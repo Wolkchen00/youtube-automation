@@ -1,104 +1,136 @@
 """
 ShadowedHistory — Visual & Video Prompt Templates
 
-Dark academia aesthetic: dusty archives, candlelit libraries, ancient manuscripts.
+Cinematic historical scene recreation inspired by @lmg2kool (880K followers).
+Style: Photorealistic AI scenes of famous historical moments.
+Close-up emotion, dramatic lighting, "was this real?" engagement.
+NO face reference — purely AI-generated historical characters.
 """
 
-# Base visual style for all ShadowedHistory frames
+# Base visual style — cinematic historical recreation
 BASE_STYLE = (
-    "cinematic dark academia aesthetic, photorealistic, 8K quality, "
-    "dusty atmospheric lighting, warm candlelight glow, "
-    "ancient stone textures, mysterious shadows, vertical 9:16 format"
+    "cinematic photorealistic historical scene recreation, 8K ultra detail, "
+    "dramatic golden hour lighting with volumetric god rays, "
+    "extreme close-up emotional detail (sweat, tears, dust), "
+    "ancient textures and authentic period costumes, "
+    "hyper-realistic skin pores and fabric textures, "
+    "vertical 9:16 format, shot on ARRI Alexa"
 )
 
-# Frame prompt templates
+# Frame prompt templates — @lmg2kool inspired cinematic history scenes
 FRAME_TEMPLATES = {
-    "opening": (
-        f"Close-up of an ancient leather-bound book opening slowly on a dusty wooden desk. "
-        f"Candlelight flickers, dust particles float in the air. "
-        f"Faded handwritten text and old maps visible on yellowed pages. "
+    "epic_establishing": (
+        f"Breathtaking wide aerial shot of an ancient historical location at golden hour. "
+        f"Massive stone structures, thousands of people visible as tiny figures. "
+        f"Dust and smoke rising. Volumetric sunlight cutting through clouds. "
+        f"Scale is overwhelming — this is a pivotal moment in history. "
         f"{BASE_STYLE}"
     ),
-    "archive": (
-        f"Vast underground archive with endless towering bookshelves disappearing into darkness. "
-        f"Single beam of light illuminates floating dust. Ancient scrolls and manuscripts. "
-        f"Cathedral-like stone ceiling with cobwebs. "
+    "dramatic_close_up": (
+        f"Extreme cinematic close-up of a historical figure's face in intense emotion. "
+        f"Sweat beads on forehead, sun-cracked lips, piercing determined eyes. "
+        f"Dust particles floating in warm light. Background blurred (shallow depth of field). "
+        f"This is the face of someone changing history. "
         f"{BASE_STYLE}"
-    ),
-    "artifact": (
-        f"Ancient mysterious artifact displayed on velvet cloth in a dimly lit museum vault. "
-        f"Golden light reflection, intricate engravings visible. "
-        f"Locked iron door in the background. Top-secret classified feeling. "
-        f"{BASE_STYLE}"
-    ),
-    "map_reveal": (
-        f"Overhead shot of an ancient world map spread across a massive oak table. "
-        f"Red pins mark secret locations. Compass rose and sea monsters on edges. "
-        f"Candles casting warm circles of light. Explorer's tools scattered nearby. "
-        f"{BASE_STYLE}"
-    ),
-    "ruins": (
-        f"Dramatic wide shot of ancient ruins at golden hour. "
-        f"Crumbling stone columns, overgrown with vines. "
-        f"Mysterious fog rolling through. Shaft of sunlight breaking through clouds. "
-        f"Lost civilization feel. Breathtaking and haunting. "
-        f"{BASE_STYLE}"
-    ),
-    "manuscript": (
-        f"Extreme close-up of an ancient manuscript with mysterious symbols and diagrams. "
-        f"Illuminated letters in gold and red ink. Quill pen resting beside an inkwell. "
-        f"Magnifying glass revealing hidden details. "
-        f"{BASE_STYLE}"
-    ),
-    "secret_chamber": (
-        f"Reveal of a hidden chamber behind a bookshelf in an old library. "
-        f"Torchlight illuminates stone walls covered in ancient writings. "
-        f"Gold artifacts and mysterious objects on stone shelves. "
-        f"Dramatic shadows, sense of discovery. "
-        f"{BASE_STYLE}"
-    ),
-}
-
-# Video transition prompts
-VIDEO_PROMPTS = {
-    "book_opening": (
-        "Cinematic slow-motion. Ancient book pages turn by themselves. "
-        "Dust particles sparkle in candlelight. Camera slowly pushes in. "
-        "Mysterious atmospheric music. 8 seconds."
-    ),
-    "archive_exploration": (
-        "Smooth dolly shot through dark archive corridors. "
-        "Camera moves past towering bookshelves. Light reveals hidden details. "
-        "Atmospheric fog drifts through. 8 seconds."
     ),
     "artifact_reveal": (
-        "Dramatic reveal. Light sweeps across ancient artifact surface. "
-        "Camera circles slowly showing intricate details. "
-        "Golden reflections dance on surrounding surfaces. 8 seconds."
+        f"Dramatic reveal shot of an ancient artifact or monument. "
+        f"Golden light sweeps across intricate carvings and engravings. "
+        f"Camera angle is low, looking up — making the subject feel powerful. "
+        f"Dust motes dance in the light beam. Museum-grade detail. "
+        f"{BASE_STYLE}"
     ),
-    "map_zoom": (
-        "Overhead camera slowly zooms into ancient map. Details become visible. "
-        "Candle flame flickers casting moving shadows. "
-        "Hidden paths and markings emerge. 8 seconds."
+    "battle_scene": (
+        f"Cinematic wide shot of an ancient battlefield. "
+        f"Thousands of warriors in formation, banners waving, dust clouds rising. "
+        f"Golden sunlight breaking through storm clouds creates dramatic lighting. "
+        f"Scale is massive — this battle changed the world forever. "
+        f"{BASE_STYLE}"
     ),
-    "ruins_pan": (
-        "Wide cinematic pan across ancient ruins. "
-        "Golden hour light breaks through clouds. "
-        "Fog rolls between stone columns. Birds scatter. 8 seconds."
+    "construction_scene": (
+        f"Photorealistic scene of ancient construction — workers hauling massive stone blocks. "
+        f"Ropes, wooden scaffolding, bronze tools. Thousands of laborers in coordinated effort. "
+        f"A colossal structure rises in the background, half-complete. "
+        f"The engineering genius of the ancient world on full display. "
+        f"{BASE_STYLE}"
+    ),
+    "hidden_chamber": (
+        f"Torchlight illuminates a hidden underground chamber discovered after centuries. "
+        f"Gold artifacts gleam on stone shelves. Ancient murals cover the walls. "
+        f"A figure holds a torch, standing in awe at the doorway. "
+        f"Dust has not settled — this was just opened. "
+        f"{BASE_STYLE}"
+    ),
+    "ruins_discovery": (
+        f"Overgrown ancient ruins emerging from dense jungle at dawn. "
+        f"Massive stone faces covered in moss and vines. "
+        f"Morning mist swirls through crumbling corridors. "
+        f"A lost civilization waiting to be found. Haunting and beautiful. "
+        f"{BASE_STYLE}"
+    ),
+    "scroll_manuscript": (
+        f"Extreme close-up of ancient hands unrolling a forbidden manuscript. "
+        f"Intricate illustrations and mysterious symbols in faded ink. "
+        f"Candlelight casts warm golden glow on yellowed papyrus. "
+        f"This document was hidden for a reason. "
+        f"{BASE_STYLE}"
+    ),
+    "crowd_scene": (
+        f"Massive crowd of ancient people gathered for a historic event. "
+        f"Thousands of faces showing emotion — awe, fear, reverence. "
+        f"A central figure stands elevated, commanding attention. "
+        f"The atmosphere is electric — something world-changing is happening. "
+        f"{BASE_STYLE}"
+    ),
+    "disaster_moment": (
+        f"The exact moment of a historical catastrophe captured cinematically. "
+        f"Structures crumbling, people fleeing, nature unleashing fury. "
+        f"Dramatic light cuts through chaos — fire, smoke, dust. "
+        f"This is the moment everything changed. "
+        f"{BASE_STYLE}"
     ),
 }
 
-# Scene sequence templates for different topic categories
+# Video transition prompts — cinematic, dramatic pacing
+VIDEO_PROMPTS = {
+    "epic_dolly": (
+        "Cinematic slow dolly forward through a historical scene. "
+        "Camera glides past people, structures, and details. "
+        "Golden sunlight streams through dust. Dramatic orchestral feel. 8 seconds."
+    ),
+    "emotional_close": (
+        "Extreme slow-motion close-up. Sweat drops fall, eyes narrow with determination. "
+        "Shallow depth of field, background melts into golden bokeh. "
+        "Every pore visible. This is history being made. 8 seconds."
+    ),
+    "reveal_pan": (
+        "Dramatic camera pan reveals the full scale of the historical scene. "
+        "Starting from a detail, pulling back to show the overwhelming scope. "
+        "Thousands of people, massive structures. Breathtaking. 8 seconds."
+    ),
+    "time_transition": (
+        "Visual timelapse showing centuries passing. Stone ages, structures crumble and rebuild. "
+        "Nature reclaims then releases. Day turns to night turns to centuries. "
+        "The passage of time is beautiful and terrifying. 8 seconds."
+    ),
+    "destruction_sequence": (
+        "Cinematic destruction captured in dramatic slow motion. "
+        "Ancient structures break apart, dust clouds billow, the world shakes. "
+        "Camera remains steady as chaos unfolds. 8 seconds."
+    ),
+}
+
+# Scene sequence templates based on topic category
 SCENE_SEQUENCES = {
-    "default": ["opening", "archive", "artifact", "ruins"],
-    "lost_civilizations": ["ruins", "artifact", "map_reveal", "secret_chamber"],
-    "forgotten_inventions": ["opening", "manuscript", "artifact", "archive"],
-    "mysterious_disappearances": ["archive", "map_reveal", "ruins", "secret_chamber"],
-    "dark_secrets": ["opening", "secret_chamber", "manuscript", "artifact"],
-    "suppressed_discoveries": ["manuscript", "archive", "artifact", "ruins"],
-    "ancient_warfare": ["ruins", "artifact", "map_reveal", "archive"],
-    "forgotten_events": ["opening", "archive", "artifact", "ruins"],
-    "hidden_knowledge": ["manuscript", "secret_chamber", "artifact", "map_reveal"],
+    "default": ["epic_establishing", "dramatic_close_up", "artifact_reveal", "ruins_discovery"],
+    "lost_civilizations": ["ruins_discovery", "construction_scene", "crowd_scene", "disaster_moment"],
+    "forgotten_inventions": ["scroll_manuscript", "dramatic_close_up", "artifact_reveal", "hidden_chamber"],
+    "mysterious_disappearances": ["epic_establishing", "crowd_scene", "disaster_moment", "ruins_discovery"],
+    "dark_secrets": ["hidden_chamber", "scroll_manuscript", "dramatic_close_up", "artifact_reveal"],
+    "suppressed_discoveries": ["scroll_manuscript", "artifact_reveal", "hidden_chamber", "dramatic_close_up"],
+    "ancient_warfare": ["epic_establishing", "battle_scene", "dramatic_close_up", "disaster_moment"],
+    "forgotten_events": ["crowd_scene", "disaster_moment", "dramatic_close_up", "ruins_discovery"],
+    "hidden_knowledge": ["scroll_manuscript", "hidden_chamber", "artifact_reveal", "epic_establishing"],
 }
 
 

@@ -14,6 +14,23 @@ from core.config import PROJECT_ROOT, logger
 HISTORY_FILE = PROJECT_ROOT / "logs" / "galactic_experiment_history.json"
 
 TOPICS = {
+    "planet_tours": [
+        "PLANET TOUR: Mercury — the closest planet to the Sun. No atmosphere, surface temperature swings from -180°C to 430°C. Craters everywhere. 0% water. One day lasts 59 Earth days",
+        "PLANET TOUR: Venus — Earth's evil twin. 96% CO2 atmosphere, 900°F surface, sulfuric acid rain. Atmospheric pressure 90x Earth. Rotates BACKWARDS. The hottest planet in our solar system",
+        "PLANET TOUR: Mars — the Red Planet. 95% CO2 atmosphere, -60°C average. Has the tallest volcano (Olympus Mons, 3x Everest). Evidence of ancient rivers. 0.38g gravity. Could humans live here?",
+        "PLANET TOUR: Jupiter — the gas giant king. 89% hydrogen, 10% helium. The Great Red Spot is a 400-year-old storm larger than Earth. 79 moons. 2.5x gravity. Magnetic field 20,000x Earth's",
+        "PLANET TOUR: Saturn — the ringed beauty. Rings are 99.9% water ice. Density so low it would float in water. Wind speeds of 1,800 km/h. 146 moons. Titan has liquid methane lakes",
+        "PLANET TOUR: Uranus — the sideways planet. Rotates at 98° tilt, literally rolling through space. -224°C. Methane atmosphere gives it ice-blue color. 27 moons. Wind speeds of 900 km/h",
+        "PLANET TOUR: Neptune — the ice giant. Wind speeds of 2,100 km/h — the fastest in the solar system. -214°C. Diamond rain in the atmosphere. Dark blue due to methane. 14 moons",
+        "PLANET TOUR: Titan — Saturn's largest moon. The only moon with a thick atmosphere. Lakes of liquid methane. Orange haze. -179°C. Could harbor alien life in its subsurface ocean",
+        "PLANET TOUR: Europa — Jupiter's icy moon. Under 15km of ice lies an ocean with MORE water than all of Earth's oceans combined. Potential for alien life. Geysers of water vapor",
+        "PLANET TOUR: Io — Jupiter's volcanic moon. 400+ active volcanoes erupting RIGHT NOW. Sulfur lava. Tidally heated by Jupiter's gravity. The most geologically active body in our solar system",
+        "PLANET TOUR: Proxima Centauri b — the closest exoplanet to Earth (4.2 light-years). In the habitable zone. Tidally locked — one side always day, one always night. Could have liquid water",
+        "PLANET TOUR: TRAPPIST-1e — one of 7 Earth-sized planets orbiting a red dwarf. In the habitable zone. 39 light-years away. Possible liquid water. A year lasts only 6.1 Earth days",
+        "PLANET TOUR: Kepler-442b — the most Earth-like planet we've found. 1.3x Earth's size. In the habitable zone. 1,206 light-years away. 60% chance of being rocky with liquid water",
+        "PLANET TOUR: 55 Cancri e — the diamond planet. Surface covered in graphite and diamond. 2,000°C surface temperature. So close to its star, a year lasts only 18 hours. 40 light-years away",
+        "PLANET TOUR: HD 189733 b — the planet where it rains GLASS sideways. 1,000°C atmosphere with 7,000 km/h winds. The glass rain is silicate particles. Beautiful deep blue color from 63 light-years",
+    ],
     "what_if_scenarios": [
         "What if the Sun disappeared right now?",
         "What if a black hole appeared near Earth?",
