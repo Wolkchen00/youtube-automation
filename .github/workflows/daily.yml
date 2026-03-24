@@ -1,0 +1,61 @@
+name: YouTube Daily Automation
+
+on:
+  schedule:
+    # Her gün UTC 16:00 = Türkiye saati 19:00 (UTC+3)
+    # Eğer sabah 9:00 istiyorsan: UTC 06:00 = TR 09:00
+    - cron: '0 6 * * *'
+  workflow_dispatch:  # Manuel tetikleme butonu
+
+jobs:
+  daily-video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300  # 5 saat max
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          SENTINAL_FACE_REF=${{ secrets.SENTINAL_FACE_REF }}
+          UPLOAD_USER_AIMAGINE=${{ secrets.UPLOAD_USER_AIMAGINE }}
+          UPLOAD_USER_SHADOWEDHISTORY=${{ secrets.UPLOAD_USER_SHADOWEDHISTORY }}
+          UPLOAD_USER_GALACTIC=${{ secrets.UPLOAD_USER_GALACTIC }}
+          UPLOAD_USER_SENTINAL=${{ secrets.UPLOAD_USER_SENTINAL }}
+          EOF
+
+      - name: Create output directories
+        run: |
+          mkdir -p output/{shadowedhistory,sentinal_ihsan,galactic_experiment,aimagine}/{frames,clips,final}
+          mkdir -p logs
+
+      - name: Run Daily Automation
+        run: python -X utf8 daily_runner.py 2>&1 | tee logs/github_actions_run.log
+
+      - name: Upload logs as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
