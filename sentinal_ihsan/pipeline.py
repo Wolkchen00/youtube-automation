@@ -89,7 +89,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     if not visual_prompts or len(visual_prompts) < 3:
         logger.warning("⚠️ Using template-based prompts...")
-        scene_keys = ["reaction_shock", "experiment_setup", "action_shot", "result_reveal", "mind_blown"]
+        scene_keys = ["intro_talking", "concept_reveal", "interaction", "reaction_close"]
         video_keys = list(VIDEO_PROMPTS.keys())
         visual_prompts = []
         for i, sk in enumerate(scene_keys[:4]):

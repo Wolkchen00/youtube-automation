@@ -1,39 +1,36 @@
 """
-AImagine — Visual Style Constants (Inspired by @hellopersonality)
+AImagine — Visual Style Constants (Construction Timelapse)
 
-Viral formula from @hellopersonality (2.3M followers):
-  - POV immersive first-person perspective
-  - Real → surreal fractal morphing transitions
-  - Neon cyber palette: electric blues, deep purples, neon magentas, hot pinks
-  - High-velocity movement creates motion blur and engagement
-  - Seamless loops: start frame == end frame, infinite watch
-  - Minimal captions: 1-3 words max for Instagram/TikTok
+Inspired by @cairo_ia (189K followers):
+  - AI construction timelapse: empty lot → excavation → building → final reveal
+  - 4 chained frames with reference continuity
+  - Crossfade transitions between stages
+  - 24-second vertical format
 """
 
-# Base style suffix applied to all image generation prompts
+# Base style for construction timelapse frames
 BASE_STYLE = (
-    "ultra high quality, 4K resolution, cinematic lighting, vibrant neon colors, "
-    "electric blue, deep purple, neon magenta, psychedelic fractal patterns, "
-    "9:16 vertical format, immersive POV perspective, hypnotic and mesmerizing, "
-    "inspired by @hellopersonality AI animation style, smooth gradients, "
-    "bioluminescent glow, mathematical geometric patterns"
+    "ultra high quality, 4K resolution, photorealistic aerial drone photography, "
+    "construction site, natural daylight, architectural visualization, "
+    "9:16 vertical format, cinematic composition, "
+    "sharp focus, depth of field, professional construction photography"
 )
 
-# Video generation style suffix
+# Video generation style for transitions between stages
 VIDEO_STYLE = (
-    "smooth continuous motion, hypnotic and mesmerizing, cinematic camera movement, "
-    "neon color palette, fractal morphing transitions, POV perspective, "
-    "high quality animation, seamless flow, psychedelic visual experience"
+    "smooth time-lapse transition, construction progress, building rising, "
+    "workers and machinery in motion, natural daylight changing, "
+    "photorealistic construction site, seamless flow between stages"
 )
 
-# Caption templates (minimal, @hellopersonality style)
+# Caption templates
 CAPTION_TEMPLATES = [
-    "Watch till the end 👁️",
-    "Where does this road lead? 🌌",
-    "Close your eyes and look again ✨",
-    "Reality is just a setting 🔮",
-    "The universe in motion 💫",
-    "Nature's hidden code 🧬",
-    "When dreams become real 🌀",
-    "Can you feel it? 🎆",
+    "From nothing to everything 🏗️",
+    "Built in 24 seconds ⚡",
+    "Watch it rise 🏢",
+    "AI construction magic ✨",
+    "Before → After 🔄",
+    "The future of building 🌆",
+    "From dirt to done 🏠",
+    "Construction satisfying ✅",
 ]
