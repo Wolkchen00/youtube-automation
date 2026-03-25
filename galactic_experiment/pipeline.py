@@ -1,8 +1,11 @@
 """
 Galactic Experiment — Full Video Production Pipeline
 
-Daily: space topic → Gemini script → cosmic visuals → cinematic video → publish.
-Uses Veo 3.1 for higher quality cinematic space videos.
+UPDATED: Uses VEO3 for voice narration over space visuals.
+Each clip has a narration prompt that generates AI voice-over
+describing planet facts, approach details, and scientific data.
+
+Daily: space topic → Gemini narration script → frames → VEO3 narrated clips → merge → publish.
 """
 
 import time
@@ -10,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 from core.config import CHANNEL_DIRS, CHANNEL_DURATION, logger
-from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
+from core.kie_api import generate_image, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_crossfade, final_export,
@@ -28,7 +31,14 @@ CHANNEL = "galactic_experiment"
 
 
 def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = False) -> dict | None:
-    """Run the full Galactic Experiment pipeline."""
+    """Run the Galactic Experiment pipeline with VEO3 voice narration.
+
+    Key difference from other channels:
+    - Uses VEO3 (not Kling 3.0) for video generation
+    - VEO3 generates actual voice narration from the prompt text
+    - No text overlays — narration is spoken by AI voice
+    - Each clip has a narration script segment
+    """
     today = date.today().isoformat()
     start_time = time.time()
     dirs = CHANNEL_DIRS[CHANNEL]
@@ -40,7 +50,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     credit = check_credit()
 
-    # Topic selection
+    # ── 1. Topic selection ────────────────────────────────────────────────
     if topic:
         daily_topic = {"topic": topic, "category": "default"}
     else:
@@ -48,8 +58,8 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     logger.info(f"📋 Topic: {daily_topic['topic']}")
 
-    # Generate script
-    logger.info("\n📝 GENERATING SPACE SCRIPT...")
+    # ── 2. Generate narration script via Gemini ───────────────────────────
+    logger.info("\n📝 GENERATING NARRATION SCRIPT...")
     script = generate_script(CHANNEL, daily_topic["topic"])
     if not script:
         logger.error("❌ Script generation failed!")
@@ -57,18 +67,32 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     title = script.get("title", daily_topic["topic"][:100])
     hook = script.get("hook", "")
+    narration = script.get("narration", "")
     description = script.get("description", "")
     hashtags = script.get("hashtags", "#shorts #space #universe #science")
     if isinstance(hashtags, list):
         hashtags = " ".join(hashtags)
 
+    # Extract narration segments (for VEO3 voice-over per clip)
+    narration_segments = script.get("narration_segments", [])
+    if not narration_segments and narration:
+        # Split narration into ~3 segments for 3 clips
+        sentences = [s.strip() for s in narration.replace("...", ".").split(".") if s.strip()]
+        chunk_size = max(1, len(sentences) // 3)
+        narration_segments = []
+        for i in range(0, len(sentences), chunk_size):
+            segment = ". ".join(sentences[i:i + chunk_size]) + "."
+            narration_segments.append(segment)
+        narration_segments = narration_segments[:3]  # max 3 segments
+
     logger.info(f"   Title: {title}")
+    logger.info(f"   Narration segments: {len(narration_segments)}")
 
     if dry_run:
         logger.info("🏃 DRY RUN — Skipping.")
         return {"date": today, "topic": daily_topic["topic"], "title": title, "dry_run": True}
 
-    # Visual prompts
+    # ── 3. Generate visual prompts ────────────────────────────────────────
     logger.info("\n🎨 GENERATING VISUAL PROMPTS...")
     visual_prompts = generate_visual_prompts(CHANNEL, script)
 
@@ -87,7 +111,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     project_name = sanitize_filename(title)
 
-    # Generate frames — use GPT Image 1.5 for photorealistic space
+    # ── 4. Generate frames ────────────────────────────────────────────────
     logger.info(f"\n🖼️ GENERATING {len(visual_prompts)} COSMIC FRAMES...")
     frames = []
     previous_url = None
@@ -96,8 +120,6 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         frame_prompt = vp.get("frame_prompt", "")
         logger.info(f"  Frame {i+1}/{len(visual_prompts)}...")
 
-        # Using Nano Banana 2 (5cr) instead of GPT Image 1.5 (20cr) — 4x cheaper
-        # NB2 is sufficient quality with reference chaining for consistency
         url = generate_image(
             prompt=frame_prompt,
             reference_url=previous_url,
@@ -117,23 +139,43 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.error("❌ Not enough frames!")
         return None
 
-    # Generate video clips — use Kling 3.0 for cinematic space
-    logger.info(f"\n🎬 GENERATING {len(frames)-1} SPACE VIDEO CLIPS...")
+    # ── 5. Generate VEO3 narrated video clips ─────────────────────────────
+    # VEO3 generates actual AI voice narration from the prompt text
+    # Each clip gets a narration segment spoken by VEO3's AI voice
+    logger.info(f"\n🎬 GENERATING {len(frames)-1} VEO3 NARRATED CLIPS...")
     clips = []
 
     for i in range(len(frames) - 1):
         start_frame = frames[i]
-        end_frame = frames[i + 1]
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]
 
-        logger.info(f"  Clip {i+1}: Frame {i} → Frame {i+1}")
+        # Build VEO3 prompt with narration
+        visual_desc = vp.get("video_prompt", "Cinematic space visualization.")
 
-        video_url = generate_video(
-            prompt=vp.get("video_prompt", "Cinematic space transition. 8 seconds."),
-            start_image_url=start_frame["url"],
-            end_image_url=end_frame["url"],
-            duration=str(vp.get("duration_seconds", 8)),
-            sound=True,
+        # Get narration segment for this clip
+        if i < len(narration_segments):
+            narr_text = narration_segments[i]
+        elif narration:
+            narr_text = narration
+        else:
+            narr_text = f"Exploring the wonders of {daily_topic['topic'][:50]}."
+
+        # VEO3 prompt format: visual description + narration script
+        # VEO3 will generate AI voice reading the narration over the visuals
+        veo_prompt = (
+            f"{visual_desc} "
+            f"A calm, authoritative male narrator speaks in English: \"{narr_text}\" "
+            f"Cinematic orchestral background music. "
+            f"No text on screen. No subtitles. Voice-over only."
+        )
+
+        logger.info(f"  Clip {i+1}: VEO3 narrated")
+        logger.info(f"    Narration: {narr_text[:80]}...")
+
+        video_url = generate_veo_video(
+            prompt=veo_prompt,
+            image_url=start_frame["url"],
+            duration="8",
         )
 
         if video_url:
@@ -141,6 +183,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             local = download_file(video_url, save_path)
             if local:
                 clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
+                logger.info(f"  ✅ Clip {i+1} ready with narration")
         else:
             logger.warning(f"⚠️ Clip {i+1} failed!")
 
@@ -148,14 +191,14 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.error("❌ No video clips!")
         return None
 
-    # FFmpeg merge with slow crossfades for cinematic feel
-    logger.info("\n🔗 MERGING CLIPS...")
+    # ── 6. FFmpeg merge with crossfades ───────────────────────────────────
+    logger.info("\n🔗 MERGING NARRATED CLIPS...")
     if not check_ffmpeg():
         return None
 
     clip_files = [c["local_path"] for c in clips]
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
-    concatenate_crossfade(clip_files, merged_path, crossfade=1.0)  # Slow crossfade for space
+    concatenate_crossfade(clip_files, merged_path, crossfade=0.5)
 
     final_path = dirs["final"] / f"{project_name}_FINAL.mp4"
     final_export(merged_path, final_path)
@@ -167,10 +210,10 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         final_path = trimmed
 
     elapsed = time.time() - start_time
-    logger.info(f"\n✅ Video ready: {final_path}")
+    logger.info(f"\n✅ Narrated video ready: {final_path}")
     logger.info(f"⏱️ Time: {elapsed/60:.1f} minutes")
 
-    # Publish
+    # ── 7. Publish ────────────────────────────────────────────────────────
     if not skip_upload:
         logger.info("\n📤 PUBLISHING...")
         full_description = f"{hook}\n\n{description}\n\n{hashtags}"
