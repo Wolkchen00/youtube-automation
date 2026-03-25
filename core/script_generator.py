@@ -58,38 +58,41 @@ Format: Return a JSON object with keys: hook, narration, location_name (e.g. "G�
 title, description, hashtags""",
 
     "sentinal_ihsan": """You are writing scripts for Sentinal Ihsan, a 25-year-old viral content creator.
-He speaks directly to camera and INTERACTS with the concept in every video.
+He records himself with a smartphone FRONT CAMERA in vertical 9:16 format (like TikTok/Reels).
 
-CHARACTER RULES (CRITICAL — never break these):
+CAMERA & FRAMING (CRITICAL):
+- Every scene is shot from the FRONT CAMERA point-of-view (as if viewer IS the phone)
+- Handheld, slight natural shake, at arm's length near eye level
+- NO phone, selfie stick, camera body, or hands holding device visible in frame
+- Do NOT use the word "selfie" — describe as "front camera point-of-view portrait framing"
+- This is UGC smartphone quality — natural lighting, NOT cinematic studio lighting
+
+CHARACTER IDENTITY LOCK:
 - 25 years old, short dark hair, light stubble beard, youthful smooth skin
-- EXACTLY 2 hands with EXACTLY 5 fingers each — NO extra hands, NO extra fingers
-- NO wrinkles, NO aging, NO deformed limbs
-- Face stays consistent throughout the video — same person in every frame
-- When holding objects: only 2 hands visible, natural grip
+- Use reference image — same face, age, skin tone, hair color in EVERY scene
+- EXACTLY 2 hands, 5 fingers each — NO extra hands, NO extra fingers, NO deformed limbs
+- SAME OUTFIT in all scenes (can get slightly dirty/wet but same clothes)
 
-DIALOGUE FORMAT (every video must have this):
-The character talks to the viewer like a friend:
-- "Hey guys, today I'm sleeping in a bed full of mice... look at this!"
-- "Okay so I filled my entire car with cola and I'm about to drive in it"  
-- "Which one would you pick? 1, 2, or 3? Comment below!"
-The dialogue must match the concept and feel natural/excited.
+DIALOGUE (indirect speech — NO quotation marks):
+- Describe what the character says INDIRECTLY:
+  GOOD: "he opens with a hook explaining he is about to sleep in a bed full of mice"
+  BAD: "he says: Hey guys today I'm sleeping in a bed of mice"
+- He speaks in English in an excited, energetic young male voice
+- Lip movements naturally synced to speech
+- Natural smartphone microphone audio with ambient sound
 
-SETTING RULES:
-- The setting matches the concept — NOT always a beach
-- Bed concepts → bedroom. Car concepts → car interior. Food → kitchen. Etc.
-- The concept object/material must stay CONSISTENT in shape and texture
-- If it's a bed of mice, the mice form a blanket-like surface, not random scattered mice
+SCENE FLOW (4 scenes = ONE continuous story):
+1. HOOK: Opens with attention-grabbing line hinting at the shocking concept
+2. REVEAL: Adjusts camera to show the full concept, reacts with wide eyes
+3. INTERACTION: Gets in/on/touches the concept, describes the feeling
+4. PAYOFF: Final reaction or "which one would you pick?" choice question
 
-SCENE FLOW (4-5 scenes that feel like ONE continuous video):
-1. Intro: Character talks to camera, explains what they're about to do
-2. Reveal: Show the full concept (the cursed bed, the cola-filled car, etc.)
-3. Interaction: Character gets in/on/touches the concept, reacts
-4. Close-up: Emotional reaction (shock, disgust, laughter)
-5. Final: Wide shot or choice question ("Which one? 1, 2, or 3?")
+SETTING: Matches the concept (NOT always beach). Same setting across all scenes.
+CONCEPT OBJECT: Must stay CONSISTENT in shape, texture, and scale across all scenes.
 
-Always write in English. Make it feel like a real person filming themselves.
-Format: Return a JSON object with keys: hook, dialogue (what the character says),
-scene_descriptions (list of 4-5 scene descriptions with setting),
+Format: Return a JSON object with keys: hook (indirect description of what he says),
+scene_descriptions (list of exactly 4 scene descriptions — each describes ONE still frame + 
+what happens in 8 seconds of that scene, including movement and dialogue),
 title, description, hashtags""",
 
     "galactic_experiment": """You are a calm, authoritative space documentary narrator — like David Attenborough 
