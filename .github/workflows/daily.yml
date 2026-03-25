@@ -2,9 +2,9 @@ name: YouTube Daily Automation
 
 on:
   schedule:
-    # Her gün UTC 16:00 = Türkiye saati 19:00 (UTC+3)
-    # Eğer sabah 9:00 istiyorsan: UTC 06:00 = TR 09:00
-    - cron: '0 6 * * *'
+    # Her gün UTC 04:00 = TR 07:00 başlar
+    # GitHub Actions ~1 saat gecikme + 2 saat pipeline = videolar ~09:00-10:00 TR hazır
+    - cron: '0 4 * * *'
   workflow_dispatch:  # Manuel tetikleme butonu
 
 jobs:
