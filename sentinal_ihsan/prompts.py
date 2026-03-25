@@ -1,95 +1,117 @@
 """
 Sentinal Ihsan — Visual Prompts & Style Constants
 
-Based on @sentinal.ihsan.daily Instagram analysis:
-  - Sentinal Ihsan (your face) appears in EVERY video
-  - Settings: beaches, boats, ocean, cliffs, golden hour
-  - Style: hyper-realistic, cinematic, emotional storytelling
-  - Colors: deep ocean blues, golden sunset warmth, dramatic skies
-  - Camera: POV/selfie angles, close-ups, handheld feel
+UPDATED based on user feedback:
+  ✅ Character: 25-year-old young man (NOT old/wrinkled)
+  ✅ Hands: Strictly 2 hands with 5 fingers each (no extra limbs)
+  ✅ Settings: Dynamic — matches the concept (NOT always beach)
+  ✅ Coherence: All frames describe ONE continuous scene/action
+  ✅ Dialogue: Character speaks to camera, interacts with concept object
+  ✅ Face consistency: Use face reference, maintain identity across frames
 """
 
-# Face reference is loaded from env: SENTINAL_FACE_REF
+from core.config import SENTINAL_FACE_REF
 
-# ─── Frame Templates (fallback when Gemini fails) ─────────────────────────────
+# ─── Character anchor prompt (used in ALL frames for consistency) ─────────────
+
+CHARACTER_ANCHOR = (
+    "A 25-year-old young man with short dark hair and light stubble beard. "
+    "Youthful face, smooth skin, NO wrinkles, NO aging. "
+    "Athletic build, wearing a casual t-shirt. "
+    "CRITICAL: Exactly 2 hands with exactly 5 fingers each. "
+    "No extra hands, no extra fingers, no deformed limbs. "
+    "Anatomically correct human body at all times."
+)
+
+# Anti-artifact instructions appended to every prompt
+QUALITY_GUARD = (
+    "STRICT RULES: The character must have EXACTLY 2 hands and 5 fingers per hand. "
+    "NO third hand, NO sixth finger, NO merged fingers, NO extra limbs. "
+    "Face must remain consistent and youthful (25 years old). "
+    "Photorealistic, 9:16 vertical, 4K, cinematic lighting."
+)
+
+# ─── Frame Templates (concept-adaptive, NOT beach-locked) ─────────────────────
 
 FRAME_TEMPLATES = {
-    # Reaction/discovery shots (uses face reference)
-    "reaction_shock": (
-        "Close-up portrait of a young man with dark hair and beard, "
-        "eyes wide with shock and amazement, mouth slightly open, "
-        "standing on a beautiful beach at golden hour, ocean waves behind, "
-        "cinematic lighting, photorealistic, 9:16 vertical, 4K"
+    # === CHARACTER + CONCEPT interaction frames ===
+    "intro_talking": (
+        f"{CHARACTER_ANCHOR} looking directly at the camera with excited expression, "
+        f"gesturing with one hand while explaining something. "
+        f"Background matches the current concept setting. "
+        f"Medium close-up shot, eye-level camera. "
+        f"{QUALITY_GUARD}"
     ),
-    "reaction_awe": (
-        "Close-up of a young man with dark hair and beard, "
-        "looking down at something incredible in his hands with pure wonder, "
-        "golden sunset light on his face, ocean background blurred, "
-        "photorealistic, 9:16 vertical, 4K"
+    "concept_reveal": (
+        f"{CHARACTER_ANCHOR} standing next to or sitting beside the concept object/setting. "
+        f"Looking at the object with wide eyes, amazed expression. "
+        f"The concept object is clearly visible and well-lit. "
+        f"Full body or waist-up shot. "
+        f"{QUALITY_GUARD}"
     ),
-    "experiment_setup": (
-        "Wide shot of a young man with dark hair and beard on a beach, "
-        "kneeling next to something unusual on the wet sand, "
-        "golden hour lighting, dramatic sky, waves lapping nearby, "
-        "cinematic composition, photorealistic, 9:16 vertical, 4K"
+    "interaction": (
+        f"{CHARACTER_ANCHOR} actively interacting with the concept — touching, holding, "
+        f"sitting in, or examining it closely. "
+        f"Both hands visible doing something natural. "
+        f"Dynamic action pose. Concept fills the background. "
+        f"{QUALITY_GUARD}"
     ),
-    "action_shot": (
-        "Dynamic action shot of a young man with dark hair and beard "
-        "reaching into clear turquoise ocean water, splash visible, "
-        "sunset colors reflecting on water, dramatic moment captured, "
-        "photorealistic, 9:16 vertical, 4K"
+    "reaction_close": (
+        f"Extreme close-up of {CHARACTER_ANCHOR}'s face showing strong emotion — "
+        f"shock, amazement, disgust, or laughter depending on the concept. "
+        f"Shallow depth of field, concept object blurred in background. "
+        f"Eye-level, direct to camera. "
+        f"{QUALITY_GUARD}"
     ),
-    "result_reveal": (
-        "Close-up of a young man holding something amazing up to camera, "
-        "face showing pure excitement, ocean sunset behind, "
-        "golden light illuminating both the man and the discovery, "
-        "photorealistic, cinematic, 9:16 vertical, 4K"
+    "final_reveal": (
+        f"Wide shot showing {CHARACTER_ANCHOR} and the full concept together. "
+        f"The scale of the concept is fully visible. Character gestures toward it. "
+        f"Dramatic lighting highlighting both character and concept. "
+        f"This is the 'money shot' — the most impressive angle. "
+        f"{QUALITY_GUARD}"
     ),
-    "mind_blown": (
-        "Young man on a boat looking straight at camera with mind-blown expression, "
-        "one hand on his head in disbelief, vast ocean stretching behind, "
-        "dramatic sunset sky with orange and purple clouds, "
-        "photorealistic, cinematic, 9:16 vertical, 4K"
+
+    # === Environment shots (no character needed) ===
+    "concept_detail": (
+        "Extreme close-up of the concept object/material showing texture and detail. "
+        "Macro photography style. High detail, sharp focus. "
+        "The material or surface is clearly identifiable. "
+        "4K, photorealistic, 9:16 vertical."
     ),
-    # Environment shots (no face needed)
-    "ocean_wide": (
-        "Dramatic aerial view of turquoise ocean with a small boat in the center, "
-        "crystal clear water revealing sandy bottom, golden hour light, "
-        "cinematic composition, 9:16 vertical, 4K"
-    ),
-    "beach_discovery": (
-        "Something mysterious glowing on a wet sandy beach at sunset, "
-        "ocean waves receding, footprints leading to the discovery, "
-        "dramatic sky, cinematic lighting, 9:16 vertical, 4K"
-    ),
-    "underwater": (
-        "Crystal clear underwater scene, shafts of golden sunlight piercing through, "
-        "coral and marine life visible, turquoise water, "
-        "photorealistic, cinematic, 9:16 vertical, 4K"
+    "environment_wide": (
+        "Wide establishing shot of the environment matching the current concept. "
+        "Could be: a bedroom, a car interior, a kitchen, a laboratory, a warehouse, "
+        "an abandoned building, a garden, a city street — whatever fits the concept. "
+        "Cinematic composition, dramatic lighting. "
+        "4K, photorealistic, 9:16 vertical."
     ),
 }
 
-# ─── Video Transition Prompts ─────────────────────────────────────────────────
+# ─── Video Transition Prompts (SEAMLESS — same scene continues) ───────────────
 
 VIDEO_PROMPTS = {
-    "discovery_reveal": (
-        "Dramatic reveal moment — camera pulls back slowly showing the full scene, "
-        "golden hour light, ocean sounds, emotional music swell. 8 seconds."
+    "talking_to_camera": (
+        "The young man talks directly to camera, gesturing naturally with both hands. "
+        "His mouth moves as he speaks. Background stays consistent. "
+        "Camera is steady, eye-level. EXACTLY 2 hands visible. "
+        "Smooth continuous motion. 8 seconds."
     ),
-    "rescue_action": (
-        "Intense action shot — reaching into water, splash effects, urgency, "
-        "dramatic music, handheld camera movement, cinematic. 8 seconds."
+    "concept_interaction": (
+        "The young man interacts with the concept object — touching, examining, reacting. "
+        "Camera follows the action smoothly. Both hands visible, natural movement. "
+        "The concept object remains stable and consistent throughout. "
+        "Single continuous shot. 8 seconds."
     ),
-    "ocean_beauty": (
-        "Sweeping cinematic ocean shot — waves, sunset reflections, peaceful yet dramatic, "
-        "golden hour light, slow camera drift. 8 seconds."
+    "reveal_reaction": (
+        "Dramatic reveal — camera pulls back showing the full scale of the concept. "
+        "The young man reacts with genuine emotion. "
+        "Smooth camera movement, cinematic lighting. "
+        "8 seconds."
     ),
-    "reaction_closeup": (
-        "Slow zoom into face showing amazement and awe, golden light on face, "
-        "ocean background blurred, emotional music. 8 seconds."
-    ),
-    "motorcycle_ride": (
-        "POV motorcycle ride along coastal road, ocean view on one side, "
-        "wind effect, golden hour, cinematic speed. 8 seconds."
+    "close_up_emotion": (
+        "Slow zoom into the young man's face showing intense emotion. "
+        "Eyes wide, expression matching the concept mood. "
+        "Shallow depth of field, smooth camera. "
+        "8 seconds."
     ),
 }
