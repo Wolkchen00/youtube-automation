@@ -13,7 +13,7 @@ from core.kie_api import generate_image, generate_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_crossfade, final_export,
-    get_video_duration, trim_to_duration
+    get_video_duration, trim_to_duration, add_text_overlay
 )
 from core.uploader import publish_video
 from core.script_generator import generate_script, generate_visual_prompts
@@ -77,12 +77,15 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     title = script.get("title", daily_topic["topic"][:100])
     hook = script.get("hook", "")
     description = script.get("description", "")
+    location_name = script.get("location_name", "")
     hashtags = script.get("hashtags", "#shorts #history #facts")
     if isinstance(hashtags, list):
         hashtags = " ".join(hashtags)
 
     logger.info(f"   Title: {title}")
     logger.info(f"   Hook: {hook}")
+    if location_name:
+        logger.info(f"   📍 Location: {location_name}")
 
     if dry_run:
         logger.info("🏃 DRY RUN — Skipping video production.")
@@ -175,7 +178,21 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.error("❌ No video clips generated!")
         return None
 
-    # 7. FFmpeg merge
+    # 7. Add location text overlay to FIRST clip (3 seconds, fade in/out)
+    if location_name and clips:
+        logger.info(f"\n📍 Adding location overlay: {location_name}")
+        first_clip = clips[0]["local_path"]
+        overlaid_path = dirs["clips"] / f"{project_name}_clip_01_overlaid.mp4"
+        add_text_overlay(
+            input_path=first_clip,
+            output_path=overlaid_path,
+            text=location_name,
+            duration=3.0,
+            fontsize=42,
+        )
+        clips[0]["local_path"] = overlaid_path
+
+    # 8. FFmpeg merge
     logger.info("\n🔗 MERGING CLIPS...")
     if not check_ffmpeg():
         return None
@@ -184,7 +201,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
     concatenate_crossfade(clip_files, merged_path)
 
-    # 8. Final export (1080x1920)
+    # 9. Final export (1080x1920)
     final_path = dirs["final"] / f"{project_name}_FINAL.mp4"
     final_export(merged_path, final_path)
 

@@ -251,3 +251,72 @@ def final_export(
     logger.info(f"   📐 Size: {size_mb:.1f} MB")
     logger.info(f"   ⏱️ Duration: {duration:.1f}s")
     return output_path
+
+
+def add_text_overlay(
+    input_path: str | Path,
+    output_path: str | Path,
+    text: str,
+    duration: float = 3.0,
+    fontsize: int = 42,
+    fade_in: float = 0.5,
+    fade_out: float = 0.5,
+) -> Path:
+    """Add a text overlay to the first N seconds of a video.
+
+    Text appears bottom-center with white font, black shadow,
+    fades in and fades out. Used for location names in ShadowedHistory.
+
+    Args:
+        input_path: Input video file path
+        output_path: Output video file path
+        text: Text to display (e.g., "Cappadocia, Turkey")
+        duration: How long the text stays on screen (seconds)
+        fontsize: Font size for the text
+        fade_in: Fade-in duration (seconds)
+        fade_out: Fade-out duration (seconds)
+    """
+    output_path = Path(output_path)
+
+    # Escape special characters for FFmpeg drawtext
+    safe_text = text.replace("'", "'\\''").replace(":", "\\:")
+
+    # drawtext filter with fade in/out using alpha expression
+    # Text appears at bottom-center, white with black shadow
+    fade_end = duration - fade_out
+    alpha_expr = (
+        f"if(lt(t\\,{fade_in})\\,t/{fade_in}\\,"
+        f"if(lt(t\\,{fade_end})\\,1\\,"
+        f"if(lt(t\\,{duration})\\,(1-(t-{fade_end})/{fade_out})\\,0)))"
+    )
+
+    drawtext_filter = (
+        f"drawtext=text='{safe_text}'"
+        f":fontsize={fontsize}"
+        f":fontcolor=white"
+        f":shadowcolor=black@0.7:shadowx=2:shadowy=2"
+        f":x=(w-text_w)/2"
+        f":y=h-th-100"
+        f":alpha='{alpha_expr}'"
+    )
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-vf", drawtext_filter,
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", FFMPEG_PRESET,
+        "-c:a", "copy",
+        str(output_path)
+    ]
+
+    logger.info(f"📝 Adding text overlay: '{text}' ({duration}s)")
+    try:
+        subprocess.run(cmd, capture_output=True, check=True)
+        logger.info(f"✅ Text overlay added: {output_path}")
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"⚠️ Text overlay failed (using original): {e}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+
+    return output_path

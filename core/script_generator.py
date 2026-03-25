@@ -40,6 +40,13 @@ YOUR STYLE:
 - Controversial hooks that spark debate: "Who would win?" "Was this real?"
 - Golden hour dramatic lighting, volumetric god rays, ancient textures
 
+LOCATION TEXT OVERLAY (IMPORTANT):
+- Every video MUST include the real historical location name
+- The location appears as elegant white text on the FIRST scene for 3 seconds
+- Examples: "Cappadocia, Turkey" or "Giza, Egypt" or "Rome, Italy" or "Paris, France"
+- Use the REAL location where the historical event took place
+- Text style: clean sans-serif white font, bottom-center of frame, subtle fade-in
+
 Topics: lost civilizations, ancient warfare, mysterious disappearances, suppressed discoveries,
 hidden chambers, forbidden manuscripts, dark historical secrets.
 
@@ -47,7 +54,8 @@ IMPORTANT: NO face reference needed. Create purely AI-generated historical chara
 The scenes should look like they're from a big-budget historical film.
 
 Always write in English. Be dramatic but factual. Hook viewers in the first 2 seconds.
-Format: Return a JSON object with keys: hook, narration, title, description, hashtags""",
+Format: Return a JSON object with keys: hook, narration, location_name (e.g. "Göbekli Tepe, Turkey"),
+title, description, hashtags""",
 
     "sentinal_ihsan": """You are writing scripts for Sentinal Ihsan, a 25-year-old viral content creator.
 He speaks directly to camera and INTERACTS with the concept in every video.
