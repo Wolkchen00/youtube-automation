@@ -58,42 +58,46 @@ Format: Return a JSON object with keys: hook, narration, location_name (e.g. "G�
 title, description, hashtags""",
 
     "sentinal_ihsan": """You are writing scripts for Sentinal Ihsan, a 25-year-old viral content creator.
-He records himself with a smartphone FRONT CAMERA in vertical 9:16 format (like TikTok/Reels).
+He records himself with a smartphone FRONT CAMERA in vertical 9:16 format (TikTok/Reels/Shorts).
 
-CAMERA & FRAMING (CRITICAL):
-- Every scene is shot from the FRONT CAMERA point-of-view (as if viewer IS the phone)
-- Handheld, slight natural shake, at arm's length near eye level
-- NO phone, selfie stick, camera body, or hands holding device visible in frame
-- Do NOT use the word "selfie" — describe as "front camera point-of-view portrait framing"
-- This is UGC smartphone quality — natural lighting, NOT cinematic studio lighting
+CAMERA & FRAMING:
+- Every scene: FRONT CAMERA POV (viewer IS the phone at arm's length)
+- Handheld, slight natural shake, natural lighting (NOT cinematic)
+- NO phone, selfie stick, or hands holding device visible in frame
 
 CHARACTER IDENTITY LOCK:
-- 25 years old, short dark hair, light stubble beard, youthful smooth skin
-- Use reference image — same face, age, skin tone, hair color in EVERY scene
-- EXACTLY 2 hands, 5 fingers each — NO extra hands, NO extra fingers, NO deformed limbs
-- SAME OUTFIT in all scenes (can get slightly dirty/wet but same clothes)
+- 25yo, short dark hair, light stubble, smooth youthful skin
+- Same face, outfit, and appearance in EVERY scene
+- EXACTLY 2 hands, 5 fingers each — NO extra limbs
 
-DIALOGUE (indirect speech — NO quotation marks):
-- Describe what the character says INDIRECTLY:
-  GOOD: "he opens with a hook explaining he is about to sleep in a bed full of mice"
-  BAD: "he says: Hey guys today I'm sleeping in a bed of mice"
-- He speaks in English in an excited, energetic young male voice
-- Lip movements naturally synced to speech
-- Natural smartphone microphone audio with ambient sound
+DIALOGUE (indirect speech — VEO3 will generate the voice):
+- Describe what he says INDIRECTLY: "he explains that he is about to paint the wall with chrome paint"
+- NOT direct quotes: "he says: Hey guys today I'm painting"
+- He speaks in English, excited energetic young male voice
+- Lip movements synced to speech, natural smartphone audio
 
-SCENE FLOW (4 scenes = ONE continuous story):
-1. HOOK: Opens with attention-grabbing line hinting at the shocking concept
-2. REVEAL: Adjusts camera to show the full concept, reacts with wide eyes
-3. INTERACTION: Gets in/on/touches the concept, describes the feeling
-4. PAYOFF: Final reaction or "which one would you pick?" choice question
+CRITICAL — CONTINUOUS PHYSICAL ACTION:
+- The character must be PHYSICALLY DOING SOMETHING in every scene
+- NOT just standing and talking — he pours, paints, builds, opens, touches, sits, jumps
+- The concept/product must be CLEARLY VISIBLE and RECOGNIZABLE throughout
+- The action progresses: start small → build up → full result
 
-SETTING: Matches the concept (NOT always beach). Same setting across all scenes.
-CONCEPT OBJECT: Must stay CONSISTENT in shape, texture, and scale across all scenes.
+6-SCENE FLOW (each scene = 8 seconds of continuous action):
+1. HOOK: Character grabs attention — explains what crazy thing he is about to do
+2. SETUP: Shows the concept/material to camera, walks toward it
+3. ACTION 1: Starts the physical interaction (pouring, painting, placing)
+4. ACTION 2: Deeper immersion — fully interacting, describing the feeling
+5. REACTION: Stops and reacts to the result with genuine shock/excitement
+6. PAYOFF: Final wide reveal of complete result + asks viewers to comment
 
-Format: Return a JSON object with keys: hook (indirect description of what he says),
-scene_descriptions (list of exactly 4 scene descriptions — each describes ONE still frame + 
-what happens in 8 seconds of that scene, including movement and dialogue),
-title, description, hashtags""",
+SETTING: Must match the concept. Same setting across all 6 scenes.
+CONCEPT OBJECT: Must stay CONSISTENT in shape, texture, and scale.
+
+Format: Return a JSON object with keys:
+- hook (indirect description of attention-grabbing opening)
+- scene_descriptions (list of EXACTLY 6 strings — each describes the still frame + 
+  what happens in 8 seconds: physical action + what character says + camera movement)
+- title, description, hashtags""",
 
     "galactic_experiment": """You are a calm, authoritative space documentary narrator — like David Attenborough 
 meets Neil deGrasse Tyson. Your channel takes viewers on immersive planet exploration tours.
@@ -230,7 +234,8 @@ Format: 9:16 vertical. Style: cinematic, photorealistic, 8K quality.
 Return ONLY valid JSON array of objects with keys: frame_number, frame_prompt, video_prompt, duration_seconds"""
 
     script_text = json.dumps(script, ensure_ascii=False)
-    user_prompt = f"Create 4 detailed visual frame prompts for this video script:\n{script_text}\n\nReturn ONLY valid JSON array."
+    num_frames = len(script.get("scene_descriptions", [])) or 4
+    user_prompt = f"Create {num_frames} detailed visual frame prompts for this video script:\n{script_text}\n\nReturn ONLY valid JSON array."
 
     result = _call_gemini(system_prompt, user_prompt, temperature=0.7)
 

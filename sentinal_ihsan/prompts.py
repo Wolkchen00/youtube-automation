@@ -1,13 +1,19 @@
 """
-Sentinal Ihsan — Visual Prompts & Style Constants
+Sentinal Ihsan — Visual Prompts & Style Constants (VEO3 Overhaul)
 
-ENHANCED with key techniques from professional VEO 3.1 multi-scene workflow:
-  ✅ IDENTITY_LOCK: Reference image anchor sentence for face consistency
-  ✅ FRONT_CAMERA_POV: Smartphone front-camera POV (not cinematic)
-  ✅ QUALITY_GUARD: No extra hands/fingers, no phone/device visible
-  ✅ OUTFIT_LOCK: Same outfit across all scenes
-  ✅ INDIRECT_SPEECH: Describe dialogue indirectly, no quotation marks
-  ✅ SCENE_CONTINUITY: Each scene naturally continues from the previous
+6-SCENE FLOW:
+  Scene 1: HOOK — Character grabs attention, explains concept
+  Scene 2: SETUP — Shows the concept/product/material to camera
+  Scene 3: ACTION 1 — Starts interacting (pouring, painting, building)
+  Scene 4: ACTION 2 — Deeper interaction (fully immersed, touching, feeling)
+  Scene 5: REACTION — Genuine surprise/shock at the result
+  Scene 6: PAYOFF — Final reveal + call-to-action ("which would you pick?")
+
+VEO3-SPECIFIC:
+  ✅ Each video prompt includes speech description (VEO3 generates audio)
+  ✅ Continuous physical motion in every clip
+  ✅ Front-camera POV with natural handheld shake
+  ✅ Identity lock + quality guard on every frame
 """
 
 # ─── Identity Lock (prepended to EVERY frame prompt for face consistency) ─────
@@ -19,7 +25,7 @@ IDENTITY_LOCK = (
     "Do NOT change them into a different person."
 )
 
-# ─── Character description (when reference image is not available) ────────────
+# ─── Character description ────────────────────────────────────────────────────
 
 CHARACTER_ANCHOR = (
     "A 25-year-old young man with short dark hair and light stubble beard. "
@@ -27,7 +33,7 @@ CHARACTER_ANCHOR = (
     "Athletic build, wearing a casual t-shirt."
 )
 
-# ─── Front Camera POV (replaces cinematic camera descriptions) ────────────────
+# ─── Front Camera POV ─────────────────────────────────────────────────────────
 
 CAMERA_POV = (
     "Handheld smartphone front camera point-of-view, vertical 9:16 format, "
@@ -37,107 +43,126 @@ CAMERA_POV = (
     "are NOT visible in the frame — we only see what the front camera sees."
 )
 
-# ─── Anti-artifact rules ─────────────────────────────────────────────────────
+# ─── Quality Guard ────────────────────────────────────────────────────────────
 
 QUALITY_GUARD = (
-    "STRICT RULES: The character must have EXACTLY 2 hands and 5 fingers per hand. "
-    "NO third hand, NO sixth finger, NO merged fingers, NO extra limbs. "
-    "Face must remain consistent and youthful (25 years old). "
-    "Realistic unedited smartphone UGC front-camera video frame, "
-    "natural lighting, no cinematic lighting, no heavy depth of field."
+    "STRICT: EXACTLY 2 hands, 5 fingers each. "
+    "NO third hand, NO sixth finger, NO merged fingers. "
+    "Face must stay youthful (25 years old), consistent across scenes. "
+    "Realistic smartphone UGC quality, natural lighting."
 )
 
-# ─── Frame Templates (front-camera POV, concept-adaptive) ────────────────────
+# ─── 6 Frame Templates (HOOK → SETUP → ACTION × 2 → REACTION → PAYOFF) ──────
 
 FRAME_TEMPLATES = {
-    "intro_talking": (
+    "hook_intro": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} looking directly at the camera with excited expression, "
-        f"gesturing naturally with one hand while explaining the concept. "
-        f"Background matches the current concept setting. "
+        f"{CHARACTER_ANCHOR} looking directly at the camera with an excited, wide-eyed expression. "
+        f"He is in a specific setting that matches the concept. "
+        f"His mouth is slightly open as if starting to speak. "
+        f"Background clearly shows the setting and environment. "
         f"Wearing the exact same outfit as in the reference image. "
         f"{QUALITY_GUARD}"
     ),
-    "concept_reveal": (
+    "concept_setup": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} adjusting the phone angle to show the concept object/setting "
-        f"behind and around him. Looking between the camera and the concept with wide eyes. "
-        f"The concept is clearly visible and well-lit in the background. "
-        f"Still wearing the exact same outfit as in the reference image. "
+        f"{CHARACTER_ANCHOR} has turned the phone to also show the concept object/material/setup "
+        f"behind and around him. He is pointing or gesturing toward it with one hand. "
+        f"The concept is clearly visible, well-lit, and recognizable. "
+        f"His expression shows anticipation. Same outfit. "
         f"{QUALITY_GUARD}"
     ),
-    "interaction": (
+    "action_start": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} actively interacting with the concept — touching, holding, "
-        f"sitting in, or examining it closely while keeping the front camera on himself. "
-        f"Both hands visible doing something natural. "
-        f"Still wearing the exact same outfit. Concept fills the background. "
+        f"{CHARACTER_ANCHOR} has started the physical action — his hands are actively "
+        f"interacting with the concept (pouring, painting, placing, touching, opening). "
+        f"Both hands are naturally engaged. The concept is changing due to his action. "
+        f"His face shows effort and concentration. Same outfit. "
         f"{QUALITY_GUARD}"
     ),
-    "reaction_close": (
+    "action_deep": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"Extreme close-up of {CHARACTER_ANCHOR}'s face showing strong emotion — "
-        f"shock, amazement, disgust, or laughter depending on the concept. "
-        f"Shallow depth of field, concept blurred in background. "
-        f"Same outfit, same person, direct eye contact with camera. "
+        f"{CHARACTER_ANCHOR} is now deeply interacting with the concept — sitting in it, "
+        f"surrounded by it, or holding the result. The transformation/effect is clearly visible. "
+        f"His expression shifts between shock and excitement. Same outfit. "
+        f"{QUALITY_GUARD}"
+    ),
+    "reaction_shock": (
+        f"{IDENTITY_LOCK} "
+        f"{CAMERA_POV} "
+        f"Close-up of {CHARACTER_ANCHOR} face showing intense reaction — jaw dropped, "
+        f"wide eyes, hand over mouth, looking between the camera and the concept result. "
+        f"The concept result is partially visible in the background. "
+        f"Same outfit. Genuine emotional reaction. "
         f"{QUALITY_GUARD}"
     ),
     "final_reveal": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} pulling the phone back to show a wider view of the full concept. "
-        f"The scale of the concept is fully visible. Character gestures toward it with one hand. "
-        f"Still wearing the exact same outfit as in every previous scene. "
+        f"{CHARACTER_ANCHOR} has pulled back to show the FULL result in a wider frame. "
+        f"The complete concept transformation is visible — impressive and shareable. "
+        f"He is gesturing toward it proudly. Same outfit. "
         f"This is the money shot — the most impressive angle. "
         f"{QUALITY_GUARD}"
     ),
-
-    # Environment detail shot (no character needed)
-    "concept_detail": (
-        "Extreme close-up of the concept object/material showing texture and detail. "
-        "Macro photography style. High detail, sharp focus. "
-        "Natural smartphone camera quality. 9:16 vertical."
-    ),
 }
 
-# ─── Video Prompts (front-camera POV, indirect speech, 8-second scenes) ──────
+# ─── 6 VEO3 Video Prompts (with speech + continuous motion) ──────────────────
 
 VIDEO_PROMPTS = {
-    "hook_intro": (
-        "Handheld vertical 9:16 front-facing camera point-of-view, as if the viewer "
-        "is the phone itself at arm's length. Throughout the clip, the recording device "
-        "and his hands holding it are never visible in the frame. "
-        "The young man opens the video with a short, attention-grabbing hook line "
-        "that immediately creates curiosity about the shocking situation. "
-        "He speaks in English in an excited, energetic young male voice. "
-        "His lip movements are naturally synced to his speech. "
-        "He gestures naturally with one hand while keeping the phone steady. "
-        "Natural ambient sound from the environment. 8 seconds."
+    "hook_video": (
+        "Handheld vertical 9:16 front-camera POV, natural hand shake. "
+        "Throughout the clip, no phone or recording device is visible. "
+        "The young man speaks directly to the front camera in English in an excited, "
+        "energetic voice. He opens with a short attention-grabbing hook line that "
+        "immediately creates curiosity about what he is about to do. "
+        "His lip movements are naturally synced to speech. "
+        "He gestures with one hand while keeping the phone steady. "
+        "His eyes are wide with excitement. Natural ambient sound. 8 seconds."
     ),
-    "concept_interaction": (
-        "Same handheld vertical 9:16 front camera POV. The recording device is never visible. "
-        "The young man interacts with the concept object — same person, same outfit. "
-        "He describes what he is experiencing in English, reacting genuinely. "
-        "Camera has slight natural hand shake as he moves. "
-        "The concept object remains stable and consistent throughout the clip. "
-        "Natural ambient sound. 8 seconds."
+    "setup_video": (
+        "Same handheld vertical front camera POV. No recording device visible. "
+        "The young man adjusts the camera angle to reveal the concept setup behind him. "
+        "He walks toward it, still talking in English, describing what it is and what he plans to do. "
+        "The camera moves with him — natural walking motion with handheld shake. "
+        "He points at the concept and looks between camera and the concept. "
+        "Same outfit, same voice. Natural ambient sound. 8 seconds."
     ),
-    "reaction_reveal": (
-        "Same front camera POV continuous shot. The recording device is never visible. "
-        "The young man pulls back to reveal the full scale of the concept, "
-        "then reacts with genuine emotion — shock, disbelief, or amazement. "
-        "He speaks to the camera in English describing what he sees. "
-        "Same outfit, same person, natural camera movement. 8 seconds."
+    "action_start_video": (
+        "Same front camera POV. No recording device visible. "
+        "The young man starts the physical action — he is actively interacting with "
+        "the concept (pouring, painting, placing, opening). Both his hands do something natural. "
+        "He narrates what he is doing in English — describing the texture, the feeling, the weight. "
+        "Camera has natural shake from his movement. The concept visibly changes. "
+        "Same outfit, same voice. Ambient sound of the action. 8 seconds."
     ),
-    "choice_question": (
-        "Same front camera POV. The recording device is never visible. "
-        "The young man shows three options to the camera and asks the viewers which one "
-        "they would pick, in an excited voice in English. "
-        "He points to each option with one hand. "
-        "Same outfit, same person. Natural ambient sound. 8 seconds."
+    "action_deep_video": (
+        "Same front camera POV. No recording device visible. "
+        "The young man is now deeply immersed in the interaction — he continues "
+        "the physical action and reacts to the result. He speaks in English describing "
+        "what is happening, how it feels, and his genuine surprise. "
+        "His body movement is natural — shifting weight, leaning in, stepping back. "
+        "The concept transformation is clearly visible and progressing. "
+        "Same outfit, same voice. 8 seconds."
+    ),
+    "reaction_video": (
+        "Same front camera POV. No recording device visible. "
+        "The young man stops the action and looks at the result with genuine shock. "
+        "He speaks in English — reacting to what just happened with disbelief and excitement. "
+        "His facial expressions are dramatic — jaw drop, wide eyes, hand over mouth. "
+        "He looks between the camera and the result multiple times. "
+        "His voice gets higher with surprise. Same outfit. 8 seconds."
+    ),
+    "payoff_video": (
+        "Same front camera POV. No recording device visible. "
+        "The young man pulls back to show the final result in a wider shot. "
+        "He speaks in English — wrapping up, showing off the complete transformation, "
+        "and asking viewers to comment their reaction or choose between options. "
+        "He gestures toward the result proudly, then looks back at camera with a smile. "
+        "Natural hand movements and body language. Same outfit, same voice. 8 seconds."
     ),
 }
