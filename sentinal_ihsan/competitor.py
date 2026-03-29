@@ -13,9 +13,17 @@ REFERENCE CHANNELS:
   @melihzyrkk — Product interaction, cursed experiences
 """
 
+import json
+import random
 from datetime import date
-from core.config import logger
-from core.script_generator import generate_script
+from pathlib import Path
+
+import google.generativeai as genai
+
+from core.config import GEMINI_API_KEY, PROJECT_ROOT, logger
+
+
+HISTORY_FILE = PROJECT_ROOT / "logs" / "sentinal_ihsan_history.json"
 
 # ─── VIRAL TOPICS (PROVEN RECREATIONS + ORIGINAL CONCEPTS) ─────────────────────
 
@@ -110,29 +118,106 @@ VIRAL_TOPICS = [
     {"topic": "Freezing a bottle of cola to exactly -2 degrees then opening it — instant freeze magic",
      "category": "experiment", "setting": "kitchen",
      "action_steps": "takes supercooled bottle from freezer, cracks it open, cola instantly freezes solid"},
+
+    # === EXTRA VIRAL TOPICS (expanded pool to avoid repeats) ===
+    {"topic": "Filling a room with 10,000 balloons and then vacuuming them all at once",
+     "category": "cursed_experience", "setting": "living_room",
+     "action_steps": "fills room with balloons, shows the sea of balloons, turns on industrial vacuum, balloons get sucked in"},
+
+    {"topic": "Making a mirror out of melted candy — does it actually reflect?",
+     "category": "transformation", "setting": "kitchen",
+     "action_steps": "melts candy, pours into flat mold, waits for it to cool, polishes surface, checks reflection"},
+
+    {"topic": "Building a chair entirely out of hot glue sticks — can it hold his weight?",
+     "category": "experiment", "setting": "workshop",
+     "action_steps": "glues sticks together layer by layer, builds chair shape, lets it dry, sits down carefully, tests weight"},
+
+    {"topic": "Covering a basketball with magnets and dropping it near a metal wall",
+     "category": "experiment", "setting": "garage",
+     "action_steps": "glues magnets all over basketball, brings it near metal wall, ball sticks, tries to pull it off"},
+
+    {"topic": "Filling shoes with concrete and trying to walk in them",
+     "category": "cursed_experience", "setting": "backyard",
+     "action_steps": "pours wet concrete into shoes, waits for it to set, puts feet in, tries to walk and lift legs"},
+
+    {"topic": "What happens if you put 50 rubber bands on a watermelon until it explodes",
+     "category": "experiment", "setting": "backyard",
+     "action_steps": "places rubber bands one by one around watermelon, tension builds, watermelon deforms, finally explodes"},
+
+    {"topic": "Making an entire outfit out of duct tape and wearing it in public",
+     "category": "cursed_experience", "setting": "garage",
+     "action_steps": "wraps duct tape into shirt, pants, shoes, puts outfit on, walks around, shows reactions"},
 ]
 
 
-def get_daily_topic() -> dict:
-    """Select today's topic from pre-built viral list."""
-    today = date.today()
-    day_num = today.toordinal()
-    idx = day_num % len(VIRAL_TOPICS)
-    topic = VIRAL_TOPICS[idx]
-    logger.info(f"🎬 Sentinal Ihsan topic: {topic['topic'][:60]}...")
-    return topic
+def get_daily_topic(exclude_recent: int = 30) -> dict:
+    """Select today's topic from pre-built viral list, avoiding recent repeats."""
+    recent = []
+    if HISTORY_FILE.exists():
+        try:
+            recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            recent = []
+
+    recent_set = set(recent[-exclude_recent:])
+    available = [t for t in VIRAL_TOPICS if t["topic"] not in recent_set]
+
+    if not available:
+        # All topics used, reset and pick any
+        available = list(VIRAL_TOPICS)
+
+    chosen = random.choice(available)
+
+    # Save to history
+    recent.append(chosen["topic"])
+    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    HISTORY_FILE.write_text(json.dumps(recent[-100:], ensure_ascii=False), encoding="utf-8")
+
+    logger.info(f"🎬 Sentinal Ihsan topic: {chosen['topic'][:60]}...")
+    return chosen
 
 
 def get_trending_with_gemini() -> dict | None:
-    """Generate a trending topic using Gemini (based on brand DNA)."""
+    """Generate a trending viral topic using Gemini with a purpose-built prompt."""
+    if not GEMINI_API_KEY:
+        return None
+
     try:
-        result = generate_script("sentinal_ihsan", "Generate a viral topic idea")
-        if result and result.get("title"):
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel(
+            "gemini-2.5-flash",
+            system_instruction=(
+                "You are a viral content strategist for TikTok/YouTube Shorts. "
+                "You specialize in satisfying, experiment, and discovery content. "
+                "Generate ONE unique viral video topic idea that a young male creator "
+                "can film with a front-facing camera. The topic must involve PHYSICAL "
+                "INTERACTION with an object or material (painting, pouring, building, "
+                "opening, crushing, filling, etc). "
+                "Return ONLY valid JSON with keys: topic (full description), "
+                "category (one of: transformation, experiment, cursed_experience, discovery), "
+                "setting (where to film), action_steps (what the character physically does)"
+            ),
+        )
+
+        response = model.generate_content(
+            "Generate a fresh, never-seen-before viral experiment topic. "
+            "Think satisfying transformations, impossible builds, or cursed experiences. "
+            "Make it something that would get millions of views. Return ONLY valid JSON.",
+            generation_config=genai.GenerationConfig(
+                response_mime_type="application/json",
+                temperature=1.0,
+            ),
+        )
+
+        result = json.loads(response.text)
+        if result and result.get("topic"):
+            logger.info(f"🤖 Gemini trending topic: {result['topic'][:60]}...")
             return {
-                "topic": result["title"],
-                "category": "gemini_trending",
-                "setting": "generic",
+                "topic": result["topic"],
+                "category": result.get("category", "gemini_trending"),
+                "setting": result.get("setting", "generic"),
+                "action_steps": result.get("action_steps", ""),
             }
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"⚠️ Gemini trending topic failed: {e}")
     return None

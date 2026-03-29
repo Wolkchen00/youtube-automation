@@ -14,7 +14,7 @@ from .config import (
     KIE_AI_CREATE_TASK, KIE_AI_RECORD_INFO, KIE_AI_CREDIT,
     DEFAULT_IMAGE_MODEL, DEFAULT_VIDEO_MODEL, DEFAULT_VIDEO_MODE,
     DEFAULT_ASPECT_RATIO, DEFAULT_RESOLUTION, DEFAULT_OUTPUT_FORMAT,
-    DEFAULT_VIDEO_DURATION,
+    DEFAULT_VIDEO_DURATION, CINEMATIC_VIDEO_MODEL,
     POLL_INTERVAL_IMAGE, POLL_INTERVAL_VIDEO,
     POLL_MAX_ATTEMPTS_IMAGE, POLL_MAX_ATTEMPTS_VIDEO,
     MAX_RETRY, logger
@@ -149,9 +149,9 @@ def poll_veo_task(task_id: str) -> str | None:
 
 
 def generate_veo_video(prompt: str, image_url: str = None, duration: str = "8") -> str | None:
-    """Generate video with Veo 3.1. Returns URL or None."""
+    """Generate video with Veo 3.1. Returns URL or None. Retries on failure."""
     payload = {
-        "model": "veo3_fast",
+        "model": CINEMATIC_VIDEO_MODEL,
         "prompt": prompt,
         "duration": duration,
         "aspect_ratio": "9:16",
@@ -159,10 +159,20 @@ def generate_veo_video(prompt: str, image_url: str = None, duration: str = "8") 
     if image_url:
         payload["image_url"] = image_url
 
-    task_id = create_veo_task(payload)
-    if not task_id:
-        return None
-    return poll_veo_task(task_id)
+    for attempt in range(1, MAX_RETRY + 1):
+        task_id = create_veo_task(payload)
+        if not task_id:
+            logger.warning(f"⚠️ Veo task creation failed (attempt {attempt}/{MAX_RETRY})")
+            if attempt < MAX_RETRY:
+                time.sleep(10)
+            continue
+        result = poll_veo_task(task_id)
+        if result:
+            return result
+        logger.warning(f"⚠️ Veo video generation failed (attempt {attempt}/{MAX_RETRY})")
+        if attempt < MAX_RETRY:
+            time.sleep(10)
+    return None
 
 
 # ─── High-Level Generation Functions ──────────────────────────────────────────

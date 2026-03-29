@@ -228,20 +228,37 @@ def generate_visual_prompts(channel: str, script: dict) -> list[dict] | None:
     system_prompt = """You are a visual prompt engineer for AI image and video generation.
 Given a video script, create detailed frame-by-frame visual prompts.
 Each frame prompt must be highly detailed, photorealistic, and cinematic.
-CRITICAL: All frames should feel like they belong to ONE continuous visual narrative.
+CRITICAL: All frames should feel like ONE continuous visual narrative.
 Always specify: camera angle, lighting, color palette, atmosphere, specific details.
 Format: 9:16 vertical. Style: cinematic, photorealistic, 8K quality.
 Return ONLY valid JSON array of objects with keys: frame_number, frame_prompt, video_prompt, duration_seconds"""
 
     script_text = json.dumps(script, ensure_ascii=False)
-    num_frames = len(script.get("scene_descriptions", [])) or 4
+
+    # Determine how many frames to request from various possible keys
+    num_frames = (
+        len(script.get("scene_descriptions", []))
+        or len(script.get("narration_segments", []))
+        or len(script.get("scenes", []))
+        or len(script.get("construction_stages", []))
+        or 4
+    )
+    # Ensure minimum of 4 frames
+    num_frames = max(4, num_frames)
+
     user_prompt = f"Create {num_frames} detailed visual frame prompts for this video script:\n{script_text}\n\nReturn ONLY valid JSON array."
 
     result = _call_gemini(system_prompt, user_prompt, temperature=0.7)
 
     if result:
-        if isinstance(result, dict) and "frames" in result:
-            result = result["frames"]
+        # Handle various possible response structures from Gemini
+        if isinstance(result, dict):
+            for key in ("frames", "visual_prompts", "prompts", "scenes"):
+                if key in result:
+                    result = result[key]
+                    break
+            else:
+                result = [result]
         if not isinstance(result, list):
             result = [result]
         logger.info(f"Generated {len(result)} visual prompts")

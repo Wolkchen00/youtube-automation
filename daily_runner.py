@@ -72,8 +72,14 @@ def run_all(dry_run: bool = False, skip_upload: bool = False,
     validate_api_keys()
 
     credit = check_credit()
-    if credit:
-        logger.info(f"Credits: {credit} (${float(credit) * 0.005:.2f})")
+    if credit and isinstance(credit, dict):
+        balance = credit.get("balance", credit.get("credit", credit.get("remaining", 0)))
+        try:
+            logger.info(f"Credits: {balance} (${float(balance) * 0.005:.2f})")
+        except (TypeError, ValueError):
+            logger.info(f"Credit info: {credit}")
+    elif credit:
+        logger.info(f"Credit info: {credit}")
 
     cost_report = estimate_daily_total()
     logger.info(f"Estimated daily cost: ~{cost_report['daily_credits']} credits (${cost_report['daily_dollars']:.2f})")
@@ -139,8 +145,14 @@ def run_all(dry_run: bool = False, skip_upload: bool = False,
         logger.info(f"  [{status}] {ch}: {title[:50]}")
 
     remaining = check_credit()
-    if remaining:
-        logger.info(f"\nRemaining credits: {remaining} (${float(remaining) * 0.005:.2f})")
+    if remaining and isinstance(remaining, dict):
+        balance = remaining.get("balance", remaining.get("credit", remaining.get("remaining", 0)))
+        try:
+            logger.info(f"\nRemaining credits: {balance} (${float(balance) * 0.005:.2f})")
+        except (TypeError, ValueError):
+            logger.info(f"\nRemaining credit info: {remaining}")
+    elif remaining:
+        logger.info(f"\nRemaining credit info: {remaining}")
 
     # Save report
     daily_report = {

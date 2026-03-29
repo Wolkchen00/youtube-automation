@@ -132,6 +132,11 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         # CRITICAL: Use face reference on ALL frames for consistency
         url = generate_image(prompt=frame_prompt, reference_url=face_ref)
 
+        # Retry once with simplified prompt if first attempt fails
+        if not url:
+            logger.warning(f"⚠️ Frame {i+1} failed, retrying with simplified prompt...")
+            url = generate_image(prompt=frame_prompt[:300], reference_url=face_ref)
+
         if url:
             save_path = dirs["frames"] / f"{project_name}_frame_{i:02d}.png"
             local = download_file(url, save_path)
@@ -173,7 +178,21 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             if local:
                 clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
         else:
-            logger.warning(f"⚠️ VEO3 Clip {i+1} failed!")
+            # Retry once for failed clips
+            logger.warning(f"⚠️ VEO3 Clip {i+1} failed, retrying...")
+            video_url = generate_veo_video(
+                prompt=vp.get("video_prompt", "Character talks to camera excitedly. 8 seconds.")[:300],
+                image_url=start_frame["url"],
+                duration="8",
+            )
+            if video_url:
+                save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
+                local = download_file(video_url, save_path)
+                if local:
+                    clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
+                    logger.info(f"  ✅ VEO3 Clip {i+1} ready (retry)")
+            else:
+                logger.warning(f"⚠️ VEO3 Clip {i+1} failed after retry!")
 
     if len(clips) < 3:
         logger.error("❌ Not enough video clips! Need at least 3 for 30s video.")

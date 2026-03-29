@@ -125,6 +125,14 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             reference_url=previous_url,
         )
 
+        # Retry once with simplified prompt if first attempt fails
+        if not url:
+            logger.warning(f"⚠️ Frame {i+1} failed, retrying with simplified prompt...")
+            url = generate_image(
+                prompt=frame_prompt[:300],
+                reference_url=previous_url,
+            )
+
         if url:
             save_path = dirs["frames"] / f"{project_name}_frame_{i:02d}.png"
             local = download_file(url, save_path)
@@ -135,8 +143,8 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         else:
             logger.warning(f"⚠️ Frame {i+1} failed!")
 
-    if len(frames) < 2:
-        logger.error("❌ Not enough frames!")
+    if len(frames) < 3:
+        logger.error("❌ Not enough frames (need at least 3)!")
         return None
 
     # ── 5. Generate VEO3 narrated video clips ─────────────────────────────
@@ -185,7 +193,23 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
                 logger.info(f"  ✅ Clip {i+1} ready with narration")
         else:
-            logger.warning(f"⚠️ Clip {i+1} failed!")
+            # Retry once for failed clips
+            logger.warning(f"⚠️ Clip {i+1} failed, retrying...")
+            video_url = generate_veo_video(
+                prompt=veo_prompt[:500],
+                image_url=start_frame["url"],
+                duration="8",
+            )
+            if video_url:
+                save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
+                local = download_file(video_url, save_path)
+                if local:
+                    clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
+                    logger.info(f"  ✅ Clip {i+1} ready (retry)")
+                else:
+                    logger.warning(f"⚠️ Clip {i+1} download failed after retry")
+            else:
+                logger.warning(f"⚠️ Clip {i+1} failed after retry!")
 
     if not clips:
         logger.error("❌ No video clips!")
