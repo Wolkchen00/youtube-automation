@@ -64,7 +64,7 @@ DEFAULT_VIDEO_DURATION = "8"        # seconds per clip
 DEFAULT_VIDEO_MODEL = "kling-3.0/video"
 DEFAULT_VIDEO_MODE = "std"          # std = cheaper, pro = expensive
 DEFAULT_IMAGE_MODEL = "nano-banana-2"
-CINEMATIC_VIDEO_MODEL = "veo3.1"    # for high quality scenes
+CINEMATIC_VIDEO_MODEL = "veo3_fast"  # Kie AI model names: veo3 (quality) or veo3_fast (fast)
 
 # Duration constraints per channel (seconds)
 CHANNEL_DURATION = {

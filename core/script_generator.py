@@ -20,7 +20,7 @@ import google.generativeai as genai
 from .config import GEMINI_API_KEY, logger
 
 # Gemini model priority: try primary, fallback to lite/older
-GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash-lite", "gemini-1.5-flash"]
+GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash-lite", "gemini-2.0-flash"]
 
 # Configure Gemini
 if GEMINI_API_KEY:
@@ -179,9 +179,10 @@ def _call_gemini(system_prompt: str, user_prompt: str, temperature: float = 0.9)
         except Exception as e:
             last_error = e
             error_str = str(e).lower()
-            if "quota" in error_str or "rate" in error_str or "429" in error_str or "resource" in error_str:
+            # Rate limits, quota errors, or deprecated/unavailable models → try next
+            if any(kw in error_str for kw in ("quota", "rate", "429", "resource", "404", "not found", "not_found")):
                 logger.warning(f"  {model_name} rate limited, trying next...")
-                time.sleep(5)
+                time.sleep(15)  # longer wait to let rate limits reset
                 continue
             else:
                 logger.error(f"  Gemini error: {e}")
