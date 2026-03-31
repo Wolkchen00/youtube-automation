@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 from core.config import CHANNEL_DIRS, CHANNEL_DURATION, logger
-from core.kie_api import generate_image, generate_veo_video, check_credit
+from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_crossfade, final_export,
@@ -155,6 +155,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     for i in range(len(frames) - 1):
         start_frame = frames[i]
+        end_frame = frames[i + 1] if (i + 1) < len(frames) else None
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]
 
         # Build VEO3 prompt with narration
@@ -169,7 +170,6 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             narr_text = f"Exploring the wonders of {daily_topic['topic'][:50]}."
 
         # VEO3 prompt format: visual description + narration script
-        # VEO3 will generate AI voice reading the narration over the visuals
         veo_prompt = (
             f"{visual_desc} "
             f"A calm, authoritative male narrator speaks in English: \"{narr_text}\" "
@@ -186,34 +186,34 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             duration="8",
         )
 
+        if not video_url:
+            # Fallback: Try Kling video generation
+            logger.warning(f"⚠️ VEO3 Clip {i+1} failed, trying Kling fallback...")
+            try:
+                video_url = generate_video(
+                    prompt=visual_desc[:200],
+                    start_frame=start_frame["url"],
+                    end_frame=end_frame["url"] if end_frame else None,
+                )
+            except Exception as e:
+                logger.warning(f"⚠️ Kling fallback error: {e}")
+                video_url = None
+
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
             local = download_file(video_url, save_path)
             if local:
                 clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
-                logger.info(f"  ✅ Clip {i+1} ready with narration")
+                logger.info(f"  ✅ Clip {i+1} ready")
         else:
-            # Retry once for failed clips
-            logger.warning(f"⚠️ Clip {i+1} failed, retrying...")
-            video_url = generate_veo_video(
-                prompt=veo_prompt[:500],
-                image_url=start_frame["url"],
-                duration="8",
-            )
-            if video_url:
-                save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
-                local = download_file(video_url, save_path)
-                if local:
-                    clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
-                    logger.info(f"  ✅ Clip {i+1} ready (retry)")
-                else:
-                    logger.warning(f"⚠️ Clip {i+1} download failed after retry")
-            else:
-                logger.warning(f"⚠️ Clip {i+1} failed after retry!")
+            logger.warning(f"⚠️ Clip {i+1} failed (both VEO3 + Kling)!")
 
-    if not clips:
-        logger.error("❌ No video clips!")
+    if len(clips) < 2:
+        logger.error("❌ Not enough video clips! Need at least 2.")
         return None
+
+    if len(clips) < 3:
+        logger.warning(f"⚠️ Only {len(clips)} clips — video may be short but publishing anyway.")
 
     # ── 6. FFmpeg merge with crossfades ───────────────────────────────────
     logger.info("\n🔗 MERGING NARRATED CLIPS...")
