@@ -184,6 +184,7 @@ def run_all(dry_run: bool = False, skip_upload: bool = False,
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="YouTube Multi-Channel Daily Automation")
     parser.add_argument("--channel", type=str, help="Run specific channel only")
+    parser.add_argument("--channels", type=str, nargs="+", help="Run multiple specific channels")
     parser.add_argument("--no-retry", action="store_true", help="Disable auto-retry on failure")
     parser.add_argument("--skip-upload", action="store_true", help="Generate but don't publish")
     parser.add_argument("--cost-only", action="store_true", help="Show cost estimate and exit")
@@ -191,6 +192,18 @@ if __name__ == "__main__":
 
     if args.cost_only:
         print_cost_report()
+    elif args.channels:
+        valid = [ch for ch in args.channels if ch in CHANNEL_NAMES]
+        invalid = [ch for ch in args.channels if ch not in CHANNEL_NAMES]
+        if invalid:
+            print(f"Unknown channel(s): {', '.join(invalid)}")
+            print(f"Available: {', '.join(CHANNEL_NAMES)}")
+        if valid:
+            run_all(
+                skip_upload=args.skip_upload,
+                channels=valid,
+                auto_retry=not args.no_retry,
+            )
     elif args.channel:
         if args.channel not in CHANNEL_NAMES:
             print(f"Unknown channel: {args.channel}")
