@@ -256,6 +256,366 @@ TIMELAPSE_CONCEPTS = [
             "Cinematic reveal. Sneaker house lights up at dusk. Swoosh window glows. LED outlines the shoe shape. Rope bridge lit. Fixed angle. Incredible. 8 seconds.",
         ],
     },
+
+    # ─── 13. Giant Basketball Court ───────────────────────────────────────────
+    {
+        "name": "Basketball Shaped Pool",
+        "hook": "He Built a BASKETBALL-Shaped Pool with Real Hoops! 🏀💦",
+        "title": "Building a BASKETBALL Pool! 🏀🏊",
+        "description": "The ultimate sports fan pool — shaped like a giant basketball with real hoops on each end! Orange tiles and black line details!",
+        "hashtags": "#shorts #basketball #pool #construction #timelapse #nba #sports",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a large flat backyard with green grass. Sports equipment shed visible. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Circular excavation in the lawn forming a giant basketball shape. Workers marking the curved line patterns. Excavator digging. Dirt piles around. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Pool structure taking shape — orange mosaic tiles covering the interior. Black line details matching basketball seam pattern. Two basketball hoops being installed at opposite ends. Concrete deck forming around. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed basketball pool filled with crystal water. Orange LED glow from underwater. Black seam lines perfectly visible. Two hoops with nets. Wooden deck with bleacher seating. Sports paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction timelapse. Excavator digs circular basketball shape. Workers mark seam lines. Earth removed rapidly. Fixed drone angle. 8 seconds.",
+            "Rapid construction. Orange tiles applied in basketball pattern. Black seam lines laid. Hoops installed. Deck built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pool fills with water. Orange LEDs illuminate. Hoops gleam. Golden hour light reflects off water. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 14. Giant Camera House ───────────────────────────────────────────────
+    {
+        "name": "Camera Shaped Studio",
+        "hook": "He Built a Studio Shaped Like a GIANT Camera! 📷🏠",
+        "title": "Building a CAMERA-Shaped Photography Studio! 📷✨",
+        "description": "A photographer's dream — an entire studio shaped like a massive DSLR camera with a lens-shaped entrance and viewfinder rooftop terrace!",
+        "hashtags": "#shorts #camera #photography #construction #timelapse #studio #creative",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at an empty commercial lot. Flat concrete ground. Chain link fence around perimeter. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Foundation poured in rectangular camera body shape. A cylindrical structure rising for the lens section. Steel framework. Crane positioning roof pieces. Workers welding. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Camera studio 80% complete — matte black exterior panels. The cylindrical lens entrance has concentric glass rings. A raised viewfinder bump on top forms a rooftop terrace. Flash unit shaped chimney. Grip texture on sides. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at blue hour. Completed camera studio glowing. Lens entrance lit with concentric LED rings. Viewfinder terrace has warm lighting. Red recording light on top blinks. Interior visible through lens — professional photography studio with lights. Stunning. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction timelapse. Foundation poured. Cylindrical lens structure rises. Steel frame assembled. Crane lifts pieces. Fixed drone. 8 seconds.",
+            "Rapid construction. Black panels applied. Glass lens rings installed. Viewfinder terrace built. Flash chimney erected. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Lens LED rings glow concentric circles. Red light blinks. Studio interior visible. Blue hour atmosphere. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 15. Coca-Cola Can Pool ───────────────────────────────────────────────
+    {
+        "name": "Coca-Cola Can Pool",
+        "hook": "He Built a GIANT Coca-Cola Can Swimming Pool! 🥤💦",
+        "title": "Building a COCA-COLA Can Pool! 🥤🏊",
+        "description": "The most refreshing pool ever — shaped like a massive Coca-Cola can with the iconic red and white design! Complete with a bubble jacuzzi!",
+        "hashtags": "#shorts #cocacola #pool #construction #timelapse #satisfying #iconic",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a backyard space with trimmed lawn and patio area. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Large cylindrical excavation in the yard. Workers building curved concrete walls. The circular shape clearly defined. Rebar visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cylindrical pool taking shape — red mosaic tiles on exterior walls visible above ground. White wave stripe being applied. Workers installing the pull-tab shaped diving platform at one end. Interior blue tiles. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed Coca-Cola can pool — iconic red with white swirl stripe. Pull-tab diving board. Bubble jets create fizzing effect. Red LED underglow. Silver rim at top edge. Landscaped with tropical plants. Refreshing paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction timelapse. Workers dig cylindrical pool. Curved walls rise. Rebar framework. Fixed drone angle. 8 seconds.",
+            "Rapid construction. Red tiles applied. White stripe painted. Pull-tab platform built. Interior finished blue. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pool fills. Bubble jets fizz. Red LED glow. Pull-tab diving board gleams. Dusk lighting. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 16. Football Stadium Pool ────────────────────────────────────────────
+    {
+        "name": "Football Stadium Pool",
+        "hook": "He Built a Mini Football Stadium Pool in His Yard! ⚽🏟️",
+        "title": "Building a FOOTBALL STADIUM Pool! ⚽💦",
+        "description": "A miniature football stadium with a real pool as the field! Terraced seating, floodlights, and goal posts included!",
+        "hashtags": "#shorts #football #stadium #pool #construction #timelapse #soccer",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a large backyard with flat terrain. Wide open space. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Rectangular excavation with stepped terracing on all sides. Workers building concrete bleacher forms. The field area deepens for the pool. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Stadium taking shape — green artificial turf tiles on terraces. White lane markings in pool floor. Goal nets at each end. Four floodlight poles being erected at corners. Miniature scoreboard. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed mini stadium — floodlights blaze white. Pool glows blue with painted pitch lines underwater. Goal nets stand at each end. Green terraces with tiny spectator figures. Scoreboard lit. Electric atmosphere. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction. Rectangular pit dug with terraced steps. Concrete poured for bleachers. Field area deepens. Fixed drone. 8 seconds.",
+            "Rapid construction. Green turf on terraces. White lines painted. Goals erected. Floodlight poles installed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Floodlights blaze on. Pool fills with blue water. Pitch lines glow underwater. Night atmosphere. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 17. Giant Donut Shop ─────────────────────────────────────────────────
+    {
+        "name": "Giant Donut Shop",
+        "hook": "He Built a Shop Inside a GIANT Donut! 🍩🏠",
+        "title": "Building a GIANT DONUT Shop! 🍩✨",
+        "description": "The sweetest building ever — a donut shop built inside a massive donut with sprinkle decorations and a glazed roof!",
+        "hashtags": "#shorts #donut #shop #construction #timelapse #food #creative",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a small commercial corner lot. Sidewalk and street visible. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Circular torus-shaped steel framework rising. Workers bending steel into the donut ring shape. The hole in the center will be the entrance. Foundation poured. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Donut structure covered in smooth pink panels (strawberry glaze). Colorful sprinkle-shaped decorations being attached to exterior. The center hole serves as a walk-through entrance. Glass display windows cut. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed giant donut shop — glossy pink glaze exterior with rainbow sprinkles. Warm golden light from interior shows display cases of donuts. Neon 'OPEN' sign glowing. Small outdoor seating with donut-shaped chairs. Sweet paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Steel bent into donut torus shape. Framework rises circular. Workers weld. Fixed drone angle. 8 seconds.",
+            "Rapid construction. Pink panels applied. Sprinkle decorations attached. Windows installed. Interior fitted. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Neon sign glows. Interior lights warm. Sprinkles shimmer in golden hour. Donut chairs placed. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 18. Shark Aquarium House ─────────────────────────────────────────────
+    {
+        "name": "Shark Aquarium House",
+        "hook": "He Built a House with a SHARK TUNNEL Inside! 🦈🏠",
+        "title": "Building a SHARK Aquarium House! 🦈💦",
+        "description": "Living with sharks! A house with an actual walk-through shark tunnel aquarium as the main hallway!",
+        "hashtags": "#shorts #shark #aquarium #house #construction #timelapse #ocean",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a beachfront lot with sandy terrain. Ocean visible in background. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Modern house foundation with a unique glass tunnel structure running through the center. Workers installing thick acrylic panels. Filtration equipment visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. House structure rising around the central aquarium tunnel. White modern walls, flat roof. The glass tunnel visible from above — thick acrylic filled with blue water. Filtration room built adjacent. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed beach house with sharks visible through the glass tunnel from above. Blue aquarium glow emanates from the center. Modern white exterior lit warmly. Ocean waves in background. Tropical landscaping. Incredible fusion of architecture and marine life. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Foundation poured with glass tunnel channel. Acrylic panels craned in. Workers seal joints. Fixed drone. 8 seconds.",
+            "Rapid construction. Walls rise around tunnel. Roof completed. Water fills tunnel blue. House finished white. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Sharks swim in glowing blue tunnel. House glows warm. Ocean backdrop at dusk. Fixed angle. Breathtaking. 8 seconds.",
+        ],
+    },
+
+    # ─── 19. Giant Headphones Pavilion ────────────────────────────────────────
+    {
+        "name": "Headphones Music Pavilion",
+        "hook": "He Built a GIANT Headphones Music Stage! 🎧🎶",
+        "title": "Building GIANT Headphones Music Stage! 🎧🔥",
+        "description": "The ultimate music venue — a stage shaped like massive headphones! The ear cups are performance areas with LED sound visualizers!",
+        "hashtags": "#shorts #headphones #music #construction #timelapse #stage #dj",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at an open field area. Flat ground with grass. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Two circular foundation areas connected by a curved arch structure. Workers building the headband arch. Scaffolding around the ear cup foundations. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Headphones structure taking shape — two large circular ear cup stages with padded exterior texture. The curved headband arch connecting them at 8 meters high. Speaker grille pattern on inner walls. Sound equipment visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed headphones stage — RGB LED rings on both ear cups pulse with color. Sound waves visualized on inner grille panels. The headband arch has chasing lights. DJ booth in one ear cup, seating in the other. Fog effects. Epic music venue. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Two circular stages built. Arch headband structure rises connecting them. Scaffolding up. Fixed drone. 8 seconds.",
+            "Rapid construction. Ear cup panels applied. Speaker grille pattern cut. Sound equipment installed. Headband completed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. RGB LEDs pulse on ear cups. Sound visualizer animations. Chasing lights on headband. Fog rolls. Night magic. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 20. Rolex Watch Pool ─────────────────────────────────────────────────
+    {
+        "name": "Rolex Watch Pool",
+        "hook": "He Built a ROLEX-Shaped Swimming Pool! ⌚💦",
+        "title": "Building a ROLEX Watch Pool! ⌚🏊",
+        "description": "Luxury meets swimming! A pool shaped like a Rolex Submariner with a rotating bezel hot tub and gold-tiled hour markers!",
+        "hashtags": "#shorts #rolex #luxury #pool #construction #timelapse #watches",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a luxury estate backyard. Manicured lawn, stone pathways. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Large circular excavation with an outer ring channel for the bezel. Workers building the dial area deeper. Hour marker positions staked. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Watch pool taking shape — circular main pool with raised bezel rim. Gold mosaic tiles at hour marker positions. Black dial-colored tiles in center area. Crown winder shaped hot tub at 3 o'clock position. Cyclops lens over date window. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed Rolex pool — green bezel rim lit with emerald LEDs. Gold hour markers glow. Black dial center with luminous hands pattern underwater. Crown hot tub bubbles. Luxury deck with loungers. Diamond-like stars above. Opulent paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction. Circular pool with outer bezel ring excavated. Workers build layers. Gold markers placed. Fixed drone. 8 seconds.",
+            "Rapid construction. Green bezel tiles applied. Gold hour markers installed. Black dial tiles laid. Crown hot tub built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Emerald bezel LEDs glow. Gold markers illuminate. Crown hot tub bubbles. Luxury dusk atmosphere. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 21. Rocket Ship Playhouse ────────────────────────────────────────────
+    {
+        "name": "Rocket Ship Playhouse",
+        "hook": "He Built a 10-Meter ROCKET SHIP in His Backyard! 🚀🏠",
+        "title": "Building a ROCKET SHIP Playhouse! 🚀✨",
+        "description": "3... 2... 1... Liftoff! A massive rocket-shaped playhouse with spiral slide, observation deck, and LED flame exhaust!",
+        "hashtags": "#shorts #rocket #space #playhouse #construction #timelapse #kids",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a spacious backyard with green lawn. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cylindrical steel framework rising 10 meters tall. Workers on scaffolding welding sections. Nose cone frame at top. Fin structures at base. Concrete foundation. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Rocket structure covered in white and red panels. Nose cone completed. Circular windows along the body. Spiral slide wrapping around exterior. Three fin stabilizers at base. Door at ground level. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed rocket — white with red trim, stars painted on. Observation deck windows glow warm from inside. Spiral slide gleams. LED flame effect at exhaust nozzle flickers orange and red. American flag decal. Landscaped with astro-turf moon surface. Epic. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction. Cylindrical tower rises. Scaffolding and welding. Nose cone lifted by crane. Fins welded at base. Fixed drone. 8 seconds.",
+            "Rapid construction. White panels applied. Red trim painted. Spiral slide installed. Windows cut. Fins finished. Fixed camera. 8 seconds.",
+            "Cinematic reveal. LED exhaust flames flicker. Windows glow. Slide gleams in dusk light. Stars appear above the rocket. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 22. Diamond Ring Fountain ────────────────────────────────────────────
+    {
+        "name": "Diamond Ring Fountain",
+        "hook": "He Built a GIANT Diamond Ring Fountain! 💍💦",
+        "title": "Building a DIAMOND RING Fountain! 💎✨",
+        "description": "The most romantic fountain ever — a massive diamond engagement ring with water cascading from the diamond and LED-lit band!",
+        "hashtags": "#shorts #diamond #ring #fountain #construction #timelapse #luxury",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a public park plaza with stone pavement. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Circular foundation poured for the ring base. A curved steel arch rising for the band. Workers welding the prong setting structure at the top for the diamond. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Ring structure nearly complete — polished silver-chrome panels on the band. Crystal glass diamond shape at top held in prong settings. Water pipes running through the band to the diamond. Basin pool around the base. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at blue hour. Completed diamond ring fountain — chrome band gleams. Crystal diamond refracts colored LED light creating rainbow projections. Water cascades from the diamond down the band into the circular pool. Underwater lights shimmer. Romantic paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Circular base poured. Chrome arch band rises. Prong settings welded at top. Fixed drone. 8 seconds.",
+            "Rapid construction. Chrome panels applied to band. Crystal diamond mounted in prongs. Water pipes installed. Basin tiled. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Water cascades from diamond. Rainbow LED refractions. Chrome band gleams. Blue hour magic. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 23. Sushi Restaurant ─────────────────────────────────────────────────
+    {
+        "name": "Giant Sushi Roll Restaurant",
+        "hook": "He Built a Restaurant Inside a GIANT Sushi Roll! 🍣🏠",
+        "title": "Building a GIANT SUSHI Restaurant! 🍣🔥",
+        "description": "Itadakimasu! A restaurant shaped like a massive maki sushi roll with nori walls, rice texture exterior, and salmon-colored roof!",
+        "hashtags": "#shorts #sushi #restaurant #japan #construction #timelapse #food",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a commercial street corner lot. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cylindrical framework rising horizontally. Workers building the roll shape. Dark green exterior panels (nori seaweed) being attached to the lower half. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Sushi roll structure taking shape — dark green nori wrap exterior on bottom half. White rice-textured upper panels. Cross-section entrance reveals colorful interior zones (salmon pink, avocado green, cucumber). Chopstick-shaped sign posts. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed sushi roll restaurant — nori exterior gleams. Cross-section entrance glows with warm light showing colorful interior. Giant chopsticks sign. Japanese lanterns along walkway. Bonsai trees flanking entrance. Appetizing and incredible. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Cylindrical horizontal framework built. Dark nori panels applied. Workers shape the roll. Fixed drone. 8 seconds.",
+            "Rapid construction. Rice texture panels on top. Colorful interior sections built. Chopstick signs erected. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Cross-section entrance glows warm. Japanese lanterns light up. Bonsai trees placed. Golden hour glow. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 24. Piano Pool ───────────────────────────────────────────────────────
+    {
+        "name": "Grand Piano Pool",
+        "hook": "He Built a GRAND PIANO Swimming Pool! 🎹💦",
+        "title": "Building a PIANO-Shaped Pool! 🎹🏊",
+        "description": "Music meets water! A grand piano-shaped pool with black and white key steps, string-pattern lane dividers, and a lid-shaped sun shade!",
+        "hashtags": "#shorts #piano #music #pool #construction #timelapse #luxury",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at an estate backyard with a stone terrace. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Grand piano shaped excavation — the curved body for the main pool, the keyboard section stepped for a wading area. Workers refining the distinctive piano curves. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Piano pool structure complete — glossy black tiles on the body, alternating black and white steps at the keyboard end. Gold string-pattern lights running lengthwise. A curved shade structure mimicking an open piano lid. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed piano pool — glossy black body reflects the sky. White and black key steps cascade into the water. Gold string lights glow underwater. Piano lid shade has ambient lighting. Classical music notes projected in light on the deck. Elegant paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction. Piano curve excavated. Keyboard steps formed. Workers shape the distinctive outline. Fixed drone. 8 seconds.",
+            "Rapid construction. Black tiles applied to body. White key steps installed. Gold strings placed. Lid shade erected. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Water fills the piano. Gold strings glow. Key steps shimmer. Lid shade illuminates. Dusk elegance. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 25. Submarine Underwater Room ────────────────────────────────────────
+    {
+        "name": "Submarine Underwater Room",
+        "hook": "He Built an UNDERWATER Submarine Room! 🚢🌊",
+        "title": "Building an UNDERWATER Submarine Room! 🚢💦",
+        "description": "Dive deep! An underground room shaped like a submarine hull with porthole windows looking into a surrounding aquarium!",
+        "hashtags": "#shorts #submarine #underwater #construction #timelapse #ocean #room",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a backyard with a digging site marked out. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Deep rectangular excavation. Workers building a submarine hull-shaped steel frame inside the pit. Waterproofing membrane being applied. Drainage pipes visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Submarine hull installed underground — grey military-style exterior with rivets. Round porthole windows. Periscope tube rising above ground. Surrounding pit being filled with water and aquarium glass walls. Hatch entrance on top. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed submarine room — periscope rises above a glass-enclosed water feature. Through the glass you can see the submarine hull with glowing porthole windows. Fish swimming in the surrounding water. Hatch entrance lit. Above ground looks like a mini naval base. Incredible engineering. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Deep pit dug. Submarine hull frame assembled inside. Waterproofing applied. Fixed drone. 8 seconds.",
+            "Rapid construction. Grey hull panels attached. Portholes installed. Periscope tube rises. Aquarium glass walls placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Portholes glow blue underwater. Fish swim around hull. Periscope rises above. Hatch illuminated. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 26. Baseball Glove Dugout ────────────────────────────────────────────
+    {
+        "name": "Baseball Glove Dugout",
+        "hook": "He Built a GIANT Baseball Glove Dugout! ⚾🧤",
+        "title": "Building a BASEBALL GLOVE Dugout! ⚾✨",
+        "description": "Play ball! A dugout shaped like a massive baseball glove catching a real-size baseball! Leather texture exterior and stitching details!",
+        "hashtags": "#shorts #baseball #sports #construction #timelapse #dugout #mlb",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at the edge of a baseball field diamond. Green grass, dirt infield visible. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Curved framework rising in the shape of an open baseball glove. Workers bending steel ribs to form the finger sections. A large sphere framework for the baseball in the pocket area. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Glove structure covered in brown leather-textured panels. Visible stitching lines. The baseball in the pocket is a white dome with red stitching. Dugout seating inside the palm area. Webbing between fingers is mesh netting. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed baseball glove dugout — rich brown leather texture gleaming. Red stitching details perfect. White baseball dome glows with interior lights. Players sitting in the palm area dugout. American flag nearby. Field lights warming up. Classic Americana. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Curved finger framework rises. Steel bent into glove shape. Baseball sphere framework built. Fixed drone. 8 seconds.",
+            "Rapid construction. Brown leather panels applied. Stitching details added. White baseball dome finished. Dugout seating installed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Leather glove gleams in golden light. Baseball dome glows. Dugout lit warmly. Field lights turn on. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 27. Gaming Controller Pool ───────────────────────────────────────────
+    {
+        "name": "Gaming Controller Pool",
+        "hook": "He Built a GIANT Xbox Controller Pool! 🎮💦",
+        "title": "Building a GAMING CONTROLLER Pool! 🎮🏊",
+        "description": "Game on! A swimming pool shaped like a massive gaming controller with button-shaped hot tubs and joystick fountains!",
+        "hashtags": "#shorts #gaming #xbox #pool #construction #timelapse #gamer",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a flat backyard with plenty of space. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Controller-shaped excavation — main body pool with bumper grip extensions. Four circular pits for buttons at right end. Two deeper circles for joystick areas. Workers refining shapes. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Controller pool taking shape — dark grey tiles on the body. Four button circles tiled in A(green) B(red) X(blue) Y(yellow). Joystick areas have rotating fountain mechanisms. D-pad shaped wading area. Xbox logo center. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed controller pool — body lit with dark ambient glow. A/B/X/Y buttons are illuminated hot tubs in their signature colors. Joystick fountains spin water in circles. Xbox logo glows green center. RGB LED strips outline everything. Ultimate gamer paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Fast construction. Controller shape excavated. Button circles and joystick areas dug. Fixed drone angle. 8 seconds.",
+            "Rapid construction. Grey tiles on body. Colored button tiles applied. Joystick mechanisms installed. Xbox logo placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Buttons glow their colors. Joystick fountains spin. Xbox logo green. RGB outlines. Night magic. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 28. Whale Playground ─────────────────────────────────────────────────
+    {
+        "name": "Blue Whale Playground",
+        "hook": "He Built a BLUE WHALE Playground for Kids! 🐳🎢",
+        "title": "Building a BLUE WHALE Playground! 🐋✨",
+        "description": "The ocean's gentle giant as the world's coolest playground! Kids slide through the whale's mouth and climb the tail fin!",
+        "hashtags": "#shorts #whale #playground #ocean #construction #timelapse #kids",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a beachside park area. Sand and grass visible. Ocean in background. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Massive steel framework in whale shape — 15 meters long. Workers building the ribcage structure. Tail fin frame rises at one end. Mouth opening at the other. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Whale covered in blue textured panels — darker on top, lighter on belly. Baleen filter slide in the mouth. Blowhole climbing tower on top. Tail fin climbing wall. Flipper-shaped benches. Water spray features along the back. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed blue whale playground — majestic blue body gleams. Kids sliding through the mouth. Water sprays from the blowhole. Tail fin casting dramatic shadow. Ocean waves in background perfectly framing the scene. Magical marine playground. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Whale ribcage framework rises. Tail fin welded. Workers shape the massive body. Fixed drone. 8 seconds.",
+            "Rapid construction. Blue panels cover the whale. Slide installed in mouth. Blowhole tower built. Water features added. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Water sprays from blowhole. Kids play on slides. Blue whale gleams in golden light. Ocean behind. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 29. Drum Set Hot Tub ─────────────────────────────────────────────────
+    {
+        "name": "Drum Set Hot Tubs",
+        "hook": "He Built HOT TUBS Shaped Like a Drum Set! 🥁💦",
+        "title": "Building DRUM SET Hot Tubs! 🥁🔥",
+        "description": "Rock and relax! A collection of hot tubs shaped like a complete drum kit — bass drum, toms, snare, and cymbal shower heads!",
+        "hashtags": "#shorts #drums #music #hottub #construction #timelapse #rockstar",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a rooftop terrace of a modern building. Flat concrete deck. City skyline in background. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Multiple circular excavations on the rooftop in drum kit arrangement — one large (bass drum), two medium (rack toms), one medium (floor tom), one small (snare). Workers waterproofing. Cymbal-shaped structures on poles. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Drum kit hot tubs taking shape — bass drum (large red tub), rack toms (blue tubs), floor tom (green), snare (chrome). Drumstick-shaped water jets between tubs. Cymbal-shaped shower heads on tall poles. Chrome hardware connecting everything. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed drum set hot tubs — each drum glows its color from underwater LEDs. Steam rises from hot water. Cymbal showers spray water catching the light. Chrome hardware gleams. City skyline sparkles behind. Drumstick jets arc water between tubs. Rock star retreat. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Multiple circular tubs dug on rooftop. Waterproofing applied. Cymbal poles erected. Fixed drone. 8 seconds.",
+            "Rapid construction. Colored drum panels applied. Chrome hardware installed. Drumstick jets positioned. Cymbal showers mounted. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Drums glow with color LEDs. Steam rises. Cymbal showers sparkle. City skyline behind. Night magic. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 30. Volcano Hot Spring ───────────────────────────────────────────────
+    {
+        "name": "Volcano Hot Spring Pool",
+        "hook": "He Built a VOLCANO with a Hot Spring INSIDE! 🌋💦",
+        "title": "Building a VOLCANO Hot Spring! 🌋🔥",
+        "description": "Nature's fury meets relaxation! A realistic volcano structure with a hot spring pool inside the crater and lava-flow water slides!",
+        "hashtags": "#shorts #volcano #hotspring #pool #construction #timelapse #nature",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a resort-like backyard with tropical landscaping. Palm trees, stone pathways. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Workers building a conical mountain structure from stone and concrete. About 6 meters tall. Crater depression at top. Channels carved down the sides for lava slides. Pump room built inside. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Volcano structure rendered with realistic volcanic rock texture. Dark grey and brown. Orange-painted channels (lava flows) zigzag down sides forming water slides. Crater at top has a pool being tiled. Steam vents installed. Tropical plants growing on lower slopes. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed volcano — realistic craggy rock exterior. The crater pool steams with warm turquoise water. Orange LED lava flows cascade down the sides as water slides. Steam jets periodically erupt from vents. Tropical garden surrounds the base. Fire torches along pathways. A volcanic paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Stone volcano built layer by layer. Workers stack rocks. Crater forms at top. Channels carved. Fixed drone. 8 seconds.",
+            "Rapid construction. Rock texture panels applied. Lava channels painted orange. Crater pool tiled. Steam vents installed. Plants placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Crater steams turquoise. Orange lava slides cascade water. Steam erupts from vents. Fire torches flicker. Dusk magic. Fixed angle. 8 seconds.",
+        ],
+    },
 ]
 
 
