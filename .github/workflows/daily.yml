@@ -7,13 +7,15 @@ on:
   workflow_dispatch:  # Manuel tetikleme butonu
 
 jobs:
-  daily-video:
+  # ─── Shared setup: checkout + persist history ─────────────────────────────────
+  shadowedhistory:
     runs-on: ubuntu-latest
-    timeout-minutes: 300  # 5 saat max
-
+    timeout-minutes: 120
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -48,13 +50,212 @@ jobs:
           mkdir -p output/{shadowedhistory,sentinal_ihsan,galactic_experiment,aimagine}/{frames,clips,final}
           mkdir -p logs
 
-      - name: Run Daily Automation
-        run: python -X utf8 daily_runner.py 2>&1 | tee logs/github_actions_run.log
+      - name: Run shadowedhistory
+        run: python -X utf8 daily_runner.py --channels shadowedhistory 2>&1 | tee logs/shadowedhistory_run.log
+
+      - name: Persist topic history
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+          git add logs/*_history.json || true
+          git commit -m "chore: update topic history [skip ci]" || true
+          git push origin main || true
 
       - name: Upload logs as artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: daily-logs-${{ github.run_number }}
+          name: logs-shadowedhistory-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+  sentinal_ihsan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          SENTINAL_FACE_REF=${{ secrets.SENTINAL_FACE_REF }}
+          UPLOAD_USER_AIMAGINE=${{ secrets.UPLOAD_USER_AIMAGINE }}
+          UPLOAD_USER_SHADOWEDHISTORY=${{ secrets.UPLOAD_USER_SHADOWEDHISTORY }}
+          UPLOAD_USER_GALACTIC=${{ secrets.UPLOAD_USER_GALACTIC }}
+          UPLOAD_USER_SENTINAL=${{ secrets.UPLOAD_USER_SENTINAL }}
+          EOF
+
+      - name: Create output directories
+        run: |
+          mkdir -p output/{shadowedhistory,sentinal_ihsan,galactic_experiment,aimagine}/{frames,clips,final}
+          mkdir -p logs
+
+      - name: Run sentinal_ihsan
+        run: python -X utf8 daily_runner.py --channels sentinal_ihsan 2>&1 | tee logs/sentinal_ihsan_run.log
+
+      - name: Persist topic history
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+          git add logs/*_history.json || true
+          git commit -m "chore: update topic history [skip ci]" || true
+          git push origin main || true
+
+      - name: Upload logs as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-sentinal-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+  galactic_experiment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          SENTINAL_FACE_REF=${{ secrets.SENTINAL_FACE_REF }}
+          UPLOAD_USER_AIMAGINE=${{ secrets.UPLOAD_USER_AIMAGINE }}
+          UPLOAD_USER_SHADOWEDHISTORY=${{ secrets.UPLOAD_USER_SHADOWEDHISTORY }}
+          UPLOAD_USER_GALACTIC=${{ secrets.UPLOAD_USER_GALACTIC }}
+          UPLOAD_USER_SENTINAL=${{ secrets.UPLOAD_USER_SENTINAL }}
+          EOF
+
+      - name: Create output directories
+        run: |
+          mkdir -p output/{shadowedhistory,sentinal_ihsan,galactic_experiment,aimagine}/{frames,clips,final}
+          mkdir -p logs
+
+      - name: Run galactic_experiment
+        run: python -X utf8 daily_runner.py --channels galactic_experiment 2>&1 | tee logs/galactic_run.log
+
+      - name: Persist topic history
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+          git add logs/*_history.json || true
+          git commit -m "chore: update topic history [skip ci]" || true
+          git push origin main || true
+
+      - name: Upload logs as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-galactic-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+  aimagine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          SENTINAL_FACE_REF=${{ secrets.SENTINAL_FACE_REF }}
+          UPLOAD_USER_AIMAGINE=${{ secrets.UPLOAD_USER_AIMAGINE }}
+          UPLOAD_USER_SHADOWEDHISTORY=${{ secrets.UPLOAD_USER_SHADOWEDHISTORY }}
+          UPLOAD_USER_GALACTIC=${{ secrets.UPLOAD_USER_GALACTIC }}
+          UPLOAD_USER_SENTINAL=${{ secrets.UPLOAD_USER_SENTINAL }}
+          EOF
+
+      - name: Create output directories
+        run: |
+          mkdir -p output/{shadowedhistory,sentinal_ihsan,galactic_experiment,aimagine}/{frames,clips,final}
+          mkdir -p logs
+
+      - name: Run aimagine
+        run: python -X utf8 daily_runner.py --channels aimagine 2>&1 | tee logs/aimagine_run.log
+
+      - name: Persist topic history
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase origin main || true
+          git add logs/*_history.json || true
+          git commit -m "chore: update topic history [skip ci]" || true
+          git push origin main || true
+
+      - name: Upload logs as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: logs-aimagine-${{ github.run_number }}
           path: logs/
           retention-days: 7

@@ -148,10 +148,12 @@ def poll_veo_task(task_id: str) -> str | None:
     return None
 
 
-def generate_veo_video(prompt: str, image_url: str = None, duration: str = "8") -> str | None:
+def generate_veo_video(prompt: str, image_url: str = None, duration: str = "8", model: str = None) -> str | None:
     """Generate video with Veo 3.1. Returns URL or None. Retries on failure."""
+    veo_model = model or CINEMATIC_VIDEO_MODEL
+    logger.info(f"  🎬 VEO model: {veo_model}")
     payload = {
-        "model": CINEMATIC_VIDEO_MODEL,
+        "model": veo_model,
         "prompt": prompt,
         "duration": duration,
         "aspect_ratio": "9:16",

@@ -147,6 +147,87 @@ VIRAL_TOPICS = [
     {"topic": "Making an entire outfit out of duct tape and wearing it in public",
      "category": "cursed_experience", "setting": "garage",
      "action_steps": "wraps duct tape into shirt, pants, shoes, puts outfit on, walks around, shows reactions"},
+
+    # === NEW VIRAL TOPICS (Pool expansion — 60+ days without repeats) ===
+    {"topic": "Freezing a rose in liquid nitrogen and shattering it with a hammer",
+     "category": "experiment", "setting": "workshop_table",
+     "action_steps": "dips rose in liquid nitrogen, waits 30 seconds, lifts frozen rose, swings hammer, rose shatters into pieces"},
+
+    {"topic": "Turning a coconut into a lamp by carving designs and putting LEDs inside",
+     "category": "transformation", "setting": "workshop",
+     "action_steps": "drills holes in coconut shell, carves intricate patterns, inserts LED strip, turns off lights, lamp glows"},
+
+    {"topic": "Making invisible ink from lemon juice and revealing a secret message with heat",
+     "category": "experiment", "setting": "kitchen",
+     "action_steps": "writes message with lemon juice, paper looks blank, holds over candle, letters slowly appear brown"},
+
+    {"topic": "Building a boat out of popsicle sticks and testing if it floats with weight",
+     "category": "experiment", "setting": "backyard",
+     "action_steps": "glues hundreds of popsicle sticks into boat shape, puts in pool, adds weights one by one, tests when it sinks"},
+
+    {"topic": "Wrapping a phone in 100 layers of bubble wrap and dropping it from the roof",
+     "category": "experiment", "setting": "backyard",
+     "action_steps": "wraps phone layer by layer, measures thickness, climbs to roof, drops wrapped phone, unwraps to check"},
+
+    {"topic": "Creating a galaxy effect in resin and turning it into a tabletop",
+     "category": "transformation", "setting": "workshop",
+     "action_steps": "pours black resin, adds blue/purple dye swirls, sprinkles glitter, adds white dots, cures and reveals galaxy table"},
+
+    {"topic": "Filling a bathtub with 1000 glow sticks and bathing in it at night",
+     "category": "cursed_experience", "setting": "bathroom",
+     "action_steps": "cracks glow sticks one by one, fills bathtub, turns off lights, gets in, entire room glows neon"},
+
+    {"topic": "Turning an old tire into a coffee table with LED lights inside",
+     "category": "transformation", "setting": "garage",
+     "action_steps": "cleans old tire, adds glass top, wraps LED strip inside, turns on lights, tire becomes glowing table"},
+
+    {"topic": "Making a knife out of frozen milk and testing if it can cut things",
+     "category": "experiment", "setting": "kitchen",
+     "action_steps": "pours milk into knife mold, freezes overnight, unmolds milk knife, tries cutting vegetables, tests sharpness"},
+
+    {"topic": "Submerging a burning candle underwater using a glass dome — does the flame survive?",
+     "category": "experiment", "setting": "kitchen",
+     "action_steps": "lights candle, places glass dome over it, slowly submerges in water, watches flame behavior"},
+
+    {"topic": "Coating a tennis ball in match heads and lighting it on fire while bouncing",
+     "category": "experiment", "setting": "backyard",
+     "action_steps": "glues match heads all over ball, bounces it first, then lights it, ball bounces while on fire"},
+
+    {"topic": "Making a working speaker out of a paper cup and copper wire",
+     "category": "experiment", "setting": "workshop_table",
+     "action_steps": "wraps copper wire around magnet, attaches to paper cup, connects to phone, plays music, sound comes out of cup"},
+
+    {"topic": "Turning a plain skateboard into a chrome mirror board using spray chrome",
+     "category": "viral_recreation", "setting": "garage",
+     "action_steps": "sands skateboard, sprays chrome paint, multiple coats, final buff, board looks like liquid metal"},
+
+    {"topic": "Putting dry ice in a bubble solution to make giant fog-filled bubbles",
+     "category": "experiment", "setting": "backyard",
+     "action_steps": "places dry ice in warm water, dips giant bubble wand, creates fog-filled bubbles, bubbles pop and release fog"},
+
+    {"topic": "Building a phone case out of cement and testing its drop protection",
+     "category": "experiment", "setting": "garage",
+     "action_steps": "makes cement mold around phone, lets it dry, removes mold, drops phone in cement case from height"},
+
+    {"topic": "Turning a watermelon into a fruit bowl by carving it and filling with mixed fruits",
+     "category": "transformation", "setting": "kitchen",
+     "action_steps": "cuts watermelon in half, scoops out flesh, carves decorative edge, fills with berry mix, final display"},
+
+    {"topic": "Making a mini volcano on a table using baking soda and vinegar with food coloring",
+     "category": "experiment", "setting": "backyard",
+     "action_steps": "builds clay volcano, fills with baking soda, adds red food coloring, pours vinegar, eruption begins"},
+
+    {"topic": "Covering a bicycle wheel in LEDs and riding it at night — it looks like a portal",
+     "category": "transformation", "setting": "street_night",
+     "action_steps": "wraps LED strips around both wheels, turns them on, rides at night, spinning wheels create light patterns"},
+
+    {"topic": "Dipping a balloon in chocolate and popping it to make a chocolate bowl",
+     "category": "transformation", "setting": "kitchen",
+     "action_steps": "inflates balloon, dips in melted chocolate, lets it cool, pops balloon, perfect chocolate bowl remains"},
+
+    {"topic": "What happens if you microwave a CD for 3 seconds — electric lightning art",
+     "category": "experiment", "setting": "kitchen",
+     "action_steps": "places CD in microwave, starts for 3 seconds, electric arcs dance across surface, creates unique burn pattern"},
 ]
 
 

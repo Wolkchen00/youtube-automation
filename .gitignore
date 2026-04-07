@@ -10,6 +10,7 @@ venv/
 # Output files (generated videos/images — too large for git)
 output/
 logs/
+!logs/*_history.json
 
 # OS
 .DS_Store

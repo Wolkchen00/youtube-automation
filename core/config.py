@@ -65,6 +65,15 @@ DEFAULT_VIDEO_MODEL = "kling-3.0/video"
 DEFAULT_VIDEO_MODE = "std"          # std = cheaper, pro = expensive
 DEFAULT_IMAGE_MODEL = "nano-banana-2"
 CINEMATIC_VIDEO_MODEL = "veo3_fast"  # Kie AI model names: veo3 (quality) or veo3_fast (fast)
+CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite"  # Cheaper alternative: 30 credits vs 80
+
+# Per-channel VEO model selection
+CHANNEL_VEO_MODEL = {
+    "sentinal_ihsan": CINEMATIC_VIDEO_MODEL,       # Quality - best channel
+    "galactic_experiment": CINEMATIC_VIDEO_MODEL,   # Quality - space visuals
+    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,  # Cost-optimized
+    "aimagine": CINEMATIC_VIDEO_MODEL_LITE,          # Cost-optimized
+}
 
 # Duration constraints per channel (seconds)
 CHANNEL_DURATION = {

@@ -53,6 +53,12 @@ hidden chambers, forbidden manuscripts, dark historical secrets.
 IMPORTANT: NO face reference needed. Create purely AI-generated historical characters.
 The scenes should look like they're from a big-budget historical film.
 
+TITLE RULES (CRITICAL):
+- NEVER include hashtags (#) in the title — hashtags go ONLY in description
+- NEVER use generic clickbait like "You Won't Believe" or "SHOCKING"
+- Title must be unique, specific, and describe the EXACT historical event
+- Good examples: "The Lost Fleet That Vanished in 60 Seconds" or "Rome's Deadliest Secret Weapon"
+
 Always write in English. Be dramatic but factual. Hook viewers in the first 2 seconds.
 Format: Return a JSON object with keys: hook, narration, location_name (e.g. "Göbekli Tepe, Turkey"),
 title, description, hashtags""",
@@ -92,6 +98,14 @@ CRITICAL — CONTINUOUS PHYSICAL ACTION:
 
 SETTING: Must match the concept. Same setting across all 6 scenes.
 CONCEPT OBJECT: Must stay CONSISTENT in shape, texture, and scale.
+
+TITLE RULES (CRITICAL):
+- NEVER use "You Won't BELIEVE This" or similar overused clickbait openers
+- NEVER start multiple titles with the same phrase
+- Each title must be UNIQUE and specifically describe the experiment
+- Good title patterns (vary these): "I [Action] [Object] and This Happened!", 
+  "[Object] + [Unexpected Material] = INSANE Result!", "Testing [Concept] for the First Time!"
+- Mix question titles, statement titles, and reaction titles
 
 Format: Return a JSON object with keys:
 - hook (indirect description of attention-grabbing opening)
@@ -146,6 +160,13 @@ VIRAL RULES:
 - The REVEAL at the end must be spectacular (LED lights, filling with water, etc.)
 - Category: satisfying, construction, DIY
 
+TITLE RULES (CRITICAL):
+- NEVER use "Copyright Free Clip" or "No Copyright" in the title
+- NEVER use generic single-word titles like "Golden Retriever"
+- Title must describe the construction project specifically
+- Good examples: "He Built a Giant iPhone Swimming Pool!", "Lamborghini-Shaped Garage Construction!"
+- Each title MUST be unique and not repeat previous titles
+
 Always write in English. Focus on VISUAL descriptions for each construction stage.
 Format: Return a JSON object with keys: concept_name, hook,
 construction_stages (list of 4: empty, excavation, building, reveal),
@@ -192,8 +213,30 @@ def _call_gemini(system_prompt: str, user_prompt: str, temperature: float = 0.9)
     return None
 
 
+def _load_recent_titles(channel: str, max_titles: int = 15) -> list[str]:
+    """Load recent video titles from history to prevent repetition."""
+    from pathlib import Path
+    history_files = {
+        "shadowedhistory": "logs/shadowedhistory_history.json",
+        "sentinal_ihsan": "logs/sentinal_ihsan_history.json",
+        "galactic_experiment": "logs/galactic_experiment_history.json",
+        "aimagine": "logs/aimagine_history.json",
+    }
+    from .config import PROJECT_ROOT
+    history_path = PROJECT_ROOT / history_files.get(channel, "")
+    titles = []
+    if history_path.exists():
+        try:
+            data = json.loads(history_path.read_text(encoding="utf-8"))
+            # History files store topic strings, use last N as titles
+            titles = data[-max_titles:] if isinstance(data, list) else []
+        except Exception:
+            pass
+    return titles
+
+
 def generate_script(channel: str, topic: str) -> dict | None:
-    """Generate a video script using Gemini."""
+    """Generate a video script using Gemini with anti-repetition context."""
     if not GEMINI_API_KEY:
         logger.error("GEMINI_API_KEY not set!")
         return None
@@ -203,6 +246,17 @@ def generate_script(channel: str, topic: str) -> dict | None:
         logger.error(f"No system prompt for channel: {channel}")
         return None
 
+    # Load recent titles to prevent repetition
+    recent_titles = _load_recent_titles(channel)
+    anti_repeat_context = ""
+    if recent_titles:
+        titles_list = "\n".join(f"  - {t[:80]}" for t in recent_titles[-10:])
+        anti_repeat_context = f"""\n\nANTI-REPETITION — These are recent video titles already used. 
+Your new title MUST be completely different from ALL of these:
+{titles_list}
+
+Do NOT reuse any of these titles or close variations."""
+
     user_prompt = f"""Create a viral short video script about: {topic}
 
 Remember:
@@ -211,10 +265,17 @@ Remember:
 - Video format is vertical (9:16) for YouTube Shorts / Instagram Reels / TikTok
 - Keep it between 30-90 seconds of content
 - Make it controversial/engaging enough to drive comments
-- Return ONLY valid JSON, no markdown fences"""
+- Return ONLY valid JSON, no markdown fences{anti_repeat_context}"""
 
-    result = _call_gemini(system_prompt, user_prompt, temperature=0.9)
+    result = _call_gemini(system_prompt, user_prompt, temperature=0.95)
     if result and isinstance(result, dict):
+        # Post-process: strip hashtags from title if any leaked through
+        title = result.get("title", "")
+        if "#" in title:
+            # Remove hashtags from title, keep them in description
+            clean_title = " ".join(w for w in title.split() if not w.startswith("#")).strip()
+            result["title"] = clean_title
+            logger.info(f"  🧹 Cleaned hashtags from title: {clean_title}")
         logger.info(f"Script generated for {channel}: {result.get('title', topic)[:50]}...")
         return result
     return None

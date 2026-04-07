@@ -12,7 +12,7 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, logger
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, logger
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
@@ -184,6 +184,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             prompt=veo_prompt,
             image_url=start_frame["url"],
             duration="8",
+            model=CHANNEL_VEO_MODEL.get(CHANNEL),
         )
 
         if not video_url:

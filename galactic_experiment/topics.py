@@ -76,15 +76,15 @@ TOPICS = {
     ],
     "solar_system": [
         "Venus rains sulfuric acid and has surface temperatures of 900°F",
-        "Io, Jupiter's moon, has 400 active volcanoes erupting right now",
         "Enceladus — Saturn's moon with a warm ocean under the ice, possible life",
         "The Great Red Spot — a storm on Jupiter bigger than Earth, raging for 400+ years",
-        "Titan has lakes of liquid methane — could aliens swim in them?",
         "Mars' Olympus Mons — the largest volcano in the solar system, 3x taller than Everest",
         "The Kuiper Belt — billions of icy objects beyond Neptune",
         "The Oort Cloud — a shell of trillions of comets surrounding our solar system",
-        "Europa's ocean has more water than all of Earth's oceans combined",
-        "Uranus rotates on its side — literally rolling through space",
+        "Pluto was demoted from planet status — but some scientists want it back",
+        "The asteroid belt between Mars and Jupiter contains millions of space rocks",
+        "Mercury has ice at its poles despite being closest to the Sun",
+        "Ceres — the largest object in the asteroid belt has a mysterious bright spot",
     ],
     "universe_scale": [
         "The Observable Universe is 93 billion light-years across — and still expanding",
@@ -112,7 +112,7 @@ TOPICS = {
     ],
     "terrifying_space": [
         "A coronal mass ejection could destroy all electronics on Earth in seconds",
-        "The Sun will eventually expand and swallow Earth — it's inevitable",
+        "The Sun will expand into a red giant in 5 billion years — engulfing Mercury and Venus",
         "Asteroid Apophis will pass closer than our satellites in 2029",
         "A supernova within 50 light-years could sterilize our planet",
         "The vacuum metastability event — the universe could self-destruct at any moment",
