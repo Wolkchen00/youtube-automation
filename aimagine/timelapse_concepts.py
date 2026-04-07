@@ -261,14 +261,37 @@ TIMELAPSE_CONCEPTS = [
 
 # ─── Daily concept selection ──────────────────────────────────────────────────
 
+import json
+from core.config import PROJECT_ROOT, logger
+
+HISTORY_FILE = PROJECT_ROOT / "logs" / "aimagine_history.json"
+
+
 def get_daily_concept() -> dict:
-    """Pick a different concept each day based on date hash."""
-    day_num = date.today().toordinal()
-    idx = day_num % len(TIMELAPSE_CONCEPTS)
-    concept = TIMELAPSE_CONCEPTS[idx]
-    logger.info(f"🏗️ AImagine timelapse concept: {concept['name']}")
-    return concept
+    """Pick a random concept, avoiding recent repeats using history file."""
+    # Load history
+    recent = []
+    if HISTORY_FILE.exists():
+        try:
+            recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            recent = []
 
+    # Find concepts not recently used (last 30 days)
+    recent_set = set(recent[-30:])
+    available = [c for c in TIMELAPSE_CONCEPTS if c["name"] not in recent_set]
 
-# Need logger imported
-from core.config import logger
+    if not available:
+        # All concepts used, reset and pick any
+        available = list(TIMELAPSE_CONCEPTS)
+
+    chosen = random.choice(available)
+
+    # Save to history
+    recent.append(chosen["name"])
+    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    HISTORY_FILE.write_text(json.dumps(recent[-100:], ensure_ascii=False), encoding="utf-8")
+
+    logger.info(f"🏗️ AImagine concept: {chosen['name']} (pool: {len(available)}/{len(TIMELAPSE_CONCEPTS)} available)")
+    return chosen
+
