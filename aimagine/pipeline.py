@@ -16,7 +16,7 @@ from core.config import CHANNEL_DIRS, CHANNEL_DURATION, logger
 from core.kie_api import generate_image, generate_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
-    check_ffmpeg, concatenate_crossfade, final_export,
+    check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
     get_video_duration, trim_to_duration
 )
 from core.uploader import publish_video
@@ -161,7 +161,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
 
     # Use 0.5s crossfade for smooth construction transition feel
-    concatenate_crossfade(clip_files, merged_path, crossfade=0.5)
+    concatenate_simple(clip_files, merged_path)  # hard cut — cleaner transitions (rebornspacestv style)
 
     # Duration check
     duration = get_video_duration(merged_path)

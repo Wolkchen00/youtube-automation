@@ -16,7 +16,7 @@ from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, logge
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
-    check_ffmpeg, concatenate_crossfade, final_export,
+    check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
     get_video_duration, trim_to_duration
 )
 from core.uploader import publish_video
@@ -216,14 +216,14 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     if len(clips) < 3:
         logger.warning(f"⚠️ Only {len(clips)} clips — video may be short but publishing anyway.")
 
-    # ── 6. FFmpeg merge with crossfades ───────────────────────────────────
+    # ── 6. FFmpeg merge — hard cut (cleaner transitions) ──────────────────
     logger.info("\n🔗 MERGING NARRATED CLIPS...")
     if not check_ffmpeg():
         return None
 
     clip_files = [c["local_path"] for c in clips]
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
-    concatenate_crossfade(clip_files, merged_path, crossfade=0.5)
+    concatenate_simple(clip_files, merged_path)  # hard cut — space narration flows naturally
 
     final_path = dirs["final"] / f"{project_name}_FINAL.mp4"
     final_export(merged_path, final_path)

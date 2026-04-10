@@ -69,10 +69,10 @@ CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite"  # Cheaper alternative: 30 credits vs 8
 
 # Per-channel VEO model selection
 CHANNEL_VEO_MODEL = {
-    "sentinal_ihsan": CINEMATIC_VIDEO_MODEL,       # Quality - best channel
-    "galactic_experiment": CINEMATIC_VIDEO_MODEL,   # Quality - space visuals
-    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,  # Cost-optimized
-    "aimagine": CINEMATIC_VIDEO_MODEL_LITE,          # Cost-optimized
+    "sentinal_ihsan": CINEMATIC_VIDEO_MODEL_LITE,       # Lite — faster + cheaper (was Fast)
+    "galactic_experiment": CINEMATIC_VIDEO_MODEL_LITE,   # Lite — stable for narration
+    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,       # Lite — was already Lite
+    "aimagine": CINEMATIC_VIDEO_MODEL_LITE,              # Lite — construction timelapses
 }
 
 # Duration constraints per channel (seconds)
@@ -87,8 +87,8 @@ CHANNEL_DURATION = {
 POLL_INTERVAL_IMAGE = 10
 POLL_INTERVAL_VIDEO = 15
 POLL_MAX_ATTEMPTS_IMAGE = 30
-POLL_MAX_ATTEMPTS_VIDEO = 40
-MAX_RETRY = 3
+POLL_MAX_ATTEMPTS_VIDEO = 25   # 25 × 15s = ~6min timeout (was 40 × 15s = 10min)
+MAX_RETRY = 2                  # 2 retries max (was 3) — fail faster, fallback sooner
 
 # FFmpeg settings
 FFMPEG_CRF = "18"

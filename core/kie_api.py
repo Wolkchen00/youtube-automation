@@ -31,7 +31,9 @@ def _headers() -> dict:
 # ─── Core Task Functions ──────────────────────────────────────────────────────
 
 def create_task(payload: dict) -> str | None:
-    """Create a new Kie AI task. Returns taskId or None."""
+    """Create a new Kie AI task. Returns taskId or None.
+    Raises ServerError on HTTP 500 to allow callers to fallback fast.
+    """
     try:
         resp = requests.post(KIE_AI_CREATE_TASK, json=payload, headers=_headers(), timeout=30)
         data = resp.json()
@@ -39,12 +41,21 @@ def create_task(payload: dict) -> str | None:
             task_id = data["data"]["taskId"]
             logger.info(f"✅ Task created: {task_id}")
             return task_id
+        elif data.get("code") == 500:
+            logger.error(f"❌ Server 500 error — API is down: {data.get('msg', '')}")
+            raise ServerError(f"Kie AI 500: {data.get('msg', '')}")
         else:
             logger.error(f"❌ Task creation failed: {data}")
             return None
+    except ServerError:
+        raise  # re-raise so callers can handle
     except Exception as e:
         logger.error(f"❌ API connection error: {e}")
         return None
+
+
+class ServerError(Exception):
+    """Raised when Kie AI returns HTTP 500 — signals callers to fallback to another model."""
 
 
 def poll_task(task_id: str, is_video: bool = False) -> dict | None:
@@ -149,7 +160,7 @@ def poll_veo_task(task_id: str) -> str | None:
 
 
 def generate_veo_video(prompt: str, image_url: str = None, duration: str = "8", model: str = None) -> str | None:
-    """Generate video with Veo 3.1. Returns URL or None. Retries on failure."""
+    """Generate video with Veo 3.1. Returns URL or None. Retries with exponential backoff."""
     veo_model = model or CINEMATIC_VIDEO_MODEL
     logger.info(f"  🎬 VEO model: {veo_model}")
     payload = {
@@ -161,19 +172,24 @@ def generate_veo_video(prompt: str, image_url: str = None, duration: str = "8", 
     if image_url:
         payload["image_url"] = image_url
 
+    backoff_delays = [10, 30]  # exponential backoff: 10s, 30s
     for attempt in range(1, MAX_RETRY + 1):
         task_id = create_veo_task(payload)
         if not task_id:
             logger.warning(f"⚠️ Veo task creation failed (attempt {attempt}/{MAX_RETRY})")
             if attempt < MAX_RETRY:
-                time.sleep(10)
+                delay = backoff_delays[min(attempt - 1, len(backoff_delays) - 1)]
+                logger.info(f"  ⏳ Waiting {delay}s before retry...")
+                time.sleep(delay)
             continue
         result = poll_veo_task(task_id)
         if result:
             return result
         logger.warning(f"⚠️ Veo video generation failed (attempt {attempt}/{MAX_RETRY})")
         if attempt < MAX_RETRY:
-            time.sleep(10)
+            delay = backoff_delays[min(attempt - 1, len(backoff_delays) - 1)]
+            logger.info(f"  ⏳ Waiting {delay}s before retry...")
+            time.sleep(delay)
     return None
 
 
@@ -216,7 +232,9 @@ def generate_video(
     model: str = None,
     sound: bool = True
 ) -> str | None:
-    """Generate a video clip with Kling 3.0. Returns URL or None."""
+    """Generate a video clip with Kling 3.0. Returns URL or None.
+    On server 500 errors, aborts immediately (no retry) so caller can fallback to VEO3.
+    """
     active_model = model or DEFAULT_VIDEO_MODEL
 
     payload = {
@@ -239,12 +257,19 @@ def generate_video(
         payload["input"]["image_urls"] = image_urls
         payload["input"]["multi_shots"] = False
 
+    backoff_delays = [10, 30]  # exponential backoff
     for attempt in range(1, MAX_RETRY + 1):
-        url = generate_and_wait(payload, is_video=True)
-        if url:
-            return url
+        try:
+            url = generate_and_wait(payload, is_video=True)
+            if url:
+                return url
+        except ServerError:
+            logger.error(f"🚫 Kling server 500 — aborting retries (caller should fallback to VEO3)")
+            return None  # fast-fail so pipeline can try VEO3
         logger.warning(f"⚠️ Video attempt {attempt} failed.")
         if attempt < MAX_RETRY:
+            delay = backoff_delays[min(attempt - 1, len(backoff_delays) - 1)]
+            time.sleep(delay)
             payload["input"]["prompt"] = prompt[:200]
     return None
 

@@ -2,9 +2,10 @@
 Sentinal Ihsan — Full Video Production Pipeline (VEO3 Overhaul)
 
 CRITICAL CHANGES:
-  ✅ 6 clips × 8s = ~40s final (minimum 30s enforced)
-  ✅ VEO3 for ALL video clips (handles speech + motion)
-  ✅ Face reference on ALL frames (not just first/last)
+  ✅ 4 clips × 8s = ~32s final (minimum 20s enforced)
+  ✅ VEO3 Lite for video clips (speech + motion)
+  ✅ Face reference on ALL frames
+  ✅ Hard cut transitions (no crossfade — cleaner scene changes)
   ✅ Action-first prompts (continuous interaction with concept)
 """
 
@@ -16,7 +17,7 @@ from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, SENTI
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
-    check_ffmpeg, concatenate_crossfade, final_export,
+    check_ffmpeg, concatenate_simple, final_export,
     get_video_duration, trim_to_duration
 )
 from core.uploader import publish_video
@@ -27,7 +28,7 @@ from .competitor import get_daily_topic, get_trending_with_gemini
 from .prompts import FRAME_TEMPLATES, VIDEO_PROMPTS, IDENTITY_LOCK, CAMERA_POV, QUALITY_GUARD
 
 CHANNEL = "sentinal_ihsan"
-NUM_SCENES = 6  # 6 clips × 8s = 48s raw → ~40s after crossfade
+NUM_SCENES = 4  # 4 clips × 8s = 32s raw → ~28-30s final (hard cut, no crossfade loss)
 
 
 def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = False) -> dict | None:
@@ -67,11 +68,9 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             "hook": f"he opens with a hook about {topic_text[:60]}",
             "scene_descriptions": [
                 f"Close-up front camera POV, {setting}, character excitedly tells viewers what he is about to do",
-                f"Same front camera POV, character walks toward the concept setup and shows it to the camera",
-                f"Character starts interacting with the concept — touching, pouring, or getting into it",
-                f"Character is fully immersed in the concept, reacting with genuine shock or excitement",
-                f"Character continues interacting, describing the texture/feeling to viewers",
-                f"Final wide reveal showing the full result, character asks viewers to comment which they would pick",
+                f"Character starts interacting with the concept — touching, pouring, painting, or building",
+                f"Character reacts with genuine shock or excitement, continues describing",
+                f"Final wide reveal showing the full result, character asks viewers to comment",
             ],
             "description": f"Watch what happens when we try {topic_text}! #shorts",
             "hashtags": "#shorts #viral #experiment #mindblown #satisfying",
@@ -210,7 +209,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     clip_files = [c["local_path"] for c in clips]
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
-    concatenate_crossfade(clip_files, merged_path, crossfade=0.3)
+    concatenate_simple(clip_files, merged_path)  # hard cut — clean scene transitions, no blending
 
     final_path = dirs["final"] / f"{project_name}_FINAL.mp4"
     final_export(merged_path, final_path)

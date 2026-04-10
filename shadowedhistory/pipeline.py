@@ -8,11 +8,11 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, logger
-from core.kie_api import generate_image, generate_video, check_credit
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, logger
+from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
-    check_ffmpeg, concatenate_crossfade, final_export,
+    check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
     get_video_duration, trim_to_duration, add_text_overlay
 )
 from core.uploader import publish_video
@@ -158,13 +158,31 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
         logger.info(f"  Clip {i+1}: Frame {i} → Frame {i+1}")
 
-        video_url = generate_video(
-            prompt=vp.get("video_prompt", "Cinematic transition. 8 seconds."),
-            start_image_url=start_frame["url"],
-            end_image_url=end_frame["url"],
-            duration=str(vp.get("duration_seconds", 8)),
-            sound=True,
-        )
+        # Try VEO3 first (more stable), fall back to Kling
+        veo_model = CHANNEL_VEO_MODEL.get(CHANNEL)
+        video_prompt = vp.get("video_prompt", "Cinematic transition. 8 seconds.")
+
+        video_url = None
+        if veo_model:
+            # VEO3 Lite: text-to-video with image reference
+            veo_prompt = f"{video_prompt} Historical documentary narration. Deep dramatic voice."
+            video_url = generate_veo_video(
+                prompt=veo_prompt,
+                image_url=start_frame["url"],
+                duration=str(vp.get("duration_seconds", 8)),
+                model=veo_model,
+            )
+
+        # Fallback to Kling if VEO3 fails
+        if not video_url:
+            logger.info(f"  🔄 Falling back to Kling for clip {i+1}...")
+            video_url = generate_video(
+                prompt=video_prompt,
+                start_image_url=start_frame["url"],
+                end_image_url=end_frame["url"],
+                duration=str(vp.get("duration_seconds", 8)),
+                sound=True,
+            )
 
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
@@ -199,7 +217,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     clip_files = [c["local_path"] for c in clips]
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
-    concatenate_crossfade(clip_files, merged_path)
+    concatenate_simple(clip_files, merged_path)  # hard cut — cleaner than crossfade
 
     # 9. Final export (1080x1920)
     final_path = dirs["final"] / f"{project_name}_FINAL.mp4"

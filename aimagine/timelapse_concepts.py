@@ -616,6 +616,211 @@ TIMELAPSE_CONCEPTS = [
             "Cinematic reveal. Crater steams turquoise. Orange lava slides cascade water. Steam erupts from vents. Fire torches flicker. Dusk magic. Fixed angle. 8 seconds.",
         ],
     },
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # ABANDONED TO LUXURY — Inspired by @rebornspacestv (376K, 212M views)
+    # Format: Ruined/abandoned space → excavation → construction → luxury reveal
+    # ══════════════════════════════════════════════════════════════════════════
+
+    # ─── 31. Abandoned Pool → Luxury Resort ──────────────────────────────────
+    {
+        "name": "Abandoned Pool to Luxury Resort",
+        "hook": "From ABANDONED to LUXURY in 24 seconds! 🏚️→🏊",
+        "title": "He Turned an ABANDONED Pool Into PARADISE! 🏊✨",
+        "description": "Watch this incredible transformation from a ruined, overgrown pool into an ultra-luxury resort pool with infinity edge and underwater lighting!",
+        "hashtags": "#shorts #abandoned #luxury #pool #transformation #renovation #satisfying",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at an abandoned overgrown backyard. A cracked, empty swimming pool filled with debris, leaves, and green algae. Broken tiles, rusty ladder.  Weeds growing through concrete. Abandoned deck furniture tipped over. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Workers have cleared the debris. Excavator deepening the pool. Old tiles jackhammered out. Fresh concrete being poured for new walls. Rebar visible. Construction crew active. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Pool structure rebuilt — smooth infinity edge on one side. White marble tiles being installed. Underwater LED tracks visible. A jacuzzi section added. Modern wooden deck framing around. Plumbing complete. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed luxury resort pool — crystal turquoise water with infinity edge overlooking the garden. Underwater LED strips glow warm. Jacuzzi bubbles. Fire bowls on deck corners. Tropical plants, loungers with white cushions. From ruin to paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Workers clear debris from abandoned pool. Excavator removes old concrete. Pool deepens. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. New concrete walls, marble tiles applied. Infinity edge built. LED tracks installed. Workers move fast. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pool fills with turquoise water. LED lights glow. Fire bowls ignite. Infinity edge overflows. Golden hour magic. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 32. Ruined Basement → Underground Cinema ────────────────────────────
+    {
+        "name": "Basement to Underground Cinema",
+        "hook": "From FLOODED Basement to CINEMA ROOM! 🎬🍿",
+        "title": "He Turned a RUINED Basement Into a HOME CINEMA! 🎬✨",
+        "description": "From a dark, flooded basement to the ultimate underground home cinema with a 200-inch screen, recliner seats, and starlight ceiling!",
+        "hashtags": "#shorts #basement #cinema #hometheater #transformation #renovation #luxury",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a dark, flooded basement. Standing water on the concrete floor. Exposed pipes, peeling paint, mold on walls. A single bare bulb swinging. Debris and old boxes. Depressing and abandoned. {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Basement drained and partially demolished. Workers waterproofing walls with membrane. New concrete floor poured. Electrical conduits routed for screen and sound. Framing for stepped floor visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cinema room taking shape — dark acoustic panels on walls. A massive 200-inch screen frame mounted. Stepped platform for 3 rows of seating. Ceiling being fitted with fiber optic starlight panels. Sound equipment racks on side walls. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Completed home cinema — luxurious dark velvet walls with LED accent strips. Massive screen showing a vivid movie scene. Three rows of leather recliners with cupholders. Fiber optic ceiling creates a starfield. Ambient purple LED lighting. Popcorn machine glowing in the corner. Absolute luxury. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Workers pump water out, demolish old walls. Waterproofing applied. New floor poured. Fast motion. Fixed angle. 8 seconds.",
+            "Rapid construction. Acoustic panels installed. Screen mounted. Recliners placed. Starlight ceiling fitted. Workers move fast. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Screen powers on with vivid image. LED accents glow purple. Starlight ceiling twinkles. Recliners ready. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 33. Empty Rooftop → Sky Garden Pool ─────────────────────────────────
+    {
+        "name": "Rooftop to Sky Garden",
+        "hook": "He Turned an EMPTY Rooftop Into a SKY GARDEN! 🌿🏊",
+        "title": "From BORING Rooftop to SKY GARDEN Paradise! 🌿✨",
+        "description": "An empty concrete rooftop transformed into a stunning sky garden with a plunge pool, vertical garden walls, and a sunset lounge!",
+        "hashtags": "#shorts #rooftop #skygarden #pool #transformation #luxury #city",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a bare concrete rooftop. Grey, flat, empty. AC units and water tanks. No greenery. City skyline in background. Boring and utilitarian. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Workers installing raised planter beds and waterproof membrane. Small plunge pool excavation framed. Vertical garden framework on walls. Electrical and plumbing roughed in. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Sky garden taking shape — lush vertical green walls, wooden deck flooring, plunge pool tiled in dark stone tiles. Pergola frame with retractable shade. Built-in outdoor kitchen counter. Ambient lighting conduits. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at sunset. Completed sky garden paradise — lush vertical walls of tropical plants. Small plunge pool glows turquoise. Pergola with warm string lights. Outdoor kitchen with grill. Cozy lounge furniture. City skyline glowing in sunset behind. Breathtaking urban oasis. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Workers install planter beds. Pool frame built. Vertical garden mounted. Deck laid. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. Plants fill vertical walls. Pool tiled. Pergola raised. Kitchen built. String lights hung. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pool glows turquoise. String lights sparkle. Vertical garden lush green. Sunset skyline behind. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 34. Old Garage → Smart Home Studio ──────────────────────────────────
+    {
+        "name": "Garage to Smart Home Studio",
+        "hook": "From DIRTY Garage to SMART HOME! 🏠💡",
+        "title": "He Turned a MESSY Garage Into a SMART HOME! 🏠✨",
+        "description": "A cluttered, oil-stained garage transformed into a futuristic smart home studio with voice control, LED walls, and automated furniture!",
+        "hashtags": "#shorts #garage #smarthome #transformation #renovation #technology #luxury",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a cluttered two-car garage. Oil-stained concrete floor. Rusty shelves with junk. Old workbench covered in tools. Spider webs. A broken garage door. Messy and forgotten. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Garage cleared out. Workers installing insulation in walls. New concrete floor poured smooth. Electrical panels upgraded. Smart home wiring conduits running everywhere — speakers, screens, sensors. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Smart home studio taking shape — clean white walls with embedded LED strip channels. A Murphy bed folding unit against one wall. Drop-down projector and screen. Motorized storage cabinets. Kitchen nook with smart appliances. Polished concrete floor with radiant heating. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at blue hour. Completed smart home — LED wall strips glow in customizable colors. Murphy bed is stowed away revealing a living room. Projector displays a large screen. Voice-activated lights transition colors. Kitchen appliances gleam. Minimalist and futuristic. The garage door is now a modern glass wall. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Garage cleared. Insulation, wiring, and smart conduits installed. Floor poured. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. White walls finished. Murphy bed installed. Projector mounted. Smart appliances placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. LED walls glow colors. Projector activates. Glass wall reveals blue hour sky. Futuristic smart home. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 35. Backyard → Japanese Zen Garden ──────────────────────────────────
+    {
+        "name": "Backyard to Zen Garden",
+        "hook": "OVERGROWN Backyard → JAPANESE Zen Garden! 🎋🪷",
+        "title": "From JUNGLE Backyard to ZEN GARDEN Paradise! 🎋✨",
+        "description": "An overgrown, weedy backyard transformed into a serene Japanese zen garden with koi pond, bamboo water feature, and stone pathways!",
+        "hashtags": "#shorts #zengarden #japanese #backyard #transformation #peaceful #satisfying",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a neglected overgrown backyard. Knee-high weeds, dead grass patches, fallen tree branches. A broken old fence. Scattered trash. Wild and unkempt. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Ground cleared completely. Workers excavating a koi pond shape. Gravel being spread and raked. Large boulders being positioned. Bamboo screening installed along the perimeter. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Zen garden 80% complete — raked white gravel with concentric circle patterns. Natural stone stepping path. Koi pond with waterfall rocks. Bamboo water feature (shishi-odoshi). Small red bridge over pond. Japanese maple trees planted. Wooden bench area. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed Japanese zen garden — perfectly raked white gravel circles. Koi fish visible in crystal clear pond. Bamboo water feature clicks rhythmically. Red bridge reflects in water. Japanese lanterns glow softly along the stone path. Cherry blossom tree petals on the ground. Absolute serenity. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Overgrown weeds cleared. Gravel spread. Koi pond excavated. Boulders positioned. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. White gravel raked in circles. Stone path laid. Red bridge built. Trees planted. Lanterns placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Koi swim in clear pond. Bamboo feature clicks. Lanterns glow. Cherry blossoms float. Golden serenity. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 36. Abandoned Warehouse → Loft Apartment ────────────────────────────
+    {
+        "name": "Warehouse to Luxury Loft",
+        "hook": "ABANDONED Warehouse → $2M LOFT! 🏚️→🏠",
+        "title": "From ABANDONED Warehouse to LUXURY LOFT! 🏗️✨",
+        "description": "A decaying industrial warehouse transformed into a stunning luxury loft apartment with exposed brick, mezzanine bedroom, and floor-to-ceiling windows!",
+        "hashtags": "#shorts #warehouse #loft #luxury #transformation #renovation #architecture",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at an abandoned industrial warehouse. Broken windows, graffiti on walls, rusted metal roof. Pigeons nesting. Weeds growing through cracked floor. Dark and eerie interior visible. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Warehouse being gutted. New steel beams reinforcing structure. Floor-to-ceiling window frames installed. Mezzanine floor framing in progress. Exposed brick walls cleaned and sealed. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Loft taking shape — open plan living with exposed brick walls. Polished concrete floors. Industrial-style kitchen island. Mezzanine bedroom with glass railings. Spiral staircase. Large windows flooding light in. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at blue hour. Completed luxury loft — warm ambient lighting. Exposed brick glows in candlelight. Floor-to-ceiling windows reflect city lights. Mezzanine bedroom cozy with soft lighting. Designer furniture. Art on walls. Potted plants. Industrial meets luxury perfection. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Warehouse gutted. Steel beams installed. Windows framed. Mezzanine built. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. Brick cleaned. Concrete polished. Kitchen installed. Staircase built. Furniture placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Warm lights glow. City reflects in windows. Mezzanine cozy. Brick and steel harmony. Blue hour. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 37. Muddy Lot → Luxury Outdoor Kitchen ─────────────────────────────
+    {
+        "name": "Mud Lot to Outdoor Kitchen",
+        "hook": "From MUD PIT to LUXURY Outdoor Kitchen! 🍳🔥",
+        "title": "He Turned a MUD LOT Into an EPIC Outdoor Kitchen! 🍳✨",
+        "description": "A muddy empty lot transformed into the ultimate outdoor kitchen with stone pizza oven, grill station, bar seating, and a fire pit!",
+        "hashtags": "#shorts #outdoorkitchen #bbq #transformation #renovation #luxury #cooking",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a bare muddy lot. Puddles, tire tracks in mud, no grass. A pile of old bricks. Flat and depressing. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Workers laying stone foundation. Post holes for pergola. Pizza oven dome being built with firebricks. Grill counter framework rising. Gas and water lines being run. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Outdoor kitchen taking shape — natural stone countertops with built-in gas grill and side burner. Brick pizza oven dome completed. U-shaped bar with stone base and teak bar top. Pergola frame up. Fire pit circle dug. Stone paver flooring laid. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed outdoor kitchen — warm glow from pizza oven fire. Gas grill ignited. Bar stools along teak counter. String lights under pergola. Fire pit crackling in center of seating area. Stone pavers gleam. Potted herbs on counter. Ultimate hosting setup. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Foundation laid. Pizza oven dome rises brick by brick. Grill counter framed. Fixed drone. 8 seconds.",
+            "Rapid construction. Stone counters placed. Pergola built. Fire pit dug. Bar stools placed. Pavers laid. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pizza oven fire glows. Grill flames. String lights sparkle. Fire pit crackles. Dusk warmth. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 38. Broken Shed → Cozy Tiny Home ────────────────────────────────────
+    {
+        "name": "Shed to Cozy Tiny Home",
+        "hook": "BROKEN Shed → COZY Tiny Home! 🏚️→🏡",
+        "title": "He Turned a BROKEN SHED Into a Tiny Home! 🏡✨",
+        "description": "A collapsing garden shed transformed into a charming tiny home with a loft bed, mini kitchen, and a covered porch!",
+        "hashtags": "#shorts #tinyhouse #shed #transformation #renovation #cozy #diy",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a dilapidated garden shed. Rotting wood panels, sagging roof, door hanging off hinges. Overgrown ivy climbing up. Rusty tools scattered around. Too small to even enter. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Shed demolished. New foundation poured slightly larger. Workers framing walls with treated lumber. Roof trusses going up. Everything new and sturdy. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Tiny home structure nearly complete — cedar shake exterior. A covered front porch with railing. Bay window on one side. Small chimney pipe. Interior visible through windows — loft bed platform, mini kitchen cabinetry. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed tiny home — warm cedar exterior with white trim. Covered porch with two chairs and a lantern. Bay window glows warm from interior. Smoke wisps from chimney. Flower boxes under windows. Stone pathway leading to it. String lights on porch. Fairy-tale cottage beauty. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Old shed demolished. New foundation and walls rise. Roof trusses up. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. Cedar panels applied. Porch built. Windows installed. Interior visible — loft and kitchen done. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Porch light glows. Smoke from chimney. String lights sparkle. Flower boxes bloom. Golden hour fairy tale. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 39. Cracked Patio → Luxury Lounge ───────────────────────────────────
+    {
+        "name": "Patio to Luxury Lounge",
+        "hook": "CRACKED Patio → LUXURY Lounge Area! 👑✨",
+        "title": "From CRACKED PATIO to LUXURY Lounge! 👑🔥",
+        "description": "A crumbling concrete patio transformed into a luxury outdoor lounge with L-shaped sofa, fire table, water feature, and mood lighting!",
+        "hashtags": "#shorts #patio #luxury #lounge #transformation #renovation #outdoor",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a cracked concrete patio. Large cracks with weeds growing through. Faded, stained concrete. Rusty patio furniture. A dead potted plant. Adjacent to house. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Workers jackhammering old concrete. New gravel base being leveled. Drainage system installed. Large format tile layout marked. Electrical conduits for lighting. Water supply for feature. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Luxury lounge taking shape — large format dark stone tiles. L-shaped built-in concrete bench with waterproof cushion slots. Fire table in center. Linear water feature along one wall. Planters with ornamental grasses. Step lighting installed. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed luxury lounge — dark tiles gleam. L-shaped sofa with plush white cushions. Fire table dancing with orange flame. Water feature cascading with LED blue glow. Step lights create pathway. Ornamental grasses sway. Wine glasses on fire table. Premium outdoor living. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Old concrete demolished. New base leveled. Tiles laid in pattern. Fire table base built. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. Dark tiles placed. Bench built. Water feature installed. Planters filled. Step lights wired. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Fire table ignites. Water feature glows blue. Step lights guide path. White cushions placed. Dusk luxury. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── 40. Forgotten Courtyard → Secret Garden ─────────────────────────────
+    {
+        "name": "Courtyard to Secret Garden",
+        "hook": "FORGOTTEN Courtyard → SECRET GARDEN! 🌸🗝️",
+        "title": "From ABANDONED Courtyard to SECRET GARDEN! 🌸✨",
+        "description": "A forgotten, weed-covered courtyard transformed into a magical secret garden with fountain, climbing roses, and fairy lights!",
+        "hashtags": "#shorts #garden #secretgarden #courtyard #transformation #magical #flowers",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a neglected enclosed courtyard. High walls covered in dead ivy. Cracked stone floor strewn with debris. A broken birdbath in the center. Rusty iron gate. Everything grey and lifeless. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Workers repairing stone floor. Old birdbath removed, new fountain base being built. Walls cleaned, trellis structures mounted. Garden beds excavated. Iron gate restored and repainted. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Secret garden forming — restored stone pathways with moss growing between. Central tiered fountain with running water. Climbing roses on trellises cover the walls. Lavender beds, boxwood hedges. Iron gate painted glossy black. Archway covered in wisteria. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed secret garden — roses climb the walls in full bloom. Tiered fountain sparkles. Fairy lights woven through the wisteria archway. Lavender and jasmine scent-implied by lush growth. Butterflies visible. Iron gate inviting. Cobblestone path glows. Enchanted paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Dead ivy removed. Walls cleaned. Fountain base built. Trellis mounted. Garden beds dug. Fixed drone. 8 seconds.",
+            "Rapid construction. Stone paths laid. Roses planted on trellis. Fountain tiers stacked. Hedges placed. Archway built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Fountain sparkles. Roses bloom on walls. Fairy lights glow. Butterflies flutter. Golden garden magic. Fixed angle. 8 seconds.",
+        ],
+    },
 ]
 
 

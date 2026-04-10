@@ -1,13 +1,11 @@
 """
-Sentinal Ihsan — Visual Prompts & Style Constants (VEO3 Overhaul)
+Sentinal Ihsan — Visual Prompts & Style Constants (VEO3 Lite)
 
-6-SCENE FLOW:
-  Scene 1: HOOK — Character grabs attention, explains concept
-  Scene 2: SETUP — Shows the concept/product/material to camera
-  Scene 3: ACTION 1 — Starts interacting (pouring, painting, building)
-  Scene 4: ACTION 2 — Deeper interaction (fully immersed, touching, feeling)
-  Scene 5: REACTION — Genuine surprise/shock at the result
-  Scene 6: PAYOFF — Final reveal + call-to-action ("which would you pick?")
+4-SCENE FLOW:
+  Scene 1: HOOK — Character grabs attention, explains what he's about to do
+  Scene 2: ACTION — Starts interacting (pouring, painting, building)
+  Scene 3: REACTION — Genuine surprise/shock at the result
+  Scene 4: PAYOFF — Final reveal + call-to-action ("which would you pick?")
 
 VEO3-SPECIFIC:
   ✅ Each video prompt includes speech description (VEO3 generates audio)
@@ -52,7 +50,7 @@ QUALITY_GUARD = (
     "Realistic smartphone UGC quality, natural lighting."
 )
 
-# ─── 6 Frame Templates (HOOK → SETUP → ACTION × 2 → REACTION → PAYOFF) ──────
+# ─── 4 Frame Templates (HOOK → ACTION → REACTION → PAYOFF) ──────────────────────
 
 FRAME_TEMPLATES = {
     "hook_intro": (
@@ -65,15 +63,6 @@ FRAME_TEMPLATES = {
         f"Wearing the exact same outfit as in the reference image. "
         f"{QUALITY_GUARD}"
     ),
-    "concept_setup": (
-        f"{IDENTITY_LOCK} "
-        f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} has turned the phone to also show the concept object/material/setup "
-        f"behind and around him. He is pointing or gesturing toward it with one hand. "
-        f"The concept is clearly visible, well-lit, and recognizable. "
-        f"His expression shows anticipation. Same outfit. "
-        f"{QUALITY_GUARD}"
-    ),
     "action_start": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
@@ -81,14 +70,6 @@ FRAME_TEMPLATES = {
         f"interacting with the concept (pouring, painting, placing, touching, opening). "
         f"Both hands are naturally engaged. The concept is changing due to his action. "
         f"His face shows effort and concentration. Same outfit. "
-        f"{QUALITY_GUARD}"
-    ),
-    "action_deep": (
-        f"{IDENTITY_LOCK} "
-        f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} is now deeply interacting with the concept — sitting in it, "
-        f"surrounded by it, or holding the result. The transformation/effect is clearly visible. "
-        f"His expression shifts between shock and excitement. Same outfit. "
         f"{QUALITY_GUARD}"
     ),
     "reaction_shock": (
@@ -111,7 +92,7 @@ FRAME_TEMPLATES = {
     ),
 }
 
-# ─── 6 VEO3 Video Prompts (with speech + continuous motion) ──────────────────
+# ─── 4 VEO3 Video Prompts (with speech + continuous motion) ────────────────────
 
 VIDEO_PROMPTS = {
     "hook_video": (
@@ -124,30 +105,13 @@ VIDEO_PROMPTS = {
         "He gestures with one hand while keeping the phone steady. "
         "His eyes are wide with excitement. Natural ambient sound. 8 seconds."
     ),
-    "setup_video": (
-        "Same handheld vertical front camera POV. No recording device visible. "
-        "The young man adjusts the camera angle to reveal the concept setup behind him. "
-        "He walks toward it, still talking in English, describing what it is and what he plans to do. "
-        "The camera moves with him — natural walking motion with handheld shake. "
-        "He points at the concept and looks between camera and the concept. "
-        "Same outfit, same voice. Natural ambient sound. 8 seconds."
-    ),
-    "action_start_video": (
+    "action_video": (
         "Same front camera POV. No recording device visible. "
         "The young man starts the physical action — he is actively interacting with "
         "the concept (pouring, painting, placing, opening). Both his hands do something natural. "
         "He narrates what he is doing in English — describing the texture, the feeling, the weight. "
         "Camera has natural shake from his movement. The concept visibly changes. "
         "Same outfit, same voice. Ambient sound of the action. 8 seconds."
-    ),
-    "action_deep_video": (
-        "Same front camera POV. No recording device visible. "
-        "The young man is now deeply immersed in the interaction — he continues "
-        "the physical action and reacts to the result. He speaks in English describing "
-        "what is happening, how it feels, and his genuine surprise. "
-        "His body movement is natural — shifting weight, leaning in, stepping back. "
-        "The concept transformation is clearly visible and progressing. "
-        "Same outfit, same voice. 8 seconds."
     ),
     "reaction_video": (
         "Same front camera POV. No recording device visible. "

@@ -58,10 +58,15 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
-          git add logs/*_history.json || true
-          git commit -m "chore: update topic history [skip ci]" || true
-          git push origin main || true
+          # Staggered push: shadowedhistory goes first (no delay)
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add logs/*_history.json || true
+            git diff --cached --quiet && echo "Nothing to commit" && break
+            git commit -m "chore: update shadowedhistory history [skip ci]" || true
+            git push origin main && break || echo "Push attempt $i failed, retrying in 10s..."
+            sleep 10
+          done
 
       - name: Upload logs as artifact
         if: always()
@@ -121,10 +126,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
-          git add logs/*_history.json || true
-          git commit -m "chore: update topic history [skip ci]" || true
-          git push origin main || true
+          # Staggered push: sentinal waits 10s before first attempt
+          sleep 10
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add logs/*_history.json || true
+            git diff --cached --quiet && echo "Nothing to commit" && break
+            git commit -m "chore: update sentinal_ihsan history [skip ci]" || true
+            git push origin main && break || echo "Push attempt $i failed, retrying in 10s..."
+            sleep 10
+          done
 
       - name: Upload logs as artifact
         if: always()
@@ -184,10 +195,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
-          git add logs/*_history.json || true
-          git commit -m "chore: update topic history [skip ci]" || true
-          git push origin main || true
+          # Staggered push: galactic waits 20s before first attempt
+          sleep 20
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add logs/*_history.json || true
+            git diff --cached --quiet && echo "Nothing to commit" && break
+            git commit -m "chore: update galactic_experiment history [skip ci]" || true
+            git push origin main && break || echo "Push attempt $i failed, retrying in 10s..."
+            sleep 10
+          done
 
       - name: Upload logs as artifact
         if: always()
@@ -247,10 +264,16 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main || true
-          git add logs/*_history.json || true
-          git commit -m "chore: update topic history [skip ci]" || true
-          git push origin main || true
+          # Staggered push: aimagine waits 30s before first attempt
+          sleep 30
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add logs/*_history.json || true
+            git diff --cached --quiet && echo "Nothing to commit" && break
+            git commit -m "chore: update aimagine history [skip ci]" || true
+            git push origin main && break || echo "Push attempt $i failed, retrying in 10s..."
+            sleep 10
+          done
 
       - name: Upload logs as artifact
         if: always()

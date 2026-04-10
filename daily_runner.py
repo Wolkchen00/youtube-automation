@@ -27,8 +27,8 @@ from core.cost_tracker import print_cost_report, estimate_daily_total
 
 
 REPORTS_FILE = PROJECT_ROOT / "logs" / "daily_reports.json"
-RETRY_INTERVAL = 1800  # 30 minutes between retries (fits GitHub Actions 5h limit)
-MAX_RETRIES = 4         # Max 4 retries (total ~2.5h retry window)
+RETRY_INTERVAL = 600   # 10 minutes between retries (500 errors now abort fast via ServerError)
+MAX_RETRIES = 2         # Max 2 retries (total ~20min retry window, not 2.5h)
 
 
 def run_channel(channel_name: str, dry_run: bool = False, skip_upload: bool = False) -> dict | None:
