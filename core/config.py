@@ -67,18 +67,18 @@ DEFAULT_IMAGE_MODEL = "nano-banana-2"
 CINEMATIC_VIDEO_MODEL = "veo3_fast"  # Kie AI model names: veo3 (quality) or veo3_fast (fast)
 CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite"  # Cheaper alternative: 30 credits vs 80
 
-# Per-channel VEO model selection
+# Per-channel VEO model selection (None = skip VEO3, use Kling directly)
 CHANNEL_VEO_MODEL = {
-    "sentinal_ihsan": CINEMATIC_VIDEO_MODEL_LITE,       # Lite — faster + cheaper (was Fast)
+    "sentinal_ihsan": None,                              # Kling-primary — VEO3 Lite times out with face-ref images
     "galactic_experiment": CINEMATIC_VIDEO_MODEL_LITE,   # Lite — stable for narration
-    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,       # Lite — was already Lite
+    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,       # Lite — stable for historical scenes
     "aimagine": CINEMATIC_VIDEO_MODEL_LITE,              # Lite — construction timelapses
 }
 
 # Duration constraints per channel (seconds)
 CHANNEL_DURATION = {
     "shadowedhistory": {"min": 30, "max": 90},
-    "sentinal_ihsan": {"min": 30, "max": 90},
+    "sentinal_ihsan": {"min": 15, "max": 90},
     "galactic_experiment": {"min": 30, "max": 90},
     "aimagine": {"min": 15, "max": 30},
 }

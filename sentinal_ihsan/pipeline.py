@@ -13,7 +13,7 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, SENTINAL_FACE_REF, logger
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, CINEMATIC_VIDEO_MODEL_LITE, SENTINAL_FACE_REF, logger
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
@@ -154,37 +154,54 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.error("❌ Not enough frames generated!")
         return None
 
-    # 6. Generate video clips with VEO3 (speech + motion), Kling fallback
-    logger.info(f"\n🎬 GENERATING {len(frames)-1} VEO3 VIDEO CLIPS...")
+    # 6. Generate video clips — Kling primary (VEO3 times out with face-ref), VEO3 fallback
+    veo_model = CHANNEL_VEO_MODEL.get(CHANNEL)
+    model_name = "Kling" if not veo_model else f"VEO3 ({veo_model})"
+    logger.info(f"\n🎬 GENERATING {len(frames)-1} VIDEO CLIPS [{model_name} primary]...")
     clips = []
 
     for i in range(len(frames) - 1):
         start_frame = frames[i]
         end_frame = frames[i + 1] if (i + 1) < len(frames) else None
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]
+        video_prompt = vp.get("video_prompt", "Character talks to camera excitedly. Natural smartphone video. 8 seconds.")
 
-        logger.info(f"  VEO3 Clip {i+1}: Frame {i} → motion...")
+        logger.info(f"  Clip {i+1}: Frame {i} → motion [{model_name}]...")
 
-        # VEO3 generates from single image + prompt (handles speech + motion)
-        video_url = generate_veo_video(
-            prompt=vp.get("video_prompt", "Character talks to camera excitedly. Natural smartphone video. 8 seconds."),
-            image_url=start_frame["url"],
-            duration="8",
-            model=CHANNEL_VEO_MODEL.get(CHANNEL),
-        )
+        video_url = None
+
+        if veo_model:
+            # VEO3 primary (for channels where it works)
+            video_url = generate_veo_video(
+                prompt=video_prompt,
+                image_url=start_frame["url"],
+                duration="8",
+                model=veo_model,
+            )
 
         if not video_url:
-            # Fallback: Try Kling video generation (image-to-video)
-            logger.warning(f"⚠️ VEO3 Clip {i+1} failed, trying Kling fallback...")
+            # Kling: image-to-image video generation (works well with face-ref images)
+            if veo_model:
+                logger.warning(f"⚠️ VEO3 Clip {i+1} failed, trying Kling fallback...")
             try:
                 video_url = generate_video(
-                    prompt=vp.get("video_prompt", "Person talking to camera, dynamic movement. 8 seconds.")[:200],
+                    prompt=video_prompt[:200],
                     start_image_url=start_frame["url"],
                     end_image_url=end_frame["url"] if end_frame else None,
                 )
             except Exception as e:
-                logger.warning(f"⚠️ Kling fallback error: {e}")
+                logger.warning(f"⚠️ Kling error: {e}")
                 video_url = None
+
+        if not video_url and not veo_model:
+            # Last resort: try VEO3 Lite even if not configured as primary
+            logger.warning(f"⚠️ Kling Clip {i+1} failed, trying VEO3 Lite last resort...")
+            video_url = generate_veo_video(
+                prompt=video_prompt,
+                image_url=start_frame["url"],
+                duration="8",
+                model=CINEMATIC_VIDEO_MODEL_LITE,
+            )
 
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
@@ -193,7 +210,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
                 logger.info(f"  ✅ Clip {i+1} ready!")
         else:
-            logger.warning(f"⚠️ Clip {i+1} failed (both VEO3 + Kling)!")
+            logger.warning(f"⚠️ Clip {i+1} failed!")
 
     if len(clips) < 2:
         logger.error("❌ Not enough video clips! Need at least 2.")
