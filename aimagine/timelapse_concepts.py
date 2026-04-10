@@ -821,6 +821,211 @@ TIMELAPSE_CONCEPTS = [
             "Cinematic reveal. Fountain sparkles. Roses bloom on walls. Fairy lights glow. Butterflies flutter. Golden garden magic. Fixed angle. 8 seconds.",
         ],
     },
+
+    # ═══════════════════════════════════════════════════════════════════════════
+    # "ABANDONED TO LUXURY" CONCEPTS — Inspired by @rebornspacestv (376K, 212M views)
+    # Hook: ruined/abandoned space → dramatic renovation → luxury reveal
+    # ═══════════════════════════════════════════════════════════════════════════
+
+    # ─── A1. Abandoned Pool → Resort Paradise ─────────────────────────────────
+    {
+        "name": "Abandoned Pool to Resort Paradise",
+        "hook": "He Turned an ABANDONED Pool Into Paradise! 🏊✨",
+        "title": "From ABANDONED Pool to LUXURY Resort! 🏚️→🏊",
+        "description": "This abandoned, cracked pool was transformed into an ultra-luxury resort-style oasis with infinity edges and LED lighting!",
+        "hashtags": "#shorts #abandoned #pool #transformation #luxury #renovation #satisfying",
+        "frame_prompts": [
+            f"{DRONE_VIEW} at a neglected backyard. OLD abandoned swimming pool filled with green algae water, cracked concrete deck, dead leaves everywhere, broken fence, overgrown weeds. Rusty pool ladder. Faded and peeling paint. Depressing atmosphere. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. The pool has been drained and demolished. Workers jackhammering cracked concrete. New deeper excavation in progress. Old deck torn up. Construction equipment, orange cones, pipes laid out. Fresh rebar framework visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. New infinity-edge pool 70% complete. Smooth premium tiles being installed — dark slate blue. LED strip channels cut into deck. Wooden deck framing with IPE wood planks. Modern lounge platform taking shape. Built-in jacuzzi corner. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour/dusk. COMPLETED luxury resort pool. Crystal clear turquoise water. Infinity edge with waterfall. LED strips glow blue along edges. IPE wood deck with modern loungers. Fire pit table nearby. Tropical plants and palm trees. Pool bar with stools. Absolutely stunning transformation. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Demolition timelapse. Green algae water pumped out. Workers jackhammer cracked concrete. Old deck ripped up. Deep excavation begins. Fixed drone. 8 seconds.",
+            "Rapid construction. New pool walls built. Tiles installed. Deck planks laid. Jacuzzi formed. LED channels wired. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pool fills with sparkling water. Infinity edge flows. LEDs glow blue. Fire pit ignites. Palm trees sway. Sunset paradise. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A2. Ruined Basement → Underground Cinema ─────────────────────────────
+    {
+        "name": "Ruined Basement to Underground Cinema",
+        "hook": "From RUINED Basement to Underground Cinema! 🎬🍿",
+        "title": "Abandoned Basement → Private CINEMA Theater! 🎬",
+        "description": "A flooded, moldy basement was completely gutted and transformed into a private underground cinema with recliner seats and a massive screen!",
+        "hashtags": "#shorts #basement #cinema #transformation #renovation #luxury #hometheater",
+        "frame_prompts": [
+            f"{DRONE_VIEW} looking down into an open basement through a removed floor section. ABANDONED basement — water puddles on cracked floor, exposed pipes hanging, mold on concrete walls, old cardboard boxes rotting, bare flickering lightbulb, cobwebs everywhere. Dark and gloomy. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Basement gutted — walls stripped, new framing and insulation installed. Waterproofing membrane on floor. Electrician running cable. Fresh drywall being mounted. Ceiling joists reinforced. Stadium-style floor risers being built. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cinema taking shape — massive 150-inch screen frame mounted on wall. 3 rows of recliner seats being placed on risers. Dark acoustic panels on walls. Star ceiling fiber optics being installed. Projector bracket on ceiling. Carpet down. Popcorn bar counter framed. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. COMPLETED private cinema — starlight ceiling glows. Movie playing on giant screen. Red leather recliners in 3 rows. LED strip accent lighting in purple and blue. Popcorn bar with professional machine. Acoustic wall panels with subtle LED backlighting. Luxurious and cozy. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Demolition timelapse. Water pumped out. Mold-covered walls stripped. Pipes replaced. Waterproofing applied. Workers build risers. Fixed angle. 8 seconds.",
+            "Construction timelapse. Acoustic panels mounted. Screen frame installed. Recliner seats placed in rows. Carpet laid. Star ceiling fibers threaded. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Star ceiling ignites. Movie starts playing on screen. LED accent lights glow. Recliners recline. Popcorn machine pops. Ultimate luxury. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A3. Empty Rooftop → Sky Garden Paradise ──────────────────────────────
+    {
+        "name": "Empty Rooftop to Sky Garden",
+        "hook": "He Transformed a BARE Rooftop Into a Sky Garden! 🌿☁️",
+        "title": "Empty Rooftop → LUXURY Sky Garden With Pool! 🌿",
+        "description": "A boring concrete rooftop turned into a breathtaking sky garden with a plunge pool, living walls, and outdoor kitchen!",
+        "hashtags": "#shorts #rooftop #garden #transformation #luxury #design #skygarden",
+        "frame_prompts": [
+            f"{DRONE_VIEW} of a flat bare concrete rooftop of a building. Empty gray concrete, HVAC units, exposed pipes, scattered debris, puddles of rainwater, pigeon droppings, no railing. Ugly and neglected. City skyline in background. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Rooftop construction started. Wooden deck frame being built. Plunge pool excavation (rooftop reinforced). Planter boxes being constructed along edges. Outdoor kitchen foundation. Glass railing posts installed. Workers busy. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Garden beds filled with soil. Plunge pool tiled. Outdoor kitchen with built-in grill and bar counter. IPE deck 80% laid. Living green wall panels mounted. Modern fire pit area. String light poles erected. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour/dusk. COMPLETED sky garden paradise. Plunge pool with turquoise water, city views. Living walls lush and green. Outdoor kitchen operational. String lights glow. Fire pit flames dance. Plants everywhere — ferns, palms, bamboo. Glass railings reflect sunset. Stunning oasis above the city. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Concrete cleaned. Deck frame built. Pool reinforcement. Planter construction. Glass posts installed. Fixed drone. 8 seconds.",
+            "Rapid build. Deck planks laid. Pool tiles. Kitchen counter built. Green wall panels. Fire pit assembled. String lights hung. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pool fills. Plants grow lush. Kitchen fires up. String lights glow at sunset. City skyline backdrop. Breathtaking. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A4. Old Garage → Modern Dream Kitchen ────────────────────────────────
+    {
+        "name": "Old Garage to Dream Kitchen",
+        "hook": "From RUSTY Garage to Luxury Dream Kitchen! 🍳✨",
+        "title": "Rusty Old Garage → Modern DREAM Kitchen! 🍳",
+        "description": "A rusty old garage filled with junk was completely transformed into a stunning modern kitchen with marble island and smart appliances!",
+        "hashtags": "#shorts #garage #kitchen #transformation #renovation #luxury #modern",
+        "frame_prompts": [
+            f"{DRONE_VIEW} looking into an open garage. OLD rusty garage — oil stains on concrete floor, rusted tools hanging, broken shelving, old paint cans, cobwebs, single flickering fluorescent light, cracked walls, junk everywhere. Dirty windows. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Garage gutted — junk removed, walls stripped. New framing for kitchen layout. Plumbing rough-in for island sink. Electrical conduit running. Subfloor leveled. Window openings enlarged for natural light. Workers framing island base. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Kitchen 80% done — white marble waterfall island installed. Matte black cabinets mounted. Large format tile floor laid. Professional range and hood installed. Pendant lights hung. Wine fridge built into island. Backsplash being tiled. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. COMPLETED luxury kitchen — gleaming marble island with waterfall edges. Matte black cabinetry. Gold hardware. Professional Wolf range. Pendant lights glow warm. Wine fridge stocked. Fresh flowers on counter. Floor-to-ceiling window floods with light. Magazine-worthy. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Demolition timelapse. Junk hauled out. Walls stripped. Floor cleaned. Plumbing installed. Windows enlarged. Fixed angle. 8 seconds.",
+            "Construction timelapse. Cabinets mounted. Marble island lifted in. Appliances installed. Tile floor laid. Lights hung. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pendant lights glow. Marble gleams. Windows flood with golden light. Wine fridge stocked. Flowers placed. Perfect kitchen. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A5. Dirty Backyard → Japanese Zen Garden ─────────────────────────────
+    {
+        "name": "Dirty Backyard to Zen Garden",
+        "hook": "Muddy Backyard → Japanese ZEN Garden Paradise! 🎋✨",
+        "title": "From MUDDY Mess to Japanese Zen Garden! 🎋",
+        "description": "A neglected, muddy backyard transformed into a serene Japanese zen garden with koi pond, stone paths, and bamboo forest!",
+        "hashtags": "#shorts #backyard #zen #japanese #garden #transformation #satisfying",
+        "frame_prompts": [
+            f"{DRONE_VIEW} of a neglected backyard. MUDDY wasteland — dead brown grass, standing water puddles, broken fence posts, pile of construction debris, overgrown weeds chest-high, rusty wheelbarrow, scattered trash bags. Depressing eyesore. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Backyard cleared and graded. Koi pond excavation — kidney shape. Gravel beds being laid. Japanese maple trees planted. Stone slab pathway being set. Bamboo fence panels going up around perimeter. Workers raking gravel patterns. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Zen garden 80% complete. Koi pond lined with natural stone, small waterfall feature. Wooden arched bridge over pond. Raked white gravel in circular patterns. Stone lanterns placed. Bamboo forest section growing. Tea house platform built. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. COMPLETED Japanese zen garden. Crystal clear koi pond with orange fish swimming. Waterfall splashes. Arched red bridge. Perfect raked gravel circles. Stone lanterns glow. Bamboo sways gently. Japanese maples show vibrant colors. Tea house with shoji screens. Peaceful paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Weeds cleared. Soil graded. Pond excavated. Gravel delivered. Maple trees planted. Bamboo fence erected. Fixed drone. 8 seconds.",
+            "Rapid construction. Pond stones laid. Bridge built. Gravel raked in patterns. Lanterns placed. Tea house constructed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pond fills. Koi swim. Waterfall flows. Lanterns glow at sunset. Bamboo sways. Red bridge gleams. Zen perfection. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A6. Abandoned Warehouse → Luxury Loft ────────────────────────────────
+    {
+        "name": "Abandoned Warehouse to Luxury Loft",
+        "hook": "ABANDONED Warehouse → Ultra-Modern Luxury Loft! 🏚️🏙️",
+        "title": "From ABANDONED Warehouse to DREAM Loft! 🏙️",
+        "description": "An old abandoned warehouse with broken windows was completely renovated into a stunning industrial-chic luxury loft apartment!",
+        "hashtags": "#shorts #warehouse #loft #transformation #luxury #renovation #industrial",
+        "frame_prompts": [
+            f"{DRONE_VIEW} of an old warehouse interior through collapsed roof section. ABANDONED — broken windows, graffiti on brick walls, pigeons nesting, puddles on concrete floor, rusty steel beams, debris everywhere, old machinery left behind. Dark and decrepit. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Warehouse gutted. Debris cleared. Steel beams cleaned and reinforced. New glass windows being installed. Mezzanine floor framing in progress. Plumbing and electrical rough-in. Exposed brick walls cleaned and sealed. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Loft 80% done. Mezzanine bedroom platform with glass railing. Open-plan living below — polished concrete floor. Industrial kitchen island. Restored brick walls. Steel staircase installed. Giant windows cleaned and gleaming. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. COMPLETED luxury loft. Mezzanine bedroom with king bed visible. Open living with designer furniture. Kitchen island with pendant lights. Polished concrete reflects light. Giant windows show city view. Exposed steel and brick create industrial charm. Warm lighting throughout. Magazine-worthy urban paradise. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Demolition timelapse. Debris cleared. Pigeons scatter. Beams sandblasted. Windows replaced. Roof patched. Fixed angle. 8 seconds.",
+            "Construction timelapse. Mezzanine built. Staircase welded. Kitchen installed. Concrete polished. Walls sealed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pendant lights illuminate. City view through windows. Furniture styled. Warm glow on brick. Industrial luxury. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A7. Cracked Driveway → Luxury Car Showroom ───────────────────────────
+    {
+        "name": "Cracked Driveway to Car Showroom",
+        "hook": "He Built a Car SHOWROOM in His Driveway! 🚗💎",
+        "title": "Cracked Driveway → Private Car SHOWROOM! 🚗",
+        "description": "A cracked, oil-stained driveway was transformed into a stunning glass-enclosed private car showroom with LED turntable!",
+        "hashtags": "#shorts #driveway #showroom #cars #transformation #luxury #garage",
+        "frame_prompts": [
+            f"{DRONE_VIEW} of a wide cracked driveway. OLD damaged concrete — deep cracks, oil stains, weeds growing through gaps, faded and discolored patches, broken edging, rusted basketball hoop. Ugly and neglected suburban home. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Driveway demolished. Deep excavation for foundation. Steel frame structure rising — columns and beams for glass showroom. Turntable pit being dug in center. Workers welding steel frame. Concrete forms for walls. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Showroom 80% complete. Glass panels being installed on steel frame. LED strip channels in floor. Central turntable mechanism installed. Polished epoxy floor gleaming. Climate control units on roof. Entry door framed. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. COMPLETED showroom — floor-to-ceiling glass reveals a luxury car on slowly rotating LED turntable. Blue and white LED strips outline the structure. Polished epoxy floor reflects car perfectly. Climate-controlled interior. Stunning modern architecture. Car enthusiast's dream. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Demolition timelapse. Concrete jackhammered. Foundation dug. Steel frame rises. Turntable pit formed. Workers weld beams. Fixed drone. 8 seconds.",
+            "Construction timelapse. Glass panels lifted and mounted. Turntable installed. Epoxy floor poured and polished. LEDs wired. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Glass showroom glows at dusk. Car rotates on turntable. LEDs illuminate blue. Epoxy floor mirrors everything. Dream garage. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A8. Overgrown Lot → Modern Tiny House ────────────────────────────────
+    {
+        "name": "Overgrown Lot to Modern Tiny House",
+        "hook": "From JUNGLE Lot to Ultra-Modern Tiny House! 🏡✨",
+        "title": "Overgrown LOT → Modern Tiny DREAM House! 🏡",
+        "description": "An overgrown abandoned lot was transformed into a stunning modern tiny house with floor-to-ceiling windows and a living roof!",
+        "hashtags": "#shorts #tinyhouse #transformation #construction #modern #luxury #building",
+        "frame_prompts": [
+            f"{DRONE_VIEW} of an overgrown vacant lot. ABANDONED — chest-high weeds, wild bushes, scattered trash, old tires, broken bottles, rusty chain-link fence, no structures. Nature reclaiming the space. Urban neglect. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Lot cleared. Foundation poured — compact rectangle for tiny house. Steel frame walls rising. Workers assembling prefab panels. Plumbing stub-outs visible. Electrical conduit. Concrete pad for deck area. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Tiny house 80% complete. Floor-to-ceiling glass windows installed on front face. Dark cedar cladding on sides. Green living roof being planted. Small deck with IPE wood. Interior visible — kitchen, loft bed. Modern and compact. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. COMPLETED modern tiny house. Glass front reflects sunset. Living roof blooms with greenery. Cedar cladding glows warm. Deck with designer chairs. Interior lights glow — cozy loft bed, sleek kitchen, bookshelf wall. Landscaped path with stepping stones. Perfect small-space luxury. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Weeds whacked. Lot cleared. Foundation poured. Steel frame rises. Panels assembled. Fixed drone. 8 seconds.",
+            "Rapid build. Windows fitted. Cedar cladding applied. Living roof planted. Deck laid. Interior fitted out. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Sunset reflects in glass. Living roof blooms. Interior glows cozy. Stepping stones lead to door. Tiny luxury. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A9. Moldy Bathroom → Luxury Spa ──────────────────────────────────────
+    {
+        "name": "Moldy Bathroom to Luxury Spa",
+        "hook": "MOLDY Bathroom → 5-Star Luxury SPA! 🛁💎",
+        "title": "From MOLDY Nightmare to Luxury SPA Bathroom! 🛁",
+        "description": "A disgusting moldy bathroom was gutted and rebuilt into a luxurious spa-like bathroom with rainfall shower and soaking tub!",
+        "hashtags": "#shorts #bathroom #spa #transformation #renovation #luxury #satisfying",
+        "frame_prompts": [
+            f"{DRONE_VIEW} looking down into a bathroom through removed ceiling. DISGUSTING — black mold covering tiles, stained bathtub with rust marks, cracked toilet, peeling wallpaper, brown water stains, broken mirror, dripping faucet, exposed rusty pipes. Nightmare bathroom. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Bathroom gutted to studs. Old fixtures removed. Waterproofing membrane applied. New copper plumbing. Heated floor mat being laid. Shower niche framed. Freestanding tub plumbing roughed in center. Workers installing cement board. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Spa bathroom 80% complete. Large format marble tiles on walls and floor. Walk-in rainfall shower with glass partition. Freestanding white soaking tub positioned. Floating vanity with vessel sink being mounted. LED mirror frame. Heated towel rack on wall. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. COMPLETED luxury spa bathroom. Marble walls gleam. Rainfall shower with steam visible. Freestanding tub with bath salts. Floating vanity with backlit mirror. Orchid on counter. Fluffy white towels on heated rack. Candles flicker. LED backlighting behind mirror. Five-star spa at home. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Demolition timelapse. Mold-covered tiles smashed. Toilet removed. Pipes replaced. Waterproofing applied. Heated floor mat laid. Fixed angle. 8 seconds.",
+            "Construction timelapse. Marble tiles placed. Tub positioned. Glass shower installed. Vanity mounted. Mirror hung. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Rainfall shower steams. Candles flicker. Tub fills. Marble gleams. Orchid and towels styled. Spa perfection. Fixed angle. 8 seconds.",
+        ],
+    },
+
+    # ─── A10. Dead Garden → Tropical Paradise ─────────────────────────────────
+    {
+        "name": "Dead Garden to Tropical Paradise",
+        "hook": "DEAD Garden → Tropical Paradise With Waterfall! 🌴💦",
+        "title": "From DEAD Garden to Tropical PARADISE! 🌴",
+        "description": "A dead, barren garden with nothing but dirt was transformed into a lush tropical paradise with a natural stone waterfall and plunge pool!",
+        "hashtags": "#shorts #garden #tropical #transformation #paradise #waterfall #satisfying",
+        "frame_prompts": [
+            f"{DRONE_VIEW} of a dead garden space. BARREN — dry cracked earth, dead shrubs, brown patches, no grass, exposed dirt, old broken fence, scattered rocks, single dead tree stump. Lifeless and depressing. Hot sun beating down. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Garden transformation started. Area excavated for plunge pool. Natural stone being stacked for waterfall feature. Irrigation pipes laid underground. Tropical palms being planted from large containers. Pathway gravel base poured. Workers building stone retaining walls. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Tropical garden 80% complete. Natural stone waterfall structure built — 3 tiers. Plunge pool lined with dark stone. Tropical plants filling in — banana leaves, bird of paradise, ferns. Wooden stepping stone path. Tiki torch posts. String light poles. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. COMPLETED tropical paradise. Waterfall cascades over natural stones into turquoise plunge pool. Lush tropical plants everywhere — palms swaying, flowers blooming. Tiki torches flame. String lights glow. Stepping stone path. Hammock between palms. Complete jungle oasis. {CONSISTENCY} {CAMERA_NOTE}",
+        ],
+        "video_prompts": [
+            "Construction timelapse. Dead earth excavated. Pool dug. Stones stacked for waterfall. Palms planted. Pipes laid. Fixed drone. 8 seconds.",
+            "Rapid build. Waterfall tiers formed. Pool stones placed. Plants filling in. Path laid. Tiki posts erected. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Waterfall cascades. Pool shimmers turquoise. Torches flame at sunset. String lights glow. Hammock sways. Paradise achieved. Fixed angle. 8 seconds.",
+        ],
+    },
 ]
 
 
