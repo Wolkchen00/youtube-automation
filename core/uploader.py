@@ -51,27 +51,54 @@ def upload_to_platform(
     elif platform == "tiktok":
         data["privacy_level"] = "PUBLIC_TO_EVERYONE"
 
-    try:
-        with open(video_path, "rb") as f:
-            files = {"video": (video_path.name, f, "video/mp4")}
-            response = requests.post(
-                UPLOAD_POST_URL,
-                headers=headers,
-                data=data,
-                files=files,
-                timeout=300
-            )
+    import time
 
-        result = response.json()
-        if response.status_code == 200:
-            logger.info(f"✅ {platform.upper()} uploaded: {title[:50]}...")
-            return result
-        else:
-            logger.error(f"❌ {platform.upper()} upload error: {result}")
+    MAX_UPLOAD_ATTEMPTS = 3
+    UPLOAD_BACKOFF = [10, 30, 60]  # seconds between retries
+
+    for attempt in range(MAX_UPLOAD_ATTEMPTS):
+        try:
+            with open(video_path, "rb") as f:
+                files = {"video": (video_path.name, f, "video/mp4")}
+                response = requests.post(
+                    UPLOAD_POST_URL,
+                    headers=headers,
+                    data=data,
+                    files=files,
+                    timeout=300
+                )
+
+            result = response.json()
+            if response.status_code == 200:
+                logger.info(f"✅ {platform.upper()} uploaded: {title[:50]}...")
+                return result
+            else:
+                logger.error(f"❌ {platform.upper()} upload error (HTTP {response.status_code}): {result}")
+                # Don't retry on auth/client errors (4xx)
+                if 400 <= response.status_code < 500:
+                    return None
+                # Retry on server errors (5xx)
+                if attempt < MAX_UPLOAD_ATTEMPTS - 1:
+                    wait = UPLOAD_BACKOFF[attempt]
+                    logger.info(f"  ⏳ Retrying in {wait}s (attempt {attempt + 2}/{MAX_UPLOAD_ATTEMPTS})...")
+                    time.sleep(wait)
+                    continue
+                return None
+
+        except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
+            logger.error(f"❌ Upload-Post connection error (attempt {attempt + 1}/{MAX_UPLOAD_ATTEMPTS}): {e}")
+            if attempt < MAX_UPLOAD_ATTEMPTS - 1:
+                wait = UPLOAD_BACKOFF[attempt]
+                logger.info(f"  ⏳ SSL/Connection error, retrying in {wait}s...")
+                time.sleep(wait)
+                continue
             return None
-    except Exception as e:
-        logger.error(f"❌ Upload-Post connection error: {e}")
-        return None
+
+        except Exception as e:
+            logger.error(f"❌ Upload-Post unexpected error: {e}")
+            return None
+
+    return None
 
 
 def publish_video(
