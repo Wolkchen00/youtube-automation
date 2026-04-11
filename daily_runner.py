@@ -5,11 +5,13 @@ Runs all 4 channel pipelines with automatic retry for failed channels.
 If a channel fails (e.g. Kie AI 500 error), it retries every hour
 until all channels succeed or max retries reached.
 
-Designed to be fully autonomous — run via Windows Task Scheduler at 9 AM daily.
+Designed to be fully autonomous — run via GitHub Actions.
 
 Usage:
     python daily_runner.py                           # Run ALL channels (with auto-retry)
     python daily_runner.py --channel shadowedhistory  # Run one channel
+    python daily_runner.py --slot morning             # Run morning slot only
+    python daily_runner.py --slot evening             # Run evening slot only
     python daily_runner.py --no-retry                 # Run once, no retry
     python daily_runner.py --skip-upload              # Generate but don't publish
     python daily_runner.py --cost-only                # Show cost estimate only
@@ -185,6 +187,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="YouTube Multi-Channel Daily Automation")
     parser.add_argument("--channel", type=str, help="Run specific channel only")
     parser.add_argument("--channels", type=str, nargs="+", help="Run multiple specific channels")
+    parser.add_argument("--slot", type=str, choices=["morning", "evening"],
+                        help="Run a specific time slot (morning or evening)")
     parser.add_argument("--no-retry", action="store_true", help="Disable auto-retry on failure")
     parser.add_argument("--skip-upload", action="store_true", help="Generate but don't publish")
     parser.add_argument("--cost-only", action="store_true", help="Show cost estimate and exit")
@@ -192,6 +196,12 @@ if __name__ == "__main__":
 
     if args.cost_only:
         print_cost_report()
+    elif args.slot:
+        logger.info(f"\n🕐 Running {args.slot.upper()} slot...")
+        run_all(
+            skip_upload=args.skip_upload,
+            auto_retry=not args.no_retry,
+        )
     elif args.channels:
         valid = [ch for ch in args.channels if ch in CHANNEL_NAMES]
         invalid = [ch for ch in args.channels if ch not in CHANNEL_NAMES]

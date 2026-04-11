@@ -1,7 +1,7 @@
 """
-AImagine — AI Construction Timelapse Concepts
+AImagine — AI Construction Timelapse Concepts (v2)
 
-20+ viral construction timelapse concepts inspired by @cairo_ia (189K).
+30 unique concepts for 15 days of dual-upload content.
 Each concept: empty land → excavation → construction → final reveal.
 4 frames → 3 video clips → ~24s seamless timelapse.
 
@@ -19,1011 +19,603 @@ CONSISTENCY = "Maintain EXACT same camera angle and surrounding environment. ONL
 LIGHTING = "Natural afternoon sunlight, consistent shadow direction, hyper-realistic textures."
 
 TIMELAPSE_CONCEPTS = [
-    # ─── 1. iPhone Pool ───────────────────────────────────────────────────────
+    # ─── 1. Rubik's Cube House ────────────────────────────────────────────────
     {
-        "name": "iPhone Shaped Pool",
-        "hook": "He Built the First iPhone-Shaped Pool in the World! 📱💦",
-        "title": "Building a GIANT iPhone Pool From Scratch! 📱🏊",
-        "description": "Watch this incredible transformation as we build a massive iPhone-shaped swimming pool from an empty backyard! Complete with camera lens jacuzzi and glowing Apple logo island.",
-        "hashtags": "#shorts #construction #pool #iphone #timelapse #diy #satisfying #building",
+        "name": "Rubik's Cube House",
+        "hook": "He Built a RUBIK'S CUBE You Can Live In! 🟥🟦",
+        "title": "Building a RUBIK'S CUBE House! 🟥🟦🏠",
+        "description": "A real house shaped like a giant Rubik's cube with rotating colored panels and LED-lit grid lines!",
+        "hashtags": "#shorts #rubikscube #house #construction #timelapse #puzzle #satisfying",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a spacious suburban backyard. Green grass lawn about 400sqm surrounded by wooden fences. Adjacent houses, mature trees, concrete patio near the house. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. The backyard now has a large excavation in the shape of a giant iPhone, about 12 meters long. Excavator parked nearby, large dirt mounds on sides. 3 workers with shovels refining edges. Concrete foundation visible at the bottom. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. The iPhone-shaped pool structure is now 80% complete — smooth concrete walls, blue mosaic tile interior, plumbing pipes visible. A circular camera-lens shaped jacuzzi area at the top. Apple logo island forming in the center. Workers applying tiles. Wooden deck framing around exterior. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour/dusk. The completed iPhone pool is filled with crystal blue water. LED strips outline the entire pool shape in white light. The camera lens jacuzzi bubbles. Apple logo island glows with embedded LEDs. Finished wooden deck surrounds the pool. Fresh landscaping with palm trees. Absolutely stunning. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an empty suburban lot. Flat terrain, green grass, wooden fence. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Square foundation 10x10m poured. Steel frame rising in perfect cubic shape. Workers welding grid structure. Crane nearby. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cube structure 80% complete. Colored square panels being attached — red, blue, green, yellow, white, orange faces. Grid lines visible between panels. Windows cut into some squares. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed Rubik's cube house — 6 colored faces perfect. LED strips glow white along grid lines. Some panels appear rotated. Warm interior light through windows. Modern landscaping. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast-paced construction timelapse from above. Excavator digs iPhone shape into lawn. Earth removed rapidly, pit deepens. Workers move quickly. Fixed 45-degree drone angle. 8 seconds.",
-            "Rapid construction timelapse. Concrete poured into iPhone-shaped excavation. Walls rise, tiles applied, plumbing installed. Workers in fast motion building deck around pool. Fixed camera angle. 8 seconds.",
-            "Cinematic reveal timelapse. Pool fills with sparkling water. LED lights illuminate one by one outlining the iPhone shape. Transition from golden hour to blue dusk. Camera remains fixed at 45 degrees. Breathtaking transformation. 8 seconds.",
+            "Fast construction timelapse. Foundation poured in square. Steel cube frame rises. Workers weld grid. Fixed drone angle. 8 seconds.",
+            "Rapid construction. Colored panels bolted to cube. Red, blue, green faces take shape. Windows installed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. LED grid lines glow. Colored faces vivid at dusk. Interior warm through windows. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 2. Lamborghini Garage ────────────────────────────────────────────────
+    # ─── 2. Cold War Bunker → Luxury SPA ──────────────────────────────────────
     {
-        "name": "Lamborghini Garage",
-        "hook": "He Built a Life-Size Lamborghini Garage from Scratch! 🏎️🔥",
-        "title": "Building a LAMBORGHINI-Shaped Garage! 🏎️🔥",
-        "description": "From empty lot to the most insane car garage ever built — shaped like a real Lamborghini Aventador! With LED-lit turntable inside.",
-        "hashtags": "#shorts #lamborghini #garage #construction #timelapse #supercar #diy",
+        "name": "Bunker to Luxury SPA",
+        "hook": "Cold War BUNKER → Underground Luxury SPA! 🧖✨",
+        "title": "Abandoned Bunker → LUXURY Underground SPA! 🧖‍♂️",
+        "description": "A forgotten Cold War bunker transformed into an underground luxury spa with hot pools, steam rooms, and ambient lighting!",
+        "hashtags": "#shorts #bunker #spa #luxury #transformation #renovation #underground",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a spacious green suburban lawn. Wide open grassy area surrounded by wooden fence, adjacent houses visible. Afternoon sun. {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. The lawn now has a deep Lamborghini-shaped excavation, 2 meters deep. Mini excavator parked beside, dirt mounds on sides. Rebar reinforcement visible. Workers with shovels. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. A sleek metallic garage structure sits over the Lamborghini-shaped foundation. Black steel frame, large glass panels on sides. Flat modern roof following aerodynamic curves. Interior floor visible — polished black epoxy. Workers installing roof panels. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour. Completed Lamborghini garage glows with orange LED strips outlining the structure. Glass doors open revealing a gleaming yellow Lamborghini Aventador on an illuminated turntable inside. Landscaped driveway with floor lights. Spectacular against twilight sky. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an overgrown concrete bunker entrance in a field. Rusted blast door, moss-covered walls, debris. Cold War era. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Bunker entrance cleared. Workers inside demolishing old walls. New waterproofing being applied. Plumbing roughed in for pools. Ventilation ducts upgraded. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Underground spa taking shape — stone tile walls, two soaking pools carved out, steam room glass doors installed. Fiber optic ceiling panels. Heated floors. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed spa — warm turquoise pools glow from below. Steam wisps from hot room. Ambient amber lighting on stone walls. Bamboo accents. Entrance modernized with glass doors. Serene underground paradise. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Excavator digs Lamborghini shape into grass. Concrete poured, rebar placed. Workers move rapidly. Fixed 45-degree drone. 8 seconds.",
-            "Rapid construction timelapse. Steel beams erected forming the garage. Glass panels installed. Interior finished with polished floor. Workers weld and bolt in fast motion. Fixed camera. 8 seconds.",
-            "Cinematic reveal. LED strips illuminate the Lamborghini garage one by one. Glass doors open revealing a supercar on a glowing turntable. Lighting transitions to blue hour. Fixed angle. Breathtaking. 8 seconds.",
+            "Construction timelapse. Workers clear bunker. Walls demolished. Waterproofing applied. Pools excavated. Fast motion. Fixed drone. 8 seconds.",
+            "Rapid construction. Stone tiles placed. Pools tiled. Glass steam room built. Ceiling fiber optics installed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Pools glow turquoise. Steam rises. Amber lights warm stone. Underground luxury. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 3. PS5 Gaming Room ───────────────────────────────────────────────────
+    # ─── 3. Giant Eye Tower ───────────────────────────────────────────────────
     {
-        "name": "Giant PS5 Gaming Room",
-        "hook": "He Turned His Basement into a GIANT PS5 Gaming Room! 🎮🤯",
-        "title": "Building a PS5-Shaped Gaming Room! 🎮✨",
-        "description": "The ultimate gaming setup — an entire room shaped like a PlayStation 5! LED-lit walls, massive screen, and a custom gaming throne inside.",
-        "hashtags": "#shorts #ps5 #gaming #construction #timelapse #gamer #playstation",
+        "name": "Giant Eye Tower",
+        "hook": "He Built a GIANT EYE Tower That Watches Everything! 👁️",
+        "title": "Building a GIANT EYE Observation Tower! 👁️🏗️",
+        "description": "A surreal observation tower shaped like a massive human eye with a rotating iris dome and pupil skylight!",
+        "hashtags": "#shorts #eye #tower #surreal #construction #timelapse #architecture",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an empty concrete basement/cellar room. Raw walls, exposed pipes, single bare bulb. Dusty floor. {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Half-demolished walls reshaped into curves matching the PS5 console shape. Workers installing metal framing. Electrical conduits routed. Debris and tools scattered. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Structure nearly complete — smooth white curved walls matching PS5 design. Black accent panels installed. A massive 120-inch screen mounted. Custom gaming chair platform in center. LED strips along ceiling edges (off). {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Completed PS5 gaming room in all its glory. Blue LED strips glow along the PS5 curves. The giant screen displays a vibrant game. Ambient RGB lighting reflects off the white walls. Gaming throne illuminated. Absolutely stunning futuristic gaming cave. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an open hilltop with panoramic views. Green grass, winding path. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Oval foundation poured. Steel framework rising in eye shape — almond curve. Workers building the iris dome support ring. Crane. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Eye structure taking shape — white sclera panels on outer shell. Blue-green iris dome forming with radial pattern. Dark pupil circle in center is a glass skylight. Eyelid overhang shades the observation deck. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed eye tower — white shell gleams. Blue iris dome lit with radial LED strips. Pupil skylight glows warm from interior. The eye seems to watch the landscape. Winding lit path leads up. Surreal and stunning. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers demolish old walls, reshape them into PS5 curved forms. Metal framing installed. Fast motion, dust and sparks. Fixed camera angle. 8 seconds.",
-            "Rapid construction timelapse. White panels applied, screen mounted, LED strips installed. Custom furniture placed. Workers moving quickly. Fixed 45-degree view. 8 seconds.",
-            "Cinematic reveal. LED strips light up blue following PS5 curves. Screen powers on with vibrant display. RGB ambient lighting transitions create stunning glow. Camera remains fixed. 8 seconds.",
+            "Fast construction. Oval foundation. Eye-shaped steel frame rises. Iris ring constructed. Fixed drone. 8 seconds.",
+            "Rapid construction. White panels on shell. Blue iris dome assembled. Pupil skylight installed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Iris LEDs glow blue concentric rings. Pupil warm. Eye watches landscape at dusk. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 4. Pirate Ship Treehouse ─────────────────────────────────────────────
+    # ─── 4. Bank Vault → Whiskey Bar ──────────────────────────────────────────
     {
-        "name": "Pirate Ship Treehouse",
-        "hook": "He Built a REAL Pirate Ship Treehouse! 🏴‍☠️⚓",
-        "title": "Building a Pirate Ship in a TREE! ☠️🌳",
-        "description": "From a simple oak tree to an incredible pirate ship treehouse with sails, cannons, and a plank! The most epic treehouse ever constructed.",
-        "hashtags": "#shorts #pirateship #treehouse #construction #timelapse #epic #diy",
+        "name": "Bank Vault Whiskey Bar",
+        "hook": "Abandoned Bank Vault → Secret WHISKEY Bar! 🥃🔐",
+        "title": "He Turned a BANK VAULT Into a Whiskey Bar! 🥃",
+        "description": "A forgotten bank vault transformed into an exclusive whiskey bar with the original vault door as the entrance!",
+        "hashtags": "#shorts #vault #whiskey #bar #transformation #luxury #speakeasy",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a large backyard with a massive old oak tree in the center. Thick trunk, spreading canopy. Green lawn around. Suburban houses in background. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Wooden platform framework built among the oak tree branches. Scaffolding around the trunk. Workers hoisting lumber. The hull shape of a ship beginning to form. Sawdust and tools below. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Pirate ship structure 80% complete in the tree. Dark wood hull with port holes, a steering wheel visible, rope ladders hanging. A plank extends outward. Mast poles erected but no sails yet. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed pirate ship treehouse — dark weathered wood, white canvas sails unfurled, skull-and-crossbones flag flying. String lights along the rails. A rope bridge connects to a crow's nest. Magical warm lighting through the leaves. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned bank interior. Massive vault door standing open, dusty marble floors, broken teller windows. Dark and forgotten. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Vault interior being gutted. Workers installing new flooring, bar counter framework rising along the back wall. Electrical rewired. Safe deposit boxes being cleaned. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Whiskey bar taking shape — dark walnut bar counter with brass rail. Restored safe deposit boxes now display whiskey bottles. Leather booth seating. Edison bulb lighting. Original vault door polished. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at evening. Completed whiskey bar — vault door gleams as entrance. Warm Edison glow inside. Whiskey bottles shimmer in old safe boxes. Leather seats filled. Brass accents everywhere. Speakeasy perfection. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers hoist lumber into the tree, building platform and hull frame. Scaffolding erected. Tools and sawdust fly. Fast motion. Fixed drone angle. 8 seconds.",
-            "Rapid construction timelapse. Ship hull takes shape — planks nailed, portholes cut, steering wheel installed. Mast poles erected. Workers climbing and building. Fixed 45-degree view. 8 seconds.",
-            "Cinematic reveal. White sails unfurl in the wind. String lights illuminate along the rails. Pirate flag raised. Golden hour light streams through the canopy. Fixed angle. Magical. 8 seconds.",
+            "Construction timelapse. Vault cleared. Bar framework rises. Flooring laid. Wiring installed. Fixed drone. 8 seconds.",
+            "Rapid construction. Walnut bar built. Whiskey displayed in safe boxes. Leather booths placed. Edison bulbs hung. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Vault door gleams. Edison glow warm. Whiskey bottles shimmer amber. Speakeasy atmosphere. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 5. Tesla Cybertruck House ────────────────────────────────────────────
+    # ─── 5. Chess Rook Tower House ────────────────────────────────────────────
     {
-        "name": "Cybertruck House",
-        "hook": "He Built a House Shaped Like a Tesla Cybertruck! 🔺🏠",
-        "title": "Building a CYBERTRUCK-Shaped House! ⚡🏗️",
-        "description": "From an empty lot to a futuristic home shaped like Tesla's Cybertruck! Stainless steel exterior, angular design, and LED-lit windows.",
-        "hashtags": "#shorts #tesla #cybertruck #house #construction #timelapse #futuristic",
+        "name": "Chess Rook Tower",
+        "hook": "Living Inside a Giant CHESS ROOK Tower! ♜🏰",
+        "title": "Building a CHESS ROOK Tower House! ♜🏗️",
+        "description": "A medieval-style tower house shaped like a chess rook piece with battlements, spiral staircase, and a rooftop terrace!",
+        "hashtags": "#shorts #chess #tower #castle #construction #timelapse #medieval",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an empty suburban lot. Flat dirt ground, surveyor stakes marking boundaries. Adjacent houses on both sides. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Concrete foundation poured in angular Cybertruck shape. Steel frame rising with sharp geometric angles. A concrete mixer and crane nearby. Workers welding angular beams. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Angular structure nearly complete — brushed stainless steel panels cladding the exterior. Triangular windows cut. The distinct Cybertruck front end forming the main entrance. Interior visible through openings — modern minimalist. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed Cybertruck house glowing. White LED strips outline every angular edge. Triangular windows glow warm from interior lights. A real Tesla Cybertruck parked in the angular driveway. Landscaped xeriscaping with modern desert plants. Futuristic and stunning. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a rural plot with rolling hills. Stone wall boundary. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Circular stone foundation. Thick cylindrical walls rising course by course. Workers laying stone blocks. Scaffolding wraps the cylinder. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Rook tower 80% complete — grey stone cylinder with narrow arrow-slit windows. Crown-shaped battlements being constructed at top with merlons and crenels. Heavy oak door at base. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed chess rook — perfect stone cylinder with crown battlements. Warm light from arrow slits. Rooftop terrace visible between merlons with furniture. Flag flying from one corner. Medieval meets modern. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Concrete poured in angular mold. Steel beams welded into sharp geometric shapes. Crane lifts panels. Fast motion. Fixed drone angle. 8 seconds.",
-            "Rapid construction timelapse. Stainless steel panels bolted onto angular frame. Windows cut. Interior finishing visible. Workers move rapidly. Fixed 45-degree camera. 8 seconds.",
-            "Cinematic reveal. LED strips illuminate every edge of the Cybertruck house. Windows glow warm. A real Cybertruck pulls into the angular driveway. Dusk lighting. Futuristic beauty. 8 seconds.",
+            "Construction timelapse. Stone walls rise circular. Workers lay blocks course by course. Scaffolding climbs. Fixed drone. 8 seconds.",
+            "Rapid construction. Battlements crown the top. Windows cut. Oak door hung. Stone completed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Golden light through arrow slits. Flag waves. Rooftop terrace cozy. Medieval tower at sunset. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 6. Dragon Slide Water Park ───────────────────────────────────────────
+    # ─── 6. Abandoned Mine → Crystal Pool ─────────────────────────────────────
     {
-        "name": "Dragon Water Slide",
-        "hook": "He Built a DRAGON Water Slide in His Backyard! 🐉💦",
-        "title": "Building a DRAGON-Shaped Water Slide! 🐉🌊",
-        "description": "The most insane backyard water slide ever — a massive fire-breathing dragon! Riders slide through the dragon's body into a splash pool.",
-        "hashtags": "#shorts #waterslide #dragon #construction #timelapse #summer #epic",
+        "name": "Mine to Crystal Pool",
+        "hook": "Abandoned MINE → Crystal Underground Pool! 💎🏊",
+        "title": "He Turned an Abandoned Mine Into a POOL! 💎",
+        "description": "A forgotten mine shaft transformed into a crystal-clear underground swimming pool with mineral rock walls and LED lighting!",
+        "hashtags": "#shorts #mine #pool #underground #transformation #luxury #crystal",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a large backyard with a gentle hillside slope. Green grass, wooden fence perimeter. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Metal framework of a dragon skeleton rising from the hillside. Workers welding curved ribs and spine structure. Foundation poured at the base for a splash pool. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Dragon structure 80% complete — scaled green exterior panels covering the body. Open jaws with teeth at the top start. Wings spread as decorative features. Enclosed tube slide running through the body. Splash pool excavated at the bottom. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed dragon water slide — gleaming green scales, fiery red LED eyes and throat glow. Water flowing through the dragon body slide into a crystal blue splash pool. Mist from the dragon's mouth. Landscaped tropical plants around the base. Epic and magical. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned mine entrance. Rusty rail tracks, collapsed timber supports, overgrown with weeds. Dark tunnel mouth. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Mine entrance reinforced with steel. Workers inside excavating and waterproofing a cavern space. Natural rock walls retained. Pool basin forming. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Underground pool taking shape — natural rock walls with crystal formations preserved. Turquoise tiled pool basin. LED strips along rock edges. Wooden deck platform. Stone steps leading down. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at evening. Completed mine pool — crystal rock walls glow with blue and purple LEDs. Turquoise water perfectly still. Wooden deck with loungers. Mine entrance modernized with glass. Underground crystal paradise. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Metal framework shaped into dragon skeleton on hillside. Workers weld ribs and spine. Foundation poured below. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Green scale panels attached to dragon frame. Wings spread. Slide tube installed inside. Splash pool tiled. Workers climb scaffolding. Fixed view. 8 seconds.",
-            "Cinematic reveal. Dragon's eyes glow red. Water rushes through the slide, splashing into the pool. Mist rises from dragon's mouth. Golden hour light. Fixed angle. Breathtaking. 8 seconds.",
+            "Construction timelapse. Mine reinforced. Cavern excavated. Pool basin formed. Rock walls cleaned. Fixed drone. 8 seconds.",
+            "Rapid construction. Tiles laid. LED strips installed in rock. Deck built. Steps carved. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Crystal walls glow purple. Turquoise water shimmers. Underground pool paradise. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 7. Pizza Oven Villa ──────────────────────────────────────────────────
+    # ─── 7. Cactus Desert House ───────────────────────────────────────────────
     {
-        "name": "Pizza Oven Villa",
-        "hook": "He Built a House Shaped Like a Giant Pizza Oven! 🍕🏠",
-        "title": "Building a PIZZA OVEN House! 🍕🔥",
-        "description": "From countryside land to an incredible dome-shaped house that looks like a massive Italian pizza oven! With a real wood-fired pizza kitchen inside.",
-        "hashtags": "#shorts #pizza #house #construction #timelapse #italian #dome",
+        "name": "Cactus Desert House",
+        "hook": "He Built a CACTUS-Shaped Desert House! 🌵🏠",
+        "title": "Building a CACTUS House in the Desert! 🌵",
+        "description": "A desert home shaped like a massive saguaro cactus with arm-shaped rooms and a spine-textured green exterior!",
+        "hashtags": "#shorts #cactus #desert #house #construction #timelapse #unique",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a rural countryside lot with rolling green hills. Wildflowers, olive trees, a dirt path leading in. Tuscany-style landscape. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Circular foundation poured. Red brick dome structure rising — workers laying bricks in arched formation. Scaffolding around the dome. The shape resembling a giant pizza oven. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Dome structure nearly complete — rustic red brick exterior, arched doorway entrance with heavy wooden door. A chimney rising from the top. Small round windows. Stone path being laid to the entrance. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed pizza oven villa glowing warm. Smoke curling from the chimney. Warm light from inside through the arched doorway shows a cozy interior. String lights along the stone path. Olive trees framing the scene. A pizza being pulled from a real brick oven visible through a side window. Magical Tuscan charm. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a desert lot. Sandy terrain, scattered desert plants, distant mountains. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cylindrical concrete core rising with two arm branches extending at different heights. Steel framework. Workers shaping curved forms. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cactus house structure covered in green textured panels with vertical spine ridges. Circular windows. Arm rooms have rounded ends. Terrace on top of main trunk. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed cactus house — green exterior with realistic spine texture. Warm light from circular windows. Rooftop terrace with desert views. Desert garden landscaped around base. Stunning against sunset sky. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers lay bricks in arched dome formation. Scaffolding circles the structure. Red brick dome grows taller. Fixed 45-degree drone. 8 seconds.",
-            "Rapid construction. Dome completed, door installed, chimney built. Stone pathways laid. Workers add finishing touches. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Smoke curls from chimney. Warm interior glow through archway. String lights sparkle along path. Golden hour in Tuscany. Fixed angle. Italian charm. 8 seconds.",
+            "Fast construction. Cylindrical core rises. Arms branch out. Steel formed. Fixed drone. 8 seconds.",
+            "Rapid construction. Green panels with spines applied. Windows cut. Terrace built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Green cactus glows in golden hour. Windows warm. Desert sunset behind. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 8. Minecraft House ───────────────────────────────────────────────────
+    # ─── 8. Bowling Alley → Surf Pool ─────────────────────────────────────────
     {
-        "name": "Real Life Minecraft House",
-        "hook": "He Built a REAL Minecraft House with REAL Blocks! 🟫⛏️",
-        "title": "Minecraft House IRL! Building Block by Block! 🟫🏠",
-        "description": "Every gamer's dream — a real-life Minecraft house built with actual cube-shaped blocks! Pixelated windows, door, and a creeper garden!",
-        "hashtags": "#shorts #minecraft #house #gaming #construction #timelapse #irl",
+        "name": "Bowling Alley to Surf Pool",
+        "hook": "Abandoned Bowling Alley → Indoor SURF Pool! 🏄🌊",
+        "title": "He Turned a Bowling Alley Into a SURF POOL! 🏄",
+        "description": "An abandoned bowling alley transformed into an indoor wave pool with artificial surf, neon lighting, and a beach bar!",
+        "hashtags": "#shorts #bowling #surfpool #transformation #waves #renovation #epic",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a suburban backyard with flat green lawn. Simple wooden fence, adjacent houses. Clear sky. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers stacking large brown cube-shaped concrete blocks (like Minecraft dirt blocks) to form walls. The structure is half-height — clearly cubic/pixelated architecture. Power tools and a forklift placing blocks. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Minecraft house structure nearly complete — brown cube walls with pixelated stone trim. Square window openings with pixel-style frames. Flat roof made of green blocks (grass block look). A wooden plank-textured door. A small garden area with green cubic bushes shaped like Creeper heads. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Completed Minecraft house with pixel-perfect detail. Green grass-block roof, dirt-block walls, stone foundation. Square windows glow warm from inside. The door is open showing a pixelated interior. A Creeper statue guards the entrance. Torches (real flame LED) line the pathway. Magical blend of digital and real world. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned bowling alley interior. Dusty lanes, broken pin machines, peeling wallpaper, ceiling tiles missing. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Bowling lanes ripped out. Deep pool excavation where lanes were. Workers waterproofing. Wave generation machinery being installed at one end. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Surf pool 80% complete — long rectangular pool with wave machine. Sandy beach entry at one end. Neon tube lighting on ceiling. Beach bar counter along one wall. Tropical murals. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at evening. Completed indoor surf pool — perfect waves rolling down the lane. Neon pink and blue lighting. Sandy beach area. Beach bar glowing warm. Surfboards mounted on walls. Tropical paradise inside. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers stack large cube blocks forming Minecraft-style walls. Forklift places blocks. Structure grows block by block. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Pixel windows installed, green roof blocks placed. Door crafted. Creeper statues built in garden. Workers add details. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Torch lights flicker along pathway. Windows glow warm. Door opens showing pixelated interior. Magical blend of Minecraft and reality. Fixed angle. 8 seconds.",
+            "Construction timelapse. Lanes demolished. Pool excavated. Wave machine installed. Fixed drone. 8 seconds.",
+            "Rapid construction. Pool tiled. Sand beach created. Neon lights hung. Bar built. Murals painted. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Waves roll perfectly. Neon pink and blue glow. Beach bar warm. Indoor surf paradise. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 9. Guitar Swimming Pool ──────────────────────────────────────────────
+    # ─── 9. Periscope House ───────────────────────────────────────────────────
     {
-        "name": "Guitar Shaped Pool",
-        "hook": "He Built a Guitar-Shaped Swimming Pool! 🎸💦",
-        "title": "Building a GUITAR Pool From Scratch! 🎸🏊",
-        "description": "Rock and roll meets swimming! An electric guitar-shaped pool with LED fret markers and a hot tub in the headstock!",
-        "hashtags": "#shorts #guitar #pool #construction #timelapse #music #rockandroll",
+        "name": "Periscope House",
+        "hook": "He Built a PERISCOPE House — See Everything! 🔭",
+        "title": "Building a PERISCOPE-Shaped House! 🔭🏠",
+        "description": "A tall house shaped like a submarine periscope with a rotating observation room at the top and mirror-glass angled windows!",
+        "hashtags": "#shorts #periscope #house #construction #timelapse #military #unique",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a spacious backyard with trimmed green lawn. Stone patio area near the house. Mature landscaping. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Large guitar-shaped excavation in the lawn — the body is deep pool area, the neck extends outward. Excavator working on the headstock area. Dirt mounds, workers refining the fret board shape. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Guitar pool taking shape — body section tiled in sunburst pattern (dark center, orange edges like a Les Paul). Neck with raised concrete fret markers. Headstock area forming a circular hot tub. Plumbing and LED conduits being installed. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed guitar pool filled with blue water. LED fret markers glow white along the neck. The body has underwater sunburst lighting. Hot tub in the headstock bubbles. String-shaped water jets cross the neck. Wooden deck surrounds everything. Rock and roll paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a coastal lot overlooking the ocean. Grassy cliff edge. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Tall cylindrical steel framework rising 12 meters. Workers building the angled top section typical of a periscope shape. Foundation deep. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Periscope structure clad in matte grey panels. Angular top section with large angled mirror-glass windows. Observation room at top. Ladder rungs as decorative exterior element. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed periscope house — grey military-style exterior. Angled glass windows reflect sunset. Observation room glows warm from interior. Ocean panorama visible. Coastal garden below. Striking silhouette. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Excavator digs guitar shape. Body deep, neck extends. Workers shape headstock. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Sunburst tiles applied to body. Fret markers built along neck. Hot tub formed in headstock. LED conduits installed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool fills with water. LED frets glow white. Sunburst underwater lights illuminate. Hot tub bubbles. Dusk lighting. Rock paradise. Fixed angle. 8 seconds.",
+            "Fast construction. Tall cylinder rises. Angled top section assembled. Workers climb scaffolding. Fixed drone. 8 seconds.",
+            "Rapid construction. Grey panels applied. Mirror glass windows installed. Observation room finished. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Glass reflects sunset. Observation room glows. Ocean behind. Dusk silhouette. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 10. Hobbit Hole House ────────────────────────────────────────────────
+    # ─── 10. Windmill → Rotating Restaurant ───────────────────────────────────
     {
-        "name": "Hobbit Hole House",
-        "hook": "He Built a REAL Hobbit House Underground! 🧙‍♂️🏠",
-        "title": "Building a Hobbit Hole From Scratch! 🧙‍♂️🌿",
-        "description": "Straight from Middle-Earth! A real underground hobbit hole with a round green door, circular windows, and a grass-covered roof!",
-        "hashtags": "#shorts #hobbit #lotr #house #construction #timelapse #fantasy",
+        "name": "Windmill to Restaurant",
+        "hook": "200-Year-Old WINDMILL → Rotating Restaurant! 🌬️🍽️",
+        "title": "He Turned an Old Windmill Into a RESTAURANT! 🌬️",
+        "description": "A crumbling 200-year-old windmill transformed into a rotating restaurant with panoramic views and restored sails!",
+        "hashtags": "#shorts #windmill #restaurant #transformation #renovation #panoramic",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a gentle grassy hillside in a rural setting. Wildflowers, a winding stone path. Rolling green countryside. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Large circular excavation carved into the hillside. Concrete arch framework installed for the tunnel entrance. Workers building stone retaining walls. The circular shape of the hobbit door frame visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Structure built into the hillside — stone walls frame a circular entrance. Round wooden door (green, with brass handle) installed. Circular windows on either side. Interior visible — cozy wooden beams. Grass starting to grow back over the earth-covered roof. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed hobbit hole — the round green door gleams. Warm light spills from circular windows revealing a cozy interior with a fireplace. Smoke rises from a chimney disguised in the hillside. Flower garden along the stone walkway. Grass fully covers the rounded roof. Magical fairy-tale setting. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an old stone windmill in a wheat field. Crumbling walls, broken sails, missing cap. Heritage structure barely standing. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Windmill walls reinforced. Workers rebuilding upper floors. New steel structure inside for rotating platform. Sails being restored with new timber. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Restaurant taking shape — stone walls restored. Large panoramic windows cut into upper level. Rotating floor mechanism installed. New wooden sails complete. Interior visible — dining tables. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed windmill restaurant — beautiful stone exterior restored. Sails turn slowly. Panoramic windows show warm dining room. Diners visible. Wheat field glows golden. String lights on terrace. Magical. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers carve circular tunnel into hillside. Stone walls rise. Arch framework installed. Fast motion. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Round door hung, circular windows installed. Interior beamed. Earth piled back over roof. Grass seed spread. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Warm light from windows. Smoke from hidden chimney. Flowers bloom along path. Golden hour magic. A hobbit house come to life. Fixed angle. 8 seconds.",
+            "Construction timelapse. Walls reinforced. Floors rebuilt. Rotating platform installed. Sails restored. Fixed drone. 8 seconds.",
+            "Rapid construction. Windows cut. Dining interior finished. Sails mounted. Terrace built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Sails turn slowly. Warm dining glow. Golden wheat field. String lights sparkle. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 11-20: Quick concepts ────────────────────────────────────────────────
+    # ─── 11. Ice Cube Cabin ───────────────────────────────────────────────────
     {
-        "name": "Dinosaur Playground",
-        "hook": "He Built a T-Rex Playground for His Kids! 🦕🎢",
-        "title": "Building a DINOSAUR Playground! 🦖🏗️",
-        "description": "The world's coolest playground — a life-size T-Rex with slides, climbing walls, and a roaring sound system!",
-        "hashtags": "#shorts #dinosaur #playground #construction #timelapse #kids #trex",
+        "name": "Ice Cube Cabin",
+        "hook": "He Built an ICE CUBE Cabin in the Mountains! ❄️",
+        "title": "Building an ICE CUBE Mountain Cabin! ❄️🏔️",
+        "description": "A mountain cabin shaped like a giant ice cube with translucent glass walls, frost-effect panels, and a warm glowing interior!",
+        "hashtags": "#shorts #icecube #cabin #winter #construction #timelapse #mountains",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a large empty park area with flat grass and sandbox. Playground fence around perimeter. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Steel skeleton framework of a massive T-Rex, 8 meters tall. Workers welding limbs. Crane holding the head piece. Foundation poured for the base. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. T-Rex structure covered in green textured panels with realistic scales. Slide running from the mouth. Climbing wall on the belly. Tail is a balance beam. Eyes are windows. Net bridge between legs. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed T-Rex playground with kids playing. Green scales shimmer. Slide in use. LED eyes glow red. Soft rubber safety ground beneath. Landscaped with ferns and tropical plants. Epic prehistoric playground. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a snowy mountain clearing. Pine trees, snow-covered ground, mountain peaks. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cube foundation on timber piles. Steel frame rising in perfect cubic shape. Workers installing structural glass panels. Snow around construction site. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Ice cube cabin structure — frosted translucent glass panels creating icy blue appearance. Internal wooden structure visible as shadows. Flat roof with snow. Heated glass prevents snow sticking to walls. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at blue hour. Completed ice cube cabin — translucent walls glow warm amber from interior fireplace. Ice-blue exterior against white snow. Pine forest frames the scene. Moonlight reflects off glass. Magical winter wonderland. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Crane lifts T-Rex steel skeleton pieces. Workers weld the frame together. Massive dinosaur shape rises. Fixed drone. 8 seconds.",
-            "Rapid construction. Green scale panels cover the frame. Slide installed in mouth. Climbing wall built. Safety surface laid. Fixed camera. 8 seconds.",
-            "Cinematic reveal. T-Rex playground complete. LED eyes glow. Kids slide and climb. Golden hour through the ferns. Fixed angle. Incredible. 8 seconds.",
-        ],
-    },
-    {
-        "name": "Sneaker House",
-        "hook": "He Built a LIFE-SIZE Nike Air Jordan House! 👟🏠",
-        "title": "Building a Sneaker-Shaped House! 👟🔥",
-        "description": "The ultimate sneakerhead dream — a house shaped like a giant Air Jordan 1! Red, white and black exterior with shoelace rope bridge!",
-        "hashtags": "#shorts #nike #airjordan #sneakers #construction #timelapse #house",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an empty suburban lot with flat terrain. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Foundation and walls rising in the shape of a massive sneaker — sole portion is the ground floor, the upper shoe shape rises 2 stories. Steel framework with curved sections. Workers and crane. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Sneaker house mostly complete — red and white panels on exterior matching Air Jordan 1 colorway. The Nike swoosh window cut into the side. Rubber-textured black sole base. Shoelace-style rope bridge to second floor. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed sneaker house — iconic red/white/black Air Jordan colorway. Nike swoosh window glows from interior. LED outline traces the shoe shape. Giant shoelace rope bridge illuminated. Modern landscaping. Sneakerhead paradise. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Workers build giant sneaker framework. Curved walls rise. Crane lifts panels. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Red and white Air Jordan panels applied. Swoosh window cut. Rope bridge installed. Black sole textured. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Sneaker house lights up at dusk. Swoosh window glows. LED outlines the shoe shape. Rope bridge lit. Fixed angle. Incredible. 8 seconds.",
+            "Fast construction. Foundation on snow. Cube frame rises. Glass panels installed. Fixed drone. 8 seconds.",
+            "Rapid construction. Frosted panels applied. Interior built. Roof completed. Snow on surroundings. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Warm amber glow through ice-blue walls. Snow sparkles. Blue hour magic. Mountain cabin paradise. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 13. Giant Basketball Court ───────────────────────────────────────────
+    # ─── 12. Water Tower → Sky House ──────────────────────────────────────────
     {
-        "name": "Basketball Shaped Pool",
-        "hook": "He Built a BASKETBALL-Shaped Pool with Real Hoops! 🏀💦",
-        "title": "Building a BASKETBALL Pool! 🏀🏊",
-        "description": "The ultimate sports fan pool — shaped like a giant basketball with real hoops on each end! Orange tiles and black line details!",
-        "hashtags": "#shorts #basketball #pool #construction #timelapse #nba #sports",
+        "name": "Water Tower Sky House",
+        "hook": "Abandoned Water Tower → Panoramic SKY HOUSE! 🏠☁️",
+        "title": "He Turned a Water Tower Into a SKY HOUSE! ☁️",
+        "description": "A rusted old water tower transformed into a stunning panoramic living space with 360-degree views and a wrap-around deck!",
+        "hashtags": "#shorts #watertower #skyhouse #transformation #panoramic #renovation",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a large flat backyard with green grass. Sports equipment shed visible. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Circular excavation in the lawn forming a giant basketball shape. Workers marking the curved line patterns. Excavator digging. Dirt piles around. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Pool structure taking shape — orange mosaic tiles covering the interior. Black line details matching basketball seam pattern. Two basketball hoops being installed at opposite ends. Concrete deck forming around. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed basketball pool filled with crystal water. Orange LED glow from underwater. Black seam lines perfectly visible. Two hoops with nets. Wooden deck with bleacher seating. Sports paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an old rusted water tower on steel legs. Peeling paint, bird nests, overgrown base. Rural setting, wide open views. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Tower legs reinforced with new steel. Workers cutting windows into the tank body. New floor structure being installed inside. Spiral staircase frame going up one leg. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Sky house taking shape — tank repainted white. Large panoramic windows all around. Wrap-around deck with railing. Interior visible — modern bedroom, kitchen. Spiral staircase complete. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at sunset. Completed sky house — white tank with panoramic windows glowing warm. Wrap-around deck with string lights. 360-degree sunset views. Modern interior visible. Spiral staircase lit. Living above the world. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Excavator digs circular basketball shape. Workers mark seam lines. Earth removed rapidly. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Orange tiles applied in basketball pattern. Black seam lines laid. Hoops installed. Deck built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool fills with water. Orange LEDs illuminate. Hoops gleam. Golden hour light reflects off water. Fixed angle. 8 seconds.",
+            "Construction timelapse. Legs reinforced. Windows cut in tank. Floors installed. Staircase built. Fixed drone. 8 seconds.",
+            "Rapid construction. White paint applied. Deck built around tank. Interior finished modern. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Panoramic sunset through windows. String lights on deck. 360 views. Sky house glows. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 14. Giant Camera House ───────────────────────────────────────────────
+    # ─── 13. AirPods Podcast Studio ───────────────────────────────────────────
     {
-        "name": "Camera Shaped Studio",
-        "hook": "He Built a Studio Shaped Like a GIANT Camera! 📷🏠",
-        "title": "Building a CAMERA-Shaped Photography Studio! 📷✨",
-        "description": "A photographer's dream — an entire studio shaped like a massive DSLR camera with a lens-shaped entrance and viewfinder rooftop terrace!",
-        "hashtags": "#shorts #camera #photography #construction #timelapse #studio #creative",
+        "name": "AirPods Podcast Studio",
+        "hook": "He Built a PODCAST Studio Shaped Like AirPods! 🎙️",
+        "title": "Building an AIRPODS-Shaped Podcast Studio! 🎙️🏗️",
+        "description": "A podcast studio shaped like a giant pair of AirPods with sound-insulated recording booths in each ear piece!",
+        "hashtags": "#shorts #airpods #podcast #studio #construction #timelapse #tech",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an empty commercial lot. Flat concrete ground. Chain link fence around perimeter. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Foundation poured in rectangular camera body shape. A cylindrical structure rising for the lens section. Steel framework. Crane positioning roof pieces. Workers welding. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Camera studio 80% complete — matte black exterior panels. The cylindrical lens entrance has concentric glass rings. A raised viewfinder bump on top forms a rooftop terrace. Flash unit shaped chimney. Grip texture on sides. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour. Completed camera studio glowing. Lens entrance lit with concentric LED rings. Viewfinder terrace has warm lighting. Red recording light on top blinks. Interior visible through lens — professional photography studio with lights. Stunning. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a commercial lot. Flat terrain. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Two teardrop-shaped foundations with connecting walkway. Steel framework rising in AirPod ear shapes. Workers bending panels for smooth curves. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. AirPod structures covered in glossy white panels. Smooth curves matching the real product. Speaker grille mesh at bottom of each piece. Glass entrance door on connecting stem walkway. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed AirPod studio — glossy white bodies glow. Blue ambient LED ring on each piece. One ear is the recording booth, other is the lounge. Stem walkway connects them. Modern tech aesthetic. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Foundation poured. Cylindrical lens structure rises. Steel frame assembled. Crane lifts pieces. Fixed drone. 8 seconds.",
-            "Rapid construction. Black panels applied. Glass lens rings installed. Viewfinder terrace built. Flash chimney erected. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Lens LED rings glow concentric circles. Red light blinks. Studio interior visible. Blue hour atmosphere. Fixed angle. 8 seconds.",
+            "Fast construction. Two teardrop foundations. Frames rise in ear shapes. Smooth curves formed. Fixed drone. 8 seconds.",
+            "Rapid construction. White panels applied. Grille mesh installed. Walkway built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. White bodies glow. Blue LED rings. Tech aesthetic at dusk. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 15. Coca-Cola Can Pool ───────────────────────────────────────────────
+    # ─── 14. Train Station → Co-Working ───────────────────────────────────────
     {
-        "name": "Coca-Cola Can Pool",
-        "hook": "He Built a GIANT Coca-Cola Can Swimming Pool! 🥤💦",
-        "title": "Building a COCA-COLA Can Pool! 🥤🏊",
-        "description": "The most refreshing pool ever — shaped like a massive Coca-Cola can with the iconic red and white design! Complete with a bubble jacuzzi!",
-        "hashtags": "#shorts #cocacola #pool #construction #timelapse #satisfying #iconic",
+        "name": "Station to Co-Working",
+        "hook": "Ghost Train Station → Modern CO-WORKING Hub! 🚉💼",
+        "title": "Abandoned Train Station → CO-WORKING Space! 🚉",
+        "description": "A forgotten train station transformed into a modern co-working hub with the original platform as an open workspace!",
+        "hashtags": "#shorts #trainstation #coworking #transformation #renovation #modern",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a backyard space with trimmed lawn and patio area. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Large cylindrical excavation in the yard. Workers building curved concrete walls. The circular shape clearly defined. Rebar visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cylindrical pool taking shape — red mosaic tiles on exterior walls visible above ground. White wave stripe being applied. Workers installing the pull-tab shaped diving platform at one end. Interior blue tiles. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed Coca-Cola can pool — iconic red with white swirl stripe. Pull-tab diving board. Bubble jets create fizzing effect. Red LED underglow. Silver rim at top edge. Landscaped with tropical plants. Refreshing paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned train station. Broken glass canopy, overgrown tracks, faded signage, pigeons. Victorian-era brick building. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Station being restored. Glass canopy repaired. Tracks removed and platform being converted to floor space. Interior walls cleaned. New electrical. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Co-working space taking shape — restored brick walls. Long communal desk where tracks once were. Glass meeting pods on platform. Restored clock. Modern furniture mixed with heritage. Plants everywhere. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at evening. Completed co-working — glass canopy beautifully restored, lit warm. Workers at communal desks. Meeting pods glow. Restored clock shows time. Original signage preserved. Heritage meets modern. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Workers dig cylindrical pool. Curved walls rise. Rebar framework. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Red tiles applied. White stripe painted. Pull-tab platform built. Interior finished blue. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool fills. Bubble jets fizz. Red LED glow. Pull-tab diving board gleams. Dusk lighting. Fixed angle. 8 seconds.",
+            "Construction timelapse. Station cleared. Canopy repaired. Tracks removed. Platform converted. Fixed drone. 8 seconds.",
+            "Rapid construction. Brick cleaned. Desks placed. Meeting pods installed. Clock restored. Plants added. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Canopy glows warm. Clock ticks. Workers at desks. Heritage beauty. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 16. Football Stadium Pool ────────────────────────────────────────────
+    # ─── 15. Soccer Ball Sports Center ────────────────────────────────────────
     {
-        "name": "Football Stadium Pool",
-        "hook": "He Built a Mini Football Stadium Pool in His Yard! ⚽🏟️",
-        "title": "Building a FOOTBALL STADIUM Pool! ⚽💦",
-        "description": "A miniature football stadium with a real pool as the field! Terraced seating, floodlights, and goal posts included!",
-        "hashtags": "#shorts #football #stadium #pool #construction #timelapse #soccer",
+        "name": "Soccer Ball Sports Center",
+        "hook": "He Built a SOCCER BALL-Shaped Sports Center! ⚽🏟️",
+        "title": "Building a SOCCER BALL Sports Center! ⚽🏗️",
+        "description": "A massive sports center shaped like a giant soccer ball with hexagonal and pentagonal panel windows!",
+        "hashtags": "#shorts #soccer #football #sports #construction #timelapse #stadium",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a large backyard with flat terrain. Wide open space. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Rectangular excavation with stepped terracing on all sides. Workers building concrete bleacher forms. The field area deepens for the pool. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Stadium taking shape — green artificial turf tiles on terraces. White lane markings in pool floor. Goal nets at each end. Four floodlight poles being erected at corners. Miniature scoreboard. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed mini stadium — floodlights blaze white. Pool glows blue with painted pitch lines underwater. Goal nets stand at each end. Green terraces with tiny spectator figures. Scoreboard lit. Electric atmosphere. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a large sports field area. Flat ground w grass. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Geodesic dome framework rising — steel hexagons and pentagons forming soccer ball pattern. Crane lifts top sections. Workers weld joints. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Soccer ball structure 80% complete — white hexagonal panels and black pentagonal panels creating classic football pattern. Some panels are glass windows. Main entrance through one pentagon. Indoor court visible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed soccer ball sports center — iconic black and white geodesic pattern. Glass pentagon windows glow green from indoor turf below. White LED outlines hexagons. Landscaped sports fields around. Massive and stunning. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction. Rectangular pit dug with terraced steps. Concrete poured for bleachers. Field area deepens. Fixed drone. 8 seconds.",
-            "Rapid construction. Green turf on terraces. White lines painted. Goals erected. Floodlight poles installed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Floodlights blaze on. Pool fills with blue water. Pitch lines glow underwater. Night atmosphere. Fixed angle. 8 seconds.",
+            "Fast construction. Geodesic dome frame rises. Hexagons and pentagons welded. Crane lifts top. Fixed drone. 8 seconds.",
+            "Rapid construction. White and black panels applied. Glass windows installed. Court built inside. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Black and white pattern perfect. Green glow from indoor turf. LED outlines hexagons. Dusk. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 17. Giant Donut Shop ─────────────────────────────────────────────────
+    # ─── 16. Lighthouse → Observatory ─────────────────────────────────────────
     {
-        "name": "Giant Donut Shop",
-        "hook": "He Built a Shop Inside a GIANT Donut! 🍩🏠",
-        "title": "Building a GIANT DONUT Shop! 🍩✨",
-        "description": "The sweetest building ever — a donut shop built inside a massive donut with sprinkle decorations and a glazed roof!",
-        "hashtags": "#shorts #donut #shop #construction #timelapse #food #creative",
+        "name": "Lighthouse to Observatory",
+        "hook": "Abandoned Lighthouse → Private OBSERVATORY! 🔭🌌",
+        "title": "He Turned a Lighthouse Into an OBSERVATORY! 🔭",
+        "description": "A decommissioned lighthouse transformed into a private astronomical observatory with retractable dome and telescope!",
+        "hashtags": "#shorts #lighthouse #observatory #astronomy #transformation #stars",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a small commercial corner lot. Sidewalk and street visible. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Circular torus-shaped steel framework rising. Workers bending steel into the donut ring shape. The hole in the center will be the entrance. Foundation poured. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Donut structure covered in smooth pink panels (strawberry glaze). Colorful sprinkle-shaped decorations being attached to exterior. The center hole serves as a walk-through entrance. Glass display windows cut. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed giant donut shop — glossy pink glaze exterior with rainbow sprinkles. Warm golden light from interior shows display cases of donuts. Neon 'OPEN' sign glowing. Small outdoor seating with donut-shaped chairs. Sweet paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a coastal lighthouse on rocky cliffs. White tower with broken light housing. Peeling paint, rusted railing. Ocean crashing below. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Lighthouse being restored. Workers replacing the light housing with a retractable dome mechanism. Interior floors reinforced for telescope mount. Windows cleaned. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Observatory taking shape — fresh white paint on tower. Retractable dome at top with slit opening visible. Large refractor telescope inside. Lower levels converted to library and control room. Railing restored. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed observatory — white tower against starry sky. Dome open showing telescope pointing at stars. Warm control room glow from lower windows. Ocean reflects moonlight. A stargazer's dream. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Steel bent into donut torus shape. Framework rises circular. Workers weld. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Pink panels applied. Sprinkle decorations attached. Windows installed. Interior fitted. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Neon sign glows. Interior lights warm. Sprinkles shimmer in golden hour. Donut chairs placed. Fixed angle. 8 seconds.",
+            "Construction timelapse. Lighthouse restored. Dome mechanism installed. Telescope mounted. Paint applied. Fixed drone. 8 seconds.",
+            "Rapid construction. Dome installed at top. Telescope visible. Library built below. Railing restored. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Dome opens to stars. Telescope points up. Moonlit ocean. Warm interior glow. Night magic. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 18. Shark Aquarium House ─────────────────────────────────────────────
+    # ─── 17. Pringles Can Store ───────────────────────────────────────────────
     {
-        "name": "Shark Aquarium House",
-        "hook": "He Built a House with a SHARK TUNNEL Inside! 🦈🏠",
-        "title": "Building a SHARK Aquarium House! 🦈💦",
-        "description": "Living with sharks! A house with an actual walk-through shark tunnel aquarium as the main hallway!",
-        "hashtags": "#shorts #shark #aquarium #house #construction #timelapse #ocean",
+        "name": "Pringles Can Store",
+        "hook": "He Built a PRINGLES CAN Convenience Store! 🥫",
+        "title": "Building a PRINGLES CAN Store! 🥫🏗️",
+        "description": "A convenience store shaped like a massive Pringles tube with the mustache logo as the entrance awning!",
+        "hashtags": "#shorts #pringles #store #food #construction #timelapse #creative",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a beachfront lot with sandy terrain. Ocean visible in background. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Modern house foundation with a unique glass tunnel structure running through the center. Workers installing thick acrylic panels. Filtration equipment visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. House structure rising around the central aquarium tunnel. White modern walls, flat roof. The glass tunnel visible from above — thick acrylic filled with blue water. Filtration room built adjacent. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed beach house with sharks visible through the glass tunnel from above. Blue aquarium glow emanates from the center. Modern white exterior lit warmly. Ocean waves in background. Tropical landscaping. Incredible fusion of architecture and marine life. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a street corner commercial lot. Sidewalk and parking. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Large cylindrical steel framework rising. Workers curving panels for the tube body. A semicircle awning frame at the bottom for the mustache logo entrance. Cap structure at top. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Pringles tube structure covered in red glossy panels. Yellow band at bottom with mustache-shaped entrance awning. Green cap structure on top houses HVAC. Product graphics being applied. Shelving visible inside through glass door. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed Pringles store — vibrant red tube with yellow band. Mustache entrance lit with LED. Green cap glows. Interior shelves stocked and lit. Neon OPEN sign. Parking spots painted. Eye-catching. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Foundation poured with glass tunnel channel. Acrylic panels craned in. Workers seal joints. Fixed drone. 8 seconds.",
-            "Rapid construction. Walls rise around tunnel. Roof completed. Water fills tunnel blue. House finished white. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Sharks swim in glowing blue tunnel. House glows warm. Ocean backdrop at dusk. Fixed angle. Breathtaking. 8 seconds.",
+            "Fast construction. Cylinder rises. Curved panels formed. Awning frame built. Fixed drone. 8 seconds.",
+            "Rapid construction. Red panels applied. Yellow band painted. Green cap placed. Graphics added. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Red tube vibrant. Mustache entrance glows. Neon sign on. Dusk lighting. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 19. Giant Headphones Pavilion ────────────────────────────────────────
+    # ─── 18. Dam → Bungee Platform ────────────────────────────────────────────
     {
-        "name": "Headphones Music Pavilion",
-        "hook": "He Built a GIANT Headphones Music Stage! 🎧🎶",
-        "title": "Building GIANT Headphones Music Stage! 🎧🔥",
-        "description": "The ultimate music venue — a stage shaped like massive headphones! The ear cups are performance areas with LED sound visualizers!",
-        "hashtags": "#shorts #headphones #music #construction #timelapse #stage #dj",
+        "name": "Dam to Bungee Platform",
+        "hook": "Abandoned Dam → Extreme BUNGEE Platform! 🪂",
+        "title": "He Turned an Abandoned Dam Into BUNGEE JUMPING! 🪂",
+        "description": "A decommissioned dam transformed into an extreme bungee jumping platform with glass observation deck and jump point!",
+        "hashtags": "#shorts #dam #bungee #extreme #transformation #adventure #adrenaline",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an open field area. Flat ground with grass. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Two circular foundation areas connected by a curved arch structure. Workers building the headband arch. Scaffolding around the ear cup foundations. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Headphones structure taking shape — two large circular ear cup stages with padded exterior texture. The curved headband arch connecting them at 8 meters high. Speaker grille pattern on inner walls. Sound equipment visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed headphones stage — RGB LED rings on both ear cups pulse with color. Sound waves visualized on inner grille panels. The headband arch has chasing lights. DJ booth in one ear cup, seating in the other. Fog effects. Epic music venue. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned concrete dam. Cracked spillway, dry reservoir, overgrown walls. Impressive height. Mountain canyon. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Dam face being reinforced. Workers building a steel platform extending over the edge. Glass floor sections being installed. Safety railing. Staircase to top. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Bungee platform taking shape — steel and glass platform jutting out from dam face. Jump point with harness station. Glass observation deck below. Safety nets. LED runway lights on the platform edge. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed bungee platform — steel structure gleams against canyon. Glass platform reflects sky. LED runway lights marking jump zone. A jumper mid-leap silhouetted against sunset. Canyon river below. Extreme and beautiful. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Two circular stages built. Arch headband structure rises connecting them. Scaffolding up. Fixed drone. 8 seconds.",
-            "Rapid construction. Ear cup panels applied. Speaker grille pattern cut. Sound equipment installed. Headband completed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. RGB LEDs pulse on ear cups. Sound visualizer animations. Chasing lights on headband. Fog rolls. Night magic. Fixed angle. 8 seconds.",
+            "Construction timelapse. Dam reinforced. Steel platform extends over edge. Glass floor installed. Fixed drone. 8 seconds.",
+            "Rapid construction. Jump point built. Safety harness station. LED lights installed. Observation deck glassed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Platform gleams at sunset. LED runway lights glow. Canyon below. Jumper silhouette. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 20. Rolex Watch Pool ─────────────────────────────────────────────────
+    # ─── 19. Octopus Restaurant ───────────────────────────────────────────────
     {
-        "name": "Rolex Watch Pool",
-        "hook": "He Built a ROLEX-Shaped Swimming Pool! ⌚💦",
-        "title": "Building a ROLEX Watch Pool! ⌚🏊",
-        "description": "Luxury meets swimming! A pool shaped like a Rolex Submariner with a rotating bezel hot tub and gold-tiled hour markers!",
-        "hashtags": "#shorts #rolex #luxury #pool #construction #timelapse #watches",
+        "name": "Octopus Restaurant",
+        "hook": "He Built an OCTOPUS Restaurant on the Water! 🐙🍽️",
+        "title": "Building an OCTOPUS Restaurant! 🐙🏗️",
+        "description": "A seafood restaurant shaped like a massive octopus sitting on the waterfront with tentacle-shaped dining extensions over the water!",
+        "hashtags": "#shorts #octopus #restaurant #seafood #construction #timelapse #ocean",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a luxury estate backyard. Manicured lawn, stone pathways. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Large circular excavation with an outer ring channel for the bezel. Workers building the dial area deeper. Hour marker positions staked. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Watch pool taking shape — circular main pool with raised bezel rim. Gold mosaic tiles at hour marker positions. Black dial-colored tiles in center area. Crown winder shaped hot tub at 3 o'clock position. Cyclops lens over date window. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed Rolex pool — green bezel rim lit with emerald LEDs. Gold hour markers glow. Black dial center with luminous hands pattern underwater. Crown hot tub bubbles. Luxury deck with loungers. Diamond-like stars above. Opulent paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a waterfront pier area. Wooden dock, calm bay water. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Dome-shaped central structure on pylons over water. Workers building 8 curved tentacle extensions radiating outward, supported by underwater pylons. Each tentacle curves differently. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Octopus structure covered — coral-red dome body with two large porthole windows as eyes. 8 tentacle dining extensions with suction cup details. Glass floors on tentacles to see water below. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed octopus restaurant — coral-red body glows warm. Tentacle dining rooms lit with lanterns. Porthole eyes glow yellow. Water reflects all lights. Boats docked nearby. Surreal seafood paradise. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction. Circular pool with outer bezel ring excavated. Workers build layers. Gold markers placed. Fixed drone. 8 seconds.",
-            "Rapid construction. Green bezel tiles applied. Gold hour markers installed. Black dial tiles laid. Crown hot tub built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Emerald bezel LEDs glow. Gold markers illuminate. Crown hot tub bubbles. Luxury dusk atmosphere. Fixed angle. 8 seconds.",
+            "Fast construction. Dome rises on pylons. 8 tentacles extend over water. Workers build curves. Fixed drone. 8 seconds.",
+            "Rapid construction. Red panels applied. Eyes installed. Suction cups added. Glass floors in tentacles. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Tentacles glow with lanterns. Eyes yellow. Water reflects. Dusk on the bay. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 21. Rocket Ship Playhouse ────────────────────────────────────────────
+    # ─── 20. Farm Silo → Spiral Library ───────────────────────────────────────
     {
-        "name": "Rocket Ship Playhouse",
-        "hook": "He Built a 10-Meter ROCKET SHIP in His Backyard! 🚀🏠",
-        "title": "Building a ROCKET SHIP Playhouse! 🚀✨",
-        "description": "3... 2... 1... Liftoff! A massive rocket-shaped playhouse with spiral slide, observation deck, and LED flame exhaust!",
-        "hashtags": "#shorts #rocket #space #playhouse #construction #timelapse #kids",
+        "name": "Silo to Spiral Library",
+        "hook": "Abandoned Farm Silo → Spiral LIBRARY Tower! 📚",
+        "title": "He Turned a Silo Into a SPIRAL LIBRARY! 📚",
+        "description": "An old grain silo transformed into a stunning spiral library with books lining the cylindrical walls floor to ceiling!",
+        "hashtags": "#shorts #silo #library #books #transformation #renovation #spiral",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a spacious backyard with green lawn. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cylindrical steel framework rising 10 meters tall. Workers on scaffolding welding sections. Nose cone frame at top. Fin structures at base. Concrete foundation. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Rocket structure covered in white and red panels. Nose cone completed. Circular windows along the body. Spiral slide wrapping around exterior. Three fin stabilizers at base. Door at ground level. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed rocket — white with red trim, stars painted on. Observation deck windows glow warm from inside. Spiral slide gleams. LED flame effect at exhaust nozzle flickers orange and red. American flag decal. Landscaped with astro-turf moon surface. Epic. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a rusted farm grain silo. Corroded metal, surrounding farmland. Concrete base cracking. Adjacent barn ruins. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Silo exterior being replaced with new panels. Inside: workers building a spiral wooden staircase along the cylinder wall. Book shelves being installed in spiral. Skylight cut in roof. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Library silo structure — fresh exterior with vertical window strips. Interior: spiral staircase winding 5 stories up lined with floor-to-ceiling bookshelves. Reading nooks at each level. Skylight at top floods light down. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed spiral library — warm light from skylight pours down through the spiral. Thousands of books lining walls. Reading nooks glow with desk lamps. Vertical windows cast light strips. Books and warmth. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction. Cylindrical tower rises. Scaffolding and welding. Nose cone lifted by crane. Fins welded at base. Fixed drone. 8 seconds.",
-            "Rapid construction. White panels applied. Red trim painted. Spiral slide installed. Windows cut. Fins finished. Fixed camera. 8 seconds.",
-            "Cinematic reveal. LED exhaust flames flicker. Windows glow. Slide gleams in dusk light. Stars appear above the rocket. Fixed angle. 8 seconds.",
+            "Construction timelapse. Silo restored. Spiral staircase built inside. Shelves installed around walls. Fixed drone. 8 seconds.",
+            "Rapid construction. Books shelved floor to ceiling. Skylight cut. Reading nooks furnished. Lamps placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Golden light streams through skylight down spiral. Books glow warm. Desk lamps twinkle. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 22. Diamond Ring Fountain ────────────────────────────────────────────
+    # ─── 21. Upside Down House ────────────────────────────────────────────────
     {
-        "name": "Diamond Ring Fountain",
-        "hook": "He Built a GIANT Diamond Ring Fountain! 💍💦",
-        "title": "Building a DIAMOND RING Fountain! 💎✨",
-        "description": "The most romantic fountain ever — a massive diamond engagement ring with water cascading from the diamond and LED-lit band!",
-        "hashtags": "#shorts #diamond #ring #fountain #construction #timelapse #luxury",
+        "name": "Upside Down House",
+        "hook": "He Built a House UPSIDE DOWN! 🙃🏠",
+        "title": "Building an UPSIDE DOWN House! 🙃🏗️",
+        "description": "A house built completely upside down — roof on the ground, foundation in the sky, inverted furniture inside!",
+        "hashtags": "#shorts #upsidedown #house #illusion #construction #timelapse #crazy",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a public park plaza with stone pavement. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Circular foundation poured for the ring base. A curved steel arch rising for the band. Workers welding the prong setting structure at the top for the diamond. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Ring structure nearly complete — polished silver-chrome panels on the band. Crystal glass diamond shape at top held in prong settings. Water pipes running through the band to the diamond. Basin pool around the base. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour. Completed diamond ring fountain — chrome band gleams. Crystal diamond refracts colored LED light creating rainbow projections. Water cascades from the diamond down the band into the circular pool. Underwater lights shimmer. Romantic paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a suburban lot with flat ground. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. An inverted roof structure sits on the ground as foundation. Walls rising upward but with windows and door frames placed upside down. Workers building the house in reverse orientation. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Upside down house nearly complete — pitched roof on ground, foundation slab visible at top. Windows, shutters, door all inverted. A chimney points down from the roof-ground. Garden and mailbox also upside down. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed upside down house — mind-bending perspective. Warm light from inverted windows. Front door is above eye level. Chimney in the ground. Garden fence points down. Visitors staring in disbelief. Viral optical illusion. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Circular base poured. Chrome arch band rises. Prong settings welded at top. Fixed drone. 8 seconds.",
-            "Rapid construction. Chrome panels applied to band. Crystal diamond mounted in prongs. Water pipes installed. Basin tiled. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Water cascades from diamond. Rainbow LED refractions. Chrome band gleams. Blue hour magic. Fixed angle. 8 seconds.",
+            "Fast construction. Roof placed on ground. Walls rise inverted. Everything built upside down. Fixed drone. 8 seconds.",
+            "Rapid construction. Inverted windows, shutters, door installed. Chimney points down. Garden inverted. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Inverted house glows at dusk. Mind-bending perspective. Visitors stare. Optical illusion magic. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 23. Sushi Restaurant ─────────────────────────────────────────────────
+    # ─── 22. Pier → Floating Cinema ───────────────────────────────────────────
     {
-        "name": "Giant Sushi Roll Restaurant",
-        "hook": "He Built a Restaurant Inside a GIANT Sushi Roll! 🍣🏠",
-        "title": "Building a GIANT SUSHI Restaurant! 🍣🔥",
-        "description": "Itadakimasu! A restaurant shaped like a massive maki sushi roll with nori walls, rice texture exterior, and salmon-colored roof!",
-        "hashtags": "#shorts #sushi #restaurant #japan #construction #timelapse #food",
+        "name": "Pier to Floating Cinema",
+        "hook": "Abandoned Pier → Floating CINEMA on Water! 🎬🌊",
+        "title": "He Built a FLOATING Cinema on an Old Pier! 🎬",
+        "description": "An abandoned wooden pier transformed into a floating outdoor cinema with a massive screen over the water!",
+        "hashtags": "#shorts #pier #cinema #floating #transformation #movies #outdoor",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a commercial street corner lot. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cylindrical framework rising horizontally. Workers building the roll shape. Dark green exterior panels (nori seaweed) being attached to the lower half. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Sushi roll structure taking shape — dark green nori wrap exterior on bottom half. White rice-textured upper panels. Cross-section entrance reveals colorful interior zones (salmon pink, avocado green, cucumber). Chopstick-shaped sign posts. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed sushi roll restaurant — nori exterior gleams. Cross-section entrance glows with warm light showing colorful interior. Giant chopsticks sign. Japanese lanterns along walkway. Bonsai trees flanking entrance. Appetizing and incredible. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned wooden pier. Broken planks, collapsed sections, rusted bollards. Calm harbor water. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Pier rebuilt with new hardwood decking. Workers erecting a large screen frame over the water at the end. Floating pontoon seating platforms being anchored. Electrical being run. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Floating cinema taking shape — massive inflatable screen at pier end over water. Rows of lounger seating on floating decks. String lights along new railings. Concession stand on the pier. Speakers on posts. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed floating cinema — massive screen playing vivid movie over dark water. Guests on floating loungers watching. String lights reflect in water. Concession stand glowing. Stars above. Moonlit harbor. Magical outdoor cinema. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Cylindrical horizontal framework built. Dark nori panels applied. Workers shape the roll. Fixed drone. 8 seconds.",
-            "Rapid construction. Rice texture panels on top. Colorful interior sections built. Chopstick signs erected. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Cross-section entrance glows warm. Japanese lanterns light up. Bonsai trees placed. Golden hour glow. Fixed angle. 8 seconds.",
+            "Construction timelapse. Pier rebuilt. Screen frame erected. Floating platforms anchored. Fixed drone. 8 seconds.",
+            "Rapid construction. Screen inflated. Loungers placed. String lights hung. Speakers mounted. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Movie plays on screen. Lights reflect on water. Stars above. Night cinema magic. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 24. Piano Pool ───────────────────────────────────────────────────────
+    # ─── 23. Honeycomb Hotel ──────────────────────────────────────────────────
     {
-        "name": "Grand Piano Pool",
-        "hook": "He Built a GRAND PIANO Swimming Pool! 🎹💦",
-        "title": "Building a PIANO-Shaped Pool! 🎹🏊",
-        "description": "Music meets water! A grand piano-shaped pool with black and white key steps, string-pattern lane dividers, and a lid-shaped sun shade!",
-        "hashtags": "#shorts #piano #music #pool #construction #timelapse #luxury",
+        "name": "Honeycomb Hotel",
+        "hook": "He Built a HONEYCOMB Hotel — Each Room is a Cell! 🐝🍯",
+        "title": "Building a HONEYCOMB Hotel! 🐝🏗️",
+        "description": "A boutique hotel shaped like a giant honeycomb with hexagonal rooms, golden exterior, and a rooftop honey bar!",
+        "hashtags": "#shorts #honeycomb #hotel #bee #construction #timelapse #unique",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an estate backyard with a stone terrace. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Grand piano shaped excavation — the curved body for the main pool, the keyboard section stepped for a wading area. Workers refining the distinctive piano curves. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Piano pool structure complete — glossy black tiles on the body, alternating black and white steps at the keyboard end. Gold string-pattern lights running lengthwise. A curved shade structure mimicking an open piano lid. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed piano pool — glossy black body reflects the sky. White and black key steps cascade into the water. Gold string lights glow underwater. Piano lid shade has ambient lighting. Classical music notes projected in light on the deck. Elegant paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a green hillside with wildflowers. Rolling meadow. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Steel hexagonal cells being stacked and welded in honeycomb pattern — 3 stories, each cell a room. Crane positions top cells. Workers inside finishing interiors. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Honeycomb hotel structure — golden amber panels on hexagonal cells. Each cell has a round porthole window. Shared corridors between cells. Rooftop terrace being built. Bee wing-shaped awning over entrance. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed honeycomb hotel — golden amber cells glow warm. Round windows lit from inside. Rooftop honey bar with golden canopy. Wildflower garden surrounds. Perfectly organic architecture merging with nature. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction. Piano curve excavated. Keyboard steps formed. Workers shape the distinctive outline. Fixed drone. 8 seconds.",
-            "Rapid construction. Black tiles applied to body. White key steps installed. Gold strings placed. Lid shade erected. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Water fills the piano. Gold strings glow. Key steps shimmer. Lid shade illuminates. Dusk elegance. Fixed angle. 8 seconds.",
+            "Fast construction. Hexagonal cells stacked by crane. Honeycomb pattern forms. Workers inside. Fixed drone. 8 seconds.",
+            "Rapid construction. Golden panels applied. Porthole windows installed. Rooftop bar built. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Golden cells glow warm. Portholes lit. Wildflowers surround. Golden hour perfection. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 25. Submarine Underwater Room ────────────────────────────────────────
+    # ─── 24. Stadium → Festival Venue ─────────────────────────────────────────
     {
-        "name": "Submarine Underwater Room",
-        "hook": "He Built an UNDERWATER Submarine Room! 🚢🌊",
-        "title": "Building an UNDERWATER Submarine Room! 🚢💦",
-        "description": "Dive deep! An underground room shaped like a submarine hull with porthole windows looking into a surrounding aquarium!",
-        "hashtags": "#shorts #submarine #underwater #construction #timelapse #ocean #room",
+        "name": "Stadium to Festival",
+        "hook": "Abandoned Stadium → Music FESTIVAL Venue! 🎪🎶",
+        "title": "He Turned a Stadium Into a FESTIVAL Venue! 🎪",
+        "description": "An abandoned sports stadium transformed into a permanent music festival venue with multiple stages, art installations, and food courts!",
+        "hashtags": "#shorts #stadium #festival #music #transformation #concert #epic",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a backyard with a digging site marked out. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Deep rectangular excavation. Workers building a submarine hull-shaped steel frame inside the pit. Waterproofing membrane being applied. Drainage pipes visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Submarine hull installed underground — grey military-style exterior with rivets. Round porthole windows. Periscope tube rising above ground. Surrounding pit being filled with water and aquarium glass walls. Hatch entrance on top. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed submarine room — periscope rises above a glass-enclosed water feature. Through the glass you can see the submarine hull with glowing porthole windows. Fish swimming in the surrounding water. Hatch entrance lit. Above ground looks like a mini naval base. Incredible engineering. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned sports stadium. Overgrown pitch, broken seats, graffiti, collapsed press box. Concrete crumbling. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Stadium being renovated. Workers building a main stage at one end. Art installation frames going up on the pitch. Food court structures along the sides. Seating areas cleared and painted. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Festival venue taking shape — massive main stage with LED wall and speaker arrays. Colorful art installations on the pitch. Food court containers along sides. VIP area with couches. Entrance arch. Ferris wheel in one corner. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at night. Completed festival venue — main stage blazing with LED colors. Crowd fills the pitch. Ferris wheel lit with rainbow lights. Food courts glow warm. Laser beams cut the sky. Art installations pulse with light. Electric atmosphere. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Deep pit dug. Submarine hull frame assembled inside. Waterproofing applied. Fixed drone. 8 seconds.",
-            "Rapid construction. Grey hull panels attached. Portholes installed. Periscope tube rises. Aquarium glass walls placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Portholes glow blue underwater. Fish swim around hull. Periscope rises above. Hatch illuminated. Fixed angle. 8 seconds.",
+            "Construction timelapse. Stadium cleared. Stage built. Art installed. Food courts constructed. Fixed drone. 8 seconds.",
+            "Rapid construction. LED wall mounted. Ferris wheel assembled. VIP built. Entrance arch raised. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Stage blazes color. Ferris wheel rainbow. Lasers cut sky. Crowd fills pitch. Night energy. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 26. Baseball Glove Dugout ────────────────────────────────────────────
+    # ─── 25. Pencil Art School ────────────────────────────────────────────────
     {
-        "name": "Baseball Glove Dugout",
-        "hook": "He Built a GIANT Baseball Glove Dugout! ⚾🧤",
-        "title": "Building a BASEBALL GLOVE Dugout! ⚾✨",
-        "description": "Play ball! A dugout shaped like a massive baseball glove catching a real-size baseball! Leather texture exterior and stitching details!",
-        "hashtags": "#shorts #baseball #sports #construction #timelapse #dugout #mlb",
+        "name": "Pencil Art School",
+        "hook": "He Built a PENCIL-Shaped Art School! ✏️🎨",
+        "title": "Building a PENCIL-Shaped Art School! ✏️🏗️",
+        "description": "An art school shaped like a massive pencil laid on its side with a sharpened tip entrance and eraser-end gallery!",
+        "hashtags": "#shorts #pencil #art #school #construction #timelapse #creative",
         "frame_prompts": [
-            f"{DRONE_VIEW} at the edge of a baseball field diamond. Green grass, dirt infield visible. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Curved framework rising in the shape of an open baseball glove. Workers bending steel ribs to form the finger sections. A large sphere framework for the baseball in the pocket area. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Glove structure covered in brown leather-textured panels. Visible stitching lines. The baseball in the pocket is a white dome with red stitching. Dugout seating inside the palm area. Webbing between fingers is mesh netting. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed baseball glove dugout — rich brown leather texture gleaming. Red stitching details perfect. White baseball dome glows with interior lights. Players sitting in the palm area dugout. American flag nearby. Field lights warming up. Classic Americana. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an educational campus area. Flat ground, paved paths. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Long hexagonal steel framework laid horizontally — pencil body shape. Workers building the conical tip section and cylindrical eraser end. Scaffold around. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Pencil building 80% complete — yellow hexagonal body panels with black band stripe. Conical wood-colored tip with graphite-grey point as entrance. Pink eraser cylinder end housing gallery. Windows along body. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed pencil art school — vibrant yellow body. Graphite tip entrance lit warm. Pink eraser gallery glowing. Black band has the school name. Interior lit showing art studios. Colorful landscaping with paintbrush benches. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Curved finger framework rises. Steel bent into glove shape. Baseball sphere framework built. Fixed drone. 8 seconds.",
-            "Rapid construction. Brown leather panels applied. Stitching details added. White baseball dome finished. Dugout seating installed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Leather glove gleams in golden light. Baseball dome glows. Dugout lit warmly. Field lights turn on. Fixed angle. 8 seconds.",
+            "Fast construction. Hexagonal body frame laid. Tip cone built. Eraser cylinder at end. Fixed drone. 8 seconds.",
+            "Rapid construction. Yellow panels applied. Graphite tip finished. Pink eraser gallery. Windows cut. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Yellow body vibrant. Tip entrance warm. Eraser glows pink. Art studios lit. Dusk. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 27. Gaming Controller Pool ───────────────────────────────────────────
+    # ─── 26. Fire Tower → Mountain Airbnb ─────────────────────────────────────
     {
-        "name": "Gaming Controller Pool",
-        "hook": "He Built a GIANT Xbox Controller Pool! 🎮💦",
-        "title": "Building a GAMING CONTROLLER Pool! 🎮🏊",
-        "description": "Game on! A swimming pool shaped like a massive gaming controller with button-shaped hot tubs and joystick fountains!",
-        "hashtags": "#shorts #gaming #xbox #pool #construction #timelapse #gamer",
+        "name": "Fire Tower Airbnb",
+        "hook": "Abandoned Fire Tower → Mountain TOP Airbnb! 🏔️🔥",
+        "title": "He Turned a Fire Tower Into an AIRBNB! 🏔️",
+        "description": "A decommissioned forest fire lookout tower transformed into a luxury mountain Airbnb with panoramic views!",
+        "hashtags": "#shorts #firetower #airbnb #mountain #transformation #luxury #views",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a flat backyard with plenty of space. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Controller-shaped excavation — main body pool with bumper grip extensions. Four circular pits for buttons at right end. Two deeper circles for joystick areas. Workers refining shapes. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Controller pool taking shape — dark grey tiles on the body. Four button circles tiled in A(green) B(red) X(blue) Y(yellow). Joystick areas have rotating fountain mechanisms. D-pad shaped wading area. Xbox logo center. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed controller pool — body lit with dark ambient glow. A/B/X/Y buttons are illuminated hot tubs in their signature colors. Joystick fountains spin water in circles. Xbox logo glows green center. RGB LED strips outline everything. Ultimate gamer paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an old wooden fire lookout tower on a mountain peak. Weathered timber, broken windows, overgrown stairs. Pine forest below. Mountain panorama. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Tower structure being reinforced. New timber replacing rotted sections. Windows being upgraded to double-pane glass. Interior being insulated. New stairs with proper railing. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Airbnb tower taking shape — fresh stained timber. Large panoramic windows on all sides. Cozy interior visible — bed, mini kitchen, wood stove. Wrap-around deck restored. Solar panel on roof. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at sunset over mountains. Completed fire tower Airbnb — warm timber glows. Panoramic windows reflect mountain sunset. Warm interior with fireplace glow. Deck has two chairs facing the view. Solar panel gleams. Pine forest carpet below. Ultimate mountain retreat. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Fast construction. Controller shape excavated. Button circles and joystick areas dug. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Grey tiles on body. Colored button tiles applied. Joystick mechanisms installed. Xbox logo placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Buttons glow their colors. Joystick fountains spin. Xbox logo green. RGB outlines. Night magic. Fixed angle. 8 seconds.",
+            "Construction timelapse. Tower reinforced. New timber replacing old. Windows upgraded. Stairs rebuilt. Fixed drone. 8 seconds.",
+            "Rapid construction. Interior insulated. Furniture placed. Wood stove installed. Deck restored. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Mountain sunset through windows. Fireplace glows. Two chairs on deck. Pine forest below. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 28. Whale Playground ─────────────────────────────────────────────────
+    # ─── 27. Mushroom Fairy Tale House ────────────────────────────────────────
     {
-        "name": "Blue Whale Playground",
-        "hook": "He Built a BLUE WHALE Playground for Kids! 🐳🎢",
-        "title": "Building a BLUE WHALE Playground! 🐋✨",
-        "description": "The ocean's gentle giant as the world's coolest playground! Kids slide through the whale's mouth and climb the tail fin!",
-        "hashtags": "#shorts #whale #playground #ocean #construction #timelapse #kids",
+        "name": "Mushroom House",
+        "hook": "He Built a MUSHROOM House From a Fairy Tale! 🍄🏡",
+        "title": "Building a MUSHROOM Fairy Tale House! 🍄",
+        "description": "A whimsical house shaped like a giant mushroom with a red-spotted cap roof and a cozy stem living space!",
+        "hashtags": "#shorts #mushroom #fairytale #house #construction #timelapse #fantasy",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a beachside park area. Sand and grass visible. Ocean in background. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Massive steel framework in whale shape — 15 meters long. Workers building the ribcage structure. Tail fin frame rises at one end. Mouth opening at the other. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Whale covered in blue textured panels — darker on top, lighter on belly. Baleen filter slide in the mouth. Blowhole climbing tower on top. Tail fin climbing wall. Flipper-shaped benches. Water spray features along the back. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed blue whale playground — majestic blue body gleams. Kids sliding through the mouth. Water sprays from the blowhole. Tail fin casting dramatic shadow. Ocean waves in background perfectly framing the scene. Magical marine playground. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a woodland clearing surrounded by oak trees. Mossy ground, dappled sunlight. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Cylindrical concrete stem structure rising 2 stories. Workers building the wide dome framework for the mushroom cap on top. Scaffolding surrounds. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Mushroom house nearly complete — white stem walls with small round windows and a hobbit-style arched door. Red dome cap roof with white polka dot patterns. Gills visible under the cap overhang. Stone pathway. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed mushroom house — white stem glows warm. Red cap with white spots vivid against green forest. Warm light from round windows. Fairy garden with tiny mushroom lights along stone path. Magical, whimsical perfection. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Whale ribcage framework rises. Tail fin welded. Workers shape the massive body. Fixed drone. 8 seconds.",
-            "Rapid construction. Blue panels cover the whale. Slide installed in mouth. Blowhole tower built. Water features added. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Water sprays from blowhole. Kids play on slides. Blue whale gleams in golden light. Ocean behind. Fixed angle. 8 seconds.",
+            "Fast construction. Cylindrical stem rises. Dome cap framework built on top. Fixed drone. 8 seconds.",
+            "Rapid construction. White walls painted. Red cap with white dots applied. Arched door hung. Stone path laid. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Red cap vivid. Warm glow from windows. Fairy lights along path. Golden hour forest magic. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 29. Drum Set Hot Tub ─────────────────────────────────────────────────
+    # ─── 28. Hospital → Wellness Center ───────────────────────────────────────
     {
-        "name": "Drum Set Hot Tubs",
-        "hook": "He Built HOT TUBS Shaped Like a Drum Set! 🥁💦",
-        "title": "Building DRUM SET Hot Tubs! 🥁🔥",
-        "description": "Rock and relax! A collection of hot tubs shaped like a complete drum kit — bass drum, toms, snare, and cymbal shower heads!",
-        "hashtags": "#shorts #drums #music #hottub #construction #timelapse #rockstar",
+        "name": "Hospital to Wellness",
+        "hook": "Abandoned Hospital → Luxury WELLNESS Center! 🏥→🧘",
+        "title": "He Turned a Hospital Into a WELLNESS Center! 🧘",
+        "description": "An abandoned hospital transformed into a luxury wellness center with yoga studios in former operating rooms and a rooftop meditation garden!",
+        "hashtags": "#shorts #hospital #wellness #spa #transformation #renovation #yoga",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a rooftop terrace of a modern building. Flat concrete deck. City skyline in background. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Multiple circular excavations on the rooftop in drum kit arrangement — one large (bass drum), two medium (rack toms), one medium (floor tom), one small (snare). Workers waterproofing. Cymbal-shaped structures on poles. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Drum kit hot tubs taking shape — bass drum (large red tub), rack toms (blue tubs), floor tom (green), snare (chrome). Drumstick-shaped water jets between tubs. Cymbal-shaped shower heads on tall poles. Chrome hardware connecting everything. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed drum set hot tubs — each drum glows its color from underwater LEDs. Steam rises from hot water. Cymbal showers spray water catching the light. Chrome hardware gleams. City skyline sparkles behind. Drumstick jets arc water between tubs. Rock star retreat. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned hospital building. Broken windows, overgrown courtyard, faded red cross sign. Multi-story concrete building deteriorating. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Hospital being gutted and renovated. Workers removing old fixtures. New bamboo flooring being installed. Large windows being cut. Rooftop being cleared for garden. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Wellness center taking shape — clean white walls with natural wood accents. Former wards now yoga halls with mirrors. Hydrotherapy pool in old basement. Rooftop garden with meditation pods. Bamboo and stone throughout. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed wellness center — serene white exterior. Rooftop meditation garden with zen stones and bamboo. Yoga practitioners visible through large windows. Hydrotherapy pool glows blue. Water features in courtyard. Tranquil paradise. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Multiple circular tubs dug on rooftop. Waterproofing applied. Cymbal poles erected. Fixed drone. 8 seconds.",
-            "Rapid construction. Colored drum panels applied. Chrome hardware installed. Drumstick jets positioned. Cymbal showers mounted. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Drums glow with color LEDs. Steam rises. Cymbal showers sparkle. City skyline behind. Night magic. Fixed angle. 8 seconds.",
+            "Construction timelapse. Hospital gutted. New floors installed. Windows enlarged. Rooftop cleared. Fixed drone. 8 seconds.",
+            "Rapid construction. Yoga halls finished. Pool built. Rooftop garden planted. Meditation pods placed. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Rooftop garden serene. Yoga through windows. Pool glows blue. Golden hour peace. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ─── 30. Volcano Hot Spring ───────────────────────────────────────────────
+    # ─── 29. Teapot Tea House ─────────────────────────────────────────────────
     {
-        "name": "Volcano Hot Spring Pool",
-        "hook": "He Built a VOLCANO with a Hot Spring INSIDE! 🌋💦",
-        "title": "Building a VOLCANO Hot Spring! 🌋🔥",
-        "description": "Nature's fury meets relaxation! A realistic volcano structure with a hot spring pool inside the crater and lava-flow water slides!",
-        "hashtags": "#shorts #volcano #hotspring #pool #construction #timelapse #nature",
+        "name": "Teapot Tea House",
+        "hook": "He Built a TEAPOT-Shaped Tea House! 🫖",
+        "title": "Building a TEAPOT Tea House! 🫖🏗️",
+        "description": "A charming tea house shaped like a giant ceramic teapot with a spout entrance canopy and lid-shaped rooftop terrace!",
+        "hashtags": "#shorts #teapot #teahouse #construction #timelapse #cozy #unique",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a resort-like backyard with tropical landscaping. Palm trees, stone pathways. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers building a conical mountain structure from stone and concrete. About 6 meters tall. Crater depression at top. Channels carved down the sides for lava slides. Pump room built inside. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Volcano structure rendered with realistic volcanic rock texture. Dark grey and brown. Orange-painted channels (lava flows) zigzag down sides forming water slides. Crater at top has a pool being tiled. Steam vents installed. Tropical plants growing on lower slopes. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed volcano — realistic craggy rock exterior. The crater pool steams with warm turquoise water. Orange LED lava flows cascade down the sides as water slides. Steam jets periodically erupt from vents. Tropical garden surrounds the base. Fire torches along pathways. A volcanic paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at a garden area with hedgerows and flower beds. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Round bulbous structure rising — the teapot body. Workers building the curved spout extension and handle arch on opposite sides. Scaffolding wraps around. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Teapot structure covered in cream ceramic-look panels. Handle is a decorative arch with seating underneath. Spout extends as an entrance canopy. Removable lid at top is a terrace. Round windows. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at golden hour. Completed teapot tea house — warm cream body. Spout entrance with guests entering. Handle arch with cozy bench. Lid terrace has outdoor seating. Round windows glow warm from tea room inside. Rose garden surrounds. English charm. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Stone volcano built layer by layer. Workers stack rocks. Crater forms at top. Channels carved. Fixed drone. 8 seconds.",
-            "Rapid construction. Rock texture panels applied. Lava channels painted orange. Crater pool tiled. Steam vents installed. Plants placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Crater steams turquoise. Orange lava slides cascade water. Steam erupts from vents. Fire torches flicker. Dusk magic. Fixed angle. 8 seconds.",
+            "Fast construction. Round body rises. Spout and handle formed. Lid built on top. Fixed drone. 8 seconds.",
+            "Rapid construction. Cream panels applied. Round windows cut. Interior furnished. Garden planted. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Teapot glows cream. Spout entrance inviting. Rose garden blooms. Golden hour warmth. Fixed angle. 8 seconds.",
         ],
     },
 
-    # ══════════════════════════════════════════════════════════════════════════
-    # ABANDONED TO LUXURY — Inspired by @rebornspacestv (376K, 212M views)
-    # Format: Ruined/abandoned space → excavation → construction → luxury reveal
-    # ══════════════════════════════════════════════════════════════════════════
-
-    # ─── 31. Abandoned Pool → Luxury Resort ──────────────────────────────────
+    # ─── 30. Submarine Base → Dive Center ─────────────────────────────────────
     {
-        "name": "Abandoned Pool to Luxury Resort",
-        "hook": "From ABANDONED to LUXURY in 24 seconds! 🏚️→🏊",
-        "title": "He Turned an ABANDONED Pool Into PARADISE! 🏊✨",
-        "description": "Watch this incredible transformation from a ruined, overgrown pool into an ultra-luxury resort pool with infinity edge and underwater lighting!",
-        "hashtags": "#shorts #abandoned #luxury #pool #transformation #renovation #satisfying",
+        "name": "Sub Base to Dive Center",
+        "hook": "Abandoned Submarine Base → SCUBA Diving Center! 🤿",
+        "title": "He Turned a Sub Base Into a DIVE CENTER! 🤿",
+        "description": "A Cold War submarine base transformed into a scuba diving center with underwater training pools in the old sub pens!",
+        "hashtags": "#shorts #submarine #diving #scuba #transformation #military #underwater",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned overgrown backyard. A cracked, empty swimming pool filled with debris, leaves, and green algae. Broken tiles, rusty ladder.  Weeds growing through concrete. Abandoned deck furniture tipped over. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers have cleared the debris. Excavator deepening the pool. Old tiles jackhammered out. Fresh concrete being poured for new walls. Rebar visible. Construction crew active. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Pool structure rebuilt — smooth infinity edge on one side. White marble tiles being installed. Underwater LED tracks visible. A jacuzzi section added. Modern wooden deck framing around. Plumbing complete. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed luxury resort pool — crystal turquoise water with infinity edge overlooking the garden. Underwater LED strips glow warm. Jacuzzi bubbles. Fire bowls on deck corners. Tropical plants, loungers with white cushions. From ruin to paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at an abandoned submarine pen — massive concrete bunker opening to water. Rusted blast doors, crumbling walkways, flooded sub berths. Cold War era. {LIGHTING} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Sub pens being renovated. Workers cleaning pools, reinforcing walls. New filtration systems. Underwater lighting being installed. Office spaces being built on upper catwalks. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW}. Dive center taking shape — crystal clear water in sub pens. Underwater LED lighting showing artificial reef structures. Training platforms at different depths. Equipment storage racks. Modern reception on upper level. Glass viewing windows. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{DRONE_VIEW} at dusk. Completed dive center — sub pen water glows turquoise from underwater LEDs. Artificial reefs visible below surface. Divers training with bubbles rising. Modern reception lit warm above. Historic concrete structure beautifully repurposed. {CONSISTENCY} {CAMERA_NOTE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers clear debris from abandoned pool. Excavator removes old concrete. Pool deepens. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. New concrete walls, marble tiles applied. Infinity edge built. LED tracks installed. Workers move fast. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool fills with turquoise water. LED lights glow. Fire bowls ignite. Infinity edge overflows. Golden hour magic. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 32. Ruined Basement → Underground Cinema ────────────────────────────
-    {
-        "name": "Basement to Underground Cinema",
-        "hook": "From FLOODED Basement to CINEMA ROOM! 🎬🍿",
-        "title": "He Turned a RUINED Basement Into a HOME CINEMA! 🎬✨",
-        "description": "From a dark, flooded basement to the ultimate underground home cinema with a 200-inch screen, recliner seats, and starlight ceiling!",
-        "hashtags": "#shorts #basement #cinema #hometheater #transformation #renovation #luxury",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a dark, flooded basement. Standing water on the concrete floor. Exposed pipes, peeling paint, mold on walls. A single bare bulb swinging. Debris and old boxes. Depressing and abandoned. {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Basement drained and partially demolished. Workers waterproofing walls with membrane. New concrete floor poured. Electrical conduits routed for screen and sound. Framing for stepped floor visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cinema room taking shape — dark acoustic panels on walls. A massive 200-inch screen frame mounted. Stepped platform for 3 rows of seating. Ceiling being fitted with fiber optic starlight panels. Sound equipment racks on side walls. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Completed home cinema — luxurious dark velvet walls with LED accent strips. Massive screen showing a vivid movie scene. Three rows of leather recliners with cupholders. Fiber optic ceiling creates a starfield. Ambient purple LED lighting. Popcorn machine glowing in the corner. Absolute luxury. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Workers pump water out, demolish old walls. Waterproofing applied. New floor poured. Fast motion. Fixed angle. 8 seconds.",
-            "Rapid construction. Acoustic panels installed. Screen mounted. Recliners placed. Starlight ceiling fitted. Workers move fast. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Screen powers on with vivid image. LED accents glow purple. Starlight ceiling twinkles. Recliners ready. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 33. Empty Rooftop → Sky Garden Pool ─────────────────────────────────
-    {
-        "name": "Rooftop to Sky Garden",
-        "hook": "He Turned an EMPTY Rooftop Into a SKY GARDEN! 🌿🏊",
-        "title": "From BORING Rooftop to SKY GARDEN Paradise! 🌿✨",
-        "description": "An empty concrete rooftop transformed into a stunning sky garden with a plunge pool, vertical garden walls, and a sunset lounge!",
-        "hashtags": "#shorts #rooftop #skygarden #pool #transformation #luxury #city",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a bare concrete rooftop. Grey, flat, empty. AC units and water tanks. No greenery. City skyline in background. Boring and utilitarian. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers installing raised planter beds and waterproof membrane. Small plunge pool excavation framed. Vertical garden framework on walls. Electrical and plumbing roughed in. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Sky garden taking shape — lush vertical green walls, wooden deck flooring, plunge pool tiled in dark stone tiles. Pergola frame with retractable shade. Built-in outdoor kitchen counter. Ambient lighting conduits. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at sunset. Completed sky garden paradise — lush vertical walls of tropical plants. Small plunge pool glows turquoise. Pergola with warm string lights. Outdoor kitchen with grill. Cozy lounge furniture. City skyline glowing in sunset behind. Breathtaking urban oasis. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Workers install planter beds. Pool frame built. Vertical garden mounted. Deck laid. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Plants fill vertical walls. Pool tiled. Pergola raised. Kitchen built. String lights hung. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool glows turquoise. String lights sparkle. Vertical garden lush green. Sunset skyline behind. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 34. Old Garage → Smart Home Studio ──────────────────────────────────
-    {
-        "name": "Garage to Smart Home Studio",
-        "hook": "From DIRTY Garage to SMART HOME! 🏠💡",
-        "title": "He Turned a MESSY Garage Into a SMART HOME! 🏠✨",
-        "description": "A cluttered, oil-stained garage transformed into a futuristic smart home studio with voice control, LED walls, and automated furniture!",
-        "hashtags": "#shorts #garage #smarthome #transformation #renovation #technology #luxury",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a cluttered two-car garage. Oil-stained concrete floor. Rusty shelves with junk. Old workbench covered in tools. Spider webs. A broken garage door. Messy and forgotten. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Garage cleared out. Workers installing insulation in walls. New concrete floor poured smooth. Electrical panels upgraded. Smart home wiring conduits running everywhere — speakers, screens, sensors. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Smart home studio taking shape — clean white walls with embedded LED strip channels. A Murphy bed folding unit against one wall. Drop-down projector and screen. Motorized storage cabinets. Kitchen nook with smart appliances. Polished concrete floor with radiant heating. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour. Completed smart home — LED wall strips glow in customizable colors. Murphy bed is stowed away revealing a living room. Projector displays a large screen. Voice-activated lights transition colors. Kitchen appliances gleam. Minimalist and futuristic. The garage door is now a modern glass wall. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Garage cleared. Insulation, wiring, and smart conduits installed. Floor poured. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. White walls finished. Murphy bed installed. Projector mounted. Smart appliances placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. LED walls glow colors. Projector activates. Glass wall reveals blue hour sky. Futuristic smart home. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 35. Backyard → Japanese Zen Garden ──────────────────────────────────
-    {
-        "name": "Backyard to Zen Garden",
-        "hook": "OVERGROWN Backyard → JAPANESE Zen Garden! 🎋🪷",
-        "title": "From JUNGLE Backyard to ZEN GARDEN Paradise! 🎋✨",
-        "description": "An overgrown, weedy backyard transformed into a serene Japanese zen garden with koi pond, bamboo water feature, and stone pathways!",
-        "hashtags": "#shorts #zengarden #japanese #backyard #transformation #peaceful #satisfying",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a neglected overgrown backyard. Knee-high weeds, dead grass patches, fallen tree branches. A broken old fence. Scattered trash. Wild and unkempt. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Ground cleared completely. Workers excavating a koi pond shape. Gravel being spread and raked. Large boulders being positioned. Bamboo screening installed along the perimeter. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Zen garden 80% complete — raked white gravel with concentric circle patterns. Natural stone stepping path. Koi pond with waterfall rocks. Bamboo water feature (shishi-odoshi). Small red bridge over pond. Japanese maple trees planted. Wooden bench area. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed Japanese zen garden — perfectly raked white gravel circles. Koi fish visible in crystal clear pond. Bamboo water feature clicks rhythmically. Red bridge reflects in water. Japanese lanterns glow softly along the stone path. Cherry blossom tree petals on the ground. Absolute serenity. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Overgrown weeds cleared. Gravel spread. Koi pond excavated. Boulders positioned. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. White gravel raked in circles. Stone path laid. Red bridge built. Trees planted. Lanterns placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Koi swim in clear pond. Bamboo feature clicks. Lanterns glow. Cherry blossoms float. Golden serenity. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 36. Abandoned Warehouse → Loft Apartment ────────────────────────────
-    {
-        "name": "Warehouse to Luxury Loft",
-        "hook": "ABANDONED Warehouse → $2M LOFT! 🏚️→🏠",
-        "title": "From ABANDONED Warehouse to LUXURY LOFT! 🏗️✨",
-        "description": "A decaying industrial warehouse transformed into a stunning luxury loft apartment with exposed brick, mezzanine bedroom, and floor-to-ceiling windows!",
-        "hashtags": "#shorts #warehouse #loft #luxury #transformation #renovation #architecture",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned industrial warehouse. Broken windows, graffiti on walls, rusted metal roof. Pigeons nesting. Weeds growing through cracked floor. Dark and eerie interior visible. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Warehouse being gutted. New steel beams reinforcing structure. Floor-to-ceiling window frames installed. Mezzanine floor framing in progress. Exposed brick walls cleaned and sealed. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Loft taking shape — open plan living with exposed brick walls. Polished concrete floors. Industrial-style kitchen island. Mezzanine bedroom with glass railings. Spiral staircase. Large windows flooding light in. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour. Completed luxury loft — warm ambient lighting. Exposed brick glows in candlelight. Floor-to-ceiling windows reflect city lights. Mezzanine bedroom cozy with soft lighting. Designer furniture. Art on walls. Potted plants. Industrial meets luxury perfection. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Warehouse gutted. Steel beams installed. Windows framed. Mezzanine built. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Brick cleaned. Concrete polished. Kitchen installed. Staircase built. Furniture placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Warm lights glow. City reflects in windows. Mezzanine cozy. Brick and steel harmony. Blue hour. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 37. Muddy Lot → Luxury Outdoor Kitchen ─────────────────────────────
-    {
-        "name": "Mud Lot to Outdoor Kitchen",
-        "hook": "From MUD PIT to LUXURY Outdoor Kitchen! 🍳🔥",
-        "title": "He Turned a MUD LOT Into an EPIC Outdoor Kitchen! 🍳✨",
-        "description": "A muddy empty lot transformed into the ultimate outdoor kitchen with stone pizza oven, grill station, bar seating, and a fire pit!",
-        "hashtags": "#shorts #outdoorkitchen #bbq #transformation #renovation #luxury #cooking",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a bare muddy lot. Puddles, tire tracks in mud, no grass. A pile of old bricks. Flat and depressing. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers laying stone foundation. Post holes for pergola. Pizza oven dome being built with firebricks. Grill counter framework rising. Gas and water lines being run. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Outdoor kitchen taking shape — natural stone countertops with built-in gas grill and side burner. Brick pizza oven dome completed. U-shaped bar with stone base and teak bar top. Pergola frame up. Fire pit circle dug. Stone paver flooring laid. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed outdoor kitchen — warm glow from pizza oven fire. Gas grill ignited. Bar stools along teak counter. String lights under pergola. Fire pit crackling in center of seating area. Stone pavers gleam. Potted herbs on counter. Ultimate hosting setup. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Foundation laid. Pizza oven dome rises brick by brick. Grill counter framed. Fixed drone. 8 seconds.",
-            "Rapid construction. Stone counters placed. Pergola built. Fire pit dug. Bar stools placed. Pavers laid. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pizza oven fire glows. Grill flames. String lights sparkle. Fire pit crackles. Dusk warmth. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 38. Broken Shed → Cozy Tiny Home ────────────────────────────────────
-    {
-        "name": "Shed to Cozy Tiny Home",
-        "hook": "BROKEN Shed → COZY Tiny Home! 🏚️→🏡",
-        "title": "He Turned a BROKEN SHED Into a Tiny Home! 🏡✨",
-        "description": "A collapsing garden shed transformed into a charming tiny home with a loft bed, mini kitchen, and a covered porch!",
-        "hashtags": "#shorts #tinyhouse #shed #transformation #renovation #cozy #diy",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a dilapidated garden shed. Rotting wood panels, sagging roof, door hanging off hinges. Overgrown ivy climbing up. Rusty tools scattered around. Too small to even enter. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Shed demolished. New foundation poured slightly larger. Workers framing walls with treated lumber. Roof trusses going up. Everything new and sturdy. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Tiny home structure nearly complete — cedar shake exterior. A covered front porch with railing. Bay window on one side. Small chimney pipe. Interior visible through windows — loft bed platform, mini kitchen cabinetry. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed tiny home — warm cedar exterior with white trim. Covered porch with two chairs and a lantern. Bay window glows warm from interior. Smoke wisps from chimney. Flower boxes under windows. Stone pathway leading to it. String lights on porch. Fairy-tale cottage beauty. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Old shed demolished. New foundation and walls rise. Roof trusses up. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Cedar panels applied. Porch built. Windows installed. Interior visible — loft and kitchen done. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Porch light glows. Smoke from chimney. String lights sparkle. Flower boxes bloom. Golden hour fairy tale. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 39. Cracked Patio → Luxury Lounge ───────────────────────────────────
-    {
-        "name": "Patio to Luxury Lounge",
-        "hook": "CRACKED Patio → LUXURY Lounge Area! 👑✨",
-        "title": "From CRACKED PATIO to LUXURY Lounge! 👑🔥",
-        "description": "A crumbling concrete patio transformed into a luxury outdoor lounge with L-shaped sofa, fire table, water feature, and mood lighting!",
-        "hashtags": "#shorts #patio #luxury #lounge #transformation #renovation #outdoor",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a cracked concrete patio. Large cracks with weeds growing through. Faded, stained concrete. Rusty patio furniture. A dead potted plant. Adjacent to house. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers jackhammering old concrete. New gravel base being leveled. Drainage system installed. Large format tile layout marked. Electrical conduits for lighting. Water supply for feature. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Luxury lounge taking shape — large format dark stone tiles. L-shaped built-in concrete bench with waterproof cushion slots. Fire table in center. Linear water feature along one wall. Planters with ornamental grasses. Step lighting installed. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed luxury lounge — dark tiles gleam. L-shaped sofa with plush white cushions. Fire table dancing with orange flame. Water feature cascading with LED blue glow. Step lights create pathway. Ornamental grasses sway. Wine glasses on fire table. Premium outdoor living. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Old concrete demolished. New base leveled. Tiles laid in pattern. Fire table base built. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Dark tiles placed. Bench built. Water feature installed. Planters filled. Step lights wired. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Fire table ignites. Water feature glows blue. Step lights guide path. White cushions placed. Dusk luxury. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 40. Forgotten Courtyard → Secret Garden ─────────────────────────────
-    {
-        "name": "Courtyard to Secret Garden",
-        "hook": "FORGOTTEN Courtyard → SECRET GARDEN! 🌸🗝️",
-        "title": "From ABANDONED Courtyard to SECRET GARDEN! 🌸✨",
-        "description": "A forgotten, weed-covered courtyard transformed into a magical secret garden with fountain, climbing roses, and fairy lights!",
-        "hashtags": "#shorts #garden #secretgarden #courtyard #transformation #magical #flowers",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a neglected enclosed courtyard. High walls covered in dead ivy. Cracked stone floor strewn with debris. A broken birdbath in the center. Rusty iron gate. Everything grey and lifeless. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Workers repairing stone floor. Old birdbath removed, new fountain base being built. Walls cleaned, trellis structures mounted. Garden beds excavated. Iron gate restored and repainted. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Secret garden forming — restored stone pathways with moss growing between. Central tiered fountain with running water. Climbing roses on trellises cover the walls. Lavender beds, boxwood hedges. Iron gate painted glossy black. Archway covered in wisteria. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed secret garden — roses climb the walls in full bloom. Tiered fountain sparkles. Fairy lights woven through the wisteria archway. Lavender and jasmine scent-implied by lush growth. Butterflies visible. Iron gate inviting. Cobblestone path glows. Enchanted paradise. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Dead ivy removed. Walls cleaned. Fountain base built. Trellis mounted. Garden beds dug. Fixed drone. 8 seconds.",
-            "Rapid construction. Stone paths laid. Roses planted on trellis. Fountain tiers stacked. Hedges placed. Archway built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Fountain sparkles. Roses bloom on walls. Fairy lights glow. Butterflies flutter. Golden garden magic. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ═══════════════════════════════════════════════════════════════════════════
-    # "ABANDONED TO LUXURY" CONCEPTS — Inspired by @rebornspacestv (376K, 212M views)
-    # Hook: ruined/abandoned space → dramatic renovation → luxury reveal
-    # ═══════════════════════════════════════════════════════════════════════════
-
-    # ─── A1. Abandoned Pool → Resort Paradise ─────────────────────────────────
-    {
-        "name": "Abandoned Pool to Resort Paradise",
-        "hook": "He Turned an ABANDONED Pool Into Paradise! 🏊✨",
-        "title": "From ABANDONED Pool to LUXURY Resort! 🏚️→🏊",
-        "description": "This abandoned, cracked pool was transformed into an ultra-luxury resort-style oasis with infinity edges and LED lighting!",
-        "hashtags": "#shorts #abandoned #pool #transformation #luxury #renovation #satisfying",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a neglected backyard. OLD abandoned swimming pool filled with green algae water, cracked concrete deck, dead leaves everywhere, broken fence, overgrown weeds. Rusty pool ladder. Faded and peeling paint. Depressing atmosphere. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. The pool has been drained and demolished. Workers jackhammering cracked concrete. New deeper excavation in progress. Old deck torn up. Construction equipment, orange cones, pipes laid out. Fresh rebar framework visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. New infinity-edge pool 70% complete. Smooth premium tiles being installed — dark slate blue. LED strip channels cut into deck. Wooden deck framing with IPE wood planks. Modern lounge platform taking shape. Built-in jacuzzi corner. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour/dusk. COMPLETED luxury resort pool. Crystal clear turquoise water. Infinity edge with waterfall. LED strips glow blue along edges. IPE wood deck with modern loungers. Fire pit table nearby. Tropical plants and palm trees. Pool bar with stools. Absolutely stunning transformation. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Demolition timelapse. Green algae water pumped out. Workers jackhammer cracked concrete. Old deck ripped up. Deep excavation begins. Fixed drone. 8 seconds.",
-            "Rapid construction. New pool walls built. Tiles installed. Deck planks laid. Jacuzzi formed. LED channels wired. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool fills with sparkling water. Infinity edge flows. LEDs glow blue. Fire pit ignites. Palm trees sway. Sunset paradise. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A2. Ruined Basement → Underground Cinema ─────────────────────────────
-    {
-        "name": "Ruined Basement to Underground Cinema",
-        "hook": "From RUINED Basement to Underground Cinema! 🎬🍿",
-        "title": "Abandoned Basement → Private CINEMA Theater! 🎬",
-        "description": "A flooded, moldy basement was completely gutted and transformed into a private underground cinema with recliner seats and a massive screen!",
-        "hashtags": "#shorts #basement #cinema #transformation #renovation #luxury #hometheater",
-        "frame_prompts": [
-            f"{DRONE_VIEW} looking down into an open basement through a removed floor section. ABANDONED basement — water puddles on cracked floor, exposed pipes hanging, mold on concrete walls, old cardboard boxes rotting, bare flickering lightbulb, cobwebs everywhere. Dark and gloomy. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Basement gutted — walls stripped, new framing and insulation installed. Waterproofing membrane on floor. Electrician running cable. Fresh drywall being mounted. Ceiling joists reinforced. Stadium-style floor risers being built. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cinema taking shape — massive 150-inch screen frame mounted on wall. 3 rows of recliner seats being placed on risers. Dark acoustic panels on walls. Star ceiling fiber optics being installed. Projector bracket on ceiling. Carpet down. Popcorn bar counter framed. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. COMPLETED private cinema — starlight ceiling glows. Movie playing on giant screen. Red leather recliners in 3 rows. LED strip accent lighting in purple and blue. Popcorn bar with professional machine. Acoustic wall panels with subtle LED backlighting. Luxurious and cozy. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Demolition timelapse. Water pumped out. Mold-covered walls stripped. Pipes replaced. Waterproofing applied. Workers build risers. Fixed angle. 8 seconds.",
-            "Construction timelapse. Acoustic panels mounted. Screen frame installed. Recliner seats placed in rows. Carpet laid. Star ceiling fibers threaded. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Star ceiling ignites. Movie starts playing on screen. LED accent lights glow. Recliners recline. Popcorn machine pops. Ultimate luxury. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A3. Empty Rooftop → Sky Garden Paradise ──────────────────────────────
-    {
-        "name": "Empty Rooftop to Sky Garden",
-        "hook": "He Transformed a BARE Rooftop Into a Sky Garden! 🌿☁️",
-        "title": "Empty Rooftop → LUXURY Sky Garden With Pool! 🌿",
-        "description": "A boring concrete rooftop turned into a breathtaking sky garden with a plunge pool, living walls, and outdoor kitchen!",
-        "hashtags": "#shorts #rooftop #garden #transformation #luxury #design #skygarden",
-        "frame_prompts": [
-            f"{DRONE_VIEW} of a flat bare concrete rooftop of a building. Empty gray concrete, HVAC units, exposed pipes, scattered debris, puddles of rainwater, pigeon droppings, no railing. Ugly and neglected. City skyline in background. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Rooftop construction started. Wooden deck frame being built. Plunge pool excavation (rooftop reinforced). Planter boxes being constructed along edges. Outdoor kitchen foundation. Glass railing posts installed. Workers busy. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Garden beds filled with soil. Plunge pool tiled. Outdoor kitchen with built-in grill and bar counter. IPE deck 80% laid. Living green wall panels mounted. Modern fire pit area. String light poles erected. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour/dusk. COMPLETED sky garden paradise. Plunge pool with turquoise water, city views. Living walls lush and green. Outdoor kitchen operational. String lights glow. Fire pit flames dance. Plants everywhere — ferns, palms, bamboo. Glass railings reflect sunset. Stunning oasis above the city. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Concrete cleaned. Deck frame built. Pool reinforcement. Planter construction. Glass posts installed. Fixed drone. 8 seconds.",
-            "Rapid build. Deck planks laid. Pool tiles. Kitchen counter built. Green wall panels. Fire pit assembled. String lights hung. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pool fills. Plants grow lush. Kitchen fires up. String lights glow at sunset. City skyline backdrop. Breathtaking. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A4. Old Garage → Modern Dream Kitchen ────────────────────────────────
-    {
-        "name": "Old Garage to Dream Kitchen",
-        "hook": "From RUSTY Garage to Luxury Dream Kitchen! 🍳✨",
-        "title": "Rusty Old Garage → Modern DREAM Kitchen! 🍳",
-        "description": "A rusty old garage filled with junk was completely transformed into a stunning modern kitchen with marble island and smart appliances!",
-        "hashtags": "#shorts #garage #kitchen #transformation #renovation #luxury #modern",
-        "frame_prompts": [
-            f"{DRONE_VIEW} looking into an open garage. OLD rusty garage — oil stains on concrete floor, rusted tools hanging, broken shelving, old paint cans, cobwebs, single flickering fluorescent light, cracked walls, junk everywhere. Dirty windows. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Garage gutted — junk removed, walls stripped. New framing for kitchen layout. Plumbing rough-in for island sink. Electrical conduit running. Subfloor leveled. Window openings enlarged for natural light. Workers framing island base. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Kitchen 80% done — white marble waterfall island installed. Matte black cabinets mounted. Large format tile floor laid. Professional range and hood installed. Pendant lights hung. Wine fridge built into island. Backsplash being tiled. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. COMPLETED luxury kitchen — gleaming marble island with waterfall edges. Matte black cabinetry. Gold hardware. Professional Wolf range. Pendant lights glow warm. Wine fridge stocked. Fresh flowers on counter. Floor-to-ceiling window floods with light. Magazine-worthy. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Demolition timelapse. Junk hauled out. Walls stripped. Floor cleaned. Plumbing installed. Windows enlarged. Fixed angle. 8 seconds.",
-            "Construction timelapse. Cabinets mounted. Marble island lifted in. Appliances installed. Tile floor laid. Lights hung. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pendant lights glow. Marble gleams. Windows flood with golden light. Wine fridge stocked. Flowers placed. Perfect kitchen. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A5. Dirty Backyard → Japanese Zen Garden ─────────────────────────────
-    {
-        "name": "Dirty Backyard to Zen Garden",
-        "hook": "Muddy Backyard → Japanese ZEN Garden Paradise! 🎋✨",
-        "title": "From MUDDY Mess to Japanese Zen Garden! 🎋",
-        "description": "A neglected, muddy backyard transformed into a serene Japanese zen garden with koi pond, stone paths, and bamboo forest!",
-        "hashtags": "#shorts #backyard #zen #japanese #garden #transformation #satisfying",
-        "frame_prompts": [
-            f"{DRONE_VIEW} of a neglected backyard. MUDDY wasteland — dead brown grass, standing water puddles, broken fence posts, pile of construction debris, overgrown weeds chest-high, rusty wheelbarrow, scattered trash bags. Depressing eyesore. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Backyard cleared and graded. Koi pond excavation — kidney shape. Gravel beds being laid. Japanese maple trees planted. Stone slab pathway being set. Bamboo fence panels going up around perimeter. Workers raking gravel patterns. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Zen garden 80% complete. Koi pond lined with natural stone, small waterfall feature. Wooden arched bridge over pond. Raked white gravel in circular patterns. Stone lanterns placed. Bamboo forest section growing. Tea house platform built. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. COMPLETED Japanese zen garden. Crystal clear koi pond with orange fish swimming. Waterfall splashes. Arched red bridge. Perfect raked gravel circles. Stone lanterns glow. Bamboo sways gently. Japanese maples show vibrant colors. Tea house with shoji screens. Peaceful paradise. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Weeds cleared. Soil graded. Pond excavated. Gravel delivered. Maple trees planted. Bamboo fence erected. Fixed drone. 8 seconds.",
-            "Rapid construction. Pond stones laid. Bridge built. Gravel raked in patterns. Lanterns placed. Tea house constructed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pond fills. Koi swim. Waterfall flows. Lanterns glow at sunset. Bamboo sways. Red bridge gleams. Zen perfection. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A6. Abandoned Warehouse → Luxury Loft ────────────────────────────────
-    {
-        "name": "Abandoned Warehouse to Luxury Loft",
-        "hook": "ABANDONED Warehouse → Ultra-Modern Luxury Loft! 🏚️🏙️",
-        "title": "From ABANDONED Warehouse to DREAM Loft! 🏙️",
-        "description": "An old abandoned warehouse with broken windows was completely renovated into a stunning industrial-chic luxury loft apartment!",
-        "hashtags": "#shorts #warehouse #loft #transformation #luxury #renovation #industrial",
-        "frame_prompts": [
-            f"{DRONE_VIEW} of an old warehouse interior through collapsed roof section. ABANDONED — broken windows, graffiti on brick walls, pigeons nesting, puddles on concrete floor, rusty steel beams, debris everywhere, old machinery left behind. Dark and decrepit. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Warehouse gutted. Debris cleared. Steel beams cleaned and reinforced. New glass windows being installed. Mezzanine floor framing in progress. Plumbing and electrical rough-in. Exposed brick walls cleaned and sealed. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Loft 80% done. Mezzanine bedroom platform with glass railing. Open-plan living below — polished concrete floor. Industrial kitchen island. Restored brick walls. Steel staircase installed. Giant windows cleaned and gleaming. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. COMPLETED luxury loft. Mezzanine bedroom with king bed visible. Open living with designer furniture. Kitchen island with pendant lights. Polished concrete reflects light. Giant windows show city view. Exposed steel and brick create industrial charm. Warm lighting throughout. Magazine-worthy urban paradise. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Demolition timelapse. Debris cleared. Pigeons scatter. Beams sandblasted. Windows replaced. Roof patched. Fixed angle. 8 seconds.",
-            "Construction timelapse. Mezzanine built. Staircase welded. Kitchen installed. Concrete polished. Walls sealed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pendant lights illuminate. City view through windows. Furniture styled. Warm glow on brick. Industrial luxury. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A7. Cracked Driveway → Luxury Car Showroom ───────────────────────────
-    {
-        "name": "Cracked Driveway to Car Showroom",
-        "hook": "He Built a Car SHOWROOM in His Driveway! 🚗💎",
-        "title": "Cracked Driveway → Private Car SHOWROOM! 🚗",
-        "description": "A cracked, oil-stained driveway was transformed into a stunning glass-enclosed private car showroom with LED turntable!",
-        "hashtags": "#shorts #driveway #showroom #cars #transformation #luxury #garage",
-        "frame_prompts": [
-            f"{DRONE_VIEW} of a wide cracked driveway. OLD damaged concrete — deep cracks, oil stains, weeds growing through gaps, faded and discolored patches, broken edging, rusted basketball hoop. Ugly and neglected suburban home. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Driveway demolished. Deep excavation for foundation. Steel frame structure rising — columns and beams for glass showroom. Turntable pit being dug in center. Workers welding steel frame. Concrete forms for walls. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Showroom 80% complete. Glass panels being installed on steel frame. LED strip channels in floor. Central turntable mechanism installed. Polished epoxy floor gleaming. Climate control units on roof. Entry door framed. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. COMPLETED showroom — floor-to-ceiling glass reveals a luxury car on slowly rotating LED turntable. Blue and white LED strips outline the structure. Polished epoxy floor reflects car perfectly. Climate-controlled interior. Stunning modern architecture. Car enthusiast's dream. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Demolition timelapse. Concrete jackhammered. Foundation dug. Steel frame rises. Turntable pit formed. Workers weld beams. Fixed drone. 8 seconds.",
-            "Construction timelapse. Glass panels lifted and mounted. Turntable installed. Epoxy floor poured and polished. LEDs wired. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Glass showroom glows at dusk. Car rotates on turntable. LEDs illuminate blue. Epoxy floor mirrors everything. Dream garage. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A8. Overgrown Lot → Modern Tiny House ────────────────────────────────
-    {
-        "name": "Overgrown Lot to Modern Tiny House",
-        "hook": "From JUNGLE Lot to Ultra-Modern Tiny House! 🏡✨",
-        "title": "Overgrown LOT → Modern Tiny DREAM House! 🏡",
-        "description": "An overgrown abandoned lot was transformed into a stunning modern tiny house with floor-to-ceiling windows and a living roof!",
-        "hashtags": "#shorts #tinyhouse #transformation #construction #modern #luxury #building",
-        "frame_prompts": [
-            f"{DRONE_VIEW} of an overgrown vacant lot. ABANDONED — chest-high weeds, wild bushes, scattered trash, old tires, broken bottles, rusty chain-link fence, no structures. Nature reclaiming the space. Urban neglect. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Lot cleared. Foundation poured — compact rectangle for tiny house. Steel frame walls rising. Workers assembling prefab panels. Plumbing stub-outs visible. Electrical conduit. Concrete pad for deck area. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Tiny house 80% complete. Floor-to-ceiling glass windows installed on front face. Dark cedar cladding on sides. Green living roof being planted. Small deck with IPE wood. Interior visible — kitchen, loft bed. Modern and compact. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. COMPLETED modern tiny house. Glass front reflects sunset. Living roof blooms with greenery. Cedar cladding glows warm. Deck with designer chairs. Interior lights glow — cozy loft bed, sleek kitchen, bookshelf wall. Landscaped path with stepping stones. Perfect small-space luxury. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Weeds whacked. Lot cleared. Foundation poured. Steel frame rises. Panels assembled. Fixed drone. 8 seconds.",
-            "Rapid build. Windows fitted. Cedar cladding applied. Living roof planted. Deck laid. Interior fitted out. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Sunset reflects in glass. Living roof blooms. Interior glows cozy. Stepping stones lead to door. Tiny luxury. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A9. Moldy Bathroom → Luxury Spa ──────────────────────────────────────
-    {
-        "name": "Moldy Bathroom to Luxury Spa",
-        "hook": "MOLDY Bathroom → 5-Star Luxury SPA! 🛁💎",
-        "title": "From MOLDY Nightmare to Luxury SPA Bathroom! 🛁",
-        "description": "A disgusting moldy bathroom was gutted and rebuilt into a luxurious spa-like bathroom with rainfall shower and soaking tub!",
-        "hashtags": "#shorts #bathroom #spa #transformation #renovation #luxury #satisfying",
-        "frame_prompts": [
-            f"{DRONE_VIEW} looking down into a bathroom through removed ceiling. DISGUSTING — black mold covering tiles, stained bathtub with rust marks, cracked toilet, peeling wallpaper, brown water stains, broken mirror, dripping faucet, exposed rusty pipes. Nightmare bathroom. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Bathroom gutted to studs. Old fixtures removed. Waterproofing membrane applied. New copper plumbing. Heated floor mat being laid. Shower niche framed. Freestanding tub plumbing roughed in center. Workers installing cement board. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Spa bathroom 80% complete. Large format marble tiles on walls and floor. Walk-in rainfall shower with glass partition. Freestanding white soaking tub positioned. Floating vanity with vessel sink being mounted. LED mirror frame. Heated towel rack on wall. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. COMPLETED luxury spa bathroom. Marble walls gleam. Rainfall shower with steam visible. Freestanding tub with bath salts. Floating vanity with backlit mirror. Orchid on counter. Fluffy white towels on heated rack. Candles flicker. LED backlighting behind mirror. Five-star spa at home. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Demolition timelapse. Mold-covered tiles smashed. Toilet removed. Pipes replaced. Waterproofing applied. Heated floor mat laid. Fixed angle. 8 seconds.",
-            "Construction timelapse. Marble tiles placed. Tub positioned. Glass shower installed. Vanity mounted. Mirror hung. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Rainfall shower steams. Candles flicker. Tub fills. Marble gleams. Orchid and towels styled. Spa perfection. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── A10. Dead Garden → Tropical Paradise ─────────────────────────────────
-    {
-        "name": "Dead Garden to Tropical Paradise",
-        "hook": "DEAD Garden → Tropical Paradise With Waterfall! 🌴💦",
-        "title": "From DEAD Garden to Tropical PARADISE! 🌴",
-        "description": "A dead, barren garden with nothing but dirt was transformed into a lush tropical paradise with a natural stone waterfall and plunge pool!",
-        "hashtags": "#shorts #garden #tropical #transformation #paradise #waterfall #satisfying",
-        "frame_prompts": [
-            f"{DRONE_VIEW} of a dead garden space. BARREN — dry cracked earth, dead shrubs, brown patches, no grass, exposed dirt, old broken fence, scattered rocks, single dead tree stump. Lifeless and depressing. Hot sun beating down. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Garden transformation started. Area excavated for plunge pool. Natural stone being stacked for waterfall feature. Irrigation pipes laid underground. Tropical palms being planted from large containers. Pathway gravel base poured. Workers building stone retaining walls. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Tropical garden 80% complete. Natural stone waterfall structure built — 3 tiers. Plunge pool lined with dark stone. Tropical plants filling in — banana leaves, bird of paradise, ferns. Wooden stepping stone path. Tiki torch posts. String light poles. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. COMPLETED tropical paradise. Waterfall cascades over natural stones into turquoise plunge pool. Lush tropical plants everywhere — palms swaying, flowers blooming. Tiki torches flame. String lights glow. Stepping stone path. Hammock between palms. Complete jungle oasis. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Dead earth excavated. Pool dug. Stones stacked for waterfall. Palms planted. Pipes laid. Fixed drone. 8 seconds.",
-            "Rapid build. Waterfall tiers formed. Pool stones placed. Plants filling in. Path laid. Tiki posts erected. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Waterfall cascades. Pool shimmers turquoise. Torches flame at sunset. String lights glow. Hammock sways. Paradise achieved. Fixed angle. 8 seconds.",
+            "Construction timelapse. Sub pens cleared. Pools cleaned. Filtration installed. Walls reinforced. Fixed drone. 8 seconds.",
+            "Rapid construction. Underwater lights placed. Reef structures sunk. Training platforms built. Reception finished. Fixed camera. 8 seconds.",
+            "Cinematic reveal. Turquoise water glows. Divers bubble below. Reception warm above. Historic meets modern. Fixed angle. 8 seconds.",
         ],
     },
 ]
@@ -1060,8 +652,7 @@ def get_daily_concept() -> dict:
     # Save to history
     recent.append(chosen["name"])
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY_FILE.write_text(json.dumps(recent[-100:], ensure_ascii=False), encoding="utf-8")
+    HISTORY_FILE.write_text(json.dumps(recent[-60:], ensure_ascii=False), encoding="utf-8")
 
     logger.info(f"🏗️ AImagine concept: {chosen['name']} (pool: {len(available)}/{len(TIMELAPSE_CONCEPTS)} available)")
     return chosen
-

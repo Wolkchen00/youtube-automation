@@ -13,7 +13,8 @@ from core.kie_api import generate_image, generate_video, generate_veo_video, che
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
-    get_video_duration, trim_to_duration, add_text_overlay
+    get_video_duration, trim_to_duration, add_text_overlay,
+    make_loop_video, prepend_teaser
 )
 from core.uploader import publish_video
 from core.script_generator import generate_script, generate_visual_prompts
@@ -233,6 +234,21 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     elapsed = time.time() - start_time
     logger.info(f"\n✅ Video ready: {final_path}")
     logger.info(f"⏱️ Time: {elapsed/60:.1f} minutes")
+
+    # 9b. Growth: Seamless Loop + Retention Teaser
+    from core.config import CHANNEL_LOOP_ENABLED
+    if CHANNEL_LOOP_ENABLED.get(CHANNEL, False):
+        looped = dirs["final"] / f"{project_name}_LOOP.mp4"
+        make_loop_video(str(final_path), str(looped))
+        if looped.exists() and looped.stat().st_size > 0:
+            final_path = looped
+            logger.info("♻️ Seamless loop applied")
+
+    teased = dirs["final"] / f"{project_name}_TEASED.mp4"
+    prepend_teaser(str(final_path), str(teased), teaser_duration=1.0)
+    if teased.exists() and teased.stat().st_size > 0:
+        final_path = teased
+        logger.info("🎣 Retention teaser hook added")
 
     # 10. Publish
     if not skip_upload:

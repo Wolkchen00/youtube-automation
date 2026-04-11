@@ -1,9 +1,9 @@
-name: YouTube Daily Automation
+name: YouTube Morning Upload
 
 on:
   schedule:
-    # Her gün UTC 16:00 = California 09:00 AM (PDT, UTC-7)
-    - cron: '0 16 * * *'
+    # Her gün UTC 13:30 = California 06:30 AM (PDT, UTC-7)
+    - cron: '30 13 * * *'
   workflow_dispatch:  # Manuel tetikleme butonu
 
 jobs:

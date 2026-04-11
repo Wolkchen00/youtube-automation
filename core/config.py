@@ -105,6 +105,39 @@ CHANNEL_PLATFORMS = {
     "aimagine": ["youtube", "instagram", "tiktok"],
 }
 
+# ─── Growth Tactics Config ─────────────────────────────────────────────────────
+# Seamless loop: append reversed video at end for infinite replay
+CHANNEL_LOOP_ENABLED = {
+    "galactic_experiment": True,
+    "shadowedhistory": True,
+    "sentinal_ihsan": True,
+    "aimagine": True,
+}
+
+# Dual-upload scheduling (2 videos/day per channel)
+VIDEO_SLOTS = {
+    "morning": {
+        "galactic_experiment": "06:30",   # PST (UTC 13:30)
+        "shadowedhistory":     "06:35",
+        "sentinal_ihsan":      "06:40",
+        "aimagine":            "06:45",
+    },
+    "evening": {
+        "galactic_experiment": "14:30",   # PST (UTC 21:30)
+        "shadowedhistory":     "14:35",
+        "sentinal_ihsan":      "14:40",
+        "aimagine":            "14:45",
+    },
+}
+
+# Auto-cleanup: minimum views after 48h to keep video alive
+MIN_VIEWS_THRESHOLD = {
+    "galactic_experiment": 50,
+    "shadowedhistory": 30,
+    "sentinal_ihsan": 30,
+    "aimagine": 30,
+}
+
 # ─── Logging ───────────────────────────────────────────────────────────────────
 def setup_logging(name: str = "youtube", level: int = logging.INFO) -> logging.Logger:
     """Create a project-wide logger."""

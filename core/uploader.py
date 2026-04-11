@@ -137,4 +137,49 @@ def publish_video(
 
     success = sum(1 for v in results.values() if v)
     logger.info(f"📊 Upload summary: {success}/{len(target_platforms)} platforms OK")
+
+    # Track YouTube video ID in registry for auto-cleanup monitoring
+    youtube_result = results.get("youtube")
+    if youtube_result and isinstance(youtube_result, dict):
+        _register_video(
+            channel_name=channel_name,
+            title=title,
+            youtube_result=youtube_result,
+        )
+
     return results
+
+
+def _register_video(channel_name: str, title: str, youtube_result: dict):
+    """Save video info to registry for cleanup monitoring."""
+    import json
+    from datetime import datetime, timezone
+    from .config import PROJECT_ROOT
+
+    registry_file = PROJECT_ROOT / "logs" / "video_registry.json"
+
+    registry = []
+    if registry_file.exists():
+        try:
+            registry = json.loads(registry_file.read_text(encoding="utf-8"))
+        except Exception:
+            registry = []
+
+    # Extract video ID from Upload-Post response
+    video_id = youtube_result.get("id") or youtube_result.get("video_id") or ""
+
+    entry = {
+        "channel": channel_name,
+        "title": title,
+        "youtube_video_id": video_id,
+        "uploaded_at": datetime.now(timezone.utc).isoformat(),
+        "status": "active",
+    }
+
+    registry.append(entry)
+    registry_file.parent.mkdir(parents=True, exist_ok=True)
+    registry_file.write_text(
+        json.dumps(registry[-200:], ensure_ascii=False, indent=2),
+        encoding="utf-8"
+    )
+    logger.info(f"📋 Registered video: {channel_name}/{video_id}")

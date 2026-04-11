@@ -1,8 +1,8 @@
 """
-ShadowedHistory — Topic Database & Daily Selector
+ShadowedHistory — Topic Database & Daily Selector (v2)
 
-100+ forgotten history topics across categories.
-Ensures no repeats for the last 30 days.
+60 unique forgotten history topics for 30 days of dual-upload content.
+Each topic designed for maximum viral potential and engagement.
 """
 
 import json
@@ -17,101 +17,102 @@ HISTORY_FILE = PROJECT_ROOT / "logs" / "shadowedhistory_history.json"
 # ─── Topic Categories ──────────────────────────────────────────────────────────
 
 TOPICS = {
-    "lost_civilizations": [
-        "The Indus Valley Civilization vanished without a trace — 5 million people gone",
-        "Göbekli Tepe was built 12,000 years ago — 6,000 years before Stonehenge",
-        "The Minoans had indoor plumbing 4,000 years ago — then disappeared overnight",
-        "Norte Chico civilization built pyramids while Egypt was still in chaos",
-        "The Sea Peoples destroyed the entire Bronze Age world — nobody knows who they were",
-        "Cahokia was bigger than London in 1100 AD — then everyone left",
-        "The Kingdom of Aksum claimed to hold the Ark of the Covenant",
-        "The Nabataeans carved Petra into solid rock — their water engineering was centuries ahead",
-        "The Khmer Empire built Angkor Wat — the largest religious structure ever — then abandoned it",
-        "Tartessos — the ancient civilization the Greeks called 'beyond wealthy' that vanished",
+    "disaster": [
+        "The last 18 minutes of Pompeii — a rain of fire and ash buried 20,000 people alive in 79 AD. Recent excavations found people frozen mid-scream",
+        "The Chernobyl disaster was caused by a SAFETY TEST gone wrong. Reactor 4 exploded during a routine test, releasing 400 times more radiation than Hiroshima",
+        "The Tunguska event of 1908 — something exploded over Siberia with 1,000 times the force of Hiroshima. Flattened 80 million trees. No crater. No debris. Still unexplained",
+        "The collapse of the Bronze Age — around 1200 BC, every major civilization fell within 50 years. Egypt weakened, Hittites vanished, Mycenaeans destroyed. Nobody knows exactly why",
+        "The Halifax Explosion of 1917 — a weapons ship detonated in Halifax harbor, killing 2,000 people. The largest man-made explosion before the atomic bomb",
     ],
-    "forgotten_inventions": [
-        "The Baghdad Battery — a 2,000-year-old device that could generate electricity",
-        "Greek Fire — the Byzantine Empire's secret weapon nobody could replicate",
-        "The Antikythera Mechanism — a 2,100-year-old analog computer found in a shipwreck",
-        "Nikola Tesla's Wardenclyffe Tower — free wireless energy that got shut down by JP Morgan",
-        "The Roman concrete recipe — stronger than modern concrete, lost for 1,500 years",
-        "Damascus Steel — a metal so sharp it could cut through rifle barrels, recipe lost forever",
-        "Starlite — a plastic that could withstand nuclear temperatures, inventor took secret to grave",
-        "The Lycurgus Cup — Romans made nanotech glass 1,700 years ago",
-        "Heron's steam engine was built in 1st century AD — but Romans ignored it",
-        "The Inca quipu — a 3D binary code system made of knotted strings",
+    "mystery": [
+        "Who REALLY burned the Library of Alexandria? There are 3 different suspects across 600 years — Julius Caesar, Christian mobs, and Muslim conquerors. The truth is more complex",
+        "The Nazca Lines — massive drawings carved into the Peruvian desert, only visible from above. 2,000 years old. Some are 1,200 feet long. Who made them and why?",
+        "Genghis Khan's tomb has NEVER been found. He ordered 2,500 soldiers to kill everyone at his burial site. Then those soldiers were killed too. The location died with them",
+        "The Voynich Manuscript — a 600-year-old book written in a language no one can read. Filled with drawings of unknown plants. The world's most mysterious document",
+        "The Wow! Signal — a 72-second radio signal from space in 1977 exactly matching what alien communication would look like. Never repeated. Never explained",
     ],
-    "mysterious_disappearances": [
-        "The entire crew of the Mary Celeste vanished — dinner was still on the table",
-        "The Roanoke Colony — 115 people disappeared, only the word 'Croatoan' remained",
-        "Flight 19 — five Navy bombers vanished in the Bermuda Triangle in 1945",
-        "The Flannan Isles lighthouse keepers — three men vanished from a locked lighthouse",
-        "The Sodder Children — five kids vanished during a house fire, bodies never found",
-        "The Amber Room — an entire room of amber and gold stolen by Nazis, never recovered",
-        "DB Cooper hijacked a plane, jumped with $200,000, and was never seen again",
-        "The Lost Colony of Greenland — 5,000 Norse settlers vanished in the 15th century",
-        "Amelia Earhart's disappearance — did she crash, get captured, or survive?",
-        "Percy Fawcett vanished searching for the Lost City of Z in the Amazon",
+    "warfare": [
+        "The Ottoman Empire dragged 70 ships OVER A MOUNTAIN to conquer Constantinople in 1453. They greased wooden logs, 50,000 soldiers pulled the ships overland. Genius",
+        "Spartacus led 70,000 slaves against the ENTIRE Roman Empire. For 2 years they defeated every Roman army sent against them. The greatest slave revolt in history",
+        "Hannibal crossed the ALPS with 37 war elephants to attack Rome from behind. He marched through snow and cliffs, losing half his army. But he won every battle for 15 years",
+        "Japan attacked America with 9,000 BALLOONS in WW2. Each carried incendiary bombs, launched from Japan to ride the jet stream across the Pacific. Some reached Oregon",
+        "The Battle of Thermopylae — 300 Spartans held a narrow pass against 300,000 Persians for 3 days. They knew they would die. They fought anyway",
+        "Attila the Hun made Rome PAY him NOT to attack. The Romans paid 2,100 pounds of gold annually as tribute. The most powerful empire in history — bribed into survival",
+        "The Scythians had FEMALE warriors 2,500 years ago. DNA analysis of burial mounds proves Amazon warriors were real — not myth. Women buried with swords and bows",
+        "Rome was so AFRAID of Carthage, they salted the earth. After 3 wars over 100 years, Rome destroyed the city completely and poured salt so nothing would ever grow there",
     ],
-    "dark_secrets": [
-        "The Vatican has 53 miles of secret archives underground — some documents sealed for 75 more years",
-        "Operation Paperclip — the US smuggled 1,600 Nazi scientists into America after WWII",
-        "MK-Ultra — the CIA dosed unwitting civilians with LSD in secret labs for mind control",
-        "The Catacombs of Paris hold the bones of 6 million people stacked in tunnels beneath the city",
-        "Pompeii's bodies were frozen in volcanic ash — their last moments preserved for 2,000 years",
-        "The Tower of London held prisoners for 900 years — executions happened on the grounds",
-        "The Terracotta Army — 8,000 life-sized clay soldiers buried with China's first emperor",
-        "Derinkuyu — an underground city in Turkey that held 20,000 people 18 stories deep",
-        "The Skull Tower of Niš — an Ottoman tower built from 952 human skulls as a warning",
-        "The Sedlec Ossuary — a Czech church decorated with the bones of 40,000 people",
+    "engineering": [
+        "How the Pyramids were ACTUALLY built — not aliens. A newly discovered ramp system, water-lubricated sleds, and 20,000 skilled workers. The real story is more impressive than myth",
+        "Roman concrete HEALS ITSELF. Modern concrete cracks in 50 years — Roman concrete gets STRONGER. Scientists finally discovered the secret: volcanic ash and seawater react to fill cracks",
+        "An Underground City for 20,000 people was hidden in Turkey for CENTURIES. Derinkuyu goes 18 stories deep. Ventilation shafts, wine presses, churches. All carved from solid rock 3,000 years ago",
+        "This 2,000-year-old iron pillar in Delhi has NEVER rusted. In constant rain and humidity for 1,600 years. The ancient Indians knew a metallurgy technique we still don't fully understand",
     ],
-    "suppressed_discoveries": [
-        "Ignaz Semmelweis discovered handwashing saves lives — was sent to an asylum for it",
-        "Alfred Wegener proposed continental drift in 1912 — was laughed at for 50 years",
-        "Rosalind Franklin discovered DNA's structure — Watson and Crick got the Nobel Prize",
-        "The Voynich Manuscript — a 600-year-old book in a language nobody can read",
-        "The Library of Alexandria held all human knowledge — burned down by accident or conquest",
-        "Tesla's death ray patent — was it real? The FBI seized all his files when he died",
-        "The Piri Reis map from 1513 shows Antarctica without ice — how?",
-        "The Wow! Signal — a 72-second signal from space in 1977 that was never explained",
-        "Ancient Egyptians may have used electricity — the Dendera Light mystery",
-        "The Baghdad hanging gardens — did they really exist or was it propaganda?",
+    "discovery": [
+        "Vikings reached America 500 YEARS before Columbus. L'Anse aux Meadows in Newfoundland proves Norse settlement around 1000 AD. Columbus wasn't even close to being first",
+        "China explored the world 87 years BEFORE Columbus. Admiral Zheng He commanded a fleet of 300 ships and 28,000 men. His flagship was 5x larger than Columbus's Santa María",
+        "Was the Trojan War REAL? We found the evidence. Heinrich Schliemann excavated a city matching Homer's description. Layers of destruction. Arrowheads in walls. Troy was real",
+        "The Tollund Man — a 2,400-year-old body found in a Danish bog looking like he died YESTERDAY. Perfectly preserved skin, hair, fingerprints. His last meal was still in his stomach",
     ],
-    "ancient_warfare": [
-        "Hannibal crossed the Alps with 37 war elephants — one of history's greatest military feats",
-        "The Battle of Thermopylae — 300 Spartans held off 300,000 Persians",
-        "Genghis Khan killed so many people that global CO2 levels actually dropped",
-        "Medieval castles had murder holes — boiling oil poured on attackers from above",
-        "The Aztecs sacrificed 84,000 people in four days during the Great Temple dedication",
-        "Viking Berserkers fought in a trance-like fury — possibly from eating magic mushrooms",
-        "The Byzantine Empire used a flamethrower-like weapon called 'Greek Fire' for 700 years",
-        "Vlad the Impaler put 20,000 people on stakes — inspired the Dracula legend",
-        "The Mongols catapulted plague-infected corpses into enemy cities — first biological warfare",
-        "The Swiss Guard was so fierce that the Pope hired them — they still protect the Vatican today",
+    "tomb": [
+        "8,000 terracotta soldiers were built to guard ONE tomb. Emperor Qin Shi Huang's burial complex. Each face is unique. And the main tomb has NEVER been opened — mercury rivers inside",
+        "Everyone who opened Tutankhamun's tomb DIED within years. Lord Carnarvon, his dog, 6 expedition members. Coincidence? Or an ancient fungal bio-weapon?",
+        "Only 1 of 63 Royal Tombs in Egypt's Valley of Kings was found UNTOUCHED — Tutankhamun's. Every other pharaoh was robbed, sometimes within years of burial",
+        "There are STILL unopened chambers in China's 2,200-year-old Terracotta Army tomb. Ground-penetrating radar shows massive voids. China says we don't have the technology to excavate safely — yet",
     ],
-    "forgotten_events": [
-        "The eruption of Krakatoa in 1883 — the loudest sound in recorded history, heard 3,000 miles away",
-        "The Tunguska Event — a mysterious explosion flattened 80 million trees across 2,150 sq km in Siberia",
-        "The sinking of the Titanic — 1,500 people died in the freezing Atlantic in 1912",
-        "The Great Fire of London 1666 — 13,200 houses and 87 churches burned for 4 days",
-        "The fall of Constantinople 1453 — massive siege walls breached by the world's largest cannon",
-        "The eruption of Mount Vesuvius — buried Pompeii and Herculaneum in 20 feet of ash",
-        "The Colosseum held 50,000 spectators watching gladiators fight to the death for 400 years",
-        "The Hagia Sophia — built in just 5 years in 537 AD, it was the world's largest building for 1,000 years",
-        "The construction of the Panama Canal — 25,000 workers died building it over 10 years",
-        "The Halifax Explosion of 1917 — the largest man-made blast before the atomic bomb flattened a city",
+    "biography": [
+        "Imhotep — the first GENIUS in recorded history. Most people never heard of him. He designed the first pyramid, practiced medicine, wrote poetry. 2,700 years before Leonardo da Vinci",
+        "This Pharaoh tried to ERASE all the gods. Akhenaton forced Egypt to worship only one god — the sun disk Aten. He moved the capital, destroyed temples. After his death, they erased HIM",
+        "Mansa Musa was so RICH he crashed Egypt's economy by visiting. His 1324 pilgrimage to Mecca with 60,000 men and 12 tons of gold caused 10 years of inflation in Cairo",
+        "Cleopatra lived CLOSER to the Moon landing than to the building of the Pyramids. The Pyramids were already 2,500 years old when she ruled. Time is not what you think",
     ],
-    "hidden_knowledge": [
-        "Ancient Sumerians described 12 planets in our solar system 6,000 years ago",
-        "The Emerald Tablet — the alchemists' most sacred text, origin unknown",
-        "The Dead Sea Scrolls contained texts that were deliberately excluded from the Bible",
-        "The Dogon Tribe in Africa knew about Sirius B — a star invisible to the naked eye",
-        "The Moai of Easter Island — 887 massive statues carved by a civilization that collapsed",
-        "The Nazca Lines can only be seen from the air — who were they made for?",
-        "Coral Castle — one man moved 1,100 tons of coral blocks alone, refused to explain how",
-        "The Stone Spheres of Costa Rica — perfectly round, some weigh 16 tons, nobody knows why",
-        "The Voynich Manuscript contains botanical drawings of plants that don't exist",
-        "The Phaistos Disc — a 4,000-year-old clay tablet with symbols nobody can decipher",
+    "legend": [
+        "We might have FOUND Atlantis. 3 locations match Plato's description — Santorini, the Richat Structure in Sahara, and a site off Spain's coast. New sonar data is compelling",
+        "The Hanging Gardens of Babylon — real or a 2,500-year LIE? No archaeological evidence has ever been found in Babylon. Some scholars think they were actually in Nineveh, 300 miles north",
+        "The Tower of Babel was REAL. We found the ruins. A massive ziggurat called Etemenanki stood in Babylon — 91 meters tall. The biblical story may be based on this actual structure",
+    ],
+    "lost_city": [
+        "America's FORGOTTEN Pyramid City — Cahokia — was bigger than London in 1100 AD. 20,000 people, massive mounds, complex astronomy. Then everyone simply left. Nobody knows why",
+        "Why the Incas ABANDONED their cloud city Machu Picchu. Built at 7,970 feet in the Andes, it was occupied for barely 100 years. Spanish invasion never reached it. They just left",
+        "The largest temple on Earth — Angkor Wat — was ABANDONED for 400 years. Swallowed by jungle. Rediscovered by a French explorer in 1860 who couldn't believe what he found",
+        "Cities worth BILLIONS were swallowed by the Sahara Desert along the Silk Road. Entire trading empires buried under sand. Some are just now being found by satellite imaging",
+        "Rome built a PARADISE in the middle of the Syrian desert. Palmira was a crossroads of civilizations — Greek, Roman, Persian. A city of 200,000. Now mostly ruins after 2015 destruction",
+    ],
+    "invention": [
+        "Vikings used a SECRET crystal to navigate the ocean — a calcite stone that could find the sun even through clouds. This was how they crossed the Atlantic without a compass",
+        "Da Vinci designed TANKS 400 years before they existed. His notebooks contain helicopters, submarines, and robot knights. He deliberately reversed the gear design so nobody could build them",
+        "Ancient Egyptians performed BRAIN surgery 5,000 years ago. Trepanation — drilling holes in the skull — with survival rates over 75%. They understood brain anatomy millennia before Hippocrates",
+    ],
+    "espionage": [
+        "Poland cracked the Nazi Enigma code machine BEFORE anyone else. Three Polish mathematicians figured it out in 1932 — 7 years before WW2. They gave their work to the British",
+        "The Stasi — East Germany's secret police — employed 1 in every 63 citizens as informants. They had files on 5.6 million people — one third of the population. Big Brother was real",
+    ],
+    "myth_busted": [
+        "The Great Wall of China can NOT be seen from space. Astronauts confirmed it. It's only 15-30 feet wide — far too narrow. But you CAN see highways and airports",
+        "The Ottoman Harem was NOT what you think. It wasn't a pleasure palace — it was the administrative center of the empire. Women held enormous political power. Some ruled as regents",
+    ],
+    "dark_history": [
+        "They BLAMED an entire religion for the Black Plague. Across Europe, Jewish communities were massacred — accused of poisoning wells. Over 200 communities destroyed in 2 years",
+        "Kamikaze pilots wrote their LAST letters before flying. Many were college students forced to volunteer. Their final words reveal not fanaticism — but heartbreak and resignation",
+        "Alexander the Great BURNED Persepolis to the ground. The most magnificent city in the world, capital of the Persian Empire. He destroyed it in a single drunken night of revenge",
+    ],
+    "lifestyle": [
+        "Gladiators were the ROCK STARS of Ancient Rome. They had fans, endorsement deals, and groupies. Their sweat was bottled and sold as an aphrodisiac. Some became millionaires",
+        "Ancient Romans had FAST FOOD restaurants 2,000 years ago. Called thermopolia — 80 have been found in Pompeii alone. They served wine, bread, cheese, and hot stews over a counter",
+        "The first COMPLAINT letter was written 4,000 years ago in Sumer. A customer named Nanni wrote to copper merchant Ea-Nasir demanding a refund for low-quality ingots. The original Karen",
+    ],
+    "diplomacy": [
+        "The world's FIRST peace treaty was signed 3,000 years ago between Egypt and the Hittites. The Treaty of Kadesh in 1259 BC. A copy hangs in the United Nations building today",
+    ],
+    "ritual": [
+        "The Aztecs sacrificed 80,000 people in ONE ceremony — the re-consecration of the Great Temple in 1487. Prisoners were lined up for miles. The rivers ran red for days",
+    ],
+    "empire": [
+        "The Göktürk Empire controlled the ENTIRE Silk Road. From Mongolia to the Black Sea, these Turkic nomads built the first empire to unify Central Asia. Founded in 552 AD",
+        "The Byzantine Empire's fall — the LAST day. May 29, 1453. Constantinople fell to Ottoman cannon fire. The walls that held for 1,000 years finally broke. The end of Rome — 2,200 years after its founding",
+    ],
+    "archaeology": [
+        "Easter Island statues were WALKED into position. For decades scientists argued over how. Recent experiments proved the Moai were rocked back and forth — literally walked — using ropes",
+        "A Samurai sword takes 3 MONTHS to make. Over a million hammer strikes fold the steel 16 times — creating 65,000 layers. Each blade is a unique work of art and lethal engineering",
     ],
 }
 
@@ -124,7 +125,7 @@ def get_all_topics() -> list[str]:
     return all_topics
 
 
-def get_daily_topic(exclude_recent: int = 30) -> dict:
+def get_daily_topic(exclude_recent: int = 60) -> dict:
     """Select a daily topic, avoiding recent repeats.
 
     Returns:
@@ -155,7 +156,7 @@ def get_daily_topic(exclude_recent: int = 30) -> dict:
     # Save to history
     recent.append(chosen["topic"])
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY_FILE.write_text(json.dumps(recent[-100:], ensure_ascii=False), encoding="utf-8")
+    HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
 
     logger.info(f"🎲 ShadowedHistory topic: {chosen['topic'][:60]}...")
     return chosen

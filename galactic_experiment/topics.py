@@ -1,7 +1,8 @@
 """
-Galactic Experiment — Space Topic Database
+Galactic Experiment — Space Topic Database (v2)
 
-100+ space topics: hypothetical scenarios, real events, cosmic phenomena.
+60 unique space topics for 30 days of dual-upload content.
+Each topic designed for maximum viral potential.
 """
 
 import json
@@ -14,127 +15,110 @@ from core.config import PROJECT_ROOT, logger
 HISTORY_FILE = PROJECT_ROOT / "logs" / "galactic_experiment_history.json"
 
 TOPICS = {
-    "planet_tours": [
-        "PLANET TOUR: Mercury — the closest planet to the Sun. No atmosphere, surface temperature swings from -180°C to 430°C. Craters everywhere. 0% water. One day lasts 59 Earth days",
-        "PLANET TOUR: Venus — Earth's evil twin. 96% CO2 atmosphere, 900°F surface, sulfuric acid rain. Atmospheric pressure 90x Earth. Rotates BACKWARDS. The hottest planet in our solar system",
-        "PLANET TOUR: Mars — the Red Planet. 95% CO2 atmosphere, -60°C average. Has the tallest volcano (Olympus Mons, 3x Everest). Evidence of ancient rivers. 0.38g gravity. Could humans live here?",
-        "PLANET TOUR: Jupiter — the gas giant king. 89% hydrogen, 10% helium. The Great Red Spot is a 400-year-old storm larger than Earth. 79 moons. 2.5x gravity. Magnetic field 20,000x Earth's",
-        "PLANET TOUR: Saturn — the ringed beauty. Rings are 99.9% water ice. Density so low it would float in water. Wind speeds of 1,800 km/h. 146 moons. Titan has liquid methane lakes",
-        "PLANET TOUR: Uranus — the sideways planet. Rotates at 98° tilt, literally rolling through space. -224°C. Methane atmosphere gives it ice-blue color. 27 moons. Wind speeds of 900 km/h",
-        "PLANET TOUR: Neptune — the ice giant. Wind speeds of 2,100 km/h — the fastest in the solar system. -214°C. Diamond rain in the atmosphere. Dark blue due to methane. 14 moons",
-        "PLANET TOUR: Titan — Saturn's largest moon. The only moon with a thick atmosphere. Lakes of liquid methane. Orange haze. -179°C. Could harbor alien life in its subsurface ocean",
-        "PLANET TOUR: Europa — Jupiter's icy moon. Under 15km of ice lies an ocean with MORE water than all of Earth's oceans combined. Potential for alien life. Geysers of water vapor",
-        "PLANET TOUR: Io — Jupiter's volcanic moon. 400+ active volcanoes erupting RIGHT NOW. Sulfur lava. Tidally heated by Jupiter's gravity. The most geologically active body in our solar system",
-        "PLANET TOUR: Proxima Centauri b — the closest exoplanet to Earth (4.2 light-years). In the habitable zone. Tidally locked — one side always day, one always night. Could have liquid water",
-        "PLANET TOUR: TRAPPIST-1e — one of 7 Earth-sized planets orbiting a red dwarf. In the habitable zone. 39 light-years away. Possible liquid water. A year lasts only 6.1 Earth days",
-        "PLANET TOUR: Kepler-442b — the most Earth-like planet we've found. 1.3x Earth's size. In the habitable zone. 1,206 light-years away. 60% chance of being rocky with liquid water",
-        "PLANET TOUR: 55 Cancri e — the diamond planet. Surface covered in graphite and diamond. 2,000°C surface temperature. So close to its star, a year lasts only 18 hours. 40 light-years away",
-        "PLANET TOUR: HD 189733 b — the planet where it rains GLASS sideways. 1,000°C atmosphere with 7,000 km/h winds. The glass rain is silicate particles. Beautiful deep blue color from 63 light-years",
+    "deep_space": [
+        "Voyager 1 just sent a mysterious signal from 15 BILLION miles away — and scientists can't fully explain it. It's the farthest human-made object ever. What did it detect?",
+        "The Oort Cloud is the edge of our solar system — and it's 2 LIGHT YEARS away. A shell of trillions of icy objects we've never seen. What's hiding out there?",
+        "There are THOUSANDS of hidden dwarf planets beyond Neptune in the Kuiper Belt. We've only mapped a fraction. An entire region of our solar system still unexplored",
+        "The farthest human-made object is leaving the solar system RIGHT NOW at 38,000 mph. Voyager 1 launched in 1977 and it still sends data. It carries a golden record for aliens",
+        "An ALIEN-like object called Oumuamua flew through our solar system in 2017. It accelerated without any visible propulsion. Scientists still debate what it was",
+        "Getting to the nearest star Proxima Centauri would take 73,000 YEARS with current technology. It's only 4.2 light-years away. The universe is incomprehensibly vast",
     ],
-    "what_if_scenarios": [
-        "What if the Sun disappeared right now?",
-        "What if a black hole appeared near Earth?",
-        "What if the Moon was twice as close to Earth?",
-        "What if Earth had rings like Saturn?",
-        "What if we could travel at the speed of light?",
-        "What if Jupiter was a star instead of a planet?",
-        "What if Earth stopped rotating for one second?",
-        "What if the Sun was twice as big?",
-        "What if gravity was twice as strong?",
-        "What if Earth had two moons?",
-        "What if a neutron star entered our solar system?",
-        "What if we nuked a black hole?",
-        "What if the Milky Way and Andromeda collided tomorrow?",
-        "What if every star in the universe went supernova at once?",
-        "What if you fell into a white hole?",
+    "what_if": [
+        "What if Earth's magnetic field suddenly FLIPPED? It's happened before — 780,000 years ago. The poles reversed. Compasses pointed south. And it might happen again soon",
+        "What if a teaspoon of neutron star material was dropped on Earth? That tiny amount weighs 6 BILLION tons. It would punch through the planet like a bullet through paper",
+        "What if Earth's core cooled down completely? No more magnetic field. Solar wind strips away the atmosphere. Oceans evaporate. Earth becomes a dead rock like Mars",
+        "What if a gamma-ray burst hit Earth directly? In SECONDS, half the ozone layer vanishes. UV radiation sterilizes the surface. One already hit Earth 450 million years ago",
+        "What if we detonated every nuclear weapon inside a black hole? Absolutely nothing would happen. The black hole wouldn't even notice. That's how powerful gravity is",
+        "What if Earth suddenly had Saturn's rings? Shadows would cover entire continents. Nighttime sky would be breathtaking. But satellite orbits would be impossible",
     ],
-    "cosmic_phenomena": [
-        "A magnetar — the most powerful magnet in the universe",
-        "Gamma-ray bursts — the most violent explosions since the Big Bang",
-        "Rogue planets — planets flying through space with no star",
-        "Neutron stars — a teaspoon weighs 6 billion tons",
-        "The Great Attractor — something is pulling our entire galaxy toward it",
-        "Dark energy is ripping the universe apart — and it's accelerating",
-        "Quasars — objects brighter than entire galaxies",
-        "Pulsars — cosmic lighthouses spinning 716 times per second",
-        "The Boötes Void — a region of space with almost nothing in it for 330 million light-years",
-        "Cosmic strings — theoretical cracks in space-time itself",
-        "Fast Radio Bursts — mysterious signals from billions of light-years away",
-        "The oldest light in the universe — the Cosmic Microwave Background",
+    "extreme_facts": [
+        "The coldest place in the universe is the Boomerang Nebula at -272°C — just 1 degree above absolute zero. It's COLDER than the empty void of space itself",
+        "It literally RAINS diamonds on Neptune and Uranus. Extreme pressure crushes carbon into diamond crystals that fall like hailstones. Billions of carats falling right now",
+        "A magnetar's magnetic field is so powerful it could erase your credit card from the MOON. It would kill you from 1,000 miles away by rearranging your atoms",
+        "A pulsar spins 716 times per SECOND. That's a star the size of a city rotating faster than a kitchen blender. The surface moves at 24% the speed of light",
+        "The universe is 93 billion light-years across but only 13.8 billion years old. How? Space itself expanded FASTER than light. The math is mind-breaking",
+        "There's a cloud of alcohol in space 1,000 times larger than our solar system. Sagittarius B2 contains enough ethanol to fill 400 trillion trillion pints of beer",
     ],
-    "black_holes": [
-        "The largest black hole ever discovered — TON 618, 66 billion solar masses",
-        "What happens inside a black hole — spaghettification explained",
-        "Sagittarius A* — the supermassive black hole at the center of our galaxy",
-        "Can a black hole destroy the universe? The information paradox",
-        "Primordial black holes — born right after the Big Bang",
-        "What if two supermassive black holes collided?",
-        "Hawking Radiation — black holes slowly evaporate over time",
-        "The first-ever photo of a black hole — M87's shadow explained",
-        "Stellar black holes — created when massive stars die",
-        "Can black holes be used as time machines?",
+    "discovery": [
+        "NASA found something STRANGE inside the Moon. When Apollo crews crashed a module into it, the Moon rang like a bell for over an hour. Is it hollow?",
+        "James Webb telescope found a galaxy that SHOULDN'T exist. It's too massive, too early in the universe's history. Our models of galaxy formation might be wrong",
+        "NASA confirmed there's WATER on the Moon. Not just traces — significant deposits of ice in permanently shadowed craters. Enough to support a lunar base",
+        "Scientists found signs of LIFE on Venus — phosphine gas in the clouds. On Earth, only living organisms produce it. Could microbes be floating in Venus's atmosphere?",
+        "We just photographed OUR black hole — Sagittarius A* — for the first time. It's 4 million times the mass of the Sun, sitting 26,000 light-years from Earth",
+        "Mars is BREATHING. Methane levels spike and drop seasonally — just like biological processes on Earth. Something is producing methane on Mars right now",
     ],
-    "solar_system": [
-        "Venus rains sulfuric acid and has surface temperatures of 900°F",
-        "Enceladus — Saturn's moon with a warm ocean under the ice, possible life",
-        "The Great Red Spot — a storm on Jupiter bigger than Earth, raging for 400+ years",
-        "Mars' Olympus Mons — the largest volcano in the solar system, 3x taller than Everest",
-        "The Kuiper Belt — billions of icy objects beyond Neptune",
-        "The Oort Cloud — a shell of trillions of comets surrounding our solar system",
-        "Pluto was demoted from planet status — but some scientists want it back",
-        "The asteroid belt between Mars and Jupiter contains millions of space rocks",
-        "Mercury has ice at its poles despite being closest to the Sun",
-        "Ceres — the largest object in the asteroid belt has a mysterious bright spot",
+    "survival": [
+        "You'd die in 37 seconds on Venus. 900°F surface, 90 atmospheres of pressure, sulfuric acid clouds. The Soviet Venera probes lasted only 23 minutes before being crushed",
+        "What happens to your body in space WITHOUT a suit? You have about 15 seconds of consciousness. Your blood doesn't boil — but the water in your lungs does",
+        "Jupiter's magnetic field would KILL you instantly. Radiation levels near Jupiter are 1,000 times the lethal dose. The Juno probe's electronics are in a titanium vault",
+        "Surviving on Titan means dealing with -179°C temperatures and methane rain. But you could actually FLY by strapping on wings — the atmosphere is thick enough",
+        "Astronauts on the ISS age SLOWER than people on Earth — by about 0.01 seconds per year. Time dilation is real. GPS satellites have to correct for it",
     ],
-    "universe_scale": [
-        "The Observable Universe is 93 billion light-years across — and still expanding",
-        "There are more stars in the universe than grains of sand on Earth",
-        "The Laniakea Supercluster — our address in the cosmos",
-        "The Cosmic Web — galaxies are connected by filaments of dark matter",
-        "Empty space isn't empty — virtual particles pop in and out of existence constantly",
-        "The Universe is 13.8 billion years old — here's everything that happened",
-        "If the universe is a simulation, what are the pixels made of?",
-        "Parallel universes — could infinite versions of you exist right now?",
-        "The heat death of the universe — how everything ends",
-        "Before the Big Bang — what was there? The answer might blow your mind",
+    "black_hole": [
+        "Time STOPS at the edge of a black hole's event horizon. From your perspective, you'd cross it instantly. But to an outside observer, you'd freeze forever at the boundary",
+        "NASA recorded the actual SOUND of a black hole. It's a deep, haunting B-flat, 57 octaves below middle C. The pressure waves in the gas cloud create real sound",
+        "We can HEAR two black holes crashing together — through gravitational waves. LIGO detected spacetime itself rippling. Einstein predicted this 100 years earlier",
+        "A supermassive black hole is SHREDDING a star right now — astronomers caught it live. The star orbits closer and closer, stretched into spaghetti, before being consumed",
     ],
-    "space_exploration": [
-        "Voyager 1 is STILL transmitting — from 15 billion miles away",
-        "The James Webb Space Telescope — seeing the first galaxies ever formed",
-        "The ISS is the most expensive thing humans have ever built — $150 billion",
-        "Elon Musk's plan to put 1 million people on Mars by 2050",
-        "The Artemis Program — NASA's plan to return humans to the Moon",
-        "TRAPPIST-1 — a star with 7 Earth-like planets in its habitable zone",
-        "The Kepler Space Telescope found over 2,700 exoplanets before retiring",
-        "Parker Solar Probe — the fastest man-made object, touching the Sun",
-        "The Rosetta mission — we landed on a COMET for the first time in 2014",
-        "SETI — 60 years of searching for alien signals and still listening",
+    "cosmic_mystery": [
+        "The invisible force holding our galaxy together is dark matter. It makes up 27% of the universe but we've NEVER detected a single particle of it directly",
+        "The universe might be filled with an invisible DARK FLUID — a combination of dark matter and dark energy. One substance explaining both. The math works",
+        "Mysterious signals from deep space last only MILLISECONDS — fast radio bursts. We've detected thousands but only traced a few. Some repeat, some don't. What creates them?",
+        "Our galaxy is EATING other galaxies right now. The Milky Way has consumed at least 11 smaller galaxies. And in 4.5 billion years, Andromeda will eat us",
     ],
-    "viral_comparisons": [
-        "SIZE COMPARISON: Earth vs Every Planet — you won't believe how small we are",
-        "SIZE COMPARISON: The Sun vs the BIGGEST stars — UY Scuti makes our Sun look like a DOT",
-        "SPEED COMPARISON: Light vs Sound vs Rockets — how fast is the universe?",
-        "How DEEP is Space? A journey from Earth's surface to the edge of the observable universe",
-        "What 1 SECOND looks like on every planet in our solar system",
-        "How FAR is each planet? If the Sun was a basketball, Earth would be 26 meters away",
-        "Every type of STAR ranked by size — from Red Dwarfs to Hypergiants",
-        "The COLDEST vs HOTTEST places in the universe — from -272°C to 4 TRILLION degrees",
-        "How LOUD is Space? The sounds NASA recorded from planets, black holes, and stars",
-        "WEIGHT COMPARISON: What would you weigh on every planet?",
-        "TIME COMPARISON: How long is a day on each planet? Mercury = 59 Earth days!",
-        "The most EXTREME weather in the solar system — diamond rain, glass sideways rain, 2000 km/h winds",
+    "collision": [
+        "Our galaxy is CRASHING into Andromeda RIGHT NOW. They're approaching at 68 miles per second. In 4.5 billion years they'll merge. But no stars will actually collide",
+        "The Moon was born from a PLANET crashing into Earth. 4.5 billion years ago, a Mars-sized body called Theia slammed into proto-Earth. The debris formed our Moon",
     ],
-    "terrifying_space": [
-        "A coronal mass ejection could destroy all electronics on Earth in seconds",
-        "The Sun will expand into a red giant in 5 billion years — engulfing Mercury and Venus",
-        "Asteroid Apophis will pass closer than our satellites in 2029",
-        "A supernova within 50 light-years could sterilize our planet",
-        "The vacuum metastability event — the universe could self-destruct at any moment",
-        "The Fermi Paradox — where is everyone? The terrifying answer",
-        "A wandering star could disrupt our solar system within a million years",
-        "Space is slowly getting darker — stars are being born slower than they die",
-        "If a gamma-ray burst hit Earth, half the atmosphere would disappear instantly",
-        "The universe might be collapsing and we wouldn't know until it's too late",
+    "moon_exploration": [
+        "IO has 400 ACTIVE volcanoes erupting right now. Jupiter's gravity squeezes this moon so hard, its surface is constantly melting and reforming. The most violent world we know",
+        "Swimming in Titan's methane ocean would look surreal. Orange sky, no waves, thick atmosphere. You could theoretically float. Saturn hangs enormous in the sky above",
+        "What's on the DARK SIDE of the Moon? China's Chang'e missions finally revealed it — ancient lava plains, massive craters, and a surprisingly different geology from the near side",
+        "NASA is sending a HELICOPTER to Saturn's moon Titan in 2034. Dragonfly will fly between landing sites, sampling for organic chemistry. It could find signs of life",
+        "There's a warm OCEAN hidden under Enceladus's ice shell. Hydrothermal vents on the ocean floor shoot water geysers through cracks in the ice into space. Life could thrive there",
+    ],
+    "perspective": [
+        "What you'd see leaving Earth at the speed of light — continents shrink in seconds, the Moon passes in 1.3 seconds, Mars in 3 minutes, Jupiter in 35 minutes. Then darkness for years",
+        "We're moving through space at 514,000 MPH right now. Earth orbits the Sun. The Sun orbits the galaxy. The galaxy rushes toward the Great Attractor. You're never standing still",
+        "We took a PHOTO of the universe when it was a baby — the Cosmic Microwave Background. It shows the universe at 380,000 years old. Every direction looks almost identical",
+    ],
+    "stellar_death": [
+        "This is how our Sun will DIE. In 5 billion years it'll swell to a red giant, swallowing Mercury and Venus. Then collapse into a white dwarf the size of Earth",
+        "Betelgeuse could EXPLODE any minute. This red supergiant is 700 times the Sun's diameter and unstable. When it goes supernova, you'll see it in daylight for weeks",
+        "We watched a star SHRED a planet into pieces. The white dwarf WD 1145+017 is actively destroying an orbiting rocky body. We can see the debris cloud transiting",
+    ],
+    "megastructure": [
+        "Could we build a SHELL around the Sun for infinite energy? A Dyson Sphere would capture ALL the Sun's output — 400 trillion trillion watts. The engineering is theoretically possible",
+        "Could we build an ELEVATOR to space? Carbon nanotubes might be strong enough. A 36,000 km cable from Earth's surface to geostationary orbit. It would revolutionize space travel",
+    ],
+    "physics": [
+        "Fire in space burns in a PERFECT sphere. Without gravity, there's no convection — flame doesn't rise. NASA studies these spherical flames to improve combustion on Earth",
+        "Astronauts age SLOWER than people on Earth. It's real — Scott Kelly aged 0.01 seconds less than his twin brother Mark after a year in space. Time dilation is not science fiction",
+    ],
+    "near_earth": [
+        "Asteroid Apophis will pass CLOSER than our satellites in 2029. On April 13, this 370-meter rock will fly just 19,000 miles from Earth. Visible to the naked eye. No impact risk — this time",
+        "The EXACT years asteroids might hit Earth — NASA tracks 2,350+ potentially hazardous objects. Bennu has a 1-in-2,700 chance of impact in 2182. We're building DART to deflect them",
+    ],
+    "civilization": [
+        "Humans are a Type 0.7 civilization on the Kardashev scale. Type 1 controls ALL planetary energy. Type 2 harnesses an entire star. Type 3 controls a galaxy. We're not even Type 1 yet",
+        "Should Pluto be a planet again? The debate is BACK. New research says the IAU's 2006 decision was based on flawed criteria. Pluto has mountains, glaciers, and a possible subsurface ocean",
+    ],
+    "cosmology": [
+        "Dark energy is RIPPING the universe apart — and it's accelerating. 68% of the universe is this mysterious force pushing everything away. In trillions of years, even atoms will be torn apart",
+        "3 ways the universe could END — Big Freeze: everything stops. Big Rip: dark energy tears matter apart. Big Crunch: gravity reverses expansion. Current evidence points to Big Freeze",
+    ],
+    "sun": [
+        "The Sun is PAINTING Earth's sky every night. Solar wind particles hit nitrogen and oxygen in our atmosphere, exciting electrons that release photons — creating the aurora borealis",
+    ],
+    "exoplanet": [
+        "These Super-Earth planets are BETTER for life than Earth. Slightly larger, more gravity, thicker atmospheres, more stable tectonics. Earth might not even be the best planet for life",
+        "A day on the nearest Earth-like planet Proxima b — one side always faces the star, permanently bright. The other side is eternal darkness. Life would cluster in the twilight zone between",
+    ],
+    "speed": [
+        "A blazar jet moves at 99.99% the speed of light. These beams of plasma shoot from supermassive black holes across millions of light-years. The fastest sustained objects in the universe",
+    ],
+    "origin": [
+        "SpaceX plans to get humans to Mars in 6 months. Here's the EXACT route — launch during the Hohmann transfer window, coast for 180 days, aerobrake into Mars orbit, land with Starship",
     ],
 }
 
@@ -146,8 +130,8 @@ def get_all_topics() -> list[str]:
     return all_t
 
 
-def get_daily_topic(exclude_recent: int = 30) -> dict:
-    """Select a daily space topic, avoiding repeats."""
+def get_daily_topic(exclude_recent: int = 60) -> dict:
+    """Select a daily space topic, avoiding repeats for the last 60 days."""
     recent = []
     if HISTORY_FILE.exists():
         try:
@@ -169,7 +153,7 @@ def get_daily_topic(exclude_recent: int = 30) -> dict:
 
     recent.append(chosen["topic"])
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY_FILE.write_text(json.dumps(recent[-100:], ensure_ascii=False), encoding="utf-8")
+    HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
 
     logger.info(f"🎲 Galactic Experiment topic: {chosen['topic'][:60]}...")
     return chosen

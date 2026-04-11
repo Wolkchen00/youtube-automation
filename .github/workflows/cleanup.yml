@@ -1,0 +1,69 @@
+name: YouTube Video Cleanup
+
+on:
+  schedule:
+    # Her gün UTC 06:00 = California 23:00 PM (PDT) — gece temizliği
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (log only, no deletions)'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+          - 'true'
+          - 'false'
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_OAUTH_CREDENTIALS=${{ secrets.YOUTUBE_OAUTH_CREDENTIALS }}
+          EOF
+
+      - name: Run cleanup monitor
+        run: |
+          python -X utf8 -m core.video_monitor \
+            ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }} \
+            2>&1 | tee logs/cleanup_run.log
+
+      - name: Persist registry changes
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add logs/video_registry.json logs/cleanup_log.json || true
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+          git commit -m "chore: update video registry after cleanup [skip ci]" || true
+          git push origin main || true
+
+      - name: Upload cleanup logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cleanup-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
