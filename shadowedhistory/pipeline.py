@@ -101,7 +101,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         scene_seq = get_scene_sequence(daily_topic["category"])
         visual_prompts = []
         for i, scene_key in enumerate(scene_seq):
-            frame_prompt = FRAME_TEMPLATES.get(scene_key, FRAME_TEMPLATES["archive"])
+            frame_prompt = FRAME_TEMPLATES.get(scene_key, FRAME_TEMPLATES["artifact_reveal"])
             video_prompt = VIDEO_PROMPTS.get(
                 list(VIDEO_PROMPTS.keys())[i % len(VIDEO_PROMPTS)],
                 "Cinematic transition. 8 seconds."
