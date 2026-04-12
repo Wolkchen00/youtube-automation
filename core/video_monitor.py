@@ -64,25 +64,43 @@ def log_cleanup_action(action: dict):
     )
 
 
-def get_youtube_service():
-    """Build YouTube Data API v3 service using OAuth credentials."""
+def get_youtube_service(channel_name: str = None):
+    """Build YouTube Data API v3 service using per-channel OAuth credentials.
+
+    Tries in order:
+    1. YOUTUBE_OAUTH_{CHANNEL} env var (per-channel token)
+    2. YOUTUBE_OAUTH_CREDENTIALS env var (shared token)
+    3. Local token file
+    """
     try:
         from google.oauth2.credentials import Credentials
         from googleapiclient.discovery import build
 
-        # Try loading from environment variable (GitHub Secrets)
-        creds_json = os.getenv("YOUTUBE_OAUTH_CREDENTIALS")
+        creds_json = None
+
+        # 1. Try per-channel token
+        if channel_name:
+            env_key = f"YOUTUBE_OAUTH_{channel_name.upper()}"
+            creds_json = os.getenv(env_key)
+            if creds_json:
+                logger.info(f"🔑 Using per-channel OAuth: {env_key}")
+
+        # 2. Fallback: shared token
+        if not creds_json:
+            creds_json = os.getenv("YOUTUBE_OAUTH_CREDENTIALS")
+
         if creds_json:
             creds_data = json.loads(creds_json)
             creds = Credentials.from_authorized_user_info(creds_data)
             return build("youtube", "v3", credentials=creds)
 
-        # Fallback: try local file
-        creds_file = PROJECT_ROOT / "client_secrets.json"
-        if creds_file.exists():
-            creds_data = json.loads(creds_file.read_text())
-            creds = Credentials.from_authorized_user_info(creds_data)
-            return build("youtube", "v3", credentials=creds)
+        # 3. Fallback: local file
+        if channel_name:
+            local_file = PROJECT_ROOT / f"youtube_token_{channel_name}.json"
+            if local_file.exists():
+                creds_data = json.loads(local_file.read_text())
+                creds = Credentials.from_authorized_user_info(creds_data)
+                return build("youtube", "v3", credentials=creds)
 
         logger.warning("⚠️ No YouTube OAuth credentials found")
         return None
@@ -150,10 +168,12 @@ def run_cleanup(dry_run: bool = False):
 
     logger.info(f"🔍 Checking {len(candidates)} videos for cleanup...")
 
-    youtube = get_youtube_service()
-    if not youtube and not dry_run:
-        logger.error("❌ Cannot connect to YouTube API. Aborting cleanup.")
-        return
+    # Build per-channel YouTube services
+    youtube_services = {}
+    for entry in candidates:
+        ch = entry.get("channel", "unknown")
+        if ch not in youtube_services:
+            youtube_services[ch] = get_youtube_service(ch)
 
     deleted_count = 0
     kept_count = 0
@@ -166,6 +186,7 @@ def run_cleanup(dry_run: bool = False):
         if not video_id:
             continue
 
+        youtube = youtube_services.get(channel)
         views = get_video_views(youtube, video_id) if youtube else 0
 
         if views is None:
