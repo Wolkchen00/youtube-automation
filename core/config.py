@@ -111,7 +111,7 @@ CHANNEL_LOOP_ENABLED = {
     "galactic_experiment": True,
     "shadowedhistory": True,
     "sentinal_ihsan": True,
-    "aimagine": True,
+    "aimagine": False,  # Timelapse videos don't look good looped
 }
 
 # Dual-upload scheduling (2 videos/day per channel)

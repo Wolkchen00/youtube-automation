@@ -322,6 +322,60 @@ def add_text_overlay(
     return output_path
 
 
+def make_loop_video(input_path: str | Path, output_path: str | Path = None) -> Path:
+    """Create a seamless loop by appending the video in reverse.
+
+    Result: original + reversed = seamless infinite replay effect.
+    """
+    input_path = Path(input_path)
+    if output_path is None:
+        output_path = input_path.parent / f"{input_path.stem}_loop{input_path.suffix}"
+    output_path = Path(output_path)
+
+    reversed_path = input_path.parent / f"_reversed{input_path.suffix}"
+
+    try:
+        cmd_reverse = [
+            "ffmpeg", "-y",
+            "-i", str(input_path),
+            "-vf", "reverse",
+            "-af", "areverse",
+            "-c:v", "libx264", "-crf", FFMPEG_CRF,
+            "-preset", "fast",
+            "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+            str(reversed_path)
+        ]
+        subprocess.run(cmd_reverse, capture_output=True, check=True, timeout=180)
+
+        concat_list = input_path.parent / "_loop_concat.txt"
+        concat_list.write_text(
+            f"file '{input_path.name}'\nfile '{reversed_path.name}'\n",
+            encoding="utf-8"
+        )
+
+        cmd_concat = [
+            "ffmpeg", "-y",
+            "-f", "concat", "-safe", "0",
+            "-i", str(concat_list),
+            "-c:v", "libx264", "-crf", FFMPEG_CRF,
+            "-preset", FFMPEG_PRESET,
+            "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+            str(output_path)
+        ]
+        subprocess.run(cmd_concat, capture_output=True, check=True, timeout=180)
+        logger.info(f"♻️ Seamless loop created: {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"⚠️ Loop creation failed (using original): {e}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+    finally:
+        reversed_path.unlink(missing_ok=True)
+        if (input_path.parent / "_loop_concat.txt").exists():
+            (input_path.parent / "_loop_concat.txt").unlink(missing_ok=True)
+
+    return output_path
+
+
 def prepend_teaser(input_path: str | Path, output_path: str | Path = None,
                    teaser_duration: float = 1.0) -> Path:
     """Prepend the last N seconds of the video as a 'result teaser' retention hook.

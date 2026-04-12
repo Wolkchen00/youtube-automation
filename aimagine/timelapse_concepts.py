@@ -1,10 +1,10 @@
 """
-AImagine — AI Construction Timelapse Concepts (v2)
+AImagine — Build & Reveal Concepts (BuildCraft Style)
 
-30 unique concepts for 15 days of dual-upload content.
-Each concept: empty land → excavation → construction → final reveal.
-4 frames → 3 video clips → ~24s seamless timelapse.
+Inspired by @buildcraft.official (427K followers).
+Format: Exterior Build → Enter Inside → Luxury Interior Reveal.
 
+4 frames (2 exterior + 2 interior) → 3 video clips → ~24s.
 Cost: ~128 credits ($0.64) per video.
 """
 
@@ -13,611 +13,357 @@ from datetime import date
 
 # ─── Shared constants ─────────────────────────────────────────────────────────
 
-DRONE_VIEW = "photorealistic aerial drone photograph at 45-degree angle looking down"
-CAMERA_NOTE = "Shot on DJI Mavic 3 Pro. Vertical 9:16 aspect ratio."
-CONSISTENCY = "Maintain EXACT same camera angle and surrounding environment. ONLY modify the construction area."
-LIGHTING = "Natural afternoon sunlight, consistent shadow direction, hyper-realistic textures."
+AERIAL = "photorealistic aerial drone photograph, 45-degree angle, DJI Mavic 3 Pro"
+INTERIOR = "photorealistic wide-angle interior photograph, natural light, 9:16 vertical"
+CINEMATIC = "cinematic smooth camera movement, photorealistic, 9:16 vertical"
+STYLE = "hyper-realistic, 8K detail, natural lighting, architectural photography"
 
 TIMELAPSE_CONCEPTS = [
-    # ─── 1. Rubik's Cube House ────────────────────────────────────────────────
+    # 1
     {
-        "name": "Rubik's Cube House",
-        "hook": "He Built a RUBIK'S CUBE You Can Live In! 🟥🟦",
-        "title": "Building a RUBIK'S CUBE House! 🟥🟦🏠",
-        "description": "A real house shaped like a giant Rubik's cube with rotating colored panels and LED-lit grid lines!",
-        "hashtags": "#shorts #rubikscube #house #construction #timelapse #puzzle #satisfying",
+        "name": "Boeing 747 Underground Mansion",
+        "hook": "They buried a BOEING 747 and built a mansion inside! ✈️🏠",
+        "title": "Boeing 747 → Underground LUXURY Mansion! ✈️",
+        "description": "A decommissioned Boeing 747 lowered into a massive excavation and converted into an underground luxury mansion with infinity pool!",
+        "hashtags": "#shorts #boeing747 #mansion #underground #luxury #architecture #ai",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an empty suburban lot. Flat terrain, green grass, wooden fence. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Square foundation 10x10m poured. Steel frame rising in perfect cubic shape. Workers welding grid structure. Crane nearby. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cube structure 80% complete. Colored square panels being attached — red, blue, green, yellow, white, orange faces. Grid lines visible between panels. Windows cut into some squares. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed Rubik's cube house — 6 colored faces perfect. LED strips glow white along grid lines. Some panels appear rotated. Warm interior light through windows. Modern landscaping. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Massive Boeing 747 fuselage being lowered by giant cranes into deep excavation pit. Construction workers, dirt piles, dramatic scale. Green countryside surrounds. {STYLE}",
+            f"{AERIAL}. Completed Boeing 747 mansion from above — fuselage half buried, landscaped garden on top, infinity pool extending from cockpit area. Solar panels on wings. Modern entrance. {STYLE}",
+            f"{INTERIOR}. Inside the Boeing 747 fuselage converted to luxury living room. Curved ceiling with warm wood paneling following fuselage shape. Floor-to-ceiling windows cut in hull. Designer furniture, fireplace. {STYLE}",
+            f"{INTERIOR}. Master bedroom inside Boeing 747 tail section. Panoramic curved windows, king bed, ambient lighting along curved walls. Luxury bathroom visible through glass partition. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction timelapse. Foundation poured in square. Steel cube frame rises. Workers weld grid. Fixed drone angle. 8 seconds.",
-            "Rapid construction. Colored panels bolted to cube. Red, blue, green faces take shape. Windows installed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. LED grid lines glow. Colored faces vivid at dusk. Interior warm through windows. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Slow aerial orbit around completed Boeing 747 mansion. Pool sparkles, garden lush, fuselage half-buried. Golden hour. 8 seconds.",
+            f"{CINEMATIC}. Walking through modern entrance door into the fuselage. Camera reveals the curved luxury interior. Light floods through hull windows. 8 seconds.",
+            f"{CINEMATIC}. Slow interior pan through living room to bedroom. Warm wood, designer furniture, curved hull ceiling. Cozy luxury. 8 seconds.",
         ],
     },
-
-    # ─── 2. Cold War Bunker → Luxury SPA ──────────────────────────────────────
+    # 2
     {
-        "name": "Bunker to Luxury SPA",
-        "hook": "Cold War BUNKER → Underground Luxury SPA! 🧖✨",
-        "title": "Abandoned Bunker → LUXURY Underground SPA! 🧖‍♂️",
-        "description": "A forgotten Cold War bunker transformed into an underground luxury spa with hot pools, steam rooms, and ambient lighting!",
-        "hashtags": "#shorts #bunker #spa #luxury #transformation #renovation #underground",
+        "name": "Cargo Ship Cliff Fortress",
+        "hook": "A CARGO SHIP turned into a cliff fortress! 🚢🏔️",
+        "title": "Giant Cargo Ship → Cliff FORTRESS! 🚢",
+        "description": "A massive cargo ship embedded into a coastal cliff, transformed into a luxury fortress with ocean views from every room!",
+        "hashtags": "#shorts #cargoship #fortress #cliff #luxury #architecture #ai",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an overgrown concrete bunker entrance in a field. Rusted blast door, moss-covered walls, debris. Cold War era. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Bunker entrance cleared. Workers inside demolishing old walls. New waterproofing being applied. Plumbing roughed in for pools. Ventilation ducts upgraded. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Underground spa taking shape — stone tile walls, two soaking pools carved out, steam room glass doors installed. Fiber optic ceiling panels. Heated floors. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed spa — warm turquoise pools glow from below. Steam wisps from hot room. Ambient amber lighting on stone walls. Bamboo accents. Entrance modernized with glass doors. Serene underground paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Giant cargo ship being pushed into cliff face by tugboats. Massive excavation in cliff side. Construction cranes on cliff top. Ocean waves below. Dramatic engineering. {STYLE}",
+            f"{AERIAL}. Completed cargo ship fortress — ship embedded in cliff, bow jutting out over ocean. Rooftop garden on ship deck. Glass observation rooms added. Helicopter pad. {STYLE}",
+            f"{INTERIOR}. Luxury open-plan living area inside cargo ship hull. Double-height ceiling. Massive floor-to-ceiling ocean view windows cut in ship side. Modern kitchen island, concrete and wood. {STYLE}",
+            f"{INTERIOR}. Glass-bottom infinity pool inside the ship bow, suspended over the ocean below. Loungers, tropical plants, ocean visible through transparent floor. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Workers clear bunker. Walls demolished. Waterproofing applied. Pools excavated. Fast motion. Fixed drone. 8 seconds.",
-            "Rapid construction. Stone tiles placed. Pools tiled. Glass steam room built. Ceiling fiber optics installed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Pools glow turquoise. Steam rises. Amber lights warm stone. Underground luxury. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial approach to cargo ship fortress in cliff. Waves crash below. Ship bow extends over ocean. Golden light. 8 seconds.",
+            f"{CINEMATIC}. Walking through reinforced entrance into ship hull. Camera reveals massive double-height living space with ocean panorama. 8 seconds.",
+            f"{CINEMATIC}. Slow pan from living room to glass-bottom pool. Ocean visible below. Luxury everywhere. 8 seconds.",
         ],
     },
-
-    # ─── 3. Giant Eye Tower ───────────────────────────────────────────────────
+    # 3
     {
-        "name": "Giant Eye Tower",
-        "hook": "He Built a GIANT EYE Tower That Watches Everything! 👁️",
-        "title": "Building a GIANT EYE Observation Tower! 👁️🏗️",
-        "description": "A surreal observation tower shaped like a massive human eye with a rotating iris dome and pupil skylight!",
-        "hashtags": "#shorts #eye #tower #surreal #construction #timelapse #architecture",
+        "name": "Shipping Container Treehouse",
+        "hook": "40 SHIPPING CONTAINERS stacked into a treehouse! 📦🌲",
+        "title": "40 Containers → Giant TREEHOUSE! 📦🌲",
+        "description": "40 shipping containers stacked around ancient oak trees creating a multi-level luxury treehouse compound in the forest!",
+        "hashtags": "#shorts #container #treehouse #forest #luxury #offgrid #architecture",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an open hilltop with panoramic views. Green grass, winding path. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Oval foundation poured. Steel framework rising in eye shape — almond curve. Workers building the iris dome support ring. Crane. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Eye structure taking shape — white sclera panels on outer shell. Blue-green iris dome forming with radial pattern. Dark pupil circle in center is a glass skylight. Eyelid overhang shades the observation deck. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed eye tower — white shell gleams. Blue iris dome lit with radial LED strips. Pupil skylight glows warm from interior. The eye seems to watch the landscape. Winding lit path leads up. Surreal and stunning. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Crane lifting shipping containers, stacking them around massive oak trees in a forest clearing. 20 containers already placed at angles, connected by walkways. Construction chaos. {STYLE}",
+            f"{AERIAL}. Completed container treehouse — 40 containers stacked organically around trees. Connected by glass walkways and steel bridges. Green roofs, solar panels. Trees grow through the structure. {STYLE}",
+            f"{INTERIOR}. Inside a container converted to luxury lounge. Exposed corrugated steel walls painted white. Oak tree trunk growing through the room. Designer mid-century furniture. Warm pendant lights. {STYLE}",
+            f"{INTERIOR}. Container master suite with glass floor showing forest canopy below. Freestanding bathtub by panoramic window. Trees at eye level outside. Cozy wood and white interior. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction. Oval foundation. Eye-shaped steel frame rises. Iris ring constructed. Fixed drone. 8 seconds.",
-            "Rapid construction. White panels on shell. Blue iris dome assembled. Pupil skylight installed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Iris LEDs glow blue concentric rings. Pupil warm. Eye watches landscape at dusk. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Drone rising up through the container treehouse structure. Containers at various angles, glass bridges connecting them. Forest canopy. 8 seconds.",
+            f"{CINEMATIC}. Walking across glass bridge between containers, entering through steel door into white luxury interior. Tree trunk inside. 8 seconds.",
+            f"{CINEMATIC}. Interior tour — lounge to bedroom. Glass floor, bathtub, forest views. Warm cozy lighting. 8 seconds.",
         ],
     },
-
-    # ─── 4. Bank Vault → Whiskey Bar ──────────────────────────────────────────
+    # 4
     {
-        "name": "Bank Vault Whiskey Bar",
-        "hook": "Abandoned Bank Vault → Secret WHISKEY Bar! 🥃🔐",
-        "title": "He Turned a BANK VAULT Into a Whiskey Bar! 🥃",
-        "description": "A forgotten bank vault transformed into an exclusive whiskey bar with the original vault door as the entrance!",
-        "hashtags": "#shorts #vault #whiskey #bar #transformation #luxury #speakeasy",
+        "name": "Military Tank Bunker Home",
+        "hook": "He buried 5 TANKS and built a home inside! 🪖🏠",
+        "title": "5 Military Tanks → Underground HOME! 🪖",
+        "description": "Five decommissioned military tanks buried underground and connected by tunnels into an off-grid luxury survival bunker!",
+        "hashtags": "#shorts #tank #bunker #survival #underground #luxury #offgrid",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned bank interior. Massive vault door standing open, dusty marble floors, broken teller windows. Dark and forgotten. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Vault interior being gutted. Workers installing new flooring, bar counter framework rising along the back wall. Electrical rewired. Safe deposit boxes being cleaned. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Whiskey bar taking shape — dark walnut bar counter with brass rail. Restored safe deposit boxes now display whiskey bottles. Leather booth seating. Edison bulb lighting. Original vault door polished. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at evening. Completed whiskey bar — vault door gleams as entrance. Warm Edison glow inside. Whiskey bottles shimmer in old safe boxes. Leather seats filled. Brass accents everywhere. Speakeasy perfection. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Five military tanks being lowered into deep trenches by cranes. Earth movers around. Green field with excavation. Tanks positioned in a star pattern connected by tunnels. {STYLE}",
+            f"{AERIAL}. Completed tank bunker from above — grass-covered mounds hide the tanks. Only turrets visible as skylights. Central courtyard with garden. Solar panels. Secret entrance. {STYLE}",
+            f"{INTERIOR}. Inside a tank hull converted to modern kitchen/dining. Rounded armored walls with warm wood cladding. Turret hatch is now a skylight flooding light. Industrial-luxury design. {STYLE}",
+            f"{INTERIOR}. Underground tunnel connecting two tanks — transformed into a luxury lounge corridor. LED strip lighting, concrete walls with art, wine cellar alcoves. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Vault cleared. Bar framework rises. Flooring laid. Wiring installed. Fixed drone. 8 seconds.",
-            "Rapid construction. Walnut bar built. Whiskey displayed in safe boxes. Leather booths placed. Edison bulbs hung. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Vault door gleams. Edison glow warm. Whiskey bottles shimmer amber. Speakeasy atmosphere. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial over peaceful green mounds. Only tank turrets visible. Camera descends toward hidden entrance. 8 seconds.",
+            f"{CINEMATIC}. Descending stairs into bunker. Camera reveals tank hull interior — warm wood, skylight through turret, modern kitchen. 8 seconds.",
+            f"{CINEMATIC}. Walking through tunnel corridor to lounge. Wine cellar, art walls, LED ambiance. Underground luxury. 8 seconds.",
         ],
     },
-
-    # ─── 5. Chess Rook Tower House ────────────────────────────────────────────
+    # 5
     {
-        "name": "Chess Rook Tower",
-        "hook": "Living Inside a Giant CHESS ROOK Tower! ♜🏰",
-        "title": "Building a CHESS ROOK Tower House! ♜🏗️",
-        "description": "A medieval-style tower house shaped like a chess rook piece with battlements, spiral staircase, and a rooftop terrace!",
-        "hashtags": "#shorts #chess #tower #castle #construction #timelapse #medieval",
+        "name": "Submarine Coastal Villa",
+        "hook": "A SUBMARINE became a luxury coastal villa! 🛥️🏖️",
+        "title": "Nuclear Submarine → Coastal VILLA! 🛥️",
+        "description": "A decommissioned submarine half-submerged on a beach, converted into a luxury coastal villa with underwater viewing rooms!",
+        "hashtags": "#shorts #submarine #villa #coastal #luxury #underwater #architecture",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a rural plot with rolling hills. Stone wall boundary. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Circular stone foundation. Thick cylindrical walls rising course by course. Workers laying stone blocks. Scaffolding wraps the cylinder. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Rook tower 80% complete — grey stone cylinder with narrow arrow-slit windows. Crown-shaped battlements being constructed at top with merlons and crenels. Heavy oak door at base. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed chess rook — perfect stone cylinder with crown battlements. Warm light from arrow slits. Rooftop terrace visible between merlons with furniture. Flag flying from one corner. Medieval meets modern. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Huge submarine being beached by tugboats onto white sand beach. Workers securing hull. Crane removing conning tower panels. Palm trees, turquoise water. {STYLE}",
+            f"{AERIAL}. Completed submarine villa — hull on beach, conning tower has glass observation deck. Wooden deck wraps hull top. Infinity pool off the stern. Tropical garden. {STYLE}",
+            f"{INTERIOR}. Inside submarine hull — curved walls with porthole windows showing ocean. Luxury open living space with curved white sofa, marble floors. Torpedo tubes are now wine storage. {STYLE}",
+            f"{INTERIOR}. Underwater viewing room in submarine bow — glass panels reveal coral reef and fish. Circular seating, blue ambient light. Half below waterline. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Stone walls rise circular. Workers lay blocks course by course. Scaffolding climbs. Fixed drone. 8 seconds.",
-            "Rapid construction. Battlements crown the top. Windows cut. Oak door hung. Stone completed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Golden light through arrow slits. Flag waves. Rooftop terrace cozy. Medieval tower at sunset. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial orbit of submarine villa on beach. Pool sparkles at stern. Palm trees sway. Turquoise water. 8 seconds.",
+            f"{CINEMATIC}. Walking through hatch entrance into curved submarine interior. Portholes show ocean. White luxury reveals. 8 seconds.",
+            f"{CINEMATIC}. Moving to bow viewing room. Glass reveals underwater world. Fish swim past. Blue ambient glow. 8 seconds.",
         ],
     },
-
-    # ─── 6. Abandoned Mine → Crystal Pool ─────────────────────────────────────
+    # 6
     {
-        "name": "Mine to Crystal Pool",
-        "hook": "Abandoned MINE → Crystal Underground Pool! 💎🏊",
-        "title": "He Turned an Abandoned Mine Into a POOL! 💎",
-        "description": "A forgotten mine shaft transformed into a crystal-clear underground swimming pool with mineral rock walls and LED lighting!",
-        "hashtags": "#shorts #mine #pool #underground #transformation #luxury #crystal",
+        "name": "Train Cars Mountain Lodge",
+        "hook": "12 TRAIN CARS became a mountain lodge! 🚂🏔️",
+        "title": "12 Train Cars → Mountain LODGE! 🚂",
+        "description": "Twelve vintage train cars arranged on a mountainside, connected and converted into a luxury mountain lodge with panoramic views!",
+        "hashtags": "#shorts #train #mountain #lodge #luxury #vintage #architecture",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned mine entrance. Rusty rail tracks, collapsed timber supports, overgrown with weeds. Dark tunnel mouth. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Mine entrance reinforced with steel. Workers inside excavating and waterproofing a cavern space. Natural rock walls retained. Pool basin forming. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Underground pool taking shape — natural rock walls with crystal formations preserved. Turquoise tiled pool basin. LED strips along rock edges. Wooden deck platform. Stone steps leading down. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at evening. Completed mine pool — crystal rock walls glow with blue and purple LEDs. Turquoise water perfectly still. Wooden deck with loungers. Mine entrance modernized with glass. Underground crystal paradise. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Helicopter lifting vintage train cars onto mountain slope. Cars being placed on stone foundations at different levels. Alpine meadow, snow peaks behind. {STYLE}",
+            f"{AERIAL}. Completed train lodge — 12 train cars arranged in terraced formation on mountainside. Glass corridors connect them. Observation deck at top car. Mountain panorama. {STYLE}",
+            f"{INTERIOR}. Inside a Pullman car converted to luxury bedroom suite. Restored wood paneling, velvet drapes. Panoramic window shows mountain valley below. Four-poster bed, fireplace. {STYLE}",
+            f"{INTERIOR}. Dining car restored as gourmet restaurant. Original brass fixtures polished. Candlelit tables. Mountain sunset through arched windows. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Mine reinforced. Cavern excavated. Pool basin formed. Rock walls cleaned. Fixed drone. 8 seconds.",
-            "Rapid construction. Tiles laid. LED strips installed in rock. Deck built. Steps carved. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Crystal walls glow purple. Turquoise water shimmers. Underground pool paradise. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Drone ascending along the terraced train lodge. Cars stepping up the mountain. Snow peaks behind. 8 seconds.",
+            f"{CINEMATIC}. Entering vintage train door. Camera reveals restored Pullman suite. Wood, velvet, mountain views through window. 8 seconds.",
+            f"{CINEMATIC}. Walking through corridor to dining car. Brass, candles, sunset through arched windows. 8 seconds.",
         ],
     },
-
-    # ─── 7. Cactus Desert House ───────────────────────────────────────────────
+    # 7
     {
-        "name": "Cactus Desert House",
-        "hook": "He Built a CACTUS-Shaped Desert House! 🌵🏠",
-        "title": "Building a CACTUS House in the Desert! 🌵",
-        "description": "A desert home shaped like a massive saguaro cactus with arm-shaped rooms and a spine-textured green exterior!",
-        "hashtags": "#shorts #cactus #desert #house #construction #timelapse #unique",
+        "name": "Oil Rig Ocean Estate",
+        "hook": "Abandoned OIL RIG → Ocean Luxury Estate! 🛢️🌊",
+        "title": "Abandoned Oil Rig → LUXURY Ocean Estate! 🛢️",
+        "description": "An abandoned offshore oil platform completely transformed into a floating luxury estate with pool, helipad, and underwater suites!",
+        "hashtags": "#shorts #oilrig #ocean #luxury #estate #offshore #architecture",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a desert lot. Sandy terrain, scattered desert plants, distant mountains. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cylindrical concrete core rising with two arm branches extending at different heights. Steel framework. Workers shaping curved forms. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cactus house structure covered in green textured panels with vertical spine ridges. Circular windows. Arm rooms have rounded ends. Terrace on top of main trunk. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed cactus house — green exterior with realistic spine texture. Warm light from circular windows. Rooftop terrace with desert views. Desert garden landscaped around base. Stunning against sunset sky. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Workers renovating massive offshore oil rig platform. Cranes removing old equipment. New glass structures being built on deck. Deep blue ocean all around. {STYLE}",
+            f"{AERIAL}. Completed oil rig estate — platform has infinity pool, helicopter pad, glass penthouses. Lower deck has marina for boats. Lush garden on main deck. {STYLE}",
+            f"{INTERIOR}. Glass penthouse on oil rig. 360-degree ocean views. Minimalist white interior, marble floors. Open kitchen with sea breeze. Sunset reflecting on water. {STYLE}",
+            f"{INTERIOR}. Underwater suite below the platform waterline. Glass walls show open ocean. Schools of fish swim by. King bed faces the deep blue. Ambient underwater lighting. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction. Cylindrical core rises. Arms branch out. Steel formed. Fixed drone. 8 seconds.",
-            "Rapid construction. Green panels with spines applied. Windows cut. Terrace built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Green cactus glows in golden hour. Windows warm. Desert sunset behind. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial orbit around oil rig estate at sunset. Pool glows, helipad, glass buildings on platform. Ocean endless. 8 seconds.",
+            f"{CINEMATIC}. Helicopter landing, walking into glass penthouse. 360 ocean panorama reveals. White marble interior. 8 seconds.",
+            f"{CINEMATIC}. Descending to underwater suite. Glass walls, fish swimming, deep blue. Luxury bed faces ocean depths. 8 seconds.",
         ],
     },
-
-    # ─── 8. Bowling Alley → Surf Pool ─────────────────────────────────────────
+    # 8
     {
-        "name": "Bowling Alley to Surf Pool",
-        "hook": "Abandoned Bowling Alley → Indoor SURF Pool! 🏄🌊",
-        "title": "He Turned a Bowling Alley Into a SURF POOL! 🏄",
-        "description": "An abandoned bowling alley transformed into an indoor wave pool with artificial surf, neon lighting, and a beach bar!",
-        "hashtags": "#shorts #bowling #surfpool #transformation #waves #renovation #epic",
+        "name": "School Bus Compound",
+        "hook": "20 SCHOOL BUSES became an off-grid compound! 🚌🌿",
+        "title": "20 School Buses → Off-Grid COMPOUND! 🚌",
+        "description": "Twenty retired school buses arranged in a circle forming a compound with shared courtyard, pool, and luxury converted interiors!",
+        "hashtags": "#shorts #schoolbus #offgrid #compound #conversion #sustainable #tiny",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned bowling alley interior. Dusty lanes, broken pin machines, peeling wallpaper, ceiling tiles missing. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Bowling lanes ripped out. Deep pool excavation where lanes were. Workers waterproofing. Wave generation machinery being installed at one end. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Surf pool 80% complete — long rectangular pool with wave machine. Sandy beach entry at one end. Neon tube lighting on ceiling. Beach bar counter along one wall. Tropical murals. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at evening. Completed indoor surf pool — perfect waves rolling down the lane. Neon pink and blue lighting. Sandy beach area. Beach bar glowing warm. Surfboards mounted on walls. Tropical paradise inside. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Cranes positioning yellow school buses in a circular arrangement on rural land. Some buses already placed, others being modified. Central area being excavated for pool. {STYLE}",
+            f"{AERIAL}. Completed bus compound — 20 buses in circle with shared courtyard garden and pool center. Some buses stacked double height. Green roofs, solar panels. Cozy community. {STYLE}",
+            f"{INTERIOR}. Inside a school bus converted to luxury tiny home. Bus ceiling raised with dormer windows. Full kitchen with butcher block counters. Reclaimed wood throughout. Twinkle lights. {STYLE}",
+            f"{INTERIOR}. Double-decker bus master bedroom on upper level. Skylight bed, wraparound windows showing countryside. Cozy blankets, reading nook. Morning light. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Lanes demolished. Pool excavated. Wave machine installed. Fixed drone. 8 seconds.",
-            "Rapid construction. Pool tiled. Sand beach created. Neon lights hung. Bar built. Murals painted. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Waves roll perfectly. Neon pink and blue glow. Beach bar warm. Indoor surf paradise. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial over circular bus compound. Pool sparkles in center. Solar panels, green roofs. Rural setting. 8 seconds.",
+            f"{CINEMATIC}. Opening bus door, stepping into luxury tiny kitchen. Warm wood, twinkle lights reveal. 8 seconds.",
+            f"{CINEMATIC}. Climbing stairs to upper bedroom. Skylight, countryside views, cozy blankets. Morning glow. 8 seconds.",
         ],
     },
-
-    # ─── 9. Periscope House ───────────────────────────────────────────────────
+    # 9
     {
-        "name": "Periscope House",
-        "hook": "He Built a PERISCOPE House — See Everything! 🔭",
-        "title": "Building a PERISCOPE-Shaped House! 🔭🏠",
-        "description": "A tall house shaped like a submarine periscope with a rotating observation room at the top and mirror-glass angled windows!",
-        "hashtags": "#shorts #periscope #house #construction #timelapse #military #unique",
+        "name": "Water Tower Penthouse",
+        "hook": "Abandoned WATER TOWER → Sky Penthouse! 🏠☁️",
+        "title": "Old Water Tower → Sky PENTHOUSE! ☁️",
+        "description": "A rusted old water tower on steel legs renovated into a stunning sky penthouse with 360-degree panoramic views!",
+        "hashtags": "#shorts #watertower #penthouse #sky #panoramic #renovation #luxury",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a coastal lot overlooking the ocean. Grassy cliff edge. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Tall cylindrical steel framework rising 12 meters. Workers building the angled top section typical of a periscope shape. Foundation deep. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Periscope structure clad in matte grey panels. Angular top section with large angled mirror-glass windows. Observation room at top. Ladder rungs as decorative exterior element. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed periscope house — grey military-style exterior. Angled glass windows reflect sunset. Observation room glows warm from interior. Ocean panorama visible. Coastal garden below. Striking silhouette. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Workers on scaffolding renovating rusted water tower on tall steel legs. New windows being cut into tank wall. Spiral staircase frame going up one leg. Rural setting, wide views. {STYLE}",
+            f"{AERIAL}. Completed water tower penthouse — tank repainted matte black. Panoramic windows all around. Wraparound deck with string lights. Solar panel on top. Dramatic against sunset. {STYLE}",
+            f"{INTERIOR}. Inside the water tower tank — circular living space with 360-degree windows. Floating kitchen island center. Polished concrete floor, minimal design. Endless sky views. {STYLE}",
+            f"{INTERIOR}. Water tower bedroom level — circular room, king bed centered. Curved glass walls show sunrise. Freestanding copper bathtub by window. Cloud-level living. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction. Tall cylinder rises. Angled top section assembled. Workers climb scaffolding. Fixed drone. 8 seconds.",
-            "Rapid construction. Grey panels applied. Mirror glass windows installed. Observation room finished. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Glass reflects sunset. Observation room glows. Ocean behind. Dusk silhouette. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial orbit around black water tower penthouse. String lights glow. Sunset paints the sky. Rural landscape below. 8 seconds.",
+            f"{CINEMATIC}. Climbing spiral staircase into tank. Door opens to 360-degree sky view living room. Jaw-dropping reveal. 8 seconds.",
+            f"{CINEMATIC}. Pan from kitchen to bedroom level. Copper tub, sunrise through curved glass. Living in the clouds. 8 seconds.",
         ],
     },
-
-    # ─── 10. Windmill → Rotating Restaurant ───────────────────────────────────
+    # 10
     {
-        "name": "Windmill to Restaurant",
-        "hook": "200-Year-Old WINDMILL → Rotating Restaurant! 🌬️🍽️",
-        "title": "He Turned an Old Windmill Into a RESTAURANT! 🌬️",
-        "description": "A crumbling 200-year-old windmill transformed into a rotating restaurant with panoramic views and restored sails!",
-        "hashtags": "#shorts #windmill #restaurant #transformation #renovation #panoramic",
+        "name": "Concrete Bunker Spa Resort",
+        "hook": "Cold War BUNKER → Underground Spa Resort! 🧖💎",
+        "title": "Military Bunker → LUXURY Spa Resort! 🧖",
+        "description": "A massive Cold War military bunker transformed into an underground luxury spa resort with hot springs, steam rooms, and crystal pools!",
+        "hashtags": "#shorts #bunker #spa #luxury #underground #coldwar #resort",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an old stone windmill in a wheat field. Crumbling walls, broken sails, missing cap. Heritage structure barely standing. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Windmill walls reinforced. Workers rebuilding upper floors. New steel structure inside for rotating platform. Sails being restored with new timber. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Restaurant taking shape — stone walls restored. Large panoramic windows cut into upper level. Rotating floor mechanism installed. New wooden sails complete. Interior visible — dining tables. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed windmill restaurant — beautiful stone exterior restored. Sails turn slowly. Panoramic windows show warm dining room. Diners visible. Wheat field glows golden. String lights on terrace. Magical. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Abandoned concrete military bunker entrance in forest clearing. Heavy blast door, guard towers. Workers clearing rubble, new ventilation being installed. {STYLE}",
+            f"{AERIAL}. Completed spa resort — bunker entrance modernized with glass and stone entrance pavilion. Landscaped zen garden above. Steam rising from underground vents. Peaceful forest setting. {STYLE}",
+            f"{INTERIOR}. Former weapons storage hall now turquoise mineral pool. Original concrete arched ceiling with dramatic uplighting. Natural stone edges, tropical plants. Steam wisps. {STYLE}",
+            f"{INTERIOR}. Private treatment room in former command center. Concrete walls softened with warm wood panels. Massage table, candles, heated stone floor. Intimate and luxurious. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Walls reinforced. Floors rebuilt. Rotating platform installed. Sails restored. Fixed drone. 8 seconds.",
-            "Rapid construction. Windows cut. Dining interior finished. Sails mounted. Terrace built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Sails turn slowly. Warm dining glow. Golden wheat field. String lights sparkle. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial descending toward bunker entrance. Zen garden above, steam rises. Forest surrounds. 8 seconds.",
+            f"{CINEMATIC}. Walking through blast door into renovated corridor. Light grows. Reveal: turquoise pool under concrete arches. 8 seconds.",
+            f"{CINEMATIC}. Slow tour from pool to treatment room. Candles, warm wood, heated stone. Underground serenity. 8 seconds.",
         ],
     },
-
-    # ─── 11. Ice Cube Cabin ───────────────────────────────────────────────────
+    # 11
     {
-        "name": "Ice Cube Cabin",
-        "hook": "He Built an ICE CUBE Cabin in the Mountains! ❄️",
-        "title": "Building an ICE CUBE Mountain Cabin! ❄️🏔️",
-        "description": "A mountain cabin shaped like a giant ice cube with translucent glass walls, frost-effect panels, and a warm glowing interior!",
-        "hashtags": "#shorts #icecube #cabin #winter #construction #timelapse #mountains",
+        "name": "Helicopter Inside Mountain",
+        "hook": "A HELICOPTER hangar inside a mountain! 🚁⛰️",
+        "title": "Secret Helicopter Base Inside a MOUNTAIN! 🚁",
+        "description": "A secret helipad and luxury hangar carved inside a mountain with retractable roof, living quarters, and underground garage!",
+        "hashtags": "#shorts #helicopter #mountain #secret #base #luxury #bunker",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a snowy mountain clearing. Pine trees, snow-covered ground, mountain peaks. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cube foundation on timber piles. Steel frame rising in perfect cubic shape. Workers installing structural glass panels. Snow around construction site. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Ice cube cabin structure — frosted translucent glass panels creating icy blue appearance. Internal wooden structure visible as shadows. Flat roof with snow. Heated glass prevents snow sticking to walls. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at blue hour. Completed ice cube cabin — translucent walls glow warm amber from interior fireplace. Ice-blue exterior against white snow. Pine forest frames the scene. Moonlight reflects off glass. Magical winter wonderland. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Mountain peak with retractable roof panels opening. Helicopter ascending from inside the mountain. Construction cranes visible inside the cavern. Alpine landscape. {STYLE}",
+            f"{AERIAL}. Mountain hangar — retractable roof open showing helicopter on pad inside. Glass observation windows cut into mountain face. Hidden road entrance below. {STYLE}",
+            f"{INTERIOR}. Inside mountain hangar — polished concrete floor, helicopter parked. Glass wall office overlooking the pad. Luxury lounge area with mountain view through carved window. {STYLE}",
+            f"{INTERIOR}. Living quarters deep inside mountain — bedroom suite carved from rock. Warm wood ceiling, natural stone walls. Aquarium wall with mountain spring water. Fireplace. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction. Foundation on snow. Cube frame rises. Glass panels installed. Fixed drone. 8 seconds.",
-            "Rapid construction. Frosted panels applied. Interior built. Roof completed. Snow on surroundings. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Warm amber glow through ice-blue walls. Snow sparkles. Blue hour magic. Mountain cabin paradise. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial approach to mountain. Roof panels retract revealing helipad inside. Dramatic engineering reveal. 8 seconds.",
+            f"{CINEMATIC}. Walking into mountain hangar. Helicopter parked. Glass office reveals. Mountain view through carved window. 8 seconds.",
+            f"{CINEMATIC}. Deeper into mountain — bedroom suite in rock. Warm wood, aquarium wall, fireplace. Underground luxury. 8 seconds.",
         ],
     },
-
-    # ─── 12. Water Tower → Sky House ──────────────────────────────────────────
+    # 12
     {
-        "name": "Water Tower Sky House",
-        "hook": "Abandoned Water Tower → Panoramic SKY HOUSE! 🏠☁️",
-        "title": "He Turned a Water Tower Into a SKY HOUSE! ☁️",
-        "description": "A rusted old water tower transformed into a stunning panoramic living space with 360-degree views and a wrap-around deck!",
-        "hashtags": "#shorts #watertower #skyhouse #transformation #panoramic #renovation",
+        "name": "Jumbo Jet Hilltop Villa",
+        "hook": "An A380 on a hilltop became a VILLA! ✈️🏡",
+        "title": "Airbus A380 → Hilltop Luxury VILLA! ✈️",
+        "description": "An Airbus A380 superjumbo placed on a hilltop and converted into a multi-level luxury villa with pool on the wing!",
+        "hashtags": "#shorts #a380 #airbus #villa #hilltop #luxury #conversion",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an old rusted water tower on steel legs. Peeling paint, bird nests, overgrown base. Rural setting, wide open views. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Tower legs reinforced with new steel. Workers cutting windows into the tank body. New floor structure being installed inside. Spiral staircase frame going up one leg. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Sky house taking shape — tank repainted white. Large panoramic windows all around. Wrap-around deck with railing. Interior visible — modern bedroom, kitchen. Spiral staircase complete. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at sunset. Completed sky house — white tank with panoramic windows glowing warm. Wrap-around deck with string lights. 360-degree sunset views. Modern interior visible. Spiral staircase lit. Living above the world. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Massive Airbus A380 fuselage being transported up a hill by heavy machinery. Workers preparing foundations. Scenic coastal hilltop with ocean views. {STYLE}",
+            f"{AERIAL}. Completed A380 villa on hilltop — fuselage with extended glass walls. Pool built on wing structure. Rooftop terrace on fuselage top. Ocean panorama. Landscaped garden. {STYLE}",
+            f"{INTERIOR}. Upper deck of A380 converted to open-plan living. Curved ceiling 3 meters high. Full glass nose showing 180-degree ocean panorama. White marble, designer sofas. {STYLE}",
+            f"{INTERIOR}. Lower deck spa level — long narrow pool along fuselage. Porthole windows show garden outside. Steam room at tail end. Mosaic tiles, warm lighting. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Legs reinforced. Windows cut in tank. Floors installed. Staircase built. Fixed drone. 8 seconds.",
-            "Rapid construction. White paint applied. Deck built around tank. Interior finished modern. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Panoramic sunset through windows. String lights on deck. 360 views. Sky house glows. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial orbit around A380 on hilltop. Wing pool sparkles. Ocean behind. Sunset colors. 8 seconds.",
+            f"{CINEMATIC}. Entering through first-class door. Upper deck reveals — curved ceiling, ocean through glass nose. White marble luxury. 8 seconds.",
+            f"{CINEMATIC}. Descending to lower deck spa. Long pool, portholes, steam room. Fuselage luxury spa. 8 seconds.",
         ],
     },
-
-    # ─── 13. AirPods Podcast Studio ───────────────────────────────────────────
+    # 13
     {
-        "name": "AirPods Podcast Studio",
-        "hook": "He Built a PODCAST Studio Shaped Like AirPods! 🎙️",
-        "title": "Building an AIRPODS-Shaped Podcast Studio! 🎙️🏗️",
-        "description": "A podcast studio shaped like a giant pair of AirPods with sound-insulated recording booths in each ear piece!",
-        "hashtags": "#shorts #airpods #podcast #studio #construction #timelapse #tech",
+        "name": "Grain Silo Loft Complex",
+        "hook": "6 GRAIN SILOS → Luxury Loft Complex! 🌾🏢",
+        "title": "Abandoned Silos → LUXURY Loft Complex! 🌾",
+        "description": "Six abandoned grain silos connected and converted into a luxury loft complex with cylindrical rooms, sky bridges, and rooftop gardens!",
+        "hashtags": "#shorts #silo #loft #luxury #conversion #industrial #architecture",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a commercial lot. Flat terrain. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Two teardrop-shaped foundations with connecting walkway. Steel framework rising in AirPod ear shapes. Workers bending panels for smooth curves. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. AirPod structures covered in glossy white panels. Smooth curves matching the real product. Speaker grille mesh at bottom of each piece. Glass entrance door on connecting stem walkway. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed AirPod studio — glossy white bodies glow. Blue ambient LED ring on each piece. One ear is the recording booth, other is the lounge. Stem walkway connects them. Modern tech aesthetic. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Six tall grain silos being renovated. Workers cutting windows. Glass sky bridges connecting silos at different levels. Scaffolding on concrete cylinders. Farmland surrounds. {STYLE}",
+            f"{AERIAL}. Completed silo complex — six cylinders with floor-to-ceiling windows at various levels. Glass bridges connect them. Green rooftop gardens on each. Warm lights glowing from inside. {STYLE}",
+            f"{INTERIOR}. Inside a silo — cylindrical living room, curved walls with exposed concrete. Spiral staircase center. Double-height curved windows. Industrial-luxury furniture. {STYLE}",
+            f"{INTERIOR}. Sky bridge between silos — glass floor and walls. Outdoor lounge furniture. Stars visible through glass ceiling at night. Warm lighting. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction. Two teardrop foundations. Frames rise in ear shapes. Smooth curves formed. Fixed drone. 8 seconds.",
-            "Rapid construction. White panels applied. Grille mesh installed. Walkway built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. White bodies glow. Blue LED rings. Tech aesthetic at dusk. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial rising between the six silos. Bridges connect them. Rooftop gardens green. Warm interior glow. 8 seconds.",
+            f"{CINEMATIC}. Entering silo through industrial door. Curved concrete walls, spiral staircase, double-height windows reveal. 8 seconds.",
+            f"{CINEMATIC}. Walking across glass sky bridge. Stars above, landscape below. Arriving at lounge. 8 seconds.",
         ],
     },
-
-    # ─── 14. Train Station → Co-Working ───────────────────────────────────────
+    # 14
     {
-        "name": "Station to Co-Working",
-        "hook": "Ghost Train Station → Modern CO-WORKING Hub! 🚉💼",
-        "title": "Abandoned Train Station → CO-WORKING Space! 🚉",
-        "description": "A forgotten train station transformed into a modern co-working hub with the original platform as an open workspace!",
-        "hashtags": "#shorts #trainstation #coworking #transformation #renovation #modern",
+        "name": "Aircraft Carrier Island",
+        "hook": "An AIRCRAFT CARRIER became a private island! ⚓🏝️",
+        "title": "Aircraft Carrier → Private ISLAND Resort! ⚓",
+        "description": "A decommissioned aircraft carrier anchored as a private island resort with beach club, pool, helipad, and luxury suites!",
+        "hashtags": "#shorts #aircraftcarrier #island #resort #luxury #navy #conversion",
         "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned train station. Broken glass canopy, overgrown tracks, faded signage, pigeons. Victorian-era brick building. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Station being restored. Glass canopy repaired. Tracks removed and platform being converted to floor space. Interior walls cleaned. New electrical. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Co-working space taking shape — restored brick walls. Long communal desk where tracks once were. Glass meeting pods on platform. Restored clock. Modern furniture mixed with heritage. Plants everywhere. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at evening. Completed co-working — glass canopy beautifully restored, lit warm. Workers at communal desks. Meeting pods glow. Restored clock shows time. Original signage preserved. Heritage meets modern. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Massive aircraft carrier anchored in turquoise tropical water. Workers on flight deck building pool and gardens. Island profile emerging. Palm trees being planted. {STYLE}",
+            f"{AERIAL}. Completed carrier island — flight deck has infinity pool, palm trees, beach club area. Control tower is glass penthouse. Marina on stern. Lagoon surrounds. {STYLE}",
+            f"{INTERIOR}. Former officers quarters now luxury hotel suite. Porthole windows enlarged to panoramic ocean views. Naval details preserved. King bed, teak floors, brass fixtures. {STYLE}",
+            f"{INTERIOR}. Flight deck beach club — sand floor, tiki bar, pool edge. Open sky above, ocean visible over deck railing. DJ booth in old weapons elevator. Sunset party atmosphere. {STYLE}",
         ],
         "video_prompts": [
-            "Construction timelapse. Station cleared. Canopy repaired. Tracks removed. Platform converted. Fixed drone. 8 seconds.",
-            "Rapid construction. Brick cleaned. Desks placed. Meeting pods installed. Clock restored. Plants added. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Canopy glows warm. Clock ticks. Workers at desks. Heritage beauty. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial approach to carrier island. Pool glows on deck. Palm trees, glass tower. Turquoise lagoon. 8 seconds.",
+            f"{CINEMATIC}. Entering through reinforced door. Naval corridor opens to luxury suite. Ocean panorama through enlarged portholes. 8 seconds.",
+            f"{CINEMATIC}. Ascending to flight deck. Beach club reveals — sand, pool, tiki bar, sunset over ocean. 8 seconds.",
         ],
     },
-
-    # ─── 15. Soccer Ball Sports Center ────────────────────────────────────────
+    # 15
     {
-        "name": "Soccer Ball Sports Center",
-        "hook": "He Built a SOCCER BALL-Shaped Sports Center! ⚽🏟️",
-        "title": "Building a SOCCER BALL Sports Center! ⚽🏗️",
-        "description": "A massive sports center shaped like a giant soccer ball with hexagonal and pentagonal panel windows!",
-        "hashtags": "#shorts #soccer #football #sports #construction #timelapse #stadium",
+        "name": "Space Shuttle Hangar Home",
+        "hook": "He lives inside a SPACE SHUTTLE hangar! 🚀🏠",
+        "title": "NASA Hangar → LUXURY Shuttle Home! 🚀",
+        "description": "A decommissioned NASA shuttle hangar with a real shuttle inside, converted into the ultimate aerospace-themed luxury home!",
+        "hashtags": "#shorts #spaceshuttle #nasa #hangar #luxury #home #space",
         "frame_prompts": [
-            f"{DRONE_VIEW} at a large sports field area. Flat ground w grass. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Geodesic dome framework rising — steel hexagons and pentagons forming soccer ball pattern. Crane lifts top sections. Workers weld joints. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Soccer ball structure 80% complete — white hexagonal panels and black pentagonal panels creating classic football pattern. Some panels are glass windows. Main entrance through one pentagon. Indoor court visible. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed soccer ball sports center — iconic black and white geodesic pattern. Glass pentagon windows glow green from indoor turf below. White LED outlines hexagons. Landscaped sports fields around. Massive and stunning. {CONSISTENCY} {CAMERA_NOTE}",
+            f"{AERIAL}. Massive NASA hangar being renovated. Shuttle visible inside through open bay doors. Workers building residential structures around and inside the shuttle. Desert landscape. {STYLE}",
+            f"{AERIAL}. Completed shuttle hangar home — hangar doors now glass walls. Shuttle inside lit dramatically. Pool extends from hangar onto tarmac. Modernist additions on sides. {STYLE}",
+            f"{INTERIOR}. Inside the hangar — shuttle as centerpiece with living areas built around it. Double-height ceiling. Modern kitchen under the wing. Shuttle cargo bay opened as loft bedroom. {STYLE}",
+            f"{INTERIOR}. Inside the shuttle cockpit restored as study/office. Original NASA controls preserved behind glass. Leather captain's chair as desk seat. Earth photos on screens. {STYLE}",
         ],
         "video_prompts": [
-            "Fast construction. Geodesic dome frame rises. Hexagons and pentagons welded. Crane lifts top. Fixed drone. 8 seconds.",
-            "Rapid construction. White and black panels applied. Glass windows installed. Court built inside. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Black and white pattern perfect. Green glow from indoor turf. LED outlines hexagons. Dusk. Fixed angle. 8 seconds.",
+            f"{CINEMATIC}. Aerial approaching glass hangar. Shuttle visible inside, dramatically lit. Pool on tarmac. Desert sunset. 8 seconds.",
+            f"{CINEMATIC}. Walking through glass doors into hangar. Shuttle towers above. Kitchen under the wing. Scale is breathtaking. 8 seconds.",
+            f"{CINEMATIC}. Climbing into shuttle, entering restored cockpit. NASA controls, leather chair, Earth photos. Living in space history. 8 seconds.",
         ],
     },
-
-    # ─── 16. Lighthouse → Observatory ─────────────────────────────────────────
-    {
-        "name": "Lighthouse to Observatory",
-        "hook": "Abandoned Lighthouse → Private OBSERVATORY! 🔭🌌",
-        "title": "He Turned a Lighthouse Into an OBSERVATORY! 🔭",
-        "description": "A decommissioned lighthouse transformed into a private astronomical observatory with retractable dome and telescope!",
-        "hashtags": "#shorts #lighthouse #observatory #astronomy #transformation #stars",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a coastal lighthouse on rocky cliffs. White tower with broken light housing. Peeling paint, rusted railing. Ocean crashing below. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Lighthouse being restored. Workers replacing the light housing with a retractable dome mechanism. Interior floors reinforced for telescope mount. Windows cleaned. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Observatory taking shape — fresh white paint on tower. Retractable dome at top with slit opening visible. Large refractor telescope inside. Lower levels converted to library and control room. Railing restored. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed observatory — white tower against starry sky. Dome open showing telescope pointing at stars. Warm control room glow from lower windows. Ocean reflects moonlight. A stargazer's dream. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Lighthouse restored. Dome mechanism installed. Telescope mounted. Paint applied. Fixed drone. 8 seconds.",
-            "Rapid construction. Dome installed at top. Telescope visible. Library built below. Railing restored. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Dome opens to stars. Telescope points up. Moonlit ocean. Warm interior glow. Night magic. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 17. Pringles Can Store ───────────────────────────────────────────────
-    {
-        "name": "Pringles Can Store",
-        "hook": "He Built a PRINGLES CAN Convenience Store! 🥫",
-        "title": "Building a PRINGLES CAN Store! 🥫🏗️",
-        "description": "A convenience store shaped like a massive Pringles tube with the mustache logo as the entrance awning!",
-        "hashtags": "#shorts #pringles #store #food #construction #timelapse #creative",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a street corner commercial lot. Sidewalk and parking. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Large cylindrical steel framework rising. Workers curving panels for the tube body. A semicircle awning frame at the bottom for the mustache logo entrance. Cap structure at top. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Pringles tube structure covered in red glossy panels. Yellow band at bottom with mustache-shaped entrance awning. Green cap structure on top houses HVAC. Product graphics being applied. Shelving visible inside through glass door. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed Pringles store — vibrant red tube with yellow band. Mustache entrance lit with LED. Green cap glows. Interior shelves stocked and lit. Neon OPEN sign. Parking spots painted. Eye-catching. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Cylinder rises. Curved panels formed. Awning frame built. Fixed drone. 8 seconds.",
-            "Rapid construction. Red panels applied. Yellow band painted. Green cap placed. Graphics added. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Red tube vibrant. Mustache entrance glows. Neon sign on. Dusk lighting. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 18. Dam → Bungee Platform ────────────────────────────────────────────
-    {
-        "name": "Dam to Bungee Platform",
-        "hook": "Abandoned Dam → Extreme BUNGEE Platform! 🪂",
-        "title": "He Turned an Abandoned Dam Into BUNGEE JUMPING! 🪂",
-        "description": "A decommissioned dam transformed into an extreme bungee jumping platform with glass observation deck and jump point!",
-        "hashtags": "#shorts #dam #bungee #extreme #transformation #adventure #adrenaline",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned concrete dam. Cracked spillway, dry reservoir, overgrown walls. Impressive height. Mountain canyon. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Dam face being reinforced. Workers building a steel platform extending over the edge. Glass floor sections being installed. Safety railing. Staircase to top. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Bungee platform taking shape — steel and glass platform jutting out from dam face. Jump point with harness station. Glass observation deck below. Safety nets. LED runway lights on the platform edge. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed bungee platform — steel structure gleams against canyon. Glass platform reflects sky. LED runway lights marking jump zone. A jumper mid-leap silhouetted against sunset. Canyon river below. Extreme and beautiful. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Dam reinforced. Steel platform extends over edge. Glass floor installed. Fixed drone. 8 seconds.",
-            "Rapid construction. Jump point built. Safety harness station. LED lights installed. Observation deck glassed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Platform gleams at sunset. LED runway lights glow. Canyon below. Jumper silhouette. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 19. Octopus Restaurant ───────────────────────────────────────────────
-    {
-        "name": "Octopus Restaurant",
-        "hook": "He Built an OCTOPUS Restaurant on the Water! 🐙🍽️",
-        "title": "Building an OCTOPUS Restaurant! 🐙🏗️",
-        "description": "A seafood restaurant shaped like a massive octopus sitting on the waterfront with tentacle-shaped dining extensions over the water!",
-        "hashtags": "#shorts #octopus #restaurant #seafood #construction #timelapse #ocean",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a waterfront pier area. Wooden dock, calm bay water. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Dome-shaped central structure on pylons over water. Workers building 8 curved tentacle extensions radiating outward, supported by underwater pylons. Each tentacle curves differently. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Octopus structure covered — coral-red dome body with two large porthole windows as eyes. 8 tentacle dining extensions with suction cup details. Glass floors on tentacles to see water below. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed octopus restaurant — coral-red body glows warm. Tentacle dining rooms lit with lanterns. Porthole eyes glow yellow. Water reflects all lights. Boats docked nearby. Surreal seafood paradise. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Dome rises on pylons. 8 tentacles extend over water. Workers build curves. Fixed drone. 8 seconds.",
-            "Rapid construction. Red panels applied. Eyes installed. Suction cups added. Glass floors in tentacles. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Tentacles glow with lanterns. Eyes yellow. Water reflects. Dusk on the bay. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 20. Farm Silo → Spiral Library ───────────────────────────────────────
-    {
-        "name": "Silo to Spiral Library",
-        "hook": "Abandoned Farm Silo → Spiral LIBRARY Tower! 📚",
-        "title": "He Turned a Silo Into a SPIRAL LIBRARY! 📚",
-        "description": "An old grain silo transformed into a stunning spiral library with books lining the cylindrical walls floor to ceiling!",
-        "hashtags": "#shorts #silo #library #books #transformation #renovation #spiral",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a rusted farm grain silo. Corroded metal, surrounding farmland. Concrete base cracking. Adjacent barn ruins. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Silo exterior being replaced with new panels. Inside: workers building a spiral wooden staircase along the cylinder wall. Book shelves being installed in spiral. Skylight cut in roof. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Library silo structure — fresh exterior with vertical window strips. Interior: spiral staircase winding 5 stories up lined with floor-to-ceiling bookshelves. Reading nooks at each level. Skylight at top floods light down. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed spiral library — warm light from skylight pours down through the spiral. Thousands of books lining walls. Reading nooks glow with desk lamps. Vertical windows cast light strips. Books and warmth. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Silo restored. Spiral staircase built inside. Shelves installed around walls. Fixed drone. 8 seconds.",
-            "Rapid construction. Books shelved floor to ceiling. Skylight cut. Reading nooks furnished. Lamps placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Golden light streams through skylight down spiral. Books glow warm. Desk lamps twinkle. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 21. Upside Down House ────────────────────────────────────────────────
-    {
-        "name": "Upside Down House",
-        "hook": "He Built a House UPSIDE DOWN! 🙃🏠",
-        "title": "Building an UPSIDE DOWN House! 🙃🏗️",
-        "description": "A house built completely upside down — roof on the ground, foundation in the sky, inverted furniture inside!",
-        "hashtags": "#shorts #upsidedown #house #illusion #construction #timelapse #crazy",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a suburban lot with flat ground. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. An inverted roof structure sits on the ground as foundation. Walls rising upward but with windows and door frames placed upside down. Workers building the house in reverse orientation. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Upside down house nearly complete — pitched roof on ground, foundation slab visible at top. Windows, shutters, door all inverted. A chimney points down from the roof-ground. Garden and mailbox also upside down. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed upside down house — mind-bending perspective. Warm light from inverted windows. Front door is above eye level. Chimney in the ground. Garden fence points down. Visitors staring in disbelief. Viral optical illusion. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Roof placed on ground. Walls rise inverted. Everything built upside down. Fixed drone. 8 seconds.",
-            "Rapid construction. Inverted windows, shutters, door installed. Chimney points down. Garden inverted. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Inverted house glows at dusk. Mind-bending perspective. Visitors stare. Optical illusion magic. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 22. Pier → Floating Cinema ───────────────────────────────────────────
-    {
-        "name": "Pier to Floating Cinema",
-        "hook": "Abandoned Pier → Floating CINEMA on Water! 🎬🌊",
-        "title": "He Built a FLOATING Cinema on an Old Pier! 🎬",
-        "description": "An abandoned wooden pier transformed into a floating outdoor cinema with a massive screen over the water!",
-        "hashtags": "#shorts #pier #cinema #floating #transformation #movies #outdoor",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned wooden pier. Broken planks, collapsed sections, rusted bollards. Calm harbor water. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Pier rebuilt with new hardwood decking. Workers erecting a large screen frame over the water at the end. Floating pontoon seating platforms being anchored. Electrical being run. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Floating cinema taking shape — massive inflatable screen at pier end over water. Rows of lounger seating on floating decks. String lights along new railings. Concession stand on the pier. Speakers on posts. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed floating cinema — massive screen playing vivid movie over dark water. Guests on floating loungers watching. String lights reflect in water. Concession stand glowing. Stars above. Moonlit harbor. Magical outdoor cinema. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Pier rebuilt. Screen frame erected. Floating platforms anchored. Fixed drone. 8 seconds.",
-            "Rapid construction. Screen inflated. Loungers placed. String lights hung. Speakers mounted. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Movie plays on screen. Lights reflect on water. Stars above. Night cinema magic. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 23. Honeycomb Hotel ──────────────────────────────────────────────────
-    {
-        "name": "Honeycomb Hotel",
-        "hook": "He Built a HONEYCOMB Hotel — Each Room is a Cell! 🐝🍯",
-        "title": "Building a HONEYCOMB Hotel! 🐝🏗️",
-        "description": "A boutique hotel shaped like a giant honeycomb with hexagonal rooms, golden exterior, and a rooftop honey bar!",
-        "hashtags": "#shorts #honeycomb #hotel #bee #construction #timelapse #unique",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a green hillside with wildflowers. Rolling meadow. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Steel hexagonal cells being stacked and welded in honeycomb pattern — 3 stories, each cell a room. Crane positions top cells. Workers inside finishing interiors. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Honeycomb hotel structure — golden amber panels on hexagonal cells. Each cell has a round porthole window. Shared corridors between cells. Rooftop terrace being built. Bee wing-shaped awning over entrance. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed honeycomb hotel — golden amber cells glow warm. Round windows lit from inside. Rooftop honey bar with golden canopy. Wildflower garden surrounds. Perfectly organic architecture merging with nature. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Hexagonal cells stacked by crane. Honeycomb pattern forms. Workers inside. Fixed drone. 8 seconds.",
-            "Rapid construction. Golden panels applied. Porthole windows installed. Rooftop bar built. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Golden cells glow warm. Portholes lit. Wildflowers surround. Golden hour perfection. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 24. Stadium → Festival Venue ─────────────────────────────────────────
-    {
-        "name": "Stadium to Festival",
-        "hook": "Abandoned Stadium → Music FESTIVAL Venue! 🎪🎶",
-        "title": "He Turned a Stadium Into a FESTIVAL Venue! 🎪",
-        "description": "An abandoned sports stadium transformed into a permanent music festival venue with multiple stages, art installations, and food courts!",
-        "hashtags": "#shorts #stadium #festival #music #transformation #concert #epic",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned sports stadium. Overgrown pitch, broken seats, graffiti, collapsed press box. Concrete crumbling. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Stadium being renovated. Workers building a main stage at one end. Art installation frames going up on the pitch. Food court structures along the sides. Seating areas cleared and painted. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Festival venue taking shape — massive main stage with LED wall and speaker arrays. Colorful art installations on the pitch. Food court containers along sides. VIP area with couches. Entrance arch. Ferris wheel in one corner. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at night. Completed festival venue — main stage blazing with LED colors. Crowd fills the pitch. Ferris wheel lit with rainbow lights. Food courts glow warm. Laser beams cut the sky. Art installations pulse with light. Electric atmosphere. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Stadium cleared. Stage built. Art installed. Food courts constructed. Fixed drone. 8 seconds.",
-            "Rapid construction. LED wall mounted. Ferris wheel assembled. VIP built. Entrance arch raised. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Stage blazes color. Ferris wheel rainbow. Lasers cut sky. Crowd fills pitch. Night energy. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 25. Pencil Art School ────────────────────────────────────────────────
-    {
-        "name": "Pencil Art School",
-        "hook": "He Built a PENCIL-Shaped Art School! ✏️🎨",
-        "title": "Building a PENCIL-Shaped Art School! ✏️🏗️",
-        "description": "An art school shaped like a massive pencil laid on its side with a sharpened tip entrance and eraser-end gallery!",
-        "hashtags": "#shorts #pencil #art #school #construction #timelapse #creative",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an educational campus area. Flat ground, paved paths. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Long hexagonal steel framework laid horizontally — pencil body shape. Workers building the conical tip section and cylindrical eraser end. Scaffold around. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Pencil building 80% complete — yellow hexagonal body panels with black band stripe. Conical wood-colored tip with graphite-grey point as entrance. Pink eraser cylinder end housing gallery. Windows along body. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed pencil art school — vibrant yellow body. Graphite tip entrance lit warm. Pink eraser gallery glowing. Black band has the school name. Interior lit showing art studios. Colorful landscaping with paintbrush benches. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Hexagonal body frame laid. Tip cone built. Eraser cylinder at end. Fixed drone. 8 seconds.",
-            "Rapid construction. Yellow panels applied. Graphite tip finished. Pink eraser gallery. Windows cut. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Yellow body vibrant. Tip entrance warm. Eraser glows pink. Art studios lit. Dusk. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 26. Fire Tower → Mountain Airbnb ─────────────────────────────────────
-    {
-        "name": "Fire Tower Airbnb",
-        "hook": "Abandoned Fire Tower → Mountain TOP Airbnb! 🏔️🔥",
-        "title": "He Turned a Fire Tower Into an AIRBNB! 🏔️",
-        "description": "A decommissioned forest fire lookout tower transformed into a luxury mountain Airbnb with panoramic views!",
-        "hashtags": "#shorts #firetower #airbnb #mountain #transformation #luxury #views",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an old wooden fire lookout tower on a mountain peak. Weathered timber, broken windows, overgrown stairs. Pine forest below. Mountain panorama. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Tower structure being reinforced. New timber replacing rotted sections. Windows being upgraded to double-pane glass. Interior being insulated. New stairs with proper railing. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Airbnb tower taking shape — fresh stained timber. Large panoramic windows on all sides. Cozy interior visible — bed, mini kitchen, wood stove. Wrap-around deck restored. Solar panel on roof. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at sunset over mountains. Completed fire tower Airbnb — warm timber glows. Panoramic windows reflect mountain sunset. Warm interior with fireplace glow. Deck has two chairs facing the view. Solar panel gleams. Pine forest carpet below. Ultimate mountain retreat. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Tower reinforced. New timber replacing old. Windows upgraded. Stairs rebuilt. Fixed drone. 8 seconds.",
-            "Rapid construction. Interior insulated. Furniture placed. Wood stove installed. Deck restored. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Mountain sunset through windows. Fireplace glows. Two chairs on deck. Pine forest below. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 27. Mushroom Fairy Tale House ────────────────────────────────────────
-    {
-        "name": "Mushroom House",
-        "hook": "He Built a MUSHROOM House From a Fairy Tale! 🍄🏡",
-        "title": "Building a MUSHROOM Fairy Tale House! 🍄",
-        "description": "A whimsical house shaped like a giant mushroom with a red-spotted cap roof and a cozy stem living space!",
-        "hashtags": "#shorts #mushroom #fairytale #house #construction #timelapse #fantasy",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a woodland clearing surrounded by oak trees. Mossy ground, dappled sunlight. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Cylindrical concrete stem structure rising 2 stories. Workers building the wide dome framework for the mushroom cap on top. Scaffolding surrounds. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Mushroom house nearly complete — white stem walls with small round windows and a hobbit-style arched door. Red dome cap roof with white polka dot patterns. Gills visible under the cap overhang. Stone pathway. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed mushroom house — white stem glows warm. Red cap with white spots vivid against green forest. Warm light from round windows. Fairy garden with tiny mushroom lights along stone path. Magical, whimsical perfection. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Cylindrical stem rises. Dome cap framework built on top. Fixed drone. 8 seconds.",
-            "Rapid construction. White walls painted. Red cap with white dots applied. Arched door hung. Stone path laid. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Red cap vivid. Warm glow from windows. Fairy lights along path. Golden hour forest magic. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 28. Hospital → Wellness Center ───────────────────────────────────────
-    {
-        "name": "Hospital to Wellness",
-        "hook": "Abandoned Hospital → Luxury WELLNESS Center! 🏥→🧘",
-        "title": "He Turned a Hospital Into a WELLNESS Center! 🧘",
-        "description": "An abandoned hospital transformed into a luxury wellness center with yoga studios in former operating rooms and a rooftop meditation garden!",
-        "hashtags": "#shorts #hospital #wellness #spa #transformation #renovation #yoga",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned hospital building. Broken windows, overgrown courtyard, faded red cross sign. Multi-story concrete building deteriorating. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Hospital being gutted and renovated. Workers removing old fixtures. New bamboo flooring being installed. Large windows being cut. Rooftop being cleared for garden. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Wellness center taking shape — clean white walls with natural wood accents. Former wards now yoga halls with mirrors. Hydrotherapy pool in old basement. Rooftop garden with meditation pods. Bamboo and stone throughout. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed wellness center — serene white exterior. Rooftop meditation garden with zen stones and bamboo. Yoga practitioners visible through large windows. Hydrotherapy pool glows blue. Water features in courtyard. Tranquil paradise. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Hospital gutted. New floors installed. Windows enlarged. Rooftop cleared. Fixed drone. 8 seconds.",
-            "Rapid construction. Yoga halls finished. Pool built. Rooftop garden planted. Meditation pods placed. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Rooftop garden serene. Yoga through windows. Pool glows blue. Golden hour peace. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 29. Teapot Tea House ─────────────────────────────────────────────────
-    {
-        "name": "Teapot Tea House",
-        "hook": "He Built a TEAPOT-Shaped Tea House! 🫖",
-        "title": "Building a TEAPOT Tea House! 🫖🏗️",
-        "description": "A charming tea house shaped like a giant ceramic teapot with a spout entrance canopy and lid-shaped rooftop terrace!",
-        "hashtags": "#shorts #teapot #teahouse #construction #timelapse #cozy #unique",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at a garden area with hedgerows and flower beds. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Round bulbous structure rising — the teapot body. Workers building the curved spout extension and handle arch on opposite sides. Scaffolding wraps around. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Teapot structure covered in cream ceramic-look panels. Handle is a decorative arch with seating underneath. Spout extends as an entrance canopy. Removable lid at top is a terrace. Round windows. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at golden hour. Completed teapot tea house — warm cream body. Spout entrance with guests entering. Handle arch with cozy bench. Lid terrace has outdoor seating. Round windows glow warm from tea room inside. Rose garden surrounds. English charm. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Fast construction. Round body rises. Spout and handle formed. Lid built on top. Fixed drone. 8 seconds.",
-            "Rapid construction. Cream panels applied. Round windows cut. Interior furnished. Garden planted. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Teapot glows cream. Spout entrance inviting. Rose garden blooms. Golden hour warmth. Fixed angle. 8 seconds.",
-        ],
-    },
-
-    # ─── 30. Submarine Base → Dive Center ─────────────────────────────────────
-    {
-        "name": "Sub Base to Dive Center",
-        "hook": "Abandoned Submarine Base → SCUBA Diving Center! 🤿",
-        "title": "He Turned a Sub Base Into a DIVE CENTER! 🤿",
-        "description": "A Cold War submarine base transformed into a scuba diving center with underwater training pools in the old sub pens!",
-        "hashtags": "#shorts #submarine #diving #scuba #transformation #military #underwater",
-        "frame_prompts": [
-            f"{DRONE_VIEW} at an abandoned submarine pen — massive concrete bunker opening to water. Rusted blast doors, crumbling walkways, flooded sub berths. Cold War era. {LIGHTING} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Sub pens being renovated. Workers cleaning pools, reinforcing walls. New filtration systems. Underwater lighting being installed. Office spaces being built on upper catwalks. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW}. Dive center taking shape — crystal clear water in sub pens. Underwater LED lighting showing artificial reef structures. Training platforms at different depths. Equipment storage racks. Modern reception on upper level. Glass viewing windows. {CONSISTENCY} {CAMERA_NOTE}",
-            f"{DRONE_VIEW} at dusk. Completed dive center — sub pen water glows turquoise from underwater LEDs. Artificial reefs visible below surface. Divers training with bubbles rising. Modern reception lit warm above. Historic concrete structure beautifully repurposed. {CONSISTENCY} {CAMERA_NOTE}",
-        ],
-        "video_prompts": [
-            "Construction timelapse. Sub pens cleared. Pools cleaned. Filtration installed. Walls reinforced. Fixed drone. 8 seconds.",
-            "Rapid construction. Underwater lights placed. Reef structures sunk. Training platforms built. Reception finished. Fixed camera. 8 seconds.",
-            "Cinematic reveal. Turquoise water glows. Divers bubble below. Reception warm above. Historic meets modern. Fixed angle. 8 seconds.",
-        ],
-    },
+    # 16
+    {"name": "Yacht in Forest", "hook": "A SUPERYACHT in the middle of a forest! 🛥️🌲", "title": "Superyacht → Forest MANSION! 🛥️🌲", "description": "A 60m superyacht transported and placed in a forest clearing, converted into a luxury forest mansion!", "hashtags": "#shorts #yacht #forest #mansion #luxury #conversion #architecture",
+     "frame_prompts": [f"{AERIAL}. 60-meter superyacht being transported on massive trucks through forest road to clearing. Trees tower around. Crane preparing to position. {STYLE}", f"{AERIAL}. Completed yacht mansion in forest clearing — white hull contrasts green trees. Deck furniture, pool on aft deck. Forest garden landscaping around hull. {STYLE}", f"{INTERIOR}. Yacht salon converted to forest lodge living room. Floor-to-ceiling windows show pine forest instead of ocean. Warm wood, cream leather, gold accents. {STYLE}", f"{INTERIOR}. Yacht master cabin — panoramic windows framing forest canopy. King bed, en-suite marble bathroom. Morning mist between trees outside. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial orbit around white yacht in green forest. Pool on deck, trees surround. Surreal beauty. 8 seconds.", f"{CINEMATIC}. Walking up gangway into yacht salon. Forest through windows instead of ocean. Warm luxury reveals. 8 seconds.", f"{CINEMATIC}. Pan to master cabin. Forest mist through panoramic windows. Marble bathroom. 8 seconds."]},
+    # 17
+    {"name": "Fire Truck Station House", "hook": "An old FIRE STATION → Family Dream Home! 🚒🏠", "title": "Abandoned Fire Station → Dream HOME! 🚒", "description": "A historic fire station with original brass poles and garage doors converted into an open-concept luxury family home!", "hashtags": "#shorts #firestation #home #conversion #brass #firehouse #luxury",
+     "frame_prompts": [f"{AERIAL}. Workers renovating a brick fire station. Bay doors being replaced with glass. Scaffolding on clock tower. Vintage fire truck parked outside. {STYLE}", f"{AERIAL}. Completed fire station home — restored brick exterior, glass bay doors showing interior. Rooftop terrace with hot tub. Original clock tower preserved. Landscaped courtyard. {STYLE}", f"{INTERIOR}. Former truck bay now double-height living room. Original brass fire pole preserved as decorative element. Industrial ceiling beams, polished concrete floor, modern furniture. {STYLE}", f"{INTERIOR}. Upstairs dormitory converted to master suite. Exposed brick walls, iron bed frame, brass pole access to living room below. Clawfoot tub by arched window. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial of restored fire station. Glass bay doors glowing warm. Clock tower lit. Cozy exterior. 8 seconds.", f"{CINEMATIC}. Glass bay doors open. Camera enters double-height living room. Brass pole, industrial beams, modern furniture. 8 seconds.", f"{CINEMATIC}. Climbing to master suite. Exposed brick, brass pole, clawfoot tub by arched window. 8 seconds."]},
+    # 18
+    {"name": "Cruise Ship Mountain Lodge", "hook": "A CRUISE SHIP on top of a mountain! 🚢🏔️", "title": "Cruise Ship → Mountain Top LODGE! 🚢⛰️", "description": "A cruise ship section airlifted to a mountain peak and converted into the world's highest luxury lodge!", "hashtags": "#shorts #cruise #mountain #lodge #luxury #extreme #architecture",
+     "frame_prompts": [f"{AERIAL}. Heavy-lift helicopters placing cruise ship section on mountain peak. Workers securing structure to rock foundation. Snow-capped peaks panorama. {STYLE}", f"{AERIAL}. Completed mountain cruise lodge — white ship section perched on peak. Glass observation deck at bow. Pool on lido deck with mountain views. Snow all around. {STYLE}", f"{INTERIOR}. Cruise ship atrium now mountain lodge lobby. Grand staircase, chandelier. But through the windows: snow-capped peaks instead of ocean. Cozy fireplaces added. {STYLE}", f"{INTERIOR}. Balcony stateroom with mountain panorama. Luxury bed facing floor-to-ceiling windows. Clouds float below. Hot chocolate on nightstand. Alpine paradise. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial orbit around cruise ship on mountain peak. Snow, clouds, pool on deck. Surreal location. 8 seconds.", f"{CINEMATIC}. Entering grand atrium. Staircase, chandelier, but mountains through windows. Fire crackling. 8 seconds.", f"{CINEMATIC}. Walking to stateroom. Balcony reveals mountain panorama. Clouds below. Alpine luxury. 8 seconds."]},
+    # 19
+    {"name": "Prison to Boutique Hotel", "hook": "Abandoned PRISON → 5-Star Boutique Hotel! 🔒✨", "title": "Old Prison → LUXURY Boutique Hotel! 🔒", "description": "A century-old prison with original cell blocks transformed into a luxury boutique hotel where each cell is a designer suite!", "hashtags": "#shorts #prison #hotel #boutique #luxury #conversion #historic",
+     "frame_prompts": [f"{AERIAL}. Century-old stone prison being renovated. New glass roof over courtyard. Workers restoring cell blocks. Guard towers being converted to observation restaurants. {STYLE}", f"{AERIAL}. Completed prison hotel — stone walls preserved, glass roof over courtyard garden. Guard tower restaurants lit warmly. Pool in former exercise yard. Elegant entrance. {STYLE}", f"{INTERIOR}. Former prison cell converted to luxury micro-suite. Original iron bars as decorative headboard. Stone walls with velvet wallpaper accent. Rainfall shower where toilet was. {STYLE}", f"{INTERIOR}. Central courtyard under glass ceiling — now a tropical garden atrium. Dining tables among palms. Original cell block walkways as balconies above. Evening ambience. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over prison hotel. Glass courtyard roof, guard tower restaurants, pool in yard. Historic beauty. 8 seconds.", f"{CINEMATIC}. Walking past iron gates into cell suite. Bars become headboard. Velvet walls, rainfall shower. Luxury in confinement. 8 seconds.", f"{CINEMATIC}. Emerging to courtyard garden. Palms, dining, cell block balconies above. Tropical prison paradise. 8 seconds."]},
+    # 20
+    {"name": "Double Decker Bus Hotel", "hook": "10 DOUBLE DECKER BUSES → Roadside Hotel! 🚌🏨", "title": "London Buses → Roadside HOTEL! 🚌", "description": "Ten retired London double-decker buses converted and arranged into a quirky roadside hotel with themed rooms!", "hashtags": "#shorts #doubledecker #bus #hotel #london #quirky #conversion",
+     "frame_prompts": [f"{AERIAL}. Ten red London double-decker buses being arranged in a U-shape on a countryside hill. Workers modifying interiors. Central courtyard forming. {STYLE}", f"{AERIAL}. Completed bus hotel — 10 red buses in U-shape around courtyard with fire pit and fairy lights. Each bus a unique themed room. Green roofs on some buses. Reception bus at entrance. {STYLE}", f"{INTERIOR}. Inside a bus converted to luxury room — upper deck is bedroom with skylight roof. Restored original seats as reading nook. Warm wood floors, boutique hotel quality. {STYLE}", f"{INTERIOR}. Driver's area converted to romantic ensuite — freestanding tub where driver sat. Original steering wheel preserved. Views through windshield of rolling hills. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over red bus hotel. Fairy lights, fire pit courtyard, countryside. Charming quirky. 8 seconds.", f"{CINEMATIC}. Stepping onto bus. Camera ascends stairs to upper deck bedroom. Skylight, warm wood, cozy bed. 8 seconds.", f"{CINEMATIC}. Moving to driver area — bathtub where wheel was. Hills through windshield. Unique luxury. 8 seconds."]},
+    # 21-30: Short-form concepts
+    {"name": "Lighthouse Cliff Mansion", "hook": "Abandoned LIGHTHOUSE → Cliff Edge Mansion! 🏮🏖️", "title": "Old Lighthouse → Cliff MANSION! 🏮", "description": "A decommissioned lighthouse on dramatic sea cliffs transformed into a luxury mansion with the light room as master bedroom!", "hashtags": "#shorts #lighthouse #cliff #mansion #luxury #ocean #renovation",
+     "frame_prompts": [f"{AERIAL}. Workers renovating white lighthouse on dramatic sea cliffs. Glass additions being built around base. Crane on cliff edge. Waves crash below. {STYLE}", f"{AERIAL}. Completed lighthouse mansion — white tower with glass base additions. Wraparound terrace on cliff edge. Infinity pool overlooking ocean. Dramatic sunset. {STYLE}", f"{INTERIOR}. Light room converted to circular master bedroom. 360-degree ocean views. Original Fresnel lens preserved as art piece. King bed center. Sunrise position. {STYLE}", f"{INTERIOR}. Glass extension living room at base. Open to cliff edge through floor-to-ceiling windows. Waves visible below. White minimalist interior with driftwood accents. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial around lighthouse on cliffs. Pool on edge. Waves crash. Golden hour. 8 seconds.", f"{CINEMATIC}. Climbing spiral stairs to light room. 360 ocean reveals. Fresnel lens art. Bed in the sky. 8 seconds.", f"{CINEMATIC}. Descending to glass living room. Cliff edge views. Waves below. White luxury. 8 seconds."]},
+    # 22
+    {"name": "Airplane Graveyard Resort", "hook": "An AIRPLANE GRAVEYARD → Desert Resort! ✈️🏜️", "title": "Airplane Graveyard → Desert RESORT! ✈️🏜️", "description": "Multiple aircraft in a desert boneyard each converted into unique luxury suites forming an aviation-themed desert resort!", "hashtags": "#shorts #airplane #desert #resort #graveyard #aviation #luxury",
+     "frame_prompts": [f"{AERIAL}. Desert airplane graveyard — five aircraft being renovated. Workers on each plane. Central pool being built between them. Desert mountains behind. {STYLE}", f"{AERIAL}. Completed resort — five aircraft as luxury suites around turquoise pool. Desert garden. Control tower as restaurant. Runway as entertainment strip. Night lights. {STYLE}", f"{INTERIOR}. Inside a 737 converted to luxury suite — business class seats removed, king bed installed. Original overhead bins now shelving. Ambient blue mood lighting. Desert views through windows. {STYLE}", f"{INTERIOR}. Cockpit converted to private hot tub room. Controls preserved behind glass. Bubble bath with desert sunset through cockpit windows. Ultimate aviation luxury. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over airplane resort at sunset. Five planes, pool, desert mountains. Unique oasis. 8 seconds.", f"{CINEMATIC}. Entering 737 door. Business class now bedroom. Blue mood lighting, desert through windows. 8 seconds.", f"{CINEMATIC}. Moving forward to cockpit hot tub. Controls preserved, sunset through cockpit glass. 8 seconds."]},
+    # 23
+    {"name": "Castle Ruin Modern Villa", "hook": "Medieval CASTLE RUIN → Modern Luxury Villa! 🏰✨", "title": "Castle Ruin → MODERN Luxury Villa! 🏰", "description": "A crumbling medieval castle ruin with modern glass and steel additions creating a stunning historic-meets-contemporary villa!", "hashtags": "#shorts #castle #ruin #modern #luxury #villa #medieval #glass",
+     "frame_prompts": [f"{AERIAL}. Medieval stone castle ruin with modern glass cube additions being built within the walls. Workers bridging old and new. Ancient towers, new steel beams. {STYLE}", f"{AERIAL}. Completed castle villa — ancient stone walls preserved, modern glass cubes inserted inside. Rooftop terrace on old tower. Pool in former courtyard. {STYLE}", f"{INTERIOR}. Modern glass living room inserted between ancient stone walls. Sleek furniture against 800-year-old masonry. Fireplace in original medieval hearth. {STYLE}", f"{INTERIOR}. Bedroom in restored tower — circular room, original arrow slit windows plus new panoramic glass. Four-poster modern bed. Stone spiral staircase. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial around castle villa. Ancient walls, modern glass. Pool in courtyard. Historic beauty. 8 seconds.", f"{CINEMATIC}. Walking through stone arch into glass living room. Medieval walls meet modern design. Fireplace in ancient hearth. 8 seconds.", f"{CINEMATIC}. Ascending tower staircase to circular bedroom. Arrow slits and panoramic glass. 800 years of history. 8 seconds."]},
+    # 24
+    {"name": "Missile Silo Smart Home", "hook": "Nuclear MISSILE SILO → Ultimate Smart Home! ☢️🏠", "title": "Missile Silo → Underground SMART Home! ☢️", "description": "A decommissioned nuclear missile silo 60 feet underground converted into an AI-powered smart home with blast door entrance!", "hashtags": "#shorts #missilesilo #smarthome #nuclear #underground #luxury #bunker",
+     "frame_prompts": [f"{AERIAL}. Concrete missile silo cap in Kansas prairie. Heavy blast door being reinforced. Workers descending into shaft. Flat farmland stretches to horizon. {STYLE}", f"{AERIAL}. Completed silo home — surface level has dome greenhouse, solar array, small pool. Blast door entrance polished steel. Underground luxury invisible from above. {STYLE}", f"{INTERIOR}. 60 feet underground in the silo — multi-level open atrium with central void. Living room with vertical garden wall. Smart home screens and automated lighting. {STYLE}", f"{INTERIOR}. Silo bedroom level — curved concrete walls with LED sky ceiling simulating daylight. King bed, walk-in closet. AI voice assistant panel. 8 seconds from surface. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over prairie. Small structures, blast door. Underground luxury invisible. Descending. 8 seconds.", f"{CINEMATIC}. Blast door opens with hydraulics. Elevator descends 60 feet. Atrium reveals, vertical garden, smart screens. 8 seconds.", f"{CINEMATIC}. Moving to bedroom level. LED sky ceiling, smart controls. Underground luxury technology. 8 seconds."]},
+    # 25
+    {"name": "Fishing Trawler Villa", "hook": "Old FISHING TRAWLER → Coastal Luxury Villa! 🚢🏡", "title": "Rusty Trawler → LUXURY Coastal Villa! 🚢", "description": "A decommissioned fishing trawler beached and converted into a coastal villa with the wheelhouse as master suite!", "hashtags": "#shorts #trawler #fishing #coastal #villa #luxury #beach #conversion",
+     "frame_prompts": [f"{AERIAL}. Rusty fishing trawler being beached by crane on sandy coast. Workers removing fishing equipment. Coastal dunes, beach grass. {STYLE}", f"{AERIAL}. Completed trawler villa — hull painted navy blue, deck has outdoor living area. Wheelhouse has panoramic glass. Dune garden around. Beach access stairs. {STYLE}", f"{INTERIOR}. Ship hold converted to open-plan coastal living. White shiplap walls, porthole windows, nautical details preserved. Driftwood dining table, sea views. {STYLE}", f"{INTERIOR}. Wheelhouse master suite — original ship wheel preserved. Panoramic ocean views from captain's windows. King bed, maritime brass fixtures. Sunrise room. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial around navy trawler on beach. Deck living, dune garden. Coastal charm. 8 seconds.", f"{CINEMATIC}. Entering through hull door. White shiplap living room, portholes, nautical detail. Coastal luxury. 8 seconds.", f"{CINEMATIC}. Climbing to wheelhouse suite. Ship wheel, panoramic ocean. Captain's quarters luxury. 8 seconds."]},
+    # 26
+    {"name": "Stadium Underground City", "hook": "Abandoned STADIUM → Underground City! 🏟️🌆", "title": "Old Stadium → Underground CITY! 🏟️", "description": "A massive abandoned sports stadium with underground levels converted into a self-sustaining underground city with shops, homes, and gardens!", "hashtags": "#shorts #stadium #underground #city #conversion #survival #community",
+     "frame_prompts": [f"{AERIAL}. Abandoned stadium being excavated beneath. Workers digging multi-level underground complex. Stadium superstructure provides the roof. Massive scale project. {STYLE}", f"{AERIAL}. Completed stadium city — arena floor is now a garden park. Underground levels visible through glass atriums. Stadium seating areas converted to terraced apartments. {STYLE}", f"{INTERIOR}. Underground shopping street beneath stadium — arched concrete ceilings with skylights to pitch above. Boutique shops, cafes. Plants hang from above. Warm lighting. {STYLE}", f"{INTERIOR}. Terraced apartment in former seating area — panoramic view of the garden arena below. Modern kitchen, living room. View of entire underground city from balcony. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over stadium city. Garden arena floor, glass atriums, terraced apartments. Living city inside. 8 seconds.", f"{CINEMATIC}. Descending into underground shopping street. Arched ceiling, boutiques, cafes, skylights. Subterranean life. 8 seconds.", f"{CINEMATIC}. Entering terraced apartment. Balcony overlooks entire arena city below. Modern comfort. 8 seconds."]},
+    # 27
+    {"name": "Gondola Cable Car Hotel", "hook": "Cable Car GONDOLAS → Sky Hotel Suites! 🚡🏨", "title": "Cable Cars → SKY Hotel Suites! 🚡", "description": "Luxury hotel where each suite is a suspended cable car gondola with glass floors and mountain panoramas!", "hashtags": "#shorts #cablecar #gondola #hotel #sky #mountains #luxury",
+     "frame_prompts": [f"{AERIAL}. Workers installing oversized luxury gondolas on cable car system over mountain valley. Each gondola the size of a small apartment. Alpine scenery. {STYLE}", f"{AERIAL}. Completed gondola hotel — 8 luxury gondolas suspended over valley at different heights. Central mountain station as lobby/restaurant. Snow peaks behind. Lights twinkling at dusk. {STYLE}", f"{INTERIOR}. Inside a gondola suite — glass floor showing valley 500m below. King bed with mountain view. Mini kitchen, rainfall shower in corner. Clouds at eye level. {STYLE}", f"{INTERIOR}. Mountain station restaurant — glass walls 360 degrees. Gourmet dining with alpine panorama. Original cable machinery preserved as industrial art. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial through gondola suites hanging over valley. Snow peaks, twinkling lights. Sky living. 8 seconds.", f"{CINEMATIC}. Entering gondola suite. Glass floor reveals valley below. Bed, mountain views, clouds. Vertigo luxury. 8 seconds.", f"{CINEMATIC}. Arriving at mountain station. Glass restaurant, 360 alpine views. Cable machinery art. 8 seconds."]},
+    # 28
+    {"name": "Cement Factory Loft", "hook": "Abandoned CEMENT FACTORY → Brutalist Luxury Loft! 🏭🏠", "title": "Cement Factory → LUXURY Brutalist Loft! 🏭", "description": "A massive abandoned cement factory with silos and smokestacks converted into a stunning brutalist luxury residence and art space!", "hashtags": "#shorts #cementfactory #brutalist #loft #luxury #industrial #architecture",
+     "frame_prompts": [f"{AERIAL}. Massive abandoned cement factory — silos, conveyors, smokestacks. Workers cleaning and renovating. New glass additions visible. Industrial scale enormous. {STYLE}", f"{AERIAL}. Completed factory loft — concrete silos as tower rooms, main hall has glass roof. Gardens growing from old concrete. Pool in mixing basin. Dramatic brutalist beauty. {STYLE}", f"{INTERIOR}. Main hall — towering concrete space with glass roof. 20m ceiling. Living area dwarfed by industrial scale. Tropical garden bed, minimal furniture, art installations. {STYLE}", f"{INTERIOR}. Silo bedroom — circular concrete room, raw walls. Skylight at top. Floating bed, monstera plants. Rainfall shower in alcove. Monastic industrial luxury. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over cement factory estate. Silos, glass roof, garden growing from concrete. Brutalist beauty. 8 seconds.", f"{CINEMATIC}. Entering main hall. 20m concrete ceiling, glass roof. Tiny furniture, massive space. Tropical garden. Breathtaking scale. 8 seconds.", f"{CINEMATIC}. Inside silo bedroom. Circular concrete, skylight beam, floating bed. Monastic luxury. 8 seconds."]},
+    # 29
+    {"name": "Tanker Truck Motel", "hook": "He parked 15 TANKER TRUCKS and made a motel! 🛢️🏨", "title": "15 Tanker Trucks → Roadside MOTEL! 🛢️", "description": "Fifteen fuel tanker trucks converted and parked in a row at a desert gas station, each one a unique luxury motel room!", "hashtags": "#shorts #tanker #truck #motel #desert #roadside #conversion",
+     "frame_prompts": [f"{AERIAL}. Fifteen tanker trucks being positioned in a row at a desert gas station. Workers cutting doors and windows into cylindrical tanks. Route 66 vibes. {STYLE}", f"{AERIAL}. Completed tanker motel — 15 chrome tankers in row, each with round porthole windows and doors cut in. Neon MOTEL sign. Pool between rows. Desert sunset. Americana aesthetic. {STYLE}", f"{INTERIOR}. Inside a tanker room — cylindrical space with curved walls. Cozy queen bed with custom curved headboard. LED strip along ceiling curve. Porthole window shows desert. {STYLE}", f"{INTERIOR}. Tanker bathroom — wet room with curved walls. Rainfall shower, brushed chrome fixtures matching tank exterior. Round mirror. Industrial chic. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial over chrome tanker motel at sunset. Neon sign glows, pool sparkles, desert stretches. Americana. 8 seconds.", f"{CINEMATIC}. Opening tanker door. Curved interior reveals — cozy bed, LED strips, porthole desert view. Unique room. 8 seconds.", f"{CINEMATIC}. Into curved bathroom. Rainfall shower, chrome fixtures. Industrial luxury in a tank. 8 seconds."]},
+    # 30
+    {"name": "Wind Turbine Tower Home", "hook": "A WIND TURBINE became a tower home! 💨🏠", "title": "Wind Turbine → TOWER Living Space! 💨", "description": "A decommissioned wind turbine tower converted into a multi-level cylindrical home with the nacelle as a sky observation room!", "hashtags": "#shorts #windturbine #tower #home #sustainable #sky #conversion",
+     "frame_prompts": [f"{AERIAL}. Workers converting a wind turbine — blades removed, nacelle being modified with glass windows. Platforms being added at multiple heights. Green energy farm around. {STYLE}", f"{AERIAL}. Completed turbine home — white tower with round windows at various levels. Nacelle at top has full glass walls as observation room. Rooftop garden ring. Spiral exterior staircase. {STYLE}", f"{INTERIOR}. Mid-tower cylindrical living room — curved white walls, porthole windows at 50m height. Custom curved sofa, central kitchen pod. Views for miles in every direction. {STYLE}", f"{INTERIOR}. Nacelle observation room at top — 80m up. Full glass walls, 360-degree views. Meditation space with floor cushions. Clouds drift past. Above the world. {STYLE}"],
+     "video_prompts": [f"{CINEMATIC}. Aerial ascending along white turbine tower. Windows at levels, nacelle at top glowing. Wind farm around. 8 seconds.", f"{CINEMATIC}. Entering tower, elevator up. Mid-level living room reveals. Curved walls, panoramic views at 50m. 8 seconds.", f"{CINEMATIC}. Ascending to nacelle. Glass room 80m up. 360 views. Clouds drift past. Sky living. 8 seconds."]},
 ]
 
 
@@ -631,7 +377,6 @@ HISTORY_FILE = PROJECT_ROOT / "logs" / "aimagine_history.json"
 
 def get_daily_concept() -> dict:
     """Pick a random concept, avoiding recent repeats using history file."""
-    # Load history
     recent = []
     if HISTORY_FILE.exists():
         try:
@@ -639,17 +384,14 @@ def get_daily_concept() -> dict:
         except Exception:
             recent = []
 
-    # Find concepts not recently used (last 30 days)
     recent_set = set(recent[-30:])
     available = [c for c in TIMELAPSE_CONCEPTS if c["name"] not in recent_set]
 
     if not available:
-        # All concepts used, reset and pick any
         available = list(TIMELAPSE_CONCEPTS)
 
     chosen = random.choice(available)
 
-    # Save to history
     recent.append(chosen["name"])
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(recent[-60:], ensure_ascii=False), encoding="utf-8")
