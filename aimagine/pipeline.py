@@ -188,14 +188,39 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     logger.info(f"\n✅ Timelapse video ready: {final_path}")
     logger.info(f"⏱️ Time: {elapsed/60:.1f} minutes")
 
-    # ── 5b. Background Music ────────────────────────────────────────────────
+    # ── 5b. Female Voiceover Narration ─────────────────────────────────────
+    narration_style = "none"
+    try:
+        from core.narration import create_narration_for_concept
+        from core.ffmpeg_tools import mix_voiceover
+        narration_audio, narration_style = create_narration_for_concept(
+            concept_name=concept["name"],
+            hook=concept["hook"],
+            output_path=dirs["final"] / f"{project_name}_narration.wav",
+        )
+        if narration_audio and narration_audio.exists():
+            narrated_out = dirs["final"] / f"{project_name}_NARRATED.mp4"
+            mix_voiceover(
+                final_path, narration_audio, narrated_out,
+                voice_volume=1.0,   # Full voice volume
+                bg_duck=0.2,        # Duck original audio to 20%
+            )
+            if narrated_out.exists() and narrated_out.stat().st_size > 0:
+                final_path = narrated_out
+                logger.info(f"🎙️ Voiceover narration added (style: {narration_style})")
+    except Exception as e:
+        logger.warning(f"⚠️ Narration step skipped: {e}")
+
+    # ── 5c. Background Music (layered on top of narration) ──────────────────
     try:
         from core.music_generator import generate_background_music
         from core.ffmpeg_tools import mix_background_music
         music_path = generate_background_music(CHANNEL)
         if music_path and music_path.exists():
             music_out = dirs["final"] / f"{project_name}_MUSIC.mp4"
-            mix_background_music(final_path, music_path, music_out, music_volume=0.15)
+            # Lower music volume when narration is present
+            vol = 0.08 if narration_style != "none" else 0.15
+            mix_background_music(final_path, music_path, music_out, music_volume=vol)
             if music_out.exists() and music_out.stat().st_size > 0:
                 final_path = music_out
                 logger.info("🎵 Background music added")
@@ -236,6 +261,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
         "channel": CHANNEL,
         "concept": concept["name"],
         "title": title,
+        "narration_style": narration_style,
         "frames": len(frames),
         "clips": len(clips),
         "duration_min": round(elapsed / 60, 1),
