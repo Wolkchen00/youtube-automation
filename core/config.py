@@ -61,18 +61,20 @@ DEFAULT_ASPECT_RATIO = "9:16"       # Vertical / Shorts format
 DEFAULT_RESOLUTION = "1K"
 DEFAULT_OUTPUT_FORMAT = "png"
 DEFAULT_VIDEO_DURATION = "8"        # seconds per clip
-DEFAULT_VIDEO_MODEL = "kling-3.0/video"
-DEFAULT_VIDEO_MODE = "std"          # std = cheaper, pro = expensive
+DEFAULT_VIDEO_MODEL = "kling-2.1/video"   # BUDGET Kling — 40 credits/8s (Kling 3.0 was 112)
+DEFAULT_VIDEO_MODE = "std"               # std = Standard quality, good balance
 DEFAULT_IMAGE_MODEL = "nano-banana-2"
-CINEMATIC_VIDEO_MODEL = "veo3_fast"  # Kie AI model names: veo3 (quality) or veo3_fast (fast)
-CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite"  # Cheaper alternative: 30 credits vs 80
+CINEMATIC_VIDEO_MODEL = "veo3_fast"      # Kie AI model names: veo3 (quality) or veo3_fast (fast)
+CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite" # 60 credits per 8s clip — includes voice narration
 
-# Per-channel VEO model selection (None = skip VEO3, use Kling directly)
+# Per-channel video model strategy:
+# - Visual channels (AIMagine, Sentinal): Kling 2.1 Std (40 credits) — high quality visuals
+# - Narration channels (GE, SH): VEO3 Lite (60 credits) — built-in AI voice narration
 CHANNEL_VEO_MODEL = {
-    "sentinal_ihsan": None,                              # Kling-primary — VEO3 Lite times out with face-ref images
-    "galactic_experiment": CINEMATIC_VIDEO_MODEL_LITE,   # Lite — stable for narration
-    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,       # Lite — stable for historical scenes
-    "aimagine": CINEMATIC_VIDEO_MODEL_LITE,              # Lite — construction timelapses
+    "sentinal_ihsan": None,                              # Kling 2.1 primary — visual quality matters most
+    "aimagine": None,                                    # Kling 2.1 primary — construction detail matters
+    "galactic_experiment": CINEMATIC_VIDEO_MODEL_LITE,   # VEO3 Lite — needs AI narration voice
+    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,       # VEO3 Lite — needs AI narration voice
 }
 
 # Duration constraints per channel (seconds)

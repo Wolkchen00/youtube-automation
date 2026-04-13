@@ -12,8 +12,8 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, logger
-from core.kie_api import generate_image, generate_video, check_credit
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, logger
+from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
@@ -151,13 +151,29 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
 
         logger.info(f"  Clip {i+1}: {start_frame['stage']} → {end_frame['stage']}")
 
-        video_url = generate_video(
-            prompt=vp,
-            start_image_url=start_frame["url"],
-            end_image_url=end_frame["url"],
-            duration="8",
-            sound=True,
-        )
+        video_url = None
+
+        # VEO3 Lite primary (30 credits vs Kling 112)
+        veo_model = CHANNEL_VEO_MODEL.get(CHANNEL)
+        if veo_model:
+            video_url = generate_veo_video(
+                prompt=vp,
+                image_url=start_frame["url"],
+                duration="8",
+                model=veo_model,
+            )
+
+        # Kling fallback if VEO3 fails
+        if not video_url:
+            if veo_model:
+                logger.warning(f"⚠️ VEO3 Clip {i+1} failed, trying Kling fallback...")
+            video_url = generate_video(
+                prompt=vp,
+                start_image_url=start_frame["url"],
+                end_image_url=end_frame["url"],
+                duration="8",
+                sound=True,
+            )
 
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
