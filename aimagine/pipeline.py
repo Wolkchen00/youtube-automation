@@ -69,6 +69,13 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     description = concept.get("description", f"Incredible construction timelapse: {concept['name']}")
     hashtags = concept.get("hashtags", "#shorts #construction #timelapse #satisfying #diy")
 
+    # Trending hook — boost title with daily trending keywords
+    from core.trending import enhance_title_with_trend, get_trending_hashtags
+    title = enhance_title_with_trend(title, CHANNEL)
+    trending_tags = get_trending_hashtags(CHANNEL)
+    if trending_tags:
+        hashtags = f"{hashtags} {trending_tags}"
+
     if dry_run:
         logger.info("🏃 DRY RUN — Skipping generation.")
         return {"date": today, "concept": concept["name"], "title": title, "dry_run": True}

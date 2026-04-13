@@ -83,6 +83,13 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     if isinstance(hashtags, list):
         hashtags = " ".join(hashtags)
 
+    # Trending hook — boost title with daily trending keywords
+    from core.trending import enhance_title_with_trend, get_trending_hashtags
+    title = enhance_title_with_trend(title, CHANNEL)
+    trending_tags = get_trending_hashtags(CHANNEL)
+    if trending_tags:
+        hashtags = f"{hashtags} {trending_tags}"
+
     logger.info(f"   Title: {title}")
     logger.info(f"   Hook: {hook}")
     if location_name:

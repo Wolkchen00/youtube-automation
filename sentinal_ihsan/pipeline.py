@@ -5,8 +5,9 @@ CRITICAL CHANGES:
   ✅ 4 clips × 8s = ~32s final (minimum 20s enforced)
   ✅ VEO3 Lite for video clips (speech + motion)
   ✅ Face reference on ALL frames
-  ✅ Hard cut transitions (no crossfade — cleaner scene changes)
+  ✅ Smooth crossfade transitions (0.3s — cinematic feel)
   ✅ Action-first prompts (continuous interaction with concept)
+  ✅ iPhone UGC realism — outdoor locations, authentic textures
 """
 
 import time
@@ -17,7 +18,7 @@ from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, CINEM
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
-    check_ffmpeg, concatenate_simple, final_export,
+    check_ffmpeg, concatenate_crossfade, final_export,
     get_video_duration, trim_to_duration,
     make_loop_video, prepend_teaser
 )
@@ -29,7 +30,7 @@ from .competitor import get_daily_topic, get_trending_with_gemini
 from .prompts import FRAME_TEMPLATES, VIDEO_PROMPTS, IDENTITY_LOCK, CAMERA_POV, QUALITY_GUARD
 
 CHANNEL = "sentinal_ihsan"
-NUM_SCENES = 4  # 4 clips × 8s = 32s raw → ~28-30s final (hard cut, no crossfade loss)
+NUM_SCENES = 4  # 4 clips × 8s = 32s raw → ~30s final (0.3s crossfade transitions)
 
 
 def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = False) -> dict | None:
@@ -83,6 +84,13 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     hashtags = script.get("hashtags", "#shorts #viral #experiment")
     if isinstance(hashtags, list):
         hashtags = " ".join(hashtags)
+
+    # 3b. Trending hook — boost title with daily trending keywords
+    from core.trending import enhance_title_with_trend, get_trending_hashtags
+    title = enhance_title_with_trend(title, CHANNEL)
+    trending_tags = get_trending_hashtags(CHANNEL)
+    if trending_tags:
+        hashtags = f"{hashtags} {trending_tags}"
 
     logger.info(f"   Title: {title}")
     logger.info(f"   Hook: {hook}")
@@ -227,7 +235,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     clip_files = [c["local_path"] for c in clips]
     merged_path = dirs["final"] / f"{project_name}_merged.mp4"
-    concatenate_simple(clip_files, merged_path)  # hard cut — clean scene transitions, no blending
+    concatenate_crossfade(clip_files, merged_path, crossfade=0.3)  # smooth cinematic transitions
 
     final_path = dirs["final"] / f"{project_name}_FINAL.mp4"
     final_export(merged_path, final_path)

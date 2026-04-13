@@ -1,0 +1,57 @@
+name: YouTube Weekly Analytics
+
+on:
+  schedule:
+    # Her Pazar UTC 08:00 = California 01:00 AM
+    - cron: '0 8 * * 0'
+  workflow_dispatch:
+
+jobs:
+  analytics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env file
+        run: |
+          cat > .env << EOF
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          YOUTUBE_OAUTH_SHADOWEDHISTORY=${{ secrets.YOUTUBE_OAUTH_SHADOWEDHISTORY }}
+          YOUTUBE_OAUTH_SENTINAL_IHSAN=${{ secrets.YOUTUBE_OAUTH_SENTINAL_IHSAN }}
+          YOUTUBE_OAUTH_GALACTIC_EXPERIMENT=${{ secrets.YOUTUBE_OAUTH_GALACTIC_EXPERIMENT }}
+          YOUTUBE_OAUTH_AIMAGINE=${{ secrets.YOUTUBE_OAUTH_AIMAGINE }}
+          EOF
+
+      - name: Generate weekly report
+        run: python -X utf8 -m core.analytics 2>&1 | tee logs/analytics_run.log
+
+      - name: Commit reports
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add logs/analytics/ || true
+          git diff --cached --quiet && echo "Nothing to commit" && exit 0
+          git commit -m "chore: weekly analytics report [skip ci]" || true
+          git push origin main || true
+
+      - name: Upload analytics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analytics-${{ github.run_number }}
+          path: logs/analytics/
+          retention-days: 30
