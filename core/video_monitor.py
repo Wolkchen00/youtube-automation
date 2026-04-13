@@ -298,12 +298,16 @@ def run_cleanup(dry_run: bool = False):
                     deleted_count += 1
                     logger.info(f"🗑️ Deleted {channel}/{video_id}: {views} views < {threshold}")
 
-                    # ── RE-UPLOAD: Same video, new title ──────────────────
-                    reupload_result = _reupload_with_new_title(entry, channel)
-                    if reupload_result:
-                        reuploaded_count += 1
-                        # Add new entry to registry
-                        registry.append(reupload_result)
+                    # ── RE-UPLOAD: Same video, new title (max 3 attempts) ──
+                    reupload_count = entry.get("reupload_count", 0)
+                    if reupload_count < 3:
+                        reupload_result = _reupload_with_new_title(entry, channel)
+                        if reupload_result:
+                            reuploaded_count += 1
+                            registry.append(reupload_result)
+                    else:
+                        entry["status"] = "retired"
+                        logger.info(f"🚫 Retired after 3 failed attempts: {entry.get('title', '')[:50]}")
 
             log_cleanup_action(action)
         else:
