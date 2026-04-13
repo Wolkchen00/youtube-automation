@@ -12,11 +12,29 @@ import random
 from datetime import date
 
 # ─── Shared constants ─────────────────────────────────────────────────────────
+# Inspired by @structural.vibes — close-up workers + sped-up timelapse feel
 
 AERIAL = "photorealistic aerial drone photograph, 45-degree angle, DJI Mavic 3 Pro"
 INTERIOR = "photorealistic wide-angle interior photograph, natural light, 9:16 vertical"
 CINEMATIC = "cinematic smooth camera movement, photorealistic, 9:16 vertical"
 STYLE = "hyper-realistic, 8K detail, natural lighting, architectural photography"
+
+# Worker realism — makes AI construction look authentic (structural.vibes style)
+WORKERS = (
+    "Multiple construction workers visible — wearing hard hats, high-vis vests, work boots. "
+    "Close-up of hands working: laying bricks, pouring concrete, welding steel, tying rebar. "
+    "Workers are physically building — NOT posing, NOT standing still. "
+    "Looks like a sped-up timelapse of real construction footage. "
+    "Natural imperfections: slightly uneven concrete, dust in the air, tool marks visible. "
+    "Construction debris, scaffolding, wheelbarrows, hand tools scattered realistically."
+)
+
+TIMELAPSE_MOTION = (
+    "Sped-up timelapse effect — workers move quickly like 10x fast-forward. "
+    "Clouds racing across sky, shadows moving fast on ground. "
+    "Construction progresses visibly between each moment. "
+    "Slight motion blur on fast-moving workers adds to timelapse authenticity."
+)
 
 TIMELAPSE_CONCEPTS = [
     # 1

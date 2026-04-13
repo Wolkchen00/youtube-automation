@@ -84,7 +84,25 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     frame_prompts = concept["frame_prompts"]
     video_prompts = concept["video_prompts"]
 
-    # ── 2. Generate 4 frames with chained references ──────────────────────
+    # ── 2. Inject worker realism (@structural.vibes style) ────────────────
+    from .timelapse_concepts import WORKERS, TIMELAPSE_MOTION
+
+    # Add workers to construction frames (first 2), NOT interior frames (last 2)
+    enhanced_frames = []
+    for i, fp in enumerate(frame_prompts):
+        if i < 2:  # Exterior/construction frames — add workers
+            enhanced_frames.append(f"{fp} {WORKERS}")
+        else:  # Interior frames — keep clean, no construction mess
+            enhanced_frames.append(fp)
+    frame_prompts = enhanced_frames
+
+    # Add timelapse motion to all video clips
+    enhanced_videos = []
+    for vp in video_prompts:
+        enhanced_videos.append(f"{vp} {TIMELAPSE_MOTION}")
+    video_prompts = enhanced_videos
+
+    # ── 3. Generate 4 frames with chained references ──────────────────────
     logger.info(f"\n🖼️ GENERATING {len(frame_prompts)} CONSTRUCTION FRAMES...")
     frames = []
     previous_url = None
