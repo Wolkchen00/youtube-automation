@@ -1,18 +1,31 @@
 """
 Galactic Experiment — Visual & Video Prompt Templates
 
-UPDATED: Seamless planet exploration format.
-Each day: Approach → Orbit → Atmosphere Entry → Surface Exploration
-All frames feel like ONE continuous journey (no jumps/breaks).
+OTHERWORLDLY COSMIC CONTENT
+Inspired by @winterpens.art (bioluminescent spiritual energy, perfect loops)
+and @natia_ai (cinematic sci-fi megastructures, epic scale).
 
-Style: NASA-quality + cinematic CGI, VEO3 narration in background.
+Style: Supernatural, ethereal space art — like being in another dimension.
+Colors: Deep midnight blues, bioluminescent cyan/gold/pink, nebula purples.
+Feel: Every frame is wallpaper-worthy.
 """
 
-# Base visual style
+# Base visual style — otherworldly cosmic dreamscape
 BASE_STYLE = (
-    "photorealistic NASA-quality space visualization, 8K cinematic render, "
-    "volumetric lighting, lens flare, deep space blacks, "
-    "vibrant planetary colors, physically accurate, vertical 9:16 format"
+    "otherworldly cosmic art, 8K cinematic render, supernatural atmosphere, "
+    "deep midnight blues and purples with bioluminescent highlights (neon cyan, glowing gold, soft pink), "
+    "glowing bokeh particles floating through space, ethereal mist and nebula clouds, "
+    "volumetric lighting with god rays, lens flare from distant stars, "
+    "every surface has subtle glow, crystalline and bioluminescent textures, "
+    "spiritual serene magical atmosphere, vertical 9:16 format, wallpaper-worthy composition"
+)
+
+# Seamless loop constants
+LOOP_AESTHETIC = (
+    "Background elements in constant subtle motion: star particles drifting slowly, "
+    "gas clouds flowing, energy pulses rippling, glowing particles rising. "
+    "Camera performs slow drift. Colors shift through the spectrum. "
+    "Entire scene breathes with cosmic energy — alive, not static."
 )
 
 # ─── Planet Tour Frame Templates (SEAMLESS single-journey feel) ───────────────
@@ -97,42 +110,62 @@ FRAME_TEMPLATES = {
     ),
 }
 
-# ─── Video Prompts (SEAMLESS transitions — single continuous journey) ─────────
+# ─── Video Prompts (OTHERWORLDLY + SEAMLESS LOOP) ─────────────────────────────
 
 VIDEO_PROMPTS = {
     "approach_to_orbit": (
-        "Seamless cinematic journey — spacecraft approaches a planet. "
-        "Stars streak past as speed increases. The planet fills the viewport. "
-        "Camera smoothly transitions to orbital view. Single continuous shot. "
-        "No cuts. Breathtaking scale revelation. 8 seconds."
+        "Cinematic spacecraft approach to a planet. "
+        "Bioluminescent particles drift past the camera like cosmic fireflies. "
+        "The planet grows larger, glowing with ethereal energy at its edges. "
+        "Stars streak past, nebula clouds in background shift colors slowly. "
+        f"{LOOP_AESTHETIC} "
+        "Single continuous shot. 8 seconds."
     ),
     "orbit_to_descent": (
-        "Continuous descent from orbit into atmosphere. "
-        "The planet's surface detail increases as altitude drops. "
-        "Atmospheric glow surrounds the frame edges. Clouds rush past. "
-        "Single unbroken shot, no cuts. Building tension. 8 seconds."
+        "Descending from orbit into an alien atmosphere. "
+        "Aurora-like energy ribbons wrap around the planet. "
+        "Glowing particles swirl in the atmospheric currents. "
+        "Crystal structures visible on the surface below, catching starlight. "
+        f"{LOOP_AESTHETIC} "
+        "Building wonder and awe. 8 seconds."
     ),
     "descent_to_surface": (
-        "Final descent to the planet's surface. Breaking through the last cloud layer. "
-        "The alien landscape reveals itself. Camera lands smoothly and pans across "
-        "the dramatic terrain. Single continuous shot. The journey is complete. 8 seconds."
+        "Landing on an alien world. The surface is alive with bioluminescent detail. "
+        "Crystalline formations glow from within, alien flora pulses with light. "
+        "Ethereal mist rolls across the terrain. Two moons visible in the alien sky. "
+        f"{LOOP_AESTHETIC} "
+        "Jaw-dropping alien landscape reveal. 8 seconds."
     ),
     "cosmic_zoom": (
-        "Cinematic zoom from deep space toward a specific object. "
-        "Stars streak past like warp drive. Object grows larger. "
-        "Awe-inspiring scale revelation. 8 seconds."
+        "Cosmic zoom from deep space toward a celestial object. "
+        "Stars and galaxies streak past like warp speed. Glowing particles trail behind. "
+        "Massive scale revelation — the object is impossibly large. "
+        f"{LOOP_AESTHETIC} "
+        "Awe-inspiring scale. 8 seconds."
     ),
     "orbit_flyby": (
-        "Slow orbital flyby around a celestial object. Camera circles showing angles. "
-        "Sunlight creates dramatic shadows. Majestic and grand. 8 seconds."
+        "Slow majestic flyby around a cosmic structure. "
+        "Bioluminescent nebula clouds frame the scene. "
+        "Light shifts through blue → purple → cyan spectrum. "
+        "Subtle god rays pierce through cosmic dust. "
+        f"{LOOP_AESTHETIC} "
+        "Wallpaper-worthy cinematic beauty. 8 seconds."
     ),
     "explosion": (
-        "Massive cosmic explosion. Shockwave expands outward. "
-        "Debris and light scatter. Slow motion for dramatic effect. 8 seconds."
+        "Massive cosmic event — supernova, collision, or energy burst. "
+        "Shockwave of glowing particles expands outward. "
+        "Colors shift from white-hot center to deep purple edges. "
+        "Debris becomes glowing bioluminescent fragments. "
+        f"{LOOP_AESTHETIC} "
+        "Dramatic slow motion. 8 seconds."
     ),
     "dramatic_reveal": (
-        "Camera moves past obstruction to show something massive. "
-        "Scale is overwhelming. Viewer realizes the enormous size. 8 seconds."
+        "Camera drifts past cosmic dust to reveal something impossibly massive. "
+        "A megastructure, a celestial body, or an alien world. "
+        "Scale is overwhelming — tiny particles in foreground show how big it is. "
+        "Everything glows with ethereal energy. "
+        f"{LOOP_AESTHETIC} "
+        "The viewer gasps. 8 seconds."
     ),
 }
 
