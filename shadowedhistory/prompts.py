@@ -1,29 +1,39 @@
 """
 ShadowedHistory — Visual & Video Prompt Templates
 
-Cinematic historical scene recreation inspired by @lmg2kool (880K followers).
-Style: Photorealistic AI scenes of famous historical moments.
-Close-up emotion, dramatic lighting, "was this real?" engagement.
+LANDSCAPE-FIRST historical storytelling.
+Inspired by @baqir_jafari (stunning scenery) + @lmg2kool (cinematic history).
+Style: Breathtaking real-world landscapes with historical events inside them.
+The scenery hooks viewers — the history keeps them watching.
 NO face reference — purely AI-generated historical characters.
 """
 
-# Base visual style — cinematic historical recreation
+# Base visual style — landscape-first cinematic history
 BASE_STYLE = (
-    "cinematic photorealistic historical scene recreation, 8K ultra detail, "
-    "dramatic golden hour lighting with volumetric god rays, "
-    "extreme close-up emotional detail (sweat, tears, dust), "
-    "ancient textures and authentic period costumes, "
-    "hyper-realistic skin pores and fabric textures, "
-    "vertical 9:16 format, shot on ARRI Alexa"
+    "breathtaking landscape photography, National Geographic quality, 8K ultra detail, "
+    "dramatic natural lighting — golden hour warmth, storm cloud drama, morning mist, "
+    "real geographical features: mountains, valleys, rivers, coastlines, "
+    "photorealistic wide-angle, shot on Hasselblad X2D, "
+    "vertical 9:16 format, jaw-dropping scenery that makes viewers say WHERE IS THIS"
 )
 
-# Frame prompt templates — @lmg2kool inspired cinematic history scenes
+# Landscape-first constants
+LANDSCAPE_HOOK = (
+    "The landscape is the STAR — viewers stop scrolling for beautiful scenery. "
+    "Mountains, valleys, ancient ruins at sunset, dramatic coastlines, vast deserts. "
+    "Aerial/drone perspective showing the scale of nature and ancient sites. "
+    "Real geographical textures: weathered rock, flowing water, snow-capped peaks, "
+    "lush green valleys, volcanic terrain, crystal-clear lakes."
+)
+
+# Frame prompt templates — landscape-first historical scenes
 FRAME_TEMPLATES = {
     "epic_establishing": (
-        f"Breathtaking wide aerial shot of an ancient historical location at golden hour. "
-        f"Massive stone structures, thousands of people visible as tiny figures. "
-        f"Dust and smoke rising. Volumetric sunlight cutting through clouds. "
-        f"Scale is overwhelming — this is a pivotal moment in history. "
+        f"BREATHTAKING wide aerial landscape shot at golden hour. "
+        f"Jaw-dropping natural scenery — mountains, valleys, ancient ruins in stunning terrain. "
+        f"The landscape stretches to the horizon with dramatic depth and scale. "
+        f"Clouds casting shadows across the terrain. No people visible yet — pure landscape beauty. "
+        f"This shot alone should make someone stop scrolling. {LANDSCAPE_HOOK} "
         f"{BASE_STYLE}"
     ),
     "dramatic_close_up": (
