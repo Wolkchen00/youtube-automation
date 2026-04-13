@@ -441,3 +441,107 @@ def prepend_teaser(input_path: str | Path, output_path: str | Path = None,
         concat_list.unlink(missing_ok=True)
 
     return output_path
+
+
+def mix_background_music(
+    video_path: str | Path,
+    music_path: str | Path,
+    output_path: str | Path = None,
+    music_volume: float = 0.15,
+) -> Path:
+    """Mix background music into a video at a lower volume.
+
+    Args:
+        video_path: Input video file
+        music_path: Background music audio file
+        output_path: Output file (default: _music suffix)
+        music_volume: Music volume (0.0 to 1.0, default 0.15 = -16dB)
+
+    Returns:
+        Path to the mixed video.
+    """
+    video_path = Path(video_path)
+    music_path = Path(music_path)
+    if output_path is None:
+        output_path = video_path.parent / f"{video_path.stem}_music{video_path.suffix}"
+    output_path = Path(output_path)
+
+    try:
+        # Get video duration to trim music
+        vid_duration = get_video_duration(video_path)
+
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", str(video_path),
+            "-i", str(music_path),
+            "-filter_complex",
+            f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS,volume={music_volume}[bg];"
+            f"[0:a][bg]amix=inputs=2:duration=first:dropout_transition=2[aout]",
+            "-map", "0:v",
+            "-map", "[aout]",
+            "-c:v", "copy",
+            "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+            "-shortest",
+            str(output_path)
+        ]
+
+        subprocess.run(cmd, capture_output=True, check=True, timeout=180)
+        logger.info(f"🎵 Background music mixed: {output_path.name} (vol={music_volume})")
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"⚠️ Music mix failed (using original): {e}")
+        import shutil
+        shutil.copy2(str(video_path), str(output_path))
+
+    return output_path
+
+
+def mix_voiceover(
+    video_path: str | Path,
+    voiceover_path: str | Path,
+    output_path: str | Path = None,
+    voice_volume: float = 1.0,
+    bg_duck: float = 0.3,
+) -> Path:
+    """Mix voiceover narration into a video, ducking original audio.
+
+    Args:
+        video_path: Input video file
+        voiceover_path: Voiceover audio file (TTS generated)
+        output_path: Output file (default: _narrated suffix)
+        voice_volume: Voiceover volume (default 1.0 = full)
+        bg_duck: Original audio ducking level when voice is present (0.3 = -10dB)
+
+    Returns:
+        Path to the narrated video.
+    """
+    video_path = Path(video_path)
+    voiceover_path = Path(voiceover_path)
+    if output_path is None:
+        output_path = video_path.parent / f"{video_path.stem}_narrated{video_path.suffix}"
+    output_path = Path(output_path)
+
+    try:
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", str(video_path),
+            "-i", str(voiceover_path),
+            "-filter_complex",
+            f"[0:a]volume={bg_duck}[bg];"
+            f"[1:a]volume={voice_volume}[vo];"
+            f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2[aout]",
+            "-map", "0:v",
+            "-map", "[aout]",
+            "-c:v", "copy",
+            "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+            "-shortest",
+            str(output_path)
+        ]
+
+        subprocess.run(cmd, capture_output=True, check=True, timeout=180)
+        logger.info(f"🎙️ Voiceover mixed: {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"⚠️ Voiceover mix failed (using original): {e}")
+        import shutil
+        shutil.copy2(str(video_path), str(output_path))
+
+    return output_path

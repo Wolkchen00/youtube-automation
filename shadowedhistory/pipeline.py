@@ -242,7 +242,21 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     logger.info(f"\n✅ Video ready: {final_path}")
     logger.info(f"⏱️ Time: {elapsed/60:.1f} minutes")
 
-    # 9b. Growth: Seamless Loop + Retention Teaser
+    # 9b. Background Music
+    try:
+        from core.music_generator import generate_background_music
+        from core.ffmpeg_tools import mix_background_music
+        music_path = generate_background_music(CHANNEL)
+        if music_path and music_path.exists():
+            music_out = dirs["final"] / f"{project_name}_MUSIC.mp4"
+            mix_background_music(final_path, music_path, music_out, music_volume=0.12)
+            if music_out.exists() and music_out.stat().st_size > 0:
+                final_path = music_out
+                logger.info("🎵 Background music added")
+    except Exception as e:
+        logger.warning(f"⚠️ Music step skipped: {e}")
+
+    # 9c. Growth: Seamless Loop + Retention Teaser
     from core.config import CHANNEL_LOOP_ENABLED
     if CHANNEL_LOOP_ENABLED.get(CHANNEL, False):
         looped = dirs["final"] / f"{project_name}_LOOP.mp4"
