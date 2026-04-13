@@ -137,6 +137,86 @@ def delete_youtube_video(youtube, video_id: str) -> bool:
         return False
 
 
+def _reupload_with_new_title(old_entry: dict, channel: str) -> dict | None:
+    """Re-upload a deleted video with a new trending title.
+
+    The video file is the same — only title, description, and hashtags change.
+    This saves 100% of generation budget (no new API calls for frames/clips).
+
+    Returns:
+        New registry entry dict, or None if re-upload failed.
+    """
+    video_path = old_entry.get("video_path") or old_entry.get("final_video")
+    if not video_path:
+        logger.warning(f"⚠️ No video file path for re-upload: {old_entry.get('title')}")
+        return None
+
+    video_path = Path(video_path)
+    if not video_path.exists():
+        logger.warning(f"⚠️ Video file not found for re-upload: {video_path}")
+        return None
+
+    old_title = old_entry.get("title", "")
+    old_topic = old_entry.get("topic", old_entry.get("concept", ""))
+
+    # Generate fresh title with trending hooks
+    try:
+        from core.trending import enhance_title_with_trend, get_trending_hashtags
+        import google.generativeai as genai
+        from core.config import GEMINI_API_KEY
+
+        # Ask Gemini for a completely new title
+        if GEMINI_API_KEY:
+            genai.configure(api_key=GEMINI_API_KEY)
+            model = genai.GenerativeModel("gemini-2.0-flash")
+            response = model.generate_content(
+                f"Write a completely NEW, different viral YouTube Shorts title for this topic: "
+                f"'{old_topic}'. The old title was '{old_title}' — make the new title "
+                f"COMPLETELY DIFFERENT in structure and hook. Max 80 characters. "
+                f"English only. No hashtags. Just the title text.",
+                generation_config=genai.GenerationConfig(temperature=1.2),
+            )
+            new_title = response.text.strip().strip('"').strip("'")
+        else:
+            # Fallback: just rearrange old title
+            new_title = f"🔥 {old_topic[:60]}"
+
+        # Add trending hook
+        new_title = enhance_title_with_trend(new_title, channel)
+        trending_tags = get_trending_hashtags(channel)
+        new_hashtags = f"#shorts #viral {trending_tags}"
+
+        # Re-upload
+        from core.uploader import publish_video
+        results = publish_video(
+            video_path=video_path,
+            title=new_title,
+            description=f"{old_entry.get('description', old_topic)}\n\n{new_hashtags}",
+            channel_name=channel,
+        )
+
+        if results:
+            logger.info(f"♻️ Re-uploaded: '{new_title}' (was: '{old_title[:40]}...')")
+            new_entry = {
+                "channel": channel,
+                "youtube_video_id": results.get("youtube_video_id", ""),
+                "title": new_title,
+                "original_title": old_title,
+                "topic": old_topic,
+                "video_path": str(video_path),
+                "uploaded_at": datetime.now(timezone.utc).isoformat(),
+                "status": "active",
+                "reupload_of": old_entry.get("youtube_video_id", ""),
+                "reupload_count": old_entry.get("reupload_count", 0) + 1,
+            }
+            return new_entry
+
+    except Exception as e:
+        logger.warning(f"⚠️ Re-upload failed: {e}")
+
+    return None
+
+
 def run_cleanup(dry_run: bool = False):
     """Main cleanup routine — check views, delete underperformers."""
     now = datetime.now(timezone.utc)
@@ -177,6 +257,7 @@ def run_cleanup(dry_run: bool = False):
 
     deleted_count = 0
     kept_count = 0
+    reuploaded_count = 0
 
     for entry in candidates:
         video_id = entry.get("youtube_video_id")
@@ -217,13 +298,20 @@ def run_cleanup(dry_run: bool = False):
                     deleted_count += 1
                     logger.info(f"🗑️ Deleted {channel}/{video_id}: {views} views < {threshold}")
 
+                    # ── RE-UPLOAD: Same video, new title ──────────────────
+                    reupload_result = _reupload_with_new_title(entry, channel)
+                    if reupload_result:
+                        reuploaded_count += 1
+                        # Add new entry to registry
+                        registry.append(reupload_result)
+
             log_cleanup_action(action)
         else:
             kept_count += 1
             logger.info(f"✅ Keeping {channel}/{video_id}: {views} views ≥ {threshold}")
 
     save_registry(registry)
-    logger.info(f"\n📊 Cleanup summary: {deleted_count} deleted, {kept_count} kept, {len(candidates)} checked")
+    logger.info(f"\n📊 Cleanup summary: {deleted_count} deleted, {reuploaded_count} re-uploaded, {kept_count} kept, {len(candidates)} checked")
 
 
 if __name__ == "__main__":
