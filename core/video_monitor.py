@@ -186,13 +186,14 @@ def _reupload_with_new_title(old_entry: dict, channel: str) -> dict | None:
         trending_tags = get_trending_hashtags(channel)
         new_hashtags = f"#shorts #viral {trending_tags}"
 
-        # Re-upload
+        # Re-upload — YouTube ONLY (IG/TT don't support auto-delete, avoid duplicates)
         from core.uploader import publish_video
         results = publish_video(
             video_path=video_path,
             title=new_title,
             description=f"{old_entry.get('description', old_topic)}\n\n{new_hashtags}",
             channel_name=channel,
+            platforms=["youtube"],  # Only YouTube — IG/TT still have the old version
         )
 
         if results:
