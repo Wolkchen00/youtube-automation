@@ -2,7 +2,7 @@
 Galactic Experiment — Visual & Video Prompt Templates
 
 OTHERWORLDLY COSMIC CONTENT
-Inspired by @winterpens.art (bioluminescent spiritual energy, perfect loops)
+Inspired by @winterpens.art (bioluminescent spiritual energy, ethereal visuals)
 and @natia_ai (cinematic sci-fi megastructures, epic scale).
 
 Style: Supernatural, ethereal space art — like being in another dimension.
@@ -20,8 +20,8 @@ BASE_STYLE = (
     "spiritual serene magical atmosphere, vertical 9:16 format, wallpaper-worthy composition"
 )
 
-# Seamless loop constants
-LOOP_AESTHETIC = (
+# Cinematic motion — keeps scenes alive and dynamic
+COSMIC_MOTION = (
     "Background elements in constant subtle motion: star particles drifting slowly, "
     "gas clouds flowing, energy pulses rippling, glowing particles rising. "
     "Camera performs slow drift. Colors shift through the spectrum. "
@@ -110,7 +110,7 @@ FRAME_TEMPLATES = {
     ),
 }
 
-# ─── Video Prompts (OTHERWORLDLY + SEAMLESS LOOP) ─────────────────────────────
+# ─── Video Prompts (OTHERWORLDLY CINEMATIC) ───────────────────────────────────
 
 VIDEO_PROMPTS = {
     "approach_to_orbit": (
@@ -118,7 +118,7 @@ VIDEO_PROMPTS = {
         "Bioluminescent particles drift past the camera like cosmic fireflies. "
         "The planet grows larger, glowing with ethereal energy at its edges. "
         "Stars streak past, nebula clouds in background shift colors slowly. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "Single continuous shot. 8 seconds."
     ),
     "orbit_to_descent": (
@@ -126,21 +126,21 @@ VIDEO_PROMPTS = {
         "Aurora-like energy ribbons wrap around the planet. "
         "Glowing particles swirl in the atmospheric currents. "
         "Crystal structures visible on the surface below, catching starlight. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "Building wonder and awe. 8 seconds."
     ),
     "descent_to_surface": (
         "Landing on an alien world. The surface is alive with bioluminescent detail. "
         "Crystalline formations glow from within, alien flora pulses with light. "
         "Ethereal mist rolls across the terrain. Two moons visible in the alien sky. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "Jaw-dropping alien landscape reveal. 8 seconds."
     ),
     "cosmic_zoom": (
         "Cosmic zoom from deep space toward a celestial object. "
         "Stars and galaxies streak past like warp speed. Glowing particles trail behind. "
         "Massive scale revelation — the object is impossibly large. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "Awe-inspiring scale. 8 seconds."
     ),
     "orbit_flyby": (
@@ -148,7 +148,7 @@ VIDEO_PROMPTS = {
         "Bioluminescent nebula clouds frame the scene. "
         "Light shifts through blue → purple → cyan spectrum. "
         "Subtle god rays pierce through cosmic dust. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "Wallpaper-worthy cinematic beauty. 8 seconds."
     ),
     "explosion": (
@@ -156,7 +156,7 @@ VIDEO_PROMPTS = {
         "Shockwave of glowing particles expands outward. "
         "Colors shift from white-hot center to deep purple edges. "
         "Debris becomes glowing bioluminescent fragments. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "Dramatic slow motion. 8 seconds."
     ),
     "dramatic_reveal": (
@@ -164,7 +164,7 @@ VIDEO_PROMPTS = {
         "A megastructure, a celestial body, or an alien world. "
         "Scale is overwhelming — tiny particles in foreground show how big it is. "
         "Everything glows with ethereal energy. "
-        f"{LOOP_AESTHETIC} "
+        f"{COSMIC_MOTION} "
         "The viewer gasps. 8 seconds."
     ),
 }

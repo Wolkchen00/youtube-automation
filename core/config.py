@@ -108,12 +108,12 @@ CHANNEL_PLATFORMS = {
 }
 
 # ─── Growth Tactics Config ─────────────────────────────────────────────────────
-# Seamless loop: append reversed video at end for infinite replay
+# Seamless loop: DISABLED for all channels (removed per user request)
 CHANNEL_LOOP_ENABLED = {
-    "galactic_experiment": True,
-    "shadowedhistory": True,
-    "sentinal_ihsan": True,
-    "aimagine": False,  # Timelapse videos don't look good looped
+    "galactic_experiment": False,
+    "shadowedhistory": False,
+    "sentinal_ihsan": False,
+    "aimagine": False,
 }
 
 # Dual-upload scheduling (2 videos/day per channel)
