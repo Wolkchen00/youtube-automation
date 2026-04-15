@@ -61,7 +61,7 @@ DEFAULT_ASPECT_RATIO = "9:16"       # Vertical / Shorts format
 DEFAULT_RESOLUTION = "1K"
 DEFAULT_OUTPUT_FORMAT = "png"
 DEFAULT_VIDEO_DURATION = "8"        # seconds per clip
-DEFAULT_VIDEO_MODEL = "kling-2.1/video"   # BUDGET Kling — 40 credits/8s (Kling 3.0 was 112)
+DEFAULT_VIDEO_MODEL = "kling-2.6/text-to-video"   # Kling 2.6 — replaces deprecated 2.1 (same pricing tier)
 DEFAULT_VIDEO_MODE = "std"               # std = Standard quality, good balance
 DEFAULT_IMAGE_MODEL = "nano-banana-2"
 CINEMATIC_VIDEO_MODEL = "veo3_fast"      # Kie AI model names: veo3 (quality) or veo3_fast (fast)
