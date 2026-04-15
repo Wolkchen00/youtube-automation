@@ -394,7 +394,30 @@ HISTORY_FILE = PROJECT_ROOT / "logs" / "aimagine_history.json"
 
 
 def get_daily_concept() -> dict:
-    """Pick a random concept, avoiding recent repeats using history file."""
+    """Pick a concept — TRENDING FIRST, static fallback.
+
+    Priority:
+      1. AI-generated trending concept (Gemini + viral patterns)
+      2. Static TIMELAPSE_CONCEPTS list (if Gemini fails)
+    """
+    # Try trending concept first
+    trending = _generate_trending_concept()
+    if trending:
+        # Save to history
+        recent = []
+        if HISTORY_FILE.exists():
+            try:
+                recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+            except Exception:
+                recent = []
+        recent.append(trending["name"])
+        HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        HISTORY_FILE.write_text(json.dumps(recent[-60:], ensure_ascii=False), encoding="utf-8")
+        logger.info(f"🔥 AImagine trending concept: {trending['name']}")
+        return trending
+
+    # Fallback: static list
+    logger.info("📋 Trending failed, using static concept list...")
     recent = []
     if HISTORY_FILE.exists():
         try:
@@ -414,5 +437,83 @@ def get_daily_concept() -> dict:
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(recent[-60:], ensure_ascii=False), encoding="utf-8")
 
-    logger.info(f"🏗️ AImagine concept: {chosen['name']} (pool: {len(available)}/{len(TIMELAPSE_CONCEPTS)} available)")
+    logger.info(f"🏗️ AImagine concept (static): {chosen['name']} (pool: {len(available)}/{len(TIMELAPSE_CONCEPTS)} available)")
     return chosen
+
+
+def _generate_trending_concept() -> dict | None:
+    """Generate a trending construction concept using Gemini + viral format analytics.
+
+    Produces a full concept dict compatible with the pipeline (name, hook, title,
+    frame_prompts, video_prompts).
+    """
+    from core.trending import generate_trending_topic
+    import google.generativeai as genai
+    from core.config import GEMINI_API_KEY
+
+    # Step 1: Get trending topic
+    trending = generate_trending_topic("aimagine")
+    if not trending or not trending.get("topic"):
+        return None
+
+    if not GEMINI_API_KEY:
+        return None
+
+    # Step 2: Generate full concept with frame/video prompts
+    try:
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel("gemini-2.5-flash")
+
+        concept_prompt = f"""You are a viral AI construction timelapse content creator.
+        
+Based on this trending topic, create a COMPLETE construction timelapse concept:
+
+TOPIC: {trending['topic']}
+TITLE: {trending.get('title', '')}
+
+You must generate a full concept with frame prompts and video prompts.
+The construction follows this format:
+- Frame 1: Aerial view of construction site beginning (excavation, cranes, workers)
+- Frame 2: Aerial view of completed structure (exterior beauty shot)
+- Frame 3: Interior wide-angle shot of main living area
+- Frame 4: Interior shot of most impressive room/feature
+
+Use these constants in your prompts:
+- AERIAL = "photorealistic aerial drone photograph, 45-degree angle, DJI Mavic 3 Pro"
+- INTERIOR = "photorealistic wide-angle interior photograph, natural light, 9:16 vertical"
+- CINEMATIC = "cinematic smooth camera movement, photorealistic, 9:16 vertical"
+- STYLE = "hyper-realistic, 8K detail, natural lighting, architectural photography"
+
+Return ONLY valid JSON with these exact keys:
+{{
+    "name": "Short concept name (3-5 words)",
+    "hook": "Hook text with emoji (under 60 chars)",
+    "title": "YouTube title with emoji (under 80 chars)",
+    "description": "YouTube description (1-2 sentences)",
+    "hashtags": "#shorts #construction #luxury #architecture #ai",
+    "frame_prompts": ["frame1_prompt", "frame2_prompt", "frame3_prompt", "frame4_prompt"],
+    "video_prompts": ["video1_prompt", "video2_prompt", "video3_prompt"]
+}}"""
+
+        response = model.generate_content(
+            concept_prompt,
+            generation_config=genai.GenerationConfig(
+                response_mime_type="application/json",
+                temperature=0.8,
+            ),
+        )
+
+        result = json.loads(response.text)
+
+        if result and result.get("name") and result.get("frame_prompts"):
+            # Validate structure
+            if len(result.get("frame_prompts", [])) >= 4 and len(result.get("video_prompts", [])) >= 3:
+                logger.info(f"🔥 Generated trending concept: {result['name']}")
+                return result
+            else:
+                logger.warning("⚠️ Trending concept missing required prompts")
+
+    except Exception as e:
+        logger.warning(f"⚠️ Trending concept generation failed: {e}")
+
+    return None

@@ -131,7 +131,34 @@ def get_all_topics() -> list[str]:
 
 
 def get_daily_topic(exclude_recent: int = 60) -> dict:
-    """Select a daily space topic, avoiding repeats for the last 60 days."""
+    """Select a daily space topic — TRENDING FIRST, static fallback.
+
+    Priority:
+      1. Trending topic from Gemini (based on today's trends + viral patterns)
+      2. Static TOPICS dict (if Gemini fails)
+    """
+    # Try trending topic first
+    from core.trending import generate_trending_topic
+
+    trending = generate_trending_topic("galactic_experiment")
+    if trending and trending.get("topic"):
+        logger.info(f"🔥 Galactic Experiment trending topic: {trending.get('title', '')[:50]}")
+        recent = []
+        if HISTORY_FILE.exists():
+            try:
+                recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+            except Exception:
+                recent = []
+        recent.append(trending["topic"])
+        HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
+        return {
+            "topic": trending["topic"],
+            "category": trending.get("category", "trending"),
+        }
+
+    # Fallback: static list
+    logger.info("📋 Trending failed, using static topic list...")
     recent = []
     if HISTORY_FILE.exists():
         try:
@@ -155,5 +182,5 @@ def get_daily_topic(exclude_recent: int = 60) -> dict:
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
 
-    logger.info(f"🎲 Galactic Experiment topic: {chosen['topic'][:60]}...")
+    logger.info(f"🎲 Galactic Experiment topic (static): {chosen['topic'][:60]}...")
     return chosen

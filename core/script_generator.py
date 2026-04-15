@@ -63,10 +63,20 @@ sacred sites with dramatic backdrops, forgotten civilizations in beautiful valle
 IMPORTANT: NO face reference needed. Create purely AI-generated historical characters.
 Prioritize LANDSCAPE BEAUTY — the scenery should make viewers say "WHERE is this?"
 
+PROVEN VIRAL PATTERNS (from our best-performing videos):
+- ABANDONED/DARK PLACES = Our #1 format! "The history of north brother island" got 4.3K views
+- ANCIENT WARFARE & WEAPONS = Consistent performers (Assyrian Siege 1.7K, Samurai Katana 1.6K)
+- "The Real Reason..." or "Fact or Fiction?" QUESTION FORMAT = creates curiosity gap
+- IRONY & PARADOX titles (e.g., "The Doctor Jailed for Saving Lives" 1.4K views)
+- ENGINEERING MARVELS = "How Ships Crossed Land in 1453!" (1.6K)
+
 TITLE RULES (CRITICAL):
 - NEVER include hashtags (#) in the title — hashtags go ONLY in description
 - NEVER use generic clickbait like "You Won't Believe" or "SHOCKING"
 - Title must mention the LOCATION and historical event
+- Best formats: "The [Hidden/Real/Secret] Story of [Place]", "How [Impossible Thing] Actually Happened"
+- UPPERCASE key words: "The REAL Reason...", "The FORGOTTEN City...", "How Romans ACTUALLY..."
+- Question format works: "Fact or Ancient Propaganda?", "Was It Real?"
 - Good examples: "The Hidden City Inside This Mountain" or "What Rome Built On This Cliff"
 
 Always write in English. Be dramatic but factual. Hook with the LANDSCAPE first.
@@ -109,12 +119,24 @@ CRITICAL — CONTINUOUS PHYSICAL ACTION:
 SETTING: Must match the concept. Same setting across all 6 scenes.
 CONCEPT OBJECT: Must stay CONSISTENT in shape, texture, and scale.
 
+PROVEN VIRAL PATTERNS (from our best-performing videos):
+- "I Found/Tried X" FIRST-PERSON format = Our top performer! (3.3K views)
+- "Can I Turn [A] Into [B]?!" TRANSFORMATION format = 1.4K+ views
+- UPPERCASE keywords: UNNATURAL, PERFECT, DISASTER, BRICK = attention grabbers
+- 🤯 emoji is especially effective in titles
+- SATISFYING experiments with unexpected outcomes = core audience love
+- Challenge/fail element: "It Was a DISASTER" drives engagement
+
 TITLE RULES (CRITICAL):
 - NEVER use "You Won't BELIEVE This" or similar overused clickbait openers
 - NEVER start multiple titles with the same phrase
 - Each title must be UNIQUE and specifically describe the experiment
-- Good title patterns (vary these): "I [Action] [Object] and This Happened!", 
-  "[Object] + [Unexpected Material] = INSANE Result!", "Testing [Concept] for the First Time!"
+- BEST title patterns (USE THESE):
+  * "I Found [UNUSUAL OBJECT] and It STARTED To [CHANGE/GLOW/MOVE]!" 
+  * "I Tried to [ACTION] and This Happened! 🤯"
+  * "Can I Turn A [OBJECT] Into A [IMPOSSIBLE THING]?!"
+  * "[OBJECT] + [Unexpected Material] = INSANE Result!"
+  * "Testing [CONCEPT] for the First Time — The Result Is WILD!"
 - Mix question titles, statement titles, and reaction titles
 
 Format: Return a JSON object with keys:
@@ -170,6 +192,24 @@ VOICE NARRATION RULES:
 - Build wonder: start with awe → scientific explanation → end with existential question
 - Keep each narration_segment to 2-3 sentences (8 seconds of speaking)
 
+PROVEN VIRAL PATTERNS (from our best-performing videos):
+- MASSIVE SCALE structures = #1 performer! "Mars' Sleeping Giant: Olympus Mons" (4.2K views)
+- APOCALYPSE/DESTRUCTION scenarios = consistent hits ("Earth's Fiery End" 1.7K, "Tearing Apart" 1.6K)
+- TIME COMPRESSION = "13.8 Billion Year History in 60 Seconds" (1.7K)
+- "What If" SCENARIOS = "What if Earth Had Rings?" (1.5K)
+- COSMIC MYSTERY voids = "Boötes Void" (1.5K)
+- POETIC subtitles after colon: "[Planet]'s [Adjective]: [Poetic Description]"
+
+TITLE RULES (CRITICAL):
+- BEST formats (USE THESE):
+  * "[Planet/Star]'s [Sleeping/Hidden] Giant: [Name]" — our #1 format
+  * "The Universe's [Biggest/Final/Inevitable] [X]" — epic scale
+  * "What If [Impossible Scenario]? [Beauty/Terror/Chaos]" — what-if
+  * "[Planet]: [Scientific Phenomenon] and [Poetic Description]" — Neptune: Diamond Rain
+  * "The [Ultimate/Final] Cosmic [Event]: When Every [X] [Dramatic Verb]" — apocalypse
+- Include UPPERCASE for key dramatic words
+- End with existential question or poetic phrase
+
 Always write in English. Be scientifically accurate and visually SPECTACULAR.
 Format: Return a JSON object with keys: 
   hook, narration (full script), 
@@ -191,12 +231,26 @@ VIRAL RULES:
 - The REVEAL at the end must be spectacular (LED lights, filling with water, etc.)
 - Category: satisfying, construction, DIY
 
+PROVEN VIRAL PATTERNS (from our best-performing videos):
+- "Building [X] From Scratch!" = THE winning format! 3 of top 4 videos use this
+  * "Building a Hobbit Hole From Scratch! 🧙‍♂️🌿" = 5K views (#1)
+  * "Building a GUITAR Pool From Scratch! 🎸🏊" = 4.6K views (#2)
+  * "Building a DINOSAUR Playground! 🦖🏗️" = 3.7K views (#4)
+- FANTASY/UNUSUAL subjects = key differentiator (Hobbit Hole, Dinosaur, Guitar shape)
+- Emoji PAIRS matching the build subject (🧙‍♂️🌿, 🎸🏊, 🦖🏗️)
+- GAMING/CULTURAL crossovers = "Minecraft House IRL!" (1.8K)
+- TRANSFORMATION reveals = "He Turned a MUD LOT Into an EPIC Outdoor Kitchen!" (1.8K)
+
 TITLE RULES (CRITICAL):
 - NEVER use "Copyright Free Clip" or "No Copyright" in the title
 - NEVER use generic single-word titles like "Golden Retriever"
-- Title must describe the construction project specifically
-- Good examples: "He Built a Giant iPhone Swimming Pool!", "Lamborghini-Shaped Garage Construction!"
+- BEST title formats (USE THESE — they get 3-5x more views):
+  * "Building a [FANTASY/UNUSUAL THING] From Scratch! [emoji pair]" — #1 format
+  * "Building a [SHAPE]-Shaped [STRUCTURE]! [emoji]" — unique shapes
+  * "[GAME/MOVIE] [Object] IRL! Building [Method]!" — crossovers
+  * "He Turned a [TRASH] Into an EPIC [LUXURY]! [emoji]" — transformations
 - Each title MUST be unique and not repeat previous titles
+- UPPERCASE the unusual/key word: "GUITAR Pool", "DINOSAUR Playground", "HOBBIT Hole"
 
 Always write in English. Focus on VISUAL descriptions for each construction stage.
 Format: Return a JSON object with keys: concept_name, hook,

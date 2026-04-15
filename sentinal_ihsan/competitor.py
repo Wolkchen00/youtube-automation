@@ -284,7 +284,29 @@ VIRAL_TOPICS = [
 
 
 def get_daily_topic(exclude_recent: int = 60) -> dict:
-    """Select today's topic from pre-built viral list, avoiding recent repeats."""
+    """Select today's topic — TRENDING FIRST, static fallback.
+
+    Priority:
+      1. Trending topic from Gemini (based on today's trends + viral patterns)
+      2. Static VIRAL_TOPICS list (if Gemini fails)
+    """
+    # Try trending topic first (uses viral analytics + real-time trends)
+    trending = get_trending_with_gemini()
+    if trending:
+        # Save to history
+        recent = []
+        if HISTORY_FILE.exists():
+            try:
+                recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+            except Exception:
+                recent = []
+        recent.append(trending["topic"])
+        HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+        HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
+        return trending
+
+    # Fallback: static list
+    logger.info("📋 Trending failed, using static topic list...")
     recent = []
     if HISTORY_FILE.exists():
         try:
@@ -306,51 +328,23 @@ def get_daily_topic(exclude_recent: int = 60) -> dict:
     HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
     HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
 
-    logger.info(f"🎬 Sentinal Ihsan topic: {chosen['topic'][:60]}...")
+    logger.info(f"🎬 Sentinal Ihsan topic (static): {chosen['topic'][:60]}...")
     return chosen
 
 
 def get_trending_with_gemini() -> dict | None:
-    """Generate a trending viral topic using Gemini with a purpose-built prompt."""
-    if not GEMINI_API_KEY:
-        return None
+    """Generate a trending viral topic using the new trending engine.
 
-    try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel(
-            "gemini-2.5-flash",
-            system_instruction=(
-                "You are a viral content strategist for TikTok/YouTube Shorts. "
-                "You specialize in satisfying, experiment, and discovery content. "
-                "Generate ONE unique viral video topic idea that a young male creator "
-                "can film with a front-facing camera. The topic must involve PHYSICAL "
-                "INTERACTION with an object or material (painting, pouring, building, "
-                "opening, crushing, filling, etc). "
-                "Return ONLY valid JSON with keys: topic (full description), "
-                "category (one of: transformation, experiment, cursed_experience, discovery), "
-                "setting (where to film), action_steps (what the character physically does)"
-            ),
-        )
+    Uses real-time trends + proven viral patterns from channel analytics.
+    """
+    from core.trending import generate_trending_topic
 
-        response = model.generate_content(
-            "Generate a fresh, never-seen-before viral experiment topic. "
-            "Think satisfying transformations, impossible builds, or cursed experiences. "
-            "Make it something that would get millions of views. Return ONLY valid JSON.",
-            generation_config=genai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=1.0,
-            ),
-        )
-
-        result = json.loads(response.text)
-        if result and result.get("topic"):
-            logger.info(f"🤖 Gemini trending topic: {result['topic'][:60]}...")
-            return {
-                "topic": result["topic"],
-                "category": result.get("category", "gemini_trending"),
-                "setting": result.get("setting", "generic"),
-                "action_steps": result.get("action_steps", ""),
-            }
-    except Exception as e:
-        logger.warning(f"⚠️ Gemini trending topic failed: {e}")
+    result = generate_trending_topic("sentinal_ihsan")
+    if result and result.get("topic"):
+        return {
+            "topic": result["topic"],
+            "category": result.get("category", "trending"),
+            "setting": result.get("setting", "generic"),
+            "action_steps": result.get("action_steps", ""),
+        }
     return None
