@@ -8,7 +8,7 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, logger
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, PIPELINE_TIMEOUT_MINUTES, logger
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
@@ -129,6 +129,12 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     previous_url = None
 
     for i, vp in enumerate(visual_prompts):
+        # Pipeline timeout check
+        elapsed_min = (time.time() - start_time) / 60
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.6:  # 60% of timeout = stop making new frames
+            logger.warning(f"⏰ Pipeline timeout approaching ({elapsed_min:.0f}min), stopping frame generation")
+            break
+
         frame_prompt = vp.get("frame_prompt", "")
         logger.info(f"  Frame {i+1}/{len(visual_prompts)}...")
 
@@ -160,6 +166,12 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     clips = []
 
     for i in range(len(frames) - 1):
+        # Pipeline timeout check
+        elapsed_min = (time.time() - start_time) / 60
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.85:  # 85% of timeout = stop, publish what we have
+            logger.warning(f"⏰ Pipeline timeout approaching ({elapsed_min:.0f}min), stopping clip generation")
+            break
+
         start_frame = frames[i]
         end_frame = frames[i + 1]
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]

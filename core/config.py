@@ -68,7 +68,7 @@ CINEMATIC_VIDEO_MODEL = "veo3_fast"      # Kie AI model names: veo3 (quality) or
 CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite" # 60 credits per 8s clip — includes voice narration
 
 # Per-channel video model strategy:
-# - Visual channels (AIMagine, Sentinal): Kling 2.1 Std (40 credits) — high quality visuals
+# - Visual channels (AIMagine, Sentinal): Kling 2.6 (40 credits) — high quality visuals
 # - Narration channels (GE, SH): VEO3 Lite (60 credits) — built-in AI voice narration
 CHANNEL_VEO_MODEL = {
     "sentinal_ihsan": None,                              # Kling 2.1 primary — visual quality matters most
@@ -88,9 +88,10 @@ CHANNEL_DURATION = {
 # Polling settings
 POLL_INTERVAL_IMAGE = 10
 POLL_INTERVAL_VIDEO = 15
-POLL_MAX_ATTEMPTS_IMAGE = 30
-POLL_MAX_ATTEMPTS_VIDEO = 25   # 25 × 15s = ~6min timeout (was 40 × 15s = 10min)
-MAX_RETRY = 2                  # 2 retries max (was 3) — fail faster, fallback sooner
+POLL_MAX_ATTEMPTS_IMAGE = 20   # 20 × 10s = ~3.3min timeout per image (was 30 = 5min)
+POLL_MAX_ATTEMPTS_VIDEO = 20   # 20 × 15s = ~5min timeout per clip (was 25 = 6.25min)
+MAX_RETRY = 2                  # 2 retries max — fail faster, fallback sooner
+PIPELINE_TIMEOUT_MINUTES = 100 # Hard timeout per channel pipeline (GitHub Actions limit = 120min)
 
 # FFmpeg settings
 FFMPEG_CRF = "18"

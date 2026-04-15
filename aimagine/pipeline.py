@@ -12,7 +12,7 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, logger
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, PIPELINE_TIMEOUT_MINUTES, logger
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
@@ -92,6 +92,12 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     previous_url = None
 
     for i, prompt in enumerate(frame_prompts):
+        # Pipeline timeout check
+        elapsed_min = (time.time() - start_time) / 60
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.6:
+            logger.warning(f"⏰ Pipeline timeout ({elapsed_min:.0f}min), stopping frames")
+            break
+
         stage_names = ["Empty Site", "Excavation", "Construction", "Final Reveal"]
         stage = stage_names[i] if i < len(stage_names) else f"Stage {i+1}"
         logger.info(f"  Frame {i+1}/{len(frame_prompts)}: {stage}...")
@@ -130,6 +136,12 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     clips = []
 
     for i in range(actual_clips_needed):
+        # Pipeline timeout check
+        elapsed_min = (time.time() - start_time) / 60
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.85:
+            logger.warning(f"⏰ Pipeline timeout ({elapsed_min:.0f}min), stopping clips")
+            break
+
         start_frame = frames[i]
         end_frame = frames[i + 1]
         vp = video_prompts[i] if i < len(video_prompts) else "Fast construction timelapse. Fixed drone angle. 8 seconds."
