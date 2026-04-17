@@ -12,7 +12,7 @@ import requests
 from .config import (
     KIE_AI_API_KEY,
     KIE_AI_CREATE_TASK, KIE_AI_RECORD_INFO, KIE_AI_CREDIT,
-    DEFAULT_IMAGE_MODEL, DEFAULT_VIDEO_MODEL, DEFAULT_VIDEO_MODE,
+    DEFAULT_IMAGE_MODEL, DEFAULT_VIDEO_MODEL, DEFAULT_VIDEO_MODEL_T2V, DEFAULT_VIDEO_MODE,
     DEFAULT_ASPECT_RATIO, DEFAULT_RESOLUTION, DEFAULT_OUTPUT_FORMAT,
     DEFAULT_VIDEO_DURATION, CINEMATIC_VIDEO_MODEL,
     POLL_INTERVAL_IMAGE, POLL_INTERVAL_VIDEO,
@@ -232,10 +232,26 @@ def generate_video(
     model: str = None,
     sound: bool = True
 ) -> str | None:
-    """Generate a video clip with Kling 3.0. Returns URL or None.
+    """Generate a video clip with Kling 2.6. Returns URL or None.
+    Auto-selects image-to-video or text-to-video model based on whether images are provided.
     On server 500 errors, aborts immediately (no retry) so caller can fallback to VEO3.
     """
-    active_model = model or DEFAULT_VIDEO_MODEL
+    # Build image list first to determine model type
+    image_urls = []
+    if start_image_url:
+        image_urls.append(start_image_url)
+    if end_image_url:
+        image_urls.append(end_image_url)
+
+    # Smart model selection: I2V when images present, T2V otherwise
+    if model:
+        active_model = model
+    elif image_urls:
+        active_model = DEFAULT_VIDEO_MODEL       # kling-2.6/image-to-video
+    else:
+        active_model = DEFAULT_VIDEO_MODEL_T2V   # kling-2.6/text-to-video
+
+    logger.info(f"  🎥 Kling model: {active_model} ({'I2V' if image_urls else 'T2V'})")
 
     payload = {
         "model": active_model,
@@ -243,16 +259,12 @@ def generate_video(
             "prompt": prompt,
             "duration": duration or DEFAULT_VIDEO_DURATION,
             "mode": DEFAULT_VIDEO_MODE,
+            "aspect_ratio": DEFAULT_ASPECT_RATIO,  # 9:16 vertical
             "sound": sound,
         }
     }
 
-    # Image-to-video
-    image_urls = []
-    if start_image_url:
-        image_urls.append(start_image_url)
-    if end_image_url:
-        image_urls.append(end_image_url)
+    # Image-to-video: attach start/end frames
     if image_urls:
         payload["input"]["image_urls"] = image_urls
         payload["input"]["multi_shots"] = False

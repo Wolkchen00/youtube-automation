@@ -19,8 +19,9 @@ import google.generativeai as genai
 
 from .config import GEMINI_API_KEY, logger
 
-# Gemini model priority: try primary, fallback to lite/older
-GEMINI_MODELS = ["gemini-2.5-flash", "gemini-2.0-flash-lite", "gemini-2.0-flash"]
+# Gemini model priority: try primary, fallback to older stable models
+# Updated 2026-04-16: old model names caused 429 quota errors
+GEMINI_MODELS = ["gemini-2.5-flash-preview-04-17", "gemini-2.0-flash", "gemini-1.5-flash"]
 
 # Configure Gemini
 if GEMINI_API_KEY:
@@ -263,7 +264,7 @@ def _call_gemini(system_prompt: str, user_prompt: str, temperature: float = 0.9)
     """Call Gemini with automatic model fallback on rate limits."""
     last_error = None
 
-    for model_name in GEMINI_MODELS:
+    for idx, model_name in enumerate(GEMINI_MODELS):
         try:
             model = genai.GenerativeModel(
                 model_name,
@@ -286,9 +287,10 @@ def _call_gemini(system_prompt: str, user_prompt: str, temperature: float = 0.9)
             last_error = e
             error_str = str(e).lower()
             # Rate limits, quota errors, or deprecated/unavailable models → try next
-            if any(kw in error_str for kw in ("quota", "rate", "429", "resource", "404", "not found", "not_found")):
-                logger.warning(f"  {model_name} rate limited, trying next...")
-                time.sleep(15)  # longer wait to let rate limits reset
+            if any(kw in error_str for kw in ("quota", "rate", "429", "resource", "404", "not found", "not_found", "deprecated")):
+                backoff = [15, 30, 60][min(idx, 2)]  # exponential backoff
+                logger.warning(f"  {model_name} rate limited/unavailable, waiting {backoff}s before next model...")
+                time.sleep(backoff)
                 continue
             else:
                 logger.error(f"  Gemini error: {e}")
