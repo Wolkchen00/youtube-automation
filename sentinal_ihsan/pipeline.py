@@ -25,6 +25,7 @@ from core.ffmpeg_tools import (
 from core.uploader import publish_video
 from core.script_generator import generate_script, generate_visual_prompts
 from core.utils import download_file, sanitize_filename
+from core.video_vault import vault
 
 from .competitor import get_daily_topic, get_trending_with_gemini
 from .prompts import FRAME_TEMPLATES, VIDEO_PROMPTS, IDENTITY_LOCK, CAMERA_POV, QUALITY_GUARD
@@ -185,7 +186,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         start_frame = frames[i]
         end_frame = frames[i + 1] if (i + 1) < len(frames) else None
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]
-        video_prompt = vp.get("video_prompt", "Character talks to camera excitedly. Natural smartphone video. 8 seconds.")
+        video_prompt = vp.get("video_prompt", "Character talks to camera excitedly. Natural smartphone video. 10 seconds.")
 
         logger.info(f"  Clip {i+1}: Frame {i} → motion [{model_name}]...")
 
@@ -196,7 +197,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             video_url = generate_veo_video(
                 prompt=video_prompt,
                 image_url=start_frame["url"],
-                duration="8",
+                duration="10",
                 model=veo_model,
             )
 
@@ -220,7 +221,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             video_url = generate_veo_video(
                 prompt=video_prompt,
                 image_url=start_frame["url"],
-                duration="8",
+                duration="10",
                 model=CINEMATIC_VIDEO_MODEL_LITE,
             )
 
@@ -235,6 +236,42 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
     if len(clips) < 2:
         logger.error("❌ Not enough video clips! Need at least 2.")
+        # ── VAULT FALLBACK: Reuse a previously generated video ──────────
+        vault_video = vault.get_unpublished(CHANNEL)
+        if vault_video:
+            logger.info(f"📦 VAULT FALLBACK: Reusing '{vault_video['title'][:50]}'")
+            fallback_path = None
+            if vault_video.get("video_path") and Path(vault_video["video_path"]).exists():
+                fallback_path = Path(vault_video["video_path"])
+            elif vault_video.get("video_url"):
+                fb_name = sanitize_filename(vault_video["title"])
+                fallback_path = dirs["final"] / f"vault_{fb_name}.mp4"
+                fallback_path = download_file(vault_video["video_url"], fallback_path)
+
+            if fallback_path and Path(fallback_path).exists():
+                vault.increment_attempt(CHANNEL, vault_video["title"])
+                if not skip_upload:
+                    logger.info("📤 PUBLISHING VAULT VIDEO...")
+                    v_desc = vault_video.get("description", description)
+                    results = publish_video(
+                        video_path=Path(fallback_path),
+                        title=vault_video["title"],
+                        description=v_desc,
+                        channel_name=CHANNEL,
+                    )
+                    if any(v for v in results.values() if v):
+                        vault.mark_published(CHANNEL, vault_video["title"])
+                        logger.info("✅ Vault video published successfully!")
+                    else:
+                        logger.warning("⚠️ Vault video publish failed")
+
+                return {
+                    "date": today, "channel": CHANNEL,
+                    "topic": daily_topic["topic"],
+                    "title": vault_video["title"],
+                    "vault_fallback": True,
+                    "duration_min": round((time.time() - start_time) / 60, 1),
+                }
         return None
 
     if len(clips) < 3:
@@ -284,10 +321,16 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         final_path = teased
         logger.info("🎣 Retention teaser hook added")
 
-    # 9. Publish
+    # 9. Save to Vault & Publish
+    full_description = f"{hook}\n\n{description}\n\n{hashtags}"
+    clip_urls = [c.get("url", "") for c in clips if c.get("url")]
+    vault.save_video(
+        channel=CHANNEL, title=title, description=full_description,
+        video_path=str(final_path), clip_urls=clip_urls,
+    )
+
     if not skip_upload:
         logger.info("\n📤 PUBLISHING...")
-        full_description = f"{hook}\n\n{description}\n\n{hashtags}"
         results = publish_video(
             video_path=final_path,
             title=title,
@@ -295,6 +338,8 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             channel_name=CHANNEL,
         )
         logger.info(f"📊 Publish results: {results}")
+        if any(v for v in results.values() if v):
+            vault.mark_published(CHANNEL, title)
     else:
         logger.info("⏭️ Upload skipped.")
 

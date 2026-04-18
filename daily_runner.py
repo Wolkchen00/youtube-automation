@@ -26,6 +26,7 @@ from pathlib import Path
 from core.config import PROJECT_ROOT, CHANNEL_NAMES, logger, validate_api_keys
 from core.kie_api import check_credit
 from core.cost_tracker import print_cost_report, estimate_daily_total
+from core.video_vault import vault
 
 
 REPORTS_FILE = PROJECT_ROOT / "logs" / "daily_reports.json"
@@ -145,6 +146,14 @@ def run_all(dry_run: bool = False, skip_upload: bool = False,
         status = "OK" if report else "FAIL"
         title = report.get("title", "N/A") if report else "FAILED"
         logger.info(f"  [{status}] {ch}: {title[:50]}")
+
+    # Vault statistics
+    vault_stats = vault.get_stats()
+    if vault_stats["total"] > 0:
+        logger.info(f"\n📦 Vault: {vault_stats['unpublished']} unpublished / {vault_stats['total']} total")
+        for vch, vdata in vault_stats.get("by_channel", {}).items():
+            if vdata["unpublished"] > 0:
+                logger.info(f"    {vch}: {vdata['unpublished']} unpublished")
 
     remaining = check_credit()
     if remaining and isinstance(remaining, dict):
