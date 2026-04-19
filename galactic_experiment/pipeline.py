@@ -114,7 +114,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 "frame_number": i,
                 "frame_prompt": f"{FRAME_TEMPLATES.get(sk, FRAME_TEMPLATES['deep_space'])} Context: {daily_topic['topic'][:80]}",
                 "video_prompt": VIDEO_PROMPTS[video_keys[i % len(video_keys)]],
-                "duration_seconds": 8,
+                "duration_seconds": 10,
             })
 
     project_name = sanitize_filename(title)

@@ -119,7 +119,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 "frame_number": i,
                 "frame_prompt": f"{frame_prompt} Topic context: {daily_topic['topic'][:100]}",
                 "video_prompt": video_prompt,
-                "duration_seconds": 8,
+                "duration_seconds": 10,
             })
 
     project_name = sanitize_filename(title)
@@ -190,7 +190,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             video_url = generate_veo_video(
                 prompt=veo_prompt,
                 image_url=start_frame["url"],
-                duration=str(vp.get("duration_seconds", 8)),
+                duration=str(vp.get("duration_seconds", 10)),
                 model=veo_model,
             )
 
@@ -201,7 +201,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 prompt=video_prompt,
                 start_image_url=start_frame["url"],
                 end_image_url=end_frame["url"],
-                duration=str(vp.get("duration_seconds", 8)),
+                duration="10",
                 sound=True,
             )
 

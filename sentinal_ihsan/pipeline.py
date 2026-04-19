@@ -121,7 +121,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 "frame_number": idx,
                 "frame_prompt": f"{FRAME_TEMPLATES[sk]} Topic: {daily_topic['topic'][:80]}",
                 "video_prompt": VIDEO_PROMPTS[vk],
-                "duration_seconds": 8,
+                "duration_seconds": 10,
             })
 
     # Trim to exactly NUM_SCENES

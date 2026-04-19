@@ -125,9 +125,10 @@ def create_veo_task(payload: dict) -> str | None:
         return None
 
 
-def poll_veo_task(task_id: str) -> str | None:
+def poll_veo_task(task_id: str, max_attempts: int = None) -> str | None:
     """Poll Veo 3.1 task. Returns video URL or None."""
-    for attempt in range(1, POLL_MAX_ATTEMPTS_VIDEO + 1):
+    attempts = max_attempts or POLL_MAX_ATTEMPTS_VIDEO
+    for attempt in range(1, attempts + 1):
         time.sleep(POLL_INTERVAL_VIDEO)
         try:
             resp = requests.get(
@@ -145,28 +146,36 @@ def poll_veo_task(task_id: str) -> str | None:
                     urls = result.get("resultUrls", [])
                     video_url = urls[0] if urls else None
                 if video_url:
-                    logger.info(f"✅ Veo video ready! ({attempt} polls)")
+                    logger.info(f"✅ Veo video ready! ({attempt} polls, {attempt * POLL_INTERVAL_VIDEO}s)")
                     return video_url
             elif state in ("failed", "fail"):
                 logger.error(f"❌ Veo failed: {data.get('failMsg', '?')}")
                 return None
+            elif state in ("processing", "running", "pending", "queued"):
+                # Expected states — VEO3 is working on it
+                if attempt % 10 == 0:  # Log every 10th poll to reduce noise
+                    logger.info(f"⏳ Veo: {state} ({attempt}/{attempts}, ~{attempt * POLL_INTERVAL_VIDEO}s elapsed)")
             else:
-                logger.info(f"⏳ Veo: {state} ({attempt}/{POLL_MAX_ATTEMPTS_VIDEO})")
+                # unknown or other states
+                if attempt % 5 == 0:  # Log every 5th poll for unknown states
+                    logger.info(f"⏳ Veo: {state} ({attempt}/{attempts})")
         except Exception as e:
             logger.warning(f"⚠️ Veo polling error: {e}")
 
-    logger.error("❌ Veo timeout!")
+    logger.error(f"❌ Veo timeout after {attempts * POLL_INTERVAL_VIDEO}s!")
     return None
 
 
 def generate_veo_video(prompt: str, image_url: str = None, duration: str = "10", model: str = None) -> str | None:
     """Generate video with Veo 3.1. Returns URL or None. Retries with exponential backoff."""
     veo_model = model or CINEMATIC_VIDEO_MODEL
-    logger.info(f"  🎬 VEO model: {veo_model}")
+    # VEO3 accepts various durations but 8 and 10 are most reliable
+    safe_dur = duration if duration in ("5", "8", "10", "15") else "10"
+    logger.info(f"  🎬 VEO model: {veo_model} (duration={safe_dur}s)")
     payload = {
         "model": veo_model,
         "prompt": prompt,
-        "duration": duration,
+        "duration": safe_dur,
         "aspect_ratio": "9:16",
     }
     if image_url:
@@ -224,6 +233,22 @@ def generate_image(
     return None
 
 
+def _sanitize_kling_duration(duration: str | None) -> str:
+    """Sanitize duration to valid Kling 2.6 values: '5' or '10' only.
+    Any other value gets rounded to the nearest valid option.
+    """
+    if not duration:
+        return DEFAULT_VIDEO_DURATION  # "10"
+    try:
+        val = int(float(duration))
+    except (ValueError, TypeError):
+        return DEFAULT_VIDEO_DURATION
+    # Kling 2.6 ONLY accepts "5" or "10" — anything else = 500 error
+    if val <= 7:
+        return "5"
+    return "10"
+
+
 def generate_video(
     prompt: str,
     start_image_url: str = None,
@@ -251,13 +276,15 @@ def generate_video(
     else:
         active_model = DEFAULT_VIDEO_MODEL_T2V   # kling-2.6/text-to-video
 
-    logger.info(f"  🎥 Kling model: {active_model} ({'I2V' if image_urls else 'T2V'})")
+    # CRITICAL: Sanitize duration — Kling 2.6 ONLY accepts "5" or "10"
+    safe_duration = _sanitize_kling_duration(duration)
+    logger.info(f"  🎥 Kling model: {active_model} ({'I2V' if image_urls else 'T2V'}) duration={safe_duration}s")
 
     payload = {
         "model": active_model,
         "input": {
             "prompt": prompt,
-            "duration": duration or DEFAULT_VIDEO_DURATION,
+            "duration": safe_duration,
             "mode": DEFAULT_VIDEO_MODE,
             "aspect_ratio": DEFAULT_ASPECT_RATIO,  # 9:16 vertical
             "sound": sound,

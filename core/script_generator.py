@@ -380,6 +380,7 @@ Each frame prompt must be highly detailed, photorealistic, and cinematic.
 CRITICAL: All frames should feel like ONE continuous visual narrative.
 Always specify: camera angle, lighting, color palette, atmosphere, specific details.
 Format: 9:16 vertical. Style: cinematic, photorealistic, 8K quality.
+IMPORTANT: duration_seconds MUST be either 5 or 10 (no other values allowed). Use 10 for most clips.
 Return ONLY valid JSON array of objects with keys: frame_number, frame_prompt, video_prompt, duration_seconds"""
 
     script_text = json.dumps(script, ensure_ascii=False)
