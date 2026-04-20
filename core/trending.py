@@ -327,47 +327,25 @@ Respond in this exact JSON format:
 def get_trending_hooks(channel: str) -> dict:
     """Get trending hooks and hashtags for a channel.
 
+    OPTIMIZED: Only reads from cache. Does NOT make a new Gemini API call.
+    The trending topic is already fetched by generate_trending_topic() which
+    is called in each channel's topic selector. Making another Gemini call
+    here wastes quota and causes 429 errors when 4 channels run in parallel.
+
     Returns:
         {"hooks": [...], "hashtags": [...], "trending_topic": "..."}
     """
-    # Check cache first
+    # Check cache only — no API call on miss
     cache = _load_cache()
     cached_channel = cache.get(channel)
     if cached_channel and "hooks" in cached_channel:
         logger.info(f"🔥 Trending hooks (cached): {cached_channel.get('hooks', [])[:3]}")
         return cached_channel
 
-    # Query Gemini for fresh trends
-    niche = CHANNEL_NICHES.get(channel, "general viral content")
-
-    if not GEMINI_API_KEY:
-        logger.warning("⚠️ No Gemini API key — skipping trending hooks")
-        return {"hooks": [], "hashtags": [], "trending_topic": ""}
-
-    try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-2.0-flash")
-
-        response = model.generate_content(
-            TRENDING_PROMPT.format(niche=niche),
-            generation_config=genai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=0.9,
-            ),
-        )
-
-        result = json.loads(response.text)
-        logger.info(f"🔥 Fresh trending hooks for {channel}: {result.get('hooks', [])[:3]}")
-
-        # Save to cache
-        cache[channel] = result
-        _save_cache(cache)
-
-        return result
-
-    except Exception as e:
-        logger.warning(f"⚠️ Trending hook fetch failed: {e}")
-        return {"hooks": [], "hashtags": [], "trending_topic": ""}
+    # Cache miss — return empty instead of making another Gemini call
+    # This saves ~15-60s per pipeline run and prevents 429 quota errors
+    logger.info(f"ℹ️ No cached trending hooks for {channel} — skipping (saves API quota)")
+    return {"hooks": [], "hashtags": [], "trending_topic": ""}
 
 
 def enhance_title_with_trend(title: str, channel: str) -> str:

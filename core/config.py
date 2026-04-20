@@ -90,9 +90,9 @@ CHANNEL_DURATION = {
 POLL_INTERVAL_IMAGE = 10
 POLL_INTERVAL_VIDEO = 15
 POLL_MAX_ATTEMPTS_IMAGE = 20   # 20 × 10s = ~3.3min timeout per image (was 30 = 5min)
-POLL_MAX_ATTEMPTS_VIDEO = 60   # 60 × 15s = ~15min timeout per clip (VEO3 needs 10-15min)
+POLL_MAX_ATTEMPTS_VIDEO = 40   # 40 × 15s = ~10min timeout per clip (VEO3 rarely succeeds after 10min)
 MAX_RETRY = 2                  # 2 retries max — fail faster, fallback sooner
-PIPELINE_TIMEOUT_MINUTES = 100 # Hard timeout per channel pipeline (GitHub Actions limit = 120min)
+PIPELINE_TIMEOUT_MINUTES = 80  # Hard timeout per channel pipeline (GitHub Actions limit = 120min)
 
 # FFmpeg settings
 FFMPEG_CRF = "18"

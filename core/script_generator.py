@@ -288,7 +288,7 @@ def _call_gemini(system_prompt: str, user_prompt: str, temperature: float = 0.9)
             error_str = str(e).lower()
             # Rate limits, quota errors, or deprecated/unavailable models → try next
             if any(kw in error_str for kw in ("quota", "rate", "429", "resource", "404", "not found", "not_found", "deprecated")):
-                backoff = [15, 30, 60][min(idx, 2)]  # exponential backoff
+                backoff = [5, 10, 20][min(idx, 2)]  # reduced backoff (4 parallel channels share quota)
                 logger.warning(f"  {model_name} rate limited/unavailable, waiting {backoff}s before next model...")
                 time.sleep(backoff)
                 continue

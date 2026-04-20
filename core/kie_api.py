@@ -313,9 +313,9 @@ def generate_video(
             url = generate_and_wait(payload, is_video=True)
             if url:
                 return url
-        except ServerError:
-            logger.error(f"🚫 Kling server 500 — aborting retries (caller should fallback to VEO3)")
-            return None  # fast-fail so pipeline can try VEO3
+        except ServerError as e:
+            logger.error(f"🚫 Kling server error ({e}) — aborting retries (caller should fallback)")
+            raise  # re-raise so caller can distinguish 422 vs 500
         logger.warning(f"⚠️ Video attempt {attempt} failed.")
         if attempt < MAX_RETRY:
             delay = backoff_delays[min(attempt - 1, len(backoff_delays) - 1)]

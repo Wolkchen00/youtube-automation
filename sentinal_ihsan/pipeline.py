@@ -15,7 +15,7 @@ from datetime import date
 from pathlib import Path
 
 from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, CINEMATIC_VIDEO_MODEL_LITE, PIPELINE_TIMEOUT_MINUTES, SENTINAL_FACE_REF, logger
-from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
+from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit, ServerError
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_crossfade, final_export,
@@ -137,7 +137,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     for i, vp in enumerate(visual_prompts):
         # Pipeline timeout check
         elapsed_min = (time.time() - start_time) / 60
-        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.6:
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.5:
             logger.warning(f"⏰ Pipeline timeout approaching ({elapsed_min:.0f}min), stopping frames")
             break
 
@@ -179,7 +179,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     for i in range(len(frames) - 1):
         # Pipeline timeout check
         elapsed_min = (time.time() - start_time) / 60
-        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.85:
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.75:
             logger.warning(f"⏰ Pipeline timeout approaching ({elapsed_min:.0f}min), stopping clips")
             break
 
@@ -210,6 +210,16 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                     prompt=video_prompt[:200],
                     start_image_url=start_frame["url"],
                 )
+            except ServerError as e:
+                logger.warning(f"⚠️ Kling 422/500 error: {e} — skipping VEO3 fallback (param error)")
+                # 422 = parameter error, VEO3 won't help. Try with shorter prompt.
+                try:
+                    video_url = generate_video(
+                        prompt=video_prompt[:100],
+                        start_image_url=start_frame["url"],
+                    )
+                except Exception:
+                    video_url = None
             except Exception as e:
                 logger.warning(f"⚠️ Kling error: {e}")
                 video_url = None

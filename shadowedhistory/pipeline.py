@@ -9,7 +9,7 @@ from datetime import date
 from pathlib import Path
 
 from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, PIPELINE_TIMEOUT_MINUTES, logger
-from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit
+from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit, ServerError
 from core.imgbb import upload_to_imgbb
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
@@ -132,7 +132,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     for i, vp in enumerate(visual_prompts):
         # Pipeline timeout check
         elapsed_min = (time.time() - start_time) / 60
-        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.6:  # 60% of timeout = stop making new frames
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.5:  # 50% of timeout = stop making new frames
             logger.warning(f"⏰ Pipeline timeout approaching ({elapsed_min:.0f}min), stopping frame generation")
             break
 
@@ -169,7 +169,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     for i in range(len(frames) - 1):
         # Pipeline timeout check
         elapsed_min = (time.time() - start_time) / 60
-        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.85:  # 85% of timeout = stop, publish what we have
+        if elapsed_min > PIPELINE_TIMEOUT_MINUTES * 0.75:  # 75% of timeout = stop, publish what we have
             logger.warning(f"⏰ Pipeline timeout approaching ({elapsed_min:.0f}min), stopping clip generation")
             break
 
@@ -197,12 +197,27 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         # Fallback to Kling if VEO3 fails
         if not video_url:
             logger.info(f"  🔄 Falling back to Kling for clip {i+1}...")
-            video_url = generate_video(
-                prompt=video_prompt,
-                start_image_url=start_frame["url"],
-                duration="10",
-                sound=True,
-            )
+            try:
+                video_url = generate_video(
+                    prompt=video_prompt,
+                    start_image_url=start_frame["url"],
+                    duration="10",
+                    sound=True,
+                )
+            except ServerError as e:
+                logger.warning(f"⚠️ Kling server error: {e} — trying shorter prompt")
+                try:
+                    video_url = generate_video(
+                        prompt=video_prompt[:100],
+                        start_image_url=start_frame["url"],
+                        duration="10",
+                        sound=True,
+                    )
+                except Exception:
+                    video_url = None
+            except Exception as e:
+                logger.warning(f"⚠️ Kling error: {e}")
+                video_url = None
 
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
