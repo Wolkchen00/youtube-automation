@@ -20,8 +20,8 @@ import google.generativeai as genai
 from .config import GEMINI_API_KEY, logger
 
 # Gemini model priority: try primary, fallback to older stable models
-# Updated 2026-04-16: old model names caused 429 quota errors
-GEMINI_MODELS = ["gemini-2.5-flash-preview-04-17", "gemini-2.0-flash", "gemini-1.5-flash"]
+# Updated 2026-04-20: gemini-1.5-flash removed (404 error), replaced with gemini-2.5-flash
+GEMINI_MODELS = ["gemini-2.5-flash-preview-04-17", "gemini-2.0-flash", "gemini-2.5-flash"]
 
 # Configure Gemini
 if GEMINI_API_KEY:
