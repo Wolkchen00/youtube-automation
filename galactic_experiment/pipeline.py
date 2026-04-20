@@ -214,7 +214,6 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 video_url = generate_video(
                     prompt=visual_desc[:200],
                     start_image_url=start_frame["url"],
-                    end_image_url=end_frame["url"] if end_frame else None,
                 )
             except Exception as e:
                 logger.warning(f"⚠️ Kling fallback error: {e}")

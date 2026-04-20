@@ -44,8 +44,11 @@ def create_task(payload: dict) -> str | None:
         elif data.get("code") == 500:
             logger.error(f"❌ Server 500 error — API is down: {data.get('msg', '')}")
             raise ServerError(f"Kie AI 500: {data.get('msg', '')}")
+        elif resp.status_code == 422 or data.get("code") == 422:
+            logger.error(f"❌ HTTP 422 — Invalid parameters: {data.get('msg', '')}")
+            raise ServerError(f"Kie AI 422: {data.get('msg', '')}")
         else:
-            logger.error(f"❌ Task creation failed: {data}")
+            logger.error(f"❌ Task creation failed (code={data.get('code')}): {data}")
             return None
     except ServerError:
         raise  # re-raise so callers can handle
@@ -126,8 +129,13 @@ def create_veo_task(payload: dict) -> str | None:
 
 
 def poll_veo_task(task_id: str, max_attempts: int = None) -> str | None:
-    """Poll Veo 3.1 task. Returns video URL or None."""
+    """Poll Veo 3.1 task. Returns video URL or None.
+    Aborts early if stuck in 'unknown' state for too long.
+    """
     attempts = max_attempts or POLL_MAX_ATTEMPTS_VIDEO
+    unknown_streak = 0  # Track consecutive unknown states
+    MAX_UNKNOWN_STREAK = 20  # ~5 min of unknown = abort
+
     for attempt in range(1, attempts + 1):
         time.sleep(POLL_INTERVAL_VIDEO)
         try:
@@ -153,12 +161,17 @@ def poll_veo_task(task_id: str, max_attempts: int = None) -> str | None:
                 return None
             elif state in ("processing", "running", "pending", "queued"):
                 # Expected states — VEO3 is working on it
+                unknown_streak = 0  # Reset unknown counter
                 if attempt % 10 == 0:  # Log every 10th poll to reduce noise
                     logger.info(f"⏳ Veo: {state} ({attempt}/{attempts}, ~{attempt * POLL_INTERVAL_VIDEO}s elapsed)")
             else:
-                # unknown or other states
-                if attempt % 5 == 0:  # Log every 5th poll for unknown states
-                    logger.info(f"⏳ Veo: {state} ({attempt}/{attempts})")
+                # unknown or other unexpected states
+                unknown_streak += 1
+                if unknown_streak >= MAX_UNKNOWN_STREAK:
+                    logger.error(f"❌ Veo stuck in '{state}' for {unknown_streak} polls (~{unknown_streak * POLL_INTERVAL_VIDEO}s) — aborting!")
+                    return None
+                if attempt % 5 == 0:
+                    logger.info(f"⏳ Veo: {state} ({attempt}/{attempts}, unknown_streak={unknown_streak})")
         except Exception as e:
             logger.warning(f"⚠️ Veo polling error: {e}")
 
@@ -252,33 +265,31 @@ def _sanitize_kling_duration(duration: str | None) -> str:
 def generate_video(
     prompt: str,
     start_image_url: str = None,
-    end_image_url: str = None,
+    end_image_url: str = None,   # DEPRECATED — kept for API compat, always ignored
     duration: str = None,
     model: str = None,
     sound: bool = True
 ) -> str | None:
     """Generate a video clip with Kling 2.6. Returns URL or None.
     Auto-selects image-to-video or text-to-video model based on whether images are provided.
+    CRITICAL: Kling 2.6 I2V only accepts exactly 1 image — end_image_url is IGNORED.
     On server 500 errors, aborts immediately (no retry) so caller can fallback to VEO3.
     """
-    # Build image list first to determine model type
-    image_urls = []
-    if start_image_url:
-        image_urls.append(start_image_url)
     if end_image_url:
-        image_urls.append(end_image_url)
+        logger.info("  ℹ️ end_image_url ignored — Kling 2.6 I2V only accepts 1 image")
 
-    # Smart model selection: I2V when images present, T2V otherwise
+    # Smart model selection: I2V when start image present, T2V otherwise
+    has_image = bool(start_image_url)
     if model:
         active_model = model
-    elif image_urls:
+    elif has_image:
         active_model = DEFAULT_VIDEO_MODEL       # kling-2.6/image-to-video
     else:
         active_model = DEFAULT_VIDEO_MODEL_T2V   # kling-2.6/text-to-video
 
     # CRITICAL: Sanitize duration — Kling 2.6 ONLY accepts "5" or "10"
     safe_duration = _sanitize_kling_duration(duration)
-    logger.info(f"  🎥 Kling model: {active_model} ({'I2V' if image_urls else 'T2V'}) duration={safe_duration}s")
+    logger.info(f"  🎥 Kling model: {active_model} ({'I2V' if has_image else 'T2V'}) duration={safe_duration}s")
 
     payload = {
         "model": active_model,
@@ -291,9 +302,9 @@ def generate_video(
         }
     }
 
-    # Image-to-video: attach start/end frames
-    if image_urls:
-        payload["input"]["image_urls"] = image_urls
+    # Image-to-video: attach ONLY the start frame (1 image max)
+    if has_image:
+        payload["input"]["image_urls"] = [start_image_url]
         payload["input"]["multi_shots"] = False
 
     backoff_delays = [10, 30]  # exponential backoff

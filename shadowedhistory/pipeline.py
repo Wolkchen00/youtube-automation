@@ -200,7 +200,6 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             video_url = generate_video(
                 prompt=video_prompt,
                 start_image_url=start_frame["url"],
-                end_image_url=end_frame["url"],
                 duration="10",
                 sound=True,
             )
