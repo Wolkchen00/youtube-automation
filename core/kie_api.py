@@ -179,8 +179,13 @@ def poll_veo_task(task_id: str, max_attempts: int = None) -> str | None:
     return None
 
 
-def generate_veo_video(prompt: str, image_url: str = None, duration: str = "10", model: str = None) -> str | None:
-    """Generate video with Veo 3.1. Returns URL or None. Retries with exponential backoff."""
+def generate_veo_video(prompt: str, image_url: str = None, duration: str = "10", model: str = None, max_poll_attempts: int = None) -> str | None:
+    """Generate video with Veo 3.1. Returns URL or None. Retries with exponential backoff.
+    
+    Args:
+        max_poll_attempts: Override poll attempts (default: POLL_MAX_ATTEMPTS_VIDEO).
+                          Use 28 (~7min) for fallback scenarios to fail faster.
+    """
     veo_model = model or CINEMATIC_VIDEO_MODEL
     # VEO3 accepts various durations but 8 and 10 are most reliable
     safe_dur = duration if duration in ("5", "8", "10", "15") else "10"
@@ -204,7 +209,7 @@ def generate_veo_video(prompt: str, image_url: str = None, duration: str = "10",
                 logger.info(f"  ⏳ Waiting {delay}s before retry...")
                 time.sleep(delay)
             continue
-        result = poll_veo_task(task_id)
+        result = poll_veo_task(task_id, max_attempts=max_poll_attempts)
         if result:
             return result
         logger.warning(f"⚠️ Veo video generation failed (attempt {attempt}/{MAX_RETRY})")

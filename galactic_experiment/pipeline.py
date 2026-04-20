@@ -12,9 +12,10 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, PIPELINE_TIMEOUT_MINUTES, logger
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, CINEMATIC_VIDEO_MODEL_LITE, PIPELINE_TIMEOUT_MINUTES, logger
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit, ServerError
 from core.imgbb import upload_to_imgbb
+from core.narration import create_narration_for_channel
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
     get_video_duration, trim_to_duration, make_loop_video, prepend_teaser
@@ -161,10 +162,10 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.error("❌ Not enough frames (need at least 3)!")
         return None
 
-    # ── 5. Generate VEO3 narrated video clips ─────────────────────────────
-    # VEO3 generates actual AI voice narration from the prompt text
-    # Each clip gets a narration segment spoken by VEO3's AI voice
-    logger.info(f"\n🎬 GENERATING {len(frames)-1} VEO3 NARRATED CLIPS...")
+    # ── 5. Generate video clips — KLING PRIMARY (fast, reliable) ─────────
+    # VEO3 was too slow (10min+ per clip, frequent timeouts).
+    # Kling generates clips in 1-2 min. Narration added via Gemini TTS after.
+    logger.info(f"\n🎬 GENERATING {len(frames)-1} CLIPS (Kling primary)...")
     clips = []
 
     for i in range(len(frames) - 1):
@@ -175,58 +176,43 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
             break
 
         start_frame = frames[i]
-        end_frame = frames[i + 1] if (i + 1) < len(frames) else None
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]
 
-        # Build VEO3 prompt with narration
         visual_desc = vp.get("video_prompt", "Cinematic space visualization.")
 
-        # Get narration segment for this clip
-        if i < len(narration_segments):
-            narr_text = narration_segments[i]
-        elif narration:
-            narr_text = narration
-        else:
-            narr_text = f"Exploring the wonders of {daily_topic['topic'][:50]}."
+        logger.info(f"  Clip {i+1}: Kling I2V")
 
-        # VEO3 prompt format: visual description + narration script
-        veo_prompt = (
-            f"{visual_desc} "
-            f"A calm, authoritative male narrator speaks in English: \"{narr_text}\" "
-            f"Cinematic orchestral background music. "
-            f"No text on screen. No subtitles. Voice-over only."
-        )
+        video_url = None
 
-        logger.info(f"  Clip {i+1}: VEO3 narrated")
-        logger.info(f"    Narration: {narr_text[:80]}...")
-
-        video_url = generate_veo_video(
-            prompt=veo_prompt,
-            image_url=start_frame["url"],
-            duration="10",
-            model=CHANNEL_VEO_MODEL.get(CHANNEL),
-        )
-
-        if not video_url:
-            # Fallback: Try Kling video generation
-            logger.warning(f"⚠️ VEO3 Clip {i+1} failed, trying Kling fallback...")
+        # Primary: Kling (fast, ~1-2 min per clip)
+        try:
+            video_url = generate_video(
+                prompt=visual_desc[:200],
+                start_image_url=start_frame["url"],
+            )
+        except ServerError as e:
+            logger.warning(f"⚠️ Kling server error: {e} — trying shorter prompt")
             try:
                 video_url = generate_video(
-                    prompt=visual_desc[:200],
+                    prompt=visual_desc[:100],
                     start_image_url=start_frame["url"],
                 )
-            except ServerError as e:
-                logger.warning(f"⚠️ Kling server error: {e} — trying shorter prompt")
-                try:
-                    video_url = generate_video(
-                        prompt=visual_desc[:100],
-                        start_image_url=start_frame["url"],
-                    )
-                except Exception:
-                    video_url = None
-            except Exception as e:
-                logger.warning(f"⚠️ Kling fallback error: {e}")
+            except Exception:
                 video_url = None
+        except Exception as e:
+            logger.warning(f"⚠️ Kling error: {e}")
+            video_url = None
+
+        # Last resort fallback: VEO3 Lite (7min timeout)
+        if not video_url:
+            logger.warning(f"⚠️ Kling Clip {i+1} failed, trying VEO3 fallback (7min timeout)...")
+            video_url = generate_veo_video(
+                prompt=f"{visual_desc[:150]} Cosmic space documentary.",
+                image_url=start_frame["url"],
+                duration="10",
+                model=CINEMATIC_VIDEO_MODEL_LITE,
+                max_poll_attempts=28,  # 28 x 15s = ~7min
+            )
 
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
@@ -235,7 +221,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 clips.append({"url": video_url, "local_path": local, "clip_number": i + 1})
                 logger.info(f"  ✅ Clip {i+1} ready")
         else:
-            logger.warning(f"⚠️ Clip {i+1} failed (both VEO3 + Kling)!")
+            logger.warning(f"⚠️ Clip {i+1} failed (both Kling + VEO3)!")
 
     if len(clips) < 2:
         logger.error("❌ Not enough video clips! Need at least 2.")
@@ -299,8 +285,32 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         final_path = trimmed
 
     elapsed = time.time() - start_time
-    logger.info(f"\n✅ Narrated video ready: {final_path}")
+    logger.info(f"\n✅ Video ready: {final_path}")
     logger.info(f"⏱️ Time: {elapsed/60:.1f} minutes")
+
+    # ── 6b. TTS Cosmic Narration (replaces VEO3 built-in voice) ──────────
+    full_narration = narration
+    if not full_narration and narration_segments:
+        full_narration = " ".join(narration_segments)
+    if full_narration:
+        logger.info("\n🎙️ ADDING COSMIC NARRATION (Gemini TTS)...")
+        try:
+            from core.ffmpeg_tools import mix_voiceover
+            narration_wav = dirs["final"] / f"{project_name}_narration.wav"
+            audio_path, style_name = create_narration_for_channel(
+                channel=CHANNEL,
+                narration_text=full_narration,
+                output_path=narration_wav,
+            )
+            if audio_path and audio_path.exists():
+                narrated_path = dirs["final"] / f"{project_name}_NARRATED.mp4"
+                mix_voiceover(str(final_path), str(audio_path), str(narrated_path),
+                              voice_volume=1.0, bg_duck=0.15)
+                if narrated_path.exists() and narrated_path.stat().st_size > 0:
+                    final_path = narrated_path
+                    logger.info(f"🎙️ Cosmic narration added ({style_name})")
+        except Exception as e:
+            logger.warning(f"⚠️ Narration step skipped: {e}")
 
     # ── 6b. Growth: Seamless Loop + Retention Teaser ────────────────────────
     from core.config import CHANNEL_LOOP_ENABLED

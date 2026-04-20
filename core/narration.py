@@ -238,3 +238,122 @@ def create_narration_for_concept(
     )
 
     return audio, style["name"]
+
+
+# ─── Channel-Specific Narration ─────────────────────────────────────────────
+
+CHANNEL_NARRATION_CONFIG = {
+    "shadowedhistory": {
+        "voice": "Charon",  # Deep male voice — documentary
+        "instruction": (
+            "Speak as a calm, authoritative documentary narrator. Deep, dramatic voice. "
+            "Build mystery and tension. Reveal historical secrets with gravitas. "
+            "Pause for dramatic effect between key revelations."
+        ),
+    },
+    "galactic_experiment": {
+        "voice": "Charon",  # Deep male voice — cosmic
+        "instruction": (
+            "Speak with wonder and awe about the cosmos. Warm, inspiring, philosophical. "
+            "Use dramatic pauses when revealing mind-blowing facts. "
+            "Sound like a narrator from a premium space documentary."
+        ),
+    },
+    "aimagine": {
+        "voice": "Kore",  # Female voice — construction
+        "instruction": None,  # Uses existing NARRATION_STYLES
+    },
+    "sentinal_ihsan": {
+        "voice": None,  # No narration — character talks to camera
+        "instruction": None,
+    },
+}
+
+
+def create_narration_for_channel(
+    channel: str,
+    narration_text: str,
+    output_path: str | Path = None,
+) -> tuple[Path | None, str]:
+    """Generate voiceover narration for any channel.
+
+    Uses channel-specific voice and style for consistent branding.
+    SH: Deep male documentary narrator
+    GE: Cosmic philosopher narrator
+    AIM: Female construction narrator (existing)
+
+    Args:
+        channel: Channel name
+        narration_text: Full narration script text
+        output_path: Output WAV file path
+
+    Returns:
+        (audio_path, style_name) tuple
+    """
+    config = CHANNEL_NARRATION_CONFIG.get(channel, {})
+    voice_name = config.get("voice")
+    instruction = config.get("instruction")
+
+    if not voice_name:
+        logger.info(f"ℹ️ No narration configured for {channel}")
+        return None, "none"
+
+    if not narration_text or not narration_text.strip():
+        logger.warning("⚠️ Empty narration text — skipping")
+        return None, "none"
+
+    if not GEMINI_API_KEY:
+        return None, "none"
+
+    NARRATION_CACHE.mkdir(parents=True, exist_ok=True)
+    if output_path is None:
+        output_path = NARRATION_CACHE / f"{channel}_narration.wav"
+    output_path = Path(output_path)
+
+    try:
+        from google import genai as genai_new
+        from google.genai import types
+
+        client = genai_new.Client(api_key=GEMINI_API_KEY)
+
+        voice_config = types.VoiceConfig(
+            prebuilt_voice_config=types.PrebuiltVoiceConfig(
+                voice_name=voice_name
+            )
+        )
+        speech_config = types.SpeechConfig(voice_config=voice_config)
+
+        # Add style instruction to narration
+        full_prompt = f"[{instruction}] {narration_text}" if instruction else narration_text
+
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-tts",
+            contents=full_prompt,
+            config=types.GenerateContentConfig(
+                response_modalities=["audio"],
+                speech_config=speech_config,
+            ),
+        )
+
+        for part in response.candidates[0].content.parts:
+            if part.inline_data and part.inline_data.data:
+                audio_bytes = part.inline_data.data
+                with wave.open(str(output_path), "wb") as wav_file:
+                    wav_file.setnchannels(1)
+                    wav_file.setsampwidth(2)
+                    wav_file.setframerate(24000)
+                    wav_file.writeframes(audio_bytes)
+
+                size_kb = output_path.stat().st_size / 1024
+                logger.info(f"🎙️ {channel} narration saved: {output_path.name} ({size_kb:.0f} KB)")
+                return output_path, f"{channel}_{voice_name}"
+
+        logger.warning("No audio data in TTS response")
+        return None, "none"
+
+    except ImportError:
+        logger.warning("google-genai SDK not installed for TTS")
+        return None, "none"
+    except Exception as e:
+        logger.warning(f"⚠️ {channel} narration failed: {e}")
+        return None, "none"

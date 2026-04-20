@@ -8,9 +8,10 @@ import time
 from datetime import date
 from pathlib import Path
 
-from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, PIPELINE_TIMEOUT_MINUTES, logger
+from core.config import CHANNEL_DIRS, CHANNEL_DURATION, CHANNEL_VEO_MODEL, CINEMATIC_VIDEO_MODEL_LITE, PIPELINE_TIMEOUT_MINUTES, logger
 from core.kie_api import generate_image, generate_video, generate_veo_video, check_credit, ServerError
 from core.imgbb import upload_to_imgbb
+from core.narration import create_narration_for_channel
 from core.ffmpeg_tools import (
     check_ffmpeg, concatenate_simple, concatenate_crossfade, final_export,
     get_video_duration, trim_to_duration, add_text_overlay,
@@ -162,8 +163,8 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.error("❌ Not enough frames generated!")
         return None
 
-    # 6. Generate video clips
-    logger.info(f"\n🎬 GENERATING {len(frames)-1} VIDEO CLIPS...")
+    # 6. Generate video clips — KLING PRIMARY (fast, reliable)
+    logger.info(f"\n🎬 GENERATING {len(frames)-1} VIDEO CLIPS (Kling primary)...")
     clips = []
 
     for i in range(len(frames) - 1):
@@ -179,45 +180,42 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
 
         logger.info(f"  Clip {i+1}: Frame {i} → Frame {i+1}")
 
-        # Try VEO3 first (more stable), fall back to Kling
-        veo_model = CHANNEL_VEO_MODEL.get(CHANNEL)
         video_prompt = vp.get("video_prompt", "Cinematic transition. 8 seconds.")
-
         video_url = None
-        if veo_model:
-            # VEO3 Lite: text-to-video with image reference
-            veo_prompt = f"{video_prompt} Historical documentary narration. Deep dramatic voice."
-            video_url = generate_veo_video(
-                prompt=veo_prompt,
-                image_url=start_frame["url"],
-                duration=str(vp.get("duration_seconds", 10)),
-                model=veo_model,
-            )
 
-        # Fallback to Kling if VEO3 fails
-        if not video_url:
-            logger.info(f"  🔄 Falling back to Kling for clip {i+1}...")
+        # Primary: Kling (fast, ~1-2 min per clip)
+        try:
+            video_url = generate_video(
+                prompt=video_prompt,
+                start_image_url=start_frame["url"],
+                duration="10",
+                sound=True,
+            )
+        except ServerError as e:
+            logger.warning(f"⚠️ Kling server error: {e} — trying shorter prompt")
             try:
                 video_url = generate_video(
-                    prompt=video_prompt,
+                    prompt=video_prompt[:100],
                     start_image_url=start_frame["url"],
                     duration="10",
                     sound=True,
                 )
-            except ServerError as e:
-                logger.warning(f"⚠️ Kling server error: {e} — trying shorter prompt")
-                try:
-                    video_url = generate_video(
-                        prompt=video_prompt[:100],
-                        start_image_url=start_frame["url"],
-                        duration="10",
-                        sound=True,
-                    )
-                except Exception:
-                    video_url = None
-            except Exception as e:
-                logger.warning(f"⚠️ Kling error: {e}")
+            except Exception:
                 video_url = None
+        except Exception as e:
+            logger.warning(f"⚠️ Kling error: {e}")
+            video_url = None
+
+        # Last resort fallback: VEO3 Lite (7min timeout)
+        if not video_url:
+            logger.warning(f"⚠️ Kling Clip {i+1} failed, trying VEO3 fallback (7min timeout)...")
+            video_url = generate_veo_video(
+                prompt=f"{video_prompt} Historical documentary scene.",
+                image_url=start_frame["url"],
+                duration="10",
+                model=CINEMATIC_VIDEO_MODEL_LITE,
+                max_poll_attempts=28,  # 28 x 15s = ~7min
+            )
 
         if video_url:
             save_path = dirs["clips"] / f"{project_name}_clip_{i+1:02d}.mp4"
@@ -227,8 +225,8 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         else:
             logger.warning(f"⚠️ Clip {i+1} failed!")
 
-    if not clips:
-        logger.error("❌ No video clips generated!")
+    if len(clips) < 2:
+        logger.error("❌ Not enough video clips generated!")
         # ── VAULT FALLBACK: Reuse a previously generated video ──────────
         vault_video = vault.get_unpublished(CHANNEL)
         if vault_video:
@@ -305,7 +303,31 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     logger.info(f"\n✅ Video ready: {final_path}")
     logger.info(f"⏱️ Time: {elapsed/60:.1f} minutes")
 
-    # 9b. Background Music
+    # 9b. TTS Documentary Narration (replaces VEO3 built-in voice)
+    narration_text = script.get("narration", "")
+    if not narration_text:
+        narration_text = script.get("hook", "")
+    if narration_text:
+        logger.info("\n🎙️ ADDING DOCUMENTARY NARRATION (Gemini TTS)...")
+        try:
+            from core.ffmpeg_tools import mix_voiceover
+            narration_wav = dirs["final"] / f"{project_name}_narration.wav"
+            audio_path, style_name = create_narration_for_channel(
+                channel=CHANNEL,
+                narration_text=narration_text,
+                output_path=narration_wav,
+            )
+            if audio_path and audio_path.exists():
+                narrated_path = dirs["final"] / f"{project_name}_NARRATED.mp4"
+                mix_voiceover(str(final_path), str(audio_path), str(narrated_path),
+                              voice_volume=1.0, bg_duck=0.15)
+                if narrated_path.exists() and narrated_path.stat().st_size > 0:
+                    final_path = narrated_path
+                    logger.info(f"🎙️ Documentary narration added ({style_name})")
+        except Exception as e:
+            logger.warning(f"⚠️ Narration step skipped: {e}")
+
+    # 9c. Background Music
     try:
         from core.music_generator import generate_background_music
         from core.ffmpeg_tools import mix_background_music

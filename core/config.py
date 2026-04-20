@@ -72,10 +72,10 @@ CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite" # 60 credits per 8s clip — includes v
 # - Visual channels (AIMagine, Sentinal): Kling 2.6 I2V (40 credits) — high quality visuals
 # - Narration channels (GE, SH): VEO3 Lite (60 credits) — built-in AI voice narration
 CHANNEL_VEO_MODEL = {
-    "sentinal_ihsan": None,                              # Kling 2.1 primary — visual quality matters most
-    "aimagine": None,                                    # Kling 2.1 primary — construction detail matters
-    "galactic_experiment": CINEMATIC_VIDEO_MODEL_LITE,   # VEO3 Lite — needs AI narration voice
-    "shadowedhistory": CINEMATIC_VIDEO_MODEL_LITE,       # VEO3 Lite — needs AI narration voice
+    "sentinal_ihsan": None,                              # Kling primary — visual quality matters most
+    "aimagine": None,                                    # Kling primary — construction detail matters
+    "galactic_experiment": None,                          # Kling primary + separate TTS narration
+    "shadowedhistory": None,                              # Kling primary + separate TTS narration
 }
 
 # Duration constraints per channel (seconds)
