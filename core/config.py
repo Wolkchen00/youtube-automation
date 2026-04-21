@@ -25,7 +25,7 @@ SENTINAL_FACE_REF = os.getenv("SENTINAL_FACE_REF", "")
 UPLOAD_USERS = {
     "aimagine": os.getenv("UPLOAD_USER_AIMAGINE", "Youtube"),
     "shadowedhistory": os.getenv("UPLOAD_USER_SHADOWEDHISTORY", "shad0wedhistory"),
-    "galactic_experiment": os.getenv("UPLOAD_USER_GALACTIC", "galacticexperimet"),
+    "galactic_experiment": os.getenv("UPLOAD_USER_GALACTIC", "galacticexperiment"),
     "sentinal_ihsan": os.getenv("UPLOAD_USER_SENTINAL", "sentinalihsandaily"),
 }
 

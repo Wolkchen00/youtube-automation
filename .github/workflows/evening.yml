@@ -192,8 +192,8 @@ jobs:
 
       - name: Run galactic_experiment
         run: |
-          echo "⏳ Waiting 180s to stagger Gemini API calls across parallel jobs..."
-          sleep 180
+          echo "⏳ Waiting 300s to stagger Gemini API calls across parallel jobs..."
+          sleep 300
           python -X utf8 daily_runner.py --channels galactic_experiment 2>&1 | tee logs/galactic_run.log
 
       - name: Persist topic history

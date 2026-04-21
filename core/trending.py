@@ -222,11 +222,16 @@ def _save_cache(data: dict):
     )
 
 
+# Model fallback list — try multiple models when one hits quota limits
+_TRENDING_MODELS = ["gemini-2.5-flash-preview-04-17", "gemini-2.0-flash", "gemini-2.5-flash"]
+
+
 def generate_trending_topic(channel: str) -> dict | None:
     """Generate a trending topic for a channel using Gemini + viral analytics.
 
     This is the PRIMARY topic selector — replaces static lists.
     Falls back to None so callers can use their static lists as backup.
+    Uses model fallback to handle 429 quota errors (critical for GE which starts last).
 
     Returns:
         {"topic": str, "title": str, "category": str, "trending_hook": str,
@@ -270,33 +275,48 @@ def generate_trending_topic(channel: str) -> dict | None:
         categories=categories,
     )
 
-    try:
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-2.5-flash")
+    genai.configure(api_key=GEMINI_API_KEY)
+    last_error = None
+    # Backoff delays matching Gemini's retry-after (~30s)
+    backoff_delays = [10, 30, 45]
 
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.GenerationConfig(
-                response_mime_type="application/json",
-                temperature=1.0,  # High creativity for trending topics
-            ),
-        )
+    for idx, model_name in enumerate(_TRENDING_MODELS):
+        try:
+            model = genai.GenerativeModel(model_name)
 
-        result = json.loads(response.text)
+            response = model.generate_content(
+                prompt,
+                generation_config=genai.GenerationConfig(
+                    response_mime_type="application/json",
+                    temperature=1.0,  # High creativity for trending topics
+                ),
+            )
 
-        if result and result.get("topic"):
-            logger.info(f"🔥 Trending topic for {channel}: {result.get('title', '')[:60]}")
-            logger.info(f"   Trend hook: {result.get('trending_hook', 'N/A')[:60]}")
+            result = json.loads(response.text)
 
-            # Cache it for the day
-            cache[cache_key] = result
-            _save_cache(cache)
+            if result and result.get("topic"):
+                logger.info(f"🔥 Trending topic for {channel}: {result.get('title', '')[:60]} (via {model_name})")
+                logger.info(f"   Trend hook: {result.get('trending_hook', 'N/A')[:60]}")
 
-            return result
+                # Cache it for the day
+                cache[cache_key] = result
+                _save_cache(cache)
 
-    except Exception as e:
-        logger.warning(f"⚠️ Trending topic generation failed for {channel}: {e}")
+                return result
 
+        except Exception as e:
+            last_error = e
+            error_str = str(e).lower()
+            if any(kw in error_str for kw in ("quota", "rate", "429", "resource", "404", "not found", "deprecated")):
+                wait = backoff_delays[min(idx, len(backoff_delays) - 1)]
+                logger.warning(f"⚠️ Trending {model_name} quota/unavailable, waiting {wait}s...")
+                time.sleep(wait)
+                continue
+            else:
+                logger.warning(f"⚠️ Trending topic generation failed for {channel}: {e}")
+                return None
+
+    logger.warning(f"⚠️ All trending models failed for {channel}: {last_error}")
     return None
 
 
