@@ -1,11 +1,11 @@
 """
-AImagine — AI Construction Timelapse Pipeline
+AImagine — DIY Crafts Fixed-Camera Pipeline
 
-Creates 24-second viral construction timelapse videos.
-Pipeline: concept selection → 4 frames (chained) → 3 video clips → crossfade merge → publish.
+Creates 24-second viral DIY transformation videos.
+Inspired by @diycraftstvofficial (5.2M IG, 319K YT).
+Pipeline: concept selection → 4 frames (chained) → 3 video clips → merge → publish.
 
-Cost per video: ~128 credits ($0.64)
-Format: 9:16 vertical, 3 clips × 8s = 24s
+Format: 9:16 vertical, fixed tripod camera, 1-2 workers, satisfying transformation.
 """
 
 import time
@@ -45,7 +45,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     duration_cfg = CHANNEL_DURATION[CHANNEL]
 
     logger.info("\n" + "=" * 60)
-    logger.info(f"🏗️ AIMAGINE — Construction Timelapse Pipeline — {today}")
+    logger.info(f"🏗️ AIMAGINE — DIY Crafts Pipeline — {today}")
     logger.info("=" * 60)
 
     credit = check_credit()
@@ -66,8 +66,8 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     logger.info(f"   Hook: {concept['hook']}")
 
     title = concept.get("title", f"🏗️ {concept['name']}")
-    description = concept.get("description", f"Incredible construction timelapse: {concept['name']}")
-    hashtags = concept.get("hashtags", "#shorts #construction #timelapse #satisfying #diy")
+    description = concept.get("description", f"Incredible DIY transformation: {concept['name']}")
+    hashtags = concept.get("hashtags", "#shorts #diy #transformation #satisfying #crafts")
 
     # Trending hook — boost title with daily trending keywords
     from core.trending import enhance_title_with_trend, get_trending_hashtags
@@ -88,7 +88,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
     # Each concept has its own coherent visual story (exterior → interior reveal).
 
     # ── 3. Generate 4 frames with chained references ──────────────────────
-    logger.info(f"\n🖼️ GENERATING {len(frame_prompts)} CONSTRUCTION FRAMES...")
+    logger.info(f"\n🖼️ GENERATING {len(frame_prompts)} DIY FRAMES...")
     frames = []
     previous_url = None
 
@@ -99,7 +99,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
             logger.warning(f"⏰ Pipeline timeout ({elapsed_min:.0f}min), stopping frames")
             break
 
-        stage_names = ["Empty Site", "Excavation", "Construction", "Final Reveal"]
+        stage_names = ["Before/Empty", "Early Progress", "Major Progress", "Finished Result"]
         stage = stage_names[i] if i < len(stage_names) else f"Stage {i+1}"
         logger.info(f"  Frame {i+1}/{len(frame_prompts)}: {stage}...")
 
@@ -133,7 +133,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
 
     # ── 3. Generate 3 video clips (frame pairs) ──────────────────────────
     actual_clips_needed = len(frames) - 1
-    logger.info(f"\n🎬 GENERATING {actual_clips_needed} TIMELAPSE VIDEO CLIPS...")
+    logger.info(f"\n🎬 GENERATING {actual_clips_needed} DIY VIDEO CLIPS...")
     clips = []
 
     for i in range(actual_clips_needed):
@@ -145,7 +145,7 @@ def run_pipeline(concept_name: str = None, dry_run: bool = False, skip_upload: b
 
         start_frame = frames[i]
         end_frame = frames[i + 1]
-        vp = video_prompts[i] if i < len(video_prompts) else "Fast construction timelapse. Fixed drone angle. 8 seconds."
+        vp = video_prompts[i] if i < len(video_prompts) else "Fixed tripod camera, DIY transformation timelapse, satisfying progress. 8 seconds."
 
         logger.info(f"  Clip {i+1}: {start_frame['stage']} → {end_frame['stage']}")
 
