@@ -11,7 +11,7 @@
   ],
   "hashtags": "#detective #mystery #whodunit #shorts #ai #thriller #influencer #crime",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "parts": {
     "1": {
@@ -24,6 +24,17 @@
         "youtube"
       ],
       "published_at": "2026-06-15T20:19:19.247021+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/viral-detective/episodes/ep02/ep02.mp4",
+      "subtitle": "The Signature",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-15T21:39:32.319802+00:00"
     }
   }
 }
