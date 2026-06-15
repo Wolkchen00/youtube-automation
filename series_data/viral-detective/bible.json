@@ -1,0 +1,128 @@
+{
+  "series": {
+    "slug": "viral-detective",
+    "title": "The Viral Detective",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p"
+  },
+  "art_style": "Sleek modern neo-noir thriller look, glossy neon city at night, rain-slick reflections, teal-and-magenta social-media color grade, cinematic shallow depth of field, high contrast, tense and stylish mood, vertical 9:16 framing.",
+  "style_ref_url": null,
+  "characters": [
+    {
+      "id": "ihsan",
+      "name": "Detective İhsan",
+      "bio": "Hikâyenin kahramanı — sakin, keskin gözlü 'Viral Dedektif'. Dijital ipuçlarını suç mahalli gibi okur.",
+      "appearance": "The exact same man as in the reference image — identical face, identity and features must be preserved. A sharp, calm man in his early 30s wearing a dark charcoal overcoat over a black shirt, observant and confident detective demeanor.",
+      "ref_image_local": null,
+      "ref_image_url": "https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg",
+      "voice": {
+        "audio_id": "orus",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "43b20c10d7c94953bbb8e0f4cec3627c"
+    },
+    {
+      "id": "mira",
+      "name": "Mira",
+      "bio": "Şehrin 1 numaralı influencer'ı — 'sosyal medya kraliçesi' güzellik mogulu tipi; katilin asıl hedefi. İhsan'dan yardım ister.",
+      "appearance": "A glamorous beauty-mogul influencer in her late 20s — the city's number-one 'queen of social media': flawless glam makeup, long glossy dark hair, a designer outfit with statement jewelry, polished and camera-perfect, confident but anxious expression.",
+      "ref_image_local": "mira.png",
+      "ref_image_url": "https://i.ibb.co/LDTNxtfV/mira.png",
+      "voice": {
+        "audio_id": "kore",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "b2895e2f4c7943259aeebb75e148c03b"
+    },
+    {
+      "id": "kaan",
+      "name": "Kaan",
+      "bio": "İhsan'ın teknoloji analisti dostu; dijital ipuçlarını çözer. (Gizli sır taşır.)",
+      "appearance": "A sharp tech analyst man in his early 30s, short neat dark hair, light stubble, glasses, a dark hoodie over a t-shirt, friendly but intensely focused look.",
+      "ref_image_local": "kaan.png",
+      "ref_image_url": "https://i.ibb.co/wZKnPR8T/kaan.png",
+      "voice": {
+        "audio_id": "sadaltager",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "2a821eaedf3f46bbaef5c101e8adf9fb"
+    },
+    {
+      "id": "deniz",
+      "name": "Deniz",
+      "bio": "1 numaralı olmak isteyen hırslı, yükselen Gen-Z TikTok yıldızı. Baş şüpheli.",
+      "appearance": "An ambitious Gen-Z TikTok-style rising star in her early 20s — viral dancer and drama-channel energy: trendy techwear streetwear, pastel-lavender dyed hair, bold colorful makeup with subtle neon-green accents, ring-light glow, eager and hungry to be number one. Clean character image with no on-image text, names, captions or logos.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\viral-detective\\refs\\characters\\deniz.png",
+      "ref_image_url": "https://i.ibb.co/Qv7CTNMr/deniz.png",
+      "voice": {
+        "audio_id": "leda",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "6b948782b95845f2ade53283020bf0c9"
+    },
+    {
+      "id": "nova",
+      "name": "NOVA",
+      "bio": "Şehrin en büyük oyun yayıncısı — milyonlarca takipçili, enerjik gaming süperstarı. Dizinin ilk kurbanı; öldürüldüğünde canlı yayını yarıda kesilir.",
+      "appearance": "A world-famous male gaming livestream superstar in his mid-20s — the city's biggest streamer with millions of followers: a stylish modern undercut, a sleek pro-gamer headset resting around his neck, an oversized esports jersey-hoodie (plain, logo-free), confident charismatic megastar energy, lit by the RGB neon glow of a high-end gaming battle-station behind him. Clean character image with no on-image text, names, captions or logos.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\viral-detective\\refs\\characters\\nova.png",
+      "ref_image_url": "https://i.ibb.co/mVWyHtW9/nova.png",
+      "voice": {
+        "audio_id": "fenrir",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "ada42b05b42048f9b93db72d46c907aa"
+    }
+  ],
+  "environments": [
+    {
+      "id": "city_night",
+      "name": "Neon gece şehri",
+      "desc": "A glossy modern city at night, rain-slick streets reflecting magenta and teal neon signs, tall glass high-rises, moody cinematic lighting.",
+      "ref_image_local": "city_night.png",
+      "ref_image_url": "https://i.ibb.co/HfnnQwf9/city-night.png"
+    },
+    {
+      "id": "crime_scene",
+      "name": "Cinayet mahalli (gaming battlestation)",
+      "desc": "A luxury gaming streamer's battle-station crime scene at night: a toppled high-end gaming chair, a curved ultrawide monitor and triple monitors still glowing with a frozen 'STREAM ENDED' screen, an RGB-lit desk with a mechanical keyboard, a pro headset dropped on the floor, police tape across the setup, a smartphone glowing on the floor, cold blue police light, neon city skyline through the window.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\viral-detective\\refs\\environments\\crime_scene.png",
+      "ref_image_url": "https://i.ibb.co/5gqsbqq6/crime-scene.png"
+    },
+    {
+      "id": "office",
+      "name": "Dedektif ofisi",
+      "desc": "A dim private-detective office at night, a wall of influencer photos connected by red string, multiple glowing computer monitors, warm desk lamp against deep shadows.",
+      "ref_image_local": "office.png",
+      "ref_image_url": "https://i.ibb.co/DH2XjGLW/office.png"
+    },
+    {
+      "id": "studio",
+      "name": "Yayın stüdyosu",
+      "desc": "A glossy influencer livestream studio, bright ring lights, a glowing neon 'LIVE' sign, pastel backdrop, cameras on tripods, stylish and modern.",
+      "ref_image_local": "studio.png",
+      "ref_image_url": "https://i.ibb.co/jvN235bM/studio.png"
+    }
+  ],
+  "props": [
+    {
+      "id": "phone_clue",
+      "name": "İpucu telefonu",
+      "desc": "A modern smartphone with a glowing screen showing a social-media post, a black-heart symbol and a threatening message visible.",
+      "ref_image_local": "phone_clue.png",
+      "ref_image_url": "https://i.ibb.co/mFP0VLFt/phone-clue.png"
+    },
+    {
+      "id": "evidence_wall",
+      "name": "Kanıt panosu",
+      "desc": "A corkboard and monitor wall covered with influencer photos, printed posts, hashtags and red string connecting suspects.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\viral-detective\\refs\\props\\evidence_wall.png",
+      "ref_image_url": "https://i.ibb.co/1t4f6HH2/evidence-wall.png"
+    }
+  ]
+}

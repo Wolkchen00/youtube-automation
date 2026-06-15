@@ -1,0 +1,49 @@
+{
+  "series": {
+    "slug": "ornek-bahce",
+    "title": "Nil'in Bahçesi",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p"
+  },
+  "art_style": "Warm, soft cinematic 3D animation style, gentle natural daylight, cozy and friendly mood, consistent color palette of greens and warm creams.",
+  "style_ref_url": null,
+  "characters": [
+    {
+      "id": "nil",
+      "name": "Nil",
+      "bio": "Bahçe bakımını seven, sıcakkanlı kadın sunucu.",
+      "appearance": "Turkish woman in her 30s, warm friendly smile, shoulder-length brown hair, green gardening apron over a cream blouse, denim trousers, garden gloves.",
+      "ref_image_local": null,
+      "ref_image_url": null,
+      "voice": {
+        "audio_id": "callirrhoe",
+        "kie_audio_id": null,
+        "custom": {
+          "base": "callirrhoe",
+          "name": "Nil",
+          "voice_description": "Bahçe bakımı anlatan, sıcak, sakin ve informatif kadın sesi.",
+          "example_dialogue": "Merhaba, benim adım Nil"
+        }
+      },
+      "character_id": null
+    }
+  ],
+  "environments": [
+    {
+      "id": "bahce",
+      "name": "Ev bahçesi",
+      "desc": "Sunny home vegetable garden with raised wooden beds, tomato plants, morning light.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    }
+  ],
+  "props": [
+    {
+      "id": "sulama_kabi",
+      "name": "Sulama kabı",
+      "desc": "A green metal watering can.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    }
+  ]
+}

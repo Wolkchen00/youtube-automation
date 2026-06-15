@@ -1,0 +1,85 @@
+{
+  "episode": { "number": 1, "title": "The First Victim" },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Establishing shot of a glossy neon city at night, rain-slick streets reflecting magenta and teal signs. Detective İhsan, the exact same man from the reference, in a dark charcoal overcoat, walks toward a glowing luxury high-rise where blue police lights flash. Seen from a cinematic three-quarter angle with neon side-light across his face, he says in English: 'In this city, the spotlight is everything. Tonight, it got someone killed.' Moody, atmospheric, slow push-in.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Inside a high-end gaming streamer's battle-station crime scene: a toppled gaming chair, an RGB-lit desk, and a giant ultrawide monitor frozen on NOVA's final livestream — the young superstar streamer's face paused mid-reaction behind a glowing 'STREAM ENDED' banner. Police tape across the setup, a smartphone still glowing on the floor. Detective İhsan crouches and examines the phone, calm and focused. He says in English: 'NOVA. Twelve million followers. The city's biggest streamer. His final stream just ended — permanently.' Cold blue police light, tense atmosphere.",
+      "characters": ["ihsan", "nova"],
+      "speakers": ["ihsan"],
+      "environment": "crime_scene",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Extreme close-up on the victim's glowing phone screen showing NOVA's final livestream frame, a black-heart symbol and a threatening message reading 'YOU ARE NEXT', with a shadowy hooded figure faintly reflected in the dark glass. İhsan's tense voice in English: 'The killer didn't hide. He posted it — right here, for everyone to see.' Eerie neon glow.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "crime_scene",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A worried young woman, Mira, with long wavy dark hair and a stylish silk blouse, hurries into the scene past the police tape, frightened. She grabs İhsan's arm and says in English: 'İhsan, please — I knew NOVA. And I think I'm next.' Handheld, urgent.",
+      "characters": ["ihsan", "mira"],
+      "speakers": ["mira"],
+      "environment": "crime_scene",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "İhsan's dim detective office, walls covered with influencer photos connected by red string, multiple glowing monitors. Kaan, a tech analyst with glasses and a dark hoodie, types fast and says in English: 'I cross-checked his followers — whoever did this watched him for weeks.' İhsan, standing beside him in his overcoat, replies in English: 'Then he's watching the next one too.'",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["kaan", "ihsan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "Close on glowing office monitors filling with data: profile analytics dashboards, timelines and bright connection lines linking several influencer accounts. Kaan, in glasses, studies the patterns, his face lit by the screens, and says in English: 'The same digital fingerprint, twice. Whoever did this left a trail in the data.' Focused, blue screen glow.",
+      "characters": ["kaan"],
+      "speakers": ["kaan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 7,
+      "duration": "6",
+      "prompt": "Mira sits in the office, her face lit by her phone's glow, scared, and asks in English: 'If I post tonight... will he come for me?' İhsan, firm and certain, answers in English: 'He already chose you. So we set the trap.' Intimate, tense close-up.",
+      "characters": ["ihsan", "mira"],
+      "speakers": ["mira", "ihsan"],
+      "environment": "office",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 8,
+      "duration": "8",
+      "prompt": "Detective İhsan stands in the neon-lit night, the city reflected in his eyes, holding the glowing phone. He turns toward the camera, half his face in cool neon shadow, and says in English: 'The killer left his first clue in plain sight. Did you catch it? Who do you think is targeting the city's influencers — comment your guess. Part two tomorrow.' Dramatic, stylish, slow push-in.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "episode": { "number": 2, "title": "The Signature" },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "İhsan's dim detective office at night, evidence wall glowing. Kaan, tech analyst in glasses and hoodie, points at a screen. Kaan says in English: 'Every victim shared one thing — someone tracked their every move. He leaves a black heart. Like a signature.' İhsan, in his charcoal overcoat, studies the wall, tense.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["kaan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A glossy neon livestream studio, ring lights glowing, a 'LIVE' sign on. Mira, the glamorous beauty-mogul influencer with long dark hair, sits before the camera as bait, nervous but composed. She says in English to camera: 'Hey loves... I'm going live all night. And if you're watching me — I'm not afraid of you.' Tense, stylish.",
+      "characters": ["mira"],
+      "speakers": ["mira"],
+      "environment": "studio",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Close on Mira's glowing phone during the livestream: a new comment appears with a black-heart symbol and the message 'YOU'RE GLOWING. FOR NOW.' Mira's smile freezes, fear in her eyes. She whispers in English: 'He's here. He's watching right now.' Eerie neon glow.",
+      "characters": ["mira"],
+      "speakers": ["mira"],
+      "environment": "studio",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Deniz, an ambitious Gen-Z streetwear influencer with braided hair, steps into the studio behind Mira, cocky and cold. She says in English: 'Number one looks lonely up there, Mira. Careful — thrones get people killed.' Mira turns, unsettled. Tense standoff under neon light.",
+      "characters": ["mira", "deniz"],
+      "speakers": ["deniz"],
+      "environment": "studio",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Back in the detective office, Kaan and İhsan watch the studio feed on a monitor, evidence wall behind them. Kaan says in English: 'Deniz. She climbed past every victim on the charts. Motive and timing.' İhsan, arms crossed, replies in English: 'Ambition isn't proof. But it's a start.'",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["kaan", "ihsan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "6",
+      "prompt": "Deniz stands alone on a rain-slick neon street at night, lit by her phone, smirking as she posts. She says in English: 'By tomorrow, I'll be the only name this city remembers.' Cold, ambitious, magenta-teal glow.",
+      "characters": ["deniz"],
+      "speakers": ["deniz"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 7,
+      "duration": "8",
+      "prompt": "İhsan stands before the glowing evidence wall, studying the black-heart pattern connecting the victims' photos with red string. He says in English, quiet and grim: 'He doesn't stalk them on the street. He hunts them through the numbers — the likes, the views, the data.' Moody, cinematic.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 8,
+      "duration": "8",
+      "prompt": "Detective İhsan in the neon-lit night, city reflected in his eyes, holding the glowing phone. He turns to camera and says in English: 'The rookie wants the crown. But does she kill for it? Who's your number one suspect — comment your guess. Part three tomorrow.' Dramatic, slow push-in.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    }
+  ]
+}

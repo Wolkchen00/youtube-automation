@@ -1,0 +1,29 @@
+{
+  "slug": "viral-detective",
+  "base_title": "The Viral Detective",
+  "logline": "A detective hunts a killer who is murdering the city's biggest influencers — one viral clue at a time.",
+  "language": "en",
+  "upload_profile": "sentinalihsandaily",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#detective #mystery #whodunit #shorts #ai #thriller #influencer #crime",
+  "total_parts": 5,
+  "next_part": 2,
+  "status": "active",
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\viral-detective\\episodes\\ep01\\ep01.mp4",
+      "subtitle": "The First Victim",
+      "platforms_ok": [
+        "instagram",
+        "tiktok",
+        "youtube"
+      ],
+      "published_at": "2026-06-15T20:19:19.247021+00:00"
+    }
+  }
+}

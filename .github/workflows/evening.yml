@@ -77,6 +77,7 @@ jobs:
           retention-days: 7
 
   sentinal_ihsan:
+    if: false  # Eski rastgele günlük kanal DURDURULDU — İhsan'ın hesabı artık The Viral Detective dizisiyle (series.yml) yayınlanıyor.
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:

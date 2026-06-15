@@ -1,0 +1,45 @@
+{
+  "episode": { "number": 1, "title": "Meydan Okuma" },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "On the starting grid, İhsan and his rival Rakip stand face-to-face between their two parked race cars, a tense confrontation, blurred pit crew and crowd behind them. İhsan, in the red and black suit, points toward the track and says firmly in Turkish: 'Bu pist bugün benim. Hazır mısın?' Rakip, in the black and yellow suit, smirks and replies in Turkish: 'Büyük konuşma. Az sonra tozumu yutacaksın.' Camera slowly pushes in, dramatic tension.",
+      "characters": ["ihsan", "rakip"],
+      "speakers": ["ihsan", "rakip"],
+      "environment": "pist",
+      "props": ["ihsan_araba", "rakip_araba"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Continuing on the same starting grid, İhsan and Rakip turn away from each other and stride to their cars — İhsan to the red number 7, Rakip to the black-and-yellow number 13 — and climb in, pulling on their helmets. The engines roar to life with shimmering exhaust heat. No dialogue, only powerful engine sounds. Determined, high-energy.",
+      "characters": ["ihsan", "rakip"],
+      "speakers": [],
+      "environment": "pist",
+      "props": ["ihsan_araba", "rakip_araba"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The red start lights go out and both race cars — İhsan's red number 7 and Rakip's black-and-yellow number 13 — launch off the line side by side, tires smoking, accelerating hard down the straight, wheel to wheel with heavy motion blur and roaring engines. İhsan shouts excitedly in Turkish from inside his cockpit: 'İşte böyle!' Fast dynamic tracking shot.",
+      "characters": ["ihsan", "rakip"],
+      "speakers": ["ihsan"],
+      "environment": "pist",
+      "props": ["ihsan_araba", "rakip_araba"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "At the finish line, İhsan's red number 7 edges ahead of Rakip's black-and-yellow number 13 and crosses first under the waving checkered flag as the grandstand crowd erupts. İhsan pumps his fist and shouts triumphantly in Turkish: 'Sana söylemiştim — bu pist benim!' Golden sunlight and confetti, victorious celebration.",
+      "characters": ["ihsan", "rakip"],
+      "speakers": ["ihsan"],
+      "environment": "pist",
+      "props": ["ihsan_araba", "rakip_araba"],
+      "seed": null
+    }
+  ]
+}

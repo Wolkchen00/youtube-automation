@@ -1,0 +1,85 @@
+{
+  "episode": { "number": 5, "title": "The Analyst" },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Detective office at night, evidence wall glowing behind them. İhsan, in his overcoat, faces Kaan and says in English: 'It was you. The black heart, the data, the bodies. All you.' Kaan, calm and cold, replies in English: 'Took you long enough, detective.' High tension, blue glow.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["ihsan", "kaan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close on Kaan, tech analyst, lit by monitor glow, confessing his motive in English: 'I built the algorithm that made them famous. Then they cancelled me — erased me. So I used their precious analytics to hunt them, one trend at a time.' Chilling, intense.",
+      "characters": ["kaan"],
+      "speakers": ["kaan"],
+      "environment": "office",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "In the neon livestream studio, Mira and Deniz stand together, stunned. Mira says in English: 'You were never a fan. You were the ghost in our feeds.' Deniz adds in English, shaken: 'He watched all of us... through the numbers.' Tense, neon glow.",
+      "characters": ["mira", "deniz"],
+      "speakers": ["mira", "deniz"],
+      "environment": "studio",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "İhsan and Kaan in a final confrontation at the gaming crime scene, RGB light and police tape around them. Kaan says in English: 'You can arrest me, but the data never forgets.' İhsan steps forward and replies in English, firm: 'Neither do I. It's over, Kaan.' Cinematic climax.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["kaan", "ihsan"],
+      "environment": "crime_scene",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Rain-slick neon street, blue police lights flashing. Kaan is led away in the background. Detective İhsan, in his overcoat, watches and says in English, half to camera: 'The city's deadliest follower... finally logged off.' Moody, cinematic, magenta-teal glow.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "6",
+      "prompt": "Mira and Deniz in the neon studio, safe now, exhausted with relief. Mira says in English, soft: 'It's finally over.' Deniz glances at her phone, uneasy, and replies in English: '...Is it?' Subtle dread under the neon.",
+      "characters": ["mira", "deniz"],
+      "speakers": ["mira", "deniz"],
+      "environment": "studio",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 7,
+      "duration": "8",
+      "prompt": "İhsan alone on the neon street at night; his phone lights up with a new black-heart message from an unknown sender. He stares, unsettled, and says in English: 'A new message. A black heart. But Kaan's behind bars...' The glowing screen reads 'DID YOU THINK HE WORKED ALONE?'. Eerie cliffhanger glow.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 8,
+      "duration": "8",
+      "prompt": "Detective İhsan in the neon-lit night, city reflected in his eyes, turns directly to camera and says in English: 'Kaan was only the beginning. Did you guess the Analyst? Season two is coming — follow now so you don't miss the next victim.' Dramatic, stylish, slow push-in.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    }
+  ]
+}

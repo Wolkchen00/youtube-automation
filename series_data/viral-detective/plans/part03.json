@@ -1,0 +1,85 @@
+{
+  "episode": { "number": 3, "title": "The Insider" },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Rain-slick neon street at night. Detective İhsan, in his charcoal overcoat, confronts Deniz, the Gen-Z streetwear influencer. İhsan says in English: 'Three victims. You were one step behind all of them.' Deniz fires back in English: 'Behind? I was live in front of forty thousand people when NOVA died. Check the timestamp.' Tense, magenta-teal glow.",
+      "characters": ["ihsan", "deniz"],
+      "speakers": ["ihsan", "deniz"],
+      "environment": "city_night",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Detective office, glowing monitors and evidence wall. Kaan, tech analyst in glasses, checks footage and says in English: 'She's telling the truth. Streaming, on camera, during every attack. It's not her.' İhsan exhales, frustrated, and replies in English: 'Then we're back to nothing.'",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["kaan", "ihsan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "In the neon livestream studio, Deniz sits alone, lit by her phone's glow, suddenly frightened. She holds up the screen showing a black-heart message and says in English: 'İhsan... he sent me the heart too. Am I a suspect, or am I next?' Vulnerable, tense.",
+      "characters": ["deniz"],
+      "speakers": ["deniz"],
+      "environment": "studio",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Detective office at night. İhsan paces before the evidence wall; Kaan watches. İhsan says in English: 'He knows their schedules, their locations, their private posts. That's not a fan. That's someone with access.' Kaan answers quietly in English: 'Someone on the inside.' Ominous blue glow.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["ihsan", "kaan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Mira, the glamorous influencer, meets İhsan in the dim office, shaken and afraid. She says in English: 'If it's someone close to us... how do we know who to trust?' İhsan, grim, replies in English: 'We don't. That's how he wins.' Intimate, tense.",
+      "characters": ["ihsan", "mira"],
+      "speakers": ["mira", "ihsan"],
+      "environment": "office",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "6",
+      "prompt": "Extreme close on the evidence wall: red string converges on a single printed logo — an analytics dashboard used by every victim. İhsan's voice in English: 'One thread connects them all — the same analytics backend. Whoever runs it... sees everything.' Eerie, cinematic.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 7,
+      "duration": "8",
+      "prompt": "İhsan sits at his desk; a black-heart symbol suddenly appears on his own glowing monitor. He leans back, unsettled, and says in English: 'He's been watching me too. Every move I made... he saw it coming.' Cold blue screen glow, deep shadows.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "office",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 8,
+      "duration": "8",
+      "prompt": "Detective İhsan in the neon night, holding the glowing phone, turns to camera and says in English: 'Deniz is innocent. The killer is someone on the inside — someone we trust. Who do you suspect now? Part four tomorrow.' Dramatic, stylish, slow push-in.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "episode": { "number": 4, "title": "The Trap" },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Detective office, evidence wall glowing. İhsan, in his overcoat, leans over Kaan's shoulder. İhsan says in English: 'I planted a fake target in the data. Only our team can see it. If the killer bites...' Kaan, tech analyst in glasses, finishes in English: '...then it's one of us.' Tense, blue monitor glow.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["ihsan", "kaan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Neon livestream studio at night. Mira, glamorous and tense, stares at her glowing phone where a fresh black-heart has appeared. She says in English, voice shaking: 'İhsan, the heart — it just appeared on the decoy. But this account... only Kaan set it up.' Eerie glow.",
+      "characters": ["mira"],
+      "speakers": ["mira"],
+      "environment": "studio",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "İhsan alone before the evidence wall, dawning dread on his face. He says in English, slow and quiet: 'Kaan built every dashboard. Kaan traced every clue. Kaan was always... already there.' Deep shadows, single warm lamp.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "office",
+      "props": ["evidence_wall"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Office, close on Kaan typing at glowing monitors, calm and confident. Kaan says in English: 'I already know where he'll strike next.' İhsan, standing behind him in the shadows, replies coldly in English: 'I never told you the location.' Kaan's typing stops. Tension snaps.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["kaan", "ihsan"],
+      "environment": "office",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "İhsan and Kaan face each other in the dim office, a silent standoff. İhsan asks in English, low: 'How did you know, Kaan?' Kaan, after a cold pause, answers in English with a faint smile: 'Lucky guess.' Charged, ominous, blue glow.",
+      "characters": ["ihsan", "kaan"],
+      "speakers": ["ihsan", "kaan"],
+      "environment": "office",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "6",
+      "prompt": "Rain-slick neon street. Mira grips İhsan's arm, terrified, and warns in English: 'Your partner knows things no one should. İhsan — what if the man hunting us has been in the room the whole time?' Urgent, magenta-teal light.",
+      "characters": ["ihsan", "mira"],
+      "speakers": ["mira"],
+      "environment": "city_night",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 7,
+      "duration": "8",
+      "prompt": "Kaan alone in the office, lit by a single monitor. He slowly removes his glasses, a cold smile forming, and says softly to himself in English: 'They erased me once. Now I decide who trends... and who disappears.' Chilling, shadowy reveal-in-progress.",
+      "characters": ["kaan"],
+      "speakers": ["kaan"],
+      "environment": "office",
+      "props": ["phone_clue"],
+      "seed": null
+    },
+    {
+      "n": 8,
+      "duration": "8",
+      "prompt": "Detective İhsan in the neon night, holding the glowing phone, turns to camera and says in English: 'Every clue points to the one man I trusted most. Is Kaan the killer? Tell me before the finale. Part five tomorrow.' Dramatic, slow push-in.",
+      "characters": ["ihsan"],
+      "speakers": ["ihsan"],
+      "environment": "city_night",
+      "props": ["phone_clue"],
+      "seed": null
+    }
+  ]
+}

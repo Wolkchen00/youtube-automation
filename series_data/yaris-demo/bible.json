@@ -1,0 +1,65 @@
+{
+  "series": {
+    "slug": "yaris-demo",
+    "title": "Pist: İhsan'ın Meydan Okuması",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p"
+  },
+  "art_style": "Cinematic photorealistic motorsport film look, golden afternoon sunlight, dynamic motion blur, high-contrast teal-and-orange color grade, shallow depth of field, intense and energetic mood, vertical 9:16 framing.",
+  "style_ref_url": null,
+  "characters": [
+    {
+      "id": "ihsan",
+      "name": "İhsan",
+      "bio": "Kararlı, yetenekli genç yarış pilotu — hikâyenin kahramanı.",
+      "appearance": "The exact same man as in the reference image — identical face, identity and features must be preserved. Young man wearing a red and black racing suit with racing gloves, confident and determined expression.",
+      "ref_image_local": null,
+      "ref_image_url": "https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg",
+      "voice": {
+        "audio_id": "orus",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "6118ea82928b4a6f9467b0942183dd73"
+    },
+    {
+      "id": "rakip",
+      "name": "Rakip",
+      "bio": "İhsan'ın kibirli baş rakibi.",
+      "appearance": "A cocky rival race driver in his late 20s, sharp jawline, smug confident grin, slicked-back dark hair, wearing a sleek black and yellow racing suit.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\yaris-demo\\bible\\characters\\rakip.png",
+      "ref_image_url": "https://i.ibb.co/0jkmCDZm/rakip.png",
+      "voice": {
+        "audio_id": "algenib",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "351b632d281f4bb888cbbb4b695d319f"
+    }
+  ],
+  "environments": [
+    {
+      "id": "pist",
+      "name": "Yarış pisti",
+      "desc": "A professional outdoor asphalt race circuit on a sunny afternoon, painted starting-grid lines, grandstands with a blurred cheering crowd, blue sky with distant hills.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\yaris-demo\\bible\\environments\\pist.png",
+      "ref_image_url": "https://i.ibb.co/xSShZ3wg/pist.png"
+    }
+  ],
+  "props": [
+    {
+      "id": "ihsan_araba",
+      "name": "İhsan'ın arabası",
+      "desc": "A sleek red and black open-wheel formula-style race car with the number 7.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\yaris-demo\\bible\\props\\ihsan_araba.png",
+      "ref_image_url": "https://i.ibb.co/rRTRww9f/ihsan-araba.png"
+    },
+    {
+      "id": "rakip_araba",
+      "name": "Rakip'in arabası",
+      "desc": "An aggressive black and yellow open-wheel formula-style race car with the number 13.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\yaris-demo\\bible\\props\\rakip_araba.png",
+      "ref_image_url": "https://i.ibb.co/Qj67PKLn/rakip-araba.png"
+    }
+  ]
+}

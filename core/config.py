@@ -34,11 +34,14 @@ KIE_AI_BASE_URL = "https://api.kie.ai/api/v1"
 KIE_AI_CREATE_TASK = f"{KIE_AI_BASE_URL}/jobs/createTask"
 KIE_AI_RECORD_INFO = f"{KIE_AI_BASE_URL}/jobs/recordInfo"
 KIE_AI_CREDIT = f"{KIE_AI_BASE_URL}/chat/credit"
+KIE_AI_OMNI_AUDIO = f"{KIE_AI_BASE_URL}/omni/audio/create"          # Gemini Omni voice registration
+KIE_AI_OMNI_CHARACTER = f"{KIE_AI_BASE_URL}/omni/character/create"  # Gemini Omni character registration
 IMGBB_UPLOAD_URL = "https://api.imgbb.com/1/upload"
 
 # ─── Project Directories ──────────────────────────────────────────────────────
 OUTPUT_DIR = PROJECT_ROOT / "output"
 LOGS_DIR = PROJECT_ROOT / "logs"
+SERIES_DIR = OUTPUT_DIR / "series"   # Gemini Omni mini-series workspace (bible/refs/shots/episodes)
 
 # Per-channel output directories
 CHANNEL_NAMES = ["shadowedhistory", "sentinal_ihsan", "galactic_experiment", "aimagine"]
@@ -55,6 +58,7 @@ for ch in CHANNEL_NAMES:
         d.mkdir(parents=True, exist_ok=True)
 
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
+SERIES_DIR.mkdir(parents=True, exist_ok=True)
 
 # ─── Default Generation Settings ──────────────────────────────────────────────
 DEFAULT_ASPECT_RATIO = "9:16"       # Vertical / Shorts format
@@ -67,6 +71,13 @@ DEFAULT_VIDEO_MODE = "std"               # std = Standard quality, good balance
 DEFAULT_IMAGE_MODEL = "nano-banana-2"
 CINEMATIC_VIDEO_MODEL = "veo3_fast"      # Kie AI model names: veo3 (quality) or veo3_fast (fast)
 CINEMATIC_VIDEO_MODEL_LITE = "veo3_lite" # 60 credits per 8s clip — includes voice narration
+
+# ─── Gemini Omni (mini-series) Settings ───────────────────────────────────────
+OMNI_MODEL = "gemini-omni-video"
+OMNI_DEFAULT_RESOLUTION = "1080p"             # 720p and 1080p cost the same on Kie → use 1080p
+OMNI_DEFAULT_ASPECT = "9:16"                  # vertical, matches existing channels + uploader
+OMNI_VALID_DURATIONS = ("4", "6", "8", "10")  # seconds per Omni shot (max 10)
+OMNI_MAX_REF_UNITS = 7                        # (images×1)+(videos×2)+(character_ids×1) ≤ 7 / request
 
 # Per-channel video model strategy:
 # - Visual channels (AIMagine, Sentinal): Kling 2.6 I2V (40 credits) — high quality visuals
@@ -149,6 +160,13 @@ def setup_logging(name: str = "youtube", level: int = logging.INFO) -> logging.L
     if _logger.handlers:
         return _logger
     _logger.setLevel(level)
+
+    # Windows konsolu cp1252 → emoji/Türkçe/box karakterler için UTF-8'e geç (no-op if already utf-8)
+    for _stream in (sys.stdout, sys.stderr):
+        try:
+            _stream.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
 
     formatter = logging.Formatter(
         "%(asctime)s │ %(levelname)-8s │ %(name)-25s │ %(message)s",

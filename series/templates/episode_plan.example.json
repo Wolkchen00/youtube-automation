@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Domates Bakımı"
+  },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Nil bahçeye neşeyle girer, izleyiciye gülümseyip el sallar ve 'Merhaba, benim adım Nil' der, ardından domates fidelerini eliyle gösterir.",
+      "characters": ["nil"],
+      "speakers": ["nil"],
+      "environment": "bahce",
+      "props": [],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Nil yeşil sulama kabıyla domatesleri dikkatle sular ve sakin bir tonda kısa bir bakım ipucu verir.",
+      "characters": ["nil"],
+      "speakers": ["nil"],
+      "environment": "bahce",
+      "props": ["sulama_kabi"],
+      "seed": 42
+    }
+  ]
+}
