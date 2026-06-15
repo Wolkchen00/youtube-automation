@@ -13,6 +13,7 @@
   "total_parts": 5,
   "next_part": 3,
   "status": "active",
+  "publish_mode": "approval",
   "parts": {
     "1": {
       "status": "published",
