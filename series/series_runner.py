@@ -23,8 +23,62 @@ from pathlib import Path
 from core.config import logger
 from core.uploader import upload_to_platform
 from series import produce
+from series import notifier
 from series.series_meta import SeriesMeta, part_plan_path, list_active_series
 from series.shots import load_plan
+
+import shutil
+import subprocess
+
+# GitHub Actions GITHUB_REPOSITORY'yi otomatik set eder; yerelde varsayılan.
+REPO = os.environ.get("GITHUB_REPOSITORY", "Wolkchen00/youtube-automation")
+
+
+def _sample_frames(video_path, count: int = 3) -> list[str]:
+    """Final videodan önizleme kareleri çıkar (Telegram onay mesajı için)."""
+    ff = shutil.which("ffmpeg")
+    if not ff:
+        return []
+    try:
+        from core.ffmpeg_tools import get_video_duration
+        dur = get_video_duration(video_path) or 8.0
+    except Exception:
+        dur = 8.0
+    out_dir = Path(video_path).parent / "_frames"
+    out_dir.mkdir(parents=True, exist_ok=True)
+    frames: list[str] = []
+    for i in range(1, count + 1):
+        t = round(dur * i / (count + 1), 2)
+        fp = out_dir / f"preview_{i}.jpg"
+        try:
+            subprocess.run([ff, "-loglevel", "error", "-y", "-ss", str(t), "-i", str(video_path),
+                            "-frames:v", "1", "-q:v", "3", str(fp)], check=True)
+            if fp.exists():
+                frames.append(str(fp))
+        except Exception:
+            pass
+    return frames
+
+
+def _persist_release(slug: str, n: int, video_path) -> str | None:
+    """Üretilen videoyu GitHub Release asset'i olarak sakla — üretim ve onay AYRI bulut
+    koşularında olduğu için video kalıcı bir yerde durmalı. Release tag'ini döndürür."""
+    gh = shutil.which("gh")
+    if not gh:
+        logger.warning("⚠️ gh CLI yok — Release persistence atlandı")
+        return None
+    tag = f"pending-{slug}-part{n}"
+    subprocess.run([gh, "release", "delete", tag, "-R", REPO, "-y", "--cleanup-tag"],
+                   capture_output=True, text=True)
+    r = subprocess.run([gh, "release", "create", tag, str(video_path), "-R", REPO,
+                        "--title", f"Pending {slug} Part {n}",
+                        "--notes", "Telegram onayı bekliyor (otomatik)."],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        logger.error(f"❌ Release oluşturulamadı: {r.stderr.strip()}")
+        return None
+    logger.info(f"📦 Video Release'e yüklendi: {tag}")
+    return tag
 
 
 def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> list[str]:
@@ -53,13 +107,20 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
         return True
 
     n = meta.next_part
+    mode = meta.data.get("publish_mode", "auto")
+
+    # Onay modu: bu part zaten onay bekliyorsa YENİDEN ÜRETME (approver yayınlayacak).
+    if mode == "approval" and meta.get_part(n).get("status") == "awaiting_approval":
+        logger.info(f"⏳ Part {n} zaten Telegram onayı bekliyor — üretim atlandı.")
+        return True
+
     plan_path = part_plan_path(slug, n)
     if not plan_path.exists():
         logger.error(f"❌ Part planı yok: {plan_path}")
         return False
     plan = load_plan(plan_path)
     subtitle = plan.get("episode", {}).get("title", "")
-    logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} — {subtitle}")
+    logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} — {subtitle} (mod={mode})")
 
     # 1) Üret (idempotent — yarım kalmışsa sadece eksik çekimi üretir)
     video = produce.produce_episode(slug, plan, dry_run=dry_run)
@@ -72,7 +133,24 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
     meta.mark_produced(n, video, subtitle)
     meta.save()
 
-    # 2) Yayınla
+    # 2a) ONAY MODU: videoyu sakla + Telegram'a "Yayınlansın mı?" sor; YAYINLAMA, İLERLETME.
+    if mode == "approval":
+        tag = _persist_release(slug, n, video)
+        frames = _sample_frames(video, 3)
+        msg_id = None
+        if notifier.enabled():
+            msg_id = notifier.request_approval(n, meta.title_for(n, subtitle), frames)
+        else:
+            logger.warning("⚠️ Telegram kapalı (token/chat yok) — onay mesajı gönderilemedi.")
+        part = meta.get_part(n)
+        part["status"] = "awaiting_approval"
+        part["release_tag"] = tag
+        part["approval_msg_id"] = msg_id
+        meta.save()
+        logger.info(f"📨 Part {n} onaya gönderildi (Telegram). Yayın İhsan onayına bağlı.")
+        return True
+
+    # 2b) OTOMATİK MOD (eski davranış)
     if not publish:
         meta.advance()
         meta.save()

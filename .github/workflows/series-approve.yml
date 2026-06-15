@@ -1,25 +1,29 @@
-name: Series Daily
+name: Series Approve
 
-# Çok part'lı dizilerin günlük üretim + 3 platforma (upload-post) yayını.
-# Her çalıştırma her aktif serinin SIRADAKİ part'ını üretir ve yayınlar.
+# Telegram'dan gelen ✅/❌ onayını yoklar; onaylanan part'ı 3 platforma yayınlar.
+# Repo public → Actions dakikaları ücretsiz, sık yoklama sorun değil.
 
 on:
   schedule:
-    - cron: '30 14 * * *'   # 14:30 UTC ≈ 07:30 California (PDT)
+    - cron: '*/10 * * * *'   # her 10 dakikada bir
   workflow_dispatch:
     inputs:
       series:
-        description: "Seri slug (boş = tüm aktif seriler)"
+        description: "Seri slug (boş = tüm aktif)"
         required: false
         default: ""
 
 permissions:
   contents: write
 
+concurrency:
+  group: series-approve
+  cancel-in-progress: false
+
 jobs:
-  produce-and-publish:
+  approve-and-publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -41,11 +45,7 @@ jobs:
       - name: Create .env
         run: |
           cat > .env << 'EOF'
-          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
-          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
-          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
-          SENTINAL_FACE_REF=${{ secrets.SENTINAL_FACE_REF }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
           EOF
@@ -53,15 +53,15 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Produce + (onay bildirimi / otomatik yayın)
+      - name: Check approvals + publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ARG=""
           if [ -n "${{ github.event.inputs.series }}" ]; then ARG="--series ${{ github.event.inputs.series }}"; fi
-          python -X utf8 -m series.series_runner $ARG 2>&1 | tee logs/series_run.log
+          python -X utf8 -m series.approver $ARG 2>&1 | tee logs/series_approve.log
 
-      - name: Persist series state
+      - name: Persist state
         if: always()
         run: |
           git config user.name "github-actions[bot]"
@@ -70,14 +70,6 @@ jobs:
             git pull --rebase --autostash origin main || true
             git add series_data/ || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
-            git commit -m "chore: seri durumunu ilerlet [skip ci]" || true
+            git commit -m "chore: onay durumu güncelle [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
           done
-
-      - name: Upload logs artifact
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: series-logs-${{ github.run_number }}
-          path: logs/
-          retention-days: 7
