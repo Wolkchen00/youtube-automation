@@ -36,6 +36,13 @@
         "tiktok"
       ],
       "published_at": "2026-06-15T21:39:32.319802+00:00"
+    },
+    "3": {
+      "status": "awaiting_approval",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/viral-detective/episodes/ep03/ep03.mp4",
+      "subtitle": "The Insider",
+      "release_tag": "pending-viral-detective-part3",
+      "approval_msg_id": 204
     }
   }
 }
