@@ -1,0 +1,30 @@
+{
+  "slug": "ava-voyage",
+  "base_title": "AVA: The Last Voyage",
+  "logline": "Earth went silent. AVA, the AI of humanity's last starship, is taking you to the edge of the galaxy to find out why.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
+  "total_parts": 5,
+  "next_part": 2,
+  "status": "active",
+  "publish_mode": "auto",
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\ava-voyage\\episodes\\ep01\\ep01.mp4",
+      "subtitle": "The Awakening",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-16T22:40:30.578383+00:00"
+    }
+  }
+}

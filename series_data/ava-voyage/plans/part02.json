@@ -1,0 +1,12 @@
+{
+  "episode": { "number": 2, "title": "The Frozen Giant" },
+  "narration": "Ahead drifts a world that should not exist. A rogue planet, thrown out of its star system, wandering alone in the dark for a billion years. Its oceans froze mid-wave. And on its surface I detect something impossible — a structure. Someone was here before us. Did they leave? Or are they still watching?",
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "A massive sunless rogue planet looms out of the blackness, no star to light it, only a faint ghostly glow from its frozen surface. The starship approaches, tiny against its scale. Slow ominous reveal." },
+    { "n": 2, "duration": "8", "prompt": "Descending toward the planet's surface: entire oceans frozen mid-wave, kilometer-high walls of blue glittering ice caught in motion, sparkling under the ship's spotlight. Sweeping aerial flythrough." },
+    { "n": 3, "duration": "8", "prompt": "The starship descends through a silent frozen storm, shards of ice and snow drifting weightlessly, cyan running-lights cutting through the gloom. Tense, atmospheric, slow descent." },
+    { "n": 4, "duration": "8", "prompt": "Half-buried beneath the ice, a colossal alien structure emerges — smooth impossible geometry, faintly glowing seams, clearly built by intelligence. The ship hovers before it. Awe and dread." },
+    { "n": 5, "duration": "8", "prompt": "Extreme close-up on the alien structure's surface: rows of strange glowing glyphs ignite one by one with soft golden light, as if responding to the ship's presence. Mysterious, beautiful." },
+    { "n": 6, "duration": "8", "prompt": "The starship lifts away from the frozen world as a vast shimmering aurora ripples across the dark sky above the planet, like something waking up. Slow rise, haunting wonder." }
+  ]
+}

@@ -14,14 +14,88 @@ from pathlib import Path
 from core.config import logger
 from core.utils import download_file, sanitize_filename
 from core.imgbb import upload_to_imgbb
-from core.kie_api import generate_image, check_credit
+from core.kie_api import (
+    generate_image, check_credit,
+    generate_seedance_video, generate_veo_video, generate_video,
+)
 from core import ffmpeg_tools, cost_tracker
 
 from .bible import Bible, refs_dir, episode_dir, shots_dir, resolve_voice_id
 from .omni_api import register_audio, register_character, generate_omni_shot, build_omni_payload
-from .shots import resolve_shot, validate_plan, load_plan, plan_summary
+from .shots import resolve_shot, resolve_visual_shot, validate_plan, load_plan, plan_summary
 from . import report
 from .voices import is_preset
+
+
+# ─── Çok-motorlu görsel klip üretimi (Omni-dışı ucuz motorlar) ──────────────────
+
+def _generate_visual_clip(engine: str, prompt: str, start_url: str | None,
+                          duration, aspect_ratio: str, resolution: str,
+                          sound: bool = True) -> dict | None:
+    """Omni-DIŞI ucuz motorlarla tek klip üret. Dönüş: {"url", "credits"} | None.
+    Seedance native ses + I2V (en ucuz); Veo Lite/Fast yedek; Kling son çare.
+    """
+    eng = (engine or "seedance").lower()
+    dur = str(duration)
+    if eng in ("seedance", "seedance-2", "seedance_fast", "bytedance/seedance-2-fast"):
+        return generate_seedance_video(prompt, first_frame_url=start_url, duration=dur,
+                                       aspect_ratio=aspect_ratio, resolution="720p", sound=sound)
+    if eng in ("veo3_lite", "veo_lite"):
+        url = generate_veo_video(prompt, image_url=start_url, duration=dur, model="veo3_lite")
+        return {"url": url, "credits": None} if url else None
+    if eng in ("veo3_fast", "veo_fast", "veo3", "veo"):
+        url = generate_veo_video(prompt, image_url=start_url, duration=dur, model="veo3_fast")
+        return {"url": url, "credits": None} if url else None
+    if eng in ("kling", "kling-2.6"):
+        try:
+            url = generate_video(prompt, start_image_url=start_url, duration=dur, sound=sound)
+        except Exception:
+            url = None
+        return {"url": url, "credits": None} if url else None
+    # bilinmeyen → Seedance'e düş
+    return generate_seedance_video(prompt, first_frame_url=start_url, duration=dur,
+                                   aspect_ratio=aspect_ratio, resolution="720p", sound=sound)
+
+
+def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
+    """Final videoya anlatım (narration) + arka plan müziği ekle (best-effort).
+    Anlatım metni plan['narration'] alanından, ses kanalı bible.narration['channel']'dan gelir.
+    """
+    out = final_ep
+    number = plan.get("episode", {}).get("number", 1)
+    narr_cfg = bible.narration
+    narr_text = (plan.get("narration") or "").strip()
+
+    if narr_cfg.get("channel") and narr_text:
+        try:
+            from core.narration import create_narration_for_channel
+            wav = episode_dir(bible.slug, number) / "narration.wav"
+            audio_path, style = create_narration_for_channel(narr_cfg["channel"], narr_text, wav)
+            if audio_path and Path(audio_path).exists():
+                narrated = out.parent / f"{out.stem}_narrated.mp4"
+                ffmpeg_tools.mix_voiceover(str(out), str(audio_path), str(narrated),
+                                           voice_volume=1.0, bg_duck=0.18)
+                if narrated.exists() and narrated.stat().st_size > 0:
+                    out = narrated
+                    logger.info(f"🎙️ Anlatım eklendi ({style})")
+        except Exception as e:
+            logger.warning(f"⚠️ Anlatım atlandı: {e}")
+
+    if bible.music:
+        try:
+            from core.music_generator import generate_background_music
+            ch = narr_cfg.get("channel") or bible.slug
+            music_path = generate_background_music(ch)
+            if music_path and Path(music_path).exists():
+                music_out = out.parent / f"{out.stem}_music.mp4"
+                ffmpeg_tools.mix_background_music(out, music_path, music_out, music_volume=0.10)
+                if music_out.exists() and music_out.stat().st_size > 0:
+                    out = music_out
+                    logger.info("🎵 Müzik eklendi")
+        except Exception as e:
+            logger.warning(f"⚠️ Müzik atlandı: {e}")
+
+    return out
 
 
 # ─── Referans görsel (Karışık: yerel görsel varsa yükle, yoksa Nano Banana ile üret) ──
@@ -175,8 +249,14 @@ def setup_references(slug: str, dry_run: bool = False) -> Bible | None:
 
 # ─── Bölüm üretimi ─────────────────────────────────────────────────────────────
 
-def produce_episode(slug: str, plan, dry_run: bool = False) -> Path | None:
-    """Bir bölümü üret: çekimler → indir → birleştir → rapor.
+def produce_episode(slug: str, plan, dry_run: bool = False,
+                    chain_start_url: str | None = None) -> Path | None:
+    """Bir bölümü üret: çekimler → indir → birleştir → (anlatım/müzik) → rapor.
+
+    Çok-motorlu: her çekim bible.engine (veya shot['engine']) ile 'omni' VEYA ucuz
+    görsel motor (seedance/veo/kling) kullanır.
+    bible.chain_frames=True ise 'bitmeyen yolculuk': her çekimin son karesi sonrakinin
+    başlangıç karesi olur; chain_start_url önceki BÖLÜMün son karesidir (parçalar arası).
     plan: dict veya episode_plan.json yolu.
     """
     bible = Bible.load(slug)
@@ -186,15 +266,18 @@ def produce_episode(slug: str, plan, dry_run: bool = False) -> Path | None:
         plan = load_plan(plan)
 
     number = plan.get("episode", {}).get("number", 1)
-    logger.info(f"🎬 {plan_summary(plan)} (dry_run={dry_run})")
+    default_engine = bible.engine
+    chaining = bible.chain_frames
+    logger.info(f"🎬 {plan_summary(plan)} (motor={default_engine}, zincir={chaining}, dry_run={dry_run})")
 
-    # Doğrulama
+    # Doğrulama — 7-birim kota / ses yalnız OMNI çekimleri için geçerli.
     v = validate_plan(plan, bible)
     for w in v["warnings"]:
         logger.warning(f"⚠️ {w}")
     for e in v["errors"]:
         logger.error(f"❌ {e}")
-    if v["errors"] and not dry_run:
+    # Omni-dışı varsayılan motorda kota hataları üretimi durdurmaz (Omni'ye özgü).
+    if v["errors"] and default_engine == "omni" and not dry_run:
         logger.error("Plan hataları nedeniyle üretim durduruldu.")
         return None
 
@@ -204,32 +287,79 @@ def produce_episode(slug: str, plan, dry_run: bool = False) -> Path | None:
     if not dry_run:
         check_credit()  # ücretsiz okuma — başlangıç bakiyesi loglanır
 
+    chain_url = chain_start_url if chaining else None
+    last_frame_url = None
     shot_files: list[Path] = []
+
     for shot in plan["shots"]:
         n = shot.get("n")
         out_file = sdir / f"shot_{int(n):02d}.mp4"
+        shot_engine = (shot.get("engine") or default_engine).lower()
 
-        # İdempotent: bu çekim zaten üretildiyse atla → yeniden çalıştırmada sadece eksikler üretilir
+        # İdempotent: bu çekim zaten üretildiyse atla; zincir için son karesini yine de al
         if not dry_run and out_file.exists() and out_file.stat().st_size > 0:
             logger.info(f"⏭️ Çekim {n} zaten var, atlanıyor: {out_file.name}")
             shot_files.append(out_file)
+            if chaining:
+                lf = ffmpeg_tools.extract_last_frame(out_file)
+                if lf:
+                    up = upload_to_imgbb(lf)
+                    if up:
+                        chain_url = up
+                        last_frame_url = up
             continue
 
-        res = resolve_shot(bible, shot)
-        kwargs = res["kwargs"]
-        char_names = [bible.get_character(c).get("name", c)
-                      for c in shot.get("characters", []) if bible.get_character(c)]
+        # ── OMNI çekimi (karakter + ses tutarlılığı) ──────────────────────────
+        if shot_engine == "omni":
+            res = resolve_shot(bible, shot)
+            kwargs = res["kwargs"]
+            # Bitmeyen yolculuk: önceki çekimin/bölümün son karesini referans olarak ekle
+            if chaining and chain_url:
+                kwargs["image_urls"] = [chain_url] + list(kwargs.get("image_urls") or [])
+            char_names = [bible.get_character(c).get("name", c)
+                          for c in shot.get("characters", []) if bible.get_character(c)]
+            if dry_run:
+                payload = build_omni_payload(**kwargs)
+                logger.info(f"[dry-run] Çekim {n} OMNI ({res['units']} birim):\n"
+                            f"{json.dumps(payload, ensure_ascii=False, indent=2)[:700]}")
+                continue
+            result = generate_omni_shot(**kwargs)
+            credits, status, video_url = None, "FAIL", ""
+            if result and result.get("url"):
+                video_url = result["url"]
+                credits = result.get("credits")
+                if download_file(video_url, out_file):
+                    shot_files.append(out_file)
+                    status = "ok"
+                if credits is not None:
+                    cost_tracker.log_cost(f"series:{slug}", f"omni_ep{number}_shot{n}",
+                                          "gemini-omni-video", credits)
+            report.append_row(slug, report.make_row(
+                episode=number, shot_n=n, characters=char_names,
+                audio_ids=kwargs["audio_ids"], duration=kwargs["duration"],
+                resolution=kwargs["resolution"], seed=kwargs["seed"],
+                credits=credits, status=status, video_url=video_url, local_file=out_file,
+            ))
+            if chaining and status == "ok":
+                lf = ffmpeg_tools.extract_last_frame(out_file)
+                if lf:
+                    up = upload_to_imgbb(lf)
+                    if up:
+                        chain_url = up
+                        last_frame_url = up
+            continue
 
+        # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
+        rv = resolve_visual_shot(bible, shot, chain_url=chain_url)
         if dry_run:
-            payload = build_omni_payload(**kwargs)
-            logger.info(f"[dry-run] Çekim {n} ({res['units']} birim) payload:\n"
-                        f"{json.dumps(payload, ensure_ascii=False, indent=2)}")
+            src = "zincir" if chain_url else ("ortam/figür" if rv["start_image_url"] else "yok")
+            logger.info(f"[dry-run] Çekim {n} {shot_engine.upper()} | başlangıç={src} | "
+                        f"{rv['duration']}s | {rv['prompt'][:140]}...")
             continue
-
-        result = generate_omni_shot(**kwargs)
-        credits = None
-        status = "FAIL"
-        video_url = ""
+        result = _generate_visual_clip(shot_engine, rv["prompt"], rv["start_image_url"],
+                                       rv["duration"], bible.aspect_ratio, bible.resolution,
+                                       sound=bible.native_audio)
+        credits, status, video_url = None, "FAIL", ""
         if result and result.get("url"):
             video_url = result["url"]
             credits = result.get("credits")
@@ -237,15 +367,20 @@ def produce_episode(slug: str, plan, dry_run: bool = False) -> Path | None:
                 shot_files.append(out_file)
                 status = "ok"
             if credits is not None:
-                cost_tracker.log_cost(f"series:{slug}", f"omni_ep{number}_shot{n}",
-                                      "gemini-omni-video", credits)
-
+                cost_tracker.log_cost(f"series:{slug}", f"{shot_engine}_ep{number}_shot{n}",
+                                      shot_engine, credits)
         report.append_row(slug, report.make_row(
-            episode=number, shot_n=n, characters=char_names,
-            audio_ids=kwargs["audio_ids"], duration=kwargs["duration"],
-            resolution=kwargs["resolution"], seed=kwargs["seed"],
+            episode=number, shot_n=n, characters=[], audio_ids=[],
+            duration=rv["duration"], resolution="720p", seed=None,
             credits=credits, status=status, video_url=video_url, local_file=out_file,
         ))
+        if chaining and status == "ok":
+            lf = ffmpeg_tools.extract_last_frame(out_file)
+            if lf:
+                up = upload_to_imgbb(lf)
+                if up:
+                    chain_url = up
+                    last_frame_url = up
 
     if dry_run:
         logger.info("[dry-run] Simülasyon bitti — dosya/kredi harcanmadı.")
@@ -260,6 +395,19 @@ def produce_episode(slug: str, plan, dry_run: bool = False) -> Path | None:
     ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
     final_ep = episode_dir(slug, number) / f"ep{int(number):02d}.mp4"
     ffmpeg_tools.final_export(raw_ep, final_ep)
+
+    # Anlatım (narration) + arka plan müziği (best-effort)
+    final_ep = _post_process(bible, plan, final_ep)
+
+    # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar)
+    if chaining:
+        if not last_frame_url:
+            lf = ffmpeg_tools.extract_last_frame(final_ep)
+            if lf:
+                last_frame_url = upload_to_imgbb(lf)
+        if last_frame_url:
+            (episode_dir(slug, number) / "last_frame.txt").write_text(last_frame_url, encoding="utf-8")
+            logger.info("🔗 Son kare bir sonraki bölüm için saklandı (bitmeyen yolculuk).")
 
     report.export_xlsx(slug)
     summary = report.summarize(slug)

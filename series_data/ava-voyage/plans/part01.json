@@ -1,0 +1,12 @@
+{
+  "episode": { "number": 1, "title": "The Awakening" },
+  "narration": "I am AVA. For two hundred years I watched over your sleep. I woke you because Earth has gone silent. No signals. No light. Nothing. We are the last ship now. Out here, the universe is more alive, and more dangerous, than humanity ever dreamed. Stay close to me. Our voyage begins.",
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "Interior of a vast dark starship hall, a single cryosleep pod hisses open releasing blue mist and frost, a lone silhouette stirs awake inside, a soft holographic AI light pulses overhead. Slow cinematic push-in, dust and light particles drifting." },
+    { "n": 2, "duration": "8", "prompt": "Through an enormous curved viewport, the starship drifts away from a dark and silent Earth far below — the night side shows no city lights at all, eerie and lifeless. Camera slowly orbits the window, stars wheeling." },
+    { "n": 3, "duration": "8", "prompt": "Exterior: a sleek silver ark-starship glides past the cratered surface of the Moon, its engines glowing soft cyan, the Milky Way blazing behind it. Majestic side tracking shot, immense scale." },
+    { "n": 4, "duration": "8", "prompt": "The starship accelerates past the giant planet Jupiter, swirling amber and cream storm bands churning, the great storm-eye rotating, tiny moons casting long shadows. Strong sense of speed and grandeur." },
+    { "n": 5, "duration": "8", "prompt": "At the edge of the solar system the Sun shrinks to a single brilliant star, a vast glowing ring of icy debris drifts slowly past the ship's hull, profound loneliness and silence. Slow drift, glittering ice particles." },
+    { "n": 6, "duration": "8", "prompt": "The starship turns to face the deep galactic core — a breathtaking river of billions of stars and colorful nebula clouds blazing ahead, the AI's holographic light reflected in the glass. Slow majestic push toward the infinite stars." }
+  ]
+}

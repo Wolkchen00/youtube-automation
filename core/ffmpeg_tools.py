@@ -44,6 +44,31 @@ def get_video_duration(video_path: str | Path) -> float:
         return 5.0
 
 
+def extract_last_frame(video_path: str | Path, output_path: str | Path = None) -> Path | None:
+    """Extract the final frame of a video as a PNG.
+
+    Used for 'endless journey' chaining: the last frame of one clip becomes
+    the first frame (start image) of the next clip/part, so the motion flows
+    seamlessly across shots and across episodes.
+    """
+    video_path = Path(video_path)
+    if output_path is None:
+        output_path = video_path.parent / f"{video_path.stem}_lastframe.png"
+    output_path = Path(output_path)
+    try:
+        # -sseof seeks from end; grab the very last decodable frame
+        subprocess.run(
+            ["ffmpeg", "-y", "-sseof", "-0.5", "-i", str(video_path),
+             "-update", "1", "-frames:v", "1", "-q:v", "2", str(output_path)],
+            capture_output=True, check=True, timeout=60
+        )
+        if output_path.exists() and output_path.stat().st_size > 0:
+            return output_path
+    except Exception as e:
+        logger.warning(f"⚠️ Last-frame extraction failed: {e}")
+    return None
+
+
 def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Path = None) -> Path:
     """Concatenate videos without transitions."""
     import shutil

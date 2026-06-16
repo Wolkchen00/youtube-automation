@@ -1,0 +1,17 @@
+{
+  "series": {
+    "slug": "secrets-anatolia",
+    "title": "Secrets of Anatolia",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false
+  },
+  "art_style": "Breathtaking cinematic landscape photography, National Geographic quality, 8K ultra detail, dramatic natural lighting with golden-hour warmth and storm-cloud drama, real Anatolian geography — mountains, plateaus, coastlines, ancient ruins — photorealistic wide-angle aerial and drone perspectives, epic historical atmosphere, vertical 9:16 framing, no on-screen text.",
+  "style_ref_url": null,
+  "narration": { "channel": "shadowedhistory" },
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

@@ -1,0 +1,12 @@
+{
+  "episode": { "number": 1, "title": "The City That Started a War" },
+  "narration": "On the windswept coast of western Anatolia lie the ruins of a city the world called a myth. Troy. For three thousand years scholars laughed at the legend of a war fought over a single face. Then a man dug into this hill and found nine cities, stacked one upon another, each ending in fire. The myth was real.",
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "Sweeping aerial at golden hour over the windswept plain and Aegean coastline of the Troad in western Anatolia, ancient ruined stone walls on a low hill, dramatic clouds and long shadows. Cinematic establishing shot." },
+    { "n": 2, "duration": "8", "prompt": "The great fortified walls and gate of ancient Troy at dusk, the silhouette of a huge wooden horse standing before them, torches flickering, ominous and legendary. Slow cinematic push-in." },
+    { "n": 3, "duration": "8", "prompt": "An epic ancient battle on the dusty plain before the city walls, bronze-armored warriors and shields clashing, banners and dust clouds rising in golden light. Wide cinematic chaos." },
+    { "n": 4, "duration": "8", "prompt": "Extreme close-up of a determined ancient warrior's weathered face, sweat and dust, piercing eyes, bronze helmet, shallow depth of field with battlefield bokeh behind. Intense, heroic." },
+    { "n": 5, "duration": "8", "prompt": "A 19th-century archaeologist's hands brushing dirt from gleaming ancient golden treasure and jewelry in an excavation trench, warm lantern light, dust motes. Discovery and wonder." },
+    { "n": 6, "duration": "8", "prompt": "Slow aerial rise revealing layered ancient ruins, the cross-section of nine cities built atop one another over millennia, each level marked by old burn scars. Haunting, epic scale." }
+  ]
+}

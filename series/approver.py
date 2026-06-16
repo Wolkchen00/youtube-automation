@@ -49,6 +49,32 @@ def _cleanup_release(tag: str):
                        capture_output=True, text=True)
 
 
+def _publish_approved(meta: SeriesMeta, n: int, part: dict) -> bool:
+    """Onaylanmış part'ı yayınla — idempotent retry. Başarısızsa part['approved']=True
+    kalır → sonraki kontrolde Telegram'a bakmadan TEKRAR denenir (onay kaybolmaz)."""
+    video = _download_release(part.get("release_tag"))
+    if not video:
+        lv = part.get("video")
+        video = Path(lv) if lv and Path(lv).exists() else None
+    if not video:
+        notifier.send_message(f"⚠️ *Part {n}* videosu bulunamadı (Release yok). Üretim tekrar gerekebilir.")
+        logger.error(f"Part {n}: onaylandı ama video yok.")
+        return False
+
+    ok = _publish_part(meta, n, video, part.get("subtitle", ""))
+    if ok:
+        meta.mark_published(n, ok)
+        meta.advance()
+        meta.save()
+        _cleanup_release(part.get("release_tag"))
+        notifier.send_message(f"✅ *Part {n}* yayınlandı: {', '.join(ok)} 🎉")
+        logger.info(f"Part {n} yayınlandı: {ok}")
+        return True
+    notifier.send_message(f"⚠️ *Part {n}* onaylandı ama yayın başarısız (platform hatası). Sonraki kontrolde tekrar denenecek.")
+    logger.error(f"Part {n}: yayın başarısız (onay kayıtlı, retry edilecek).")
+    return False
+
+
 def process(slug: str) -> bool:
     meta = SeriesMeta.load(slug)
     if not meta:
@@ -58,6 +84,13 @@ def process(slug: str) -> bool:
     if part.get("status") != "awaiting_approval":
         logger.info(f"'{slug}' Part {n}: onay bekleyen yok (status={part.get('status')}).")
         return True
+
+    # Onay daha önce KAYDEDİLDİYSE (✅ okundu ama yayın takıldı) → Telegram'a bakmadan
+    # doğrudan yayını tekrar dene. Böylece onay tg_offset tükense bile kaybolmaz.
+    if part.get("approved"):
+        logger.info(f"'{slug}' Part {n}: onay kayıtlı, yayın yeniden deneniyor.")
+        return _publish_approved(meta, n, part)
+
     if not notifier.enabled():
         logger.warning("⚠️ Telegram kapalı (token/chat yok) — onay okunamıyor.")
         return False
@@ -97,28 +130,10 @@ def process(slug: str) -> bool:
         logger.info(f"Part {n} reddedildi → atlandı.")
         return True
 
-    # ✅ ONAY → videoyu getir, yayınla
-    video = _download_release(part.get("release_tag"))
-    if not video:
-        lv = part.get("video")
-        video = Path(lv) if lv and Path(lv).exists() else None
-    if not video:
-        notifier.send_message(f"⚠️ *Part {n}* videosu bulunamadı (Release yok). Üretim tekrar gerekebilir.")
-        logger.error(f"Part {n}: onaylandı ama video yok.")
-        return False
-
-    ok = _publish_part(meta, n, video, part.get("subtitle", ""))
-    if ok:
-        meta.mark_published(n, ok)
-        meta.advance()
-        meta.save()
-        _cleanup_release(part.get("release_tag"))
-        notifier.send_message(f"✅ *Part {n}* yayınlandı: {', '.join(ok)} 🎉")
-        logger.info(f"Part {n} yayınlandı: {ok}")
-        return True
-    notifier.send_message(f"⚠️ *Part {n}* onaylandı ama yayın başarısız (platform hatası). Sonraki kontrolde tekrar denenecek.")
-    logger.error(f"Part {n}: yayın başarısız.")
-    return False
+    # ✅ ONAY → önce KALICI işaretle (offset tükense/yayın takılsa bile kaybolmaz), sonra yayınla
+    part["approved"] = True
+    meta.save()
+    return _publish_approved(meta, n, part)
 
 
 def main(argv: list):

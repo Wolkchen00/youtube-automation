@@ -1,0 +1,12 @@
+{
+  "episode": { "number": 4, "title": "The Wonder a Madman Burned" },
+  "narration": "On the Aegean coast rose Ephesus, and within it one of the Seven Wonders of the world. The Temple of Artemis. Vast, gleaming, white marble. It survived floods and invaders for centuries. And then one man, craving fame, burned it to the ground for no reason but to be remembered. His name was banned. I will not repeat it. But you just heard his story.",
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "Golden-hour aerial over the grand marble city of Ephesus by the Aegean sea, the famous columned library facade, wide marble avenues and statues. Majestic establishing shot." },
+    { "n": 2, "duration": "8", "prompt": "The colossal Temple of Artemis gleaming white, a forest of towering marble columns rising into the sky, gold accents catching the sun. Awe-inspiring grandeur, low heroic angle." },
+    { "n": 3, "duration": "8", "prompt": "Crowds of ancient worshippers in robes filling the temple steps, offerings and incense smoke, sunlight streaming between the columns. Lively, reverent, cinematic." },
+    { "n": 4, "duration": "8", "prompt": "A lone shadowy figure holding a torch in the dark temple at night, firelight flickering across his face, a look of obsession. Tense, sinister close-up." },
+    { "n": 5, "duration": "8", "prompt": "The great marble temple engulfed in roaring flames at night, columns cracking and collapsing, sparks swirling into the black sky. Dramatic, tragic destruction." },
+    { "n": 6, "duration": "8", "prompt": "A single broken marble column standing alone in a quiet green marsh at dawn today, mist drifting, all that remains of a wonder. Mournful, poetic." }
+  ]
+}

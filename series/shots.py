@@ -122,6 +122,42 @@ def resolve_shot(bible: Bible, shot: dict) -> dict:
     return {"kwargs": kwargs, "warnings": warnings, "units": units}
 
 
+def resolve_visual_shot(bible: Bible, shot: dict, chain_url: str | None = None) -> dict:
+    """Bir çekimi Omni-DIŞI ucuz motorlar (Seedance / Veo / Kling) için çöz.
+
+    Omni'nin karakter/ses kaydı YOK; sadece (prompt + başlangıç görseli + süre) gerekir.
+    Başlangıç görseli önceliği:
+      1) chain_url  — 'bitmeyen yolculuk' zinciri (önceki çekimin son karesi)
+      2) ortam referans görseli (environment)
+      3) ilk karakterin referans görseli (figür kamera önündeyse — ucuz modelde tek kare)
+      4) None — saf text-to-video
+    Dönüş: {"prompt", "start_image_url", "duration"}
+    """
+    base_prompt = (shot.get("prompt") or "").strip()
+    art = bible.art_style.strip()
+    prompt = f"{art}\n\n{base_prompt}" if art else base_prompt
+
+    start_url = chain_url
+    if not start_url:
+        env_id = shot.get("environment")
+        if env_id:
+            env = bible.get("environments", env_id)
+            if env and env.get("ref_image_url"):
+                start_url = env["ref_image_url"]
+    if not start_url:
+        for cid in shot.get("characters", []):
+            ch = bible.get_character(cid)
+            if ch and ch.get("ref_image_url"):
+                start_url = ch["ref_image_url"]
+                break
+
+    return {
+        "prompt": prompt,
+        "start_image_url": start_url,
+        "duration": validate_duration(shot.get("duration", "8")),
+    }
+
+
 def validate_plan(plan: dict, bible: Bible) -> dict:
     """Bölüm planını bible'a karşı doğrula.
     Dönüş: {"errors": [...], "warnings": [...]}

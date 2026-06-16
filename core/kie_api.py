@@ -329,6 +329,94 @@ def generate_video(
     return None
 
 
+# ─── Seedance 2.0 Fast (cheap visual engine, native audio, I2V chaining) ──────
+
+def _poll_video_with_credits(task_id: str, max_attempts: int = None) -> dict | None:
+    """Poll a generic /jobs task and return {url, urls, credits}.
+    Like poll_task but also surfaces the real creditsConsumed for cost logging.
+    """
+    attempts = max_attempts or POLL_MAX_ATTEMPTS_VIDEO
+    for attempt in range(1, attempts + 1):
+        time.sleep(POLL_INTERVAL_VIDEO)
+        try:
+            resp = requests.get(
+                f"{KIE_AI_RECORD_INFO}?taskId={task_id}",
+                headers=_headers(), timeout=30
+            )
+            data = resp.json().get("data", {}) or {}
+            state = data.get("state", "unknown")
+            if state == "success":
+                result_json = data.get("resultJson", "{}")
+                result = json.loads(result_json) if isinstance(result_json, str) else (result_json or {})
+                urls = result.get("resultUrls", [])
+                credits = data.get("creditsConsumed")
+                logger.info(f"✅ Video ready! ({attempt} polls, credits={credits})")
+                return {"url": urls[0] if urls else None, "urls": urls, "credits": credits}
+            elif state in ("fail", "failed"):
+                logger.error(f"❌ Video failed: {data.get('failMsg', '?')}")
+                return None
+            elif attempt % 5 == 0:
+                logger.info(f"⏳ Video {state} ({attempt}/{attempts})")
+        except Exception as e:
+            logger.warning(f"⚠️ Polling error: {e} (attempt {attempt})")
+    logger.error(f"❌ Video timeout ({attempts} attempts)")
+    return None
+
+
+def generate_seedance_video(
+    prompt: str,
+    first_frame_url: str = None,
+    last_frame_url: str = None,
+    duration: str = None,
+    aspect_ratio: str = None,
+    resolution: str = "720p",
+    sound: bool = True,
+    model: str = "bytedance/seedance-2-fast",
+) -> dict | None:
+    """Generate a clip with Seedance 2.0 Fast — cheapest engine with native audio.
+
+    Uses the generic /jobs/createTask endpoint. Supports image-to-video via
+    first_frame_url (and optional last_frame_url) — ideal for 'endless journey'
+    frame chaining. Seedance duration is an integer 4-15s; resolution 480p/720p.
+    Returns {"url": str, "credits": float|None} or None.
+    """
+    try:
+        dur = int(float(duration)) if duration else 8
+    except (ValueError, TypeError):
+        dur = 8
+    dur = max(4, min(15, dur))
+
+    inp = {
+        "prompt": prompt[:20000],
+        "aspect_ratio": aspect_ratio or DEFAULT_ASPECT_RATIO,
+        "resolution": resolution if resolution in ("480p", "720p") else "720p",
+        "duration": dur,
+        "generate_audio": bool(sound),
+    }
+    if first_frame_url:
+        inp["first_frame_url"] = first_frame_url
+    if last_frame_url:
+        inp["last_frame_url"] = last_frame_url
+
+    payload = {"model": model, "input": inp}
+    backoff_delays = [10, 30]
+    for attempt in range(1, MAX_RETRY + 1):
+        try:
+            task_id = create_task(payload)
+        except ServerError as e:
+            logger.error(f"🚫 Seedance server error ({e}) — aborting retries")
+            task_id = None
+        if task_id:
+            result = _poll_video_with_credits(task_id)
+            if result and result.get("url"):
+                return result
+        logger.warning(f"⚠️ Seedance attempt {attempt}/{MAX_RETRY} failed.")
+        if attempt < MAX_RETRY:
+            time.sleep(backoff_delays[min(attempt - 1, len(backoff_delays) - 1)])
+            inp["prompt"] = prompt[:300]
+    return None
+
+
 # ─── Credit Check ─────────────────────────────────────────────────────────────
 
 def check_credit() -> dict | None:

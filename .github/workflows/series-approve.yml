@@ -4,8 +4,10 @@ name: Series Approve
 # Repo public → Actions dakikaları ücretsiz, sık yoklama sorun değil.
 
 on:
-  schedule:
-    - cron: '*/10 * * * *'   # her 10 dakikada bir
+  # Telegram ONAY sistemi KALDIRILDI (İhsan kararı) — tüm seriler artık publish_mode=auto
+  # ile direkt yayınlanıyor. Cron kapalı; gerekirse elle (workflow_dispatch) çalıştırılabilir.
+  # schedule:
+  #   - cron: '*/10 * * * *'   # her 10 dakikada bir
   workflow_dispatch:
     inputs:
       series:

@@ -1,0 +1,30 @@
+{
+  "slug": "secrets-anatolia",
+  "base_title": "Secrets of Anatolia",
+  "logline": "Beneath the land millions call home lie secrets buried for three thousand years. This is the hidden history of Anatolia.",
+  "language": "en",
+  "upload_profile": "shad0wedhistory",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
+  "total_parts": 5,
+  "next_part": 2,
+  "status": "active",
+  "publish_mode": "auto",
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\secrets-anatolia\\episodes\\ep01\\ep01.mp4",
+      "subtitle": "The City That Started a War",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-16T22:30:24.024676+00:00"
+    }
+  }
+}

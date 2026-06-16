@@ -80,10 +80,46 @@ def send_media_group(photo_paths: list, caption: str = ""):
                 pass
 
 
-def request_approval(part_n: int, title: str, frame_paths: list) -> int | None:
-    """Kareleri + onay butonlu mesajı gönder. Gönderilen onay mesajının message_id'sini döndürür."""
-    if frame_paths:
-        send_media_group(frame_paths, caption=f"🎬 *{title}*\nYeni bölüm üretildi.")
+def send_video(video_path: str, caption: str = "") -> dict | None:
+    """Bitmiş videoyu Telegram'a gönder (sendVideo). Bot limiti ~50MB."""
+    tok = _token()
+    if not tok or not video_path or not os.path.exists(video_path):
+        return None
+    try:
+        size_mb = os.path.getsize(video_path) / (1024 * 1024)
+        if size_mb > 49:
+            logger.warning(f"⚠️ Video {size_mb:.0f}MB > 50MB — Telegram sendVideo atlanıyor, karelere düşülecek")
+            return None
+        with open(video_path, "rb") as fh:
+            files = {"video": (os.path.basename(video_path), fh, "video/mp4")}
+            data = {
+                "chat_id": _chat(),
+                "caption": caption[:1000],
+                "parse_mode": "Markdown",
+                "supports_streaming": "true",
+            }
+            r = requests.post(_API.format(token=tok, method="sendVideo"),
+                              data=data, files=files, timeout=180)
+            j = r.json()
+            if not j.get("ok"):
+                logger.error(f"❌ Telegram sendVideo hata: {j.get('description')}")
+                return None
+            logger.info(f"📹 Telegram'a video gönderildi ({size_mb:.1f}MB)")
+            return j.get("result")
+    except Exception as e:
+        logger.error(f"❌ Telegram sendVideo bağlantı hatası: {e}")
+        return None
+
+
+def request_approval(part_n: int, title: str, video_path: str = None,
+                     frame_paths: list = None) -> int | None:
+    """Bitmiş VİDEOYU + onay butonlu mesajı gönder. Video gönderilemezse karelere düşer.
+    Gönderilen onay mesajının message_id'sini döndürür."""
+    sent_video = None
+    if video_path:
+        sent_video = send_video(video_path, caption=f"🎬 *{title}*\nYeni bölüm hazır — izle ve karar ver.")
+    if not sent_video and frame_paths:  # video gidemezse (büyük/hatalı) karelere düş
+        send_media_group(frame_paths, caption=f"🎬 *{title}*\nYeni bölüm üretildi (önizleme kareleri).")
     kb = {"inline_keyboard": [[
         {"text": "✅ Yayınla", "callback_data": f"vd:approve:{part_n}"},
         {"text": "❌ Atla", "callback_data": f"vd:reject:{part_n}"},

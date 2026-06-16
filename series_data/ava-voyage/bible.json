@@ -1,0 +1,17 @@
+{
+  "series": {
+    "slug": "ava-voyage",
+    "title": "AVA: The Last Voyage",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false
+  },
+  "art_style": "Otherworldly cinematic cosmic art, 8K, photoreal space-documentary look, deep midnight blues and violet with bioluminescent cyan, gold and soft pink highlights, glowing particles drifting through space, volumetric god rays, nebula mist, lens flares from distant stars, awe-inspiring sense of scale, slow majestic camera motion, vertical 9:16 wallpaper-worthy framing, no on-screen text.",
+  "style_ref_url": null,
+  "narration": { "channel": "galactic_experiment" },
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

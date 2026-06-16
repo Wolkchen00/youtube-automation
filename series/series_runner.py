@@ -122,8 +122,18 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
     subtitle = plan.get("episode", {}).get("title", "")
     logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} — {subtitle} (mod={mode})")
 
+    # 'Bitmeyen yolculuk' — önceki bölümün son karesinden devam (parçalar arası zincir).
+    # Bulutta her koşu temiz checkout olduğu için son kare URL'i git'li series.json'da tutulur.
+    from series.bible import Bible, episode_dir
+    bible = Bible.load(slug)
+    chain_start_url = None
+    if bible and bible.chain_frames:
+        chain_start_url = meta.data.get("last_frame_url")
+        if chain_start_url:
+            logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
+
     # 1) Üret (idempotent — yarım kalmışsa sadece eksik çekimi üretir)
-    video = produce.produce_episode(slug, plan, dry_run=dry_run)
+    video = produce.produce_episode(slug, plan, dry_run=dry_run, chain_start_url=chain_start_url)
     if dry_run:
         logger.info(f"[dry-run] Başlık olurdu: {meta.title_for(n, subtitle)}")
         return True
@@ -131,6 +141,11 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
         logger.error(f"❌ Part {n} üretilemedi — durum ilerletilmedi (sonraki çalıştırmada tekrar denenir).")
         return False
     meta.mark_produced(n, video, subtitle)
+    # Zincir: bu bölümün son karesini sonraki bölüm için series.json'a yaz (bulut-kalıcı).
+    if bible and bible.chain_frames:
+        sidecar = episode_dir(slug, n) / "last_frame.txt"
+        if sidecar.exists():
+            meta.data["last_frame_url"] = sidecar.read_text(encoding="utf-8").strip()
     meta.save()
 
     # 2a) ONAY MODU: videoyu sakla + Telegram'a "Yayınlansın mı?" sor; YAYINLAMA, İLERLETME.
@@ -139,7 +154,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
         frames = _sample_frames(video, 3)
         msg_id = None
         if notifier.enabled():
-            msg_id = notifier.request_approval(n, meta.title_for(n, subtitle), frames)
+            msg_id = notifier.request_approval(n, meta.title_for(n, subtitle), video, frames)
         else:
             logger.warning("⚠️ Telegram kapalı (token/chat yok) — onay mesajı gönderilemedi.")
         part = meta.get_part(n)

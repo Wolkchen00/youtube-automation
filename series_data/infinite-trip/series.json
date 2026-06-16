@@ -1,0 +1,30 @@
+{
+  "slug": "infinite-trip",
+  "base_title": "The Infinite Trip",
+  "logline": "One unbroken journey through a reality that never stops melting. Each part continues exactly where the last ended. Don't blink.",
+  "language": "en",
+  "upload_profile": "Youtube",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
+  "total_parts": 5,
+  "next_part": 2,
+  "status": "active",
+  "publish_mode": "auto",
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\infinite-trip\\episodes\\ep01\\ep01.mp4",
+      "subtitle": "Birth",
+      "platforms_ok": [
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-16T22:37:14.759473+00:00"
+    }
+  },
+  "last_frame_url": "https://i.ibb.co/tpmhdcPm/shot-06-lastframe.png"
+}

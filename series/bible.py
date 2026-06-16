@@ -97,6 +97,36 @@ class Bible:
     def resolution(self) -> str:
         return self.data["series"].get("resolution", OMNI_DEFAULT_RESOLUTION)
 
+    # -- üretim motoru (çok-motorlu) --
+    @property
+    def engine(self) -> str:
+        """Varsayılan üretim motoru: 'omni' (karakter+ses) | 'seedance' | 'veo3_fast' |
+        'veo3_lite' | 'kling' (ucuz görsel). Çekim bazında shot['engine'] ile override edilir."""
+        return self.data["series"].get("engine", "omni")
+
+    @property
+    def chain_frames(self) -> bool:
+        """True ise 'bitmeyen yolculuk': her çekimin son karesi sonraki çekimin (ve sonraki
+        bölümün ilk çekiminin) başlangıç karesi olur → kesintisiz akış."""
+        return bool(self.data["series"].get("chain_frames", False))
+
+    @property
+    def narration(self) -> dict:
+        """Anlatım katmanı ayarı: {'channel': 'galactic_experiment'|'shadowedhistory'|...}.
+        Boşsa anlatım eklenmez (motorun native sesi kullanılır)."""
+        return self.data.get("narration") or {}
+
+    @property
+    def music(self) -> bool:
+        """True ise arka plan müziği eklenir (galactic/shadowedhistory/aimagine atmosferi)."""
+        return bool(self.data.get("music", False))
+
+    @property
+    def native_audio(self) -> bool:
+        """Ucuz motorun (Seedance) kendi sesini üretsin mi? Anlatım-odaklı kanallarda
+        False önerilir (anlatım+müzik temiz kalsın); 'trip' kanalında serbest."""
+        return bool(self.data["series"].get("native_audio", True))
+
     # -- referanslar --
     @property
     def characters(self) -> list[dict]:

@@ -1,0 +1,12 @@
+{
+  "episode": { "number": 4, "title": "The Garden World" },
+  "narration": "After the dark, I found light. A living world. Oceans, forests, air you could breathe. The first paradise humanity has ever seen beyond Earth. For a moment, I let you hope. But nothing here is sleeping. Every leaf, every light, is turning to face us. We are not the explorers. We are the discovered.",
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "The starship approaches a stunning blue-green alien world wrapped in swirling bioluminescent clouds that glow turquoise and pink, two moons behind it. Hopeful, breathtaking reveal." },
+    { "n": 2, "duration": "8", "prompt": "Descending low over endless glowing bioluminescent jungles and luminous oceans, rivers of light winding through alien forests far below. Sweeping cinematic flythrough at golden dusk." },
+    { "n": 3, "duration": "8", "prompt": "Among the alien flora: giant luminous flowers and crystalline plants pulse softly with inner light, spores drifting like fireflies. Magical, serene close exploration." },
+    { "n": 4, "duration": "8", "prompt": "Slowly, thousands of glowing eyes open across the dark foliage in every direction, all turning to stare at the same point. Subtle, deeply unsettling shift from beauty to dread." },
+    { "n": 5, "duration": "8", "prompt": "On the horizon a colossal living silhouette rises against the glowing sky, impossibly tall, its form wreathed in light, awakening. Ominous reveal of overwhelming scale." },
+    { "n": 6, "duration": "8", "prompt": "The starship ascends fast and steep, escaping into orbit as the entire planet below blooms with light surging upward toward the fleeing ship. Urgent, dramatic escape." }
+  ]
+}

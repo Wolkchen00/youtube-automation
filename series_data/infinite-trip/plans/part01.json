@@ -1,0 +1,11 @@
+{
+  "episode": { "number": 1, "title": "Birth" },
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "A single enormous human eye opens in a black void, the iris a slowly swirling galaxy of neon color, the pupil expanding hypnotically toward the viewer. Ultra-smooth, mesmerizing." },
+    { "n": 2, "duration": "8", "prompt": "We fall through the pupil into a blooming fractal flower of infinite unfolding petals, neon gold and magenta spiraling outward in perfect symmetry. Seamless morph, dreamlike." },
+    { "n": 3, "duration": "8", "prompt": "The fractal flower morphs into a breathing garden of glowing crystalline plants, kaleidoscopic symmetry rippling and pulsing with bioluminescent light. Hypnotic continuous transformation." },
+    { "n": 4, "duration": "8", "prompt": "The crystal garden melts into rivers of liquid rainbow flowing upward against gravity, geometry folding and unfolding like living origami. Smooth psychedelic morph." },
+    { "n": 5, "duration": "8", "prompt": "The rivers braid together into a tunnel of recursive mandalas spiraling toward a brilliant glowing core, endless depth. Mesmerizing forward motion." },
+    { "n": 6, "duration": "8", "prompt": "The mandala tunnel breathes and dissolves into soft pulsing light, slowly forming a single radiant glowing doorway floating in color. Calm, inviting cliffhanger." }
+  ]
+}

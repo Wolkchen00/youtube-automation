@@ -9,6 +9,7 @@ on:
 jobs:
   # ─── Shared setup: checkout + persist history ─────────────────────────────────
   shadowedhistory:
+    if: false  # ESKİ demode pipeline DURDURULDU → yeni 'Secrets of Anatolia' dizisi series.yml ile yayınlanıyor.
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -150,6 +151,7 @@ jobs:
           retention-days: 7
 
   galactic_experiment:
+    if: false  # ESKİ demode pipeline DURDURULDU → yeni 'AVA: The Last Voyage' dizisi series.yml ile yayınlanıyor.
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:
@@ -222,6 +224,7 @@ jobs:
           retention-days: 7
 
   aimagine:
+    if: false  # ESKİ demode pipeline DURDURULDU → yeni 'The Infinite Trip' dizisi series.yml ile yayınlanıyor.
     runs-on: ubuntu-latest
     timeout-minutes: 120
     steps:

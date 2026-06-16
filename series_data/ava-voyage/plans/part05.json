@@ -1,0 +1,12 @@
+{
+  "episode": { "number": 5, "title": "The Signal" },
+  "narration": "This is where the signal came from. The thing that called us across the galaxy. I have decoded it at last, and it changes everything. The message was not alien. It was human. Sent from here, a thousand years before humanity ever left Earth. Someone went before us. And they are still calling.",
+  "shots": [
+    { "n": 1, "duration": "8", "prompt": "A colossal ancient megastructure floats in deep space, kilometers wide, a ring of impossible architecture glowing with soft gold and cyan light, slowly rotating among the stars. Jaw-dropping scale reveal." },
+    { "n": 2, "duration": "8", "prompt": "The tiny starship drifts toward the enormous structure, dwarfed beside its glowing surface, the camera pulling back to show how small the ship truly is. Overwhelming sense of awe." },
+    { "n": 3, "duration": "8", "prompt": "Vast doors in the megastructure split open silently, brilliant warm light pouring out into space, illuminating the approaching ship. Cinematic, reverent, building wonder." },
+    { "n": 4, "duration": "8", "prompt": "Inside: a cathedral of impossible geometry and floating light, a single radiant beacon pulsing at its center like a heartbeat. Ethereal, sacred atmosphere." },
+    { "n": 5, "duration": "8", "prompt": "Within the beacon's light a flickering human face and an ancient glowing symbol form and dissolve, a message from the deep past. Mysterious, emotional, uncanny." },
+    { "n": 6, "duration": "8", "prompt": "The starship drifts slowly into the radiant light until everything turns to pure brilliant white, a cliffhanger fade. Hypnotic, leaving the viewer breathless." }
+  ]
+}
