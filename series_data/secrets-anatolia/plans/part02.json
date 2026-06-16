@@ -1,12 +1,29 @@
 {
-  "episode": { "number": 2, "title": "The Empire Time Forgot" },
+  "episode": {
+    "number": 2,
+    "title": "The Empire Time Forgot"
+  },
   "narration": "Deep in the highlands of central Anatolia stood Hattusa, capital of an empire so powerful it rivalled Egypt. The Hittites. They forged iron, commanded thousands of war chariots, and fought the Pharaoh himself to a standstill. Then, in a single generation, they vanished. Their language lost for three thousand years. Why does almost no one remember them?",
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "Aerial over rugged central Anatolian highlands at dawn, massive ancient stone city walls winding across the hills, a grand gateway flanked by carved stone lions. Epic establishing shot, mist in the valleys." },
-    { "n": 2, "duration": "8", "prompt": "A vast ancient battle of thousands of war chariots clashing on a dusty plain, horses charging, spears and dust, two great armies colliding. Cinematic wide shot of overwhelming scale." },
-    { "n": 3, "duration": "8", "prompt": "Close-up of a stern Hittite king in bronze armor and ceremonial robes, commanding gaze, lit by warm sun, blurred warriors behind. Powerful, regal." },
-    { "n": 4, "duration": "8", "prompt": "A clay tablet covered in ancient cuneiform writing held in the light — the world's first known peace treaty — intricate wedge marks, museum-grade detail, golden glow." },
-    { "n": 5, "duration": "8", "prompt": "The great stone city burning and abandoned at night, empty halls and toppled columns, embers drifting, no people left. Mournful, dramatic firelight." },
-    { "n": 6, "duration": "8", "prompt": "Aerial over the silent ruins today, weathered stone foundations reclaimed by golden grass swaying in the wind, long shadows, utter stillness. Lonely and beautiful." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Aerial over rugged central Anatolian highlands at dawn, massive ancient stone city walls winding across the hills, a grand gateway flanked by carved stone lions. Epic establishing shot, mist in the valleys."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A vast ancient battle of thousands of war chariots clashing on a dusty plain, horses charging, spears and dust, two great armies colliding. Cinematic wide shot of overwhelming scale."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close-up of a stern Hittite king in bronze armor and ceremonial robes, commanding gaze, lit by warm sun, blurred warriors behind. Powerful, regal."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "A clay tablet covered in ancient cuneiform writing held in the light — the world's first known peace treaty — intricate wedge marks, museum-grade detail, golden glow."
+    }
   ]
 }

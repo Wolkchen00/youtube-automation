@@ -1,11 +1,28 @@
 {
-  "episode": { "number": 3, "title": "The Forest of Eyes" },
+  "episode": {
+    "number": 3,
+    "title": "The Forest of Eyes"
+  },
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "The glowing tendrils grow into a vast bioluminescent jungle, enormous breathing leaves and vines pulsing with neon light in the dark. Lush, seamless continuation." },
-    { "n": 2, "duration": "8", "prompt": "Giant luminous flowers slowly open across the jungle, and at the center of each bloom is a gently blinking eye, all turning together. Beautiful and uncanny." },
-    { "n": 3, "duration": "8", "prompt": "The whole forest breathes as one, trunks expanding and contracting, glowing spores drifting upward like sparks. Hypnotic living motion." },
-    { "n": 4, "duration": "8", "prompt": "Thousands of fireflies of colored light swirl together and arrange into shifting constellations and sacred geometry above the canopy. Mesmerizing swarm." },
-    { "n": 5, "duration": "8", "prompt": "A glowing path melts open through the breathing jungle leading deeper, the foliage parting in kaleidoscopic symmetry. Forward hypnotic motion." },
-    { "n": 6, "duration": "8", "prompt": "The jungle floor turns liquid and begins to flood with luminous water rising up, dissolving the forest into glowing ocean. Smooth transition into water." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "The glowing tendrils grow into a vast bioluminescent jungle, enormous breathing leaves and vines pulsing with neon light in the dark. Lush, seamless continuation."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Giant luminous flowers slowly open across the jungle, and at the center of each bloom is a gently blinking eye, all turning together. Beautiful and uncanny."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The whole forest breathes as one, trunks expanding and contracting, glowing spores drifting upward like sparks. Hypnotic living motion."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Thousands of fireflies of colored light swirl together and arrange into shifting constellations and sacred geometry above the canopy. Mesmerizing swarm."
+    }
   ]
 }

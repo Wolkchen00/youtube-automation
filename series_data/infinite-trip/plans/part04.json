@@ -1,11 +1,28 @@
 {
-  "episode": { "number": 4, "title": "The Ocean Mind" },
+  "episode": {
+    "number": 4,
+    "title": "The Ocean Mind"
+  },
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "We sink into a vast glowing ocean of deep blues and violets, shafts of neon light piercing down through luminous water. Serene, seamless continuation." },
-    { "n": 2, "duration": "8", "prompt": "Translucent jellyfish drift past, each one a tiny swirling galaxy of light, trailing glowing tendrils, multiplying into a sea of stars. Mesmerizing, dreamlike." },
-    { "n": 3, "duration": "8", "prompt": "Fields of psychedelic coral pulse with shifting rainbow bioluminescence, breathing in kaleidoscopic patterns across the seabed. Hypnotic color waves." },
-    { "n": 4, "duration": "8", "prompt": "An enormous whale made entirely of flowing light glides slowly overhead, its body a window into a starry cosmos, dwarfing everything. Awe-inspiring, smooth." },
-    { "n": 5, "duration": "8", "prompt": "Streams of glowing bubbles rise and each one becomes a tiny spinning planet and galaxy, an ocean turning into a universe. Magical scale shift." },
-    { "n": 6, "duration": "8", "prompt": "We descend into the deepest dark where the water crystallizes into faceted glowing geometry, the first walls of a vast temple forming. Transition into crystal." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "We sink into a vast glowing ocean of deep blues and violets, shafts of neon light piercing down through luminous water. Serene, seamless continuation."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Translucent jellyfish drift past, each one a tiny swirling galaxy of light, trailing glowing tendrils, multiplying into a sea of stars. Mesmerizing, dreamlike."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Fields of psychedelic coral pulse with shifting rainbow bioluminescence, breathing in kaleidoscopic patterns across the seabed. Hypnotic color waves."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "An enormous whale made entirely of flowing light glides slowly overhead, its body a window into a starry cosmos, dwarfing everything. Awe-inspiring, smooth."
+    }
   ]
 }

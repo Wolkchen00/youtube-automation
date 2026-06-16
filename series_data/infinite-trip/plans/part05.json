@@ -1,11 +1,28 @@
 {
-  "episode": { "number": 5, "title": "The Machine Elves" },
+  "episode": {
+    "number": 5,
+    "title": "The Machine Elves"
+  },
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "The crystal walls assemble into a colossal kaleidoscope temple of glowing sacred geometry, mirrored infinitely in every direction. Breathtaking, seamless continuation." },
-    { "n": 2, "duration": "8", "prompt": "Playful geometric light-beings weave and dance through the temple, braiding ribbons of neon color into impossible patterns. Joyful, hypnotic motion." },
-    { "n": 3, "duration": "8", "prompt": "The fractal entities multiply into a spinning mandala of countless dancing forms, the whole temple pulsing in kaleidoscopic symmetry. Overwhelming beautiful pattern." },
-    { "n": 4, "duration": "8", "prompt": "The point of view dissolves and merges into the pattern itself, individual shapes melting into one flowing field of pure luminous geometry. Blissful ego-dissolution." },
-    { "n": 5, "duration": "8", "prompt": "Everything floods into soft brilliant white-gold light, perfectly calm and infinite, all patterns at rest. Serene, transcendent." },
-    { "n": 6, "duration": "8", "prompt": "From the white light a single neon eye slowly reforms in the void, the iris a swirling galaxy, beginning the cycle again. Hypnotic loop back to the start." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "The crystal walls assemble into a colossal kaleidoscope temple of glowing sacred geometry, mirrored infinitely in every direction. Breathtaking, seamless continuation."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Playful geometric light-beings weave and dance through the temple, braiding ribbons of neon color into impossible patterns. Joyful, hypnotic motion."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The fractal entities multiply into a spinning mandala of countless dancing forms, the whole temple pulsing in kaleidoscopic symmetry. Overwhelming beautiful pattern."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The point of view dissolves and merges into the pattern itself, individual shapes melting into one flowing field of pure luminous geometry. Blissful ego-dissolution."
+    }
   ]
 }

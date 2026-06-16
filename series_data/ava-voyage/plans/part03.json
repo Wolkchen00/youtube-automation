@@ -1,12 +1,29 @@
 {
-  "episode": { "number": 3, "title": "The Dying Star" },
+  "episode": {
+    "number": 3,
+    "title": "The Dying Star"
+  },
   "narration": "I have plotted a shortcut, past a dying star. When a sun like this collapses, it tears a hole in space itself. Most ships would be torn apart. But hidden in the data I recovered is a warning, spoken in a human voice. This is what silenced Earth. Hold on. We are going through.",
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "A swollen crimson supergiant star fills the sky, its surface boiling with vast plasma arcs and dark spots, pulsing as if breathing its last. The ship is a speck before it. Overwhelming scale." },
-    { "n": 2, "duration": "8", "prompt": "The dying star collapses violently inward then erupts, a blinding shockwave of light and matter expanding outward across space. Dramatic slow-motion cosmic explosion." },
-    { "n": 3, "duration": "8", "prompt": "A black hole forms from the collapse — a perfectly dark sphere ringed by a glowing orange-red accretion disk spiraling inward, starlight bending around it in a luminous ring. Terrifying and beautiful." },
-    { "n": 4, "duration": "8", "prompt": "The starship threads dangerously close past the black hole, space and starlight visibly warping and stretching around the hull, gravitational lensing distorting the stars. White-knuckle tension." },
-    { "n": 5, "duration": "8", "prompt": "Inside the ship's bridge, a flickering blue holographic recording plays — a distorted human distress message, sound-wave patterns and fragmented data glyphs hovering in the air. Eerie, ominous glow." },
-    { "n": 6, "duration": "8", "prompt": "The starship bursts free of the black hole's pull into a calm field of distant stars, trembling, engines flaring bright, the danger behind it. Relief, then a slow turn toward the next unknown." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A swollen crimson supergiant star fills the sky, its surface boiling with vast plasma arcs and dark spots, pulsing as if breathing its last. The ship is a speck before it. Overwhelming scale."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The dying star collapses violently inward then erupts, a blinding shockwave of light and matter expanding outward across space. Dramatic slow-motion cosmic explosion."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A black hole forms from the collapse — a perfectly dark sphere ringed by a glowing orange-red accretion disk spiraling inward, starlight bending around it in a luminous ring. Terrifying and beautiful."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The starship threads dangerously close past the black hole, space and starlight visibly warping and stretching around the hull, gravitational lensing distorting the stars. White-knuckle tension."
+    }
   ]
 }

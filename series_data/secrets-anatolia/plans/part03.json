@@ -1,12 +1,29 @@
 {
-  "episode": { "number": 3, "title": "The Cities Beneath the Earth" },
+  "episode": {
+    "number": 3,
+    "title": "The Cities Beneath the Earth"
+  },
   "narration": "In Cappadocia, the land itself is a dream of stone. But the real secret lies below. Beneath these valleys is a city carved eighteen storeys deep. Tunnels, churches, stables, room for twenty thousand people. Someone hid an entire population underground. And the question history still cannot answer is simple, and chilling. What were they hiding from?",
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "Surreal aerial over the Cappadocia valley at sunrise, hundreds of tall fairy-chimney rock spires and carved cliffs glowing pink and gold, hot-air balloons drifting in the soft light. Dreamlike establishing shot." },
-    { "n": 2, "duration": "8", "prompt": "A narrow hidden cave entrance in the rock, a single flaming torch descending into deep darkness, dust and shadow. Mysterious, tense." },
-    { "n": 3, "duration": "8", "prompt": "A vast underground city carved entirely from soft stone, winding tunnels, carved stairways and chambers descending into darkness, lit by warm torchlight. Awe-inspiring scale." },
-    { "n": 4, "duration": "8", "prompt": "A huge round stone wheel-door rolled across a tunnel entrance to seal it from inside, torchlight raking across its surface. Ingenious and ominous." },
-    { "n": 5, "duration": "8", "prompt": "Frightened ancient families sheltering deep underground by flickering candlelight, faces tense and watchful, huddled in carved stone rooms. Intimate, fearful atmosphere." },
-    { "n": 6, "duration": "8", "prompt": "Wide reveal pulling back through the multi-level underground city, countless carved chambers and tunnels glowing with distant torches in the dark. Breathtaking, haunting." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Surreal aerial over the Cappadocia valley at sunrise, hundreds of tall fairy-chimney rock spires and carved cliffs glowing pink and gold, hot-air balloons drifting in the soft light. Dreamlike establishing shot."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A narrow hidden cave entrance in the rock, a single flaming torch descending into deep darkness, dust and shadow. Mysterious, tense."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A vast underground city carved entirely from soft stone, winding tunnels, carved stairways and chambers descending into darkness, lit by warm torchlight. Awe-inspiring scale."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "A huge round stone wheel-door rolled across a tunnel entrance to seal it from inside, torchlight raking across its surface. Ingenious and ominous."
+    }
   ]
 }

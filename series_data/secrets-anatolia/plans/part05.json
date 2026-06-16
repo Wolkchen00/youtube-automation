@@ -1,12 +1,29 @@
 {
-  "episode": { "number": 5, "title": "The Fall of the Queen of Cities" },
+  "episode": {
+    "number": 5,
+    "title": "The Fall of the Queen of Cities"
+  },
   "narration": "For a thousand years, one city guarded the edge of two worlds. Constantinople. Its walls had never fallen. A great chain sealed its harbour. But in 1453, an army dragged its ships over the hills by land, around the chain. And the impossible happened. The Queen of Cities fell, and an age of the world ended in a single day.",
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "Epic aerial over a vast walled medieval city on the water at dawn, great domes, towers and sea walls, ships in the harbour, mist on the straits. Breathtaking establishing shot." },
-    { "n": 2, "duration": "8", "prompt": "The massive triple land walls of the city stretching to the horizon, immense stone fortifications with towers, soldiers tiny on the battlements. Imposing scale, dramatic sky." },
-    { "n": 3, "duration": "8", "prompt": "A huge heavy iron chain stretched across the mouth of a glittering harbour, blocking warships, water sparkling in morning light. Tense, clever detail." },
-    { "n": 4, "duration": "8", "prompt": "Wooden warships being dragged overland on greased log rollers up a hill at night by torchlight, hundreds of men hauling ropes, an impossible feat. Dramatic, cinematic." },
-    { "n": 5, "duration": "8", "prompt": "An enormous bronze cannon firing at the ancient walls, a thunderous blast of smoke and fire, stone shattering and dust exploding outward. Epic slow-motion impact." },
-    { "n": 6, "duration": "8", "prompt": "The great city falling, columns of smoke rising over the domes at dusk, a single torn banner fluttering on a broken tower. The end of an era, solemn and powerful." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Epic aerial over a vast walled medieval city on the water at dawn, great domes, towers and sea walls, ships in the harbour, mist on the straits. Breathtaking establishing shot."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The massive triple land walls of the city stretching to the horizon, immense stone fortifications with towers, soldiers tiny on the battlements. Imposing scale, dramatic sky."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A huge heavy iron chain stretched across the mouth of a glittering harbour, blocking warships, water sparkling in morning light. Tense, clever detail."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wooden warships being dragged overland on greased log rollers up a hill at night by torchlight, hundreds of men hauling ropes, an impossible feat. Dramatic, cinematic."
+    }
   ]
 }

@@ -1,11 +1,28 @@
 {
-  "episode": { "number": 2, "title": "The Liquid City" },
+  "episode": {
+    "number": 2,
+    "title": "The Liquid City"
+  },
   "shots": [
-    { "n": 1, "duration": "8", "prompt": "The glowing doorway opens and reality reshapes into a melting neon city, glassy skyscrapers bending and dripping like liquid, reflections rippling. Seamless continuation, hypnotic." },
-    { "n": 2, "duration": "8", "prompt": "The city streets fold and twist into impossible Escher staircases looping back on themselves, neon signs smearing into ribbons of light. Mind-bending morph." },
-    { "n": 3, "duration": "8", "prompt": "Cars and crowds dissolve into flowing streaks of liquid light coursing through the bending streets, the buildings breathing in and out. Mesmerizing flow." },
-    { "n": 4, "duration": "8", "prompt": "The entire liquid city folds inward and collapses smoothly into a single rotating neon cube suspended in glittering void. Satisfying geometric morph." },
-    { "n": 5, "duration": "8", "prompt": "The neon cube unfolds layer by layer like a blooming origami fractal, revealing endless inner structure of glowing geometry. Hypnotic unfolding." },
-    { "n": 6, "duration": "8", "prompt": "The unfolding geometry softens into swaying luminous tendrils, the first glowing vines of a strange forest beginning to grow. Smooth transition into the next realm." }
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "The glowing doorway opens and reality reshapes into a melting neon city, glassy skyscrapers bending and dripping like liquid, reflections rippling. Seamless continuation, hypnotic."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The city streets fold and twist into impossible Escher staircases looping back on themselves, neon signs smearing into ribbons of light. Mind-bending morph."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Cars and crowds dissolve into flowing streaks of liquid light coursing through the bending streets, the buildings breathing in and out. Mesmerizing flow."
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The entire liquid city folds inward and collapses smoothly into a single rotating neon cube suspended in glittering void. Satisfying geometric morph."
+    }
   ]
 }
