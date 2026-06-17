@@ -97,27 +97,24 @@ CHARACTER IDENTITY LOCK:
 - Same face, outfit, and appearance in EVERY scene
 - EXACTLY 2 hands, 5 fingers each — NO extra limbs
 
-DIALOGUE (indirect speech — VEO3 will generate the voice):
-- Describe what he says INDIRECTLY: "he explains that he is about to paint the wall with chrome paint"
-- NOT direct quotes: "he says: Hey guys today I'm painting"
-- He speaks in English, excited energetic young male voice
-- Lip movements synced to speech, natural smartphone audio
+NO DIALOGUE / SILENT ACTION:
+- The character must NOT speak. Describe silent, focused physical actions.
+- Remove all references to explaining, speaking, narrating, or telling.
+- Focus purely on what he does with his hands, his facial expressions (focused, smiling), and the visual process.
 
 CRITICAL — CONTINUOUS PHYSICAL ACTION:
 - The character must be PHYSICALLY DOING SOMETHING in every scene
-- NOT just standing and talking — he pours, paints, builds, opens, touches, sits, jumps
+- NOT just standing still — he pours, paints, builds, opens, touches, sits, jumps
 - The concept/product must be CLEARLY VISIBLE and RECOGNIZABLE throughout
 - The action progresses: start small → build up → full result
 
-6-SCENE FLOW (each scene = 8 seconds of continuous action):
-1. HOOK: Character grabs attention — explains what crazy thing he is about to do
-2. SETUP: Shows the concept/material to camera, walks toward it
-3. ACTION 1: Starts the physical interaction (pouring, painting, placing)
-4. ACTION 2: Deeper immersion — fully interacting, describing the feeling
-5. REACTION: Stops and reacts to the result with genuine shock/excitement
-6. PAYOFF: Final wide reveal of complete result + asks viewers to comment
+4-SCENE FLOW (each scene = 8 seconds of continuous action):
+1. SETUP: Character silently prepares materials to start the process
+2. ACTION: Actively interacting with the concept — full body visible, arms connected to torso, silent focus
+3. PROGRESS: Continues working, looking satisfied with the progress, no talking. NO shocked expressions.
+4. REVEAL: Final wide reveal clearly showing the full completed result, character proudly gestures toward it silently
 
-SETTING: Must match the concept. Same setting across all 6 scenes.
+SETTING: Must match the concept. Same setting across all 4 scenes.
 CONCEPT OBJECT: Must stay CONSISTENT in shape, texture, and scale.
 
 PROVEN VIRAL PATTERNS (from our best-performing videos):
@@ -128,22 +125,21 @@ PROVEN VIRAL PATTERNS (from our best-performing videos):
 - SATISFYING experiments with unexpected outcomes = core audience love
 - Challenge/fail element: "It Was a DISASTER" drives engagement
 
+CRITICAL CONCEPT RULE: The concept must involve a BIZARRE, UNNATURAL, or EXTREMELY SATISFYING transformation (e.g., carving perfect Jell-O, injecting polymer into a sponge, unnatural glowing objects).
+
 TITLE RULES (CRITICAL):
-- NEVER use "You Won't BELIEVE This" or similar overused clickbait openers
-- NEVER start multiple titles with the same phrase
-- Each title must be UNIQUE and specifically describe the experiment
-- BEST title patterns (USE THESE):
-  * "I Found [UNUSUAL OBJECT] and It STARTED To [CHANGE/GLOW/MOVE]!" 
-  * "I Tried to [ACTION] and This Happened! 🤯"
-  * "Can I Turn A [OBJECT] Into A [IMPOSSIBLE THING]?!"
-  * "[OBJECT] + [Unexpected Material] = INSANE Result!"
-  * "Testing [CONCEPT] for the First Time — The Result Is WILD!"
-- Mix question titles, statement titles, and reaction titles
+- You MUST use one of these EXACT title patterns (they are our proven viral formats):
+  1. "I Found UNNATURAL [OBJECTS]... And They STARTED To [ACTION]! 🤯"
+  2. "I Tried to [ACTION] a PERFECT [OBJECT] (It Was a DISASTER) 🤯"
+  3. "Can I Turn A [OBJECT] Into A [IMPOSSIBLE THING]?! 🤯"
+- Do NOT invent new title formats. Stick strictly to these 3 patterns.
+- Always include the 🤯 emoji or similar relevant emojis.
+- ALWAYS use UPPERCASE for the keywords (e.g., UNNATURAL, PERFECT, DISASTER, BRICK).
 
 Format: Return a JSON object with keys:
 - hook (indirect description of attention-grabbing opening)
-- scene_descriptions (list of EXACTLY 6 strings — each describes the still frame + 
-  what happens in 8 seconds: physical action + what character says + camera movement)
+- scene_descriptions (list of EXACTLY 4 strings — each describes the still frame + 
+  what happens in 8 seconds: physical action, silent focus, and camera movement)
 - title, description, hashtags""",
 
     "galactic_experiment": """You are a cosmic visual storyteller creating OTHERWORLDLY space content.
@@ -380,7 +376,7 @@ Each frame prompt must be highly detailed, photorealistic, and cinematic.
 CRITICAL: All frames should feel like ONE continuous visual narrative.
 Always specify: camera angle, lighting, color palette, atmosphere, specific details.
 Format: 9:16 vertical. Style: cinematic, photorealistic, 8K quality.
-IMPORTANT: duration_seconds MUST be either 5 or 10 (no other values allowed). Use 10 for most clips.
+IMPORTANT: duration_seconds MUST be exactly 5 (no other values allowed). Use 5 for ALL clips.
 Return ONLY valid JSON array of objects with keys: frame_number, frame_prompt, video_prompt, duration_seconds"""
 
     script_text = json.dumps(script, ensure_ascii=False)

@@ -1,0 +1,90 @@
+{
+  "series": {
+    "slug": "the-signal",
+    "title": "The Signal",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "audio_smooth": true
+  },
+  "art_style": "FOUND-FOOTAGE REALISM — looks like REAL footage filmed on a phone, not a movie. Vertical 9:16 handheld home-video look: natural available light only (headlamp beam, flashlight, phone-screen glow, moonlight on snow, occasional night-vision green), authentic handheld shake and motion blur, brief autofocus hunting, mild digital noise and grain in the dark, NO cinematic color grading, NO music score (only diegetic sound and a faint low signal hum). Cold blue winter night, deep snow, visible breath fog. Photoreal, grounded, documentary. A small glitchy timestamp may flicker in a corner. ABSOLUTELY no captions, subtitles, on-screen text, logos or watermarks. Keep it tense and believable, never gory.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": {},
+  "characters": [
+    {
+      "id": "theo",
+      "name": "Theo",
+      "bio": "Sıradan bir adam — kışı tek başına izole bir orman kabininde geçiren kış bekçisi/araştırmacı. Yaşadıklarını telefonuyla kaydeder. Çoğunlukla kamerayı tutan kişidir (POV), nadiren selfie/ayna yansımasında görünür. Sakinken giderek korkuya kapılır.",
+      "appearance": "An ordinary man in his early 30s bundled in a heavy snow parka, knit beanie and a headlamp, tired stubble, breath fogging in the cold. Usually unseen behind the camera (point-of-view); occasionally glimpsed in a phone selfie-cam or a frosted window reflection. Looks like a real person, NOT a model or actor.",
+      "ref_image_local": null,
+      "ref_image_url": null,
+      "voice": {
+        "audio_id": "orus",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": null
+    },
+    {
+      "id": "radio",
+      "name": "Telsizdeki Ses",
+      "bio": "Telsizden gelen ses — başta bir orman gözcüsü/dispatcher gibi, sonra giderek bozulup Theo'nun kendi sözlerini tekrar eden tekinsiz bir sese dönüşür. Asla bedeniyle görünmez, yalnızca cızırtılı telsizden duyulur.",
+      "appearance": "Never shown on screen — heard only through a crackling handheld radio. (Voice-only character.)",
+      "ref_image_local": null,
+      "ref_image_url": null,
+      "voice": {
+        "audio_id": "sadaltager",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": null
+    }
+  ],
+  "environments": [
+    {
+      "id": "cabin_ext",
+      "name": "Kabin (dış) — karlı orman",
+      "desc": "A small isolated wooden cabin deep in a snowbound pine forest at night, smoke from the chimney, one warm window glowing, deep untouched snow, dark treeline all around, cold blue moonlight. Photoreal, found-footage handheld look.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "cabin_int",
+      "name": "Kabin (iç)",
+      "desc": "A cramped rustic cabin interior at night: a wood stove, a single lantern, a CB radio on a table, frosted windows, sleeping bag, a phone propped up recording. Warm dim light against deep shadow. Photoreal, handheld.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "frozen_lake",
+      "name": "Donmuş göl",
+      "desc": "A vast frozen lake at the forest edge under a night sky, cracked snow-dusted ice, dark pines on the far shore, faint strange lights pulsing low over the ice. Cold, silent, photoreal found-footage look.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    }
+  ],
+  "props": [
+    {
+      "id": "phone",
+      "name": "Telefon (çekim yapan)",
+      "desc": "A modern smartphone recording vertical video, screen glow lighting a face, a faint flickering timestamp in the corner. The camera itself.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "radio",
+      "name": "CB telsiz",
+      "desc": "An old handheld CB radio with a glowing dial and a small VU needle, crackling with static, the only link to the outside world.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "ring_mark",
+      "name": "Halka iz",
+      "desc": "A perfect geometric ring/circle melted or burned into snow, ice or wooden floorboards — too precise to be natural, faintly warm.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    }
+  ]
+}

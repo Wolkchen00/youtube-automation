@@ -110,6 +110,75 @@ def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Pa
     return output_path
 
 
+def concatenate_audio_smooth(
+    video_files: list,
+    output_path: str | Path,
+    clips_dir: Path = None,
+    fade: float = 0.25,
+    normalize: bool = True,
+) -> Path:
+    """Concatenate clips with HARD video cuts but SMOOTHED audio at every cut.
+
+    Why: each AI shot carries its own ambient/score, so a plain concat makes the
+    soundscape 'pop' and jump in loudness (often ~8-10 dB) at every transition,
+    and leaves an audible gap when one clip ends quiet and the next starts loud.
+
+    Fix, per clip, before joining:
+      • loudness-normalise the audio (EBU R128) so shot-to-shot levels match,
+      • short afade in + afade out so each boundary decays/rises instead of cutting.
+
+    Video is concatenated as straight cuts (the visuals are fine as-is) and the
+    fades live *inside* each clip's own duration, so total length is unchanged and
+    audio stays in sync with video. Pair this with a continuous music bed
+    (mix_background_music) to fully mask the seams.
+
+    Falls back to a plain concat on any ffmpeg error so the nightly run never breaks.
+    """
+    output_path = Path(output_path)
+    files = [Path(v) for v in video_files]
+    if len(files) <= 1:
+        return concatenate_simple(files, output_path, clips_dir=clips_dir)
+
+    durations = [get_video_duration(f) for f in files]
+    inputs = []
+    for f in files:
+        inputs.extend(["-i", str(f)])
+
+    vfilters, afilters = [], []
+    for i, d in enumerate(durations):
+        # normalise geometry so the concat filter accepts every segment
+        vfilters.append(f"[{i}:v]fps={FFMPEG_FPS},setsar=1,format=yuv420p[v{i}]")
+        chain = []
+        if normalize:
+            chain.append("loudnorm=I=-18:TP=-1.5:LRA=11")
+        out_st = max(0.0, d - fade)
+        chain.append(f"afade=t=in:st=0:d={fade:.2f}")
+        chain.append(f"afade=t=out:st={out_st:.2f}:d={fade:.2f}")
+        afilters.append(f"[{i}:a]{','.join(chain)}[a{i}]")
+
+    concat_in = "".join(f"[v{i}][a{i}]" for i in range(len(files)))
+    full_filter = ";".join(
+        vfilters + afilters + [f"{concat_in}concat=n={len(files)}:v=1:a=1[v][a]"]
+    )
+
+    cmd = ["ffmpeg", "-y"] + inputs + [
+        "-filter_complex", full_filter,
+        "-map", "[v]", "-map", "[a]",
+        "-c:v", "libx264", "-crf", FFMPEG_CRF, "-preset", FFMPEG_PRESET,
+        "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+        "-r", FFMPEG_FPS,
+        str(output_path),
+    ]
+    logger.info(f"🔗 Smooth-audio concat: {len(files)} clips (fade={fade}s, norm={normalize})")
+    try:
+        subprocess.run(cmd, capture_output=True, check=True, timeout=600)
+        logger.info(f"✅ Merged (smooth audio): {output_path}")
+        return output_path
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"⚠️ Smooth concat failed ({e}); falling back to simple concat")
+        return concatenate_simple(files, output_path, clips_dir=clips_dir)
+
+
 def concatenate_crossfade(
     video_files: list,
     output_path: str | Path,
@@ -472,15 +541,25 @@ def mix_background_music(
     video_path: str | Path,
     music_path: str | Path,
     output_path: str | Path = None,
-    music_volume: float = 0.15,
+    music_volume: float = 0.18,
 ) -> Path:
-    """Mix background music into a video at a lower volume.
+    """Mix a CONTINUOUS background-music bed into a video.
+
+    The bed is what stops scene transitions from sounding like the audio
+    'drops out' — it plays unbroken under the whole episode and only fades at
+    the very start/end. To guarantee full coverage even when the source clip is
+    short (Lyria gives 30s clips), the music is LOOPED to the video length, then
+    trimmed, volume-set and faded.
+
+    `amix` runs with normalize=0 so it does NOT silently halve the program audio
+    when adding the bed (the default behaviour, which made earlier mixes feel
+    quiet/uneven).
 
     Args:
         video_path: Input video file
-        music_path: Background music audio file
+        music_path: Background music audio file (may be shorter than the video)
         output_path: Output file (default: _music suffix)
-        music_volume: Music volume (0.0 to 1.0, default 0.15 = -16dB)
+        music_volume: Music bed volume (0.0 to 1.0, default 0.18 ≈ -15dB)
 
     Returns:
         Path to the mixed video.
@@ -492,16 +571,18 @@ def mix_background_music(
     output_path = Path(output_path)
 
     try:
-        # Get video duration to trim music
         vid_duration = get_video_duration(video_path)
+        fade_out_st = max(0.0, vid_duration - 1.5)
 
         cmd = [
             "ffmpeg", "-y",
             "-i", str(video_path),
-            "-i", str(music_path),
+            "-stream_loop", "-1", "-i", str(music_path),   # loop bed to cover full video
             "-filter_complex",
-            f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS,volume={music_volume}[bg];"
-            f"[0:a][bg]amix=inputs=2:duration=first:dropout_transition=2[aout]",
+            f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS,"
+            f"volume={music_volume},"
+            f"afade=t=in:st=0:d=1.0,afade=t=out:st={fade_out_st:.2f}:d=1.5[bg];"
+            f"[0:a][bg]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]",
             "-map", "0:v",
             "-map", "[aout]",
             "-c:v", "copy",
@@ -511,7 +592,7 @@ def mix_background_music(
         ]
 
         subprocess.run(cmd, capture_output=True, check=True, timeout=180)
-        logger.info(f"🎵 Background music mixed: {output_path.name} (vol={music_volume})")
+        logger.info(f"🎵 Background music bed mixed (looped, vol={music_volume}): {output_path.name}")
     except subprocess.CalledProcessError as e:
         logger.warning(f"⚠️ Music mix failed (using original): {e}")
         import shutil

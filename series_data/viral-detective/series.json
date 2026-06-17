@@ -12,7 +12,8 @@
   "hashtags": "#detective #mystery #whodunit #shorts #ai #thriller #influencer #crime",
   "total_parts": 5,
   "next_part": 4,
-  "status": "active",
+  "status": "paused",
+  "paused_reason": "İhsan: kanal dedektif konseptinden çıkıyor → gerçekçi uzaylı serisine geçiş (2026-06-17). Part 1-3 yayında kalır; Part 4-5 dedektif planları üretilmez.",
   "publish_mode": "auto",
   "parts": {
     "1": {

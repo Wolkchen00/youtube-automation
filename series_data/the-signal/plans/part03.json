@@ -1,0 +1,48 @@
+{
+  "episode": { "number": 3, "title": "Contact" },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "The cabin plunges into darkness, only the phone flashlight beam shaking around the room. Theo, scared, behind camera: \"Power's gone. Whole cabin. Phone's at thirty percent.\" The beam jitters across the stove and door. Authentic low-light found-footage grain, very dark, tense.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Phone footage through the frosted window: the tall slender figure is closer now, halfway across the moonlit snow, head tilted, not walking like a person. Theo, breath trembling the camera: \"It's in the yard. It's just... watching me back.\" Cold blue night, handheld, photoreal, dread.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The dead, unpowered CB radio suddenly crackles ON by itself, its dial glowing. It plays back Theo's OWN earlier voice. Radio (Theo's recorded voice, distorted): \"...day one... just me...\" Theo, terrified, filming the radio: \"That's me. That's my voice. How does it have my voice?\" Realistic, unsettling, low light.",
+      "speakers": ["radio", "theo"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Theo spins the phone around the dark cabin, breathing hard, flashlight smearing. For a single frame the reflection in the black window shows the tall figure standing right behind him — then it's gone, and he doesn't notice. Authentic handheld found-footage, blink-and-miss-it scare, photoreal.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A slow, deliberate knock sounds on the window. Then a second. Theo freezes, the phone trembling in his grip, flashlight on the glass. Theo, barely a whisper: \"...it knocked. Okay. Okay. I'm not opening anything.\" Tense silence, realistic low-light footage.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "The knocking settles into the same rhythm as the signal's pulse. The phone flashlight flickers. Theo backs into the corner, aiming the camera at the wedged door. The shot ends on the door handle slowly, silently beginning to turn. Found-footage realism, maximum suspense.",
+      "speakers": ["theo"],
+      "seed": null
+    }
+  ]
+}

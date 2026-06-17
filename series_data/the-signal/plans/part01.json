@@ -1,0 +1,48 @@
+{
+  "episode": { "number": 1, "title": "Night One" },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical phone selfie-cam, handheld, shaky. Theo, an ordinary man in a snow parka and headlamp, breath fogging, sits in a dim cabin lit only by a lantern and his phone screen. He talks quietly to the camera, a little nervous-excited. Theo: \"Okay... day one. I'm out at the lake cabin until spring. No road, no neighbors. Just me.\" Authentic found-footage look, screen glow on his face, mild grain.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "POV phone footage, handheld, panning slowly across the cabin interior: a wood stove, a frosted window, an old CB radio on a table. Theo's voice from behind the camera, calm. Theo: \"Place is older than the map said. But the quiet's kind of perfect.\" The radio crackles faintly with static for a second. Realistic available light, slight autofocus hunt.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Night exterior, POV phone footage, Theo steps outside onto deep snow, headlamp beam cutting the dark, breath fogging. The camera finds a dark treeline and, far over a frozen lake, three faint lights pulsing low. A low hum rises. Theo, behind camera, uneasy: \"...you hear that? That hum. Been going since sunset.\" Handheld shake, cold blue moonlight, photoreal.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Shaky phone footage punching in / digital-zooming on three faint glowing lights hovering low over the frozen lake, pulsing slowly in rhythm with a deep hum. The autofocus hunts and the image grain crawls. Theo, behind camera, voice tightening: \"That's not a plane. Planes don't just... sit there.\" Found-footage realism, no music.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Inside the dark cabin, phone filming the old CB radio as it bursts into static then a rhythmic pulsing tone that matches the lights outside. A broken voice comes through the radio. Radio voice, distorted and slow: \"...stay... inside...\" Theo, behind camera, leaning in: \"Hello? Who is this?\" Only static answers. Tense, realistic, handheld.",
+      "speakers": ["radio", "theo"],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "Cold first-light morning, POV phone footage looking down at fresh tracks pressed into the snow, circling the whole cabin — evenly spaced, not human — leading off toward the dark pines. Theo's breath shakes the camera. Theo: \"These weren't here last night. They go all the way around.\" The shot ends on the tracks vanishing into the treeline. Found-footage realism.",
+      "speakers": ["theo"],
+      "seed": null
+    }
+  ]
+}

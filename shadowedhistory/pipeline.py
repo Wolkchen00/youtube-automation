@@ -67,15 +67,44 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     if not script:
         logger.warning("⚠️ Gemini script failed, using template script...")
         topic_text = daily_topic["topic"]
-        script = {
-            "title": f"The Secret They Hid: {topic_text[:50]}",
-            "hook": f"This forgotten piece of history will change everything you know...",
-            "narration": f"Deep in the archives of history, a secret was buried. {topic_text}. "
-                         f"For centuries, this knowledge was hidden from public view. "
-                         f"Now, for the first time, the truth is revealed.",
-            "description": f"Discover the forgotten truth about {topic_text}. #shorts #history",
-            "hashtags": "#shorts #history #facts #mystery #hidden #secrets",
-        }
+
+        # Extract city metadata if available
+        city_name = ""
+        city_loc = ""
+        if "[LOCATION:" in topic_text:
+            try:
+                loc_parts = topic_text.split("[LOCATION:")[1].split("]")[0].strip()
+                parts = loc_parts.split(",", 1)
+                city_name = parts[0].strip()
+                city_loc = parts[1].strip() if len(parts) > 1 else ""
+            except (IndexError, ValueError):
+                pass
+
+        # Get the hook (text before [LOCATION:])
+        hook_text = topic_text.split("[LOCATION:")[0].strip() if "[LOCATION:" in topic_text else topic_text
+
+        if city_name:
+            script = {
+                "title": f"The FORGOTTEN Secret of {city_name}",
+                "hook": hook_text,
+                "narration": f"{hook_text} "
+                             f"Located in {city_loc or 'a forgotten corner of the world'}, {city_name} "
+                             f"holds secrets that historians are still trying to unravel. "
+                             f"What happened here changed the course of history forever.",
+                "location_name": f"{city_name}, {city_loc}" if city_loc else city_name,
+                "description": f"The untold story of {city_name}. #shorts #history",
+                "hashtags": f"#shorts #history #facts #{city_name.replace(' ', '')} #mystery",
+            }
+        else:
+            script = {
+                "title": f"The Secret They Hid: {topic_text[:50]}",
+                "hook": "This forgotten piece of history will change everything you know...",
+                "narration": f"Deep in the archives of history, a secret was buried. {topic_text}. "
+                             f"For centuries, this knowledge was hidden from public view. "
+                             f"Now, for the first time, the truth is revealed.",
+                "description": f"Discover the forgotten truth about {topic_text}. #shorts #history",
+                "hashtags": "#shorts #history #facts #mystery #hidden #secrets",
+            }
 
     title = script.get("title", daily_topic["topic"][:100])
     hook = script.get("hook", "")
@@ -84,6 +113,15 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
     hashtags = script.get("hashtags", "#shorts #history #facts")
     if isinstance(hashtags, list):
         hashtags = " ".join(hashtags)
+
+    # Auto-extract location from city database topic if Gemini didn't provide one
+    topic_text = daily_topic["topic"]
+    if not location_name and "[LOCATION:" in topic_text:
+        try:
+            location_name = topic_text.split("[LOCATION:")[1].split("]")[0].strip()
+            logger.info(f"   📍 Auto-extracted location: {location_name}")
+        except (IndexError, ValueError):
+            pass
 
     # Trending hook — boost title with daily trending keywords
     from core.trending import enhance_title_with_trend, get_trending_hashtags

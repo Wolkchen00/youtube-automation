@@ -2,13 +2,13 @@
 Sentinal Ihsan — Visual Prompts & Style Constants (VEO3 Lite)
 
 4-SCENE FLOW:
-  Scene 1: HOOK — Character grabs attention, explains what he's about to do
-  Scene 2: ACTION — Starts interacting (pouring, painting, building)
-  Scene 3: REACTION — Genuine surprise/shock at the result
-  Scene 4: PAYOFF — Final reveal + call-to-action ("which would you pick?")
+  Scene 1: SETUP — Character silently prepares the materials to start the process
+  Scene 2: ACTION — Actively working on it, full body visible, no speaking
+  Scene 3: PROGRESS — Close to finishing, focused and satisfied, no speaking
+  Scene 4: REVEAL — Final completed result is clearly shown at the end
 
 VEO3-SPECIFIC:
-  ✅ Each video prompt includes speech description (VEO3 generates audio)
+  ✅ Each video prompt describes silent physical action (NO speech)
   ✅ Continuous physical motion in every clip
   ✅ Front-camera POV with natural handheld shake
   ✅ Identity lock + quality guard on every frame
@@ -79,16 +79,16 @@ REALISM_PRODUCT = (
     "Materials interact with light naturally — matte vs glossy vs metallic surfaces."
 )
 
-# ─── 4 Frame Templates (HOOK → ACTION → REACTION → PAYOFF) ──────────────────
+# ─── 4 Frame Templates (SETUP → ACTION → PROGRESS → REVEAL) ─────────────────
 
 FRAME_TEMPLATES = {
     "hook_intro": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} looking directly at the camera with an excited, wide-eyed expression. "
+        f"{CHARACTER_ANCHOR} preparing the materials with a focused and determined expression. "
         f"He is in a real outdoor location that matches the concept. "
         f"{REALISM_OUTDOOR} "
-        f"His mouth is slightly open as if starting to speak. "
+        f"He is completely silent, NOT speaking. "
         f"The concept item/product is visible beside him — real, tangible, with authentic texture. "
         f"{REALISM_PRODUCT} "
         f"Wearing the exact same outfit as in the reference image. "
@@ -97,82 +97,80 @@ FRAME_TEMPLATES = {
     "action_start": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"{CHARACTER_ANCHOR} has started the physical action — his hands are actively "
-        f"interacting with the concept (pouring, painting, placing, touching, opening). "
+        f"{CHARACTER_ANCHOR} is actively engaged in the physical action (pouring, painting, placing, touching, opening). "
+        f"CRITICAL: His whole body is visible and his arms are naturally connected to his torso. NO floating arms, NO disembodied hands. "
         f"Both hands are naturally engaged with realistic grip and finger positioning. "
         f"{REALISM_PRODUCT} "
         f"The concept is changing due to his action — real physics: liquid flows, paint drips, "
         f"material deforms naturally. {REALISM_OUTDOOR} "
-        f"His face shows effort and concentration. Same outfit. "
+        f"His face shows effort and concentration. He is silent, NOT speaking. Same outfit. "
         f"{QUALITY_GUARD}"
     ),
-    "reaction_shock": (
+    "progress_check": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
-        f"Close-up of {CHARACTER_ANCHOR} face showing intense genuine reaction — jaw dropped, "
-        f"wide eyes, hand over mouth in disbelief, looking between the camera and the concept result. "
+        f"Close-up of {CHARACTER_ANCHOR} face showing satisfaction and focus as he nears completion of the process. "
+        f"He is smiling slightly at the progress. NO shocked expression, NO wide eyes, NO open mouth. "
         f"The concept result is partially visible in the background with realistic detail. "
         f"{REALISM_OUTDOOR} "
-        f"Sweat or excitement flush on face for authenticity. "
-        f"Same outfit. Genuine emotional reaction, not acted. "
+        f"Sweat or excitement flush on face for authenticity. He is silent, NOT speaking. "
+        f"Same outfit. "
         f"{QUALITY_GUARD}"
     ),
     "final_reveal": (
         f"{IDENTITY_LOCK} "
         f"{CAMERA_POV} "
         f"{CHARACTER_ANCHOR} has pulled back to show the FULL result in a wider frame. "
-        f"The complete concept transformation is visible — impressive, detailed, and shareable. "
+        f"The complete concept transformation is clearly and fully visible — impressive, detailed, and shareable. "
         f"{REALISM_PRODUCT} "
-        f"He is gesturing toward it proudly with natural hand positioning. "
+        f"He is gesturing toward it proudly with natural hand positioning. He is silent, NOT speaking. "
         f"{REALISM_OUTDOOR} "
         f"Same outfit. Golden hour lighting highlights the result beautifully. "
-        f"This is the money shot — the most impressive, photorealistic angle. "
+        f"This is the money shot — the most impressive, photorealistic angle showing exactly what was made. "
         f"{QUALITY_GUARD}"
     ),
 }
 
-# ─── 4 VEO3 Video Prompts (with speech + continuous motion) ────────────────────
+# ─── 4 VEO3 Video Prompts (silent action + continuous motion) ──────────────────
 
 VIDEO_PROMPTS = {
     "hook_video": (
         "Handheld vertical 9:16 front-camera POV, shot on iPhone 15 Pro Max, natural hand shake. "
         "Real outdoor location with natural ambient sound — wind, birds, distant traffic. "
         "Throughout the clip, no phone or recording device is visible. "
-        "The young man speaks directly to the front camera in English in an excited, "
-        "energetic voice. He opens with a short attention-grabbing hook line that "
-        "immediately creates curiosity about what he is about to do. "
-        "His lip movements are naturally synced to speech. "
+        "The young man silently prepares to start the process, showing the materials to the camera. "
+        "He is completely silent, NOT speaking, just focused on the setup. "
         "He gestures with one hand while the concept item is visible beside him. "
         "Real sunlight creates natural shadows on his face. "
-        "His eyes are wide with genuine excitement. 8 seconds."
+        "He has a determined, focused expression. 5 seconds."
     ),
     "action_video": (
         "Same iPhone front camera POV. Same outdoor location. No recording device visible. "
-        "The young man starts the physical action — he is actively interacting with "
-        "the concept (pouring, painting, placing, opening). Both his hands do something natural. "
-        "He narrates what he is doing in English — describing the texture, the feeling, the weight. "
+        "The young man is actively interacting with the concept (pouring, painting, placing, opening). "
+        "CRITICAL: His full torso is visible and his arms are connected naturally to his body. NO floating arms. "
+        "He is completely silent, NOT speaking. "
         "IMPORTANT: The product/material behaves with REAL physics — liquid splashes naturally, "
         "paint drips realistically, metal clinks with authentic sound. "
         "Camera has natural shake from his movement. The concept visibly changes with realistic detail. "
-        "Same outfit, same voice, same environment. Continuous scene — no jump cuts. 8 seconds."
+        "Same outfit, same environment. Continuous scene — no jump cuts. 5 seconds."
     ),
     "reaction_video": (
         "Same iPhone front camera POV. Same outdoor location. No recording device visible. "
-        "The young man stops the action and looks at the result with genuine shock. "
-        "He speaks in English — reacting to what just happened with disbelief and excitement. "
-        "His facial expressions are dramatic but NATURAL — jaw drop, wide eyes, hand over mouth. "
-        "He looks between the camera and the result multiple times. "
-        "His voice gets higher with surprise. Wind moves his hair slightly. "
-        "Same outfit, same environment, same natural lighting. 8 seconds."
+        "The young man continues working, pausing slightly to look at the progress with satisfaction. "
+        "He is completely silent, NOT speaking. "
+        "His facial expression is calm, focused, and slightly smiling — NO shocked face, NO open mouth. "
+        "He looks between the camera and the result naturally. "
+        "Wind moves his hair slightly. "
+        "Same outfit, same environment, same natural lighting. 5 seconds."
     ),
     "payoff_video": (
         "Same iPhone front camera POV. Same outdoor location. No recording device visible. "
-        "The young man pulls back to show the final result in a wider shot — revealing the "
-        "full transformation. He speaks in English — wrapping up, showing off the complete result, "
-        "and asking viewers to comment their reaction or choose between options. "
+        "The young man pulls back to clearly show the final result in a wider shot — revealing the "
+        "full, completed transformation exactly as it is finished. "
+        "He is completely silent, NOT speaking. "
         "He gestures toward the result proudly, then looks back at camera with a natural smile. "
-        "The result looks REAL, IMPRESSIVE, and SHAREABLE — perfect final shot. "
+        "The result looks REAL, IMPRESSIVE, and SHAREABLE — perfect final shot showing what was made. "
         "Golden hour sunlight highlights everything. Natural hand movements. "
-        "Same outfit, same voice, same environment. 8 seconds."
+        "Same outfit, same environment. 5 seconds."
     ),
 }

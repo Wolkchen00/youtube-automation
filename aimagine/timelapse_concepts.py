@@ -291,7 +291,14 @@ def get_daily_concept() -> dict:
 
 
 def _generate_trending_concept() -> dict | None:
-    """Generate a trending DIY concept using Gemini."""
+    """Generate a trending DIY concept using Gemini.
+
+    CRITICAL: Gemini only provides the CREATIVE CONTENT (what is being built,
+    what environment). The visual structure (camera angle, worker style, format)
+    is ALWAYS enforced by wrapping Gemini's descriptions with our mandatory
+    style constants (BASE_STYLE, PERSON_STYLE, VIDEO_STYLE). This ensures
+    every video looks like it belongs to the same channel.
+    """
     from core.trending import generate_trending_topic
     import google.generativeai as genai
     from core.config import GEMINI_API_KEY
@@ -302,28 +309,49 @@ def _generate_trending_concept() -> dict | None:
     if not GEMINI_API_KEY:
         return None
 
+    # Pick the best matching environment preset based on topic keywords
+    topic_lower = trending["topic"].lower()
+    if any(kw in topic_lower for kw in ("indoor", "room", "bathroom", "kitchen", "bedroom", "living")):
+        env = INDOOR_ENV
+    elif any(kw in topic_lower for kw in ("luxury", "villa", "mediterranean", "mansion")):
+        env = LUXURY_ENV
+    elif any(kw in topic_lower for kw in ("patio", "dining", "outdoor kitchen", "bbq", "grill")):
+        env = OUTDOOR_DINING_ENV
+    elif any(kw in topic_lower for kw in ("front yard", "driveway", "curb")):
+        env = FRONTYARD_ENV
+    elif any(kw in topic_lower for kw in ("garden", "flower", "topiary", "hedge", "lawn", "zen")):
+        env = GARDEN_ENV
+    else:
+        env = BACKYARD_ENV
+
     try:
         genai.configure(api_key=GEMINI_API_KEY)
         model = genai.GenerativeModel("gemini-2.5-flash")
 
+        # IMPORTANT: We ask Gemini for SCENE DESCRIPTIONS only, not full prompts.
+        # We wrap them with our style constants afterward.
         concept_prompt = f"""You are a viral DIY/crafts content creator inspired by @diycraftstvofficial.
 
-Based on this trending topic, create a COMPLETE DIY transformation concept:
+Based on this trending topic, create a DIY transformation concept.
 
 TOPIC: {trending['topic']}
 TITLE: {trending.get('title', '')}
 
-Format rules:
-- Fixed tripod camera, ground-level angle, SAME position all 4 frames
-- 1-2 people working (seen from behind/side, mid-distance, dark work clothes)
-- Transformation: empty/messy → beautiful finished result
-- Categories: garden landscaping, room makeover, outdoor build, topiary, patio, kitchen
+IMPORTANT: You ONLY provide the SCENE DESCRIPTIONS — what is being built,
+what the person is physically doing, what tools/materials are visible.
+Do NOT include camera angle, resolution, format, or person clothing descriptions.
+Those are added automatically by the system.
 
-Frame sequence:
-- Frame 1: Empty/before state, person starting work
-- Frame 2: Early progress, person actively working
-- Frame 3: Major progress, nearly complete
-- Frame 4: Stunning finished result, no people, beauty shot
+Frame sequence (describe ONLY the scene content):
+- frame_desc_1: Empty/before state, what the person is doing to start
+- frame_desc_2: Early progress, what work is happening
+- frame_desc_3: Major progress, nearly complete
+- frame_desc_4: Stunning finished result (beauty shot, NO people)
+
+Video transitions (describe ONLY the action happening):
+- video_action_1: What physical work is happening in transition 1→2
+- video_action_2: What physical work is happening in transition 2→3
+- video_action_3: What physical work is happening in transition 3→4
 
 Return ONLY valid JSON:
 {{
@@ -332,8 +360,13 @@ Return ONLY valid JSON:
     "title": "YouTube title with emoji (under 80 chars)",
     "description": "YouTube description (1-2 sentences)",
     "hashtags": "#shorts #diy #transformation #satisfying",
-    "frame_prompts": ["frame1", "frame2", "frame3", "frame4"],
-    "video_prompts": ["video1 8 seconds.", "video2 8 seconds.", "video3 8 seconds."]
+    "frame_desc_1": "scene description for empty/before state",
+    "frame_desc_2": "scene description for early progress",
+    "frame_desc_3": "scene description for major progress",
+    "frame_desc_4": "scene description for finished beauty shot",
+    "video_action_1": "action description for clip 1",
+    "video_action_2": "action description for clip 2",
+    "video_action_3": "action description for clip 3"
 }}"""
 
         response = model.generate_content(
@@ -344,9 +377,38 @@ Return ONLY valid JSON:
             ),
         )
         result = json.loads(response.text)
-        if result and result.get("name") and len(result.get("frame_prompts", [])) >= 4 and len(result.get("video_prompts", [])) >= 3:
-            logger.info(f"🔥 Generated trending DIY concept: {result['name']}")
-            return result
+
+        # Validate we got the required fields
+        required = ["name", "frame_desc_1", "frame_desc_2", "frame_desc_3", "frame_desc_4",
+                     "video_action_1", "video_action_2", "video_action_3"]
+        if not all(result.get(k) for k in required):
+            logger.warning("⚠️ Trending concept missing required fields")
+            return None
+
+        # CRITICAL: Wrap Gemini's scene descriptions with our mandatory style constants.
+        # This ensures EVERY video has the same camera angle, worker appearance, and format.
+        concept = {
+            "name": result["name"],
+            "hook": result.get("hook", f"{result['name']} ✨"),
+            "title": result.get("title", f"{result['name']} ✨"),
+            "description": result.get("description", f"Incredible DIY transformation: {result['name']}"),
+            "hashtags": result.get("hashtags", "#shorts #diy #transformation #satisfying"),
+            "frame_prompts": [
+                F(result["frame_desc_1"], env),
+                F(result["frame_desc_2"], env),
+                F(result["frame_desc_3"], env),
+                # Frame 4 is the beauty shot — use BASE_STYLE but NO person
+                f"{BASE_STYLE}. {result['frame_desc_4']}. {env}",
+            ],
+            "video_prompts": [
+                f"{V}. {result['video_action_1']}. 8 seconds.",
+                f"{V}. {result['video_action_2']}. 8 seconds.",
+                f"{V}. {result['video_action_3']}. 8 seconds.",
+            ],
+        }
+
+        logger.info(f"🔥 Generated trending DIY concept: {concept['name']}")
+        return concept
     except Exception as e:
         logger.warning(f"⚠️ Trending concept generation failed: {e}")
     return None

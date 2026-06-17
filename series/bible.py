@@ -127,6 +127,16 @@ class Bible:
         False önerilir (anlatım+müzik temiz kalsın); 'trip' kanalında serbest."""
         return bool(self.data["series"].get("native_audio", True))
 
+    @property
+    def audio_smooth(self) -> bool:
+        """True ise çekim sınırlarında ses YUMUŞATILIR: her çekimin sesi loudness
+        eşitlenir + kısa afade ile in/out yapılır → geçişlerde 'pop'/seviye sıçraması
+        ve ses boşluğu olmaz. Atmosfer/müzik kanalları için idealdir.
+        Diyalog kanallarında (ör. viral-detective) KAPALI olmalı — afade söz
+        baş/sonunu kırpabilir; orada akıcılığı sürekli diyalog zaten sağlar.
+        Varsayılan: müzik açıksa açık."""
+        return bool(self.data["series"].get("audio_smooth", self.music))
+
     # -- referanslar --
     @property
     def characters(self) -> list[dict]:

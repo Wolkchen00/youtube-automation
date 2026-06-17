@@ -131,7 +131,9 @@ VIDEO_PROMPTS = {
 }
 
 # Scene sequence templates based on topic category
+# Includes both legacy categories AND city_database categories
 SCENE_SEQUENCES = {
+    # Legacy categories (static topics)
     "default": ["epic_establishing", "dramatic_close_up", "artifact_reveal", "ruins_discovery"],
     "lost_civilizations": ["ruins_discovery", "construction_scene", "crowd_scene", "disaster_moment"],
     "forgotten_inventions": ["scroll_manuscript", "dramatic_close_up", "artifact_reveal", "hidden_chamber"],
@@ -141,6 +143,25 @@ SCENE_SEQUENCES = {
     "ancient_warfare": ["epic_establishing", "battle_scene", "dramatic_close_up", "disaster_moment"],
     "forgotten_events": ["crowd_scene", "disaster_moment", "dramatic_close_up", "ruins_discovery"],
     "hidden_knowledge": ["scroll_manuscript", "hidden_chamber", "artifact_reveal", "epic_establishing"],
+    # City database categories
+    "lost_city": ["epic_establishing", "ruins_discovery", "hidden_chamber", "disaster_moment"],
+    "disaster": ["epic_establishing", "crowd_scene", "disaster_moment", "ruins_discovery"],
+    "engineering": ["epic_establishing", "construction_scene", "artifact_reveal", "dramatic_close_up"],
+    "mystery": ["epic_establishing", "hidden_chamber", "scroll_manuscript", "artifact_reveal"],
+    "empire": ["epic_establishing", "crowd_scene", "battle_scene", "disaster_moment"],
+    "warfare": ["epic_establishing", "battle_scene", "dramatic_close_up", "disaster_moment"],
+    "discovery": ["ruins_discovery", "artifact_reveal", "hidden_chamber", "dramatic_close_up"],
+    "dark_history": ["hidden_chamber", "dramatic_close_up", "disaster_moment", "ruins_discovery"],
+    "legend": ["epic_establishing", "scroll_manuscript", "construction_scene", "ruins_discovery"],
+    "tomb": ["hidden_chamber", "artifact_reveal", "dramatic_close_up", "scroll_manuscript"],
+    "biography": ["dramatic_close_up", "crowd_scene", "artifact_reveal", "epic_establishing"],
+    "ritual": ["crowd_scene", "dramatic_close_up", "disaster_moment", "artifact_reveal"],
+    "espionage": ["scroll_manuscript", "dramatic_close_up", "hidden_chamber", "crowd_scene"],
+    "myth_busted": ["scroll_manuscript", "artifact_reveal", "dramatic_close_up", "epic_establishing"],
+    "lifestyle": ["crowd_scene", "construction_scene", "artifact_reveal", "dramatic_close_up"],
+    "diplomacy": ["crowd_scene", "scroll_manuscript", "dramatic_close_up", "epic_establishing"],
+    "archaeology": ["ruins_discovery", "artifact_reveal", "hidden_chamber", "dramatic_close_up"],
+    "invention": ["scroll_manuscript", "construction_scene", "artifact_reveal", "dramatic_close_up"],
 }
 
 

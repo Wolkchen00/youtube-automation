@@ -13,7 +13,9 @@ from pathlib import Path
 
 from .config import GEMINI_API_KEY, PROJECT_ROOT, logger
 
-# Channel-specific music prompts
+# Channel-specific music prompts.
+# NOTE: these play as a CONTINUOUS bed under the whole episode (looped + faded),
+# so they must be smooth and seamless — no abrupt hits, no hard endings.
 MUSIC_PROMPTS = {
     "aimagine": (
         "Cinematic construction timelapse music. "
@@ -31,6 +33,36 @@ MUSIC_PROMPTS = {
         "Instrumental only, no vocals. "
         "Similar to BBC history documentary music."
     ),
+    # ava-voyage (narration channel = galactic_experiment): cosmic awe
+    "galactic_experiment": (
+        "Ethereal cinematic space ambient. Slow evolving synth pads, deep sub-bass "
+        "drone, distant ethereal choir, shimmering bell and crystal textures. "
+        "A sense of awe, vastness and infinite cosmos. Continuous flowing soundscape "
+        "with NO percussion hits and NO abrupt changes — seamless and immersive. "
+        "Instrumental only, no vocals. Similar to an interstellar documentary score."
+    ),
+    # infinite-trip: hypnotic psychedelic bed
+    "infinite-trip": (
+        "Continuous psychedelic ambient music. Hypnotic flowing synth arpeggios, "
+        "warm analog pads, gentle steady pulse, dreamy reverb, textures that morph "
+        "seamlessly into one another. Meditative, immersive, downtempo psybient. "
+        "NO abrupt changes, NO hard stops. Instrumental only, no vocals."
+    ),
+    # the-signal (found-footage alien series): eerie sound-design drone, NOT a score
+    "the-signal": (
+        "Subtle eerie sub-bass drone for a realistic found-footage night. A low, "
+        "almost-subliminal hum with a slow rhythmic pulse — like a faint distant "
+        "signal. Cold, tense, minimal sound design. NO melody, NO percussion hits, "
+        "NO vocals. Sits quietly under wind and silence to build dread. "
+        "Seamless and continuous, never resolving."
+    ),
+}
+
+# Slug → music-prompt-key aliases (so callers can pass either the narration channel
+# OR the series slug and still get the right bed).
+MUSIC_PROMPT_ALIASES = {
+    "ava-voyage": "galactic_experiment",
+    "secrets-anatolia": "shadowedhistory",
 }
 
 # Cache directory for generated music
@@ -52,11 +84,12 @@ def generate_background_music(
     Returns:
         Path to the generated audio file, or None if failed.
     """
-    if channel not in MUSIC_PROMPTS and not custom_prompt:
+    key = MUSIC_PROMPT_ALIASES.get(channel, channel)
+    if key not in MUSIC_PROMPTS and not custom_prompt:
         logger.info(f"Music generation skipped for {channel} (no music config)")
         return None
 
-    prompt = custom_prompt or MUSIC_PROMPTS.get(channel, "")
+    prompt = custom_prompt or MUSIC_PROMPTS.get(key, "")
     if not prompt:
         return None
 

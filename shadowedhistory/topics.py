@@ -125,45 +125,79 @@ def get_all_topics() -> list[str]:
     return all_topics
 
 
+def _load_history() -> list:
+    """Load topic history from file."""
+    if HISTORY_FILE.exists():
+        try:
+            return json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            return []
+    return []
+
+
+def _save_history(recent: list, topic: str):
+    """Append topic to history and save."""
+    recent.append(topic)
+    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
+
+
 def get_daily_topic(exclude_recent: int = 60) -> dict:
-    """Select a daily topic — TRENDING FIRST, static fallback.
+    """Select a daily topic — TRENDING → CITY DATABASE → STATIC fallback.
 
     Priority:
       1. Trending topic from Gemini (based on today's trends + viral patterns)
-      2. Static TOPICS dict (if Gemini fails)
+      2. City Database (40% chance — our best-performing category!)
+      3. Static TOPICS dict (general history)
     """
-    # Try trending topic first
+    recent = _load_history()
+
+    # ── Priority 1: Trending topic ──────────────────────────────────
     from core.trending import generate_trending_topic
 
     trending = generate_trending_topic("shadowedhistory")
     if trending and trending.get("topic"):
         logger.info(f"🔥 ShadowedHistory trending topic: {trending.get('title', '')[:50]}")
-        # Save to history
-        recent = []
-        if HISTORY_FILE.exists():
-            try:
-                recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
-            except Exception:
-                recent = []
-        recent.append(trending["topic"])
-        HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
-        HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
+        _save_history(recent, trending["topic"])
         return {
             "topic": trending["topic"],
             "category": trending.get("category", "trending"),
         }
 
-    # Fallback: static list
-    logger.info("📋 Trending failed, using static topic list...")
-    recent = []
-    if HISTORY_FILE.exists():
-        try:
-            recent = json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
-        except Exception:
-            recent = []
+    # ── Priority 2: City Database (40% chance) ──────────────────────
+    from .city_database import get_all_cities, get_city_topic_string
 
-    # Find available topics
     recent_set = set(recent[-exclude_recent:])
+
+    if random.random() < 0.4:
+        # Get unused cities
+        used_city_names = set()
+        for r in recent[-exclude_recent:]:
+            # Extract city name from "[LOCATION: CityName," pattern
+            if "[LOCATION:" in r:
+                try:
+                    name = r.split("[LOCATION:")[1].split(",")[0].strip()
+                    used_city_names.add(name)
+                except (IndexError, ValueError):
+                    pass
+
+        available_cities = [
+            c for c in get_all_cities()
+            if c["name"] not in used_city_names
+        ]
+
+        if available_cities:
+            city = random.choice(available_cities)
+            topic_str = get_city_topic_string(city)
+            logger.info(f"🏛️ ShadowedHistory CITY topic: {city['name']}, {city['location']}")
+            _save_history(recent, topic_str)
+            return {
+                "topic": topic_str,
+                "category": city.get("category", "lost_city"),
+            }
+
+    # ── Priority 3: Static topic list ──────────────────────────────
+    logger.info("📋 Using static topic list...")
     available = []
     for category, topics in TOPICS.items():
         for topic in topics:
@@ -171,15 +205,10 @@ def get_daily_topic(exclude_recent: int = 60) -> dict:
                 available.append({"topic": topic, "category": category})
 
     if not available:
-        # Reset if all used
         available = [{"topic": t, "category": c} for c, ts in TOPICS.items() for t in ts]
 
     chosen = random.choice(available)
-
-    # Save to history
-    recent.append(chosen["topic"])
-    HISTORY_FILE.parent.mkdir(parents=True, exist_ok=True)
-    HISTORY_FILE.write_text(json.dumps(recent[-120:], ensure_ascii=False), encoding="utf-8")
+    _save_history(recent, chosen["topic"])
 
     logger.info(f"🎲 ShadowedHistory topic (static): {chosen['topic'][:60]}...")
     return chosen

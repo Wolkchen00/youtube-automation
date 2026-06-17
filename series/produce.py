@@ -88,7 +88,7 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
             music_path = generate_background_music(ch)
             if music_path and Path(music_path).exists():
                 music_out = out.parent / f"{out.stem}_music.mp4"
-                ffmpeg_tools.mix_background_music(out, music_path, music_out, music_volume=0.10)
+                ffmpeg_tools.mix_background_music(out, music_path, music_out, music_volume=0.18)
                 if music_out.exists() and music_out.stat().st_size > 0:
                     out = music_out
                     logger.info("🎵 Müzik eklendi")
@@ -392,7 +392,12 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
 
     # Birleştir → final export (9:16 dikey)
     raw_ep = episode_dir(slug, number) / f"ep{int(number):02d}_raw.mp4"
-    ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
+    if bible.audio_smooth:
+        # Atmosfer/müzik kanalları: çekim sınırlarında sesi yumuşat (pop/boşluk gider).
+        ffmpeg_tools.concatenate_audio_smooth(shot_files, raw_ep, clips_dir=sdir)
+    else:
+        # Diyalog kanalları: düz birleştir (söz baş/sonu kırpılmasın).
+        ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
     final_ep = episode_dir(slug, number) / f"ep{int(number):02d}.mp4"
     ffmpeg_tools.final_export(raw_ep, final_ep)
 

@@ -1,0 +1,48 @@
+{
+  "episode": { "number": 5, "title": "The Lights" },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Pre-dawn blue light in the cabin. Theo, oddly calm now, films himself bundling into his parka. Theo, quiet: \"Last entry. I think. I keep hearing it — like it's asking. And I think I want to know.\" Realistic handheld found-footage, soft grain, screen glow.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "POV phone footage, Theo walking out across the deep snow toward the frozen lake, breath fogging, the deep hum swelling louder. Boots crunch. Theo, behind camera: \"It's waiting at the lake. It's been waiting the whole time.\" Cold blue dawn, handheld shake, photoreal.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The frozen lake revealed: a vast geometric pattern glowing bright beneath the ice, the tall figure standing at its center as light pours up around it. Theo, voice soft with wonder: \"...it's beautiful. I don't know why I'm not scared anymore.\" Photoreal found-footage, overwhelming light, no music score.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Theo steps out onto the glowing ice toward the figure, the phone shaking, white light washing the frame. The radio in his pocket plays the steady signal pulse. Theo: \"Tell them — tell whoever finds this — I went because I wanted to.\" Handheld, realistic, building to blinding light.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The light becomes blinding; the phone camera overexposes to pure white, the audio peaking into a single clean signal tone. For one instant the tall figure is right in front of the lens. The frame whites out completely. Authentic camera-overload found-footage look.",
+      "speakers": [],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "The phone lies face-up in the snow, screen cracked, still recording. Silence, then wind. Far above the frozen lake a vast light lifts off into the sky and is gone. The corner timestamp glitches and the recording cuts to harsh static. The end. Found-footage realism, ambiguous and haunting, no music.",
+      "speakers": [],
+      "seed": null
+    }
+  ]
+}

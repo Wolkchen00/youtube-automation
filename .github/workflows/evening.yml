@@ -1,10 +1,11 @@
 name: YouTube Evening Upload
 
 on:
-  schedule:
-    # Her gün UTC 21:30 = California 14:30 PM (PDT, UTC-7)
-    - cron: '30 21 * * *'
-  workflow_dispatch:  # Manuel tetikleme butonu
+  # ESKİ demode pipeline TAMAMEN DURDURULDU (tüm işler if:false). Cron de kapatıldı ki
+  # workflow boşuna bile tetiklenmesin → eski/demode videolar artık ASLA yayınlanmaz.
+  # schedule:
+  #   - cron: '30 21 * * *'   # eskiden: UTC 21:30
+  workflow_dispatch:  # yalnızca elle tetiklenebilir (gerekirse)
 
 jobs:
   # ─── Shared setup: checkout + persist history ─────────────────────────────────

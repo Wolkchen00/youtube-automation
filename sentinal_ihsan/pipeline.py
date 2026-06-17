@@ -2,8 +2,8 @@
 Sentinal Ihsan — Full Video Production Pipeline (VEO3 Overhaul)
 
 CRITICAL CHANGES:
-  ✅ 4 clips × 8s = ~32s final (minimum 20s enforced)
-  ✅ VEO3 Lite for video clips (speech + motion)
+  ✅ 4 clips × 5s = ~20s final (minimum 15s enforced)
+  ✅ VEO3 Lite for video clips (silent action + motion)
   ✅ Face reference on ALL frames
   ✅ Smooth crossfade transitions (0.3s — cinematic feel)
   ✅ Action-first prompts (continuous interaction with concept)
@@ -31,7 +31,7 @@ from .competitor import get_daily_topic, get_trending_with_gemini
 from .prompts import FRAME_TEMPLATES, VIDEO_PROMPTS, IDENTITY_LOCK, CAMERA_POV, QUALITY_GUARD
 
 CHANNEL = "sentinal_ihsan"
-NUM_SCENES = 4  # 4 clips × 8s = 32s raw → ~30s final (0.3s crossfade transitions)
+NUM_SCENES = 4  # 4 clips × 5s = 20s raw → ~19s final (0.3s crossfade transitions)
 
 
 def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = False) -> dict | None:
@@ -67,13 +67,13 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         topic_text = daily_topic["topic"]
         setting = daily_topic.get("setting", "room")
         script = {
-            "title": f"You Won't BELIEVE This! 🤯 {topic_text[:40]}",
-            "hook": f"he opens with a hook about {topic_text[:60]}",
+            "title": f"Testing {topic_text[:50]} — The Result Is WILD! 🤯",
+            "hook": f"Close-up of the materials laid out on the workspace, character's hands entering frame to begin the process with {topic_text[:60]}",
             "scene_descriptions": [
-                f"Close-up front camera POV, {setting}, character excitedly tells viewers what he is about to do",
-                f"Character starts interacting with the concept — touching, pouring, painting, or building",
-                f"Character reacts with genuine shock or excitement, continues describing",
-                f"Final wide reveal showing the full result, character asks viewers to comment",
+                f"Close-up front camera POV, {setting}, character silently prepares materials to start the process",
+                f"Character actively interacts with the concept — full body visible, arms connected to torso, silent focus",
+                f"Character continues working, looking satisfied with the progress, no talking",
+                f"Final wide reveal clearly showing the full completed result, character proudly gestures toward it silently",
             ],
             "description": f"Watch what happens when we try {topic_text}! #shorts",
             "hashtags": "#shorts #viral #experiment #mindblown #satisfying",
@@ -100,7 +100,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         logger.info("🏃 DRY RUN — Skipping video production.")
         return {"date": today, "topic": daily_topic["topic"], "title": title, "dry_run": True}
 
-    # 4. Generate visual prompts (6 scenes)
+    # 4. Generate visual prompts (4 scenes)
     logger.info(f"\n🎨 GENERATING {NUM_SCENES} VISUAL PROMPTS...")
     visual_prompts = generate_visual_prompts(CHANNEL, script)
 
@@ -121,7 +121,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
                 "frame_number": idx,
                 "frame_prompt": f"{FRAME_TEMPLATES[sk]} Topic: {daily_topic['topic'][:80]}",
                 "video_prompt": VIDEO_PROMPTS[vk],
-                "duration_seconds": 10,
+                "duration_seconds": 5,
             })
 
     # Trim to exactly NUM_SCENES
@@ -186,7 +186,7 @@ def run_pipeline(topic: str = None, dry_run: bool = False, skip_upload: bool = F
         start_frame = frames[i]
         end_frame = frames[i + 1] if (i + 1) < len(frames) else None
         vp = visual_prompts[i] if i < len(visual_prompts) else visual_prompts[-1]
-        video_prompt = vp.get("video_prompt", "Character talks to camera excitedly. Natural smartphone video. 10 seconds.")
+        video_prompt = vp.get("video_prompt", "Character silently works on the concept. Natural smartphone video. 5 seconds.")
 
         logger.info(f"  Clip {i+1}: Frame {i} → motion [{model_name}]...")
 

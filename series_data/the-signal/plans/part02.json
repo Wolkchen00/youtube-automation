@@ -1,0 +1,48 @@
+{
+  "episode": { "number": 2, "title": "The Tracks" },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Daylight, POV phone footage, Theo trudging through deep snow following the strange evenly-spaced tracks away from the cabin toward the lake, boots crunching, breath fogging. Theo, behind camera: \"Following them in daylight. Feels stupid. But I have to know.\" Overcast cold light, handheld shake, photoreal found-footage.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "POV phone footage at the edge of the vast frozen lake: a perfect circular ring melted clean through the ice and refrozen, far too precise to be natural. Theo films it from above, hand shaking. Theo: \"There's a circle. Melted clean through, then frozen over. A perfect circle.\" Cold daylight, snow-dusted ice, realistic.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Phone footage glitching hard as Theo steps closer to the ring: the screen tears, the corner timestamp scrambles, the audio warbles and pops. Theo, alarmed, behind camera: \"Whoa — my phone's freaking out. The closer I get the worse it—\" a burst of static cuts him off. Authentic digital-malfunction found-footage look.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Theo backs away, the deep hum returning even in daylight. He tilts the phone up to the pale daytime sky: beside the faint daytime moon hangs a second small steady light. Theo, quiet, unnerved: \"...is something next to the moon? In the middle of the day?\" Handheld, photoreal, no music.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Dusk inside the cabin, phone footage. Theo wedges a wooden chair under the door handle, then props his phone on the table aimed at the frosted window, the lens settling. Theo: \"Setting the phone here tonight. If something's out there, I want it on camera.\" Dim lantern light, realistic, tense.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "Locked-off night footage with a faint green night-vision cast. The porch motion light snaps on. At the treeline across the snow stands a tall, thin silhouette, perfectly still, its eyes catching the light. Theo whispers off-camera: \"...there. Do you see it? It hasn't moved in ten minutes.\" The shot holds on the motionless figure. Found-footage realism, deeply eerie.",
+      "speakers": ["theo"],
+      "seed": null
+    }
+  ]
+}

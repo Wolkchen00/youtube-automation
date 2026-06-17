@@ -1,0 +1,48 @@
+{
+  "episode": { "number": 4, "title": "Inside" },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Grey dawn light, exhausted Theo films the cabin: the door still shut, the chair still wedged. Theo, hollow: \"Made it to morning. Door never opened. But...\" He slowly tilts the phone down toward the floor. Realistic handheld found-footage, washed-out morning grain.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Phone footage of the wooden floorboards: a perfect ring is burned into the wood, faintly warm, a thread of smoke still curling up. Theo, shaken, behind camera: \"It's on the floor. Inside. The same circle, burned right into the wood. It was IN here.\" Photoreal, eerie, dim light.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The soft hum now seems to come from the walls and the radio at once. Theo films the radio; in the curved glass of its dial, the tall figure's calm reflection appears, observing. Radio voice, gentle, mimicking him: \"...not going to hurt you.\" Theo goes very still. Realistic, quietly terrifying.",
+      "speakers": ["radio"],
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Theo backs to the window and films the frozen lake: a huge faint geometric pattern now glows under the ice, stretching across the whole lake. Theo, awed and afraid: \"The whole lake. There's something under the whole lake.\" Cold daylight, handheld, photoreal.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Tight, shaky selfie-cam close on Theo's face, a faint pulsing light reflected in his eyes. He speaks strangely calm now, as if being shown something. Theo: \"It's showing me things. Places. It keeps showing me the lake.\" Realistic found-footage, screen glow, unsettling stillness.",
+      "speakers": ["theo"],
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "Theo lowers the phone slightly; in the cabin doorway stands the tall figure, haloed in pale dawn light, one long hand slowly raised — not a threat, an invitation. The shot holds, breath fogging the lens. Found-footage realism, awe and dread, no music.",
+      "speakers": ["theo"],
+      "seed": null
+    }
+  ]
+}
