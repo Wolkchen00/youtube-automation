@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "publish_mode": "auto",
   "parts": {
@@ -25,6 +25,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-16T22:40:30.578383+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep02/ep02.mp4",
+      "subtitle": "The Frozen Giant",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-17T17:41:25.912486+00:00"
     }
   }
 }

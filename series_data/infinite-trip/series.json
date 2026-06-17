@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "publish_mode": "auto",
   "parts": {
@@ -25,7 +25,18 @@
         "youtube"
       ],
       "published_at": "2026-06-16T22:37:14.759473+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep02/ep02.mp4",
+      "subtitle": "The Liquid City",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-17T17:57:18.564957+00:00"
     }
   },
-  "last_frame_url": "https://i.ibb.co/tpmhdcPm/shot-06-lastframe.png"
+  "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"
 }
