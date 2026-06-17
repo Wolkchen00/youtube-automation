@@ -13,6 +13,7 @@
   "total_parts": 5,
   "next_part": 3,
   "status": "active",
+  "standalone": true,
   "publish_mode": "auto",
   "parts": {
     "1": {

@@ -6,7 +6,7 @@
     "resolution": "1080p",
     "engine": "omni",
     "native_audio": false,
-    "chain_frames": true
+    "chain_frames": false
   },
   "art_style": "Hyper-saturated psychedelic dreamscape, fractal patterns, liquid morphing geometry, kaleidoscopic symmetry, bioluminescent neon colors bleeding and breathing, impossible Escher architecture, melting reality, infinite recursive tunnels, visionary DMT machine-elf art, ultra-smooth seamless morphing motion, 8K, mesmerizing and hypnotic, vertical 9:16, no on-screen text.",
   "style_ref_url": null,

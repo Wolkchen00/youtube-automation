@@ -1,7 +1,7 @@
 {
   "slug": "ava-voyage",
   "base_title": "AVA: The Last Voyage",
-  "logline": "Earth went silent. AVA, the AI of humanity's last starship, is taking you to the edge of the galaxy to find out why.",
+  "logline": "AVA, the AI of humanity's last starship, takes you to the edge of the galaxy to witness its most impossible wonders.",
   "language": "en",
   "upload_profile": "galacticexperimet",
   "platforms": [
@@ -13,6 +13,7 @@
   "total_parts": 5,
   "next_part": 3,
   "status": "active",
+  "standalone": true,
   "publish_mode": "auto",
   "parts": {
     "1": {

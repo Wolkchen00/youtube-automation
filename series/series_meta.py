@@ -57,15 +57,36 @@ class SeriesMeta:
     def next_part(self) -> int: return int(self.data.get("next_part", 1))
     @property
     def status(self) -> str: return self.data.get("status", "active")
+    @property
+    def standalone(self) -> bool:
+        """True ise her video BAĞIMSIZ/tam bir parça olarak sunulur: başlıkta 'Part N'
+        yok, açıklamada 'seriyi takip et / her gün yeni part' çağrısı yok. Hikâye
+        kurmayan atmosfer/belgesel kanalları içindir (her video kendi başına izlenir).
+        Hikâye dizileri (ör. The Signal) bunu KULLANMAZ → seri çerçevesi korunur."""
+        return bool(self.data.get("standalone", False))
 
-    # -- başlık / açıklama (Part N) --
+    # -- başlık / açıklama --
     def title_for(self, n: int, subtitle: str = "") -> str:
+        if self.standalone:
+            # Bağımsız video: kendi alt-başlığı tek başına başlık olur (kanca).
+            return (subtitle or self.base_title)[:100]
         t = f"{self.base_title} — Part {n}"
         if subtitle:
             t += f": {subtitle}"
         return t[:100]
 
     def description_for(self, n: int, subtitle: str = "") -> str:
+        if self.standalone:
+            # Bağımsız video: seri/part çerçevesi YOK, tek başına tam bir parça.
+            lines = []
+            if subtitle:
+                lines.append(subtitle)
+            if self.logline:
+                lines.append(self.logline)
+            lines.append("\n▶ Subscribe for more.")
+            if self.hashtags:
+                lines.append("\n" + self.hashtags)
+            return "\n".join(lines)[:4900]
         lines = [f"{self.base_title} — Part {n} of {self.total_parts}."]
         if subtitle:
             lines.append(subtitle)
