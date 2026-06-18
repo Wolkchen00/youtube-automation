@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -37,6 +37,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-17T18:12:07.972379+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep03/ep03.mp4",
+      "subtitle": "The Cities Beneath the Earth",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-18T18:32:33.391260+00:00"
     }
   }
 }

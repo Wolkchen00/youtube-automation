@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -37,6 +37,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-17T17:57:18.564957+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep03/ep03.mp4",
+      "subtitle": "The Forest of Eyes",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-18T18:17:40.700585+00:00"
     }
   },
   "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"
