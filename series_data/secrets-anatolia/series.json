@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -48,6 +48,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-18T18:32:33.391260+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep04/ep04.mp4",
+      "subtitle": "The Wonder a Madman Burned",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-19T17:28:23.618199+00:00"
     }
   }
 }

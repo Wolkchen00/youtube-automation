@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -48,6 +48,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-18T18:03:20.321907+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep04/ep04.mp4",
+      "subtitle": "The Garden World",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-19T16:56:55.267255+00:00"
     }
   }
 }
