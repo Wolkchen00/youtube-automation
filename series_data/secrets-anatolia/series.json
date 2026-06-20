@@ -11,8 +11,8 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 5,
-  "next_part": 5,
-  "status": "active",
+  "next_part": 6,
+  "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -59,6 +59,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-19T17:28:23.618199+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep05/ep05.mp4",
+      "subtitle": "The Fall of the Queen of Cities",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-20T16:39:45.827150+00:00"
     }
   }
 }

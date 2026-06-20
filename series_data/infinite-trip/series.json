@@ -11,8 +11,8 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 5,
-  "next_part": 5,
-  "status": "active",
+  "next_part": 6,
+  "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -59,6 +59,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-19T17:14:24.304399+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep05/ep05.mp4",
+      "subtitle": "The Machine Elves",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-20T16:25:02.555991+00:00"
     }
   },
   "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"

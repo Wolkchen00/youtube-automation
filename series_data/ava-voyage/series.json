@@ -11,8 +11,8 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 5,
-  "next_part": 5,
-  "status": "active",
+  "next_part": 6,
+  "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -59,6 +59,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-19T16:56:55.267255+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep05/ep05.mp4",
+      "subtitle": "The Last Message",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-20T16:10:29.163099+00:00"
     }
   }
 }
