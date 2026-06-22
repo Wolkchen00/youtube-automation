@@ -4,7 +4,7 @@ Narration Generator — AIMagine Building Stories with Female Voice
 Generates engaging narration scripts and converts to audio using
 Gemini TTS. Each build gets a different storytelling style for A/B testing.
 
-Model: gemini-2.5-flash-tts (low-latency, natural speech)
+Model: gemini-2.5-flash-preview-tts (low-latency, natural speech)
 Voice: Kore (female, energetic)
 """
 
@@ -174,7 +174,7 @@ def generate_voiceover(
             full_prompt = text
 
         response = client.models.generate_content(
-            model="gemini-2.5-flash-tts",
+            model="gemini-2.5-flash-preview-tts",
             contents=full_prompt,
             config=types.GenerateContentConfig(
                 response_modalities=["audio"],
@@ -331,7 +331,7 @@ def create_narration_for_channel(
         full_prompt = f"[{instruction}] {narration_text}" if instruction else narration_text
 
         response = client.models.generate_content(
-            model="gemini-2.5-flash-tts",
+            model="gemini-2.5-flash-preview-tts",
             contents=full_prompt,
             config=types.GenerateContentConfig(
                 response_modalities=["audio"],
