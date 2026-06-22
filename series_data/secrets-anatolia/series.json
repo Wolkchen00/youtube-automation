@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -70,6 +70,16 @@
         "tiktok"
       ],
       "published_at": "2026-06-20T16:39:45.827150+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep06/ep06_narrated.mp4",
+      "subtitle": "The Temple Before Time",
+      "platforms_ok": [
+        "youtube",
+        "instagram"
+      ],
+      "published_at": "2026-06-22T18:18:22.891053+00:00"
     }
   }
 }

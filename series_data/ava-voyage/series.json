@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -70,6 +70,16 @@
         "tiktok"
       ],
       "published_at": "2026-06-20T16:10:29.163099+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep06/ep06_narrated.mp4",
+      "subtitle": "The Black Heart",
+      "platforms_ok": [
+        "youtube",
+        "instagram"
+      ],
+      "published_at": "2026-06-22T17:50:53.947450+00:00"
     }
   }
 }

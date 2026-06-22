@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -70,6 +70,16 @@
         "tiktok"
       ],
       "published_at": "2026-06-20T16:25:02.555991+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep06/ep06.mp4",
+      "subtitle": "The Breathing Cathedral",
+      "platforms_ok": [
+        "youtube",
+        "instagram"
+      ],
+      "published_at": "2026-06-22T18:05:00.909688+00:00"
     }
   },
   "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"
