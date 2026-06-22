@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -80,6 +80,16 @@
         "instagram"
       ],
       "published_at": "2026-06-22T18:05:00.909688+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep07/ep07_music.mp4",
+      "subtitle": "Liquid Gold",
+      "platforms_ok": [
+        "youtube",
+        "instagram"
+      ],
+      "published_at": "2026-06-22T19:08:51.452763+00:00"
     }
   },
   "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"
