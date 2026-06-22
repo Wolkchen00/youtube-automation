@@ -34,6 +34,16 @@ import subprocess
 REPO = os.environ.get("GITHUB_REPOSITORY", "Wolkchen00/youtube-automation")
 
 
+def _alert(msg: str) -> None:
+    """Telegram'a sessizce uyarı gönder (token/chat yoksa no-op). Üretim/yayın
+    başarısızlıklarının GÜNLERCE fark edilmeden geçmesini engeller."""
+    try:
+        if notifier.enabled():
+            notifier.send_message(msg)
+    except Exception as e:
+        logger.warning(f"⚠️ Uyarı bildirimi gönderilemedi: {e}")
+
+
 def _sample_frames(video_path, count: int = 3) -> list[str]:
     """Final videodan önizleme kareleri çıkar (Telegram onay mesajı için)."""
     ff = shutil.which("ffmpeg")
@@ -139,6 +149,8 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
         return True
     if not video:
         logger.error(f"❌ Part {n} üretilemedi — durum ilerletilmedi (sonraki çalıştırmada tekrar denenir).")
+        _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLEMEDİ (içerik filtresi / motor hatası olabilir). "
+               f"Bu kanala video çıkmadı — plan/prompt kontrol edilmeli.")
         return False
     meta.mark_produced(n, video, subtitle)
     # Zincir: bu bölümün son karesini sonraki bölüm için series.json'a yaz (bulut-kalıcı).
@@ -184,18 +196,25 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
         logger.info(f"🎉 Part {n} yayınlandı ({', '.join(ok)}): {meta.title_for(n, subtitle)}")
         return True
     logger.error(f"❌ Part {n} hiçbir platforma yayınlanamadı — durum ilerletilmedi (yarın tekrar denenir).")
+    _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLDİ ama hiçbir platforma YAYINLANAMADI "
+           f"(upload-post / hesap bağlantısı kontrol edilmeli).")
     return False
 
 
-def run_all(dry_run: bool = False, publish: bool = True):
-    """Tüm aktif serilerin sıradaki part'ını çalıştır."""
+def run_all(dry_run: bool = False, publish: bool = True) -> bool:
+    """Tüm aktif serilerin sıradaki part'ını çalıştır. Hepsi başarılıysa True."""
     slugs = list_active_series()
     if not slugs:
         logger.info("Aktif seri yok.")
-        return
+        _alert("ℹ️ *Seri otomasyonu:* Aktif seri kalmadı — tüm diziler tamamlandı. "
+               "Yeni sezon/part eklenene kadar bu kanallara yeni video ÇIKMAYACAK.")
+        return True
     logger.info(f"Aktif seriler: {', '.join(slugs)}")
+    all_ok = True
     for slug in slugs:
-        run_next(slug, dry_run=dry_run, publish=publish)
+        ok = run_next(slug, dry_run=dry_run, publish=publish)
+        all_ok = all_ok and bool(ok)
+    return all_ok
 
 
 def main(argv: list[str]):
@@ -207,9 +226,12 @@ def main(argv: list[str]):
         if i + 1 < len(argv):
             slug = argv[i + 1]
     if slug:
-        run_next(slug, dry_run=dry, publish=not no_pub)
+        ok = run_next(slug, dry_run=dry, publish=not no_pub)
     else:
-        run_all(dry_run=dry, publish=not no_pub)
+        ok = run_all(dry_run=dry, publish=not no_pub)
+    # Gerçek bir üretim/yayın başarısızlığında iş KIRMIZI görünsün (sessiz 'success' yerine).
+    if not dry and ok is False:
+        sys.exit(1)
 
 
 if __name__ == "__main__":

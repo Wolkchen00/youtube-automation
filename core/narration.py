@@ -264,8 +264,12 @@ CHANNEL_NARRATION_CONFIG = {
         "instruction": None,  # Uses existing NARRATION_STYLES
     },
     "sentinal_ihsan": {
-        "voice": None,  # No narration — character talks to camera
-        "instruction": None,
+        "voice": "Charon",  # Deep male voice — found-footage video diary
+        "instruction": (
+            "Speak in a hushed, tense first-person voice, like a man quietly narrating his own "
+            "phone footage alone at night — trying to stay calm but clearly unnerved. Low volume, "
+            "close and intimate, with uneasy pauses. Never shout; the fear is in the restraint."
+        ),
     },
 }
 

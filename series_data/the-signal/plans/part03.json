@@ -1,47 +1,41 @@
 {
   "episode": { "number": 3, "title": "Contact" },
-  "narration": "",
+  "narration": "The power's gone. Just the flashlight now, and the phone at thirty percent. There's something at the window. Tall, thin. It was at the treeline an hour ago. It's halfway across the yard now, and it doesn't walk like a person. Then the radio turned itself on. It isn't even plugged in. It's playing my own voice back at me, the things I said that first night. I keep spinning around, checking every corner. I don't want it behind me. Something just knocked on the glass. Once. Twice. And the knocking, it's matching that hum, the same rhythm as the lights. It knows I can hear it. The door is wedged shut. The handle is starting to turn.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "The cabin plunges into darkness, only the phone flashlight beam shaking around the room. Theo, scared, behind camera: \"Power's gone. Whole cabin. Phone's at thirty percent.\" The beam jitters across the stove and door. Authentic low-light found-footage grain, very dark, tense.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage as the cabin plunges into darkness, only a shaking phone-flashlight beam jittering across the wood stove and door. Authentic very-dark low-light found-footage grain, tense. No people.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Phone footage through the frosted window: the tall slender figure is closer now, halfway across the moonlit snow, head tilted, not walking like a person. Theo, breath trembling the camera: \"It's in the yard. It's just... watching me back.\" Cold blue night, handheld, photoreal, dread.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage through a frosted window: far out on the moonlit snow a tall, slender silhouette stands halfway across the yard, head tilted at a wrong angle, not standing like a person. Cold blue night, handheld, photoreal dread. Figure distant and dark.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "The dead, unpowered CB radio suddenly crackles ON by itself, its dial glowing. It plays back Theo's OWN earlier voice. Radio (Theo's recorded voice, distorted): \"...day one... just me...\" Theo, terrified, filming the radio: \"That's me. That's my voice. How does it have my voice?\" Realistic, unsettling, low light.",
-      "speakers": ["radio", "theo"],
+      "prompt": "Silent POV phone footage in the dark cabin, close on the old CB radio as its dial suddenly glows and lights up by itself, the needle pulsing. A gloved hand hovers near it, hesitating. Realistic, unsettling, low light. No face shown.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Theo spins the phone around the dark cabin, breathing hard, flashlight smearing. For a single frame the reflection in the black window shows the tall figure standing right behind him — then it's gone, and he doesn't notice. Authentic handheld found-footage, blink-and-miss-it scare, photoreal.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage whipping around the dark cabin, flashlight smearing across the walls. For a single frame the reflection in a black window shows a tall figure standing far behind in the dark, then it's gone. Authentic handheld blink-and-miss-it found-footage scare. No clear face.",
       "seed": null
     },
     {
       "n": 5,
       "duration": "8",
-      "prompt": "A slow, deliberate knock sounds on the window. Then a second. Theo freezes, the phone trembling in his grip, flashlight on the glass. Theo, barely a whisper: \"...it knocked. Okay. Okay. I'm not opening anything.\" Tense silence, realistic low-light footage.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage holding on a frosted, frozen window, flashlight trembling on the glass. Frost crystals creep across the pane. The frame is dead still with tension, breath fog at the edge of the lens. Realistic low-light footage. No people.",
       "seed": null
     },
     {
       "n": 6,
       "duration": "8",
-      "prompt": "The knocking settles into the same rhythm as the signal's pulse. The phone flashlight flickers. Theo backs into the corner, aiming the camera at the wedged door. The shot ends on the door handle slowly, silently beginning to turn. Found-footage realism, maximum suspense.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage, the flashlight flickering, the camera backing into a corner and aiming at the wedged cabin door. The shot ends on the door handle slowly, silently beginning to turn. Found-footage realism, maximum suspense. No people on screen.",
       "seed": null
     }
   ]

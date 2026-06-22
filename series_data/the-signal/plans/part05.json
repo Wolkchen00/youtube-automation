@@ -1,47 +1,41 @@
 {
   "episode": { "number": 5, "title": "The Lights" },
-  "narration": "",
+  "narration": "I'm not scared anymore. I don't really know why. I'm going out to the lake. It wants me to, and I can feel it, like a tide pulling. The whole lake is lit from underneath now, a shape too big and too perfect to be real, standing on the ice, waiting for me. I'm walking out to it. The light is so bright it doesn't even hurt; it feels like being remembered. So if you found this phone in the snow, I'm not coming back, and that's okay. Don't come looking for the lights. And if you ever hear that hum start up over your own quiet little lake, do the one thing it told me on the very first night. Stay inside.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Pre-dawn blue light in the cabin. Theo, oddly calm now, films himself bundling into his parka. Theo, quiet: \"Last entry. I think. I keep hearing it — like it's asking. And I think I want to know.\" Realistic handheld found-footage, soft grain, screen glow.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage in pre-dawn blue light: a gloved hand zips up a snow parka, picks up the phone and a flashlight from the table. Calm, deliberate movements. Soft grain, screen glow, realistic found-footage. No face shown.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "POV phone footage, Theo walking out across the deep snow toward the frozen lake, breath fogging, the deep hum swelling louder. Boots crunch. Theo, behind camera: \"It's waiting at the lake. It's been waiting the whole time.\" Cold blue dawn, handheld shake, photoreal.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage walking out across deep snow toward the frozen lake at blue dawn, breath fogging, boots crunching in frame. Ahead, a glow builds low over the ice. Cold blue light, handheld shake, photoreal. No people visible.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "The frozen lake revealed: a vast geometric pattern glowing bright beneath the ice, the tall figure standing at its center as light pours up around it. Theo, voice soft with wonder: \"...it's beautiful. I don't know why I'm not scared anymore.\" Photoreal found-footage, overwhelming light, no music score.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage of the frozen lake revealed: a vast geometric pattern glowing bright beneath the ice, and at its center a tall figure standing far off as light pours up around it. Overwhelming light, photoreal found-footage. Figure distant and backlit, featureless.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Theo steps out onto the glowing ice toward the figure, the phone shaking, white light washing the frame. The radio in his pocket plays the steady signal pulse. Theo: \"Tell them — tell whoever finds this — I went because I wanted to.\" Handheld, realistic, building to blinding light.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage stepping out onto the glowing ice toward the distant figure, brilliant white light steadily washing into the frame, the handheld camera shaking. Building to blinding light. Realistic found-footage. No clear face.",
       "seed": null
     },
     {
       "n": 5,
       "duration": "8",
-      "prompt": "The light becomes blinding; the phone camera overexposes to pure white, the audio peaking into a single clean signal tone. For one instant the tall figure is right in front of the lens. The frame whites out completely. Authentic camera-overload found-footage look.",
-      "speakers": [],
+      "prompt": "Silent POV phone footage as the light becomes blinding and the camera overexposes toward pure white. For one instant a tall featureless silhouette is centered in the glare, then the frame whites out completely. Authentic camera-overload found-footage look. No gore.",
       "seed": null
     },
     {
       "n": 6,
       "duration": "8",
-      "prompt": "The phone lies face-up in the snow, screen cracked, still recording. Silence, then wind. Far above the frozen lake a vast light lifts off into the sky and is gone. The corner timestamp glitches and the recording cuts to harsh static. The end. Found-footage realism, ambiguous and haunting, no music.",
-      "speakers": [],
+      "prompt": "Silent footage: a phone lies face-up in the snow, screen cracked, still recording. Wind drifts snow over the lens. Far above the frozen lake a vast light lifts off into the sky and is gone. The corner timestamp glitches and the picture cuts to harsh static. Found-footage realism, haunting, no people.",
       "seed": null
     }
   ]

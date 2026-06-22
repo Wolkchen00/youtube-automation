@@ -14,6 +14,43 @@ from .config import UPLOAD_POST_API_KEY, UPLOAD_USERS, CHANNEL_PLATFORMS, logger
 UPLOAD_POST_URL = "https://api.upload-post.com/api/upload"
 
 
+def _platform_result(body: dict, platform: str) -> dict | None:
+    """Upload-Post yanıtındaki tek platforma ait sonucu bul (varsa)."""
+    if not isinstance(body, dict):
+        return None
+    results = body.get("results")
+    if isinstance(results, dict):
+        entry = results.get(platform)
+        if isinstance(entry, dict):
+            return entry
+    return None
+
+
+def _body_indicates_failure(body: dict, platform: str) -> bool:
+    """HTTP 200 olsa bile gövde açıkça başarısızlık bildiriyor mu?
+
+    Muhafazakâr davranır: yalnızca success alanı AÇIKÇA False ise True döner.
+    Alan yoksa (eski/farklı şema) işi bozmamak için False (başarı) kabul edilir.
+    """
+    if not isinstance(body, dict):
+        return False
+    entry = _platform_result(body, platform)
+    if entry is not None and entry.get("success") is False:
+        return True
+    return body.get("success") is False
+
+
+def _extract_error(body: dict, platform: str) -> str:
+    """Yanıttan insan-okur hata mesajını çıkar (loglamak için)."""
+    entry = _platform_result(body, platform) or {}
+    for src in (entry, body if isinstance(body, dict) else {}):
+        for k in ("error", "message", "error_message", "detail"):
+            v = src.get(k)
+            if v:
+                return str(v)[:300]
+    return str(body)[:300]
+
+
 def upload_to_platform(
     video_path: Path,
     title: str,
@@ -68,22 +105,37 @@ def upload_to_platform(
                     timeout=300
                 )
 
-            result = response.json()
-            if response.status_code == 200:
+            result = response.json() if response.content else {}
+
+            # ⚠️ Upload-Post HTTP 200 dönse BİLE gövdede başarısızlık bildirebilir
+            # (ör. TikTok geçici kısıtlaması, sosyal hesap kopması). Sadece HTTP
+            # koduna güvenmek, kanala hiç düşmeyen videoyu "✅ yayınlandı" gösterir.
+            # Bu yüzden gövdedeki success alanını da kontrol ediyoruz.
+            body_failed = _body_indicates_failure(result, platform)
+
+            if response.status_code == 200 and not body_failed:
                 logger.info(f"✅ {platform.upper()} uploaded: {title[:50]}...")
                 return result
-            else:
-                logger.error(f"❌ {platform.upper()} upload error (HTTP {response.status_code}): {result}")
-                # Don't retry on auth/client errors (4xx)
-                if 400 <= response.status_code < 500:
-                    return None
-                # Retry on server errors (5xx)
-                if attempt < MAX_UPLOAD_ATTEMPTS - 1:
-                    wait = UPLOAD_BACKOFF[attempt]
-                    logger.info(f"  ⏳ Retrying in {wait}s (attempt {attempt + 2}/{MAX_UPLOAD_ATTEMPTS})...")
-                    time.sleep(wait)
-                    continue
+
+            err = _extract_error(result, platform)
+            if response.status_code == 200 and body_failed:
+                # API isteği geçti ama platforma gerçekte düşmedi → bu koşuda yeniden
+                # denemek anlamsız (TikTok 'birkaç saat sonra' der). Sessizce başarı
+                # sayma; None dön ki seri bu platformu 'OK' işaretlemesin.
+                logger.error(f"❌ {platform.upper()} REDDEDİLDİ (HTTP 200 ama success=false): {err}")
                 return None
+
+            logger.error(f"❌ {platform.upper()} upload error (HTTP {response.status_code}): {err}")
+            # Don't retry on auth/client errors (4xx)
+            if 400 <= response.status_code < 500:
+                return None
+            # Retry on server errors (5xx)
+            if attempt < MAX_UPLOAD_ATTEMPTS - 1:
+                wait = UPLOAD_BACKOFF[attempt]
+                logger.info(f"  ⏳ Retrying in {wait}s (attempt {attempt + 2}/{MAX_UPLOAD_ATTEMPTS})...")
+                time.sleep(wait)
+                continue
+            return None
 
         except (requests.exceptions.SSLError, requests.exceptions.ConnectionError) as e:
             logger.error(f"❌ Upload-Post connection error (attempt {attempt + 1}/{MAX_UPLOAD_ATTEMPTS}): {e}")

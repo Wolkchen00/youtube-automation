@@ -324,6 +324,16 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                             f"{json.dumps(payload, ensure_ascii=False, indent=2)[:700]}")
                 continue
             result = generate_omni_shot(**kwargs)
+            # GÜVENLİK AĞI: İçerik filtresi en sık KONUŞAN İNSAN (audio_ids) çekimlerini
+            # 'flagged content' diye reddeder. Sesli çekim başarısızsa sesi düşürüp SESSİZ
+            # görsel olarak bir kez daha dene — anlatım zaten post'ta eklendiği için seri
+            # tamamen durmaz (bir dizinin günlerce sessizce çökmesini engeller).
+            if (not result or not result.get("url")) and kwargs.get("audio_ids"):
+                logger.warning("⚠️ Sesli çekim başarısız (muhtemelen içerik filtresi) → "
+                               "SESSİZ görsel olarak yeniden deneniyor (ses post-anlatıma bırakılır)")
+                fb_kwargs = dict(kwargs)
+                fb_kwargs["audio_ids"] = []
+                result = generate_omni_shot(**fb_kwargs)
             credits, status, video_url = None, "FAIL", ""
             if result and result.get("url"):
                 video_url = result["url"]

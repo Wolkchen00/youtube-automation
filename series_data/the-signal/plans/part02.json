@@ -1,47 +1,41 @@
 {
   "episode": { "number": 2, "title": "The Tracks" },
-  "narration": "",
+  "narration": "They go in a perfect circle. Whatever made them walked around me all night while I sat ten feet away. I followed them down to the lake. There's a ring melted clean through the ice and frozen over again, too perfect to be natural. My phone won't behave near it, the screen tears, the timestamp jumps an hour every time I get close. Then the hum came back in broad daylight. I looked up, and beside the daytime moon there was a second light, just hanging there. Tonight I'm not taking chances. Chair under the door. Camera on the window. If you're watching this, the porch light just came on by itself. And there is something standing at the treeline that has not moved in ten minutes.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Daylight, POV phone footage, Theo trudging through deep snow following the strange evenly-spaced tracks away from the cabin toward the lake, boots crunching, breath fogging. Theo, behind camera: \"Following them in daylight. Feels stupid. But I have to know.\" Overcast cold light, handheld shake, photoreal found-footage.",
-      "speakers": ["theo"],
+      "prompt": "Silent daylight POV phone footage following strange evenly-spaced tracks through deep snow away from the cabin toward the lake; boots crunch in frame, breath fogs the lens. Overcast cold light, handheld shake, soft film grain. No people.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "POV phone footage at the edge of the vast frozen lake: a perfect circular ring melted clean through the ice and refrozen, far too precise to be natural. Theo films it from above, hand shaking. Theo: \"There's a circle. Melted clean through, then frozen over. A perfect circle.\" Cold daylight, snow-dusted ice, realistic.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage at the edge of a vast frozen lake, looking down at a perfect circular ring melted clean through the ice and refrozen, far too precise to be natural. Cold daylight, snow-dusted ice, light grain. No people on screen.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Phone footage glitching hard as Theo steps closer to the ring: the screen tears, the corner timestamp scrambles, the audio warbles and pops. Theo, alarmed, behind camera: \"Whoa — my phone's freaking out. The closer I get the worse it—\" a burst of static cuts him off. Authentic digital-malfunction found-footage look.",
-      "speakers": ["theo"],
+      "prompt": "Silent phone footage glitching hard near the ring: the screen tears, the corner timestamp scrambles, blocks of digital noise crawl across the frame, the image warps. Authentic camera-malfunction found-footage look. No people.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Theo backs away, the deep hum returning even in daylight. He tilts the phone up to the pale daytime sky: beside the faint daytime moon hangs a second small steady light. Theo, quiet, unnerved: \"...is something next to the moon? In the middle of the day?\" Handheld, photoreal, no music.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage tilting up to a pale overcast daytime sky: beside the faint daytime moon hangs a second small, steady light. The frame drifts, handheld and uneasy. Photoreal, mysterious. No people on screen.",
       "seed": null
     },
     {
       "n": 5,
       "duration": "8",
-      "prompt": "Dusk inside the cabin, phone footage. Theo wedges a wooden chair under the door handle, then props his phone on the table aimed at the frosted window, the lens settling. Theo: \"Setting the phone here tonight. If something's out there, I want it on camera.\" Dim lantern light, realistic, tense.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage at dusk inside the cabin: a gloved hand wedges a wooden chair under the door handle, then sets the phone on the table aimed at the frosted window, the lens settling into a locked-off shot. Dim lantern light, tense. Face never shown.",
       "seed": null
     },
     {
       "n": 6,
       "duration": "8",
-      "prompt": "Locked-off night footage with a faint green night-vision cast. The porch motion light snaps on. At the treeline across the snow stands a tall, thin silhouette, perfectly still, its eyes catching the light. Theo whispers off-camera: \"...there. Do you see it? It hasn't moved in ten minutes.\" The shot holds on the motionless figure. Found-footage realism, deeply eerie.",
-      "speakers": ["theo"],
+      "prompt": "Silent locked-off night footage with a faint green low-light cast. A porch light snaps on. Far away at the treeline across the snow stands a tall, thin silhouette, distant and perfectly still. The shot holds on the motionless distant figure. Found-footage realism, deeply eerie, no gore.",
       "seed": null
     }
   ]

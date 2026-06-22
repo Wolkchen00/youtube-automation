@@ -7,16 +7,16 @@
     "engine": "omni",
     "audio_smooth": true
   },
-  "art_style": "FOUND-FOOTAGE REALISM — looks like REAL footage filmed on a phone, not a movie. Vertical 9:16 handheld home-video look: natural available light only (headlamp beam, flashlight, phone-screen glow, moonlight on snow, occasional night-vision green), authentic handheld shake and motion blur, brief autofocus hunting, mild digital noise and grain in the dark, NO cinematic color grading, NO music score (only diegetic sound and a faint low signal hum). Cold blue winter night, deep snow, visible breath fog. Photoreal, grounded, documentary. A small glitchy timestamp may flicker in a corner. ABSOLUTELY no captions, subtitles, on-screen text, logos or watermarks. Keep it tense and believable, never gory.",
+  "art_style": "Cinematic found-footage style of a FICTIONAL sci-fi short film — a vertical 9:16 handheld camcorder look. Natural available light only (headlamp beam, flashlight, phone-screen glow, moonlight on snow), gentle handheld camera movement and motion blur, soft autofocus shifts, light film grain in the dark, no heavy color grading, no in-frame music (only faint ambient room tone and a low signal hum). Cold blue winter night, deep snow, visible breath fog. Atmospheric, mysterious, suspenseful sci-fi mood. No captions, subtitles, on-screen text, logos or watermarks. Never graphic or gory. IMPORTANT: this is a silent visual shot — do NOT render any person speaking, lip-sync or talking to camera; the voice is added separately as narration.",
   "style_ref_url": null,
   "music": true,
-  "narration": {},
+  "narration": { "channel": "sentinal_ihsan" },
   "characters": [
     {
       "id": "theo",
       "name": "Theo",
       "bio": "Sıradan bir adam — kışı tek başına izole bir orman kabininde geçiren kış bekçisi/araştırmacı. Yaşadıklarını telefonuyla kaydeder. Çoğunlukla kamerayı tutan kişidir (POV), nadiren selfie/ayna yansımasında görünür. Sakinken giderek korkuya kapılır.",
-      "appearance": "An ordinary man in his early 30s bundled in a heavy snow parka, knit beanie and a headlamp, tired stubble, breath fogging in the cold. Usually unseen behind the camera (point-of-view); occasionally glimpsed in a phone selfie-cam or a frosted window reflection. Looks like a real person, NOT a model or actor.",
+      "appearance": "A fictional character in a heavy snow parka, knit beanie and a headlamp, breath fogging in the cold. ALWAYS unseen behind the camera (pure point-of-view) — we may see his gloved hands, his breath or a blurred reflection, but never a clear talking face. Never speaks on camera; his voice exists only as separate narration.",
       "ref_image_local": null,
       "ref_image_url": null,
       "voice": {

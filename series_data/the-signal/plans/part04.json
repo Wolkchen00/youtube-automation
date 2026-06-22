@@ -1,47 +1,41 @@
 {
   "episode": { "number": 4, "title": "Inside" },
-  "narration": "",
+  "narration": "Morning. The door never opened. The chair never moved. But it got in anyway. There's a ring burned into the floorboards, right in the middle of the room, and it's still warm. The hum is in the walls now. In the radio. In my teeth. Out on the lake there's a pattern under the ice, huge, glowing, like a circuit slowly waking up. When I catch my own reflection I don't quite look like me, there's a light in my eyes that isn't coming from the camera. And it's standing in the doorway. I think it's been here the whole time. Waiting, very patiently, for me to stop being afraid of it.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Grey dawn light, exhausted Theo films the cabin: the door still shut, the chair still wedged. Theo, hollow: \"Made it to morning. Door never opened. But...\" He slowly tilts the phone down toward the floor. Realistic handheld found-footage, washed-out morning grain.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage in grey dawn light: the cabin door still shut, a chair still wedged under the handle. The camera slowly tilts down toward the floorboards. Washed-out morning grain, realistic handheld found-footage. No people.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Phone footage of the wooden floorboards: a perfect ring is burned into the wood, faintly warm, a thread of smoke still curling up. Theo, shaken, behind camera: \"It's on the floor. Inside. The same circle, burned right into the wood. It was IN here.\" Photoreal, eerie, dim light.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage close on wooden floorboards: a perfect ring is burned into the wood, faintly glowing-warm, a single thread of smoke curling up from it. Photoreal, eerie, dim light. No people on screen.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "The soft hum now seems to come from the walls and the radio at once. Theo films the radio; in the curved glass of its dial, the tall figure's calm reflection appears, observing. Radio voice, gentle, mimicking him: \"...not going to hurt you.\" Theo goes very still. Realistic, quietly terrifying.",
-      "speakers": ["radio"],
+      "prompt": "Silent POV phone footage close on the radio's curved glowing dial; in its reflection, far across the dim room, a tall calm figure stands out of focus, observing. The hum seems to come from the walls. Realistic, quietly terrifying. Figure distant and blurred, no clear face.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Theo backs to the window and films the frozen lake: a huge faint geometric pattern now glows under the ice, stretching across the whole lake. Theo, awed and afraid: \"The whole lake. There's something under the whole lake.\" Cold daylight, handheld, photoreal.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage at the window looking out over the frozen lake: a huge faint geometric pattern glows beneath the ice, stretching across the whole lake like a vast circuit. Cold daylight, handheld, photoreal, awe and dread. No people.",
       "seed": null
     },
     {
       "n": 5,
       "duration": "8",
-      "prompt": "Tight, shaky selfie-cam close on Theo's face, a faint pulsing light reflected in his eyes. He speaks strangely calm now, as if being shown something. Theo: \"It's showing me things. Places. It keeps showing me the lake.\" Realistic found-footage, screen glow, unsettling stillness.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage drifting across a frosted, partly-mirrored window; a dim, blurred reflection of the camera operator's silhouette passes by, a faint pulsing light glinting where the eyes would be. Never a clear face. Realistic found-footage, unsettling stillness.",
       "seed": null
     },
     {
       "n": 6,
       "duration": "8",
-      "prompt": "Theo lowers the phone slightly; in the cabin doorway stands the tall figure, haloed in pale dawn light, one long hand slowly raised — not a threat, an invitation. The shot holds, breath fogging the lens. Found-footage realism, awe and dread, no music.",
-      "speakers": ["theo"],
+      "prompt": "Silent POV phone footage: the camera lowers slightly to reveal a tall figure standing in the cabin doorway, haloed in pale dawn light, one long hand slowly raised, not a threat but an invitation. Backlit and featureless, kept at a distance. The shot holds, breath fogging the lens. Found-footage realism, no gore.",
       "seed": null
     }
   ]
