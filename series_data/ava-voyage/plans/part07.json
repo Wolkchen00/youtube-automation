@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "The Lighthouse of the Galaxy"
+  },
+  "narration": "Listen. A heartbeat in the void, a thousand times a second. This is a pulsar, the corpse of a dead star spinning faster than thought, sweeping the galaxy with beams of light like a lighthouse for ships that never come. It has kept this rhythm since before your species learned to walk. Some say if you map enough of them, you can find your way home from anywhere. I am mapping them. For you.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A neutron star spinning impossibly fast in deep space, two brilliant blue-white beams of radiation sweeping out from its magnetic poles like a cosmic lighthouse, glowing magnetic field lines arcing around it. Photoreal, rhythmic, mesmerizing.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close on the dense, smooth, blue-hot surface of the neutron star, crackling with arcs of energy and ferocious magnetic distortion, space warping around its immense gravity. Intense detail, cinematic.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The sweeping radiation beams rake across drifting clouds of interstellar gas, lighting them up in pulses of electric blue as they pass. Vast scale, slow and hypnotic.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide cosmic vista: the pulsar as a tiny brilliant beacon amid a field of countless stars, its beams cutting the dark, the ark-starship drifting quietly past. Serene, awe-filled.",
+      "seed": null
+    }
+  ]
+}

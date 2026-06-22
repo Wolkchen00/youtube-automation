@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "The Breathing Cathedral"
+  },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A vast cathedral of glowing stained glass slowly breathing and morphing, fractal rose windows blooming and folding, hyper-saturated neon light bleeding across liquid stone. Seamless psychedelic motion, kaleidoscopic symmetry.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The cathedral columns melt upward into luminous vines of sacred geometry, recursive arches opening into infinite recursive arches, colors pulsing in waves. Mesmerizing, continuous.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Kaleidoscopic explosion of liquid gold and violet light unfolding into mandala patterns that breathe and rotate, impossible Escher staircases spiraling inward. Hypnotic, fluid.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Camera drifts through an endless tunnel of breathing neon glass blossoms, reality folding origami-like into deeper fractal layers, bioluminescent and dreamlike. Smooth infinite zoom.",
+      "seed": null
+    }
+  ]
+}

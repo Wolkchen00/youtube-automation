@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "The Wandering World"
+  },
+  "narration": "Not every world belongs to a sun. This one was thrown out of its system long ago, and now it wanders the dark alone, a frozen orphan between the stars. Its oceans are ice miles thick. And yet, far below, where its core still beats warm, there may be water. There may be life, dreaming in the dark with no sky at all. Even cast out and alone, the universe finds a way to keep a candle lit.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A lone rogue planet drifting through the starlit dark with no sun, its frozen surface lit only by faint starlight and shimmering green-violet auroras dancing over ice. Hauntingly beautiful, photoreal, slow drift.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Surface-level shot across a vast frozen ocean of cracked blue ice under a black sky blazing with the Milky Way, no sun anywhere, breathtaking desolation. Cinematic, still.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Deep beneath the ice: a faint warm glow from hydrothermal vents on a dark seafloor, mineral towers and drifting particles, the suggestion of a hidden living ocean. Mysterious, bioluminescent.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide shot of the dark wandering world against the galactic core, auroras crowning it, the tiny ark-starship approaching with running lights glowing. Lonely and majestic.",
+      "seed": null
+    }
+  ]
+}

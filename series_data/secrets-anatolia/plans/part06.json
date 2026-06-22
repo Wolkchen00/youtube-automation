@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "The Temple Before Time"
+  },
+  "narration": "On a windswept hill in southeastern Anatolia stands the oldest temple on Earth. Gobekli Tepe. It is twelve thousand years old, older than farming, older than the wheel, older than writing itself. Hunters carved these towering stone pillars, ringed them with lions, foxes and vultures, and then, mysteriously, buried the whole thing. We built a temple before we built a town. And no one truly knows why.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Breathtaking aerial over a windswept golden hilltop in southeastern Anatolia at dawn, ancient massive T-shaped stone pillars arranged in great stone rings, long shadows. National Geographic quality, photoreal, cinematic.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Ground-level shot among towering carved limestone pillars, intricate reliefs of foxes, lions and vultures catching warm golden-hour light, dust drifting. Awe-inspiring, ultra-detailed.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Slow push toward a single great pillar carved with a stylized animal and human arms, weathered by twelve thousand years, sky dramatic behind it. Reverent, photoreal.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide landscape of the excavation under a vast Anatolian sky, the ancient sanctuary glowing in late light, rolling plains stretching to the horizon. Epic, contemplative.",
+      "seed": null
+    }
+  ]
+}

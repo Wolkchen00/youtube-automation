@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "The Empire of Iron"
+  },
+  "narration": "Three and a half thousand years ago, an empire rose in the heart of Anatolia that rivaled Egypt itself. The Hittites. From their mountain capital, Hattusa, ringed by mighty walls and gates guarded by stone lions, they forged one of the first great codes of law, and signed the world's earliest surviving peace treaty. Then, in a single dark century, they vanished, their cities burned, their language forgotten for three thousand years.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Epic aerial over a vast ancient mountain capital ringed by massive stone walls and towers, temples and a great citadel, dramatic Anatolian mountains and storm clouds behind. Photoreal, cinematic, golden light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Ground shot approaching a monumental stone gateway flanked by two carved lion sculptures, weathered and imposing, warm light raking across the stone. Awe-inspiring, ultra-detailed.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close on a clay tablet covered in ancient cuneiform script, lit warmly, the earliest peace treaty pressed into the clay. Reverent, detailed, shallow focus.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide desolate shot of the ruined capital's foundations at dusk under a brooding sky, the empire's silence palpable, plains stretching away. Haunting, epic.",
+      "seed": null
+    }
+  ]
+}

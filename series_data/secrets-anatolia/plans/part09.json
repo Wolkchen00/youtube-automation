@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "The City of Artemis"
+  },
+  "narration": "On the Aegean coast of Anatolia stood one of the greatest cities of the ancient world. Ephesus. Its temple to Artemis was so vast and so beautiful it was named one of the Seven Wonders of the World. Hundreds of thousands walked its marble streets, past a library that held twelve thousand scrolls. But the sea that made it rich slowly turned to swamp, the harbour vanished, and the great city was left stranded, magnificent and empty.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Breathtaking aerial over a grand ancient Greco-Roman city on the Anatolian coast at golden hour, marble streets, columns, a great theatre carved into a hillside, the sea beyond. Photoreal, National Geographic quality.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Ground-level shot looking up at the ornate two-story marble facade of an ancient library, columns and statues glowing in warm light, blue sky above. Majestic, ultra-detailed.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Slow track down a colonnaded marble avenue lined with toppled columns and carvings, long golden shadows, dust and light. Cinematic, reverent.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide shot of the ruins of a colossal temple, a single great column standing amid scattered marble in a green plain, dramatic sky, the lost wonder. Epic, contemplative.",
+      "seed": null
+    }
+  ]
+}

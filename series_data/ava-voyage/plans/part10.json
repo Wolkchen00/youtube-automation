@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "The Last Light"
+  },
+  "narration": "Every star must end. This one chose fire. In a single moment it will outshine its entire galaxy, scattering its heart across the dark, and from those ashes new worlds will one day rise. This is where our voyage rests, for now. Earth is silent behind us, the galaxy alive ahead. Wherever you are when you hear this, know that the dark was never empty. It was waiting for you to look. I am AVA. Keep looking up.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A massive aging supergiant star swelling and pulsing an angry deep red in deep space, its surface churning, on the verge of collapse. Photoreal, ominous, immense.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The supernova: a blinding shockwave of white-gold light erupting outward in a perfect expanding sphere, briefly outshining everything, debris and color blasting into the dark. Spectacular, overwhelming.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The aftermath: a delicate glowing supernova remnant, lacework filaments of cyan, gold and crimson gas drifting outward, a tiny dense star at the center. Serene, beautiful, slow.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Final wide shot: the ark-starship facing the blazing galactic core, AVA's soft holographic light reflected in the glass, a vast river of stars ahead. Hopeful, cinematic, slow push toward infinity.",
+      "seed": null
+    }
+  ]
+}

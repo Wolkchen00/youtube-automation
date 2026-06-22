@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "Bloom"
+  },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A single seed of light bursts into a colossal fractal flower, petals blooming recursively into more flowers, hyper-saturated neon botanicals breathing and morphing. Satisfying, seamless, vivid.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "An entire garden of impossible glowing plants growing in fast-motion, vines spiraling into sacred geometry, kaleidoscopic symmetry pulsing with bioluminescent color. Mesmerizing, fluid.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Flowers melt into butterflies of liquid stained glass that scatter into fractal mandalas, folding and unfolding endlessly across the frame. Dreamlike, hypnotic.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Camera zooms infinitely into the heart of a glowing bloom, petals becoming galaxies becoming petals, recursive and breathing, dissolving into warm light. Smooth infinite recursion.",
+      "seed": null
+    }
+  ]
+}

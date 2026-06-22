@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "The First City"
+  },
+  "narration": "Nine thousand years ago, on the Anatolian plain, thousands of people lived together in a town with no streets. Catalhoyuk. Its houses were packed wall to wall, entered through the roof, and the dead were buried beneath the floors where families slept. They painted their walls with bulls and hunting scenes, and shaped some of the earliest art on Earth. This was humanity learning, for the first time, how to live together.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Aerial reconstruction view of a dense Neolithic town of mud-brick houses packed wall to wall with no streets, rooftops as walkways, smoke rising, golden Anatolian plain around it. Photoreal, cinematic, warm light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Inside a Neolithic dwelling: white plastered walls painted with red bulls and hunters, a small hearth, light falling through a roof opening, clay figures on a ledge. Atmospheric, detailed.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close on an ancient wall mural of leaping bulls and geometric patterns in red ochre, flickering in firelight, ancient and alive. Reverent, ultra-detailed.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide shot of the excavated mound at golden hour, layers of ancient mud-brick exposed, vast plain and dramatic sky beyond. Epic, contemplative.",
+      "seed": null
+    }
+  ]
+}

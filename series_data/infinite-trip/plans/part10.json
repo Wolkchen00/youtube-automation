@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "The Last Door"
+  },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "An endless hall of glowing morphing doors, each opening onto a different breathing fractal universe, kaleidoscopic and recursive, neon light pouring through. Hypnotic, seamless, vivid.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Camera flies through door after door, each world melting into the next, liquid geometry and bioluminescent color folding origami-like in continuous motion. Mesmerizing, fluid.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "All the doors merge into a single colossal mandala that rotates and breathes, infinite recursive symmetry blooming outward in hyper-saturated color. Dreamlike, satisfying.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The mandala opens into a calm tunnel of soft radiant light, the journey dissolving gently into pure breathing color and stillness. Serene, smooth, infinite.",
+      "seed": null
+    }
+  ]
+}

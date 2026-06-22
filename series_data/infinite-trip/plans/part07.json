@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Liquid Gold"
+  },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Rivers of molten liquid gold flowing upward against gravity, splitting into fractal deltas of shimmering metal, mirror-bright reflections bending into impossible geometry. Hyper-saturated, satisfying, seamless.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The gold liquid crystallizes into a rotating kaleidoscope of honeycomb cells, each cell opening into a tiny glowing universe, symmetrical and infinite. Oddly satisfying, fluid morph.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Drops of chrome and gold merge and bloom into morphing flowers of liquid metal, petals unfolding recursively into more petals, neon highlights breathing. Smooth, hypnotic.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Camera spirals down a vortex of liquid gold and turquoise, melting reality streaming past, dissolving into a calm mirror ocean of light. Continuous, dreamy.",
+      "seed": null
+    }
+  ]
+}

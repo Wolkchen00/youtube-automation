@@ -58,13 +58,21 @@ def _generate_visual_clip(engine: str, prompt: str, start_url: str | None,
 
 
 def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
-    """Final videoya anlatım (narration) + arka plan müziği ekle (best-effort).
-    Anlatım metni plan['narration'] alanından, ses kanalı bible.narration['channel']'dan gelir.
+    """Final videoya anlatım (narration) + SÜREKLİ müzik ekle (best-effort).
+
+    Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
+    çekim sınırlarında 'pop'lar ve boşluk/sessizlik bırakır. Çözüm:
+      • Anlatım varsa  → gappy native ses TAMAMEN düşürülür (bg_duck=0); temiz tek
+        anlatım + sürekli müzik bedi kalır.
+      • Anlatım yoksa (saf görsel şölen kanalları) → müzik TEK ses olur (native
+        atılır) → çekim kesişlerinde boşluk imkânsız.
+    Müzik HER VİDEO için ayrı üretilir (kanal stiline sadık ama her video benzersiz).
     """
     out = final_ep
     number = plan.get("episode", {}).get("number", 1)
     narr_cfg = bible.narration
     narr_text = (plan.get("narration") or "").strip()
+    narration_ok = False
 
     if narr_cfg.get("channel") and narr_text:
         try:
@@ -73,10 +81,12 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
             audio_path, style = create_narration_for_channel(narr_cfg["channel"], narr_text, wav)
             if audio_path and Path(audio_path).exists():
                 narrated = out.parent / f"{out.stem}_narrated.mp4"
+                # bg_duck=0 → gappy native sesi at; anlatım tek temiz ses olsun
                 ffmpeg_tools.mix_voiceover(str(out), str(audio_path), str(narrated),
-                                           voice_volume=1.0, bg_duck=0.18)
+                                           voice_volume=1.0, bg_duck=0.0)
                 if narrated.exists() and narrated.stat().st_size > 0:
                     out = narrated
+                    narration_ok = True
                     logger.info(f"🎙️ Anlatım eklendi ({style})")
         except Exception as e:
             logger.warning(f"⚠️ Anlatım atlandı: {e}")
@@ -85,13 +95,21 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
         try:
             from core.music_generator import generate_background_music
             ch = narr_cfg.get("channel") or bible.slug
-            music_path = generate_background_music(ch)
+            # Her video kendi müziğini alsın → benzersiz dosya = benzersiz üretim
+            music_file = episode_dir(bible.slug, number) / "bg_music.mp3"
+            music_path = generate_background_music(ch, output_path=music_file)
             if music_path and Path(music_path).exists():
                 music_out = out.parent / f"{out.stem}_music.mp4"
-                ffmpeg_tools.mix_background_music(out, music_path, music_out, music_volume=0.18)
+                if narration_ok:
+                    # anlatım + sürekli müzik bedi (boşluk zaten kalmadı)
+                    ffmpeg_tools.mix_background_music(out, music_path, music_out, music_volume=0.28)
+                else:
+                    # saf görsel: müzik TEK sürekli ses olsun (gappy native atılır)
+                    ffmpeg_tools.mix_background_music(out, music_path, music_out,
+                                                      music_volume=0.9, replace_original=True)
                 if music_out.exists() and music_out.stat().st_size > 0:
                     out = music_out
-                    logger.info("🎵 Müzik eklendi")
+                    logger.info("🎵 Müzik eklendi" + ("" if narration_ok else " (tek/sürekli ses)"))
         except Exception as e:
             logger.warning(f"⚠️ Müzik atlandı: {e}")
 

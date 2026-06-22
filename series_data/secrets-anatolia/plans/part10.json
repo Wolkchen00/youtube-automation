@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "The Underground Cities"
+  },
+  "narration": "Beneath the strange stone landscape of Cappadocia lies a secret carved into the earth itself. Entire cities, dug eight stories deep, with churches, stables, kitchens and wells, sealed by great rolling stone doors. Tens of thousands could vanish underground and live for months, hidden from any army that came. For two thousand years, in times of danger, the people of Anatolia simply disappeared into the ground, and waited for the world above to grow quiet again.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Breathtaking aerial over the surreal Cappadocia landscape at dawn, fairy-chimney rock cones and carved cliffs glowing gold, hot-air balloons rising in the distance. Photoreal, cinematic, National Geographic quality.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Inside a vast underground city carved from soft rock, warm torchlight on tunnels and chambers, a great circular rolling stone door sealing a passage. Atmospheric, detailed, mysterious.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Descending shot through multiple carved underground levels connected by narrow stairways and ventilation shafts, warm light glowing from below. Immersive, dramatic.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide shot of carved rock-cut churches and cave dwellings in a golden Cappadocian valley at sunset, ancient and silent, vast sky above. Epic, contemplative.",
+      "seed": null
+    }
+  ]
+}

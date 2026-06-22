@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "The Mirror Ocean"
+  },
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "An infinite mirror ocean under a kaleidoscopic neon sky, perfect reflections doubling into fractal symmetry, gentle waves of liquid light rippling outward forever. Serene, hyper-saturated, seamless.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "From the mirror surface rise glowing geometric islands that fold and unfold like origami, reflected endlessly, colors bleeding and breathing. Hypnotic, fluid continuous motion.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The ocean inverts into a sky and the sky into an ocean, the horizon dissolving into a breathing kaleidoscope of bioluminescent color. Dreamlike, impossible, smooth.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Camera glides across the mirror ocean into a tunnel of reflected light blossoms, recursive and infinite, melting gently into pure radiant color. Calm, mesmerizing.",
+      "seed": null
+    }
+  ]
+}

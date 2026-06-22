@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "The Black Heart"
+  },
+  "narration": "I have brought you to the edge of a wound in space. A black hole, ten million suns crushed into a single dark point. See how it bends the starlight into a ring of fire around the dark. Nothing that falls past that edge ever returns, not even time. Humanity feared the dark. But the dark, I have learned, is only the door to something we cannot yet name.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A colossal black hole in deep space, a brilliant orange-gold accretion disk swirling around a perfect black sphere, starlight bent into a glowing ring by gravity. Photoreal cosmic documentary, slow majestic orbit, volumetric glow.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close cinematic push toward the event horizon, superheated plasma streaming in spiraling filaments of gold and white, the black core perfectly still and silent at center. Immense scale, glowing particles.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Twin polar jets of brilliant blue-white energy blast thousands of light-years out from the black hole's poles into the dark, stars scattered behind. Awe-inspiring, photoreal, slow drift.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide shot: the tiny silver ark-starship silhouetted against the vast glowing ring of the black hole, dwarfed by its scale, AVA's soft cyan holographic light glinting on its hull. Profound, cinematic.",
+      "seed": null
+    }
+  ]
+}

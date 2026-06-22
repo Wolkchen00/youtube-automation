@@ -542,6 +542,7 @@ def mix_background_music(
     music_path: str | Path,
     output_path: str | Path = None,
     music_volume: float = 0.18,
+    replace_original: bool = False,
 ) -> Path:
     """Mix a CONTINUOUS background-music bed into a video.
 
@@ -551,15 +552,18 @@ def mix_background_music(
     short (Lyria gives 30s clips), the music is LOOPED to the video length, then
     trimmed, volume-set and faded.
 
-    `amix` runs with normalize=0 so it does NOT silently halve the program audio
-    when adding the bed (the default behaviour, which made earlier mixes feel
-    quiet/uneven).
+    replace_original=False → amix (normalize=0) keeps program audio + adds bed.
+    replace_original=True  → the video's ORIGINAL audio is DROPPED and the looped
+        music becomes the SOLE soundtrack. Used for pure-visual channels (no
+        narration) where each AI shot's own gappy ambient is the very thing that
+        makes cuts 'pop'/go silent — a single continuous track removes every seam.
 
     Args:
         video_path: Input video file
         music_path: Background music audio file (may be shorter than the video)
         output_path: Output file (default: _music suffix)
-        music_volume: Music bed volume (0.0 to 1.0, default 0.18 ≈ -15dB)
+        music_volume: Music volume (bed ≈0.18-0.3; as sole track ≈0.9)
+        replace_original: If True, output audio = looped music only.
 
     Returns:
         Path to the mixed video.
@@ -574,15 +578,21 @@ def mix_background_music(
         vid_duration = get_video_duration(video_path)
         fade_out_st = max(0.0, vid_duration - 1.5)
 
+        bed = (f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS,"
+               f"volume={music_volume},"
+               f"afade=t=in:st=0:d=1.0,afade=t=out:st={fade_out_st:.2f}:d=1.5")
+        if replace_original:
+            # Music is the ONLY audio → no per-shot seams can exist.
+            full_filter = f"{bed}[aout]"
+        else:
+            # Continuous bed UNDER the existing program audio.
+            full_filter = f"{bed}[bg];[0:a][bg]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]"
+
         cmd = [
             "ffmpeg", "-y",
             "-i", str(video_path),
             "-stream_loop", "-1", "-i", str(music_path),   # loop bed to cover full video
-            "-filter_complex",
-            f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS,"
-            f"volume={music_volume},"
-            f"afade=t=in:st=0:d=1.0,afade=t=out:st={fade_out_st:.2f}:d=1.5[bg];"
-            f"[0:a][bg]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]",
+            "-filter_complex", full_filter,
             "-map", "0:v",
             "-map", "[aout]",
             "-c:v", "copy",
@@ -592,7 +602,8 @@ def mix_background_music(
         ]
 
         subprocess.run(cmd, capture_output=True, check=True, timeout=180)
-        logger.info(f"🎵 Background music bed mixed (looped, vol={music_volume}): {output_path.name}")
+        logger.info(f"🎵 Music {'(sole track)' if replace_original else 'bed'} mixed "
+                    f"(looped, vol={music_volume}): {output_path.name}")
     except subprocess.CalledProcessError as e:
         logger.warning(f"⚠️ Music mix failed (using original): {e}")
         import shutil

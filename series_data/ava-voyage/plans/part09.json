@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "The Star Forge"
+  },
+  "narration": "Here is where stars are born. Towering pillars of gas and dust, light-years tall, glowing from within as new suns ignite inside them for the very first time. Everything you ever were came from a place like this, every atom of iron in your blood forged in a furnace among the stars. You are not visitors to the universe. You are the universe, awake, come home to watch itself begin again.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Colossal pillars of glowing interstellar gas and dust light-years tall, lit from within by newborn stars, deep crimson, gold and cyan, set against a field of brilliant stars. Photoreal, epic scale, slow push in.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A newborn star igniting inside a cocoon of swirling nebula gas, a brilliant flash of white-gold light blooming outward, jets of material streaming from its poles. Spectacular, cinematic.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Drifting through luminous canyons of nebula mist, glowing tendrils of gas parting around the camera, baby stars twinkling like embers throughout. Dreamlike, immersive.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide majestic vista of the entire stellar nursery glowing in the dark, the ark-starship gliding into the radiant clouds, dwarfed and haloed in light. Awe-inspiring.",
+      "seed": null
+    }
+  ]
+}

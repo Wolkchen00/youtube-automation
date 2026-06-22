@@ -63,6 +63,7 @@ MUSIC_PROMPTS = {
 MUSIC_PROMPT_ALIASES = {
     "ava-voyage": "galactic_experiment",
     "secrets-anatolia": "shadowedhistory",
+    "sentinal_ihsan": "the-signal",   # narration channel adı → the-signal müzik (eerie drone)
 }
 
 # Cache directory for generated music
