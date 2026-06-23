@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -80,6 +80,17 @@
         "instagram"
       ],
       "published_at": "2026-06-22T18:18:22.891053+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep07/ep07_narrated_music.mp4",
+      "subtitle": "The First City",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-23T17:35:13.749142+00:00"
     }
   }
 }

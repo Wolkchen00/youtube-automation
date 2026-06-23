@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 10,
-  "next_part": 8,
+  "next_part": 9,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -90,6 +90,17 @@
         "instagram"
       ],
       "published_at": "2026-06-22T19:08:51.452763+00:00"
+    },
+    "8": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep08/ep08_music.mp4",
+      "subtitle": "The Mirror Ocean",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-23T17:16:59.906286+00:00"
     }
   },
   "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"

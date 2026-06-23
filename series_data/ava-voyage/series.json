@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -80,6 +80,17 @@
         "instagram"
       ],
       "published_at": "2026-06-22T17:50:53.947450+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep07/ep07_narrated_music.mp4",
+      "subtitle": "The Lighthouse of the Galaxy",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-23T16:58:37.660620+00:00"
     }
   }
 }

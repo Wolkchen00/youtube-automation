@@ -11,7 +11,7 @@
   ],
   "hashtags": "#foundfootage #aliens #ufo #firstcontact #shorts #scary #encounter #realfootage #signal #thriller",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "publish_mode": "auto",
   "parts": {
@@ -34,6 +34,17 @@
         "instagram"
       ],
       "published_at": "2026-06-22T18:39:52.847945+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-signal/episodes/ep03/ep03_narrated_music.mp4",
+      "subtitle": "Contact",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-23T17:54:25.878966+00:00"
     }
   }
 }
