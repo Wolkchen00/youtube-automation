@@ -11,7 +11,7 @@
   ],
   "hashtags": "#foundfootage #aliens #ufo #firstcontact #shorts #scary #encounter #realfootage #signal #thriller",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "publish_mode": "auto",
   "parts": {
@@ -45,6 +45,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-23T17:54:25.878966+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-signal/episodes/ep04/ep04_narrated_music.mp4",
+      "subtitle": "Inside",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-24T17:49:33.948525+00:00"
     }
   }
 }

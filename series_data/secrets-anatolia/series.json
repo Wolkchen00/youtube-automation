@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 10,
-  "next_part": 8,
+  "next_part": 9,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -91,6 +91,16 @@
         "tiktok"
       ],
       "published_at": "2026-06-23T17:35:13.749142+00:00"
+    },
+    "8": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep08/ep08_narrated_music.mp4",
+      "subtitle": "The Empire of Iron",
+      "platforms_ok": [
+        "youtube",
+        "tiktok"
+      ],
+      "published_at": "2026-06-24T17:31:10.413575+00:00"
     }
   }
 }
