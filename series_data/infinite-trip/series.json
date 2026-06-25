@@ -11,8 +11,8 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 10,
-  "next_part": 10,
-  "status": "active",
+  "next_part": 11,
+  "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -111,6 +111,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-24T17:08:25.771982+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep10/ep10_music.mp4",
+      "subtitle": "The Last Door",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-25T17:13:55.966350+00:00"
     }
   },
   "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"

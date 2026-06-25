@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 10,
-  "next_part": 9,
+  "next_part": 10,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -102,6 +102,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-24T16:49:55.578483+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep09/ep09_narrated_music.mp4",
+      "subtitle": "The Star Forge",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-25T16:56:29.741785+00:00"
     }
   }
 }

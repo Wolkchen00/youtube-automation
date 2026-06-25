@@ -11,8 +11,8 @@
   ],
   "hashtags": "#foundfootage #aliens #ufo #firstcontact #shorts #scary #encounter #realfootage #signal #thriller",
   "total_parts": 5,
-  "next_part": 5,
-  "status": "active",
+  "next_part": 6,
+  "status": "completed",
   "publish_mode": "auto",
   "parts": {
     "1": {
@@ -56,6 +56,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-24T17:49:33.948525+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-signal/episodes/ep05/ep05_narrated_music.mp4",
+      "subtitle": "The Lights",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-25T18:02:59.138119+00:00"
     }
   }
 }

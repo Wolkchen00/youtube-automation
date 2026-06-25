@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 10,
-  "next_part": 9,
+  "next_part": 10,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -101,6 +101,16 @@
         "tiktok"
       ],
       "published_at": "2026-06-24T17:31:10.413575+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep09/ep09_narrated_music.mp4",
+      "subtitle": "The City of Artemis",
+      "platforms_ok": [
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-25T17:39:00.233006+00:00"
     }
   }
 }
