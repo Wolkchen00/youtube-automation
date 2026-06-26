@@ -11,8 +11,8 @@
   ],
   "hashtags": "#shorts #space #ai #universe #scifi #cosmos #galaxy #nebula #spacetravel",
   "total_parts": 10,
-  "next_part": 10,
-  "status": "active",
+  "next_part": 11,
+  "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -113,6 +113,17 @@
         "tiktok"
       ],
       "published_at": "2026-06-25T16:56:29.741785+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/ava-voyage/episodes/ep10/ep10_narrated_music.mp4",
+      "subtitle": "The Last Light",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-26T16:45:26.710993+00:00"
     }
   }
 }

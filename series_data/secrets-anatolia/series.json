@@ -11,8 +11,8 @@
   ],
   "hashtags": "#shorts #history #anatolia #turkey #ancient #archaeology #civilization #mystery",
   "total_parts": 10,
-  "next_part": 10,
-  "status": "active",
+  "next_part": 11,
+  "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -111,6 +111,16 @@
         "tiktok"
       ],
       "published_at": "2026-06-25T17:39:00.233006+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/secrets-anatolia/episodes/ep10/ep10_narrated_music.mp4",
+      "subtitle": "The Underground Cities",
+      "platforms_ok": [
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-06-26T17:03:58.803874+00:00"
     }
   }
 }
