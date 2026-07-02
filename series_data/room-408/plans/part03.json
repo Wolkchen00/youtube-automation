@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "The Fourth Floor"
+  },
+  "hook_shot": 3,
+  "narration": "I didn't answer it. I did something dumber. At five to three I took the master key and rode up to four — to be standing at that door when the call happens. The corridor up there feels longer than the building. Room 408 is painted shut, sealed over like a scar. At three exactly, I heard it. Not ringing. Dialing. A rotary phone turning, patiently, inside a room with no line, no power, no guest. Under the door, a light passed. Slow. Searching. And four floors down, in my empty lobby, the front desk began to ring. I ran. The elevator opened on the lobby — and the receiver was already off the hook.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "elevator_hall",
+      "prompt": "Deniz Aksoy (burgundy waistcoat, brass key on a leather fob in his fist) steps into the vintage elevator; the brass accordion-cage doors fold shut across his tense face; above, the floor-indicator arrow begins to climb from the lobby mark. Ends on: the arrow sweeping past the third-floor mark.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "corridor_408",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) walks slowly down the long fourth-floor corridor, wall sconces flickering as he passes each one, the patterned carpet stretching in deep perspective toward the darker sealed door at the far end with its old room-service tray. Ends on: him stopping a few steps short of the door, chest rising and falling.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "door_408",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) leans his ear close to the sealed door of room 408, breath held; the sconce beside him dies; in the gap under the door a slow band of warm light sweeps past from inside, and he jerks back a step. Ends on: the band of light returning and STOPPING at the gap, as if it noticed him.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": [],
+      "environment": "door_408",
+      "prompt": "Close on the door of room 408: the faded 'Do Not Disturb' card begins to sway gently on the handle though the air is dead still; the brass peephole glints faintly warm from within; a hairline crack creeps along the old paint sealing the frame. Ends on: the peephole going suddenly dark.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "corridor_408",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) sprints back down the long corridor toward camera, sconces dying one by one close behind him as darkness swallows the corridor's far end; ahead the elevator's cage doors already stand open, glowing amber, waiting. Ends on: the cage doors folding shut across his terrified face.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) bursts out into the lamplit lobby and stops dead: on the reception counter the switchboard receiver lies OFF the hook across the open logbook, its coiled cord swinging slowly, a fresh line of wet ink glistening on the page. Ends on: Deniz frozen in the middle of the vast dark lobby, staring at the desk.",
+      "seed": null
+    }
+  ]
+}

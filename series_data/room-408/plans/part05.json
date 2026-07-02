@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Check-Out"
+  },
+  "hook_shot": 4,
+  "narration": "The elevator opened on an empty cabin. An invitation. Yusuf begged me to walk out the front door and never look back. But it would just keep ringing — for the next kid on the night desk, and the next — the way it rang for him. Somebody has to finish the call. So at three, I answered. Static. Then my own voice, saying words I hadn't said yet: room service for 408. I carried the tray up myself. The paint around the door was already broken. Inside, it's still 1994 — a phone off the hook on the nightstand. A bed turned down. A chair pulled out. For me. If you ever work nights at the Halden Grand: it's quiet at 3 AM now. Mostly. And there's a new rule on the card. Rule eight. If the phone asks for Deniz... tell them he checked out.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "At 3 AM sharp Deniz Aksoy (burgundy waistcoat) lifts the ringing switchboard receiver in the lamplight and holds it to his ear; his face slowly empties of fear as the tiny brass lamp pulses in rhythm like slow breathing; then he sets the receiver gently back down, decided. Ends on: his calm, resolved face in the lamplight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["night_clerk", "old_porter"],
+      "environment": "lobby_desk",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) lifts a silver-cloched room-service tray from the reception counter; Yusuf Kara (navy porter uniform) blocks his path for a heartbeat, hands half-raised in plea — then steps aside, head bowing, unable to watch. Ends on: Deniz walking past him with the tray, steady.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "elevator_hall",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) stands centered in the vintage elevator holding the silver tray level; the brass cage doors fold shut across him; above, the floor-indicator arrow climbs smooth and unhurried toward the fourth-floor mark. Ends on: the arrow arriving at the fourth-floor mark with a soft settle.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "door_408",
+      "prompt": "The door of room 408 stands ajar for the first time, warm golden light pouring through the crack, the old paint seal split along the frame; Deniz Aksoy (burgundy waistcoat) balances the tray on one arm and pushes the door slowly open with his fingertips, face bathed in the glow. Ends on: him stepping into the light as the door swallows him.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": [],
+      "environment": "corridor_408",
+      "prompt": "The fourth-floor corridor afterwards: the dead sconces relight one by one down its length; the far door stands closed, its paint seal smooth and unbroken as if never opened, the room-service tray gone, the 'Do Not Disturb' card hanging perfectly still. Slow pull-back down the empty corridor. Ends on: the corridor at rest, long and silent.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "characters": ["old_porter"],
+      "environment": "lobby_desk",
+      "prompt": "Pale dawn light in the lobby: Yusuf Kara (navy porter uniform) stands behind the reception counter in a clerk's posture and writes one careful line in the logbook, closes the leather cover, and places a small brass name tag on top of it like a headstone; behind him the switchboard's tiny lamp blinks once, softly, and goes dark. Ends on: the name tag resting on the closed logbook in the morning light.",
+      "seed": null
+    }
+  ]
+}

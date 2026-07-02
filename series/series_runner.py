@@ -202,10 +202,26 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
     return False
 
 
+def _priority(slug: str) -> int:
+    """Serinin günde-1 sırası (series.json['priority']; okunamazsa varsayılan 100)."""
+    m = SeriesMeta.load(slug)
+    return m.priority if m else 100
+
+
 def run_all(dry_run: bool = False, publish: bool = True) -> bool:
-    """Tüm aktif serilerin sıradaki part'ını çalıştır. Hepsi başarılıysa True."""
+    """GÜNDE TEK SERİ üret+yayınla (kredi tavanı) — İhsan kararı 2026-07-02.
+
+    Her koşuda aktif seriler öncelik sırasına dizilir (series.json['priority'],
+    küçük=önce, eşitlikte slug) ve yalnız İLK seri üretilir; kalanlar sırada
+    bekler. Bir seri tamamlanınca (completed) listeden düşer → ertesi gün
+    sıradaki otomatik devreye girer. Böylece tüm seriler günde 1 videoyla,
+    elle müdahale gerekmeden art arda akar. Belirli bir seriyi elle koşturmak
+    için --series (workflow_dispatch 'series' girdisi) tavandan etkilenmez.
+    Üretim başarısız olursa BAŞKA seriye geçilmez (aynı gün ikinci üretim =
+    çifte kredi); ertesi gün aynı seri kaldığı çekimden devam eder.
+    """
     # Oto-ikmal: kuyruğu azalan auto_replenish'li serilere Gemini yeni planlar yazar.
-    # Aktif seri seçiminden ÖNCE çalışır → bugün dirilen seri bugün üretilir.
+    # Kie kredisi harcamaz; sırası gelmeden planların hazır olmasını sağlar.
     try:
         from series.replenish import replenish_all
         replenish_all(dry_run=dry_run)
@@ -217,12 +233,11 @@ def run_all(dry_run: bool = False, publish: bool = True) -> bool:
         _alert("ℹ️ *Seri otomasyonu:* Aktif seri kalmadı — tüm diziler tamamlandı. "
                "Yeni sezon/part eklenene kadar bu kanallara yeni video ÇIKMAYACAK.")
         return True
-    logger.info(f"Aktif seriler: {', '.join(slugs)}")
-    all_ok = True
-    for slug in slugs:
-        ok = run_next(slug, dry_run=dry_run, publish=publish)
-        all_ok = all_ok and bool(ok)
-    return all_ok
+    slugs.sort(key=lambda s: (_priority(s), s))
+    chosen, waiting = slugs[0], slugs[1:]
+    logger.info(f"🎯 Günde-1 tavanı: bugün '{chosen}' üretilecek"
+                + (f" (sırada: {', '.join(waiting)})" if waiting else ""))
+    return run_next(chosen, dry_run=dry_run, publish=publish)
 
 
 def main(argv: list[str]):

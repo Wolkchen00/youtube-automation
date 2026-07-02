@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "The Guest Who Never Left"
+  },
+  "hook_shot": 4,
+  "narration": "Whatever answered my phone left a line in the logbook. Handwriting I'd seen before — on the burned page from 1994. Yusuf stopped meeting my eyes. So I pulled the old staff photographs. 1993. There he is. Young. Front row. Behind the desk. Yusuf was never the porter. Yusuf was the night clerk. He answered. He went up. And the room let him walk back down — but it kept something. He's carried those keys for thirty years like a man paying off a debt. Tonight he wrote one line in my ledger: it doesn't want to talk anymore. And at three... the switchboard stayed silent. Instead, the elevator started coming down. Four. Three. Two.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "back_office",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) under the green banker's lamp lifts a framed staff photograph off the office wall, blows dust from the glass and holds it beside the open logbook, eyes darting between the two. Ends on: his thumb coming to rest over one young face in the front row of the photograph.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["old_porter"],
+      "environment": "lobby_desk",
+      "prompt": "Yusuf Kara (faded navy porter uniform, iron key ring) stands alone BEHIND the reception counter in the dead of night — a porter standing where a clerk stands — palms flat on the mahogany, eyes closed, like a man returning to an old post. The desk lamp dims slightly. Ends on: his jaw tightening as the switchboard lamp glints once.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["old_porter", "night_clerk"],
+      "environment": "back_office",
+      "prompt": "Yusuf Kara (navy porter uniform) and Deniz Aksoy (burgundy waistcoat) face each other across the small office desk in the green lamplight; Yusuf slowly unhooks his heavy iron ring of keys and sets it down between them like a confession. Ends on: both men staring down at the keys settling into silence.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": [],
+      "environment": "hotel_exterior",
+      "prompt": "The hotel facade at 3 AM: the single lit fourth-floor window now PULSES slowly, brightening and dimming like breathing; the flickering neon letter dies; a curtain-shaped shadow glides across the glowing window. Ends on: every light in the window snapping out at once, the facade going black.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "elevator_hall",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) stands alone before the vintage elevator, head tilted up: the brass floor-indicator arrow sweeps steadily DOWN from the fourth-floor mark, sconces guttering as it passes each floor; he backs away one slow step at a time. Ends on: the arrow reaching the lowest mark as the cage lattice begins to glow warm from within.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) stands rigid behind the reception counter, knuckles white on the mahogany edge, as warm amber light from the opening elevator spills across the lobby carpet toward him, stretching his shadow long across the key pigeonholes. Ends on: the light reaching the desk and lighting one side of his face.",
+      "seed": null
+    }
+  ]
+}

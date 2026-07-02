@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Never Answer 408"
+  },
+  "hook_shot": 3,
+  "narration": "First night at the Halden Grand. The manager left me a laminated card — seven rules. One through six are normal. Rule seven says: at 3 AM, the switchboard will ring. It's Room 408. Do not answer. Log it. Wait for it to stop. I laughed. Then, at three exactly, it rang. Room 408 has been sealed for thirty years. No guest. No line. It rang for three minutes while that little brass lamp blinked like a heartbeat. The logbook goes back decades — same entry, every single night: three AM, four-oh-eight, no answer. Except one page. 1994. That night, somebody answered. And tonight... it's ringing twice.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": [],
+      "environment": "hotel_exterior",
+      "prompt": "Establishing wide shot of the old hotel facade at 3 AM: rain-wet empty street, the vertical neon sign flickering, warm light in the ground-floor lobby windows — and one single faint light behind a fourth-floor window. Slow push-in toward that window. Ends on: the fourth-floor window glowing alone in the dark facade.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "Deniz Aksoy (burgundy hotel waistcoat, brass name tag, rolled sleeves) leans on the mahogany reception counter at night reading a small laminated card, half-smiling at it — then his smile fades as his eyes lift toward the antique brass switchboard beside him. Ends on: his gaze fixed on the silent switchboard.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "At the stroke of 3 AM the antique switchboard rings: one tiny brass extension lamp blinking rhythmically in the dim lobby. Deniz Aksoy (burgundy waistcoat) stands frozen behind the counter, his hand hovering over the receiver without touching it, lamplight trembling. Slow push-in past his hand to the blinking lamp. Ends on: the blinking brass lamp reflected in his wide eyes.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": [],
+      "environment": "elevator_hall",
+      "prompt": "The vintage elevator stands dark and still while the distant phone keeps ringing off-screen: the brass floor-indicator arrow rests at the lobby mark, the amber sconces flicker faintly in rhythm with each muffled ring, shadows of the cage doors stretching across the carpet. Ends on: the sconces steadying as the ringing suddenly stops mid-ring.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "In the ringing silence Deniz Aksoy (burgundy waistcoat) exhales, pulls the thick leather-bound logbook under the desk lamp and turns brittle pages — decades of identical handwritten night entries in long columns — then stops at one old yellowed page whose bottom corner is scorched black. Ends on: his fingertip resting on a single underlined line of that burned page.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "Deniz Aksoy (burgundy waistcoat) writes tonight's entry into the logbook — and mid-stroke the switchboard ERUPTS ringing again, the brass lamp blinking twice as fast; his head snaps up; wide shot of him standing small behind the desk lamp in the vast dark lobby. Ends on: the frantic blinking lamp glowing in the darkness.",
+      "seed": null
+    }
+  ]
+}

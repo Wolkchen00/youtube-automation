@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "It Rang Twice"
+  },
+  "hook_shot": 3,
+  "narration": "The old porter found me at dawn. Yusuf. He's carried keys in this hotel since 1994. He didn't ask what happened. He asked how many times it rang. When I said twice, he went very quiet — and unlocked the back office. There's a tape machine down there older than I am, and one reel, marked with that date. The last clerk who answered. On the tape you only hear his side of the call. 'Front desk.' A long silence. Then: 'Yes. I understand.' The receiver set down soft as a prayer... and footsteps, walking to the elevator. They never found him. The hotel says he quit. Rule seven says don't answer. Nobody ever wrote a rule for when it rings twice.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["old_porter", "night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "Grey dawn light seeps into the lobby. Yusuf Kara (faded navy porter uniform, iron key ring on his belt) stands before the reception counter facing a hollow-eyed Deniz Aksoy (burgundy waistcoat, undone collar); Yusuf slowly raises two fingers, a grave question in his pale eyes. Ends on: Deniz giving a single small nod.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["old_porter"],
+      "environment": "back_office",
+      "prompt": "Yusuf Kara (navy porter uniform) unlocks the cramped back office with an old iron key and pulls the chain of the hanging bulb; shelves of dusty ledgers loom; he draws a dust cloth off an old reel-to-reel tape machine and lifts one tape reel with careful, trembling hands. Ends on: his thumb wiping dust from the reel's faded label.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": ["night_clerk"],
+      "environment": "back_office",
+      "prompt": "The reel-to-reel machine spins in the green glow of the banker's lamp, its VU needle twitching with breaths of static; Deniz Aksoy (burgundy waistcoat) leans close over it, listening, and the color drains from his face as the needle jumps once, hard. Ends on: the turning reels throwing slow shadows across his frozen eyes.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": [],
+      "environment": "lobby_desk",
+      "prompt": "Flashback, 1994 — the same reception desk, decor newer and warmer: the switchboard receiver lies OFF the hook on the mahogany counter, its coiled cord still swaying, the desk chair pushed back and empty, steam rising from an abandoned cup. Nobody there. Ends on: the swaying cord slowing to dead stillness.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": [],
+      "environment": "elevator_hall",
+      "prompt": "Flashback continues — the vintage elevator's brass floor-indicator arrow sweeps slowly upward from the lobby mark toward the fourth-floor mark while the cage doors stand closed; one by one the amber sconces along the wall dim as the arrow climbs. Ends on: the arrow stopping at the top mark in near-darkness.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["night_clerk"],
+      "environment": "lobby_desk",
+      "prompt": "Present, night again: Deniz Aksoy (burgundy waistcoat) grips the edge of the counter, staring down the silent switchboard like an opponent — and the tiny brass extension lamp flicks ON one full beat BEFORE the first ring sounds. Ends on: his hand sliding toward the receiver and stopping just above it.",
+      "seed": null
+    }
+  ]
+}

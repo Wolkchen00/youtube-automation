@@ -57,6 +57,18 @@ class SeriesMeta:
     def next_part(self) -> int: return int(self.data.get("next_part", 1))
     @property
     def status(self) -> str: return self.data.get("status", "active")
+
+    @property
+    def priority(self) -> int:
+        """Günde-1 üretim tavanında sıra (KÜÇÜK sayı = önce; varsayılan 100).
+        Hikâye dizisine 1-2 verilir ki bölümleri ARDIŞIK günlerde çıksın; sonsuz
+        seriler (auto_replenish) varsayılanda bırakılır → kuyruk sonuna düşer,
+        sıraları geldiğinde otomatik günlük yayına girerler."""
+        try:
+            return int(self.data.get("priority", 100))
+        except (TypeError, ValueError):
+            return 100
+
     @property
     def standalone(self) -> bool:
         """True ise her video BAĞIMSIZ/tam bir parça olarak sunulur: başlıkta 'Part N'

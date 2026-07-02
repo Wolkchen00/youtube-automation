@@ -1,0 +1,98 @@
+{
+  "series": {
+    "slug": "room-408",
+    "title": "Room 408",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.4,
+      "offset_in_shot": 1.6
+    }
+  },
+  "art_style": "Cinematic supernatural thriller — a FICTIONAL haunted-hotel mini-film in 9:16 vertical. A faded grand hotel frozen in the 1970s: warm tungsten pools from brass lamps against deep burgundy-and-forest-green decor, dark wood paneling, geometric-pattern carpet, brass key pigeonholes and an antique switchboard at the front desk; cold blue night beyond the windows. Deep shadows, shallow depth of field, anamorphic feel, subtle film grain, dust motes drifting in lamplight, slow deliberate camera moves. Grounded, realistic, moody — like a prestige horror series. No captions, no on-screen text, no logos, no watermarks. IMPORTANT: this is a silent visual shot — do NOT render any person speaking, lip-sync or talking to camera; the clerk's voice is added separately as narration. Never graphic or gory — the dread lives in stillness and in what is NOT shown.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": {
+    "channel": "sentinal_ihsan"
+  },
+  "characters": [
+    {
+      "id": "night_clerk",
+      "name": "Deniz Aksoy",
+      "bio": "Halden Grand Oteli'nin yeni gece resepsiyonisti. Kural listesindeki 7. maddeyi — '03:00'te 408'den gelen telefona ASLA cevap verme' — önce merak eder, sonra bozar. Anlatıcı ses onun iç monoloğudur (asla kamerada konuşmaz).",
+      "appearance": "A young night-shift hotel receptionist in his late 20s: short dark hair neatly combed but coming loose by 3 AM, tired brown eyes, light stubble, a fitted burgundy hotel waistcoat with a small brass name tag over a crisp white shirt with sleeves rolled to the forearm, dark trousers, a brass room key on a worn leather fob often in his hand. Realistic, grounded, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\characters\\night_clerk.png",
+      "ref_image_url": "https://i.ibb.co/nsRNvCfw/night-clerk.png",
+      "voice": {
+        "audio_id": "orus",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "eb560ec1ad844976b9dc7a7e0833bd72"
+    },
+    {
+      "id": "old_porter",
+      "name": "Yusuf Kara",
+      "bio": "Otelde 1994'ten beri çalışan tek kişi; 408 kurallarını yazan adam. Part 2'de görünür, Part 4'te sırrı açığa çıkar: 1994'te telefona cevap veren gece memuru oydu. Kamerada konuşmaz.",
+      "appearance": "An elderly hotel porter in his mid-70s: thinning white hair combed back, a deeply lined weathered face, heavy grey brows over pale watchful eyes, slightly stooped but dignified posture, a faded navy porter's uniform with tarnished gold braid and worn brass buttons, a large iron ring of old room keys hanging from his belt. Realistic, grounded, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\characters\\old_porter.png",
+      "ref_image_url": "https://i.ibb.co/4wyt5gXJ/old-porter.png",
+      "voice": {
+        "audio_id": "callirrhoe",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "7c80724c2c554f10a9288c45027f6119"
+    }
+  ],
+  "environments": [
+    {
+      "id": "lobby_desk",
+      "name": "Resepsiyon — gece",
+      "desc": "The front desk of a faded grand 1970s hotel at night: a long mahogany reception counter lit by a single warm desk lamp, a wall of wooden key pigeonholes behind it, an antique brass switchboard telephone with rows of tiny extension lamps, a thick leather-bound logbook open on the counter, dim chandeliers and empty armchairs sinking into shadow beyond. Moody, quiet, cinematic night interior.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\environments\\lobby_desk.png",
+      "ref_image_url": "https://i.ibb.co/DDcjWRmt/lobby-desk.png"
+    },
+    {
+      "id": "elevator_hall",
+      "name": "Asansör holü",
+      "desc": "A vintage hotel elevator seen from the lobby: polished brass accordion-cage doors, an antique semicircular floor-indicator dial with a slender brass arrow mounted above them, dim amber wall sconces on either side, geometric-pattern carpet in front, dark wood paneling. Eerie, still, cinematic night interior.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\environments\\elevator_hall.png",
+      "ref_image_url": "https://i.ibb.co/kgYDws37/elevator-hall.png"
+    },
+    {
+      "id": "corridor_408",
+      "name": "4. kat koridoru",
+      "desc": "A long narrow fourth-floor hotel corridor at night: geometric-pattern carpet receding in deep perspective, rows of identical dark wooden doors with brass numerals, dim wall sconces every few meters — several flickering, and at the far end one door subtly darker than the rest with an old room-service tray on the floor beside it. Unsettling, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\environments\\corridor_408.png",
+      "ref_image_url": "https://i.ibb.co/XZq9v7M4/corridor-408.png"
+    },
+    {
+      "id": "door_408",
+      "name": "408 kapısı",
+      "desc": "Close view of hotel room door number 408 at night: a dark wooden door with tarnished brass numerals, its frame sealed over with old cracked paint as if painted shut decades ago, a dark brass peephole, a faded 'Do Not Disturb' card hanging from the handle, one dim flickering sconce beside it. Ominous, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\environments\\door_408.png",
+      "ref_image_url": "https://i.ibb.co/v4Stb1FG/door-408.png"
+    },
+    {
+      "id": "back_office",
+      "name": "Arka ofis / arşiv",
+      "desc": "A cramped hotel back office at night: metal shelves stacked with dusty leather ledgers and card-file boxes, a small desk with a green banker's lamp, faded framed staff photographs on the wall, an old reel-to-reel tape machine under a dust cloth, a hanging pull-chain bulb. Cluttered, secretive, cinematic interior.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\environments\\back_office.png",
+      "ref_image_url": "https://i.ibb.co/wFJ68dRc/back-office.png"
+    },
+    {
+      "id": "hotel_exterior",
+      "name": "Otel cephesi — 03:00",
+      "desc": "The Halden Grand Hotel exterior at 3 AM: a narrow old European-style stone facade on a rain-wet empty street, a vertical neon HOTEL sign with one letter flickering, warm light only in the ground-floor lobby windows — and one single faint light behind a fourth-floor window. Cold blue night, thin mist, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\room-408\\refs\\environments\\hotel_exterior.png",
+      "ref_image_url": "https://i.ibb.co/v6SFgg13/hotel-exterior.png"
+    }
+  ],
+  "props": []
+}
