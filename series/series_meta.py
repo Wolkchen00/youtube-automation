@@ -65,6 +65,14 @@ class SeriesMeta:
         Hikâye dizileri (ör. The Signal) bunu KULLANMAZ → seri çerçevesi korunur."""
         return bool(self.data.get("standalone", False))
 
+    @property
+    def auto_replenish(self) -> dict:
+        """Oto-ikmal ayarı (opt-in, 'sonsuz içerik'): {"enabled": true, "batch": 5,
+        "min_queue": 2, "brief": "..."}. Yoksa/enabled değilse boş dict → özellik kapalı.
+        Detay: series/replenish.py."""
+        v = self.data.get("auto_replenish") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
     # -- başlık / açıklama --
     def title_for(self, n: int, subtitle: str = "") -> str:
         if self.standalone:

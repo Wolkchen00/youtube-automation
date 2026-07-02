@@ -13,6 +13,47 @@ from .config import UPLOAD_POST_API_KEY, UPLOAD_USERS, CHANNEL_PLATFORMS, logger
 
 UPLOAD_POST_URL = "https://api.upload-post.com/api/upload"
 
+# Bu boyutun üzerindeki dosyalar yüklenmeden önce bitrate-kapaklı bir 'delivery'
+# kopyasına çevrilir. Upload-Post büyük gövdeleri akış ortasında kesiyor
+# (ConnectionReset 10054) — grain'li/CRF'li kaynaklar 45s'de 140MB'ı aşabiliyor;
+# Shorts zaten platformda ~2-6 Mbps'e yeniden kodlanıyor, kalite kaybı görünmez.
+MAX_UPLOAD_MB = 80
+_DELIVERY_MAXRATE = "6500k"
+_DELIVERY_BUFSIZE = "13M"
+
+
+def _delivery_copy(video_path: Path) -> Path:
+    """Dosya MAX_UPLOAD_MB'ı aşıyorsa yükleme için sıkıştırılmış kopya döndür.
+
+    Kaynak dosyaya dokunmaz; kopya yanına '<ad>_delivery.mp4' olarak cache'lenir
+    (idempotent). Herhangi bir hatada orijinal yol döner (yükleme yine denenir)."""
+    try:
+        size_mb = video_path.stat().st_size / (1024 * 1024)
+        if size_mb <= MAX_UPLOAD_MB:
+            return video_path
+        delivery = video_path.parent / f"{video_path.stem}_delivery.mp4"
+        if delivery.exists() and delivery.stat().st_size > 0:
+            return delivery
+        import subprocess
+        cmd = [
+            "ffmpeg", "-y", "-i", str(video_path),
+            "-c:v", "libx264", "-crf", "26",
+            "-maxrate", _DELIVERY_MAXRATE, "-bufsize", _DELIVERY_BUFSIZE,
+            "-preset", "fast",
+            "-c:a", "aac", "-b:a", "128k",
+            "-movflags", "+faststart",
+            str(delivery),
+        ]
+        logger.info(f"📦 {size_mb:.0f}MB > {MAX_UPLOAD_MB}MB → delivery kopyası kodlanıyor...")
+        subprocess.run(cmd, capture_output=True, check=True, timeout=900)
+        if delivery.exists() and delivery.stat().st_size > 0:
+            new_mb = delivery.stat().st_size / (1024 * 1024)
+            logger.info(f"📦 Delivery hazır: {new_mb:.0f}MB ({delivery.name})")
+            return delivery
+    except Exception as e:
+        logger.warning(f"⚠️ Delivery kopyası üretilemedi ({e}) — orijinal dosya denenecek")
+    return video_path
+
 
 def _platform_result(body: dict, platform: str) -> dict | None:
     """Upload-Post yanıtındaki tek platforma ait sonucu bul (varsa)."""
@@ -68,6 +109,9 @@ def upload_to_platform(
     if not video_path.exists():
         logger.error(f"❌ Video not found: {video_path}")
         return None
+
+    # Büyük dosya → akış ortasında kesilme (10054). Gerekirse sıkıştırılmış kopya yükle.
+    video_path = _delivery_copy(Path(video_path))
 
     headers = {"Authorization": f"Apikey {UPLOAD_POST_API_KEY}"}
 

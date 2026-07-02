@@ -1,0 +1,47 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "The aisle that restocks itself at 3AM"
+  },
+  "cctv": { "camera": "CAM 02 — AISLE 3", "date": "2026-05-02" },
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "environment": "gas_station_aisle",
+      "cam_time": "03:12:07",
+      "caption": "The night clerk quit after one week. He said it was aisle 3.",
+      "prompt": "The empty convenience-store aisle sits still in the same fixed view: stocked shelves on both sides, the yellow wet-floor sign standing mid-aisle, fluorescent light reflecting off the glossy tiles, coolers glowing at the far end. Nothing moves. Ends on: the exact same still aisle."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "environment": "gas_station_aisle",
+      "cam_time": "03:14:26",
+      "prompt": "In the same fixed view, the fluorescent lights flicker once. A single chip bag slides off the middle shelf on the left and drops to the tile floor. Everything else stays perfectly still. Ends on: the bag lying alone on the floor, the aisle motionless."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "environment": "gas_station_aisle",
+      "cam_time": "03:17:02",
+      "prompt": "In the same fixed view, every item on the LEFT middle shelf slides about ten centimeters toward the camera in perfect unison, slowly and smoothly, as if pushed from behind by one motion. The other shelves do not move at all. Ends on: the shifted row sitting at the shelf edge."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "environment": "gas_station_aisle",
+      "cam_time": "03:17:58",
+      "prompt": "In the same fixed view, the yellow wet-floor sign tips over on its own and claps flat against the tiles; a few hanging price tags swing; the fluorescent lights flicker twice and then hold steady. Ends on: the aisle still again, the sign lying flat on the floor."
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "environment": "gas_station_aisle",
+      "cam_time": "03:19:44",
+      "caption": "By morning, aisle 3 was in perfect order. Nothing else in the store was touched.",
+      "prompt": "In the same fixed view, the aisle is calm: the dropped chip bag is back on the shelf, every product on the middle shelf sits perfectly aligned face-forward — neater than before — while the wet-floor sign still lies flat on the tiles. Ends on: the perfectly ordered, motionless aisle."
+    }
+  ]
+}

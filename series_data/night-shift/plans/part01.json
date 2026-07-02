@@ -1,0 +1,47 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Why the crabs kept disappearing at 2AM"
+  },
+  "cctv": { "camera": "CAM 04 — HUSBANDRY", "date": "2026-03-11" },
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "environment": "aquarium_lab",
+      "cam_time": "02:47:12",
+      "caption": "Staff kept finding empty crab shells in the wrong tank. So they finally checked the night camera.",
+      "prompt": "The husbandry room sits perfectly still in the same fixed view: gentle ripples cross both open-top tanks, the octopus is a dim reddish shape resting inside the LEFT tank, blue glow shimmers on the wet concrete floor. Nothing else moves. Ends on: the exact same still room."
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "environment": "aquarium_lab",
+      "cam_time": "02:51:33",
+      "prompt": "In the same fixed view, the octopus slowly slides one arm over the rim of the LEFT tank, then pours its whole soft body over the edge and down the metal stand leg onto the wet floor, unhurried and deliberate. Ends on: the octopus resting on the floor beside the left tank stand."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "environment": "aquarium_lab",
+      "cam_time": "02:52:41",
+      "prompt": "In the same fixed view, the octopus hauls itself across the wet concrete floor between the two tank stands, arms reaching and pulling in turn, body glistening in the dim blue light, moving steadily toward the RIGHT tank. Ends on: the octopus arriving at the base of the right tank's stand."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "environment": "aquarium_lab",
+      "cam_time": "02:54:05",
+      "prompt": "In the same fixed view, the octopus climbs the right tank's metal stand, slips over the rim and disappears into the water; the surface churns briefly as small crabs scatter inside the glass. Ends on: the water settling, the octopus a dark shape inside the right tank."
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "environment": "aquarium_lab",
+      "cam_time": "03:26:58",
+      "caption": "It always put itself back before the morning shift arrived.",
+      "prompt": "In the same fixed view, the room is perfectly still again. The octopus rests inside its OWN left tank as if it never moved; only a faint drying wet sheen still crosses the floor between the two tank stands. Ends on: the still room, identical to the start of the night."
+    }
+  ]
+}

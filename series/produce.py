@@ -116,6 +116,72 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
     return out
 
 
+# ─── Kurgu-öncesi çekim hazırlığı (micro_trim + CCTV giydirme; opt-in) ─────────
+
+def _cam_epoch(date_str: str | None, cam_time: str | None) -> int | None:
+    """'2026-06-14' + '02:47[:33]' → UTC epoch (CCTV saatinin işlemeye başlayacağı an)."""
+    if not cam_time:
+        return None
+    try:
+        import calendar
+        import time as _time
+        d = (date_str or "2026-01-01").strip()
+        hms = str(cam_time).strip()
+        if len(hms.split(":")) == 2:
+            hms += ":00"
+        return calendar.timegm(_time.strptime(f"{d} {hms}", "%Y-%m-%d %H:%M:%S"))
+    except Exception:
+        return None
+
+
+def _cam_date_text(date_str: str | None) -> str:
+    """ISO tarih ('2026-06-14') → CCTV overlay tarih metni ('06/14/2026')."""
+    try:
+        y, m, d = (int(x) for x in (date_str or "").split("-"))
+        return f"{m:02d}/{d:02d}/{y}"
+    except Exception:
+        return date_str or ""
+
+
+def _prep_shot_clip(bible: Bible, plan: dict, shot: dict, src: Path) -> Path:
+    """Kurguya girmeden önce çekimi hazırla (opt-in): micro_trim + CCTV giydirme.
+
+    Çıktı yan dosyada cache'lenir (*_prep.mp4) → yarım kalan koşular idempotent.
+    Kare zinciri (chain_frames) HAM klipten beslenmeye devam eder — yakılan
+    timestamp/grain bir sonraki çekimin başlangıç karesine sızmaz. Her adım
+    best-effort: hazırlık başarısızsa ham klip kullanılır, gece koşusu durmaz."""
+    cfg = bible.cctv
+    trim = bible.micro_trim
+    if not cfg and not trim:
+        return src
+    prep = src.parent / f"{src.stem}_prep.mp4"
+    if prep.exists() and prep.stat().st_size > 0:
+        return prep
+    work = src
+    try:
+        if trim:
+            tpath = src.parent / f"{src.stem}_trim.mp4"
+            work = ffmpeg_tools.trim_head_tail(src, tpath, head=trim, tail=trim)
+            if not cfg:
+                Path(work).replace(prep)   # sadece kırpma → cache sözleşmesi korunur
+                return prep
+        pcfg = {**cfg, **(plan.get("cctv") or {})}   # bible varsayılan, plan bölüme özgü
+        ffmpeg_tools.cctv_overlay(
+            work, prep,
+            camera_label=pcfg.get("camera", "CAM 01"),
+            date_text=_cam_date_text(pcfg.get("date")),
+            epoch=_cam_epoch(pcfg.get("date"), shot.get("cam_time")),
+            fps=pcfg.get("fps", 18),
+            grain=pcfg.get("grain", 7),
+            caption=shot.get("caption"),
+        )
+        if prep.exists() and prep.stat().st_size > 0:
+            return prep
+    except Exception as e:
+        logger.warning(f"⚠️ Çekim hazırlığı başarısız ({src.name}): {e} — ham klip kullanılacak")
+    return src
+
+
 # ─── Referans görsel (Karışık: yerel görsel varsa yükle, yoksa Nano Banana ile üret) ──
 
 def _ref_prompt(kind: str, item: dict, style: str) -> str:
@@ -308,6 +374,8 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     chain_url = chain_start_url if chaining else None
     last_frame_url = None
     shot_files: list[Path] = []
+    shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
+    running = 0.0
 
     for shot in plan["shots"]:
         n = shot.get("n")
@@ -317,7 +385,10 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
         # İdempotent: bu çekim zaten üretildiyse atla; zincir için son karesini yine de al
         if not dry_run and out_file.exists() and out_file.stat().st_size > 0:
             logger.info(f"⏭️ Çekim {n} zaten var, atlanıyor: {out_file.name}")
-            shot_files.append(out_file)
+            prep = _prep_shot_clip(bible, plan, shot, out_file)
+            shot_offsets[int(n)] = running
+            running += ffmpeg_tools.get_video_duration(prep)
+            shot_files.append(prep)
             if chaining:
                 lf = ffmpeg_tools.extract_last_frame(out_file)
                 if lf:
@@ -357,7 +428,10 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 video_url = result["url"]
                 credits = result.get("credits")
                 if download_file(video_url, out_file):
-                    shot_files.append(out_file)
+                    prep = _prep_shot_clip(bible, plan, shot, out_file)
+                    shot_offsets[int(n)] = running
+                    running += ffmpeg_tools.get_video_duration(prep)
+                    shot_files.append(prep)
                     status = "ok"
                 if credits is not None:
                     cost_tracker.log_cost(f"series:{slug}", f"omni_ep{number}_shot{n}",
@@ -392,7 +466,10 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             video_url = result["url"]
             credits = result.get("credits")
             if download_file(video_url, out_file):
-                shot_files.append(out_file)
+                prep = _prep_shot_clip(bible, plan, shot, out_file)
+                shot_offsets[int(n)] = running
+                running += ffmpeg_tools.get_video_duration(prep)
+                shot_files.append(prep)
                 status = "ok"
             if credits is not None:
                 cost_tracker.log_cost(f"series:{slug}", f"{shot_engine}_ep{number}_shot{n}",
@@ -432,8 +509,34 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     # Anlatım (narration) + arka plan müziği (best-effort)
     final_ep = _post_process(bible, plan, final_ep)
 
-    # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar)
-    if chaining:
+    # Açılış kancası (opt-in): doruk çekimden kısa bir kesit videonun EN BAŞINA
+    # eklenir — ilk 1-2 saniyede 'olağandışı an' görünmezse Shorts'ta kaydırılır.
+    # Müzik/anlatımdan SONRA yapılır ki kesit sesiyle birlikte gelsin.
+    hook = bible.hook_teaser
+    if hook and shot_offsets:
+        try:
+            ns = sorted(shot_offsets)
+            hn = int(plan.get("hook_shot") or (ns[-2] if len(ns) >= 2 else ns[-1]))
+            if hn not in shot_offsets:
+                raise ValueError(f"hook_shot={hn} üretilen çekimler arasında değil")
+            d = float(hook.get("duration", 1.4))
+            skip = float(hook.get("offset_in_shot", 1.6))
+            total = ffmpeg_tools.get_video_duration(final_ep)
+            start = min(shot_offsets[hn] + skip, max(0.0, total - d - 0.25))
+            teaser = episode_dir(slug, number) / "hook_teaser.mp4"
+            ffmpeg_tools.extract_clip(final_ep, teaser, start, d)
+            hooked = Path(final_ep).parent / f"{Path(final_ep).stem}_hooked.mp4"
+            ffmpeg_tools.concatenate_simple([teaser, Path(final_ep)], hooked,
+                                            clips_dir=Path(final_ep).parent)
+            if hooked.exists() and hooked.stat().st_size > 0:
+                final_ep = hooked
+                logger.info(f"🎣 Kanca: çekim {hn} dorukundan {d:.1f}s (t={start:.1f}s) başa eklendi")
+        except Exception as e:
+            logger.warning(f"⚠️ Kanca eklenemedi (video kancasız yayınlanır): {e}")
+
+    # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar).
+    # chain_scope="episode" ise bölümler arası taşıma YOK — sidecar yazılmaz.
+    if chaining and bible.chain_scope == "series":
         if not last_frame_url:
             lf = ffmpeg_tools.extract_last_frame(final_ep)
             if lf:

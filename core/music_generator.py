@@ -56,6 +56,14 @@ MUSIC_PROMPTS = {
         "NO vocals. Sits quietly under wind and silence to build dread. "
         "Seamless and continuous, never resolving."
     ),
+    # night-shift (CCTV anthology): realistic empty-building room tone, NOT music
+    "night-shift": (
+        "Ultra-quiet realistic room tone of an empty building at night, as heard "
+        "on a security-camera recording: steady fluorescent light hum, faint "
+        "electrical buzz, distant HVAC air rumble. Constant and seamless, almost "
+        "subliminal. NO melody, NO rhythm, NO music, NO vocals — just a real, "
+        "slightly uneasy quiet building."
+    ),
 }
 
 # Slug → music-prompt-key aliases (so callers can pass either the narration channel
@@ -82,6 +90,9 @@ AMBIENT_PROFILES = {
     "infinite-trip":       {"drone": 73.4, "fifth": 110.0, "lp": 950, "trem": 0.18},  # hipnotik/psychedelic
     "shadowedhistory":     {"drone": 55.0, "fifth": 82.4, "lp": 520, "trem": 0.12},   # ağırbaşlı/brooding
     "the-signal":          {"drone": 46.3, "fifth": 69.3, "lp": 430, "trem": 0.14},   # tekinsiz/sub drone
+    # 60 Hz = şebeke uğultusu + 120 Hz harmoniği → floresan/trafo vızıltısı; dar lowpass
+    # + pembe gürültü = uzak havalandırma. Müzik değil, 'boş bina gece sesi'.
+    "night-shift":         {"drone": 60.0, "fifth": 120.0, "lp": 330, "trem": 0.11},
 }
 DEFAULT_AMBIENT = {"drone": 60.0, "fifth": 90.0, "lp": 700, "trem": 0.13}
 

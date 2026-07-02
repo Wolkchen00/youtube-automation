@@ -44,6 +44,19 @@ def get_video_duration(video_path: str | Path) -> float:
         return 5.0
 
 
+def get_video_height(video_path: str | Path) -> int:
+    """Get video height in pixels (0 on failure)."""
+    try:
+        result = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0",
+             "-show_entries", "stream=height", "-of", "csv=p=0", str(video_path)],
+            capture_output=True, text=True, timeout=10
+        )
+        return int(result.stdout.strip().splitlines()[0])
+    except Exception:
+        return 0
+
+
 def extract_last_frame(video_path: str | Path, output_path: str | Path = None) -> Path | None:
     """Extract the final frame of a video as a PNG.
 
@@ -609,6 +622,222 @@ def mix_background_music(
         import shutil
         shutil.copy2(str(video_path), str(output_path))
 
+    return output_path
+
+
+def _find_font(mono: bool = True) -> str | None:
+    """Find a usable TTF font for drawtext (GitHub Actions ubuntu + local Windows/macOS).
+
+    mono=True prefers a monospace face (CCTV/timestamp look)."""
+    mono_first = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf",   # ubuntu runner
+        "C:/Windows/Fonts/consola.ttf",                          # Windows (Consolas)
+        "C:/Windows/Fonts/lucon.ttf",
+        "/System/Library/Fonts/Menlo.ttc",                       # macOS
+    ]
+    prop_first = [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
+        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
+        "C:/Windows/Fonts/arialbd.ttf",
+        "C:/Windows/Fonts/arial.ttf",
+        "/System/Library/Fonts/Helvetica.ttc",
+    ]
+    candidates = (mono_first + prop_first) if mono else (prop_first + mono_first)
+    for c in candidates:
+        if Path(c).exists():
+            return c
+    return None
+
+
+def _drawtext_escape(text: str) -> str:
+    """Escape free text for a single-quoted drawtext value (args passed via
+    subprocess list — only ffmpeg's own filtergraph/expansion parsing applies)."""
+    s = (text or "").replace("\\", "\\\\")
+    s = s.replace("'", "’")          # real apostrophes → typographic (no quote wars)
+    s = s.replace(":", "\\:").replace("%", "%%")
+    return s
+
+
+def trim_head_tail(
+    input_path: str | Path,
+    output_path: str | Path,
+    head: float = 0.3,
+    tail: float = 0.3,
+) -> Path:
+    """Cut the first/last fraction of a clip before stitching.
+
+    AI-generated shots tend to open and close on a static 'pose' beat, which makes
+    a stitched episode read as N mini-videos instead of one flow. Shaving a few
+    tenths of a second from both ends drops every clip into the middle of its own
+    motion — the single cheapest fluidity win. Falls back to a plain copy when the
+    clip is too short to trim safely.
+    """
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+    duration = get_video_duration(input_path)
+    keep = duration - head - tail
+    if keep < 2.0:
+        import shutil
+        logger.warning(f"⚠️ Clip too short to micro-trim ({duration:.1f}s) — copied as-is")
+        shutil.copy2(str(input_path), str(output_path))
+        return output_path
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-ss", f"{head:.3f}",
+        "-i", str(input_path),
+        "-t", f"{keep:.3f}",
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", FFMPEG_PRESET,
+        "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+        str(output_path)
+    ]
+    try:
+        subprocess.run(cmd, capture_output=True, check=True, timeout=300)
+        logger.info(f"✂️ Micro-trim {head:.2f}s/{tail:.2f}s → {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        logger.warning(f"⚠️ Micro-trim failed (using original): {e}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+    return output_path
+
+
+def cctv_overlay(
+    input_path: str | Path,
+    output_path: str | Path,
+    camera_label: str = "CAM 01",
+    date_text: str = "",
+    epoch: int | None = None,
+    fps: int | None = 18,
+    grain: int = 7,
+    caption: str | None = None,
+    caption_start: float = 0.3,
+    caption_duration: float = 4.4,
+) -> Path:
+    """Dress a clip as security-camera footage: ticking timestamp, camera label,
+    blinking REC dot, sensor grain, muted colors, low frame rate.
+
+    Applied PER SHOT before concat so each shot's clock starts at its own
+    plan-provided time (real CCTV cuts jump minutes — that jump legitimizes any
+    small visual discontinuity between AI shots). `epoch` is the UTC epoch the
+    ticking HH:MM:SS starts from (drawtext pts:gmtime, %T avoids colon-escape
+    pitfalls). The low fps stutter also masks AI motion artifacts.
+    """
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+
+    # Boyutlar 1080x1920 referansına göre tasarlandı; girdi farklıysa (Seedance
+    # klipleri 720x1280 gelir) her şey yüksekliğe oranla ölçeklenir.
+    scale = (get_video_height(input_path) or 1920) / 1920.0
+
+    def px(v: float) -> int:
+        return max(1, round(v * scale))
+
+    font = _find_font(mono=True)
+    # Windows sürücü iki noktası (C:) çift-katman filter parser'ını kırar → '\:' kaçışı
+    fontarg = f"fontfile='{font.replace(':', chr(92) + ':')}':" if font else ""
+
+    vf_parts = []
+    if fps:
+        vf_parts.append(f"fps={int(fps)}")
+    vf_parts.append("eq=saturation=0.78:contrast=1.05:brightness=-0.015")
+    if grain:
+        vf_parts.append(f"noise=alls={int(grain)}:allf=t")
+
+    common = f"shadowcolor=black@0.65:shadowx={px(2)}:shadowy={px(2)}"
+
+    # ● REC — top-left, slow blink
+    vf_parts.append(
+        f"drawtext={fontarg}text='● REC':fontsize={px(38)}:fontcolor=0xE84040:"
+        f"alpha='if(lt(mod(t,1.6),1.0),0.85,0.15)':x={px(44)}:y={px(64)}:{common}"
+    )
+    # Camera label — top-right
+    if camera_label:
+        vf_parts.append(
+            f"drawtext={fontarg}text='{_drawtext_escape(camera_label)}':fontsize={px(34)}:"
+            f"fontcolor=white@0.82:x=w-text_w-{px(44)}:y={px(64)}:{common}"
+        )
+    # Live-ticking date+time — top-right, second line. %{pts:gmtime:EPOCH}
+    # renders 'YYYY-MM-DD HH:MM:SS' and TICKS with the clip (a 4th strftime arg
+    # renders empty on ffmpeg 8 — don't add one).
+    if epoch is not None:
+        vf_parts.append(
+            f"drawtext={fontarg}text='%{{pts\\:gmtime\\:{int(epoch)}}}':"
+            f"fontsize={px(38)}:fontcolor=white@0.82:x=w-text_w-{px(44)}:y={px(116)}:{common}"
+        )
+    elif date_text:
+        vf_parts.append(
+            f"drawtext={fontarg}text='{_drawtext_escape(date_text)}':fontsize={px(38)}:"
+            f"fontcolor=white@0.82:x=w-text_w-{px(44)}:y={px(116)}:{common}"
+        )
+    # Context caption — lower third, boxed, fade in/out. One drawtext PER LINE:
+    # ffmpeg 8's text shaping draws embedded '\n' as a missing-glyph box, so
+    # multi-line text via a single drawtext is not safe.
+    if caption:
+        import textwrap
+        lines = textwrap.wrap(caption, width=34)
+        c_end = caption_start + caption_duration
+        c_in = caption_start + 0.4
+        c_out = c_end - 0.5
+        alpha = (
+            f"if(lt(t,{caption_start}),0,"
+            f"if(lt(t,{c_in}),(t-{caption_start})/0.4,"
+            f"if(lt(t,{c_out}),1,if(lt(t,{c_end}),({c_end}-t)/0.5,0))))"
+        )
+        cap_fs, cap_gap = px(40), px(26)
+        line_h = cap_fs + cap_gap          # boxborderw büyümesin diye satır arası boşluk
+        base = f"h-{px(460)}-{len(lines)}*{line_h}"
+        for i, line in enumerate(lines):
+            vf_parts.append(
+                f"drawtext={fontarg}text='{_drawtext_escape(line)}':fontsize={cap_fs}:"
+                f"fontcolor=white:box=1:boxcolor=black@0.55:boxborderw={px(13)}:"
+                f"x=(w-text_w)/2:y={base}+{i}*{line_h}:alpha='{alpha}'"
+            )
+    vf_parts.append("format=yuv420p")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-vf", ",".join(vf_parts),
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", FFMPEG_PRESET,
+        "-c:a", "copy",
+        str(output_path)
+    ]
+    try:
+        subprocess.run(cmd, capture_output=True, check=True, timeout=300)
+        logger.info(f"📹 CCTV overlay ({camera_label}) → {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        err = (e.stderr or b"").decode(errors="replace")[-400:] if e.stderr else str(e)
+        logger.warning(f"⚠️ CCTV overlay failed (using original): {err}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+    return output_path
+
+
+def extract_clip(
+    input_path: str | Path,
+    output_path: str | Path,
+    start: float,
+    duration: float,
+) -> Path:
+    """Extract a [start, start+duration] excerpt (re-encoded — frame-exact).
+
+    Used for the retention hook: a beat from the episode's climax shot is
+    prepended as a cold-open teaser."""
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+    cmd = [
+        "ffmpeg", "-y",
+        "-ss", f"{max(0.0, start):.3f}",
+        "-i", str(input_path),
+        "-t", f"{duration:.3f}",
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", "fast",
+        "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+        str(output_path)
+    ]
+    subprocess.run(cmd, capture_output=True, check=True, timeout=120)
     return output_path
 
 

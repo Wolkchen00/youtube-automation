@@ -134,10 +134,11 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
 
     # 'Bitmeyen yolculuk' — önceki bölümün son karesinden devam (parçalar arası zincir).
     # Bulutta her koşu temiz checkout olduğu için son kare URL'i git'li series.json'da tutulur.
+    # chain_scope="episode" ise zincir yalnız bölüm içi → önceki bölümün karesi OKUNMAZ.
     from series.bible import Bible, episode_dir
     bible = Bible.load(slug)
     chain_start_url = None
-    if bible and bible.chain_frames:
+    if bible and bible.chain_frames and bible.chain_scope == "series":
         chain_start_url = meta.data.get("last_frame_url")
         if chain_start_url:
             logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
@@ -154,7 +155,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
         return False
     meta.mark_produced(n, video, subtitle)
     # Zincir: bu bölümün son karesini sonraki bölüm için series.json'a yaz (bulut-kalıcı).
-    if bible and bible.chain_frames:
+    if bible and bible.chain_frames and bible.chain_scope == "series":
         sidecar = episode_dir(slug, n) / "last_frame.txt"
         if sidecar.exists():
             meta.data["last_frame_url"] = sidecar.read_text(encoding="utf-8").strip()
@@ -203,6 +204,13 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
 
 def run_all(dry_run: bool = False, publish: bool = True) -> bool:
     """Tüm aktif serilerin sıradaki part'ını çalıştır. Hepsi başarılıysa True."""
+    # Oto-ikmal: kuyruğu azalan auto_replenish'li serilere Gemini yeni planlar yazar.
+    # Aktif seri seçiminden ÖNCE çalışır → bugün dirilen seri bugün üretilir.
+    try:
+        from series.replenish import replenish_all
+        replenish_all(dry_run=dry_run)
+    except Exception as e:
+        logger.warning(f"⚠️ Oto-ikmal atlandı: {e}")
     slugs = list_active_series()
     if not slugs:
         logger.info("Aktif seri yok.")

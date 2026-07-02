@@ -1,0 +1,47 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Flour spilled at 4AM — something walked through it"
+  },
+  "cctv": { "camera": "CAM 01 — PREP KITCHEN", "date": "2026-04-18" },
+  "hook_shot": 3,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "environment": "bakery_kitchen",
+      "cam_time": "04:06:11",
+      "caption": "Every morning the bakers found flour on the floor. The bag was always still sealed.",
+      "prompt": "The bakery prep kitchen sits spotless and still in the same fixed view: steel worktables, stacked bowls, paper flour sacks leaning by a table leg, one dim safety light over the door. Nothing moves. Ends on: the exact same still kitchen."
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "environment": "bakery_kitchen",
+      "cam_time": "04:09:36",
+      "prompt": "In the same fixed view, the tallest paper flour sack slowly leans away from the table leg and tips over; a wide fan of white flour spreads across the dark tiled floor and the fine dust settles. Ends on: a smooth, untouched fan of flour on the floor."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "environment": "bakery_kitchen",
+      "cam_time": "04:11:02",
+      "prompt": "In the same fixed view, small bare footprints press into the smooth flour ONE BY ONE, appearing out of nothing, walking away from the camera across the spill — each print sharp and child-sized, with no one there to make them. Ends on: a trail of small footprints crossing the flour."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "environment": "bakery_kitchen",
+      "cam_time": "04:11:58",
+      "prompt": "In the same fixed view, the trail of footprints simply STOPS in the middle of the open floor. On the far worktable a metal mixing bowl rocks and spins slowly to a stop, and the door under the safety light sways gently once. Ends on: the still kitchen, prints ending mid-floor."
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "environment": "bakery_kitchen",
+      "cam_time": "04:29:47",
+      "caption": "The footprints ended in the middle of the room. They never walked back.",
+      "prompt": "In the same fixed view, the kitchen is silent: the tipped sack, the fan of flour and the trail of small footprints all exactly as they were, while a thin strip of early morning light appears under the door. Ends on: the still kitchen holding its evidence, morning approaching."
+    }
+  ]
+}

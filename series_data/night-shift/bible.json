@@ -1,0 +1,67 @@
+{
+  "series": {
+    "slug": "night-shift",
+    "title": "Night Shift Files",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "seedance",
+    "native_audio": false,
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "audio_smooth": false,
+    "micro_trim": 0.25,
+    "cctv": {
+      "enabled": true,
+      "fps": 18,
+      "grain": 7
+    },
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.4,
+      "offset_in_shot": 1.6
+    }
+  },
+  "art_style": "Fictional security-camera footage from a single FIXED ceiling-mounted CCTV camera: locked-off static high-angle view, 9:16 vertical framing, slightly wide lens with mild distortion, dim after-hours lighting, muted colors, mild sensor noise, soft focus. The camera is completely motionless — absolutely no pans, no zooms, no handheld movement; the framing never changes between moments. Photoreal, mundane, believable real-world place, empty of people. No on-screen text, no timestamp, no watermark, no logos, no captions (all overlays are added in post). Nothing graphic, nothing gory.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": {},
+  "characters": [],
+  "environments": [
+    {
+      "id": "aquarium_lab",
+      "name": "Akvaryum arka oda (husbandry)",
+      "desc": "The exact view from a ceiling security camera in the corner of an aquarium's back-of-house husbandry room at night: two large open-top glass tanks on metal stands a few meters apart (the left one holding a reddish octopus, the right one holding small crabs), wet concrete floor with a center drain, coiled hoses, shelves of buckets and nets, dim blue tank glow and one small red standby LED, a door with a small window at the far end.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-shift\\refs\\environments\\aquarium_lab.png",
+      "ref_image_url": "https://i.ibb.co/M5Cf6yKQ/aquarium-lab.png"
+    },
+    {
+      "id": "gas_station_aisle",
+      "name": "Benzinlik market koridoru",
+      "desc": "The exact view from a ceiling security camera looking straight down a single convenience-store aisle at night: fully stocked shelves of chip bags and snacks on both sides, glossy tile floor reflecting harsh fluorescent light, a yellow wet-floor sign standing near the middle of the aisle, glowing drink coolers at the far end.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-shift\\refs\\environments\\gas_station_aisle.png",
+      "ref_image_url": "https://i.ibb.co/dsZ1WgvG/gas-station-aisle.png"
+    },
+    {
+      "id": "museum_gallery",
+      "name": "Müze galerisi (batı kanadı)",
+      "desc": "The exact view from a ceiling security camera at one end of a long dark museum gallery at night: polished marble floor, glass display cases along both walls with faint artifact silhouettes inside, banks of ceiling lights (all switched off) receding to the far end, the dim green glow of an exit sign, velvet rope stanchions.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-shift\\refs\\environments\\museum_gallery.png",
+      "ref_image_url": "https://i.ibb.co/YBJTwRxC/museum-gallery.png"
+    },
+    {
+      "id": "bakery_kitchen",
+      "name": "Fırın hazırlık mutfağı",
+      "desc": "The exact view from a ceiling security camera in the corner of a commercial bakery prep kitchen at night: long stainless-steel worktables, stacked metal bowls and sheet pans, large paper sacks of flour leaning against a table leg, utensils hanging on a rail, a single dim safety light over the door, clean tiled floor.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-shift\\refs\\environments\\bakery_kitchen.png",
+      "ref_image_url": "https://i.ibb.co/qMf6mmNr/bakery-kitchen.png"
+    },
+    {
+      "id": "parking_garage",
+      "name": "Kapalı otopark B2",
+      "desc": "The exact view from a ceiling security camera overlooking level B2 of an underground parking garage at night: six parked cars in a row facing the camera at an angle, concrete pillars with painted 'B2' markings, one distant fluorescent tube flickering slightly, an exit ramp with a striped boom barrier on the right side, oil stains on the concrete floor.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-shift\\refs\\environments\\parking_garage.png",
+      "ref_image_url": "https://i.ibb.co/v4Tv2hkb/parking-garage.png"
+    }
+  ],
+  "props": []
+}

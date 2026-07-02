@@ -1,0 +1,47 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Six cars. One garage. Three seconds nobody can explain."
+  },
+  "cctv": { "camera": "CAM 12 — LEVEL B2", "date": "2026-06-09" },
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "environment": "parking_garage",
+      "cam_time": "02:33:04",
+      "caption": "Every alarm on level B2 went off at 2:33 AM. For exactly three seconds.",
+      "prompt": "Level B2 sits still in the same fixed view: six parked cars in a row, concrete pillars, one distant fluorescent tube flickering slightly, the striped boom barrier down at the exit ramp. Nothing moves. Ends on: the exact same still garage."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "environment": "parking_garage",
+      "cam_time": "02:33:21",
+      "prompt": "In the same fixed view, the interior dome lights of ALL six cars blink on at the same instant; every hazard light flashes once in perfect sync; then all the cars go dark again together. Ends on: the dark, still row of cars."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "environment": "parking_garage",
+      "cam_time": "02:34:10",
+      "prompt": "In the same fixed view, a slow wave of dust and a few scraps of paper rolls across the concrete floor from the left toward the exit ramp, like a single pressure front passing through, and dies out. The cars do not move. Ends on: the floor settling, faint dust hanging in the air."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "environment": "parking_garage",
+      "cam_time": "02:35:02",
+      "prompt": "In the same fixed view, the striped boom barrier at the exit ramp rises smoothly on its own, holds fully open for a long moment over the empty ramp, then lowers itself back down. Nothing passes under it. Ends on: the barrier resting down, the ramp empty."
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "environment": "parking_garage",
+      "cam_time": "02:37:49",
+      "caption": "No car was missing. The ramp camera saw nothing leave.",
+      "prompt": "In the same fixed view, the garage is still — except the nearest car's door now stands slightly ajar with its dome light glowing softly inside the dark row. Ends on: the still garage, one door open, one small light on."
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "slug": "night-shift",
+  "base_title": "Night Shift Files",
+  "logline": "Dramatized fictional stories told entirely through security-camera footage — a different empty building every night. Night Shift Files.",
+  "language": "en",
+  "standalone": true,
+  "upload_profile": "sentinalihsandaily",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#cctv #securitycamera #caughtoncamera #nightshift #unexplained #creepy #liminalspaces #mystery #shorts",
+  "total_parts": 5,
+  "next_part": 2,
+  "status": "active",
+  "publish_mode": "auto",
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-shift\\episodes\\ep01\\ep01_music_hooked.mp4",
+      "subtitle": "Why the crabs kept disappearing at 2AM",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-02T19:59:07.292551+00:00"
+    }
+  }
+}

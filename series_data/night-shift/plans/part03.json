@@ -1,0 +1,47 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "The motion lights kept finding something in Gallery West"
+  },
+  "cctv": { "camera": "CAM 09 — GALLERY WEST", "date": "2026-01-27" },
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "environment": "museum_gallery",
+      "cam_time": "01:58:20",
+      "caption": "The motion sensors only trigger for movement. Gallery West was empty.",
+      "prompt": "The long museum gallery sits dark and still in the same fixed view: glass display cases along both walls, all ceiling light banks off, only the dim green exit-sign glow on the marble floor. Nothing moves. Ends on: the exact same dark gallery."
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "environment": "museum_gallery",
+      "cam_time": "02:03:11",
+      "prompt": "In the same fixed view, the FARTHEST bank of motion-sensor ceiling lights clicks on by itself, throwing a cold pool of light on the marble at the far end of the gallery. The pool of light is completely empty. The rest stays dark. Ends on: one lit empty pool of light at the far end."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "environment": "museum_gallery",
+      "cam_time": "02:03:47",
+      "prompt": "In the same fixed view, the next bank of lights clicks on, then the next, each one closer to the camera, as if something unseen is walking up the gallery; reflections slide across the display-case glass with each new light. The floor under every light is empty. Ends on: only the nearest bank still dark."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "environment": "museum_gallery",
+      "cam_time": "02:04:29",
+      "prompt": "In the same fixed view, the NEAREST light bank clicks on directly in front of the camera: dust motes drift into a slow spinning vortex in the cold light, and a small oval of fog blooms on the inside of the nearest display case's glass, like a breath. Ends on: the fog oval slowly shrinking on the glass."
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "environment": "museum_gallery",
+      "cam_time": "02:06:53",
+      "caption": "Curators found one handprint that morning. On the inside of the glass.",
+      "prompt": "In the same fixed view, the light banks click off one by one from far to near, returning the gallery to darkness and the dim green exit glow. The gallery stands empty and still. Ends on: the dark gallery, exactly as the night began."
+    }
+  ]
+}

@@ -111,6 +111,16 @@ class Bible:
         return bool(self.data["series"].get("chain_frames", False))
 
     @property
+    def chain_scope(self) -> str:
+        """Zincirin kapsamı: "series" (varsayılan) = bölümün son karesi SONRAKİ BÖLÜME de
+        taşınır (series.json.last_frame_url); "episode" = zincir yalnız bölüm İÇİNDE çalışır,
+        her bölüm temiz/yeni bir sahneyle açılır (sidecar yazılmaz, last_frame_url okunmaz).
+        Bölümleri farklı mekân/tema olan kanallar için "episode" şarttır — yoksa yeni bölümün
+        ilk çekimi önceki bölümün mekânından başlar."""
+        v = str(self.data["series"].get("chain_scope", "series")).strip().lower()
+        return v if v in ("series", "episode") else "series"
+
+    @property
     def narration(self) -> dict:
         """Anlatım katmanı ayarı: {'channel': 'galactic_experiment'|'shadowedhistory'|...}.
         Boşsa anlatım eklenmez (motorun native sesi kullanılır)."""
@@ -126,6 +136,40 @@ class Bible:
         """Ucuz motorun (Seedance) kendi sesini üretsin mi? Anlatım-odaklı kanallarda
         False önerilir (anlatım+müzik temiz kalsın); 'trip' kanalında serbest."""
         return bool(self.data["series"].get("native_audio", True))
+
+    @property
+    def micro_trim(self) -> float:
+        """Kurgu öncesi her çekimin BAŞINDAN ve SONUNDAN kırpılacak saniye.
+        AI klipleri kendi içinde 'poz → aksiyon → poz' yaşar; uçlar kırpılınca her
+        kesme hareketin ORTASINA düşer → bölüm tek akış gibi okunur (en ucuz
+        akıcılık kazancı). 0/yok = kapalı; true = 0.30s. Örn: "micro_trim": 0.25"""
+        v = self.data["series"].get("micro_trim", 0)
+        if v is True:
+            return 0.3
+        try:
+            return max(0.0, float(v))
+        except (TypeError, ValueError):
+            return 0.0
+
+    @property
+    def cctv(self) -> dict:
+        """Güvenlik kamerası sunum katmanı (opt-in). Etkinse her çekim kurgudan önce
+        CCTV gibi giydirilir: işleyen saat + tarih + kamera etiketi + REC + grain +
+        düşük fps (AI kusurlarını da maskeler). Bible'daki değerler varsayılandır;
+        plan['cctv'] (kamera/tarih bölüme özgü) ve shot['cam_time']/shot['caption']
+        çekim bazında zenginleştirir.
+        Örn: "cctv": {"enabled": true, "fps": 18, "grain": 7}"""
+        v = self.data["series"].get("cctv") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
+    def hook_teaser(self) -> dict:
+        """Açılış kancası (opt-in): bölümün DORUK çekiminden kısa bir kesit videonun
+        en başına eklenir ('bekle, ne oluyor?' etkisi — ilk 2 saniye kuralı).
+        plan['hook_shot'] doruk çekimin n'sini söyler (yoksa sondan bir önceki).
+        Örn: "hook_teaser": {"enabled": true, "duration": 1.4, "offset_in_shot": 1.6}"""
+        v = self.data["series"].get("hook_teaser") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
     def audio_smooth(self) -> bool:
