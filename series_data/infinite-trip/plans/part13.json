@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Echoing Caverns"
+  },
+  "synopsis": "Pulsating bioluminescent formations within a vast cavern evolve and respond to unseen vibrations, creating a dynamic visual symphony.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera drifts into a vast, dark cavern where immense, organic-looking formations of deep teal rock slowly begin to glow with internal lime-green light, resembling dormant spores.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The glowing formations pulse and expand, as if breathing, sending out ripples of electric orange light that echo across the cavern walls, revealing more intricate, fractal textures, camera slowly exploring.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The entire cavern erupts in a symphony of synchronized bioluminescent pulses, the formations blooming into complex, alien flora of neon colors, the light waves creating impossible, ephemeral structures that appear and disappear.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The intense light show subsides, the formations receding into a gentle, soft glow of teal and lime, the cavern returning to a serene, dimly lit space, camera slowly moving towards a distant, softly glowing exit.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

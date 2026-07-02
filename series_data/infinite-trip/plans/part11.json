@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Celestial Ribbons"
+  },
+  "synopsis": "Shimmering ribbons of light unfurl across a cosmic void, weaving into complex, ever-shifting celestial tapestries.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera floats through a dark cosmic void as luminous, wide ribbons of deep purple and blue light slowly unfurl and twist into gentle spirals, shimmering with faint gold particles.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The ribbons multiply and intertwine, forming intricate, glowing celestial knots and braids, evolving into a vast, slowly rotating tapestry of light with magenta accents, camera gently weaving through them.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The celestial tapestry becomes immensely dense and complex, glowing with intense bioluminescent energy, forming a colossal, hyper-symmetric structure that slowly rotates and pulses, camera pulling back to reveal its grandeur.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The complex structure gently unravels, the ribbons dissolving into a tranquil river of soft, flowing light, slowly receding into an infinite, softly glowing horizon of deep blue and purple.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

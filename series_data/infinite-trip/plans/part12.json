@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Glass Spire Ascent"
+  },
+  "synopsis": "Towering spires of impossibly refractive glass grow and intertwine, reflecting an internal golden light as the camera ascends through their intricate forms.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From ground level, immense, translucent spires of emerald-green glass slowly grow upward, reflecting fragmented internal golden light, camera smoothly beginning an upward ascent alongside them.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The glass spires multiply and converge, forming an impossible, crystalline forest, shafts of sapphire light refracting through their facets, as the camera continues to ascend, twisting and turning through the increasing density.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Reaching the peak of this crystal metropolis, the spires coalesce into a colossal, glowing amethyst-hued super-structure, its facets creating an infinite internal kaleidoscope of light, the camera rotating to reveal its immense scale.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera gently floats above the crystal city, the spires below appearing as a serene, glowing landscape of fractured light, slowly dissolving into a soft, hazy sky of golden and purple light.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

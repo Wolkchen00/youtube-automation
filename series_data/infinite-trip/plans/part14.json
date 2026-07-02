@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "Veil of Whispers"
+  },
+  "synopsis": "Delicate, pearlescent veils shimmer and undulate, parting to reveal glimpses of hidden, softer realities within their folds.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A vast, shimmering veil of pearlescent white and soft silver fabric gently undulates and flows, slowly revealing subtle, ethereal patterns within its folds as the camera slowly approaches.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The veil parts gracefully, peeling back like an impossibly delicate curtain to reveal a dimension of soft rose and lavender light, where smaller, intricate silk-like ribbons slowly drift and intertwine.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Deeper within this revealed space, the ribbons multiply into an infinite, intricate network of shimmering, translucent threads, forming a complex, breathing tapestry of light that gently pulses and shifts, camera navigating through it.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The intricate tapestry of threads slowly dissolves and reforms into a single, vast, gently swaying veil of pearlescent light, softly obscuring the view once more, creating a sense of tranquil mystery.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

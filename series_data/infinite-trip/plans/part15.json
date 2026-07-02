@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Chromatic Vortex"
+  },
+  "synopsis": "A dynamic vortex of hyper-saturated chromatic energy spirals and expands, drawing the viewer into its mesmerizing, ever-changing core.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A subtle swirl of fiery red and deep orange light slowly begins to form in the center of the frame against a backdrop of dark space, gradually intensifying and expanding.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The swirl rapidly accelerates, pulling in electric yellow and bright magenta, forming a powerful, spiraling vortex of hyper-saturated color, the camera being drawn into its outer edges.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera plunges deep into the heart of the chromatic vortex, surrounded by an intense, rapidly shifting tunnel of pure light and color, reds, oranges, and yellows blurring into a blinding, mesmerizing blur, with glimpses of deep blue at the very core.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The intense vortex slowly diffuses and spreads out, the spiraling energy transforming into a vast, gentle aurora of intermingling colors, slowly expanding and fading into an infinite, softly glowing canvas of cosmic dust.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

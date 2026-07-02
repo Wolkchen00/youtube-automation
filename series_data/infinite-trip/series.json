@@ -10,9 +10,9 @@
     "tiktok"
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
-  "total_parts": 10,
-  "next_part": 11,
-  "status": "completed",
+  "total_parts": 15,
+  "next_part": 12,
+  "status": "active",
   "standalone": true,
   "publish_mode": "auto",
   "parts": {
@@ -122,7 +122,27 @@
         "tiktok"
       ],
       "published_at": "2026-06-25T17:13:55.966350+00:00"
+    },
+    "11": {
+      "status": "published",
+      "video": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\infinite-trip\\episodes\\ep11\\ep11_music_hooked.mp4",
+      "subtitle": "Celestial Ribbons",
+      "platforms_ok": [
+        "tiktok",
+        "youtube",
+        "instagram"
+      ],
+      "published_at": "2026-07-02T20:25:13.862656+00:00"
     }
   },
-  "last_frame_url": "https://i.ibb.co/p6n8WWRZ/shot-04-lastframe.png"
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "brief": "Her bölüm bağımsız ~30 saniyelik psychedelic görsel trip: tek kesintisiz morph halinde akan 4 çekim. Tema havuzu: fraktal doğa, sıvı mimari, kozmik tüneller, biyolüminesan okyanuslar, kristal/ışık/metal formları, imkânsız geometri, aurora/ışık fırtınaları. Her bölüm YENİ bir tema + renk paleti seçsin; asla insan, asla okunabilir yazı.",
+    "last_run": {
+      "at": "2026-07-02T19:57:10.057127+00:00",
+      "parts": "11-15"
+    }
+  }
 }
