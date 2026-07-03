@@ -1,0 +1,81 @@
+name: Night Archive Daily
+
+# The Night Archive'ın GARANTİLİ günlük şeridi (İhsan kararı 2026-07-03: "tam otomatik her gün 1 video"
+# — sentinalihsan = İhsan yüzlü korku evreni, kanalın ana marka serisi).
+# Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır: her gün sıradaki FILE
+# bölümünü üretir + sentinalihsandaily'ye (YT/IG/TikTok) yayınlar. Çifte üretim olmasın diye
+# night-archive series.json'da priority=999 ile ana kuyruğun fiilen dışında tutulur.
+# Saat düzeni: ana koşu 14:30 UTC → planetfall 16:30 UTC → bu koşu 18:30 UTC (durum-commit yarışı yok).
+
+on:
+  schedule:
+    - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni FILE bölümleri yazar — kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series night-archive 2>&1 | tee logs/night_archive_replenish.log
+
+      - name: Produce + publish (Night Archive sıradaki dosya)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -X utf8 -m series.series_runner --series night-archive 2>&1 | tee logs/night_archive_run.log
+
+      - name: Persist series state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add series_data/ || true
+            git diff --cached --quiet && echo "Değişiklik yok" && break
+            git commit -m "chore: night-archive durumunu ilerlet [skip ci]" || true
+            git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
+          done
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: night-archive-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7

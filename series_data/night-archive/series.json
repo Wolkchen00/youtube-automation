@@ -13,7 +13,7 @@
   "total_parts": 5,
   "next_part": 1,
   "status": "active",
-  "priority": 1,
+  "priority": 999,
   "publish_mode": "auto",
   "auto_replenish": {
     "enabled": true,
