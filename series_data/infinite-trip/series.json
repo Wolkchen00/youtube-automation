@@ -136,7 +136,7 @@
     }
   },
   "auto_replenish": {
-    "enabled": true,
+    "enabled": false,
     "batch": 5,
     "min_queue": 2,
     "brief": "Her bölüm bağımsız ~30 saniyelik psychedelic görsel trip: tek kesintisiz morph halinde akan 4 çekim. Tema havuzu: fraktal doğa, sıvı mimari, kozmik tüneller, biyolüminesan okyanuslar, kristal/ışık/metal formları, imkânsız geometri, aurora/ışık fırtınaları. Her bölüm YENİ bir tema + renk paleti seçsin; asla insan, asla okunabilir yazı.",
