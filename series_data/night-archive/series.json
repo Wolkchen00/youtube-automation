@@ -15,5 +15,14 @@
   "status": "active",
   "priority": 1,
   "publish_mode": "auto",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 6,
+    "shot_seconds": "8",
+    "brief": "Sonsuz antoloji: her bölüm arşive gelen YENİ bir dosya/kaset (FILE #numarası artarak devam eder) — kendi başına tam bir mini korku hikâyesi + bölüm sonu cliffhanger. DEĞİŞMEZ KURALLAR: (1) Başrol HER bölümde 'ihsan_archivist' karakteridir (kanalın yüzü) — en az 3-4 çekimde masa başında/rafların arasında yakın-orta planda görünür. (2) Her bölümde 1-2 çekim 'crt_screen' ortamında VHS kaset görüntüsü insert'i olsun (izlenen dosyanın içeriği). (3) Anlatım (narration) her zaman arşivcinin İngilizce birinci-şahıs iç monoloğu: sakin, yorgun, gergin — MrBallen tarzı; asla panik/çığlık. (4) Çekimler SESSİZ görsel: kimse konuşmaz, lip-sync yok. (5) Asla kan/vahşet — korku gösterilmeyende, durgunlukta. (6) hook_shot olarak bölümün en ürkütücü çekimini seç. Tema havuzu: tuhaf kasetler (geleceği/izleyeni çeken kayıtlar), imkânsız belgeler ve fotoğraflar, gelen kutuların tekrarlayan desenleri, arşivin kendi kuralları (intake zili, raf ışıkları, 9. koridor), zaman döngüleri, FILE #000 mitosuna ara sıra dokunan meta-bölümler. Her bölüm YENİ bir dosya konsepti kullansın; önceki bölümlerin dosya numaraları ve olaylarıyla tutarlı kal.",
+    "last_run": null
+  },
   "parts": {}
 }
