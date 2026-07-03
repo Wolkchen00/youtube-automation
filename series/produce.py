@@ -93,6 +93,17 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
         except Exception as e:
             logger.warning(f"⚠️ Anlatım atlandı: {e}")
 
+    # Anlatım BEKLENEN seride TTS başarısızsa sessiz kalma (the-signal dersi: sessiz
+    # başarısızlık günlerce fark edilmez) — video müzik-only çıkar ama Telegram'a haber ver.
+    if narr_cfg.get("channel") and narr_text and not narration_ok:
+        try:
+            from series import notifier
+            if notifier.enabled():
+                notifier.send_message(f"⚠️ *{bible.title}* ep{number}: anlatım (TTS) üretilemedi — "
+                                      f"video anlatımsız (müzik-only) yayınlanacak.")
+        except Exception:
+            pass
+
     if bible.music:
         try:
             from core.music_generator import generate_background_music
