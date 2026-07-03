@@ -119,7 +119,8 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> l
     return ok
 
 
-def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
+def run_next(slug: str, dry_run: bool = False, publish: bool = True,
+             force: bool = False) -> bool:
     """Serinin sıradaki part'ını üret + yayınla + durumu ilerlet."""
     meta = SeriesMeta.load(slug)
     if not meta:
@@ -127,6 +128,18 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True) -> bool:
     if meta.status != "active" or meta.next_part > meta.total_parts:
         logger.info(f"✅ '{slug}' tamamlandı (part {meta.total_parts}/{meta.total_parts}).")
         return True
+
+    # GÜNDE-1 (seri başına): bu seriden BUGÜN zaten bir part yayınlandıysa üretme.
+    # Ana kuyruk (series.yml) + serinin özel günlük şeridi aynı güne denk geldiğinde
+    # çifte üretimi/krediyi ve aynı kanala 2. videoyu önler. --force ile aşılır
+    # (İhsan bilerek aynı gün ikinci video isterse).
+    if not force:
+        from datetime import datetime, timezone
+        today = datetime.now(timezone.utc).date().isoformat()
+        for p in meta.parts().values():
+            if str(p.get("published_at", ""))[:10] == today:
+                logger.info(f"⏭️ '{slug}' bugün zaten yayınladı — günde-1 kilidi: üretim yarına bırakıldı.")
+                return True
 
     n = meta.next_part
     mode = meta.data.get("publish_mode", "auto")
@@ -255,13 +268,14 @@ def run_all(dry_run: bool = False, publish: bool = True) -> bool:
 def main(argv: list[str]):
     dry = "--dry-run" in argv
     no_pub = "--no-publish" in argv
+    force = "--force" in argv   # günde-1 kilidini aş (bilerek aynı gün 2. video)
     slug = None
     if "--series" in argv:
         i = argv.index("--series")
         if i + 1 < len(argv):
             slug = argv[i + 1]
     if slug:
-        ok = run_next(slug, dry_run=dry, publish=not no_pub)
+        ok = run_next(slug, dry_run=dry, publish=not no_pub, force=force)
     else:
         ok = run_all(dry_run=dry, publish=not no_pub)
     # Gerçek bir üretim/yayın başarısızlığında iş KIRMIZI görünsün (sessiz 'success' yerine).
