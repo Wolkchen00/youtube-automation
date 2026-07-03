@@ -184,29 +184,78 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         sec = DEFAULT_SHOT_SECONDS
     end = start + batch - 1
 
-    system_instruction = f"""You are the showrunner of an endless, VISUAL-ONLY vertical (9:16) YouTube Shorts series.
-Every episode is a STANDALONE ~{shots * int(sec)}-second visual trip: {shots} consecutive shots (each ONE
-continuous moment of {sec} seconds) that morph seamlessly into one another. No dialogue,
-no narration, no characters — pure visuals.
+    # ── Opt-in format bayrakları (auto_replenish cfg; hiçbiri yoksa davranış ESKİSİYLE AYNI) ──
+    # narration: true | {"min_words":95,"max_words":125} → bölüm başına anlatım metni istenir
+    # title_card: true → plan'a title_card {title, subtitle} alanı istenir (produce künyesi)
+    # humans: "silent" → insan figürü serbest (asla konuşmaz/yüz yakın planı yok)
+    # eerie_ok: true → 'frightening' yasağı kalkar (korku-tonlu kanallar; gore yine yasak)
+    # title_style: "<metin>" → başlık kuralını değiştirir (ör. haber-kancası cümle başlıklar)
+    # shot_refs: true → çekimler bible'daki characters/environment id'lerini kullanabilir
+    narr_cfg = cfg.get("narration")
+    if narr_cfg is True:
+        narr_cfg = {}
+    narrated = isinstance(narr_cfg, dict)
+    wmin = int((narr_cfg or {}).get("min_words", 95))
+    wmax = int((narr_cfg or {}).get("max_words", 125))
+    want_tc = bool(cfg.get("title_card"))
+    humans_silent = str(cfg.get("humans") or "").strip().lower() in ("silent", "silent-masked", "allowed")
+    eerie_ok = bool(cfg.get("eerie_ok"))
+    title_style = str(cfg.get("title_style") or "").strip()
+    shot_refs = bool(cfg.get("shot_refs"))
+
+    if narrated:
+        head = (f"You are the showrunner of an endless vertical (9:16) YouTube Shorts series told through\n"
+                f"SILENT visual shots plus a POST-PRODUCTION voice-over narration.\n"
+                f"Every episode is a STANDALONE ~{shots * int(sec)}-second piece: {shots} consecutive shots (each ONE\n"
+                f"continuous moment of {sec} seconds) that flow into one another, plus ONE narration script\n"
+                f"({wmin}-{wmax} words) recorded separately and laid over the finished edit. No dialogue, no lip-sync.")
+        narr_shape = f'"<{wmin}-{wmax} word English voice-over script>"'
+    else:
+        head = (f"You are the showrunner of an endless, VISUAL-ONLY vertical (9:16) YouTube Shorts series.\n"
+                f"Every episode is a STANDALONE ~{shots * int(sec)}-second visual trip: {shots} consecutive shots (each ONE\n"
+                f"continuous moment of {sec} seconds) that morph seamlessly into one another. No dialogue,\n"
+                f"no narration, no characters — pure visuals.")
+        narr_shape = '""'
+
+    tc_shape = ('\n   "title_card": {"title": "<subject name, max 40 chars>", '
+                '"subtitle": "<max 48 chars>"},') if want_tc else ""
+    shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
+    if shot_refs:
+        shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
+
+    title_rule = title_style or ('2-4 words, poetic, curiosity-driven — the title IS the YouTube title of a\n'
+                                 '  standalone video (like "Bloom" or "The Last Door"). No drug slang, no clickbait\n'
+                                 '  punctuation.')
+    narr_rule = (f"\n- NARRATION: {wmin}-{wmax} words of spoken English voice-over for the WHOLE episode — "
+                 f"flowing prose, no camera directions, no shot numbers; follow the CREATIVE BRIEF strictly."
+                 if narrated else "")
+    tc_rule = ('\n- TITLE_CARD: "title" = the subject/site name (max 40 chars); "subtitle" = place and year '
+               'exactly as the CREATIVE BRIEF instructs (max 48 chars).' if want_tc else "")
+    refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
+                 '"environment"; follow the brief about when to use them.' if shot_refs else "")
+    humans_rule = ("human figures may appear but must NEVER speak, lip-sync or show a clear close-up face "
+                   "(masked, distant, silhouetted or from behind only),"
+                   if humans_silent else "no humans or human faces,")
+    tone_tail = "nothing gory, violent or graphic." if eerie_ok else "nothing gory, violent or frightening."
+
+    system_instruction = f"""{head}
 
 Return STRICT JSON ONLY, exactly this shape:
 {{"episodes": [
-  {{"episode": {{"number": <int>, "title": "<2-4 words>"}},
+  {{"episode": {{"number": <int>, "title": "<title>"}},
    "synopsis": "<one sentence>",
    "hook_shot": <int>,
-   "narration": "",
-   "shots": [{{"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null}}]}}
+   "narration": {narr_shape},{tc_shape}
+   "shots": [{{{shot_fields}}}]}}
 ]}}
 
 RULES:
 - Produce EXACTLY {batch} episodes, numbered {start} to {end}, in this order.
 - Each episode has EXACTLY {shots} shots, every shot with "duration": "{sec}".
-- TITLES: 2-4 words, poetic, curiosity-driven — the title IS the YouTube title of a
-  standalone video (like "Bloom" or "The Last Door"). No drug slang, no clickbait
-  punctuation. All {batch} titles must be distinct from each other AND from every
+- TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
-- "synopsis": ONE specific sentence describing this episode's visual journey (it is
-  stored and used to keep future episodes fresh).
+- "synopsis": ONE specific sentence describing this episode (it is
+  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{refs_rule}
 - SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final
   frame): shot 1 opens a brand-new striking scene; every later shot's prompt must
   describe ONE continuous transformation that begins EXACTLY at the previous shot's end
@@ -217,8 +266,8 @@ RULES:
 - PROMPTS: rich visual language — motion, geometry, light, color, camera flow. The
   series art style is automatically prefixed to every shot at production; do NOT restate
   it wholesale, but stay inside it.
-- HARD LIMITS: no humans or human faces, no readable text/letters/logos/watermarks,
-  nothing gory, violent or frightening. English only."""
+- HARD LIMITS: {humans_rule} no readable text/letters/logos/watermarks,
+  {tone_tail} English only."""
 
     lines = [f"SERIES: {meta.base_title} — {meta.logline}".strip()]
     art = (bible.art_style or "").strip()
@@ -227,6 +276,16 @@ RULES:
     brief = str(cfg.get("brief") or "").strip()
     if brief:
         lines.append(f"\nCREATIVE BRIEF for new episodes:\n{brief}")
+    if shot_refs:
+        refs_lines = []
+        for kind in ("characters", "environments"):
+            items = bible.data.get(kind) or []
+            entries = [f"{it.get('id')} — {(it.get('name') or it.get('desc') or '')[:60]}"
+                       for it in items if it.get("id")]
+            if entries:
+                refs_lines.append(f"{kind}: " + "; ".join(entries))
+        if refs_lines:
+            lines.append("\nAVAILABLE REFERENCES (use these ids only):\n" + "\n".join(refs_lines))
     if history:
         lines.append("\nEXISTING EPISODES (title — synopsis). NEVER repeat or reword these:")
         for h in history:
@@ -242,12 +301,24 @@ RULES:
 
 
 def _validate_batch(episodes, bible: Bible, start: int, batch: int,
-                    existing_titles: set[str]) -> list[str]:
+                    existing_titles: set[str], cfg: dict | None = None) -> list[str]:
     """Sert doğrulama + normalizasyon (yerinde): numaralar/çekim n'leri düzeltilir,
-    bilinmeyen alanlar atılır. Hata listesi döner (boş = geçerli)."""
+    bilinmeyen alanlar atılır. Hata listesi döner (boş = geçerli).
+    cfg (auto_replenish) format bayraklarını taşır: narration/title_card/shot_refs —
+    bkz. _build_prompt; bayrak yoksa davranış eskisiyle birebir aynıdır."""
     if not isinstance(episodes, list) or len(episodes) != batch:
         got = len(episodes) if isinstance(episodes, list) else type(episodes).__name__
         return [f"'episodes' tam {batch} bölüm olmalı (gelen: {got})"]
+
+    cfg = cfg or {}
+    narr_cfg = cfg.get("narration")
+    if narr_cfg is True:
+        narr_cfg = {}
+    narrated = isinstance(narr_cfg, dict)
+    wmin = int((narr_cfg or {}).get("min_words", 95))
+    wmax = int((narr_cfg or {}).get("max_words", 125))
+    want_tc = bool(cfg.get("title_card"))
+    shot_refs = bool(cfg.get("shot_refs"))
 
     errors: list[str] = []
     seen = set(existing_titles)
@@ -287,7 +358,17 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     errors.append(f"part {want} çekim {k}: süre {shot.get('duration')!r} "
                                   f"geçersiz (4/6/8/10 olmalı)")
                 # Yalnız bilinen alanlar; model karakter/diyalog uydurduysa sessizce atılır.
-                clean_shots.append({"n": k, "duration": dur, "prompt": prompt, "seed": None})
+                clean = {"n": k, "duration": dur, "prompt": prompt, "seed": None}
+                if shot_refs:
+                    # Opt-in: bible'da GERÇEKTEN var olan referans id'leri korunur.
+                    env = shot.get("environment")
+                    if env and bible.get("environments", str(env)):
+                        clean["environment"] = str(env)
+                    chars = [c for c in (shot.get("characters") or [])
+                             if isinstance(c, str) and bible.get_character(c)]
+                    if chars:
+                        clean["characters"] = chars
+                clean_shots.append(clean)
 
         hook = plan.get("hook_shot")
         try:
@@ -297,10 +378,28 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         except (TypeError, ValueError):
             hook = None   # produce.py'nin 'sondan bir önceki' varsayılanı devreye girer
 
+        ntext = str(plan.get("narration") or "").strip()
+        if narrated:
+            wc = len(ntext.split())
+            lo, hi = max(30, int(wmin * 0.7)), int(wmax * 1.35)
+            if not (lo <= wc <= hi):
+                errors.append(f"part {want}: anlatım {wc} kelime — hedef {wmin}-{wmax} "
+                              f"(kabul {lo}-{hi}) dışında")
+        else:
+            ntext = ""   # anlatımsız seri: eski davranış (boş string zorlanır)
+
         normalized = {"episode": {"number": want, "title": title},
                       "synopsis": str(plan.get("synopsis") or "").strip()[:300],
-                      "narration": "",
+                      "narration": ntext,
                       "shots": clean_shots}
+        if want_tc:
+            tcv = plan.get("title_card") or {}
+            tt = str(tcv.get("title") or "").strip()
+            ts = str(tcv.get("subtitle") or "").strip()
+            if not tt or not ts or len(tt) > 60 or len(ts) > 60:
+                errors.append(f"part {want}: title_card.title ve .subtitle zorunlu (≤60 karakter)")
+            else:
+                normalized["title_card"] = {"title": tt, "subtitle": ts}
         if hook:
             normalized["hook_shot"] = hook
         episodes[i] = normalized
@@ -323,7 +422,7 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
                                          fix_errors=errors)
         data = _gen_json(contents, sysins, temperature=0.9)
         episodes = data.get("episodes") if isinstance(data, dict) else None
-        errors = _validate_batch(episodes, bible, start, batch, existing)
+        errors = _validate_batch(episodes, bible, start, batch, existing, cfg)
         if not errors:
             return episodes
         logger.warning(f"⚠️ İkmal doğrulaması geçmedi ({attempt}. deneme): {errors[:4]}")

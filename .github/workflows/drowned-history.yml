@@ -1,0 +1,82 @@
+name: Drowned History Daily
+
+# shadowedhistory kanalının GARANTİLİ günlük şeridi (İhsan kararı 2026-07-03:
+# "tam otomatik her gün 1 video"). Ana kuyruktan (series.yml / run_all günde-1
+# tavanı) BAĞIMSIZ çalışır: her gün Drowned History'nin sıradaki gerçek sualtı
+# keşfini üretir + shad0wedhistory profiline yayınlar. Çifte üretim olmasın diye
+# drowned-history series.json'da priority=999 ile ana kuyruğun fiilen dışındadır.
+# Şerit merdiveni: 14:30 ana → 16:30 planetfall → 18:30 night-archive → 20:30 bu.
+
+on:
+  schedule:
+    - cron: '30 20 * * *'   # 20:30 UTC ≈ 13:30 California ≈ 23:30 TR
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        # fonts-dejavu-core: title_card / drawtext bindirmeleri için
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni keşifler yazar — kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series drowned-history 2>&1 | tee logs/drowned_replenish.log
+
+      - name: Produce + publish (Drowned History sıradaki keşif)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -X utf8 -m series.series_runner --series drowned-history 2>&1 | tee logs/drowned_run.log
+
+      - name: Persist series state
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add series_data/ || true
+            git diff --cached --quiet && echo "Değişiklik yok" && break
+            git commit -m "chore: drowned-history durumunu ilerlet [skip ci]" || true
+            git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
+          done
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drowned-history-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
