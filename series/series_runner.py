@@ -119,6 +119,38 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> l
     return ok
 
 
+def _channel_published_today(meta: SeriesMeta) -> str | None:
+    """Bu serinin KANALINA (upload_profile) bugün (UTC) yayın yapıldıysa 'slug Part N'
+    döndür; yoksa None. Aynı profili paylaşan TÜM seriler taranır — böylece bir kanala
+    farklı serilerden/şeritlerden aynı gün 2. video çıkamaz. Profil boşsa yalnız
+    serinin kendi part geçmişine bakılır."""
+    from datetime import datetime, timezone
+    today = datetime.now(timezone.utc).date().isoformat()
+
+    def _hit(m: SeriesMeta) -> str | None:
+        for pn, p in (m.data.get("parts") or {}).items():
+            if str(p.get("published_at", ""))[:10] == today:
+                return f"{m.slug} Part {pn}"
+        return None
+
+    profile = meta.upload_profile
+    if not profile:
+        return _hit(meta)
+    from series.bible import SERIES_DATA_DIR
+    from series.series_meta import series_meta_path
+    if not SERIES_DATA_DIR.exists():
+        return _hit(meta)
+    for d in sorted(SERIES_DATA_DIR.iterdir()):
+        if not (d.is_dir() and series_meta_path(d.name).exists()):
+            continue
+        m = meta if d.name == meta.slug else SeriesMeta.load(d.name)
+        if m and m.upload_profile == profile:
+            found = _hit(m)
+            if found:
+                return found
+    return None
+
+
 def run_next(slug: str, dry_run: bool = False, publish: bool = True,
              force: bool = False) -> bool:
     """Serinin sıradaki part'ını üret + yayınla + durumu ilerlet."""
@@ -129,17 +161,17 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.info(f"✅ '{slug}' tamamlandı (part {meta.total_parts}/{meta.total_parts}).")
         return True
 
-    # GÜNDE-1 (seri başına): bu seriden BUGÜN zaten bir part yayınlandıysa üretme.
-    # Ana kuyruk (series.yml) + serinin özel günlük şeridi aynı güne denk geldiğinde
-    # çifte üretimi/krediyi ve aynı kanala 2. videoyu önler. --force ile aşılır
-    # (İhsan bilerek aynı gün ikinci video isterse).
+    # GÜNDE-1 KİLİDİ (KANAL başına — İhsan kuralı 2026-07-03: "günde sadece 1 video").
+    # Bu serinin KANALINA (upload_profile; aynı profili paylaşan TÜM seriler dahil)
+    # BUGÜN zaten bir part yayınlandıysa üretme. Ana kuyruk (series.yml) + özel günlük
+    # şeritler aynı güne/kanala denk geldiğinde çifte üretimi/krediyi ve aynı kanala
+    # 2. videoyu önler. --force ile aşılır (İhsan bilerek aynı gün ikinci video isterse).
     if not force:
-        from datetime import datetime, timezone
-        today = datetime.now(timezone.utc).date().isoformat()
-        for p in meta.parts().values():
-            if str(p.get("published_at", ""))[:10] == today:
-                logger.info(f"⏭️ '{slug}' bugün zaten yayınladı — günde-1 kilidi: üretim yarına bırakıldı.")
-                return True
+        prev = _channel_published_today(meta)
+        if prev:
+            logger.info(f"⏭️ Günde-1 kilidi: '{prev}' bugün aynı kanala "
+                        f"({meta.upload_profile or slug}) yayınlandı — '{slug}' üretimi yarına bırakıldı.")
+            return True
 
     n = meta.next_part
     mode = meta.data.get("publish_mode", "auto")
