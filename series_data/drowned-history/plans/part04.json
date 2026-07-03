@@ -9,7 +9,7 @@
   },
   "synopsis": "In the sunken pleasure city of Baiae divers enter a flooded banquet hall where marble statues still stand serving wine, and lift one of them back into daylight after two thousand years.",
   "hook_shot": 4,
-  "narration": "The Romans called Baiae the place where old men went to become young, and young men went to be ruined. Emperors kept villas here. Nero schemed here. Then the volcanic ground beneath it slowly sank, and the sea slid in over the marble floors. For centuries it was a rumor — until a pilot's aerial photographs in the 1940s revealed streets beneath the Bay of Naples. By 1959, divers were drawing the first maps of a drowned city. In a flooded banquet hall they met them: marble statues still standing in the dark, arms outstretched, serving wine to guests who had been gone for two thousand years. The statues were carried up into the light. Their drowned dining room is still down there.",
+  "narration": "The Romans called Baiae the place where old men went to become young, and young men went to be ruined. Emperors kept villas here. Then the volcanic ground slowly sank, and the sea slid in over the marble floors. For centuries it was a rumor — until a pilot's aerial photographs in the 1940s revealed streets beneath the Bay of Naples, and by 1959 divers were drawing the first maps of a drowned city. In a flooded banquet hall they met them: marble statues still standing in the dark, arms outstretched, serving wine to guests two thousand years gone. The statues rose into the light. Their dining room is still down there.",
   "shots": [
     {
       "n": 1,
@@ -20,13 +20,13 @@
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Drifting slowly down the submerged Roman street between low villa walls, past doorways breathing small fish, sun rays fading behind and torch beams taking over. Ends on: a dark vaulted doorway yawning at the end of the street.",
+      "prompt": "Drifting slowly down the submerged Roman street between low villa walls, past doorways breathing small fish, sun rays fading behind and torch beams taking over. Ends on: the camera passing through a dark vaulted doorway at the end of the street.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Passing through the vaulted doorway into a flooded banquet hall: the torch sweeps across a row of pale marble statues standing upright in the dark, arms outstretched in greeting, their long shadows swinging across the walls as the beam moves. Ends on: the beam stopping on one statue's calm marble face.",
+      "prompt": "Inside the flooded banquet hall: the torch sweeps across a row of pale marble statues standing upright in the dark, arms outstretched in greeting, their long shadows swinging across the walls as the beam moves. Ends on: the beam stopping on one statue's calm marble face.",
       "seed": null
     },
     {
@@ -38,13 +38,7 @@
     {
       "n": 5,
       "duration": "8",
-      "prompt": "Soft lifting straps are cradled around the statue's torso; it tilts slowly free of the silt floor, sand pouring off its shoulders and cup arm, divers steadying it as it begins to rise through the hall. Ends on: the statue ascending through a collapsed opening in the vault, silt raining softly.",
-      "seed": null
-    },
-    {
-      "n": 6,
-      "duration": "8",
-      "prompt": "POV rising out of the ruin beside the ascending statue into brighter green water, the mosaic streets and villa walls of the drowned city fading below into haze. Ends on: the shimmering silver surface spreading wide overhead.",
+      "prompt": "Soft lifting straps cradle the statue as it tilts free of the silt floor, sand pouring off its cup arm; the camera rises with it through a collapsed opening in the vault into brighter green water, the mosaic streets of the drowned city fading below. Ends on: the shimmering silver surface spreading wide overhead.",
       "seed": null
     }
   ]

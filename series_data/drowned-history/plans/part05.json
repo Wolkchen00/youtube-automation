@@ -9,7 +9,7 @@
   },
   "synopsis": "A dive team enters Shicheng, the 1,300-year-old Lion City deliberately drowned in 1959 for a dam, and finds its gates, carvings and wooden beams perfectly preserved in the cold dark freshwater.",
   "hook_shot": 4,
-  "narration": "This city was not lost. It was sentenced. In 1959, China flooded an entire valley to build a dam — and Shicheng, the Lion City, thirteen hundred years old, vanished beneath Qiandao Lake with its gates still standing. Three hundred thousand people walked away. The water rose over the rooftops. Then, in 2001, divers went down to see what was left — and found the city perfectly preserved in the cold, dark freshwater. Carved dragons still guarding the arches. Wooden beams still in place. Streets waiting in silence, forty meters down. Nothing decayed. Nothing moved. The Lion City is still down there — holding its breath.",
+  "narration": "This city was not lost. It was sentenced. In 1959, China flooded an entire valley to build a dam — and Shicheng, the Lion City, thirteen hundred years old, vanished beneath Qiandao Lake with its gates still standing. Three hundred thousand people walked away, and the water rose over the rooftops. Then, in 2001, divers went down — and found the city perfectly preserved in the cold, dark freshwater. Carved dragons still guarding the arches. Streets waiting in silence, forty meters down. Nothing decayed. Nothing moved. The Lion City is still down there, holding its breath.",
   "shots": [
     {
       "n": 1,
@@ -38,13 +38,7 @@
     {
       "n": 5,
       "duration": "8",
-      "prompt": "The team documents the archway: a diver steadies a small camera rig whose soft strobe pulses light down the street, another runs a gloved hand along an intact dark wooden beam overhead; nothing is taken, the city left as found. Ends on: the two divers drifting away down the black street, torches fading.",
-      "seed": null
-    },
-    {
-      "n": 6,
-      "duration": "8",
-      "prompt": "POV rising slowly above the drowned rooftops, the gate tower and streets shrinking below as the teammate torch beams trace the lanes one last time; the water above stays black and starless. Ends on: the Lion City fading completely into the dark below the camera.",
+      "prompt": "The gloved hand withdraws — nothing is taken; the camera rises slowly above the drowned rooftops, the gate tower and streets shrinking below as teammate torch beams trace the lanes one last time in water that stays black and starless. Ends on: the Lion City fading completely into the dark below the camera.",
       "seed": null
     }
   ]

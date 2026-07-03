@@ -9,7 +9,7 @@
   },
   "synopsis": "On the steep slope off Uluburun near Kaş, a team works the oldest shipwreck ever excavated — Bronze Age copper ingots stacked like grave rows and, hidden in the silt, a solid gold scarab bearing Nefertiti's name.",
   "hook_shot": 4,
-  "narration": "In 1982, a Turkish sponge diver named Mehmet Çakır surfaced near Kaş with a strange report: metal biscuits with ears, stacked on the seabed. Archaeologists went down — and found the oldest shipwreck ever excavated. A royal trading vessel that sank thirty-three centuries ago, resting fifty meters deep. Ten tons of copper. Ingots of raw blue glass. Ebony from Nubia. Ivory from the Nile. And buried in the silt, a single scarab of solid gold, carved with the name of Queen Nefertiti. Divers made more than twenty-two thousand descents to bring the cargo home. What the sea kept for three thousand years now rests in Bodrum.",
+  "narration": "In 1982, a Turkish sponge diver named Mehmet Çakır surfaced near Kaş with a strange report: metal biscuits with ears, stacked on the seabed. Archaeologists went down — and found the oldest shipwreck ever excavated. A royal trading vessel from thirty-three centuries ago, fifty meters down. Ten tons of copper. Raw blue glass. Ebony and ivory. And buried in the silt, a single scarab of solid gold, carved with the name of Queen Nefertiti. It took more than twenty-two thousand dives to bring the cargo home. The sea kept it for three thousand years. Bodrum keeps it now.",
   "shots": [
     {
       "n": 1,
@@ -20,13 +20,13 @@
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Moving along the rows: four-handled oxhide-shaped copper ingots crusted with growth, stacked and scattered down the slope like grave markers, large clay storage jars leaning between them, torch light gliding across it all. Ends on: a teammate diver hovering over the dark open mouth of a large jar.",
+      "prompt": "Moving along the rows: four-handled oxhide-shaped copper ingots crusted with growth, stacked and scattered down the slope like grave markers, large clay storage jars leaning between them, torch light gliding across it all. Ends on: blackened ancient hull timbers curving up from the seabed ahead like a ribcage.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Passing between blackened ancient hull timbers curving up from the seabed like a ribcage in the torch light; a moray eel slides suddenly out of a jar mouth and vanishes into the dark, silt pulsing in the beam. Ends on: the beam falling on a patch of pale undisturbed silt between two timbers.",
+      "prompt": "Passing between the blackened hull timbers in the torch light; a moray eel slides suddenly out of a jar mouth and vanishes into the dark, silt pulsing in the beam. Ends on: the beam falling on a patch of pale undisturbed silt between two timbers.",
       "seed": null
     },
     {
@@ -38,13 +38,7 @@
     {
       "n": 5,
       "duration": "8",
-      "prompt": "The gloved hands seal the scarab into a small clear sample case; beside them a second diver guides a crusted copper ingot into a recovery basket and tugs the lift line twice, silt swirling softly. Ends on: the basket rising past the camera into dark blue water.",
-      "seed": null
-    },
-    {
-      "n": 6,
-      "duration": "8",
-      "prompt": "POV ascending the slope line: below, the rows of ingots dim one by one as the torch beams leave them, the wreck sinking back into deep blue darkness; faint sunlight begins to shimmer far overhead. Ends on: the site swallowed by blue-black depth as the surface glow strengthens.",
+      "prompt": "The gloved hands seal the scarab into a small clear sample case clipped to a lift line; the camera follows the line upward as the rows of ingots dim one by one below, the wreck sinking back into deep blue darkness while faint sunlight shimmers far overhead. Ends on: the site swallowed by depth as the surface glow strengthens.",
       "seed": null
     }
   ]
