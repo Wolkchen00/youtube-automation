@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "NYSSA: The Glowing Sea"
+  },
+  "synopsis": "NYSSA — bioluminescent ocean world: midnight-blue night seas with cyan light blooms and magenta-pulsing island forests; signature = whole lagoon igniting in radiating rings of light as a gentle colossal sea creature arcs through the surface.",
+  "narration": "",
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A midnight-blue ocean planet glows softly in the dark: across its night side, immense blooms of cyan light drift beneath the sea surface like slow auroras trapped underwater, outlining chains of black volcanic islands. The camera glides closer over the glowing hemisphere, the luminous blooms swelling and breathing below as the approach curves down toward the brightest lagoon.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera sinks through thin phosphorescent cloud wisps into warm night air above a glowing archipelago: below, a vast lagoon shines from within, ringed by dark islands whose shorelines pulse with faint magenta light. The luminous water rises closer and closer beneath the steady descent until the camera levels off just above the softly glowing swells.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low across the lagoon, every wave crest ignites electric cyan beneath the camera as it passes. Huge, gentle silhouettes glide deep below the surface, trailing long ribbons of light through the dark water, while the island forests along the shore pulse magenta in a slow rhythm — an entire ecosystem breathing light in the darkness as the camera sails on across the bay.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The whole lagoon awakens at once: expanding rings of cyan light radiate outward across the water from its center, where an immense, gentle sea creature arcs slowly through the surface in a cascade of glowing spray before sliding back into the deep. The camera rises softly to reveal the entire archipelago shimmering with traveling waves of light, then settles into a calm, floating drift beneath the stars.",
+      "seed": null
+    }
+  ]
+}

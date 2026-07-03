@@ -1,0 +1,25 @@
+{
+  "series": {
+    "slug": "planetfall",
+    "title": "Planetfall",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false,
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.3,
+      "offset_in_shot": 1.5
+    }
+  },
+  "art_style": "Photorealistic cinematic alien-planet documentary, epic IMAX scale and awe, volumetric atmosphere and clouds, dramatic natural lighting with god rays, deep-space backdrop with crisp stars, rich filmic color grading, hyper-detailed terrain, ultra-smooth continuous one-take camera motion with no cuts, vertical 9:16 composition, no people and no faces anywhere (any civilization appears only as distant aerial architecture and lights), no on-screen text, no watermarks.",
+  "style_ref_url": null,
+  "narration": {},
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

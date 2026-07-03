@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "VEYRA-9: The Violet Storm"
+  },
+  "synopsis": "VEYRA-9 — storm world: indigo night ocean under permanent charcoal megastorm, violet lightning palette; signature = dozens of violet bolts striking the sea at once around a calm glowing storm eye.",
+  "narration": "",
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A vast indigo storm planet fills the view from high orbit against a black star field: charcoal cloud bands spiral across its face, and deep inside the vortices faint violet flashes pulse like a slow heartbeat. Two small ashen moons drift past in the foreground as the camera glides steadily forward, closing in on the glowing eye of the largest storm system until its swirling cloud wall begins to fill the frame.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera plunges straight down into the swirling cloud wall: towering canyons of charcoal vapor rush past on both sides, lit from within by branching violet lightning that veins the clouds like glowing roots. Streaks of rain and ice whip past the lens, and the light below grows brighter and more electric as the dive accelerates toward the storm's luminous base.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera bursts through the cloud ceiling into open air beneath the storm: an endless black ocean stretches to the horizon, lit only by continuous violet lightning strikes marching across the water in the distance. The camera levels out and races low over the dark swells, weaving between colossal glowing waterspouts, every strike reflecting off the wet waves in flashes of purple.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Ahead, the heart of the megastorm is revealed: a slowly rotating cathedral of cloud where dozens of violet lightning bolts strike the sea at once around a calm, glowing central eye. The camera gradually slows and rises in a gentle arc to frame the entire luminous storm beneath its cloud dome, lightning shimmering silently across the dark water as the view settles into a serene, weightless drift.",
+      "seed": null
+    }
+  ]
+}

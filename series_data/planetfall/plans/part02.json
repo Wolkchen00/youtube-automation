@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "AURELIN: City of Dusk"
+  },
+  "synopsis": "AURELIN — civilization world: ochre-teal planet at eternal dusk, golden light networks on the night side; signature = colossal illuminated arcology tower above an endless alien metropolis seen only from the air.",
+  "narration": "",
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "An ochre and teal planet hangs in space, its day side glowing warm amber along the terminator line. Across the vast night side, faint golden webs of light trace geometric patterns far too regular to be natural — something built glitters down there. The camera drifts closer over the darkened hemisphere, the golden networks sharpening and spreading wider as the curve of the horizon grows.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera descends through high amber cloud layers glowing with dusk light, thin luminous veils parting one after another around the lens. Through the haze below, an immense grid of golden light slowly resolves into focus — avenues, terraces and spires of a vast alien city emerging from the twilight, growing sharper and closer as the descent glides steadily down toward its glow.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Now low over the alien metropolis at twilight, the camera glides above tiered crystalline towers and sweeping terraces, rivers of golden light flowing along curved avenues far below, streams of tiny luminous craft drifting between the spires like slow fireflies. The glittering city stretches unbroken to the horizon under a deep teal sky as the camera sails onward toward a distant, taller glow.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Ahead rises the city's heart: a colossal illuminated arcology tower piercing the low cloud layer, its stacked tiers ringed with golden beacons that pulse slowly against the deepening dusk. The camera eases into a wide, slow orbit around the glowing summit, the endless city sparkling below in every direction, and settles into a calm, weightless drift as the last daylight fades to indigo.",
+      "seed": null
+    }
+  ]
+}

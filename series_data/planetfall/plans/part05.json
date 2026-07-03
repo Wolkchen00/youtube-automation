@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "SOLENNE: Twin Dawn"
+  },
+  "synopsis": "SOLENNE — ringed ice world: glacial blue-white terrain lit by twin suns (gold + crimson), iridescent crystal clouds; signature = double sunrise inside an ice canyon with the silver ring arcing overhead like a bridge.",
+  "narration": "",
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "An ice-white planet wrapped in a thin, luminous silver ring floats in darkness as two suns — one warm gold, one deep crimson — rise together behind its curved horizon, their mingled light flaring across the frost-covered face. The camera glides forward over the brightening limb, glacier fields and frozen seas glittering into view beneath the double dawn.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera descends through iridescent ice-crystal clouds that sparkle in two colors at once, gold on one side and rose on the other. Twin shafts of colored light sweep the frozen landscape far below, where glacier spires and vast frozen seas emerge in growing detail as the sparkling veils thin and part around the steady, smooth descent.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Flying low over a crystalline wilderness, the camera weaves between towering glacier spires and natural arches of blue ice, each face glowing gold on one side and rose on the other under the twin suns. Frozen geyser plumes stand mid-air like glass sculptures, the silver ring arcs faintly overhead, and the camera races across the glittering frozen sea toward a great canyon of ice ahead.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Inside the ice canyon, both suns crest the horizon together, framed between colossal glacier walls that blaze apricot and rose, while the planet's ring spans the sky above like a silver bridge. Beams of double light flood slowly down the canyon, setting every frost surface glittering, as the camera eases into a gentle forward drift straight into the twin dawn and settles there, weightless and calm.",
+      "seed": null
+    }
+  ]
+}

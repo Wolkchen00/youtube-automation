@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "KHAROS: The Silent Dunes"
+  },
+  "synopsis": "KHAROS — dead desert world: rust dune seas under harsh white sun, bone-pale sky, no clouds, no water, no life; signature = vast canyon where endless slow waterfalls of sand pour through shafts of white light.",
+  "narration": "",
+  "hook_shot": 4,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A sun-scorched rust-red planet turns slowly against the void, its face bare of clouds and oceans — nothing but endless dune seas, dry fossil riverbeds and ancient impact scars glaring under harsh white sunlight. The camera approaches steadily over the bright limb, heat shimmer trembling along the curved horizon as the empty desert surface sharpens in detail below.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera descends through the thin, dusty atmosphere in pale bone-white light, faint high haze streaking past the lens. Below, a boundless ocean of rust-colored dunes rises into view, their crests sculpted into razor-sharp ridges by wind, utterly still and lifeless from horizon to horizon. The descent glides lower and lower until the tallest dune crests begin to slip past beneath the camera.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Racing low over colossal dunes, the camera skims their knife-edged crests as the wind tears glowing ribbons of sand off into the air. Islands of cracked, bleached bedrock break through the dune sea, casting long hard shadows in the white sunlight. Nothing moves but the sand itself — a world of absolute, beautiful emptiness stretching toward a trembling bright horizon.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The dune sea suddenly ends at the rim of a vast canyon: slow waterfalls of sand pour endlessly over its edges, drifting down in golden curtains through shafts of white sunlight that pierce the dusty air. The camera slows and sinks gently between the glowing sand-falls into the canyon's still, cathedral-like silence, settling into a serene drift among the softly falling dust.",
+      "seed": null
+    }
+  ]
+}

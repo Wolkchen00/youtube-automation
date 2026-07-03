@@ -64,6 +64,16 @@ MUSIC_PROMPTS = {
         "dream. Continuous and seamless, NO percussion hits, NO abrupt changes. "
         "Instrumental only, no vocals. Similar to the quiet epic moments of an A24 film score."
     ),
+    # planetfall (gezegen iniş yolculukları): epik-sinematik keşif skoru
+    "planetfall": (
+        "Epic cinematic space-exploration score. Warm evolving orchestral strings "
+        "and distant horns over a deep sub-bass drone, slow majestic build, "
+        "shimmering celestial bell and choir textures — a feeling of awe and "
+        "discovery, like descending onto an alien world for the first time. "
+        "Continuous seamless flow, NO hard percussion hits, NO abrupt changes, "
+        "no hard ending. Instrumental only, no vocals. Similar to an "
+        "Interstellar-style ambient-orchestral score."
+    ),
     # night-shift (CCTV anthology): realistic empty-building room tone, NOT music
     "night-shift": (
         "Ultra-quiet realistic room tone of an empty building at night, as heard "
@@ -102,6 +112,7 @@ AMBIENT_PROFILES = {
     # + pembe gürültü = uzak havalandırma. Müzik değil, 'boş bina gece sesi'.
     "night-shift":         {"drone": 60.0, "fifth": 120.0, "lp": 330, "trem": 0.11},
     "the-drift":           {"drone": 69.3, "fifth": 103.8, "lp": 820, "trem": 0.14},  # sıcak/rüyamsı sinematik
+    "planetfall":          {"drone": 61.7, "fifth": 92.5, "lp": 720, "trem": 0.13},   # epik/kozmik keşif
 }
 DEFAULT_AMBIENT = {"drone": 60.0, "fifth": 90.0, "lp": 700, "trem": 0.13}
 

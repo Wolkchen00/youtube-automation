@@ -1,0 +1,28 @@
+{
+  "slug": "planetfall",
+  "base_title": "Planetfall",
+  "logline": "One unbroken descent onto a world no one has ever seen — from orbit, through the clouds, down to the one sight that makes it unforgettable.",
+  "language": "en",
+  "standalone": true,
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
+  "total_parts": 5,
+  "next_part": 1,
+  "status": "active",
+  "priority": 3,
+  "publish_mode": "auto",
+  "parts": {},
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 4,
+    "shot_seconds": "8",
+    "brief": "Her bölüm = İLK KEZ görülen YENİ bir gezegene tek kesintisiz sinematik iniş yolculuğu (film tadında, belgesel-huşu tonu; korku değil). 4 çekimlik değişmez iskelet: (1) yörüngeden görkemli açılış — gezegenin karakteri daha uzaydan belli olur; (2) atmosfere dalış — bulut katmanları, ışık, hız hissi; (3) yüzeye alçak uçuş — arazinin doğası netleşir, imza anına yaklaşılır; (4) İMZA ANI + kapanış — bu dünyayı unutulmaz yapan manzara görkemle açığa çıkar, kamera yavaşlar ve huzurlu, döngüye uygun bir süzülüşle biter. hook_shot=4 olsun. ÖNCE gezegeni TASARLA, SONRA çekimleri yaz; synopsis gezegen künyesi olsun: 'AD — tip: palet, atmosfer, imza anı'. Her bölüm KESİN farklı bir gezegen ve palet: tip havuzu = sürekli şimşek/fırtına dünyası, ıssız ölü çöl, biyolüminesan okyanus/orman, buz dünyası, volkanik lav dünyası, kristal dünyası, dev mantar ormanı, halkalı süper-dünya, gelgit-kilitli alacakaranlık kuşağı, uzaktan görülen medeniyet (YALNIZ havadan mimari + ışıklar; insan, yüz, yakın figür ASLA), terk edilmiş harabe dünyası, yüzen kaya/ada dünyası... Işık ve hava olayları (çifte güneş doğumu, aurora fırtınası, halka gölgesi, dev ay) imza anı olarak kullanılabilir. Başlık = GEZEGEN ADI + kısa çekici ek, 'VEYRA-9: The Violet Storm' kalıbında."
+  }
+}
