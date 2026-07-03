@@ -12,9 +12,21 @@
   ],
   "hashtags": "#shorts #history #archaeology #underwater #ancient #artifact #deepsea #mystery #lostcity #scuba",
   "total_parts": 5,
-  "next_part": 1,
+  "next_part": 2,
   "status": "active",
   "priority": 2,
   "publish_mode": "auto",
-  "parts": {}
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/drowned-history/episodes/ep01/ep01_narrated_music_hooked_titled.mp4",
+      "subtitle": "Divers Found a 2,000-Year-Old Computer",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-03T16:48:29.607903+00:00"
+    }
+  }
 }
