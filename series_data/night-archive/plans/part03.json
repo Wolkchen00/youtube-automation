@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Aisle Nine"
+  },
+  "hook_shot": 4,
+  "narration": "The archive has eight aisles. Every map on the wall says so. Every page of the ledger says so. So I need someone to explain the aisle I walked into at 3 AM — the one after eight. The boxes there don't have file numbers. They have a name. Mine. Hundreds of boxes. Years on the labels I haven't lived yet... and years from before I was born. I opened the oldest one. Inside: photographs. A birthday party in a house I've never been to. A boy who looks exactly like I did. And a staff card for this archive — my face, my name... issued 1987. I put it back. I swear I put it back. Behind me, at the end of the aisle... a box slid off the shelf on its own.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_stacks",
+      "prompt": "Ihsan (charcoal work shirt, staff badge, flashlight in hand) walks past the painted aisle numbers on the concrete floor, his beam sweeping across them one by one — seven, then eight — then he stops dead: beyond the last shelf, another aisle mouth opens into darkness. Ends on: his flashlight beam trembling on the extra aisle.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_stacks",
+      "prompt": "Ihsan (charcoal work shirt) moves slowly into the impossible aisle: every box on every shelf carries the same handwritten name label instead of a file number; he pulls one box out, reads the label, shoves it back, pulls another — the same name again; his breathing quickens as the aisle stretches deeper. Ends on: rows of identical name labels receding into the dark.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Back at the desk Ihsan (charcoal work shirt) opens the oldest, most sun-yellowed box under the green lamp: faded photographs spill across the ledger; he lifts one close to the light — a small birthday party in an unfamiliar living room, a little boy at its center. Ends on: his thumb hovering over the boy's face.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "From the same box Ihsan (charcoal work shirt) lifts a yellowed laminated staff card into the green lamplight and goes completely still: the small photo on the vintage 1980s card is HIS OWN face; he wipes the dust from it with his thumb, then slowly raises the card beside his head. Ends on: his real face and the card's identical face side by side in the lamplight.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": [],
+      "environment": "archive_stacks",
+      "prompt": "Far down the impossible aisle a single box slides off its shelf by itself and drops to the concrete with a heavy echoing thud; dust erupts upward through the beam of a caged bulb; the fallen box rocks once and lies still. Ends on: the box lying in the pool of light, its lid slightly ajar.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_stacks",
+      "prompt": "Ihsan (charcoal work shirt) stands frozen at the mouth of the aisle staring at the distant fallen box, flashlight shaking slightly in his hand — above him the caged bulbs begin going dark one by one, the darkness walking toward him down the aisle. Ends on: only his silhouette left against the last burning bulb.",
+      "seed": null
+    }
+  ]
+}

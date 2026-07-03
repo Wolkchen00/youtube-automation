@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "The Tape Labeled Tomorrow"
+  },
+  "hook_shot": 4,
+  "narration": "I didn't play it. All night. I logged forty boxes, I stamped the ledger, I did everything right. At 2:57 I gave up — because a tape labeled TOMORROW is either a prank... or an appointment. It was neither. It was this room. The archive. My desk. My lamp. Filmed from high up — from an angle where there is no camera at all. And at my desk, there was a man sitting. Working. Stamping the ledger. He had my shirt. He had my face. The timestamp said 3:00 AM. My watch said 2:59. And then the man on the tape stopped writing... looked straight up into the camera — straight at me... and smiled. Somewhere deep in the stacks, at exactly three... a box lid opened.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "The tape labeled TOMORROW leans against the CRT monitor in the green lamplight; Ihsan (charcoal work shirt, staff badge) stamps ledger pages restlessly, his eyes flicking again and again toward the tape between stamps. Ends on: his stamp pausing mid-air as he stares at the tape.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Ihsan (charcoal work shirt) checks his wristwatch in the lamplight, exhales through his nose, then takes the TOMORROW tape and slides it firmly into the VHS deck; the CRT blinks awake, washing his face in grey light. Ends on: his tense face lit by the glowing screen.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT playback with VHS scanlines and a 3:00 AM corner timestamp: the archive intake desk filmed from an impossibly high angle — the green banker's lamp burning, and a man in a charcoal work shirt with a staff badge (Ihsan) sitting at the desk, stamping the ledger, unaware of the camera. Ends on: the man dipping his pen while slight tracking wobble ripples the image.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT playback, VHS scanlines: the man at the desk (Ihsan, charcoal work shirt) slowly stops writing, goes very still — then tilts his head up and looks directly into the high camera, directly at the viewer, with a faint knowing smile as tracking distortion creeps across the screen. Ends on: his upturned smiling face frozen as static eats the frame.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "At the real desk Ihsan (charcoal work shirt) snaps his wrist up: the watch reads just before three; his eyes jump from the watch to the CRT as the screen collapses to a single dying point of light, leaving only the green lamp. Ends on: his wide eyes in the sudden half-darkness.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "characters": [],
+      "environment": "archive_stacks",
+      "prompt": "Deep in the dark stacks a single archive box on a high shelf tips its lid open with a soft creak, dust breathing out into the beam of a caged bulb; down the long aisle the hanging bulbs flicker twice in sequence toward the camera. Ends on: the open box's black interior in the trembling light.",
+      "seed": null
+    }
+  ]
+}

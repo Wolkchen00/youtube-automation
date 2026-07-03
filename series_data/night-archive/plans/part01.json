@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Never Play the Tapes"
+  },
+  "hook_shot": 5,
+  "narration": "First night at the city records archive. Sub-level three. The job is simple: boxes arrive, you log them, you shelve them. The rule card on the desk is simpler: LOG EVERYTHING. PLAY NOTHING. I thought it was a joke — until the intake shutter moved at 2 AM, and nobody was on the other side. One box. No sender. Today's date. Inside: a single tape. I know what the card says. But you would have played it too. Eleven minutes of an empty hallway — somewhere I have never seen. Then, in the last ten seconds, someone at the far end turned around... and started walking toward the camera. The tape ended. And under it, in the box, there was a second tape. The label says: TOMORROW.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": [],
+      "environment": "archive_stacks",
+      "prompt": "Establishing shot gliding slowly down an endless dark archive aisle at night: steel shelves stacked with numbered boxes, caged industrial bulbs overhead, the farthest bulb flickering irregularly, dust drifting through the light beams. Ends on: the black mouth of the aisle where the light does not reach.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Ihsan (charcoal work shirt, staff badge on lanyard) settles into the chair at the intake desk under the green banker's lamp, opens the leather intake ledger, then picks up a laminated rule card; his half-smile fades as he reads the bold stenciled words on it: LOG EVERYTHING. PLAY NOTHING. Ends on: his eyes lifting slowly from the card toward the dark VHS deck.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "intake_window",
+      "prompt": "The steel intake shutter rattles once and a worn grey archive box slides through onto the stainless counter by itself; Ihsan (charcoal work shirt, staff badge) approaches slowly, bends to peer through the slot — only darkness on the other side — then straightens and looks down at the box, a fresh handwritten date label on its lid. Ends on: his hands closing around the box under the dim overhead bulb.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Ihsan (charcoal work shirt) sets the box on the desk, lifts out a single black VHS tape with a handwritten label and turns it in the green lamplight, hesitating a long beat — then slides it into the VHS deck beneath the CRT monitor. Ends on: the deck swallowing the tape as the CRT screen flickers to life.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": [],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT playback of an empty 1980s office hallway: analog VHS scanlines, corner timestamp, buzzing fluorescent tubes; at the very far end of the hallway a still figure stands facing away — then slowly turns and begins walking toward the camera as tracking distortion tears across the image; static floods the screen. Ends on: dead grey static filling the whole frame.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Ihsan (charcoal work shirt) sits frozen in the green lamplight staring at the static on the CRT; he reaches into the open box and lifts out a SECOND tape, holding it up to the lamp: a handwritten label reading TOMORROW; behind him the far aisle bulb steadies. Ends on: the tape labeled TOMORROW in his hand under the green lamp.",
+      "seed": null
+    }
+  ]
+}

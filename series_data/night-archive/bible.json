@@ -1,0 +1,69 @@
+{
+  "series": {
+    "slug": "night-archive",
+    "title": "The Night Archive",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.4,
+      "offset_in_shot": 1.6
+    }
+  },
+  "art_style": "Cinematic supernatural mystery — a FICTIONAL night-archive mini-film in 9:16 vertical. A vast municipal records archive at night, frozen in the 1980s: endless steel shelving stacked with numbered evidence boxes, warm pools of light from green banker's lamps against cold concrete, a heavy wooden clerk's desk with an old CRT monitor and a VHS deck, card-catalog cabinets, caged industrial bulbs down long dark aisles, dust motes drifting in the light. Deep shadows, shallow depth of field, anamorphic feel, subtle film grain, slow deliberate camera moves. Grounded, realistic, moody — like a prestige horror series. Any footage playing on the CRT screen has an analog VHS look: soft scanlines, slight tracking wobble, a small white timestamp in the corner. No captions, no on-screen text except diegetic labels and timestamps, no logos, no watermarks. IMPORTANT: this is a silent visual shot — do NOT render any person speaking, lip-sync or talking to camera; the archivist's voice is added separately as narration. Never graphic or gory — the dread lives in stillness and in what is NOT shown.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": {
+    "channel": "sentinal_ihsan"
+  },
+  "characters": [
+    {
+      "id": "ihsan_archivist",
+      "name": "Ihsan",
+      "bio": "Kanalın yüzü — İhsan'ın kendi figürü. Şehir arşivinin yeni gece arşivcisi. Tek kural: her kutuyu logla, kasetleri ASLA izleme. İlk gece kuralı bozar; kasetler onu geriye doğru filme almaya başlar. Anlatıcı ses onun iç monoloğudur (asla kamerada konuşmaz).",
+      "appearance": "A 30-year-old Turkish man with warm olive skin, dark brown eyes, thick dark eyebrows, and a full, neatly groomed black beard and moustache. Short dark brown-black hair, faded short on the sides with thicker voluminous styling swept up on top. Athletic lean-muscular build with broad shoulders. His signature night-archive look: a dark charcoal button-up work shirt with sleeves rolled to the forearms over a black tee, black trousers, a thin silver chain necklace, and a laminated staff badge on a lanyard around his neck. Friendly but tired, confident face. No glasses, no tattoos. Realistic, grounded, cinematic.",
+      "ref_image_url": "https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg",
+      "voice": {
+        "audio_id": "algieba",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "92369a8131e7497abf00c3b5ba1c92c9"
+    }
+  ],
+  "environments": [
+    {
+      "id": "archive_desk",
+      "name": "Arşiv masası — gece",
+      "desc": "The intake desk of a vast municipal records archive at night: a heavy wooden clerk's desk lit by a single green banker's lamp, an old CRT monitor and a VHS deck on the desk beside a small stack of tapes, an open leather-bound intake ledger with a fountain pen, rubber date-stamps, a rotary phone, and steel shelving with numbered boxes fading into darkness behind. 1980s institutional mood, dusty air, moody cinematic night interior.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-archive\\refs\\environments\\archive_desk.png",
+      "ref_image_url": "https://i.ibb.co/Lsftgvh/archive-desk.png"
+    },
+    {
+      "id": "archive_stacks",
+      "name": "Arşiv rafları",
+      "desc": "Endless parallel aisles of tall steel shelving in a dark records archive, every shelf stacked with identical numbered evidence boxes, caged industrial bulbs hanging down the aisle with one far bulb flickering, a concrete floor with painted aisle numbers, a wheeled ladder leaning against one shelf. Deep perspective, unsettling stillness, cinematic night interior.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-archive\\refs\\environments\\archive_stacks.png",
+      "ref_image_url": "https://i.ibb.co/k6VNRy3Q/archive-stacks.png"
+    },
+    {
+      "id": "crt_screen",
+      "name": "CRT ekran (kaset görüntüsü)",
+      "desc": "Extreme close view of an old CRT monitor screen glowing in a dark room, the curved screen filling the frame: analog VHS playback with soft scanlines, slight tracking wobble and a small white timestamp in the corner, the dark glass faintly reflecting a green desk lamp. Ominous analog-horror mood, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-archive\\refs\\environments\\crt_screen.png",
+      "ref_image_url": "https://i.ibb.co/jkrGtSR6/crt-screen.png"
+    },
+    {
+      "id": "intake_window",
+      "name": "Kabul gişesi",
+      "desc": "A metal intake counter set into the archive wall: a roll-down steel shutter above a worn stainless-steel counter, a small brass service bell, a rubber stamp pad, a battered wooden delivery cart beside it, and a faded institutional sign on the wall. A single dim overhead bulb, 1980s night mood, cinematic.",
+      "ref_image_local": "C:\\Users\\ihsan\\Desktop\\Antigravity\\Projects\\Youtube\\output\\series\\night-archive\\refs\\environments\\intake_window.png",
+      "ref_image_url": "https://i.ibb.co/B2N9mXFD/intake-window.png"
+    }
+  ],
+  "props": []
+}

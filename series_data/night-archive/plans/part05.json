@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "FILE #000"
+  },
+  "hook_shot": 4,
+  "narration": "File Zero is the archive. Empty. Filmed from the shelf camera — the camera that does not exist. For a long time, nothing. Then the door opens... and a man walks in. Sits at the desk. Clips on a badge. Opens the ledger. It's me. Not from 1987. Not from sixty years ago. The timestamp is tonight. It is NOW. I watched myself log a box I hadn't logged yet. Watched myself label a fresh tape — FILE number one — tie the string, and set it on the intake counter. Then the man on the screen stopped. And turned. Not to the desk. To the shelf camera. To me. The screen went dark. And on my desk: a box. A tape. A blank label. The archive doesn't close. The next file always arrives. Maybe on your screen... it already has.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": [],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT playback with VHS scanlines: the archive intake desk filmed from a high shelf angle, completely empty, the green banker's lamp burning alone, nothing moving at all — only the corner timestamp ticking forward second by second. Ends on: the empty desk under the lamp, timestamp still running.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT playback, slight tracking wobble: a man enters the empty archive frame, sits down at the intake desk, clips a staff badge to his lanyard and opens the ledger — it is Ihsan (charcoal work shirt), identical, present-day, working calmly under the green lamp. Ends on: the man on the tape dipping the pen to write.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "At the real desk Ihsan (charcoal work shirt) grips the desk edge, looking from the glowing CRT down to his own hands and back; beside him the ledger lies open at a fresh finished entry he does not remember writing, the ink still wet in the lamplight. Ends on: his hand hovering over the wet entry.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT playback: the man on the tape (Ihsan, charcoal work shirt) ties string around a small box and stands it on the intake counter — then freezes mid-motion, and turns his face slowly and deliberately up toward the shelf camera until his eyes fill the frame, tracking distortion tearing the image apart. Ends on: his eyes meeting the lens through the static.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "The CRT dies to black; in the sudden green lamplight a NEW archive box now sits on the desk that was not there before, a fresh blank-labeled tape leaning against it; Ihsan (charcoal work shirt) stares at it for a long beat, then slowly picks up the fountain pen. Ends on: the pen touching the blank label.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "intake_window",
+      "prompt": "Ihsan (charcoal work shirt) sets the freshly labeled box on the stainless intake counter, taps the small brass service bell once, and walks away into the dark aisles without looking back; the steel shutter begins lowering by itself over the box. Ends on: the shutter closing down over the box in the dim bulb light.",
+      "seed": null
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "The Previous Archivist"
+  },
+  "hook_shot": 5,
+  "narration": "Personnel files. That's where you look when your face is on a card from 1987. This archive has had one night archivist at a time, going back sixty years. Ihsan. Before him — Ihsan. Before him — Ihsan. Different photographs. The same face. And the intake ledger... sixty years of entries. All of it in my handwriting. I found the last archivist's final entry, dated the night he disappeared. One line, pressed so hard the pen tore through the page: DO NOT PLAY FILE ZERO. I PLAYED IT. I want you to understand — I never touched the deck. I was still holding the ledger... when the screen switched itself on. When the reels started turning by themselves. And the screen said: FILE number zero.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Ihsan (charcoal work shirt, staff badge) pulls a deep drawer of personnel files out onto the desk and spreads a row of old laminated staff cards under the green banker's lamp, decades apart in style, arranging them side by side with quick tense movements. Ends on: his hands flattening the row of cards in the lamplight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Close over the desk: Ihsan (charcoal work shirt) slides the vintage staff cards into a line under the green lamp — every card from every decade carries the SAME face, his face, aging styles of photograph but one identical man; his finger stops on the oldest card. Ends on: the row of identical faces stretching across the desk.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Ihsan (charcoal work shirt) turns the heavy brittle pages of the intake ledger under the lamp — decades of entries flowing past in one continuous unbroken handwriting — until he stops at a page torn and gouged near the bottom. Ends on: his palm flattening the damaged page.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Extreme close over Ihsan's shoulder (charcoal work shirt): the final ledger entry is pressed so hard into the paper that the pen has torn it, the words gouged like a warning; his fingertip traces the torn letters as the green desk lamp slowly dims around him. Ends on: the lamp guttering while his finger rests on the torn line.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": ["ihsan_archivist"],
+      "environment": "archive_desk",
+      "prompt": "Behind Ihsan (charcoal work shirt) the CRT monitor snaps on BY ITSELF, flooding the desk in cold grey light; the VHS deck's reels begin turning with a soft mechanical whir though no one touched it; he turns around very slowly, ledger still in his hands. Ends on: his face lit only by the glowing screen, eyes wide.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": [],
+      "environment": "crt_screen",
+      "prompt": "Full-frame CRT screen in the dark: heavy static resolves into an old tape leader — rolling tracking bars, a countdown flicker, then the image steadies into stillness as playback begins, the corner timestamp resetting to zero. Ends on: the steadied first frame, waiting.",
+      "seed": null
+    }
+  ]
+}
