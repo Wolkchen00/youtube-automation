@@ -264,11 +264,16 @@ CHANNEL_NARRATION_CONFIG = {
         "instruction": None,  # Uses existing NARRATION_STYLES
     },
     "sentinal_ihsan": {
-        "voice": "Charon",  # Deep male voice — found-footage video diary
+        # İhsan geri bildirimi (2026-07-03, Night Archive P1): fısıltı ürkütücü/irite
+        # edici duruyor — "sessiz olsun ama fısıldamasın". Sakin ama NORMAL sesle anlat.
+        # Algieba = influencer personasıyla aynı ses (marka sesi tek).
+        "voice": "Algieba",  # Warm male voice — calm late-night storyteller
         "instruction": (
-            "Speak in a hushed, tense first-person voice, like a man quietly narrating his own "
-            "phone footage alone at night — trying to stay calm but clearly unnerved. Low volume, "
-            "close and intimate, with uneasy pauses. Never shout; the fear is in the restraint."
+            "Speak in a calm, steady, first-person storyteller voice at NORMAL speaking volume — "
+            "like a man matter-of-factly recounting something strange that happened on his night "
+            "shift. Measured pace, grounded and confident, subtle tension in the pauses only. "
+            "Do NOT whisper. No breathy or hushed delivery, no ASMR tone. Never shout either — "
+            "just quiet, composed, natural speech."
         ),
     },
 }
