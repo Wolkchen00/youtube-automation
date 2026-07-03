@@ -13,6 +13,7 @@ Kullanım:
 
 import os
 import sys
+import time
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _ROOT not in sys.path:
@@ -103,7 +104,8 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> l
     delivery = episode_dir(meta.slug, n) / "delivery_1080.mp4"
     has_delivery = delivery.exists() and delivery.stat().st_size > 0
     ok: list[str] = []
-    for plat in meta.platforms:
+
+    def _try(plat: str) -> bool:
         src = Path(video_path)
         if plat in ("instagram", "tiktok") and has_delivery and src.stem.endswith("_4k"):
             src = delivery
@@ -113,8 +115,24 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> l
         res = upload_to_platform(src, title, desc,
                                  user=meta.upload_profile, platform=plat,
                                  tags=meta.hashtags)
-        if res:
+        return bool(res)
+
+    for plat in meta.platforms:
+        if _try(plat):
             ok.append(plat)
+
+    # Telafi turu: upload-post'un geçici arızası (SSL/5xx) bir platformu düşürdüyse,
+    # API'ye toparlanma payı bırakıp başarısızları BİR kez daha dene. (2026-07-03
+    # dersi: night-archive P1'de YouTube tam arıza penceresine denk geldi; IG/TikTok
+    # 2 dk sonra sorunsuz geçmişti — tek tur telafi YouTube'u kurtarırdı.)
+    failed = [p for p in meta.platforms if p not in ok]
+    if failed:
+        logger.info(f"🔁 Telafi turu: {', '.join(failed)} için 90s sonra yeniden denenecek…")
+        time.sleep(90)
+        for plat in failed:
+            if _try(plat):
+                ok.append(plat)
+
     logger.info(f"📊 Yayın: {len(ok)}/{len(meta.platforms)} platform OK")
     return ok
 
