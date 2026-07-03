@@ -614,6 +614,28 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
         except Exception as e:
             logger.warning(f"⚠️ Kanca eklenemedi (video kancasız yayınlanır): {e}")
 
+    # Açılış künyesi (opt-in): plan'daki eser adı + bölge/yıl videonun İLK
+    # saniyelerine yazılır. Kancadan SONRA uygulanır ki künye, başa eklenen
+    # doruk-kesitinin üzerine binsin (izleyici ilk karede NE ve NEREDE okur);
+    # upscale'den ÖNCE uygulanır ki 4K master da IG/TikTok delivery kopyası da
+    # yazıyı taşısın.
+    tc_cfg = bible.title_card
+    tc = plan.get("title_card") or {}
+    if tc_cfg and (tc.get("title") or tc.get("subtitle")):
+        try:
+            titled = Path(final_ep).parent / f"{Path(final_ep).stem}_titled.mp4"
+            ffmpeg_tools.title_card_overlay(
+                final_ep, titled,
+                title=str(tc.get("title") or ""),
+                subtitle=str(tc.get("subtitle") or ""),
+                duration=float(tc_cfg.get("duration", 3.0)),
+            )
+            if titled.exists() and titled.stat().st_size > 0:
+                final_ep = titled
+                logger.info(f"🪧 Künye bindirildi: {tc.get('title') or tc.get('subtitle')}")
+        except Exception as e:
+            logger.warning(f"⚠️ Künye eklenemedi (video künyesiz yayınlanır): {e}")
+
     # 4K master (opt-in): en-son final Topaz ile ×2 büyütülür (YouTube 4K);
     # IG/TikTok için 1080p delivery kopyası yanına bırakılır.
     final_ep = _upscale_master(bible, number, Path(final_ep))

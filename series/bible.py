@@ -172,6 +172,16 @@ class Bible:
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
+    def title_card(self) -> dict:
+        """Açılış künyesi (opt-in): plan'daki title_card={'title','subtitle'} metni
+        videonun İLK saniyelerine yazılır (ör. eser adı + bölge/yıl — 'ekranda yazı'
+        kancası). Kanca-kesiti eklendikten SONRA, upscale'den ÖNCE final videoya
+        bindirilir; t=0'dan itibaren tam görünür, süre sonunda erir.
+        Örn: "title_card": {"enabled": true, "duration": 3.0}"""
+        v = self.data["series"].get("title_card") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
     def upscale(self) -> dict:
         """4K master katmanı (opt-in): final video Topaz Video Upscale ile ×2 büyütülür
         (1080x1920 → 2160x3840) — YouTube 4K bitrate merdivenine girer, izleyiciye

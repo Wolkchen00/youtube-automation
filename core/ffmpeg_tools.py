@@ -873,6 +873,89 @@ def cctv_overlay(
     return output_path
 
 
+def title_card_overlay(
+    input_path: str | Path,
+    output_path: str | Path,
+    title: str,
+    subtitle: str = "",
+    duration: float = 3.0,
+) -> Path:
+    """Burn an opening title card (e.g. artifact name + region/year) over the
+    first seconds of a FINISHED episode.
+
+    Applied after the hook teaser is prepended, so the text sits on top of the
+    cold-open — the viewer reads WHAT and WHERE on the very first frame. The
+    card is fully visible from t=0 (no fade-in: frame one must already carry
+    the text) and fades out over the last 0.5s of `duration`. Only drawtext is
+    applied — the footage look is not altered (no fps/eq/noise like the CCTV
+    dressing).
+    """
+    import textwrap
+
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+
+    # Boyutlar 1080x1920 referansına göre; farklı girdi yüksekliğe oranla ölçeklenir.
+    scale = (get_video_height(input_path) or 1920) / 1920.0
+
+    def px(v: float) -> int:
+        return max(1, round(v * scale))
+
+    font = _find_font(mono=False)
+    # Windows sürücü iki noktası (C:) çift-katman filter parser'ını kırar → '\:' kaçışı
+    fontarg = f"fontfile='{font.replace(':', chr(92) + ':')}':" if font else ""
+
+    fade = 0.5
+    end = max(fade + 0.1, float(duration))
+    hold = end - fade
+    # t=0'da TAM görünür; hold'a kadar sabit; 0.5s'de erir (fade-in YOK — ilk kare okunmalı).
+    alpha = f"if(lt(t,{hold:.2f}),1,if(lt(t,{end:.2f}),({end:.2f}-t)/{fade},0))"
+
+    title_fs, sub_fs = px(58), px(38)
+    title_lh, sub_lh = title_fs + px(24), sub_fs + px(18)
+
+    # Bir drawtext PER LINE (ffmpeg 8 çok-satır tuzağı — cctv_overlay'deki çözümle aynı).
+    rows: list[tuple[str, int, str]] = []   # (metin, fontsize, renk)
+    for line in textwrap.wrap((title or "").upper(), width=24):
+        rows.append((line, title_fs, "white"))
+    for line in textwrap.wrap(subtitle or "", width=36):
+        rows.append((line, sub_fs, "white@0.92"))
+    if not rows:
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+        return output_path
+
+    vf_parts = []
+    y = px(320)   # Shorts üst ikon bölgesinin altı, alt UI'ın çok üstü
+    for text, fs, color in rows:
+        vf_parts.append(
+            f"drawtext={fontarg}text='{_drawtext_escape(text)}':fontsize={fs}:"
+            f"fontcolor={color}:box=1:boxcolor=black@0.45:boxborderw={px(16)}:"
+            f"x=(w-text_w)/2:y={y}:alpha='{alpha}'"
+        )
+        y += title_lh if fs == title_fs else sub_lh
+    vf_parts.append("format=yuv420p")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-vf", ",".join(vf_parts),
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", FFMPEG_PRESET,
+        "-c:a", "copy",
+        str(output_path)
+    ]
+    try:
+        subprocess.run(cmd, capture_output=True, check=True, timeout=300)
+        logger.info(f"🪧 Title card ('{title}') → {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        err = (e.stderr or b"").decode(errors="replace")[-400:] if e.stderr else str(e)
+        logger.warning(f"⚠️ Title card failed (using original): {err}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+    return output_path
+
+
 def extract_clip(
     input_path: str | Path,
     output_path: str | Path,

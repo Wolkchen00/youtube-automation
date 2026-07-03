@@ -14,7 +14,7 @@
   "total_parts": 5,
   "next_part": 2,
   "status": "active",
-  "priority": 2,
+  "priority": 3,
   "publish_mode": "auto",
   "parts": {
     "1": {

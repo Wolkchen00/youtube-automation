@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "The Drowned City Frozen in Time"
+  },
+  "title_card": {
+    "title": "Shicheng — The Lion City",
+    "subtitle": "Qiandao Lake, China — flooded 1959"
+  },
+  "synopsis": "A dive team enters Shicheng, the 1,300-year-old Lion City deliberately drowned in 1959 for a dam, and finds its gates, carvings and wooden beams perfectly preserved in the cold dark freshwater.",
+  "hook_shot": 4,
+  "narration": "This city was not lost. It was sentenced. In 1959, China flooded an entire valley to build a dam — and Shicheng, the Lion City, thirteen hundred years old, vanished beneath Qiandao Lake with its gates still standing. Three hundred thousand people walked away. The water rose over the rooftops. Then, in 2001, divers went down to see what was left — and found the city perfectly preserved in the cold, dark freshwater. Carved dragons still guarding the arches. Wooden beams still in place. Streets waiting in silence, forty meters down. Nothing decayed. Nothing moved. The Lion City is still down there — holding its breath.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "POV descent through cold dark freshwater, fine particles hanging motionless in the headlamp beam, two teammate torches sinking ahead; a massive vertical stone wall face slides into the light. Ends on: a city gate tower emerging from the darkness at the base of the wall.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Gliding along the ancient city wall toward the gate tower, the torch beam tracing ornate stone carvings and rooftop ridge lines furred with fine brown sediment. Ends on: the camera passing under the great stone arch of the gate into pure darkness.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Inside a drowned street: intact wooden house frames and black open doorways line both sides, utterly still; the sweeping beam suddenly catches a carved stone guardian lion face jutting from a wall, teeth bared in the light. Ends on: the lion relief centered and staring in the beam.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close on an ornate carved dragon relief coiling across a memorial archway, every scale still crisp after centuries; a gloved hand hovers over it, tracing the carving without touching, particles glittering through the beam. Ends on: the full dragon carving lit end to end, perfectly preserved.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The team documents the archway: a diver steadies a small camera rig whose soft strobe pulses light down the street, another runs a gloved hand along an intact dark wooden beam overhead; nothing is taken, the city left as found. Ends on: the two divers drifting away down the black street, torches fading.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "POV rising slowly above the drowned rooftops, the gate tower and streets shrinking below as the teammate torch beams trace the lanes one last time; the water above stays black and starless. Ends on: the Lion City fading completely into the dark below the camera.",
+      "seed": null
+    }
+  ]
+}

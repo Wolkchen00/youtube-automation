@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "The Lost City the Sea Swallowed Whole"
+  },
+  "title_card": {
+    "title": "Thonis-Heracleion",
+    "subtitle": "Abu Qir Bay, Egypt — found 2000"
+  },
+  "synopsis": "Divers glide through the drowned Egyptian port of Thonis-Heracleion and raise the five-meter granite god Hapi from the silt where the liquefying ground let the whole city sink.",
+  "hook_shot": 4,
+  "narration": "For a thousand years, Thonis-Heracleion was only a legend — Egypt's gateway city, where myth said Helen of Troy once walked. Then, in the year 2000, divers scanning Abu Qir Bay found it: an entire city lying in the dark, seven kilometers off the coast. Temples. Harbors. Sixty-four buried ships. And rising out of the silt, a red granite god five meters tall — Hapi, lord of the flood, staring into the murk for two thousand years. The ground beneath the city had simply turned to liquid, and the sea took everything. The god was lifted back into daylight. The city stayed below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "POV descent through murky green water onto a flat sand plain, torch cones sweeping ahead, marine snow drifting; scattered broken column drums and worked stone blocks appear out of the haze. Ends on: a long avenue of toppled stone blocks stretching into the gloom.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Gliding forward along the avenue of toppled temple blocks, weathered carvings ghosting under the torch light, a school of small silver fish bursting out of a doorway-shaped gap and scattering past the lens. Ends on: an enormous dark shape looming out of the murk ahead.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Drawing slowly closer to the enormous shape: a colossal red granite face emerges from the gloom, half-buried in silt, calm and staring, the torch beam crawling across its carved crown while a teammate diver hangs tiny beside it. Ends on: the beam holding on the colossus' staring face.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close on the colossal granite head as gloved hands brush drifting silt from its carved crown and eyes; two torch beams cross over the stone face, and the diver hovers beside it, dwarfed — a five-meter god lying in the dark. Ends on: the statue's head and shoulders fully revealed in the crossed beams.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Wide heavy lifting straps are cinched around the colossus' torso; the statue stirs from the seabed in a slow storm of silt, sand pouring off its shoulders as it tilts upright, divers steadying it on either side. Ends on: the colossus rising slowly off the bottom inside a cloud of silt.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "POV ascending alongside the rising granite god toward a pale green glow far above, its serene face passing close to the camera; below, the drowned city's toppled avenues recede into darkness. Ends on: the city's shadows fading below while the god rises into the light.",
+      "seed": null
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "series": {
+    "slug": "drowned-history",
+    "title": "Drowned History",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false,
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "audio_smooth": false,
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.4,
+      "offset_in_shot": 1.6
+    },
+    "title_card": {
+      "enabled": true,
+      "duration": 3.0
+    }
+  },
+  "art_style": "Found-footage from a technical diver's helmet-mounted camera — a FICTIONAL dramatized reenactment of a real archaeological recovery operation. Vertical 9:16, first-person POV: the frame drifts and sways gently with the diver's slow fin kicks, occasionally a gloved hand, gauge or exhaled bubbles cross the frame. Deep dark water lit only by dive torches and headlamp beams — volumetric light cones full of drifting silt and marine snow, murky green-blue gloom fading to pure black at the edges, mild wide-lens distortion, soft focus shifts, light sensor grain. One or two teammate divers appear ahead as dark silhouettes with glowing torches; their faces are always hidden behind dive masks and regulators, never clearly visible. Atmospheric, ominous, awe-and-dread mood — haunting but never graphic or gory. No on-screen text, no captions, no logos, no watermarks (all overlays are added in post). IMPORTANT: this is a silent visual shot — do NOT render any person speaking, lip-sync or talking to camera; the voice is added separately as narration.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": { "channel": "shadowedhistory" },
+  "characters": [],
+  "environments": [],
+  "props": []
+}

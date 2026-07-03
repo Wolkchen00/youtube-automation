@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "The 3,300-Year-Old Ship Full of Royal Gold"
+  },
+  "title_card": {
+    "title": "The Uluburun Shipwreck",
+    "subtitle": "Kaş, Türkiye — found 1982"
+  },
+  "synopsis": "On the steep slope off Uluburun near Kaş, a team works the oldest shipwreck ever excavated — Bronze Age copper ingots stacked like grave rows and, hidden in the silt, a solid gold scarab bearing Nefertiti's name.",
+  "hook_shot": 4,
+  "narration": "In 1982, a Turkish sponge diver named Mehmet Çakır surfaced near Kaş with a strange report: metal biscuits with ears, stacked on the seabed. Archaeologists went down — and found the oldest shipwreck ever excavated. A royal trading vessel that sank thirty-three centuries ago, resting fifty meters deep. Ten tons of copper. Ingots of raw blue glass. Ebony from Nubia. Ivory from the Nile. And buried in the silt, a single scarab of solid gold, carved with the name of Queen Nefertiti. Divers made more than twenty-two thousand descents to bring the cargo home. What the sea kept for three thousand years now rests in Bodrum.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "POV descent along a steep underwater rock slope plunging into deep blue darkness, headlamp beam raking the incline, bubbles streaming up past the lens, a teammate diver below as a silhouette with a torch. Ends on: rows of strange rectangular slabs appearing on the slope out of the gloom.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Moving along the rows: four-handled oxhide-shaped copper ingots crusted with growth, stacked and scattered down the slope like grave markers, large clay storage jars leaning between them, torch light gliding across it all. Ends on: a teammate diver hovering over the dark open mouth of a large jar.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Passing between blackened ancient hull timbers curving up from the seabed like a ribcage in the torch light; a moray eel slides suddenly out of a jar mouth and vanishes into the dark, silt pulsing in the beam. Ends on: the beam falling on a patch of pale undisturbed silt between two timbers.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close on the pale silt as gloved fingers fan it gently away: a small golden scarab emerges, impossibly bright and untouched, gleaming in the torch beam against the grey sediment, bubbles drifting up. Ends on: the gold scarab resting in a gloved palm, glinting under the light.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The gloved hands seal the scarab into a small clear sample case; beside them a second diver guides a crusted copper ingot into a recovery basket and tugs the lift line twice, silt swirling softly. Ends on: the basket rising past the camera into dark blue water.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "POV ascending the slope line: below, the rows of ingots dim one by one as the torch beams leave them, the wreck sinking back into deep blue darkness; faint sunlight begins to shimmer far overhead. Ends on: the site swallowed by blue-black depth as the surface glow strengthens.",
+      "seed": null
+    }
+  ]
+}
