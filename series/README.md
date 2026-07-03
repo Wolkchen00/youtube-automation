@@ -48,6 +48,23 @@ output/series/<slug>/
   series_log.csv / series_log.xlsx                 (üretim raporu)
 ```
 
+## 4K master (opt-in: `bible.series.upscale`)
+```json
+"upscale": {"enabled": true, "factor": "2", "provider": "topaz"}
+```
+- Final video (kanca dahil her şey bittikten sonra) **×2 büyütülür**: 1080x1920 → **2160x3840**.
+  YouTube 4K bitrate merdivenine girer → izleyiciye belirgin daha temiz görüntü + "4K" rozeti.
+- `provider: "topaz"` (varsayılan) — Kie `topaz/video-upscale`, kareyi yeniden inşa eder
+  (gerçek detay). **Ölçülen maliyet ~8 kredi/sn** (2026-07-03: 4sn=32 kredi → 40sn ≈ 320 kredi).
+  Akış: final → Kie dosya deposu (`kieai.redpandaai.co`, 3 gün) → görev → indir.
+  >50MB girdi otomatik bitrate-kapaklı kopyayla gönderilir; ~100Mbps çıktı ~9.5Mbps'e
+  normalize edilir (Upload-Post ~80MB limiti).
+- `provider: "lanczos"` — bedava yerel ffmpeg ×2 (detay sentezlemez ama YouTube'un 4K
+  encode kazancını yine tetikler). Topaz başarısız olursa da otomatik bu yola düşülür.
+- **IG/TikTok her durumda 1080p alır** (`episodes/epNN/delivery_1080.mp4`) — iki platform
+  da videoyu zaten 1080p'ye yeniden kodluyor; 4K yalnız YouTube'a gider.
+- Hiçbir yol çalışmazsa 1080p yayınlanır — yayın durmaz (best-effort).
+
 ## Notlar
 - Üretim **Kie kredisi harcar** (Omni ücretli). Gerçek maliyet API'den (`creditsConsumed`)
   okunur ve rapora yazılır. Kurulum/dry-run ücretsizdir.

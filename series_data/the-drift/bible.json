@@ -1,0 +1,29 @@
+{
+  "series": {
+    "slug": "the-drift",
+    "title": "The Drift",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false,
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.3,
+      "offset_in_shot": 1.5
+    },
+    "upscale": {
+      "enabled": true,
+      "factor": "2"
+    }
+  },
+  "art_style": "Photorealistic cinematic dreamscape shot on anamorphic 35mm film, razor-sharp ultra-detailed 4K clarity, muted desaturated color grade with soft golden highlights, volumetric fog and atmospheric haze, vast epic scale, slow continuous forward camera drift with subtle floating motion, seamless surreal transformations of real-world places, liminal dreamcore mood, soft cinematic lighting, photoreal textures, no on-screen text, no watermark, no captions, vertical 9:16 composition.",
+  "style_ref_url": null,
+  "narration": {},
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

@@ -36,6 +36,7 @@ KIE_AI_RECORD_INFO = f"{KIE_AI_BASE_URL}/jobs/recordInfo"
 KIE_AI_CREDIT = f"{KIE_AI_BASE_URL}/chat/credit"
 KIE_AI_OMNI_AUDIO = f"{KIE_AI_BASE_URL}/omni/audio/create"          # Gemini Omni voice registration
 KIE_AI_OMNI_CHARACTER = f"{KIE_AI_BASE_URL}/omni/character/create"  # Gemini Omni character registration
+KIE_AI_FILE_UPLOAD = "https://kieai.redpandaai.co/api/file-stream-upload"  # geçici dosya deposu (3 gün) — URL isteyen modellere yerel dosya beslemek için (api.kie.ai'de DEĞİL — docs curl örneğindeki host)
 IMGBB_UPLOAD_URL = "https://api.imgbb.com/1/upload"
 
 # ─── Project Directories ──────────────────────────────────────────────────────

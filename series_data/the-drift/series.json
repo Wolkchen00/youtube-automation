@@ -1,0 +1,25 @@
+{
+  "slug": "the-drift",
+  "base_title": "The Drift",
+  "logline": "One continuous drift through places that cannot exist — filmed like a dream you almost remember.",
+  "language": "en",
+  "standalone": true,
+  "upload_profile": "Youtube",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #4k #dreamcore #surreal #liminalspaces #cinematic #aivideo #oddlysatisfying",
+  "total_parts": 5,
+  "next_part": 1,
+  "status": "active",
+  "publish_mode": "auto",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "brief": "Cinematic dreamcore serisi (maxvoao / odysseyml tarzı — fotoreal, sinematik, gerçeküstü). Her bölüm TEK KESİNTİSİZ rüya-yolculuğudur: kamera hiç durmadan yavaşça ileri süzülür ve gerçek bir dünya, bölüm ortasında imkânsız bir şekilde dönüşür. KURAL: tam 5 çekim × 8 saniye. Çekim 1 = sakin, fotoreal, neredeyse sıradan bir açılış (gerçek bir yer: tarla, sokak, sahil, orman, çöl, dağ, şehir). Çekim 2-3 = dünya sezdirmeden bükülmeye başlar (yerçekimi, ölçek, ufuk, mimari kurallar bozulur). Çekim 4 = DORUK — nefes kesen imkânsız manzara (hook_shot bu olsun). Çekim 5 = dingin, duygusal final vista. Bazı bölümlerde arkadan görünen UZAK tek bir figür yürür/koşar (asla yüz yakın planı, asla konuşma); bazı bölümler tamamen figürsüz saf manzara/mimari olsun. Her bölüm YENİ bir biyom/dünya kullanır (buğday tarlası, katlanan şehir, ayna çölü, bulut denizleri, ters şelaleler, sonsuz koridorlar, tuz gölü, kar, okyanus, megastrüktürler...). Başlık = 4-9 kelimelik şiirsel İngilizce cümle, tırnak/emoji yok (ör: 'Stepping into whatever waits ahead', 'The field kept going', 'Where the city folds'). narration alanı DAİMA boş string. Prompt'lar somut ve görsel olsun; 'kamera yavaşça ileri süzülür' hissini her çekimde koru."
+  },
+  "parts": {}
+}

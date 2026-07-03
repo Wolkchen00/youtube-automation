@@ -9,9 +9,11 @@ import json
 import time
 import requests
 
+from pathlib import Path
+
 from .config import (
     KIE_AI_API_KEY,
-    KIE_AI_CREATE_TASK, KIE_AI_RECORD_INFO, KIE_AI_CREDIT,
+    KIE_AI_CREATE_TASK, KIE_AI_RECORD_INFO, KIE_AI_CREDIT, KIE_AI_FILE_UPLOAD,
     DEFAULT_IMAGE_MODEL, DEFAULT_VIDEO_MODEL, DEFAULT_VIDEO_MODEL_T2V, DEFAULT_VIDEO_MODE,
     DEFAULT_ASPECT_RATIO, DEFAULT_RESOLUTION, DEFAULT_OUTPUT_FORMAT,
     DEFAULT_VIDEO_DURATION, CINEMATIC_VIDEO_MODEL,
@@ -415,6 +417,67 @@ def generate_seedance_video(
             time.sleep(backoff_delays[min(attempt - 1, len(backoff_delays) - 1)])
             inp["prompt"] = prompt[:300]
     return None
+
+
+# ─── File Upload (geçici depo) & Topaz 4K Upscale ─────────────────────────────
+
+def upload_file_to_kie(file_path: str | Path, upload_path: str = "videos") -> str | None:
+    """Yerel dosyayı Kie'nin geçici deposuna yükle → downloadUrl (3 gün saklanır).
+
+    'URL ister' modellere (ör. topaz/video-upscale) yerel dosya beslemek için.
+    Multipart yükleme; Content-Type requests tarafından atanır (elle set etme).
+    """
+    p = Path(file_path)
+    if not p.exists() or p.stat().st_size == 0:
+        logger.error(f"❌ Kie upload: dosya yok/boş: {p}")
+        return None
+    size_mb = p.stat().st_size / (1024 * 1024)
+    try:
+        with open(p, "rb") as f:
+            resp = requests.post(
+                KIE_AI_FILE_UPLOAD,
+                headers={"Authorization": f"Bearer {KIE_AI_API_KEY}"},
+                files={"file": (p.name, f, "video/mp4")},
+                data={"uploadPath": upload_path.strip("/"), "fileName": p.name},
+                timeout=600,
+            )
+        data = resp.json()
+        payload = data.get("data") or data
+        url = payload.get("downloadUrl") or payload.get("fileUrl") or payload.get("file_url")
+        if data.get("code") in (0, 200) and url:
+            logger.info(f"📤 Kie deposuna yüklendi ({size_mb:.0f}MB): {p.name}")
+            return url
+        logger.error(f"❌ Kie upload hatası (code={data.get('code')}): {str(data)[:200]}")
+        return None
+    except Exception as e:
+        logger.error(f"❌ Kie upload bağlantı hatası: {e}")
+        return None
+
+
+def generate_topaz_upscale(video_url: str, upscale_factor: str = "2",
+                           max_attempts: int = 60) -> dict | None:
+    """Topaz Video Upscale (topaz/video-upscale): kareyi yeniden inşa ederek büyütür
+    (1080p ×2 → 2160x3840 4K master). Girdi bir URL olmalı — yerel dosya için önce
+    upload_file_to_kie. Girdi limiti ~50MB. Başarısız görev kredi harcamaz.
+    Ölçülen maliyet: ~8 kredi/sn (2026-07-03 testi: 4sn=32 kredi → 40sn ≈ 320 kredi).
+    Dönüş: {"url": str, "credits": float|None} veya None.
+    """
+    factor = str(upscale_factor)
+    if factor not in ("1", "2", "4"):
+        logger.warning(f"⚠️ Geçersiz upscale_factor '{upscale_factor}' → '2'")
+        factor = "2"
+    payload = {
+        "model": "topaz/video-upscale",
+        "input": {"video_url": video_url, "upscale_factor": factor},
+    }
+    try:
+        task_id = create_task(payload)
+    except ServerError as e:
+        logger.error(f"🚫 Topaz create_task sunucu hatası: {e}")
+        return None
+    if not task_id:
+        return None
+    return _poll_video_with_credits(task_id, max_attempts=max_attempts)
 
 
 # ─── Credit Check ─────────────────────────────────────────────────────────────

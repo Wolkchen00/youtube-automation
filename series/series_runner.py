@@ -92,13 +92,25 @@ def _persist_release(slug: str, n: int, video_path) -> str | None:
 
 
 def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> list[str]:
-    """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür."""
+    """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür.
+
+    4K master (bible.upscale) varsa yalnız YouTube'a gider; IG/TikTok 1080p
+    delivery kopyasını alır — iki platform da videoyu zaten 1080p'ye yeniden
+    kodladığı için 4K oraya sadece upload süresi/riski demek."""
     title = meta.title_for(n, subtitle)
     desc = meta.description_for(n, subtitle)
+    from series.bible import episode_dir
+    delivery = episode_dir(meta.slug, n) / "delivery_1080.mp4"
+    has_delivery = delivery.exists() and delivery.stat().st_size > 0
     ok: list[str] = []
     for plat in meta.platforms:
-        logger.info(f"📤 {plat.upper()} → {title}")
-        res = upload_to_platform(Path(video_path), title, desc,
+        src = Path(video_path)
+        if plat in ("instagram", "tiktok") and has_delivery and src.stem.endswith("_4k"):
+            src = delivery
+            logger.info(f"📤 {plat.upper()} → {title} (1080p delivery)")
+        else:
+            logger.info(f"📤 {plat.upper()} → {title}")
+        res = upload_to_platform(src, title, desc,
                                  user=meta.upload_profile, platform=plat,
                                  tags=meta.hashtags)
         if res:

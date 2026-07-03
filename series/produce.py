@@ -9,6 +9,7 @@ dry_run=True her ikisinde de API/kredi harcamadan adımları simüle eder.
 """
 
 import json
+import shutil
 from pathlib import Path
 
 from core.config import logger
@@ -17,6 +18,7 @@ from core.imgbb import upload_to_imgbb
 from core.kie_api import (
     generate_image, check_credit,
     generate_seedance_video, generate_veo_video, generate_video,
+    upload_file_to_kie, generate_topaz_upscale,
 )
 from core import ffmpeg_tools, cost_tracker
 
@@ -114,6 +116,84 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
             logger.warning(f"⚠️ Müzik atlandı: {e}")
 
     return out
+
+
+# ─── 4K master (opt-in: bible.upscale; best-effort) ───────────────────────────
+
+TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
+
+
+def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
+    """Final videoyu 4K master'a yükselt (bible.upscale açıksa).
+
+    Birincil yol: Kie 'topaz/video-upscale' — kareyi yeniden inşa eder (gerçek detay).
+      Akış: yerel final → Kie geçici deposu (3 gün) → upscale görevi → 4K indir.
+    Yedek yol: yerel ffmpeg lanczos ×2 — API başarısızsa bile 4K konteyner garanti.
+    Yan ürün: 1080p kaynak episode_dir/delivery_1080.mp4 olarak saklanır; yayında
+    IG/TikTok bunu alır (4K yalnız YouTube'a gider — diğerleri zaten 1080p'ye kodlar).
+    Her iki yol da başarısızsa 1080p final döner — yayın hiçbir koşulda durmaz."""
+    cfg = bible.upscale
+    if not cfg:
+        return src
+    out = src.parent / f"{src.stem}_4k.mp4"
+    delivery = episode_dir(bible.slug, number) / "delivery_1080.mp4"
+    try:
+        if not delivery.exists() or delivery.stat().st_size == 0:
+            shutil.copy2(src, delivery)
+    except Exception as e:
+        logger.warning(f"⚠️ delivery_1080 kopyalanamadı: {e}")
+    if out.exists() and out.stat().st_size > 0:
+        logger.info(f"⏭️ 4K master zaten var: {out.name}")
+        return out
+
+    factor = str(cfg.get("factor", "2"))
+    # provider: "topaz" (varsayılan; gerçek detay, ölçülen ~8 kredi/sn → 40sn ≈ 320 kredi)
+    #           "lanczos" (bedava; yalnız YouTube 4K bitrate merdiveni kazancı)
+    provider = str(cfg.get("provider", "topaz")).strip().lower()
+
+    # 1) Topaz (gerçek detay sentezi)
+    if provider == "topaz":
+        try:
+            topaz_in = src
+            # Girdi limiti ~50MB: uzun bölümlerin CRF-18 finali aşabilir →
+            # çözünürlüğü koruyan bitrate-kapaklı kopya Topaz'a gönderilir
+            # (Topaz kareyi zaten yeniden inşa ediyor; 6M 1080p girdi yeterli).
+            if src.stat().st_size / (1024 * 1024) > TOPAZ_INPUT_LIMIT_MB:
+                shrunk = src.parent / f"{src.stem}_topaz_in.mp4"
+                if not shrunk.exists() or shrunk.stat().st_size == 0:
+                    ffmpeg_tools.cap_bitrate(src, shrunk, maxrate="6000k", crf="23")
+                topaz_in = shrunk
+            src_url = upload_file_to_kie(topaz_in, upload_path="series-upscale")
+            if src_url:
+                res = generate_topaz_upscale(src_url, factor)
+                raw = src.parent / f"{src.stem}_4k_raw.mp4"
+                if (res and res.get("url") and download_file(res["url"], raw)
+                        and raw.exists() and raw.stat().st_size > 0):
+                    if res.get("credits") is not None:
+                        cost_tracker.log_cost(f"series:{bible.slug}", f"topaz_ep{number}",
+                                              "topaz/video-upscale", res["credits"])
+                    # Topaz ~100 Mbps çıkarıyor (40sn ≈ 500MB) → Upload-Post'un
+                    # ~80MB limitine sığması için bitrate normalize edilir.
+                    if raw.stat().st_size / (1024 * 1024) > 78:
+                        ffmpeg_tools.cap_bitrate(raw, out, maxrate="9500k", crf="18")
+                    else:
+                        raw.replace(out)
+                    if out.exists() and out.stat().st_size > 0:
+                        logger.info(f"🔍 4K master hazır (Topaz ×{factor}): {out.name}")
+                        return out
+        except Exception as e:
+            logger.warning(f"⚠️ Topaz upscale hatası: {e}")
+        logger.warning("⚠️ Topaz yolu başarısız — yerel lanczos yedeğine geçiliyor")
+
+    # 2) Yerel lanczos yedeği
+    try:
+        ffmpeg_tools.upscale_lanczos(src, out, factor=int(factor))
+        if out.exists() and out.stat().st_size > 0:
+            logger.info(f"🔍 4K master hazır (lanczos ×{factor}): {out.name}")
+            return out
+    except Exception as e:
+        logger.warning(f"⚠️ Lanczos upscale de başarısız: {e} — 1080p yayınlanacak")
+    return src
 
 
 # ─── Kurgu-öncesi çekim hazırlığı (micro_trim + CCTV giydirme; opt-in) ─────────
@@ -533,6 +613,10 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 logger.info(f"🎣 Kanca: çekim {hn} dorukundan {d:.1f}s (t={start:.1f}s) başa eklendi")
         except Exception as e:
             logger.warning(f"⚠️ Kanca eklenemedi (video kancasız yayınlanır): {e}")
+
+    # 4K master (opt-in): en-son final Topaz ile ×2 büyütülür (YouTube 4K);
+    # IG/TikTok için 1080p delivery kopyası yanına bırakılır.
+    final_ep = _upscale_master(bible, number, Path(final_ep))
 
     # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar).
     # chain_scope="episode" ise bölümler arası taşıma YOK — sidecar yazılmaz.

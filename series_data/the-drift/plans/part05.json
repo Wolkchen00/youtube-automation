@@ -1,0 +1,41 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Falling felt like floating here"
+  },
+  "synopsis": "A figure steps off a cliff above a sea of clouds and falls in slow motion past floating islands and upward waterfalls, landing soft in a field of glowing grass.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A lone figure in a long coat stands at the edge of an immense cliff above a sea of clouds at dusk, coat moving in the wind, warm low light on the cloud tops, the camera drifting slowly toward their back.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The figure steps off the edge and falls in dreamlike slow motion through the first cloud layer, arms slightly open, the camera falling alongside them, mist tearing past, shafts of low golden sun cutting through the clouds.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Below the clouds: enormous floating rock islands covered in green moss with waterfalls flowing upward into the sky, the figure falls gently past them, drops of water rising around like slow stars, camera descending in the same continuous drift.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The fall slows into a float through a vast canyon of bioluminescent hanging gardens, curtains of teal and gold glowing vines swaying on both sides in the dusk air, the figure drifting down through the light, camera gliding with them.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The figure lands featherlight in a field of softly glowing blue-green grass at night under two pale moons, rings of gentle light rippling outward from their feet through the grass, the camera settling to a calm stop behind them.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

@@ -1,0 +1,41 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "The hallway remembers every door"
+  },
+  "synopsis": "An infinite hotel corridor whose doors open into other worlds, until the corridor itself dissolves into a path of doors floating through space.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "An endless dim hotel corridor with warm yellowed wallpaper and worn carpet, identical wooden doors on both sides receding to infinity, a single distant figure walking away from the camera, the camera drifting forward at walking pace.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Doors stand open as the camera passes: one door reveals a blinding desert at noon, another holds back a deep blue ocean pressed against the doorframe like glass, shafts of foreign light spilling across the corridor carpet, the distant figure still walking ahead.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The corridor walls slowly turn transparent — behind them an endless starry void with green auroras, while the carpet and the row of doors continue floating through space, the lone figure walking far ahead, camera drifting after them.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The corridor dissolves completely: only a floating path of glowing doorframes winding through a violet nebula, stardust drifting past, the distant figure stepping through the final door which glows warm gold.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Through the final door: a silent snowy plain at night under slow curtains of aurora, the lone figure walking toward a single warm lit cabin on the far horizon, snowflakes hanging almost still in the air, camera gliding gently to a rest.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

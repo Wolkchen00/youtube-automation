@@ -360,6 +360,64 @@ def final_export(
     return output_path
 
 
+def upscale_lanczos(
+    input_path: str | Path,
+    output_path: str | Path,
+    factor: int = 2,
+    maxrate: str = "10M",
+) -> Path:
+    """Yerel 4K büyütme (Topaz API yedeği): lanczos ×factor + hafif keskinleştirme.
+
+    Gerçek detay sentezlemez ama YouTube'un 4K bitrate merdivenini tetikler —
+    aynı içerik 1080p yüklemeye göre gözle görülür daha temiz VP9/AV1 encode alır.
+    maxrate, Upload-Post'un ~80MB gövde limitine sığmak için bitrate'i kapaklar.
+    """
+    output_path = Path(output_path)
+    vf = (f"scale=iw*{int(factor)}:ih*{int(factor)}:flags=lanczos,"
+          "unsharp=5:5:0.4:5:5:0.0")
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-vf", vf,
+        "-c:v", "libx264", "-crf", "18",
+        "-maxrate", maxrate, "-bufsize", "20M",
+        "-preset", "medium",
+        "-c:a", "copy",
+        "-movflags", "+faststart",
+        str(output_path),
+    ]
+    logger.info(f"🔍 Lanczos ×{factor} upscale kodlanıyor...")
+    subprocess.run(cmd, capture_output=True, check=True, timeout=1800)
+    return output_path
+
+
+def cap_bitrate(
+    input_path: str | Path,
+    output_path: str | Path,
+    maxrate: str = "9500k",
+    crf: str = "18",
+    preset: str = "fast",
+) -> Path:
+    """Çözünürlüğü KORUYARAK bitrate'i kapakla (upload limitlerine sığdırma).
+
+    Topaz 4K çıktısı ~100 Mbps gelebiliyor (4sn ≈ 50MB) — Upload-Post ~80MB üstü
+    gövdeleri kesiyor. 9500k @ 60s ≈ 72MB → limite güvenle sığar; YouTube zaten
+    kendi 4K VP9/AV1 encode'unu üretiyor, görünür kalite kaybı olmaz."""
+    output_path = Path(output_path)
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-c:v", "libx264", "-crf", crf,
+        "-maxrate", maxrate, "-bufsize", "20M",
+        "-preset", preset,
+        "-c:a", "copy",
+        "-movflags", "+faststart",
+        str(output_path),
+    ]
+    subprocess.run(cmd, capture_output=True, check=True, timeout=1800)
+    return output_path
+
+
 def add_text_overlay(
     input_path: str | Path,
     output_path: str | Path,

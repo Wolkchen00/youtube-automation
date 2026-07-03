@@ -1,0 +1,41 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "The tide came in slow"
+  },
+  "synopsis": "A pink desert is silently flooded by a tide of liquid mirror, turning the world into perfect symmetry with a second world glowing beneath the surface.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A vast desert of pale pink dunes under a soft overcast sky, a lone distant figure walking away from the camera along a dune crest, fine sand drifting off the ridges in the wind, camera floating forward low over the sand.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "From the horizon a slow silent tide of liquid mirror floods in between the dunes, reflecting the sky perfectly as it spreads, the distant figure keeps walking as the thin mirror water reaches their feet, camera drifting forward just above the surface.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The whole desert is now a shallow mirror — perfect symmetry above and below, the figure walks on the reflection of the clouds, the tops of dunes floating like pale islands in the sky-colored water, camera gliding forward through the doubled world.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The reflection deepens: beneath the mirror surface an inverted second world glows — upside-down violet mountains and a sunken golden city with lights — while the lone figure walks the exact seam between both worlds, camera drifting alongside the seam.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The mirror horizon opens into a soft white-gold glow, the distant figure walking calmly into the light as the world above and its reflection below slowly fold closed like the pages of a book, camera easing to a stop in the glow.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

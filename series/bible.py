@@ -172,6 +172,17 @@ class Bible:
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
+    def upscale(self) -> dict:
+        """4K master katmanı (opt-in): final video Topaz Video Upscale ile ×2 büyütülür
+        (1080x1920 → 2160x3840) — YouTube 4K bitrate merdivenine girer, izleyiciye
+        '4K' rozeti görünür. Topaz başarısızsa yerel lanczos yedeği devreye girer;
+        o da olmazsa 1080p yayınlanır (yayın hiçbir koşulda durmaz). IG/TikTok her
+        durumda 1080p delivery kopyasını alır (platformlar zaten 1080p'ye sıkıştırır).
+        Örn: "upscale": {"enabled": true, "factor": "2"}"""
+        v = self.data["series"].get("upscale") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
     def audio_smooth(self) -> bool:
         """True ise çekim sınırlarında ses YUMUŞATILIR: her çekimin sesi loudness
         eşitlenir + kısa afade ile in/out yapılır → geçişlerde 'pop'/seviye sıçraması

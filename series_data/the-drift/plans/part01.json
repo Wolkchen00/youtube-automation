@@ -1,0 +1,41 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "The field kept going"
+  },
+  "synopsis": "A lone figure runs through an endless wheat field that slowly becomes an ocean, then the sky itself — one continuous drift from earth to above the clouds.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A lone figure in a long dark coat runs away from the camera through an endless golden wheat field at dawn, thin mist hanging over the field, wheat stalks parting in the wind, the camera drifting forward behind the figure at a steady floating pace.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The run continues without a cut as the wheat field begins to ripple in slow enormous waves like a golden ocean, whole hills of wheat rising and falling, the distant figure keeps running across the moving crests, camera gliding smoothly forward.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The horizon tilts upward — the wheat field curves into the sky like the inside of a colossal golden bowl, distant farmhouses and trees hanging upside down far above, the figure runs up the impossibly curving field, camera following in one continuous drift.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The field dissolves into a sea of glowing clouds; the figure runs up a staircase made of drifting golden light through the cloud layers, immense sunbeams breaking through the mist, camera ascending steadily behind them.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Above the clouds: a calm infinite cloud-ocean at sunset, the figure slows from a run to a quiet walk on the last steps of light, silhouetted against a giant soft sun on the horizon, camera drifting gently to a stop.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

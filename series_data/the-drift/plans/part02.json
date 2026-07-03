@@ -1,0 +1,41 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "Where the city folds"
+  },
+  "synopsis": "An empty dawn city bends over itself — streets and skyscrapers folding overhead into a spiraling canyon of glass, in one continuous forward drift.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "An empty city avenue at dawn, wet asphalt reflecting the last streetlights, tall skyscrapers lining both sides, thin mist between the buildings, the camera drifting slowly forward down the exact centerline of the street.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Ahead the skyline begins to bend — distant skyscrapers lean and curve over the street like a frozen wave about to break, thousands of windows glinting in the dawn light, the camera continuing its slow forward drift beneath them.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The city folds fully overhead: a second city hangs upside down above the street, rooftops nearly touching, streets and towers mirroring each other into a vast canyon of glass and concrete, the camera gliding deeper into the fold.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The folded canyon twists into a slow spiraling vortex of buildings, thousands of lit windows and facades swirling majestically around the center as the camera drifts straight through the heart of the spiral.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The camera emerges above everything: an endless quiet horizon of gently folded cities under a pale golden sky, soft haze between the folds, drifting slowly forward into the vastness.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}
