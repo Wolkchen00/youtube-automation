@@ -4,7 +4,7 @@
   "logline": "Dramatized fictional stories told entirely through security-camera footage — a different empty building every night. Night Shift Files.",
   "language": "en",
   "standalone": true,
-  "upload_profile": "Youtube",
+  "upload_profile": "sentinalihsandaily",
   "platforms": [
     "youtube",
     "instagram",
@@ -13,8 +13,8 @@
   "hashtags": "#cctv #securitycamera #caughtoncamera #liminalspaces #unexplained #nightshift #creepy #dreamcore #shorts",
   "total_parts": 5,
   "next_part": 3,
-  "status": "active",
-  "priority": 3,
+  "status": "paused",
+  "priority": 999,
   "publish_mode": "auto",
   "parts": {
     "1": {
