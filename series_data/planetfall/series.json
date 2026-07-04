@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -27,6 +27,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-03T18:14:50.977312+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep02/ep02_narrated_music_hooked.mp4",
+      "subtitle": "AURELIN: City of Dusk",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-04T18:02:58.885015+00:00"
     }
   },
   "auto_replenish": {
