@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #history #archaeology #underwater #ancient #artifact #deepsea #mystery #lostcity #scuba",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -27,6 +27,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-03T16:48:29.607903+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/drowned-history/episodes/ep02/ep02_narrated_music_hooked_titled.mp4",
+      "subtitle": "The Lost City the Sea Swallowed Whole",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-04T22:02:21.769360+00:00"
     }
   },
   "auto_replenish": {
@@ -35,7 +46,10 @@
     "min_queue": 2,
     "shots": 5,
     "shot_seconds": "8",
-    "narration": { "min_words": 80, "max_words": 105 },
+    "narration": {
+      "min_words": 80,
+      "max_words": 105
+    },
     "title_card": true,
     "humans": "silent",
     "eerie_ok": true,
