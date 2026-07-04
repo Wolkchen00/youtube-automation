@@ -12,7 +12,7 @@
   ],
   "hashtags": "#cctv #securitycamera #caughtoncamera #liminalspaces #unexplained #nightshift #creepy #dreamcore #shorts",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 3,
   "publish_mode": "auto",
@@ -27,6 +27,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-02T19:59:07.292551+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-shift/episodes/ep02/ep02_music_hooked.mp4",
+      "subtitle": "The aisle that restocks itself at 3AM",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-04T16:04:48.801603+00:00"
     }
   }
 }
