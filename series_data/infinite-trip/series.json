@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 15,
-  "next_part": 12,
+  "next_part": 13,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -133,6 +133,17 @@
         "instagram"
       ],
       "published_at": "2026-07-02T20:25:13.862656+00:00"
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep12/ep12_music_hooked.mp4",
+      "subtitle": "Glass Spire Ascent",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-05T16:41:07.758857+00:00"
     }
   },
   "auto_replenish": {
