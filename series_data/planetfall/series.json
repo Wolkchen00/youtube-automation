@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -38,6 +38,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-04T18:02:58.885015+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep03/ep03_narrated_music_hooked.mp4",
+      "subtitle": "KHAROS: The Silent Dunes",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-05T18:02:11.917743+00:00"
     }
   },
   "auto_replenish": {
