@@ -11,7 +11,7 @@
   ],
   "hashtags": "#horror #mystery #vhs #analoghorror #foundfootage #archive #paranormal #creepy #storytime #shorts",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -36,6 +36,17 @@
       ],
       "published_at": "2026-07-03T20:27:51.493754+00:00",
       "note": "YT: SSL arizasi sonrasi yerel telafi (2026-07-03 21:17Z) — yeniden uretim + YENI sakin ses (Algieba, fisilti yok, Ihsan geri bildirimi). IG/TikTok'ta v1 (fisiltili Charon) duruyor."
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep02/ep02_narrated_music_hooked.mp4",
+      "subtitle": "The Tape Labeled Tomorrow",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-05T20:22:16.870568+00:00"
     }
   }
 }
