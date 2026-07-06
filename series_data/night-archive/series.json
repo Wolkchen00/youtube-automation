@@ -11,7 +11,7 @@
   ],
   "hashtags": "#horror #mystery #vhs #analoghorror #foundfootage #archive #paranormal #creepy #storytime #shorts",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -47,6 +47,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-05T20:22:16.870568+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep03/ep03_narrated_music_hooked.mp4",
+      "subtitle": "Aisle Nine",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-06T20:47:39.960940+00:00"
     }
   }
 }
