@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -49,6 +49,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-05T18:02:11.917743+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep04/ep04_narrated_music_hooked.mp4",
+      "subtitle": "NYSSA: The Glowing Sea",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-06T18:47:38.373549+00:00"
     }
   },
   "auto_replenish": {
