@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "A ghost ship was found with its mast still standing"
+  },
+  "synopsis": "A dive team led by Robert Ballard discovers the Sinop D wreck, a ~1,600-year-old ship so perfectly preserved in the Black Sea's oxygen-free depths that its mast still stands.",
+  "narration": "In the abyssal depths of the Black Sea, an ancient vessel lies entombed, defying the relentless march of time. Discovered in 2000 by Robert Ballard's team, the Sinop D wreck is a ~1,600-year-old Byzantine ship. Its extraordinary preservation is attributed to the Black Sea's unique anoxic zone, where a lack of oxygen prevents decay. Resting at approximately 320 meters, this ghost ship offers an almost pristine snapshot of maritime history. Its wooden hull, cargo, and even its towering mast remain remarkably intact, a testament to the ocean's ability to both consume and conserve. It stands as a silent sentinel, a frozen moment from another era.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into profound, inky blackness, only the narrow, intense beams of dive torches visible, cutting through scattered marine snow; two distant silhouettes of deep-sea divers with glowing headlamps appear ahead, moving slowly into the void.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The torch beams sweep across a vast, dark seabed, revealing an indistinct, massive form slowly emerging from the gloom; the camera drifts closer, revealing the sheer scale of a sunken vessel, its outline still vague in the limited light.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Gliding along the hull of the ancient ship, remarkably intact and upright, its wooden planks and ribs perfectly preserved; the camera passes an eerie, open deck, then moves upwards, following a towering, dark vertical structure rising from the deck into the absolute darkness above.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Torchlight dramatically reveals the ship's mast, still standing tall and almost complete, reaching towards the unseen surface; ropes and rigging are visible, perfectly preserved, draped with fine sediment; the camera pans slowly from the base of the mast upwards, emphasizing its impossible verticality.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand gently brushes aside some fine sediment from a section of the mast, revealing the dark, smooth wood beneath; the camera pulls back slowly, showing the entire ghost ship with its mast, fading back into the Black Sea's dark, timeless embrace as the divers begin their slow ascent, leaving the sentinel behind.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Sinop D Wreck",
+    "subtitle": "Black Sea, Türkiye — found 2000"
+  },
+  "hook_shot": 4
+}

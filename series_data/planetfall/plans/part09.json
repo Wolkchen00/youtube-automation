@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "PYROS: Heart of Fire"
+  },
+  "synopsis": "PYROS — volcanic lava world: a hellish landscape of rivers of molten rock, erupting volcanoes, and a perpetually dark, smoke-filled sky; signature = a gargantuan lava geyser erupting from a central caldera, momentarily illuminating vast networks of glowing subterranean tunnels beneath the crusted su",
+  "narration": "Pyros, a young world still in its fiery birth, is a testament to raw planetary power. From orbit, it glows with an infernal light beneath a churning, dark sky. Our descent breaches a sulfurous atmosphere, revealing a landscape defined by creation and destruction. Deep within its heart, a spectacular geyser pulses, momentarily unveiling the molten veins that truly define this world.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "View of Pyros from high orbit, a planet glowing intensely red and orange beneath a thick, dark, turbulent atmosphere. Streaks of fiery lightning occasionally crackle through the dense clouds. The surface beneath is a network of molten rivers and glowing fissures. Camera begins to descend into the tumultuous atmosphere.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Plunging through Pyros' dense, sulfurous clouds and volcanic ash. Occasional, powerful flashes of lightning illuminate the chaotic surroundings. The intense, fiery glow of molten lava becomes increasingly bright and detailed below as the camera accelerates its descent.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over vast, jagged plains of cooling, crusted lava, crisscrossed by glowing rivers of molten rock snaking their way across the landscape. In the distance, colossal volcanoes spew ash and plumes of fire into the perpetually dark sky. The camera navigates the dangerous, fiery terrain, approaching a colossal caldera.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Descending into a massive, fiery caldera. A gargantuan lava geyser erupts from its center with incredible, explosive force, momentarily illuminating a complex network of glowing, molten tunnels and caverns just beneath the crusted surface. The camera hovers, capturing the raw power before the geyser recedes, leaving the subsurface structures to slowly fade back into the fiery depths.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

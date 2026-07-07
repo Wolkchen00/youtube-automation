@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "ETERNUM: The Perpetual Dusk"
+  },
+  "synopsis": "ETERNUM — tidal-locked twilight zone world: a planet with one scorched desert face, one frozen dark face, and a perpetual twilight band in between; signature = the razor-sharp terminator line where the searing day meets the freezing night, illuminated by a colossal, slow-moving aurora borealis.",
+  "narration": "Eternum, a world trapped in a cosmic embrace, presents a stark duality. One face burns under an eternal sun, the other shivers in endless night. Our journey targets the 'Perpetual Dusk,' a narrow, habitable ribbon where these extremes meet. It's here, on the razor edge of existence, that a monumental atmospheric phenomenon paints the sky, a spectacle of light born from conflict.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "View of Eternum from high orbit, clearly showing a planet tidally locked: one hemisphere is a brilliant, sun-baked, ochre desert, while the other is a stark, frozen, dark expanse. A distinct, narrow band of twilight separates these two extremes. Camera slowly descends towards this twilight zone.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The descent accelerates towards the twilight zone, passing through high-altitude winds carrying fine dust from the day side and shimmering ice crystals from the night side. The stark contrast of the terminator line, where light meets shadow, becomes increasingly sharp and defined below.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Gliding low along the razor-sharp edge of the terminator line. To the left, the landscape is bathed in the eternal golden glow of a perpetual sunset; to the right, it plunges into deep, indigo shadows. Strange, wind-sculpted rock formations and ridges are visible, straddling both light and darkness as the camera moves forward.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Camera hovers over the dramatic terminator line, where the last golden rays of the distant sun meet the encroaching, deep indigo shadows of the night. Above, a monumental, slow-moving aurora borealis ripples across the perpetual twilight sky, casting vibrant, shifting colors onto the stark, alien rock formations below. The camera slowly pans across the breathtaking, luminous boundary.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

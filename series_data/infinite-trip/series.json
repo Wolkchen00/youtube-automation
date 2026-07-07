@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #psychedelic #trippy #satisfying #fractal #visuals #dreamcore #oddlysatisfying",
   "total_parts": 15,
-  "next_part": 14,
+  "next_part": 15,
   "status": "active",
   "standalone": true,
   "publish_mode": "auto",
@@ -155,6 +155,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-06T17:38:59.504036+00:00"
+    },
+    "14": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/infinite-trip/episodes/ep14/ep14_music_hooked.mp4",
+      "subtitle": "Veil of Whispers",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-07T17:08:49.005839+00:00"
     }
   },
   "auto_replenish": {

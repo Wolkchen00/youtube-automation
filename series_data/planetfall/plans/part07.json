@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "MYCELIA: Spore Gardens"
+  },
+  "synopsis": "MYCELIA — giant mushroom forest world: humid, glowing landscape dominated by colossal bioluminescent fungi, misty atmosphere; signature = a vast, pulsating mushroom forest valley, with giant caps slowly releasing clouds of iridescent spores into the humid air.",
+  "narration": "Mycelia, a world cloaked in perpetual twilight, reveals itself as a colossal garden of alien fungi. Its humid atmosphere teems with life, unseen forces shaping an ecosystem unlike any other. Our descent takes us deep into its heart, towards valleys where titanic organisms dictate the very air. Here, in the spore gardens, the slow, rhythmic breath of Mycelia is finally unveiled.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "View of Mycelia from high orbit, a hazy, warm planet with an indistinct surface, occasionally punctuated by soft, organic light blooms from below the clouds. The atmosphere has a humid, slightly bioluminescent quality. Camera slowly begins its descent towards the glowing patches.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Plunging through Mycelia's thick, warm, humid atmosphere. Billowing, soft spore plumes drift by like ethereal clouds. Below, the immense, rounded forms of colossal fungal structures begin to emerge from the haze, glowing faintly with internal light, their scale becoming apparent as the camera accelerates downwards.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming just above an alien canopy of enormous, varied fungi. Some rise like massive, glowing pillars, others spread wide like colossal plates, all imbued with soft, pulsating bioluminescence. A thick, ethereal mist weaves through the forest, hinting at a vast valley beyond as the camera navigates through the mushroom spires.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Descending into a vast, awe-inspiring valley, revealing a dense forest of truly gigantic, pulsating mushrooms. Their caps slowly and rhythmically release vast clouds of iridescent spores that drift lazily through the humid, glowing air. The camera gently glides past these monumental, breathing organisms, capturing their serene, organic rhythm.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

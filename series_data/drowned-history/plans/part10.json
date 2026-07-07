@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Ancient gold and shell offerings were found in a sacred lake"
+  },
+  "synopsis": "In Bolivia's Lake Titicaca, archaeologists raised Inca and Tiwanaku stone offering boxes containing gold figurines and spondylus shell, revealing ancient sacred rituals.",
+  "narration": "High in the Andes, within the sacred waters of Lake Titicaca, an ancient spiritual world lay preserved. From 2013 to 2019, archaeological excavations explored Khoa Reef, near the fabled Island of the Sun. This was a site of profound reverence for both the Inca and Tiwanaku civilizations, who offered precious items to their deities. Divers meticulously worked in the cold, clear freshwater, discovering and raising intricate stone offering boxes. These remarkable containers held a treasure trove of spiritual artifacts: delicate gold figurines, shimmering spondylus shells, and other sacred objects, offering a unique glimpse into the elaborate rituals of these powerful pre-Columbian cultures.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into cold, clear freshwater of Lake Titicaca, shafts of sunlight piercing through the surface, illuminating a rocky, sparsely vegetated lakebed below; the silhouette of a teammate diver hovers ahead, preparing for a delicate operation.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Drifting over a rocky outcrop, the camera reveals sections of the lakebed carefully gridded and marked, indicating an active archaeological excavation; a diver gently brushes sediment from a small, stone-lined crevice, revealing hints of buried artifacts.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Moving closer, the camera focuses on a partially exposed, rectangular stone box, carefully placed within a natural depression; another diver meticulously clears surrounding debris with a small suction dredge, revealing more of the box's ancient, weathered surface.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Torchlight peers into the open stone offering box, revealing its contents: several small, gleaming gold figurines and fragments of a vibrant red-orange spondylus shell, the gold glinting brightly against the dark stone and freshwater; the camera slowly pans across the precious, ancient offerings.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand carefully uses a specialized tool to retrieve one of the gold figurines, placing it into a clear sample case; the camera pulls back, showing the offering box being gently prepared for raising, as the divers begin their slow ascent, the deep green-blue water of Lake Titicaca closing over the ancient site, preserving its remaining secrets.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Lake Titicaca Offerings",
+    "subtitle": "Bolivia — excavated 2013-2019"
+  },
+  "hook_shot": 4
+}

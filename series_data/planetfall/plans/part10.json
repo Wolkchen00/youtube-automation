@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "LUMINA: Shard Spire"
+  },
+  "synopsis": "LUMINA — crystal world: a luminous planet dominated by immense, geometrically perfect crystalline formations, refracting and emitting light; signature = a vast, ancient canyon filled with colossal, resonating crystal spires that glow with internal light and create harmonious, deep vibrations in the ",
+  "narration": "Lumina, a celestial jewel, shimmers with an otherworldly brilliance from across the void. Its very geology is crystalline, refracting and reflecting light in ways that defy earthly physics. Our journey takes us to its core, a realm where colossal spires not only glow but sing, their vibrations echoing through the very fabric of this alien world, a symphony of light and sound.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "View of Lumina from high orbit, a shimmering, jewel-like planet. Its surface shows sharp, reflective facets and hints of internal luminescence, visible through a clear, pristine atmosphere. Brilliant light refracts off its surface, creating a dazzling spectacle. Camera begins a slow, deliberate descent.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Descending through Lumina's crystal-clear, crisp atmosphere. Smaller, exquisitely faceted crystal formations float gently, catching and refracting the light dramatically as the camera passes them. The world below appears as an increasingly complex, geometric landscape of light and shadow, beckoning the camera deeper.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Gliding low over vast plains and valleys composed entirely of colossal, geometrically perfect crystals. These formations shimmer with internal light and external reflections, some rising like sharp, alien mountains, others forming intricate, glowing networks. The landscape is a breathtaking, luminous tapestry as the camera approaches a deep canyon.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Entering a vast, ancient canyon where gargantuan, perfectly formed crystal spires rise from the ground. They glow with a soft, internal luminescence and slowly resonate, emitting deep, harmonious vibrations that ripple audibly through the pristine air. The camera slows, gently navigating through these monumental, singing structures, capturing their intricate, light-filled beauty and profound serenity.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

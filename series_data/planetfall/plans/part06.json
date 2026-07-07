@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "AERIDIA: The Sky Islands"
+  },
+  "synopsis": "AERIDIA — floating island world: emerald-green islands shrouded in atmospheric haze, rivers flowing into the void; signature = a colossal, ancient tree-city built atop a central island, illuminated by cascading bioluminescent waterfalls.",
+  "narration": "From orbit, Aeridia appears as a dream, a world fractured into colossal landmasses suspended by unknown forces. Descending through the perpetual mists, we glimpse vast rivers flowing not to oceans, but into the endless abyss below. Life here clings to impossible heights. Our journey culminates at a sight rumored in ancient star charts: an immense, living city, its roots drawing life from bioluminescent waterfalls cascading into the sky.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "View of Aeridia from high orbit, a planet dominated by immense, emerald-green floating islands partially obscured by a thick, misty atmospheric haze. Glimpses of rivers on the islands spilling into the clouds below. Camera slowly descends, revealing more detail of the ethereal landscape.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The descent continues, plunging through the dense, swirling mists and clouds of Aeridia's atmosphere. Smaller, craggy floating rock formations drift by, illuminated by soft, diffused light, hinting at the colossal structures below. The camera picks up speed, angling downwards.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Gliding low between colossal, moss-covered floating islands. Rivers of pristine water flow across their surfaces, dramatically spilling over the edges into the misty void, forming ethereal waterfalls. In the distance, faint, organic architectural forms begin to emerge on the largest island ahead, beckoning the camera forward.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Arriving at the colossal, ancient tree-city on the central floating island. Intricate, glowing structures are integrated into a gigantic, gnarled tree-like formation. Bioluminescent waterfalls cascade from its roots and branches into the surrounding mist below. The camera slows, gently circling the awe-inspiring, illuminated architecture, bathed in soft, ethereal light.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

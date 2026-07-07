@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "Divers discovered a lost city swallowed by the earth"
+  },
+  "synopsis": "A team explores the sunken remains of Port Royal, finding a pocket watch frozen in time within the debris of the pirate city drowned by a 1692 earthquake.",
+  "narration": "In the vibrant waters off Jamaica, divers descended into a submerged world unlike any other. This was Port Royal, once dubbed 'the wickedest city on Earth,' a bustling pirate haven that met its cataclysmic end in 1692. A massive earthquake and subsequent tsunami dragged two-thirds of the city into the sea, burying its secrets beneath the waves. Decades of archaeological exploration, beginning in the 1980s, revealed an incredibly preserved snapshot of daily life. Among the domestic objects and building remnants, a profound discovery emerged: a pocket watch, its hands eerily stopped at the precise moment of disaster, forever marking 11:43.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending slowly through murky, warm tropical green-blue water, beams from dive torches cutting through drifting silt and detritus; the silhouette of a teammate diver ahead, disappearing into deeper gloom, hints of ruined structures below.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Camera drifts past a chaotic jumble of coral-encrusted building rubble and half-buried wooden beams, evidence of a violent collapse; another diver's torch beam illuminates a broken terracotta roof tile, then pans across a collapsed stone wall.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Moving slowly through a narrow passage formed by overturned walls, the water grows darker and more confined; a gloved hand brushes past a sediment-covered jug, then the camera focuses on a strange stillness in the debris-filled corridor, a moment of eerie calm.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Torchlight lands on a small, perfectly preserved silver pocket watch, half-buried in the silt next to a brass candlestick; its delicate hands are frozen, a stark metallic glint in the dark water; the camera holds on the watch, emphasizing its immobility.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand gently clears silt from around the pocket watch, revealing more of its intricate details, then carefully places a small numbered tag nearby for documentation; the camera slowly pulls back, ascending as the site fades into the murky green-blue water below, a distant surface glow appearing above.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Sunken Port Royal",
+    "subtitle": "Jamaica — flooded 1692"
+  },
+  "hook_shot": 4
+}

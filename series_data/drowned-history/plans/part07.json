@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Scientists found a 9,000-year-old stone village underwater"
+  },
+  "synopsis": "Divers explore Atlit-Yam, a remarkably preserved 9,000-year-old Neolithic village off Israel, uncovering a unique stone circle and ancient wells.",
+  "narration": "Off the coast of Israel, an extraordinary relic of early human civilization lies submerged. The site, known as Atlit-Yam, was discovered in 1984, revealing a Neolithic village that thrived nine millennia ago. This prehistoric settlement, now resting 8 to 12 meters beneath the Mediterranean, offers an unparalleled window into an ancient world. Rising sea levels slowly claimed Atlit-Yam, but in doing so, preserved its structures and artifacts from the ravages of time and human development. Divers navigate streets, explore houses, and examine the remnants of a Stone Age society, including a mysterious stone circle and the earliest known wells, still holding fresh water.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, slowly descending through shallow, clear, warm Mediterranean water, sunlight dappling through the surface onto a sandy seabed; a distant, indistinct outline of large stones emerges from the hazy blue-green depth.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Drifting over a vast, sandy expanse dotted with ancient, algae-covered stone walls and building foundations, some still partially intact; a school of small fish flits past a preserved hearth, leaving trails in the light current.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera glides into a clearly defined 'street' flanked by low stone structures, the scene eerily quiet and still; a diver's gloved hand points towards a large, upright monolithic stone, part of a circular arrangement, its surface rough with age.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Torchlight illuminates a perfectly preserved, ancient stone well, its inner walls visible and intact, a dark opening leading deeper into the earth; the camera slowly circles the well, revealing a smaller stone basin nearby, carved with primitive tools.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand carefully inspects the rim of the well, then drops a small, weighted line to gauge its depth; the camera pulls back, slowly ascending past the stone circle and into the filtered sunlight above, the entire village fading into the soft, sandy expanse below, a timeless landscape.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Atlit-Yam Neolithic Village",
+    "subtitle": "Off Atlit, Israel — found 1984"
+  },
+  "hook_shot": 4
+}
