@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 10,
-  "next_part": 5,
+  "next_part": 6,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -60,6 +60,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-06T18:47:38.373549+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep05/ep05_narrated_music_hooked.mp4",
+      "subtitle": "SOLENNE: Twin Dawn",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-07T18:54:52.603696+00:00"
     }
   },
   "auto_replenish": {
