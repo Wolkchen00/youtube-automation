@@ -1,0 +1,62 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "I Woke Up on the Titanic 20 Minutes Before the Iceberg — 1912"
+  },
+  "hook_shot": 5,
+  "title_card": {
+    "title": "RMS TITANIC",
+    "subtitle": "1912 · 20 Minutes Before"
+  },
+  "narration": "I woke in third class with twenty minutes left. It's April 14th, 1912. It's warm and loud down here — a fiddle playing, a couple dancing, a boy asleep against his mother. None of them know. Up on the bridge, two men stare into a night with no moon and no wind — so nothing breaks white against whatever waits ahead. At 11:40 the whole ship shivers, softly. That's all it is. A shiver. Most people around me have two hours left — and the band will play the whole time. Then the lights went out, and so did I.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler wakes in a warm, wood-paneled third-class common room on the RMS Titanic, night of April 14th 1912, dressed in a flat cap, waistcoat and rolled shirtsleeves. An accordion and fiddle play; families laugh at long wooden tables under brass lamps. He sits up, taking in the cozy, golden-lit room. Ends on him looking around at the celebrating passengers.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler moves through the lively third-class party — a couple dancing a jig, a boy asleep against his mother, glasses clinking, warmth and light everywhere. He alone looks uneasy, glancing toward a small porthole of pure black night. Ends on him stopping at the dark porthole, the golden party glowing behind him.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "prompt": "High on the Titanic's bridge, two officers in greatcoats stare out at a flat, glass-calm sea under a moonless sky blazing with stars — no wind, no waves, no visible horizon, only black water and cold. One slowly lifts a pair of binoculars. Ends on the still, starlit black sea stretching ahead into the dark.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "Below decks, the traveler feels it before he hears it — a long, soft shudder runs up through the floor and into his feet; a hanging lamp sways gently, a glass walks slowly to the edge of a table. The music falters for a single beat, then resumes. Ends on his face as he understands what that shiver was.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "prompt": "Exterior wide in the dark: the vast brightly-lit RMS Titanic gliding across a black mirror-still ocean beneath a blaze of stars, and off the starboard bow a mountain of pale ice sliding silently past, close enough to seem to brush the hull. Immense, quiet dread — no damage or wreckage shown, just the ship, the ice and the night. Ends on the iceberg slipping past into the dark behind the glittering ship.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "Back inside, the band keeps playing as the traveler stands amid the warm light and the unknowing faces. He closes his eyes; the brass lamps dim and gutter, the golden room slowly darkening around him until only the music remains, then fades to black. Ends on his silhouette vanishing as the lights go out.",
+      "seed": null
+    }
+  ]
+}

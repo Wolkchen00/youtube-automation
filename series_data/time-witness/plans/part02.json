@@ -1,0 +1,62 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "I Woke Up in Rome the Day the Colosseum Opened — 80 AD"
+  },
+  "hook_shot": 3,
+  "title_card": {
+    "title": "THE COLOSSEUM",
+    "subtitle": "Rome · 80 AD · Opening Day"
+  },
+  "narration": "Fifty thousand people are screaming, and I'm standing in the middle of them. It's the year 80 — opening day of the Colosseum — and Rome has never seen anything like it. The stone is so new it's still white. High above, sailors haul a great canvas roof across the sky to shade us from the sun. The Emperor raises one hand, and the roar hits my chest like a wave. For a hundred days this arena will not go dark. Every face around me believes Rome will last forever. Standing in its newest stone, so did I.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler wakes in a dim stone tunnel beneath the brand-new Colosseum, Rome, 80 AD, wearing a simple Roman tunic. A muffled roar of a huge crowd throbs through the walls; shafts of dusty light fall from vents above. He rises and moves toward an archway of blinding daylight at the tunnel's end. Ends on him stepping into the bright light of the archway.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler emerges from the tunnel onto the sunlit seating tiers and stops dead: the vast oval of the Colosseum opens before him, its travertine stone gleaming bright white and new, tier upon tier of Romans in white togas roaring and waving. He turns slowly, overwhelmed by the scale. Ends on him gazing up at the towering, packed stands.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "prompt": "Sweeping view across the packed Colosseum at its opening: fifty thousand spectators on gleaming white stone, and high overhead teams of sailors haul an enormous canvas awning — the velarium — across the sky on ropes to shade the crowd, its vast shadow sliding over the tiers. Ends on the great sail spreading across the sun.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "In the imperial box a purple-robed figure — the Emperor — rises and lifts one hand; the traveler, standing among the crowd, feels the roar swell into a wall of sound that visibly shakes dust from the stone railings. He presses a hand to his chest, awed. Ends on his face amid the deafening, jubilant crowd.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "prompt": "The clean white sand of the arena floor far below, ringed by the immense roaring bowl of spectators; banners snap in the wind, trumpets flash in the sun, flower petals drift down through the light. Grandeur and spectacle without any violence. Ends on the sunlit empty arena framed by the vast cheering crowd.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler stands quietly amid the celebrating Romans, turning once to take in the whole eternal-seeming city and its gleaming new monument. He closes his eyes; the roar and the bright arena slowly blur and fade to soft golden light. Ends on him dissolving into the golden haze.",
+      "seed": null
+    }
+  ]
+}

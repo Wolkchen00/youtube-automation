@@ -1,19 +1,16 @@
-name: Night Archive Daily
+name: Time Witness Daily
 
-# The Night Archive'ın GARANTİLİ günlük şeridi (İhsan kararı 2026-07-03: "tam otomatik her gün 1 video"
-# — sentinalihsan = İhsan yüzlü korku evreni, kanalın ana marka serisi).
-# Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır: her gün sıradaki FILE
-# bölümünü üretir + sentinalihsandaily'ye (YT/IG/TikTok) yayınlar. Çifte üretim olmasın diye
-# night-archive series.json'da priority=999 ile ana kuyruğun fiilen dışında tutulur.
-# Saat düzeni: ana koşu 14:30 UTC → planetfall 16:30 UTC → bu koşu 18:30 UTC (durum-commit yarışı yok).
+# 'I Woke Up In History' (time-witness) GARANTİLİ günlük şeridi — sentinalihsandaily kanalının
+# YENİ korku-DIŞI ana serisi (İhsan kararı 2026-07-07: "korku olmasın, bambaşka seri, en çok
+# tıklanan/aranan tarz"). Birinci-şahıs tarih POV antolojisi: İhsan her bölüm başka bir gerçek
+# tarihsel anda uyanır. Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır:
+# her gün sıradaki bölümü üretir + 3 platforma (YT/IG/TikTok) yayınlar. Çifte üretim olmasın diye
+# time-witness series.json'da priority=999. Eski night-archive.yml şeridi (aynı 18:30 slotu)
+# paused edildiği için devre dışıdır → yarış yok.
 
 on:
-  # 2026-07-07: PAUSED — sentinalihsandaily kanalı time-witness ('I Woke Up In History',
-  # korku-DIŞI) serisine devredildi; günlük cron devre dışı (18:30 slotu time-witness.yml'da).
-  # Night Archive geri istenirse aşağıdaki schedule'ı aç + time-witness.yml schedule'ını kapat
-  # + iki series.json'daki status'ları takasla (tek kanal = tek aktif seri, günde-1 kilidi).
-  # schedule:
-  #   - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
+  schedule:
+    - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
   workflow_dispatch:
 
 permissions:
@@ -55,13 +52,13 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni FILE bölümleri yazar — kredi harcamaz)
-        run: python -X utf8 -m series.replenish --series night-archive 2>&1 | tee logs/night_archive_replenish.log
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni tarih bölümleri yazar — kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series time-witness 2>&1 | tee logs/time_witness_replenish.log
 
-      - name: Produce + publish (Night Archive sıradaki dosya)
+      - name: Produce + publish (Time Witness sıradaki bölüm)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -X utf8 -m series.series_runner --series night-archive 2>&1 | tee logs/night_archive_run.log
+        run: python -X utf8 -m series.series_runner --series time-witness 2>&1 | tee logs/time_witness_run.log
 
       - name: Persist series state
         if: always()
@@ -72,7 +69,7 @@ jobs:
             git pull --rebase --autostash origin main || true
             git add series_data/ || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
-            git commit -m "chore: night-archive durumunu ilerlet [skip ci]" || true
+            git commit -m "chore: time-witness durumunu ilerlet [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
           done
 
@@ -80,6 +77,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: night-archive-logs-${{ github.run_number }}
+          name: time-witness-logs-${{ github.run_number }}
           path: logs/
           retention-days: 7

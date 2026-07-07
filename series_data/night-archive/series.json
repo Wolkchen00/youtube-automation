@@ -12,7 +12,8 @@
   "hashtags": "#horror #mystery #vhs #analoghorror #foundfootage #archive #paranormal #creepy #storytime #shorts",
   "total_parts": 5,
   "next_part": 5,
-  "status": "active",
+  "status": "paused",
+  "paused_note": "2026-07-07: sentinalihsandaily kanalı korku-DIŞI 'I Woke Up In History' (time-witness) serisine pivot etti (İhsan kararı: 'korku olmasın, bambaşka seri'). Night Archive geri istenirse status'u 'active' yap + time-witness'i pause et (tek kanal = tek aktif seri, günde-1 kilidi).",
   "priority": 999,
   "publish_mode": "auto",
   "auto_replenish": {

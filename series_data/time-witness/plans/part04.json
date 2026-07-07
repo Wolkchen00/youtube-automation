@@ -1,0 +1,62 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "I Woke Up in Egypt as They Finished the Great Pyramid — 2560 BC"
+  },
+  "hook_shot": 3,
+  "title_card": {
+    "title": "THE GREAT PYRAMID",
+    "subtitle": "Giza · 2560 BC · The Last Stone"
+  },
+  "narration": "I woke in the desert to ten thousand people singing. It's 2560 BC, and today they set the final stone atop the Great Pyramid. It isn't a ruin — it's blinding: cased in polished white limestone, a gold capstone catching a sun so bright you can't look at it. The man beside me is weeping. He worked here his whole life, and his father before him — and no, they aren't slaves. They're proud. For four thousand years it will be the tallest thing we ever build. I stood in its shadow on the only day it was new.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler wakes on warm desert sand at Giza, around 2560 BC, in a simple white linen kilt and headcloth, olive skin and dark beard. Distant singing and drums drift on the wind. He sits up, shielding his eyes against a brilliant morning sun. Ends on him rising, squinting toward a huge brightness on the horizon.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler walks toward an immense crowd — thousands of Egyptian workers, families and white-robed priests — gathered singing across the sand, with earthen ramps, wooden sledges and ropes around them. He moves through the joyful throng. Ends on the crowd parting to reveal the base of something enormous rising above them.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "prompt": "The Great Pyramid revealed in its full glory: not weathered stone but a perfect mountain of dazzling polished white limestone rising into the blue, a gold-plated pyramidion blazing at its summit in the sun, so bright it hurts to look at. Ten thousand tiny figures cheer at its base. Ends on the golden capstone flaring against the sky.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "Close on the traveler among the crowd: beside him an older Egyptian worker with calloused hands and proud, tearful eyes gazes up at the finished pyramid and weeps with joy. The traveler follows his gaze upward, deeply moved. Ends on both their faces tilted up into the blazing light.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "prompt": "Ground-level looking straight up the vast mirror-smooth flank of the pyramid to the gold capstone far above; workers on the earthen ramp raise their tools in celebration, fine white limestone dust glittering in the sun like snow. Pure wonder and scale. Ends on the sunlit golden summit towering overhead.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler stands in the long cool shadow of the new pyramid as the celebration swells around him. He closes his eyes and lowers his head; the gleaming white stone and golden light slowly blur and dissolve. Ends on his silhouette fading into brightness.",
+      "seed": null
+    }
+  ]
+}

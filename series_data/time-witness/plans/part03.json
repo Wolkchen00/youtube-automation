@@ -1,0 +1,62 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "I Woke Up Inside the Walls of Constantinople — 1453"
+  },
+  "hook_shot": 4,
+  "title_card": {
+    "title": "CONSTANTINOPLE",
+    "subtitle": "1453 · The Final Dawn"
+  },
+  "narration": "For fifty-three days these walls have held. On the fifty-fourth, I woke standing on them. It's 1453. Below me the largest army in the world waits in the dark, and a bronze cannon longer than a house cools after the day's work. The men beside me haven't slept; they pass a single cup of water down the line. At first light the drums begin — thousands of them, a heartbeat you feel through the stone. A thousand years of empire will end before noon, and a new age will begin. History turns on this wall tonight.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "Night on the great land walls of Constantinople, 1453. The traveler wakes leaning against ancient stone battlements, wrapped in a worn cloak over a simple tunic and leather. Torches gutter along the ramparts; exhausted defenders in dented armor stand watch. Far below, countless campfires of a vast army glitter across the dark plain to the horizon. Ends on him rising to look out over the field of enemy fires.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler moves along the crowded rampart past weary Byzantine defenders mending armor and sharpening blades by torchlight. A soldier presses a single wooden cup of water into his hands; he drinks a sip and passes it on down the silent line. Faces are grey with exhaustion but steady. Ends on the shared cup moving hand to hand down the wall.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "prompt": "Down on the plain before the walls, in flickering torchlight, an enormous bronze bombard — a cannon longer than a house — sits cooling, its gun crews asleep around it, huge carved stone cannonballs stacked nearby. Beyond it the tents and banners of a massive army stretch into the darkness. Ends on the giant cannon silhouetted against a thousand campfires.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "First grey light. The traveler stands on the wall as, across the whole plain below, thousands of drums and horns begin to sound at once — a slow, building war-rhythm you can feel through the stone. Banners lift; the vast army begins to stir and move toward the walls. He grips the battlement, his breath fogging in the cold dawn. Ends on him facing the sunrise as the drums swell.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "prompt": "Panorama at dawn: the immense triple walls of Constantinople stretching into the mist, thin smoke rising here and there, the great domed skyline of the city behind them, and before them the endless army advancing under countless banners as the sky turns pale gold. Epic scale and tension, no gore. Ends on sunrise breaking over the walls and the advancing host.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler stands alone on the rampart as the dawn light and the distant roar of the assault rise around him. He closes his eyes and lowers his head; the walls, the banners and the pale gold sky slowly blur and fade to light. Ends on his silhouette dissolving into the dawn.",
+      "seed": null
+    }
+  ]
+}

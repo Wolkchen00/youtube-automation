@@ -1,0 +1,62 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "I Woke Up in Pompeii the Morning It Died — 79 AD"
+  },
+  "hook_shot": 5,
+  "title_card": {
+    "title": "POMPEII",
+    "subtitle": "79 AD · The Day It Died"
+  },
+  "narration": "It is the year 79, and the mountain has gone quiet — everyone here thinks that's a good sign. I woke on a warm stone floor in a city that smells of bread and salt. Children chase a dog across the forum. A baker stacks loaves I will later see turned to charcoal. Nobody looks up. At midday the sky above Vesuvius tears open, and a column of ash climbs seven miles into the sun. The people around me begin to point — not run. Point. They thought they had time. I closed my eyes, and woke somewhere else.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "Dawn in Pompeii, 79 AD. The traveler — a calm olive-skinned man with a dark beard, in a plain undyed Roman tunic — wakes on a sun-warmed stone street, sits up and looks around, disoriented, at whitewashed walls and terracotta roofs glowing in the early light. Behind the rooftops, Mount Vesuvius rises green and utterly calm against a flawless blue sky. Ends on him getting to his feet, eyes lifting toward the quiet mountain.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler walks into the crowded Pompeii forum — marble colonnades, painted frescoes, market stalls of fish and figs, children chasing a dog, a baker sliding loaves from a stone oven. He drifts through the bustle unnoticed, wonder and unease on his face. Ends on him pausing as his gaze catches Vesuvius framed between two columns.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "prompt": "Midday in the Pompeii forum. A low tremor rolls through the ground: fountain water shivers, hanging merchant scales rattle, pigeons burst from the tiled roofs all at once. The crowd stops and looks around, uncertain. Then, far above Vesuvius, a thin dark plume begins to rise into the flawless blue sky. Ends on the plume swelling upward over the mountain.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler stands frozen among Pompeiians who have all turned to POINT up at the sky — their faces lit with curiosity, not fear — as a vast pine-shaped cloud of ash billows over Vesuvius. He alone steps slowly backward, understanding what they do not. The first pale flakes of ash begin drifting down like snow. Ends on ash settling on his shoulder as he stares up.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "prompt": "Wide over the rooftops of Pompeii: the colossal eruption column now boils miles into the air and swallows the sun, turning midday into a brown-black dusk. Pumice and ash rain down across the city; tiny figures in the streets finally begin to hurry. A marble statue stands silhouetted against the churning darkness. Ends on the whole city dimming beneath the falling ash.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_witness"],
+      "environment": null,
+      "prompt": "The traveler stands still in the falling ash as the street greys out around him and the sounds of the city fade to silence. He lowers his head and closes his eyes. The drifting ash and the buildings slowly blur and desaturate into soft grey nothing. Ends on his silhouette dissolving into the ash-grey void.",
+      "seed": null
+    }
+  ]
+}

@@ -198,7 +198,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     wmin = int((narr_cfg or {}).get("min_words", 95))
     wmax = int((narr_cfg or {}).get("max_words", 125))
     want_tc = bool(cfg.get("title_card"))
-    humans_silent = str(cfg.get("humans") or "").strip().lower() in ("silent", "silent-masked", "allowed")
+    humans_mode = str(cfg.get("humans") or "").strip().lower()
+    humans_featured = humans_mode == "featured"
+    humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
     eerie_ok = bool(cfg.get("eerie_ok"))
     title_style = str(cfg.get("title_style") or "").strip()
     shot_refs = bool(cfg.get("shot_refs"))
@@ -233,9 +235,16 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                'exactly as the CREATIVE BRIEF instructs (max 48 chars).' if want_tc else "")
     refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
                  '"environment"; follow the brief about when to use them.' if shot_refs else "")
-    humans_rule = ("human figures may appear but must NEVER speak, lip-sync or show a clear close-up face "
-                   "(masked, distant, silhouetted or from behind only),"
-                   if humans_silent else "no humans or human faces,")
+    if humans_featured:
+        humans_rule = ("the recurring lead character (see AVAILABLE REFERENCES) MAY appear in clear close-up, "
+                       "mid and wide shots and is the emotional anchor of the episode, but must NEVER speak, "
+                       "lip-sync or move their lips as if talking (the voice is added later as narration); "
+                       "other people may appear around them,")
+    elif humans_silent:
+        humans_rule = ("human figures may appear but must NEVER speak, lip-sync or show a clear close-up face "
+                       "(masked, distant, silhouetted or from behind only),")
+    else:
+        humans_rule = "no humans or human faces,"
     tone_tail = "nothing gory, violent or graphic." if eerie_ok else "nothing gory, violent or frightening."
 
     system_instruction = f"""{head}
