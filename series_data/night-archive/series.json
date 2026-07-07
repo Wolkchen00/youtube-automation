@@ -11,7 +11,7 @@
   ],
   "hashtags": "#horror #mystery #vhs #analoghorror #foundfootage #archive #paranormal #creepy #storytime #shorts",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -58,6 +58,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-06T20:47:39.960940+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep04/ep04_narrated_music_hooked.mp4",
+      "subtitle": "The Previous Archivist",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-07T21:08:55.914061+00:00"
     }
   }
 }
