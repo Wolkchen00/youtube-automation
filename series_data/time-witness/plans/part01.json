@@ -23,7 +23,7 @@
       "duration": "8",
       "characters": ["ihsan_witness"],
       "environment": null,
-      "prompt": "The traveler walks into the crowded Pompeii forum — marble colonnades, painted frescoes, market stalls of fish and figs, children chasing a dog, a baker sliding loaves from a stone oven. He drifts through the bustle unnoticed, wonder and unease on his face. Ends on him pausing as his gaze catches Vesuvius framed between two columns.",
+      "prompt": "The traveler — the same bearded olive-skinned man, wearing his plain undyed Roman linen tunic with a leather belt and sandals (period-accurate; NO modern clothing) — walks into the crowded Pompeii forum: marble colonnades, painted frescoes, market stalls of fish and figs, children chasing a dog, a baker sliding loaves from a stone oven. He drifts through the bustle unnoticed, wonder and unease on his face. Ends on him pausing as his gaze catches Vesuvius framed between two columns.",
       "seed": null
     },
     {
@@ -39,7 +39,7 @@
       "duration": "8",
       "characters": ["ihsan_witness"],
       "environment": null,
-      "prompt": "The traveler stands frozen among Pompeiians who have all turned to POINT up at the sky — their faces lit with curiosity, not fear — as a vast pine-shaped cloud of ash billows over Vesuvius. He alone steps slowly backward, understanding what they do not. The first pale flakes of ash begin drifting down like snow. Ends on ash settling on his shoulder as he stares up.",
+      "prompt": "The traveler — the same bearded olive-skinned man, wearing his plain undyed Roman linen tunic with a leather belt and sandals (period-accurate; NO modern clothing, NO t-shirt, NO trousers, NO sneakers) — stands frozen among Pompeiians who have all turned to POINT up at the sky, their faces lit with curiosity, not fear, as a vast pine-shaped cloud of ash billows over Vesuvius. He alone steps slowly backward, understanding what they do not. The first pale flakes of ash begin drifting down like snow. Ends on ash settling on his shoulder as he stares up.",
       "seed": null
     },
     {
@@ -55,7 +55,7 @@
       "duration": "8",
       "characters": ["ihsan_witness"],
       "environment": null,
-      "prompt": "The traveler stands still in the falling ash as the street greys out around him and the sounds of the city fade to silence. He lowers his head and closes his eyes. The drifting ash and the buildings slowly blur and desaturate into soft grey nothing. Ends on his silhouette dissolving into the ash-grey void.",
+      "prompt": "The traveler — the same bearded olive-skinned man, wearing his plain undyed Roman linen tunic with a leather belt and sandals (period-accurate; NO modern clothing) — stands still in the falling ash as the street greys out around him and the sounds of the city fade to silence. He lowers his head and closes his eyes. The drifting ash and the buildings slowly blur and desaturate into soft grey nothing. Ends on his silhouette dissolving into the ash-grey void.",
       "seed": null
     }
   ]
