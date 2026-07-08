@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #history #archaeology #underwater #ancient #artifact #deepsea #mystery #lostcity #scuba",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -71,6 +71,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-07T23:13:22.067404+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/drowned-history/episodes/ep06/ep06_narrated_music_titled.mp4",
+      "subtitle": "Divers discovered a lost city swallowed by the earth",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-08T22:01:53.895295+00:00"
     }
   },
   "auto_replenish": {
