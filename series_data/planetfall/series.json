@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -71,6 +71,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-07T18:54:52.603696+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep06/ep06_narrated_music_hooked.mp4",
+      "subtitle": "AERIDIA: The Sky Islands",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-08T18:19:53.599747+00:00"
     }
   },
   "auto_replenish": {
