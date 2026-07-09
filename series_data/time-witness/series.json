@@ -11,7 +11,7 @@
   ],
   "hashtags": "#history #historytok #pov #ancienthistory #timetravel #didyouknow #education #cinematic #shorts #fyp",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -44,6 +44,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-08T20:35:06.425857+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/time-witness/episodes/ep02/ep02_narrated_music_hooked_titled.mp4",
+      "subtitle": "I Woke Up in Rome the Day the Colosseum Opened — 80 AD",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-09T20:51:09.403405+00:00"
     }
   }
 }
