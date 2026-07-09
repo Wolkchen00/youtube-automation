@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -82,6 +82,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-08T18:19:53.599747+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep07/ep07_narrated_music_hooked.mp4",
+      "subtitle": "MYCELIA: Spore Gardens",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-09T18:36:24.477697+00:00"
     }
   },
   "auto_replenish": {
