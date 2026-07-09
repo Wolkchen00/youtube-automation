@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #history #archaeology #underwater #ancient #artifact #deepsea #mystery #lostcity #scuba",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -82,6 +82,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-08T22:01:53.895295+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/drowned-history/episodes/ep07/ep07_narrated_music_hooked_titled.mp4",
+      "subtitle": "Scientists found a 9,000-year-old stone village underwater",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-09T22:20:21.084872+00:00"
     }
   },
   "auto_replenish": {
