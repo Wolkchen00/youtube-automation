@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #4k #dreamcore #surreal #liminalspaces #cinematic #aivideo #oddlysatisfying",
   "total_parts": 5,
-  "next_part": 1,
+  "next_part": 2,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -21,5 +21,17 @@
     "min_queue": 2,
     "brief": "Cinematic dreamcore serisi (maxvoao / odysseyml tarzı — fotoreal, sinematik, gerçeküstü). Her bölüm TEK KESİNTİSİZ rüya-yolculuğudur: kamera hiç durmadan yavaşça ileri süzülür ve gerçek bir dünya, bölüm ortasında imkânsız bir şekilde dönüşür. KURAL: tam 5 çekim × 8 saniye. Çekim 1 = sakin, fotoreal, neredeyse sıradan bir açılış (gerçek bir yer: tarla, sokak, sahil, orman, çöl, dağ, şehir). Çekim 2-3 = dünya sezdirmeden bükülmeye başlar (yerçekimi, ölçek, ufuk, mimari kurallar bozulur). Çekim 4 = DORUK — nefes kesen imkânsız manzara (hook_shot bu olsun). Çekim 5 = dingin, duygusal final vista. Bazı bölümlerde arkadan görünen UZAK tek bir figür yürür/koşar (asla yüz yakın planı, asla konuşma); bazı bölümler tamamen figürsüz saf manzara/mimari olsun. Her bölüm YENİ bir biyom/dünya kullanır (buğday tarlası, katlanan şehir, ayna çölü, bulut denizleri, ters şelaleler, sonsuz koridorlar, tuz gölü, kar, okyanus, megastrüktürler...). Başlık = 4-9 kelimelik şiirsel İngilizce cümle, tırnak/emoji yok (ör: 'Stepping into whatever waits ahead', 'The field kept going', 'Where the city folds'). narration alanı DAİMA boş string. Prompt'lar somut ve görsel olsun; 'kamera yavaşça ileri süzülür' hissini her çekimde koru."
   },
-  "parts": {}
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-drift/episodes/ep01/ep01_music_hooked_4k.mp4",
+      "subtitle": "The field kept going",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-09T17:24:10.132545+00:00"
+    }
+  }
 }
