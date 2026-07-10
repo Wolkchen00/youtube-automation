@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #4k #dreamcore #surreal #liminalspaces #cinematic #aivideo #oddlysatisfying",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -32,6 +32,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-09T17:24:10.132545+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-drift/episodes/ep02/ep02_music_hooked_4k.mp4",
+      "subtitle": "Where the city folds",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-10T17:14:41.479379+00:00"
     }
   }
 }
