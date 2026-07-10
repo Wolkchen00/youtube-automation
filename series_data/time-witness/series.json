@@ -11,7 +11,7 @@
   ],
   "hashtags": "#history #historytok #pov #ancienthistory #timetravel #didyouknow #education #cinematic #shorts #fyp",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -55,6 +55,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-09T20:51:09.403405+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/time-witness/episodes/ep03/ep03_narrated_music_hooked_titled.mp4",
+      "subtitle": "I Woke Up Inside the Walls of Constantinople — 1453",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-10T20:24:04.845439+00:00"
     }
   }
 }
