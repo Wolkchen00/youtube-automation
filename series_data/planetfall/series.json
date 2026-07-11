@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 10,
-  "next_part": 9,
+  "next_part": 10,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -104,6 +104,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-10T18:28:25.704714+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep09/ep09_narrated_music_hooked.mp4",
+      "subtitle": "PYROS: Heart of Fire",
+      "platforms_ok": [
+        "instagram",
+        "tiktok",
+        "youtube"
+      ],
+      "published_at": "2026-07-11T17:54:26.765586+00:00"
     }
   },
   "auto_replenish": {
