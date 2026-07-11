@@ -11,7 +11,7 @@
   ],
   "hashtags": "#history #historytok #pov #ancienthistory #timetravel #didyouknow #education #cinematic #shorts #fyp",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -66,6 +66,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-10T20:24:04.845439+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/time-witness/episodes/ep04/ep04_narrated_music_hooked_titled.mp4",
+      "subtitle": "I Woke Up in Egypt as They Finished the Great Pyramid — 2560 BC",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-11T20:09:21.940447+00:00"
     }
   }
 }
