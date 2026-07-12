@@ -11,7 +11,7 @@
   ],
   "hashtags": "#history #historytok #pov #ancienthistory #timetravel #didyouknow #education #cinematic #shorts #fyp",
   "total_parts": 10,
-  "next_part": 5,
+  "next_part": 6,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -81,6 +81,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-11T20:09:21.940447+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/time-witness/episodes/ep05/ep05_narrated_music_hooked_titled.mp4",
+      "subtitle": "I Woke Up on the Titanic 20 Minutes Before the Iceberg — 1912",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-12T20:07:28.927680+00:00"
     }
   }
 }
