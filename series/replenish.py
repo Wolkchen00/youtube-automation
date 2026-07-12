@@ -198,6 +198,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     wmin = int((narr_cfg or {}).get("min_words", 95))
     wmax = int((narr_cfg or {}).get("max_words", 125))
     want_tc = bool(cfg.get("title_card"))
+    want_fc = bool(cfg.get("fact_captions"))
     humans_mode = str(cfg.get("humans") or "").strip().lower()
     humans_featured = humans_mode == "featured"
     humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
@@ -224,6 +225,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
     if shot_refs:
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
+    if want_fc:
+        shot_fields += ', "fact": "<2-5 word on-screen fact, optional>"'
 
     title_rule = title_style or ('2-4 words, poetic, curiosity-driven — the title IS the YouTube title of a\n'
                                  '  standalone video (like "Bloom" or "The Last Door"). No drug slang, no clickbait\n'
@@ -233,6 +236,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                  if narrated else "")
     tc_rule = ('\n- TITLE_CARD: "title" = the subject/site name (max 40 chars); "subtitle" = place and year '
                'exactly as the CREATIVE BRIEF instructs (max 48 chars).' if want_tc else "")
+    fact_rule = ('\n- FACT_CAPTIONS: give a "fact" to 2-4 shots — a punchy 2-5 word hard fact from the entry '
+                 'that is literally on screen in THAT shot (a depth, an age, a count, a death toll, a date), '
+                 'e.g. "45 METERS DEEP", "2,000 YEARS OLD", "ONE DIVER DIED". They are burned low on screen '
+                 'while the viewer watches. NO "fact" on the final resolve shot; omit "fact" where the shot '
+                 'shows nothing concrete. NEVER invent a number — every fact must come from the brief entry.'
+                 if want_fc else "")
     refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
                  '"environment"; follow the brief about when to use them.' if shot_refs else "")
     if humans_featured:
@@ -264,7 +273,7 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{refs_rule}
+  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{fact_rule}{refs_rule}
 - SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final
   frame): shot 1 opens a brand-new striking scene; every later shot's prompt must
   describe ONE continuous transformation that begins EXACTLY at the previous shot's end
@@ -327,6 +336,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     wmin = int((narr_cfg or {}).get("min_words", 95))
     wmax = int((narr_cfg or {}).get("max_words", 125))
     want_tc = bool(cfg.get("title_card"))
+    want_fc = bool(cfg.get("fact_captions"))
     shot_refs = bool(cfg.get("shot_refs"))
 
     errors: list[str] = []
@@ -350,6 +360,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
 
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
+        fact_count = 0
         if not isinstance(raw_shots, list) or not (3 <= len(raw_shots) <= 6):
             got = len(raw_shots) if isinstance(raw_shots, list) else "yok"
             errors.append(f"part {want}: çekim sayısı 3-6 olmalı (gelen: {got})")
@@ -377,7 +388,17 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                              if isinstance(c, str) and bible.get_character(c)]
                     if chars:
                         clean["characters"] = chars
+                if want_fc:
+                    # Opt-in: kısa ekran-içi 'fact' (≤40 karakter); produce alt üçlüğe basar.
+                    fv = str(shot.get("fact") or "").strip()
+                    if fv:
+                        clean["fact"] = fv[:40].strip()
+                        fact_count += 1
                 clean_shots.append(clean)
+
+        if want_fc and clean_shots and fact_count < 2:
+            errors.append(f"part {want}: fact_captions açık — en az 2 çekimde 'fact' olmalı "
+                          f"(gelen: {fact_count})")
 
         hook = plan.get("hook_shot")
         try:

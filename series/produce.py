@@ -603,6 +603,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     # Açılış kancası (opt-in): doruk çekimden kısa bir kesit videonun EN BAŞINA
     # eklenir — ilk 1-2 saniyede 'olağandışı an' görünmezse Shorts'ta kaydırılır.
     # Müzik/anlatımdan SONRA yapılır ki kesit sesiyle birlikte gelsin.
+    teaser_len = 0.0   # kanca kesiti eklenirse tüm gövde bu kadar kayar (fact-caption sync'i için)
     hook = bible.hook_teaser
     if hook and shot_offsets:
         try:
@@ -621,6 +622,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                                             clips_dir=Path(final_ep).parent)
             if hooked.exists() and hooked.stat().st_size > 0:
                 final_ep = hooked
+                teaser_len = ffmpeg_tools.get_video_duration(teaser) or d
                 logger.info(f"🎣 Kanca: çekim {hn} dorukundan {d:.1f}s (t={start:.1f}s) başa eklendi")
         except Exception as e:
             logger.warning(f"⚠️ Kanca eklenemedi (video kancasız yayınlanır): {e}")
@@ -646,6 +648,39 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 logger.info(f"🪧 Künye bindirildi: {tc.get('title') or tc.get('subtitle')}")
         except Exception as e:
             logger.warning(f"⚠️ Künye eklenemedi (video künyesiz yayınlanır): {e}")
+
+    # Senkron fact-caption'lar (opt-in): her çekimin shot['fact']'i (kısa sert bilgi)
+    # o çekimin FINAL zaman çizgisindeki anına — kanca kaymasi (teaser_len) dahil —
+    # alt üçlüğe yazılır (üst=künye / alt=fact, çakışmaz). Künyeden SONRA, upscale'den
+    # ÖNCE uygulanır ki 4K master da IG/TikTok kopyası da yazıyı taşısın. shot['fact']
+    # olmayan planlar (eski/anlatımsız) hiç etkilenmez.
+    fc_cfg = bible.fact_captions
+    facts = [(int(s["n"]), str(s.get("fact") or "").strip())
+             for s in plan.get("shots", []) if str(s.get("fact") or "").strip()]
+    if fc_cfg and facts and shot_offsets:
+        try:
+            total = ffmpeg_tools.get_video_duration(final_ep)
+            tc_hold = float(tc_cfg.get("duration", 3.0)) if tc_cfg else 0.0
+            hold = float(fc_cfg.get("hold", 2.6))
+            items, last_at = [], -1e9
+            for n, text in facts:
+                if n not in shot_offsets:
+                    continue
+                at = shot_offsets[n] + teaser_len + 0.7        # çekime biraz girince belir
+                at = max(at, tc_hold + 0.4)                    # açılış künyesiyle yarışma
+                at = min(at, max(0.0, total - hold - 0.3))     # sondan taşma
+                if at - last_at < hold + 0.3:                  # üst üste binmesin
+                    continue
+                items.append({"text": text, "at": at, "hold": hold})
+                last_at = at
+            if items:
+                capped = Path(final_ep).parent / f"{Path(final_ep).stem}_capped.mp4"
+                ffmpeg_tools.fact_captions_overlay(final_ep, capped, items, hold=hold)
+                if capped.exists() and capped.stat().st_size > 0:
+                    final_ep = capped
+                    logger.info(f"💬 {len(items)} fact-caption bindirildi")
+        except Exception as e:
+            logger.warning(f"⚠️ Fact-caption'lar eklenemedi (video onlarsız yayınlanır): {e}")
 
     # 4K master (opt-in): en-son final Topaz ile ×2 büyütülür (YouTube 4K);
     # IG/TikTok için 1080p delivery kopyası yanına bırakılır.

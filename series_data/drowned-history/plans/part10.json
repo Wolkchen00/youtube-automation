@@ -16,18 +16,21 @@
       "n": 2,
       "duration": "8",
       "prompt": "Drifting over a rocky outcrop, the camera reveals sections of the lakebed carefully gridded and marked, indicating an active archaeological excavation; a diver gently brushes sediment from a small, stone-lined crevice, revealing hints of buried artifacts.",
+      "fact": "2013-2019 excavation",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
       "prompt": "Moving closer, the camera focuses on a partially exposed, rectangular stone box, carefully placed within a natural depression; another diver meticulously clears surrounding debris with a small suction dredge, revealing more of the box's ancient, weathered surface.",
+      "fact": "Inca & Tiwanaku",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
       "prompt": "Torchlight peers into the open stone offering box, revealing its contents: several small, gleaming gold figurines and fragments of a vibrant red-orange spondylus shell, the gold glinting brightly against the dark stone and freshwater; the camera slowly pans across the precious, ancient offerings.",
+      "fact": "solid gold figurines",
       "seed": null
     },
     {

@@ -128,6 +128,7 @@
       "max_words": 105
     },
     "title_card": true,
+    "fact_captions": true,
     "humans": "silent",
     "eerie_ok": true,
     "title_style": "a 5-10 word plain-case English sentence stating the discovery like a news hook (e.g. 'Divers Found a 2,000-Year-Old Computer'). Every title MUST carry ONE concrete specific taken straight from the entry — an age or number ('3,300-Year-Old', '60,000 Bowls'), a named place or people, or a startling concrete object — NEVER a vague-only title such as 'a giant underwater monument' or 'a mysterious lost city'. No quotes, no emoji, no ALL-CAPS words, no colons.",

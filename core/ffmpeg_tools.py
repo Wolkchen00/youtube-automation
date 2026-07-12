@@ -956,6 +956,88 @@ def title_card_overlay(
     return output_path
 
 
+def fact_captions_overlay(
+    input_path: str | Path,
+    output_path: str | Path,
+    captions: list[dict],
+    hold: float = 2.6,
+    fade: float = 0.3,
+) -> Path:
+    """Burn short, synced 'fact captions' into the LOWER third of a finished
+    episode — the retention lever for faceless history Shorts. Each item is
+    {'text': '45 METERS DEEP', 'at': <second in the FINAL video>, 'hold': <s>?}:
+    the caption pops in at `at` (a beat tied to the shot that shows that fact),
+    holds ~2.6s and fades out. Sits well below the top title card (different
+    screen region) and above the Shorts bottom UI. One ffmpeg pass; one drawtext
+    PER LINE (ffmpeg multi-line trap — same as title_card_overlay). On any error
+    the original is copied through, so a caption failure never blocks a publish."""
+    import textwrap
+
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+    caps = [c for c in (captions or []) if str(c.get("text") or "").strip()]
+    if not caps:
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+        return output_path
+
+    scale = (get_video_height(input_path) or 1920) / 1920.0
+
+    def px(v: float) -> int:
+        return max(1, round(v * scale))
+
+    font = _find_font(mono=False)
+    fontarg = f"fontfile='{font.replace(':', chr(92) + ':')}':" if font else ""
+
+    fs = px(52)
+    lh = fs + px(20)
+    y_base = px(1330)   # alt-üçlük: üst künye (y≈320) ile alt Shorts UI arasında güvenli
+    fade = max(0.1, float(fade))
+
+    vf_parts: list[str] = []
+    for c in caps:
+        text = str(c.get("text") or "").strip().upper()
+        at = max(0.0, float(c.get("at", 0.0)))
+        h = max(fade * 2 + 0.2, float(c.get("hold", hold)))
+        t0, t1 = at, at + h
+        # Yamuk (trapez) alpha: fade-in → tam → fade-out. Tırnak içinde virgül
+        # ffmpeg filtergraph'ında literaldir (title_card_overlay'de kanıtlı desen).
+        alpha = (f"if(lt(t,{t0:.2f}),0,"
+                 f"if(lt(t,{t0 + fade:.2f}),(t-{t0:.2f})/{fade:.2f},"
+                 f"if(lt(t,{t1 - fade:.2f}),1,"
+                 f"if(lt(t,{t1:.2f}),({t1:.2f}-t)/{fade:.2f},0))))")
+        lines = textwrap.wrap(text, width=22) or [text]
+        # Blok alt-hizalı: son satır y_base'te, üste doğru yığılır.
+        y = y_base - (len(lines) - 1) * lh
+        for line in lines:
+            vf_parts.append(
+                f"drawtext={fontarg}text='{_drawtext_escape(line)}':fontsize={fs}:"
+                f"fontcolor=white:box=1:boxcolor=black@0.5:boxborderw={px(18)}:"
+                f"x=(w-text_w)/2:y={y}:alpha='{alpha}'"
+            )
+            y += lh
+    vf_parts.append("format=yuv420p")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-vf", ",".join(vf_parts),
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", FFMPEG_PRESET,
+        "-c:a", "copy",
+        str(output_path)
+    ]
+    try:
+        subprocess.run(cmd, capture_output=True, check=True, timeout=300)
+        logger.info(f"💬 {len(caps)} fact-caption bindirildi → {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        err = (e.stderr or b"").decode(errors="replace")[-400:] if e.stderr else str(e)
+        logger.warning(f"⚠️ Fact captions failed (using original): {err}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+    return output_path
+
+
 def extract_clip(
     input_path: str | Path,
     output_path: str | Path,

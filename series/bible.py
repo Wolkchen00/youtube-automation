@@ -182,6 +182,19 @@ class Bible:
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
+    def fact_captions(self) -> dict:
+        """Senkron ekran-içi 'fact caption' katmanı (opt-in). Etkinse, plan'daki
+        her çekimin shot['fact'] (2-5 kelimelik sert bilgi — 'ONE DIVER DIED',
+        '2,000 YEARS OLD') o çekimin ekranda olduğu ana denk gelecek şekilde
+        videonun ALT üçlüğüne yazılır. Faceless tarih Shorts'larında izlenme/
+        paylaşımı en çok artıran kaldıraç. Künyeden AYRI ekran bölgesi (üst=künye,
+        alt=fact). Kanca-kesiti + künye eklendikten SONRA, upscale'den ÖNCE bindirilir.
+        shot['fact'] yoksa hiçbir şey çizilmez (eski planlarla tam uyumlu).
+        Örn: "fact_captions": {"enabled": true, "hold": 2.6}"""
+        v = self.data["series"].get("fact_captions") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
     def upscale(self) -> dict:
         """4K master katmanı (opt-in): final video Topaz Video Upscale ile ×2 büyütülür
         (1080x1920 → 2160x3840) — YouTube 4K bitrate merdivenine girer, izleyiciye
