@@ -405,8 +405,16 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             tcv = plan.get("title_card") or {}
             tt = str(tcv.get("title") or "").strip()
             ts = str(tcv.get("subtitle") or "").strip()
+            # Künye alt yazısı GERÇEK bir 4-haneli yıl taşımalı (1000-2099).
+            # Ekrana basılan tarih doğruluğu güvencesi: model tarihi düşürür ya da
+            # uydurursa batch reddedilir → Gemini yeniden dener (brief: yıl DOĞRUDAN
+            # FACT BANK kaydından kopyalanır). Tek boşluk kalan doğrulama buydu.
+            has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", ts))
             if not tt or not ts or len(tt) > 60 or len(ts) > 60:
                 errors.append(f"part {want}: title_card.title ve .subtitle zorunlu (≤60 karakter)")
+            elif not has_year:
+                errors.append(f"part {want}: title_card.subtitle 4-haneli bir yıl içermeli "
+                              f"(ör. '… — found 1901') — gelen: {ts!r}")
             else:
                 normalized["title_card"] = {"title": tt, "subtitle": ts}
         if hook:
