@@ -1,9 +1,12 @@
 name: YouTube Video Cleanup
 
 on:
-  schedule:
-    # Her gün UTC 06:00 = California 23:00 PM (PDT) — gece temizliği
-    - cron: '0 6 * * *'
+  # 2026-07-11: KAPATILDI (İhsan kararı) — eski sistemin logs/video_registry.json'ına
+  # bakıyordu; yeni series/ motoru oraya yazmadığı için hiçbir video görmüyor,
+  # aylardır fiilen no-op koşuyordu (cleanup_log.json hiç oluşmadı).
+  # Gerekirse elle workflow_dispatch ile çalıştırılabilir (varsayılan dry-run).
+  # schedule:
+  #   - cron: '0 6 * * *'   # Her gün UTC 06:00 = California 23:00 (PDT)
   workflow_dispatch:
     inputs:
       dry_run:
