@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #history #archaeology #underwater #ancient #artifact #deepsea #mystery #lostcity #scuba",
   "total_parts": 15,
-  "next_part": 10,
+  "next_part": 11,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -115,6 +115,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-11T21:43:18.493973+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/drowned-history/episodes/ep10/ep10_narrated_music_hooked_titled_capped.mp4",
+      "subtitle": "Ancient gold and shell offerings were found in a sacred lake",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-12T21:43:05.007081+00:00"
     }
   },
   "auto_replenish": {
