@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "IGNIS: The World Below"
+  },
+  "synopsis": "IGNIS — geode/subterranean world: stark, fractured grey surface with glowing fissures, deep-red atmosphere; signature = a colossal chasm opening into a vast, crystal-lined cavern illuminated by a pulsating, molten core.",
+  "narration": "Far from suns, Ignis appears a fractured, desolate world, its surface a mosaic of grey stone. But this is merely a thin shell, a deceptive crust guarding an inferno within. Our journey descends into its depths, where the very ground glows with an inner fire, a testament to a restless core. Below, a vast, crystalline heart beats, illuminated by a molten ocean. Ignis reminds us: true beauty, and power, often lie hidden beneath the surface.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From high orbit, a stark, fractured grey planet surface, crisscrossed by immense, glowing fissures that hint at internal light. A dark red atmospheric glow envelops the world, creating a desolate, yet captivating, appearance. Camera very slowly orbits.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing the descent from the previous shot's end state, rapidly approaching the fractured surface of Ignis. The vast, spiderweb cracks and glowing fissures become more defined, some pulsing faintly from deep within. The camera moves towards a particularly large, glowing chasm.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Transitioning from the rapid descent, now gliding at low altitude over a desolate, rocky, ash-strewn landscape. The ground is scarred by countless cracks and vents, some emitting faint red light. The camera sweeps towards a colossal, glowing chasm that plunges deep into the planet's interior, emanating a deep red light.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "From the previous shot's approach, slowly descending into the colossal chasm. The camera reveals a vast, shimmering cavern lined with immense, geometrically perfect crimson and amber crystals. These crystals glow with internal light, all illuminated by a pulsating, molten core far below, radiating intense heat and light.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

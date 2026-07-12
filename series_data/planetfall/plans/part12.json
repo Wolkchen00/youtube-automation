@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "ZEPHYRA: The Sky Whirl"
+  },
+  "synopsis": "ZEPHYRA — gas giant: swirling amethyst and amber atmospheric bands, opalescent clouds, distant floating structures; signature = a colossal, slow-moving atmospheric vortex revealing a geometric, glowing structure at its heart.",
+  "narration": "Zephyra, a colossal gas giant, cloaked in an eternal dance of amethyst and amber. Its turbulent atmosphere, a canvas of shifting opalescent clouds, conceals secrets unfathomable. As we plunge deeper, the immense scale of its atmospheric currents becomes clear. Yet, within its grandest tempest, a calm eye exists, a hidden truth. Here, a structure of impossible geometry defies the maelstrom, a silent testament to something vast and ancient, enduring within the sky's embrace.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From high orbit, a colossal gas giant planet, swirling bands of deep amethyst and vibrant amber gases dominate its surface. Streaks of opalescent, iridescent clouds drift between the bands, revealing the planet's immense scale. Camera very slowly orbits.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing the descent from the previous shot's end state, diving rapidly into the churning, iridescent atmosphere of the gas giant. The camera plunges through dense layers of opalescent clouds, light refracting dramatically into spectral colors, creating a sense of immense speed and atmospheric pressure.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Transitioning from the dense clouds, now moving at high speed through vast, swirling atmospheric currents of deep blue and violet. Distant, impossibly large, geometric structures, partially embedded and shrouded within the swirling gas, slowly become visible, hinting at a hidden civilization. Camera maintains forward momentum.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "From the previous shot's flight, slowing to hover gently at the edge of a colossal, slow-moving atmospheric vortex. The calm, clear eye of the vortex is revealed, within it, a vast, ancient, glowing geometric city structure, partially embedded and serene, defying the surrounding maelstrom.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

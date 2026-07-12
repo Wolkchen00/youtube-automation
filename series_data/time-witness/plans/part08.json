@@ -1,0 +1,63 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "I Woke Up in Venice at Its Golden Dawn — 1480 AD"
+  },
+  "synopsis": "The traveler awakens in the opulent, bustling heart of Renaissance Venice, experiencing the city's unique beauty and vibrant maritime life.",
+  "narration": "It is the year 1480 AD, and a golden mist rises from the canals of Venice. I breathe in the crisp, briny air, surrounded by the gentle lapping of water and the distant chatter of merchants. Gondolas glide past ornate palaces, their reflections shimmering on the water. Every surface here tells a story of wealth, artistry, and trade. This city, built on a lagoon, defying the sea itself, is a masterpiece of human ingenuity and ambition. It’s a merchant’s paradise, where East meets West in a symphony of commerce and beauty, and then I was gone.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opens in a quiet, misty canal in early morning Venice. ihsan_witness, wearing a rich, deep-red velvet doublet, dark hose, and a short cloak typical of a wealthy 15th-century Venetian citizen, stands on a small stone bridge, looking out as a single gondola glides silently past, its silhouette merging with the fog.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera follows the gondola as it turns a corner, revealing a wider canal now bustling with activity: more gondolas, small merchant boats, and people on foot along the ornate stone banks. Sunlight begins to break through the dissipating mist, casting a warm glow.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The view smoothly transitions into a vibrant market square (campo) filled with merchants selling exotic goods, people in colorful Renaissance attire haggling and conversing. ihsan_witness, still in his velvet doublet and cloak, observes the lively scene, perhaps pausing to admire some fabric or a piece of local craft.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera pulls back and rises, showcasing the grand architecture of a Venetian palace or church, its facade intricately carved and adorned with vibrant frescoes. The sound of distant church bells chimes through the morning air, adding to the atmosphere of the golden age.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The perspective shifts to an over-the-shoulder shot of ihsan_witness, still dressed in his luxurious velvet doublet, as he stands on a balcony or rooftop. He gazes out over a panoramic cityscape of Venice: countless canals, bridges, and red-tiled roofs stretching towards the shimmering lagoon under a bright blue sky.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "Close-up on ihsan_witness's face, his expression one of serene wonder and deep contemplation. The setting sun casts a warm, golden glow over the entire city, reflecting off the gently rippling water of the canals. The distant sounds of the city softly fade into a peaceful hum.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "VENICE: GOLDEN DAWN",
+    "subtitle": "Venice, Italy — 1480 AD"
+  },
+  "hook_shot": 3
+}

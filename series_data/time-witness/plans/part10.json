@@ -1,0 +1,63 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "I Woke Up in Tenochtitlan on its Last Day — 1519 AD"
+  },
+  "synopsis": "The traveler awakens in the magnificent Aztec capital of Tenochtitlan, exploring its vibrant markets and impressive pyramids before its tragic fall.",
+  "narration": "It is the year 1519 AD, and the air in Tenochtitlan is alive with the hum of a grand civilization. I stand on causeways linking this magnificent island city, the scent of copal incense mingling with exotic spices. Canoes laden with goods crisscross the canals, ferrying people to bustling markets. Towering pyramids pierce the sky, monuments to a powerful, intricate culture. This city, an engineering marvel, floats on a vast lake, a jewel of the Mesoamerican world. Its beauty is breathtaking, but a shadow looms, one that few here can yet perceive, and then I was gone.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opens on a misty morning over Lake Texcoco. ihsan_witness, wearing a simple, woven cotton loincloth and a plain, natural-fiber cloak typical of an Aztec commoner or visitor, stands on a stone causeway, looking across the serene water towards the distant, emerging skyline of Tenochtitlan with its grand pyramids shrouded in fog.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera follows ihsan_witness as he walks along the causeway, now bustling with canoes filled with people, vibrant flowers, and fresh produce. The city's intricate canal system becomes more apparent, lined with adobe and stone houses and small, lush floating gardens (chinampas). ihsan_witness is still in his cotton loincloth and cloak.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The view moves seamlessly into the vibrant Tlatelolco market, a riot of colors, sounds, and exotic aromas. Merchants sell everything from vibrant textiles to cacao beans, obsidian tools, and tropical fruits. ihsan_witness, still in his simple Aztec attire, blends in with the crowd, observing the lively trade with fascination.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera pulls back and rises, revealing a grand plaza dominated by the massive Templo Mayor, its intricate carvings and twin shrines dedicated to Huitzilopochtli and Tlaloc clearly visible. Priests in ornate feathered headdresses and citizens move about the sacred space under the bright Mesoamerican sun.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Overhead shot tracking slowly across the vast expanse of the city, showcasing its unique layout of perfectly straight canals, causeways, numerous temples, and dense residential areas, all seemingly floating on the vast expanse of Lake Texcoco. The city is a masterpiece of urban planning and hydraulic engineering.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_witness, still in his cotton loincloth and cloak, stands on a temple platform, looking out at the panoramic view of Tenochtitlan, now bathed in the warm, golden light of a setting sun. The city glows, appearing eternal and peaceful. A subtle, melancholic sense of impending change hangs in the air, a beautiful world on the brink.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "TENOCHTITLAN",
+    "subtitle": "Aztec Capital — 1519 AD"
+  },
+  "hook_shot": 4
+}

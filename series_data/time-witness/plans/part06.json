@@ -1,0 +1,60 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "I Woke Up in Alexandria as the Scrolls Burned — 48 BC"
+  },
+  "synopsis": "The traveler finds himself amidst the ancient wonders of the Library of Alexandria, witnessing its tragic decline as priceless knowledge is threatened.",
+  "narration": "It is the year 48 BC, and the air in Alexandria hums with a quiet, scholarly energy. I’m standing amidst towering shelves, the scent of papyrus and ancient dust filling my lungs. Scholars murmur, their faces illuminated by oil lamps, lost in scrolls containing humanity's accumulated wisdom. This place is a beacon, a vast reservoir of knowledge, a testament to civilization's endless quest for understanding. But a subtle tremor runs through the city, a distant crackle. Few realize that within days, the fires of conflict will sweep through parts of this very complex, consuming irreplaceable histories and dreams, and then I was gone.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opens in a quiet, dimly lit chamber within the Library of Alexandria, filled with towering stacks of papyrus scrolls. ihsan_witness, in a simple, undyed linen tunic and sandals, is turning from a shelf, looking around with a curious expression. Dust motes dance in the faint light filtering from high windows.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera pans slowly from ihsan_witness, through an arched doorway, revealing a vast, sunlit grand hall filled with numerous scholars poring over scrolls, some writing intently, others engaged in quiet debate. The scale is immense, with soaring columns and intricate architectural details.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Zoom into a specific area of the hall, focusing on intricate details of a scribe diligently at work, a quill scratching softly on papyrus. ihsan_witness, still in his linen tunic and sandals, stands nearby, observing the meticulous process with quiet fascination.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera pulls back and slowly rises, revealing more of the grand library's magnificent architecture, the scale of its multiple levels and the complex network of shelves and walkways. A subtle, distant plume of smoke becomes just visible outside a high, arched window, hinting at unrest.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The view shifts, moving steadily towards an open courtyard within the library complex, away from the interior. ihsan_witness walks slowly through the courtyard, looking up at the sky. The distant smoke on the horizon is now more pronounced, and a building in the distance begins to show a faint orange glow against the blue.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "Close-up on ihsan_witness's face, still in the simple linen tunic and sandals. His expression is one of profound sorrow and awe, as the distant glow of the fire intensifies dramatically, reflecting ominously in his eyes. A gentle wind carries faint ash particles through the air.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "LIBRARY OF ALEXANDRIA",
+    "subtitle": "Alexandria, Egypt — 48 BC"
+  },
+  "hook_shot": 2
+}

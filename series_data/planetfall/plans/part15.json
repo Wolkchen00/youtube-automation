@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "BIOTA-7: The Living Veil"
+  },
+  "synopsis": "BIOTA-7 — living planet: vibrant green and purple organic surface, pulsating with internal light, bioluminescent mist; signature = a colossal, rhythmic pulse across a vast organic landscape, revealing glowing, interconnected biological structures beneath the surface.",
+  "narration": "Behold Biota-7, a world unlike any other, its entire surface a single, colossal organism. From orbit, it subtly pulses, a vibrant canvas of green and violet. Our descent reveals a living landscape, breathing with slow, deliberate rhythm, shrouded in a bioluminescent mist. Every tendril, every structure, is interconnected, part of a greater whole. This is not just a planet with life; it is life itself, a pulsating, interconnected entity, forever in a state of organic revelation.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From high orbit, a planet entirely covered in vibrant, intricate organic textures of deep green and rich purple. The entire surface subtly pulses with a slow, rhythmic internal light, hinting at a single, colossal organism. Camera very slowly orbits.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing the descent from the previous shot's end state, plunging through a thick, bioluminescent mist that shimmers with soft green and violet light. The camera approaches an undulating, textured surface that appears to subtly breathe and move below the haze.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Transitioning from the mist, now gliding at low altitude over a vast, seemingly breathing landscape of interconnected organic structures. These colossal biological forms are covered in intricate textures, some glowing faintly with internal light, while others pulse slowly with a deep, rhythmic beat.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "From the previous shot's low flight, the camera settles and slowly zooms into a massive, intricate network of organic formations. This vast landscape rhythmically expands and contracts in a slow, synchronized pulse, revealing deeper, glowing crimson and violet biological structures beneath the surface, as if the entire world is a single, immense, living heart.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

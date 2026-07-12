@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "XYLOS: Relic Echoes"
+  },
+  "synopsis": "XYLOS — ruin world: jade-green jungle reclaiming colossal, moss-covered alien architecture, humid misty atmosphere; signature = a vast, partially submerged, ancient city structure slowly revealing itself through mist, glowing faintly with dormant energy.",
+  "narration": "Beyond the star-flecked veil lies Xylos, a world whispered to be home to a lost empire. Millennia have passed, and nature has claimed its grandest monuments, weaving jungles through forgotten cities. Our descent reveals the humid breath of a planet slowly reclaiming its past. Here, among the jade-green moss and ancient stone, faint energies stir, hinting at dormant power. What stories do these silent, glowing ruins hold, eternally embraced by life's relentless tide?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From high orbit, a jade-green planet, mostly covered in dense, exotic jungle foliage, with faint, sprawling grey geometric patterns visible beneath breaks in the clouds. Volumetric mist drifts across its surface, revealing glimpses of ancient, colossal structures. Camera very slowly orbits.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing the descent from the previous shot's end state, plunging through humid, jade-tinged atmospheric mist. Glimpses of impossibly vast, moss-covered, angular forms slowly become clearer below, half-obscured by the thick, glowing haze. The descent feels rapid yet controlled.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Transitioning from the mist, now gliding at low altitude over an endless, incredibly dense, vibrant jade-green jungle canopy. Colossal, moss-covered stone structures, partially eroded and overgrown, emerge majestically from the foliage, hinting at an ancient, vast civilization beneath. Camera sweeps smoothly.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "From the previous shot's low flight, slowing to hover gently above a vast, partially submerged, geometric city-like complex, its ancient, mossy surfaces glowing faintly with an internal jade-green luminescence. Water slowly laps at its foundations as mist gently swirls around the towering, silent ruins.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

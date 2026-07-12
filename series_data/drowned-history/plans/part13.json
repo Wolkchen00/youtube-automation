@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Divers found the oldest known shipwreck cargo on Earth"
+  },
+  "synopsis": "The Dokos wreck, found off Dokos island, Greece, represents the oldest known shipwreck cargo on Earth, dating back to approximately 2200 BC.",
+  "narration": "In 1975, off the Greek island of Dokos, divers made a discovery that rewrote maritime history. They found the remains of a merchant ship, its cargo scattered across the seabed, dating back to around 2200 BC. This modest collection of pottery and stone tools represented the oldest known shipwreck cargo on Earth. It offered an unprecedented window into Bronze Age trade, suggesting sophisticated seafaring routes existed far earlier than previously understood. The Dokos wreck, a silent testament to ancient commerce, reminds us how little we truly know about the earliest journeys across the seas.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into moderately dark, slightly silty water. The seabed is a gradual, featureless slope of fine sediment. Visibility is decent but not pristine, giving an atmospheric, muted blue-grey feel.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "As the diver continues, a vast, scattered field of ancient pottery shards and heavily encrusted, intact ceramic vessels slowly emerges from the murk. They are blending seamlessly with the seafloor, covered in millennia of sediment and marine growth. The scale of the debris field is immense.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The diver glides silently over the extensive debris field. Distinct shapes of various types of ancient amphorae, jugs, and bowls can be discerned among the fragments. A sense of an untold story permeates the scene, a silent testament to ancient commerce. A teammate diver is ahead, scanning.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The diver's torchlight focuses on a particularly well-preserved, very ancient ceramic jar or large bowl. Its distinct, crude Bronze Age form is clearly visible, half-buried in the sediment but remarkably intact, a tangible link to a distant past.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand carefully places a measurement scale next to the ancient ceramic artifact, while a teammate photographs it from a distance. Exhaled bubbles stream upwards. The diver slowly begins to ascend, the vast, ancient pottery field receding into the deep, leaving behind its enduring mystery.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Dokos wreck",
+    "subtitle": "Dokos island, Greece — found 1975"
+  },
+  "hook_shot": 4
+}

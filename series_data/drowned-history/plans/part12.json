@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Two ancient Greek bronze warriors were found off Italy"
+  },
+  "synopsis": "Off Riace, Italy, a snorkeler discovered the Riace Bronzes, two full-size ancient Greek bronze warriors, at a relatively shallow depth.",
+  "narration": "In the summer of 1972, a snorkeler near Riace, Italy, stumbled upon an archaeological marvel. At a mere eight meters depth, he found two life-sized ancient Greek bronze statues. These masterpieces, now known as the Riace Bronzes, date back to approximately 460-450 BC. They depict warrior figures, cast with astonishing detail and artistry, a rare survival from antiquity. After careful recovery, these magnificent sculptures captivated the world, offering a vivid glimpse into the classical era. Yet, how they came to rest on that shallow seabed remains a mystery, their silent vigil enduring for millennia.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into clear, warm, sun-dappled turquoise water. Sandy bottom with patches of seagrass is visible below. Sunlight filters down in shimmering shafts, creating an inviting but mysterious atmosphere. A distant rocky reef appears on the horizon.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The diver approaches the rocky reef, sunlight playing across ancient rock formations and swaying marine life. A faint, large, human-like silhouette, encrusted with growth, becomes discernible amongst the rocks, barely distinguishable from its surroundings.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Swimming closer, the silhouette resolves into the distinct form of a life-sized statue, partly covered in vibrant green marine growth and barnacles. It stands eerily still amidst the natural reef, seemingly staring into the deep. Its ancient presence is striking.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The diver's torch beam fully illuminates one of the Riace Bronzes. The light reveals intricate details of its powerful, muscular form and the stoic, almost haunting expression of its face (viewed from a respectful angle, no direct close-up). The rich bronze color, though corroded, is still evident.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand gently brushes away some loose sediment near the base of the statue, revealing more of its ancient foot. Another diver, a dark silhouette, carefully documents the find with an underwater camera. The diver slowly ascends, looking back as the bronze warrior fades into the sun-dappled water towards the sparkling surface.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Riace Bronzes",
+    "subtitle": "Riace, Italy — found 1972"
+  },
+  "hook_shot": 4
+}

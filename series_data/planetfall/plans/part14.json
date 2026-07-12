@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "ASTREIA: Starfall Echoes"
+  },
+  "synopsis": "ASTREIA — low-gravity moon-debris world: deep cosmic blue planet, ethereal silver debris rings, constant meteor shower; signature = a vast, shimmering curtain of slow-moving, glowing meteoroids perpetually raining into the atmosphere, creating silent light trails.",
+  "narration": "Astria, a world forever touched by a celestial ballet. Encircled by ethereal rings of cosmic debris, its deep blue atmosphere is a stage for constant, silent starfall. As we approach, individual motes of ancient impact glitter into view, each a whisper from the void. These aren't destructive strikes, but a perpetual rain of light, a gentle, luminous shower. Here, the very sky is a moving tapestry, woven from the echoes of shattered moons and distant, cosmic dust.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From high orbit, a deep cosmic blue planet, elegantly encircled by ethereal silver rings of slowly orbiting debris. Faint, luminous trails are visible in the atmosphere, suggesting a constant, gentle interaction with the debris. Camera very slowly orbits.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing the descent from the previous shot's end state, passing through the sparse, glittering debris field. Individual dust motes and tiny fragments slowly drift past the camera, catching the distant starlight, creating a sense of ethereal movement.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Transitioning from the debris field, now gliding smoothly just above the upper atmospheric edge of Astreia. Countless small objects from the debris ring are slowly entering the atmosphere, beginning to glow faintly as they experience friction, creating soft, luminous streaks.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "From the previous shot's atmospheric flight, the camera settles and slowly pans upwards, revealing a vast, silent, shimmering curtain of glowing meteoroids. These objects are perpetually raining into the deep blue atmosphere, their slow, silent descent creating luminous, ephemeral trails against the cosmic backdrop, a constant shower of light.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

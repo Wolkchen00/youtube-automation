@@ -1,0 +1,60 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "I Woke Up on the Great Wall as it Rose — 210 BC"
+  },
+  "synopsis": "The traveler witnesses the monumental effort of building the Great Wall of China, experiencing the vast scale and human toil involved.",
+  "narration": "It is the year 210 BC, and the piercing wind howls across the northern frontier. I stand on rough, newly laid stones, the ground vibrating with the rhythmic clang of hammers. Thousands of laborers, their breath misting in the cold, haul massive rocks up the treacherous slopes, their faces etched with determination. This isn't just a wall; it's a defiant serpent of stone, stretching beyond the horizon, built by sheer human will against an unforgiving land. It’s a testament to an emperor’s ambition, a silent sentinel against the north. This incredible feat of engineering will one day be visible from space, and then I was gone.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opens on a barren, windswept mountain pass in northern China. ihsan_witness, wearing a rough, layered linen tunic, simple trousers, and sturdy leather boots appropriate for a laborer, stands amidst scattered rocks, looking up at a partially constructed section of the Great Wall winding up a distant ridge. The sky is overcast and grey.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera follows ihsan_witness as he walks towards the construction site. Laborers are now clearly visible in the mid-ground, slowly hauling massive stones using ropes and simple wooden rollers up the incline. The sheer scale of the operation is immense, stretching into the rugged terrain.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close-up on a group of workers, their faces grim with effort, as they strain together to lift a massive stone block into place on the wall. Dust and grit fill the air, kicked up by their movements. ihsan_witness, still in his laborer's attire, observes from a respectful distance, his expression somber.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera pulls back and rises steadily, revealing a vast panorama of the wall snaking across dramatic, rugged mountains. Both finished and unfinished sections stretch endlessly into the hazy, atmospheric distance, showcasing the breathtaking scope of the construction. The clouds break slightly, revealing glimpses of a vast sky.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The view continues to track along the wall, showing watchtowers under construction, their wooden scaffolding reaching towards the sky. Below, smoke rises from temporary camps. The sun begins to dip towards the horizon, casting long, dramatic shadows across the undulating landscape of the emerging wall.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_witness, still in his rough layered tunic and trousers, stands alone on a completed section of the wall, looking out at the endless expanse of mountains. The sun is setting, painting the sky in deep oranges and purples, emphasizing the isolation and the monumental human effort embodied by the silent structure.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "THE GREAT WALL RISES",
+    "subtitle": "Northern China — 210 BC"
+  },
+  "hook_shot": 4
+}

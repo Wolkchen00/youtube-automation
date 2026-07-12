@@ -1,0 +1,63 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "I Woke Up at Thermopylae Before the Stand — 480 BC"
+  },
+  "synopsis": "The traveler finds himself in the narrow pass of Thermopylae just before the legendary battle, amidst the stoic Spartan preparations.",
+  "narration": "It is the year 480 BC, and the air in the narrow pass of Thermopylae is heavy with an unspoken tension. I feel the grit of ancient dust underfoot, hear the quiet clink of bronze and leather. Spartan warriors, their red cloaks stark against the rugged landscape, prepare for a stand against an unimaginable horde. The sea glitters deceptively close, a silent witness to the approaching storm. This is a place where courage will be etched into history, a sacrifice that will echo through millennia, long before the famous last stand, and then I was gone.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opens in the narrow, rugged coastal pass of Thermopylae. ihsan_witness, wearing a simple, practical Greek chiton, a leather jerkin, and sturdy sandals, stands amidst sparse rocks and scrub, looking towards the eastern entrance of the pass. The Aegean Sea is visible on one side, steep, rocky cliffs on the other under a bright, clear sky.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera follows ihsan_witness as he walks deeper into the pass. Spartan warriors, identifiable by their iconic red cloaks and Corinthian helmets, are visible in small, disciplined groups, sharpening spears, checking armor, or quietly conversing. Their movements are deliberate and imbued with solemn purpose.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A wide shot from behind the Spartan line, looking down the pass. In the far distance, a vast, dark mass representing the Persian army is just beginning to become discernible, stretching across the plains. The scale of the approaching force is overwhelming, a stark contrast to the small Spartan contingent.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close-up on ihsan_witness's face, still in his Greek chiton and leather jerkin. His expression is a mixture of awe and somber realization as he takes in the sight of the approaching army. His gaze is fixed, unwavering, reflecting the immense gravity of the moment.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The view pans slowly across the faces of several Spartan warriors standing firm, their expressions stoic, resolute, and calm despite the impending doom. The bright sun glints off their bronze shields and helmets, emphasizing their preparedness.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_witness, still in the same simple chiton and jerkin, stands near the cliffs overlooking the pass, looking out towards the shimmering sea and the distant, rugged mountains. The air is still, the calm before the storm. The sun begins to set, casting long, dramatic shadows across the historic landscape, deepening the sense of anticipation.",
+      "seed": null,
+      "characters": [
+        "ihsan_witness"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "THERMOPYLAE PASS",
+    "subtitle": "Greece — 480 BC"
+  },
+  "hook_shot": 3
+}
