@@ -25,7 +25,7 @@ from core import ffmpeg_tools, cost_tracker
 from .bible import Bible, refs_dir, episode_dir, shots_dir, resolve_voice_id
 from .omni_api import register_audio, register_character, generate_omni_shot, build_omni_payload
 from .shots import resolve_shot, resolve_visual_shot, validate_plan, load_plan, plan_summary
-from . import report
+from . import critic, report
 from .voices import is_preset
 
 
@@ -57,6 +57,21 @@ def _generate_visual_clip(engine: str, prompt: str, start_url: str | None,
     # bilinmeyen → Seedance'e düş
     return generate_seedance_video(prompt, first_frame_url=start_url, duration=dur,
                                    aspect_ratio=aspect_ratio, resolution="720p", sound=sound)
+
+
+def _gen_omni_with_fallback(kwargs: dict) -> dict | None:
+    """Omni çekimi üret; sesli çekim başarısızsa sesi düşürüp SESSİZ görsel olarak
+    bir kez daha dene. GÜVENLİK AĞI: içerik filtresi en sık KONUŞAN İNSAN (audio_ids)
+    çekimlerini 'flagged content' diye reddeder — anlatım zaten post'ta eklendiği için
+    seri tamamen durmaz (bir dizinin günlerce sessizce çökmesini engeller)."""
+    result = generate_omni_shot(**kwargs)
+    if (not result or not result.get("url")) and kwargs.get("audio_ids"):
+        logger.warning("⚠️ Sesli çekim başarısız (muhtemelen içerik filtresi) → "
+                       "SESSİZ görsel olarak yeniden deneniyor (ses post-anlatıma bırakılır)")
+        fb_kwargs = dict(kwargs)
+        fb_kwargs["audio_ids"] = []
+        result = generate_omni_shot(**fb_kwargs)
+    return result
 
 
 def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
@@ -459,6 +474,16 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     sdir = shots_dir(slug, number)
     sdir.mkdir(parents=True, exist_ok=True)
 
+    # Critic-QC (opt-in, bible."series"."qc"): bölüm-başı regen tavanı ≈ çekim/2
+    # (PLAN §5: regen bütçesi baz maliyetin +%50'si). qc_budget=None → QC kapalı.
+    qc_cfg = critic.qc_config(bible)
+    qc_budget = None
+    if qc_cfg and not dry_run:
+        per_ep = qc_cfg.get("max_regens_per_episode")
+        qc_budget = {"left": int(per_ep) if per_ep else max(1, round(len(plan["shots"]) / 2))}
+        logger.info(f"🔍 Critic-QC AÇIK — kare={qc_cfg['frames']}, eşik={qc_cfg['artifact_threshold']}, "
+                    f"çekim regen≤{qc_cfg['max_regens_per_shot']}, bölüm regen≤{qc_budget['left']}")
+
     if not dry_run:
         check_credit()  # ücretsiz okuma — başlangıç bakiyesi loglanır
 
@@ -498,35 +523,45 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 kwargs["image_urls"] = [chain_url] + list(kwargs.get("image_urls") or [])
             char_names = [bible.get_character(c).get("name", c)
                           for c in shot.get("characters", []) if bible.get_character(c)]
+            if qc_cfg:
+                for w in critic.lint_prompt(bible, shot, kwargs["prompt"]):
+                    logger.warning(f"🧹 QC-lint çekim {n}: {w}")
             if dry_run:
                 payload = build_omni_payload(**kwargs)
                 logger.info(f"[dry-run] Çekim {n} OMNI ({res['units']} birim):\n"
                             f"{json.dumps(payload, ensure_ascii=False, indent=2)[:700]}")
                 continue
-            result = generate_omni_shot(**kwargs)
-            # GÜVENLİK AĞI: İçerik filtresi en sık KONUŞAN İNSAN (audio_ids) çekimlerini
-            # 'flagged content' diye reddeder. Sesli çekim başarısızsa sesi düşürüp SESSİZ
-            # görsel olarak bir kez daha dene — anlatım zaten post'ta eklendiği için seri
-            # tamamen durmaz (bir dizinin günlerce sessizce çökmesini engeller).
-            if (not result or not result.get("url")) and kwargs.get("audio_ids"):
-                logger.warning("⚠️ Sesli çekim başarısız (muhtemelen içerik filtresi) → "
-                               "SESSİZ görsel olarak yeniden deneniyor (ses post-anlatıma bırakılır)")
-                fb_kwargs = dict(kwargs)
-                fb_kwargs["audio_ids"] = []
-                result = generate_omni_shot(**fb_kwargs)
+            result = _gen_omni_with_fallback(kwargs)
             credits, status, video_url = None, "FAIL", ""
             if result and result.get("url"):
                 video_url = result["url"]
                 credits = result.get("credits")
                 if download_file(video_url, out_file):
-                    prep = _prep_shot_clip(bible, plan, shot, out_file)
-                    shot_offsets[int(n)] = running
-                    running += ffmpeg_tools.get_video_duration(prep)
-                    shot_files.append(prep)
                     status = "ok"
                 if credits is not None:
                     cost_tracker.log_cost(f"series:{slug}", f"omni_ep{number}_shot{n}",
                                           "gemini-omni-video", credits)
+            # Critic-QC (opt-in): bozuk klip kurguya giremez — REDde fix_notes'lu
+            # prompt + taze seed ile otomatik regen; eşiği geçemeyen çekim düşer.
+            if status == "ok" and qc_budget is not None:
+                def _regen_omni(fixed_prompt, _kw=kwargs):
+                    kw = dict(_kw)
+                    kw["prompt"] = fixed_prompt
+                    kw["seed"] = None   # None → generate_omni_shot taze seed üretir
+                    return _gen_omni_with_fallback(kw)
+                qc_path, qc_credits = critic.qc_shot(bible, shot, out_file, kwargs["prompt"],
+                                                     _regen_omni, episode=number, budget=qc_budget)
+                if qc_credits:
+                    cost_tracker.log_cost(f"series:{slug}", f"qc_regen_ep{number}_shot{n}",
+                                          "gemini-omni-video", qc_credits)
+                    credits = (credits or 0) + qc_credits
+                if qc_path is None:
+                    status = "qc_fail"
+            if status == "ok":
+                prep = _prep_shot_clip(bible, plan, shot, out_file)
+                shot_offsets[int(n)] = running
+                running += ffmpeg_tools.get_video_duration(prep)
+                shot_files.append(prep)
             report.append_row(slug, report.make_row(
                 episode=number, shot_n=n, characters=char_names,
                 audio_ids=kwargs["audio_ids"], duration=kwargs["duration"],
@@ -544,6 +579,9 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
 
         # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
         rv = resolve_visual_shot(bible, shot, chain_url=chain_url)
+        if qc_cfg:
+            for w in critic.lint_prompt(bible, shot, rv["prompt"]):
+                logger.warning(f"🧹 QC-lint çekim {n}: {w}")
         if dry_run:
             src = "zincir" if chain_url else ("ortam/figür" if rv["start_image_url"] else "yok")
             logger.info(f"[dry-run] Çekim {n} {shot_engine.upper()} | başlangıç={src} | "
@@ -557,14 +595,30 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             video_url = result["url"]
             credits = result.get("credits")
             if download_file(video_url, out_file):
-                prep = _prep_shot_clip(bible, plan, shot, out_file)
-                shot_offsets[int(n)] = running
-                running += ffmpeg_tools.get_video_duration(prep)
-                shot_files.append(prep)
                 status = "ok"
             if credits is not None:
                 cost_tracker.log_cost(f"series:{slug}", f"{shot_engine}_ep{number}_shot{n}",
                                       shot_engine, credits)
+        # Critic-QC (opt-in): ucuz motorlarda seed parametresi yok — düzeltilmiş
+        # prompt + modelin doğal varyasyonu regen'i çeşitlendirir.
+        if status == "ok" and qc_budget is not None:
+            def _regen_visual(fixed_prompt, _rv=rv, _eng=shot_engine):
+                return _generate_visual_clip(_eng, fixed_prompt, _rv["start_image_url"],
+                                             _rv["duration"], bible.aspect_ratio,
+                                             bible.resolution, sound=bible.native_audio)
+            qc_path, qc_credits = critic.qc_shot(bible, shot, out_file, rv["prompt"],
+                                                 _regen_visual, episode=number, budget=qc_budget)
+            if qc_credits:
+                cost_tracker.log_cost(f"series:{slug}", f"qc_regen_ep{number}_shot{n}",
+                                      shot_engine, qc_credits)
+                credits = (credits or 0) + qc_credits
+            if qc_path is None:
+                status = "qc_fail"
+        if status == "ok":
+            prep = _prep_shot_clip(bible, plan, shot, out_file)
+            shot_offsets[int(n)] = running
+            running += ffmpeg_tools.get_video_duration(prep)
+            shot_files.append(prep)
         report.append_row(slug, report.make_row(
             episode=number, shot_n=n, characters=[], audio_ids=[],
             duration=rv["duration"], resolution="720p", seed=None,

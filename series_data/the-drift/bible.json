@@ -17,6 +17,10 @@
     "upscale": {
       "enabled": true,
       "factor": "2"
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "Dreamcore channel: smooth SURREAL TRANSFORMATIONS of places are the INTENDED style — do NOT count deliberate dreamlike morphing as a defect. Fail only on broken rendering: glitch frames, duplicated/shattered geometry that reads as an error, visible humans with broken anatomy, or burned-in text/watermarks."
     }
   },
   "art_style": "Photorealistic cinematic dreamscape shot on anamorphic 35mm film, razor-sharp ultra-detailed 4K clarity, muted desaturated color grade with soft golden highlights, volumetric fog and atmospheric haze, vast epic scale, slow continuous forward camera drift with subtle floating motion, seamless surreal transformations of real-world places, liminal dreamcore mood, soft cinematic lighting, photoreal textures, no on-screen text, no watermark, no captions, vertical 9:16 composition.",

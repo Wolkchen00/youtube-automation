@@ -206,6 +206,21 @@ class Bible:
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
+    def qc(self) -> dict:
+        """Critic-QC katmanı (opt-in) — director-studio PLAN §5 Faz 0 yaması.
+        Etkinse her üretilen çekim Gemini vision denetiminden geçer (anatomi /
+        yüz-referans eşleşmesi / kıyafet / dönem / gömülü yazı / artifact skoru);
+        RED klip fix_notes'lu prompt + yeni seed ile otomatik yeniden üretilir
+        (çekim başına maks 2, bölüm başına ~çekim/2). Eşiği geçemeyen çekim
+        bölümden düşer + Telegram'a kare albümü gider. Denetim <$0.01/video;
+        kie'de başarısız görev 0 kredi olduğundan yalnız 'başarılı-ama-bozuk'
+        üretim regen kredisi yakar. Ayarlar (varsayılanlar critic.QC_DEFAULTS):
+        frames, artifact_threshold, max_regens_per_shot, notes (kanal-özgü
+        denetim talimatı). Örn: "qc": {"enabled": true}"""
+        v = self.data["series"].get("qc") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
     def audio_smooth(self) -> bool:
         """True ise çekim sınırlarında ses YUMUŞATILIR: her çekimin sesi loudness
         eşitlenir + kısa afade ile in/out yapılır → geçişlerde 'pop'/seviye sıçraması

@@ -13,6 +13,10 @@
       "enabled": true,
       "duration": 1.3,
       "offset_in_shot": 1.5
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "This channel must contain NO people, human figures or faces anywhere — any clearly visible human is a fail (distant city lights/architecture are fine). Alien terrain, strange geology and exotic skies are INTENDED and correct; judge only broken rendering: melting/duplicated geometry, glitch frames, burned-in text."
     }
   },
   "art_style": "Photorealistic cinematic alien-planet documentary, epic IMAX scale and awe, volumetric atmosphere and clouds, dramatic natural lighting with god rays, deep-space backdrop with crisp stars, rich filmic color grading, hyper-detailed terrain, ultra-smooth continuous one-take camera motion with no cuts, vertical 9:16 composition, no people and no faces anywhere (any civilization appears only as distant aerial architecture and lights), no on-screen text, no watermarks.",

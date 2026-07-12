@@ -16,6 +16,10 @@
     "title_card": {
       "enabled": true,
       "duration": 3.0
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "The recurring man is the channel's real face — his head, neck and body posture must be anatomically perfect in every frame (a twisted or backwards head is an automatic fail). He must wear ONLY period-appropriate clothing for the era in the prompt; any modern garment, glasses, watch or object is a fail. He must never appear to speak or lip-sync."
     }
   },
   "art_style": "Cinematic living-history — a photoreal first-person time-travel documentary in 9:16 vertical. Each shot looks like a single continuous moment captured inside a meticulously reconstructed REAL place and year in human history: authentic period architecture, costumes, tools, materials, weather and light, rich with dust, haze, atmosphere and depth. Natural, motivated lighting only (sun, torch, fire, candle, overcast sky, lamplight). Shallow depth of field, subtle anamorphic feel, fine film grain, slow deliberate camera moves; immersive eye-level and over-the-shoulder framing that puts the viewer INSIDE the scene. Grounded, realistic and emotionally warm — like a prestige historical film, never a cartoon, never a video game. A single recurring man — 'the traveler', the channel's face — moves quietly through each scene as a silent witness; he NEVER speaks, lip-syncs or mouths words (his voice is added afterward as narration). No captions, no subtitles, no on-screen text, no logos or watermarks, and NO modern objects or anachronisms — only what truly belonged to that exact time and place. Intense, immersive and awe-inspiring but NEVER gory, bloody or graphic — the power lives in scale, humanity and the weight of the moment, not in violence.",

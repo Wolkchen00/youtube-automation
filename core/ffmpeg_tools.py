@@ -82,6 +82,32 @@ def extract_last_frame(video_path: str | Path, output_path: str | Path = None) -
     return None
 
 
+def sample_frames(video_path: str | Path, count: int = 8, width: int = 720,
+                  out_dir: str | Path = None, prefix: str = "qcframe") -> list[Path]:
+    """Klip boyunca eşit aralıklı `count` kare çıkar (JPEG, `width` px genişlik).
+
+    Critic-QC için: kareler Gemini vision'a denetim girdisi olur. Kare sayısı
+    süreden bağımsız sabittir — kısa klipte sıklaşır, uzun klipte seyrekleşir.
+    """
+    video_path = Path(video_path)
+    out_dir = Path(out_dir) if out_dir else video_path.parent
+    out_dir.mkdir(parents=True, exist_ok=True)
+    pattern = out_dir / f"{prefix}_%02d.jpg"
+    duration = max(get_video_duration(video_path), 0.5)
+    fps = count / duration
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", str(video_path),
+             "-vf", f"fps={fps:.6f},scale={int(width)}:-2",
+             "-frames:v", str(int(count)), "-q:v", "3", str(pattern)],
+            capture_output=True, check=True, timeout=120
+        )
+    except Exception as e:
+        logger.warning(f"⚠️ Frame sampling failed ({video_path.name}): {e}")
+    frames = sorted(out_dir.glob(f"{prefix}_*.jpg"))
+    return [f for f in frames if f.stat().st_size > 0]
+
+
 def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Path = None) -> Path:
     """Concatenate videos without transitions."""
     import shutil
