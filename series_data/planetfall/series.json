@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 15,
-  "next_part": 10,
+  "next_part": 11,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -115,6 +115,17 @@
         "youtube"
       ],
       "published_at": "2026-07-11T17:54:26.765586+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep10/ep10_narrated_music_hooked.mp4",
+      "subtitle": "LUMINA: Shard Spire",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-12T17:51:22.531282+00:00"
     }
   },
   "auto_replenish": {
