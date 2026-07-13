@@ -1,0 +1,66 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "Your Car Just Sank — You Have 60 Seconds"
+  },
+  "hook_shot": 2,
+  "title_card": {
+    "title": "SINKING CAR",
+    "subtitle": "60 Seconds to Get Out"
+  },
+  "narration": "The bridge rail gives way, and your car hits the river hard. You have about sixty seconds before it goes under. First instinct: push the door. Wrong — the water pressure seals it shut. Seatbelt off. Window — before the water reaches it, because electric switches die fast. Can't open it? Strike the corner of the glass, not the center. Children first, oldest to youngest — they can hold on. Then you're out, kicking for the light. The car is gone in a minute. Could you have done it? Be honest below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "Interior of a modern sedan crossing a rain-slicked concrete bridge on an overcast day, wipers beating. The survivor — a calm olive-skinned man with a full black beard, wearing a plain grey zip-up commuter jacket over a dark t-shirt (scenario-appropriate driving clothes) — drives relaxed, one hand on the wheel. Through the windshield a truck ahead swerves; his eyes go wide and he wrenches the wheel. Ends on the guardrail rushing at the hood.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "fact": "60 SECONDS BEFORE IT SINKS",
+      "prompt": "Wide exterior from the riverbank: a silver sedan smashes through the bridge guardrail and plunges nose-first into the wide grey river below, throwing up a huge column of spray. The car slams the surface, bobs once, and begins settling hood-first, water sheeting over the paint, ripples spreading. Ends on the car sinking to its windows in the current.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "DOORS WON'T OPEN UNDERWATER",
+      "prompt": "Car interior, tilted nose-down: cold green river water rushes in at the footwells and climbs fast. The survivor — the same bearded man in his grey commuter jacket, now soaked at the sleeves — throws his shoulder against the driver door, once, twice; it does not move an inch, held shut by the pressure outside the glass, dark water pressing at the window. His face shifts from panic to hard focus. Ends on him abandoning the door and reaching for the seatbelt.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "BREAK THE CORNER, NOT THE CENTER",
+      "prompt": "Car interior, water at chest height, everything tilting: the survivor — the same bearded man in his soaked grey commuter jacket, seatbelt now off — jabs the window switch: dead. He grips the metal seat-headrest post and drives it hard into the CORNER of the side window; the glass blooms into a spiderweb of cracks. Ends on the crazed window bulging as water starts spraying through the fractures.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "SWIM TO THE LIGHT",
+      "prompt": "Underwater in murky green river water: the sedan sinks slowly below, headlights still glowing faint. The survivor — the same bearded man, grey jacket billowing — pulls himself out through the shattered side window, pushes off the door frame and kicks upward, a stream of silver bubbles rising past his face toward the wavering pale light of the surface far above. Ends on his silhouette rising into the brightening water.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "The river surface near the bank: the survivor — the same bearded man in his soaked grey jacket — bursts up through the surface gasping, hair plastered to his forehead, and strokes heavily toward the muddy bank as the current carries him. Behind him, out in the river, the last corner of the silver car's roof slips under in a boil of foam. He drags himself onto the wet stones on hands and knees. Ends on him coughing river water, alive, rain still falling.",
+      "seed": null
+    }
+  ]
+}

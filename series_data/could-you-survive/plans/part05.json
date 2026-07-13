@@ -1,0 +1,67 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Lost in the Desert with One Bottle of Water"
+  },
+  "hook_shot": 4,
+  "title_card": {
+    "title": "DESERT",
+    "subtitle": "One Bottle · 110 Degrees"
+  },
+  "narration": "Your car dies on a back road, thirty miles from anywhere, and the gauge outside reads a hundred and ten. One bottle of water. First decision: start walking? Wrong — the car is shade, and it's visible from the air; you are not. Second: sip the water now or save it? Drink when you're thirsty — dehydration doesn't ration. You ration sweat instead: stay still through the day, signal with the mirror, move only at night. Rescue finds the car first — and you beside it. Would you have walked? Be honest in the comments.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "NO SIGNAL · 30 MILES OUT",
+      "prompt": "A lone dusty sedan dead on the shoulder of an empty desert back road at midday, hood propped open with a thin curl of steam. The survivor — a calm olive-skinned man with a full black beard, wearing a loose light-beige long-sleeve shirt, tan hiking trousers and a wide-brim sun hat (scenario-appropriate desert clothing) — stands beside it holding his phone high toward the white sky, then lowers it, defeated. Heat shimmer bends the ruler-straight road to both horizons. Ends on him turning a slow circle: nothing but creosote flats in every direction.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "YOUR CAR IS VISIBLE — YOU ARE NOT",
+      "prompt": "The survivor — the same bearded man in his light-beige long-sleeve shirt, tan trousers and wide-brim hat — stands at the front bumper looking down the endless empty road, one boot already angled to start walking. He glances back at the dusty car, jaw working, weighing it. From high above, a brief aerial-style wide: the car a bright glinting speck on the vast tan desert, the man an invisible dot beside it. Ends back at eye level on him deliberately stepping BACK toward the car.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "SIGNAL WITH THE MIRROR",
+      "prompt": "In the hard shade beside the car: the survivor — the same bearded man in his light-beige shirt and wide-brim hat, sleeves rolled down against the sun — kneels and works a side mirror free from the car, then angles the small mirror in his hands, catching the sun and throwing a sharp white flash across the desert toward the horizon, again and again in a steady rhythm. Dust hangs golden in the shade line. Ends on the mirror flash blazing directly into the lens for a frame.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "fact": "110 IN THE SHADE",
+      "prompt": "Vast wide shot of the empty desert at peak afternoon: the white sun hammers a cracked clay flat scattered with creosote and a single dead road cutting to the horizon, the lone car a tiny glinting speck on it. The entire landscape ripples under violent heat shimmer; a dust devil twists lazily across the distance and collapses. High above, a single hawk circles as a slow dark silhouette in the bleached sky. Ends on the sun flaring over the trembling horizon line.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "RATION SWEAT, NOT WATER",
+      "prompt": "Deep shade against the car's flank, late afternoon: the survivor — the same bearded man, light-beige shirt dark with sweat at the collar, wide-brim hat tipped low — sits utterly still against the door, conserving himself, and drinks a real, unhurried swallow from a clear water bottle, eyes closed. He caps it calmly and rests it in his lap, chest rising slow and controlled. Ends on his stillness while the heat shimmers beyond the shade line.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "Desert dusk, the sky a cooling violet-orange, the flats sinking into blue shadow: the survivor — the same bearded man in his light-beige shirt, hat pushed back — stands beside the car with its hazard lights blinking amber into the gloom. Far down the road, a helicopter searchlight sweeps the desert floor, growing closer. He raises the small mirror and flashes the last of the dusk light toward it, steady and deliberate. Ends on the searchlight beam sweeping across and locking onto him and the car.",
+      "seed": null
+    }
+  ]
+}

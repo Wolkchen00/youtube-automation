@@ -1,0 +1,67 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Could You Survive a Sinking U-Boat? — 1943"
+  },
+  "hook_shot": 2,
+  "title_card": {
+    "title": "U-BOAT · 1943",
+    "subtitle": "200 Feet Down · Depth Charges Above"
+  },
+  "narration": "It is 1943, and you are two hundred feet under the Atlantic when the depth charges start. The hull groans; rivets weep seawater. Lights die. First choice: rush the escape hatch now? Wrong — you wait for the pounding to pass, or the sea above is still exploding. Water reaches the batteries and the air turns sharp — chlorine. Now you go. At the hatch you exhale all the way up; hold your breath from this depth and your lungs burst. Three out of four U-boat men never came home. Would you have made it? Tell me below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "200 FEET DOWN",
+      "prompt": "Interior of a German U-boat, 1943, bathed in dim red battle lighting: a claustrophobic tunnel of pipes, valves, gauges and cables glistening with condensation. The survivor — a calm olive-skinned man with a full black beard, wearing a coarse dark-grey naval wool sweater and dark work trousers of a 1943 submarine crewman (period-accurate; NO modern clothing) — grips an overhead pipe among two other crewmen, all frozen, all eyes turned upward, listening to a faint churning above. Ends on a single distant metallic ping echoing through the hull.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "fact": "DEPTH CHARGES",
+      "prompt": "Inside the 1943 U-boat control room: a colossal detonation rocks the entire hull sideways — hanging lamps swing wildly and burst, glass gauge faces crack, dust and paint flakes rain from the overhead, loose gear flies. A second blast tilts the deck; thin jets of seawater burst from a pipe joint and hiss across the compartment in the strobing, failing light. Ends on the red lights flickering out into darkness cut only by one swinging hand lamp.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "MOVE NOW AND YOU DIE",
+      "prompt": "The dark flooded compartment, lit by a single handheld lamp beam through drifting haze: the survivor — the same bearded man in his coarse dark-grey 1943 naval sweater, sleeves soaked — stands in shin-deep black water with two crewmates, one hand raised in a silent HOLD gesture toward the escape trunk ladder, restraining a younger crewman who strains toward it. All faces tilted up, jaws set, waiting as muffled blasts still thud somewhere above. Ends on the water at their shins trembling with another distant detonation.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "SEAWATER + BATTERIES = CHLORINE",
+      "prompt": "The 1943 U-boat battery compartment hatch: a sickly pale greenish haze seeps up through floor gratings into the lamp beam, curling like smoke through the dark air. The survivor — the same bearded man in his dark-grey naval wool sweater — presses a wet cloth over his nose and mouth with one hand and with the other points sharply toward the escape trunk, eyes urgent above the cloth. Crewmen behind him cover their faces and move. Ends on the green haze thickening as the lamp beam swings toward the ladder.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "EXHALE ALL THE WAY UP",
+      "prompt": "Inside the vertical escape trunk of the 1943 U-boat, lit from below by a fading lamp: the survivor — the same bearded man in his dark-grey naval sweater, hair plastered down — climbs the narrow steel ladder as cold seawater floods up around his chest, then his shoulders. He tilts his head back in the last air pocket, takes a final breath, and spins the hatch wheel overhead. Ends on the hatch swinging open into black water and his body pushing up into it.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "Open Atlantic water at night, seen from below: the survivor — the same bearded man in his dark 1943 naval sweater — rises through the black toward a faint silver shimmer of moonlight far above, a steady thin stream of bubbles flowing from his lips the entire way up as he exhales continuously. The dark hull of the U-boat falls away beneath into the abyss. He breaks the surface under a cold moonlit sky, gasping among the swells. Ends on his face above the black water, breathing, alive and alone in the vast night sea.",
+      "seed": null
+    }
+  ]
+}

@@ -64,6 +64,8 @@ _WARDROBE_WORDS = (
     "tunic", "toga", "robe", "armor", "armour", "uniform", "cloak", "coat",
     "suit", "dress", "vest", "shirt", "trousers", "gown", "chiton", "kaftan",
     "loincloth", "period-appropriate", "period clothing", "costume",
+    "jacket", "sweater", "beanie", "boots", "sandals", "hat", "gloves",
+    "wetsuit", "parka", "jeans", "outfit",
 )
 
 _RISKY_PATTERNS = (
@@ -83,7 +85,9 @@ _RISKY_PATTERNS = (
 def lint_prompt(bible: Bible, shot: dict, prompt: str) -> list[str]:
     """Üretimden önce ücretsiz denetim. Uyarı listesi döndürür (prompt'u DEĞİŞTİRMEZ).
     07 Tem dersi: character_id YÜZÜ kilitler, KIYAFETİ kilitlemez — insanlı çekimde
-    kıyafet tarifsiz prompt en sık bozulma kaynağıdır."""
+    kıyafet tarifsiz prompt en sık bozulma kaynağıdır.
+    NOT: buraya HAM çekim promptu verilmeli (art_style'sız) — art_style'lar genel
+    'clothing' kuralları içerir ve birleşik metinde kıyafet denetimini köreltir."""
     warns: list[str] = []
     p = (prompt or "").lower()
     if shot.get("characters") and not any(w in p for w in _WARDROBE_WORDS):

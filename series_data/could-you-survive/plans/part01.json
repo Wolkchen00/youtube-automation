@@ -1,0 +1,67 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Could You Survive an Avalanche? — 15 Minutes of Air"
+  },
+  "hook_shot": 3,
+  "title_card": {
+    "title": "AVALANCHE",
+    "subtitle": "15 Minutes of Air"
+  },
+  "narration": "The mountain cracks like thunder — and it's above you. A wall of snow hits at eighty miles an hour. When it stops, it sets around you like concrete. You can't tell up from down. Here's your first decision: do you dig immediately? Wrong — first you spit. Gravity pulls the drool down; you dig the other way. You have maybe fifteen minutes of air, so you make a pocket in front of your face and slow your breathing. Rescuers found you because your partner watched where you vanished. Would you have stayed calm? Tell me below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "High alpine backcountry on a brilliant winter morning. The survivor — a calm olive-skinned man with a full black beard, wearing a bright red-and-black ski touring jacket, black ski trousers, gloves and a grey beanie (scenario-appropriate winter gear) — stands on a vast untouched slope, ski poles in hand, and stops mid-stride: somewhere above, a deep muffled WHUMP. He turns his head slowly uphill. Ends on his eyes narrowing at a hairline crack racing across the snow above him.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "80 MPH IN SECONDS",
+      "prompt": "Wide shot of the slope: the snowpack fractures along a jagged line and an avalanche releases — a boiling white wall gathering speed, trees snapping at its edge. The survivor — the same bearded man in his bright red-and-black ski jacket, black ski trousers, gloves and grey beanie — is a small figure below, turning to escape at an angle, powder spray already reaching his legs. Ends on the white wall towering over the frame.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "fact": "SNOW SETS LIKE CONCRETE",
+      "prompt": "Inside the avalanche: a churning white-and-grey chaos of snow blocks, ice crystals and shadow, tumbling violently with immense force and a deafening roar implied by the motion. Light flickers as the surface vanishes and reappears. The tumbling gradually slows, the chaos compresses, and everything grinds to a heavy, absolute stillness. Ends on packed snow pressing against the lens in near-darkness, a faint blue glow from one side.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "15 MINUTES OF AIR",
+      "prompt": "Buried under the snow, dim blue-white light filtering through the pack. The survivor — the same bearded man in his red-and-black ski jacket and grey beanie, face dusted with snow — lies encased in hard snow, only his head and one gloved hand with room to move. Controlled fear on his face; he forces his breathing slow, and with the gloved hand carves a small air pocket in front of his mouth. Ends on his breath fogging in the tiny blue cavity.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "SPIT — THEN DIG THE OTHER WAY",
+      "prompt": "Under the snow, close on the survivor — the same bearded man in his red-and-black ski jacket, snow-dusted beard, in the dim blue pocket. He lets saliva fall from his lips and watches it drop toward his chin — DOWN is that way. His eyes flick the opposite direction with new certainty and his gloved hand begins driving upward through the pack, snow crumbling grain by grain, a faint warm glow strengthening above. Ends on a thin shaft of daylight breaking through onto his face.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "YOUR PARTNER IS YOUR RESCUE",
+      "prompt": "The debris field of the avalanche under a clearing sky. A second skier in a blue jacket digs hard with a compact shovel where a gloved hand sticks out of the snow. The survivor — the bearded man in his red-and-black ski jacket and grey beanie — is pulled up out of the hole, collapsing onto the surface, chest heaving, snow falling from his shoulders. He sits back against the slope, alive, staring at the mountain. Ends on his long exhale steaming in the cold air.",
+      "seed": null
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Trapped by a Wildfire — Could You Outrun It?"
+  },
+  "hook_shot": 3,
+  "title_card": {
+    "title": "WILDFIRE",
+    "subtitle": "It Runs Uphill Faster Than You"
+  },
+  "narration": "You smell it before you see it — smoke rolling down the trail. The wind just turned, and the fire is coming. Instinct says run uphill to the ridge. That instinct kills: a fire can double its speed on a slope, faster than any runner. You go sideways and down, toward what has already burned. Firefighters call it the black — nothing left there to burn. Cover your mouth, stay low, cross onto scorched ground as the front roars past. Radiant heat kills before flames ever touch you. What would you have done? Tell me below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "A dry pine forest trail in late golden afternoon. The survivor — a calm olive-skinned man with a full black beard, wearing a khaki hiking shirt, olive hiking trousers, a small daypack and trail boots (scenario-appropriate hiking clothes) — walks the trail, then slows and lifts his head, nostrils flaring. A thin grey haze is drifting between the trunks ahead, and dry needles skitter past his boots as the wind shifts direction. Ends on his gaze locking onto the haze thickening down-trail.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": [],
+      "environment": null,
+      "fact": "FIRE DOUBLES ITS SPEED UPHILL",
+      "prompt": "Wide shot across a forested valley: behind the far ridge an angry orange glow pulses under a towering column of brown-black smoke that leans with the wind. Birds burst from the canopy in scattering flocks. Embers drift across the frame like fireflies, and the treetops along the ridge begin to silhouette against the growing light. Ends on the smoke column boiling higher and blotting the sun into a dim red disc.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "characters": [],
+      "environment": null,
+      "fact": "RADIANT HEAT KILLS FIRST",
+      "prompt": "The fire front crests the ridge: whole pine crowns ignite like torches in sequence, flame lengths towering above the trees, a blizzard of embers streaming ahead of the front on the wind, heat shimmer bending the air. The fire pours downhill-sideways through the forest with terrifying liquid speed, smoke churning orange from within. Ends on a wall of flame consuming the frame's upper half while the lower trail still lies in shadow.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "GO SIDEWAYS AND DOWN",
+      "prompt": "The survivor — the same bearded man in his khaki hiking shirt, olive trousers and daypack — runs with controlled, natural strides ACROSS the slope and downhill, away from the ridge, forearm raised across his mouth and nose, eyes squinting through drifting smoke. Embers land and wink out on the trail around him; the orange glow lights the smoke behind and above. Ends on him vaulting a fallen log toward darker, burnt ground below.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "fact": "INTO THE BLACK",
+      "prompt": "Edge of an already-burned area: charred black earth, smoking stumps, thin grey ash drifting like snow. The survivor — the same bearded man in his khaki hiking shirt and olive trousers, now ash-smudged — crouches low and moves onto the scorched ground, one hand near the earth, mouth covered with his collar. Beyond the black's edge, the main fire front roars past through the unburned green forest, huge and bright. Ends on him kneeling low in the black as the firelight sweeps by.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["ihsan_survivor"],
+      "environment": null,
+      "prompt": "After the front has passed: a smoking black landscape under an orange-grey sky, small flames still flickering on distant stumps. The survivor — the same bearded man, khaki shirt ash-streaked, face smudged — rises slowly to his feet in the burned clearing, lowers his collar from his mouth and watches the fire's glow recede along the far ridge. Fine ash falls around him like grey snow. Ends on his steady, exhausted breathing as he stands alive in the black.",
+      "seed": null
+    }
+  ]
+}

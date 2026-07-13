@@ -524,7 +524,8 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             char_names = [bible.get_character(c).get("name", c)
                           for c in shot.get("characters", []) if bible.get_character(c)]
             if qc_cfg:
-                for w in critic.lint_prompt(bible, shot, kwargs["prompt"]):
+                # HAM çekim promptu — art_style'ın genel 'clothing' metni denetimi köreltmesin
+                for w in critic.lint_prompt(bible, shot, shot.get("prompt") or ""):
                     logger.warning(f"🧹 QC-lint çekim {n}: {w}")
             if dry_run:
                 payload = build_omni_payload(**kwargs)
@@ -580,7 +581,8 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
         # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
         rv = resolve_visual_shot(bible, shot, chain_url=chain_url)
         if qc_cfg:
-            for w in critic.lint_prompt(bible, shot, rv["prompt"]):
+            # HAM çekim promptu — art_style'ın genel 'clothing' metni denetimi köreltmesin
+            for w in critic.lint_prompt(bible, shot, shot.get("prompt") or ""):
                 logger.warning(f"🧹 QC-lint çekim {n}: {w}")
         if dry_run:
             src = "zincir" if chain_url else ("ortam/figür" if rv["start_image_url"] else "yok")

@@ -1,21 +1,17 @@
-name: Time Witness Daily
+name: Could You Survive Daily
 
-# 'I Woke Up In History' (time-witness) GARANTİLİ günlük şeridi — sentinalihsandaily kanalının
-# YENİ korku-DIŞI ana serisi (İhsan kararı 2026-07-07: "korku olmasın, bambaşka seri, en çok
-# tıklanan/aranan tarz"). Birinci-şahıs tarih POV antolojisi: İhsan her bölüm başka bir gerçek
-# tarihsel anda uyanır. Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır:
-# her gün sıradaki bölümü üretir + 3 platforma (YT/IG/TikTok) yayınlar. Çifte üretim olmasın diye
-# time-witness series.json'da priority=999. Eski night-archive.yml şeridi (aynı 18:30 slotu)
-# paused edildiği için devre dışıdır → yarış yok.
+# 'Could You Survive' GARANTİLİ günlük şeridi — sentinalihsandaily kanalının YENİ ana serisi
+# (İhsan kararı 2026-07-12: time-witness "sadece tarih anlatıyor, etkileşim yok" → PIVOT;
+# yeni konsept = ikinci-şahıs hayatta-kalma karar POV'u, İhsan yüzü + Algieba anlatım).
+# Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır: her gün sıradaki bölümü
+# üretir + 3 platforma (YT/IG/TikTok) yayınlar. Çifte üretim olmasın diye could-you-survive
+# series.json'da priority=999. Eski time-witness.yml şeridi (aynı 18:30 slotu) paused edildiği
+# için devre dışıdır → yarış yok. Critic-QC bible'da AÇIK (bozuk klip yayına çıkamaz).
+# Saat düzeni: ana koşu 14:30 UTC → planetfall 16:30 UTC → bu koşu 18:30 UTC → drowned 20:30 UTC.
 
 on:
-  # 2026-07-12: PAUSED — İhsan kararı: "sadece tarih anlatıyor, etkileşim yok" → sentinalihsandaily
-  # kanalı could-you-survive ('Could You Survive', hayatta-kalma karar POV'u) serisine devredildi;
-  # günlük cron devre dışı (18:30 slotu could-you-survive.yml'da). time-witness geri istenirse
-  # aşağıdaki schedule'ı aç + could-you-survive.yml schedule'ını kapat + iki series.json'daki
-  # status'ları takasla (tek kanal = tek aktif seri, günde-1 kilidi).
-  # schedule:
-  #   - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
+  schedule:
+    - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
   workflow_dispatch:
 
 permissions:
@@ -57,13 +53,13 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni tarih bölümleri yazar — kredi harcamaz)
-        run: python -X utf8 -m series.replenish --series time-witness 2>&1 | tee logs/time_witness_replenish.log
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni hayatta-kalma bölümleri yazar — kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series could-you-survive 2>&1 | tee logs/could_you_survive_replenish.log
 
-      - name: Produce + publish (Time Witness sıradaki bölüm)
+      - name: Produce + publish (Could You Survive sıradaki bölüm)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -X utf8 -m series.series_runner --series time-witness 2>&1 | tee logs/time_witness_run.log
+        run: python -X utf8 -m series.series_runner --series could-you-survive 2>&1 | tee logs/could_you_survive_run.log
 
       - name: Persist series state
         if: always()
@@ -74,7 +70,7 @@ jobs:
             git pull --rebase --autostash origin main || true
             git add series_data/ || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
-            git commit -m "chore: time-witness durumunu ilerlet [skip ci]" || true
+            git commit -m "chore: could-you-survive durumunu ilerlet [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
           done
 
@@ -82,6 +78,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: time-witness-logs-${{ github.run_number }}
+          name: could-you-survive-logs-${{ github.run_number }}
           path: logs/
           retention-days: 7
