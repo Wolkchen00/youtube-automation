@@ -7,7 +7,7 @@ Uploads local images to ImgBB for use as Kie AI reference URLs.
 import requests
 from pathlib import Path
 
-from .config import IMGBB_API_KEY, IMGBB_UPLOAD_URL, logger
+from .env import IMGBB_API_KEY, IMGBB_UPLOAD_URL, logger
 
 
 def upload_to_imgbb(local_path: str | Path) -> str | None:

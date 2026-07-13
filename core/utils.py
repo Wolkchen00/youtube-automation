@@ -6,7 +6,7 @@ import re
 import requests
 from pathlib import Path
 
-from .config import logger
+from .env import logger
 
 
 def download_file(url: str, save_path: str | Path) -> Path | None:

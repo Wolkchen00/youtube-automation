@@ -7,7 +7,7 @@ Merge clips, add crossfades, create seamless loops, export to 9:16 vertical.
 import subprocess
 from pathlib import Path
 
-from .config import (
+from .env import (
     FFMPEG_CRF, FFMPEG_PRESET, FFMPEG_FPS,
     FFMPEG_AUDIO_BITRATE, CROSSFADE_DURATION,
     logger

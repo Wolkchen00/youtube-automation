@@ -15,7 +15,7 @@ from pathlib import Path
 
 import google.generativeai as genai
 
-from .config import GEMINI_API_KEY, PROJECT_ROOT, logger
+from .env import GEMINI_API_KEY, PROJECT_ROOT, logger
 
 NARRATION_CACHE = PROJECT_ROOT / "assets" / "narration"
 

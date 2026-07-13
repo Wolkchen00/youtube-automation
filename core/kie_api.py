@@ -11,7 +11,7 @@ import requests
 
 from pathlib import Path
 
-from .config import (
+from .env import (
     KIE_AI_API_KEY,
     KIE_AI_CREATE_TASK, KIE_AI_RECORD_INFO, KIE_AI_CREDIT, KIE_AI_FILE_UPLOAD,
     DEFAULT_IMAGE_MODEL, DEFAULT_VIDEO_MODEL, DEFAULT_VIDEO_MODEL_T2V, DEFAULT_VIDEO_MODE,

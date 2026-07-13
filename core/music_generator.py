@@ -11,7 +11,7 @@ SDK: google-genai
 import os
 from pathlib import Path
 
-from .config import GEMINI_API_KEY, PROJECT_ROOT, logger
+from .env import GEMINI_API_KEY, PROJECT_ROOT, logger
 
 # Channel-specific music prompts.
 # NOTE: these play as a CONTINUOUS bed under the whole episode (looped + faded),

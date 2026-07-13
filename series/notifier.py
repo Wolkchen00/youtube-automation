@@ -13,7 +13,7 @@ import os
 import json
 import requests
 
-from core.config import logger
+from core.env import logger
 
 _API = "https://api.telegram.org/bot{token}/{method}"
 

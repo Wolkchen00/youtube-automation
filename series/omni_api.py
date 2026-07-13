@@ -16,7 +16,7 @@ import time
 import requests
 
 from core.kie_api import create_task, _headers, ServerError
-from core.config import (
+from core.env import (
     OMNI_MODEL, OMNI_DEFAULT_RESOLUTION, OMNI_DEFAULT_ASPECT,
     OMNI_VALID_DURATIONS, OMNI_MAX_REF_UNITS,
     KIE_AI_OMNI_AUDIO, KIE_AI_OMNI_CHARACTER, KIE_AI_RECORD_INFO,
