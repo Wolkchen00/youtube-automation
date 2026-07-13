@@ -11,7 +11,7 @@
   ],
   "hashtags": "#survival #couldyousurvive #whatwouldyoudo #pov #survivaltips #howtosurvive #disaster #adventure #shorts #fyp",
   "total_parts": 5,
-  "next_part": 1,
+  "next_part": 2,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -34,5 +34,17 @@
     "title_style": "a second-person, search-friendly YouTube title in the pattern 'Could You Survive <deadly situation>?' or '<Deadly situation> — You Have <hard number>' (e.g. 'Could You Survive an Avalanche? 15 Minutes of Air', 'Your Car Just Sank — You Have 60 Seconds'). Concrete danger + a hard number when possible, challenge-driven, max 75 characters. No hashtags, no surrounding quotes, no clickbait punctuation.",
     "brief": "Sonsuz ikinci-şahıs HAYATTA KALMA antolojisi. Her bölüm izleyiciyi ('you') — ekranda kanalın yüzü 'ihsan_survivor' ile temsil edilir — GERÇEK, yüksek-ilgi bir ölüm-kalım durumunun içine bırakır ve KARAR KARAR yaşatır. DEĞİŞMEZ KURALLAR: (1) Her bölüm FARKLI bir gerçek tehlike seçer ve kategoriyi bölümler arasında ROTASYONLA değiştirir: dağ/kar, açık su/boğulma, yangın, aşırı sıcak/soğuk, vahşi hayvan karşılaşması, kentsel/mekanik kaza (asansör, tren, yıldırım), ve ara sıra tarihsel felaketin içindeki hayatta-kalma anı (1943 denizaltısı, 1912 filika gibi). Milyonların zaten arattığı, öğretici değeri kanıtlanmış senaryolar seç ('could you survive an avalanche', 'how to escape a sinking car' gibi aramaların karşılığı). (2) Anlatım = İKİNCİ şahıs ('you'), ŞİMDİKİ zaman, MrBallen gerilimi ama öğretici PAYOFF'lu: tehlikeyi ve süreyi/sayıyı adlayan tok bir KANCA cümlesiyle AÇ; ortada izleyiciye 1-2 gerçek KARAR sorusu sor ('do you dig immediately?' gibi) ve yanlış seçimin NEDEN öldürdüğünü söyle; DOĞRU hamleyi ve nedenini ver — payoff GERÇEK, kanıtlanabilir hayatta-kalma bilgisidir (uydurma istatistik YASAK: kesin sayıyı yalnız eminsen kullan, değilsen 'most people' de); SON cümle HER ZAMAN izleyiciye yorum sorusudur ('What would you have done? Tell me below.' — bölümden bölüme çeşitlendir). 82-96 kelime; son cümle ~44. saniyeye kadar bitmeli. (3) 'ihsan_survivor' en az 3-4 çekimde görünür; kıyafeti SENARYOYA UYGUN (kayak montu, sürücü kıyafeti, yürüyüş kıyafeti, dönem üniforması, çöl giysisi...) ve İhsan'ın göründüğü HER çekimin prompt'unda AÇIKÇA yeniden yazılır (character_id yalnız YÜZÜ kilitler, kıyafeti DEĞİL; boş bırakılan çekim yanlış gardıroba kayar); tarihsel bölümde dönem-doğru, modern bölümde senaryo-doğru giyinir; ASLA konuşmaz/dudak senkronu yapmaz. (4) Çekim 1 tehlikenin hemen okunan çarpıcı bir anıyla açar (kanca); hook_shot = en nefes kesen DORUK çekim. (5) Çekimlerin en az 4'üne shot.fact ekle: 2-5 kelimelik BÜYÜK HARF sert gerçek ('SNOW SETS LIKE CONCRETE', '60 SECONDS TO ESCAPE') — fact doğru olmalı ve o çekimin görüntüsüyle senkron düşmeli. (6) title_card.title = TEHLİKE adı, büyük harf (maks 40); title_card.subtitle = süre/kaynak/derinlik etiketi (maks 48; ör. '15 Minutes of Air'). (7) Yoğun ve fiziksel ama ASLA kanlı/vahşi/grafik değil — tehlike fizikte, sürede ve mesafede yaşar, yaralanma detayında değil; çocuğa/hayvana zarar gösterilmez; kurtulamama İMA edilebilir ama ölüm görüntülenmez. (8) Kadrajda okunur yazı yok (tüm yazılar post'ta bindirilir); tarihsel bölümlerde anakronizm yok."
   },
-  "parts": {}
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/could-you-survive/episodes/ep01/ep01_narrated_music_hooked_titled_capped.mp4",
+      "subtitle": "Could You Survive an Avalanche? — 15 Minutes of Air",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-13T20:26:35.282098+00:00"
+    }
+  }
 }
