@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "Whispering Parchment"
+  },
+  "synopsis": "An infinite library of ancient scrolls comes alive, their pages unfurling and merging into a flowing river of knowledge that carries the viewer through abstract landscapes.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera drifts through an impossibly vast, silent library, endless shelves stacked to the ceiling with countless ancient scrolls and leather-bound tomes. Dust motes dance in the soft, ethereal light filtering through unseen windows.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The scrolls on the shelves begin to subtly unfurl, their aged parchment pages rippling and shifting like water. Individual pages detach and float, forming a gentle, nascent current of flowing text and abstract imagery, drawing the camera forward.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera is now immersed in a swirling river of living parchment. Thousands of unfurling scrolls form a continuous, flowing stream of ancient script and illustrations, carrying the viewer through an abstract, illuminated tunnel of knowledge, the pages glowing softly.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The river of parchment gently disperses and slows, the pages dissolving into a tranquil, glowing mist of abstract symbols and soft light. The mist fades into an endless, warm horizon, leaving a serene, ethereal calm.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

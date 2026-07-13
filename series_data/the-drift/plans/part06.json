@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "Stone Dreams"
+  },
+  "synopsis": "An ancient ruin slowly breaks apart and floats into a bioluminescent sky, eventually forming a new constellation of stone.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera drifts through a vast, overgrown ancient stone ruin under soft, diffused light, with thick vines clinging to colossal, weathered blocks and silent archways, hinting at a forgotten civilization.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The ruins begin to subtly lift and break apart from the ground, individual blocks and sections slowly detaching and floating upwards into the darkening sky, revealing glimpses of a cosmic, bioluminescent nebula beneath where the ground used to be.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera drifts upwards with a colossal segment of the ruins, now clearly floating among countless other glowing stone islands in a vibrant, cosmic, bioluminescent nebula. The fragmented ruins are bathed in soft, pulsing cyan and magenta light.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The floating ruins spread out and gently disperse, their glowing fragments slowly resolving into a tranquil, vast field of geometric, luminous stone formations that form a silent, ethereal constellation against the deep cosmic backdrop.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "Crystalline Embrace"
+  },
+  "synopsis": "A vast, barren salt flat slowly transforms into a landscape of giant, geometric crystals that grow and interlock into an impossible, silent structure.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera drifts over a pristine, endless white salt flat under a clear, pale sky. The vast, barren expanse is silent and still, with minimal ripples on the salt surface stretching to the distant horizon.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Subtle, intricate geometric patterns begin to emerge on the surface of the salt, slowly growing into small, transparent crystal formations. The ground is gradually transforming into a field of nascent, sharp-edged, translucent structures, catching the soft light.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera drifts through a colossal labyrinth of towering, translucent salt crystals. These crystals grow into impossible, interlocking geometric shapes, forming vast, arching tunnels and cathedral-like structures that refract the ambient light into soft, shifting rainbows.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The crystal structures soften and become more fluid and organic, their sharp edges gently merging as they dissolve into a tranquil, shimmering expanse of light and color, resembling a nebula trapped within an icy, dreamlike firmament.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

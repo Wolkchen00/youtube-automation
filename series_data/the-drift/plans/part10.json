@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Obsidian Bloom"
+  },
+  "synopsis": "A desolate volcanic landscape of black obsidian slowly crystallizes into intricate, glowing structures, eventually revealing veins of molten gold beneath.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera drifts over a stark, desolate volcanic landscape, fields of jagged, silent black obsidian rock under a smoky, muted sky. The ground is rough and fractured, hinting at immense geological forces.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The obsidian rock begins to subtly fracture further and crystallize, sharp geometric patterns emerging on its glossy surface. Small, internal veins of faint, golden light appear within the deepening cracks, pulsating gently.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera drifts through a surreal canyon of towering, geometric obsidian structures. These formations are alive with glowing golden veins, pulsating and flowing like molten light, creating an impossible, intricate architecture of black rock and liquid gold.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The obsidian structures soften and recede, the golden veins widening and spreading, until the entire landscape becomes a vast, tranquil field of gently flowing, solidified gold. It reflects the muted sky like a precious metal sea, creating a serene, luminous vista.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}

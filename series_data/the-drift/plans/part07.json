@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Upside Down Roots"
+  },
+  "synopsis": "A dense, mist-shrouded forest silently inverts, its trees growing downwards into an endless mirror reflection of the sky, creating a symmetrical canopy above and below.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Camera drifts slowly through a dense, ancient forest, with towering, gnarled trees, heavy mist clinging to the canopy, and dappled sunlight filtering through the leaves onto a moss-covered ground.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The ground beneath the trees slowly becomes perfectly reflective, like an impossibly still, dark lake. As the camera drifts forward, the reflection deepens, the forest above beginning to duplicate below, but inverted, with trees' roots subtly starting to reach skyward.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera is now drifting through a perfectly symmetrical world where the forest grows both upwards and downwards, meeting in a razor-sharp, horizontal mirror line. The 'ground' is now a sky-mirror, and the 'sky' is an inverted forest, creating an endless, dreamlike tunnel of foliage.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The inverted forest slowly blends with the true forest, creating a seamless, infinite expanse of intertwining branches and roots. The mirror line softens and disappears, leading into a tranquil, endless green vista with a soft, diffused glow.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 3
+}
