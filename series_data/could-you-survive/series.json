@@ -11,7 +11,7 @@
   ],
   "hashtags": "#survival #couldyousurvive #whatwouldyoudo #pov #survivaltips #howtosurvive #disaster #adventure #shorts #fyp",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -45,6 +45,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-13T20:26:35.282098+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/could-you-survive/episodes/ep02/ep02_narrated_music_hooked_titled_capped.mp4",
+      "subtitle": "Your Car Just Sank — You Have 60 Seconds",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-14T20:24:35.086432+00:00"
     }
   }
 }
