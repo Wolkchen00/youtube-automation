@@ -1,0 +1,35 @@
+{
+  "slug": "footnotes",
+  "base_title": "Footnotes of History",
+  "logline": "One real moment history almost forgot — rebuilt exactly where and when it happened.",
+  "language": "en",
+  "standalone": true,
+  "upload_profile": "shad0wedhistory",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
+  "total_parts": 5,
+  "next_part": 1,
+  "status": "active",
+  "priority": 999,
+  "publish_mode": "auto",
+  "parts": {},
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 5,
+    "shot_seconds": "8",
+    "title_card": true,
+    "fact_captions": true,
+    "music_prompt": true,
+    "caption": true,
+    "humans": "historical",
+    "eerie_ok": true,
+    "title_style": "'City, YEAR — <4-8 word emotional hook>' (e.g. 'Barcelona, 1909 — The Week the City Burned'). The city and 4-digit year are MANDATORY and must match the title_card exactly; the hook states the astonishing core in plain words. No clickbait punctuation, no ALL-CAPS words, no quotes, no colons; 60 characters maximum.",
+    "brief": "Each episode reconstructs ONE REAL historical moment — a 'footnote' of history: a lesser-known but thoroughly documented event with a precise 4-digit year (prefer an exact day). THE FORMAT (the__footnote model): the VIDEO is silent period cinema carried entirely by the musical score; the WRITTEN caption tells the story; a date card ('City, YEAR') opens the video. FIXED 5-SHOT ARC: (1) establish the place in its stated year at its most alive and beautiful — the world before; (2) daily life with the first visible seed of tension; (3) escalation — the event begins to break loose; (4) THE MOMENT — the single most striking, era-defining image of the event (hook_shot=4); (5) aftermath and legacy — quiet, human, lingering. ACCURACY IS SACRED: use ONLY events you are absolutely certain about at an encyclopedia level (real names, real places, real dates); NEVER invent or round a number, name or date — if a figure is disputed, write 'more than X' from the documented floor or leave it out. Rotate regions, centuries and emotional tones across episodes — tragedy, wonder, heroism, catastrophe, warm nostalgia — NOT every episode dark. NEVER reuse an event already in EXISTING EPISODES. SHOT PROMPTS: every prompt states the city and year and describes period-accurate detail (clothing, architecture, light sources, vehicles and technology of that exact year — nothing later); when the story names a real person, prompts describe them ONLY by appearance, age, dress and role, never by name. NEVER show graphic death, wounds, blood or human remains — tragedy lives in scale, faces, objects and aftermath. MUSIC: compose the score prompt TOGETHER with the visuals — name the era- and REGION-appropriate instruments (Spanish guitar for Barcelona, oud and ney for Baghdad, gamelan for Java, waltz strings for Vienna, low brass and hymn-like strings for the North Atlantic), give it a deeply EMOTIONAL arc that mirrors the 5-shot arc (atmospheric open, slow swell, emotional peak at the MOMENT, aching resolve) and 1-2 restrained cinematic percussion hits timed to that peak — the music is what makes the viewer FEEL the era and stay. TITLE_CARD: title = 'City, YEAR' exactly (e.g. 'Barcelona, 1909'); subtitle = the event's evocative name, max 40 chars (e.g. 'The Tragic Week'). FACT_CAPTIONS: date-led story beats copied straight from the record, e.g. 'JULY 26, 1909 — THE STRIKE BEGINS', 'HEARD 4,800 KM AWAY'. CAPTION: the soul of the format — follow the caption formula exactly, ending on a line that lingers. SUGGESTED EVENTS (prefer these until used up; afterwards choose equally well-documented ones): [1] Lisbon 1755 — the All Saints' Day earthquake, tsunami and fires destroy Europe's fourth-largest city on November 1, 1755. [2] Saint-Pierre 1902 — Mont Pelée erupts May 8, 1902, killing about 30,000 in minutes; prisoner Ludger Sylbaris survives in his stone cell. [3] Johnstown 1889 — the South Fork dam of a millionaires' fishing club fails May 31, 1889; over 2,200 die in the flood. [4] Tambora 1815 — the April 1815 eruption, the largest in recorded history, brings 1816's 'Year Without a Summer' to the whole world. [5] Tunguska 1908 — on June 30, 1908 an explosion flattens 2,000 square km of Siberian forest; no crater is ever found. [6] The Carrington Event 1859 — a solar storm on September 1-2, 1859 sets telegraph lines sparking and paints auroras over the tropics. [7] London 1666 — the Great Fire starts in a Pudding Lane bakery on September 2, 1666 and burns 13,200 houses; the official death toll is famously tiny. [8] Lakehurst 1937 — the airship Hindenburg burns in 34 seconds on May 6, 1937; 62 of the 97 aboard survive. [9] Messina 1908 — Europe's deadliest recorded earthquake and tsunami strike Sicily at dawn, December 28, 1908. [10] Chicago 1871 — the fire of October 8-10, 1871 leaves 100,000 homeless; the same night, Peshtigo burns with far more dead and is forgotten. [11] Constantinople 1204 — on April 12-13, 1204 the Fourth Crusade sacks the greatest Christian city instead of reaching Jerusalem. [12] Tenochtitlan 1521 — the island capital of the Aztec empire falls on August 13, 1521 after a 93-day siege. [13] Prague 1618 — on May 23, 1618 two imperial governors are thrown from a castle window and survive; the Thirty Years' War begins. [14] The Christmas Truce 1914 — on December 25, 1914 soldiers cross no-man's-land to sing, trade and play football. [15] Strasbourg 1518 — the Dancing Plague: in July 1518 hundreds dance uncontrollably for weeks in the summer heat. [16] Boston 1919 — the Great Molasses Flood of January 15, 1919: a tank bursts and a wave of molasses kills 21. [17] The Children's Blizzard 1888 — January 12, 1888, a sudden warm morning turns lethal on the Great Plains just as school lets out. [18] Earth 1910 — Halley's Comet returns in May 1910 and newspapers sell the end of the world; people buy 'comet pills'. [19] Orange, New Jersey 1917 — the Radium Girls paint watch dials with glowing paint and are told to point the brushes with their lips. [20] Balaclava 1854 — on October 25, 1854 a misread order sends the Light Brigade charging the wrong guns."
+  }
+}

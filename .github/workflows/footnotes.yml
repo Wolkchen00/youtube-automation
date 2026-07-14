@@ -1,20 +1,18 @@
-name: Drowned History Daily
+name: Footnotes Daily
 
-# shadowedhistory kanalının GARANTİLİ günlük şeridi (İhsan kararı 2026-07-03:
-# "tam otomatik her gün 1 video"). Ana kuyruktan (series.yml / run_all günde-1
-# tavanı) BAĞIMSIZ çalışır: her gün Drowned History'nin sıradaki gerçek sualtı
-# keşfini üretir + shad0wedhistory profiline yayınlar. Çifte üretim olmasın diye
-# drowned-history series.json'da priority=999 ile ana kuyruğun fiilen dışındadır.
-# Şerit merdiveni: 14:30 ana → 16:30 planetfall → 18:30 night-archive → 20:30 bu.
+# 'Footnotes of History' — shadowedhistory kanalının YENİ ana şeridi (İhsan kararı
+# 2026-07-13: the__footnote formatının tam kopyası → kanala entegre). Her bölüm
+# tarihin az bilinen ama belgelenmiş TEK GERÇEK anını yeniden kurar: video sessiz
+# sinematik dönem-daldırma (başta 'City, YEAR' kartı + crossfade geçişler + bölüme
+# özgü Suno duygusal skoru TEK ses), hikâye YAZILI caption'da (YT açıklaması +
+# IG/TikTok caption). Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ
+# çalışır; priority=999 ile ana kuyruğun fiilen dışında. Eski drowned-history.yml
+# şeridi (aynı 20:30 slotu) paused edildiği için devre dışıdır → yarış yok.
+# Şerit merdiveni: 14:30 ana → 16:30 planetfall → 18:30 could-you-survive → 20:30 bu.
 
 on:
-  # 2026-07-13: PAUSED — İhsan kararı: shadowedhistory kanalı the__footnote formatına
-  # pivot etti → yeni ana şerit 'Footnotes of History' (footnotes.yml, aynı 20:30 slotu).
-  # drowned-history geri istenirse: aşağıdaki schedule'ı aç + footnotes.yml schedule'ını
-  # kapat + iki series.json'daki status'ları takasla (tek kanal = tek aktif seri,
-  # günde-1 kilidi). P1-P10 yayında kaldı; part11-15 planları kuyrukta hazır bekliyor.
-  # schedule:
-  #   - cron: '30 20 * * *'   # 20:30 UTC ≈ 13:30 California ≈ 23:30 TR
+  schedule:
+    - cron: '30 20 * * *'   # 20:30 UTC ≈ 13:30 California ≈ 23:30 TR
   workflow_dispatch:
 
 permissions:
@@ -37,7 +35,7 @@ jobs:
           cache: 'pip'
 
       - name: Install FFmpeg
-        # fonts-dejavu-core: title_card / drawtext bindirmeleri için
+        # fonts-dejavu-core: title_card / fact_captions drawtext bindirmeleri için
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
 
       - name: Install dependencies
@@ -57,13 +55,13 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni keşifler yazar — kredi harcamaz)
-        run: python -X utf8 -m series.replenish --series drowned-history 2>&1 | tee logs/drowned_replenish.log
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni 'footnote' anları yazar — kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series footnotes 2>&1 | tee logs/footnotes_replenish.log
 
-      - name: Produce + publish (Drowned History sıradaki keşif)
+      - name: Produce + publish (Footnotes sıradaki bölüm)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -X utf8 -m series.series_runner --series drowned-history 2>&1 | tee logs/drowned_run.log
+        run: python -X utf8 -m series.series_runner --series footnotes 2>&1 | tee logs/footnotes_run.log
 
       - name: Persist series state
         if: always()
@@ -74,7 +72,7 @@ jobs:
             git pull --rebase --autostash origin main || true
             git add series_data/ || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
-            git commit -m "chore: drowned-history durumunu ilerlet [skip ci]" || true
+            git commit -m "chore: footnotes durumunu ilerlet [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
           done
 
@@ -82,6 +80,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: drowned-history-logs-${{ github.run_number }}
+          name: footnotes-logs-${{ github.run_number }}
           path: logs/
           retention-days: 7

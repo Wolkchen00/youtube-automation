@@ -92,14 +92,20 @@ def _persist_release(slug: str, n: int, video_path) -> str | None:
     return tag
 
 
-def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> list[str]:
+def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
+                  caption: str = "") -> list[str]:
     """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür.
+
+    caption (opt-in, plan['caption'] — the__footnote formatı): bölümün YAZILI HİKÂYESİ.
+    Verilirse YouTube açıklaması bu metin olur ve IG/TikTok'ta da (Upload-Post
+    instagram_title/tiktok_title alanları üzerinden) uzun caption olarak basılır —
+    video sessiz-sinematik kalır, hikâyeyi açıklama anlatır. Boşsa eski davranış.
 
     4K master (bible.upscale) varsa yalnız YouTube'a gider; IG/TikTok 1080p
     delivery kopyasını alır — iki platform da videoyu zaten 1080p'ye yeniden
     kodladığı için 4K oraya sadece upload süresi/riski demek."""
     title = meta.title_for(n, subtitle)
-    desc = meta.description_for(n, subtitle)
+    desc = (caption or meta.description_for(n, subtitle))[:4900]
     from series.bible import episode_dir
     delivery = episode_dir(meta.slug, n) / "delivery_1080.mp4"
     has_delivery = delivery.exists() and delivery.stat().st_size > 0
@@ -114,7 +120,7 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "") -> l
             logger.info(f"📤 {plat.upper()} → {title}")
         res = upload_to_platform(src, title, desc,
                                  user=meta.upload_profile, platform=plat,
-                                 tags=meta.hashtags)
+                                 tags=meta.hashtags, social_caption=caption)
         return bool(res)
 
     for plat in meta.platforms:
@@ -207,6 +213,16 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     subtitle = plan.get("episode", {}).get("title", "")
     logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} — {subtitle} (mod={mode})")
 
+    # Hikâye-caption (opt-in, the__footnote formatı): plan 'caption' taşıyorsa bölümün
+    # yazılı hikâyesi + bölüme-özgü etiketler + serinin marka etiketleri tek metinde
+    # birleşir ve YT açıklaması + IG/TikTok caption'ı olur. Alan yoksa eski davranış.
+    caption = str(plan.get("caption") or "").strip()
+    if caption:
+        tags = " ".join(t for t in (str(plan.get("hashtags") or "").strip(),
+                                    meta.hashtags.strip()) if t)
+        if tags:
+            caption = f"{caption}\n\n{tags}"
+
     # 'Bitmeyen yolculuk' — önceki bölümün son karesinden devam (parçalar arası zincir).
     # Bulutta her koşu temiz checkout olduğu için son kare URL'i git'li series.json'da tutulur.
     # chain_scope="episode" ise zincir yalnız bölüm içi → önceki bölümün karesi OKUNMAZ.
@@ -264,7 +280,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.warning("⚠️ upload_profile boş — yayın atlandı. series.json'a upload_profile ekle.")
         return False
 
-    ok = _publish_part(meta, n, video, subtitle)
+    ok = _publish_part(meta, n, video, subtitle, caption=caption)
     if ok:
         meta.mark_published(n, ok)
         meta.advance()

@@ -651,12 +651,29 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
 
     # Birleştir → final export (9:16 dikey)
     raw_ep = episode_dir(slug, number) / f"ep{int(number):02d}_raw.mp4"
-    if bible.audio_smooth:
-        # Atmosfer/müzik kanalları: çekim sınırlarında sesi yumuşat (pop/boşluk gider).
-        ffmpeg_tools.concatenate_audio_smooth(shot_files, raw_ep, clips_dir=sdir)
-    else:
-        # Diyalog kanalları: düz birleştir (söz baş/sonu kırpılmasın).
-        ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
+    merged = False
+    xf = bible.transitions
+    if xf and len(shot_files) >= 2:
+        # Sinematik crossfade (opt-in, the__footnote formatı): sahneler birbirinin
+        # içinde erir. Ses birleştirmede atılır — müzik post'ta TEK ses olur
+        # (replace_original), o yüzden yalnız anlatımsız müzikli serilerde açılmalı.
+        fade = max(0.2, min(1.5, float(xf.get("duration", 0.6))))
+        try:
+            ffmpeg_tools.concatenate_video_crossfade(shot_files, raw_ep, fade=fade)
+            # Her geçiş 'fade' sn örtüşür → k'inci klip k·fade erken başlar.
+            # Kanca/fact-caption zamanlamaları şaşmasın diye ofsetler hizalanır.
+            for i, sn in enumerate(sorted(shot_offsets, key=shot_offsets.get)):
+                shot_offsets[sn] = max(0.0, shot_offsets[sn] - i * fade)
+            merged = True
+        except Exception as e:
+            logger.warning(f"⚠️ Crossfade birleştirme başarısız ({e}) — düz kesmeye dönülüyor")
+    if not merged:
+        if bible.audio_smooth:
+            # Atmosfer/müzik kanalları: çekim sınırlarında sesi yumuşat (pop/boşluk gider).
+            ffmpeg_tools.concatenate_audio_smooth(shot_files, raw_ep, clips_dir=sdir)
+        else:
+            # Diyalog kanalları: düz birleştir (söz baş/sonu kırpılmasın).
+            ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
     final_ep = episode_dir(slug, number) / f"ep{int(number):02d}.mp4"
     ffmpeg_tools.final_export(raw_ep, final_ep)
 

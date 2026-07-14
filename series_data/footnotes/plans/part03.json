@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Baghdad, 1258 — The Day the River Ran Black"
+  },
+  "synopsis": "The Mongol sack of Baghdad, February 10, 1258: the House of Wisdom is destroyed and chroniclers write that the Tigris ran black with the ink of its books — the end of the Islamic Golden Age's center.",
+  "narration": "",
+  "caption": "Baghdad, 1258. For five hundred years, the greatest library on Earth stood here.\n\nThe House of Wisdom held centuries of mathematics, medicine, astronomy and poetry — knowledge gathered from three continents, copied by hand, one page at a time.\n\nIn January 1258, a Mongol army surrounded the city. On February 10th, Baghdad fell.\n\nThe chroniclers wrote that the Tigris ran black with the ink of books hurled into the water — that for days the river carried pages instead of boats.\n\nHundreds of thousands died. The beating heart of the Islamic Golden Age never recovered.\n\nEmpires can rebuild walls. No one could rebuild what the river took.",
+  "hashtags": "#Baghdad #HouseOfWisdom #1258 #IslamicGoldenAge #MongolEmpire #MedievalHistory #hiddenhistory",
+  "music": "Elegiac Middle Eastern lament. A lone ney flute opens over a deep sustained drone in immediate atmosphere, joined by weeping oud arpeggios and low dark strings; a slow processional frame-drum pulse grows beneath as danger nears, breaking into one thunderous war-drum hit and a grieving string climax, then everything falls away to a solitary ney over a fading drone. Grief, dignity, immense loss. Instrumental only, no vocals.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Baghdad at dawn in the mid-13th century: slow aerial over the round city on the Tigris — turquoise domes, slender minarets, palm groves along the banks, river boats with triangular sails, bustling covered bazaars waking up; warm golden haze over the capital of a golden age at its height.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Interior of a vast 13th-century Baghdad library: shafts of dusty sunlight fall across galleries of hand-bound manuscripts; scholars in robes and turbans bend over brass astrolabes, star charts and geometric diagrams, reed pens scratching on paper; a boy carries a tall stack of books past shelves that rise into shadow.",
+      "seed": null,
+      "fact": "500 YEARS OF KNOWLEDGE"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The plain outside Baghdad's high brick walls, January 1258: an endless Mongol host emerges through cold dust — horsemen in lacquered lamellar armor with banners, siege engines dragged by oxen, campfire smoke stretching to the horizon; on the distant ramparts, defenders stand watching in silence; the light turns iron-grey.",
+      "seed": null,
+      "fact": "JANUARY 1258 — THE SIEGE BEGINS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The Tigris river at dusk, February 1258: the water runs black with ink, thousands of manuscript pages drifting on the current like pale leaves; half-burned leather-bound books bob past the reeds; on the far bank the city skyline glows with scattered fires under a smoke-bruised sky. Haunting, vast, sorrowful — no people visible.",
+      "seed": null,
+      "fact": "THE RIVER RAN BLACK WITH INK"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A ruined Baghdad scriptorium days after the fall in 1258: wind stirs torn manuscript pages across a marble floor, an overturned brass inkwell lies long dry, one intact book rests in a shaft of pale light; through a shattered horseshoe arch, the quiet river and the smoking, empty city beyond. Stillness, grief, memory.",
+      "seed": null,
+      "fact": "FEBRUARY 10, 1258 — BAGHDAD FELL"
+    }
+  ],
+  "title_card": {
+    "title": "Baghdad, 1258",
+    "subtitle": "The Fall of the House of Wisdom"
+  },
+  "hook_shot": 4
+}

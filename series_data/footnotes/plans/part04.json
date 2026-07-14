@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Halifax, 1917 — One Last Message Saved 300 Lives"
+  },
+  "synopsis": "The Halifax Explosion of December 6, 1917 — the largest man-made blast before the atomic bomb — and train dispatcher Vince Coleman, who stayed at his telegraph key to stop an incoming passenger train.",
+  "narration": "",
+  "caption": "Halifax, 1917. One of the busiest wartime harbors in the British Atlantic.\n\nOn the morning of December 6th, a French ship loaded with nearly 3,000 tons of explosives collided with another vessel in the Narrows. Fire took the deck. Crowds gathered at windows to watch it burn.\n\nIn the railway office by the water, a dispatcher named Vince Coleman understood what was coming. A passenger train was due in minutes. He stayed at his key: 'Hold up the train... Goodbye boys.'\n\nAt 9:04 am the ship exploded — the largest man-made blast before the atomic bomb. Nearly 2,000 people died. Nine thousand were injured. The train stopped in time.\n\nThe next morning, a blizzard buried the ruins in white.\n\nBoston rushed doctors and supplies north. Nova Scotia still sends Boston a Christmas tree every year — a thank-you that never expired.",
+  "hashtags": "#Halifax #HalifaxExplosion #1917 #CanadianHistory #NovaScotia #WW1 #hiddenhistory",
+  "music": "Sombre North Atlantic elegy. Low hymn-like brass and a dark cello drone open in cold immediate atmosphere; a faint telegraph-like ticking pulse builds tension beneath slowly rising strings; one massive orchestral percussion hit lands at the catastrophe, followed by ringing near-silence and a high lone violin; closes as a slow tender hymn of strings and French horn over soft distant bells. Sorrow, courage, gratitude. Restrained and deeply moving. Instrumental only, no vocals.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Halifax harbor on a cold clear morning in December 1917: wartime steamships and convoy vessels in dazzle camouflage at anchor, tugboats trailing white wakes through the Narrows strait, wooden houses climbing the snow-dusted hillside, chimney smoke rising straight in still air, gulls turning overhead. Crisp, peaceful, alive.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The Narrows of Halifax harbor, December 6, 1917: two steamships locked together after a collision, thick black smoke and orange fire boiling from one deck; small boats hurrying across the water; on shore, dock workers and children press to windows and fences, watching the burning ship drift slowly toward the wooden piers.",
+      "seed": null,
+      "fact": "DECEMBER 6, 1917 — 8:45 AM"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Inside a small wooden railway telegraph office beside Halifax harbor, 1917: a middle-aged dispatcher in waistcoat and rolled shirtsleeves sits alone at his desk, hand steady on the brass telegraph key, the window behind him glowing orange with firelight from the harbor; scattered papers, an oil lamp, a wall clock nearing nine. Calm, resolute, human.",
+      "seed": null,
+      "fact": "HOLD UP THE TRAIN — HIS LAST WORDS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Halifax at 9:04 am, December 6, 1917, seen from high above the harbor: a colossal white shockwave ring races outward across the water and the city, piers and rooftops vanishing into a wall of spray and dust, a towering grey-black column climbing into the winter sky, ships heeled over in the harbor. Terrifying scale — no people visible.",
+      "seed": null,
+      "fact": "THE LARGEST BLAST BEFORE THE BOMB"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Halifax the next morning, December 1917: heavy blizzard snow falls silently over a flattened district — leaning chimneys and splintered timber softened under white; rescue lanterns glow faintly through the snowfall; out in the harbor beyond, a relief ship arrives with all its lights burning. Quiet grief and arriving kindness.",
+      "seed": null,
+      "fact": "2,000 DEAD — 9,000 WOUNDED"
+    }
+  ],
+  "title_card": {
+    "title": "Halifax, 1917",
+    "subtitle": "The Great Explosion"
+  },
+  "hook_shot": 4
+}

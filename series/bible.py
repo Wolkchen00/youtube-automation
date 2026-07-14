@@ -221,6 +221,19 @@ class Bible:
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
+    def transitions(self) -> dict:
+        """Sinematik sahne geçişleri (opt-in): çekimler düz kesme yerine kısa VIDEO
+        crossfade (xfade) ile birleştirilir — the__footnote tarzı dönem-daldırma
+        kurgusu (her sahne bir sonrakinin içinde erir; müzik geçişleri taşır).
+        Birleştirmede SES ATILIR (sessiz iz basılır) → yalnız müziğin TEK ses olduğu
+        anlatımsız serilerde kullan (music:true + narration'sız bible). Toplam süre
+        her geçişte 'duration' kadar kısalır; hook/fact zamanlamaları produce
+        tarafında otomatik hizalanır. Başarısızlıkta düz kesmeye düşülür.
+        Örn: "transitions": {"enabled": true, "duration": 0.6}"""
+        v = self.data["series"].get("transitions") or {}
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
     def audio_smooth(self) -> bool:
         """True ise çekim sınırlarında ses YUMUŞATILIR: her çekimin sesi loudness
         eşitlenir + kısa afade ile in/out yapılır → geçişlerde 'pop'/seviye sıçraması

@@ -99,9 +99,16 @@ def upload_to_platform(
     user: str,
     platform: str = "youtube",
     privacy: str = "public",
-    tags: str = ""
+    tags: str = "",
+    social_caption: str = ""
 ) -> dict | None:
-    """Upload video to a single platform via Upload-Post.com."""
+    """Upload video to a single platform via Upload-Post.com.
+
+    social_caption (opt-in): IG/TikTok'ta 'title' yerine geçen UZUN caption metni.
+    Upload-Post, Instagram'da instagram_title'ı ve TikTok'ta tiktok_title'ı post
+    caption'ı olarak kullanır (global 'description' bu iki platformda YOK sayılır;
+    TikTok video caption limiti 2.200 karakter). Boş bırakılırsa eski davranış —
+    caption = title."""
     if not UPLOAD_POST_API_KEY:
         logger.error("❌ UPLOAD_POST_API_KEY not set!")
         return None
@@ -129,8 +136,12 @@ def upload_to_platform(
     elif platform == "instagram":
         data["media_type"] = "REELS"
         data["share_to_feed"] = "true"
+        if social_caption:
+            data["instagram_title"] = social_caption[:2100]
     elif platform == "tiktok":
         data["privacy_level"] = "PUBLIC_TO_EVERYONE"
+        if social_caption:
+            data["tiktok_title"] = social_caption[:2100]
 
     import time
 

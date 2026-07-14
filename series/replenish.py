@@ -23,6 +23,8 @@ series.json şeması:
     "min_queue": 2,         // ops. (>=1): bekleyen bölüm bunun altına inince ikmal
     "brief": "...",         // ops.: Gemini'ye seriye özgü yaratıcı yön (Türkçe olabilir)
     "music_prompt": true,   // ops.: bölüm başına sahne-eşleşmeli 'music' alanı istenir (Suno)
+    "caption": true,        // ops.: bölüm başına 'caption' (yazılı hikâye) + 'hashtags' istenir
+                            //       (the__footnote formatı: hikâye videoda değil açıklamada)
     "shots": 4,             // ops.: bölüm başına çekim sayısı
     "shot_seconds": "8",    // ops.: çekim süresi ("4"|"6"|"8"|"10")
     "last_run": {...}       // makine yazar
@@ -189,9 +191,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     # narration: true | {"min_words":95,"max_words":125} → bölüm başına anlatım metni istenir
     # title_card: true → plan'a title_card {title, subtitle} alanı istenir (produce künyesi)
     # humans: "silent" → insan figürü serbest (asla konuşmaz/yüz yakın planı yok)
+    #         "historical" → dönem insanları yakın planda serbest (the__footnote formatı;
+    #         gerçek isimli kişiler prompt'ta ASLA isimle değil görünümle tarif edilir)
     # eerie_ok: true → 'frightening' yasağı kalkar (korku-tonlu kanallar; gore yine yasak)
     # title_style: "<metin>" → başlık kuralını değiştirir (ör. haber-kancası cümle başlıklar)
     # shot_refs: true → çekimler bible'daki characters/environment id'lerini kullanabilir
+    # caption: true → bölüm başına 'caption' (yazılı hikâye) + 'hashtags' istenir
     narr_cfg = cfg.get("narration")
     if narr_cfg is True:
         narr_cfg = {}
@@ -201,12 +206,15 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_tc = bool(cfg.get("title_card"))
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
+    want_caption = bool(cfg.get("caption"))
     humans_mode = str(cfg.get("humans") or "").strip().lower()
+    humans_historical = humans_mode == "historical"
     humans_featured = humans_mode == "featured"
     humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
     eerie_ok = bool(cfg.get("eerie_ok"))
     title_style = str(cfg.get("title_style") or "").strip()
     shot_refs = bool(cfg.get("shot_refs"))
+    humans_present = humans_historical or humans_featured or humans_silent
 
     if narrated:
         head = (f"You are the showrunner of an endless vertical (9:16) YouTube Shorts series told through\n"
@@ -215,6 +223,13 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 f"continuous moment of {sec} seconds) that flow into one another, plus ONE narration script\n"
                 f"({wmin}-{wmax} words) recorded separately and laid over the finished edit. No dialogue, no lip-sync.")
         narr_shape = f'"<{wmin}-{wmax} word English voice-over script>"'
+    elif humans_present:
+        # Anlatımsız ama İNSANLI seri (the__footnote formatı): tek ses = müzik.
+        head = (f"You are the showrunner of an endless, NARRATION-FREE vertical (9:16) Shorts series told\n"
+                f"through SILENT cinematic shots — the musical score is the only sound.\n"
+                f"Every episode is a STANDALONE ~{shots * int(sec)}-second piece: {shots} consecutive shots (each ONE\n"
+                f"continuous moment of {sec} seconds). No dialogue, no narration, no lip-sync.")
+        narr_shape = '""'
     else:
         head = (f"You are the showrunner of an endless, VISUAL-ONLY vertical (9:16) YouTube Shorts series.\n"
                 f"Every episode is a STANDALONE ~{shots * int(sec)}-second visual trip: {shots} consecutive shots (each ONE\n"
@@ -226,6 +241,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 '"subtitle": "<max 48 chars>"},') if want_tc else ""
     music_shape = ('\n   "music": "<40-90 word instrumental music style prompt '
                    'matched to THIS episode>",') if want_music else ""
+    cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
+                 '\n   "hashtags": "<#Tag1 #Tag2 ... 6-9 tags>",') if want_caption else ""
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
     if shot_refs:
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
@@ -254,9 +271,25 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                   'very first second, so it must open with immediate atmosphere — no long silent intro. '
                   'Each episode gets a CLEARLY different musical color (vary instruments/scale/texture).'
                   if want_music else "")
+    cap_rule = ('\n- CAPTION: "caption" = the post\'s WRITTEN STORY (70-140 words of flowing English '
+                'prose; separate paragraphs with \\n\\n). Open with "City, YEAR." plus ONE vivid '
+                'scene-setting line, then short 1-2 sentence paragraphs that tell the REAL event like '
+                'a documentary: context, escalation, the event itself, one human moment (a real name '
+                'where history records one), the precise date, and a final line about what it left '
+                'behind. Every name, number and date must be real and verifiable from the CREATIVE '
+                'BRIEF — NEVER invent or embellish a fact; when unsure of a number, leave it out.'
+                '\n- HASHTAGS: "hashtags" = 6-9 space-separated tags: the city, the event name, the '
+                '4-digit year, the country or people, plus 2-3 broad history tags. Each tag starts '
+                'with # and contains no spaces.' if want_caption else "")
     refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
                  '"environment"; follow the brief about when to use them.' if shot_refs else "")
-    if humans_featured:
+    if humans_historical:
+        humans_rule = ("period-accurate people MAY appear in clear close-up, mid and wide shots and "
+                       "carry the episode's emotion, but must NEVER speak, lip-sync or move their lips "
+                       "as if talking (the score is the only voice); when the story involves a real "
+                       "named person, shot prompts describe them ONLY by appearance, age, dress and "
+                       "role — never by name,")
+    elif humans_featured:
         humans_rule = ("the recurring lead character (see AVAILABLE REFERENCES) MAY appear in clear close-up, "
                        "mid and wide shots and is the emotional anchor of the episode, but must NEVER speak, "
                        "lip-sync or move their lips as if talking (the voice is added later as narration); "
@@ -267,6 +300,19 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     else:
         humans_rule = "no humans or human faces,"
     tone_tail = "nothing gory, violent or graphic." if eerie_ok else "nothing gory, violent or frightening."
+    # Kare zinciri AÇIK serilerde çekimler tek kesintisiz morf akışıdır; zincirsiz
+    # serilerde (chain_frames=false, ör. footnotes) her çekim AYRI bir sinematik
+    # tablodur — kurgu bunları crossfade/kesme ile bağlar.
+    if bible.chain_frames:
+        chain_rule = ("- SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final\n"
+                      "  frame): shot 1 opens a brand-new striking scene; every later shot's prompt must\n"
+                      "  describe ONE continuous transformation that begins EXACTLY at the previous shot's end\n"
+                      "  state and evolves into somewhere new. No cuts, no teleports, no scene resets inside\n"
+                      "  an episode.")
+    else:
+        chain_rule = ("- SCENE FLOW: shots are DISTINCT cinematic tableaux joined in post by soft transitions —\n"
+                      "  each shot may open a new angle, location or moment of the SAME story; order them so the\n"
+                      "  episode reads as one continuous emotional arc with no confusing jumps.")
 
     system_instruction = f"""{head}
 
@@ -275,7 +321,7 @@ Return STRICT JSON ONLY, exactly this shape:
   {{"episode": {{"number": <int>, "title": "<title>"}},
    "synopsis": "<one sentence>",
    "hook_shot": <int>,
-   "narration": {narr_shape},{tc_shape}{music_shape}
+   "narration": {narr_shape},{tc_shape}{music_shape}{cap_shape}
    "shots": [{{{shot_fields}}}]}}
 ]}}
 
@@ -285,12 +331,8 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{fact_rule}{music_rule}{refs_rule}
-- SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final
-  frame): shot 1 opens a brand-new striking scene; every later shot's prompt must
-  describe ONE continuous transformation that begins EXACTLY at the previous shot's end
-  state and evolves into somewhere new. No cuts, no teleports, no scene resets inside
-  an episode.
+  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}
+{chain_rule}
 - EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve.
   "hook_shot" = the n of the single most spectacular, jaw-dropping shot (usually 2 or 3).
 - PROMPTS: rich visual language — motion, geometry, light, color, camera flow. The
@@ -350,6 +392,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     want_tc = bool(cfg.get("title_card"))
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
+    want_caption = bool(cfg.get("caption"))
     shot_refs = bool(cfg.get("shot_refs"))
 
     errors: list[str] = []
@@ -447,18 +490,39 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             tcv = plan.get("title_card") or {}
             tt = str(tcv.get("title") or "").strip()
             ts = str(tcv.get("subtitle") or "").strip()
-            # Künye alt yazısı GERÇEK bir 4-haneli yıl taşımalı (1000-2099).
-            # Ekrana basılan tarih doğruluğu güvencesi: model tarihi düşürür ya da
-            # uydurursa batch reddedilir → Gemini yeniden dener (brief: yıl DOĞRUDAN
-            # FACT BANK kaydından kopyalanır). Tek boşluk kalan doğrulama buydu.
-            has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", ts))
+            # Künye GERÇEK bir 4-haneli yıl taşımalı (1000-2099) — başlıkta VEYA alt
+            # yazıda (footnotes formatı yılı başlığa koyar: 'Barcelona, 1909'; drowned
+            # alt yazıya: '… — found 1901'). Ekrana basılan tarih doğruluğu güvencesi:
+            # model tarihi düşürür ya da uydurursa batch reddedilir → Gemini yeniden
+            # dener (brief: yıl DOĞRUDAN kaynak kayıttan kopyalanır).
+            has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", f"{tt} {ts}"))
             if not tt or not ts or len(tt) > 60 or len(ts) > 60:
                 errors.append(f"part {want}: title_card.title ve .subtitle zorunlu (≤60 karakter)")
             elif not has_year:
-                errors.append(f"part {want}: title_card.subtitle 4-haneli bir yıl içermeli "
-                              f"(ör. '… — found 1901') — gelen: {ts!r}")
+                errors.append(f"part {want}: title_card 4-haneli bir yıl içermeli (başlıkta "
+                              f"'City, 1909' ya da alt yazıda '… — found 1901') — "
+                              f"gelen: {tt!r} / {ts!r}")
             else:
                 normalized["title_card"] = {"title": tt, "subtitle": ts}
+        if want_caption:
+            # Opt-in (the__footnote formatı): yazılı hikâye + bölüme-özgü etiketler.
+            cap = str(plan.get("caption") or "").strip()
+            cwc = len(cap.split())
+            if not (40 <= cwc <= 220):
+                errors.append(f"part {want}: caption {cwc} kelime — 70-140 hedef "
+                              f"(kabul 40-220) dışında")
+            elif not re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", cap):
+                errors.append(f"part {want}: caption gerçek bir 4-haneli yıl içermeli")
+            else:
+                normalized["caption"] = cap
+            tags = [t if t.startswith("#") else "#" + t
+                    for t in str(plan.get("hashtags") or "").split()
+                    if re.sub(r"[#\W]", "", t)]
+            if len(tags) < 3:
+                errors.append(f"part {want}: hashtags en az 3 etiket olmalı "
+                              f"(gelen: {len(tags)})")
+            else:
+                normalized["hashtags"] = " ".join(tags[:12])
         if hook:
             normalized["hook_shot"] = hook
         episodes[i] = normalized

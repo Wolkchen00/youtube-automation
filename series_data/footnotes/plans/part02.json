@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "Paris, 1900 — The Summer the Future Arrived"
+  },
+  "synopsis": "The Exposition Universelle of 1900: over 50 million visitors, a moving wooden sidewalk, the Palace of Electricity lit by thousands of lamps, the first Métro line and a 100-meter Ferris wheel — a future built for one summer and then torn down.",
+  "narration": "",
+  "caption": "Paris, 1900. The city threw a party for the new century — and more than 50 million people came.\n\nAlong the Seine, palaces built to last a single summer glittered beside the Eiffel Tower. Visitors rode a wooden sidewalk that moved on its own — two speeds, no horses.\n\nAt dusk, the Palace of Electricity switched on thousands of lamps at once. Crowds gasped: entire buildings drawn in light, in an age when most homes still burned candles.\n\nThat July, the city opened its first Métro line. A Ferris wheel a hundred meters tall turned slowly over it all.\n\nThe Exposition Universelle closed in November 1900, and almost everything was torn down.\n\nFor one summer, the future had an address.",
+  "hashtags": "#Paris #ExpositionUniverselle #1900 #BelleEpoque #FrenchHistory #WorldsFair #hiddenhistory",
+  "music": "Warm romantic Belle Époque orchestral waltz. A delicate music-box celesta and harp open alone in immediate atmosphere, then lilting waltz strings, soft clarinet and accordion color rise with wonder; a gentle build to a radiant, joyful orchestral bloom with one shimmering cymbal swell as the lights ignite, easing into a tender nostalgic piano-and-strings farewell that dissolves like a lantern going out. Uplifting, dreamlike, deeply nostalgic. Instrumental only, no vocals.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Paris at golden dawn in the summer of 1900: sweeping aerial along the Seine over the Exposition Universelle grounds — ornate white exhibition palaces with domes and gilded statues, the Eiffel Tower painted golden yellow, footbridges and moored river boats, flags of many nations stirring, early crowds in Belle Époque dress crossing vast plazas.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The Paris 1900 world's fair: elegant visitors glide past on the raised wooden moving sidewalk — ladies in long pastel dresses and wide feathered hats laughing as they hold the rail, gentlemen in boater hats stepping between the slow and fast lanes; ornate iron lampposts and pavilion facades slipping by behind them in bright afternoon light.",
+      "seed": null,
+      "fact": "A SIDEWALK THAT MOVED — 1900"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Dusk at the Paris 1900 exposition: the Palace of Electricity ignites — thousands of incandescent bulbs trace every arch, spire and cornice in golden light, a radiant crowned figure of light at its peak, fountains below glowing violet and gold; a vast crowd in evening dress stares upward, faces lit with wonder, in an era of candlelit homes.",
+      "seed": null,
+      "fact": "LIT BY ELECTRICITY ALONE"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Paris night in the summer of 1900: the giant hundred-meter Ferris wheel turns slowly against a deep blue sky, its gondolas carrying tiny elegant figures; below, the fairgrounds sparkle with strings of electric lights reflected in the Seine; distant fireworks bloom softly over the rooftops of the city.",
+      "seed": null,
+      "fact": "OVER 50 MILLION VISITORS"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Paris in the autumn of 1900: an Art Nouveau Métro entrance of sinuous green iron and glowing amber glass; passengers in period coats descend the steps into warm light as golden leaves drift down; the camera rises slowly above gaslit boulevards toward the distant fading lights of the exposition grounds. Wistful and tender.",
+      "seed": null,
+      "fact": "THE FIRST MÉTRO OPENED IN 1900"
+    }
+  ],
+  "title_card": {
+    "title": "Paris, 1900",
+    "subtitle": "The World's Fair of Wonders"
+  },
+  "hook_shot": 3
+}

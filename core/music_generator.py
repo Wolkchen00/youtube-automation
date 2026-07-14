@@ -84,6 +84,17 @@ MUSIC_PROMPTS = {
         "Continuous and seamless, NO abrupt changes, no hard ending. Instrumental "
         "only — like drifting through a colossal beautiful world."
     ),
+    # footnotes (tarih dipnotları, the__footnote formatı): Suno birincil — plan['music']
+    # her bölümde DÖNEME/BÖLGEYE özgü duygusal skor yazar; bu YEDEK prompt yalnız
+    # Suno + Lyria birlikte düşerse devreye girer.
+    "footnotes": (
+        "Emotional cinematic historical score. Aching solo strings over a deep warm "
+        "drone, distant wordless choir, soft piano fragments, slow orchestral swells "
+        "rising to a restrained sorrowful peak with gentle timpani pulses. Nostalgic, "
+        "elegiac, dignified — the sound of remembering something the world forgot. "
+        "Opens with immediate atmosphere, no long intro. Instrumental only, no "
+        "vocals, no hard ending."
+    ),
     # night-shift (CCTV anthology): realistic empty-building room tone, NOT music
     "night-shift": (
         "Ultra-quiet realistic room tone of an empty building at night, as heard "
@@ -122,6 +133,7 @@ AMBIENT_PROFILES = {
     # + pembe gürültü = uzak havalandırma. Müzik değil, 'boş bina gece sesi'.
     "night-shift":         {"drone": 60.0, "fifth": 120.0, "lp": 330, "trem": 0.11},
     "the-drift":           {"drone": 69.3, "fifth": 103.8, "lp": 820, "trem": 0.14},  # sıcak/rüyamsı sinematik
+    "footnotes":           {"drone": 58.3, "fifth": 87.3, "lp": 560, "trem": 0.12},   # ağıtsı/nostaljik tarih
     "the-vast":            {"drone": 65.4, "fifth": 98.0, "lp": 760, "trem": 0.13},   # uçsuz/huşu dolu vista
     "planetfall":          {"drone": 61.7, "fifth": 92.5, "lp": 720, "trem": 0.13},   # epik/kozmik keşif
 }

@@ -299,6 +299,73 @@ def concatenate_crossfade(
     return output_path
 
 
+def concatenate_video_crossfade(
+    video_files: list,
+    output_path: str | Path,
+    fade: float = 0.6,
+) -> Path:
+    """Klipleri sinematik VIDEO crossfade (xfade) ile birleştir — the__footnote tarzı
+    dönem-daldırma kurgusu: her sahne bir sonrakinin içinde erir.
+
+    Sesle uğraşmaz: kaynak sesler ATILIR, yerine sessiz bir stereo iz basılır.
+    Bu yol, müziğin post'ta replace_original=True ile TEK ses olduğu anlatımsız
+    seriler için tasarlandı — acrossfade'in 'sessiz/ses-siz klip = filtre çöker'
+    tuzağına hiç girmez. xfade iki girdinin birebir aynı boyut/fps'te olmasını
+    şart koştuğu için tüm girdiler önce 1080x1920'ye normalize edilir.
+    Toplam süre = Σ süre − (N−1)·fade → çağıran taraf (produce) çekim ofsetlerini
+    aynı kaymayla hizalamak zorundadır. Hata FIRLATIR — çağıran düz kesmeye düşer.
+    """
+    output_path = Path(output_path)
+    files = [Path(v) for v in video_files]
+    if len(files) < 2:
+        import shutil
+        shutil.copy2(str(files[0]), str(output_path))
+        return output_path
+
+    durations = [get_video_duration(f) for f in files]
+    if any(d <= fade * 2 for d in durations):
+        raise ValueError(f"crossfade için klip çok kısa (fade={fade}s, süreler="
+                         f"{[round(d, 2) for d in durations]})")
+
+    inputs = []
+    for f in files:
+        inputs.extend(["-i", str(f)])
+    total = sum(durations) - fade * (len(files) - 1)
+
+    parts = []
+    for i in range(len(files)):
+        parts.append(
+            f"[{i}:v]scale=1080:1920:force_original_aspect_ratio=decrease,"
+            f"pad=1080:1920:(ow-iw)/2:(oh-ih)/2,fps={FFMPEG_FPS},setsar=1,"
+            f"format=yuv420p[n{i}]"
+        )
+    prev, cum = "n0", 0.0
+    for i in range(1, len(files)):
+        cum += durations[i - 1]
+        off = max(0.0, cum - i * fade)
+        cur = "vout" if i == len(files) - 1 else f"x{i}"
+        parts.append(f"[{prev}][n{i}]xfade=transition=fade:duration={fade:.2f}:"
+                     f"offset={off:.3f}[{cur}]")
+        prev = cur
+
+    cmd = (["ffmpeg", "-y"] + inputs + [
+        "-f", "lavfi", "-t", f"{total:.3f}",
+        "-i", "anullsrc=channel_layout=stereo:sample_rate=44100",
+        "-filter_complex", ";".join(parts),
+        "-map", "[vout]", "-map", f"{len(files)}:a",
+        "-c:v", "libx264", "-crf", FFMPEG_CRF, "-preset", FFMPEG_PRESET,
+        "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+        "-r", FFMPEG_FPS, "-shortest",
+        str(output_path),
+    ])
+    logger.info(f"🔗 Crossfade (video-only) merge: {len(files)} klip, fade={fade}s")
+    subprocess.run(cmd, capture_output=True, check=True, timeout=900)
+    if not output_path.exists() or output_path.stat().st_size == 0:
+        raise RuntimeError("crossfade çıktısı boş")
+    logger.info(f"✅ Merged (crossfade): {output_path}")
+    return output_path
+
+
 def make_loop_video(input_path: str | Path, output_path: str | Path) -> Path:
     """Create a seamless loop by appending reversed video.
 
