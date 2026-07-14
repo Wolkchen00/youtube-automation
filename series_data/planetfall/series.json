@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 15,
-  "next_part": 12,
+  "next_part": 13,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -137,6 +137,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-13T18:38:38.877337+00:00"
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep12/ep12_narrated_music_hooked.mp4",
+      "subtitle": "ZEPHYRA: The Sky Whirl",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-14T18:01:31.703208+00:00"
     }
   },
   "auto_replenish": {
