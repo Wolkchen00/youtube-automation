@@ -480,6 +480,80 @@ def generate_topaz_upscale(video_url: str, upscale_factor: str = "2",
     return _poll_video_with_credits(task_id, max_attempts=max_attempts)
 
 
+# ─── Suno Music (kie suno-api; ayrı endpoint ailesi) ──────────────────────────
+
+SUNO_GENERATE = "https://api.kie.ai/api/v1/generate"
+SUNO_RECORD_INFO = "https://api.kie.ai/api/v1/generate/record-info"
+# Suno webhook zorunlu alan ama biz poll ediyoruz — placeholder yeterli.
+SUNO_CALLBACK_PLACEHOLDER = "https://example.com/suno-callback"
+
+
+def generate_suno_music(style_prompt: str, title: str = "Score",
+                        model: str = "V5", instrumental: bool = True,
+                        max_attempts: int = 40, poll_interval: int = 10) -> dict | None:
+    """Suno ile GERÇEK müzik üret (kie suno-api). Dönüş: {"url", "duration"} | None.
+
+    customMode=true + instrumental=true → 'style' alanı türü/ruh halini belirler
+    (V4_5+/V5'te 1000 karaktere kadar). Suno ~1-4 dk'lık tam parça üretir; video
+    tarafı (mix_background_music) parçayı zaten video boyuna kırpar + fade'ler,
+    o yüzden style prompt'u 'parça HEMEN atmosferle başlasın' diye kurulmalı.
+    Sonuç 14 gün saklanır → aynı koşuda indirilmeli. Başarısız görev kredi yakmaz.
+    """
+    payload = {
+        "prompt": style_prompt[:2800],
+        "style": style_prompt[:950],
+        "title": (title or "Score")[:80],
+        "customMode": True,
+        "instrumental": bool(instrumental),
+        "model": model,
+        "callBackUrl": SUNO_CALLBACK_PLACEHOLDER,
+    }
+    try:
+        resp = requests.post(SUNO_GENERATE, json=payload, headers=_headers(), timeout=30)
+        data = resp.json()
+    except Exception as e:
+        logger.error(f"❌ Suno bağlantı hatası: {e}")
+        return None
+    if data.get("code") != 200:
+        logger.error(f"❌ Suno görev hatası (code={data.get('code')}): {str(data)[:200]}")
+        return None
+    task_id = (data.get("data") or {}).get("taskId")
+    if not task_id:
+        logger.error(f"❌ Suno taskId yok: {str(data)[:200]}")
+        return None
+    logger.info(f"🎼 Suno görevi oluşturuldu: {task_id}")
+
+    for attempt in range(1, max_attempts + 1):
+        time.sleep(poll_interval)
+        try:
+            r = requests.get(f"{SUNO_RECORD_INFO}?taskId={task_id}",
+                             headers=_headers(), timeout=30)
+            d = (r.json() or {}).get("data") or {}
+            status = str(d.get("status") or "").upper()
+            # FIRST_SUCCESS'te ilk parça hazır — beklemeyi kısaltır.
+            if status in ("SUCCESS", "FIRST_SUCCESS"):
+                tracks = ((d.get("response") or {}).get("sunoData")) or []
+                for t in tracks:
+                    url = t.get("audioUrl") or t.get("audio_url") or t.get("sourceAudioUrl")
+                    if url:
+                        dur = t.get("duration")
+                        logger.info(f"✅ Suno müzik hazır ({attempt} poll, {dur}s): {t.get('title','')}")
+                        return {"url": url, "duration": dur}
+                if status == "SUCCESS":
+                    logger.error(f"❌ Suno SUCCESS ama audioUrl yok: {str(d)[:200]}")
+                    return None
+            elif "FAIL" in status or status in ("CREATE_TASK_FAILED", "GENERATE_AUDIO_FAILED",
+                                                "SENSITIVE_WORD_ERROR"):
+                logger.error(f"❌ Suno başarısız ({status}): {d.get('errorMessage', '?')}")
+                return None
+            elif attempt % 6 == 0:
+                logger.info(f"⏳ Suno {status or 'PENDING'} ({attempt}/{max_attempts})")
+        except Exception as e:
+            logger.warning(f"⚠️ Suno poll hatası: {e} (deneme {attempt})")
+    logger.error(f"❌ Suno zaman aşımı ({max_attempts * poll_interval}s)")
+    return None
+
+
 # ─── Credit Check ─────────────────────────────────────────────────────────────
 
 def check_credit() -> dict | None:

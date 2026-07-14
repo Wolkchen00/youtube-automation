@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "the light that waits"
+  },
+  "synopsis": "A weathered lighthouse blazes warm gold through a storm while a lantern-lit tall ship rides dark teal swells beneath snow-striped mountains.",
+  "narration": "",
+  "music": "Cinematic ambient with a slow orchestral heart. A low string-like drone opens immediately under soft rain-textured pads, then warm brass-toned swells bloom slowly like a beam of light sweeping through storm clouds, joined by sparse felt piano notes with long reverb tails. Around 40 BPM, no percussion, no vocals. The piece rises through the storm into a hopeful sustained golden peak, then settles into a calm glowing afterlight.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Low drone shot already inside the drama: a weathered white-and-rust lighthouse on jagged black rocks, its lamp blazing warm gold through sheets of storm rain, the beam cutting a bright cone through dark teal air. Huge foaming waves explode against the rocks in slow heavy spray. Behind, snow-striped mountains fade into storm clouds. In the distance a tall three-masted sailing ship with lantern-lit sails rides the swell. Slow push-in toward the lighthouse, rain and spray catching the golden light, chiaroscuro contrast of warm gold against near-black sea.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same slow push-in curves gently to the right without a cut, drifting past the lighthouse tower as its golden beam sweeps across the frame, illuminating drifting rain and sea spray in the air like embers. The tall sailing ship rises over a dark swell directly into the beam's path, its lantern-lit sails glowing warm against the storm. Waves continue their slow heavy rhythm against the rocks below. The motion eases into a sustained final image: ship, beam and storm sea held in golden-dark balance.",
+      "seed": null
+    }
+  ]
+}

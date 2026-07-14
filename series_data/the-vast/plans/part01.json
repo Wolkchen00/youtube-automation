@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "where the city touches the clouds"
+  },
+  "synopsis": "A colossal tiered megacity built into a dusk cliff face glows through lavender fog while a giant ship drifts overhead and tiny cars trace the cliff-edge highway.",
+  "narration": "",
+  "music": "Cinematic ambient score full of vast quiet awe. A deep resonant synth drone opens instantly, then ethereal evolving pads swell layer by layer with a faint wordless choir shimmer and a deep soft sub-bass. Glacial tempo around 35 BPM, no percussion, no vocals. The music builds like fog lifting off a giant city at dusk, reaching a sustained majestic emotional peak, then easing into a warm lingering afterglow that never fully resolves.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Aerial view already deep inside the vista: a colossal tiered megacity built into the face of a mile-high cliff at dusk, thousands of warm amber windows glowing through lavender and pink fog. A curving highway ribbon hugs the cliff edge with tiny cars moving along it, headlights on. High above, an enormous ancient ship drifts silently across the rose-colored sky. Two thin beams of white light rise from the city core into the haze. Slow dolly forward, gliding gently toward the city, volumetric fog drifting between towers, hyper-detailed architecture receding into atmospheric depth.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same slow dolly forward continues without a cut: the camera glides past the cliff edge and the lower city is revealed dissolving into an ocean of glowing violet mist far below, scattered light beams rising through it into the dusk. The colossal drifting ship passes closer overhead as a soft silhouette, its hull lights winking on one by one. The amber windows of the cliff city drift by on the right, tiny cars still flowing along the highway. The drift eases into a serene sustained final vista of city, mist and sky in lavender-gold balance.",
+      "seed": null
+    }
+  ]
+}

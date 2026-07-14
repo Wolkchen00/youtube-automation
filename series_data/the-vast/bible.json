@@ -1,0 +1,28 @@
+{
+  "series": {
+    "slug": "the-vast",
+    "title": "The Vast",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false,
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "micro_trim": 0.25,
+    "upscale": {
+      "enabled": true,
+      "factor": "2"
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "Mesmerizing-vista channel: ONE continuous ultra-slow camera move per shot is the INTENDED style — do NOT flag slow drift, heavy fog, haze, dusk gloom or dreamlike scale as defects. FAIL only on real rendering errors: broken/shattered geometry, glitch or duplicated frames, warped/melting structures, malformed vehicles, animals or human figures, readable close-up faces, sudden cuts or speed jumps, burned-in text/logos/watermarks."
+    }
+  },
+  "art_style": "Photorealistic cinematic vista shot on anamorphic 35mm film — one single continuous ultra-slow camera move through a world of impossible scale, razor-sharp hyper-detailed 4K clarity. Colossal subjects rendered believable, contrasted with tiny warm human-scale details: lit windows, distant vehicles, chimney smoke, small lantern lights. Cool desaturated base palette of slate blue, teal and lavender fog, pierced by one warm amber-gold light source. Heavy atmosphere: volumetric fog, storm haze, dusk glow, drifting mist, deep atmospheric perspective. Soft cinematic lighting, gentle anamorphic flare, subtle 35mm film grain. Serene, awe-filled, hopeful mood — never dark or dystopian. Smooth constant motion, no cuts, no speed changes, no on-screen text, no watermark, no captions, vertical 9:16 composition.",
+  "style_ref_url": null,
+  "narration": {},
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

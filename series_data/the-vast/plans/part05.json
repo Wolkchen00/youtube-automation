@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "the colossus remembers"
+  },
+  "synopsis": "A half-buried colossal stone head rises serene from rose-gold dawn dunes while a tiny camel caravan passes at its base, and beyond it a valley of sleeping colossi marches into the mist.",
+  "narration": "",
+  "music": "Ancient-toned cinematic ambient. A low warm drone opens instantly beneath a breathy duduk-like woodwind melody, sparse and mournful-sweet, with shimmering high strings and a deep slow sub-bass swell. Around 40 BPM, no drums, no vocals. Reverent and wondrous, like dawn light crossing something older than memory; it climbs patiently to a sustained luminous peak, then exhales into a soft desert-wind fade.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Ultra-slow dolly across a silent rose-gold desert at dawn, already facing the wonder: a colossal ancient statue half-buried in the dunes, its serene weathered stone face and one shoulder rising ten stories above the sand. Fine sand smokes off the dune ridges in the wind, catching low golden light. At the statue's base a tiny caravan of three camels and robed riders passes, casting long thin shadows. Gentle heat haze and volumetric dawn light layer the scene; every crack and lichen stain on the stone face is sharply detailed.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same ultra-slow dolly drifts upward along the statue's weathered face without a cut, rising past its calm closed eyes into the golden dawn sky, and reveals beyond it a wide valley where more half-buried colossi march in a silent row into rose-colored mist, each one fainter with distance. A few birds circle the nearest statue's crown, tiny against the stone. Sand-smoke drifts across the frame in slow ribbons. The rise settles into a sustained final vista of the sleeping colossi under the warming sky.",
+      "seed": null
+    }
+  ]
+}

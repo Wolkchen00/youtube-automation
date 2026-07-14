@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "smoke over the snow"
+  },
+  "synopsis": "A lone timber cottage with one glowing orange window sends chimney smoke into blue-hour snowfall, and behind the hill a frozen lake mirrors a pale green aurora.",
+  "narration": "",
+  "music": "Intimate ambient like a memory of home. Soft felt piano phrases open at once over a warm analog synth pad, with a faint music-box shimmer and deep gentle sub-bass warmth. Around 45 BPM, no percussion, no vocals. Nostalgic, safe and tender; the piece swells softly as if aurora light is spreading across a night sky, holds a warm emotional peak, then drifts down into a hushed peaceful ending like falling snow.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Gentle aerial drift already close to the subject: a lone timber cottage on a snowy hillside at deep blue-hour dusk, one window glowing warm orange, chimney smoke curling slowly into the cold air. Snow falls softly through the frame. Around it, a pine forest dusted white fades into volumetric mist; far below in the valley, a scatter of tiny distant town lights. The drift moves slowly toward and slightly above the cottage, snowflakes drifting past the lens, the single warm window burning steady in the vast blue cold.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same gentle aerial drift continues rising over the cottage roof without a cut, chimney smoke drifting across the frame, and reveals behind the hill an enormous frozen lake mirroring a sky of pale green aurora, its light rippling softly on the ice between drifting bands of mist. The snowy pines frame the reveal on both sides; the warm orange window still glows at the edge of frame, tiny against the aurora's vast cold light. The motion settles into a serene sustained final vista of ice, aurora and falling snow.",
+      "seed": null
+    }
+  ]
+}

@@ -74,6 +74,16 @@ MUSIC_PROMPTS = {
         "no hard ending. Instrumental only, no vocals. Similar to an "
         "Interstellar-style ambient-orchestral score."
     ),
+    # the-vast (büyüleyici manzara): Suno birincil (plan['music']); bu YEDEK prompt
+    "the-vast": (
+        "Cinematic ambient score of vast serene awe. Deep resonant synth drone "
+        "foundation, slowly evolving ethereal pads, soft felt-piano notes with long "
+        "reverb tails, faint wordless choir shimmer. Glacial tempo, NO percussion, "
+        "no vocals. Opens with immediate atmosphere, swells gradually to a sustained "
+        "majestic emotional peak, then softens into a gentle lingering afterglow. "
+        "Continuous and seamless, NO abrupt changes, no hard ending. Instrumental "
+        "only — like drifting through a colossal beautiful world."
+    ),
     # night-shift (CCTV anthology): realistic empty-building room tone, NOT music
     "night-shift": (
         "Ultra-quiet realistic room tone of an empty building at night, as heard "
@@ -112,6 +122,7 @@ AMBIENT_PROFILES = {
     # + pembe gürültü = uzak havalandırma. Müzik değil, 'boş bina gece sesi'.
     "night-shift":         {"drone": 60.0, "fifth": 120.0, "lp": 330, "trem": 0.11},
     "the-drift":           {"drone": 69.3, "fifth": 103.8, "lp": 820, "trem": 0.14},  # sıcak/rüyamsı sinematik
+    "the-vast":            {"drone": 65.4, "fifth": 98.0, "lp": 760, "trem": 0.13},   # uçsuz/huşu dolu vista
     "planetfall":          {"drone": 61.7, "fifth": 92.5, "lp": 720, "trem": 0.13},   # epik/kozmik keşif
 }
 DEFAULT_AMBIENT = {"drone": 60.0, "fifth": 90.0, "lp": 700, "trem": 0.13}
@@ -162,6 +173,34 @@ def _synth_ambient_bed(channel: str, output_path: Path, duration: int = 30) -> P
         return None
 
 
+def _try_suno_music(channel: str, custom_prompt: str, output_path: Path,
+                    title: str = "") -> Path | None:
+    """Suno (kie) ile sahneye ÖZEL gerçek müzik üret — yalnız custom_prompt varken.
+
+    custom_prompt = plan'ın 'music' alanı (Gemini yönetmen sahneyle birlikte yazar)
+    → her videonun müziği görüntünün ruhuna birebir eşleşir (hiroisekai modeli).
+    Kanal-geneli sabit prompt'lu seriler bilerek Suno'ya SOKULMAZ (maliyet/opt-in):
+    plan'ında 'music' alanı olmayan hiçbir seri bu yola giremez."""
+    if not custom_prompt:
+        return None
+    try:
+        from .kie_api import generate_suno_music
+        from .utils import download_file
+    except Exception as e:
+        logger.warning(f"⚠️ Suno modülü yüklenemedi: {e}")
+        return None
+    logger.info(f"🎼 Suno müzik deneniyor ({channel})...")
+    res = generate_suno_music(custom_prompt, title=title or f"{channel} score")
+    if not res or not res.get("url"):
+        return None
+    mp3 = output_path if str(output_path).endswith(".mp3") else Path(str(output_path) + ".mp3")
+    if download_file(res["url"], mp3) and mp3.exists() and mp3.stat().st_size > 0:
+        logger.info(f"🎼 Suno müzik kaydedildi ({res.get('duration')}s): {mp3.name}")
+        return mp3
+    logger.warning("⚠️ Suno müzik indirilemedi")
+    return None
+
+
 def _try_lyria_music(channel: str, custom_prompt: str, output_path: Path) -> Path | None:
     """Lyria 3 ile GERÇEK müzik üretmeyi dene (yalnızca ücretli/erişimli anahtarda çalışır)."""
     key = MUSIC_PROMPT_ALIASES.get(channel, channel)
@@ -189,9 +228,13 @@ def generate_background_music(
     channel: str,
     custom_prompt: str = None,
     output_path: str | Path = None,
+    title: str = "",
 ) -> Path | None:
-    """Sürekli arka plan müziği üret. Önce Lyria (gerçek müzik), olmazsa yerel ambient bed.
+    """Sürekli arka plan müziği üret.
 
+    Sıra: Suno (yalnız sahneye-özel custom_prompt varsa; gerçek kompozisyon)
+        → Lyria (kanal prompt'u; erişim varsa)
+        → yerel ffmpeg ambient bed (kota yok → asla boşluk kalmaz).
     HER VİDEO için benzersiz dosya verilirse (output_path) benzersiz müzik döner.
     Dönüş: ses dosyası yolu veya None.
     """
@@ -205,9 +248,13 @@ def generate_background_music(
         output_path = MUSIC_CACHE_DIR / f"{channel}_bg_music.mp3"
     output_path = Path(output_path)
 
-    # 1) Gerçek müzik (Lyria) — varsa en iyisi
+    # 1) Sahneye-özel gerçek kompozisyon (Suno) — plan 'music' alanı taşıyorsa
+    real = _try_suno_music(channel, custom_prompt, output_path, title=title)
+    if real:
+        return real
+    # 2) Gerçek müzik (Lyria) — erişim varsa
     real = _try_lyria_music(channel, custom_prompt, output_path)
     if real:
         return real
-    # 2) Yedek: yerel ffmpeg ambient bed (kota yok → asla boşluk kalmaz)
+    # 3) Yedek: yerel ffmpeg ambient bed (kota yok → asla boşluk kalmaz)
     return _synth_ambient_bed(key, output_path)

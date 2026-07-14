@@ -125,7 +125,14 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
             ch = narr_cfg.get("channel") or bible.slug
             # Her video kendi müziğini alsın → benzersiz dosya = benzersiz üretim
             music_file = episode_dir(bible.slug, number) / "bg_music.mp3"
-            music_path = generate_background_music(ch, output_path=music_file)
+            # Plan sahneye-özel müzik prompt'u taşıyorsa (plan['music'], Gemini
+            # yönetmen sahneyle birlikte yazar) müzik motoru Suno'ya gider →
+            # her videonun skoru görüntünün ruhuna birebir eşleşir. Alan yoksa
+            # davranış ESKİSİYLE AYNI (Lyria → ambient bed).
+            music_prompt = str(plan.get("music") or "").strip() or None
+            ep_title = str(plan.get("episode", {}).get("title") or "").strip()
+            music_path = generate_background_music(ch, custom_prompt=music_prompt,
+                                                   output_path=music_file, title=ep_title)
             if music_path and Path(music_path).exists():
                 music_out = out.parent / f"{out.stem}_music.mp4"
                 if narration_ok:

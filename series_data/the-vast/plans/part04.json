@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "islands that never land"
+  },
+  "synopsis": "Colossal floating islands pour waterfalls into a bottomless sea of golden-hour clouds, and beneath the largest island a tiny lantern-lit shrine glows in the falling mist.",
+  "narration": "",
+  "music": "Warm weightless cinematic ambient. Harp-like arpeggios open immediately over lush slowly-breathing string pads and an airy wordless choir halo. Around 50 BPM, no percussion, no vocals. Golden and floating, like sunlight through falling water; the piece blooms gradually into a soaring sustained peak of wonder, then releases into a soft shimmering afterglow that fades like mist.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Slow crane descend already among the wonder: a chain of colossal floating islands hanging in golden-hour sky, waterfalls pouring off their mossy edges and dissolving into a bottomless sea of sunlit clouds below. Ancient stone ruins and wind-bent pines crown the island tops; flocks of tiny birds circle far beneath. Backlit mist catches the low sun as drifting gold dust. The camera descends gently past the islands, waterfalls streaming by in slow silver threads, deep atmospheric haze layering island after island into the distance.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same slow crane descend continues without a cut, slipping beneath the largest island into a canyon of golden clouds: the waterfalls turn to drifting veils of glowing mist around the camera, and clinging to the island's underside a small stone shrine appears, its tiny lanterns burning warm amber inside the cool golden haze. Sunlight flares gently anamorphic through the falling water overhead; roots and hanging vines trail past. The descent eases into a sustained final image of the lantern-lit shrine floating in endless gold cloud.",
+      "seed": null
+    }
+  ]
+}

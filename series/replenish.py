@@ -22,6 +22,7 @@ series.json şeması:
     "batch": 5,             // ops. (1-10): her ikmalde kaç yeni bölüm
     "min_queue": 2,         // ops. (>=1): bekleyen bölüm bunun altına inince ikmal
     "brief": "...",         // ops.: Gemini'ye seriye özgü yaratıcı yön (Türkçe olabilir)
+    "music_prompt": true,   // ops.: bölüm başına sahne-eşleşmeli 'music' alanı istenir (Suno)
     "shots": 4,             // ops.: bölüm başına çekim sayısı
     "shot_seconds": "8",    // ops.: çekim süresi ("4"|"6"|"8"|"10")
     "last_run": {...}       // makine yazar
@@ -199,6 +200,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     wmax = int((narr_cfg or {}).get("max_words", 125))
     want_tc = bool(cfg.get("title_card"))
     want_fc = bool(cfg.get("fact_captions"))
+    want_music = bool(cfg.get("music_prompt"))
     humans_mode = str(cfg.get("humans") or "").strip().lower()
     humans_featured = humans_mode == "featured"
     humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
@@ -222,6 +224,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
 
     tc_shape = ('\n   "title_card": {"title": "<subject name, max 40 chars>", '
                 '"subtitle": "<max 48 chars>"},') if want_tc else ""
+    music_shape = ('\n   "music": "<40-90 word instrumental music style prompt '
+                   'matched to THIS episode>",') if want_music else ""
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
     if shot_refs:
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
@@ -242,6 +246,14 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                  'while the viewer watches. NO "fact" on the final resolve shot; omit "fact" where the shot '
                  'shows nothing concrete. NEVER invent a number — every fact must come from the brief entry.'
                  if want_fc else "")
+    music_rule = ('\n- MUSIC: "music" = a 40-90 word ENGLISH prompt for an AI music generator, composed '
+                  'TOGETHER with the visuals so score and image share one soul: name genre, mood, 2-4 '
+                  'instruments, rough tempo (slow/glacial), and an arc that mirrors the episode (open '
+                  'atmospheric → swell → sustained emotional peak → gentle end). INSTRUMENTAL only, no '
+                  'vocals, no drums unless the scene demands a pulse. The track starts playing from its '
+                  'very first second, so it must open with immediate atmosphere — no long silent intro. '
+                  'Each episode gets a CLEARLY different musical color (vary instruments/scale/texture).'
+                  if want_music else "")
     refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
                  '"environment"; follow the brief about when to use them.' if shot_refs else "")
     if humans_featured:
@@ -263,7 +275,7 @@ Return STRICT JSON ONLY, exactly this shape:
   {{"episode": {{"number": <int>, "title": "<title>"}},
    "synopsis": "<one sentence>",
    "hook_shot": <int>,
-   "narration": {narr_shape},{tc_shape}
+   "narration": {narr_shape},{tc_shape}{music_shape}
    "shots": [{{{shot_fields}}}]}}
 ]}}
 
@@ -273,7 +285,7 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{fact_rule}{refs_rule}
+  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{fact_rule}{music_rule}{refs_rule}
 - SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final
   frame): shot 1 opens a brand-new striking scene; every later shot's prompt must
   describe ONE continuous transformation that begins EXACTLY at the previous shot's end
@@ -337,6 +349,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     wmax = int((narr_cfg or {}).get("max_words", 125))
     want_tc = bool(cfg.get("title_card"))
     want_fc = bool(cfg.get("fact_captions"))
+    want_music = bool(cfg.get("music_prompt"))
     shot_refs = bool(cfg.get("shot_refs"))
 
     errors: list[str] = []
@@ -361,9 +374,9 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
         fact_count = 0
-        if not isinstance(raw_shots, list) or not (3 <= len(raw_shots) <= 6):
+        if not isinstance(raw_shots, list) or not (2 <= len(raw_shots) <= 6):
             got = len(raw_shots) if isinstance(raw_shots, list) else "yok"
-            errors.append(f"part {want}: çekim sayısı 3-6 olmalı (gelen: {got})")
+            errors.append(f"part {want}: çekim sayısı 2-6 olmalı (gelen: {got})")
         else:
             for k, shot in enumerate(raw_shots, start=1):
                 shot = shot if isinstance(shot, dict) else {}
@@ -422,6 +435,14 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "synopsis": str(plan.get("synopsis") or "").strip()[:300],
                       "narration": ntext,
                       "shots": clean_shots}
+        if want_music:
+            mtext = str(plan.get("music") or "").strip()
+            mwc = len(mtext.split())
+            if not (20 <= mwc <= 140):
+                errors.append(f"part {want}: music prompt {mwc} kelime — 40-90 hedef "
+                              f"(kabul 20-140) dışında")
+            else:
+                normalized["music"] = mtext
         if want_tc:
             tcv = plan.get("title_card") or {}
             tt = str(tcv.get("title") or "").strip()
