@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 5,
-  "next_part": 1,
+  "next_part": 2,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -27,5 +27,17 @@
     "title_style": "a lowercase poetic phrase of 2-6 words that reads like a quiet thought (e.g. 'where the city touches the clouds', 'the light that waits', 'smoke over the snow') — no quotes, no emoji, no punctuation except an optional period",
     "brief": "Büyüleyici manzara serisi (metronovon / hiroisekai / skybound.world tarzı — fotoreal, sinematik, huşu uyandıran). Her bölüm TEK kesintisiz süzülen plan gibi akan ~20 saniyelik bir vista'dır: 2 çekim × 10 sn, kare-zinciriyle tek plan hissi. KURAL 1 — İLK KARE = DORUK: çekim 1 doğrudan nefes kesen manzaranın İÇİNDE açılır (yavaş kurulum YASAK; izleyici ilk yarım saniyede 'vay' demeli). KURAL 2 — TEK YAVAŞ KAMERA HAREKETİ: bölüm başına adıyla TEK sinematik hareket (slow dolly-in / slow crane descend / gentle aerial drift / slow pan); en fazla 2 kamera niteleyicisi; hızlı hareket ve kesme YASAK; çekim 2 aynı hareketle öncekinin son karesinden devam eder ve ikinci bir katman/mucize AÇIĞA ÇIKARIR (reveal), sonra dingin sürdürülen finalle biter. KURAL 3 — ÖLÇEK KONTRASTI: devasa tek özne (megastrüktür şehir, deniz feneri, kolosal heykel, yüzen ada, buzul, okyanus gemisi, gök limanı, antik tapınak, dev köprü, kanyon...) + minicik sıcak yaşam detayı (ışıklı pencereler, uzak arabalar, baca dumanı, fenerli kervan, güvertede minik figürler). KURAL 4 — PALET: soğuk desatüre taban (kurşuni mavi, teal, lavanta sis) + TEK sıcak amber/altın ışık kaynağı. KURAL 5 — ATMOSFER: 'volumetric fog', 'storm haze', 'dusk glow', 'drifting mist' gibi somut atmosfer anahtar kelimeleri kullan. Her bölüm YENİ bir dünya/biyom/arketip — şehir, okyanus, dağ, çöl, kutup, gökyüzü, orman, antik harabe, sualtı-üstü... arka arkaya aynı arketip GELMESİN, palet vurgusu da bölümden bölüme değişsin. Ton: umutlu, dingin, hayranlık; distopya/korku/karanlık YASAK. Uzak/siluet SESSİZ insan figürleri serbest (asla yüz yakın planı). MÜZİK: 'music' alanını sahneyle BİRLİKTE bestele — tür + ruh + 2-4 enstrüman + yavaş tempo hissi (30-55 BPM) + bölümle aynı yay (atmosferik açılış → kabarma → duygusal doruk → yumuşak son); enstrümantal, vokalsiz, davulsuz; parça İLK saniyesinden atmosferle başlasın; her bölümün müzik rengi öncekilerden net farklı olsun (piyano / koro / yaylı / arp / nefesli dokularını dönüşümlü kullan)."
   },
-  "parts": {}
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep01/ep01_music_4k.mp4",
+      "subtitle": "where the city touches the clouds",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-14T16:12:38.312633+00:00"
+    }
+  }
 }
