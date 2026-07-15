@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -27,6 +27,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-14T21:59:05.544771+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep02/ep02_music_hooked_titled_capped.mp4",
+      "subtitle": "Paris, 1900 — The Summer the Future Arrived",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-15T22:01:05.203857+00:00"
     }
   },
   "auto_replenish": {
