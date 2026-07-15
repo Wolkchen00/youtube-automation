@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -38,6 +38,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-14T16:12:38.312633+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep02/ep02_music_4k.mp4",
+      "subtitle": "the light that waits",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-15T16:18:58.477309+00:00"
     }
   }
 }
