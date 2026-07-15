@@ -11,7 +11,7 @@
   ],
   "hashtags": "#survival #couldyousurvive #whatwouldyoudo #pov #survivaltips #howtosurvive #disaster #adventure #shorts #fyp",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -56,6 +56,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-14T20:24:35.086432+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/could-you-survive/episodes/ep03/ep03_narrated_music_hooked_titled_capped.mp4",
+      "subtitle": "Trapped by a Wildfire — Could You Outrun It?",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-15T20:14:57.997851+00:00"
     }
   }
 }
