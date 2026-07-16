@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 15,
-  "next_part": 14,
+  "next_part": 15,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -159,6 +159,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-15T18:08:23.326613+00:00"
+    },
+    "14": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep14/ep14_narrated_music_hooked.mp4",
+      "subtitle": "ASTREIA: Starfall Echoes",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-16T18:08:30.215959+00:00"
     }
   },
   "auto_replenish": {
