@@ -11,7 +11,7 @@
   ],
   "hashtags": "#survival #couldyousurvive #whatwouldyoudo #pov #survivaltips #howtosurvive #disaster #adventure #shorts #fyp",
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -67,6 +67,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-15T20:14:57.997851+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/could-you-survive/episodes/ep04/ep04_narrated_music_titled_capped.mp4",
+      "subtitle": "Could You Survive a Sinking U-Boat? — 1943",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-16T20:15:17.154745+00:00"
     }
   }
 }
