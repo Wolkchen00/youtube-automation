@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -38,6 +38,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-15T22:01:05.203857+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep03/ep03_music_hooked_titled_capped.mp4",
+      "subtitle": "Baghdad, 1258 — The Day the River Ran Black",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-16T22:11:10.548686+00:00"
     }
   },
   "auto_replenish": {
