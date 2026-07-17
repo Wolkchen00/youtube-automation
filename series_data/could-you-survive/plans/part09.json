@@ -1,0 +1,71 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "You Just Fell Through Ice — 10 Minutes of Movement"
+  },
+  "synopsis": "Submerged in freezing water after falling through ice, you must quickly extract yourself before hypothermia renders you immobile.",
+  "narration": "The ice cracks, then gives way. You’re plunged into freezing water, the shock stealing your breath. You have about ten minutes of useful movement before hypothermia renders you helpless. Do you try to pull yourself out vertically? The ice edge will likely break, wasting precious energy. Instead, kick your legs vigorously to get horizontal, then propel yourself forward onto the ice like a seal, distributing your weight. Roll away from the hole immediately. How would you fight the cold shock? Tell us your plan.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person perspective looking down at a vast, pristine frozen lake in an Alaskan winter wilderness. The ice surface is suddenly crisscrossed with spiderweb cracks, a dark opening appearing rapidly beneath the viewer. Snow-covered pines in the background.",
+      "seed": null,
+      "fact": "32°F WATER"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Over-the-shoulder shot of ihsan_survivor, wearing a thick, dark winter coat, hat, and gloves, submerged up to his chest in dark, icy water. His hands grip the jagged edge of the ice hole, his breath coming in ragged gasps. Cold shock is evident on his face.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "COLD SHOCK IN SECONDS"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Underwater perspective looking up at ihsan_survivor's legs frantically kicking in the murky, dark water, creating ripples on the underside of the ice. Bits of ice float around his legs. The cold is palpable in the blue-green light.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "ICE BREAKS EASILY"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "A close-up of ihsan_survivor's gloved hands, now wet and stiff, struggling to get a grip on the slick, breaking ice edge. His fingers are turning red from the cold. The effort is exhausting.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "10 MINUTES OF MOVEMENT"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Wide shot of the ice hole in the vast, silent wilderness. ihsan_survivor is a small, struggling figure in the center, surrounded by the stark white landscape and dark, menacing water. Heavy snow is falling lightly.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "NO ONE AROUND"
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_survivor, still in his thick winter coat, hat, and gloves, has managed to get his torso onto the ice, propelling himself forward in a seal-like motion. His face is grim but determined as he rolls away from the precarious hole, exhaling steam into the cold air. Snow continues to fall.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "FALLEN THROUGH ICE",
+    "subtitle": "Alaskan Wilderness, 1990"
+  },
+  "hook_shot": 2
+}

@@ -1,0 +1,68 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "Could You Survive a Crevasse Fall? — 100 Feet Deep"
+  },
+  "synopsis": "You find yourself suspended upside down in a glacial crevasse, needing to act fast before ice or exhaustion takes you.",
+  "narration": "You’re plummeting, then suddenly suspended upside down in a glacial crevasse, freezing wind biting at your skin. Below, a hundred feet of darkness. Your rope is your only lifeline. Do you immediately try to climb out? That’s often a fatal mistake. The extreme cold will drain your strength in minutes. Instead, secure yourself to the rope with prusiks, taking your weight off the harness. Then, slowly, methodically, begin your self-rescue. What would your first move be? Share your strategy below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A close-up, visceral view of fractured, sharp ice walls rushing past, a dark abyss below. Camera is tumbling downwards. Shallow depth of field, natural light reflecting off the ice.",
+      "seed": null,
+      "fact": "100 FEET DEEP"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Over-the-shoulder shot of ihsan_survivor, upside down, tethered by a rope around his waist, struggling against his harness. He is wearing a bright red mountaineering jacket, helmet, and ice axe clipped to his gear. His breath plumes in the icy air. The light is dim, reflecting off blue-white ice.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "HYPOTHERMIA IN MINUTES"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A wide, awe-inspiring shot looking down the crevasse. ihsan_survivor is a small figure suspended, dangling precariously, emphasizing the vast scale of the icy chasm and the sheer drop below. Jagged ice formations gleam under faint light from above. Extreme cold atmosphere.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "ICE WALLS CLOSE IN"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close-up on ihsan_survivor's gloved hands, wearing mountaineering gloves, fumbling with his gear, attempting to unclip something or secure himself to the rope. His movements are slow and deliberate, hampered by the cold and inverted position.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "FROSTBITE RISK"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Eye-level shot looking up at the narrow opening of the crevasse high above, a tiny sliver of bright sky visible. The ice walls are rough and formidable, creating a claustrophobic tunnel. A single rope disappears upwards.",
+      "seed": null,
+      "fact": "NO SIGNAL HERE"
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "A steady, patient shot of ihsan_survivor, righting himself slightly, now more stable. He takes a deep, controlled breath, his face etched with determination amidst the cold, his red jacket a stark contrast against the blue ice. The camera holds his resolve.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "GLACIAL CREVASSE",
+    "subtitle": "Mount Everest, 1924"
+  },
+  "hook_shot": 3
+}

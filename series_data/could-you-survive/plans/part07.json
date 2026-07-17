@@ -1,0 +1,68 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Deep Sea Dive — You Have 60 Seconds of Air"
+  },
+  "synopsis": "Trapped on the seafloor with a damaged rebreather, you must fix your equipment or ascend rapidly before oxygen runs out.",
+  "narration": "You’re 200 meters down, deep in the crushing dark, when your rebreather malfunctions. A critical O2 sensor flickers, then dies. You have seconds before your air mixture becomes toxic. Do you bolt for the surface in a panic? A rapid ascent guarantees a lethal case of decompression sickness, or worse, lung overexpansion. The correct move is an emergency blow-off, slowly releasing gas while ascending at a controlled rate, no faster than 10 meters per minute. What would you do in this terrifying situation? Tell us below.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person perspective looking down into the abyssal gloom. The beam of a powerful dive light illuminates a barren, silty seafloor, with the pressure distorting vision. Small, strange deep-sea creatures scatter from the light. Eerie, silent atmosphere.",
+      "seed": null,
+      "fact": "200 METERS DOWN"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close-up of ihsan_survivor's helmeted face inside a high-tech deep-sea diving suit, the visor reflecting the dim, cold light. His eyes are wide with alarm, looking at a malfunctioning rebreather display on his wrist. Bubbles escape from a small crack in the hose. He is wearing a heavy, articulated deep-sea dive suit.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "PRESSURE CRUSHES LUNGS"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A wide shot looking up from the seafloor, capturing ihsan_survivor's full form in the dive suit, dwarfed by the immense, dark water column above. He struggles with a piece of equipment, a cloud of silt rising around him. The surface is an impossibly distant, faint disc of light.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "DECOMPRESSION SICKNESS KILLS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Extreme close-up on ihsan_survivor's gloved hand, wearing thick dive gloves, frantically manipulating valves and hoses on his damaged rebreather, tiny bubbles indicating a leak. The gauges are unreadable in the dim light.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "100 ATM PRESSURES"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "An eye-level shot looking out into the total blackness beyond the dive light's beam. The silence is profound, broken only by the faint hiss of the rebreather. A faint, distorted hum might be heard from far above, a distant ship.",
+      "seed": null,
+      "fact": "DARKNESS ABYSSAL"
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_survivor, still on the seafloor, takes a moment of controlled, deep breaths inside his helmet. His hand now calmly adjusts a pressure valve, initiating a slow, deliberate ascent. A sense of focused determination replaces panic. He is wearing a heavy, articulated deep-sea dive suit.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "DEEP SEA DIVE",
+    "subtitle": "North Atlantic, 1980"
+  },
+  "hook_shot": 2
+}

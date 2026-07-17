@@ -1,0 +1,68 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "Your Elevator Is Falling — You Have 5 Seconds"
+  },
+  "synopsis": "Plummeting in a freefalling elevator, you must correctly brace for impact to survive the sudden stop.",
+  "narration": "The sickening lurch, the grinding shriek of tearing cables. Your elevator is in freefall, plummeting towards certain impact. You have less than five seconds to react. Do you attempt to jump just before hitting the bottom? Physics dictates you'd still be falling at the same speed as the elevator, likely hitting the ceiling and then the floor with devastating force. Instead, lie flat on your back, head covered, to distribute the impact force across your body. Would you have known how to brace yourself? Let us know in the comments.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person perspective looking up from inside an old, ornate elevator car. The cables above are visibly snapping and fraying against the backdrop of the shaft. The car gives a violent, sudden lurch downwards. Dim, flickering incandescent lights.",
+      "seed": null,
+      "fact": "FALLING 80 MPH"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Mid-shot of ihsan_survivor, in a classic 1970s business suit, tie askew, thrown against the back wall of the elevator. His eyes are wide with terror, body braced against the accelerating fall. Dust and debris fall from the ceiling.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "9.8 M/S² ACCELERATION"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A wide, low-angle shot from the floor of the elevator looking up at ihsan_survivor as he desperately tries to grab onto a handrail, his feet leaving the floor. The elevator car is accelerating downwards rapidly, the shaft walls a blur through the small gaps.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "100 G-FORCES ON IMPACT"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close-up on the numerical display panel of the elevator, showing floors counting down rapidly: 30... 28... 26... The numbers blur, then flicker erratically, the light buzzing. The sound of air rushing past the elevator is prominent.",
+      "seed": null,
+      "fact": "5 SECONDS LEFT"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Over-the-shoulder shot of ihsan_survivor, still in his 1970s business suit, reacting to the plummeting. He glances around wildly, assessing his options within the confined, shaking space. His hand clutches his head in a protective gesture.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "NOTHING TO GRAB"
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_survivor, in his business suit, now lies flat on the floor of the elevator car, spread-eagled, his arms covering his head. His body is tense, braced, awaiting impact. The lights inside the car flicker violently as it continues its descent.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "ELEVATOR FREEFALL",
+    "subtitle": "New York City, 1970"
+  },
+  "hook_shot": 3
+}

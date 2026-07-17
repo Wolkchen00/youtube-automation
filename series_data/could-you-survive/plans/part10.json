@@ -1,0 +1,68 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Your House Is On Fire — You Have 3 Minutes"
+  },
+  "synopsis": "Waking to a burning home, you must navigate through smoke and heat to find an escape route before you're overcome.",
+  "narration": "The acrid smell of smoke, the piercing shriek of the alarm. You wake to your house on fire. In less than three minutes, the situation can become unsurvivable. Do you try to grab valuables or look for family members? Every second counts. Stay low, as smoke and heat rise. Feel doors for heat before opening, and always know two escape routes. Smoke inhalation, not flames, is the primary killer. What’s your escape plan for your home? Share it with us.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person view from a bed, waking up to thick, dark smoke filling a cramped, old bedroom. The air is hazy and orange, a faint glow from under the door. The sound of a distant, crackling fire and a faint alarm is heard.",
+      "seed": null,
+      "fact": "3 MINUTES TO ESCAPE"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Low-angle shot of ihsan_survivor, wearing early 20th-century pajamas, crawling on hands and knees through thick, acrid smoke. Flames are visible in the background through a doorway, licking at wooden furniture. Intense, orange and red light dominates.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "SMOKE KILLS FIRST"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close-up on ihsan_survivor's hand, wearing pajamas, reaching out to feel a closed wooden door. The wood is visibly hot, steam rising from where his hand touches it. He recoils quickly. The air is thick with embers.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "DO NOT OPEN"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Wide shot of a narrow hallway, almost completely obscured by dense, rolling smoke. A distant window glows faintly, offering a glimmer of hope, but the path is unclear. The fire sounds are louder, closer.",
+      "seed": null,
+      "fact": "FLASHOVER AT 1,100°F"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Over-the-shoulder shot of ihsan_survivor, still in his pajamas, coughing violently from the smoke, his eyes red and watering. He struggles to orient himself in the blinding haze, desperately searching for an alternative exit. The heat is oppressive.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ],
+      "fact": "TOXIC GASES"
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "ihsan_survivor, still crawling low, finally locates a window in an adjacent room. He reaches out, manages to push it open slightly, and a gust of cool, fresh air rushes in, clearing some of the smoke around him. A narrow escape route is revealed.",
+      "seed": null,
+      "characters": [
+        "ihsan_survivor"
+      ]
+    }
+  ],
+  "title_card": {
+    "title": "HOUSE FIRE",
+    "subtitle": "London Tenement, 1906"
+  },
+  "hook_shot": 2
+}
