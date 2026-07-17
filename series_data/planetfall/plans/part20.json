@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 20,
+    "title": "FRAGMENTA: Shards of Time"
+  },
+  "synopsis": "FRAGMENTA — shattered world: a broken planet, its colossal fragments suspended in a chaotic, low-gravity orbit, glowing with internal energy; signature = a slow, silent drift through a field of immense, crystalline planet shards, revealing glowing fissures and ancient, broken structures.",
+  "narration": "Fragmenta is a world born of cataclysm, a planet torn asunder, its colossal remnants suspended in a chaotic yet stable orbit. From the void, its main body is scarred, surrounded by immense fragments glowing with ethereal purple light from deep fissures. As we navigate this cosmic graveyard, we drift between world-pieces the size of continents. Each shard reveals glowing crystal veins and ancient, fractured geological layers, a breathtaking testament to a catastrophic past, preserved in silent, ethereal beauty.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A visibly fractured planet, its main body scarred and broken, with immense, stable fragments suspended in chaotic but stable orbit around it, resembling a perpetual debris field. Ethereal purple light glows from deep fissures in the larger fragments.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Descending into the void between Fragments. The camera navigates through colossal, slow-moving shards of planetary crust, some the size of continents, glowing faintly with internal purple light from their exposed, fractured surfaces.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The camera drifts between and through immense, broken sections of the planet. Exposed interiors reveal glowing crystal veins and ancient, fractured geological layers, moving slowly past the camera, bathed in ethereal purple light.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera gently settles amidst a cluster of particularly large, intricately broken fragments. It slowly rotates to reveal a breathtaking view: a cosmic graveyard of glowing, broken world-pieces, their internal fissures pulsing with deep purple light, creating a silent, awe-inspiring testament to a cataclysmic past.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

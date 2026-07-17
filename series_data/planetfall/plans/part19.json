@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 19,
+    "title": "FORNAX: The Iron Peaks"
+  },
+  "synopsis": "FORNAX — metallic mountain world: a colossal super-earth with towering, metallic-mineral mountain ranges shrouded in a dense, ochre atmosphere; signature = a vast, glowing atmospheric compression wave rippling through a valley between colossal, iron-rich peaks.",
+  "narration": "Fornax is a super-earth of unimaginable density and scale, its surface dominated by colossal metallic-mineral mountains. From orbit, its ochre atmosphere swirls around peaks that scratch the heavens. As we pierce the heavy, turbulent air, the sheer magnitude of these iron-rich giants becomes clear. Gravitational forces create unique phenomena; we witness a silent compression wave, a glowing ripple of pure atmospheric power, coursing through a valley between these titanic, ancient peaks.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A colossal, dense-looking super-earth, deep ochre and bronze in color. Incredibly sharp, metallic-looking mountain ranges are visible through gaps in the swirling, heavy atmosphere, hinting at immense scale and density.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapid descent through an extremely dense, turbulent, ochre-colored atmosphere. The air feels heavy, creating shimmering distortions. Distant, impossibly tall, dark metallic peaks begin to emerge from the haze below, their surfaces glinting faintly.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Flying low between gargantuan, dark iron-rich peaks that scrape the upper atmosphere. The air shimmers with gravitational distortions, and faint, glowing atmospheric currents are visible, hugging the immense, sheer rock faces.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera drifts into a vast, deep canyon between two titanic metallic mountains. A colossal, slow-moving wave of super-dense, glowing atmospheric compression moves silently through the canyon, creating shimmering light and profound pressure before gently dissipating around the camera, revealing the immense scale of the peaks.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

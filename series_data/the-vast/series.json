@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -49,6 +49,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-15T16:18:58.477309+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep03/ep03_music_4k.mp4",
+      "subtitle": "smoke over the snow",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-17T16:08:48.237801+00:00"
     }
   }
 }

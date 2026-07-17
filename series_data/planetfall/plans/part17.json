@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "ZYTHUS: Electric Bloom"
+  },
+  "synopsis": "ZYTHUS — crystal flora world: emerald-green planet with colossal, conductive crystal formations, perpetually charged atmosphere; signature = a vast valley of living crystal trees pulsating with electric energy, drawing lightning from the sky.",
+  "narration": "Zytus, a world where life takes a crystalline form, buzzes with an undeniable energy. From orbit, its emerald surface shimmers, hinting at the vast, conductive flora below. Its atmosphere is a constant conductor, channeling raw power. As we descend, we witness colossal crystal trees, alive with an internal glow, drawing the very essence of the sky. This incredible ecosystem harnesses atmospheric electricity, sustaining an electrifying, beautiful existence.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Emerald-green planet, with shimmering, jagged crystalline structures visible from orbit, reflecting sunlight. Wisps of electric blue energy arc occasionally in the high atmosphere, hinting at a charged world.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapidly descending through a turbulent, charged atmosphere. Flashes of brilliant electric blue light illuminate swirling emerald clouds. The ground below slowly resolves into vast, sharp, immense crystal formations, reaching skyward.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Flying low over a landscape dominated by colossal, tree-like crystal formations, glowing with an internal emerald light. Arcs of static electricity dance between their sharp points, making the humid air hum with unseen power.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera slowly descends into a vast, deep canyon filled with the tallest, most intricate crystal trees. A massive bolt of electric-blue lightning strikes one of the central spires, momentarily overcharging it with brilliant light that propagates through the entire crystalline network before fading to a gentle, rhythmic pulse.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

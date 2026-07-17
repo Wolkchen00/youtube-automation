@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 18,
+    "title": "RHIZOMIA: The Root Labyrinth"
+  },
+  "synopsis": "RHIZOMIA — root world: a dark, humid planet covered by a colossal, intertwining organic root network, partially submerged in murky water; signature = a vast, intricate labyrinth of colossal, glowing roots forming archways and tunnels above a bioluminescent swamp.",
+  "narration": "Rhizomia is a living enigma, a world almost entirely covered by a colossal, intertwining organic root network. From space, its surface appears as an impenetrable, dark-green mat. As we penetrate its humid atmosphere, the true scale of this biological architecture becomes clear. We navigate a dizzying maze where ancient roots, some as thick as mountains, form archways and tunnels above bioluminescent waters, creating an ethereal, glowing labyrinth in the perpetual twilight.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A murky, dark-green planet, mostly obscured by a dense, tangled, dark-brown organic surface texture, resembling an impenetrable mat from space. Faint glimmers of amber bioluminescence can be seen deep within the shadowed fissures.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Descending through a thick, humid, misty atmosphere. The dense organic layer below begins to resolve into colossal, intertwining root structures, partially submerged in dark, still water, hint of amber light from beneath the surface.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Flying low through a dizzying maze of colossal, gnarled roots, forming natural archways and tunnels. Amber bioluminescence emanates from the murky water below and the roots themselves, casting long, shifting shadows through the humid air.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera slowly glides into a vast, central cavernous space, entirely formed by an ancient, intertwined root network. Here, the roots are thicker, glowing brighter with a warm amber light, creating a breathtaking, cathedral-like organic structure above a perfectly still, shimmering bioluminescent pool.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "LUNARA: The Ring's Embrace"
+  },
+  "synopsis": "LUNARA — ringed world: dark-blue planet enveloped by colossal, swirling rings, dynamic shadow play on the upper atmosphere; signature = a vast, atmospheric storm eye perpetually illuminated by shifting ring shadows.",
+  "narration": "From afar, Lunara appears a serene blue, yet its colossal ring system casts an ever-changing tapestry of shadows across its upper atmosphere. Each band of cosmic dust and ice orchestrates a silent ballet of light and dark, creating an ethereal embrace. As we descend, a colossal storm eye is revealed, an enigmatic calm at the heart of this shadow play. It pulsates with an inner light, a permanent beacon beneath the shifting celestial dance.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vast, dark-blue gas giant, its upper atmosphere partially obscured by immense, multi-layered rings. The camera slowly pans, revealing colossal, intricate shadows cast by the rings onto the planet's curved surface below.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapidly descending through Lunara's deep blue upper atmosphere, entering the region of complex, shifting ring shadows. Volumetric clouds swirl below, illuminated by filtered, dynamic light patterns as immense, dark swathes move across the cloud deck.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Breaking through a lower cloud layer into a clearer, but still shadowed, mid-atmosphere. Below, a colossal, perfectly circular storm eye is visible, glowing faintly with an iridescent inner light, creating a stark, luminous contrast against the surrounding darkness.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Gently descending towards the glowing storm eye. The camera hovers just above its swirling, calm, iridescent center, revealing its internally lit currents, perpetually framed by the vast, slow-moving shadows of the distant rings arcing majestically overhead, creating a serene, unforgettable spectacle.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}
