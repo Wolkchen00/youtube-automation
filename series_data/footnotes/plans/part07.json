@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Earth, 1859 — The Sky Set Telegraphs Ablaze"
+  },
+  "synopsis": "A powerful solar storm, known as the Carrington Event, causes widespread telegraph system failures and visible auroras as far south as the Caribbean, revealing Earth's vulnerability to cosmic forces.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "London, 1859. A period-accurate telegraph office. Sunlight streams through a tall window onto a bustling room where operators in formal 19th-century attire are diligently sending and receiving messages via Morse code on their clattering brass instruments. Wires crisscross the ceiling, connecting the nascent global communication network.",
+      "seed": null,
+      "fact": "SEPTEMBER 1-2, 1859"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "London, 1859. Close-up on the face of a dedicated male telegraph operator, mid-40s, focused on his key. Suddenly, his eyes widen slightly as a strange static or buzz comes through. He glances nervously at the sparking connection point of his device, a subtle flicker of concern crossing his face.",
+      "seed": null,
+      "fact": "TELEGRAPH LINES SPARK"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Cuba, 1859. A warm, humid night. Palm trees silhouette against a strangely illuminated sky. A small group of Cuban villagers, dressed in light 19th-century clothing, gaze upwards in awe and wonder. The faint, glowing green and red hues of an aurora begin to bloom unexpectedly low on the northern horizon, a spectacle rarely, if ever, seen in the tropics.",
+      "seed": null,
+      "fact": "TROPICAL AURORAS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "North America, 1859. A dramatic wide shot of a vast, open landscape at night. The sky above is ablaze with vivid, swirling auroras in brilliant greens, reds, and purples, stretching from horizon to zenith. In the foreground, a single telegraph pole stands starkly, with sparks visibly crackling and arcing from its wires and insulators, illuminating the pole momentarily.",
+      "seed": null,
+      "fact": "READ NEWSPAPERS AT NIGHT"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Earth orbit (stylized), 1859. A slow, majestic drift around a rendering of Earth. The planet's magnetic field is visually depicted as a shimmering, ethereal shield being buffeted by incoming solar wind particles, causing a brilliant, glowing aurora oval around the poles. The shot emphasizes the invisible, powerful forces at play between the Sun and Earth.",
+      "seed": null
+    }
+  ],
+  "music": "An ethereal and building electronic-orchestral piece with a sense of cosmic wonder and mounting tension. It opens with shimmering, high-frequency synths and sustained string harmonics, gradually introducing deep, resonant brass and a slow, driving pulse from timpani. The score swells with sweeping melodic lines, reaching a peak with a powerful, almost overwhelming surge of sound, before resolving into a quiet, sustained hum, hinting at the vastness of space.",
+  "title_card": {
+    "title": "The Carrington Superflare",
+    "subtitle": "Earth, 1859"
+  },
+  "caption": "Earth, 1859. The modern world was just beginning to connect itself with telegraph lines, unaware of the celestial drama unfolding.\n\nOn September 1, 1859, British astronomers Richard Carrington and Richard Hodgson independently observed an intense solar flare. What seemed like a fleeting event on the Sun soon unleashed its power upon Earth.\n\nLess than 18 hours later, on September 2, a colossal geomagnetic storm, now known as the Carrington Event, slammed into our planet. Telegraph systems across Europe and North America began to fail, with operators reporting shocks and even fires from sparking equipment. Some lines astonishingly continued to transmit messages even after being disconnected from their power sources.\n\nThat night, the sky erupted in a spectacle of vibrant auroras, visible not just in polar regions but as far south as Cuba and Colombia. Witnesses described skies so bright they could read newspapers in the middle of the night. This unprecedented event served as a stark, beautiful, and terrifying reminder of the Sun's immense power and its direct influence on our burgeoning technological world.",
+  "hashtags": "#CarringtonEvent #SolarStorm #1859 #AuroraBorealis #GeomagneticStorm #Telegraph #SpaceWeather #History",
+  "hook_shot": 4
+}

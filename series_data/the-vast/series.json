@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -60,6 +60,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-17T16:08:48.237801+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep04/ep04_music_4k.mp4",
+      "subtitle": "islands that never land",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-18T15:46:49.253881+00:00"
     }
   }
 }

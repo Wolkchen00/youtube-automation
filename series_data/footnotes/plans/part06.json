@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "Lisbon, 1755 — The Day the City Vanished"
+  },
+  "synopsis": "On All Saints' Day, a massive earthquake, followed by a tsunami and fires, devastates Lisbon, making it one of history's deadliest natural disasters and profoundly impacting European thought.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Lisbon, 1755. A serene wide shot of the Tagus River estuary at dawn, golden light reflecting on calm waters. Numerous period sailing ships with furled sails are anchored peacefully. The grand Praça do Comércio, still intact, with its elegant arcades and bustling dockside, glows in the morning sun. A few early morning vendors setting up stalls.",
+      "seed": null,
+      "fact": "NOVEMBER 1, 1755"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Lisbon, 1755. Inside a richly decorated, crowded Baroque church. Sunlight streams through high windows, illuminating dust motes. A diverse congregation, dressed in 18th-century attire, kneels in prayer during morning mass. A slight, almost imperceptible tremor begins, causing candelabras to sway gently. Focus on the expressions of early unease.",
+      "seed": null,
+      "fact": "ALL SAINTS' DAY"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Lisbon, 1755. Chaos erupts on a narrow, cobblestone street. Buildings begin to crumble, dust plumes rise. People, panicked, run in disarray, some looking up at falling masonry. The camera is low, emphasizing the ground shaking violently, creating a sense of immediate danger and destruction. A wide shot capturing the scale of the initial collapse.",
+      "seed": null,
+      "fact": "OVER 60,000 DEAD"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Lisbon, 1755. A devastating aerial shot sweeps over the ruined city. The once majestic Praça do Comércio is engulfed by a churning, dark tsunami wave crashing inland, sweeping away debris and people. Fires have begun to rage in the distance, smoke rising against the pale sky. The sheer scale of destruction is overwhelming.",
+      "seed": null,
+      "fact": "3 TSUNAMI WAVES"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Lisbon, 1755. A close-up of a survivor, an elderly woman, sits amidst the smoldering ruins of what was once her home. Her face is etched with grief and shock, dust clinging to her tattered clothes. A single ember glows nearby, casting a warm, melancholic light on her face. The camera slowly pushes in on her eyes, reflecting the distant fires.",
+      "seed": null
+    }
+  ],
+  "music": "A solemn and foreboding orchestral piece with a slow tempo, featuring deep cello and double bass lines, punctuated by lamenting violins and a sparse, echoing piano. The music opens with an atmospheric drone, building tension through sustained string chords and subtle brass swells, reaching a powerful, mournful climax as the disaster strikes, then fading into a hushed, sorrowful resolution with a single, lingering cello note.",
+  "title_card": {
+    "title": "The All Saints' Day Quake",
+    "subtitle": "Lisbon, 1755"
+  },
+  "caption": "Lisbon, 1755. The city awakens on All Saints' Day to clear skies, its churches filling with worshippers.\n\nAt 9:40 AM on November 1, 1755, a massive earthquake, estimated at magnitude 8.5-9.0, struck off the coast of Portugal. The tremors lasted for several minutes, collapsing palaces, churches, and houses across Lisbon.\n\nSurvivors fled to the open space of the Tagus riverfront, only to witness the sea recede dramatically. Moments later, three immense tsunami waves, up to 20 meters high, swept over the low-lying areas, drowning thousands.\n\nAs the day progressed, candles lit in fallen churches and cooking fires ignited new infernos. The city burned for five days, consuming what the earthquake and tsunami had spared. More than 60,000 people perished, and Lisbon, once one of Europe's grandest capitals, lay in ruins, forever altering its landscape and sparking philosophical debates across the continent.",
+  "hashtags": "#Lisbon #Earthquake #1755 #Portugal #Tsunami #NaturalDisaster #History #DisasterHistory",
+  "hook_shot": 4
+}

@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Constantinople, 1204 — The City of Gold Lay Broken"
+  },
+  "synopsis": "During the Fourth Crusade, instead of journeying to Jerusalem, the crusader army diverts to Constantinople and brutally sacks the greatest Christian city of its age.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Constantinople, 1204. A wide, majestic aerial shot of the city, showing its formidable triple walls and the glittering domes of Hagia Sophia and other churches under a clear sky. The Golden Horn is bustling with Byzantine ships. The city appears vibrant and impregnable, a true 'city of the world's desire.'",
+      "seed": null,
+      "fact": "CITY OF THE WORLD'S DESIRE"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Constantinople, 1204. A scene on the Mese, the city's main thoroughfare. Richly dressed Byzantine citizens, merchants, and guards mingle. There's an undercurrent of tension as news of the approaching crusader army spreads. People look worriedly at the city walls, a subtle shift in the city's usual vibrant energy.",
+      "seed": null,
+      "fact": "APRIL 12-13, 1204"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Constantinople, 1204. A chaotic scene at the base of the city walls. Scaling ladders are being raised, and crusader soldiers in heavy armor clash with Byzantine defenders atop the ramparts. Siege engines are visible. The sky is filled with arrows and smoke, signaling the intensity of the assault. The camera captures the brutal, close-quarters combat.",
+      "seed": null,
+      "fact": "CRUSADER BETRAYAL"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Constantinople, 1204. Inside the Hagia Sophia. The once-magnificent interior is now desecrated. Crusader soldiers, indifferent to its holiness, smash icons, rip down tapestries, and load precious religious artifacts onto carts. A sense of sacrilege and irreversible loss pervades the scene. Light streams dramatically through high windows, highlighting the dust and destruction.",
+      "seed": null,
+      "fact": "HAGIA SOPHIA PILLAGED"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Constantinople, 1204. A quiet, sorrowful shot of a Byzantine monk, elderly and weary, walking slowly through the ravaged streets. He stops to pick up a broken piece of mosaic, clutching it to his chest. Smoke still rises in the distance, and once-grand buildings stand as skeletal ruins against a grey, somber sky. The city's golden age is undeniably over.",
+      "seed": null
+    }
+  ],
+  "music": "A dramatic and tragic orchestral piece with a heavy, foreboding atmosphere. It opens with dissonant strings and a deep, sustained brass drone, establishing a sense of impending doom. The music builds with escalating intensity through frantic string passages and percussive hits, reaching a powerful, sorrowful climax with a full, mournful orchestral swell, before fading into a quiet, aching lament with plucked strings and a solitary, echoing oboe.",
+  "title_card": {
+    "title": "The Fourth Crusade's Sack",
+    "subtitle": "Constantinople, 1204"
+  },
+  "caption": "Constantinople, 1204. For centuries, this magnificent city stood as the heart of the Byzantine Empire, a beacon of Christian civilization.\n\nIn 1204, the armies of the Fourth Crusade, initially bound for Jerusalem, found themselves diverted to Constantinople. Enticed by promises of treasure and political maneuvering, the crusaders, who were meant to defend Christianity, instead turned their swords on its greatest city.\n\nOn April 12, 1204, after a brutal siege, the crusaders breached the city's formidable defenses. What followed was three days of unprecedented destruction and pillage. Churches were desecrated, priceless relics stolen, and the city's vast wealth plundered. The sacred Hagia Sophia was not spared, stripped of its treasures and defiled.\n\nThe sack of Constantinople by fellow Christians was a catastrophic blow from which the Byzantine Empire never fully recovered. It left an enduring legacy of bitterness between Eastern and Western Christianity, irrevocably altering the course of European and Middle Eastern history, leaving the once golden city broken and humiliated.",
+  "hashtags": "#Constantinople #1204 #FourthCrusade #ByzantineEmpire #SackOfConstantinople #HagiaSophia #MedievalHistory #Crusades #History",
+  "hook_shot": 4
+}
