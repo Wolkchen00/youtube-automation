@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 20,
-  "next_part": 16,
+  "next_part": 17,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -181,6 +181,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-17T17:58:42.967001+00:00"
+    },
+    "16": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep16/ep16_narrated_music_hooked.mp4",
+      "subtitle": "LUNARA: The Ring's Embrace",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-18T17:53:12.498943+00:00"
     }
   },
   "auto_replenish": {
