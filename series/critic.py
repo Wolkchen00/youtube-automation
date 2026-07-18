@@ -18,7 +18,7 @@ Sözleşmeler:
     idempotent "zaten var, atla" yolu QC bilmeden güvenli kalır.
   • QC/Gemini hatası = "skip" (klip aynen kullanılır) — QC bir kalite katmanıdır,
     yayını tek başına durduramaz (the-signal dersi: sessiz zincirleme çökme yok).
-  • Her karar series_data/<slug>/qc_log.jsonl'e yazılır (workflow bunu commit'ler)
+  • Her karar seri veri klasörüne (bible.data_dir(slug)/qc_log.jsonl) yazılır (workflow commit'ler)
     → ilk hafta false-positive kalibrasyonu bu logdan yapılır.
 Maliyet: denetim <$0.01/video (Gemini Flash); kie'de FAIL görev 0 kredi, regen
 yalnız "başarılı-fakat-bozuk" üretimde kredi yakar.
@@ -279,7 +279,7 @@ def strengthen_prompt(prompt: str, fix_notes: list[str]) -> str:
 
 
 def _log_event(slug: str, entry: dict) -> None:
-    """QC olayını series_data/<slug>/qc_log.jsonl'e ekle (workflow commit'ler →
+    """QC olayını seri veri klasörüne (data_dir(slug)/qc_log.jsonl) ekle (workflow commit'ler →
     ilk hafta eşik kalibrasyonu bu logdan yapılır). Best-effort."""
     try:
         p = data_dir(slug) / "qc_log.jsonl"

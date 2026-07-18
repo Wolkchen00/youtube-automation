@@ -181,14 +181,11 @@ class SeriesMeta:
 
 
 def list_active_series() -> list[str]:
-    """series_data/ altında status=active olan dizilerin slug listesi."""
-    from .bible import SERIES_DATA_DIR
+    """Kanal klasörleri + eski series_data/ altında status=active dizilerin slug listesi."""
+    from .bible import all_series_dirs
     active = []
-    if not SERIES_DATA_DIR.exists():
-        return active
-    for d in sorted(SERIES_DATA_DIR.iterdir()):
-        if d.is_dir() and series_meta_path(d.name).exists():
-            m = SeriesMeta.load(d.name)
-            if m and m.status == "active" and m.next_part <= m.total_parts:
-                active.append(d.name)
-    return active
+    for slug in all_series_dirs():
+        m = SeriesMeta.load(slug)
+        if m and m.status == "active" and m.next_part <= m.total_parts:
+            active.append(slug)
+    return sorted(active)

@@ -2,7 +2,7 @@
 Oto-ikmal (auto-replenish) — 'sonsuz içerik' motoru.
 
 Plan kuyruğu azalan serilere Gemini yönetmeniyle YENİ part planları yazar
-(series_data/<slug>/plans/partNN.json), total_parts'ı büyütür ve makinenin
+(<seri-veri-klasörü>/plans/partNN.json — konum bible.data_dir(slug)), total_parts'ı büyütür ve makinenin
 'completed'e düşürdüğü seriyi yeniden 'active' yapar. Kie kredisi HARCAMAZ —
 yalnız ücretsiz Gemini text çağrısı (planlama), üretim yine series_runner'da.
 
@@ -49,8 +49,8 @@ if _ROOT not in sys.path:
 
 from core.config import GEMINI_API_KEY, logger
 from series import notifier
-from series.bible import Bible, SERIES_DATA_DIR
-from series.series_meta import SeriesMeta, part_plan_path, plans_dir, series_meta_path
+from series.bible import Bible
+from series.series_meta import SeriesMeta, part_plan_path, plans_dir
 from series.shots import validate_plan
 
 REPLENISH_MODEL = "gemini-2.5-flash"
@@ -624,15 +624,12 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
 def replenish_all(dry_run: bool = False) -> None:
     """auto_replenish açık tüm serileri dolaş. Hata seriye hapsolur — günlük yayın
     koşusunu asla bloklamaz."""
-    if not SERIES_DATA_DIR.exists():
-        return
-    for d in sorted(SERIES_DATA_DIR.iterdir()):
-        if not (d.is_dir() and series_meta_path(d.name).exists()):
-            continue
+    from series.bible import all_series_dirs
+    for slug in all_series_dirs():
         try:
-            replenish(d.name, dry_run=dry_run)
+            replenish(slug, dry_run=dry_run)
         except Exception as e:
-            logger.error(f"❌ {d.name} ikmal denetimi çöktü: {e}")
+            logger.error(f"❌ {slug} ikmal denetimi çöktü: {e}")
 
 
 def main(argv: list[str]) -> None:

@@ -26,7 +26,7 @@ from rich.prompt import Prompt, Confirm
 
 from core.kie_api import check_credit
 from series import produce, report, voices
-from series.bible import Bible, bible_path, episodes_dir, SERIES_DATA_DIR
+from series.bible import Bible, bible_path, episodes_dir, all_series_dirs
 
 console = Console()
 
@@ -64,21 +64,18 @@ def cmd_voices(gender: str | None = None):
 
 
 def cmd_list():
-    if not SERIES_DATA_DIR.exists():
-        console.print("[yellow]Henüz dizi yok.[/]")
-        return
     table = Table(title="📺 Diziler")
     table.add_column("Slug", style="cyan")
     table.add_column("Başlık")
     table.add_column("Karakter")
     table.add_column("Bölüm klasörü")
     found = False
-    for d in sorted(SERIES_DATA_DIR.iterdir()):
-        if not (d.is_dir() and bible_path(d.name).exists()):
+    for slug in all_series_dirs():
+        if not bible_path(slug).exists():
             continue
         found = True
-        b = Bible.load(d.name)
-        eps = episodes_dir(d.name)
+        b = Bible.load(slug)
+        eps = episodes_dir(slug)
         ep_count = len([x for x in eps.iterdir() if x.is_dir()]) if eps.exists() else 0
         table.add_row(b.slug, b.title, str(len(b.characters)), str(ep_count))
     if found:

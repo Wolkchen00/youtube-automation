@@ -160,14 +160,9 @@ def _channel_published_today(meta: SeriesMeta) -> str | None:
     profile = meta.upload_profile
     if not profile:
         return _hit(meta)
-    from series.bible import SERIES_DATA_DIR
-    from series.series_meta import series_meta_path
-    if not SERIES_DATA_DIR.exists():
-        return _hit(meta)
-    for d in sorted(SERIES_DATA_DIR.iterdir()):
-        if not (d.is_dir() and series_meta_path(d.name).exists()):
-            continue
-        m = meta if d.name == meta.slug else SeriesMeta.load(d.name)
+    from series.bible import all_series_dirs
+    for slug in all_series_dirs():
+        m = meta if slug == meta.slug else SeriesMeta.load(slug)
         if m and m.upload_profile == profile:
             found = _hit(m)
             if found:

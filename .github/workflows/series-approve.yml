@@ -71,6 +71,10 @@ jobs:
           for i in 1 2 3; do
             git pull --rebase --autostash origin main || true
             git add series_data/ || true
+            git add sentinal_ihsan/ || true
+            git add aimagine/ || true
+            git add galactic_experience/ || true
+            git add shadowedhistory/ || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
             git commit -m "chore: onay durumu güncelle [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)

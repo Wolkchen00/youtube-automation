@@ -18,16 +18,55 @@ from core.config import SERIES_DIR, PROJECT_ROOT, OMNI_DEFAULT_ASPECT, OMNI_DEFA
 
 REF_KINDS = ("characters", "environments", "props")
 
-# KAYNAK (git'te tutulur): bible.json, series.json, plans/, raporlar
+# KAYNAK (git'te tutulur): bible.json, series.json, plans/, raporlar.
+# 2026-07-18 İhsan kararı: her kanalın serileri repo kökünde KENDİ klasöründe
+# durur (kanal bazlı takip). series_data/ ESKİ konumdur — galactic serileri
+# (planetfall, ava-voyage) paralel oturumun işi bitince oraya taşınacak; sonra
+# series_data/ silinebilir. Motor iki konumu da tanır (bkz. KANAL_KLASORLERI.md).
+CHANNEL_DATA_DIRS = {
+    "sentinal_ihsan": PROJECT_ROOT / "sentinal_ihsan",
+    "aimagine": PROJECT_ROOT / "aimagine",
+    "galactic_experience": PROJECT_ROOT / "galactic_experience",
+    "shadowedhistory": PROJECT_ROOT / "shadowedhistory",
+}
 SERIES_DATA_DIR = PROJECT_ROOT / "series_data"
+_SEARCH_ROOTS = [*CHANNEL_DATA_DIRS.values(), SERIES_DATA_DIR]
 # ARTEFAKT (gitignore: output/): üretilen videolar, çekimler, referans görselleri
 
 
 # ─── Yol yardımcıları ──────────────────────────────────────────────────────────
 
 def data_dir(slug: str) -> Path:
-    """Git'te tutulan kaynak klasörü (bible.json, series.json, plans/, rapor)."""
+    """Git'te tutulan kaynak klasörü (bible.json, series.json, plans/, rapor).
+    Önce kanal klasörlerinde arar, sonra eski series_data/. Hiçbirinde yoksa
+    (yeni seri) series_data/<slug> döner — kurulumdan sonra `git mv` ile kanal
+    klasörüne alınabilir, motor iki konumu da bulur."""
+    candidates = [root / slug for root in _SEARCH_ROOTS]
+    for d in candidates:
+        if (d / "series.json").exists():
+            return d
+    for d in candidates:
+        if d.exists():
+            return d
     return SERIES_DATA_DIR / slug
+
+
+def all_series_dirs() -> dict[str, Path]:
+    """slug → klasör: kanal klasörleri + eski series_data altında series.json
+    içeren tüm seri klasörleri. Aynı slug iki konumda varsa kanal klasörü
+    kazanır ve uyarı loglanır (taşıma yarıda kalmış demektir)."""
+    found: dict[str, Path] = {}
+    for root in _SEARCH_ROOTS:
+        if not root.exists():
+            continue
+        for d in sorted(root.iterdir()):
+            if not (d.is_dir() and (d / "series.json").exists()):
+                continue
+            if d.name in found:
+                logger.warning(f"⚠️ '{d.name}' iki konumda var: {found[d.name]} ve {d} — ilki kullanılıyor.")
+                continue
+            found[d.name] = d
+    return found
 
 
 def series_dir(slug: str) -> Path:
