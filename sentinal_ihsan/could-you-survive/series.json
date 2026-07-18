@@ -11,7 +11,7 @@
   ],
   "hashtags": "#survival #couldyousurvive #whatwouldyoudo #pov #survivaltips #howtosurvive #disaster #adventure #shorts #fyp",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -93,6 +93,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-17T20:22:34.816596+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/could-you-survive/episodes/ep06/ep06_narrated_music_hooked_titled_capped.mp4",
+      "subtitle": "Could You Survive a Crevasse Fall? — 100 Feet Deep",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-18T20:13:48.492897+00:00"
     }
   }
 }
