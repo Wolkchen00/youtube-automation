@@ -11,7 +11,7 @@
   ],
   "hashtags": "#survival #couldyousurvive #whatwouldyoudo #pov #survivaltips #howtosurvive #disaster #adventure #shorts #fyp",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -104,6 +104,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-18T20:13:48.492897+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/could-you-survive/episodes/ep07/ep07_narrated_music_hooked_titled_capped.mp4",
+      "subtitle": "Deep Sea Dive — You Have 60 Seconds of Air",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-19T20:19:20.018697+00:00"
     }
   }
 }
