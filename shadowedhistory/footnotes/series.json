@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -71,6 +71,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-18T21:55:01.573934+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep06/ep06_music_hooked_titled_capped.mp4",
+      "subtitle": "Lisbon, 1755 — The Day the City Vanished",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-19T21:57:04.232580+00:00"
     }
   },
   "auto_replenish": {
