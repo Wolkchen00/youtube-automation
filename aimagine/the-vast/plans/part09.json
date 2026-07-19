@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "the forest sleeps"
+  },
+  "synopsis": "A slow pan through a misty, ancient petrified forest reveals towering, moss-covered trees and a tiny glowing lantern marking a hidden path.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A slow, gentle pan through an ancient, petrified forest, revealing colossal, gnarled trees, their bark entirely covered in vibrant, glowing green moss. The scene is bathed in a deep, cool blue-hour light, with heavy volumetric mist drifting between the towering trunks. A single warm, amber light source is faintly visible deep within the forest, hinting at a hidden path.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Continuing the slow pan, the camera glides deeper into the heart of the petrified forest. The warm amber light now reveals a tiny, glowing lantern marking a narrow, winding pathway through the base of the moss-covered, colossal trees. The intricate details of the ancient bark and glowing moss are visible, while the mist continues to drift, creating a serene, almost magical atmosphere, dwarfing the tiny human artifact.",
+      "seed": null
+    }
+  ],
+  "music": "A contemplative and atmospheric piece with a slow, drifting tempo, blending neo-classical and ambient textures. Opens with a single, sustained, deep cello note, slowly joined by a gentle, resonant piano melody, establishing a profound, quiet mood. Subtle, airy woodwind pads (flute, clarinet) weave in, creating a sense of ancient mystery. It builds to a soft, reflective peak with layered strings and piano, then gradually dissipates into a lingering, misty resonance.",
+  "hook_shot": 2
+}

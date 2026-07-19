@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "the mountain's heart"
+  },
+  "synopsis": "A slow dolly-in reveals a colossal crystal cavern filled with glowing formations, where tiny lantern-lit figures navigate intricate pathways.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A slow dolly-in through the mouth of a colossal cave, revealing an immense, cathedral-like cavern dominated by towering, razor-sharp amethyst and quartz crystal formations. Volumetric mist drifts through the deep teal and lavender space. A single warm, golden glow emanates from a distant fissure deep within the cave, illuminating the mist and the crystals' facets.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Continuing the slow dolly-in, the camera glides deeper into the cavern, past the initial crystal spires. The golden light from the fissure grows slightly, revealing tiny, silhouetted figures with small lanterns meticulously navigating intricate, carved pathways along the cave walls, dwarfed by the immense scale of the glowing crystal landscape. The air is heavy with shimmering volumetric fog.",
+      "seed": null
+    }
+  ],
+  "music": "An ethereal ambient soundscape, deep and resonant, for a glacial tempo. Opens with crystalline synth pads and a sustained, low-frequency hum, establishing a mystical atmosphere. Slowly introduces shimmering harp arpeggios, building a sense of wonder and discovery. Sustains a warm, glowing synth melody that gently peaks, then gradually fades into a soft, echoing drone, leaving a contemplative silence.",
+  "hook_shot": 2
+}

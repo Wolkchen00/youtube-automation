@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "the sunken gardens"
+  },
+  "synopsis": "The camera gently descends into a vast, submerged ancient city, revealing colossal ruins overgrown with bioluminescent flora and tiny schools of fish.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A gentle aerial drift, descending slowly into the crystal-clear, deep teal ocean, revealing the upper reaches of a colossal, ancient submerged city. Giant, weathered stone structures, half-buried in sand and overgrown with glowing bioluminescent coral, rise into view. Shafts of warm, golden sunlight penetrate the surface, creating dappled patterns on the ruins. Heavy volumetric haze diffuses the light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Continuing the gentle descent, the camera glides deeper into the sunken city, revealing more intricate architecture: colossal archways and plazas now forming 'gardens' of vibrant, glowing underwater flora. Tiny schools of shimmering, iridescent fish slowly drift through the massive ruins, dwarfed by the silent, ancient grandeur. The amber sunlight now creates a more diffused, hazy glow around the bioluminescent plant life.",
+      "seed": null
+    }
+  ],
+  "music": "A melancholic orchestral piece with a slow, drifting tempo, evoking underwater majesty. It begins with sustained, deep cello notes and gentle, undulating string pads, creating an immediate sense of vast, submerged mystery. Flutes introduce a sorrowful, meandering melody, slowly accompanied by a subtle choir 'ahh' pad. The music swells into a profound, mournful peak with full strings, then slowly recedes, leaving a quiet, echoing resonance.",
+  "hook_shot": 2
+}

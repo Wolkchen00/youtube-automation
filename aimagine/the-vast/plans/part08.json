@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "bridges to forever"
+  },
+  "synopsis": "A slow crane ascend reveals an impossibly long, multi-tiered sky-bridge stretching across a pastel cloudscape, with tiny airships navigating its illuminated spans at sunset.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A slow crane ascend, starting from beneath a colossal, impossibly long sky-bridge, revealing its immense scale as it stretches into a vast, pastel lavender and rose-gold cloudscape at sunset. The bridge is a series of interconnected, tiered structures, with a single warm, golden glow emanating from its central spine, reflecting off the volumetric fog and clouds.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Continuing the slow crane ascend, the camera rises higher, showcasing more of the sky-bridge's colossal span disappearing into the distant sunset haze. Tiny, glowing airships, like fireflies, slowly traverse the illuminated lower decks of the bridge, dwarfed by the architectural marvel and the endless sky. The golden light from the bridge and the setting sun now bathes the entire scene in a soft, ethereal glow, with drifting mist.",
+      "seed": null
+    }
+  ],
+  "music": "A majestic and uplifting orchestral composition, perfect for a slow, grand reveal. Opens with a soaring, sustained brass chord overlaid with a shimmering cymbal, establishing an immediate sense of awe. Gradually introduces a rich, full-bodied string melody that builds with a powerful, distant choir, evoking boundless wonder. The piece reaches a triumphant, sustained peak of harmonious brass and strings, then resolves into a soft, hopeful chord, fading gently.",
+  "hook_shot": 2
+}

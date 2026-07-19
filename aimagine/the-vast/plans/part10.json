@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "the silent watchers"
+  },
+  "synopsis": "A gentle aerial drift reveals a line of colossal, weathered guardian statues standing watch over a vast, misty canyon at dawn, as a tiny solitary figure approaches their base.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A gentle aerial drift over a vast, desolate canyon landscape, revealing a line of colossal, ancient guardian statues carved directly into the cliff faces. Their weathered stone forms are bathed in the cool, desaturated hues of deep blues and greys of pre-dawn, with heavy volumetric mist filling the canyon depths. A single warm, amber-gold ray of sunrise begins to pierce the mist in the far distance.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Continuing the gentle aerial drift, the camera glides closer, revealing the intricate, worn details of the colossal guardian statues. The amber-gold light from the rising sun now illuminates a tiny, solitary figure approaching the base of one of the statues, dwarfed by its immense scale. The mist drifts majestically through the canyon, creating deep atmospheric perspective, as the statues silently watch over the awakening world.",
+      "seed": null
+    }
+  ],
+  "music": "A solemn and evocative instrumental piece with a very slow, deliberate tempo, featuring a solo piano as its core. It opens with sparse, resonant piano chords, creating a vast and desolate atmosphere, slowly joined by subtle, sustained string pads (violins, violas) that add a layer of melancholic depth. The piano melody becomes slightly more intricate and reflective, building to a quiet, emotional peak, then slowly fades into a single, lingering piano note, leaving a sense of profound introspection.",
+  "hook_shot": 2
+}
