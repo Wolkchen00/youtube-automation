@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 20,
-  "next_part": 17,
+  "next_part": 18,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -192,6 +192,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-18T17:53:12.498943+00:00"
+    },
+    "17": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep17/ep17_narrated_music_hooked.mp4",
+      "subtitle": "ZYTHUS: Electric Bloom",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-19T17:49:49.454583+00:00"
     }
   },
   "auto_replenish": {
