@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -86,6 +86,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-19T15:57:06.839913+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep06/ep06_music_4k.mp4",
+      "subtitle": "the mountain's heart",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-20T16:28:19.607576+00:00"
     }
   }
 }
