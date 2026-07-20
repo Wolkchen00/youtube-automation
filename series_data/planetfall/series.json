@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 20,
-  "next_part": 18,
+  "next_part": 19,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -203,6 +203,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-19T17:49:49.454583+00:00"
+    },
+    "18": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep18/ep18_narrated_music_hooked.mp4",
+      "subtitle": "RHIZOMIA: The Root Labyrinth",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-20T18:46:24.656979+00:00"
     }
   },
   "auto_replenish": {
