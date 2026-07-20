@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Can I Turn A STONE Into A MAGNET?!"
+  },
+  "synopsis": "A man demonstrates how a seemingly ordinary river stone can interact with a mysterious magnetic liquid, creating mesmerizing, spiky formations.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, placing a smooth, grey river stone into a shallow glass petri dish on a clean, light-colored workbench. The stone is central, reflecting the soft, even light from an overhead work lamp. A small bottle of opaque black liquid is visible in the background, hinting at the upcoming experiment.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully pouring a viscous, glossy black ferrofluid into the petri dish, surrounding the river stone. The liquid pools and slowly spreads. His other hand introduces a strong, disc-shaped magnet beneath the dish, causing the liquid nearest the stone to subtly shift and pull away, revealing the stone's non-magnetic nature. The lighting emphasizes the liquid's sheen.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Dynamic close-up on the petri dish, with Ihsan's hands, wearing a plain black crew-neck t-shirt, slowly manipulating a powerful hidden magnet beneath the dish. The ferrofluid around the river stone is now forming incredible, sharp, spiky formations that dance and undulate in response to the magnet's pull, creating an alien landscape. The stone remains static, but the liquid around it is alive with motion.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Wide shot of Ihsan, wearing a plain black crew-neck t-shirt, standing back slightly from the workbench, gesturing subtly towards the petri dish. The ferrofluid has settled into a mesmerizing, textured field of spikes and peaks around the smooth river stone, creating a striking contrast. The work lamp's light reflects off the liquid's surface, enhancing its unique texture. The entire setup is neat and impactful.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A hypnotic, flowing electronic instrumental piece, opening with a deep, resonant bass synth pulse and shimmering, arpeggiated synth melodies that create a sense of calm curiosity. A subtle, rhythmic build incorporates gentle percussive clicks and evolving ambient textures, mirroring the liquid's movement. It reaches a peak with sustained, swirling synth pads and an intricate, almost liquid sound design, then gently fades with a soft, lingering electronic hum, leaving a sense of awe.",
+  "hook_shot": 3
+}

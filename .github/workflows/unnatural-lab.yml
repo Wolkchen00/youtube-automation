@@ -1,23 +1,28 @@
-name: Could You Survive Daily
+name: Unnatural Lab Daily
 
-# 'Could You Survive' GARANTİLİ günlük şeridi — sentinalihsandaily kanalının YENİ ana serisi
-# (İhsan kararı 2026-07-12: time-witness "sadece tarih anlatıyor, etkileşim yok" → PIVOT;
-# yeni konsept = ikinci-şahıs hayatta-kalma karar POV'u, İhsan yüzü + Algieba anlatım).
-# Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır: her gün sıradaki bölümü
-# üretir + 3 platforma (YT/IG/TikTok) yayınlar. Çifte üretim olmasın diye could-you-survive
-# series.json'da priority=999. Eski time-witness.yml şeridi (aynı 18:30 slotu) paused edildiği
-# için devre dışıdır → yarış yok. Critic-QC bible'da AÇIK (bozuk klip yayına çıkamaz).
+# 'Unnatural Lab' GARANTİLİ günlük şeridi — sentinalihsandaily kanalının YENİ ana serisi.
+#
+# İhsan kararı 2026-07-20: ABSÜRT-OBJE / DENEY formatına DÖNÜŞ. Gerekçe (canlı YouTube API
+# ölçümü, 148 video): absürt-obje n=105 medyan 788 izlenme / medyan 31 sn; tarihsel
+# hayatta-kalma (could-you-survive) n=12 medyan 15.5 izlenme / medyan 49 sn, 12 videoda
+# TOPLAM 1 yorum, iki günde 0 abone. Belirleyici sinyal SÜRE: 14-41 sn bandı 1.000-3.355
+# izlenme, 47-53 sn bandı 4-71 izlenme → yeni seri 4 çekim × 6 sn = 24 saniyeye SABİTLENDİ.
+#
+# Format: SESSİZ (anlatım yok, tek ses müzik), ön kamera POV, 4 sahne SETUP→ACTION→PROGRESS→REVEAL.
+# Eski (2026-06-14 öncesi) pipeline'ın reçetesi yeni series/ motoruna taşındı.
+#
+# Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır. Çifte üretim olmasın
+# diye unnatural-lab series.json'da priority=999. Eski could-you-survive.yml şeridi (aynı 18:30
+# slotu) paused edildiği için devre dışıdır → yarış yok. Critic-QC bible'da AÇIK.
 # Saat düzeni: ana koşu 14:30 UTC → planetfall 16:30 UTC → bu koşu 18:30 UTC → drowned 20:30 UTC.
+#
+# ⚠️ İLK KOŞULAR ONAYLI: series.json publish_mode="approval" → video üretilir, GitHub Release'e
+# yüklenir, Telegram'a önizleme kareleriyle "yayınlansın mı?" sorusu gider; ONAY GELMEDEN
+# hiçbir platforma yayınlanmaz. Format kanıtlandıktan sonra publish_mode="auto" yapılır.
 
-# ⏸️ PAUSED — İhsan kararı 2026-07-20: 4 eksenli ölçüm sonrası ABSÜRT-OBJE formatına PİVOT.
-# Gerekçe (canlı YouTube API, 148 video): absürt-obje n=105 medyan 788 izlenme / 31 sn;
-# could-you-survive n=12 medyan 15.5 izlenme / 49 sn, 12 videoda TOPLAM 1 yorum, 2 günde 0 abone.
-# Yerini `unnatural-lab.yml` aldı (aynı 18:30 slotu). could-you-survive/series.json status=paused.
-# Geri istenirse: aşağıdaki schedule'ı aç + unnatural-lab.yml schedule'ını kapat + iki
-# series.json'daki status'ları takasla (tek kanal = tek aktif seri, günde-1 kilidi).
 on:
-  # schedule:
-  #   - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
+  schedule:
+    - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
   workflow_dispatch:
 
 permissions:
@@ -59,13 +64,13 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni hayatta-kalma bölümleri yazar — kredi harcamaz)
-        run: python -X utf8 -m series.replenish --series could-you-survive 2>&1 | tee logs/could_you_survive_replenish.log
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni obje/deney bölümleri yazar — kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series unnatural-lab 2>&1 | tee logs/unnatural_lab_replenish.log
 
-      - name: Produce + publish (Could You Survive sıradaki bölüm)
+      - name: Produce + publish (Unnatural Lab sıradaki bölüm)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -X utf8 -m series.series_runner --series could-you-survive 2>&1 | tee logs/could_you_survive_run.log
+        run: python -X utf8 -m series.series_runner --series unnatural-lab 2>&1 | tee logs/unnatural_lab_run.log
 
       - name: Persist series state
         if: always()
@@ -80,7 +85,7 @@ jobs:
             git add galactic_experience/ || true
             git add shadowedhistory/ || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
-            git commit -m "chore: could-you-survive durumunu ilerlet [skip ci]" || true
+            git commit -m "chore: unnatural-lab durumunu ilerlet [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
           done
 
@@ -88,6 +93,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: could-you-survive-logs-${{ github.run_number }}
+          name: unnatural-lab-logs-${{ github.run_number }}
           path: logs/
           retention-days: 7

@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "I Tried to SHATTER a PERFECT GEL BALL (It Was a DISASTER)"
+  },
+  "synopsis": "A man freezes a large, colorful gel ball with liquid nitrogen, then spectacularly shatters it into countless vibrant fragments on his workbench.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully placing a large, perfectly spherical, translucent blue gel ball onto a heat-resistant ceramic tile on a worn workshop bench. Steam subtly rises from the tile, suggesting cold. A small, insulated container with liquid nitrogen is visible nearby. Natural light accentuates the gel ball's smooth surface.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot of Ihsan, wearing a plain black crew-neck t-shirt, using tongs to carefully lower the gel ball into a small, insulated Dewar flask filled with swirling liquid nitrogen. Intense white vapor plumes dramatically from the flask, obscuring parts of his hands. The gel ball quickly turns opaque and begins to frost over. The workshop wall provides a utilitarian background.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Close-up on Ihsan's gloved hands (wearing a plain black crew-neck t-shirt under the gloves), carefully retrieving the now completely frozen, opaque, solid blue gel ball from the liquid nitrogen with tongs. Frost crystals sparkle on its surface. He places it gently back onto the ceramic tile, revealing its brittle, ice-like texture. Subtle ambient sounds from the workshop are hinted by the lighting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Dynamic close-up, slow-motion effect, as Ihsan's gloved hand (wearing a plain black crew-neck t-shirt under the gloves) brings down a small hammer with a satisfying CRACK onto the frozen blue gel ball. It shatters instantly and dramatically into hundreds of shimmering, sharp, crystalline blue fragments that scatter across the ceramic tile. The motion is smooth and powerful, capturing the explosive fragmentation.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A chilling, percussive instrumental piece starting with sustained, low-frequency drones and sparse, metallic 'ping' sounds, creating a cold, anticipatory atmosphere. A slow, building rhythm emerges with crisp, high-hat-like effects and deep, resonant synth pulses, escalating in intensity. The piece peaks with a sudden, sharp orchestral hit and a cascade of shimmering, broken glass-like sounds, then fades quickly with a lingering icy echo, leaving a sense of dramatic finality.",
+  "hook_shot": 4
+}

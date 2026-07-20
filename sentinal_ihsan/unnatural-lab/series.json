@@ -1,0 +1,36 @@
+{
+  "slug": "unnatural-lab",
+  "base_title": "Unnatural Lab",
+  "logline": "One ordinary object, one pair of hands, one transformation that should not be possible. No talking, just the payoff.",
+  "language": "en",
+  "upload_profile": "sentinalihsandaily",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #viral #experiment #satisfying #oddlysatisfying #mindblown #diy #howto #fyp",
+  "total_parts": 5,
+  "next_part": 1,
+  "status": "active",
+  "priority": 999,
+  "standalone": true,
+  "publish_mode": "approval",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 4,
+    "shot_seconds": "6",
+    "humans": "featured",
+    "shot_refs": true,
+    "music_prompt": true,
+    "eerie_ok": false,
+    "title_style": "a punchy, curiosity-driven English YouTube Shorts title using ONE of these THREE patterns only, never invent a new one: (1) 'I Found UNNATURAL <objects>... And They STARTED To <action>!', (2) 'I Tried to <action> a PERFECT <object> (It Was a DISASTER)', (3) 'Can I Turn A <object> Into A <impossible thing>?!'. Put the two or three key words in CAPS exactly as shown. Max 75 characters. No hashtags, no surrounding quotes, no emoji in the title field.",
+    "brief": "Sonsuz ABSÜRT OBJE / DENEY antolojisi — kanalın 2026-06-14'e kadar en çok izlenen formatının (medyan 788 izlenme, 105 video) yeniden açılmış hâli. Her bölüm SIRADAN bir objeyi alır ve ona ELLE, fiziksel olarak, absürt ya da aşırı tatmin edici bir dönüşüm uygular. >>> ÇIKTI DİLİ: bu brief TÜRKÇEDİR ama ÜRETTİĞİN HER ŞEY İNGİLİZCEDİR — bölüm başlığı, sinopsis, TÜM çekim prompt'ları ve müzik tarifi İngilizce yazılır. Bu brief'teki hiçbir Türkçe ifadeyi prompt'un içine OLDUĞU GİBİ kopyalama, İngilizce karşılığını yaz. <<< DEĞİŞMEZ KURALLAR: (1) SESSİZ. Karakter ASLA konuşmaz, ağzını oynatmaz, bir şey anlatmaz. Anlatım YOK, diyalog YOK; tek ses müziktir. Prompt'larda 'explaining', 'speaking', 'narrating', 'telling' geçmez. (2) ÖN KAMERA POV: izleyici telefonun kendisidir, kol mesafesinden çekim; ama kadrajda telefon, selfie çubuğu, tripod ya da kamera ASLA görünmez. (3) DÖRT ÇEKİM, HER BÖLÜMDE AYNI AKIŞ: shot 1 SETUP = malzemeleri sessizce hazırlar, konsept objesi ilk kez net görünür; shot 2 ACTION = objeye aktif olarak müdahale eder (döker, kaplar, keser, ezer, daldırır), eller net; shot 3 PROGRESS = çalışmaya devam eder, dönüşüm yarılanmıştır, ifadesi sakin ve memnun, ŞOK ifadesi YOK; shot 4 REVEAL = geniş final, tamamlanmış sonuç net ve tam görünür, sonuca eliyle işaret eder. hook_shot = en çarpıcı görsel an (genelde shot 2 ya da 4). (4) KIYAFET her çekimde AÇIKÇA yeniden yazılır ve İNGİLİZCE yazılır. Her çekim prompt'unda karakteri TAM OLARAK şu ifadeyle tarif et: 'wearing a plain black crew-neck t-shirt'. Türkçe kıyafet ifadesi yazmak HATADIR (görsel modeli anlamaz). character_id yalnız YÜZÜ kilitler, kıyafeti DEĞİL; boş bırakılan çekim yanlış gardıroba kayar. (5) OBJE TUTARLILIĞI: konsept objesinin şekli, rengi ve ÖLÇEĞİ dört çekimde de aynı kalır; çekimler arası büyüyüp küçülen obje hatadır. (6) ÇEŞİTLİLİK ZORUNLU (bu madde ihmal edilemez): her bölüm MADDESEL olarak farklı olmalı — farklı obje ailesi, farklı malzeme, farklı mekanizma, farklı sonuç. Sadece objeyi değiştirip aynı işlemi tekrarlamak YETMEZ. Kategoriyi bölümler arasında ROTASYONLA değiştir: sıvı kaplama/daldırma, ısı ve erime, dondurma/kırılganlaştırma, ezme ve deformasyon, kesme ve iç yapıyı açığa çıkarma, polimer/köpük genleşmesi, mıknatıs ve manyetik sıvı, ışıldayan/fosforlu madde, mutfak kimyası, beton ve kalıp alma. Aynı mekanizma üst üste iki bölümde kullanılmaz. (7) Mekân sıradan ve gerçek: garaj, atölye, mutfak tezgahı, arka bahçe, banyo lavabosu. Dönüşüm absürt, oda tamamen normal. (8) GÜVENLİK: tehlikeli, zehirli ya da evde taklit edilmesi riskli bir işlem GÖSTERİLMEZ (patlayıcı, açık alev + çözücü, asit, yüksek voltaj yok). Merak fizikten ve dönüşümden gelir, riskten değil. Kan, yaralanma, hayvana zarar YOK. (9) Kadrajda okunur yazı yok; tüm yazılar post'ta bindirilir. Marka etiketleri gerçekçi görünebilir ama logo vurgusu yapılmaz.",
+    "last_run": {
+      "at": "2026-07-20T17:09:18.674032+00:00",
+      "parts": "1-5"
+    }
+  }
+}

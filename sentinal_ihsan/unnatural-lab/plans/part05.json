@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Can I Turn A ROSE Into A WATERPROOF WONDER?!"
+  },
+  "synopsis": "A man dips a beautiful rose into a clear, hydrophobic coating, transforming its petals to instantly repel water, turning it into an unnatural, waterproof wonder.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, gently holding a single, vibrant red rose. Its petals are fresh and dewy. He prepares a clear glass beaker containing a perfectly transparent, slightly viscous liquid on a clean kitchen counter. Natural light from a nearby window illuminates the rose's delicate texture.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully dipping the red rose into the clear liquid in the beaker. The liquid smoothly coats the petals, then drips off, leaving the rose looking unchanged to the naked eye, but with a subtle, almost invisible film. The kitchen background is clean and simple, focusing on the action.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Close-up on Ihsan's hands, wearing a plain black crew-neck t-shirt, as he gently pulls the rose out of the beaker, letting any excess liquid drip away. He then holds the rose up, inspecting its petals closely, which now have a subtly different sheen. His expression is calm and anticipating the next step. The rose maintains its vibrant red color and shape.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Dynamic close-up on the red rose, held by Ihsan's hands, wearing a plain black crew-neck t-shirt. He uses a dropper to release droplets of water onto its petals. The water astonishingly beads up into perfect spheres and rolls off the surface without wetting the rose, demonstrating its new superhydrophobic properties. The effect is magical and unnatural, with water droplets shimmering as they glide away.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A gentle and elegant instrumental piece, opening with a soft, plucked acoustic guitar melody and shimmering, delicate piano chords, evoking natural beauty. As the dipping occurs, a subtle, magical glissando from a harp and sustained, airy synth pads create a sense of transformation. The music swells into a light, wondrous orchestral moment with flutes and pizzicato strings as the water is repelled, then gently resolves with a soft, lingering piano arpeggio, leaving a feeling of delicate enchantment.",
+  "hook_shot": 4
+}

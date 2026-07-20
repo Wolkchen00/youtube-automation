@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "I Found UNNATURAL FOAM... And It STARTED To EXPAND!"
+  },
+  "synopsis": "A man carefully prepares a ceramic figurine, then submerges it in a container that rapidly fills with expanding, otherworldly foam, completely engulfing and transforming the object.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully placing a delicate, intricate white ceramic figurine onto a small, elevated platform inside a clear glass container on a worn wooden workbench. Natural daylight from a window illuminates the scene, highlighting dust motes. The figurine is pristine and central.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot, Ihsan's hands, wearing a plain black crew-neck t-shirt, pouring a thick, pale green liquid from a small, unlabeled bottle into the base of the container holding the figurine. The liquid slowly spreads, then tiny bubbles begin to form. The ceramic figurine remains clearly visible, waiting for the transformation. Overhead workshop light casts soft shadows.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Dynamic close-up on the clear container as a vibrant, rapidly expanding white polyurethane foam engulfs the ceramic figurine. The foam billows and pushes upwards, its surface evolving with organic, cloud-like textures. Parts of the figurine are still visible through the translucent foam, being slowly swallowed. Ihsan's hands, wearing a plain black crew-neck t-shirt, are out of focus in the foreground, steadying the container.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Wide shot of Ihsan, wearing a plain black crew-neck t-shirt, standing over the workbench, presenting the fully formed, solidified mass of white foam that has completely encased the ceramic figurine, now a smooth, abstract sculpture. He gently turns the container to show the complete transformation. The workshop background is slightly blurred, emphasizing the bizarre new object.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "An ethereal, atmospheric instrumental piece, opening with a gentle, sustained synth pad and sparse, high-pitched glockenspiel notes, evoking wonder. A slow, bubbling crescendo begins with low, resonant cello tones and subtle, evolving ambient textures, building to a sustained, mysterious peak as the foam expands. It resolves into a soft, lingering synth drone, leaving a sense of quiet marvel.",
+  "hook_shot": 3
+}

@@ -1,0 +1,43 @@
+{
+  "series": {
+    "slug": "unnatural-lab",
+    "title": "Unnatural Lab",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.2,
+      "offset_in_shot": 1.4
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "The recurring man is the channel's real face — his head, neck, limbs and especially HANDS must be anatomically perfect in every frame (exactly two hands, five fingers each; fused, extra or missing fingers is an automatic fail, and this format is hand-heavy so check every shot). He wears the SAME plain black t-shirt in every shot of every episode; a changed or wrong outfit is a fail. He must never appear to speak, lip-sync or mouth words. The concept object must keep CONSISTENT shape, colour and scale across all four shots of an episode — an object that changes size or form between shots is a fail. No phone, camera, tripod or selfie stick may be visible in frame even though the framing is front-camera POV. No burned-in overlay text, captions, logos or watermarks (all overlays are added in post). Liquid drips, splashes, dust, steam, smears, uneven coating and motion blur are INTENDED realism, not defects."
+    }
+  },
+  "art_style": "Raw front-camera phone realism — a photoreal 9:16 vertical clip that looks like it was shot on an iPhone at arm's length, NOT a 3D render and NOT CGI. Handheld, slightly imperfect framing, natural motivated light only (real daylight, garage work light, kitchen window light); never studio lighting, never perfect plastic skin. A single recurring man — the channel's face — physically does something to an ordinary object with his own hands: pouring, coating, crushing, carving, dipping, building, cutting. His hands and the object are the subject; both stay sharp and clearly readable in every frame. Real materials with real physics: liquid viscosity and drip, paint running, powder settling, glass reflecting, metal catching light, genuine product labels and worn workshop surfaces. The transformation is BIZARRE, UNNATURAL or extremely satisfying, but the room around it is completely ordinary. He NEVER speaks, lip-syncs or mouths words — the only sound is music. No captions, no subtitles, no on-screen text, no logos, no watermarks, and no phone or camera rig visible in frame."
+  ,
+  "style_ref_url": null,
+  "music": true,
+  "narration": {},
+  "characters": [
+    {
+      "id": "ihsan_maker",
+      "name": "Ihsan",
+      "bio": "Kanalın yüzü — İhsan'ın kendi figürü. Her bölümde sıradan bir objeyi kendi elleriyle absürt/tatmin edici bir dönüşüme sokar. Kamerada ASLA konuşmaz, ağzını oynatmaz (seri tamamen sessizdir, tek ses müziktir). Her bölümde aynı yüz VE aynı düz siyah tişört; kıyafet değişmez, bu formatın imzasıdır. Eller ve obje her karede net görünür.",
+      "appearance": "A 30-year-old Turkish man with warm olive skin, dark brown eyes, thick dark eyebrows, and a full, neatly groomed black beard and moustache. Short dark brown-black hair. Athletic lean-muscular build with broad shoulders. A calm, focused, mildly amused expression — a man absorbed in what his hands are doing. He wears a plain black crew-neck t-shirt in EVERY shot of EVERY episode, sleeves at mid-bicep, no print, no logo. No visible tattoos, no watch, no jewellery. Hands clearly visible and anatomically correct: exactly two hands, five fingers each. Realistic, grounded, phone-camera look.",
+      "ref_image_url": "https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg",
+      "voice": {
+        "audio_id": "algieba",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "92369a8131e7497abf00c3b5ba1c92c9"
+    }
+  ],
+  "environments": [],
+  "props": []
+}

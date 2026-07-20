@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "I Found UNNATURAL WOOD... And It STARTED To BLEED!"
+  },
+  "synopsis": "A man precisely cuts into a seemingly ordinary wooden block, only to reveal a shockingly vibrant and complex internal structure that appears to 'bleed' color.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully positioning a solid, plain-looking rectangular block of faux wood onto a stable cutting mat on a well-lit workshop bench. He picks up a precision hobby knife, checking its sharpness. The wood block has a consistent, uniform grain, appearing perfectly normal. Bright task lighting highlights the tools and object.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, making the initial, clean cut into the 'wooden' block with the hobby knife. A faint line appears, but no unexpected interior is yet visible. He applies steady, controlled pressure. The workshop environment is practical and orderly. The focus is on the precision of the action.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Close-up on Ihsan's hands, wearing a plain black crew-neck t-shirt, as he carefully continues to slice through the 'wooden' block. A thin sliver of the exterior peels away, revealing the first glimpse of an intensely vibrant, layered, and intricate internal structure with swirling patterns of deep reds and purples, contrasting sharply with the mundane exterior. His expression is focused and calm.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Wide shot of Ihsan, wearing a plain black crew-neck t-shirt, holding up the now fully cut-open 'wooden' block, revealing its astonishing, 'bleeding' interior. The block is split in two, exposing an organic, almost biological pattern of vivid, flowing colors and textures that resemble veins or intricate geological layers, completely unexpected for wood. He presents it to the camera with a satisfied gesture. The light catches the glossy internal surface.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A suspenseful and precise instrumental piece, opening with a sustained, low string drone and a delicate, almost mechanical ticking rhythm, building quiet tension. As the cutting begins, sharp, percussive plucks from a pizzicato cello and subtle, rising synth pads increase the suspense. The music dramatically swells with a sudden, bright orchestral flourish and rich, warm strings as the reveal happens, then gently settles into a wondrous, sustained harmony with a lingering, soft piano melody.",
+  "hook_shot": 4
+}
