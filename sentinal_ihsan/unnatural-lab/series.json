@@ -32,5 +32,14 @@
       "at": "2026-07-20T17:09:18.674032+00:00",
       "parts": "1-5"
     }
+  },
+  "parts": {
+    "1": {
+      "status": "awaiting_approval",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep01/ep01_music_hooked.mp4",
+      "subtitle": "I Found UNNATURAL FOAM... And It STARTED To EXPAND!",
+      "release_tag": "pending-unnatural-lab-part1",
+      "approval_msg_id": 290
+    }
   }
 }
