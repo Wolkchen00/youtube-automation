@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -82,6 +82,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-19T21:57:04.232580+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep07/ep07_music_hooked_titled_capped.mp4",
+      "subtitle": "Earth, 1859 — The Sky Set Telegraphs Ablaze",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-20T22:04:47.232664+00:00"
     }
   },
   "auto_replenish": {
