@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 10,
-  "next_part": 8,
+  "next_part": 9,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -93,6 +93,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-20T22:04:47.232664+00:00"
+    },
+    "8": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep08/ep08_music_hooked_titled_capped.mp4",
+      "subtitle": "Venice, 1500 — The Queen of the Seas at Her Zenith",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-21T22:09:29.287988+00:00"
     }
   },
   "auto_replenish": {
