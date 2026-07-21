@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -97,6 +97,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-20T16:28:19.607576+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep07/ep07_music_4k.mp4",
+      "subtitle": "the sunken gardens",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-21T16:18:56.785146+00:00"
     }
   }
 }
