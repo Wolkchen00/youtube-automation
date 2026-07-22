@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 10,
-  "next_part": 9,
+  "next_part": 10,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -104,6 +104,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-21T22:09:29.287988+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep09/ep09_music_hooked_titled_capped.mp4",
+      "subtitle": "Western Front, 1914 — The Day the Guns Fell Silent",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-22T22:02:21.132125+00:00"
     }
   },
   "auto_replenish": {
