@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 25,
+    "title": "ANIMA-13: The Glitch Horizon"
+  },
+  "synopsis": "ANIMA-13 — quantum-flux world: a reality-bending planet where the landscape constantly shifts and distorts due to quantum instability, shrouded in shimmering atmospheric anomalies; signature = vast, geometric sections of the terrain momentarily glitch and duplicate, forming impossible, iridescent st",
+  "narration": "ANIMA-13 exists at the very edge of quantum stability, a world where reality itself is fluid. Its landscape is a constantly shifting canvas, prone to breathtaking distortions and impossible transformations. Here, mountains can duplicate, and valleys can fold, creating fleeting, iridescent wonders that defy physics. It is a spectacle of pure, untamed cosmic energy, a planet in a perpetual state of becoming.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From deep space, ANIMA-13 appears to shimmer and distort, its very form subtly changing. Patches of its surface momentarily duplicate or blur, and its colors shift iridescently across a palette of purples, teals, and fuchsia, reflecting its unstable nature as the camera approaches.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera descends through ANIMA-13's iridescent, unstable atmosphere, which visually warps and bends light. Below, the landscape resolves into a surreal patchwork of shifting, impossible geometries and colors, with sections appearing and disappearing in a dazzling, silent display of quantum flux.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over a surreal landscape of impossible angles and duplicated features. A colossal mountain range appears to have multiple, slightly offset reflections of itself, shimmering with holographic light. The ground itself subtly phases in and out of existence as the camera approaches a particularly active zone of instability.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera slowly drifts towards a colossal, iridescent canyon wall. As it approaches, vast, geometric sections of the terrain momentarily glitch and duplicate, forming impossible, shimmering, crystalline structures that reflect multiple light sources, before slowly dissolving and snapping back into their original, distorted forms. The ground below subtly phases in and out of existence, creating a breathtaking and mind-bending spectacle.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

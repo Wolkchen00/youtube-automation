@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 24,
+    "title": "CHRONOS: The Great Engine"
+  },
+  "synopsis": "CHRONOS — ancient machine world: a colossal, decaying planet where immense, dormant mechanisms form the landscape, shrouded in metallic dust; signature = a vast, ancient clockwork valley where colossal gears and levers slowly turn, powered by an unseen, pulsating energy core.",
+  "narration": "CHRONOS, a forgotten relic of a bygone era, reveals a planet-sized machine. Its metallic surface, scarred by time, conceals colossal mechanisms, dormant for eons. What purpose did this grand engine serve? Today, it stirs, a testament to ancient ingenuity, as colossal gears turn with a slow, deliberate grace, hinting at a hidden power that still breathes life into this magnificent, silent giant.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From orbit, a dark, metallic-grey planet, CHRONOS, fills the frame. Its surface is scarred with vast, geometric patterns resembling intricate circuitry or colossal gears. A faint, internal orange glow can be seen through deep fissures, suggesting hidden power within, as the camera begins its descent.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera dives through a thick, swirling metallic dust haze, revealing colossal, ancient metallic structures and vast, interconnected conduits stretching across the surface like dormant arteries. The air hums faintly with an unseen energy as the descent continues towards a massive rupture in the crust.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over a barren, metallic plain, the camera approaches a colossal chasm that plunges into the planet's interior. The chasm's depths are filled with an intricate, dormant machinery, hinting at immense, forgotten workings. The hum intensifies slightly, a precursor to awakening.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera slowly glides into the vast, deep canyon, revealing an immense, ancient clockwork valley. Colossal bronze gears and intricate mechanisms, long dormant, begin to slowly, rhythmically turn with a deep, resonating thrum. A pulsating orange glow emanates from deep within the core, illuminating the colossal, awakening machinery.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 22,
+    "title": "LUMINOS: The Tidal Whisper"
+  },
+  "synopsis": "LUMINOS — tidal-locked moon world: a frigid, ancient planet orbiting a colossal gas giant, covered in vast frozen seas and crystalline structures, constantly bombarded by atmospheric tides; signature = a colossal, slow-moving iridescent atmospheric wave breaking over a frozen ocean, revealing ancien",
+  "narration": "LUMINOS, an ancient moon caught in the gravitational embrace of its gas giant parent, endures eternal atmospheric tides. Frigid, frozen oceans span its surface, shaped by unimaginable forces. Yet, this relentless energy also sculpts beauty: colossal, iridescent waves of compressed atmosphere that sweep across the landscape, momentarily illuminating the hidden wonders of this silent, ice-bound world.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opening on a vast, icy-blue and grey moon, LUMINOS, locked in orbit around a colossal, swirling gas giant that dominates the background. Subtle, ethereal atmospheric haze shimmers around the moon's edges, hinting at dynamic forces at play as the camera begins its approach.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The camera descends through LUMINOS' shimmering, iridescent upper atmosphere, which scatters light in spectral hues. Below, vast, cracked frozen oceans emerge from the haze, reflecting the distant gas giant's light. The camera moves purposefully towards a strange, slow-moving atmospheric disturbance on the horizon.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over immense, fractured sheets of ancient ice, some rising into towering, crystalline formations. A colossal, slow-moving atmospheric front, shimmering with iridescent light and casting strange, shifting patterns, is visibly approaching from the horizon, its scale immense and awe-inspiring.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera is positioned just beneath a colossal, ethereal atmospheric wave of shimmering light and ice particles as it slowly breaks over an ancient, frozen ocean. The wave momentarily illuminates a hidden forest of glowing, intricate ice spires that emerge from the deep ice, before gently passing, leaving a soft, lingering glow in its wake.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

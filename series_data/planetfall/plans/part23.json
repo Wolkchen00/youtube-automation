@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "AETHERIA: The Luminaflow"
+  },
+  "synopsis": "AETHERIA — sentient light world: an ethereal planet where landscapes are sculpted from living, flowing light, existing in a perpetual twilight; signature = colossal, self-forming canyons and spires of pure, glowing energy that gently pulse and reform in intricate patterns.",
+  "narration": "AETHERIA defies conventional planetary classification. Here, landscapes are not rock and soil, but pure, sentient light, constantly flowing and reforming in intricate patterns. Existing in perpetual twilight, this world is a symphony of luminous energy, a testament to what is possible when the very fabric of existence can be sculpted by unseen forces, creating transient beauty that challenges perception.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "From orbit, a dark, almost invisible planet is revealed against the backdrop of space. Across its surface, vast, intricate patterns of glowing blue and purple light constantly shift and flow, like a living neural network, hinting at a world made of pure energy as the camera begins its descent.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Descending through AETHERIA's shimmering, almost non-existent atmosphere, the intricate light patterns below resolve into vast, flowing rivers and formations of pure, pulsating light. The 'ground' appears to be made of dark, light-absorbing matter, providing a stark contrast to the luminous landscape, as the camera approaches a grand confluence of light streams.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over a landscape of gently undulating, luminous energy. Colossal 'canyons' and 'mountains' of pure light are slowly forming and dissolving as glowing, iridescent streams flow through them, creating intricate, ever-changing patterns of light and shadow, with the camera moving towards a particularly dynamic, swirling light vortex.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera slowly drifts into a colossal 'canyon' where immense, swirling vortexes of luminous blue and violet energy coalesce and dissipate. They form and reform into crystalline-like spires and archways of pure light, pulsing with gentle, rhythmic brilliance, illuminating the dark, absorbing canyon walls in a breathtaking display of raw, living energy.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

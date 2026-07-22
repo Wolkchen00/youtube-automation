@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 21,
+    "title": "TERRA-X: The Shifting Peaks"
+  },
+  "synopsis": "TERRA-X — tectonic world: a heavy-gravity planet dominated by colossal, slowly shifting geological formations, deep ochre atmosphere; signature = vast mountain ranges slowly grinding past each other, revealing glowing magma veins and deep rifts.",
+  "narration": "From a distance of fifty light-years, TERRA-X presents a geological paradox: a world of unimaginable mass, yet one in constant, glacial flux. Its colossal mountain ranges are living entities, endlessly reshaping the crust under crushing gravity. Deep within, unseen forces drive these tectonic giants, revealing the raw, molten heart of a world still being born, or perhaps, slowly dying.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Opening from deep space, a colossal, dark-red and ochre planet fills the frame, scarred by immense, ancient mountain ranges that hint at internal, glowing fissures. The atmosphere swirls with dense, heavy clouds, showcasing the planet's immense gravity as the camera begins a slow descent.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing the descent, the camera plunges through swirling layers of thick, ochre atmospheric haze, picking up speed as it penetrates the dense cloud deck. The sheer scale of the rugged, ancient peaks below becomes breathtakingly clear, stretching into an infinite, hazy distance, with the camera focused on a vast, flat plain between two immense mountain systems.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over a colossal, ancient tectonic plate, its surface shows signs of immense pressure and slow, grinding movement, with subtle tremors rippling across vast, cracked expanses. The camera moves towards a gargantuan, newly forming chasm, its edges jagged and immense, hinting at the depths below.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera slowly glides into the gargantuan, newly formed chasm, where two immense mountain ranges are slowly grinding past each other in a breathtaking, silent ballet. Deep within the rift, a spectacular vista of glowing magma veins and ancient, multi-layered mineral deposits is revealed, pulsating with inner light as the colossal plates continue their ponderous, unstoppable dance.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}
