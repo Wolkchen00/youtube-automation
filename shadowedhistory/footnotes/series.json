@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 15,
-  "next_part": 10,
+  "next_part": 11,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -115,6 +115,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-22T22:02:21.132125+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep10/ep10_music_titled_capped.mp4",
+      "subtitle": "Constantinople, 1204 — The City of Gold Lay Broken",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-23T21:58:42.320080+00:00"
     }
   },
   "auto_replenish": {
