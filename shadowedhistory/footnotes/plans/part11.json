@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Tenochtitlan, 1521 — The City of Lakes Vanished"
+  },
+  "synopsis": "The once-grand island capital of the Aztec Empire, Tenochtitlan, faces its tragic downfall after a relentless 93-day siege, marking a pivotal end to an era.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Tenochtitlan, 1521. Aerial wide shot, vibrant market day in the pre-Columbian city of Tenochtitlan. Hundreds of canoes filled with goods on the canals, bustling crowds of Aztec people in traditional clothing on the causeways. Sunlight glints off the calm lake. Templo Mayor visible in the distance. Camera slowly drifts over the vibrant scene.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Tenochtitlan, 1521. Medium shot from a causeway, looking towards the city center. A few emaciated Aztec citizens, their faces etched with worry and hunger, watch a distant plume of smoke rising from the lake, indicating conflict. The usual vibrant market activity is subdued, canoes are fewer. Golden hour light.",
+      "seed": null,
+      "fact": "93-DAY SIEGE"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Tenochtitlan, 1521. Close-up on the face of a young Aztec warrior, weary and dirt-streaked, peering intensely across a barricade. Behind him, other warriors prepare simple weapons. The sounds of distant conflict are implied. His eyes reflect determination mixed with deep fatigue.",
+      "seed": null,
+      "fact": "CITY UNDER SIEGE"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Tenochtitlan, 1521. Epic wide shot of the final desperate battle. Aztec canoes, overloaded with warriors, clash fiercely with Spanish brigantines on the lake, surrounded by the burning edges of the city. Black smoke billows into the sky, obscuring the setting sun. The iconic Templo Mayor is visible but partially damaged. Dramatic, chaotic.",
+      "seed": null,
+      "fact": "AUGUST 13, 1521"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Tenochtitlan, 1521. Slow push-in on a desolate, smoke-hazed cityscape. Only a few broken structures and empty waterways remain. A lone, elderly Aztec woman walks slowly through the rubble, her head bowed in silent grief. The vibrant colors are gone, replaced by muted tones of ash and destruction. Lingering shot.",
+      "seed": null
+    }
+  ],
+  "music": "A mournful, epic orchestral piece with indigenous Mesoamerican flutes and drums, opening with a somber, atmospheric melody. It slowly builds with low strings and a sense of impending doom, escalating to a powerful, tragic climax driven by percussion and brass, before resolving into a quiet, sorrowful and reflective flute passage with sustained strings. Tempo is slow to moderate.",
+  "title_card": {
+    "title": "Fall of Tenochtitlan",
+    "subtitle": "Tenochtitlan, 1521"
+  },
+  "caption": "Tenochtitlan, 1521. The jewel of the Aztec Empire, a city of floating gardens and magnificent temples, once thrummed with life, built on a lake and connected by causeways.\n\nBut by spring, the air grew heavy with dread. For months, Spanish conquistadors led by Hernán Cortés, allied with indigenous rivals, had tightened their grip.\n\nOn May 26, 1521, the final, brutal siege began, cutting off food and water to the island city’s hundreds of thousands of residents.\n\nAgainst overwhelming odds, the Mexica fought valiantly for 93 days under their last emperor, Cuauhtémoc, but starvation and disease took a terrible toll.\n\nThe city fell on August 13, 1521, its splendor giving way to ruin, forever changing the course of a continent and leaving behind a haunting silence.",
+  "hashtags": "#Tenochtitlan #AztecEmpire #Conquista #1521 #Mexico #IndigenousHistory #LostCivilizations",
+  "hook_shot": 4
+}

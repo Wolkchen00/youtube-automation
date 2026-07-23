@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Lakehurst, 1937 — The Sky Fell in Fire"
+  },
+  "synopsis": "The majestic Hindenburg airship catastrophically bursts into flames upon landing at Lakehurst, New Jersey, in a shocking disaster that instantly ends the era of passenger airships.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Lakehurst, 1937. High aerial wide shot, the majestic Hindenburg airship glides gracefully across a clear blue sky towards Naval Air Station Lakehurst. Below, cars and small buildings are visible, dwarfed by its immense scale. The airship is pristine, a symbol of technological marvel. Smooth, slow cinematic drift.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Lakehurst, 1937. Medium shot from the ground looking up. Spectators in 1930s attire point and gaze in wonder as the Hindenburg hovers overhead, its engines softly whirring. Ground crew members stand ready with mooring lines, a mix of excitement and routine on their faces. Golden afternoon light.",
+      "seed": null,
+      "fact": "MAY 6, 1937"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Lakehurst, 1937. Dramatic wide shot: a sudden, bright flash of fire erupts from the tail of the Hindenburg. Smoke billows instantly, and the fire rapidly engulfs the entire airship as it begins to tilt and fall. People on the ground scatter in terror, running away from the inferno. The scene is chaotic, a moment of sudden, overwhelming catastrophe. Very quick, shocking.",
+      "seed": null,
+      "fact": "34 SECONDS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Lakehurst, 1937. Close-up on the horrified face of a young woman in the crowd, her mouth open in a silent scream, eyes wide with disbelief and terror as she witnesses the burning airship. Flames and smoke are reflected in her eyes. The heat of the fire is palpable. A single tear rolls down her cheek. The chaos is implied around her.",
+      "seed": null,
+      "fact": "62 SURVIVORS"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Lakehurst, 1937. Somber wide shot of the charred skeletal remains of the Hindenburg lying on the ground. Firefighters and emergency personnel move slowly through the wreckage, small plumes of smoke still rising. The sky above is dark, reflecting the tragedy. A profound sense of loss and the end of an era. Overcast, desolate lighting.",
+      "seed": null
+    }
+  ],
+  "music": "A tense, modern classical piece for strings and low brass, opening with a soaring, optimistic but subtly unsettling melody that hints at the grandeur of flight. A low, persistent hum underpins the rising anticipation, building with subtle dissonances. A sudden, dramatic crescendo with crashing percussion and a rapid, descending string motif marks the disaster, followed by a profound, mournful cello and violin elegy that slowly fades into silence, reflecting shock and sorrow. Starts with slow build, then fast, then very slow.",
+  "title_card": {
+    "title": "The Hindenburg Disaster",
+    "subtitle": "Lakehurst, New Jersey, 1937"
+  },
+  "caption": "Lakehurst, 1937. The German airship Hindenburg, a symbol of luxury and aerial prowess, prepared for its landing at Naval Air Station Lakehurst after a transatlantic journey.\n\nOn May 6, 1937, a crowd of spectators and ground crew watched in awe as the massive airship, 804 feet long, began its final approach.\n\nAt 7:25 PM, as mooring lines were being dropped, a sudden burst of flame erupted near the tail. Within 34 seconds, the Hindenburg was engulfed in a horrifying inferno.\n\nWitnesses watched in disbelief as the giant airship rapidly crashed to the ground, a fiery wreck. The tragedy was captured on film and radio, shocking the world.\n\nRemarkably, 62 of the 97 passengers and crew aboard survived the inferno, but the Hindenburg disaster irrevocably ended the public’s confidence in hydrogen-filled passenger airships, ushering in the jet age.",
+  "hashtags": "#Hindenburg #Lakehurst #Airship #1937 #Disaster #AviationHistory #Tragedy #NewJersey #Zeppelin",
+  "hook_shot": 3
+}

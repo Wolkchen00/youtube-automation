@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "Johnstown, 1889 — The Valley Washed Away"
+  },
+  "synopsis": "The catastrophic failure of the South Fork Dam unleashes a deadly torrent that devastates Johnstown, Pennsylvania, claiming over 2,200 lives in mere minutes.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Johnstown, 1889. Wide, idyllic shot of Johnstown nestled in a lush green valley, with the Conemaugh River winding through it. Victorian homes and bustling factories line the riverbanks. Horse-drawn carriages move along dirt roads. Above, the serene expanse of the Conemaugh Lake and the dam are visible in the distance. Clear, bright morning.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Johnstown, 1889. Medium shot of a group of townspeople gathered near the river, looking up at the swollen, churning waters of the Conemaugh. Their faces show concern as heavy rain continues to fall, creating puddles on the muddy street. The sky is dark and ominous. A child clings to a parent's leg.",
+      "seed": null,
+      "fact": "HEAVY RAIN"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Johnstown, 1889. Close-up on the South Fork Dam itself. The earthen embankment is clearly failing, water relentlessly pours over the top, eroding its structure. Cracks spiderweb across the surface, and debris from trees washes away. A lone worker desperately tries to place sandbags, a futile effort. Sound of rushing water implied. Dark, stormy light.",
+      "seed": null,
+      "fact": "DAM BROKE"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Johnstown, 1889. Horrific wide shot of a massive, roiling wall of water, filled with houses, trees, and train cars, slamming into Johnstown. The town is instantly engulfed by the torrent, structures collapsing in a maelstrom of destruction. A terrifying, unstoppable force of nature. Dust and spray fill the air. Dramatic, chaotic, but no gore.",
+      "seed": null,
+      "fact": "OVER 2,200 DEAD"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Johnstown, 1889. Slow tracking shot through the aftermath. A vast, desolate landscape of mud, debris, and shattered remnants of homes. A few survivors, covered in mud, walk aimlessly, dazed and heartbroken, searching through the wreckage. The only sound is the dripping of water and distant cries. Overcast, somber light.",
+      "seed": null
+    }
+  ],
+  "music": "A poignant, Americana-infused orchestral score, opening with a pastoral, slightly melancholic melody played by strings and acoustic guitar, evoking a tranquil valley. A low, persistent rumble gradually introduces tension, building with unsettling brass harmonies and a driving timpani rhythm, escalating into a terrifying, overwhelming crescendo of sound representing the flood's power. It resolves into a somber, sparse piano and cello lament, expressing profound loss. Begins slow, becomes frantic, then slow again.",
+  "title_card": {
+    "title": "The Johnstown Flood",
+    "subtitle": "Johnstown, Pennsylvania, 1889"
+  },
+  "caption": "Johnstown, 1889. Nestled in a valley of the Allegheny Mountains, Johnstown was a thriving industrial town, home to a resilient community.\n\nAbove it lay the South Fork Dam, poorly maintained by an exclusive fishing club, holding back 20 million tons of water from the Conemaugh Lake.\n\nPersistent heavy rains swelled the lake to dangerous levels. Despite frantic warnings from locals, the structural integrity of the dam was fatally compromised.\n\nOn May 31, 1889, at 3:10 PM, the dam burst. A 40-foot wall of water, traveling at 40 miles per hour, roared down the valley, carrying homes, trees, and railway cars.\n\nIn just ten minutes, the flood consumed Johnstown, killing over 2,200 people. It remains one of America's deadliest disasters, a stark reminder of human arrogance and nature's raw power.",
+  "hashtags": "#JohnstownFlood #1889 #Pennsylvania #DamFailure #Tragedy #AmericanHistory #NaturalDisaster #SouthForkDam",
+  "hook_shot": 4
+}

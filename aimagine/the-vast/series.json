@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 10,
-  "next_part": 9,
+  "next_part": 10,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -119,6 +119,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-22T16:10:52.571960+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep09/ep09_music_4k.mp4",
+      "subtitle": "the forest sleeps",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-23T16:28:37.352398+00:00"
     }
   }
 }
