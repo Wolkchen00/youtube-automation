@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 25,
-  "next_part": 21,
+  "next_part": 22,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -236,6 +236,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-22T18:05:23.096658+00:00"
+    },
+    "21": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep21/ep21_narrated_music_hooked.mp4",
+      "subtitle": "TERRA-X: The Shifting Peaks",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-23T18:25:56.868727+00:00"
     }
   },
   "auto_replenish": {
