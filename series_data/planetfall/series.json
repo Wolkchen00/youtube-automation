@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 25,
-  "next_part": 22,
+  "next_part": 23,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -247,6 +247,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-23T18:25:56.868727+00:00"
+    },
+    "22": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep22/ep22_narrated_music_hooked.mp4",
+      "subtitle": "LUMINOS: The Tidal Whisper",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-24T18:20:59.338520+00:00"
     }
   },
   "auto_replenish": {
