@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "where stars meet the sea"
+  },
+  "synopsis": "A massive, ancient vessel drifts silently on a perfectly still, reflective sea under a sky ablaze with a distant nebula, its interior lights casting warm reflections on the water's surface.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A slow dolly-in over a perfectly still, inky black ocean at night. The surface acts as a mirror, reflecting a sky ablaze with a distant, swirling nebula of deep purples, indigos, and hints of cosmic dust. In the far distance, the silhouette of a colossal, ancient vessel slowly drifts, its lower decks casting a warm amber glow onto the water's surface, creating a long, shimmering reflection. Heavy atmospheric perspective emphasizes the immense scale.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The dolly-in continues, bringing the camera closer to the colossal vessel. Its sheer size becomes apparent, its hull adorned with intricate, weathered details. Warm golden light streams from numerous windows and portholes along its massive structure, piercing the deep indigo night and the subtle storm haze that clings to its upper decks. Tiny, distant figures can be glimpsed through some of the illuminated windows, adding a sense of life to the grand, silent journey under the nebula-streaked sky.",
+      "seed": null
+    }
+  ],
+  "music": "A grand, celestial ambient track featuring deep, resonant synth pads, shimmering arpeggios from an electric piano, and soaring, wordless choir textures. A slow, expansive tempo (30 BPM) creates a sense of awe and endless space, gradually swelling in emotional depth as the cosmic vista unfolds, then gently receding into a vast, serene hum.",
+  "hook_shot": 2
+}

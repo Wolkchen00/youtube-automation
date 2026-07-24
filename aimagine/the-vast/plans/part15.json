@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "stone-bound wisdom"
+  },
+  "synopsis": "A slow pan reveals a colossal, intricately carved library built into the heart of a massive rock formation, its endless shelves illuminated by countless tiny lamps revealing distant, solitary scholars.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A slow pan to the right across the colossal, weathered façade of an ancient library carved directly into a sheer, towering sandstone cliff face. The rock is a deep ochre, with intricate, eroded carvings depicting forgotten symbols. Tiny, recessed windows glow with a warm, amber light, hinting at the vastness within. Volumetric dust motes dance in the air, caught in the low dusk glow.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The pan continues smoothly, bringing the camera inside the library through a massive, arched opening. The interior is cavernous, a labyrinth of colossal, towering bookshelves reaching impossibly high into the vaulted, carved rock ceiling. Thousands of tiny, warm lantern lights illuminate the endless rows of ancient tomes. Deep atmospheric perspective shows distant, tiny figures of solitary scholars moving slowly through the aisles, engrossed in their studies. The air is thick with a gentle, drifting mist.",
+      "seed": null
+    }
+  ],
+  "music": "A contemplative, scholarly chamber piece for string quartet and a delicate harpsichord. Features a slow, unfolding melody in a minor key, with pizzicato strings providing a gentle rhythmic pulse. A measured tempo (45 BPM) creates an introspective mood, gradually building in texture and emotional resonance as the vastness of the library is revealed, then settling into a quiet, thoughtful close.",
+  "hook_shot": 2
+}

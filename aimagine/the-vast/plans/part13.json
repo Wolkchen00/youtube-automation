@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "roots in the sky"
+  },
+  "synopsis": "A slow crane ascend reveals a colossal, ancient living tree structure stretching into the clouds, its massive branches adorned with countless tiny, glowing dwelling-pods connected by delicate bridges.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A slow crane ascend begins from ground level, looking up at the base of an impossibly colossal, ancient tree, its trunk wider than a skyscraper, disappearing into a dense, misty canopy high above. The bark is textured with deep greens and browns, covered in luminous moss. Tiny, glowing lanterns hang from delicate ropes, marking a hidden path leading up into the tree's immense roots. Volumetric fog drifts through the lower branches.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The crane ascend continues smoothly, rising higher into the colossal tree. The camera now reveals a sprawling network of immense branches, each as thick as a mountain ridge. Perched among these branches are countless tiny, glowing spherical dwelling-pods, connected by intricate, illuminated rope bridges. Warm amber light spills from their windows, creating a vibrant contrast against the deep green foliage and the lavender fog that surrounds the upper reaches of the tree. Distant, silhouetted figures can be seen moving across the bridges.",
+      "seed": null
+    }
+  ],
+  "music": "An organic, soaring orchestral piece for woodwinds and strings. Features a melancholic oboe melody over a bed of sustained, gentle string chords and delicate, plucked cello notes, evoking growth and ancient life. A slow tempo (40 BPM) builds in warmth and complexity as the tree-city is revealed, reaching a gentle, hopeful peak before settling into a soft, ethereal resolution.",
+  "hook_shot": 2
+}

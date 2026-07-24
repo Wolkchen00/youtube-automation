@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "silent gears of time"
+  },
+  "synopsis": "A massive, ancient clockwork mechanism embedded in a colossal mountain slowly turns, revealing intricate gears and tiny maintenance figures working within its glowing depths.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Slow crane descend, revealing the upper section of a colossal, ornate clockwork mechanism embedded into a sheer, craggy mountain face. Volumetric fog drifts around the huge, slowly turning bronze gears and polished steel levers. Tiny, masked figures with glowing lanterns can be seen on precarious platforms, tending to the machinery. The scene is dominated by slate blue and deep grey rock, with warm amber light emanating from the glowing internal mechanisms.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The crane descend continues, smoothly transitioning from the previous shot's final frame. The camera descends further into the vast mechanism, revealing a cavernous interior filled with more intricate, glowing gears and counterweights the size of buildings. Warm amber light from within casts long shadows, illuminating a network of delicate, glowing walkways where more tiny, silhouetted maintenance figures move with purpose. The air is thick with a gentle, drifting mist.",
+      "seed": null
+    }
+  ],
+  "music": "An ethereal, cinematic ambient piece in a minor key. Features a sustained, low-register cello drone, delicate harp arpeggios, and the soft, resonating chime of distant, deep bells, evoking a sense of ancient mystery and slow, inexorable movement. Tempo is very slow (35 BPM), building a gentle, almost imperceptible swell as the intricate machinery is revealed, then slowly fading into a sustained, contemplative hum.",
+  "hook_shot": 2
+}

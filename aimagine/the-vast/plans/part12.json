@@ -1,0 +1,24 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "ice whispers fire"
+  },
+  "synopsis": "A gentle aerial drift reveals a colossal, intricate glacier labyrinth, where hidden geothermal vents release warm, glowing steam, creating an impossible contrast of ice and heat.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A gentle aerial drift over a colossal, labyrinthine glacier field at dusk. The ice formations are razor-sharp and sculpted, shimmering in shades of icy blue and brilliant white under a lavender-tinged sky. Volumetric fog clings to the valleys between the towering ice walls. Far below, a tiny, distant snowcat with amber headlights traces a path along a frozen river.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The aerial drift continues seamlessly, slowly moving deeper into the glacier labyrinth. The camera reveals a dramatic chasm where the ice glows with an internal, warm orange light. Plumes of thick, glowing orange-red steam erupt from hidden geothermal vents within the ice, creating a stark, beautiful contrast against the surrounding teal and white ice walls. Tiny, almost imperceptible figures in warm gear can be seen near a small, glowing research outpost nestled against a steaming ice wall. Heavy storm haze hangs in the air.",
+      "seed": null
+    }
+  ],
+  "music": "A spacious, atmospheric ambient track combining chilling, sustained high-pitched strings with deep, resonant synth pads and the occasional, delicate ping of a glockenspiel. A glacial tempo (30 BPM) mirrors the slow drift, with a subtle increase in warmth and density as the geothermal elements are revealed, culminating in a sustained, shimmering, almost paradoxical soundscape of ice and warmth, then fading out.",
+  "hook_shot": 2
+}
