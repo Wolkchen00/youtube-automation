@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 15,
-  "next_part": 11,
+  "next_part": 12,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -126,6 +126,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-23T21:58:42.320080+00:00"
+    },
+    "11": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep11/ep11_music_hooked_titled_capped.mp4",
+      "subtitle": "Tenochtitlan, 1521 — The City of Lakes Vanished",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-24T22:02:53.293038+00:00"
     }
   },
   "auto_replenish": {
