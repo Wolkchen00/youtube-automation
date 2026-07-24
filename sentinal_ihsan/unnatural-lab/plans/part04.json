@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "This ICE Is NOT Supposed To BURN?!"
+  },
+  "synopsis": "A man handles a block of ice that, despite its appearance, radiates a visible, scorching heat, causing nearby paper to curl and char.",
+  "narration": "So I thought maybe it was just a really cold block of ice, you know? But then it started to melt the other ice around it... by radiating heat. I even tried to put it in the freezer, but it just kept getting hotter in there. Wild, right?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A close-up of ihsan_maker's hand holding a clear, perfectly formed ice cube over a wooden table. Thin wisps of heat distortion visibly rise from its surface, subtly blurring the background. ihsan_maker is wearing a plain black crew-neck t-shirt. Natural daylight illuminates the ice.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker places the ice cube on a piece of white paper on a wooden table. The paper immediately begins to curl at the edges and a faint scorch mark appears where the ice sits, while the ice itself remains solid and clear. ihsan_maker is wearing a plain black crew-neck t-shirt. Handheld, slightly imperfect framing.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A macro shot showing ihsan_maker's gloved hand carefully turning the ice cube. A small, intense orange glow can be seen deep within the ice, radiating outwards, creating visible heat haze around it. ihsan_maker is wearing a plain black crew-neck t-shirt. Natural, focused light highlights the anomaly.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. The ice cube rests in a puddle of water (from a normal ice cube it melted), but steam visibly rises from the water around it, indicating intense heat, as ihsan_maker watches calmly. His hand hovers nearby. ihsan_maker is wearing a plain black crew-neck t-shirt. Overhead shot, loopable action.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A tense, crackling ambient soundscape built from deep, throbbing synth bass and high-frequency, shimmering metallic percussion, evoking both cold and heat paradoxically. A slow, rising electronic hum builds steadily, creating a sense of unease and mystery, culminating in a sustained, almost painful high note before dissipating, subdued under narration.",
+  "hook_shot": 3
+}

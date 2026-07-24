@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "I Found UNNATURAL APPLES... And They STARTED To GLOW!"
+  },
+  "synopsis": "A man cuts open an apple to reveal a core filled with intricate, softly glowing metallic gears that slowly turn, completely unlike natural fruit flesh.",
+  "narration": "Honestly, I thought it was just a really dense core at first, but then I cut it open... and found this. Pretty sure my landlord would have some questions about apples that hum and slowly turn like a clock inside. Never seen anything like it.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker cuts a crisp red apple in half on a clean white kitchen counter. As the apple halves separate, a core of small, intricate, softly glowing metallic gears, slowly turning, is revealed instead of seeds and natural core. ihsan_maker is wearing a plain black crew-neck t-shirt. Bright kitchen window light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A macro shot focusing on the metallic gears inside the apple half. The gears emit a faint, warm internal light as ihsan_maker gently prods them with a toothpick, showing their intricate metallic surface. ihsan_maker is wearing a plain black crew-neck t-shirt. Handheld, slightly imperfect framing, natural light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker holds one apple half close to the camera, the internal gears slowly rotating and casting a soft, pulsing glow onto his fingers and the surrounding kitchen environment. The light from the apple subtly illuminates the scene. ihsan_maker is wearing a plain black crew-neck t-shirt. Calm, curious gaze.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. An overhead shot of ihsan_maker rotating the two apple halves together on the white counter. The internal gears briefly align and mesh before continuing their independent, slow rotation within each half. ihsan_maker is wearing a plain black crew-neck t-shirt. The soft glow from the apples is visible.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A delicate, shimmering instrumental piece featuring a gentle, repeating arpeggio on a glockenspiel or celeste, combined with a subtle, low-frequency synth hum and faint, intricate clockwork-like ticks. The mood is curious and wondrous, building to a soft, magical resonance before slowly fading out, played quietly under the voice-over.",
+  "hook_shot": 3
+}

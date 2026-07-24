@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "This CONCRETE Is NOT Supposed To FLOW?!"
+  },
+  "synopsis": "A man observes a small concrete block that, when pressed or disturbed, flows and reforms like a thick, gritty liquid, defying its solid nature.",
+  "narration": "Okay, so this concrete block I found is... something else. I swear I just picked it up and it started to ooze like this. Tried to dry it out, put it in the sun, but nope. It just keeps doing this weird, gritty slow-motion pour, you know?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A close-up of ihsan_maker's hand pressing a small, grey concrete block on a worn wooden workbench. The block visibly deforms and slowly 'melts' under his finger, flowing into a gritty puddle on the surface. ihsan_maker is wearing a plain black crew-neck t-shirt. Natural motivated daylight from a nearby window.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A macro shot focusing on ihsan_maker's hands as he uses a small metal trowel to scoop a section of the 'flowing' concrete. The concrete drips off the trowel like thick, grainy mud, then slowly re-forms and spreads on the workbench. ihsan_maker is wearing a plain black crew-neck t-shirt. Handheld, slightly imperfect framing.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A wide shot capturing ihsan_maker's perspective, showing the concrete 'flowing' off the edge of the workbench onto the workshop floor. It forms a small, slow-moving grey stalagmite structure that collapses under its own weight and reforms. ihsan_maker is wearing a plain black crew-neck t-shirt. Natural, soft daylight illuminates the scene.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. An overhead shot of ihsan_maker's hands gently pushing the flowing concrete back into a rough block shape on the wooden workbench. The reformed block immediately starts to flatten and spread again, its surface rippling slowly. ihsan_maker is wearing a plain black crew-neck t-shirt. Calm and curious expression.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A low, resonant synth drone underlaid with subtle, irregular metallic scraping and grinding sounds, creating a gritty, unsettling industrial atmosphere. The tempo is very slow, almost geological, building a gentle, ominous tension as the anomaly progresses. Ends with a sustained, vibrating hum, subdued under narration.",
+  "hook_shot": 3
+}

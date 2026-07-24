@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "I Found UNNATURAL WOOD... And It STARTED To FLEX!"
+  },
+  "synopsis": "A man demonstrates a piece of ordinary-looking wooden plank that, when bent, flexes and distorts like soft rubber, then snaps back into its original rigid form.",
+  "narration": "I was trying to cut this piece of scrap wood for a project, but then it just... bent. Like rubber. Tried to snap it, tried to saw it, nothing. It just stretches and then springs right back into place. How do you even work with something like this, honestly?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker holds a short, ordinary-looking wooden plank between his hands over a wooden workbench. He bends it into a deep curve, demonstrating its impossible rubber-like flexibility, before it springs back straight. ihsan_maker is wearing a plain black crew-neck t-shirt. Bright, natural overhead light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A close-up of ihsan_maker's hands bending the wooden plank. The wood visibly distorts and compresses at the bend, like soft rubber, then immediately reforms its grain and texture as it straightens. ihsan_maker is wearing a plain black crew-neck t-shirt. Handheld, slightly imperfect framing, clear focus on the wood.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker places the bent plank on a workbench, then pulls it into an extreme, impossible arc, almost touching the ends. The wood stretches thin in the middle, then instantly snaps back to its original flat shape as he releases it. ihsan_maker is wearing a plain black crew-neck t-shirt. Natural, soft light illuminates the scene.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. An overhead shot of ihsan_maker holding the plank, gently flexing it back and forth. The wood undulates smoothly with each movement, returning perfectly to its rigid form as he manipulates it. ihsan_maker is wearing a plain black crew-neck t-shirt. Loopable action, calm and curious expression.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "An organic, resonant, and slightly elastic musical piece featuring warm, plucked acoustic guitar strings and sustained, bending cello notes. The mood is curious and playful, with rhythmic shifts that mimic stretching and springing back, creating a fluid yet grounded texture. It ends with a gentle, sustained harmonic, subdued under narration.",
+  "hook_shot": 3
+}

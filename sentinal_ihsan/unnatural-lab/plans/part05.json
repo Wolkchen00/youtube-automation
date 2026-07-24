@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Can I Turn A TAPE ROLL Into A NEVER-ENDING STRING?!"
+  },
+  "synopsis": "A man attempts to use a roll of ordinary adhesive tape that continuously unspools without end, creating an impossible length of material.",
+  "narration": "Okay so, this tape roll just doesn't want to stop. I've been pulling for, like, twenty minutes straight and it's still going. My neighbor thinks I'm trying to wrap the entire house, but I swear it's just never-ending. What do you even do with this much tape?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker's hands are unspooling clear adhesive tape from a standard roll on a wooden workbench. The tape stretches out seemingly endlessly, forming a growing, impossible pile on the bench. ihsan_maker is wearing a plain black crew-neck t-shirt. Natural garage work light, slightly yellow-tinted.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A close-up of the tape dispenser. The roll visibly shrinks, but the tape continuously feeds out, pulled taut by ihsan_maker's hand as it forms a long, impossible strand. ihsan_maker is wearing a plain black crew-neck t-shirt. Handheld, slightly imperfect framing, clear focus on the tape.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. A wide shot showing ihsan_maker in his workshop, holding the tape. The tape now stretches across the entire width of the room, a vast amount already pooled on the floor, yet still unspooling from the small roll in his hand. ihsan_maker is wearing a plain black crew-neck t-shirt. Ambient natural light from the workshop windows.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Raw front-camera phone realism. ihsan_maker holds the still-unspooling tape, letting it fall into a neat coil onto the workbench. The roll in his hand continues diminishing slowly but perpetually feeding out more tape. ihsan_maker is wearing a plain black crew-neck t-shirt. Calm, curious expression, loopable action.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A continuous, rhythmic loop of light, staccato pizzicato strings combined with a gentle, insistent synth pulse, creating a sense of relentless, repetitive motion. The tempo is moderately paced, with a subtle build in layered complexity that suggests an endless, unfolding process, then smoothly loops, subdued under narration.",
+  "hook_shot": 3
+}
