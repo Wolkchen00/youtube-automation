@@ -276,6 +276,22 @@ CHANNEL_NARRATION_CONFIG = {
             "just quiet, composed, natural speech."
         ),
     },
+    "sentinal_vlog": {
+        # İhsan kararı (2026-07-24, KONSEPT.md v2.1): steril sessizlik "AI hissi" veriyor,
+        # izleyici mesafeleniyor → unnatural-lab GÜNDELİK VLOG voiceover'a geçti. Ses yine
+        # Algieba (marka sesi tek) ama register tamamen farklı: anlatıcı değil, telefonuyla
+        # çekim yapan adamın doğal konuşması. Fısıltı yasağı (2026-07-03) burada da geçerli.
+        "voice": "Algieba",
+        "instruction": (
+            "Speak like a real guy casually talking over a video he just shot on his phone — "
+            "first person, relaxed, mildly amused, completely natural and fluent. Conversational "
+            "pace with tiny human imperfections: a brief pause mid-thought, a small exhale or "
+            "half-chuckle where it fits, throwaway words like 'okay so...' delivered off-the-cuff. "
+            "He is talking to a friend, not to an audience. Absolutely NO announcer, documentary, "
+            "salesman or ASMR tone; do NOT whisper, do not perform, do not over-enunciate. "
+            "Just a normal dude who can't quite believe what his kitchen is doing right now."
+        ),
+    },
 }
 
 

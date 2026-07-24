@@ -1183,13 +1183,32 @@ def mix_voiceover(
     output_path = Path(output_path)
 
     try:
+        # Süre uyumu: amix duration=first + -shortest yüzünden videodan uzun TTS cümle
+        # ORTASINDA sert kesilir. Sığmayan anlatım hafifçe hızlandırılarak sığdırılır
+        # (atempo; doğallık tavanı 1.15x — üstü robotik duyulur). Tavan da yetmezse
+        # kesilme yine olur ama artık loglanır (Telegram onay önizlemesinde duyulur).
+        vo_chain = f"volume={voice_volume}"
+        try:
+            vid_dur = get_video_duration(video_path)
+            vo_dur = get_video_duration(voiceover_path)
+            if vid_dur > 1.0 and vo_dur > vid_dur - 0.4:
+                tempo = vo_dur / max(vid_dur - 0.4, 0.1)
+                if tempo > 1.15:
+                    logger.warning(f"⚠️ Anlatım 1.15x hızda bile videoya sığmıyor "
+                                   f"(ses {vo_dur:.1f}s / video {vid_dur:.1f}s) — sonu kesilebilir")
+                    tempo = 1.15
+                vo_chain += f",atempo={tempo:.3f}"
+                logger.info(f"🎙️ Anlatım {tempo:.2f}x hızlandırılarak videoya sığdırıldı "
+                            f"({vo_dur:.1f}s → ~{vid_dur - 0.4:.1f}s)")
+        except Exception:
+            pass  # süre ölçülemezse eski davranış (best-effort)
         cmd = [
             "ffmpeg", "-y",
             "-i", str(video_path),
             "-i", str(voiceover_path),
             "-filter_complex",
             f"[0:a]volume={bg_duck}[bg];"
-            f"[1:a]volume={voice_volume}[vo];"
+            f"[1:a]{vo_chain}[vo];"
             f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2[aout]",
             "-map", "0:v",
             "-map", "[aout]",
