@@ -24,3 +24,5 @@
 {"ts": "2026-07-23T16:14:15Z", "event": "review", "episode": 9, "shot": 2, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
 {"ts": "2026-07-24T15:53:39Z", "event": "review", "episode": 10, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-07-24T15:56:13Z", "event": "review", "episode": 10, "shot": 2, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
+{"ts": "2026-07-25T15:37:12Z", "event": "review", "episode": 11, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-07-25T15:40:58Z", "event": "review", "episode": 11, "shot": 2, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}

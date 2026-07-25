@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 15,
-  "next_part": 11,
+  "next_part": 12,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -141,6 +141,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-24T16:07:17.536100+00:00"
+    },
+    "11": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep11/ep11_music_4k.mp4",
+      "subtitle": "silent gears of time",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-25T15:54:02.796313+00:00"
     }
   }
 }
