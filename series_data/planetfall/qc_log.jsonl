@@ -79,3 +79,7 @@
 {"ts": "2026-07-25T17:39:36Z", "event": "review", "episode": 23, "shot": 2, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
 {"ts": "2026-07-25T17:43:38Z", "event": "review", "episode": 23, "shot": 3, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_03.mp4"}
 {"ts": "2026-07-25T17:46:52Z", "event": "review", "episode": 23, "shot": 4, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_04.mp4"}
+{"ts": "2026-07-26T17:35:45Z", "event": "review", "episode": 24, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-07-26T17:38:45Z", "event": "review", "episode": 24, "shot": 2, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
+{"ts": "2026-07-26T17:42:31Z", "event": "review", "episode": 24, "shot": 3, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_03.mp4"}
+{"ts": "2026-07-26T17:46:12Z", "event": "review", "episode": 24, "shot": 4, "attempt": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_04.mp4"}
