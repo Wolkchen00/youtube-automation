@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 15,
-  "next_part": 12,
+  "next_part": 13,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -152,6 +152,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-25T15:54:02.796313+00:00"
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep12/ep12_music_4k.mp4",
+      "subtitle": "ice whispers fire",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-26T15:51:39.528152+00:00"
     }
   }
 }
