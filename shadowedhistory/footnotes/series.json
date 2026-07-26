@@ -12,7 +12,7 @@
   ],
   "hashtags": "#history #historyfacts #hiddenhistory #shorts #ShadowedHistory",
   "total_parts": 15,
-  "next_part": 13,
+  "next_part": 14,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -148,6 +148,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-25T21:57:42.411108+00:00"
+    },
+    "13": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/footnotes/episodes/ep13/ep13_music_hooked_titled_capped.mp4",
+      "subtitle": "Isfahan, 1598 — The Jewel of Persia Awakened",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-26T21:52:16.998573+00:00"
     }
   },
   "auto_replenish": {
