@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #space #planet #alienworld #scifi #cosmos #universe #cinematic #spaceexploration",
   "total_parts": 30,
-  "next_part": 25,
+  "next_part": 26,
   "status": "active",
   "priority": 999,
   "publish_mode": "auto",
@@ -280,6 +280,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-26T17:51:21.201983+00:00"
+    },
+    "25": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/planetfall/episodes/ep25/ep25_narrated_music_hooked.mp4",
+      "subtitle": "ANIMA-13: The Glitch Horizon",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-27T18:26:41.863318+00:00"
     }
   },
   "auto_replenish": {
