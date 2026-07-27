@@ -51,6 +51,13 @@
       "subtitle": "This CONCRETE Is NOT Supposed To FLOW?!",
       "release_tag": "pending-unnatural-lab-part2",
       "approval_msg_id": 318
+    },
+    "3": {
+      "status": "awaiting_approval",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep03/ep03_narrated_music.mp4",
+      "subtitle": "I Found UNNATURAL APPLES... And They STARTED To GLOW!",
+      "release_tag": "pending-unnatural-lab-part3",
+      "approval_msg_id": 346
     }
   }
 }
