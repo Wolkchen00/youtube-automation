@@ -25,8 +25,55 @@ from core import ffmpeg_tools, cost_tracker
 from .bible import Bible, refs_dir, episode_dir, shots_dir, resolve_voice_id
 from .omni_api import register_audio, register_character, generate_omni_shot, build_omni_payload
 from .shots import resolve_shot, resolve_visual_shot, validate_plan, load_plan, plan_summary
-from . import critic, report
+from . import credit_gate, critic, report
 from .voices import is_preset
+
+
+def episode_spent(slug: str, number: int) -> float | None:
+    """Maliyet izleyicisinden bu serinin bu bölüm toplam kredisini oku."""
+    path = cost_tracker.COST_LOG
+    if not path.exists():
+        return 0.0
+    try:
+        history = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(history, list):
+            raise ValueError("maliyet kaydı liste değil")
+    except Exception as error:
+        logger.error(f"❌ Bölüm kredi toplamı okunamadı: {error}")
+        return None
+    marker = f"_ep{int(number)}"
+    total = 0.0
+    for entry in history:
+        if not isinstance(entry, dict) or entry.get("channel") != f"series:{slug}":
+            continue
+        operation = str(entry.get("operation") or "")
+        pos = operation.find(marker)
+        if pos < 0:
+            continue
+        suffix = operation[pos + len(marker):]
+        if suffix and not suffix.startswith("_"):
+            continue
+        try:
+            total += float(entry.get("credits") or 0)
+        except (TypeError, ValueError):
+            logger.error(f"❌ Geçersiz kredi kaydı: {entry}")
+            return None
+    return total
+
+
+def _qc_regen_allowed(slug: str, number: int) -> bool:
+    """QC regen öncesinde bölümün harcanan kredi tavanını denetle."""
+    spent = episode_spent(slug, number)
+    cap = credit_gate.episode_cap()
+    if spent is None:
+        logger.warning("⏭️ QC regen atlandı: harcanan kredi okunamadı")
+        return False
+    if spent >= cap:
+        logger.warning(
+            f"⏭️ QC regen atlandı: harcanan={spent:g}, bölüm_tavanı={cap}"
+        )
+        return False
+    return True
 
 
 # ─── Çok-motorlu görsel klip üretimi (Omni-dışı ucuz motorlar) ──────────────────
@@ -186,6 +233,17 @@ def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
 
     # 1) Topaz (gerçek detay sentezi)
     if provider == "topaz":
+        spent = episode_spent(bible.slug, number)
+        duration = ffmpeg_tools.get_video_duration(src) or 40.0
+        projected = 8 * duration
+        cap = credit_gate.episode_cap()
+        if spent is None or spent + projected > cap:
+            shown = "bilinmiyor" if spent is None else f"{spent:g}"
+            logger.warning(
+                f"⏭️ 4K upscale atlandı: harcanan={shown}, "
+                f"tahmini_upscale={projected:g}, bölüm_tavanı={cap}; 1080p kullanılacak"
+            )
+            return src
         try:
             topaz_in = src
             # Girdi limiti ~50MB: uzun bölümlerin CRF-18 finali aşabilir →
@@ -553,6 +611,8 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             # prompt + taze seed ile otomatik regen; eşiği geçemeyen çekim düşer.
             if status == "ok" and qc_budget is not None:
                 def _regen_omni(fixed_prompt, _kw=kwargs):
+                    if not _qc_regen_allowed(slug, number):
+                        return None
                     kw = dict(_kw)
                     kw["prompt"] = fixed_prompt
                     kw["seed"] = None   # None → generate_omni_shot taze seed üretir
@@ -612,6 +672,8 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
         # prompt + modelin doğal varyasyonu regen'i çeşitlendirir.
         if status == "ok" and qc_budget is not None:
             def _regen_visual(fixed_prompt, _rv=rv, _eng=shot_engine):
+                if not _qc_regen_allowed(slug, number):
+                    return None
                 return _generate_visual_clip(_eng, fixed_prompt, _rv["start_image_url"],
                                              _rv["duration"], bible.aspect_ratio,
                                              bible.resolution, sound=bible.native_audio)

@@ -25,6 +25,10 @@ on:
     - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
   workflow_dispatch:
 
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -59,10 +63,18 @@ jobs:
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EPISODE_CREDIT_CAP=900
+          MONTHLY_CREDIT_CAP=18000
           EOF
 
       - name: Prepare dirs
         run: mkdir -p logs output
+
+      - name: Onay kuyrugunu isle (Telegram)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        run: python -X utf8 -m series.approver --series unnatural-lab 2>&1 | tee logs/unnatural_lab_approve.log
 
       - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni obje/deney bölümleri yazar — kredi harcamaz)
         run: python -X utf8 -m series.replenish --series unnatural-lab 2>&1 | tee logs/unnatural_lab_replenish.log
@@ -84,6 +96,7 @@ jobs:
             git add aimagine/ || true
             git add galactic_experience/ || true
             git add shadowedhistory/ || true
+            git add credits_ledger.json || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
             git commit -m "chore: unnatural-lab durumunu ilerlet [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)

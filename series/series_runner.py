@@ -22,8 +22,10 @@ if _ROOT not in sys.path:
 from pathlib import Path
 
 from core.config import logger
+from core.kie_api import check_credit
 from core.uploader import upload_to_platform
 from series import produce
+from series import credit_gate
 from series import notifier
 from series.series_meta import SeriesMeta, part_plan_path, list_active_series
 from series.shots import load_plan
@@ -43,6 +45,27 @@ def _alert(msg: str) -> None:
             notifier.send_message(msg)
     except Exception as e:
         logger.warning(f"⚠️ Uyarı bildirimi gönderilemedi: {e}")
+
+
+def _balance_value(data) -> int | None:
+    """Kie kredi yanıtını tek bir tam sayı bakiyeye indir."""
+    if isinstance(data, (int, float)):
+        return int(data)
+    if isinstance(data, dict):
+        for key in ("balance", "credit", "remaining"):
+            value = data.get(key)
+            if isinstance(value, (int, float)):
+                return int(value)
+    return None
+
+
+def _actual_episode_spent(slug: str, part: int) -> int | None:
+    """Maliyet izleyicisindeki bölüm toplamını yukarı doğru tam sayıya yuvarla."""
+    spent = produce.episode_spent(slug, part)
+    if spent is None:
+        return None
+    whole = int(spent)
+    return whole if spent == whole else whole + 1
 
 
 def _sample_frames(video_path, count: int = 3) -> list[str]:
@@ -230,7 +253,38 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
             logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
 
     # 1) Üret (idempotent — yarım kalmışsa sadece eksik çekimi üretir)
-    video = produce.produce_episode(slug, plan, dry_run=dry_run, chain_start_url=chain_start_url)
+    reserved = False
+    if not dry_run:
+        balance = _balance_value(check_credit())
+        threshold = credit_gate.episode_cap() * 1.5
+        if not credit_gate.run_gate(balance):
+            logger.error(
+                f"❌ Kredi başlangıç kapısı kapalı: bakiye={balance}, eşik={threshold:g}"
+            )
+            _alert(
+                f"❌ *{meta.base_title}* Part {n} kredi kapısında durdu. "
+                f"bakiye={balance}, esik={threshold:g}"
+            )
+            return None
+        if not credit_gate.reserve(slug, n):
+            logger.error(
+                f"❌ Aylık kredi tavanı üretimi durdurdu: "
+                f"bölüm={credit_gate.episode_cap()}, tavan={credit_gate.monthly_cap()}"
+            )
+            _alert(
+                f"❌ *{meta.base_title}* Part {n} aylik tavan nedeniyle durdu. "
+                f"bolum={credit_gate.episode_cap()}, tavan={credit_gate.monthly_cap()}"
+            )
+            return None
+        reserved = True
+    try:
+        video = produce.produce_episode(
+            slug, plan, dry_run=dry_run, chain_start_url=chain_start_url
+        )
+    finally:
+        if reserved:
+            actual_spent = _actual_episode_spent(slug, n)
+            credit_gate.reconcile(slug, n, actual_spent)
     if dry_run:
         logger.info(f"[dry-run] Başlık olurdu: {meta.title_for(n, subtitle)}")
         return True

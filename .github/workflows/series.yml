@@ -17,6 +17,10 @@ on:
         required: false
         default: ""
 
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -78,6 +82,7 @@ jobs:
             git add aimagine/ || true
             git add galactic_experience/ || true
             git add shadowedhistory/ || true
+            git add credits_ledger.json || true
             git diff --cached --quiet && echo "Değişiklik yok" && break
             git commit -m "chore: seri durumunu ilerlet [skip ci]" || true
             git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
