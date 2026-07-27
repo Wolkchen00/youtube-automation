@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 6,
-  "next_part": 2,
+  "next_part": 3,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -46,7 +46,7 @@
       "approval_msg_id": 290
     },
     "2": {
-      "status": "awaiting_approval",
+      "status": "rejected",
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep02/ep02_narrated_music.mp4",
       "subtitle": "This CONCRETE Is NOT Supposed To FLOW?!",
       "release_tag": "pending-unnatural-lab-part2",
