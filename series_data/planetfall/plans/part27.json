@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 27,
+    "title": "KAIROS: The Frozen Heart"
+  },
+  "synopsis": "KAIROS — frozen geode world: a frigid, ancient planet of vast ice plains and towering glaciers, its surface scarred by deep fissures revealing immense internal crystalline structures; signature = a colossal, fractured glacier opening into a vast, glowing geode cavern filled with iridescent, ancient ",
+  "narration": "Kairos, a sentinel of deep space, remains a frigid enigma. Its surface, an ancient tapestry of ice and rock, hides geological wonders forged over millennia. Deep fissures scar its crust, gateways to a hidden world beneath the frozen plains. Here, colossal geodes form, housing crystalline forests that glow with an ethereal light, a testament to the planet's slow, internal geological dance.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "KAIROS from orbit: a vast, ancient ice sheet planet, glacial blue-white, scarred by immense, dark blue chasms and towering, fractured glaciers under a pale, distant sun. The planet is stark and awe-inspiring, a jewel in the void.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapid descent through wisps of icy vapor and atmospheric haze on KAIROS. The camera navigates past towering, jagged ice peaks, plunging rapidly towards a massive, geometrically perfect fissure splitting a colossal glacier below.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low into the deep fissure on KAIROS, revealing impossibly smooth, glowing blue ice walls that descend into darkness. The camera tracks deeper, a sense of immense scale growing as it enters a vast, crystal-lined cavern within the glacier.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The cavern on KAIROS opens into a truly colossal, ancient geode chamber. Giant, iridescent ice crystals, like frozen trees, fill the space, pulsing with soft green and gold light from within, creating a breathtaking, still spectacle. Camera drifts slowly through the crystalline forest.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

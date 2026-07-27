@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 26,
+    "title": "HADAR: The Whispering Sands"
+  },
+  "synopsis": "HADAR — acoustic desert world: vast, oceanic dunes of metallic-infused sand under a hazy amber sky, producing resonant, deep sonic vibrations as they shift; signature = colossal, slow-motion sand waves cresting and collapsing, emitting mournful, echoing tones across the landscape.",
+  "narration": "From orbit, Hadar appears as a tranquil ocean of ochre, but beneath the hazy amber sky lies a world of profound geological song. Its colossal dunes, infused with metallic grains, constantly shift, creating a unique acoustic phenomenon. As these monumental sand waves crest and collapse, they emit deep, resonant tones, a mournful symphony carved by aeons of wind and friction, echoing across the vast, silent landscape.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "HADAR from orbit: a vast, rippling, oceanic expanse of ochre and deep orange sands, some areas catching glints of metallic sheen under a soft, hazy amber atmosphere. The planet fills the frame, slowly rotating.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapid descent into HADAR's hazy amber atmosphere, visibility gradually improving as the camera plunges through dusty layers, revealing immense, frozen-wave-like sand formations below, stretching to an obscured horizon. The sense of speed is paramount.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low and fast over the colossal, slowly shifting sand waves of HADAR, their sheer size and metallic glint evident as light plays across the grains. The camera sweeps towards a particularly massive, dark orange crest, revealing its impressive height.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Camera slows and hovers as a colossal sand wave, shimmering with metallic dust, majestically crests and slowly collapses in a silent, deep-red plume. The fine, sparkling metallic grains cascade, creating an unseen, low-frequency vibration, revealing a serene, ever-changing landscape.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

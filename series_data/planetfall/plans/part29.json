@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 29,
+    "title": "CINDER: The Ash Veil"
+  },
+  "synopsis": "CINDER — post-cataclysmic ash world: a desolate planet perpetually veiled in falling ash from ancient cataclysms, with stark, eroded landscapes and glimpses of smoldering fissures; signature = a vast, silent 'ashfall' creating immense, ever-shifting drifts and dunes, illuminated by faint, internal s",
+  "narration": "Cinder, a world forever marked by ancient cataclysms, exists beneath a perpetual veil of ash. Its desolate, eroded landscapes speak of a violent past, with smoldering fissures hinting at hidden energies. Here, the very air itself sculpts the terrain. A continuous, silent ashfall descends, creating immense, ever-shifting dunes, a breathtaking testament to a world endlessly reshaping itself in a slow, ethereal dance.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "CINDER from orbit: a grey, desolate sphere, perpetually shrouded in a thin, swirling veil of fine ash. Hints of vast, dark, eroded canyons and ancient impacts are visible beneath the translucent shroud.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Descending through CINDER's ash veil, visibility gradually improves to reveal immense, eroded landscapes beneath, perpetually dusted. Distant, faint red glows hint at subsurface activity through the settling particulate.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over CINDER's vast, undulating ash dunes and sharp, eroded peaks. Fresh ash is constantly settling like a silent, grey snow, creating a desolate yet strangely beautiful and still landscape under a muted, obscured sky.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera drifts into a colossal valley on CINDER where a continuous, gentle 'ashfall' creates immense, soft, drifting mounds and dunes. Light catches the countless falling particles, revealing an ethereal cascade, with subtle, warm glows emanating from cracks in the ground beneath the ash.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

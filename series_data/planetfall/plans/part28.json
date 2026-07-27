@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 28,
+    "title": "NOVA: The Cosmic Bloom"
+  },
+  "synopsis": "NOVA — nebular gas giant: a colossal gas giant with a dynamic, swirling atmosphere of cosmic dust and luminous gases, resembling a living nebula; signature = a gargantuan, organic-shaped atmospheric bloom of iridescent light slowly unfurling and pulsating with vibrant colors, like a celestial flower",
+  "narration": "Nova, a gas giant of unparalleled beauty, exists as a living nebula in the cosmic expanse. Its turbulent atmosphere, a canvas of swirling cosmic dust and luminous gases, defies conventional understanding. Within its depths, titanic energetic formations blossom, vast and organic. These ethereal structures, pulsating with iridescent light, resemble celestial flowers unfurling in slow motion, a silent ballet of light and energy.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "NOVA from deep space: a stunning, massive gas giant, swirling with nebular purples, deep blues, and faint pinks, catching distant starlight. Its atmospheric bands are fluid and luminous, like a cosmic painting.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapid descent into NOVA's upper atmosphere, plunging through layers of glowing, shifting gas and iridescent clouds. Streaks of luminous energy race past, conveying immense speed and the vastness of the gas giant's envelope.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Drifting slowly through NOVA's vast, luminous clouds, resembling cosmic dust. The colors intensify, beginning to coalesce into subtle, organic-like structures as the camera approaches a central, brighter region within the swirling gases.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "A colossal, multi-lobed atmospheric bloom on NOVA slowly unfurls and expands, radiating brilliant iridescent greens, golds, and pinks. It resembles a slow-motion celestial flower opening, dominating the frame as the camera settles into a serene observation of its ethereal beauty.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

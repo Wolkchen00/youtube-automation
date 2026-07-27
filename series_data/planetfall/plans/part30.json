@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 30,
+    "title": "VERDIA: The Living Canopy"
+  },
+  "synopsis": "VERDIA — stratified jungle world: a vibrant, super-earth entirely covered by an impossibly dense, multi-layered jungle, teeming with unseen life and towering organic structures; signature = a colossal, interwoven canopy pathway of glowing vines and bioluminescent flora, revealing the hidden activity",
+  "narration": "Verdia, a super-earth swathed in an unbroken tapestry of green, hides a labyrinth of life. Its multi-layered jungle canopy, so dense it obscures the ground below, pulses with an unseen vitality. Within this colossal, living architecture, unique ecosystems thrive. Towering organic structures, woven from bioluminescent vines and flora, form pathways and habitats, revealing a vibrant, elevated world teeming with exotic, hidden creatures.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "VERDIA from orbit: a vibrant, unbroken sphere of deep, rich green, textured with immense, swirling cloud patterns, hinting at a colossal, living surface. The planet appears entirely covered by dense vegetation.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Rapid descent through VERDIA's dense, humid cloud layers. The camera breaks through to reveal an endless, undulating canopy of colossal trees and interwoven, glowing plant life stretching to an unseen horizon below.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Skimming low over VERDIA's uppermost canopy layer, a sea of vibrant greens and purples. The camera begins to descend into gaps, revealing massive, intertwined trunks and bioluminescent undergrowth, with hints of movement within the foliage.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The camera gently navigates into a vast, open space within VERDIA's upper canopy, revealing a colossal, organic 'pathway' or 'bridge' woven from glowing vines and enormous, textured leaves. Intricate bioluminescent patterns pulse along its surface, and subtle, non-human, abstract animalistic forms move within the foliage, revealing a hidden, thriving ecosystem.",
+      "seed": null
+    }
+  ],
+  "hook_shot": 4
+}

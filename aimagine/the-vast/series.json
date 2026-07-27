@@ -13,7 +13,7 @@
   "hashtags": "#dreamscape #cinematic #ambient #aiart #4k",
   "priority": 10,
   "total_parts": 15,
-  "next_part": 13,
+  "next_part": 14,
   "status": "active",
   "publish_mode": "auto",
   "auto_replenish": {
@@ -163,6 +163,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-26T15:51:39.528152+00:00"
+    },
+    "13": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/the-vast/episodes/ep13/ep13_music_4k.mp4",
+      "subtitle": "roots in the sky",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-27T16:51:37.651969+00:00"
     }
   }
 }
