@@ -4,8 +4,12 @@ name: Series Daily
 # Her çalıştırma her aktif serinin SIRADAKİ part'ını üretir ve yayınlar.
 
 on:
-  schedule:
-    - cron: '30 14 * * *'   # 14:30 UTC ≈ 07:30 California (PDT)
+  # ⏸️ DURAKLATILDI 2026-07-27 (İhsan kararı S1, KANAL_ENTEGRASYON_PLANI_v2 FAZ 1):
+  # the-vast bölümleri 0-1 izlenme alırken günlük üretim kredi yakıyordu. Aimagine
+  # doktrini (S3: @aimagine_._357 + Building formatı) yazılıp onaylanınca yeni
+  # seriyle geri açılacak. Geri açmak için schedule yorumunu kaldır.
+  # schedule:
+  #   - cron: '30 14 * * *'   # 14:30 UTC ≈ 07:30 California (PDT)
   workflow_dispatch:
     inputs:
       series:

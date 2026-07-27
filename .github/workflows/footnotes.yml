@@ -1,6 +1,6 @@
 name: Footnotes Daily
 
-# 'Footnotes of History' — shadowedhistory kanalının YENİ ana şeridi (İhsan kararı
+# 'Footnotes of History' ,  shadowedhistory kanalının YENİ ana şeridi (İhsan kararı
 # 2026-07-13: the__footnote formatının tam kopyası → kanala entegre). Her bölüm
 # tarihin az bilinen ama belgelenmiş TEK GERÇEK anını yeniden kurar: video sessiz
 # sinematik dönem-daldırma (başta 'City, YEAR' kartı + crossfade geçişler + bölüme
@@ -11,8 +11,12 @@ name: Footnotes Daily
 # Şerit merdiveni: 14:30 ana → 16:30 planetfall → 18:30 could-you-survive → 20:30 bu.
 
 on:
-  schedule:
-    - cron: '30 20 * * *'   # 20:30 UTC ≈ 13:30 California ≈ 23:30 TR
+  # ⏸️ DURAKLATILDI 2026-07-27 (İhsan kararı S1, KANAL_ENTEGRASYON_PLANI_v2 FAZ 1):
+  # footnotes bölümleri 0-75 izlenme bandındaydı; Shadowed doktrini (S4: 10-16sn
+  # tekil tarih-faktı) onaylanınca yeni formatla geri açılacak. 2026-07-27 21:37 UTC
+  # koşusu S1 kararıyla elle iptal edildi (kredi koruması).
+  # schedule:
+  #   - cron: '30 20 * * *'   # 20:30 UTC ≈ 13:30 California ≈ 23:30 TR
   workflow_dispatch:
 
 permissions:
@@ -55,7 +59,7 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni 'footnote' anları yazar — kredi harcamaz)
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni 'footnote' anları yazar ,  kredi harcamaz)
         run: python -X utf8 -m series.replenish --series footnotes 2>&1 | tee logs/footnotes_replenish.log
 
       - name: Produce + publish (Footnotes sıradaki bölüm)

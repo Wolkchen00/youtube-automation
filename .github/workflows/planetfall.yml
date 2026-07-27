@@ -7,8 +7,11 @@ name: Planetfall Daily
 # Ana koşu 14:30 UTC'de; bu koşu 2 saat sonra → durum-commit yarışı yok.
 
 on:
-  schedule:
-    - cron: '30 16 * * *'   # 16:30 UTC ≈ 09:30 California ≈ 19:30 TR
+  # ⏸️ DURAKLATILDI 2026-07-27 (İhsan kararı S1, KANAL_ENTEGRASYON_PLANI_v2 FAZ 1):
+  # planetfall bölümleri 0 izlenmede; Galactic doktrini (S4: 12-24sn tekil uzay-faktı
+  # + #15 konu kartları) onaylanınca yeni formatla geri açılacak.
+  # schedule:
+  #   - cron: '30 16 * * *'   # 16:30 UTC ≈ 09:30 California ≈ 19:30 TR
   workflow_dispatch:
 
 permissions:
@@ -50,7 +53,7 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni gezegenler yazar — kredi harcamaz)
+      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni gezegenler yazar ,  kredi harcamaz)
         run: python -X utf8 -m series.replenish --series planetfall 2>&1 | tee logs/planetfall_replenish.log
 
       - name: Produce + publish (Planetfall sıradaki gezegen)
