@@ -188,7 +188,8 @@
       "status": "awaiting_approval",
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep01/ep01_narrated_music_titled.mp4",
       "subtitle": "How Britain Won History's Shortest War In 1896!",
-      "release_tag": "pending-flashpoints-part1"
+      "release_tag": "pending-flashpoints-part1",
+      "approval_msg_id": 365
     }
   }
 }
