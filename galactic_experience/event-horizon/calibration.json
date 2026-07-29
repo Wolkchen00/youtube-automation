@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated_at": "2026-07-29T23:20:41.349062+00:00",
+  "generated_at": "2026-07-29T23:21:58.741979+00:00",
   "source_snapshot": "2026-07-29",
   "mode": "gecici_baseline",
   "channel_median_30d": 72.0,
@@ -24,6 +24,7 @@
   "rollback": {
     "active": false,
     "history": [
+      null,
       null
     ]
   },
