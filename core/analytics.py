@@ -1,270 +1,462 @@
-"""
-Analytics Dashboard — YouTube Performance Tracking
+"""YouTube kanalları için kimlik güvenli ölçüm omurgası.
 
-Generates weekly performance reports for all 4 channels using
-YouTube Data API v3. Uses per-channel OAuth tokens from GitHub Secrets.
-
-Metrics: views, likes, comments, subscriber count, top performing videos.
+Snapshot modu yalnızca sabit kanal kimlikleri ve ``YOUTUBE_API_KEY`` kullanır.
+Rapor modu ağa çıkmaz; repo içindeki günlük snapshot dosyalarından hesaplanır.
 """
 
+from __future__ import annotations
+
+import argparse
 import json
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import date, datetime, time, timedelta, timezone
 from pathlib import Path
+from statistics import median
+from typing import Any
+
+import requests
 
 from core.config import PROJECT_ROOT, logger
 
-REPORT_DIR = PROJECT_ROOT / "logs" / "analytics"
+YOUTUBE_API_BASE = "https://www.googleapis.com/youtube/v3"
+DATA_DIR = PROJECT_ROOT / "analytics_data"
+REQUEST_TIMEOUT = 30
 
-# Channel name to YouTube channel mapping
-CHANNELS = [
-    "shadowedhistory",
-    "sentinal_ihsan",
-    "galactic_experiment",
-    "aimagine",
-]
+CHANNELS = (
+    {
+        "name": "shadowedhistory",
+        "channel_id": "UCUdp0KLBh4EeeSgVbwS_DhA",
+        "uploads": "UUUdp0KLBh4EeeSgVbwS_DhA",
+    },
+    {
+        "name": "sentinal_ihsan",
+        "channel_id": "UC-Aht8VqAUMTUKYRQA3agYQ",
+        "uploads": "UU-Aht8VqAUMTUKYRQA3agYQ",
+    },
+    {
+        "name": "galactic_experiment",
+        "channel_id": "UCVCRWrQYrIHW6csOsw9bDNw",
+        "uploads": "UUVCRWrQYrIHW6csOsw9bDNw",
+    },
+    {
+        "name": "aimagine",
+        "channel_id": "UCCgbHTzYKYawUT6zEo0nlDg",
+        "uploads": "UUCgbHTzYKYawUT6zEo0nlDg",
+    },
+)
 
 
-def _get_youtube_service(channel_name: str):
-    """Build YouTube service for a specific channel."""
+def _utc_now() -> datetime:
+    """Saat bağımlı işlemler için tek UTC zaman kaynağı."""
+    return datetime.now(timezone.utc)
+
+
+def _integer(value: Any) -> int:
+    """YouTube'un metin sayılarını güvenli biçimde tam sayıya çevir."""
     try:
-        from google.oauth2.credentials import Credentials
-        from googleapiclient.discovery import build
-
-        env_key = f"YOUTUBE_OAUTH_{channel_name.upper()}"
-        creds_json = os.getenv(env_key)
-
-        if not creds_json:
-            # Try local file
-            local_file = PROJECT_ROOT / f"youtube_token_{channel_name}.json"
-            if local_file.exists():
-                creds_json = local_file.read_text()
-
-        if not creds_json:
-            logger.warning(f"No OAuth token for {channel_name}")
-            return None
-
-        creds_data = json.loads(creds_json)
-        creds = Credentials.from_authorized_user_info(creds_data)
-        return build("youtube", "v3", credentials=creds)
-    except Exception as e:
-        logger.error(f"YouTube API error for {channel_name}: {e}")
-        return None
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
 
 
-def get_channel_stats(channel_name: str) -> dict | None:
-    """Get channel-level statistics (subscribers, views, videos)."""
-    youtube = _get_youtube_service(channel_name)
-    if not youtube:
-        return None
+def _parse_datetime(value: str) -> datetime:
+    """ISO tarih-saat metnini UTC ve timezone-aware datetime olarak oku."""
+    parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed.astimezone(timezone.utc)
 
-    try:
-        response = youtube.channels().list(
-            part="statistics,snippet",
-            mine=True
-        ).execute()
 
-        items = response.get("items", [])
-        if not items:
-            return None
+def _api_get(resource: str, params: dict[str, Any], api_key: str) -> dict:
+    """YouTube Data API GET isteğini yap ve JSON nesnesi döndür."""
+    response = requests.get(
+        f"{YOUTUBE_API_BASE}/{resource}",
+        params={**params, "key": api_key},
+        timeout=REQUEST_TIMEOUT,
+    )
+    if not response.ok:
+        try:
+            detail = response.json()
+        except ValueError:
+            detail = response.text[:500]
+        raise RuntimeError(f"{resource} HTTP {response.status_code}: {detail}")
+    body = response.json()
+    if not isinstance(body, dict):
+        raise ValueError(f"{resource} yanıtı JSON nesnesi değil")
+    return body
 
-        ch = items[0]
-        stats = ch["statistics"]
-        return {
-            "channel": channel_name,
-            "channel_title": ch["snippet"]["title"],
-            "subscribers": int(stats.get("subscriberCount", 0)),
-            "total_views": int(stats.get("viewCount", 0)),
-            "total_videos": int(stats.get("videoCount", 0)),
+
+def _fetch_channel(channel: dict[str, str], api_key: str) -> dict:
+    """Tek kanalın istatistiklerini ve tam uploads listesini indir."""
+    channel_response = _api_get(
+        "channels",
+        {
+            "part": "statistics",
+            "id": channel["channel_id"],
+            "maxResults": 1,
+        },
+        api_key,
+    )
+    channel_items = channel_response.get("items") or []
+    if not channel_items:
+        raise RuntimeError(f"sabit kanal kimliği bulunamadı: {channel['channel_id']}")
+
+    raw_stats = channel_items[0].get("statistics") or {}
+    stats = {
+        "subs": _integer(raw_stats.get("subscriberCount")),
+        "total_views": _integer(raw_stats.get("viewCount")),
+        "total_videos": _integer(raw_stats.get("videoCount")),
+    }
+
+    playlist_videos: dict[str, dict[str, Any]] = {}
+    page_token: str | None = None
+    while True:
+        params: dict[str, Any] = {
+            "part": "snippet,contentDetails",
+            "playlistId": channel["uploads"],
+            "maxResults": 50,
         }
-    except Exception as e:
-        logger.error(f"Channel stats error for {channel_name}: {e}")
-        return None
+        if page_token:
+            params["pageToken"] = page_token
+        playlist_response = _api_get("playlistItems", params, api_key)
+        for item in playlist_response.get("items") or []:
+            snippet = item.get("snippet") or {}
+            content = item.get("contentDetails") or {}
+            resource = snippet.get("resourceId") or {}
+            video_id = content.get("videoId") or resource.get("videoId")
+            if not video_id:
+                continue
+            playlist_videos[str(video_id)] = {
+                "title": str(snippet.get("title") or ""),
+                "published": str(
+                    content.get("videoPublishedAt") or snippet.get("publishedAt") or ""
+                ),
+                "views": 0,
+                "likes": 0,
+                "comments": 0,
+            }
+        page_token = playlist_response.get("nextPageToken")
+        if not page_token:
+            break
 
-
-def get_recent_videos(channel_name: str, days: int = 7) -> list[dict]:
-    """Get performance data for videos uploaded in the last N days."""
-    youtube = _get_youtube_service(channel_name)
-    if not youtube:
-        return []
-
-    try:
-        # Get channel's uploads playlist
-        ch_response = youtube.channels().list(
-            part="contentDetails",
-            mine=True
-        ).execute()
-
-        items = ch_response.get("items", [])
-        if not items:
-            return []
-
-        uploads_id = items[0]["contentDetails"]["relatedPlaylists"]["uploads"]
-
-        # Get recent uploads
-        cutoff = (datetime.now(timezone.utc) - timedelta(days=days)).isoformat()
-        videos = []
-        next_page = None
-
-        for _ in range(5):  # Max 5 pages
-            pl_response = youtube.playlistItems().list(
-                part="snippet",
-                playlistId=uploads_id,
-                maxResults=50,
-                pageToken=next_page
-            ).execute()
-
-            for item in pl_response.get("items", []):
-                published = item["snippet"]["publishedAt"]
-                if published >= cutoff:
-                    videos.append({
-                        "video_id": item["snippet"]["resourceId"]["videoId"],
-                        "title": item["snippet"]["title"],
-                        "published": published,
-                    })
-
-            next_page = pl_response.get("nextPageToken")
-            if not next_page:
-                break
-
-        if not videos:
-            return []
-
-        # Get stats for these videos
-        video_ids = [v["video_id"] for v in videos]
-        stats_response = youtube.videos().list(
-            part="statistics",
-            id=",".join(video_ids[:50])
-        ).execute()
-
-        stats_map = {}
-        for item in stats_response.get("items", []):
-            s = item["statistics"]
-            stats_map[item["id"]] = {
-                "views": int(s.get("viewCount", 0)),
-                "likes": int(s.get("likeCount", 0)),
-                "comments": int(s.get("commentCount", 0)),
+    video_ids = list(playlist_videos)
+    for offset in range(0, len(video_ids), 50):
+        batch = video_ids[offset : offset + 50]
+        videos_response = _api_get(
+            "videos",
+            {
+                "part": "snippet,statistics",
+                "id": ",".join(batch),
+                "maxResults": 50,
+            },
+            api_key,
+        )
+        for item in videos_response.get("items") or []:
+            video_id = str(item.get("id") or "")
+            if video_id not in playlist_videos:
+                continue
+            snippet = item.get("snippet") or {}
+            raw_video_stats = item.get("statistics") or {}
+            playlist_videos[video_id] = {
+                "title": str(snippet.get("title") or playlist_videos[video_id]["title"]),
+                "published": str(
+                    snippet.get("publishedAt") or playlist_videos[video_id]["published"]
+                ),
+                "views": _integer(raw_video_stats.get("viewCount")),
+                "likes": _integer(raw_video_stats.get("likeCount")),
+                "comments": _integer(raw_video_stats.get("commentCount")),
             }
 
-        for v in videos:
-            v.update(stats_map.get(v["video_id"], {"views": 0, "likes": 0, "comments": 0}))
-
-        # Sort by views descending
-        videos.sort(key=lambda x: x["views"], reverse=True)
-        return videos
-
-    except Exception as e:
-        logger.error(f"Recent videos error for {channel_name}: {e}")
-        return []
+    return {"stats": stats, "videos": playlist_videos}
 
 
-def generate_weekly_report() -> dict:
-    """Generate a comprehensive weekly performance report for all channels."""
-    now = datetime.now(timezone.utc)
-    report = {
-        "generated_at": now.isoformat(),
-        "period": f"{(now - timedelta(days=7)).strftime('%Y-%m-%d')} to {now.strftime('%Y-%m-%d')}",
-        "channels": [],
-        "summary": {},
+def take_snapshot(api_key: str | None = None, now: datetime | None = None) -> dict | None:
+    """Tüm sabit kanalları ölç, başarılı sonuçları günlük dosyaya yaz.
+
+    Bir kanalın isteği bozulursa diğer kanallar devam eder. Dört kanalın tamamı
+    başarısızsa dosya yazılmaz ve ``None`` döner.
+    """
+    key = (api_key if api_key is not None else os.getenv("YOUTUBE_API_KEY", "")).strip()
+    if not key:
+        logger.error("YOUTUBE_API_KEY boş veya tanımsız; snapshot fail-closed durduruldu.")
+        return None
+
+    generated = (now or _utc_now()).astimezone(timezone.utc)
+    channels: dict[str, dict] = {}
+    for channel in CHANNELS:
+        name = channel["name"]
+        try:
+            logger.info(f"{name}: kanal ve video istatistikleri alınıyor.")
+            channels[name] = _fetch_channel(channel, key)
+            logger.info(f"{name}: {len(channels[name]['videos'])} video ölçüldü.")
+        except Exception as exc:
+            logger.exception(f"{name}: YouTube API ölçümü başarısız: {exc}")
+
+    if not channels:
+        logger.error("Tüm kanal ölçümleri başarısız; boş snapshot yazılmadı.")
+        return None
+
+    snapshot = {
+        "generated_at": generated.isoformat(),
+        "channels": channels,
     }
-
-    total_views = 0
-    total_new_videos = 0
-    best_video = None
-
-    for channel_name in CHANNELS:
-        logger.info(f"\n--- Analyzing {channel_name} ---")
-
-        stats = get_channel_stats(channel_name)
-        videos = get_recent_videos(channel_name, days=7)
-
-        channel_data = {
-            "name": channel_name,
-            "stats": stats,
-            "recent_videos": videos[:10],  # Top 10
-            "weekly_views": sum(v["views"] for v in videos),
-            "weekly_likes": sum(v["likes"] for v in videos),
-            "weekly_comments": sum(v["comments"] for v in videos),
-            "videos_posted": len(videos),
-        }
-
-        total_views += channel_data["weekly_views"]
-        total_new_videos += len(videos)
-
-        if videos and (best_video is None or videos[0]["views"] > best_video.get("views", 0)):
-            best_video = {**videos[0], "channel": channel_name}
-
-        report["channels"].append(channel_data)
-        logger.info(f"  Subscribers: {stats['subscribers'] if stats else 'N/A'}")
-        logger.info(f"  Weekly views: {channel_data['weekly_views']}")
-        logger.info(f"  Videos posted: {len(videos)}")
-
-    report["summary"] = {
-        "total_weekly_views": total_views,
-        "total_videos_posted": total_new_videos,
-        "best_video": best_video,
-    }
-
-    # Save report
-    REPORT_DIR.mkdir(parents=True, exist_ok=True)
-    filename = f"weekly_{now.strftime('%Y-%m-%d')}.json"
-    report_path = REPORT_DIR / filename
-    report_path.write_text(
-        json.dumps(report, ensure_ascii=False, indent=2),
-        encoding="utf-8"
+    daily_dir = DATA_DIR / "daily"
+    daily_dir.mkdir(parents=True, exist_ok=True)
+    output_path = daily_dir / f"{generated.date().isoformat()}.json"
+    output_path.write_text(
+        json.dumps(snapshot, ensure_ascii=False, indent=2),
+        encoding="utf-8",
     )
-    logger.info(f"\nReport saved: {report_path}")
+    logger.info(f"Günlük snapshot yazıldı: {output_path}")
+    return snapshot
 
-    # Generate markdown summary
-    _generate_markdown_report(report, REPORT_DIR / f"weekly_{now.strftime('%Y-%m-%d')}.md")
 
+def load_snapshots() -> list[tuple[date, dict]]:
+    """Günlük snapshot dosyalarını dosya tarihine göre sıralı yükle."""
+    daily_dir = DATA_DIR / "daily"
+    snapshots: list[tuple[date, dict]] = []
+    for path in sorted(daily_dir.glob("*.json")):
+        try:
+            snapshot_date = date.fromisoformat(path.stem)
+            content = json.loads(path.read_text(encoding="utf-8"))
+            if not isinstance(content, dict) or not isinstance(content.get("channels"), dict):
+                raise ValueError("channels nesnesi yok")
+            snapshots.append((snapshot_date, content))
+        except Exception as exc:
+            raise ValueError(f"Snapshot okunamadı: {path}: {exc}") from exc
+    return sorted(snapshots, key=lambda item: item[0])
+
+
+def _snapshot_time(snapshot_date: date, snapshot: dict) -> datetime:
+    """Snapshot'ın ölçüm saatini, yoksa dosya gününün sonunu döndür."""
+    generated_at = snapshot.get("generated_at")
+    if generated_at:
+        try:
+            return _parse_datetime(str(generated_at))
+        except (TypeError, ValueError):
+            pass
+    return datetime.combine(snapshot_date, time.max, tzinfo=timezone.utc)
+
+
+def _views_after_48h(
+    snapshots: list[tuple[date, dict]],
+    channel_name: str,
+    video_id: str,
+    published: datetime,
+) -> tuple[int | None, str | None]:
+    """İlk uygun günlük snapshot'tan videonun 48 saat metriğini çıkar."""
+    target_date = published.date() + timedelta(days=2)
+    latest_usable_date = published.date() + timedelta(days=7)
+    candidate: tuple[date, dict] | None = next(
+        (
+            (snapshot_date, snapshot)
+            for snapshot_date, snapshot in snapshots
+            if snapshot_date >= target_date
+        ),
+        None,
+    )
+
+    if candidate is None or candidate[0] > latest_usable_date:
+        return None, "warmup"
+
+    channel = (candidate[1].get("channels") or {}).get(channel_name)
+    if not isinstance(channel, dict):
+        return None, "warmup"
+    video = (channel.get("videos") or {}).get(video_id)
+    if not isinstance(video, dict):
+        return None, "warmup"
+    return _integer(video.get("views")), None
+
+
+def _channel_report(
+    channel_name: str,
+    newest_date: date,
+    newest_snapshot: dict,
+    snapshots: list[tuple[date, dict]],
+) -> dict:
+    """Tek kanalın haftalık video listesini ve 30 günlük medyanını hesapla."""
+    channel = (newest_snapshot.get("channels") or {}).get(channel_name) or {}
+    videos = channel.get("videos") or {}
+    as_of = _snapshot_time(newest_date, newest_snapshot)
+    week_cutoff = as_of - timedelta(days=7)
+    month_cutoff = as_of - timedelta(days=30)
+    recent: list[dict] = []
+    median_values: list[int] = []
+
+    for video_id, video in videos.items():
+        try:
+            published = _parse_datetime(str(video.get("published") or ""))
+        except (TypeError, ValueError):
+            logger.warning(f"{channel_name}/{video_id}: yayın tarihi geçersiz, rapordan atlandı.")
+            continue
+
+        age = as_of - published
+        if month_cutoff <= published <= as_of and age >= timedelta(hours=48):
+            median_values.append(_integer(video.get("views")))
+
+        if week_cutoff <= published <= as_of:
+            views_48h, reason = _views_after_48h(
+                snapshots, channel_name, str(video_id), published
+            )
+            item = {
+                "video_id": str(video_id),
+                "title": str(video.get("title") or ""),
+                "published": str(video.get("published") or ""),
+                "views": _integer(video.get("views")),
+                "views_48h": views_48h,
+                "views_48h_reason": reason,
+            }
+            recent.append(item)
+
+    recent.sort(key=lambda item: item["published"], reverse=True)
+    rolling_median = median(median_values) if median_values else None
+    return {
+        "stats": {
+            "subs": _integer((channel.get("stats") or {}).get("subs")),
+            "total_views": _integer((channel.get("stats") or {}).get("total_views")),
+            "total_videos": _integer((channel.get("stats") or {}).get("total_videos")),
+        },
+        "videos_last_7_days": recent,
+        "views_30d_median": rolling_median,
+    }
+
+
+def _markdown_cell(value: Any) -> str:
+    """Markdown tablo hücresindeki ayırıcıları ve satır sonlarını temizle."""
+    return str(value).replace("|", r"\|").replace("\r", " ").replace("\n", " ")
+
+
+def _write_markdown(report: dict, output_path: Path) -> None:
+    """JSON raporunun kısa, insan-okur Markdown karşılığını yaz."""
+    lines = [
+        "# Haftalık YouTube Raporu",
+        "",
+        f"**Dönem:** {report['period']}",
+        f"**Snapshot tarihi:** {report['snapshot_date']}",
+        f"**Üretim zamanı:** {report['generated_at']}",
+        "",
+        "## Kanal Özeti",
+        "",
+        "| Kanal | Abone | Toplam görüntüleme | Toplam video | 30 günlük medyan |",
+        "|---|---:|---:|---:|---:|",
+    ]
+    for name, channel in report["channels"].items():
+        stats = channel["stats"]
+        median_value = channel["views_30d_median"]
+        median_text = "-" if median_value is None else f"{median_value:,}"
+        lines.append(
+            f"| {name} | {stats['subs']:,} | {stats['total_views']:,} | "
+            f"{stats['total_videos']:,} | {median_text} |"
+        )
+
+    for name, channel in report["channels"].items():
+        lines.extend(
+            [
+                "",
+                f"## {name}",
+                "",
+                "| Video | Yayın zamanı | Güncel görüntüleme | 48 saat görüntüleme |",
+                "|---|---|---:|---:|",
+            ]
+        )
+        videos = channel["videos_last_7_days"]
+        if not videos:
+            lines.append("| Son 7 günde video yok | - | - | - |")
+            continue
+        for video in videos:
+            metric = (
+                "warmup"
+                if video["views_48h"] is None
+                else f"{video['views_48h']:,}"
+            )
+            lines.append(
+                f"| {_markdown_cell(video['title'])} | {video['published']} | "
+                f"{video['views']:,} | {metric} |"
+            )
+
+    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    logger.info(f"Markdown raporu yazıldı: {output_path}")
+
+
+def _send_telegram_summary(report: dict) -> None:
+    """Telegram açıksa kısa haftalık özeti gönder; hata raporu bozmasın."""
+    try:
+        from series import notifier
+
+        if not notifier.enabled():
+            return
+        channel_count = len(report["channels"])
+        video_count = sum(
+            len(channel["videos_last_7_days"])
+            for channel in report["channels"].values()
+        )
+        notifier.send_message(
+            f"Haftalık YouTube analitiği hazır.\n"
+            f"Kanal: {channel_count}, son 7 gün videosu: {video_count}\n"
+            f"Snapshot: {report['snapshot_date']}"
+        )
+    except Exception as exc:
+        logger.warning(f"Telegram analitik özeti gönderilemedi: {exc}")
+
+
+def generate_weekly_report(now: datetime | None = None) -> dict:
+    """Mevcut günlük snapshot'lardan haftalık JSON ve Markdown raporu üret."""
+    snapshots = load_snapshots()
+    if not snapshots:
+        raise FileNotFoundError(f"Günlük snapshot bulunamadı: {DATA_DIR / 'daily'}")
+
+    newest_date, newest_snapshot = snapshots[-1]
+    generated = (now or _utc_now()).astimezone(timezone.utc)
+    newest_channels = newest_snapshot["channels"]
+    channels = {
+        channel["name"]: _channel_report(
+            channel["name"], newest_date, newest_snapshot, snapshots
+        )
+        for channel in CHANNELS
+        if channel["name"] in newest_channels
+    }
+    report = {
+        "generated_at": generated.isoformat(),
+        "snapshot_date": newest_date.isoformat(),
+        "period": (
+            f"{(newest_date - timedelta(days=6)).isoformat()} "
+            f"to {newest_date.isoformat()}"
+        ),
+        "channels": channels,
+    }
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    report_date = generated.date().isoformat()
+    json_path = DATA_DIR / f"weekly_{report_date}.json"
+    markdown_path = DATA_DIR / f"weekly_{report_date}.md"
+    json_path.write_text(
+        json.dumps(report, ensure_ascii=False, indent=2),
+        encoding="utf-8",
+    )
+    logger.info(f"Haftalık JSON raporu yazıldı: {json_path}")
+    _write_markdown(report, markdown_path)
+    _send_telegram_summary(report)
     return report
 
 
-def _generate_markdown_report(report: dict, output_path: Path):
-    """Generate a human-readable markdown report."""
-    summary = report["summary"]
-    lines = [
-        f"# Weekly YouTube Report",
-        f"**Period:** {report['period']}",
-        f"**Generated:** {report['generated_at'][:19]}",
-        "",
-        "## Summary",
-        f"- Total Views: **{summary['total_weekly_views']:,}**",
-        f"- Videos Posted: **{summary['total_videos_posted']}**",
-    ]
+def main(argv: list[str] | None = None) -> int:
+    """Komut satırı modunu çalıştır ve süreç çıkış kodunu döndür."""
+    parser = argparse.ArgumentParser(description="YouTube snapshot ve haftalık rapor")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--snapshot", action="store_true", help="Günlük snapshot al")
+    modes.add_argument("--report", action="store_true", help="Haftalık rapor üret")
+    args = parser.parse_args(argv)
 
-    if summary.get("best_video"):
-        bv = summary["best_video"]
-        lines.extend([
-            f"- Best Video: **{bv['title']}** ({bv['channel']}) — {bv['views']:,} views",
-        ])
+    if args.snapshot:
+        return 0 if take_snapshot() is not None else 1
 
-    lines.append("")
-    lines.append("## Channel Breakdown")
-    lines.append("")
-    lines.append("| Channel | Subscribers | Weekly Views | Videos | Likes |")
-    lines.append("|---------|------------|-------------|--------|-------|")
-
-    for ch in report["channels"]:
-        subs = ch["stats"]["subscribers"] if ch["stats"] else "?"
-        lines.append(
-            f"| {ch['name']} | {subs} | {ch['weekly_views']:,} | "
-            f"{ch['videos_posted']} | {ch['weekly_likes']:,} |"
-        )
-
-    for ch in report["channels"]:
-        if ch["recent_videos"]:
-            lines.append(f"\n### {ch['name']} — Top Videos")
-            lines.append("| # | Title | Views | Likes |")
-            lines.append("|---|-------|-------|-------|")
-            for i, v in enumerate(ch["recent_videos"][:5], 1):
-                lines.append(f"| {i} | {v['title'][:50]} | {v['views']:,} | {v['likes']:,} |")
-
-    output_path.write_text("\n".join(lines), encoding="utf-8")
-    logger.info(f"Markdown report: {output_path}")
+    try:
+        generate_weekly_report()
+        return 0
+    except Exception as exc:
+        logger.exception(f"Haftalık rapor üretilemedi: {exc}")
+        return 1
 
 
 if __name__ == "__main__":
-    report = generate_weekly_report()
-    print(json.dumps(report["summary"], indent=2))
+    raise SystemExit(main())

@@ -115,6 +115,93 @@ def _persist_release(slug: str, n: int, video_path) -> str | None:
     return tag
 
 
+def _publish_identifier(result: dict, platform: str) -> str | None:
+    """Upload-Post yanıtından platform video veya post kimliğini bul."""
+    if not isinstance(result, dict):
+        return None
+
+    platform_result = None
+    results = result.get("results")
+    if isinstance(results, dict) and isinstance(results.get(platform), dict):
+        platform_result = results[platform]
+
+    preferred_keys = (
+        f"{platform}_id",
+        "video_id",
+        "post_id",
+        "media_id",
+        "publication_id",
+        "platform_id",
+        "videoId",
+        "postId",
+        "mediaId",
+        "id",
+    )
+
+    def _search(value) -> str | None:
+        if isinstance(value, dict):
+            for key in preferred_keys:
+                found = value.get(key)
+                if found is not None and not isinstance(found, (dict, list, bool)):
+                    text = str(found).strip()
+                    if text:
+                        return text
+            for nested in value.values():
+                found = _search(nested)
+                if found:
+                    return found
+        elif isinstance(value, list):
+            for nested in value:
+                found = _search(nested)
+                if found:
+                    return found
+        return None
+
+    return _search(platform_result) or _search(result)
+
+
+def _append_publish_registry(
+    slug: str,
+    n: int,
+    subtitle: str,
+    upload_results: dict[str, dict],
+) -> None:
+    """Başarılı part yayınını seri veri klasöründeki registry'ye ekle.
+
+    Registry hiçbir koşulda asıl yayın akışını başarısız yapamaz.
+    """
+    try:
+        import json
+        from datetime import datetime, timezone
+        from series.bible import data_dir
+
+        registry_path = data_dir(slug) / "published.json"
+        registry = []
+        if registry_path.exists():
+            registry = json.loads(registry_path.read_text(encoding="utf-8"))
+            if not isinstance(registry, list):
+                raise ValueError("published.json kökü liste değil")
+
+        entry = {
+            "part": n,
+            "subtitle": str(subtitle),
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "results": {
+                platform: _publish_identifier(result, platform)
+                for platform, result in upload_results.items()
+            },
+        }
+        registry.append(entry)
+        registry_path.parent.mkdir(parents=True, exist_ok=True)
+        registry_path.write_text(
+            json.dumps(registry, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        logger.info(f"📋 Part {n} yayın registry'sine eklendi: {registry_path}")
+    except Exception as e:
+        logger.warning(f"⚠️ Part {n} yayın registry'si yazılamadı: {e}")
+
+
 def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
                   caption: str = "") -> list[str]:
     """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür.
@@ -133,6 +220,7 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
     delivery = episode_dir(meta.slug, n) / "delivery_1080.mp4"
     has_delivery = delivery.exists() and delivery.stat().st_size > 0
     ok: list[str] = []
+    upload_results: dict[str, dict] = {}
 
     def _try(plat: str) -> bool:
         src = Path(video_path)
@@ -144,6 +232,8 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
         res = upload_to_platform(src, title, desc,
                                  user=meta.upload_profile, platform=plat,
                                  tags=meta.hashtags, social_caption=caption)
+        if res:
+            upload_results[plat] = res if isinstance(res, dict) else {}
         return bool(res)
 
     for plat in meta.platforms:
@@ -163,6 +253,8 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
                 ok.append(plat)
 
     logger.info(f"📊 Yayın: {len(ok)}/{len(meta.platforms)} platform OK")
+    if ok:
+        _append_publish_registry(meta.slug, n, subtitle, upload_results)
     return ok
 
 
