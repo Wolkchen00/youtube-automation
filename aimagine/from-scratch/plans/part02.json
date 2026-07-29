@@ -1,38 +1,38 @@
 {
   "episode": {
     "number": 2,
-    "title": "Building A Pirate Ship Treehouse From Scratch! 🛠️✨"
+    "title": "Building A GLASS IGLOO From Scratch! 🛠️✨"
   },
-  "synopsis": "Craftspeople ingeniously construct an elaborate pirate ship treehouse, complete with rigging and a crow's nest, high among the branches of a majestic old tree.",
+  "synopsis": "A modern, transparent glass igloo is constructed in a snowy, remote landscape, offering panoramic views.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Eye-level shot looking up into the canopy of a massive oak tree, where the partial hull of a wooden pirate ship treehouse is taking shape, suspended by sturdy cables. Workers in harnesses are carefully maneuvering a large section of weathered timber into place, their forms silhouetted against the bright sky.",
+      "prompt": "Engineers are carefully lowering a large, curved pane of insulated glass into a partially assembled geodesic dome structure in a pristine, snow-covered landscape. Steam rises from nearby machinery, bright daylight, saturated but believable color, tactile real materials.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Drone shot circling the tree, showing the complex network of platforms, ropes, and gangways rapidly connecting to the growing ship structure. Construction workers are busy installing the mast, unfurling small canvas sails, and securing railings, creating a whirlwind of activity.",
+      "prompt": "A time-lapse shows the rapid assembly of the glass igloo. Crews work efficiently in cold conditions, sealing panels, installing flooring, and setting up minimal, stylish interior furniture. Snow continues to fall gently, natural camera motion, satisfying build progression.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Tight close-up on hands meticulously lashing a thick, weathered rope around a polished wooden pulley block, securing it to a strong branch. The tension is palpable as the knot tightens, highlighting the craftsmanship involved in the rigging. Sunlight filters through the leaves.",
+      "prompt": "A close-up of a sophisticated heating element being seamlessly integrated into the floor, followed by a shot of warm, soft light illuminating from beneath a cozy sheepskin rug, creating an inviting glow against the frosty glass, rich visual language, motion of light.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Grand reveal shot from a slight distance, showcasing the magnificent, fully realized pirate ship treehouse. Its sails are partially unfurled, a skull-and-crossbones flag flutters from the mast, and a detailed crow's nest is visible. Children (distant, indistinct figures) can be seen climbing a rope ladder, bringing the playful structure to life as the sun gleams off its wooden hull.",
+      "prompt": "The completed glass igloo stands majestically on a snowy hill, under a clear, starry night sky. Inside, a couple sips warm drinks by a central fireplace, gazing out through the transparent roof at the vibrant, swirling Northern Lights, peak spectacle, gentle resolve.",
       "seed": null
     }
   ],
-  "family": "absürt eğlence mimarisi",
-  "music": "An adventurous, rhythmic percussion track with a playful, slightly whimsical feel, incorporating acoustic instruments like wooden blocks, shakers, and a driving bassline that mirrors the hoisting and assembly of ship components. The tempo builds, reaching a peak of excitement before a brief, light pause, then sails into a grand, looping melody on the reveal.",
+  "family": "fantezi konutlar",
+  "music": "A crisp, minimalist instrumental track with a driving, cold percussion, utilizing subtle clicks and light metallic sounds. A sustained, ambient synth pad provides a foundation as percussive elements gradually intensify, reflecting the precision of construction. A momentary pause with a shimmering bell tone precedes the reveal, followed by a serene, yet rhythmic, melody that fades gracefully mid-phrase.",
   "hook_shot": 4,
-  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
 }

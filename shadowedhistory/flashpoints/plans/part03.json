@@ -1,31 +1,31 @@
 {
   "episode": {
     "number": 3,
-    "title": "Roman Concrete: Fact Or Ancient Propaganda?"
+    "title": "The Real Reason Britain Called Napoleon Short"
   },
-  "synopsis": "Modern science in 2023 confirmed that Roman concrete possesses a self-healing capability, thanks to its unique composition.",
-  "narration": "Roman concrete's legendary durability isn't just myth. In 2023, MIT confirmed its secret: lime clasts. These tiny fragments react with water, self-healing cracks over time. An ancient engineering marvel, still baffling us today.",
+  "synopsis": "Napoleon Bonaparte was average height for his time, but enemy wartime propaganda successfully skewed public perception.",
+  "narration": "Napoleon Bonaparte was not short; he stood five feet six inches, average height for nineteenth-century Frenchmen. British wartime caricatures spun his imperial guard's tall stature into political propaganda, creating a myth that outlasted his empire.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Roman engineers intently mixing materials and pouring concrete into massive wooden forms at a construction site for a grand public building. Dust motes dance in the sunlight, showing the scale and physical effort of the work.",
+      "prompt": "Vertical 9:16 frame showing a French general in an 1804 wool uniform standing tall beside towering imperial guards in bearskin caps outside a grand Parisian palace. Bright daylight illuminates crisp golden embroidery and polished leather boots as printing presses nearby churn out satirical ink sketches.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "An extreme, macro close-up of a section of Roman concrete. Fine, hairline cracks are visible, with tiny, bright white lime clasts within them. A subtle, almost imperceptible visual of the cracks seemingly closing over time, implying the self-healing process.",
+      "prompt": "Tight close-up shot of a British political cartoon sheet being pressed with dark black ink, revealing exaggerated dwarfed caricature lines, while hands in military cuffs slide past the frame, framing the tall general standing motionless in soft background light.",
       "seed": null
     }
   ],
-  "family": "imkânsız mühendislik",
-  "seed_id": 5,
-  "music": "A rhythmic, industrial-percussive track, hinting at intricate ancient construction and modern scientific discovery. It has a slightly mysterious, intelligent feel, building with a sense of revelation and continuing with a steady, complex groove.",
+  "family": "yanılgı kırıcı",
+  "seed_id": 11,
+  "music": "Fast, tense, percussive underscore featuring crisp march snares, rapid acoustic bass stabs, and sharp wooden clappers. Begins abruptly with driving rhythmic momentum and urgent woodwind arpeggios, sustaining high-energy forward drive before snapping off abruptly mid-measure for seamless looping.",
   "title_card": {
-    "title": "Roman Concrete's Secret",
-    "subtitle": "Ancient Rome / MIT, 2023 AD"
+    "title": "Napoleon Bonaparte",
+    "subtitle": "France, 1804"
   },
-  "hook_shot": 2,
-  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+  "hook_shot": 1,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
 }

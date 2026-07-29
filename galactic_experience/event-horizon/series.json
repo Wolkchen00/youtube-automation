@@ -16,7 +16,7 @@
   "priority": 999,
   "total_parts": 5,
   "next_part": 1,
-  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051",
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
     "batch": 5,
@@ -97,12 +97,87 @@
         "id": 12,
         "topic": "What if the Moon vanished tonight? Lunar tides disappear, weaker solar tides remain, and Earth's tilt slowly destabilizes.",
         "family": "bilim temelli what-if"
+      },
+      {
+        "id": 13,
+        "topic": "The Sun holds about 99.8 percent of all the mass in the Solar System.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 14,
+        "topic": "A photon can take tens of thousands of years to escape the Sun's core, then just 8 minutes to reach Earth.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 15,
+        "topic": "Jupiter and the Sun both orbit a shared balance point that lies just outside the Sun's surface.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 16,
+        "topic": "On WASP-76b, iron vaporizes on the scorching day side and likely condenses into molten-iron rain on the cooler night side.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 17,
+        "topic": "The International Space Station moves so fast its crew sees about 16 sunrises every day.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 18,
+        "topic": "Uranus spins on its side, rolling around the Sun like a tipped-over top.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 19,
+        "topic": "The Moon drifts about 3.8 centimeters farther from Earth every year; total solar eclipses will one day end forever.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 20,
+        "topic": "A single year on Neptune lasts 165 Earth years; it completed its first full orbit since discovery only in 2011.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 21,
+        "topic": "New 2025 simulations give the Milky Way and Andromeda only about a coin-flip chance of merging within the next 10 billion years.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 22,
+        "topic": "Sagittarius A*, the black hole at the center of our galaxy, weighs about 4 million Suns.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 23,
+        "topic": "On Saturn's moon Titan, methane rains from orange skies and fills rivers and seas, the only other world with standing surface liquid.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 24,
+        "topic": "Flying a passenger jet to the nearest star would take about 5 million years.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 25,
+        "topic": "What if Earth suddenly stopped spinning? Everything not bolted down would keep moving at up to 1,670 km/h.",
+        "family": "bilim temelli what-if"
+      },
+      {
+        "id": 26,
+        "topic": "Venus spins backwards, so there the Sun rises in the west and sets in the east.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 27,
+        "topic": "Some of Earth's gold was forged in neutron-star collisions before the Solar System existed; how much is still an open mystery.",
+        "family": "derin uzay canavarları"
       }
     ],
     "title_style": "a sharp English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes.",
     "brief": "EVENT HORIZON üretim brief'i (dayanak: galactic_experience/KONSEPT.md v1.4, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, narration, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Üç çekim vardır. shot 1 ŞOK: gerçek gök cismi en dramatik halinde, iddia narration ilk cümlesinde; yavaş yıldız alanı, logo ve welcome kurulumu yasak. shot 2 ÖLÇEK: karşılaştırma veya yakınlaşma faktın ölçeğini hissettirir. shot 3 UÇURUM: uç sonuç, kompozisyon shot 1'e rimlenir ve hareket sürerken biter. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: güneş sistemi uçları, kozmik kader, derin uzay canavarları, cehennem gezegenler, ölçek şoku, bilim temelli what-if. Aynı aile üst üste iki bölümde kullanılamaz. (3) DOĞRULUK: Fakt gerçek astronomi veya astrofizikten gelir ve yaygın kaynakla doğrulanabilir; sayı uydurulamaz. Konu yalnız runtime enjekte edilen topic_pool girdilerinden seçilir; her partta tam sayı seed_id zorunludur ve yalnız o tohumun konusu ile family değeri kullanılır. Tohum listesi bu brief'te yer almaz. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; dini veya komplocu kışkırtma ve rage-bait yasak. (5) SES: Narration 30-44 kelimedir; ilk cümle iddianın kendisidir. Selamlama, CTA ve 'did you know' yasak. (6) LOOP DİKİŞİ: Son kompozisyon ilk kareye döner; kapanış kartı, sunum jesti ve kutlama yasak. (7) GÜVENLİK: Korku estetiği ve epilepsi riski yaratan hızlı flaş dizileri yok; ton dehşet değil huşudur. (8) MÜZİK: Huşu odaklı kozmik altlık sabit ileri nabız taşır, ölçek anında tek kısa kabarma yapar ve kesintisiz loop için cümlenin ortasında biter.",
     "last_run": {
-      "at": "2026-07-29T15:02:38.355549+00:00",
+      "at": "2026-07-29T18:41:12.688254+00:00",
       "parts": "1-5"
     }
   }

@@ -3,36 +3,36 @@
     "number": 3,
     "title": "Junk-Filled Backyard → Japanese Zen Garden ✨"
   },
-  "synopsis": "A neglected, debris-filled backyard is meticulously transformed into a serene and minimalist Japanese Zen garden.",
+  "synopsis": "A neglected, junk-filled backyard is transformed into a peaceful and meticulously designed Japanese Zen garden.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Medium shot of a cluttered backyard, half-cleared, with an old rusty bicycle frame and scattered pots still visible, contrasting with a freshly raked patch of fine white gravel in the foreground. Workers are carefully sifting soil, preparing the ground.",
+      "prompt": "A crew is actively clearing piles of old furniture and debris from a neglected backyard, revealing patches of overgrown weeds and broken paving. One worker uses a small excavator, bright daylight, saturated but believable color, tactile real materials.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Dynamic wide shot, showing the rapid transformation: workers laying down weed barriers, carefully placing large, smooth river stones and shaping the landscape. A small, elegant wooden bridge is swiftly assembled over a dry stream bed. Time-lapse effect emphasizes the efficiency and precision.",
+      "prompt": "Time-lapse footage of the backyard being meticulously transformed: leveling the ground, laying down weed barriers, arranging large rocks, and carefully raking sand into patterns. New, delicate plants are introduced, natural camera motion, satisfying build progression.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Extreme close-up on gloved hands meticulously arranging small, smooth river pebbles around the base of a newly planted, perfectly pruned bonsai tree. Each stone is placed with intention, contributing to the balance and harmony of the miniature landscape. A gentle mist rises from a nearby sprinkler.",
+      "prompt": "Close-up of hands precisely placing smooth river stones around a small, bubbling water feature, followed by a shot of a miniature maple tree being gently positioned into freshly raked gravel, its red leaves contrasting with the grey, rich visual language, motion of water.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Serene wide shot revealing the completed Japanese Zen garden. A meticulously raked gravel \"ocean\" surrounds carefully placed, naturally sculpted rock formations. A delicate wooden bridge crosses a dry riverbed, and a small, vibrant bonsai tree adds a touch of life, all bathed in soft, golden hour sunlight. A single, distant figure meditates peacefully.",
+      "prompt": "The formerly cluttered backyard is now a pristine, serene Japanese Zen garden. A meticulously raked gravel path leads to a smooth rock arrangement, surrounded by bonsai trees and a tranquil koi pond, bathed in soft afternoon light, peak spectacle, gentle resolve.",
       "seed": null
     }
   ],
   "family": "dönüşüm",
-  "music": "A contemplative and evolving percussive track, starting with a subtle, almost hesitant rhythm, then gradually introducing natural sounds and more defined beats as elements are placed, reflecting the methodical nature of the transformation. It softens into a serene, meditative flow for the final reveal, creating a peaceful, looping atmosphere.",
+  "music": "A calming, yet focused, instrumental track with a gentle percussive beat, featuring subtle clicks and soft bamboo sounds. The rhythm slowly builds with delicate melodic layers from koto and shakuhachi, reflecting the careful, deliberate work. A single, resonant chime momentarily breaks the rhythm before the reveal, opening into a tranquil, harmonious melody that concludes mid-phrase, allowing for a seamless loop.",
   "hook_shot": 4,
-  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
 }

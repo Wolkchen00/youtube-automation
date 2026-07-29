@@ -1,31 +1,31 @@
 {
   "episode": {
     "number": 4,
-    "title": "The Real Reason Australia Lost The Emu War"
+    "title": "Zheng Yi Sao: The Undefeated Pirate Queen"
   },
-  "synopsis": "In 1932, the Australian military waged a peculiar and ultimately unsuccessful war against emus in the nation's west.",
-  "narration": "In 1932, Australia declared war on emus. Armed with Lewis guns, soldiers faced thousands of birds destroying crops. Despite heavy ammunition, the emus proved too fast and scattered, leaving the military bewildered and defeated.",
+  "synopsis": "Pirate leader Zheng Yi Sao forced an imperial amnesty in 1810 and retired with her massive treasure intact.",
+  "narration": "In 1810, pirate commander Zheng Yi Sao forced Qing imperial envoys into a full amnesty after commanding seventy thousand sailors. She surrendered her battle fleet on her own terms, kept her vast fortune, and retired peacefully.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Dusty, sun-baked Australian outback. A small squad of Australian soldiers in 1930s uniforms, one aiming a heavy Lewis machine gun, facing a vast, seemingly endless flock of emus across the dry plains. Tension and anticipation in their stance.",
+      "prompt": "Vertical 9:16 view of hundreds of red-sailed junks filling a misty bay in 1810 in the South China Sea. A sharp-featured female commander in silk battle robes stands at a wooden ship prow, staring calmly down imperial messengers holding imperial pardon scrolls.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "A chaotic, wide shot of emus scattering in all directions through sparse bushland, surprisingly agile. The soldiers look on in exasperation, some reloading, others shaking their heads. Dust rises from the frantic movement.",
+      "prompt": "Extreme close-up of heavy gold coins and official government seals poured onto a polished teak table on a flagship deck, while red silk banners sway in ocean wind behind the quiet commander looking out over calm coastal waters.",
       "seed": null
     }
   ],
-  "family": "tuhaf savaş",
-  "seed_id": 10,
-  "music": "A comically serious, fast-paced military march with strong, quirky percussive elements. It should feel both determined and slightly absurd, maintaining a driving, relentless rhythm that ends mid-phrase for a seamless loop, hinting at the ongoing futility.",
+  "family": "unutulmuş kişi",
+  "seed_id": 23,
+  "music": "Fast, tense, percussive underscore powered by pounding taiko drums, rapid gong scrapes, and aggressive low strings. Hits immediately with high velocity, driving an intense nautical rhythm through sharp syncopated beats, breaking off mid-groove to loop back seamlessly to the start.",
   "title_card": {
-    "title": "The Great Emu War",
-    "subtitle": "Western Australia, 1932"
+    "title": "Zheng Yi Sao",
+    "subtitle": "South China Sea, 1810"
   },
   "hook_shot": 1,
-  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
 }

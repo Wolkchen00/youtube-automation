@@ -1,33 +1,33 @@
 {
   "episode": {
     "number": 3,
-    "title": "Sun and Moon: The Eclipse Coincidence"
+    "title": "What If the Moon Vanished? Earth's Tides COLLAPSE"
   },
-  "synopsis": "This episode explores the improbable cosmic alignment that allows for perfect total solar eclipses on Earth.",
-  "narration": "Total solar eclipses are a cosmic fluke. The Sun is precisely 400 times wider than the Moon, and coincidentally, also 400 times farther away from Earth. This perfect alignment creates the stunning spectacle of a perfectly covered Sun, a rare celestial dance.",
+  "synopsis": "The sudden vanishing of the Moon disrupts Earth's ocean tides and long-term orbital stability, sending planetary climate into turmoil.",
+  "narration": "If the Moon suddenly vanished, Earth's oceanic tides would instantly collapse to a fraction of their strength. Over millions of years, without lunar stabilization, Earth's axial tilt would wobble violently, plunging global climates into utter atmospheric chaos.",
   "shots": [
     {
       "n": 1,
       "duration": "6",
-      "prompt": "The majestic Sun, a fiery orb of plasma, flares and churns with solar activity, seen from a distance that reveals its immense scale. Streaks of solar winds emanate outward into the deep blackness of space. Camera slowly zooms in on a prominent solar flare.",
+      "prompt": "Photoreal vertical shot of Earth in deep space with the Moon brightly visible in foreground orbit, dynamic light casting sharp lunar craters against blue oceans.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "The Moon, a dark, silhouetted sphere, slowly glides perfectly across the Sun's face, revealing the stunning corona and Baily's beads just before totality. The camera is positioned from Earth's perspective, emphasizing the perfect, miraculous alignment.",
+      "prompt": "The Moon instantly dissolves into faint cosmic dust and vanishes, causing ocean tidal bulges on Earth below to visibly shrink and flatten as camera slowly pans down.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "Pull back to a wide shot showing the Sun and Moon in their relative positions, now slightly separated post-eclipse. The camera is situated to show Earth as a distant, serene blue marble, reinforcing the unique vantage point for this celestial coincidence. The Moon subtly drifts back towards its pre-eclipse position, looping back to shot 1.",
+      "prompt": "Earth wobbling unsteadily on its tilted axis against a dark background of stars, cloud layers swirling wildly, as camera glides smoothly back into the original orbital framing.",
       "seed": null
     }
   ],
-  "family": "ölçek şoku",
-  "seed_id": 4,
-  "music": "A majestic, awe-driven cosmic underscore with a steady, anticipatory pulse, building to a grand, shimmering swell as the eclipse peaks. The music should evoke wonder and the precision of cosmic mechanics, ending mid-phrase to facilitate a continuous loop.",
-  "hook_shot": 2,
-  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+  "family": "bilim temelli what-if",
+  "seed_id": 12,
+  "music": "An eerie cinematic synth drone backed by a steady rhythmic pulse, swelling dramatically with ominous low orchestral strings as Earth destabilizes on its axis in deep space, maintaining high cosmic tension before cutting abruptly mid-bar on a resonant pulsing bass note for an infinite loop.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
 }

@@ -1,33 +1,33 @@
 {
   "episode": {
     "number": 5,
-    "title": "HD 189733 b: The Raining Glass Planet"
+    "title": "Venus: A Day Is LONGER Than Its Year"
   },
-  "synopsis": "This episode showcases the terrifying conditions of exoplanet HD 189733 b, where it rains molten glass sideways amid extreme winds.",
-  "narration": "Meet HD 189733 b, a stunning deep-blue exoplanet. But this beauty hides a monstrous secret: its atmosphere whips up winds of 8,700 kilometers per hour. Scientists believe it rains molten glass sideways across its scorching surface, a truly hellish alien world.",
+  "synopsis": "Venus rotates so agonizingly slowly on its axis that a single day takes longer than its complete journey around the Sun.",
+  "narration": "A single day on Venus lasts longer than its entire year around the Sun. Rotating in slow reverse, Venus takes two hundred forty days to turn once, causing the distant Sun to rise slowly in the west.",
   "shots": [
     {
       "n": 1,
       "duration": "6",
-      "prompt": "Exoplanet HD 189733 b, a vibrant, deep-blue 'hot Jupiter,' dominates the frame. Its thick, turbulent atmosphere swirls with immense, high-speed storm systems, illuminated fiercely by its nearby orange star. The camera slowly tracks across the planet's tempestuous surface.",
+      "prompt": "A majestic panoramic view of yellow Venus shrouded in golden sulfuric clouds slowly revolving against the black backdrop of deep space.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "Extreme close-up on the upper atmosphere of HD 189733 b. Streaks of superheated, glowing molten glass are visibly flung sideways by incredible winds, creating a dazzling but terrifying phenomenon. The glass shards shimmer and distort the light, emphasizing the extreme conditions.",
+      "prompt": "Slow camera push down into the dense swirling amber cloud deck of Venus, showing light diffusing in reverse orientation across thick atmospheric layers.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "Pull back slightly to show HD 189733 b in its entirety again, emphasizing the stark contrast between its alluring blue color and the violent weather systems. The molten glass effect is still subtly visible in the atmospheric streaks as the planet orbits its star, reinforcing its 'hell planet' status. Loops back to shot 1's composition.",
+      "prompt": "Distant glare of the Sun appearing on the western atmospheric horizon of Venus as the planet imperceptibly spins, looping back to the full orbital scale view of shot one.",
       "seed": null
     }
   ],
-  "family": "cehennem gezegenler",
-  "seed_id": 11,
-  "music": "An intense, turbulent, awe-driven cosmic underscore with a relentless, driving rhythm. A sharp, shimmering swell accompanies the visual of molten glass rain, creating a sense of chaotic, dangerous beauty. The music should be unsettling and powerful, ending mid-phrase for seamless looping.",
-  "hook_shot": 2,
-  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+  "family": "güneş sistemi uçları",
+  "seed_id": 1,
+  "music": "A rich atmospheric cosmic underscore driven by a slow steady mechanical synth pulse, swelling with warm synth brass chords as dense golden sulfur clouds illuminate in reverse rotation, sustaining a deep rhythmic drone that abruptly stops mid-phrase to allow an unbroken seamless loop.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
 }

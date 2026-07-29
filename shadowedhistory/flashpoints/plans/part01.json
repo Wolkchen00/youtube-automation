@@ -1,31 +1,31 @@
 {
   "episode": {
     "number": 1,
-    "title": "The Anglo-Zanzibar War: The Quickest Victory"
+    "title": "How Britain Won History's Shortest War In 1896!"
   },
-  "synopsis": "The shortest war in recorded history unfolded in 1896, lasting less than an hour as British forces swiftly overwhelmed Zanzibar.",
-  "narration": "The Anglo-Zanzibar War of 1896 holds a bizarre record: just 38 minutes. After a British ultimatum expired, a swift naval bombardment crushed the Sultan's palace, forcing a surrender before noon. History's shortest conflict, over in a flash.",
+  "synopsis": "The Anglo-Zanzibar War of 1896 ended in under forty-five minutes when naval gunfire crippled the royal palace.",
+  "narration": "In 1896, the shortest war in recorded history broke out and concluded in under forty-five minutes. British Royal Navy warships bombarded the royal palace of Zanzibar until the sultan fled, ending the conflict almost immediately.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "A wide, dramatic shot of a British Royal Navy cruiser, cannons blazing smoke and fire towards the ornate Sultan's Palace on Zanzibar's coastline. The sky is clear, sun high, showing chaos and immediate impact. Waves crash against the shore.",
+      "prompt": "In 9:16 vertical view, smoke billows over the ornate waterfront palace of Zanzibar in 1896 as naval artillery shells burst in mid-air above decorated coral-stone balconies. Dense grey haze drifts fast across sunlit turquoise sea while British armored cruisers fire from the harbor, sparks snapping off carved wooden doors.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "A medium shot inside the heavily damaged Sultan's Palace, thick smoke filling the grand hall as debris falls. Disheveled palace guards look stunned and defeated, raising hands in surrender. A palpable sense of swift, decisive defeat.",
+      "prompt": "A tight, dramatic close-up of a brass marine clock on a warship deck ticking rapidly past thirty-eight minutes, its glass face reflecting lingering smoke plumes and the royal banner sliding down a scorched flagpole in the background, framing a silent, still resolve.",
       "seed": null
     }
   ],
   "family": "tuhaf savaş",
   "seed_id": 1,
-  "music": "An intensely fast and percussive military march, building immediately with urgent snare drums and brass fanfare. The tempo is relentless, conveying a sense of rapid, decisive action and overwhelming force, ending abruptly mid-phrase to facilitate a seamless loop.",
+  "music": "Fast, tense, percussive underscore driven by rapid brass hits, aggressive snare rolls, and heavy wooden percussion. The arrangement opens instantly at full speed, maintaining unrelenting rhythmic pressure with dramatic low-register orchestral swells, ending abruptly mid-beat to allow seamless video looping.",
   "title_card": {
     "title": "Anglo-Zanzibar War",
     "subtitle": "Zanzibar, 1896"
   },
   "hook_shot": 1,
-  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
 }

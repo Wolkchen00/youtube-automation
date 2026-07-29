@@ -1,33 +1,33 @@
 {
   "episode": {
     "number": 1,
-    "title": "Venus: A Day Longer Than Its Year"
+    "title": "HD 189733b: Glass Rains SIDEWAYS"
   },
-  "synopsis": "This episode illustrates Venus's incredibly slow rotation, resulting in a day longer than its orbital year.",
-  "narration": "On Venus, a single day stretches longer than its entire orbital year. This slow rotation, combined with its rapid orbit, creates a unique temporal paradox. Experience the sun crawling across a scorching, toxic sky. Time itself moves differently on this infernal world.",
+  "synopsis": "On exoplanet HD 189733b, screaming supersonic winds blast glowing molten glass horizontally across a deep blue atmosphere.",
+  "narration": "On exoplanet HD 189733b, winds howl at eight thousand kilometers per hour while molten glass rains sideways across cobalt skies. Silicate vapor condenses into lethal razor-sharp storms, painting this cobalt blue hellscape with glowing, horizontal rain.",
   "shots": [
     {
       "n": 1,
       "duration": "6",
-      "prompt": "Venus, a dominant, hazy yellow-orange sphere, slowly rotating against a backdrop of distant, pinprick stars. The atmosphere is thick and opaque, obscuring the surface. Camera slowly tracks the planet's rotation, emphasizing its sluggishness.",
+      "prompt": "A majestic wide view of deep cobalt blue gas giant HD 189733b against dark starfields, violently ripped by glowing turquoise atmospheric bands moving at terrifying speed, camera slowly drifting inward.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "Time-lapse effect on the Venusian horizon. A colossal, distorted sun slowly creeps across the sky, casting long, shifting shadows across a desolate, reddish-brown landscape, hinting at the scorching surface beneath thick clouds. The sun's movement is almost imperceptible.",
+      "prompt": "Extreme close camera push through dense glowing blue clouds, revealing streaks of incandescent liquid glass flying sideways horizontally across the frame at hypersonic velocity, illuminated by distant starlight.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "Pull back to a wide shot of Venus as a full disk, now showing its rapid orbital path around a distant, bright sun. The planet itself rotates at an almost imperceptible pace, contrasting its swift journey through space with its internal temporal scale. Gently loops back to shot 1's composition.",
+      "prompt": "Macro view of glowing silicate droplets rushing endlessly past the camera into the dark horizon of the planet, smoothly looping back to the framing and orbit trajectory of the first shot.",
       "seed": null
     }
   ],
-  "family": "güneş sistemi uçları",
-  "seed_id": 1,
-  "music": "An awe-driven cosmic underscore with a slow, heavy, atmospheric pulse, building with a subtle, sustained chord for the scale moment, emphasizing the immense duration. The music should evoke a sense of deep time and oppressive gravity, ending mid-phrase for seamless looping.",
+  "family": "cehennem gezegenler",
+  "seed_id": 11,
+  "music": "An awe-driven deep space synth pulse with a steady forward rhythm and shimmering harmonic atmospheric pads, swelling dramatically with intense cinematic brass textures as horizontal storm streaks rush past, resolving into a deep continuous rhythmic hum that cuts abruptly mid-beat to create a seamless loop.",
   "hook_shot": 2,
-  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
 }

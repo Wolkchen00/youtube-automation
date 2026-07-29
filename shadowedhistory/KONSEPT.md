@@ -1,5 +1,5 @@
-# SHAD0WED HISTORY, KANAL KONSEPT DOKTRİNİ v1.6
-**Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
+# SHAD0WED HISTORY, KANAL KONSEPT DOKTRİNİ v1.7
+**Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** ONAYLANDI (İhsan, 2026-07-29, "FAZ 3 ONAY")
 **v1.1 (aynı gün, Codex Same Page turu 1):** zaman çıpası BCE/çağ biçimlerini kapsar; caption
 ve fact_captions kaldırıldı (motor gerçeği); kelime bütçesi doğrulayıcıda birebir uygulanır;
 konu havuzu kuralı eklendi; ölçüm tablosu ölçülebilirlik etiketleri aldı; 4 tohum fakt
@@ -16,6 +16,10 @@ kelimeye indi.
 **v1.5 (aynı gün, canlı replenish kanıtı):** çağ çıpası BCE/CE biçimlerini de kapsar (Gemini
 doğal olarak "69 BCE" yazar; canlı koşu BC/AD-tek regex'inde fail-closed düştü, doğrulayıcı
 genişletildi).
+**v1.7 (aynı gün):** İhsan onayı işlendi (statü ONAYLANDI); konu havuzu 12 → 27 (15 yeni
+tohum, hepsi web doğrulamalı: Claude doğrulayıcı S13-S17 + Codex web fact-check S18-S27;
+Yamaguchi, Colosseum naumachiae, Vespasian idrar vergisi, Viyana 1913, Domuz Savaşı 1859,
+Zheng Yi Sao, Londra Bira Seli 1814 vb.).
 **v1.6 (aynı gün, canlı replenish kanıtı 2):** bölüm 2 x 8 sn = ~16 sn oldu (kanıt bandı
 10-16'nın üst ucu) ve anlatım bütçesi 26-38 kelimeye çıktı: Gemini tarih faktı anlatımını
 doğal olarak söylenen aralığın %10-20 üstünde yazıyor ve hedefi kovalamak çözüm değil. Nihai
@@ -174,6 +178,25 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
 11. Napoleon was average height for his era; "tiny Napoleon" was British propaganda. (yanılgı kırıcı)
 12. The Great Fire of London in 1666 destroyed 13,200 houses; traditional accounts name only six victims, though the true toll was likely higher. (efsane vs kayıt)
 
+Onay sonrası genişletme (2026-07-29; her tohum web kaynaklarıyla düşmanca doğrulandı,
+kaynaklar FAZ3 doğrulama kayıtlarında):
+
+13. Tsutomu Yamaguchi survived both the Hiroshima and Nagasaki atomic bombs in 1945, officially recognized by Japan in 2009. (unutulmuş kişi)
+14. Roman writers record that the brand-new Colosseum was flooded for mock naval battles at its opening games in AD 80. (efsane vs kayıt)
+15. Ancient Romans washed clothes in fermented urine, prized for its ammonia; Emperor Vespasian even taxed the trade. (yanılgı kırıcı)
+16. The Hundred Years' War actually lasted 116 years, from 1337 to 1453. (efsane vs kayıt)
+17. The fax machine was patented in 1843, 33 years before the telephone. (zaman çarpması)
+18. Nintendo was founded in 1889, selling playing cards while the Ottoman Empire still ruled. (zaman çarpması)
+19. Since 1889, the Eiffel Tower's summit has traced a circle of about 15 centimeters on hot days, leaning away from the sun as its iron expands. (imkânsız mühendislik)
+20. In early 1913, Hitler, Stalin, Trotsky and Freud were all living in Vienna at the same time. (zaman çarpması)
+21. The Great Wall of China is not visible from the Moon, a myth astronauts themselves have debunked since the Apollo era. (yanılgı kırıcı)
+22. In 1859, the United States and Britain nearly went to war over a shot pig; the pig was the only casualty. (tuhaf savaş)
+23. In the early 1800s, pirate queen Zheng Yi Sao commanded tens of thousands of pirates, then negotiated a pardon in 1810 and retired rich. (unutulmuş kişi)
+24. Most Roman gladiator fights did not end in death; fighters were costly investments and the defeated were often spared. (yanılgı kırıcı)
+25. In 1814, the London Beer Flood sent roughly 570 tons of porter through the St Giles slum, killing eight people. (efsane vs kayıt)
+26. In the first century BC, Cleopatra addressed foreign envoys without interpreters; ancient sources call her the first Ptolemaic ruler to learn Egyptian. (yanılgı kırıcı)
+27. Beginning in 1962, a contagious laughing-and-crying epidemic swept through Tanganyikan schools and villages, closing schools for months. (efsane vs kayıt)
+
 ## 7. UYGULAMA (İhsan onayı sonrası)
 
 **Yeni seri:** `shadowedhistory/flashpoints/`
@@ -208,9 +231,9 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
 **Cron AÇILMAZ:** hattın açılması ayrı İhsan kararı (S8 bütçe + 4 kayıt kuralı:
 KURULUM_TAKIP + projects.yaml + routines.json + ACTIONS_TARGETS).
 
-**Hat açma ön koşulu:** konu havuzu ≥25 doğrulanmış konuya çıkarılır (12 tohum 25 bölüm
-penceresini dolduramaz; onay sonrası ek doğrulanmış tohum turu yapılır, her tohum kaynak
-kontrolünden geçer).
+**Hat açma ön koşulu ✅ SAĞLANDI (2026-07-29):** konu havuzu 27 doğrulanmış konuda (12 ilk
+havuz + 15 onay-sonrası tohum; her yeni tohum web kaynaklarıyla düşmanca doğrulandı, 2'si
+düzeltilerek alındı, Eiffel "15 cm uzar" efsanesi salınım gerçeğine çevrildi).
 
 **İhsan kararları:** (1) bu doktrinin onayı, (2) hattı açma + kredi bütçesi payı,
 (3) footnotes/drowned-history kalıcı durumu (öneri: paused kalsın, 25 bölüm sonrası bakılır).

@@ -1,31 +1,31 @@
 {
   "episode": {
     "number": 2,
-    "title": "How Oxford Outlived Empires In 1096!"
+    "title": "The Real Reason Roman Concrete Survived Centuries"
   },
-  "synopsis": "Oxford University began teaching centuries before the Aztec Empire was founded, making it older than many ancient civilizations.",
-  "narration": "It's a true mind-bender: Oxford University, teaching since around 1096, is actually older than the entire Aztec Empire. While monumental pyramids rose in Mesoamerica, scholars were already debating within Oxford's ancient halls.",
+  "synopsis": "Ancient Roman concrete uses reactive lime clasts that self-heal structural cracks whenever water enters.",
+  "narration": "Ancient Roman concrete heals its own cracks through hot-mixed lime clasts embedded inside the mortar. When seawater or rain trickles into micro-fractures, these white mineral pockets dissolve and recrystallize, binding the solid sea walls stronger over centuries.",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "A bustling medieval lecture hall at Oxford, circa 1100s. Sunlight streams through arched windows onto robed scholars intently listening to an aged lecturer pointing to a large illuminated manuscript. The air is thick with intellectual energy.",
+      "prompt": "In 9:16 vertical orientation, harsh ocean waves crash against ancient Roman harbor piers in 1st century BC, water spraying over rugged grey volcanic ash mortar. Fine white lime clasts gleam within dark concrete fissures as saltwater surges over weathered stone blocks under stormy morning light.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "A sweeping, majestic panorama of Tenochtitlan at its peak, circa 1400s. Intricate stone pyramids and bustling causeways are visible, vibrant life and impressive architecture under a clear, powerful sun. The shot emphasizes its peak grandeur.",
+      "prompt": "Extreme close-up macro shot of a hairline crack inside wet Roman concrete, where tiny white crystalline lime deposits visibly crystallize and seal the micro-gap in real-time, illuminated by side sunlight as water droplets bead on the rough mineral surface.",
       "seed": null
     }
   ],
-  "family": "zaman çarpması",
-  "seed_id": 2,
-  "music": "A driving, intellectual, percussive score with medieval instrument influences, then shifting to a more grand, ancient civilization feel. It evokes the passage of vast time, with an underlying current of wonder and discovery, ending on a thought-provoking rhythm.",
+  "family": "imkânsız mühendislik",
+  "seed_id": 5,
+  "music": "Fast, tense, percussive underscore with intense pounding metallic drums, rhythmic stone scraping sounds, and low driving cello ostinatos. Pushes forward instantly without intro, building tight rhythmic tension alongside deep brass accents, cutting off sharply mid-phrase for an effortless infinite loop.",
   "title_card": {
-    "title": "Oxford University vs. Aztecs",
-    "subtitle": "Europe & Mesoamerica, 1096 AD"
+    "title": "Self-Healing Roman Concrete",
+    "subtitle": "Rome, 1st Century BC"
   },
   "hook_shot": 2,
-  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
 }

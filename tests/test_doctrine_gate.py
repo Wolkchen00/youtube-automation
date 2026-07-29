@@ -434,8 +434,8 @@ class InstalledSeriesTests(unittest.TestCase):
 
     def test_new_series_load_with_effective_values(self):
         detailed = {
-            "flashpoints": ("shad0wedhistory", 2, "8", (26, 38), 6, 12),
-            "event-horizon": ("galacticexperimet", 3, "6", (30, 44), 6, 12),
+            "flashpoints": ("shad0wedhistory", 2, "8", (26, 38), 6, 27),
+            "event-horizon": ("galacticexperimet", 3, "6", (30, 44), 6, 27),
             "from-scratch": ("Youtube", 4, "8", None, 5, 0),
         }
         for slug, values in detailed.items():

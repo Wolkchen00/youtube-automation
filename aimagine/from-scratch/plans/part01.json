@@ -1,38 +1,38 @@
 {
   "episode": {
     "number": 1,
-    "title": "Building A MINECRAFT Village From SCRATCH! 🛠️✨"
+    "title": "Building A GIANT TREEHOUSE From Scratch! 🛠️✨"
   },
-  "synopsis": "A team of builders constructs a charming, blocky Minecraft-inspired village, complete with a central well and small houses, in a lush green valley.",
+  "synopsis": "A sprawling, multi-level treehouse with a pirate ship theme is constructed high in the canopy.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Wide shot, mid-afternoon sun, a partially built blocky house with an iconic red roof and exposed timber frames. Several construction workers, distinct but faces obscured, are meticulously placing large, pixelated wooden blocks onto a wall. The ground is a vibrant, blocky green landscape.",
+      "prompt": "Workers are welding a large, curved wooden frame for what will be a ship's bow section, high up in a robust tree canopy. Scaffolding is visible, and tropical leaves surround the scene, bright daylight, saturated but believable color.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Dynamic overhead drone shot, showcasing the rapid expansion of the village. Multiple small structures are seen growing simultaneously, foundations being laid, walls rising. Time-lapse effect of blocks 'snapping' into place, creating a satisfying, energetic build. Smoke rises from a small, distant campfire.",
+      "prompt": "Time-lapse of multiple crews assembling more sections of the treehouse: platforms, rope bridges, and a slide. The structure rapidly expands around the central tree trunk, incorporating a vibrant color palette of painted wood and metal, natural camera motion, coherent site geography.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Close-up on a skilled worker's hands, wearing sturdy gloves, carefully aligning and pushing a large, textured \"stone\" block into a precisely measured gap in the base of a well. The block clicks perfectly into place, creating a satisfying sound and visual. Dust motes dance in the sunlight.",
+      "prompt": "A close-up of skilled hands meticulously carving intricate details into a wooden ship's wheel, then attaching it to a railing overlooking a newly completed circular deck, surrounded by glowing fairy lights, tactile real materials, rich visual language.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Sweeping cinematic wide shot reveals the completed Minecraft village, nestled harmoniously in the valley. Several distinct blocky houses, a central stone well, and a small farm patch are visible. Villagers (silhouetted figures) are seen moving about, adding life to the scene, as a gentle stream flows nearby. The sun sets, casting long, warm shadows.",
+      "prompt": "A wide shot reveals the magnificent, fully realized pirate ship treehouse nestled amongst lush, green jungle trees. It boasts multiple levels, a functioning slide, a crow's nest, and soft internal lighting, with kids joyfully exploring its various features, peak spectacle, gentle resolve.",
       "seed": null
     }
   ],
-  "family": "oyun/film üsleri",
-  "music": "A driving, upbeat electronic percussive track, featuring chiptune-inspired synth melodies and a steady, building rhythm that evokes the repetitive nature of block placement and construction. The energy intensifies with each shot, softening briefly before a triumphant, expansive synth chord and a full, looping groove on the final reveal.",
+  "family": "absürt eğlence mimarisi",
+  "music": "A lively, upbeat instrumental track with a strong percussive beat, featuring mallets and wood blocks. The rhythm builds steadily with added layers of light synth and pizzicato strings, mirroring the construction's progress. It softens slightly with a single, held synth note just before the final reveal, then bursts into a playful, adventurous melody that ends mid-groove, inviting a seamless loop.",
   "hook_shot": 4,
-  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
 }

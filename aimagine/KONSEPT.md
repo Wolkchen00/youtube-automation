@@ -1,5 +1,5 @@
 # AIMAGINE, KANAL KONSEPT DOKTRİNİ v1.4
-**Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
+**Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** ONAYLANDI (İhsan, 2026-07-29, "FAZ 3 ONAY"; İhsan notu: "aimagine kanalının eskiye dönmesi çok mantıklı")
 **v1.1 (aynı gün, Codex Same Page turu 1):** hook_teaser loop kuralı netleşti; humans
 "allowed" oldu (featured tekrarlayan başrol demek, motor gerçeği); kelime yerine müzik odaklı
 music_style eklendi; ölçüm tablosu ölçülebilirlik etiketleri aldı.
@@ -11,6 +11,7 @@ geçersizleştirir); sürüm hizalaması (bu kanalda topic_pool YOK, kurgu serbe
 **v1.4 (aynı gün, Level 10):** çekim süresi 7 sn → 8 sn (Kie gemini-omni-video resmi şeması
 duration'ı 4/6/8/10 enum'una kilitliyor, 7 YOK; bölüm ~32 sn oldu, 24-32 bandının üst ucu;
 kanal verisi bandın uzun ucunu ödüllendiriyor).
+**v1.5 (aynı gün):** İhsan onayı işlendi; statü ONAYLANDI.
 **Kanal:** `UCCgbHTzYKYawUT6zEo0nlDg` · @aimagine_._357 (S3 kararı: ana kanal budur;
 @aimagineasmr ARŞİV, dokunulmaz) · upload_profile: `Youtube` · anlatım: YOK (müzik + görsel)
 

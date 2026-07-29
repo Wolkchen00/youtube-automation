@@ -1,33 +1,33 @@
 {
   "episode": {
     "number": 4,
-    "title": "What If the Moon VANISHED? Earth's Tilt Destabilizes"
+    "title": "The Universe's Saddest Goodbye: Solar ECLIPSES"
   },
-  "synopsis": "This episode imagines the drastic consequences for Earth's tides and axial stability if the Moon were to suddenly disappear.",
-  "narration": "What if our Moon suddenly vanished? Earth’s lunar tides would disappear, leaving only weaker solar tides. Over millennia, our planet's axial tilt would slowly destabilize, leading to extreme, unpredictable climate shifts. A world without its lunar companion is profoundly different.",
+  "synopsis": "As the Moon slowly moves farther from Earth each year, total solar eclipses will eventually cease to exist.",
+  "narration": "The Moon drifts nearly four centimeters away from Earth every single year. As it steadily recedes into deep space, its apparent disk shrinks, ensuring that total solar eclipses will eventually disappear forever, leaving only partial shadows across our planet.",
   "shots": [
     {
       "n": 1,
       "duration": "6",
-      "prompt": "Earth and its Moon, gracefully orbiting each other against a backdrop of distant stars. The pair are bathed in soft starlight, emphasizing their stable, ancient dance. Camera slowly orbits the Earth-Moon system, highlighting their harmonious relationship.",
+      "prompt": "A breathtaking total solar eclipse seen from space, the dark silhouetted Moon perfectly covering the brilliant white solar corona with shimmering diamond ring glare.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "The Moon rapidly, almost instantly, dissolves into nothingness, leaving Earth alone in its orbit. A subtle, momentary ripple effect spreads through the surrounding space. On Earth, visible ocean tides immediately flatten, then surge back with a weaker, solar-driven ebb and flow.",
+      "prompt": "Camera tracks backward in time-lapse motion as the Moon slowly pulls away from Earth, shrinking in visible size relative to the giant glaring disk of the distant Sun.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "Earth, now moonless, slowly rotates. Its axial tilt is subtly but visibly precessing more dramatically than before, a slow, continuous wobble hinting at future instability over vast timescales. The camera maintains a steady distance, observing the planet's altered state, looping back to shot 1's composition with the Moon present.",
+      "prompt": "An annular eclipse far in the future where a ring of harsh sunlight completely surrounds the smaller Moon, camera seamlessly panning back toward the dark orbital trajectory of shot one.",
       "seed": null
     }
   ],
-  "family": "bilim temelli what-if",
-  "seed_id": 12,
-  "music": "An eerie, slightly unsettling, awe-driven cosmic underscore with a slow, evolving drone and a subtle, anxious pulse. A gentle, drawn-out swell accompanies the visual of the Moon vanishing, creating a sense of profound cosmic change and uncertainty. Ends mid-phrase for seamless looping.",
+  "family": "kozmik kader",
+  "seed_id": 19,
+  "music": "Poignant cosmic strings layered over a soft low synth heartbeat pulse, swelling majestically with bright symphonic textures as solar light breaks through the glowing lunar corona, lingering in solemn emotional resonance before abruptly stopping mid-bar to loop perfectly back to the beginning.",
   "hook_shot": 2,
-  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
 }

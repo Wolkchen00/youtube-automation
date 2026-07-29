@@ -1,38 +1,38 @@
 {
   "episode": {
     "number": 4,
-    "title": "Building A Hidden Underground Library From Scratch! 🛠️✨"
+    "title": "Building A JURASSIC PARK Entrance From SCRATCH! 🛠️✨"
   },
-  "synopsis": "A team of engineers and builders constructs a clandestine, cozy underground library, seamlessly integrated beneath a seemingly ordinary hillside.",
+  "synopsis": "The iconic, colossal Jurassic Park main entrance gate and a raptor enclosure are constructed in a dense jungle.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Interior shot within a partially excavated underground chamber, revealing a robust concrete archway taking shape, supported by temporary wooden shoring. Workers in hard hats are expertly pouring concrete into formwork, illuminated by powerful work lights, emphasizing the hidden nature of the construction.",
+      "prompt": "Heavy machinery is lifting massive steel beams into place for the towering frame of a large, imposing entrance gate, surrounded by dense, humid jungle foliage. Construction workers are visible on scaffolding, bright daylight, saturated but believable color, tactile real materials.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Overhead time-lapse shot from inside the expanding underground space. Walls are swiftly lined with custom-built wooden bookshelves, and ventilation systems are installed in the ceiling. The floor is being laid with warm, polished wood planks, transforming the raw space into a habitable interior.",
+      "prompt": "A time-lapse shows the rapid construction of the gate's iconic stone-like cladding and the adjacent raptor enclosure. Crews are welding, sculpting, and painting, creating the weathered, prehistoric aesthetic, natural camera motion, satisfying build progression, coherent site geography.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Close-up on a skilled craftsman's hands carefully installing a hidden, spring-loaded bookshelf door into a seamless wall of books. The mechanism is intricate yet smooth, creating a satisfying 'click' as it locks into place, revealing no visible seams. Dust motes float in the controlled light.",
+      "prompt": "Close-up of intricate, reptilian-scale patterns being carefully etched into the faux-stone facade of the gate, followed by a shot of a heavy-duty, electrified security fence being installed with a powerful, humming sound, rich visual language, motion of machinery.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Wide, inviting shot of the fully realized hidden underground library. Floor-to-ceiling bookshelves are packed with books, comfortable armchairs are arranged by a faux fireplace (digital screen displaying fire), and soft, warm lighting illuminates the entire cozy space. A lone figure (from behind, reading) enjoys the tranquility, with a subtle, well-camouflaged entrance visible in the background.",
+      "prompt": "The colossal Jurassic Park main entrance gate stands fully erected, illuminated by dramatic spotlights under a twilight sky. The gate is slightly ajar, revealing a dense, mysterious jungle path beyond, with the formidable raptor pen visible to one side, peak spectacle, gentle resolve.",
       "seed": null
     }
   ],
-  "family": "saklı/mühendislik harikası",
-  "music": "A mysterious and subtly complex percussive track, blending muted metallic sounds with deep, resonant thumps and gentle, echoing chimes, mirroring the excavation and precise fitting of underground structures. The rhythm is steady and focused, building to a quiet, awe-inspiring crescendo before settling into a warm, looping ambience on the reveal.",
+  "family": "oyun/film üsleri",
+  "music": "A powerful, orchestral-infused instrumental track with a strong, tribal-percussive beat, featuring deep drums and metallic clangs. The rhythm intensifies with building brass swells and a driving string motif, reflecting the scale of the construction. A brief, suspenseful silence with a low synth hum precedes the reveal, opening into an epic, recognizable theme that fades mid-climax, ready to loop.",
   "hook_shot": 4,
-  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
 }

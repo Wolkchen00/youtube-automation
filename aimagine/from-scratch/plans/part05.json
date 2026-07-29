@@ -1,38 +1,38 @@
 {
   "episode": {
     "number": 5,
-    "title": "Building An AVATAR Treehouse From SCRATCH! 🛠️✨"
+    "title": "Building A Hidden UNDERGROUND Library From SCRATCH! 🛠️✨"
   },
-  "synopsis": "Visionary builders construct an ethereal, bioluminescent treehouse deeply integrated within the roots and branches of a massive, otherworldly tree.",
+  "synopsis": "A luxurious, secret underground library with a skylight view is excavated and furnished beneath a tranquil garden.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "8",
-      "prompt": "Medium shot, late dusk, of a partially constructed, organic-shaped treehouse structure nestled within the winding, glowing roots of an immense, fantastical tree. Workers, wearing glowing safety vests, are attaching translucent, flexible panels that begin to faintly emit soft blue light.",
+      "prompt": "Engineers are reinforcing excavated earth with concrete and steel beams, forming a cavernous underground space beneath a neatly manicured lawn. A large skylight opening is visible above, bright daylight, saturated but believable color, tactile real materials, coherent site geography.",
       "seed": null
     },
     {
       "n": 2,
       "duration": "8",
-      "prompt": "Sweeping drone shot at night, showcasing the rapid construction of multiple bioluminescent platforms and walkways spiraling up the gigantic tree trunk. Time-lapse effect shows the glowing organic material forming walls and railings, connecting different levels, creating a mesmerizing, otherworldly spectacle of light and form.",
+      "prompt": "Time-lapse of the underground library's interior coming together: walls being panelled with rich wood, custom bookshelves installed, and a spiral staircase descending from the skylight entrance. Electrical wiring is integrated, natural camera motion, satisfying build progression.",
       "seed": null
     },
     {
       "n": 3,
       "duration": "8",
-      "prompt": "Close-up on a skilled hand carefully weaving glowing, fibrous plant material into a living wall panel. The fibers softly pulse with internal light, creating intricate patterns as they are integrated into the structure, demonstrating the unique, living architecture.",
+      "prompt": "Close-up of a craftsman meticulously installing a sliding panel in a bookshelf, revealing a hidden compartment, followed by a shot of hands gently arranging rare, leather-bound books on a freshly polished shelf, rich visual language, motion of hands.",
       "seed": null
     },
     {
       "n": 4,
       "duration": "8",
-      "prompt": "Breathtaking wide shot at night, revealing the fully completed AVATAR-inspired treehouse. It glows with an intricate network of soft blues, purples, and greens, seamlessly integrated into the enormous tree. Figures (distant, indistinct) can be seen moving within, and glowing flora surrounds the base, creating a truly magical, living dwelling that perfectly loops back to the soft glow of shot 1.",
+      "prompt": "The opulent, hidden underground library is fully revealed, bathed in natural light streaming through the large skylight. Luxurious armchairs, glowing lamps, and floor-to-ceiling bookshelves filled with books create a cozy, inviting atmosphere, peak spectacle, gentle resolve.",
       "seed": null
     }
   ],
-  "family": "fantezi konutlar",
-  "music": "An organic and ethereal percussive soundscape, featuring subtle, resonant hits and shimmering, otherworldly textures, building a sense of natural wonder and growth. The rhythm is fluid and captivating, reaching a peak of magical intensity before a brief, gentle breath, then blooming into an expansive, looping melody imbued with bioluminescent warmth for the final reveal.",
+  "family": "saklı/mühendislik harikası",
+  "music": "A sophisticated, slightly mysterious instrumental track with a precise, rhythmic percussion, utilizing deep bass notes and soft clicks. The score builds with evolving synth textures and delicate piano arpeggios, reflecting the detailed engineering. A soft, airy drone creates a moment of anticipation before the reveal, then opens into an elegant, flowing melody that concludes mid-measure, ready for another cycle.",
   "hook_shot": 4,
-  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
 }

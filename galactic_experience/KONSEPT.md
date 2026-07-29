@@ -1,5 +1,5 @@
-# GALACTIC EXPERIMENTS, KANAL KONSEPT DOKTRİNİ v1.4
-**Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
+# GALACTIC EXPERIMENTS, KANAL KONSEPT DOKTRİNİ v1.5
+**Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** ONAYLANDI (İhsan, 2026-07-29, "FAZ 3 ONAY")
 **v1.1 (aynı gün, Codex Same Page turu 1):** hook_teaser kapatıldı (loop bütünlüğü); planetfall
 emekliliği paused + replenish-kapalı olarak düzeltildi (completed diriltilir, motor gerçeği);
 konu havuzu kuralı eklendi; ölçüm tablosu ölçülebilirlik etiketleri aldı; 6 tohum fakt
@@ -14,6 +14,9 @@ topic_pool + pin.
 **v1.4 (aynı gün, Level 10 canlı kanıt):** anlatım bütçesi kuralı netleşti: hedef aralık
 prompt'ta aynen; doğrulayıcı miksör payıyla kabul eder (min×0.85 .. max×1.15; TTS miksörü
 1.15x hızlandırmayı karşılar). Plan damgası gereği eski planlar yeniden üretildi.
+**v1.5 (aynı gün):** İhsan onayı işlendi (statü ONAYLANDI); konu havuzu 12 → 27 (15 yeni
+tohum, web doğrulamalı; Andromeda çarpışması 2025 bulgusuyla yazı-tura olarak güncellendi,
+WASP-76b demir yağmuru "gözlemle uyumlu çıkarım" diline çekildi).
 **Kanal:** `UCVCRWrQYrIHW6csOsw9bDNw` · @galacticexperiment-x6l · upload_profile: `galacticexperimet`
 (profil adındaki yazım Upload-Post kaydının kendisidir, DÜZELTME) · narration register:
 `galactic_experiment` · repo klasörü: `galactic_experience/`
@@ -176,6 +179,25 @@ motor iki konumu da tanıdığı için kod değişikliği gerekmez).
 11. HD 189733 b: a deep-blue world where winds hit 8,700 km/h and it likely rains molten glass sideways. (cehennem gezegenler)
 12. What if the Moon vanished tonight? Lunar tides disappear, weaker solar tides remain, and Earth's tilt slowly destabilizes. (bilim temelli what-if)
 
+Onay sonrası genişletme (2026-07-29; her tohum web kaynaklarıyla düşmanca doğrulandı, ağırlıkla
+NASA/ESA; kaynaklar FAZ3 doğrulama kayıtlarında):
+
+13. The Sun holds about 99.8 percent of all the mass in the Solar System. (ölçek şoku)
+14. A photon can take tens of thousands of years to escape the Sun's core, then just 8 minutes to reach Earth. (ölçek şoku)
+15. Jupiter and the Sun both orbit a shared balance point that lies just outside the Sun's surface. (güneş sistemi uçları)
+16. On WASP-76b, iron vaporizes on the scorching day side and likely condenses into molten-iron rain on the cooler night side. (cehennem gezegenler)
+17. The International Space Station moves so fast its crew sees about 16 sunrises every day. (ölçek şoku)
+18. Uranus spins on its side, rolling around the Sun like a tipped-over top. (güneş sistemi uçları)
+19. The Moon drifts about 3.8 centimeters farther from Earth every year; total solar eclipses will one day end forever. (kozmik kader)
+20. A single year on Neptune lasts 165 Earth years; it completed its first full orbit since discovery only in 2011. (güneş sistemi uçları)
+21. New 2025 simulations give the Milky Way and Andromeda only about a coin-flip chance of merging within the next 10 billion years. (kozmik kader)
+22. Sagittarius A*, the black hole at the center of our galaxy, weighs about 4 million Suns. (derin uzay canavarları)
+23. On Saturn's moon Titan, methane rains from orange skies and fills rivers and seas, the only other world with standing surface liquid. (güneş sistemi uçları)
+24. Flying a passenger jet to the nearest star would take about 5 million years. (ölçek şoku)
+25. What if Earth suddenly stopped spinning? Everything not bolted down would keep moving at up to 1,670 km/h. (bilim temelli what-if)
+26. Venus spins backwards, so there the Sun rises in the west and sets in the east. (güneş sistemi uçları)
+27. Some of Earth's gold was forged in neutron-star collisions before the Solar System existed; how much is still an open mystery. (derin uzay canavarları)
+
 ## 8. UYGULAMA (İhsan onayı sonrası)
 
 **Yeni seri:** `galactic_experience/event-horizon/`
@@ -211,8 +233,10 @@ motor iki konumu da tanıdığı için kod değişikliği gerekmez).
 
 **Cron AÇILMAZ:** hat açma ayrı İhsan kararı (S8 bütçe + 4 kayıt kuralı).
 
-**Hat açma ön koşulu:** konu havuzu ≥25 doğrulanmış konuya çıkarılır (12 tohum 25 bölüm
-penceresini dolduramaz; onay sonrası ek tohum turu + onaylı #15 kartları havuza eklenir).
+**Hat açma ön koşulu ✅ SAĞLANDI (2026-07-29):** konu havuzu 27 doğrulanmış konuda (12 ilk
+havuz + 15 onay-sonrası tohum; NASA/ESA ağırlıklı kaynak doğrulaması; Andromeda tohumu 2025
+Nature Astronomy bulgusuyla "çarpışma kesin değil, yazı-tura" gerçeğine güncellendi). Onaylı
+#15 kartları prosedürle eklenmeye devam eder.
 
 **İhsan kararları:** (1) bu doktrinin onayı, (2) planetfall emekliliği (§6), (3) hattı açma +
 kredi bütçesi payı.
