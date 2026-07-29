@@ -180,5 +180,14 @@
       "at": "2026-07-29T18:41:12.688254+00:00",
       "parts": "1-5"
     }
+  },
+  "parts": {
+    "1": {
+      "status": "awaiting_approval",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep01/ep01_narrated_music.mp4",
+      "subtitle": "HD 189733b: Glass Rains SIDEWAYS",
+      "release_tag": "pending-event-horizon-part1",
+      "approval_msg_id": 363
+    }
   }
 }

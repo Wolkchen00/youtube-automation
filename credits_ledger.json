@@ -2,17 +2,10 @@
   "entries": [
     {
       "month": "2026-07",
-      "series": "unnatural-lab",
-      "part": 3,
-      "reserved": 900,
-      "actual": 504,
-      "ts": "2026-07-27T22:09:15.293885+00:00"
-    },
-    {
-      "month": "2026-07",
-      "series": "from-scratch",
+      "series": "event-horizon",
       "part": 1,
       "reserved": 900,
+<<<<<<< Updated upstream
       "actual": 630.0,
       "ts": "2026-07-29T20:55:00+00:00"
     },
@@ -23,6 +16,10 @@
       "reserved": 900,
       "actual": 315.0,
       "ts": "2026-07-29T21:05:37+00:00"
+=======
+      "actual": 252,
+      "ts": "2026-07-29T21:06:51.468124+00:00"
+>>>>>>> Stashed changes
     }
   ]
 }
