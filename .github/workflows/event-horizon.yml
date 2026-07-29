@@ -1,28 +1,16 @@
-name: Unnatural Lab Daily
+name: Event Horizon Daily
 
-# 'Unnatural Lab' GARANTİLİ günlük şeridi ,  sentinalihsandaily kanalının YENİ ana serisi.
-#
-# İhsan kararı 2026-07-20: ABSÜRT-OBJE / DENEY formatına DÖNÜŞ. Gerekçe (canlı YouTube API
-# ölçümü, 148 video): absürt-obje n=105 medyan 788 izlenme / medyan 31 sn; tarihsel
-# hayatta-kalma (could-you-survive) n=12 medyan 15.5 izlenme / medyan 49 sn, 12 videoda
-# TOPLAM 1 yorum, iki günde 0 abone. Belirleyici sinyal SÜRE: 14-41 sn bandı 1.000-3.355
-# izlenme, 47-53 sn bandı 4-71 izlenme → yeni seri 4 çekim × 6 sn = 24 saniyeye SABİTLENDİ.
-#
-# Format: SESSİZ (anlatım yok, tek ses müzik), ön kamera POV, 4 sahne SETUP→ACTION→PROGRESS→REVEAL.
-# Eski (2026-06-14 öncesi) pipeline'ın reçetesi yeni series/ motoruna taşındı.
-#
-# Ana kuyruktan (series.yml / run_all günde-1 tavanı) BAĞIMSIZ çalışır. Çifte üretim olmasın
-# diye unnatural-lab series.json'da priority=999. Eski could-you-survive.yml şeridi (aynı 18:30
-# slotu) paused edildiği için devre dışıdır → yarış yok. Critic-QC bible'da AÇIK.
-# Saat düzeni: ana koşu 14:30 UTC → planetfall 16:30 UTC → bu koşu 18:30 UTC → drowned 20:30 UTC.
-#
-# ⚠️ İLK KOŞULAR ONAYLI: series.json publish_mode="approval" → video üretilir, GitHub Release'e
-# yüklenir, Telegram'a önizleme kareleriyle "yayınlansın mı?" sorusu gider; ONAY GELMEDEN
-# hiçbir platforma yayınlanmaz. Format kanıtlandıktan sonra publish_mode="auto" yapılır.
+# 'EVENT HORIZON' gunluk seridi (galactic kanali, @galacticexperiment-x6l). Dayanak:
+# galactic_experience/KONSEPT.md (v1.5, ONAYLANDI). Ihsan karari 2026-07-29: "TUM KANALLARI
+# ACALIM GUNLUK 1 VIDEO". Format: 3 x 6 sn gercek uzay-fakti, seed_id'li 27'lik dogrulanmis
+# konu havuzu, teaser kapali. publish_mode="approval": onay gelmeden yayin yok. Doktrin
+# kapisi: kosu basinda KONSEPT SHA-256 loglanir, pin/damga eslesmezse fail-closed.
+# Saat duzeni: from-scratch 14:30 -> BU KOSU 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
+# kie-uretim concurrency grubu 4 hatti fiilen serilestirir (FAZ 1 kurali).
 
 on:
   schedule:
-    - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
+    - cron: '30 16 * * *'   # 16:30 UTC, galactic kanalinin tarihsel yayin penceresi
   workflow_dispatch:
 
 concurrency:
@@ -74,15 +62,15 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
-        run: python -X utf8 -m series.approver --series unnatural-lab 2>&1 | tee logs/unnatural_lab_approve.log
+        run: python -X utf8 -m series.approver --series event-horizon 2>&1 | tee logs/event_horizon_approve.log
 
-      - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni obje/deney bölümleri yazar ,  kredi harcamaz)
-        run: python -X utf8 -m series.replenish --series unnatural-lab 2>&1 | tee logs/unnatural_lab_replenish.log
+      - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolum planlari yazar, kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series event-horizon 2>&1 | tee logs/event_horizon_replenish.log
 
-      - name: Produce + publish (Unnatural Lab sıradaki bölüm)
+      - name: Produce + publish (Event Horizon siradaki bolum)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: python -X utf8 -m series.series_runner --series unnatural-lab 2>&1 | tee logs/unnatural_lab_run.log
+        run: python -X utf8 -m series.series_runner --series event-horizon 2>&1 | tee logs/event_horizon_run.log
 
       - name: Persist series state
         if: always()
@@ -95,13 +83,13 @@ jobs:
             git pull --rebase --autostash origin main || true
             git add series_data/ sentinal_ihsan/ aimagine/ galactic_experience/ shadowedhistory/ credits_ledger.json || true
             if git diff --cached --quiet && [ "$(git rev-list --count origin/main..HEAD)" -eq 0 ]; then
-              echo "Değişiklik yok"; success=true; break
+              echo "Degisiklik yok"; success=true; break
             fi
             if ! git diff --cached --quiet; then
-              git commit -m "chore: unnatural-lab durumunu ilerlet [skip ci]" || true
+              git commit -m "chore: event-horizon durumunu ilerlet [skip ci]" || true
             fi
             if git push origin main; then success=true; break; fi
-            echo "push denemesi $i başarısız, 10s bekle..."; sleep 10
+            echo "push denemesi $i basarisiz, 10s bekle..."; sleep 10
           done
           [ "$success" = true ] || exit 1
 
@@ -109,6 +97,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: unnatural-lab-logs-${{ github.run_number }}
+          name: event-horizon-logs-${{ github.run_number }}
           path: logs/
           retention-days: 7
