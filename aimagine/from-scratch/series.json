@@ -45,7 +45,8 @@
       "status": "awaiting_approval",
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep01/ep01_music_hooked.mp4",
       "subtitle": "Building A GIANT TREEHOUSE From Scratch! 🛠️✨",
-      "release_tag": "pending-from-scratch-part1"
+      "release_tag": "pending-from-scratch-part1",
+      "approval_msg_id": 367
     }
   }
 }
