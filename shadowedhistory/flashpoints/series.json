@@ -182,5 +182,13 @@
       "at": "2026-07-29T18:44:00.777660+00:00",
       "parts": "1-5"
     }
+  },
+  "parts": {
+    "1": {
+      "status": "awaiting_approval",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep01/ep01_narrated_music_titled.mp4",
+      "subtitle": "How Britain Won History's Shortest War In 1896!",
+      "release_tag": "pending-flashpoints-part1"
+    }
   }
 }
