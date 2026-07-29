@@ -507,5 +507,24 @@ class InstalledSeriesTests(unittest.TestCase):
         self.assertIn("never let the delivery drag", galactic["instruction"])
 
 
+class ApprovalCallbackTests(unittest.TestCase):
+    """Slug'li onay callback eslesmesi: coklu-seri carpisma guvenligi (2026-07-29)."""
+
+    def test_new_format_matches_only_own_slug(self):
+        from series.approver import match_decision
+        self.assertEqual(match_decision("vd:flashpoints:approve:1", "flashpoints", 1, None, None), "approve")
+        self.assertEqual(match_decision("vd:flashpoints:reject:1", "flashpoints", 1, None, None), "reject")
+        self.assertIsNone(match_decision("vd:flashpoints:approve:1", "event-horizon", 1, None, None))
+        self.assertIsNone(match_decision("vd:flashpoints:approve:2", "flashpoints", 1, None, None))
+
+    def test_legacy_format_requires_message_id_match(self):
+        from series.approver import match_decision
+        self.assertEqual(match_decision("vd:approve:3", "unnatural-lab", 3, 346, 346), "approve")
+        self.assertEqual(match_decision("vd:reject:3", "unnatural-lab", 3, 346, 346), "reject")
+        self.assertIsNone(match_decision("vd:approve:3", "unnatural-lab", 3, 346, 999))
+        self.assertIsNone(match_decision("vd:approve:1", "flashpoints", 1, None, 555))
+        self.assertIsNone(match_decision("vd:approve:1", "event-horizon", 1, None, None))
+
+
 if __name__ == "__main__":
     unittest.main()

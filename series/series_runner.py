@@ -1,5 +1,5 @@
 """
-Seri Koşucusu — günlük otomasyon.
+Seri Koşucusu ,  günlük otomasyon.
 
 Her çalıştırmada bir serinin SIRADAKİ part'ını üretir, 3 platforma (upload-post)
 yayınlar ve durumu ilerletir. GitHub Actions cron ile günde bir tetiklenir.
@@ -95,11 +95,11 @@ def _sample_frames(video_path, count: int = 3) -> list[str]:
 
 
 def _persist_release(slug: str, n: int, video_path) -> str | None:
-    """Üretilen videoyu GitHub Release asset'i olarak sakla — üretim ve onay AYRI bulut
+    """Üretilen videoyu GitHub Release asset'i olarak sakla ,  üretim ve onay AYRI bulut
     koşularında olduğu için video kalıcı bir yerde durmalı. Release tag'ini döndürür."""
     gh = shutil.which("gh")
     if not gh:
-        logger.warning("⚠️ gh CLI yok — Release persistence atlandı")
+        logger.warning("⚠️ gh CLI yok ,  Release persistence atlandı")
         return None
     tag = f"pending-{slug}-part{n}"
     subprocess.run([gh, "release", "delete", tag, "-R", REPO, "-y", "--cleanup-tag"],
@@ -206,13 +206,13 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
                   caption: str = "") -> list[str]:
     """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür.
 
-    caption (opt-in, plan['caption'] — the__footnote formatı): bölümün YAZILI HİKÂYESİ.
+    caption (opt-in, plan['caption'] ,  the__footnote formatı): bölümün YAZILI HİKÂYESİ.
     Verilirse YouTube açıklaması bu metin olur ve IG/TikTok'ta da (Upload-Post
-    instagram_title/tiktok_title alanları üzerinden) uzun caption olarak basılır —
+    instagram_title/tiktok_title alanları üzerinden) uzun caption olarak basılır , 
     video sessiz-sinematik kalır, hikâyeyi açıklama anlatır. Boşsa eski davranış.
 
     4K master (bible.upscale) varsa yalnız YouTube'a gider; IG/TikTok 1080p
-    delivery kopyasını alır — iki platform da videoyu zaten 1080p'ye yeniden
+    delivery kopyasını alır ,  iki platform da videoyu zaten 1080p'ye yeniden
     kodladığı için 4K oraya sadece upload süresi/riski demek."""
     title = meta.title_for(n, subtitle)
     desc = (caption or meta.description_for(n, subtitle))[:4900]
@@ -243,7 +243,7 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
     # Telafi turu: upload-post'un geçici arızası (SSL/5xx) bir platformu düşürdüyse,
     # API'ye toparlanma payı bırakıp başarısızları BİR kez daha dene. (2026-07-03
     # dersi: night-archive P1'de YouTube tam arıza penceresine denk geldi; IG/TikTok
-    # 2 dk sonra sorunsuz geçmişti — tek tur telafi YouTube'u kurtarırdı.)
+    # 2 dk sonra sorunsuz geçmişti ,  tek tur telafi YouTube'u kurtarırdı.)
     failed = [p for p in meta.platforms if p not in ok]
     if failed:
         logger.info(f"🔁 Telafi turu: {', '.join(failed)} için 90s sonra yeniden denenecek…")
@@ -260,7 +260,7 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
 
 def _channel_published_today(meta: SeriesMeta) -> str | None:
     """Bu serinin KANALINA (upload_profile) bugün (UTC) yayın yapıldıysa 'slug Part N'
-    döndür; yoksa None. Aynı profili paylaşan TÜM seriler taranır — böylece bir kanala
+    döndür; yoksa None. Aynı profili paylaşan TÜM seriler taranır ,  böylece bir kanala
     farklı serilerden/şeritlerden aynı gün 2. video çıkamaz. Profil boşsa yalnız
     serinin kendi part geçmişine bakılır."""
     from datetime import datetime, timezone
@@ -295,7 +295,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.info(f"✅ '{slug}' tamamlandı (part {meta.total_parts}/{meta.total_parts}).")
         return True
 
-    # GÜNDE-1 KİLİDİ (KANAL başına — İhsan kuralı 2026-07-03: "günde sadece 1 video").
+    # GÜNDE-1 KİLİDİ (KANAL başına ,  İhsan kuralı 2026-07-03: "günde sadece 1 video").
     # Bu serinin KANALINA (upload_profile; aynı profili paylaşan TÜM seriler dahil)
     # BUGÜN zaten bir part yayınlandıysa üretme. Ana kuyruk (series.yml) + özel günlük
     # şeritler aynı güne/kanala denk geldiğinde çifte üretimi/krediyi ve aynı kanala
@@ -304,7 +304,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         prev = _channel_published_today(meta)
         if prev:
             logger.info(f"⏭️ Günde-1 kilidi: '{prev}' bugün aynı kanala "
-                        f"({meta.upload_profile or slug}) yayınlandı — '{slug}' üretimi yarına bırakıldı.")
+                        f"({meta.upload_profile or slug}) yayınlandı ,  '{slug}' üretimi yarına bırakıldı.")
             return True
 
     n = meta.next_part
@@ -312,7 +312,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
 
     # Onay modu: bu part zaten onay bekliyorsa YENİDEN ÜRETME (approver yayınlayacak).
     if mode == "approval" and meta.get_part(n).get("status") == "awaiting_approval":
-        logger.info(f"⏳ Part {n} zaten Telegram onayı bekliyor — üretim atlandı.")
+        logger.info(f"⏳ Part {n} zaten Telegram onayı bekliyor ,  üretim atlandı.")
         return True
 
     plan_path = part_plan_path(slug, n)
@@ -321,7 +321,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         return False
     plan = load_plan(plan_path)
     subtitle = plan.get("episode", {}).get("title", "")
-    logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} — {subtitle} (mod={mode})")
+    logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} ,  {subtitle} (mod={mode})")
 
     # Hikâye-caption (opt-in, the__footnote formatı): plan 'caption' taşıyorsa bölümün
     # yazılı hikâyesi + bölüme-özgü etiketler + serinin marka etiketleri tek metinde
@@ -333,7 +333,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         if tags:
             caption = f"{caption}\n\n{tags}"
 
-    # 'Bitmeyen yolculuk' — önceki bölümün son karesinden devam (parçalar arası zincir).
+    # 'Bitmeyen yolculuk' ,  önceki bölümün son karesinden devam (parçalar arası zincir).
     # Bulutta her koşu temiz checkout olduğu için son kare URL'i git'li series.json'da tutulur.
     # chain_scope="episode" ise zincir yalnız bölüm içi → önceki bölümün karesi OKUNMAZ.
     from series.bible import Bible, episode_dir
@@ -344,7 +344,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         if chain_start_url:
             logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
 
-    # 1) Üret (idempotent — yarım kalmışsa sadece eksik çekimi üretir)
+    # 1) Üret (idempotent ,  yarım kalmışsa sadece eksik çekimi üretir)
     reserved = False
     if not dry_run:
         balance = _balance_value(check_credit())
@@ -381,9 +381,9 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.info(f"[dry-run] Başlık olurdu: {meta.title_for(n, subtitle)}")
         return True
     if not video:
-        logger.error(f"❌ Part {n} üretilemedi — durum ilerletilmedi (sonraki çalıştırmada tekrar denenir).")
+        logger.error(f"❌ Part {n} üretilemedi ,  durum ilerletilmedi (sonraki çalıştırmada tekrar denenir).")
         _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLEMEDİ (içerik filtresi / motor hatası olabilir). "
-               f"Bu kanala video çıkmadı — plan/prompt kontrol edilmeli.")
+               f"Bu kanala video çıkmadı ,  plan/prompt kontrol edilmeli.")
         return False
     meta.mark_produced(n, video, subtitle)
     # Zincir: bu bölümün son karesini sonraki bölüm için series.json'a yaz (bulut-kalıcı).
@@ -399,9 +399,10 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         frames = _sample_frames(video, 3)
         msg_id = None
         if notifier.enabled():
-            msg_id = notifier.request_approval(n, meta.title_for(n, subtitle), video, frames)
+            msg_id = notifier.request_approval(n, meta.title_for(n, subtitle), video, frames,
+                                               slug=slug)
         else:
-            logger.warning("⚠️ Telegram kapalı (token/chat yok) — onay mesajı gönderilemedi.")
+            logger.warning("⚠️ Telegram kapalı (token/chat yok) ,  onay mesajı gönderilemedi.")
         part = meta.get_part(n)
         part["status"] = "awaiting_approval"
         part["release_tag"] = tag
@@ -418,7 +419,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         return True
 
     if not meta.upload_profile:
-        logger.warning("⚠️ upload_profile boş — yayın atlandı. series.json'a upload_profile ekle.")
+        logger.warning("⚠️ upload_profile boş ,  yayın atlandı. series.json'a upload_profile ekle.")
         return False
 
     ok = _publish_part(meta, n, video, subtitle, caption=caption)
@@ -428,7 +429,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         meta.save()
         logger.info(f"🎉 Part {n} yayınlandı ({', '.join(ok)}): {meta.title_for(n, subtitle)}")
         return True
-    logger.error(f"❌ Part {n} hiçbir platforma yayınlanamadı — durum ilerletilmedi (yarın tekrar denenir).")
+    logger.error(f"❌ Part {n} hiçbir platforma yayınlanamadı ,  durum ilerletilmedi (yarın tekrar denenir).")
     _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLDİ ama hiçbir platforma YAYINLANAMADI "
            f"(upload-post / hesap bağlantısı kontrol edilmeli).")
     return False
@@ -441,7 +442,7 @@ def _priority(slug: str) -> int:
 
 
 def run_all(dry_run: bool = False, publish: bool = True) -> bool:
-    """GÜNDE TEK SERİ üret+yayınla (kredi tavanı) — İhsan kararı 2026-07-02.
+    """GÜNDE TEK SERİ üret+yayınla (kredi tavanı) ,  İhsan kararı 2026-07-02.
 
     Her koşuda aktif seriler öncelik sırasına dizilir (series.json['priority'],
     küçük=önce, eşitlikte slug) ve yalnız İLK seri üretilir; kalanlar sırada
@@ -462,7 +463,7 @@ def run_all(dry_run: bool = False, publish: bool = True) -> bool:
     slugs = list_active_series()
     if not slugs:
         logger.info("Aktif seri yok.")
-        _alert("ℹ️ *Seri otomasyonu:* Aktif seri kalmadı — tüm diziler tamamlandı. "
+        _alert("ℹ️ *Seri otomasyonu:* Aktif seri kalmadı ,  tüm diziler tamamlandı. "
                "Yeni sezon/part eklenene kadar bu kanallara yeni video ÇIKMAYACAK.")
         return True
     slugs.sort(key=lambda s: (_priority(s), s))

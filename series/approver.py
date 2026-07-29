@@ -1,11 +1,11 @@
 """
-Onay Yoklayıcı — Telegram'dan İhsan'ın ✅/❌ cevabını okuyup yayınlar/atlar.
+Onay Yoklayıcı ,  Telegram'dan İhsan'ın ✅/❌ cevabını okuyup yayınlar/atlar.
 
 GitHub Actions'ta sık cron ile çalışır (her ~10 dk). Onay bekleyen part varsa
 getUpdates ile callback'i okur:
   ✅ Yayınla → Release'ten videoyu indir → 3 platforma yayınla → durumu ilerlet
   ❌ Atla    → part'ı atla, ilerlet
-getUpdates offset'i series.json'da (tg_offset) tutulur — tekrar işlemeyi önler.
+getUpdates offset'i series.json'da (tg_offset) tutulur ,  tekrar işlemeyi önler.
 
 Kullanım: python -m series.approver [--series viral-detective]
 """
@@ -24,6 +24,26 @@ from core.config import logger, OUTPUT_DIR
 from series import notifier
 from series.series_meta import SeriesMeta, list_active_series
 from series.series_runner import _publish_part, REPO
+
+
+def match_decision(data: str, slug: str, n: int,
+                   stored_msg_id, cb_msg_id) -> str | None:
+    """Callback verisini karara çevir; seri-kimlikli yeni biçim + güvenli eski biçim.
+
+    Yeni biçim: vd:<slug>:approve:<n> / vd:<slug>:reject:<n> (2026-07-29).
+    Eski biçim (vd:approve:<n>) YALNIZ kayıtlı onay mesajının message_id'si
+    callback'inkiyle eşleşiyorsa kabul edilir: birden çok seri aynı part
+    numarasında beklerken slug'sız veri tek tıkla hepsini yayınlatabilirdi."""
+    if data == f"vd:{slug}:approve:{n}":
+        return "approve"
+    if data == f"vd:{slug}:reject:{n}":
+        return "reject"
+    legacy_ok = stored_msg_id and cb_msg_id and stored_msg_id == cb_msg_id
+    if legacy_ok and data == f"vd:approve:{n}":
+        return "approve"
+    if legacy_ok and data == f"vd:reject:{n}":
+        return "reject"
+    return None
 
 
 def _download_release(tag: str) -> Path | None:
@@ -50,7 +70,7 @@ def _cleanup_release(tag: str):
 
 
 def _publish_approved(meta: SeriesMeta, n: int, part: dict) -> bool:
-    """Onaylanmış part'ı yayınla — idempotent retry. Başarısızsa part['approved']=True
+    """Onaylanmış part'ı yayınla ,  idempotent retry. Başarısızsa part['approved']=True
     kalır → sonraki kontrolde Telegram'a bakmadan TEKRAR denenir (onay kaybolmaz)."""
     video = _download_release(part.get("release_tag"))
     if not video:
@@ -92,8 +112,23 @@ def process(slug: str) -> bool:
         return _publish_approved(meta, n, part)
 
     if not notifier.enabled():
-        logger.warning("⚠️ Telegram kapalı (token/chat yok) — onay okunamıyor.")
+        logger.warning("⚠️ Telegram kapalı (token/chat yok) ,  onay okunamıyor.")
         return False
+
+    # Kart kimliği kayıpsa (persist arızası) kartı yeniden gönder: aksi halde İhsan'ın
+    # elindeki eski kart güvenli eşleşme kuralına takılır ve onay yolu kilitlenir.
+    if not part.get("approval_msg_id"):
+        logger.warning(f"'{slug}' Part {n}: onay kartı kimliği yok, kart yeniden gönderiliyor.")
+        video = _download_release(part.get("release_tag"))
+        if video:
+            msg_id = notifier.request_approval(
+                n, meta.title_for(n, part.get("subtitle")), str(video), None, slug=slug)
+            if msg_id:
+                part["approval_msg_id"] = msg_id
+                meta.save()
+                logger.info(f"'{slug}' Part {n}: yeni onay kartı gönderildi (msg {msg_id}).")
+        else:
+            logger.error(f"'{slug}' Part {n}: release indirilemedi, kart yenilenemedi.")
 
     offset = meta.data.get("tg_offset")
     updates = notifier.get_updates(offset)
@@ -105,11 +140,11 @@ def process(slug: str) -> bool:
         cq = u.get("callback_query")
         if not cq:
             continue
-        data = cq.get("data", "")
-        if data == f"vd:approve:{n}":
-            decision, cb_id = "approve", cq.get("id")
-        elif data == f"vd:reject:{n}":
-            decision, cb_id = "reject", cq.get("id")
+        verdict = match_decision(cq.get("data", ""), slug, n,
+                                 part.get("approval_msg_id"),
+                                 (cq.get("message") or {}).get("message_id"))
+        if verdict:
+            decision, cb_id = verdict, cq.get("id")
     if new_offset != offset:
         meta.data["tg_offset"] = new_offset
         meta.save()
