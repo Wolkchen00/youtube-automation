@@ -1,0 +1,182 @@
+{
+  "generated_at": "2026-07-29T00:17:09.551581+00:00",
+  "snapshot_date": "2026-07-29",
+  "period": "2026-07-23 to 2026-07-29",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 123,
+        "total_views": 107277,
+        "total_videos": 245
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "F7IplgjXwaM",
+          "title": "Isfahan, 1598 — The Jewel of Persia Awakened",
+          "published": "2026-07-26T21:51:50Z",
+          "views": 29,
+          "views_48h": 29,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "WOKInvEu_ic",
+          "title": "Strasbourg, 1518 — The City Danced Itself Sick",
+          "published": "2026-07-25T21:57:26Z",
+          "views": 79,
+          "views_48h": 79,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "sIlLDtiQw8o",
+          "title": "Tenochtitlan, 1521 — The City of Lakes Vanished",
+          "published": "2026-07-24T22:02:27Z",
+          "views": 38,
+          "views_48h": 38,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "f54ICj-JrjY",
+          "title": "Constantinople, 1204 — The City of Gold Lay Broken",
+          "published": "2026-07-23T21:58:08Z",
+          "views": 27,
+          "views_48h": 27,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "2i46L0wWCp0",
+          "title": "Western Front, 1914 — The Day the Guns Fell Silent",
+          "published": "2026-07-22T22:01:54Z",
+          "views": 755,
+          "views_48h": 755,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 77.5
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 113,
+        "total_views": 99353,
+        "total_videos": 148
+      },
+      "videos_last_7_days": [],
+      "views_30d_median": 15
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 121,
+        "total_views": 57653,
+        "total_videos": 172
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "sDmQ4lNH2m4",
+          "title": "ANIMA-13: The Glitch Horizon",
+          "published": "2026-07-27T18:26:15Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "gy_6vMKupx0",
+          "title": "CHRONOS: The Great Engine",
+          "published": "2026-07-26T17:50:44Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "r4x-sd2pJRo",
+          "title": "AETHERIA: The Luminaflow",
+          "published": "2026-07-25T17:51:50Z",
+          "views": 77,
+          "views_48h": 77,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "5gHfaH9yyb4",
+          "title": "LUMINOS: The Tidal Whisper",
+          "published": "2026-07-24T18:20:28Z",
+          "views": 676,
+          "views_48h": 676,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "DQoElx1AyqM",
+          "title": "TERRA-X: The Shifting Peaks",
+          "published": "2026-07-23T18:25:31Z",
+          "views": 555,
+          "views_48h": 555,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "pNdLoZesFB4",
+          "title": "FRAGMENTA: Shards of Time",
+          "published": "2026-07-22T18:05:14Z",
+          "views": 169,
+          "views_48h": 169,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 72.0
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 100,
+        "total_views": 140941,
+        "total_videos": 223
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "fPwKk6y2ck0",
+          "title": "roots in the sky",
+          "published": "2026-07-27T16:51:34Z",
+          "views": 4,
+          "views_48h": 4,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "DRqP_gOKn-4",
+          "title": "ice whispers fire",
+          "published": "2026-07-26T15:51:25Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "NwBYVvDR1UA",
+          "title": "silent gears of time",
+          "published": "2026-07-25T15:53:44Z",
+          "views": 2,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "KmZlCjiCp4U",
+          "title": "the silent watchers",
+          "published": "2026-07-24T16:07:03Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "zVujV6rdL80",
+          "title": "the forest sleeps",
+          "published": "2026-07-23T16:28:16Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "S6a9SVmFZm8",
+          "title": "bridges to forever",
+          "published": "2026-07-22T16:10:36Z",
+          "views": 4,
+          "views_48h": 4,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 12
+    }
+  }
+}
