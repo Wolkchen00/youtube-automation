@@ -22,6 +22,7 @@ import re
 import sys
 import tempfile
 import time
+import unicodedata
 import uuid
 from collections import Counter, defaultdict
 from datetime import date, datetime, timedelta, timezone
@@ -618,7 +619,18 @@ def _query_pages(token: str, database_id: str, status: str) -> list[dict]:
     return pages
 
 
-def _ensure_notion_schema(token: str, database_id: str) -> None:
+def _fold_status_name(value: Any) -> str:
+    """Notion select adini aksan ve buyuk/kucuk harften bagimsiz eslestir."""
+    text = str(value or "").replace("ı", "i").replace("İ", "I")
+    return (
+        unicodedata.normalize("NFKD", text)
+        .encode("ascii", "ignore")
+        .decode("ascii")
+        .casefold()
+    )
+
+
+def _ensure_notion_schema(token: str, database_id: str) -> dict[str, str]:
     database = _notion_request("GET", f"databases/{database_id}", token)
     properties = database.get("properties") or {}
     status_prop = properties.get("Durum") or {}
@@ -627,7 +639,25 @@ def _ensure_notion_schema(token: str, database_id: str) -> None:
         raise NotionHTTPError(400, "Durum select property degil")
     changes: dict[str, dict] = {}
     options = list(status_select.get("options") or [])
-    if not any(option.get("name") == "Claimed" for option in options if isinstance(option, dict)):
+    actual_by_fold = {
+        _fold_status_name(option.get("name")): str(option.get("name"))
+        for option in options
+        if isinstance(option, dict) and str(option.get("name") or "").strip()
+    }
+    approved = actual_by_fold.get(_fold_status_name("Onaylandı"))
+    produced = actual_by_fold.get(_fold_status_name("Üretildi"))
+    if not approved or not produced:
+        missing = []
+        if not approved:
+            missing.append("Onaylandı")
+        if not produced:
+            missing.append("Üretildi")
+        raise NotionHTTPError(
+            400, "Durum option eksik: " + ", ".join(missing)
+        )
+    claimed = actual_by_fold.get(_fold_status_name("Claimed"))
+    if not claimed:
+        claimed = "Claimed"
         changes["Durum"] = {
             "select": {
                 "options": options + [{"name": "Claimed", "color": "default"}]
@@ -639,6 +669,11 @@ def _ensure_notion_schema(token: str, database_id: str) -> None:
         changes["Claim Kosu"] = {"rich_text": {}}
     if changes:
         _notion_request("PATCH", f"databases/{database_id}", token, {"properties": changes})
+    return {
+        "approved": approved,
+        "produced": produced,
+        "claimed": claimed,
+    }
 
 
 def _page_patch(token: str, page_id: str, properties: dict) -> dict:
@@ -675,7 +710,7 @@ def _bridge_notion(
 
     run_token = os.getenv("GITHUB_RUN_ID", "").strip() or uuid.uuid4().hex
     try:
-        _ensure_notion_schema(token, database_id)
+        status_names = _ensure_notion_schema(token, database_id)
 
         for card_id in sorted(used_cards):
             if not CARD_ID_RE.fullmatch(card_id):
@@ -685,14 +720,14 @@ def _bridge_notion(
                 token,
                 page_id,
                 {
-                    "Durum": _status_property("Üretildi"),
+                    "Durum": _status_property(status_names["produced"]),
                     "Claim Zamani": {"date": None},
                     "Claim Kosu": {"rich_text": []},
                 },
             )
 
         approved_from_lease: list[dict] = []
-        for page in _query_pages(token, database_id, "Claimed"):
+        for page in _query_pages(token, database_id, status_names["claimed"]):
             page_id = str(page.get("id") or "")
             normalized_id = "n15-" + page_id.replace("-", "").lower()
             claimed_at = _claim_time(page)
@@ -701,7 +736,7 @@ def _bridge_notion(
                     token,
                     page_id,
                     {
-                        "Durum": _status_property("Üretildi"),
+                        "Durum": _status_property(status_names["produced"]),
                         "Claim Zamani": {"date": None},
                         "Claim Kosu": {"rich_text": []},
                     },
@@ -717,14 +752,17 @@ def _bridge_notion(
                     token,
                     page_id,
                     {
-                        "Durum": _status_property("Onaylandı"),
+                        "Durum": _status_property(status_names["approved"]),
                         "Claim Zamani": {"date": None},
                         "Claim Kosu": {"rich_text": []},
                     },
                 )
                 approved_from_lease.append(released)
 
-        approved = _query_pages(token, database_id, "Onaylandı") + approved_from_lease
+        approved = (
+            _query_pages(token, database_id, status_names["approved"])
+            + approved_from_lease
+        )
         known = {str(item.get("id") or "") for item in retained}
         new_topics: list[dict] = []
         seen_pages: set[str] = set()
@@ -741,7 +779,7 @@ def _bridge_notion(
                     token,
                     page_id,
                     {
-                        "Durum": _status_property("Üretildi"),
+                        "Durum": _status_property(status_names["produced"]),
                         "Claim Zamani": {"date": None},
                         "Claim Kosu": {"rich_text": []},
                     },
@@ -761,7 +799,7 @@ def _bridge_notion(
                 token,
                 page_id,
                 {
-                    "Durum": _status_property("Claimed"),
+                    "Durum": _status_property(status_names["claimed"]),
                     "Claim Zamani": {"date": {"start": claimed_at}},
                     "Claim Kosu": {
                         "rich_text": [{"type": "text", "text": {"content": run_token}}]
@@ -788,21 +826,31 @@ def _bridge_notion(
         return retained, notes
 
 
+def _telegram_markdown_escape(value: Any) -> str:
+    text = str(value or "").replace("\r", " ").replace("\n", " ")
+    return re.sub(r"([_*\[\]`])", r"\\\1", text)
+
+
 def _summary(slug: str, calibration: dict, notes: list[str]) -> str:
     stats = calibration["series_stats"]
     median_value = stats["series_median"]
     median_text = "yok" if median_value is None else f"{median_value:g}"
+    mode_text = _telegram_markdown_escape(
+        str(calibration["mode"]).replace("_", " ")
+    )
     line1 = (
-        f"📊 *{slug}* {calibration['mode']}: "
+        f"📊 *{_telegram_markdown_escape(slug)}* {mode_text}: "
         f"{stats['n_comparable']}/{stats['n_published']} karsilastirilabilir, "
-        f"seri medyani {median_text}"
+        f"seri medyani {_telegram_markdown_escape(median_text)}"
     )
     decisions: list[str] = []
     if calibration["rollback"]["active"]:
         decisions.append("ROLLBACK: iki ardisik siki dusus")
     if calibration["pilot_kill"]["triggered"]:
-        decisions.append(calibration["pilot_kill"]["detail"])
-    decisions.extend(notes)
+        decisions.append(
+            _telegram_markdown_escape(calibration["pilot_kill"]["detail"])
+        )
+    decisions.extend(_telegram_markdown_escape(note) for note in notes)
     return line1 + (("\n" + " | ".join(decisions)) if decisions else "")
 
 

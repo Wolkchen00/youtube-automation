@@ -378,9 +378,17 @@ class MetricAndDecisionTests(Phase4Fixture):
                 "detail": "KARAR KARTI: pilot kanal medyaninin altinda",
             },
         }
-        summary = calibrate._summary("event-horizon", decision, [])
+        summary = calibrate._summary(
+            "event_horizon",
+            decision,
+            ["Notion_error [bad] *oops* `raw`"],
+        )
         self.assertIn("ROLLBACK", summary)
         self.assertIn("KARAR KARTI", summary)
+        self.assertIn("gecici baseline", summary)
+        self.assertIn(r"*event\_horizon*", summary)
+        self.assertIn(r"Notion\_error \[bad\] \*oops\* \`raw\`", summary)
+        self.assertNotRegex(summary, r"(?<!\\)_")
 
     def test_pilot_card_telegram_mock_and_comparable_floor(self):
         folder = self.make_series()
@@ -416,6 +424,7 @@ class MetricAndDecisionTests(Phase4Fixture):
             )
         self.assertTrue(result["pilot_kill"]["triggered"])
         self.assertIn("KARAR KARTI", send.call_args.args[0])
+        self.assertNotIn("_", send.call_args.args[0])
         videos.pop("series3")
         videos.pop("series4")
         low, _ = calibrate._build_calibration(
@@ -502,7 +511,14 @@ class NotionBridgeTests(Phase4Fixture):
             if method == "GET":
                 return {
                     "properties": {
-                        "Durum": {"select": {"options": [{"name": "Onaylandı"}]}}
+                        "Durum": {
+                            "select": {
+                                "options": [
+                                    {"name": "Onaylandi"},
+                                    {"name": "Uretildi"},
+                                ]
+                            }
+                        }
                     }
                 }
             if path == "databases/db" and method == "PATCH":
@@ -514,13 +530,18 @@ class NotionBridgeTests(Phase4Fixture):
             raise AssertionError((method, path, body))
 
         with mock.patch.object(calibrate, "_notion_request", side_effect=fake):
-            calibrate._ensure_notion_schema("token", "db")
-            pages = calibrate._query_pages("token", "db", "Onaylandı")
+            names_by_role = calibrate._ensure_notion_schema("token", "db")
+            pages = calibrate._query_pages("token", "db", "Onaylandi")
         self.assertEqual([page["id"] for page in pages], ["1", "2"])
+        self.assertEqual(names_by_role, {
+            "approved": "Onaylandi",
+            "produced": "Uretildi",
+            "claimed": "Claimed",
+        })
         update = next(body for method, path, body in calls
                       if method == "PATCH" and path == "databases/db")
         names = [item["name"] for item in update["properties"]["Durum"]["select"]["options"]]
-        self.assertEqual(names, ["Onaylandı", "Claimed"])
+        self.assertEqual(names, ["Onaylandi", "Uretildi", "Claimed"])
         self.assertIn("Claim Zamani", update["properties"])
         self.assertIn("Claim Kosu", update["properties"])
 
@@ -534,18 +555,30 @@ class NotionBridgeTests(Phase4Fixture):
         token = "run-77"
         now = datetime(2026, 7, 29, 12, tzinfo=timezone.utc)
         patched = []
+        queried_statuses = []
 
         def fake(method, path, auth, body=None):
             if method == "GET" and path == "databases/db":
                 return {
                     "properties": {
-                        "Durum": {"select": {"options": [{"name": "Claimed"}]}},
+                        "Durum": {
+                            "select": {
+                                "options": [
+                                    {"name": "Aday"},
+                                    {"name": "Onaylandi"},
+                                    {"name": "Reddedildi"},
+                                    {"name": "Uretildi"},
+                                    {"name": "Claimed"},
+                                ]
+                            }
+                        },
                         "Claim Zamani": {"date": {}},
                         "Claim Kosu": {"rich_text": {}},
                     }
                 }
             if method == "POST" and path.endswith("/query"):
                 status = body["filter"]["select"]["equals"]
+                queried_statuses.append(status)
                 if status == "Claimed":
                     return {
                         "results": [_page(
@@ -556,9 +589,9 @@ class NotionBridgeTests(Phase4Fixture):
                     }
                 return {
                     "results": [
-                        _page(new_id),
-                        _page(foreign_id),
-                        _page(missing_id, source=""),
+                        _page(new_id, status="Onaylandi"),
+                        _page(foreign_id, status="Onaylandi"),
+                        _page(missing_id, source="", status="Onaylandi"),
                     ],
                     "has_more": False,
                 }
@@ -566,8 +599,8 @@ class NotionBridgeTests(Phase4Fixture):
                 page_id = path.split("/", 1)[1]
                 patched.append((page_id, body))
                 status = body["properties"]["Durum"]["select"]["name"]
-                if status == "Onaylandı":
-                    return _page(page_id)
+                if status == "Onaylandi":
+                    return _page(page_id, status="Onaylandi")
                 return _page(page_id, status=status, claim_token=token)
             if method == "GET" and path == f"pages/{new_id}":
                 return _page(new_id, status="Claimed", claim_token=token)
@@ -600,9 +633,10 @@ class NotionBridgeTests(Phase4Fixture):
         self.assertNotIn("n15-" + foreign_id, ids)
         self.assertNotIn(used_id, ids)
         self.assertTrue(any("kaynaksiz kart" in note for note in notes))
+        self.assertEqual(queried_statuses, ["Claimed", "Onaylandi"])
         produced_patch = next(body for page, body in patched if page == "5" * 32)
         self.assertEqual(
-            produced_patch["properties"]["Durum"]["select"]["name"], "Üretildi"
+            produced_patch["properties"]["Durum"]["select"]["name"], "Uretildi"
         )
 
     def test_disabled_env_and_schema_drift_preserve_only_unconsumed(self):
