@@ -1,0 +1,82 @@
+name: Weekly Series Calibration
+
+on:
+  schedule:
+    - cron: '0 9 * * 0'
+  workflow_dispatch:
+
+# Dört üretim workflow'u ile Kie kredi ve seri persist akisini serilestirir.
+# Analytics, series-approve ve lokal kosular kapsam disidir. Yarislari iki
+# tarafin hardened rebase-retry persist'i ve dosya basina ayrik yazim yonetir.
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  calibrate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTION_REELS_TOKEN=${{ secrets.NOTION_REELS_TOKEN }}
+          NOTION_TOPIC_DB_ID=${{ secrets.NOTION_TOPIC_DB_ID }}
+          EOF
+
+      - name: Prepare logs
+        run: mkdir -p logs
+
+      - name: Measure and calibrate
+        run: python -X utf8 -m series.calibrate 2>&1 | tee logs/calibrate.log
+
+      - name: Persist calibration state
+        if: always()
+        run: |
+          set -o pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          success=false
+          for i in 1 2 3; do
+            git pull --rebase --autostash origin main || true
+            git add 'sentinal_ihsan/*/calibration.json' || true
+            git add 'aimagine/*/calibration.json' || true
+            git add 'galactic_experience/*/calibration.json' || true
+            git add 'shadowedhistory/*/calibration.json' || true
+            if git diff --cached --quiet && [ "$(git rev-list --count origin/main..HEAD)" -eq 0 ]; then
+              echo "Degisiklik yok"; success=true; break
+            fi
+            if ! git diff --cached --quiet; then
+              git commit -m "chore: kalibrasyon guncellendi [skip ci]" || true
+            fi
+            if git push origin main; then success=true; break; fi
+            echo "push denemesi $i basarisiz, 10s bekle..."; sleep 10
+          done
+          [ "$success" = true ] || exit 1
+
+      - name: Upload calibration log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: calibrate-logs-${{ github.run_number }}
+          path: logs/calibrate.log
+          retention-days: 7

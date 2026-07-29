@@ -42,6 +42,8 @@ import re
 import sys
 import time
 from datetime import datetime, timezone
+from types import MappingProxyType
+from typing import Mapping
 
 _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _ROOT not in sys.path:
@@ -49,7 +51,7 @@ if _ROOT not in sys.path:
 
 from core.config import GEMINI_API_KEY, logger
 from series import notifier
-from series.bible import Bible, doctrine_path, doctrine_repo_path, doctrine_sha256
+from series.bible import Bible, data_dir, doctrine_path, doctrine_repo_path, doctrine_sha256
 from series.series_meta import SeriesMeta, part_plan_path, plans_dir
 from series.shots import validate_plan
 
@@ -224,10 +226,70 @@ def _unused_topics(cfg: dict, history: list[dict]) -> list[dict]:
     return [item for seed_id, item in _topic_pool(cfg).items() if seed_id not in used]
 
 
+def _freeze(value):
+    """Calibration kopyasini kosu boyunca degistirilemez hale getir."""
+    if isinstance(value, dict):
+        return MappingProxyType({key: _freeze(item) for key, item in value.items()})
+    if isinstance(value, list):
+        return tuple(_freeze(item) for item in value)
+    return value
+
+
+def _load_calibration(slug: str) -> Mapping:
+    """calibration.json'u bir kez yukle; yok/bozuk dosyada fail-open bos kopya don."""
+    path = data_dir(slug) / "calibration.json"
+    if not path.exists():
+        logger.warning(f"⚠️ {slug}: calibration.json yok, kalibrasyon eki atlandi.")
+        return MappingProxyType({})
+    try:
+        content = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(content, dict):
+            raise ValueError("kok JSON nesnesi degil")
+        if not content:
+            logger.warning(f"⚠️ {slug}: calibration.json bos, kalibrasyon eki atlandi.")
+        return _freeze(content)
+    except Exception as exc:
+        logger.warning(f"⚠️ {slug}: calibration.json bozuk, kalibrasyon eki atlandi: {exc}")
+        return MappingProxyType({})
+
+
+def _card_topics(calibration: Mapping | None) -> dict[str, dict]:
+    """Bu kosunun onayli #15 kartlarini id ile indeksle."""
+    cards: dict[str, dict] = {}
+    for item in (calibration or {}).get("extra_topics") or ():
+        if not isinstance(item, Mapping):
+            continue
+        seed_id = str(item.get("id") or "")
+        page_id = str(item.get("page_id") or "")
+        topic = str(item.get("topic") or "").strip()
+        if not re.fullmatch(r"n15-[0-9a-f]{32}", seed_id) or not page_id or not topic:
+            continue
+        cards[seed_id] = {
+            "id": seed_id,
+            "topic": topic[:180],
+            "page_id": page_id,
+            "claimed_at": str(item.get("claimed_at") or ""),
+        }
+    return cards
+
+
+def _unused_cards(calibration: Mapping | None, history: list[dict]) -> list[dict]:
+    used = {
+        str(item.get("seed_id"))
+        for item in history
+        if isinstance(item.get("seed_id"), str)
+    }
+    return [
+        item for seed_id, item in _card_topics(calibration).items()
+        if seed_id not in used
+    ]
+
+
 # ─── Gemini yönetmen promptu ───────────────────────────────────────────────────
 
 def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: int,
-                  history: list[dict], fix_errors: list[str] | None = None) -> tuple[str, str]:
+                  history: list[dict], fix_errors: list[str] | None = None,
+                  calibration: Mapping | None = None) -> tuple[str, str]:
     """(contents, system_instruction) döndür. Kurallar salt-görsel, zincir-uyumlu
     (her çekim öncekinin son karesinden morf eder) ve içerik-filtresi-güvenlidir."""
     shots = max(2, int(cfg.get("shots", DEFAULT_SHOTS)))
@@ -258,6 +320,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_caption = bool(cfg.get("caption"))
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     pool = _topic_pool(cfg)
+    cards = _unused_cards(calibration, history)
     humans_mode = str(cfg.get("humans") or "").strip().lower()
     humans_historical = humans_mode == "historical"
     humans_featured = humans_mode == "featured"
@@ -372,18 +435,27 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                       "  episode reads as one continuous emotional arc with no confusing jumps.")
 
     family_shape = '\n   "family": "<canonical family>",' if families else ""
-    seed_shape = '\n   "seed_id": <int>,' if pool else ""
+    seed_shape = '\n   "seed_id": <int or "n15-32hex">,' if (pool or cards) else ""
     family_rule = (
         "\n- FAMILY: every episode must include one \"family\" chosen exactly from this canonical list: "
         + json.dumps(families, ensure_ascii=False)
         + ". Consecutive episodes must never use the same family."
         if families else ""
     )
-    seed_rule = (
-        "\n- TOPIC POOL: every episode must include integer \"seed_id\" from the runtime pool in the "
-        "input, use only that seed's topic, and copy that seed's family exactly. Never invent a topic."
-        if pool else ""
-    )
+    if cards:
+        seed_rule = (
+            "\n- TOPIC POOL: every episode must include \"seed_id\" from the runtime pools in the "
+            "input and use only that seed's topic. Card topics are approved external signals and "
+            "MUST be consumed first. Integer seeds must copy their seed family exactly; card seeds "
+            "choose one canonical family. Never invent a topic."
+        )
+    elif pool:
+        seed_rule = (
+            "\n- TOPIC POOL: every episode must include integer \"seed_id\" from the runtime pool in the "
+            "input, use only that seed's topic, and copy that seed's family exactly. Never invent a topic."
+        )
+    else:
+        seed_rule = ""
     if meta.slug == "from-scratch":
         hook_rule = (
             '- "hook_shot" MUST be 4. Shot 4 is the final reveal and the teaser source.'
@@ -428,6 +500,18 @@ RULES:
     brief = str(cfg.get("brief") or "").strip()
     if brief:
         lines.append(f"\nCREATIVE BRIEF for new episodes:\n{brief}")
+    brief_note = str((calibration or {}).get("brief_note") or "").strip()
+    if brief_note:
+        lines.append(
+            "\nCALIBRATION (weekly measured audience feedback, follow unless it contradicts the brief):\n"
+            + brief_note
+        )
+    if cards:
+        lines.append(
+            "\nRUNTIME APPROVED CARD TOPICS. Card topics are approved external signals "
+            "and MUST be consumed first:"
+        )
+        lines.append(json.dumps(cards, ensure_ascii=False, indent=2))
     if pool:
         lines.append("\nRUNTIME UNUSED TOPIC POOL. Use each seed_id at most once:")
         lines.append(json.dumps(_unused_topics(cfg, history), ensure_ascii=False, indent=2))
@@ -457,7 +541,8 @@ RULES:
 
 def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     existing_titles: set[str], cfg: dict | None = None,
-                    history: list[dict] | None = None) -> list[str]:
+                    history: list[dict] | None = None,
+                    calibration: Mapping | None = None) -> list[str]:
     """Sert doğrulama + normalizasyon (yerinde): numaralar/çekim n'leri düzeltilir,
     bilinmeyen alanlar atılır. Hata listesi döner (boş = geçerli).
     cfg (auto_replenish) format bayraklarını taşır: narration/title_card/shot_refs , 
@@ -481,11 +566,18 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     pool = _topic_pool(cfg)
     history = history or []
+    cards = _card_topics(calibration)
+    unused_cards = {
+        item["id"]: item for item in _unused_cards(calibration, history)
+    }
     used_seed_ids: set[int] = set()
+    used_card_ids: set[str] = set()
     for item in history:
         seed_id = item.get("seed_id")
         if isinstance(seed_id, int) and not isinstance(seed_id, bool):
             used_seed_ids.add(seed_id)
+        elif isinstance(seed_id, str):
+            used_card_ids.add(seed_id)
     previous_family = ""
     for item in reversed(history):
         previous_family = str(item.get("family") or "").strip()
@@ -523,13 +615,23 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 previous_family = family
 
         seed_id = None
-        if pool:
+        card = None
+        if pool or cards:
             raw_seed = plan.get("seed_id")
-            if not isinstance(raw_seed, int) or isinstance(raw_seed, bool):
-                errors.append(f"part {want}: seed_id tam sayı olmalı")
-            else:
+            if isinstance(raw_seed, str):
                 seed_id = raw_seed
-            if seed_id is not None:
+                if seed_id not in cards:
+                    errors.append(f"part {want}: seed_id bu kosunun kart havuzunda yok ({seed_id})")
+                elif seed_id in used_card_ids:
+                    errors.append(f"part {want}: kart seed_id daha once kullanilmis ({seed_id})")
+                else:
+                    card = cards[seed_id]
+                    used_card_ids.add(seed_id)
+            elif isinstance(raw_seed, int) and not isinstance(raw_seed, bool):
+                seed_id = raw_seed
+            else:
+                errors.append(f"part {want}: seed_id tam sayi veya onayli kart id olmali")
+            if isinstance(seed_id, int):
                 if seed_id not in pool:
                     errors.append(f"part {want}: seed_id konu havuzunda yok ({seed_id})")
                 elif seed_id in used_seed_ids:
@@ -613,8 +715,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "shots": clean_shots}
         if families:
             normalized["family"] = family
-        if pool and seed_id is not None:
+        if (pool or cards) and seed_id is not None:
             normalized["seed_id"] = seed_id
+        if card is not None:
+            normalized["card_page_id"] = card["page_id"]
+            normalized["card_topic"] = card["topic"]
         if want_music:
             mtext = str(plan.get("music") or "").strip()
             mwc = len(mtext.split())
@@ -685,11 +790,19 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         # Motorun kendi doğrulaması (Omni kota vb.) ,  hatalar batch'i düşürür.
         v = validate_plan(normalized, bible)
         errors.extend(f"part {want}: {e}" for e in v.get("errors", []))
+    required_cards = min(len(unused_cards), batch)
+    used_distinct_cards = len(set(unused_cards).intersection(used_card_ids))
+    if used_distinct_cards < required_cards:
+        errors.append(
+            f"batch: en az {required_cards} farkli kart kullanilmali "
+            f"(gelen: {used_distinct_cards})"
+        )
     return errors
 
 
 def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
-                   start: int, batch: int) -> list[dict]:
+                   start: int, batch: int,
+                   calibration: Mapping | None = None) -> list[dict]:
     """TEK Gemini çağrısıyla batch adet bölüm planı üret. 2 semantik deneme:
     ilk denemenin hataları ikinci denemede prompt'a geri beslenir."""
     history = _episode_history(meta.slug)
@@ -697,10 +810,12 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
     errors: list[str] | None = None
     for attempt in (1, 2):
         contents, sysins = _build_prompt(meta, bible, cfg, start, batch, history,
-                                         fix_errors=errors)
+                                         fix_errors=errors, calibration=calibration)
         data = _gen_json(contents, sysins, temperature=0.9)
         episodes = data.get("episodes") if isinstance(data, dict) else None
-        errors = _validate_batch(episodes, bible, start, batch, existing, cfg, history)
+        errors = _validate_batch(
+            episodes, bible, start, batch, existing, cfg, history, calibration
+        )
         if not errors:
             return episodes
         logger.warning(f"⚠️ İkmal doğrulaması geçmedi ({attempt}. deneme): {errors[:4]}")
@@ -711,6 +826,7 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
 
 def replenish(slug: str, dry_run: bool = False) -> bool:
     """Bir serinin plan kuyruğunu gerekiyorsa doldur. True = sorun yok (no-op dahil)."""
+    calibration = _load_calibration(slug)
     meta = SeriesMeta.load(slug)
     if not meta:
         return True
@@ -736,12 +852,14 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
         return True
     batch = min(10, max(1, int(cfg.get("batch", DEFAULT_BATCH))))
     history = _episode_history(slug)
-    if cfg.get("topic_pool") is not None:
-        unused = _unused_topics(cfg, history)
-        if not unused:
-            logger.error(f"❌ HATA {slug}: kullanılmamış konu havuzu kalmadı.")
+    unused_ints = _unused_topics(cfg, history)
+    unused_cards = _unused_cards(calibration, history)
+    if cfg.get("topic_pool") is not None or _card_topics(calibration):
+        available = len(unused_ints) + len(unused_cards)
+        if not available:
+            logger.error(f"❌ HATA {slug}: kullanılmamış birleşik konu havuzu kalmadı.")
             return False
-        batch = min(batch, len(unused))
+        batch = min(batch, available)
     start = meta.total_parts + 1
     end = start + batch - 1
 
@@ -755,7 +873,7 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
 
     logger.info(f"🔁 {slug}: kuyruk {pending} < {min_q} → Gemini part {start}-{end} yazıyor…")
     try:
-        episodes = generate_plans(meta, bible, cfg, start, batch)
+        episodes = generate_plans(meta, bible, cfg, start, batch, calibration)
 
         # 1) Önce plan dosyaları (çökme güvenliği: sayaç sonra; öksüzler sonraki koşuda sahiplenilir)
         for i, plan in enumerate(episodes):

@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-29T23:20:41.349062+00:00",
+  "source_snapshot": "2026-07-29",
+  "mode": "gecici_baseline",
+  "channel_median_30d": 72.0,
+  "series_stats": {
+    "n_published": 0,
+    "n_comparable": 0,
+    "series_median": null,
+    "videos": []
+  },
+  "family_stats": [],
+  "recommendations": {
+    "boost_families": [],
+    "explore_family": null,
+    "empty_reason": "veri_yok"
+  },
+  "double_down": [],
+  "pilot_kill": {
+    "triggered": false,
+    "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
+  },
+  "rollback": {
+    "active": false,
+    "history": [
+      null
+    ]
+  },
+  "brief_note": "",
+  "extra_topics": []
+}
