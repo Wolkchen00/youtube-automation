@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Venus: A Day Longer Than Its Year"
+  },
+  "synopsis": "This episode illustrates Venus's incredibly slow rotation, resulting in a day longer than its orbital year.",
+  "narration": "On Venus, a single day stretches longer than its entire orbital year. This slow rotation, combined with its rapid orbit, creates a unique temporal paradox. Experience the sun crawling across a scorching, toxic sky. Time itself moves differently on this infernal world.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Venus, a dominant, hazy yellow-orange sphere, slowly rotating against a backdrop of distant, pinprick stars. The atmosphere is thick and opaque, obscuring the surface. Camera slowly tracks the planet's rotation, emphasizing its sluggishness.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Time-lapse effect on the Venusian horizon. A colossal, distorted sun slowly creeps across the sky, casting long, shifting shadows across a desolate, reddish-brown landscape, hinting at the scorching surface beneath thick clouds. The sun's movement is almost imperceptible.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Pull back to a wide shot of Venus as a full disk, now showing its rapid orbital path around a distant, bright sun. The planet itself rotates at an almost imperceptible pace, contrasting its swift journey through space with its internal temporal scale. Gently loops back to shot 1's composition.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 1,
+  "music": "An awe-driven cosmic underscore with a slow, heavy, atmospheric pulse, building with a subtle, sustained chord for the scale moment, emphasizing the immense duration. The music should evoke a sense of deep time and oppressive gravity, ending mid-phrase for seamless looping.",
+  "hook_shot": 2,
+  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+}

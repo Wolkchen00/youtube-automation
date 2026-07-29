@@ -11,6 +11,7 @@ Klasör yapısı:
     episodes/ ep01/ shots/  ep01.mp4
 """
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -20,9 +21,8 @@ REF_KINDS = ("characters", "environments", "props")
 
 # KAYNAK (git'te tutulur): bible.json, series.json, plans/, raporlar.
 # 2026-07-18 İhsan kararı: her kanalın serileri repo kökünde KENDİ klasöründe
-# durur (kanal bazlı takip). series_data/ ESKİ konumdur — galactic serileri
-# (planetfall, ava-voyage) paralel oturumun işi bitince oraya taşınacak; sonra
-# series_data/ silinebilir. Motor iki konumu da tanır (bkz. KANAL_KLASORLERI.md).
+# durur (kanal bazlı takip). series_data/ ESKİ konumdur; yeni seri kurulumu için
+# geçici hedef olarak kalır. Motor iki konumu da tanır (bkz. KANAL_KLASORLERI.md).
 CHANNEL_DATA_DIRS = {
     "sentinal_ihsan": PROJECT_ROOT / "sentinal_ihsan",
     "aimagine": PROJECT_ROOT / "aimagine",
@@ -76,6 +76,36 @@ def series_dir(slug: str) -> Path:
 
 def bible_path(slug: str) -> Path:
     return data_dir(slug) / "bible.json"
+
+
+def doctrine_path(slug: str) -> Path | None:
+    """Serinin doktrin dosyasını bul; açık yol yoksa kanal KONSEPT.md'sini kullan."""
+    ddir = data_dir(slug)
+    meta_path = ddir / "series.json"
+    try:
+        meta = json.loads(meta_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return None
+    if "doctrine" in meta:
+        configured = Path(str(meta.get("doctrine") or ""))
+        candidate = configured if configured.is_absolute() else PROJECT_ROOT / configured
+    else:
+        candidate = ddir.parent / "KONSEPT.md"
+    return candidate if candidate.is_file() else None
+
+
+def doctrine_sha256(path: Path) -> str:
+    """Doktrinin satır sonundan bağımsız SHA-256 değerini döndür."""
+    text = path.read_bytes().decode("utf-8").replace("\r\n", "\n")
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+
+def doctrine_repo_path(path: Path) -> str:
+    """Doktrin yolunu repo köküne göre eğik çizgili biçimde döndür."""
+    try:
+        return path.resolve().relative_to(PROJECT_ROOT.resolve()).as_posix()
+    except ValueError:
+        return path.resolve().as_posix()
 
 
 def refs_dir(slug: str, kind: str) -> Path:
@@ -218,6 +248,8 @@ class Bible:
         bindirilir; t=0'dan itibaren tam görünür, süre sonunda erir.
         Örn: "title_card": {"enabled": true, "duration": 3.0}"""
         v = self.data["series"].get("title_card") or {}
+        if v is True:
+            return {"enabled": True}
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property

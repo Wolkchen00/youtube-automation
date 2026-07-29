@@ -1,0 +1,109 @@
+{
+  "slug": "event-horizon",
+  "base_title": "Galactic Experiments",
+  "logline": "One verified fact from the real universe, pushed to its visual extreme in 18 seconds.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #space #astronomy #universe",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "active",
+  "priority": 999,
+  "total_parts": 5,
+  "next_part": 1,
+  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 3,
+    "shot_seconds": "6",
+    "music_prompt": true,
+    "narration": {
+      "min_words": 30,
+      "max_words": 44
+    },
+    "families": [
+      "güneş sistemi uçları",
+      "kozmik kader",
+      "derin uzay canavarları",
+      "cehennem gezegenler",
+      "ölçek şoku",
+      "bilim temelli what-if"
+    ],
+    "music_style": "Awe-driven cosmic underscore with a steady forward pulse; one brief swell at the scale moment; no glacial ambient intro, no gentle outro; end mid-phrase so the loop is seamless.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "A day on Venus is longer than its year.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 2,
+        "topic": "A sugar-cube of neutron star matter would weigh about as much as Mount Everest.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 3,
+        "topic": "Saturn is less dense than water; given a big enough ocean, it would float.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 4,
+        "topic": "The Sun is about 400 times wider than the Moon and about 400 times farther away: the eclipse coincidence.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 5,
+        "topic": "TON 618: a black hole weighing tens of billions of Suns, recent estimates near 40 billion.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 6,
+        "topic": "Jupiter's Great Red Spot, a storm bigger than Earth, has been shrinking for 150 years.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 7,
+        "topic": "There are more trees on Earth than stars in the Milky Way.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 8,
+        "topic": "NASA detected pressure waves from a black hole and sonified them: B-flat, 57 octaves below middle C.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 9,
+        "topic": "On average, Mercury is the closest planet to every other planet.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 10,
+        "topic": "The light of the galactic center you see tonight left during the last Ice Age.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 11,
+        "topic": "HD 189733 b: a deep-blue world where winds hit 8,700 km/h and it likely rains molten glass sideways.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 12,
+        "topic": "What if the Moon vanished tonight? Lunar tides disappear, weaker solar tides remain, and Earth's tilt slowly destabilizes.",
+        "family": "bilim temelli what-if"
+      }
+    ],
+    "title_style": "a sharp English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes.",
+    "brief": "EVENT HORIZON üretim brief'i (dayanak: galactic_experience/KONSEPT.md v1.4, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, narration, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Üç çekim vardır. shot 1 ŞOK: gerçek gök cismi en dramatik halinde, iddia narration ilk cümlesinde; yavaş yıldız alanı, logo ve welcome kurulumu yasak. shot 2 ÖLÇEK: karşılaştırma veya yakınlaşma faktın ölçeğini hissettirir. shot 3 UÇURUM: uç sonuç, kompozisyon shot 1'e rimlenir ve hareket sürerken biter. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: güneş sistemi uçları, kozmik kader, derin uzay canavarları, cehennem gezegenler, ölçek şoku, bilim temelli what-if. Aynı aile üst üste iki bölümde kullanılamaz. (3) DOĞRULUK: Fakt gerçek astronomi veya astrofizikten gelir ve yaygın kaynakla doğrulanabilir; sayı uydurulamaz. Konu yalnız runtime enjekte edilen topic_pool girdilerinden seçilir; her partta tam sayı seed_id zorunludur ve yalnız o tohumun konusu ile family değeri kullanılır. Tohum listesi bu brief'te yer almaz. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; dini veya komplocu kışkırtma ve rage-bait yasak. (5) SES: Narration 30-44 kelimedir; ilk cümle iddianın kendisidir. Selamlama, CTA ve 'did you know' yasak. (6) LOOP DİKİŞİ: Son kompozisyon ilk kareye döner; kapanış kartı, sunum jesti ve kutlama yasak. (7) GÜVENLİK: Korku estetiği ve epilepsi riski yaratan hızlı flaş dizileri yok; ton dehşet değil huşudur. (8) MÜZİK: Huşu odaklı kozmik altlık sabit ileri nabız taşır, ölçek anında tek kısa kabarma yapar ve kesintisiz loop için cümlenin ortasında biter.",
+    "last_run": {
+      "at": "2026-07-29T15:02:38.355549+00:00",
+      "parts": "1-5"
+    }
+  }
+}

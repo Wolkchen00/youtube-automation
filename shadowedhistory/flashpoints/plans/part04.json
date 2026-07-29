@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "The Real Reason Australia Lost The Emu War"
+  },
+  "synopsis": "In 1932, the Australian military waged a peculiar and ultimately unsuccessful war against emus in the nation's west.",
+  "narration": "In 1932, Australia declared war on emus. Armed with Lewis guns, soldiers faced thousands of birds destroying crops. Despite heavy ammunition, the emus proved too fast and scattered, leaving the military bewildered and defeated.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Dusty, sun-baked Australian outback. A small squad of Australian soldiers in 1930s uniforms, one aiming a heavy Lewis machine gun, facing a vast, seemingly endless flock of emus across the dry plains. Tension and anticipation in their stance.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A chaotic, wide shot of emus scattering in all directions through sparse bushland, surprisingly agile. The soldiers look on in exasperation, some reloading, others shaking their heads. Dust rises from the frantic movement.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 10,
+  "music": "A comically serious, fast-paced military march with strong, quirky percussive elements. It should feel both determined and slightly absurd, maintaining a driving, relentless rhythm that ends mid-phrase for a seamless loop, hinting at the ongoing futility.",
+  "title_card": {
+    "title": "The Great Emu War",
+    "subtitle": "Western Australia, 1932"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+}

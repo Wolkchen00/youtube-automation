@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "The Anglo-Zanzibar War: The Quickest Victory"
+  },
+  "synopsis": "The shortest war in recorded history unfolded in 1896, lasting less than an hour as British forces swiftly overwhelmed Zanzibar.",
+  "narration": "The Anglo-Zanzibar War of 1896 holds a bizarre record: just 38 minutes. After a British ultimatum expired, a swift naval bombardment crushed the Sultan's palace, forcing a surrender before noon. History's shortest conflict, over in a flash.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A wide, dramatic shot of a British Royal Navy cruiser, cannons blazing smoke and fire towards the ornate Sultan's Palace on Zanzibar's coastline. The sky is clear, sun high, showing chaos and immediate impact. Waves crash against the shore.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A medium shot inside the heavily damaged Sultan's Palace, thick smoke filling the grand hall as debris falls. Disheveled palace guards look stunned and defeated, raising hands in surrender. A palpable sense of swift, decisive defeat.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 1,
+  "music": "An intensely fast and percussive military march, building immediately with urgent snare drums and brass fanfare. The tempo is relentless, conveying a sense of rapid, decisive action and overwhelming force, ending abruptly mid-phrase to facilitate a seamless loop.",
+  "title_card": {
+    "title": "Anglo-Zanzibar War",
+    "subtitle": "Zanzibar, 1896"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+}

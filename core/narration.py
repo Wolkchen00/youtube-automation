@@ -1,5 +1,5 @@
 """
-Narration Generator — AIMagine Building Stories with Female Voice
+Narration Generator ,  AIMagine Building Stories with Female Voice
 
 Generates engaging narration scripts and converts to audio using
 Gemini TTS. Each build gets a different storytelling style for A/B testing.
@@ -19,7 +19,7 @@ from .env import GEMINI_API_KEY, PROJECT_ROOT, logger
 
 NARRATION_CACHE = PROJECT_ROOT / "assets" / "narration"
 
-# Different narration styles — A/B testing which resonates best
+# Different narration styles ,  A/B testing which resonates best
 NARRATION_STYLES = [
     {
         "name": "excited_reveal",
@@ -30,8 +30,8 @@ NARRATION_STYLES = [
             "Write a 20-second energetic narration for a construction timelapse video. "
             "The building is: {concept_name}. "
             "Hook: {hook}. "
-            "Style: Start with 'You won't believe what they built!' — build excitement "
-            "as the construction progresses — climax with the interior reveal. "
+            "Style: Start with 'You won't believe what they built!' ,  build excitement "
+            "as the construction progresses ,  climax with the interior reveal. "
             "Keep it punchy, use short sentences, lots of energy. "
             "MUST be under 60 words total. English only."
         ),
@@ -45,7 +45,7 @@ NARRATION_STYLES = [
             "Write a 20-second story narration for a construction timelapse video. "
             "The building is: {concept_name}. "
             "Hook: {hook}. "
-            "Style: Tell a mini-story — 'They said it couldn't be done...' "
+            "Style: Tell a mini-story ,  'They said it couldn't be done...' "
             "Build drama around the construction challenge, end with the beautiful reveal. "
             "Emotional, inspiring, cinematic feel. "
             "MUST be under 60 words total. English only."
@@ -60,7 +60,7 @@ NARRATION_STYLES = [
             "Write a 20-second soft, satisfying narration for a construction timelapse. "
             "The building is: {concept_name}. "
             "Hook: {hook}. "
-            "Style: Soft, calming, satisfying descriptions — 'Watch the concrete pour... "
+            "Style: Soft, calming, satisfying descriptions ,  'Watch the concrete pour... "
             "smooth... perfect...' Focus on textures, materials, the satisfaction of building. "
             "MUST be under 60 words total. English only."
         ),
@@ -74,7 +74,7 @@ NARRATION_STYLES = [
             "Write a 20-second hyped-up narration for a construction timelapse video. "
             "The building is: {concept_name}. "
             "Hook: {hook}. "
-            "Style: 'HERE WE GO! The foundation is IN! Walls going UP!' — "
+            "Style: 'HERE WE GO! The foundation is IN! Walls going UP!' ,  "
             "commentate like a sports play-by-play building to the big reveal. "
             "Fast, energetic, breathless excitement. "
             "MUST be under 60 words total. English only."
@@ -89,7 +89,7 @@ NARRATION_STYLES = [
             "Write a 20-second mysterious narration for a construction timelapse video. "
             "The building is: {concept_name}. "
             "Hook: {hook}. "
-            "Style: 'Something incredible is taking shape... but what is it?' — "
+            "Style: 'Something incredible is taking shape... but what is it?' ,  "
             "build mystery about what's being built, tease the reveal, "
             "then blow minds with the final result. "
             "MUST be under 60 words total. English only."
@@ -244,35 +244,36 @@ def create_narration_for_concept(
 
 CHANNEL_NARRATION_CONFIG = {
     "shadowedhistory": {
-        "voice": "Charon",  # Deep male voice — documentary
+        "voice": "Charon",  # Deep male voice ,  documentary
         "instruction": (
-            "Speak as a calm, authoritative documentary narrator. Deep, dramatic voice. "
-            "Build mystery and tension. Reveal historical secrets with gravitas. "
-            "Pause for dramatic effect between key revelations."
+            "Deliver hard historical facts fast, with a firm, confident voice. "
+            "State the claim itself in the first sentence. Use one short pause only, "
+            "immediately before the twist. Keep the pace tight for a roughly 16-second video. "
+            "No heavy documentary delivery and no long dramatic pauses."
         ),
     },
     "galactic_experiment": {
-        "voice": "Charon",  # Deep male voice — cosmic
+        "voice": "Charon",  # Deep male voice ,  cosmic
         "instruction": (
-            "Speak with wonder and awe about the cosmos. Warm, inspiring, philosophical. "
-            "Use dramatic pauses when revealing mind-blowing facts. "
-            "Sound like a narrator from a premium space documentary."
+            "Keep the voice warm and full of cosmic awe, but hold a tight pace for a roughly "
+            "18-second video. Use one short pause only at the scale-reveal moment. "
+            "State the claim itself in the first sentence and never let the delivery drag."
         ),
     },
     "aimagine": {
-        "voice": "Kore",  # Female voice — construction
+        "voice": "Kore",  # Female voice ,  construction
         "instruction": None,  # Uses existing NARRATION_STYLES
     },
     "sentinal_ihsan": {
         # İhsan geri bildirimi (2026-07-03, Night Archive P1): fısıltı ürkütücü/irite
-        # edici duruyor — "sessiz olsun ama fısıldamasın". Sakin ama NORMAL sesle anlat.
+        # edici duruyor ,  "sessiz olsun ama fısıldamasın". Sakin ama NORMAL sesle anlat.
         # Algieba = influencer personasıyla aynı ses (marka sesi tek).
-        "voice": "Algieba",  # Warm male voice — calm late-night storyteller
+        "voice": "Algieba",  # Warm male voice ,  calm late-night storyteller
         "instruction": (
-            "Speak in a calm, steady, first-person storyteller voice at NORMAL speaking volume — "
+            "Speak in a calm, steady, first-person storyteller voice at NORMAL speaking volume ,  "
             "like a man matter-of-factly recounting something strange that happened on his night "
             "shift. Measured pace, grounded and confident, subtle tension in the pauses only. "
-            "Do NOT whisper. No breathy or hushed delivery, no ASMR tone. Never shout either — "
+            "Do NOT whisper. No breathy or hushed delivery, no ASMR tone. Never shout either ,  "
             "just quiet, composed, natural speech."
         ),
     },
@@ -283,7 +284,7 @@ CHANNEL_NARRATION_CONFIG = {
         # çekim yapan adamın doğal konuşması. Fısıltı yasağı (2026-07-03) burada da geçerli.
         "voice": "Algieba",
         "instruction": (
-            "Speak like a real guy casually talking over a video he just shot on his phone — "
+            "Speak like a real guy casually talking over a video he just shot on his phone ,  "
             "first person, relaxed, mildly amused, completely natural and fluent. Conversational "
             "pace with tiny human imperfections: a brief pause mid-thought, a small exhale or "
             "half-chuckle where it fits, throwaway words like 'okay so...' delivered off-the-cuff. "
@@ -324,7 +325,7 @@ def create_narration_for_channel(
         return None, "none"
 
     if not narration_text or not narration_text.strip():
-        logger.warning("⚠️ Empty narration text — skipping")
+        logger.warning("⚠️ Empty narration text ,  skipping")
         return None, "none"
 
     if not GEMINI_API_KEY:

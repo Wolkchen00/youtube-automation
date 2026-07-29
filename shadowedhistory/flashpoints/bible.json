@@ -1,0 +1,28 @@
+{
+  "series": {
+    "slug": "flashpoints",
+    "title": "Flashpoints",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "title_card": true,
+    "hook_teaser": {
+      "enabled": false
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "The episode must communicate exactly one verified historical fact. No closing gesture, presentation pose, celebration, end card, or follow prompt may appear. No readable counterfeit text, logos, captions, or watermarks may be burned into the generated footage. Historical clothing, architecture, objects, and technology must match the stated time anchor. Graphic violence, blood, bodies, torture, and executions are automatic failures."
+    }
+  },
+  "art_style": "Photoreal cinematic period realism in vertical 9:16, with historically accurate clothing, architecture, tools and practical light; immediate hard visual clarity, tactile materials, close dramatic composition, natural human motion, no fantasy rendering, no on-screen text, no logos, no watermarks.",
+  "music": true,
+  "narration": {
+    "channel": "shadowedhistory"
+  },
+  "characters": [],
+  "environments": [],
+  "props": []
+}

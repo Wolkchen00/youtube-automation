@@ -1,0 +1,38 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Junk-Filled Backyard → Japanese Zen Garden ✨"
+  },
+  "synopsis": "A neglected, debris-filled backyard is meticulously transformed into a serene and minimalist Japanese Zen garden.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Medium shot of a cluttered backyard, half-cleared, with an old rusty bicycle frame and scattered pots still visible, contrasting with a freshly raked patch of fine white gravel in the foreground. Workers are carefully sifting soil, preparing the ground.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Dynamic wide shot, showing the rapid transformation: workers laying down weed barriers, carefully placing large, smooth river stones and shaping the landscape. A small, elegant wooden bridge is swiftly assembled over a dry stream bed. Time-lapse effect emphasizes the efficiency and precision.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Extreme close-up on gloved hands meticulously arranging small, smooth river pebbles around the base of a newly planted, perfectly pruned bonsai tree. Each stone is placed with intention, contributing to the balance and harmony of the miniature landscape. A gentle mist rises from a nearby sprinkler.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Serene wide shot revealing the completed Japanese Zen garden. A meticulously raked gravel \"ocean\" surrounds carefully placed, naturally sculpted rock formations. A delicate wooden bridge crosses a dry riverbed, and a small, vibrant bonsai tree adds a touch of life, all bathed in soft, golden hour sunlight. A single, distant figure meditates peacefully.",
+      "seed": null
+    }
+  ],
+  "family": "dönüşüm",
+  "music": "A contemplative and evolving percussive track, starting with a subtle, almost hesitant rhythm, then gradually introducing natural sounds and more defined beats as elements are placed, reflecting the methodical nature of the transformation. It softens into a serene, meditative flow for the final reveal, creating a peaceful, looping atmosphere.",
+  "hook_shot": 4,
+  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+}

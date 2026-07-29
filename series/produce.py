@@ -22,8 +22,18 @@ from core.kie_api import (
 )
 from core import ffmpeg_tools, cost_tracker
 
-from .bible import Bible, refs_dir, episode_dir, shots_dir, resolve_voice_id
+from .bible import (
+    Bible,
+    doctrine_path,
+    doctrine_repo_path,
+    doctrine_sha256,
+    refs_dir,
+    episode_dir,
+    shots_dir,
+    resolve_voice_id,
+)
 from .omni_api import register_audio, register_character, generate_omni_shot, build_omni_payload
+from .series_meta import SeriesMeta
 from .shots import resolve_shot, resolve_visual_shot, validate_plan, load_plan, plan_summary
 from . import credit_gate, critic, report
 from .voices import is_preset
@@ -504,6 +514,30 @@ def setup_references(slug: str, dry_run: bool = False) -> Bible | None:
 
 # ─── Bölüm üretimi ─────────────────────────────────────────────────────────────
 
+def _doctrine_gate(meta: SeriesMeta) -> str | None:
+    """Üretim öncesi doktrin dosyasını, içeriğini ve varsa pin'ini doğrula."""
+    path = doctrine_path(meta.slug)
+    if path is None:
+        logger.error(f"❌ HATA {meta.slug}: doktrin dosyası bulunamadı.")
+        return None
+    try:
+        text = path.read_bytes().decode("utf-8").replace("\r\n", "\n")
+    except (OSError, UnicodeError) as exc:
+        logger.error(f"❌ HATA {meta.slug}: doktrin okunamadı: {exc}")
+        return None
+    if not text.strip():
+        logger.error(f"❌ HATA {meta.slug}: doktrin dosyası boş.")
+        return None
+    digest = doctrine_sha256(path)
+    if "doctrine_sha256" in meta.data:
+        pinned = str(meta.data.get("doctrine_sha256") or "").strip().lower()
+        if pinned != digest:
+            logger.error(f"❌ HATA {meta.slug}: doctrine_sha256 pin'i güncel doktrinle eşleşmiyor.")
+            return None
+    logger.info(f"Doktrin: {doctrine_repo_path(path)} sha256={digest}")
+    return digest
+
+
 def produce_episode(slug: str, plan, dry_run: bool = False,
                     chain_start_url: str | None = None) -> Path | None:
     """Bir bölümü üret: çekimler → indir → birleştir → (anlatım/müzik) → rapor.
@@ -514,11 +548,29 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     başlangıç karesi olur; chain_start_url önceki BÖLÜMün son karesidir (parçalar arası).
     plan: dict veya episode_plan.json yolu.
     """
+    meta = SeriesMeta.load(slug)
+    if not meta:
+        return None
+    digest = _doctrine_gate(meta)
+    if digest is None:
+        return None
+
     bible = Bible.load(slug)
     if not bible:
         return None
     if isinstance(plan, (str, Path)):
         plan = load_plan(plan)
+    plan_digest = str(plan.get("doctrine_sha256") or "").strip().lower()
+    if "doctrine_sha256" in meta.data:
+        if not plan_digest:
+            logger.error(f"❌ HATA {slug}: pinli serinin planında doctrine_sha256 damgası yok.")
+            return None
+        if plan_digest != digest:
+            logger.error(f"❌ HATA {slug}: plan doktrin damgası güncel doktrinle eşleşmiyor.")
+            return None
+    elif plan_digest and plan_digest != digest:
+        logger.error(f"❌ HATA {slug}: legacy plan doktrin damgası güncel doktrinle eşleşmiyor.")
+        return None
 
     number = plan.get("episode", {}).get("number", 1)
     default_engine = bible.engine

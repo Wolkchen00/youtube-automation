@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "How Oxford Outlived Empires In 1096!"
+  },
+  "synopsis": "Oxford University began teaching centuries before the Aztec Empire was founded, making it older than many ancient civilizations.",
+  "narration": "It's a true mind-bender: Oxford University, teaching since around 1096, is actually older than the entire Aztec Empire. While monumental pyramids rose in Mesoamerica, scholars were already debating within Oxford's ancient halls.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A bustling medieval lecture hall at Oxford, circa 1100s. Sunlight streams through arched windows onto robed scholars intently listening to an aged lecturer pointing to a large illuminated manuscript. The air is thick with intellectual energy.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A sweeping, majestic panorama of Tenochtitlan at its peak, circa 1400s. Intricate stone pyramids and bustling causeways are visible, vibrant life and impressive architecture under a clear, powerful sun. The shot emphasizes its peak grandeur.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 2,
+  "music": "A driving, intellectual, percussive score with medieval instrument influences, then shifting to a more grand, ancient civilization feel. It evokes the passage of vast time, with an underlying current of wonder and discovery, ending on a thought-provoking rhythm.",
+  "title_card": {
+    "title": "Oxford University vs. Aztecs",
+    "subtitle": "Europe & Mesoamerica, 1096 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+}

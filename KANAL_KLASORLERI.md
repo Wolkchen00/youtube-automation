@@ -12,14 +12,18 @@ Youtube/
 │   ├── night-archive/  night-shift/  room-408/  the-signal/  time-witness/
 │   └── the-sleepwalkers/   (draft — git'e GİRMEZ, bilerek untracked)
 ├── aimagine/             # profil: Youtube
-│   ├── the-vast/           (aktif)
+│   ├── from-scratch/       (aktif, approval)
+│   ├── the-vast/           (paused)
 │   ├── infinite-trip/  the-drift/
-├── galactic_experience/  # profil: galacticexperimet — HENÜZ BOŞ, aşağıya bak
+├── galactic_experience/  # profil: galacticexperimet
+│   ├── event-horizon/      (aktif, approval)
+│   ├── planetfall/         (paused, replenish kapalı)
+│   └── ava-voyage/         (completed)
 ├── shadowedhistory/      # profil: shad0wedhistory
-│   ├── footnotes/          (aktif)
+│   ├── flashpoints/        (aktif, approval)
+│   ├── footnotes/          (paused)
 │   ├── drowned-history/  secrets-anatolia/
-├── series_data/          # ESKİ konum — sadece galactic serileri kaldı
-│   ├── planetfall/  ava-voyage/
+├── series_data/          # boş; yeni seri kurulumunda geçici konum
 └── core/ series/ .github/ output/ ...   # motor (dokunma)
 ```
 
@@ -33,17 +37,9 @@ değişikliği gerekmez. Workflow'lar (`git add`) beş klasörü de commit'ler.
 Yeni seri kurulumu varsayılan olarak `series_data/` altında açılır; kurulum
 bitince ilgili kanal klasörüne `git mv` ile alın.
 
-## GALACTIC TAŞIMASI — paralel oturuma not
+## GALACTIC TAŞIMASI
 
-`planetfall` (aktif, 12/15) ve `ava-voyage` şu an galactic üzerinde çalışan
-oturum yüzünden BİLEREK taşınmadı (İhsan kararı: "galactic'i en son taşıyın").
-Galactic işin bitince şunu çalıştır ve commit'le:
-
-```
-git mv series_data/planetfall  galactic_experience/planetfall
-git mv series_data/ava-voyage  galactic_experience/ava-voyage
-```
-
-Taşıma sonrası `series_data/` boşalır ve silinebilir (git boş klasörü zaten
-izlemez). İSTERSEN `series/bible.py` içindeki `SERIES_DATA_DIR` geriye-uyum
-kodu da kalabilir — zararı yok, yeni seri kurulumunda hâlâ kullanılıyor.
+2026-07-29 tarihinde `planetfall` ve `ava-voyage`, `git mv` ile
+`galactic_experience/` altına taşındı. `series_data/` artık boştur ve yeni seri
+kurulumunda geçici konum olarak kalır. `series/bible.py` içindeki geriye uyum
+kodu bu kurulum akışı için korunur.

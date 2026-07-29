@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Sun and Moon: The Eclipse Coincidence"
+  },
+  "synopsis": "This episode explores the improbable cosmic alignment that allows for perfect total solar eclipses on Earth.",
+  "narration": "Total solar eclipses are a cosmic fluke. The Sun is precisely 400 times wider than the Moon, and coincidentally, also 400 times farther away from Earth. This perfect alignment creates the stunning spectacle of a perfectly covered Sun, a rare celestial dance.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "The majestic Sun, a fiery orb of plasma, flares and churns with solar activity, seen from a distance that reveals its immense scale. Streaks of solar winds emanate outward into the deep blackness of space. Camera slowly zooms in on a prominent solar flare.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "The Moon, a dark, silhouetted sphere, slowly glides perfectly across the Sun's face, revealing the stunning corona and Baily's beads just before totality. The camera is positioned from Earth's perspective, emphasizing the perfect, miraculous alignment.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Pull back to a wide shot showing the Sun and Moon in their relative positions, now slightly separated post-eclipse. The camera is situated to show Earth as a distant, serene blue marble, reinforcing the unique vantage point for this celestial coincidence. The Moon subtly drifts back towards its pre-eclipse position, looping back to shot 1.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 4,
+  "music": "A majestic, awe-driven cosmic underscore with a steady, anticipatory pulse, building to a grand, shimmering swell as the eclipse peaks. The music should evoke wonder and the precision of cosmic mechanics, ending mid-phrase to facilitate a continuous loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+}

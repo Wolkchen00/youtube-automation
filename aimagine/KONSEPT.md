@@ -1,4 +1,4 @@
-# AIMAGINE, KANAL KONSEPT DOKTRİNİ v1.3
+# AIMAGINE, KANAL KONSEPT DOKTRİNİ v1.4
 **Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
 **v1.1 (aynı gün, Codex Same Page turu 1):** hook_teaser loop kuralı netleşti; humans
 "allowed" oldu (featured tekrarlayan başrol demek, motor gerçeği); kelime yerine müzik odaklı
@@ -8,6 +8,9 @@ kanonik enum + ardışıklık RED; §6 açıkça KONU listesi oldu; güvenlik ma
 sabitlendi; doctrine_sha256 pin'i.
 **v1.3 (aynı gün, turu 3):** plan damgası eklendi (doktrin revizyonu bekleyen planları
 geçersizleştirir); sürüm hizalaması (bu kanalda topic_pool YOK, kurgu serbest).
+**v1.4 (aynı gün, Level 10):** çekim süresi 7 sn → 8 sn (Kie gemini-omni-video resmi şeması
+duration'ı 4/6/8/10 enum'una kilitliyor, 7 YOK; bölüm ~32 sn oldu, 24-32 bandının üst ucu;
+kanal verisi bandın uzun ucunu ödüllendiriyor).
 **Kanal:** `UCCgbHTzYKYawUT6zEo0nlDg` · @aimagine_._357 (S3 kararı: ana kanal budur;
 @aimagineasmr ARŞİV, dokunulmaz) · upload_profile: `Youtube` · anlatım: YOK (müzik + görsel)
 
@@ -42,15 +45,16 @@ izlenme, 100 abone, 30 günlük medyan 12.
 - **Politika:** onay modu + gerçek varyasyon + AI disclosure; kürasyonlu günde 1 tavan.
 - **Tek ödül ilkesi:** dört kanalın ortak dersi; bölüm tek vaat kurar, tek ödül verir.
 
-## 3. KONSEPT: "FROM SCRATCH", 28 saniyede imkânsız inşaat
+## 3. KONSEPT: "FROM SCRATCH", 32 saniyede imkânsız inşaat
 
 **Konumlandırma:** Her bölüm, gerçekte var olmayan ya da kimsenin bahçesine sığmayacak TEK
 yapıyı sıfırdan inşa eder ve TEK reveal ile ödüllendirir: pop-kültür üsleri, fantezi konutlar,
-absürt eğlence mimarisi. Kanal vaadi: **"Hayalindeki yapı, 28 saniyede temelden çatıya."**
+absürt eğlence mimarisi. Kanal vaadi: **"Hayalindeki yapı, 32 saniyede temelden çatıya."**
 
 **Formül:** tek yapı + ilk karede yarı-bitmiş kanca + hızlanan inşa + TEK reveal + loop.
 
-### 3.1 İmza format, DÖRT ÇEKİM (4 × 7 sn = ~28 sn)
+### 3.1 İmza format, DÖRT ÇEKİM (4 × 8 sn = ~32 sn; motor gerçeği: Kie Omni süresi 4/6/8/10
+enum'udur, ara değer yoktur)
 
 | Çekim | Adı | Kural |
 |-------|-----|-------|
@@ -118,7 +122,7 @@ YASAK. Yapı dört çekimde de aynı arsa/açı mantığında kalır (mekan tuta
 | Metrik | Sağlıklı | Alarm | Ölçüm kaynağı |
 |--------|----------|-------|---------------|
 | İlk ≥48 saat snapshot izlenmesi (bölüm başına; yayının 48. saatinden SONRAKİ ilk günlük snapshot) | Building bandına tırmanış (1.000+) | <100 kalıcı → ilk kare kancası zayıf | analytics_data/daily (seri-bazlı medyan FAZ 4'e kadar MANUEL, published.json eşlemesiyle) |
-| Ortalama izlenme yüzdesi (APV) | ≥%85 (28 sn'de) | <%65 → tempo çekimi sarkıyor, reveal geç | ÖLÇÜLEMEZ API katmanında; YouTube Studio'dan haftalık MANUEL bakış |
+| Ortalama izlenme yüzdesi (APV) | ≥%85 (32 sn'de) | <%65 → tempo çekimi sarkıyor, reveal geç | ÖLÇÜLEMEZ API katmanında; YouTube Studio'dan haftalık MANUEL bakış |
 | APV >%100 (loop/rewatch VEKİLİ; doğrudan loop ölçümü değildir) | >%100 hedef | kutlama jesti sızmış mı denetle | ÖLÇÜLEMEZ; Studio'dan MANUEL |
 
 - **Kill gate:** 25 bölüm sonunda medyan <500 VE tavan <5K → aile ağırlıkları değişir (kanal
@@ -154,9 +158,9 @@ YASAK. Yapı dört çekimde de aynı arsa/açı mantığında kalır (mekan tuta
   `upload_profile: Youtube`, `publish_mode: approval`, `status: active`, `priority: 999`,
   `total_parts: 0`, `next_part: 1` (ilk replenish part 1'den başlasın), platformlar
   youtube+instagram+tiktok, hashtag §3.5.
-- auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 4, shot_seconds: "7",
+- auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 4, shot_seconds: "8",
   music_prompt: true, humans: allowed}` (allowed: eller/ekip görünür ama tekrarlayan başrol
-  yok; "featured" bible karakteri gerektirir, motor gerçeği)
+  yok; "featured" bible karakteri gerektirir, motor gerçeği; süre Kie enum gerçeği gereği 8 sn)
   + `families`: ["oyun/film üsleri", "fantezi konutlar", "absürt eğlence mimarisi",
   "dönüşüm", "saklı/mühendislik harikası"] (kanonik enum; doğrulayıcı dışını RED eder,
   ardışık aynı aile RED)

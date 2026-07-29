@@ -1,4 +1,4 @@
-# GALACTIC EXPERIMENTS, KANAL KONSEPT DOKTRİNİ v1.3
+# GALACTIC EXPERIMENTS, KANAL KONSEPT DOKTRİNİ v1.4
 **Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
 **v1.1 (aynı gün, Codex Same Page turu 1):** hook_teaser kapatıldı (loop bütünlüğü); planetfall
 emekliliği paused + replenish-kapalı olarak düzeltildi (completed diriltilir, motor gerçeği);
@@ -11,6 +11,9 @@ doctrine_sha256 pin'i; hat açma ön koşulu havuz ≥25; 2 tohum netleştirildi
 (id+topic+family; prompt'a runtime enjekte edilir); plan damgası eklendi (doktrin revizyonu
 bekleyen planları geçersizleştirir); #15 kartı prosedürü: önce doktrin listesi, sonra
 topic_pool + pin.
+**v1.4 (aynı gün, Level 10 canlı kanıt):** anlatım bütçesi kuralı netleşti: hedef aralık
+prompt'ta aynen; doğrulayıcı miksör payıyla kabul eder (min×0.85 .. max×1.15; TTS miksörü
+1.15x hızlandırmayı karşılar). Plan damgası gereği eski planlar yeniden üretildi.
 **Kanal:** `UCVCRWrQYrIHW6csOsw9bDNw` · @galacticexperiment-x6l · upload_profile: `galacticexperimet`
 (profil adındaki yazım Upload-Post kaydının kendisidir, DÜZELTME) · narration register:
 `galactic_experiment` · repo klasörü: `galactic_experience/`
@@ -181,8 +184,8 @@ motor iki konumu da tanıdığı için kod değişikliği gerekmez).
   `priority: 999`, `total_parts: 0`, `next_part: 1` (ilk replenish part 1'den başlasın),
   platformlar youtube+instagram+tiktok, hashtag §3.6.
 - auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 3, shot_seconds: "6",
-  music_prompt: true, narration: {min_words: 30, max_words: 44}}` (bütçe doğrulayıcıda
-  BİREBİR uygulanır)
+  music_prompt: true, narration: {min_words: 30, max_words: 44}}` (hedef aralık prompt'ta;
+  doğrulayıcı miksör payıyla kabul eder: 25-51)
   + `families`: ["güneş sistemi uçları", "kozmik kader", "derin uzay canavarları",
   "cehennem gezegenler", "ölçek şoku", "bilim temelli what-if"] (kanonik enum; doğrulayıcı
   dışını RED eder, ardışık aynı aile RED)

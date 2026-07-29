@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Napoleon: The Average-Sized Emperor"
+  },
+  "synopsis": "The widespread belief in \"tiny Napoleon\" is a myth, largely fueled by British propaganda during his era.",
+  "narration": "Forget the myth of \"Tiny Napoleon.\" French measurements showed him to be average height for his era, around 5'6\". The image of a diminutive emperor was largely crafted by British propaganda, a strategic smear campaign.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Napoleon Bonaparte, in his iconic green uniform and bicorne hat, standing confidently at the center of his Imperial Guard. He appears commanding, his height proportionate to the average-sized soldiers around him, amidst a grand, formal setting.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Napoleon Bonaparte, standing on a battlefield during a strategic meeting, engaged in conversation with several of his marshals and aides. All individuals, including Napoleon, appear to be of similar, average height, demonstrating the contemporary norm without exaggeration.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 11,
+  "music": "A grand, authoritative, yet slightly mischievous classical-inspired underscore. Percussive and driving, it builds with a sense of historical gravitas, then subtly shifts to a more questioning or revealing tone, ending with a clever, abrupt flourish.",
+  "title_card": {
+    "title": "Napoleon Bonaparte's Height",
+    "subtitle": "Europe, Early 1800s"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+}

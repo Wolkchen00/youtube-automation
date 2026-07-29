@@ -1,0 +1,38 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Building An AVATAR Treehouse From SCRATCH! 🛠️✨"
+  },
+  "synopsis": "Visionary builders construct an ethereal, bioluminescent treehouse deeply integrated within the roots and branches of a massive, otherworldly tree.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Medium shot, late dusk, of a partially constructed, organic-shaped treehouse structure nestled within the winding, glowing roots of an immense, fantastical tree. Workers, wearing glowing safety vests, are attaching translucent, flexible panels that begin to faintly emit soft blue light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Sweeping drone shot at night, showcasing the rapid construction of multiple bioluminescent platforms and walkways spiraling up the gigantic tree trunk. Time-lapse effect shows the glowing organic material forming walls and railings, connecting different levels, creating a mesmerizing, otherworldly spectacle of light and form.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close-up on a skilled hand carefully weaving glowing, fibrous plant material into a living wall panel. The fibers softly pulse with internal light, creating intricate patterns as they are integrated into the structure, demonstrating the unique, living architecture.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Breathtaking wide shot at night, revealing the fully completed AVATAR-inspired treehouse. It glows with an intricate network of soft blues, purples, and greens, seamlessly integrated into the enormous tree. Figures (distant, indistinct) can be seen moving within, and glowing flora surrounds the base, creating a truly magical, living dwelling that perfectly loops back to the soft glow of shot 1.",
+      "seed": null
+    }
+  ],
+  "family": "fantezi konutlar",
+  "music": "An organic and ethereal percussive soundscape, featuring subtle, resonant hits and shimmering, otherworldly textures, building a sense of natural wonder and growth. The rhythm is fluid and captivating, reaching a peak of magical intensity before a brief, gentle breath, then blooming into an expansive, looping melody imbued with bioluminescent warmth for the final reveal.",
+  "hook_shot": 4,
+  "doctrine_sha256": "805bc22fedb34009edcbd413459c6c49ea23f168e5d7b40084261bdda1a3195c"
+}

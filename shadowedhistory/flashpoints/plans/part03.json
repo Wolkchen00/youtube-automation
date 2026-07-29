@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Roman Concrete: Fact Or Ancient Propaganda?"
+  },
+  "synopsis": "Modern science in 2023 confirmed that Roman concrete possesses a self-healing capability, thanks to its unique composition.",
+  "narration": "Roman concrete's legendary durability isn't just myth. In 2023, MIT confirmed its secret: lime clasts. These tiny fragments react with water, self-healing cracks over time. An ancient engineering marvel, still baffling us today.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Roman engineers intently mixing materials and pouring concrete into massive wooden forms at a construction site for a grand public building. Dust motes dance in the sunlight, showing the scale and physical effort of the work.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "An extreme, macro close-up of a section of Roman concrete. Fine, hairline cracks are visible, with tiny, bright white lime clasts within them. A subtle, almost imperceptible visual of the cracks seemingly closing over time, implying the self-healing process.",
+      "seed": null
+    }
+  ],
+  "family": "imkânsız mühendislik",
+  "seed_id": 5,
+  "music": "A rhythmic, industrial-percussive track, hinting at intricate ancient construction and modern scientific discovery. It has a slightly mysterious, intelligent feel, building with a sense of revelation and continuing with a steady, complex groove.",
+  "title_card": {
+    "title": "Roman Concrete's Secret",
+    "subtitle": "Ancient Rome / MIT, 2023 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877"
+}

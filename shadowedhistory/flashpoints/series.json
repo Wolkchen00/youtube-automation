@@ -1,0 +1,111 @@
+{
+  "slug": "flashpoints",
+  "base_title": "Shadowed History",
+  "logline": "One verified historical shock, delivered in the hardest 14 seconds in the feed.",
+  "language": "en",
+  "upload_profile": "shad0wedhistory",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #history #historyfacts #didyouknow",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "active",
+  "priority": 999,
+  "total_parts": 5,
+  "next_part": 1,
+  "doctrine_sha256": "0a84a2210899afac9797382e7acacb1342005d8290303be580094fcab9130877",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 2,
+    "shot_seconds": "8",
+    "title_card": true,
+    "music_prompt": true,
+    "humans": "historical",
+    "narration": {
+      "min_words": 26,
+      "max_words": 38
+    },
+    "families": [
+      "yanılgı kırıcı",
+      "imkânsız mühendislik",
+      "tuhaf savaş",
+      "unutulmuş kişi",
+      "efsane vs kayıt",
+      "zaman çarpması"
+    ],
+    "music_style": "Fast, tense, percussive underscore that hits with the opening claim and drives without pause; no slow or ethereal intro, no gentle outro; end mid-groove so the loop is seamless.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "The Anglo-Zanzibar War of 1896 lasted roughly 38 to 45 minutes, history's shortest war.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 2,
+        "topic": "Oxford University is older than the Aztec Empire, teaching since ~1096.",
+        "family": "zaman çarpması"
+      },
+      {
+        "id": 3,
+        "topic": "Cleopatra lived closer in time to the Moon landing than to the Great Pyramid.",
+        "family": "zaman çarpması"
+      },
+      {
+        "id": 4,
+        "topic": "Woolly mammoths were still alive on Wrangel Island while the pyramids were built.",
+        "family": "zaman çarpması"
+      },
+      {
+        "id": 5,
+        "topic": "Roman concrete heals its own cracks with lime clasts, confirmed by MIT in 2023.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 6,
+        "topic": "The Eiffel Tower had a 20-year permit; a radio antenna saved it in 1909.",
+        "family": "efsane vs kayıt"
+      },
+      {
+        "id": 7,
+        "topic": "Hiroo Onoda kept fighting World War 2 in the Philippines until 1974.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 8,
+        "topic": "Tree rings from a solar storm date the Viking camp in Newfoundland to exactly 1021.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 9,
+        "topic": "In the 1830s, American quacks marketed tomato extract as medicine, even as tomato pills.",
+        "family": "yanılgı kırıcı"
+      },
+      {
+        "id": 10,
+        "topic": "In 1932, Australia deployed soldiers with Lewis machine guns against emus; the cull failed and the birds stayed.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 11,
+        "topic": "Napoleon was average height for his era; \"tiny Napoleon\" was British propaganda.",
+        "family": "yanılgı kırıcı"
+      },
+      {
+        "id": 12,
+        "topic": "The Great Fire of London in 1666 destroyed 13,200 houses; traditional accounts name only six victims, though the true toll was likely higher.",
+        "family": "efsane vs kayıt"
+      }
+    ],
+    "title_style": "a punchy English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) 'The Real Reason <subject> <did X>', (2) 'How <subject> <impossible feat> In <YEAR>!', (3) '<Subject>: Fact Or Ancient Propaganda?', (4) '<Subject>: The <striking epithet>'. No emoji, no hashtags, no surrounding quotes.",
+    "brief": "FLASHPOINTS üretim brief'i (dayanak: shadowedhistory/KONSEPT.md v1.6, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, narration, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: İki çekim vardır, toplam yaklaşık 12 sn. shot 1 ÇARPMA: faktın en görsel anının ortasında soğuk açılış; ilk kare konuyu ve tuhaflığı tek başına okutur; establishing shot, harita üstünde yavaş zoom ve atmosfer kurulumu yasak. shot 2 KANIT/BÜKÜM: en tuhaf detay veya sonuç, shot 1'den daha yakın ve sert; kompozisyon ilk kareye rimlenir, eylem sürerken biter. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: yanılgı kırıcı, imkânsız mühendislik, tuhaf savaş, unutulmuş kişi, efsane vs kayıt, zaman çarpması. Aynı aile üst üste iki bölümde kullanılamaz. (3) DOĞRULUK: Fakt gerçek ve yaygın kaynaklarla doğrulanabilir olmalı; sayı uydurulamaz. Her bölümde 4 haneli yıl veya 'X BC/AD' çağı veya yüzyıl biçiminde zaman çıpası bulunur. Konu yalnız runtime enjekte edilen topic_pool girdilerinden seçilir; her partta tam sayı seed_id zorunludur ve yalnız o tohumun konusu ile family değeri kullanılır. Tohum listesi bu brief'te yer almaz. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; rage-bait ve milliyetçi kışkırtma yasak. (5) SES: Narration 26-38 kelimedir; ilk cümle iddianın kendisidir. Selamlama, CTA ve 'did you know' yasak. (6) LOOP DİKİŞİ: Son kompozisyon ilk kareye döner; kapanış kartı, sunum jesti, kutlama ve follow-for-more hareketi yasak. (7) GÜVENLİK: Kan, ceset, işkence ve infaz görseli yok; savaş ve felaket grafik şiddet göstermeden anlatılır. (8) MÜZİK: Hızlı, gergin, perküsif; açılış iddiasıyla vurur, duraksamadan ilerler ve kesintisiz loop için ritmin ortasında biter.",
+    "last_run": {
+      "at": "2026-07-29T15:04:08.272224+00:00",
+      "parts": "1-5"
+    }
+  }
+}

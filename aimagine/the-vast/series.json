@@ -14,7 +14,7 @@
   "priority": 10,
   "total_parts": 15,
   "next_part": 14,
-  "status": "active",
+  "status": "paused",
   "publish_mode": "auto",
   "auto_replenish": {
     "enabled": true,

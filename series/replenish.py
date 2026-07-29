@@ -1,9 +1,9 @@
 """
-Oto-ikmal (auto-replenish) — 'sonsuz içerik' motoru.
+Oto-ikmal (auto-replenish) ,  'sonsuz içerik' motoru.
 
 Plan kuyruğu azalan serilere Gemini yönetmeniyle YENİ part planları yazar
-(<seri-veri-klasörü>/plans/partNN.json — konum bible.data_dir(slug)), total_parts'ı büyütür ve makinenin
-'completed'e düşürdüğü seriyi yeniden 'active' yapar. Kie kredisi HARCAMAZ —
+(<seri-veri-klasörü>/plans/partNN.json ,  konum bible.data_dir(slug)), total_parts'ı büyütür ve makinenin
+'completed'e düşürdüğü seriyi yeniden 'active' yapar. Kie kredisi HARCAMAZ , 
 yalnız ücretsiz Gemini text çağrısı (planlama), üretim yine series_runner'da.
 
 Kurallar:
@@ -13,7 +13,7 @@ Kurallar:
     DURDURMA ANAHTARI: status="paused" veya auto_replenish.enabled=false.
   • Var olan plan dosyasının üzerine ASLA yazılmaz; koşu başına en fazla 1 batch.
   • Yarıda çökme güvenliği: önce plan dosyaları yazılır, sayaç SONRA güncellenir;
-    ortada kalan dosyalar bir sonraki koşuda sahiplenilir (_adopt_orphans) —
+    ortada kalan dosyalar bir sonraki koşuda sahiplenilir (_adopt_orphans) , 
     Gemini çıktısı asla çöpe gitmez, yeniden istenmez.
 
 series.json şeması:
@@ -49,7 +49,7 @@ if _ROOT not in sys.path:
 
 from core.config import GEMINI_API_KEY, logger
 from series import notifier
-from series.bible import Bible
+from series.bible import Bible, doctrine_path, doctrine_repo_path, doctrine_sha256
 from series.series_meta import SeriesMeta, part_plan_path, plans_dir
 from series.shots import validate_plan
 
@@ -86,7 +86,7 @@ def _gen_json(contents: str, system_instruction: str,
     """Gemini'den JSON iste. Bozuk JSON → aynı modelde tekrar; 429/503 → backoff;
     model ölürse yedek modele geç."""
     if not GEMINI_API_KEY:
-        raise RuntimeError("GEMINI_API_KEY tanımlı değil — oto-ikmal için gerekli.")
+        raise RuntimeError("GEMINI_API_KEY tanımlı değil ,  oto-ikmal için gerekli.")
     from google import genai
     from google.genai import types
 
@@ -105,7 +105,7 @@ def _gen_json(contents: str, system_instruction: str,
             except Exception as e:
                 last_err = e
                 msg = str(e)
-                # Bozuk JSON şans işidir — AYNI modelden taze üretim genelde geçer;
+                # Bozuk JSON şans işidir ,  AYNI modelden taze üretim genelde geçer;
                 # yedek modeli buna harcama.
                 bad_json = isinstance(e, json.JSONDecodeError)
                 transient = any(s in msg for s in
@@ -114,7 +114,7 @@ def _gen_json(contents: str, system_instruction: str,
                 if (transient or bad_json) and attempt < max_tries:
                     wait = 3 if bad_json else min(5 * attempt, 20)
                     label = "bozuk JSON" if bad_json else "geçici hata"
-                    logger.warning(f"⚠️ ikmal {model} {label} ({msg[:60]}…) — {wait}s sonra tekrar")
+                    logger.warning(f"⚠️ ikmal {model} {label} ({msg[:60]}…) ,  {wait}s sonra tekrar")
                     time.sleep(wait)
                     continue
                 logger.warning(f"⚠️ ikmal {model} başarısız: {msg[:120]}")
@@ -123,7 +123,7 @@ def _gen_json(contents: str, system_instruction: str,
 
 
 def _alert(msg: str) -> None:
-    """Telegram'a sessizce bildir (token yoksa no-op) — series_runner._alert eşleniği."""
+    """Telegram'a sessizce bildir (token yoksa no-op) ,  series_runner._alert eşleniği."""
     try:
         if notifier.enabled():
             notifier.send_message(msg)
@@ -139,7 +139,7 @@ def _norm_title(t: str) -> str:
 
 
 def _episode_history(slug: str) -> list[dict]:
-    """plans/partNN.json → [{"n","title","synopsis"}] sıralı. synopsis alanı yoksa
+    """Plan geçmişini başlık, özet, seed_id ve family alanlarıyla sıralı döndür. Özet yoksa
     (eski elle yazılmış planlar) ilk çekim prompt'unun başı özet sayılır."""
     out: list[dict] = []
     pdir = plans_dir(slug)
@@ -157,7 +157,9 @@ def _episode_history(slug: str) -> list[dict]:
             if shots:
                 syn = str((shots[0] or {}).get("prompt") or "").strip()[:140]
         out.append({"n": ep.get("number"), "title": str(ep.get("title") or "").strip(),
-                    "synopsis": syn})
+                    "synopsis": syn, "seed_id": plan.get("seed_id"),
+                    "family": str(plan.get("family") or "").strip()})
+    out.sort(key=lambda item: int(item["n"]) if isinstance(item.get("n"), int) else -1)
     return out
 
 
@@ -173,6 +175,53 @@ def _adopt_orphans(meta: SeriesMeta) -> int:
     if n:
         meta.data["total_parts"] = total
     return n
+
+
+def _doctrine_gate(meta: SeriesMeta) -> str | None:
+    """Doktrin dosyasını, içeriğini ve varsa pin'ini doğrula; başarıda hash döndür."""
+    path = doctrine_path(meta.slug)
+    if path is None:
+        logger.error(f"❌ HATA {meta.slug}: doktrin dosyası bulunamadı.")
+        return None
+    try:
+        text = path.read_bytes().decode("utf-8").replace("\r\n", "\n")
+    except (OSError, UnicodeError) as exc:
+        logger.error(f"❌ HATA {meta.slug}: doktrin okunamadı: {exc}")
+        return None
+    if not text.strip():
+        logger.error(f"❌ HATA {meta.slug}: doktrin dosyası boş.")
+        return None
+    digest = doctrine_sha256(path)
+    if "doctrine_sha256" in meta.data:
+        pinned = str(meta.data.get("doctrine_sha256") or "").strip().lower()
+        if pinned != digest:
+            logger.error(f"❌ HATA {meta.slug}: doctrine_sha256 pin'i güncel doktrinle eşleşmiyor.")
+            return None
+    logger.info(f"Doktrin: {doctrine_repo_path(path)} sha256={digest}")
+    return digest
+
+
+def _topic_pool(cfg: dict) -> dict[int, dict]:
+    """Yapılandırılmış konu havuzunu id ile indeksle."""
+    pool: dict[int, dict] = {}
+    for item in cfg.get("topic_pool") or []:
+        if not isinstance(item, dict):
+            continue
+        seed_id = item.get("id")
+        if not isinstance(seed_id, int) or isinstance(seed_id, bool):
+            continue
+        pool[seed_id] = item
+    return pool
+
+
+def _unused_topics(cfg: dict, history: list[dict]) -> list[dict]:
+    """Mevcut planlarda kullanılmamış havuz girdilerini sıra korunarak döndür."""
+    used: set[int] = set()
+    for item in history:
+        seed_id = item.get("seed_id")
+        if isinstance(seed_id, int) and not isinstance(seed_id, bool):
+            used.add(seed_id)
+    return [item for seed_id, item in _topic_pool(cfg).items() if seed_id not in used]
 
 
 # ─── Gemini yönetmen promptu ───────────────────────────────────────────────────
@@ -207,6 +256,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
+    families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
+    pool = _topic_pool(cfg)
     humans_mode = str(cfg.get("humans") or "").strip().lower()
     humans_historical = humans_mode == "historical"
     humans_featured = humans_mode == "featured"
@@ -226,7 +277,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     elif humans_present:
         # Anlatımsız ama İNSANLI seri (the__footnote formatı): tek ses = müzik.
         head = (f"You are the showrunner of an endless, NARRATION-FREE vertical (9:16) Shorts series told\n"
-                f"through SILENT cinematic shots — the musical score is the only sound.\n"
+                f"through SILENT cinematic shots ,  the musical score is the only sound.\n"
                 f"Every episode is a STANDALONE ~{shots * int(sec)}-second piece: {shots} consecutive shots (each ONE\n"
                 f"continuous moment of {sec} seconds). No dialogue, no narration, no lip-sync.")
         narr_shape = '""'
@@ -234,7 +285,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         head = (f"You are the showrunner of an endless, VISUAL-ONLY vertical (9:16) YouTube Shorts series.\n"
                 f"Every episode is a STANDALONE ~{shots * int(sec)}-second visual trip: {shots} consecutive shots (each ONE\n"
                 f"continuous moment of {sec} seconds) that morph seamlessly into one another. No dialogue,\n"
-                f"no narration, no characters — pure visuals.")
+                f"no narration, no characters ,  pure visuals.")
         narr_shape = '""'
 
     tc_shape = ('\n   "title_card": {"title": "<subject name, max 40 chars>", '
@@ -249,35 +300,41 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     if want_fc:
         shot_fields += ', "fact": "<2-5 word on-screen fact, optional>"'
 
-    title_rule = title_style or ('2-4 words, poetic, curiosity-driven — the title IS the YouTube title of a\n'
+    title_rule = title_style or ('2-4 words, poetic, curiosity-driven ,  the title IS the YouTube title of a\n'
                                  '  standalone video (like "Bloom" or "The Last Door"). No drug slang, no clickbait\n'
                                  '  punctuation.')
-    narr_rule = (f"\n- NARRATION: {wmin}-{wmax} words of spoken English voice-over for the WHOLE episode — "
+    narr_rule = (f"\n- NARRATION: {wmin}-{wmax} words of spoken English voice-over for the WHOLE episode ,  "
                  f"flowing prose, no camera directions, no shot numbers; follow the CREATIVE BRIEF strictly."
                  if narrated else "")
     tc_rule = ('\n- TITLE_CARD: "title" = the subject/site name (max 40 chars); "subtitle" = place and year '
                'exactly as the CREATIVE BRIEF instructs (max 48 chars).' if want_tc else "")
-    fact_rule = ('\n- FACT_CAPTIONS: give a "fact" to 2-4 shots — a punchy 2-5 word hard fact from the entry '
+    fact_rule = ('\n- FACT_CAPTIONS: give a "fact" to 2-4 shots ,  a punchy 2-5 word hard fact from the entry '
                  'that is literally on screen in THAT shot (a depth, an age, a count, a death toll, a date), '
                  'e.g. "45 METERS DEEP", "2,000 YEARS OLD", "ONE DIVER DIED". They are burned low on screen '
                  'while the viewer watches. NO "fact" on the final resolve shot; omit "fact" where the shot '
-                 'shows nothing concrete. NEVER invent a number — every fact must come from the brief entry.'
+                 'shows nothing concrete. NEVER invent a number ,  every fact must come from the brief entry.'
                  if want_fc else "")
+    music_style = str(cfg.get("music_style") or "").strip()
     music_rule = ('\n- MUSIC: "music" = a 40-90 word ENGLISH prompt for an AI music generator, composed '
                   'TOGETHER with the visuals so score and image share one soul: name genre, mood, 2-4 '
                   'instruments, rough tempo (slow/glacial), and an arc that mirrors the episode (open '
                   'atmospheric → swell → sustained emotional peak → gentle end). INSTRUMENTAL only, no '
                   'vocals, no drums unless the scene demands a pulse. The track starts playing from its '
-                  'very first second, so it must open with immediate atmosphere — no long silent intro. '
+                  'very first second, so it must open with immediate atmosphere ,  no long silent intro. '
                   'Each episode gets a CLEARLY different musical color (vary instruments/scale/texture).'
                   if want_music else "")
+    if want_music and music_style:
+        music_rule = (
+            '\n- MUSIC: "music" = a 40-90 word ENGLISH prompt for an AI music generator. '
+            f'Follow this SERIES MUSIC STYLE exactly: {music_style}'
+        )
     cap_rule = ('\n- CAPTION: "caption" = the post\'s WRITTEN STORY (70-140 words of flowing English '
                 'prose; separate paragraphs with \\n\\n). Open with "City, YEAR." plus ONE vivid '
                 'scene-setting line, then short 1-2 sentence paragraphs that tell the REAL event like '
                 'a documentary: context, escalation, the event itself, one human moment (a real name '
                 'where history records one), the precise date, and a final line about what it left '
                 'behind. Every name, number and date must be real and verifiable from the CREATIVE '
-                'BRIEF — NEVER invent or embellish a fact; when unsure of a number, leave it out.'
+                'BRIEF ,  NEVER invent or embellish a fact; when unsure of a number, leave it out.'
                 '\n- HASHTAGS: "hashtags" = 6-9 space-separated tags: the city, the event name, the '
                 '4-digit year, the country or people, plus 2-3 broad history tags. Each tag starts '
                 'with # and contains no spaces.' if want_caption else "")
@@ -288,7 +345,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                        "carry the episode's emotion, but must NEVER speak, lip-sync or move their lips "
                        "as if talking (the score is the only voice); when the story involves a real "
                        "named person, shot prompts describe them ONLY by appearance, age, dress and "
-                       "role — never by name,")
+                       "role ,  never by name,")
     elif humans_featured:
         humans_rule = ("the recurring lead character (see AVAILABLE REFERENCES) MAY appear in clear close-up, "
                        "mid and wide shots and is the emotional anchor of the episode, but must NEVER speak, "
@@ -302,7 +359,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     tone_tail = "nothing gory, violent or graphic." if eerie_ok else "nothing gory, violent or frightening."
     # Kare zinciri AÇIK serilerde çekimler tek kesintisiz morf akışıdır; zincirsiz
     # serilerde (chain_frames=false, ör. footnotes) her çekim AYRI bir sinematik
-    # tablodur — kurgu bunları crossfade/kesme ile bağlar.
+    # tablodur ,  kurgu bunları crossfade/kesme ile bağlar.
     if bible.chain_frames:
         chain_rule = ("- SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final\n"
                       "  frame): shot 1 opens a brand-new striking scene; every later shot's prompt must\n"
@@ -310,9 +367,32 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                       "  state and evolves into somewhere new. No cuts, no teleports, no scene resets inside\n"
                       "  an episode.")
     else:
-        chain_rule = ("- SCENE FLOW: shots are DISTINCT cinematic tableaux joined in post by soft transitions —\n"
+        chain_rule = ("- SCENE FLOW: shots are DISTINCT cinematic tableaux joined in post by soft transitions , \n"
                       "  each shot may open a new angle, location or moment of the SAME story; order them so the\n"
                       "  episode reads as one continuous emotional arc with no confusing jumps.")
+
+    family_shape = '\n   "family": "<canonical family>",' if families else ""
+    seed_shape = '\n   "seed_id": <int>,' if pool else ""
+    family_rule = (
+        "\n- FAMILY: every episode must include one \"family\" chosen exactly from this canonical list: "
+        + json.dumps(families, ensure_ascii=False)
+        + ". Consecutive episodes must never use the same family."
+        if families else ""
+    )
+    seed_rule = (
+        "\n- TOPIC POOL: every episode must include integer \"seed_id\" from the runtime pool in the "
+        "input, use only that seed's topic, and copy that seed's family exactly. Never invent a topic."
+        if pool else ""
+    )
+    if meta.slug == "from-scratch":
+        hook_rule = (
+            '- "hook_shot" MUST be 4. Shot 4 is the final reveal and the teaser source.'
+        )
+    else:
+        hook_rule = (
+            '- "hook_shot" = the n of the single most spectacular, jaw-dropping shot '
+            "(usually 2 or 3)."
+        )
 
     system_instruction = f"""{head}
 
@@ -320,7 +400,7 @@ Return STRICT JSON ONLY, exactly this shape:
 {{"episodes": [
   {{"episode": {{"number": <int>, "title": "<title>"}},
    "synopsis": "<one sentence>",
-   "hook_shot": <int>,
+   "hook_shot": <int>,{family_shape}{seed_shape}
    "narration": {narr_shape},{tc_shape}{music_shape}{cap_shape}
    "shots": [{{{shot_fields}}}]}}
 ]}}
@@ -331,39 +411,42 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}
+  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}
 {chain_rule}
 - EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve.
-  "hook_shot" = the n of the single most spectacular, jaw-dropping shot (usually 2 or 3).
-- PROMPTS: rich visual language — motion, geometry, light, color, camera flow. The
+{hook_rule}
+- PROMPTS: rich visual language ,  motion, geometry, light, color, camera flow. The
   series art style is automatically prefixed to every shot at production; do NOT restate
   it wholesale, but stay inside it.
 - HARD LIMITS: {humans_rule} no readable text/letters/logos/watermarks,
   {tone_tail} English only."""
 
-    lines = [f"SERIES: {meta.base_title} — {meta.logline}".strip()]
+    lines = [f"SERIES: {meta.base_title} ,  {meta.logline}".strip()]
     art = (bible.art_style or "").strip()
     if art:
         lines.append(f"\nART STYLE (auto-prefixed to every shot at production):\n{art}")
     brief = str(cfg.get("brief") or "").strip()
     if brief:
         lines.append(f"\nCREATIVE BRIEF for new episodes:\n{brief}")
+    if pool:
+        lines.append("\nRUNTIME UNUSED TOPIC POOL. Use each seed_id at most once:")
+        lines.append(json.dumps(_unused_topics(cfg, history), ensure_ascii=False, indent=2))
     if shot_refs:
         refs_lines = []
         for kind in ("characters", "environments"):
             items = bible.data.get(kind) or []
-            entries = [f"{it.get('id')} — {(it.get('name') or it.get('desc') or '')[:60]}"
+            entries = [f"{it.get('id')} ,  {(it.get('name') or it.get('desc') or '')[:60]}"
                        for it in items if it.get("id")]
             if entries:
                 refs_lines.append(f"{kind}: " + "; ".join(entries))
         if refs_lines:
             lines.append("\nAVAILABLE REFERENCES (use these ids only):\n" + "\n".join(refs_lines))
     if history:
-        lines.append("\nEXISTING EPISODES (title — synopsis). NEVER repeat or reword these:")
+        lines.append("\nEXISTING EPISODES (title ,  synopsis). NEVER repeat or reword these:")
         for h in history:
             n = h.get("n")
             tag = f"{int(n):02d}" if isinstance(n, int) else "??"
-            lines.append(f"{tag}. {h['title']} — {h['synopsis']}")
+            lines.append(f"{tag}. {h['title']} ,  {h['synopsis']}")
     if fix_errors:
         lines.append("\nYOUR PREVIOUS ATTEMPT WAS REJECTED. Fix ALL of these problems:")
         lines.extend(f"- {e}" for e in fix_errors)
@@ -373,10 +456,11 @@ RULES:
 
 
 def _validate_batch(episodes, bible: Bible, start: int, batch: int,
-                    existing_titles: set[str], cfg: dict | None = None) -> list[str]:
+                    existing_titles: set[str], cfg: dict | None = None,
+                    history: list[dict] | None = None) -> list[str]:
     """Sert doğrulama + normalizasyon (yerinde): numaralar/çekim n'leri düzeltilir,
     bilinmeyen alanlar atılır. Hata listesi döner (boş = geçerli).
-    cfg (auto_replenish) format bayraklarını taşır: narration/title_card/shot_refs —
+    cfg (auto_replenish) format bayraklarını taşır: narration/title_card/shot_refs , 
     bkz. _build_prompt; bayrak yoksa davranış eskisiyle birebir aynıdır."""
     if not isinstance(episodes, list) or len(episodes) != batch:
         got = len(episodes) if isinstance(episodes, list) else type(episodes).__name__
@@ -394,6 +478,19 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
     shot_refs = bool(cfg.get("shot_refs"))
+    families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
+    pool = _topic_pool(cfg)
+    history = history or []
+    used_seed_ids: set[int] = set()
+    for item in history:
+        seed_id = item.get("seed_id")
+        if isinstance(seed_id, int) and not isinstance(seed_id, bool):
+            used_seed_ids.add(seed_id)
+    previous_family = ""
+    for item in reversed(history):
+        previous_family = str(item.get("family") or "").strip()
+        if previous_family:
+            break
 
     errors: list[str] = []
     seen = set(existing_titles)
@@ -411,8 +508,37 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         else:
             nt = _norm_title(title)
             if nt in seen:
-                errors.append(f"part {want}: başlık tekrarı ('{title}') — özgün başlık gerekli")
+                errors.append(f"part {want}: başlık tekrarı ('{title}') ,  özgün başlık gerekli")
             seen.add(nt)
+
+        family = str(plan.get("family") or "").strip()
+        if families:
+            if not family:
+                errors.append(f"part {want}: family alanı zorunlu")
+            elif family not in families:
+                errors.append(f"part {want}: family kanonik listede değil ({family!r})")
+            if family and previous_family and family == previous_family:
+                errors.append(f"part {want}: ardışık iki part aynı family değerini kullanamaz")
+            if family:
+                previous_family = family
+
+        seed_id = None
+        if pool:
+            raw_seed = plan.get("seed_id")
+            if not isinstance(raw_seed, int) or isinstance(raw_seed, bool):
+                errors.append(f"part {want}: seed_id tam sayı olmalı")
+            else:
+                seed_id = raw_seed
+            if seed_id is not None:
+                if seed_id not in pool:
+                    errors.append(f"part {want}: seed_id konu havuzunda yok ({seed_id})")
+                elif seed_id in used_seed_ids:
+                    errors.append(f"part {want}: seed_id daha önce kullanılmış ({seed_id})")
+                else:
+                    expected_family = str(pool[seed_id].get("family") or "").strip()
+                    if family != expected_family:
+                        errors.append(f"part {want}: family seed_id {seed_id} ile eşleşmiyor")
+                    used_seed_ids.add(seed_id)
 
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
@@ -453,7 +579,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 clean_shots.append(clean)
 
         if want_fc and clean_shots and fact_count < 2:
-            errors.append(f"part {want}: fact_captions açık — en az 2 çekimde 'fact' olmalı "
+            errors.append(f"part {want}: fact_captions açık ,  en az 2 çekimde 'fact' olmalı "
                           f"(gelen: {fact_count})")
 
         hook = plan.get("hook_shot")
@@ -463,13 +589,20 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 raise ValueError
         except (TypeError, ValueError):
             hook = None   # produce.py'nin 'sondan bir önceki' varsayılanı devreye girer
+        if bible.slug == "from-scratch" and hook != 4:
+            errors.append(f"part {want}: from-scratch hook_shot 4 olmalı")
 
         ntext = str(plan.get("narration") or "").strip()
         if narrated:
             wc = len(ntext.split())
-            lo, hi = max(30, int(wmin * 0.7)), int(wmax * 1.35)
+            # Hedef aralik (wmin-wmax) prompt'ta; kabul araligi mikser payiyla genisler:
+            # TTS mikseri 1.15x hizlandirmayi karsilar (ffmpeg_tools.mix_voiceover tavani),
+            # alt sinirda %15 pay ince ama teknik olarak sorunsuz anlatimi gecirir.
+            # Olcusuz eski 0.7x-1.35x toleransi DEGIL; sinir mikser kapasitesidir.
+            lo = max(1, int(wmin * 0.85))
+            hi = int(wmax * 1.15 + 0.999)
             if not (lo <= wc <= hi):
-                errors.append(f"part {want}: anlatım {wc} kelime — hedef {wmin}-{wmax} "
+                errors.append(f"part {want}: anlatım {wc} kelime ,  hedef {wmin}-{wmax} "
                               f"(kabul {lo}-{hi}) dışında")
         else:
             ntext = ""   # anlatımsız seri: eski davranış (boş string zorlanır)
@@ -478,11 +611,15 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "synopsis": str(plan.get("synopsis") or "").strip()[:300],
                       "narration": ntext,
                       "shots": clean_shots}
+        if families:
+            normalized["family"] = family
+        if pool and seed_id is not None:
+            normalized["seed_id"] = seed_id
         if want_music:
             mtext = str(plan.get("music") or "").strip()
             mwc = len(mtext.split())
             if not (20 <= mwc <= 140):
-                errors.append(f"part {want}: music prompt {mwc} kelime — 40-90 hedef "
+                errors.append(f"part {want}: music prompt {mwc} kelime ,  40-90 hedef "
                               f"(kabul 20-140) dışında")
             else:
                 normalized["music"] = mtext
@@ -490,17 +627,35 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             tcv = plan.get("title_card") or {}
             tt = str(tcv.get("title") or "").strip()
             ts = str(tcv.get("subtitle") or "").strip()
-            # Künye GERÇEK bir 4-haneli yıl taşımalı (1000-2099) — başlıkta VEYA alt
+            # Künye GERÇEK bir 4-haneli yıl taşımalı (1000-2099) ,  başlıkta VEYA alt
             # yazıda (footnotes formatı yılı başlığa koyar: 'Barcelona, 1909'; drowned
-            # alt yazıya: '… — found 1901'). Ekrana basılan tarih doğruluğu güvencesi:
+            # alt yazıya: '… ,  found 1901'). Ekrana basılan tarih doğruluğu güvencesi:
             # model tarihi düşürür ya da uydurursa batch reddedilir → Gemini yeniden
             # dener (brief: yıl DOĞRUDAN kaynak kayıttan kopyalanır).
-            has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", f"{tt} {ts}"))
+            anchor_text = f"{tt} {ts}"
+            has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", anchor_text))
+            if bible.slug == "flashpoints":
+                has_year = has_year or bool(
+                    re.search(
+                        r"\b(?:\d{1,4}\s*(?:BCE|BC|CE|AD)|"
+                        r"(?:BCE|BC|CE|AD)\s*\d{1,4})\b|"
+                        r"\b(?:1[0-9]{3}|20[0-9]{2})s\b|"
+                        r"\b\d{1,2}(?:st|nd|rd|th)\s+century\b",
+                        anchor_text,
+                        re.IGNORECASE,
+                    )
+                )
             if not tt or not ts or len(tt) > 60 or len(ts) > 60:
                 errors.append(f"part {want}: title_card.title ve .subtitle zorunlu (≤60 karakter)")
+            elif not has_year and bible.slug == "flashpoints":
+                errors.append(
+                    f"part {want}: title_card 4-haneli yıl veya çağ çıpası içermeli "
+                    f"(ör. 'Zanzibar, 1896', 'Egypt, 69 BCE', 'Pompeii, AD 79'); "
+                    f"gelen: {tt!r} / {ts!r}"
+                )
             elif not has_year:
                 errors.append(f"part {want}: title_card 4-haneli bir yıl içermeli (başlıkta "
-                              f"'City, 1909' ya da alt yazıda '… — found 1901') — "
+                              f"'City, 1909' ya da alt yazıda '… ,  found 1901') ,  "
                               f"gelen: {tt!r} / {ts!r}")
             else:
                 normalized["title_card"] = {"title": tt, "subtitle": ts}
@@ -509,7 +664,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             cap = str(plan.get("caption") or "").strip()
             cwc = len(cap.split())
             if not (40 <= cwc <= 220):
-                errors.append(f"part {want}: caption {cwc} kelime — 70-140 hedef "
+                errors.append(f"part {want}: caption {cwc} kelime ,  70-140 hedef "
                               f"(kabul 40-220) dışında")
             elif not re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", cap):
                 errors.append(f"part {want}: caption gerçek bir 4-haneli yıl içermeli")
@@ -527,7 +682,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             normalized["hook_shot"] = hook
         episodes[i] = normalized
 
-        # Motorun kendi doğrulaması (Omni kota vb.) — hatalar batch'i düşürür.
+        # Motorun kendi doğrulaması (Omni kota vb.) ,  hatalar batch'i düşürür.
         v = validate_plan(normalized, bible)
         errors.extend(f"part {want}: {e}" for e in v.get("errors", []))
     return errors
@@ -545,7 +700,7 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
                                          fix_errors=errors)
         data = _gen_json(contents, sysins, temperature=0.9)
         episodes = data.get("episodes") if isinstance(data, dict) else None
-        errors = _validate_batch(episodes, bible, start, batch, existing, cfg)
+        errors = _validate_batch(episodes, bible, start, batch, existing, cfg, history)
         if not errors:
             return episodes
         logger.warning(f"⚠️ İkmal doğrulaması geçmedi ({attempt}. deneme): {errors[:4]}")
@@ -561,13 +716,13 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
         return True
     cfg = meta.auto_replenish
     if not cfg:
-        return True   # opt-in değil — dokunma
+        return True   # opt-in değil ,  dokunma
     if meta.status not in ("active", "completed"):
-        logger.info(f"⏸️ {slug}: status={meta.status} (insan kararı) — ikmal yapılmaz.")
+        logger.info(f"⏸️ {slug}: status={meta.status} (insan kararı) ,  ikmal yapılmaz.")
         return True
     bible = Bible.load(slug)
     if not bible:
-        logger.warning(f"⚠️ {slug}: bible.json yok — ikmal atlandı.")
+        logger.warning(f"⚠️ {slug}: bible.json yok ,  ikmal atlandı.")
         return True
 
     adopted = _adopt_orphans(meta)
@@ -580,6 +735,13 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
     if pending >= min_q:
         return True
     batch = min(10, max(1, int(cfg.get("batch", DEFAULT_BATCH))))
+    history = _episode_history(slug)
+    if cfg.get("topic_pool") is not None:
+        unused = _unused_topics(cfg, history)
+        if not unused:
+            logger.error(f"❌ HATA {slug}: kullanılmamış konu havuzu kalmadı.")
+            return False
+        batch = min(batch, len(unused))
     start = meta.total_parts + 1
     end = start + batch - 1
 
@@ -587,14 +749,19 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
         logger.info(f"[dry-run] {slug}: kuyruk {pending} < {min_q} → part {start}-{end} üretilirdi.")
         return True
 
+    digest = _doctrine_gate(meta)
+    if digest is None:
+        return False
+
     logger.info(f"🔁 {slug}: kuyruk {pending} < {min_q} → Gemini part {start}-{end} yazıyor…")
     try:
         episodes = generate_plans(meta, bible, cfg, start, batch)
 
         # 1) Önce plan dosyaları (çökme güvenliği: sayaç sonra; öksüzler sonraki koşuda sahiplenilir)
         for i, plan in enumerate(episodes):
+            plan["doctrine_sha256"] = digest
             pp = part_plan_path(slug, start + i)
-            if pp.exists():   # sigorta — _adopt_orphans sonrası imkânsız olmalı
+            if pp.exists():   # sigorta ,  _adopt_orphans sonrası imkânsız olmalı
                 raise RuntimeError(f"plan dosyası zaten var, üzerine yazılmaz: {pp.name}")
             pp.parent.mkdir(parents=True, exist_ok=True)
             pp.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -612,17 +779,17 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
         titles = ", ".join(p["episode"]["title"] for p in episodes)
         logger.info(f"🔁 {slug}: part {start}-{end} planlandı → {titles}")
         _alert(f"🔁 *{meta.base_title}*: {batch} yeni bölüm planlandı (Part {start}-{end}: "
-               f"{titles}) — kanal kesintisiz devam ediyor.")
+               f"{titles}) ,  kanal kesintisiz devam ediyor.")
         return True
     except Exception as e:
         logger.error(f"❌ {slug} oto-ikmal başarısız: {e}")
         _alert(f"❌ *{meta.base_title}* oto-ikmal BAŞARISIZ: {str(e)[:200]}\n"
-               f"Kuyrukta {pending} part kaldı — kuyruk biterse bu kanala video çıkmaz.")
+               f"Kuyrukta {pending} part kaldı ,  kuyruk biterse bu kanala video çıkmaz.")
         return False
 
 
 def replenish_all(dry_run: bool = False) -> None:
-    """auto_replenish açık tüm serileri dolaş. Hata seriye hapsolur — günlük yayın
+    """auto_replenish açık tüm serileri dolaş. Hata seriye hapsolur ,  günlük yayın
     koşusunu asla bloklamaz."""
     from series.bible import all_series_dirs
     for slug in all_series_dirs():

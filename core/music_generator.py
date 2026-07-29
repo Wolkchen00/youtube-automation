@@ -109,6 +109,7 @@ MUSIC_PROMPTS = {
 # OR the series slug and still get the right bed).
 MUSIC_PROMPT_ALIASES = {
     "ava-voyage": "galactic_experiment",
+    "from-scratch": "aimagine",
     "secrets-anatolia": "shadowedhistory",
     "sentinal_ihsan": "the-signal",   # narration channel adı → the-signal müzik (eerie drone)
 }

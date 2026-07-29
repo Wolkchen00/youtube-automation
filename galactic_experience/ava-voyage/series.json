@@ -15,6 +15,7 @@
   "status": "completed",
   "standalone": true,
   "publish_mode": "auto",
+  "doctrine": "galactic_experience/KONSEPT.md",
   "parts": {
     "1": {
       "status": "published",

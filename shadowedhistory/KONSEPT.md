@@ -1,4 +1,4 @@
-# SHAD0WED HISTORY, KANAL KONSEPT DOKTRİNİ v1.3
+# SHAD0WED HISTORY, KANAL KONSEPT DOKTRİNİ v1.6
 **Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
 **v1.1 (aynı gün, Codex Same Page turu 1):** zaman çıpası BCE/çağ biçimlerini kapsar; caption
 ve fact_captions kaldırıldı (motor gerçeği); kelime bütçesi doğrulayıcıda birebir uygulanır;
@@ -10,6 +10,18 @@ doctrine_sha256 pin'i; hat açma ön koşulu havuz ≥25.
 **v1.3 (aynı gün, turu 3):** havuzun teknik tek kaynağı series.json `topic_pool` oldu
 (id+topic+family; brief'e kopyalanmaz, prompt'a runtime enjekte edilir); plan damgası eklendi
 (doktrin revizyonu bekleyen planları geçersizleştirir); havuz genişletme prosedürü netleşti.
+**v1.4 (aynı gün, Level 10):** çekim süresi 7 sn → 6 sn (Kie gemini-omni-video resmi şeması
+duration'ı 4/6/8/10 enum'una kilitliyor, 7 YOK; bölüm ~12 sn oldu); anlatım bütçesi 20-30
+kelimeye indi.
+**v1.5 (aynı gün, canlı replenish kanıtı):** çağ çıpası BCE/CE biçimlerini de kapsar (Gemini
+doğal olarak "69 BCE" yazar; canlı koşu BC/AD-tek regex'inde fail-closed düştü, doğrulayıcı
+genişletildi).
+**v1.6 (aynı gün, canlı replenish kanıtı 2):** bölüm 2 x 8 sn = ~16 sn oldu (kanıt bandı
+10-16'nın üst ucu) ve anlatım bütçesi 26-38 kelimeye çıktı: Gemini tarih faktı anlatımını
+doğal olarak söylenen aralığın %10-20 üstünde yazıyor ve hedefi kovalamak çözüm değil. Nihai
+kural: hedef aralık prompt'ta aynen; doğrulayıcı MİKSÖR PAYIYLA kabul eder (min×0.85 ..
+max×1.15; TTS miksörü 1.15x hızlandırmayı zaten karşılar, ölçüsüz eski 0.7-1.35 toleransı
+geri gelmedi).
 **Kanal:** `UCUdp0KLBh4EeeSgVbwS_DhA` · @shad0wedhistory357 · upload_profile: `shad0wedhistory` · narration register: `shadowedhistory`
 
 > S4 kararı (2026-07-27): 10-16 sn tekil tarih-faktı formatına dönüş. Bu doküman o kararın
@@ -46,15 +58,17 @@ izlenme, 123 abone, 30 günlük medyan 77,5.
 - **Beklenti matematiği:** kırılma tipik ilk 20-25 videoda gelir ya da o mekanikte hiç gelmez;
   25 bölüm dolmadan format hakkında hüküm verilmez.
 
-## 3. KONSEPT: "FLASHPOINTS", 14 saniyede bir tarih çarpması
+## 3. KONSEPT: "FLASHPOINTS", 16 saniyede bir tarih çarpması
 
 **Konumlandırma:** Her bölüm, izleyicinin bildiğini sandığı tarihten TEK çarpıcı ve
-DOĞRULANABİLİR faktı 12-16 saniyede patlatır. İddia daha ilk cümlede ve ilk karede;
-kanıt/büküm ikinci çekimde. Kanal vaadi: **"Tarih kitabının dipnotu, feed'in en sert 14 saniyesi."**
+DOĞRULANABİLİR faktı ~16 saniyede patlatır (kanıt bandı 10-16 sn'nin üst ucu). İddia daha ilk
+cümlede ve ilk karede; kanıt/büküm ikinci çekimde. Kanal vaadi: **"Tarih kitabının dipnotu,
+feed'in en sert 16 saniyesi."**
 
 **Formül:** gerçek fakt + ilk karede iddia + iki çekim + tek nefes anlatım + loop dikişi.
 
-### 3.1 İmza format, İKİ ÇEKİM (2 × 7 sn = ~14 sn)
+### 3.1 İmza format, İKİ ÇEKİM (2 × 8 sn = ~16 sn; motor gerçeği: Kie Omni süresi 4/6/8/10
+enum'udur, ara değer yoktur)
 
 | Çekim | Adı | Kural |
 |-------|-----|-------|
@@ -78,8 +92,8 @@ kanıt/büküm ikinci çekimde. Kanal vaadi: **"Tarih kitabının dipnotu, feed'
    piramitlerle aynı çağda). Viral tarih türünün kanıtlanmış ailesi.
 
 **Doğruluk kuralı (pazarlıksız):** her fakt gerçek ve yaygın kaynaklarla doğrulanabilir olmalı;
-her bölümde ZAMAN ÇIPASI bulunur: 4 haneli yıl, "X BC/AD" çağ biçimi ya da yüzyıl (antik
-konular dışlanmaz). Sayı UYDURULMAZ; brief'te/kartta olmayan sayı prompt'a giremez.
+her bölümde ZAMAN ÇIPASI bulunur: 4 haneli yıl, onlu yıl biçimi ("the 1830s"), çağ biçimi
+(BC, BCE, AD ya da CE) ya da yüzyıl (antik konular dışlanmaz). Sayı UYDURULMAZ; brief'te/kartta olmayan sayı prompt'a giremez.
 **Konu havuzu kuralı:** bölüm konuları YALNIZ doğrulanmış tohum havuzundan seçilir. Havuzun
 NORMATİF kaynağı bu doktrinin §6 listesi, TEKNİK tek kaynağı series.json `topic_pool` alanıdır
 (id + topic + family; brief'e kopyalanmaz, prompt'a runtime enjekte edilir). Doğrulayıcı KOD
@@ -98,10 +112,11 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
 
 ### 3.4 Ses
 
-- Register `shadowedhistory` (Charon) kalır; talimat 14 sn temposuna güncellenir: belgesel
-  ağırlığı yerine **sert, kendinden emin, hızlı fakt anlatımı**; "dramatic pause" 14 sn'de
+- Register `shadowedhistory` (Charon) kalır; talimat 16 sn temposuna güncellenir: belgesel
+  ağırlığı yerine **sert, kendinden emin, hızlı fakt anlatımı**; "dramatic pause" 16 sn'de
   lüks, tek kısa duraklama büküm öncesinde.
-- Metin 22-34 kelime; ilk cümle iddia (5-9 kelime), son cümle yarım bırakılıp başa bağlanır.
+- Metin 26-38 kelime (Gemini'nin doğal fakt-anlatım uzunluğu; 16 sn'de rahat tempo); ilk
+  cümle iddia (5-9 kelime), son cümle yarım bırakılıp başa bağlanır.
 - Selamlama, CTA, "did you know" kalıbı YASAK (ilk kelime doğrudan faktır).
 
 ### 3.5 Paketleme
@@ -132,7 +147,7 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
 | Metrik | Sağlıklı | Alarm | Ölçüm kaynağı |
 |--------|----------|-------|---------------|
 | İlk ≥48 saat snapshot izlenmesi (bölüm başına; "48h" tam 48 saat değil, yayının 48. saatinden SONRAKİ ilk günlük snapshot'tır) | Ocak-Mart bandına tırmanış (400+) | <100 kalıcı → ilk kare/iddia zayıf | analytics_data/daily (seri-bazlı medyan FAZ 4'e kadar MANUEL: published.json eşlemesiyle elle bakılır) |
-| Ortalama izlenme yüzdesi (APV) | ≥%90 (14 sn'de) | <%70 → büküm geç geliyor | ÖLÇÜLEMEZ API katmanında; YouTube Studio'dan haftalık MANUEL bakış |
+| Ortalama izlenme yüzdesi (APV) | ≥%90 (16 sn'de) | <%70 → büküm geç geliyor | ÖLÇÜLEMEZ API katmanında; YouTube Studio'dan haftalık MANUEL bakış |
 | APV >%100 (loop/rewatch VEKİLİ; doğrudan loop ölçümü değildir) | >%100 hedef | kapanış jesti sızmış mı denetle | ÖLÇÜLEMEZ; Studio'dan MANUEL |
 
 - **Kill gate:** 25 bölüm sonunda medyan <350 VE tavan <3K → aile ağırlıkları değişir
@@ -166,10 +181,11 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
   `upload_profile: shad0wedhistory`, `publish_mode: approval`, `status: active`,
   `priority: 999`, `total_parts: 0`, `next_part: 1` (ilk replenish part 1'den başlasın),
   platformlar youtube+instagram+tiktok, hashtag §3.5.
-- auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 2, shot_seconds: "7",
+- auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 2, shot_seconds: "8",
   title_card: true, music_prompt: true, humans: historical,
-  narration: {min_words: 22, max_words: 34}}` (bütçe doğrulayıcıda BİREBİR uygulanır;
-  caption/fact_captions YOK)
+  narration: {min_words: 26, max_words: 38}}` (hedef aralık prompt'ta; doğrulayıcı miksör
+  payıyla kabul eder: 22-44; caption/fact_captions YOK; süre Kie enum gerçeği gereği 8 sn,
+  bölüm ~16 sn)
   + `families`: ["yanılgı kırıcı", "imkânsız mühendislik", "tuhaf savaş", "unutulmuş kişi",
   "efsane vs kayıt", "zaman çarpması"] (kanonik enum; doğrulayıcı bunun dışını RED eder,
   ardışık aynı aile RED)

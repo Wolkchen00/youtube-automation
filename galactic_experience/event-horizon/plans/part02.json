@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "The Universe's Densest Matter: Neutron Star Cube"
+  },
+  "synopsis": "This episode demonstrates the incredible density of neutron star matter by comparing a sugar cube's worth to Mount Everest's mass.",
+  "narration": "A neutron star is matter compressed beyond imagination. Just one sugar cube of this ultra-dense material would weigh as much as Mount Everest on Earth. Imagine its immense gravity, a crushing force that distorts spacetime around it, a true cosmic behemoth.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A rapidly spinning neutron star, its surface shimmering with incredible heat and powerful magnetic fields. Light bends dramatically around its gravitational well, distorting the starfield behind it, emphasizing its extreme density. Dark, deep space setting.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Extreme close-up on a minuscule, perfectly cubic speck of ultra-dense matter, glowing with residual energy, floating in the vacuum. Around it, spacetime is visibly warped and distorted, illustrating its unimaginable gravitational pull despite its tiny size. Camera subtly rotates around the cube.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Pull back to the neutron star, now seen from a slightly different, slightly closer angle, with accretion disk remnants swirling. The gravitational lensing effect is even more pronounced, bending light from a distant nebula into an impossible arc, reinforcing the star's monstrous density. Motion continues toward the core, looping back to shot 1.",
+      "seed": null
+    }
+  ],
+  "family": "derin uzay canavarları",
+  "seed_id": 2,
+  "music": "A deep, resonant, awe-driven cosmic underscore with a steady, powerful forward pulse. A brief, impactful swell at the moment of scale comparison, creating a feeling of immense weight and density. The music should be heavy and profound, concluding mid-phrase for a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "d3c474e2a1da7595aa66b6bc52168bf885054049f5ded18220dc53df4f0a5051"
+}

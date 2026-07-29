@@ -1,0 +1,27 @@
+{
+  "series": {
+    "slug": "event-horizon",
+    "title": "Event Horizon",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": false
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "Every episode must name a real celestial object and communicate exactly one verified astronomical fact. No closing card, presentation gesture, celebration, readable counterfeit text, logo, caption, or watermark may appear. Celestial scale and appearance must stay physically coherent. Horror aesthetics and rapid flashing sequences are automatic failures."
+    }
+  },
+  "art_style": "Photoreal astronomical cinema in vertical 9:16, grounded in real celestial objects and NASA-image realism; physically coherent scale, dramatic natural cosmic light, crisp planetary and stellar detail, deep blacks, restrained cinematic color, no fantasy spacecraft focus, no on-screen text, no logos, no watermarks.",
+  "music": true,
+  "narration": {
+    "channel": "galactic_experiment"
+  },
+  "characters": [],
+  "environments": [],
+  "props": []
+}

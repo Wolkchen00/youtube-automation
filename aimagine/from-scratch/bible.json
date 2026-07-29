@@ -1,0 +1,26 @@
+{
+  "series": {
+    "slug": "from-scratch",
+    "title": "From Scratch",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.2,
+      "offset_in_shot": 1.4
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "Exactly one structure and one final reveal are allowed. The site, structure, materials, scale, and camera geography must remain consistent across all four shots. No celebration, presentation gesture, look to camera, finished closing pose, readable counterfeit text, logo, caption, or watermark may appear. The hook teaser must come from shot 4, hook_shot must equal 4, and the final shot must flow into the teaser frame before returning naturally to shot 1. Unsafe electrical work, unprotected deep excavation, and open flame are automatic failures."
+    }
+  },
+  "art_style": "Photoreal construction timelapse realism in vertical 9:16, bright daylight, saturated but believable color, tactile real materials, coherent site geography, skilled hands and crews in safe working conditions, satisfying build progression, natural camera motion, no CGI sheen, no on-screen text, no logos, no watermarks.",
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}
