@@ -59,12 +59,9 @@ jobs:
       - name: Persist registry changes
         if: always()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add logs/video_registry.json logs/cleanup_log.json || true
-          git diff --cached --quiet && echo "Nothing to commit" && exit 0
-          git commit -m "chore: update video registry after cleanup [skip ci]" || true
-          git push origin main || true
+          bash scripts/persist_state.sh \
+            "chore: update video registry after cleanup [skip ci]" \
+            logs/video_registry.json logs/cleanup_log.json
 
       - name: Upload cleanup logs
         if: always()

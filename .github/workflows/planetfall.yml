@@ -68,20 +68,10 @@ jobs:
       - name: Persist series state
         if: always()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          for i in 1 2 3; do
-            git pull --rebase --autostash origin main || true
-            git add series_data/ || true
-            git add sentinal_ihsan/ || true
-            git add aimagine/ || true
-            git add galactic_experience/ || true
-            git add shadowedhistory/ || true
-            git add credits_ledger.json || true
-            git diff --cached --quiet && echo "Değişiklik yok" && break
-            git commit -m "chore: planetfall durumunu ilerlet [skip ci]" || true
-            git push origin main && break || (echo "push denemesi $i başarısız, 10s bekle..." && sleep 10)
-          done
+          bash scripts/persist_state.sh \
+            "chore: planetfall durumunu ilerlet [skip ci]" \
+            series_data/ sentinal_ihsan/ aimagine/ galactic_experience/ \
+            shadowedhistory/ credits_ledger.json
 
       - name: Upload logs artifact
         if: always()

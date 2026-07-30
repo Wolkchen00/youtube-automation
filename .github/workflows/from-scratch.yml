@@ -69,34 +69,28 @@ jobs:
         run: python -X utf8 -m series.replenish --series from-scratch 2>&1 | tee logs/from_scratch_replenish.log
 
       - name: Produce + publish (From Scratch siradaki bolum)
+        id: produce
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python -X utf8 -m series.series_runner --series from-scratch 2>&1 | tee logs/from_scratch_run.log
 
+      - name: Uretim sonucunu kaydet
+        if: always()
+        run: |
+          raw_outcome="${{ steps.produce.outcome }}"
+          outcome=failure
+          if [ "$raw_outcome" = "success" ]; then outcome=success; fi
+          printf '{"ts":"%s","outcome":"%s","raw_outcome":"%s","run_id":%s}\n' \
+            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" "$outcome" "$raw_outcome" "${{ github.run_id }}" \
+            > aimagine/from-scratch/last_run.json
+
       - name: Persist series state
         if: always()
         run: |
-          set -o pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          success=false
-          for i in 1 2 3; do
-            git pull --rebase --autostash origin main || true
-            git add sentinal_ihsan/ || true
-            git add aimagine/ || true
-            git add galactic_experience/ || true
-            git add shadowedhistory/ || true
-            git add credits_ledger.json || true
-            if git diff --cached --quiet && [ "$(git rev-list --count origin/main..HEAD)" -eq 0 ]; then
-              echo "Degisiklik yok"; success=true; break
-            fi
-            if ! git diff --cached --quiet; then
-              git commit -m "chore: from-scratch durumunu ilerlet [skip ci]" || true
-            fi
-            if git push origin main; then success=true; break; fi
-            echo "push denemesi $i basarisiz, 10s bekle..."; sleep 10
-          done
-          [ "$success" = true ] || exit 1
+          bash scripts/persist_state.sh \
+            "chore: from-scratch durumunu ilerlet [skip ci]" \
+            sentinal_ihsan/ aimagine/ galactic_experience/ shadowedhistory/ \
+            credits_ledger.json aimagine/from-scratch/last_run.json
 
       - name: Upload logs artifact
         if: always()

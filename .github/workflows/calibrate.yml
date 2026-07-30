@@ -52,26 +52,12 @@ jobs:
       - name: Persist calibration state
         if: always()
         run: |
-          set -o pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          success=false
-          for i in 1 2 3; do
-            git pull --rebase --autostash origin main || true
-            git add 'sentinal_ihsan/*/calibration.json' || true
-            git add 'aimagine/*/calibration.json' || true
-            git add 'galactic_experience/*/calibration.json' || true
-            git add 'shadowedhistory/*/calibration.json' || true
-            if git diff --cached --quiet && [ "$(git rev-list --count origin/main..HEAD)" -eq 0 ]; then
-              echo "Degisiklik yok"; success=true; break
-            fi
-            if ! git diff --cached --quiet; then
-              git commit -m "chore: kalibrasyon guncellendi [skip ci]" || true
-            fi
-            if git push origin main; then success=true; break; fi
-            echo "push denemesi $i basarisiz, 10s bekle..."; sleep 10
-          done
-          [ "$success" = true ] || exit 1
+          bash scripts/persist_state.sh \
+            "chore: kalibrasyon guncellendi [skip ci]" \
+            'sentinal_ihsan/*/calibration.json' \
+            'aimagine/*/calibration.json' \
+            'galactic_experience/*/calibration.json' \
+            'shadowedhistory/*/calibration.json'
 
       - name: Upload calibration log
         if: always()

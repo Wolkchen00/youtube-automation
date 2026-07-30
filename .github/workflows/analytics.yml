@@ -63,28 +63,9 @@ jobs:
       - name: Persist analytics data
         if: always()
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          success=false
-          for i in 1 2 3; do
-            git pull --rebase --autostash origin main || true
-            git add analytics_data/ || true
-            if git diff --cached --quiet && [ "$(git rev-list --count origin/main..HEAD)" -eq 0 ]; then
-              echo "Değişiklik yok"
-              success=true
-              break
-            fi
-            if ! git diff --cached --quiet; then
-              git commit -m "chore: analitik verisi [skip ci]" || true
-            fi
-            if git push origin main; then
-              success=true
-              break
-            fi
-            echo "push denemesi $i başarısız, 10s bekle..."
-            sleep 10
-          done
-          [ "$success" = true ] || exit 1
+          bash scripts/persist_state.sh \
+            "chore: analitik verisi [skip ci]" \
+            analytics_data/
 
       - name: Upload analytics artifact
         if: always()
