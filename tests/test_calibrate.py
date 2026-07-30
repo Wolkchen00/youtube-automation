@@ -809,7 +809,7 @@ class WorkflowAndCliTests(unittest.TestCase):
         # FAZ 7 M1 (2026-07-30): persist ortak scripts/persist_state.sh betigine tasindi;
         # sozlesme artik betik cagrisinin 4 kalibrasyon glob'unu arguman tasimasi.
         self.assertIn("bash scripts/persist_state.sh", raw)
-        staged = re.findall(r"^\s*'([^']*calibration\.json)' \\?$", raw, re.MULTILINE)
+        staged = re.findall(r"^\s*'([^']*calibration\.json)'(?: \\)?$", raw, re.MULTILINE)
         self.assertEqual(staged, [
             "sentinal_ihsan/*/calibration.json",
             "aimagine/*/calibration.json",
