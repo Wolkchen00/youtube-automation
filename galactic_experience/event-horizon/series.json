@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #space #astronomy #universe",
   "standalone": true,
-  "publish_mode": "approval",
+  "publish_mode": "auto",
   "status": "active",
   "priority": 999,
   "total_parts": 5,
@@ -187,7 +187,8 @@
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep01/ep01_narrated_music.mp4",
       "subtitle": "HD 189733b: Glass Rains SIDEWAYS",
       "release_tag": "pending-event-horizon-part1",
-      "approval_msg_id": 363
+      "approval_msg_id": 363,
+      "approved": true
     }
   }
 }

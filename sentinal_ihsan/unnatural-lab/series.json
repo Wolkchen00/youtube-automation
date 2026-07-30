@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "standalone": true,
-  "publish_mode": "approval",
+  "publish_mode": "auto",
   "auto_replenish": {
     "enabled": true,
     "batch": 5,
@@ -57,7 +57,8 @@
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep03/ep03_narrated_music.mp4",
       "subtitle": "I Found UNNATURAL APPLES... And They STARTED To GLOW!",
       "release_tag": "pending-unnatural-lab-part3",
-      "approval_msg_id": 346
+      "approval_msg_id": 346,
+      "approved": true
     }
   }
 }

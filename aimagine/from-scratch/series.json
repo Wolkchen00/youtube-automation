@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #satisfying #construction #fromscratch",
   "standalone": true,
-  "publish_mode": "approval",
+  "publish_mode": "auto",
   "status": "active",
   "priority": 999,
   "total_parts": 5,
@@ -46,7 +46,8 @@
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep01/ep01_music_hooked.mp4",
       "subtitle": "Building A GIANT TREEHOUSE From Scratch! 🛠️✨",
       "release_tag": "pending-from-scratch-part1",
-      "approval_msg_id": 367
+      "approval_msg_id": 367,
+      "approved": true
     }
   }
 }
