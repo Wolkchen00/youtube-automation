@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 6,
-  "next_part": 3,
+  "next_part": 4,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -53,12 +53,18 @@
       "approval_msg_id": 318
     },
     "3": {
-      "status": "awaiting_approval",
+      "status": "published",
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep03/ep03_narrated_music.mp4",
       "subtitle": "I Found UNNATURAL APPLES... And They STARTED To GLOW!",
       "release_tag": "pending-unnatural-lab-part3",
       "approval_msg_id": 346,
-      "approved": true
+      "approved": true,
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-30T20:11:41.448729+00:00"
     }
   }
 }

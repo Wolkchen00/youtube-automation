@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 5,
-  "next_part": 1,
+  "next_part": 2,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -185,12 +185,18 @@
   },
   "parts": {
     "1": {
-      "status": "awaiting_approval",
+      "status": "published",
       "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep01/ep01_narrated_music_titled.mp4",
       "subtitle": "How Britain Won History's Shortest War In 1896!",
       "release_tag": "pending-flashpoints-part1",
       "approval_msg_id": 365,
-      "approved": true
+      "approved": true,
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-30T20:09:48.743953+00:00"
     }
   }
 }
