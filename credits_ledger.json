@@ -2,24 +2,27 @@
   "entries": [
     {
       "month": "2026-07",
+      "series": "from-scratch",
+      "part": 1,
+      "reserved": 900,
+      "actual": 630,
+      "ts": "2026-07-29T15:45:00+00:00"
+    },
+    {
+      "month": "2026-07",
       "series": "event-horizon",
       "part": 1,
       "reserved": 900,
-<<<<<<< Updated upstream
-      "actual": 630.0,
-      "ts": "2026-07-29T20:55:00+00:00"
+      "actual": 252,
+      "ts": "2026-07-29T21:06:51+00:00"
     },
     {
       "month": "2026-07",
       "series": "flashpoints",
       "part": 1,
       "reserved": 900,
-      "actual": 315.0,
+      "actual": 315,
       "ts": "2026-07-29T21:05:37+00:00"
-=======
-      "actual": 252,
-      "ts": "2026-07-29T21:06:51.468124+00:00"
->>>>>>> Stashed changes
     }
   ]
 }
