@@ -806,13 +806,17 @@ class WorkflowAndCliTests(unittest.TestCase):
         self.assertEqual(workflow["on"]["schedule"][0]["cron"], "0 9 * * 0")
         self.assertEqual(workflow["concurrency"]["group"], "kie-uretim")
         self.assertEqual(workflow["permissions"]["contents"], "write")
-        staged = re.findall(r"^\s*git add '([^']+)' \|\| true$", raw, re.MULTILINE)
+        # FAZ 7 M1 (2026-07-30): persist ortak scripts/persist_state.sh betigine tasindi;
+        # sozlesme artik betik cagrisinin 4 kalibrasyon glob'unu arguman tasimasi.
+        self.assertIn("bash scripts/persist_state.sh", raw)
+        staged = re.findall(r"^\s*'([^']*calibration\.json)' \\?$", raw, re.MULTILINE)
         self.assertEqual(staged, [
             "sentinal_ihsan/*/calibration.json",
             "aimagine/*/calibration.json",
             "galactic_experience/*/calibration.json",
             "shadowedhistory/*/calibration.json",
         ])
+        self.assertNotIn("git add ", raw)
         self.assertNotIn("FFmpeg", raw)
         self.assertNotIn("GEMINI_API_KEY", raw)
         self.assertIn("python -X utf8 -m series.calibrate", raw)
