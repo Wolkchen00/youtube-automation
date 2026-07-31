@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 6,
-  "next_part": 4,
+  "next_part": 5,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -65,6 +65,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-30T20:11:41.448729+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep04/ep04_narrated_music.mp4",
+      "subtitle": "This ICE Is NOT Supposed To BURN?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-31T20:20:26.006665+00:00"
     }
   }
 }
