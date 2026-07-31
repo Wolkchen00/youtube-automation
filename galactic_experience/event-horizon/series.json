@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -195,6 +195,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-30T20:08:52.775022+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep02/ep02_narrated_music.mp4",
+      "subtitle": "Neutron Stars: A Cube Weighs MOUNT Everest",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-31T18:21:49.519064+00:00"
     }
   }
 }
