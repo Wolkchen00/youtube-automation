@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 6,
-  "next_part": 5,
+  "next_part": 6,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -76,6 +76,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-31T20:20:26.006665+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep05/ep05_narrated_music_hooked.mp4",
+      "subtitle": "Can I Turn A TAPE ROLL Into A NEVER-ENDING STRING?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-01T20:01:47.189187+00:00"
     }
   }
 }
