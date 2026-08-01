@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 5,
-  "next_part": 3,
+  "next_part": 4,
   "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9",
   "auto_replenish": {
     "enabled": true,
@@ -65,6 +65,17 @@
         "tiktok"
       ],
       "published_at": "2026-07-31T16:33:06.465863+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep03/ep03_music.mp4",
+      "subtitle": "Junk-Filled Backyard → Japanese Zen Garden ✨",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-01T15:52:13.321380+00:00"
     }
   }
 }
