@@ -1,0 +1,183 @@
+{
+  "generated_at": "2026-08-02T10:00:56.689434+00:00",
+  "snapshot_date": "2026-08-02",
+  "period": "2026-07-27 to 2026-08-02",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 123,
+        "total_views": 107348,
+        "total_videos": 248
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "IjR6ooIU6SQ",
+          "title": "The Real Reason Britain Called Napoleon Short",
+          "published": "2026-08-01T21:32:06Z",
+          "views": 182,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "q-jVtry0ntk",
+          "title": "The Real Reason Roman Concrete Survived Centuries",
+          "published": "2026-07-31T21:43:53Z",
+          "views": 129,
+          "views_48h": 129,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "WG146S7KNnk",
+          "title": "How Britain Won History's Shortest War In 1896!",
+          "published": "2026-07-30T20:09:29Z",
+          "views": 20,
+          "views_48h": 18,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "F7IplgjXwaM",
+          "title": "Isfahan, 1598 — The Jewel of Persia Awakened",
+          "published": "2026-07-26T21:51:50Z",
+          "views": 33,
+          "views_48h": 30,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 77
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 114,
+        "total_views": 99864,
+        "total_videos": 151
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Wxw1Ybwghvs",
+          "title": "Can I Turn A TAPE ROLL Into A NEVER-ENDING STRING?!",
+          "published": "2026-08-01T20:01:30Z",
+          "views": 491,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "XdlbRkY7J6o",
+          "title": "This ICE Is NOT Supposed To BURN?!",
+          "published": "2026-07-31T20:20:11Z",
+          "views": 69,
+          "views_48h": 69,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "5Ke4t1WRT3w",
+          "title": "I Found UNNATURAL APPLES... And They STARTED To GLOW!",
+          "published": "2026-07-30T20:11:22Z",
+          "views": 801,
+          "views_48h": 800,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 18
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 123,
+        "total_views": 57821,
+        "total_videos": 175
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "jyGtbJWG_gk",
+          "title": "What If the Moon Vanished? Earth's Tides COLLAPSE",
+          "published": "2026-08-01T17:44:55Z",
+          "views": 311,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "tshcQQCLwdM",
+          "title": "Neutron Stars: A Cube Weighs MOUNT Everest",
+          "published": "2026-07-31T18:21:15Z",
+          "views": 287,
+          "views_48h": 287,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "KhWGFlMwJ-w",
+          "title": "HD 189733b: Glass Rains SIDEWAYS",
+          "published": "2026-07-30T20:08:27Z",
+          "views": 448,
+          "views_48h": 388,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "sDmQ4lNH2m4",
+          "title": "ANIMA-13: The Glitch Horizon",
+          "published": "2026-07-27T18:26:15Z",
+          "views": 3,
+          "views_48h": 3,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "gy_6vMKupx0",
+          "title": "CHRONOS: The Great Engine",
+          "published": "2026-07-26T17:50:44Z",
+          "views": 2,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 72.5
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 99,
+        "total_views": 140956,
+        "total_videos": 226
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "lIowMRSJb_U",
+          "title": "Junk-Filled Backyard → Japanese Zen Garden ✨",
+          "published": "2026-08-01T15:51:46Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "j52QwXwKlpM",
+          "title": "Building A GLASS IGLOO From Scratch! 🛠️✨",
+          "published": "2026-07-31T16:32:53Z",
+          "views": 6,
+          "views_48h": 6,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "2yygBtzjp3M",
+          "title": "Building A GIANT TREEHOUSE From Scratch! 🛠️✨",
+          "published": "2026-07-30T20:10:35Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "fPwKk6y2ck0",
+          "title": "roots in the sky",
+          "published": "2026-07-27T16:51:34Z",
+          "views": 4,
+          "views_48h": 4,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "DRqP_gOKn-4",
+          "title": "ice whispers fire",
+          "published": "2026-07-26T15:51:25Z",
+          "views": 2,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 10.0
+    }
+  }
+}
