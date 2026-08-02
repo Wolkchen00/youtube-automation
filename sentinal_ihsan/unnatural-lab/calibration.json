@@ -1,22 +1,38 @@
 {
   "version": 1,
-  "generated_at": "2026-07-29T23:32:17.916162+00:00",
-  "source_snapshot": "2026-07-29",
+  "generated_at": "2026-08-02T10:36:31.288400+00:00",
+  "source_snapshot": "2026-08-02",
   "mode": "gecici_baseline",
-  "channel_median_30d": 15.0,
+  "channel_median_30d": 18.0,
   "series_stats": {
-    "n_published": 0,
-    "n_comparable": 0,
-    "series_median": null,
-    "videos": []
+    "n_published": 2,
+    "n_comparable": 1,
+    "series_median": 801.0,
+    "videos": [
+      {
+        "part": 3,
+        "video_id": "5Ke4t1WRT3w",
+        "family": "",
+        "metric": 801,
+        "age_h": 61.008
+      }
+    ]
   },
   "family_stats": [],
   "recommendations": {
     "boost_families": [],
     "explore_family": null,
-    "empty_reason": "veri_yok"
+    "empty_reason": null
   },
-  "double_down": [],
+  "double_down": [
+    {
+      "part": 3,
+      "video_id": "5Ke4t1WRT3w",
+      "family": "",
+      "metric": 801,
+      "ratio": 44.5
+    }
+  ],
   "pilot_kill": {
     "triggered": false,
     "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
@@ -26,7 +42,7 @@
     "history": [
       null,
       null,
-      null
+      801.0
     ]
   },
   "brief_note": "",

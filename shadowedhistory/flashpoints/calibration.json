@@ -1,20 +1,34 @@
 {
   "version": 1,
-  "generated_at": "2026-07-29T23:32:16.840674+00:00",
-  "source_snapshot": "2026-07-29",
+  "generated_at": "2026-08-02T10:36:30.324125+00:00",
+  "source_snapshot": "2026-08-02",
   "mode": "gecici_baseline",
-  "channel_median_30d": 78.5,
+  "channel_median_30d": 77.0,
   "series_stats": {
-    "n_published": 0,
-    "n_comparable": 0,
-    "series_median": null,
-    "videos": []
+    "n_published": 3,
+    "n_comparable": 1,
+    "series_median": 20.0,
+    "videos": [
+      {
+        "part": 1,
+        "video_id": "WG146S7KNnk",
+        "family": "tuhaf savaş",
+        "metric": 20,
+        "age_h": 61.04
+      }
+    ]
   },
-  "family_stats": [],
+  "family_stats": [
+    {
+      "family": "tuhaf savaş",
+      "n": 1,
+      "median": 20.0
+    }
+  ],
   "recommendations": {
     "boost_families": [],
-    "explore_family": null,
-    "empty_reason": "veri_yok"
+    "explore_family": "unutulmuş kişi",
+    "empty_reason": null
   },
   "double_down": [],
   "pilot_kill": {
@@ -26,9 +40,9 @@
     "history": [
       null,
       null,
-      null
+      20.0
     ]
   },
-  "brief_note": "",
+  "brief_note": "early baseline, limited data. Reserve an exploration slot for unutulmuş kişi.",
   "extra_topics": []
 }

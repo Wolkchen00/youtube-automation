@@ -1,22 +1,44 @@
 {
   "version": 1,
-  "generated_at": "2026-07-29T23:32:15.084751+00:00",
-  "source_snapshot": "2026-07-29",
+  "generated_at": "2026-08-02T10:36:29.001741+00:00",
+  "source_snapshot": "2026-08-02",
   "mode": "gecici_baseline",
-  "channel_median_30d": 72.0,
+  "channel_median_30d": 72.5,
   "series_stats": {
-    "n_published": 0,
-    "n_comparable": 0,
-    "series_median": null,
-    "videos": []
+    "n_published": 3,
+    "n_comparable": 1,
+    "series_median": 448.0,
+    "videos": [
+      {
+        "part": 1,
+        "video_id": "KhWGFlMwJ-w",
+        "family": "cehennem gezegenler",
+        "metric": 448,
+        "age_h": 61.057
+      }
+    ]
   },
-  "family_stats": [],
+  "family_stats": [
+    {
+      "family": "cehennem gezegenler",
+      "n": 1,
+      "median": 448.0
+    }
+  ],
   "recommendations": {
     "boost_families": [],
-    "explore_family": null,
-    "empty_reason": "veri_yok"
+    "explore_family": "güneş sistemi uçları",
+    "empty_reason": null
   },
-  "double_down": [],
+  "double_down": [
+    {
+      "part": 1,
+      "video_id": "KhWGFlMwJ-w",
+      "family": "cehennem gezegenler",
+      "metric": 448,
+      "ratio": 6.1793
+    }
+  ],
   "pilot_kill": {
     "triggered": false,
     "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
@@ -26,9 +48,9 @@
     "history": [
       null,
       null,
-      null
+      448.0
     ]
   },
-  "brief_note": "",
+  "brief_note": "early baseline, limited data. Reserve an exploration slot for güneş sistemi uçları. Double down on breakout patterns in: cehennem gezegenler.",
   "extra_topics": []
 }
