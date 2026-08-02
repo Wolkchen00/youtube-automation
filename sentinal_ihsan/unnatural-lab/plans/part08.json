@@ -1,0 +1,49 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "This ROCK Is NOT Supposed To FLOAT?!"
+  },
+  "synopsis": "A man handles an ordinary-looking rock that defies gravity, floating in water or even in the air with minimal support.",
+  "narration": "I found this rock near the creek, and I swear it's lighter than air. It just refuses to sink, no matter what I do. And when it’s not in water, it’s like it’s barely touching the surface. What is even going on with this thing, and...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) gently drops a fist-sized, ordinary-looking grey river rock into a clear glass jar of water. Instead of sinking, the rock slowly and gracefully floats upwards from the bottom, coming to rest just below the surface. The water is perfectly still, reflecting the soft kitchen light. His hands are steady, his expression calm.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) uses two fingers to carefully push the floating rock down to the bottom of the jar. As he releases it, the rock bobs back up with surprising, slow resistance, returning to its subsurface position. The kitchen counter is clean and well-lit by a window. His focus is entirely on the rock's impossible buoyancy.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Extreme close-up of the rock. Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) has it tied with a thin, almost invisible fishing line and suspended just above the kitchen counter. The rock subtly, gently oscillates and drifts slightly in the air as if lighter than air, defying gravity without visible support. The soft ambient light highlights its rough texture.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Medium close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) holds the rock loosely in his open palm. The rock visibly lifts slightly off his skin, creating a tiny, impossible gap, as if repelled by his hand. He observes it with calm wonder. The background is a sunlit, slightly cluttered garage workbench, emphasizing the ordinary setting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A light, ethereal orchestral piece with delicate pizzicato strings, a breathy flute melody, and subtle, sustained piano chords. The mood is whimsical and mysterious, with a slow, floating tempo. It opens with gentle, airy tones, swells into a slightly more complex, yet still delicate, melody, and then resolves with soft, lingering notes, like a feather drifting down.",
+  "hook_shot": 3,
+  "doctrine_sha256": "2e5cccb17da769bcf6e236e2f4af5633b66bfee0062a10b21476378c4184674d"
+}

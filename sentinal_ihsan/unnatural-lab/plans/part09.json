@@ -1,0 +1,49 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "I Found UNNATURAL CLAY... And It STARTED To WHISPER!"
+  },
+  "synopsis": "A man molds a piece of clay that, as it's shaped, emits faint, unidentifiable whispers or murmurs.",
+  "narration": "I picked up this clay from the art supply store, and it started doing this weird thing. Every time I shape it, there's these faint whispers coming from it. I can't quite make out what it's saying, but it's definitely...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) intently molds a piece of soft, grey modeling clay with his thumbs. As he presses and indents it, faint, barely audible whispers seem to emanate from the clay, making him cock his head slightly to listen closer. The workshop is quiet, lit by a single overhead work light, highlighting his focused expression.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) squishes the entire lump of clay in his hands, compressing it. The whispers grow slightly louder and more distinct, like multiple voices murmuring just below the threshold of comprehension. He holds the clay close to his ear, his eyes wide with a calm curiosity. The background is a blurred garage setting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Extreme close-up of the clay, now shaped into a rough, ear-like form. Tiny, almost imperceptible vibrations ripple across its surface. The whispers are clearer now, sounding like fragmented, disjointed human speech, just on the edge of being understood. Ihsan's (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) fingers gently prod the vibrating clay, his presence implied just out of frame. The light catches the subtle movement on the clay's surface.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Medium close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) slowly kneads the clay again, gently folding and smoothing it. As he does, the faint, continuous murmuring returns, a constant background hum of indistinguishable voices. His movements are deliberate and steady, his gaze fixed on the clay, absorbed in the anomaly. Natural light filters in from a window.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A dark, atmospheric drone with sustained, low-frequency synth pads and subtle, granular textures that hint at distant, indistinct voices. The mood is eerie and mysterious, with a very slow, almost glacial tempo. It opens with an immediate sense of unease, builds gradually with the addition of high-frequency, metallic scrapes, and then fades out on a prolonged, questioning tone.",
+  "hook_shot": 3,
+  "doctrine_sha256": "2e5cccb17da769bcf6e236e2f4af5633b66bfee0062a10b21476378c4184674d"
+}

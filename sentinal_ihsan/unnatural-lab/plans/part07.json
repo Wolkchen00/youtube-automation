@@ -1,0 +1,49 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "This MIRROR Is NOT Supposed To SHOW THE PAST?!"
+  },
+  "synopsis": "A man interacts with a small handheld mirror that consistently reflects scenes from the immediate past instead of the present moment.",
+  "narration": "Okay, so I swear this thing just showed me my hand closing around it before I even picked it up. Now it's a few seconds behind, like a weird delay. And don't tell me it's just my eyes, because I keep trying to trick it, and it just...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) holds a small, ornate handheld mirror. The reflection shows his hand as it was a split second ago, just before it adjusted its grip, creating a subtle temporal lag. Natural daylight from a nearby window illuminates the scene, casting soft shadows on his curious, calm face. The mirror's reflection is slightly desaturated compared to real time.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) places a small, brightly colored toy car directly in front of the mirror on a wooden workshop bench. The mirror's reflection, however, still shows the empty space on the bench from moments before he placed the car, creating a disorienting visual. His expression is one of calm observation, his hands steady. The workshop is bathed in warm, afternoon sunlight.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Extreme close-up on the mirror's surface. Ihsan's (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) fingers are visible at the edges, holding it. The reflection now clearly shows a completely different, older scene: a stack of wooden blocks that he disassembled minutes ago, undisturbed on the bench. The light in the reflection is subtly different, like a memory. The edges of the mirror are slightly warped, enhancing the effect.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Medium close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) gently rotates the mirror, his fingers brushing the frame. The reflection shows his hand completing the rotation a second later than his actual hand, perpetually lagging. The background is a blurred, sunlit workshop corner with tools hanging on a pegboard. His gaze is focused, slightly intense, on the mirror's surface, as if trying to catch it.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A minimalist, shimmering ambient piece with sustained glass harmonica notes and a subtle, reverbed acoustic guitar arpeggio. The mood is curious and slightly unsettling, building a gentle tension through a slow tempo and sparse, echoing textures, then resolving into a sustained, fading drone.",
+  "hook_shot": 3,
+  "doctrine_sha256": "2e5cccb17da769bcf6e236e2f4af5633b66bfee0062a10b21476378c4184674d"
+}

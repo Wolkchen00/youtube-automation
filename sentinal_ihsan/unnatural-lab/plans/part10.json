@@ -1,0 +1,49 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Can I Turn A BOTTLE Into A NEVER-ENDING FOUNTAIN?!"
+  },
+  "synopsis": "A man attempts to empty a small bottle that continuously refills itself with liquid, producing an endless stream.",
+  "narration": "So I found this empty bottle, and it just keeps refilling itself. I've been pouring for like five minutes straight, and it's still going. I even tried to cap it, but it just builds up pressure. It's like a never-ending...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) holds an ordinary, clear plastic bottle, about 500ml, tilted downwards. A steady stream of clear water pours out into a large, empty glass bowl on a kitchen counter. The stream shows no sign of diminishing, despite the bottle's small size. The kitchen is brightly lit by natural morning light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Mid-shot, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) has tilted the bottle completely upside down, holding it over the overflowing glass bowl. The water continues to pour out in a consistent, unbroken stream, defying gravity and the bottle's apparent capacity. His calm expression is fixed on the impossible flow. The counter is getting wet.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Extreme close-up on the bottle's opening. Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) tries to quickly cap it with his thumb. Water visibly forces its way out from around his thumb with surprising pressure, creating small, powerful jets. The bottle itself subtly bulges with the internal pressure, a faint, impossible vibration visible. The light glints off the water.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Medium shot, Ihsan (characters: ihsan_maker, wearing a plain black crew-neck t-shirt) holds the bottle, now upright, watching it. Ripples appear on the surface of the liquid inside, and tiny bubbles continuously rise, indicating an unseen replenishment. He gently shakes the bottle, but the liquid level remains constant, defying the agitation. Soft daylight fills the scene.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "music": "A flowing, minimalistic piano piece with repeating arpeggios and sustained, shimmering synth pads. The mood is curious and slightly whimsical, with a medium-slow tempo that evokes a continuous flow. It starts with an immediate, gentle trickle of notes, gradually builds a subtle, undulating harmony, and then resolves with a soft, persistent, looping pattern that fades out gracefully.",
+  "hook_shot": 3,
+  "doctrine_sha256": "2e5cccb17da769bcf6e236e2f4af5633b66bfee0062a10b21476378c4184674d"
+}
