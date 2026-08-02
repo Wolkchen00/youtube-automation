@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 5,
-  "next_part": 4,
+  "next_part": 5,
   "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9",
   "auto_replenish": {
     "enabled": true,
@@ -76,6 +76,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-01T15:52:13.321380+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep04/ep04_music.mp4",
+      "subtitle": "Building A JURASSIC PARK Entrance From SCRATCH! 🛠️✨",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-02T15:55:01.202671+00:00"
     }
   }
 }
