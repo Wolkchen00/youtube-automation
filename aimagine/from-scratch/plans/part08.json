@@ -1,0 +1,38 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "Building A PIRATE SHIP Treehouse From SCRATCH! 🛠️✨"
+  },
+  "synopsis": "A magnificent, multi-deck pirate ship treehouse with sails and rigging is constructed high within a majestic forest canopy, becoming a fantastical abode.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Mid-construction of a pirate ship treehouse, the curved wooden hull suspended within the massive branches of ancient, gnarled trees. Skilled carpenters are attaching dark wooden planks to the frame, sunlight dappling through the dense forest canopy. The camera ascends slowly, revealing the impressive scale of the project high above the forest floor.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Time-lapse showing the upper decks, mast, and intricate rigging of the pirate ship treehouse rapidly taking shape amidst the vibrant green leaves. Ropes are hoisted, sails unfurled, and decorative elements are added, transforming the structure into a majestic vessel. The camera circles the evolving ship, capturing the dynamic progression.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Close-up on skilled hands intricately tying nautical knots for the ship's rigging, showing the meticulous craftsmanship involved. Sunlight filters through the leaves, creating moving patterns of light and shadow on the ropes and hands. The camera holds steady, highlighting the detail and authenticity of the sailing preparations.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Grand reveal of the completed pirate ship treehouse, sails majestically unfurled, nestled perfectly within the towering treetops of a lush, ancient forest. The camera slowly pulls back to showcase the entire structure, a fantastical blend of nature and adventure, ready for imaginative voyages and blending seamlessly with its verdant surroundings.",
+      "seed": null
+    }
+  ],
+  "family": "fantezi konutlar",
+  "music": "A spirited, percussive build-track with a distinct swashbuckling rhythm, featuring acoustic instruments like ukulele, mandolin, and light drums, evoking a sense of adventure and craftsmanship. The energy escalates with a playful, driving beat, softening for one beat with a gentle, flowing string motif just before a whimsical, soaring orchestral reveal. The track ends mid-groove, maintaining its adventurous spirit for a seamless loop.",
+  "hook_shot": 4,
+  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
+}

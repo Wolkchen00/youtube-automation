@@ -14,8 +14,8 @@
   "publish_mode": "auto",
   "status": "active",
   "priority": 999,
-  "total_parts": 5,
-  "next_part": 5,
+  "total_parts": 10,
+  "next_part": 6,
   "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9",
   "auto_replenish": {
     "enabled": true,
@@ -36,8 +36,8 @@
     "title_style": "a punchy English YouTube Shorts title using ONE of these THREE patterns only, never invent a new one: (1) 'Building A <X> From Scratch! 🛠️✨', (2) 'Building A <FRANCHISE> <STRUCTURE> From SCRATCH! 🛠️✨' with the franchise name in CAPS, (3) '<Before> → <Stunning After> ✨' only for the transformation family. One or two emoji are allowed. No hashtags or surrounding quotes.",
     "brief": "FROM SCRATCH üretim brief'i (dayanak: aimagine/KONSEPT.md v1.4, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Dört çekim vardır, toplam yaklaşık 32 sn. shot 1 KANCA: inşaatın ortasında, karakteristik parça yarı bitmiş ve tanınır; eller veya ekip iş başında; boş arsa, malzeme yığını ve plan çizimi açılışı yasak. shot 2 TEMPO: inşaat hızlanan montaj enerjisiyle büyür. shot 3 DETAY: en tatmin edici malzeme veya mekanizma yakın planı. shot 4 REVEAL + LOOP: bitmiş yapı tek genel planda açılır, kompozisyon shot 1'e rimlenir ve hayat sürerken biter. hook_shot her zaman 4'tür. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: oyun/film üsleri, fantezi konutlar, absürt eğlence mimarisi, dönüşüm, saklı/mühendislik harikası. Aynı aile üst üste iki bölümde kullanılamaz. (3) KONU VE DOĞRULUK: Bölüm başına tek yapı ve tek reveal vardır. Doktrin §6 bir ilham KONU listesidir; seed_id ve topic_pool yoktur. İlham konuları: Building a MINECRAFT Village From Scratch!; Building a ZELDA Shrine From Scratch!; Building HOWL'S MOVING CASTLE From Scratch!; Building a TATOOINE Homestead From Scratch!; Building an AVATAR Treehouse From Scratch!; Building a POKEMON Center From Scratch!; Building a Hidden UNDERGROUND Library!; Building a GLASS IGLOO Under the Northern Lights!; Junk-Filled Backyard → Japanese Zen Garden; Building a PIRATE SHIP Treehouse From Scratch!; Building a CYBERPUNK Rooftop Garden From Scratch!; Building a JURASSIC PARK Gate & Raptor Pen From Scratch! Başlık her zaman title_style kalıplarından üretilir. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; rage-bait yasak. (5) SES: Narration ve voiceover yoktur; müzik ve görsel tek anlatımdır. (6) LOOP DİKİŞİ: Teaser shot 4 reveal'inden alınır; son kare teaser'ın ilk karesine, teaser da shot 1'e doğal akar. Kapanış kartı, kutlama, kameraya bakış, sunum ve ta-da jesti yasak. (7) GÜVENLİK: Korumasız elektrik işi, güvenliksiz derin kazı, açık alev ve başka tehlikeli pratikleri özendiren görüntü yok. (8) MÜZİK: İnşaat vuruşlarına senkron perküsif yapı, shot 3 sonunda tek vuruş yumuşama, final reveal'de açılma ve loop için ritmin ortasında bitiş.",
     "last_run": {
-      "at": "2026-07-29T18:42:15.561097+00:00",
-      "parts": "1-5"
+      "at": "2026-08-03T16:57:10.745739+00:00",
+      "parts": "6-10"
     }
   },
   "parts": {
@@ -87,6 +87,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-02T15:55:01.202671+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep05/ep05_music.mp4",
+      "subtitle": "Building A Hidden UNDERGROUND Library From SCRATCH! 🛠️✨",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-03T17:16:27.667194+00:00"
     }
   }
 }
