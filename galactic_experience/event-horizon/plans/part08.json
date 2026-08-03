@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "WASP-76b: Iron Rains from the Sky"
+  },
+  "synopsis": "On the exoplanet WASP-76b, extreme temperatures on its day side vaporize iron, which then condenses into molten metal rain on the cooler night side.",
+  "narration": "Welcome to WASP-76b, a scorching exoplanet where temperatures reach thousands of degrees. On its day side, iron vaporizes into the atmosphere. Then, as fierce winds carry it to the cooler night side, it condenses into clouds, raining molten iron onto the alien landscape.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A fiery, intensely hot close-up of the day side of exoplanet WASP-76b. Super-heated iron gas visibly shimmers and rises from the molten surface into a turbulent, glowing orange-red atmosphere, distorted by extreme heat. Slow, dramatic camera movement across the turbulent surface.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A cinematic transition across the terminator line of WASP-76b, moving from the scorching day into the cooler, perpetually dark night side. Ominous, heavy clouds of condensing iron vapor hang low, from which gleaming streaks of molten iron rain are visibly falling onto a dark, barren landscape below.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A wide, dramatic shot of WASP-76b's night side, bathed in the eerie glow of its supergiant host star just off-screen. Molten iron rain streaks continuously across the frame, creating shimmering pools and rivers on the dark, craggy surface, offering a stark, loopable vision of this extreme world.",
+      "seed": null
+    }
+  ],
+  "family": "cehennem gezegenler",
+  "seed_id": 16,
+  "music": "A tense, atmospheric cosmic soundscape with a driving, slightly unsettling pulse. The music builds with a metallic, percussive shimmer as the iron rain is introduced, swelling with a dramatic, low-frequency synth. It sustains an urgent, almost industrial rhythm, cutting abruptly.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

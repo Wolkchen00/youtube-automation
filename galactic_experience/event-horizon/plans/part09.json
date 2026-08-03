@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "What If Earth Stopped Spinning? TOTAL DESTRUCTION"
+  },
+  "synopsis": "If Earth abruptly ceased its rotation, everything on its surface not anchored down would be flung eastward at supersonic speeds, causing unimaginable global devastation.",
+  "narration": "What if Earth suddenly stopped spinning? The planet's rotation carries us at over 1,600 kilometers per hour. A sudden halt would send everything not bolted down flying eastward at that incredible speed. Oceans would become tsunamis, continents would reshape, and life as we know it would be utterly changed.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A beautiful, serene orbital view of Earth spinning gently in space, bathed in soft sunlight. Wisps of clouds drift across its blue and green surface, showcasing the peaceful, natural rotation of our home planet. The camera slowly tracks its rotation.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A sudden, jarring halt in Earth's rotation. From an orbital perspective, the surface below erupts into chaos: vast stretches of ocean water visibly surge into titanic tsunamis, massive landmasses fracture and shift, and atmospheric layers are violently ripped away, showing a global catastrophe unfold.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A close-up, ground-level view of the aftermath. Massive, impossibly high tsunami waves crash inland, tearing through landscapes. Debris, torn from the ground, flies across the frame at incredible speed, creating a continuous, horrifying vision of the planet's surface being reshaped by immense inertia, looping back to the initial stillness.",
+      "seed": null
+    }
+  ],
+  "family": "bilim temelli what-if",
+  "seed_id": 25,
+  "music": "A suspenseful cosmic pulse with a growing sense of tension. The music features a rapid, escalating synth arpeggio and a deep, resonant bass drop as the catastrophic event occurs, swelling into a chaotic, powerful soundscape. It maintains an urgent, driving momentum, ending sharply mid-phrase.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

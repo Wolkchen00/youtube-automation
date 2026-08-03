@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Milky Way and Andromeda: A COSMIC COIN FLIP"
+  },
+  "synopsis": "Recent simulations suggest our Milky Way and the Andromeda galaxy have only a 50/50 chance of truly merging into a single elliptical galaxy within the next 10 billion years.",
+  "narration": "For billions of years, the Milky Way and Andromeda have been on a collision course. But new simulations show it's less a definite merger and more a cosmic coin flip. There's only a 50/50 chance they will truly coalesce into a single elliptical galaxy within the next ten billion years.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A majestic, wide-angle view of the Milky Way galaxy, its spiral arms glowing with countless stars and nebulae, slowly rotating in the cosmic void. The camera gently tracks its vast, serene presence.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Andromeda galaxy, a magnificent spiral, slowly and gracefully approaches the Milky Way from a distance. The perspective emphasizes their colossal scale, showing the two galaxies drawing closer but still distinct, filling the frame with their stellar grandeur. The camera slowly zooms in, hinting at the potential interaction.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A surreal, artistic representation of the two galaxies in an intricate \"dance\" – passing each other closely, their outer spiral arms beginning to interact and distort slightly, but not yet fully merging. The scene conveys a moment of immense, uncertain gravitational interplay, creating a beautiful, loopable cosmic ballet.",
+      "seed": null
+    }
+  ],
+  "family": "kozmik kader",
+  "seed_id": 21,
+  "music": "An expansive, hopeful cosmic theme with a steady, forward-moving pulse. The music swells with a sense of grand destiny and uncertainty, featuring sweeping orchestral pads and a subtle, questioning melodic line. It maintains an ethereal, evolving energy, fading out gently mid-phrase.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

@@ -14,8 +14,8 @@
   "publish_mode": "auto",
   "status": "active",
   "priority": 999,
-  "total_parts": 5,
-  "next_part": 5,
+  "total_parts": 10,
+  "next_part": 6,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -177,8 +177,8 @@
     "title_style": "a sharp English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes.",
     "brief": "EVENT HORIZON üretim brief'i (dayanak: galactic_experience/KONSEPT.md v1.4, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, narration, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Üç çekim vardır. shot 1 ŞOK: gerçek gök cismi en dramatik halinde, iddia narration ilk cümlesinde; yavaş yıldız alanı, logo ve welcome kurulumu yasak. shot 2 ÖLÇEK: karşılaştırma veya yakınlaşma faktın ölçeğini hissettirir. shot 3 UÇURUM: uç sonuç, kompozisyon shot 1'e rimlenir ve hareket sürerken biter. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: güneş sistemi uçları, kozmik kader, derin uzay canavarları, cehennem gezegenler, ölçek şoku, bilim temelli what-if. Aynı aile üst üste iki bölümde kullanılamaz. (3) DOĞRULUK: Fakt gerçek astronomi veya astrofizikten gelir ve yaygın kaynakla doğrulanabilir; sayı uydurulamaz. Konu yalnız runtime enjekte edilen topic_pool girdilerinden seçilir; her partta tam sayı seed_id zorunludur ve yalnız o tohumun konusu ile family değeri kullanılır. Tohum listesi bu brief'te yer almaz. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; dini veya komplocu kışkırtma ve rage-bait yasak. (5) SES: Narration 30-44 kelimedir; ilk cümle iddianın kendisidir. Selamlama, CTA ve 'did you know' yasak. (6) LOOP DİKİŞİ: Son kompozisyon ilk kareye döner; kapanış kartı, sunum jesti ve kutlama yasak. (7) GÜVENLİK: Korku estetiği ve epilepsi riski yaratan hızlı flaş dizileri yok; ton dehşet değil huşudur. (8) MÜZİK: Huşu odaklı kozmik altlık sabit ileri nabız taşır, ölçek anında tek kısa kabarma yapar ve kesintisiz loop için cümlenin ortasında biter.",
     "last_run": {
-      "at": "2026-07-29T18:41:12.688254+00:00",
-      "parts": "1-5"
+      "at": "2026-08-03T18:19:00.687132+00:00",
+      "parts": "6-10"
     }
   },
   "parts": {
@@ -228,6 +228,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-02T17:44:36.681734+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep05/ep05_narrated_music.mp4",
+      "subtitle": "Venus: A Day Is LONGER Than Its Year",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-03T18:30:00.216514+00:00"
     }
   }
 }

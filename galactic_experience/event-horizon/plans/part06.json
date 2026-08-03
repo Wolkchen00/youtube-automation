@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "TON 618: The Universe's Giga-Black Hole"
+  },
+  "synopsis": "The supermassive black hole TON 618 is one of the largest ever discovered, with an unfathomable mass equivalent to tens of billions of suns.",
+  "narration": "TON 618 is no ordinary black hole; it's a hyper-luminous quasar fueled by one of the largest known black holes, weighing an astonishing forty billion times the mass of our Sun. Its gravitational pull shapes an entire galactic region, dwarfing everything around it.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A close, overwhelming view of the accretion disk of TON 618, a swirling vortex of superheated plasma in vibrant orange and red, impossibly vast. Matter streams towards the event horizon, warped by intense gravity, with relativistic jets faintly visible far in the distance. Camera slowly drifts through the plasma, emphasizing its colossal scale.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A dramatic pull-back shot, revealing TON 618's accretion disk as a pinpoint of light against a backdrop of a vast, ancient galaxy. Zoom out further to show other galaxies, tiny specks, as the black hole's immense gravitational influence distorts the surrounding spacetime. A subtle cosmic dust lane streaks across the foreground.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A serene, wide-angle shot of TON 618, its powerful jets now more prominent, carving through the fabric of space and illuminating distant galactic clusters. The immense scale is visually reinforced as the camera ever so slowly orbits, showing the vastness it influences, transitioning back towards the chaotic inner disk for a seamless loop.",
+      "seed": null
+    }
+  ],
+  "family": "derin uzay canavarları",
+  "seed_id": 5,
+  "music": "A deep, resonant cosmic soundscape begins with an immediate, powerful bass pulse, building slowly with an ethereal synth pad. A subtle, high-frequency shimmer enters as the scale is revealed, swelling with gravitas and wonder, then continues its rhythmic forward drive, ending unresolved.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

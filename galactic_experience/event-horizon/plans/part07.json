@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Saturn: It Would Float on Water"
+  },
+  "synopsis": "Despite its massive size, Saturn is less dense than water, meaning it would famously float if placed in an impossibly large cosmic ocean.",
+  "narration": "Saturn, with its majestic rings, holds a surprising secret: it's less dense than water. Imagine a cosmic ocean vast enough to hold it; this gas giant would simply bob on the surface. Its entire structure, mostly hydrogen and helium, makes it incredibly light for its enormous volume.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A classic, majestic view of Saturn, perfectly rendered with its iconic, delicate rings shimmering in distant sunlight. The gas giant's intricate cloud bands slowly churn, showing subtle atmospheric motion. The camera slowly zooms in on its serene, gaseous surface.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "An impossible, breathtaking vista: a colossal, tranquil cosmic ocean, stretching endlessly into the void. Saturn, with its rings, is gently lowering into the water, just beginning to make contact, showing its massive size relative to the water surface. The water ripples with subtle, impossibly slow motion.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Saturn now partially submerged in the vast cosmic ocean, serenely floating. The rings reflect the water's surface, creating a mirror effect. The camera slowly rotates around Saturn, emphasizing its buoyant nature, with the endless liquid expanse forming a surreal, loopable backdrop.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 3,
+  "music": "A gentle, curious cosmic drone with a light, airy rhythmic pulse. As Saturn's unique property is revealed, the music swells briefly with a sense of playful wonder, incorporating shimmering chimes and a rising synth melody. It maintains its steady, floating rhythm, then cuts cleanly mid-phrase.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}
