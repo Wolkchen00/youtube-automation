@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 11,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -98,6 +98,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-02T20:03:05.021352+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep07/ep07_narrated_music_hooked.mp4",
+      "subtitle": "This MIRROR Is NOT Supposed To SHOW THE PAST?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-03T20:33:40.690381+00:00"
     }
   }
 }
