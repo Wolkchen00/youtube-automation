@@ -43,7 +43,7 @@ REQUIRED_KEYLESS_GOLDEN_SERIES = frozenset({
 })
 ROCK2_EXPECTED_OPT_IN_SERIES = frozenset({"from-scratch"})
 FROM_SCRATCH_ROCK2_AUTO_KEYS = frozenset({
-    "chain_breaks", "hook_shot", "shot_plan", "title_patterns",
+    "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "credit_hard_cap",
 })
 
 
@@ -463,6 +463,7 @@ class GoldenNeutralityTests(unittest.TestCase):
         # Rock 2 state: only the reviewed from-scratch opt-in may bypass its old prompt.
         self.assertEqual(opted_in, FROM_SCRATCH_ROCK2_AUTO_KEYS)
         self.assertEqual(meta.auto_replenish.get("shots"), 6)
+        self.assertEqual(meta.auto_replenish.get("shot_seconds"), "10")
 
     def test_keyless_normalizer_does_not_introduce_new_fields(self):
         plan = {
