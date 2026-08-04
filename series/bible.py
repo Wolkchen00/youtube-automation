@@ -190,6 +190,14 @@ class Bible:
         return v if v in ("series", "episode") else "series"
 
     @property
+    def required_layers(self) -> list[str]:
+        """Delivery layers that must succeed for this episode (opt-in)."""
+        value = self.data["series"].get("required_layers")
+        if not isinstance(value, list):
+            return []
+        return [str(item).strip() for item in value if str(item).strip()]
+
+    @property
     def narration(self) -> dict:
         """Anlatım katmanı ayarı: {'channel': 'galactic_experiment'|'shadowedhistory'|...}.
         Boşsa anlatım eklenmez (motorun native sesi kullanılır)."""
@@ -290,6 +298,12 @@ class Bible:
         denetim talimatı). Örn: "qc": {"enabled": true}"""
         v = self.data["series"].get("qc") or {}
         return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
+    def require_all_shots(self) -> bool:
+        """Whether missing, QC-failed, or QC-skipped shots block delivery."""
+        value = self.data["series"].get("qc") or {}
+        return bool(isinstance(value, dict) and value.get("require_all_shots"))
 
     @property
     def transitions(self) -> dict:

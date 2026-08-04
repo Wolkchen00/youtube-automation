@@ -3,8 +3,8 @@ name: From Scratch Daily
 # 'FROM SCRATCH' gunluk seridi (aimagine kanali, @aimagine_._357). Dayanak: aimagine/KONSEPT.md
 # (v1.5, ONAYLANDI). Ihsan karari 2026-07-29: "TUM KANALLARI ACALIM GUNLUK 1 VIDEO".
 # Format: 4 x 8 sn Building From Scratch, anlatimsiz, teaser acik, hook_shot = cekim 4.
-# publish_mode="approval": video uretilir, Telegram'a onay kartiyla gider; ONAY GELMEDEN
-# hicbir platforma yayinlanmaz. Doktrin kapisi: kosu basinda KONSEPT SHA-256 loglanir,
+# publish_mode="auto": Ihsan'in 2026-07-30 onay dondurma karari surer; basarili video
+# otomatik yayinlanir. Doktrin kapisi: kosu basinda KONSEPT SHA-256 loglanir,
 # pin/damga eslesmezse fail-closed.
 # Saat duzeni: bu kosu 14:30 UTC -> event-horizon 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
 # kie-uretim concurrency grubu 4 hatti fiilen serilestirir (Kie kredi guvenligi, FAZ 1 kurali).
@@ -52,7 +52,7 @@ jobs:
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
-          EPISODE_CREDIT_CAP=900
+          EPISODE_CREDIT_CAP=1400
           MONTHLY_CREDIT_CAP=60000
           EOF
 

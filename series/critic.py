@@ -318,17 +318,19 @@ def _notify(msg: str, frames: list[Path] | None = None) -> None:
 
 
 def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
-            regen_fn, episode: int, budget: dict) -> tuple[Path | None, float]:
+            regen_fn, episode: int, budget: dict) -> tuple[Path | None, float, str]:
     """Üretilmiş bir çekimi denetle; REDse regen_fn(güçlendirilmiş_prompt) ile yeniden
     üret (çekim başına maks max_regens_per_shot, bölüm başına budget["left"]).
 
-    Dönüş: (kullanılacak_klip_yolu | None, regen'lerin ek kredisi).
+    Dönüş: (kullanılacak_klip_yolu | None, regen'lerin ek kredisi,
+    ``"pass"|"skip"|"fail"``). Durum her zaman açıktır; require_all_shots modunda
+    ``skip`` yol dönmez ve teslimatı engeller.
     None = çekim eşiği geçemedi → çağıran onu üretim-FAIL gibi işler (bölümden düşer).
     Sözleşme: dönüşte clip_path adında dosya YA onaylıdır YA hiç yoktur — reddedilenler
     *_qcfail*.mp4'e taşınır, idempotent 'atla' yolu asla bozuk klip devralmaz."""
     qc = qc_config(bible)
     if not qc:
-        return Path(clip_path), 0.0
+        return Path(clip_path), 0.0, "pass"
     clip_path = Path(clip_path)
     slug, n = bible.slug, shot.get("n")
     extra_credits = 0.0
@@ -356,7 +358,17 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                             f"(nedenler: {'; '.join(all_fix_notes[:3]) or 'anatomi'}) ✅")
             else:
                 logger.warning(f"🔍 QC ATLANDI: çekim {n} — {'; '.join(reasons)}")
-            return clip_path, extra_credits
+                if bible.require_all_shots:
+                    skipped = clip_path.parent / f"{clip_path.stem}_qcskip{attempt}{clip_path.suffix}"
+                    try:
+                        clip_path.replace(skipped)
+                    except Exception as error:
+                        logger.warning(f"⚠️ QC: atlanan klip taşınamadı ({error})")
+                    logger.error(
+                        f"❌ QC skip require_all_shots nedeniyle çekim {n} teslimatını engelledi"
+                    )
+                    return None, extra_credits, "skip"
+            return clip_path, extra_credits, verdict
 
         # ── RED ──
         logger.warning(f"🔍 QC RED: çekim {n} (deneme {attempt}): {'; '.join(reasons)}")
@@ -383,7 +395,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     f"{attempt} regen denendi, eşik geçilemedi → çekim bölümden ÇIKARILDI. "
                     f"Bölüm kalan çekimlerle hazırlanıyor — yayın öncesi elle bak.",
                     frames=frames)
-            return None, extra_credits
+            return None, extra_credits, "fail"
 
         budget["left"] -= 1
         attempt += 1
@@ -410,5 +422,5 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
             _notify(f"🔍❌ *QC — {bible.title}* ep{episode} çekim {n}: klip QC'den geçemedi ve "
                     f"yeniden üretim de başarısız → çekim bölümden ÇIKARILDI (elle bak).",
                     frames=frames)
-            return None, extra_credits
+            return None, extra_credits, "fail"
         # döngü başa döner → yeni klip denetlenir

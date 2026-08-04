@@ -4,6 +4,7 @@ import copy
 import hashlib
 import json
 import pathlib
+import re
 import sys
 import tempfile
 import types
@@ -166,6 +167,16 @@ class DoctrineGateTests(unittest.TestCase):
         self.assertEqual(bible_module.doctrine_path("paths"), explicit)
         explicit.unlink()
         self.assertIsNone(bible_module.doctrine_path("paths"))
+
+    def test_doctrine_hash_is_crlf_lf_equivalent(self):
+        lf = self.root / "lf.md"
+        crlf = self.root / "crlf.md"
+        lf.write_bytes(b"Line one\nLine two\n")
+        crlf.write_bytes(b"Line one\r\nLine two\r\n")
+        self.assertEqual(
+            bible_module.doctrine_sha256(lf),
+            bible_module.doctrine_sha256(crlf),
+        )
 
     def test_missing_empty_and_completed_doctrine_fail_before_gemini(self):
         for slug, status, text in (
@@ -436,7 +447,7 @@ class InstalledSeriesTests(unittest.TestCase):
         detailed = {
             "flashpoints": ("shad0wedhistory", 2, "8", (26, 38), 6, 27),
             "event-horizon": ("galacticexperimet", 3, "6", (30, 44), 6, 27),
-            "from-scratch": ("Youtube", 4, "8", None, 5, 0),
+            "from-scratch": ("Youtube", 6, "10", None, 6, 0),
         }
         for slug, values in detailed.items():
             profile, shots, seconds, word_range, family_count, pool_size = values
@@ -458,7 +469,7 @@ class InstalledSeriesTests(unittest.TestCase):
         expected = {
             "flashpoints": (2, "8", False),
             "event-horizon": (3, "6", False),
-            "from-scratch": (4, "8", True),
+            "from-scratch": (6, "10", True),
         }
         for slug, (shots, seconds, teaser) in expected.items():
             with self.subTest(slug=slug):
@@ -477,6 +488,56 @@ class InstalledSeriesTests(unittest.TestCase):
         self.assertTrue(flash.title_card)
         scratch = Bible.load("from-scratch")
         self.assertNotIn("narration", scratch.data)
+        self.assertTrue(scratch.chain_frames)
+        self.assertEqual(scratch.chain_scope, "episode")
+        self.assertEqual(scratch.required_layers, ["hook_teaser", "music"])
+        self.assertTrue(scratch.require_all_shots)
+        self.assertEqual(scratch.hook_teaser["offset_in_shot"], 7.0)
+
+        scratch_meta = SeriesMeta.load("from-scratch")
+        scratch_cfg = scratch_meta.auto_replenish
+        canonical_families = [
+            "oyun/film üsleri",
+            "fantezi konutlar",
+            "absürt eğlence mimarisi",
+            "dönüşüm",
+            "saklı/mühendislik harikası",
+            "geri dönüşüm / off-grid dönüşüm",
+        ]
+        self.assertGreaterEqual(
+            scratch_meta.total_parts,
+            len(scratch_meta.data.get("parts", {})),
+        )
+        self.assertEqual(scratch_meta.data["hashtags"], "#shorts #satisfying #construction #diy")
+        self.assertEqual(scratch_cfg["shots"], 6)
+        self.assertEqual(scratch_cfg["shot_seconds"], "10")
+        self.assertEqual(scratch_cfg["hook_shot"], 6)
+        self.assertEqual(scratch_cfg["chain_breaks"], [1, 4])
+        self.assertTrue(scratch_cfg["credit_hard_cap"])
+        self.assertEqual(scratch_cfg["families"], canonical_families)
+        self.assertEqual(len(scratch_cfg["shot_plan"]), 6)
+        expected_pattern_families = [
+            canonical_families,
+            canonical_families,
+            ["dönüşüm"],
+            ["dönüşüm", "geri dönüşüm / off-grid dönüşüm"],
+            canonical_families,
+        ]
+        self.assertEqual(len(scratch_cfg["title_patterns"]), 5)
+        for rule, expected_families in zip(
+                scratch_cfg["title_patterns"], expected_pattern_families):
+            re.compile(rule["regex"])
+            self.assertEqual(rule["families"], expected_families)
+        doctrine = REPO_ROOT / "aimagine" / "KONSEPT.md"
+        self.assertEqual(scratch_meta.data["doctrine_sha256"],
+                         bible_module.doctrine_sha256(doctrine))
+
+    def test_from_scratch_workflow_credit_cap(self):
+        raw = (REPO_ROOT / ".github" / "workflows" / "from-scratch.yml").read_text(
+            encoding="utf-8"
+        )
+        values = re.findall(r"^\s*EPISODE_CREDIT_CAP=(\d+)\s*$", raw, re.MULTILINE)
+        self.assertEqual(values, ["1400"])
 
     def test_from_scratch_post_process_skips_narration_and_uses_alias(self):
         bible = Bible.load("from-scratch")

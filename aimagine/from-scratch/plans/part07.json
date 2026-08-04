@@ -1,38 +1,56 @@
 {
   "episode": {
     "number": 7,
-    "title": "Building A CYBERPUNK Rooftop Garden From SCRATCH! 🛠️✨"
+    "title": "Old Shipping Container → Luxury Tiny Home ✨"
   },
-  "synopsis": "A futuristic, neon-lit rooftop garden oasis is meticulously crafted high above a sprawling cyberpunk metropolis, transforming concrete into a bioluminescent sanctuary.",
+  "synopsis": "A weathered shipping container is ingeniously transformed into a sleek, modern luxury tiny home with all amenities.",
   "narration": "",
   "shots": [
     {
       "n": 1,
-      "duration": "8",
-      "prompt": "Early stages of a cyberpunk rooftop garden, intricate metallic hydroponic systems being installed by masked technicians. Glowing neon tubes are integrated into the dark steel framework against a backdrop of towering, rain-slicked futuristic skyscrapers. The camera sweeps across the initial modular structures, revealing the complex groundwork.",
-      "seed": null
+      "duration": "10",
+      "prompt": "CAMERA A — CHAIN BREAK: Start a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty site, grade the ground, and establish the road, fence, and landscape framework before construction; materials and the recurring silent USTA enter, seen from behind or mid-distance in a dark cap, dark crew-neck, and work gloves, never in face close-up. Mark the foundation so the structure's location is unmistakable.\n\nStart a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on a cleared, level plot in a serene, natural setting. An old, weathered shipping container is delivered and placed, looking rusty and uninviting. Establish the surrounding tall trees, a gravel path, and the foundation markings for the container's transformation. The recurring silent USTA enters, seen from behind, inspecting the container.",
+      "seed": null,
+      "chain": false
     },
     {
       "n": 2,
-      "duration": "8",
-      "prompt": "Time-lapse of vibrant, bioluminescent plants and glowing architectural features rapidly being integrated into the steel framework of the rooftop garden. Vertical farms pulse with light, and workers add glowing walkways. The city lights twinkle in the background as the garden comes alive with an otherworldly glow, camera slowly pushing in to highlight the growth.",
-      "seed": null
+      "duration": "10",
+      "prompt": "CAMERA A — CHAINED: Continue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Raise the foundation, walls, and roof frame in this same composition with accelerating timelapse energy and satisfying material flow. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. The container is cleaned, structural openings for windows and doors are cut, and the initial framing for a roof extension begins. Show accelerating timelapse energy and satisfying material flow as the shell is prepared. The recurring silent USTA is seen mid-distance, operating a cutting tool, never in face close-up.",
+      "seed": null,
+      "chain": true
     },
     {
       "n": 3,
-      "duration": "8",
-      "prompt": "Close-up on the intricate wiring and clear tubing of a vertical hydroponic garden section, with subtle neon glow emanating from the plant roots. Water flows silently through the system. A gloved hand adjusts a connection, showing precision and detail in the futuristic farming technology. Reflections of city lights shimmer on the wet surfaces.",
-      "seed": null
+      "duration": "10",
+      "prompt": "CAMERA A — CHAINED: Continue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the cladding, roof, paint, exterior lights, and final landscaping until the exterior is entirely finished and remains clearly visible in frame. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install sleek, large windows and a modern entry door. Apply a fresh coat of matte black paint to the container, add a minimalist wooden deck, and complete the roof extension with solar panels. Final landscaping with native plants and a stone path until the exterior is entirely finished and remains clearly visible in frame. The recurring silent USTA is seen from behind, finishing a deck board.",
+      "seed": null,
+      "chain": true
     },
     {
       "n": 4,
-      "duration": "8",
-      "prompt": "Wide shot of the completed cyberpunk rooftop garden, glowing brilliantly with bioluminescent plants and neon accents against a backdrop of a sprawling, futuristic metropolis at dusk. The camera slowly pulls back to reveal the garden as a vibrant, serene oasis amidst the bustling urban chaos, ready to welcome its inhabitants and offering a breathtaking view.",
-      "seed": null
+      "duration": "10",
+      "prompt": "CAMERA B — CHAIN BREAK: Start a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior walls, lay the flooring, and install the utility and lighting infrastructure while carrying the exterior's established materials and design language inside. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nStart a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior partition walls, insulate the container, lay down light-colored wooden flooring, and install utility and minimalist recessed lighting infrastructure, reflecting the sleek, modern aesthetic. The recurring silent USTA is seen installing a wall panel, maintaining distance.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "CAMERA B — CHAINED: Continue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install furniture and decor, bring the lighting on, and finish the interior completely until it feels ready to inhabit. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install compact, built-in furniture including a kitchenette, a fold-down bed, and a small dining area. Add modern decor elements, bring the lighting on, and finish the interior completely, making it feel luxurious, spacious, and ready to inhabit. The recurring silent USTA is seen arranging cushions, from behind.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6.\n\nContinue directly from shot 5's final frame; make one unbroken camera move that starts inside, slowly panning past the finished interior details, through the large glass sliding door, and ending on a wide exterior view of the fully finished, elegant container tiny home nestled beautifully in its natural environment. The same silent USTA is visible walking along the stone path outside, contentedly surveying the completed transformation, never celebrating or looking at the camera.",
+      "seed": null,
+      "chain": true
     }
   ],
-  "family": "absürt eğlence mimarisi",
-  "music": "A driving electronic beat with a dark, atmospheric synth pad undercurrent, building energy with mechanical percussive elements and subtle glitch textures. The rhythm is relentless, mirroring the urban environment, then softens briefly with a shimmering, ethereal synth wash just before a lush, atmospheric and expansive melodic synth reveal. The track concludes mid-sequence, ready for a seamless loop back into the city's pulse.",
-  "hook_shot": 4,
-  "doctrine_sha256": "a113ae32734f5f9f41a4bbb666b611b5b39d25131e81cdffcaca22ae5ade16a9"
+  "family": "dönüşüm",
+  "music": "A resourceful and inventive instrumental track with a steady, rhythmic pulse, driven by light percussive elements, acoustic guitar arpeggios, and warm, gentle synth pads. The music should reflect ingenuity and clever construction. As shot 5 concludes, the rhythm softens for one beat into a quiet, sustained chord, then opens up with an uplifting, elegant melody for the shot 6 reveal tour, finishing softly with a sense of peaceful completion.",
+  "hook_shot": 6,
+  "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008"
 }

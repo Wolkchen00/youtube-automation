@@ -10,6 +10,7 @@ dry_run=True her ikisinde de API/kredi harcamadan adımları simüle eder.
 
 import json
 import shutil
+from dataclasses import dataclass
 from pathlib import Path
 
 from core.config import logger
@@ -32,11 +33,60 @@ from .bible import (
     shots_dir,
     resolve_voice_id,
 )
-from .omni_api import register_audio, register_character, generate_omni_shot, build_omni_payload
+from .omni_api import (
+    register_audio, register_character, generate_omni_shot, build_omni_payload,
+    validate_ref_units,
+)
 from .series_meta import SeriesMeta
 from .shots import resolve_shot, resolve_visual_shot, validate_plan, load_plan, plan_summary
 from . import credit_gate, critic, report
 from .voices import is_preset
+
+
+@dataclass(frozen=True)
+class ChainDecision:
+    """Pure per-shot chain decision used by production and preflight tracing."""
+
+    start_url: str | None
+    reset_before: bool
+    require_previous: bool
+    capture_last_frame: bool
+    explicit: bool
+    error: str | None = None
+
+
+def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
+                      available_url: str | None) -> ChainDecision:
+    """Decide current input/reset and look-ahead frame capture without side effects.
+
+    A missing ``chain`` field is the exact legacy mode. Explicit fields enable the
+    segmented fail-closed semantics.
+    """
+    if "chain" not in shot:
+        return ChainDecision(
+            start_url=available_url if chain_frames else None,
+            reset_before=False,
+            require_previous=False,
+            capture_last_frame=bool(chain_frames),
+            explicit=False,
+        )
+    value = shot.get("chain")
+    if not isinstance(value, bool):
+        return ChainDecision(None, False, False, False, True, "chain bool olmalı")
+    next_chained = False
+    if next_shot is not None:
+        next_chained = (
+            next_shot.get("chain") is True
+            if "chain" in next_shot else bool(chain_frames)
+        )
+    if value is False:
+        return ChainDecision(None, True, False, next_chained, True)
+    if not available_url:
+        return ChainDecision(
+            None, False, True, next_chained, True,
+            "chain=true fakat önceki son kare yok",
+        )
+    return ChainDecision(available_url, False, True, next_chained, True)
 
 
 def episode_spent(slug: str, number: int) -> float | None:
@@ -116,22 +166,28 @@ def _generate_visual_clip(engine: str, prompt: str, start_url: str | None,
                                    aspect_ratio=aspect_ratio, resolution="720p", sound=sound)
 
 
-def _gen_omni_with_fallback(kwargs: dict) -> dict | None:
+def _gen_omni_with_fallback(kwargs: dict, before_call=None) -> dict | None:
     """Omni çekimi üret; sesli çekim başarısızsa sesi düşürüp SESSİZ görsel olarak
     bir kez daha dene. GÜVENLİK AĞI: içerik filtresi en sık KONUŞAN İNSAN (audio_ids)
     çekimlerini 'flagged content' diye reddeder — anlatım zaten post'ta eklendiği için
     seri tamamen durmaz (bir dizinin günlerce sessizce çökmesini engeller)."""
+    if before_call is not None and not before_call():
+        return None
     result = generate_omni_shot(**kwargs)
     if (not result or not result.get("url")) and kwargs.get("audio_ids"):
         logger.warning("⚠️ Sesli çekim başarısız (muhtemelen içerik filtresi) → "
                        "SESSİZ görsel olarak yeniden deneniyor (ses post-anlatıma bırakılır)")
         fb_kwargs = dict(kwargs)
         fb_kwargs["audio_ids"] = []
+        if before_call is not None and not before_call():
+            return None
         result = generate_omni_shot(**fb_kwargs)
     return result
 
 
-def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
+def _post_process(bible: Bible, plan: dict, final_ep: Path,
+                  hard_cap: credit_gate.HardCreditCap | None = None,
+                  required_music: bool = False) -> Path | None:
     """Final videoya anlatım (narration) + SÜREKLİ müzik ekle (best-effort).
 
     Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
@@ -147,6 +203,7 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
     narr_cfg = bible.narration
     narr_text = (plan.get("narration") or "").strip()
     narration_ok = False
+    music_ok = False
 
     if narr_cfg.get("channel") and narr_text:
         try:
@@ -188,6 +245,15 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
             # davranış ESKİSİYLE AYNI (Lyria → ambient bed).
             music_prompt = str(plan.get("music") or "").strip() or None
             ep_title = str(plan.get("episode", {}).get("title") or "").strip()
+            if music_prompt and hard_cap is not None:
+                if not hard_cap.authorize("music", "suno"):
+                    return None
+                # Suno does not surface creditsConsumed. Its conservative estimate is
+                # therefore recorded as spent even when generation later fails.
+                cost_tracker.log_cost(
+                    f"series:{bible.slug}", f"suno_estimate_ep{number}", "suno",
+                    hard_cap.last_estimate,
+                )
             music_path = generate_background_music(ch, custom_prompt=music_prompt,
                                                    output_path=music_file, title=ep_title)
             if music_path and Path(music_path).exists():
@@ -201,9 +267,14 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path) -> Path:
                                                       music_volume=0.9, replace_original=True)
                 if music_out.exists() and music_out.stat().st_size > 0:
                     out = music_out
+                    music_ok = True
                     logger.info("🎵 Müzik eklendi" + ("" if narration_ok else " (tek/sürekli ses)"))
         except Exception as e:
             logger.warning(f"⚠️ Müzik atlandı: {e}")
+
+    if required_music and not music_ok:
+        logger.error("❌ Zorunlu teslimat katmanı üretilemedi: music")
+        return None
 
     return out
 
@@ -558,6 +629,26 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     bible = Bible.load(slug)
     if not bible:
         return None
+    series_cfg = bible.data["series"]
+    if "chain_scope" in series_cfg and str(series_cfg.get("chain_scope")).strip().lower() not in (
+        "series", "episode"
+    ):
+        logger.error("❌ bible.series.chain_scope yalnız 'series' veya 'episode' olabilir")
+        return None
+    if "required_layers" in series_cfg:
+        raw_layers = series_cfg.get("required_layers")
+        if (not isinstance(raw_layers, list)
+                or any(not isinstance(layer, str) or not layer.strip() for layer in raw_layers)
+                or len(set(raw_layers)) != len(raw_layers)):
+            logger.error("❌ bible.series.required_layers benzersiz, boş olmayan string listesi olmalı")
+            return None
+    required_layers = set(bible.required_layers)
+    unknown_layers = required_layers - {"hook_teaser", "music"}
+    if unknown_layers:
+        logger.error(
+            f"❌ Bilinmeyen zorunlu teslimat katmanı: {', '.join(sorted(unknown_layers))}"
+        )
+        return None
     if isinstance(plan, (str, Path)):
         plan = load_plan(plan)
     plan_digest = str(plan.get("doctrine_sha256") or "").strip().lower()
@@ -577,6 +668,19 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     chaining = bible.chain_frames
     logger.info(f"🎬 {plan_summary(plan)} (motor={default_engine}, zincir={chaining}, dry_run={dry_run})")
 
+    cfg = meta.auto_replenish
+    from .replenish import strict_plan_validation_enabled, validate_plan_against_config
+    strict_plan = strict_plan_validation_enabled(cfg)
+    if strict_plan:
+        cfg_errors = validate_plan_against_config(plan, cfg)
+        if "chain_breaks" in cfg and not bible.chain_frames:
+            cfg_errors.append("chain_breaks için bible.series.chain_frames=true olmalı")
+        if cfg_errors:
+            for error in cfg_errors:
+                logger.error(f"❌ Plan/cfg uyumsuzluğu: {error}")
+            logger.error("Plan/cfg hataları nedeniyle üretim kredi harcamadan durduruldu.")
+            return None
+
     # Doğrulama — 7-birim kota / ses yalnız OMNI çekimleri için geçerli.
     v = validate_plan(plan, bible)
     for w in v["warnings"]:
@@ -587,6 +691,20 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     if v["errors"] and default_engine == "omni" and not dry_run:
         logger.error("Plan hataları nedeniyle üretim durduruldu.")
         return None
+
+    hard_cap_enabled = bool(
+        cfg.get("credit_hard_cap")
+        or bible.data["series"].get("credit_hard_cap")
+    )
+    hard_cap = None
+    if hard_cap_enabled and not dry_run:
+        hard_cap = credit_gate.HardCreditCap(
+            cap=credit_gate.episode_cap(),
+            spent=episode_spent(slug, number),
+        )
+        if hard_cap.spent is None:
+            logger.error("❌ Kredi sert tavanı: mevcut bölüm harcaması okunamadı")
+            return None
 
     sdir = shots_dir(slug, number)
     sdir.mkdir(parents=True, exist_ok=True)
@@ -610,10 +728,16 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
     running = 0.0
 
-    for shot in plan["shots"]:
+    for shot_index, shot in enumerate(plan["shots"]):
         n = shot.get("n")
         out_file = sdir / f"shot_{int(n):02d}.mp4"
         shot_engine = (shot.get("engine") or default_engine).lower()
+        next_shot = plan["shots"][shot_index + 1] if shot_index + 1 < len(plan["shots"]) else None
+        chain_decision = decide_shot_chain(shot, next_shot, chaining, chain_url)
+        if chain_decision.error:
+            logger.error(f"❌ Çekim {n} zincir kapısı: {chain_decision.error}")
+            return None
+        chain_url = chain_decision.start_url
 
         # İdempotent: bu çekim zaten üretildiyse atla; zincir için son karesini yine de al
         if not dry_run and out_file.exists() and out_file.stat().st_size > 0:
@@ -622,7 +746,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             shot_offsets[int(n)] = running
             running += ffmpeg_tools.get_video_duration(prep)
             shot_files.append(prep)
-            if chaining:
+            if chain_decision.capture_last_frame:
                 lf = ffmpeg_tools.extract_last_frame(out_file)
                 if lf:
                     up = upload_to_imgbb(lf)
@@ -636,8 +760,18 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             res = resolve_shot(bible, shot)
             kwargs = res["kwargs"]
             # Bitmeyen yolculuk: önceki çekimin/bölümün son karesini referans olarak ekle
-            if chaining and chain_url:
+            if chain_decision.start_url:
                 kwargs["image_urls"] = [chain_url] + list(kwargs.get("image_urls") or [])
+            if strict_plan:
+                units_ok, final_units = validate_ref_units(
+                    kwargs.get("image_urls"), kwargs.get("character_ids")
+                )
+                if not units_ok:
+                    logger.error(
+                        f"❌ Çekim {n}: zincir karesi sonrası 7-birim kotası aşıldı "
+                        f"({final_units} birim); üretim kredi harcamadan durduruldu"
+                    )
+                    return None
             char_names = [bible.get_character(c).get("name", c)
                           for c in shot.get("characters", []) if bible.get_character(c)]
             if qc_cfg:
@@ -648,8 +782,20 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 payload = build_omni_payload(**kwargs)
                 logger.info(f"[dry-run] Çekim {n} OMNI ({res['units']} birim):\n"
                             f"{json.dumps(payload, ensure_ascii=False, indent=2)[:700]}")
+                if chain_decision.capture_last_frame:
+                    chain_url = f"dry-run://shot/{n}/last-frame"
                 continue
-            result = _gen_omni_with_fallback(kwargs)
+            result = _gen_omni_with_fallback(
+                kwargs,
+                before_call=(
+                    None if hard_cap is None else
+                    lambda _duration=kwargs["duration"]: hard_cap.authorize(
+                        "main_shot", "omni", _duration
+                    )
+                ),
+            )
+            if hard_cap is not None and hard_cap.blocked:
+                return None
             credits, status, video_url = None, "FAIL", ""
             if result and result.get("url"):
                 video_url = result["url"]
@@ -659,24 +805,45 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 if credits is not None:
                     cost_tracker.log_cost(f"series:{slug}", f"omni_ep{number}_shot{n}",
                                           "gemini-omni-video", credits)
+                elif hard_cap is not None and hard_cap.last_estimate is not None:
+                    cost_tracker.log_cost(
+                        f"series:{slug}", f"omni_estimate_ep{number}_shot{n}",
+                        "gemini-omni-video", hard_cap.last_estimate,
+                    )
             # Critic-QC (opt-in): bozuk klip kurguya giremez — REDde fix_notes'lu
             # prompt + taze seed ile otomatik regen; eşiği geçemeyen çekim düşer.
             if status == "ok" and qc_budget is not None:
                 def _regen_omni(fixed_prompt, _kw=kwargs):
-                    if not _qc_regen_allowed(slug, number):
+                    if hard_cap is None and not _qc_regen_allowed(slug, number):
                         return None
                     kw = dict(_kw)
                     kw["prompt"] = fixed_prompt
                     kw["seed"] = None   # None → generate_omni_shot taze seed üretir
-                    return _gen_omni_with_fallback(kw)
-                qc_path, qc_credits = critic.qc_shot(bible, shot, out_file, kwargs["prompt"],
-                                                     _regen_omni, episode=number, budget=qc_budget)
+                    regen_result = _gen_omni_with_fallback(
+                        kw,
+                        before_call=(
+                            None if hard_cap is None else
+                            lambda _duration=kw["duration"]: hard_cap.authorize(
+                                "qc_regen", "omni", _duration
+                            )
+                        ),
+                    )
+                    if (regen_result and regen_result.get("credits") is None
+                            and hard_cap is not None and hard_cap.last_estimate is not None):
+                        regen_result = {**regen_result, "credits": hard_cap.last_estimate}
+                    return regen_result
+                qc_path, qc_credits, qc_status = critic.qc_shot(
+                    bible, shot, out_file, kwargs["prompt"],
+                    _regen_omni, episode=number, budget=qc_budget,
+                )
                 if qc_credits:
                     cost_tracker.log_cost(f"series:{slug}", f"qc_regen_ep{number}_shot{n}",
                                           "gemini-omni-video", qc_credits)
                     credits = (credits or 0) + qc_credits
                 if qc_path is None:
-                    status = "qc_fail"
+                    status = "qc_skip" if qc_status == "skip" else "qc_fail"
+                if hard_cap is not None and hard_cap.blocked:
+                    return None
             if status == "ok":
                 prep = _prep_shot_clip(bible, plan, shot, out_file)
                 shot_offsets[int(n)] = running
@@ -688,7 +855,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 resolution=kwargs["resolution"], seed=kwargs["seed"],
                 credits=credits, status=status, video_url=video_url, local_file=out_file,
             ))
-            if chaining and status == "ok":
+            if chain_decision.capture_last_frame and status == "ok":
                 lf = ffmpeg_tools.extract_last_frame(out_file)
                 if lf:
                     up = upload_to_imgbb(lf)
@@ -698,7 +865,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             continue
 
         # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
-        rv = resolve_visual_shot(bible, shot, chain_url=chain_url)
+        rv = resolve_visual_shot(bible, shot, chain_url=chain_decision.start_url)
         if qc_cfg:
             # HAM çekim promptu — art_style'ın genel 'clothing' metni denetimi köreltmesin
             for w in critic.lint_prompt(bible, shot, shot.get("prompt") or ""):
@@ -707,7 +874,14 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             src = "zincir" if chain_url else ("ortam/figür" if rv["start_image_url"] else "yok")
             logger.info(f"[dry-run] Çekim {n} {shot_engine.upper()} | başlangıç={src} | "
                         f"{rv['duration']}s | {rv['prompt'][:140]}...")
+            if chain_decision.capture_last_frame:
+                chain_url = f"dry-run://shot/{n}/last-frame"
             continue
+        reserved_estimate = None
+        if hard_cap is not None:
+            if not hard_cap.authorize("main_shot", shot_engine, rv["duration"]):
+                return None
+            reserved_estimate = hard_cap.last_estimate
         result = _generate_visual_clip(shot_engine, rv["prompt"], rv["start_image_url"],
                                        rv["duration"], bible.aspect_ratio, bible.resolution,
                                        sound=bible.native_audio)
@@ -720,23 +894,41 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             if credits is not None:
                 cost_tracker.log_cost(f"series:{slug}", f"{shot_engine}_ep{number}_shot{n}",
                                       shot_engine, credits)
+            elif reserved_estimate is not None:
+                cost_tracker.log_cost(
+                    f"series:{slug}", f"{shot_engine}_estimate_ep{number}_shot{n}",
+                    shot_engine, reserved_estimate,
+                )
         # Critic-QC (opt-in): ucuz motorlarda seed parametresi yok — düzeltilmiş
         # prompt + modelin doğal varyasyonu regen'i çeşitlendirir.
         if status == "ok" and qc_budget is not None:
             def _regen_visual(fixed_prompt, _rv=rv, _eng=shot_engine):
-                if not _qc_regen_allowed(slug, number):
+                if hard_cap is None and not _qc_regen_allowed(slug, number):
                     return None
-                return _generate_visual_clip(_eng, fixed_prompt, _rv["start_image_url"],
-                                             _rv["duration"], bible.aspect_ratio,
-                                             bible.resolution, sound=bible.native_audio)
-            qc_path, qc_credits = critic.qc_shot(bible, shot, out_file, rv["prompt"],
-                                                 _regen_visual, episode=number, budget=qc_budget)
+                if hard_cap is not None and not hard_cap.authorize(
+                    "qc_regen", _eng, _rv["duration"]
+                ):
+                    return None
+                regen_result = _generate_visual_clip(
+                    _eng, fixed_prompt, _rv["start_image_url"], _rv["duration"],
+                    bible.aspect_ratio, bible.resolution, sound=bible.native_audio,
+                )
+                if (regen_result and regen_result.get("credits") is None
+                        and hard_cap is not None and hard_cap.last_estimate is not None):
+                    regen_result = {**regen_result, "credits": hard_cap.last_estimate}
+                return regen_result
+            qc_path, qc_credits, qc_status = critic.qc_shot(
+                bible, shot, out_file, rv["prompt"],
+                _regen_visual, episode=number, budget=qc_budget,
+            )
             if qc_credits:
                 cost_tracker.log_cost(f"series:{slug}", f"qc_regen_ep{number}_shot{n}",
                                       shot_engine, qc_credits)
                 credits = (credits or 0) + qc_credits
             if qc_path is None:
-                status = "qc_fail"
+                status = "qc_skip" if qc_status == "skip" else "qc_fail"
+            if hard_cap is not None and hard_cap.blocked:
+                return None
         if status == "ok":
             prep = _prep_shot_clip(bible, plan, shot, out_file)
             shot_offsets[int(n)] = running
@@ -747,7 +939,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             duration=rv["duration"], resolution="720p", seed=None,
             credits=credits, status=status, video_url=video_url, local_file=out_file,
         ))
-        if chaining and status == "ok":
+        if chain_decision.capture_last_frame and status == "ok":
             lf = ffmpeg_tools.extract_last_frame(out_file)
             if lf:
                 up = upload_to_imgbb(lf)
@@ -757,6 +949,13 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
 
     if dry_run:
         logger.info("[dry-run] Simülasyon bitti — dosya/kredi harcanmadı.")
+        return None
+
+    if bible.require_all_shots and len(shot_files) != len(plan["shots"]):
+        logger.error(
+            f"❌ require_all_shots kapısı: {len(shot_files)}/{len(plan['shots'])} çekim hazır; "
+            "bölüm birleştirilmeyecek/yayınlanmayacak"
+        )
         return None
 
     if not shot_files:
@@ -792,12 +991,18 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     ffmpeg_tools.final_export(raw_ep, final_ep)
 
     # Anlatım (narration) + arka plan müziği (best-effort)
-    final_ep = _post_process(bible, plan, final_ep)
+    final_ep = _post_process(
+        bible, plan, final_ep, hard_cap=hard_cap,
+        required_music="music" in required_layers,
+    )
+    if final_ep is None:
+        return None
 
     # Açılış kancası (opt-in): doruk çekimden kısa bir kesit videonun EN BAŞINA
     # eklenir — ilk 1-2 saniyede 'olağandışı an' görünmezse Shorts'ta kaydırılır.
     # Müzik/anlatımdan SONRA yapılır ki kesit sesiyle birlikte gelsin.
     teaser_len = 0.0   # kanca kesiti eklenirse tüm gövde bu kadar kayar (fact-caption sync'i için)
+    teaser_ok = False
     hook = bible.hook_teaser
     if hook and shot_offsets:
         try:
@@ -816,10 +1021,15 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                                             clips_dir=Path(final_ep).parent)
             if hooked.exists() and hooked.stat().st_size > 0:
                 final_ep = hooked
+                teaser_ok = True
                 teaser_len = ffmpeg_tools.get_video_duration(teaser) or d
                 logger.info(f"🎣 Kanca: çekim {hn} dorukundan {d:.1f}s (t={start:.1f}s) başa eklendi")
         except Exception as e:
             logger.warning(f"⚠️ Kanca eklenemedi (video kancasız yayınlanır): {e}")
+
+    if "hook_teaser" in required_layers and not teaser_ok:
+        logger.error("❌ Zorunlu teslimat katmanı üretilemedi: hook_teaser")
+        return None
 
     # Açılış künyesi (opt-in): plan'daki eser adı + bölge/yıl videonun İLK
     # saniyelerine yazılır. Kancadan SONRA uygulanır ki künye, başa eklenen
