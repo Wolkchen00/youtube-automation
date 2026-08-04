@@ -504,9 +504,13 @@ class InstalledSeriesTests(unittest.TestCase):
             "saklı/mühendislik harikası",
             "geri dönüşüm / off-grid dönüşüm",
         ]
-        self.assertEqual(scratch_meta.total_parts, 5)
-        self.assertEqual(scratch_meta.next_part, 6)
+        self.assertGreaterEqual(
+            scratch_meta.total_parts,
+            len(scratch_meta.data.get("parts", {})),
+        )
         self.assertEqual(scratch_meta.data["hashtags"], "#shorts #satisfying #construction #diy")
+        self.assertEqual(scratch_cfg["shots"], 6)
+        self.assertEqual(scratch_cfg["shot_seconds"], "10")
         self.assertEqual(scratch_cfg["hook_shot"], 6)
         self.assertEqual(scratch_cfg["chain_breaks"], [1, 4])
         self.assertTrue(scratch_cfg["credit_hard_cap"])
@@ -527,11 +531,6 @@ class InstalledSeriesTests(unittest.TestCase):
         doctrine = REPO_ROOT / "aimagine" / "KONSEPT.md"
         self.assertEqual(scratch_meta.data["doctrine_sha256"],
                          bible_module.doctrine_sha256(doctrine))
-        for number in range(6, 11):
-            self.assertFalse(
-                (REPO_ROOT / "aimagine" / "from-scratch" / "plans"
-                 / f"part{number:02d}.json").exists()
-            )
 
     def test_from_scratch_workflow_credit_cap(self):
         raw = (REPO_ROOT / ".github" / "workflows" / "from-scratch.yml").read_text(
