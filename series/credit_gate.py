@@ -8,6 +8,7 @@ import datetime
 import json
 import logging
 import os
+from dataclasses import dataclass, field
 import pathlib
 import time
 
@@ -228,3 +229,55 @@ def run_gate(balance: int | None) -> bool:
         )
         return False
     return True
+
+
+@dataclass
+class HardCreditCap:
+    """Opt-in, per-episode pre-spend budget using conservative estimates."""
+
+    cap: float
+    spent: float | None = 0.0
+    blocked_reason: str | None = None
+    reservations: list[dict] = field(default_factory=list)
+
+    @property
+    def blocked(self) -> bool:
+        return self.blocked_reason is not None
+
+    @property
+    def remaining(self) -> float | None:
+        if self.spent is None:
+            return None
+        return max(0.0, float(self.cap) - float(self.spent))
+
+    @property
+    def last_estimate(self) -> float | None:
+        return self.reservations[-1]["estimate"] if self.reservations else None
+
+    def authorize(self, call_type: str, engine: str, duration=None) -> bool:
+        """Reserve the next call's estimate; unknown/over-cap calls are blocked."""
+        from core.cost_tracker import conservative_credit_estimate
+
+        estimate = conservative_credit_estimate(call_type, engine, duration)
+        if self.spent is None:
+            self.blocked_reason = "mevcut bölüm harcaması okunamadı"
+        elif estimate is None:
+            self.blocked_reason = (
+                f"bilinmeyen maliyet: çağrı={call_type}, motor={engine}, süre={duration}"
+            )
+        elif float(self.spent) + float(estimate) > float(self.cap):
+            self.blocked_reason = (
+                f"sert tavan aşımı: harcanan={float(self.spent):g}, "
+                f"sonraki={float(estimate):g}, tavan={float(self.cap):g}"
+            )
+        else:
+            self.spent = float(self.spent) + float(estimate)
+            self.reservations.append({
+                "call_type": call_type,
+                "engine": engine,
+                "duration": None if duration is None else str(duration),
+                "estimate": float(estimate),
+            })
+            return True
+        logger.error("Kredi sert tavanı çağrıyı engelledi: %s", self.blocked_reason)
+        return False

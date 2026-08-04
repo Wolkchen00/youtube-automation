@@ -27,6 +27,13 @@ series.json şeması:
                             //       (the__footnote formatı: hikâye videoda değil açıklamada)
     "shots": 4,             // ops.: bölüm başına çekim sayısı
     "shot_seconds": "8",    // ops.: çekim süresi ("4"|"6"|"8"|"10")
+    "chain_breaks": [1, 4], // ops.: bu çekimler chain=false; diğerleri chain=true
+    "hook_shot": 4,         // ops.: zorunlu teaser-source çekim numarası
+    "shot_plan": ["..."],   // ops.: çekim başına deterministik prompt öneki
+    "title_patterns": [      // ops.: fullmatch + izinli family kuralları
+      {"regex": "...", "families": ["..."]}
+    ],
+    "credit_hard_cap": true,// ops.: her ücretli çağrıda tahmini sert tavan
     "last_run": {...}       // makine yazar
   }
 
@@ -62,6 +69,165 @@ DEFAULT_MIN_QUEUE = 2
 DEFAULT_SHOTS = 4          # bölüm başına çekim
 DEFAULT_SHOT_SECONDS = "8" # çekim süresi (motor enum'u: 4/6/8/10)
 VALID_DURATIONS = ("4", "6", "8", "10")
+
+
+def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
+    """Compile structured title rules. Invalid config raises ``ValueError``."""
+    raw = cfg.get("title_patterns")
+    if raw is None:
+        return []
+    if not isinstance(raw, list) or not raw:
+        raise ValueError("title_patterns boş olmayan bir liste olmalı")
+    compiled = []
+    canonical = {
+        str(value).strip() for value in (cfg.get("families") or []) if str(value).strip()
+    }
+    for index, item in enumerate(raw, start=1):
+        if not isinstance(item, dict):
+            raise ValueError(f"title_patterns[{index}] nesne olmalı")
+        regex = item.get("regex")
+        families = item.get("families")
+        if not isinstance(regex, str) or not regex:
+            raise ValueError(f"title_patterns[{index}].regex boş olamaz")
+        if not isinstance(families, list) or not families:
+            raise ValueError(f"title_patterns[{index}].families boş olmayan liste olmalı")
+        allowed = {str(value).strip() for value in families if str(value).strip()}
+        if len(allowed) != len(families):
+            raise ValueError(f"title_patterns[{index}].families boş/tekrarlı değer içeriyor")
+        if canonical and not allowed.issubset(canonical):
+            unknown = sorted(allowed - canonical)
+            raise ValueError(f"title_patterns[{index}] kanonik olmayan aile içeriyor: {unknown}")
+        try:
+            pattern = re.compile(regex)
+        except re.error as error:
+            raise ValueError(f"title_patterns[{index}] bozuk regex: {error}") from error
+        compiled.append((pattern, allowed))
+    return compiled
+
+
+def validate_replenish_config(cfg: dict) -> list[str]:
+    """Validate only Rock 1 opt-in config fields; legacy configs are untouched."""
+    errors: list[str] = []
+    try:
+        shots = int(cfg.get("shots", DEFAULT_SHOTS))
+    except (TypeError, ValueError):
+        shots = 0
+    fixedframe_keys = ("chain_breaks", "hook_shot", "shot_plan", "title_patterns")
+    if any(key in cfg for key in fixedframe_keys) and not (2 <= shots <= 6):
+        errors.append("shots 2..6 aralığında tam sayı olmalı")
+    if any(key in cfg for key in fixedframe_keys):
+        duration = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
+        if duration not in VALID_DURATIONS:
+            errors.append("shot_seconds 4/6/8/10 değerlerinden biri olmalı")
+
+    if "chain_breaks" in cfg:
+        breaks = cfg.get("chain_breaks")
+        if not isinstance(breaks, list) or any(
+            not isinstance(value, int) or isinstance(value, bool) for value in (breaks or [])
+        ):
+            errors.append("chain_breaks tam sayı listesi olmalı")
+        elif len(set(breaks)) != len(breaks):
+            errors.append("chain_breaks benzersiz olmalı")
+        elif any(value < 1 or value > shots for value in breaks):
+            errors.append(f"chain_breaks değerleri 1..{shots} aralığında olmalı")
+
+    if "hook_shot" in cfg:
+        hook = cfg.get("hook_shot")
+        if not isinstance(hook, int) or isinstance(hook, bool) or not (1 <= hook <= shots):
+            errors.append(f"hook_shot 1..{shots} aralığında tam sayı olmalı")
+
+    if "shot_plan" in cfg:
+        shot_plan = cfg.get("shot_plan")
+        if not isinstance(shot_plan, list) or len(shot_plan) != shots:
+            errors.append(f"shot_plan tam {shots} satır içermeli")
+        elif any(not isinstance(line, str) or not line.strip() for line in shot_plan):
+            errors.append("shot_plan boş satır içeremez")
+
+    if "title_patterns" in cfg:
+        try:
+            _compiled_title_patterns(cfg)
+        except ValueError as error:
+            errors.append(str(error))
+    return errors
+
+
+def strict_plan_validation_enabled(cfg: dict) -> bool:
+    """The pre-spend validator is opt-in through Rock 1 plan config keys."""
+    return any(key in cfg for key in (
+        "chain_breaks", "hook_shot", "shot_plan", "title_patterns"
+    ))
+
+
+def _prompt_content(prompt, shot_plan_prefix: str | None = None) -> str:
+    """Return the actual shot description, excluding an echoed shot-plan prefix."""
+    content = str(prompt or "").strip()
+    prefix = str(shot_plan_prefix or "").strip()
+    if prefix and content.startswith(prefix):
+        remainder = content[len(prefix):]
+        if not remainder or remainder[0].isspace():
+            content = remainder.strip()
+    return content
+
+
+def validate_plan_against_config(plan: dict, cfg: dict) -> list[str]:
+    """Strict, non-normalizing plan validation used by replenish/produce/preflight."""
+    errors = list(validate_replenish_config(cfg))
+    if errors or not strict_plan_validation_enabled(cfg):
+        return errors
+    shots_expected = int(cfg.get("shots", DEFAULT_SHOTS))
+    duration_expected = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
+    shots = plan.get("shots")
+    if not isinstance(shots, list):
+        return errors + ["plan shots listesi yok"]
+    if len(shots) != shots_expected:
+        errors.append(f"çekim sayısı tam {shots_expected} olmalı (gelen: {len(shots)})")
+    numbers = [shot.get("n") if isinstance(shot, dict) else None for shot in shots]
+    if (len(numbers) != shots_expected or any(
+            not isinstance(number, int) or isinstance(number, bool) for number in numbers
+        ) or sorted(numbers) != list(range(1, shots_expected + 1))):
+        errors.append(f"çekim numaraları tam [1..{shots_expected}] olmalı (gelen: {numbers})")
+    for index, shot in enumerate(shots, start=1):
+        if not isinstance(shot, dict):
+            continue
+        if str(shot.get("duration", "")).strip() != duration_expected:
+            errors.append(
+                f"çekim {shot.get('n', index)} süresi tam {duration_expected} olmalı"
+            )
+        prefix = None
+        if "shot_plan" in cfg and index <= len(cfg["shot_plan"]):
+            prefix = cfg["shot_plan"][index - 1].strip() + "\n\n"
+        if len(_prompt_content(shot.get("prompt"), prefix)) < 30:
+            errors.append(f"çekim {shot.get('n', index)} prompt boş/çok kısa")
+    if "chain_breaks" in cfg:
+        breaks = set(cfg["chain_breaks"])
+        for index, shot in enumerate(shots, start=1):
+            if not isinstance(shot, dict):
+                continue
+            number = shot.get("n", index)
+            expected = number not in breaks
+            if shot.get("chain") is not expected:
+                errors.append(
+                    f"çekim {number} chain={expected} olmalı (chain_breaks={sorted(breaks)})"
+                )
+    if "hook_shot" in cfg and plan.get("hook_shot") != cfg["hook_shot"]:
+        errors.append(f"hook_shot tam {cfg['hook_shot']} olmalı")
+    if "shot_plan" in cfg:
+        for index, shot in enumerate(shots, start=1):
+            if not isinstance(shot, dict) or index > len(cfg["shot_plan"]):
+                continue
+            prefix = cfg["shot_plan"][index - 1].strip() + "\n\n"
+            if not str(shot.get("prompt") or "").startswith(prefix):
+                errors.append(f"çekim {index} prompt'u shot_plan önekiyle başlamalı")
+    patterns = _compiled_title_patterns(cfg) if "title_patterns" in cfg else []
+    if patterns:
+        title = str((plan.get("episode") or {}).get("title") or "")
+        family = str(plan.get("family") or "").strip()
+        matching = [(pattern, allowed) for pattern, allowed in patterns if pattern.fullmatch(title)]
+        if not matching:
+            errors.append(f"başlık title_patterns fullmatch sağlamıyor: {title!r}")
+        elif not any(family in allowed for _, allowed in matching):
+            errors.append(f"başlık kalıbı family={family!r} ailesine izin vermiyor")
+    return errors
 
 
 # ─── Gemini JSON yardımcıları (omni-studio director kalıbı) ────────────────────
@@ -358,6 +524,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
                  '\n   "hashtags": "<#Tag1 #Tag2 ... 6-9 tags>",') if want_caption else ""
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
+    chain_breaks = cfg.get("chain_breaks") if "chain_breaks" in cfg else None
+    if chain_breaks is not None:
+        shot_fields += ', "chain": <bool>'
     if shot_refs:
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
     if want_fc:
@@ -423,7 +592,14 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     # Kare zinciri AÇIK serilerde çekimler tek kesintisiz morf akışıdır; zincirsiz
     # serilerde (chain_frames=false, ör. footnotes) her çekim AYRI bir sinematik
     # tablodur ,  kurgu bunları crossfade/kesme ile bağlar.
-    if bible.chain_frames:
+    if chain_breaks is not None:
+        chain_rule = (
+            "- SEGMENTED CHAIN (the engine enforces this mechanically): shots "
+            f"{json.dumps(chain_breaks)} MUST have chain=false and start a fresh scene; every other "
+            "shot MUST have chain=true and begin from the previous shot's final frame. A chained shot "
+            "may never reset, cut, teleport, or change the locked camera established by its segment."
+        )
+    elif bible.chain_frames:
         chain_rule = ("- SEAMLESS CHAIN (the engine literally starts each shot from the PREVIOUS shot's final\n"
                       "  frame): shot 1 opens a brand-new striking scene; every later shot's prompt must\n"
                       "  describe ONE continuous transformation that begins EXACTLY at the previous shot's end\n"
@@ -456,7 +632,11 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         )
     else:
         seed_rule = ""
-    if meta.slug == "from-scratch":
+    if "hook_shot" in cfg:
+        hook_rule = (
+            f'- "hook_shot" MUST be {int(cfg["hook_shot"])}. That shot is the teaser source.'
+        )
+    elif meta.slug == "from-scratch":
         hook_rule = (
             '- "hook_shot" MUST be 4. Shot 4 is the final reveal and the teaser source.'
         )
@@ -464,6 +644,18 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         hook_rule = (
             '- "hook_shot" = the n of the single most spectacular, jaw-dropping shot '
             "(usually 2 or 3)."
+        )
+
+    shot_plan = cfg.get("shot_plan") if "shot_plan" in cfg else None
+    shot_plan_rule = ""
+    if shot_plan is not None:
+        numbered = "\n".join(
+            f"  Shot {index}: {str(line).strip()}"
+            for index, line in enumerate(shot_plan, start=1)
+        )
+        shot_plan_rule = (
+            "\n- SHOT_PLAN: obey every numbered line exactly; the engine also prefixes the matching "
+            f"line to each production prompt:\n{numbered}"
         )
 
     system_instruction = f"""{head}
@@ -484,7 +676,7 @@ RULES:
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
   stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}
-{chain_rule}
+{chain_rule}{shot_plan_rule}
 - EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve.
 {hook_rule}
 - PROMPTS: rich visual language ,  motion, geometry, light, color, camera flow. The
@@ -552,6 +744,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         return [f"'episodes' tam {batch} bölüm olmalı (gelen: {got})"]
 
     cfg = cfg or {}
+    cfg_errors = validate_replenish_config(cfg)
+    if cfg_errors:
+        return [f"auto_replenish cfg: {error}" for error in cfg_errors]
+    if "chain_breaks" in cfg and not bible.chain_frames:
+        return ["auto_replenish cfg: chain_breaks için bible.series.chain_frames=true olmalı"]
     narr_cfg = cfg.get("narration")
     if narr_cfg is True:
         narr_cfg = {}
@@ -614,6 +811,18 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             if family:
                 previous_family = family
 
+        if "title_patterns" in cfg and title:
+            matches = [
+                allowed for pattern, allowed in _compiled_title_patterns(cfg)
+                if pattern.fullmatch(title)
+            ]
+            if not matches:
+                errors.append(f"part {want}: başlık title_patterns fullmatch sağlamıyor ({title!r})")
+            elif not any(family in allowed for allowed in matches):
+                errors.append(
+                    f"part {want}: başlık kalıbı family={family!r} ailesine izin vermiyor"
+                )
+
         seed_id = None
         card = None
         if pool or cards:
@@ -645,14 +854,40 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
         fact_count = 0
+        strict_chain = "chain_breaks" in cfg
+        expected_shots = int(cfg.get("shots", DEFAULT_SHOTS))
+        if strict_chain and isinstance(raw_shots, list) and len(raw_shots) != expected_shots:
+            errors.append(
+                f"part {want}: çekim sayısı tam {expected_shots} olmalı (gelen: {len(raw_shots)})"
+            )
         if not isinstance(raw_shots, list) or not (2 <= len(raw_shots) <= 6):
             got = len(raw_shots) if isinstance(raw_shots, list) else "yok"
             errors.append(f"part {want}: çekim sayısı 2-6 olmalı (gelen: {got})")
         else:
+            if strict_chain:
+                raw_numbers = [
+                    shot.get("n") if isinstance(shot, dict) else None for shot in raw_shots
+                ]
+                if (any(not isinstance(number, int) or isinstance(number, bool)
+                        for number in raw_numbers)
+                        or sorted(raw_numbers) != list(range(1, expected_shots + 1))):
+                    errors.append(
+                        f"part {want}: çekim numaraları tam [1..{expected_shots}] olmalı "
+                        f"(gelen: {raw_numbers})"
+                    )
+                else:
+                    raw_shots = sorted(raw_shots, key=lambda shot: shot["n"])
             for k, shot in enumerate(raw_shots, start=1):
                 shot = shot if isinstance(shot, dict) else {}
                 prompt = str(shot.get("prompt") or "").strip()
-                if len(prompt) < 30:
+                shot_number = shot.get("n") if strict_chain else k
+                prefix = None
+                if ("shot_plan" in cfg and isinstance(shot_number, int)
+                        and 1 <= shot_number <= len(cfg["shot_plan"])):
+                    prefix = cfg["shot_plan"][shot_number - 1].strip() + "\n\n"
+                    if not prompt.startswith(prefix):
+                        prompt = prefix + prompt
+                if len(_prompt_content(prompt, prefix)) < 30:
                     errors.append(f"part {want} çekim {k}: prompt boş/çok kısa")
                 try:
                     dur = str(int(float(str(shot.get("duration", "")).strip() or "0")))
@@ -661,8 +896,20 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 if dur not in VALID_DURATIONS:
                     errors.append(f"part {want} çekim {k}: süre {shot.get('duration')!r} "
                                   f"geçersiz (4/6/8/10 olmalı)")
+                if strict_chain and dur != str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip():
+                    errors.append(
+                        f"part {want} çekim {shot_number}: süre tam "
+                        f"{str(cfg.get('shot_seconds', DEFAULT_SHOT_SECONDS)).strip()} olmalı"
+                    )
                 # Yalnız bilinen alanlar; model karakter/diyalog uydurduysa sessizce atılır.
-                clean = {"n": k, "duration": dur, "prompt": prompt, "seed": None}
+                clean = {"n": shot_number, "duration": dur, "prompt": prompt, "seed": None}
+                if strict_chain:
+                    expected_chain = shot_number not in set(cfg["chain_breaks"])
+                    if shot.get("chain") is not expected_chain:
+                        errors.append(
+                            f"part {want} çekim {shot_number}: chain={expected_chain} olmalı"
+                        )
+                    clean["chain"] = shot.get("chain")
                 if shot_refs:
                     # Opt-in: bible'da GERÇEKTEN var olan referans id'leri korunur.
                     env = shot.get("environment")
@@ -691,7 +938,9 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 raise ValueError
         except (TypeError, ValueError):
             hook = None   # produce.py'nin 'sondan bir önceki' varsayılanı devreye girer
-        if bible.slug == "from-scratch" and hook != 4:
+        if "hook_shot" in cfg and hook != cfg["hook_shot"]:
+            errors.append(f"part {want}: hook_shot {cfg['hook_shot']} olmalı")
+        elif "hook_shot" not in cfg and bible.slug == "from-scratch" and hook != 4:
             errors.append(f"part {want}: from-scratch hook_shot 4 olmalı")
 
         ntext = str(plan.get("narration") or "").strip()
@@ -787,6 +1036,12 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             normalized["hook_shot"] = hook
         episodes[i] = normalized
 
+        if strict_plan_validation_enabled(cfg):
+            errors.extend(
+                f"part {want}: {error}"
+                for error in validate_plan_against_config(normalized, cfg)
+            )
+
         # Motorun kendi doğrulaması (Omni kota vb.) ,  hatalar batch'i düşürür.
         v = validate_plan(normalized, bible)
         errors.extend(f"part {want}: {e}" for e in v.get("errors", []))
@@ -833,6 +1088,10 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
     cfg = meta.auto_replenish
     if not cfg:
         return True   # opt-in değil ,  dokunma
+    cfg_errors = validate_replenish_config(cfg)
+    if cfg_errors:
+        logger.error(f"❌ HATA {slug}: auto_replenish cfg geçersiz: {'; '.join(cfg_errors)}")
+        return False
     if meta.status not in ("active", "completed"):
         logger.info(f"⏸️ {slug}: status={meta.status} (insan kararı) ,  ikmal yapılmaz.")
         return True

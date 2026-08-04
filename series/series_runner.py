@@ -68,6 +68,13 @@ def _actual_episode_spent(slug: str, part: int) -> int | None:
     return whole if spent == whole else whole + 1
 
 
+def _episode_chain_start(bible, meta: SeriesMeta) -> str | None:
+    """Return the prior episode frame only for legacy series-scoped chaining."""
+    if bible and bible.chain_frames and bible.chain_scope == "series":
+        return meta.data.get("last_frame_url")
+    return None
+
+
 def _sample_frames(video_path, count: int = 3) -> list[str]:
     """Final videodan önizleme kareleri çıkar (Telegram onay mesajı için)."""
     ff = shutil.which("ffmpeg")
@@ -338,11 +345,9 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     # chain_scope="episode" ise zincir yalnız bölüm içi → önceki bölümün karesi OKUNMAZ.
     from series.bible import Bible, episode_dir
     bible = Bible.load(slug)
-    chain_start_url = None
-    if bible and bible.chain_frames and bible.chain_scope == "series":
-        chain_start_url = meta.data.get("last_frame_url")
-        if chain_start_url:
-            logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
+    chain_start_url = _episode_chain_start(bible, meta)
+    if chain_start_url:
+        logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
 
     # 1) Üret (idempotent ,  yarım kalmışsa sadece eksik çekimi üretir)
     reserved = False

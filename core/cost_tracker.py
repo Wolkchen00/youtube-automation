@@ -58,6 +58,50 @@ CREDIT_COSTS = {
 }
 
 
+# Conservative hard-cap estimates, version 2026-08-04.
+#
+# These are deliberately upper bounds over the observed Kie charges, not billing
+# quotes.  Rock 1's opt-in hard cap uses this single table before a paid request is
+# made.  Missing engine/duration/call-type entries are UNKNOWN and therefore block.
+CONSERVATIVE_VIDEO_CREDITS = {
+    "omni": {"4": 80, "6": 120, "8": 160, "10": 200},
+    "seedance": {"4": 40, "6": 50, "8": 60, "10": 75},
+    "veo3_lite": {"4": 40, "6": 60, "8": 80, "10": 100},
+    "veo3_fast": {"4": 50, "6": 70, "8": 90, "10": 115},
+    "kling": {"4": 40, "6": 55, "8": 70, "10": 90},
+}
+CONSERVATIVE_FIXED_CREDITS = {
+    ("music", "suno"): 80,
+}
+
+_ENGINE_ALIASES = {
+    "gemini-omni-video": "omni",
+    "seedance-2": "seedance",
+    "seedance_fast": "seedance",
+    "bytedance/seedance-2-fast": "seedance",
+    "veo_lite": "veo3_lite",
+    "veo_fast": "veo3_fast",
+    "veo3": "veo3_fast",
+    "veo": "veo3_fast",
+    "kling-2.6": "kling",
+}
+
+
+def conservative_credit_estimate(call_type: str, engine: str,
+                                 duration=None) -> float | None:
+    """Return the hard-cap estimate for one paid call, or ``None`` if unknown.
+
+    ``main_shot`` and ``qc_regen`` share the engine/duration video table.  Music
+    is a fixed Suno reservation.  Unknown values intentionally fail closed.
+    """
+    kind = str(call_type or "").strip().lower()
+    eng = str(engine or "").strip().lower()
+    eng = _ENGINE_ALIASES.get(eng, eng)
+    if kind in ("main_shot", "qc_regen"):
+        return CONSERVATIVE_VIDEO_CREDITS.get(eng, {}).get(str(duration).strip())
+    return CONSERVATIVE_FIXED_CREDITS.get((kind, eng))
+
+
 # ─── Per-Channel Cost Breakdown ────────────────────────────────────────────────
 
 CHANNEL_COSTS = {
