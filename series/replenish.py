@@ -817,7 +817,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 if pattern.fullmatch(title)
             ]
             if not matches:
-                errors.append(f"part {want}: başlık title_patterns fullmatch sağlamıyor ({title!r})")
+                errors.append(f"part {want}: başlık title_patterns fullmatch sağlamıyor: {title!r}")
             elif not any(family in allowed for allowed in matches):
                 errors.append(
                     f"part {want}: başlık kalıbı family={family!r} ailesine izin vermiyor"
@@ -1037,10 +1037,10 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         episodes[i] = normalized
 
         if strict_plan_validation_enabled(cfg):
-            errors.extend(
-                f"part {want}: {error}"
-                for error in validate_plan_against_config(normalized, cfg)
-            )
+            for error in validate_plan_against_config(normalized, cfg):
+                surfaced = f"part {want}: {error}"
+                if surfaced not in errors:
+                    errors.append(surfaced)
 
         # Motorun kendi doğrulaması (Omni kota vb.) ,  hatalar batch'i düşürür.
         v = validate_plan(normalized, bible)

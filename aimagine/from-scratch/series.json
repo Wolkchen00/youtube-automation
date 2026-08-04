@@ -14,7 +14,7 @@
   "publish_mode": "auto",
   "status": "active",
   "priority": 999,
-  "total_parts": 5,
+  "total_parts": 10,
   "next_part": 6,
   "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008",
   "auto_replenish": {
@@ -47,7 +47,7 @@
       "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6."
     ],
     "music_style": "Steady-tempo percussive construction music synchronized to the build rhythm; soften for one beat at the end of shot 5, open up through the shot 6 reveal tour, and finish gently. No epic trailer bombast, no ethereal intro, and no vocals.",
-    "title_style": "a punchy English YouTube Shorts title using ONE of these FIVE patterns only, never invent a new one: (1) 'Building A <X> From Scratch! 🛠️✨', (2) 'Building A <FRANCHISE> <STRUCTURE> From SCRATCH! 🛠️✨' with the franchise name in CAPS, (3) '<Before> → <Stunning After> ✨' only for the transformation family, (4) 'He Turned <X> Into A $<N> <Y>! ♻️✨' only for the transformation or recycling/off-grid transformation families, (5) 'Building A $<N> <X> From Scratch! ✨'. One or two emoji are required. No hashtags or surrounding quotes.",
+    "title_style": "a punchy English YouTube Shorts title using ONE of these FIVE patterns only, never invent a new one: (1) 'Building A <X> From Scratch! 🛠️✨', (2) 'Building A <FRANCHISE> <STRUCTURE> From SCRATCH! 🛠️✨' with the franchise name in CAPS, (3) '<Before> → <Stunning After> ✨' only for the transformation family, (4) 'He Turned <X> Into A $<N> <Y>! ♻️✨' only for the transformation or recycling/off-grid transformation families, (5) 'Building A $<N> <X> From Scratch! ✨'. HARD MAXIMUM: 60 characters total, including spaces and emoji. Keep value-hook titles compact by shortening <X> or <Y>, never by dropping $<N>. One or two emoji are required. No hashtags or surrounding quotes.",
     "title_patterns": [
       {
         "regex": "Building A .+ From Scratch! (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
@@ -78,14 +78,14 @@
         ]
       },
       {
-        "regex": "He Turned .+ Into A \\$[0-9][0-9,]* .+! (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
+        "regex": "He Turned .+ Into A \\$(?:[0-9]+|[0-9]{1,3}(?:,[0-9]{3})+)(?:\\.[0-9]+)?[KM]? .+! (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
         "families": [
           "dönüşüm",
           "geri dönüşüm / off-grid dönüşüm"
         ]
       },
       {
-        "regex": "Building A \\$[0-9][0-9,]* .+ From Scratch! (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
+        "regex": "Building A \\$(?:[0-9]+|[0-9]{1,3}(?:,[0-9]{3})+)(?:\\.[0-9]+)?[KM]? .+ From Scratch! (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
         "families": [
           "oyun/film üsleri",
           "fantezi konutlar",
@@ -97,9 +97,9 @@
       }
     ],
     "credit_hard_cap": true,
-    "brief": "FROM SCRATCH üretim brief'i (dayanak: aimagine/KONSEPT.md v2.0, 2026-08-04). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Tek yapı, altı çekim ve yaklaşık 60 saniye. Çekim 1 boş arsada çevre ve zeminle başlar; çekim 2 gövdeyi yükseltir; çekim 3 dışı tamamen bitirir; çekim 4 bağımsız iç zinciri kurar; çekim 5 içi tamamen döşer; çekim 6 içeriden dış geniş finale akan tek kesintisiz reveal turudur ve hook_shot her zaman 6'dır. (2) SABİT KARE + ZİNCİR: Kamera-A çekim 1-3'te, Kamera-B çekim 4-5'te tripod kilidindedir; yalnız yavaş zoom serbesttir. Çekim 1 ve 4 yeni sahne açar, diğer çekimler önceki son kareden zincirlenir. Bölümler arasında zincir yoktur. (3) USTA: Aynı sessiz usta koyu bere/şapka, koyu üst ve iş eldivenleriyle arkadan, yandan veya orta mesafeden görünür; yüz yakın planı, konuşma ve kameraya bakış yoktur. (4) AİLE ROTASYONU: family yalnız altı kanonik aileden biri olur ve aynı aile art arda kullanılamaz. Bölüm başına tek yapı ve tek reveal vardır; iç mekan aynı yapının içidir. Doktrin §6 yalnız ilham konularıdır; seed_id ve topic_pool yoktur. Başlık her zaman beş title_style kalıbından üretilir ve aile kısıtına uyar. (5) SES: Narration ve voiceover yoktur; tek ses inşaat ritmine senkron sabit tempolu perküsif müziktir. Çekim 5 sonunda tek vuruş yumuşar, çekim 6'da açılır ve yumuşak kapanır; loop dikişi yoktur. (6) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; rage-bait yasaktır. (7) YASAKLAR: Kutlama, ta-da, kameraya bakış, kapanış kartı, okunur yazı, logo ve watermark yoktur. Korumasız elektrik işi, güvenliksiz derin kazı, açık alev ve başka tehlikeli pratikler özendirilmez.",
+    "brief": "FROM SCRATCH üretim brief'i (dayanak: aimagine/KONSEPT.md v2.0, 2026-08-04). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Tek yapı, altı çekim ve yaklaşık 60 saniye. Çekim 1 boş arsada çevre ve zeminle başlar; çekim 2 gövdeyi yükseltir; çekim 3 dışı tamamen bitirir; çekim 4 bağımsız iç zinciri kurar; çekim 5 içi tamamen döşer; çekim 6 içeriden dış geniş finale akan tek kesintisiz reveal turudur ve hook_shot her zaman 6'dır. (2) SABİT KARE + ZİNCİR: Kamera-A çekim 1-3'te, Kamera-B çekim 4-5'te tripod kilidindedir; yalnız yavaş zoom serbesttir. Çekim 1 ve 4 yeni sahne açar, diğer çekimler önceki son kareden zincirlenir. Bölümler arasında zincir yoktur. (3) USTA: Aynı sessiz usta koyu bere/şapka, koyu üst ve iş eldivenleriyle arkadan, yandan veya orta mesafeden görünür; yüz yakın planı, konuşma ve kameraya bakış yoktur. (4) AİLE ROTASYONU: family yalnız altı kanonik aileden biri olur ve aynı aile art arda kullanılamaz. Bölüm başına tek yapı ve tek reveal vardır; iç mekan aynı yapının içidir. Doktrin §6 yalnız ilham konularıdır; seed_id ve topic_pool yoktur. Başlık her zaman beş title_style kalıbından üretilir ve aile kısıtına uyar. Başlık boşluklar ve emojiler dahil en fazla 60 karakterdir; değer kancasını korumak için <X>/<Y>'yi kısalt, $<N>'yi atma. (5) SES: Narration ve voiceover yoktur; tek ses inşaat ritmine senkron sabit tempolu perküsif müziktir. Çekim 5 sonunda tek vuruş yumuşar, çekim 6'da açılır ve yumuşak kapanır; loop dikişi yoktur. (6) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; rage-bait yasaktır. (7) YASAKLAR: Kutlama, ta-da, kameraya bakış, kapanış kartı, okunur yazı, logo ve watermark yoktur. Korumasız elektrik işi, güvenliksiz derin kazı, açık alev ve başka tehlikeli pratikler özendirilmez.",
     "last_run": {
-      "at": "2026-08-03T16:57:10.745739+00:00",
+      "at": "2026-08-04T17:51:07.543064+00:00",
       "parts": "6-10"
     }
   },

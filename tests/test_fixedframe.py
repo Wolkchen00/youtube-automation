@@ -214,6 +214,45 @@ class ReplenishValidationTests(unittest.TestCase):
         plan["family"] = "beta"
         self.assertTrue(any("ailesine izin vermiyor" in error for error in self.errors(plan)))
 
+    def test_from_scratch_value_hook_money_forms_and_families(self):
+        cfg = SeriesMeta.load("from-scratch").auto_replenish
+        patterns = replenish._compiled_title_patterns(cfg)
+        cases = (
+            ("He Turned Scrap Into A $100,000 Home! ♻️✨", 3, "dönüşüm"),
+            ("He Turned Silos Into A $250K Home! ♻️✨", 3,
+             "geri dönüşüm / off-grid dönüşüm"),
+            ("Building A $1.2M Cliff Home From Scratch! ✨", 4,
+             "saklı/mühendislik harikası"),
+            ("Building A $80,000 Cabin From Scratch! ✨", 4, "fantezi konutlar"),
+        )
+        for title, pattern_index, family in cases:
+            with self.subTest(title=title):
+                pattern, allowed = patterns[pattern_index]
+                self.assertIsNotNone(pattern.fullmatch(title))
+                self.assertIn(family, allowed)
+        for pattern_index, title in (
+            (3, "He Turned Scrap Into A $ Home! ♻️✨"),
+            (3, "He Turned Scrap Into A $abc Home! ♻️✨"),
+            (4, "Building A $ Cabin From Scratch! ✨"),
+            (4, "Building A $abc Cabin From Scratch! ✨"),
+        ):
+            with self.subTest(title=title):
+                self.assertIsNone(patterns[pattern_index][0].fullmatch(title))
+
+    def test_61_character_title_is_rejected_once(self):
+        cfg = fixed_cfg()
+        cfg["title_patterns"] = [{"regex": r".{61}", "families": ["alpha"]}]
+        plan = raw_fixed_plan()
+        plan["episode"]["title"] = "X" * 61
+        title_errors = [error for error in self.errors(plan, cfg) if "başlık" in error]
+        self.assertEqual(title_errors, ["part 1: başlık boş veya 60 karakterden uzun"])
+
+    def test_title_pattern_violation_is_reported_once(self):
+        plan = raw_fixed_plan()
+        plan["episode"]["title"] = "Build CABIN extra"
+        violations = [error for error in self.errors(plan) if "fullmatch" in error]
+        self.assertEqual(len(violations), 1)
+
     def test_bad_regex_is_config_error(self):
         cfg = fixed_cfg()
         cfg["title_patterns"][0]["regex"] = "(unclosed"

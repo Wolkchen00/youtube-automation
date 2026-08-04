@@ -1,0 +1,56 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "He Turned Discarded Tires Into A $5K Tiny Office! ♻️✨"
+  },
+  "synopsis": "An innovative off-grid tiny office space is ingeniously built from recycled car tires and sustainable materials.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "CAMERA A — CHAIN BREAK: Start a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty site, grade the ground, and establish the road, fence, and landscape framework before construction; materials and the recurring silent USTA enter, seen from behind or mid-distance in a dark cap, dark crew-neck, and work gloves, never in face close-up. Mark the foundation so the structure's location is unmistakable.\n\nStart a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on a secluded, overgrown plot in a rural area. Graded ground is prepared for an off-grid structure. Piles of discarded car tires, wooden pallets, and natural clay arrive. The recurring silent USTA enters, seen from behind, arranging the first layer of tires for the foundation, marking the unique footprint.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "CAMERA A — CHAINED: Continue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Raise the foundation, walls, and roof frame in this same composition with accelerating timelapse energy and satisfying material flow. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Rapidly stack and fill the car tires to form thick, insulated walls. Construct a simple, sloped roof frame from reclaimed wood. Show accelerating timelapse energy and satisfying material flow as the unique structure takes shape. The recurring silent USTA is seen mid-distance, compacting earth into the tires, never in face close-up.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "CAMERA A — CHAINED: Continue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the cladding, roof, paint, exterior lights, and final landscaping until the exterior is entirely finished and remains clearly visible in frame. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the exterior by plastering the tire walls with natural clay and lime, install reclaimed windows and a sturdy wooden door, add a small solar panel array on the roof, and finish with a rainwater harvesting system. Final landscaping with local plants until the exterior is entirely finished and remains clearly visible in frame. The recurring silent USTA is seen from behind, smoothing the clay finish.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "CAMERA B — CHAIN BREAK: Start a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior walls, lay the flooring, and install the utility and lighting infrastructure while carrying the exterior's established materials and design language inside. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nStart a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build interior partition walls with wood and natural plaster, lay down salvaged wood flooring, and install minimalist, energy-efficient lighting and utility infrastructure, reflecting the rustic, sustainable design language. The recurring silent USTA is seen installing a window sill, maintaining distance.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "CAMERA B — CHAINED: Continue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install furniture and decor, bring the lighting on, and finish the interior completely until it feels ready to inhabit. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install a compact, custom-built desk and shelving units from reclaimed wood, a comfortable chair, and add warm, battery-powered LED lighting. Decorate with simple, natural accents, finishing the interior completely, making it a cozy and functional off-grid tiny office. The recurring silent USTA is seen placing a plant on the desk, from behind.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6.\n\nContinue directly from shot 5's final frame; make one unbroken camera move that starts inside, slowly moving past the neat office setup, through the rustic wooden door, and ending on a wide exterior view of the fully finished, charming off-grid tiny office, nestled harmoniously in its natural surroundings. The same silent USTA is visible sitting on a small bench outside, looking at the completed structure, never celebrating or looking at the camera.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "geri dönüşüm / off-grid dönüşüm",
+  "music": "A clever and resourceful instrumental piece with a steady, organic beat, driven by found-object percussion, plucked strings, and earthy synth textures, perfectly synchronized to the construction rhythm. The music evokes ingenuity and sustainability. As shot 5 concludes, the rhythm softens for one beat into a warm, sustained chord, then opens up with an inviting, optimistic melody during the shot 6 reveal tour, finishing gently with a feeling of cozy satisfaction.",
+  "hook_shot": 6,
+  "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008"
+}
