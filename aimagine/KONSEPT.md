@@ -138,6 +138,10 @@ YASAK. İç mekan aynı yapının içidir; ikinci yapı sayılmaz.
   dondurma kararı 2026-07-30 sürer).
 - 6 çekim × 10 sn + QC ≈ tahmini **750-1.150 kredi/bölüm** (v1.4 bölümünün ~1,9 katı; İLK
   gerçek koşu logundan doğrulanır). ⚠️ KIE_API_KEY ortak havuz.
+- **Kredi tavanı (Codex bulgusu, tur 1):** bölüm kredi tavanı (EPISODE_CREDIT_CAP) bu seri
+  için 1.400'e çekilir; 900'lük eski tavan doktrinin kendi 1.150 tahmininin altında kalır ve
+  bölümü ortasında keserdi. Tavan yalnız from-scratch koşusunda yükseltilir, diğer kanallar
+  eski tavanda kalır.
 
 ## 5. Ölçüm ve gate'ler (analytics_data verisiyle, haftalık)
 
@@ -171,39 +175,111 @@ kalıplarından üretilir)
 
 ## 7. UYGULAMA (motor + veri değişiklikleri; PLAN.md kayaları bu bölümü uygular)
 
-**Motor (series/ altında, tüm seriler için OPT-IN ,  yeni cfg anahtarı kullanmayan serilerin
-davranışı BİT DEĞİŞMEZ):**
-- `produce.py`: çekim-bazlı zincir kontrolü ,  plan çekimindeki `"chain": false` alanı o çekimde
-  zincir referansını (chain_url / chain_start_url) KULLANDIRMAZ; çekim sonrası son-kare
-  çıkarımı yine yapılır (sonraki çekim zincirlenebilsin). Alan yoksa davranış bugünkü gibidir.
-- `replenish.py`: (a) `auto_replenish.chain_breaks: [1, 4]` ,  şemaya `"chain": <bool>` alanı
-  eklenir, Gemini kuralı ve doğrulayıcı chain_breaks listesine göre zorlar; normalizer `chain`
-  alanını DÜŞÜRMEZ. (b) `auto_replenish.hook_shot: 6` ,  from-scratch slug hard-code'u
-  ("MUST be 4") cfg-güdümlü olur; cfg yoksa eski davranış korunur. (c) `auto_replenish.
-  shot_plan: [<çekim başına kural satırı>]` ,  sistem talimatına numaralı çekim kuralları
-  olarak girer (§3.1 tablosunun İngilizce hali); yoksa davranış eskisi gibi.
-- Doğrulayıcı: şu koşullar hata üretir ,  çekim sayısı 6 değil; herhangi bir çekim süresi "10"
-  değil; hook_shot ≠ 6; chain alanları chain_breaks ile uyumsuz.
+**Motor (series/ altında, tüm seriler için OPT-IN; yeni cfg anahtarı kullanmayan serilerin
+davranışı BİT DEĞİŞMEZ, tur-1 Codex bulgularıyla sertleştirildi):**
+- **Zincir semantiği (`produce.py`):** karar saf bir fonksiyona alınır (test edilebilir zincir
+  izi). Kurallar: `"chain": false` çekim ÖNCE zincir durumunu SIFIRLAR (bayat kare asla
+  tüketilmez); `"chain": true` çekim, bir önceki çekimin son karesi yoksa (çıkarım/yükleme
+  hatası) bölümü FAIL-CLOSED durdurur; son-kare çıkarımı ve imgbb yüklemesi yalnız SONRAKİ
+  çekim zincirliyse yapılır (lookahead); idempotent "çekim zaten var" dalı aynı kurallara
+  uyar. Plan çekimlerinde `chain` alanı yoksa davranış bugünkünün aynısıdır.
+- **Bölümler arası izolasyon:** `bible.json`'ın `series` bloğuna `chain_scope: "episode"`
+  (opt-in, chain_frames'in yanına; tüketiciler seri-düzeyi ayarı ORADAN okur) eklenir; runner
+  (`series_runner.py`, kapsam İÇİNDE) bu seride önceki bölümün `last_frame_url`'ünü HİÇ
+  aktarmaz. Varsayılan "series" (bugünkü davranış). Çekim 1'in `chain: false` olması ikinci
+  emniyettir.
+- **Eksik çekim = yayın yok:** bible `qc` bloğuna `require_all_shots: true` (opt-in) eklenir;
+  plandaki HERHANGİ bir çekim üretilemez veya QC'den düşerse bölüm birleştirilmez ve
+  yayınlanmaz. Bu modda QC "skip" sonucu (inceleme yapılamadı: Gemini/kare hatası) BAŞARISIZ
+  sayılır; `critic.py` pass/skip/fail'i AYIRT EDEN açık bir durum döndürür (bugün skip ile
+  pass aynı görünüyor). Diğer serilerde skip davranışı değişmez.
+- **Üretim-tarafı doğrulama:** produce, Kie kredisi harcamadan ÖNCE planı cfg'ye karşı doğrular
+  (çekim sayısı, süreler, chain alanlarının chain_breaks ile uyumu, hook_shot; çekim
+  numaraları TAM OLARAK [1..shots] sırasız/tekrarsız); damgası doğru ama içeriği bozuk plan
+  yakalanır. 7-birim referans kotası, zincir karesi EKLENDİKTEN sonraki nihai kwargs
+  üzerinde doğrulanır.
+- **Sert kredi tavanı:** `auto_replenish` (veya seri cfg) `credit_hard_cap: true` (opt-in):
+  produce her ücretli çağrıdan (ana çekim, QC regen VE müzik/Suno) önce kalan bütçeyi,
+  SIRADAKİ çağrının TAHMİNİ maliyetiyle birlikte denetler; tavan aşılacaksa çağrı yapılmaz
+  ve bölüm fail-closed durur. Tahmin kaynağı açıkça tanımlıdır: motor+süre bazlı MUHAFAZAKÂR
+  maliyet tablosu (gözlenen gerçek maliyetlerin üst sınırı; tablo tek yerde, sürüm notlu).
+  Tabloda karşılığı olmayan bir çağrı türü = BİLİNMEYEN maliyet = fail-closed (sessizce
+  geçilmez). Ücretli müzik (Suno/Kie) çağrısı da rezervasyon ve harcama muhasebesine girer;
+  kredi dönmese bile tablo tahmini harcanmış sayılır. Eski davranış (yalnız rezervasyon/QC
+  denetimi) diğer serilerde aynen sürer.
+- **Teslimat kapısı (zorunlu katmanlar):** bible `series` bloğuna `required_layers`
+  (opt-in, ör. `["hook_teaser", "music"]`) eklenir: bu katmanlardan biri üretilemezse bölüm
+  fail-closed durur, YAYINLANMAZ. Bugün teaser ve müzik best-effort'tur (`produce.py` kanca
+  bloğu hatayı yutup "video kancasız yayınlanır" der) ,  sabit-kare formatında teaser vaadi
+  taşıyan tek öğedir, müzik de ürünün yarısıdır; kancasız/müziksiz bölüm bu kanalda kusurlu
+  teslimattır. Anahtar tanımlı değilse davranış bugünkünün aynısı.
+- **Preflight CLI (makine-doğrulanabilir kanıt):** zincir izi CLI'ı tam bir ön-uçuş aracına
+  genişler: meta + bible + plan yükler; doktrin SHA kapısı, cfg-uyum doğrulaması ve çekim
+  başına zincir kararını yazar; HERHANGİ bir ihlalde sıfır-dışı çıkar. Rock 3 kanıtı ve CI
+  teşhisi budur (produce dry-run'ının None-körlüğüne güvenilmez).
+- **`replenish.py`:** (a) `auto_replenish.chain_breaks: [1, 4]`: şemaya `"chain": <bool>`
+  alanı eklenir, Gemini kuralı + doğrulayıcı chain_breaks'e göre ZORLAR, normalizer `chain`
+  alanını düşürmez; zincir anlatım kuralı SEGMENTED CHAIN metnine döner. (b) `auto_replenish.
+  hook_shot: 6`: cfg değeri varsa kural + doğrulayıcı bu değeri zorlar; cfg YOKSA eski
+  from-scratch slug dalı AYNEN korunur (bit-değişmezlik). (c) `auto_replenish.shot_plan`:
+  çekim başına kural satırları sistem talimatına girer VE normalize sırasında her çekim
+  prompt'unun başına deterministik olarak eklenir (Gemini kuralı yok saysa bile kamera/faz
+  dili Kie'ye ulaşır). (d) cfg-yükleme doğrulayıcısı: shot_plan uzunluğu == shots, breaks
+  benzersiz + aralıkta, hook aralıkta, boş satır yok. (e) chain_breaks tanımlı cfg'de katı
+  doğrulama: çekim sayısı TAM cfg değeri, her süre TAM cfg değeri, çekim numaraları TAM
+  [1..shots]. (f) `auto_replenish.title_patterns` (opt-in): DÜZ regex listesi DEĞİL, yapılı
+  kurallar ,  her öğe `{"regex": "<kalıp>", "families": ["<izinli aile>", ...]}`. Üretilen HER
+  başlık, o bölümün `family` değerinin izinli olduğu bir kuralla **fullmatch** etmek zorundadır
+  (kısmi eşleşme + artık metin REDdedilir; ör. kalıp 3 yalnız "dönüşüm", kalıp 4 yalnız
+  "dönüşüm" + "geri dönüşüm/off-grid dönüşüm" ailelerinde geçerlidir). Kurallar cfg yüklenirken
+  DERLENİR (bozuk regex = cfg hatası, üretim başlamaz); uymayan batch reddedilir ve fix-turuna
+  gider. Tek seferlik Rock-3 kontrolü değil, her replenish koşusunda zorlanır.
+- **Golden kanıt:** kod değişmeden ÖNCE, yeni anahtar kullanmayan TÜM kurulu serilerin
+  `_build_prompt` çıktıları fixture olarak dondurulur; değişiklik sonrası bire bir eşitlik +
+  normalize planlarda yeni alanların YOKLUĞU test ile kanıtlanır.
 
 **Veri (aimagine/from-scratch/):**
 - `series.json`: `auto_replenish` → `shots: 6`, `shot_seconds: "10"`, `hook_shot: 6`,
   `chain_breaks: [1, 4]`, `families` §3.2'deki ALTI kanonik değer, `shot_plan` §3.1 İngilizce
-  kural satırları, `music_style` §3.4'e göre yeniden yazılır (loop bitişi kuralı çıkar),
-  `title_style` §3.5'in BEŞ kalıbı, `brief` §3'ün Türkçe özeti (DEĞİŞMEZ KURALLAR yeniden;
-  çıktı dili İngilizce notu korunur), `hashtags: "#shorts #satisfying #construction #diy"`.
-  `doctrine_sha256` bu dosyanın YENİ SHA-256'sıyla güncellenir.
+  kural satırları, `music_style` §3.4'e göre yeniden (loop bitişi kuralı çıkar), `title_style`
+  §3.5'in BEŞ kalıbı, `brief` §3'ün Türkçe özeti (çıktı dili İngilizce notu korunur),
+  `hashtags: "#shorts #satisfying #construction #diy"`, `title_patterns` (§3.5 beş kalıbın
+  `{regex, families}` hali; kalıp 3 yalnız "dönüşüm", kalıp 4 "dönüşüm" + "geri dönüşüm/
+  off-grid dönüşüm", kalıp 1/2/5 tüm aileler), `credit_hard_cap: true`.
+- **Doktrin SHA:** pin, motorun KENDİ hash fonksiyonuyla hesaplanır (series/bible.py LF
+  normalizasyonu; Windows CRLF ile Linux CI çıktısı aynı hash'i vermeli); CRLF/LF eşdeğerlik
+  testi eklenir. Elle sha256sum KULLANILMAZ.
 - `bible.json`: `chain_frames: true`; `art_style` yeniden: fotoreal inşaat timelapse, 9:16,
   "LOCKED-OFF TRIPOD camera: the exact same fixed camera position and angle, only slow zoom
   allowed" + usta kilidi ("one recurring silent builder in a dark cap, dark crew-neck and work
   gloves, seen from behind or mid-distance, face never in close-up") + no CGI sheen, no text,
-  no logos, no watermarks; `hook_teaser.offset_in_shot` çekim sonu üçte birine (ör. 7.0);
-  `qc.notes` yeniden: sabit kamera kayması, usta görünüm değişimi, yapı stil kopması, zincirli
-  çekimde kompozisyon kilidi ihlali = artifact; kutlama/ta-da/okunur yazı yasakları sürer.
-- Bekleyen `plans/part06..part10.json` (eski doktrin damgalı) SİLİNİR; replenish yeni doktrinle
-  6-10'u yeniden üretir (Gemini flash ,  Kie kredisi harcamaz). `total_parts: 10`, `next_part: 6`
-  değişmez.
-- `.github/workflows/from-scratch.yml` başlık yorumundaki bayat "approval" cümlesi düzeltilir
-  (canlı gerçek: publish_mode=auto, İhsan kararı 2026-07-30).
+  no logos, no watermarks; `series` bloğuna `chain_scope: "episode"` +
+  `required_layers: ["hook_teaser", "music"]`;
+  `hook_teaser.offset_in_shot: 7.0`; `qc` bloğuna
+  `require_all_shots: true`; `qc.notes` yeniden: sabit kamera kayması, usta görünüm değişimi,
+  yapı stil kopması, zincirli çekimde kompozisyon kilidi ihlali = artifact; kutlama/ta-da/
+  okunur yazı yasakları sürer; hook_shot=6 + teaser kaynağı çekim 6.
+- **Plan geçişi:** bekleyen `plans/part06..part10.json` SİLİNİR ve `total_parts` geçici olarak
+  5'e çekilir (aksi halde replenish beş "bekleyen" part görür ve no-op kalır; Codex bulgusu);
+  yeni doktrinle replenish 6-10'u üretip total_parts'ı 10'a geri taşır. `next_part: 6` kalır;
+  parts 1-5 ve published.json'a DOKUNULMAZ.
+- Eski 4×8/beş-aile değerlerini bekleyen mevcut test fixture'ları güncellenir; kanıt TÜM
+  tests/test_*.py dosyalarının koşulmasıdır.
+- `.github/workflows/from-scratch.yml` başlık yorumundaki bayat "approval" cümlesi canlı
+  gerçeğe çevrilir (publish_mode=auto, İhsan kararı 2026-07-30). Cron/adımlar değişmez;
+  bu koşunun `EPISODE_CREDIT_CAP` değeri TAM 1.400 olur (§4) ve bu değer testle makine
+  denetlenir (yalnız cfg bayrağı değil, workflow env'in kendisi).
 
-**Kapsam dışı (ISSUES.md):** usta için Kie referans-görsel/characterId kaydı; diegetik foley;
-`core/config.py` süre bandı (seri hattı okumuyorsa dokunulmaz); the-vast/the-drift emeklilik kararı.
+**Tur-1/2 CLARIFY kararları (Visionary):**
+- Çekim 3→4 köprüsü: dış ve iç, MEKANİK olarak iki bağımsız zincir segmentidir; bu tasarım
+  KABUL (cairo da içe kesiyor). Süreklilik bu sınırda SALT-PROMPT'tur ve doktrin bunu açıkça
+  kabul eder: critic tek klip inceler, sınır karesini göremez; köprüyü şot-4 kural öneki
+  (dış malzeme/stil dilini içeride sürdürür) taşır. Çekim 3'ün son karesini şot 4'e ek
+  REFERANS görsel verme deneyi ve sınır-ötesi (cross-shot) QC incelemesi ISSUES'ta.
+- İlk pivot bölümü canary'siz auto yayınlanır: İhsan'ın onay dondurma kararı (2026-07-30)
+  sürer; merge + push zaten İhsan kapısıdır, isterse push öncesi publish_mode=approval'a
+  çevirtebilir (tek satır).
+
+**Kapsam dışı (ISSUES.md):** usta için Kie referans-görsel/characterId kaydı; şot 3→4 referans
+köprüsü deneyi; sınır-ötesi (cross-shot) QC incelemesi; diegetik foley; `core/config.py` süre
+bandı (seri hattı okumuyorsa dokunulmaz); the-vast/the-drift emeklilik kararı.
