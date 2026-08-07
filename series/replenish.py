@@ -392,6 +392,15 @@ def _unused_topics(cfg: dict, history: list[dict]) -> list[dict]:
     return [item for seed_id, item in _topic_pool(cfg).items() if seed_id not in used]
 
 
+def _previous_family(history: list[dict]) -> str:
+    """Geçmişte family taşıyan son bölümün kanonik değerini döndür."""
+    for item in reversed(history):
+        family = str(item.get("family") or "").strip()
+        if family:
+            return family
+    return ""
+
+
 def _freeze(value):
     """Calibration kopyasini kosu boyunca degistirilemez hale getir."""
     if isinstance(value, dict):
@@ -485,6 +494,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
+    previous_family = _previous_family(history) if families else ""
     pool = _topic_pool(cfg)
     cards = _unused_cards(calibration, history)
     humans_mode = str(cfg.get("humans") or "").strip().lower()
@@ -618,6 +628,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         + ". Consecutive episodes must never use the same family."
         if families else ""
     )
+    first_family_rule = (
+        f'\n- CRITICAL FAMILY BLOCK FOR EPISODE {start}: The previous episode used '
+        f'{json.dumps(previous_family, ensure_ascii=False)}, so episode {start} must not use '
+        f'{json.dumps(previous_family, ensure_ascii=False)}.'
+        if previous_family else ""
+    )
     if cards:
         seed_rule = (
             "\n- TOPIC POOL: every episode must include \"seed_id\" from the runtime pools in the "
@@ -632,6 +648,11 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         )
     else:
         seed_rule = ""
+    if pool and previous_family:
+        seed_rule += (
+            f' For integer seed_id in episode {start}, choose only from the runtime pool explicitly '
+            'labeled for the first episode. Later episodes may use the later-episode pool.'
+        )
     if "hook_shot" in cfg:
         hook_rule = (
             f'- "hook_shot" MUST be {int(cfg["hook_shot"])}. That shot is the teaser source.'
@@ -670,7 +691,7 @@ Return STRICT JSON ONLY, exactly this shape:
 ]}}
 
 RULES:
-- Produce EXACTLY {batch} episodes, numbered {start} to {end}, in this order.
+- Produce EXACTLY {batch} episodes, numbered {start} to {end}, in this order.{first_family_rule}
 - Each episode has EXACTLY {shots} shots, every shot with "duration": "{sec}".
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
@@ -705,8 +726,28 @@ RULES:
         )
         lines.append(json.dumps(cards, ensure_ascii=False, indent=2))
     if pool:
-        lines.append("\nRUNTIME UNUSED TOPIC POOL. Use each seed_id at most once:")
-        lines.append(json.dumps(_unused_topics(cfg, history), ensure_ascii=False, indent=2))
+        unused_topics = _unused_topics(cfg, history)
+        if previous_family:
+            first_topics = [
+                item for item in unused_topics
+                if str(item.get("family") or "").strip() != previous_family
+            ]
+            lines.append(
+                f"\nRUNTIME UNUSED TOPIC POOL FOR FIRST EPISODE {start}. "
+                f"Family {json.dumps(previous_family, ensure_ascii=False)} is forbidden here; "
+                "its seeds are intentionally not offered for this position:"
+            )
+            lines.append(json.dumps(first_topics, ensure_ascii=False, indent=2))
+            if batch > 1:
+                lines.append(
+                    f"\nRUNTIME UNUSED TOPIC POOL FOR LATER EPISODES {start + 1}-{end}. "
+                    "Use each seed_id at most once across the batch; seeds omitted from the first "
+                    "position remain valid here:"
+                )
+                lines.append(json.dumps(unused_topics, ensure_ascii=False, indent=2))
+        else:
+            lines.append("\nRUNTIME UNUSED TOPIC POOL. Use each seed_id at most once:")
+            lines.append(json.dumps(unused_topics, ensure_ascii=False, indent=2))
     if shot_refs:
         refs_lines = []
         for kind in ("characters", "environments"):
@@ -775,11 +816,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             used_seed_ids.add(seed_id)
         elif isinstance(seed_id, str):
             used_card_ids.add(seed_id)
-    previous_family = ""
-    for item in reversed(history):
-        previous_family = str(item.get("family") or "").strip()
-        if previous_family:
-            break
+    previous_family = _previous_family(history)
 
     errors: list[str] = []
     seen = set(existing_titles)
@@ -807,7 +844,10 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             elif family not in families:
                 errors.append(f"part {want}: family kanonik listede değil ({family!r})")
             if family and previous_family and family == previous_family:
-                errors.append(f"part {want}: ardışık iki part aynı family değerini kullanamaz")
+                errors.append(
+                    f"part {want}: ardışık iki part aynı family değerini kullanamaz "
+                    f"(yasak family: {previous_family!r})"
+                )
             if family:
                 previous_family = family
 
@@ -1058,12 +1098,12 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
 def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
                    start: int, batch: int,
                    calibration: Mapping | None = None) -> list[dict]:
-    """TEK Gemini çağrısıyla batch adet bölüm planı üret. 2 semantik deneme:
-    ilk denemenin hataları ikinci denemede prompt'a geri beslenir."""
+    """TEK Gemini çağrısıyla batch adet bölüm planı üret. 3 semantik deneme:
+    her başarısız denemenin hataları sonraki prompt'a geri beslenir."""
     history = _episode_history(meta.slug)
     existing = {_norm_title(h["title"]) for h in history if h.get("title")}
     errors: list[str] | None = None
-    for attempt in (1, 2):
+    for attempt in (1, 2, 3):
         contents, sysins = _build_prompt(meta, bible, cfg, start, batch, history,
                                          fix_errors=errors, calibration=calibration)
         data = _gen_json(contents, sysins, temperature=0.9)
@@ -1074,7 +1114,15 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
         if not errors:
             return episodes
         logger.warning(f"⚠️ İkmal doğrulaması geçmedi ({attempt}. deneme): {errors[:4]}")
-    raise RuntimeError(f"Gemini planları doğrulamadan geçemedi: {'; '.join(errors[:4])}")
+    forbidden_family = _previous_family(history) if cfg.get("families") else ""
+    forbidden_note = (
+        f"; ilk bölüm {start} için yasak family: {forbidden_family!r}"
+        if forbidden_family else ""
+    )
+    raise RuntimeError(
+        f"Gemini planları doğrulamadan geçemedi{forbidden_note}; "
+        f"başarısız kurallar: {'; '.join(errors)}"
+    )
 
 
 # ─── Ana akış ──────────────────────────────────────────────────────────────────
