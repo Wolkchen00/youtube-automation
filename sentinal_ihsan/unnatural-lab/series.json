@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 11,
-  "next_part": 8,
+  "next_part": 9,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -109,6 +109,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-03T20:33:40.690381+00:00"
+    },
+    "8": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep08/ep08_narrated_music.mp4",
+      "subtitle": "This ROCK Is NOT Supposed To FLOAT?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-07T19:33:42.994325+00:00"
     }
   }
 }
