@@ -73,6 +73,11 @@ def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
     value = shot.get("chain")
     if not isinstance(value, bool):
         return ChainDecision(None, False, False, False, True, "chain bool olmalı")
+    if value and not chain_frames:
+        return ChainDecision(
+            None, False, False, False, True,
+            "chain=true için bible.series.chain_frames=true olmalı",
+        )
     next_chained = False
     if next_shot is not None:
         next_chained = (
@@ -738,13 +743,18 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     sdir = shots_dir(slug, number)
     sdir.mkdir(parents=True, exist_ok=True)
 
-    # Critic-QC (opt-in, bible."series"."qc"): bölüm-başı regen tavanı ≈ çekim/2
-    # (PLAN §5: regen bütçesi baz maliyetin +%50'si). qc_budget=None → QC kapalı.
+    # Critic-QC (opt-in, bible."series"."qc"): varsayılan bölüm tavanı çekim sayısıdır.
+    # Toplam ve çekim sayısı, QC katmanının çekim başı adil payı hesaplamasını sağlar.
     qc_cfg = critic.qc_config(bible)
     qc_budget = None
     if qc_cfg and not dry_run:
         per_ep = qc_cfg.get("max_regens_per_episode")
-        qc_budget = {"left": int(per_ep) if per_ep else max(1, round(len(plan["shots"]) / 2))}
+        total_budget = int(per_ep) if per_ep is not None else len(plan["shots"])
+        qc_budget = {
+            "left": total_budget,
+            "total": total_budget,
+            "shot_count": len(plan["shots"]),
+        }
         logger.info(f"🔍 Critic-QC AÇIK — kare={qc_cfg['frames']}, eşik={qc_cfg['artifact_threshold']}, "
                     f"çekim regen≤{qc_cfg['max_regens_per_shot']}, bölüm regen≤{qc_budget['left']}")
 
@@ -756,6 +766,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     shot_files: list[Path] = []
     shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
     running = 0.0
+    previous_shot_dropped = False
 
     for shot_index, shot in enumerate(plan["shots"]):
         n = shot.get("n")
@@ -764,8 +775,21 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
         next_shot = plan["shots"][shot_index + 1] if shot_index + 1 < len(plan["shots"]) else None
         chain_decision = decide_shot_chain(shot, next_shot, chaining, chain_url)
         if chain_decision.error:
-            logger.error(f"❌ Çekim {n} zincir kapısı: {chain_decision.error}")
-            return None
+            if previous_shot_dropped and chain_decision.require_previous:
+                logger.warning(
+                    f"⚠️ Çekim {n} zinciri kırıldı: önceki çekim düştüğü için son kare yok; "
+                    "çekim kendi promptuyla başlangıç karesiz üretilecek"
+                )
+                chain_decision = ChainDecision(
+                    start_url=None,
+                    reset_before=True,
+                    require_previous=False,
+                    capture_last_frame=chain_decision.capture_last_frame,
+                    explicit=chain_decision.explicit,
+                )
+            else:
+                logger.error(f"❌ Çekim {n} zincir kapısı: {chain_decision.error}")
+                return None
         chain_url = chain_decision.start_url
 
         # İdempotent: bu çekim zaten üretildiyse atla; zincir için son karesini yine de al
@@ -782,6 +806,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                     if up:
                         chain_url = up
                         last_frame_url = up
+            previous_shot_dropped = False
             continue
 
         # ── OMNI çekimi (karakter + ses tutarlılığı) ──────────────────────────
@@ -848,13 +873,20 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                     kw = dict(_kw)
                     kw["prompt"] = fixed_prompt
                     kw["seed"] = None   # None → generate_omni_shot taze seed üretir
+
+                    def _authorize_regen(_duration=kw["duration"]):
+                        allowed = hard_cap.authorize(
+                            "qc_regen", "omni", _duration, optional=True
+                        )
+                        if not allowed:
+                            qc_budget["left"] = 0
+                        return allowed
+
                     regen_result = _gen_omni_with_fallback(
                         kw,
                         before_call=(
                             None if hard_cap is None else
-                            lambda _duration=kw["duration"]: hard_cap.authorize(
-                                "qc_regen", "omni", _duration
-                            )
+                            _authorize_regen
                         ),
                     )
                     if (regen_result and regen_result.get("credits") is None
@@ -891,6 +923,9 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                     if up:
                         chain_url = up
                         last_frame_url = up
+            previous_shot_dropped = status != "ok"
+            if previous_shot_dropped:
+                chain_url = None
             continue
 
         # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
@@ -935,8 +970,9 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 if hard_cap is None and not _qc_regen_allowed(slug, number):
                     return None
                 if hard_cap is not None and not hard_cap.authorize(
-                    "qc_regen", _eng, _rv["duration"]
+                    "qc_regen", _eng, _rv["duration"], optional=True
                 ):
+                    qc_budget["left"] = 0
                     return None
                 regen_result = _generate_visual_clip(
                     _eng, fixed_prompt, _rv["start_image_url"], _rv["duration"],
@@ -975,6 +1011,9 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 if up:
                     chain_url = up
                     last_frame_url = up
+        previous_shot_dropped = status != "ok"
+        if previous_shot_dropped:
+            chain_url = None
 
     if dry_run:
         logger.info("[dry-run] Simülasyon bitti — dosya/kredi harcanmadı.")

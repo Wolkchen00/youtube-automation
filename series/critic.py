@@ -339,6 +339,16 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
     extra_credits = 0.0
     all_fix_notes: list[str] = []
     attempt = 0  # 0 = ilk üretim; 1..max = regen'ler
+    shot_regen_limit = int(qc["max_regens_per_shot"])
+    if "total" in budget and "shot_count" in budget:
+        try:
+            shot_count = int(budget["shot_count"])
+            if shot_count > 0:
+                fair_share = max(1, int(budget["total"]) // shot_count)
+                shot_regen_limit = min(shot_regen_limit, fair_share)
+        except (TypeError, ValueError):
+            # Eski veya bozuk ek alanlar çekim başı mevcut davranışa geri döner.
+            pass
 
     while True:
         review_try = 0
@@ -397,7 +407,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         all_fix_notes.extend((review or {}).get("fix_notes") or reasons)
 
         can_regen = (regen_fn is not None
-                     and attempt < int(qc["max_regens_per_shot"])
+                     and attempt < shot_regen_limit
                      and budget.get("left", 0) > 0)
         # Reddedilen klip out_file adını BOŞALTIR (skip-yolu sözleşmesi)
         rejected = clip_path.parent / f"{clip_path.stem}_qcfail{attempt}{clip_path.suffix}"
@@ -408,6 +418,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         if not can_regen:
             why = ("regen hakkı bitti" if regen_fn is not None and budget.get("left", 0) <= 0
+                   else "çekim adil payı doldu"
+                   if regen_fn is not None and shot_regen_limit < int(qc["max_regens_per_shot"])
                    else "çekim regen limiti doldu" if regen_fn is not None else "regen kapalı")
             logger.error(f"❌ QC: çekim {n} eşiği geçemedi ({why}) — çekim bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "final_reject", "episode": episode, "shot": n,
@@ -422,7 +434,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         budget["left"] -= 1
         attempt += 1
         fixed_prompt = strengthen_prompt(prompt, all_fix_notes)
-        logger.info(f"♻️ QC regen {attempt}/{qc['max_regens_per_shot']}: çekim {n} "
+        logger.info(f"♻️ QC regen {attempt}/{shot_regen_limit}: çekim {n} "
                     f"düzeltilmiş prompt + yeni seed ile yeniden üretiliyor "
                     f"(bölüm hakkı: {budget['left']})")
         _log_event(slug, {"event": "regen", "episode": episode, "shot": n,

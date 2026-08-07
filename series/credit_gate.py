@@ -254,19 +254,20 @@ class HardCreditCap:
     def last_estimate(self) -> float | None:
         return self.reservations[-1]["estimate"] if self.reservations else None
 
-    def authorize(self, call_type: str, engine: str, duration=None) -> bool:
-        """Reserve the next call's estimate; unknown/over-cap calls are blocked."""
+    def authorize(self, call_type: str, engine: str, duration=None,
+                  optional: bool = False) -> bool:
+        """Sonraki çağrıyı rezerve et; isteğe bağlı ret sert tavanı zehirlemez."""
         from core.cost_tracker import conservative_credit_estimate
 
         estimate = conservative_credit_estimate(call_type, engine, duration)
         if self.spent is None:
-            self.blocked_reason = "mevcut bölüm harcaması okunamadı"
+            reason = "mevcut bölüm harcaması okunamadı"
         elif estimate is None:
-            self.blocked_reason = (
+            reason = (
                 f"bilinmeyen maliyet: çağrı={call_type}, motor={engine}, süre={duration}"
             )
         elif float(self.spent) + float(estimate) > float(self.cap):
-            self.blocked_reason = (
+            reason = (
                 f"sert tavan aşımı: harcanan={float(self.spent):g}, "
                 f"sonraki={float(estimate):g}, tavan={float(self.cap):g}"
             )
@@ -279,5 +280,9 @@ class HardCreditCap:
                 "estimate": float(estimate),
             })
             return True
+        if optional:
+            logger.warning("Kredi sert tavanı isteğe bağlı çağrıyı reddetti: %s", reason)
+            return False
+        self.blocked_reason = reason
         logger.error("Kredi sert tavanı çağrıyı engelledi: %s", self.blocked_reason)
         return False
