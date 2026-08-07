@@ -537,7 +537,7 @@ class InstalledSeriesTests(unittest.TestCase):
             encoding="utf-8"
         )
         values = re.findall(r"^\s*EPISODE_CREDIT_CAP=(\d+)\s*$", raw, re.MULTILINE)
-        self.assertEqual(values, ["1400"])
+        self.assertEqual(values, ["1900"])
 
     def test_from_scratch_post_process_skips_narration_and_uses_alias(self):
         bible = Bible.load("from-scratch")

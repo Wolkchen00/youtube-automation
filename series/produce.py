@@ -185,9 +185,32 @@ def _gen_omni_with_fallback(kwargs: dict, before_call=None) -> dict | None:
     return result
 
 
+def _reserve_plan_music(bible: Bible, plan: dict,
+                        hard_cap: credit_gate.HardCreditCap | None,
+                        number: int) -> bool | None:
+    """Suno müziğini çekimlerden önce ayır.
+
+    True rezervasyon yapıldığını, None rezervasyon gerekmediğini, False ise sert
+    tavanın rezervasyonu engellediğini belirtir.
+    """
+    music_prompt = str(plan.get("music") or "").strip()
+    if hard_cap is None or not bible.music or not music_prompt:
+        return None
+    if not hard_cap.authorize("music", "suno"):
+        return False
+    # Suno creditsConsumed döndürmüyor. Üretim daha sonra başarısız olsa bile
+    # korumacı tahmin harcanmış sayılır.
+    cost_tracker.log_cost(
+        f"series:{bible.slug}", f"suno_estimate_ep{number}", "suno",
+        hard_cap.last_estimate,
+    )
+    return True
+
+
 def _post_process(bible: Bible, plan: dict, final_ep: Path,
                   hard_cap: credit_gate.HardCreditCap | None = None,
-                  required_music: bool = False) -> Path | None:
+                  required_music: bool = False,
+                  music_reserved: bool = False) -> Path | None:
     """Final videoya anlatım (narration) + SÜREKLİ müzik ekle (best-effort).
 
     Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
@@ -245,11 +268,11 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
             # davranış ESKİSİYLE AYNI (Lyria → ambient bed).
             music_prompt = str(plan.get("music") or "").strip() or None
             ep_title = str(plan.get("episode", {}).get("title") or "").strip()
-            if music_prompt and hard_cap is not None:
+            if music_prompt and hard_cap is not None and not music_reserved:
                 if not hard_cap.authorize("music", "suno"):
                     return None
-                # Suno does not surface creditsConsumed. Its conservative estimate is
-                # therefore recorded as spent even when generation later fails.
+                # Doğrudan çağrılarda ön rezervasyon yoktur; eski güvenli davranış
+                # korunur ve Suno tahmini burada bir kez ayrılır.
                 cost_tracker.log_cost(
                     f"series:{bible.slug}", f"suno_estimate_ep{number}", "suno",
                     hard_cap.last_estimate,
@@ -706,6 +729,12 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             logger.error("❌ Kredi sert tavanı: mevcut bölüm harcaması okunamadı")
             return None
 
+    # Zorunlu Suno müziği hiçbir ana çekim harcamasının gerisinde kalamaz.
+    # _post_process music_reserved=True aldığında aynı rezervasyonu ikinci kez saymaz.
+    music_reservation = _reserve_plan_music(bible, plan, hard_cap, number)
+    if music_reservation is False:
+        return None
+
     sdir = shots_dir(slug, number)
     sdir.mkdir(parents=True, exist_ok=True)
 
@@ -994,6 +1023,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     final_ep = _post_process(
         bible, plan, final_ep, hard_cap=hard_cap,
         required_music="music" in required_layers,
+        music_reserved=music_reservation is True,
     )
     if final_ep is None:
         return None

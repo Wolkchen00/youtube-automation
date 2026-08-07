@@ -45,7 +45,10 @@ QC_DEFAULTS = {
     "artifact_threshold": 6,    # 0-10; bu ve üstü artifact_score = RED
     "max_regens_per_shot": 2,   # çekim başına yeniden üretim hakkı
     "frame_width": 720,         # denetim karesi genişliği (dikeyde 720x1280)
+    "qc_review_retries": 2,     # skip sonrası aynı klibi ek denetleme sayısı
 }
+
+QC_REVIEW_RETRY_DELAY = 0.05
 
 
 def qc_config(bible: Bible) -> dict:
@@ -323,8 +326,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
     üret (çekim başına maks max_regens_per_shot, bölüm başına budget["left"]).
 
     Dönüş: (kullanılacak_klip_yolu | None, regen'lerin ek kredisi,
-    ``"pass"|"skip"|"fail"``). Durum her zaman açıktır; require_all_shots modunda
-    ``skip`` yol dönmez ve teslimatı engeller.
+    ``"pass"|"skip"|"fail"``). Durum her zaman açıktır; denetlenemeyen ``skip``
+    klibi require_all_shots modunda da korunur, yalnız gerçek ``fail`` düşürülür.
     None = çekim eşiği geçemedi → çağıran onu üretim-FAIL gibi işler (bölümden düşer).
     Sözleşme: dönüşte clip_path adında dosya YA onaylıdır YA hiç yoktur — reddedilenler
     *_qcfail*.mp4'e taşınır, idempotent 'atla' yolu asla bozuk klip devralmaz."""
@@ -338,15 +341,29 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
     attempt = 0  # 0 = ilk üretim; 1..max = regen'ler
 
     while True:
-        review, verdict, reasons, frames = review_clip(bible, shot, clip_path, prompt, qc)
-        _log_event(slug, {
-            "event": "review", "episode": episode, "shot": n, "attempt": attempt,
-            "verdict": verdict, "reasons": reasons,
-            "artifact_score": (review or {}).get("artifact_score"),
-            "issues": (review or {}).get("issues"),
-            "fix_notes": (review or {}).get("fix_notes"),
-            "clip": clip_path.name,
-        })
+        review_try = 0
+        review_retries = max(0, int(qc["qc_review_retries"]))
+        while True:
+            review, verdict, reasons, frames = review_clip(
+                bible, shot, clip_path, prompt, qc
+            )
+            _log_event(slug, {
+                "event": "review", "episode": episode, "shot": n, "attempt": attempt,
+                "review_try": review_try, "verdict": verdict, "reasons": reasons,
+                "artifact_score": (review or {}).get("artifact_score"),
+                "issues": (review or {}).get("issues"),
+                "fix_notes": (review or {}).get("fix_notes"),
+                "clip": clip_path.name,
+            })
+            if verdict != "skip" or review_try >= review_retries:
+                break
+            review_try += 1
+            wait = QC_REVIEW_RETRY_DELAY * review_try
+            logger.warning(
+                f"⚠️ QC denetimi atlandı: çekim {n}, aynı klip "
+                f"{wait:.2f}s sonra yeniden denenecek ({review_try}/{review_retries})"
+            )
+            time.sleep(wait)
 
         if verdict in ("pass", "skip"):
             if verdict == "pass":
@@ -357,17 +374,22 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     _notify(f"🔍 *{bible.title}* ep{episode} çekim {n}: QC {attempt}. regen'de GEÇTİ "
                             f"(nedenler: {'; '.join(all_fix_notes[:3]) or 'anatomi'}) ✅")
             else:
-                logger.warning(f"🔍 QC ATLANDI: çekim {n} — {'; '.join(reasons)}")
-                if bible.require_all_shots:
-                    skipped = clip_path.parent / f"{clip_path.stem}_qcskip{attempt}{clip_path.suffix}"
-                    try:
-                        clip_path.replace(skipped)
-                    except Exception as error:
-                        logger.warning(f"⚠️ QC: atlanan klip taşınamadı ({error})")
-                    logger.error(
-                        f"❌ QC skip require_all_shots nedeniyle çekim {n} teslimatını engelledi"
-                    )
-                    return None, extra_credits, "skip"
+                reason_text = "; ".join(reasons)
+                logger.warning(
+                    f"⚠️ QC DENETİMSİZ KABUL: çekim {n}, "
+                    f"{review_try + 1} deneme sonuçsuz kaldı; {reason_text}"
+                )
+                _log_event(slug, {
+                    "event": "qc_skip_accepted", "episode": episode, "shot": n,
+                    "attempt": attempt, "review_attempts": review_try + 1,
+                    "reasons": reasons, "clip": clip_path.name,
+                })
+                _notify(
+                    f"⚠️ *QC DENETİMSİZ KABUL, {bible.title}* ep{episode} çekim {n}\n"
+                    f"{review_try + 1} denetim denemesi sonuçsuz kaldı. "
+                    f"Klip RED almadığı için kabul edildi. Neden: {reason_text}",
+                    frames=frames,
+                )
             return clip_path, extra_credits, verdict
 
         # ── RED ──

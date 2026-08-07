@@ -357,14 +357,26 @@ class CriticStatusTests(unittest.TestCase):
         )
         self.assertEqual((path, credits, status), (None, 0.0, "fail"))
 
-    def test_require_all_turns_skip_into_delivery_blocker(self):
+    def test_require_all_accepts_unreviewable_clip(self):
+        strict = Bible(bible_data(require_all=True))
+        strict.data["series"]["qc"]["enabled"] = True
+        with mock.patch.object(critic.time, "sleep"):
+            path, credits, status = self.call(
+                (None, "skip", ["offline"], []), bible=strict
+            )
+        self.assertEqual((path, credits, status), (self.clip, 0.0, "skip"))
+        self.assertTrue(self.clip.exists())
+
+    def test_require_all_still_rejects_failed_clip_without_regen_budget(self):
         strict = Bible(bible_data(require_all=True))
         strict.data["series"]["qc"]["enabled"] = True
         path, credits, status = self.call(
-            (None, "skip", ["offline"], []), bible=strict
+            ({"fix_notes": ["düzelt"]}, "fail", ["artifact"], []),
+            bible=strict, budget=0, regen=lambda _prompt: None,
         )
-        self.assertEqual((path, credits, status), (None, 0.0, "skip"))
+        self.assertEqual((path, credits, status), (None, 0.0, "fail"))
         self.assertFalse(self.clip.exists())
+        self.assertTrue(list(self.clip.parent.glob("shot_01_qcfail*.mp4")))
 
 
 class HardCapPathTests(unittest.TestCase):

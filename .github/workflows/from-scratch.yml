@@ -52,7 +52,8 @@ jobs:
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
-          EPISODE_CREDIT_CAP=1400
+          # 80 muzik + 6 x 200 ana cekim + 3 x 200 QC regen = 1880; 20 kredi guvenlik payi.
+          EPISODE_CREDIT_CAP=1900
           MONTHLY_CREDIT_CAP=60000
           EOF
 
