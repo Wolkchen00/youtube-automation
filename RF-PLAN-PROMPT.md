@@ -408,3 +408,117 @@ v2.1'e çıkar ve `doctrine_sha256` yeniden pinlenir.
 - **I-7 (düşük):** `artifact_threshold: 6` kalibrasyonu.
 - **I-8 (orta):** USTA kıyafetini doygun turuncuya çevirme , QC faydası kanıtsız, ROCK 1 ile
   aynı turda değiştirmek ölçümü kirletir.
+
+---
+
+# ROCK 3 , Prodüksiyon jargonunu sahneden çıkar + `require_all_shots` kapat
+
+**Tarih:** 2026-08-08, iki canlı koşudan SONRA. **KARAR-2: İhsan onayladı (ikisi birden).**
+
+## Ö1. Ölçüm , ROCK 1+2 çalıştı ama yetmedi
+
+| | İlk deneme geçişi |
+|---|---|
+| Onarım öncesi | 4/21 = **%19,0** |
+| Koşu 31277373777 (20:38) | 5/6 |
+| Koşu 31278291977 (21:05) | 3/6 |
+| **Birleşik** | **8/12 = %66,7** |
+
+Red sebepleri 12 çekimde: artifact 7, anatomi 2, gömülü yazı 1. `forbidden_elements`
+**19 → 1**, `unwanted_text` **9 → 1**. Mekanizma doğrulandı.
+
+Ama `require_all_shots` açıkken %66,7 → bölüm yayın olasılığı **%47,5**. İki koşu da
+yayınlanamadı (5/6 ve 4/6 çekim hazırdı). **Kapalı olsaydı İKİSİ DE yayınlanırdı.**
+§4.1 kanaryası (15/18) artık matematiksel olarak ulaşılamaz: en iyi ihtimalle 14/18.
+
+## Ö2. Yeni kök neden , KN-5: prodüksiyon jargonu sahneye NESNE olarak sızıyor
+
+Gemini'nin kendi `issues` cümleleri, ikisi de benim ROCK 1 metnimden:
+- `Burned-in 'CAMERA B' text overlay in top left corner` , `shot_plan` satırları
+  `CAMERA A, CHAIN BREAK:` diye başlıyor, model bunu ekrana YAZI olarak basıyor.
+- `A camera on a tripod is physically visible inside the scene during frames 5-8`
+  (üç ayrı çekimde) , `locked-off tripod` ifadesi sahneye fiziksel tripod koyuyor.
+- `A second builder appears in frames 3 and 4, violating the single builder requirement`
+  (dört ayrı yerde) , tek figür kuralı QC'ce uygulanıyor ama model deliyor.
+
+Ders KN-1 ile aynı sınıftan: **modele söylediğin her somut isim sahnede belirebilir.**
+Kamera bir ekipman adıyla değil, DAVRANIŞIYLA tarif edilmeli.
+
+## R3-a. `bible.json` → `art_style` , TAM DEĞİŞTİRME
+
+```
+Photoreal construction timelapse realism in vertical 9:16, bright daylight, saturated but believable color, tactile real materials with matte weathered surfaces, coherent site geography, and satisfying build progression. The viewpoint stays fixed for the whole shot: one unchanging position and angle, with a slow zoom as its single movement. Exactly one silent builder is present, working alone at mid-distance in a dark cap, dark crew-neck and work gloves, framed from behind or in profile with the full body inside the frame.
+```
+Çıkanlar: `LOCKED-OFF TRIPOD camera` (KN-5), `its single camera move` → `its single movement`.
+`A single silent builder works alone` → `Exactly one silent builder is present, working alone`
+(ikinci usta sorununa karşı sertleştirme).
+
+## R3-b. `series.json` → `auto_replenish.shot_plan` , TAM DEĞİŞTİRME
+
+Etiketsiz JSON dizisi, doğrudan değerin yerine geçer. `CAMERA A/B`, `CHAIN BREAK`, `CHAINED`,
+`tripod` ve çekim NUMARALARI metinden tamamen çıktı; hepsi ekrana yazı olarak basılabilecek
+sembollerdi. Zincir semantiği zaten `chain` alanıyla mekanik olarak sağlanıyor, prompt
+"previous final frame" der. Dış/iç ayrımı `exterior`/`interior` kelimeleriyle korunur.
+Kelime sayıları doğrulandı: 45 / 37 / 36 / 40 / 40 / 38.
+
+```json
+[
+  "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.",
+  "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.",
+  "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.",
+  "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.",
+  "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.",
+  "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working."
+]
+```
+
+## R3-c. `bible.json` → `series.qc.require_all_shots: false` (KARAR-2)
+
+Gerekçe ölçüm: %66,7 çekim başarısıyla bölümlerin %52,5'i tek kötü çekim yüzünden çöpe
+gidiyor ve her çöpe giden bölüm ~750 kredi yakıyor. Kapalıyken bölüm geçen çekimlerle
+birleştirilir (~50 sn).
+**Etkileşim, bilerek DEĞİŞTİRİLMİYOR:** `required_layers: ["hook_teaser", "music"]` duruyor.
+Yani çekim 6 düşerse teaser üretilemez ve bölüm yine fail-closed durur. Bu doğrudur, reveal
+turu ürünün ödülüdür.
+
+## R3-d. `series.json` → `brief`, iki nokta düzenlemesi (madde 7 ve 9)
+
+- Madde 7'deki kanonik yasaklı nesne listesinin SONUNA eklenir:
+  `camera, tripod, clapperboard, slate, film crew`
+- Madde 9'un sonuna eklenir: `Çekim prompt'una kamera etiketi (CAMERA A/B), çekim numarası,
+  faz adı (CHAIN BREAK/CHAINED) veya ekipman adı YAZILMAZ; bunlar ekrana yazı olarak basılır.`
+
+## R3-e. `tools/rf_prompt_lint.py` , kanonik listeye beş kelime eklenir
+
+`PROHIBITED_NOUNS` sonuna `camera, tripod, clapperboard, slate, film crew`. Brief listesiyle
+birebir eşitliği doğrulayan mevcut test bunu zaten zorlar. Ek test: eski `art_style`'ın
+`LOCKED-OFF TRIPOD camera` ifadesi ve `CAMERA A, CHAIN BREAK:` ile başlayan bir çekim gövdesi
+`prohibited_noun` ile DÜŞMELİ.
+
+## R3-f. `aimagine/KONSEPT.md` → v2.2
+
+Sürüm notu eklenir:
+```
+**v2.2 (2026-08-08, jargon sızıntısı + tam-çekim kapısı):** İki canlı koşu ölçtü: ilk-deneme
+geçişi %19,0 → %66,7 (yasaklı öğe redi 19→1, gömülü yazı 9→1). Kalan iki kusur prompt
+jargonundan: "CAMERA B" etiketi ekrana yazı olarak basıldı, "locked-off tripod" sahneye
+fiziksel tripod koydu. Kamera artık ekipman adıyla değil davranışıyla tarif edilir; kamera
+etiketi, çekim numarası ve faz adı çekim prompt'una yazılmaz. `require_all_shots` KAPATILDI
+(İhsan kararı): %66,7 çekim başarısıyla bölümlerin yarısı tek kötü çekim yüzünden çöpe
+gidiyordu. `required_layers` DURUYOR, yani çekim 6 düşerse bölüm yine durur.
+```
+§3.1 tablosundaki "KAMERA-A/KAMERA-B" adlandırması doktrin İÇİNDE kalır (Türkçe, hiçbir modele
+gitmez); yalnız İngilizce prompt yüzeylerinden çıkar. §7'ye `require_all_shots: false` işlenir.
+
+## R3-g. Planları yeniden üret
+
+`shot_plan` ve `KONSEPT.md` değiştiği için ROCK 2 sırası AYNEN tekrarlanır (2b adımları
+0-6, 2a snapshot/verify, 2c kurtarma).
+
+**PROOF:**
+```
+python -X utf8 -m pytest tests/ -q
+python -X utf8 tools/rf_transition_check.py aimagine/from-scratch --verify
+python -X utf8 tools/rf_prompt_lint.py aimagine/from-scratch
+```
+Beklenen: testler yeşil, verify OK, denetçi TOPLAM 0 ihlal.
