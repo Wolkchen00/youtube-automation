@@ -1,8 +1,16 @@
 {
-  "checkpoint_sha": "7c222bed84a5e8d108e5563c85229258f5cdfea1",
+  "checkpoint_sha": "09b1509f5f681ba1242019bf1a43e592d83e2784",
   "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3",
   "next_part": 6,
   "parts_sha256": "5cd31ec7df3f7e43187386d04d11e3c96a74fad57c7fa50314dab7c3f1c3c8c7",
   "published_sha256": "aea5b946351816f75708dbd5a1447c9af81ca0de3e6de2b4cc1d15d10c329b34",
-  "total_parts": 10
+  "total_parts": 10,
+  "previous": {
+    "checkpoint_sha": "7c222bed84a5e8d108e5563c85229258f5cdfea1",
+    "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3",
+    "next_part": 6,
+    "parts_sha256": "5cd31ec7df3f7e43187386d04d11e3c96a74fad57c7fa50314dab7c3f1c3c8c7",
+    "published_sha256": "aea5b946351816f75708dbd5a1447c9af81ca0de3e6de2b4cc1d15d10c329b34",
+    "total_parts": 10
+  }
 }

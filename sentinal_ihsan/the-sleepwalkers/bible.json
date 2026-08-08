@@ -1,0 +1,84 @@
+{
+  "series": {
+    "slug": "the-sleepwalkers",
+    "title": "The Sleepwalkers",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "chain_frames": false,
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "hook_teaser": { "enabled": true, "duration": 1.4, "offset_in_shot": 1.6 }
+  },
+  "art_style": "Cinematic neo-noir thriller — a FICTIONAL detective mini-film in 9:16 vertical. Night-city palette of sodium orange and cold teal, deep shadows, shallow depth of field, anamorphic feel, subtle film grain, slow deliberate camera moves, fog and breath visible in cold air. Grounded, realistic, moody — like a prestige crime series. No captions, no on-screen text, no logos, no watermarks. IMPORTANT: this is a silent visual shot — do NOT render any person speaking, lip-sync or talking to camera; the detective's voice is added separately as narration. Never graphic or gory.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": { "channel": "sentinal_ihsan" },
+  "characters": [
+    {
+      "id": "detective_aras",
+      "name": "Detective Aras Kaya",
+      "bio": "Şehrin yorgun ama keskin cinayet masası dedektifi. Kimsenin inanmadığı 03:03 uyurgezer vakasını üstlenir; anlatıcı ses onun iç monoloğudur (asla kamerada konuşmaz).",
+      "appearance": "A weary but sharp homicide detective in his early 40s: short dark hair greying at the temples, tired deep-set eyes with dark circles, two-day stubble, a worn charcoal wool overcoat over a rumpled light-blue shirt and loosened dark tie, a police badge on a neck lanyard, a small dog-eared notebook in hand. Realistic, grounded, cinematic.",
+      "ref_image_local": null,
+      "ref_image_url": null,
+      "voice": { "audio_id": "orus", "kie_audio_id": null, "custom": null },
+      "character_id": null
+    },
+    {
+      "id": "dr_ward",
+      "name": "Dr. Lena Ward",
+      "bio": "Halden Street uyku kliniğinin araştırmacı doktoru; uyurgezerlerin beyin dalgalarını kaydeden kişi. Part 3'ten itibaren görünür, finalde vakayı devralır. Kamerada konuşmaz.",
+      "appearance": "A precise sleep-research physician in her late 30s: ash-blond hair in a low bun, thin wire-rim glasses, calm analytical expression, white lab coat over a dark turtleneck, clinic ID badge on a lanyard, a tablet held against her chest. Realistic, cinematic.",
+      "ref_image_local": null,
+      "ref_image_url": null,
+      "voice": { "audio_id": "callirrhoe", "kie_audio_id": null, "custom": null },
+      "character_id": null
+    }
+  ],
+  "environments": [
+    {
+      "id": "night_street",
+      "name": "Banliyö sokağı — 03:03",
+      "desc": "A quiet suburban street at 3 AM: rows of small houses with dark windows, pools of orange sodium streetlight, parked cars, thin ground fog, empty asphalt centerline receding into darkness. Cinematic night exterior.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "field_night",
+      "name": "Route 9 tarlası — gece",
+      "desc": "A vast empty grass field at the city's edge at night: knee-high dry grass under cold moonlight, a sagging broken wire fence in the foreground, distant city glow on the horizon, low ground mist. Vast, silent, uneasy. Cinematic night exterior.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "field_day",
+      "name": "Route 9 tarlası — gündüz",
+      "desc": "The same vast empty grass field under a flat overcast grey sky by day: dull green-brown grass moving in wind, the broken wire fence, tire tracks in mud, distant pylons on the horizon. Bleak, ordinary, quietly wrong.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "precinct_office",
+      "name": "Dedektif ofisi",
+      "desc": "A cramped police precinct office at night lit by a single desk lamp: a large cork evidence board with pinned photos, maps and red string, stacks of case files, a cold cup of coffee, venetian blinds with city light leaking through. Moody noir interior.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "sleep_clinic",
+      "name": "Uyku kliniği",
+      "desc": "A modern sleep-research clinic ward at night: a row of hospital beds with sleeping patients wired to EEG electrodes, banks of monitors glowing green waveforms in the dim room, glass observation wall, soft blue nightlights. Clinical, quiet, eerie.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    },
+    {
+      "id": "substation",
+      "name": "Route 9 trafo istasyonu",
+      "desc": "An electrical substation at night: tall humming transformers and pylons behind chain-link fencing, harsh sodium floodlights, warning signs, gravel ground, a single red indicator light pulsing on a control cabinet. Industrial, ominous night exterior.",
+      "ref_image_local": null,
+      "ref_image_url": null
+    }
+  ],
+  "props": []
+}

@@ -321,3 +321,18 @@ Fix turu GEREKMEDI.
 
 **Sonuc:** ROCK 1 + ROCK 2 tamam. Yapisal is bitti; geriye §4.1'in olctugu gercek uretim
 kanaryasi kaldi ve o Ihsan'in kredi onayina bagli.
+
+## Temel oran duzeltmesi (rebase sonrasi, 2026-08-08)
+
+Plan boyunca kullanilan **%23,5 (4/17)** temel orani, `qc_log.jsonl`'in YEREL kopyasindan
+hesaplanmisti ve o kopya bugunku kosunun (31263243153) kayitlarini icermiyordu. Actions o 17
+satiri `b430e69` ile uzaga yazmisti. Rebase sonrasi TAM log ile yeniden hesap:
+
+- toplam kayit **65**, `event="review"` **36**
+- **ILK DENEME GECISI: 4/21 = %19,0** (raporlanan %23,5 degil)
+- Redler: `forbidden_elements` **19**, artifact **18**, anatomi **10**, gomulu yazi **9**,
+  kiyafet **1**
+
+Iki sonuc: (1) baslangic durumu raporladigimdan DAHA KOTU; (2) en buyuk red sebebi artik
+`forbidden_elements`, yani bu onarimin tam hedefi. §4.1 kanaryasi bu %19,0 taban degerine
+karsi olculecek. Kabul kapisi degismedi: 3 bolum / 18 cekim, >=15/18 gecer.

@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Patient Zero"
+  },
+  "hook_shot": 4,
+  "narration": "Doctor Ward runs the sleep clinic on Halden Street. She's been recording the walkers for a month. Their brains don't dream anymore — they listen. Same wave, same rhythm, forty skulls in perfect sync, every night at three. The earliest case on record was an engineer at the Route 9 substation. He walked out of a night shift six weeks ago and never clocked back in. So I drove out there. The hum from the field is louder by the transformers. My compass spins like it's drowning. And I am not alone out here.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": ["dr_ward", "detective_aras"],
+      "environment": "sleep_clinic",
+      "prompt": "Dr. Lena Ward (white lab coat, wire-rim glasses, low bun) leads Detective Aras Kaya (charcoal overcoat) along the dim clinic ward past a row of sleeping patients wired with EEG electrodes, green waveforms glowing on bedside monitors. She gestures quietly toward the beds. Ends on: the two standing at the observation glass.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "characters": ["dr_ward"],
+      "environment": "sleep_clinic",
+      "prompt": "Dr. Lena Ward (white lab coat, glasses) stands before a bank of monitors and points from screen to screen: every green EEG waveform is identical — the same slow pulsing pattern repeated on every display in the dark room. Her reflection ghosts across the glass. Ends on: the wall of synchronized waveforms.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["detective_aras"],
+      "environment": "precinct_office",
+      "prompt": "Detective Aras Kaya (rumpled shirt, loosened tie) flips through personnel files under the desk lamp and stops at one: a photo of a man in a hard hat clipped to a substation work badge. He pins it at the very top of the evidence board and underlines a date. Ends on: the engineer's photo at the top of the board.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["dr_ward", "detective_aras"],
+      "environment": "sleep_clinic",
+      "prompt": "In the dim ward every sleeping patient sits up in bed at the same instant, eyes closed, perfectly straight, wires trailing — while every monitor's waveform snaps into one single synchronized pulse. Dr. Lena Ward (lab coat) and Detective Aras Kaya (overcoat) stand frozen at the glass. Ends on: the row of upright sleepers, monitors pulsing in unison.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "characters": ["detective_aras"],
+      "environment": "substation",
+      "prompt": "Detective Aras Kaya (charcoal overcoat) walks slowly along the chain-link fence of the humming substation at night, sodium floodlights above, a single red indicator light pulsing rhythmically on a control cabinet behind the wire. He watches the pulse. Ends on: the red light throbbing like a heartbeat.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "characters": ["detective_aras"],
+      "environment": "substation",
+      "prompt": "Detective Aras Kaya (overcoat) holds up his phone: the compass needle spins uselessly. He lowers it — and beyond the transformers, rows of sleepwalkers in nightclothes already stand motionless outside the far fence in the dark, all facing him, eyes closed. He turns around slowly. Ends on: Aras face to face with the silent crowd beyond the wire.",
+      "seed": null
+    }
+  ]
+}

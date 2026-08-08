@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Underneath"
+  },
+  "hook_shot": 5,
+  "narration": "The radar crew quit at noon. Their machine says the field has a floor. A lattice, thirty meters down, kilometers wide — lines too straight for nature to have drawn them. I went back after dark, alone, with a shovel. Two meters in I hit something smooth. Warm. It pulsed against my palm like the hum finally found me. Then my lamp died — and I felt them arrive. I never heard a single footstep. I woke up on my own doorstep at dawn, mud on my boots, shovel gone. And pressed into my palm, a mark I didn't make. Tomorrow night I stop fighting the sleep.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": [],
+      "environment": "field_day",
+      "prompt": "Two technicians in high-vis vests push a ground-penetrating radar cart across the grey daytime field, its small screen flickering, wind flattening the grass in waves. Ends on: the radar cart receding across the vast field.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "characters": ["detective_aras"],
+      "environment": "precinct_office",
+      "prompt": "Detective Aras Kaya (rumpled shirt, tie gone) tapes a long radar printout across the evidence board: a vast, perfectly regular dark lattice pattern beneath layered soil strata. He traces one straight line with his finger, then steps back. Ends on: the lattice printout dominating the board.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": ["detective_aras"],
+      "environment": "field_night",
+      "prompt": "Detective Aras Kaya (overcoat off, sleeves rolled) digs alone in the moonlit field inside a small pool of light from a battery work lamp, a knee-deep pit already open, mist curling around it. Steady, tired shovelfuls. Ends on: Aras pausing, staring down into the pit.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "characters": ["detective_aras"],
+      "environment": "field_night",
+      "prompt": "Inside the pit: the work lamp flickers in a slow rhythm as Detective Aras Kaya (sleeves rolled, dirt-streaked) kneels and brushes soil from a smooth, dark, slightly warm surface with a faint geometric seam running across it. He lays his bare palm flat on it. Ends on: his hand on the seam, lamp pulsing.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "characters": ["detective_aras"],
+      "environment": "field_night",
+      "prompt": "Detective Aras Kaya (dirt-streaked) looks up from the pit — a silent ring of dozens of sleepwalkers in nightclothes stands around the excavation in the mist, eyes closed, having arrived without a sound. The work lamp stutters and dies to black. Ends on: darkness swallowing the ring of sleepers.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "characters": ["detective_aras"],
+      "environment": "night_street",
+      "prompt": "Cold blue dawn: Detective Aras Kaya wakes slumped on his own doorstep, overcoat gone, boots caked in field mud. He stirs, then slowly opens his right hand: a crisp geometric mark is pressed into the skin of his palm. Ends on: close on the marked palm in the dawn light.",
+      "seed": null
+    }
+  ]
+}
