@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 11,
-  "next_part": 9,
+  "next_part": 10,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -120,6 +120,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-07T19:33:42.994325+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep09/ep09_narrated_music_hooked.mp4",
+      "subtitle": "I Found UNNATURAL CLAY... And It STARTED To WHISPER!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-08T19:25:42.584911+00:00"
     }
   }
 }
