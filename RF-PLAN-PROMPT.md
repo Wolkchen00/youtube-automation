@@ -300,8 +300,11 @@ eski damgalıdır ve `produce` onları zaten reddeder.
 1. `python -X utf8 tools/rf_transition_check.py aimagine/from-scratch --snapshot`
 2. `plans/partNN.json` , **NN ≥ 6 olan HEPSİ** silinir (T3 F-4).
 3. `series.json` → `total_parts: 5`. `next_part: 6` DEĞİŞMEZ.
-4. `doctrine_sha256` **motorun kendi fonksiyonuyla** (`series.bible.doctrine_sha256`) yeniden
-   pinlenir; elle `sha256sum` KULLANILMAZ (LF normalizasyonu).
+4. ~~`doctrine_sha256` yeniden pinlenir~~ , **ROCK 1'e TAŞINDI (Visionary kararı 2026-08-08).**
+   Gerekçe: `KONSEPT.md`'yi değiştirip pin'i bayat bırakmak bir işlem sınırı değil, yarım kalmış
+   bir düzenlemedir; bayat pin `test_doctrine_gate`'i kırıyor ve ROCK 1 kanıtı yeşil olamıyordu.
+   ROCK 1'de motorun kendi fonksiyonuyla pinlendi:
+   `918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3`.
 5. replenish koşar; `total_parts`'ı kendisi 10'a taşır.
 6. `--verify` koşar.
 

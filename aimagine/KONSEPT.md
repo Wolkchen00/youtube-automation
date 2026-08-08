@@ -1,4 +1,4 @@
-# AIMAGINE, KANAL KONSEPT DOKTRİNİ v2.0 ,  SABİT KARE
+# AIMAGINE, KANAL KONSEPT DOKTRİNİ v2.1 ,  SABİT KARE
 **Tarih:** 2026-08-04 · **Karar sahibi:** İhsan · **Statü:** ONAYLANDI (İhsan talimatı 2026-08-04:
 "bu kanalı kopyala, aynı konsepti tekrar ettirelim; sadece başka yapılar olsun" ,  cairo_ia formatına
 geçiş; yayına alma = branch merge + push kararı İhsan'da)
@@ -8,6 +8,11 @@ iç mekan fazı eklendi (dış → iç → tur); loop dikişi kaldırıldı (lin
 açılışı yasak" kuralı KALDIRILDI (teaser vaadi taşır, sıfırdan izleme ritüeli hipnozun kendisi);
 tek tekrarlayan USTA figürü; "geri dönüşüm / off-grid dönüşüm" ailesi eklendi; değer-kancalı
 başlık kalıpları eklendi.
+**v2.1 (2026-08-08, prompt onarımı):** Kadroda tek figür (yardımcı işçi izni kalktı);
+okunur yazı/logo yasağı art_style ve qc.notes'tan kaldırıldı (üretim yasağı değil, sahne
+tasarımı kuralı oldu); qc.notes artık süreklilik sapmasını artifact skoruna yazdırmıyor;
+güvenlik kuralı yasak cümlesinden sahne tasarımına taşındı. Gerekçe: 27 QC incelemesinde
+ilk-deneme geçişi %23,5 ve dört red sebebinin dördü de bu kurallardan besleniyordu.
 **Önceki sürüm:** v1.4/v1.5 (2026-07-29, "FROM SCRATCH 32 sn" dört-çekim doktrini). v1.4'ün
 teşhisi geçerliliğini korur; v2.0 formatı değiştirir, konu ailesi kanıtını devralır.
 **Kanal:** `UCCgbHTzYKYawUT6zEo0nlDg` · @aimagine_._357 (S3 kararı: ana kanal budur;
@@ -76,10 +81,13 @@ ASLA değişmez; yalnız YAVAŞ zoom in/out serbesttir. Pan, kesme, açı deği�
 (`chain: true`). Bölümler ARASI zincir YOKTUR: her bölüm yeni arsadır; çekim 1'in zincir
 kırması bunu garanti eder (runner'ın önceki bölümden taşıdığı son kare KULLANILMAZ).
 
-**USTA (tek tekrarlayan figür):** Her bölümde AYNI sessiz usta çalışır: koyu bere/şapka, koyu
-üst, iş eldivenleri; arkadan, yandan veya orta mesafeden görünür ,  YÜZ YAKIN PLANI YASAK
-(humans "allowed" motor kuralı; yüz tutarlılığı riski tasarımla sıfırlanır). Yardımcı işçiler
-görünebilir ama usta görsel çapadır. Usta asla konuşmaz, kameraya bakmaz.
+**USTA (tek tekrarlayan figür, KADRODA TEK KİŞİ):** Her bölümde AYNI sessiz usta çalışır: koyu
+bere/şapka, koyu üst, iş eldivenleri; arkadan, yandan veya orta mesafeden TAM VÜCUT kadrajda
+görünür , yüz yakın planı yoktur (humans "allowed" motor kuralı; yüz tutarlılığı riski
+tasarımla sıfırlanır). **Yardımcı işçi, ekip veya kalabalık YAZILMAZ** (v2.1, 2026-08-08;
+gerekçe ölçüm: 27 QC incelemesinin 9'unda anatomi redi var ve Gemini'nin gerekçeleri çoğul
+"workers" figürlerini suçluyor , klonlanmış, bulanık, füzyon parmaklı). Usta konuşmaz,
+kameraya bakmaz, ince motor iş yapmaz.
 
 **v1.4'ten kaldırılan kurallar:** (a) "Boş arsa/malzeme yığını açılışı YASAK" ,  KALKTI; vaat
 görevini teaser üstlenir, sıfırdan başlama artık imzanın kendisidir. (b) Loop dikişi (son kare →
@@ -127,8 +135,11 @@ YASAK. İç mekan aynı yapının içidir; ikinci yapı sayılmaz.
   5. `Building A $<N> <X> From Scratch! <emoji>` (değer kancası; her aile)
 - **Hashtag 4 tane:** `#shorts #satisfying #construction #diy`
 - AI disclosure HER videoda açık. Watermark'sız tek master, Upload-Post ile üç platforma.
-- **Güvenlik:** tehlikeli inşaat pratiği özendirilmez (korumasız elektrik işi, güvenliksiz
-  derin kazı, açık alev gösterilmez); sahne fantastik ama güvenli görünür.
+- **Güvenlik (v2.1: yasak cümlesi değil, sahne tasarımı):** tehlikeli inşaat pratiği
+  özendirilmez. Korumasız elektrik işi, güvenliksiz derin kazı ve açık alev (meşale, ateş,
+  kaynak alevi) SAHNEYE KONULMAZ; bu kural brief madde 8 ile yazara verilir, QC notunda yasak
+  cümlesi olarak DURMAZ (gerekçe: JURASSIC PARK kapısındaki meşaleler tam bu yasak yüzünden
+  `forbidden_elements` redi aldı). Sahne fantastik ama güvenli görünür.
 - **Esinlenme sınırı:** cairo_ia'nın FORMATI kopyalanır (sabit kare, faz sırası, değer kancası);
   videoları, yapıları, karakter kimliği KOPYALANMAZ. Usta bizim tanımımızdır, yapılar özgündür.
 
@@ -256,9 +267,10 @@ davranışı BİT DEĞİŞMEZ, tur-1 Codex bulgularıyla sertleştirildi):**
   no logos, no watermarks; `series` bloğuna `chain_scope: "episode"` +
   `required_layers: ["hook_teaser", "music"]`;
   `hook_teaser.offset_in_shot: 7.0`; `qc` bloğuna
-  `require_all_shots: true`; `qc.notes` yeniden: sabit kamera kayması, usta görünüm değişimi,
-  yapı stil kopması, zincirli çekimde kompozisyon kilidi ihlali = artifact; kutlama/ta-da/
-  okunur yazı yasakları sürer; hook_shot=6 + teaser kaynağı çekim 6.
+  `require_all_shots: true`; `qc.notes` v2.1: süreklilik gözlemleri (kamera kilidi kayması, usta görünüm değişimi, yapı
+stil kopması) `issues` alanına yazılır, sayısal skora GİRMEZ; okunur yazı/logo/watermark
+yasağı nottan KALDIRILDI (bindirme denetimi _QC_SYSTEM'in kendi tanımıyla yapılır); kutlama/
+ta-da/kameraya bakış yasağı KALIR; hook_shot=6 + teaser kaynağı çekim 6.
 - **Plan geçişi:** bekleyen `plans/part06..part10.json` SİLİNİR ve `total_parts` geçici olarak
   5'e çekilir (aksi halde replenish beş "bekleyen" part görür ve no-op kalır; Codex bulgusu);
   yeni doktrinle replenish 6-10'u üretip total_parts'ı 10'a geri taşır. `next_part: 6` kalır;

@@ -251,3 +251,38 @@ VERDICT: SAME PAGE```
 Meeting kapandi: 5 turda 46 bulgu, 45 kabul, 1 kismen red (T1 F-19).
 KARAR-1 Ihsan tarafindan 2026-08-08 tarihinde dort maddede de ONAYLANDI.
 ROCK 1 build baslayabilir.
+
+## ROCK 1 , build + Level 10
+
+Build thread: `019fe2f1-6830-72d1-80ae-765b487e55f9`
+
+**Codex teslimi (tur 1):** uc veri dosyasi + KONSEPT.md birebir blok degistirmesi,
+`tools/rf_prompt_lint.py` (255 satir), `tests/test_rf_prompt_lint.py` (8 test).
+Codex bozuk `test_doctrine_gate`'i sessizce yeniden YAZMADI, durdu ve sordu , dogru davranis.
+
+**Level 10 (Visionary):**
+- Tam diff okundu, Codex'in ozetine guvenilmedi. Veri diff'i birebir plandaki literal bloklar,
+  sapma yok. Tek sapma raporlandi ve kabul edildi: `series.json`'a eksik olan son satir
+  sonu eklendi.
+- Kanit KENDIM kosuldu. Ilk turda 135 gecti / 1 dustu (doktrin SHA pin'i, beklenen).
+- **Bagimsiz saldiri paketi yazildi**, Codex gormedi: `tests/test_rf_prompt_lint_adversarial.py`,
+  20 test. Kapsam: sinir degerleri (45/46 sozcuk, 60/61 sozcuk, tekrar orani tam 0.300),
+  Turkce metin, bos/None/bozuk girdi, kivrik kesme `don’t`, satir asan `free of`, cogul ve
+  buyuk harf nesneler, `design`/`designed assignment` yanlis-pozitif tuzagi, olmayan klasor,
+  bos govdeli onek, ve ucdan uca canli dosya denetimi.
+- **19/20 gecti.** Dusen tek test benim ongordugum kapsam acigiydi: `art_style` ve `shot_plan`
+  yasakli nesneye karsi taranmiyordu. Bu spec'imin acigi, Codex'in hatasi degil.
+- Sinir testlerinin hepsi ilk seferde temiz , bir-eksik hatasi YOK.
+
+**Fix turu 1 (3 madde, hepsi uygulandi):**
+1. Doktrin re-pin ROCK 2'den ROCK 1'e TASINDI (Visionary karari). Pin motorun kendi
+   fonksiyonuyla hesaplandi ve dogrulandi: `series.json` pin == `doctrine_sha256(KONSEPT.md)`.
+2. Nesne taramasi `lint_art_style` ve `lint_shot_plan`'a eklendi; negasyon ve uzunluk
+   kurallari zayiflatilmadi.
+3. Kanonik liste testinin IndexError yerine okunur mesajla dusmesi saglandi.
+
+**ROCK 1 SON DURUM (Visionary kendi kostu):**
+- `pytest tests/ -q` -> **156 passed, 56 subtests passed, 0 failed**
+- `rf_prompt_lint` -> art_style 0, qc.notes 0, shot_plan 0; bekleyen planlar 68 (ROCK 2 temizler)
+- `preflight` -> 7 ihlal, HEPSI bayat plan damgasi/oneki; "series pin" hatasi GITTI
+- `series.json`: total_parts 10, next_part 6, parts 1-5 bit-degismez
