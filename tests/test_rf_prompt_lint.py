@@ -43,6 +43,39 @@ class RfPromptLintTests(unittest.TestCase):
             [],
         )
 
+    def test_rock1_art_style_fails_for_production_nouns(self):
+        text = (
+            "Photoreal construction timelapse. LOCKED-OFF TRIPOD camera: one fixed "
+            "position and angle held through the shot."
+        )
+        violations = rf_prompt_lint.lint_art_style(text)
+        matches = [
+            item for item in violations
+            if item["rule"] == "prohibited_noun"
+            and "camera" in item["detail"]
+            and "tripod" in item["detail"]
+        ]
+        self.assertTrue(matches)
+
+    def test_camera_label_shot_body_fails_for_production_noun(self):
+        plan = {"shots": [{
+            "n": 1,
+            "prompt": "CAMERA A, CHAIN BREAK: Timber walls rise around the foundation.",
+        }]}
+        violations = rf_prompt_lint.lint_plan_data(
+            plan,
+            self.bible["art_style"],
+            self.series["auto_replenish"]["shot_plan"],
+            "part06.json",
+        )
+        matches = [
+            item for item in violations
+            if item["rule"] == "prohibited_noun"
+            and item["shot"] == 1
+            and "camera" in item["detail"]
+        ]
+        self.assertTrue(matches)
+
     def test_stale_part08_shot4_fixture_fails_for_display(self):
         plan = {"shots": [{
             "n": 4,
@@ -95,6 +128,20 @@ class RfPromptLintTests(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertEqual(rf_prompt_lint.find_negations(text), [])
                 self.assertEqual(rf_prompt_lint.find_prohibited_nouns(text), [])
+
+    def test_slate_material_passes_while_production_gear_fails(self):
+        self.assertEqual(
+            rf_prompt_lint.find_prohibited_nouns(
+                "polished slate flooring tiles are laid out"
+            ),
+            [],
+        )
+        self.assertEqual(
+            rf_prompt_lint.find_prohibited_nouns(
+                "a clapperboard and a camera on a tripod"
+            ),
+            ["camera", "tripod", "clapperboard"],
+        )
 
     def test_signage_free_is_caught(self):
         self.assertIn("-free", rf_prompt_lint.find_negations("signage-free surfaces"))

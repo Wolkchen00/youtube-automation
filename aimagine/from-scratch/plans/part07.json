@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 7,
-    "title": "Building A Mushroom House From Scratch! 🛠️✨"
+    "title": "Building A Glowing Crystal Cottage From Scratch! 🛠️✨"
   },
-  "synopsis": "A whimsical fairy-tale mushroom cottage with a carved wood stem and cap-shaped clay roof is constructed in a mossy forest clearing.",
+  "synopsis": "A magical fairy-tail cottage built with embedded glowing quartz crystals rises within an enchanted forest clearing.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nLush mossy forest glade surrounded by tall pine trees. The builder grades moist soil, installs circular stone footing slabs, and arranges thick cedar logs across the site.",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nMoist forest earth littered with pine needles is cleared. Stone masonry footings are laid in a circular formation, and bundles of hand-carved oak beams and raw quartz crystals arrive on a timber wagon.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nThick curved timber logs rise to form a flared stem wall frame. Layered birch plywood sheets and flexible clay tiles shape an overhang roof resembling a giant mushroom cap.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nCurved oak timber posts lock onto the stone foundation. Timber rafters form a high arched roof frame while stacked river stone walls rise with embedded glowing raw crystals catching warm sunlight.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nDeep red clay shingles cover the domed roof cap, trimmed with white decorative plaster dots. Terracotta plaster coats the exterior stem wall alongside an arched timber front door.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nMoss-covered wood shingles cover the roof dome. Smooth mortar seals the stone facade, warm lanterns mount beside arched wooden entryways, and lush flowering vines with cobblestone pathways surround the fairytale exterior.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior circular room with exposed timber joists overhead. Hand-laid cobblestone flooring spreads smoothly while rustic wood partitioning walls and a stone hearth take shape.",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the circular earthen interior, hexagonal wooden floor tiles are installed. Hidden warm backlight channels align along curved stone walls, and exposed ceiling beams are fitted with iron hanging hooks.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nCustom carved wooden furniture, built-in shelving, plush woven textiles, and warm Edison bulb fixtures adorn the interior. Soft golden light fills the cozy fairy-tale living space.",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nA hand-carved stone fireplace with glowing crystals is built against the back wall. Plush velvet seating, raw edge wooden tables, and glowing crystal lamp fixtures complete the whimsical, warm interior space.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nUnbroken camera path moves from the glowing hearth interior, gliding out the round wooden doorway, sweeping out to showcase the fully lit mushroom house glowing in the forest twilight.",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nMoving gracefully from the cozy fireplace hearth, the shot drifts through the arched timber doorway into the verdant forest glade, revealing the full glowing stone cottage as the builder sweeps the stone patio.",
       "seed": null,
       "chain": true
     }
   ],
   "family": "fantezi konutlar",
-  "music": "Acoustic wood percussion, marimba, and light hand drums maintain a steady rhythmic groove matching step-by-step woodworking. Sound tapers to a quiet hum as final interior decorations settle, then swells into a bright warm acoustic guitar melody across the full structure reveal, fading gently.",
+  "music": "Acoustic wooden percussion with organic marimba taps, soft shaker rhythms, and warm cellos. The steady construction rhythm aligns with timber work and crystal placement. At the end of shot 5, the percussion dips for a calm breath before blossoming into a rich acoustic string crescendo in shot 6, finishing softly.",
   "hook_shot": 6,
-  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
 }

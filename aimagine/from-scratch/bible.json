@@ -20,11 +20,11 @@
     },
     "qc": {
       "enabled": true,
-      "require_all_shots": true,
+      "require_all_shots": false,
       "notes": "This channel builds exactly one structure and delivers exactly one final reveal; record any second structure or second reveal under issues. Camera-lock drift across a chained shot, a change in the recurring builder's cap, crew-neck, gloves or established look, and a break in the structure's material or design language are continuity observations: record them under issues. Reserve the numeric score for genuine generation defects as defined in your instructions. Celebration, presentation gestures, looking at camera and ta-da poses are forbidden in this channel. hook_shot is 6 and the hook teaser comes from near the end of shot 6 while the finished exterior is visible."
     }
   },
-  "art_style": "Photoreal construction timelapse realism in vertical 9:16, bright daylight, saturated but believable color, tactile real materials with matte weathered surfaces, coherent site geography, and satisfying build progression. LOCKED-OFF TRIPOD camera: one fixed position and angle held through the shot, with a slow zoom as its single camera move. A single silent builder works alone at mid-distance in a dark cap, dark crew-neck and work gloves, framed from behind or in profile with the full body inside the frame.",
+  "art_style": "Photoreal construction timelapse realism in vertical 9:16, bright daylight, saturated but believable color, tactile real materials with matte weathered surfaces, coherent site geography, and satisfying build progression. The viewpoint stays fixed for the whole shot: one unchanging position and angle, with a slow zoom as its single movement. Exactly one silent builder is present, working alone at mid-distance in a dark cap, dark crew-neck and work gloves, framed from behind or in profile with the full body inside the frame.",
   "music": true,
   "characters": [],
   "environments": [],

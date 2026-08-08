@@ -24,6 +24,10 @@ PROHIBITED_NOUNS = (
     "license plate",
     "number plate",
     "branded machinery",
+    "camera",
+    "tripod",
+    "clapperboard",
+    "film crew",
 )
 
 _NEGATION_WORDS = (

@@ -1,4 +1,4 @@
-# AIMAGINE, KANAL KONSEPT DOKTRİNİ v2.1 ,  SABİT KARE
+# AIMAGINE, KANAL KONSEPT DOKTRİNİ v2.2 ,  SABİT KARE
 **Tarih:** 2026-08-04 · **Karar sahibi:** İhsan · **Statü:** ONAYLANDI (İhsan talimatı 2026-08-04:
 "bu kanalı kopyala, aynı konsepti tekrar ettirelim; sadece başka yapılar olsun" ,  cairo_ia formatına
 geçiş; yayına alma = branch merge + push kararı İhsan'da)
@@ -13,6 +13,13 @@ okunur yazı/logo yasağı art_style ve qc.notes'tan kaldırıldı (üretim yasa
 tasarımı kuralı oldu); qc.notes artık süreklilik sapmasını artifact skoruna yazdırmıyor;
 güvenlik kuralı yasak cümlesinden sahne tasarımına taşındı. Gerekçe: 27 QC incelemesinde
 ilk-deneme geçişi %23,5 ve dört red sebebinin dördü de bu kurallardan besleniyordu.
+**v2.2 (2026-08-08, jargon sızıntısı + tam-çekim kapısı):** İki canlı koşu ölçtü: ilk-deneme
+geçişi %19,0 → %66,7 (yasaklı öğe redi 19→1, gömülü yazı 9→1). Kalan iki kusur prompt
+jargonundan: "CAMERA B" etiketi ekrana yazı olarak basıldı, "locked-off tripod" sahneye
+fiziksel tripod koydu. Kamera artık ekipman adıyla değil davranışıyla tarif edilir; kamera
+etiketi, çekim numarası ve faz adı çekim prompt'una yazılmaz. `require_all_shots` KAPATILDI
+(İhsan kararı): %66,7 çekim başarısıyla bölümlerin yarısı tek kötü çekim yüzünden çöpe
+gidiyordu. `required_layers` DURUYOR, yani çekim 6 düşerse bölüm yine durur.
 **Önceki sürüm:** v1.4/v1.5 (2026-07-29, "FROM SCRATCH 32 sn" dört-çekim doktrini). v1.4'ün
 teşhisi geçerliliğini korur; v2.0 formatı değiştirir, konu ailesi kanıtını devralır.
 **Kanal:** `UCCgbHTzYKYawUT6zEo0nlDg` · @aimagine_._357 (S3 kararı: ana kanal budur;
@@ -199,11 +206,11 @@ davranışı BİT DEĞİŞMEZ, tur-1 Codex bulgularıyla sertleştirildi):**
   (`series_runner.py`, kapsam İÇİNDE) bu seride önceki bölümün `last_frame_url`'ünü HİÇ
   aktarmaz. Varsayılan "series" (bugünkü davranış). Çekim 1'in `chain: false` olması ikinci
   emniyettir.
-- **Eksik çekim = yayın yok:** bible `qc` bloğuna `require_all_shots: true` (opt-in) eklenir;
-  plandaki HERHANGİ bir çekim üretilemez veya QC'den düşerse bölüm birleştirilmez ve
-  yayınlanmaz. Bu modda QC "skip" sonucu (inceleme yapılamadı: Gemini/kare hatası) BAŞARISIZ
-  sayılır; `critic.py` pass/skip/fail'i AYIRT EDEN açık bir durum döndürür (bugün skip ile
-  pass aynı görünüyor). Diğer serilerde skip davranışı değişmez.
+- **Eksik çekim kapısı:** bible `qc` bloğunda `require_all_shots: false` kullanılır; tek kötü
+  çekim bütün bölümü düşürmez, geçen çekimler birleştirilir. `required_layers` kapısı durur;
+  hook teaser veya müzik üretilemezse bölüm fail-closed durur. QC "skip" sonucu bu seride
+  başarısız çekim sayılır; `critic.py` pass/skip/fail durumlarını ayırır. Diğer serilerde skip
+  davranışı değişmez.
 - **Üretim-tarafı doğrulama:** produce, Kie kredisi harcamadan ÖNCE planı cfg'ye karşı doğrular
   (çekim sayısı, süreler, chain alanlarının chain_breaks ile uyumu, hook_shot; çekim
   numaraları TAM OLARAK [1..shots] sırasız/tekrarsız); damgası doğru ama içeriği bozuk plan
@@ -267,7 +274,7 @@ davranışı BİT DEĞİŞMEZ, tur-1 Codex bulgularıyla sertleştirildi):**
   no logos, no watermarks; `series` bloğuna `chain_scope: "episode"` +
   `required_layers: ["hook_teaser", "music"]`;
   `hook_teaser.offset_in_shot: 7.0`; `qc` bloğuna
-  `require_all_shots: true`; `qc.notes` v2.1: süreklilik gözlemleri (kamera kilidi kayması, usta görünüm değişimi, yapı
+  `require_all_shots: false`; `qc.notes` v2.1: süreklilik gözlemleri (kamera kilidi kayması, usta görünüm değişimi, yapı
 stil kopması) `issues` alanına yazılır, sayısal skora GİRMEZ; okunur yazı/logo/watermark
 yasağı nottan KALDIRILDI (bindirme denetimi _QC_SYSTEM'in kendi tanımıyla yapılır); kutlama/
 ta-da/kameraya bakış yasağı KALIR; hook_shot=6 + teaser kaynağı çekim 6.

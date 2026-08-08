@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 8,
-    "title": "Old Silo → Luxury Off-Grid Home ✨"
+    "title": "Old Grain Silo → Luxury Stargazing Tower ✨"
   },
-  "synopsis": "An abandoned rustic grain silo is transformed into a modern multi-story off-grid cylinder home with glass balconies.",
+  "synopsis": "A rusted agricultural grain silo is converted into a breathtaking multi-story luxury observatory tower.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nOvergrown rural farm lot with a weathered cylindrical steel silo base. The builder clears tall grass, lays stone pavers around the perimeter, and sets up scaffolding.",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nAn overgrown concrete pad surrounding a tall weathered metal cylinder is cleared of weeds. Structural support rings are laid out around the base, and steel beams and curved glass panels arrive on a flatbed trailer.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nCorroded metal panels are replaced with polished corrugated steel sheeting. Structural timber floor joists and spiral staircase framing lock into place inside the vertical cylinder.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nReinforced steel scaffolding wraps around the tall metal cylinder. Precise circular cutouts form window openings along the structure while a gleaming glass dome frame rises over the top cap.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nFresh matte charcoal paint seals the exterior silo shell. Paned curved glass windows, a top-floor balcony deck, and solar roof panels complete the striking cylindrical exterior.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nSleek charcoal matte paint coats the exterior shell. Panoramic glass windows seat flush into the openings, exterior accent strip lights illuminate the vertical seams, and gravel landscaping surrounds the completed tower base.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior cylindrical room with exposed brick and curved timber walls. Polished concrete floor dries under temporary lights while structural wooden beams form a loft platform.",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the cylindrical interior, spiral steel stair treads mount to a central support column. Hardwood floor planks lay across structural deck levels, and recessed LED ceiling channels illuminate the high walls.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nCustom curved leather seating, spiraling wooden staircase, warm recessed ceiling lights, and minimalist wooden kitchen counters complete the high-end interior living zone.",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nA brass astronomical telescope mounts onto the top glass dome floor. Modern leather lounge chairs, built-in teak bookshelves, and warm floor lamps transform the upper observatory deck into a polished retreat.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nSmooth continuous motion travels from the upper loft interior, passing out through the balcony glass door to reveal the complete solar-powered silo home shining under bright sunlight.",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nDescending softly from beside the brass telescope, the perspective drifts through the high balcony door into the dusk air, showcasing the complete glowing observatory tower under twilight stars while the builder inspects the entrance.",
       "seed": null,
       "chain": true
     }
   ],
   "family": "dönüşüm",
-  "music": "Rhythmic steel tongue drum and steady woodblock percussion pulse in time with structural construction. The beat softens right before the final decor placement, then blossoms into a lush, resonant ambient acoustic ensemble as the camera sweeps outside, ending on a soft acoustic note.",
+  "music": "Metallic acoustic percussion, warm steel tongue drums, and steady kick beats drive a focused, industrious rhythm. The track builds tempo alongside the structural transformation. Shot 5 ends with a gentle pause, then unfolds into an open, ethereal ambient brass and string melody for shot 6, fading gracefully.",
   "hook_shot": 6,
-  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
 }

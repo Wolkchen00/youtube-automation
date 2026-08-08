@@ -123,7 +123,9 @@ class RealSeriesContract(unittest.TestCase):
         qc = critic.qc_config(b)
         self.assertTrue(qc, "from-scratch'te QC acik olmali")
         self.assertEqual(qc["qc_review_retries"], 2)
-        self.assertTrue(qc.get("require_all_shots"))
+        # KARAR-2 (Ihsan, 2026-08-08): kurulu deger artik False. Iddia zayiflamiyor, yeni
+        # dogru degere civileniyor, biri yanlislikla geri acarsa bu test duser.
+        self.assertFalse(qc.get("require_all_shots"))
 
     # A6 ,  cift ucretlendirme GERCEKTEN tavani patlatir (tek-ucret yuku tasiyici mi)
     def test_a6_double_charging_music_would_actually_blow_the_cap(self):

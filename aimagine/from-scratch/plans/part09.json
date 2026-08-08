@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 9,
-    "title": "Building A $50,000 Coaster From Scratch! ✨"
+    "title": "Building A $50K Coaster Cabin From Scratch! ✨"
   },
-  "synopsis": "A thrill-seeker builds a custom wooden backyard roller coaster complete with banking turns and a steep launch hill.",
+  "synopsis": "A playful mountain cabin integrated with a functional wooden coaster track around its roof and deck is built on a pine hillside.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nWide sunny meadow bordered by low hills. The builder clears a winding path, pours concrete footings into mapped positions, and stacks pressure-treated lumber posts.",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA sloping mountain clearing among tall pine trees is leveled with wooden retaining walls. Heavy cedar timber posts and bent wood coaster track segments arrive on a rugged mountain trailer.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nLumber trestles and vertical support bents rise rapidly along the track layout. Curved wooden cross-beams and tubular steel rail guides form the undulating coaster track structure.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nHeavy timber posts anchor into concrete footings. Wall frames and roof trusses rise rapidly while curved wooden track supports extend outward from the cabin eaves across the hillside terrain.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nStained cedar support beams stand complete with smooth steel rails mounted on top. Safety netting, loading platform stairs, and a bright yellow coaster car settle onto the track.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nCedar lap siding covers the walls, durable metal roofing caps the pitch, and polished timber coaster tracks loop seamlessly around the wrap-around porch and roof overhangs amidst fresh pine landscaping.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior loading station platform under a timber canopy. Hardwood floor planks lay down while steel control levers, safety gates, and overhead queue line lights are mounted.",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the open cabin space, wide plank oak flooring installs across structural floor joists. Exposed timber roof trusses receive warm recessed lighting fixtures, and plumbing lines route through timber wall studs.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nPadded operator console, decorative festoon lighting, velvet entry ropes, and polished wooden benches fill the station. Warm string lights illuminate the entire wooden loading bay.",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nA rustic stone hearth is built against the side wall. Leather armchairs, a carved timber dining table, and warm Edison bulb pendants create an inviting alpine interior living space.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nUninterrupted camera glide moves from the station control desk, floating past the yellow coaster car, panning back to reveal the full thrilling wooden roller coaster spanning across the field.",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nGliding smoothly from the warm living room, the movement passes through double glass doors onto the wooden deck, revealing the full playful coaster cabin architecture as the builder polishes the coaster rail.",
       "seed": null,
       "chain": true
     }
   ],
   "family": "absürt eğlence mimarisi",
-  "music": "Upbeat syncopated percussion with wood taps and metallic snaps matching rapid timber assembly. The rhythmic momentum pauses for a brief breath as final safety rails snap into place, then opens into an expansive rhythmic acoustic groove during the full track reveal, dissolving smoothly.",
+  "music": "Upbeat acoustic guitar plucking paired with lively wooden percussion, stomps, and snare rims. The energetic beat mirrors the playful construction flow. At the conclusion of shot 5, the instrumentation drops to a quiet acoustic strum, opening into a joyful, sweeping timberland melody for shot 6, ending softly.",
   "hook_shot": 6,
-  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
 }

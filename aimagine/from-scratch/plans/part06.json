@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 6,
-    "title": "Building A BATMAN Batcave From SCRATCH! 🛠️✨"
+    "title": "Building A CYBERPUNK Noodle Bar From SCRATCH! 🛠️✨"
   },
-  "synopsis": "A high-tech underground Batcave command center featuring sleek black platforms and dramatic spotlighting is built into a rock canyon face.",
+  "synopsis": "A vibrant, neon-infused cyberpunk noodle shop is constructed from raw steel frames on a rainy urban alley lot.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nHigh desert canyon clearing framed by dark volcanic rock faces. The builder marks an excavation perimeter with bright stakes and lays smooth dark asphalt tiles onto the graded gravel foundation.",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nRain-slicked dark pavement in a tight city alley is cleared and leveled. Steel floor beams are aligned over marked chalk guidelines, and black metallic wall studs arrive on heavy wooden pallets under wet tungsten streetlamps.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nSteel beam framework rises inside the canyon niche, anchored into stone walls. Dark composite wall panels, matte black steel catwalks, and heavy support pillars lock into place rapidly.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nCorrugated steel walls rise rapidly over the floor frame. Overhead crossbeams lock together, and vibrant acrylic wall panels install along the frame as bright overhead LED strips illuminate the rising building structure.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nExterior subterranean cave entry features reinforced steel blast doors set into heavy granite walling. Symmetrical LED strip lighting illuminates the textured rock facade and sleek dark entrance ramp.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nMatte black exterior panels receive glowing magenta light channels. Weathered aluminum roof overhangs click into place, glass window sliders install, and wet concrete alley paving with potted neon-tinted ferns completes the exterior build.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior subterranean cavern scene with exposed basalt walls. Smooth epoxy flooring lays down while central steel pedestals, cable channels, and sleek console frames are bolted into place.",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the dark enclosure, polished slate flooring tiles are laid out. Overhead cable trays lock into the ceiling joists, warm under-counter lighting tracks mount, and chrome kitchen fixture lines run across the rear partition.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nMatte black control desks, ambient amber light strips, ergonomic swivel seating, and multi-tier equipment racks fill the chamber. Warm overhead spotlights glow across polished dark surfaces.",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nA long polished dark timber counter attaches to the floor. Stainless prep stations and wooden stool seating install along the bar while hanging warm lanterns illuminate steaming ceramic noodle bowls on the counter surface.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nContinuous camera motion glides past the illuminated central workstation, through the heavy canyon entrance doors, settling outside on the dramatic stone fortress illuminated under twilight sky.",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nGliding smoothly from behind the wooden counter, the movement passes open sliding glass doors into the wet alley, revealing the full glowing magenta structure bathed in soft neon reflection while the builder polishes the counter.",
       "seed": null,
       "chain": true
     }
   ],
   "family": "oyun/film üsleri",
-  "music": "Rhythmic industrial percussion with metallic beats and low resonant bass synth, perfectly timed to a steady construction pace. The tempo slows for a quiet beat near the end of the interior assembly, then expands into a wide, powerful orchestral acoustic groove during the final reveal, finishing with a soft decaying bass note.",
+  "music": "Rhythmic industrial electronic percussion with driving basslines, synthetic claps, and subtle synth arpeggiation. Crisp drum beats lock into the construction movement, creating a steady urban pulse. The percussion softens briefly at the end of shot 5, then blooms into an expansive, bright cyber-synth soundscape for shot 6, resolving gently.",
   "hook_shot": 6,
-  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
 }

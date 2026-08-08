@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 10,
-    "title": "He Turned Scrap Into A $10,000 Cabin! ♻️✨"
+    "title": "He Turned Scrapped Cans Into A $100K Oasis! ♻️✨"
   },
-  "synopsis": "Reclaimed wooden pallets and salvaged corrugated tin are transformed into a cozy off-grid A-frame retreat.",
+  "synopsis": "Recycled metal shipping containers are transformed into a sleek, off-grid desert eco-oasis with a roof garden.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nGrassy mountain slope beside a pine forest. The builder clears rocks, levels a gravel pad, and arranges stacks of salvaged wooden pallets and corrugated metal sheets.",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA flat sun-baked desert lot with golden sands is leveled. Concrete pier blocks are positioned at structural corner marks, and reclaimed steel shipping boxes arrive on a heavy transport bed.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nA-frame timber trusses assembled from reclaimed beams rise over the base. Cross-bracing locks the angular roof frame, while recycled wooden planks form sturdy subflooring.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nTwo reclaimed steel containers align on the concrete piers. Steel cutting creates large window openings, steel connecting plates join the structures, and an upper shade canopy frame rises overhead.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nPatinated tin roofing panels cover the A-frame slope. Weathered barn wood siding coats the end walls, accented by a reclaimed glass window and cedar front porch.",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nSleek terracotta ceramic paint coats the exterior steel panels. Floor-to-ceiling double-glazed sliding doors install, solar roof panels mount, and desert succulent gardens frame the finished eco-oasis exterior.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior A-frame cabin space with exposed timber rafters. Warm tongue-and-groove pine cladding lines the sloped walls while wide plank reclaimed flooring lays flat.",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the long container layout, eco-friendly bamboo flooring planks are fitted across insulated floor decks. Recessed LED strip lighting routes along ceiling conduits, and light wood wall panels line the interior.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nCast iron wood stove, plush wool armchair, wall-mounted kerosene lantern fixtures, and a cozy loft bed complete the off-grid interior living space.",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nBuilt-in birch cabinetry, a minimalist dining bar, modular fabric seating, and vibrant potted desert flora convert the industrial interior into an elegant, tranquil living sanctuary.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nContinuous camera motion glides past the warm wood stove interior, drifting through the open front door to capture the complete rustic A-frame cabin nestled in mountain sunlight.",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nPanning continuously from the sunlit living space, the perspective glides past open sliding glass doors onto the gravel patio, revealing the complete off-grid desert home under golden sunlight as the builder waters the planter beds.",
       "seed": null,
       "chain": true
     }
   ],
   "family": "geri dönüşüm / off-grid dönüşüm",
-  "music": "Organic percussive beat made of wooden thumps and rhythmic metallic taps driving the eco-friendly build momentum. The music drops into a quiet moment at the end of shot five, then opens into a rich acoustic warmth during the exterior reveal, resolving with a gentle acoustic ring.",
+  "music": "Eco-acoustic percussion featuring bamboo blocks, metallic shakers, and a steady bass kick. The organic, recycled aesthetic is reflected in warm acoustic tones that stay locked to the build rhythm. The rhythm softens for a beat after shot 5, soaring into an expansive sun-drenched melody in shot 6, ending gently.",
   "hook_shot": 6,
-  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
 }

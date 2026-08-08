@@ -491,7 +491,9 @@ class InstalledSeriesTests(unittest.TestCase):
         self.assertTrue(scratch.chain_frames)
         self.assertEqual(scratch.chain_scope, "episode")
         self.assertEqual(scratch.required_layers, ["hook_teaser", "music"])
-        self.assertTrue(scratch.require_all_shots)
+        # KARAR-2 (Ihsan, 2026-08-08): require_all_shots KAPATILDI. Motor yetenegi hala
+        # test_fixedframe.py::test_require_all_shots_blocks_merge_when_any_shot_missing'de korunuyor.
+        self.assertFalse(scratch.require_all_shots)
         self.assertEqual(scratch.hook_teaser["offset_in_shot"], 7.0)
 
         scratch_meta = SeriesMeta.load("from-scratch")
