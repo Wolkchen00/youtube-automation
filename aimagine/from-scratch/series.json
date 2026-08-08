@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 6,
+  "next_part": 7,
   "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a",
   "auto_replenish": {
     "enabled": true,
@@ -161,6 +161,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-03T17:16:27.667194+00:00"
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep06/ep06_music_hooked.mp4",
+      "subtitle": "Building A CYBERPUNK Noodle Bar From SCRATCH! 🛠️✨",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-08T22:42:04.212708+00:00"
     }
   }
 }
