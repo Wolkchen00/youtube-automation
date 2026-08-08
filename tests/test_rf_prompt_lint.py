@@ -43,10 +43,11 @@ class RfPromptLintTests(unittest.TestCase):
             [],
         )
 
-    def test_part08_shot4_fails_for_display(self):
-        plan = json.loads(
-            (SERIES_ROOT / "plans" / "part08.json").read_text(encoding="utf-8")
-        )
+    def test_stale_part08_shot4_fixture_fails_for_display(self):
+        plan = {"shots": [{
+            "n": 4,
+            "prompt": "Install holographic display systems across the curved interior wall.",
+        }]}
         violations = rf_prompt_lint.lint_plan_data(
             plan,
             self.bible["art_style"],
@@ -61,10 +62,9 @@ class RfPromptLintTests(unittest.TestCase):
         ]
         self.assertTrue(matches)
 
-    def test_part06_fails_for_prefix_repetition(self):
-        plan = json.loads(
-            (SERIES_ROOT / "plans" / "part06.json").read_text(encoding="utf-8")
-        )
+    def test_stale_part06_fixture_fails_for_prefix_repetition(self):
+        prefix = self.series["auto_replenish"]["shot_plan"][0]
+        plan = {"shots": [{"n": 1, "prompt": f"{prefix}\n\n{prefix}"}]}
         violations = rf_prompt_lint.lint_plan_data(
             plan,
             self.bible["art_style"],

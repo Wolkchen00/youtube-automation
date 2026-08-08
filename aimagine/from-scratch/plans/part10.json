@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 10,
-    "title": "Building A $1M Floating Villa From Scratch! ✨"
+    "title": "He Turned Scrap Into A $10,000 Cabin! ♻️✨"
   },
-  "synopsis": "A luxurious, multi-level floating villa with underwater viewing rooms is constructed on a serene, clear-water lake.",
+  "synopsis": "Reclaimed wooden pallets and salvaged corrugated tin are transformed into a cozy off-grid A-frame retreat.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A — CHAIN BREAK: Start a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty site, grade the ground, and establish the road, fence, and landscape framework before construction; materials and the recurring silent USTA enter, seen from behind or mid-distance in a dark cap, dark crew-neck, and work gloves, never in face close-up. Mark the foundation so the structure's location is unmistakable.\n\nStart a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty, pristine clear-water lake, with lush green forests on the distant shore. A large, modular floating platform is assembled, forming the foundation of the villa. Materials like sleek glass panels and polished wood arrive by barge. The recurring silent USTA enters, seen from behind, overseeing the platform's positioning, marking the precise location.",
+      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nGrassy mountain slope beside a pine forest. The builder clears rocks, levels a gravel pad, and arranges stacks of salvaged wooden pallets and corrugated metal sheets.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Raise the foundation, walls, and roof frame in this same composition with accelerating timelapse energy and satisfying material flow. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Rapidly raise the multi-level structure of the floating villa, incorporating a lower sub-aquatic level with large viewing windows. Install sleek, modern walls and the initial roof frame. Show accelerating timelapse energy and satisfying material flow. The recurring silent USTA is seen mid-distance, guiding a hoist, never in face close-up.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nA-frame timber trusses assembled from reclaimed beams rise over the base. Cross-bracing locks the angular roof frame, while recycled wooden planks form sturdy subflooring.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the cladding, roof, paint, exterior lights, and final landscaping until the exterior is entirely finished and remains clearly visible in frame. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the exterior cladding with a mix of polished wood panels, large floor-to-ceiling glass windows, and a green roof. Install elegant exterior lighting on multiple levels and a spacious deck. Final additions of mooring lines and a gangway, until the exterior is entirely finished and remains clearly visible in frame. The recurring silent USTA is seen from behind, attaching a railing.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nPatinated tin roofing panels cover the A-frame slope. Weathered barn wood siding coats the end walls, accented by a reclaimed glass window and cedar front porch.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B — CHAIN BREAK: Start a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior walls, lay the flooring, and install the utility and lighting infrastructure while carrying the exterior's established materials and design language inside. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nStart a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior partition walls, lay down pristine light-colored flooring, and install sophisticated utility and ambient recessed lighting infrastructure, reflecting the luxurious, open-plan design. The recurring silent USTA is seen installing a large glass panel in an underwater viewing room, maintaining distance.",
+      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior A-frame cabin space with exposed timber rafters. Warm tongue-and-groove pine cladding lines the sloped walls while wide plank reclaimed flooring lays flat.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B — CHAINED: Continue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install furniture and decor, bring the lighting on, and finish the interior completely until it feels ready to inhabit. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install high-end modern furniture, including a gourmet kitchen, lavish living room seating, and a luxurious bedroom. Bring the integrated lighting on, illuminating the stunning lake views and the unique underwater viewing room. Finish the interior completely, making it ready to inhabit. The recurring silent USTA is seen adjusting a light fixture, from behind.",
+      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nCast iron wood stove, plush wool armchair, wall-mounted kerosene lantern fixtures, and a cozy loft bed complete the off-grid interior living space.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6.\n\nContinue directly from shot 5's final frame; make one unbroken camera move that starts inside, slowly moving past the elegant interior, through a wide glass sliding door, and ending on a sweeping wide exterior view of the fully finished, magnificent floating villa, perfectly integrated into the serene lake environment, shimmering under bright daylight. The same silent USTA is visible on the deck, admiring the view, never celebrating or looking at the camera.",
+      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nContinuous camera motion glides past the warm wood stove interior, drifting through the open front door to capture the complete rustic A-frame cabin nestled in mountain sunlight.",
       "seed": null,
       "chain": true
     }
   ],
-  "family": "fantezi konutlar",
-  "music": "A sophisticated and ethereal instrumental track with a gentle, flowing rhythm, featuring shimmering strings, delicate piano melodies, and soft synth pads, perfectly synchronized to the elegant construction. The music evokes a sense of tranquility and luxury. As shot 5 concludes, the intensity softens for one beat with a sustained, dreamy chord, then opens up with a grand, expansive and graceful melody during the shot 6 reveal tour, finishing gently with a serene, luxurious resolution.",
+  "family": "geri dönüşüm / off-grid dönüşüm",
+  "music": "Organic percussive beat made of wooden thumps and rhythmic metallic taps driving the eco-friendly build momentum. The music drops into a quiet moment at the end of shot five, then opens into a rich acoustic warmth during the exterior reveal, resolving with a gentle acoustic ring.",
   "hook_shot": 6,
-  "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008"
+  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
 }

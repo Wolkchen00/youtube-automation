@@ -144,11 +144,11 @@ class LiveSurfaceTests(unittest.TestCase):
                   if v["surface"] in ("art_style", "qc.notes", "shot_plan")]
         self.assertEqual(static, [], f"statik yuzeylerde ihlal var: {static}")
 
-    def test_pending_plans_still_dirty_before_rock2(self):
-        """ROCK 2 oncesi bekleyen planlar KIRLI olmali; temizse denetci korlesmis demektir."""
+    def test_regenerated_pending_plans_are_clean_after_rock2(self):
+        """ROCK 2 sonrasi bekleyen planlarin tamaminda sifir ihlal olmali."""
         violations = rf_prompt_lint.lint_series(SERIES_ROOT)
         pending = [v for v in violations if v["surface"] == "pending_plan"]
-        self.assertTrue(pending, "bekleyen planlar temiz gorunuyor, denetci calismiyor olabilir")
+        self.assertEqual(pending, [], f"bekleyen planlarda ihlal var: {pending}")
 
     def test_live_shot_plan_is_six_lines_within_limit(self):
         series = json.loads((SERIES_ROOT / "series.json").read_text(encoding="utf-8"))

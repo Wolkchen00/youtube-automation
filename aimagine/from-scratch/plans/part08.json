@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 8,
-    "title": "Building A STAR WARS Speeder Garage From SCRATCH! 🛠️✨"
+    "title": "Old Silo → Luxury Off-Grid Home ✨"
   },
-  "synopsis": "A futuristic garage designed for iconic Star Wars landspeeders is meticulously constructed in a desert environment.",
+  "synopsis": "An abandoned rustic grain silo is transformed into a modern multi-story off-grid cylinder home with glass balconies.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A — CHAIN BREAK: Start a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty site, grade the ground, and establish the road, fence, and landscape framework before construction; materials and the recurring silent USTA enter, seen from behind or mid-distance in a dark cap, dark crew-neck, and work gloves, never in face close-up. Mark the foundation so the structure's location is unmistakable.\n\nStart a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on a vast, empty desert landscape with distant rock formations and a clear, alien sky. Grade the sandy ground and establish the perimeter for a large, futuristic garage structure, resembling something from the Star Wars universe. Materials like weathered metal panels and circular support beams arrive. The recurring silent USTA enters, seen from behind, marking the foundation for the unique structure.",
+      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nOvergrown rural farm lot with a weathered cylindrical steel silo base. The builder clears tall grass, lays stone pavers around the perimeter, and sets up scaffolding.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Raise the foundation, walls, and roof frame in this same composition with accelerating timelapse energy and satisfying material flow. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Rapidly raise the circular foundation, install heavy, weathered metal walls, and construct the domed roof frame of the speeder garage, showing accelerating timelapse energy and satisfying material flow. The structure's distinct sci-fi silhouette emerges against the desert. The recurring silent USTA is seen mid-distance, guiding a robotic arm, never in face close-up.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nCorroded metal panels are replaced with polished corrugated steel sheeting. Structural timber floor joists and spiral staircase framing lock into place inside the vertical cylinder.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the cladding, roof, paint, exterior lights, and final landscaping until the exterior is entirely finished and remains clearly visible in frame. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the exterior cladding with distressed metallic panels, install a large, retractable entrance hatch, add exterior utility conduits, and final sand-sculpted landscaping around the base. The exterior of the speeder garage is entirely finished, blending with its environment and clearly visible in frame. The recurring silent USTA is seen from behind, inspecting a panel seam.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nFresh matte charcoal paint seals the exterior silo shell. Paned curved glass windows, a top-floor balcony deck, and solar roof panels complete the striking cylindrical exterior.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B — CHAIN BREAK: Start a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior walls, lay the flooring, and install the utility and lighting infrastructure while carrying the exterior's established materials and design language inside. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nStart a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior storage compartments, lay down industrial-grade metallic flooring, and install advanced holographic display systems and utility infrastructure, carrying the exterior's futuristic, functional design language inside. The recurring silent USTA is seen calibrating a control panel, maintaining distance.",
+      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior cylindrical room with exposed brick and curved timber walls. Polished concrete floor dries under temporary lights while structural wooden beams form a loft platform.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B — CHAINED: Continue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install furniture and decor, bring the lighting on, and finish the interior completely until it feels ready to inhabit. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install tool racks, maintenance bays with lifting platforms, and a central control station. Bring the lighting on, illuminating the space with cool blue and white light, and finish the interior completely, making it ready for a landspeeder. The recurring silent USTA is seen positioning a spare part, from behind.",
+      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nCustom curved leather seating, spiraling wooden staircase, warm recessed ceiling lights, and minimalist wooden kitchen counters complete the high-end interior living zone.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6.\n\nContinue directly from shot 5's final frame; make one unbroken camera move that starts inside, slowly moving past the futuristic control station, through the open retractable entrance hatch, and ending on a wide exterior view of the fully finished, imposing Star Wars speeder garage set against the vast desert landscape. The same silent USTA is visible standing near the entrance, looking out at the horizon, never celebrating or looking at the camera.",
+      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nSmooth continuous motion travels from the upper loft interior, passing out through the balcony glass door to reveal the complete solar-powered silo home shining under bright sunlight.",
       "seed": null,
       "chain": true
     }
   ],
-  "family": "oyun/film üsleri",
-  "music": "An epic yet controlled instrumental score with a consistent, driving percussive rhythm, featuring soaring orchestral brass, mystical synth pads, and a sense of futuristic wonder, perfectly synced to the construction. The music maintains a hopeful, adventurous tempo. As shot 5 concludes, the intensity softens for one beat with a single, resonant synth note, then opens up with a majestic, expansive theme during the shot 6 reveal tour, finishing gently with a feeling of awe and accomplishment.",
+  "family": "dönüşüm",
+  "music": "Rhythmic steel tongue drum and steady woodblock percussion pulse in time with structural construction. The beat softens right before the final decor placement, then blossoms into a lush, resonant ambient acoustic ensemble as the camera sweeps outside, ending on a soft acoustic note.",
   "hook_shot": 6,
-  "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008"
+  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
 }

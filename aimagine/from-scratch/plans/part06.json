@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 6,
-    "title": "Building A GIANT ARCADE From Scratch! 🕹️✨"
+    "title": "Building A BATMAN Batcave From SCRATCH! 🛠️✨"
   },
-  "synopsis": "A massive, vibrant arcade center with larger-than-life game cabinets is constructed on a bustling street corner.",
+  "synopsis": "A high-tech underground Batcave command center featuring sleek black platforms and dramatic spotlighting is built into a rock canyon face.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A — CHAIN BREAK: Start a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty site, grade the ground, and establish the road, fence, and landscape framework before construction; materials and the recurring silent USTA enter, seen from behind or mid-distance in a dark cap, dark crew-neck, and work gloves, never in face close-up. Mark the foundation so the structure's location is unmistakable.\n\nStart a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty urban lot, grading the ground for a large, modern building. Establish the surrounding street, a temporary construction fence, and distant city buildings. Materials like steel beams and colorful panels arrive. The recurring silent USTA enters, seen from behind, marking the foundation for a colossal arcade center, with a vivid orange and teal color palette visible in materials.",
+      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nHigh desert canyon clearing framed by dark volcanic rock faces. The builder marks an excavation perimeter with bright stakes and lays smooth dark asphalt tiles onto the graded gravel foundation.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Raise the foundation, walls, and roof frame in this same composition with accelerating timelapse energy and satisfying material flow. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Rapidly raise the steel skeleton, concrete foundation, and initial wall panels of the giant arcade, showing accelerating timelapse energy and satisfying material flow. The structure begins to take shape with its distinctive geometric form. The recurring silent USTA is seen mid-distance, guiding a crane, never in face close-up.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nSteel beam framework rises inside the canyon niche, anchored into stone walls. Dark composite wall panels, matte black steel catwalks, and heavy support pillars lock into place rapidly.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the cladding, roof, paint, exterior lights, and final landscaping until the exterior is entirely finished and remains clearly visible in frame. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the vibrant exterior cladding in neon oranges, teals, and purples, install the roof, apply exterior paint, and add illuminated signage. Final landscaping around the entrance with sleek planters and paving, until the exterior of the colossal arcade is entirely finished and remains clearly visible in frame. The recurring silent USTA is seen from behind, finishing a detail on a wall.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nExterior subterranean cave entry features reinforced steel blast doors set into heavy granite walling. Symmetrical LED strip lighting illuminates the textured rock facade and sleek dark entrance ramp.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B — CHAIN BREAK: Start a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior walls, lay the flooring, and install the utility and lighting infrastructure while carrying the exterior's established materials and design language inside. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nStart a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior partition walls, lay down polished concrete flooring, and install the elaborate utility and colorful LED lighting infrastructure, echoing the vibrant exterior's geometric design and color language. The recurring silent USTA is seen placing a large display panel, maintaining distance.",
+      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior subterranean cavern scene with exposed basalt walls. Smooth epoxy flooring lays down while central steel pedestals, cable channels, and sleek console frames are bolted into place.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B — CHAINED: Continue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install furniture and decor, bring the lighting on, and finish the interior completely until it feels ready to inhabit. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install giant, retro-futuristic arcade game cabinets, a central cashier desk with glowing accents, comfortable lounge seating, and bring the elaborate LED lighting on, bathing the space in dynamic, shifting colors. The interior feels fully ready to host gamers. The recurring silent USTA is seen connecting a final power cable, from behind.",
+      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nMatte black control desks, ambient amber light strips, ergonomic swivel seating, and multi-tier equipment racks fill the chamber. Warm overhead spotlights glow across polished dark surfaces.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6.\n\nContinue directly from shot 5's final frame; make one unbroken camera move that starts inside, slowly moving past glowing arcade machines, through a wide automatic glass door, and ending on a panoramic wide exterior view of the fully finished, brightly lit, colossal arcade center, showcasing its vibrant street presence. The same silent USTA is visible in the distance near the entrance, observing the completed work, never celebrating or looking at the camera.",
+      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nContinuous camera motion glides past the illuminated central workstation, through the heavy canyon entrance doors, settling outside on the dramatic stone fortress illuminated under twilight sky.",
       "seed": null,
       "chain": true
     }
   ],
-  "family": "absürt eğlence mimarisi",
-  "music": "A lively, upbeat instrumental track with a steady, driving rhythm, featuring energetic electronic percussion, chiptune-inspired melodies, and playful synth arpeggios, synchronized to the rapid construction. The music maintains a constant, building tempo. As shot 5 concludes, the intensity softens for one beat with a brief synth pad, then opens into a triumphant, more expansive and fun melody during the shot 6 reveal, finishing with a satisfying, gentle fade-out.",
+  "family": "oyun/film üsleri",
+  "music": "Rhythmic industrial percussion with metallic beats and low resonant bass synth, perfectly timed to a steady construction pace. The tempo slows for a quiet beat near the end of the interior assembly, then expands into a wide, powerful orchestral acoustic groove during the final reveal, finishing with a soft decaying bass note.",
   "hook_shot": 6,
-  "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008"
+  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
 }

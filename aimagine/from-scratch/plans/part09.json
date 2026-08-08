@@ -1,56 +1,56 @@
 {
   "episode": {
     "number": 9,
-    "title": "He Turned Discarded Tires Into A $5K Tiny Office! ♻️✨"
+    "title": "Building A $50,000 Coaster From Scratch! ✨"
   },
-  "synopsis": "An innovative off-grid tiny office space is ingeniously built from recycled car tires and sustainable materials.",
+  "synopsis": "A thrill-seeker builds a custom wooden backyard roller coaster complete with banking turns and a steep launch hill.",
   "narration": "",
   "shots": [
     {
       "n": 1,
       "duration": "10",
-      "prompt": "CAMERA A — CHAIN BREAK: Start a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on an empty site, grade the ground, and establish the road, fence, and landscape framework before construction; materials and the recurring silent USTA enter, seen from behind or mid-distance in a dark cap, dark crew-neck, and work gloves, never in face close-up. Mark the foundation so the structure's location is unmistakable.\n\nStart a fresh exterior scene in a LOCKED-OFF TRIPOD wide shot; keep the exact camera position and angle, allowing only a slow zoom. Begin on a secluded, overgrown plot in a rural area. Graded ground is prepared for an off-grid structure. Piles of discarded car tires, wooden pallets, and natural clay arrive. The recurring silent USTA enters, seen from behind, arranging the first layer of tires for the foundation, marking the unique footprint.",
+      "prompt": "CAMERA A, CHAIN BREAK: open a fresh exterior scene in a locked-off tripod wide shot, with a slow zoom as its single camera move. Grade an empty lot, lay out road, fence and landscaping first, then mark the foundation. The builder arrives with materials.\n\nWide sunny meadow bordered by low hills. The builder clears a winding path, pours concrete footings into mapped positions, and stacks pressure-treated lumber posts.",
       "seed": null,
       "chain": false
     },
     {
       "n": 2,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Raise the foundation, walls, and roof frame in this same composition with accelerating timelapse energy and satisfying material flow. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 1's final frame in the same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Rapidly stack and fill the car tires to form thick, insulated walls. Construct a simple, sloped roof frame from reclaimed wood. Show accelerating timelapse energy and satisfying material flow as the unique structure takes shape. The recurring silent USTA is seen mid-distance, compacting earth into the tires, never in face close-up.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 1's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Raise foundation, walls and roof frame inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nLumber trestles and vertical support bents rise rapidly along the track layout. Curved wooden cross-beams and tubular steel rail guides form the undulating coaster track structure.",
       "seed": null,
       "chain": true
     },
     {
       "n": 3,
       "duration": "10",
-      "prompt": "CAMERA A — CHAINED: Continue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the cladding, roof, paint, exterior lights, and final landscaping until the exterior is entirely finished and remains clearly visible in frame. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 2's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Complete the exterior by plastering the tire walls with natural clay and lime, install reclaimed windows and a sturdy wooden door, add a small solar panel array on the roof, and finish with a rainwater harvesting system. Final landscaping with local plants until the exterior is entirely finished and remains clearly visible in frame. The recurring silent USTA is seen from behind, smoothing the clay finish.",
+      "prompt": "CAMERA A, CHAINED: continue from shot 2's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Finish cladding, roof, paint, exterior lighting and landscaping until the completed exterior stands clearly in frame.\n\nStained cedar support beams stand complete with smooth steel rails mounted on top. Safety netting, loading platform stairs, and a bright yellow coaster car settle onto the track.",
       "seed": null,
       "chain": true
     },
     {
       "n": 4,
       "duration": "10",
-      "prompt": "CAMERA B — CHAIN BREAK: Start a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build the interior walls, lay the flooring, and install the utility and lighting infrastructure while carrying the exterior's established materials and design language inside. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nStart a fresh interior wide scene with a LOCKED-OFF TRIPOD; keep this exact interior camera position and angle, allowing only a slow zoom. Build interior partition walls with wood and natural plaster, lay down salvaged wood flooring, and install minimalist, energy-efficient lighting and utility infrastructure, reflecting the rustic, sustainable design language. The recurring silent USTA is seen installing a window sill, maintaining distance.",
+      "prompt": "CAMERA B, CHAIN BREAK: open a fresh interior wide scene on a locked-off tripod, with a slow zoom as its single camera move. Build interior walls, lay flooring, install utilities and lighting infrastructure, carrying the exterior's materials and design language inside.\n\nInterior loading station platform under a timber canopy. Hardwood floor planks lay down while steel control levers, safety gates, and overhead queue line lights are mounted.",
       "seed": null,
       "chain": false
     },
     {
       "n": 5,
       "duration": "10",
-      "prompt": "CAMERA B — CHAINED: Continue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install furniture and decor, bring the lighting on, and finish the interior completely until it feels ready to inhabit. Keep the same recurring silent USTA in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, never in face close-up.\n\nContinue from shot 4's final frame in the exact same LOCKED-OFF TRIPOD position and angle, allowing only a slow zoom. Install a compact, custom-built desk and shelving units from reclaimed wood, a comfortable chair, and add warm, battery-powered LED lighting. Decorate with simple, natural accents, finishing the interior completely, making it a cozy and functional off-grid tiny office. The recurring silent USTA is seen placing a plant on the desk, from behind.",
+      "prompt": "CAMERA B, CHAINED: continue from shot 4's final frame in the same locked-off tripod framing, with a slow zoom as its single camera move. Install furniture and decor, bring the lighting up, and finish the interior until it looks ready to live in.\n\nPadded operator console, decorative festoon lighting, velvet entry ropes, and polished wooden benches fill the station. Warm string lights illuminate the entire wooden loading bay.",
       "seed": null,
       "chain": true
     },
     {
       "n": 6,
       "duration": "10",
-      "prompt": "REVEAL TOUR — CHAINED FROM CAMERA B: Continue directly from shot 5's final frame; this is the only exception to the LOCKED-OFF TRIPOD rule. Make one unbroken camera move that starts inside, flows through a door or window, and ends on a wide exterior view of the fully finished structure, delivering the single interior-and-exterior payoff. The same silent USTA may remain in a dark cap, dark crew-neck, and work gloves, seen from behind or mid-distance, but never celebrates, looks at camera, poses 'ta-da,' speaks, or appears in face close-up. This is hook shot 6.\n\nContinue directly from shot 5's final frame; make one unbroken camera move that starts inside, slowly moving past the neat office setup, through the rustic wooden door, and ending on a wide exterior view of the fully finished, charming off-grid tiny office, nestled harmoniously in its natural surroundings. The same silent USTA is visible sitting on a small bench outside, looking at the completed structure, never celebrating or looking at the camera.",
+      "prompt": "REVEAL TOUR, CHAINED FROM CAMERA B: continue from shot 5's final frame with the tripod lock released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nUninterrupted camera glide moves from the station control desk, floating past the yellow coaster car, panning back to reveal the full thrilling wooden roller coaster spanning across the field.",
       "seed": null,
       "chain": true
     }
   ],
-  "family": "geri dönüşüm / off-grid dönüşüm",
-  "music": "A clever and resourceful instrumental piece with a steady, organic beat, driven by found-object percussion, plucked strings, and earthy synth textures, perfectly synchronized to the construction rhythm. The music evokes ingenuity and sustainability. As shot 5 concludes, the rhythm softens for one beat into a warm, sustained chord, then opens up with an inviting, optimistic melody during the shot 6 reveal tour, finishing gently with a feeling of cozy satisfaction.",
+  "family": "absürt eğlence mimarisi",
+  "music": "Upbeat syncopated percussion with wood taps and metallic snaps matching rapid timber assembly. The rhythmic momentum pauses for a brief breath as final safety rails snap into place, then opens into an expansive rhythmic acoustic groove during the full track reveal, dissolving smoothly.",
   "hook_shot": 6,
-  "doctrine_sha256": "dfe790aaa1806184fbd7444fc1a702de4544a9d3fafe18aca44a1b5b4b5f2008"
+  "doctrine_sha256": "918032a5eeb81fd9d5e55f210be5c54659874a62530cb02177028192630df6f3"
 }

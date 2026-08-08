@@ -286,3 +286,38 @@ Codex bozuk `test_doctrine_gate`'i sessizce yeniden YAZMADI, durdu ve sordu , do
 - `rf_prompt_lint` -> art_style 0, qc.notes 0, shot_plan 0; bekleyen planlar 68 (ROCK 2 temizler)
 - `preflight` -> 7 ihlal, HEPSI bayat plan damgasi/oneki; "series pin" hatasi GITTI
 - `series.json`: total_parts 10, next_part 6, parts 1-5 bit-degismez
+
+## ROCK 2 , build + Level 10
+
+Build thread: `019fe302-4e67-7723-a01b-1783c5a99d9c`
+
+**Codex teslimi:** `tools/rf_transition_check.py` (snapshot/verify, `series.preflight.run`'i
+yeniden kullaniyor, 10 ustu tasmayi reddediyor, `checkpoint_sha` kaydediyor) +
+`tests/test_rf_transition_check.py`; sonra 2b sirasi kosuldu ve part06-part10 yeniden uretildi.
+Fix turu GEREKMEDI.
+
+**Level 10 (Visionary), hepsi kendim kosuldu:**
+- `pytest tests/ -q` -> **164 passed, 56 subtests, 0 failed**
+- `rf_prompt_lint` -> **TOPLAM 0 ihlal** (ROCK 1 sonrasi 68'di). Kazanma kosulu buydu.
+- `rf_transition_check --verify` -> `RF TRANSITION OK`, exit 0
+- Bes planin BEsi de tek tek `PREFLIGHT OK`
+- **Korunan veri bagimsiz dogrulandi** (Codex'in aracina guvenilmeden, `git diff 7c222be`):
+  `parts` 1-5 bit-ayni, `published.json` HIC degismedi, `next_part` 6, `total_parts` 10,
+  doktrin pin'i ayni. `series.json`'daki tek fark `last_run.at` damgasi , replenish yazdi.
+- **Aile rotasyonu dogrulandi:** oyun/film -> fantezi konut -> donusum -> absurt eglence ->
+  geri donusum. Ard arda tekrar YOK.
+- **Yeni promptlar gozle okundu (part06):** govdeler 26-30 kelime (eskiden 60-90), negasyon
+  sifir, yasakli nesne sifir, onek tekrari sifir, ve cekim 2-6'da insan HIC anilmiyor , figur
+  tarifi tek kaynaktan (`art_style`) geliyor. Doktrin tam olarak bunu istiyordu.
+
+**Iki test dosyasi degisti, ikisi de MESRU ve dogrulandi:**
+1. `tests/test_rf_prompt_lint.py`: `part08`/`part06` CANLI dosyalari fixture olarak
+   kullaniyordu; ROCK 2 onlari temizleyince testler duserdi. Codex bunlari STATIK satir-ici
+   fixture'a cevirdi ve iddialari AYNEN korudu. Bu, gecen turda yasanan "canli veriye
+   civilenmis test" tuzaginin dogru cozumu.
+2. `tests/test_rf_prompt_lint_adversarial.py` (benim dosyam): "ROCK 2 oncesi planlar KIRLI
+   olmali" iddiasi artik yanlisti. `assertTrue(pending)` -> `assertEqual(pending, [])` oldu,
+   yani iddia ZAYIFLAMADI, GUCLENDI. Kabul.
+
+**Sonuc:** ROCK 1 + ROCK 2 tamam. Yapisal is bitti; geriye §4.1'in olctugu gercek uretim
+kanaryasi kaldi ve o Ihsan'in kredi onayina bagli.
