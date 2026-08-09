@@ -189,15 +189,30 @@ def _append_publish_registry(
             if not isinstance(registry, list):
                 raise ValueError("published.json kökü liste değil")
 
+        identifiers = {
+            platform: _publish_identifier(result, platform)
+            for platform, result in upload_results.items()
+        }
         entry = {
             "part": n,
             "subtitle": str(subtitle),
             "ts": datetime.now(timezone.utc).isoformat(),
-            "results": {
-                platform: _publish_identifier(result, platform)
-                for platform, result in upload_results.items()
-            },
+            "results": identifiers,
         }
+        # Kimlik çıkarılamayan platformun HAM yanıtını sakla: IG/TikTok kimlikleri
+        # part 3'ten beri null geliyor ve yanıt şekli bilinmediği için _publish_identifier
+        # körlemesine düzeltilemiyor. Bu alan bir sonraki yayında şekli görünür kılar.
+        unresolved = {
+            platform: str(upload_results.get(platform))[:600]
+            for platform, ident in identifiers.items()
+            if not ident
+        }
+        if unresolved:
+            entry["results_raw"] = unresolved
+            logger.warning(
+                f"⚠️ Part {n}: {', '.join(sorted(unresolved))} için yayın kimliği "
+                f"çıkarılamadı; ham yanıt registry'ye 'results_raw' olarak yazıldı."
+            )
         registry.append(entry)
         registry_path.parent.mkdir(parents=True, exist_ok=True)
         registry_path.write_text(
