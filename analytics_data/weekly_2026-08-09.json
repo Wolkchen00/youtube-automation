@@ -1,0 +1,175 @@
+{
+  "generated_at": "2026-08-09T08:49:08.119493+00:00",
+  "snapshot_date": "2026-08-09",
+  "period": "2026-08-03 to 2026-08-09",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 123,
+        "total_views": 109135,
+        "total_videos": 252
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "u8qMm7sa2u8",
+          "title": "How Australia Lost The Emu War In 1932!",
+          "published": "2026-08-08T21:09:19Z",
+          "views": 16,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "sBF2-IvStKY",
+          "title": "The Real Reason Nintendo Made Playing Cards",
+          "published": "2026-08-07T18:25:50Z",
+          "views": 643,
+          "views_48h": 643,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "9srLC9rkyJY",
+          "title": "The Real Reason Nintendo Made Playing Cards",
+          "published": "2026-08-07T17:51:23Z",
+          "views": 721,
+          "views_48h": 721,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "kMURIA0ZXfQ",
+          "title": "Zheng Yi Sao: The Undefeated Pirate Queen",
+          "published": "2026-08-02T21:38:07Z",
+          "views": 16,
+          "views_48h": 11,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 95
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 117,
+        "total_views": 104322,
+        "total_videos": 156
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "DU6F3AeUMzM",
+          "title": "I Found UNNATURAL CLAY... And It STARTED To WHISPER!",
+          "published": "2026-08-08T19:25:20Z",
+          "views": 2490,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "KcfGkqlqLI8",
+          "title": "This ROCK Is NOT Supposed To FLOAT?!",
+          "published": "2026-08-07T19:53:39Z",
+          "views": 1640,
+          "views_48h": 1640,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "fn7wuBVzQAg",
+          "title": "This ROCK Is NOT Supposed To FLOAT?!",
+          "published": "2026-08-07T19:33:20Z",
+          "views": 1720,
+          "views_48h": 1720,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "q9MNNewPSlA",
+          "title": "This MIRROR Is NOT Supposed To SHOW THE PAST?!",
+          "published": "2026-08-03T20:33:21Z",
+          "views": 58,
+          "views_48h": 54,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "WFsI2SxVoOM",
+          "title": "I Found UNNATURAL WOOD... And It STARTED To FLEX!",
+          "published": "2026-08-02T20:02:49Z",
+          "views": 74,
+          "views_48h": 75,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 58
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 125,
+        "total_views": 60237,
+        "total_videos": 179
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "uLSjJ40sByk",
+          "title": "Saturn: It Would Float on Water",
+          "published": "2026-08-08T17:13:32Z",
+          "views": 40,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "WASLc0rFPvM",
+          "title": "TON 618: The Universe's Giga-Black Hole",
+          "published": "2026-08-07T17:42:17Z",
+          "views": 638,
+          "views_48h": 638,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "_482wLxaXXI",
+          "title": "Venus: A Day Is LONGER Than Its Year",
+          "published": "2026-08-03T18:29:37Z",
+          "views": 162,
+          "views_48h": 149,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "rn9jgOQ7G0g",
+          "title": "The Universe's Saddest Goodbye: Solar ECLIPSES",
+          "published": "2026-08-02T17:44:16Z",
+          "views": 398,
+          "views_48h": 341,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 170
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 98,
+        "total_views": 141039,
+        "total_videos": 229
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "vZa2uEZnXCU",
+          "title": "Building A CYBERPUNK Noodle Bar From SCRATCH! 🛠️✨",
+          "published": "2026-08-08T22:42:32Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "y68ttrNIZiE",
+          "title": "Building A Hidden UNDERGROUND Library From SCRATCH! 🛠️✨",
+          "published": "2026-08-03T17:16:20Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "BZwMTgCKDp4",
+          "title": "Building A JURASSIC PARK Entrance From SCRATCH! 🛠️✨",
+          "published": "2026-08-02T15:55:38Z",
+          "views": 14,
+          "views_48h": 15,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 5.0
+    }
+  }
+}
