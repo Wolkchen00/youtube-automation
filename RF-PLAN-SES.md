@@ -286,14 +286,14 @@ ALET + duyulan ses; hepsi ≤45 kelime:
 [
   "A fresh exterior wide scene, position and angle fixed, with a slow zoom as its single movement. A loaded trailer rolls in; the builder unloads timber, panels and sacks by hand, rakes the lot level, then drives marker stakes with a ringing mallet.",
   "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. The builder pours and levels the footing, raises the wall frames, and nails the roof rafters with a hammer and a screaming circular saw.",
-  "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. The builder screws on cladding with a whining drill, lays roofing, rolls paint across the walls, mounts exterior lamps, then plants the landscaping.",
-  "A fresh interior wide scene, position and angle fixed, with a slow zoom as its single movement. The builder carries in boards, screws up interior walls, snaps flooring together with a rubber mallet, and runs conduit and lighting cable, matching the exterior materials.",
-  "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. The builder hauls furniture in, assembles it with a clicking screwdriver, hangs decor, fits the lamps, then flips the switch.",
+  "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. The builder screws on cladding with a whining drill, lays roofing, mounts exterior lamps, rolls paint across the walls, then plants the landscaping.",
+  "A fresh interior wide scene, position and angle fixed, with a slow zoom as its single movement. The builder carries in timber, screws up the interior walls, lays the flooring with a rubber mallet, and runs conduit and lighting cable, matching the exterior materials.",
+  "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. The builder carries in the furniture, screws it together with a clicking screwdriver, hangs the decor, then flips the light switch.",
   "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder fastens the last trim with a whining screwdriver."
 ]
 ```
 
-Kelime sayıları: **43 / 43 / 42 / 43 / 39 / 44** (sınır 45).
+Kelime sayıları: **43 / 43 / 42 / 44 / 40 / 44** (sınır 45).
 
 **Tur-2 F-7 kabul, kendi hatam:** ilk yazımda "slow zoom the **only** movement" kullanmıştım;
 `only` ve `sole`, `rf_prompt_lint.py:44-45`'te `_NEGATION_WORDS` içindedir , kendi
@@ -409,6 +409,38 @@ fail-closed skora çevirmek istiyor. Üç sebeple hayır:
   )
   ```
 
+  **Tur-4 F-1 kabul , kural (f)(3) GENİŞLETİLDİ: `STRUCTURAL_SUBJECT` deseni.**
+  Codex somut bir kaçak daha gösterdi: *"the builder carries a hammer while the wall panels
+  assemble around him"* , usta özne, alet var, ama yapı yine kendi kendine kuruluyor.
+  Çözüm bir gramer ayrıştırıcısı DEĞİL, hedefli bir desen: yapısal bir ad, ardından en fazla
+  bir sözcük, ardından yapısal bir fiil gelirse İHLAL sayılır.
+
+  ```python
+  STRUCTURAL_NOUNS = (
+      "wall","walls","panel","panels","beam","beams","frame","frames","roof",
+      "floor","flooring","structure","building","house","furniture","decor",
+      "cladding","tile","tiles","board","boards","rafter","rafters","brick",
+      "bricks","plank","planks",
+  )
+  STRUCTURAL_VERBS = (
+      "assemble","assembles","install","installs","rise","rises","fit","fits",
+      "mount","mounts","attach","attaches","erect","erects","join","joins",
+      "stack","stacks","appear","appears","snap","snaps","slot","slots",
+      "lock","locks","click","clicks","form","forms","grow","grows",
+      "build","builds",
+  )
+  # İhlal: <STRUCTURAL_NOUN> (en fazla 1 sozcuk) <STRUCTURAL_VERB>
+  ```
+
+  **Bu kuralı kendi altı satırıma uyguladım ve ÜÇÜ DÜŞTÜ** , Codex'in bulgusunun gerçek
+  olduğunun kanıtı: eski çekim 3 "across the walls, **mounts**", eski çekim 4 "interior
+  walls, **snaps**", eski çekim 5 "furniture in, **assembles**". Üçü de yeniden yazıldı
+  (yukarıdaki JSON güncel hâlidir); niyet ve alet aynı kaldı, yalnız sıralama değişti.
+
+  **Kalan sınır (ISSUES I-K):** sözcük tabanlı bir denetçi özne-yüklem ilişkisini
+  ayrıştıramaz. Listede olmayan bir yapısal ad ya da fiilyle kaçış hâlâ mümkündür. Denetçi
+  bir kapı, kanıt değil; gerçek kanıt canlı koşudaki `issues` kayıtlarıdır.
+
   **Tur-2 F-9, kabul AMA rafine edildi.** Codex `attaches` ve `mounts` gibi ETKEN fiillerin
   de listeye girmesini istedi. Bu YANLIŞ olurdu: benim çekim 3 satırım "the builder **mounts**
   exterior lamps" diyor , ustayı özne yapan meşru bir cümle. Kusur fiilde değil, ÖZNESİZLİKTE.
@@ -477,7 +509,9 @@ engellemez" garantisi verilir.
   **Tur-3 F-6 kabul , mekanizma:** `authorize()` yalnız bool döndürüyor, ret sebebini
   taşımıyor. Çözüm EKLEMELİ olsun: `HardCreditCap`'e `last_denial_kind` alanı eklenir
   (`None` | `"cap"` | `"reserve"` | `"unknown"`), her ret bunu yazar, `produce` okur ve
-  yalnız `"cap"` retinde `qc_budget["left"] = 0` yapar. Codex'in "hiçbir isteğe bağlı rette
+  `"cap"` VE `"unknown"` retlerinde `qc_budget["left"] = 0` yapar, YALNIZ `"reserve"`
+  retini muaf tutar (tur-4 F-2: bugünkü kod HER isteğe bağlı rette sıfırlıyor; yalnız
+  `"cap"` demek bilinmeyen-maliyet davranışını da sessizce değiştirirdi). Codex'in "hiçbir isteğe bağlı rette
   sıfırlama" önerisi daha basit ama mevcut sert-tavan davranışını da değiştirirdi; ekleme
   yaklaşımı eski davranışı bit-değişmez bırakır (`credit_hard_cap` yalnız from-scratch'te
   açık , doğrulandı , ama imza dört kanalın ortak kodunda).
@@ -551,6 +585,10 @@ planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
   Codex `BLOCKED:` yazıp DURUR (test yeniden yazmak yasak).
 - **R4-f** Plan geçişi, `finally` ile geri alınabilir tek bir betikle (F-15/F-16):
   1. `git status --porcelain` BOŞ olmalı (temiz ağaç ön kontrolü , tur-3 F-8).
+     **Tur-4 F-3 çözümü:** bu çelişki değil, SIRA kuralıdır. ROCK 1, 2 ve 3 kendi Level-10
+     incelemelerinden geçip **commit edilir**; ROCK 4 ondan sonra başlar. Yani yeni doktrin
+     ve cfg değişiklikleri o noktada zaten commit'li olur ve ağaç gerçekten temizdir.
+     Snapshot yeni doktrin hash'ini görür. Beklenen-fark izin listesi GEREKMEZ.
   2. `python tools/rf_transition_check.py aimagine/from-scratch --snapshot`
   3. `series.json` yedeklenir.
   4. **ÖNCE METADATA:** `total_parts: 6` **ve** `auto_replenish.batch: 4` yazılır
@@ -694,6 +732,8 @@ Onaylı Plan 1 ROCK 3 bunu çözüyor ve hâlâ yapılmadı (ISSUES I-A).
   senkron sesi var mı" sorusunu YANITLAMAZ. Yalnız "müzik yok + inşaat sesi var + sessizlik
   az" der. Çekim-başına veya zaman damgalı görüntü-ses eşleme denetimi ayrı bir tasarımdır;
   bu koşunun kapsamı dışında ve bilinçli olarak yapılmıyor.
+- **I-K (orta, tur-4 F-1):** sözcük tabanlı denetçi özne-yüklem ilişkisini ayrıştıramaz;
+  `STRUCTURAL_NOUNS`/`STRUCTURAL_VERBS` listesinde olmayan bir çiftle kaçış mümkündür.
 - Devralınanlar: usta için Kie referans-görseli, çekim 3→4 referans köprüsü, cross-shot QC.
 
 ---

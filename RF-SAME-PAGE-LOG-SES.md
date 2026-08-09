@@ -198,3 +198,41 @@ VERDICT: NOT YET```
   Bit-değişmezlik kanıtı artık HER kurulu seriyi kapsıyor.
 
 **Plan r4.**
+
+## Tur 4
+
+### Integrator bulguları (Codex, aynen)
+
+```
+- [FIX] Rule (f) still passes “the builder carries a hammer while the wall panels assemble around him,” because its builder/tool checks pass and bare non-builder `assemble` remains outside `AUTONOMOUS_CLAUSES` -> Detect structural nouns governing build verbs and add this exact adversarial test.
+- [FIX] `last_denial_kind="unknown"` changes existing behavior because the current code zeroes `qc_budget` after every optional denial, while r4 zeroes it only for `"cap"` -> Zero the budget for `"cap"` and `"unknown"`; exempt only `"reserve"`.
+- [FIX] R4-f’s clean-tree precondition cannot coexist with the required uncommitted doctrine/config changes: snapshot must see the new doctrine hash, but those changes make `git status --porcelain` nonempty -> Use an expected-diff allowlist before transition while separately verifying protected files are pristine.
+
+VERDICT: NOT YET```
+
+### Visionary yanıtı (Claude) , 3 bulgunun 3'ü KABUL
+
+- **KABUL F-1** ("the builder carries a hammer while the wall panels assemble around him")
+  → Gerçek kaçak. Kural (f)(3)'e hedefli `STRUCTURAL_SUBJECT` deseni eklendi: yapısal ad +
+  en fazla 1 sözcük + yapısal fiil = ihlal. Gramer ayrıştırıcısı DEĞİL, kapalı iki liste.
+  **Kuralı kendi altı satırıma uyguladım ve ÜÇÜ DÜŞTÜ** ("across the walls, mounts",
+  "interior walls, snaps", "furniture in, assembles") , bulgunun gerçek olduğunun kanıtı.
+  Üçü yeniden yazıldı. Kalan sınır ISSUES I-K olarak yazıldı.
+- **KABUL F-2** (`"unknown"` davranışı sessizce değişirdi) → `"cap"` VE `"unknown"`
+  sıfırlar, yalnız `"reserve"` muaf.
+- **KABUL F-3** (temiz ağaç ön koşulu çelişkisi) → Çelişki değil SIRA kuralı: ROCK 1-3
+  kendi Level-10 incelemelerinden geçip commit edilir, ROCK 4 ondan sonra başlar; o noktada
+  doktrin değişiklikleri commit'li ve ağaç gerçekten temiz. İzin listesi gerekmez.
+
+### Visionary'nin kendi kanıtı (Codex'e güvenilmedi)
+
+Altı `shot_plan` satırı, tarif edilen YEDİ kuralın hepsine karşı `tools/rf_prompt_lint.py`
+fonksiyonları + yeni kümeler kullanılarak makineyle koşuldu:
+
+```
+OK shot1 43 | OK shot2 43 | OK shot3 42 | OK shot4 44 | OK shot5 40 | OK shot6 44
+```
+
+Sıfır ihlal. Kelime sayıları plandaki iddiayla birebir aynı.
+
+**Plan r5.**
