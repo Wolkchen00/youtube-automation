@@ -48,9 +48,11 @@ Gemini 2.5 Flash (ses girdisi) → {"has_music": false, "speech": false,
   "silent_fraction_estimate": 0.0}
 ```
 
-**Boru hattı İhsan'ın istediği sesi zaten üretiyor, sonra siliyor.** Bu ölçüm, tur-1'in
-F-1 bulgusunu (kod alıntısı yanlıştı) düzeltirken ROCK 1'in temelini de sağlamlaştırır:
-artık varsayım değil, ölçüm.
+**Boru hattı İhsan'ın istediği sesi zaten üretiyor, sonra siliyor.**
+
+**İddianın SINIRI (tur-2 F-1):** bu TEK bir klibin ölçümüdür. Kanıtladığı şey "Omni modeli
+kullanılabilir inşaat sesi üretebiliyor"dur; "her klip her zaman üretir" DEĞİL. Teslimat
+garantisi bu ölçüm değil, R1-j'deki bölüm-başına kapıdır.
 
 ### 1.2 KANIT B , Gemini'nin kendi cümleleri (`issues`, ep06-ep07)
 
@@ -164,8 +166,11 @@ Ses akışı yok / ayrıştırılamıyor / ffmpeg patlıyor → `None`.
 - `_review_frames`'in retry/yedek-model kalıbıyla Gemini'ye verir, ZORUNLU JSON:
   `{"has_music": bool, "speech": bool, "construction_sounds": [string],
     "silent_fraction_estimate": float}`.
-- API hatası / anahtar yok → `None` (pass-through; `qc_shot`'ın "skip" felsefesi , Gemini
-  kesintisi bir bölümü öldürmez).
+- **Alan doğrulaması (tur-2 F-5):** üç bool gerçekten bool, `construction_sounds` gerçekten
+  string listesi, `silent_fraction_estimate` gerçekten `0.0-1.0` aralığında sayı olmalı.
+  Eksik / yanlış tipli / aralık dışı herhangi bir alan → sonuç GEÇERSİZ sayılır ve
+  fonksiyon `None` döner (yarım JSON'la karar verilmez).
+- API hatası / anahtar yok / geçersiz JSON → `None`.
 - Sonuç `qc_log.jsonl`'a `{"event": "audio", ...}` olarak yazılır (ölçülebilir olsun).
 
 **R1-h** `series/produce.py:674`: `unknown_layers` beyaz listesi
@@ -175,18 +180,24 @@ Ses akışı yok / ayrıştırılamıyor / ffmpeg patlıyor → `None`.
 (Tur-1 F-6: preflight'ın kendi kopyası var; yalnız produce'u güncellemek preflight'ı
 kırar.)
 
-**R1-j** Kapı, TÜM dönüşümlerden SONRA, YAYINLANACAK dosya üzerinde koşar
-(tur-1 F-4). Sıra: birleştirme → `_post_process` (anlatım/müzik) → hook teaser →
-**ses kapısı** → yükleme. Kapı `produce`'un final dosyayı döndürdüğü noktadan hemen önce
-çağrılır, `_post_process`'in içinden değil.
+**R1-j** Kapı, TÜM dönüşümlerden SONRA, YAYINLANACAK dosya üzerinde koşar.
+Tur-2 F-6 doğru: kancadan sonra `title_card_overlay`, `fact_captions_overlay` ve
+`_upscale_master` da çalışıyor. Kesin yer: **`_upscale_master` çağrısından HEMEN SONRA,
+sidecar/rapor yazımı, başarı logu ve `return final_ep`'ten ÖNCE.**
 
 Kapı mantığı (`native_audio` zorunlu katmandaysa):
 1. `measure_mean_volume(final)` → `None` veya `< -50.0 dB` ise **FAIL**.
 2. `critic.qc_audio(final)`:
-   - `None` → geçir, `logger.warning` (Gemini kesintisi bölüm öldürmez).
+   - `None` (API hatası, anahtar yok veya geçersiz JSON) → **FAIL**.
+     (Tur-2 F-2 kabul: `required_layers` fail-closed bir teslimat kapısıdır. Doğrulanamayan
+     ses, doğrulanmış ses değildir. `qc_shot`'ın "skip" felsefesi çekim düzeyinde geçerli;
+     teslimat düzeyinde geçerli değil. Log ve Telegram mesajı sebebi AÇIKÇA yazar ki
+     Gemini kesintisi teşhis edilebilsin.)
    - `has_music is True` → **FAIL** (İhsan'ın 1 numaralı şartı).
    - `speech is True` → **FAIL** (kanalda konuşma yok).
-   - `construction_sounds` boş **VE** `silent_fraction_estimate > 0.5` → **FAIL**.
+   - `construction_sounds` boş **VEYA** `silent_fraction_estimate > 0.5` → **FAIL**.
+     (Tur-2 F-3 kabul: eski "VE" koşulu, gürültülü ama inşaat sesi olmayan bir ortamı ,
+     rüzgâr, trafik , geçiriyordu.)
 3. FAIL → `logger.error` + `notifier` mesajı + `return None` (durum ilerlemez).
    Ölçülen değerler her hâlükârda loglanır.
 
@@ -271,14 +282,21 @@ ALET + duyulan ses; hepsi ≤45 kelime:
 
 ```json
 [
-  "A fresh exterior wide scene, position and angle fixed, slow zoom the only movement. A loaded trailer rolls in; the builder unloads timber, panels and sacks by hand, rakes the lot level, then drives marker stakes with a ringing mallet.",
-  "The same fixed exterior view continues from the previous final frame, slow zoom the only movement. The builder pours and levels the footing, raises wall frames one by one, and nails the roof rafters with a hammer and a screaming circular saw.",
-  "The same fixed exterior view continues from the previous final frame, slow zoom the only movement. The builder screws on cladding with a whining drill, lays roofing, rolls paint across the walls, mounts exterior lamps, then plants and waters the landscaping.",
-  "A fresh interior wide scene, position and angle fixed, slow zoom the only movement. The builder carries in boards, screws up interior walls, snaps flooring together with a rubber mallet, and runs conduit and lighting cable, matching the exterior materials.",
-  "The same fixed interior view continues from the previous final frame, slow zoom the only movement. The builder hauls furniture in, assembles it with a clicking screwdriver, hangs decor, fits the lamps, flips the switch, and wipes the surfaces clean.",
+  "A fresh exterior wide scene, position and angle fixed, with a slow zoom as its single movement. A loaded trailer rolls in; the builder unloads timber, panels and sacks by hand, rakes the lot level, then drives marker stakes with a ringing mallet.",
+  "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. The builder pours and levels the footing, raises the wall frames, and nails the roof rafters with a hammer and a screaming circular saw.",
+  "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. The builder screws on cladding with a whining drill, lays roofing, rolls paint across the walls, mounts exterior lamps, then plants the landscaping.",
+  "A fresh interior wide scene, position and angle fixed, with a slow zoom as its single movement. The builder carries in boards, screws up interior walls, snaps flooring together with a rubber mallet, and runs conduit and lighting cable, matching the exterior materials.",
+  "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. The builder hauls furniture in, assembles it with a clicking screwdriver, hangs decor, fits the lamps, then flips the switch.",
   "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder fastens the last trim with a whining screwdriver."
 ]
 ```
+
+Kelime sayıları: **43 / 43 / 42 / 43 / 39 / 44** (sınır 45).
+
+**Tur-2 F-7 kabul, kendi hatam:** ilk yazımda "slow zoom the **only** movement" kullanmıştım;
+`only` ve `sole`, `rf_prompt_lint.py:44-45`'te `_NEGATION_WORDS` içindedir , kendi
+denetçim kendi satırlarımı reddederdi. Yürürlükteki güvenli ifadeye dönüldü:
+"with a slow zoom as its **single** movement".
 
 Çekim 1 İhsan'ın 4. maddesini birebir karşılar: yüklü römork gelir, usta malzemeyi ELLE
 indirir, sonra inşaata başlar. Çekim 6'ya tur-1 F-11 gereği gerçek alet + ses eklendi.
@@ -326,14 +344,58 @@ fail-closed skora çevirmek istiyor. Üç sebeple hayır:
   1. `the builder` + (en fazla 2 sözcük) + `BUILD_VERBS` içinden bir fiil;
   2. `TOOL_NOUNS` içinden en az bir ALET adı (malzeme adı yetmez , F-11);
   3. `AUTONOMOUS_CLAUSES` blokajından temiz olmalı.
-  `AUTONOMOUS_CLAUSES` ölçülmüş ihlallerden oluşan AÇIK bir listedir, genel bir edilgen
-  dedektörü DEĞİLDİR (genel dedektör yanlış pozitif üretir; "the viewpoint is released"
-  meşrudur): `rise, rises, rising, go up, goes up, going up, come up, comes up, coming up,
-  is installed, are installed, is finished, are finished, is laid, are laid, is graded,
-  are graded, is marked, are marked, appear, appears, appearing, assembles itself,
-  builds itself`.
   Sabitler modül başında demet, `PROHIBITED_NOUNS` ile aynı stilde, `normalize()` üzerinden
   **sözcük-sınırı** eşleşmesiyle (`rebuilder` → `builder` eşleşmesi OLMAYACAK).
+
+  **Tur-2 F-8'e cevap , üç sabit kümenin TAM içeriği:**
+
+  ```python
+  BUILD_VERBS = (
+      "unloads","unloading","unpacks","unpacking","carries","carrying","hauls","hauling",
+      "lifts","lifting","sets","setting","places","placing","positions","positioning",
+      "drives","driving","nails","nailing","hammers","hammering","screws","screwing",
+      "bolts","bolting","fastens","fastening","drills","drilling","saws","sawing",
+      "cuts","cutting","pours","pouring","levels","leveling","levelling","rakes","raking",
+      "digs","digging","raises","raising","lays","laying","fits","fitting",
+      "mounts","mounting","installs","installing","assembles","assembling",
+      "snaps","snapping","joins","joining","paints","painting","rolls","rolling",
+      "brushes","brushing","wires","wiring","runs","running","hangs","hanging",
+      "plants","planting","waters","watering","wipes","wiping","tightens","tightening",
+      "clamps","clamping","seals","sealing","stacks","stacking","trims","trimming",
+      "sands","sanding","measures","measuring","marks","marking","fills","filling",
+  )
+
+  TOOL_NOUNS = (
+      "mallet","hammer","saw","circular saw","jigsaw","drill","impact driver",
+      "screwdriver","wrench","spanner","nail gun","nailgun","stapler","trowel",
+      "shovel","spade","rake","chisel","sander","grinder","crowbar","pliers",
+      "clamp","ladder","wheelbarrow","bucket","chalk line","string line",
+      "tape measure","caulk gun","utility knife","hand plane","paint roller",
+  )
+  # NOT: "level", "roller" ve "brush" bilerek DIŞARIDA , fiil hâlleriyle karışır
+  # ("the builder levels the footing" bir alet adı SAYILMAMALI).
+
+  AUTONOMOUS_CLAUSES = (
+      "rise","rises","rising","risen",
+      "go up","goes up","going up","went up",
+      "come up","comes up","coming up",
+      "appear","appears","appearing","appeared",
+      "assembles itself","assemble themselves","builds itself","build themselves",
+      "lock together","locks together","locking together",
+      "click into place","clicks into place","clicking into place",
+      "is installed","are installed","was installed","were installed",
+      "is finished","are finished","is laid","are laid","is graded","are graded",
+      "is marked","are marked","is mounted","are mounted","is attached","are attached",
+      "is built","are built","is erected","are erected","is fitted","are fitted",
+  )
+  ```
+
+  **Tur-2 F-9, kabul AMA rafine edildi.** Codex `attaches` ve `mounts` gibi ETKEN fiillerin
+  de listeye girmesini istedi. Bu YANLIŞ olurdu: benim çekim 3 satırım "the builder **mounts**
+  exterior lamps" diyor , ustayı özne yapan meşru bir cümle. Kusur fiilde değil, ÖZNESİZLİKTE.
+  Bu yüzden listeye yalnız (a) doğası gereği öznesiz olan öbekler ("lock together",
+  "click into place", "assembles itself") ve (b) EDİLGEN biçimler ("is mounted", "are
+  attached") girdi; etken üçüncü tekil biçimler girmedi.
 - **Kural (g) QC YÜZEYİNDE YASAK YOK.** `art_style` ve `qc.notes` içinde
   `forbidden`, `prohibited`, `exactly one`, `must not`, `is not allowed`, `are not allowed`
   kalıpları ihlaldir. Gerekçe kod: `critic.py:118`.
@@ -385,21 +447,38 @@ QC regen'leri yalnız arta kalan bütçeden harcanır.
   o çekimden SONRAKİ zorunlu ana çekimlerin muhafazakâr tahmin toplamı.
   Herhangi birinin tahmini `None` (bilinmeyen maliyet) ise `reserve = math.inf` → hiçbir
   isteğe bağlı regen yetkilendirilmez (fail-closed, sessizce geçilmez).
-- **R3-c** Etki `logger.info` ile yazılır: `"regen bütçesi: kalan=X, sonraki ana çekimler
+- **R3-c** Rezerv yüzünden reddedilen isteğe bağlı çağrı **`qc_budget["left"] = 0` YAPMAZ**
+  (tur-2 F-12 kabul). Bugün `produce.py:975` her isteğe bağlı ret için küresel QC bütçesini
+  sıfırlıyor; bu, "sert tavan zehirlendi" sinyalidir ve rezerv reddi o anlama gelmez.
+  Rezerv reddi ayrı bir dalda ele alınır ve sonraki çekimlerde rezerv YENİDEN hesaplanır.
+- **R3-d** Etki `logger.info` ile yazılır: `"regen bütçesi: kalan=X, sonraki ana çekimler
   için ayrılan=Y"`.
 
-**Kanıtlanabilir etki (ep07 senaryosu, cap 1900, müziksiz):**
+**Kanıtlanabilir etki (ep07 senaryosu, cap 1900):**
 
-| | Bugünkü davranış | R3 sonrası |
+| | Bugünkü davranış (müzikli, ölçüldü) | R3 + ROCK 1 sonrası (müziksiz) |
 |---|---|---|
-| Üretilen ana çekim | 5/6 (çekim 6 engellendi) | **6/6** |
-| Kullanılan regen | 3 | 3 |
-| Bölüm sonucu | ❌ üretilemedi | ✅ birleşir ve yayınlanır |
+| Ana çekim çağrısı | **5** (çekim 6 engellendi) | **6** |
+| Regen çağrısı | **4** | 3 |
+| Toplam rezervasyon | 80 + 9×200 = 1880 | 9×200 = 1800 |
+| Sonraki çağrı | 2080 > 1900 → `return None` | çekim 6 finanse edildi |
 
-**PROOF:** YENİ `tests/test_main_shot_reserve.py` , yukarıdaki tabloyu birebir simüle eden
-bir test (cap 1900, omni 10 sn, 6 çekim, 1-4 arası birer regen): R3 öncesi çekim 6 bloklanır,
-R3 sonrası bloklanmaz; `reserve=0.0` varsayılanıyla eski davranış bit-değişmez;
-tahmin `None` iken isteğe bağlı çağrı reddedilir.
+**Tur-2 F-10 kabul, aritmetiğim yanlıştı:** ep07'nin `qc_log`'unda 9 inceleme var ve dağılım
+5 ana + 4 regen (çekim 1-4'ün her birinde bir regen), benim yazdığım gibi 6 ana + 3 regen
+değil. Tablo düzeltildi; test tam çağrı DİZİSİNİ iddia edecek, yalnız sayıları değil.
+
+**Tur-2 F-11 kabul, iddia daraltıldı:** ROCK 3 yalnız **finansman garantisi** verir , altı
+ana çekim isteği her zaman bütçe bulur. "Bölüm yayınlanır" GARANTİSİ VERMEZ: çekim 6 QC'den
+düşebilir, `hook_teaser` üretilemeyebilir, yeni ses kapısı reddedebilir. Tablonun son satırı
+buna göre yazıldı.
+
+**PROOF:** YENİ `tests/test_main_shot_reserve.py`:
+- ep07 senaryosunu birebir simüle eder (cap 1900, omni 10 sn, 6 çekim, çekim 1-4'te birer
+  regen) ve **çağrı dizisini sırasıyla** iddia eder: R3 öncesi 6. ana çekim bloklanır,
+  R3 sonrası bloklanmaz.
+- `reserve=0.0` varsayılanıyla `authorize` davranışı bit-değişmez.
+- Kalan çekimlerden birinin tahmini `None` iken isteğe bağlı çağrı reddedilir (fail-closed).
+- Rezerv reddi `qc_budget["left"]`'i sıfırlamaz; sert tavan reddi sıfırlar (ikisi ayrı).
 Ek: `python -m pytest tests/test_credit_gate.py -q` yeşil.
 
 ---
@@ -445,6 +524,21 @@ planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
      total_parts 6` çökme durumu diske KALICI olarak yazılmaz (F-16).
   7. Son kontrol: `next_part == 7`, `total_parts == 10`, `batch == 5`, plans 7-10 var,
      11 YOK.
+
+  **Neden `total_parts` düşürülmek ZORUNDA (doğrulandı):** `replenish.py:1156`
+  `pending = max(0, total_parts - next_part + 1)`. Bu sayı DİSKTEKİ dosyalardan değil,
+  METADATA'dan gelir. `total_parts=10, next_part=7` ile `pending=4 >= min_queue=2` → no-op.
+  Ayrıca `replenish.py:1170` `start = total_parts + 1`, yani `total_parts=6` → `start=7`.
+
+  **Tur-2 F-13'e cevap , "durable recovery journal" GEREKMİYOR, reddediyorum.** Codex
+  süreç ortasında ölmeyi felaket sayıyor; bu operasyon **yerel çalışma ağacında** koşuyor
+  ve **yalnız son durum doğrulandıktan sonra commit ediliyor**. Süreç ölürse uzaktaki repo
+  hiç etkilenmez, `git checkout -- aimagine/from-scratch` her şeyi geri alır. Üstelik yarım
+  kalan durum kendi kendini onarır: `total_parts=6, next_part=7` → `pending = max(0, 0) = 0
+  < min_queue` → sonraki replenish `start=7`'den üretir. En kötü maliyet bir günlük gecikme,
+  kalıcı bozulma değil. `finally` + son koşul doğrulaması bu risk için YETERLİDİR.
+  (Staging dizini + atomik takas, replenish'in çıktı yolunu değiştirmeyi gerektirir , dört
+  kanalın ortak kod yolunda bu koşunun kapsamı dışında bir risk.)
 - **R4-g** Her yeni plan için
   `python -m series.preflight --series from-scratch --plan aimagine/from-scratch/plans/partNN.json`
   exit 0 (F-19: `--plan` gerçek dosya yolu ister).
@@ -543,6 +637,10 @@ Onaylı Plan 1 ROCK 3 bunu çözüyor ve hâlâ yapılmadı (ISSUES I-A).
 - **I-H:** §8.4'teki dört otomasyon önerisi.
 - **I-I:** Ses kapısı düşerse klipler önbellekte kalır ve sonraki koşu aynı sonuca varır;
   bilinçli olarak otomatik silmiyoruz, gürültülü duruyoruz (tur-1 F-5).
+- **I-J (orta, tur-2 F-4):** Bölüm-düzeyi `qc_audio`, "ekrandaki HER çekiç darbesinin kendi
+  senkron sesi var mı" sorusunu YANITLAMAZ. Yalnız "müzik yok + inşaat sesi var + sessizlik
+  az" der. Çekim-başına veya zaman damgalı görüntü-ses eşleme denetimi ayrı bir tasarımdır;
+  bu koşunun kapsamı dışında ve bilinçli olarak yapılmıyor.
 - Devralınanlar: usta için Kie referans-görseli, çekim 3→4 referans köprüsü, cross-shot QC.
 
 ---

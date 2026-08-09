@@ -90,3 +90,61 @@ indirilip ffprobe + Gemini ses denetimiyle ÖLÇÜLDÜ.
   (~126 kredi), İhsan onayına bağlı.
 
 **Plan r2 olarak yeniden yazıldı. Rock sayısı 3 → 4.**
+
+## Tur 2
+
+### Integrator bulguları (Codex, aynen)
+
+```
+- [FIX] One measured ep07 clip proves that the current Omni model can emit usable construction audio, not that Omni clips generally or reliably do so -> Narrow the claim to the sampled clip and treat the per-episode gate, not that measurement, as the delivery guarantee.
+- [FIX] ROCK 1 says unverifiable audio fails closed, but `qc_audio(final) is None` explicitly passes a loud file whose music/content is unknown -> Fail the required `native_audio` layer when semantic review is unavailable.
+- [FIX] The audio condition rejects empty `construction_sounds` only when silence also exceeds 50%, so loud wind, traffic, or other non-construction ambience passes -> Fail when `construction_sounds` is empty OR excessive silence is reported.
+- [FIX] Whole-episode `construction_sounds=["thud","whirring"]` cannot prove that each visible hammer, drill, or screwdriver action has its matching synchronized sound -> Review clips individually with the expected tool/action or perform timestamped audiovisual validation.
+- [FIX] `qc_audio` specifies required JSON but no type or range validation, so missing or malformed `silent_fraction_estimate` can crash or corrupt the gate decision -> Validate every field and treat invalid semantic output as an unavailable review.
+- [FIX] R1-j says both “hook then gate” and “immediately before return,” but `produce.py` still performs title cards, fact captions, upscale, sidecar/report work, and success logging after the hook -> Place the gate immediately after `_upscale_master` and before sidecars, reports, success logs, and `return final_ep`.
+- [FIX] Shot-plan word counts are valid at 40/42/41/40/40/44 and no prohibited noun matches, but lines 1–5 contain `only`, which rule (a)’s `_NEGATION_WORDS` rejects -> Replace “slow zoom the only movement” with the existing safe wording “slow zoom as its single movement.”
+- [CLARIFY] The plan never enumerates `BUILD_VERBS` or `TOOL_NOUNS`, so rule (f) cannot yet be checked against verbs such as `unloads`, `pours`, `screws`, `carries`, `hauls`, and `fastens` -> What are the exact two constant sets?
+- [FIX] The new `AUTONOMOUS_CLAUSES` list still misses existing self-building language such as `lock together`, `click into place`, `attaches`, and `mounts`, allowing generated bodies to pass while the structure assembles itself -> Add the measured variants or enforce builder causality at clause level.
+- [FIX] ROCK 3’s “today” column says three regens, but ep07’s logs show five main calls plus four regens, matching 80 + 9×200 = 1880 -> Correct the before table to four regens and make the regression test assert the exact call sequence.
+- [FIX] ROCK 3 guarantees budget for six main requests but cannot guarantee the table’s “combines and publishes” outcome because QC can drop shot 6, the required hook can fail, or the new audio gate can reject the final -> State and test only the funding guarantee, not publication.
+- [FIX] A reserve-based optional refusal currently sets `qc_budget["left"]=0`, which can starve a later cheaper regen after the future-main reserve has decreased -> Do not exhaust the global QC budget for a reserve-only refusal; recalculate reserve independently on later shots.
+- [FIX] R4-f restores only `series.json`, leaving deleted old plans or partially written replacement plans behind, and `finally` cannot recover from process termination -> Generate plans in a staging directory and atomically swap the complete validated set, or back up and restore both metadata and all four plans with a durable recovery journal.
+VERDICT: NOT YET```
+
+### Visionary yanıtı (Claude)
+
+- **KABUL F-1** (tek klip genel kanıt değil) → §1.1'e "İDDİANIN SINIRI" paragrafı eklendi;
+  teslimat garantisi ölçüm değil, bölüm-başına kapı.
+- **KABUL F-2** (`qc_audio is None` geçiyordu) → Artık **FAIL**. `required_layers`
+  fail-closed bir teslimat kapısıdır; doğrulanamayan ses doğrulanmış ses değildir.
+- **KABUL F-3** (`VE` koşulu gevşekti) → `construction_sounds` boş **VEYA** sessizlik >%50
+  → FAIL. Rüzgâr/trafik gürültüsü artık geçmez.
+- **KABUL, ÇÖZÜM ERTELENDİ F-4** (bölüm-düzeyi denetim her darbenin senkronunu kanıtlamaz)
+  → Doğru ve iddia daraltıldı; zaman damgalı görüntü-ses eşlemesi ISSUES **I-J**.
+- **KABUL F-5** (JSON alan doğrulaması yok) → Üç bool + liste + `0.0-1.0` aralık kontrolü;
+  geçersiz alan → sonuç `None` sayılır.
+- **KABUL F-6** (kapının yeri çelişkiliydi) → Doğrulandı: kancadan sonra `title_card_overlay`,
+  `fact_captions_overlay`, `_upscale_master` var. Kesin yer yazıldı: `_upscale_master`'dan
+  hemen sonra, sidecar/rapor/başarı logu ve `return`'den önce.
+- **KABUL F-7** (`only` yasaklı sözcük) → Doğrulandı (`rf_prompt_lint.py:44-45`), kendi
+  denetçim kendi satırlarımı reddedecekti. Altı satır "with a slow zoom as its single
+  movement" ile yeniden yazıldı; kelime sayıları 43/43/42/43/39/44.
+- **CEVAP F-8** (sabit kümeler yok) → `BUILD_VERBS`, `TOOL_NOUNS`, `AUTONOMOUS_CLAUSES`
+  tam içerikleriyle plana yazıldı.
+- **KABUL AMA RAFİNE F-9** (`attaches`, `mounts` de eklensin) → Etken üçüncü tekil biçimler
+  EKLENMEDİ: kendi çekim-3 satırım "the builder **mounts** exterior lamps" diyor ve meşru.
+  Kusur fiilde değil öznesizlikte. Listeye yalnız doğası gereği öznesiz öbekler ve EDİLGEN
+  biçimler girdi.
+- **KABUL F-10** (ep07 5 ana + 4 regen'di) → Doğrulandı, tablo düzeltildi; test artık çağrı
+  DİZİSİNİ iddia edecek.
+- **KABUL F-11** (ROCK 3 yayını garanti edemez) → İddia "finansman garantisi"ne daraltıldı.
+- **KABUL F-12** (`qc_budget["left"]=0` rezerv reddinde yanlış) → Doğrulandı
+  (`produce.py:975`); rezerv reddi ayrı dal, küresel bütçeyi sıfırlamaz.
+- **RED F-13** (staging dizini + recovery journal) → Operasyon YEREL çalışma ağacında koşuyor
+  ve yalnız son durum doğrulandıktan sonra commit ediliyor; süreç ölürse uzak repo etkilenmez
+  ve `git checkout` geri alır. Ayrıca yarım durum kendi kendini onarır
+  (`pending=0 < min_queue` → sonraki replenish `start=7`'den üretir). Staging + atomik takas,
+  dört kanalın ortak replenish çıktı yolunu değiştirmeyi gerektirir , bu koşunun kapsamı
+  dışında bir risk. `finally` + son koşul doğrulaması yeterli.
+
+**Plan r3.**
