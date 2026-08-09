@@ -1,20 +1,41 @@
 {
   "version": 1,
-  "generated_at": "2026-08-02T10:36:31.288400+00:00",
-  "source_snapshot": "2026-08-02",
+  "generated_at": "2026-08-09T09:34:23.971267+00:00",
+  "source_snapshot": "2026-08-09",
   "mode": "gecici_baseline",
-  "channel_median_30d": 18.0,
+  "channel_median_30d": 58.0,
   "series_stats": {
-    "n_published": 2,
-    "n_comparable": 1,
-    "series_median": 801.0,
+    "n_published": 6,
+    "n_comparable": 4,
+    "series_median": 75.5,
     "videos": [
       {
         "part": 3,
         "video_id": "5Ke4t1WRT3w",
         "family": "",
-        "metric": 801,
-        "age_h": 61.008
+        "metric": 812,
+        "age_h": 227.733
+      },
+      {
+        "part": 4,
+        "video_id": "XdlbRkY7J6o",
+        "family": "",
+        "metric": 77,
+        "age_h": 203.586
+      },
+      {
+        "part": 6,
+        "video_id": "WFsI2SxVoOM",
+        "family": "",
+        "metric": 74,
+        "age_h": 155.875
+      },
+      {
+        "part": 7,
+        "video_id": "q9MNNewPSlA",
+        "family": "",
+        "metric": 58,
+        "age_h": 131.366
       }
     ]
   },
@@ -29,8 +50,8 @@
       "part": 3,
       "video_id": "5Ke4t1WRT3w",
       "family": "",
-      "metric": 801,
-      "ratio": 44.5
+      "metric": 812,
+      "ratio": 14.0
     }
   ],
   "pilot_kill": {
@@ -41,8 +62,8 @@
     "active": false,
     "history": [
       null,
-      null,
-      801.0
+      801.0,
+      75.5
     ]
   },
   "brief_note": "",

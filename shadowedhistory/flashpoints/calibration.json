@@ -1,48 +1,84 @@
 {
   "version": 1,
-  "generated_at": "2026-08-02T10:36:30.324125+00:00",
-  "source_snapshot": "2026-08-02",
+  "generated_at": "2026-08-09T09:34:22.740746+00:00",
+  "source_snapshot": "2026-08-09",
   "mode": "gecici_baseline",
-  "channel_median_30d": 77.0,
+  "channel_median_30d": 95.0,
   "series_stats": {
-    "n_published": 3,
-    "n_comparable": 1,
-    "series_median": 20.0,
+    "n_published": 5,
+    "n_comparable": 4,
+    "series_median": 106.5,
     "videos": [
       {
         "part": 1,
         "video_id": "WG146S7KNnk",
         "family": "tuhaf savaş",
         "metric": 20,
-        "age_h": 61.04
+        "age_h": 227.764
+      },
+      {
+        "part": 2,
+        "video_id": "q-jVtry0ntk",
+        "family": "imkânsız mühendislik",
+        "metric": 242,
+        "age_h": 202.191
+      },
+      {
+        "part": 3,
+        "video_id": "IjR6ooIU6SQ",
+        "family": "yanılgı kırıcı",
+        "metric": 193,
+        "age_h": 178.387
+      },
+      {
+        "part": 4,
+        "video_id": "kMURIA0ZXfQ",
+        "family": "unutulmuş kişi",
+        "metric": 16,
+        "age_h": 154.287
       }
     ]
   },
   "family_stats": [
     {
+      "family": "imkânsız mühendislik",
+      "n": 1,
+      "median": 242.0
+    },
+    {
       "family": "tuhaf savaş",
       "n": 1,
       "median": 20.0
+    },
+    {
+      "family": "unutulmuş kişi",
+      "n": 1,
+      "median": 16.0
+    },
+    {
+      "family": "yanılgı kırıcı",
+      "n": 1,
+      "median": 193.0
     }
   ],
   "recommendations": {
     "boost_families": [],
-    "explore_family": "unutulmuş kişi",
+    "explore_family": "efsane vs kayıt",
     "empty_reason": null
   },
   "double_down": [],
   "pilot_kill": {
     "triggered": false,
-    "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
+    "detail": "pilot esigi tetiklenmedi"
   },
   "rollback": {
     "active": false,
     "history": [
       null,
-      null,
-      20.0
+      20.0,
+      106.5
     ]
   },
-  "brief_note": "early baseline, limited data. Reserve an exploration slot for unutulmuş kişi.",
+  "brief_note": "early baseline, limited data. Reserve an exploration slot for efsane vs kayıt.",
   "extra_topics": []
 }
