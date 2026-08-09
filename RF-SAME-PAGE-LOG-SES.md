@@ -267,3 +267,16 @@ ve giderildi; mimari bir itiraz KALMADI. Kural 4 gereği sahte onay verilmiyor: 
 | 4 | 3 | 3 | 0 |
 | 5 | 1 | 1 | 0 |
 
+### USER OVERRIDE (İhsan, 2026-08-09)
+
+Sert tavan sonrası karar İhsan'a taşındı. Kararlar:
+1. **Build onaylandı** , dört kayanın hepsi (ROCK 1, 2, 3, 4A/4B).
+2. **Canary onaylandı** , tam bölüm harcanmadan önce tek klip testi (~126 kredi).
+3. **`EPISODE_CREDIT_CAP` 1900 → 2200** (planın §9.2 önerisinin tersi; İhsan kararı).
+
+**Karar sırasında ölçülen ve İhsan'a bildirilen gerçek:** Kie bakiyesi **1436**
+(canlı API, 2026-08-09). `run_gate` eşiği `episode_cap × 1.5`:
+- tavan 1900 → eşik 2850 → **bloke**
+- tavan 2200 → eşik 3300 → **bloke**
+Yani tavan kararı yarınki sonucu DEĞİŞTİRMEZ; kredi yüklenmeden from-scratch hiç başlamaz.
+Diğer üç kanal tavan 900 (eşik 1350) ile bir bölüm daha üretebilir, sonra havuz onları da keser.
