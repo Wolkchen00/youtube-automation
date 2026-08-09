@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #oddlysatisfying #experiment #isitreal",
   "total_parts": 11,
-  "next_part": 10,
+  "next_part": 11,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -131,6 +131,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-08T19:25:42.584911+00:00"
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep10/ep10_narrated_music.mp4",
+      "subtitle": "Can I Turn A BOTTLE Into A NEVER-ENDING FOUNTAIN?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-09T19:28:52.519880+00:00"
     }
   }
 }
