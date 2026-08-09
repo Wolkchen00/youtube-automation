@@ -1,7 +1,7 @@
 # RF-PLAN-SES , AImagine: diegetik ses + görünür işçilik
 
 **Tarih:** 2026-08-09 · **Sürücü:** Claude (Visionary) / Codex (Integrator) · **Kanal:** AImagine
-`from-scratch` · **Sürüm:** r2 (Codex tur-1'in 22 bulgusu işlendi) · Log:
+`from-scratch` · **Sürüm:** r4 (Codex tur-1/2/3 bulguları işlendi) · Log:
 `RF-SAME-PAGE-LOG-SES.md`
 
 ## CORE FOCUS (tek cümle)
@@ -48,7 +48,7 @@ Gemini 2.5 Flash (ses girdisi) → {"has_music": false, "speech": false,
   "silent_fraction_estimate": 0.0}
 ```
 
-**Boru hattı İhsan'ın istediği sesi zaten üretiyor, sonra siliyor.**
+**Ölçülen bu klipte boru hattı, İhsan'ın istediği sesi üretmiş ve sonra silmiş.**
 
 **İddianın SINIRI (tur-2 F-1):** bu TEK bir klibin ölçümüdür. Kanıtladığı şey "Omni modeli
 kullanılabilir inşaat sesi üretebiliyor"dur; "her klip her zaman üretir" DEĞİL. Teslimat
@@ -69,9 +69,9 @@ kusur), birden fazla usta (3 kayıt), kamera kayması, ve "conflicting lighting 
 
 ## 2. KÖK NEDENLER (kod ve ölçümle doğrulanmış)
 
-### KN-1 , İnşaat sesi üretiliyor ve SİLİNİYOR
+### KN-1 , Üretilen inşaat sesi teslimattan önce SİLİNİYOR
 
-- Kanıt A: Omni klipleri dolu, müziksiz inşaat sesi taşıyor.
+- Kanıt A: ölçülen Omni klibi dolu, müziksiz inşaat sesi taşıyordu (tek örnek, genelleme değil).
   (Not: `build_omni_payload` , `omni_api.py:110-130` , bir ses bayrağı GÖNDERMEZ; Omni
   modeli sesi varsayılan üretiyor. `sound=bible.native_audio` , `produce.py:951,979` ,
   **ucuz görsel motor dalıdır** ve from-scratch `engine: "omni"` olduğu için o dala HİÇ
@@ -127,7 +127,7 @@ ep07'nin gerçek akışı: müzik 80 → çekim 1 ana 200 (280) → regen (480) 
 çekim 5 ana (1880) → çekim 5 regen 2080 > 1900 **reddedildi (isteğe bağlı)** → **çekim 6
 ana 2080 > 1900 → ENGELLENDİ → `return None` → "Part 7 üretilemedi"**.
 
-`qc_log`'daki 9 inceleme (6 ana + 3 regen) bu aritmetiği birebir doğrular.
+`qc_log`'daki 9 inceleme (**5 ana + 4 regen**) bu aritmetiği birebir doğrular.
 
 **Yapısal kusur:** erken çekimlerin isteğe bağlı regen'leri, sonraki ZORUNLU ana çekimleri
 aç bırakabiliyor. Müziği kaldırmak 80 kredi kazandırır ama `floor(1900/200)=9` çağrı sayısını
@@ -166,7 +166,7 @@ Ses akışı yok / ayrıştırılamıyor / ffmpeg patlıyor → `None`.
 - `_review_frames`'in retry/yedek-model kalıbıyla Gemini'ye verir, ZORUNLU JSON:
   `{"has_music": bool, "speech": bool, "construction_sounds": [string],
     "silent_fraction_estimate": float}`.
-- **Alan doğrulaması (tur-2 F-5):** üç bool gerçekten bool, `construction_sounds` gerçekten
+- **Alan doğrulaması (tur-2 F-5):** iki bool alanı (`has_music`, `speech`) gerçekten bool, `construction_sounds` gerçekten
   string listesi, `silent_fraction_estimate` gerçekten `0.0-1.0` aralığında sayı olmalı.
   Eksik / yanlış tipli / aralık dışı herhangi bir alan → sonuç GEÇERSİZ sayılır ve
   fonksiyon `None` döner (yarım JSON'la karar verilmez).
@@ -239,8 +239,10 @@ işle aynı cümledededir.
    - `bible.audio_fade` anahtarsız serilerde 0.25; `concatenate_audio_smooth` o değerle
      çağrılır (mock ile kanıt).
    - `qc_audio` sahte Gemini yanıtlarıyla: `has_music=True` → kapı FAIL;
-     `has_music=False, construction_sounds=["hammer"]` → kapı PASS; `None` → kapı PASS +
-     uyarı.
+     `speech=True` → FAIL; `construction_sounds=[]` → FAIL;
+     `silent_fraction_estimate=0.8` → FAIL; `None` (API hatası) → **FAIL** + notifier
+     çağrıldı + `return None`; `has_music=False, construction_sounds=["hammer"],
+     silent_fraction=0.1` → tek PASS hâli.
    - Zorunlu katman `native_audio` iken sessiz final → üretim `None` döner.
 4. Makine iddiası: `bible.music is False`; `"music" not in required_layers`;
    `"native_audio" in required_layers`; `aimagine/`, `sentinal_ihsan/`, `shadowedhistory/`,
@@ -341,7 +343,8 @@ fail-closed skora çevirmek istiyor. Üç sebeple hayır:
 
 - **Kural (f) ETKEN İNŞA.** `shot_plan` satırlarının HER BİRİ ve her plan çekim GÖVDESİ
   (önek ayrıldıktan sonra) üç şartı birden karşılamalı:
-  1. `the builder` + (en fazla 2 sözcük) + `BUILD_VERBS` içinden bir fiil;
+  1. `the builder` + (**en fazla 1 ara sözcük, o da `ALLOWED_MODIFIERS` içinden**) +
+     `BUILD_VERBS` içinden bir fiil;
   2. `TOOL_NOUNS` içinden en az bir ALET adı (malzeme adı yetmez , F-11);
   3. `AUTONOMOUS_CLAUSES` blokajından temiz olmalı.
   Sabitler modül başında demet, `PROHIBITED_NOUNS` ile aynı stilde, `normalize()` üzerinden
@@ -374,6 +377,22 @@ fail-closed skora çevirmek istiyor. Üç sebeple hayır:
   )
   # NOT: "level", "roller" ve "brush" bilerek DIŞARIDA , fiil hâlleriyle karışır
   # ("the builder levels the footing" bir alet adı SAYILMAMALI).
+
+  ALLOWED_MODIFIERS = (
+      "then","now","first","next","finally","also","still","again",
+      "quickly","slowly","carefully","steadily","patiently","methodically",
+  )
+  ```
+
+  **Tur-3 F-4 kabul , kural (f)(1) SIKILAŞTIRILDI.** Codex somut bir kaçak gösterdi:
+  "the builder watches panels **fitting** themselves" , iki serbest ara sözcük, gerçek özne
+  ustanın kendisi değil, ve "fitting themselves" blokajda yok. Serbest pencere kapatıldı:
+  artık ya `the builder <FİİL>` (sıfır ara sözcük) ya da `the builder <MODIFIER> <FİİL>`
+  (tek ara sözcük ve o da kapalı listeden). "watches panels" bu listeye giremez, dolayısıyla
+  kaçak kapanır. Altı `shot_plan` satırımın hepsi sıfır ara sözcükle yazılmıştır, etkilenmez.
+
+  ```python
+  # (yukarıdaki üç küme ile birlikte okunur)
 
   AUTONOMOUS_CLAUSES = (
       "rise","rises","rising","risen",
@@ -437,8 +456,13 @@ R1/R2/R3 anahtarlarıyla güncellenir. `doctrine_sha256` **motorun kendi fonksiy
 gösteriyor ki bölüm ne kadar iyi yazılırsa yazılsın, erken regen'ler son çekimin bütçesini
 yiyorsa video HİÇ çıkmıyor. Doğru ses ve doğru işçilik, ancak yayınlanan bir videoda görülür.
 
-**Done looks like:** Bir bölümün altı ANA çekimi her zaman finanse edilir; isteğe bağlı
-QC regen'leri yalnız arta kalan bütçeden harcanır.
+**Done looks like:** Bir bölümün altı ANA çekim isteği **bu bölümün `HardCreditCap`'i
+tarafından bloklanmaz**; isteğe bağlı QC regen'leri yalnız arta kalan bütçeden harcanır.
+
+**Tur-3 F-7 kabul, garanti sınırı:** rezerv YALNIZ bölüm-içi tavana karşı çalışır. Paylaşımlı
+Kie bakiyesi dört kanal tarafından eşzamanlı harcanıyor; `check_credit()` bakiyeyi yalnız
+loglar. Yani "altı çağrı gerçekten fonlanır" DEĞİL, "bu bölümün sert tavanı altı çağrıyı
+engellemez" garantisi verilir.
 
 - **R3-a** `series/credit_gate.py` → `HardCreditCap.authorize(..., reserve: float = 0.0)`.
   `optional=True` çağrılarda koşul `spent + estimate + reserve <= cap` olur.
@@ -450,7 +474,14 @@ QC regen'leri yalnız arta kalan bütçeden harcanır.
 - **R3-c** Rezerv yüzünden reddedilen isteğe bağlı çağrı **`qc_budget["left"] = 0` YAPMAZ**
   (tur-2 F-12 kabul). Bugün `produce.py:975` her isteğe bağlı ret için küresel QC bütçesini
   sıfırlıyor; bu, "sert tavan zehirlendi" sinyalidir ve rezerv reddi o anlama gelmez.
-  Rezerv reddi ayrı bir dalda ele alınır ve sonraki çekimlerde rezerv YENİDEN hesaplanır.
+  **Tur-3 F-6 kabul , mekanizma:** `authorize()` yalnız bool döndürüyor, ret sebebini
+  taşımıyor. Çözüm EKLEMELİ olsun: `HardCreditCap`'e `last_denial_kind` alanı eklenir
+  (`None` | `"cap"` | `"reserve"` | `"unknown"`), her ret bunu yazar, `produce` okur ve
+  yalnız `"cap"` retinde `qc_budget["left"] = 0` yapar. Codex'in "hiçbir isteğe bağlı rette
+  sıfırlama" önerisi daha basit ama mevcut sert-tavan davranışını da değiştirirdi; ekleme
+  yaklaşımı eski davranışı bit-değişmez bırakır (`credit_hard_cap` yalnız from-scratch'te
+  açık , doğrulandı , ama imza dört kanalın ortak kodunda).
+  Rezerv sonraki çekimlerde YENİDEN hesaplanır.
 - **R3-d** Etki `logger.info` ile yazılır: `"regen bütçesi: kalan=X, sonraki ana çekimler
   için ayrılan=Y"`.
 
@@ -510,35 +541,57 @@ planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
     çağrılmadığını iddia edecek şekilde çevrilir.
   - `tests/test_doctrine_gate.py:472` from-scratch cfg üçlüsündeki `music_prompt` beklentisi.
   - `tests/test_rf_transition_check.py:32,88` , `next_part` fikstürü.
-  Bu dört yer DIŞINDA hiçbir mevcut test iddiası değiştirilmez. Başka bir test kırılırsa
+  - **(tur-3 F-5)** `tests/test_rf_prompt_lint_adversarial.py::test_shot_plan_45_words_passes_46_fails`
+    , 45 kelimelik `"alpha" * 45` fikstürü sıfır ihlal bekliyor; kural (f) onu artık
+    reddeder. Fikstür, 45 kelimeye tamamlanmış GEÇERLİ bir usta/alet satırıyla değiştirilir
+    (sınır testinin amacı , 45 geçer / 46 düşer , AYNEN korunur).
+  - **(tur-3 F-5, aynı kök)** aynı dosyadaki `test_plan_body_60_words_passes_61_fails`
+    gövde fikstürü de aynı şekilde geçerli hâle getirilir.
+  Bu ALTI yer DIŞINDA hiçbir mevcut test iddiası değiştirilmez. Başka bir test kırılırsa
   Codex `BLOCKED:` yazıp DURUR (test yeniden yazmak yasak).
 - **R4-f** Plan geçişi, `finally` ile geri alınabilir tek bir betikle (F-15/F-16):
-  1. `python tools/rf_transition_check.py aimagine/from-scratch --snapshot`
-  2. `series.json` yedeklenir.
-  3. `plans/part07..part10.json` silinir.
-  4. `total_parts: 6` **ve** `auto_replenish.batch: 4` geçici olarak yazılır
+  1. `git status --porcelain` BOŞ olmalı (temiz ağaç ön kontrolü , tur-3 F-8).
+  2. `python tools/rf_transition_check.py aimagine/from-scratch --snapshot`
+  3. `series.json` yedeklenir.
+  4. **ÖNCE METADATA:** `total_parts: 6` **ve** `auto_replenish.batch: 4` yazılır
      (batch 5 kalırsa part11 üretilir , F-15).
-  5. Replenish koşar.
-  6. `total_parts: 10`, `batch: 5`, `next_part: 7` **doğrulanır ve geri yazılır**.
-     Herhangi bir adım patlarsa `series.json` yedekten geri yüklenir , `next_part 7 >
-     total_parts 6` çökme durumu diske KALICI olarak yazılmaz (F-16).
-  7. Son kontrol: `next_part == 7`, `total_parts == 10`, `batch == 5`, plans 7-10 var,
-     11 YOK.
+  5. **SONRA** `plans/part07..part10.json` silinir. (Sıra tur-3 F-8 ile ters çevrildi:
+     aradaki ölüm `total_parts=6` + planlar DURUYOR bırakır, `_adopt_orphans` bunları
+     sahiplenip `total_parts`'ı 10'a geri taşır , temiz dönüş.)
+  6. Replenish koşar.
+  7. `total_parts: 10`, `batch: 5`, `next_part: 7` **doğrulanır ve geri yazılır**.
+     Herhangi bir adım patlarsa `series.json` yedekten geri yüklenir (F-16).
+  8. Son kontrol: `next_part == 7`, `total_parts == 10`, `batch == 5`, plans 7-10 var,
+     11 YOK, `git status` yalnız beklenen dosyaları gösteriyor.
 
   **Neden `total_parts` düşürülmek ZORUNDA (doğrulandı):** `replenish.py:1156`
   `pending = max(0, total_parts - next_part + 1)`. Bu sayı DİSKTEKİ dosyalardan değil,
   METADATA'dan gelir. `total_parts=10, next_part=7` ile `pending=4 >= min_queue=2` → no-op.
   Ayrıca `replenish.py:1170` `start = total_parts + 1`, yani `total_parts=6` → `start=7`.
 
-  **Tur-2 F-13'e cevap , "durable recovery journal" GEREKMİYOR, reddediyorum.** Codex
-  süreç ortasında ölmeyi felaket sayıyor; bu operasyon **yerel çalışma ağacında** koşuyor
-  ve **yalnız son durum doğrulandıktan sonra commit ediliyor**. Süreç ölürse uzaktaki repo
-  hiç etkilenmez, `git checkout -- aimagine/from-scratch` her şeyi geri alır. Üstelik yarım
-  kalan durum kendi kendini onarır: `total_parts=6, next_part=7` → `pending = max(0, 0) = 0
-  < min_queue` → sonraki replenish `start=7`'den üretir. En kötü maliyet bir günlük gecikme,
-  kalıcı bozulma değil. `finally` + son koşul doğrulaması bu risk için YETERLİDİR.
-  (Staging dizini + atomik takas, replenish'in çıktı yolunu değiştirmeyi gerektirir , dört
-  kanalın ortak kod yolunda bu koşunun kapsamı dışında bir risk.)
+  **Tur-3 F-8 kabul , "kendi kendini onarır" iddiam EKSİKTİ.** Codex haklı: iki ölüm
+  penceresi var, ben yalnız birini saymıştım. Silme ÖNCE metadata SONRA yazılırsa,
+  aradaki ölüm `total_parts=10` + planlar YOK durumunu bırakır; `pending=4 >= min_queue`
+  olduğu için replenish no-op kalır ve kanal her gün sessizce başarısız olur. Ayrıca
+  `_adopt_orphans` yarım yazılmış part11 üretirse `git checkout --` onu SİLMEZ (takipsiz
+  dosya).
+
+  **Düzeltme , sıra TERS çevrildi ve temizlik zorunlu kılındı:**
+  1. Önce `git status --porcelain` BOŞ olmalı (temiz ağaç ön kontrolü).
+  2. Önce METADATA yazılır (`total_parts: 6`, `batch: 4`), SONRA planlar silinir.
+     Aradaki ölüm `total_parts=6` + planlar 7-10 DURUYOR demektir; `_adopt_orphans`
+     (`replenish.py:334`) ardışık öksüzleri sahiplenip `total_parts`'ı 10'a geri taşır ,
+     bugünkü duruma temiz dönüş.
+  3. Ölüm hâlinde açık geri alma (yalnız bu seri):
+     `git checkout -- aimagine/from-scratch && git clean -fd aimagine/from-scratch/plans`
+     , ikinci komut takipsiz part11'i de siler.
+  4. `finally` bloğu `series.json` yedeğini geri yükler ve son koşulları doğrular.
+
+  **Reddedilen kısım DURUYOR:** staging dizini + atomik takas + recovery journal
+  GEREKMİYOR. Operasyon yerel çalışma ağacında koşuyor, yalnız son durum doğrulandıktan
+  sonra commit ediliyor, uzak repo hiç etkilenmiyor ve yukarıdaki iki satırlık geri alma
+  her iki pencereyi de kapatıyor. Staging, replenish'in çıktı yolunu değiştirmeyi
+  gerektirir , dört kanalın ortak kod yolunda bu koşunun kapsamı dışında bir risk.
 - **R4-g** Her yeni plan için
   `python -m series.preflight --series from-scratch --plan aimagine/from-scratch/plans/partNN.json`
   exit 0 (F-19: `--plan` gerçek dosya yolu ister).
@@ -649,7 +702,10 @@ Onaylı Plan 1 ROCK 3 bunu çözüyor ve hâlâ yapılmadı (ISSUES I-A).
 
 - `aimagine/from-scratch/plans/part01..part06.json` ve `published.json` , bit-değişmez.
 - `series.json` → `next_part: 7`, `parts` bloğu, `status`, `publish_mode`, `priority`.
-- Diğer üç kanalın (sentinal_ihsan, shadowedhistory, galactic_experience) hiçbir dosyası.
+- **Diğer HER kurulu serinin** dosyaları (tur-3 F-10: `aimagine/` altında from-scratch
+  dışında `infinite-trip`, `the-drift`, `the-vast` de var ve aynı motor yollarını
+  paylaşıyorlar). Bit-değişmezlik kanıtı bu üçünü de KAPSAR, yalnız diğer üç kanal
+  klasörünü değil.
 - `series/critic.py` `_QC_SYSTEM` metni , motor kodu, dört kanal ortak (I-B ayrı karar).
 - `series/omni_api.py` `build_omni_payload` , Kie API'sine bilinmeyen alan EKLENMEZ.
 - `core/cost_tracker.py` maliyet tabloları , tahminler bilerek muhafazakâr.
