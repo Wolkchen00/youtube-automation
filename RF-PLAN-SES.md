@@ -581,6 +581,12 @@ planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
     (sınır testinin amacı , 45 geçer / 46 düşer , AYNEN korunur).
   - **(tur-3 F-5, aynı kök)** aynı dosyadaki `test_plan_body_60_words_passes_61_fails`
     gövde fikstürü de aynı şekilde geçerli hâle getirilir.
+  **Sahiplik , hangi kaya hangi iddiayı günceller** (her kayanın kendi kanıtı yeşil kalsın diye):
+  - ROCK 1 → `test_doctrine_gate.py:493` (`required_layers`), müzik çağrısı iddiası
+    (`generate_background_music` + `MUSIC_PROMPT_ALIASES`), `:472` (`music_prompt`).
+  - ROCK 2 → `test_rf_prompt_lint_adversarial.py` iki sınır fikstürü.
+  - ROCK 4A → `test_rf_transition_check.py:32,88` (`next_part`).
+
   Bu ALTI yer DIŞINDA hiçbir mevcut test iddiası değiştirilmez. Başka bir test kırılırsa
   Codex `BLOCKED:` yazıp DURUR (test yeniden yazmak yasak).
 ### ROCK 4 İKİ COMMIT'TİR (tur-5 F-1)
