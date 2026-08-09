@@ -4,6 +4,7 @@ FFmpeg Tools — Video Assembly & Processing
 Merge clips, add crossfades, create seamless loops, export to 9:16 vertical.
 """
 
+import re
 import subprocess
 from pathlib import Path
 
@@ -42,6 +43,25 @@ def get_video_duration(video_path: str | Path) -> float:
         return float(result.stdout.strip())
     except Exception:
         return 5.0
+
+
+def measure_mean_volume(path: str | Path) -> float | None:
+    """Return ffmpeg volumedetect's mean volume in dB, or None on any failure."""
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-i", str(path), "-af", "volumedetect", "-f", "null", "-"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode != 0:
+            return None
+        match = re.search(
+            r"mean_volume:\s*(-?(?:\d+(?:\.\d+)?|inf))\s*dB",
+            f"{result.stdout}\n{result.stderr}",
+            re.IGNORECASE,
+        )
+        return float(match.group(1)) if match else None
+    except Exception:
+        return None
 
 
 def get_video_height(video_path: str | Path) -> int:

@@ -26,6 +26,8 @@ yalnız "başarılı-fakat-bozuk" üretimde kredi yakar.
 
 import json
 import re
+import subprocess
+import tempfile
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -318,6 +320,145 @@ def _notify(msg: str, frames: list[Path] | None = None) -> None:
             notifier.send_message(msg)
     except Exception as e:
         logger.warning(f"⚠️ QC bildirimi gönderilemedi: {e}")
+
+
+_AUDIO_QC_SYSTEM = """You are a strict audio quality-control inspector for a construction video.
+Listen to the supplied audio and answer with STRICT JSON only:
+{
+  "has_music": bool,
+  "speech": bool,
+  "construction_sounds": [string],
+  "silent_fraction_estimate": float
+}
+Set has_music true for any musical score, song, melody, beat, or rhythmic music bed.
+List only clearly audible construction or building-work sounds in construction_sounds.
+Estimate the fraction of the supplied audio that is effectively silent from 0.0 to 1.0.
+Return ONLY the JSON object."""
+
+
+def _review_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
+    """Send an extracted audio sample to Gemini using the clip-QC retry/model pattern."""
+    if not GEMINI_API_KEY:
+        logger.warning("⚠️ Ses QC: GEMINI_API_KEY yok — ses doğrulanamıyor")
+        return None
+    try:
+        from google import genai
+        from google.genai import types
+    except ImportError as error:
+        logger.warning(f"⚠️ Ses QC: google-genai import edilemedi ({error})")
+        return None
+
+    try:
+        audio = audio_path.read_bytes()
+    except OSError as error:
+        logger.warning(f"⚠️ Ses QC: geçici mp3 okunamadı ({error})")
+        return None
+    parts = [
+        types.Part.from_bytes(data=audio, mime_type="audio/mpeg"),
+        types.Part.from_text(
+            text="Inspect this video's first 60 seconds of audio for the required fields."
+        ),
+    ]
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    cfg = types.GenerateContentConfig(
+        system_instruction=_AUDIO_QC_SYSTEM,
+        response_mime_type="application/json",
+        temperature=0.1,
+    )
+    last_error = None
+    for model in (QC_MODEL, QC_MODEL_FALLBACK):
+        for attempt in range(1, max_tries + 1):
+            try:
+                response = client.models.generate_content(
+                    model=model, contents=parts, config=cfg
+                )
+                return _parse_json(response.text or "")
+            except Exception as error:
+                last_error = error
+                message = str(error)
+                bad_json = isinstance(error, json.JSONDecodeError)
+                transient = any(
+                    marker in message
+                    for marker in (
+                        "503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
+                        "INTERNAL", "deadline",
+                    )
+                )
+                if (transient or bad_json) and attempt < max_tries:
+                    wait = 3 if bad_json else min(5 * attempt, 15)
+                    logger.warning(
+                        f"⚠️ Ses QC {model} geçici hata ({message[:60]}…) — "
+                        f"{wait}s sonra tekrar"
+                    )
+                    time.sleep(wait)
+                    continue
+                logger.warning(f"⚠️ Ses QC {model} başarısız: {message[:120]}")
+                break
+    logger.warning(f"⚠️ Ses QC yapılamadı ({last_error})")
+    return None
+
+
+def _audio_slug(path: Path) -> str | None:
+    """Infer output/series/<slug>/... so qc_audio can append the series QC log."""
+    parts = path.resolve().parts
+    lowered = [part.lower() for part in parts]
+    for index in range(len(parts) - 2):
+        if lowered[index:index + 2] == ["output", "series"]:
+            return parts[index + 2]
+    return None
+
+
+def _log_audio(path: Path, **values) -> None:
+    slug = _audio_slug(path)
+    if slug:
+        _log_event(slug, {"event": "audio", "file": path.name, **values})
+
+
+def qc_audio(path: str | Path) -> dict | None:
+    """Verify the first 60 seconds of delivered audio with strict Gemini JSON."""
+    media_path = Path(path)
+    try:
+        with tempfile.TemporaryDirectory(prefix="series-audio-qc-") as temp_dir:
+            sample = Path(temp_dir) / "sample.mp3"
+            result = subprocess.run(
+                [
+                    "ffmpeg", "-y", "-i", str(media_path), "-t", "60", "-vn",
+                    "-ac", "1", "-ar", "16000", "-codec:a", "libmp3lame", str(sample),
+                ],
+                capture_output=True, check=True, timeout=180,
+            )
+            if result.returncode != 0 or not sample.exists() or sample.stat().st_size == 0:
+                _log_audio(media_path, status="extract_failed")
+                return None
+            review = _review_audio(sample)
+    except Exception as error:
+        logger.warning(f"⚠️ Ses QC örneği çıkarılamadı ({error})")
+        _log_audio(media_path, status="extract_failed")
+        return None
+
+    valid = (
+        isinstance(review, dict)
+        and type(review.get("has_music")) is bool
+        and type(review.get("speech")) is bool
+        and isinstance(review.get("construction_sounds"), list)
+        and all(isinstance(item, str) for item in review["construction_sounds"])
+        and isinstance(review.get("silent_fraction_estimate"), (int, float))
+        and not isinstance(review.get("silent_fraction_estimate"), bool)
+        and 0.0 <= review["silent_fraction_estimate"] <= 1.0
+    )
+    if not valid:
+        logger.warning("⚠️ Ses QC zorunlu JSON alanları geçersiz")
+        _log_audio(media_path, status="invalid_json")
+        return None
+
+    normalized = {
+        "has_music": review["has_music"],
+        "speech": review["speech"],
+        "construction_sounds": review["construction_sounds"],
+        "silent_fraction_estimate": float(review["silent_fraction_estimate"]),
+    }
+    _log_audio(media_path, status="ok", **normalized)
+    return normalized
 
 
 def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,

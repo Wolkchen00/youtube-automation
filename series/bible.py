@@ -198,6 +198,18 @@ class Bible:
         return [str(item).strip() for item in value if str(item).strip()]
 
     @property
+    def audio_fade(self) -> float:
+        """Per-clip native-audio fade used by smooth concatenation."""
+        raw = self.data["series"].get("audio_fade", 0.25)
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.series.audio_fade float olmalı") from error
+        if not 0.0 <= value <= 1.0:
+            raise ValueError("bible.series.audio_fade 0.0 ile 1.0 arasında olmalı")
+        return value
+
+    @property
     def narration(self) -> dict:
         """Anlatım katmanı ayarı: {'channel': 'galactic_experiment'|'shadowedhistory'|...}.
         Boşsa anlatım eklenmez (motorun native sesi kullanılır)."""

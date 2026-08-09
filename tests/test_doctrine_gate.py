@@ -490,7 +490,7 @@ class InstalledSeriesTests(unittest.TestCase):
         self.assertNotIn("narration", scratch.data)
         self.assertTrue(scratch.chain_frames)
         self.assertEqual(scratch.chain_scope, "episode")
-        self.assertEqual(scratch.required_layers, ["hook_teaser", "music"])
+        self.assertEqual(scratch.required_layers, ["hook_teaser", "native_audio"])
         # KARAR-2 (Ihsan, 2026-08-08): require_all_shots KAPATILDI. Motor yetenegi hala
         # test_fixedframe.py::test_require_all_shots_blocks_merge_when_any_shot_missing'de korunuyor.
         self.assertFalse(scratch.require_all_shots)
@@ -516,6 +516,7 @@ class InstalledSeriesTests(unittest.TestCase):
         self.assertEqual(scratch_cfg["hook_shot"], 6)
         self.assertEqual(scratch_cfg["chain_breaks"], [1, 4])
         self.assertTrue(scratch_cfg["credit_hard_cap"])
+        self.assertFalse(scratch_cfg["music_prompt"])
         self.assertEqual(scratch_cfg["families"], canonical_families)
         self.assertEqual(len(scratch_cfg["shot_plan"]), 6)
         expected_pattern_families = [
@@ -556,8 +557,7 @@ class InstalledSeriesTests(unittest.TestCase):
                     video,
                 )
             narrate.assert_not_called()
-            self.assertEqual(music.call_args.args[0], "from-scratch")
-        self.assertEqual(music_generator.MUSIC_PROMPT_ALIASES["from-scratch"], "aimagine")
+            music.assert_not_called()
 
     def test_narration_register_names_unchanged_and_instructions_updated(self):
         shadow = narration.CHANNEL_NARRATION_CONFIG["shadowedhistory"]

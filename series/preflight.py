@@ -42,6 +42,10 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
                 or len(set(raw_layers)) != len(raw_layers)):
             errors.append("bible: required_layers benzersiz, boş olmayan string listesi olmalı")
     try:
+        bible.audio_fade
+    except ValueError as error:
+        errors.append(f"bible: {error}")
+    try:
         plan = load_plan(plan_path)
     except Exception as error:
         return [f"plan yüklenemedi: {error}"], trace
@@ -75,7 +79,7 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
         errors.extend(f"plan/cfg: {error}" for error in validate_plan_against_config(plan, cfg))
     if "chain_breaks" in cfg and not bible.chain_frames:
         errors.append("cfg: chain_breaks için bible.series.chain_frames=true olmalı")
-    unknown_layers = set(bible.required_layers) - {"hook_teaser", "music"}
+    unknown_layers = set(bible.required_layers) - {"hook_teaser", "music", "native_audio"}
     if unknown_layers:
         errors.append(f"bible: bilinmeyen required_layers: {sorted(unknown_layers)}")
     generic = validate_plan(plan, bible)

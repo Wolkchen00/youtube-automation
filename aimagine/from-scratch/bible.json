@@ -9,9 +9,10 @@
     "chain_scope": "episode",
     "required_layers": [
       "hook_teaser",
-      "music"
+      "native_audio"
     ],
     "audio_smooth": true,
+    "audio_fade": 0.06,
     "micro_trim": 0.25,
     "hook_teaser": {
       "enabled": true,
@@ -25,7 +26,7 @@
     }
   },
   "art_style": "Photoreal construction timelapse realism in vertical 9:16, bright daylight, saturated but believable color, tactile real materials with matte weathered surfaces, coherent site geography, and satisfying build progression. The viewpoint stays fixed for the whole shot: one unchanging position and angle, with a slow zoom as its single movement. Exactly one silent builder is present, working alone at mid-distance in a dark cap, dark crew-neck and work gloves, framed from behind or in profile with the full body inside the frame.",
-  "music": true,
+  "music": false,
   "characters": [],
   "environments": [],
   "props": []

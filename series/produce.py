@@ -307,6 +307,53 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     return out
 
 
+def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path) -> bool:
+    """Fail-closed delivery gate for a required native construction soundtrack."""
+    mean_volume = ffmpeg_tools.measure_mean_volume(final_ep)
+    logger.info(f"🔊 Diegetik ses ölçümü: mean_volume={mean_volume!r} dB")
+    audio_review = None
+    failure = None
+    if mean_volume is None:
+        failure = "mean_volume ölçülemedi veya ses akışı yok"
+    elif mean_volume < -50.0:
+        failure = f"mean_volume çok düşük ({mean_volume:.1f} dB < -50.0 dB)"
+    else:
+        audio_review = critic.qc_audio(final_ep)
+        logger.info(
+            "🔊 Diegetik ses Gemini ölçümü: "
+            + json.dumps(audio_review, ensure_ascii=False, sort_keys=True)
+        )
+        if audio_review is None:
+            failure = "Gemini ses denetimi doğrulanamadı (API/anahtar/JSON hatası)"
+        elif audio_review["has_music"] is True:
+            failure = "müzik algılandı"
+        elif audio_review["speech"] is True:
+            failure = "konuşma algılandı"
+        elif not audio_review["construction_sounds"]:
+            failure = "inşaat sesi algılanmadı"
+        elif audio_review["silent_fraction_estimate"] > 0.5:
+            failure = (
+                "sessiz bölüm oranı çok yüksek "
+                f"({audio_review['silent_fraction_estimate']:.3f} > 0.5)"
+            )
+    if not failure:
+        logger.info("✅ Diegetik ses kapısı geçti: müziksiz inşaat sesi doğrulandı")
+        return True
+
+    message = (
+        f"❌ Zorunlu teslimat katmanı doğrulanamadı: native_audio — {failure}. "
+        "Yayın durduruldu; ELLE BAK."
+    )
+    logger.error(message)
+    try:
+        from series import notifier
+        if notifier.enabled():
+            notifier.send_message(f"🔊 *{bible.title}* ep{number}: {message}")
+    except Exception as error:
+        logger.warning(f"⚠️ Diegetik ses kapısı bildirimi gönderilemedi: {error}")
+    return False
+
+
 # ─── 4K master (opt-in: bible.upscale; best-effort) ───────────────────────────
 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
@@ -670,8 +717,13 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 or len(set(raw_layers)) != len(raw_layers)):
             logger.error("❌ bible.series.required_layers benzersiz, boş olmayan string listesi olmalı")
             return None
+    try:
+        bible.audio_fade
+    except ValueError as error:
+        logger.error(f"❌ {error}")
+        return None
     required_layers = set(bible.required_layers)
-    unknown_layers = required_layers - {"hook_teaser", "music"}
+    unknown_layers = required_layers - {"hook_teaser", "music", "native_audio"}
     if unknown_layers:
         logger.error(
             f"❌ Bilinmeyen zorunlu teslimat katmanı: {', '.join(sorted(unknown_layers))}"
@@ -1051,7 +1103,9 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     if not merged:
         if bible.audio_smooth:
             # Atmosfer/müzik kanalları: çekim sınırlarında sesi yumuşat (pop/boşluk gider).
-            ffmpeg_tools.concatenate_audio_smooth(shot_files, raw_ep, clips_dir=sdir)
+            ffmpeg_tools.concatenate_audio_smooth(
+                shot_files, raw_ep, clips_dir=sdir, fade=bible.audio_fade
+            )
         else:
             # Diyalog kanalları: düz birleştir (söz baş/sonu kırpılmasın).
             ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
@@ -1158,6 +1212,11 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     # 4K master (opt-in): en-son final Topaz ile ×2 büyütülür (YouTube 4K);
     # IG/TikTok için 1080p delivery kopyası yanına bırakılır.
     final_ep = _upscale_master(bible, number, Path(final_ep))
+
+    if "native_audio" in required_layers and not _verify_native_audio_delivery(
+        bible, number, final_ep
+    ):
+        return None
 
     # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar).
     # chain_scope="episode" ise bölümler arası taşıma YOK — sidecar yazılmaz.
