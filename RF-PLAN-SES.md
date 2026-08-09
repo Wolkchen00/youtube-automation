@@ -548,7 +548,7 @@ Ek: `python -m pytest tests/test_credit_gate.py -q` yeşil.
 
 ---
 
-## 6. ROCK 4 , ARAÇ ONARIMI + PLAN YENİLEME
+## 6. ROCK 4 , ARAÇ ONARIMI (4A) + PLAN YENİLEME (4B)
 
 Tur-1'in F-13..F-20 bulgularının tamamı buraya toplandı. Araçlar önce onarılır, sonra
 planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
@@ -583,12 +583,22 @@ planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
     gövde fikstürü de aynı şekilde geçerli hâle getirilir.
   Bu ALTI yer DIŞINDA hiçbir mevcut test iddiası değiştirilmez. Başka bir test kırılırsa
   Codex `BLOCKED:` yazıp DURUR (test yeniden yazmak yasak).
+### ROCK 4 İKİ COMMIT'TİR (tur-5 F-1)
+
+Codex sert tavanda son bir gerçek kusur buldu ve haklı: **R4-a…R4-e'nin kendisi**
+`rf_prompt_lint.py`, `rf_transition_check.py` ve testleri değiştiriyor. R4-f başlarken ağaç
+bu yüzden kirli olur ve temiz-ağaç ön koşulu sağlanamaz.
+
+**Çözüm , ROCK 4 ikiye bölünür:**
+- **ROCK 4A (araç onarımı):** R4-a, R4-b, R4-c, R4-d, R4-e. Level-10 incelemesinden geçer,
+  test paketi yeşil olur ve **commit edilir**.
+- **ROCK 4B (plan geçişi):** R4-f, R4-g, R4-h, R4-i. Temiz ağaçtan başlar ve onarılmış
+  araçlarla koşar , kanıt artık yalan söyleyemez.
+
 - **R4-f** Plan geçişi, `finally` ile geri alınabilir tek bir betikle (F-15/F-16):
-  1. `git status --porcelain` BOŞ olmalı (temiz ağaç ön kontrolü , tur-3 F-8).
-     **Tur-4 F-3 çözümü:** bu çelişki değil, SIRA kuralıdır. ROCK 1, 2 ve 3 kendi Level-10
-     incelemelerinden geçip **commit edilir**; ROCK 4 ondan sonra başlar. Yani yeni doktrin
-     ve cfg değişiklikleri o noktada zaten commit'li olur ve ağaç gerçekten temizdir.
-     Snapshot yeni doktrin hash'ini görür. Beklenen-fark izin listesi GEREKMEZ.
+  1. `git status --porcelain` BOŞ olmalı. Bu, ROCK 1, 2, 3 ve **4A**'nın hepsi commit
+     edildiği için sağlanır (tur-4 F-3 + tur-5 F-1). Snapshot yeni doktrin hash'ini görür;
+     beklenen-fark izin listesi GEREKMEZ.
   2. `python tools/rf_transition_check.py aimagine/from-scratch --snapshot`
   3. `series.json` yedeklenir.
   4. **ÖNCE METADATA:** `total_parts: 6` **ve** `auto_replenish.batch: 4` yazılır

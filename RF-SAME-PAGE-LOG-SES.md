@@ -236,3 +236,34 @@ OK shot1 43 | OK shot2 43 | OK shot3 42 | OK shot4 44 | OK shot5 40 | OK shot6 4
 Sıfır ihlal. Kelime sayıları plandaki iddiayla birebir aynı.
 
 **Plan r5.**
+
+## Tur 5 , SERT TAVAN
+
+### Integrator bulgusu (Codex, aynen)
+
+```
+- [FIX] R4-f still cannot satisfy full-tree cleanliness because R4-a–e must modify `rf_prompt_lint.py`, `rf_transition_check.py`, and tests before the repaired tools can run, while r5 commits only ROCK 1–3 first -> Check cleanliness only for `aimagine/from-scratch`, or commit and verify R4-a–e before starting R4-f.
+
+VERDICT: NOT YET```
+
+### Visionary yanıtı (Claude)
+
+- **KABUL** → Haklı ve tur-4 F-3'teki kendi çözümümün eksik yanı. R4-a…e'nin kendisi
+  araçları ve testleri değiştiriyor, dolayısıyla R4-f başlarken ağaç kirli olurdu.
+  **ROCK 4 ikiye bölündü:** 4A (araç onarımı, commit edilir) → 4B (plan geçişi, temiz
+  ağaçtan başlar). Yeni makinerî gerekmedi, yalnız sıra.
+
+**Meeting sert tavana (5 tur) `VERDICT: NOT YET` ile ulaştı.** Kalan tek bulgu kabul edildi
+ve giderildi; mimari bir itiraz KALMADI. Kural 4 gereği sahte onay verilmiyor: karar
+İhsan'a taşındı.
+
+### Tur bazında yakınsama
+
+| Tur | Bulgu | Kabul | Red |
+|---|---|---|---|
+| 1 | 22 | 20 | 2 (F-7 KILL, F-8) |
+| 2 | 13 | 12 | 1 (F-13) |
+| 3 | 10 | 10 | 0 |
+| 4 | 3 | 3 | 0 |
+| 5 | 1 | 1 | 0 |
+
