@@ -1,9 +1,8 @@
 # RF-PLAN-SES , AImagine: diegetik ses + görünür işçilik
 
 **Tarih:** 2026-08-09 · **Sürücü:** Claude (Visionary) / Codex (Integrator) · **Kanal:** AImagine
-`from-scratch` · **Dosya adı çakışma kuralı:** `PLAN.md`, `RF-PLAN.md` ve `RF-PLAN-PROMPT.md`
-zaten var ve ilgisiz , bu koşunun kanonik plan dosyası **`RF-PLAN-SES.md`**, log dosyası
-**`RF-SAME-PAGE-LOG-SES.md`**.
+`from-scratch` · **Sürüm:** r2 (Codex tur-1'in 22 bulgusu işlendi) · Log:
+`RF-SAME-PAGE-LOG-SES.md`
 
 ## CORE FOCUS (tek cümle)
 
@@ -23,196 +22,226 @@ kendi kendine belirmesin, ustanın gözle görülür el işçiliğiyle yükselsi
 
 ---
 
-## 1. ÖLÇÜM , bugünkü gerçek durum (dünkü rapora göre DÜZELTME)
+## 1. ÖLÇÜM , bugünkü gerçek durum
 
-Kaynak: `aimagine/from-scratch/qc_log.jsonl` (yalnız `event="review"` sayıldı; `final_reject`
-aynı sebepleri tekrarlar ve tabloyu şişirir) + Actions koşuları 31281224993, 31319930400.
+Kaynak: `qc_log.jsonl` (yalnız `event="review"`; `final_reject` aynı sebepleri tekrarlar) +
+Actions koşuları 31281224993, 31319930400 + `series_log.csv`.
 
-| Bölüm | Koşu | İlk-deneme QC geçişi | Sonuç |
+| Bölüm | Koşu | İlk-deneme QC | Sonuç |
 |---|---|---|---|
-| ep06 | 2026-08-08 22:14 | 4/6 (çekim 6'nın ilk incelemesi Gemini API hatası, üretim kusuru değil → üretim kalitesi bazında 5/6) | ✅ **YAYINLANDI** |
-| ep07 | 2026-08-09 15:00 | **0/5** | ❌ **"Part 7 üretilemedi"** |
+| ep06 | 08-08 22:14 | 4/6 (çekim 6'nın ilk incelemesi Gemini API hatası, üretim kusuru değil → kalite bazında 5/6) | ✅ **YAYINLANDI** |
+| ep07 | 08-09 15:00 | **0/5** | ❌ **"Part 7 üretilemedi"** |
 
-**Dün "%83,3" dedim, o rakam yalnız ep06 içindi ve çekim 6'nın API hatasını saymıyordu.
-Bugünkü ep07 koşusu 0/5 ile çöktü ve kanal bugün yayın yapmadı.** Yani ROCK 1-3 kazanımı tek
-bölümde tuttu, ikinci bölümde tutmadı. Doğru okuma: iki bölüm birleşik **4-5/11**, ve
-varyans çok yüksek.
+**Dünkü "%83,3" rakamı yalnız ep06 içindi. Bugünkü ep07 çöktü, kanal bugün yayın yapmadı.**
+İki bölüm birleşik 4-5/11; varyans çok yüksek.
 
-ep07 bütçede öldü: klip başına 126 kredi, tavan 1880 → ~14 klip. 13 klip harcandı, çekim 6'ya
-sıra gelmeden bölüm durdu.
+### 1.1 KANIT A , native ses ZATEN doğru sesi taşıyor (bugün ölçüldü)
 
-### 1.1 Gemini'nin kendi cümleleri , İhsan'ın şikâyeti makine tarafından doğrulanmış
+`series_log.csv`'deki canlı Kie URL'inden bugünkü ep07 klibi indirildi
+(`2d3c1b9a...1786288937.mp4`, 10 sn):
 
-`issues` alanından, ep06-ep07:
+```
+ffprobe → stream 1: aac, 48000 Hz, 2 kanal          (ses akışı VAR)
+ffmpeg volumedetect → mean_volume: -29.7 dB, max_volume: -1.2 dB   (dolu, sessiz değil)
+Gemini 2.5 Flash (ses girdisi) → {"has_music": false, "speech": false,
+  "construction_sounds": ["thud","whirring"], "dominant_content": "construction sounds",
+  "silent_fraction_estimate": 0.0}
+```
 
-- "Materials (wagon, wood, crystals) **appear abruptly without continuous movement or arrival**,
-  breaking the satisfying build progression."
+**Boru hattı İhsan'ın istediği sesi zaten üretiyor, sonra siliyor.** Bu ölçüm, tur-1'in
+F-1 bulgusunu (kod alıntısı yanlıştı) düzeltirken ROCK 1'in temelini de sağlamlaştırır:
+artık varsayım değil, ölçüm.
+
+### 1.2 KANIT B , Gemini'nin kendi cümleleri (`issues`, ep06-ep07)
+
+- "Materials (wagon, wood, crystals) **appear abruptly without continuous movement or
+  arrival**, breaking the satisfying build progression."
 - "Furniture and decor **appear abruptly rather than being smoothly installed**."
 - "**Lack of smooth, continuous build progression; stages appear to jump rather than flow.**"
-- "The roof elements **appear and disappear non-linearly** during the build progression."
-- "Abrupt, **non-timelapse-like transformation** of the ground from rubble to paved surface."
+- "The roof elements **appear and disappear non-linearly**."
 
-Bu, madde 3'ün birebir makine kaydıdır. Şikâyet öznel değil, ölçülü.
-
-Yan bulgular (aynı log): kalıcı **ghosting/çift pozlama** (yeni baskın kusur), **birden fazla
-usta** (3 kayıt), **kamera kayması**, ve `art_style`'ın "bright daylight" sabitiyle yazarın
-neon gece sahnesi arasındaki **çelişki** ("The prompt has conflicting lighting descriptions").
+İhsan'ın 3. maddesinin birebir makine kaydı. Yan bulgular: ghosting/çift pozlama (yeni baskın
+kusur), birden fazla usta (3 kayıt), kamera kayması, ve "conflicting lighting descriptions".
 
 ---
 
-## 2. KÖK NEDENLER (kod ve log ile, tahmin değil)
+## 2. KÖK NEDENLER (kod ve ölçümle doğrulanmış)
 
-### KN-1 , Native inşaat sesi üretiliyor ve sonra SİLİNİYOR
+### KN-1 , İnşaat sesi üretiliyor ve SİLİNİYOR
 
-- Kie klipleri sesli üretiliyor: `core/kie_api.py:396` → `"generate_audio": bool(sound)`;
-  `produce.py:951,979` → `sound=bible.native_audio`; `bible.py:215` varsayılan **True**.
+- Kanıt A: Omni klipleri dolu, müziksiz inşaat sesi taşıyor.
+  (Not: `build_omni_payload` , `omni_api.py:110-130` , bir ses bayrağı GÖNDERMEZ; Omni
+  modeli sesi varsayılan üretiyor. `sound=bible.native_audio` , `produce.py:951,979` ,
+  **ucuz görsel motor dalıdır** ve from-scratch `engine: "omni"` olduğu için o dala HİÇ
+  girmez. Tur-1 F-1 haklıydı; payload'a bilinmeyen bir alan EKLEMİYORUZ.)
 - AImagine'de anlatım yok → `produce.py:236` bloğu atlanır → `narration_ok=False`.
-- `produce.py:292-295` bu durumda `mix_background_music(..., music_volume=0.9,
-  **replace_original=True**)` çağırır.
+- `produce.py:292-295` bu durumda
+  `mix_background_music(..., music_volume=0.9, replace_original=True)` çağırır.
 - `ffmpeg_tools.py:748-750`: `replace_original=True` → filtre yalnız `[bed][aout]`, yani
-  **videonun kendi ses kanalı tamamen düşürülür** ve Suno tek ses olur.
+  **klibin kendi ses kanalı tamamen düşürülür** ve Suno tek ses olur.
 
-Yani çekiç sesi zaten üretiliyor; boru hattı onu atıp yerine müzik koyuyor.
+Tasarım kasıtlıydı (`produce.py:219-227`): native ses kesişlerde "pop"lar; müzik bedi
+maskeliyordu. Müzik kalkınca bu dikiş sorunu geri gelir , ROCK 1 ayrıca çözer.
 
-**Bu tasarım kasıtlıydı** (`produce.py:219-227` yorumu): her AI klibinin native sesi kesişlerde
-"pop"lar ve boşluk bırakır; sürekli müzik bedi bu dikişleri maskeler. Müziği kaldırırken bu
-sorunu geri çağırıyoruz , ROCK 1 bunu ayrıca çözmek zorunda.
+### KN-2 , Altı çekimin hiçbirinde ustanın YAPTIĞI iş yazmıyor
 
-### KN-2 , Prompt'un altı çekiminde ustanın YAPTIĞI hiçbir iş yazmıyor
-
-Yürürlükteki `shot_plan` (özneyi düşüren edilgen çatı):
-
-- "An empty lot **is graded**, then road, fence and landscaping **are laid out**, then the
-  foundation **is marked**."
-- "Foundation, walls and roof frame **rise** inside that same composition."
-- "Cladding, roof, paint, exterior lighting and landscaping **are finished**."
-- "Furniture and decor **are installed**, the lighting **comes up**."
-
-Altı çekimde ustanın özne olduğu tek cümle var: "The builder arrives with materials."
-Model kendisine yazılanı üretiyor: kendi kendine kurulan bir yapı ve yanında duran bir adam.
+Yürürlükteki `shot_plan` özneyi düşüren edilgen çatıdır: "An empty lot **is graded**",
+"the foundation **is marked**", "Foundation, walls and roof frame **rise**",
+"Cladding, roof, paint ... **are finished**", "Furniture and decor **are installed**",
+"the lighting **comes up**". Ustanın özne olduğu tek cümle: "The builder arrives with
+materials." Model kendisine yazılanı üretiyor.
 
 ### KN-3 , Doktrin ustaya iş yapmayı açıkça YASAKLIYOR
 
-- `art_style`: "Photoreal construction **timelapse** realism" (timelapse = insan bulanıklaşır,
-  yapı sıçrar).
-- `brief` madde (3): "Ustaya el veya parmak yakın planı gerektiren ince motor iş verilmez;
-  **yürür, taşır, işaret eder, gözlemler**."
+`art_style`: "Photoreal construction **timelapse** realism". `brief` madde (3): "Ustaya el
+veya parmak yakın planı gerektiren ince motor iş verilmez; **yürür, taşır, işaret eder,
+gözlemler**." 2026-08-08'de anatomi redini azaltmak için kondu; İhsan'ın bugün reddettiği
+görüntü tam olarak budur.
 
-Bu kural 2026-08-08'de anatomi redlerini azaltmak için bilinçli konmuştu. İhsan'ın bugün
-reddettiği görüntü tam olarak budur.
+### KN-4 , QC yüzeyinde iki kendi kendini vuran yasak KALDI
 
-### KN-4 , QC yüzeyinde iki tane kendi kendini vuran yasak KALDI
+`critic.py:118`: `forbidden_elements` = *"the prompt explicitly forbids elements ... and a
+frame clearly shows one."* İki kaynak açık:
+1. `qc.notes`: "ta-da poses **are forbidden**" → Gemini logu: *"standing back and observing
+   the finished work, **could be interpreted as a forbidden presentation**"*. İnşaat bitince
+   ustanın geri çekilmesi bu türün en doğal karesidir.
+2. `art_style`: "**Exactly one** silent builder is present" → Gemini logu 3 kez:
+   *"violating the 'exactly one silent builder' rule"*.
 
-`critic.py:118` tanımı: `forbidden_elements` = *"the prompt explicitly forbids elements ... and
-a frame clearly shows one."* Yani prompt yüzeyindeki HER yasak, sık görülen bir üretim
-sonucunu sert redde çevirir. 2026-08-08'de kanıtlanan mekanizma budur; iki kaynak hâlâ açık:
+### KN-5 , `art_style` ışığı sabitliyor, sahneyle çelişiyor
 
-1. `qc.notes`: "Celebration, presentation gestures, looking at camera and ta-da poses **are
-   forbidden** in this channel."
-   → Gemini logu: *"The builder's final pose in frame 8, standing back and observing the
-   finished work, **could be interpreted as a forbidden presentation** or 'ta-da' gesture."*
-   İnşaat bitince ustanın geri çekilip bakması bu türün en doğal karesidir.
-2. `art_style`: "**Exactly one** silent builder is present."
-   → Gemini logu (3 kez): *"Multiple builders appear in frames 6 and 7, **violating the
-   'exactly one silent builder' rule**."*
+"bright daylight" + yazarın neon gece sahnesi = kendi kendisiyle çelişen prompt.
 
-Niyet doğru, yeri yanlış: ikisi de `issues` gözlemi olmalı, red sebebi değil.
+### KN-6 , ep07'yi öldüren şey QC DEĞİL, KREDİ TAVANIYDI (tur-1 F-21, doğrulandı)
 
-### KN-5 , `art_style` ışığı sabitliyor, yazar sahneyi çelişkiye sokuyor
+- `.github/workflows/from-scratch.yml:56` → `EPISODE_CREDIT_CAP=1900`.
+- `core/cost_tracker.py:67` → muhafazakâr tahmin `omni` 10 sn = **200** kredi
+  (gözlenen gerçek maliyet 126; tavan bilerek yüksek tutulmuş).
+- `CONSERVATIVE_FIXED_CREDITS[("music","suno")] = 80`.
+- `HardCreditCap.authorize` (`credit_gate.py:257`) her çağrıda **tahmini** ekler.
 
-`art_style` "bright daylight" diyor; yazar meşru biçimde ıslak neon gece sahnesi yazıyor.
-Kendi kendisiyle çelişen prompt artifact skorunu yükseltiyor ve bir regen yakıyor.
+ep07'nin gerçek akışı: müzik 80 → çekim 1 ana 200 (280) → regen (480) → çekim 2 ana (680)
+→ regen (880) → çekim 3 ana (1080) → regen (1280) → çekim 4 ana (1480) → regen (1680) →
+çekim 5 ana (1880) → çekim 5 regen 2080 > 1900 **reddedildi (isteğe bağlı)** → **çekim 6
+ana 2080 > 1900 → ENGELLENDİ → `return None` → "Part 7 üretilemedi"**.
+
+`qc_log`'daki 9 inceleme (6 ana + 3 regen) bu aritmetiği birebir doğrular.
+
+**Yapısal kusur:** erken çekimlerin isteğe bağlı regen'leri, sonraki ZORUNLU ana çekimleri
+aç bırakabiliyor. Müziği kaldırmak 80 kredi kazandırır ama `floor(1900/200)=9` çağrı sayısını
+değiştirmez , tek başına bu ölümü ÖNLEMEZ. ROCK 3 bunu çözer.
 
 ---
 
-## 3. ROCK 1 , DİEGETİK SES (müzik kalkar, inşaat sesi kalır)
+## 3. ROCK 1 , DİEGETİK SES
 
 **Done looks like:** AImagine bölümünün tek sesi kliplerin kendi inşaat sesidir; Suno hiç
-çağrılmaz; ses gerçekten var olduğu MAKİNEYLE doğrulanır ve yoksa bölüm fail-closed durur.
+çağrılmaz; teslim edilen dosyada müzik OLMADIĞI ve inşaat sesi OLDUĞU makineyle doğrulanır;
+doğrulanamıyorsa bölüm fail-closed durur.
 
 ### Değişiklikler
 
 **R1-a** `aimagine/from-scratch/bible.json` kök: `"music": false`.
 
-**R1-b** `bible.json` → `series.required_layers`: `["hook_teaser", "native_audio"]`
-(`music` çıkar, yerine ses-varlığı kapısı gelir). Müzik bir teslimat garantisiydi; yerine
-boşluk bırakmıyoruz, ölçülen bir kapı koyuyoruz.
+**R1-b** `bible.json` → `series.required_layers`: `["hook_teaser", "native_audio"]`.
 
 **R1-c** `bible.json` → `series.audio_fade: 0.06` (YENİ opt-in anahtar).
-Gerekçe: `concatenate_audio_smooth` varsayılan `fade=0.25` her kesişte 0,25 sn iniş + 0,25 sn
-çıkış üretir. Bu, müzik bedinin altında saklanmak üzere seçilmişti; bed kalkınca bölüm başına
-beş kez duyulur bir çukur olur. 0,06 sn tıkırtıyı keser, delik açmaz.
+`concatenate_audio_smooth` varsayılan `fade=0.25` her kesişte 0,25 in + 0,25 out yapar; bu
+müzik bedinin altında saklanmak için seçilmişti. Bed kalkınca bölüm başına beş duyulur çukur
+olur. 0,06 tıkırtıyı keser, delik açmaz.
 
-**R1-d** `series/bible.py`: yeni `audio_fade` property. Varsayılan **0.25** (anahtarı
-kullanmayan HER seri bit-değişmez), tip float, `0.0 <= v <= 1.0` dışında cfg hatası.
+**R1-d** `series/bible.py`: yeni `audio_fade` property, varsayılan **0.25**
+(anahtarı kullanmayan HER seri bit-değişmez), float, `0.0 <= v <= 1.0` dışı cfg hatası.
 
 **R1-e** `series/produce.py:1054`: `concatenate_audio_smooth(..., fade=bible.audio_fade)`.
 
 **R1-f** `core/ffmpeg_tools.py`: yeni `measure_mean_volume(path) -> float | None`.
 `ffmpeg -i <p> -af volumedetect -f null -` çıktısından `mean_volume: -XX.X dB` ayrıştırır.
-Ses akışı yoksa veya ayrıştırılamazsa `None`. ffmpeg yoksa/patlarsa `None` (çağıran karar verir).
+Ses akışı yok / ayrıştırılamıyor / ffmpeg patlıyor → `None`.
 
-**R1-g** `series/produce.py:674`: `unknown_layers` beyaz listesi
-`{"hook_teaser", "music", "native_audio"}` olur. (`music` beyaz listede KALIR , başka seriler
-kullanıyor.)
+**R1-g** `series/critic.py`: yeni `qc_audio(path) -> dict | None`.
+- ffmpeg ile ilk 60 sn'yi 16 kHz mono mp3'e çıkarır (geçici dosya, sonra silinir).
+- `_review_frames`'in retry/yedek-model kalıbıyla Gemini'ye verir, ZORUNLU JSON:
+  `{"has_music": bool, "speech": bool, "construction_sounds": [string],
+    "silent_fraction_estimate": float}`.
+- API hatası / anahtar yok → `None` (pass-through; `qc_shot`'ın "skip" felsefesi , Gemini
+  kesintisi bir bölümü öldürmez).
+- Sonuç `qc_log.jsonl`'a `{"event": "audio", ...}` olarak yazılır (ölçülebilir olsun).
 
-**R1-h** `series/produce.py` `_post_process`: `required_layers` içinde `native_audio` varsa,
-tüm katmanlardan SONRA final dosya ölçülür. `None` (ses akışı yok) **veya**
-`mean_volume < -50.0 dB` ise `logger.error` + `return None` (fail-closed, `music` kapısının
-aynısı). Ölçülen değer her hâlükârda `logger.info` ile loga yazılır , sessiz teslimat bir daha
-fark edilmeden geçmesin.
+**R1-h** `series/produce.py:674`: `unknown_layers` beyaz listesi
+`{"hook_teaser", "music", "native_audio"}`.
 
-**R1-i** `aimagine/from-scratch/series.json`: `auto_replenish.music_prompt: false`,
-`auto_replenish.music_style` anahtarı SİLİNİR. Yazar artık Suno prompt'u yazmaz.
+**R1-i** `series/preflight.py:78`: **AYNI** beyaz liste orada da güncellenir.
+(Tur-1 F-6: preflight'ın kendi kopyası var; yalnız produce'u güncellemek preflight'ı
+kırar.)
 
-**R1-j** Ses yönü PROMPT yüzeyine, OLUMLU cümleyle yazılır (olumsuzlama hem denetçi kuralı
-(a)'yı ihlal eder hem `forbidden_elements`'i besler , KN-4):
-`art_style` sonuna eklenen cümle:
-`The soundtrack is the work itself, close and dry: tool impacts, motor whine, material scrape and open-air site ambience.`
-ve her `shot_plan` satırı o fazın duyulan aletini adıyla taşır (ROCK 2, R2-b).
+**R1-j** Kapı, TÜM dönüşümlerden SONRA, YAYINLANACAK dosya üzerinde koşar
+(tur-1 F-4). Sıra: birleştirme → `_post_process` (anlatım/müzik) → hook teaser →
+**ses kapısı** → yükleme. Kapı `produce`'un final dosyayı döndürdüğü noktadan hemen önce
+çağrılır, `_post_process`'in içinden değil.
 
-**R1-k** `brief` madde (5) yeniden yazılır:
+Kapı mantığı (`native_audio` zorunlu katmandaysa):
+1. `measure_mean_volume(final)` → `None` veya `< -50.0 dB` ise **FAIL**.
+2. `critic.qc_audio(final)`:
+   - `None` → geçir, `logger.warning` (Gemini kesintisi bölüm öldürmez).
+   - `has_music is True` → **FAIL** (İhsan'ın 1 numaralı şartı).
+   - `speech is True` → **FAIL** (kanalda konuşma yok).
+   - `construction_sounds` boş **VE** `silent_fraction_estimate > 0.5` → **FAIL**.
+3. FAIL → `logger.error` + `notifier` mesajı + `return None` (durum ilerlemez).
+   Ölçülen değerler her hâlükârda loglanır.
 
+**Tur-1 F-5 kararı (kabul, farklı çözümle):** ses kapısı düşerse çekim dosyaları
+önbellekte kalır ve sonraki koşu aynı sonuca varır. Klipleri otomatik silmiyoruz , 6 klip
+yeniden üretmek ~1200 kredidir ve aynı sonucu vermesi beklenir. Bunun yerine kapı düştüğünde
+**Telegram uyarısı** gider ve mesaj "ELLE BAK" der. Sessiz döngü yerine gürültülü durma.
+
+**R1-k** `series.json`: `auto_replenish.music_prompt: false`, `auto_replenish.music_style`
+anahtarı SİLİNİR.
+
+**R1-l** `brief` madde (5):
 ```
 (5) SES: Müzik yoktur ve müzik prompt'u yazılmaz. Bölümün tek sesi sahnenin kendi sesidir:
 aletin darbesi, motorun uğultusu, malzemenin sürtünmesi, açık hava şantiye ortamı. Her çekim
-prompt'unda EN AZ BİR duyulur alet eylemi bulunur (çekiç vuruşu, matkap uğultusu, testere
-sesi, tornavida tıkırtısı gibi) ve bu eylem ustanın yaptığı işle aynı cümlededir.
+prompt'unun gövdesinde EN AZ BİR duyulur alet eylemi bulunur ve bu eylem ustanın yaptığı
+işle aynı cümledededir.
 ```
 
-### Riskler (açıkça)
+**R1-m** Ses yönü `art_style`'a OLUMLU cümleyle girer (R2-a içinde).
 
-- Doktrin §3.4 "müzik = hipnozun yarısı" diyordu ve müzik `required_layers` kapısıydı.
-  Bu, İhsan'ın açık kararıyla iptal ediliyor; doktrin v2.3'te güncellenir.
-- Dikiş sesi: R1-c azaltır, sıfırlamaz. Kesişte ton sıçraması kalırsa çare `acrossfade`
-  değil (video ile senkron kayar) , ISSUES'a yazılır.
-- Kie'nin native sesinin gerçekten alet sesi taşıdığı ilk canlı koşuda ÖLÇÜLECEK; R1-h
-  yalnız "ses var mı" der, "çekiç sesi mi" demez.
+### Riskler
 
-### PROOF (Codex koşacak, ben tekrar koşacağım)
+- Doktrin §3.4 "müzik = hipnozun yarısı" diyordu; İhsan'ın açık kararıyla iptal, v2.3'te
+  güncellenir.
+- Dikiş: R1-c azaltır, sıfırlamaz. Kalırsa çözüm `acrossfade` DEĞİL (video ile senkron
+  kayar) , ISSUES I-E.
+- `qc_audio` bölüm başına 1 Gemini çağrısı ekler (ücretsiz kotada, ihmal edilebilir).
+
+### PROOF
 
 1. `python -m pytest tests/ -q` , tamamı yeşil.
-2. `python tools/rf_prompt_lint.py --series aimagine/from-scratch` , 0 ihlal.
-3. YENİ `tests/test_diegetic_audio.py`:
-   - ffmpeg ile iki adet 2 sn'lik klip üretilir (biri 440 Hz ton, biri sessiz);
-     `concatenate_audio_smooth(..., fade=0.06)` sonucu ses akışı taşır ve
-     `measure_mean_volume` tonlu birleşimde > -50 dB, sessizde < -50 dB (veya None) döner.
-   - ffmpeg yoksa test `skip` olur (CI'da ffmpeg var, yerelde olmayabilir).
-   - `bible.audio_fade` varsayılanı 0.25; anahtar yokken `concatenate_audio_smooth`
-     0.25 ile çağrılır (mevcut serilerin bit-değişmezliği).
-   - `native_audio` zorunlu katmanken sessiz final → `_post_process` `None` döner.
-4. Makine iddiası: `bible.music is False`, `"music" not in required_layers`,
-   `"native_audio" in required_layers`, ve `aimagine/`, `sentinal_ihsan/`,
-   `shadowedhistory/`, `galactic_experience/` altındaki DİĞER hiçbir bible'da `audio_fade`
-   anahtarı yok.
+2. `python tools/rf_prompt_lint.py aimagine/from-scratch` , 0 ihlal.
+   (Tur-1 F-19: araç **konumsal** `series_dir` alır, `--series` DEĞİL.)
+3. YENİ `tests/test_diegetic_audio.py` (ffmpeg yoksa `skip`):
+   - ffmpeg ile 440 Hz tonlu ve tam sessiz 2 sn'lik klipler üretilir;
+     `measure_mean_volume` tonluda > -50 dB, sessizde `< -50 dB` veya `None`.
+   - Ses akışı HİÇ olmayan dosyada `measure_mean_volume` → `None` (patlamaz).
+   - `bible.audio_fade` anahtarsız serilerde 0.25; `concatenate_audio_smooth` o değerle
+     çağrılır (mock ile kanıt).
+   - `qc_audio` sahte Gemini yanıtlarıyla: `has_music=True` → kapı FAIL;
+     `has_music=False, construction_sounds=["hammer"]` → kapı PASS; `None` → kapı PASS +
+     uyarı.
+   - Zorunlu katman `native_audio` iken sessiz final → üretim `None` döner.
+4. Makine iddiası: `bible.music is False`; `"music" not in required_layers`;
+   `"native_audio" in required_layers`; `aimagine/`, `sentinal_ihsan/`, `shadowedhistory/`,
+   `galactic_experience/` altındaki DİĞER hiçbir bible'da `audio_fade` anahtarı yok.
 
 ---
 
-## 4. ROCK 2 , GÖRÜNÜR İŞÇİLİK (yapı kendi kendine belirmez)
+## 4. ROCK 2 , GÖRÜNÜR İŞÇİLİK
 
-**Done looks like:** Altı çekimin altısında da ustanın özne olduğu, adı konmuş bir aletle
-yapılan bir iş vardır; malzeme çekim 1'de sahneye TAŞINARAK girer; QC yüzeyinde red üreten
-yasak cümlesi kalmaz; bu kural makineyle denetlenir.
+**Done looks like:** Altı çekimin altısında da ustanın özne olduğu, adı konmuş bir ALETLE
+yapılan bir iş vardır; malzeme çekim 1'de sahneye taşınarak girer; QC yüzeyinde red üreten
+yasak cümlesi kalmaz; hepsi makineyle denetlenir.
 
 ### Değişiklikler
 
@@ -220,21 +249,25 @@ yasak cümlesi kalmaz; bu kural makineyle denetlenir.
 Gemini'ye gider , `shots.py:48,137` + `produce.py:897`):
 
 ```
-Photoreal construction realism in vertical 9:16, natural light that matches the scene, saturated but believable color, tactile real materials with matte weathered surfaces, coherent site geography, and continuous hands-on build progression in briskly accelerated real time. The viewpoint stays fixed for the whole shot: one unchanging position and angle, with a slow zoom as its single movement. A single recurring builder does all the work alone at mid-distance in a dark cap, dark crew-neck and work gloves, framed from behind or in profile with the full body inside the frame. Every change in the structure comes from his visible action in the same shot: he carries each piece in, sets it in place and fastens it with a real tool before it becomes part of the build. The soundtrack is the work itself, close and dry: tool impacts, motor whine, material scrape and open-air site ambience.
+Photoreal construction realism in vertical 9:16, natural light that matches the scene, saturated but believable color, tactile real materials with matte weathered surfaces, coherent site geography, and continuous hands-on build progression in briskly accelerated real time. The viewpoint stays fixed for the whole shot: one unchanging position and angle, with a slow zoom as its single movement. The build is carried out by one recurring builder who does every task himself, working at mid-distance in a dark cap, dark crew-neck and work gloves, framed from behind or in profile with the full body inside the frame. Every change in the structure comes from his visible action in the same shot: he carries each piece in, sets it in place and fastens it with a real tool before it becomes part of the build. The soundtrack is the work itself, close and dry: tool impacts, motor whine, material scrape and open-air site ambience.
 ```
 
-Neyi neden değiştirdi:
-- `timelapse` → `continuous hands-on build progression in briskly accelerated real time`
-  (hız korunur, sıçrama gider , Gemini'nin "stages jump rather than flow" şikâyeti).
-- `bright daylight` → `natural light that matches the scene` (KN-5 çelişkisi biter).
-- `Exactly one silent builder is present` → `A single recurring builder does all the work
-  alone` (aynı niyet, yasak cümlesi değil , KN-4/2).
-- YENİ nedensellik cümlesi: değişimin sebebi ustanın görünür eylemidir (KN-2'nin panzehiri).
-- YENİ ses cümlesi (R1-j).
+| Ne değişti | Neden |
+|---|---|
+| `timelapse` → `continuous hands-on build progression in briskly accelerated real time` | Hız korunur, sıçrama gider (Gemini: "stages jump rather than flow") |
+| `bright daylight` → `natural light that matches the scene` | KN-5 çelişkisi biter |
+| `Exactly one silent builder is present` → `The build is carried out by one recurring builder who does every task himself` | KN-4/2: dışlama cümlesi değil, tarif |
+| YENİ nedensellik cümlesi | KN-2'nin panzehiri |
+| YENİ ses cümlesi | R1-m |
 
-**R2-b** `series.json` → `auto_replenish.shot_plan` altı satır, ETİKETSİZ JSON dizisi
-(numaralandırma prompt'a yazı olarak sızıyor , v2.2 dersi). Hepsi etken çatı, ustanın öznesi,
-adı konmuş alet ve duyulan ses; hepsi ≤45 kelime (denetçi kuralı c):
+**Tur-1 F-12 kısmen kabul:** "one recurring builder" hâlâ tekillik ima eder ve Gemini bunu
+ihlal olarak okuyabilir. Tam çözüm yok: cümleyi tamamen atarsak Kie yine kalabalık üretir
+(v2.1'de ölçüldü). "exactly one" / "alone" gibi dışlama sözcükleri çıkarıldı; ikinci figür
+artık `qc.notes` ile `issues`'a yönlendiriliyor. Kalan risk kabul edildi ve ölçülecek.
+
+**R2-b** `series.json` → `auto_replenish.shot_plan`, ETİKETSİZ JSON dizisi (numaralandırma
+prompt'a yazı olarak sızıyor , v2.2 dersi). Hepsi etken çatı + ustanın öznesi + adı konmuş
+ALET + duyulan ses; hepsi ≤45 kelime:
 
 ```json
 [
@@ -243,12 +276,12 @@ adı konmuş alet ve duyulan ses; hepsi ≤45 kelime (denetçi kuralı c):
   "The same fixed exterior view continues from the previous final frame, slow zoom the only movement. The builder screws on cladding with a whining drill, lays roofing, rolls paint across the walls, mounts exterior lamps, then plants and waters the landscaping.",
   "A fresh interior wide scene, position and angle fixed, slow zoom the only movement. The builder carries in boards, screws up interior walls, snaps flooring together with a rubber mallet, and runs conduit and lighting cable, matching the exterior materials.",
   "The same fixed interior view continues from the previous final frame, slow zoom the only movement. The builder hauls furniture in, assembles it with a clicking screwdriver, hangs decor, fits the lamps, flips the switch, and wipes the surfaces clean.",
-  "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps fastening the last trim."
+  "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder fastens the last trim with a whining screwdriver."
 ]
 ```
 
-Çekim 1 İhsan'ın madde 4'ünü birebir karşılar: yüklü römork gelir, usta malzemeyi ELLE indirir,
-sonra inşaata başlar.
+Çekim 1 İhsan'ın 4. maddesini birebir karşılar: yüklü römork gelir, usta malzemeyi ELLE
+indirir, sonra inşaata başlar. Çekim 6'ya tur-1 F-11 gereği gerçek alet + ses eklendi.
 
 **R2-c** `bible.json` → `series.qc.notes` TAMAMEN şu metinle değişir:
 
@@ -256,187 +289,273 @@ sonra inşaata başlar.
 This channel builds one structure and delivers one final reveal; record any second structure or second reveal under issues. A second figure in the frame, camera-lock drift across a chained shot, a change in the recurring builder's cap, crew-neck, gloves or established look, and a break in the structure's material or design language are continuity observations: record them under issues. A celebration pose, a presentation gesture or a look at camera is also a continuity observation for this channel: record it under issues. Reserve the numeric score for genuine generation defects as defined in your instructions. When the structure changes state with no visible action causing it, record that under issues as well. hook_shot is 6 and the hook teaser comes from near the end of shot 6 while the finished exterior is visible.
 ```
 
-- "forbidden" kelimesi tamamen çıktı (KN-4/1).
-- İkinci figür artık `issues` gözlemi (KN-4/2).
-- "görünür eylem olmadan durum değişimi" `issues`'a KAYDEDİLİR ama **skora yazılmaz**.
-  Gerekçe: bugün bütçe zaten dar (ep07 13 klipte öldü); yeni bir sert red kaynağı açmak
-  "sıfır video" riskini büyütür. Birincil kaldıraç prompt'tur; bu satır ölçüm gözüdür.
-  **Terfi tetiği:** ardışık iki bölümde hâlâ "appear abruptly / jump rather than flow"
-  sınıfı kayıt varsa, bu satır skorlanır hâle getirilir (ayrı karar, ISSUES).
-- `qc.notes` yalnız Gemini'ye gider, Kie'ye GİTMEZ; bu yüzden içindeki "camera" kelimesi
-  yasaklı-nesne taramasına GİRMEZ. Denetçi kuralı (b) `qc.notes`'a uygulanmayacak.
+- "forbidden" tamamen çıktı (KN-4/1); ikinci figür `issues` gözlemi (KN-4/2).
+- `qc.notes` yalnız Gemini'ye gider, Kie'ye GİTMEZ → içindeki "camera" kelimesi yasaklı-nesne
+  taramasına GİRMEZ. Denetçi kuralı (b) `qc.notes`'a uygulanmayacak.
+
+**Tur-1 F-7 [KILL] REDDEDİLDİ, gerekçeli.** Codex "kendi kendine inşa" gözlemini HEMEN
+fail-closed skora çevirmek istiyor. Üç sebeple hayır:
+1. `_QC_SYSTEM` (`critic.py:119`) `artifact_score`'u zaten "impossible physics" ile tanımlar;
+   yoktan beliren nesne bunun içindedir ve ep07'nin 7-9 skorları kısmen buradan geldi. Yani
+   şu an bile TAMAMEN skorsuz değil.
+2. Birincil kaldıraç prompt'tur (R2-a/b). Yeni bir sert red sınıfı, kredi tavanı bu kadar
+   darken (KN-6) "sıfır video" gününü garantiler. Bir kusurlu video, sıfır videodan daha
+   iyi Core Focus'a hizmet eder.
+3. Ölçüm gözü kapalı kalmıyor: satır `issues`'a yazıyor, yani terfi kararı VERİYLE alınacak.
+   **Terfi tetiği:** ardışık iki bölümde hâlâ "appear abruptly / jump rather than flow"
+   sınıfı kayıt varsa satır skorlanır (ISSUES I-G).
 
 **R2-d** `series.json` → `auto_replenish.brief`:
-- Madde (3) sonu değişir: "Ustaya el veya parmak yakın planı gerektiren ince motor iş
-  verilmez; yürür, taşır, işaret eder, gözlemler." **→**
+- Madde (3) sonu: "ince motor iş verilmez; yürür, taşır, işaret eder, gözlemler" **→**
   `Usta işi KENDİ ELİYLE yapar: malzemeyi indirir, taşır, yerine koyar, aletle sabitler.
   İş ORTA MESAFEDEN, tam vücut kadrajda görünür; el veya parmak makro yakın planı yoktur.`
-- Madde (5) R1-k ile değişir.
+- Madde (5) → R1-l.
+- Madde (9) netleştirilir (tur-1 F-10): `Öneki KELİME KELİME tekrarlama; ama gövdede
+  ustanın O SAHNEDE yaptığı işi kendi sözcüklerinle YAZ. Önekle gövdenin ortak 8-kelimelik
+  dizisi olmamalı, ustanın özne olması ise ZORUNLUDUR.`
 - YENİ madde (10):
   `(10) ETKEN ÇATI: Her çekim prompt'unun gövdesinde usta ÖZNEDİR ve bir iş yapar
-  ("the builder <fiil>"). Yapının kendi kendine değiştiğini anlatan öznesiz edilgen cümle
-  ("is built", "are installed", "rise", "goes up") YAZILMAZ. Her gövdede en az bir alet veya
-  malzeme adı geçer ve o aletin sesi duyulur.`
+  ("the builder <fiil>"). Gövdede en az bir ALET adı geçer. Yapının kendi kendine
+  değiştiğini anlatan öznesiz cümle ("rise", "go up", "are installed", "are finished",
+  "is laid", "appear") YAZILMAZ.`
 
-**R2-e** `tools/rf_prompt_lint.py` iki yeni kural:
-- **Kural (f) ETKEN İNŞA:** `shot_plan` satırlarının HER BİRİ ve her plan çekim gövdesi
-  (`plans/part*.json` → `shots[].prompt` gövdesi, önek ayrıldıktan sonra) şunları taşımalı:
-  (1) `the builder` + (en fazla 2 sözcük ara) + `BUILD_VERBS` içinden bir fiil,
-  (2) `TOOL_OR_MATERIAL_NOUNS` içinden en az bir ad.
-  Bu POZİTİF gerekliliktir: karşılanması için ustanın özne olduğu bir yan cümle şarttır,
-  dolayısıyla öznesiz edilgen çatı yapısal olarak dışlanır. Ayrı bir "edilgen dedektörü"
-  YAZILMAZ (kırılgan olur, yanlış pozitif üretir).
-  `BUILD_VERBS` ve `TOOL_OR_MATERIAL_NOUNS` modül başında sabit demet, `PROHIBITED_NOUNS`
-  ile aynı stilde, `normalize()` üzerinden sözcük-sınırı eşleşmesiyle.
-- **Kural (g) QC YÜZEYİNDE YASAK YOK:** `art_style` ve `qc.notes` içinde
-  `forbidden`, `exactly one`, `must not`, `is not allowed`, `prohibited` kalıpları ihlaldir.
-  Gerekçe kod: `critic.py:118`.
+**R2-e** `tools/rf_prompt_lint.py` iki yeni kural (tur-1 F-9/F-11 ile sertleştirildi):
 
-**R2-f** `aimagine/KONSEPT.md` → **v2.3**:
-- Başlık bloğuna v2.3 satırı (ses pivotu + görünür işçilik + gerekçe ölçümü).
-- §3.1 tablosu: her çekimin "Kural" hücresi ustanın yaptığı işle yeniden yazılır; çekim 1'e
-  malzeme teslimatı girer.
-- §3.1 USTA paragrafı: "ince motor iş verilmez" → "işi kendi eliyle yapar, orta mesafeden".
-- §3.4 SES tamamen yeniden: müzik YOK, diegetik ses TEK ses; ISSUES'taki "diegetik foley"
-  maddesi kapanır.
-- §3.5 Güvenlik maddesine dokunulmaz; "Kutlama/ta-da YASAK" ifadesi QC notundan kalktığı için
-  §3.1 tablosundaki karşılığı "sahne tasarımı kuralı" olarak yeniden ifade edilir.
-- §7 veri bölümü R1/R2 anahtarlarıyla güncellenir (`music: false`, `required_layers`,
-  `audio_fade`, `music_prompt: false`).
-- `doctrine_sha256` **motorun kendi fonksiyonuyla** yeniden pinlenir
-  (`series/bible.py:97` LF normalizasyonu). Elle `sha256sum` KULLANILMAZ.
+- **Kural (f) ETKEN İNŞA.** `shot_plan` satırlarının HER BİRİ ve her plan çekim GÖVDESİ
+  (önek ayrıldıktan sonra) üç şartı birden karşılamalı:
+  1. `the builder` + (en fazla 2 sözcük) + `BUILD_VERBS` içinden bir fiil;
+  2. `TOOL_NOUNS` içinden en az bir ALET adı (malzeme adı yetmez , F-11);
+  3. `AUTONOMOUS_CLAUSES` blokajından temiz olmalı.
+  `AUTONOMOUS_CLAUSES` ölçülmüş ihlallerden oluşan AÇIK bir listedir, genel bir edilgen
+  dedektörü DEĞİLDİR (genel dedektör yanlış pozitif üretir; "the viewpoint is released"
+  meşrudur): `rise, rises, rising, go up, goes up, going up, come up, comes up, coming up,
+  is installed, are installed, is finished, are finished, is laid, are laid, is graded,
+  are graded, is marked, are marked, appear, appears, appearing, assembles itself,
+  builds itself`.
+  Sabitler modül başında demet, `PROHIBITED_NOUNS` ile aynı stilde, `normalize()` üzerinden
+  **sözcük-sınırı** eşleşmesiyle (`rebuilder` → `builder` eşleşmesi OLMAYACAK).
+- **Kural (g) QC YÜZEYİNDE YASAK YOK.** `art_style` ve `qc.notes` içinde
+  `forbidden`, `prohibited`, `exactly one`, `must not`, `is not allowed`, `are not allowed`
+  kalıpları ihlaldir. Gerekçe kod: `critic.py:118`.
 
-### Riskler (açıkça)
+**R2-f** `aimagine/KONSEPT.md` → **v2.3**: başlık bloğuna v2.3 satırı; §3.1 tablosunun her
+"Kural" hücresi ustanın yaptığı işle yeniden yazılır (çekim 1'e malzeme teslimatı girer);
+§3.1 USTA paragrafı "işi kendi eliyle yapar, orta mesafeden"; §3.4 SES tamamen yeniden
+(müzik YOK, diegetik ses TEK ses; ISSUES'taki "diegetik foley" maddesi kapanır); §3.5'te
+"ta-da YASAK" ifadesi sahne tasarımı kuralı olarak yeniden ifade edilir; §7 veri bölümü
+R1/R2/R3 anahtarlarıyla güncellenir. `doctrine_sha256` **motorun kendi fonksiyonuyla**
+(`series/bible.py:97`) yeniden pinlenir , elle `sha256sum` KULLANILMAZ.
+
+### Riskler
 
 - **Anatomi:** alet kullanan usta anatomi redini artırabilir. Karşı veri: iş yaptırmayan
-  bugünkü prompt'la ep07'de zaten 3 anatomi redi var; 27 incelemelik eski ölçümde 9 anatomi
-  redi vardı ve o da elsiz doktrindi. Panzehir orta mesafe + tam vücut kadraj.
+  bugünkü prompt'la ep07'de zaten 3 anatomi redi var. Panzehir: orta mesafe + tam vücut.
   **Geri dönüş tetiği:** ardışık iki bölümde anatomi redi ≥5 ise R2-d madde (3) eski hâline
   döner (tek satır).
-- **Ghosting:** ep07'nin baskın kusuru; kaynağı ölçülmedi. Etken-çatı yazımının sürekli
-  hareket üretip morphing'i azaltması BEKLENTİDİR, iddia değil. Ayrı ISSUES maddesi.
+- **Ghosting:** ep07'nin baskın kusuru; kök neden ölçülmedi. Etken çatının sürekli hareket
+  üretip morphing'i azaltması BEKLENTİDİR, iddia değil (ISSUES I-C).
 
 ### PROOF
 
 1. `python -m pytest tests/ -q` , tamamı yeşil.
-2. `python tools/rf_prompt_lint.py --series aimagine/from-scratch` , 0 ihlal
-   (yeni (f) ve (g) kuralları AÇIKKEN).
-3. Benim yazacağım `tests/test_rf_active_build_adversarial.py` (Codex'in suitine ek):
+2. `python tools/rf_prompt_lint.py aimagine/from-scratch` , 0 ihlal, (f) ve (g) AÇIK.
+3. Benim yazacağım `tests/test_rf_active_build_adversarial.py`:
    edilgen satır reddedilir; "the builder" yalnız ÖNEKte geçip gövdede geçmiyorsa reddedilir;
-   fiil eşleşmesi sözcük-sınırlı ("rebuilder" tetiklemez); boş/None/Türkçe girdi patlamaz;
-   45/46 kelime sınırı; `qc.notes` içindeki "exactly one" yakalanır, "one final reveal"
-   yakalanmaz.
-4. `python tools/rf_transition_check.py --verify` , `parts` 1-6 ve `published.json`
-   bit-değişmez.
-5. Doktrin SHA: `series.json`'daki pin, `bible.py`'nin kendi fonksiyonunun çıktısına eşit.
+   `rebuilder`/`reappears` sözcük-sınırı tetiklemez; yalnız MALZEME adı olup ALET olmayan
+   satır reddedilir (F-11); kural (e) tekrar eşiğini geçmeyen ama kural (f)'i sağlayan gövde
+   İKİSİNDEN DE geçer (F-10 çelişkisinin kanıtı); `qc.notes` içindeki "exactly one" yakalanır
+   ama "one final reveal" yakalanmaz; boş/None/Türkçe girdi patlamaz; 45/46 kelime sınırı.
+4. Doktrin SHA: `series.json` pini `bible.py`'nin kendi fonksiyonunun çıktısına eşit.
 
 ---
 
-## 5. ROCK 3 , PLAN YENİLEME + KANIT
+## 5. ROCK 3 , ZORUNLU ANA ÇEKİM REZERVASYONU (bölüm gerçekten çıksın)
 
-**Done looks like:** Bekleyen part07-10 planları yeni doktrinle yeniden üretilmiş, denetçiden
-ve preflight'tan geçmiş; yayınlanmış veriye dokunulmamış.
+**Kapsam gerekçesi:** Bu rock İhsan'ın cümlelerinde yok. Ekliyorum çünkü KN-6 ölçümü
+gösteriyor ki bölüm ne kadar iyi yazılırsa yazılsın, erken regen'ler son çekimin bütçesini
+yiyorsa video HİÇ çıkmıyor. Doğru ses ve doğru işçilik, ancak yayınlanan bir videoda görülür.
 
-- **R3-a** `tools/rf_transition_check.py --snapshot` (korunan veri mühürlenir).
-- **R3-b** `plans/part07.json` … `part10.json` SİLİNİR.
-- **R3-c** `series.json` → `total_parts` GEÇİCİ olarak **6** yapılır. (Yoksa replenish dört
-  "bekleyen" part görüp no-op kalır , `replenish.py:334` `_adopt_orphans` + `:1195`
-  `total_parts` kendi kendini yazma davranışı.) `next_part: 7` DEĞİŞMEZ.
-- **R3-d** Replenish koşar, 7-10 yeni doktrinle üretilir, `total_parts` 10'a döner.
-- **R3-e** Her yeni plan için `python -m series.preflight --series from-scratch --plan partNN`
-  exit 0.
-- **R3-f** `rf_prompt_lint` yeni planlarda 0 ihlal (kural (f) plan gövdelerini de tarar).
-- **R3-g** `rf_transition_check --verify` , parts 1-6 + `published.json` bit-değişmez.
+**Done looks like:** Bir bölümün altı ANA çekimi her zaman finanse edilir; isteğe bağlı
+QC regen'leri yalnız arta kalan bütçeden harcanır.
 
-### Canlı ölçüm kapısı (bir sonraki iki koşudan sonra, kod işi değil)
+- **R3-a** `series/credit_gate.py` → `HardCreditCap.authorize(..., reserve: float = 0.0)`.
+  `optional=True` çağrılarda koşul `spent + estimate + reserve <= cap` olur.
+  Varsayılan `0.0` → diğer TÜM çağrılar ve seriler **bit-değişmez**.
+- **R3-b** `series/produce.py`: `qc_regen` yetkilendirmesinden önce `reserve` hesaplanır =
+  o çekimden SONRAKİ zorunlu ana çekimlerin muhafazakâr tahmin toplamı.
+  Herhangi birinin tahmini `None` (bilinmeyen maliyet) ise `reserve = math.inf` → hiçbir
+  isteğe bağlı regen yetkilendirilmez (fail-closed, sessizce geçilmez).
+- **R3-c** Etki `logger.info` ile yazılır: `"regen bütçesi: kalan=X, sonraki ana çekimler
+  için ayrılan=Y"`.
+
+**Kanıtlanabilir etki (ep07 senaryosu, cap 1900, müziksiz):**
+
+| | Bugünkü davranış | R3 sonrası |
+|---|---|---|
+| Üretilen ana çekim | 5/6 (çekim 6 engellendi) | **6/6** |
+| Kullanılan regen | 3 | 3 |
+| Bölüm sonucu | ❌ üretilemedi | ✅ birleşir ve yayınlanır |
+
+**PROOF:** YENİ `tests/test_main_shot_reserve.py` , yukarıdaki tabloyu birebir simüle eden
+bir test (cap 1900, omni 10 sn, 6 çekim, 1-4 arası birer regen): R3 öncesi çekim 6 bloklanır,
+R3 sonrası bloklanmaz; `reserve=0.0` varsayılanıyla eski davranış bit-değişmez;
+tahmin `None` iken isteğe bağlı çağrı reddedilir.
+Ek: `python -m pytest tests/test_credit_gate.py -q` yeşil.
+
+---
+
+## 6. ROCK 4 , ARAÇ ONARIMI + PLAN YENİLEME
+
+Tur-1'in F-13..F-20 bulgularının tamamı buraya toplandı. Araçlar önce onarılır, sonra
+planlar yeniden üretilir , yoksa "kanıt" yalan söyler.
+
+- **R4-a** `tools/rf_prompt_lint.py`: `_PENDING_PARTS = range(6, 11)` sabiti KALKAR; denetim
+  kapsamı `series.json`'daki `next_part`'tan türetilir (`next_part`..`total_parts`).
+  part06 artık YAYINLANMIŞ ve korunmuş veridir; yeni kuralla denetlenmesi hem yanlış hem
+  imkânsızdır (F-13).
+- **R4-b** `tools/rf_transition_check.py:170`: `next_part != 6` sabiti KALKAR; `--verify`
+  değeri **snapshot'takiyle** karşılaştırır (F-17). Canlı durum zaten 7; bugün `--verify`
+  hatalı çalışıyor.
+- **R4-c** `tools/rf_transition_check.py`: snapshot artık korunan plan DOSYALARININ ham
+  SHA-256'sını da alır (`plans/part01..part<next_part-1>.json`) ve `--verify` bunları
+  bire bir karşılaştırır (F-18). Bugün yalnız `series.json.parts` metadata'sı ve
+  `published.json` mühürleniyor, yani korunan plan dosyası değişse kanıt yine geçiyor.
+- **R4-d** `--verify` korunan planlarda `doctrine_sha256` eşitliği ARAMAZ; yayınlanmış
+  part06 eski damgayı taşır ve taşımaya devam edecektir (F-14). Yeni damga yalnız yeniden
+  üretilen part07-10 için zorunludur.
+- **R4-e** Var olan test beklentileri güncellenir (F-20) , İZİN VERİLEN TAM LİSTE:
+  - `tests/test_doctrine_gate.py:493` , `required_layers` beklentisi
+    `["hook_teaser", "native_audio"]`.
+  - `tests/test_doctrine_gate.py` içindeki from-scratch **müzik çağrısı** iddiası
+    (`generate_background_music` çağrıldı + `MUSIC_PROMPT_ALIASES`) , müziğin ARTIK
+    çağrılmadığını iddia edecek şekilde çevrilir.
+  - `tests/test_doctrine_gate.py:472` from-scratch cfg üçlüsündeki `music_prompt` beklentisi.
+  - `tests/test_rf_transition_check.py:32,88` , `next_part` fikstürü.
+  Bu dört yer DIŞINDA hiçbir mevcut test iddiası değiştirilmez. Başka bir test kırılırsa
+  Codex `BLOCKED:` yazıp DURUR (test yeniden yazmak yasak).
+- **R4-f** Plan geçişi, `finally` ile geri alınabilir tek bir betikle (F-15/F-16):
+  1. `python tools/rf_transition_check.py aimagine/from-scratch --snapshot`
+  2. `series.json` yedeklenir.
+  3. `plans/part07..part10.json` silinir.
+  4. `total_parts: 6` **ve** `auto_replenish.batch: 4` geçici olarak yazılır
+     (batch 5 kalırsa part11 üretilir , F-15).
+  5. Replenish koşar.
+  6. `total_parts: 10`, `batch: 5`, `next_part: 7` **doğrulanır ve geri yazılır**.
+     Herhangi bir adım patlarsa `series.json` yedekten geri yüklenir , `next_part 7 >
+     total_parts 6` çökme durumu diske KALICI olarak yazılmaz (F-16).
+  7. Son kontrol: `next_part == 7`, `total_parts == 10`, `batch == 5`, plans 7-10 var,
+     11 YOK.
+- **R4-g** Her yeni plan için
+  `python -m series.preflight --series from-scratch --plan aimagine/from-scratch/plans/partNN.json`
+  exit 0 (F-19: `--plan` gerçek dosya yolu ister).
+- **R4-h** `python tools/rf_prompt_lint.py aimagine/from-scratch` , 0 ihlal.
+- **R4-i** `python tools/rf_transition_check.py aimagine/from-scratch --verify` , parts 1-6
+  ve `published.json` bit-değişmez.
+
+---
+
+## 7. CANLI KAPI , ölçüm (kod işi değil)
+
+**Tur-1 F-22 kabul.** Sentetik ffmpeg testleri Omni'nin gerçek davranışını kanıtlamaz.
+Bu yüzden build'den sonra, cron'un bir sonraki koşusundan ÖNCE, İhsan onayıyla **tek klip
+canary'si**: yeni `art_style` + yeni çekim-2 prompt'uyla tek bir 10 sn Omni klibi üretilir
+(~126 kredi), inip ffprobe + Gemini ses denetimi + Gemini görüntü denetiminden geçirilir.
+Alet sesi yoksa veya inşa hâlâ kendi kendine oluyorsa, tam bölüm hiç harcanmadan dönülür.
+
+Sonraki iki canlı bölümün kapısı:
 
 | Metrik | Hedef | Bugün |
 |---|---|---|
-| İlk-deneme QC geçişi (2 bölüm birleşik) | ≥ 8/12 | 4-5/11 |
-| Yayınlanan bölüm | ≥ 1/2 | 1/2 |
-| `issues`'ta "appear abruptly / jump rather than flow" sınıfı kayıt | 0 | 5 |
-| Final videoda ölçülen `mean_volume` | > -50 dB | ölçülmüyor |
-
-Hedef tutmazsa: R2-c'deki "görünür eylem" satırı skorlanır hâle getirilir + bölüm kredi
-tavanı ayrı bir kararla ele alınır.
+| İlk-deneme QC geçişi (2 bölüm) | ≥ 8/12 | 4-5/11 |
+| Yayınlanan bölüm | 2/2 (R3 sonrası artık bütçe öldürmemeli) | 1/2 |
+| `issues`'ta "appear abruptly / jump rather than flow" | 0 | 5 |
+| `event="audio"` kaydında `has_music` | false | ölçülmüyor |
+| `event="audio"` kaydında `construction_sounds` | boş değil | ölçülmüyor |
 
 ---
 
-## 6. OTOMASYON DENETİMİ (İhsan'ın 5. maddesi , kod değil, rapor)
+## 8. OTOMASYON DENETİMİ (İhsan'ın 5. maddesi)
 
-### 6.1 AImagine'e ZATEN entegre olanlar (doğrulandı)
+### 8.1 AImagine'e ZATEN entegre olanlar (dosyadan doğrulandı)
 
 | # | Proje | Bağ | Durum |
 |---|---|---|---|
 | , | **Motor** (`Projeler/Youtube`) | `.github/workflows/from-scratch.yml`, günlük cron | ✅ CANLI (bugün başarısız) |
 | , | **Upload-Post** | motor içinden YouTube + Instagram + TikTok | ✅ CANLI (ep06 üçüne de gitti) |
 | 6 | YouTube_Yorum_Otomasyonu | `.github/workflows/aimagine.yml`, `YOUTUBE_CHANNEL_ID: UCCgbHTzYKYawUT6zEo0nlDg`, cron `0 7 * * *`, `YT_PHASE: "1"` | ✅ CANLI (Faz-1 salt-rapor) |
-| 35 | Akilli_Watchdog | `config.py` → `#19 YouTube Otomasyonu`, repo `youtube-automation` | ⚠️ İZLİYOR ama `cron_hint: []` |
+| 35 | Akilli_Watchdog | `config.py:139` → `#19 YouTube Otomasyonu`, repo `youtube-automation` | ⚠️ İZLİYOR ama `cron_hint: []` |
 | 36 | Proje_Dashboard | `config/projects.yaml` | ✅ CANLI |
 | 13 | YT_Aciklama_Otomasyonu | AImagine kanalına kurulu | 🚫 EMEKLİ (cron YAML'da yorumlu) |
-| 14 | Gizli_Video_Otomasyonu | `aimagine_oauth_kur.py`, kanal ID bağlı | 🚫 DURAKLATILDI (schedule yorumlu; kanal `publish_mode=auto` ile doğrudan public yayınlıyor, unlisted akışı kullanılmıyor) |
+| 14 | Gizli_Video_Otomasyonu | `aimagine_oauth_kur.py`, kanal ID bağlı | 🚫 DURAKLATILDI (schedule yorumlu; kanal `publish_mode=auto` ile doğrudan public yayınlıyor) |
 
-### 6.2 Bu talep için gereken yeni otomasyon: YOK
+### 8.2 Bu talep için gereken YENİ otomasyon: YOK
 
-Ses ve işçilik sorunu motorun kendi prompt yüzeyinde ve `_post_process` zincirinde çözülür.
-Yeni bir servis eklemek bu iki sorunun hiçbirine dokunmaz. ROCK 1-3 dışında bir şey kurmak,
-bu talep için harcanmış boş efor olur.
+Ses ve işçilik sorunu motorun kendi prompt yüzeyinde ve teslim zincirinde çözülür. Yeni bir
+servis kurmak bu iki soruna dokunmaz.
 
-### 6.3 Gerçek boşluk , nöbetçi bu kanalın başarısızlığını GÖREMİYOR
+### 8.3 Gerçek boşluk , nöbetçi bu kanalın başarısızlığını GÖREMİYOR
 
-Bugün ep07 çöktü ama Actions "success" yazdı. Sebep bilinen ve hâlâ açık:
-`from-scratch.yml` içinde `python ... | tee log` boru hattı `pipefail` olmadan koşuyor,
-çıkış kodu maskeleniyor. Nöbetçi (#35) bu repoyu `cron_hint: []` ile izliyor, yani
-"koşu başarısız mı" sinyaline bakıyor , ve o sinyal yalan. **Sonuç: 4 kanalın üretim
-başarısızlığı nöbetçinin kör noktasında.** Bu, hafızadaki "3,8 günlük 4-kanal sessizliği"
-olayının tam mekanizması.
+Bugün ep07 çöktü, Actions "success" yazdı. `from-scratch.yml`'de `python ... | tee log`
+boru hattı `pipefail` olmadan koşuyor, çıkış kodu maskeleniyor. Nöbetçi (#35) bu repoyu
+izliyor ama baktığı sinyal yalan. **Dört kanalın üretim başarısızlığı nöbetçinin kör
+noktasında** , hafızadaki "3,8 günlük 4-kanal sessizliği" olayının tam mekanizması.
+Onaylı Plan 1 ROCK 3 bunu çözüyor ve hâlâ yapılmadı (ISSUES I-A).
 
-Bu bir ROCK DEĞİL (Plan 1 ROCK 3 olarak zaten onaylı planda duruyor), ama bu koşunun
-raporunda İhsan'a tekrar hatırlatılır ve ISSUES'ta en yüksek öncelikte kalır.
+### 8.4 Eklemeye DEĞER (öneri, bu koşunun kapsamı dışında)
 
-### 6.4 Eklemeye DEĞER (öneri, bu koşunun kapsamı dışında, ayrı karar)
-
-| Öneri | Ne kazandırır | Maliyet/risk |
+| Öneri | Ne kazandırır | Maliyet |
 |---|---|---|
-| **#9 Notion Performans'ı AImagine'e klonla** | Kanal artık yayınlıyor; KONSEPT §5 kill-gate'i (25 bölüm, medyan <500) 7-günlük olgun performans verisi olmadan ÇALIŞMAZ | 1 saat, reçete hazır (`KURULUM_TAKIP.md`) |
-| **#34 İtibar Radarı'nı AImagine'e aç** (FAZ 6 kapısı) | "Bu adam hiçbir şey yapmıyor" tipi yorum, bu şikâyetin ERKEN uyarısıydı; bugün tek denetçi İhsan'ın gözü | 3-4 saat, şemaya `channel` kolonu |
-| **Higgsfield MCP `video_analysis_create` / `virality_predictor`** (#27 eklentisi içinde zaten kurulu) | Yayınlanan bölümü makineye izletip "aktif inşa var mı / ses dolu mu" sorusunu ölçmek. Bugün bu ölçüm HİÇ yok | Kredi + oturum doğrulaması gerekir, doğrulanmadı |
-| **Apify MCP `scraptik--tiktok-api`** | cairo_ia gibi referans hesapların gerçek viral verisini çekmek; bugün format kopyalama gözleme dayanıyor | Apify kredisi |
+| **#9 Notion Performans'ı AImagine'e klonla** | KONSEPT §5 kill-gate'i 7-günlük olgun performans verisi olmadan ÇALIŞMAZ | 1 saat, reçete hazır |
+| **#34 İtibar Radarı'nı AImagine'e aç** (FAZ 6) | "Bu adam hiçbir şey yapmıyor" tipi yorum bu şikâyetin ERKEN uyarısıydı | 3-4 saat |
+| **Higgsfield `video_analysis_create` / `virality_predictor`** (#27 eklentisinde kurulu) | Yayınlanan bölümü makineye izletmek. ROCK 1'in `qc_audio`'su bunun ses yarısını zaten getiriyor | kredi + oturum doğrulaması yapılmadı |
+| **Apify `scraptik--tiktok-api`** | Referans hesapların gerçek viral verisi; bugün format kopyalama gözleme dayanıyor | Apify kredisi |
 
-### 6.5 Kapsam dışı / gereksiz
+### 8.5 Kapsam dışı
 
-#33 TikTok Boost (hesap yok, BLOKE) · #19 YT_Otomasyonu (ayrı hat) · #18 NOVASCEND (ayrı hat)
-· #26/#27/#28 (iş kolu, kanal bağı sıfır) · #13 ve #14 (emekli/duraklatılmış, açmaya gerek yok).
+#33 TikTok Boost (hesap yok) · #19 · #18 NOVASCEND · #26/#27/#28 (iş kolu) · #13 ve #14
+(emekli/duraklatılmış).
 
 ---
 
-## 7. ISSUES (bu koşuda bilinçli YAPILMAYANLAR)
+## 9. İHSAN'A AÇIK SORULAR (bloke etmez, ayrı karar)
 
-- **I-A (yüksek):** Plan 1 ROCK 3 , `defaults: run: shell: bash -euo pipefail {0}` + `ok is
-  not True` çıkışı, 4 workflow. Actions'ın yalan "success"'i nöbetçiyi kör ediyor (§6.3).
+1. **Tek klip canary'si (~126 kredi)** , tam bölüm harcanmadan önce yeni prompt'un
+   sesini ve işçiliğini doğrulamak. Öneri: EVET.
+2. **`EPISODE_CREDIT_CAP` 1900 → 2200?** ROCK 3 bölümün çıkmasını garantiler ama regen
+   sayısı 3'te kalır. 2200, 6 ana + 5 regen finanse eder (gerçek maliyet ~126/klip olduğu
+   için beklenen artış ~250 kredi/bölüm). Öneri: ROCK 3'ün etkisi ölçülene kadar BEKLE.
+
+---
+
+## 10. ISSUES (bilinçli YAPILMAYANLAR)
+
+- **I-A (yüksek):** Plan 1 ROCK 3 , `bash -euo pipefail` + `ok is not True` çıkışı, 4
+  workflow. Actions'ın yalan "success"'i nöbetçiyi kör ediyor (§8.3).
 - **I-B (yüksek):** `critic.strengthen_prompt` (`critic.py:273`) Gemini'nin `fix_notes`'unu
-  regen prompt'una AYNEN ekliyor ve o notlar olumsuzlama taşıyor (gerçek log: "Ensure no
-  readable logos or text appear..."). Onarım yalnız İLK denemeyi kapsıyor. Motor kodu, dört
-  kanal ortak.
+  regen prompt'una AYNEN ekliyor, notlar olumsuzlama taşıyor. Onarım yalnız İLK denemeyi
+  kapsıyor. Motor kodu, dört kanal ortak.
 - **I-C (orta):** Ghosting/çift pozlama ep07'nin baskın kusuru; kök neden ölçülmedi.
-- **I-D (orta):** Bölüm kredi tavanı 1880, klip 126 → 14 klip. ep07 13 klipte öldü.
-  Geçiş oranı yükselmezse tavan kararı gerekir.
-- **I-E (düşük):** Müziksiz kesişte ton sıçraması kalırsa çözüm `acrossfade` değil
+- **I-D (orta):** Kredi tavanı kararı (§9.2).
+- **I-E (düşük):** Müziksiz kesişte ton sıçraması kalırsa `acrossfade` çözüm değil
   (senkron kayar); ayrı tasarım gerekir.
 - **I-F (düşük):** `from-scratch.yml` başlık yorumu iki doktrin sürümü bayat.
-- **I-G:** R2-c "görünür eylem" satırının skorlanmaya terfisi (tetik §4'te).
-- **I-H:** §6.4'teki dört otomasyon önerisi.
+- **I-G:** R2-c "görünür eylem" satırının skorlanmaya terfisi (tetik §7).
+- **I-H:** §8.4'teki dört otomasyon önerisi.
+- **I-I:** Ses kapısı düşerse klipler önbellekte kalır ve sonraki koşu aynı sonuca varır;
+  bilinçli olarak otomatik silmiyoruz, gürültülü duruyoruz (tur-1 F-5).
 - Devralınanlar: usta için Kie referans-görseli, çekim 3→4 referans köprüsü, cross-shot QC.
 
 ---
 
-## 8. DOKUNULMAZ (bu koşuda)
+## 11. DOKUNULMAZ
 
 - `aimagine/from-scratch/plans/part01..part06.json` ve `published.json` , bit-değişmez.
-- `series.json` → `next_part: 7`, `parts` bloğu, `status`, `publish_mode`.
+- `series.json` → `next_part: 7`, `parts` bloğu, `status`, `publish_mode`, `priority`.
 - Diğer üç kanalın (sentinal_ihsan, shadowedhistory, galactic_experience) hiçbir dosyası.
-- `series/critic.py` `_QC_SYSTEM` , motor kodu, dört kanal ortak (I-B ayrı karar).
+- `series/critic.py` `_QC_SYSTEM` metni , motor kodu, dört kanal ortak (I-B ayrı karar).
+- `series/omni_api.py` `build_omni_payload` , Kie API'sine bilinmeyen alan EKLENMEZ.
+- `core/cost_tracker.py` maliyet tabloları , tahminler bilerek muhafazakâr.
 - Kök `.gitignore`, `master.env`, `credentials/`.
-- `core/ffmpeg_tools.py`'nin mevcut fonksiyonlarının imzaları , yalnız EKLEME yapılır
-  (`measure_mean_volume`) ve `concatenate_audio_smooth`'a varsayılanı değişmeyen bir
-  parametre GEÇİLİR (imza zaten `fade: float = 0.25` taşıyor, değiştirilmez).
+- Mevcut fonksiyon imzaları , yalnız EKLEME yapılır; `concatenate_audio_smooth`'un
+  `fade: float = 0.25` varsayılanı DEĞİŞMEZ.
+- R4-e'de listelenen dört yer dışında hiçbir mevcut test iddiası değiştirilmez.
