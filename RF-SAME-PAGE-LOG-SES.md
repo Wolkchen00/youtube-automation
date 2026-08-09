@@ -148,3 +148,53 @@ VERDICT: NOT YET```
   dışında bir risk. `finally` + son koşul doğrulaması yeterli.
 
 **Plan r3.**
+
+## Tur 3
+
+### Integrator bulguları (Codex, aynen)
+
+```
+- [FIX] The single Omni sample supports only “usable construction audio can occur,” while lines 51 and 74 still generalize that the pipeline/Omni clips produce the right sound -> Narrow both claims to the sampled clip and retain R1-j as the delivery control.
+- [FIX] R1-g says three boolean fields require validation, but its JSON contract defines only `has_music` and `speech` as booleans -> Correct the count to two or specify the missing third field.
+- [FIX] ROCK 1’s proof still expects `qc_audio(...) is None` to PASS even though R1-j now correctly requires FAIL -> Change that proof assertion to FAIL and verify the notifier and `return None`.
+- [FIX] Rule (f) still accepts self-building prose such as “the builder watches walls assemble with a hammer,” because two arbitrary intervening words reach the `assemble` build verb and bare `assemble` is absent from `AUTONOMOUS_CLAUSES` -> Restrict intervening tokens to harmless modifiers and add this exact clause-level adversarial case.
+- [FIX] Adding rule (f) makes `tests/test_rf_prompt_lint_adversarial.py::test_shot_plan_45_words_passes_46_fails` fail because its 45-word `alpha` fixture expects zero violations, yet R4-e does not permit changing that assertion -> Add this existing test to R4-e and replace its boundary fixture with a valid builder/tool line.
+- [FIX] R3-c requires distinguishing reserve-only denial from ordinary optional cap denial, but `HardCreditCap.authorize()` returns only a boolean and exposes no denial classification -> Return or record a denial reason, or use the materially simpler rule of never zeroing `qc_budget` after any optional credit denial.
+- [FIX] ROCK 3 reserves only against the local episode cap and `check_credit()` merely logs the shared Kie balance, so it cannot guarantee six calls are actually funded while other channels spend concurrently -> Narrow the guarantee to “not blocked by this episode’s `HardCreditCap`.”
+- [FIX] R4-f is not self-healing: death after deletion leaves `total_parts=10` and replenish no-ops, while death during writes lets `_adopt_orphans` advance the start and potentially create untracked part11 that `git checkout -- aimagine/from-scratch` will not remove -> Drop the self-heal claim and require a clean-tree preflight plus explicit rollback before any rerun.
+- [FIX] The purported r3 still labels itself r2 and retains the superseded KN-6 claim of six main plus three regen inspections despite the corrected five-plus-four table -> Update the revision header and remove the stale arithmetic before implementation.
+- [FIX] Section 11 protects the other three channel trees but omits the fourth unaffected series, `aimagine/the-vast`, which shares every changed engine path -> Add that series explicitly and include it in the bit-identical regression proof.
+
+VERDICT: NOT YET```
+
+### Visionary yanıtı (Claude) , 10 bulgunun 10'u KABUL
+
+- **KABUL F-1** → 51. ve 74. satırlardaki genelleme kaldırıldı, "ölçülen bu klipte" oldu.
+- **KABUL F-2** → "üç bool" yanlıştı, JSON'da iki bool var; metin düzeltildi.
+- **KABUL F-3** → R1-j'yi değiştirmiş ama PROOF'u değiştirmemiştim; `None → FAIL` oldu ve
+  beş ayrı FAIL hâli + tek PASS hâli test edilecek.
+- **KABUL F-4** → Somut kaçak: "the builder watches panels fitting themselves". İki serbest
+  ara sözcük penceresi kapatıldı; artık sıfır ara sözcük veya kapalı `ALLOWED_MODIFIERS`
+  listesinden TEK sözcük. Altı satırım sıfır ara sözcükle yazılı, etkilenmiyor.
+- **KABUL F-5** → Doğrulandı: `test_shot_plan_45_words_passes_46_fails:29`
+  `"alpha"*45` için sıfır ihlal bekliyor, kural (f) bunu reddeder. Aynı kök
+  `test_plan_body_60_words_passes_61_fails`'te de var. R4-e'nin izin listesi 4 → 6 yere
+  çıktı; sınır testinin AMACI korunur, yalnız fikstür geçerli hâle getirilir.
+- **KABUL F-6** → `authorize()` ret sebebini taşımıyor. Codex'in "hiç sıfırlama" önerisi
+  daha basit ama mevcut sert-tavan davranışını da değiştirirdi. EKLEMELİ çözüm seçildi:
+  `last_denial_kind` alanı (`cap` | `reserve` | `unknown`); yalnız `cap` retinde
+  `qc_budget["left"]=0`. (`credit_hard_cap` yalnız from-scratch'te açık , doğrulandı.)
+- **KABUL F-7** → Rezerv yalnız bölüm-içi tavana karşı çalışır; paylaşımlı Kie bakiyesi
+  garanti edilemez. Garanti "bu bölümün `HardCreditCap`'i engellemez" diye daraltıldı.
+- **KABUL F-8** → **"Kendi kendini onarır" iddiam eksikti.** İki ölüm penceresi var, ben
+  birini saymıştım: silme önce yapılırsa `total_parts=10` + planlar YOK kalır, `pending=4`
+  olduğu için replenish no-op eder ve kanal her gün sessizce başarısız olur. Ayrıca takipsiz
+  part11'i `git checkout` silmez. Sıra TERS çevrildi (önce metadata, sonra silme), temiz-ağaç
+  ön kontrolü ve `git clean -fd` içeren açık geri alma eklendi. Staging/journal reddi DURUYOR.
+- **KABUL F-9** → Başlık r2 diyordu ve KN-6 hâlâ "6 ana + 3 regen" yazıyordu; ikisi de
+  düzeltildi (r4, 5 ana + 4 regen).
+- **KABUL F-10** → §11 yalnız üç kanal klasörünü koruyordu; `aimagine/` altında
+  `infinite-trip`, `the-drift`, `the-vast` de var ve aynı motor yollarını paylaşıyor.
+  Bit-değişmezlik kanıtı artık HER kurulu seriyi kapsıyor.
+
+**Plan r4.**
