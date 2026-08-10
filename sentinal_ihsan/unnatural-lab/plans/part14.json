@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "I Found UNNATURAL POTTERY... And It STARTED To REPAIR!"
+  },
+  "synopsis": "A man demonstrates a clay pot that, when shattered, automatically reassembles itself perfectly.",
+  "narration": "I dropped this old pot, and it shattered. But then, it pulled itself back together like nothing happened. This thing is seriously weird; how does it do that?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hand, wearing a plain black crew-neck t-shirt, dropping a small, ordinary terracotta pot onto a worn wooden workbench. The pot shatters into several distinct pieces upon impact. Immediately, the pieces subtly begin to shift and attract towards each other. The view stays in one unchanging position and angle for the whole shot. Lit by diffuse daylight from a kitchen window.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photorealistic close-up on the shattered pot pieces. They visibly and rapidly slide across the wooden surface, re-fusing and knitting themselves back together with impossible speed, filling all cracks and restoring the pot's original shape perfectly. The view stays in one unchanging position and angle for the whole shot. Lit by diffuse daylight from a kitchen window.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photorealistic mid-shot of Ihsan, wearing a plain black crew-neck t-shirt, gently poking the now fully reformed and solid terracotta pot with his finger to confirm its integrity. With a calm, unsurprised expression, he then deliberately pushes the pot off the edge of the workbench again. The view stays in one unchanging position and angle for the whole shot. Lit by diffuse daylight from a kitchen window.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photorealistic close-up on the fallen pot. It shatters a second time upon impact with the floor, but the pieces immediately begin to swirl and reassemble even faster than before, rushing back together to form a perfectly whole pot, continuing its reformation as the shot ends. The view stays in one unchanging position and angle for the whole shot. Lit by diffuse daylight from a kitchen window.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-behaviour",
+  "music": "A sparse, dry percussive arrangement of soft, sharp taps and low, resonant thuds, with an occasional subtle 'clink' sound as if pieces are touching. A quiet sustained tone provides a backdrop. The rhythm is slow and deliberate, leaving significant space. No melody or ethereal pads. Music opens immediately, with a clear percussive element.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

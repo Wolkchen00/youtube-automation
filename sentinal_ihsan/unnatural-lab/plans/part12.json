@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "I Found UNNATURAL WATER... And It STARTED To SOLIDIFY!"
+  },
+  "synopsis": "A man demonstrates water that instantly freezes upon being poured but melts back to liquid when touched.",
+  "narration": "This water instantly freezes solid once it leaves the beaker. Then in my hand, it melts right back to liquid. I've tried everything with this stuff; it’s truly wild.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, pouring clear water from a glass beaker. The water stream, immediately upon leaving the beaker's rim, instantly transforms into a solid, clear ice stream that is visibly flowing downwards. The view stays in one unchanging position and angle for the whole shot. Lit by warm overhead work light in a home garage setting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photorealistic close-up on Ihsan's open palm, wearing a plain black crew-neck t-shirt. The previously solid ice stream falls into his hand, and upon contact, instantly melts back into clear liquid water, flowing between his fingers. The view stays in one unchanging position and angle for the whole shot. Lit by warm overhead work light in a home garage setting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photorealistic mid-shot of Ihsan, wearing a plain black crew-neck t-shirt, pouring a larger amount of water. As it solidifies, it forms into an impossibly geometric and intricate small ice sculpture mid-air, holding its form for a moment before gracefully falling into a puddle on the workbench, where it melts instantly. The view stays in one unchanging position and angle for the whole shot. Lit by warm overhead work light in a home garage setting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, cupping the liquid water from shot 3. He slowly pours it back into the beaker, and as it enters the beaker, it instantly reverts to its fluid state, swirling gently inside the glass, ready to be poured again. The view stays in one unchanging position and angle for the whole shot. Lit by warm overhead work light in a home garage setting.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-state-change",
+  "music": "A minimal percussive track with soft, resonant taps and hollow, woody thuds. A very subtle, low-frequency hum provides a sustained, cool undertone, complementing the ice. The pace is deliberate, with vast silent spaces, avoiding any melody or ethereal sounds. The music begins immediately, without preamble.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

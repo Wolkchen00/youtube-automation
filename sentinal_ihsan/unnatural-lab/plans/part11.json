@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "This GLASS Is NOT Supposed To FLEX?!"
+  },
+  "synopsis": "A man discovers a piece of glass that can be bent and shaped like rubber, then reforms itself to its original state.",
+  "narration": "Found this glass shard and tried to snap it, but it just bends. Been doing this for days; it even reforms itself perfectly. My neighbor just walked away when he saw it.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, holding a shard of clear, ordinary glass. The glass is visibly bending between his fingers like soft plastic, not shattering or creaking. The view stays in one unchanging position and angle for the whole shot. Lit by natural daylight from a window onto a worn wooden workbench.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photorealistic mid-shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, actively trying to snap the pliable glass shard. It folds completely in half, its edges touching, resembling a soft rubber sheet, then springs back slightly without breaking. The view stays in one unchanging position and angle for the whole shot. Lit by natural daylight from a window onto a worn wooden workbench.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully shaping the impossibly flexible glass shard into an intricate, self-sustaining loop. The glass holds its new form, shimmering softly, as he guides it. The view stays in one unchanging position and angle for the whole shot. Lit by natural daylight from a window onto a worn wooden workbench.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hand, wearing a plain black crew-neck t-shirt, holding the intricately looped glass. Slowly, over several seconds, the glass loop begins to untwist and flatten itself, reforming back into its original flat shard shape, continuing to flow as the shot ends. The view stays in one unchanging position and angle for the whole shot. Lit by natural daylight from a window onto a worn wooden workbench.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-material",
+  "music": "A sparse, dry percussive bed featuring soft, muted taps and low, woody hits, underpinned by a single quiet, sustained metallic tone. The rhythm is slow and steady, leaving ample negative space. No melody lines, no swells, no ethereal pads, no vocals. Opens with sound instantly, matching the visual surprise.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

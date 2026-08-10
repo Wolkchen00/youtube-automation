@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Can I Turn A LIGHT BEAM Into A SOLID OBJECT?!"
+  },
+  "synopsis": "A man demonstrates a beam of light that can be physically manipulated and shaped like a solid object.",
+  "narration": "I’ve been trying to figure out this light beam for weeks. It’s solid, like you can actually bend and shape it. My landlord just thinks I'm going crazy.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of a focused, bright beam of light emanating from a simple tabletop lamp onto a dark wooden surface. Ihsan's hand, wearing a plain black crew-neck t-shirt, reaches into the frame and gently pushes the light beam, visibly bending it like a flexible, physical rod. The view stays in one unchanging position and angle for the whole shot. Lit only by the lamp and ambient low evening light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, working together to pull and twist the previously straight light beam. They are forming it into a distinct, stable knot that glows brightly and holds its shape, casting sharp, unusual shadows. The view stays in one unchanging position and angle for the whole shot. Lit only by the lamp and ambient low evening light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photorealistic mid-shot of the glowing, knotted light beam, now floating slightly above the dark wooden table, perfectly maintaining its impossible twisted shape without support. Ihsan's hands are momentarily out of frame, allowing the impossible object to be observed. The view stays in one unchanging position and angle for the whole shot. Lit only by the lamp and ambient low evening light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, reaching back into the frame. He gently manipulates the glowing, knotted light beam, slowly straightening it out. The knot gracefully unfurls and smooths back into a perfectly straight, solid beam of light, continuing to reform as the shot ends. The view stays in one unchanging position and angle for the whole shot. Lit only by the lamp and ambient low evening light.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "reversed-physics",
+  "music": "A sparse, dry percussive bed featuring soft, precise taps and low, hollow woody hits. A quiet, sustained, shimmering tone forms a delicate backdrop, creating an ethereal yet grounded feel. The pulse is slow and steady, with ample negative space. No melody line, no swell, no vocals. Music opens with sound immediately.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

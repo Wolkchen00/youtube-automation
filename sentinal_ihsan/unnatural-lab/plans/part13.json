@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "This MATCHBOX Is NOT Supposed To BE A FOREST?!"
+  },
+  "synopsis": "A man discovers an impossibly deep, self-sustaining miniature forest complete with its own weather inside an ordinary matchbox.",
+  "narration": "You won't believe what I found in this matchbox. It’s a tiny, perfectly alive forest, with its own weather inside. My landlord just said 'don't burn the house down'.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, carefully sliding open an old, wooden matchbox. Inside, an impossibly deep miniature forest is revealed, with tiny, living trees, moss, and a faint mist hanging in the air. The view stays in one unchanging position and angle for the whole shot. Lit by soft, warm light from an antique desk lamp on a cluttered wooden desk.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photorealistic close-up, looking into the opened matchbox. Ihsan's finger, wearing a plain black crew-neck t-shirt, gently prods one of the miniature trees. In response, a tiny gust of wind visibly ripples through the miniature forest, rustling the tiny leaves. The view stays in one unchanging position and angle for the whole shot. Lit by soft, warm light from an antique desk lamp on a cluttered wooden desk.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photorealistic close-up, still looking into the matchbox. A miniature, perfect rain shower begins, tiny droplets falling onto the miniature foliage, creating glistening surfaces and a soft, barely audible patter. The scale is impossibly small yet utterly real. The view stays in one unchanging position and angle for the whole shot. Lit by soft, warm light from an antique desk lamp on a cluttered wooden desk.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photorealistic close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt. He carefully slides the matchbox closed, pausing for a moment, then slowly reopens it to reveal the miniature forest inside, now slightly damp and glistening from the miniature rain, still alive and thriving. The view stays in one unchanging position and angle for the whole shot. Lit by soft, warm light from an antique desk lamp on a cluttered wooden desk.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-interior",
+  "music": "A sparse, dry percussion track with very soft, almost imperceptible taps and a low, resonant woody thrum. A single, quiet, sustained earthy tone gently floats beneath. It evokes a sense of miniature wonder and delicate natural processes, with significant negative space. No melody or dramatic swells. Music starts immediately.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}
