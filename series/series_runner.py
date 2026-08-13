@@ -377,7 +377,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
                 f"❌ *{meta.base_title}* Part {n} kredi kapısında durdu. "
                 f"bakiye={balance}, esik={threshold:g}"
             )
-            return None
+            return False
         if not credit_gate.reserve(slug, n):
             logger.error(
                 f"❌ Aylık kredi tavanı üretimi durdurdu: "
@@ -387,7 +387,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
                 f"❌ *{meta.base_title}* Part {n} aylik tavan nedeniyle durdu. "
                 f"bolum={credit_gate.episode_cap()}, tavan={credit_gate.monthly_cap()}"
             )
-            return None
+            return False
         reserved = True
     try:
         video = produce.produce_episode(
@@ -506,8 +506,10 @@ def main(argv: list[str]):
         ok = run_next(slug, dry_run=dry, publish=not no_pub, force=force)
     else:
         ok = run_all(dry_run=dry, publish=not no_pub)
-    # Gerçek bir üretim/yayın başarısızlığında iş KIRMIZI görünsün (sessiz 'success' yerine).
-    if not dry and ok is False:
+    # Video ÇIKMAYAN her koşu KIRMIZI görünsün (sessiz 'success' yerine): üretim/yayın
+    # hatası, kredi kapısı ve aylık tavan dahil. 2026-08-09..12 dört kanalın kredi
+    # kapısında sessizce (yeşil) durması bu satırın 'ok is False' halinden kaynaklandı.
+    if not dry and ok is not True:
         sys.exit(1)
 
 

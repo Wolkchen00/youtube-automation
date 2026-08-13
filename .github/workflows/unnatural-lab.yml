@@ -83,6 +83,8 @@ jobs:
         id: produce
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; tee'nin 0'i python'un exit kodunu maskeliyordu (ROCK 3).
+        shell: bash
         run: python -X utf8 -m series.series_runner --series unnatural-lab 2>&1 | tee logs/unnatural_lab_run.log
 
       - name: Üretim sonucunu kaydet

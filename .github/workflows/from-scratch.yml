@@ -73,6 +73,9 @@ jobs:
         id: produce
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; 'python | tee' kalibinda tee'nin 0'i python'un exit
+        # kodunu maskeliyordu (2026-08-09..12 sahte-yesil kesintisi). Plan 1 ROCK 3.
+        shell: bash
         run: python -X utf8 -m series.series_runner --series from-scratch 2>&1 | tee logs/from_scratch_run.log
 
       - name: Uretim sonucunu kaydet
