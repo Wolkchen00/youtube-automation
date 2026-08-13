@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 15,
-  "next_part": 11,
+  "next_part": 12,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -152,6 +152,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-09T19:28:52.519880+00:00"
+    },
+    "11": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep11/ep11_narrated_music.mp4",
+      "subtitle": "This GLASS Is NOT Supposed To FLEX?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-13T19:53:02.807756+00:00"
     }
   }
 }

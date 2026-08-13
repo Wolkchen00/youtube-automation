@@ -78,5 +78,19 @@
       "instagram": null,
       "tiktok": null
     }
+  },
+  {
+    "part": 11,
+    "subtitle": "This GLASS Is NOT Supposed To FLEX?!",
+    "ts": "2026-08-13T19:53:02.807276+00:00",
+    "results": {
+      "youtube": "G3NkAzMFdUQ",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f1ede1b2a16f4fec84303515b79e5e3f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f1ede1b2a16f4fec84303515b79e5e3f', 'total_platforms': 1, 'job_id': '4d39a2ad3f604c79900a8a997507127a'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=5abc4d23559c424c9217211256d79184. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '5abc4d23559c424c9217211256d79184', 'total_platforms': 1, 'job_id': '2483c6a179414a4ba456e18b64ed8e5e'}"
+    }
   }
 ]
