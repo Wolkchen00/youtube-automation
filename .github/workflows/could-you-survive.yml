@@ -65,6 +65,8 @@ jobs:
       - name: Produce + publish (Could You Survive sıradaki bölüm)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; tee'nin 0'i python'un exit kodunu maskeliyordu (ROCK 3).
+        shell: bash
         run: python -X utf8 -m series.series_runner --series could-you-survive 2>&1 | tee logs/could_you_survive_run.log
 
       - name: Persist series state

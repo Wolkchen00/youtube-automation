@@ -65,6 +65,8 @@ jobs:
       - name: Produce + (onay bildirimi / otomatik yayın)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; tee'nin 0'i python'un exit kodunu maskeliyordu (ROCK 3).
+        shell: bash
         run: |
           ARG=""
           if [ -n "${{ github.event.inputs.series }}" ]; then ARG="--series ${{ github.event.inputs.series }}"; fi
