@@ -59,5 +59,19 @@
       "tiktok": null
     },
     "restored_from_run": 31278099009
+  },
+  {
+    "part": 7,
+    "subtitle": "Hiroo Onoda: The Last Samurai",
+    "ts": "2026-08-13T21:24:08.854461+00:00",
+    "results": {
+      "youtube": "NMBoI-RD53s",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c2f71c500c3848c9969c82932119bb6f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c2f71c500c3848c9969c82932119bb6f', 'total_platforms': 1, 'job_id': '1bacf66bd7e34454976d8a435c3b6ae6'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=806ec8bae3284ce3882106b77494f7d0. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '806ec8bae3284ce3882106b77494f7d0', 'total_platforms': 1, 'job_id': 'd316bf85756e4cb8aa145052c56d3bf0'}"
+    }
   }
 ]
