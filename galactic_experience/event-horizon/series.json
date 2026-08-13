@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 9,
+  "next_part": 10,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -272,6 +272,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-09T17:17:17.629305+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep09/ep09_narrated_music.mp4",
+      "subtitle": "What If Earth Stopped Spinning? TOTAL DESTRUCTION",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-13T17:44:15.499102+00:00"
     }
   }
 }
