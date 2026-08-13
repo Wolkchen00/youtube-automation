@@ -11,10 +11,60 @@ commit_message=$1
 shift
 paths=("$@")
 retry_delay=${PERSIST_RETRY_DELAY_SECONDS:-10}
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+
+# Hatlar arası TEK paylaşılan durum dosyası; yalnız bunun çakışması
+# merge_credits_ledger.py ile otomatik birleştirilir, kalan her şey fail-closed.
+readonly MERGEABLE_LEDGER="credits_ledger.json"
 
 fail() {
   echo "Persist hatası: $*" >&2
   exit 1
+}
+
+resolve_python() {
+  local candidate
+  for candidate in python3 python; do
+    if command -v "$candidate" >/dev/null 2>&1 &&
+      "$candidate" -c 'import sys' >/dev/null 2>&1; then
+      printf '%s' "$candidate"
+      return 0
+    fi
+  done
+  return 1
+}
+
+# Çakışan dosyaların TAMAMI defterse birleştirip stage'ler (0 döner);
+# başka herhangi bir dosya çakıştıysa dokunmaz (1 döner, çağıran fail eder).
+resolve_mergeable_conflicts() {
+  local conflicted file python_bin
+  conflicted=$(git diff --name-only --diff-filter=U) || return 1
+  if [ -z "$conflicted" ]; then
+    return 1
+  fi
+  while IFS= read -r file; do
+    if [ "$file" != "$MERGEABLE_LEDGER" ]; then
+      echo "Otomatik birleştirilemeyen çakışma: $file" >&2
+      return 1
+    fi
+  done <<<"$conflicted"
+  python_bin=$(resolve_python) || {
+    echo "Çalışan bir Python bulunamadı, defter birleştirilemedi" >&2
+    return 1
+  }
+  while IFS= read -r file; do
+    "$python_bin" "$script_dir/merge_credits_ledger.py" "$file" || return 1
+    git add -- "$file" || return 1
+  done <<<"$conflicted"
+  return 0
+}
+
+# Autostash uygulaması çakıştığında git stash girdisini SAKLAR; çözümden
+# sonra bırakılırsa bir sonraki denemede kafa karıştırır, düşürülür.
+drop_autostash_entry() {
+  if git stash list | head -n 1 | grep -q autostash; then
+    git stash drop >/dev/null 2>&1 || true
+  fi
 }
 
 check_preconditions() {
@@ -195,13 +245,31 @@ for attempt in 1 2 3; do
   check_preconditions
 
   if ! git pull --rebase --autostash origin main; then
-    git rebase --abort >/dev/null 2>&1 || true
-    fail "git pull --rebase --autostash başarısız"
+    # Rebase ortasında durduysa ve çakışan tek dosya defterse birleştirip sür.
+    if { [ -e "$(git rev-parse --git-path rebase-merge)" ] ||
+      [ -e "$(git rev-parse --git-path rebase-apply)" ]; } &&
+      resolve_mergeable_conflicts; then
+      if ! GIT_EDITOR=true git rebase --continue; then
+        git rebase --abort >/dev/null 2>&1 || true
+        fail "Defter birleşimi sonrası rebase --continue başarısız"
+      fi
+      echo "Rebase çakışması defter birleşimiyle çözüldü"
+    else
+      git rebase --abort >/dev/null 2>&1 || true
+      fail "git pull --rebase --autostash başarısız"
+    fi
   fi
 
   if [ -n "$(git ls-files -u)" ]; then
-    git rebase --abort >/dev/null 2>&1 || true
-    fail "Autostash sonrasında çözülmemiş index girdileri bulundu"
+    # Autostash geri uygulaması çakıştı (2026-08-08 Emu War vakası). Çakışan
+    # tek dosya defterse birleştir; değilse eski fail-closed davranış.
+    if resolve_mergeable_conflicts; then
+      drop_autostash_entry
+      echo "Autostash çakışması defter birleşimiyle çözüldü"
+    else
+      git rebase --abort >/dev/null 2>&1 || true
+      fail "Autostash sonrasında çözülmemiş index girdileri bulundu"
+    fi
   fi
 
   scan_for_conflicts

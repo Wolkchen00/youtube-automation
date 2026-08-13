@@ -23,7 +23,65 @@ fail() {
 
 pass() {
   PASS_COUNT=$((PASS_COUNT + 1))
-  echo "GEÇTİ $PASS_COUNT/16: $1"
+  echo "GEÇTİ $PASS_COUNT/20: $1"
+}
+
+# Defter senaryoları için: base defteri remote'a koy (work + other görür).
+seed_ledger() {
+  cat >"$WORK_DIR/credits_ledger.json" <<'EOF'
+{
+  "entries": [
+    {"month": "2026-08", "series": "seed", "part": 1, "reserved": 900, "actual": 100, "ts": "2026-08-01T00:00:00+00:00"}
+  ]
+}
+EOF
+  git -C "$WORK_DIR" add credits_ledger.json
+  git -C "$WORK_DIR" commit -q -m "defter tabanı"
+  git -C "$WORK_DIR" push -q origin main
+}
+
+# Uzak tarafı hazırla: other klonu defterine "aimagine" girdisini ekleyip push'lar.
+push_other_ledger() {
+  OTHER_DIR="$CASE_DIR/other"
+  git clone -q "$REMOTE_DIR" "$OTHER_DIR"
+  git -C "$OTHER_DIR" config user.name "Uzak Kullanıcı"
+  git -C "$OTHER_DIR" config user.email "uzak@example.com"
+  git -C "$OTHER_DIR" config core.autocrlf false
+  cat >"$OTHER_DIR/credits_ledger.json" <<'EOF'
+{
+  "entries": [
+    {"month": "2026-08", "series": "seed", "part": 1, "reserved": 900, "actual": 100, "ts": "2026-08-01T00:00:00+00:00"},
+    {"month": "2026-08", "series": "aimagine", "part": 7, "reserved": 1900, "actual": 1214, "ts": "2026-08-09T01:00:00+00:00"}
+  ]
+}
+EOF
+  git -C "$OTHER_DIR" add credits_ledger.json
+  git -C "$OTHER_DIR" commit -q -m "uzak defter girdisi"
+  git -C "$OTHER_DIR" push -q origin main
+}
+
+# Yerel taraf: work klonu defterine "flashpoints" girdisini yazar (commit'siz).
+write_local_ledger() {
+  cat >"$WORK_DIR/credits_ledger.json" <<'EOF'
+{
+  "entries": [
+    {"month": "2026-08", "series": "seed", "part": 1, "reserved": 900, "actual": 100, "ts": "2026-08-01T00:00:00+00:00"},
+    {"month": "2026-08", "series": "flashpoints", "part": 6, "reserved": 900, "actual": 315, "ts": "2026-08-09T02:00:00+00:00"}
+  ]
+}
+EOF
+}
+
+assert_merged_remote_ledger() {
+  local name=$1
+  local remote_ledger
+  remote_ledger=$(git --git-dir="$REMOTE_DIR" show main:credits_ledger.json)
+  printf '%s' "$remote_ledger" | grep -q '"series": "aimagine"' ||
+    fail "$name uzak girdiyi kaybetti"
+  printf '%s' "$remote_ledger" | grep -q '"series": "flashpoints"' ||
+    fail "$name yerel girdiyi kaybetti"
+  [ "$(printf '%s\n' "$remote_ledger" | grep -c '"series"')" -eq 3 ] ||
+    fail "$name girdi sayısı 3 değil"
 }
 
 new_sandbox() {
@@ -248,4 +306,72 @@ git -C "$WORK_DIR" diff --cached --quiet ||
   fail "alt dizindeki CRLF marker dosyayı stage etti"
 pass "üst dizin pathspec altındaki CRLF untracked marker exit 1, stage yok, commit sayısı sabit"
 
-echo "SONUÇ: 16/16 senaryo geçti"
+new_sandbox "17-ledger-autostash-merge"
+seed_ledger
+push_other_ledger
+write_local_ledger
+run_persist credits_ledger.json >"$CASE_DIR/persist.log" 2>&1 || {
+  sed 's/^/  /' "$CASE_DIR/persist.log" >&2
+  fail "defter autostash çakışması otomatik birleşmedi"
+}
+grep -q "Autostash çakışması defter birleşimiyle çözüldü" "$CASE_DIR/persist.log" ||
+  fail "defter autostash birleşim mesajı loglanmadı"
+assert_merged_remote_ledger "defter autostash birleşimi"
+[ -z "$(git -C "$WORK_DIR" stash list)" ] ||
+  fail "defter autostash birleşimi stash girdisi bıraktı"
+[ -z "$(git -C "$WORK_DIR" ls-files -u)" ] ||
+  fail "defter autostash birleşimi çözülmemiş index bıraktı"
+pass "defter autostash çakışması birleşti, iki taraf da push'ta korundu"
+
+new_sandbox "18-ledger-rebase-merge"
+seed_ledger
+push_other_ledger
+write_local_ledger
+git -C "$WORK_DIR" add credits_ledger.json
+git -C "$WORK_DIR" commit -q -m "yerel defter girdisi"
+run_persist credits_ledger.json >"$CASE_DIR/persist.log" 2>&1 || {
+  sed 's/^/  /' "$CASE_DIR/persist.log" >&2
+  fail "defter rebase çakışması otomatik birleşmedi"
+}
+grep -q "Rebase çakışması defter birleşimiyle çözüldü" "$CASE_DIR/persist.log" ||
+  fail "defter rebase birleşim mesajı loglanmadı"
+assert_merged_remote_ledger "defter rebase birleşimi"
+git_dir=$(git -C "$WORK_DIR" rev-parse --git-dir)
+[ ! -e "$WORK_DIR/$git_dir/rebase-merge" ] || fail "defter rebase birleşimi rebase-merge bıraktı"
+pass "commit'li defter rebase çakışması birleşti ve push edildi"
+
+new_sandbox "19-ledger-mixed-conflict"
+seed_ledger
+push_other_ledger
+printf 'uzak state\n' >"$OTHER_DIR/state.txt"
+git -C "$OTHER_DIR" add state.txt
+git -C "$OTHER_DIR" commit -q -m "uzak state değişikliği"
+git -C "$OTHER_DIR" push -q origin main
+write_local_ledger
+printf 'yerel state\n' >"$WORK_DIR/state.txt"
+before=$(remote_commit_count)
+expect_killer "karışık çakışma" "$before" credits_ledger.json state.txt
+git_dir=$(git -C "$WORK_DIR" rev-parse --git-dir)
+[ ! -e "$WORK_DIR/$git_dir/rebase-merge" ] || fail "karışık çakışma rebase-merge bıraktı"
+pass "defter + defter-dışı karışık çakışma fail-closed kaldı"
+
+new_sandbox "20-ledger-bad-schema"
+printf '[{"ts": "2026-08-01T00:00:00+00:00"}]\n' >"$WORK_DIR/credits_ledger.json"
+git -C "$WORK_DIR" add credits_ledger.json
+git -C "$WORK_DIR" commit -q -m "bozuk şemalı defter tabanı"
+git -C "$WORK_DIR" push -q origin main
+OTHER_DIR="$CASE_DIR/other"
+git clone -q "$REMOTE_DIR" "$OTHER_DIR"
+git -C "$OTHER_DIR" config user.name "Uzak Kullanıcı"
+git -C "$OTHER_DIR" config user.email "uzak@example.com"
+git -C "$OTHER_DIR" config core.autocrlf false
+printf '[{"ts": "2026-08-01T00:00:00+00:00"}, {"ts": "uzak"}]\n' >"$OTHER_DIR/credits_ledger.json"
+git -C "$OTHER_DIR" add credits_ledger.json
+git -C "$OTHER_DIR" commit -q -m "uzak bozuk şema"
+git -C "$OTHER_DIR" push -q origin main
+printf '[{"ts": "2026-08-01T00:00:00+00:00"}, {"ts": "yerel"}]\n' >"$WORK_DIR/credits_ledger.json"
+before=$(remote_commit_count)
+expect_killer "bozuk şemalı defter" "$before" credits_ledger.json
+pass "bozuk şemalı defter çakışması fail-closed kaldı"
+
+echo "SONUÇ: 20/20 senaryo geçti"
