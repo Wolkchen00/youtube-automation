@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 15,
-  "next_part": 12,
+  "next_part": 13,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -163,6 +163,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-13T19:53:02.807756+00:00"
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep12/ep12_narrated_music.mp4",
+      "subtitle": "I Found UNNATURAL WATER... And It STARTED To SOLIDIFY!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-14T19:45:24.162340+00:00"
     }
   }
 }
