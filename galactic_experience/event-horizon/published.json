@@ -92,5 +92,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=a124b85fc1b04f8bb824ed72edefb4a7. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'a124b85fc1b04f8bb824ed72edefb4a7', 'total_platforms': 1, 'job_id': 'd439893c624c4930a1b6cd66375a4a79'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=554cb0dc56484e4ea0e6fa533177a2fb. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '554cb0dc56484e4ea0e6fa533177a2fb', 'total_platforms': 1, 'job_id': '6b7b5364b8d94a7c8a290debbea24018'}"
     }
+  },
+  {
+    "part": 10,
+    "subtitle": "Milky Way and Andromeda: A COSMIC COIN FLIP",
+    "ts": "2026-08-14T17:48:27.891797+00:00",
+    "results": {
+      "youtube": "B3UHsf030ZE",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=eb63bdbc46754a859a1eabed3926affc. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'eb63bdbc46754a859a1eabed3926affc', 'total_platforms': 1, 'job_id': '4babadd725df49738502cb7491614aee'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=64cf75c74740476abffde09c693923ee. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '64cf75c74740476abffde09c693923ee', 'total_platforms': 1, 'job_id': 'c3a61838437042938046a6097852c3c9'}"
+    }
   }
 ]

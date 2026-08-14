@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Jupiter's Red Spot: It's DISAPPEARING"
+  },
+  "synopsis": "Jupiter's iconic Great Red Spot, a colossal storm larger than Earth, has been observed shrinking for over 150 years.",
+  "narration": "Jupiter's iconic Great Red Spot, a colossal storm wider than Earth, has been raging for centuries. Yet, observations reveal this monumental vortex has been steadily shrinking for over 150 years. Will this planetary marvel eventually fade away, lost to Jupiter's turbulent atmosphere?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A majestic, close-up view of Jupiter's Great Red Spot, its swirling crimson and orange clouds forming a powerful anticyclonic storm. The intricate details of its turbulent edges and central eye are sharply defined against Jupiter's striped atmosphere. Camera slowly rotates, highlighting the storm's immense scale.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Zoom out to reveal a small, blue-marbled Earth floating beside the Great Red Spot, providing a stark scale comparison. Earth appears tiny next to the colossal storm, emphasizing its monumental size. The Red Spot subtly pulsates or shows faint signs of dynamic change as if slowly contracting over time.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A dynamic, slightly wider shot of Jupiter, with the Great Red Spot prominent but subtly diminished compared to its initial presentation. The surrounding Jovian atmosphere continues its complex flow, hinting at the long, slow process of the storm's observed reduction over centuries. Camera pulls back slightly, resolving to a grand view of the gas giant.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 6,
+  "music": "An awe-driven cosmic underscore with a steady, powerful pulse, reflecting Jupiter's immense scale. The music should carry a subtle sense of grandeur mixed with a touch of poignant observation, building to a brief swell as the Red Spot is shown shrinking, ending mid-phrase for a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

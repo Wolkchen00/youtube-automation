@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Black Holes: They SING at Us"
+  },
+  "synopsis": "NASA has captured and sonified the pressure waves emitted by a black hole, revealing an ultra-low B-flat note.",
+  "narration": "Black holes are not silent cosmic voids. NASA detected pressure waves emanating from a supermassive black hole, then sonified them. The result is a haunting B-flat, an astronomical note 57 octaves below middle C, a sound resonating through the vacuum of space.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A swirling, supermassive black hole, its accretion disk blazing with light and heat, seen from a distance. Subtle, slow-moving ripples or distortions in the surrounding cosmic dust and gas hint at unseen pressure waves propagating outwards, deep space in the background.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Close-up on the event horizon of the black hole, showing extreme gravitational lensing and spacetime distortion. Abstract, shimmering light patterns or energy pulses emanate from the core, visually representing the incredibly low-frequency sound waves, like a cosmic B-flat vibrating the fabric of reality.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A wider, dramatic shot of the black hole, its bright accretion disk radiating energy. The surrounding nebulae and starfields appear to gently undulate or subtly ripple, as if moved by an imperceptible, deep cosmic hum. The camera slowly orbits, maintaining the sense of vastness and ancient power.",
+      "seed": null
+    }
+  ],
+  "family": "derin uzay canavarları",
+  "seed_id": 8,
+  "music": "A deep, resonant, awe-driven cosmic underscore with a steady, low-frequency pulse, gradually building in subtle intensity. The music should evoke the profound mystery and ancient power of a black hole's unseen vibrations, with a brief swell at the moment of sonic visualization, ending mid-phrase for a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

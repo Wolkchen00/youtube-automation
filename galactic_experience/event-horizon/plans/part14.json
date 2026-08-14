@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "Earth's Trees: More Than Milky Way Stars"
+  },
+  "synopsis": "There are estimated to be more individual trees on Earth than there are stars in the entire Milky Way galaxy.",
+  "narration": "It's a staggering comparison: there are more individual trees on Earth than there are stars in our entire Milky Way galaxy. Our planet's vibrant forests, teeming with uncountable life, dwarf the glittering cosmic expanse above in sheer numbers. A profound testament to terrestrial abundance.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A breathtaking, sweeping aerial view over an ancient, dense forest on Earth. Sunlight filters through a canopy of countless trees, casting intricate shadows on the forest floor. The sheer volume of individual trees fills the frame, stretching endlessly into the horizon, conveying immense, organic abundance.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A seamless transition from the dense forest to a glittering, vast expanse of the Milky Way galaxy. The camera slowly zooms through a starfield, revealing billions of stars, yet conceptually less numerous than the trees. The stars are individually distinct, yet collectively form a grand structure, juxtaposing the two forms of 'countless'.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A split composition: the bottom half showing a vibrant, uncountable forest on Earth, gently swaying, while the top half displays a deep-space vista of the Milky Way, awe-inspiring but with a sense of its components being globally fewer. The imagery contrasts the organic, localized abundance with the cosmic, grand structure.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 7,
+  "music": "An awe-driven cosmic underscore blending organic, earthy textures with a vast, celestial ambiance. A steady, gentle pulse underlies the theme of abundant life, building to a brief swell as the comparison of trees to stars is revealed, without a glacial intro or gentle outro, ending mid-phrase to seamlessly loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

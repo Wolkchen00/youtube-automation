@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Solar Eclipse: A COSMIC Ballet"
+  },
+  "synopsis": "The rare cosmic alignment where the Sun and Moon appear almost identical in size from Earth is a profound optical coincidence.",
+  "narration": "The perfect alignment during a total solar eclipse is no cosmic accident; it's a stunning coincidence. From Earth, the Sun is precisely 400 times wider than the Moon, and almost exactly 400 times farther away, making them appear the same size. A rare celestial ballet, only seen from our world.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Dramatic close-up of a total solar eclipse from Earth's perspective, showcasing the ethereal corona shimmering brightly, against a deep indigo sky during twilight. The moon's silhouette is perfectly centered, obscuring the sun's disk. Camera slowly pulls back, revealing a sliver of Earth's curved horizon.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Abstract visual explanation of scale: a conceptual representation showing a tiny Earth, then the Moon's orbit, then a vastly larger Sun in the distance. Visual lines or guides demonstrate the 400x size difference and 400x distance coincidence, leading to their apparent matching size from Earth. Cinematic lens flares and precise alignment.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A breathtaking view of the Earth, Moon, and Sun perfectly aligned during a total solar eclipse, seen from far beyond the Moon's orbit. Earth glows faintly, the Moon casts a long, dark shadow cone, and the distant Sun's corona is visible. The scene is majestic and serene, emphasizing the cosmic geometry.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 4,
+  "music": "Awe-driven cosmic underscore with a steady, anticipatory pulse, building to a brief, majestic swell as the eclipse peaks. The music should evoke precision, a rare celestial dance, and profound wonder, without a glacial intro or gentle outro, ending mid-phrase to seamlessly loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

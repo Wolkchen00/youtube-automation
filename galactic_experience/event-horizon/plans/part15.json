@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Sun and Jupiter: They Don't Share a Center"
+  },
+  "synopsis": "Jupiter's immense mass means that it and the Sun both orbit a barycenter, a shared center of mass, located just beyond the Sun's visible surface.",
+  "narration": "Despite its immense gravity, the Sun doesn't sit at the precise center of its own orbit. Instead, both the Sun and Jupiter, the Solar System's most massive planet, orbit a shared barycenter. This invisible balance point actually lies just outside the Sun's visible surface.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A majestic, close-up shot of Jupiter, showcasing its swirling, banded atmosphere and the immense scale of its gaseous body. The camera slowly tracks its motion through space, emphasizing its colossal mass and gravitational presence within the Solar System.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A dynamic visualization of the Sun and Jupiter orbiting their shared barycenter. The Sun appears to 'wobble' subtly as it orbits a point just outside its visible surface, while Jupiter orbits the same point much farther out. A subtle, glowing point or line illustrates the barycenter, emphasizing the unexpected mechanics. Dark, empty space surrounds them.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A wider, cinematic view of the Sun and Jupiter in their shared orbital dance around the barycenter. The camera slowly pulls back, showing the two giants in relative motion, with the Sun's powerful luminosity balanced against Jupiter's massive gravitational pull. The rest of the inner solar system is subtly implied or very distant, focusing on the two main bodies.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 15,
+  "music": "An awe-driven cosmic underscore with a steady, rhythmic pulse, reflecting the dynamic orbital mechanics of massive bodies. The music should evoke a sense of gravitational balance and surprising interaction, building to a brief swell as the barycenter is revealed, ending mid-phrase for a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}
