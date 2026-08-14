@@ -58,5 +58,19 @@
       "instagram": null,
       "tiktok": null
     }
+  },
+  {
+    "part": 7,
+    "subtitle": "Building A Glowing Crystal Cottage From Scratch! 🛠️✨",
+    "ts": "2026-08-14T16:11:47.032923+00:00",
+    "results": {
+      "youtube": "27qQOJa3YRI",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=dc8bc9473e324e2197e0e1900bb9f3e5. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'dc8bc9473e324e2197e0e1900bb9f3e5', 'total_platforms': 1, 'job_id': '7e29038d604b4f3e829fa31da451f682'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=593fea07aef349bca13cad463da53011. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '593fea07aef349bca13cad463da53011', 'total_platforms': 1, 'job_id': 'c17e372f6d874585897fc962d45fa94f'}"
+    }
   }
 ]

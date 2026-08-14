@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a",
   "auto_replenish": {
     "enabled": true,
@@ -171,6 +171,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-08T22:42:04.212708+00:00"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep07/ep07_hooked.mp4",
+      "subtitle": "Building A Glowing Crystal Cottage From Scratch! 🛠️✨",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-14T16:11:47.033395+00:00"
     }
   }
 }
