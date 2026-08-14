@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 8,
+  "next_part": 9,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -263,6 +263,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-13T21:24:08.854989+00:00"
+    },
+    "8": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep08/ep08_narrated_music_titled.mp4",
+      "subtitle": "How Tree Rings Proved Vikings Reached America In 1021!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-14T21:04:36.050205+00:00"
     }
   }
 }

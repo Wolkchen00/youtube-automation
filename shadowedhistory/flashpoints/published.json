@@ -73,5 +73,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c2f71c500c3848c9969c82932119bb6f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c2f71c500c3848c9969c82932119bb6f', 'total_platforms': 1, 'job_id': '1bacf66bd7e34454976d8a435c3b6ae6'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=806ec8bae3284ce3882106b77494f7d0. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '806ec8bae3284ce3882106b77494f7d0', 'total_platforms': 1, 'job_id': 'd316bf85756e4cb8aa145052c56d3bf0'}"
     }
+  },
+  {
+    "part": 8,
+    "subtitle": "How Tree Rings Proved Vikings Reached America In 1021!",
+    "ts": "2026-08-14T21:04:36.049712+00:00",
+    "results": {
+      "youtube": "vhQwh_B7cQ0",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ebd4d12a6e094b99b58f58c2d84ce942. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ebd4d12a6e094b99b58f58c2d84ce942', 'total_platforms': 1, 'job_id': 'e542a0ee68f747b29130796a5fc92798'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=bbc8ffb10c0e45cdb1577566c5fc5aca. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'bbc8ffb10c0e45cdb1577566c5fc5aca', 'total_platforms': 1, 'job_id': '70448c7e3c3644878400efbddcaa1fe4'}"
+    }
   }
 ]
