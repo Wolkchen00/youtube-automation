@@ -87,5 +87,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ebd4d12a6e094b99b58f58c2d84ce942. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ebd4d12a6e094b99b58f58c2d84ce942', 'total_platforms': 1, 'job_id': 'e542a0ee68f747b29130796a5fc92798'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=bbc8ffb10c0e45cdb1577566c5fc5aca. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'bbc8ffb10c0e45cdb1577566c5fc5aca', 'total_platforms': 1, 'job_id': '70448c7e3c3644878400efbddcaa1fe4'}"
     }
+  },
+  {
+    "part": 9,
+    "subtitle": "The Real Reason America Sold Tomato Pills In The 1830s!",
+    "ts": "2026-08-15T20:55:31.896518+00:00",
+    "results": {
+      "youtube": "OiJqRrMP6vg",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=320b06d928b64f61a4e7e256b8e9d77a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '320b06d928b64f61a4e7e256b8e9d77a', 'total_platforms': 1, 'job_id': 'fe0c4829d8e747e387dba721ad10a1ec'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=88a724d8f9bb4ff18180a0c40db0d6e1. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '88a724d8f9bb4ff18180a0c40db0d6e1', 'total_platforms': 1, 'job_id': '715231b425e24043a9b7924bbc6bf968'}"
+    }
   }
 ]
