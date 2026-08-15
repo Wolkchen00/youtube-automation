@@ -106,5 +106,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=eb63bdbc46754a859a1eabed3926affc. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'eb63bdbc46754a859a1eabed3926affc', 'total_platforms': 1, 'job_id': '4babadd725df49738502cb7491614aee'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=64cf75c74740476abffde09c693923ee. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '64cf75c74740476abffde09c693923ee', 'total_platforms': 1, 'job_id': 'c3a61838437042938046a6097852c3c9'}"
     }
+  },
+  {
+    "part": 11,
+    "subtitle": "Solar Eclipse: A COSMIC Ballet",
+    "ts": "2026-08-15T17:06:23.782031+00:00",
+    "results": {
+      "youtube": "ugugo5e823A",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d61ed7f2426c41d0a3fbd0206284419f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd61ed7f2426c41d0a3fbd0206284419f', 'total_platforms': 1, 'job_id': '0f934d8dcdee452aba83b40f81ed7c2c'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=622157a3b34f470e9ff52ba40986533f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '622157a3b34f470e9ff52ba40986533f', 'total_platforms': 1, 'job_id': '86f585e73b7d405ea2df4ad9dd1a6e4c'}"
+    }
   }
 ]
