@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Tsutomu Yamaguchi: The Double Survivor"
+  },
+  "synopsis": "Tsutomu Yamaguchi remarkably survived both the atomic bombings of Hiroshima and Nagasaki in 1945, a unique and officially recognized feat.",
+  "narration": "Tsutomu Yamaguchi, a Japanese engineer, endured what no one else officially did: surviving both the Hiroshima and Nagasaki atomic bombings in 1945. His extraordinary story of resilience was formally recognized in 2009, a testament to human survival against unimaginable odds.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Medium shot of a Japanese man in his early 30s, dressed in a 1940s business suit, walking through a bustling, pre-war Hiroshima street. Sunlight is bright, people are going about their day. Suddenly, a blinding flash of white light fills the frame from behind him, followed by a violent shockwave distorting the scene. The man shields his eyes just as the world blurs into chaos. The camera simulates a brief, jarring shake.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close-up of the same man, now haggard, wounded, and disoriented, stumbling through the desolate, ash-covered ruins of Nagasaki. Smoke drifts in the background. His clothes are torn, but his eyes show a profound, weary resilience and a glint of survival. He clutches a small, personal item. The camera slowly pulls back, revealing a landscape of utter devastation around him, emphasizing his solitary, enduring presence.",
+      "seed": null
+    }
+  ],
+  "family": "unutulmuş kişi",
+  "seed_id": 13,
+  "music": "Somber and reflective yet with an underlying pulse of resilience and determination. Features a subtle, driving percussion and a poignant, ascending string motif. The intensity builds gently, reflecting survival and hope, and ends on a sustained, resonant note that cycles back.",
+  "title_card": {
+    "title": "Tsutomu Yamaguchi",
+    "subtitle": "Hiroshima & Nagasaki, Japan, 1945 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

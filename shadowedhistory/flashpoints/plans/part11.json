@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "The Real Reason The Fax Machine Came First"
+  },
+  "synopsis": "The fax machine predates the telephone by over three decades, revealing a surprising timeline in communication technology.",
+  "narration": "Long before Alexander Graham Bell patented the telephone, the fax machine already existed. Patented in 1843, this groundbreaking invention allowed remote image transmission decades ahead of its time, fundamentally reshaping our understanding of technological evolution.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Close-up of an early 19th-century inventor, a man in his 40s with intricate spectacles and period attire, intently inspecting a complex, brass and wire telegraph apparatus with a stylus moving across chemically treated paper. His face is illuminated by a single, warm gas lamp, showing concentration and determination. The camera subtly pushes in, highlighting the delicate machinery.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "From a slightly wider, lower angle, a hand with gloved fingers meticulously adjusts fine wires on a 1840s electrical transmitting device. Behind it, a sheet of paper with faint, complex patterns is slowly emerging from a receiver mechanism, hinting at distant communication. The room is dimly lit, focusing on the mechanical marvel, with subtle steam rising from a component. Camera pans slowly upwards, revealing more of the device's intricate gears and levers.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 17,
+  "music": "Fast, ticking, electronic percussion with a driving synth bassline, evoking a sense of urgent technological discovery. Percussive elements build tension, maintaining a constant forward momentum. No ethereal intro, just a hard cut into the groove, ending abruptly mid-phrase.",
+  "title_card": {
+    "title": "The Fax Machine",
+    "subtitle": "London, 1843 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}
