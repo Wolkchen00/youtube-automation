@@ -1,48 +1,55 @@
 {
   "version": 1,
-  "generated_at": "2026-08-09T09:34:23.335907+00:00",
-  "source_snapshot": "2026-08-09",
-  "mode": "gecici_baseline",
-  "channel_median_30d": 5.0,
+  "generated_at": "2026-08-16T09:22:32.057907+00:00",
+  "source_snapshot": "2026-08-16",
+  "mode": "yas_normalize",
+  "channel_median_30d": 4.0,
   "series_stats": {
-    "n_published": 6,
-    "n_comparable": 5,
-    "series_median": 5.0,
+    "n_published": 7,
+    "n_comparable": 6,
+    "series_median": 3.5,
     "videos": [
       {
         "part": 1,
         "video_id": "2yygBtzjp3M",
         "family": "absürt eğlence mimarisi",
         "metric": 0,
-        "age_h": 227.746
+        "age_h": 395.391
       },
       {
         "part": 2,
         "video_id": "j52QwXwKlpM",
         "family": "fantezi konutlar",
-        "metric": 7,
-        "age_h": 207.374
+        "metric": 6,
+        "age_h": 375.019
       },
       {
         "part": 3,
         "video_id": "lIowMRSJb_U",
         "family": "dönüşüm",
         "metric": 5,
-        "age_h": 184.059
+        "age_h": 351.704
       },
       {
         "part": 4,
         "video_id": "BZwMTgCKDp4",
         "family": "oyun/film üsleri",
-        "metric": 14,
-        "age_h": 159.995
+        "metric": 15,
+        "age_h": 327.64
       },
       {
         "part": 5,
         "video_id": "y68ttrNIZiE",
         "family": "saklı/mühendislik harikası",
         "metric": 0,
-        "age_h": 134.65
+        "age_h": 302.295
+      },
+      {
+        "part": 6,
+        "video_id": "vZa2uEZnXCU",
+        "family": "oyun/film üsleri",
+        "metric": 2,
+        "age_h": 176.858
       }
     ]
   },
@@ -60,12 +67,12 @@
     {
       "family": "fantezi konutlar",
       "n": 1,
-      "median": 7.0
+      "median": 6.0
     },
     {
       "family": "oyun/film üsleri",
-      "n": 1,
-      "median": 14.0
+      "n": 2,
+      "median": 8.5
     },
     {
       "family": "saklı/mühendislik harikası",
@@ -86,11 +93,11 @@
   "rollback": {
     "active": false,
     "history": [
-      null,
       0.0,
-      5.0
+      5.0,
+      3.5
     ]
   },
-  "brief_note": "early baseline, limited data. Reserve an exploration slot for geri dönüşüm / off-grid dönüşüm.",
+  "brief_note": "Reserve an exploration slot for geri dönüşüm / off-grid dönüşüm.",
   "extra_topics": []
 }

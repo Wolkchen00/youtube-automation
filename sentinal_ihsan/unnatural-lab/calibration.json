@@ -1,59 +1,85 @@
 {
   "version": 1,
-  "generated_at": "2026-08-09T09:34:23.971267+00:00",
-  "source_snapshot": "2026-08-09",
-  "mode": "gecici_baseline",
-  "channel_median_30d": 58.0,
+  "generated_at": "2026-08-16T09:22:32.653580+00:00",
+  "source_snapshot": "2026-08-16",
+  "mode": "yas_normalize",
+  "channel_median_30d": 525.0,
   "series_stats": {
-    "n_published": 6,
-    "n_comparable": 4,
-    "series_median": 75.5,
+    "n_published": 10,
+    "n_comparable": 8,
+    "series_median": 960.5,
     "videos": [
       {
         "part": 3,
         "video_id": "5Ke4t1WRT3w",
         "family": "",
-        "metric": 812,
-        "age_h": 227.733
+        "metric": 801,
+        "age_h": 395.378
       },
       {
         "part": 4,
         "video_id": "XdlbRkY7J6o",
         "family": "",
-        "metric": 77,
-        "age_h": 203.586
+        "metric": 76,
+        "age_h": 371.231
       },
       {
         "part": 6,
         "video_id": "WFsI2SxVoOM",
         "family": "",
         "metric": 74,
-        "age_h": 155.875
+        "age_h": 323.52
       },
       {
         "part": 7,
         "video_id": "q9MNNewPSlA",
         "family": "",
-        "metric": 58,
-        "age_h": 131.366
+        "metric": 57,
+        "age_h": 299.011
+      },
+      {
+        "part": 8,
+        "video_id": "fn7wuBVzQAg",
+        "family": "",
+        "metric": 1723,
+        "age_h": 204.012
+      },
+      {
+        "part": 9,
+        "video_id": "DU6F3AeUMzM",
+        "family": "",
+        "metric": 2554,
+        "age_h": 180.145
+      },
+      {
+        "part": 10,
+        "video_id": "J0n5aOgMKvg",
+        "family": "",
+        "metric": 2158,
+        "age_h": 156.093
+      },
+      {
+        "part": 11,
+        "video_id": "G3NkAzMFdUQ",
+        "family": "impossible-material",
+        "metric": 1120,
+        "age_h": 59.686
       }
     ]
   },
-  "family_stats": [],
-  "recommendations": {
-    "boost_families": [],
-    "explore_family": null,
-    "empty_reason": null
-  },
-  "double_down": [
+  "family_stats": [
     {
-      "part": 3,
-      "video_id": "5Ke4t1WRT3w",
-      "family": "",
-      "metric": 812,
-      "ratio": 14.0
+      "family": "impossible-material",
+      "n": 1,
+      "median": 1120.0
     }
   ],
+  "recommendations": {
+    "boost_families": [],
+    "explore_family": "impossible-behaviour",
+    "empty_reason": null
+  },
+  "double_down": [],
   "pilot_kill": {
     "triggered": false,
     "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
@@ -61,11 +87,11 @@
   "rollback": {
     "active": false,
     "history": [
-      null,
       801.0,
-      75.5
+      75.5,
+      960.5
     ]
   },
-  "brief_note": "",
+  "brief_note": "Reserve an exploration slot for impossible-behaviour.",
   "extra_topics": []
 }

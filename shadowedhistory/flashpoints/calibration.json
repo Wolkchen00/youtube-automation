@@ -1,41 +1,62 @@
 {
   "version": 1,
-  "generated_at": "2026-08-09T09:34:22.740746+00:00",
-  "source_snapshot": "2026-08-09",
-  "mode": "gecici_baseline",
-  "channel_median_30d": 95.0,
+  "generated_at": "2026-08-16T09:22:31.463692+00:00",
+  "source_snapshot": "2026-08-16",
+  "mode": "yas_normalize",
+  "channel_median_30d": 81.0,
   "series_stats": {
-    "n_published": 5,
-    "n_comparable": 4,
-    "series_median": 106.5,
+    "n_published": 9,
+    "n_comparable": 7,
+    "series_median": 137.0,
     "videos": [
       {
         "part": 1,
         "video_id": "WG146S7KNnk",
         "family": "tuhaf savaş",
         "metric": 20,
-        "age_h": 227.764
+        "age_h": 395.409
       },
       {
         "part": 2,
         "video_id": "q-jVtry0ntk",
         "family": "imkânsız mühendislik",
-        "metric": 242,
-        "age_h": 202.191
+        "metric": 244,
+        "age_h": 369.836
       },
       {
         "part": 3,
         "video_id": "IjR6ooIU6SQ",
         "family": "yanılgı kırıcı",
-        "metric": 193,
-        "age_h": 178.387
+        "metric": 192,
+        "age_h": 346.032
       },
       {
         "part": 4,
         "video_id": "kMURIA0ZXfQ",
         "family": "unutulmuş kişi",
-        "metric": 16,
-        "age_h": 154.287
+        "metric": 15,
+        "age_h": 321.932
+      },
+      {
+        "part": 5,
+        "video_id": "sBF2-IvStKY",
+        "family": "zaman çarpması",
+        "metric": 771,
+        "age_h": 205.137
+      },
+      {
+        "part": 6,
+        "video_id": "u8qMm7sa2u8",
+        "family": "tuhaf savaş",
+        "metric": 20,
+        "age_h": 178.412
+      },
+      {
+        "part": 7,
+        "video_id": "NMBoI-RD53s",
+        "family": "unutulmuş kişi",
+        "metric": 137,
+        "age_h": 58.172
       }
     ]
   },
@@ -43,22 +64,27 @@
     {
       "family": "imkânsız mühendislik",
       "n": 1,
-      "median": 242.0
+      "median": 244.0
     },
     {
       "family": "tuhaf savaş",
-      "n": 1,
+      "n": 2,
       "median": 20.0
     },
     {
       "family": "unutulmuş kişi",
-      "n": 1,
-      "median": 16.0
+      "n": 2,
+      "median": 76.0
     },
     {
       "family": "yanılgı kırıcı",
       "n": 1,
-      "median": 193.0
+      "median": 192.0
+    },
+    {
+      "family": "zaman çarpması",
+      "n": 1,
+      "median": 771.0
     }
   ],
   "recommendations": {
@@ -66,19 +92,27 @@
     "explore_family": "efsane vs kayıt",
     "empty_reason": null
   },
-  "double_down": [],
+  "double_down": [
+    {
+      "part": 5,
+      "video_id": "sBF2-IvStKY",
+      "family": "zaman çarpması",
+      "metric": 771,
+      "ratio": 9.5185
+    }
+  ],
   "pilot_kill": {
     "triggered": false,
-    "detail": "pilot esigi tetiklenmedi"
+    "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
   },
   "rollback": {
     "active": false,
     "history": [
-      null,
       20.0,
-      106.5
+      106.5,
+      137.0
     ]
   },
-  "brief_note": "early baseline, limited data. Reserve an exploration slot for efsane vs kayıt.",
+  "brief_note": "Reserve an exploration slot for efsane vs kayıt. Double down on breakout patterns in: zaman çarpması.",
   "extra_topics": []
 }
