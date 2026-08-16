@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 15,
-  "next_part": 14,
+  "next_part": 15,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -185,6 +185,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-15T19:12:09.626152+00:00"
+    },
+    "14": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep14/ep14_narrated_music.mp4",
+      "subtitle": "I Found UNNATURAL POTTERY... And It STARTED To REPAIR!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-16T19:12:16.418658+00:00"
     }
   }
 }

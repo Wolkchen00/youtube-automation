@@ -120,5 +120,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=fb8a229707c94b94aa5c9df2b35a5871. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'fb8a229707c94b94aa5c9df2b35a5871', 'total_platforms': 1, 'job_id': 'e093521a27ca43af95d6087ed5c4fed4'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=5fb4ef32860946f9a8e32d4b63b24db6. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '5fb4ef32860946f9a8e32d4b63b24db6', 'total_platforms': 1, 'job_id': '746be7365e4747de891f272c31091d01'}"
     }
+  },
+  {
+    "part": 14,
+    "subtitle": "I Found UNNATURAL POTTERY... And It STARTED To REPAIR!",
+    "ts": "2026-08-16T19:12:16.418033+00:00",
+    "results": {
+      "youtube": "M_QQcLEGQjA",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=4ac2523be80c4d9a8392f1e5992ef4c0. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '4ac2523be80c4d9a8392f1e5992ef4c0', 'total_platforms': 1, 'job_id': 'a59b6513309e46939e8862333dfd0775'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d2076d0e0f714fe580d3bcbb8139704a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd2076d0e0f714fe580d3bcbb8139704a', 'total_platforms': 1, 'job_id': '3dc0ce5b6c414e96a44e5f3e3f3b2619'}"
+    }
   }
 ]
