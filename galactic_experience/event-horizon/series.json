@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 15,
-  "next_part": 12,
+  "next_part": 13,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -305,6 +305,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-15T17:06:23.782572+00:00"
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep12/ep12_narrated_music.mp4",
+      "subtitle": "Black Holes: They SING at Us",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-16T17:04:37.305583+00:00"
     }
   }
 }

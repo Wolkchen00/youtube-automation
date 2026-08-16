@@ -120,5 +120,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d61ed7f2426c41d0a3fbd0206284419f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd61ed7f2426c41d0a3fbd0206284419f', 'total_platforms': 1, 'job_id': '0f934d8dcdee452aba83b40f81ed7c2c'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=622157a3b34f470e9ff52ba40986533f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '622157a3b34f470e9ff52ba40986533f', 'total_platforms': 1, 'job_id': '86f585e73b7d405ea2df4ad9dd1a6e4c'}"
     }
+  },
+  {
+    "part": 12,
+    "subtitle": "Black Holes: They SING at Us",
+    "ts": "2026-08-16T17:04:37.304908+00:00",
+    "results": {
+      "youtube": "WUErzXuC-9g",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b0b150a2d83247df907b54326bab8d2e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b0b150a2d83247df907b54326bab8d2e', 'total_platforms': 1, 'job_id': 'd8c93d339e964a188ee64ceea5f0e12a'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=709467fd92ee4009bb3b8ded0659033c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '709467fd92ee4009bb3b8ded0659033c', 'total_platforms': 1, 'job_id': 'd1ff113acc894085b56e94d7400a4ea4'}"
+    }
   }
 ]
