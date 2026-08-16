@@ -1,0 +1,143 @@
+{
+  "generated_at": "2026-08-16T08:34:34.832925+00:00",
+  "snapshot_date": "2026-08-16",
+  "period": "2026-08-10 to 2026-08-16",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 126,
+        "total_views": 108975,
+        "total_videos": 254
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "OiJqRrMP6vg",
+          "title": "The Real Reason America Sold Tomato Pills In The 1830s!",
+          "published": "2026-08-15T20:55:12Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "vhQwh_B7cQ0",
+          "title": "How Tree Rings Proved Vikings Reached America In 1021!",
+          "published": "2026-08-14T21:04:17Z",
+          "views": 53,
+          "views_48h": 53,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "NMBoI-RD53s",
+          "title": "Hiroo Onoda: The Last Samurai",
+          "published": "2026-08-13T21:23:41Z",
+          "views": 137,
+          "views_48h": 106,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 82
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 118,
+        "total_views": 110747,
+        "total_videos": 160
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "8NHuc97QN8A",
+          "title": "This MATCHBOX Is NOT Supposed To BE A FOREST?!",
+          "published": "2026-08-15T19:11:39Z",
+          "views": 460,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "L0xmetOFYVo",
+          "title": "I Found UNNATURAL WATER... And It STARTED To SOLIDIFY!",
+          "published": "2026-08-14T19:44:56Z",
+          "views": 628,
+          "views_48h": 628,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "G3NkAzMFdUQ",
+          "title": "This GLASS Is NOT Supposed To FLEX?!",
+          "published": "2026-08-13T19:52:53Z",
+          "views": 1120,
+          "views_48h": 866,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "J0n5aOgMKvg",
+          "title": "Can I Turn A BOTTLE Into A NEVER-ENDING FOUNTAIN?!",
+          "published": "2026-08-09T19:28:26Z",
+          "views": 2278,
+          "views_48h": 2139,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 538
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 127,
+        "total_views": 61068,
+        "total_videos": 183
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "ugugo5e823A",
+          "title": "Solar Eclipse: A COSMIC Ballet",
+          "published": "2026-08-15T17:06:02Z",
+          "views": 85,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "B3UHsf030ZE",
+          "title": "Milky Way and Andromeda: A COSMIC COIN FLIP",
+          "published": "2026-08-14T17:48:04Z",
+          "views": 63,
+          "views_48h": 63,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "eIw6nx2S6WY",
+          "title": "What If Earth Stopped Spinning? TOTAL DESTRUCTION",
+          "published": "2026-08-13T17:43:57Z",
+          "views": 25,
+          "views_48h": 25,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "JTlRJteJzi8",
+          "title": "WASP-76b: Iron Rains from the Sky",
+          "published": "2026-08-09T17:16:10Z",
+          "views": 120,
+          "views_48h": 106,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 174.0
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 98,
+        "total_views": 141101,
+        "total_videos": 230
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "27qQOJa3YRI",
+          "title": "Building A Glowing Crystal Cottage From Scratch! 🛠️✨",
+          "published": "2026-08-14T16:11:19Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 4
+    }
+  }
+}
