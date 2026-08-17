@@ -115,5 +115,20 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=a4f1a93a87f1428fafdfd7d3ad955f60. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'a4f1a93a87f1428fafdfd7d3ad955f60', 'total_platforms': 1, 'job_id': '92ecf4807ad74b62acd7984a6eb79878'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=142862eb28fb4c5d9ae194161df1dc7f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '142862eb28fb4c5d9ae194161df1dc7f', 'total_platforms': 1, 'job_id': '5f86d8151f3f4e19919bf3dc1cd66f70'}"
     }
+  },
+  {
+    "part": 11,
+    "subtitle": "The Real Reason The Fax Machine Came First",
+    "ts": "2026-08-17T21:01:32.862404+00:00",
+    "results": {
+      "youtube": null,
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "youtube": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=16ad4a3d710a4922afc1d28222134525. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '16ad4a3d710a4922afc1d28222134525', 'total_platforms': 1, 'job_id': 'fc759c3ba22049ec80c1eeb99489498e'}",
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ecdc71d4ec2d4b6ba2b37a85fff835db. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ecdc71d4ec2d4b6ba2b37a85fff835db', 'total_platforms': 1, 'job_id': '0319ebf8238e4bbe8c3ed8b8d9ef793f'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=2a56ecad6d4c4c4286d609c6aa6f38ef. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '2a56ecad6d4c4c4286d609c6aa6f38ef', 'total_platforms': 1, 'job_id': 'f23593df7af3444792744801f041fb32'}"
+    }
   }
 ]
