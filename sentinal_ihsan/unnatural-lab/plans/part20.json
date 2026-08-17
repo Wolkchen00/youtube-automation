@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 20,
+    "title": "This BRUSH Is NOT Supposed To HUM?!"
+  },
+  "synopsis": "A man uses a hairbrush that, when held, emits a faint, human-like hum and vibrates subtly in his hand.",
+  "narration": "This brush started making this weird sound yesterday, it's not even plugged in. And you can feel it, this strange little vibration, right in your hand.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photoreal close-up on ihsan_maker's hand holding a plain, dark hairbrush. The view stays in one unchanging position and angle for the whole shot. His hand holding the brush visibly trembles ever so slightly, and a faint, almost imperceptible ripple in the air around the bristles suggests a subtle, low hum. His expression is calm but focused. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photoreal mid-shot of ihsan_maker bringing his ear close to the hairbrush, which he holds steady in his hand. The view stays in one unchanging position and angle for the whole shot. A subtle vibration is visible through his fingers gripping the handle, as if he's intently listening to a faint, human-like hum emanating from the brush. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photoreal close-up on the hairbrush resting on a smooth, slightly dusty wooden table surface. The view stays in one unchanging position and angle for the whole shot. A few loose dust particles and tiny hairs on the table visibly jump and dance subtly around the base of the brush, indicating a low, constant, unseen vibration emanating from it. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photoreal close-up of ihsan_maker picking the hairbrush up again, holding it calmly in his hand. The view stays in one unchanging position and angle for the whole shot. The faint, internal vibration and subtle, almost-human hum continues, his hand subtly absorbing the uncanny sensation as he holds it. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "slightly-uncanny",
+  "music": "A sparse, dry, percussive bed built from soft taps, low woody hits and one quiet sustained tone, opening with sound in the very first second. Mostly negative space so the sounds of the work stay in front; slow steady pulse, no melody line, no swell, no ethereal pads, and no vocals.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

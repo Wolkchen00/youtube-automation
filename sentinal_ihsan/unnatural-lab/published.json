@@ -134,5 +134,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=4ac2523be80c4d9a8392f1e5992ef4c0. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '4ac2523be80c4d9a8392f1e5992ef4c0', 'total_platforms': 1, 'job_id': 'a59b6513309e46939e8862333dfd0775'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d2076d0e0f714fe580d3bcbb8139704a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd2076d0e0f714fe580d3bcbb8139704a', 'total_platforms': 1, 'job_id': '3dc0ce5b6c414e96a44e5f3e3f3b2619'}"
     }
+  },
+  {
+    "part": 15,
+    "subtitle": "Can I Turn A LIGHT BEAM Into A SOLID OBJECT?!",
+    "ts": "2026-08-17T19:28:10.572401+00:00",
+    "results": {
+      "youtube": "MNHdULJfHuo",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=2332ba2f708f417fba78e779918e56c6. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '2332ba2f708f417fba78e779918e56c6', 'total_platforms': 1, 'job_id': '78e46b6fe39b43ad85d5b4ccfa09f4f0'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=e7e3f4b4d5c844f9890f46dc5b87de76. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'e7e3f4b4d5c844f9890f46dc5b87de76', 'total_platforms': 1, 'job_id': 'acd1813c1feb4173bdcf060571d7d882'}"
+    }
   }
 ]

@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "I Found UNNATURAL CLOTH... And It STARTED To HARDEN!"
+  },
+  "synopsis": "A man handles a piece of ordinary-looking cloth that, upon touch, instantly stiffens and holds rigid, impossible shapes.",
+  "narration": "Just found this old rag, thought I'd clean up a bit, but then it just... froze. I mean, look at this thing, it's like glass now...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photoreal close-up of ihsan_maker's hand gently touching a crumpled piece of ordinary, soft grey fabric on a simple wooden surface. The view stays in one unchanging position and angle for the whole shot. As his fingers make contact, the touched area of the fabric visibly stiffens and freezes into a rigid, angular shape, defying its soft nature. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photoreal mid-shot of ihsan_maker's hands attempting to smooth out the partially hardened grey cloth on the wooden surface. The view stays in one unchanging position and angle for the whole shot. Each movement causes new areas of the fabric to instantly become stiff and unyielding, creating sharp, impossible folds that resist flattening. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photoreal close-up as ihsan_maker tries to drape the stiffening grey cloth over a small, mundane object like a wooden block. The view stays in one unchanging position and angle for the whole shot. The fabric defies gravity, forming an impossibly rigid, self-supporting structure in mid-air, holding its shape without support. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photoreal close-up of ihsan_maker's hands holding the now largely rigid, angular piece of grey cloth, which maintains its impossible, stiff form. The view stays in one unchanging position and angle for the whole shot. A small, untouched section of the fabric at the edge remains soft and pliable, contrasting with its new impossible state. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-material",
+  "music": "A sparse, dry, percussive bed built from soft taps, low woody hits and one quiet sustained tone, opening with sound in the very first second. Mostly negative space so the sounds of the work stay in front; slow steady pulse, no melody line, no swell, no ethereal pads, and no vocals.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

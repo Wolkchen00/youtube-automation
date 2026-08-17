@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 19,
+    "title": "I Found UNNATURAL PAGES... And They STARTED To REPLICATE!"
+  },
+  "synopsis": "A man attempts to turn the pages of a book, only to find new, blank pages continuously materializing between the ones he's already turned.",
+  "narration": "Okay, so I picked up this old book and I've been trying to read it for days. But the pages just keep... appearing. It's endless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photoreal close-up on ihsan_maker's hands turning a page in a thick, antique-looking book resting on a wooden table. The view stays in one unchanging position and angle for the whole shot. As he lifts the page, a new, blank, perfectly formed page visibly materializes and expands from the spine, inserting itself between the one he's turning and the next. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photoreal mid-shot of ihsan_maker's hands attempting to rapidly flip through several pages of the book. The view stays in one unchanging position and angle for the whole shot. As his fingers pass, a constant stream of new, blank pages continuously generates from the spine, instantly filling the gaps and making it impossible to reach the back cover. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photoreal close-up on the open book, held by ihsan_maker's hands. The view stays in one unchanging position and angle for the whole shot. A visible, subtle ripple of new blank pages spontaneously generates from the spine, causing the entire block of pages to visibly thicken and expand, with the newly formed pages folding outwards. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photoreal close-up on ihsan_maker's hands gently closing the impossibly thick, bulging book. The view stays in one unchanging position and angle for the whole shot. As he does so, a final new, blank page subtly unfolds and tucks itself into the ever-growing stack of pages, just before the covers meet. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-continuity",
+  "music": "A sparse, dry, percussive bed built from soft taps, low woody hits and one quiet sustained tone, opening with sound in the very first second. Mostly negative space so the sounds of the work stay in front; slow steady pulse, no melody line, no swell, no ethereal pads, and no vocals.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

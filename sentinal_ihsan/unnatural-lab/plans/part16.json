@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "This PENCIL Is NOT Supposed To SMOKE?!"
+  },
+  "synopsis": "A man attempts to write with a pencil that, instead of leaving graphite, produces a stream of tangible, solidifying smoke as he draws.",
+  "narration": "I swear, every time I pick this thing up, it just starts doing this. Tried using it to write a note, but now my whole desk looks like a cloud...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Photoreal close-up on a hand (ihsan_maker) holding a wooden pencil over a blank sheet of paper on a worn wooden desk. The view stays in one unchanging position and angle for the whole shot. The pencil tip visibly emits a steady stream of thick, swirling, tangible smoke that holds its shape, as if trying to draw. The hand is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Photoreal mid-shot of ihsan_maker's hands attempting to sharpen the smoke-emitting pencil with a small, ordinary sharpener. The view stays in one unchanging position and angle for the whole shot. Instead of wood shavings, dense, structured plumes of smoke peel away from the pencil, maintaining their curled, solid-like form as they fall onto the desk. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Photoreal close-up on ihsan_maker's hand drawing a line on paper with the smoke-emitting pencil. The view stays in one unchanging position and angle for the whole shot. The smoke, instead of dispersing, forms a visibly solid, yet ethereal, raised line on the paper, which then subtly expands and billows outwards like a miniature cloud formation. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Photoreal close-up on ihsan_maker's hand holding the pencil upright on the wooden desk, a small, tangible cloud of swirling, solidifying smoke perpetually forming and hovering around its tip. The view stays in one unchanging position and angle for the whole shot. The hand is calm and steady, ready for the next impossible stroke. He is wearing a plain black crew-neck t-shirt.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-state-change",
+  "music": "A sparse, dry, percussive bed built from soft taps, low woody hits and one quiet sustained tone, opening with sound in the very first second. Mostly negative space so the sounds of the work stay in front; slow steady pulse, no melody line, no swell, no ethereal pads, and no vocals.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}
