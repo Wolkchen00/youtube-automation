@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 15,
-  "next_part": 13,
+  "next_part": 14,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -316,6 +316,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-16T17:04:37.305583+00:00"
+    },
+    "13": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep13/ep13_narrated_music.mp4",
+      "subtitle": "Jupiter's Red Spot: It's DISAPPEARING",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-17T17:10:35.579287+00:00"
     }
   }
 }
