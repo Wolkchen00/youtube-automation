@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 20,
-  "next_part": 16,
+  "next_part": 17,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -207,6 +207,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-17T19:28:10.572931+00:00"
+    },
+    "16": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep16/ep16_narrated_music.mp4",
+      "subtitle": "This PENCIL Is NOT Supposed To SMOKE?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-18T19:27:10.847665+00:00"
     }
   }
 }
