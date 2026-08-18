@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 15,
-  "next_part": 12,
+  "next_part": 13,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -307,6 +307,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-17T21:01:32.862976+00:00"
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep12/ep12_narrated_music_titled.mp4",
+      "subtitle": "Gladiators: Fact Or Ancient Propaganda?",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-18T21:05:27.112103+00:00"
     }
   }
 }

@@ -130,5 +130,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ecdc71d4ec2d4b6ba2b37a85fff835db. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ecdc71d4ec2d4b6ba2b37a85fff835db', 'total_platforms': 1, 'job_id': '0319ebf8238e4bbe8c3ed8b8d9ef793f'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=2a56ecad6d4c4c4286d609c6aa6f38ef. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '2a56ecad6d4c4c4286d609c6aa6f38ef', 'total_platforms': 1, 'job_id': 'f23593df7af3444792744801f041fb32'}"
     }
+  },
+  {
+    "part": 12,
+    "subtitle": "Gladiators: Fact Or Ancient Propaganda?",
+    "ts": "2026-08-18T21:05:27.111361+00:00",
+    "results": {
+      "youtube": "t3ZND-eQYlo",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=5942456ac38c48849c3987807e89c19e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '5942456ac38c48849c3987807e89c19e', 'total_platforms': 1, 'job_id': 'a98b453c0b624274a5a5d7fab9cb73e2'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=1d6cf5d682574ee1b2ffdc05433ad05e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '1d6cf5d682574ee1b2ffdc05433ad05e', 'total_platforms': 1, 'job_id': 'b516524d7dfe4fe9a15c0c34bbd0b56c'}"
+    }
   }
 ]
