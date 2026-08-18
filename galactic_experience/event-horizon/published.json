@@ -148,5 +148,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=6e179ca6159c4c22a8d42e8b85e26f23. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '6e179ca6159c4c22a8d42e8b85e26f23', 'total_platforms': 1, 'job_id': '4d65c0a4f92946dc96f62822b535d562'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=86a4b875df294b75ba4e3acebcef3286. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '86a4b875df294b75ba4e3acebcef3286', 'total_platforms': 1, 'job_id': '09cddcf2e07f461ba88b1e721d8b20af'}"
     }
+  },
+  {
+    "part": 14,
+    "subtitle": "Earth's Trees: More Than Milky Way Stars",
+    "ts": "2026-08-18T17:50:29.210279+00:00",
+    "results": {
+      "youtube": "d8uLmNOV3o0",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=dff8b234dfeb49a183f91568f4241a3f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'dff8b234dfeb49a183f91568f4241a3f', 'total_platforms': 1, 'job_id': '4dfe58966d224abda84582d412e810c5'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=86a3afbd92764e5586aa9d3d8bcb6d46. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '86a3afbd92764e5586aa9d3d8bcb6d46', 'total_platforms': 1, 'job_id': '00256c3696ed4a99bf98f6bb8191cb0e'}"
+    }
   }
 ]

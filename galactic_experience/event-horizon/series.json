@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 15,
-  "next_part": 14,
+  "next_part": 15,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -327,6 +327,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-17T17:10:35.579287+00:00"
+    },
+    "14": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep14/ep14_narrated_music.mp4",
+      "subtitle": "Earth's Trees: More Than Milky Way Stars",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-18T17:50:29.210784+00:00"
     }
   }
 }
