@@ -144,5 +144,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=5942456ac38c48849c3987807e89c19e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '5942456ac38c48849c3987807e89c19e', 'total_platforms': 1, 'job_id': 'a98b453c0b624274a5a5d7fab9cb73e2'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=1d6cf5d682574ee1b2ffdc05433ad05e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '1d6cf5d682574ee1b2ffdc05433ad05e', 'total_platforms': 1, 'job_id': 'b516524d7dfe4fe9a15c0c34bbd0b56c'}"
     }
+  },
+  {
+    "part": 13,
+    "subtitle": "The Eiffel Tower: The Swaying Colossus",
+    "ts": "2026-08-19T21:33:19.225246+00:00",
+    "results": {
+      "youtube": "N2tSAEYsNc4",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c737c2932e154373909fa815ee9a41f7. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c737c2932e154373909fa815ee9a41f7', 'total_platforms': 1, 'job_id': '75143da73f734eec8c34dea197fd9565'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=56d7a6c3b33c4fc8867301247bb6fd3c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '56d7a6c3b33c4fc8867301247bb6fd3c', 'total_platforms': 1, 'job_id': '2713d27cd676480bb5b3d38977168c3c'}"
+    }
   }
 ]
