@@ -162,5 +162,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c390083c7afd413e9b34975bf0eadb7f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c390083c7afd413e9b34975bf0eadb7f', 'total_platforms': 1, 'job_id': 'c98bb4ba90ec42fc848505a3490bf5f9'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=e60d49bbd01a402e8eba23090243dbc4. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'e60d49bbd01a402e8eba23090243dbc4', 'total_platforms': 1, 'job_id': '59fbf51471d14b378e9680df6093080c'}"
     }
+  },
+  {
+    "part": 17,
+    "subtitle": "I Found UNNATURAL CLOTH... And It STARTED To HARDEN!",
+    "ts": "2026-08-19T19:42:20.362976+00:00",
+    "results": {
+      "youtube": "RGXMfib9u84",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b720621d056e4535890eb26729180a51. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b720621d056e4535890eb26729180a51', 'total_platforms': 1, 'job_id': '6f333152ec5442f09d1d8b3d6ecba24b'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=935de8d5647b4e37910df3b07d36e946. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '935de8d5647b4e37910df3b07d36e946', 'total_platforms': 1, 'job_id': 'cdedeb80a5b44b4fbd2d9c01ca1f21dc'}"
+    }
   }
 ]

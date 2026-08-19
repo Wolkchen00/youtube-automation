@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 20,
-  "next_part": 17,
+  "next_part": 18,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -218,6 +218,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-18T19:27:10.847665+00:00"
+    },
+    "17": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep17/ep17_narrated_music.mp4",
+      "subtitle": "I Found UNNATURAL CLOTH... And It STARTED To HARDEN!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-19T19:42:20.363457+00:00"
     }
   }
 }
