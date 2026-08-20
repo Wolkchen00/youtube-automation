@@ -158,5 +158,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c737c2932e154373909fa815ee9a41f7. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c737c2932e154373909fa815ee9a41f7', 'total_platforms': 1, 'job_id': '75143da73f734eec8c34dea197fd9565'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=56d7a6c3b33c4fc8867301247bb6fd3c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '56d7a6c3b33c4fc8867301247bb6fd3c', 'total_platforms': 1, 'job_id': '2713d27cd676480bb5b3d38977168c3c'}"
     }
+  },
+  {
+    "part": 14,
+    "subtitle": "The Real Reason America Almost Fought Britain In 1859!",
+    "ts": "2026-08-20T21:09:15.999185+00:00",
+    "results": {
+      "youtube": "ymP7XbkRpFU",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f24c0c467ffd424ba18e9c3ba26ab508. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f24c0c467ffd424ba18e9c3ba26ab508', 'total_platforms': 1, 'job_id': '767b4c9dd8524dc08feed639a5fbb2ad'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7566b645e71443eaa614428d1fae55dc. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7566b645e71443eaa614428d1fae55dc', 'total_platforms': 1, 'job_id': '3cd9127b52e94595b33ab89c90b66a03'}"
+    }
   }
 ]
