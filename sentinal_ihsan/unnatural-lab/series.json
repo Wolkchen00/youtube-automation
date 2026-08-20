@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 20,
-  "next_part": 18,
+  "next_part": 19,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -229,6 +229,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-19T19:42:20.363457+00:00"
+    },
+    "18": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep18/ep18_narrated_music.mp4",
+      "subtitle": "This KEY Is NOT Supposed To PULL THINGS?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-20T19:24:59.230027+00:00"
     }
   }
 }
