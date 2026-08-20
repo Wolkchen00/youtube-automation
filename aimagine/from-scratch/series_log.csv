@@ -82,3 +82,9 @@
 2026-08-19 15:23,8,3,,,10,1080p,,252.0,1.26,ok,https://tempfile.aiquickdraw.com/v/cb00c7af1731c015db4d09d514c0f99a_1787152558.mp4,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_03.mp4
 2026-08-19 15:34,8,4,,,10,1080p,,126.0,0.63,ok,https://tempfile.aiquickdraw.com/v/b3c136d5b3449744324664e3f90c53d4_1787153438.mp4,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_04.mp4
 2026-08-19 15:46,8,5,,,10,1080p,,252.0,1.26,qc_fail,https://tempfile.aiquickdraw.com/v/13b2f6e800678efe3e526234405604f0_1787153810.mp4,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_05.mp4
+2026-08-20 15:09,8,1,,,10,1080p,,,,FAIL,,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_01.mp4
+2026-08-20 15:19,8,2,,,10,1080p,,126.0,0.63,qc_fail,https://tempfile.aiquickdraw.com/v/5e23a5c3cbbd3a1ccddf49735a0d0cc4_1787238677.mp4,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_02.mp4
+2026-08-20 15:28,8,3,,,10,1080p,,126.0,0.63,qc_fail,https://tempfile.aiquickdraw.com/v/ebf7e56873356dff7735a47bed5bb632_1787239419.mp4,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_03.mp4
+2026-08-20 15:32,8,4,,,10,1080p,,,,FAIL,,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_04.mp4
+2026-08-20 15:37,8,5,,,10,1080p,,,,FAIL,,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_05.mp4
+2026-08-20 15:41,8,6,,,10,1080p,,,,FAIL,,/home/runner/work/youtube-automation/youtube-automation/output/series/from-scratch/episodes/ep08/shots/shot_06.mp4
