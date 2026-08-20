@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "Uranus: The Tilted Giant"
+  },
+  "synopsis": "The ice giant Uranus unique axial tilt causes it to roll around the Sun like a tipped-over top, resulting in extreme seasonal variations.",
+  "narration": "Uranus, an ice giant, rolls around the Sun on its side, unlike any other planet. Its extreme 98-degree axial tilt means poles face the Sun for decades, creating seasons lasting 21 Earth years. This cosmic tumble defines its bizarre, prolonged orbital dance.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Majestic, icy blue Uranus, seen from deep space with its faint rings, slowly rotating on its side, its pole directly facing the camera, against a backdrop of distant, scattered stars. Gentle sunlight illuminates its cloud tops.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A wide, orbital shot of Uranus, its rings clearly visible, slowly circling the distant Sun while maintaining its extreme axial tilt. The camera tracks its path, emphasizing its unusual \"rolling\" motion relative to the ecliptic plane.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Close-up, slow-motion shot of Uranus's smooth, blue-green surface, with subtle atmospheric banding. The planet slowly rotates sideways, disappearing behind the edge of the frame, revealing the vastness of space and a distant, pale Sun.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 18,
+  "music": "Ethereal, shimmering synth textures with a gentle, consistent forward motion. A sense of wonder and calm, punctuated by a subtle rise in harmony and intensity as the planet's orbit is revealed. The music remains spacious and cool, fading mid-phrase with a soft, sustained chord.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

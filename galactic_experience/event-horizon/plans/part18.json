@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 18,
+    "title": "The ISS: 16 Sunrises DAILY"
+  },
+  "synopsis": "The International Space Station orbits Earth so rapidly that its crew experiences an astonishing 16 sunrises and sunsets every single day.",
+  "narration": "Orbiting Earth at five miles per second, the International Space Station witnesses 16 sunrises and sunsets daily. Astronauts aboard experience a new dawn every 90 minutes. This dizzying pace highlights our planet's rapid rotation and the incredible speed of orbital mechanics.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Dramatic shot of the International Space Station (ISS) silhouetted against a brilliant, rapidly rising sun over Earth's curved horizon. The ISS glints as sunlight hits its solar panels. The camera tracks its fast movement.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "POV from above the ISS, looking down at Earth as it rapidly spins beneath, showing a quick succession of day turning to night and then back to day. Clouds swirl, continents pass quickly, emphasizing the orbital speed and frequent transitions.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Close-up of the ISS's solar arrays, bathed in the golden light of a setting sun that quickly dips below Earth's atmosphere. Stars begin to emerge rapidly in the deepening twilight, before a faint glow on the opposite horizon suggests the next sunrise.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 17,
+  "music": "Uplifting and dynamic electronic score with a brisk, consistent tempo, reflecting speed and precision. Bright, arpeggiated synths and a subtle orchestral layer. A brief, soaring melodic peak at the moment of sunrise, then maintaining an energetic yet wonder-filled mood, ending abruptly.",
+  "hook_shot": 1,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

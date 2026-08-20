@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 19,
+    "title": "Titan: Lakes of LIQUID Methane"
+  },
+  "synopsis": "Saturn's moon Titan is the only other world in our solar system where stable bodies of liquid exist on its surface, but these are composed of methane, not water.",
+  "narration": "Saturn's moon Titan is a world unlike any other, featuring lakes and rivers of liquid methane. Beneath its thick, orange atmosphere, methane rains from the sky, carving channels and filling vast seas. It's the only other place in our solar system with stable surface liquid.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A moody, atmospheric shot of Titan's thick, orange-hued atmosphere, with subtle clouds and distant lightning flashes, viewed from just above the cloud tops. A dark, indistinct surface lies below.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Close-up of methane droplets falling from the orange sky, hitting a dark, shimmering liquid surface that forms a calm lake. Ripples spread out, revealing a reflective, yet alien, liquid landscape under the dim, hazy light.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Wide shot of vast, intricate river systems and large, calm lakes of liquid methane stretching across Titan's surface, reflecting the dull orange glow of the sky. The camera slowly pans across the desolate, yet beautiful, alien terrain.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 23,
+  "music": "Atmospheric and mysterious, with a deep, rumbling synth bass and slow, echoing melodic lines, evoking a sense of alien wonder. Sparse, percussive elements suggest falling rain. A gradual build in texture and harmonic richness as the liquid surface is revealed, concluding on a sustained, contemplative note.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

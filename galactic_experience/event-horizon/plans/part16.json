@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "Sagittarius A*: The Galactic HEARTBEAT"
+  },
+  "synopsis": "At the heart of the Milky Way, the supermassive black hole Sagittarius A* exerts a powerful gravitational influence equivalent to millions of suns.",
+  "narration": "At the heart of our Milky Way lies Sagittarius A*, a supermassive black hole weighing four million Suns. Its immense gravity warps spacetime, orchestrating the dance of stars around it. This cosmic behemoth, unseen directly, is the mysterious, powerful heartbeat of our galaxy.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Swirling accretion disk around a supermassive black hole, Sagittarius A*, seen from a distance within the crowded galactic core, stars orbit rapidly in foreground, dramatic lens flare from unseen central singularity. Camera slowly pulls back, revealing more of the dense starfield.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Extreme close-up of a single star rapidly accelerating around the invisible point of Sagittarius A*, its orbit highly elliptical and fast, against a backdrop of myriad other stars streaking by. The star's light is subtly lensed and distorted by the immense gravity.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "POV looking down into the very heart of the Milky Way, showing the central bulge of stars and gas, with an invisible, intensely bright central point of gravitational pull. Star streams flow like cosmic rivers towards the galactic center. Camera slowly descends towards the swirling core.",
+      "seed": null
+    }
+  ],
+  "family": "derin uzay canavarları",
+  "seed_id": 22,
+  "music": "A deep, resonant cosmic soundscape with a slow, building pulse. Synthesized low-frequency hums and subtle glissandos create a sense of immense scale. A gentle, accelerating swell as the perspective zooms towards the galactic center, ending with a sustained, slightly unresolved drone, ready for loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

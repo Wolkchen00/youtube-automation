@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 20,
+    "title": "Earth's Gold: Forged in STAR COLLISIONS"
+  },
+  "synopsis": "Much of the gold found on Earth, and across the universe, was created in the violent, cataclysmic collisions of neutron stars billions of years ago.",
+  "narration": "Earth's precious gold, along with other heavy elements, was forged in the universe's most violent events: neutron star collisions. These cataclysmic mergers unleash immense energy, creating and scattering heavy elements across the cosmos, long before our solar system ever formed.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Two incredibly dense neutron stars in a death spiral, distorted by extreme gravity, rapidly approaching collision amidst a dramatic, colorful stellar nebula. Intense gravitational waves ripple through spacetime.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A blinding, ultra-bright kilonova explosion as the neutron stars merge, ejecting a vast, expanding cloud of newly formed heavy elements, including glittering gold dust, into the surrounding space. Shockwaves expand.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Stylized depiction of Earth's crust, slowly forming, with veins of shimmering gold appearing within ancient rock formations, hinting at its cosmic origin. The camera slowly pushes in on a gleaming vein of raw gold, contrasting its terrestrial presence with its violent birth.",
+      "seed": null
+    }
+  ],
+  "family": "derin uzay canavarları",
+  "seed_id": 27,
+  "music": "Intense and dramatic orchestral sci-fi score with a powerful, percussive pulse, building tension and awe. Brass swells and deep string motifs convey cosmic power. A sudden, impactful crescendo at the moment of collision, followed by a majestic, slightly unresolved decay, hinting at vast timescales.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}
