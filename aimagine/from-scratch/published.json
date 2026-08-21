@@ -72,5 +72,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=dc8bc9473e324e2197e0e1900bb9f3e5. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'dc8bc9473e324e2197e0e1900bb9f3e5', 'total_platforms': 1, 'job_id': '7e29038d604b4f3e829fa31da451f682'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=593fea07aef349bca13cad463da53011. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '593fea07aef349bca13cad463da53011', 'total_platforms': 1, 'job_id': 'c17e372f6d874585897fc962d45fa94f'}"
     }
+  },
+  {
+    "part": 8,
+    "subtitle": "Old Grain Silo → Luxury Stargazing Tower ✨",
+    "ts": "2026-08-21T15:36:36.963609+00:00",
+    "results": {
+      "youtube": "Z921ZjDwpW8",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ed3c7be9dade445bbdf953aa1b4bd77a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ed3c7be9dade445bbdf953aa1b4bd77a', 'total_platforms': 1, 'job_id': 'ae62e9fa4d7e4a0481d766ad92073947'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=3bfd57d9b6b94b239d00befc298c8020. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '3bfd57d9b6b94b239d00befc298c8020', 'total_platforms': 1, 'job_id': '9dd00e5a8cea4566abbc07fa8c1e2995'}"
+    }
   }
 ]
