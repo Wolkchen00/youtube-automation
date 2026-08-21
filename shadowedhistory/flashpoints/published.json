@@ -172,5 +172,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f24c0c467ffd424ba18e9c3ba26ab508. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f24c0c467ffd424ba18e9c3ba26ab508', 'total_platforms': 1, 'job_id': '767b4c9dd8524dc08feed639a5fbb2ad'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7566b645e71443eaa614428d1fae55dc. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7566b645e71443eaa614428d1fae55dc', 'total_platforms': 1, 'job_id': '3cd9127b52e94595b33ab89c90b66a03'}"
     }
+  },
+  {
+    "part": 15,
+    "subtitle": "Tsutomu Yamaguchi: The Double Survivor",
+    "ts": "2026-08-21T21:07:38.516362+00:00",
+    "results": {
+      "youtube": "AgKGuO2Q4XA",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=8ad497513efa4cdab563f3de6481914a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '8ad497513efa4cdab563f3de6481914a', 'total_platforms': 1, 'job_id': '5a5169bdd5f246ad85fbe709d19b2ec1'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=cd72bcd58bb346639872398e794bc603. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'cd72bcd58bb346639872398e794bc603', 'total_platforms': 1, 'job_id': 'a79c667188c54ef4bff07ef06c53a3f2'}"
+    }
   }
 ]
