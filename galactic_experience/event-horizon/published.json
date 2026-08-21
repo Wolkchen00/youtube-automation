@@ -176,5 +176,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b3c6a680575d47049f14e3c0b0b6568c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b3c6a680575d47049f14e3c0b0b6568c', 'total_platforms': 1, 'job_id': '52d7d7de4bd3448ea7cd1cd0d38723f9'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=72758e9b38c9485f99dbaa90b8e333f6. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '72758e9b38c9485f99dbaa90b8e333f6', 'total_platforms': 1, 'job_id': '4be78f7abc9048af884aad980586633c'}"
     }
+  },
+  {
+    "part": 16,
+    "subtitle": "Sagittarius A*: The Galactic HEARTBEAT",
+    "ts": "2026-08-21T17:16:54.319938+00:00",
+    "results": {
+      "youtube": "sbf-AZzRDog",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f4006c15d9fb4b04afe8262432813d12. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f4006c15d9fb4b04afe8262432813d12', 'total_platforms': 1, 'job_id': 'd774b014a93a46628474344d8471a731'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b13617781882491cb9a91d8b9be5d2e1. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b13617781882491cb9a91d8b9be5d2e1', 'total_platforms': 1, 'job_id': '7234c2d4c94a44408bad5acf1a6df719'}"
+    }
   }
 ]
