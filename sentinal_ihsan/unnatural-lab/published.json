@@ -190,5 +190,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=a0917381655a45bda1c1d1498c93d133. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'a0917381655a45bda1c1d1498c93d133', 'total_platforms': 1, 'job_id': 'fe9fe05cb4284a5fbe3bde71a2254407'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=fbcae94e97dc43708b75e8aa39529a97. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'fbcae94e97dc43708b75e8aa39529a97', 'total_platforms': 1, 'job_id': '934c949990364485b5a512c98669454f'}"
     }
+  },
+  {
+    "part": 19,
+    "subtitle": "I Found UNNATURAL PAGES... And They STARTED To REPLICATE!",
+    "ts": "2026-08-21T19:24:49.884011+00:00",
+    "results": {
+      "youtube": "FuoWvZCKvf4",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=1bf31e9343a645858cf5376c2628da43. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '1bf31e9343a645858cf5376c2628da43', 'total_platforms': 1, 'job_id': '19a5a3c09b4243ea95e87b52eea157fc'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=99d362f6d0324788a98167c6c4d14cc3. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '99d362f6d0324788a98167c6c4d14cc3', 'total_platforms': 1, 'job_id': '7a02f0513e334882b6243dab9c3ae8b1'}"
+    }
   }
 ]

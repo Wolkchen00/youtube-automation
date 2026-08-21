@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 20,
-  "next_part": 19,
+  "next_part": 20,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -240,6 +240,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-20T19:24:59.230027+00:00"
+    },
+    "19": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep19/ep19_narrated_music.mp4",
+      "subtitle": "I Found UNNATURAL PAGES... And They STARTED To REPLICATE!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-21T19:24:49.884707+00:00"
     }
   }
 }
