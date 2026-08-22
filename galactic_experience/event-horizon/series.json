@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 20,
-  "next_part": 17,
+  "next_part": 18,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -360,6 +360,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-21T17:16:54.320533+00:00"
+    },
+    "17": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep17/ep17_narrated_music.mp4",
+      "subtitle": "Uranus: The Tilted Giant",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-22T17:09:52.408695+00:00"
     }
   }
 }

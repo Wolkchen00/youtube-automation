@@ -190,5 +190,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f4006c15d9fb4b04afe8262432813d12. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f4006c15d9fb4b04afe8262432813d12', 'total_platforms': 1, 'job_id': 'd774b014a93a46628474344d8471a731'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b13617781882491cb9a91d8b9be5d2e1. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b13617781882491cb9a91d8b9be5d2e1', 'total_platforms': 1, 'job_id': '7234c2d4c94a44408bad5acf1a6df719'}"
     }
+  },
+  {
+    "part": 17,
+    "subtitle": "Uranus: The Tilted Giant",
+    "ts": "2026-08-22T17:09:52.408176+00:00",
+    "results": {
+      "youtube": "FGVRYNHIKQI",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=efc57afe88144f238a7ecca99b5c9586. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'efc57afe88144f238a7ecca99b5c9586', 'total_platforms': 1, 'job_id': '46c8d08ef1024807b6f0d8f7c1e48016'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7fdd36ebb22b4c138d8b18837f7c378a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7fdd36ebb22b4c138d8b18837f7c378a', 'total_platforms': 1, 'job_id': '84c5822379d14334aea7f02c451d992a'}"
+    }
   }
 ]
