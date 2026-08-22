@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "Oxford University: The Ancient Institution"
+  },
+  "synopsis": "Oxford University began teaching centuries before the Aztec Empire's formation, highlighting its extraordinary longevity.",
+  "narration": "Oxford University began teaching around 1096 AD. This means the venerable institution predates the entire Aztec Empire, which was founded centuries later. Imagine classrooms bustling while Tenochtitlan was still a distant future. A true testament to enduring knowledge.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vibrant medieval university courtyard, late morning sun, with a robed scholar intently reading a scroll by an arched window. Soft light illuminates aged stone and scholarly activity, hinting at centuries of learning. Focus on tactile textures and a sense of enduring calm.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Sweeping view over a sprawling Aztec city, Tenochtitlan, bustling with life and intricate stone pyramids, under a clear, bright Mesoamerican sky. Motion of people moving on causeways, the grandeur of the architecture emphasizing its powerful presence, yet still a future from the first shot.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 2,
+  "music": "Fast, academic yet tense. Percussive, driving rhythm featuring pizzicato strings and a deep, resonant synth bass. A sense of historical revelation with a relentless, unfolding pace, evoking scholarly discovery amidst ancient stone. No melodic resolution, cuts mid-phrase, ready for a seamless loop.",
+  "title_card": {
+    "title": "Oxford University",
+    "subtitle": "Oxford, England, est. 1096"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

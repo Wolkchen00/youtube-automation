@@ -186,5 +186,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=8ad497513efa4cdab563f3de6481914a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '8ad497513efa4cdab563f3de6481914a', 'total_platforms': 1, 'job_id': '5a5169bdd5f246ad85fbe709d19b2ec1'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=cd72bcd58bb346639872398e794bc603. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'cd72bcd58bb346639872398e794bc603', 'total_platforms': 1, 'job_id': 'a79c667188c54ef4bff07ef06c53a3f2'}"
     }
+  },
+  {
+    "part": 16,
+    "subtitle": "Oxford University: The Ancient Institution",
+    "ts": "2026-08-22T20:59:09.911215+00:00",
+    "results": {
+      "youtube": "NZE4B4iylnM",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=6cba1aed65d2466eb12c7b846c9c209e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '6cba1aed65d2466eb12c7b846c9c209e', 'total_platforms': 1, 'job_id': '9aabf119ce0b466c875ba799cc69e75d'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=a121a1db4f184fbbbba27db60b89e084. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'a121a1db4f184fbbbba27db60b89e084', 'total_platforms': 1, 'job_id': 'a3fddd07d146475ea07ec4e0d2e1f372'}"
+    }
   }
 ]

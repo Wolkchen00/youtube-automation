@@ -12,10 +12,10 @@
   "hashtags": "#shorts #history #historyfacts #didyouknow",
   "standalone": true,
   "publish_mode": "auto",
-  "status": "completed",
+  "status": "active",
   "priority": 999,
-  "total_parts": 15,
-  "next_part": 16,
+  "total_parts": 20,
+  "next_part": 17,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -179,8 +179,8 @@
     "title_style": "a punchy English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) 'The Real Reason <subject> <did X>', (2) 'How <subject> <impossible feat> In <YEAR>!', (3) '<Subject>: Fact Or Ancient Propaganda?', (4) '<Subject>: The <striking epithet>'. No emoji, no hashtags, no surrounding quotes. CRITICAL fit rule: choose the ONE pattern that truthfully fits the fact. In pattern 2 the year must be when the feat itself happened, never the year of a modern study or confirmation. Use pattern 3 only for ancient or legendary subjects. A title must never imply a false claim even when the underlying fact is true.",
     "brief": "FLASHPOINTS üretim brief'i (dayanak: shadowedhistory/KONSEPT.md v1.6, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, narration, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: İki çekim vardır, toplam yaklaşık 12 sn. shot 1 ÇARPMA: faktın en görsel anının ortasında soğuk açılış; ilk kare konuyu ve tuhaflığı tek başına okutur; establishing shot, harita üstünde yavaş zoom ve atmosfer kurulumu yasak. shot 2 KANIT/BÜKÜM: en tuhaf detay veya sonuç, shot 1'den daha yakın ve sert; kompozisyon ilk kareye rimlenir, eylem sürerken biter. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: yanılgı kırıcı, imkânsız mühendislik, tuhaf savaş, unutulmuş kişi, efsane vs kayıt, zaman çarpması. Aynı aile üst üste iki bölümde kullanılamaz. (3) DOĞRULUK: Fakt gerçek ve yaygın kaynaklarla doğrulanabilir olmalı; sayı uydurulamaz. Her bölümde 4 haneli yıl veya 'X BC/AD' çağı veya yüzyıl biçiminde zaman çıpası bulunur. Konu yalnız runtime enjekte edilen topic_pool girdilerinden seçilir; her partta tam sayı seed_id zorunludur ve yalnız o tohumun konusu ile family değeri kullanılır. Tohum listesi bu brief'te yer almaz. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; rage-bait ve milliyetçi kışkırtma yasak. (5) SES: Narration 26-38 kelimedir; ilk cümle iddianın kendisidir. Selamlama, CTA ve 'did you know' yasak. (6) LOOP DİKİŞİ: Son kompozisyon ilk kareye döner; kapanış kartı, sunum jesti, kutlama ve follow-for-more hareketi yasak. (7) GÜVENLİK: Kan, ceset, işkence ve infaz görseli yok; savaş ve felaket grafik şiddet göstermeden anlatılır. (8) MÜZİK: Hızlı, gergin, perküsif; açılış iddiasıyla vurur, duraksamadan ilerler ve kesintisiz loop için ritmin ortasında biter.",
     "last_run": {
-      "at": "2026-08-16T20:47:07.013084+00:00",
-      "parts": "11-15"
+      "at": "2026-08-22T20:48:55.763110+00:00",
+      "parts": "16-20"
     }
   },
   "parts": {
@@ -351,6 +351,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-21T21:07:38.517011+00:00"
+    },
+    "16": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep16/ep16_narrated_music_titled.mp4",
+      "subtitle": "Oxford University: The Ancient Institution",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-22T20:59:09.911798+00:00"
     }
   }
 }

@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 18,
+    "title": "The Real Reason Cleopatra Was Closer To The Moon Landing"
+  },
+  "synopsis": "Cleopatra, the last pharaoh of Egypt, lived closer to the 1969 Moon landing than to the construction of the Great Pyramid of Giza.",
+  "narration": "Cleopatra, the last pharaoh, died in 30 BC. That's 2,000 years *after* the Great Pyramid was built, yet nearly 2,000 years *before* the Moon landing. Her life was astonishingly closer to Neil Armstrong's footsteps than to the pharaohs who built Giza.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Regal, intimate close-up of Cleopatra, adorned with traditional Egyptian jewels and headpiece, her face a study in ancient power and intelligence. Soft, golden light from an unseen window highlights her features, evoking the timeless mystery of her era. Her expression is calm but intense.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Wide, dramatic shot of the Great Pyramid of Giza, stark and immense against a twilight sky, with a subtle, ethereal overlay of a distant Earth seen from the Moon. The scale of the pyramid is emphasized, while the lunar element hints at the vast temporal expanse. Motion is slow, almost imperceptible celestial drift.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 3,
+  "music": "Mysterious, pulsating electronic score with a deep, echoing bassline and shimmering synth textures. Builds a sense of vast, shifting timelines and unexpected connections, maintaining a driving, hypnotic rhythm. The soundscape is both ancient and futuristic, designed to evoke wonder and intellectual curiosity. Ends mid-phrase for a perfect loop.",
+  "title_card": {
+    "title": "Cleopatra",
+    "subtitle": "Ancient Egypt, 69-30 BC"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}
