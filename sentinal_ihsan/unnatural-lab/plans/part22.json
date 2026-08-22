@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 22,
+    "title": "I Found UNNATURAL ROCKS... And They STARTED To VAPORIZE!"
+  },
+  "synopsis": "A man observes a small rock that, when heated slightly, begins to melt and vaporize into a slow-moving, heavy cloud, rather than crumbling or turning to liquid.",
+  "narration": "I just can't believe it, this rock, it started to… dissipate. No ash, no liquid, just turning into this strange, heavy vapor, swirling around my hand like it's alive.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, holding a small, ordinary-looking grey river rock on a worn wooden table. Thin, heavy tendrils of dark, swirling vapor are already visibly rising from the rock's surface, slowly pooling on his palm. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Ihsan's hands, wearing a plain black crew-neck t-shirt, gently rub the surface of the rock with his thumb. As he does, more of the heavy, dark vapor visibly flows from the contact point, creating miniature, slow-motion vortexes that drift off his hand. The frame never moves.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Medium shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, placing the vaporizing rock onto a cool, dark metal surface on the wooden table. A small, dense cloud of the heavy, dark vapor immediately forms underneath the rock, slowly spreading out and clinging to the surface. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, holding the rock again, which now appears slightly smaller. A steady, gentle stream of the dark, heavy vapor swirls continuously off its surface, pooling on his open palm before slowly dissipating. The frame never moves.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-state-change",
+  "music": "A sparse, dry, percussive bed of soft, crackling 'fizz' sounds mixed with low, sustained, and slightly dissonant 'drone' elements that evoke a sense of slow, unnatural transformation. There are no melody lines, no swells, no ethereal pads, and no vocals. The music opens with sound in its very first second, maintaining a slow, steady pulse and plenty of negative space.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

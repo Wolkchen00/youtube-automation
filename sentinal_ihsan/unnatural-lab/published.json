@@ -204,5 +204,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=1bf31e9343a645858cf5376c2628da43. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '1bf31e9343a645858cf5376c2628da43', 'total_platforms': 1, 'job_id': '19a5a3c09b4243ea95e87b52eea157fc'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=99d362f6d0324788a98167c6c4d14cc3. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '99d362f6d0324788a98167c6c4d14cc3', 'total_platforms': 1, 'job_id': '7a02f0513e334882b6243dab9c3ae8b1'}"
     }
+  },
+  {
+    "part": 20,
+    "subtitle": "This BRUSH Is NOT Supposed To HUM?!",
+    "ts": "2026-08-22T19:16:42.789087+00:00",
+    "results": {
+      "youtube": "HeP0V84NXfw",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b13692e9b7604841a85f5091dbadce24. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b13692e9b7604841a85f5091dbadce24', 'total_platforms': 1, 'job_id': '0c67520bb29d46b38d807c8a49079923'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=1796bc93e2da48bd8e8f153a4cd51a92. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '1796bc93e2da48bd8e8f153a4cd51a92', 'total_platforms': 1, 'job_id': 'f5e72da378df4f75a59dc4973d5880e0'}"
+    }
   }
 ]

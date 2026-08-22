@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 21,
+    "title": "This SPONGE Is NOT Supposed To REPEL WATER?!"
+  },
+  "synopsis": "A man attempts to clean a surface with a sponge that, instead of absorbing liquid, actively repels and pushes water away from itself.",
+  "narration": "Okay so, this old sponge, I swear, the water just refuses to stick to it. It’s like it has its own force field, pushing every drop away, making it impossible to clean.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, attempting to wipe a small puddle of spilled water on a worn wooden table with a common yellow sponge. The water visibly beads up and rolls off the sponge, refusing to be absorbed, creating a shimmering, impossible repulsion effect. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Ihsan's hands, wearing a plain black crew-neck t-shirt, press the sponge down firmly into a larger puddle of water on the same wooden table. The water visibly pushes away from the sponge's surface, forming a clear, concave depression around it, rather than being absorbed. The frame never moves.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Medium shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, attempting to submerge the sponge in a clear glass bowl filled with water on the wooden table. The sponge floats stubbornly on the surface, pushing a deep, visible depression into the water, as if an invisible force field is resisting its entry. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, holding the sponge directly under a thin stream of water from a tap, just off-frame. The water stream visibly diverts and splits around the sponge's impossible, water-repelling surface, not touching it at all. The frame never moves.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-behaviour",
+  "music": "A sparse, dry, percussive bed built from soft, rapid 'plink' sounds like water droplets hitting a resistant surface, mixed with a low, sustained 'thrum' that subtly shifts pitch. There are no melody lines, no swells, no ethereal pads, and no vocals. The music opens with sound in its very first second, maintaining a slow, steady pulse and plenty of negative space.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}

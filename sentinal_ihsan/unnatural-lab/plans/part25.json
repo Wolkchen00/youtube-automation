@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 25,
+    "title": "I Found UNNATURAL ROPE... And It STARTED To TIE ITSELF!"
+  },
+  "synopsis": "A man observes a piece of ordinary rope that spontaneously and continuously ties itself into complex, ever-forming knots, defying any manual intervention.",
+  "narration": "This rope, I swear, it just keeps tying itself. I untangle one knot, and another forms right behind it. It's like it has its own mind, creating impossible patterns.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, holding a segment of ordinary brown rope over a workbench. A section of the rope is visibly, slowly tightening a new, complex knot on its own, with no visible external force. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Ihsan's hands, wearing a plain black crew-neck t-shirt, attempt to untie a tightly formed knot in the rope. As his fingers work to loosen one part, a new loop inexplicably begins to form and tighten itself further down the rope, just out of his immediate grasp. The frame never moves.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Medium shot of Ihsan's hands, wearing a plain black crew-neck t-shirt, laying the rope out on the wooden workbench. The rope slowly, autonomously begins to intertwine and coil into an intricate, multi-layered knot system, twisting and weaving by itself. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "Close-up of Ihsan's hands, wearing a plain black crew-neck t-shirt, observing a section of the rope hanging freely. The rope meticulously ties a simple overhand knot with no visible external force, then begins the initial movements to form another knot just below it, in continuous motion. The frame never moves.",
+      "seed": null,
+      "characters": [
+        "ihsan_maker"
+      ]
+    }
+  ],
+  "family": "impossible-continuity",
+  "music": "A sparse, dry, percussive bed built from intricate, soft clicking and scraping sounds, mimicking the subtle movements of rope. This is paired with a very low, sustained, almost 'plucked' tone that gently shifts pitch, creating a sense of unfolding complexity. There are no melody lines, no swells, no ethereal pads, and no vocals. The music opens with sound in its very first second, maintaining a slow, steady pulse and plenty of negative space.",
+  "hook_shot": 3,
+  "doctrine_sha256": "f526216f5bf6a3966d49de03a2ef71b98f4e014672a5595aeb31751cfdc95cae"
+}
