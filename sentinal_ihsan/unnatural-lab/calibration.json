@@ -1,82 +1,151 @@
 {
   "version": 1,
-  "generated_at": "2026-08-16T09:22:32.653580+00:00",
-  "source_snapshot": "2026-08-16",
+  "generated_at": "2026-08-23T09:22:21.530508+00:00",
+  "source_snapshot": "2026-08-23",
   "mode": "yas_normalize",
-  "channel_median_30d": 525.0,
+  "channel_median_30d": 1127.0,
   "series_stats": {
-    "n_published": 10,
-    "n_comparable": 8,
-    "series_median": 960.5,
+    "n_published": 17,
+    "n_comparable": 15,
+    "series_median": 1127.0,
     "videos": [
       {
         "part": 3,
         "video_id": "5Ke4t1WRT3w",
         "family": "",
         "metric": 801,
-        "age_h": 395.378
+        "age_h": 563.409
       },
       {
         "part": 4,
         "video_id": "XdlbRkY7J6o",
         "family": "",
         "metric": 76,
-        "age_h": 371.231
+        "age_h": 539.262
       },
       {
         "part": 6,
         "video_id": "WFsI2SxVoOM",
         "family": "",
         "metric": 74,
-        "age_h": 323.52
+        "age_h": 491.551
       },
       {
         "part": 7,
         "video_id": "q9MNNewPSlA",
         "family": "",
         "metric": 57,
-        "age_h": 299.011
+        "age_h": 467.042
       },
       {
         "part": 8,
         "video_id": "fn7wuBVzQAg",
         "family": "",
         "metric": 1723,
-        "age_h": 204.012
+        "age_h": 372.043
       },
       {
         "part": 9,
         "video_id": "DU6F3AeUMzM",
         "family": "",
         "metric": 2554,
-        "age_h": 180.145
+        "age_h": 348.176
       },
       {
         "part": 10,
         "video_id": "J0n5aOgMKvg",
         "family": "",
         "metric": 2158,
-        "age_h": 156.093
+        "age_h": 324.124
       },
       {
         "part": 11,
         "video_id": "G3NkAzMFdUQ",
         "family": "impossible-material",
         "metric": 1120,
-        "age_h": 59.686
+        "age_h": 227.717
+      },
+      {
+        "part": 12,
+        "video_id": "L0xmetOFYVo",
+        "family": "impossible-state-change",
+        "metric": 1285,
+        "age_h": 203.849
+      },
+      {
+        "part": 13,
+        "video_id": "8NHuc97QN8A",
+        "family": "impossible-interior",
+        "metric": 1020,
+        "age_h": 180.404
+      },
+      {
+        "part": 14,
+        "video_id": "M_QQcLEGQjA",
+        "family": "impossible-behaviour",
+        "metric": 1127,
+        "age_h": 156.398
+      },
+      {
+        "part": 15,
+        "video_id": "MNHdULJfHuo",
+        "family": "reversed-physics",
+        "metric": 616,
+        "age_h": 132.128
+      },
+      {
+        "part": 16,
+        "video_id": "NUorphoZoq0",
+        "family": "impossible-state-change",
+        "metric": 1298,
+        "age_h": 108.148
+      },
+      {
+        "part": 17,
+        "video_id": "RGXMfib9u84",
+        "family": "impossible-material",
+        "metric": 1202,
+        "age_h": 83.904
+      },
+      {
+        "part": 18,
+        "video_id": "biY7zmMczDw",
+        "family": "impossible-behaviour",
+        "metric": 1136,
+        "age_h": 60.191
       }
     ]
   },
   "family_stats": [
     {
-      "family": "impossible-material",
+      "family": "impossible-behaviour",
+      "n": 2,
+      "median": 1131.5
+    },
+    {
+      "family": "impossible-interior",
       "n": 1,
-      "median": 1120.0
+      "median": 1020.0
+    },
+    {
+      "family": "impossible-material",
+      "n": 2,
+      "median": 1161.0
+    },
+    {
+      "family": "impossible-state-change",
+      "n": 2,
+      "median": 1291.5
+    },
+    {
+      "family": "reversed-physics",
+      "n": 1,
+      "median": 616.0
     }
   ],
   "recommendations": {
     "boost_families": [],
-    "explore_family": "impossible-behaviour",
+    "explore_family": "impossible-interior",
     "empty_reason": null
   },
   "double_down": [],
@@ -87,11 +156,11 @@
   "rollback": {
     "active": false,
     "history": [
-      801.0,
       75.5,
-      960.5
+      960.5,
+      1127.0
     ]
   },
-  "brief_note": "Reserve an exploration slot for impossible-behaviour.",
+  "brief_note": "Reserve an exploration slot for impossible-interior.",
   "extra_topics": []
 }
