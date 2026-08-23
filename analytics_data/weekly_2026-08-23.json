@@ -1,0 +1,215 @@
+{
+  "generated_at": "2026-08-23T08:35:03.558551+00:00",
+  "snapshot_date": "2026-08-23",
+  "period": "2026-08-17 to 2026-08-23",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 126,
+        "total_views": 109329,
+        "total_videos": 261
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "NZE4B4iylnM",
+          "title": "Oxford University: The Ancient Institution",
+          "published": "2026-08-22T20:58:49Z",
+          "views": 15,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "AgKGuO2Q4XA",
+          "title": "Tsutomu Yamaguchi: The Double Survivor",
+          "published": "2026-08-21T21:07:17Z",
+          "views": 2,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "ymP7XbkRpFU",
+          "title": "The Real Reason America Almost Fought Britain In 1859!",
+          "published": "2026-08-20T21:10:15Z",
+          "views": 8,
+          "views_48h": 8,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "N2tSAEYsNc4",
+          "title": "The Eiffel Tower: The Swaying Colossus",
+          "published": "2026-08-19T21:32:43Z",
+          "views": 29,
+          "views_48h": 30,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "t3ZND-eQYlo",
+          "title": "Gladiators: Fact Or Ancient Propaganda?",
+          "published": "2026-08-18T21:05:11Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "p8X09E8SgBE",
+          "title": "The Real Reason The Fax Machine Came First",
+          "published": "2026-08-17T21:01:08Z",
+          "views": 197,
+          "views_48h": 188,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "3SaPGH6r9_g",
+          "title": "The Real Reason The Eiffel Tower Still Stands!",
+          "published": "2026-08-16T20:57:10Z",
+          "views": 51,
+          "views_48h": 47,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 40
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 121,
+        "total_views": 118275,
+        "total_videos": 167
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "HeP0V84NXfw",
+          "title": "This BRUSH Is NOT Supposed To HUM?!",
+          "published": "2026-08-22T19:16:24Z",
+          "views": 226,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "FuoWvZCKvf4",
+          "title": "I Found UNNATURAL PAGES... And They STARTED To REPLICATE!",
+          "published": "2026-08-21T19:24:25Z",
+          "views": 48,
+          "views_48h": 48,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "biY7zmMczDw",
+          "title": "This KEY Is NOT Supposed To PULL THINGS?!",
+          "published": "2026-08-20T19:24:26Z",
+          "views": 1136,
+          "views_48h": 1013,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "RGXMfib9u84",
+          "title": "I Found UNNATURAL CLOTH... And It STARTED To HARDEN!",
+          "published": "2026-08-19T19:41:40Z",
+          "views": 1202,
+          "views_48h": 1159,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "NUorphoZoq0",
+          "title": "This PENCIL Is NOT Supposed To SMOKE?!",
+          "published": "2026-08-18T19:27:01Z",
+          "views": 1346,
+          "views_48h": 1280,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "MNHdULJfHuo",
+          "title": "Can I Turn A LIGHT BEAM Into A SOLID OBJECT?!",
+          "published": "2026-08-17T19:28:13Z",
+          "views": 617,
+          "views_48h": 442,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "M_QQcLEGQjA",
+          "title": "I Found UNNATURAL POTTERY... And It STARTED To REPAIR!",
+          "published": "2026-08-16T19:11:59Z",
+          "views": 1137,
+          "views_48h": 1122,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1136
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 137,
+        "total_views": 63532,
+        "total_videos": 189
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "FGVRYNHIKQI",
+          "title": "Uranus: The Tilted Giant",
+          "published": "2026-08-22T17:09:37Z",
+          "views": 50,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "sbf-AZzRDog",
+          "title": "Sagittarius A*: The Galactic HEARTBEAT",
+          "published": "2026-08-21T17:17:04Z",
+          "views": 87,
+          "views_48h": 87,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "U1TF0puCXkU",
+          "title": "Sun and Jupiter: They Don't Share a Center",
+          "published": "2026-08-20T17:13:10Z",
+          "views": 840,
+          "views_48h": 599,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "d8uLmNOV3o0",
+          "title": "Earth's Trees: More Than Milky Way Stars",
+          "published": "2026-08-18T17:50:03Z",
+          "views": 40,
+          "views_48h": 38,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "D159HcF5xc0",
+          "title": "Jupiter's Red Spot: It's DISAPPEARING",
+          "published": "2026-08-17T17:10:14Z",
+          "views": 298,
+          "views_48h": 292,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "WUErzXuC-9g",
+          "title": "Black Holes: They SING at Us",
+          "published": "2026-08-16T17:04:22Z",
+          "views": 1047,
+          "views_48h": 1005,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 161
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 98,
+        "total_views": 141149,
+        "total_videos": 231
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Z921ZjDwpW8",
+          "title": "Old Grain Silo → Luxury Stargazing Tower ✨",
+          "published": "2026-08-21T15:36:15Z",
+          "views": 2,
+          "views_48h": 2,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 2
+    }
+  }
+}
