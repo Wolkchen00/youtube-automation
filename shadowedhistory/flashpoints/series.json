@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 20,
-  "next_part": 17,
+  "next_part": 18,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -362,6 +362,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-22T20:59:09.911798+00:00"
+    },
+    "17": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep17/ep17_narrated_music_titled.mp4",
+      "subtitle": "The Colosseum: Fact Or Ancient Propaganda?",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-23T20:54:52.040792+00:00"
     }
   }
 }

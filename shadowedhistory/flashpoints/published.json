@@ -200,5 +200,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=6cba1aed65d2466eb12c7b846c9c209e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '6cba1aed65d2466eb12c7b846c9c209e', 'total_platforms': 1, 'job_id': '9aabf119ce0b466c875ba799cc69e75d'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=a121a1db4f184fbbbba27db60b89e084. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'a121a1db4f184fbbbba27db60b89e084', 'total_platforms': 1, 'job_id': 'a3fddd07d146475ea07ec4e0d2e1f372'}"
     }
+  },
+  {
+    "part": 17,
+    "subtitle": "The Colosseum: Fact Or Ancient Propaganda?",
+    "ts": "2026-08-23T20:54:52.040137+00:00",
+    "results": {
+      "youtube": "v4DAdC8OYkA",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=6dc58004ca69441686b79d5e30adb550. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '6dc58004ca69441686b79d5e30adb550', 'total_platforms': 1, 'job_id': 'c294c07e98bf4f36a2cfbbe7635f157c'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=968de77df26b4a528e9fbc5cb872e1c0. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '968de77df26b4a528e9fbc5cb872e1c0', 'total_platforms': 1, 'job_id': '571520ea68df463197a86ec866ffdb20'}"
+    }
   }
 ]
