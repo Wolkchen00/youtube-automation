@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 25,
-  "next_part": 21,
+  "next_part": 22,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -262,6 +262,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-22T19:16:42.789630+00:00"
+    },
+    "21": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep21/ep21_narrated_music.mp4",
+      "subtitle": "This SPONGE Is NOT Supposed To REPEL WATER?!",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-23T19:13:03.529528+00:00"
     }
   }
 }
