@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 20,
-  "next_part": 18,
+  "next_part": 19,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -371,6 +371,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-22T17:09:52.408695+00:00"
+    },
+    "18": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep18/ep18_narrated_music.mp4",
+      "subtitle": "The ISS: 16 Sunrises DAILY",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-23T17:05:02.586849+00:00"
     }
   }
 }
