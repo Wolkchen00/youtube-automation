@@ -214,5 +214,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=6dc58004ca69441686b79d5e30adb550. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '6dc58004ca69441686b79d5e30adb550', 'total_platforms': 1, 'job_id': 'c294c07e98bf4f36a2cfbbe7635f157c'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=968de77df26b4a528e9fbc5cb872e1c0. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '968de77df26b4a528e9fbc5cb872e1c0', 'total_platforms': 1, 'job_id': '571520ea68df463197a86ec866ffdb20'}"
     }
+  },
+  {
+    "part": 18,
+    "subtitle": "The Real Reason Cleopatra Was Closer To The Moon Landing",
+    "ts": "2026-08-24T21:05:33.987241+00:00",
+    "results": {
+      "youtube": "6GgIn4roshE",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d5bdd3eaa5e1459fac94750ba1cb768c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd5bdd3eaa5e1459fac94750ba1cb768c', 'total_platforms': 1, 'job_id': 'faf41af525054ecca9a2fc8ace8c88b4'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=9c037cedeee6458ba3eb340903b84ab8. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '9c037cedeee6458ba3eb340903b84ab8', 'total_platforms': 1, 'job_id': '87a52e0a1af34efea30b6a4d4b727c05'}"
+    }
   }
 ]
