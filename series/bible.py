@@ -216,6 +216,21 @@ class Bible:
         return self.data.get("narration") or {}
 
     @property
+    def native_mix_level(self) -> float:
+        """Anlatım miksinde ham klip sesine uygulanan sabit seviye çarpanı.
+
+        Alan yoksa tarihsel davranış korunur: native ses tamamen kapalıdır (0.0).
+        """
+        raw = self.narration.get("native_mix_level", 0.0)
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.narration.native_mix_level float olmalı") from error
+        if value < 0.0:
+            raise ValueError("bible.narration.native_mix_level negatif olamaz")
+        return value
+
+    @property
     def music(self) -> bool:
         """True ise arka plan müziği eklenir (galactic/shadowedhistory/aimagine atmosferi)."""
         return bool(self.data.get("music", False))
@@ -225,6 +240,17 @@ class Bible:
         """Ucuz motorun (Seedance) kendi sesini üretsin mi? Anlatım-odaklı kanallarda
         False önerilir (anlatım+müzik temiz kalsın); 'trip' kanalında serbest."""
         return bool(self.data["series"].get("native_audio", True))
+
+    @property
+    def omit_character_refs(self) -> bool:
+        """True ise çekim üretim payload'larından karakter kimliği/görseli çıkarılır."""
+        return bool(self.data["series"].get("omit_character_refs", False))
+
+    @property
+    def face_visible(self) -> bool | None:
+        """Planlayıcının bölüm düzeyi yüz politikası; alan yoksa legacy davranış."""
+        value = self.data["series"].get("face_visible")
+        return value if type(value) is bool else None
 
     @property
     def micro_trim(self) -> float:
@@ -307,7 +333,8 @@ class Bible:
         kie'de başarısız görev 0 kredi olduğundan yalnız 'başarılı-ama-bozuk'
         üretim regen kredisi yakar. Ayarlar (varsayılanlar critic.QC_DEFAULTS):
         frames, artifact_threshold, max_regens_per_shot, notes (kanal-özgü
-        denetim talimatı). Örn: "qc": {"enabled": true}"""
+        denetim talimatı), native_audio_review (ham stem denetimi), require_no_face
+        (zorunlu face_present=false kapısı). Örn: "qc": {"enabled": true}"""
         v = self.data["series"].get("qc") or {}
         return v if isinstance(v, dict) and v.get("enabled") else {}
 

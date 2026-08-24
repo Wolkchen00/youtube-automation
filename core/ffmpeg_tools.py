@@ -128,6 +128,28 @@ def sample_frames(video_path: str | Path, count: int = 8, width: int = 720,
     return [f for f in frames if f.stat().st_size > 0]
 
 
+def extract_audio(video_path: str | Path, output_path: str | Path = None) -> Path | None:
+    """Extract a clip's native audio as a mono 16 kHz PCM WAV stem."""
+    video_path = Path(video_path)
+    if output_path is None:
+        output_path = video_path.parent / f"{video_path.stem}.wav"
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-i", str(video_path), "-vn", "-ac", "1",
+                "-ar", "16000", "-codec:a", "pcm_s16le", str(output_path),
+            ],
+            capture_output=True, check=True, timeout=120,
+        )
+        if output_path.exists() and output_path.stat().st_size > 0:
+            return output_path
+    except Exception as error:
+        logger.warning(f"⚠️ Native audio extraction failed ({video_path.name}): {error}")
+    return None
+
+
 def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Path = None) -> Path:
     """Concatenate videos without transitions."""
     import shutil
@@ -1184,14 +1206,14 @@ def mix_voiceover(
     voice_volume: float = 1.0,
     bg_duck: float = 0.3,
 ) -> Path:
-    """Mix voiceover narration into a video, ducking original audio.
+    """Mix voiceover narration into a video at a static original-audio level.
 
     Args:
         video_path: Input video file
         voiceover_path: Voiceover audio file (TTS generated)
         output_path: Output file (default: _narrated suffix)
         voice_volume: Voiceover volume (default 1.0 = full)
-        bg_duck: Original audio ducking level when voice is present (0.3 = -10dB)
+        bg_duck: Static original-audio level multiplier for the whole mix
 
     Returns:
         Path to the narrated video.

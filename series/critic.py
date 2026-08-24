@@ -16,8 +16,8 @@ karışımı hatalar yayına çıkıyor"). Üç adım:
 Sözleşmeler:
   • Reddedilen klip ASLA shot_NN.mp4 adıyla diskte bırakılmaz → produce'un
     idempotent "zaten var, atla" yolu QC bilmeden güvenli kalır.
-  • QC/Gemini hatası = "skip" (klip aynen kullanılır) — QC bir kalite katmanıdır,
-    yayını tek başına durduramaz (the-signal dersi: sessiz zincirleme çökme yok).
+  • Legacy QC/Gemini hatası = "skip" (klip aynen kullanılır). Opt-in zorunlu
+    yüz/ham-ses kapıları denetlenemezse fail-closed biçimde RED olur.
   • Her karar seri veri klasörüne (bible.data_dir(slug)/qc_log.jsonl) yazılır (workflow commit'ler)
     → ilk hafta false-positive kalibrasyonu bu logdan yapılır.
 Maliyet: denetim <$0.01/video (Gemini Flash); kie'de FAIL görev 0 kredi, regen
@@ -37,7 +37,7 @@ import requests
 from core.config import GEMINI_API_KEY, logger
 from core import ffmpeg_tools
 from core.utils import download_file
-from .bible import Bible, data_dir
+from .bible import Bible, data_dir, episode_dir
 
 QC_MODEL = "gemini-2.5-flash"
 QC_MODEL_FALLBACK = "gemini-flash-latest"
@@ -127,6 +127,12 @@ Be STRICT on anatomy — a single twisted head, backwards body or six-fingered h
 Be TOLERANT of film grain, motion blur, compression, artistic color grading and stylization: they are NOT defects.
 Return ONLY the JSON object."""
 
+_NO_FACE_QC_ADDENDUM = """
+
+FACE VISIBILITY GATE (mandatory for this series): add this required field to the same JSON object:
+  "face_present": bool       // true when any recognizable human face is visible in any sampled frame, including partial or background faces; false only when every face stays outside the sampled frames.
+This field must always be a JSON boolean. Inspect every sampled frame before answering."""
+
 
 def _parse_json(txt: str):
     """Gemini çıktısını kurtarıcı ayrıştırma (replenish kalıbı): ```json çiti / kırpık uçlar tolere edilir."""
@@ -169,8 +175,9 @@ def _fetch_ref_face(bible: Bible, shot: dict) -> bytes | None:
 
 
 def _review_frames(frames: list[Path], ref_face: bytes | None,
-                   prompt: str, notes: str, max_tries: int = 3) -> dict | None:
-    """Kareleri Gemini vision'a ver → zorunlu JSON karar. Hata = None (pass-through).
+                   prompt: str, notes: str, max_tries: int = 3,
+                   require_no_face: bool = False) -> dict | None:
+    """Kareleri Gemini vision'a ver → zorunlu JSON karar. Hata = None (çağıran kapı karar verir).
     replenish._gen_json retry kalıbı: geçici hata → backoff; model ölürse yedek model."""
     if not GEMINI_API_KEY:
         logger.warning("⚠️ QC: GEMINI_API_KEY yok — denetim atlanıyor")
@@ -200,7 +207,9 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
 
     client = genai.Client(api_key=GEMINI_API_KEY)
     cfg = types.GenerateContentConfig(
-        system_instruction=_QC_SYSTEM,
+        system_instruction=(
+            _QC_SYSTEM + _NO_FACE_QC_ADDENDUM if require_no_face else _QC_SYSTEM
+        ),
         response_mime_type="application/json",
         temperature=0.1,
     )
@@ -245,6 +254,12 @@ def _decide(review: dict, qc: dict, has_ref: bool) -> tuple[str, list[str]]:
         reasons.append("gömülü yazı/watermark")
     if review.get("forbidden_elements") is True:
         reasons.append("prompt'un yasakladığı öğe görünüyor")
+    if qc.get("require_no_face"):
+        face_present = review.get("face_present")
+        if type(face_present) is not bool:
+            reasons.append("zorunlu yüz görünürlüğü alanı doğrulanamadı")
+        elif face_present:
+            reasons.append("örneklenen karelerde insan yüzü görünüyor")
     score = review.get("artifact_score")
     if isinstance(score, (int, float)) and score >= qc["artifact_threshold"]:
         reasons.append(f"artifact skoru {score}/10 (eşik {qc['artifact_threshold']})")
@@ -254,18 +269,31 @@ def _decide(review: dict, qc: dict, has_ref: bool) -> tuple[str, list[str]]:
 def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 qc: dict) -> tuple[dict | None, str, list[str], list[Path]]:
     """Bir klibi denetle. Dönüş: (gemini_kararı|None, 'pass'|'fail'|'skip', nedenler, kareler).
-    'skip' = denetim yapılamadı → klip aynen kullanılır (QC yayını durduramaz)."""
+    Legacy 'skip' klibi korur; require_no_face aynı hatayı fail-closed RED yapar."""
     clip_path = Path(clip_path)
     frames = ffmpeg_tools.sample_frames(
         clip_path, count=int(qc["frames"]), width=int(qc["frame_width"]),
         out_dir=clip_path.parent / "qc", prefix=clip_path.stem,
     )
     if not frames:
-        return None, "skip", ["denetim karesi çıkarılamadı"], []
-    ref_face = _fetch_ref_face(bible, shot) if shot.get("characters") else None
-    review = _review_frames(frames, ref_face, prompt, str(qc.get("notes") or ""))
+        verdict = "fail" if qc.get("require_no_face") else "skip"
+        return None, verdict, ["denetim karesi çıkarılamadı"], []
+    ref_face = (
+        _fetch_ref_face(bible, shot)
+        if shot.get("characters") and not qc.get("require_no_face") else None
+    )
+    review = _review_frames(
+        frames, ref_face, prompt, str(qc.get("notes") or ""),
+        require_no_face=bool(qc.get("require_no_face")),
+    )
     if review is None:
-        return None, "skip", ["Gemini denetimi başarısız (klip denetimsiz kabul edildi)"], frames
+        verdict = "fail" if qc.get("require_no_face") else "skip"
+        reason = (
+            "zorunlu yüz görünürlüğü denetimi başarısız"
+            if qc.get("require_no_face")
+            else "Gemini denetimi başarısız (klip denetimsiz kabul edildi)"
+        )
+        return None, verdict, [reason], frames
     verdict, reasons = _decide(review, qc, has_ref=ref_face is not None)
     return review, verdict, reasons, frames
 
@@ -398,6 +426,117 @@ def _review_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
     return None
 
 
+_RAW_AUDIO_QC_SYSTEM = """You are a strict quality-control inspector for raw native audio from one generated video shot.
+Listen to the supplied audio and answer with STRICT JSON only:
+{
+  "has_foley": bool,
+  "unwanted_speech": bool,
+  "unwanted_music": bool,
+  "notes": string
+}
+Set has_foley true when audible actions in the shot produce natural object, hand, tool, surface, room, or material sounds.
+Set unwanted_speech true for any spoken, whispered, sung, or intelligible human voice.
+Set unwanted_music true for any musical score, melody, beat, song, or rhythmic music bed.
+Use notes for one concise observation. Return ONLY the JSON object."""
+
+
+def _review_raw_native_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
+    """Review one persisted raw WAV stem with the native-audio schema."""
+    if not GEMINI_API_KEY:
+        logger.warning("⚠️ Ham ses QC: GEMINI_API_KEY yok — denetim başarısız")
+        return None
+    try:
+        from google import genai
+        from google.genai import types
+    except ImportError as error:
+        logger.warning(f"⚠️ Ham ses QC: google-genai import edilemedi ({error})")
+        return None
+
+    try:
+        audio = audio_path.read_bytes()
+    except OSError as error:
+        logger.warning(f"⚠️ Ham ses QC: stem okunamadı ({error})")
+        return None
+    parts = [
+        types.Part.from_bytes(data=audio, mime_type="audio/wav"),
+        types.Part.from_text(text="Inspect this raw shot-audio stem for every required field."),
+    ]
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    cfg = types.GenerateContentConfig(
+        system_instruction=_RAW_AUDIO_QC_SYSTEM,
+        response_mime_type="application/json",
+        temperature=0.1,
+    )
+    last_error = None
+    for model in (QC_MODEL, QC_MODEL_FALLBACK):
+        for attempt in range(1, max_tries + 1):
+            try:
+                response = client.models.generate_content(
+                    model=model, contents=parts, config=cfg
+                )
+                return _parse_json(response.text or "")
+            except Exception as error:
+                last_error = error
+                message = str(error)
+                bad_json = isinstance(error, json.JSONDecodeError)
+                transient = any(
+                    marker in message
+                    for marker in (
+                        "503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
+                        "INTERNAL", "deadline",
+                    )
+                )
+                if (transient or bad_json) and attempt < max_tries:
+                    wait = 3 if bad_json else min(5 * attempt, 15)
+                    logger.warning(
+                        f"⚠️ Ham ses QC {model} geçici hata ({message[:60]}…) — "
+                        f"{wait}s sonra tekrar"
+                    )
+                    time.sleep(wait)
+                    continue
+                logger.warning(f"⚠️ Ham ses QC {model} başarısız: {message[:120]}")
+                break
+    logger.warning(f"⚠️ Ham ses QC yapılamadı ({last_error})")
+    return None
+
+
+def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
+                            episode: int, attempt: int) -> tuple[
+                                dict | None, str, list[str], Path | None
+                            ]:
+    """Persist and review a raw shot stem; unavailable/invalid review fails closed."""
+    shot_number = int(shot.get("n") or 0)
+    stems = episode_dir(bible.slug, episode) / "stems"
+    stem = stems / f"shot_{shot_number:02d}_attempt_{int(attempt):02d}.wav"
+    extracted = ffmpeg_tools.extract_audio(clip_path, stem)
+    if extracted is None:
+        return None, "fail", ["ham native ses stem'i çıkarılamadı"], None
+
+    review = _review_raw_native_audio(extracted)
+    valid = (
+        isinstance(review, dict)
+        and type(review.get("has_foley")) is bool
+        and type(review.get("unwanted_speech")) is bool
+        and type(review.get("unwanted_music")) is bool
+        and isinstance(review.get("notes"), str)
+    )
+    if not valid:
+        return None, "fail", ["ham native ses denetimi zorunlu alanları doğrulamadı"], extracted
+
+    normalized = {
+        "has_foley": review["has_foley"],
+        "unwanted_speech": review["unwanted_speech"],
+        "unwanted_music": review["unwanted_music"],
+        "notes": review["notes"].strip(),
+    }
+    reasons: list[str] = []
+    if normalized["unwanted_speech"]:
+        reasons.append("ham native seste istenmeyen konuşma var")
+    if normalized["unwanted_music"]:
+        reasons.append("ham native seste istenmeyen müzik var")
+    return normalized, ("fail" if reasons else "pass"), reasons, extracted
+
+
 def _audio_slug(path: Path) -> str | None:
     """Infer output/series/<slug>/... so qc_audio can append the series QC log."""
     parts = path.resolve().parts
@@ -467,8 +606,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
     üret (çekim başına maks max_regens_per_shot, bölüm başına budget["left"]).
 
     Dönüş: (kullanılacak_klip_yolu | None, regen'lerin ek kredisi,
-    ``"pass"|"skip"|"fail"``). Durum her zaman açıktır; denetlenemeyen ``skip``
-    klibi require_all_shots modunda da korunur, yalnız gerçek ``fail`` düşürülür.
+    ``"pass"|"skip"|"fail"``). Legacy görsel denetimde ``skip`` korunur; opt-in
+    zorunlu yüz ve ham-ses kapıları denetlenemezse ``fail`` olur.
     None = çekim eşiği geçemedi → çağıran onu üretim-FAIL gibi işler (bölümden düşer).
     Sözleşme: dönüşte clip_path adında dosya YA onaylıdır YA hiç yoktur — reddedilenler
     *_qcfail*.mp4'e taşınır, idempotent 'atla' yolu asla bozuk klip devralmaz."""
@@ -494,27 +633,60 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
     while True:
         review_try = 0
         review_retries = max(0, int(qc["qc_review_retries"]))
-        while True:
-            review, verdict, reasons, frames = review_clip(
-                bible, shot, clip_path, prompt, qc
+        frames: list[Path] = []
+        audio_failure = False
+        if qc.get("native_audio_review"):
+            review, verdict, reasons, stem = review_raw_native_audio(
+                bible, shot, clip_path, episode, attempt
             )
+            if review is not None and review["has_foley"] is False:
+                budget["no_foley_count"] = int(budget.get("no_foley_count", 0)) + 1
             _log_event(slug, {
-                "event": "review", "episode": episode, "shot": n, "attempt": attempt,
-                "review_try": review_try, "verdict": verdict, "reasons": reasons,
-                "artifact_score": (review or {}).get("artifact_score"),
-                "issues": (review or {}).get("issues"),
-                "fix_notes": (review or {}).get("fix_notes"),
+                "event": "native_audio_review", "episode": episode, "shot": n,
+                "attempt": attempt, "verdict": verdict, "reasons": reasons,
+                "has_foley": (review or {}).get("has_foley"),
+                "unwanted_speech": (review or {}).get("unwanted_speech"),
+                "unwanted_music": (review or {}).get("unwanted_music"),
+                "notes": (review or {}).get("notes"),
+                "no_foley_count": int(budget.get("no_foley_count", 0)),
+                "stem": stem.name if stem else None,
                 "clip": clip_path.name,
             })
-            if verdict != "skip" or review_try >= review_retries:
-                break
-            review_try += 1
-            wait = QC_REVIEW_RETRY_DELAY * review_try
-            logger.warning(
-                f"⚠️ QC denetimi atlandı: çekim {n}, aynı klip "
-                f"{wait:.2f}s sonra yeniden denenecek ({review_try}/{review_retries})"
-            )
-            time.sleep(wait)
+            audio_failure = verdict != "pass"
+
+        if not audio_failure:
+            while True:
+                review, verdict, reasons, frames = review_clip(
+                    bible, shot, clip_path, prompt, qc
+                )
+                if qc.get("require_no_face"):
+                    face_present = (review or {}).get("face_present")
+                    if face_present is not False:
+                        verdict = "fail"
+                        gate_reason = (
+                            "örneklenen karelerde insan yüzü görünüyor"
+                            if face_present is True
+                            else "zorunlu yüz görünürlüğü alanı doğrulanamadı"
+                        )
+                        if gate_reason not in reasons:
+                            reasons = [*reasons, gate_reason]
+                _log_event(slug, {
+                    "event": "review", "episode": episode, "shot": n, "attempt": attempt,
+                    "review_try": review_try, "verdict": verdict, "reasons": reasons,
+                    "artifact_score": (review or {}).get("artifact_score"),
+                    "issues": (review or {}).get("issues"),
+                    "fix_notes": (review or {}).get("fix_notes"),
+                    "clip": clip_path.name,
+                })
+                if verdict != "skip" or review_try >= review_retries:
+                    break
+                review_try += 1
+                wait = QC_REVIEW_RETRY_DELAY * review_try
+                logger.warning(
+                    f"⚠️ QC denetimi atlandı: çekim {n}, aynı klip "
+                    f"{wait:.2f}s sonra yeniden denenecek ({review_try}/{review_retries})"
+                )
+                time.sleep(wait)
 
         if verdict in ("pass", "skip"):
             if verdict == "pass":
@@ -545,7 +717,19 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         # ── RED ──
         logger.warning(f"🔍 QC RED: çekim {n} (deneme {attempt}): {'; '.join(reasons)}")
-        all_fix_notes.extend((review or {}).get("fix_notes") or reasons)
+        if audio_failure:
+            current_fix_notes = [
+                "Keep the soundtrack limited to natural foley from the visible hands, "
+                "object, material, and workbench."
+            ]
+        elif qc.get("require_no_face") and (review or {}).get("face_present") is not False:
+            current_fix_notes = [
+                "Frame only the hands, forearms, object, and workbench, with the face "
+                "outside the frame."
+            ]
+        else:
+            current_fix_notes = (review or {}).get("fix_notes") or reasons
+        all_fix_notes.extend(current_fix_notes)
 
         can_regen = (regen_fn is not None
                      and attempt < shot_regen_limit

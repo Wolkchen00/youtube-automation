@@ -238,12 +238,12 @@ class ProtectedStateTests(unittest.TestCase):
         meta = json.loads(
             (REPO_ROOT / "aimagine/from-scratch/series.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(meta["next_part"], 7)
+        self.assertEqual(meta["next_part"], 9)
         self.assertEqual(meta["total_parts"], 10)
         self.assertEqual(meta["publish_mode"], "auto")
         self.assertEqual(meta["status"], "active")
-        self.assertEqual(sorted(meta["parts"]), ["1", "2", "3", "4", "5", "6"])
-        for number in range(1, 7):
+        self.assertEqual(sorted(meta["parts"]), ["1", "2", "3", "4", "5", "6", "7", "8"])
+        for number in range(1, 9):
             with self.subTest(part=number):
                 self.assertEqual(meta["parts"][str(number)]["status"], "published")
 

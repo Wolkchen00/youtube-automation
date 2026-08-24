@@ -112,3 +112,12 @@ jobs:
           name: unnatural-lab-logs-${{ github.run_number }}
           path: logs/
           retention-days: 7
+
+      - name: Upload raw audio stems artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unnatural-lab-raw-audio-${{ github.run_number }}
+          path: output/series/unnatural-lab/episodes/*/stems/
+          if-no-files-found: ignore
+          retention-days: 7

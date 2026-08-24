@@ -498,13 +498,17 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     pool = _topic_pool(cfg)
     cards = _unused_cards(calibration, history)
     humans_mode = str(cfg.get("humans") or "").strip().lower()
+    face_hidden = bible.face_visible is False
     humans_historical = humans_mode == "historical"
-    humans_featured = humans_mode == "featured"
+    humans_featured = humans_mode == "featured" and not face_hidden
+    humans_hands_only = humans_mode == "featured" and face_hidden
     humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
     eerie_ok = bool(cfg.get("eerie_ok"))
     title_style = str(cfg.get("title_style") or "").strip()
-    shot_refs = bool(cfg.get("shot_refs"))
-    humans_present = humans_historical or humans_featured or humans_silent
+    shot_refs = bool(cfg.get("shot_refs")) and not bible.omit_character_refs
+    humans_present = (
+        humans_historical or humans_featured or humans_hands_only or humans_silent
+    )
 
     if narrated:
         head = (f"You are the showrunner of an endless vertical (9:16) YouTube Shorts series told through\n"
@@ -533,6 +537,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                    'matched to THIS episode>",') if want_music else ""
     cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
                  '\n   "hashtags": "<#Tag1 #Tag2 ... 6-9 tags>",') if want_caption else ""
+    face_shape = '\n   "face_visible": false,' if face_hidden else ""
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
     chain_breaks = cfg.get("chain_breaks") if "chain_breaks" in cfg else None
     if chain_breaks is not None:
@@ -593,6 +598,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                        "mid and wide shots and is the emotional anchor of the episode, but must NEVER speak, "
                        "lip-sync or move their lips as if talking (the voice is added later as narration); "
                        "other people may appear around them,")
+    elif humans_hands_only:
+        humans_rule = ("the recurring worker is represented by hands and forearms working at bench level, "
+                       "and every composition keeps the face outside the frame,")
     elif humans_silent:
         humans_rule = ("human figures may appear but must NEVER speak, lip-sync or show a clear close-up face "
                        "(masked, distant, silhouetted or from behind only),")
@@ -648,6 +656,11 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         )
     else:
         seed_rule = ""
+    face_rule = (
+        '\n- FACE FRAMING: set "face_visible" to false; compose every shot around the hands, '
+        'forearms, object and workbench, with the face outside the frame.'
+        if face_hidden else ""
+    )
     if pool and previous_family:
         seed_rule += (
             f' For integer seed_id in episode {start}, choose only from the runtime pool explicitly '
@@ -684,7 +697,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
 Return STRICT JSON ONLY, exactly this shape:
 {{"episodes": [
   {{"episode": {{"number": <int>, "title": "<title>"}},
-   "synopsis": "<one sentence>",
+   "synopsis": "<one sentence>",{face_shape}
    "hook_shot": <int>,{family_shape}{seed_shape}
    "narration": {narr_shape},{tc_shape}{music_shape}{cap_shape}
    "shots": [{{{shot_fields}}}]}}
@@ -696,7 +709,7 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}
+  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}{face_rule}
 {chain_rule}{shot_plan_rule}
 - EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve.
 {hook_rule}
@@ -800,7 +813,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
-    shot_refs = bool(cfg.get("shot_refs"))
+    shot_refs = bool(cfg.get("shot_refs")) and not bible.omit_character_refs
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     pool = _topic_pool(cfg)
     history = history or []
@@ -1002,6 +1015,10 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "synopsis": str(plan.get("synopsis") or "").strip()[:300],
                       "narration": ntext,
                       "shots": clean_shots}
+        if bible.face_visible is False:
+            if plan.get("face_visible") is not False:
+                errors.append(f"part {want}: face_visible tam false olmalı")
+            normalized["face_visible"] = False
         if families:
             normalized["family"] = family
         if (pool or cards) and seed_id is not None:

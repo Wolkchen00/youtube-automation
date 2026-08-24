@@ -220,8 +220,8 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
 
     Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
     çekim sınırlarında 'pop'lar ve boşluk/sessizlik bırakır. Çözüm:
-      • Anlatım varsa  → gappy native ses TAMAMEN düşürülür (bg_duck=0); temiz tek
-        anlatım + sürekli müzik bedi kalır.
+      • Anlatım varsa → narration.native_mix_level ham sese bütün miks boyunca
+        sabit çarpan uygular; alan yoksa tarihsel 0.0 davranışı korunur.
       • Anlatım yoksa (saf görsel şölen kanalları) → müzik TEK ses olur (native
         atılır) → çekim kesişlerinde boşluk imkânsız.
     Müzik HER VİDEO için ayrı üretilir (kanal stiline sadık ama her video benzersiz).
@@ -240,9 +240,11 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
             audio_path, style = create_narration_for_channel(narr_cfg["channel"], narr_text, wav)
             if audio_path and Path(audio_path).exists():
                 narrated = out.parent / f"{out.stem}_narrated.mp4"
-                # bg_duck=0 → gappy native sesi at; anlatım tek temiz ses olsun
+                # Adı legacy kalsa da bg_duck sidechain değildir; bütün klip boyunca
+                # native sese uygulanan sabit seviye çarpanıdır.
                 ffmpeg_tools.mix_voiceover(str(out), str(audio_path), str(narrated),
-                                           voice_volume=1.0, bg_duck=0.0)
+                                           voice_volume=1.0,
+                                           bg_duck=bible.native_mix_level)
                 if narrated.exists() and narrated.stat().st_size > 0:
                     out = narrated
                     narration_ok = True

@@ -51,19 +51,21 @@ def resolve_shot(bible: Bible, shot: dict) -> dict:
     character_ids: list[str] = []
     image_urls: list[str] = []
 
-    # Karakterler → characterId (yoksa referans görsel)
-    for cid in shot.get("characters", []):
-        ch = bible.get_character(cid)
-        if not ch:
-            warnings.append(f"Karakter '{cid}' bible'da yok")
-            continue
-        if ch.get("character_id"):
-            character_ids.append(ch["character_id"])
-        elif ch.get("ref_image_url"):
-            image_urls.append(ch["ref_image_url"])
-            warnings.append(f"Karakter '{cid}' henüz kaydedilmemiş → referans görsel kullanılıyor")
-        else:
-            warnings.append(f"Karakter '{cid}' için characterId/referans görsel yok")
+    # Karakterler → characterId (yoksa referans görsel). Yüzsüz formatlar bu
+    # teknik referans katmanını opt-in olarak tamamen kaldırabilir.
+    if not bible.omit_character_refs:
+        for cid in shot.get("characters", []):
+            ch = bible.get_character(cid)
+            if not ch:
+                warnings.append(f"Karakter '{cid}' bible'da yok")
+                continue
+            if ch.get("character_id"):
+                character_ids.append(ch["character_id"])
+            elif ch.get("ref_image_url"):
+                image_urls.append(ch["ref_image_url"])
+                warnings.append(f"Karakter '{cid}' henüz kaydedilmemiş → referans görsel kullanılıyor")
+            else:
+                warnings.append(f"Karakter '{cid}' için characterId/referans görsel yok")
 
     # Ortam → image_url
     env_id = shot.get("environment")
@@ -144,7 +146,7 @@ def resolve_visual_shot(bible: Bible, shot: dict, chain_url: str | None = None) 
             env = bible.get("environments", env_id)
             if env and env.get("ref_image_url"):
                 start_url = env["ref_image_url"]
-    if not start_url:
+    if not start_url and not bible.omit_character_refs:
         for cid in shot.get("characters", []):
             ch = bible.get_character(cid)
             if ch and ch.get("ref_image_url"):
@@ -169,6 +171,9 @@ def validate_plan(plan: dict, bible: Bible) -> dict:
     if not shots:
         errors.append("Plan'da 'shots' yok veya boş")
         return {"errors": errors, "warnings": warnings}
+
+    if bible.face_visible is False and plan.get("face_visible") is not False:
+        errors.append("Plan'da 'face_visible' tam false olmalı")
 
     for shot in shots:
         n = shot.get("n", "?")
