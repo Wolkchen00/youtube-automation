@@ -19,12 +19,12 @@ COLUMNS = [
 ]
 
 
-def csv_path(slug: str) -> Path:
-    return data_dir(slug) / "series_log.csv"
+def csv_path(slug: str, output_dir: str | Path | None = None) -> Path:
+    return (Path(output_dir) if output_dir is not None else data_dir(slug)) / "series_log.csv"
 
 
-def xlsx_path(slug: str) -> Path:
-    return data_dir(slug) / "series_log.xlsx"
+def xlsx_path(slug: str, output_dir: str | Path | None = None) -> Path:
+    return (Path(output_dir) if output_dir is not None else data_dir(slug)) / "series_log.xlsx"
 
 
 def make_row(*, episode, shot_n, characters, audio_ids, duration, resolution,
@@ -48,9 +48,9 @@ def make_row(*, episode, shot_n, characters, audio_ids, duration, resolution,
     }
 
 
-def append_row(slug: str, row: dict) -> Path:
+def append_row(slug: str, row: dict, *, output_dir: str | Path | None = None) -> Path:
     """Rapora bir satır ekle (yoksa başlık yazar)."""
-    p = csv_path(slug)
+    p = csv_path(slug, output_dir)
     p.parent.mkdir(parents=True, exist_ok=True)
     exists = p.exists()
     with open(p, "a", newline="", encoding="utf-8-sig") as f:
@@ -61,15 +61,15 @@ def append_row(slug: str, row: dict) -> Path:
     return p
 
 
-def read_rows(slug: str) -> list[dict]:
-    p = csv_path(slug)
+def read_rows(slug: str, *, output_dir: str | Path | None = None) -> list[dict]:
+    p = csv_path(slug, output_dir)
     if not p.exists():
         return []
     with open(p, "r", newline="", encoding="utf-8-sig") as f:
         return list(csv.DictReader(f))
 
 
-def export_xlsx(slug: str) -> Path | None:
+def export_xlsx(slug: str, *, output_dir: str | Path | None = None) -> Path | None:
     """CSV'yi Excel (.xlsx) olarak da dışa aktar (openpyxl varsa)."""
     try:
         from openpyxl import Workbook
@@ -78,7 +78,7 @@ def export_xlsx(slug: str) -> Path | None:
         logger.warning("⚠️ openpyxl yok — yalnızca CSV üretildi")
         return None
 
-    rows = read_rows(slug)
+    rows = read_rows(slug, output_dir=output_dir)
     wb = Workbook()
     ws = wb.active
     ws.title = "Üretim"
@@ -87,7 +87,7 @@ def export_xlsx(slug: str) -> Path | None:
         cell.font = Font(bold=True)
     for r in rows:
         ws.append([r.get(c, "") for c in COLUMNS])
-    out = xlsx_path(slug)
+    out = xlsx_path(slug, output_dir)
     try:
         wb.save(out)
         logger.info(f"📊 Excel raporu: {out}")
@@ -97,9 +97,9 @@ def export_xlsx(slug: str) -> Path | None:
         return None
 
 
-def summarize(slug: str) -> dict:
+def summarize(slug: str, *, output_dir: str | Path | None = None) -> dict:
     """Toplam kredi/dolar/çekim özetini döndür."""
-    rows = read_rows(slug)
+    rows = read_rows(slug, output_dir=output_dir)
     total_credits = sum(float(r["kredi"]) for r in rows if r.get("kredi"))
     ok = sum(1 for r in rows if r.get("durum") == "ok")
     return {

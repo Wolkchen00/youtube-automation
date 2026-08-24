@@ -480,13 +480,16 @@ def strengthen_prompt(prompt: str, fix_notes: list[str], *,
     return f"{prompt.rstrip()}\n\n{block}"
 
 
-def _log_event(slug: str, entry: dict) -> None:
+def _log_event(slug: str, entry: dict, *,
+               experiment_id: str | None = None) -> None:
     """QC olayını seri veri klasörüne (data_dir(slug)/qc_log.jsonl) ekle (workflow commit'ler →
     ilk hafta eşik kalibrasyonu bu logdan yapılır). Best-effort."""
     try:
         p = data_dir(slug) / "qc_log.jsonl"
         p.parent.mkdir(parents=True, exist_ok=True)
         entry = {"ts": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **entry}
+        if experiment_id is not None:
+            entry["experiment_id"] = experiment_id
         with open(p, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except Exception as e:
@@ -570,7 +573,8 @@ def content_sha256(path: str | Path) -> str | None:
 
 
 def qc_pass_exists(slug: str, episode: int, shot: int,
-                   content_hash: str | None, qc: dict | None = None) -> bool:
+                   content_hash: str | None, qc: dict | None = None, *,
+                   experiment_id: str | None = None) -> bool:
     """Return whether this exact clip passed every currently enabled QC gate."""
     if not content_hash:
         return False
@@ -584,7 +588,8 @@ def qc_pass_exists(slug: str, episode: int, shot: int,
             if (event.get("event") != "qc_pass"
                     or int(event.get("episode")) != int(episode)
                     or int(event.get("shot")) != int(shot)
-                    or event.get("content_sha256") != content_hash):
+                    or event.get("content_sha256") != content_hash
+                    or event.get("experiment_id") != experiment_id):
                 continue
             required = qc or {}
             if required.get("require_no_face") and event.get("face_present") is not False:
@@ -612,7 +617,8 @@ def qc_pass_exists(slug: str, episode: int, shot: int,
 
 
 def log_scene_cut_scan(slug: str, episode: int, shot: int,
-                       clip_path: str | Path) -> dict:
+                       clip_path: str | Path, *,
+                       experiment_id: str | None = None) -> dict:
     timestamps = ffmpeg_tools.detect_scene_cuts(clip_path, threshold=0.2, height=270)
     event = {
         "event": "scene_cut_scan", "episode": int(episode), "shot": int(shot),
@@ -623,7 +629,7 @@ def log_scene_cut_scan(slug: str, episode: int, shot: int,
         "gated": False,
         "clip": Path(clip_path).name,
     }
-    _log_event(slug, event)
+    _log_event(slug, event, experiment_id=experiment_id)
     return event
 
 
@@ -804,12 +810,16 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3) -> dict | Non
 
 
 def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
-                            episode: int, attempt: int) -> tuple[
+                            episode: int, attempt: int, *,
+                            output_dir: str | Path | None = None) -> tuple[
                                 dict | None, str, list[str], Path | None
                             ]:
     """Persist and review a raw shot stem; unavailable/invalid review fails closed."""
     shot_number = int(shot.get("n") or 0)
-    stems = episode_dir(bible.slug, episode) / "stems"
+    stems = (
+        Path(output_dir) / "stems"
+        if output_dir is not None else episode_dir(bible.slug, episode) / "stems"
+    )
     stem = stems / f"shot_{shot_number:02d}_attempt_{int(attempt):02d}.wav"
     extracted = ffmpeg_tools.extract_audio(clip_path, stem)
     if extracted is None:
@@ -904,9 +914,10 @@ def qc_audio(path: str | Path) -> dict | None:
 
 
 def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
-            regen_fn, episode: int, budget: dict, *,
-            object_ref: bytes | None = None,
-            previous_clip: str | Path | None = None) -> tuple[Path | None, float, str]:
+             regen_fn, episode: int, budget: dict, *,
+             object_ref: bytes | None = None,
+             previous_clip: str | Path | None = None,
+             experiment_id: str | None = None) -> tuple[Path | None, float, str]:
     """Review and optionally regenerate one clip.
 
     ``hold`` means a mandatory gate could not be evaluated.  A confident ``fail``
@@ -956,9 +967,15 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         audio_failure = False
         if qc.get("native_audio_review"):
-            review, verdict, reasons, stem = review_raw_native_audio(
-                bible, shot, clip_path, episode, attempt
-            )
+            if experiment_id is not None:
+                review, verdict, reasons, stem = review_raw_native_audio(
+                    bible, shot, clip_path, episode, attempt,
+                    output_dir=clip_path.parent.parent,
+                )
+            else:
+                review, verdict, reasons, stem = review_raw_native_audio(
+                    bible, shot, clip_path, episode, attempt
+                )
             if review is None:
                 verdict = "hold"
                 reasons = [*reasons, "zorunlu ham ses denetimi değerlendirilemedi"]
@@ -974,7 +991,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 "no_foley_count": int(budget.get("no_foley_count", 0)),
                 "stem": stem.name if stem else None,
                 "clip": clip_path.name,
-            })
+            }, experiment_id=experiment_id)
             audio_failure = verdict == "fail"
 
         audio_hold = bool(qc.get("native_audio_review") and verdict == "hold")
@@ -1033,7 +1050,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                         event["opening_frame_sharpness_proxy"] = (
                             (opening_metrics or {}).get("sharpness_proxy") if n == 1 else "n/a"
                         )
-                    _log_event(slug, event)
+                    _log_event(slug, event, experiment_id=experiment_id)
                     if verdict not in ("skip", "hold") or review_try >= review_retries:
                         break
                     review_try += 1
@@ -1053,7 +1070,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
             _log_event(slug, {
                 "event": "qc_hold", "episode": episode, "shot": n,
                 "attempt": attempt, "reasons": reasons, "clip": held.name,
-            })
+            }, experiment_id=experiment_id)
             logger.error(f"⏸️ QC HOLD: çekim {n} zorunlu kapıda değerlendirilemedi")
             return None, extra_credits, "hold"
 
@@ -1092,7 +1109,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     pass_event["opening_frame_sharpness_proxy"] = (
                         (opening_metrics or {}).get("sharpness_proxy") if n == 1 else "n/a"
                     )
-                _log_event(slug, pass_event)
+                _log_event(slug, pass_event, experiment_id=experiment_id)
                 if attempt:
                     _notify(f"🔍 *{bible.title}* ep{episode} çekim {n}: QC {attempt}. regen'de GEÇTİ "
                             f"(nedenler: {'; '.join(all_fix_notes[:3]) or 'anatomi'}) ✅")
@@ -1106,7 +1123,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     "event": "qc_skip_accepted", "episode": episode, "shot": n,
                     "attempt": attempt, "review_attempts": review_try + 1,
                     "reasons": reasons, "clip": clip_path.name,
-                })
+                }, experiment_id=experiment_id)
                 _notify(
                     f"⚠️ *QC DENETİMSİZ KABUL, {bible.title}* ep{episode} çekim {n}\n"
                     f"{review_try + 1} denetim denemesi sonuçsuz kaldı. "
@@ -1151,7 +1168,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                    else "çekim regen limiti doldu" if regen_fn is not None else "regen kapalı")
             logger.error(f"❌ QC: çekim {n} eşiği geçemedi ({why}) — çekim bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "final_reject", "episode": episode, "shot": n,
-                              "attempts": attempt, "reasons": reasons})
+                              "attempts": attempt, "reasons": reasons},
+                       experiment_id=experiment_id)
             _notify(f"🔍❌ *QC RED — {bible.title}* ep{episode} çekim {n}\n"
                     f"Nedenler: {'; '.join(reasons)}\n"
                     f"{attempt} regen denendi, eşik geçilemedi → çekim bölümden ÇIKARILDI. "
@@ -1177,7 +1195,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
             ]
         else:
             regen_event["fix_notes"] = list(all_fix_notes)
-        _log_event(slug, regen_event)
+        _log_event(slug, regen_event, experiment_id=experiment_id)
         _clean_sidecars(clip_path)
 
         result = None
@@ -1193,7 +1211,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 and clip_path.exists() and clip_path.stat().st_size > 0):
             logger.error(f"❌ QC regen üretimi başarısız — çekim {n} bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "regen_failed", "episode": episode, "shot": n,
-                              "attempt": attempt})
+                              "attempt": attempt}, experiment_id=experiment_id)
             _notify(f"🔍❌ *QC — {bible.title}* ep{episode} çekim {n}: klip QC'den geçemedi ve "
                     f"yeniden üretim de başarısız → çekim bölümden ÇIKARILDI (elle bak).",
                     frames=frames)

@@ -455,3 +455,101 @@ class HardCreditCap:
         self.blocked_reason = reason
         logger.error("Kredi sert tavanı çağrıyı engelledi: %s", self.blocked_reason)
         return False
+
+
+@dataclass
+class CompositeCreditCap:
+    """Require two independent authorizers for every paid call.
+
+    The episode cap remains the source of estimates and allocator state.  The
+    second authorizer is normally an experiment gate backed by its own durable
+    ledger.  If the second gate refuses, the in-memory episode reservation is
+    settled to zero because no provider call was made.
+    """
+
+    episode_cap: HardCreditCap
+    experiment_gate: object
+    blocked_reason: str | None = None
+
+    @property
+    def cap(self) -> float:
+        return self.episode_cap.cap
+
+    @property
+    def spent(self) -> float | None:
+        return self.episode_cap.spent
+
+    @property
+    def reservations(self) -> list[dict]:
+        return self.episode_cap.reservations
+
+    @property
+    def blocked(self) -> bool:
+        return bool(
+            self.blocked_reason
+            or self.episode_cap.blocked
+            or getattr(self.experiment_gate, "blocked", False)
+        )
+
+    @property
+    def remaining(self) -> float | None:
+        episode_remaining = self.episode_cap.remaining
+        experiment_remaining = getattr(self.experiment_gate, "remaining", None)
+        if episode_remaining is None or experiment_remaining is None:
+            return None
+        return min(float(episode_remaining), float(experiment_remaining))
+
+    @property
+    def last_estimate(self) -> float | None:
+        return self.episode_cap.last_estimate
+
+    def authorize(self, call_type: str, engine: str, duration=None,
+                  optional: bool = False) -> bool:
+        if self.blocked and not optional:
+            logger.error(
+                "Birleşik kredi kapısı önceden kapandı: %s",
+                self.blocked_reason or "alt kapılardan biri kapalı",
+            )
+            return False
+        if not self.episode_cap.authorize(
+            call_type, engine, duration, optional=optional
+        ):
+            if not optional:
+                self.blocked_reason = (
+                    self.episode_cap.blocked_reason or "bölüm kredi kapısı reddetti"
+                )
+            return False
+        try:
+            allowed = self.experiment_gate.authorize(
+                call_type, engine, duration, optional=optional
+            )
+        except TypeError:
+            # A simple authorizer only needs the three-argument protocol.
+            allowed = self.experiment_gate.authorize(call_type, engine, duration)
+        if allowed:
+            return True
+
+        # No paid call happened. Release only the just-created episode estimate;
+        # the durable experiment gate did not create a reservation on refusal.
+        self.episode_cap.settle_last(0)
+        reason = (
+            getattr(self.experiment_gate, "blocked_reason", None)
+            or "deney kredi kapısı reddetti"
+        )
+        if not optional:
+            self.blocked_reason = reason
+            logger.error("Birleşik kredi kapısı çağrıyı engelledi: %s", reason)
+        return False
+
+    def settle_last(self, actual: float | int | None) -> bool:
+        episode_ok = self.episode_cap.settle_last(actual)
+        experiment_ok = self.experiment_gate.settle_last(actual)
+        if episode_ok and experiment_ok:
+            return True
+        self.blocked_reason = (
+            self.episode_cap.blocked_reason
+            or getattr(self.experiment_gate, "blocked_reason", None)
+            or "birleşik kredi uzlaştırması başarısız"
+        )
+        logger.error("Birleşik kredi kapısı uzlaştırması başarısız: %s", self.blocked_reason)
+        return False

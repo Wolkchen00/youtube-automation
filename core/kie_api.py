@@ -10,6 +10,9 @@ import time
 import requests
 
 from pathlib import Path
+from urllib.parse import urlparse
+
+from . import ffmpeg_tools
 
 from .env import (
     KIE_AI_API_KEY,
@@ -110,11 +113,87 @@ def generate_and_wait(payload: dict, is_video: bool = False) -> str | None:
 
 # ─── Veo 3.1 (Different endpoint) ─────────────────────────────────────────────
 
+VEO_GENERATE_URL = "https://api.kie.ai/api/v1/veo/generate"
+VEO_RECORD_INFO_URL = "https://api.kie.ai/api/v1/veo/record-info"
+VEO_MODE_TEXT = "TEXT_2_VIDEO"
+VEO_MODE_FLF = "FIRST_AND_LAST_FRAMES_2_VIDEO"
+VEO_MODE_REFERENCE = "REFERENCE_2_VIDEO"
+VEO_GENERATION_TYPES = {VEO_MODE_TEXT, VEO_MODE_FLF, VEO_MODE_REFERENCE}
+VEO_MODE_IMAGE_LIMITS = {
+    VEO_MODE_TEXT: (0, 0),
+    VEO_MODE_FLF: (1, 2),
+    VEO_MODE_REFERENCE: (1, 3),
+}
+
+
+class VeoContractError(ValueError):
+    """A request cannot be represented by the current Kie Veo contract."""
+
+
+class VeoDurationError(RuntimeError):
+    """A downloaded Veo clip does not have the requested real duration."""
+
+
+def _https_url(value: object) -> bool:
+    if not isinstance(value, str):
+        return False
+    parsed = urlparse(value)
+    return parsed.scheme == "https" and bool(parsed.netloc)
+
+
+def build_veo_payload(prompt: str, *, generation_type: str = VEO_MODE_TEXT,
+                      image_urls: list[str] | tuple[str, ...] | None = None,
+                      duration: str | int = 8, model: str | None = None,
+                      aspect_ratio: str = "9:16",
+                      resolution: str = "1080p") -> dict:
+    """Build and validate the current generation-mode-aware Kie Veo request."""
+    veo_model = model or CINEMATIC_VIDEO_MODEL
+    if veo_model not in ("veo3_fast", "veo3", "veo3_lite"):
+        raise VeoContractError(f"unsupported Veo model: {veo_model!r}")
+    if generation_type not in VEO_GENERATION_TYPES:
+        raise VeoContractError(f"unsupported Veo generationType: {generation_type!r}")
+    if aspect_ratio not in ("9:16", "16:9"):
+        raise VeoContractError(f"unsupported Veo aspectRatio: {aspect_ratio!r}")
+    if resolution not in ("720p", "1080p"):
+        raise VeoContractError(f"unsupported Veo resolution: {resolution!r}")
+    try:
+        duration_value = int(duration)
+    except (TypeError, ValueError) as error:
+        raise VeoContractError(f"invalid Veo duration: {duration!r}") from error
+    if duration_value not in (4, 6, 8):
+        raise VeoContractError("Veo duration must be one of 4, 6, or 8 seconds")
+    if generation_type == VEO_MODE_REFERENCE and duration_value != 8:
+        raise VeoContractError("REFERENCE_2_VIDEO has a fixed duration of 8 seconds")
+
+    ordered_urls = list(image_urls or [])
+    minimum, maximum = VEO_MODE_IMAGE_LIMITS[generation_type]
+    if not minimum <= len(ordered_urls) <= maximum:
+        raise VeoContractError(
+            f"{generation_type} requires {minimum}-{maximum} imageUrls; "
+            f"received {len(ordered_urls)}"
+        )
+    if any(not _https_url(url) for url in ordered_urls):
+        raise VeoContractError("Veo imageUrls must contain only https URLs")
+
+    payload = {
+        "model": veo_model,
+        "prompt": str(prompt),
+        "aspectRatio": aspect_ratio,
+        "generationType": generation_type,
+        "duration": duration_value,
+        "resolution": resolution,
+    }
+    if ordered_urls:
+        # Preserve caller order: FLF uses first then last; reference mode uses
+        # the submitted ingredient ordering.
+        payload["imageUrls"] = ordered_urls
+    return payload
+
 def create_veo_task(payload: dict) -> str | None:
     """Create Veo 3.1 task (uses separate endpoint)."""
     try:
         resp = requests.post(
-            "https://api.kie.ai/api/v1/veo/generate",
+            VEO_GENERATE_URL,
             json=payload, headers=_headers(), timeout=30
         )
         data = resp.json()
@@ -131,49 +210,50 @@ def create_veo_task(payload: dict) -> str | None:
 
 
 def poll_veo_task(task_id: str, max_attempts: int = None) -> str | None:
-    """Poll Veo 3.1 task. Returns video URL or None.
-    Aborts early if stuck in 'unknown' state for too long.
-    """
+    """Poll the current Veo record contract and return its first result URL."""
     attempts = max_attempts or POLL_MAX_ATTEMPTS_VIDEO
-    unknown_streak = 0  # Track consecutive unknown states
-    MAX_UNKNOWN_STREAK = 20  # ~5 min of unknown = abort
 
     for attempt in range(1, attempts + 1):
         time.sleep(POLL_INTERVAL_VIDEO)
         try:
             resp = requests.get(
-                f"https://api.kie.ai/api/v1/veo/record-info?taskId={task_id}",
+                f"{VEO_RECORD_INFO_URL}?taskId={task_id}",
                 headers=_headers(), timeout=30
             )
-            data = resp.json().get("data", {})
-            state = data.get("state", "unknown")
-
-            if state == "success" or data.get("successFlag") == 1:
-                video_url = data.get("video_url")
-                if not video_url:
-                    result_json = data.get("resultJson", "{}")
-                    result = json.loads(result_json) if isinstance(result_json, str) else result_json
-                    urls = result.get("resultUrls", [])
-                    video_url = urls[0] if urls else None
-                if video_url:
-                    logger.info(f"✅ Veo video ready! ({attempt} polls, {attempt * POLL_INTERVAL_VIDEO}s)")
-                    return video_url
-            elif state in ("failed", "fail"):
-                logger.error(f"❌ Veo failed: {data.get('failMsg', '?')}")
+            envelope = resp.json() or {}
+            if envelope.get("code") != 200:
+                logger.error(f"❌ Veo record-info error: {str(envelope)[:200]}")
                 return None
-            elif state in ("processing", "running", "pending", "queued"):
-                # Expected states — VEO3 is working on it
-                unknown_streak = 0  # Reset unknown counter
-                if attempt % 10 == 0:  # Log every 10th poll to reduce noise
-                    logger.info(f"⏳ Veo: {state} ({attempt}/{attempts}, ~{attempt * POLL_INTERVAL_VIDEO}s elapsed)")
-            else:
-                # unknown or other unexpected states
-                unknown_streak += 1
-                if unknown_streak >= MAX_UNKNOWN_STREAK:
-                    logger.error(f"❌ Veo stuck in '{state}' for {unknown_streak} polls (~{unknown_streak * POLL_INTERVAL_VIDEO}s) — aborting!")
+            data = envelope.get("data") or {}
+            success_flag = data.get("successFlag")
+            if success_flag == 1:
+                response = data.get("response") or {}
+                urls = response.get("resultUrls") or []
+                video_url = urls[0] if urls and isinstance(urls[0], str) else None
+                if not video_url:
+                    logger.error("❌ Veo success response contains no resultUrls")
                     return None
-                if attempt % 5 == 0:
-                    logger.info(f"⏳ Veo: {state} ({attempt}/{attempts}, unknown_streak={unknown_streak})")
+                credits = response.get("creditsConsumed")
+                logger.info(
+                    f"✅ Veo video ready! ({attempt} polls, "
+                    f"{attempt * POLL_INTERVAL_VIDEO}s, credits={credits})"
+                )
+                return video_url
+            if success_flag in (2, 3):
+                logger.error(
+                    f"❌ Veo failed (successFlag={success_flag}): "
+                    f"{data.get('errorMessage') or data.get('failMsg') or '?'}"
+                )
+                return None
+            if success_flag == 0:
+                if attempt % 10 == 0:  # Log every 10th poll to reduce noise
+                    logger.info(
+                        f"⏳ Veo pending ({attempt}/{attempts}, "
+                        f"~{attempt * POLL_INTERVAL_VIDEO}s elapsed)"
+                    )
+                continue
+            logger.error(f"❌ Veo record-info has invalid successFlag: {success_flag!r}")
+            return None
         except Exception as e:
             logger.warning(f"⚠️ Veo polling error: {e}")
 
@@ -181,25 +261,36 @@ def poll_veo_task(task_id: str, max_attempts: int = None) -> str | None:
     return None
 
 
-def generate_veo_video(prompt: str, image_url: str = None, duration: str = "10", model: str = None, max_poll_attempts: int = None) -> str | None:
-    """Generate video with Veo 3.1. Returns URL or None. Retries with exponential backoff.
-    
-    Args:
-        max_poll_attempts: Override poll attempts (default: POLL_MAX_ATTEMPTS_VIDEO).
-                          Use 28 (~7min) for fallback scenarios to fail faster.
+def generate_veo_video(prompt: str, image_url: str = None,
+                       duration: str | int = 8, model: str = None,
+                       max_poll_attempts: int = None, *,
+                       generation_type: str = VEO_MODE_TEXT,
+                       image_urls: list[str] | tuple[str, ...] | None = None,
+                       aspect_ratio: str = "9:16",
+                       resolution: str = "1080p") -> str | None:
+    """Generate a Veo clip using the current mode-aware request contract.
+
+    ``image_url`` remains only as a source-compatible legacy argument.  It is
+    ignored in default TEXT_2_VIDEO mode so an old character reference cannot
+    accidentally become a first frame.  New callers use ordered ``image_urls``.
     """
-    veo_model = model or CINEMATIC_VIDEO_MODEL
-    # VEO3 accepts various durations but 8 and 10 are most reliable
-    safe_dur = duration if duration in ("5", "8", "10", "15") else "10"
-    logger.info(f"  🎬 VEO model: {veo_model} (duration={safe_dur}s)")
-    payload = {
-        "model": veo_model,
-        "prompt": prompt,
-        "duration": safe_dur,
-        "aspect_ratio": "9:16",
-    }
-    if image_url:
-        payload["image_url"] = image_url
+    if image_urls is None and image_url and generation_type != VEO_MODE_TEXT:
+        image_urls = [image_url]
+    elif image_url and generation_type == VEO_MODE_TEXT:
+        logger.warning("Legacy Veo image_url ignored in TEXT_2_VIDEO mode")
+    payload = build_veo_payload(
+        prompt,
+        generation_type=generation_type,
+        image_urls=image_urls,
+        duration=duration,
+        model=model,
+        aspect_ratio=aspect_ratio,
+        resolution=resolution,
+    )
+    logger.info(
+        f"  🎬 VEO model: {payload['model']} "
+        f"(mode={payload['generationType']}, duration={payload['duration']}s)"
+    )
 
     backoff_delays = [10, 30]  # exponential backoff: 10s, 30s
     for attempt in range(1, MAX_RETRY + 1):
@@ -220,6 +311,22 @@ def generate_veo_video(prompt: str, image_url: str = None, duration: str = "10",
             logger.info(f"  ⏳ Waiting {delay}s before retry...")
             time.sleep(delay)
     return None
+
+
+def assert_veo_flf_duration(video_path: str | Path,
+                            requested_duration: float = 6.0,
+                            tolerance: float = 0.25) -> float:
+    """Return ffprobe duration or reject a non-conforming downloaded FLF clip."""
+    measured = float(ffmpeg_tools.get_video_duration(video_path))
+    if abs(measured - float(requested_duration)) > float(tolerance):
+        message = (
+            "Veo FIRST_AND_LAST_FRAMES_2_VIDEO real-duration guard failed: "
+            f"requested={float(requested_duration):g}s, measured={measured:g}s, "
+            f"tolerance={float(tolerance):g}s, file={Path(video_path)}"
+        )
+        logger.error(message)
+        raise VeoDurationError(message)
+    return measured
 
 
 # ─── High-Level Generation Functions ──────────────────────────────────────────

@@ -101,6 +101,12 @@ def conservative_credit_estimate(call_type: str, engine: str,
     eng = _ENGINE_ALIASES.get(eng, eng)
     if kind in ("main_shot", "qc_regen"):
         return CONSERVATIVE_VIDEO_CREDITS.get(eng, {}).get(str(duration).strip())
+    if kind == "upscale" and eng in ("topaz", "topaz/video-upscale"):
+        try:
+            seconds = float(duration)
+        except (TypeError, ValueError):
+            return None
+        return 8.0 * seconds if seconds > 0 else None
     return CONSERVATIVE_FIXED_CREDITS.get((kind, eng))
 
 

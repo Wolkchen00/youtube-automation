@@ -182,9 +182,14 @@ def series_monthly_credit_cap(bible: Bible) -> int | None:
 
 
 def _record_episode_cost(bible: Bible, number: int, operation: str,
-                         model: str, credits: float | int | None) -> bool:
+                         model: str, credits: float | int | None, *,
+                         isolated: bool = False) -> bool:
     """Write the legacy cost log and, when opted in, the durable episode ledger."""
     if credits is None:
+        return True
+    if isolated:
+        # The experiment ledger is the sole durable spend record for isolated
+        # runs. Never contaminate production episode/monthly accounting.
         return True
     if bible.data["series"].get("durable_credit_ledger"):
         if not credit_gate.record_episode_spend(bible.slug, number, float(credits)):
@@ -194,11 +199,15 @@ def _record_episode_cost(bible: Bible, number: int, operation: str,
 
 
 def _revalidate_cached_shot(slug: str, episode: int, shot: int,
-                            path: Path, qc: dict | None = None) -> bool:
+                            path: Path, qc: dict | None = None,
+                            experiment_id: str | None = None) -> bool:
     """Bind a cache hit to valid media and an exact content-hash QC pass."""
     content_hash = critic.content_sha256(path)
     media_ok = ffmpeg_tools.validate_media(path)
-    pass_ok = critic.qc_pass_exists(slug, episode, shot, content_hash, qc)
+    pass_ok = critic.qc_pass_exists(
+        slug, episode, shot, content_hash, qc,
+        experiment_id=experiment_id,
+    )
     if media_ok and pass_ok:
         return True
     suffix = (content_hash or "unreadable")[:12]
@@ -214,6 +223,27 @@ def _revalidate_cached_shot(slug: str, episode: int, shot: int,
         f"(media_ok={media_ok}, qc_hash_pass={pass_ok})"
     )
     return False
+
+
+def _episode_work_dir(slug: str, number: int,
+                      output_area: str | Path | None = None) -> Path:
+    return Path(output_area) if output_area is not None else episode_dir(slug, number)
+
+
+def _shots_work_dir(slug: str, number: int,
+                    output_area: str | Path | None = None) -> Path:
+    return (
+        Path(output_area) / "shots"
+        if output_area is not None else shots_dir(slug, number)
+    )
+
+
+def _refs_work_dir(slug: str, kind: str,
+                   output_area: str | Path | None = None) -> Path:
+    return (
+        Path(output_area) / "refs" / kind
+        if output_area is not None else refs_dir(slug, kind)
+    )
 
 
 def _qc_regen_allowed(slug: str, number: int) -> bool:
@@ -281,8 +311,8 @@ def _gen_omni_with_fallback(kwargs: dict, before_call=None) -> dict | None:
 
 
 def _reserve_plan_music(bible: Bible, plan: dict,
-                        hard_cap: credit_gate.HardCreditCap | None,
-                        number: int) -> bool | None:
+                        hard_cap,
+                        number: int, *, isolated: bool = False) -> bool | None:
     """Suno müziğini çekimlerden önce ayır.
 
     True rezervasyon yapıldığını, None rezervasyon gerekmediğini, False ise sert
@@ -297,16 +327,19 @@ def _reserve_plan_music(bible: Bible, plan: dict,
     # Suno creditsConsumed döndürmüyor. Üretim daha sonra başarısız olsa bile
     # korumacı tahmin harcanmış sayılır.
     if not _record_episode_cost(
-        bible, number, f"suno_estimate_ep{number}", "suno", hard_cap.last_estimate
+        bible, number, f"suno_estimate_ep{number}", "suno", hard_cap.last_estimate,
+        isolated=isolated,
     ):
         return False
     return True
 
 
 def _post_process(bible: Bible, plan: dict, final_ep: Path,
-                  hard_cap: credit_gate.HardCreditCap | None = None,
+                  hard_cap=None,
                   required_music: bool = False,
-                  music_reserved: bool = False) -> Path | None:
+                  music_reserved: bool = False, *,
+                  output_area: str | Path | None = None,
+                  isolated: bool = False) -> Path | None:
     """Final videoya anlatım (narration) + SÜREKLİ müzik ekle (best-effort).
 
     Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
@@ -327,7 +360,7 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     if narr_cfg.get("channel") and narr_text:
         try:
             from core.narration import create_narration_for_channel
-            wav = episode_dir(bible.slug, number) / "narration.wav"
+            wav = _episode_work_dir(bible.slug, number, output_area) / "narration.wav"
             audio_path, style = create_narration_for_channel(narr_cfg["channel"], narr_text, wav)
             if audio_path and Path(audio_path).exists():
                 narrated = out.parent / f"{out.stem}_narrated.mp4"
@@ -359,7 +392,7 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
             from core.music_generator import generate_background_music
             ch = narr_cfg.get("channel") or bible.slug
             # Her video kendi müziğini alsın → benzersiz dosya = benzersiz üretim
-            music_file = episode_dir(bible.slug, number) / "bg_music.mp3"
+            music_file = _episode_work_dir(bible.slug, number, output_area) / "bg_music.mp3"
             # Plan sahneye-özel müzik prompt'u taşıyorsa (plan['music'], Gemini
             # yönetmen sahneyle birlikte yazar) müzik motoru Suno'ya gider →
             # her videonun skoru görüntünün ruhuna birebir eşleşir. Alan yoksa
@@ -374,7 +407,7 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                 # korunur ve Suno tahmini burada bir kez ayrılır.
                 if not _record_episode_cost(
                     bible, number, f"suno_estimate_ep{number}", "suno",
-                    hard_cap.last_estimate,
+                    hard_cap.last_estimate, isolated=isolated,
                 ):
                     return None
             music_path = generate_background_music(ch, custom_prompt=music_prompt,
@@ -454,7 +487,8 @@ def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path) -> 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
 
 
-def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
+def _upscale_master(bible: Bible, number: int, src: Path, *, hard_cap=None,
+                    isolated: bool = False) -> Path:
     """Final videoyu 4K master'a yükselt (bible.upscale açıksa).
 
     Birincil yol: Kie 'topaz/video-upscale' — kareyi yeniden inşa eder (gerçek detay).
@@ -467,7 +501,7 @@ def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
     if not cfg:
         return src
     out = src.parent / f"{src.stem}_4k.mp4"
-    delivery = episode_dir(bible.slug, number) / "delivery_1080.mp4"
+    delivery = src.parent / "delivery_1080.mp4"
     try:
         if not delivery.exists() or delivery.stat().st_size == 0:
             shutil.copy2(src, delivery)
@@ -484,17 +518,18 @@ def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
 
     # 1) Topaz (gerçek detay sentezi)
     if provider == "topaz":
-        spent = episode_spent(bible.slug, number)
         duration = ffmpeg_tools.get_video_duration(src) or 40.0
-        projected = 8 * duration
-        cap = episode_credit_cap(bible)
-        if spent is None or spent + projected > cap:
-            shown = "bilinmiyor" if spent is None else f"{spent:g}"
-            logger.warning(
-                f"⏭️ 4K upscale atlandı: harcanan={shown}, "
-                f"tahmini_upscale={projected:g}, bölüm_tavanı={cap}; 1080p kullanılacak"
-            )
-            return src
+        if not (isolated and hard_cap is not None):
+            spent = episode_spent(bible.slug, number)
+            projected = 8 * duration
+            cap = episode_credit_cap(bible)
+            if spent is None or spent + projected > cap:
+                shown = "bilinmiyor" if spent is None else f"{spent:g}"
+                logger.warning(
+                    f"⏭️ 4K upscale atlandı: harcanan={shown}, "
+                    f"tahmini_upscale={projected:g}, bölüm_tavanı={cap}; 1080p kullanılacak"
+                )
+                return src
         try:
             topaz_in = src
             # Girdi limiti ~50MB: uzun bölümlerin CRF-18 finali aşabilir →
@@ -507,13 +542,24 @@ def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
                 topaz_in = shrunk
             src_url = upload_file_to_kie(topaz_in, upload_path="series-upscale")
             if src_url:
+                if (isolated and hard_cap is not None
+                        and not hard_cap.authorize(
+                            "upscale", "topaz/video-upscale", duration
+                        )):
+                    return src
                 res = generate_topaz_upscale(src_url, factor)
                 raw = src.parent / f"{src.stem}_4k_raw.mp4"
                 if (res and res.get("url") and download_file(res["url"], raw)
                         and raw.exists() and raw.stat().st_size > 0):
                     if res.get("credits") is not None:
-                        cost_tracker.log_cost(f"series:{bible.slug}", f"topaz_ep{number}",
-                                              "topaz/video-upscale", res["credits"])
+                        if isolated and hard_cap is not None:
+                            if not hard_cap.settle_last(res["credits"]):
+                                return src
+                        else:
+                            cost_tracker.log_cost(
+                                f"series:{bible.slug}", f"topaz_ep{number}",
+                                "topaz/video-upscale", res["credits"],
+                            )
                     # Topaz ~100 Mbps çıkarıyor (40sn ≈ 500MB) → Upload-Post'un
                     # ~80MB limitine sığması için bitrate normalize edilir.
                     if raw.stat().st_size / (1024 * 1024) > 78:
@@ -682,9 +728,12 @@ def _generate_uploaded_reference(
     bible: Bible,
     prompt: str,
     save_path: Path,
-    hard_cap: credit_gate.HardCreditCap,
+    hard_cap,
     number: int,
     operation: str,
+    *,
+    isolated: bool = False,
+    report_output_dir: str | Path | None = None,
 ) -> str | None:
     """Cost-authorize one NB2 image, then download and publish it through ImgBB."""
     if not hard_cap.authorize("reference_image", "nano-banana-2"):
@@ -695,7 +744,7 @@ def _generate_uploaded_reference(
     if estimate is not None:
         if not _record_episode_cost(
             bible, number, f"{operation}_estimate_ep{number}",
-            "nano-banana-2", estimate,
+            "nano-banana-2", estimate, isolated=isolated,
         ):
             return None
     generated_url = generate_image(
@@ -723,7 +772,7 @@ def _generate_uploaded_reference(
         status=status,
         video_url=uploaded_url or generated_url,
         local_file=save_path if downloaded else "",
-    ))
+    ), output_dir=report_output_dir)
     if not downloaded:
         logger.error(f"❌ {operation}: üretilen referans indirilemedi")
         return None
@@ -737,8 +786,11 @@ def ensure_episode_refs(
     bible: Bible,
     plan: dict,
     plan_path: str | Path,
-    hard_cap: credit_gate.HardCreditCap | None = None,
+    hard_cap=None,
     dry_run: bool = False,
+    *,
+    output_area: str | Path | None = None,
+    isolated: bool = False,
 ) -> bool:
     """Persist the opt-in episode object ref and its shared environment ref.
 
@@ -800,15 +852,22 @@ def ensure_episode_refs(
             "One fixed composition shows the full work surface, its natural wear, the plain wall "
             "and the established daylight with realistic home-workshop detail."
         )
-        env_file = refs_dir(bible.slug, "environments") / f"{sanitize_filename(env_id)}.png"
+        env_file = _refs_work_dir(
+            bible.slug, "environments", output_area
+        ) / f"{sanitize_filename(env_id)}.png"
         env_url = _generate_uploaded_reference(
             bible, env_prompt, env_file, hard_cap, number,
             f"environment_ref_{sanitize_filename(env_id)}",
+            isolated=isolated, report_output_dir=output_area,
         )
         if not env_url:
             return False
         environment["ref_image_url"] = env_url
-        atomic_write_json(bible_path(bible.slug), bible.data)
+        atomic_write_json(
+            Path(output_area) / "bible.json" if output_area is not None
+            else bible_path(bible.slug),
+            bible.data,
+        )
 
     if missing_object:
         descriptor = str(card.get("descriptor") or "").strip()
@@ -821,11 +880,12 @@ def ensure_episode_refs(
             "texture and distinguishing mark sharply readable."
         )
         object_file = (
-            refs_dir(bible.slug, "props")
+            _refs_work_dir(bible.slug, "props", output_area)
             / f"ep{number:02d}_{sanitize_filename(name)}.png"
         )
         object_url = _generate_uploaded_reference(
             bible, object_prompt, object_file, hard_cap, number, "object_ref",
+            isolated=isolated, report_output_dir=output_area,
         )
         if not object_url:
             return False
@@ -949,7 +1009,10 @@ def _doctrine_gate(meta: SeriesMeta) -> str | None:
 
 
 def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
-                          chain_start_url: str | None = None) -> Path | ProduceResult | None:
+                          chain_start_url: str | None = None, *,
+                          hard_cap=None,
+                          output_area: str | Path | None = None,
+                          experiment_id: str | None = None) -> Path | ProduceResult | None:
     """Bir bölümü üret: çekimler → indir → birleştir → (anlatım/müzik) → rapor.
 
     Çok-motorlu: her çekim bible.engine (veya shot['engine']) ile 'omni' VEYA ucuz
@@ -1040,13 +1103,15 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         logger.error("Plan hataları nedeniyle üretim durduruldu.")
         return None
 
+    external_hard_cap = hard_cap is not None
+    isolated = output_area is not None
     hard_cap_enabled = bool(
         cfg.get("credit_hard_cap")
         or bible.data["series"].get("credit_hard_cap")
         or cfg.get("format_version")
+        or external_hard_cap
     )
-    hard_cap = None
-    if hard_cap_enabled and not dry_run:
+    if hard_cap_enabled and not dry_run and hard_cap is None:
         cap_value = episode_credit_cap(bible)
         if cap_value <= 0:
             logger.error("❌ Kredi sert tavanı pozitif tam sayı olmalı")
@@ -1062,13 +1127,16 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
 
     # Zorunlu Suno müziği hiçbir ücretli görsel/video harcamasının gerisinde kalamaz.
     # _post_process music_reserved=True aldığında aynı rezervasyonu ikinci kez saymaz.
-    music_reservation = _reserve_plan_music(bible, plan, hard_cap, number)
+    music_reservation = _reserve_plan_music(
+        bible, plan, hard_cap, number, isolated=isolated
+    )
     if music_reservation is False:
         return None
 
     persistent_plan_path = supplied_plan_path or part_plan_path(slug, number)
     if not ensure_episode_refs(
-        bible, plan, persistent_plan_path, hard_cap=hard_cap, dry_run=dry_run
+        bible, plan, persistent_plan_path, hard_cap=hard_cap, dry_run=dry_run,
+        output_area=output_area, isolated=isolated,
     ):
         logger.error("❌ Bölüm/ortam referansları hazırlanamadı; üretim durduruldu.")
         return None
@@ -1082,7 +1150,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 logger.error(f"❌ Referans sonrası plan hatası: {error}")
             return None
 
-    sdir = shots_dir(slug, number)
+    sdir = _shots_work_dir(slug, number, output_area)
     sdir.mkdir(parents=True, exist_ok=True)
 
     # Critic-QC (opt-in, bible."series"."qc"): varsayılan bölüm tavanı çekim sayısıdır.
@@ -1169,12 +1237,19 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             cache_ok = True
             if qc_cfg and qc_cfg.get("revalidate_cache"):
                 cache_ok = _revalidate_cached_shot(
-                    slug, number, int(n), out_file, qc_cfg
+                    slug, number, int(n), out_file, qc_cfg,
+                    experiment_id=experiment_id,
                 )
             if cache_ok:
                 logger.info(f"⏭️ Çekim {n} doğrulanmış cache'de: {out_file.name}")
                 if qc_cfg and qc_cfg.get("scene_cut_scan"):
-                    critic.log_scene_cut_scan(slug, number, int(n), out_file)
+                    if experiment_id is not None:
+                        critic.log_scene_cut_scan(
+                            slug, number, int(n), out_file,
+                            experiment_id=experiment_id,
+                        )
+                    else:
+                        critic.log_scene_cut_scan(slug, number, int(n), out_file)
                 prep = _prep_shot_clip(bible, plan, shot, out_file)
                 shot_offsets[int(n)] = running
                 running += ffmpeg_tools.get_video_duration(prep)
@@ -1241,18 +1316,20 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 video_url = result["url"]
                 credits = result.get("credits")
                 if (credits is not None and hard_cap is not None
-                        and series_cfg.get("durable_credit_ledger")):
+                        and (external_hard_cap
+                             or series_cfg.get("durable_credit_ledger"))):
                     hard_cap.settle_last(credits)
                 if credits is not None:
                     if not _record_episode_cost(
                         bible, number, f"omni_ep{number}_shot{n}",
-                        "gemini-omni-video", credits,
+                        "gemini-omni-video", credits, isolated=isolated,
                     ):
                         return None
                 elif hard_cap is not None and hard_cap.last_estimate is not None:
                     if not _record_episode_cost(
                         bible, number, f"omni_estimate_ep{number}_shot{n}",
                         "gemini-omni-video", hard_cap.last_estimate,
+                        isolated=isolated,
                     ):
                         return None
                 if hard_cap is not None and hard_cap.blocked:
@@ -1287,7 +1364,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     )
                     if (regen_result and regen_result.get("credits") is not None
                             and hard_cap is not None
-                            and series_cfg.get("durable_credit_ledger")):
+                            and (external_hard_cap
+                                 or series_cfg.get("durable_credit_ledger"))):
                         hard_cap.settle_last(regen_result["credits"])
                     if (regen_result and regen_result.get("credits") is None
                             and hard_cap is not None and hard_cap.last_estimate is not None):
@@ -1298,6 +1376,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     qc_context["object_ref"] = object_ref_bytes
                 if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
                     qc_context["previous_clip"] = previous_accepted_clip
+                if experiment_id is not None:
+                    qc_context["experiment_id"] = experiment_id
                 qc_path, qc_credits, qc_status = critic.qc_shot(
                     bible, shot, out_file, kwargs["prompt"],
                     _regen_omni, episode=number, budget=qc_budget,
@@ -1306,7 +1386,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 if qc_credits:
                     if not _record_episode_cost(
                         bible, number, f"qc_regen_ep{number}_shot{n}",
-                        "gemini-omni-video", qc_credits,
+                        "gemini-omni-video", qc_credits, isolated=isolated,
                     ):
                         return None
                     credits = (credits or 0) + qc_credits
@@ -1322,7 +1402,13 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     return None
             if status == "ok":
                 if qc_cfg and qc_cfg.get("scene_cut_scan"):
-                    critic.log_scene_cut_scan(slug, number, int(n), out_file)
+                    if experiment_id is not None:
+                        critic.log_scene_cut_scan(
+                            slug, number, int(n), out_file,
+                            experiment_id=experiment_id,
+                        )
+                    else:
+                        critic.log_scene_cut_scan(slug, number, int(n), out_file)
                 prep = _prep_shot_clip(bible, plan, shot, out_file)
                 shot_offsets[int(n)] = running
                 running += ffmpeg_tools.get_video_duration(prep)
@@ -1333,7 +1419,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 audio_ids=kwargs["audio_ids"], duration=kwargs["duration"],
                 resolution=kwargs["resolution"], seed=kwargs["seed"],
                 credits=credits, status=status, video_url=video_url, local_file=out_file,
-            ))
+            ), output_dir=output_area)
             if chain_decision.capture_last_frame and status == "ok":
                 lf = ffmpeg_tools.extract_last_frame(out_file)
                 if lf:
@@ -1374,18 +1460,19 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             video_url = result["url"]
             credits = result.get("credits")
             if (credits is not None and hard_cap is not None
-                    and series_cfg.get("durable_credit_ledger")):
+                    and (external_hard_cap
+                         or series_cfg.get("durable_credit_ledger"))):
                 hard_cap.settle_last(credits)
             if credits is not None:
                 if not _record_episode_cost(
                     bible, number, f"{shot_engine}_ep{number}_shot{n}",
-                    shot_engine, credits,
+                    shot_engine, credits, isolated=isolated,
                 ):
                     return None
             elif reserved_estimate is not None:
                 if not _record_episode_cost(
                     bible, number, f"{shot_engine}_estimate_ep{number}_shot{n}",
-                    shot_engine, reserved_estimate,
+                    shot_engine, reserved_estimate, isolated=isolated,
                 ):
                     return None
             if hard_cap is not None and hard_cap.blocked:
@@ -1410,7 +1497,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 )
                 if (regen_result and regen_result.get("credits") is not None
                         and hard_cap is not None
-                        and series_cfg.get("durable_credit_ledger")):
+                        and (external_hard_cap
+                             or series_cfg.get("durable_credit_ledger"))):
                     hard_cap.settle_last(regen_result["credits"])
                 if (regen_result and regen_result.get("credits") is None
                         and hard_cap is not None and hard_cap.last_estimate is not None):
@@ -1421,6 +1509,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 qc_context["object_ref"] = object_ref_bytes
             if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
                 qc_context["previous_clip"] = previous_accepted_clip
+            if experiment_id is not None:
+                qc_context["experiment_id"] = experiment_id
             qc_path, qc_credits, qc_status = critic.qc_shot(
                 bible, shot, out_file, rv["prompt"],
                 _regen_visual, episode=number, budget=qc_budget,
@@ -1429,7 +1519,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             if qc_credits:
                 if not _record_episode_cost(
                     bible, number, f"qc_regen_ep{number}_shot{n}",
-                    shot_engine, qc_credits,
+                    shot_engine, qc_credits, isolated=isolated,
                 ):
                     return None
                 credits = (credits or 0) + qc_credits
@@ -1445,7 +1535,13 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 return None
         if status == "ok":
             if qc_cfg and qc_cfg.get("scene_cut_scan"):
-                critic.log_scene_cut_scan(slug, number, int(n), out_file)
+                if experiment_id is not None:
+                    critic.log_scene_cut_scan(
+                        slug, number, int(n), out_file,
+                        experiment_id=experiment_id,
+                    )
+                else:
+                    critic.log_scene_cut_scan(slug, number, int(n), out_file)
             prep = _prep_shot_clip(bible, plan, shot, out_file)
             shot_offsets[int(n)] = running
             running += ffmpeg_tools.get_video_duration(prep)
@@ -1455,7 +1551,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             episode=number, shot_n=n, characters=[], audio_ids=[],
             duration=rv["duration"], resolution="720p", seed=None,
             credits=credits, status=status, video_url=video_url, local_file=out_file,
-        ))
+        ), output_dir=output_area)
         if chain_decision.capture_last_frame and status == "ok":
             lf = ffmpeg_tools.extract_last_frame(out_file)
             if lf:
@@ -1483,7 +1579,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         return None
 
     # Birleştir → final export (9:16 dikey)
-    raw_ep = episode_dir(slug, number) / f"ep{int(number):02d}_raw.mp4"
+    work_dir = _episode_work_dir(slug, number, output_area)
+    raw_ep = work_dir / f"ep{int(number):02d}_raw.mp4"
     merged = False
     xf = bible.transitions
     if xf and len(shot_files) >= 2:
@@ -1509,7 +1606,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         else:
             # Diyalog kanalları: düz birleştir (söz baş/sonu kırpılmasın).
             ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
-    final_ep = episode_dir(slug, number) / f"ep{int(number):02d}.mp4"
+    final_ep = work_dir / f"ep{int(number):02d}.mp4"
     ffmpeg_tools.final_export(raw_ep, final_ep)
 
     # Anlatım (narration) + arka plan müziği (best-effort)
@@ -1517,6 +1614,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         bible, plan, final_ep, hard_cap=hard_cap,
         required_music="music" in required_layers,
         music_reserved=music_reservation is True,
+        output_area=output_area, isolated=isolated,
     )
     if final_ep is None:
         return None
@@ -1537,7 +1635,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             skip = float(hook.get("offset_in_shot", 1.6))
             total = ffmpeg_tools.get_video_duration(final_ep)
             start = min(shot_offsets[hn] + skip, max(0.0, total - d - 0.25))
-            teaser = episode_dir(slug, number) / "hook_teaser.mp4"
+            teaser = work_dir / "hook_teaser.mp4"
             ffmpeg_tools.extract_clip(final_ep, teaser, start, d)
             hooked = Path(final_ep).parent / f"{Path(final_ep).stem}_hooked.mp4"
             ffmpeg_tools.concatenate_simple([teaser, Path(final_ep)], hooked,
@@ -1611,7 +1709,12 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
 
     # 4K master (opt-in): en-son final Topaz ile ×2 büyütülür (YouTube 4K);
     # IG/TikTok için 1080p delivery kopyası yanına bırakılır.
-    final_ep = _upscale_master(bible, number, Path(final_ep))
+    if isolated:
+        final_ep = _upscale_master(
+            bible, number, Path(final_ep), hard_cap=hard_cap, isolated=True
+        )
+    else:
+        final_ep = _upscale_master(bible, number, Path(final_ep))
 
     if "native_audio" in required_layers and not _verify_native_audio_delivery(
         bible, number, final_ep
@@ -1626,11 +1729,11 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             if lf:
                 last_frame_url = upload_to_imgbb(lf)
         if last_frame_url:
-            (episode_dir(slug, number) / "last_frame.txt").write_text(last_frame_url, encoding="utf-8")
+            (work_dir / "last_frame.txt").write_text(last_frame_url, encoding="utf-8")
             logger.info("🔗 Son kare bir sonraki bölüm için saklandı (bitmeyen yolculuk).")
 
-    report.export_xlsx(slug)
-    summary = report.summarize(slug)
+    report.export_xlsx(slug, output_dir=output_area)
+    summary = report.summarize(slug, output_dir=output_area)
     logger.info(f"🎉 Bölüm hazır: {final_ep}")
     logger.info(f"   📊 {summary['başarılı']}/{summary['çekim_sayısı']} çekim, "
                 f"{summary['toplam_kredi']} kredi (~${summary['toplam_dolar']})")
@@ -1639,14 +1742,19 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
 
 def produce_episode(slug: str, plan, dry_run: bool = False,
                     chain_start_url: str | None = None, *,
-                    typed_result: bool = False) -> Path | ProduceResult | None:
+                    typed_result: bool = False,
+                    hard_cap=None,
+                    output_area: str | Path | None = None,
+                    experiment_id: str | None = None) -> Path | ProduceResult | None:
     """Produce an episode, with an opt-in typed adapter for scheduler callers.
 
     Direct/legacy callers still receive ``Path | None``.  The runner requests the
     typed result so a QC hold remains distinct from a generation failure.
     """
     raw = _produce_episode_impl(
-        slug, plan, dry_run=dry_run, chain_start_url=chain_start_url
+        slug, plan, dry_run=dry_run, chain_start_url=chain_start_url,
+        hard_cap=hard_cap, output_area=output_area,
+        experiment_id=experiment_id,
     )
     if isinstance(raw, ProduceResult):
         result = raw
