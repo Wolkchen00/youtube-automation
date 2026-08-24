@@ -4,6 +4,11 @@ Shot / Episode Plan — bir bölümün çekim listesi, doğrulaması ve Omni par
 episode_plan.json şeması:
 {
   "episode": {"number": 1, "title": "Bölüm adı"},
+  "format_version": "tek-obje-4x6",    # opsiyonel format doğrulayıcısı
+  "object_card": {                      # tek-obje-4x6 için zorunlu
+    "name": "...", "descriptor": "...", "environment": "garden", "framing": "..."
+  },
+  "prop_ref_urls": ["https://..."],     # bölüm-başı obje referansı
   "shots": [
     {
       "n": 1,
@@ -21,10 +26,110 @@ episode_plan.json şeması:
 
 import json
 from pathlib import Path
+import re
+from urllib.parse import urlparse
 
 from core.config import logger
 from .bible import Bible, resolve_voice_id
 from .omni_api import validate_duration, validate_ref_units
+
+
+TEK_OBJE_FORMAT = "tek-obje-4x6"
+OBJECT_CARD_FIELDS = ("name", "descriptor", "environment", "framing")
+NEGATIVE_VIDEO_LANGUAGE = re.compile(
+    r"\b(?:no|not|never|nothing|neither|nor|without|cannot|can't|don't|doesn't|"
+    r"isn't|aren't|won't|absent|lacks?|lacking|avoid)\b",
+    re.IGNORECASE,
+)
+
+
+def _is_https_url(value) -> bool:
+    if not isinstance(value, str):
+        return False
+    parsed = urlparse(value)
+    return parsed.scheme == "https" and bool(parsed.netloc)
+
+
+def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
+    """Fail-closed checks owned by the ``tek-obje-4x6`` plan format."""
+    if plan.get("format_version") != TEK_OBJE_FORMAT:
+        return []
+
+    errors: list[str] = []
+    card = plan.get("object_card")
+    card_ok = isinstance(card, dict)
+    if not card_ok:
+        errors.append("object_card nesnesi zorunlu")
+        card = {}
+
+    values: dict[str, str] = {}
+    for field in OBJECT_CARD_FIELDS:
+        value = card.get(field)
+        if not isinstance(value, str) or not value.strip() or value != value.strip():
+            errors.append(f"object_card.{field} boş olmayan, kırpılmış string olmalı")
+        else:
+            values[field] = value
+
+    descriptor = values.get("descriptor", "")
+    if descriptor and len(descriptor.split()) < 12:
+        errors.append("object_card.descriptor en az 12 kelime olmalı")
+
+    env_id = values.get("environment", "")
+    if env_id and not bible.get("environments", env_id):
+        errors.append(f"object_card.environment bible.environments içinde yok ({env_id!r})")
+
+    shots = plan.get("shots")
+    if not isinstance(shots, list) or len(shots) != 4:
+        got = len(shots) if isinstance(shots, list) else "yok"
+        errors.append(f"tek-obje-4x6 tam 4 çekim içermeli (gelen: {got})")
+        shots = shots if isinstance(shots, list) else []
+    numbers = [shot.get("n") if isinstance(shot, dict) else None for shot in shots]
+    if len(shots) == 4 and numbers != [1, 2, 3, 4]:
+        errors.append(f"tek-obje-4x6 çekim numaraları tam [1, 2, 3, 4] olmalı (gelen: {numbers})")
+
+    framing = values.get("framing", "")
+    if framing:
+        sentence_marks = re.findall(r"[.!?](?=\s|$)", framing)
+        if len(sentence_marks) != 1 or framing[-1] not in ".!?":
+            errors.append("object_card.framing tam bir cümle olmalı")
+    for index, shot in enumerate(shots, start=1):
+        if not isinstance(shot, dict):
+            errors.append(f"çekim {index} JSON nesnesi olmalı")
+            continue
+        number = shot.get("n", index)
+        if shot.get("duration") != "6":
+            errors.append(f"çekim {number} süresi tam '6' string olmalı")
+        prompt = shot.get("prompt")
+        if not isinstance(prompt, str):
+            prompt = ""
+        if NEGATIVE_VIDEO_LANGUAGE.search(prompt):
+            errors.append(f"çekim {number} prompt'u yalnız olumlu görsel dil kullanmalı")
+        if descriptor and descriptor not in prompt:
+            errors.append(f"çekim {number} object_card.descriptor metnini birebir içermeli")
+        if framing and framing not in prompt:
+            errors.append(f"çekim {number} object_card.framing cümlesini birebir içermeli")
+        if env_id and shot.get("environment") != env_id:
+            errors.append(f"çekim {number} environment tam {env_id!r} olmalı")
+
+    refs = plan.get("prop_ref_urls")
+    if refs is not None and (
+        not isinstance(refs, list)
+        or not refs
+        or not all(_is_https_url(url) for url in refs)
+    ):
+        errors.append("prop_ref_urls bir veya daha fazla https URL içermeli")
+    for shot in shots:
+        if not isinstance(shot, dict) or "prop_ref_urls" not in shot:
+            continue
+        shot_refs = shot.get("prop_ref_urls")
+        if (not isinstance(shot_refs, list) or not shot_refs
+                or not all(_is_https_url(url) for url in shot_refs)):
+            errors.append(
+                f"çekim {shot.get('n', '?')} prop_ref_urls bir veya daha fazla https URL içermeli"
+            )
+    if NEGATIVE_VIDEO_LANGUAGE.search(bible.art_style or ""):
+        errors.append("bible.art_style tek-obje-4x6 için yalnız olumlu görsel dil kullanmalı")
+    return errors
 
 
 def load_plan(path: str | Path) -> dict:
@@ -32,7 +137,7 @@ def load_plan(path: str | Path) -> dict:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def resolve_shot(bible: Bible, shot: dict) -> dict:
+def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
     """Bir çekimi generate_omni_shot için somut parametrelere çevir.
 
     Dönüş: {
@@ -46,10 +151,45 @@ def resolve_shot(bible: Bible, shot: dict) -> dict:
 
     base_prompt = (shot.get("prompt") or "").strip()
     art = bible.art_style.strip()
-    prompt = f"{art}\n\n{base_prompt}" if art else base_prompt
 
     character_ids: list[str] = []
     image_urls: list[str] = []
+    binding_lines: list[str] = []
+
+    # Bölüm-başı obje referansları her zaman ilk sıradadır. Shot düzeyi alan,
+    # gerektiğinde plan düzeyi alanı bilinçli olarak geçersiz kılar.
+    prop_ref_urls = (
+        shot.get("prop_ref_urls")
+        if "prop_ref_urls" in shot
+        else (plan or {}).get("prop_ref_urls")
+    )
+    if isinstance(prop_ref_urls, list):
+        for url in prop_ref_urls:
+            if not _is_https_url(url):
+                warnings.append(f"Obje referans URL'i geçersiz: {url!r}")
+                continue
+            image_urls.append(url)
+            binding_lines.append(
+                f"[image {len(image_urls)}] is the exact object: keep its shape, colour, "
+                "scale and markings identical."
+            )
+    object_refs_added = bool(image_urls)
+
+    # Ortam referansı obje referanslarından hemen sonra gelir. Bu sıra formatın
+    # video payload sözleşmesidir ve sonraki legacy referanslardan bağımsızdır.
+    env_id = shot.get("environment")
+    if object_refs_added and env_id:
+        env = bible.get("environments", env_id)
+        if not env:
+            warnings.append(f"Ortam '{env_id}' bible'da yok")
+        elif env.get("ref_image_url"):
+            image_urls.append(env["ref_image_url"])
+            if prop_ref_urls:
+                binding_lines.append(
+                    f"[image {len(image_urls)}] is the room and workbench: keep the same surface and light."
+                )
+        else:
+            warnings.append(f"Ortam '{env_id}' referans görseli yok")
 
     # Karakterler → characterId (yoksa referans görsel). Yüzsüz formatlar bu
     # teknik referans katmanını opt-in olarak tamamen kaldırabilir.
@@ -67,9 +207,9 @@ def resolve_shot(bible: Bible, shot: dict) -> dict:
             else:
                 warnings.append(f"Karakter '{cid}' için characterId/referans görsel yok")
 
-    # Ortam → image_url
-    env_id = shot.get("environment")
-    if env_id:
+    # Legacy sıra byte/behavior uyumu: obje referansı yokken karakter görselleri
+    # ortamdan önce gelmeye devam eder.
+    if not object_refs_added and env_id:
         env = bible.get("environments", env_id)
         if not env:
             warnings.append(f"Ortam '{env_id}' bible'da yok")
@@ -101,6 +241,10 @@ def resolve_shot(bible: Bible, shot: dict) -> dict:
         else:
             warnings.append(f"Konuşmacı '{sid}' için ses tanımlı değil")
     audio_ids = list(dict.fromkeys(audio_ids))
+
+    if binding_lines:
+        base_prompt = f"{base_prompt}\n\n" + "\n".join(binding_lines)
+    prompt = f"{art}\n\n{base_prompt}" if art else base_prompt
 
     # Bütçe / limit kontrolleri
     ok, units = validate_ref_units(image_urls, character_ids)
@@ -168,19 +312,24 @@ def validate_plan(plan: dict, bible: Bible) -> dict:
     warnings: list[str] = []
 
     shots = plan.get("shots")
-    if not shots:
+    if not isinstance(shots, list) or not shots:
         errors.append("Plan'da 'shots' yok veya boş")
         return {"errors": errors, "warnings": warnings}
 
     if bible.face_visible is False and plan.get("face_visible") is not False:
         errors.append("Plan'da 'face_visible' tam false olmalı")
 
+    errors.extend(format_plan_errors(plan, bible))
+
     for shot in shots:
+        if not isinstance(shot, dict):
+            errors.append("Plan'daki her çekim JSON nesnesi olmalı")
+            continue
         n = shot.get("n", "?")
         dur = str(shot.get("duration", "8")).strip()
         if dur not in ("4", "6", "8", "10"):
             warnings.append(f"Çekim {n}: süre '{dur}' geçersiz → 8s'ye düşürülecek")
-        res = resolve_shot(bible, shot)
+        res = resolve_shot(bible, shot, plan)
         for w in res["warnings"]:
             # Kota aşımı = hata, diğerleri uyarı
             if "AŞILDI" in w:

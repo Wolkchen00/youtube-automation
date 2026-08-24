@@ -108,7 +108,7 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
             errors.append(f"çekim {entry['shot']} zincir: {decision.error}")
         trace.append(entry)
         if strict_plan_validation_enabled(cfg) and bible.engine == "omni" and not decision.error:
-            kwargs = resolve_shot(bible, shot)["kwargs"]
+            kwargs = resolve_shot(bible, shot, plan)["kwargs"]
             if decision.start_url:
                 kwargs["image_urls"] = [decision.start_url] + list(kwargs.get("image_urls") or [])
             ok, units = validate_ref_units(kwargs.get("image_urls"), kwargs.get("character_ids"))

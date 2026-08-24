@@ -12,6 +12,7 @@ import json
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
+from urllib.parse import urlparse
 
 from core.config import logger
 from core.utils import download_file, sanitize_filename
@@ -25,6 +26,8 @@ from core import ffmpeg_tools, cost_tracker
 
 from .bible import (
     Bible,
+    atomic_write_json,
+    bible_path,
     doctrine_path,
     doctrine_repo_path,
     doctrine_sha256,
@@ -37,8 +40,15 @@ from .omni_api import (
     register_audio, register_character, generate_omni_shot, build_omni_payload,
     validate_ref_units,
 )
-from .series_meta import SeriesMeta
-from .shots import resolve_shot, resolve_visual_shot, validate_plan, load_plan, plan_summary
+from .series_meta import SeriesMeta, part_plan_path
+from .shots import (
+    TEK_OBJE_FORMAT,
+    resolve_shot,
+    resolve_visual_shot,
+    validate_plan,
+    load_plan,
+    plan_summary,
+)
 from . import credit_gate, critic, report
 from .voices import is_preset
 
@@ -572,6 +582,172 @@ def ensure_ref_image(bible: Bible, kind: str, item: dict, dry_run: bool = False)
     return url
 
 
+def _valid_https_urls(value, *, count: int | None = None) -> bool:
+    if not isinstance(value, list) or (count is not None and len(value) != count):
+        return False
+    if not value:
+        return False
+    return all(
+        isinstance(url, str)
+        and urlparse(url).scheme == "https"
+        and bool(urlparse(url).netloc)
+        for url in value
+    )
+
+
+def _generate_uploaded_reference(
+    bible: Bible,
+    prompt: str,
+    save_path: Path,
+    hard_cap: credit_gate.HardCreditCap,
+    number: int,
+    operation: str,
+) -> str | None:
+    """Cost-authorize one NB2 image, then download and publish it through ImgBB."""
+    if not hard_cap.authorize("reference_image", "nano-banana-2"):
+        return None
+    generated_url = generate_image(
+        prompt,
+        model="nano-banana-2",
+        aspect_ratio=bible.aspect_ratio,
+    )
+    if not generated_url:
+        logger.error(f"❌ {operation}: Nano Banana 2 referansı üretilemedi")
+        return None
+
+    # Image polling does not expose creditsConsumed, so the authorized conservative
+    # estimate is the durable episode-visible charge.
+    estimate = hard_cap.last_estimate
+    if estimate is not None:
+        cost_tracker.log_cost(
+            f"series:{bible.slug}", f"{operation}_estimate_ep{number}",
+            "nano-banana-2", estimate,
+        )
+
+    save_path.parent.mkdir(parents=True, exist_ok=True)
+    downloaded = download_file(generated_url, save_path)
+    uploaded_url = upload_to_imgbb(save_path) if downloaded else None
+    status = "ok" if _valid_https_urls([uploaded_url], count=1) else "FAIL"
+    report.append_row(bible.slug, report.make_row(
+        episode=number,
+        shot_n=operation,
+        characters=[],
+        audio_ids=[],
+        duration="",
+        resolution="1K",
+        seed=None,
+        credits=estimate,
+        status=status,
+        video_url=uploaded_url or generated_url,
+        local_file=save_path if downloaded else "",
+    ))
+    if not downloaded:
+        logger.error(f"❌ {operation}: üretilen referans indirilemedi")
+        return None
+    if status != "ok":
+        logger.error(f"❌ {operation}: ImgBB geçerli bir https URL döndürmedi")
+        return None
+    return uploaded_url
+
+
+def ensure_episode_refs(
+    bible: Bible,
+    plan: dict,
+    plan_path: str | Path,
+    hard_cap: credit_gate.HardCreditCap | None = None,
+    dry_run: bool = False,
+) -> bool:
+    """Persist the opt-in episode object ref and its shared environment ref.
+
+    Existing valid URLs are reused. Each new image is authorized before the paid
+    call, logged against the episode, and persisted atomically before returning.
+    """
+    if plan.get("format_version") != TEK_OBJE_FORMAT:
+        return True
+
+    try:
+        number = int((plan.get("episode") or {}).get("number"))
+    except (TypeError, ValueError):
+        logger.error("❌ Referans üretimi için geçerli episode.number zorunlu")
+        return False
+    card = plan.get("object_card")
+    if not isinstance(card, dict):
+        logger.error("❌ Referans üretimi için object_card zorunlu")
+        return False
+    env_id = str(card.get("environment") or "").strip()
+    environment = bible.get("environments", env_id)
+    if not environment:
+        logger.error(f"❌ Referans ortamı bible'da yok: {env_id!r}")
+        return False
+
+    existing_props = plan.get("prop_ref_urls")
+    if existing_props is not None and not _valid_https_urls(existing_props):
+        logger.error("❌ prop_ref_urls bir veya daha fazla https URL içermeli")
+        return False
+    existing_env = environment.get("ref_image_url")
+    if existing_env is not None and not _valid_https_urls([existing_env], count=1):
+        logger.error(f"❌ Ortam referansı geçerli https URL değil: {env_id}")
+        return False
+
+    missing_env = not existing_env
+    missing_object = existing_props is None
+    if not missing_env and not missing_object:
+        return True
+    if dry_run:
+        logger.info(
+            f"[dry-run] ep{number}: referanslar hazırlanacak "
+            f"(ortam={missing_env}, obje={missing_object})"
+        )
+        return True
+
+    if hard_cap is None:
+        spent = episode_spent(bible.slug, number)
+        if spent is None:
+            logger.error("❌ Referans kredi kapısı: bölüm harcaması okunamadı")
+            return False
+        hard_cap = credit_gate.HardCreditCap(credit_gate.episode_cap(), spent)
+
+    if missing_env:
+        env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
+        env_prompt = (
+            f"Consistent room and workbench reference for a vertical video series: {env_desc}. "
+            "One fixed composition shows the full work surface, its natural wear, the plain wall "
+            "and the established daylight with realistic home-workshop detail."
+        )
+        env_file = refs_dir(bible.slug, "environments") / f"{sanitize_filename(env_id)}.png"
+        env_url = _generate_uploaded_reference(
+            bible, env_prompt, env_file, hard_cap, number,
+            f"environment_ref_{sanitize_filename(env_id)}",
+        )
+        if not env_url:
+            return False
+        environment["ref_image_url"] = env_url
+        atomic_write_json(bible_path(bible.slug), bible.data)
+
+    if missing_object:
+        descriptor = str(card.get("descriptor") or "").strip()
+        name = str(card.get("name") or "object").strip()
+        env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
+        object_prompt = (
+            f"Hero reference image of one {name} on a plain neutral section of the matching "
+            f"workbench. Exact object identity: {descriptor}. Environment context: {env_desc}. "
+            "The entire object is clearly visible at realistic scale with its colour, material "
+            "texture and distinguishing mark sharply readable."
+        )
+        object_file = (
+            refs_dir(bible.slug, "props")
+            / f"ep{number:02d}_{sanitize_filename(name)}.png"
+        )
+        object_url = _generate_uploaded_reference(
+            bible, object_prompt, object_file, hard_cap, number, "object_ref",
+        )
+        if not object_url:
+            return False
+        plan["prop_ref_urls"] = [object_url]
+        atomic_write_json(plan_path, plan)
+    return True
+
+
 # ─── Ses garantisi ─────────────────────────────────────────────────────────────
 
 def ensure_voice(bible: Bible, ch: dict, dry_run: bool = False) -> str | None:
@@ -696,6 +872,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     başlangıç karesi olur; chain_start_url önceki BÖLÜMün son karesidir (parçalar arası).
     plan: dict veya episode_plan.json yolu.
     """
+    supplied_plan_path = Path(plan) if isinstance(plan, (str, Path)) else None
     meta = SeriesMeta.load(slug)
     if not meta:
         return None
@@ -770,13 +947,17 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     for e in v["errors"]:
         logger.error(f"❌ {e}")
     # Omni-dışı varsayılan motorda kota hataları üretimi durdurmaz (Omni'ye özgü).
-    if v["errors"] and default_engine == "omni" and not dry_run:
+    if v["errors"] and (
+        plan.get("format_version") == TEK_OBJE_FORMAT
+        or (default_engine == "omni" and not dry_run)
+    ):
         logger.error("Plan hataları nedeniyle üretim durduruldu.")
         return None
 
     hard_cap_enabled = bool(
         cfg.get("credit_hard_cap")
         or bible.data["series"].get("credit_hard_cap")
+        or cfg.get("format_version")
     )
     hard_cap = None
     if hard_cap_enabled and not dry_run:
@@ -788,11 +969,27 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             logger.error("❌ Kredi sert tavanı: mevcut bölüm harcaması okunamadı")
             return None
 
-    # Zorunlu Suno müziği hiçbir ana çekim harcamasının gerisinde kalamaz.
+    # Zorunlu Suno müziği hiçbir ücretli görsel/video harcamasının gerisinde kalamaz.
     # _post_process music_reserved=True aldığında aynı rezervasyonu ikinci kez saymaz.
     music_reservation = _reserve_plan_music(bible, plan, hard_cap, number)
     if music_reservation is False:
         return None
+
+    persistent_plan_path = supplied_plan_path or part_plan_path(slug, number)
+    if not ensure_episode_refs(
+        bible, plan, persistent_plan_path, hard_cap=hard_cap, dry_run=dry_run
+    ):
+        logger.error("❌ Bölüm/ortam referansları hazırlanamadı; üretim durduruldu.")
+        return None
+
+    # Yeni URL'ler bellekteki bible/plan'a da işlendi; Omni kota dahil son sözleşmeyi
+    # ücretli video çağrısından hemen önce yeniden doğrula.
+    if plan.get("format_version") == TEK_OBJE_FORMAT and not dry_run:
+        post_ref_validation = validate_plan(plan, bible)
+        if post_ref_validation["errors"]:
+            for error in post_ref_validation["errors"]:
+                logger.error(f"❌ Referans sonrası plan hatası: {error}")
+            return None
 
     sdir = shots_dir(slug, number)
     sdir.mkdir(parents=True, exist_ok=True)
@@ -865,7 +1062,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
 
         # ── OMNI çekimi (karakter + ses tutarlılığı) ──────────────────────────
         if shot_engine == "omni":
-            res = resolve_shot(bible, shot)
+            res = resolve_shot(bible, shot, plan)
             kwargs = res["kwargs"]
             # Bitmeyen yolculuk: önceki çekimin/bölümün son karesini referans olarak ekle
             if chain_decision.start_url:

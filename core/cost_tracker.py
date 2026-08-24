@@ -72,6 +72,7 @@ CONSERVATIVE_VIDEO_CREDITS = {
 }
 CONSERVATIVE_FIXED_CREDITS = {
     ("music", "suno"): 80,
+    ("reference_image", "nano-banana-2"): 8,
 }
 
 _ENGINE_ALIASES = {

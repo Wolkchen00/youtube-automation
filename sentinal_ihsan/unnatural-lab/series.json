@@ -18,6 +18,7 @@
   "publish_mode": "auto",
   "auto_replenish": {
     "enabled": true,
+    "format_version": "tek-obje-4x6",
     "batch": 5,
     "min_queue": 2,
     "shots": 4,

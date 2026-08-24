@@ -25,7 +25,7 @@
       "require_no_face": true
     }
   },
-  "art_style": "Vertical 9:16 real-world footage: a pair of hands working with one ordinary object on a fixed workbench. The view stays in one unchanging position for the whole shot; the framing never changes. Slight sensor grain in the shadows; window light clips to white on the bench edge; mixed warm lamp and cool daylight colour. Worn wood, real dust, natural imperfect surfaces. The face stays outside the frame. Exactly ONE impossible property is visibly active; everything else behaves normally.",
+  "art_style": "Vertical 9:16 real-world footage: a pair of hands working with one ordinary object on a fixed workbench. The view stays in one unchanging position for the whole shot; the framing remains identical. Slight sensor grain in the shadows; window light clips to white on the bench edge; mixed warm lamp and cool daylight colour. Worn wood, real dust, natural imperfect surfaces. The face stays outside the frame. Exactly ONE impossible property is visibly active; everything else behaves normally.",
   "style_ref_url": null,
   "music": true,
   "narration": {
@@ -47,6 +47,12 @@
       "character_id": "92369a8131e7497abf00c3b5ba1c92c9"
     }
   ],
-  "environments": [],
+  "environments": [
+    {
+      "id": "workbench_main",
+      "desc": "worn wooden workbench in a small home workshop corner, daylight from a side window, plain wall",
+      "ref_image_url": null
+    }
+  ],
   "props": []
 }

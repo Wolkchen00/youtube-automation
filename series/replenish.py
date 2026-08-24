@@ -22,6 +22,7 @@ series.json şeması:
     "batch": 5,             // ops. (1-10): her ikmalde kaç yeni bölüm
     "min_queue": 2,         // ops. (>=1): bekleyen bölüm bunun altına inince ikmal
     "brief": "...",         // ops.: Gemini'ye seriye özgü yaratıcı yön (Türkçe olabilir)
+    "format_version": "tek-obje-4x6", // ops.: format-bazlı şema + fail-closed doğrulama
     "music_prompt": true,   // ops.: bölüm başına sahne-eşleşmeli 'music' alanı istenir (Suno)
     "caption": true,        // ops.: bölüm başına 'caption' (yazılı hikâye) + 'hashtags' istenir
                             //       (the__footnote formatı: hikâye videoda değil açıklamada)
@@ -58,9 +59,16 @@ if _ROOT not in sys.path:
 
 from core.config import GEMINI_API_KEY, logger
 from series import notifier
-from series.bible import Bible, data_dir, doctrine_path, doctrine_repo_path, doctrine_sha256
+from series.bible import (
+    Bible,
+    atomic_write_json,
+    data_dir,
+    doctrine_path,
+    doctrine_repo_path,
+    doctrine_sha256,
+)
 from series.series_meta import SeriesMeta, part_plan_path, plans_dir
-from series.shots import validate_plan
+from series.shots import OBJECT_CARD_FIELDS, TEK_OBJE_FORMAT, validate_plan
 
 REPLENISH_MODEL = "gemini-2.5-flash"
 REPLENISH_MODEL_FALLBACK = "gemini-flash-latest"
@@ -112,7 +120,21 @@ def validate_replenish_config(cfg: dict) -> list[str]:
         shots = int(cfg.get("shots", DEFAULT_SHOTS))
     except (TypeError, ValueError):
         shots = 0
-    fixedframe_keys = ("chain_breaks", "hook_shot", "shot_plan", "title_patterns")
+    format_version = cfg.get("format_version")
+    if "format_version" in cfg and (
+        not isinstance(format_version, str) or not format_version.strip()
+    ):
+        errors.append("format_version boş olmayan string olmalı")
+    if format_version == TEK_OBJE_FORMAT and (shots != 4):
+        errors.append("tek-obje-4x6 formatında shots tam 4 olmalı")
+    if format_version == TEK_OBJE_FORMAT and (
+        str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip() != "6"
+    ):
+        errors.append("tek-obje-4x6 formatında shot_seconds tam 6 olmalı")
+
+    fixedframe_keys = (
+        "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version"
+    )
     if any(key in cfg for key in fixedframe_keys) and not (2 <= shots <= 6):
         errors.append("shots 2..6 aralığında tam sayı olmalı")
     if any(key in cfg for key in fixedframe_keys):
@@ -154,7 +176,7 @@ def validate_replenish_config(cfg: dict) -> list[str]:
 def strict_plan_validation_enabled(cfg: dict) -> bool:
     """The pre-spend validator is opt-in through Rock 1 plan config keys."""
     return any(key in cfg for key in (
-        "chain_breaks", "hook_shot", "shot_plan", "title_patterns"
+        "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version"
     ))
 
 
@@ -176,6 +198,9 @@ def validate_plan_against_config(plan: dict, cfg: dict) -> list[str]:
         return errors
     shots_expected = int(cfg.get("shots", DEFAULT_SHOTS))
     duration_expected = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
+    format_version = str(cfg.get("format_version") or "").strip()
+    if format_version and plan.get("format_version") != format_version:
+        errors.append(f"plan format_version tam {format_version!r} olmalı")
     shots = plan.get("shots")
     if not isinstance(shots, list):
         return errors + ["plan shots listesi yok"]
@@ -493,6 +518,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
+    format_version = str(cfg.get("format_version") or "").strip()
+    formatted_object = bool(format_version)
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     previous_family = _previous_family(history) if families else ""
     pool = _topic_pool(cfg)
@@ -538,12 +565,22 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
                  '\n   "hashtags": "<#Tag1 #Tag2 ... 6-9 tags>",') if want_caption else ""
     face_shape = '\n   "face_visible": false,' if face_hidden else ""
+    format_shape = (
+        f'\n   "format_version": {json.dumps(format_version)},'
+        '\n   "object_card": {"name": "<ordinary object name>", '
+        '"descriptor": "<colour + material + size + one distinguishing mark, at least 12 words>", '
+        '"environment": "<available environment id>", '
+        '"framing": "<one fixed-composition sentence>"},'
+        if formatted_object else ""
+    )
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
     chain_breaks = cfg.get("chain_breaks") if "chain_breaks" in cfg else None
     if chain_breaks is not None:
         shot_fields += ', "chain": <bool>'
     if shot_refs:
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
+    elif formatted_object:
+        shot_fields += ', "environment": "<object_card.environment>"'
     if want_fc:
         shot_fields += ', "fact": "<2-5 word on-screen fact, optional>"'
 
@@ -585,8 +622,14 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 '\n- HASHTAGS: "hashtags" = 6-9 space-separated tags: the city, the event name, the '
                 '4-digit year, the country or people, plus 2-3 broad history tags. Each tag starts '
                 'with # and contains no spaces.' if want_caption else "")
-    refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
-                 '"environment"; follow the brief about when to use them.' if shot_refs else "")
+    if formatted_object:
+        refs_rule = (
+            '\n- ENVIRONMENT: every shot must set "environment" to the object_card.environment id, '
+            'chosen exactly from AVAILABLE REFERENCES.'
+        )
+    else:
+        refs_rule = ('\n- Shots MAY reference ONLY the ids listed under AVAILABLE REFERENCES via "characters" / '
+                     '"environment"; follow the brief about when to use them.' if shot_refs else "")
     if humans_historical:
         humans_rule = ("period-accurate people MAY appear in clear close-up, mid and wide shots and "
                        "carry the episode's emotion, but must NEVER speak, lip-sync or move their lips "
@@ -610,7 +653,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     # Kare zinciri AÇIK serilerde çekimler tek kesintisiz morf akışıdır; zincirsiz
     # serilerde (chain_frames=false, ör. footnotes) her çekim AYRI bir sinematik
     # tablodur ,  kurgu bunları crossfade/kesme ile bağlar.
-    if chain_breaks is not None:
+    if formatted_object:
+        chain_rule = (
+            "- FIXED COMPOSITION: All shots share ONE fixed composition on the same bench in the "
+            "same light; the cuts are jumps in time only."
+        )
+    elif chain_breaks is not None:
         chain_rule = (
             "- SEGMENTED CHAIN (the engine enforces this mechanically): shots "
             f"{json.dumps(chain_breaks)} MUST have chain=false and start a fresh scene; every other "
@@ -627,6 +675,38 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         chain_rule = ("- SCENE FLOW: shots are DISTINCT cinematic tableaux joined in post by soft transitions , \n"
                       "  each shot may open a new angle, location or moment of the SAME story; order them so the\n"
                       "  episode reads as one continuous emotional arc with no confusing jumps.")
+
+    object_rule = (
+        '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
+        'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
+        'into every one of the four shot prompts. Write one framing sentence in object_card.framing '
+        'and copy it VERBATIM into every shot prompt. All four shots use the same '
+        'object_card.environment id. Shot prompts use positive visual language only.'
+        if formatted_object else ""
+    )
+    episode_arc_rule = (
+        "- EPISODE ARC: All shots share ONE fixed composition on the same bench in the same "
+        "light; the cuts are jumps in time only."
+        if formatted_object else
+        "- EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve."
+    )
+    prompts_rule = (
+        "- PROMPTS: All shots share ONE fixed composition on the same bench in the same light; "
+        "the cuts are jumps in time only. Use rich visual language for motion, geometry, light and "
+        "color within that composition. The series art style is automatically prefixed to every "
+        "shot at production; stay inside it."
+        if formatted_object else
+        "- PROMPTS: rich visual language ,  motion, geometry, light, color, camera flow. The\n"
+        "  series art style is automatically prefixed to every shot at production; do NOT restate\n"
+        "  it wholesale, but stay inside it."
+    )
+    hard_limits_rule = (
+        f"- HARD LIMITS: {humans_rule} clean unlabeled surfaces and grounded safe workshop "
+        "activity fill the frame. English only."
+        if formatted_object else
+        f"- HARD LIMITS: {humans_rule} no readable text/letters/logos/watermarks,\n"
+        f"  {tone_tail} English only."
+    )
 
     family_shape = '\n   "family": "<canonical family>",' if families else ""
     seed_shape = '\n   "seed_id": <int or "n15-32hex">,' if (pool or cards) else ""
@@ -697,7 +777,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
 Return STRICT JSON ONLY, exactly this shape:
 {{"episodes": [
   {{"episode": {{"number": <int>, "title": "<title>"}},
-   "synopsis": "<one sentence>",{face_shape}
+   "synopsis": "<one sentence>",{face_shape}{format_shape}
    "hook_shot": <int>,{family_shape}{seed_shape}
    "narration": {narr_shape},{tc_shape}{music_shape}{cap_shape}
    "shots": [{{{shot_fields}}}]}}
@@ -709,15 +789,12 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}{face_rule}
+  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}{face_rule}{object_rule}
 {chain_rule}{shot_plan_rule}
-- EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve.
+{episode_arc_rule}
 {hook_rule}
-- PROMPTS: rich visual language ,  motion, geometry, light, color, camera flow. The
-  series art style is automatically prefixed to every shot at production; do NOT restate
-  it wholesale, but stay inside it.
-- HARD LIMITS: {humans_rule} no readable text/letters/logos/watermarks,
-  {tone_tail} English only."""
+{prompts_rule}
+{hard_limits_rule}"""
 
     lines = [f"SERIES: {meta.base_title} ,  {meta.logline}".strip()]
     art = (bible.art_style or "").strip()
@@ -761,9 +838,10 @@ RULES:
         else:
             lines.append("\nRUNTIME UNUSED TOPIC POOL. Use each seed_id at most once:")
             lines.append(json.dumps(unused_topics, ensure_ascii=False, indent=2))
-    if shot_refs:
+    if shot_refs or formatted_object:
         refs_lines = []
-        for kind in ("characters", "environments"):
+        ref_kinds = ("characters", "environments") if shot_refs else ("environments",)
+        for kind in ref_kinds:
             items = bible.data.get(kind) or []
             entries = [f"{it.get('id')} ,  {(it.get('name') or it.get('desc') or '')[:60]}"
                        for it in items if it.get("id")]
@@ -814,6 +892,8 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
     shot_refs = bool(cfg.get("shot_refs")) and not bible.omit_character_refs
+    format_version = str(cfg.get("format_version") or "").strip()
+    formatted_object = bool(format_version)
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     pool = _topic_pool(cfg)
     history = history or []
@@ -908,8 +988,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         clean_shots: list[dict] = []
         fact_count = 0
         strict_chain = "chain_breaks" in cfg
+        strict_structure = strict_chain or formatted_object
         expected_shots = int(cfg.get("shots", DEFAULT_SHOTS))
-        if strict_chain and isinstance(raw_shots, list) and len(raw_shots) != expected_shots:
+        if formatted_object and plan.get("format_version") != format_version:
+            errors.append(f"part {want}: format_version tam {format_version!r} olmalı")
+        if strict_structure and isinstance(raw_shots, list) and len(raw_shots) != expected_shots:
             errors.append(
                 f"part {want}: çekim sayısı tam {expected_shots} olmalı (gelen: {len(raw_shots)})"
             )
@@ -917,7 +1000,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             got = len(raw_shots) if isinstance(raw_shots, list) else "yok"
             errors.append(f"part {want}: çekim sayısı 2-6 olmalı (gelen: {got})")
         else:
-            if strict_chain:
+            if strict_structure:
                 raw_numbers = [
                     shot.get("n") if isinstance(shot, dict) else None for shot in raw_shots
                 ]
@@ -933,7 +1016,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             for k, shot in enumerate(raw_shots, start=1):
                 shot = shot if isinstance(shot, dict) else {}
                 prompt = str(shot.get("prompt") or "").strip()
-                shot_number = shot.get("n") if strict_chain else k
+                shot_number = shot.get("n") if strict_structure else k
                 prefix = None
                 if ("shot_plan" in cfg and isinstance(shot_number, int)
                         and 1 <= shot_number <= len(cfg["shot_plan"])):
@@ -954,6 +1037,8 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         f"part {want} çekim {shot_number}: süre tam "
                         f"{str(cfg.get('shot_seconds', DEFAULT_SHOT_SECONDS)).strip()} olmalı"
                     )
+                if formatted_object and shot.get("duration") != "6":
+                    errors.append(f"part {want} çekim {shot_number}: süre tam '6' string olmalı")
                 # Yalnız bilinen alanlar; model karakter/diyalog uydurduysa sessizce atılır.
                 clean = {"n": shot_number, "duration": dur, "prompt": prompt, "seed": None}
                 if strict_chain:
@@ -972,6 +1057,10 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                              if isinstance(c, str) and bible.get_character(c)]
                     if chars:
                         clean["characters"] = chars
+                elif formatted_object:
+                    env = shot.get("environment")
+                    if env is not None:
+                        clean["environment"] = env
                 if want_fc:
                     # Opt-in: kısa ekran-içi 'fact' (≤40 karakter); produce alt üçlüğe basar.
                     fv = str(shot.get("fact") or "").strip()
@@ -1015,6 +1104,13 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "synopsis": str(plan.get("synopsis") or "").strip()[:300],
                       "narration": ntext,
                       "shots": clean_shots}
+        if formatted_object:
+            raw_card = plan.get("object_card")
+            normalized["format_version"] = plan.get("format_version")
+            normalized["object_card"] = (
+                {field: raw_card.get(field) for field in OBJECT_CARD_FIELDS}
+                if isinstance(raw_card, dict) else raw_card
+            )
         if bible.face_visible is False:
             if plan.get("face_visible") is not False:
                 errors.append(f"part {want}: face_visible tam false olmalı")
@@ -1205,8 +1301,7 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
             pp = part_plan_path(slug, start + i)
             if pp.exists():   # sigorta ,  _adopt_orphans sonrası imkânsız olmalı
                 raise RuntimeError(f"plan dosyası zaten var, üzerine yazılmaz: {pp.name}")
-            pp.parent.mkdir(parents=True, exist_ok=True)
-            pp.write_text(json.dumps(plan, ensure_ascii=False, indent=2), encoding="utf-8")
+            atomic_write_json(pp, plan)
 
         # 2) Sonra sayaç + durum ('completed' makine kararıydı → diril)
         meta.data["total_parts"] = end

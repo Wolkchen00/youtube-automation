@@ -13,7 +13,9 @@ Klasör yapısı:
 
 import hashlib
 import json
+import os
 from pathlib import Path
+import time
 
 from core.config import SERIES_DIR, PROJECT_ROOT, OMNI_DEFAULT_ASPECT, OMNI_DEFAULT_RESOLUTION, logger
 
@@ -76,6 +78,23 @@ def series_dir(slug: str) -> Path:
 
 def bible_path(slug: str) -> Path:
     return data_dir(slug) / "bible.json"
+
+
+def atomic_write_json(path: str | Path, data: dict) -> Path:
+    """Write UTF-8 JSON through a sibling temp file, then atomically replace it."""
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temp = target.with_name(f"{target.name}.tmp-{os.getpid()}-{time.time_ns()}")
+    try:
+        temp.write_text(
+            json.dumps(data, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        os.replace(temp, target)
+    finally:
+        if temp.exists():
+            temp.unlink()
+    return target
 
 
 def doctrine_path(slug: str) -> Path | None:
