@@ -75,6 +75,8 @@ class ProduceResult:
     reason: str | None = None
 
     def __post_init__(self):
+        if self.status not in ("ok", "qc_hold", "generation_fail"):
+            raise ValueError(f"unknown ProduceResult status: {self.status}")
         if self.status == "ok" and self.path is None:
             raise ValueError("ok ProduceResult requires a path")
         if self.status != "ok" and self.path is not None:

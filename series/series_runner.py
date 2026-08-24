@@ -20,8 +20,6 @@ _ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 
-from pathlib import Path
-
 from core.config import logger
 from core.kie_api import check_credit
 from core.uploader import upload_to_platform

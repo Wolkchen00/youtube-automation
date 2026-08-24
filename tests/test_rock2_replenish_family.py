@@ -138,7 +138,7 @@ class Rock2ReplenishFamilyTests(unittest.TestCase):
         self.assertIn(f"part {start}", family_errors[0])
         self.assertIn(forbidden, family_errors[0])
 
-    def test_generation_makes_three_attempts_and_final_report_names_rule_and_family(self):
+    def test_generation_exhausts_attempts_and_final_report_names_rule_and_family(self):
         meta, bible, cfg, _history = flashpoints_context()
         start, forbidden = live_position()
         self.assertTrue(forbidden)
@@ -154,7 +154,7 @@ class Rock2ReplenishFamilyTests(unittest.TestCase):
             with self.assertRaises(RuntimeError) as raised:
                 replenish.generate_plans(meta, bible, cfg, start, 1, calibration={})
 
-        self.assertEqual(gemini.call_count, 3)
+        self.assertEqual(gemini.call_count, 6)  # ROCK 4: format doğrulaması için deneme sayısı 3→6
         message = str(raised.exception)
         self.assertIn("ardışık iki part aynı family", message)
         self.assertIn(forbidden, message)

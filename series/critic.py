@@ -429,17 +429,6 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
 # ─── 3) Regen döngüsü ──────────────────────────────────────────────────────────
 
-_NEGATIVE_CORRECTION = re.compile(
-    r"\b(?:no|not|never|without|don'?t|doesn'?t|isn'?t|aren'?t|cannot|can'?t|"
-    r"won'?t|shouldn'?t|mustn'?t|missing|extra|wrong|bad|fail(?:ed|ure)?|"
-    r"avoid|omit|exclude|forbid(?:den)?)\b", re.IGNORECASE,
-)
-_IMPERATIVE_STARTS = (
-    "keep", "show", "render", "frame", "match", "continue", "open", "maintain",
-    "preserve", "use", "hold", "place", "make", "display", "fill", "light",
-)
-
-
 def positive_correction(issue: str) -> str:
     """Turn one issue into one positive imperative without copying negative prose."""
     raw = " ".join(str(issue or "").strip().split())
@@ -470,11 +459,6 @@ def positive_correction(issue: str) -> str:
                 "legs, and five fingers on each hand.")
     if any(word in lowered for word in ("text", "watermark", "caption", "logo", "yazı")):
         return "Show a clean workshop image filled only with natural scene detail."
-    candidate = raw.rstrip(".!?")
-    if (candidate and not _NEGATIVE_CORRECTION.search(candidate)
-            and candidate.lower().startswith(_IMPERATIVE_STARTS)
-            and not re.search(r"[.!?;:]", candidate)):
-        return candidate + "."
     return "Render a coherent realistic take with stable geometry, lighting, materials, and motion."
 
 
@@ -607,11 +591,19 @@ def qc_pass_exists(slug: str, episode: int, shot: int,
                 continue
             if required.get("require_object_match") and event.get("object_match") is not True:
                 continue
-            if required.get("require_continuity") and 2 <= int(shot) <= 4:
-                if event.get("continuity_ok") is not True:
+            if required.get("require_continuity"):
+                continuity = event.get("continuity_ok")
+                if 2 <= int(shot) <= 4:
+                    if continuity is not True:
+                        continue
+                elif continuity != "n/a":
                     continue
-            if required.get("require_first_frame") and int(shot) == 1:
-                if event.get("first_frame_ok") is not True:
+            if required.get("require_first_frame"):
+                first_frame = event.get("first_frame_ok")
+                if int(shot) == 1:
+                    if first_frame is not True:
+                        continue
+                elif first_frame != "n/a":
                     continue
             return True
         except (TypeError, ValueError, json.JSONDecodeError):

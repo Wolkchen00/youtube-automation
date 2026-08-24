@@ -501,13 +501,16 @@ class LiveConfigTests(unittest.TestCase):
         self.assertIs(data["series"]["qc"]["require_no_face"], True)
 
     def test_pending_plans_and_workflow_carry_rock1_gates(self):
-        for number in range(22, 26):
-            plan = json.loads(
-                (UNNATURAL_ROOT / "plans" / f"part{number:02d}.json").read_text(
-                    encoding="utf-8"
-                )
-            )
-            self.assertIs(plan["face_visible"], False)
+        # ROCK 4 geçişi: bekleyen plan sayısı sabit değil (eski 22-25 silindi,
+        # ikmal yenilerini yazar). VAR OLAN her bekleyen plan yüz kapısını taşımalı.
+        published_max = 21
+        pending = sorted(
+            path for path in (UNNATURAL_ROOT / "plans").glob("part*.json")
+            if int(path.stem[4:]) > published_max
+        )
+        for path in pending:
+            plan = json.loads(path.read_text(encoding="utf-8"))
+            self.assertIs(plan["face_visible"], False, path.name)
         workflow = (REPO_ROOT / ".github" / "workflows" / "unnatural-lab.yml").read_text(
             encoding="utf-8"
         )

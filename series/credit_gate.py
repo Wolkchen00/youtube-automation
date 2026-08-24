@@ -62,7 +62,9 @@ def _timestamp() -> str:
 
 def _empty_ledger() -> dict:
     """Boş defter yapısını döndür."""
-    return {"entries": [], "episode_spend": {}}
+    # Keep the legacy on-disk shape until durable per-episode accounting is
+    # explicitly used by an opted-in series.
+    return {"entries": []}
 
 
 def _validate(data: object) -> dict:
@@ -87,7 +89,7 @@ def _validate(data: object) -> dict:
             raise ValueError("actual alanı geçersiz")
         if not isinstance(entry.get("ts"), str):
             raise ValueError("ts alanı geçersiz")
-    spends = data.setdefault("episode_spend", {})
+    spends = data.get("episode_spend", {})
     if not isinstance(spends, dict):
         raise ValueError("episode_spend alanı nesne değil")
     for key, value in spends.items():
@@ -201,7 +203,7 @@ def record_episode_spend(series: str, part: int, amount: float) -> bool:
         return False
     key = _episode_key(series, part)
     current = _episode_spent_from(data, series, part)
-    data["episode_spend"][key] = current + float(amount)
+    data.setdefault("episode_spend", {})[key] = current + float(amount)
     try:
         _save(data)
     except OSError as error:

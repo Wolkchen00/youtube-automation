@@ -520,6 +520,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_caption = bool(cfg.get("caption"))
     format_version = str(cfg.get("format_version") or "").strip()
     formatted_object = bool(format_version)
+    compose_object_prompt = format_version == TEK_OBJE_FORMAT
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     previous_family = _previous_family(history) if families else ""
     pool = _topic_pool(cfg)
@@ -677,6 +678,16 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                       "  episode reads as one continuous emotional arc with no confusing jumps.")
 
     object_rule = (
+        '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
+        'size and one distinguishing mark in at least 12 words. Write one fixed-composition sentence '
+        'in object_card.framing. Each shot\'s "prompt" field contains ONLY that shot\'s specific '
+        'action and state, described only by what IS visible and happening. FORBIDDEN WORDS in every '
+        'shot prompt (they poison the video model): no, not, never, nothing, neither, nor, without, '
+        'cannot, cant, dont, doesnt, isnt, arent, wont, absent, lacks, lacking, avoid. State what '
+        'happens instead: write "the shell stays whole" rather than "the shell does not crack". '
+        'It must NOT repeat the descriptor or the framing sentence because the pipeline prepends '
+        'them mechanically. All four shots use the same object_card.environment id.'
+        if compose_object_prompt else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
         'into every one of the four shot prompts. Write one framing sentence in object_card.framing '
@@ -894,6 +905,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     shot_refs = bool(cfg.get("shot_refs")) and not bible.omit_character_refs
     format_version = str(cfg.get("format_version") or "").strip()
     formatted_object = bool(format_version)
+    compose_object_prompt = format_version == TEK_OBJE_FORMAT
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     pool = _topic_pool(cfg)
     history = history or []
@@ -984,6 +996,17 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         errors.append(f"part {want}: family seed_id {seed_id} ile eşleşmiyor")
                     used_seed_ids.add(seed_id)
 
+        raw_card = plan.get("object_card")
+        card_descriptor = (
+            raw_card.get("descriptor")
+            if isinstance(raw_card, dict) and isinstance(raw_card.get("descriptor"), str)
+            else ""
+        )
+        card_framing = (
+            raw_card.get("framing")
+            if isinstance(raw_card, dict) and isinstance(raw_card.get("framing"), str)
+            else ""
+        )
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
         fact_count = 0
@@ -1015,7 +1038,8 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     raw_shots = sorted(raw_shots, key=lambda shot: shot["n"])
             for k, shot in enumerate(raw_shots, start=1):
                 shot = shot if isinstance(shot, dict) else {}
-                prompt = str(shot.get("prompt") or "").strip()
+                model_action_text = str(shot.get("prompt") or "").strip()
+                prompt = model_action_text
                 shot_number = shot.get("n") if strict_structure else k
                 prefix = None
                 if ("shot_plan" in cfg and isinstance(shot_number, int)
@@ -1025,6 +1049,13 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         prompt = prefix + prompt
                 if len(_prompt_content(prompt, prefix)) < 30:
                     errors.append(f"part {want} çekim {k}: prompt boş/çok kısa")
+                if compose_object_prompt:
+                    composed_action_text = prompt
+                    prompt = " ".join(part for part in (
+                        card_descriptor if card_descriptor not in composed_action_text else "",
+                        card_framing if card_framing not in composed_action_text else "",
+                        composed_action_text,
+                    ) if part)
                 try:
                     dur = str(int(float(str(shot.get("duration", "")).strip() or "0")))
                 except (TypeError, ValueError):
@@ -1105,7 +1136,6 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "narration": ntext,
                       "shots": clean_shots}
         if formatted_object:
-            raw_card = plan.get("object_card")
             normalized["format_version"] = plan.get("format_version")
             normalized["object_card"] = (
                 {field: raw_card.get(field) for field in OBJECT_CARD_FIELDS}
@@ -1216,7 +1246,7 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
     history = _episode_history(meta.slug)
     existing = {_norm_title(h["title"]) for h in history if h.get("title")}
     errors: list[str] | None = None
-    for attempt in (1, 2, 3):
+    for attempt in (1, 2, 3, 4, 5, 6):
         contents, sysins = _build_prompt(meta, bible, cfg, start, batch, history,
                                          fix_errors=errors, calibration=calibration)
         data = _gen_json(contents, sysins, temperature=0.9)

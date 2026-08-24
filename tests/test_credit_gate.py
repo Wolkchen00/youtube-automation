@@ -60,6 +60,11 @@ class CreditGateTests(unittest.TestCase):
         self.assertEqual(data["entries"][0]["reserved"], 100)
         self.assertEqual(data["entries"][0]["actual"], 72)
 
+    def test_legacy_reservation_keeps_the_original_ledger_shape(self):
+        self.assertTrue(credit_gate.reserve("legacy", 1))
+        data = json.loads(self.ledger.read_text(encoding="utf-8"))
+        self.assertEqual(set(data), {"entries"})
+
     def test_month_total_uses_actual_or_reservation(self):
         month = self.current_month()
         self.write_entries([

@@ -5,6 +5,42 @@ sessizlik "AI hissi" veriyor, izleyici mesafeleniyor; gerçek video hissi = akı
 
 ---
 
+## 🧪 GERÇEKÇİLİK PLANI YÜRÜRLÜKTE (2026-08-24, İhsan onayı: K1-K8) — FAZ-1 ve v2.1 ile çeliştiği yerde KAZANIR
+
+Dayanak: `sentinal_ihsan/PLAN_GERCEKCILIK_v1.md` (Codex ile 5 tur incelendi) + `PLAN_GERCEKCILIK_SPM_LOG.md`.
+Uygulama commitleri: ROCK 1 `bfa5c39` (foley geri + yüzsüz format), ROCK 2 `09df3eb` (obje kartı +
+referans kilidi), ROCK 3 `98c1e3d` (fail-closed QC + 800 kredi tavanı), ROCK 4 (bu değişiklik).
+
+1. **TURNUSOL-1 İKİYE BÖLÜNDÜ (K4).** 1a MEKANİZMA (eski kural aynen): "bunu nasıl yaptı?"nın
+   cevabı satın alınabilir bir teknikse ÇÖP. 1b OBJE (YENİ): "bunu nereden alırım?"ın dürüst
+   cevabı "hiçbir yerden, fizik izin vermez" ise DOĞRU; "Amazon, 12 dolar" ise ÇÖP. Obje arzu
+   edilebilir olmalı, ihlal satın alınamaz olmalı.
+2. **OBJE HAVUZU DEĞİŞTİ.** Yalnız üç sınıf: A yiyecek/içecek · B su/buz · C kanonik sert obje
+   (tuğla, lastik ördek, tenis topu, zar, mum, sabun...). Araç-gereç (anahtar, fırça, kalem,
+   bant, kibrit kutusu, sünger, ip, kâğıt, kitap, ayna) ELENDİ. Yalnız sesle ya da
+   ışık/parıltı/dumanla anlaşılan ihlaller ELENDİ; ihlal fiziksel + sürekli + TEK KAREDE okunur.
+   Ölçülen gerekçe: beğeni/yorum alan tüm bölümler somut madde dönüşümü; 2026 TikTok AI-ASMR
+   ilk 30'unda tek bir araç-gereç objesi yok.
+3. **YÜZ BU ÇEVRİMDE TAMAMEN KADRAJ DIŞI (K5).** `face_visible:false` plan alanı + çekimlerden
+   karakter referansı çıkarıldı + QC `face_present=false` zorunlu kapısı. Yüzü geri getirme
+   deneyi sonraki çevrimde.
+4. **BAŞLIK KALIPLARI YENİLENDİ.** (1) "Something Is WRONG With This <OBJECT>" · (2) somut,
+   klipte görünür iddia (sayı yalnız ekranda sayılabiliyorsa) · (3) "Why Won't This <OBJECT>
+   <beklenen davranış>?" soru formu. "Real or AI" başlığa YAZILMAZ. Eski 3 kalıp emekli.
+5. **BİTİŞ: LOOP KALIR (K7).** FAZ-2 taslağındaki zincir (chain) Omni'de kanıtlı işe yaramadığı
+   için İPTAL; yerini bölüm-başı OBJE KARTI + referans görsel kilidi aldı (descriptor 4 çekimde
+   kelimesi kelimesine aynı; obje+ortam referansları her çekimin payload'ında). REVEAL bitişi
+   sonraki çevrimde test edilecek.
+6. **YAYIN KAPILARI.** `require_all_shots:true` — eksik çekimli bölüm yayını mekanik olarak
+   imkânsız. Denetleyemeyen koşu yayınlayamaz (qc_hold → awaiting_approval, yayın modundan
+   bağımsız). Bölüm sert tavanı 800 kredi (video+görsel; Suno ayrı), aylık seri tavanı 14.000.
+7. **GEÇİŞ (K8).** Kanal en fazla 3 hafta yayınsız; eski part22-25 planları yeni şemayla
+   KOMPLE yenilendi; yayına dönüş: kill-gate'in ilk 3 bölümü onaylı, temizse kalan 7 otomatik.
+   Kill-gate: donmuş kurulumda 10 ardışık yayın, 72 saat yaşında; L/1k <10 → içerik havuzu
+   yeniden ele alınır; başarı L/1k ≥30 VE C/1k ≥1,0.
+
+---
+
 ## ⚡ v3 FAZ-1 YÜRÜRLÜKTE (2026-08-09, İhsan onayı) ,  aşağıdaki v2.1 metnini EZER
 
 Referans kanal @silent_builder_official ölçüldü; tam analiz ve fazlı plan: `KONSEPT_v3_TASLAK.md`

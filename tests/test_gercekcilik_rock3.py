@@ -1,10 +1,12 @@
 """ROCK 3 fail-closed QC, state, cache, download, and budget proofs."""
 
+import contextlib
 import json
 import pathlib
 import subprocess
 import sys
 import tempfile
+import types
 import unittest
 from types import SimpleNamespace
 from unittest import mock
@@ -199,6 +201,74 @@ class MandatoryGateTests(unittest.TestCase):
         self.assertIsNone(review)
         self.assertEqual(verdict, "hold")
 
+    def test_reviewer_payload_labels_object_continuity_and_opening_images(self):
+        captured = {}
+
+        class Part:
+            @staticmethod
+            def from_text(*, text):
+                return {"kind": "text", "text": text}
+
+            @staticmethod
+            def from_bytes(*, data, mime_type):
+                return {"kind": "bytes", "data": data, "mime_type": mime_type}
+
+        class Config:
+            def __init__(self, **kwargs):
+                self.kwargs = kwargs
+
+        class Models:
+            def generate_content(self, **kwargs):
+                captured.update(kwargs)
+                return SimpleNamespace(text=json.dumps(passing_review()))
+
+        fake_types = types.ModuleType("google.genai.types")
+        fake_types.Part = Part
+        fake_types.GenerateContentConfig = Config
+        fake_genai = types.ModuleType("google.genai")
+        fake_genai.types = fake_types
+        fake_genai.Client = lambda **_kwargs: SimpleNamespace(models=Models())
+        fake_google = types.ModuleType("google")
+        fake_google.genai = fake_genai
+
+        with tempfile.TemporaryDirectory() as temp:
+            root = pathlib.Path(temp)
+            frame = root / "frame.jpg"
+            previous = root / "previous.jpg"
+            opening = root / "opening.jpg"
+            frame.write_bytes(b"frame")
+            previous.write_bytes(b"previous")
+            opening.write_bytes(b"opening")
+            with mock.patch.dict(sys.modules, {
+                "google": fake_google,
+                "google.genai": fake_genai,
+                "google.genai.types": fake_types,
+            }), mock.patch.object(critic, "GEMINI_API_KEY", "test-key"):
+                result = critic._review_frames(
+                    [frame], None, "prompt", "notes", object_ref=b"object",
+                    previous_frame=previous, opening_frame=opening,
+                    require_object_match=True, require_continuity=True,
+                    require_first_frame=True,
+                )
+
+        self.assertEqual(result["object_match"], True)
+        labels = [
+            part["text"] for part in captured["contents"]
+            if part["kind"] == "text"
+        ]
+        self.assertIn("[REFERENCE OBJECT]", labels)
+        self.assertIn("[PREVIOUS SHOT LAST FRAME]", labels)
+        self.assertIn("[OPENING FRAME]", labels)
+        self.assertIn("[SAMPLED CLIP FRAMES IN TIME ORDER]", labels)
+        binary = [
+            part["data"] for part in captured["contents"]
+            if part["kind"] == "bytes"
+        ]
+        self.assertIn(b"object", binary)
+        instruction = captured["config"].kwargs["system_instruction"]
+        for field in ("object_match", "continuity_ok", "first_frame_ok"):
+            self.assertIn(field, instruction)
+
 
 class RunnerHoldStateTests(unittest.TestCase):
     def test_two_auto_runs_hold_then_block_produce_and_publish(self):
@@ -315,6 +385,120 @@ class CacheAndDownloadTests(unittest.TestCase):
             self.assertFalse(cached.exists())
             self.assertEqual(len(list(cached.parent.glob("shot_01_stale_*.mp4"))), 1)
 
+    def test_cache_hash_mismatch_drives_fresh_generation_and_qc(self):
+        bible = Bible({
+            "series": {
+                "slug": "cache-produce", "title": "Cache Produce",
+                "aspect_ratio": "9:16", "resolution": "1080p",
+                "engine": "seedance", "chain_frames": False,
+                "qc": {
+                    "enabled": True, "revalidate_cache": True,
+                    "harden_downloads": True, "require_all_shots": True,
+                },
+            },
+            "art_style": "workshop", "music": False, "narration": {},
+            "characters": [], "environments": [], "props": [],
+        })
+        plan = {
+            "episode": {"number": 1, "title": "Cache"},
+            "shots": [{"n": 1, "duration": "6", "prompt": "Stable workshop motion."}],
+        }
+        meta = SimpleNamespace(auto_replenish={}, data={}, slug=bible.slug)
+
+        with tempfile.TemporaryDirectory() as temp:
+            root = pathlib.Path(temp)
+            shots = root / "shots"
+            shots.mkdir()
+            cached = shots / "shot_01.mp4"
+            cached.write_bytes(self.media.read_bytes())
+
+            def download(_url, target, **kwargs):
+                self.assertTrue(kwargs.get("hardened"))
+                pathlib.Path(target).write_bytes(self.media.read_bytes())
+                return pathlib.Path(target)
+
+            def write_video(_source, target, *_args, **_kwargs):
+                pathlib.Path(target).parent.mkdir(parents=True, exist_ok=True)
+                pathlib.Path(target).write_bytes(self.media.read_bytes())
+                return pathlib.Path(target)
+
+            with contextlib.ExitStack() as stack:
+                stack.enter_context(mock.patch.object(
+                    produce.SeriesMeta, "load", return_value=meta
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "_doctrine_gate", return_value="digest"
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce.Bible, "load", return_value=bible
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "validate_plan", return_value={"warnings": [], "errors": []}
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "ensure_episode_refs", return_value=True
+                ))
+                stack.enter_context(mock.patch.object(produce, "shots_dir", return_value=shots))
+                stack.enter_context(mock.patch.object(produce, "episode_dir", return_value=root))
+                stack.enter_context(mock.patch.object(
+                    produce.ffmpeg_tools, "validate_media", return_value=True
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce.critic, "qc_pass_exists", return_value=False
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "resolve_visual_shot",
+                    return_value={
+                        "prompt": "Stable workshop motion.", "start_image_url": None,
+                        "duration": "6",
+                    },
+                ))
+                generated = stack.enter_context(mock.patch.object(
+                    produce, "_generate_visual_clip",
+                    return_value={"url": "https://example.invalid/fresh", "credits": 0},
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "download_file", side_effect=download
+                ))
+                reviewed = stack.enter_context(mock.patch.object(
+                    produce.critic, "qc_shot",
+                    side_effect=lambda _b, _s, path, *_a, **_k: (path, 0.0, "pass"),
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "_prep_shot_clip", side_effect=lambda _b, _p, _s, path: path
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce.ffmpeg_tools, "get_video_duration", return_value=0.25
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce.ffmpeg_tools, "concatenate_simple", side_effect=write_video
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce.ffmpeg_tools, "final_export", side_effect=write_video
+                ))
+                stack.enter_context(mock.patch.object(
+                    produce, "_post_process", side_effect=lambda _b, _p, path, **_k: path
+                ))
+                stack.enter_context(mock.patch.object(produce, "check_credit"))
+                stack.enter_context(mock.patch.object(produce.cost_tracker, "log_cost"))
+                stack.enter_context(mock.patch.object(produce.report, "append_row"))
+                stack.enter_context(mock.patch.object(produce.report, "export_xlsx"))
+                stack.enter_context(mock.patch.object(
+                    produce.report, "summarize",
+                    return_value={
+                        "başarılı": 1, "çekim_sayısı": 1,
+                        "toplam_kredi": 0, "toplam_dolar": 0,
+                    },
+                ))
+                result = produce.produce_episode(
+                    bible.slug, plan, typed_result=True
+                )
+
+            self.assertEqual(result.status, "ok")
+            generated.assert_called_once()
+            reviewed.assert_called_once()
+            self.assertEqual(len(list(shots.glob("shot_01_stale_*.mp4"))), 1)
+
     def test_scene_cut_scan_is_measure_only_log(self):
         with mock.patch.object(
             critic.ffmpeg_tools, "detect_scene_cuts", return_value=[0.75, 1.5]
@@ -384,6 +568,21 @@ class CacheAndDownloadTests(unittest.TestCase):
             self.assertEqual(target.read_bytes(), b"existing")
             self.assertEqual(list(target.parent.glob("*.part-*")), [])
 
+    def test_legacy_download_path_keeps_single_attempt_empty_file_behavior(self):
+        response = SimpleNamespace(
+            raise_for_status=lambda: None,
+            iter_content=lambda chunk_size=8192: iter((b"",)),
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            target = pathlib.Path(temp) / "legacy.bin"
+            with mock.patch.object(utils.requests, "get", return_value=response) as get:
+                self.assertEqual(
+                    utils.download_file("https://example.invalid/legacy", target),
+                    target,
+                )
+            self.assertEqual(target.read_bytes(), b"")
+            get.assert_called_once()
+
 
 class DurableBudgetAndPromptTests(unittest.TestCase):
     def test_durable_spend_survives_fresh_state_and_blocks_over_cap(self):
@@ -399,6 +598,30 @@ class DurableBudgetAndPromptTests(unittest.TestCase):
                 self.assertTrue(cap.authorize("qc_regen", "omni", "6"))
                 self.assertTrue(cap.authorize("qc_regen", "omni", "6"))
                 self.assertFalse(cap.authorize("qc_regen", "omni", "6"))
+
+    def test_paid_actual_that_crosses_cap_is_still_durable(self):
+        bible = rock3_bible("lab")
+        bible.data["series"]["durable_credit_ledger"] = True
+        with tempfile.TemporaryDirectory() as temp:
+            ledger = pathlib.Path(temp) / "credits_ledger.json"
+            ledger.write_text('{"entries": []}', encoding="utf-8")
+            with mock.patch.object(credit_gate, "LEDGER_PATH", ledger), mock.patch.object(
+                produce.cost_tracker, "log_cost"
+            ):
+                self.assertTrue(credit_gate.record_episode_spend("lab", 4, 700))
+                cap = credit_gate.HardCreditCap(
+                    800, credit_gate.episode_spent("lab", 4), durable_ledger=True
+                )
+                self.assertTrue(cap.authorize("main_shot", "omni", "6"))
+                self.assertFalse(cap.settle_last(150))
+                self.assertTrue(produce._record_episode_cost(
+                    bible, 4, "omni_ep4_shot1", "gemini-omni-video", 150
+                ))
+                fresh = credit_gate.HardCreditCap(
+                    800, credit_gate.episode_spent("lab", 4), durable_ledger=True
+                )
+                self.assertEqual(fresh.spent, 850)
+                self.assertFalse(fresh.authorize("main_shot", "omni", "6"))
 
     def test_dynamic_allocator_orders_first_round_before_second(self):
         self.assertEqual(
@@ -426,6 +649,25 @@ class DurableBudgetAndPromptTests(unittest.TestCase):
         self.assertNotIn(raw, rewritten)
         self.assertNotRegex(rewritten.lower(), r"\b(?:not|never|don't|without)\b")
         self.assertIn("Match the reference object's exact shape", rewritten)
+
+    def test_structured_generic_correction_is_exactly_one_positive_sentence(self):
+        raw = "Keep motion stable. Add another camera move."
+        correction = critic.positive_correction(raw)
+        self.assertNotEqual(correction, raw)
+        self.assertEqual(correction.count("."), 1)
+        self.assertTrue(correction.startswith("Render "))
+
+    def test_typed_result_adapter_preserves_legacy_unwrap(self):
+        hold = produce.ProduceResult("qc_hold", reason="review unavailable")
+        with mock.patch.object(produce, "_produce_episode_impl", return_value=hold):
+            self.assertIsNone(produce.produce_episode("s", {}))
+            typed = produce.produce_episode("s", {}, typed_result=True)
+        self.assertEqual(typed, hold)
+
+    def test_legacy_series_has_no_scoped_monthly_override(self):
+        bible = rock3_bible("legacy")
+        bible.data["series"].pop("credit_monthly_cap_value", None)
+        self.assertIsNone(produce.series_monthly_credit_cap(bible))
 
     def test_legacy_prompt_path_is_byte_identical(self):
         expected = (

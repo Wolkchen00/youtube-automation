@@ -59,7 +59,7 @@ def bible_data(*, environment_url=None):
     }
 
 
-def raw_plan(number=1):
+def raw_plan(number=1, *, action_only=False):
     shots = []
     actions = (
         "Two hands rotate the cube while its scratch releases a slow ribbon of solid blue dust.",
@@ -71,7 +71,7 @@ def raw_plan(number=1):
         shots.append({
             "n": index,
             "duration": "6",
-            "prompt": f"{DESCRIPTOR}. {FRAMING} {action}",
+            "prompt": action if action_only else f"{DESCRIPTOR}. {FRAMING} {action}",
             "seed": None,
             "environment": ENV_ID,
         })
@@ -106,12 +106,18 @@ class EndToEndReferenceChainTests(unittest.TestCase):
             base_title="Rock 2 Test",
             logline="One object in one fixed workshop composition.",
         )
-        response = {"episodes": [raw_plan()]}
+        response = {"episodes": [raw_plan(action_only=True)]}
         with mock.patch.object(replenish, "_gen_json", return_value=response) as llm:
             episodes = replenish.generate_plans(meta, bible, FORMAT_CFG, 1, 1)
         llm.assert_called_once()
         self.assertEqual(episodes[0]["format_version"], TEK_OBJE_FORMAT)
         self.assertEqual(episodes[0]["object_card"]["descriptor"], DESCRIPTOR)
+        self.assertEqual(validate_plan(episodes[0], bible)["errors"], [])
+        locked_prefix = f"{DESCRIPTOR} {FRAMING} "
+        for shot in episodes[0]["shots"]:
+            self.assertTrue(shot["prompt"].startswith(locked_prefix))
+            self.assertEqual(shot["prompt"].count(DESCRIPTOR), 1)
+            self.assertEqual(shot["prompt"].count(FRAMING), 1)
 
         with tempfile.TemporaryDirectory() as temp:
             root = pathlib.Path(temp)
@@ -260,6 +266,37 @@ class FormatValidationTests(unittest.TestCase):
         errors = replenish._validate_batch([bad], bible, 1, 1, set(), FORMAT_CFG)
         self.assertTrue(any("tam '6' string" in error for error in errors))
 
+    def test_validate_batch_does_not_duplicate_an_embedded_exact_descriptor(self):
+        bible = Bible(bible_data())
+        plan = raw_plan(action_only=True)
+        plan["shots"][0]["prompt"] = (
+            f"Two hands rotate {DESCRIPTOR} while its scratch releases a solid blue ribbon."
+        )
+        episodes = [plan]
+
+        self.assertEqual(
+            replenish._validate_batch(episodes, bible, 1, 1, set(), FORMAT_CFG), []
+        )
+        prompt = episodes[0]["shots"][0]["prompt"]
+        self.assertEqual(prompt.count(DESCRIPTOR), 1)
+        self.assertEqual(prompt.count(FRAMING), 1)
+        self.assertEqual(validate_plan(episodes[0], bible)["errors"], [])
+
+    def test_validate_batch_checks_positive_language_after_composition(self):
+        bible = Bible(bible_data())
+        plan = raw_plan(action_only=True)
+        plan["shots"][0]["prompt"] = (
+            "Two hands turn the cube without changing the fixed arrangement of the tools."
+        )
+        episodes = [plan]
+
+        errors = replenish._validate_batch(episodes, bible, 1, 1, set(), FORMAT_CFG)
+
+        self.assertTrue(any("yalnız olumlu görsel dil" in error for error in errors))
+        self.assertTrue(
+            episodes[0]["shots"][0]["prompt"].startswith(f"{DESCRIPTOR} {FRAMING} ")
+        )
+
     def test_legacy_resolve_order_and_validation_are_unchanged(self):
         bible = Bible({
             **bible_data(environment_url=ENV_URL),
@@ -320,7 +357,12 @@ class PlannerIsolationTests(unittest.TestCase):
         )
         self.assertIn('"format_version": "tek-obje-4x6"', system)
         self.assertIn('"object_card": {"name"', system)
-        self.assertIn("descriptor VERBATIM", system)
+        self.assertIn(
+            'Each shot\'s "prompt" field contains ONLY that shot\'s specific action and state',
+            system,
+        )
+        self.assertIn("the pipeline prepends them mechanically", system)
+        self.assertNotIn("Copy that descriptor VERBATIM", system)
         self.assertIn(
             "All shots share ONE fixed composition on the same bench in the same light; "
             "the cuts are jumps in time only.",
