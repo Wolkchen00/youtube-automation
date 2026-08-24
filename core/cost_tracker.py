@@ -64,7 +64,8 @@ CREDIT_COSTS = {
 # quotes.  Rock 1's opt-in hard cap uses this single table before a paid request is
 # made.  Missing engine/duration/call-type entries are UNKNOWN and therefore block.
 CONSERVATIVE_VIDEO_CREDITS = {
-    "omni": {"4": 80, "6": 120, "8": 160, "10": 200},
+    # Omni 6s measured 84 credits on 2026-08-23; 100 keeps a 16-credit margin.
+    "omni": {"4": 80, "6": 100, "8": 160, "10": 200},
     "seedance": {"4": 40, "6": 50, "8": 60, "10": 75},
     "veo3_lite": {"4": 40, "6": 60, "8": 80, "10": 100},
     "veo3_fast": {"4": 50, "6": 70, "8": 90, "10": 115},

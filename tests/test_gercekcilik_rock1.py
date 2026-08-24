@@ -236,13 +236,13 @@ class FaceGateTests(unittest.TestCase):
         self.assertEqual(verdict, "fail")
         self.assertTrue(any("yüz" in reason for reason in reasons))
 
-    def test_missing_or_null_face_field_and_reviewer_error_fail_closed(self):
+    def test_missing_or_null_face_field_and_reviewer_error_hold_closed(self):
         missing = visual_review()
         missing.pop("face_present")
         for response in (missing, visual_review(face_present=None), None):
             with self.subTest(response=response):
                 _review, verdict, reasons, _frames = self.review(response)
-                self.assertEqual(verdict, "fail")
+                self.assertEqual(verdict, "hold")
                 self.assertTrue(any("yüz" in reason for reason in reasons))
 
     def test_explicit_false_passes_face_gate(self):
@@ -264,7 +264,7 @@ class FaceGateTests(unittest.TestCase):
                     self.bible, {"n": 1}, clip, "prompt", None,
                     episode=1, budget={"left": 0},
                 )
-        self.assertEqual(result[2], "fail")
+        self.assertEqual(result[2], "hold")
 
 
 class RawAudioGateTests(unittest.TestCase):
@@ -411,7 +411,7 @@ class RawAudioGateTests(unittest.TestCase):
                 self.opt_bible(), {"n": 1}, clip, "prompt", None,
                 episode=1, budget={"left": 0},
             )
-        self.assertEqual(result[2], "fail")
+        self.assertEqual(result[2], "hold")
         visual.assert_not_called()
 
 

@@ -91,17 +91,51 @@ class CreditGateTests(unittest.TestCase):
         self.assertTrue(credit_gate.run_gate(150))
         self.assertTrue(credit_gate.run_gate(151))
 
-    def test_corrupt_ledger_is_sidelined(self):
+    def test_corrupt_ledger_is_fatal_for_paid_calls(self):
         original = b"{not-json"
         self.ledger.write_bytes(original)
-        self.assertEqual(credit_gate.month_total(self.current_month()), 0)
-        backups = list(self.ledger.parent.glob("credits_ledger.corrupt-*.json"))
-        self.assertEqual(len(backups), 1)
-        self.assertEqual(backups[0].read_bytes(), original)
-        self.assertEqual(
-            json.loads(self.ledger.read_text(encoding="utf-8")),
-            {"entries": []},
+        self.assertIsNone(credit_gate.month_total(self.current_month()))
+        self.assertFalse(credit_gate.reserve("lab", 1))
+        self.assertFalse(
+            credit_gate.HardCreditCap(100, 0, durable_ledger=True).authorize(
+                "main_shot", "omni", "6"
+            )
         )
+        backups = list(self.ledger.parent.glob("credits_ledger.corrupt-*.json"))
+        self.assertGreaterEqual(len(backups), 1)
+        self.assertTrue(all(path.read_bytes() == original for path in backups))
+        self.assertEqual(self.ledger.read_bytes(), original)
+
+    def test_same_part_resume_reuses_open_reservation_and_cumulative_spend(self):
+        month = self.current_month()
+        self.ledger.write_text(json.dumps({
+            "entries": [self.entry(month, 100, None, series="lab", part=7)],
+            "episode_spend": {"lab:7": 60},
+        }), encoding="utf-8")
+        self.assertTrue(credit_gate.reserve("lab", 7, cap=100, resume_episode=True))
+        data = json.loads(self.ledger.read_text(encoding="utf-8"))
+        self.assertEqual(len(data["entries"]), 1)
+        self.assertEqual(data["entries"][0]["reserved"], 100)
+        self.assertTrue(credit_gate.record_episode_spend("lab", 7, 40))
+        self.assertFalse(credit_gate.reserve("lab", 7, cap=100, resume_episode=True))
+
+    def test_opt_in_monthly_limit_is_scoped_to_the_series(self):
+        month = self.current_month()
+        self.write_entries([
+            self.entry(month, 950, None, series="other", part=1),
+            self.entry(month, 850, None, series="lab", part=1),
+        ])
+        self.assertTrue(credit_gate.reserve(
+            "lab", 2, cap=100, monthly_limit=1000
+        ))
+
+    def test_measured_actual_releases_conservative_margin(self):
+        cap = credit_gate.HardCreditCap(800, 0)
+        self.assertTrue(cap.authorize("main_shot", "omni", "6"))
+        self.assertEqual(cap.spent, 100)
+        self.assertTrue(cap.settle_last(84))
+        self.assertEqual(cap.spent, 84)
+        self.assertEqual(cap.reservations[-1]["actual"], 84)
 
     def test_empty_environment_values_use_defaults(self):
         with mock.patch.dict(

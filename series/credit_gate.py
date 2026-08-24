@@ -11,6 +11,7 @@ import os
 from dataclasses import dataclass, field
 import pathlib
 import time
+from numbers import Real
 
 
 logger = logging.getLogger("credit_gate")
@@ -20,6 +21,10 @@ LEDGER_PATH = _ROOT / "credits_ledger.json"
 
 _EPISODE_DEFAULT = 900
 _MONTHLY_DEFAULT = 20000
+
+
+class LedgerCorruptError(RuntimeError):
+    """Raised when the durable paid-call ledger cannot be trusted."""
 
 
 def _env_int(name: str, default: int) -> int:
@@ -57,7 +62,7 @@ def _timestamp() -> str:
 
 def _empty_ledger() -> dict:
     """Boş defter yapısını döndür."""
-    return {"entries": []}
+    return {"entries": [], "episode_spend": {}}
 
 
 def _validate(data: object) -> dict:
@@ -73,12 +78,23 @@ def _validate(data: object) -> dict:
             raise ValueError("series alanı geçersiz")
         if type(entry.get("part")) is not int:
             raise ValueError("part alanı geçersiz")
-        if type(entry.get("reserved")) is not int:
+        if type(entry.get("reserved")) is not int or entry["reserved"] < 0:
             raise ValueError("reserved alanı geçersiz")
-        if entry.get("actual") is not None and type(entry.get("actual")) is not int:
+        if (entry.get("actual") is not None
+                and (isinstance(entry.get("actual"), bool)
+                     or not isinstance(entry.get("actual"), Real)
+                     or float(entry["actual"]) < 0)):
             raise ValueError("actual alanı geçersiz")
         if not isinstance(entry.get("ts"), str):
             raise ValueError("ts alanı geçersiz")
+    spends = data.setdefault("episode_spend", {})
+    if not isinstance(spends, dict):
+        raise ValueError("episode_spend alanı nesne değil")
+    for key, value in spends.items():
+        if (not isinstance(key, str) or not key
+                or isinstance(value, bool) or not isinstance(value, Real)
+                or float(value) < 0):
+            raise ValueError("episode_spend girdisi geçersiz")
     return data
 
 
@@ -101,7 +117,7 @@ def _save(data: dict) -> None:
 
 
 def _shelve_corrupt(raw: bytes, error: Exception) -> None:
-    """Bozuk defteri kopyala ve ana defteri boş bir yapıyla yenile."""
+    """Best-effort forensic copy; the corrupt authoritative file stays untouched."""
     path = pathlib.Path(LEDGER_PATH)
     stamp = int(time.time())
     aside = path.with_name(f"credits_ledger.corrupt-{stamp}.json")
@@ -114,11 +130,10 @@ def _shelve_corrupt(raw: bytes, error: Exception) -> None:
     except Exception:
         logger.exception("Bozuk kredi defteri kopyalanamadı; ana dosya korunuyor")
         raise
-    _save(_empty_ledger())
 
 
 def _load() -> dict:
-    """Defteri oku; eksik dosyayı boş, bozuk dosyayı kenara alınmış say."""
+    """Read the ledger; corruption is fatal and never becomes an empty ledger."""
     path = pathlib.Path(LEDGER_PATH)
     if not path.exists():
         return _empty_ledger()
@@ -126,31 +141,135 @@ def _load() -> dict:
     try:
         return _validate(json.loads(raw.decode("utf-8")))
     except Exception as error:
-        _shelve_corrupt(raw, error)
-        return _empty_ledger()
+        try:
+            _shelve_corrupt(raw, error)
+        except Exception:
+            pass
+        raise LedgerCorruptError(f"kredi defteri bozuk: {error}") from error
 
 
-def month_total(month: str) -> int:
+def month_total(month: str) -> int | None:
     """Ay için gerçek harcamaları, yoksa rezervasyonları topla."""
     total = 0
-    for entry in _load()["entries"]:
+    try:
+        entries = _load()["entries"]
+    except LedgerCorruptError as error:
+        logger.error("Aylık toplam okunamadı; ücretli çağrılar kapalı: %s", error)
+        return None
+    for entry in entries:
         if entry["month"] == month:
             actual = entry["actual"]
             total += actual if actual is not None else entry["reserved"]
     return total
 
 
-def reserve(series: str, part: int) -> bool:
+def _episode_key(series: str, part: int) -> str:
+    return f"{series}:{int(part)}"
+
+
+def _episode_spent_from(data: dict, series: str, part: int) -> float:
+    key = _episode_key(series, part)
+    spends = data.get("episode_spend") or {}
+    if key in spends:
+        return float(spends[key])
+    return float(sum(
+        entry["actual"] or 0
+        for entry in data["entries"]
+        if entry["series"] == series and entry["part"] == int(part)
+        and entry["actual"] is not None
+    ))
+
+
+def episode_spent(series: str, part: int) -> float | None:
+    """Return durable cumulative actuals for one series part."""
+    try:
+        return _episode_spent_from(_load(), series, part)
+    except LedgerCorruptError as error:
+        logger.error("Bölüm harcaması okunamadı; ücretli çağrılar kapalı: %s", error)
+        return None
+
+
+def record_episode_spend(series: str, part: int, amount: float) -> bool:
+    """Atomically add one paid call's actual (or conservative fallback) charge."""
+    if isinstance(amount, bool) or not isinstance(amount, Real) or float(amount) < 0:
+        logger.error("Geçersiz bölüm harcaması: %r", amount)
+        return False
+    try:
+        data = _load()
+    except LedgerCorruptError as error:
+        logger.error("Harcama yazılamadı; ücretli çağrılar kapalı: %s", error)
+        return False
+    key = _episode_key(series, part)
+    current = _episode_spent_from(data, series, part)
+    data["episode_spend"][key] = current + float(amount)
+    try:
+        _save(data)
+    except OSError as error:
+        logger.error("Kalıcı bölüm harcaması yazılamadı: %s", error)
+        return False
+    return True
+
+
+def ledger_healthy() -> bool:
+    try:
+        _load()
+        return True
+    except LedgerCorruptError as error:
+        logger.error("Kredi defteri FATAL: %s", error)
+        return False
+
+
+def reserve(series: str, part: int, *, cap: int | None = None,
+            resume_episode: bool = False,
+            monthly_limit: int | None = None) -> bool:
     """Bölüm kredisini aylık defterde ayır; tavan aşılıyorsa False döndür."""
-    data = _load()
+    try:
+        data = _load()
+    except LedgerCorruptError as error:
+        logger.error("Rezervasyon reddedildi; kredi defteri FATAL: %s", error)
+        return False
     month = _current_month()
+    configured_cap = int(cap if cap is not None else episode_cap())
+    spent = _episode_spent_from(data, series, part) if resume_episode else 0.0
+    amount = max(0, int(configured_cap - spent)) if resume_episode else configured_cap
+    if amount <= 0:
+        logger.error(
+            "Bölüm kredi tavanı dolu: seri=%s part=%s harcanan=%s tavan=%s",
+            series, part, spent, configured_cap,
+        )
+        return False
+    if resume_episode:
+        open_entries = [
+            entry for entry in data["entries"]
+            if entry["series"] == series and entry["part"] == int(part)
+            and entry["actual"] is None
+        ]
+        same_month = next(
+            (entry for entry in reversed(open_entries) if entry["month"] == month), None
+        )
+        if same_month is not None:
+            same_month["reserved"] = min(int(same_month["reserved"]), configured_cap)
+            _save(data)
+            logger.info(
+                "Mevcut bölüm rezervasyonu sürdürüldü: seri=%s part=%s kalan=%s",
+                series, part, amount,
+            )
+            return True
+        if open_entries:
+            prior_actual = sum(
+                float(entry["actual"] or 0) for entry in data["entries"]
+                if entry["series"] == series and entry["part"] == int(part)
+                and entry["actual"] is not None
+            )
+            open_entries[-1]["actual"] = max(0.0, float(spent) - prior_actual)
+    scoped_monthly = monthly_limit is not None
     used = sum(
         entry["actual"] if entry["actual"] is not None else entry["reserved"]
         for entry in data["entries"]
         if entry["month"] == month
+        and (not scoped_monthly or entry["series"] == series)
     )
-    amount = episode_cap()
-    limit = monthly_cap()
+    limit = int(monthly_limit if monthly_limit is not None else monthly_cap())
     if used + amount > limit:
         logger.error(
             "Aylık kredi tavanı: ay=%s mevcut=%s bölüm=%s tavan=%s; rezervasyon reddedildi",
@@ -173,13 +292,18 @@ def reserve(series: str, part: int) -> bool:
     return True
 
 
-def reconcile(series: str, part: int, actual: int | None) -> None:
+def reconcile(series: str, part: int, actual: int | float | None,
+              *, cap: int | None = None) -> bool:
     """En yeni açık rezervasyonu gerçek harcamayla uzlaştır.
 
     actual None ise rezervasyon tam olarak ayakta kalır. Eşleşen açık kayıt yoksa
     savunmacı olarak uzlaştırılmış yeni bir kayıt eklenir.
     """
-    data = _load()
+    try:
+        data = _load()
+    except LedgerCorruptError as error:
+        logger.error("Uzlaştırma yapılamadı; kredi defteri FATAL: %s", error)
+        return False
     entries = data["entries"]
     match = None
     for entry in reversed(entries):
@@ -192,7 +316,7 @@ def reconcile(series: str, part: int, actual: int | None) -> None:
             "month": _current_month(),
             "series": series,
             "part": int(part),
-            "reserved": episode_cap(),
+            "reserved": int(cap if cap is not None else episode_cap()),
             "actual": actual,
             "ts": _timestamp(),
         }
@@ -202,7 +326,13 @@ def reconcile(series: str, part: int, actual: int | None) -> None:
             series, part,
         )
     elif actual is not None:
-        match["actual"] = int(actual)
+        prior = sum(
+            float(entry["actual"] or 0)
+            for entry in entries
+            if entry is not match and entry["series"] == series
+            and entry["part"] == int(part) and entry["actual"] is not None
+        )
+        match["actual"] = max(0, float(actual) - prior)
     _save(data)
     if actual is None:
         logger.warning(
@@ -214,11 +344,12 @@ def reconcile(series: str, part: int, actual: int | None) -> None:
             "Kredi uzlaştırıldı: seri=%s part=%s gerçek=%s",
             series, part, actual,
         )
+    return True
 
 
-def run_gate(balance: int | None) -> bool:
+def run_gate(balance: int | None, *, cap: int | None = None) -> bool:
     """Başlangıç bakiyesi güvenli eşiği karşılıyorsa True döndür."""
-    threshold = episode_cap() * 1.5
+    threshold = int(cap if cap is not None else episode_cap()) * 1.5
     if balance is None:
         logger.error("Kie bakiyesi okunamadı; üretim güvenli şekilde durduruldu")
         return False
@@ -239,6 +370,7 @@ class HardCreditCap:
     spent: float | None = 0.0
     blocked_reason: str | None = None
     reservations: list[dict] = field(default_factory=list)
+    durable_ledger: bool = False
 
     @property
     def blocked(self) -> bool:
@@ -246,6 +378,10 @@ class HardCreditCap:
 
     @property
     def remaining(self) -> float | None:
+        if self.blocked:
+            return None
+        if self.durable_ledger and not ledger_healthy():
+            return None
         if self.spent is None:
             return None
         return max(0.0, float(self.cap) - float(self.spent))
@@ -254,13 +390,44 @@ class HardCreditCap:
     def last_estimate(self) -> float | None:
         return self.reservations[-1]["estimate"] if self.reservations else None
 
+    def settle_last(self, actual: float | int | None) -> bool:
+        """Replace the latest conservative reservation with a measured charge."""
+        if actual is None:
+            return True
+        if (isinstance(actual, bool) or not isinstance(actual, Real)
+                or float(actual) < 0 or not self.reservations or self.spent is None):
+            self.blocked_reason = "gerçek kredi uzlaştırması geçersiz"
+            logger.error("Kredi sert tavanı uzlaştırması başarısız: %r", actual)
+            return False
+        reservation = self.reservations[-1]
+        if reservation.get("settled"):
+            self.blocked_reason = "aynı kredi rezervasyonu iki kez uzlaştırıldı"
+            logger.error("Kredi sert tavanı uzlaştırması iki kez çağrıldı")
+            return False
+        estimate = float(reservation["estimate"])
+        self.spent = float(self.spent) - estimate + float(actual)
+        reservation["actual"] = float(actual)
+        reservation["settled"] = True
+        if float(self.spent) > float(self.cap):
+            self.blocked_reason = (
+                f"gerçek harcama sert tavanı aştı: harcanan={float(self.spent):g}, "
+                f"tavan={float(self.cap):g}"
+            )
+            logger.error("Kredi sert tavanı gerçek harcamada aşıldı: %s", self.blocked_reason)
+            return False
+        return True
+
     def authorize(self, call_type: str, engine: str, duration=None,
                   optional: bool = False) -> bool:
         """Sonraki çağrıyı rezerve et; isteğe bağlı ret sert tavanı zehirlemez."""
         from core.cost_tracker import conservative_credit_estimate
 
         estimate = conservative_credit_estimate(call_type, engine, duration)
-        if self.spent is None:
+        if self.blocked:
+            reason = self.blocked_reason or "kredi sert tavanı önceden kapandı"
+        elif self.durable_ledger and not ledger_healthy():
+            reason = "kalıcı kredi defteri bozuk veya okunamıyor"
+        elif self.spent is None:
             reason = "mevcut bölüm harcaması okunamadı"
         elif estimate is None:
             reason = (

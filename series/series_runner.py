@@ -12,6 +12,7 @@ Kullanım:
 """
 
 import os
+from pathlib import Path
 import sys
 import time
 
@@ -317,6 +318,15 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.info(f"✅ '{slug}' tamamlandı (part {meta.total_parts}/{meta.total_parts}).")
         return True
 
+    n = meta.next_part
+    mode = meta.data.get("publish_mode", "auto")
+
+    # A QC hold is stronger than publish mode: later cron runs neither regenerate
+    # nor publish until a human changes the part state.
+    if meta.get_part(n).get("status") == "awaiting_approval":
+        logger.info(f"⏳ Part {n} zorunlu QC/onay bekliyor — üretim ve yayın atlandı.")
+        return True
+
     # GÜNDE-1 KİLİDİ (KANAL başına ,  İhsan kuralı 2026-07-03: "günde sadece 1 video").
     # Bu serinin KANALINA (upload_profile; aynı profili paylaşan TÜM seriler dahil)
     # BUGÜN zaten bir part yayınlandıysa üretme. Ana kuyruk (series.yml) + özel günlük
@@ -328,14 +338,6 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
             logger.info(f"⏭️ Günde-1 kilidi: '{prev}' bugün aynı kanala "
                         f"({meta.upload_profile or slug}) yayınlandı ,  '{slug}' üretimi yarına bırakıldı.")
             return True
-
-    n = meta.next_part
-    mode = meta.data.get("publish_mode", "auto")
-
-    # Onay modu: bu part zaten onay bekliyorsa YENİDEN ÜRETME (approver yayınlayacak).
-    if mode == "approval" and meta.get_part(n).get("status") == "awaiting_approval":
-        logger.info(f"⏳ Part {n} zaten Telegram onayı bekliyor ,  üretim atlandı.")
-        return True
 
     plan_path = part_plan_path(slug, n)
     if not plan_path.exists():
@@ -366,10 +368,19 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
 
     # 1) Üret (idempotent ,  yarım kalmışsa sadece eksik çekimi üretir)
     reserved = False
+    cap_value = produce.episode_credit_cap(bible) if bible else credit_gate.episode_cap()
+    series_monthly_limit = produce.series_monthly_credit_cap(bible) if bible else None
+    monthly_cap_value = (
+        series_monthly_limit if series_monthly_limit is not None
+        else credit_gate.monthly_cap()
+    )
+    durable_episode = bool(
+        bible and bible.data["series"].get("durable_credit_ledger")
+    )
     if not dry_run:
         balance = _balance_value(check_credit())
-        threshold = credit_gate.episode_cap() * 1.5
-        if not credit_gate.run_gate(balance):
+        threshold = cap_value * 1.5
+        if not credit_gate.run_gate(balance, cap=cap_value):
             logger.error(
                 f"❌ Kredi başlangıç kapısı kapalı: bakiye={balance}, eşik={threshold:g}"
             )
@@ -378,29 +389,51 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
                 f"bakiye={balance}, esik={threshold:g}"
             )
             return False
-        if not credit_gate.reserve(slug, n):
+        if not credit_gate.reserve(
+            slug, n, cap=cap_value, resume_episode=durable_episode,
+            monthly_limit=series_monthly_limit,
+        ):
             logger.error(
                 f"❌ Aylık kredi tavanı üretimi durdurdu: "
-                f"bölüm={credit_gate.episode_cap()}, tavan={credit_gate.monthly_cap()}"
+                f"bölüm={cap_value}, tavan={monthly_cap_value}"
             )
             _alert(
                 f"❌ *{meta.base_title}* Part {n} aylik tavan nedeniyle durdu. "
-                f"bolum={credit_gate.episode_cap()}, tavan={credit_gate.monthly_cap()}"
+                f"bolum={cap_value}, tavan={monthly_cap_value}"
             )
             return False
         reserved = True
     try:
-        video = produce.produce_episode(
-            slug, plan, dry_run=dry_run, chain_start_url=chain_start_url
+        produced = produce.produce_episode(
+            slug, plan, dry_run=dry_run, chain_start_url=chain_start_url,
+            typed_result=True,
         )
     finally:
         if reserved:
             actual_spent = _actual_episode_spent(slug, n)
-            credit_gate.reconcile(slug, n, actual_spent)
+            credit_gate.reconcile(slug, n, actual_spent, cap=cap_value)
     if dry_run:
         logger.info(f"[dry-run] Başlık olurdu: {meta.title_for(n, subtitle)}")
         return True
-    if not video:
+    if isinstance(produced, produce.ProduceResult):
+        result = produced
+    elif produced:
+        result = produce.ProduceResult("ok", Path(produced))
+    else:
+        result = produce.ProduceResult("generation_fail")
+    if result.status == "qc_hold":
+        part = meta.get_part(n)
+        part["status"] = "awaiting_approval"
+        part["hold_reason"] = result.reason or "mandatory QC could not be evaluated"
+        meta.save()
+        logger.error(f"⏸️ Part {n} QC HOLD — durum awaiting_approval; yayın bloke edildi.")
+        _alert(
+            f"⏸️ *{meta.base_title}* Part {n} zorunlu QC tarafından değerlendirilemedi. "
+            "Durum awaiting_approval; otomatik üretim ve yayın durduruldu."
+        )
+        return True
+    video = result.path
+    if result.status != "ok" or not video:
         logger.error(f"❌ Part {n} üretilemedi ,  durum ilerletilmedi (sonraki çalıştırmada tekrar denenir).")
         _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLEMEDİ (içerik filtresi / motor hatası olabilir). "
                f"Bu kanala video çıkmadı ,  plan/prompt kontrol edilmeli.")

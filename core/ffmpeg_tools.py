@@ -6,6 +6,7 @@ Merge clips, add crossfades, create seamless loops, export to 9:16 vertical.
 
 import re
 import subprocess
+import statistics
 from pathlib import Path
 
 from .env import (
@@ -43,6 +44,107 @@ def get_video_duration(video_path: str | Path) -> float:
         return float(result.stdout.strip())
     except Exception:
         return 5.0
+
+
+def validate_media(video_path: str | Path) -> bool:
+    """Return True only when ffprobe finds a readable video stream."""
+    try:
+        result = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0",
+             "-show_entries", "stream=codec_type", "-of", "csv=p=0",
+             str(video_path)],
+            capture_output=True, text=True, timeout=30,
+        )
+        return result.returncode == 0 and "video" in result.stdout.split()
+    except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
+        return False
+
+
+def extract_frame_at(video_path: str | Path, timestamp: float,
+                     output_path: str | Path, width: int = 720) -> Path | None:
+    """Extract the viewer-visible frame at an exact post-trim timestamp."""
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-i", str(video_path), "-ss",
+             f"{max(0.0, float(timestamp)):.6f}", "-frames:v", "1",
+             "-vf", f"scale={int(width)}:-2", "-q:v", "2", str(output_path)],
+            capture_output=True, check=True, timeout=60,
+        )
+        if output_path.exists() and output_path.stat().st_size > 0:
+            return output_path
+    except Exception as error:
+        logger.warning(f"⚠️ Frame extraction failed ({Path(video_path).name}): {error}")
+    return None
+
+
+def _parse_pgm(data: bytes) -> tuple[int, int, bytes] | None:
+    try:
+        header = re.match(rb"P5\s+(?:#[^\r\n]*[\r\n]+\s*)*(\d+)\s+(\d+)\s+255\s", data)
+        if not header:
+            return None
+        width, height = int(header.group(1)), int(header.group(2))
+        pixels = data[-(width * height):]
+        return (width, height, pixels) if len(pixels) == width * height else None
+    except (ValueError, IndexError):
+        return None
+
+
+def frame_metrics(image_path: str | Path, width: int = 270) -> dict[str, float] | None:
+    """Measure p90-p10 luma contrast and Laplacian-variance sharpness proxies."""
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-v", "error", "-i", str(image_path), "-vf",
+             f"scale={int(width)}:-2,format=gray", "-frames:v", "1",
+             "-f", "image2pipe", "-vcodec", "pgm", "-"],
+            capture_output=True, timeout=60,
+        )
+        parsed = _parse_pgm(result.stdout) if result.returncode == 0 else None
+        if not parsed:
+            return None
+        image_width, height, pixels = parsed
+        ordered = sorted(pixels)
+        p10 = ordered[int((len(ordered) - 1) * 0.10)]
+        p90 = ordered[int((len(ordered) - 1) * 0.90)]
+        laplacian = []
+        for y in range(1, height - 1):
+            row = y * image_width
+            for x in range(1, image_width - 1):
+                i = row + x
+                laplacian.append(
+                    4 * pixels[i] - pixels[i - 1] - pixels[i + 1]
+                    - pixels[i - image_width] - pixels[i + image_width]
+                )
+        return {
+            "luma_contrast_proxy": round(float(p90 - p10), 4),
+            "sharpness_proxy": round(
+                float(statistics.pvariance(laplacian) if laplacian else 0.0), 4
+            ),
+        }
+    except Exception as error:
+        logger.warning(f"⚠️ Opening-frame metrics failed: {error}")
+        return None
+
+
+def detect_scene_cuts(video_path: str | Path, threshold: float = 0.2,
+                      height: int = 270) -> list[float] | None:
+    """Return low-resolution ffmpeg scene-change timestamps for calibration."""
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-v", "info", "-i", str(video_path), "-vf",
+             f"scale=-2:{int(height)},select='gt(scene,{float(threshold):g})',showinfo",
+             "-an", "-f", "null", "-"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode != 0:
+            return None
+        return [round(float(value), 6) for value in re.findall(
+            r"pts_time:([0-9]+(?:\.[0-9]+)?)", result.stderr
+        )]
+    except Exception as error:
+        logger.warning(f"⚠️ Scene-cut scan failed: {error}")
+        return None
 
 
 def measure_mean_volume(path: str | Path) -> float | None:
@@ -88,6 +190,7 @@ def extract_last_frame(video_path: str | Path, output_path: str | Path = None) -
     if output_path is None:
         output_path = video_path.parent / f"{video_path.stem}_lastframe.png"
     output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
     try:
         # -sseof seeks from end; grab the very last decodable frame
         subprocess.run(

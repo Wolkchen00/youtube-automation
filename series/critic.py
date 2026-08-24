@@ -24,6 +24,7 @@ Maliyet: denetim <$0.01/video (Gemini Flash); kie'de FAIL görev 0 kredi, regen
 yalnız "başarılı-fakat-bozuk" üretimde kredi yakar.
 """
 
+import hashlib
 import json
 import re
 import subprocess
@@ -48,6 +49,7 @@ QC_DEFAULTS = {
     "max_regens_per_shot": 2,   # çekim başına yeniden üretim hakkı
     "frame_width": 720,         # denetim karesi genişliği (dikeyde 720x1280)
     "qc_review_retries": 2,     # skip sonrası aynı klibi ek denetleme sayısı
+    "scene_cut_fail": False,    # measure-only until real-clip calibration is complete
 }
 
 QC_REVIEW_RETRY_DELAY = 0.05
@@ -133,6 +135,34 @@ FACE VISIBILITY GATE (mandatory for this series): add this required field to the
   "face_present": bool       // true when any recognizable human face is visible in any sampled frame, including partial or background faces; false only when every face stays outside the sampled frames.
 This field must always be a JSON boolean. Inspect every sampled frame before answering."""
 
+_OBJECT_QC_ADDENDUM = """
+
+OBJECT IDENTITY GATE (mandatory for this series): add these required fields:
+  "object_match": bool,
+  "object_notes": string
+The image labeled [REFERENCE OBJECT] is the episode's physical hero object. Decide
+whether the object in every sampled clip frame is that SAME physical object, matching
+its shape, colour, scale, material, and distinguishing markings. object_match must
+always be a JSON boolean."""
+
+_CONTINUITY_QC_ADDENDUM = """
+
+CROSS-SHOT CONTINUITY GATE (mandatory for this shot): add these required fields:
+  "continuity_ok": bool,
+  "continuity_notes": string
+Compare [PREVIOUS SHOT LAST FRAME] with this shot. Require the same workbench,
+composition, lighting, physical object identity, and a coherent object-state lineage.
+continuity_ok must always be a JSON boolean."""
+
+_FIRST_FRAME_QC_ADDENDUM = """
+
+VIEWER-VISIBLE FIRST-FRAME GATE (mandatory for shot 1): add these required fields:
+  "first_frame_ok": bool,
+  "first_frame_notes": string
+Judge [OPENING FRAME] as one standalone frame. The episode's impossible property must
+already be active and readable in this exact frame, and the object must fill a large
+share of the frame. first_frame_ok must always be a JSON boolean."""
+
 
 def _parse_json(txt: str):
     """Gemini çıktısını kurtarıcı ayrıştırma (replenish kalıbı): ```json çiti / kırpık uçlar tolere edilir."""
@@ -174,74 +204,134 @@ def _fetch_ref_face(bible: Bible, shot: dict) -> bytes | None:
     return None
 
 
+def fetch_object_reference(plan: dict) -> bytes | None:
+    """Download ``prop_ref_urls[0]`` once and return the exact reviewer bytes."""
+    urls = plan.get("prop_ref_urls")
+    url = urls[0] if isinstance(urls, list) and urls else None
+    if not isinstance(url, str) or not url.strip():
+        return None
+    if url in _REF_IMAGE_CACHE:
+        return _REF_IMAGE_CACHE[url]
+    for attempt in range(1, 4):
+        try:
+            response = requests.get(url, timeout=30)
+            response.raise_for_status()
+            content = response.content
+            if content:
+                _REF_IMAGE_CACHE[url] = content
+                return content
+            raise ValueError("empty reference image")
+        except Exception as error:
+            logger.warning(
+                f"⚠️ QC: obje referansı indirilemedi ({attempt}/3, {error})"
+            )
+            if attempt < 3:
+                time.sleep(0.25 * attempt)
+    return None
+
+
+def _image_mime(data: bytes) -> str:
+    if data.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png"
+    if data.startswith((b"GIF87a", b"GIF89a")):
+        return "image/gif"
+    if data.startswith(b"RIFF") and data[8:12] == b"WEBP":
+        return "image/webp"
+    return "image/jpeg"
+
+
 def _review_frames(frames: list[Path], ref_face: bytes | None,
                    prompt: str, notes: str, max_tries: int = 3,
-                   require_no_face: bool = False) -> dict | None:
-    """Kareleri Gemini vision'a ver → zorunlu JSON karar. Hata = None (çağıran kapı karar verir).
-    replenish._gen_json retry kalıbı: geçici hata → backoff; model ölürse yedek model."""
+                   require_no_face: bool = False,
+                   object_ref: bytes | None = None,
+                   previous_frame: Path | None = None,
+                   opening_frame: Path | None = None,
+                   require_object_match: bool = False,
+                   require_continuity: bool = False,
+                   require_first_frame: bool = False) -> dict | None:
+    """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
     if not GEMINI_API_KEY:
         logger.warning("⚠️ QC: GEMINI_API_KEY yok — denetim atlanıyor")
         return None
     try:
         from google import genai
         from google.genai import types
-    except ImportError as e:
-        logger.warning(f"⚠️ QC: google-genai import edilemedi ({e}) — denetim atlanıyor")
+    except ImportError as error:
+        logger.warning(f"⚠️ QC: google-genai import edilemedi ({error}) — denetim atlanıyor")
         return None
 
     parts = []
     if ref_face:
-        parts.append(types.Part.from_bytes(data=ref_face, mime_type="image/jpeg"))
-    for f in frames:
-        parts.append(types.Part.from_bytes(data=f.read_bytes(), mime_type="image/jpeg"))
-    text = []
-    if ref_face:
-        text.append("The FIRST image is the REFERENCE FACE of the recurring character; "
-                    "all following images are the sampled clip frames in time order.")
-    else:
-        text.append("All images are the sampled clip frames in time order.")
-    text.append(f"GENERATION PROMPT:\n{prompt}")
+        parts.extend((types.Part.from_text(text="[REFERENCE FACE]"),
+                      types.Part.from_bytes(data=ref_face, mime_type="image/jpeg")))
+    if object_ref:
+        parts.extend((types.Part.from_text(text="[REFERENCE OBJECT]"),
+                      types.Part.from_bytes(
+                          data=object_ref, mime_type=_image_mime(object_ref)
+                      )))
+    if previous_frame:
+        parts.extend((types.Part.from_text(text="[PREVIOUS SHOT LAST FRAME]"),
+                      types.Part.from_bytes(data=previous_frame.read_bytes(), mime_type="image/jpeg")))
+    if opening_frame:
+        parts.extend((types.Part.from_text(text="[OPENING FRAME]"),
+                      types.Part.from_bytes(data=opening_frame.read_bytes(), mime_type="image/jpeg")))
+    parts.append(types.Part.from_text(text="[SAMPLED CLIP FRAMES IN TIME ORDER]"))
+    parts.extend(types.Part.from_bytes(data=frame.read_bytes(), mime_type="image/jpeg")
+                 for frame in frames)
+    request_text = [
+        "Every image group is explicitly labeled. Judge each mandatory gate against its labeled reference.",
+        f"GENERATION PROMPT:\n{prompt}",
+    ]
     if notes:
-        text.append(f"CHANNEL-SPECIFIC INSPECTION NOTES:\n{notes}")
-    parts.append(types.Part.from_text(text="\n\n".join(text)))
+        request_text.append(f"CHANNEL-SPECIFIC INSPECTION NOTES:\n{notes}")
+    parts.append(types.Part.from_text(text="\n\n".join(request_text)))
 
+    instruction = _QC_SYSTEM
+    if require_no_face:
+        instruction += _NO_FACE_QC_ADDENDUM
+    if require_object_match:
+        instruction += _OBJECT_QC_ADDENDUM
+    if require_continuity:
+        instruction += _CONTINUITY_QC_ADDENDUM
+    if require_first_frame:
+        instruction += _FIRST_FRAME_QC_ADDENDUM
     client = genai.Client(api_key=GEMINI_API_KEY)
-    cfg = types.GenerateContentConfig(
-        system_instruction=(
-            _QC_SYSTEM + _NO_FACE_QC_ADDENDUM if require_no_face else _QC_SYSTEM
-        ),
+    config = types.GenerateContentConfig(
+        system_instruction=instruction,
         response_mime_type="application/json",
         temperature=0.1,
     )
-    last_err = None
+    last_error = None
     for model in (QC_MODEL, QC_MODEL_FALLBACK):
         for attempt in range(1, max_tries + 1):
             try:
-                resp = client.models.generate_content(model=model, contents=parts, config=cfg)
-                return _parse_json(resp.text or "")
-            except Exception as e:
-                last_err = e
-                msg = str(e)
-                bad_json = isinstance(e, json.JSONDecodeError)
-                transient = any(s in msg for s in
-                                ("503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
-                                 "INTERNAL", "deadline"))
+                response = client.models.generate_content(
+                    model=model, contents=parts, config=config
+                )
+                return _parse_json(response.text or "")
+            except Exception as error:
+                last_error = error
+                message = str(error)
+                bad_json = isinstance(error, json.JSONDecodeError)
+                transient = any(value in message for value in (
+                    "503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
+                    "INTERNAL", "deadline",
+                ))
                 if (transient or bad_json) and attempt < max_tries:
-                    wait = 3 if bad_json else min(5 * attempt, 15)
-                    logger.warning(f"⚠️ QC {model} geçici hata ({msg[:60]}…) — {wait}s sonra tekrar")
-                    time.sleep(wait)
+                    time.sleep(3 if bad_json else min(5 * attempt, 15))
                     continue
-                logger.warning(f"⚠️ QC {model} başarısız: {msg[:120]}")
-                break  # yedek modele geç
-    logger.warning(f"⚠️ QC denetimi yapılamadı ({last_err}) — klip DENETİMSİZ kabul ediliyor")
+                logger.warning(f"⚠️ QC {model} başarısız: {message[:120]}")
+                break
+    logger.warning(f"⚠️ QC denetimi yapılamadı ({last_error})")
     return None
 
 
 # ─── 2) Klip denetimi + karar ──────────────────────────────────────────────────
 
-def _decide(review: dict, qc: dict, has_ref: bool) -> tuple[str, list[str]]:
-    """Gemini kararını pass/fail'e çevir. Nedenler insan-okur (log + Telegram)."""
+def _decide(review: dict, qc: dict, has_ref: bool,
+            shot_n: int = 1) -> tuple[str, list[str]]:
     reasons: list[str] = []
+    unevaluated: list[str] = []
     if review.get("anatomy_ok") is False:
         reasons.append("anatomi bozuk")
     if has_ref and review.get("face_match") is False:
@@ -255,29 +345,60 @@ def _decide(review: dict, qc: dict, has_ref: bool) -> tuple[str, list[str]]:
     if review.get("forbidden_elements") is True:
         reasons.append("prompt'un yasakladığı öğe görünüyor")
     if qc.get("require_no_face"):
-        face_present = review.get("face_present")
-        if type(face_present) is not bool:
-            reasons.append("zorunlu yüz görünürlüğü alanı doğrulanamadı")
-        elif face_present:
+        value = review.get("face_present")
+        if type(value) is not bool:
+            unevaluated.append("zorunlu yüz görünürlüğü alanı doğrulanamadı")
+        elif value:
             reasons.append("örneklenen karelerde insan yüzü görünüyor")
+    if qc.get("require_object_match"):
+        value = review.get("object_match")
+        if type(value) is not bool:
+            unevaluated.append("zorunlu obje kimliği alanı doğrulanamadı")
+        elif not value:
+            reasons.append("obje referansla aynı fiziksel obje değil")
+    if qc.get("require_continuity") and 2 <= int(shot_n) <= 4:
+        value = review.get("continuity_ok")
+        if type(value) is not bool:
+            unevaluated.append("zorunlu çekimler arası süreklilik alanı doğrulanamadı")
+        elif not value:
+            reasons.append("çekimler arası tezgâh, ışık veya obje-durumu sürekliliği bozuk")
+    if qc.get("require_first_frame") and int(shot_n) == 1:
+        value = review.get("first_frame_ok")
+        if type(value) is not bool:
+            unevaluated.append("zorunlu açılış karesi alanı doğrulanamadı")
+        elif not value:
+            reasons.append("izleyici açılış karesinde imkânsız özelliği okuyamıyor")
     score = review.get("artifact_score")
     if isinstance(score, (int, float)) and score >= qc["artifact_threshold"]:
         reasons.append(f"artifact skoru {score}/10 (eşik {qc['artifact_threshold']})")
+    if unevaluated:
+        return "hold", [*reasons, *unevaluated]
     return ("fail" if reasons else "pass"), reasons
 
 
 def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
-                qc: dict) -> tuple[dict | None, str, list[str], list[Path]]:
-    """Bir klibi denetle. Dönüş: (gemini_kararı|None, 'pass'|'fail'|'skip', nedenler, kareler).
-    Legacy 'skip' klibi korur; require_no_face aynı hatayı fail-closed RED yapar."""
+                qc: dict, *, object_ref: bytes | None = None,
+                previous_frame: Path | None = None,
+                opening_frame: Path | None = None) -> tuple[dict | None, str, list[str], list[Path]]:
     clip_path = Path(clip_path)
+    shot_n = int(shot.get("n") or 0)
+    mandatory = bool(
+        qc.get("require_no_face") or qc.get("require_object_match")
+        or (qc.get("require_continuity") and 2 <= shot_n <= 4)
+        or (qc.get("require_first_frame") and shot_n == 1)
+    )
     frames = ffmpeg_tools.sample_frames(
         clip_path, count=int(qc["frames"]), width=int(qc["frame_width"]),
         out_dir=clip_path.parent / "qc", prefix=clip_path.stem,
     )
     if not frames:
-        verdict = "fail" if qc.get("require_no_face") else "skip"
-        return None, verdict, ["denetim karesi çıkarılamadı"], []
+        return None, ("hold" if mandatory else "skip"), ["denetim karesi çıkarılamadı"], []
+    if qc.get("require_object_match") and object_ref is None:
+        return None, "hold", ["zorunlu obje referansı indirilemedi"], frames
+    if qc.get("require_continuity") and 2 <= shot_n <= 4 and previous_frame is None:
+        return None, "hold", ["önceki onaylı çekimin son karesi çıkarılamadı"], frames
+    if qc.get("require_first_frame") and shot_n == 1 and opening_frame is None:
+        return None, "hold", ["izleyici açılış karesi çıkarılamadı"], frames
     ref_face = (
         _fetch_ref_face(bible, shot)
         if shot.get("characters") and not qc.get("require_no_face") else None
@@ -285,29 +406,93 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
     review = _review_frames(
         frames, ref_face, prompt, str(qc.get("notes") or ""),
         require_no_face=bool(qc.get("require_no_face")),
+        object_ref=object_ref, previous_frame=previous_frame,
+        opening_frame=opening_frame,
+        require_object_match=bool(qc.get("require_object_match")),
+        require_continuity=bool(qc.get("require_continuity") and 2 <= shot_n <= 4),
+        require_first_frame=bool(qc.get("require_first_frame") and shot_n == 1),
     )
     if review is None:
-        verdict = "fail" if qc.get("require_no_face") else "skip"
-        reason = (
-            "zorunlu yüz görünürlüğü denetimi başarısız"
-            if qc.get("require_no_face")
-            else "Gemini denetimi başarısız (klip denetimsiz kabul edildi)"
-        )
-        return None, verdict, [reason], frames
-    verdict, reasons = _decide(review, qc, has_ref=ref_face is not None)
+        if qc.get("require_no_face"):
+            reason = "zorunlu yüz görünürlüğü ve diğer QC alanları denetlenemedi"
+        elif mandatory:
+            reason = "zorunlu QC alanları denetlenemedi"
+        else:
+            reason = "Gemini denetimi başarısız (klip denetimsiz kabul edildi)"
+        return None, ("hold" if mandatory else "skip"), [reason], frames
+    if not isinstance(review, dict):
+        reason = "QC yanıtı zorunlu JSON nesnesi değil"
+        return None, ("hold" if mandatory else "skip"), [reason], frames
+    verdict, reasons = _decide(review, qc, ref_face is not None, shot_n)
     return review, verdict, reasons, frames
 
 
 # ─── 3) Regen döngüsü ──────────────────────────────────────────────────────────
 
-def strengthen_prompt(prompt: str, fix_notes: list[str]) -> str:
-    """Reddedilen üretimin fix_notes'larını prompt'a zorunlu-düzeltme bloğu olarak ekle."""
-    notes = [n.strip() for n in (fix_notes or []) if n and n.strip()]
-    if not notes:
-        notes = ["render all human figures with strictly correct anatomy: one head facing "
-                 "a natural direction, two arms, two legs, five fingers per hand"]
-    block = "CRITICAL CORRECTIONS — the previous take FAILED quality control. You MUST fix:\n" \
-            + "\n".join(f"- {n}" for n in notes)
+_NEGATIVE_CORRECTION = re.compile(
+    r"\b(?:no|not|never|without|don'?t|doesn'?t|isn'?t|aren'?t|cannot|can'?t|"
+    r"won'?t|shouldn'?t|mustn'?t|missing|extra|wrong|bad|fail(?:ed|ure)?|"
+    r"avoid|omit|exclude|forbid(?:den)?)\b", re.IGNORECASE,
+)
+_IMPERATIVE_STARTS = (
+    "keep", "show", "render", "frame", "match", "continue", "open", "maintain",
+    "preserve", "use", "hold", "place", "make", "display", "fill", "light",
+)
+
+
+def positive_correction(issue: str) -> str:
+    """Turn one issue into one positive imperative without copying negative prose."""
+    raw = " ".join(str(issue or "").strip().split())
+    lowered = raw.lower()
+    if any(word in lowered for word in ("face", "yüz")):
+        return ("Frame only the hands, forearms, object, and workbench, with the face "
+                "outside the frame.")
+    if any(word in lowered for word in ("audio", "music", "speech", "foley", "ses", "müzik")):
+        return ("Keep the soundtrack limited to natural foley from the visible hands, "
+                "object, material, and workbench.")
+    if any(word in lowered for word in (
+        "object", "obje", "shape", "colour", "color", "scale", "marking", "reference",
+    )):
+        return ("Match the reference object's exact shape, colour, scale, material, and "
+                "distinguishing markings in every frame.")
+    if any(word in lowered for word in (
+        "continu", "bench", "light", "lineage", "state", "tezg", "sürekl",
+    )):
+        return ("Continue from the established bench, lighting, object position, and "
+                "transformation state shown in the previous shot.")
+    if any(word in lowered for word in ("opening", "first frame", "ilk kare", "açılış")):
+        return ("Open with the impossible property visibly active and readable as the "
+                "object fills most of the frame.")
+    if any(word in lowered for word in (
+        "anatom", "hand", "finger", "limb", "head", "neck", "parmak", "el ",
+    )):
+        return ("Render every human figure with natural anatomy, one head, two arms, two "
+                "legs, and five fingers on each hand.")
+    if any(word in lowered for word in ("text", "watermark", "caption", "logo", "yazı")):
+        return "Show a clean workshop image filled only with natural scene detail."
+    candidate = raw.rstrip(".!?")
+    if (candidate and not _NEGATIVE_CORRECTION.search(candidate)
+            and candidate.lower().startswith(_IMPERATIVE_STARTS)
+            and not re.search(r"[.!?;:]", candidate)):
+        return candidate + "."
+    return "Render a coherent realistic take with stable geometry, lighting, materials, and motion."
+
+
+def strengthen_prompt(prompt: str, fix_notes: list[str], *,
+                      structured: bool = False) -> str:
+    """Keep legacy bytes by default; ROCK 3 opts into positive structured rewrites."""
+    if not structured:
+        notes = [n.strip() for n in (fix_notes or []) if n and n.strip()]
+        if not notes:
+            notes = ["render all human figures with strictly correct anatomy: one head facing "
+                     "a natural direction, two arms, two legs, five fingers per hand"]
+        block = "CRITICAL CORRECTIONS — the previous take FAILED quality control. You MUST fix:\n" \
+                + "\n".join(f"- {note}" for note in notes)
+        return f"{prompt.rstrip()}\n\n{block}"
+    source = [note for note in (fix_notes or []) if str(note or "").strip()] or ["anatomy"]
+    corrections = list(dict.fromkeys(positive_correction(note) for note in source))
+    block = "QUALITY TARGETS — render this take with:\n" \
+            + "\n".join(f"- {correction}" for correction in corrections)
     return f"{prompt.rstrip()}\n\n{block}"
 
 
@@ -322,6 +507,132 @@ def _log_event(slug: str, entry: dict) -> None:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except Exception as e:
         logger.warning(f"⚠️ QC log yazılamadı: {e}")
+
+
+def allocate_regen_rounds(shots: list[int], spent: float, cap: float,
+                          estimate: float, max_per_shot: int) -> list[int]:
+    """Pure round-robin allocation: every shot's first token precedes seconds."""
+    if estimate <= 0 or cap <= spent or max_per_shot <= 0:
+        return []
+    tokens = int((float(cap) - float(spent)) // float(estimate))
+    allocation = []
+    ordered = [int(shot) for shot in shots]
+    for _round in range(int(max_per_shot)):
+        for shot in ordered:
+            if len(allocation) >= tokens:
+                return allocation
+            allocation.append(shot)
+    return allocation
+
+
+class CapAwareRegenAllocator:
+    """Conservative two-pass token allocator for the tek-obje format.
+
+    It protects every not-yet-authorized main shot and one first-round regen for
+    every not-yet-complete shot before granting surplus second-round tokens.
+    """
+
+    def __init__(self, hard_cap, estimates: dict[int, float], max_per_shot: int):
+        self.hard_cap = hard_cap
+        self.estimates = {int(key): float(value) for key, value in estimates.items()}
+        self.max_per_shot = max(0, int(max_per_shot))
+        self._main_authorized: set[int] = set()
+        self._complete: set[int] = set()
+        self._granted = {shot: 0 for shot in self.estimates}
+
+    def mark_main_authorized(self, shot: int) -> None:
+        self._main_authorized.add(int(shot))
+
+    def mark_complete(self, shot: int) -> None:
+        self._complete.add(int(shot))
+
+    def request(self, shot: int, _attempt: int | None = None) -> bool:
+        shot = int(shot)
+        estimate = self.estimates.get(shot)
+        used = self._granted.get(shot, 0)
+        requested_round = used + 1 if _attempt is None else int(_attempt)
+        if (estimate is None or used >= self.max_per_shot
+                or requested_round != used + 1):
+            return False
+        remaining = self.hard_cap.remaining
+        if remaining is None:
+            return False
+        protected_main = sum(
+            value for candidate, value in self.estimates.items()
+            if candidate not in self._main_authorized
+        )
+        protected_first_round = 0.0
+        if requested_round >= 2:
+            protected_first_round = sum(
+                value for candidate, value in self.estimates.items()
+                if candidate != shot and candidate not in self._complete
+                and self._granted.get(candidate, 0) == 0
+            )
+        if remaining + 1e-9 < estimate + protected_main + protected_first_round:
+            return False
+        self._granted[shot] = self._granted.get(shot, 0) + 1
+        return True
+
+
+def content_sha256(path: str | Path) -> str | None:
+    try:
+        digest = hashlib.sha256()
+        with open(path, "rb") as handle:
+            for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                digest.update(chunk)
+        return digest.hexdigest()
+    except OSError:
+        return None
+
+
+def qc_pass_exists(slug: str, episode: int, shot: int,
+                   content_hash: str | None, qc: dict | None = None) -> bool:
+    """Return whether this exact clip passed every currently enabled QC gate."""
+    if not content_hash:
+        return False
+    try:
+        lines = (data_dir(slug) / "qc_log.jsonl").read_text(encoding="utf-8").splitlines()
+    except OSError:
+        return False
+    for line in reversed(lines):
+        try:
+            event = json.loads(line)
+            if (event.get("event") != "qc_pass"
+                    or int(event.get("episode")) != int(episode)
+                    or int(event.get("shot")) != int(shot)
+                    or event.get("content_sha256") != content_hash):
+                continue
+            required = qc or {}
+            if required.get("require_no_face") and event.get("face_present") is not False:
+                continue
+            if required.get("require_object_match") and event.get("object_match") is not True:
+                continue
+            if required.get("require_continuity") and 2 <= int(shot) <= 4:
+                if event.get("continuity_ok") is not True:
+                    continue
+            if required.get("require_first_frame") and int(shot) == 1:
+                if event.get("first_frame_ok") is not True:
+                    continue
+            return True
+        except (TypeError, ValueError, json.JSONDecodeError):
+            continue
+    return False
+
+
+def log_scene_cut_scan(slug: str, episode: int, shot: int,
+                       clip_path: str | Path) -> dict:
+    timestamps = ffmpeg_tools.detect_scene_cuts(clip_path, threshold=0.2, height=270)
+    event = {
+        "event": "scene_cut_scan", "episode": int(episode), "shot": int(shot),
+        "threshold": 0.2, "height": 270,
+        "count": None if timestamps is None else len(timestamps),
+        "timestamps": timestamps,
+        "status": "measure_error" if timestamps is None else "measured",
+        "gated": False,
+        "clip": Path(clip_path).name,
+    }
+    _log_event(slug, event)
+    return event
 
 
 def _clean_sidecars(clip_path: Path) -> None:
@@ -601,44 +912,64 @@ def qc_audio(path: str | Path) -> dict | None:
 
 
 def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
-            regen_fn, episode: int, budget: dict) -> tuple[Path | None, float, str]:
-    """Üretilmiş bir çekimi denetle; REDse regen_fn(güçlendirilmiş_prompt) ile yeniden
-    üret (çekim başına maks max_regens_per_shot, bölüm başına budget["left"]).
+            regen_fn, episode: int, budget: dict, *,
+            object_ref: bytes | None = None,
+            previous_clip: str | Path | None = None) -> tuple[Path | None, float, str]:
+    """Review and optionally regenerate one clip.
 
-    Dönüş: (kullanılacak_klip_yolu | None, regen'lerin ek kredisi,
-    ``"pass"|"skip"|"fail"``). Legacy görsel denetimde ``skip`` korunur; opt-in
-    zorunlu yüz ve ham-ses kapıları denetlenemezse ``fail`` olur.
-    None = çekim eşiği geçemedi → çağıran onu üretim-FAIL gibi işler (bölümden düşer).
-    Sözleşme: dönüşte clip_path adında dosya YA onaylıdır YA hiç yoktur — reddedilenler
-    *_qcfail*.mp4'e taşınır, idempotent 'atla' yolu asla bozuk klip devralmaz."""
+    ``hold`` means a mandatory gate could not be evaluated.  A confident ``fail``
+    may regenerate; a hold never spends another credit and never enters assembly.
+    """
     qc = qc_config(bible)
     if not qc:
         return Path(clip_path), 0.0, "pass"
     clip_path = Path(clip_path)
-    slug, n = bible.slug, shot.get("n")
+    slug, n = bible.slug, int(shot.get("n") or 0)
     extra_credits = 0.0
     all_fix_notes: list[str] = []
-    attempt = 0  # 0 = ilk üretim; 1..max = regen'ler
+    attempt = 0
+    current_prompt = prompt
+    allocator = budget.get("allocator")
     shot_regen_limit = int(qc["max_regens_per_shot"])
-    if "total" in budget and "shot_count" in budget:
+    if not budget.get("dynamic") and "total" in budget and "shot_count" in budget:
         try:
             shot_count = int(budget["shot_count"])
             if shot_count > 0:
                 fair_share = max(1, int(budget["total"]) // shot_count)
                 shot_regen_limit = min(shot_regen_limit, fair_share)
         except (TypeError, ValueError):
-            # Eski veya bozuk ek alanlar çekim başı mevcut davranışa geri döner.
             pass
+
+    previous_frame = None
+    if qc.get("require_continuity") and 2 <= n <= 4 and previous_clip:
+        previous_frame = ffmpeg_tools.extract_last_frame(
+            previous_clip,
+            clip_path.parent / "qc" / f"ep{int(episode):02d}_shot{n - 1:02d}_accepted_last.jpg",
+        )
 
     while True:
         review_try = 0
         review_retries = max(0, int(qc["qc_review_retries"]))
         frames: list[Path] = []
+        opening_frame = None
+        opening_metrics = None
+        if qc.get("require_first_frame") and n == 1:
+            opening_frame = ffmpeg_tools.extract_frame_at(
+                clip_path, bible.micro_trim,
+                clip_path.parent / "qc" / f"{clip_path.stem}_opening_{attempt}.jpg",
+                width=int(qc["frame_width"]),
+            )
+            if opening_frame:
+                opening_metrics = ffmpeg_tools.frame_metrics(opening_frame, width=270)
+
         audio_failure = False
         if qc.get("native_audio_review"):
             review, verdict, reasons, stem = review_raw_native_audio(
                 bible, shot, clip_path, episode, attempt
             )
+            if review is None:
+                verdict = "hold"
+                reasons = [*reasons, "zorunlu ham ses denetimi değerlendirilemedi"]
             if review is not None and review["has_foley"] is False:
                 budget["no_foley_count"] = int(budget.get("no_foley_count", 0)) + 1
             _log_event(slug, {
@@ -652,47 +983,124 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 "stem": stem.name if stem else None,
                 "clip": clip_path.name,
             })
-            audio_failure = verdict != "pass"
+            audio_failure = verdict == "fail"
 
-        if not audio_failure:
+        audio_hold = bool(qc.get("native_audio_review") and verdict == "hold")
+        if not audio_hold and not audio_failure:
             while True:
-                review, verdict, reasons, frames = review_clip(
-                    bible, shot, clip_path, prompt, qc
-                )
-                if qc.get("require_no_face"):
-                    face_present = (review or {}).get("face_present")
-                    if face_present is not False:
-                        verdict = "fail"
-                        gate_reason = (
-                            "örneklenen karelerde insan yüzü görünüyor"
-                            if face_present is True
-                            else "zorunlu yüz görünürlüğü alanı doğrulanamadı"
+                    review_kwargs = {}
+                    if qc.get("require_object_match"):
+                        review_kwargs["object_ref"] = object_ref
+                    if qc.get("require_continuity") and 2 <= n <= 4:
+                        review_kwargs["previous_frame"] = previous_frame
+                    if qc.get("require_first_frame") and n == 1:
+                        review_kwargs["opening_frame"] = opening_frame
+                    review, verdict, reasons, frames = review_clip(
+                        bible, shot, clip_path, current_prompt, qc, **review_kwargs
+                    )
+                    mandatory_visual = bool(
+                        qc.get("require_no_face")
+                        or qc.get("require_object_match")
+                        or (qc.get("require_continuity") and 2 <= n <= 4)
+                        or (qc.get("require_first_frame") and n == 1)
+                    )
+                    if mandatory_visual and verdict == "skip":
+                        verdict = "hold"
+                        reasons = [*reasons, "zorunlu görsel QC değerlendirilemedi"]
+                    event = {
+                        "event": "review", "episode": episode, "shot": n,
+                        "attempt": attempt, "review_try": review_try,
+                        "verdict": verdict, "reasons": reasons,
+                        "artifact_score": (review or {}).get("artifact_score"),
+                        "issues": (review or {}).get("issues"),
+                        "fix_notes": (review or {}).get("fix_notes"),
+                        "clip": clip_path.name,
+                    }
+                    if qc.get("require_no_face"):
+                        event["face_present"] = (review or {}).get("face_present")
+                    if qc.get("require_object_match"):
+                        event["object_match"] = (review or {}).get("object_match")
+                        event["object_notes"] = (review or {}).get("object_notes")
+                    if qc.get("require_continuity"):
+                        event["continuity_ok"] = (
+                            (review or {}).get("continuity_ok") if 2 <= n <= 4 else "n/a"
                         )
-                        if gate_reason not in reasons:
-                            reasons = [*reasons, gate_reason]
-                _log_event(slug, {
-                    "event": "review", "episode": episode, "shot": n, "attempt": attempt,
-                    "review_try": review_try, "verdict": verdict, "reasons": reasons,
-                    "artifact_score": (review or {}).get("artifact_score"),
-                    "issues": (review or {}).get("issues"),
-                    "fix_notes": (review or {}).get("fix_notes"),
-                    "clip": clip_path.name,
-                })
-                if verdict != "skip" or review_try >= review_retries:
-                    break
-                review_try += 1
-                wait = QC_REVIEW_RETRY_DELAY * review_try
-                logger.warning(
-                    f"⚠️ QC denetimi atlandı: çekim {n}, aynı klip "
-                    f"{wait:.2f}s sonra yeniden denenecek ({review_try}/{review_retries})"
-                )
-                time.sleep(wait)
+                        event["continuity_notes"] = (
+                            (review or {}).get("continuity_notes") if 2 <= n <= 4 else "n/a"
+                        )
+                    if qc.get("require_first_frame"):
+                        event["first_frame_ok"] = (
+                            (review or {}).get("first_frame_ok") if n == 1 else "n/a"
+                        )
+                        event["first_frame_notes"] = (
+                            (review or {}).get("first_frame_notes") if n == 1 else "n/a"
+                        )
+                        event["opening_frame_luma_contrast_proxy"] = (
+                            (opening_metrics or {}).get("luma_contrast_proxy") if n == 1 else "n/a"
+                        )
+                        event["opening_frame_sharpness_proxy"] = (
+                            (opening_metrics or {}).get("sharpness_proxy") if n == 1 else "n/a"
+                        )
+                    _log_event(slug, event)
+                    if verdict not in ("skip", "hold") or review_try >= review_retries:
+                        break
+                    review_try += 1
+                    wait = QC_REVIEW_RETRY_DELAY * review_try
+                    logger.warning(
+                        f"⚠️ QC denetimi sonuçsuz: çekim {n}, aynı klip "
+                        f"{wait:.2f}s sonra yeniden denenecek ({review_try}/{review_retries})"
+                    )
+                    time.sleep(wait)
+
+        if verdict == "hold":
+            held = clip_path.parent / f"{clip_path.stem}_qchold{attempt}{clip_path.suffix}"
+            try:
+                clip_path.replace(held)
+            except Exception as error:
+                logger.warning(f"⚠️ QC: beklemeye alınan klip taşınamadı ({error})")
+            _log_event(slug, {
+                "event": "qc_hold", "episode": episode, "shot": n,
+                "attempt": attempt, "reasons": reasons, "clip": held.name,
+            })
+            logger.error(f"⏸️ QC HOLD: çekim {n} zorunlu kapıda değerlendirilemedi")
+            return None, extra_credits, "hold"
 
         if verdict in ("pass", "skip"):
             if verdict == "pass":
                 score = (review or {}).get("artifact_score")
                 extra = f" (regen {attempt} sonrası)" if attempt else ""
                 logger.info(f"🔍 QC GEÇTİ: çekim {n}, artifact {score}/10{extra}")
+                pass_event = {
+                    "event": "qc_pass", "episode": episode, "shot": n,
+                    "attempt": attempt, "content_sha256": content_sha256(clip_path),
+                    "clip": clip_path.name,
+                }
+                if qc.get("require_no_face"):
+                    pass_event["face_present"] = (review or {}).get("face_present")
+                if qc.get("require_object_match"):
+                    pass_event["object_match"] = (review or {}).get("object_match")
+                    pass_event["object_notes"] = (review or {}).get("object_notes")
+                if qc.get("require_continuity"):
+                    pass_event["continuity_ok"] = (
+                        (review or {}).get("continuity_ok") if 2 <= n <= 4 else "n/a"
+                    )
+                    pass_event["continuity_notes"] = (
+                        (review or {}).get("continuity_notes") if 2 <= n <= 4 else "n/a"
+                    )
+                if qc.get("require_first_frame"):
+                    pass_event["first_frame_ok"] = (
+                        (review or {}).get("first_frame_ok") if n == 1 else "n/a"
+                    )
+                    pass_event["first_frame_notes"] = (
+                        (review or {}).get("first_frame_notes") if n == 1 else "n/a"
+                    )
+                    pass_event["opening_frame_luma_contrast_proxy"] = (
+                        (opening_metrics or {}).get("luma_contrast_proxy") if n == 1 else "n/a"
+                    )
+                    pass_event["opening_frame_sharpness_proxy"] = (
+                        (opening_metrics or {}).get("sharpness_proxy") if n == 1 else "n/a"
+                    )
+                _log_event(slug, pass_event)
                 if attempt:
                     _notify(f"🔍 *{bible.title}* ep{episode} çekim {n}: QC {attempt}. regen'de GEÇTİ "
                             f"(nedenler: {'; '.join(all_fix_notes[:3]) or 'anatomi'}) ✅")
@@ -713,16 +1121,17 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     f"Klip RED almadığı için kabul edildi. Neden: {reason_text}",
                     frames=frames,
                 )
+            if allocator is not None:
+                allocator.mark_complete(n)
             return clip_path, extra_credits, verdict
 
-        # ── RED ──
         logger.warning(f"🔍 QC RED: çekim {n} (deneme {attempt}): {'; '.join(reasons)}")
         if audio_failure:
             current_fix_notes = [
                 "Keep the soundtrack limited to natural foley from the visible hands, "
                 "object, material, and workbench."
             ]
-        elif qc.get("require_no_face") and (review or {}).get("face_present") is not False:
+        elif qc.get("require_no_face") and (review or {}).get("face_present") is True:
             current_fix_notes = [
                 "Frame only the hands, forearms, object, and workbench, with the face "
                 "outside the frame."
@@ -734,17 +1143,19 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         can_regen = (regen_fn is not None
                      and attempt < shot_regen_limit
                      and budget.get("left", 0) > 0)
-        # Reddedilen klip out_file adını BOŞALTIR (skip-yolu sözleşmesi)
+        if can_regen and allocator is not None:
+            can_regen = allocator.request(n, attempt + 1)
         rejected = clip_path.parent / f"{clip_path.stem}_qcfail{attempt}{clip_path.suffix}"
         try:
             clip_path.replace(rejected)
-        except Exception as e:
-            logger.warning(f"⚠️ QC: reddedilen klip taşınamadı ({e})")
+        except Exception as error:
+            logger.warning(f"⚠️ QC: reddedilen klip taşınamadı ({error})")
 
         if not can_regen:
             why = ("regen hakkı bitti" if regen_fn is not None and budget.get("left", 0) <= 0
                    else "çekim adil payı doldu"
                    if regen_fn is not None and shot_regen_limit < int(qc["max_regens_per_shot"])
+                   else "dinamik kredi payı doldu" if allocator is not None
                    else "çekim regen limiti doldu" if regen_fn is not None else "regen kapalı")
             logger.error(f"❌ QC: çekim {n} eşiği geçemedi ({why}) — çekim bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "final_reject", "episode": episode, "shot": n,
@@ -758,22 +1169,35 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         budget["left"] -= 1
         attempt += 1
-        fixed_prompt = strengthen_prompt(prompt, all_fix_notes)
+        current_prompt = strengthen_prompt(
+            prompt, all_fix_notes,
+            structured=bool(qc.get("structured_positive_corrections")),
+        )
         logger.info(f"♻️ QC regen {attempt}/{shot_regen_limit}: çekim {n} "
-                    f"düzeltilmiş prompt + yeni seed ile yeniden üretiliyor "
+                    f"yapılandırılmış olumlu prompt ile yeniden üretiliyor "
                     f"(bölüm hakkı: {budget['left']})")
-        _log_event(slug, {"event": "regen", "episode": episode, "shot": n,
-                          "attempt": attempt, "fix_notes": all_fix_notes})
+        regen_event = {
+            "event": "regen", "episode": episode, "shot": n, "attempt": attempt,
+        }
+        if qc.get("structured_positive_corrections"):
+            regen_event["corrections"] = [
+                positive_correction(note) for note in all_fix_notes
+            ]
+        else:
+            regen_event["fix_notes"] = list(all_fix_notes)
+        _log_event(slug, regen_event)
         _clean_sidecars(clip_path)
 
         result = None
         try:
-            result = regen_fn(fixed_prompt)
-        except Exception as e:
-            logger.warning(f"⚠️ QC regen üretimi hata verdi: {e}")
+            result = regen_fn(current_prompt)
+        except Exception as error:
+            logger.warning(f"⚠️ QC regen üretimi hata verdi: {error}")
         if result and result.get("credits"):
             extra_credits += float(result["credits"])
-        if not (result and result.get("url") and download_file(result["url"], clip_path)
+        download_kwargs = {"hardened": True} if qc.get("harden_downloads") else {}
+        if not (result and result.get("url")
+                and download_file(result["url"], clip_path, **download_kwargs)
                 and clip_path.exists() and clip_path.stat().st_size > 0):
             logger.error(f"❌ QC regen üretimi başarısız — çekim {n} bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "regen_failed", "episode": episode, "shot": n,
@@ -782,4 +1206,3 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     f"yeniden üretim de başarısız → çekim bölümden ÇIKARILDI (elle bak).",
                     frames=frames)
             return None, extra_credits, "fail"
-        # döngü başa döner → yeni klip denetlenir

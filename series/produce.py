@@ -12,6 +12,7 @@ import json
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 from urllib.parse import urlparse
 
 from core.config import logger
@@ -65,6 +66,21 @@ class ChainDecision:
     error: str | None = None
 
 
+@dataclass(frozen=True)
+class ProduceResult:
+    """Typed production outcome used by the scheduler's fail-closed state machine."""
+
+    status: Literal["ok", "qc_hold", "generation_fail"]
+    path: Path | None = None
+    reason: str | None = None
+
+    def __post_init__(self):
+        if self.status == "ok" and self.path is None:
+            raise ValueError("ok ProduceResult requires a path")
+        if self.status != "ok" and self.path is not None:
+            raise ValueError("non-ok ProduceResult cannot carry a final path")
+
+
 def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
                       available_url: str | None) -> ChainDecision:
     """Decide current input/reset and look-ahead frame capture without side effects.
@@ -106,6 +122,9 @@ def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
 
 def episode_spent(slug: str, number: int) -> float | None:
     """Maliyet izleyicisinden bu serinin bu bölüm toplam kredisini oku."""
+    bible = Bible.load(slug)
+    if bible and bible.data["series"].get("durable_credit_ledger"):
+        return credit_gate.episode_spent(slug, number)
     path = cost_tracker.COST_LOG
     if not path.exists():
         return 0.0
@@ -134,6 +153,65 @@ def episode_spent(slug: str, number: int) -> float | None:
             logger.error(f"❌ Geçersiz kredi kaydı: {entry}")
             return None
     return total
+
+
+def episode_credit_cap(bible: Bible) -> int:
+    """Use a reviewed series cap when configured; legacy series keep the env cap."""
+    value = bible.data["series"].get("credit_hard_cap_value")
+    if value is None:
+        return credit_gate.episode_cap()
+    try:
+        cap = int(value)
+    except (TypeError, ValueError):
+        return 0
+    return cap if cap > 0 else 0
+
+
+def series_monthly_credit_cap(bible: Bible) -> int | None:
+    """Return an opt-in per-series monthly cap; legacy series remain global."""
+    value = bible.data["series"].get("credit_monthly_cap_value")
+    if value is None:
+        return None
+    try:
+        cap = int(value)
+    except (TypeError, ValueError):
+        return 0
+    return cap if cap > 0 else 0
+
+
+def _record_episode_cost(bible: Bible, number: int, operation: str,
+                         model: str, credits: float | int | None) -> bool:
+    """Write the legacy cost log and, when opted in, the durable episode ledger."""
+    if credits is None:
+        return True
+    if bible.data["series"].get("durable_credit_ledger"):
+        if not credit_gate.record_episode_spend(bible.slug, number, float(credits)):
+            return False
+    cost_tracker.log_cost(f"series:{bible.slug}", operation, model, credits)
+    return True
+
+
+def _revalidate_cached_shot(slug: str, episode: int, shot: int,
+                            path: Path, qc: dict | None = None) -> bool:
+    """Bind a cache hit to valid media and an exact content-hash QC pass."""
+    content_hash = critic.content_sha256(path)
+    media_ok = ffmpeg_tools.validate_media(path)
+    pass_ok = critic.qc_pass_exists(slug, episode, shot, content_hash, qc)
+    if media_ok and pass_ok:
+        return True
+    suffix = (content_hash or "unreadable")[:12]
+    stale = path.with_name(f"{path.stem}_stale_{suffix}{path.suffix}")
+    serial = 1
+    while stale.exists():
+        stale = path.with_name(f"{path.stem}_stale_{suffix}_{serial}{path.suffix}")
+        serial += 1
+    critic._clean_sidecars(path)
+    path.replace(stale)
+    logger.warning(
+        f"⚠️ Bayat çekim cache'i ayrıldı: {stale.name} "
+        f"(media_ok={media_ok}, qc_hash_pass={pass_ok})"
+    )
+    return False
 
 
 def _qc_regen_allowed(slug: str, number: int) -> bool:
@@ -209,16 +287,17 @@ def _reserve_plan_music(bible: Bible, plan: dict,
     tavanın rezervasyonu engellediğini belirtir.
     """
     music_prompt = str(plan.get("music") or "").strip()
-    if hard_cap is None or not bible.music or not music_prompt:
+    if (hard_cap is None or not bible.music or not music_prompt
+            or bible.data["series"].get("credit_excludes_music")):
         return None
     if not hard_cap.authorize("music", "suno"):
         return False
     # Suno creditsConsumed döndürmüyor. Üretim daha sonra başarısız olsa bile
     # korumacı tahmin harcanmış sayılır.
-    cost_tracker.log_cost(
-        f"series:{bible.slug}", f"suno_estimate_ep{number}", "suno",
-        hard_cap.last_estimate,
-    )
+    if not _record_episode_cost(
+        bible, number, f"suno_estimate_ep{number}", "suno", hard_cap.last_estimate
+    ):
+        return False
     return True
 
 
@@ -285,15 +364,17 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
             # davranış ESKİSİYLE AYNI (Lyria → ambient bed).
             music_prompt = str(plan.get("music") or "").strip() or None
             ep_title = str(plan.get("episode", {}).get("title") or "").strip()
-            if music_prompt and hard_cap is not None and not music_reserved:
+            if (music_prompt and hard_cap is not None and not music_reserved
+                    and not bible.data["series"].get("credit_excludes_music")):
                 if not hard_cap.authorize("music", "suno"):
                     return None
                 # Doğrudan çağrılarda ön rezervasyon yoktur; eski güvenli davranış
                 # korunur ve Suno tahmini burada bir kez ayrılır.
-                cost_tracker.log_cost(
-                    f"series:{bible.slug}", f"suno_estimate_ep{number}", "suno",
+                if not _record_episode_cost(
+                    bible, number, f"suno_estimate_ep{number}", "suno",
                     hard_cap.last_estimate,
-                )
+                ):
+                    return None
             music_path = generate_background_music(ch, custom_prompt=music_prompt,
                                                    output_path=music_file, title=ep_title)
             if music_path and Path(music_path).exists():
@@ -404,7 +485,7 @@ def _upscale_master(bible: Bible, number: int, src: Path) -> Path:
         spent = episode_spent(bible.slug, number)
         duration = ffmpeg_tools.get_video_duration(src) or 40.0
         projected = 8 * duration
-        cap = credit_gate.episode_cap()
+        cap = episode_credit_cap(bible)
         if spent is None or spent + projected > cap:
             shown = "bilinmiyor" if spent is None else f"{spent:g}"
             logger.warning(
@@ -606,6 +687,15 @@ def _generate_uploaded_reference(
     """Cost-authorize one NB2 image, then download and publish it through ImgBB."""
     if not hard_cap.authorize("reference_image", "nano-banana-2"):
         return None
+    # Image polling exposes no actual charge, so persist the conservative amount
+    # before entering the paid call. A crash cannot erase this episode spend.
+    estimate = hard_cap.last_estimate
+    if estimate is not None:
+        if not _record_episode_cost(
+            bible, number, f"{operation}_estimate_ep{number}",
+            "nano-banana-2", estimate,
+        ):
+            return None
     generated_url = generate_image(
         prompt,
         model="nano-banana-2",
@@ -614,15 +704,6 @@ def _generate_uploaded_reference(
     if not generated_url:
         logger.error(f"❌ {operation}: Nano Banana 2 referansı üretilemedi")
         return None
-
-    # Image polling does not expose creditsConsumed, so the authorized conservative
-    # estimate is the durable episode-visible charge.
-    estimate = hard_cap.last_estimate
-    if estimate is not None:
-        cost_tracker.log_cost(
-            f"series:{bible.slug}", f"{operation}_estimate_ep{number}",
-            "nano-banana-2", estimate,
-        )
 
     save_path.parent.mkdir(parents=True, exist_ok=True)
     downloaded = download_file(generated_url, save_path)
@@ -705,7 +786,10 @@ def ensure_episode_refs(
         if spent is None:
             logger.error("❌ Referans kredi kapısı: bölüm harcaması okunamadı")
             return False
-        hard_cap = credit_gate.HardCreditCap(credit_gate.episode_cap(), spent)
+        hard_cap = credit_gate.HardCreditCap(
+            episode_credit_cap(bible), spent,
+            durable_ledger=bool(bible.data["series"].get("durable_credit_ledger")),
+        )
 
     if missing_env:
         env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
@@ -862,8 +946,8 @@ def _doctrine_gate(meta: SeriesMeta) -> str | None:
     return digest
 
 
-def produce_episode(slug: str, plan, dry_run: bool = False,
-                    chain_start_url: str | None = None) -> Path | None:
+def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
+                          chain_start_url: str | None = None) -> Path | ProduceResult | None:
     """Bir bölümü üret: çekimler → indir → birleştir → (anlatım/müzik) → rapor.
 
     Çok-motorlu: her çekim bible.engine (veya shot['engine']) ile 'omni' VEYA ucuz
@@ -961,9 +1045,14 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     )
     hard_cap = None
     if hard_cap_enabled and not dry_run:
+        cap_value = episode_credit_cap(bible)
+        if cap_value <= 0:
+            logger.error("❌ Kredi sert tavanı pozitif tam sayı olmalı")
+            return None
         hard_cap = credit_gate.HardCreditCap(
-            cap=credit_gate.episode_cap(),
+            cap=cap_value,
             spent=episode_spent(slug, number),
+            durable_ledger=bool(series_cfg.get("durable_credit_ledger")),
         )
         if hard_cap.spent is None:
             logger.error("❌ Kredi sert tavanı: mevcut bölüm harcaması okunamadı")
@@ -999,15 +1088,44 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     qc_cfg = critic.qc_config(bible)
     qc_budget = None
     if qc_cfg and not dry_run:
+        dynamic_regens = bool(
+            plan.get("format_version") == TEK_OBJE_FORMAT
+            or qc_cfg.get("dynamic_regens")
+        )
         per_ep = qc_cfg.get("max_regens_per_episode")
-        total_budget = int(per_ep) if per_ep is not None else len(plan["shots"])
+        total_budget = (
+            len(plan["shots"]) * int(qc_cfg["max_regens_per_shot"])
+            if dynamic_regens else
+            int(per_ep) if per_ep is not None else len(plan["shots"])
+        )
         qc_budget = {
             "left": total_budget,
             "total": total_budget,
             "shot_count": len(plan["shots"]),
         }
+        if dynamic_regens and hard_cap is not None:
+            qc_budget["dynamic"] = True
+            estimates = {}
+            for candidate in plan["shots"]:
+                candidate_engine = (candidate.get("engine") or default_engine).lower()
+                estimate = cost_tracker.conservative_credit_estimate(
+                    "qc_regen", candidate_engine, candidate.get("duration")
+                )
+                if estimate is not None:
+                    estimates[int(candidate["n"])] = float(estimate)
+            qc_budget["allocator"] = critic.CapAwareRegenAllocator(
+                hard_cap, estimates, int(qc_cfg["max_regens_per_shot"])
+            )
         logger.info(f"🔍 Critic-QC AÇIK — kare={qc_cfg['frames']}, eşik={qc_cfg['artifact_threshold']}, "
-                    f"çekim regen≤{qc_cfg['max_regens_per_shot']}, bölüm regen≤{qc_budget['left']}")
+                    f"çekim regen≤{qc_cfg['max_regens_per_shot']}, "
+                    f"regen modu={'dinamik-cap' if dynamic_regens else qc_budget['left']}")
+
+    object_ref_bytes = None
+    if qc_cfg and qc_cfg.get("require_object_match") and not dry_run:
+        object_ref_bytes = critic.fetch_object_reference(plan)
+        if object_ref_bytes is None:
+            logger.error("⏸️ QC HOLD: [REFERENCE OBJECT] indirilemedi")
+            return ProduceResult("qc_hold", reason="reference object could not be downloaded")
 
     if not dry_run:
         check_credit()  # ücretsiz okuma — başlangıç bakiyesi loglanır
@@ -1018,6 +1136,7 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
     running = 0.0
     previous_shot_dropped = False
+    previous_accepted_clip: Path | None = None
 
     for shot_index, shot in enumerate(plan["shots"]):
         n = shot.get("n")
@@ -1043,22 +1162,34 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                 return None
         chain_url = chain_decision.start_url
 
-        # İdempotent: bu çekim zaten üretildiyse atla; zincir için son karesini yine de al
+        # Idempotent legacy cache, or ROCK 3 media+content-hash QC revalidation.
         if not dry_run and out_file.exists() and out_file.stat().st_size > 0:
-            logger.info(f"⏭️ Çekim {n} zaten var, atlanıyor: {out_file.name}")
-            prep = _prep_shot_clip(bible, plan, shot, out_file)
-            shot_offsets[int(n)] = running
-            running += ffmpeg_tools.get_video_duration(prep)
-            shot_files.append(prep)
-            if chain_decision.capture_last_frame:
-                lf = ffmpeg_tools.extract_last_frame(out_file)
-                if lf:
-                    up = upload_to_imgbb(lf)
-                    if up:
-                        chain_url = up
-                        last_frame_url = up
-            previous_shot_dropped = False
-            continue
+            cache_ok = True
+            if qc_cfg and qc_cfg.get("revalidate_cache"):
+                cache_ok = _revalidate_cached_shot(
+                    slug, number, int(n), out_file, qc_cfg
+                )
+            if cache_ok:
+                logger.info(f"⏭️ Çekim {n} doğrulanmış cache'de: {out_file.name}")
+                if qc_cfg and qc_cfg.get("scene_cut_scan"):
+                    critic.log_scene_cut_scan(slug, number, int(n), out_file)
+                prep = _prep_shot_clip(bible, plan, shot, out_file)
+                shot_offsets[int(n)] = running
+                running += ffmpeg_tools.get_video_duration(prep)
+                shot_files.append(prep)
+                previous_accepted_clip = out_file
+                if qc_budget and qc_budget.get("allocator"):
+                    qc_budget["allocator"].mark_main_authorized(int(n))
+                    qc_budget["allocator"].mark_complete(int(n))
+                if chain_decision.capture_last_frame:
+                    lf = ffmpeg_tools.extract_last_frame(out_file)
+                    if lf:
+                        up = upload_to_imgbb(lf)
+                        if up:
+                            chain_url = up
+                            last_frame_url = up
+                previous_shot_dropped = False
+                continue
 
         # ── OMNI çekimi (karakter + ses tutarlılığı) ──────────────────────────
         if shot_engine == "omni":
@@ -1099,22 +1230,34 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                     )
                 ),
             )
+            if qc_budget and qc_budget.get("allocator"):
+                qc_budget["allocator"].mark_main_authorized(int(n))
             if hard_cap is not None and hard_cap.blocked:
                 return None
             credits, status, video_url = None, "FAIL", ""
             if result and result.get("url"):
                 video_url = result["url"]
                 credits = result.get("credits")
-                if download_file(video_url, out_file):
-                    status = "ok"
+                if (credits is not None and hard_cap is not None
+                        and series_cfg.get("durable_credit_ledger")):
+                    hard_cap.settle_last(credits)
                 if credits is not None:
-                    cost_tracker.log_cost(f"series:{slug}", f"omni_ep{number}_shot{n}",
-                                          "gemini-omni-video", credits)
+                    if not _record_episode_cost(
+                        bible, number, f"omni_ep{number}_shot{n}",
+                        "gemini-omni-video", credits,
+                    ):
+                        return None
                 elif hard_cap is not None and hard_cap.last_estimate is not None:
-                    cost_tracker.log_cost(
-                        f"series:{slug}", f"omni_estimate_ep{number}_shot{n}",
+                    if not _record_episode_cost(
+                        bible, number, f"omni_estimate_ep{number}_shot{n}",
                         "gemini-omni-video", hard_cap.last_estimate,
-                    )
+                    ):
+                        return None
+                if hard_cap is not None and hard_cap.blocked:
+                    return None
+                download_kwargs = {"hardened": True} if qc_cfg and qc_cfg.get("harden_downloads") else {}
+                if download_file(video_url, out_file, **download_kwargs):
+                    status = "ok"
             # Critic-QC (opt-in): bozuk klip kurguya giremez — REDde fix_notes'lu
             # prompt + taze seed ile otomatik regen; eşiği geçemeyen çekim düşer.
             if status == "ok" and qc_budget is not None:
@@ -1140,27 +1283,49 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                             _authorize_regen
                         ),
                     )
+                    if (regen_result and regen_result.get("credits") is not None
+                            and hard_cap is not None
+                            and series_cfg.get("durable_credit_ledger")):
+                        hard_cap.settle_last(regen_result["credits"])
                     if (regen_result and regen_result.get("credits") is None
                             and hard_cap is not None and hard_cap.last_estimate is not None):
                         regen_result = {**regen_result, "credits": hard_cap.last_estimate}
                     return regen_result
+                qc_context = {}
+                if qc_cfg.get("require_object_match"):
+                    qc_context["object_ref"] = object_ref_bytes
+                if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
+                    qc_context["previous_clip"] = previous_accepted_clip
                 qc_path, qc_credits, qc_status = critic.qc_shot(
                     bible, shot, out_file, kwargs["prompt"],
                     _regen_omni, episode=number, budget=qc_budget,
+                    **qc_context,
                 )
                 if qc_credits:
-                    cost_tracker.log_cost(f"series:{slug}", f"qc_regen_ep{number}_shot{n}",
-                                          "gemini-omni-video", qc_credits)
+                    if not _record_episode_cost(
+                        bible, number, f"qc_regen_ep{number}_shot{n}",
+                        "gemini-omni-video", qc_credits,
+                    ):
+                        return None
                     credits = (credits or 0) + qc_credits
                 if qc_path is None:
+                    if qc_status == "hold":
+                        return ProduceResult(
+                            "qc_hold", reason=f"mandatory QC unavailable for shot {n}"
+                        )
                     status = "qc_skip" if qc_status == "skip" else "qc_fail"
+                    if bible.require_all_shots:
+                        return None
                 if hard_cap is not None and hard_cap.blocked:
                     return None
             if status == "ok":
+                if qc_cfg and qc_cfg.get("scene_cut_scan"):
+                    critic.log_scene_cut_scan(slug, number, int(n), out_file)
                 prep = _prep_shot_clip(bible, plan, shot, out_file)
                 shot_offsets[int(n)] = running
                 running += ffmpeg_tools.get_video_duration(prep)
                 shot_files.append(prep)
+                previous_accepted_clip = out_file
             report.append_row(slug, report.make_row(
                 episode=number, shot_n=n, characters=char_names,
                 audio_ids=kwargs["audio_ids"], duration=kwargs["duration"],
@@ -1197,6 +1362,8 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
             if not hard_cap.authorize("main_shot", shot_engine, rv["duration"]):
                 return None
             reserved_estimate = hard_cap.last_estimate
+        if qc_budget and qc_budget.get("allocator"):
+            qc_budget["allocator"].mark_main_authorized(int(n))
         result = _generate_visual_clip(shot_engine, rv["prompt"], rv["start_image_url"],
                                        rv["duration"], bible.aspect_ratio, bible.resolution,
                                        sound=bible.native_audio)
@@ -1204,16 +1371,26 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
         if result and result.get("url"):
             video_url = result["url"]
             credits = result.get("credits")
-            if download_file(video_url, out_file):
-                status = "ok"
+            if (credits is not None and hard_cap is not None
+                    and series_cfg.get("durable_credit_ledger")):
+                hard_cap.settle_last(credits)
             if credits is not None:
-                cost_tracker.log_cost(f"series:{slug}", f"{shot_engine}_ep{number}_shot{n}",
-                                      shot_engine, credits)
+                if not _record_episode_cost(
+                    bible, number, f"{shot_engine}_ep{number}_shot{n}",
+                    shot_engine, credits,
+                ):
+                    return None
             elif reserved_estimate is not None:
-                cost_tracker.log_cost(
-                    f"series:{slug}", f"{shot_engine}_estimate_ep{number}_shot{n}",
+                if not _record_episode_cost(
+                    bible, number, f"{shot_engine}_estimate_ep{number}_shot{n}",
                     shot_engine, reserved_estimate,
-                )
+                ):
+                    return None
+            if hard_cap is not None and hard_cap.blocked:
+                return None
+            download_kwargs = {"hardened": True} if qc_cfg and qc_cfg.get("harden_downloads") else {}
+            if download_file(video_url, out_file, **download_kwargs):
+                status = "ok"
         # Critic-QC (opt-in): ucuz motorlarda seed parametresi yok — düzeltilmiş
         # prompt + modelin doğal varyasyonu regen'i çeşitlendirir.
         if status == "ok" and qc_budget is not None:
@@ -1229,27 +1406,49 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
                     _eng, fixed_prompt, _rv["start_image_url"], _rv["duration"],
                     bible.aspect_ratio, bible.resolution, sound=bible.native_audio,
                 )
+                if (regen_result and regen_result.get("credits") is not None
+                        and hard_cap is not None
+                        and series_cfg.get("durable_credit_ledger")):
+                    hard_cap.settle_last(regen_result["credits"])
                 if (regen_result and regen_result.get("credits") is None
                         and hard_cap is not None and hard_cap.last_estimate is not None):
                     regen_result = {**regen_result, "credits": hard_cap.last_estimate}
                 return regen_result
+            qc_context = {}
+            if qc_cfg.get("require_object_match"):
+                qc_context["object_ref"] = object_ref_bytes
+            if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
+                qc_context["previous_clip"] = previous_accepted_clip
             qc_path, qc_credits, qc_status = critic.qc_shot(
                 bible, shot, out_file, rv["prompt"],
                 _regen_visual, episode=number, budget=qc_budget,
+                **qc_context,
             )
             if qc_credits:
-                cost_tracker.log_cost(f"series:{slug}", f"qc_regen_ep{number}_shot{n}",
-                                      shot_engine, qc_credits)
+                if not _record_episode_cost(
+                    bible, number, f"qc_regen_ep{number}_shot{n}",
+                    shot_engine, qc_credits,
+                ):
+                    return None
                 credits = (credits or 0) + qc_credits
             if qc_path is None:
+                if qc_status == "hold":
+                    return ProduceResult(
+                        "qc_hold", reason=f"mandatory QC unavailable for shot {n}"
+                    )
                 status = "qc_skip" if qc_status == "skip" else "qc_fail"
+                if bible.require_all_shots:
+                    return None
             if hard_cap is not None and hard_cap.blocked:
                 return None
         if status == "ok":
+            if qc_cfg and qc_cfg.get("scene_cut_scan"):
+                critic.log_scene_cut_scan(slug, number, int(n), out_file)
             prep = _prep_shot_clip(bible, plan, shot, out_file)
             shot_offsets[int(n)] = running
             running += ffmpeg_tools.get_video_duration(prep)
             shot_files.append(prep)
+            previous_accepted_clip = out_file
         report.append_row(slug, report.make_row(
             episode=number, shot_n=n, characters=[], audio_ids=[],
             duration=rv["duration"], resolution="720p", seed=None,
@@ -1434,3 +1633,23 @@ def produce_episode(slug: str, plan, dry_run: bool = False,
     logger.info(f"   📊 {summary['başarılı']}/{summary['çekim_sayısı']} çekim, "
                 f"{summary['toplam_kredi']} kredi (~${summary['toplam_dolar']})")
     return final_ep
+
+
+def produce_episode(slug: str, plan, dry_run: bool = False,
+                    chain_start_url: str | None = None, *,
+                    typed_result: bool = False) -> Path | ProduceResult | None:
+    """Produce an episode, with an opt-in typed adapter for scheduler callers.
+
+    Direct/legacy callers still receive ``Path | None``.  The runner requests the
+    typed result so a QC hold remains distinct from a generation failure.
+    """
+    raw = _produce_episode_impl(
+        slug, plan, dry_run=dry_run, chain_start_url=chain_start_url
+    )
+    if isinstance(raw, ProduceResult):
+        result = raw
+    elif raw is None:
+        result = ProduceResult("generation_fail")
+    else:
+        result = ProduceResult("ok", Path(raw))
+    return result if typed_result else result.path
