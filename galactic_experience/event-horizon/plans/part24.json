@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 24,
+    "title": "Neptune: Its Year is LONGER Than a LIFETIME"
+  },
+  "synopsis": "Neptune's immense distance from the Sun results in an orbital period so vast that one Neptunian year equals 165 Earth years, meaning it only just completed its first full orbit since its discovery.",
+  "narration": "Neptune, the distant ice giant, completes a single orbit around the Sun only once every 165 Earth years. Discovered in 1846, it finally completed its first full journey since discovery in 2011, making its 'year' longer than many human lifetimes.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "The deep blue gas giant Neptune, serene and majestic, slowly drifting through the cold, outer reaches of the solar system. Its faint rings and swirling storms are visible as it glides along its incredibly distant orbit. Camera slowly zooms out, emphasizing its isolation.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "An elegant animation contrasting Earth's rapid, small orbit around the Sun with Neptune's vast, sweeping, slow path. Multiple Earth years are shown cycling quickly, while Neptune barely moves a fraction of its immense orbital path, illustrating the massive time difference. Camera is positioned high above the ecliptic plane.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Neptune continues its stately, unhurried orbit around the distant, small Sun. Faint, ethereal markers appear, indicating its position at discovery and its completion of one full, slow cycle in 2011, then fading as it continues its endless journey. Camera follows Neptune from a great distance.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 20,
+  "music": "A majestic and slow instrumental score, conveying vastness and the patient rhythm of the outer solar system. Deep, resonant synth pads and a glacial, pulsing beat create a sense of scale and immense time. A subtle, sustained swell builds as the orbital comparison is made, leaving a lasting impression of cosmic duration before looping.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

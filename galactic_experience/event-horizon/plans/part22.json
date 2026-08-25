@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 22,
+    "title": "Venus: The Sun Rises in the WEST"
+  },
+  "synopsis": "Venus's unique retrograde rotation means that, from its surface, the Sun appears to rise in the west and set in the east.",
+  "narration": "On Venus, our cosmic twin, the Sun rises in the west and sets in the east. This bizarre phenomenon is due to its retrograde rotation, spinning backwards compared to most planets. A Venusian day is longer than its year, creating a truly alien celestial experience.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "The dense, sulfuric acid atmosphere of Venus, glowing in shades of orange and yellow, seen from orbit. Thick clouds swirl slowly, hinting at the planet's sluggish, backwards rotation. A faint, distant Sun peeks through the haze. Camera slowly orbits Venus.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A desolate, rocky Venusian landscape under a perpetual, oppressive orange sky. Jagged, dark volcanic rock formations stretch into the hazy distance. The faint disk of the Sun is just visible near the western horizon, appearing to slowly ascend. Slow push-in towards the horizon.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A time-lapse composite of the Sun rising from the west over the thick, acidic clouds of Venus. The sky slowly brightens from deep orange to a fiery yellow, casting long, eerie shadows eastward across the stark terrain. Camera holds steady on the rising sun.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 26,
+  "music": "An ethereal and slightly disorienting instrumental piece, featuring slow, sustained synth chords and subtle, unsettling atmospheric textures. A low, persistent drone underscores the vastness. A gradual, sustained swell accompanies the reveal of the peculiar sunrise, building a sense of cosmic wonder and strangeness before fading into a seamless loop.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

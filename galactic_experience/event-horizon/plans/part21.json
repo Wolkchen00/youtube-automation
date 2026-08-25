@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 21,
+    "title": "Mercury: The Universe's LONELY Neighbor"
+  },
+  "synopsis": "Despite its orbit close to the Sun, Mercury's average proximity to all other planets is surprisingly closer than any other planetary pairing.",
+  "narration": "Mercury, the smallest planet, holds a peculiar cosmic title. On average, it is the closest planet to every other planet in our solar system. Its swift, innermost orbit ensures that at any given moment, its proximity to other worlds surpasses any other planetary pairing, making it the universe's lonely neighbor.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Mercury, a small, pockmarked terrestrial planet, zipping rapidly in a tight, elliptical orbit close to the Sun, bathed in harsh, direct solar light. Camera tracks its swift motion, emphasizing its isolated path.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A simplified, elegant visual model of the inner solar system, showing Mercury's orbit intersecting and passing close to the orbital paths of Earth, Mars, and Venus over time, highlighting its frequent close approaches to multiple planets. Camera slowly rotates around the orbital planes.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "An abstract, data-visualization style shot. Mercury is centrally positioned, with ethereal lines representing its average shortest distance to all other major planets, contrasted with longer, fainter lines for other planetary pairings. The scene feels vast and illuminating, with subtle cosmic dust trails. Camera slowly pushes in on Mercury.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 9,
+  "music": "A mysterious and slightly melancholic instrumental score opens with distant, shimmering synth pads, slowly building a sense of vast cosmic space. A steady, low pulse emerges, reflecting Mercury's swift orbit. A brief, subtle swell intensifies as the counter-intuitive fact is revealed, maintaining a reflective, awe-driven mood before ending mid-phrase.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

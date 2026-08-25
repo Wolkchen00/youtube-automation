@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 25,
+    "title": "The Sun: Master of the Solar System"
+  },
+  "synopsis": "The Sun's colossal mass dominates the solar system, accounting for an astonishing 99.8 percent of all its matter, dictating the orbits of every planet.",
+  "narration": "Our Sun is the undisputed master of the solar system. It holds an astonishing 99.8 percent of all the mass within its domain. This immense gravitational power dictates the existence and orbits of every planet, dwarf planet, and asteroid, truly making it the system's heart.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "The Sun, a blazing sphere of incandescent plasma, fills the frame with its intense energy and gravitational presence. Solar flares erupt gently from its surface, showcasing its raw power. Camera slowly pulls back to reveal the Sun's immense scale.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A dramatic scale comparison. The massive Sun is at the center, with all eight planets, vastly tiny and almost invisible specks, orbiting around it at different distances. The scene emphasizes the sheer difference in mass and the Sun's gravitational grip. Camera slowly rotates around the solar system, focusing on the Sun's dominance.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "The Sun, a solitary and overwhelming gravitational anchor, dominates the deep black expanse of space. Faint, ethereal, almost invisible trails represent the distant, tiny paths of the planets, further highlighting the Sun's near-monolithic mass dominance. Camera slowly zooms out, emphasizing the emptiness surrounding the Sun.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 13,
+  "music": "A powerful, resonant instrumental score, opening with a deep, gravitational hum and soaring, majestic strings. A steady, driving pulse underscores the Sun's immense presence. A dramatic, sustained swell builds as the scale comparison is presented, evoking a profound sense of awe and the Sun's overwhelming dominance, ending mid-phrase for a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

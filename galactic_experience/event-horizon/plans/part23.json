@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "Galactic Center: Light From the ICE AGE"
+  },
+  "synopsis": "The immense distance to our galaxy's core means the light we observe today began its journey thousands of years ago, during Earth's last Ice Age.",
+  "narration": "The breathtaking light from the Milky Way's galactic center that we see tonight is truly ancient. It embarked on its journey across vast cosmic distances during Earth's last Ice Age, tens of thousands of years ago. We are literally witnessing prehistoric starlight.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A majestic, wide-angle view of the Milky Way's glowing core from deep space, rich with stars, gas, and dust. The central bulge radiates with intense, golden light against the deep black. Camera slowly drifts through the starfield towards the core.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "An artistic visualization of a single photon escaping the dense, turbulent environment of the galactic center, then stretching into a long, thin beam traveling across vast, empty interstellar space, emphasizing the immense distance. Camera follows the photon's path.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A composite shot: The foreground shows a depiction of ancient Earth covered in glaciers during the last Ice Age, with woolly mammoths. As the camera pulls back and transitions, the background reveals the modern night sky with the distinct, glowing light of the Milky Way's core finally arriving. Slow, continuous pull-back and transition.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 10,
+  "music": "A grand, ancient, deep space ambiance with sweeping, resonant strings and a deep, rumbling synth bass. A slow, steady rhythm pulses, evoking the passage of immense time and distance. A powerful, sustained swell emphasizes the incredible journey of light, maintaining a sense of awe and cosmic scale before the track loops seamlessly.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

@@ -232,5 +232,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=9f33cbc617f04695ac2d84b042966fc7. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '9f33cbc617f04695ac2d84b042966fc7', 'total_platforms': 1, 'job_id': 'ee6c5cfffe694eb1a6c285a45bbd3f6a'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b869a27eabf34746b506b183d46bd959. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b869a27eabf34746b506b183d46bd959', 'total_platforms': 1, 'job_id': 'ef771084407e40e788c9d5426c4f7fb6'}"
     }
+  },
+  {
+    "part": 20,
+    "subtitle": "Earth's Gold: Forged in STAR COLLISIONS",
+    "ts": "2026-08-25T17:19:11.124329+00:00",
+    "results": {
+      "youtube": "LX8xNFvUeo0",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7dd04a01d6c546d494644b3d74a90ae4. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7dd04a01d6c546d494644b3d74a90ae4', 'total_platforms': 1, 'job_id': 'a05878541941453eb3e394eb2561b557'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=2a20b89462fc47098d251e732d3ba74c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '2a20b89462fc47098d251e732d3ba74c', 'total_platforms': 1, 'job_id': 'c10c71bae66f41c0a00411099d7d247d'}"
+    }
   }
 ]
