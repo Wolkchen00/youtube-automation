@@ -228,5 +228,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d5bdd3eaa5e1459fac94750ba1cb768c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd5bdd3eaa5e1459fac94750ba1cb768c', 'total_platforms': 1, 'job_id': 'faf41af525054ecca9a2fc8ace8c88b4'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=9c037cedeee6458ba3eb340903b84ab8. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '9c037cedeee6458ba3eb340903b84ab8', 'total_platforms': 1, 'job_id': '87a52e0a1af34efea30b6a4d4b727c05'}"
     }
+  },
+  {
+    "part": 19,
+    "subtitle": "The Real Reason Romans Used Urine For Laundry",
+    "ts": "2026-08-25T21:01:54.164336+00:00",
+    "results": {
+      "youtube": "EUysWNHpokY",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f8cf3b2ba5b24100876fdc9453f746c5. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f8cf3b2ba5b24100876fdc9453f746c5', 'total_platforms': 1, 'job_id': '130fd46197b3497186cdf0845622886d'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ea878492b28f4cf78b962d131ddc38cf. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ea878492b28f4cf78b962d131ddc38cf', 'total_platforms': 1, 'job_id': '0f318d5e693e43a68663772c6cf4216a'}"
+    }
   }
 ]
