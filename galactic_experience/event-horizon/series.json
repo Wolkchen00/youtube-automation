@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 25,
-  "next_part": 21,
+  "next_part": 22,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -404,6 +404,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-25T17:19:11.124918+00:00"
+    },
+    "21": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep21/ep21_narrated_music.mp4",
+      "subtitle": "Mercury: The Universe's LONELY Neighbor",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-26T18:36:38.112601+00:00"
     }
   }
 }

@@ -246,5 +246,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7dd04a01d6c546d494644b3d74a90ae4. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7dd04a01d6c546d494644b3d74a90ae4', 'total_platforms': 1, 'job_id': 'a05878541941453eb3e394eb2561b557'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=2a20b89462fc47098d251e732d3ba74c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '2a20b89462fc47098d251e732d3ba74c', 'total_platforms': 1, 'job_id': 'c10c71bae66f41c0a00411099d7d247d'}"
     }
+  },
+  {
+    "part": 21,
+    "subtitle": "Mercury: The Universe's LONELY Neighbor",
+    "ts": "2026-08-26T18:36:38.111730+00:00",
+    "results": {
+      "youtube": "3wIKN2SajIw",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ace20ec40d574271a9cc8114f359ba8f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ace20ec40d574271a9cc8114f359ba8f', 'total_platforms': 1, 'job_id': '1975b0faf7dc4097a177f88285d9124a'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c4c5ebaef48a4b16ae30ec1497ac2d5a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c4c5ebaef48a4b16ae30ec1497ac2d5a', 'total_platforms': 1, 'job_id': 'aab942a82de14f499537b6909356df7b'}"
+    }
   }
 ]
