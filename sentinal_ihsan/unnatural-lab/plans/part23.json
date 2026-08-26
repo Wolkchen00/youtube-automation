@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "Why Won't This SOAP Melt?"
+  },
+  "synopsis": "A man tries to wash his hands only to find that his bar of soap behaves exactly like solid glass, cracking into sharp shards.",
+  "narration": "Washing my hands before dinner and this bar just cracked like a window. It feels like real glass now. Is this even safe to touch?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet. Instead of lathering, the soap becomes perfectly rigid and begins to crack like glass under the running water.",
+      "seed": null,
+      "environment": "bathroom_sink"
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt tap the wet pink soap against the side of the ceramic sink, causing a clean, sharp shard of soap to break off.",
+      "seed": null,
+      "environment": "bathroom_sink"
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt stack the sharp, glass-like shards of pink soap on the edge of the sink, where they catch the light like polished gemstones.",
+      "seed": null,
+      "environment": "bathroom_sink"
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt pick up the original, unbroken bar of pink soap, holding it over the sink basin.",
+      "seed": null,
+      "environment": "bathroom_sink"
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Bar of soap",
+    "descriptor": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top",
+    "environment": "bathroom_sink",
+    "framing": "The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin."
+  },
+  "face_visible": false,
+  "family": "impossible-state-change",
+  "music": "Dry percussive sequence starting with a sharp plastic click in the first frame. Low, muffled wooden block hits pulse slowly and steadily. A very quiet, low-frequency hum sustains underneath, leaving vast empty spaces between each hit, maintaining a sterile and eerie atmosphere with no melodic elements.",
+  "hook_shot": 2,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}

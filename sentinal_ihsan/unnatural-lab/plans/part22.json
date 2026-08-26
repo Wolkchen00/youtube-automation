@@ -1,0 +1,50 @@
+{
+  "episode": {
+    "number": 22,
+    "title": "Something Is WRONG With This LEMON"
+  },
+  "synopsis": "A man slices open a fresh lemon to find a tiny, impossibly deep stone spiral staircase inside, flowing water down into the void.",
+  "narration": "I was slicing lemons for tea yesterday when I saw this. My landlord thinks I'm losing my mind, but how does this even fit in here?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt slices the yellow lemon in half with a silver knife. The interior reveals a tiny, ancient stone spiral staircase curving down into a dark hollow space.",
+      "seed": null,
+      "environment": "kitchen_counter"
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt drop a small wooden toothpick into the opening of the tiny staircase, watching it fall into the darkness.",
+      "seed": null,
+      "environment": "kitchen_counter"
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt pour a stream of water into the opening, and the liquid flows down the spiraling steps into the deep void.",
+      "seed": null,
+      "environment": "kitchen_counter"
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt fit the two lemon halves back together, restoring the external appearance of the fruit.",
+      "seed": null,
+      "environment": "kitchen_counter"
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Lemon",
+    "descriptor": "A large bright yellow lemon with a thick textured rind and a small green stem attached",
+    "environment": "kitchen_counter",
+    "framing": "The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter."
+  },
+  "face_visible": false,
+  "family": "impossible-interior",
+  "music": "Sparse percussive bed opening with a dry woody tap in the first second. A slow, steady pulse of soft wooden mallet hits on a hollow block, surrounded by quiet negative space. A single, very low, sustained warm bass tone hums in the background, keeping the audio field minimal and dry without any melody.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}
