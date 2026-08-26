@@ -361,17 +361,18 @@ class PlannerIsolationTests(unittest.TestCase):
             'Each shot\'s "prompt" field contains ONLY that shot\'s specific action and state',
             system,
         )
-        self.assertIn("the pipeline prepends them mechanically", system)
+        self.assertIn("the pipeline composes them mechanically", system)
         self.assertNotIn("Copy that descriptor VERBATIM", system)
         self.assertIn(
-            "All shots share ONE fixed composition on the same bench in the same light; "
-            "the cuts are jumps in time only.",
+            "All shots share ONE fixed composition on the same everyday surface in "
+            "the same light; the cuts are jumps in time only.",
             system,
         )
         self.assertNotIn("each shot may open a new angle", system)
         self.assertNotIn("camera flow", system)
         self.assertNotIn("striking opening → build → peak spectacle", system)
-        self.assertIn("environments: workbench_main", contents)
+        self.assertIn("environments: kitchen_counter", contents)
+        self.assertIn("workbench_main", contents)
 
     def test_legacy_planner_prompt_remains_byte_identical_to_golden(self):
         root = pathlib.Path(__file__).resolve().parents[1]
@@ -387,6 +388,40 @@ class PlannerIsolationTests(unittest.TestCase):
         )
         self.assertEqual(contents, golden["contents"])
         self.assertEqual(system, golden["system_instruction"])
+
+    def test_environment_description_is_composed_mechanically(self):
+        bible = Bible(bible_data())
+        meta = SimpleNamespace(
+            slug="rock2-test",
+            base_title="Rock 2 Test",
+            logline="One object in one fixed workshop composition.",
+        )
+        env_desc = bible_data()["environments"][0]["desc"]
+        response = {"episodes": [raw_plan(action_only=True)]}
+        with mock.patch.object(replenish, "_gen_json", return_value=response):
+            episodes = replenish.generate_plans(meta, bible, FORMAT_CFG, 1, 1)
+        for shot in episodes[0]["shots"]:
+            self.assertTrue(
+                shot["prompt"].startswith(f"{DESCRIPTOR} {FRAMING} {env_desc} ")
+            )
+            self.assertEqual(shot["prompt"].count(env_desc), 1)
+
+    def test_environment_description_is_not_duplicated_when_action_contains_it(self):
+        bible = Bible(bible_data())
+        meta = SimpleNamespace(
+            slug="rock2-test",
+            base_title="Rock 2 Test",
+            logline="One object in one fixed workshop composition.",
+        )
+        env_desc = bible_data()["environments"][0]["desc"]
+        plan = raw_plan(action_only=True)
+        plan["shots"][0]["prompt"] = (
+            f"Two hands rotate the cube above the {env_desc} while the scratch glows."
+        )
+        response = {"episodes": [plan]}
+        with mock.patch.object(replenish, "_gen_json", return_value=response):
+            episodes = replenish.generate_plans(meta, bible, FORMAT_CFG, 1, 1)
+        self.assertEqual(episodes[0]["shots"][0]["prompt"].count(env_desc), 1)
 
     def test_workflow_persists_bible_through_series_tree(self):
         root = pathlib.Path(__file__).resolve().parents[1]

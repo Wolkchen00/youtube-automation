@@ -656,8 +656,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     # tablodur ,  kurgu bunları crossfade/kesme ile bağlar.
     if formatted_object:
         chain_rule = (
-            "- FIXED COMPOSITION: All shots share ONE fixed composition on the same bench in the "
-            "same light; the cuts are jumps in time only."
+            "- FIXED COMPOSITION: All shots share ONE fixed composition on the same everyday "
+            "surface in the same light; the cuts are jumps in time only."
         )
     elif chain_breaks is not None:
         chain_rule = (
@@ -685,8 +685,10 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'shot prompt (they poison the video model): no, not, never, nothing, neither, nor, without, '
         'cannot, cant, dont, doesnt, isnt, arent, wont, absent, lacks, lacking, avoid. State what '
         'happens instead: write "the shell stays whole" rather than "the shell does not crack". '
-        'It must NOT repeat the descriptor or the framing sentence because the pipeline prepends '
-        'them mechanically. All four shots use the same object_card.environment id.'
+        'It must NOT repeat the descriptor, the framing sentence or the room description because '
+        'the pipeline composes them mechanically. Choose the object_card.environment id of the '
+        'room where this exact object naturally lives in a real home; all four shots use that '
+        'same id.'
         if compose_object_prompt else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
@@ -696,24 +698,24 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         if formatted_object else ""
     )
     episode_arc_rule = (
-        "- EPISODE ARC: All shots share ONE fixed composition on the same bench in the same "
-        "light; the cuts are jumps in time only."
+        "- EPISODE ARC: All shots share ONE fixed composition on the same everyday surface in "
+        "the same light; the cuts are jumps in time only."
         if formatted_object else
         "- EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve."
     )
     prompts_rule = (
-        "- PROMPTS: All shots share ONE fixed composition on the same bench in the same light; "
-        "the cuts are jumps in time only. Use rich visual language for motion, geometry, light and "
-        "color within that composition. The series art style is automatically prefixed to every "
-        "shot at production; stay inside it."
+        "- PROMPTS: All shots share ONE fixed composition on the same everyday surface in the "
+        "same light; the cuts are jumps in time only. Use rich visual language for motion, "
+        "geometry, light and color within that composition. The series art style is automatically "
+        "prefixed to every shot at production; stay inside it."
         if formatted_object else
         "- PROMPTS: rich visual language ,  motion, geometry, light, color, camera flow. The\n"
         "  series art style is automatically prefixed to every shot at production; do NOT restate\n"
         "  it wholesale, but stay inside it."
     )
     hard_limits_rule = (
-        f"- HARD LIMITS: {humans_rule} clean unlabeled surfaces and grounded safe workshop "
-        "activity fill the frame. English only."
+        f"- HARD LIMITS: {humans_rule} natural lived-in unlabeled surfaces and grounded safe "
+        "everyday home activity fill the frame. English only."
         if formatted_object else
         f"- HARD LIMITS: {humans_rule} no readable text/letters/logos/watermarks,\n"
         f"  {tone_tail} English only."
@@ -749,7 +751,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         seed_rule = ""
     face_rule = (
         '\n- FACE FRAMING: set "face_visible" to false; compose every shot around the hands, '
-        'forearms, object and workbench, with the face outside the frame.'
+        'forearms, object and work surface, with the face outside the frame.'
         if face_hidden else ""
     )
     if pool and previous_family:
@@ -1007,6 +1009,12 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             if isinstance(raw_card, dict) and isinstance(raw_card.get("framing"), str)
             else ""
         )
+        # Oda gerçekçiliği mekanik kilittir: ortam tarifi bible'dan alınır ve
+        # prompt'a kodla eklenir; LLM'den odayı yeniden yazması istenmez.
+        card_env_desc = ""
+        if isinstance(raw_card, dict) and isinstance(raw_card.get("environment"), str):
+            card_env_entry = bible.get("environments", raw_card["environment"]) or {}
+            card_env_desc = str(card_env_entry.get("desc") or "").strip()
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
         fact_count = 0
@@ -1054,6 +1062,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     prompt = " ".join(part for part in (
                         card_descriptor if card_descriptor not in composed_action_text else "",
                         card_framing if card_framing not in composed_action_text else "",
+                        card_env_desc if card_env_desc not in composed_action_text else "",
                         composed_action_text,
                     ) if part)
                 try:

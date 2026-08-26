@@ -33,12 +33,13 @@ REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
 UNNATURAL_ROOT = REPO_ROOT / "sentinal_ihsan" / "unnatural-lab"
 ART_STYLE = (
     "Vertical 9:16 real-world footage: a pair of hands working with one ordinary "
-    "object on a fixed workbench. The view stays in one unchanging position for "
-    "the whole shot; the framing remains identical. Slight sensor grain in the shadows; "
-    "window light clips to white on the bench edge; mixed warm lamp and cool daylight "
-    "colour. Worn wood, real dust, natural imperfect surfaces. The face stays outside "
-    "the frame. Exactly ONE impossible property is visibly active; everything else "
-    "behaves normally."
+    "household object on a fixed everyday surface in a lived-in home. The view stays "
+    "in one unchanging position for the whole shot; the framing remains identical. "
+    "Slight sensor grain in the shadows; window light clips to white on the surface "
+    "edge; mixed warm lamp and cool daylight colour. Worn, smudged, imperfect real "
+    "surfaces with a hint of everyday clutter at the frame edges. The face stays "
+    "outside the frame. Exactly ONE impossible property is visibly active; everything "
+    "else behaves normally."
 )
 
 
@@ -467,7 +468,8 @@ class ConfigIsolationTests(unittest.TestCase):
         self.assertIn('"face_visible": false', system)
         self.assertIn("hands and forearms working at bench level", system)
         self.assertNotIn("emotional anchor of the episode", system)
-        self.assertIn("environments: workbench_main", contents)
+        self.assertIn("environments: kitchen_counter", contents)
+        self.assertIn("workbench_main", contents)
         self.assertNotIn("characters: ihsan_maker", contents)
         self.assertNotIn('"characters": ["<ref id, optional>"]', system)
 

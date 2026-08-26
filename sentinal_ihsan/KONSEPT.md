@@ -5,7 +5,7 @@ sessizlik "AI hissi" veriyor, izleyici mesafeleniyor; gerçek video hissi = akı
 
 ---
 
-## 🧪 GERÇEKÇİLİK PLANI YÜRÜRLÜKTE (2026-08-24, İhsan onayı: K1-K8) — FAZ-1 ve v2.1 ile çeliştiği yerde KAZANIR
+## 🧪 GERÇEKÇİLİK PLANI YÜRÜRLÜKTE (2026-08-24, İhsan onayı: K1-K8) ,  FAZ-1 ve v2.1 ile çeliştiği yerde KAZANIR
 
 Dayanak: `sentinal_ihsan/PLAN_GERCEKCILIK_v1.md` (Codex ile 5 tur incelendi) + `PLAN_GERCEKCILIK_SPM_LOG.md`.
 Uygulama commitleri: ROCK 1 `bfa5c39` (foley geri + yüzsüz format), ROCK 2 `09df3eb` (obje kartı +
@@ -31,13 +31,21 @@ referans kilidi), ROCK 3 `98c1e3d` (fail-closed QC + 800 kredi tavanı), ROCK 4 
    için İPTAL; yerini bölüm-başı OBJE KARTI + referans görsel kilidi aldı (descriptor 4 çekimde
    kelimesi kelimesine aynı; obje+ortam referansları her çekimin payload'ında). REVEAL bitişi
    sonraki çevrimde test edilecek.
-6. **YAYIN KAPILARI.** `require_all_shots:true` — eksik çekimli bölüm yayını mekanik olarak
+6. **YAYIN KAPILARI.** `require_all_shots:true` ,  eksik çekimli bölüm yayını mekanik olarak
    imkânsız. Denetleyemeyen koşu yayınlayamaz (qc_hold → awaiting_approval, yayın modundan
    bağımsız). Bölüm sert tavanı 800 kredi (video+görsel; Suno ayrı), aylık seri tavanı 14.000.
 7. **GEÇİŞ (K8).** Kanal en fazla 3 hafta yayınsız; eski part22-25 planları yeni şemayla
    KOMPLE yenilendi; yayına dönüş: kill-gate'in ilk 3 bölümü onaylı, temizse kalan 7 otomatik.
    Kill-gate: donmuş kurulumda 10 ardışık yayın, 72 saat yaşında; L/1k <10 → içerik havuzu
    yeniden ele alınır; başarı L/1k ≥30 VE C/1k ≥1,0.
+8. **GERÇEKÇİ ORTAM + ÖZDEŞLEŞME (2026-08-26, İhsan talebi).** Tek atölye tezgâhı yerine 4
+   yaşanmış ev ortamı (`kitchen_counter`, `bathroom_sink`, `living_room_table`,
+   `workbench_main`); ortam tarifi çekim prompt'una MEKANİK eklenir (LLM ricası değil,
+   `replenish` kompozisyonu). Obje havuzu "izleyicinin evinde şu anda olan" objelere
+   daraltıldı ve her obje kendi doğal odasıyla ZORUNLU eşleşir (yumurta→mutfak,
+   sabun→banyo, kumanda→sehpa); 5 bölümün en az 4'ü gündelik A/B/C sınıflarından. Anlatımın
+   ilk cümlesi gündelik bir rutinin ortasına düşer (özdeşleşme çengeli). `art_style`
+   "workbench"ten yaşanmış-ev diline genelleştirildi.
 
 ---
 

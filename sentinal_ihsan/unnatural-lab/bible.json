@@ -39,7 +39,7 @@
       "require_all_shots": true
     }
   },
-  "art_style": "Vertical 9:16 real-world footage: a pair of hands working with one ordinary object on a fixed workbench. The view stays in one unchanging position for the whole shot; the framing remains identical. Slight sensor grain in the shadows; window light clips to white on the bench edge; mixed warm lamp and cool daylight colour. Worn wood, real dust, natural imperfect surfaces. The face stays outside the frame. Exactly ONE impossible property is visibly active; everything else behaves normally.",
+  "art_style": "Vertical 9:16 real-world footage: a pair of hands working with one ordinary household object on a fixed everyday surface in a lived-in home. The view stays in one unchanging position for the whole shot; the framing remains identical. Slight sensor grain in the shadows; window light clips to white on the surface edge; mixed warm lamp and cool daylight colour. Worn, smudged, imperfect real surfaces with a hint of everyday clutter at the frame edges. The face stays outside the frame. Exactly ONE impossible property is visibly active; everything else behaves normally.",
   "style_ref_url": null,
   "music": true,
   "narration": {
@@ -63,8 +63,23 @@
   ],
   "environments": [
     {
+      "id": "kitchen_counter",
+      "desc": "A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow.",
+      "ref_image_url": null
+    },
+    {
+      "id": "bathroom_sink",
+      "desc": "An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light.",
+      "ref_image_url": null
+    },
+    {
+      "id": "living_room_table",
+      "desc": "A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight.",
+      "ref_image_url": null
+    },
+    {
       "id": "workbench_main",
-      "desc": "worn wooden workbench in a small home workshop corner, daylight from a side window, plain wall",
+      "desc": "A worn wooden workbench in a small home workshop corner: dark scratched wood grain, fine sawdust in the corners, a folded rag resting at the frame edge, and daylight from a side window falling across a plain painted wall.",
       "ref_image_url": null
     }
   ],
