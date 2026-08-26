@@ -686,7 +686,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'cannot, cant, dont, doesnt, isnt, arent, wont, absent, lacks, lacking, avoid. State what '
         'happens instead: write "the shell stays whole" rather than "the shell does not crack". '
         'It must NOT repeat the descriptor, the framing sentence or the room description because '
-        'the pipeline composes them mechanically. Choose the object_card.environment id of the '
+        'the pipeline composes them mechanically. Anchor the descriptor\'s identity in large '
+        'durable marks (body colour, surface texture, cut faces); leave out fragile micro-details '
+        'such as stems, leaves or printed labels. Choose the object_card.environment id of the '
         'room where this exact object naturally lives in a real home; all four shots use that '
         'same id.'
         if compose_object_prompt else

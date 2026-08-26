@@ -238,11 +238,15 @@ class ProtectedStateTests(unittest.TestCase):
         meta = json.loads(
             (REPO_ROOT / "aimagine/from-scratch/series.json").read_text(encoding="utf-8")
         )
-        self.assertEqual(meta["next_part"], 9)
-        self.assertEqual(meta["total_parts"], 10)
+        # Canlı sayaç pinleri cron her yayında çürüyordu; koruma artık değişmezlerle:
+        # ROCK 1 anındaki taban (part 1-8 yayınlı) geriye dönük bozulmamış olmalı,
+        # serinin İLERLEMESİ ise ihlal değildir.
+        self.assertGreaterEqual(meta["next_part"], 9)
+        self.assertGreaterEqual(meta["total_parts"], 10)
         self.assertEqual(meta["publish_mode"], "auto")
         self.assertEqual(meta["status"], "active")
-        self.assertEqual(sorted(meta["parts"]), ["1", "2", "3", "4", "5", "6", "7", "8"])
+        expected = [str(n) for n in range(1, meta["next_part"])]
+        self.assertEqual(sorted(meta["parts"], key=int), expected)
         for number in range(1, 9):
             with self.subTest(part=number):
                 self.assertEqual(meta["parts"][str(number)]["status"], "published")

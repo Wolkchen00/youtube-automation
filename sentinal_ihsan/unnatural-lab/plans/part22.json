@@ -9,28 +9,28 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt slices the yellow lemon in half with a silver knife. The interior reveals a tiny, ancient stone spiral staircase curving down into a dark hollow space.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt steadies the open half in the centre of the counter; the stone steps catch the morning light and the spiral drops far deeper than the fruit, its lowest turns fading into darkness.",
       "seed": null,
       "environment": "kitchen_counter"
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt drop a small wooden toothpick into the opening of the tiny staircase, watching it fall into the darkness.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. One hand wearing a plain black crew-neck t-shirt holds the half still while the other drops a single white sugar cube onto the top step; the cube tumbles from step to step and disappears around the dark lower turn.",
       "seed": null,
       "environment": "kitchen_counter"
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt pour a stream of water into the opening, and the liquid flows down the spiraling steps into the deep void.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lift the second half and hold it edge to edge with the first; inside it the same staircase continues, and the two spirals line up into one continuous stairwell reading deeper than both halves combined.",
       "seed": null,
       "environment": "kitchen_counter"
     },
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick textured rind and a small green stem attached The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt fit the two lemon halves back together, restoring the external appearance of the fruit.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt set the larger half back in its opening spot at the centre of the counter, fingertips resting on the rind while morning light settles on the top steps and the staircase keeps descending into the dark.",
       "seed": null,
       "environment": "kitchen_counter"
     }
@@ -38,7 +38,7 @@
   "format_version": "tek-obje-4x6",
   "object_card": {
     "name": "Lemon",
-    "descriptor": "A large bright yellow lemon with a thick textured rind and a small green stem attached",
+    "descriptor": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside",
     "environment": "kitchen_counter",
     "framing": "The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter."
   },
