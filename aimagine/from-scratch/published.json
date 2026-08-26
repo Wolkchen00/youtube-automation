@@ -86,5 +86,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ed3c7be9dade445bbdf953aa1b4bd77a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ed3c7be9dade445bbdf953aa1b4bd77a', 'total_platforms': 1, 'job_id': 'ae62e9fa4d7e4a0481d766ad92073947'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=3bfd57d9b6b94b239d00befc298c8020. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '3bfd57d9b6b94b239d00befc298c8020', 'total_platforms': 1, 'job_id': '9dd00e5a8cea4566abbc07fa8c1e2995'}"
     }
+  },
+  {
+    "part": 9,
+    "subtitle": "Building A $50K Coaster Cabin From Scratch! ✨",
+    "ts": "2026-08-26T16:50:28.011714+00:00",
+    "results": {
+      "youtube": "FIlCYUC4ntA",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=e06f2446f3884f1b892c29ef820b8e0b. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'e06f2446f3884f1b892c29ef820b8e0b', 'total_platforms': 1, 'job_id': '108ac4c065e54c0eb0bc7296e06210cc'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=fd205198430f4ebfb68198d33ab35552. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'fd205198430f4ebfb68198d33ab35552', 'total_platforms': 1, 'job_id': '0f47f56d6f2b4e7394d3436a09abbee9'}"
+    }
   }
 ]
