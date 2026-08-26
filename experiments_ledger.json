@@ -1,3 +1,15 @@
 {
-  "experiments": {}
+  "experiments": {
+    "exp-2026-08-gerceklik": {
+      "total_cap": 4000.0,
+      "stage_caps": {
+        "pilot": 800.0,
+        "preflight": 300.0,
+        "bakeoff": 2400.0,
+        "holdout": 500.0
+      },
+      "reservations": [],
+      "measurements": []
+    }
+  }
 }
