@@ -36,3 +36,14 @@
   bugün `unnatural-lab` için `upscale` kapalı olduğundan etkisiz, ama K-FILO yayılımında
   1080p teslimatı olan bir seriyi durdurabilir. Öneri: K-FILO öncesi "4K üretilemedi ama 1080p
   master doğrulandı" durumunu ayrı sınıflandır.
+
+## ROCK D0 (kredi tabani) sonrasi ertelenenler , 2026-08-27
+
+- **[yuksek, taban ACILMADAN once yapilmali] Kosular arasi kalicilik.** `kie_reservations.json`
+  yerel dosyadir. Ayni makinede (VPS, yerel) koşan islemler kilit sayesinde birbirini gorur; ancak
+  her GitHub Actions kosusu TAZE checkout ile baslar, yani iki Actions kosusu birbirinin ucusta
+  kaydini goremez. Taban su an KAPALI (`KIE_BALANCE_FLOOR` tanimsiz) oldugu icin bu bir aciklik
+  degil, bir on kosuldur: taban acilmadan once defterin paylasilmasi gerekir (credits_ledger.json
+  gibi commit edilerek ya da VPS uzerinde tek kopya tutularak).
+- **[orta] Ucusta TTL'i (900 sn) olculmedi.** Uzun Omni kosularinda tek cagri bu sureyi asarsa
+  koruma erken dusebilir; pilot-2 sirasinda gercek cagri sureleri olculup deger buna gore konmali.

@@ -373,6 +373,7 @@ class HardCreditCap:
     blocked_reason: str | None = None
     reservations: list[dict] = field(default_factory=list)
     durable_ledger: bool = False
+    balance_owner: str | None = None   # ROCK D0: kuresel taban icin sahip etiketi
 
     @property
     def blocked(self) -> bool:
@@ -410,6 +411,17 @@ class HardCreditCap:
         self.spent = float(self.spent) - estimate + float(actual)
         reservation["actual"] = float(actual)
         reservation["settled"] = True
+        # ROCK D0: ucusta tutulan koruma birakilir, harcanmayan tahmin sahibin
+        # rezervasyonuna geri doner. Yapilmazsa taban kendi filosunu bogar.
+        if reservation.get("floor_inflight_id") or self.balance_owner:
+            from series import balance_floor
+            try:
+                balance_floor.settle(
+                    self.balance_owner, estimate, float(actual),
+                    inflight_id=reservation.get("floor_inflight_id"),
+                )
+            except balance_floor.BalanceFloorError as error:
+                logger.warning("Kredi tabani uzlastirmasi yapilamadi: %s", error)
         if float(self.spent) > float(self.cap):
             self.blocked_reason = (
                 f"gerçek harcama sert tavanı aştı: harcanan={float(self.spent):g}, "
@@ -441,12 +453,30 @@ class HardCreditCap:
                 f"sonraki={float(estimate):g}, tavan={float(self.cap):g}"
             )
         else:
+            # ROCK D0: yerel tavan gecti; simdi ORTAK bakiye tabani. Taban kapaliysa
+            # bu cagri hicbir sey yapmaz ve bakiye bile sorgulanmaz (P9).
+            from series import balance_floor
+            try:
+                decision = balance_floor.authorize_spend(
+                    float(estimate), owner=self.balance_owner
+                )
+            except balance_floor.BalanceFloorError as error:
+                decision = balance_floor.FloorDecision(False, f"taban mekanizmasi: {error}")
+            if not decision.allowed:
+                reason = f"ortak bakiye tabani: {decision.reason}"
+                if optional:
+                    logger.warning("Kredi tabani istege bagli cagriyi reddetti: %s", reason)
+                    return False
+                self.blocked_reason = reason
+                logger.error("Kredi tabani cagriyi engelledi: %s", reason)
+                return False
             self.spent = float(self.spent) + float(estimate)
             self.reservations.append({
                 "call_type": call_type,
                 "engine": engine,
                 "duration": None if duration is None else str(duration),
                 "estimate": float(estimate),
+                "floor_inflight_id": decision.inflight_id,
             })
             return True
         if optional:

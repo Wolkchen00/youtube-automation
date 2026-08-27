@@ -265,6 +265,21 @@ def _reserve(experiment_id: str, stage: str, call_type: str, engine: str,
             experiment_id, total_used, float(estimate), total_cap,
         )
         return None
+    # ROCK D0: deney tavani gecti; ORTAK bakiye tabani da gecmeli. Deney harcamasi
+    # kill-gate rezervasyonuna ait DEGILDIR: sahipsiz (owner=None) yetkilendirilir,
+    # yani sahip etiketli rezervasyonlarin korudugu krediyi yiyemez.
+    from series import balance_floor
+    try:
+        decision = balance_floor.authorize_spend(float(estimate), owner=None)
+    except balance_floor.BalanceFloorError as error:
+        logger.error("EXPERIMENT GATE REFUSED balance floor fatal: %s", error)
+        return None
+    if not decision.allowed:
+        logger.error(
+            "EXPERIMENT GATE REFUSED balance floor: experiment=%s stage=%s %s",
+            experiment_id, stage, decision.reason,
+        )
+        return None
     reservation_id = uuid.uuid4().hex
     entry["reservations"].append({
         "reservation_id": reservation_id,
