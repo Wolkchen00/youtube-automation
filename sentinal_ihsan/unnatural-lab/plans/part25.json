@@ -18,7 +18,7 @@
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A bright neon yellow fuzzy tennis ball with classic white rubber curved seams. dense unyielding fuzz that holds its perfect sphere while crisp compacted grooves and flattened metal appear beneath it. The frame remains completely locked looking down at a wooden living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. Hands wearing a plain black crew-neck t-shirt squeeze the tennis ball, but the fuzzy surface remains completely rigid and unyielding, like solid steel.",
+      "prompt": "A bright neon yellow fuzzy tennis ball with classic white rubber curved seams. dense unyielding fuzz that holds its perfect sphere while crisp compacted grooves and flattened metal appear beneath it. The frame remains completely locked looking down at a wooden living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. the flattened soda can stays crushed on the table. Hands wearing a plain black crew-neck t-shirt squeeze the tennis ball while the fuzzy surface stays completely rigid and unyielding like solid steel.",
       "seed": null,
       "environment": "living_room_table",
       "violation_observation": "the squeezed fuzzy surface holds its perfect round shape under hard pressure"
@@ -35,7 +35,7 @@
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A bright neon yellow fuzzy tennis ball with classic white rubber curved seams. dense unyielding fuzz that holds its perfect sphere while crisp compacted grooves and flattened metal appear beneath it. The frame remains completely locked looking down at a wooden living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. Hands wearing a plain black crew-neck t-shirt pick up the neon yellow tennis ball, holding it gently above the damaged wooden surface.",
+      "prompt": "A bright neon yellow fuzzy tennis ball with classic white rubber curved seams. dense unyielding fuzz that holds its perfect sphere while crisp compacted grooves and flattened metal appear beneath it. The frame remains completely locked looking down at a wooden living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. a deep compressed groove remains in the wood. Hands wearing a plain black crew-neck t-shirt pick up the neon yellow tennis ball, holding it gently above the damaged wooden surface.",
       "seed": null,
       "environment": "living_room_table",
       "violation_observation": "the lifted ball stays round above the grooved, damaged wood"

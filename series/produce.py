@@ -519,6 +519,7 @@ def _audio_master_hold(reason: str) -> ProduceResult:
 # ROCK B: referans prompt sablonunun surumu; sablon metni degistiginde ARTIRILIR,
 # boylece eski hash tutmaz ve tum referanslar yeniden uretilir.
 REF_PROMPT_TEMPLATE_VERSION = "rb1"
+REFERENCE_IMAGE_MODEL = "nano-banana-2"
 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
 
@@ -772,7 +773,7 @@ def _generate_uploaded_reference(
     report_output_dir: str | Path | None = None,
 ) -> str | None:
     """Cost-authorize one NB2 image, then download and publish it through ImgBB."""
-    if not hard_cap.authorize("reference_image", "nano-banana-2"):
+    if not hard_cap.authorize("reference_image", REFERENCE_IMAGE_MODEL):
         return None
     # Image polling exposes no actual charge, so persist the conservative amount
     # before entering the paid call. A crash cannot erase this episode spend.
@@ -780,12 +781,12 @@ def _generate_uploaded_reference(
     if estimate is not None:
         if not _record_episode_cost(
             bible, number, f"{operation}_estimate_ep{number}",
-            "nano-banana-2", estimate, isolated=isolated,
+            REFERENCE_IMAGE_MODEL, estimate, isolated=isolated,
         ):
             return None
     generated_url = generate_image(
         prompt,
-        model="nano-banana-2",
+        model=REFERENCE_IMAGE_MODEL,
         aspect_ratio=bible.aspect_ratio,
     )
     if not generated_url:
@@ -877,8 +878,12 @@ def ensure_episode_refs(
         "The entire object is clearly visible at realistic scale with its colour, material "
         "texture and distinguishing mark sharply readable."
     )
+    generation_identity = json.dumps({
+        "model": REFERENCE_IMAGE_MODEL,
+        "aspect_ratio": bible.aspect_ratio,
+    }, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
     expected_ref_hash = hashlib.sha256(
-        f"{REF_PROMPT_TEMPLATE_VERSION}|{object_prompt}".encode("utf-8")
+        f"{REF_PROMPT_TEMPLATE_VERSION}|{generation_identity}|{object_prompt}".encode("utf-8")
     ).hexdigest()
     stale_ref = (
         existing_props is not None

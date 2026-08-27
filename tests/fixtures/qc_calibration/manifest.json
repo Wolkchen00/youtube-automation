@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "description": "ROCK B P7 labels arrive after Pilot 2; samples stays empty until human labeling.",
+  "sample_format": {
+    "id": "unique-sample-id",
+    "field": "anomaly_match | violation_reads | state_carry_ok",
+    "fixture": "relative/path/to/ordered-12-frame-group",
+    "class": "positive | negative",
+    "split": "train | held-out",
+    "human_label": true,
+    "human_visible": true,
+    "model_result": {
+      "value": true,
+      "visible": true,
+      "confidence": 0.9
+    },
+    "null_reason": null
+  },
+  "samples": []
+}

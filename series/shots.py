@@ -39,7 +39,13 @@ OBJECT_CARD_FIELDS = ("name", "descriptor", "environment", "framing",
                        "anomaly_descriptor")
 NEGATIVE_VIDEO_LANGUAGE = re.compile(
     r"\b(?:no|not|never|nothing|neither|nor|without|cannot|can't|don't|doesn't|"
-    r"isn't|aren't|won't|absent|lacks?|lacking|avoid)\b",
+    r"isn't|aren't|won't|absent|lacks?|lacking|avoid)\b|\binstead\s+of\b",
+    re.IGNORECASE,
+)
+TEMPORAL_OVERREACH = re.compile(
+    r"\b(?:never|always|forever|eventually)\b|"
+    r"\bstill\b[^.!?]{0,80}\bafter\b|"
+    r"\bkeeps?\b[^.!?]{0,80}\b\w+ing\b[^.!?]{0,40}\bindefinitely\b",
     re.IGNORECASE,
 )
 
@@ -127,7 +133,8 @@ def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
                 )
             elif len(observation.split()) < 4:
                 errors.append(f"çekim {number} violation_observation en az 4 kelime olmalı")
-            elif NEGATIVE_VIDEO_LANGUAGE.search(observation):
+            elif (NEGATIVE_VIDEO_LANGUAGE.search(observation)
+                  or TEMPORAL_OVERREACH.search(observation)):
                 errors.append(
                     f"çekim {number} violation_observation OLUMLU ve gözlemlenebilir olmalı; "
                     f"olumsuz ya da zaman-ötesi iddia yasak"
@@ -146,6 +153,16 @@ def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
                     f"çekim {number} state_carry tanımlı ama ardıl çekim yok; iz yalnız bir "
                     f"SONRAKİ çekime karşı değerlendirilir"
                 )
+            elif isinstance(carry, str) and carry.strip() == carry:
+                next_shot = shots[index] if index < len(shots) else None
+                next_prompt = (
+                    next_shot.get("prompt") if isinstance(next_shot, dict) else None
+                )
+                if not isinstance(next_prompt, str) or carry not in next_prompt:
+                    errors.append(
+                        f"çekim {number} state_carry metni ardıl çekim prompt'unda "
+                        f"birebir bulunmalı"
+                    )
         if framing and framing not in prompt:
             errors.append(f"çekim {number} object_card.framing cümlesini birebir içermeli")
         if env_id and shot.get("environment") != env_id:
@@ -172,6 +189,10 @@ def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
                 or not all(_is_https_url(url) for url in shot_refs)):
             errors.append(
                 f"çekim {shot.get('n', '?')} prop_ref_urls bir veya daha fazla https URL içermeli"
+            )
+        elif shot_refs != refs:
+            errors.append(
+                f"çekim {shot.get('n', '?')} prop_ref_urls plan düzeyi listeyle birebir aynı olmalı"
             )
     if NEGATIVE_VIDEO_LANGUAGE.search(bible.art_style or ""):
         errors.append("bible.art_style tek-obje-4x6 için yalnız olumlu görsel dil kullanmalı")

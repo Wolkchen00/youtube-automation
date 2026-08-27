@@ -18,6 +18,11 @@
 
 ## ROCK A (ses master) sonrası ertelenenler — 2026-08-27
 
+- **[orta] ROCK B kareler-arası belirgin durum karşılaştırması.** Aynı örneklem içinde ihlal
+  sonucu ile ona aykırı belirgin bir sonucu kareden kareye izleyen ayrı karşılaştırma sistemi bu
+  çevrimde kurulmadı; Pilot 2 sonrasında fixture verisiyle tasarlanacak. Bugünkü dar onarım,
+  mevcut QC çağrısındaki talimata çelişki görülünce `value=false` deme kuralını ekler.
+
 - **[orta] Üretim yalnız LUFS/TP kapısı koşuyor.** `_verify_audio_master` teslimatı yalnız entegre
   loudness ve true-peak için doğruluyor; foley varlığı ve dinamik sıkışma kapıları
   `tools/audio_master_check.py` içinde, yani üretim yolunda DEĞİL. Foley'i gömülmüş bir bölüm

@@ -686,7 +686,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'action and state, described only by what IS visible and happening. FORBIDDEN WORDS in every '
         'shot prompt (they poison the video model): no, not, never, nothing, neither, nor, without, '
         'cannot, cant, dont, doesnt, isnt, arent, wont, absent, lacks, lacking, avoid. State what '
-        'happens instead: write "the shell stays whole" rather than "the shell does not crack". '
+        'happens in positive terms; the construction "instead of" is forbidden too. Write '
+        '"the shell stays whole" rather than "the shell does not crack". '
         'It must NOT repeat the descriptor, the framing sentence or the room description because '
         'the pipeline composes them mechanically. Anchor the descriptor\'s identity in large '
         'durable marks (body colour, surface texture, cut faces); leave out fragile micro-details '
@@ -701,7 +702,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'confirm it from the frames alone; never phrase it as something that fails to '
         'happen. Where a shot leaves a lasting trace the next shot must still show '
         '(a puddle, a crushed can, a groove), add state_carry to the shot that CREATES '
-        'it; the final shot never carries state_carry.'
+        'it; the pipeline copies that exact state_carry sentence verbatim into the NEXT '
+        'shot prompt, so the next action must agree with it. The final shot never carries state_carry.'
         if compose_object_prompt else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
@@ -1038,6 +1040,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             card_env_desc = str(card_env_entry.get("desc") or "").strip()
         raw_shots = plan.get("shots")
         clean_shots: list[dict] = []
+        previous_state_carry = ""
         fact_count = 0
         strict_chain = "chain_breaks" in cfg
         strict_structure = strict_chain or formatted_object
@@ -1087,6 +1090,8 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         card_anomaly if card_anomaly not in composed_action_text else "",
                         card_framing if card_framing not in composed_action_text else "",
                         card_env_desc if card_env_desc not in composed_action_text else "",
+                        previous_state_carry
+                        if previous_state_carry not in composed_action_text else "",
                         composed_action_text,
                     ) if part)
                 try:
@@ -1125,6 +1130,12 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     env = shot.get("environment")
                     if env is not None:
                         clean["environment"] = env
+                if compose_object_prompt:
+                    for field in ("violation_observation", "state_carry"):
+                        value = shot.get(field)
+                        if isinstance(value, str) and value.strip():
+                            clean[field] = value.strip()
+                    previous_state_carry = clean.get("state_carry", "")
                 if want_fc:
                     # Opt-in: kısa ekran-içi 'fact' (≤40 karakter); produce alt üçlüğe basar.
                     fv = str(shot.get("fact") or "").strip()

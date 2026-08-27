@@ -489,6 +489,9 @@ VIOLATION READABILITY FIELD: add this required field:
 In this shot a viewer should be able to observe exactly this:
 {observation}
 Judge only the sampled frames, in order. value=true when the frames show that outcome.
+Answer value=false when the described outcome is only partly true, or when a contradicting
+outcome is visible in the same sampled frames. For example, water descending the steps AND
+pooling on the counter means value=false for an outcome that says the water drains away.
 {_RB_SHAPE}"""
 
 
@@ -506,11 +509,11 @@ def _parse_rb_field(raw) -> tuple | None:
     """ROCK B alanını katı biçimde ayrıştır; şema dışıysa None."""
     if not isinstance(raw, dict):
         return None
-    if "value" not in raw or "visible" not in raw:
+    if set(raw) != {"value", "visible", "confidence"}:
         return None
     value = raw.get("value")
     visible = raw.get("visible")
-    confidence = raw.get("confidence", 1.0)
+    confidence = raw.get("confidence")
     if value is not None and type(value) is not bool:
         return None
     if type(visible) is not bool:
@@ -519,6 +522,8 @@ def _parse_rb_field(raw) -> tuple | None:
         return None
     if not 0.0 <= float(confidence) <= 1.0:
         return None
+    if visible is False and value is not None:
+        return None
     return value, visible, float(confidence)
 
 
@@ -526,6 +531,11 @@ def _rb_enforced(qc: dict, field: str) -> bool:
     """Alan terfi etti mi? Varsayılan HAYIR (P7: önce ölçüm, sonra kapı)."""
     enforce = qc.get("enforce")
     return bool(isinstance(enforce, dict) and enforce.get(field))
+
+
+def _has_enforced_rb_gate(qc: dict) -> bool:
+    """Terfi edilmiş ROCK B alanlarından en az biri zorunlu kapı mı?"""
+    return any(_rb_enforced(qc, field) for field in ROCK_B_FIELDS)
 
 
 
@@ -616,6 +626,7 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         qc.get("require_no_face") or qc.get("require_object_match")
         or (qc.get("require_continuity") and 2 <= shot_n <= 4)
         or (qc.get("require_first_frame") and shot_n == 1)
+        or _has_enforced_rb_gate(qc)
     )
     frames = ffmpeg_tools.sample_frames(
         clip_path, count=int(qc["frames"]), width=int(qc["frame_width"]),
@@ -672,7 +683,7 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
 # ─── 3) Regen döngüsü ──────────────────────────────────────────────────────────
 
-def positive_correction(issue: str) -> str:
+def positive_correction(issue: str, *, environment: str | None = None) -> str:
     """Turn one issue into one positive imperative without copying negative prose."""
     raw = " ".join(str(issue or "").strip().split())
     lowered = raw.lower()
@@ -690,6 +701,9 @@ def positive_correction(issue: str) -> str:
     if any(word in lowered for word in (
         "continu", "bench", "light", "lineage", "state", "tezg", "sürekl",
     )):
+        if environment:
+            return (f"Continue from the established {environment}, preserving its lighting, "
+                    "object position, and transformation state shown in the previous shot.")
         return ("Continue from the established bench, lighting, object position, and "
                 "transformation state shown in the previous shot.")
     if any(word in lowered for word in ("opening", "first frame", "ilk kare", "açılış")):
@@ -706,7 +720,8 @@ def positive_correction(issue: str) -> str:
 
 
 def strengthen_prompt(prompt: str, fix_notes: list[str], *,
-                      structured: bool = False) -> str:
+                      structured: bool = False,
+                      environment: str | None = None) -> str:
     """Keep legacy bytes by default; ROCK 3 opts into positive structured rewrites."""
     if not structured:
         notes = [n.strip() for n in (fix_notes or []) if n and n.strip()]
@@ -717,7 +732,9 @@ def strengthen_prompt(prompt: str, fix_notes: list[str], *,
                 + "\n".join(f"- {note}" for note in notes)
         return f"{prompt.rstrip()}\n\n{block}"
     source = [note for note in (fix_notes or []) if str(note or "").strip()] or ["anatomy"]
-    corrections = list(dict.fromkeys(positive_correction(note) for note in source))
+    corrections = list(dict.fromkeys(
+        positive_correction(note, environment=environment) for note in source
+    ))
     block = "QUALITY TARGETS — render this take with:\n" \
             + "\n".join(f"- {correction}" for correction in corrections)
     return f"{prompt.rstrip()}\n\n{block}"
@@ -779,6 +796,7 @@ def _has_mandatory_gate(qc: dict) -> bool:
         qc.get("require_no_face") or qc.get("require_object_match")
         or qc.get("require_continuity") or qc.get("require_first_frame")
         or qc.get("native_audio_review")
+        or _has_enforced_rb_gate(qc)
     )
 
 
@@ -897,6 +915,23 @@ def qc_pass_exists(slug: str, episode: int, shot: int,
                         continue
                 elif first_frame != "n/a":
                     continue
+            rb_cache_ok = True
+            for field in ROCK_B_FIELDS:
+                if not _rb_enforced(required, field):
+                    continue
+                parsed = _parse_rb_field(event.get(field))
+                if parsed is None:
+                    rb_cache_ok = False
+                    break
+                value, visible, confidence = parsed
+                if confidence < 0.5 or not (
+                    (value is True and visible is True)
+                    or (value is None and visible is False)
+                ):
+                    rb_cache_ok = False
+                    break
+            if not rb_cache_ok:
+                continue
             return True
         except (TypeError, ValueError, json.JSONDecodeError):
             continue
@@ -1356,6 +1391,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                         or qc.get("require_object_match")
                         or (qc.get("require_continuity") and 2 <= n <= 4)
                         or (qc.get("require_first_frame") and n == 1)
+                        or _has_enforced_rb_gate(qc)
                     )
                     if mandatory_visual and verdict == "skip":
                         verdict = "hold"
@@ -1457,6 +1493,9 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     "attempt": attempt, "content_sha256": content_sha256(clip_path),
                     "clip": clip_path.name,
                 }
+                for rb_field in ROCK_B_FIELDS:
+                    if rb_field in (review or {}):
+                        pass_event[rb_field] = (review or {}).get(rb_field)
                 if qc.get("require_no_face"):
                     pass_event["face_present"] = (review or {}).get("face_present")
                 if qc.get("require_object_match"):
@@ -1552,9 +1591,17 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         budget["left"] -= 1
         attempt += 1
+        environment_desc = None
+        environment_id = shot.get("environment")
+        if environment_id:
+            environment_entry = bible.get("environments", str(environment_id)) or {}
+            candidate_desc = environment_entry.get("desc")
+            if isinstance(candidate_desc, str) and candidate_desc.strip():
+                environment_desc = candidate_desc.strip()
         current_prompt = strengthen_prompt(
             prompt, all_fix_notes,
             structured=bool(qc.get("structured_positive_corrections")),
+            environment=environment_desc,
         )
         logger.info(f"♻️ QC regen {attempt}/{shot_regen_limit}: çekim {n} "
                     f"yapılandırılmış olumlu prompt ile yeniden üretiliyor "
@@ -1564,7 +1611,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         }
         if qc.get("structured_positive_corrections"):
             regen_event["corrections"] = [
-                positive_correction(note) for note in all_fix_notes
+                positive_correction(note, environment=environment_desc)
+                for note in all_fix_notes
             ]
         else:
             regen_event["fix_notes"] = list(all_fix_notes)
