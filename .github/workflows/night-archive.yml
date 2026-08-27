@@ -47,6 +47,7 @@ jobs:
           KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
           IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
           GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
