@@ -4,6 +4,21 @@ Tarih: 2026-08-27 · Durum: ONAYLI r6 (SAME PAGE tur 5 + İhsan kararları 2026-
 Öncül: `PLAN_GERCEKCILIK_v1.md` (ROCK 1-5 ön işi push'lu; ENTEGRE PİLOT 1 üretildi).
 Ölçüm kanıtları: `sentinal_ihsan/measurements/pilot1_audio.md` · Müzakere: `PLAN_PILOT_SONRASI_SPM_LOG.md`
 
+## DURUM (2026-08-27)
+
+| Rock | Durum | Commit | Kanıt |
+|---|---|---|---|
+| ROCK A ,  ses master | ✅ BİTTİ | `fa46a58` | 283 test yeşil; pilot master −14,5 LUFS / −1,2 dBTP; gömülü-foley sabotajı exit 1 |
+| ROCK C1 ,  QC ölçümleme | ✅ BİTTİ | `cbb459a` | 295 test yeşil; 5 tükenme sınıfı → qc_hold; muafiyet yalnız zorunlu kapısı olmayan seride |
+| ROCK B ,  anomali/ihlal/durum | ✅ BİTTİ (log-only) | `56e5607` | 316 test yeşil; karar tablosu + bayat referans + ortam-nötr dil |
+| ROCK C2 ,  QC anahtarı | ⬜ K-G kararına bağlı (varsayılan 08-31) | ,  | ,  |
+| ROCK D0 ,  kredi tabanı | ⬜ sırada | ,  | ,  |
+| ROCK D1-D2 ,  PİLOT 2 | ⬜ A-C sonrası | ,  | ,  |
+| P7 kalibrasyon → terfi | ⬜ pilot-2 sonrası | ,  | ,  |
+
+**Not:** ROCK B, Codex kullanım limitine takıldığı için Visionary devralmasıyla yazıldı;
+Codex döndüğünde bu kodun düşmanca incelemesini yapacak (çapraz-model inceleme atlanmadı, ertelendi).
+
 ## CORE FOCUS (değişmedi)
 
 Bölüm başına ~$2-4 üretim bütçesi içinde (video + tüm keyframe/referans görselleri + upscale;
