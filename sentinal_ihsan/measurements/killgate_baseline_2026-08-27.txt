@@ -1,0 +1,29 @@
+# KILL-GATE TABAN CIZGISI (degisiklik ONCESI) - 2026-08-27
+
+Bu, ROCK A/B/C/D0 YURURLUGE GIRMEDEN once yayinlanmis son 10 bolumun sabit-yas
+(72 saat) olcumudur. Kill-gate bu tabana karsi okunacaktir.
+
+Uretim komutu:
+    py -X utf8 tools/killgate_report.py --series unnatural-lab --channel sentinal_ihsan --window 10
+
+Okuma notu: medyan L/1k 10.2, oldurme esigi 10 , kanal esigin KILPAYI ustunde.
+Medyan C/1k 0.00 (10 bolumun 9'unda sifir yorum) , yorum motoru olcumle olu.
+Bu iki sayi, planin 0. bolumundeki teshisi bagimsiz olarak dogruluyor.
+
+KILL-GATE RAPORU - unnatural-lab
+pencere: 10 yayin | olgun olcum: 10
+  L0xmetOFYVo: izlenme=1285 L/1k=4.7 C/1k=2.33 (olcum 2026-08-17)
+  8NHuc97QN8A: izlenme=1020 L/1k=6.9 C/1k=0.00 (olcum 2026-08-18)
+  M_QQcLEGQjA: izlenme=1127 L/1k=9.8 C/1k=0.89 (olcum 2026-08-19)
+  MNHdULJfHuo: izlenme=616 L/1k=14.6 C/1k=0.00 (olcum 2026-08-20)
+  NUorphoZoq0: izlenme=1298 L/1k=10.8 C/1k=0.00 (olcum 2026-08-21)
+  RGXMfib9u84: izlenme=1202 L/1k=10.8 C/1k=0.00 (olcum 2026-08-22)
+  biY7zmMczDw: izlenme=1136 L/1k=10.6 C/1k=0.00 (olcum 2026-08-23)
+  FuoWvZCKvf4: izlenme=79 L/1k=12.7 C/1k=0.00 (olcum 2026-08-24)
+  HeP0V84NXfw: izlenme=495 L/1k=6.1 C/1k=0.00 (olcum 2026-08-25)
+  5PG5IbbivE0: izlenme=1377 L/1k=7.3 C/1k=0.00 (olcum 2026-08-26)
+medyan L/1k: 10.2
+medyan C/1k: 0.00
+KARAR: ara_bant
+  - L/1k medyani 10.2 ara bantta (10-30): en fazla BIR ek karar penceresi
+  - YORUM ALARMI: C/1k medyani 0.00 < 0.3; yorum motoru calismiyor
