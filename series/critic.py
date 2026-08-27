@@ -26,10 +26,12 @@ yalnız "başarılı-fakat-bozuk" üretimde kredi yakar.
 
 import hashlib
 import json
+import os
 import re
 import subprocess
 import tempfile
 import time
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -53,6 +55,18 @@ QC_DEFAULTS = {
 }
 
 QC_REVIEW_RETRY_DELAY = 0.05
+QC_HOLD_REASONS = frozenset({"quota", "auth", "server", "parse", "logging"})
+
+
+class QCApiExhausted(RuntimeError):
+    """QC API deneme politikası sonuç vermeden tükendi."""
+
+    def __init__(self, reason: str, detail: str = ""):
+        if reason not in QC_HOLD_REASONS:
+            raise ValueError(f"bilinmeyen QC hold nedeni: {reason}")
+        self.reason = reason
+        self.detail = detail
+        super().__init__(detail or reason)
 
 
 def qc_config(bible: Bible) -> dict:
@@ -181,6 +195,98 @@ def _parse_json(txt: str):
         raise
 
 
+def _parse_response_json(response):
+    """SDK yanıt metni yoksa bunu da unusable-body/parse olarak sınıflandır."""
+    try:
+        text = response.text
+    except Exception as error:
+        raise json.JSONDecodeError("QC response text unavailable", "", 0) from error
+    return _parse_json(text or "")
+
+
+def _classify_api_error(error: Exception) -> str:
+    """Gemini/taşıma hatasını dondurulmuş C1 hold sınıflarına indirger."""
+    if isinstance(error, json.JSONDecodeError):
+        return "parse"
+    message = str(error).upper()
+    if "429" in message or "RESOURCE_EXHAUSTED" in message:
+        return "quota"
+    if any(marker in message for marker in (
+        "401", "403", "UNAUTHENTICATED", "PERMISSION_DENIED", "API_KEY_INVALID",
+        "API KEY", "CREDENTIAL", "FORBIDDEN",
+    )):
+        return "auth"
+    return "server"
+
+
+def _is_transient_api_error(error: Exception) -> bool:
+    message = str(error).upper()
+    return any(marker in message for marker in (
+        "503", "502", "501", "500", "429", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
+        "INTERNAL", "DEADLINE", "TIMEOUT", "CONNECTION",
+    ))
+
+
+def _strict_log_event(slug: str, entry: dict, *,
+                      experiment_id: str | None = None) -> None:
+    """QC olayını append + flush + fsync ile yaz; hiçbir hatayı yutma."""
+    path = data_dir(slug) / "qc_log.jsonl"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    record = {"ts": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), **entry}
+    if experiment_id is not None:
+        record["experiment_id"] = experiment_id
+    with open(path, "a", encoding="utf-8") as handle:
+        handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+        handle.flush()
+        os.fsync(handle.fileno())
+
+
+def _generate_content_recorded(client, *, model: str, contents, config,
+                               slug: str, episode: int | None, shot: int | None,
+                               task_type: str, is_fallback: bool,
+                               experiment_id: str | None = None):
+    """Bir Gemini çağrısını, ücret/kota tüketiminden önce kalıcı olarak kaydet."""
+    attempt_id = uuid.uuid4().hex
+    try:
+        _strict_log_event(slug, {
+            "event": "qc_api_attempt",
+            "attempt_id": attempt_id,
+            "task_type": task_type,
+            "model": model,
+            "is_fallback": bool(is_fallback),
+            "episode": episode,
+            "shot": shot,
+        }, experiment_id=experiment_id)
+    except Exception as error:
+        raise QCApiExhausted("logging", str(error)) from error
+
+    try:
+        response = client.models.generate_content(
+            model=model, contents=contents, config=config
+        )
+    except Exception as error:
+        outcome = "429" if _classify_api_error(error) == "quota" else "error"
+        try:
+            _strict_log_event(slug, {
+                "event": "qc_api_result",
+                "attempt_id": attempt_id,
+                "outcome": outcome,
+            }, experiment_id=experiment_id)
+        except Exception as log_error:
+            raise QCApiExhausted("logging", str(log_error)) from log_error
+        raise
+
+    try:
+        _strict_log_event(slug, {
+            "event": "qc_api_result",
+            "attempt_id": attempt_id,
+            "outcome": "ok",
+        }, experiment_id=experiment_id)
+    except Exception as error:
+        raise QCApiExhausted("logging", str(error)) from error
+    return response
+
+
 _REF_IMAGE_CACHE: dict[str, bytes] = {}
 
 
@@ -248,17 +354,17 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    opening_frame: Path | None = None,
                    require_object_match: bool = False,
                    require_continuity: bool = False,
-                   require_first_frame: bool = False) -> dict | None:
+                   require_first_frame: bool = False, *,
+                   slug: str, episode: int | None, shot: int | None,
+                   experiment_id: str | None = None) -> dict | None:
     """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
     if not GEMINI_API_KEY:
-        logger.warning("⚠️ QC: GEMINI_API_KEY yok — denetim atlanıyor")
-        return None
+        raise QCApiExhausted("auth", "GEMINI_API_KEY yok")
     try:
         from google import genai
         from google.genai import types
     except ImportError as error:
-        logger.warning(f"⚠️ QC: google-genai import edilemedi ({error}) — denetim atlanıyor")
-        return None
+        raise QCApiExhausted("server", f"google-genai import edilemedi: {error}") from error
 
     parts = []
     if ref_face:
@@ -295,35 +401,43 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
         instruction += _CONTINUITY_QC_ADDENDUM
     if require_first_frame:
         instruction += _FIRST_FRAME_QC_ADDENDUM
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    config = types.GenerateContentConfig(
-        system_instruction=instruction,
-        response_mime_type="application/json",
-        temperature=0.1,
-    )
-    last_error = None
-    for model in (QC_MODEL, QC_MODEL_FALLBACK):
+    try:
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        config = types.GenerateContentConfig(
+            system_instruction=instruction,
+            response_mime_type="application/json",
+            temperature=0.1,
+        )
+    except Exception as error:
+        raise QCApiExhausted(_classify_api_error(error), str(error)) from error
+    last_error: Exception | None = None
+    last_reason = "server"
+    for model_index, model in enumerate((QC_MODEL, QC_MODEL_FALLBACK)):
         for attempt in range(1, max_tries + 1):
+            response_received = False
             try:
-                response = client.models.generate_content(
-                    model=model, contents=parts, config=config
+                response = _generate_content_recorded(
+                    client, model=model, contents=parts, config=config,
+                    slug=slug, episode=episode, shot=shot, task_type="visual_review",
+                    is_fallback=model_index > 0, experiment_id=experiment_id,
                 )
-                return _parse_json(response.text or "")
+                response_received = True
+                return _parse_response_json(response)
+            except QCApiExhausted:
+                raise
             except Exception as error:
                 last_error = error
                 message = str(error)
-                bad_json = isinstance(error, json.JSONDecodeError)
-                transient = any(value in message for value in (
-                    "503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
-                    "INTERNAL", "deadline",
-                ))
+                bad_json = response_received
+                last_reason = "parse" if bad_json else _classify_api_error(error)
+                transient = _is_transient_api_error(error)
                 if (transient or bad_json) and attempt < max_tries:
                     time.sleep(3 if bad_json else min(5 * attempt, 15))
                     continue
                 logger.warning(f"⚠️ QC {model} başarısız: {message[:120]}")
                 break
     logger.warning(f"⚠️ QC denetimi yapılamadı ({last_error})")
-    return None
+    raise QCApiExhausted(last_reason, str(last_error or "bilinmeyen hata"))
 
 
 # ─── 2) Klip denetimi + karar ──────────────────────────────────────────────────
@@ -377,11 +491,19 @@ def _decide(review: dict, qc: dict, has_ref: bool,
 
 
 def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
-                qc: dict, *, object_ref: bytes | None = None,
-                previous_frame: Path | None = None,
-                opening_frame: Path | None = None) -> tuple[dict | None, str, list[str], list[Path]]:
+                 qc: dict, *, object_ref: bytes | None = None,
+                 previous_frame: Path | None = None,
+                 opening_frame: Path | None = None,
+                 episode: int | None = None,
+                 experiment_id: str | None = None,
+                 api_fail_closed: bool = False) -> tuple[dict | None, str, list[str], list[Path]]:
     clip_path = Path(clip_path)
     shot_n = int(shot.get("n") or 0)
+    if episode is None:
+        episode = qc.get("_api_episode")
+    if experiment_id is None:
+        experiment_id = qc.get("_api_experiment_id")
+    api_fail_closed = bool(api_fail_closed or qc.get("_api_fail_closed"))
     mandatory = bool(
         qc.get("require_no_face") or qc.get("require_object_match")
         or (qc.get("require_continuity") and 2 <= shot_n <= 4)
@@ -411,6 +533,8 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         require_object_match=bool(qc.get("require_object_match")),
         require_continuity=bool(qc.get("require_continuity") and 2 <= shot_n <= 4),
         require_first_frame=bool(qc.get("require_first_frame") and shot_n == 1),
+        slug=bible.slug, episode=episode, shot=shot_n,
+        experiment_id=experiment_id,
     )
     if review is None:
         if qc.get("require_no_face"):
@@ -422,6 +546,8 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         return None, ("hold" if mandatory else "skip"), [reason], frames
     if not isinstance(review, dict):
         reason = "QC yanıtı zorunlu JSON nesnesi değil"
+        if api_fail_closed:
+            raise QCApiExhausted("parse", reason)
         return None, ("hold" if mandatory else "skip"), [reason], frames
     verdict, reasons = _decide(review, qc, ref_face is not None, shot_n)
     return review, verdict, reasons, frames
@@ -494,6 +620,50 @@ def _log_event(slug: str, entry: dict, *,
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except Exception as e:
         logger.warning(f"⚠️ QC log yazılamadı: {e}")
+
+
+def notify_qc_exhaustion(title: str, episode: int, reason: str,
+                         shot: int | None = None, *, blocking: bool = True) -> None:
+    """Kota tükenmesini kota-dışı QC arızalarından açıkça ayır.
+
+    blocking=False: seride zorunlu kapı yok, bölüm QC'siz devam ediyor. Sessiz
+    geçiş YASAK olduğu için mesaj yine gider ama sonucu doğru anlatır.
+    """
+    target = f"ep{episode}" + (f" çekim {shot}" if shot is not None else "")
+    outcome = ("Bölüm QC HOLD; yayınlanmayacak." if blocking else
+               "Seride zorunlu kapı yok: bölüm QC'SİZ devam ediyor, elle bak.")
+    if reason == "quota":
+        _notify(
+            f"🚨 *QC KOTA TÜKENDİ: {title}* {target}\n"
+            f"Gemini 429 denemeleri tükendi. {outcome}"
+        )
+    else:
+        _notify(
+            f"🚨 *QC KOTA-DIŞI TÜKENME: {title}* {target}\n"
+            f"Neden: `{reason}`. {outcome}"
+        )
+
+
+def _api_fail_open(qc: dict) -> bool:
+    """Seri, degerlendirilemeyen QC'de ACIK bicimde devam etmeyi secmis mi?
+
+    Varsayilan fail-closed'dur. `qc.api_fail_open` YALNIZ zorunlu kapisi olmayan
+    serilerde gecerlidir: ilan edilmis bir kapidan muafiyet satin alinamaz.
+    P9 gerekcesi: tek bir Gemini kota tukenmesi, ayri QC anahtari (ROCK C2) hazir
+    olmadan canli kanallari birden susturmamali; ama sessizce de gecilmez, alarm gider.
+    """
+    return bool(qc.get("api_fail_open")) and not _has_mandatory_gate(qc)
+
+
+
+def _has_mandatory_gate(qc: dict) -> bool:
+    """Seri, değerlendirilemeyen QC'de bölümü durduracak bir kapı ilan etmiş mi?"""
+    return bool(
+        qc.get("require_no_face") or qc.get("require_object_match")
+        or qc.get("require_continuity") or qc.get("require_first_frame")
+        or qc.get("native_audio_review")
+    )
+
 
 
 def allocate_regen_rounds(shots: list[int], spent: float, cap: float,
@@ -673,17 +843,19 @@ Estimate the fraction of the supplied audio that is effectively silent from 0.0 
 Return ONLY the JSON object."""
 
 
-def _review_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
+def _review_audio(audio_path: Path, max_tries: int = 3, *,
+                  slug: str, episode: int | None, shot: int | None = None,
+                  experiment_id: str | None = None) -> dict | None:
     """Send an extracted audio sample to Gemini using the clip-QC retry/model pattern."""
+    if not slug:
+        raise QCApiExhausted("logging", "ses QC günlüğü için seri kimliği belirlenemedi")
     if not GEMINI_API_KEY:
-        logger.warning("⚠️ Ses QC: GEMINI_API_KEY yok — ses doğrulanamıyor")
-        return None
+        raise QCApiExhausted("auth", "GEMINI_API_KEY yok")
     try:
         from google import genai
         from google.genai import types
     except ImportError as error:
-        logger.warning(f"⚠️ Ses QC: google-genai import edilemedi ({error})")
-        return None
+        raise QCApiExhausted("server", f"google-genai import edilemedi: {error}") from error
 
     try:
         audio = audio_path.read_bytes()
@@ -696,31 +868,37 @@ def _review_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
             text="Inspect this video's first 60 seconds of audio for the required fields."
         ),
     ]
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    cfg = types.GenerateContentConfig(
-        system_instruction=_AUDIO_QC_SYSTEM,
-        response_mime_type="application/json",
-        temperature=0.1,
-    )
-    last_error = None
-    for model in (QC_MODEL, QC_MODEL_FALLBACK):
+    try:
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        cfg = types.GenerateContentConfig(
+            system_instruction=_AUDIO_QC_SYSTEM,
+            response_mime_type="application/json",
+            temperature=0.1,
+        )
+    except Exception as error:
+        raise QCApiExhausted(_classify_api_error(error), str(error)) from error
+    last_error: Exception | None = None
+    last_reason = "server"
+    for model_index, model in enumerate((QC_MODEL, QC_MODEL_FALLBACK)):
         for attempt in range(1, max_tries + 1):
+            response_received = False
             try:
-                response = client.models.generate_content(
-                    model=model, contents=parts, config=cfg
+                response = _generate_content_recorded(
+                    client, model=model, contents=parts, config=cfg,
+                    slug=slug, episode=episode, shot=shot,
+                    task_type="delivery_audio_review", is_fallback=model_index > 0,
+                    experiment_id=experiment_id,
                 )
-                return _parse_json(response.text or "")
+                response_received = True
+                return _parse_response_json(response)
+            except QCApiExhausted:
+                raise
             except Exception as error:
                 last_error = error
                 message = str(error)
-                bad_json = isinstance(error, json.JSONDecodeError)
-                transient = any(
-                    marker in message
-                    for marker in (
-                        "503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
-                        "INTERNAL", "deadline",
-                    )
-                )
+                bad_json = response_received
+                last_reason = "parse" if bad_json else _classify_api_error(error)
+                transient = _is_transient_api_error(error)
                 if (transient or bad_json) and attempt < max_tries:
                     wait = 3 if bad_json else min(5 * attempt, 15)
                     logger.warning(
@@ -732,7 +910,7 @@ def _review_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
                 logger.warning(f"⚠️ Ses QC {model} başarısız: {message[:120]}")
                 break
     logger.warning(f"⚠️ Ses QC yapılamadı ({last_error})")
-    return None
+    raise QCApiExhausted(last_reason, str(last_error or "bilinmeyen hata"))
 
 
 _RAW_AUDIO_QC_SYSTEM = """You are a strict quality-control inspector for raw native audio from one generated video shot.
@@ -749,17 +927,17 @@ Set unwanted_music true for any musical score, melody, beat, song, or rhythmic m
 Use notes for one concise observation. Return ONLY the JSON object."""
 
 
-def _review_raw_native_audio(audio_path: Path, max_tries: int = 3) -> dict | None:
+def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
+                             slug: str, episode: int | None, shot: int | None,
+                             experiment_id: str | None = None) -> dict | None:
     """Review one persisted raw WAV stem with the native-audio schema."""
     if not GEMINI_API_KEY:
-        logger.warning("⚠️ Ham ses QC: GEMINI_API_KEY yok — denetim başarısız")
-        return None
+        raise QCApiExhausted("auth", "GEMINI_API_KEY yok")
     try:
         from google import genai
         from google.genai import types
     except ImportError as error:
-        logger.warning(f"⚠️ Ham ses QC: google-genai import edilemedi ({error})")
-        return None
+        raise QCApiExhausted("server", f"google-genai import edilemedi: {error}") from error
 
     try:
         audio = audio_path.read_bytes()
@@ -770,31 +948,37 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3) -> dict | Non
         types.Part.from_bytes(data=audio, mime_type="audio/wav"),
         types.Part.from_text(text="Inspect this raw shot-audio stem for every required field."),
     ]
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    cfg = types.GenerateContentConfig(
-        system_instruction=_RAW_AUDIO_QC_SYSTEM,
-        response_mime_type="application/json",
-        temperature=0.1,
-    )
-    last_error = None
-    for model in (QC_MODEL, QC_MODEL_FALLBACK):
+    try:
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        cfg = types.GenerateContentConfig(
+            system_instruction=_RAW_AUDIO_QC_SYSTEM,
+            response_mime_type="application/json",
+            temperature=0.1,
+        )
+    except Exception as error:
+        raise QCApiExhausted(_classify_api_error(error), str(error)) from error
+    last_error: Exception | None = None
+    last_reason = "server"
+    for model_index, model in enumerate((QC_MODEL, QC_MODEL_FALLBACK)):
         for attempt in range(1, max_tries + 1):
+            response_received = False
             try:
-                response = client.models.generate_content(
-                    model=model, contents=parts, config=cfg
+                response = _generate_content_recorded(
+                    client, model=model, contents=parts, config=cfg,
+                    slug=slug, episode=episode, shot=shot,
+                    task_type="native_audio_review", is_fallback=model_index > 0,
+                    experiment_id=experiment_id,
                 )
-                return _parse_json(response.text or "")
+                response_received = True
+                return _parse_response_json(response)
+            except QCApiExhausted:
+                raise
             except Exception as error:
                 last_error = error
                 message = str(error)
-                bad_json = isinstance(error, json.JSONDecodeError)
-                transient = any(
-                    marker in message
-                    for marker in (
-                        "503", "429", "500", "UNAVAILABLE", "RESOURCE_EXHAUSTED",
-                        "INTERNAL", "deadline",
-                    )
-                )
+                bad_json = response_received
+                last_reason = "parse" if bad_json else _classify_api_error(error)
+                transient = _is_transient_api_error(error)
                 if (transient or bad_json) and attempt < max_tries:
                     wait = 3 if bad_json else min(5 * attempt, 15)
                     logger.warning(
@@ -806,12 +990,13 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3) -> dict | Non
                 logger.warning(f"⚠️ Ham ses QC {model} başarısız: {message[:120]}")
                 break
     logger.warning(f"⚠️ Ham ses QC yapılamadı ({last_error})")
-    return None
+    raise QCApiExhausted(last_reason, str(last_error or "bilinmeyen hata"))
 
 
 def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
                             episode: int, attempt: int, *,
-                            output_dir: str | Path | None = None) -> tuple[
+                            output_dir: str | Path | None = None,
+                            experiment_id: str | None = None) -> tuple[
                                 dict | None, str, list[str], Path | None
                             ]:
     """Persist and review a raw shot stem; unavailable/invalid review fails closed."""
@@ -825,7 +1010,10 @@ def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
     if extracted is None:
         return None, "fail", ["ham native ses stem'i çıkarılamadı"], None
 
-    review = _review_raw_native_audio(extracted)
+    review = _review_raw_native_audio(
+        extracted, slug=bible.slug, episode=episode, shot=shot_number,
+        experiment_id=experiment_id,
+    )
     valid = (
         isinstance(review, dict)
         and type(review.get("has_foley")) is bool
@@ -834,7 +1022,9 @@ def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
         and isinstance(review.get("notes"), str)
     )
     if not valid:
-        return None, "fail", ["ham native ses denetimi zorunlu alanları doğrulamadı"], extracted
+        raise QCApiExhausted(
+            "parse", "ham native ses denetimi zorunlu alanları doğrulamadı"
+        )
 
     normalized = {
         "has_foley": review["has_foley"],
@@ -866,9 +1056,13 @@ def _log_audio(path: Path, **values) -> None:
         _log_event(slug, {"event": "audio", "file": path.name, **values})
 
 
-def qc_audio(path: str | Path) -> dict | None:
+def qc_audio(path: str | Path, *, slug: str | None = None,
+             episode: int | None = None, shot: int | None = None,
+             experiment_id: str | None = None,
+             api_fail_closed: bool = False) -> dict | None:
     """Verify the first 60 seconds of delivered audio with strict Gemini JSON."""
     media_path = Path(path)
+    journal_slug = slug or _audio_slug(media_path)
     try:
         with tempfile.TemporaryDirectory(prefix="series-audio-qc-") as temp_dir:
             sample = Path(temp_dir) / "sample.mp3"
@@ -882,7 +1076,12 @@ def qc_audio(path: str | Path) -> dict | None:
             if result.returncode != 0 or not sample.exists() or sample.stat().st_size == 0:
                 _log_audio(media_path, status="extract_failed")
                 return None
-            review = _review_audio(sample)
+            review = _review_audio(
+                sample, slug=journal_slug or "", episode=episode, shot=shot,
+                experiment_id=experiment_id,
+            )
+    except QCApiExhausted:
+        raise
     except Exception as error:
         logger.warning(f"⚠️ Ses QC örneği çıkarılamadı ({error})")
         _log_audio(media_path, status="extract_failed")
@@ -901,6 +1100,8 @@ def qc_audio(path: str | Path) -> dict | None:
     if not valid:
         logger.warning("⚠️ Ses QC zorunlu JSON alanları geçersiz")
         _log_audio(media_path, status="invalid_json")
+        if api_fail_closed:
+            raise QCApiExhausted("parse", "ses QC zorunlu JSON alanları geçersiz")
         return None
 
     normalized = {
@@ -928,6 +1129,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         return Path(clip_path), 0.0, "pass"
     clip_path = Path(clip_path)
     slug, n = bible.slug, int(shot.get("n") or 0)
+    budget.pop("hold_reason", None)
     extra_credits = 0.0
     all_fix_notes: list[str] = []
     attempt = 0
@@ -966,16 +1168,18 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 opening_metrics = ffmpeg_tools.frame_metrics(opening_frame, width=270)
 
         audio_failure = False
+        api_hold_reason = None
         if qc.get("native_audio_review"):
-            if experiment_id is not None:
+            try:
                 review, verdict, reasons, stem = review_raw_native_audio(
                     bible, shot, clip_path, episode, attempt,
-                    output_dir=clip_path.parent.parent,
+                    output_dir=clip_path.parent.parent if experiment_id is not None else None,
+                    experiment_id=experiment_id,
                 )
-            else:
-                review, verdict, reasons, stem = review_raw_native_audio(
-                    bible, shot, clip_path, episode, attempt
-                )
+            except QCApiExhausted as error:
+                review, verdict, stem = None, "hold", None
+                reasons = [f"QC API deneme politikası tükendi ({error.reason})"]
+                api_hold_reason = error.reason
             if review is None:
                 verdict = "hold"
                 reasons = [*reasons, "zorunlu ham ses denetimi değerlendirilemedi"]
@@ -996,6 +1200,12 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         audio_hold = bool(qc.get("native_audio_review") and verdict == "hold")
         if not audio_hold and not audio_failure:
+            review_qc = {
+                **qc,
+                "_api_episode": episode,
+                "_api_experiment_id": experiment_id,
+                "_api_fail_closed": True,
+            }
             while True:
                     review_kwargs = {}
                     if qc.get("require_object_match"):
@@ -1004,9 +1214,16 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                         review_kwargs["previous_frame"] = previous_frame
                     if qc.get("require_first_frame") and n == 1:
                         review_kwargs["opening_frame"] = opening_frame
-                    review, verdict, reasons, frames = review_clip(
-                        bible, shot, clip_path, current_prompt, qc, **review_kwargs
-                    )
+                    try:
+                        review, verdict, reasons, frames = review_clip(
+                            bible, shot, clip_path, current_prompt, review_qc,
+                            **review_kwargs,
+                        )
+                    except QCApiExhausted as error:
+                        review, frames = None, []
+                        verdict = "skip" if _api_fail_open(qc) else "hold"
+                        reasons = [f"QC API deneme politikası tükendi ({error.reason})"]
+                        api_hold_reason = error.reason
                     mandatory_visual = bool(
                         qc.get("require_no_face")
                         or qc.get("require_object_match")
@@ -1061,7 +1278,32 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     )
                     time.sleep(wait)
 
+        if api_hold_reason is not None and verdict == "skip":
+            # P9 (filo riski): API tükenmesi HER ZAMAN yüksek sesle raporlanır, ama
+            # bölümü yalnız ZORUNLU kapısı olan seride durdurur. Zorunlu kapısı
+            # olmayan seriler (bugün from-scratch, event-horizon) eskisi gibi
+            # QC'siz devam eder — aksi hâlde tek bir Gemini kota tükenmesi, ayrı QC
+            # anahtarı (ROCK C2) hazır olmadan canlı kanalları birden susturur.
+            # Sessizlik değil, sesli devam: alarm + defter kaydı aşağıda yazılır.
+            if not _api_fail_open(qc):
+                verdict = "hold"
+                reasons = [*reasons, f"QC API tükenmesi giderilemedi ({api_hold_reason})"]
+            else:
+                reasons = [*reasons,
+                           f"QC API tükenmesi ({api_hold_reason}) — seride zorunlu kapı "
+                           f"yok, bölüm QC'siz sürüyor"]
+                notify_qc_exhaustion(bible.title, episode, api_hold_reason, n,
+                                     blocking=False)
+                _log_event(slug, {
+                    "event": "qc_api_exhausted_open",
+                    "episode": episode, "shot": n, "attempt": attempt,
+                    "reason": api_hold_reason, "reasons": reasons,
+                    "clip": clip_path.name,
+                }, experiment_id=experiment_id)
         if verdict == "hold":
+            if api_hold_reason is not None:
+                budget["hold_reason"] = api_hold_reason
+                notify_qc_exhaustion(bible.title, episode, api_hold_reason, n)
             held = clip_path.parent / f"{clip_path.stem}_qchold{attempt}{clip_path.suffix}"
             try:
                 clip_path.replace(held)
@@ -1069,7 +1311,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 logger.warning(f"⚠️ QC: beklemeye alınan klip taşınamadı ({error})")
             _log_event(slug, {
                 "event": "qc_hold", "episode": episode, "shot": n,
-                "attempt": attempt, "reasons": reasons, "clip": held.name,
+                "attempt": attempt, "reason": api_hold_reason,
+                "reasons": reasons, "clip": held.name,
             }, experiment_id=experiment_id)
             logger.error(f"⏸️ QC HOLD: çekim {n} zorunlu kapıda değerlendirilemedi")
             return None, extra_credits, "hold"

@@ -13,7 +13,8 @@
     },
     "qc": {
       "enabled": true,
-      "notes": "Every episode must name a real celestial object and communicate exactly one verified astronomical fact. No closing card, presentation gesture, celebration, readable counterfeit text, logo, caption, or watermark may appear. Celestial scale and appearance must stay physically coherent. Horror aesthetics and rapid flashing sequences are automatic failures."
+      "notes": "Every episode must name a real celestial object and communicate exactly one verified astronomical fact. No closing card, presentation gesture, celebration, readable counterfeit text, logo, caption, or watermark may appear. Celestial scale and appearance must stay physically coherent. Horror aesthetics and rapid flashing sequences are automatic failures.",
+      "api_fail_open": true
     }
   },
   "art_style": "Photoreal astronomical cinema in vertical 9:16, grounded in real celestial objects and NASA-image realism; physically coherent scale, dramatic natural cosmic light, crisp planetary and stellar detail, deep blacks, restrained cinematic color, no fantasy spacecraft focus, no on-screen text, no logos, no watermarks.",

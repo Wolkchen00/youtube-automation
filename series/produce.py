@@ -442,7 +442,8 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     return out
 
 
-def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path) -> bool:
+def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path, *,
+                                  experiment_id: str | None = None) -> bool:
     """Fail-closed delivery gate for a required native construction soundtrack."""
     mean_volume = ffmpeg_tools.measure_mean_volume(final_ep)
     logger.info(f"🔊 Diegetik ses ölçümü: mean_volume={mean_volume!r} dB")
@@ -453,7 +454,10 @@ def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path) -> 
     elif mean_volume < -50.0:
         failure = f"mean_volume çok düşük ({mean_volume:.1f} dB < -50.0 dB)"
     else:
-        audio_review = critic.qc_audio(final_ep)
+        audio_review = critic.qc_audio(
+            final_ep, slug=bible.slug, episode=number,
+            experiment_id=experiment_id, api_fail_closed=True,
+        )
         logger.info(
             "🔊 Diegetik ses Gemini ölçümü: "
             + json.dumps(audio_review, ensure_ascii=False, sort_keys=True)
@@ -1421,7 +1425,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 if qc_path is None:
                     if qc_status == "hold":
                         return ProduceResult(
-                            "qc_hold", reason=f"mandatory QC unavailable for shot {n}"
+                            "qc_hold", reason=qc_budget.get("hold_reason")
+                            or f"mandatory QC unavailable for shot {n}"
                         )
                     status = "qc_skip" if qc_status == "skip" else "qc_fail"
                     if bible.require_all_shots:
@@ -1554,7 +1559,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             if qc_path is None:
                 if qc_status == "hold":
                     return ProduceResult(
-                        "qc_hold", reason=f"mandatory QC unavailable for shot {n}"
+                        "qc_hold", reason=qc_budget.get("hold_reason")
+                        or f"mandatory QC unavailable for shot {n}"
                     )
                 status = "qc_skip" if qc_status == "skip" else "qc_fail"
                 if bible.require_all_shots:
@@ -1784,10 +1790,22 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 return _audio_master_hold("final ses doğrulaması başarısız")
             final_ep = mastered_1080
 
-    if "native_audio" in required_layers and not _verify_native_audio_delivery(
-        bible, number, final_ep
-    ):
-        return None
+    if "native_audio" in required_layers:
+        try:
+            native_audio_ok = _verify_native_audio_delivery(
+                bible, number, final_ep, experiment_id=experiment_id
+            )
+        except critic.QCApiExhausted as error:
+            critic.notify_qc_exhaustion(bible.title, number, error.reason)
+            critic._log_event(slug, {
+                "event": "qc_hold", "episode": number, "shot": None,
+                "reason": error.reason,
+                "reasons": [f"QC API deneme politikası tükendi ({error.reason})"],
+                "clip": Path(final_ep).name,
+            }, experiment_id=experiment_id)
+            return ProduceResult("qc_hold", reason=error.reason)
+        if not native_audio_ok:
+            return None
 
     # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar).
     # chain_scope="episode" ise bölümler arası taşıma YOK — sidecar yazılmaz.

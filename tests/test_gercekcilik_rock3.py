@@ -243,12 +243,14 @@ class MandatoryGateTests(unittest.TestCase):
                 "google": fake_google,
                 "google.genai": fake_genai,
                 "google.genai.types": fake_types,
-            }), mock.patch.object(critic, "GEMINI_API_KEY", "test-key"):
+            }), mock.patch.object(critic, "GEMINI_API_KEY", "test-key"), \
+                    mock.patch.object(critic, "data_dir", return_value=root):
                 result = critic._review_frames(
                     [frame], None, "prompt", "notes", object_ref=b"object",
                     previous_frame=previous, opening_frame=opening,
                     require_object_match=True, require_continuity=True,
                     require_first_frame=True,
+                    slug="rock3-test", episode=1, shot=1,
                 )
 
         self.assertEqual(result["object_match"], True)
