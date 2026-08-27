@@ -47,3 +47,19 @@
   gibi commit edilerek ya da VPS uzerinde tek kopya tutularak).
 - **[orta] Ucusta TTL'i (900 sn) olculmedi.** Uzun Omni kosularinda tek cagri bu sureyi asarsa
   koruma erken dusebilir; pilot-2 sirasinda gercek cagri sureleri olculup deger buna gore konmali.
+
+## ROCK C2 model kanidi (2026-08-27)
+
+Anahtarin gordugu model sayisi: 53. Flash ailesinde mevcut olanlar arasinda
+`gemini-3.5-flash`, `gemini-3.6-flash`, `gemini-3.7-flash` ve `gemini-flash-latest` var;
+QC hala `gemini-2.5-flash` (birincil) + `gemini-flash-latest` (yedek) kullaniyor.
+
+**Karar: model DEGISTIRILMEDI.** Gerekce: (a) model degistirmek kota stratejisi degildir,
+ayni proje ayni havuzdur , kotayi ayiran sey ayri anahtar/projedir (bu rock'in asil isi);
+(b) QC modelini degistirmek 18 serinin verdict dagilimini OLCUMSUZ kaydirir. Model
+karsilastirmasi P7 fixture seti hazir olunca (pilot-2 sonrasi) yapilmalidir , ayni
+etiketli kareler uzerinde yanlis-gecis/yanlis-red karsilastirmasi olmadan "daha yeni model
+daha iyidir" bir varsayimdir.
+
+- **[orta] QC model karsilastirmasi (P7 sonrasi):** gemini-2.5-flash vs 3.x, ayni held-out
+  fixture setinde; kazanan olcumle secilir.

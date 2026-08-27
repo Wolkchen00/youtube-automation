@@ -58,6 +58,29 @@ QC_REVIEW_RETRY_DELAY = 0.05
 QC_HOLD_REASONS = frozenset({"quota", "auth", "server", "parse", "logging"})
 
 
+_QC_KEY_SOURCE_LOGGED = False
+
+
+def _qc_api_key() -> tuple[str | None, str]:
+    """QC icin kullanilacak anahtar ve KAYNAGININ ADI (anahtarin kendisi ASLA loglanmaz).
+
+    ROCK C2: uretim/ikmal anahtari ile QC anahtari ayrilabilsin diye. GEMINI_API_KEY_QC
+    tanimliysa QC onu kullanir; tanimsizsa davranis BUGUNKUYLE birebir aynidir.
+    Not: model degistirmek kota stratejisi DEGILDIR (ayni proje = ayni havuz);
+    kotayi ayiran sey ayri proje/anahtar ya da odemeli katmandir.
+    """
+    global _QC_KEY_SOURCE_LOGGED
+    separate = os.environ.get("GEMINI_API_KEY_QC")
+    if separate and separate.strip():
+        key, source = separate.strip(), "GEMINI_API_KEY_QC"
+    else:
+        key, source = GEMINI_API_KEY, "GEMINI_API_KEY"
+    if not _QC_KEY_SOURCE_LOGGED:
+        logger.info(f"🔑 QC anahtar kaynagi: {source}")
+        _QC_KEY_SOURCE_LOGGED = True
+    return key, source
+
+
 class QCApiExhausted(RuntimeError):
     """QC API deneme politikası sonuç vermeden tükendi."""
 
@@ -361,8 +384,9 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    slug: str, episode: int | None, shot: int | None,
                    experiment_id: str | None = None) -> dict | None:
     """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
-    if not GEMINI_API_KEY:
-        raise QCApiExhausted("auth", "GEMINI_API_KEY yok")
+    qc_key, qc_key_source = _qc_api_key()
+    if not qc_key:
+        raise QCApiExhausted("auth", f"{qc_key_source} yok")
     try:
         from google import genai
         from google.genai import types
@@ -411,7 +435,7 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
     if state_carry_expected:
         instruction += _state_carry_addendum(state_carry_expected)
     try:
-        client = genai.Client(api_key=GEMINI_API_KEY)
+        client = genai.Client(api_key=qc_key)
         config = types.GenerateContentConfig(
             system_instruction=instruction,
             response_mime_type="application/json",
@@ -1001,8 +1025,9 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
     """Send an extracted audio sample to Gemini using the clip-QC retry/model pattern."""
     if not slug:
         raise QCApiExhausted("logging", "ses QC günlüğü için seri kimliği belirlenemedi")
-    if not GEMINI_API_KEY:
-        raise QCApiExhausted("auth", "GEMINI_API_KEY yok")
+    qc_key, qc_key_source = _qc_api_key()
+    if not qc_key:
+        raise QCApiExhausted("auth", f"{qc_key_source} yok")
     try:
         from google import genai
         from google.genai import types
@@ -1021,7 +1046,7 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
         ),
     ]
     try:
-        client = genai.Client(api_key=GEMINI_API_KEY)
+        client = genai.Client(api_key=qc_key)
         cfg = types.GenerateContentConfig(
             system_instruction=_AUDIO_QC_SYSTEM,
             response_mime_type="application/json",
@@ -1083,8 +1108,9 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
                              slug: str, episode: int | None, shot: int | None,
                              experiment_id: str | None = None) -> dict | None:
     """Review one persisted raw WAV stem with the native-audio schema."""
-    if not GEMINI_API_KEY:
-        raise QCApiExhausted("auth", "GEMINI_API_KEY yok")
+    qc_key, qc_key_source = _qc_api_key()
+    if not qc_key:
+        raise QCApiExhausted("auth", f"{qc_key_source} yok")
     try:
         from google import genai
         from google.genai import types
@@ -1101,7 +1127,7 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
         types.Part.from_text(text="Inspect this raw shot-audio stem for every required field."),
     ]
     try:
-        client = genai.Client(api_key=GEMINI_API_KEY)
+        client = genai.Client(api_key=qc_key)
         cfg = types.GenerateContentConfig(
             system_instruction=_RAW_AUDIO_QC_SYSTEM,
             response_mime_type="application/json",
