@@ -242,5 +242,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f8cf3b2ba5b24100876fdc9453f746c5. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f8cf3b2ba5b24100876fdc9453f746c5', 'total_platforms': 1, 'job_id': '130fd46197b3497186cdf0845622886d'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ea878492b28f4cf78b962d131ddc38cf. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ea878492b28f4cf78b962d131ddc38cf', 'total_platforms': 1, 'job_id': '0f318d5e693e43a68663772c6cf4216a'}"
     }
+  },
+  {
+    "part": 20,
+    "subtitle": "Vienna 1913: The Unthinkable Coincidence",
+    "ts": "2026-08-27T00:12:08.554965+00:00",
+    "results": {
+      "youtube": "ZFI72hS02Qs",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=8cbf2bb8c1224f01ac8975c3b25f2a72. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '8cbf2bb8c1224f01ac8975c3b25f2a72', 'total_platforms': 1, 'job_id': '3cb13b762fab4e269ea58e4ac88f53ac'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=54ca4c268bad4eca9820e1a652c2e702. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '54ca4c268bad4eca9820e1a652c2e702', 'total_platforms': 1, 'job_id': '3cd14cf4de974e9dbf18f280c3582fcf'}"
+    }
   }
 ]

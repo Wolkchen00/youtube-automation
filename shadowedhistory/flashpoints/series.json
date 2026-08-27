@@ -12,10 +12,10 @@
   "hashtags": "#shorts #history #historyfacts #didyouknow",
   "standalone": true,
   "publish_mode": "auto",
-  "status": "active",
+  "status": "completed",
   "priority": 999,
   "total_parts": 20,
-  "next_part": 20,
+  "next_part": 21,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -395,6 +395,17 @@
         "tiktok"
       ],
       "published_at": "2026-08-25T21:01:54.165039+00:00"
+    },
+    "20": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep20/ep20_narrated_music_titled.mp4",
+      "subtitle": "Vienna 1913: The Unthinkable Coincidence",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-27T00:12:08.555706+00:00"
     }
   }
 }
