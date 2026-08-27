@@ -478,7 +478,10 @@ class InstalledSeriesTests(unittest.TestCase):
                 self.assertIsNotNone(meta)
                 self.assertIsNotNone(bible)
                 self.assertTrue(meta.standalone)
-                self.assertEqual(meta.status, "active")
+                # Canlı duruma PİNLEME: filo serileri yaşam döngüsünde ilerler
+                # (flashpoints 2026-08-27'de "completed" oldu ve bu assert'i çürüttü).
+                # Değişmez olan şey serinin KURULU olması: taslak ya da askıda değil.
+                self.assertIn(meta.status, ("active", "completed"))
                 self.assertEqual(meta.priority, 999)
                 self.assertEqual(meta.auto_replenish["shots"], shots)
                 self.assertEqual(meta.auto_replenish["shot_seconds"], seconds)
