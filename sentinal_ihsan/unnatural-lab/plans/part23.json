@@ -9,30 +9,35 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet. Instead of lathering, the soap becomes perfectly rigid and begins to crack like glass under the running water.",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet. Instead of lathering, the soap becomes perfectly rigid and begins to crack like glass under the running water.",
       "seed": null,
-      "environment": "bathroom_sink"
+      "environment": "bathroom_sink",
+      "violation_observation": "the wet bar stays rigid and splits with a clean glass-like crack"
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt tap the wet pink soap against the side of the ceramic sink, causing a clean, sharp shard of soap to break off.",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt tap the wet pink soap against the side of the ceramic sink, causing a clean, sharp shard of soap to break off.",
       "seed": null,
-      "environment": "bathroom_sink"
+      "environment": "bathroom_sink",
+      "violation_observation": "a sharp translucent shard breaks cleanly off the wet bar",
+      "state_carry": "sharp soap shards rest on the sink edge"
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt stack the sharp, glass-like shards of pink soap on the edge of the sink, where they catch the light like polished gemstones.",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt stack the sharp, glass-like shards of pink soap on the edge of the sink, where they catch the light like polished gemstones.",
       "seed": null,
-      "environment": "bathroom_sink"
+      "environment": "bathroom_sink",
+      "violation_observation": "the stacked shards hold sharp edges and shine like polished glass"
     },
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt pick up the original, unbroken bar of pink soap, holding it over the sink basin.",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt pick up the original, unbroken bar of pink soap, holding it over the sink basin.",
       "seed": null,
-      "environment": "bathroom_sink"
+      "environment": "bathroom_sink",
+      "violation_observation": "the whole bar stays dry-looking and rigid in the hand"
     }
   ],
   "format_version": "tek-obje-4x6",
@@ -40,7 +45,8 @@
     "name": "Bar of soap",
     "descriptor": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top",
     "environment": "bathroom_sink",
-    "framing": "The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin."
+    "framing": "The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin.",
+    "anomaly_descriptor": "glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light"
   },
   "face_visible": false,
   "family": "impossible-state-change",

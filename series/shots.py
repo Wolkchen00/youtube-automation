@@ -35,7 +35,8 @@ from .omni_api import validate_duration, validate_ref_units
 
 
 TEK_OBJE_FORMAT = "tek-obje-4x6"
-OBJECT_CARD_FIELDS = ("name", "descriptor", "environment", "framing")
+OBJECT_CARD_FIELDS = ("name", "descriptor", "environment", "framing",
+                       "anomaly_descriptor")
 NEGATIVE_VIDEO_LANGUAGE = re.compile(
     r"\b(?:no|not|never|nothing|neither|nor|without|cannot|can't|don't|doesn't|"
     r"isn't|aren't|won't|absent|lacks?|lacking|avoid)\b",
@@ -74,6 +75,13 @@ def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
     if descriptor and len(descriptor.split()) < 12:
         errors.append("object_card.descriptor en az 12 kelime olmalı")
 
+    # ROCK B: anomalinin KENDİ görsel imzası. descriptor objeyi kilitler, bu alan
+    # imkânsız özelliğin ekranda nasıl göründüğünü kilitler (pilot-1 ölçümü: limon
+    # aynı kaldı ama içindeki merdiven çekim 1/3/4'te başka başka çıktı).
+    anomaly = values.get("anomaly_descriptor", "")
+    if anomaly and len(anomaly.split()) < 10:
+        errors.append("object_card.anomaly_descriptor en az 10 kelime olmalı")
+
     env_id = values.get("environment", "")
     if env_id and not bible.get("environments", env_id):
         errors.append(f"object_card.environment bible.environments içinde yok ({env_id!r})")
@@ -106,10 +114,48 @@ def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
             errors.append(f"çekim {number} prompt'u yalnız olumlu görsel dil kullanmalı")
         if descriptor and descriptor not in prompt:
             errors.append(f"çekim {number} object_card.descriptor metnini birebir içermeli")
+        if anomaly and anomaly not in prompt:
+            errors.append(
+                f"çekim {number} object_card.anomaly_descriptor metnini birebir içermeli"
+            )
+        observation = shot.get("violation_observation")
+        if observation is not None:
+            if (not isinstance(observation, str) or not observation.strip()
+                    or observation != observation.strip()):
+                errors.append(
+                    f"çekim {number} violation_observation boş olmayan, kırpılmış string olmalı"
+                )
+            elif len(observation.split()) < 4:
+                errors.append(f"çekim {number} violation_observation en az 4 kelime olmalı")
+            elif NEGATIVE_VIDEO_LANGUAGE.search(observation):
+                errors.append(
+                    f"çekim {number} violation_observation OLUMLU ve gözlemlenebilir olmalı; "
+                    f"olumsuz ya da zaman-ötesi iddia yasak"
+                )
+        carry = shot.get("state_carry")
+        if carry is not None:
+            if (not isinstance(carry, str) or not carry.strip()
+                    or carry != carry.strip()):
+                errors.append(
+                    f"çekim {number} state_carry boş olmayan, kırpılmış string olmalı"
+                )
+            elif len(carry.split()) < 3:
+                errors.append(f"çekim {number} state_carry en az 3 kelime olmalı")
+            elif number >= len(shots):
+                errors.append(
+                    f"çekim {number} state_carry tanımlı ama ardıl çekim yok; iz yalnız bir "
+                    f"SONRAKİ çekime karşı değerlendirilir"
+                )
         if framing and framing not in prompt:
             errors.append(f"çekim {number} object_card.framing cümlesini birebir içermeli")
         if env_id and shot.get("environment") != env_id:
             errors.append(f"çekim {number} environment tam {env_id!r} olmalı")
+
+    ref_hash = plan.get("ref_prompt_sha256")
+    if ref_hash is not None and (
+        not isinstance(ref_hash, str) or not re.fullmatch(r"[0-9a-f]{64}", ref_hash)
+    ):
+        errors.append("ref_prompt_sha256 64 haneli küçük harf hex olmalı")
 
     refs = plan.get("prop_ref_urls")
     if refs is not None and (
@@ -186,7 +232,7 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
             image_urls.append(env["ref_image_url"])
             if prop_ref_urls:
                 binding_lines.append(
-                    f"[image {len(image_urls)}] is the room and workbench: keep the same surface and light."
+                    f"[image {len(image_urls)}] is the room and surface: keep the same surface and light."
                 )
         else:
             warnings.append(f"Ortam '{env_id}' referans görseli yok")

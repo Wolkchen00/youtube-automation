@@ -9,30 +9,34 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt place the stainless steel fork next to a single blue blueberry. The four metal tines slowly curl inward, wrapping around the blueberry.",
+      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle. polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing. The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt place the stainless steel fork next to a single blue blueberry. The four metal tines slowly curl inward, wrapping around the blueberry.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the four metal tines curl inward and close around the blueberry"
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lift the fork by its handle. The metal tines maintain their tight grip, holding the blueberry securely in mid-air.",
+      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle. polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing. The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lift the fork by its handle. The metal tines maintain their tight grip, holding the blueberry securely in mid-air.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the curled tines hold the blueberry in mid-air as the fork is lifted"
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt gently pull the blueberry out of the metal grip. The tines slowly stretch and reach after the fruit like small fingers.",
+      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle. polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing. The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt gently pull the blueberry out of the metal grip. The tines slowly stretch and reach after the fruit like small fingers.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the tines stretch after the fruit as it is pulled away"
     },
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lay the metal fork flat on the counter, where the tines slowly return to their straight, parallel alignment.",
+      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle. polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing. The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lay the metal fork flat on the counter, where the tines slowly return to their straight, parallel alignment.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the tines straighten back into an even parallel row on the counter"
     }
   ],
   "format_version": "tek-obje-4x6",
@@ -40,7 +44,8 @@
     "name": "Metal fork",
     "descriptor": "A shiny stainless steel four-tined dinner fork with a simple polished handle",
     "environment": "kitchen_counter",
-    "framing": "The frame remains completely locked from a tight profile angle across the kitchen counter."
+    "framing": "The frame remains completely locked from a tight profile angle across the kitchen counter.",
+    "anomaly_descriptor": "polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing"
   },
   "face_visible": false,
   "family": "impossible-behaviour",

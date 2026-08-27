@@ -8,6 +8,7 @@
 dry_run=True her ikisinde de API/kredi harcamadan adımları simüle eder.
 """
 
+import hashlib
 import json
 import shutil
 from dataclasses import dataclass
@@ -515,6 +516,10 @@ def _audio_master_hold(reason: str) -> ProduceResult:
 
 # ─── 4K master (opt-in: bible.upscale; best-effort) ───────────────────────────
 
+# ROCK B: referans prompt sablonunun surumu; sablon metni degistiginde ARTIRILIR,
+# boylece eski hash tutmaz ve tum referanslar yeniden uretilir.
+REF_PROMPT_TEMPLATE_VERSION = "rb1"
+
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
 
 
@@ -855,8 +860,37 @@ def ensure_episode_refs(
         logger.error(f"❌ Ortam referansı geçerli https URL değil: {env_id}")
         return False
 
+    # ROCK B: referans gorseli objeyi VE anomali imzasini gostermek zorundadir,
+    # cunku anomaly_match tam bu referansa karsi olculur. Prompt bilesenlerinden
+    # herhangi biri degisirse (isim, descriptor, anomali, ortam, sablon surumu)
+    # kayitli referans BAYAT sayilir ve yeniden uretilir.
+    ref_name = str(card.get("name") or "object").strip()
+    ref_descriptor = str(card.get("descriptor") or "").strip()
+    ref_anomaly = str(card.get("anomaly_descriptor") or "").strip()
+    ref_env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
+    object_prompt = (
+        f"Hero reference image of one {ref_name} on a plain neutral section of the matching "
+        f"surface. Exact object identity: {ref_descriptor}. "
+        + (f"The impossible property is visible and looks like this: {ref_anomaly}. "
+           if ref_anomaly else "")
+        + f"Environment context: {ref_env_desc}. "
+        "The entire object is clearly visible at realistic scale with its colour, material "
+        "texture and distinguishing mark sharply readable."
+    )
+    expected_ref_hash = hashlib.sha256(
+        f"{REF_PROMPT_TEMPLATE_VERSION}|{object_prompt}".encode("utf-8")
+    ).hexdigest()
+    stale_ref = (
+        existing_props is not None
+        and plan.get("ref_prompt_sha256") != expected_ref_hash
+    )
+    if stale_ref:
+        logger.warning(
+            "♻️ Obje referansi bayat (prompt bilesenleri degisti); yeniden uretilecek"
+        )
+
     missing_env = not existing_env
-    missing_object = existing_props is None
+    missing_object = existing_props is None or stale_ref
     if not missing_env and not missing_object:
         return True
     if dry_run:
@@ -879,9 +913,9 @@ def ensure_episode_refs(
     if missing_env:
         env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
         env_prompt = (
-            f"Consistent room and workbench reference for a vertical video series: {env_desc}. "
-            "One fixed composition shows the full work surface, its natural wear, the plain wall "
-            "and the established daylight with realistic home-workshop detail."
+            f"Consistent room and surface reference for a vertical video series: {env_desc}. "
+            "One fixed composition shows the full surface, its natural wear, the plain wall "
+            "and the established daylight with realistic lived-in detail."
         )
         env_file = _refs_work_dir(
             bible.slug, "environments", output_area
@@ -901,18 +935,10 @@ def ensure_episode_refs(
         )
 
     if missing_object:
-        descriptor = str(card.get("descriptor") or "").strip()
-        name = str(card.get("name") or "object").strip()
-        env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
-        object_prompt = (
-            f"Hero reference image of one {name} on a plain neutral section of the matching "
-            f"workbench. Exact object identity: {descriptor}. Environment context: {env_desc}. "
-            "The entire object is clearly visible at realistic scale with its colour, material "
-            "texture and distinguishing mark sharply readable."
-        )
+        # prompt ve hash yukarida kanonik olarak hesaplandi
         object_file = (
             _refs_work_dir(bible.slug, "props", output_area)
-            / f"ep{number:02d}_{sanitize_filename(name)}.png"
+            / f"ep{number:02d}_{sanitize_filename(ref_name)}.png"
         )
         object_url = _generate_uploaded_reference(
             bible, object_prompt, object_file, hard_cap, number, "object_ref",
@@ -921,6 +947,7 @@ def ensure_episode_refs(
         if not object_url:
             return False
         plan["prop_ref_urls"] = [object_url]
+        plan["ref_prompt_sha256"] = expected_ref_hash
         atomic_write_json(plan_path, plan)
     return True
 
@@ -1408,6 +1435,19 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     qc_context["object_ref"] = object_ref_bytes
                 if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
                     qc_context["previous_clip"] = previous_accepted_clip
+                # ROCK B: anomali imzasi plandan, ihlal gozlemi cekimden, tasinan iz
+                # ONCEKI cekimden gelir (iz yalnız bir sonraki cekime karsi olculur).
+                rb_card = (plan.get("object_card") or {}) if isinstance(plan, dict) else {}
+                rb_anomaly = rb_card.get("anomaly_descriptor")
+                if rb_anomaly:
+                    qc_context["anomaly_descriptor"] = rb_anomaly
+                rb_prev = None
+                if isinstance(plan, dict) and int(n) >= 2:
+                    for candidate in (plan.get("shots") or []):
+                        if isinstance(candidate, dict) and int(candidate.get("n") or 0) == int(n) - 1:
+                            rb_prev = candidate.get("state_carry")
+                if rb_prev:
+                    qc_context["state_carry_expected"] = rb_prev
                 if experiment_id is not None:
                     qc_context["experiment_id"] = experiment_id
                 qc_path, qc_credits, qc_status = critic.qc_shot(
@@ -1542,6 +1582,19 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 qc_context["object_ref"] = object_ref_bytes
             if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
                 qc_context["previous_clip"] = previous_accepted_clip
+            # ROCK B: anomali imzasi plandan, ihlal gozlemi cekimden, tasinan iz
+            # ONCEKI cekimden gelir (iz yalnız bir sonraki cekime karsi olculur).
+            rb_card = (plan.get("object_card") or {}) if isinstance(plan, dict) else {}
+            rb_anomaly = rb_card.get("anomaly_descriptor")
+            if rb_anomaly:
+                qc_context["anomaly_descriptor"] = rb_anomaly
+            rb_prev = None
+            if isinstance(plan, dict) and int(n) >= 2:
+                for candidate in (plan.get("shots") or []):
+                    if isinstance(candidate, dict) and int(candidate.get("n") or 0) == int(n) - 1:
+                        rb_prev = candidate.get("state_carry")
+            if rb_prev:
+                qc_context["state_carry_expected"] = rb_prev
             if experiment_id is not None:
                 qc_context["experiment_id"] = experiment_id
             qc_path, qc_credits, qc_status = critic.qc_shot(

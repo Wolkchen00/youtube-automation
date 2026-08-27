@@ -571,7 +571,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         '\n   "object_card": {"name": "<ordinary object name>", '
         '"descriptor": "<colour + material + size + one distinguishing mark, at least 12 words>", '
         '"environment": "<available environment id>", '
-        '"framing": "<one fixed-composition sentence>"},'
+        '"framing": "<one fixed-composition sentence>", "anomaly_descriptor": "<how the impossible property LOOKS on screen: material + geometry + light, at least 10 words>"},'
         if formatted_object else ""
     )
     shot_fields = f'"n": <int>, "duration": "{sec}", "prompt": "<visual description>", "seed": null'
@@ -582,6 +582,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
     elif formatted_object:
         shot_fields += ', "environment": "<object_card.environment>"'
+        shot_fields += (', "violation_observation": "<one positive, observable outcome of the impossible property in THIS shot>"'
+                        ', "state_carry": "<optional: a lasting trace this shot leaves for the NEXT shot>"')
     if want_fc:
         shot_fields += ', "fact": "<2-5 word on-screen fact, optional>"'
 
@@ -691,10 +693,22 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'such as stems, leaves or printed labels. Choose the object_card.environment id of the '
         'room where this exact object naturally lives in a real home; all four shots use that '
         'same id.'
+        ' Also write object_card.anomaly_descriptor: how the impossible property itself '
+        'LOOKS on screen (material, geometry, light) in at least 10 words; the pipeline '
+        'composes it into every shot, so do NOT repeat it inside the shot text. '
+        'For every shot give violation_observation: ONE positive, directly observable '
+        'outcome of the impossible property in that shot, written so a viewer could '
+        'confirm it from the frames alone; never phrase it as something that fails to '
+        'happen. Where a shot leaves a lasting trace the next shot must still show '
+        '(a puddle, a crushed can, a groove), add state_carry to the shot that CREATES '
+        'it; the final shot never carries state_carry.'
         if compose_object_prompt else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
         'into every one of the four shot prompts. Write one framing sentence in object_card.framing '
+        'Write object_card.anomaly_descriptor as well: how the impossible property '
+        'itself LOOKS on screen (material, geometry, light) in at least 10 words, and '
+        'copy THAT verbatim into every shot prompt too. '
         'and copy it VERBATIM into every shot prompt. All four shots use the same '
         'object_card.environment id. Shot prompts use positive visual language only.'
         if formatted_object else ""
@@ -1006,6 +1020,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             if isinstance(raw_card, dict) and isinstance(raw_card.get("descriptor"), str)
             else ""
         )
+        card_anomaly = (
+            raw_card.get("anomaly_descriptor")
+            if isinstance(raw_card, dict) and isinstance(raw_card.get("anomaly_descriptor"), str)
+            else ""
+        )
         card_framing = (
             raw_card.get("framing")
             if isinstance(raw_card, dict) and isinstance(raw_card.get("framing"), str)
@@ -1063,6 +1082,9 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     composed_action_text = prompt
                     prompt = " ".join(part for part in (
                         card_descriptor if card_descriptor not in composed_action_text else "",
+                        # ROCK B: anomalinin görsel imzası da MEKANİK eklenir;
+                        # LLM'den tekrar etmesi istenmez (descriptor kilidiyle aynı felsefe).
+                        card_anomaly if card_anomaly not in composed_action_text else "",
                         card_framing if card_framing not in composed_action_text else "",
                         card_env_desc if card_env_desc not in composed_action_text else "",
                         composed_action_text,

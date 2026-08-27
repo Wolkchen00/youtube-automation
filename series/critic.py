@@ -164,7 +164,7 @@ _CONTINUITY_QC_ADDENDUM = """
 CROSS-SHOT CONTINUITY GATE (mandatory for this shot): add these required fields:
   "continuity_ok": bool,
   "continuity_notes": string
-Compare [PREVIOUS SHOT LAST FRAME] with this shot. Require the same workbench,
+Compare [PREVIOUS SHOT LAST FRAME] with this shot. Require the same room and surface,
 composition, lighting, physical object identity, and a coherent object-state lineage.
 continuity_ok must always be a JSON boolean."""
 
@@ -355,6 +355,9 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    require_object_match: bool = False,
                    require_continuity: bool = False,
                    require_first_frame: bool = False, *,
+                   anomaly_descriptor: str | None = None,
+                   violation_observation: str | None = None,
+                   state_carry_expected: str | None = None,
                    slug: str, episode: int | None, shot: int | None,
                    experiment_id: str | None = None) -> dict | None:
     """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
@@ -401,6 +404,12 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
         instruction += _CONTINUITY_QC_ADDENDUM
     if require_first_frame:
         instruction += _FIRST_FRAME_QC_ADDENDUM
+    if anomaly_descriptor:
+        instruction += _anomaly_addendum(anomaly_descriptor)
+    if violation_observation:
+        instruction += _violation_addendum(violation_observation)
+    if state_carry_expected:
+        instruction += _state_carry_addendum(state_carry_expected)
     try:
         client = genai.Client(api_key=GEMINI_API_KEY)
         config = types.GenerateContentConfig(
@@ -442,6 +451,84 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
 
 # ─── 2) Klip denetimi + karar ──────────────────────────────────────────────────
 
+ROCK_B_FIELDS = ("anomaly_match", "violation_reads", "state_carry_ok")
+
+_RB_LABELS = {
+    "anomaly_match": "anomali kimliği",
+    "violation_reads": "ihlal okunurluğu",
+    "state_carry_ok": "sahne durumu sürekliliği",
+}
+
+_RB_SHAPE = """Every field named below is an object with EXACTLY this shape:
+  {"value": true|false|null, "visible": true|false, "confidence": 0.0-1.0}
+"visible" describes whether the REGION or ACTION that would carry the property is
+inside the sampled frames and readable, NOT whether the property is present. If that
+region is readable but the property looks wrong or is missing, answer
+visible=true and value=false. Use visible=false, value=null ONLY when the region is
+out of frame, occluded, too small, or too dark to judge. "confidence" is your certainty
+in "value"."""
+
+
+def _anomaly_addendum(anomaly_descriptor: str) -> str:
+    return f"""
+
+ANOMALY IDENTITY FIELD: add this required field:
+  "anomaly_match": {{"value": bool|null, "visible": bool, "confidence": number}}
+The episode's impossible property must look like this on screen:
+{anomaly_descriptor}
+Decide whether the sampled frames show that same anomaly, with the same material,
+geometry and light signature, in every frame where it is readable.
+{_RB_SHAPE}"""
+
+
+def _violation_addendum(observation: str) -> str:
+    return f"""
+
+VIOLATION READABILITY FIELD: add this required field:
+  "violation_reads": {{"value": bool|null, "visible": bool, "confidence": number}}
+In this shot a viewer should be able to observe exactly this:
+{observation}
+Judge only the sampled frames, in order. value=true when the frames show that outcome.
+{_RB_SHAPE}"""
+
+
+def _state_carry_addendum(expected: str) -> str:
+    return f"""
+
+CARRIED STATE FIELD: add this required field:
+  "state_carry_ok": {{"value": bool|null, "visible": bool, "confidence": number}}
+The previous shot left this lasting trace, and this shot must still show it:
+{expected}
+{_RB_SHAPE}"""
+
+
+def _parse_rb_field(raw) -> tuple | None:
+    """ROCK B alanını katı biçimde ayrıştır; şema dışıysa None."""
+    if not isinstance(raw, dict):
+        return None
+    if "value" not in raw or "visible" not in raw:
+        return None
+    value = raw.get("value")
+    visible = raw.get("visible")
+    confidence = raw.get("confidence", 1.0)
+    if value is not None and type(value) is not bool:
+        return None
+    if type(visible) is not bool:
+        return None
+    if isinstance(confidence, bool) or not isinstance(confidence, (int, float)):
+        return None
+    if not 0.0 <= float(confidence) <= 1.0:
+        return None
+    return value, visible, float(confidence)
+
+
+def _rb_enforced(qc: dict, field: str) -> bool:
+    """Alan terfi etti mi? Varsayılan HAYIR (P7: önce ölçüm, sonra kapı)."""
+    enforce = qc.get("enforce")
+    return bool(isinstance(enforce, dict) and enforce.get(field))
+
+
+
 def _decide(review: dict, qc: dict, has_ref: bool,
             shot_n: int = 1) -> tuple[str, list[str]]:
     reasons: list[str] = []
@@ -482,6 +569,23 @@ def _decide(review: dict, qc: dict, has_ref: bool,
             unevaluated.append("zorunlu açılış karesi alanı doğrulanamadı")
         elif not value:
             reasons.append("izleyici açılış karesinde imkânsız özelliği okuyamıyor")
+    # ROCK B alanları: her zaman ÖLÇÜLÜR, yalnız terfi edenler kapı olur (P7).
+    for field in qc.get("_rb_requested") or ():
+        label = _RB_LABELS.get(field, field)
+        parsed = _parse_rb_field(review.get(field))
+        if not _rb_enforced(qc, field):
+            continue
+        if parsed is None:
+            unevaluated.append(f"{label} alanı şema dışı ya da eksik")
+            continue
+        value, visible, confidence = parsed
+        if confidence < 0.5:
+            unevaluated.append(f"{label}: güven {confidence:.2f} < 0.50")
+        elif value is None and visible:
+            unevaluated.append(f"{label}: bölge görünür ama karar verilmedi")
+        elif value is False and visible:
+            reasons.append(f"{label} tutmuyor")
+
     score = review.get("artifact_score")
     if isinstance(score, (int, float)) and score >= qc["artifact_threshold"]:
         reasons.append(f"artifact skoru {score}/10 (eşik {qc['artifact_threshold']})")
@@ -496,7 +600,11 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                  opening_frame: Path | None = None,
                  episode: int | None = None,
                  experiment_id: str | None = None,
-                 api_fail_closed: bool = False) -> tuple[dict | None, str, list[str], list[Path]]:
+                 api_fail_closed: bool = False,
+                 anomaly_descriptor: str | None = None,
+                 violation_observation: str | None = None,
+                 state_carry_expected: str | None = None,
+                 ) -> tuple[dict | None, str, list[str], list[Path]]:
     clip_path = Path(clip_path)
     shot_n = int(shot.get("n") or 0)
     if episode is None:
@@ -535,6 +643,9 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         require_first_frame=bool(qc.get("require_first_frame") and shot_n == 1),
         slug=bible.slug, episode=episode, shot=shot_n,
         experiment_id=experiment_id,
+        anomaly_descriptor=anomaly_descriptor,
+        violation_observation=violation_observation,
+        state_carry_expected=state_carry_expected,
     )
     if review is None:
         if qc.get("require_no_face"):
@@ -549,7 +660,13 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         if api_fail_closed:
             raise QCApiExhausted("parse", reason)
         return None, ("hold" if mandatory else "skip"), [reason], frames
-    verdict, reasons = _decide(review, qc, ref_face is not None, shot_n)
+    requested = tuple(field for field, wanted in (
+        ("anomaly_match", anomaly_descriptor),
+        ("violation_reads", violation_observation),
+        ("state_carry_ok", state_carry_expected),
+    ) if wanted)
+    decide_qc = {**qc, "_rb_requested": requested} if requested else qc
+    verdict, reasons = _decide(review, decide_qc, ref_face is not None, shot_n)
     return review, verdict, reasons, frames
 
 
@@ -560,11 +677,11 @@ def positive_correction(issue: str) -> str:
     raw = " ".join(str(issue or "").strip().split())
     lowered = raw.lower()
     if any(word in lowered for word in ("face", "yüz")):
-        return ("Frame only the hands, forearms, object, and workbench, with the face "
-                "outside the frame.")
+        return ("Frame only the hands, forearms, object, and the surface it rests on, "
+                "keeping the face outside the frame.")
     if any(word in lowered for word in ("audio", "music", "speech", "foley", "ses", "müzik")):
         return ("Keep the soundtrack limited to natural foley from the visible hands, "
-                "object, material, and workbench.")
+                "object, material, and surface.")
     if any(word in lowered for word in (
         "object", "obje", "shape", "colour", "color", "scale", "marking", "reference",
     )):
@@ -1118,7 +1235,10 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
              regen_fn, episode: int, budget: dict, *,
              object_ref: bytes | None = None,
              previous_clip: str | Path | None = None,
-             experiment_id: str | None = None) -> tuple[Path | None, float, str]:
+             experiment_id: str | None = None,
+             anomaly_descriptor: str | None = None,
+             state_carry_expected: str | None = None,
+             ) -> tuple[Path | None, float, str]:
     """Review and optionally regenerate one clip.
 
     ``hold`` means a mandatory gate could not be evaluated.  A confident ``fail``
@@ -1214,6 +1334,13 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                         review_kwargs["previous_frame"] = previous_frame
                     if qc.get("require_first_frame") and n == 1:
                         review_kwargs["opening_frame"] = opening_frame
+                    if anomaly_descriptor:
+                        review_kwargs["anomaly_descriptor"] = anomaly_descriptor
+                    observation = shot.get("violation_observation")
+                    if observation:
+                        review_kwargs["violation_observation"] = observation
+                    if state_carry_expected:
+                        review_kwargs["state_carry_expected"] = state_carry_expected
                     try:
                         review, verdict, reasons, frames = review_clip(
                             bible, shot, clip_path, current_prompt, review_qc,
@@ -1242,6 +1369,9 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                         "fix_notes": (review or {}).get("fix_notes"),
                         "clip": clip_path.name,
                     }
+                    for rb_field in ROCK_B_FIELDS:
+                        if rb_field in (review or {}):
+                            event[rb_field] = (review or {}).get(rb_field)
                     if qc.get("require_no_face"):
                         event["face_present"] = (review or {}).get("face_present")
                     if qc.get("require_object_match"):
@@ -1381,12 +1511,12 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         if audio_failure:
             current_fix_notes = [
                 "Keep the soundtrack limited to natural foley from the visible hands, "
-                "object, material, and workbench."
+                "object, material, and surface."
             ]
         elif qc.get("require_no_face") and (review or {}).get("face_present") is True:
             current_fix_notes = [
-                "Frame only the hands, forearms, object, and workbench, with the face "
-                "outside the frame."
+                "Frame only the hands, forearms, object, and the surface it rests on, "
+                "keeping the face outside the frame."
             ]
         else:
             current_fix_notes = (review or {}).get("fix_notes") or reasons

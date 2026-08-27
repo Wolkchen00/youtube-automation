@@ -29,6 +29,10 @@ DESCRIPTOR = (
     "A palm-sized matte cobalt-blue ceramic cube with one thin white diagonal "
     "scratch across its front edge"
 )
+ANOMALY = (
+    "a solid blue dust ribbon holding a firm glassy arch that keeps its even "
+    "width and matte sheen"
+)
 FRAMING = (
     "The close bench-level view stays in one fixed composition with the workbench "
     "edge aligned identically throughout the shot."
@@ -71,7 +75,7 @@ def raw_plan(number=1, *, action_only=False):
         shots.append({
             "n": index,
             "duration": "6",
-            "prompt": action if action_only else f"{DESCRIPTOR}. {FRAMING} {action}",
+            "prompt": action if action_only else f"{DESCRIPTOR}. {ANOMALY}. {FRAMING} {action}",
             "seed": None,
             "environment": ENV_ID,
         })
@@ -86,6 +90,7 @@ def raw_plan(number=1, *, action_only=False):
             "descriptor": DESCRIPTOR,
             "environment": ENV_ID,
             "framing": FRAMING,
+            "anomaly_descriptor": ANOMALY,
         },
         "shots": shots,
     }
@@ -113,7 +118,7 @@ class EndToEndReferenceChainTests(unittest.TestCase):
         self.assertEqual(episodes[0]["format_version"], TEK_OBJE_FORMAT)
         self.assertEqual(episodes[0]["object_card"]["descriptor"], DESCRIPTOR)
         self.assertEqual(validate_plan(episodes[0], bible)["errors"], [])
-        locked_prefix = f"{DESCRIPTOR} {FRAMING} "
+        locked_prefix = f"{DESCRIPTOR} {ANOMALY} {FRAMING} "
         for shot in episodes[0]["shots"]:
             self.assertTrue(shot["prompt"].startswith(locked_prefix))
             self.assertEqual(shot["prompt"].count(DESCRIPTOR), 1)
@@ -190,7 +195,7 @@ class EndToEndReferenceChainTests(unittest.TestCase):
                     kwargs["prompt"],
                 )
                 self.assertIn(
-                    "[image 2] is the room and workbench: keep the same surface and light.",
+                    "[image 2] is the room and surface: keep the same surface and light.",
                     kwargs["prompt"],
                 )
                 self.assertEqual(resolved["units"], 2)
@@ -294,7 +299,7 @@ class FormatValidationTests(unittest.TestCase):
 
         self.assertTrue(any("yalnız olumlu görsel dil" in error for error in errors))
         self.assertTrue(
-            episodes[0]["shots"][0]["prompt"].startswith(f"{DESCRIPTOR} {FRAMING} ")
+            episodes[0]["shots"][0]["prompt"].startswith(f"{DESCRIPTOR} {ANOMALY} {FRAMING} ")
         )
 
     def test_legacy_resolve_order_and_validation_are_unchanged(self):
@@ -330,7 +335,7 @@ class FormatValidationTests(unittest.TestCase):
             [OBJECT_URL, "https://i.ibb.co/rock2/object-detail.png", ENV_URL],
         )
         self.assertIn(
-            "[image 3] is the room and workbench: keep the same surface and light.",
+            "[image 3] is the room and surface: keep the same surface and light.",
             resolved["kwargs"]["prompt"],
         )
 
@@ -402,7 +407,7 @@ class PlannerIsolationTests(unittest.TestCase):
             episodes = replenish.generate_plans(meta, bible, FORMAT_CFG, 1, 1)
         for shot in episodes[0]["shots"]:
             self.assertTrue(
-                shot["prompt"].startswith(f"{DESCRIPTOR} {FRAMING} {env_desc} ")
+                shot["prompt"].startswith(f"{DESCRIPTOR} {ANOMALY} {FRAMING} {env_desc} ")
             )
             self.assertEqual(shot["prompt"].count(env_desc), 1)
 

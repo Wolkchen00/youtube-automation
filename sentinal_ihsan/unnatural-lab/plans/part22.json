@@ -9,30 +9,35 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt steadies the open half in the centre of the counter; the stone steps catch the morning light and the spiral drops far deeper than the fruit, its lowest turns fading into darkness.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside. a weathered grey stone spiral stairway with a low arched opening and worn treads descending into an unlit shaft. The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt steadies the open half in the centre of the counter; the stone steps catch the morning light and the spiral drops far deeper than the fruit, its lowest turns fading into darkness.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the stone steps continue far below the fruit's own depth"
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. One hand wearing a plain black crew-neck t-shirt holds the half still while the other drops a single white sugar cube onto the top step; the cube tumbles from step to step and disappears around the dark lower turn.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside. a weathered grey stone spiral stairway with a low arched opening and worn treads descending into an unlit shaft. The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. One hand wearing a plain black crew-neck t-shirt holds the half still while the other drops a single white sugar cube onto the top step; the cube tumbles from step to step and disappears around the dark lower turn.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the sugar cube tumbles from step to step and vanishes into the dark turn"
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. The larger half sits in the centre exactly as before while one hand wearing a plain black crew-neck t-shirt tilts a small clear glass of water over the opening; the water runs down the stone steps in an orderly stream, wrapping the spiral turn after turn and draining into the darkness far below the counter surface.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside. a weathered grey stone spiral stairway with a low arched opening and worn treads descending into an unlit shaft. The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. The larger half sits in the centre exactly as before while one hand wearing a plain black crew-neck t-shirt tilts a small clear glass of water over the opening; the water runs down the stone steps in an orderly stream, wrapping the spiral turn after turn and draining into the darkness far below the counter surface.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the poured water runs down the stone steps and disappears into the dark shaft",
+      "state_carry": "water glistens on the stone steps"
     },
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt set the empty glass aside out of frame and steady the larger half in the centre of the counter, fingertips resting on the rind while a last thin trickle of water slides down the glistening steps and the staircase keeps descending into the dark.",
+      "prompt": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside. a weathered grey stone spiral stairway with a low arched opening and worn treads descending into an unlit shaft. The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt set the empty glass aside out of frame and steady the larger half in the centre of the counter, fingertips resting on the rind while a last thin trickle of water slides down the glistening steps and the staircase keeps descending into the dark.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "a thin trickle keeps sliding down the glistening steps into the dark"
     }
   ],
   "format_version": "tek-obje-4x6",
@@ -40,7 +45,8 @@
     "name": "Lemon",
     "descriptor": "A large bright yellow lemon with a thick dimpled rind, split into two matching halves, the larger half revealing a tiny ancient stone spiral staircase descending inside",
     "environment": "kitchen_counter",
-    "framing": "The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter."
+    "framing": "The frame remains completely locked from a slightly elevated top-down angle over the kitchen counter.",
+    "anomaly_descriptor": "a weathered grey stone spiral stairway with a low arched opening and worn treads descending into an unlit shaft"
   },
   "face_visible": false,
   "family": "impossible-interior",

@@ -9,30 +9,34 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt tilt the matte black mug filled with dark coffee. The dark liquid streams out of the mug, curving upward into the air toward the top of the frame.",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt tilt the matte black mug filled with dark coffee. The dark liquid streams out of the mug, curving upward into the air toward the top of the frame.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the coffee stream leaves the tilted mug and climbs upward through the air"
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt hold an empty clear glass above the tilted mug, catching the rising stream of coffee as it flows upward.",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt hold an empty clear glass above the tilted mug, catching the rising stream of coffee as it flows upward.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the rising stream reaches the glass held above the mug"
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lower the clear glass, showing the coffee suspended in the air as a vertical liquid column between the mug and the glass.",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lower the clear glass, showing the coffee suspended in the air as a vertical liquid column between the mug and the glass.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the coffee stands still in the air as a vertical column between mug and glass"
     },
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt set the matte black mug upright on the kitchen counter, with the coffee resting quietly inside it.",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt set the matte black mug upright on the kitchen counter, with the coffee resting quietly inside it.",
       "seed": null,
-      "environment": "kitchen_counter"
+      "environment": "kitchen_counter",
+      "violation_observation": "the coffee settles inside the upright mug with a level surface"
     }
   ],
   "format_version": "tek-obje-4x6",
@@ -40,7 +44,8 @@
     "name": "Coffee mug",
     "descriptor": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim",
     "environment": "kitchen_counter",
-    "framing": "The frame remains completely locked in a close-up profile view of the kitchen counter."
+    "framing": "The frame remains completely locked in a close-up profile view of the kitchen counter.",
+    "anomaly_descriptor": "a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge"
   },
   "face_visible": false,
   "family": "reversed-physics",
