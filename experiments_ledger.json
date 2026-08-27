@@ -3,12 +3,301 @@
     "exp-2026-08-gerceklik": {
       "total_cap": 4000.0,
       "stage_caps": {
-        "pilot": 800.0,
+        "pilot": 1700.0,
         "preflight": 300.0,
         "bakeoff": 2400.0,
         "holdout": 500.0
       },
-      "reservations": [],
+      "reservations": [
+        {
+          "reservation_id": "c1fc92c45bf34f0685c4587234432d72",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T17:44:45.612857+00:00"
+        },
+        {
+          "reservation_id": "c93014393fef4ac18a32130f05af09f4",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T17:45:20.061973+00:00"
+        },
+        {
+          "reservation_id": "c5208c1cc43b465d8b7edf0a2b491914",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T17:45:55.567544+00:00",
+          "settled_ts": "2026-08-26T17:47:43.069137+00:00"
+        },
+        {
+          "reservation_id": "fd2f26b5168f48a7b28a93baf4d7f8d6",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T17:58:39.282707+00:00",
+          "settled_ts": "2026-08-26T18:00:26.934752+00:00"
+        },
+        {
+          "reservation_id": "566cb7cb3d404ac7afd1623ca3576442",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T18:04:00.634593+00:00"
+        },
+        {
+          "reservation_id": "fec26edf8f2345e39e9dbdc31b63f448",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:04:39.567431+00:00",
+          "settled_ts": "2026-08-26T18:06:57.712185+00:00"
+        },
+        {
+          "reservation_id": "308d14df3d314267aea5834b06e718a6",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:07:24.478828+00:00",
+          "settled_ts": "2026-08-26T18:09:12.089588+00:00"
+        },
+        {
+          "reservation_id": "3d3ce6ab466f4529937b3bbc030e8236",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T18:15:21.124003+00:00"
+        },
+        {
+          "reservation_id": "d302cad1ca374663a24193594a8c354b",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T18:15:56.281131+00:00"
+        },
+        {
+          "reservation_id": "efd8c8dafcf142498fc1c61620ce892e",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:16:43.408739+00:00",
+          "settled_ts": "2026-08-26T18:19:16.754994+00:00"
+        },
+        {
+          "reservation_id": "ec0f7dd242f246d6ad17cbe8417f4af2",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:19:55.953458+00:00",
+          "settled_ts": "2026-08-26T18:21:43.633720+00:00"
+        },
+        {
+          "reservation_id": "cdd4fee2d4e64196b25a0734ac79d05f",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:22:20.729111+00:00",
+          "settled_ts": "2026-08-26T18:24:08.486222+00:00"
+        },
+        {
+          "reservation_id": "345710850233489db2d8c9f78e4e5f6a",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:24:13.489284+00:00",
+          "settled_ts": "2026-08-26T18:26:01.091427+00:00"
+        },
+        {
+          "reservation_id": "534e1b53456e4f56b6ba866c31d7dd4f",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:26:27.324467+00:00",
+          "settled_ts": "2026-08-26T18:28:30.106434+00:00"
+        },
+        {
+          "reservation_id": "abb2a0ed93ec4063a47e1eec66cccc30",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T18:30:56.087346+00:00"
+        },
+        {
+          "reservation_id": "5e104047156e45459bd1dfcc381cbfac",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:31:21.912257+00:00",
+          "settled_ts": "2026-08-26T18:33:24.923666+00:00"
+        },
+        {
+          "reservation_id": "a20af86ccad54c048fec0cf905e32004",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:33:50.638415+00:00",
+          "settled_ts": "2026-08-26T18:35:53.532927+00:00"
+        },
+        {
+          "reservation_id": "18c2dcacb7f64ae0805c54128b88cd6b",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:37:42.245796+00:00",
+          "settled_ts": "2026-08-26T18:39:29.812742+00:00"
+        },
+        {
+          "reservation_id": "e0d2f7e5d28c4abe945800093488f73e",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T18:42:12.512938+00:00"
+        },
+        {
+          "reservation_id": "b9e43d160de245e1a711ebdbc07dde0d",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:42:48.787428+00:00",
+          "settled_ts": "2026-08-26T18:44:36.209453+00:00"
+        },
+        {
+          "reservation_id": "6d2c796e8fdd485c829c61cbdee0e14f",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:45:57.547633+00:00",
+          "settled_ts": "2026-08-26T18:48:00.375679+00:00"
+        },
+        {
+          "reservation_id": "521f0d622a4c4c32b3b5850a05654465",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:49:21.729881+00:00",
+          "settled_ts": "2026-08-26T18:51:09.302193+00:00"
+        },
+        {
+          "reservation_id": "567a0424a42740b2bb89358d27442b41",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T18:52:19.105698+00:00"
+        },
+        {
+          "reservation_id": "16890f8d6c2a4d09895038ea9354e456",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:52:55.266066+00:00",
+          "settled_ts": "2026-08-26T18:55:13.474522+00:00"
+        },
+        {
+          "reservation_id": "231a10004eb046478469080bde6b1a70",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:55:43.126370+00:00",
+          "settled_ts": "2026-08-26T18:57:45.910707+00:00"
+        },
+        {
+          "reservation_id": "f6836373003e48b38ef197a15fd91c2a",
+          "stage": "pilot",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "6",
+          "reserved": 100.0,
+          "actual": 84.0,
+          "ts": "2026-08-26T18:58:29.527193+00:00",
+          "settled_ts": "2026-08-26T19:00:17.024879+00:00"
+        },
+        {
+          "reservation_id": "09cdb38fe1ef4326a6332097025531a4",
+          "stage": "pilot",
+          "call_type": "reference_image",
+          "engine": "nano-banana-2",
+          "duration": null,
+          "reserved": 8.0,
+          "actual": null,
+          "ts": "2026-08-26T19:03:25.677326+00:00"
+        }
+      ],
       "measurements": []
     }
   }
