@@ -1,9 +1,8 @@
 # PLAN_PILOT_SONRASI_v1 ,  sentinal.ihsan.daily / Unnatural Lab
 
-Tarih: 2026-08-27 · Durum: TASLAK r1 (Same Page Meeting öncesi) · Sahibi: İhsan
+Tarih: 2026-08-27 · Durum: TASLAK r4 (Same Page Meeting tur 1-3 bulguları işlendi) · Sahibi: İhsan
 Öncül: `PLAN_GERCEKCILIK_v1.md` (ROCK 1-5 ön işi push'lu; ENTEGRE PİLOT 1 üretildi).
-Bu plan **PİLOT 1 SONRASI** çevrimi kapsar. Öncül planın CORE FOCUS'u, P1-P6 ilkeleri ve
-kill-gate/K8 mimarisi aynen geçerlidir; burada yalnız pilotun ÖLÇÜLEN sonucundan doğan işler var.
+Ölçüm kanıtları: `sentinal_ihsan/measurements/pilot1_audio.md` · Müzakere: `PLAN_PILOT_SONRASI_SPM_LOG.md`
 
 ## CORE FOCUS (değişmedi)
 
@@ -14,167 +13,250 @@ izleyicinin 0,5 saniyede "AI" diye kaydırmayacağı, beğeni ve yorum üreten v
 ## 0. PİLOT-1 ÖLÇÜM RAPORU (part22 "Something Is WRONG With This LEMON")
 
 Üretim: 2026-08-26, izole deney runner'ı, `exp-2026-08-gerceklik/pilot`, YAYINLANMADI.
-Ölçümler 2026-08-27'de Visionary tarafından bağımsız koşuldu (üreten koşunun raporu kanıt sayılmadı).
+Ölçümler 2026-08-27'de Visionary tarafından bağımsız koşuldu.
 
-**GEÇEN (yeni doktrin sahada çalışıyor):**
-- 4/4 çekim QC'den geçti; `qc_log` ep22: 20 review, 18 native_audio_review, 15 scene_cut_scan,
-  10 regen, 4 final_reject, 4 qc_pass, 1 qc_hold. Eksik çekim yok, süre 22,29 sn (4×6 − micro_trim).
-- Yüz yok (4 çekimde de yalnız eller/gövde). İlk karede anomali okunuyor (limon + taş sarmal merdiven).
-- Ortam gerçekçiliği: yaşanmış mutfak tezgâhı ,  çizikli granit, kırıntı, fayans, pencere ışığı,
-  dolap altı sıcak ışık, kesme tahtası, bez. Öncül plandaki "atölye tezgâhı" sterilliği gitti.
-- **Native foley mikste:** konuşmasız pencerelerde final ↔ ham (raw) zarf korelasyonu **0,709**
-  (ROCK 1 `bg_duck 0.0 → native_mix_level 0.5` düzeltmesi sahada çalışıyor).
-- **Anlatım mikste:** (final − müziksiz) zarfı ile TTS zarfı korelasyonu **0,630**; konuşma
-  pencerelerinde ortalama fark −36,9 dB, konuşmasız pencerelerde −54,2 dB (**+17,2 dB**).
-- **Müzik yatağı:** 219 pencerenin 196'sında final > anlatımlı-müziksiz sürüm.
-- Maliyet: **1.584 kr** (pilot alt-tavanı 1.700; deney toplam tavanı 4.000).
+**GEÇEN:** 4/4 çekim QC'den geçti; eksik çekim yok; 22,29 sn. Yüz yok; ilk karede anomali okunuyor;
+ortam yaşanmış mutfak. Native foley mikste (konuşmasız pencerelerde final↔ham korelasyonu **0,709**);
+anlatım mikste (**+17,2 dB**); müzik yatağı 219 pencerenin 196'sında. Maliyet **1.584 kr**.
 
-**BULGULAR (hepsi ölçüldü; her biri bu planın bir rock'ına bağlanır):**
+**BULGULAR:**
 
-- **B1 ,  SES SEVİYESİ, FİLO GENELİ (kritik).** Master **−24,5 LUFS**; sosyal platform normu ~−14 LUFS.
-  Kök 1: `core/ffmpeg_tools.mix_voiceover` içindeki `amix=inputs=2` **`normalize=0` taşımıyor** →
-  ffmpeg her girdiyi 1/N'e böler. Sentetik ölçüm (aynı filtre, aynı seviyeler): varsayılan −26,5 LUFS
-  vs `normalize=0` −20,4 LUFS = **6,1 LU sistematik kayıp**. Kök 2: final master'da loudnorm YOK
-  (`concatenate_audio_smooth` içindeki `loudnorm=I=-18` klip-içi katmandır, master değil).
-  Etki alanı: anlatımlı TÜM seriler. Müzik-only seriler `replace_original=True` yolundan gider
-  (amix yok) → etkilenmez. Sessiz feed'de 10 LU düşük master = ses açıkken bile "cılız" video.
-- **B2 ,  ANOMALİ KİMLİĞİ SÜRÜKLENİYOR.** `object_card.descriptor` limonu kilitliyor ama anomalinin
-  İÇ YAPISI çekimden çekime değişiyor: çekim 1 sık dokulu yıkıntı, çekim 3 düz kabartma,
-  çekim 4 kemerli + derinlikli sarmal. `object_match` bunu göremez (limon eşleşiyor, kapı geçiyor).
-  Kanalın satması gereken şey tam da o iç yapı.
-- **B3 ,  İHLAL FİZİĞİ PREMISE'İ ÇÜRÜTÜYOR.** Çekim 3'te su basamaklardan inip karanlığa akmak yerine
-  limonun ALTINDAN sızıp tezgâhta birikiyor → "dipsiz boşluk" yerine "akıtan meyve". Hiçbir kapı
-  "ihlal amaçlandığı gibi okunuyor mu"yu ölçmüyor; dört zorunlu alan da geçti.
-- **B4 ,  ORTAM DURUM SÜREKLİLİĞİ.** Çekim 3'ün bıraktığı su birikintisi çekim 4'te yok;
-  `continuity_ok` yine de geçti (kapı obje kimliğine bakıyor, sahne durumuna değil).
-- **B5 ,  KADRAJ KİLİDİ YALNIZ ÇEKİM İÇİ.** Çekim 4 belirgin biçimde daha yakın ve alçak açı.
-  "The frame remains completely locked" cümlesi çekimler ARASI ölçek/açıyı bağlamıyor; ölçen kapı yok.
-- **B6 ,  BÜTÇE ARİTMETİĞİ ÇÖKTÜ.** Pilot-1: 1.584 kr. Kalan: 2.416 kr. Öncül planın kalan aşamaları
-  bake-off 2.400 + holdout 500 = 2.900 → toplam **4.484 > 4.000 mekanik tavan**. Ayrıca bake-off'un
-  ayrı ön koşulu (ortak havuz koruması: Kie bakiyesi ≥ 15.000 kr) bugün karşılanmıyor (~8.165).
-- **B7 ,  QC KOTA TAVANI.** Tek bölüm **53 Gemini çağrısı** yaktı (20 review + 18 native_audio +
-  15 scene_cut). Yerel anahtar ücretsiz katmanda; 2026-08-26'da ikmal + QC kotayı tüketti (429) ve
-  pilot ikinci Google projesinin anahtarıyla sürdürüldü. Fail-closed kapılar kota bitince `qc_hold`
-  üretir → yayın durur. Günlük 4 kanallık filo bu tavanı her gün zorlar. `QC_MODEL` hâlâ
-  `gemini-2.5-flash` (sabit, `series/critic.py:43`).
+- **B1 ,  SES SEVİYESİ (kritik).** Master **−24,5 LUFS** (norm ~−14). İki kök: (i) `mix_voiceover`
+  içindeki `amix` **`normalize=0` taşımıyor** → kontrollü ölçümde **6,1 LU kayıp** (yalnız anlatımlı
+  seriler); (ii) teslim zincirinde **master normalizasyonu yok** (19 serinin tamamı).
+- **B2 ,  ANOMALİ KİMLİĞİ SÜRÜKLENİYOR.** Anomalinin iç yapısı çekim 1/3/4'te farklı; `object_match` görmüyor.
+- **B3 ,  İHLAL FİZİĞİ PREMISE'İ ÇÜRÜTÜYOR.** Çekim 3'te su limonun altından sızıp tezgâhta birikiyor.
+- **B4 ,  ORTAM DURUM SÜREKLİLİĞİ.** Birikinti çekim 4'te yok; `continuity_ok` geçti.
+- **B5 ,  KADRAJ KİLİDİ YALNIZ ÇEKİM İÇİ.** Ölçüm altyapısı yok (`ffmpeg_tools.py:95` yalnız luma/keskinlik
+  vekilleri) → ERTELENENLER (telemetri).
+- **B6 ,  BÜTÇE ARİTMETİĞİ.** Harcanan 1.584; kalan aşama tavanları 3.200 → en kötü 4.784 > 4.000.
+  `pilot` aşamasında kalan **116 kr**.
+- **B7 ,  QC ÇAĞRI HACMİ.** Loglanan **36** Gemini çağrısı (18 review + 18 native_audio); 15 scene_cut
+  yerel ffmpeg. **Asıl sorun:** retry / yedek model / 429 loglanmıyor → gerçek deneme sayısı ölçülemiyor.
+- **B8 ,  KREDİ ÖMRÜ (ACİL, ÖLÇÜLDÜ).** Bakiye **5.999 kr (~$30)**; `credits_ledger.json` son 7 gün
+  ortalaması **1.390 kr/gün**; Ağustos gerçekleşen **37.594 kr ≈ $188/ay**. → **~4 günlük ömür.**
+  Kill-gate sonuna kadar (bugünden ~22 gün) toplam ihtiyaç **~35.900 kr ≈ $179**; eldeki düşülünce
+  **~30.000 kr ≈ $149 yükleme**. Mevcut bakiyeyle kill-gate mekanik olarak imkânsızdır.
+- **B9 ,  ORTAM DİLİ KODDA ESKİ.** "workbench/bench" `bible.json > qc.notes` dışında da sabit:
+  `series/critic.py:153, 437, 441, **450**, 1141, 1145` ve `series/produce.py:851, 878`.
 
 ## İLKELER (devralınan P1-P6 + yeni)
 
-- **P7 ,  Ölçüm önce, kapı sonra.** Yeni her QC alanı önce salt-ölçüm (log-only) modunda koşar;
-  fixture kalibrasyonu yapılıp **yanlış-geçiş ve yanlış-red oranları raporlanmadan** fail-closed'a alınmaz.
-- **P8 ,  Kapı bütçesi.** Her yeni kapı Gemini çağrı maliyetiyle birlikte planlanır; bölüm başına
-  toplam QC çağrısının mekanik üst sınırı vardır. Kapı eklemek bedava değildir.
+- **P7 ,  Ölçüm önce, kapı sonra; manifestli protokolle.** Yeni her QC alanı log-only başlar.
+  **Etiket manifesti** (`tests/fixtures/qc_calibration/manifest.json`) alan başına örnekleri,
+  sınıfını (pozitif/negatif), split'ini (train/held-out) ve insan etiketini taşır; manifest
+  değişmez (immutable) kabul edilir ve raporlayıcı **manifest sayıları tutmuyorsa terfi ÖNERİSİ
+  üretmez, hata verir**. Asgari: alan başına **≥24 örnek**, **≥8 negatif**, **≥%50 held-out**,
+  sınıf-katmanlı. Fixture'lar üretimin gördüğü biçimde (sıralı 12 karelik grup + önceki çekimin son
+  karesi) hazırlanır. Terfi eşiği: **yanlış-geçiş ≤ %10, yanlış-red ≤ %20, gözlemlenebilir vakalarda
+  null ≤ %30**; gerekçesiz null hata sayılır. **Terfi metrikleri YALNIZ held-out split'ten hesaplanır;**
+  train sonuçları ayrı raporlanır ve terfi kararına girmez. Eşik tutmazsa alan log-only kalır
+  (başarısızlık değil).
+- **P8 ,  Kapı bütçesi ölçümle konur.** Önce gerçek `generate_content` denemeleri kaydedilir; sayısal
+  tavan pilot-2 verisinden sonra konur.
+- **P9 ,  Filo riski tek serinin işine feda edilmez.** Teslim zincirine dokunan değişiklik **tek bir
+  opt-in alanın** arkasındadır; alan yoksa çıktı bit-değişmez. Yayılım ayrı, kanaryalı adım (K-FILO).
 
 ---
 
-## ROCK A ,  Ses master zinciri (0 kredi; filo geneli; B1)
+## ROCK A ,  Ses master zinciri (0 kredi; yalnız Unnatural Lab; B1)
 
 **Ne:**
-1. `core/ffmpeg_tools.mix_voiceover`: `amix` çağrısına **`normalize=0`** eklenir (niyet edilen gain
-   staging'i geri getirir: native × `native_mix_level` + ses × `voice_volume`).
-2. Teslim zincirinin EN SONUNA (müzik miksinden sonra, `series/produce.py` içindeki tek noktada)
-   **iki geçişli loudnorm** eklenir: ölçüm geçişi → `measured_*` değerleriyle uygulama geçişi.
-   Hedef: **I = −14 LUFS, TP = −1,0 dBTP, LRA = 11**.
-3. Bible'a `narration.master_lufs` (veya `series.master_lufs`) alanı; yoksa varsayılan −14.
-   Müzik-only seriler dahil TÜM final master'lar bu aşamadan geçer (tek çıkış noktası).
-4. Native foley'in normalizasyonla ezilmediği ölçülür (zarf korelasyonu eşiği).
+1. **Tek opt-in anahtar `series.master_lufs`.** Alan yoksa ses yolu (amix davranışı dahil)
+   bugünküyle birebir aynıdır. Bu çevrimde yalnız `unnatural-lab/bible.json` `-14` alır.
+2. Yeni yolda `mix_voiceover` **`normalize=0`** ile çağrılır (parametre; varsayılan legacy).
+3. **Master noktası:** ölçülen zincir `_post_process` (1613) → `hook_teaser` (1638) →
+   `title_card_overlay` (1665) → `fact_captions_overlay` (1703) → `_upscale_master` (1713).
+   Mastering **`_upscale_master`'dan hemen önce** uygulanır.
+4. **İki geçişli loudnorm**: hedef **I = −14 LUFS, TP = −1,0 dBTP, LRA = 11**.
+5. **Upscale dış servistir (Topaz):** master'lanmış ses dönen 4K'ya **remux** edilir; `delivery_1080.mp4`
+   ve 4K **ayrı ayrı** doğrulanır.
+6. **Fail-closed:** `master_lufs` tanımlıyken mastering veya iki teslimattan HERHANGİ birinin
+   doğrulaması başarısızsa bölüm **`qc_hold`**.
+7. **Ölçüm sözleşmesi (belirsizlik bırakmaz):**
+   - **Loudness ve true-peak, teslim dosyasının KENDİ kanal düzeni ve örnekleme hızında ölçülür**
+     (`ebur128=peak=true`; downmix ya da yeniden örnekleme YOK). Mono 8 kHz indirgeme YALNIZ zarf
+     karşılaştırmaları içindir ,  aksi hâlde stereo kırpma ve true-peak aşımı görünmez kalır.
+   - Zarf karşılaştırması final master'ın zaman eksenine hizalanır: teaser eklendiyse gövde kayması
+     (`teaser_len`) düşülür; **müzik yatağı referansı üretimin filtre grafiğiyle yeniden üretilir**
+     (loop + `volume` + `afade`), ham `bg_music.mp3` ile karşılaştırma YAPILMAZ; native referans
+     master noktasındaki stem'den alınır. Pencere 100 ms.
+   - "Konuşmasız pencere" = TTS zarfı kendi tepesinin **%8**'inin altında olan pencere.
+   - **Aggregation: seçilen pencerelerin MEDYANI** kullanılır (tek uç pencere kararı çevirmesin);
+     eşiği ihlal eden pencere oranı da raporlanır.
+   - Eşikler: master **−14 ±1 LUFS**, **TP ≤ −1,0 dBTP** (her iki teslimat);
+     foley: konuşmasız pencerelerde program medyanı **≥ −30 dBFS** VE yalnız-müzik referansının
+     medyanının **≥ 6 dB** üstünde; anlatım/yatak dengesi: `--baseline-final` ile verilen
+     değişiklik-öncesi master'a göre fark **±1,5 dB** bandında (bant dışındaysa `music_volume`
+     ölçümle yeniden ayarlanır).
+8. Filoya yayılım bu rock'ta YAPILMAZ (K-FILO).
 
-**Done:** yeni master **−14 ±1 LUFS**, true peak ≤ −1,0 dBTP, native foley zarf korelasyonu ≥ 0,60;
-mevcut 276 test + 127 subtest yeşil kalır; müzik-only yol davranışı bozulmaz.
+**Done:** her iki teslimat da dört eşiği geçer; `master_lufs` alanı olmayan seriler için çıktı
+bit-değişmez; mastering/doğrulama hatası `qc_hold` üretir; 276 + 127 subtest yeşil.
 
-**Proof:** `py -X utf8 -m pytest tests/ -q` **ve** yeni `tools/audio_master_check.py <mp4> [--ref-raw <mp4>]`
-(ebur128 entegre loudness + true peak + native korelasyon ölçer; eşik dışında exit 1) , 
-pilot-1 master'ının yeniden mikslenmiş sürümü üzerinde koşturulur ve çıktısı rapora eklenir.
+**Proof:**
+```
+py -X utf8 -m pytest tests/ -q
+py -X utf8 tools/audio_master_check.py <delivery_1080.mp4> --ref-raw <ep_raw.mp4> --ref-tts <narration.wav> --ref-bed <bg_music.mp3> --baseline-final <pilot1_master.mp4>
+py -X utf8 tools/audio_master_check.py <delivery_4k.mp4>   --ref-raw <ep_raw.mp4> --ref-tts <narration.wav> --ref-bed <bg_music.mp3>
+```
+Testler: (a) **iki** bit-değişmezlik fixture'ı ,  bir anlatımlı seri ve bir `replace_original=True`
+müzik-only seri ,  artı "unnatural-lab dışında hiçbir bible'da `master_lufs` yok" assert'i;
+(b) bozuk 4K sesi → `qc_hold` testi; (c) mastering başarısızlığı → `qc_hold` testi.
 
-## ROCK B ,  Anomali kimlik çıpası + ihlal okunurluk kapısı (0 kredi; B2, B3)
-
-**Ne:**
-1. Plan şemasına **`object_card.anomaly_descriptor`** (≥10 kelime; iç yapının malzeme + geometri +
-   ışık imzası, ör. "weathered grey stone steps with a low arched opening and a dark unlit shaft").
-   4 çekimde birebir tekrar; `replenish._validate_batch` fail-closed doğrular (`tek-obje-4x6` formatı).
-2. Plana **`violation_statement`** (tek cümle: ihlal izleyiciye NE göstermeli;
-   ör. "the water disappears down the shaft and never reaches the counter").
-3. QC'ye iki alan: **`anomaly_match: bool|null`** (bölümün NB2 hero referansına karşı iç yapı eşleşmesi)
-   ve **`violation_reads: bool|null`** (`violation_statement`'a karşı gösterilen fizik).
-4. P7: iki alan da önce log-only; fixture seti (ep22'nin gerçek kareleri dahil pozitif/negatif örnekler)
-   ölçülür, alan başına doğruluk + **yanlış-geçiş oranı** raporlanır, ancak ondan sonra fail-closed.
-5. P8: iki yeni alan ayrı çağrı AÇMAZ ,  mevcut `review` çağrısının şemasına eklenir (çağrı sayısı sabit kalır).
-
-**Done:** fixture'da ep22 çekim 3 karesi `violation_reads=false`, ep22 çekim 1 ↔ çekim 4 karesi
-`anomaly_match=false` olarak yakalanır; iki alanın yanlış-geçiş oranı raporlanır; testler yeşil.
-
-**Proof:** `py -X utf8 -m pytest tests/ -q` + yeni `tools/qc_fixture_report.py --field anomaly_match
---field violation_reads` çıktısı (alan başına doğruluk/yanlış-geçiş tablosu).
-
-## ROCK C ,  Sahne durumu + kadraj sürüklenmesi: ÖLÇÜM (0 kredi; B4, B5)
-
-**Ne:**
-1. Plana opsiyonel **`state_carry`** (tek cümle: bir çekimin bıraktığı kalıcı iz);
-   `continuity_ok` review şemasına "bu iz sonraki çekimde var mı" sorusu eklenir (yeni çağrı açmadan).
-2. **Kadraj sürüklenmesi LLM'siz, kodla ölçülür:** her çekimin ilk karesinde kahraman objenin kadraj
-   alanı ve merkez koordinatı (mevcut `first_frame_ok` doluluk/kontrast altyapısı yeniden kullanılır);
-   çekimler arası sapma **log-only** raporlanır (öneri bandı: alan ±%35, merkez ±%15).
-3. Kapıya dönüştürme bu rock'ta YAPILMAZ (P7): kalibrasyon verisi toplanır.
-
-**Done:** ep22 üzerinde çekim 4'ün ölçek sapması sayıyla raporlanır; `state_carry` alanının
-review şemasına ulaştığı testle kanıtlanır.
-
-**Proof:** `py -X utf8 -m pytest tests/ -q` + yeni `tools/framing_drift_report.py <bölüm-klasörü>` çıktısı.
-
-## ROCK D ,  QC kota dayanıklılığı (0 kredi; B7; K-G kararına bağlı)
+## ROCK B ,  Anomali kimliği + ihlal okunurluğu + sahne durumu (0 kredi; B2, B3, B4, B9)
 
 **Ne:**
-1. `QC_MODEL` sabitleri gözden geçirilir: anahtarın gerçekten görebildiği modeller listelenir
-   (ücretsiz API çağrısı), kota havuzu ayrı ve güncel bir model seçilir; seçim gerekçesiyle loglanır.
-2. **Bölüm başına QC çağrı sayacı + mekanik üst sınır** (`qc_call_budget`, öneri 60): aşımda `qc_hold`
-   (fail-closed korunur; sessiz geçiş asla).
-3. **429/kota hatası ayrı sınıflandırılır:** `qc_hold` sebebi `quota` olarak loglanır ve Telegram'a
-   AYRI ve açık mesaj gider (bugün genel hataya karışıyor, 3,8 günlük sessizlik dersinin aynısı).
-4. `GEMINI_API_KEY_QC` varsa QC bu anahtarı kullanır (üretim/ikmal anahtarından ayrılır); yoksa
-   mevcut davranış birebir korunur.
+1. **`object_card.anomaly_descriptor`** (≥10 kelime; iç yapının malzeme + geometri + ışık imzası),
+   4 çekimde birebir; `tek-obje-4x6` formatında fail-closed doğrulanır.
+2. **Şema beyaz listeleri açıkça güncellenir:** `series/shots.py: OBJECT_CARD_FIELDS`,
+   `TEK_OBJE_FORMAT`, `validate_plan` ve `series/replenish.py` normalizasyonu (~1003, ~1151).
+   `part23.json` proof'tan ÖNCE yeni şemaya migrate edilir.
+3. **İhlal çekim bazında ve OLUMLU:** ilgili çekime `shot.violation_observation` ,  12 karelik sıralı
+   örneklemde gözlemlenebilir olumlu kontrol noktası. Olumsuz/zaman-ötesi ifade yasak; ihlal
+   taşımayan çekimlerde **N/A**.
+4. **`state_carry` kaynak çekimde** tanımlanır, **yalnız bir sonraki çekime karşı** değerlendirilir;
+   ardıl yoksa N/A.
+5. **Üç nullable alan** review şemasına (yeni çağrı açmadan): `anomaly_match`, `violation_reads`,
+   `state_carry_ok`; biçim `{value: bool|null, visible: bool, confidence: 0-1}`.
+   **`visible` tanımı bağımsızdır:** ilgili BÖLGE/EYLEM kadrajda ve okunabilir mi (beklenen özelliğin
+   VAR olup olmaması değil). Yani anomali bölgesi görünüyor ama beklenen yapı yoksa doğru cevap
+   **`visible=true, value=false`**'tur; `visible=false` yalnız bölge kapalı/çok küçük/karanlıksa geçerlidir.
+   Bu ayrım fixture'da ayrı test sınıfı olarak ölçülür (görünür-ama-yok vakaları).
+6. **Terfi anahtarı ve karar tablosu:** her alan için `qc.enforce.<field>: false|true` konfigürasyonu.
+   `false` (log-only): hiçbir sonuç bölümü durdurmaz. `true` (terfi etmiş):
+   | sonuç | davranış |
+   |---|---|
+   | `value=true` | geç |
+   | `value=false`, `visible=true` | **fail → regen hakkı** |
+   | `value=null`, `visible=false` | geç, `qc_log`'a not (gözlemlenemedi) |
+   | `value=null`, `visible=true` (gerekçesiz null) | **fail-closed → `qc_hold`** |
+   | `confidence < 0.5` | `value` yok sayılır, gerekçesiz null gibi işlenir |
+   Terfi etmiş bir alanın `false` ve gerekçesiz `null` sonucunun teslimatı BLOKE ettiği testle kanıtlanır.
+7. **Referans zinciri:** `ensure_episode_refs` hero referansını `descriptor` + `anomaly_descriptor` +
+   `object_card.name` + ortam tarifi + **prompt şablon sürümü** ile üretir; plana bunların
+   **kanonik tam prompt'unun** `ref_prompt_sha256`'sı yazılır. Hash uyuşmazlığının HERHANGİ bir
+   nedeni (herhangi bir alan ya da şablon sürümü değişikliği) referansı geçersiz kılar ve yeniden ürettirir.
+8. **B9 onarımı ,  ortam-nötr dil, TÜM yüzeylerde:** `bible.json > qc.notes` +
+   `series/critic.py:153, 437, 441, **450**, 1141, 1145` + `series/produce.py:851, 878`.
+   Metinler `object_card.environment`'tan beslenir; "workbench/bench" sabitleri kaldırılır;
+   ortam alanı olmayan seriler için mevcut metin fallback'i korunur ama **ortam alanı olan seride
+   fallback'e düşülmediği** testle kanıtlanır.
+9. Üç alan da log-only başlar; P7 manifest protokolüyle kalibre edilir. `continuity_ok`'un bugünkü
+   fail-closed davranışı DEĞİŞMEZ.
 
-**Done:** sahte 429 senaryosunda koşu `qc_hold(quota)` verir, yayınlamaz, ayrı Telegram mesajı çıkar;
-gerçek bir bölümün QC çağrı sayısı raporlanır.
+**Done:** fixture'da ep22 çekim 3 `violation_reads` = görünür-ama-yok (false), çekim 1 ↔ 4
+`anomaly_match=false`; üç alanın yanlış-geçiş/yanlış-red/null oranı manifest sayılarıyla raporlanır;
+bayat referans ve hash testleri geçer; **banyo fixture'ıyla** üretilen tüm QC/referans/regen
+prompt'larında workbench dili yok; testler yeşil.
 
-**Proof:** `py -X utf8 -m pytest tests/ -q` (yeni kota testleri dahil) + çağrı sayısı raporu.
+**Proof:** `py -X utf8 -m pytest tests/ -q` ,  uçtan uca zincir testi dahil (plan → normalizasyon →
+`ensure_episode_refs` → Gemini istek gövdesi → `qc_log`), artı terfi karar tablosu testleri ve
+banyo-ortamı prompt testleri ,  + `py -X utf8 tools/qc_fixture_report.py --field anomaly_match
+--field violation_reads --field state_carry_ok` (manifest sayıları tutmazsa exit 1).
 
-## ROCK E ,  ENTEGRE PİLOT 2 (yayınsız; ~450-800 kr; K1-B kararına bağlı)
+## ROCK C ,  QC ölçümleme + kota dayanıklılığı (0 kredi; B7)
 
-**Ne:** A-D yürürlükteyken part23 (sabun → banyo lavabosu) izole deney runner'ında üretilir.
-Ölçülenler: 4 zorunlu kapı + 2 yeni alan, master LUFS, anomali eşleşmesi, ihlal okunurluğu,
-kadraj sapması, QC çağrı sayısı, toplam kredi.
+**C1 ,  karar beklemez (2026-08-29):**
+1. **Dayanıklı deneme kaydı:** her `generate_content` çağrısından ÖNCE `qc_log.jsonl`'a
+   `qc_api_attempt` (benzersiz `attempt_id`, görev tipi, model, `is_fallback`, deney kimliği)
+   **katı append+flush** yoluyla yazılır. Mevcut `_log_event` yazma hatasını sessizce yutuyor;
+   yeni yol için bu YASAK: **attempt kalıcı olarak yazılamadıysa ücretli/kotalı çağrı YAPILMAZ.**
+   Yanıt dönünce `qc_api_result` yazılır; sonuç sınıfı **yalnız `ok | 429 | error`**
+   (hangi modelin denendiği ve fallback olup olmadığı attempt olayında durur).
+   Eşleşmemiş attempt = çökme/bilinmeyen sonuç.
+2. **Tükenme politikası:** ara 429'lar loglanır, tek başına bölümü düşürmez. **Deneme politikası
+   HANGİ nedenle tükenirse tükensin** (kota, kimlik doğrulama, 5xx, ayrıştırma hatası, log yazma
+   hatası) sonuç **`qc_hold`**'dur ,  "incelenmemiş kabul" yoluna düşülmez. `reason` alanı
+   `quota` / `auth` / `server` / `parse` / `logging` olarak ayrışır ve Telegram'da kota ile
+   kota-dışı ayrı mesajlanır.
+3. Çağrı tavanı bu rock'ta KONMAZ (P8).
 
-**Done:** rapor + video; A-D'nin sahada çalıştığı ölçümle kanıtlanır (pilot-1'e göre fark tablosu).
+**C2 ,  K-G kararına bağlı (varsayılan tarihli, 2026-08-31):** `GEMINI_API_KEY_QC` desteği; yoksa
+mevcut davranış korunur. Yanıt gelmezse İhsan'ın ikinci Google projesi anahtarı QC'ye atanır.
+`QC_MODEL` seçimi kanıtla yapılır; **model değiştirmek kota stratejisi değildir** (aynı proje = aynı havuz).
 
-**Proof:** `py -X utf8 -m series.experiment run unnatural-lab --plan sentinal_ihsan/unnatural-lab/plans/part23.json --experiment-id exp-2026-08-gerceklik --stage pilot` + `tools/audio_master_check.py` + fixture raporları.
+**Done:** bir bölümün gerçek API denemesi `qc_log`'dan sayılabiliyor; log yazılamıyorsa çağrı
+yapılmıyor; her tükenme sınıfı `qc_hold` üretiyor; kota ve kota-dışı ayrı alarm.
+
+**Proof:** `py -X utf8 -m pytest tests/ -q` (attempt/result eşleşmesi, log-yazma-hatası → çağrı yok,
+beş tükenme sınıfı → `qc_hold`, tek 429'da düşmeme) + pilot-2 deneme sayısı raporu.
+
+## ROCK D ,  Kredi tabanı + ENTEGRE PİLOT 2 (K-KREDI + K1-B kararına bağlı)
+
+**D0 ,  Küresel kredi tabanı (0 kredi, kod işi; ön koşul).** Bugün ne bölüm defteri ne deney defteri
+başka workflow'ların ortak bakiyeyi tüketmesini durduramıyor. Ücretli çağrı yapan **tüm** yollara
+ortak kapı: **`KIE_BALANCE_FLOOR`**. Yetkilendirme kuralı: **taze bakiye (önbelleksiz) − bu çağrının
+tahmini − açık (settle edilmemiş) rezervasyonların toplamı ≥ taban** ise geçer, değilse reddedilir ve
+alarm gider. Kontrol + rezervasyon yazımı **workflow'lar arası kilit** altında atomik yapılır (yarış
+hâlinde iki koşu aynı krediyi harcayamaz).
+**Kill-gate tabanla çelişmez:** kill-gate yayınları kendi **sahip etiketli rezervasyonundan**
+(ör. `owner="killgate"`, 10 bölüm × tahmin) işlemsel olarak düşülür ve koşu sonunda gerçekleşenle
+mutabakat yapılır; taban yalnız bu rezervasyonun DIŞINDAKİ bakiyeyi korur, dolayısıyla ne kill-gate'i
+bloke eder ne de sıfırlanmak zorunda kalır.
+*Proof:* taban altında çağrı reddedilir; eşzamanlı iki yetkilendirme testinde yalnız biri geçer;
+açık rezervasyonlar hesaba katılmazsa testin KIRMIZI olduğu gösterilir; kill-gate rezervasyonu
+düşülürken filo çağrıları taban tarafından durdurulur.
+
+**D1 ,  Bütçe mekaniği (tek seçenek):** defterde **`pilot2` aşaması, tavanı tam 800 kr**.
+4.000 toplam altında harita: `pilot 1.700` (1.584 harcandı, donduruldu) · **`pilot2` 800** ·
+`preflight 0` · `bakeoff 0` · `holdout 0` → tahsis 2.500; tahsis edilmemiş 1.500 yalnız K1-B ile açılır.
+
+**D2 ,  Pilot 2:** A-C yürürlükteyken part23 (sabun → banyo lavabosu) izole runner'da üretilir.
+Ölçülenler: 4 zorunlu kapı + 3 yeni alan, master LUFS (1080p ve 4K), foley eşikleri, anomali
+eşleşmesi, ihlal okunurluğu, gerçek QC API denemesi, toplam kredi; pilot-1'e göre fark tablosu.
+**Başlama ön koşulu:** `KIE_BALANCE_FLOOR` kill-gate rezervini koruyacak şekilde ayarlanmış olmalı
+ve canlı bakiye pilot-2 + taban toplamını karşılamalı.
+
+**Proof:** `py -X utf8 -m series.experiment run unnatural-lab --plan sentinal_ihsan/unnatural-lab/plans/part23.json --experiment-id exp-2026-08-gerceklik --stage pilot2` + iki teslimat için
+`tools/audio_master_check.py` + fixture raporları.
 
 ---
 
 ## KARAR MADDELERİ (İhsan)
 
-- **K1-B (deney bütçesi).** Pilot-1 1.584 kr yedi, kalan 2.416 kr; bake-off + holdout 2.900 kr sığmıyor.
-  (a) Tavanı 4.000 → 6.000 kr ($30) çıkar, öncül plan aynen sürsün.
-  (b) Tavan 4.000'de kalsın, **bake-off ERTELENSİN**; pilot-2 + kill-gate Omni ile koşsun, motor kararı
-  sonraki çevrime kalsın. (c) Bake-off küçültülsün (4 kol → 2 kol: Omni kontrol + Veo FLF), holdout korunur.
-  **Önerim: (b)** ,  B2 bake-off'un gerekçesini güçlendiriyor ama Kie bakiyesi (~8.165) zaten 15.000
-  eşiğinin altında; önce 0 kredilik kazanımları (A-D) alıp kill-gate'i başlatmak, motor kararını
-  bakiye ve kanıt olgunlaşınca vermek daha ucuz ve daha hızlı yayına döndürür.
-- **K-G (QC anahtarı).** Ücretsiz katman filo için yetersiz (bölüm başı 53 çağrı).
-  (a) Ödemeli katmana geç (aylık birkaç dolar), (b) QC'ye ayrı proje anahtarı ver, (c) kapı sayısını azalt.
-  **Önerim: (a)+(b)**; ROCK D bunu mekanik hale getirir.
-- **K-P (pilot-1 kalite kapısı).** P6 gereği pilot YAYINLANMAZ. Sorulan tek şey: ep22 kalitesi
-  kill-gate'e girecek çıtayı karşılıyor mu ,  evet / hayır / "şu düzeltmeyle evet".
+- **K-KREDI (ACİL ,  karar tarihi 2026-08-28).** Bakiye **5.999 kr (~$30)**; ölçülen tüketim
+  **1.390 kr/gün**; Ağustos gerçekleşen **$188**. Hesap: 08-27→09-08 filo **16.680 kr** + pilot-2
+  **800** + kill-gate 10 gün (filo 1.390 + unnatural 450 = 1.840/gün) **18.400** = **35.880 kr ≈ $179**;
+  eldeki düşülünce **yükleme ≈ 29.900 kr ≈ $149**.
+  (a) **~30.000 kr (~$150)** ,  pilot-2 + kill-gate + filo sonuna kadar güvence. **Önerim.**
+  (b) ~12.000 kr (~$60) ,  filo 09-08'e kadar + pilot-2; kill-gate için ikinci yükleme şart.
+  (c) ~7.000 kr (~$35) ,  yalnız filo birkaç gün daha; deneyler durur.
+  (d) yükleme yok ,  **~4 gün içinde tüm filo durur.**
+  Not: kill-gate 10 ARDIŞIK yayın ölçer; ortasında kredi bitmesi ölçümü çöpe atar → (b) seçilirse
+  kill-gate başlangıcı ikinci yüklemeye bağlanır ve takvim kayar.
+- **K1-B (deney bütçesi).** (a) tavan 6.000; (b) tavan 4.000 kalsın, **bake-off ERTELENSİN**;
+  (c) bake-off 2 kola insin. **Önerim: (b)**. Yanıt gelmezse **2026-08-30'da (b)** varsayılan.
+- **K-G (QC anahtarı).** (a) ödemeli katman, (b) ayrı proje anahtarı, (c) kapı sayısını azalt.
+  **Önerim: (a)+(b)**. Yanıt gelmezse 2026-08-31'de ikinci proje anahtarı QC'ye atanır.
+- **K-FILO (mastering yayılımı).** Pilot-2 raporundan sonra 18 seriye kanarya ile yayılsın mı?
+  **Önerim: EVET**, bir anlatımlı + bir müzik-only seride gölge ölçümden sonra.
+- **K8 (yayına dönüş modu).** Üç yeni alan kill-gate başında hâlâ log-only olabilir → o durumda
+  **varsayılan (b): 10 bölümün tamamı insan onaylı**; alanlar terfi etmişse (a) 3 onay + 7 auto.
+- **K-P (pilot-1 kalite kapısı).** Pilot YAYINLANMAZ (P6). Tek soru: ep22 kalitesi kill-gate çıtasını
+  karşılıyor mu ,  evet / hayır / "şu düzeltmeyle evet".
 
 ## ERTELENENLER (Issues)
 
-Öncül planın Ertelenenler listesi aynen geçerli. Eklenenler: B5 kapıya dönüşmeden önce ölçüm (ROCK C);
-sidechain ducking + LUFS ince ayarı; anomali referansının çekim başına yeniden basılması (maliyetli varyant);
-`micro_trim` sonrası ilk-kare tazeleme.
+Öncül planın listesi geçerli. Eklenenler: **B5 kadraj sürüklenmesi ölçümü** (insan etiketli kutu ya da
+bilinen sentetik dönüşüm ister → pilot-2 ve kill-gate telemetrisi, K8 ön koşulu DEĞİL);
+sidechain ducking + LUFS ince ayarı; anomali referansının çekim başına yeniden basılması;
+`micro_trim` sonrası ilk-kare tazeleme; mastering'in 18 seriye yayılımı (K-FILO);
+QC çağrı tavanının sayısal değeri (pilot-2 sonrası).
 
-## SIRA VE ZAMAN
+## SIRA VE ZAMAN (K8 penceresi: son tarih 2026-09-16)
 
-1. **ROCK A** (yarım gün, filo geneli kazanım) → 2. **ROCK B** → 3. **ROCK C** (ölçüm) →
-4. **ROCK D** (K-G kararıyla) → 5. **ROCK E / PİLOT 2** (K1-B kararıyla) → 6. K8 prosedürü + 10 bölümlük kill-gate.
+| # | İş | Tarih hedefi | Bağlı karar |
+|---|---|---|---|
+| 1 | ROCK A (ses master, yalnız unnatural-lab) | 2026-08-28 | ,  |
+| 2 | ROCK C1 (QC ölçümleme + tükenme politikası) | 2026-08-29 | ,  |
+| 3 | ROCK D0 (küresel kredi tabanı) | 2026-08-29 | ,  |
+| 4 | ROCK B (anomali + ihlal + durum + ortam dili, log-only) | 2026-08-31 | ,  |
+| 5 | ROCK C2 (QC anahtarı) | 2026-08-31 | K-G (tarihli varsayılan) |
+| 6 | ROCK D1-D2 / PİLOT 2 | 2026-09-02 | **K-KREDI (08-28)** + K1-B (08-30) |
+| 7 | P7 kalibrasyon raporu → terfi (ZORUNLU DEĞİL) | 2026-09-04 | ,  |
+| 8 | K8 prosedürü + kill-gate başlangıcı | **en geç 2026-09-08** | K8 + K-KREDI |
 
-**K8 penceresi işliyor:** seri part21'den beri yayınsız (workflow `unnatural-lab.yml` devre dışı,
-2026-08-26). Öncül plandaki azami yayınsız süre 3 hafta; bu çevrim o pencereye sığmalıdır.
+**Stop-loss:** 2026-09-08'e kadar kill-gate başlamazsa kalan rock'lar ERTELENENLER'e taşınır ve kanal
+mevcut (A+B uygulanmış) stack'le yayına döner ,  **yeni alanlar log-only ise yayın modu insan onaylıdır
+(K8-b)**, otomatik yayına geçilmez. Yayınsız geçiş 3 haftayı AŞMAZ. Seri part21'den beri yayınsız.
