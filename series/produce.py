@@ -368,7 +368,8 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                 # native sese uygulanan sabit seviye çarpanıdır.
                 ffmpeg_tools.mix_voiceover(str(out), str(audio_path), str(narrated),
                                            voice_volume=1.0,
-                                           bg_duck=bible.native_mix_level)
+                                           bg_duck=bible.native_mix_level,
+                                           amix_normalize=bible.master_lufs is None)
                 if narrated.exists() and narrated.stat().st_size > 0:
                     out = narrated
                     narration_ok = True
@@ -416,7 +417,13 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                 music_out = out.parent / f"{out.stem}_music.mp4"
                 if narration_ok:
                     # anlatım + sürekli müzik bedi (boşluk zaten kalmadı)
-                    ffmpeg_tools.mix_background_music(out, music_path, music_out, music_volume=0.28)
+                    # normalize=0 programı legacy mikse göre 6,1 LU yükselttiği için
+                    # opt-in yatak 0.50'ye eşlendi (foley/yatak +6,19 dB;
+                    # anlatım/yatak değişimi +0,42 dB). Legacy yol 0.28 kalır.
+                    music_volume = 0.50 if bible.master_lufs is not None else 0.28
+                    ffmpeg_tools.mix_background_music(
+                        out, music_path, music_out, music_volume=music_volume
+                    )
                 else:
                     # saf görsel: müzik TEK sürekli ses olsun (gappy native atılır)
                     ffmpeg_tools.mix_background_music(out, music_path, music_out,
@@ -480,6 +487,26 @@ def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path) -> 
     except Exception as error:
         logger.warning(f"⚠️ Diegetik ses kapısı bildirimi gönderilemedi: {error}")
     return False
+
+
+def _verify_audio_master(path: Path, target_lufs: float) -> bool:
+    """Master teslimini fail-closed LUFS/true-peak kapısından geçir."""
+    measured = ffmpeg_tools.measure_audio_loudness(path)
+    if measured is None:
+        logger.error(f"❌ Ses master doğrulaması ölçülemedi: {path}")
+        return False
+    loudness = measured["integrated_lufs"]
+    true_peak = measured["true_peak_dbtp"]
+    logger.info(
+        f"🎚️ Ses master doğrulaması {path.name}: "
+        f"I={loudness:.1f} LUFS, TP={true_peak:.1f} dBTP"
+    )
+    return abs(loudness - target_lufs) <= 1.0 and true_peak <= -1.0
+
+
+def _audio_master_hold(reason: str) -> ProduceResult:
+    logger.error(f"❌ Ses master teslimatı QC hold: {reason}")
+    return ProduceResult("qc_hold", reason=reason)
 
 
 # ─── 4K master (opt-in: bible.upscale; best-effort) ───────────────────────────
@@ -1047,6 +1074,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             return None
     try:
         bible.audio_fade
+        bible.master_lufs
     except ValueError as error:
         logger.error(f"❌ {error}")
         return None
@@ -1708,13 +1736,53 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             logger.warning(f"⚠️ Fact-caption'lar eklenemedi (video onlarsız yayınlanır): {e}")
 
     # 4K master (opt-in): en-son final Topaz ile ×2 büyütülür (YouTube 4K);
-    # IG/TikTok için 1080p delivery kopyası yanına bırakılır.
-    if isolated:
-        final_ep = _upscale_master(
-            bible, number, Path(final_ep), hard_cap=hard_cap, isolated=True
-        )
+    # IG/TikTok için 1080p delivery kopyası yanına bırakılır. Ses master alanı
+    # yoksa aşağıdaki legacy çağrı sırası ve dosya yolu birebir korunur.
+    master_lufs = bible.master_lufs
+    if master_lufs is None:
+        if isolated:
+            final_ep = _upscale_master(
+                bible, number, Path(final_ep), hard_cap=hard_cap, isolated=True
+            )
+        else:
+            final_ep = _upscale_master(bible, number, Path(final_ep))
     else:
-        final_ep = _upscale_master(bible, number, Path(final_ep))
+        source_1080 = Path(final_ep)
+        mastered_1080 = source_1080.parent / f"{source_1080.stem}_mastered.mp4"
+        try:
+            ffmpeg_tools.master_audio(
+                source_1080, mastered_1080,
+                target_i=master_lufs, target_tp=-1.0, target_lra=11.0,
+            )
+        except Exception as error:
+            return _audio_master_hold(f"mastering başarısız: {error}")
+
+        if bible.upscale:
+            if isolated:
+                upscaled = _upscale_master(
+                    bible, number, mastered_1080, hard_cap=hard_cap, isolated=True
+                )
+            else:
+                upscaled = _upscale_master(bible, number, mastered_1080)
+            upscaled = Path(upscaled)
+            delivery_1080 = mastered_1080.parent / "delivery_1080.mp4"
+            try:
+                # Önceki koşudan kalan delivery kopyası mastering'i atlayamaz.
+                shutil.copy2(mastered_1080, delivery_1080)
+                if upscaled.resolve() == mastered_1080.resolve():
+                    return _audio_master_hold("4K master üretilemedi")
+                ffmpeg_tools.remux_audio(upscaled, mastered_1080, upscaled)
+            except Exception as error:
+                return _audio_master_hold(f"4K master ses remux başarısız: {error}")
+            if not _verify_audio_master(delivery_1080, master_lufs):
+                return _audio_master_hold("delivery_1080 ses doğrulaması başarısız")
+            if not _verify_audio_master(upscaled, master_lufs):
+                return _audio_master_hold("4K master ses doğrulaması başarısız")
+            final_ep = upscaled
+        else:
+            if not _verify_audio_master(mastered_1080, master_lufs):
+                return _audio_master_hold("final ses doğrulaması başarısız")
+            final_ep = mastered_1080
 
     if "native_audio" in required_layers and not _verify_native_audio_delivery(
         bible, number, final_ep

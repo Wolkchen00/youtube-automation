@@ -13,6 +13,7 @@ Klasör yapısı:
 
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import time
@@ -247,6 +248,23 @@ class Bible:
             raise ValueError("bible.narration.native_mix_level float olmalı") from error
         if value < 0.0:
             raise ValueError("bible.narration.native_mix_level negatif olamaz")
+        return value
+
+    @property
+    def master_lufs(self) -> float | None:
+        """Teslim master hedefi; alan yoksa bütün legacy ses yolu kapalı kalır."""
+        series = self.data["series"]
+        if "master_lufs" not in series:
+            return None
+        raw = series["master_lufs"]
+        if isinstance(raw, bool):
+            raise ValueError("bible.series.master_lufs sonlu bir sayı olmalı")
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.series.master_lufs sonlu bir sayı olmalı") from error
+        if not math.isfinite(value):
+            raise ValueError("bible.series.master_lufs sonlu bir sayı olmalı")
         return value
 
     @property

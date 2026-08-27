@@ -4,6 +4,8 @@ FFmpeg Tools — Video Assembly & Processing
 Merge clips, add crossfades, create seamless loops, export to 9:16 vertical.
 """
 
+import json
+import math
 import re
 import subprocess
 import statistics
@@ -164,6 +166,177 @@ def measure_mean_volume(path: str | Path) -> float | None:
         return float(match.group(1)) if match else None
     except Exception:
         return None
+
+
+def measure_audio_loudness(path: str | Path) -> dict[str, float] | None:
+    """Teslim sesini kendi kanal düzeni/oranında EBU R128 ile ölç."""
+    try:
+        result = subprocess.run(
+            ["ffmpeg", "-hide_banner", "-nostats", "-i", str(path),
+             "-vn", "-af", "ebur128=peak=true", "-f", "null", "-"],
+            capture_output=True, text=True, timeout=600,
+        )
+        if result.returncode != 0:
+            return None
+        output = f"{result.stdout}\n{result.stderr}"
+        loudness = re.findall(
+            r"Integrated loudness:\s*I:\s*(-?(?:\d+(?:\.\d+)?|inf))\s*LUFS",
+            output,
+            re.IGNORECASE,
+        )
+        true_peak = re.findall(
+            r"True peak:\s*Peak:\s*(-?(?:\d+(?:\.\d+)?|inf))\s*dBFS",
+            output,
+            re.IGNORECASE,
+        )
+        if not loudness or not true_peak:
+            return None
+        values = {
+            "integrated_lufs": float(loudness[-1]),
+            "true_peak_dbtp": float(true_peak[-1]),
+        }
+        return values if all(math.isfinite(value) for value in values.values()) else None
+    except (FileNotFoundError, subprocess.TimeoutExpired, OSError, ValueError):
+        return None
+
+
+def _loudnorm_json(stderr: str) -> dict:
+    """loudnorm'un son JSON raporunu katı biçimde ayrıştır."""
+    blocks = re.findall(r"\{\s*\"input_i\".*?\}", stderr, re.DOTALL)
+    if not blocks:
+        raise RuntimeError("loudnorm ölçüm JSON'u bulunamadı")
+    return json.loads(blocks[-1])
+
+
+def _loudnorm_measurement(stderr: str) -> dict[str, float]:
+    """loudnorm ölçüm değerlerini katı biçimde ayrıştır."""
+    raw = _loudnorm_json(stderr)
+    required = ("input_i", "input_tp", "input_lra", "input_thresh", "target_offset")
+    try:
+        measured = {key: float(raw[key]) for key in required}
+    except (KeyError, TypeError, ValueError) as error:
+        raise RuntimeError("loudnorm ölçüm JSON'u eksik veya geçersiz") from error
+    if not all(math.isfinite(value) for value in measured.values()):
+        raise RuntimeError("loudnorm ölçümü sonlu olmayan değer döndürdü")
+    return measured
+
+
+def master_audio(
+    input_path: str | Path,
+    output_path: str | Path,
+    *,
+    target_i: float = -14.0,
+    target_tp: float = -1.0,
+    target_lra: float = 11.0,
+) -> Path:
+    """Sesi iki geçişli loudnorm ile master'la; hata halinde istisna yükselt."""
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    target = f"I={float(target_i):g}:TP={float(target_tp):g}:LRA={float(target_lra):g}"
+    measure = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-nostats", "-i", str(input_path),
+         "-vn", "-af", f"loudnorm={target}:print_format=json", "-f", "null", "-"],
+        capture_output=True, text=True, timeout=600,
+    )
+    if measure.returncode != 0:
+        raise RuntimeError(f"loudnorm ölçüm geçişi başarısız: {measure.stderr.strip()}")
+    values = _loudnorm_measurement(measure.stderr)
+    # loudnorm 192 kHz'de true-peak sınırlar; 96 kHz AAC dönüşümü bu malzemede
+    # codec-arası tepe üretiyor. Son örnekleme alanındaki 2 dB güvenlik payı,
+    # teslim decode edildiğinde sözleşmedeki -1 dBTP tavanını korur.
+    delivery_limit = 10.0 ** ((float(target_tp) - 2.0) / 20.0)
+    apply_filter = (
+        f"loudnorm={target}"
+        f":measured_I={values['input_i']:g}"
+        f":measured_TP={values['input_tp']:g}"
+        f":measured_LRA={values['input_lra']:g}"
+        f":measured_thresh={values['input_thresh']:g}"
+        f":offset={values['target_offset']:g}"
+        ":linear=true:print_format=json"
+        f",aresample=96000,alimiter=limit={delivery_limit:.6f}:level=false"
+    )
+    metadata_path = output_path.with_suffix(".audio_master.json")
+    try:
+        apply = subprocess.run(
+            ["ffmpeg", "-y", "-hide_banner", "-nostats", "-i", str(input_path),
+             "-map", "0:v?", "-map", "0:a:0", "-c:v", "copy",
+             "-af", apply_filter, "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+             "-movflags", "+faststart", str(output_path)],
+            capture_output=True, text=True, check=True, timeout=600,
+        )
+        apply_report = _loudnorm_json(apply.stderr)
+        normalization_type = str(apply_report.get("normalization_type") or "").strip().lower()
+        if normalization_type not in ("linear", "dynamic"):
+            raise RuntimeError("loudnorm uygulama modu raporlanmadı")
+        metadata = {
+            "target": {
+                "integrated_lufs": float(target_i),
+                "true_peak_dbtp": float(target_tp),
+                "lra_lu": float(target_lra),
+            },
+            "measure_pass": values,
+            "apply_pass": {
+                "normalization_type": normalization_type,
+                "output_i": float(apply_report["output_i"]),
+                "output_tp": float(apply_report["output_tp"]),
+                "output_lra": float(apply_report["output_lra"]),
+                "output_thresh": float(apply_report["output_thresh"]),
+            },
+            "delivery_limiter": {
+                "sample_rate_hz": 96000,
+                "limit": delivery_limit,
+            },
+        }
+        metadata_path.write_text(
+            json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except Exception:
+        output_path.unlink(missing_ok=True)
+        metadata_path.unlink(missing_ok=True)
+        raise
+    if not output_path.exists() or output_path.stat().st_size == 0:
+        raise RuntimeError("loudnorm uygulama geçişi çıktı üretmedi")
+    logger.info(
+        f"🎚️ İki geçişli master hazır (I={float(target_i):g}, "
+        f"TP={float(target_tp):g}, LRA={float(target_lra):g}, "
+        f"mod={normalization_type}): {output_path.name}"
+    )
+    return output_path
+
+
+def remux_audio(
+    video_path: str | Path,
+    audio_source: str | Path,
+    output_path: str | Path = None,
+) -> Path:
+    """Master'lanmış sesi başka bir videoya yeniden kodlamadan yerleştir."""
+    video_path = Path(video_path)
+    audio_source = Path(audio_source)
+    output_path = Path(output_path) if output_path is not None else video_path
+    same_target = output_path.resolve() == video_path.resolve()
+    target = (
+        output_path.with_name(f"{output_path.stem}_audio_remux_tmp{output_path.suffix}")
+        if same_target else output_path
+    )
+    target.unlink(missing_ok=True)
+    try:
+        subprocess.run(
+            ["ffmpeg", "-y", "-hide_banner", "-nostats",
+             "-i", str(video_path), "-i", str(audio_source),
+             "-map", "0:v:0", "-map", "1:a:0", "-map_metadata", "0",
+             "-c:v", "copy", "-c:a", "copy", "-movflags", "+faststart",
+             str(target)],
+            capture_output=True, text=True, check=True, timeout=600,
+        )
+        if not target.exists() or target.stat().st_size == 0:
+            raise RuntimeError("ses remux çıktısı üretilemedi")
+        if same_target:
+            target.replace(output_path)
+    except Exception:
+        target.unlink(missing_ok=True)
+        raise
+    return output_path
 
 
 def get_video_height(video_path: str | Path) -> int:
@@ -1308,6 +1481,7 @@ def mix_voiceover(
     output_path: str | Path = None,
     voice_volume: float = 1.0,
     bg_duck: float = 0.3,
+    amix_normalize: bool = True,
 ) -> Path:
     """Mix voiceover narration into a video at a static original-audio level.
 
@@ -1317,6 +1491,7 @@ def mix_voiceover(
         output_path: Output file (default: _narrated suffix)
         voice_volume: Voiceover volume (default 1.0 = full)
         bg_duck: Static original-audio level multiplier for the whole mix
+        amix_normalize: True = tarihsel ffmpeg varsayılanı; False = normalize=0
 
     Returns:
         Path to the narrated video.
@@ -1347,6 +1522,7 @@ def mix_voiceover(
                             f"({vo_dur:.1f}s → ~{vid_dur - 0.4:.1f}s)")
         except Exception:
             pass  # süre ölçülemezse eski davranış (best-effort)
+        normalize_suffix = "" if amix_normalize else ":normalize=0"
         cmd = [
             "ffmpeg", "-y",
             "-i", str(video_path),
@@ -1354,7 +1530,7 @@ def mix_voiceover(
             "-filter_complex",
             f"[0:a]volume={bg_duck}[bg];"
             f"[1:a]{vo_chain}[vo];"
-            f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2[aout]",
+            f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2{normalize_suffix}[aout]",
             "-map", "0:v",
             "-map", "[aout]",
             "-c:v", "copy",

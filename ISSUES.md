@@ -15,3 +15,19 @@
   status paused; dosya düzeyi kapatma netleşmeli.
 - [low] KANAL_ENTEGRASYON_PLANI_v2.md'deki aimagine doktrin özeti (24-32 sn + tek ödül)
   v2.0'dan sonra bayat kalır; plan dokümanı ayrı klasörde, İhsan onayıyla güncellenir.
+
+## ROCK A (ses master) sonrası ertelenenler — 2026-08-27
+
+- **[orta] Üretim yalnız LUFS/TP kapısı koşuyor.** `_verify_audio_master` teslimatı yalnız entegre
+  loudness ve true-peak için doğruluyor; foley varlığı ve dinamik sıkışma kapıları
+  `tools/audio_master_check.py` içinde, yani üretim yolunda DEĞİL. Foley'i gömülmüş bir bölüm
+  bugün yayına çıkabilir (Seviye-10'da sabotaj dosyasıyla kanıtlandı: araç yakalıyor, üretim yakalamıyor).
+  Öneri: pilot-2 penceresinde tam denetimi üretimde fail-closed koştur (premaster + referanslar
+  zaten `produce.py` içinde mevcut).
+- **[düşük] Yatak seviyesi 0.50 kapıya çok yakın.** Opt-in yolda foley/yatak marjı pilot malzemesinde
+  6,195 dB, kapı 6,0 dB → 0,2 dB pay. Pilot-2 malzemesi biraz farklı gelirse araç FAIL raporlar.
+  Öneri: pilot-2 ölçümünden sonra ya eşiği ya da yatak seviyesini seri bazlı ayarlanabilir yap.
+- **[düşük] Opt-in seride upscale hatası artık `qc_hold` üretiyor.** Topaz dış servis ve kırılgan;
+  bugün `unnatural-lab` için `upscale` kapalı olduğundan etkisiz, ama K-FILO yayılımında
+  1080p teslimatı olan bir seriyi durdurabilir. Öneri: K-FILO öncesi "4K üretilemedi ama 1080p
+  master doğrulandı" durumunu ayrı sınıflandır.
