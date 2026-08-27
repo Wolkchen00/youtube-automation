@@ -1,6 +1,6 @@
 # PLAN_PILOT_SONRASI_v1 ,  sentinal.ihsan.daily / Unnatural Lab
 
-Tarih: 2026-08-27 · Durum: TASLAK r4 (Same Page Meeting tur 1-3 bulguları işlendi) · Sahibi: İhsan
+Tarih: 2026-08-27 · Durum: ONAYLI r6 (SAME PAGE tur 5 + İhsan kararları 2026-08-27) · Sahibi: İhsan
 Öncül: `PLAN_GERCEKCILIK_v1.md` (ROCK 1-5 ön işi push'lu; ENTEGRE PİLOT 1 üretildi).
 Ölçüm kanıtları: `sentinal_ihsan/measurements/pilot1_audio.md` · Müzakere: `PLAN_PILOT_SONRASI_SPM_LOG.md`
 
@@ -35,8 +35,10 @@ anlatım mikste (**+17,2 dB**); müzik yatağı 219 pencerenin 196'sında. Maliy
   yerel ffmpeg. **Asıl sorun:** retry / yedek model / 429 loglanmıyor → gerçek deneme sayısı ölçülemiyor.
 - **B8 ,  KREDİ ÖMRÜ (ACİL, ÖLÇÜLDÜ).** Bakiye **5.999 kr (~$30)**; `credits_ledger.json` son 7 gün
   ortalaması **1.390 kr/gün**; Ağustos gerçekleşen **37.594 kr ≈ $188/ay**. → **~4 günlük ömür.**
-  Kill-gate sonuna kadar (bugünden ~22 gün) toplam ihtiyaç **~35.900 kr ≈ $179**; eldeki düşülünce
-  **~30.000 kr ≈ $149 yükleme**. Mevcut bakiyeyle kill-gate mekanik olarak imkânsızdır.
+  Kill-gate sonuna kadar (bugünden ~22 gün) toplam ihtiyaç **~35.900 kr ≈ $179**.
+  **→ K-KREDI kararıyla KAPANDI (2026-08-27):** bakiye 1.500'ün altına düşünce otomatik yükleme
+  yapılıyor (İhsan beyanı), dolayısıyla bu bulgu plan riski değil **maliyet kaydıdır**; mekanik
+  korumalar (ROCK D0 tabanı, watchdog eşikleri) yine de yürürlükte kalır.
 - **B9 ,  ORTAM DİLİ KODDA ESKİ.** "workbench/bench" `bible.json > qc.notes` dışında da sabit:
   `series/critic.py:153, 437, 441, **450**, 1141, 1145` ve `series/produce.py:851, 878`.
 
@@ -215,27 +217,28 @@ ve canlı bakiye pilot-2 + taban toplamını karşılamalı.
 
 ## KARAR MADDELERİ (İhsan)
 
-- **K-KREDI (ACİL ,  karar tarihi 2026-08-28).** Bakiye **5.999 kr (~$30)**; ölçülen tüketim
-  **1.390 kr/gün**; Ağustos gerçekleşen **$188**. Hesap: 08-27→09-08 filo **16.680 kr** + pilot-2
-  **800** + kill-gate 10 gün (filo 1.390 + unnatural 450 = 1.840/gün) **18.400** = **35.880 kr ≈ $179**;
-  eldeki düşülünce **yükleme ≈ 29.900 kr ≈ $149**.
-  (a) **~30.000 kr (~$150)** ,  pilot-2 + kill-gate + filo sonuna kadar güvence. **Önerim.**
-  (b) ~12.000 kr (~$60) ,  filo 09-08'e kadar + pilot-2; kill-gate için ikinci yükleme şart.
-  (c) ~7.000 kr (~$35) ,  yalnız filo birkaç gün daha; deneyler durur.
-  (d) yükleme yok ,  **~4 gün içinde tüm filo durur.**
-  Not: kill-gate 10 ARDIŞIK yayın ölçer; ortasında kredi bitmesi ölçümü çöpe atar → (b) seçilirse
-  kill-gate başlangıcı ikinci yüklemeye bağlanır ve takvim kayar.
-- **K1-B (deney bütçesi).** (a) tavan 6.000; (b) tavan 4.000 kalsın, **bake-off ERTELENSİN**;
-  (c) bake-off 2 kola insin. **Önerim: (b)**. Yanıt gelmezse **2026-08-30'da (b)** varsayılan.
+- **K-KREDI ,  KARAR VERİLDİ (İhsan, 2026-08-27): dert edilmeyecek.** İhsan'ın beyanı: *bakiye
+  1.500 kredinin altına düşünce otomatik yükleme yapılıyor.* Bu karara göre kredi tükenmesi plan
+  riski sayılmaz ve pilot-2 kredi kararı beklemez.
+  **Kayda geçen çekince (iptal edilmez):** 2026-08-07'de "Kie bakiyesi otomatik yükleniyor, uyarı
+  yapma" kuralı yürürlükteydi, varsayım tutmadı ve **4 kanal 3,8 gün sessiz kaldı**. Bu yüzden
+  mekanik korumalar KALIR: **ROCK D0 bakiye tabanı**, watchdog eşikleri (4.800 / 2.850) ve
+  Kie-kritik alarm konu satırı. Otomatik yükleme çalışıyorsa bu korumalar hiç tetiklenmez;
+  çalışmıyorsa sessizlik yerine alarm üretirler.
+  Ölçülen bağlam (kayıt için): bakiye 5.999 kr, tüketim ~1.390 kr/gün, Ağustos gerçekleşen ~$188.
+- **K1-B ,  KARAR VERİLDİ (İhsan, 2026-08-27): (b) bake-off ERTELENDİ.** Deney tavanı 4.000'de kalır;
+  pilot-2 ve kill-gate mevcut Omni motoruyla koşar; motor kararı (Veo/Seedance karşılaştırması)
+  sonraki çevrime kalır. Aşama haritası kesinleşti: `pilot 1.700` (dondu) · `pilot2 800` ·
+  `preflight/bakeoff/holdout 0` · tahsis edilmemiş 1.500.
 - **K-G (QC anahtarı).** (a) ödemeli katman, (b) ayrı proje anahtarı, (c) kapı sayısını azalt.
   **Önerim: (a)+(b)**. Yanıt gelmezse 2026-08-31'de ikinci proje anahtarı QC'ye atanır.
 - **K-FILO (mastering yayılımı).** Pilot-2 raporundan sonra 18 seriye kanarya ile yayılsın mı?
   **Önerim: EVET**, bir anlatımlı + bir müzik-only seride gölge ölçümden sonra.
 - **K8 (yayına dönüş modu).** Üç yeni alan kill-gate başında hâlâ log-only olabilir → o durumda
   **varsayılan (b): 10 bölümün tamamı insan onaylı**; alanlar terfi etmişse (a) 3 onay + 7 auto.
-- **K-P (pilot-1 kalite kapısı).** Pilot YAYINLANMAZ (P6). Tek soru: ep22 kalitesi kill-gate çıtasını
-  karşılıyor mu ,  evet / hayır / "şu düzeltmeyle evet".
-
+- **K-P ,  KARAR VERİLDİ (İhsan, 2026-08-27): şartlı evet.** ep22 çıtayı ROCK A (ses master) ve
+  ROCK B (anomali + ihlal kapıları) uygulandıktan sonra karşılar sayılır; doğrulama **PİLOT 2** ile
+  yapılır, ondan sonra kill-gate'e girilir. Pilot YAYINLANMAZ (P6).
 ## ERTELENENLER (Issues)
 
 Öncül planın listesi geçerli. Eklenenler: **B5 kadraj sürüklenmesi ölçümü** (insan etiketli kutu ya da
