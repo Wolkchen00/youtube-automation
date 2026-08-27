@@ -4,9 +4,10 @@
       "total_cap": 4000.0,
       "stage_caps": {
         "pilot": 1700.0,
-        "preflight": 300.0,
-        "bakeoff": 2400.0,
-        "holdout": 500.0
+        "pilot2": 800.0,
+        "preflight": 0.0,
+        "bakeoff": 0.0,
+        "holdout": 0.0
       },
       "reservations": [
         {
@@ -298,7 +299,13 @@
           "ts": "2026-08-26T19:03:25.677326+00:00"
         }
       ],
-      "measurements": []
+      "measurements": [],
+      "notes": [
+        {
+          "ts": "2026-08-27",
+          "karar": "K1-B (Ihsan): bake-off ERTELENDI. pilot2 asamasi 800 kr ile acildi; preflight/bakeoff/holdout 0. Toplam tavan 4000 DEGISMEDI; tahsis 2500, tahsis edilmemis 1500 yalnizca yeni bir karar ile acilir."
+        }
+      ]
     }
   }
 }
