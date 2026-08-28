@@ -7,11 +7,18 @@ uretilen bir kill-gate karari, kanali ya haksiz oldurur ya da bos yere yasatir.
 import pathlib
 import sys
 import unittest
+from contextlib import redirect_stdout
 from datetime import date, datetime, timedelta, timezone
+from io import StringIO
+from unittest import mock
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from core import killgate
+from tools import killgate_report
+
+
+FROZEN_STACK = "a" * 64
 
 
 def snapshot(day: date, channel: str, videos: dict) -> tuple[date, dict]:
@@ -19,10 +26,11 @@ def snapshot(day: date, channel: str, videos: dict) -> tuple[date, dict]:
 
 
 def episode(video_id, likes, comments, views=1000, published=None, reason=None,
-            measured_at=None):
+            measured_at=None, stack_sha256=FROZEN_STACK):
     return killgate.EpisodeMetric(
         video_id=video_id,
         published=published or datetime(2026, 8, 1, tzinfo=timezone.utc),
+        stack_sha256=stack_sha256,
         views=views, likes=likes, comments=comments,
         measured_at=measured_at or date(2026, 8, 4), reason=reason,
     )
@@ -96,6 +104,42 @@ class VerdictTests(unittest.TestCase):
         report = self.build([episode(f"v{i}", 35, 2) for i in range(10)])
         self.assertEqual(report.verdict, "basari")
 
+    def test_refuses_to_decide_when_the_window_has_two_stacks(self):
+        episodes = [episode(f"v{i}", 35, 0) for i in range(5)]
+        episodes.extend(
+            episode(f"v{i}", 35, 0, stack_sha256="b" * 64)
+            for i in range(5, 10)
+        )
+        report = self.build(episodes)
+        self.assertEqual(report.verdict, "karar_yok")
+        self.assertTrue(report.comment_alarm)
+        self.assertTrue(any("farkli stack" in reason for reason in report.reasons))
+        self.assertTrue(any("YORUM ALARMI" in reason for reason in report.reasons))
+
+    def test_refuses_to_decide_when_a_mature_episode_has_no_stack(self):
+        episodes = [episode(f"v{i}", 35, 0) for i in range(9)]
+        episodes.append(episode("v9", 35, 0, stack_sha256=None))
+        report = self.build(episodes)
+        self.assertEqual(report.verdict, "karar_yok")
+        self.assertTrue(report.comment_alarm)
+        self.assertTrue(any("stack parmak izi yok (1 bolum): v9" in reason
+                            for reason in report.reasons))
+        self.assertTrue(any("YORUM ALARMI" in reason for reason in report.reasons))
+
+    def test_one_frozen_stack_uses_the_existing_thresholds(self):
+        self.assertEqual(
+            self.build([episode(f"kill{i}", 9, 1) for i in range(10)]).verdict,
+            "oldur",
+        )
+        self.assertEqual(
+            self.build([episode(f"middle{i}", 15, 1) for i in range(10)]).verdict,
+            "ara_bant",
+        )
+        self.assertEqual(
+            self.build([episode(f"win{i}", 35, 2) for i in range(10)]).verdict,
+            "basari",
+        )
+
     def test_high_likes_but_dead_comments_is_not_success(self):
         report = self.build([episode(f"v{i}", 40, 0) for i in range(10)])
         self.assertEqual(report.verdict, "ara_bant")
@@ -115,6 +159,40 @@ class VerdictTests(unittest.TestCase):
         text = killgate.format_report(report, series="unnatural-lab")
         self.assertIn("KARAR: karar_yok", text)
         self.assertIn("pencere dolmadi", text)
+
+    def test_report_text_shows_episode_and_window_stack(self):
+        report = self.build([episode(f"v{i}", 35, 2) for i in range(10)])
+        text = killgate.format_report(report, series="unnatural-lab")
+        self.assertIn("pencere stack: aaaaaaaa", text)
+        self.assertIn("v0: stack=aaaaaaaa", text)
+
+
+class CliTests(unittest.TestCase):
+    def test_stack_mode_prints_only_current_fingerprint(self):
+        output = StringIO()
+        with mock.patch.object(sys, "argv", [
+            "killgate_report.py", "--series", "unnatural-lab", "--stack",
+        ]), mock.patch.object(
+            killgate_report, "fingerprint", return_value="c" * 64
+        ), mock.patch.object(
+            killgate_report, "load_snapshots"
+        ) as snapshots, redirect_stdout(output):
+            result = killgate_report.main()
+        self.assertEqual(result, 0)
+        self.assertEqual(output.getvalue(), ("c" * 64) + "\n")
+        snapshots.assert_not_called()
+
+
+def test_published_parts_carry_stack_from_the_series_ledger(tmp_path, monkeypatch):
+    ledger = tmp_path / "series.json"
+    ledger.write_text(
+        '{"parts":{"1":{"status":"published","published_at":"2026-08-01T00:00:00+00:00",'
+        '"subtitle":"Episode","stack_sha256":"eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"}}}',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(killgate_report, "_series_path", lambda series: ledger)
+    parts = killgate_report._published_parts("test-series", 10)
+    assert parts[0]["stack_sha256"] == "e" * 64
 
 
 if __name__ == "__main__":

@@ -40,6 +40,7 @@ class EpisodeMetric:
     comments: int | None = None
     measured_at: date | None = None
     reason: str | None = None
+    stack_sha256: str | None = None
 
     @property
     def mature(self) -> bool:
@@ -74,9 +75,14 @@ class KillGateReport:
 
 
 def measure_episode(snapshots, channel_name: str, video_id: str,
-                    published: datetime) -> EpisodeMetric:
+                    published: datetime,
+                    stack_sha256: str | None = None) -> EpisodeMetric:
     """Yayindan >=72 saat sonraki ILK kullanilabilir snapshot'tan olc."""
-    metric = EpisodeMetric(video_id=video_id, published=published)
+    metric = EpisodeMetric(
+        video_id=video_id,
+        published=published,
+        stack_sha256=stack_sha256,
+    )
     target = published + timedelta(hours=MATURITY_HOURS)
     latest_usable = published.date() + timedelta(days=LATEST_USABLE_DAYS)
     for snapshot_date, snapshot in snapshots:
@@ -130,6 +136,30 @@ def build_report(episodes: list[EpisodeMetric], window: int = DEFAULT_WINDOW) ->
     report.median_l_per_1k = median(e.likes_per_1k for e in mature[:window])
     report.median_c_per_1k = median(e.comments_per_1k for e in mature[:window])
     report.comment_alarm = report.median_c_per_1k < COMMENT_ALARM_C_PER_1K
+    if report.comment_alarm:
+        report.reasons.append(
+            f"YORUM ALARMI: C/1k medyani {report.median_c_per_1k:.2f} < "
+            f"{COMMENT_ALARM_C_PER_1K:g}; yorum motoru calismiyor"
+        )
+
+    # Kill-gate yalniz ayni uretim tarifiyle uretilmis tam bir pencereyi tartar.
+    # Kayit tarafindaki eksik iz burada sessizce sayilmaz; karar fail-closed kalir.
+    decision_window = mature[:window]
+    missing_stack = [e for e in decision_window if not e.stack_sha256]
+    if missing_stack:
+        videos = ", ".join(e.video_id for e in missing_stack)
+        report.reasons.append(
+            f"stack parmak izi yok ({len(missing_stack)} bolum): {videos}"
+        )
+        return report
+    stacks = {e.stack_sha256 for e in decision_window}
+    if len(stacks) > 1:
+        short = ", ".join(sorted(stack[:8] for stack in stacks))
+        report.reasons.append(
+            f"pencerede {len(stacks)} farkli stack var: {short}; "
+            "kill-gate donmus stack ister"
+        )
+        return report
 
     if report.median_l_per_1k < KILL_L_PER_1K:
         report.verdict = "oldur"
@@ -150,26 +180,30 @@ def build_report(episodes: list[EpisodeMetric], window: int = DEFAULT_WINDOW) ->
             f"L/1k medyani {report.median_l_per_1k:.1f} ara bantta "
             f"({KILL_L_PER_1K:g}-{SUCCESS_L_PER_1K:g}): en fazla BIR ek karar penceresi"
         )
-    if report.comment_alarm:
-        report.reasons.append(
-            f"YORUM ALARMI: C/1k medyani {report.median_c_per_1k:.2f} < "
-            f"{COMMENT_ALARM_C_PER_1K:g}; yorum motoru calismiyor"
-        )
     return report
 
 
 def format_report(report: KillGateReport, series: str = "") -> str:
     lines = [f"KILL-GATE RAPORU{(' - ' + series) if series else ''}"]
     lines.append(f"pencere: {report.window} yayin | olgun olcum: {len(report.mature_episodes)}")
+    decision_window = report.mature_episodes[:report.window]
+    window_stacks = {e.stack_sha256 for e in decision_window if e.stack_sha256}
+    if (len(decision_window) == report.window
+            and len(window_stacks) == 1
+            and all(e.stack_sha256 for e in decision_window)):
+        lines.append(f"pencere stack: {next(iter(window_stacks))[:8]}")
     for episode in report.episodes:
+        short_stack = episode.stack_sha256[:8] if episode.stack_sha256 else "yok"
         if episode.mature:
             lines.append(
-                f"  {episode.video_id}: izlenme={episode.views} "
+                f"  {episode.video_id}: stack={short_stack} izlenme={episode.views} "
                 f"L/1k={episode.likes_per_1k:.1f} C/1k={episode.comments_per_1k:.2f} "
                 f"(olcum {episode.measured_at})"
             )
         else:
-            lines.append(f"  {episode.video_id}: OLCULEMEDI ({episode.reason})")
+            lines.append(
+                f"  {episode.video_id}: stack={short_stack} OLCULEMEDI ({episode.reason})"
+            )
     if report.median_l_per_1k is not None:
         lines.append(f"medyan L/1k: {report.median_l_per_1k:.1f}")
         lines.append(f"medyan C/1k: {report.median_c_per_1k:.2f}")

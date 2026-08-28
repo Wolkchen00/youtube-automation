@@ -13,6 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from core.config import logger
+from core.stack_fingerprint import STACK_VERSION, fingerprint
 from .bible import data_dir, ensure_dirs
 
 DEFAULT_PLATFORMS = ["youtube", "instagram", "tiktok"]
@@ -130,6 +131,17 @@ class SeriesMeta:
         p["video"] = str(video)
         if subtitle:
             p["subtitle"] = subtitle
+        # Parmak izi yalniz olcum metadatasidir: hesabi bozulursa uretilmis videoyu
+        # kaybetmek yerine eksik izi acikca kaydeder, karar tarafina birakiriz.
+        try:
+            p["stack_sha256"] = fingerprint(self.slug)
+            p["stack_version"] = STACK_VERSION
+        except Exception as exc:
+            logger.warning(
+                f"⚠️ {self.slug} part {n} stack parmak izi hesaplanamadi: {exc}"
+            )
+            p["stack_sha256"] = None
+            p["stack_version"] = None
 
     def mark_published(self, n: int, platforms_ok: list[str]):
         p = self.get_part(n)
