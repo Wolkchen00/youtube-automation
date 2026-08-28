@@ -278,3 +278,48 @@ QC çağrı tavanının sayısal değeri (pilot-2 sonrası).
 **Stop-loss:** 2026-09-08'e kadar kill-gate başlamazsa kalan rock'lar ERTELENENLER'e taşınır ve kanal
 mevcut (A+B uygulanmış) stack'le yayına döner ,  **yeni alanlar log-only ise yayın modu insan onaylıdır
 (K8-b)**, otomatik yayına geçilmez. Yayınsız geçiş 3 haftayı AŞMAZ. Seri part21'den beri yayınsız.
+
+
+---
+
+# DURUM DAMGASI (2026-08-28, cevrim KAPANDI)
+
+Cizelgedeki 8 maddenin tamami kapandi ya da acikca karara baglandi. Kanal
+**2026-08-28'de yayina dondu** (stop-loss tarihi 2026-09-08'den 11 gun once).
+
+| # | Is | Durum |
+|---|---|---|
+| 1 | ROCK A ses master | **BITTI + CANLI DOGRULANDI**: uretim fonksiyonlariyla, 0 kredi, ham -24,5 LUFS -> master -14,3 LUFS / -1,3 dBTP, `_verify_audio_master` True |
+| 2 | ROCK C1 QC olcumleme | **BITTI + CANLI**: pilot-2'de attempt/result ciftleri eksiksiz; 503'te bolum dusmedi, yeniden denendi |
+| 3 | ROCK D0 kredi tabani | **BITTI + CANLI**; ucusta sizintisi 2026-08-28'de bulundu ve onarildi |
+| 4 | ROCK B anomali/ihlal/durum | **BITTI + CANLI SINYAL**: `anomaly_match {value:false, visible:true, conf:0.9}` - tasarlanan "gorunur ama yok" vakasi |
+| 5 | ROCK C2 QC anahtari | **BITTI + CANLI**: GitHub secret kondu, uretimde `QC anahtar kaynagi: GEMINI_API_KEY_QC` |
+| 6 | PILOT 2 | **DURDURULDU** (636 kr). Dogrulama gorevini yapti: 5 rock canlida kanitlandi, 3 gercek kusur buldu. Tam bolum uretemedi cunku her seferinde PLAN kusuru vardi; sonuncusu ROCK B'nin kendi tasarim acigiydi. Bundan sonraki dogrulama CANLI b0lumdur (deney bolumu atiliyor, canli bolum yayinlanabiliyor). |
+| 7 | P7 kalibrasyon | **YAPILAMADI**: alan basina >=24 ornek gerekiyor, elde ~8 var. Uc alan LOG-ONLY kaliyor. |
+| 8 | K8 + kill-gate | **BITTI**: workflow ENABLED, pencere acildi, bkz. `K8_KILL_GATE_PENCERESI.md` |
+
+## Bu cevrimde eklenen rock'lar (planda yoktu, olcum dogurdu)
+
+* **E1** - pilot2 asamasi CLI'dan erisilemiyordu VE K1-B'nin sifir kapaklari canli
+  deney defterini bozmustu (`_load()` iki gundur `ExperimentLedgerCorruptError`
+  veriyordu). Ikisi de pilot-2'yi baslamadan oldururdu.
+* **E2** - stack parmak izi. Kill-gate'in "donmus stack" tanimi olculemiyordu;
+  artik olculuyor ve kirli pencerede karar VERILMIYOR.
+* **E3** - shot-1 onset kapisi. 184 kredilik hata artik 0 krediye yakaniyor;
+  `tools/plan_lint.py` kuyrugu ucretsiz denetliyor.
+* **E4** (Visionary devraldi, Codex kotada) - D0 ucusta sizintisi + planlayiciya
+  descriptor/anomali uyum kurali.
+
+## Yayin modu: K8-b'den SAPMA (Ihsan karari)
+
+Plan varsayilani (b) 10 bolum insan onayliydi. Ihsan 2026-08-28'de **dogrudan
+otomatik**'i secti. Sunulan cekince ve bilinen sinirlar
+`K8_KILL_GATE_PENCERESI.md` icinde kayitlidir.
+
+## Acik kalan tek is
+
+**Facebook.** upload-post'a bagli hesap Ihsan'in KISISEL PROFILI; sayfa sorgusu
+"No Facebook pages found" donuyor ve API `facebook_page_id`'yi zorunlu tutuyor.
+Meta 2018'de ucuncu taraf uygulamalarin profile paylasmasini kaldirdi. Ihsan bir
+Facebook SAYFASI acip upload-post'ta yeniden baglayinca kod tarafi (platform
+listesi + `facebook_media_type=VIDEO` dali) eklenecek.
