@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "Old Train Car → Luxury Art Studio ✨"
+  },
+  "synopsis": "An old, rusted train car is transformed into a sleek, modern luxury art studio with expansive windows in a tranquil field.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA wide view of a remote, grassy field with a long, heavily rusted old train car sitting on a short track. The builder measures, a small crane shifts sections of track, and a concrete foundation for an extension is prepared.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nSections of the train car's side are carefully cut out with an angle grinder's screech. A new steel frame for a glass extension begins to rise from the concrete foundation, bolted securely to the train car.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nThe exterior of the train car is sandblasted and repainted a deep charcoal gray, while expansive floor-to-ceiling glass panels are installed in the new extension. Exterior lights are fitted, and a power washer hums during final cleaning.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the now open train car and extension, new polished concrete flooring is laid. Walls are insulated and paneled with light wood, and a sophisticated track lighting system is installed along the ceiling. A trowel scrapes as mortar is spread.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nLarge art easels, canvases, and painting supplies are meticulously arranged in the light-filled studio. Minimalist, modern furniture is placed, and a high-tech ventilation system is integrated. A soft click of a light switch activates the ambiance.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nThe camera drifts from the pristine, organized art studio, through the large glass doors of the extension, revealing the sleek, transformed train car standing majestically in the tranquil, sun-drenched field. A distant train horn sounds faintly.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "dönüşüm",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

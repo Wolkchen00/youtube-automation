@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Building A Sky Palace From Scratch! 🛠️✨"
+  },
+  "synopsis": "A majestic palace built into the clouds, accessible only by a hidden elevator, is constructed on a floating platform.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA wide view of a floating, barren platform amidst soft, wispy clouds. The builder arrives, and a drone whirs as it marks the foundation with laser lines. Soil is shifted, and a temporary road for supplies is laid out on the edge of the platform.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nThe foundation is poured on the floating platform, with concrete mixers humming. Elegant white walls rise with intricate gold accents. A grand, domed roof frame is assembled, accompanied by the distinct sound of a hammer striking.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nWhite marble cladding glistens, and golden filigree detailing is meticulously applied to the roof. Exterior lighting fixtures are installed, and a crane gently lowers a sculpted fountain into place. A brush sweeps dust from a finished surface.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the rising palace, an open interior space with vast arched windows. Walls are paneled with white and gold, and a stone grinder whirs as marble floor tiles are precisely laid. Intricate electrical conduits are installed along the ceiling.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nPlush, cloud-like furniture is placed, and chandeliers of glowing crystals are hung. Elegant drapes fall from tall windows as a soft fabric unrolls. The interior is finished and bathed in a warm, inviting light, with a gentle hum of ventilation.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nFrom a grand interior hall, the camera glides through a tall, ornate doorway, revealing the builder observing the finished white and gold palace exterior, floating serenely above the clouds. A faint whirring sound accompanies the view.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "fantezi konutlar",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Building A Secret Cavern Lab From Scratch! 🛠️✨"
+  },
+  "synopsis": "A hidden, high-tech research laboratory is meticulously excavated and constructed within a natural cavern behind a thundering waterfall.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA lush, remote jungle scene dominated by a thundering waterfall. The builder, with a rock hammer, carefully surveys a hidden cave entrance behind the water. A small bore drill whirs, testing rock samples as ground is cleared.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nHeavy machinery, brought in stealthily, begins to expand the natural cavern. Rock walls are shored up with steel beams, and a smooth, reinforced concrete floor is poured. Jackhammers pound rhythmically.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nThe cavern entrance behind the waterfall is subtly disguised with natural rock, while a secure, watertight bulkhead door is installed. Exterior sensors and camouflaged vents are integrated. A wrench clanks against metal.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the expansive, now stable cavern, a modular laboratory structure is assembled. Walls of sleek, glowing panels rise, and a complex network of power conduits and data cables is laid beneath the floor. A cable spool whirs as wire is unwound.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nHigh-tech computer servers hum with blue light, scientific instruments are meticulously calibrated, and ergonomic lab stations are installed. The entire space glows with a cool, ambient light, and the soft hiss of pneumatic tubes is heard.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nFrom the futuristic, glowing interior of the secret lab, the camera moves past a holographic display, through the heavy bulkhead door, emerging behind the cascading waterfall, revealing the hidden entrance to the lab from the jungle. The roar of the waterfall fills the scene.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "saklı/mühendislik harikası",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

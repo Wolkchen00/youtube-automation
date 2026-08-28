@@ -100,5 +100,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=e06f2446f3884f1b892c29ef820b8e0b. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'e06f2446f3884f1b892c29ef820b8e0b', 'total_platforms': 1, 'job_id': '108ac4c065e54c0eb0bc7296e06210cc'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=fd205198430f4ebfb68198d33ab35552. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'fd205198430f4ebfb68198d33ab35552', 'total_platforms': 1, 'job_id': '0f47f56d6f2b4e7394d3436a09abbee9'}"
     }
+  },
+  {
+    "part": 10,
+    "subtitle": "He Turned Scrapped Cans Into A $100K Oasis! ♻️✨",
+    "ts": "2026-08-28T00:21:52.886719+00:00",
+    "results": {
+      "youtube": "yD2bQvfqJQg",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=41dee647d05f41638b40ae01d9036ecc. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '41dee647d05f41638b40ae01d9036ecc', 'total_platforms': 1, 'job_id': 'fc13d2efe45a4c3caf931d50c6e64838'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ce8b6fa14dda4d5f8518b7ea813abfbd. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ce8b6fa14dda4d5f8518b7ea813abfbd', 'total_platforms': 1, 'job_id': '537b2c58c6234ce2ba4e6c82479102e8'}"
+    }
   }
 ]

@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Building A $75K Tiny Home From Scratch! ✨"
+  },
+  "synopsis": "A whimsical, mushroom-shaped tiny home with vibrant colors and eccentric features is constructed in a lush forest clearing.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA sun-dappled forest clearing with tall, ancient trees. The builder lays out a circular foundation, a small excavator scrapes soil. A winding path of colorful stepping stones is marked for future placement.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nA curved, organic-shaped wooden frame rises for the mushroom cap roof, with a circular base for the stalk. Beams are lifted and fitted, and a circular saw buzzes through timber as sections are cut.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nThe mushroom cap is covered with vibrant red shingles, while the stalk base is clad in smooth, cream-colored plaster. Large, round windows are fitted, and a whimsical front door is painted bright blue. A paint roller sweeps across a surface.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the circular tiny home, a warm, inviting space takes shape. Curved wooden walls are paneled, and a compact, multi-level flooring system is installed. Wiring for unique, embedded lighting is pulled through, with a staple gun clicking.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nCustom-built, space-saving furniture like a circular bed and a tiny kitchenette are fitted. Colorful cushions and whimsical decor are arranged. Glowing soft light emanates from circular wall fixtures, and a gentle hum of a small fan fills the air.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nFrom the cozy, brightly lit interior, the camera gracefully floats through the round front door, revealing the finished, vibrant red and cream mushroom house nestled playfully within the lush green forest. A bird chirps softly nearby.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "absürt eğlence mimarisi",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}
