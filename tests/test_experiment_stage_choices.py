@@ -59,8 +59,12 @@ def test_live_ledger_zero_cap_does_not_invalidate_ledger():
     loaded = experiment._load()
     stage_caps = loaded["experiments"]["exp-2026-08-gerceklik"]["stage_caps"]
 
-    assert stage_caps["pilot2"] == 800.0
-    assert stage_caps["bakeoff"] == 0.0
+    # Defterdeki KAPAK DEGERLERI operasyonel karardir ve degisir; testin pinledigi
+    # sey degismezdir: sifir kapakli bir asamanin varligi defteri gecersiz KILMAZ.
+    assert "pilot2" in stage_caps
+    zero_capped = [name for name, cap in stage_caps.items() if cap == 0]
+    assert zero_capped, "regresyonu olcebilmek icin en az bir sifir kapak gerekli"
+    assert all(cap >= 0 for cap in stage_caps.values())
 
 
 def test_unknown_stage_fails_closed_and_lists_valid_stages(ledger_path):

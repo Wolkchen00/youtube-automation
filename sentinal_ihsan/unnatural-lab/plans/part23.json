@@ -9,10 +9,10 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet. Under the water, the soap stays perfectly rigid and begins to crack like glass.",
+      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet, the bar filling most of the frame. The bar is already split along a bright conchoidal fracture; its glassy translucent edge throws hard specular glints under the water while the broken face holds a mirror-smooth shine and water beads roll off the sharp facets.",
       "seed": null,
       "environment": "bathroom_sink",
-      "violation_observation": "the wet bar stays rigid and splits with a clean glass-like crack"
+      "violation_observation": "the soaked bar keeps a bright glassy fracture face with sharp translucent edges"
     },
     {
       "n": 2,
