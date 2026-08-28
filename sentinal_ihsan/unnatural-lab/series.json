@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 26,
-  "next_part": 22,
+  "next_part": 23,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -274,6 +274,19 @@
         "tiktok"
       ],
       "published_at": "2026-08-23T19:13:03.529528+00:00"
+    },
+    "22": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep22/ep22_narrated_music_mastered.mp4",
+      "subtitle": "Something Is WRONG With This LEMON",
+      "stack_sha256": "6c18a9c5e88cadb651843e315acf0d24612d467bac33b37f61eb2ddc8f5d7027",
+      "stack_version": "sf1",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-28T21:06:13.921838+00:00"
     }
   }
 }
