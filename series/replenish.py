@@ -703,7 +703,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'happen. Where a shot leaves a lasting trace the next shot must still show '
         '(a puddle, a crushed can, a groove), add state_carry to the shot that CREATES '
         'it; the pipeline copies that exact state_carry sentence verbatim into the NEXT '
-        'shot prompt, so the next action must agree with it. The final shot never carries state_carry.'
+        'shot prompt, so the next action must agree with it. The final shot never carries state_carry. '
+        'SHOT 1 ONSET: describe the anomaly as an ongoing, visible STATE already at its most '
+        'extreme in the very first frame. Onset phrases such as "begins to" and "starts to" '
+        'are forbidden in shot 1. BAD: "the soap stays rigid and begins to crack like glass". '
+        'GOOD: "the bar is already split along a bright conchoidal fracture, its glassy '
+        'translucent edge glinting under the water".'
         if compose_object_prompt else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
@@ -712,7 +717,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'itself LOOKS on screen (material, geometry, light) in at least 10 words, and '
         'copy THAT verbatim into every shot prompt too. '
         'and copy it VERBATIM into every shot prompt. All four shots use the same '
-        'object_card.environment id. Shot prompts use positive visual language only.'
+        'object_card.environment id. Shot prompts use positive visual language only. '
+        'SHOT 1 ONSET: describe the anomaly as an ongoing, visible STATE already at its most '
+        'extreme in the very first frame. Onset phrases such as "begins to" and "starts to" '
+        'are forbidden in shot 1. BAD: "the soap stays rigid and begins to crack like glass". '
+        'GOOD: "the bar is already split along a bright conchoidal fracture, its glassy '
+        'translucent edge glinting under the water".'
         if formatted_object else ""
     )
     episode_arc_rule = (
