@@ -4,7 +4,7 @@
       "total_cap": 4000.0,
       "stage_caps": {
         "pilot": 1700.0,
-        "pilot2": 800.0,
+        "pilot2": 900.0,
         "preflight": 0.0,
         "bakeoff": 0.0,
         "holdout": 0.0
