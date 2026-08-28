@@ -260,5 +260,19 @@
       "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ace20ec40d574271a9cc8114f359ba8f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ace20ec40d574271a9cc8114f359ba8f', 'total_platforms': 1, 'job_id': '1975b0faf7dc4097a177f88285d9124a'}",
       "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c4c5ebaef48a4b16ae30ec1497ac2d5a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c4c5ebaef48a4b16ae30ec1497ac2d5a', 'total_platforms': 1, 'job_id': 'aab942a82de14f499537b6909356df7b'}"
     }
+  },
+  {
+    "part": 22,
+    "subtitle": "Venus: The Sun Rises in the WEST",
+    "ts": "2026-08-28T01:14:25.526781+00:00",
+    "results": {
+      "youtube": "EI5aLoNH86Q",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b45259706c574263b7d4595f19fad275. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b45259706c574263b7d4595f19fad275', 'total_platforms': 1, 'job_id': '0e9c3ae9440b40148599678f3ed49325'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=4755754ee736439d8e5bb532bffd0960. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '4755754ee736439d8e5bb532bffd0960', 'total_platforms': 1, 'job_id': 'b2dfaa3aef234273ae40d802c1a66642'}"
+    }
   }
 ]
