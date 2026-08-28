@@ -13,6 +13,12 @@ on:
   schedule:
     - cron: '20 13 * * *'   # 13:20 UTC, aimagine yayin penceresinin hemen oncesi
   workflow_dispatch:
+    inputs:
+      force:
+        description: "Gunde-1 kilidini as (ayni kanala bugun 2. video). Kredi harcar."
+        type: boolean
+        required: false
+        default: false
 
 concurrency:
   group: kie-uretim
@@ -77,7 +83,13 @@ jobs:
         # shell: bash = pipefail; 'python | tee' kalibinda tee'nin 0'i python'un exit
         # kodunu maskeliyor. from-scratch.yml ile ayni onlem.
         shell: bash
-        run: python -X utf8 -m series.series_runner --series next-stop 2>&1 | tee logs/next_stop_run.log
+        run: |
+          FORCE=""
+          if [ "${{ inputs.force }}" = "true" ]; then
+            FORCE="--force"
+            echo "⚠️ --force: gunde-1 kilidi bilerek asiliyor."
+          fi
+          python -X utf8 -m series.series_runner --series next-stop $FORCE 2>&1 | tee logs/next_stop_run.log
 
       - name: Uretim sonucunu kaydet
         if: always()
