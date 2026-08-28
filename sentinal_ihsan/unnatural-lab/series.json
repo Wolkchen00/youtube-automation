@@ -283,11 +283,19 @@
       "stack_version": "sf2",
       "platforms_ok": [
         "youtube",
-        "instagram",
         "tiktok"
       ],
       "published_at": "2026-08-28T21:06:13.921838+00:00",
-      "stack_recomputed": "sf1 -> sf2: sf1 ucucu alan listesi ref_image_url'i kacirmisti; video ve uretim tarifi DEGISMEDI, yalniz hangi alanlarin hash'lendigi duzeltildi. sf2'nin part22 uretiminden ONCE ve SONRA ayni degeri verdigi dogrulandi."
+      "stack_recomputed": "sf1 -> sf2: sf1 ucucu alan listesi ref_image_url'i kacirmisti; video ve uretim tarifi DEGISMEDI, yalniz hangi alanlarin hash'lendigi duzeltildi. sf2'nin part22 uretiminden ONCE ve SONRA ayni degeri verdigi dogrulandi.",
+      "unconfirmed": {
+        "instagram": {
+          "error_code": "account_reauth_required",
+          "failure_stage": "precheck",
+          "reason": "Instagram oturumu gecersiz kilinmis (Meta guvenlik). Hesap app.upload-post.com/manage-users adresinden yeniden baglanmali.",
+          "request_id": "e8e8d371f3ee481094941b47a79794e2",
+          "job_id": "714b4b40855d4dad9fc7b4582de09a12"
+        }
+      }
     }
   }
 }
