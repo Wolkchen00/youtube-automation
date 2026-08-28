@@ -42,6 +42,12 @@ NEGATIVE_VIDEO_LANGUAGE = re.compile(
     r"isn't|aren't|won't|absent|lacks?|lacking|avoid)\b|\binstead\s+of\b",
     re.IGNORECASE,
 )
+# Shot 1 anomalinin başladığı anı değil, ilk karede zaten süren hâlini göstermeli.
+SHOT1_ONSET_LANGUAGE = re.compile(
+    r"\b(?:begins?|starts?|beginning|starting)\s+to\b|"
+    r"\b(?:begins|starts)\s+[a-z]+ing\b",
+    re.IGNORECASE,
+)
 TEMPORAL_OVERREACH = re.compile(
     r"\b(?:never|always|forever|eventually)\b|"
     r"\bstill\b[^.!?]{0,80}\bafter\b|"
@@ -116,6 +122,14 @@ def format_plan_errors(plan: dict, bible: Bible) -> list[str]:
         prompt = shot.get("prompt")
         if not isinstance(prompt, str):
             prompt = ""
+        if index == 1:
+            onset = SHOT1_ONSET_LANGUAGE.search(prompt)
+            if onset:
+                errors.append(
+                    f"çekim 1 anomaliyi BAŞLATIYOR ({onset.group(0)!r}); shot 1'de "
+                    "anomali kameradan önce başlamış ve ilk karede zaten sürer olmalı "
+                    "(brief kural 4). Süren bir DURUM yaz, başlayan bir OLAY değil."
+                )
         if NEGATIVE_VIDEO_LANGUAGE.search(prompt):
             errors.append(f"çekim {number} prompt'u yalnız olumlu görsel dil kullanmalı")
         if descriptor and descriptor not in prompt:
