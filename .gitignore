@@ -24,5 +24,6 @@ client_secret_*.json
 youtube_token_*.json
 _gen_token.py
 
+kie_reservations.json
 kie_reservations.lock
 kie_reservations.tmp

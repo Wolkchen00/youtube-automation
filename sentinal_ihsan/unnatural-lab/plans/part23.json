@@ -9,24 +9,25 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet, the bar filling most of the frame. The bar is already split along a bright conchoidal fracture; its glassy translucent edge throws hard specular glints under the water while the broken face holds a mirror-smooth shine and water beads roll off the sharp facets.",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet, the bar filling most of the frame. The bar is already split along a bright conchoidal fracture; its glassy translucent edge throws hard specular glints under the water while the broken face holds a mirror-smooth shine and water beads roll off the sharp facets.",
       "seed": null,
       "environment": "bathroom_sink",
-      "violation_observation": "the soaked bar keeps a bright glassy fracture face with sharp translucent edges"
+      "violation_observation": "the soaked bar keeps a bright glassy fracture face with sharp translucent edges",
+      "state_carry": "a bright conchoidal fracture face on the pink bar"
     },
     {
       "n": 2,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt tap the wet pink soap against the side of the ceramic sink, causing a clean, sharp shard of soap to break off.",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt turn the bar to show a bright conchoidal fracture face on the pink bar, then tap it against the ceramic rim so a second sharp translucent shard parts cleanly from the glassy break.",
       "seed": null,
       "environment": "bathroom_sink",
-      "violation_observation": "a sharp translucent shard breaks cleanly off the wet bar",
+      "violation_observation": "a second translucent shard parts cleanly from the glassy break face",
       "state_carry": "sharp soap shards rest on the sink edge"
     },
     {
       "n": 3,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. sharp soap shards rest on the sink edge. Hands wearing a plain black crew-neck t-shirt stack the sharp, glass-like shards of pink soap on the edge of the sink, where they catch the light like polished gemstones.",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. sharp soap shards rest on the sink edge. Hands wearing a plain black crew-neck t-shirt stack the sharp, glass-like shards of pink soap on the edge of the sink, where they catch the light like polished gemstones.",
       "seed": null,
       "environment": "bathroom_sink",
       "violation_observation": "the stacked shards hold sharp edges and shine like polished glass"
@@ -34,7 +35,7 @@
     {
       "n": 4,
       "duration": "6",
-      "prompt": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt lift the largest broken section of pink soap beside the smaller shards resting on the sink edge.",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt lift the largest broken section of pink soap beside the smaller shards resting on the sink edge.",
       "seed": null,
       "environment": "bathroom_sink",
       "violation_observation": "the lifted broken section keeps rigid glass-like edges in the hand"
@@ -43,7 +44,7 @@
   "format_version": "tek-obje-4x6",
   "object_card": {
     "name": "Bar of soap",
-    "descriptor": "A rectangular bar of light pink soap with smooth rounded edges and a faint brand imprint on top",
+    "descriptor": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge",
     "environment": "bathroom_sink",
     "framing": "The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin.",
     "anomaly_descriptor": "glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light"
