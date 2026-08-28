@@ -14,6 +14,7 @@ import os
 from numbers import Real
 from pathlib import Path
 import re
+import sys
 import time
 import uuid
 
@@ -50,6 +51,10 @@ class ExperimentLedgerCorruptError(RuntimeError):
     """The durable experiment ledger cannot safely authorize paid work."""
 
 
+class UnknownExperimentStageError(ValueError):
+    """The requested stage is not authorized by the experiment ledger."""
+
+
 def _timestamp() -> str:
     return datetime.datetime.now(datetime.timezone.utc).isoformat()
 
@@ -80,7 +85,8 @@ def _validate(data: object) -> dict:
         if not isinstance(stages, dict) or not stages:
             raise ValueError(f"experiment {experiment_id!r} stage_caps is invalid")
         for stage, cap in stages.items():
-            if not isinstance(stage, str) or not stage or not _valid_credit(cap, positive=True):
+            # Sifir kapak asamayi kapatir; defter kaydini gecersiz kilmaz.
+            if not isinstance(stage, str) or not stage or not _valid_credit(cap):
                 raise ValueError(f"experiment {experiment_id!r} has an invalid stage cap")
         reservations = entry.get("reservations", [])
         if not isinstance(reservations, list):
@@ -447,6 +453,13 @@ def run_experiment(slug: str, plan_path: str | Path, experiment_id: str,
     """Produce one unpublished episode in an experiment-only artifact tree."""
     safe_slug = _safe_path_component(slug, "slug")
     safe_experiment = _safe_path_component(experiment_id, "experiment_id")
+    # Asama kaynagi deney defteridir; dry-run da yazim hatasini gizlememeli.
+    entry = _entry(_load(), experiment_id)
+    if stage not in entry["stage_caps"]:
+        valid_stages = ", ".join(sorted(entry["stage_caps"]))
+        raise UnknownExperimentStageError(
+            f"bilinmeyen asama {stage!r}; bu deneyde gecerli asamalar: {valid_stages}"
+        )
     source_plan = Path(plan_path)
     plan = json.loads(source_plan.read_text(encoding="utf-8"))
     try:
@@ -599,7 +612,7 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("slug")
     run.add_argument("--plan", required=True)
     run.add_argument("--experiment-id", required=True)
-    run.add_argument("--stage", default="pilot", choices=tuple(DEFAULT_STAGE_CAPS))
+    run.add_argument("--stage", default="pilot")
     run.add_argument("--dry-run", action="store_true")
 
     preflight = commands.add_parser("preflight", help="measure one real adapter price")
@@ -620,10 +633,14 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     if args.command == "run":
-        result = run_experiment(
-            args.slug, args.plan, args.experiment_id,
-            stage=args.stage, dry_run=args.dry_run,
-        )
+        try:
+            result = run_experiment(
+                args.slug, args.plan, args.experiment_id,
+                stage=args.stage, dry_run=args.dry_run,
+            )
+        except UnknownExperimentStageError as error:
+            print(f"error: {error}", file=sys.stderr)
+            return 2
         if getattr(result, "status", None) == "ok":
             print(str(result.path))
             return 0
