@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Building A STAR WARS AT-AT Home From SCRATCH! 🛠️✨"
+  },
+  "synopsis": "An abandoned AT-AT Walker is meticulously converted into a unique, fully functional home in a snowy, desolate landscape.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A fresh exterior scene in a wide view whose position and angle stay fixed, with a slow zoom as its single movement. An empty lot is graded, then road, fence and landscaping are laid out, then the foundation is marked. The builder arrives with materials.\n\nA desolate, snow-covered plain with a massive, rusted AT-AT Walker lying on its side. The builder measures, a snow plow rumbles clearing access, and a foundation for the new base structure is dug beside the walker's body.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Foundation, walls and roof frame rise inside that same composition with accelerating timelapse energy and satisfying material flow.\n\nHeavy lifting equipment groans as sections of the walker's hull are cut and repositioned. New steel framework rises from the snow, connecting to the walker's interior. A welding torch hisses as metal joins metal.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "The same fixed exterior view continues from the previous final frame, with a slow zoom as its single movement. Cladding, roof, paint, exterior lighting and landscaping are finished until the completed exterior stands clearly in frame.\n\nExterior panels are re-attached, sealed, and painted a sleek dark gray. Large, reinforced windows are installed, and a snow-proof ramp leading into the walker's belly is fabricated. A drill whines as bolts are secured.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "A fresh interior wide scene whose position and angle stay fixed, with a slow zoom as its single movement. Interior walls go up, flooring is laid, utilities and lighting infrastructure are installed, carrying the exterior's materials and design language inside.\n\nInside the cavernous belly of the AT-AT, new insulated walls are erected. The floor is leveled, and a network of pipes and conduits for heating and power are installed, with the sound of pipes clanging.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "The same fixed interior view continues from the previous final frame, with a slow zoom as its single movement. Furniture and decor are installed, the lighting comes up, and the interior is finished until it looks ready to live in.\n\nModern, ergonomic furniture is bolted into place against the curved walls. Computer stations glow with soft blue light, and built-in storage units are installed. The interior feels functional and cozy, with a soft whir of electronics.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "Continuing from the previous final frame, the viewpoint is released for one unbroken move that begins inside, passes through a door or window, and settles on a wide exterior of the finished structure while the builder keeps working.\n\nThe camera moves from the warm, futuristic interior living space, past an illuminated console, through a heavy-duty hatch, and out onto the snowy plain, revealing the transformed AT-AT home against the vast white landscape. A distant rumble echoes.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "oyun/film üsleri",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}
