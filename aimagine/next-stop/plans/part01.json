@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Next Stop: Hell 🚆🔥"
+  },
+  "synopsis": "A rain-wet evening commute drops below the city and keeps descending until the window opens onto an endless vertical furnace city.",
+  "narration": {},
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "chain": false,
+      "prompt": "A completely ordinary world streams past the same left-side window in the dull light of a routine commute. Open on one arresting mundane detail passing close to the glass. By 2.5 seconds a two-note chime sounds and a calm neutral announcer says the destination line. Nobody reacts. Immediately afterwards the train accelerates hard and every body leans from inertia.\n\nRain-wet industrial outskirts in flat grey evening light: freight rails, low warehouses, a rust-dark gantry crane sliding past too close to fit in frame, power pylons diminishing toward an immense electrical substation still far ahead. One sodium lamp ignites. The announcer says exactly: \"Next stop: Hell.\""
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the ordinary geography begins physically deforming toward the destination as the line climbs, descends, tunnels or crosses into weather. The world is still recognisably ours where the shot begins.\n\nThe ground beside the line falls away into an excavated cutting. Wet concrete retaining walls rise steadily higher, warehouse roofs slip behind and above, and a small black tunnel mouth already visible at the vanishing point grows until the carriage is swallowed by strobing tunnel lights and raw rock racing across the glass."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the train crosses the threshold layer. The last ordinary object grows, passes the window and recedes for the last time, and the passengers stop pretending this is a normal commute.\n\nThe tunnel wall beside the window falls away. The train is running on a ledge bolted to the side of an impossibly deep vertical shaft, the last string of tunnel lamps receding behind. Deep red glow rises from far below, heat haze bends the view, condensation dries off the glass and the pane begins ticking with heat stress."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the first true landmark of the destination resolves out of the far distance under the approach rule and continuously grows as the train closes on it.\n\nThe shaft opens into a cavern with no far wall. Basalt canyon systems drop away below the window, magma rivers thread the floor kilometres down, ember storms drift upward on thermals past the glass, and vast dark industrial-cathedral silhouettes stand on the far side, already growing."
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the train races at close range alongside the destination's signature landmarks at maximum parallax, and the light of that place crosses the six fixed faces inside the carriage.\n\nThe train races close alongside the foundry-cathedral: black basalt buttresses, chains the size of buildings, furnace mouths and molten spillways flashing past the window while ash falls upward. Orange light strobes across the six fixed faces and the glass fogs and clears with heat. A colossal open iron gate stands already ahead."
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, travel alone carries the train into the heart of the destination. At about 9 seconds a calm ordinary commuter announcer quietly says the arrival line, then the dim destination board flickers to a new name that stays illegible, the chime sounds again, the voice begins only \"Next stop—\" and the shot ends mid-announcement while the train is still moving forward.\n\nTower-wide gate bars pass the window one by one, then the train travels through into an endless vertical city of furnaces, bridges and terraces descending beyond resolution, enormous non-human silhouettes moving calmly on distant platforms. The announcer says exactly: \"Welcome to Hell.\""
+    }
+  ],
+  "family": "mitoloji ve öte dünya coğrafyaları",
+  "hook_shot": 6
+}

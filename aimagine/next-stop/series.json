@@ -1,0 +1,67 @@
+{
+  "slug": "next-stop",
+  "base_title": "Next Stop",
+  "logline": "An ordinary commuter train announces an impossible destination, and never stops.",
+  "language": "en",
+  "upload_profile": "Youtube",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #nextstop #train #liminal #surreal #scifi #whatif #fyp",
+  "standalone": true,
+  "publish_mode": "auto",
+  "status": "active",
+  "priority": 1,
+  "total_parts": 3,
+  "next_part": 1,
+  "parts": {},
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 6,
+    "shot_seconds": "10",
+    "hook_shot": 6,
+    "chain_breaks": [
+      1
+    ],
+    "music_prompt": false,
+    "humans": "allowed",
+    "families": [
+      "mitoloji ve öte dünya coğrafyaları",
+      "tarih ve kayıp uygarlıklar",
+      "gerçek bilim ve uzay",
+      "özgün bilim kurgu gelecekleri",
+      "derin zaman ve doğa",
+      "nostalji ve tanıdık mekânlar",
+      "gerilim ve tekinsizlik"
+    ],
+    "title_style": "exactly 'Next Stop: <DESTINATION>' followed by one or two emoji, where <DESTINATION> is the same short name spoken in the announcements",
+    "title_patterns": [
+      {
+        "regex": "Next Stop: .+ (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
+        "families": [
+          "mitoloji ve öte dünya coğrafyaları",
+          "tarih ve kayıp uygarlıklar",
+          "gerçek bilim ve uzay",
+          "özgün bilim kurgu gelecekleri",
+          "derin zaman ve doğa",
+          "nostalji ve tanıdık mekânlar",
+          "gerilim ve tekinsizlik"
+        ]
+      }
+    ],
+    "shot_plan": [
+      "A completely ordinary world streams past the same left-side window in the dull light of a routine commute. Open on one arresting mundane detail passing close to the glass. By 2.5 seconds a two-note chime sounds and a calm neutral announcer says the destination line. Nobody reacts. Immediately afterwards the train accelerates hard and every body leans from inertia.",
+      "Continuing from the previous final frame, the ordinary geography begins physically deforming toward the destination as the line climbs, descends, tunnels or crosses into weather. The world is still recognisably ours where the shot begins.",
+      "Continuing from the previous final frame, the train crosses the threshold layer. The last ordinary object grows, passes the window and recedes for the last time, and the passengers stop pretending this is a normal commute.",
+      "Continuing from the previous final frame, the first true landmark of the destination resolves out of the far distance under the approach rule and continuously grows as the train closes on it.",
+      "Continuing from the previous final frame, the train races at close range alongside the destination's signature landmarks at maximum parallax, and the light of that place crosses the six fixed faces inside the carriage.",
+      "Continuing from the previous final frame, travel alone carries the train into the heart of the destination. At about 9 seconds a calm ordinary commuter announcer quietly says the arrival line, then the dim destination board flickers to a new name that stays illegible, the chime sounds again, the voice begins only \"Next stop—\" and the shot ends mid-announcement while the train is still moving forward."
+    ],
+    "credit_hard_cap": true,
+    "brief": "NEXT STOP üretim brief'i. >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis ve tüm çekim prompt'ları İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: her bölüm TEK bir imkânsız durağa yapılan altı çekimlik, yaklaşık 60 saniyelik kesintisiz bir tren yolculuğudur. Kamera vagonu ASLA terk etmez ve hep aynı sol pencereden, gidiş yönüne 90 derece yandan bakar. (2) ZİNCİR: çekim 1 sahneyi açar (chain=false), çekim 2-6 önceki son kareden zincirlenir (chain=true). Bölümler arasında zincir yoktur. hook_shot her zaman 6'dır. (3) ALTI BEAT: kalkış (sıradan dünya + 'Next stop: X.' anonsu 2.5 saniyeden geç olmamak üzere + sert ivme), geçiş (coğrafya fiziksel olarak deforme olur), eşik (dönüşü olmayan sınır katmanı), varış kenarı (ilk gerçek landmark uzakta belirip büyür), uçuş (imza landmark'ların yanından yakın mesafede geçiş), derinlik ve ödül ('Welcome to X.' + tabelanın okunmaz yeni isme atlaması + yarıda kesilen 'Next stop, '). (4) YAKLAŞMA KURALI: her landmark önce uzakta VAR olur, sürekli büyür, pencerenin yanından fiziksel olarak geçer ve geride kalır; geride kalırken bir sonraki çoktan görünürdedir. Hiçbir şey aniden belirmez, erimez, dönüşmez, ışınlanmaz. 'X, Y'ye dönüşür' YASAK; yerine ardışıklık yaz: biri biter, öteki başlar. (5) ÖLÇEK ŞOKU: her çekimde kareye sığmayan en az bir şey olmalı. (6) Hiçbir çekim durağan, çözülmüş ya da 'varılmış' bir görüntüyle bitmez; hep hareket hâlinde ve ileride çoktan görünen yeni bir şeyle biter. (7) DURAK SEÇİMİ: her bölüm YENİ bir durak seçer, aile rotasyonuna uyar ve daha önce kullanılmış bir durağı tekrar etmez. Durak, yan pencereden paralaks üretecek bir MEKÂN olmalıdır: ufku, manzarası ve birbirinden çok farklı uzaklıklarda landmark'ları bulunmalı. Sıradan bir işe gidiş hattından oraya kesintisiz fiziksel bir yol kurulabilmelidir. (8) GÜVENLİK: telifli hiçbir evren, karakter ya da yer adı kullanılmaz; kan, vahşet, işkence, ceset, insan ıstırabı ve gerçek dinî figür tasviri yasaktır. Korku ölçekten, ısıdan, karanlıktan ve sessizlikten gelir. (9) Anons cümleleri tam olarak 'Next stop: X.' ve 'Welcome to X.' biçimindedir; X küresel izleyicinin tek hamlede anladığı kısa bir isimdir."
+  }
+}

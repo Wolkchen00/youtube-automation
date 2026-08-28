@@ -1,0 +1,48 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "Next Stop: Aloran 🚆🌌"
+  },
+  "synopsis": "A rainy night commute climbs out of the city, crosses a luminous spore layer and arrives on a bioluminescent moon under an enormous gas giant.",
+  "narration": {},
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "chain": false,
+      "prompt": "A completely ordinary world streams past the same left-side window in the dull light of a routine commute. Open on one arresting mundane detail passing close to the glass. By 2.5 seconds a two-note chime sounds and a calm neutral announcer says the destination line. Nobody reacts. Immediately afterwards the train accelerates hard and every body leans from inertia.\n\nA rainy night commute through wet city outskirts: neon shop signs, bus shelters, a petrol station forecourt sliding past close to the glass, rain beading and streaking on the outside of the window, tower blocks stacked far behind. The announcer says exactly: \"Next stop: Aloran.\""
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the ordinary geography begins physically deforming toward the destination as the line climbs, descends, tunnels or crosses into weather. The world is still recognisably ours where the shot begins.\n\nThe line climbs onto a long viaduct and into heavy weather. The rain on the glass stops falling downward and individual luminous motes begin drifting upward past the window instead. The last suburban lights shrink behind and the sky colour is wrong."
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the train crosses the threshold layer. The last ordinary object grows, passes the window and recedes for the last time, and the passengers stop pretending this is a normal commute.\n\nThe train travels through a dense luminous spore layer. A red-lit radio mast, the final terrestrial object, grows, passes close and recedes behind for the last time. Everything beyond it is blue-green glow, and the carriage interior takes the colour."
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the first true landmark of the destination resolves out of the far distance under the approach rule and continuously grows as the train closes on it.\n\nThe train emerges into alien night under an enormous banded gas giant filling a third of the sky and lighting the ground. Far ahead, a floating stone island trailing vines hangs above an unbroken cloud ocean and continuously grows as the train closes."
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, the train races at close range alongside the destination's signature landmarks at maximum parallax, and the light of that place crosses the six fixed faces inside the carriage.\n\nThe train races between floating stone islands strung with vine bridges. Waterfalls pour off floating rock into cloud far below, glowing spore drifts rise between luminous forest crowns, and a colossal six-limbed animal glides at great distance across the gas giant's pale bands, readable only by scale."
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "chain": true,
+      "prompt": "Continuing from the previous final frame, travel alone carries the train into the heart of the destination. At about 9 seconds a calm ordinary commuter announcer quietly says the arrival line, then the dim destination board flickers to a new name that stays illegible, the chime sounds again, the voice begins only \"Next stop—\" and the shot ends mid-announcement while the train is still moving forward.\n\nA single tree organism kilometres tall fills the window, bioluminescent settlements and suspended platforms glowing among its branches with tiny figures moving on high spans, deeper canopy lights beyond a vast root arch. The announcer says exactly: \"Welcome to Aloran.\""
+    }
+  ],
+  "family": "özgün bilim kurgu gelecekleri",
+  "hook_shot": 6
+}

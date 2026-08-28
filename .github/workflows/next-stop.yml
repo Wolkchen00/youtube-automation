@@ -1,0 +1,106 @@
+name: Next Stop Daily
+
+# 'NEXT STOP' gunluk serisi (aimagine kanali, @aimagine_._357).
+# Format: 6 x 10 sn, ~60 sn, tek kesintisiz tren yolculugu. Kamera vagondan hic cikmaz ve
+# hep ayni sol pencereden 90 derece yandan bakar. Sureklilik KARE ZINCIRIYLE saglanir:
+# cekim 1 sahneyi acar (chain=false), cekim 2-6 onceki son kareden zincirlenir. hook_shot = 6.
+# Oto-ikmal acik: kuyruk 2'nin altina inince Gemini yeni DURAKLAR yazar (kredi harcamaz),
+# yani trenin nereye gidecegi kendiliginden uretilir.
+# Saat duzeni: bu kosu 13:20 UTC -> from-scratch 14:30 -> event-horizon 16:30 ->
+# unnatural-lab 18:30 -> flashpoints 20:30. kie-uretim concurrency grubu hatlari serilestirir.
+
+on:
+  schedule:
+    - cron: '20 13 * * *'   # 13:20 UTC, aimagine yayin penceresinin hemen oncesi
+  workflow_dispatch:
+
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          # 6 x 200 ana cekim + 3 x 200 QC regen = 1800; 100 kredi guvenlik payi. Muzik yok.
+          EPISODE_CREDIT_CAP=1900
+          MONTHLY_CREDIT_CAP=60000
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Onay kuyrugunu isle (Telegram)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        run: python -X utf8 -m series.approver --series next-stop 2>&1 | tee logs/next_stop_approve.log
+
+      - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni duraklar yazar, kredi harcamaz)
+        run: python -X utf8 -m series.replenish --series next-stop 2>&1 | tee logs/next_stop_replenish.log
+
+      - name: Produce + publish (Next Stop siradaki bolum)
+        id: produce
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; 'python | tee' kalibinda tee'nin 0'i python'un exit
+        # kodunu maskeliyor. from-scratch.yml ile ayni onlem.
+        shell: bash
+        run: python -X utf8 -m series.series_runner --series next-stop 2>&1 | tee logs/next_stop_run.log
+
+      - name: Uretim sonucunu kaydet
+        if: always()
+        run: |
+          raw_outcome="${{ steps.produce.outcome }}"
+          outcome=failure
+          if [ "$raw_outcome" = "success" ]; then outcome=success; fi
+          printf '{"ts":"%s","outcome":"%s","raw_outcome":"%s","run_id":%s}\n' \
+            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" "$outcome" "$raw_outcome" "${{ github.run_id }}" \
+            > aimagine/next-stop/last_run.json
+
+      - name: Persist series state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: next-stop durumunu ilerlet [skip ci]" \
+            sentinal_ihsan/ aimagine/ galactic_experience/ shadowedhistory/ \
+            credits_ledger.json aimagine/next-stop/last_run.json
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: next-stop-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7

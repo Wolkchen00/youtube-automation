@@ -1,0 +1,25 @@
+{
+  "series": {
+    "slug": "next-stop",
+    "title": "Next Stop",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": true,
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "micro_trim": true,
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.3,
+      "offset_in_shot": 1.5
+    }
+  },
+  "art_style": "Raw photorealistic amateur smartphone footage, one unbroken handheld take, vertical 9:16. The camera is a cheap phone held at chest height by a standing passenger inside a completely packed magnetic-levitation commuter carriage, and it looks ONLY sideways through the SAME dirty rectangular LEFT-SIDE window at 90 degrees to the direction of travel. Never look forward or rearward, never leave the carriage, never show the train exterior or nose, no aerial view, no third-person view, no zoom, no cinematic camera move, no stabilization. The dirty glass and its black rubber frame stay between camera and world at all times, with a hairline scratch in the lower-left corner. Crooked off-centre framing, handheld shake, rolling-shutter skew, autofocus hunting, auto-exposure pumping, glare, blown highlights, shadow noise, low-bitrate compression, smeared motion blur. The same six commuters stand in the same positions every shot: a short East Asian woman in a beige raincoat and tortoiseshell glasses gripping the pole immediately left of camera; a tall dark-skinned Black man in a charcoal coat with a backpack strap crossing the lower-right frame; a slim South Asian man in a moss-green hoodie with white wired earbuds below the window; an elderly light-skinned woman with a silver bun and navy quilted jacket on an overhead strap; a stocky light-brown-skinned man with shaved head, trimmed beard and orange work jacket reflected at window centre; a pale freckled young woman with a copper braid and mustard scarf half-occluded at far right. They blink, breathe and sway; nobody changes position or wardrobe. A small dim LED destination board sits clipped at the top frame edge, its text never legible. THE TRAIN IS ALWAYS MOVING FORWARD AND NEVER STOPS; the world streams front-to-back across the glass, near objects fast, distant objects slow. THE APPROACH RULE: every landmark already exists far ahead, continuously grows, physically passes the window and recedes while another is already visible beyond it ,  nothing appears, dissolves, morphs or teleports. Diegetic audio only, never music: constant maglev hum, carriage rumble, rattling poles, vibrating glass, exterior sound muffled through closed glass. No subtitles, no captions, no legible on-screen text, no gore, no graphic injury, no real religious figures, no trademarked property.",
+  "style_ref_url": null,
+  "narration": {},
+  "music": false,
+  "characters": [],
+  "environments": [],
+  "props": []
+}
