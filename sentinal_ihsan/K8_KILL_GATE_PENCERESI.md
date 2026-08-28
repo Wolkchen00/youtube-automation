@@ -5,8 +5,8 @@
 | alan | deger |
 |---|---|
 | seri | unnatural-lab (sentinal.ihsan.daily) |
-| stack parmak izi | `f55e28a30826a44b4ee3f1a33d4a33f41e9d9a2834357e378fdb08d72243b9d9` |
-| acilis commit'i | `43c693b` |
+| stack parmak izi | `ba61738183bbc4366dc4346651252976cfb0fac088b40f90d0b32796d203e63c` |
+| acilis commit'i | `43c693b` (parmak izi son kod dondurmasiyla guncellendi) |
 | yayin modu | **auto** (Ihsan karari, 2026-08-28) |
 | workflow | `unnatural-lab.yml` ENABLED, gunluk 18:30 UTC |
 | ilk bolum | part22 (`next_part=22`) |
@@ -71,3 +71,14 @@ karsilastirma referansi olarak durur.
 * **Planlayici kurali beklemede:** descriptor ile anomaly_descriptor ayni obje
   durumunu tarif etmeli (part23'un uc dususunun sebebi). Kuyruktaki part24-26 bu
   celiskiyi TASIMIYOR, ama ikmal yeni bolum yazdiginda kural henuz ogretilmemis olur.
+
+## Parmak izi gecmisi
+
+| an | parmak izi | sebep |
+|---|---|---|
+| E2 merge sonrasi | `43a0e535...` | stack parmak izi ozelligi eklendi |
+| E3 merge sonrasi | `f55e28a3...` | shots.py + replenish.py: shot-1 onset kurali |
+| **pencere baslangici** | `ba617381...` | replenish.py: descriptor-anomali uyum kurali |
+
+Pencere HENUZ bolum uretmedi (part22 bu gece 18:30 UTC'de uretilecek), bu yuzden bu
+guncellemeler pencereyi kirletmedi. **Bu noktadan itibaren STACK_SOURCES dondu.**
