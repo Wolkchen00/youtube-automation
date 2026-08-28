@@ -22,7 +22,7 @@ if _ROOT not in sys.path:
 
 from core.config import logger
 from core.kie_api import check_credit
-from core.uploader import upload_to_platform
+from core.uploader import pop_upload_failure, upload_to_platform
 from series import produce
 from series import credit_gate
 from series import notifier
@@ -166,11 +166,40 @@ def _publish_identifier(result: dict, platform: str) -> str | None:
     return _search(platform_result) or _search(result)
 
 
+def _async_publish_post_url(result: dict) -> str | None:
+    """Yalnız doğrulanmış asenkron yanıttaki platform gönderi URL'sini bul.
+
+    Senkron registry yolunu bit-değişmez bırakmak için bu ek alan yalnız uploader'ın
+    doğrulama işareti varsa değerlendirilir.
+    """
+    if not isinstance(result, dict) or not result.get("_async_confirmation"):
+        return None
+
+    def _search(value) -> str | None:
+        if isinstance(value, dict):
+            found = value.get("post_url")
+            if isinstance(found, str) and found.strip():
+                return found.strip()
+            for nested in value.values():
+                found = _search(nested)
+                if found:
+                    return found
+        elif isinstance(value, list):
+            for nested in value:
+                found = _search(nested)
+                if found:
+                    return found
+        return None
+
+    return _search(result)
+
+
 def _append_publish_registry(
     slug: str,
     n: int,
     subtitle: str,
     upload_results: dict[str, dict],
+    unconfirmed: dict[str, dict] | None = None,
 ) -> None:
     """Başarılı part yayınını seri veri klasöründeki registry'ye ekle.
 
@@ -198,6 +227,25 @@ def _append_publish_registry(
             "ts": datetime.now(timezone.utc).isoformat(),
             "results": identifiers,
         }
+        post_urls = {
+            platform: url
+            for platform, result in upload_results.items()
+            if (url := _async_publish_post_url(result))
+        }
+        if post_urls:
+            entry["post_urls"] = post_urls
+        if unconfirmed:
+            # Başarısız/belirsiz platform results/platforms_ok içine girmez; fakat
+            # operatör işi sonradan durum endpoint'inde bulabilsin diye iş kimlikleri
+            # ayrı ve açıkça "doğrulanmadı" alanında kalıcı tutulur.
+            entry["unconfirmed"] = {
+                platform: {
+                    "reason": failure.get("reason"),
+                    "request_id": failure.get("request_id"),
+                    "job_id": failure.get("job_id"),
+                }
+                for platform, failure in unconfirmed.items()
+            }
         # Kimlik çıkarılamayan platformun HAM yanıtını sakla: IG/TikTok kimlikleri
         # part 3'ten beri null geliyor ve yanıt şekli bilinmediği için _publish_identifier
         # körlemesine düzeltilemiyor. Bu alan bir sonraki yayında şekli görünür kılar.
@@ -242,6 +290,7 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
     has_delivery = delivery.exists() and delivery.stat().st_size > 0
     ok: list[str] = []
     upload_results: dict[str, dict] = {}
+    async_failures: dict[str, dict] = {}
 
     def _try(plat: str) -> bool:
         src = Path(video_path)
@@ -255,6 +304,11 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
                                  tags=meta.hashtags, social_caption=caption)
         if res:
             upload_results[plat] = res if isinstance(res, dict) else {}
+            async_failures.pop(plat, None)
+        else:
+            failure = pop_upload_failure(plat)
+            if failure and failure.get("async"):
+                async_failures[plat] = failure
         return bool(res)
 
     for plat in meta.platforms:
@@ -265,7 +319,9 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
     # API'ye toparlanma payı bırakıp başarısızları BİR kez daha dene. (2026-07-03
     # dersi: night-archive P1'de YouTube tam arıza penceresine denk geldi; IG/TikTok
     # 2 dk sonra sorunsuz geçmişti ,  tek tur telafi YouTube'u kurtarırdı.)
-    failed = [p for p in meta.platforms if p not in ok]
+    # Kuyruğa kabul edilmiş fakat doğrulanamamış işi yeniden POST etmek çift yayın
+    # doğurabilir. Bu işler telafi turuna değil, request_id'li operatör alarmına gider.
+    failed = [p for p in meta.platforms if p not in ok and p not in async_failures]
     if failed:
         logger.info(f"🔁 Telafi turu: {', '.join(failed)} için 90s sonra yeniden denenecek…")
         time.sleep(90)
@@ -273,9 +329,22 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
             if _try(plat):
                 ok.append(plat)
 
+    for plat, failure in async_failures.items():
+        if plat in ok:
+            continue
+        request_id = failure.get("request_id") or "-"
+        job_id = failure.get("job_id") or "-"
+        reason = failure.get("reason") or "belirsiz asenkron durum"
+        _alert(
+            f"⚠️ *{meta.base_title}* Part {n}: {plat.upper()} yayını doğrulanamadı. "
+            f"Neden: {reason}. request_id={request_id}, job_id={job_id}"
+        )
+
     logger.info(f"📊 Yayın: {len(ok)}/{len(meta.platforms)} platform OK")
     if ok:
-        _append_publish_registry(meta.slug, n, subtitle, upload_results)
+        _append_publish_registry(
+            meta.slug, n, subtitle, upload_results, unconfirmed=async_failures,
+        )
     return ok
 
 

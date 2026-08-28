@@ -5,6 +5,8 @@ Publishes videos to YouTube Shorts, Instagram Reels, and TikTok
 via the Upload-Post.com API.
 """
 
+import time
+
 import requests
 from pathlib import Path
 
@@ -12,6 +14,18 @@ from .config import UPLOAD_POST_API_KEY, UPLOAD_USERS, CHANNEL_PLATFORMS, logger
 
 
 UPLOAD_POST_URL = "https://api.upload-post.com/api/upload"
+UPLOAD_POST_STATUS_URL = "https://api.upload-post.com/api/uploadposts/status"
+
+# Arka plan işini sonsuza dek beklemek cron koşusunu kilitler. Bu değerler modül
+# düzeyinde tutulur; üretimde güvenli bir tavan verirken testler sleep/saati kolayca
+# enjekte edebilir.
+ASYNC_UPLOAD_CONFIRM_TIMEOUT = 600
+ASYNC_UPLOAD_POLL_INTERVALS = (5, 15, 30)
+ASYNC_STATUS_REQUEST_TIMEOUT = 30
+
+_ASYNC_SLEEP = time.sleep
+_ASYNC_MONOTONIC = time.monotonic
+_LAST_UPLOAD_FAILURES: dict[str, dict] = {}
 
 # Bu boyutun üzerindeki dosyalar yüklenmeden önce bitrate-kapaklı bir 'delivery'
 # kopyasına çevrilir. Upload-Post büyük gövdeleri akış ortasında kesiyor
@@ -92,6 +106,281 @@ def _extract_error(body: dict, platform: str) -> str:
     return str(body)[:300]
 
 
+def _publication_identifier(body: dict, platform: str) -> str | None:
+    """Yanıtta platforma ait gerçek yayın kimliği var mı, onu bul.
+
+    request_id/job_id iş kimliğidir; özellikle anahtar listesine alınmaz. Böylece
+    kuyruğa kabul edilen iş, platformda oluşmuş bir gönderiyle karıştırılmaz.
+    """
+    if not isinstance(body, dict):
+        return None
+
+    preferred_keys = (
+        f"{platform}_id",
+        "platform_post_id",
+        "video_id",
+        "post_id",
+        "media_id",
+        "publication_id",
+        "platform_id",
+        "external_id",
+        "videoId",
+        "postId",
+        "mediaId",
+        "id",
+    )
+
+    def _search(value) -> str | None:
+        if isinstance(value, dict):
+            for key in preferred_keys:
+                found = value.get(key)
+                if found is not None and not isinstance(found, (dict, list, bool)):
+                    text = str(found).strip()
+                    if text:
+                        return text
+            for nested in value.values():
+                found = _search(nested)
+                if found:
+                    return found
+        elif isinstance(value, list):
+            for nested in value:
+                found = _search(nested)
+                if found:
+                    return found
+        return None
+
+    entry = _platform_result(body, platform) or _status_platform_result(body, platform)
+    found = _search(entry)
+    if found:
+        return found
+
+    # Üst düzey kimlik eski senkron şemada meşrudur; buna karşılık body içindeki
+    # rastgele bir nested `id` (ör. job/user id) platform yayın kimliği sayılamaz.
+    for key in preferred_keys:
+        value = body.get(key)
+        if value is not None and not isinstance(value, (dict, list, bool)):
+            text = str(value).strip()
+            if text:
+                return text
+    return None
+
+
+def _status_platform_result(body: dict, platform: str) -> dict | None:
+    """Durum endpoint'inin liste şemasından ilgili platform girdisini bul."""
+    if not isinstance(body, dict):
+        return None
+    results = body.get("results")
+    if not isinstance(results, list):
+        return None
+    for entry in results:
+        if isinstance(entry, dict) and str(entry.get("platform", "")).lower() == platform.lower():
+            return entry
+    return None
+
+
+def _async_reference(body: dict) -> tuple[str | None, str | None]:
+    """İş durumunu sorgulamak için request_id'yi, yoksa job_id'yi çıkar."""
+    if not isinstance(body, dict):
+        return None, None
+    request_id = body.get("request_id")
+    job_id = body.get("job_id")
+    return (
+        str(request_id).strip() if request_id else None,
+        str(job_id).strip() if job_id else None,
+    )
+
+
+def _record_async_failure(
+    platform: str,
+    reason: str,
+    request_id: str | None,
+    job_id: str | None,
+) -> None:
+    """Seri koşucusunun mevcut uyarı yolunda kullanacağı tanı bağlamını sakla."""
+    _LAST_UPLOAD_FAILURES[platform] = {
+        "async": True,
+        "reason": reason,
+        "request_id": request_id,
+        "job_id": job_id,
+    }
+
+
+def pop_upload_failure(platform: str) -> dict | None:
+    """Son başarısız yüklemenin tanısını bir kez tüketilecek şekilde döndür."""
+    return _LAST_UPLOAD_FAILURES.pop(platform, None)
+
+
+def _status_outcome(body: dict, platform: str) -> tuple[str, str]:
+    """Durum gövdesini success/failure/pending kararına indir."""
+    entry = _status_platform_result(body, platform)
+    entry_status = str((entry or {}).get("status") or "").lower()
+    top_status = str(body.get("status") or "").lower()
+    terminal_failures = {
+        "failed", "error", "cancelled", "canceled", "rejected", "skipped",
+    }
+    terminal_states = terminal_failures | {"completed", "complete", "succeeded", "success", "published"}
+
+    if entry is not None and entry.get("success") is True:
+        return "success", "platform sonucu success=true"
+
+    failed = body.get("failed")
+    if isinstance(failed, (int, float)) and not isinstance(failed, bool) and failed >= 1:
+        return "failure", f"failed={failed}"
+
+    if entry is not None and entry.get("success") is False and entry_status in terminal_failures:
+        return "failure", f"platform durumu={entry_status}"
+
+    if entry is not None and entry.get("success") is False and (
+        entry_status in terminal_states or top_status in terminal_states
+    ):
+        return "failure", f"terminal durumda platform success=false ({entry_status or top_status})"
+
+    if top_status in terminal_failures:
+        return "failure", f"iş durumu={top_status}"
+
+    completed = body.get("completed")
+    failed_is_zero = (
+        isinstance(failed, (int, float)) and not isinstance(failed, bool) and failed == 0
+    )
+    platform_failed = entry is not None and entry.get("success") is False
+    listed_results = body.get("results")
+    platform_missing = isinstance(listed_results, list) and bool(listed_results) and entry is None
+    if (
+        isinstance(completed, (int, float))
+        and not isinstance(completed, bool)
+        and completed >= 1
+        and failed_is_zero
+        and not platform_failed
+        and not platform_missing
+    ):
+        return "success", f"completed={completed}, failed=0"
+
+    return "pending", str(body.get("message") or entry_status or top_status or "belirsiz durum")[:300]
+
+
+def _confirmed_async_result(
+    status_body: dict,
+    platform: str,
+    request_id: str | None,
+    job_id: str | None,
+) -> dict:
+    """Doğrulama kanıtını, registry'nin kimlik/URL kaydedebileceği biçimde döndür."""
+    confirmed = dict(status_body)
+    confirmed.setdefault("request_id", request_id)
+    confirmed.setdefault("job_id", job_id)
+    confirmed["_async_confirmation"] = {
+        "platform": platform,
+        "request_id": request_id,
+        "job_id": job_id,
+    }
+    identifier = _publication_identifier(status_body, platform)
+    if identifier:
+        # series_runner'ın mevcut kimlik çıkarıcısı publication_id'yi zaten tanır.
+        confirmed.setdefault("publication_id", identifier)
+    return confirmed
+
+
+def _confirm_async_upload(
+    initial_body: dict,
+    platform: str,
+    headers: dict,
+    *,
+    timeout: float | None = None,
+    poll_intervals: tuple[float, ...] | list[float] | None = None,
+    sleep_fn=None,
+    monotonic_fn=None,
+) -> dict | None:
+    """Kuyruğa alınan işi terminal duruma kadar sorgula; belirsizlikte fail-closed."""
+    request_id, job_id = _async_reference(initial_body)
+    lookup_key = "request_id" if request_id else "job_id"
+    lookup_value = request_id or job_id
+    timeout = ASYNC_UPLOAD_CONFIRM_TIMEOUT if timeout is None else max(0, timeout)
+    intervals = tuple(poll_intervals or ASYNC_UPLOAD_POLL_INTERVALS)
+    if not intervals:
+        intervals = (30,)
+    sleep_fn = sleep_fn or _ASYNC_SLEEP
+    monotonic_fn = monotonic_fn or _ASYNC_MONOTONIC
+    started = monotonic_fn()
+    poll_index = 0
+    last_detail = "durum henüz alınmadı"
+
+    logger.info(
+        f"⏳ {platform.upper()} yüklemesi arka planda kabul edildi; yayın doğrulanıyor "
+        f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+    )
+
+    while True:
+        try:
+            response = requests.get(
+                UPLOAD_POST_STATUS_URL,
+                headers=headers,
+                params={lookup_key: lookup_value},
+                timeout=ASYNC_STATUS_REQUEST_TIMEOUT,
+            )
+        except Exception as exc:
+            reason = f"durum endpoint'i sorgulanamadı: {exc}"
+            _record_async_failure(platform, reason, request_id, job_id)
+            logger.error(
+                f"❌ {platform.upper()} YAYIN DOĞRULANAMADI: {reason} "
+                f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+            )
+            return None
+
+        if response.status_code != 200:
+            reason = f"durum endpoint'i HTTP {response.status_code} döndürdü"
+            _record_async_failure(platform, reason, request_id, job_id)
+            logger.error(
+                f"❌ {platform.upper()} YAYIN DOĞRULANAMADI: {reason} "
+                f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+            )
+            return None
+
+        try:
+            status_body = response.json()
+            if not isinstance(status_body, dict):
+                raise ValueError("JSON kökü nesne değil")
+        except Exception as exc:
+            reason = f"durum endpoint'i bozuk JSON döndürdü: {exc}"
+            _record_async_failure(platform, reason, request_id, job_id)
+            logger.error(
+                f"❌ {platform.upper()} YAYIN DOĞRULANAMADI: {reason} "
+                f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+            )
+            return None
+
+        outcome, detail = _status_outcome(status_body, platform)
+        last_detail = detail
+        if outcome == "success":
+            logger.info(
+                f"✅ {platform.upper()} yayını doğrulandı: {detail} "
+                f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+            )
+            return _confirmed_async_result(status_body, platform, request_id, job_id)
+        if outcome == "failure":
+            reason = f"durum endpoint'i terminal başarısızlık bildirdi: {detail}"
+            _record_async_failure(platform, reason, request_id, job_id)
+            logger.error(
+                f"❌ {platform.upper()} YAYIN DOĞRULANAMADI: {reason} "
+                f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+            )
+            return None
+
+        elapsed = monotonic_fn() - started
+        if elapsed >= timeout:
+            reason = f"{timeout:g}s doğrulama zaman aşımı; son durum={last_detail}"
+            _record_async_failure(platform, reason, request_id, job_id)
+            logger.error(
+                f"❌ {platform.upper()} YAYIN DOĞRULANAMADI: {reason} "
+                f"(request_id={request_id or '-'}, job_id={job_id or '-'})"
+            )
+            return None
+
+        delay = max(0.001, float(intervals[min(poll_index, len(intervals) - 1)]))
+        remaining = timeout - elapsed
+        sleep_fn(min(delay, remaining))
+        poll_index += 1
+
+
 def upload_to_platform(
     video_path: Path,
     title: str,
@@ -143,10 +432,11 @@ def upload_to_platform(
         if social_caption:
             data["tiktok_title"] = social_caption[:2100]
 
-    import time
-
     MAX_UPLOAD_ATTEMPTS = 3
     UPLOAD_BACKOFF = [10, 30, 60]  # seconds between retries
+
+    # Önceki çağrıdan kalan tanı, bu platformun yeni sonucuna sızmamalı.
+    _LAST_UPLOAD_FAILURES.pop(platform, None)
 
     for attempt in range(MAX_UPLOAD_ATTEMPTS):
         try:
@@ -169,6 +459,9 @@ def upload_to_platform(
             body_failed = _body_indicates_failure(result, platform)
 
             if response.status_code == 200 and not body_failed:
+                request_id, job_id = _async_reference(result)
+                if not _publication_identifier(result, platform) and (request_id or job_id):
+                    return _confirm_async_upload(result, platform, headers)
                 logger.info(f"✅ {platform.upper()} uploaded: {title[:50]}...")
                 return result
 
