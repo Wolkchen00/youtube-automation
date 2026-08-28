@@ -23,6 +23,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from core import killgate
 from core.analytics import load_snapshots
+from core.stack_fingerprint import fingerprint
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 
@@ -45,6 +46,7 @@ def _published_parts(series: str, window: int) -> list[dict]:
             "part": int(key),
             "title": str(part.get("subtitle") or "").strip(),
             "published_at": part["published_at"],
+            "stack_sha256": part.get("stack_sha256"),
         })
     parts.sort(key=lambda p: p["published_at"])
     return parts[-window:]
@@ -68,7 +70,16 @@ def main() -> int:
     parser.add_argument("--channel", default="sentinal_ihsan")
     parser.add_argument("--window", type=int, default=killgate.DEFAULT_WINDOW)
     parser.add_argument("--json", action="store_true")
+    parser.add_argument(
+        "--stack",
+        action="store_true",
+        help="yalniz mevcut stack parmak izini yaz",
+    )
     args = parser.parse_args()
+
+    if args.stack:
+        print(fingerprint(args.series))
+        return 0
 
     snapshots = load_snapshots()
     if not snapshots:
@@ -83,6 +94,7 @@ def main() -> int:
             metrics.append(killgate.EpisodeMetric(
                 video_id=f"part{part['part']}",
                 published=datetime.fromisoformat(part["published_at"]),
+                stack_sha256=part["stack_sha256"],
                 reason="analitikte_bulunamadi",
             ))
             continue
@@ -94,7 +106,13 @@ def main() -> int:
         if published.tzinfo is None:
             published = published.replace(tzinfo=timezone.utc)
         metrics.append(
-            killgate.measure_episode(snapshots, args.channel, video_id, published)
+            killgate.measure_episode(
+                snapshots,
+                args.channel,
+                video_id,
+                published,
+                stack_sha256=part["stack_sha256"],
+            )
         )
 
     report = killgate.build_report(metrics, window=args.window)
