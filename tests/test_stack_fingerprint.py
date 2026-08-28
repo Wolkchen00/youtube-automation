@@ -152,7 +152,13 @@ def test_removing_a_stack_source_from_the_list_changes_fingerprint(tmp_path, mon
 def test_stack_version_change_changes_fingerprint(tmp_path, monkeypatch):
     _fixture(tmp_path, monkeypatch)
     before = stack_fingerprint.fingerprint("test-series")
-    monkeypatch.setattr(stack_fingerprint, "STACK_VERSION", "sf2")
+    # Sabit bir surum dizesi PINLEME: sf1 -> sf2 yukseltmesinde bu test sessizce
+    # kendiliginden gecer hale gelmisti. Iddia edilen sey degismezdir: surum
+    # DEGISIRSE parmak izi degisir.
+    monkeypatch.setattr(
+        stack_fingerprint, "STACK_VERSION",
+        stack_fingerprint.STACK_VERSION + "-baska",
+    )
     assert stack_fingerprint.fingerprint("test-series") != before
 
 

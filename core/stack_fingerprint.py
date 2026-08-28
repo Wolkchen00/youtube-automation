@@ -15,7 +15,7 @@ from pathlib import Path
 from core.config import PROJECT_ROOT
 from series.bible import data_dir, doctrine_path
 
-STACK_VERSION = "sf1"
+STACK_VERSION = "sf2"
 
 STACK_SOURCES = (
     "series/produce.py",
@@ -29,9 +29,22 @@ STACK_SOURCES = (
     "core/kie_api.py",
 )
 
+# Uretim sirasinda YAZILAN kimlik/cache alanlari. Bu liste ezberden degil, yazan kod
+# satirlarindan cikarilmistir; eksik yazmak parmak izini her yeni referansta kaydirir
+# ve kill-gate penceresini sessizce olduren sinifin ta kendisidir (2026-08-28'de
+# part22 yayininda olculdu: kitchen_counter referansi yazilinca iz degisti).
+#   produce.py 731/747/935 -> ref_image_url    (ortam/karakter/prop referansi)
+#   produce.py             -> ref_image_local  (yerel dosya yolu)
+#   produce.py ~999        -> character_id     (Omni kayit kimligi)
+#   bible.py 474           -> kie_audio_id     (uretilen ses kaydi)
+# BILEREK DISARIDA BIRAKILMAYANLAR (operator girdisi; degisirse CIKTI degisir):
+#   style_ref_url, voice.audio_id
 _BIBLE_VOLATILE_KEYS = {
     "ref_url",
+    "ref_image_url",
+    "ref_image_local",
     "voice_id",
+    "kie_audio_id",
     "character_id",
     "registered",
     "prop_ref_urls",
