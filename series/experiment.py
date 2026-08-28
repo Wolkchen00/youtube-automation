@@ -296,11 +296,16 @@ def _reserve(experiment_id: str, stage: str, call_type: str, engine: str,
         "reserved": float(estimate),
         "actual": None,
         "ts": _timestamp(),
+        # ROCK D0: ucusta kaydinin kimligi defterde yasar. Uzlastirmada birakilmazsa
+        # harcanmamis kredi 900 sn TTL boyunca harcanmis gorunur ve taban, koruma en
+        # cok gerektigi anda (bakiye daralinca) fazladan reddeder.
+        "floor_inflight_id": decision.inflight_id,
     })
     try:
         _save(data)
     except OSError as error:
         logger.error("EXPERIMENT LEDGER FATAL; reservation was not durable: %s", error)
+        _release_floor_hold(decision.inflight_id)
         return None
     logger.info(
         "EXPERIMENT GATE reserved: experiment=%s stage=%s call=%s "
@@ -315,6 +320,21 @@ def authorize(experiment_id: str, stage: str, call_type: str, engine: str,
               duration=None) -> bool:
     """Durably reserve a conservative charge against stage and total caps."""
     return _reserve(experiment_id, stage, call_type, engine, duration) is not None
+
+
+def _release_floor_hold(inflight_id: str | None) -> None:
+    """ROCK D0 ucusta kaydini birak.
+
+    Birakma HICBIR kosulda uzlastirmayi dusurmez: taban bir koruma mekanizmasidir,
+    deney defterinin dogrulugundan sorumlu degildir.
+    """
+    if not inflight_id:
+        return
+    from series import balance_floor
+    try:
+        balance_floor.release(inflight_id)
+    except Exception as error:
+        logger.warning("Balance floor ucusta kaydi birakilamadi: %s", error)
 
 
 def record(experiment_id: str, actual: float | int | None, *,
@@ -346,6 +366,8 @@ def record(experiment_id: str, actual: float | int | None, *,
         return False
     match["actual"] = float(actual)
     match["settled_ts"] = _timestamp()
+    # Cagri bitti: tuttugu kredi serbest kalmali, TTL'in dolmasi beklenmemeli.
+    _release_floor_hold(match.pop("floor_inflight_id", None))
     _save(data)
     stage_used = _usage(entry, match["stage"])
     total_used = _usage(entry)

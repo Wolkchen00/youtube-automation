@@ -708,7 +708,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'extreme in the very first frame. Onset phrases such as "begins to" and "starts to" '
         'are forbidden in shot 1. BAD: "the soap stays rigid and begins to crack like glass". '
         'GOOD: "the bar is already split along a bright conchoidal fracture, its glassy '
-        'translucent edge glinting under the water".'
+        'translucent edge glinting under the water". '
+        'OBJECT IDENTITY AND ANOMALY MUST AGREE: descriptor and anomaly_descriptor are composed into ONE hero reference image, so they must never contradict each other about the same surfaces, edges or material. Write object_card.descriptor as the object LOOKS WHILE the anomaly is active; when the anomaly changes the object\'s own geometry or material, describe the changed object, never its intact "before" state. BAD: descriptor "smooth rounded edges" with anomaly "sharp fracture edges and glossy shards". GOOD: descriptor "one bright glassy break face along its long edge" with anomaly "sharp conchoidal fracture edges and glossy translucent shards".'
         if compose_object_prompt else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
@@ -722,7 +723,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'extreme in the very first frame. Onset phrases such as "begins to" and "starts to" '
         'are forbidden in shot 1. BAD: "the soap stays rigid and begins to crack like glass". '
         'GOOD: "the bar is already split along a bright conchoidal fracture, its glassy '
-        'translucent edge glinting under the water".'
+        'translucent edge glinting under the water". '
+        'OBJECT IDENTITY AND ANOMALY MUST AGREE: descriptor and anomaly_descriptor are composed into ONE hero reference image, so they must never contradict each other about the same surfaces, edges or material. Write object_card.descriptor as the object LOOKS WHILE the anomaly is active; when the anomaly changes the object\'s own geometry or material, describe the changed object, never its intact "before" state. BAD: descriptor "smooth rounded edges" with anomaly "sharp fracture edges and glossy shards". GOOD: descriptor "one bright glassy break face along its long edge" with anomaly "sharp conchoidal fracture edges and glossy translucent shards".'
         if formatted_object else ""
     )
     episode_arc_rule = (
