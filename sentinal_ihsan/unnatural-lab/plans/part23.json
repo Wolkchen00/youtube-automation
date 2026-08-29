@@ -53,5 +53,9 @@
   "family": "impossible-state-change",
   "music": "Dry percussive sequence starting with a sharp plastic click in the first frame. Low, muffled wooden block hits pulse slowly and steadily. A very quiet, low-frequency hum sustains underneath, leaving vast empty spaces between each hit, maintaining a sterile and eerie atmosphere with no melodic elements.",
   "hook_shot": 2,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/SXPpVG4t/ep23-bar-of-soap.png"
+  ],
+  "ref_prompt_sha256": "fea7d9b3d72ff1b214a668b3299462030e0df90f96eadb91a0e92d35d4b4915f"
 }
