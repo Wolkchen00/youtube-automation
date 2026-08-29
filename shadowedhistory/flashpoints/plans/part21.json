@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 21,
+    "title": "The Real Reason Cleopatra Ruled Without Translators"
+  },
+  "synopsis": "Cleopatra defied centuries of Macedonian tradition by mastering the Egyptian language and personally negotiating with foreign dignitaries.",
+  "narration": "Cleopatra was the first Greek Ptolemaic monarch to speak Egyptian fluently, addressing foreign emissaries directly in their native tongues. Her true imperial power came from unmatched diplomacy and intellect, not legendary seduction alone.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical framing. Close-up profile of a sharp-eyed 20-year-old royal Ptolemaic queen adorned in gold diadem and pleated linen, holding court under gleaming limestone colonnades, firmly leaning forward toward a cluster of kneeling foreign envoys while parchment scrolls unfurl across a bronze table under harsh Mediterranean daylight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Vertical framing. Tight macro view of ink dripping from a reed pen onto papyrus inscribed with ancient Egyptian hieratic script alongside Greek texts, as royal ringed fingers rapidly roll the treaty scroll shut, with blurred silhouettes of guards in the background catching flickering oil lamp firelight.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 26,
+  "music": "Fast, tense Mediterranean acoustic percussion and aggressive low oud strums driving a relentless rhythmic pulse, layered with rapid bronze rattle accents and dark cello ostinatos that punch forward with immediate urgency, sustaining continuous tension and cutting off abruptly mid-groove for a seamless loop.",
+  "title_card": {
+    "title": "Cleopatra VII",
+    "subtitle": "Alexandria, 48 BC"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

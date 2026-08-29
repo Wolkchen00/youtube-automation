@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 24,
+    "title": "The Great Wall: Fact Or Ancient Propaganda?"
+  },
+  "synopsis": "Despite widespread claims, the Great Wall of China is indistinguishable from space due to its narrow width and natural stone hues.",
+  "narration": "Despite centuries of persistent myth, the Great Wall of China is completely invisible to human eyes from lunar orbit. Astronauts confirmed that its narrow masonry blends seamlessly into the surrounding natural mountain ridges without aid.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical framing. Rapid sweeping view from high above the dramatic mountain peaks of northern China, following the snaking path of weathered gray brick battlements as they blend entirely into dry rocky ridges and misty ravines under sharp afternoon sunlight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Vertical framing. Perspective from inside a spacecraft cabin window looking down onto the vast expanse of Earth's curved blue horizon, continents and mountain textures clearly visible while human-built walls dissolve into total invisibility against the vast continental terrain.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 21,
+  "music": "Tense futuristic synth pulses colliding with aggressive cinematic frame drums and high-speed metallic ticks, maintaining an urgent clockwork momentum with heavy sub-bass drops and sharp staccato strings that surge without interruption, cutting off dead mid-measure for a flawless looping edit.",
+  "title_card": {
+    "title": "The Great Wall of China",
+    "subtitle": "Low Earth Orbit, 1969"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

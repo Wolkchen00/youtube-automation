@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 25,
+    "title": "How Laughter Paralyzed Tanganyika In 1962!"
+  },
+  "synopsis": "A mysterious mass psychogenic laughter epidemic forced dozens of schools to shut down across East Africa in 1962.",
+  "narration": "In 1962, an uncontrollable outbreak of contagious laughter and weeping struck a Tanzanian boarding school, spreading rapidly across neighboring villages. The inexplicable psychological phenomenon shuttered fourteen schools and afflicted over a thousand people for months.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical framing. Medium tracking shot through a 1960s sun-drenched East African classroom as uniformed female students clutch their sides and desks in overwhelming emotional exhaustion and hysterical laughter, while textbooks slide off wooden tables onto concrete floors.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Vertical framing. Outdoor wide view of the school gates padlocked shut with an official wooden closure notice in the village of Kashasha, with bewildered elders and medical workers standing in dust-blown courtyards under tall eucalyptus trees.",
+      "seed": null
+    }
+  ],
+  "family": "efsane vs kayıt",
+  "seed_id": 27,
+  "music": "Fast, chaotic tribal percussion and frantic marimba pulses driving a breathless, escalating tempo, layered with tense dissonant vocal chants and rapid hollow woodblocks that build unrelenting psychological pressure, cutting off abruptly mid-measure on a hard percussive accent to loop continuously.",
+  "title_card": {
+    "title": "Tanganyika Laughter Epidemic",
+    "subtitle": "Kashasha, 1962"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

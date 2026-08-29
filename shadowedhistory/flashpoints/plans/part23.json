@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "How A Brewery Flooded London In 1814!"
+  },
+  "synopsis": "A massive brewing vat rupture unleashed a destructive wave of porter beer through the slums of nineteenth-century London.",
+  "narration": "In 1814, a ruptured vat unleashed five hundred seventy tons of fermenting porter through the narrow streets of London. The fifteen-foot tidal wave destroyed brick tenements and claimed eight lives before draining away into the earth.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical framing. Low-angle eye-level shot inside a dark, multi-story industrial brewery as a gigantic twenty-two-foot wooden vat explodes with violently snapping iron hoops, unleashing a catastrophic dark foaming torrent of porter smashing through brick warehouse walls into daylight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Vertical framing. Medium tracking shot through a cobblestone alleyway in St Giles as dark frothing liquid surges past shattered wooden doorframes and overturned handcarts, swirling around brick basements under a gloomy overcast nineteenth-century London sky.",
+      "seed": null
+    }
+  ],
+  "family": "efsane vs kayıt",
+  "seed_id": 25,
+  "music": "Frantic industrial copper percussion, distorted tavern violin riffs, and pounding wooden stomp beats driving a hard, relentless groove without pause, building suffocating tension with fast metallic scrapes and slamming bass hits, snapping off instantly mid-beat to cycle seamlessly back to the start.",
+  "title_card": {
+    "title": "The London Beer Flood",
+    "subtitle": "London, 1814"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

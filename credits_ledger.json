@@ -687,6 +687,14 @@
       "reserved": 900,
       "actual": 252.0,
       "ts": "2026-08-29T00:38:13.000083+00:00"
+    },
+    {
+      "month": "2026-08",
+      "series": "flashpoints",
+      "part": 21,
+      "reserved": 900,
+      "actual": 210.0,
+      "ts": "2026-08-29T02:57:34.336013+00:00"
     }
   ],
   "episode_spend": {
