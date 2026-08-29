@@ -215,7 +215,12 @@ pencere daha baslamamisti; degisikligin bedeli SIFIR. Bir bolum bile kaybedilmed
 | onceki (kullanilmadi) | `e1d24f81...` |
 | pencere | part23 - part32 |
 
-### Facebook: hala engelli
+### Facebook: RAFA KALDIRILDI (Ihsan karari, 29.08.2026)
 `GET /api/uploadposts/facebook/pages` -> `{"success": false, "message": "No
 Facebook pages found"}`. Profildeki "Sentinal Ihsan Daily" girdisi PROFIL,
-Page degil. Kod tarafi Page baglanana kadar EKLENMIYOR.
+Page degil; upload-post profile yayin yapmiyor.
+
+Ihsan "simdilik facebook birakalim" dedi. Bu is ACIK DEGIL, RAFTA. Yeniden
+gundeme gelmesi icin Ihsan'in bir Facebook Page acmasi gerekir. O olmadan kod
+tarafina `facebook` EKLENMEZ - eklemek, yayinin sessizce dusmesi demektir.
+Kanal su an uc platformda: YouTube, Instagram, TikTok.
