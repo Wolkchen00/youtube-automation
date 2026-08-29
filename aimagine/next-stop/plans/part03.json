@@ -10,37 +10,37 @@
       "n": 1,
       "duration": "10",
       "chain": false,
-      "prompt": "A completely ordinary world streams past the same left-side window in the dull light of a routine commute. Open on one arresting mundane detail passing close to the glass. By 2.5 seconds a two-note chime sounds and a calm neutral announcer says the destination line. Nobody reacts. Immediately afterwards the train accelerates hard and every body leans from inertia.\n\nA sleet-grey suburban line in failing afternoon light: allotment fences, a football pitch, a supermarket car park sliding past the glass, bare trees and a chalk ridge standing far behind. The announcer says exactly: \"Next stop: Valhalla.\""
+      "prompt": "HOOK. Open already mid-motion on one ordinary object passing the glass at arm's length, so close and so fast it is only a streak. A dull, grey, utterly routine commute. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line. Nobody reacts and nothing changes. The train immediately accelerates hard. By 6 seconds ONE thing far ahead is unmistakably wrong, and it is already growing.\n\nA sleet-grey suburban line in failing afternoon light. An allotment fence whips past the glass close enough to blur, a football pitch and a supermarket car park streaming backward, bare trees and a chalk ridge standing far behind. The announcer says exactly: \"Next stop: Valhalla.\" By 6 seconds the sleet has turned to dry snow and the light is going hard."
     },
     {
       "n": 2,
       "duration": "10",
       "chain": true,
-      "prompt": "Continuing from the previous final frame, the ordinary geography begins physically deforming toward the destination as the line climbs, descends, tunnels or crosses into weather. The world is still recognisably ours where the shot begins.\n\nThe line begins climbing hard. Cuttings give way to old stone embankments, sleet turns to dry snow streaking past the window, and the last farmhouse lights drop away below the level of the track as a bare white ridge already ahead keeps growing."
+      "prompt": "HARD BREACH. In the first half second something enormous slams past the glass at arm's length and blacks the frame out for an instant. Coming out of that darkness the ordinary world is already gone and the line has physically committed to the destination with no way back. The shot ends with the destination's first true landmark resolving far ahead.\n\nA stone embankment wall slams past the glass and blacks the frame. Out of it the farmhouse lights are already dropping away below the level of the track, snow streaks past the window horizontally, and a bare white ridge far ahead keeps growing while the line climbs onto a viaduct above the cloud deck."
     },
     {
       "n": 3,
       "duration": "10",
       "chain": true,
-      "prompt": "Continuing from the previous final frame, the train crosses the threshold layer. The last ordinary object grows, passes the window and recedes for the last time, and the passengers stop pretending this is a normal commute.\n\nThe train climbs onto a stone viaduct and crosses the cloud deck. The final pylon carrying the line grows, passes close and recedes behind into white. Above the cloud floor the light turns hard and low, and a dark shape stands on the horizon ahead."
+      "prompt": "ARRIVAL EDGE. Open on a violent change of light in the first half second: the exposure blows out white or crushes to black and recovers. Then the first landmark grows continuously across the whole shot until it no longer fits inside the window. Show how far down or how far up the place goes. The scale must be frightening.\n\nThe train breaks through the cloud floor and the exposure blows out white. Above the deck the light is low and hard, and a dark shape on the snow plain resolves into a hall the size of a mountain range, its roof shingled in overlapping golden shields, growing until it no longer fits inside the window."
     },
     {
       "n": 4,
       "duration": "10",
       "chain": true,
-      "prompt": "Continuing from the previous final frame, the first true landmark of the destination resolves out of the far distance under the approach rule and continuously grows as the train closes on it.\n\nThe dark shape on the snow plain resolves into a hall the size of a mountain range, its roof shingled in overlapping golden shields, growing steadily across the window. Ravens cross the glass close and fast. Three more halls of the same size stand farther out on the plain."
+      "prompt": "FLYTHROUGH. Open with that landmark's mass already passing the window at close range, filling the glass and strobing the interior. Maximum parallax: foreground elements cross the frame in a fraction of a second while the true size of the place is revealed by what lies beyond them. Something larger still is already visible ahead.\n\nThe hall wall passes the window at close range. Barn-door-sized hammered gold shields cross the glass one after another, firelight flashing between them across endless tables inside and strobing the carriage. Ravens cross close and fast. Beyond the receding wall three more halls of the same size stand out on the plain."
     },
     {
       "n": 5,
       "duration": "10",
       "chain": true,
-      "prompt": "Continuing from the previous final frame, the train races at close range alongside the destination's signature landmarks at maximum parallax, and the light of that place crosses the six fixed faces inside the carriage.\n\nThe train runs the length of the hall wall at close range. Barn-door-sized hammered gold shields pass one by one, firelight flashing between them across endless tables inside, and the six fixed faces catch the flicker. Beyond the receding wall the next hall is already growing."
+      "prompt": "DEEPEST SCALE. Open with a hard impact against the glass in the first half second - heat, pressure, spray or a shockwave that jolts the camera and knocks the focus. Then the widest and deepest view of the destination so far, too large for the window to contain. The single most spectacular second of the episode belongs here.\n\nA gust of snow slams the glass, the camera jolts and the focus hunts. Then the widest view yet: hall roofs stretching to the snow horizon in every direction under a low burning sky, gate lines and banners between them, the plain itself too large to read."
     },
     {
       "n": 6,
       "duration": "10",
       "chain": true,
-      "prompt": "Continuing from the previous final frame, travel alone carries the train into the heart of the destination. At about 9 seconds a calm ordinary commuter announcer quietly says the arrival line, then the dim destination board flickers to a new name that stays illegible, the chime sounds again, the voice begins only \"Next stop—\" and the shot ends mid-announcement while the train is still moving forward.\n\nThe train passes through the gate line into the hall field itself: firelit doorways, banners the height of the carriage, a mead lake, and roofs stretching to the snow horizon under a low burning sky. The announcer says exactly: \"Welcome to Valhalla.\""
+      "prompt": "HEART AND PAYOFF. Open with the train passing through or beneath something colossal. Travel alone carries it into the centre of the place. At about 8.5 seconds a calm ordinary commuter announcer quietly says the arrival line. Then the chime sounds again, the same voice begins only \"Next stop-\" and the shot ends mid-word while the train is still moving forward and something new is already growing ahead.\n\nThe train passes beneath a gate lintel so large its underside fills the entire window. Then the heart of the field: firelit doorways, banners the height of the carriage, a mead lake reflecting the burning sky, roofs receding beyond resolution. The announcer says exactly: \"Welcome to Valhalla.\""
     }
   ],
   "family": "mitoloji ve öte dünya coğrafyaları",
