@@ -15,22 +15,8 @@
   "status": "active",
   "priority": 1,
   "total_parts": 3,
-  "next_part": 2,
-  "parts": {
-    "1": {
-      "status": "published",
-      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep01/ep01_hooked.mp4",
-      "subtitle": "Next Stop: Hell 🚆🔥",
-      "stack_sha256": "e7008ec13144148f50c9e150bf4d4b3327b93c9fdc9c9c72a95135f088c8b9f5",
-      "stack_version": "sf2",
-      "platforms_ok": [
-        "youtube",
-        "instagram",
-        "tiktok"
-      ],
-      "published_at": "2026-08-29T17:59:14.993622+00:00"
-    }
-  },
+  "next_part": 1,
+  "parts": {},
   "auto_replenish": {
     "enabled": true,
     "batch": 5,
