@@ -168,3 +168,54 @@ yurutmedir. Bir bolum kaybetmek, karisik veriyle karar vermekten iyidir.
 **BU NOKTADAN ITIBAREN STACK_SOURCES DONDU.** Listedeki bir dosyaya dokunmak
 pencereyi yeniden baslatir; once
 `py -X utf8 tools/killgate_report.py --series unnatural-lab --stack` ile kontrol et.
+
+---
+
+## 2026-08-29 — Instagram kurtarildi, teslim orani duzeltildi
+
+### Instagram: part22 yayinda
+Ihsan hesabi yeniden bagladi. Medya upload-post tarafinda duruyordu, yeniden
+yukleme YAPILMADI: `POST /api/uploadposts/retry` ile eski is yeniden
+zamanlandi (`request_id 071d9cff...`), 8.5 dakika sonra terminal durum
+`success: true`.
+
+    https://www.instagram.com/reel/DcoY5uaDoIw/  (post_id 18096705644316421)
+
+Defter duzeltildi: part22 `platforms_ok: ["youtube","instagram","tiktok"]`,
+`unconfirmed` kaldirildi, kurtarma kayda gecti. part22 hala pencere DISI.
+
+### Bu yayin YENI bir kusur olctu: 96 kHz teslim
+Basarili isin `changes` alani sunu raporladi:
+
+    "audio: -> AAC 128k [44100, 48000] stereo (got 96000Hz, ch=2)"
+
+Yani Instagram sesi KENDI encoder'iyla yeniden kodladi. Sebep: master zinciri
+`aresample=96000` ile limiter'i asiri ornekliyor ama sonra geri INMIYORDU, yani
+teslim de 96 kHz oluyordu. Instagram 44.1/48 disini kabul etmiyor.
+
+Bu, ROCK A'nin tum amacini sessizce iptal ediyordu: R128 garantisini platforma
+kadar bozulmadan goturmek icin ugrasip, platformda yeniden kodlatiyorduk.
+
+**Duzeltme:** limiter hala 96 kHz alaninda calisiyor (codec-arasi tepe korumasi
+DURUYOR), teslim ondan sonra 48 kHz'e iniyor. `core/ffmpeg_tools.py` icinde
+`LIMITER_OVERSAMPLE_HZ` / `DELIVERY_SAMPLE_RATE_HZ` olarak adlandirildi;
+`audio_master.json` artik iki orani da yaziyor.
+
+**Kanit (0 kredi, gercek ffmpeg):** 96 kHz kaynak -> teslim 48 kHz, teslim
+dosyasinin olculen degeri I=-13.99 LUFS / TP=-7.70 dBTP. `tests/test_delivery_
+sample_rate.py` (5 test); mutasyon (asagi ornekleme silinir) 2 testi dusuruyor.
+
+### Pencere yeniden basliyor (part23 URETILMEDEN ONCE)
+`core/ffmpeg_tools.py` STACK_SOURCES icinde. part23 HENUZ URETILMEDIGI icin
+pencere daha baslamamisti; degisikligin bedeli SIFIR. Bir bolum bile kaybedilmedi.
+
+| | |
+|---|---|
+| **pencere baslangici** | **part23**, stack `513e558e8649d6c4c52b3b613a850319526a9f92faf0c84dc61aa5718614a4b0` |
+| onceki (kullanilmadi) | `e1d24f81...` |
+| pencere | part23 - part32 |
+
+### Facebook: hala engelli
+`GET /api/uploadposts/facebook/pages` -> `{"success": false, "message": "No
+Facebook pages found"}`. Profildeki "Sentinal Ihsan Daily" girdisi PROFIL,
+Page degil. Kod tarafi Page baglanana kadar EKLENMIYOR.

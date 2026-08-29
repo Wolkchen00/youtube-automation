@@ -200,6 +200,12 @@ def measure_audio_loudness(path: str | Path) -> dict[str, float] | None:
         return None
 
 
+# Limiter, codec-arasi tepeleri gorebilmek icin asiri orneklenmis alanda calisir;
+# teslim ise her platformun native kabul ettigi orandadir (Instagram/TikTok 44.1-48 kHz).
+LIMITER_OVERSAMPLE_HZ = 96000
+DELIVERY_SAMPLE_RATE_HZ = 48000
+
+
 def _loudnorm_json(stderr: str) -> dict:
     """loudnorm'un son JSON raporunu katı biçimde ayrıştır."""
     blocks = re.findall(r"\{\s*\"input_i\".*?\}", stderr, re.DOTALL)
@@ -254,7 +260,14 @@ def master_audio(
         f":measured_thresh={values['input_thresh']:g}"
         f":offset={values['target_offset']:g}"
         ":linear=true:print_format=json"
-        f",aresample=96000,alimiter=limit={delivery_limit:.6f}:level=false"
+        f",aresample={LIMITER_OVERSAMPLE_HZ},alimiter=limit={delivery_limit:.6f}:level=false"
+        # 96 kHz YALNIZ limiter'in asiri orneklemesi icindir, teslim bicimi degildir.
+        # Instagram 29.08.2026'da part22'yi tam da bu yuzden yeniden kodladi
+        # ("AAC 128k [44100, 48000] stereo (got 96000Hz)"): platform kabul etmeyince
+        # master'i kendi encoder'iyla eziyor ve R128 garantisi bizim elimizden cikiyor.
+        # Limitten SONRA 48 kHz'e inip teslimi her platformun native kabul ettigi
+        # orana sabitliyoruz; sinirlama hala 96 kHz alaninda yapiliyor.
+        f",aresample={DELIVERY_SAMPLE_RATE_HZ}"
     )
     metadata_path = output_path.with_suffix(".audio_master.json")
     try:
@@ -284,7 +297,8 @@ def master_audio(
                 "output_thresh": float(apply_report["output_thresh"]),
             },
             "delivery_limiter": {
-                "sample_rate_hz": 96000,
+                "oversample_rate_hz": LIMITER_OVERSAMPLE_HZ,
+                "delivery_rate_hz": DELIVERY_SAMPLE_RATE_HZ,
                 "limit": delivery_limit,
             },
         }
