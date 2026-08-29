@@ -711,6 +711,14 @@
       "reserved": 1900,
       "actual": 0,
       "ts": "2026-08-29T17:34:03.377566+00:00"
+    },
+    {
+      "month": "2026-08",
+      "series": "next-stop",
+      "part": 1,
+      "reserved": 1900,
+      "actual": 0,
+      "ts": "2026-08-29T18:38:40.770752+00:00"
     }
   ],
   "episode_spend": {
