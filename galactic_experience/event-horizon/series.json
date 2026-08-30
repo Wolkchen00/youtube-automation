@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 25,
-  "next_part": 24,
+  "next_part": 25,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -439,6 +439,19 @@
         "tiktok"
       ],
       "published_at": "2026-08-29T01:04:52.539487+00:00"
+    },
+    "24": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep24/ep24_narrated_music.mp4",
+      "subtitle": "Neptune: Its Year is LONGER Than a LIFETIME",
+      "stack_sha256": "926d0a7f63e4637a11430d6a044b3a50bfb8f5a19909de7cd3c88e5ee3f6847a",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-30T19:41:53.157808+00:00"
     }
   }
 }
