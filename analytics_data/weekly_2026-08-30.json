@@ -1,0 +1,199 @@
+{
+  "generated_at": "2026-08-30T13:41:48.581345+00:00",
+  "snapshot_date": "2026-08-30",
+  "period": "2026-08-24 to 2026-08-30",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 126,
+        "total_views": 109706,
+        "total_videos": 264
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "ZFI72hS02Qs",
+          "title": "Vienna 1913: The Unthinkable Coincidence",
+          "published": "2026-08-27T00:11:45Z",
+          "views": 16,
+          "views_48h": 16,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "EUysWNHpokY",
+          "title": "The Real Reason Romans Used Urine For Laundry",
+          "published": "2026-08-25T21:01:29Z",
+          "views": 105,
+          "views_48h": 105,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "6GgIn4roshE",
+          "title": "The Real Reason Cleopatra Was Closer To The Moon Landing",
+          "published": "2026-08-24T21:05:20Z",
+          "views": 0,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "v4DAdC8OYkA",
+          "title": "The Colosseum: Fact Or Ancient Propaganda?",
+          "published": "2026-08-23T20:54:30Z",
+          "views": 143,
+          "views_48h": 145,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 33
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 125,
+        "total_views": 121626,
+        "total_videos": 169
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "vKus2kyMIN0",
+          "title": "Something Is WRONG With This LEMON",
+          "published": "2026-08-28T21:05:46Z",
+          "views": 1346,
+          "views_48h": 1346,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "5PG5IbbivE0",
+          "title": "This SPONGE Is NOT Supposed To REPEL WATER?!",
+          "published": "2026-08-23T19:12:45Z",
+          "views": 1407,
+          "views_48h": 1354,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1136
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 139,
+        "total_views": 64009,
+        "total_videos": 195
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "5c3g86vKTYg",
+          "title": "Galactic Center: Light From the ICE AGE",
+          "published": "2026-08-29T01:02:47Z",
+          "views": 35,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "EI5aLoNH86Q",
+          "title": "Venus: The Sun Rises in the WEST",
+          "published": "2026-08-28T01:14:09Z",
+          "views": 24,
+          "views_48h": 24,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "3wIKN2SajIw",
+          "title": "Mercury: The Universe's LONELY Neighbor",
+          "published": "2026-08-26T18:36:12Z",
+          "views": 46,
+          "views_48h": 46,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "LX8xNFvUeo0",
+          "title": "Earth's Gold: Forged in STAR COLLISIONS",
+          "published": "2026-08-25T17:18:53Z",
+          "views": 42,
+          "views_48h": 39,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "K86IObBKX0s",
+          "title": "Titan: Lakes of LIQUID Methane",
+          "published": "2026-08-24T17:18:31Z",
+          "views": 55,
+          "views_48h": 54,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "m3KiVW7pLwY",
+          "title": "The ISS: 16 Sunrises DAILY",
+          "published": "2026-08-23T17:03:46Z",
+          "views": 104,
+          "views_48h": 105,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 109
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 98,
+        "total_views": 141216,
+        "total_videos": 238
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "HwBlObdDvIE",
+          "title": "Next Stop: Hell 🚆🔥",
+          "published": "2026-08-29T20:07:15Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "3CHhtE98jWc",
+          "title": "Next Stop: Hell 🚆🔥",
+          "published": "2026-08-29T19:39:50Z",
+          "views": 6,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "YvgNfEgKQZg",
+          "title": "Next Stop: Hell 🚆🔥",
+          "published": "2026-08-29T19:01:40Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "fhuziJ_Dtqw",
+          "title": "Next Stop: Hell 🚆🔥",
+          "published": "2026-08-29T17:57:05Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "JJxeH7qscnQ",
+          "title": "Next Stop: Hell 🚆🔥",
+          "published": "2026-08-29T17:02:17Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "yD2bQvfqJQg",
+          "title": "He Turned Scrapped Cans Into A $100K Oasis! ♻️✨",
+          "published": "2026-08-28T00:21:13Z",
+          "views": 5,
+          "views_48h": 5,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "FIlCYUC4ntA",
+          "title": "Building A $50K Coaster Cabin From Scratch! ✨",
+          "published": "2026-08-26T16:50:07Z",
+          "views": 3,
+          "views_48h": 2,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 4
+    }
+  }
+}
