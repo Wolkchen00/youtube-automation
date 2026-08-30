@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 1,
   "total_parts": 3,
-  "next_part": 2,
+  "next_part": 3,
   "parts": {
     "1": {
       "status": "published",
@@ -29,6 +29,19 @@
         "tiktok"
       ],
       "published_at": "2026-08-29T20:10:20.771421+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep02/ep02_hooked.mp4",
+      "subtitle": "Next Stop: Aloran 🚆🌌",
+      "stack_sha256": "e462fbe5716a9ed2b5194a0f209992c2b324a9ed0c3b73901ac9397820554907",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-30T18:01:01.669203+00:00"
     }
   },
   "auto_replenish": {
