@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-08-23T09:22:21.098777+00:00",
-  "source_snapshot": "2026-08-23",
+  "generated_at": "2026-08-30T14:14:21.067175+00:00",
+  "source_snapshot": "2026-08-30",
   "mode": "yas_normalize",
   "channel_median_30d": 2.0,
   "series_stats": {
-    "n_published": 8,
-    "n_comparable": 7,
+    "n_published": 10,
+    "n_comparable": 10,
     "series_median": 2.0,
     "videos": [
       {
@@ -14,67 +14,93 @@
         "video_id": "2yygBtzjp3M",
         "family": "absürt eğlence mimarisi",
         "metric": 0,
-        "age_h": 563.422
+        "age_h": 736.496
       },
       {
         "part": 2,
         "video_id": "j52QwXwKlpM",
         "family": "fantezi konutlar",
         "metric": 6,
-        "age_h": 543.05
+        "age_h": 716.125
       },
       {
         "part": 3,
         "video_id": "lIowMRSJb_U",
         "family": "dönüşüm",
         "metric": 5,
-        "age_h": 519.735
+        "age_h": 692.81
       },
       {
         "part": 4,
         "video_id": "BZwMTgCKDp4",
         "family": "oyun/film üsleri",
         "metric": 15,
-        "age_h": 495.671
+        "age_h": 668.746
       },
       {
         "part": 5,
         "video_id": "y68ttrNIZiE",
         "family": "saklı/mühendislik harikası",
         "metric": 0,
-        "age_h": 470.326
+        "age_h": 643.401
       },
       {
         "part": 6,
         "video_id": "vZa2uEZnXCU",
         "family": "oyun/film üsleri",
         "metric": 2,
-        "age_h": 344.889
+        "age_h": 517.964
       },
       {
         "part": 7,
         "video_id": "27qQOJa3YRI",
         "family": "fantezi konutlar",
         "metric": 0,
-        "age_h": 207.41
+        "age_h": 380.484
+      },
+      {
+        "part": 8,
+        "video_id": "Z921ZjDwpW8",
+        "family": "dönüşüm",
+        "metric": 2,
+        "age_h": 213.069
+      },
+      {
+        "part": 9,
+        "video_id": "FIlCYUC4ntA",
+        "family": "absürt eğlence mimarisi",
+        "metric": 2,
+        "age_h": 91.838
+      },
+      {
+        "part": 10,
+        "video_id": "yD2bQvfqJQg",
+        "family": "geri dönüşüm / off-grid dönüşüm",
+        "metric": 5,
+        "age_h": 60.319
       }
     ]
   },
   "family_stats": [
     {
       "family": "absürt eğlence mimarisi",
-      "n": 1,
-      "median": 0.0
+      "n": 2,
+      "median": 1.0
     },
     {
       "family": "dönüşüm",
-      "n": 1,
-      "median": 5.0
+      "n": 2,
+      "median": 3.5
     },
     {
       "family": "fantezi konutlar",
       "n": 2,
       "median": 3.0
+    },
+    {
+      "family": "geri dönüşüm / off-grid dönüşüm",
+      "n": 1,
+      "median": 5.0
     },
     {
       "family": "oyun/film üsleri",
@@ -89,8 +115,8 @@
   ],
   "recommendations": {
     "boost_families": [],
-    "explore_family": null,
-    "empty_reason": "rollback"
+    "explore_family": "saklı/mühendislik harikası",
+    "empty_reason": null
   },
   "double_down": [
     {
@@ -106,13 +132,13 @@
     "detail": "pilot penceresi veya karsilastirilabilir veri kosulu saglanmadi"
   },
   "rollback": {
-    "active": true,
+    "active": false,
     "history": [
-      5.0,
       3.5,
+      2.0,
       2.0
     ]
   },
-  "brief_note": "",
+  "brief_note": "Reserve an exploration slot for saklı/mühendislik harikası. Double down on breakout patterns in: oyun/film üsleri.",
   "extra_topics": []
 }

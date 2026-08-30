@@ -1,126 +1,152 @@
 {
   "version": 1,
-  "generated_at": "2026-08-23T09:22:21.530508+00:00",
-  "source_snapshot": "2026-08-23",
+  "generated_at": "2026-08-30T14:14:21.677505+00:00",
+  "source_snapshot": "2026-08-30",
   "mode": "yas_normalize",
   "channel_median_30d": 1127.0,
   "series_stats": {
-    "n_published": 17,
-    "n_comparable": 15,
-    "series_median": 1127.0,
+    "n_published": 19,
+    "n_comparable": 18,
+    "series_median": 1123.5,
     "videos": [
       {
         "part": 3,
         "video_id": "5Ke4t1WRT3w",
         "family": "",
         "metric": 801,
-        "age_h": 563.409
+        "age_h": 736.483
       },
       {
         "part": 4,
         "video_id": "XdlbRkY7J6o",
         "family": "",
         "metric": 76,
-        "age_h": 539.262
+        "age_h": 712.336
       },
       {
         "part": 6,
         "video_id": "WFsI2SxVoOM",
         "family": "",
         "metric": 74,
-        "age_h": 491.551
+        "age_h": 664.626
       },
       {
         "part": 7,
         "video_id": "q9MNNewPSlA",
         "family": "",
         "metric": 57,
-        "age_h": 467.042
+        "age_h": 640.117
       },
       {
         "part": 8,
         "video_id": "fn7wuBVzQAg",
         "family": "",
         "metric": 1723,
-        "age_h": 372.043
+        "age_h": 545.117
       },
       {
         "part": 9,
         "video_id": "DU6F3AeUMzM",
         "family": "",
         "metric": 2554,
-        "age_h": 348.176
+        "age_h": 521.251
       },
       {
         "part": 10,
         "video_id": "J0n5aOgMKvg",
         "family": "",
         "metric": 2158,
-        "age_h": 324.124
+        "age_h": 497.199
       },
       {
         "part": 11,
         "video_id": "G3NkAzMFdUQ",
         "family": "impossible-material",
         "metric": 1120,
-        "age_h": 227.717
+        "age_h": 400.791
       },
       {
         "part": 12,
         "video_id": "L0xmetOFYVo",
         "family": "impossible-state-change",
         "metric": 1285,
-        "age_h": 203.849
+        "age_h": 376.924
       },
       {
         "part": 13,
         "video_id": "8NHuc97QN8A",
         "family": "impossible-interior",
         "metric": 1020,
-        "age_h": 180.404
+        "age_h": 353.479
       },
       {
         "part": 14,
         "video_id": "M_QQcLEGQjA",
         "family": "impossible-behaviour",
         "metric": 1127,
-        "age_h": 156.398
+        "age_h": 329.473
       },
       {
         "part": 15,
         "video_id": "MNHdULJfHuo",
         "family": "reversed-physics",
         "metric": 616,
-        "age_h": 132.128
+        "age_h": 305.203
       },
       {
         "part": 16,
         "video_id": "NUorphoZoq0",
         "family": "impossible-state-change",
         "metric": 1298,
-        "age_h": 108.148
+        "age_h": 281.223
       },
       {
         "part": 17,
         "video_id": "RGXMfib9u84",
         "family": "impossible-material",
         "metric": 1202,
-        "age_h": 83.904
+        "age_h": 256.978
       },
       {
         "part": 18,
         "video_id": "biY7zmMczDw",
         "family": "impossible-behaviour",
         "metric": 1136,
-        "age_h": 60.191
+        "age_h": 233.266
+      },
+      {
+        "part": 19,
+        "video_id": "FuoWvZCKvf4",
+        "family": "impossible-continuity",
+        "metric": 79,
+        "age_h": 209.266
+      },
+      {
+        "part": 20,
+        "video_id": "HeP0V84NXfw",
+        "family": "slightly-uncanny",
+        "metric": 495,
+        "age_h": 185.4
+      },
+      {
+        "part": 21,
+        "video_id": "5PG5IbbivE0",
+        "family": "impossible-behaviour",
+        "metric": 1377,
+        "age_h": 161.46
       }
     ]
   },
   "family_stats": [
     {
       "family": "impossible-behaviour",
-      "n": 2,
-      "median": 1131.5
+      "n": 3,
+      "median": 1136.0
+    },
+    {
+      "family": "impossible-continuity",
+      "n": 1,
+      "median": 79.0
     },
     {
       "family": "impossible-interior",
@@ -141,11 +167,18 @@
       "family": "reversed-physics",
       "n": 1,
       "median": 616.0
+    },
+    {
+      "family": "slightly-uncanny",
+      "n": 1,
+      "median": 495.0
     }
   ],
   "recommendations": {
-    "boost_families": [],
-    "explore_family": "impossible-interior",
+    "boost_families": [
+      "impossible-behaviour"
+    ],
+    "explore_family": "reversed-physics",
     "empty_reason": null
   },
   "double_down": [],
@@ -156,11 +189,11 @@
   "rollback": {
     "active": false,
     "history": [
-      75.5,
       960.5,
-      1127.0
+      1127.0,
+      1123.5
     ]
   },
-  "brief_note": "Reserve an exploration slot for impossible-interior.",
+  "brief_note": "Prioritize proven families: impossible-behaviour. Reserve an exploration slot for reversed-physics.",
   "extra_topics": []
 }

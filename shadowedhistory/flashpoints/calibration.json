@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "generated_at": "2026-08-23T09:22:20.668618+00:00",
-  "source_snapshot": "2026-08-23",
+  "generated_at": "2026-08-30T14:14:20.464168+00:00",
+  "source_snapshot": "2026-08-30",
   "mode": "yas_normalize",
-  "channel_median_30d": 38.0,
+  "channel_median_30d": 33.0,
   "series_stats": {
-    "n_published": 15,
-    "n_comparable": 13,
+    "n_published": 19,
+    "n_comparable": 19,
     "series_median": 29.0,
     "videos": [
       {
@@ -14,99 +14,141 @@
         "video_id": "WG146S7KNnk",
         "family": "tuhaf savaş",
         "metric": 20,
-        "age_h": 563.44
+        "age_h": 736.515
       },
       {
         "part": 2,
         "video_id": "q-jVtry0ntk",
         "family": "imkânsız mühendislik",
         "metric": 244,
-        "age_h": 537.867
+        "age_h": 710.941
       },
       {
         "part": 3,
         "video_id": "IjR6ooIU6SQ",
         "family": "yanılgı kırıcı",
         "metric": 192,
-        "age_h": 514.063
+        "age_h": 687.138
       },
       {
         "part": 4,
         "video_id": "kMURIA0ZXfQ",
         "family": "unutulmuş kişi",
         "metric": 15,
-        "age_h": 489.963
+        "age_h": 663.038
       },
       {
         "part": 5,
         "video_id": "sBF2-IvStKY",
         "family": "zaman çarpması",
         "metric": 771,
-        "age_h": 373.168
+        "age_h": 546.242
       },
       {
         "part": 6,
         "video_id": "u8qMm7sa2u8",
         "family": "tuhaf savaş",
         "metric": 20,
-        "age_h": 346.443
+        "age_h": 519.518
       },
       {
         "part": 7,
         "video_id": "NMBoI-RD53s",
         "family": "unutulmuş kişi",
         "metric": 137,
-        "age_h": 226.203
+        "age_h": 399.278
       },
       {
         "part": 8,
         "video_id": "vhQwh_B7cQ0",
         "family": "imkânsız mühendislik",
         "metric": 53,
-        "age_h": 202.527
+        "age_h": 375.601
       },
       {
         "part": 9,
         "video_id": "OiJqRrMP6vg",
         "family": "yanılgı kırıcı",
         "metric": 2,
-        "age_h": 178.678
+        "age_h": 351.753
       },
       {
         "part": 10,
         "video_id": "3SaPGH6r9_g",
         "family": "efsane vs kayıt",
         "metric": 50,
-        "age_h": 154.645
+        "age_h": 327.72
       },
       {
         "part": 12,
         "video_id": "t3ZND-eQYlo",
         "family": "yanılgı kırıcı",
         "metric": 0,
-        "age_h": 106.512
+        "age_h": 279.586
       },
       {
         "part": 13,
         "video_id": "N2tSAEYsNc4",
         "family": "imkânsız mühendislik",
         "metric": 29,
-        "age_h": 82.053
+        "age_h": 255.128
       },
       {
         "part": 14,
         "video_id": "ymP7XbkRpFU",
         "family": "tuhaf savaş",
         "metric": 8,
-        "age_h": 58.427
+        "age_h": 231.502
+      },
+      {
+        "part": 15,
+        "video_id": "AgKGuO2Q4XA",
+        "family": "unutulmuş kişi",
+        "metric": 8,
+        "age_h": 207.551
+      },
+      {
+        "part": 16,
+        "video_id": "NZE4B4iylnM",
+        "family": "zaman çarpması",
+        "metric": 33,
+        "age_h": 183.693
+      },
+      {
+        "part": 17,
+        "video_id": "v4DAdC8OYkA",
+        "family": "efsane vs kayıt",
+        "metric": 145,
+        "age_h": 159.765
+      },
+      {
+        "part": 18,
+        "video_id": "6GgIn4roshE",
+        "family": "zaman çarpması",
+        "metric": 0,
+        "age_h": 135.584
+      },
+      {
+        "part": 19,
+        "video_id": "EUysWNHpokY",
+        "family": "yanılgı kırıcı",
+        "metric": 105,
+        "age_h": 111.648
+      },
+      {
+        "part": 20,
+        "video_id": "ZFI72hS02Qs",
+        "family": "zaman çarpması",
+        "metric": 16,
+        "age_h": 84.477
       }
     ]
   },
   "family_stats": [
     {
       "family": "efsane vs kayıt",
-      "n": 1,
-      "median": 50.0
+      "n": 2,
+      "median": 97.5
     },
     {
       "family": "imkânsız mühendislik",
@@ -120,25 +162,26 @@
     },
     {
       "family": "unutulmuş kişi",
-      "n": 2,
-      "median": 76.0
+      "n": 3,
+      "median": 15.0
     },
     {
       "family": "yanılgı kırıcı",
-      "n": 3,
-      "median": 2.0
+      "n": 4,
+      "median": 53.5
     },
     {
       "family": "zaman çarpması",
-      "n": 1,
-      "median": 771.0
+      "n": 4,
+      "median": 24.5
     }
   ],
   "recommendations": {
     "boost_families": [
+      "yanılgı kırıcı",
       "imkânsız mühendislik"
     ],
-    "explore_family": "efsane vs kayıt",
+    "explore_family": "imkânsız mühendislik",
     "empty_reason": null
   },
   "double_down": [
@@ -147,21 +190,21 @@
       "video_id": "q-jVtry0ntk",
       "family": "imkânsız mühendislik",
       "metric": 244,
-      "ratio": 6.4211
+      "ratio": 7.3939
     },
     {
       "part": 3,
       "video_id": "IjR6ooIU6SQ",
       "family": "yanılgı kırıcı",
       "metric": 192,
-      "ratio": 5.0526
+      "ratio": 5.8182
     },
     {
       "part": 5,
       "video_id": "sBF2-IvStKY",
       "family": "zaman çarpması",
       "metric": 771,
-      "ratio": 20.2895
+      "ratio": 23.3636
     }
   ],
   "pilot_kill": {
@@ -171,11 +214,11 @@
   "rollback": {
     "active": false,
     "history": [
-      106.5,
       137.0,
+      29.0,
       29.0
     ]
   },
-  "brief_note": "Prioritize proven families: imkânsız mühendislik. Reserve an exploration slot for efsane vs kayıt. Double down on breakout patterns in: imkânsız mühendislik, yanılgı kırıcı, zaman çarpması.",
+  "brief_note": "Prioritize proven families: yanılgı kırıcı, imkânsız mühendislik. Reserve an exploration slot for imkânsız mühendislik. Double down on breakout patterns in: imkânsız mühendislik, yanılgı kırıcı, zaman çarpması.",
   "extra_topics": []
 }

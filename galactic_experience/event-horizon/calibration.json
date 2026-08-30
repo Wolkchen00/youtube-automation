@@ -1,118 +1,167 @@
 {
   "version": 1,
-  "generated_at": "2026-08-23T09:22:19.240413+00:00",
-  "source_snapshot": "2026-08-23",
+  "generated_at": "2026-08-30T14:14:19.066892+00:00",
+  "source_snapshot": "2026-08-30",
   "mode": "yas_normalize",
-  "channel_median_30d": 161.0,
+  "channel_median_30d": 109.0,
   "series_stats": {
-    "n_published": 17,
-    "n_comparable": 15,
-    "series_median": 297.0,
+    "n_published": 23,
+    "n_comparable": 22,
+    "series_median": 110.5,
     "videos": [
       {
         "part": 1,
         "video_id": "KhWGFlMwJ-w",
         "family": "cehennem gezegenler",
         "metric": 448,
-        "age_h": 563.457
+        "age_h": 736.532
       },
       {
         "part": 2,
         "video_id": "tshcQQCLwdM",
         "family": "derin uzay canavarları",
         "metric": 368,
-        "age_h": 541.244
+        "age_h": 714.319
       },
       {
         "part": 3,
         "video_id": "jyGtbJWG_gk",
         "family": "bilim temelli what-if",
         "metric": 810,
-        "age_h": 517.85
+        "age_h": 690.924
       },
       {
         "part": 4,
         "video_id": "rn9jgOQ7G0g",
         "family": "kozmik kader",
         "metric": 381,
-        "age_h": 493.86
+        "age_h": 666.935
       },
       {
         "part": 5,
         "video_id": "_482wLxaXXI",
         "family": "güneş sistemi uçları",
         "metric": 161,
-        "age_h": 469.105
+        "age_h": 642.179
       },
       {
         "part": 6,
         "video_id": "WASLc0rFPvM",
         "family": "derin uzay canavarları",
         "metric": 936,
-        "age_h": 373.893
+        "age_h": 546.968
       },
       {
         "part": 7,
         "video_id": "uLSjJ40sByk",
         "family": "güneş sistemi uçları",
         "metric": 76,
-        "age_h": 350.373
+        "age_h": 523.447
       },
       {
         "part": 8,
         "video_id": "JTlRJteJzi8",
         "family": "cehennem gezegenler",
         "metric": 118,
-        "age_h": 326.329
+        "age_h": 499.403
       },
       {
         "part": 9,
         "video_id": "eIw6nx2S6WY",
         "family": "bilim temelli what-if",
         "metric": 25,
-        "age_h": 229.866
+        "age_h": 402.94
       },
       {
         "part": 10,
         "video_id": "B3UHsf030ZE",
         "family": "kozmik kader",
         "metric": 66,
-        "age_h": 205.797
+        "age_h": 378.872
       },
       {
         "part": 11,
         "video_id": "ugugo5e823A",
         "family": "ölçek şoku",
         "metric": 112,
-        "age_h": 182.498
+        "age_h": 355.572
       },
       {
         "part": 12,
         "video_id": "WUErzXuC-9g",
         "family": "derin uzay canavarları",
         "metric": 1039,
-        "age_h": 158.525
+        "age_h": 331.6
       },
       {
         "part": 13,
         "video_id": "D159HcF5xc0",
         "family": "güneş sistemi uçları",
         "metric": 297,
-        "age_h": 134.428
+        "age_h": 307.502
       },
       {
         "part": 14,
         "video_id": "d8uLmNOV3o0",
         "family": "ölçek şoku",
         "metric": 40,
-        "age_h": 109.764
+        "age_h": 282.839
       },
       {
         "part": 15,
         "video_id": "U1TF0puCXkU",
         "family": "güneş sistemi uçları",
         "metric": 840,
-        "age_h": 62.379
+        "age_h": 235.453
+      },
+      {
+        "part": 16,
+        "video_id": "sbf-AZzRDog",
+        "family": "derin uzay canavarları",
+        "metric": 94,
+        "age_h": 211.388
+      },
+      {
+        "part": 17,
+        "video_id": "FGVRYNHIKQI",
+        "family": "güneş sistemi uçları",
+        "metric": 109,
+        "age_h": 187.513
+      },
+      {
+        "part": 18,
+        "video_id": "m3KiVW7pLwY",
+        "family": "ölçek şoku",
+        "metric": 103,
+        "age_h": 163.61
+      },
+      {
+        "part": 19,
+        "video_id": "K86IObBKX0s",
+        "family": "güneş sistemi uçları",
+        "metric": 55,
+        "age_h": 139.364
+      },
+      {
+        "part": 20,
+        "video_id": "LX8xNFvUeo0",
+        "family": "derin uzay canavarları",
+        "metric": 39,
+        "age_h": 115.358
+      },
+      {
+        "part": 21,
+        "video_id": "3wIKN2SajIw",
+        "family": "ölçek şoku",
+        "metric": 46,
+        "age_h": 90.07
+      },
+      {
+        "part": 22,
+        "video_id": "EI5aLoNH86Q",
+        "family": "güneş sistemi uçları",
+        "metric": 24,
+        "age_h": 59.437
       }
     ]
   },
@@ -129,13 +178,13 @@
     },
     {
       "family": "derin uzay canavarları",
-      "n": 3,
-      "median": 936.0
+      "n": 5,
+      "median": 368.0
     },
     {
       "family": "güneş sistemi uçları",
-      "n": 4,
-      "median": 229.0
+      "n": 7,
+      "median": 109.0
     },
     {
       "family": "kozmik kader",
@@ -144,8 +193,8 @@
     },
     {
       "family": "ölçek şoku",
-      "n": 2,
-      "median": 76.0
+      "n": 4,
+      "median": 74.5
     }
   ],
   "recommendations": {
@@ -159,28 +208,28 @@
       "video_id": "jyGtbJWG_gk",
       "family": "bilim temelli what-if",
       "metric": 810,
-      "ratio": 5.0311
+      "ratio": 7.4312
     },
     {
       "part": 6,
       "video_id": "WASLc0rFPvM",
       "family": "derin uzay canavarları",
       "metric": 936,
-      "ratio": 5.8137
+      "ratio": 8.5872
     },
     {
       "part": 12,
       "video_id": "WUErzXuC-9g",
       "family": "derin uzay canavarları",
       "metric": 1039,
-      "ratio": 6.4534
+      "ratio": 9.5321
     },
     {
       "part": 15,
       "video_id": "U1TF0puCXkU",
       "family": "güneş sistemi uçları",
       "metric": 840,
-      "ratio": 5.2174
+      "ratio": 7.7064
     }
   ],
   "pilot_kill": {
@@ -190,9 +239,9 @@
   "rollback": {
     "active": true,
     "history": [
-      398.0,
       368.0,
-      297.0
+      297.0,
+      110.5
     ]
   },
   "brief_note": "",
