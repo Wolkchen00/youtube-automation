@@ -135,3 +135,45 @@ Codex hesap duzeyinde kullanim limitine takildi; taze oturum da ayni limite carp
 **Toplanti tur 2'de `VERDICT: NOT YET` ile durdu.** r3 revizyonu tur-2'nin 13 bulgusunun
 tamamini isliyor ama Codex tarafindan DOGRULANMADI. Limit sifirlandiktan sonra
 (15:53 PT) tur 3 ayni thread ile (`01a0595e-2570-7123-9288-2f1ac9f053be`) kosulmali.
+
+## ROCK 0 , UYGULANDI ve DOGRULANDI (2026-08-31)
+
+**Yapilanlar**
+1. `gh workflow disable unnatural-lab.yml` , Ihsan karari: o hat simdilik donduruldu
+   (part 23 oldugu gibi duruyor, gunluk kosu QC kotasi yakmiyor).
+2. `shadowedhistory/flashpoints/series.json` part 21: `awaiting_approval` -> `planned`
+   (commit 80d8293), push origin/main.
+3. Tetiklemeden hemen once canli kota probe'u: `gemini-2.5-flash` generateContent HTTP 200.
+4. `gh workflow run flashpoints.yml` -> run 33445384960 (workflow_dispatch, 22:15:46Z).
+
+**Kosu ne yapti (log kaniti, ozet)**
+- Cekim 1 ilk uretimde QC RED (yasakli oge) -> regen 1/1 -> QC GECTI (artifact 0/10).
+- Cekim 2 QC GECTI (artifact 1/10). Merge + final export + anlatim (Charon) + Suno muzik
+  + kunye "Cleopatra VII".
+- Yayin: 3/3 platform OK (YouTube senkron, IG ve TikTok asenkron dogrulandi).
+
+**Bagimsiz dogrulama (Codex'in tur-1/2'de istedigi siki kanit)**
+- `series.json` part 21: `status=published`, `platforms_ok=[youtube,instagram,tiktok]`,
+  `published_at=2026-08-31T22:29:24Z`; `next_part=22`.
+- `published.json` son kayit: part 21, `results.youtube="KBmoJvN4spE"` , 11 karakter
+  duzenli ifadeyi gecti.
+- oEmbed: baslik "The Real Reason Cleopatra Ruled Without Translators",
+  `author_url=https://www.youtube.com/@shad0wedhistory357`; watch sayfasinda kanal kimligi
+  `UCUdp0KLBh4EeeSgVbwS_DhA` dogrulandi.
+- Video indirildi ve izlendi (yt-dlp + ffmpeg): 1080x1920, 30 fps, 15,04 sn, opus stereo.
+  EBU R128: I=-19,6 LUFS, TP=-6,5 dBFS, LRA=1,5 LU. flashpoints `bible.json`'da
+  `master_lufs` YOK -> eski ses yolu, master kapisi bu seride zaten calismiyor (spec ihlali
+  degil, ama K-FILO'da ele alinmali).
+- Kontakt sayfasi: kunye "CLEOPATRA VII / Alexandria, 48 BC" ilk 3 saniyede okunuyor;
+  cekim 1 sutunlu disari sahnesi, cekim 2 papirus/mürekkep yakin plani.
+
+**QC'nin kacirdigi gozlem (Ihsan'a not)**
+13-15. saniyedeki mesaleli tas ic mekanda arkadaki iki muhafizin zirh/mifer silueti
+Ptolemaios donemi (MO 48) yerine gec antik/ortacag hissi veriyor; bible'in "kiyafet,
+mimari, nesne ve teknoloji zaman capasiyla ortusmeli" kuralinin sinirinda. Agir alan
+derinligi yuzunden bulanik, izleyicinin fark etme ihtimali dusuk , kanal doktrini acisindan
+kayda gecirildi, yayin geri cekilmedi.
+
+**Dogrulamadigim sey:** anlatimin sesli icerigini birebir dinleyip/transkript edip plandaki
+metinle karsilastirmadim; anlatimin varligi kosu logu + ses karakteristigi ile teyitli.
+Plandaki metin 37 kelime (hedef bant 26-38).
