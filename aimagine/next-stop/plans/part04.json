@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Next Stop: Xibalba 🏞️💀"
+  },
+  "synopsis": "An ordinary commute descends far below the surface to reveal a colossal, overgrown underworld city carved from dark stone, illuminated by strange, ancient energies.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "HOOK. Open already mid-motion on one ordinary object passing the glass at arm's length, so close and so fast it is only a streak. A dull, grey, utterly routine commute. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line. Nobody reacts and nothing changes. The train immediately accelerates hard. By 6 seconds ONE thing far ahead is unmistakably wrong, and it is already growing.\n\nA blur of grey concrete passing the window, a dull, routine underground tunnel. At 1.5 seconds a two-note chime sounds, and a calm neutral announcer says, \"Next stop: Xibalba.\" Nobody reacts. The train immediately accelerates hard, vibrations intensify. By 6 seconds, a single colossal, uncarved stalactite, impossibly large, is visible far ahead in the distant, dim light, growing fast.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "HARD BREACH. In the first half second something enormous slams past the glass at arm's length and blacks the frame out for an instant. Coming out of that darkness the ordinary world is already gone and the line has physically committed to the destination with no way back. The shot ends with the destination's first true landmark resolving far ahead.\n\nThe carriage judders hard, blurring the frame. In the first half second, a massive, jagged rock formation slams past the glass, blacking out the view for an instant. Coming out of the darkness, the ordinary tunnel is gone. The tracks are now carved into living rock, descending sharply into a vast, open chasm. Far ahead, the first true landmark resolves: the upper spires of an impossibly huge, ancient temple complex, carved from dark stone, glowing with an internal, eerie green light.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "ARRIVAL EDGE. Open on a violent change of light in the first half second: the exposure blows out white or crushes to black and recovers. Then the first landmark grows continuously across the whole shot until it no longer fits inside the window. Show how far down or how far up the place goes. The scale must be frightening.\n\nThe camera jolts violently, the exposure crushes to near black then slowly recovers to reveal a continuous view of the colossal temple complex. Its scale is terrifying, dwarfing the train as it descends alongside, showing how far down it goes. Intricate, moss-covered carvings and enormous, unlit archways disappear into the abyss below the window frame, while strange, phosphorescent plants cling to its upper reaches.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "FLYTHROUGH. Open with that landmark's mass already passing the window at close range, filling the glass and strobing the interior. Maximum parallax: foreground elements cross the frame in a fraction of a second while the true size of the place is revealed by what lies beyond them. Something larger still is already visible ahead.\n\nThe colossal temple's obsidian-like mass is already passing the window at close range, filling the glass and strobing the interior with flashes of internal green light. Foreground elements of ancient, weathered stone columns, adorned with bioluminescent fungi, streak past in a fraction of a second. Beyond them, the true, terrifying scale of Xibalba is revealed: an entire city of similar structures, connected by impossible bridges, stretching into a cavernous, mist-shrouded distance. Something even larger, a cyclopean gate, is already visible ahead.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "DEEPEST SCALE. Open with a hard impact against the glass in the first half second - heat, pressure, spray or a shockwave that jolts the camera and knocks the focus. Then the widest and deepest view of the destination so far, too large for the window to contain. The single most spectacular second of the episode belongs here.\n\nA hard impact against the glass in the first half second – a blast of cold, damp air and spray jolts the camera and blurs the focus. Then, the widest and deepest view of Xibalba so far, a vertigo-inducing panorama. The train races along a narrow ledge, passing the cyclopean gate, which is so immense it occupies half the window. Below, the city plunges into an eternal twilight, illuminated by countless, distant, glowing green and blue lights, too vast for the window to contain. This is the single most spectacular second of the episode.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "HEART AND PAYOFF. Open with the train passing through or beneath something colossal. Travel alone carries it into the centre of the place. At about 8.5 seconds a calm ordinary commuter announcer quietly says the arrival line. Then the chime sounds again, the same voice begins only \"Next stop-\" and the shot ends mid-word while the train is still moving forward and something new is already growing ahead.\n\nThe train passes through a colossal, moss-draped archway, part of the main gate, which briefly blacks out the view. Travel alone carries it into the very heart of the underworld city, a cavernous space where colossal, glowing crystalline formations pierce the darkness. At about 8.5 seconds, a calm ordinary commuter announcer quietly says, \"Welcome to Xibalba.\" Then the chime sounds again, the same voice begins, \"Next stop-\" and the shot ends mid-word while the train is still moving forward, and a massive, glowing blue river, flowing upwards against gravity, is already growing ahead.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "tarih ve kayıp uygarlıklar",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

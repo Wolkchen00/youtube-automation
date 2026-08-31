@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Next Stop: Nova Prime ✨🏙️"
+  },
+  "synopsis": "A regular commute ascends from the familiar surface into a dazzling, vertical mega-city of impossible scale, constructed within a perpetual twilight under an artificial sky.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "HOOK. Open already mid-motion on one ordinary object passing the glass at arm's length, so close and so fast it is only a streak. A dull, grey, utterly routine commute. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line. Nobody reacts and nothing changes. The train immediately accelerates hard. By 6 seconds ONE thing far ahead is unmistakably wrong, and it is already growing.\n\nA blur of grey, rain-slicked concrete passing the window, a routine elevated monorail track above a grimy city. At 1.5 seconds a two-note chime sounds, and a calm neutral announcer says, \"Next stop: Nova Prime.\" Nobody reacts. The train immediately accelerates hard. By 6 seconds, a single, impossibly tall, glowing purple spire, piercing the low clouds, is unmistakably wrong and already growing far ahead.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "HARD BREACH. In the first half second something enormous slams past the glass at arm's length and blacks the frame out for an instant. Coming out of that darkness the ordinary world is already gone and the line has physically committed to the destination with no way back. The shot ends with the destination's first true landmark resolving far ahead.\n\nThe carriage judders hard, blurring the frame. In the first half second, a colossal, chrome-plated support strut slams past the glass at arm's length, blacking out the frame for an instant. Coming out of that darkness, the ordinary city is gone. The line now climbs steeply, entering a vast, enclosed vertical space. Far ahead, the first true landmark resolves: a gigantic, multi-layered urban structure, kilometers high, glowing with a network of cyan and magenta light lines.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "ARRIVAL EDGE. Open on a violent change of light in the first half second: the exposure blows out white or crushes to black and recovers. Then the first landmark grows continuously across the whole shot until it no longer fits inside the window. Show how far down or how far up the place goes. The scale must be frightening.\n\nThe camera jolts violently, the exposure blows out to white then recovers to reveal the continuous ascent alongside the colossal, artificial city-mountain. Its sheer height is frightening, disappearing upwards into a manufactured twilight. Countless glowing sky-bridges, spiraling roadways, and holographic advertisements flicker past, showing how far up the place goes, while massive, humming energy conduits drop below the window.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "FLYTHROUGH. Open with that landmark's mass already passing the window at close range, filling the glass and strobing the interior. Maximum parallax: foreground elements cross the frame in a fraction of a second while the true size of the place is revealed by what lies beyond them. Something larger still is already visible ahead.\n\nThe colossal, crystalline mass of Nova Prime is already passing the window at close range, filling the glass and strobing the interior with flashes of neon light. Foreground elements of flying vehicles, intricate pipe networks, and suspended garden platforms streak past in a fraction of a second. Beyond them, the true size of the place is revealed: an endless, interconnected cityscape sprawling across an artificial firmament. Something larger still, a colossal, glowing central data-spire, is already visible ahead.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "DEEPEST SCALE. Open with a hard impact against the glass in the first half second - heat, pressure, spray or a shockwave that jolts the camera and knocks the focus. Then the widest and deepest view of the destination so far, too large for the window to contain. The single most spectacular second of the episode belongs here.\n\nA hard impact against the glass in the first half second – a powerful electromagnetic discharge jolts the camera and knocks the focus. Then, the widest and deepest view of Nova Prime so far, an awe-inspiring panorama of a synthetic metropolis. The train races through a canyon of towering, illuminated skyscrapers, passing the colossal central data-spire, which is so immense it forms the horizon. Below and above, the city stretches into an infinite, glowing grid of light, too large for the window to contain. This is the single most spectacular second of the episode.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "HEART AND PAYOFF. Open with the train passing through or beneath something colossal. Travel alone carries it into the centre of the place. At about 8.5 seconds a calm ordinary commuter announcer quietly says the arrival line. Then the chime sounds again, the same voice begins only \"Next stop-\" and the shot ends mid-word while the train is still moving forward and something new is already growing ahead.\n\nThe train passes through a colossal, shimmering energy field that briefly blacks out the view. Travel alone carries it into the core of Nova Prime, a vast, open chamber filled with swirling holographic data streams and silent, massive transport conduits. At about 8.5 seconds, a calm ordinary commuter announcer quietly says, \"Welcome to Nova Prime.\" Then the chime sounds again, the same voice begins, \"Next stop-\" and the shot ends mid-word while the train is still moving forward, and a massive, spinning cosmic energy generator is already growing ahead.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "özgün bilim kurgu gelecekleri",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

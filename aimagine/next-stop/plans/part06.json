@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "Next Stop: Hadal Zone 🌊🌌"
+  },
+  "synopsis": "An ordinary commute plunges into the deepest abyss of the ocean, revealing a terrifying, bioluminescent world of crushing pressure and monstrous, ancient life forms.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "HOOK. Open already mid-motion on one ordinary object passing the glass at arm's length, so close and so fast it is only a streak. A dull, grey, utterly routine commute. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line. Nobody reacts and nothing changes. The train immediately accelerates hard. By 6 seconds ONE thing far ahead is unmistakably wrong, and it is already growing.\n\nA blur of grey, rain-streaked urban tunnel passing the window, a routine underground journey. At 1.5 seconds a two-note chime sounds, and a calm neutral announcer says, \"Next stop: Hadal Zone.\" Nobody reacts. The train immediately accelerates hard, vibrations intensify. By 6 seconds, the tunnel walls abruptly end, revealing an impossibly vast, inky blackness, and a single, faint, shimmering bioluminescent organism far ahead is unmistakably wrong and already growing.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "HARD BREACH. In the first half second something enormous slams past the glass at arm's length and blacks the frame out for an instant. Coming out of that darkness the ordinary world is already gone and the line has physically committed to the destination with no way back. The shot ends with the destination's first true landmark resolving far ahead.\n\nThe carriage judders hard, blurring the frame. In the first half second, a massive, unseen force slams against the glass, distorting the view for an instant as if passing through an immense pressure barrier. Coming out of that darkness, the ordinary tunnel is gone. The line now descends sharply into an abyssal trench. The carriage tilts forward, the internal pressure subtly increases. Far ahead, the first true landmark resolves: a colossal, glowing hydrothermal vent structure, kilometers tall, spewing superheated, mineral-rich plumes.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "ARRIVAL EDGE. Open on a violent change of light in the first half second: the exposure blows out white or crushes to black and recovers. Then the first landmark grows continuously across the whole shot until it no longer fits inside the window. Show how far down or how far up the place goes. The scale must be frightening.\n\nThe camera jolts violently, the exposure crushes to black, then slowly recovers to reveal a continuous descent alongside the colossal hydrothermal vent complex. Its scale is terrifying, dwarfing the train as it plunges past. Gigantic, fluorescent tube worms and massive, unknown coral formations cling to its sides, disappearing into the crushing darkness below and above the window frame, illuminated by its internal, eerie yellow glow. The water outside is pitch black save for the vent.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "FLYTHROUGH. Open with that landmark's mass already passing the window at close range, filling the glass and strobing the interior. Maximum parallax: foreground elements cross the frame in a fraction of a second while the true size of the place is revealed by what lies beyond them. Something larger still is already visible ahead.\n\nThe colossal, dark mass of the hydrothermal vent is already passing the window at close range, filling the glass and strobing the interior with flashes of yellow light from its fissures. Foreground elements of enormous, undulating bioluminescent kelp forests and schools of strange, deep-sea creatures streak past in a fraction of a second. Beyond them, the true size of the Hadal Zone is revealed: an endless, dark ocean floor, punctuated by more glowing vents and gargantuan, unseen formations stretching into the crushing depths. Something larger still, a colossal, ancient leviathan, is already visible ahead, barely illuminated.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "DEEPEST SCALE. Open with a hard impact against the glass in the first half second - heat, pressure, spray or a shockwave that jolts the camera and knocks the focus. Then the widest and deepest view of the destination so far, too large for the window to contain. The single most spectacular second of the episode belongs here.\n\nA hard impact against the glass in the first half second – a sudden surge of water pressure and a violent shudder jolts the camera and blurs the focus. Then, the widest and deepest view of the Hadal Zone so far, a terrifying panorama of the abyssal plain. The train races past a gargantuan, ancient leviathan, a creature of unimaginable size with glowing eyes, which is so immense it occupies half the window. The ocean floor stretches into an infinite, inky blackness, dotted with distant bioluminescent organisms, too vast for the window to contain. This is the single most spectacular second of the episode.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "HEART AND PAYOFF. Open with the train passing through or beneath something colossal. Travel alone carries it into the centre of the place. At about 8.5 seconds a calm ordinary commuter announcer quietly says the arrival line. Then the chime sounds again, the same voice begins only \"Next stop-\" and the shot ends mid-word while the train is still moving forward and something new is already growing ahead.\n\nThe train passes through a colossal, cavernous opening formed by enormous, fused mineral deposits, which briefly blacks out the view. Travel alone carries it into the heart of the Hadal Zone, a vast, open abyssal plain teeming with countless, silent, glowing deep-sea organisms. At about 8.5 seconds, a calm ordinary commuter announcer quietly says, \"Welcome to Hadal Zone.\" Then the chime sounds again, the same voice begins, \"Next stop-\" and the shot ends mid-word while the train is still moving forward, and a massive, shimmering, crystalline cavern system is already growing ahead.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "derin zaman ve doğa",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "Next Stop: Io 🌋🪐"
+  },
+  "synopsis": "A city commute spectacularly breaches Earth's atmosphere to arrive at Io, Jupiter's volcanic moon, a landscape of unimaginable heat and constant eruption.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "HOOK. Open already mid-motion on one ordinary object passing the glass at arm's length, so close and so fast it is only a streak. A dull, grey, utterly routine commute. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line. Nobody reacts and nothing changes. The train immediately accelerates hard. By 6 seconds ONE thing far ahead is unmistakably wrong, and it is already growing.\n\nA blur of grey, featureless tunnel wall passing the window, a dull, subterranean commute. At 1.5 seconds a two-note chime sounds, and a calm neutral announcer says, \"Next stop: Io.\" Nobody reacts. The train immediately accelerates hard, vibrations intensify. By 6 seconds, a single, impossibly bright, pulsing red light in the distant blackness ahead is unmistakably wrong and already growing.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "HARD BREACH. In the first half second something enormous slams past the glass at arm's length and blacks the frame out for an instant. Coming out of that darkness the ordinary world is already gone and the line has physically committed to the destination with no way back. The shot ends with the destination's first true landmark resolving far ahead.\n\nThe carriage judders hard, blurring the frame. In the first half second, a brilliant flash of plasma slams against the glass, blacking out the frame for an instant. Coming out of that darkness, the tunnel is gone. The line has physically committed to an upward trajectory into the blackness of space. Earth's curving horizon is visible far below. Far ahead, the first true landmark resolves: the glowing, volcanic plumes of Jupiter's moon, Io, under the immense, swirling clouds of Jupiter itself.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "ARRIVAL EDGE. Open on a violent change of light in the first half second: the exposure blows out white or crushes to black and recovers. Then the first landmark grows continuously across the whole shot until it no longer fits inside the window. Show how far down or how far up the place goes. The scale must be frightening.\n\nThe camera jolts violently, the exposure blows out to white with a plasma flare across the glass, then recovers to reveal the continuous approach to Io. Its scale is frightening, the entire moon filling the distant view, showing how far down its surface extends below the train. Rivers of molten lava and towering volcanic vents erupt continuously, painting the dark sky with fiery orange and sulfurous green, making the planet itself the landmark.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "FLYTHROUGH. Open with that landmark's mass already passing the window at close range, filling the glass and strobing the interior. Maximum parallax: foreground elements cross the frame in a fraction of a second while the true size of the place is revealed by what lies beyond them. Something larger still is already visible ahead.\n\nThe colossal, volcanic surface of Io is already passing the window at close range, filling the glass and strobing the interior with intense, flickering orange and yellow light from lava flows. Foreground elements of rapidly cooling lava rock formations and steaming sulfur vents streak past in a fraction of a second. Beyond them, the true size of Io is revealed: an entire world of active volcanoes and vast plains of hardened lava, all under the colossal, swirling eye of Jupiter, which fills the distant horizon. Something larger still, a supervolcano in full eruption, is already visible ahead.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "DEEPEST SCALE. Open with a hard impact against the glass in the first half second - heat, pressure, spray or a shockwave that jolts the camera and knocks the focus. Then the widest and deepest view of the destination so far, too large for the window to contain. The single most spectacular second of the episode belongs here.\n\nA hard impact against the glass in the first half second – a surge of superheated volcanic ash and a violent shockwave jolts the camera and blurs the focus. Then, the widest and deepest view of Io so far, a breathtaking panorama of a volcanic hellscape. The train races over a vast, molten lake, passing a colossal supervolcano in full eruption, its plume towering higher than mountains, so immense it occupies half the window. The entire surface of Io stretches into an infinite, fiery expanse of lava and ash, too vast for the window to contain. This is the single most spectacular second of the episode.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "HEART AND PAYOFF. Open with the train passing through or beneath something colossal. Travel alone carries it into the centre of the place. At about 8.5 seconds a calm ordinary commuter announcer quietly says the arrival line. Then the chime sounds again, the same voice begins only \"Next stop-\" and the shot ends mid-word while the train is still moving forward and something new is already growing ahead.\n\nThe train passes through a colossal, arching plume of volcanic ash and superheated gases, which briefly blacks out the view. Travel alone carries it into the heart of Io's most active volcanic region, a vast, open plain where lava rivers converge and new land is constantly being formed. At about 8.5 seconds, a calm ordinary commuter announcer quietly says, \"Welcome to Io.\" Then the chime sounds again, the same voice begins, \"Next stop-\" and the shot ends mid-word while the train is still moving forward, and a massive, ancient, glowing caldera is already growing ahead.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "gerçek bilim ve uzay",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}

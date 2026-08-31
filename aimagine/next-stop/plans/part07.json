@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Next Stop: The Maw ⚙️🌑"
+  },
+  "synopsis": "An everyday journey plunges into the colossal, derelict heart of a forgotten industrial complex, where the silence and scale create an unnerving sense of unease.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "HOOK. Open already mid-motion on one ordinary object passing the glass at arm's length, so close and so fast it is only a streak. A dull, grey, utterly routine commute. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line. Nobody reacts and nothing changes. The train immediately accelerates hard. By 6 seconds ONE thing far ahead is unmistakably wrong, and it is already growing.\n\nA blur of ordinary suburban concrete wall passing the window, a routine morning commute. At 1.5 seconds a two-note chime sounds, and a calm neutral announcer says, \"Next stop: The Maw.\" Nobody reacts. The train immediately accelerates hard. By 6 seconds, a single, impossibly vast, rusted metal wall, covered in dark, cavernous openings, is unmistakably wrong and already growing far ahead.",
+      "seed": null,
+      "chain": false
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "HARD BREACH. In the first half second something enormous slams past the glass at arm's length and blacks the frame out for an instant. Coming out of that darkness the ordinary world is already gone and the line has physically committed to the destination with no way back. The shot ends with the destination's first true landmark resolving far ahead.\n\nThe carriage judders hard, blurring the frame. In the first half second, a colossal, corroded girder slams past the glass at arm's length, blacking out the frame for an instant. Coming out of that darkness, the suburban landscape is gone. The line has committed to a track plunging into a massive, dark tunnel leading into an immense, derelict structure. Far ahead, the first true landmark resolves: a gigantic, unmoving cog, hundreds of meters across, half-submerged in black, stagnant water.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 3,
+      "duration": "10",
+      "prompt": "ARRIVAL EDGE. Open on a violent change of light in the first half second: the exposure blows out white or crushes to black and recovers. Then the first landmark grows continuously across the whole shot until it no longer fits inside the window. Show how far down or how far up the place goes. The scale must be frightening.\n\nThe camera jolts violently, the exposure crushes to black, then slowly recovers to reveal a continuous view of the colossal, rusted machinery. Its scale is frightening, dwarfing the train as it passes alongside. Enormous, silent pistons, long since frozen in place, and vast, dark conveyor belts disappear into the oppressive gloom below and above the window frame, illuminated only by sparse, flickering amber hazard lights from within.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 4,
+      "duration": "10",
+      "prompt": "FLYTHROUGH. Open with that landmark's mass already passing the window at close range, filling the glass and strobing the interior. Maximum parallax: foreground elements cross the frame in a fraction of a second while the true size of the place is revealed by what lies beyond them. Something larger still is already visible ahead.\n\nThe colossal, corroded mass of a silent, abandoned turbine is already passing the window at close range, filling the glass and strobing the interior with erratic flickers of amber light. Foreground elements of broken catwalks, dangling cables, and massive, unlit ventilation shafts streak past in a fraction of a second. Beyond them, the true size of The Maw is revealed: an endless, interconnected network of decaying industrial structures, stretching into a perpetual, dusty twilight. Something larger still, a colossal, circular excavation pit, is already visible ahead.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 5,
+      "duration": "10",
+      "prompt": "DEEPEST SCALE. Open with a hard impact against the glass in the first half second - heat, pressure, spray or a shockwave that jolts the camera and knocks the focus. Then the widest and deepest view of the destination so far, too large for the window to contain. The single most spectacular second of the episode belongs here.\n\nA hard impact against the glass in the first half second – a shower of rust particles and a violent clanking sound jolts the camera and blurs the focus. Then, the widest and deepest view of The Maw so far, a chilling panorama of industrial decay. The train races along a precarious track, passing the colossal, circular excavation pit, which is so immense it forms a gaping maw in the ground, descending into unseen depths. The surrounding complex stretches into an infinite, silent labyrinth of metal and shadow, too vast for the window to contain. This is the single most spectacular second of the episode.",
+      "seed": null,
+      "chain": true
+    },
+    {
+      "n": 6,
+      "duration": "10",
+      "prompt": "HEART AND PAYOFF. Open with the train passing through or beneath something colossal. Travel alone carries it into the centre of the place. At about 8.5 seconds a calm ordinary commuter announcer quietly says the arrival line. Then the chime sounds again, the same voice begins only \"Next stop-\" and the shot ends mid-word while the train is still moving forward and something new is already growing ahead.\n\nThe train passes through a colossal, multi-layered airlock door, formed from rusted steel plates, which briefly blacks out the view. Travel alone carries it into the very heart of The Maw, a vast, echoing chamber filled with the skeletal remains of titanic, unknown machinery. At about 8.5 seconds, a calm ordinary commuter announcer quietly says, \"Welcome to The Maw.\" Then the chime sounds again, the same voice begins, \"Next stop-\" and the shot ends mid-word while the train is still moving forward, and a massive, silent, glowing core of unknown energy is already growing ahead.",
+      "seed": null,
+      "chain": true
+    }
+  ],
+  "family": "gerilim ve tekinsizlik",
+  "hook_shot": 6,
+  "doctrine_sha256": "e01e3735c73c80d70dfe04900a32eb63715975e12aec302c7fecc75ce457e06a"
+}
