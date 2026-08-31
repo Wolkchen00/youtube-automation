@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 25,
-  "next_part": 21,
+  "next_part": 22,
   "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
   "auto_replenish": {
     "enabled": true,
@@ -408,7 +408,17 @@
       "published_at": "2026-08-27T00:12:08.555706+00:00"
     },
     "21": {
-      "status": "planned"
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep21/ep21_narrated_music_titled.mp4",
+      "subtitle": "The Real Reason Cleopatra Ruled Without Translators",
+      "stack_sha256": "188a1e5265e4a1fed5269ca9a02c6b4481e9278eb4409bf8961d0f5097d51859",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-31T22:29:24.034544+00:00"
     }
   }
 }
