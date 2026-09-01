@@ -1,7 +1,9 @@
 # RF-PLAN , Sentinal Ihsan kanalinin dirilisi + "yapmacik" sorununun kokunden cozumu
 
 **Tarih:** 2026-09-01 · **Surucu:** Claude (Visionary) · **Inceleyen:** Codex (Integrator)
-**Revizyon:** r5 (Codex tur 1-3: 60 bulgu · bagimsiz panel: 5 blocking · ROCK 0 canli sonucu)
+**Revizyon:** r6 (Codex tur 1-4: 71 bulgu · bagimsiz panel: 5 blocking · ROCK 0 canli sonucu)
+**Not:** r6'da tum duzeltmeler rock GOVDELERINE islendi; r5'in EK bolumu kaldirildi,
+kanitlar §8 defterine tasindi (Codex tur-4 yapisal bulgusu).
 **Kapsam:** `sentinal_ihsan/unnatural-lab` hatti (kanal: @sentinalihsandaily,
 `UC-Aht8VqAUMTUKYRQA3agYQ`). ROCK 2 ve ROCK 3 ortak motoru degistirir , patlama yaricapi
 **12 workflow** `series_runner`'i cagiriyor, **5 workflow** `last_run.json` semasini yaziyor
@@ -193,432 +195,331 @@ yayini durdurabilir).
 
 ## 4. ROCK'LAR
 
-**[Codex tur-3 FIX kabul , sira DUZELTILDI]** Tur-2'de onerdigim sira hatali idi: ROCK 4c'nin
-10 bolumluk penceresi boyunca alarmlar kirik ve yesil isik yalanci kalirdi , yani kalite
-deneyini tam da kanalin sessizce olebildigi kosullarda kosardim. Dogru sira:
+**[Codex tur-4 FIX kabul , YAPISAL]** r5'te zorunlu duzeltmeler bir EK'te duruyordu, rock
+govdeleri onlarla celisiyordu , bir gelistirici ROCK 3'u okuyup yanlis seyi insa ederdi.
+r6'da tum duzeltmeler **rock govdelerinin ve proof'larinin ICINE** islendi; ek kaldirildi,
+yerine §8 kanit defteri kondu.
 
-**ROCK 0 (hemen) -> ROCK 1 (Sentinal canary) -> ROCK 2 + ROCK 3'un REPO ICI kismi
-(guvenilirlik tabani, filoya yayilim BLOKE watchdog isinden bagimsiz) -> ROCK 4a pilot
--> ROCK 4b duzeltmeler -> ROCK 4c 10 bolumluk pencere.**
+**Sira:** ROCK 0 (KAPANDI) -> **ROCK 1a defter** -> **ROCK 1b QC kapasitesi** ->
+ROCK 1c durum makinesi (Sentinal canary) -> ROCK 2 alarm -> ROCK 3 repo ici olcum ->
+ROCK 3d nobetci (ayri repo) -> ROCK 4a pilot -> 4b kosullandirma -> 4c pencere.
 
-ROCK 3'un watchdog'a bagli 5-6. maddeleri ayri ve BLOKE kalir; repo ici kismi (RunResult,
-dogrulanmis yayin damgasi, cifte yukleme korumasi) ROCK 4c'den ONCE biter.
+---
 
-### ROCK 0 , Acil dirilis: bugun video ciksin  [elle, ~30 dk]
-1. **Ihsan onayi olmadan baslamaz** (Bolum 5, soru 1): workflow neden kapali?
-   Onay gelirse `gh workflow enable .github/workflows/unnatural-lab.yml
-   --repo Wolkchen00/youtube-automation`, sonra `gh workflow list` ile `active` dogrula.
-2. **[Codex FIX kabul]** Kredi defteri **SIFIRLANMAZ** , 436 gercek harcamadir.
-   Secenek: (i) part 23 `skipped` + part 24'ten devam, (ii) kayda gecen tek seferlik
-   tavan istisnasi. Gercek tavan **800**, kalan **364** (Codex tur-2 kesinlestirdi:
-   yol `produce.episode_credit_cap(bible)` -> `credit_gate.reserve`).
-3. **[Codex FIX kabul]** Part 23 atlanacaksa `status="skipped"` + `skip_reason` yazilir,
-   `next_part` **atomik** ilerletilir; nonterminal hold birakilmaz.
-4. "state_carry zincirini duzelt" onerisi **dusuruldu** (2.3).
-5. `workflow_dispatch` ile tetikle.
+### ROCK 0 , KAPANDI: uygulandi, BASARISIZ  [Codex tur-4 KILL kabul]
 
-**Done:** kanalda **bugun tarihli, beklenen bolume ait** yeni video var.
-**Proof , [Codex tur-2 FIX kabul] onceki surum BUGUN DE GECIYORDU** (bayat part-22 kimligi
-hem `published.json`'da hem RSS'te ayni). Bu yuzden dort kosul birden aranir:
+1 Eylul'de uygulandi: workflow `active` yapildi, part 23/24 `skipped`, part 25 kuyudan
+kurtarildi, part 24/25/26 cekim 1 promptlari duzeltildi. **Uc kosu, sifir yayin.**
+Ayrintili kanit: §8.
 
-**[Codex tur-3 FIX kabul]** Bolum ve baslik kontrolu de duz yazi degil, **assert** olmali
-(`EXPECTED_PART` kurtarma karari verilirken , Bolum 5 soru 2 , sabitlenir):
+**Durum: EXECUTED-BUT-UNSUCCESSFUL.**
+**[Codex tur-4 KILL kabul] YASAK:** ROCK 1a, 1b, 2 ve 3'un Done kapilari gecmeden
+**hicbir uretim retry'i tetiklenmeyecek**. Her deneme kalici bolum butcesinden yiyor ve
+bugun yayin uretmeden ~1300 kredi yakildi.
 
-    EXPECTED_PART=24 python - <<'EOF'
-    import json,re,os,unicodedata,urllib.request,datetime
-    exp=int(os.environ['EXPECTED_PART'])
-    d=json.load(open('sentinal_ihsan/unnatural-lab/published.json',encoding='utf-8'))[-1]
-    vid=d['results']['youtube']; part=d['part']; sub=d['subtitle']
-    x=urllib.request.urlopen(
-      'https://www.youtube.com/feeds/videos.xml?channel_id=UC-Aht8VqAUMTUKYRQA3agYQ',
-      timeout=30).read().decode()
-    e=x[x.index('<entry>'):]
-    top_id=re.search(r'<yt:videoId>([^<]+)</yt:videoId>',e).group(1)
-    top_pub=re.search(r'<published>([^<]+)</published>',e).group(1)
-    top_title=re.search(r'<title>([^<]*)</title>',e).group(1)
-    norm=lambda s:unicodedata.normalize('NFKC',s).casefold().strip()
-    today=datetime.datetime.now(datetime.timezone.utc).date().isoformat()
-    checks={'id eslesti':vid==top_id,'beklenen bolum':part==exp,
-            'bugun yayinlandi':top_pub[:10]==today,'baslik eslesti':norm(sub)==norm(top_title)}
-    for k,v in checks.items(): print(f'{k:20}: {v}')
-    assert all(checks.values()), f'ROCK 0 BASARISIZ: {checks}'
-    EOF
+**Kalici kazanim (yok sayilmamali):** cekim 1 "kurulmus durum" duzeltmesi tuttu ,
+part 24'te regen 1 sonrasi, part 25'te **ilk denemede** gecti. Ilk-kare kusuru cozulmustur.
 
-### ROCK 1 , Gecici altyapi arizasi kalici olum olmasin  [once YALNIZ Sentinal , canary]
-0. **[Codex tur-3 FIX kabul , canary'nin ON KOSULU]** "Yalniz Sentinal'de dene" ortak
-   runner'da **mumkun degil**: `series_runner`'i degistirmek 12 workflow'u aninda etkiler.
-   Bu yuzden ilk is bir **seri-basi durum makinesi surum bayragi** (`bible.json >
-   series.state_machine_version`, varsayilan = eski davranis). Yeni yol yalnizca bayrak
-   aciksa calisir. Kanit sarti: **bayrak kapaliyken davranisin BIREBIR eskisi oldugu**
-   test edilir (legacy-off testi), migrasyon yalnizca `unnatural-lab`'a uygulanir.
-1. **[Codex tur-2 FIX kabul] TEK dayanikli referans stratejisi**, yalniz QC indirmesi
-   degil: **obje referansi, ortam referansi ve zincir karesi** ucu birden ayni kalici
-   kaynaktan gelir. Repoya gomulu hash'li dosya QC icin yeterli ama uretim motoru
-   **public URL** istiyor , bu yuzden strateji "kalici depo + deterministik public URL"
-   olarak tek yerde tanimlanir. Cozulmeden ROCK 4 baslamaz.
-2. **[Codex tur-2 FIX kabul] Geri cekilme sayilari SIMDI sabitlenir**, implementasyona
-   birakilmaz: 5 deneme, gecikmeler 2/5/10/20 sn + ±%20 jitter, **toplam son tarih 90 sn**.
-   En kotu durum aritmetigi testte assert edilir.
+---
+
+### ROCK 1a , Defter catisma kurtarma  [ROCK 1c'nin ON KOSULU]
+
+**Neden once bu:** `scripts/merge_credits_ledger.py:36-41` korumasi `set(doc) == {"entries"}`;
+canli defterde `{'entries','episode_spend'}` var (`episode_spend` 2026-08-28'de eklendi,
+script 2026-08-13'te yazildi). Bu makinede calistirdim: `is_ledger(canli) = False`.
+Sonuc: es zamanli kosuda defter catisirsa `persist_state.sh` fail-closed dala girer ve
+**durum commit'inin TAMAMI duser** , `series.json` ilerlemesi, `published.json`,
+`last_run.json` ve ROCK 2'nin alarm outbox'i repoya hic ulasmaz.
+Ayrica satir 74 dosyayi `{"entries": merged}` olarak yeniden yazar , **`episode_spend`'i
+SILER**, yani `credit_gate`'in dayandigi bolum muhasebesi ucar.
+**[Codex tur-4 FIX kabul]** ROCK 1c'nin "tek yetkili sayac" iddiasi ve ROCK 2'nin outbox'i
+ikisi de bu kirik yolun uzerinde duruyor , ayri rock degil, ON KOSUL.
+
+**Ne:** sema-koruyan uc-yollu defter catisma cozumu. `episode_spend` dahil bilinen tum
+ust seviye anahtarlar korunur; bilinmeyen anahtar gorulurse fail-closed.
+**Done:** es zamanli iki kosunun defter catismasi veri kaybetmeden birlesir.
+**Proof:** `python -m pytest tests/test_ledger_merge.py -q` , (a) ayrik anahtarlar
+birlesir, (b) **ayni anahtarda ayrisan degerler** icin tanimli ve test edilmis kural,
+(c) `episode_spend` her senaryoda korunur, (d) bilinmeyen sema -> fail-closed,
+(e) **uctan uca:** yapay catisma kurulur, `persist_state.sh` kosar, `series.json` +
+`published.json` + `last_run.json` + outbox'in HEPSI commit'te bulunur.
+
+---
+
+### ROCK 1b , QC kapasitesi: kota bir "retry" degil, bir KAPASITE sorunu  [ON KOSUL]
+
+**[Codex tur-4 FIX kabul]** r5'te `QUOTA` yalnizca "retryable" bir neden koduydu. EK-7
+bunu curuttu: 1 Eylul 19:25-19:29'da birincil `gemini-2.5-flash` **429 RESOURCE_EXHAUSTED**,
+yedek `gemini-flash-latest` **503 UNAVAILABLE** verdi ve bolum yayinlanamadi. Filo ortak
+kota Sentinal'in gunluk slotuna sira gelmeden tukeniyor (dunku flashpoints planinin
+Olgu 8'i, ayni sinif). Retry mantigi bunu **cozmez**: ertesi gun ayni saatte kota yine bos olur.
+
+**Ne:** canary, **bir tam gunluk bolume yetecek AYRILMIS ya da IZOLE QC kapasitesi**
+uzerine kurulur. Secenekler (Ihsan karari, §5 soru 2): ayri proje+anahtar, faturalandirma
++ harcama tavani, hat basina QC butcesi, ya da sira adaleti.
+**Done:** Sentinal'in gunluk slotunda bir bolumun TUM QC cagrilarini yapabilecek kapasite
+olculebilir sekilde ayrilmis.
+**Proof:** `python tools/qc_call_census.py --days 7` ile gun x hat x model x sonuc tablosu
+**artı** ayrilmis kapasiteyle kosan **gercek bir ZAMANLANMIS kosu** (elle tetikleme degil)
+QC'yi 429/503 almadan bastan sona tamamlar.
+
+---
+
+### ROCK 1c , Gecici ariza kalici olum olmasin  [Sentinal canary]
+
+0. **Canary'nin on kosulu:** ortak runner'da "yalniz Sentinal'de dene" imkansiz ,
+   `series_runner`'i degistirmek 12 workflow'u aninda etkiler. Bu yuzden seri-basi
+   `bible.json > series.state_machine_version` bayragi, **varsayilan eski davranis**.
+   Bayrak kapaliyken davranisin BIREBIR eskisi oldugu test edilir; migrasyon yalniz
+   `unnatural-lab`'a uygulanir.
+1. **Tek dayanikli referans stratejisi:** obje referansi, ortam referansi ve zincir karesi
+   ucu birden ayni kalici kaynaktan. Uretim motoru public URL istedigi icin strateji
+   "kalici depo + deterministik public URL" olarak TEK yerde tanimlanir.
+2. **Geri cekilme sabit:** 5 deneme, 2/5/10/20 sn + ±%20 jitter, **toplam son tarih 90 sn**;
+   en kotu durum aritmetigi testte assert edilir.
 3. **Tipli neden kodu:** `QUOTA`, `REF_DOWNLOAD`, `FRAME_EXTRACT`, `AUDIO_MASTER`,
-   `CONTENT_REJECT`, `UNKNOWN`. Varsayilan retryable; istisnalar acik listede.
-4. **[Codex FIX kabul]** Tek sinirli deneme politikasi `generation_fail` ve icerik reddi
-   dahil **her** terminal-olmayan uretim sonucuna uygulanir.
-5. **[Codex FIX kabul] Kontrol noktalari ayrilir:** uretim / Release / onay karti /
-   platform yuklemesi. Telegram ya da Release patladiginda video **yeniden URETILMEZ**.
-6. **[Codex FIX kabul]** `retry_spent` EKLENMEZ; `credits_ledger.json` tek yetkili sayac.
-7. **[Codex FIX kabul]** 3 denemeden sonra bolum olu-mektup: `status="needs_human"` +
-   kanaldan dusurulur, `run_next` sonraki uygun bolume gecer, escalation devam eder.
-   **[Codex tur-2 FIX kabul]** Olu-mektup **terminallestirilir ve `next_part` isaretcisi
-   secilen sonraki bolum URETILMEDEN ONCE atomik ilerletilir** , yoksa mevcut `advance()`
-   semantigi part 24'u yayinlarken isaretciyi 24'te birakabilir.
-8. **[Codex FIX kabul] Gecis:** diskteki bozuk `awaiting_approval` kayitlari (part 23 ve
-   diger hatlar) idempotent migrasyonla siniflandirilir , yeni runner calismadan ONCE.
-9. `awaiting_approval` yalniz `video` + `release_tag` + `approval_msg_id` ucu doluyken.
-
-**Done:** imgbb dusse hat kendiliginden toparlanir; tek kotu bolum kanali durduramaz.
+   `CONTENT_REJECT`, `BUDGET_EXHAUSTED`, `UNKNOWN`. Varsayilan retryable; istisnalar acik listede.
+4. Tek sinirli deneme politikasi `generation_fail` ve icerik reddi dahil **her**
+   terminal-olmayan uretim sonucuna uygulanir.
+5. **Kontrol noktalari ayrilir:** uretim / Release / onay karti / platform yuklemesi.
+   Telegram ya da Release patladiginda video **yeniden URETILMEZ**.
+6. `retry_spent` EKLENMEZ; `credits_ledger.json` tek yetkili sayac (ROCK 1a onu onarir).
+7. 3 denemeden sonra olu-mektup: `needs_human` + kanaldan dusurulur, `run_next` sonraki
+   uygun bolume gecer, escalation surer. Olu-mektup **terminallestirilir** ve `next_part`
+   secilen bolum URETILMEDEN ONCE atomik ilerletilir.
+8. **Gecis:** diskteki bozuk `awaiting_approval` kayitlari idempotent migrasyonla
+   siniflandirilir , yeni runner calismadan ONCE.
+9. `awaiting_approval` yalniz `video` + `release_tag` + `approval_msg_id` ucu doluyken yazilir.
+10. **[Codex tur-4 FIX kabul , YENI] Butce tukenmesi normatif gecistir.** r5'te yalnizca
+    "kredi butcesi asilirsa retry durur" yaziyordu; bu, bolumu **secili ama bitirilemez**
+    birakiyordu (part 24 bugun tam bunu yasadi: 512/800, kalan 288, dort ana cekim icin
+    muhafazakar taban 400). Kural: **her ucretli cagridan ONCE** kalan kredi ile
+    *muhafazakar asgari tamamlama maliyeti* karsilastirilir; yetmiyorsa bolum atomik olarak
+    `budget_exhausted` diye **terminallestirilir**, alarm gider, `next_part` ilerler.
+**Done:** imgbb/kota dususe bile hat kendiliginden toparlanir; tek kotu bolum kanali durdurmaz.
 **Proof:** `python -m pytest tests/test_hold_recovery.py -q` , hold->retry->yayin;
 `REF_DOWNLOAD` retryable; 3 denemeden sonra olu-mektup + **sonraki bolum uretilir ve
-isaretci once ilerler**; kredi butcesi asilirsa retry durur; her eksik-artefakt vakasi
-`awaiting_approval` YAZMAZ; migrasyon idempotent; **iki ardisik temiz checkout kosusu
-disaridaki imgbb kapaliyken gecer**; geri cekilme en kotu suresi 90 sn'yi asmaz.
+isaretci once ilerler**; her eksik-artefakt vakasi `awaiting_approval` YAZMAZ; migrasyon
+idempotent; **iki ardisik temiz checkout kosusu disaridaki imgbb kapaliyken gecer**;
+geri cekilme en kotu suresi 90 sn'yi asmaz; **butce yetmeyen bolumde EK HARCAMA SIFIR
+oldugu assert edilir** ve durum `budget_exhausted` olur.
 
-### ROCK 4 , Sahne butunlugu: ONCE PILOT, sonra dar mudahale  [ROCK 1'den sonra]
-**[Codex KILL kabul]** Salt-olcum rock'i kapatilabilir ve izleyici sahte video izlemeye
-devam eder. Elle denetim bugun yapildi (2.2, artefaktlar
-`sentinal_ihsan/measurements/contact_sheets_2026-09-01/`).
-
-**4a , YAYINLANMAYAN ESLI PILOT (once bu).** **[Codex tur-2 FIX kabul]** 10 bolumluk
-deneye girmeden once, ayni plandan iki uretim: biri bugunku ayarla, biri gorsel
-kosullandirma acikken. Ikisi de yayinlanmaz; kontakt sayfalari karsilastirilir.
-Pilot sahne butunlugunde fark uretmezse ROCK 4 **durur** ve hipotez reddedilir.
-
-**[Codex tur-3 FIX kabul , pilotun kendisi gecerli olmali]** Planlarda `"seed": null`
-(bkz. `plans/part23.json`), yani kol basina TEK uretim salt model rastgeleligini olcer ve
-kosullandirmayi yanlislikla dogrulayabilir ya da reddedebilir. Sart: **acik ve kollar
-arasi AYNI seed'ler**, **birden fazla esli tekrar** (en az 3 cift, 3 farkli obje/ortam) ve
-**onceden yazilmis sahne-sureklilik rubrigi** (ayni yuzey / ayni isik / ayni kamera konumu /
-obje konum tutarliligi , her biri gec-kal ikili). Degerlendirme **kor**: sayfalar
-etiketsiz karistirilarak puanlanir.
-
-**4b , Kosullandirmayi acmadan once kapatilmasi ZORUNLU uc kusur** (ucu de Codex tur-2,
-ucunu de kodda dogruladim , acilirsa uretimi BOZAR):
-- **`chain_scope` varsayilani `"series"`** (`series/bible.py:209`). `chain_frames` acilip
-  `chain_scope="episode"` acikca yazilmazsa **bolum 24, bolum 23'un son karesinden
-  baslar**. ROCK 4 `chain_scope="episode"` yazar ve test eder.
-- **Baglama sirasi bozuk** (`series/produce.py:1337-1341`): `resolve_shot` prompt'un
-  numarali gorsel baglamalarini kurduktan SONRA zincir karesi `image_urls`'in **basina**
-  ekleniyor. Prompt "gorsel 1 = obje, gorsel 2 = oda" derken 1. sira artik onceki karedir.
-  Duzeltme: tam sirali referans listesi **once** kurulur, etiketler ondan turetilir ve
-  URL-etiket karsiligi assert edilir.
-- **Sessiz geri dusme:** zincir karesi cikarilip imgbb'ye yukleniyor; yukleme patlarsa
-  kosullandirma olmadan **sessizce devam** ediyor. Payload testi mutlu yolda gecerken
-  uretim bagimsiz cekimlere donuyor. Duzeltme: fail-closed ya da ROCK 1'in kalici referans
-  servisi + **yukleme-patlamasi dusman testi**.
-- **[Codex tur-2 FIX kabul] Yeni hata sinifi:** son-kare zinciri, kabul edilmis kucuk bir
-  artefakti ya da kotu obje duruşunu sonraki tum cekimlere tasiyabilir. Zincir karesi
-  **uygunluk QC'si** + metin-uretimine sessizce donmeyen **kanonik sahneye sifirlama** yolu.
-
-**4c , 10 bolumluk pencere (yalniz 4a gecerse).**
-- Tek degisken: gorsel sureklilik. Obje havuzu, baslik kaliplari, anlatim, sure, yuz kurali
-  **degismez**.
-- **[Codex tur-2 FIX kabul] Gozle kabul 3 degil 10 bolumun HEPSINDE**, ve **yayindan
-  ONCE**: her bolumun son kontakt sayfasi bakilir, karar kayda gecer.
-  **[Codex tur-3 FIX kabul , yoksa kalite kapisi gunluk yayini durdurur ve CORE FOCUS'u
-  ihlal eder]** Bu inceleme havada kalmaz, **mevcut artefakt-tam onay kontrol noktasina**
-  baglanir (`publish_mode="approval"` yolu; ROCK 1'in sarti geregi `video`+`release_tag`+
-  `approval_msg_id` ucu de dolu, yani onay karti gercekten yenilenebilir). Iki kural:
-  (i) inceleme **SLA'si 12 saat**, asilirsa alarm; (ii) pencere boyunca **en az 1 onaylanmis
-  bolum onde tutulur** (tampon), boylece inceleme gecikse bile o gunun yayini cikar.
-  Tampon biterse bu bir **alarm**dir, sessiz duraklama degil.
-- **[Codex tur-2 FIX kabul] Taban yeniden kurulur:** bugunku 7,54 karisik yasta olculdu;
-  karsilastirma icin **sabit 72 saat yasta** taban yeniden hesaplanir. Karar bantlari ve
-  istatistik **onceden** yazilir.
-- **[Codex tur-2 FIX kabul] Kalite hedefi acik kalir:** L/1k 30'a ulasmadan bu is "baska
-  deney secerek" Done ilan EDILEMEZ. 30'a ulasilir ya da Ihsan acik bir pivot/kill karari
-  verir. 7,54'un altina duserse mudahale geri alinir.
-- **Kill-gate:** stack parmak izi degisecegi icin `K8_KILL_GATE_PENCERESI.md` geregi yeni
-  pencere acilir, kayda gecer.
-
-**Proof:**
-1. `python -m pytest tests/test_shot_conditioning.py -q` , `chain_scope="episode"`
-   zorunlu; URL-etiket karsiligi assert; **zincir yuklemesi patarsa uretim baslamaz**
-   (dusman testi); bolumler arasi tasima YOK.
-2. 4a pilotunun iki kontakt sayfasi ve karsilastirma notu.
-3. 10 bolumun her biri icin yayin-oncesi gorsel kabul kaydi.
-4. Sabit-72-saat taban ve onceden yazilmis karar bandi raporu.
+---
 
 ### ROCK 2 , Alarm kirilmasin
-1. **[Codex FIX kabul]** Kritik alarmlar **`parse_mode` olmadan** gonderilir (kacis+fallback
-   yerine, daha basit). Markdown yalnizca sunum mesajlarinda.
+
+1. Kritik alarmlar **`parse_mode` olmadan** gonderilir (kacis+fallback yerine, daha basit).
 2. `send_message` yapisal sonuc doner; `last_run.json`'a dokunmaz.
-3. **Outbox:** teslim edilemeyen kritik alarm dosyaya yazilir, durum commit'iyle kalici
-   olur, sonraki kosuda yeniden denenir; teslim edilene kadar `outcome=failure`.
-4. **[Codex FIX kabul] Sira baglayici:** outbox bosaltimi **son `if: always()` persist
-   adimindan ONCE**; gercek workflow sirasi test edilir.
-5. **[Codex tur-2 FIX kabul] Checkout patlarsa repodaki alarm kodu YOKTUR.** Bu yuzden
-   ayri, **checkout'tan bagimsiz** dogrudan bildirim adimi (inline curl + secret) eklenir
-   ve checkout/pip/import patlamalari workflow duzeyi proof'a dahil edilir.
-
+3. **Outbox:** teslim edilemeyen kritik alarm dosyaya yazilir, durum commit'iyle kalici olur,
+   sonraki kosuda yeniden denenir; teslim edilene kadar `outcome=failure`.
+4. **Sira baglayici:** outbox bosaltimi **son `if: always()` persist adimindan ONCE**.
+5. Checkout patlarsa repodaki alarm kodu YOKTUR -> ayri, **checkout'tan bagimsiz** dogrudan
+   bildirim adimi; checkout/pip/import patlamalari workflow duzeyi proof'a dahil.
 **Done:** icinde `_`, `*`, `[` gecen alarm her zaman ulasir; ulasmazsa hat kirmizi olur.
-**Proof:** `python -m pytest tests/test_notifier_entity_fallback.py -q` **+ [Codex FIX
-kabul]** `_alert` dahil TUM kritik cagri yollari runner cikis kodu + outbox olusumu +
-sonraki kosuda teslim uzerinden; **+ checkout-basarisiz senaryosunun workflow testi**.
+**Proof:** `python -m pytest tests/test_notifier_entity_fallback.py -q` + `_alert` dahil TUM
+kritik cagri yollari (runner cikis kodu + outbox olusumu + sonraki kosuda teslim) +
+checkout-basarisiz workflow testi
+**+ [Codex tur-4 FIX kabul] uctan uca:** ROCK 1a'nin catisma senaryosu altinda outbox
+kaydinin commit'te HAYATTA KALDIGI gosterilir , aksi halde alarm testi gecerken gercek
+alarm sessizce kaybolur.
 
-### ROCK 3 , Yesil isik gercek yayini olcsun + KAPALI WORKFLOW nobeti  [surum kapisi]
+---
+
+### ROCK 3 , Yesil isik gercek yayini olcsun  [repo ici]
+
 1. Tipli `RunResult` + tek atomik yazici.
-2. `last_run.json` semasi korunur; `action` ve `last_youtube_publish_at` eklenir.
-   **Gecis:** damga `published.json`'daki son dogrulanmis yayindan tohumlanir; yayin
-   olmayan her sonuc onu **degistirmeden birakir**.
-3. **[Codex FIX kabul]** `action=published` icin 11 karakterlik bicim yeterli degil ,
-   kimlik YouTube RSS/API ile dogrulanir.
-   **[Codex tur-2 FIX kabul , CIFTE YUKLEME RISKI]** RSS/API yayilimi gecikirse basarili
-   bir yukleme "failed" sayilip retry'de **ikinci kez yuklenebilir**. Bu yuzden
-   `uploaded_pending_verification` kontrol noktasi: mevcut kimlik yoklanir, dogrulama
-   belirsizken **asla yeniden POST edilmez**.
-   **[Codex tur-3 FIX kabul , bu kontrol noktasinin KENDI on kosulu var]** Mevcut yukleyici
-   HTTP 200 donen ama **hicbir kimlik icermeyen** cevaplari kabul ediyor
+2. `last_run.json` semasi korunur; `action` ve `last_youtube_publish_at` eklenir. Damga
+   `published.json`'daki son dogrulanmis yayindan tohumlanir; yayin olmayan her sonuc onu
+   **degistirmeden birakir**.
+3. `action=published` icin 11 karakterlik bicim yeterli degil , kimlik YouTube RSS/API ile
+   dogrulanir. **Cifte yukleme korumasi:** `uploaded_pending_verification` kontrol noktasi;
+   mevcut yukleyici HTTP 200 donen ama **kimlik icermeyen** cevaplari kabul ettigi icin
    (`core/uploader.py` kimlik cikarma yollari `None` donebiliyor; `published.json`'da
-   `instagram`/`tiktok` alanlari `null` ve `results_raw` yalnizca "Upload initiated
-   successfully in background" diyor). Kimlik yoksa "bekliyor" durumu sonsuza kadar
-   asili kalir. Sart: ya **dayanikli bir arama/idempotency anahtari** (yukleme oncesi
-   uretilen, cevaptan bagimsiz, sonradan kanalda aranabilen bir isaret , or. baslik/
-   aciklama icine gomulu bolum kimligi), ya da **kimliksiz kurtarma yolu** acikca
-   tanimlanir ve test edilir: ne yeniden POST eder, ne sonsuza kadar bekler
-   (sinirli yoklama -> `needs_human` + alarm).
-4. **[Codex FIX kabul]** Runner hic olusmadan patlayan durumlar icin workflow'a ait ayri
-   hata zarfi; runner ciktisi icin tek atomik yazici korunur.
-5. **[Codex FIX kabul]** Nobet esigi 12 saat DEGIL (yayin slotu 18:30 UTC; 12 saatlik yas
-   her sabah 09:00'da bagirirdi). **Beklenen-slot son tarihi + tolerans.**
-   **[Codex tur-2 FIX kabul]** 3 saatlik tolerans planin KENDI olcumuyle celisiyor ,
-   `kie-uretim` kuyruk gecikmeleri 30-31 Ag'da **+397 dakikaya** kadar cikti. Cozum:
-   tolerans tek basina yetmez, **kuyrukta/kosuyor/patladi durumlari ayirt edilir**
-   (GitHub run state) ve secilen tolerans 24 saat sozunun altinda kalir.
-6. **YENI:** watchdog izlenen her hattin GitHub `state` alanini okur; `active` degilse
-   KRITIK alarm. Bugunku arizayi mevcut nobetci hic goremez.
-7. **[Codex CLARIFY kabul]** 5 ve 6 **ikinci repoda** (`akilli-watchdog`), buradan
-   okunamiyor. Bu maddeler **BLOKE**; plandaki config alintilari **dogrulanmamis iddia**.
-   ROCK 4 bu bloke isi beklemez.
-
-**Done:** bugunku senaryo (hold + kapali workflow) tekrarlansa 24 saatin altinda alarm.
+   `instagram`/`tiktok` `null`) ya **dayanikli idempotency anahtari** (yukleme oncesi
+   uretilen, kanalda aranabilen isaret) ya da **test edilmis kimliksiz kurtarma yolu**
+   tanimlanir: ne yeniden POST eder, ne sonsuza kadar bekler (sinirli yoklama ->
+   `needs_human` + alarm).
+4. Runner hic olusmadan patlayan durumlar icin workflow'a ait ayri hata zarfi.
+5. Nobet esigi 12 saat DEGIL , **beklenen-slot son tarihi + tolerans**. Tolerans, olculen
+   kuyruk gecikmeleriyle (+119..+397 dk) celismeyecek sekilde secilir ve
+   **kuyrukta/kosuyor/patladi** durumlari ayirt edilir (GitHub run state).
+**Done:** held/failed kosu asla `success` yazmaz; yalniz dogrulanmis YouTube yayini
+`published` sayilir.
 **Proof:** `python -m pytest tests/test_last_run_contract.py -q` (held kosu success yazmaz;
 IG-only `failed`; no-op damgayi ilerletmez; dis dogrulama belirsizken cifte yukleme YOK)
-**+ [Codex tur-2 FIX kabul] gecis matrisi tek basina yetmez:** bes sema yazicisinin
-**calistirilabilir workflow sozlesme kontrolu** ve 12 runner cagiricisinin duman testi.
++ **calistirilabilir workflow sozlesme kontrolu** bes sema yazicisi icin ve duman testi
+12 runner cagiricisi icin (gecis matrisi tek basina YETMEZ).
+
+---
+
+### ROCK 3d , NOBETCI: kontrol eksik degil, NOBETCININ KENDISI OLU  [ayri repo]
+
+**[Codex tur-4 FIX kabul , r5'in ROCK 3.5-3.6'si YANLISTI ve kaldirildi]** "state kontrolu
+ekleyelim" onerisi olu dogmustu: `actions_checker.py:371-388` **zaten** `state != "active"`
+icin `logger.critical` uretiyor, `disabled_manually`'yi adiyla aniyor ve `config.py:138`
+`youtube-automation`'i **zaten** hedefliyor. Eksik olan kontrol degil, **calisma yolu**.
+
+Olculen kok neden: `akilli-watchdog` workflow'unda `Nobet` adiminin `if:` korumasi YOK ve
+onunde kosulsuz bir unittest adimi var. `tests/test_kurulum.py:391`
+`assertTrue(check_actions_quota(100)["healthy"])` iddia ediyor ama fonksiyon **ay sonu
+projeksiyonu** yapiyor. Yerelde birebir urettim: ayin 1'inde 100 dk -> projeksiyon **3000**
+-> `healthy=False` -> test patlar -> job exit 1 -> **nobet hic kosmaz**.
+Kanit: kosu 33493291124 (2026-09-01 09:38) `FAILED (failures=1)`, logda CANLI saglik
+kontrolu ciktisi YOK. 2026-08-31 11:12 kosusu ise DOGRU davranmisti.
+
+**Ne:**
+1. **Nobeti kendi testinden ayir:** patrol ayri, **bagimsiz zamanlanmis job**.
+   **[Codex tur-4 FIX kabul]** Yalnizca `Nobet` adimina `if: always()` koymak YETMEZ ,
+   workflow'un kendisi devre disi kalirsa ya da calismadan patlarsa yine sessizdir.
+2. **Olu-adam (dead-man) kalp atisi:** nobetci kosmadiginda BAGIMSIZ bir kanal bagirir.
+3. Tarih bagimli kota testi **enjekte edilen tarihle deterministik** hale getirilir.
+4. `FLEET_PAT` yoklugu **fail-closed** dogrulanir (bugun yokken Actions nobeti sessizce kor).
+**Done:** nobetci kosmadigi ya da workflow'u kapatildigi zaman 24 saatin altinda haber gelir.
+**Proof:** ayin 1'i enjekte edilmis kota testi gecer; PAT'siz kosu KIRMIZI biter; patrol
+job'u kasten oldurulur ve **dead-man kanali bagirir**; **[Codex tur-4 CLARIFY]** bu repo
+buradan okunamadigi icin kanit o repodan disariya alinir (kosu kimligi + log alintisi).
+
+---
+
+### ROCK 4a , YAYINLANMAYAN ESLI PILOT  [4b/4c'nin kapisi]
+
+Cekim 2 surekliligi **4 bagimsiz uretimde, 2 obje ve 2 ortamda** reddedildi (§8).
+**[Codex tur-4 kabul]** Bu, surekliligin **sistematik bir sorun oldugunu kanitlar**;
+`chain_frames=True`'nun **cozum oldugunu kanitlamaz**. Pilot bu yuzden zorunlu kalir.
+
+**Ne:** ayni plandan iki kol , biri bugunku ayar, biri gorsel kosullandirma acik.
+Ikisi de yayinlanmaz. Planlarda `"seed": null` oldugu icin kol basina tek uretim salt
+model rastgeleligini olcer: **acik ve kollar arasi AYNI seed'ler**, **en az 3 esli tekrar**
+(3 farkli obje/ortam), **onceden yazilmis sahne-sureklilik rubrigi** (ayni yuzey / ayni
+isik / ayni kamera konumu / obje konum tutarliligi , her biri gec-kal), **kor puanlama**.
+**Done:** pilot fark uretirse 4b'ye gecilir; uretmezse hipotez REDDEDILIR ve ROCK 4 durur.
+**Proof , [Codex tur-4 FIX kabul] "iki kontakt sayfasi" YETMEZ:** **alti kolun artefaktinin
+tamami**, kaydedilmis seed'ler, kor puanlar, rubrik sonuclari ve **onceden yazilmis
+dur/devam hesabi** teslim edilir.
+
+---
+
+### ROCK 4b , Kosullandirmayi acmadan ONCE kapatilacak kusurlar
+
+Ucu de kodda dogrulandi; acilirsa uretimi BOZAR:
+1. **`chain_scope` varsayilani `"series"`** (`series/bible.py:209`) , `chain_frames` acilip
+   `chain_scope="episode"` yazilmazsa bolum 24, bolum 23'un son karesinden baslar.
+2. **Baglama sirasi bozuk** (`series/produce.py:1337-1341`): `resolve_shot` numarali gorsel
+   baglamalari kurduktan SONRA zincir karesi `image_urls`'in basina ekleniyor; prompt
+   "gorsel 1 = obje" derken 1. sira artik onceki kare. Tam sirali referans listesi **once**
+   kurulur, etiketler ondan turetilir, URL-etiket karsiligi assert edilir.
+3. **[Codex tur-4 FIX kabul , r5 bunu EKSIK tarif ediyordu] Bayat kare tasinmasi.**
+   r5 "kosullandirmasiz sessizce devam eder" diyordu; kod daha kotu:
+   `produce.py:1501-1510` ve `1647-1656`'da `if up: chain_url = up` dallarinin **else'i yok**.
+   Cekim KABUL edildiginde ama kare cikarma/yukleme None donduğunde `chain_url` **onceki
+   cekimin karesinde KALIR** (sifirlama yalnizca `previous_shot_dropped` yolunda) , yani
+   cekim 4, cekim 2'nin karesiyle kosullandirilabilir ve bu yolda **tek log satiri yok**.
+   Duzeltme: her cekim icin **taze bir degiskenden** kurulan sonraki-kare referansi; her
+   basarisizlikta ya fail ya **acik sifirlama**.
+4. Son-kare zinciri kabul edilmis bir artefakti sonraki tum cekimlere tasiyabilir , zincir
+   karesi **uygunluk QC'si** + metin-uretimine sessizce donmeyen **kanonik sahneye sifirlama**.
+**Proof:** `python -m pytest tests/test_shot_conditioning.py -q` , `chain_scope="episode"`
+zorunlu; URL-etiket karsiligi assert; zincir yuklemesi patarsa uretim baslamaz (dusman testi);
+**cekim N+1'in YALNIZ kabul edilmis cekim N'in provenansiyla kosullandirildigi assert edilir**
+(bayat kare tasinmasi yakalanir); bolumler arasi tasima YOK.
+
+---
+
+### ROCK 4c , 10 bolumluk pencere  [YENIDEN TASARLANDI]
+
+**[Codex tur-4 FIX kabul , r5'in tasarimi MIMARI OLARAK IMKANSIZDI]** r5 "yayin oncesi
+gozle kabul + 12 saat SLA + 1 bolum tampon" diyordu. Mevcut kodda kurulamaz:
+onay adimi (`unnatural-lab.yml:74-78`) ve uretim adimi (:83-89) **ayni gunluk job'da**;
+`series-approve.yml` cron'u YORUMDA; `approver.py:102-106` yalnizca `next_part`'a bakiyor;
+`series_runner.py:393-395` `awaiting_approval` gorunce uretimi blokluyor ve `:403-407`
+o gun kanala yayin yapilmissa yine uretmiyor. Sonuc: kadans **iki gunde bire** duser ve
+tampon hicbir zaman olusamaz , CORE FOCUS'un "her gun 1 video" ayagi ihlal edilir.
+
+**Ne:** uretim, inceleme ve zamanlanmis yayin **birbirinden ayrilir** ve aralarinda
+**dayanikli bir artefakt kuyrugu** durur. Uretim kuyruga yazar; inceleme kuyruktan alir;
+yayin kuyrugun onaylanmis basindan gunluk cikar. Uretim, inceleme bekleyen bir bolum
+yuzunden durmaz.
+**Tek degisken kilidi:** obje havuzu, baslik kaliplari, anlatim, sure, yuz kurali degismez.
+**Olcum:** taban **sabit 72 saat yasta** yeniden kurulur (bugunku 7,54 karisik yasta
+olculdu); karar bantlari ve istatistik **onceden** yazilir. **Kalite hedefi acik kalir:**
+L/1k 30'a ulasmadan bu is "baska deney secerek" Done ilan EDILEMEZ; 7,54'un altina duserse
+mudahale geri alinir.
+**Kill-gate:** stack parmak izi degisecegi icin yeni pencere acilir ve kayda gecer.
+**Done + Proof , [Codex tur-4 FIX kabul]:** **10 ARDISIK GUNLUK yayin** kanitlanir ve
+**tamponun hicbir gun sessizce sifira dusmedigi** gosterilir; 10 bolumun her biri icin
+yayin oncesi gorsel kabul kaydi; sabit-72-saat taban raporu ve onceden yazilmis karar bandi.
 
 ---
 
 ## 5. IHSAN'IN KARAR VERMESI GEREKENLER
 
 1. **`Unnatural Lab Daily` workflow'unu kim/neden kapatti?** (30 Ag 21:29 , 31 Ag 18:30
-   arasi, elle). Repodan kanitlanamiyor. Bilerek kapatildiysa ROCK 0 yanlis olur. Aciliyor mu?
-2. **Kredi:** part 23'e 436 yanmis, gercek tavan **800**, kalan **364** , dort taze cekime
-   muhtemelen yetmez. (i) part 23 `skipped` + part 24'ten devam mi, (ii) kayda gecen tek
-   seferlik tavan istisnasi mi?
-3. **ROCK 1-3 yayilimi:** motor ortak (12 workflow / 5 sema yazicisi). Codex'in onerisi ve
-   benim tavsiyem: **once yalniz Sentinal'de canary, sonra filo.** Onayliyor musun?
-4. **[Codex CLARIFY , UC turdur acik, artik ROCK 2'nin Done sartidir]** Kirmizi GitHub
-   job'i ikinci bildirim kanali sayiliyor. **Basarisiz job bildirimlerini gercekten aliyor
-   musun** (mail/mobil), 24 saat icinde? Almiyorsan ROCK 2'nin ikinci katmani YOKTUR ve
-   24 saat sozu tek kanala dayanir.
-   **Kural:** bu kanal **dogrulanana** (test bildirimi gonderilip alindigina dair kanit)
-   kadar ROCK 2 "bitti" ilan EDILEMEZ; alternatifi bagimsiz dogrulanmis ikinci bir hedef
-   (ayri Telegram sohbeti / e-posta) eklemektir.
+   arasi). 31 Ag 11:12'de nobetci onu hala `active` gormustu. Repodan kanitlanamiyor.
+2. **QC kapasitesi (ROCK 1b, artik ON KOSUL):** (a) ayri proje+anahtar, (b) faturalandirma
+   + harcama tavani, (c) hat basina QC butcesi, (d) sira adaleti , ya da bilesimi?
+   Bugun filo ortak kota Sentinal'i kuru birakti ve bolum yayinlanamadi.
+3. **ROCK 1c yayilimi:** 12 workflow / 5 sema yazicisi ortak motoru kullaniyor. Tavsiyem:
+   surum bayragiyla once yalniz Sentinal canary, sonra filo. Onayliyor musun?
+4. **[UC turdur acik, ROCK 2'nin Done sarti]** Basarisiz GitHub job bildirimlerini
+   **gercekten aliyor musun** (mail/mobil), 24 saat icinde? Kanit gelene kadar 24 saat sozu
+   tek kanala dayanir sayilacak.
+5. **ROCK 3d ayri repoda** (`akilli-watchdog`). Orada calismami istiyor musun? Nobetci su an
+   OLU ve her ay basinda yeniden olecek.
 
-**[Codex tur-2 KILL kabul]** Onceki revizyondaki 5. soru (gorme-analizi saglayicisi)
-**kaldirildi** , revize ROCK 4 payload testleri ve elle kontakt sayfasi kullaniyor,
-o saglayiciya ihtiyaci yok. (`higgsfield.video_analysis_create` sonraki cevrimin konusu.)
-
-## 6. KAPSAM DISI (bu cevrimde yapilmayacak)
+## 6. KAPSAM DISI
 
 - Kalite kapisini gevsetmek. Fail-closed dogru; sorun cikis yolunun olmamasi.
-- QC modelini degistirmek. **[Codex FIX kabul]** Onceki revizyon bunu `ISSUES.md` ROCK
-  C2'ye dayandiriyordu , **yanlis alinti, kaldirildi**. C2 yalnizca QC model envanteridir.
+- QC modelini degistirmek (`ISSUES.md` C2 yalnizca envanterdir; r4'te bunu yanlis
+  alintiladigim engel kaldirildi).
 - `virality_predictor`'i yayin bloke eden kapi yapmak (kalibre degil).
 - Duraklatilmis 6 Sentinal serisini diriltmek.
-- `kie-uretim` concurrency kuyrugu (olctum: gecikmeler 20-24 Ag'da +40 dk iken 30-31 Ag'da
-  +119..+397 dk; 28 Ag'da eklenen next-stop 5. hat oldu) -> `ISSUES.md`.
-  **Not:** ROCK 3'un tolerans secimi bu olcume bagimli , kuyruk yeniden tasarlanmasa da
-  durum ayrimi ROCK 3 kapsamindadir.
-- TikTok boost (#33), upscale, Apify havuz beslemesi, `video_analysis_create` -> sonraki cevrim.
+- `kie-uretim` concurrency kuyrugunun yeniden tasarimi -> `ISSUES.md` (ROCK 3.5'in
+  tolerans secimi bu olcume BAGIMLI kalir).
+- **[Codex tur-4 DEFER kabul]** `SHOT1_ONSET_LANGUAGE`'a daha fazla tetikleyici fiil
+  eklemek , sinirsiz bir regex yamasi olur ve etkilenen planlar duzeltildikten sonra
+  asil engel degil. Yerine "yapisal kurulmus-ilk-kare dogrulamasi" `ISSUES.md`'ye yazildi.
+- TikTok boost (#33), upscale, Apify havuz beslemesi, `video_analysis_create`.
 
 ## 7. RISKLER
 
-- ROCK 0 kredi harcar; part 23'te 436 yanmis, kalan yalnizca 364.
-- ROCK 1 durum makinesini degistirir ve **12 workflow** ayni motoru cagirir , bu yuzden
-  once Sentinal canary, surum kapisiyla filoya yayilim.
-- ROCK 3'un 5-6. maddeleri **ikinci repoya** bagimli ve acikca BLOKE; ayni cevrimde
-  yapilmazsa 24 saat sozu tutulmaz.
-- **ROCK 4 en riskli rock:** gorsel kosullandirmayi acmak uc bilinen kusuru (chain_scope
-  varsayilani, baglama sirasi, sessiz geri dusme) tetikleyebilir ve son-kare zinciri yeni
-  bir bulasici artefakt sinifi dogurabilir. Bu yuzden once yayinlanmayan esli pilot.
-- ROCK 4 kill-gate penceresini sifirlar; olcum yeniden 10 bolum bekler.
-- Alarm outbox'i durum commit'ine baglidir; persist adimi patlarsa alarm kuyrukta kalir.
-- **Kanit sinirlari:** kontakt sayfalari iki bolume dayanir (n=2) ve
-  `chain_frames=False` kanitlanmis tek kok neden degil, sinanacak hipotezdir.
+- ROCK 1a/1b on kosul; atlanirsa ROCK 1c ve ROCK 2 kagit uzerinde gecer, gercekte kaybolur.
+- ROCK 1c 12 workflow'un cagirdigi motoru degistirir , surum bayragi + canary sart.
+- ROCK 3d ayri repoda ve nobetci su an olu; yapilmazsa 24 saat sozu tutulmaz.
+- ROCK 4b acilmadan kosullandirma acilirsa uretim BOZULUR (uc kusur da kodda dogrulandi).
+- ROCK 4a pilotu hipotezi curutebilir , o zaman ROCK 4 durur, bu kabul edilen bir sonuctur.
+- ROCK 4c yeniden tasarimi uretim/yayin ayrimini degistirir; kadans regresyon riski var,
+  bu yuzden proof 10 ardisik GUNLUK yayin istiyor.
 
----
-
-# EK , TUR 3 SONRASI BULUNANLAR (2026-09-01, ROCK 0 uygulanirken + bagimsiz panel)
-
-Bu bolum, plan r4 yazildiktan SONRA uretilen kanitlari tasir. Ucu de plani degistiriyor.
-Bagimsiz panel: 29 ajan, 5 mercek, her bulgu 2 celiskici dogrulayiciyla sinandi
-(25 ham -> 25 benzersiz -> ilk 12 dogrulandi -> 5 blocking onaylandi; 13 dusuk-siddetli
-bulgu DOGRULANMADI, kapsam disi birakildi). Asagidakilerin hepsini KODDA kendim dogruladim.
-
-## EK-1 , NOBETCI OLU: kendi testi onu her ay basi olduruyor  [YENI, EN KRITIK]
-
-`akilli-watchdog` workflow'unda `Nobet` adiminin ONUNDE kosulsuz bir test adimi var ve
-`Nobet`'in `if:` korumasi YOK:
-
-    - name: Kurulum testleri (agsiz, anahtarsiz)
-      run: python -m unittest discover -s tests -p "test_*.py" -v
-    - name: Nobet          # <- if: yok, testler patlayinca ATLANIR
-
-`tests/test_kurulum.py:391`: `self.assertTrue(ac.check_actions_quota(100)["healthy"])`.
-`check_actions_quota` ay sonu PROJEKSIYONU yapiyor. Bu makinede birebir urettim:
-
-    kullanilan  100 -> healthy=False  projeksiyon=3000     (ayin 1'i: 100 / (1/30))
-    kullanilan 1650 -> healthy=False  projeksiyon=49500
-    kullanilan 1900 -> healthy=False  projeksiyon=57000
-
-Yani **ayin ilk gunlerinde 100 dakika bile "saglksiz" projekte ediliyor**, test patliyor,
-job exit 1 veriyor ve **nobet adimi hic calismiyor**.
-Kanit: kosu 33493291124 (2026-09-01 09:38) `FAILED (failures=1)` +
-`##[error]Process completed with exit code 1`; log'da CANLI saglik kontrolu ciktisi YOK
-(satir 1-221 yalniz runner kurulumu, 222+ unittest).
-
-**Zaman cizelgesi , 24 saat sozunun nerede koptugu:**
-| an | olay |
-|---|---|
-| 31 Ag 11:12 | Nobetci kostu, DOGRU davrandi: `unnatural-lab.yml -> success`, kanit taze (13,8 sa), `Sorun Sayisi: 0` |
-| 31 Ag 11:12-18:30 | Workflow elle kapatildi (bu araliktan sonra) |
-| 1 Eyl 09:38 | Nobetci **kendi testinde oldu**, nobet adimi atlandi -> kimse haber almadi |
-
-**UYARI , yorumlamada duzeltme:** kosu logundaki `🚨 [Is kaniti] Hat: kanit 84.0 saatlik`
-ve `[Kie kredi] bakiye 1200` gibi satirlar **birim test fixture'larilidir**, canli bulgu
-DEGILDIR (ayni checker sirayla 1200/3000/3001/3002,5 yaziyor, Temmuz tarihleri kullaniyor).
-Ilk okumamda bunlari canli sanmistim; duzeltildi.
-
-**Plan etkisi:** ROCK 3'un 5-6. maddeleri **YENIDEN YAZILMALI**. `state != active` kritik
-alarmi ZATEN VAR (`actions_checker.py:371-388`, `disabled_manually` acikca adlandirilmis)
-ve `youtube-automation` ZATEN hedef listesinde (`config.py:138`). Eksik olan kontrol degil:
-(a) nobetcinin kendisi ayin basinda oluyor, (b) `FLEET_PAT` olmadan Actions nobeti kor.
-Yeni ROCK 3 maddesi: **nobetciyi kendi testinden ayir** (`Nobet` adimina `if: always()`
-ya da testleri ayri job'a al) + tarih bagimli kota testini duzelt + PAT varligini
-fail-closed dogrula.
-
-## EK-2 , UCUNCU SESSIZ OLUM MEKANIZMASI: defter birlestirme olu  [YENI]
-
-`scripts/merge_credits_ledger.py:36-41` korumasi `set(doc) == {"entries"}`. Canli defterde
-`{'entries', 'episode_spend'}` var (`episode_spend` 2026-08-28'de eklendi, birlestirme
-script'i 2026-08-13'te yazilmis). Bu makinede calistirdim:
-
-    canli defter anahtarlari: {'entries', 'episode_spend'}
-    is_ledger(canli defter) = False
-
-Sonuc: es zamanli kosularda defter catismasi olursa birlestirme exit 1 verir,
-`persist_state.sh` fail-closed dala girer ve **durum commit'inin TAMAMI dusar**
-(series.json ilerlemesi, published.json, last_run.json repoya HIC ulasmaz).
-Ustelik koruma gevsetilse bile satir 74 dosyayi `{"entries": merged}` olarak yeniden
-yaziyor , **`episode_spend`'i SILERDI**, yani `credit_gate`'in dayandigi bolum butcesi
-muhasebesi ucar.
-
-**Plan etkisi:** ROCK 1.6 `credits_ledger.json`'i "tek yetkili sayac" ilan ediyor ve
-ROCK 2.3 alarm outbox'ini "durum commit'ine" bagliyor , **ikisi de bu kirik yolun
-uzerinde duruyor.** Bu, ROCK 1'in on kosulu olarak plana girer.
-
-## EK-3 , ZINCIR KARESI SESSIZ GERI DUSMESI SANDIGIMDAN KOTU  [ROCK 4b duzeltmesi]
-
-Plan 4b "yukleme patlarsa kosullandirmasiz sessizce devam eder" diyordu. Kod daha kotu:
-`produce.py:1501-1510` (omni) ve `1647-1656` (visual): `if lf:` / `if up: chain_url = up`
-dallarinin **else'i yok**. Cekim kabul edildiginde (`status == "ok"`) ama kare cikarma ya
-da yukleme None donduğunde `chain_url` **onceki cekimin karesinde kaliyor** , sifirlama
-yalnizca `previous_shot_dropped` (yani `status != "ok"`) durumunda tetikleniyor.
-Yani cekim 4, cekim 2'nin son karesiyle kosullandirilabilir ve **bu yolda tek bir log
-satiri bile yok**. Bagimlilik yine imgbb , kanali olduren CDN'in ta kendisi.
-
-## EK-4 , ROCK 0 CANLI SONUCU: hipotez dogrulandi, part 24 terk edildi
-
-- Kosu 33533304587: cekim 1 iki kez reddedildi ("acilis karesinde imkansiz ozellik
-  okunmuyor"). Sebep plan metniydi (tetikleyici fiiller).
-- Cekim 1 "kurulmus durum" olarak yeniden yazildi (commit 5ab27cd). Kosu 33534926748:
-  **`QC GECTI: cekim 1, artifact 0/10 (regen 1 sonrasi)`** , duzeltme tuttu.
-- Ayni kosu **cekim 2**'de dustu: *"cekimler arasi tezgah, isik veya obje-durumu
-  surekliligi bozuk"*. **ROCK 4'un hipotezi icin canli kanit.**
-- `episode_spend["unnatural-lab:24"] = 512/800`. Panel gercek `CapAwareRegenAllocator` ile
-  simule etti: 4 ana cekim icin muhafazakar tahminle **400 kredi taban** gerekir, ONE regen
-  icin 484; 288 kalan **aritmetik olarak yetersiz**. Part 24 `skipped`, part 25'e gecildi
-  (Ihsan karari).
-- **Plan etkisi , YENI KURAL:** ROCK 1'e "bolum butcesi tukenmis bolum" kurali eklenmeli.
-  `credit_gate.reserve` `amount = tavan - harcanan <= 0` oldugunda `False` donuyor ve bolum
-  **kalici olarak tavan-kilidinde** kaliyor , bu, planin kapatmadigi IKINCI olum kuyusudur.
-
-## EK-5 , LINT BOSLUGU: tetikleyici fiil kalibi yakalanmiyor  [ROCK 5 adayi]
-
-`series/shots.py:46-50` `SHOT1_ONSET_LANGUAGE` yalnizca `begins/starts to` ve
-`begins/starts <fiil>ing` kaliplarini ariyor. Part 24 ("tilt the mug... streams out...
-curving upward"), part 25 ("drop the ball... immediately crushes the can flat") ve
-part 26 ("the tines slowly curl inward") **ucu de** `plan_lint`'ten TEMIZ geciyordu.
-Part 24 ve 25 elle duzeltildi; **part 26 hala bu kusurda.**
-Bu, Codex'in `state_carry` lint'i icin gosterdigi boslugun ucuncu ornegi: metin lint'i
-geciyor, uretilen goruntu kaliyor.
-
-## EK-6 , ROCK 4c'nin onay kapisi gunluk yayinla CELISIYOR  [panel, blocking]
-
-`unnatural-lab.yml`de onay adimi (:74-78) ve uretim adimi (:83-89) **ayni gunluk job'da**;
-`series-approve.yml` cron'u YORUMDA. `approver.py:102-106` yalnizca `next_part`'a bakiyor.
-`series_runner.py:393-395` `awaiting_approval` gorunce uretimi sert blokluyor; `:403-407`
-o gun kanala yayin yapilmissa yine uretmiyor. Sonuc: onay-kapili pencerede kadans
-**iki gunde bire** duser ve planin "en az 1 onaylanmis bolum onde tampon" sarti
-mimari olarak kurulamaz , CORE FOCUS'un "her gun 1 video" ayagi ihlal edilir.
-**Plan etkisi:** ROCK 4c'nin gozle-kabul mekanizmasi yeniden tasarlanmali (or. yayin
-oncesi kabul ayri bir kosuda ve uretimden bagimsiz kuyrukla).
-
-## EK-7 , ROCK 0 TEK BASINA CALISMIYOR: bugun 4 kez kanitlandi  [KARAR GEREKTIRIR]
-
-1 Eylul'de uc kosu tetiklendi. Sonuc: **kanalda hala video yok, 5. gune giriliyor.**
+## 8. KANIT DEFTERI , 1 Eylul 2026 (ROCK 0 uygulamasi)
 
 | kosu | ne oldu | sonuc |
 |---|---|---|
-| 33533304587 (16:41) | part24 cekim 1 iki kez red (acilis karesi) | failure |
-| 33534926748 (16:57) | cekim 1 **GECTI** (duzeltme tuttu); cekim 2 surekliligi gecemedi | failure |
-| 33547942009 (19:10) | part25 cekim 1 **ILK denemede GECTI**; cekim 2 surekliligi 2 kez red; sonra Gemini QC kotasi | **"success" ama YAYIN YOK** |
+| 33533304587 16:41 | part24 cekim 1 iki kez red (acilis karesi okunmuyor) | failure |
+| 33534926748 16:57 | cekim 1 **GECTI** (duzeltme tuttu); cekim 2 surekliligi 2 kez red | failure |
+| 33547942009 19:10 | part25 cekim 1 **ILK denemede GECTI**; cekim 2 surekliligi 2 kez red; sonra QC kotasi | **"success" ama YAYIN YOK** |
 
-### Son kosunun tam olum zinciri (birebir log)
+Son kosunun tam olum zinciri (birebir log):
 
-    19:25:55 Ham ses QC gemini-2.5-flash geçici hata (429 RESOURCE_EXHAUSTED) — 5s sonra tekrar
+    19:25:55 Ham ses QC gemini-2.5-flash geçici hata (429 RESOURCE_EXHAUSTED) ,  5s sonra tekrar
     19:26:10 Ham ses QC gemini-2.5-flash başarısız: 429 RESOURCE_EXHAUSTED
     19:27:44 Ham ses QC gemini-flash-latest geçici hata (503 UNAVAILABLE)
     19:29:14 Ham ses QC yapılamadı (503 UNAVAILABLE)
     19:29:15 QC HOLD: çekim 2 zorunlu kapıda değerlendirilemedi
-    19:29:15 Part 25 QC HOLD — durum awaiting_approval; yayın bloke edildi.
+    19:29:15 Part 25 QC HOLD ,  durum awaiting_approval; yayın bloke edildi.
     19:29:15 Telegram sendMessage hata: can't parse entities ... byte offset 89
     kosu sonucu: success ; uzaktaki last_run.json = {"outcome":"success"}
 
-**Dort kusur da AYNI ANDA calisti:** (A) kurtarilamaz hold yazildi, (B) alarm Markdown
-hatasindan gitmedi, (C) kosu yesil raporladi, (D) filo ortak Gemini kotasi tukendi
-(dun flashpoints'i olduren Olgu 8'in aynisi; kota Pasifik gece yarisinda sifirlanir).
+Dort kusur ayni anda: kurtarilamaz hold + olu alarm + yalanci yesil + tukenmis ortak kota.
 
-### Bunun plan icin anlami
+**Kredi (tavan 800/bolum):** 23 -> 436, 24 -> 512, 25 -> 352. Bir gunde ~1300 kredi,
+sifir yayin.
 
-1. **ROCK 0 (elle kurtarma) bir cozum degil, bir tur pansumandir.** Her bolum ayni kuyuya
-   dusuyor; bugun uc bolum (23, 24, 25) elle kurtarilmak zorunda kaldi.
-2. **ROCK 4'un hipotezi artik tek bolume dayanmiyor:** cekim 2 surekliligi part 24'te 2,
-   part 25'te 2 kez reddedildi , dort bagimsiz uretim, iki farkli obje ve iki farkli ortam.
-   Codex'in "tek bolum kanit degil" itirazi hakliydi ve o itiraz artik karsilanmistir.
-3. **Cekim 1 duzeltmesi kalicidir:** part24'te regen 1 sonrasi, part25'te **ilk denemede**
-   gecti. Ilk-kare kusuru cozuldu; kalan tek yapisal kusur cekimler arasi sureklilik.
-4. **Kredi tablosu:** 23 -> 436, 24 -> 512, 25 -> 352 (tavan 800). Bir gunde ~1300 kredi
-   yayin uretmeden yandi. ROCK 1'in "kurtarilabilir hold" maddesi olmadan bu her gun tekrar eder.
+**Elle mudahaleler (hepsi kayitli, geri alinabilir):** part23 `skipped` (0b2c579),
+part24 `skipped`, part25 hold'dan kurtarildi -> `planned` (49f7300), part24/25/26 cekim 1
+promptlari duzeltildi (5ab27cd, 207986e, 16bccd2), workflow `active`.
 
-### Bugun yapilan elle mudahaleler (hepsi geri alinabilir, hepsi kayitli)
-- part23 `skipped` (commit 0b2c579) · part24 `skipped` (uzak yazim) · part25 hold'dan
-  **kurtarildi** -> `planned` (commit 49f7300)
-- part24/25/26 cekim 1 promptlari duzeltildi (commit 5ab27cd, 207986e, 16bccd2)
-- workflow `disabled_manually` -> `active`
+**Kontakt sayfalari:** `sentinal_ihsan/measurements/contact_sheets_2026-09-01/`
+(video kimlikleri, yayin tarihleri, olcumler, yeniden uretim komutlari, SHA256).
 
-**TAVSIYE:** ROCK 0 retry'lari DURDURULMALI. Kanalin guvenilir yayin yapabilmesi icin
-ROCK 1 (kurtarilabilir hold + tipli neden) ve ROCK 2 (alarm teslimati) ON KOSULDUR;
-ROCK 3'un repo ici kismi (gercek yayin olcumu) olmadan da her basarisizlik yesil gorunmeye
-devam eder. Gemini kota tavani (dunku planin ROCK 4'u) da artik Sentinal'i dogrudan
-vuruyor , filo ortak kota bu kanali gunun sonunda kuru birakiyor.
+**Bagimsiz panel:** 29 ajan, 5 mercek, her bulgu 2 celiskici dogrulayici; 25 ham bulgu ->
+12 dogrulandi -> 5 blocking onaylandi. 13 dusuk siddetli bulgu DOGRULANMADI (kapsam disi).

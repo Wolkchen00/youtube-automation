@@ -91,3 +91,13 @@ Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
   havuzunu olcuye baglamak, TikTok boost (#33).
 - **[bilgi] `fal-ai` MCP sunucusu 2026-09-01 oturumunda 401 (AUTH_HEADER_REJECTED) ile
   baglanamadi.** Higgsfield ve Apify calisiyor.
+
+- **[orta, Codex tur-4 DEFER] Yapisal "kurulmus ilk kare" dogrulamasi.**
+  `series/shots.py:46-50` `SHOT1_ONSET_LANGUAGE` yalniz `begins/starts to` kaliplarini
+  yakaliyor. part24 ("tilt the mug... streams out... curving upward"), part25 ("drop the
+  ball... immediately crushes") ve part26 ("the tines slowly curl inward") ucu de
+  `plan_lint`'ten TEMIZ gecip gorme QC'sinde dustu; ucu de elle duzeltildi.
+  **Regex'i buyutmek cozum DEGIL** (sinirsiz yama; kendi tarama denemem duzeltilmis
+  part24/25'i bile yanlis isaretledi , anahtar kelime "the stream climbs" ile "liquid
+  streams out" arasini ayiramiyor). Gereken: cekim 1'in SUREN BIR DURUM mu yoksa BASLAYAN
+  BIR OLAY mi tarif ettigini anlayan yapisal/anlamsal dogrulama.
