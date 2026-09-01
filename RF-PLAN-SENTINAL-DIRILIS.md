@@ -573,3 +573,52 @@ o gun kanala yayin yapilmissa yine uretmiyor. Sonuc: onay-kapili pencerede kadan
 mimari olarak kurulamaz , CORE FOCUS'un "her gun 1 video" ayagi ihlal edilir.
 **Plan etkisi:** ROCK 4c'nin gozle-kabul mekanizmasi yeniden tasarlanmali (or. yayin
 oncesi kabul ayri bir kosuda ve uretimden bagimsiz kuyrukla).
+
+## EK-7 , ROCK 0 TEK BASINA CALISMIYOR: bugun 4 kez kanitlandi  [KARAR GEREKTIRIR]
+
+1 Eylul'de uc kosu tetiklendi. Sonuc: **kanalda hala video yok, 5. gune giriliyor.**
+
+| kosu | ne oldu | sonuc |
+|---|---|---|
+| 33533304587 (16:41) | part24 cekim 1 iki kez red (acilis karesi) | failure |
+| 33534926748 (16:57) | cekim 1 **GECTI** (duzeltme tuttu); cekim 2 surekliligi gecemedi | failure |
+| 33547942009 (19:10) | part25 cekim 1 **ILK denemede GECTI**; cekim 2 surekliligi 2 kez red; sonra Gemini QC kotasi | **"success" ama YAYIN YOK** |
+
+### Son kosunun tam olum zinciri (birebir log)
+
+    19:25:55 Ham ses QC gemini-2.5-flash geçici hata (429 RESOURCE_EXHAUSTED) — 5s sonra tekrar
+    19:26:10 Ham ses QC gemini-2.5-flash başarısız: 429 RESOURCE_EXHAUSTED
+    19:27:44 Ham ses QC gemini-flash-latest geçici hata (503 UNAVAILABLE)
+    19:29:14 Ham ses QC yapılamadı (503 UNAVAILABLE)
+    19:29:15 QC HOLD: çekim 2 zorunlu kapıda değerlendirilemedi
+    19:29:15 Part 25 QC HOLD — durum awaiting_approval; yayın bloke edildi.
+    19:29:15 Telegram sendMessage hata: can't parse entities ... byte offset 89
+    kosu sonucu: success ; uzaktaki last_run.json = {"outcome":"success"}
+
+**Dort kusur da AYNI ANDA calisti:** (A) kurtarilamaz hold yazildi, (B) alarm Markdown
+hatasindan gitmedi, (C) kosu yesil raporladi, (D) filo ortak Gemini kotasi tukendi
+(dun flashpoints'i olduren Olgu 8'in aynisi; kota Pasifik gece yarisinda sifirlanir).
+
+### Bunun plan icin anlami
+
+1. **ROCK 0 (elle kurtarma) bir cozum degil, bir tur pansumandir.** Her bolum ayni kuyuya
+   dusuyor; bugun uc bolum (23, 24, 25) elle kurtarilmak zorunda kaldi.
+2. **ROCK 4'un hipotezi artik tek bolume dayanmiyor:** cekim 2 surekliligi part 24'te 2,
+   part 25'te 2 kez reddedildi , dort bagimsiz uretim, iki farkli obje ve iki farkli ortam.
+   Codex'in "tek bolum kanit degil" itirazi hakliydi ve o itiraz artik karsilanmistir.
+3. **Cekim 1 duzeltmesi kalicidir:** part24'te regen 1 sonrasi, part25'te **ilk denemede**
+   gecti. Ilk-kare kusuru cozuldu; kalan tek yapisal kusur cekimler arasi sureklilik.
+4. **Kredi tablosu:** 23 -> 436, 24 -> 512, 25 -> 352 (tavan 800). Bir gunde ~1300 kredi
+   yayin uretmeden yandi. ROCK 1'in "kurtarilabilir hold" maddesi olmadan bu her gun tekrar eder.
+
+### Bugun yapilan elle mudahaleler (hepsi geri alinabilir, hepsi kayitli)
+- part23 `skipped` (commit 0b2c579) · part24 `skipped` (uzak yazim) · part25 hold'dan
+  **kurtarildi** -> `planned` (commit 49f7300)
+- part24/25/26 cekim 1 promptlari duzeltildi (commit 5ab27cd, 207986e, 16bccd2)
+- workflow `disabled_manually` -> `active`
+
+**TAVSIYE:** ROCK 0 retry'lari DURDURULMALI. Kanalin guvenilir yayin yapabilmesi icin
+ROCK 1 (kurtarilabilir hold + tipli neden) ve ROCK 2 (alarm teslimati) ON KOSULDUR;
+ROCK 3'un repo ici kismi (gercek yayin olcumu) olmadan da her basarisizlik yesil gorunmeye
+devam eder. Gemini kota tavani (dunku planin ROCK 4'u) da artik Sentinal'i dogrudan
+vuruyor , filo ortak kota bu kanali gunun sonunda kuru birakiyor.
