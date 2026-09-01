@@ -1,4 +1,4 @@
-# RF-PLAN - NEXT STOP canon v3 (rev.4, Codex turu 1 + 2 + 3 uygulandi)
+# RF-PLAN - NEXT STOP canon v3.1 (rev.5, Codex 1-3 + Pilot B bulgulari uygulandi)
 
 **Core Focus (tek cumle):** Next Stop bolumleri, referans kanallardaki gibi her iki-uc saniyede
 bir ortamin KENDISI cami opak olarak kapatarak degisen, cam tavanli bir gozlem vagonundan
@@ -96,7 +96,12 @@ Bu cumle kullanicinin istedigi gecisin ta kendisini yasakliyor. v3'un en onemli 
 
 Sadece art_style degisir. Diger tum anahtarlar bayt bayt ayni kalir.
 
-**Boyut hedefi: ~5600 karakter** (v2 = 5397, kanitlanmis calisir boyut). Tur 1'de Codex'in
+**Boyut hedefi: 5300-6500 karakter.** Ilk sinir 5300-6000 idi (v2 = 5397, kanitlanmis calisir
+boyut). Pilot B iki YENI kural zorunlu kildi (asagida ROCK 3 bulgulari): **kadraj kilidi** ve
+**yana akis / kacis noktasi yasagi**, birlikte ~1010 karakter. Gercek fazlalik iki gecisle
+kirpildi (6867 -> 6354), yani yeni metnin ucte ikisi soguruldu; kalan 354 karakter icin sinir
+**bilerek ve gerekcesiyle** 6500'e cekildi. Alternatif, olculerek zorunlu oldugu kanitlanmis
+kurallari keyfi bir sayiya uydurmak icin atmakti. Pilot C bu boyutun hala calistigini olcecek. Tur 1'de Codex'in
 seyrelme uyarisi kabul edildi: 19 madde **15'e** indirildi, kamera kara listesi ve ornek
 listeleri sikistirildi, "bir sey trene dikkat eder" maddesi canon'dan cikarilip brief'e tasindi.
 
@@ -160,7 +165,7 @@ Canon v3'un icermesi ZORUNLU 15 maddesi:
     yolcularin nefesi ve kisa cigliklari), muzik yok; kan, yaralanma, gercek dini figur, tescilli
     mulk yok.
 
-**Done looks like:** art_style gecerli JSON string, **5300-6000 karakter**, 15 maddenin hepsi
+**Done looks like:** art_style gecerli JSON string, **5300-6500 karakter**, 15 maddenin hepsi
 metinde, bible.json'un diger anahtarlari degismemis, **em-dash yok** (formatter hook em-dash'i
 bozuyor - yalniz ASCII noktalama).
 
@@ -348,6 +353,42 @@ iki noktali yeniden okuma tercih edildi.)
 
 ---
 
+## 7.5 ROCK 3 SONUCU - Pilot B olculdu (part91 "The Deep", ~756 kredi)
+
+Uretildi ve **kare kare izlendi**. `ep91.mp4` 54.77s gecerli; `ep91_hooked.mp4` **bozuk**
+(moov atom yok) - ayri bir boru hatti kusuru, ISSUES'a alindi.
+
+**GECEN olcutler (canon v3 calisti):**
+
+| Olcut | Sonuc |
+|---|---|
+| Cam tavan | **GECTI** - alti cekimin altisinda kavisli yan-tavan cami ve kaburgalar net; cekim 2'de yuzey isigi tavandan geliyor |
+| Ortam maddesi ortmeleri | **GECTI** - serpinti, silt bulutu, kabarcik perdesi, balik surusu, buhar, deniz kari; yapisal ortucu **sifir** |
+| Kadans | **GECTI** - cekim basina 3 ortme goruldu, 3.2s ustu bosluk yok |
+| "Bir sey trene dikkat eder" | **GECTI** - cekim 4'te devasa yaratigin govdesi cami siliyor, sonra pencere buyuklugunde bir goz treni takip ediyor |
+| Kontrast tirmanmasi | **GECTI** - cekim 4-6 belirgin karanlik, v2'deki soluk gok tekrarlamadi |
+
+**KALAN iki kusur (v3.1 bunlari kapatiyor):**
+
+| # | Kusur | Kanit |
+|---|---|---|
+| **1** | **Yeniden sahneleme / kadraj kaymasi.** Cekim 5'in ~7. saniyesinde model vagonu bastan sahneledi; kadraj, yolcularin tarafi ve kamera konumu degisti. Cekim 6 zincirle bunu miras aldi. Birlesik bolumde kirilma ~0:47. | ilk-kare seridi + cekim 5 kontakt sayfasi 4. satir |
+| **2** | **Yana akis kayboldu.** Yeni kadrajda pencerenin ortasinda kacis noktasi olustu; dunya yana akmak yerine kameraya dogru geliyor, tren "karsiya" gidiyormus gibi duruyor. | cekim 6 kontakt sayfasi |
+
+**Ucuncu bulgu (kusur degil, kesif):** cekim 1-4'te **oturan telefoncu yolcu darbelere hic tepki
+vermedi** - okyanusun cami yuttugu ani 8 fps'te inceledim, adam telefonunu kaydirmaya devam
+ediyor. Sismograf kurali yaziliydi ama **saatsizdi**; ortmeler tuttu cunku saatleri vardi.
+Model'in yeniden sahneledigi kadrajda (ayakta, direge tutunan siluetler) tepki **gorundu**:
+savrulma, tutunma, egilme, telefonla cekme. Kullanici da bu kadraji sectigi icin **ayakta duran
+direk kadraji canon oldu** - istenen fiziği gorunur kilan tek kadraj bu.
+
+**v3.1 degisiklikleri:** kadraj kilidi (cam hep solda, yolcular hep sagda, tek konum/aci/objektif,
+aynalanma ve yeniden sahneleme yasak), yana akis kurali (kacis noktasi yok, ileri bakis yok),
+ayakta duran direk kadraji, "tepki asla eksik olmaz" maddesi, ve yanki cumlesi bu iki yeni
+kurali tasiyacak sekilde 272 -> 435 karaktere cikarildi.
+
+---
+
 ## 8. ISSUES (bu dongude ele alinmaz)
 
 - **Doktrin dosyasi bayat.** `aimagine/KONSEPT.md` hala eski AImagine konseptini anlatiyor
@@ -356,6 +397,9 @@ iki noktali yeniden okuma tercih edildi.)
   damgaliyor (`_doctrine_gate`, `replenish.py:373`). Uretimi bozmuyor; provenance/dokumantasyon
   borcu. Ayri bir dongude tazelenmeli.
 - **`doctrine_sha256` pini yok** (kontrol edildi) - art_style degisimi kapiyi kirmiyor.
+- **`ep91_hooked.mp4` bozuk uretildi** (moov atom yok) - `produce.py:1730` kanca birlestirmesi
+  pilot ciktisinda gecersiz dosya urett; `ep91.mp4` saglam. Uretimi engellemedi ama gercek
+  bolumde kanca katmani zorunlu oldugu icin ayrica incelenmeli.
 
 ---
 

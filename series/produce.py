@@ -10,6 +10,7 @@ dry_run=True her ikisinde de API/kredi harcamadan adımları simüle eder.
 
 import hashlib
 import json
+import re
 import shutil
 from dataclasses import dataclass
 from pathlib import Path
@@ -1751,6 +1752,21 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     # yazıyı taşısın.
     tc_cfg = bible.title_card
     tc = plan.get("title_card") or {}
+    # Next Stop kancasi: durak adi ZATEN bolum basliginda ve title_patterns ile
+    # garanti altinda ("Next Stop: <DURAK> <emoji>"). Bu yuzden kunye plandan
+    # degil BASLIKTAN turetilebilir: Gemini'ye fazladan alan sordurmuyoruz, yil
+    # zorunlulugu olan title_card dogrulamasina takilmiyoruz ve kuyrukta HAZIR
+    # bekleyen planlar da kunyeyi kendiliginden kazaniyor. Opt-in:
+    # bible.series.title_card = {"enabled": true, "from_episode_title": true}
+    if tc_cfg and tc_cfg.get("from_episode_title") and not (tc.get("title") or tc.get("subtitle")):
+        ep_title = str((plan.get("episode") or {}).get("title") or "").strip()
+        if ep_title:
+            # sondaki emoji/sembolleri at, "Next Stop:" onekini koru, tek satir yap
+            dest = re.sub(r"^\s*next\s*stop\s*:\s*", "", ep_title, flags=re.IGNORECASE)
+            dest = "".join(c for c in dest if c.isalnum() or c in " '-,.&").strip()
+            if dest:
+                tc = {"title": f"NEXT STOP: {dest}", "subtitle": ""}
+                logger.info(f"🪷 Kunye bolum basligindan turetildi: {tc['title']}")
     if tc_cfg and (tc.get("title") or tc.get("subtitle")):
         try:
             titled = Path(final_ep).parent / f"{Path(final_ep).stem}_titled.mp4"

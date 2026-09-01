@@ -443,6 +443,238 @@
           "karar": "K1-B (Ihsan): bake-off ERTELENDI. pilot2 asamasi 800 kr ile acildi; preflight/bakeoff/holdout 0. Toplam tavan 4000 DEGISMEDI; tahsis 2500, tahsis edilmemis 1500 yalnizca yeni bir karar ile acilir."
         }
       ]
+    },
+    "nextstop-v2-pilot": {
+      "total_cap": 4000.0,
+      "stage_caps": {
+        "pilot": 2000.0,
+        "preflight": 300.0,
+        "bakeoff": 2400.0,
+        "holdout": 500.0
+      },
+      "reservations": [
+        {
+          "reservation_id": "5dbf0dea8ca94e818c9ba50e57a5c89b",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-08-31T22:19:00.157865+00:00",
+          "settled_ts": "2026-08-31T22:20:32.676315+00:00"
+        },
+        {
+          "reservation_id": "e8e2a8d15f024fdcb7b44c7f268185b9",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-08-31T22:20:43.609099+00:00",
+          "settled_ts": "2026-08-31T22:22:46.578305+00:00"
+        },
+        {
+          "reservation_id": "fd67862e0df346bb8af6e4db50d1ebd2",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-08-31T22:22:57.186340+00:00",
+          "settled_ts": "2026-08-31T22:25:30.745346+00:00"
+        },
+        {
+          "reservation_id": "e2d8d97eb5084b4cbcddb358f4063c05",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-08-31T22:26:10.343773+00:00",
+          "settled_ts": "2026-08-31T22:27:58.062526+00:00"
+        },
+        {
+          "reservation_id": "23f09d46deeb4df3b5e137f0816b73d1",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-08-31T22:28:08.761276+00:00",
+          "settled_ts": "2026-08-31T22:30:11.910951+00:00"
+        },
+        {
+          "reservation_id": "efb0d17388f94a51a4ae949595dcd099",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-08-31T22:30:22.034417+00:00",
+          "settled_ts": "2026-08-31T22:32:25.223546+00:00"
+        }
+      ],
+      "measurements": []
+    },
+    "nextstop-v3-pilot": {
+      "total_cap": 2200.0,
+      "stage_caps": {
+        "pilot": 2000.0,
+        "preflight": 0.0,
+        "bakeoff": 0.0,
+        "holdout": 0.0
+      },
+      "reservations": [
+        {
+          "reservation_id": "f2aac252b9284a1e8b3ca636384d8657",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T16:30:15.162525+00:00",
+          "settled_ts": "2026-09-01T16:33:03.962221+00:00"
+        },
+        {
+          "reservation_id": "b0671c44e5f84b82aec75af90085ab36",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T16:33:12.697463+00:00",
+          "settled_ts": "2026-09-01T16:36:32.249693+00:00"
+        },
+        {
+          "reservation_id": "5b7ff181af954225aad5e779802af0a1",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T16:36:41.212290+00:00",
+          "settled_ts": "2026-09-01T16:40:00.583462+00:00"
+        },
+        {
+          "reservation_id": "41c77d5c5fa746b6a4bd9db79cad1cf8",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T16:40:11.435866+00:00",
+          "settled_ts": "2026-09-01T16:42:29.780332+00:00"
+        },
+        {
+          "reservation_id": "f8e8d33c33ec45a2ba6792ba84b4c9b6",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T16:42:39.795766+00:00",
+          "settled_ts": "2026-09-01T16:46:45.360742+00:00"
+        },
+        {
+          "reservation_id": "7a9965dd30f446efacb5391dcd7ad968",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T16:46:54.789363+00:00",
+          "settled_ts": "2026-09-01T16:50:29.672945+00:00"
+        }
+      ]
+    },
+    "nextstop-v31-pilot": {
+      "total_cap": 2200.0,
+      "stage_caps": {
+        "pilot": 2000.0,
+        "preflight": 0.0,
+        "bakeoff": 0.0,
+        "holdout": 0.0
+      },
+      "reservations": [
+        {
+          "reservation_id": "6ccdbff7a99c4b978f46e68f042b0368",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T18:10:57.718951+00:00",
+          "settled_ts": "2026-09-01T18:13:31.521730+00:00"
+        },
+        {
+          "reservation_id": "475f2c2bbc97438687a8dbe840672f93",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T18:13:40.891524+00:00",
+          "settled_ts": "2026-09-01T18:30:17.927246+00:00"
+        },
+        {
+          "reservation_id": "f522135b77fa4fadbd40ea4edc4e693e",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T18:30:35.586122+00:00",
+          "settled_ts": "2026-09-01T18:48:58.683239+00:00"
+        },
+        {
+          "reservation_id": "d0bc8bdf8f014fe581d54edb0cc9856e",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T18:49:08.536199+00:00",
+          "settled_ts": "2026-09-01T18:53:13.793891+00:00"
+        },
+        {
+          "reservation_id": "56dc6e5ccc4040bd8b19e4a77a4ef663",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T18:53:22.222838+00:00",
+          "settled_ts": "2026-09-01T18:55:55.850300+00:00"
+        },
+        {
+          "reservation_id": "6046fc24d970408db47f3e9fc24d56b5",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "10",
+          "reserved": 200.0,
+          "actual": 126.0,
+          "ts": "2026-09-01T18:56:04.022019+00:00",
+          "settled_ts": "2026-09-01T18:58:06.880452+00:00"
+        }
+      ]
     }
   }
 }
