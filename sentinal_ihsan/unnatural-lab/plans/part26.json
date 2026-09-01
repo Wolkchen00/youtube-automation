@@ -9,10 +9,10 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle. polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing. The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt place the stainless steel fork next to a single blue blueberry. The four metal tines slowly curl inward, wrapping around the blueberry.",
+      "prompt": "A shiny stainless steel four-tined dinner fork with a simple polished handle. polished steel tines curving inward like slow metal fingers, keeping their mirror finish and even spacing. The frame remains completely locked from a tight profile angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt rest on the counter beside the stainless steel fork, the fork filling the centre of the frame. The four polished tines already curl inward like slow metal fingers, closed around a single blue blueberry and holding it clear of the surface; the steel keeps its mirror finish with even spacing between the tines, and the berry skin stays smooth and whole.",
       "seed": null,
       "environment": "kitchen_counter",
-      "violation_observation": "the four metal tines curl inward and close around the blueberry"
+      "violation_observation": "the four steel tines stay curled shut around the blueberry, holding it above the surface"
     },
     {
       "n": 2,

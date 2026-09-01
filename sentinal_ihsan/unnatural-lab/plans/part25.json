@@ -9,10 +9,10 @@
     {
       "n": 1,
       "duration": "6",
-      "prompt": "A bright neon yellow fuzzy tennis ball with classic white rubber curved seams. dense unyielding fuzz that holds its perfect sphere while crisp compacted grooves and flattened metal appear beneath it. The frame remains completely locked looking down at a wooden living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. Hands wearing a plain black crew-neck t-shirt drop the neon yellow tennis ball onto a metal soda can on the table. The tennis ball immediately crushes the metal can flat, landing with a heavy, metallic thud.",
+      "prompt": "A bright neon yellow fuzzy tennis ball with classic white rubber curved seams. dense unyielding fuzz that holds its perfect sphere while crisp compacted grooves and flattened metal appear beneath it. The frame remains completely locked looking down at a wooden living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. Hands wearing a plain black crew-neck t-shirt rest on the table beside the neon yellow tennis ball, the ball filling the centre of the frame. The ball already sits inside a metal soda can pressed flat beneath it, the aluminium folded and split outward around the ball's lower curve; the felt keeps a perfect round shape with every fibre crisp, and the wood under the can carries a deep compressed groove.",
       "seed": null,
       "environment": "living_room_table",
-      "violation_observation": "the ball flattens the metal can on impact and stays perfectly round",
+      "violation_observation": "the flattened can stays crushed under a tennis ball that keeps a perfect round shape",
       "state_carry": "the flattened soda can stays crushed on the table"
     },
     {
