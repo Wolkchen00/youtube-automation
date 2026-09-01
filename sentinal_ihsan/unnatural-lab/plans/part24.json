@@ -51,5 +51,9 @@
   "family": "reversed-physics",
   "music": "Minimalist percussive beat beginning with a soft metallic tap. A slow, steady rhythm of low woody thuds repeats with wide gaps of silence. A single quiet, low-end drone sustains in the background, keeping the focus on the natural environment sounds and preventing any musical climax.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/rGBZn5JK/ep24-coffee-mug.png"
+  ],
+  "ref_prompt_sha256": "991914a7ec724654aa983fb4b255f3cf7903b64e3bab0f92939c1d3813f4392f"
 }
