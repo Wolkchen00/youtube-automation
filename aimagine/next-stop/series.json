@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 1,
   "total_parts": 8,
-  "next_part": 4,
+  "next_part": 5,
   "parts": {
     "1": {
       "status": "published",
@@ -55,6 +55,19 @@
         "tiktok"
       ],
       "published_at": "2026-08-31T19:57:35.560775+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep04/ep04_hooked.mp4",
+      "subtitle": "Next Stop: Xibalba 🏞️💀",
+      "stack_sha256": "43a4c0b262a5a4224d2027dd3f18c7fe659add4730ee69f2644b3e2812706386",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-01T17:46:00.274505+00:00"
     }
   },
   "auto_replenish": {
