@@ -1,7 +1,7 @@
 # RF-PLAN , Sentinal Ihsan kanalinin dirilisi + "yapmacik" sorununun kokunden cozumu
 
 **Tarih:** 2026-09-01 · **Surucu:** Claude (Visionary) · **Inceleyen:** Codex (Integrator)
-**Revizyon:** r4 (Codex tur-1: 33 · tur-2: 21 · tur-3: 6 bulgu · Claude elle video denetimi)
+**Revizyon:** r5 (Codex tur 1-3: 60 bulgu · bagimsiz panel: 5 blocking · ROCK 0 canli sonucu)
 **Kapsam:** `sentinal_ihsan/unnatural-lab` hatti (kanal: @sentinalihsandaily,
 `UC-Aht8VqAUMTUKYRQA3agYQ`). ROCK 2 ve ROCK 3 ortak motoru degistirir , patlama yaricapi
 **12 workflow** `series_runner`'i cagiriyor, **5 workflow** `last_run.json` semasini yaziyor
@@ -455,3 +455,121 @@ o saglayiciya ihtiyaci yok. (`higgsfield.video_analysis_create` sonraki cevrimin
 - Alarm outbox'i durum commit'ine baglidir; persist adimi patlarsa alarm kuyrukta kalir.
 - **Kanit sinirlari:** kontakt sayfalari iki bolume dayanir (n=2) ve
   `chain_frames=False` kanitlanmis tek kok neden degil, sinanacak hipotezdir.
+
+---
+
+# EK , TUR 3 SONRASI BULUNANLAR (2026-09-01, ROCK 0 uygulanirken + bagimsiz panel)
+
+Bu bolum, plan r4 yazildiktan SONRA uretilen kanitlari tasir. Ucu de plani degistiriyor.
+Bagimsiz panel: 29 ajan, 5 mercek, her bulgu 2 celiskici dogrulayiciyla sinandi
+(25 ham -> 25 benzersiz -> ilk 12 dogrulandi -> 5 blocking onaylandi; 13 dusuk-siddetli
+bulgu DOGRULANMADI, kapsam disi birakildi). Asagidakilerin hepsini KODDA kendim dogruladim.
+
+## EK-1 , NOBETCI OLU: kendi testi onu her ay basi olduruyor  [YENI, EN KRITIK]
+
+`akilli-watchdog` workflow'unda `Nobet` adiminin ONUNDE kosulsuz bir test adimi var ve
+`Nobet`'in `if:` korumasi YOK:
+
+    - name: Kurulum testleri (agsiz, anahtarsiz)
+      run: python -m unittest discover -s tests -p "test_*.py" -v
+    - name: Nobet          # <- if: yok, testler patlayinca ATLANIR
+
+`tests/test_kurulum.py:391`: `self.assertTrue(ac.check_actions_quota(100)["healthy"])`.
+`check_actions_quota` ay sonu PROJEKSIYONU yapiyor. Bu makinede birebir urettim:
+
+    kullanilan  100 -> healthy=False  projeksiyon=3000     (ayin 1'i: 100 / (1/30))
+    kullanilan 1650 -> healthy=False  projeksiyon=49500
+    kullanilan 1900 -> healthy=False  projeksiyon=57000
+
+Yani **ayin ilk gunlerinde 100 dakika bile "saglksiz" projekte ediliyor**, test patliyor,
+job exit 1 veriyor ve **nobet adimi hic calismiyor**.
+Kanit: kosu 33493291124 (2026-09-01 09:38) `FAILED (failures=1)` +
+`##[error]Process completed with exit code 1`; log'da CANLI saglik kontrolu ciktisi YOK
+(satir 1-221 yalniz runner kurulumu, 222+ unittest).
+
+**Zaman cizelgesi , 24 saat sozunun nerede koptugu:**
+| an | olay |
+|---|---|
+| 31 Ag 11:12 | Nobetci kostu, DOGRU davrandi: `unnatural-lab.yml -> success`, kanit taze (13,8 sa), `Sorun Sayisi: 0` |
+| 31 Ag 11:12-18:30 | Workflow elle kapatildi (bu araliktan sonra) |
+| 1 Eyl 09:38 | Nobetci **kendi testinde oldu**, nobet adimi atlandi -> kimse haber almadi |
+
+**UYARI , yorumlamada duzeltme:** kosu logundaki `🚨 [Is kaniti] Hat: kanit 84.0 saatlik`
+ve `[Kie kredi] bakiye 1200` gibi satirlar **birim test fixture'larilidir**, canli bulgu
+DEGILDIR (ayni checker sirayla 1200/3000/3001/3002,5 yaziyor, Temmuz tarihleri kullaniyor).
+Ilk okumamda bunlari canli sanmistim; duzeltildi.
+
+**Plan etkisi:** ROCK 3'un 5-6. maddeleri **YENIDEN YAZILMALI**. `state != active` kritik
+alarmi ZATEN VAR (`actions_checker.py:371-388`, `disabled_manually` acikca adlandirilmis)
+ve `youtube-automation` ZATEN hedef listesinde (`config.py:138`). Eksik olan kontrol degil:
+(a) nobetcinin kendisi ayin basinda oluyor, (b) `FLEET_PAT` olmadan Actions nobeti kor.
+Yeni ROCK 3 maddesi: **nobetciyi kendi testinden ayir** (`Nobet` adimina `if: always()`
+ya da testleri ayri job'a al) + tarih bagimli kota testini duzelt + PAT varligini
+fail-closed dogrula.
+
+## EK-2 , UCUNCU SESSIZ OLUM MEKANIZMASI: defter birlestirme olu  [YENI]
+
+`scripts/merge_credits_ledger.py:36-41` korumasi `set(doc) == {"entries"}`. Canli defterde
+`{'entries', 'episode_spend'}` var (`episode_spend` 2026-08-28'de eklendi, birlestirme
+script'i 2026-08-13'te yazilmis). Bu makinede calistirdim:
+
+    canli defter anahtarlari: {'entries', 'episode_spend'}
+    is_ledger(canli defter) = False
+
+Sonuc: es zamanli kosularda defter catismasi olursa birlestirme exit 1 verir,
+`persist_state.sh` fail-closed dala girer ve **durum commit'inin TAMAMI dusar**
+(series.json ilerlemesi, published.json, last_run.json repoya HIC ulasmaz).
+Ustelik koruma gevsetilse bile satir 74 dosyayi `{"entries": merged}` olarak yeniden
+yaziyor , **`episode_spend`'i SILERDI**, yani `credit_gate`'in dayandigi bolum butcesi
+muhasebesi ucar.
+
+**Plan etkisi:** ROCK 1.6 `credits_ledger.json`'i "tek yetkili sayac" ilan ediyor ve
+ROCK 2.3 alarm outbox'ini "durum commit'ine" bagliyor , **ikisi de bu kirik yolun
+uzerinde duruyor.** Bu, ROCK 1'in on kosulu olarak plana girer.
+
+## EK-3 , ZINCIR KARESI SESSIZ GERI DUSMESI SANDIGIMDAN KOTU  [ROCK 4b duzeltmesi]
+
+Plan 4b "yukleme patlarsa kosullandirmasiz sessizce devam eder" diyordu. Kod daha kotu:
+`produce.py:1501-1510` (omni) ve `1647-1656` (visual): `if lf:` / `if up: chain_url = up`
+dallarinin **else'i yok**. Cekim kabul edildiginde (`status == "ok"`) ama kare cikarma ya
+da yukleme None donduğunde `chain_url` **onceki cekimin karesinde kaliyor** , sifirlama
+yalnizca `previous_shot_dropped` (yani `status != "ok"`) durumunda tetikleniyor.
+Yani cekim 4, cekim 2'nin son karesiyle kosullandirilabilir ve **bu yolda tek bir log
+satiri bile yok**. Bagimlilik yine imgbb , kanali olduren CDN'in ta kendisi.
+
+## EK-4 , ROCK 0 CANLI SONUCU: hipotez dogrulandi, part 24 terk edildi
+
+- Kosu 33533304587: cekim 1 iki kez reddedildi ("acilis karesinde imkansiz ozellik
+  okunmuyor"). Sebep plan metniydi (tetikleyici fiiller).
+- Cekim 1 "kurulmus durum" olarak yeniden yazildi (commit 5ab27cd). Kosu 33534926748:
+  **`QC GECTI: cekim 1, artifact 0/10 (regen 1 sonrasi)`** , duzeltme tuttu.
+- Ayni kosu **cekim 2**'de dustu: *"cekimler arasi tezgah, isik veya obje-durumu
+  surekliligi bozuk"*. **ROCK 4'un hipotezi icin canli kanit.**
+- `episode_spend["unnatural-lab:24"] = 512/800`. Panel gercek `CapAwareRegenAllocator` ile
+  simule etti: 4 ana cekim icin muhafazakar tahminle **400 kredi taban** gerekir, ONE regen
+  icin 484; 288 kalan **aritmetik olarak yetersiz**. Part 24 `skipped`, part 25'e gecildi
+  (Ihsan karari).
+- **Plan etkisi , YENI KURAL:** ROCK 1'e "bolum butcesi tukenmis bolum" kurali eklenmeli.
+  `credit_gate.reserve` `amount = tavan - harcanan <= 0` oldugunda `False` donuyor ve bolum
+  **kalici olarak tavan-kilidinde** kaliyor , bu, planin kapatmadigi IKINCI olum kuyusudur.
+
+## EK-5 , LINT BOSLUGU: tetikleyici fiil kalibi yakalanmiyor  [ROCK 5 adayi]
+
+`series/shots.py:46-50` `SHOT1_ONSET_LANGUAGE` yalnizca `begins/starts to` ve
+`begins/starts <fiil>ing` kaliplarini ariyor. Part 24 ("tilt the mug... streams out...
+curving upward"), part 25 ("drop the ball... immediately crushes the can flat") ve
+part 26 ("the tines slowly curl inward") **ucu de** `plan_lint`'ten TEMIZ geciyordu.
+Part 24 ve 25 elle duzeltildi; **part 26 hala bu kusurda.**
+Bu, Codex'in `state_carry` lint'i icin gosterdigi boslugun ucuncu ornegi: metin lint'i
+geciyor, uretilen goruntu kaliyor.
+
+## EK-6 , ROCK 4c'nin onay kapisi gunluk yayinla CELISIYOR  [panel, blocking]
+
+`unnatural-lab.yml`de onay adimi (:74-78) ve uretim adimi (:83-89) **ayni gunluk job'da**;
+`series-approve.yml` cron'u YORUMDA. `approver.py:102-106` yalnizca `next_part`'a bakiyor.
+`series_runner.py:393-395` `awaiting_approval` gorunce uretimi sert blokluyor; `:403-407`
+o gun kanala yayin yapilmissa yine uretmiyor. Sonuc: onay-kapili pencerede kadans
+**iki gunde bire** duser ve planin "en az 1 onaylanmis bolum onde tampon" sarti
+mimari olarak kurulamaz , CORE FOCUS'un "her gun 1 video" ayagi ihlal edilir.
+**Plan etkisi:** ROCK 4c'nin gozle-kabul mekanizmasi yeniden tasarlanmali (or. yayin
+oncesi kabul ayri bir kosuda ve uretimden bagimsiz kuyrukla).
