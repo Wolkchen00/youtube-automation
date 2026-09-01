@@ -1,7 +1,7 @@
 # RF-PLAN , Sentinal Ihsan kanalinin dirilisi + "yapmacik" sorununun kokunden cozumu
 
 **Tarih:** 2026-09-01 · **Surucu:** Claude (Visionary) · **Inceleyen:** Codex (Integrator)
-**Revizyon:** r6 (Codex tur 1-4: 71 bulgu · bagimsiz panel: 5 blocking · ROCK 0 canli sonucu)
+**Revizyon:** r7 (Codex tur 1-5: 72 bulgu · bagimsiz panel: 5 blocking · ROCK 0 canli sonucu)
 **Not:** r6'da tum duzeltmeler rock GOVDELERINE islendi; r5'in EK bolumu kaldirildi,
 kanitlar §8 defterine tasindi (Codex tur-4 yapisal bulgusu).
 **Kapsam:** `sentinal_ihsan/unnatural-lab` hatti (kanal: @sentinalihsandaily,
@@ -202,7 +202,7 @@ yerine §8 kanit defteri kondu.
 
 **Sira:** ROCK 0 (KAPANDI) -> **ROCK 1a defter** -> **ROCK 1b QC kapasitesi** ->
 ROCK 1c durum makinesi (Sentinal canary) -> ROCK 2 alarm -> ROCK 3 repo ici olcum ->
-ROCK 3d nobetci (ayri repo) -> ROCK 4a pilot -> 4b kosullandirma -> 4c pencere.
+ROCK 3d nobetci (ayri repo) -> **ROCK 4b guvenlik duzeltmeleri** -> ROCK 4a pilot -> 4c pencere.
 
 ---
 
@@ -381,25 +381,7 @@ buradan okunamadigi icin kanit o repodan disariya alinir (kosu kimligi + log ali
 
 ---
 
-### ROCK 4a , YAYINLANMAYAN ESLI PILOT  [4b/4c'nin kapisi]
-
-Cekim 2 surekliligi **4 bagimsiz uretimde, 2 obje ve 2 ortamda** reddedildi (§8).
-**[Codex tur-4 kabul]** Bu, surekliligin **sistematik bir sorun oldugunu kanitlar**;
-`chain_frames=True`'nun **cozum oldugunu kanitlamaz**. Pilot bu yuzden zorunlu kalir.
-
-**Ne:** ayni plandan iki kol , biri bugunku ayar, biri gorsel kosullandirma acik.
-Ikisi de yayinlanmaz. Planlarda `"seed": null` oldugu icin kol basina tek uretim salt
-model rastgeleligini olcer: **acik ve kollar arasi AYNI seed'ler**, **en az 3 esli tekrar**
-(3 farkli obje/ortam), **onceden yazilmis sahne-sureklilik rubrigi** (ayni yuzey / ayni
-isik / ayni kamera konumu / obje konum tutarliligi , her biri gec-kal), **kor puanlama**.
-**Done:** pilot fark uretirse 4b'ye gecilir; uretmezse hipotez REDDEDILIR ve ROCK 4 durur.
-**Proof , [Codex tur-4 FIX kabul] "iki kontakt sayfasi" YETMEZ:** **alti kolun artefaktinin
-tamami**, kaydedilmis seed'ler, kor puanlar, rubrik sonuclari ve **onceden yazilmis
-dur/devam hesabi** teslim edilir.
-
----
-
-### ROCK 4b , Kosullandirmayi acmadan ONCE kapatilacak kusurlar
+### ROCK 4b , Kosullandirmayi acmadan ONCE kapatilacak kusurlar  [ROCK 4a'DAN ONCE]
 
 Ucu de kodda dogrulandi; acilirsa uretimi BOZAR:
 1. **`chain_scope` varsayilani `"series"`** (`series/bible.py:209`) , `chain_frames` acilip
@@ -425,7 +407,31 @@ zorunlu; URL-etiket karsiligi assert; zincir yuklemesi patarsa uretim baslamaz (
 
 ---
 
-### ROCK 4c , 10 bolumluk pencere  [YENIDEN TASARLANDI]
+### ROCK 4a , YAYINLANMAYAN ESLI PILOT  [ROCK 4b BITTIKTEN SONRA , 4c'nin kapisi]
+
+Cekim 2 surekliligi **4 bagimsiz uretimde, 2 obje ve 2 ortamda** reddedildi (§8).
+**[Codex tur-4 kabul]** Bu, surekliligin **sistematik bir sorun oldugunu kanitlar**;
+`chain_frames=True`'nun **cozum oldugunu kanitlamaz**. Pilot bu yuzden zorunlu kalir.
+
+**[Codex tur-5 FIX kabul , SIRA DUZELTILDI]** Bu rock ROCK 4a degil, **ROCK 4b'den SONRA**
+kosar. Onceki sirada pilotun "kosullandirma acik" kolu, 4b'nin duzelttigi uc kusurla
+(seri kapsamli `chain_scope`, kayan baglama sirasi, bayat kare tasinmasi) calisacakti ,
+yani pilot **bozuk bir tedavi kolu** uzerinden hipotezi kabul ya da reddedebilirdi.
+Sart: 4b'nin tum guvenlik degismezleri gecmeden pilot BASLAMAZ.
+
+**Ne:** ayni plandan iki kol , biri bugunku ayar, biri gorsel kosullandirma acik.
+Ikisi de yayinlanmaz. Planlarda `"seed": null` oldugu icin kol basina tek uretim salt
+model rastgeleligini olcer: **acik ve kollar arasi AYNI seed'ler**, **en az 3 esli tekrar**
+(3 farkli obje/ortam), **onceden yazilmis sahne-sureklilik rubrigi** (ayni yuzey / ayni
+isik / ayni kamera konumu / obje konum tutarliligi , her biri gec-kal), **kor puanlama**.
+**Done:** pilot fark uretirse 4b'ye gecilir; uretmezse hipotez REDDEDILIR ve ROCK 4 durur.
+**Proof , [Codex tur-4 FIX kabul] "iki kontakt sayfasi" YETMEZ:** **alti kolun artefaktinin
+tamami**, kaydedilmis seed'ler, kor puanlar, rubrik sonuclari ve **onceden yazilmis
+dur/devam hesabi** teslim edilir.
+
+---
+
+### ROCK 4c , 10 bolumluk pencere  [YENIDEN TASARLANDI , 4b sonra 4a gectikten sonra]
 
 **[Codex tur-4 FIX kabul , r5'in tasarimi MIMARI OLARAK IMKANSIZDI]** r5 "yayin oncesi
 gozle kabul + 12 saat SLA + 1 bolum tampon" diyordu. Mevcut kodda kurulamaz:
@@ -485,7 +491,8 @@ yayin oncesi gorsel kabul kaydi; sabit-72-saat taban raporu ve onceden yazilmis 
 - ROCK 1a/1b on kosul; atlanirsa ROCK 1c ve ROCK 2 kagit uzerinde gecer, gercekte kaybolur.
 - ROCK 1c 12 workflow'un cagirdigi motoru degistirir , surum bayragi + canary sart.
 - ROCK 3d ayri repoda ve nobetci su an olu; yapilmazsa 24 saat sozu tutulmaz.
-- ROCK 4b acilmadan kosullandirma acilirsa uretim BOZULUR (uc kusur da kodda dogrulandi).
+- ROCK 4b acilmadan kosullandirma acilirsa uretim BOZULUR (uc kusur da kodda dogrulandi);
+  bu yuzden 4b, pilotun (4a) ONUNDE durur , aksi halde pilot bozuk kolu olcerdi.
 - ROCK 4a pilotu hipotezi curutebilir , o zaman ROCK 4 durur, bu kabul edilen bir sonuctur.
 - ROCK 4c yeniden tasarimi uretim/yayin ayrimini degistirir; kadans regresyon riski var,
   bu yuzden proof 10 ardisik GUNLUK yayin istiyor.

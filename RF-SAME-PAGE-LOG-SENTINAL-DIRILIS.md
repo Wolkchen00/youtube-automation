@@ -279,3 +279,115 @@ kusurlardi ve kapatildi; yeni bir sinif bulgu acilmadi.
 (a) Kota 13:42'de acilinca tur-4 kosulur ve verdict alinir , TAVSIYEM BU, ROCK 0 zaten
     Ihsan'in yanitini bekliyor (Bolum 5, soru 1-2), yani beklemenin maliyeti yok.
 (b) Ihsan override eder ve ROCK 0 tur-4 beklemeden baslar.
+
+
+## Round 4
+
+### Integrator bulgulari (Codex, birebir)
+
+```
+NOT YET. Five of the six carried fixes landed correctly. Item 5 is present in prose but is architecturally impossible with the current approval runner, so it is not genuinely addressed.
+
+Repository history corroborates ROCK 0, the shot-1 correction, the continuity failures, the historical 352-credit spend, and run `33547942009`’s false-success state. EK-2 and EK-3 are exactly correct in code. The external watchdog repository and CI logs remain independently unverifiable from this workspace.
+
+The four shot-2 failures across two objects and environments are sufficient evidence that continuity is a systematic problem worth fixing. They do not prove that `chain_frames=True` is the solution; ROCK 4a’s paired pilot remains necessary.
+
+- [FIX] ROCK 1 treats `QUOTA` as merely retryable although EK-7 proves shared QC capacity can be exhausted at Sentinal’s daily slot, allowing every state-machine proof to pass while nothing publishes -> Gate the canary on reserved or isolated QC capacity sufficient for one complete daily episode, with a real scheduled-run proof.
+- [FIX] `merge_credits_ledger.py` rejects the live `episode_spend` schema and would erase it when writing, so a conflict can discard every state transition and outbox record underpinning ROCK 1 and ROCK 2 -> Make schema-preserving three-way ledger conflict recovery a prerequisite to ROCK 1, with disjoint-key and divergent-same-key adversarial tests; it does not need a separate rock.
+- [FIX] ROCK 3 still specifies already-existing watchdog checks while EK-1 identifies the watchdog’s own execution path as the failure -> Replace items 5-6 with an independently scheduled patrol job, deterministic date-injected quota tests, fail-closed PAT validation, and external proof from the otherwise unreadable watchdog repository.
+- [FIX] Guarding only the `Nobet` step with `if: always()` cannot detect the watchdog workflow itself being disabled or failing before execution -> Use an independent heartbeat/dead-man monitor; a separate patrol job is the simpler immediate implementation.
+- [FIX] ROCK 1 still has no normative near-exhausted-budget transition, so “kredi bütçesi aşılırsa retry durur” can leave an episode permanently selected without enough credit to finish -> Before any paid call, compare remaining credit with the conservative minimum completion cost; if insufficient, atomically terminalize as `budget_exhausted`, alarm, advance, and prove zero additional spend.
+- [FIX] ROCK 4c’s promised approved buffer cannot be created by the current same-job approver/producer and `next_part`-only runner, so its approval records could all exist while cadence falls to every other day -> Separate production, review, and scheduled publication around a durable artifact queue, and prove ten consecutive daily publications while the buffer never silently reaches zero.
+- [FIX] ROCK 4b still describes conditioningless fallback, but both production paths can retain shot N-1’s frame after shot N extraction/upload failure -> Build each next-frame reference from a fresh per-shot variable and fail or explicitly reset on every failure; proof must assert shot N+1 is conditioned only by accepted shot N provenance.
+- [FIX] ROCK 4a requires at least three paired repetitions, but its Proof asks only for “two contact sheets,” so the proof can pass without the preregistered experiment being run -> Require all six arm artifacts, recorded seeds, blinded scores, rubric results, and the preregistered stop/go calculation.
+- [FIX] ROCK 2’s outbox tests and ROCK 3’s in-repo contract tests can pass while the broken ledger persistence and dead external watchdog prevent any alarm from surviving or running -> Add end-to-end conflict-persist and watchdog-heartbeat evidence to their Done gates.
+- [KILL] ROCK 0 is now a failed emergency attempt rather than remaining builder work, and further retries only burn durable credit before the prerequisites are repaired -> Close ROCK 0 as executed-but-unsuccessful and prohibit further production retries until ledger, budget, QC-capacity, alarm, and truthful-run gates pass.
+- [DEFER] Expanding `SHOT1_ONSET_LANGUAGE` with more trigger verbs is an unbounded regex patch and is no longer the principal blocker after the affected plans were corrected -> Record a structured established-first-frame validation improvement in the Issues List instead of adding another rock now.
+
+The nominal rock count is acceptable; the problem is that r5 leaves mandatory corrections in an appendix while the authoritative rock bodies and proofs still contradict them. Fold the blockers above into the executable specifications and ordering before handoff.
+
+VERDICT: NOT YET
+```
+
+### Visionary yaniti (Claude)
+
+11 bulgu, hepsi kabul. Codex'in MERKEZI bulgusu yapisaldi ve benim hatamdi:
+
+> "r5 zorunlu duzeltmeleri bir EK'te birakiyor, oysa asil rock govdeleri ve proof'lari
+> onlarla hala celisiyor."
+
+EK-1..EK-7'yi ekleyip rock'larin kendisini guncellememistim , bir gelistirici ROCK 3'u
+okuyup hala yanlis seyi insa ederdi. r6'da EK KALDIRILDI, tum duzeltmeler rock govdelerine
+ve proof'larina islendi, kanitlar §8 defterine tasindi.
+
+Codex ayrica BAGIMSIZ olarak dogruladi: tur-3'un 6 duzeltmesinden 5'i tuttu; EK-2 ve EK-3
+"kodda tam olarak dogru"; ROCK 4c "yazida var ama mevcut approver ile mimari olarak
+imkansiz" (bagimsiz panelin EK-6 bulgusuyla ayni sonuc, iki ayri yoldan).
+
+Yapisal degisiklikler:
+- ROCK 0 KAPANDI (executed-but-unsuccessful); on kosullar gecmeden retry YASAK.
+- ROCK 1a YENI ON KOSUL: defter catisma kurtarma. ROCK 1c'nin "tek yetkili sayac" iddiasi
+  ve ROCK 2'nin outbox'i ikisi de bu kirik yolun uzerinde duruyordu.
+- ROCK 1b YENI ON KOSUL: QC kotasi bir "retry" degil KAPASITE sorunu. EK-7 bunu curuttu ,
+  ertesi gun ayni saatte kota yine bos olur. Proof gercek ZAMANLANMIS kosu istiyor.
+- ROCK 1c: butce tukenmesi normatif gecis oldu (budget_exhausted + sifir ek harcama assert).
+- ROCK 2: Done kapisina uctan uca catisma-persist kaniti eklendi.
+- ROCK 3d YENI: r5'in "state kontrolu ekleyelim" maddesi OLU DOGMUSTU (kontrol zaten var).
+  Yerine ayri zamanlanmis patrol + dead-man kalp atisi (if: always() yetmez, workflow'un
+  kendisi kapatilirsa yine sessiz) + tarih enjekte edilmis test + PAT fail-closed.
+- ROCK 4a proof'u: "iki kontakt sayfasi" yetmiyordu -> alti kolun tamami, seed'ler, kor
+  puanlar, on-kayitli dur/devam hesabi.
+- ROCK 4b: bayat kare tasinmasi r5'te EKSIK tarif edilmisti (else'siz dallar).
+- ROCK 4c: uretim/inceleme/yayin ayrildi, proof 10 ARDISIK GUNLUK yayin istiyor.
+- DEFER kabul: SHOT1_ONSET regex'ini buyutmek rock degil -> ISSUES.md.
+
+Codex'in "4 cekim-2 reddi surekliligin sistematik oldugunu kanitlar ama chain_frames'in
+COZUM oldugunu kanitlamaz" ayrimi kabul edildi , 4a pilotu zorunlu kaldi.
+
+
+## Round 5 (kap , son tur)
+
+### Integrator bulgulari (Codex, birebir)
+
+```
+All r6 corrections and proofs landed as described. One blocking ordering contradiction remains; everything else is builder-grade.
+
+- [FIX] ROCK 4a enables conditioning before ROCK 4b fixes defects that §7 explicitly says will break conditioning, so the paired pilot can accept or reject the hypothesis using a corrupted treatment arm -> Move ROCK 4b before ROCK 4a, or complete all ROCK 4b safety invariants in the pilot harness first; that single ordering change makes this SAME PAGE.
+
+VERDICT: NOT YET
+```
+
+### Visionary yaniti (Claude)
+
+Tek bulgu, kabul , ve benim mantik hatamdi:
+
+ROCK 4a (pilot) sirada ROCK 4b'den (guvenlik duzeltmeleri) ONCE geliyordu. Ama pilotun
+"kosullandirma acik" kolu tam da 4b'nin duzelttigi uc kusurla calisacakti: seri kapsamli
+`chain_scope` varsayilani, `resolve_shot` sonrasi kayan baglama sirasi, ve bayat kare
+tasinmasi. Yani pilot **bozuk bir tedavi kolu** olcup iyi bir hipotezi reddedebilirdi.
+
+Duzeltme (r7): **ROCK 4b, ROCK 4a'nin ONUNE alindi.** Sira artik
+ROCK 0(kapandi) -> 1a -> 1b -> 1c -> 2 -> 3 -> 3d -> **4b** -> 4a -> 4c.
+4a'ya "4b'nin tum guvenlik degismezleri gecmeden pilot BASLAMAZ" sarti yazildi; §7 riski
+ve 4c basligi da sirayla uyumlandi.
+
+REDDEDILEN: yok.
+
+## MEETING KAPANISI , durust kayit
+
+Tur kapagi (5) doldu. Son verdict **NOT YET** idi, ancak Codex kabul sartini ACIKCA
+onceden yazdi:
+
+> "Move ROCK 4b before ROCK 4a ... that single ordering change makes this SAME PAGE."
+
+Istenen tek degisiklik birebir uygulandi (r7). Bu **taze bir SAME PAGE verdict'i DEGILDIR**:
+r7, Codex tarafindan bagimsiz olarak yeniden dogrulanmadi, cunku tur kapagi doldu.
+
+Kayit: **CLOSED AT CAP , Codex'in yazili kabul sarti karsilandi, bagimsiz teyit YOK.**
+Karar Ihsan'a aittir (Owner's Box):
+(a) r7'yi bu temelde kapali say ve insaya gec , TAVSIYEM BU (kalan tek madde bir sira
+    degisikligiydi ve Codex onu pesinen kabul etti);
+(b) kapagi acip bir dogrulama turu daha kosalim.
+
+Yakinsama: tur-1 33 bulgu -> tur-2 21 -> tur-3 6 -> tur-4 11 (yapisal yeniden yazim) ->
+tur-5 **1**. Ayrica bagimsiz panel (29 ajan) 5 blocking bulgu uretti, hepsi islendi.
