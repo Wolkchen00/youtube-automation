@@ -63,3 +63,31 @@ daha iyidir" bir varsayimdir.
 
 - **[orta] QC model karsilastirmasi (P7 sonrasi):** gemini-2.5-flash vs 3.x, ayni held-out
   fixture setinde; kazanan olcumle secilir.
+
+## Sentinal dirilis cevriminden ERTELENENLER (2026-09-01, Codex Same Page tur 1-3)
+
+Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
+
+- **[yuksek] `kie-uretim` concurrency kuyrugu doyuma ulasti.** Olculdu (persist commit
+  saatleri vs cron): gecikmeler 20-24 Ag'da +40 dk iken 30-31 Ag'da **+119..+397 dk**.
+  28 Ag'da eklenen next-stop bes ardisik seri hatti yapti; bes hat tek seri grupta.
+  1 Eyl 16:45 itibariyle next-stop (13:20), from-scratch (14:30) ve event-horizon (16:30)
+  o gun henuz kosmamisti. ROCK 3'un nobet toleransi bu olcume BAGIMLIDIR (3 saatlik
+  tolerans yetersiz) , kuyruk yeniden tasarlanmasa bile kuyrukta/kosuyor/patladi durum
+  ayrimi ROCK 3 kapsamindadir.
+- **[yuksek] Ayni olum durumu diger hatlarda da acik.** `awaiting_approval` kuyusu,
+  Markdown alarm kirilmasi ve yalanci-yesil `last_run.json` ortak motorda; 12 workflow
+  `series_runner`'i cagiriyor, 5'i sema yaziyor. ROCK 1-3 filoya yayilana kadar her hat
+  ayni sekilde sessizce olebilir.
+- **[orta] `environments[].ref_image_url` bosluklari:** `living_room_table` ve
+  `workbench_main` icin `None`. `plan_lint` part25'te dort cekimde de uyari veriyor.
+- **[orta] Yayin ILERLETME kurali platform ayrimi yapmiyor:** herhangi bir platform
+  basarisi yayin sayiliyor; YouTube basarisiz olsa da ilerliyor (ROCK 3 olcumu baglar,
+  ilerletme davranisini degistirmez).
+- **[dusuk] Duraklatilmis 6 Sentinal serisi** (could-you-survive, night-archive,
+  night-shift, room-408, the-signal, time-witness) , once tek hat saglam calissin.
+- **[dusuk] Sonraki cevrim adaylari:** `higgsfield.video_analysis_create` ile elle
+  gerceklik denetimini otomatige cevirmek, `upscale_video`, `apify` ile obje/kanca
+  havuzunu olcuye baglamak, TikTok boost (#33).
+- **[bilgi] `fal-ai` MCP sunucusu 2026-09-01 oturumunda 401 (AUTH_HEADER_REJECTED) ile
+  baglanamadi.** Higgsfield ve Apify calisiyor.
