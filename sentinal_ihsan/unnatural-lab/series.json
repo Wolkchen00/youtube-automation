@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 26,
-  "next_part": 23,
+  "next_part": 24,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -298,9 +298,6 @@
         "confirmed_at": "2026-08-29T16:41:27+00:00"
       }
     },
-    "23": {
-      "status": "awaiting_approval",
-      "hold_reason": "reference object could not be downloaded"
-    }
+    "23": {"status": "skipped", "skip_reason": "ROCK 0 (2026-09-01, Ihsan karari): 29 Ag icerik reddi + 30 Ag imgbb kesintisi; 436/800 kredi yandi, kalan 364 dort taze cekime yetmez. Part 24 ile devam.", "skipped_at": "2026-09-01T13:35:00Z"}
   }
 }
