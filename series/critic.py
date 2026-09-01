@@ -61,17 +61,25 @@ QC_HOLD_REASONS = frozenset({"quota", "auth", "server", "parse", "logging"})
 _QC_KEY_SOURCE_LOGGED = False
 
 
-def _qc_api_key() -> tuple[str | None, str]:
+def _qc_api_key(slug: str | None = None) -> tuple[str | None, str]:
     """QC icin kullanilacak anahtar ve KAYNAGININ ADI (anahtarin kendisi ASLA loglanmaz).
 
-    ROCK C2: uretim/ikmal anahtari ile QC anahtari ayrilabilsin diye. GEMINI_API_KEY_QC
-    tanimliysa QC onu kullanir; tanimsizsa davranis BUGUNKUYLE birebir aynidir.
+    Seri anahtari varsa once onu, sonra filo QC anahtarini kullanir. Ikisi de tanimsizsa
+    davranis BUGUNKUYLE birebir aynidir ve uretim anahtarina duser.
     Not: model degistirmek kota stratejisi DEGILDIR (ayni proje = ayni havuz);
     kotayi ayiran sey ayri proje/anahtar ya da odemeli katmandir.
     """
     global _QC_KEY_SOURCE_LOGGED
+    series_source = ""
+    series_key = None
+    if slug:
+        normalized_slug = re.sub(r"[^A-Z0-9]", "_", slug.upper())
+        series_source = f"GEMINI_API_KEY_QC_{normalized_slug}"
+        series_key = os.environ.get(series_source)
     separate = os.environ.get("GEMINI_API_KEY_QC")
-    if separate and separate.strip():
+    if series_key and series_key.strip():
+        key, source = series_key.strip(), series_source
+    elif separate and separate.strip():
         key, source = separate.strip(), "GEMINI_API_KEY_QC"
     else:
         key, source = GEMINI_API_KEY, "GEMINI_API_KEY"
@@ -384,7 +392,7 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    slug: str, episode: int | None, shot: int | None,
                    experiment_id: str | None = None) -> dict | None:
     """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
-    qc_key, qc_key_source = _qc_api_key()
+    qc_key, qc_key_source = _qc_api_key(slug)
     if not qc_key:
         raise QCApiExhausted("auth", f"{qc_key_source} yok")
     try:
@@ -1025,7 +1033,7 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
     """Send an extracted audio sample to Gemini using the clip-QC retry/model pattern."""
     if not slug:
         raise QCApiExhausted("logging", "ses QC günlüğü için seri kimliği belirlenemedi")
-    qc_key, qc_key_source = _qc_api_key()
+    qc_key, qc_key_source = _qc_api_key(slug)
     if not qc_key:
         raise QCApiExhausted("auth", f"{qc_key_source} yok")
     try:
@@ -1108,7 +1116,7 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
                              slug: str, episode: int | None, shot: int | None,
                              experiment_id: str | None = None) -> dict | None:
     """Review one persisted raw WAV stem with the native-audio schema."""
-    qc_key, qc_key_source = _qc_api_key()
+    qc_key, qc_key_source = _qc_api_key(slug)
     if not qc_key:
         raise QCApiExhausted("auth", f"{qc_key_source} yok")
     try:
