@@ -53,5 +53,9 @@
   "family": "impossible-material",
   "music": "Sparse percussive bed opening with a dry wooden hit on the very first beat. Slow, steady pulse of low woody thuds and soft plastic taps. A faint, low sustained background tone provides a subtle anchor, leaving massive negative space to emphasize the heavy physical impacts on screen.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/nMWY5Z5h/ep25-tennis-ball.png"
+  ],
+  "ref_prompt_sha256": "5adeef7bd990d6982808158d05c20a7d74662d55c8010e4e9cd6685f677372b9"
 }
