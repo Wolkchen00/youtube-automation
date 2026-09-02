@@ -1,9 +1,9 @@
-# RF-PLAN: Sentinal yayin acil kurtarma (2026-09-02)
+# RF-PLAN: Sentinal yayin acil kurtarma (2026-09-02) , r2
 
 ## Core Focus (tek cumle)
 
 sentinalihsandaily kanali 28 Agustos'tan beri yayin yapamiyor; QC kapisinin kendi
-kendini imkansiz kilan iki tuzagi temizlenip hat bugun tek kosuda bolum yayinlar
+kendini imkansiz kilan tuzaklari temizlenip hat bugun tek kosuda bolum yayinlar
 hale getirilecek.
 
 ## Kanit (kod + canli kosu gunlukleri)
@@ -22,16 +22,20 @@ Yayin kapisi `sentinal_ihsan/unnatural-lab/bible.json` icinde
 komple iptal ettiriyor: satir 1527, satir 1679 (`return None`) ve satir 1717
 (`len(shot_files) != len(plan["shots"])`). Tek cekim dusunce yayin yok.
 
-Bu "hep ya da hic" kapisinin onunde uc tuzak var:
+### T1: Zincir karesi YANLIS gerekcelerle sifirlaniyor (asil kok)
 
-### T1: Sureklilik kapisi kendi cipasini yok ediyor
+`series/critic.py` `review_chain_frame()` bir cekimin son karesini "sonraki cekime
+baslangic olarak uygun mu" diye denetlerken statik obje referansini olcut aliyor.
+Ama bu serinin FORMATI objenin bozulmasi. part26 planinda cekim 3'un
+`state_carry` degeri: `"the tines stretched long and empty above the counter"`.
+Yani catalin uzamis ve bos olmasi KASITLI terminal hal. Denetim bunu pirupak
+catal referansiyla kiyaslayip "uygunsuz" diyor.
 
-`series/produce.py:250` `_next_chain_frame()` icinde: onceki cekimin son karesi
-uygunsuz bulunursa `reset_or_fail("unsuitable", ...)` calisir ve zincir karesi
-`None`'a duser (`chain_frame_reset`). Sonraki cekim boylece sureklilik cipasi
-OLMADAN uretilir. Ardindan ayni bolumde `qc.require_continuity: true` o cekimi
-"cekimler arasi tezgah, isik veya obje-durumu surekliligi bozuk" diye reddeder.
-Regen de cipasiz calistigi icin ikinci ve ucuncu deneme de ayni duvara carpar.
+`series/produce.py:250` bunun uzerine `reset_or_fail("unsuitable", ...)` calisir,
+zincir karesi `None`'a duser. Sonraki cekim sureklilik cipasi OLMADAN uretilir.
+Ardindan ayni bolumde `qc.require_continuity: true` o cekimi "cekimler arasi
+tezgah, isik veya obje-durumu surekliligi bozuk" diye reddeder. Regen de cipasiz
+calistigi icin ikinci ve ucuncu deneme ayni duvara carpar.
 
 Canli kanit, kosu 33594947982 (2026-09-02 05:30 UTC):
 ```
@@ -44,138 +48,199 @@ Canli kanit, kosu 33594947982 (2026-09-02 05:30 UTC):
 ```
 Cekim 1, 2, 3 ayni kosuda QC'yi GECTI. Yalniz zinciri sifirlanan cekim 4 oldu.
 
+Onemli: part26 cekimlerinde `chain` alani YOK. `decide_shot_chain()` bu durumda
+legacy dala girer ve `chain_decision.error` uretmez. Dolayisiyla produce.py:1452
+icindeki `chain_reset_pending` dali HIC DANISILMAZ; degisken 1480'de sessizce
+sifirlanir. Reset bilgisi bugun bir sonraki cekime hic ulasmiyor.
+
 ### T2: Ucretsiz Gemini kotasi matematiksel olarak yetmiyor
 
 `qc.native_audio_review: true` zorunlu kapi. Anahtar ucretsiz katmanda:
 `generate_content_free_tier_requests, limit: 20` istek/gun. Olculen gercek yuk
-(`sentinal_ihsan/unnatural-lab/qc_log.jsonl`, `qc_api_attempt` olaylari):
+(`qc_log.jsonl`, `qc_api_attempt` olaylari): 2026-08-28 61 cagri, 09-01 32 cagri
+(17 ses + 15 gorsel), 09-02 33 cagri (21 ses + 12 gorsel). Temiz bir bolum bile
+~10 cagri istiyor, regen girince 30+. 20/gun tavani ile bu hat asla duzenli yayin
+yapamaz.
 
-```
-2026-08-28  61 cagri
-2026-09-01  32 cagri  (17 ses + 15 gorsel)
-2026-09-02  33 cagri  (21 ses + 12 gorsel)
-```
-
-Temiz bir bolum bile 4 cekim x 2 kapi + zincir denetimleri = ~10 cagri. Regen
-girince 30+. Yani 20/gun tavani ile bu hat asla duzenli yayin yapamaz. Kota
-bitince `critic.py:1517` "QC HOLD: zorunlu kapida degerlendirilemedi" der,
-`produce.py` `ProduceResult("qc_hold")` doner ve bolum olur. Altyapi arizasi
-icerik reddi gibi islenmis oluyor.
-
-Bekleme merdiveni de sabirsiz: 429 govdesi `retryDelay: 9s` derken merdiven
-5s ve 10s bekleyip pes ediyor.
+Bekleme merdiveni de sabirsiz ve UC KOPYA halinde duruyor (gorsel denetim
+critic.py ~467-495, ham ses ~1126-1160, teslimat sesi ~1207-1241). Uctu de
+`time.sleep(min(5 * attempt, 15))` kullaniyor ve 429 govdesindeki `retryDelay`
+alanini hic okumuyor.
 
 ### T3: Kismi ilerleme tasinmiyor (bu turda DEFER)
 
 QC'den gecmis cekimler basarisiz kosuda cope gidiyor. Kosu 33594947982 alti klip
-x 84 kredi = 504 kredi yakti, sifir yayin. Ayni bolum ertesi kosuda sifirdan
-uretiliyor; part 23 ve 24 tam bu yuzden `budget_exhausted` oldu.
-
-GitHub runner efemer: `.github/workflows/unnatural-lab.yml` yalniz `logs/` ve ses
-stem'lerini artifact yapiyor, `output/` hicbir yere kalici yazilmiyor;
-`scripts/persist_state.sh` sadece durum klasorlerini commit'liyor. Kosular arasi
-cekim tasimak icin ayri bir kalici depo (Release veya artifact indirme) gerekir.
-Bu acil turun kapsami disinda: ROCK 1-3 + faturalandirma ile bolumun TEK kosuda
-bitmesi hedefleniyor, o zaman tasima gereksiz kalir. ISSUES'a yazildi.
+x 84 kredi = 504 kredi yakti, sifir yayin. GitHub runner efemer:
+`.github/workflows/unnatural-lab.yml` yalniz `logs/` ve ses stem'lerini artifact
+yapiyor, `output/` kalici degil. Kosular arasi cekim tasimak ayri kalici depo
+ister. ROCK 1-3 + faturalandirma ile bolumun TEK kosuda bitmesi hedefleniyor, o
+zaman tasima gereksiz kalir. ISSUES'a yazildi.
 
 ## Ihsan kararlari (2026-09-02)
 
 1. QC kotasi: **faturalandirma acilacak** (ucretli katman). Elle adim, asagida.
 2. Regen'e ragmen gecemeyen cekim: **kalan cekimlerle yayinlansin**, alarm gitsin.
 
+## Duzeltilen yanlis varsayimlar (Codex tur-1)
+
+- **"Sessiz seri" YANLIS.** `.github/workflows/unnatural-lab.yml` yorumu bayat.
+  Canli gercek: `bible.narration = {"channel": "sentinal_vlog",
+  "native_mix_level": 0.5}` ve part26 tam bir anlatim metni tasiyor. Cekim
+  dusurmek videoyu kisaltir, anlatim sesi videodan uzun kalir. ROCK 2 bunu
+  ele almak zorunda.
+- **Test takimi ZATEN KIRMIZI.** `origin/main` uzerinde `pytest tests/ -q`
+  sonucu 2 failed, 599 passed. Ikisi de dunku bilincli kararlarla celisen bayat
+  testler. Proof komutu bu haliyle asla gecemezdi. ROCK 4 eklendi.
+- **`retry_count` neden kodundan bagimsiz artiyor.** `series_runner.py:474`
+  civari: kod ne olursa olsun sayac artar, 3'te `needs_human`. "QUOTA sayilmaz"
+  iddiasi yanlisti, cikarildi.
+
 ## Non-goals
 
 - Kosular arasi cekim tasima (T3). ISSUES'a.
-- QC kalite esiklerini gevsetmek. Esikler aynen kalir; sadece kendi kendisiyle
-  celisen kapi ve altyapi arizasinin icerik reddi sayilmasi duzeltilir.
+- QC kalite esiklerini gevsetmek. Esikler aynen kalir.
+- `hook_teaser` icin genel yedek mekanizma (canli `hook_teaser.enabled=false`).
+  ISSUES'a.
 - Diger hatlarin (aimagine, galactic_experience, shadowedhistory) davranisini
   degistirmek. Yeni davranislar opt-in alan olarak gelir, varsayilan bugunku
   davranistir.
-- Yeni bolum icerigi yazmak, plan/bible metni degistirmek.
+- Fail-open. QC API tukendiginde bolum yine `hold` olur, denetimsiz yayin YOK.
 
 ## Kisitlar
 
 - Python 3.11, mevcut bagimlilklar. Yeni paket yok.
-- `series/produce.py` ve `series/critic.py` disinda kod dosyasi degismesin
-  (bible.json ve testler haric).
+- Degisebilecek kod dosyalari: `series/produce.py`, `series/critic.py`,
+  `series/bible.py`, `series/series_runner.py`, `tests/`, ve
+  `sentinal_ihsan/unnatural-lab/bible.json`. Baska kod dosyasi degismesin.
 - Turkce log/alarm metinleri mevcut usluba uysun.
 - Em dash karakteri kullanilmayacak.
 
 ---
 
-## ROCK 1: Sifirlanan zincir, sureklilik kapisini muaf tutar
+## ROCK 1: Zincir karesi kasitli terminal hali "bozuk" saymaz + reset tek cekimlik muafiyet acar
 
-**Done looks like:** `_next_chain_frame()` bir cekim icin `chain_frame_reset`
-urettiginde, BIR SONRAKI cekimin QC'sinde sureklilik olcutu red sebebi olamaz.
-Sureklilik gozlemi gunluge yazilmaya devam eder (`continuity_ok` alani korunur),
-ama `verdict` sadece o olcut yuzunden `fail` olmaz. Zincir normal aktiginda
-sureklilik kapisi bugunku gibi sert kalir.
+**Done looks like:** iki katman:
 
-**Neden:** cipayi sistem kendi kaldiriyor, sonra cipanin urunu olan surekliligi
-sart kosuyor. Regen bunu asla cozemez, sadece kredi yakar.
+**1a (kok):** `critic.review_chain_frame()` cagrisina kaynak cekimin
+`state_carry` beklentisi verilir. Denetim, kasitli imkansiz ozelligin urunu olan
+deformasyonu (uzamis catal, kivrilmis dis) uygunsuzluk saymaz; yalniz gercek
+uretim kusurlarini (bulanik kare, kirpilmis kadraj, cozunmus el/yuzey) uygunsuz
+sayar. `bible.series.qc.notes` icindeki SERIES EXEMPTION metni bu denetime de
+uygulanir; bugun uygulanmiyor.
 
-**Kapsam:** `series/produce.py` (reset bayragini bir sonraki cekimin qc_context'ine
-tasi), `series/critic.py` (bayrak varken sureklilik olcutunu red sebebi olmaktan
-cikar, gozlem olarak logla).
+**1b (emniyet agi):** zincir GERCEKTEN sifirlandiginda (kare cikarilamadi,
+yukleme basarisiz, API tukendi veya dogrulanmis uygunsuzluk), BIR SONRAKI cekimin
+QC'sinde sureklilik olcutu red sebebi OLAMAZ. Muafiyet hem `continuity_ok=false`
+hem de alanin eksik/degerlendirilemez oldugu durumu kapsar, ve o cekimin butun
+review + regen dongusu boyunca gecerlidir.
 
-**Dikkat:** bayrak TEK cekim icin gecerlidir. Cekim 3 -> 4 sifirlandiysa yalniz
-cekim 4 muaf olur; cekim 4 -> 5 zinciri saglamsa cekim 5 yine sert kapiya girer.
-Bayrak kalici olmamali, bir sonraki basarili zincirde temizlenmeli.
+**Bookkeeping:** yeni durum degiskeni YARATILMAZ. Mevcut `chain_reset_pending`
+(produce.py:1519, 1707, 1868'de `next_frame.canonical_reset` ile yaziliyor)
+1480'de sifirlanmadan ONCE yerel snapshot'i alinir ve o cekimin `qc_context`'ine
+konur. `previous_shot_dropped` ile birlikte TEK "kirik cipa" sinyali olur, ve ilk
+basarili zincirde temizlenir. Boylece tek cekim dususu domino olmaz.
 
-**Proof:** `python -m pytest tests/test_chain_reset_continuity.py -q` (yeni dosya)
-ve mevcut takim: `python -m pytest tests/ -q`.
+**Dikkat:** muafiyet TEK cekimliktir. Cekim 3 -> 4 sifirlandiysa yalniz cekim 4
+muaf olur; cekim 4 -> 5 zinciri saglamsa cekim 5 yine sert kapiya girer.
+
+**Proof:** `python -m pytest tests/test_chain_reset_continuity.py -q` (yeni).
+Vakalar: (a) `state_carry` verilen kasitli deformasyon uygun sayilir;
+(b) gercek uretim kusuru hala uygunsuz sayilir; (c) reset sonrasi sonraki cekim
+`continuity_ok=false` ile GECER; (d) reset sonrasi `continuity_ok` alani hic
+gelmezse yine GECER; (e) reset YOKKEN `continuity_ok=false` hala REDDEDILIR;
+(f) muafiyet ikinci cekime sizmaz.
 
 ---
 
 ## ROCK 2: Eksik cekim tabani (min_shots), bolum kalan cekimlerle yayinlanir
 
-**Done looks like:** `bible.series.qc.min_shots` (tam sayi) opt-in alani eklenir.
-Alan yoksa bugunku `require_all_shots` davranisi aynen surer (diger hatlar
-etkilenmez). Alan varsa: QC'den gecen cekim sayisi `min_shots` degerine esit veya
-buyukse bolum kalan cekimlerle birlestirilir ve yayinlanir; altindaysa bolum
-bugunku gibi iptal edilir. `unnatural-lab` icin `min_shots: 3` yazilir.
+**Done looks like:** `bible.series.qc.min_shots` opt-in tam sayi alani. Alan
+yoksa bugunku `require_all_shots` davranisi aynen surer. `unnatural-lab` icin
+`min_shots: 3`.
 
-Yayin gerceklestiginde Telegram'a dusen cekim numarasini ve nedenini soyleyen
-alarm gider, ve part kaydina hangi cekimin dustugu yazilir.
+**Tek turetilmis esik:** uc kapiya ayri ayri kontrol YAZILMAZ. Tek bir
+`required_shot_count` turetilir. Erken cikis SADECE matematiksel olarak imkansiz
+oldugunda olur: `accepted + remaining < required`. Son kapi `accepted >= required`
+olarak uygulanir. Boylece 4 cekimin 2. sinda dusen bir cekim, 3/4 hala mumkunken
+bolumu iptal ettirmez.
 
-**Neden:** dort cekimden ucu gecmisken kanalin karanlik kalmasi, 18 saniyelik
-bolumden daha kotu.
+**Dogrulama:** `min_shots` preflight'ta denetlenir: `bool` OLMAYAN gercek `int`,
+ve `1 <= min_shots <= len(plan["shots"])`. Gecersizse UCRETLI cagri baslamadan
+once net hatayla durulur.
 
-**Kapsam:** `series/bible.py` (yeni ozellik), `series/produce.py` (satir 1527,
-1679, 1717 uc kapinin da min_shots'u dikkate almasi),
-`sentinal_ihsan/unnatural-lab/bible.json` (`min_shots: 3`).
+**Anlatim ve sure:** seri anlatimli. Cekim dusunce video kisalir; anlatim sesi
+videodan uzun kalmamali. Kisalan videoya gore anlatim/muzik/master zinciri
+tutarli kalmali (`shot_offsets`, `running`, `audio_smooth`, `micro_trim`).
+Bolum suresi ve ses uzunlugu final master'da uyusmali.
 
-**Dikkat:** `shot_offsets` ve sure hesabi eksik cekimle tutarli kalmali; sessiz
-seri oldugu icin anlatim hizalamasi yok, ama muzik ve master sure hesabi kirilmamali.
+**Rol kaybi gorunur olmali:** cekim 1 dusarsa cold-open, cekim 4 dusarse loop
+seam kaybolur. Bu bilgi alarmda ve part kaydinda ACIKCA yazilir; sessizce
+yutulmaz.
 
-**Proof:** `python -m pytest tests/test_min_shots.py -q` (yeni dosya). En az uc
-vaka: 3/4 gecti + min_shots=3 -> bolum birlesir; 2/4 gecti + min_shots=3 -> iptal;
-min_shots alani yok + 3/4 -> bugunku gibi iptal (geriye donuk uyum).
+**Alarm ve kayit dogru katmanda:** `produce.py` gercek upload sonucunu bilmez.
+Dusen cekim listesi `ProduceResult` uzerinde `dropped_shots` olarak tasinir;
+BASARILI yayindan sonra `series_runner.py` tek alarm gonderir ve part kaydina
+yazar. Boylece yayinlanmamis bolum icin "yayinlandi" alarmi gitmez.
+
+**Proof:** `python -m pytest tests/test_min_shots.py -q` (yeni). Vakalar:
+(a) 3/4 + min_shots=3 -> bolum birlesir, `dropped_shots` dolu;
+(b) 2/4 + min_shots=3 -> iptal; (c) min_shots alani yok + 3/4 -> bugunku gibi
+iptal (geriye donuk uyum); (d) dort dusus konumunun DORDU de ayri test edilir
+(cekim 1, 2, 3, 4); (e) `min_shots` bool/sifir/negatif/cekim sayisindan buyuk ->
+preflight ucretli cagri oncesi reddeder; (f) kisalan bolumde anlatim sesi
+video suresini asmaz.
 
 ---
 
-## ROCK 3: Altyapi arizasi icerik reddi degildir (sabirli merdiven)
+## ROCK 3: Altyapi arizasi ile icerik reddi ayrilir
 
-**Done looks like:** QC API bekleme merdiveni sunucunun soyledigi sureye uyar.
-429 govdesindeki `retryDelay` alani okunur ve o kadar beklenir (ust sinir ile),
-deneme sayisi bugunkunden fazladir. Merdiven tukendiginde davranis DEGISMEZ
-(`hold` kalir, fail-open YOK), ama `hold` sebebi tipli kod olarak dogru yazilir:
-kota veya sunucu kaynakli hold `UNKNOWN` degil `QUOTA` olarak kaydedilir, boylece
-`retry_count` altyapi arizasi yuzunden `needs_human` esigine dogru yurumez.
+**Done looks like:**
 
-**Neden:** Ihsan faturalandirmayi aciyor, bu 429'lari bitirir. Ama 503
-UNAVAILABLE (model yogunlugu) faturali katmanda da olur. 5s + 10s bekleyip pes
-eden merdiven, sunucu "9.5 saniye sonra tekrar dene" derken bolumu olduruyor.
+**3a:** uc kopya retry merdiveni (gorsel, ham ses, teslimat sesi) TEK ortak
+yardimciya toplanir. Yardimci sunucunun soyledigi `retryDelay` degerini okur
+(SDK metadata, yoksa metin fallback; parse hatasinda sabit merdivene duser).
+Iki tavan zorunlu: tek bekleme tavani ve TOPLAM QC bekleme tavani. Toplam tavan
+120 dakikalik workflow limitini asamaz.
 
-**Kapsam:** `series/critic.py` (merdiven ve reason_code siniflandirmasi).
+**3b:** GUNLUK kota tukenmesinde bosuna uyunmaz. 20/gun tavani saniyeler icinde
+acilmaz; gunluk kota sinyali gelirse merdiven kisa devre yapar ve hold'a gecer.
 
-**Dikkat:** part 26 kaydinda `last_reason_code: "UNKNOWN"` ve `retry_count: 2`
-var; bu yanlis siniflandirmanin urunu. Kod duzeldikten sonra bu kayit
-elle duzeltilecek (asagida kapanis adimi).
+**3c:** hold davranisi DEGISMEZ (fail-open yok). Ama siniflandirma duzelir:
+sunucu kaynakli hold `QUOTA` diye ADLANDIRILMAZ. Ayri tipli altyapi kodu
+eklenir (ornegin `TRANSIENT_INFRA`), `QUOTA` yalniz gercek kota icin kalir.
+Teshis bozulmaz.
 
-**Proof:** `python -m pytest tests/test_qc_backoff.py -q` (yeni dosya): 429 govdesi
-`retryDelay: 9s` verdiginde merdivenin o sureye uydugu, ve tukenen kota
-holdunun `QUOTA` kodu urettigi.
+**3d:** icerik ve altyapi sayaclari AYRILIR. Altyapi kaynakli hold, icerik
+`retry_count` sayacini yakmaz. Ancak altyapinin da SONLU butcesi olur (deneme
+sayisi ve yas esigi); o esik asilinca insan alarmi ve `needs_human` yine devreye
+girer. Kalici billing arizasinda sonsuz gunluk retry dongusu OLUSMAZ.
+
+**Proof:** `python -m pytest tests/test_qc_backoff.py -q` (yeni). Vakalar:
+(a) 429 govdesi `retryDelay: 9s` verdiginde merdiven o sureye uyar;
+(b) `retryDelay` parse edilemezse sabit merdivene duser; (c) tek ve toplam
+bekleme tavanlari asilmaz; (d) gunluk kota sinyalinde bosuna uyunmaz;
+(e) once 429 sonra fallback 503 karisik zincirinin NIHAI nedeni ve runner sonucu
+dogru siniflanir; (f) altyapi hold'u `retry_count` artirmaz; (g) altyapi butcesi
+tukenince `needs_human` ve alarm YINE tetiklenir.
+
+---
+
+## ROCK 4: Bayat kirmizi testler onarilir, takim gercek kapi olur
+
+**Done looks like:** `origin/main` uzerindeki iki basarisiz test, dunku bilincli
+kararlari yansitacak sekilde guncellenir:
+
+- `tests/test_gercekcilik_rock3.py::test_installed_series_enables_only_measure_scene_scan_and_800_cap`
+  canli 1000 kredi tavanini bilmiyor. Gecici 1000 karari ve 800'e donus kosulu
+  test sozlesmesine acikca islenir.
+- `tests/test_shot_conditioning_adversarial.py::test_unnatural_lab_got_scope_but_NOT_chaining`
+  `chain_frames` kapali olmasini sart kosuyor; commit 84a9192 onu bilincli acti.
+  Test yeni gercege gore guncellenir, kapsam korumasi (chain_scope) korunur.
+
+Testlerin KORUDUGU davranis silinmez, yalnizca bugunku bilincli karara
+hizalanir. Kapsam korumasi zayiflatilmaz.
+
+**Proof:** `python -m pytest tests/ -q` -> 0 failed.
 
 ---
 
@@ -187,16 +252,28 @@ Ucretli katmanda bolum basina maliyet ~$0.01 ile $0.05 arasi.
 
 1. https://aistudio.google.com/apikey adresinde ilgili anahtarin projesini bul.
 2. Proje adina tikla, Google Cloud Console'da "Billing" bolumune gec.
-3. "Link a billing account" ile kart bagli hesabi ili$kilendir.
+3. "Link a billing account" ile kart bagli hesabi iliskilendir.
 4. Bagladiktan sonra kota otomatik olarak ucretli katmana gecer, kod degisikligi
    gerekmez (ayni anahtar calisir).
 
-Bu adim ROCK 1-3'ten bagimsizdir; kodun duzelmesi icin beklemez.
+Bu adim ROCK 1-4'ten bagimsizdir, kodun duzelmesini beklemez.
 
-## Kapanis adimlari (kod bittikten sonra)
+## Kapanis adimlari (kod bittikten sonra, SIRAYLA)
 
-1. `sentinal_ihsan/unnatural-lab/series.json` part 26 kaydinda `retry_count` 0'a
-   cekilir (iki basarisizlik da altyapi kaynakliydi, icerik reddi degildi).
-2. Hat elle tetiklenir, kosu izlenir.
-3. Uretilen video INDIRILIP izlenir; kontakt sayfasi cikarilir. Pipeline'in
+1. **Billing go/no-go kapisi.** Tetiklemeden ONCE ucretli kotanin gectigi
+   dogrulanir (tek ucuz Gemini cagrisi ile). Gecmediyse tetikleme YAPILMAZ;
+   aksi halde yuzlerce video kredisi yanar ve part 26 ucuncu basarisizlikta
+   `needs_human` olur.
+2. **Part 26 durum onarimi, durustce.** Sayac sifirlama "iki basarisizlik da
+   altyapiydi" diye YAZILMAZ; depo kaniti bunu yalanliyor (iki kosu da
+   continuity `final_reject` ile bitti). Kayit, yeni kismi-yayin politikasi
+   geregi verilmis ACIK OPERATOR OVERRIDE olarak yazilir. `retry_count` ile
+   birlikte `last_reason_code`, `hold_reason`, `first_held_at` alanlari atomik
+   temizlenir veya `retry_history` altinda arsivlenir; basarili yayin kaydinda
+   bayat alan kalmaz.
+3. Hat elle tetiklenir, kosu izlenir.
+4. **Kabul kaniti (unit testler YETMEZ).** Tek kosuda: part durumu `published`,
+   YouTube video kimligi dolu, `next_part=27`, final medya sure ve ses
+   dogrulamasi yapilmis, dusen cekim varsa kaydi ve alarmi yazilmis.
+5. **Video INDIRILIP izlenir**, kontakt sayfasi cikarilir. Pipeline'in
    "basarili" demesi kalite kaniti degildir.
