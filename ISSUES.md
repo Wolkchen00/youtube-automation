@@ -101,3 +101,18 @@ Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
   part24/25'i bile yanlis isaretledi , anahtar kelime "the stream climbs" ile "liquid
   streams out" arasini ayiramiyor). Gereken: cekim 1'in SUREN BIR DURUM mu yoksa BASLAYAN
   BIR OLAY mi tarif ettigini anlayan yapisal/anlamsal dogrulama.
+
+- **[yuksek, YAYIN ACIL turu DEFER] Kosular arasi kismi ilerleme tasinmiyor.**
+  QC'den gecmis cekimler basarisiz kosuda cope gidiyor; ayni bolum ertesi kosuda
+  sifirdan uretiliyor. Kosu 33594947982 alti klip x 84 = 504 kredi yakti, sifir
+  yayin; part 23 ve 24 tam bu yuzden butce tuketip dustu. GitHub runner efemer:
+  `unnatural-lab.yml` yalniz `logs/` ve ses stem'lerini artifact yapiyor,
+  `output/` kalici degil, `persist_state.sh` sadece durum klasorlerini
+  commit'liyor. Cozum ayri kalici depo ister (Release veya artifact indirme).
+  Acil turda kapsam disi birakildi: ROCK 1-4 + faturalandirma ile bolumun TEK
+  kosuda bitmesi hedeflendi, o zaman tasima gereksiz kalir. Hedef tutmazsa bu
+  madde bir sonraki cevrimin ilk rock'i olmali.
+- **[dusuk, YAYIN ACIL turu DEFER] `hook_shot` dusunce teaser yedegi yok.**
+  Kismi yayinda hook olarak isaretli cekim (part26'da cekim 3) dusebilir ve
+  teaser uretilemez. Canli `hook_teaser.enabled=false` oldugu icin bugun zararsiz;
+  teaser acilirsa once bu yedek yazilmali.
