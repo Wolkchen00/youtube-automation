@@ -95,6 +95,22 @@ zaman tasima gereksiz kalir. ISSUES'a yazildi.
   civari: kod ne olursa olsun sayac artar, 3'te `needs_human`. "QUOTA sayilmaz"
   iddiasi yanlisti, cikarildi.
 
+Codex tur-2 sonrasi (hepsi kodda dogrulandi):
+
+- **"SERIES EXEMPTION zincir denetimine uygulanmiyor" YANLIS.** critic.py:660
+  `config.get("notes")` degerini `_review_frames`'e zaten geciriyor. Iddia
+  plandan cikarildi, yerine regresyon testi kondu.
+- **Tek basina `state_carry_expected` eklemek YETMEZ.** critic.py:610-615
+  `_decide()` `object_match=false` gelince sert red veriyor ve
+  `review_chain_frame` `require_object_match`'i true geciriyor. ROCK 1a
+  kimlik sozlesmesi olarak yeniden yazildi.
+- **Yayin kurali platform ayrimi yapmiyor.** series_runner.py:753 `if ok:`
+  herhangi bir platform basarisini yayin sayiyor. ROCK 2'ye zorunlu platform
+  eklendi.
+- **Anlatim sigmama riski olculdu.** ffmpeg_tools.py:207-209 sabitleriyle
+  18 sn'lik varyantta donuk kare + yarim cumle olusuyor. ROCK 2'ye tam
+  sigdirma sarti eklendi.
+
 ## Non-goals
 
 - Kosular arasi cekim tasima (T3). ISSUES'a.
@@ -110,8 +126,11 @@ zaman tasima gereksiz kalir. ISSUES'a yazildi.
 
 - Python 3.11, mevcut bagimlilklar. Yeni paket yok.
 - Degisebilecek kod dosyalari: `series/produce.py`, `series/critic.py`,
-  `series/bible.py`, `series/series_runner.py`, `tests/`, ve
-  `sentinal_ihsan/unnatural-lab/bible.json`. Baska kod dosyasi degismesin.
+  `series/bible.py`, `series/series_runner.py`, `series/series_meta.py`,
+  `series/preflight.py`, `core/narration.py`, `tests/`, ve
+  `sentinal_ihsan/unnatural-lab/bible.json` + `series.json`. Baska kod dosyasi
+  degismesin. `core/ffmpeg_tools.py` sabitleri (NARRATION_MAX_TEMPO,
+  NARRATION_MAX_EXTEND) DEGISTIRILMEZ; anlatim metni kisaltilarak sigdirilir.
 - Turkce log/alarm metinleri mevcut usluba uysun.
 - Em dash karakteri kullanilmayacak.
 
@@ -121,12 +140,25 @@ zaman tasima gereksiz kalir. ISSUES'a yazildi.
 
 **Done looks like:** iki katman:
 
-**1a (kok):** `critic.review_chain_frame()` cagrisina kaynak cekimin
-`state_carry` beklentisi verilir. Denetim, kasitli imkansiz ozelligin urunu olan
-deformasyonu (uzamis catal, kivrilmis dis) uygunsuzluk saymaz; yalniz gercek
-uretim kusurlarini (bulanik kare, kirpilmis kadraj, cozunmus el/yuzey) uygunsuz
-sayar. `bible.series.qc.notes` icindeki SERIES EXEMPTION metni bu denetime de
-uygulanir; bugun uygulanmiyor.
+**1a (kok): zincir karesinin KIMLIK sozlesmesi.** Asil arizanin tek basina
+`state_carry_expected` eklemekle COZULMEDIGI dogrulandi. `review_chain_frame()`
+(critic.py:653) `_decide()` cagrisina `require_object_match` degerini TRUE olarak
+geciriyor; `_decide()` critic.py:610-615'te `object_match` alani false gelince
+"obje referansla ayni fiziksel obje degil" diyip sert red veriyor. Kasitli
+deformasyon (uzamis catal) referans fotoyla ayni obje gorunmedigi icin bu kapi
+her turlu kapaniyor.
+
+Gereken: zincir karesine OZGU kimlik sozlesmesi. Kaynak cekimin `state_carry`
+beklentisi denetime verilir, ve kasitli terminal hal ile gercek kimlik kaymasi
+ayrilir. Canli sekil olan `object_match=false` + `state_carry_ok=true` +
+`chain_frame_suitable=true` GECMELIDIR. Gercek uretim kusuru (bulanik kare,
+kirpilmis kadraj, cozunmus el/yuzey) ve gercek kimlik kaymasi (bambaska bir
+obje) hala REDDEDILIR.
+
+`bible.series.qc.notes` icindeki SERIES EXEMPTION metni bu denetime BUGUN ZATEN
+uygulaniyor (critic.py:660 `config.get("notes")` degerini `_review_frames`'e
+geciriyor). Buraya yeni wiring EKLENMEZ; mevcut aktarim regresyon testiyle
+kilitlenir.
 
 **1b (emniyet agi):** zincir GERCEKTEN sifirlandiginda (kare cikarilamadi,
 yukleme basarisiz, API tukendi veya dogrulanmis uygunsuzluk), BIR SONRAKI cekimin
@@ -144,11 +176,15 @@ basarili zincirde temizlenir. Boylece tek cekim dususu domino olmaz.
 muaf olur; cekim 4 -> 5 zinciri saglamsa cekim 5 yine sert kapiya girer.
 
 **Proof:** `python -m pytest tests/test_chain_reset_continuity.py -q` (yeni).
-Vakalar: (a) `state_carry` verilen kasitli deformasyon uygun sayilir;
-(b) gercek uretim kusuru hala uygunsuz sayilir; (c) reset sonrasi sonraki cekim
-`continuity_ok=false` ile GECER; (d) reset sonrasi `continuity_ok` alani hic
-gelmezse yine GECER; (e) reset YOKKEN `continuity_ok=false` hala REDDEDILIR;
-(f) muafiyet ikinci cekime sizmaz.
+Vakalar: (a) CANLI SEKIL `object_match=false` + `state_carry_ok=true` +
+`chain_frame_suitable=true` zincir denetiminden GECER; (b) gercek uretim kusuru
+(dusuk artifact skoru, bulanik/kirpilmis kare) hala uygunsuz sayilir;
+(c) gercek kimlik kaymasi (`state_carry_ok=false` + `object_match=false`) hala
+REDDEDILIR; (d) reset sonrasi sonraki cekim `continuity_ok=false` ile GECER;
+(e) reset sonrasi `continuity_ok` alani hic gelmezse yine GECER; (f) reset
+YOKKEN `continuity_ok=false` hala REDDEDILIR; (g) muafiyet ikinci cekime sizmaz;
+(h) REGRESYON: `qc.notes` (SERIES EXEMPTION) zincir denetimine gecirilmeye
+devam eder.
 
 ---
 
@@ -168,10 +204,32 @@ bolumu iptal ettirmez.
 ve `1 <= min_shots <= len(plan["shots"])`. Gecersizse UCRETLI cagri baslamadan
 once net hatayla durulur.
 
-**Anlatim ve sure:** seri anlatimli. Cekim dusunce video kisalir; anlatim sesi
-videodan uzun kalmamali. Kisalan videoya gore anlatim/muzik/master zinciri
-tutarli kalmali (`shot_offsets`, `running`, `audio_smooth`, `micro_trim`).
-Bolum suresi ve ses uzunlugu final master'da uyusmali.
+**Anlatim ve sure (olculmus risk, sessiz kalite kaybi):** seri anlatimli.
+`core/ffmpeg_tools.py:207-209` sabitleri: `NARRATION_MAX_TEMPO = 1.05`,
+`NARRATION_MAX_EXTEND = 3.0`, `NARRATION_TAIL_PAD = 0.4`. Hesap: 24 sn'lik
+bolumden 6 sn'lik tek cekim dusunce video ~18 sn olur; 24 sn icin yazilmis
+anlatim 1.05x ile ancak ~22.9 sn'ye iner, gereken uzatma ~5.3 sn ve bu 3.0 sn
+tavanini asar. Sonuc `mix_voiceover()` icinde `capped=True`: video sonuna 3
+saniyelik DONUK KLON KARE eklenir ve anlatim CUMLE ORTASINDA kesilir.
+
+Bu kabul edilemez. Kural: kismi yayin yolunda anlatim TAM olarak sigmali.
+Cekim dustugunde anlatim metni kisaltilmis sureye gore yeniden uretilir
+(`core/narration.py` zaten Gemini ile metin uretiyor, kredi harcamaz). Yeniden
+uretim basarisiz olursa bolum muzik-only yayinlanir (pipeline bu yolu zaten
+destekliyor ve alarm atiyor). Yarim cumle ile ASLA yayinlanmaz.
+
+Kisalan videoya gore muzik/master zinciri tutarli kalmali (`shot_offsets`,
+`running`, `audio_smooth`, `micro_trim`). Bolum suresi ve ses uzunlugu final
+master'da uyusmali.
+
+**Zorunlu platform (kanal karanlik kalmasin):** `series_runner.py:753`
+bugun `ok = _publish_part(...)` sonrasi `if ok:` diyor; HERHANGI bir platform
+basariliysa part `published` isaretlenip `next_part` ilerliyor. Instagram
+basarili + YouTube basarisiz senaryosunda hedef kanal karanlik kalir, isaretci
+ilerler ve ~500 kredi harcanmis olur. Bu hat icin opt-in `required_platforms`
+tanimlanir ve `unnatural-lab` icin `["youtube"]` yazilir: `published` ve
+`advance` YALNIZ YouTube dogrulaninca calisir. Alan yoksa bugunku davranis
+aynen surer (diger hatlar etkilenmez).
 
 **Rol kaybi gorunur olmali:** cekim 1 dusarsa cold-open, cekim 4 dusarse loop
 seam kaybolur. Bu bilgi alarmda ve part kaydinda ACIKCA yazilir; sessizce
@@ -187,8 +245,14 @@ yazar. Boylece yayinlanmamis bolum icin "yayinlandi" alarmi gitmez.
 (b) 2/4 + min_shots=3 -> iptal; (c) min_shots alani yok + 3/4 -> bugunku gibi
 iptal (geriye donuk uyum); (d) dort dusus konumunun DORDU de ayri test edilir
 (cekim 1, 2, 3, 4); (e) `min_shots` bool/sifir/negatif/cekim sayisindan buyuk ->
-preflight ucretli cagri oncesi reddeder; (f) kisalan bolumde anlatim sesi
-video suresini asmaz.
+preflight ucretli cagri oncesi reddeder;
+(f) part26'nin 18 saniyelik varyantinda anlatimin TAMAMI yerlesir: truncation
+uyarisi YOK ve `NARRATION_MAX_EXTEND` tavanina CARPILMAZ (yalniz "ses videodan
+uzun degil" demek YETMEZ, cunku kesilmis anlatim da o testi gecer);
+(g) anlatim sigdirilamazsa bolum muzik-only cikar ve alarm atilir, yarim cumle
+ile yayinlanmaz; (h) YouTube basarisiz + Instagram basarili -> part `published`
+OLMAZ, `next_part` ILERLEMEZ; (i) `required_platforms` alani yokken bugunku
+"herhangi bir platform" davranisi aynen surer.
 
 ---
 
@@ -199,8 +263,12 @@ video suresini asmaz.
 **3a:** uc kopya retry merdiveni (gorsel, ham ses, teslimat sesi) TEK ortak
 yardimciya toplanir. Yardimci sunucunun soyledigi `retryDelay` degerini okur
 (SDK metadata, yoksa metin fallback; parse hatasinda sabit merdivene duser).
-Iki tavan zorunlu: tek bekleme tavani ve TOPLAM QC bekleme tavani. Toplam tavan
-120 dakikalik workflow limitini asamaz.
+Iki tavan zorunlu: tek bekleme tavani ve TOPLAM QC bekleme tavani.
+
+Toplam tavan CAGRI BASINA DEGIL, BOLUM GENELINDE PAYLASILAN tek butcedir. Bir
+bolumde yaklasik on QC isi var; cagri basina tavan bunlarla carpilip 120
+dakikalik workflow limitini yine asardi. Paylasilan butce, video uretimi,
+post-process ve upload icin acik zaman tamponu birakacak sekilde secilir.
 
 **3b:** GUNLUK kota tukenmesinde bosuna uyunmaz. 20/gun tavani saniyeler icinde
 acilmaz; gunluk kota sinyali gelirse merdiven kisa devre yapar ve hold'a gecer.
@@ -260,10 +328,13 @@ Bu adim ROCK 1-4'ten bagimsizdir, kodun duzelmesini beklemez.
 
 ## Kapanis adimlari (kod bittikten sonra, SIRAYLA)
 
-1. **Billing go/no-go kapisi.** Tetiklemeden ONCE ucretli kotanin gectigi
-   dogrulanir (tek ucuz Gemini cagrisi ile). Gecmediyse tetikleme YAPILMAZ;
-   aksi halde yuzlerce video kredisi yanar ve part 26 ucuncu basarisizlikta
-   `needs_human` olur.
+1. **Billing go/no-go kapisi.** Tetiklemeden ONCE ucretli katmana gecildigi
+   dogrulanir. DIKKAT: tek ucuz Gemini cagrisinin basarili olmasi ucretli
+   katmani KANITLAMAZ; ucretsiz kotada kalan son cagri da basarili doner. Test
+   cagrisi yalnizca anahtar/auth kontrolu sayilir. Gercek kanit Cloud
+   projesinin billing/tier durumu ve free-tier kota metrigidir. Gecmediyse
+   tetikleme YAPILMAZ; aksi halde yuzlerce video kredisi yanar ve part 26
+   ucuncu basarisizlikta `needs_human` olur.
 2. **Part 26 durum onarimi, durustce.** Sayac sifirlama "iki basarisizlik da
    altyapiydi" diye YAZILMAZ; depo kaniti bunu yalanliyor (iki kosu da
    continuity `final_reject` ile bitti). Kayit, yeni kismi-yayin politikasi
@@ -272,8 +343,13 @@ Bu adim ROCK 1-4'ten bagimsizdir, kodun duzelmesini beklemez.
    temizlenir veya `retry_history` altinda arsivlenir; basarili yayin kaydinda
    bayat alan kalmaz.
 3. Hat elle tetiklenir, kosu izlenir.
-4. **Kabul kaniti (unit testler YETMEZ).** Tek kosuda: part durumu `published`,
-   YouTube video kimligi dolu, `next_part=27`, final medya sure ve ses
-   dogrulamasi yapilmis, dusen cekim varsa kaydi ve alarmi yazilmis.
+4. **Kabul kaniti (unit testler YETMEZ), kesin tanim.** Tek kosuda HEPSI:
+   - `series.json` part 26 durumu `published`
+   - part kaydindaki `platforms_ok` listesi `youtube` ICERIR
+   - `published.json` son kaydinda `results.youtube` NULL DEGIL (gercek video
+     kimligi), ve bu kimlik YouTube'da acilan gercek bir videoya karsilik gelir
+   - `next_part` 27
+   - final medya suresi ve ses uzunlugu olculup uyusuyor
+   - dusen cekim varsa part kaydinda ve alarmda yazili
 5. **Video INDIRILIP izlenir**, kontakt sayfasi cikarilir. Pipeline'in
    "basarili" demesi kalite kaniti degildir.

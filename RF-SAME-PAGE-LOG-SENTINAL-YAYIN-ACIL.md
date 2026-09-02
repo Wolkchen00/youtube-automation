@@ -87,3 +87,48 @@ Once dogrulama: uc iddiayi kendim kontrol ettim, ucu de DOGRU cikti.
   next_part=27 + medya dogrulamasi), adim 5 videoyu elle izletiyor.
 
 Reddedilen bulgu yok.
+
+## Round 2
+### Integrator bulgular (Codex, birebir)
+```
+- [KILL] ROCK 1a’daki “SERIES EXEMPTION bugün zincir denetimine uygulanmıyor” iddiası yanlış; `review_chain_frame()` zaten `qc.notes` değerini `_review_frames()` çağrısına geçiriyor -> Yeni wiring eklemeyin, mevcut aktarımı regression testiyle kilitleyin
+- [FIX] Yalnız `state_carry_expected` eklemek canlı hatayı çözmez; `_decide()` hâlâ `require_object_match` üzerinden kasıtlı deformasyon için dönen `object_match=false` sonucunu sert red sayar -> Zincir denetimine state-carry deformasyonuna izin veren ayrı kimlik sözleşmesi ekleyin ve `object_match=false + state_carry_ok=true + chain_frame_suitable=true` canlı şeklinin geçtiğini test edin
+- [FIX] ROCK 2’nin “ses video süresini aşmaz” proof’u, `mix_voiceover()` anlatımın sonunu kestikten sonra da yeşil geçebilir -> Part 26’nın 18 saniyelik varyantında anlatımın tamamının yerleştiğini, `NARRATION_MAX_EXTEND` tavanına çarpılmadığını ve truncation warning oluşmadığını doğrulayın
+- [FIX] ROCK 3’te “toplam QC bekleme tavanı” ortak helper çağrısı başına uygulanırsa yaklaşık on QC işiyle katlanıp 120 dakikalık workflow’u yine aşabilir -> Tek episode-wide paylaşılan bekleme bütçesi tanımlayın ve video üretimi, post-process ile upload için açık zaman tamponu bırakın
+- [FIX] Tek ucuz Gemini çağrısının başarılı olması ücretli katmanı kanıtlamaz; ücretsiz kotada kalan tek çağrı da aynı sonucu verir -> Go/no-go kontrolünde Cloud projesinin billing/tier ve free-tier quota metriğini doğrulayın, test çağrısını yalnız anahtar/auth kontrolü sayın
+- [FIX] Runner bugün herhangi bir platform başarılıysa part’ı `published` yapıp `next_part` değerini ilerletiyor; Instagram/TikTok başarılı fakat YouTube başarısız olduğunda hedef kanal karanlık kalır ve 500 kredi harcanmış olur -> Unnatural Lab için opt-in zorunlu platform olarak YouTube’u tanımlayın ve yalnız YouTube doğrulanınca published/advance ile kısmi-yayın alarmını çalıştırın
+- [FIX] Kabul adımındaki “YouTube video kimliği dolu” şartının kaynağı belirsiz; part kaydı kimlik tutmuyor ve best-effort `published.json.results.youtube` başarılı upload sonrası bile null kalabiliyor -> Runner sonucunda YouTube kimliğini part’a kalıcı yazın veya kabulü YouTube API/public URL ile doğrulanmış yayın olarak kesin biçimde tanımlayın
+
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+Yedi bulgunun ikisini kodda birebir dogruladim, ikisi de DOGRU cikti:
+critic.py:610-615 `_decide()` `object_match=false` gelince sert red veriyor
+ve `review_chain_frame` `require_object_match`'i true geciriyor; ve
+series_runner.py:753 `if ok:` herhangi bir platform basarisini yayin sayip
+`next_part` ilerletiyor.
+
+- ACCEPTED (KILL): SERIES EXEMPTION zaten zincir denetimine geciriliyor ->
+  yanlis iddia ROCK 1a'dan cikarildi, yerine regresyon testi (h) kondu.
+- ACCEPTED: state_carry tek basina yetmez, object_match sert red veriyor ->
+  ROCK 1a kimlik sozlesmesi olarak yeniden yazildi; canli sekil
+  (object_match=false + state_carry_ok=true + chain_frame_suitable=true)
+  proof vakasi (a) oldu, gercek kimlik kaymasi vakasi (c) ile korundu.
+- ACCEPTED: anlatim proof'u kesilmis anlatimla da yesil gecerdi -> proof
+  vakasi (f) truncation uyarisi ve MAX_EXTEND tavani sartlarina baglandi.
+  Not: bu riski bagimsiz olarak ben de bulmustum; Codex olcutu keskinlestirdi.
+- ACCEPTED: toplam QC bekleme tavani cagri basina olursa katlanir -> ROCK 3a
+  bolum genelinde PAYLASILAN tek butceye cevrildi, upload icin tampon birakildi.
+- ACCEPTED: tek ucuz cagri ucretli katmani kanitlamaz -> kapanis adimi 1
+  billing/tier ve free-tier kota metrigi dogrulamasina baglandi.
+- ACCEPTED: herhangi bir platform yayin sayiliyor -> ROCK 2'ye opt-in
+  `required_platforms` eklendi, unnatural-lab icin ["youtube"].
+  Proof vakalari (h) ve (i).
+- ACCEPTED (keskinlestirilerek): kabul kaniti belirsizdi -> kapanis adimi 4
+  kesin tanima cevrildi. Not: part kaydi `platforms_ok` TUTUYOR
+  (series_meta.py:149) ve published.json `results.youtube` kimligi tutuyor
+  (part 22'de vKus2kyMIN0), yani kaynak belirsiz degil; kabul her ikisine
+  birden baglandi.
+
+Reddedilen bulgu yok.
