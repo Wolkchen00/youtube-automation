@@ -54,5 +54,9 @@
   "family": "impossible-state-change",
   "music": "Sparse percussive bed opening with one soft icy tick in the very first second. A slow, steady pulse of low woody hits and quiet dry taps carries underneath, spaced far apart with plenty of silence between them. One quiet sustained tone hums softly below the surface, keeping a dry, negative-space-heavy atmosphere that matches the slow creeping spread of frost across warm stone.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/SwYP4f5F/ep27-ice-cube.png"
+  ],
+  "ref_prompt_sha256": "79768f04929a8e23ee440ce19d33c76995182837af256b0aa2ccf9de0dc3287a"
 }

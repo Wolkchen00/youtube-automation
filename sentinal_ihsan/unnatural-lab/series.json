@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 30,
-  "next_part": 27,
+  "next_part": 28,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -334,6 +334,25 @@
       "operator_override": "2026-09-02, Ihsan karari, ACIK OPERATOR OVERRIDE. Onceki gerekce ('iki basarisizlik da QUOTA idi') depo kanitiyla CELISIYORDU: 05:04 ve 05:30 kosulari cekim 2 ve cekim 4 icin continuity final_reject ile bitti, yani ICERIK reddiydi. Sayac, o icerik reddinin KOK NEDENI duzeldigi icin sifirlaniyor: zincir karesi denetimi kasitli terminal hali (state_carry) artik kimlik kaymasi saymiyor, ve gercek reset olunca sonraki cekim tek seferlik sureklilik muafiyeti aliyor. Ayrica qc.min_shots=3 ile 4 cekimin 3'u gecerse bolum yayinlanabiliyor. Altyapi kaynakli hold'lar bundan boyle ayri infra_retry_count sayacindan harciyor, icerik sayacini yakmiyor.",
       "hold_reason": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=68.0, asgari=400.0, tavan=1000",
       "last_reason_code": "BUDGET_EXHAUSTED"
+    },
+    "27": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep27/ep27_music_mastered.mp4",
+      "subtitle": "Something Is WRONG With This ICE CUBE",
+      "stack_sha256": "b28f310c242a79fdf01ee49cd91bf80fdb922f8bf59ba477dbd4732fb6a5ea65",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-02T17:48:10.941795+00:00",
+      "dropped_shots": [
+        4
+      ],
+      "dropped_shot_roles": {
+        "4": "loop_seam"
+      }
     }
   }
 }
