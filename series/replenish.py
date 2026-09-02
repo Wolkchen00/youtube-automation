@@ -1380,7 +1380,19 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
         meta.save()
         logger.info(f"🧩 {slug}: {adopted} öksüz plan sahiplenildi → total_parts={meta.total_parts}")
 
-    pending = max(0, meta.total_parts - meta.next_part + 1)
+    # Kuyruk NUMARA ARALIGINDAN degil, GERCEK plan dosyalarindan sayilir.
+    #
+    # Eski hesap `total_parts - next_part + 1` idi ve `total_parts`in "plani olan
+    # bolum sayisi" oldugu varsayimina dayaniyordu (`_adopt_orphans` bu degismezi
+    # korur). 2026-09-01'de total_parts elle 30'a cekildi ama 27-30 icin plan
+    # YAZILMADI. Sonuc: 2026-09-02'de kuyruk "5 bolum var" sanildi, ikmal sessizce
+    # atlandi ve uretim "Part plani yok: part27.json" ile oldu. Yani kanal, kuyrugu
+    # dolu sanarken bos kaldi. Dosya sistemi tek dogru kaynaktir.
+    pending = 0
+    probe = meta.next_part
+    while part_plan_path(meta.slug, probe).exists():
+        pending += 1
+        probe += 1
     min_q = max(1, int(cfg.get("min_queue", DEFAULT_MIN_QUEUE)))
     if pending >= min_q:
         return True
@@ -1394,7 +1406,11 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
             logger.error(f"❌ HATA {slug}: kullanılmamış birleşik konu havuzu kalmadı.")
             return False
         batch = min(batch, available)
-    start = meta.total_parts + 1
+    # Yeni planlar ILK BOSLUGA yazilir, `total_parts + 1`e DEGIL. Sayac gercekten
+    # yazilmis planlarin onune gecmisse (yukaridaki 30'a cekme vakasi), eski hesap
+    # part 31'den baslar, 27-30 plansiz kalir ve isaretci 27'de SONSUZA KADAR
+    # sikisir; kanal bir daha video cikaramaz.
+    start = probe
     end = start + batch - 1
 
     if dry_run:
@@ -1418,7 +1434,9 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
             atomic_write_json(pp, plan)
 
         # 2) Sonra sayaç + durum ('completed' makine kararıydı → diril)
-        meta.data["total_parts"] = end
+        # Bosluga yazildiginda `end` mevcut sayacin ALTINDA kalabilir; sayac
+        # kucultulmez, yoksa ilerideki planlar kuyruk disinda kalirdi.
+        meta.data["total_parts"] = max(int(meta.total_parts), end)
         if meta.status == "completed":
             meta.data["status"] = "active"
             logger.info(f"▶️ {slug}: içerik tükenmişti (completed) → yeniden 'active'.")
