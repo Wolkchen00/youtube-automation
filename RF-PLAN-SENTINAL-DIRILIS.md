@@ -530,3 +530,52 @@ promptlari duzeltildi (5ab27cd, 207986e, 16bccd2), workflow `active`.
 
 **Bagimsiz panel:** 29 ajan, 5 mercek, her bulgu 2 celiskici dogrulayici; 25 ham bulgu ->
 12 dogrulandi -> 5 blocking onaylandi. 13 dusuk siddetli bulgu DOGRULANMADI (kapsam disi).
+
+---
+
+## EK-8 , ROCK 4a'NIN CEVABI GELDI: gorsel kosullandirma CALISIYOR  [2026-09-02]
+
+Plan 4a icin yayinlanmayan esli pilot ongoruyordu. Cevap bundan once, GERCEK bir
+uretim kosusundan geldi (kosu 33594947982). Bu bir sapmadir ve boyle kayda geciyor:
+kollar kor degildi ve tekrar yok. Buna karsilik veri gercek uretim kosullarindan.
+
+### Ayrim kusursuz
+
+| cekim | zincir karesi | QC sonucu |
+|---|---|---|
+| 1 | (ilk cekim, zincir yok) | **GECTI**, artifact 0/10 |
+| 2 | `🔗 Zincir karesi uygun: cekim 1 -> 2` | **GECTI**, artifact 0/10 |
+| 3 | `🔗 Zincir karesi uygun: cekim 2 -> 3` | **GECTI**, artifact 0/10 |
+| 4 | `⚠️ Zincir karesi sifirlandi: neden=unsuitable` | **3 KEZ RED** (sureklilik) |
+
+Kosullandirilan her cekim ILK denemede gecti. Zinciri sifirlanan tek cekim uc kez
+dustu. Karsilastirma tabani: kosullandirma KAPALIYKEN cekim 2 uc bolumde
+**6/6 dustu** (part 24 x2, part 25 x2, part 26 x2), hicbiri gecemedi.
+
+**Sonuc:** "yapmacik" sorununun cekirdegi olan cekimler-arasi sureklilik, metinle
+degil gorsel kosullandirmayla cozuluyor. Kontakt sayfalarindan cikardigim teshis
+(part 22'nin dort cekimi ayni `kitchen_counter` yazarken video iki ayri mutfakta
+geciyordu) dogrulandi.
+
+### ROCK 4b'nin uygunluk kapisi da kanitlandi
+`⚠️ Zincir karesi sifirlandi: cekim 3 -> 4; neden=unsuitable,
+kanonik=omni_image_references` , kapi uygunsuz kareyi yakaladi ve kanonik referansa
+GORUNUR sekilde sifirladi. Sessizce kotu kare tasimadi. 4b'nin 4. maddesi calisiyor.
+
+### Kalan sorun ARTIK MEKANIZMA DEGIL, PLAN
+Cekim 3 "tines stretching long after the fruit" ile bitiyor , asiri deforme bir
+durum. Uygunluk kapisi onu kosullandirma kaynagi olarak reddediyor, cekim 4 de
+kanonikten baslayip sahneyi tutturamiyor. Yani cekim dizisi, HER cekimin son
+karesi bir sonrakine uygun kaynak olacak sekilde tasarlanmali. Bu ROCK 4c'nin
+icerik kuralina girer.
+
+### Maliyet ve durum
+part 26: 932/1000 kredi (tavan tek seferlik 800->1000 yukseltilmisti, defter
+SIFIRLANMADI). Kalan 68; sonraki kosuda butce kapisi terminal yapip part 27'ye
+gecer. part 27'nin plani YOK , yazilmasi gerekiyor.
+part 26 durumu: qc_retry 2/3.
+
+### Ihsan'in karar vermesi gereken
+1. part 27 plani yazilsin mi (doktrin + state_carry zinciri + "her son kare uygun
+   kaynak olsun" kurali ile)?
+2. Tavan 800'e geri dondurulsun mu (deney bitti)?
