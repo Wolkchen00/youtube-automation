@@ -162,12 +162,25 @@ class Adversarial(unittest.TestCase):
         """1 Eylül'ün gerçek senaryosu: canlı defter base, iki hat aynı anda harcıyor."""
         live = json.loads(LIVE_LEDGER_PATH.read_text(encoding="utf-8"))
         self.assertIn("episode_spend", live, "canlı defter şekli değişmiş")
+        # Sentetik bolum numarasi CANLI defterden TURETILIR. Sabit 27 yazilmisti ve
+        # 2026-09-02'de part 27 gercekten uretilince (848 kredi) bu test kirildi:
+        # birlestirme 84 + 848 topladi. Test uretimle yarisamaz; carpismayan bir
+        # numara sectigimizde konusu (iki hattin harcamasi + gecmis bozulmasin)
+        # aynen korunur.
+        used = [
+            int(key.split(":")[1])
+            for key in live["episode_spend"]
+            if key.startswith("unnatural-lab:") and key.split(":")[1].isdigit()
+        ]
+        fresh_part = max(used, default=0) + 100
+        fresh_key = f"unnatural-lab:{fresh_part}"
+        self.assertNotIn(fresh_key, live["episode_spend"])
         ours = json.loads(json.dumps(live))
         theirs = json.loads(json.dumps(live))
         ours["entries"] = live["entries"] + [
-            {"month": "2026-09", "series": "unnatural-lab", "part": 27,
+            {"month": "2026-09", "series": "unnatural-lab", "part": fresh_part,
              "reserved": 800, "actual": 84.0, "ts": "2026-09-01T21:00:00Z"}]
-        ours["episode_spend"]["unnatural-lab:27"] = 84.0
+        ours["episode_spend"][fresh_key] = 84.0
         theirs["entries"] = live["entries"] + [
             {"month": "2026-09", "series": "flashpoints", "part": 22,
              "reserved": 900, "actual": 105.0, "ts": "2026-09-01T21:05:00Z"}]
@@ -175,7 +188,7 @@ class Adversarial(unittest.TestCase):
         rc, doc, _ = run_merge(live, ours, theirs)
         self.assertEqual(rc, 0)
         # iki hattın harcaması da hayatta
-        self.assertEqual(doc["episode_spend"]["unnatural-lab:27"], 84.0)
+        self.assertEqual(doc["episode_spend"][fresh_key], 84.0)
         self.assertEqual(doc["episode_spend"]["flashpoints:22"], 105.0)
         # ve GEÇMİŞ hiç bozulmadı - asıl veri kaybı korkusu buydu
         for k, v in live["episode_spend"].items():

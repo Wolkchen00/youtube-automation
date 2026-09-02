@@ -116,3 +116,25 @@ Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
   Kismi yayinda hook olarak isaretli cekim (part26'da cekim 3) dusebilir ve
   teaser uretilemez. Canli `hook_teaser.enabled=false` oldugu icin bugun zararsiz;
   teaser acilirsa once bu yedek yazilmali.
+
+- **[YUKSEK, KANALI YINE KARARTIR] Oto-ikmal Gemini'si sert dogrulamadan gecemiyor.**
+  Kuyruk sayimi 2026-09-02'de duzeldi ve ikmal artik Gemini'yi CAGIRIYOR, ama
+  uretilen planlar ALTI denemenin altisinda da reddediliyor. Iki ayri canli
+  kosuda (33658009710 ve elle calistirma) ayni tablo:
+  baskin sebep `cekim N prompt'u yalniz olumlu gorsel dil kullanmali`
+  (NEGATIVE_VIDEO_LANGUAGE), ardindan `anlatim 34-43 kelime` (tavan 28) ve
+  `violation_observation ... zaman-otesi iddia yasak` (TEMPORAL_OVERREACH).
+  Dogrulayici DOGRU calisiyor; sorun uretim tarafinda.
+  Denenen ve GERI ALINAN yama: prompt'a kelime sayma zorunlulugu + TEMPORAL
+  kelime listesi eklendim; (a) sorunu cozmedi, (b) planner prompt'unun
+  bayt-bayt sabit kalmasini koruyan golden testleri kirdi (8 test). Prompt
+  dort kanal tarafindan paylasiliyor, o yuzden gelisigüzel degistirilemez.
+  Dogru cozum muhtemelen: uretim sonrasi OTOMATIK DUZELTME katmani (reddedilen
+  alanlari kural bazinda yeniden yazip tekrar dogrulamak), ya da yalniz bu
+  seriye ozel bir prompt eki. Golden testler once guncellenmeli.
+  Ara cozum: part 27 ve 28 planlari ELLE yazildi (plan_lint TEMIZ). Kuyruk
+  29'da yine bitecek, yani bu madde cozulmezse kanal tekrar kararir.
+- **[orta] `credit_hard_cap_value` 1000'de birakildi.** chain_frames deneyi
+  bitti ve part 27 yayinlandi; `credit_cap_note` 800'e donusu sart kosuyor.
+  test_gercekcilik_rock3 artik 1000'e izin veriyor ama SADECE note geri donus
+  kosulunu yaziyorsa. Deney degerlendirilip 800'e donulmeli.

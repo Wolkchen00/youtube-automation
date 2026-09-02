@@ -19,6 +19,12 @@ from .env import GEMINI_API_KEY, PROJECT_ROOT, logger
 
 NARRATION_CACHE = PROJECT_ROOT / "assets" / "narration"
 
+# Surum-sabit model adi emekliye ayrilinca 404 doner ve anlatim SESSIZCE duser:
+# 2026-09-02'de part27 tam boyle anlatimsiz (muzik-only) yayinlandi
+# ("404 models/gemini-2.0-flash is no longer available"). Takma ad kullaniyoruz ki
+# model kusagi degistiginde hat kendiliginden kirilmasin.
+TEXT_MODEL = "gemini-flash-latest"
+
 # Different narration styles ,  A/B testing which resonates best
 NARRATION_STYLES = [
     {
@@ -119,7 +125,7 @@ def generate_narration_script(concept_name: str, hook: str, style: dict = None) 
 
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(TEXT_MODEL)
         response = model.generate_content(prompt)
         script = response.text.strip().strip('"')
         logger.info(f"📝 Narration script ({style['name']}): {script[:80]}...")
@@ -148,7 +154,7 @@ def shorten_narration_for_duration(narration_text: str, target_seconds: float,
     )
     try:
         genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel(TEXT_MODEL)
         response = model.generate_content(prompt)
         rewritten = str(response.text or "").strip().strip('"')
         if not rewritten or len(rewritten.split()) > max_words:

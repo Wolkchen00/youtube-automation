@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 28,
+    "title": "This HONEY Climbs UPWARD!"
+  },
+  "synopsis": "A man reaches for honey and a thick amber rope climbs up the spoon and arcs toward the cabinet above the counter.",
+  "narration": "Tried to get honey for my tea and it went up the spoon and onto the cabinet. Third jar this week. Anyone seen this?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "An open glass jar of golden honey with a plain metal teaspoon resting inside it. a thick amber rope of honey travelling upward against gravity, glossy and unbroken along its whole length. The frame remains completely locked from a tight side angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt rest on the counter beside the open jar, the jar filling the centre of the frame. A thick amber rope of honey climbing the spoon runs from the surface of the honey up along the metal handle and into the air above the rim, glossy and steady in the warm light.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "a thick amber rope of honey travels upward along the spoon handle",
+      "state_carry": "a thick amber rope of honey climbing the spoon"
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "An open glass jar of golden honey with a plain metal teaspoon resting inside it. a thick amber rope of honey travelling upward against gravity, glossy and unbroken along its whole length. The frame remains completely locked from a tight side angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lift the teaspoon slowly out of the jar, a thick amber rope of honey climbing the spoon stretching longer as the metal rises, with the honey rope arcing high above the open jar in one smooth glossy curve.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the honey rope stretches longer and arcs above the jar rim",
+      "state_carry": "the honey rope arcing high above the open jar"
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "An open glass jar of golden honey with a plain metal teaspoon resting inside it. a thick amber rope of honey travelling upward against gravity, glossy and unbroken along its whole length. The frame remains completely locked from a tight side angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt hold the teaspoon steady while the honey rope arcing high above the open jar reaches the underside of the cabinet, where a slow amber disc spreading under the cabinet widens in the warm glow.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the amber rope reaches the cabinet and spreads into a widening disc",
+      "state_carry": "a slow amber disc spreading under the cabinet"
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "An open glass jar of golden honey with a plain metal teaspoon resting inside it. a thick amber rope of honey travelling upward against gravity, glossy and unbroken along its whole length. The frame remains completely locked from a tight side angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lower the teaspoon back into the jar exactly as at the opening, a slow amber disc spreading under the cabinet thinning as the glossy rope draws back down toward the rim and keeps climbing along the metal handle.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the amber rope draws back down and climbs the handle again"
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Honey jar",
+    "descriptor": "An open glass jar of golden honey with a plain metal teaspoon resting inside it",
+    "environment": "kitchen_counter",
+    "framing": "The frame remains completely locked from a tight side angle across the kitchen counter.",
+    "anomaly_descriptor": "a thick amber rope of honey travelling upward against gravity, glossy and unbroken along its whole length"
+  },
+  "face_visible": false,
+  "family": "reversed-physics",
+  "music": "Sparse percussive bed opening with one soft glassy tap in the very first second. A slow, steady pulse of low woody hits and quiet dry ticks carries underneath, spaced far apart with generous silence between them. One quiet sustained tone hums softly below the surface, holding a dry, negative-space-heavy atmosphere that matches the slow upward crawl of thick amber honey.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}
