@@ -7,14 +7,14 @@
     "resolution": "1080p",
     "master_lufs": -14,
     "engine": "omni",
-    "chain_frames": false,
+    "chain_frames": true,
     "chain_scope": "episode",
     "audio_smooth": true,
     "micro_trim": 0.25,
     "face_visible": false,
     "omit_character_refs": true,
     "credit_hard_cap": true,
-    "credit_hard_cap_value": 800,
+    "credit_hard_cap_value": 1000,
     "credit_monthly_cap_value": 14000,
     "durable_credit_ledger": true,
     "credit_excludes_music": true,
@@ -40,7 +40,9 @@
       "scene_cut_scan": true,
       "scene_cut_fail": false,
       "require_all_shots": true
-    }
+    },
+    "credit_cap_note": "2026-09-02 Ihsan karari, TEK SEFERLIK DENEY: 800 -> 1000. part26'ya iki basarisiz denemede 428 kredi yandi, kalan 372 dort ana cekimin muhafazakar tabani ~400'un altinda kaldi ve butce kapisi uretimi baslatmiyordu. Defter SIFIRLANMADI (gercek harcama korunuyor); yalniz tavan gecici yukseltildi. chain_frames deneyi bittikten sonra 800'e geri dondurulecek.",
+    "chain_frames_note": "2026-09-02: sureklilik 3 bolumde 6 kez dustu (part24 x2, 25 x2, 26 x2). Metin coozumu tuketildi (cekim1 promptlari + state_carry zinciri). ROCK 4b uc kusuru kapattigi icin gorsel kosullandirma guvenle aciliyor. chain_scope=episode: bolumler arasi tasima YOK."
   },
   "art_style": "Vertical 9:16 real-world footage: a pair of hands working with one ordinary household object on a fixed everyday surface in a lived-in home. The view stays in one unchanging position for the whole shot; the framing remains identical. Slight sensor grain in the shadows; window light clips to white on the surface edge; mixed warm lamp and cool daylight colour. Worn, smudged, imperfect real surfaces with a hint of everyday clutter at the frame edges. The face stays outside the frame. Exactly ONE impossible property is visibly active; everything else behaves normally.",
   "style_ref_url": null,
