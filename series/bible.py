@@ -210,6 +210,15 @@ class Bible:
         return v if v in ("series", "episode") else "series"
 
     @property
+    def allow_cross_episode_chaining(self) -> bool:
+        """Bölümler arası kare taşımaya ayrı ve açık üretim izni.
+
+        ``chain_scope='series'`` tek başına yeterli değildir; eski varsayılanın kazara
+        canlıya taşınmasını önlemek için operatör ayrıca tam JSON boolean ``true`` yazar.
+        """
+        return self.data["series"].get("allow_cross_episode_chaining") is True
+
+    @property
     def state_machine_version(self) -> int:
         """Seri koşucusu durum makinesi sürümü; yazılmamışsa tam eski davranış."""
         value = self.data["series"].get("state_machine_version", 1)

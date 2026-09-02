@@ -218,7 +218,22 @@ def load_plan(path: str | Path) -> dict:
     return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
-def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
+def _assert_image_bindings(image_urls: list[str], bindings: list[dict]) -> None:
+    """Numaralı prompt bağlarının payload sırasından kopmasına izin verme."""
+    assert len(image_urls) == len(bindings), "görsel URL/etiket sayısı eşleşmiyor"
+    for index, (url, binding) in enumerate(zip(image_urls, bindings), start=1):
+        assert binding == {
+            "index": index,
+            "url": url,
+            "label": binding["label"],
+        }, f"görsel {index} URL/etiket eşleşmesi bozuk"
+        assert binding["label"].startswith(f"[image {index}] "), (
+            f"görsel {index} etiketi yanlış konumu söylüyor"
+        )
+
+
+def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None,
+                 chain_url: str | None = None) -> dict:
     """Bir çekimi generate_omni_shot için somut parametrelere çevir.
 
     Dönüş: {
@@ -234,8 +249,13 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
     art = bible.art_style.strip()
 
     character_ids: list[str] = []
-    image_urls: list[str] = []
+    image_references: list[dict[str, str]] = []
     binding_lines: list[str] = []
+
+    # Zincir karesi de dahil TAM payload sırası önce burada kurulur. Etiketler aşağıda
+    # aynı listeden türetilir; sonradan prepend ederek numaraları kaydırmak yasaktır.
+    if chain_url:
+        image_references.append({"url": chain_url, "role": "chain"})
 
     # Bölüm-başı obje referansları her zaman ilk sıradadır. Shot düzeyi alan,
     # gerektiğinde plan düzeyi alanı bilinçli olarak geçersiz kılar.
@@ -249,12 +269,12 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
             if not _is_https_url(url):
                 warnings.append(f"Obje referans URL'i geçersiz: {url!r}")
                 continue
-            image_urls.append(url)
+            image_references.append({"url": url, "role": "object"})
             binding_lines.append(
-                f"[image {len(image_urls)}] is the exact object: keep its shape, colour, "
+                f"[image {len(image_references)}] is the exact object: keep its shape, colour, "
                 "scale and markings identical."
             )
-    object_refs_added = bool(image_urls)
+    object_refs_added = any(ref["role"] == "object" for ref in image_references)
 
     # Ortam referansı obje referanslarından hemen sonra gelir. Bu sıra formatın
     # video payload sözleşmesidir ve sonraki legacy referanslardan bağımsızdır.
@@ -264,10 +284,10 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
         if not env:
             warnings.append(f"Ortam '{env_id}' bible'da yok")
         elif env.get("ref_image_url"):
-            image_urls.append(env["ref_image_url"])
+            image_references.append({"url": env["ref_image_url"], "role": "environment"})
             if prop_ref_urls:
                 binding_lines.append(
-                    f"[image {len(image_urls)}] is the room and surface: keep the same surface and light."
+                    f"[image {len(image_references)}] is the room and surface: keep the same surface and light."
                 )
         else:
             warnings.append(f"Ortam '{env_id}' referans görseli yok")
@@ -283,7 +303,7 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
             if ch.get("character_id"):
                 character_ids.append(ch["character_id"])
             elif ch.get("ref_image_url"):
-                image_urls.append(ch["ref_image_url"])
+                image_references.append({"url": ch["ref_image_url"], "role": "character"})
                 warnings.append(f"Karakter '{cid}' henüz kaydedilmemiş → referans görsel kullanılıyor")
             else:
                 warnings.append(f"Karakter '{cid}' için characterId/referans görsel yok")
@@ -295,7 +315,7 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
         if not env:
             warnings.append(f"Ortam '{env_id}' bible'da yok")
         elif env.get("ref_image_url"):
-            image_urls.append(env["ref_image_url"])
+            image_references.append({"url": env["ref_image_url"], "role": "environment"})
         else:
             warnings.append(f"Ortam '{env_id}' referans görseli yok")
 
@@ -305,7 +325,7 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
         if not pr:
             warnings.append(f"Aksesuar '{pid}' bible'da yok")
         elif pr.get("ref_image_url"):
-            image_urls.append(pr["ref_image_url"])
+            image_references.append({"url": pr["ref_image_url"], "role": "prop"})
         else:
             warnings.append(f"Aksesuar '{pid}' referans görseli yok")
 
@@ -322,6 +342,27 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
         else:
             warnings.append(f"Konuşmacı '{sid}' için ses tanımlı değil")
     audio_ids = list(dict.fromkeys(audio_ids))
+
+    image_urls = [reference["url"] for reference in image_references]
+    image_bindings: list[dict] = []
+    if chain_url:
+        labels = {
+            "chain": "is the previous accepted shot's suitable last frame: continue its camera, surface, light and object state.",
+            "object": "is the exact object: keep its shape, colour, scale and markings identical.",
+            "environment": "is the room and surface: keep the same surface and light.",
+            "character": "is a character reference: keep that character's identity consistent.",
+            "prop": "is a prop reference: keep that prop's identity consistent.",
+        }
+        image_bindings = [
+            {
+                "index": index,
+                "url": reference["url"],
+                "label": f"[image {index}] {labels[reference['role']]}",
+            }
+            for index, reference in enumerate(image_references, start=1)
+        ]
+        _assert_image_bindings(image_urls, image_bindings)
+        binding_lines = [binding["label"] for binding in image_bindings]
 
     if binding_lines:
         base_prompt = f"{base_prompt}\n\n" + "\n".join(binding_lines)
@@ -346,7 +387,10 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None) -> dict:
         "resolution": bible.resolution,
         "seed": shot.get("seed"),
     }
-    return {"kwargs": kwargs, "warnings": warnings, "units": units}
+    result = {"kwargs": kwargs, "warnings": warnings, "units": units}
+    if chain_url:
+        result["image_bindings"] = image_bindings
+    return result
 
 
 def resolve_visual_shot(bible: Bible, shot: dict, chain_url: str | None = None) -> dict:

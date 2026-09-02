@@ -145,6 +145,7 @@ class ChainDecisionTests(unittest.TestCase):
         episode = Bible(bible_data(chain=True))
         series_data = bible_data(chain=True)
         series_data["series"]["chain_scope"] = "series"
+        series_data["series"]["allow_cross_episode_chaining"] = True
         self.assertIsNone(series_runner._episode_chain_start(episode, meta))
         self.assertEqual(
             series_runner._episode_chain_start(Bible(series_data), meta),
@@ -637,6 +638,12 @@ class EngineFixture(unittest.TestCase):
             ))
             stack.enter_context(mock.patch.object(
                 produce, "upload_to_imgbb", side_effect=lambda path: f"frame://{path.stem}"
+            ))
+            stack.enter_context(mock.patch.object(
+                produce.critic, "review_chain_frame", return_value=(True, [])
+            ))
+            stack.enter_context(mock.patch.object(
+                produce.critic, "log_chain_frame_event"
             ))
             stack.enter_context(mock.patch.object(
                 produce.ffmpeg_tools, "get_video_duration", return_value=10.0

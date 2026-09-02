@@ -8,6 +8,7 @@
     "master_lufs": -14,
     "engine": "omni",
     "chain_frames": false,
+    "chain_scope": "episode",
     "audio_smooth": true,
     "micro_trim": 0.25,
     "face_visible": false,

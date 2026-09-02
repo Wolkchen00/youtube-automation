@@ -101,8 +101,9 @@ def _actual_episode_spent(slug: str, part: int) -> int | None:
 
 
 def _episode_chain_start(bible, meta: SeriesMeta) -> str | None:
-    """Return the prior episode frame only for legacy series-scoped chaining."""
-    if bible and bible.chain_frames and bible.chain_scope == "series":
+    """Yalnız ayrı açık izin verilmişse önceki bölüm karesini oku."""
+    if (bible and bible.chain_frames and bible.chain_scope == "series"
+            and bible.allow_cross_episode_chaining):
         return meta.data.get("last_frame_url")
     return None
 
@@ -548,6 +549,10 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
 
     from series.bible import Bible, episode_dir
     bible = Bible.load(slug)
+    chain_error = produce.chain_configuration_error(bible) if bible else None
+    if chain_error:
+        logger.error(f"❌ ZİNCİR GÜVENLİK KAPISI: {chain_error}")
+        return False
     new_state_machine = bool(bible and bible.state_machine_version >= 2)
     if new_state_machine:
         migrate_malformed_approval_holds(meta, bible)
@@ -693,7 +698,8 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         return False
     meta.mark_produced(n, video, subtitle)
     # Zincir: bu bölümün son karesini sonraki bölüm için series.json'a yaz (bulut-kalıcı).
-    if bible and bible.chain_frames and bible.chain_scope == "series":
+    if (bible and bible.chain_frames and bible.chain_scope == "series"
+            and bible.allow_cross_episode_chaining):
         sidecar = episode_dir(slug, n) / "last_frame.txt"
         if sidecar.exists():
             meta.data["last_frame_url"] = sidecar.read_text(encoding="utf-8").strip()

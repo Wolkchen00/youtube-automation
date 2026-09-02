@@ -69,6 +69,15 @@ class ChainDecision:
 
 
 @dataclass(frozen=True)
+class NextChainFrame:
+    """Kabul edilen tek çekimden türetilen taze zincir sonucu."""
+
+    url: str | None
+    canonical_reset: bool
+    error: str | None = None
+
+
+@dataclass(frozen=True)
 class ProduceResult:
     """Typed production outcome used by the scheduler's fail-closed state machine."""
 
@@ -136,6 +145,121 @@ def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
             "chain=true fakat önceki son kare yok",
         )
     return ChainDecision(available_url, False, True, next_chained, True)
+
+
+def chain_configuration_error(bible: Bible) -> str | None:
+    """Kazara bölümler-arası zinciri üretim başlamadan kapat."""
+    if (bible.chain_frames and bible.chain_scope == "series"
+            and not bible.allow_cross_episode_chaining):
+        return (
+            "bible.series.chain_frames=true ve chain_scope='series' bölümler arası kare "
+            "taşır; üretim güvenlik nedeniyle durdu. Bilinçli kullanım için ayrıca "
+            "bible.series.allow_cross_episode_chaining=true yazılmalı"
+        )
+    return None
+
+
+def _initial_chain_url(bible: Bible, supplied_url: str | None) -> str | None:
+    """Bölüm kapsamındaki seride dışarıdan verilmiş sidecar URL'ini kesin olarak yoksay."""
+    if bible.chain_frames and bible.chain_scope == "series":
+        return supplied_url
+    return None
+
+
+def _canonical_scene_source(bible: Bible, shot: dict | None, plan: dict,
+                            default_engine: str) -> str | None:
+    """Zincir sıfırlanınca text-only yerine kullanılacak kanonik görsel katmanı bul."""
+    if not shot:
+        return None
+    engine = (shot.get("engine") or default_engine).lower()
+    if engine == "omni":
+        resolved = resolve_shot(bible, shot, plan)
+        if resolved["kwargs"].get("image_urls"):
+            return "omni_image_references"
+        return None
+    resolved = resolve_visual_shot(bible, shot)
+    return "visual_start_image" if resolved.get("start_image_url") else None
+
+
+def _next_chain_frame(bible: Bible, plan: dict, shot: dict,
+                      next_shot: dict | None, out_file: Path, *,
+                      default_engine: str, qc_cfg: dict,
+                      object_ref: bytes | None, episode: int,
+                      experiment_id: str | None = None) -> NextChainFrame:
+    """Her kabulden sonra yalnız o çekime ait son kareyi denetle ve yükle.
+
+    Her çağrı ``None`` ile başlar; çıkarma/yükleme/QC hatasının önceki URL'yi taşıması
+    yapısal olarak mümkün değildir. Bölüm içindeki hata kanonik görsele görünür biçimde
+    sıfırlanır; kanonik görsel yoksa text-only üretime düşmek yerine kapı kapanır.
+    """
+    source_n = int(shot.get("n") or 0)
+    next_n = int(next_shot.get("n") or 0) if next_shot else None
+    canonical_source = _canonical_scene_source(
+        bible, next_shot, plan, default_engine
+    )
+
+    def record(event: str, **fields) -> str | None:
+        try:
+            critic.log_chain_frame_event(slug=bible.slug, entry={
+                "event": event,
+                "episode": int(episode),
+                "shot": source_n,
+                "next_shot": next_n,
+                **fields,
+            }, experiment_id=experiment_id)
+        except Exception as error:
+            return f"zincir kararı QC günlüğüne yazılamadı: {error}"
+        return None
+
+    def reset_or_fail(reason: str, details: list[str] | None = None) -> NextChainFrame:
+        if canonical_source:
+            logger.warning(
+                f"⚠️ Zincir karesi sıfırlandı: çekim {source_n} → {next_n}; "
+                f"neden={reason}, kanonik={canonical_source}"
+            )
+            log_error = record(
+                "chain_frame_reset", verdict="canonical_reset", reason=reason,
+                reasons=details or [], canonical_source=canonical_source,
+            )
+            return NextChainFrame(None, True, log_error)
+        message = (
+            f"çekim {source_n} zincir karesi kullanılamadı ({reason}) ve çekim "
+            f"{next_n if next_n is not None else 'sonraki bölüm'} için kanonik görsel yok; "
+            "text-only üretime düşülmedi"
+        )
+        logger.error(f"❌ {message}")
+        log_error = record(
+            "chain_frame_failure", verdict="fail_closed", reason=reason,
+            reasons=details or [], canonical_source=None,
+        )
+        return NextChainFrame(None, False, log_error or message)
+
+    fresh_frame = ffmpeg_tools.extract_last_frame(out_file)
+    if not fresh_frame:
+        return reset_or_fail("frame_extract_failed")
+    try:
+        suitable, reasons = critic.review_chain_frame(
+            bible, shot, fresh_frame, str(shot.get("prompt") or ""), qc_cfg,
+            object_ref=object_ref, episode=episode, experiment_id=experiment_id,
+        )
+    except critic.QCApiExhausted as error:
+        return reset_or_fail(f"suitability_qc_{error.reason}", [str(error)])
+    except Exception as error:
+        return reset_or_fail("suitability_qc_failed", [str(error)])
+    if not suitable:
+        return reset_or_fail("unsuitable", reasons)
+
+    fresh_url = upload_to_imgbb(fresh_frame)
+    if not fresh_url:
+        return reset_or_fail("upload_failed")
+    log_error = record(
+        "chain_frame_suitability", verdict="pass", reason=None,
+        reasons=[], canonical_source=None,
+    )
+    if log_error:
+        return NextChainFrame(None, False, log_error)
+    logger.info(f"🔗 Zincir karesi uygun: çekim {source_n} → {next_n or 'sonraki bölüm'}")
+    return NextChainFrame(fresh_url, False)
 
 
 def episode_spent(slug: str, number: int) -> float | None:
@@ -1138,6 +1262,10 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     ):
         logger.error("❌ bible.series.chain_scope yalnız 'series' veya 'episode' olabilir")
         return None
+    chain_error = chain_configuration_error(bible)
+    if chain_error:
+        logger.error(f"❌ ZİNCİR GÜVENLİK KAPISI: {chain_error}")
+        return None
     if "required_layers" in series_cfg:
         raw_layers = series_cfg.get("required_layers")
         if (not isinstance(raw_layers, list)
@@ -1304,8 +1432,10 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     if not dry_run:
         check_credit()  # ücretsiz okuma — başlangıç bakiyesi loglanır
 
-    chain_url = chain_start_url if chaining else None
+    # Bölüm kapsamı dışarıdan yanlışlıkla verilmiş eski sidecar URL'ini de okumaz/kullanmaz.
+    chain_url = _initial_chain_url(bible, chain_start_url)
     last_frame_url = None
+    chain_reset_pending = False
     shot_files: list[Path] = []
     shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
     running = 0.0
@@ -1319,7 +1449,19 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         next_shot = plan["shots"][shot_index + 1] if shot_index + 1 < len(plan["shots"]) else None
         chain_decision = decide_shot_chain(shot, next_shot, chaining, chain_url)
         if chain_decision.error:
-            if previous_shot_dropped and chain_decision.require_previous:
+            if chain_reset_pending and chain_decision.require_previous:
+                logger.warning(
+                    f"⚠️ Çekim {n} zincir yerine kanonik sahneden başlatılıyor; "
+                    "önceki kabul edilmiş karenin uygunluk/yükleme kapısı geçilemedi"
+                )
+                chain_decision = ChainDecision(
+                    start_url=None,
+                    reset_before=True,
+                    require_previous=False,
+                    capture_last_frame=chain_decision.capture_last_frame,
+                    explicit=chain_decision.explicit,
+                )
+            elif previous_shot_dropped and chain_decision.require_previous:
                 logger.warning(
                     f"⚠️ Çekim {n} zinciri kırıldı: önceki çekim düştüğü için son kare yok; "
                     "çekim kendi promptuyla başlangıç karesiz üretilecek"
@@ -1335,6 +1477,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 logger.error(f"❌ Çekim {n} zincir kapısı: {chain_decision.error}")
                 return None
         chain_url = chain_decision.start_url
+        chain_reset_pending = False
 
         # Idempotent legacy cache, or ROCK 3 media+content-hash QC revalidation.
         if not dry_run and out_file.exists() and out_file.stat().st_size > 0:
@@ -1362,23 +1505,30 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 if qc_budget and qc_budget.get("allocator"):
                     qc_budget["allocator"].mark_main_authorized(int(n))
                     qc_budget["allocator"].mark_complete(int(n))
-                if chain_decision.capture_last_frame:
-                    lf = ffmpeg_tools.extract_last_frame(out_file)
-                    if lf:
-                        up = upload_to_imgbb(lf)
-                        if up:
-                            chain_url = up
-                            last_frame_url = up
+                if chaining:
+                    last_frame_url = None
+                if (chain_decision.capture_last_frame
+                        and (next_shot is not None or bible.chain_scope == "series")):
+                    next_frame = _next_chain_frame(
+                        bible, plan, shot, next_shot, out_file,
+                        default_engine=default_engine, qc_cfg=qc_cfg,
+                        object_ref=object_ref_bytes, episode=number,
+                        experiment_id=experiment_id,
+                    )
+                    chain_url = next_frame.url
+                    chain_reset_pending = next_frame.canonical_reset
+                    if next_frame.error:
+                        logger.error(f"❌ Zincir karesi hazırlanamadı: {next_frame.error}")
+                        return None
+                    if next_frame.url:
+                        last_frame_url = next_frame.url
                 previous_shot_dropped = False
                 continue
 
         # ── OMNI çekimi (karakter + ses tutarlılığı) ──────────────────────────
         if shot_engine == "omni":
-            res = resolve_shot(bible, shot, plan)
+            res = resolve_shot(bible, shot, plan, chain_url=chain_decision.start_url)
             kwargs = res["kwargs"]
-            # Bitmeyen yolculuk: önceki çekimin/bölümün son karesini referans olarak ekle
-            if chain_decision.start_url:
-                kwargs["image_urls"] = [chain_url] + list(kwargs.get("image_urls") or [])
             if strict_plan:
                 units_ok, final_units = validate_ref_units(
                     kwargs.get("image_urls"), kwargs.get("character_ids")
@@ -1543,13 +1693,23 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 resolution=kwargs["resolution"], seed=kwargs["seed"],
                 credits=credits, status=status, video_url=video_url, local_file=out_file,
             ), output_dir=output_area)
-            if chain_decision.capture_last_frame and status == "ok":
-                lf = ffmpeg_tools.extract_last_frame(out_file)
-                if lf:
-                    up = upload_to_imgbb(lf)
-                    if up:
-                        chain_url = up
-                        last_frame_url = up
+            if chaining and status == "ok":
+                last_frame_url = None
+            if (chain_decision.capture_last_frame and status == "ok"
+                    and (next_shot is not None or bible.chain_scope == "series")):
+                next_frame = _next_chain_frame(
+                    bible, plan, shot, next_shot, out_file,
+                    default_engine=default_engine, qc_cfg=qc_cfg,
+                    object_ref=object_ref_bytes, episode=number,
+                    experiment_id=experiment_id,
+                )
+                chain_url = next_frame.url
+                chain_reset_pending = next_frame.canonical_reset
+                if next_frame.error:
+                    logger.error(f"❌ Zincir karesi hazırlanamadı: {next_frame.error}")
+                    return None
+                if next_frame.url:
+                    last_frame_url = next_frame.url
             previous_shot_dropped = status != "ok"
             if previous_shot_dropped:
                 chain_url = None
@@ -1694,13 +1854,23 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             duration=rv["duration"], resolution="720p", seed=None,
             credits=credits, status=status, video_url=video_url, local_file=out_file,
         ), output_dir=output_area)
-        if chain_decision.capture_last_frame and status == "ok":
-            lf = ffmpeg_tools.extract_last_frame(out_file)
-            if lf:
-                up = upload_to_imgbb(lf)
-                if up:
-                    chain_url = up
-                    last_frame_url = up
+        if chaining and status == "ok":
+            last_frame_url = None
+        if (chain_decision.capture_last_frame and status == "ok"
+                and (next_shot is not None or bible.chain_scope == "series")):
+            next_frame = _next_chain_frame(
+                bible, plan, shot, next_shot, out_file,
+                default_engine=default_engine, qc_cfg=qc_cfg,
+                object_ref=object_ref_bytes, episode=number,
+                experiment_id=experiment_id,
+            )
+            chain_url = next_frame.url
+            chain_reset_pending = next_frame.canonical_reset
+            if next_frame.error:
+                logger.error(f"❌ Zincir karesi hazırlanamadı: {next_frame.error}")
+                return None
+            if next_frame.url:
+                last_frame_url = next_frame.url
         previous_shot_dropped = status != "ok"
         if previous_shot_dropped:
             chain_url = None
@@ -1939,12 +2109,13 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     # chain_scope="episode" ise bölümler arası taşıma YOK — sidecar yazılmaz.
     if chaining and bible.chain_scope == "series":
         if not last_frame_url:
-            lf = ffmpeg_tools.extract_last_frame(final_ep)
-            if lf:
-                last_frame_url = upload_to_imgbb(lf)
-        if last_frame_url:
-            (work_dir / "last_frame.txt").write_text(last_frame_url, encoding="utf-8")
-            logger.info("🔗 Son kare bir sonraki bölüm için saklandı (bitmeyen yolculuk).")
+            logger.error(
+                "❌ Bölümler arası zincir için son kabul edilmiş çekime ait uygun kare yok; "
+                "eski kare sidecar'a yazılmadı"
+            )
+            return None
+        (work_dir / "last_frame.txt").write_text(last_frame_url, encoding="utf-8")
+        logger.info("🔗 Son kare bir sonraki bölüm için saklandı (bitmeyen yolculuk).")
 
     report.export_xlsx(slug, output_dir=output_area)
     summary = report.summarize(slug, output_dir=output_area)

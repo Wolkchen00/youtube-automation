@@ -10,7 +10,7 @@ from pathlib import Path
 
 from .bible import Bible, doctrine_path, doctrine_repo_path, doctrine_sha256
 from .omni_api import validate_ref_units
-from .produce import decide_shot_chain
+from .produce import chain_configuration_error, decide_shot_chain
 from .replenish import (
     strict_plan_validation_enabled,
     validate_plan_against_config,
@@ -35,6 +35,9 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
         "series", "episode"
     ):
         errors.append("bible: chain_scope yalnız 'series' veya 'episode' olabilir")
+    chain_error = chain_configuration_error(bible)
+    if chain_error:
+        errors.append(f"bible: {chain_error}")
     if "required_layers" in series_cfg:
         raw_layers = series_cfg.get("required_layers")
         if (not isinstance(raw_layers, list)
@@ -108,9 +111,9 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
             errors.append(f"çekim {entry['shot']} zincir: {decision.error}")
         trace.append(entry)
         if strict_plan_validation_enabled(cfg) and bible.engine == "omni" and not decision.error:
-            kwargs = resolve_shot(bible, shot, plan)["kwargs"]
-            if decision.start_url:
-                kwargs["image_urls"] = [decision.start_url] + list(kwargs.get("image_urls") or [])
+            kwargs = resolve_shot(
+                bible, shot, plan, chain_url=decision.start_url
+            )["kwargs"]
             ok, units = validate_ref_units(kwargs.get("image_urls"), kwargs.get("character_ids"))
             if not ok:
                 errors.append(f"çekim {entry['shot']}: zincir sonrası referans kotası {units}/7")

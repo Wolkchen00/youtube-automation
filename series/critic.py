@@ -208,6 +208,17 @@ Judge [OPENING FRAME] as one standalone frame. The episode's impossible property
 already be active and readable in this exact frame, and the object must fill a large
 share of the frame. first_frame_ok must always be a JSON boolean."""
 
+_CHAIN_FRAME_QC_ADDENDUM = """
+
+CHAIN-CONDITIONING SUITABILITY GATE (mandatory): add these required fields:
+  "chain_frame_suitable": bool,
+  "chain_frame_notes": string
+This exact image would become the visual starting condition for the next generated shot.
+Answer true only when it is a stable, coherent continuation anchor: the primary object and
+work surface are readable, object pose and geometry are intentional, hands/limbs are natural,
+and no transient blur, occlusion, cut, duplicated element, glitch, or accepted-but-imperfect
+artifact would be amplified by conditioning the next shot. Always return a JSON boolean."""
+
 
 def _parse_json(txt: str):
     """Gemini çıktısını kurtarıcı ayrıştırma (replenish kalıbı): ```json çiti / kırpık uçlar tolere edilir."""
@@ -389,6 +400,7 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    anomaly_descriptor: str | None = None,
                    violation_observation: str | None = None,
                    state_carry_expected: str | None = None,
+                   chain_frame_suitability: bool = False,
                    slug: str, episode: int | None, shot: int | None,
                    experiment_id: str | None = None) -> dict | None:
     """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
@@ -442,6 +454,8 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
         instruction += _violation_addendum(violation_observation)
     if state_carry_expected:
         instruction += _state_carry_addendum(state_carry_expected)
+    if chain_frame_suitability:
+        instruction += _CHAIN_FRAME_QC_ADDENDUM
     try:
         client = genai.Client(api_key=qc_key)
         config = types.GenerateContentConfig(
@@ -634,6 +648,50 @@ def _decide(review: dict, qc: dict, has_ref: bool,
     if unevaluated:
         return "hold", [*reasons, *unevaluated]
     return ("fail" if reasons else "pass"), reasons
+
+
+def review_chain_frame(bible: Bible, shot: dict, frame_path: Path, prompt: str,
+                       qc: dict | None = None, *, object_ref: bytes | None = None,
+                       episode: int | None = None,
+                       experiment_id: str | None = None) -> tuple[bool, list[str]]:
+    """Son karenin bir sonraki çekimi zehirlemeyeceğini zorunlu olarak denetle."""
+    config = {**QC_DEFAULTS, **(qc or {})}
+    review = _review_frames(
+        [Path(frame_path)], None, prompt, str(config.get("notes") or ""),
+        require_no_face=bool(config.get("require_no_face")),
+        object_ref=object_ref,
+        require_object_match=bool(config.get("require_object_match") and object_ref),
+        chain_frame_suitability=True,
+        slug=bible.slug, episode=episode, shot=int(shot.get("n") or 0),
+        experiment_id=experiment_id,
+    )
+    if not isinstance(review, dict):
+        return False, ["zincir karesi QC yanıtı geçersiz"]
+
+    # Klip QC'sinin standart artifact/anatomi kapıları da bu tek kare için geçerlidir;
+    # süreklilik/ilk-kare/ROCK B alanları burada istenmediği için bilinçli kapatılır.
+    frame_config = {
+        **config,
+        "require_continuity": False,
+        "require_first_frame": False,
+        "enforce": {},
+    }
+    verdict, reasons = _decide(
+        review, frame_config, bool(config.get("require_object_match") and object_ref),
+        int(shot.get("n") or 0),
+    )
+    suitable = review.get("chain_frame_suitable")
+    if type(suitable) is not bool:
+        reasons.append("chain_frame_suitable alanı eksik veya şema dışı")
+    elif not suitable:
+        reasons.append(str(review.get("chain_frame_notes") or "zincir karesi uygun değil"))
+    return verdict == "pass" and suitable is True, reasons
+
+
+def log_chain_frame_event(slug: str, entry: dict, *,
+                          experiment_id: str | None = None) -> None:
+    """Zincir uygunluk/reset kararını QC defterine dayanıklı biçimde yaz."""
+    _strict_log_event(slug, entry, experiment_id=experiment_id)
 
 
 def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
