@@ -244,7 +244,11 @@ class ProtectedStateTests(unittest.TestCase):
         self.assertGreaterEqual(meta["next_part"], 9)
         self.assertGreaterEqual(meta["total_parts"], 10)
         self.assertEqual(meta["publish_mode"], "auto")
-        self.assertEqual(meta["status"], "active")
+        # 2026-09-02: seri "paused" yapıldı (İhsan kararı, aimagine kanalı günde
+        # tek video). Duraklatma yayınlanmış durumu bozmaz, bu testin konusu da
+        # odur; aşağıdaki part 1-8 "published" assert'leri değişmeden korur.
+        # "draft" yine ihlaldir: o, kurulumun bozulduğu anlamına gelir.
+        self.assertIn(meta["status"], ("active", "paused"))
         expected = [str(n) for n in range(1, meta["next_part"])]
         self.assertEqual(sorted(meta["parts"], key=int), expected)
         for number in range(1, 9):

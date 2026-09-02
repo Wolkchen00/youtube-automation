@@ -480,8 +480,13 @@ class InstalledSeriesTests(unittest.TestCase):
                 self.assertTrue(meta.standalone)
                 # Canlı duruma PİNLEME: filo serileri yaşam döngüsünde ilerler
                 # (flashpoints 2026-08-27'de "completed" oldu ve bu assert'i çürüttü).
-                # Değişmez olan şey serinin KURULU olması: taslak ya da askıda değil.
-                self.assertIn(meta.status, ("active", "completed"))
+                # Değişmez olan şey serinin KURULU olması: taslak değil.
+                # "paused" 2026-09-02'de eklendi: İhsan from-scratch'i bilerek
+                # duraklattı (aimagine kanalı günde tek video, yalnız next-stop).
+                # Duraklatma bir kurulum hatası değil, operasyonel bir karardır;
+                # altındaki doktrin assert'leri (çekim sayısı, süre, teaser)
+                # aynen geçerli kalır ve bu seriyi korumaya devam eder.
+                self.assertIn(meta.status, ("active", "completed", "paused"))
                 self.assertEqual(meta.priority, 999)
                 self.assertEqual(meta.auto_replenish["shots"], shots)
                 self.assertEqual(meta.auto_replenish["shot_seconds"], seconds)

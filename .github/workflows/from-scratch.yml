@@ -10,8 +10,15 @@ name: From Scratch Daily
 # kie-uretim concurrency grubu 4 hatti fiilen serilestirir (Kie kredi guvenligi, FAZ 1 kurali).
 
 on:
-  schedule:
-    - cron: '30 14 * * *'   # 14:30 UTC, aimagine kanalinin tarihsel yayin penceresi
+  # DURAKLATILDI 2026-09-02 (Ihsan karari): aimagine kanali gunde 2 video
+  # cikariyordu. Kanal artik yalniz 'Next Stop' seridiyle gunde 1 video
+  # yayinlar. Gunde-1 kilidi (series_runner.py:537) yalnizca next-stop
+  # YAYINLADIKTAN sonra devreye giriyordu; next-stop basarisiz oldugu gun
+  # bu kosu tam bedelle uretiyordu (2026-09-02: 1134 kredi, sifir video).
+  # Seri durumu 'active' ve next_part=11 olarak birakildi; schedule
+  # yorumunu kaldirmak seriyi tam kaldigi bolumden geri acar.
+  # schedule:
+  #   - cron: '30 14 * * *'   # 14:30 UTC, aimagine kanalinin tarihsel yayin penceresi
   workflow_dispatch:
 
 concurrency:
@@ -103,4 +110,4 @@ jobs:
         with:
           name: from-scratch-logs-${{ github.run_number }}
           path: logs/
-          retention-days: 7
+          retention-days: 7"" 

@@ -5,8 +5,8 @@ name: Event Horizon Daily
 # ACALIM GUNLUK 1 VIDEO". Format: 3 x 6 sn gercek uzay-fakti, seed_id'li 27'lik dogrulanmis
 # konu havuzu, teaser kapali. publish_mode="approval": onay gelmeden yayin yok. Doktrin
 # kapisi: kosu basinda KONSEPT SHA-256 loglanir, pin/damga eslesmezse fail-closed.
-# Saat duzeni: from-scratch 14:30 -> BU KOSU 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
-# kie-uretim concurrency grubu 4 hatti fiilen serilestirir (FAZ 1 kurali).
+# Saat duzeni: next-stop 13:20 -> BU KOSU 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
+# from-scratch DURAKLATILDI. kie-uretim concurrency grubu 4 hatti fiilen serilestirir (FAZ 1 kurali).
 
 on:
   schedule:
@@ -100,4 +100,4 @@ jobs:
         with:
           name: event-horizon-logs-${{ github.run_number }}
           path: logs/
-          retention-days: 7
+          retention-days: 7"" 

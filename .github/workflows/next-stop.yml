@@ -6,8 +6,9 @@ name: Next Stop Daily
 # cekim 1 sahneyi acar (chain=false), cekim 2-6 onceki son kareden zincirlenir. hook_shot = 6.
 # Oto-ikmal acik: kuyruk 2'nin altina inince Gemini yeni DURAKLAR yazar (kredi harcamaz),
 # yani trenin nereye gidecegi kendiliginden uretilir.
-# Saat duzeni: bu kosu 13:20 UTC -> from-scratch 14:30 -> event-horizon 16:30 ->
-# unnatural-lab 18:30 -> flashpoints 20:30. kie-uretim concurrency grubu hatlari serilestirir.
+# Saat duzeni: bu kosu 13:20 UTC -> event-horizon 16:30 ->
+# unnatural-lab 18:30 -> flashpoints 20:30. from-scratch DURAKLATILDI.
+# kie-uretim concurrency grubu hatlari serilestirir.
 
 on:
   schedule:
@@ -115,4 +116,4 @@ jobs:
         with:
           name: next-stop-logs-${{ github.run_number }}
           path: logs/
-          retention-days: 7
+          retention-days: 7"" 
