@@ -125,36 +125,39 @@ yayinda part `published` olmaz.
 
 ---
 
-## ROCK 2: Loop kapanisi OLCULUR (kare benzerligi)
+## ROCK 2: KILL , loop kapanisi kare benzerligiyle OLCULEMEZ
 
-**Done looks like:** son cekim yerindeyse, bolumun ILK karesi ile SON karesi
-ffmpeg ile cikarilip yapisal olarak karsilastirilir; benzerlik esigin altindaysa
-`loop_closed=false` yazilir. Boylece "cekim 4 uretildi ama acilis kadrajina
-donmedi" durumu da yakalanir, sadece "cekim dustu" degil.
+Bu rock "ilk kare ile son kareyi karsilastir, benzerlik esigin altindaysa loop
+kirik say" diyordu. Plan esigi uydurmayi yasaklayip CANLI VERIYLE kalibre
+edilmesini sart kosuyordu. Kalibrasyon yapildi ve HIPOTEZI CURUTTU.
 
-**Neden ayri rock:** ROCK 1 cekimin VARLIGINA bakar, bu rock KALITESINE bakar.
-Part 27'de cekim dustugu icin ROCK 1 yeterdi; ama cekim uretilip loop'u yine de
-kapatmadigi durum daha sinsi ve olculmeden gorulmez.
+Olcum (yayinlanmis videolar YouTube'dan indirildi, 64x114 gri tonlama, ilk kare
+ile son karenin ortalama mutlak farki; 0 = ayni, 255 = zit):
 
-**Yontem:** ffmpeg ile iki kare PNG'ye alinir, kucultulup gri tonlamaya
-indirilir ve ortalama mutlak fark hesaplanir. Esik CANLI VERIYLE kalibre
-edilir: yayinlanmis bir bolumun (part 22, loop'u saglam) ve part 27'nin
-(loop'u kirik) degerleri olculup esik ikisinin arasina konur. Esik uydurulmaz.
+| Bolum | Loop durumu | Ilk-son fark |
+|---|---|---|
+| part 22 (vKus2kyMIN0) | SAGLAM, dort cekim tam | **65.66** |
+| part 27 (dnsKT8eTWMo) | KIRIK, cekim 4 dustu | **21.29** |
 
-**Dikkat:** hook_teaser acikken bolumun basina ayri bir kesit ekleniyor ve ILK
-KARE degisiyor. unnatural-lab'da `hook_teaser.enabled=false`, ama olcum
-teaser'dan ONCEKI gövde uzerinden yapilmali ki teaser acilirsa olcum bozulmasin.
+Loop'u KIRIK olan bolum, saglam olandan DAHA BENZER cikti. Onerilen olcut iki
+bolumu TERS siniflandirirdi.
 
-**Proof:** `python -m pytest tests/test_loop_seam.py -q` (yeni). Vakalar:
-(a) ayni kare iki kez -> benzerlik tam, `loop_closed=true`;
-(b) tamamen farkli iki kare -> `loop_closed=false`;
-(c) esik, canli olculmus part 22 ve part 27 degerlerinin ARASINDA;
-(d) kare cikarilamazsa denetim `null` doner ve bolumu DUSURMEZ (fail-open,
-    cunku bu bir kalite raporu, teslimat kapisi degil).
+Sebep, formatin kendi kuralinda: kadraj butun bolum boyunca KILITLI. Dolayisiyla
+ilk-son piksel farki loop kapanisini degil, OBJENIN NE KADAR DEGISTIGINI olcer.
+part 22'de limon dramatik bicimde donustugu icin fark buyuk; part 27 cekim 3'te
+bittigi ve o kare acilisa benzedigi icin fark kucuk. Kilitli kadrajli bir
+formatta ham piksel farki yanlis alettir.
+
+Anlamli bir "loop gercekten kapandi mi" olcumu ancak GORME denetimi ister; o da
+Gemini kotasi harcar ve kota bu kanalin bilinen dar bogazidir (plan non-goal'u).
+
+**Karar: KILL.** Loop icin guvenilir ve ucretsiz sinyal, ROCK 1'in deterministik
+"planin son cekimi bolumde var mi" kontrolüdur. Kanit burada birakiliyor ki ayni
+fikir yeniden onerilmesin.
 
 ---
 
-## ROCK 3: Senaryo gercekciligi olcutu (ikmal denetimine ek)
+## ROCK 2 (yeni numara): Senaryo gercekciligi olcutu (ikmal denetimine ek)
 
 **Done looks like:** ikmalin urettigi plan, mevcut sert dogrulamaya EK OLARAK
 uc gercekcilik olcutunden gecer. Ucu de deterministik, LLM cagrisi yok:
