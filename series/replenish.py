@@ -58,6 +58,7 @@ if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 
 from core.config import GEMINI_API_KEY, logger
+from core.ffmpeg_tools import NARRATION_MAX_TEMPO
 from series import notifier
 from series.bible import (
     Bible,
@@ -514,6 +515,13 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     narrated = isinstance(narr_cfg, dict)
     wmin = int((narr_cfg or {}).get("min_words", 95))
     wmax = int((narr_cfg or {}).get("max_words", 125))
+    # voiceover_continuity (opt-in, shadowedhistory/flashpoints): anlatim yavas
+    # belgesel temposunda okunur, TAM CUMLEYLE biter ve cekimler tek kesintisiz
+    # seslendirmenin altinda birbirinin devami olur. Bayrak YOKSA prompt eskisiyle
+    # BIT-BIT AYNIDIR , diger anlatimli serilerin kelime butcesi bu pencereye gore
+    # hesaplanmadigi icin kural onlara dayatilmaz.
+    vo_continuity = narrated and bool(cfg.get("voiceover_continuity"))
+    speech_window = shots * int(sec) - shots * 2 * bible.micro_trim - 0.7
     want_tc = bool(cfg.get("title_card"))
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
@@ -590,8 +598,17 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     title_rule = title_style or ('2-4 words, poetic, curiosity-driven ,  the title IS the YouTube title of a\n'
                                  '  standalone video (like "Bloom" or "The Last Door"). No drug slang, no clickbait\n'
                                  '  punctuation.')
-    narr_rule = (f"\n- NARRATION: {wmin}-{wmax} words of spoken English voice-over for the WHOLE episode ,  "
-                 f"flowing prose, no camera directions, no shot numbers; follow the CREATIVE BRIEF strictly."
+    narr_pace_rule = (
+        f" It will be read at a measured documentary pace of ~2 words per second; the total "
+        f"speaking window is {speech_window:.1f} seconds, and the complete narration must fit inside it."
+        f"\n- NARRATION COMPLETENESS: The voice-over is ONE continuous, unbroken spoken flow and "
+        f"must end with a complete sentence. Never end mid-sentence, with an ellipsis (\"...\"), "
+        f"or with a cliffhanger fragment. If a sentence crosses the cut, it must be heard as one "
+        f"unbroken sentence."
+    ) if vo_continuity else ""
+    narr_rule = ((f"\n- NARRATION: {wmin}-{wmax} words of spoken English voice-over for the WHOLE episode ,  "
+                  f"flowing prose, no camera directions, no shot numbers; follow the CREATIVE BRIEF strictly."
+                  + narr_pace_rule)
                  if narrated else "")
     tc_rule = ('\n- TITLE_CARD: "title" = the subject/site name (max 40 chars); "subtitle" = place and year '
                'exactly as the CREATIVE BRIEF instructs (max 48 chars).' if want_tc else "")
@@ -674,6 +691,14 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                       "  describe ONE continuous transformation that begins EXACTLY at the previous shot's end\n"
                       "  state and evolves into somewhere new. No cuts, no teleports, no scene resets inside\n"
                       "  an episode.")
+    elif vo_continuity:
+        cont_lead = ("Shot 2 directly continues shot 1's exact same moment and scene"
+                     if shots == 2 else
+                     "Each shot directly continues the previous shot's exact same moment and scene")
+        chain_rule = ("- VOICE-OVER CONTINUITY: Shots are silent visual segments beneath one continuous "
+                      f"voice-over. {cont_lead}; the cut "
+                      "must not reset the location or open a new scene. The spoken sentence remains audibly "
+                      "unbroken across the cut.")
     else:
         chain_rule = ("- SCENE FLOW: shots are DISTINCT cinematic tableaux joined in post by soft transitions , \n"
                       "  each shot may open a new angle, location or moment of the SAME story; order them so the\n"
@@ -1180,7 +1205,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             # alt sinirda %15 pay ince ama teknik olarak sorunsuz anlatimi gecirir.
             # Olcusuz eski 0.7x-1.35x toleransi DEGIL; sinir mikser kapasitesidir.
             lo = max(1, int(wmin * 0.85))
-            hi = int(wmax * 1.15 + 0.999)
+            # voiceover_continuity acikken tolerans MIKSORUN GERCEK tavanina
+            # baglidir (NARRATION_MAX_TEMPO). Sabit 1.15 birakilirsa miksor
+            # tavani dustugu icin band uyusmaz ve her bolumde video uzatilir.
+            tolerance = NARRATION_MAX_TEMPO if cfg.get("voiceover_continuity") else 1.15
+            hi = int(wmax * tolerance + 0.999)
             if not (lo <= wc <= hi):
                 errors.append(f"part {want}: anlatım {wc} kelime ,  hedef {wmin}-{wmax} "
                               f"(kabul {lo}-{hi}) dışında")

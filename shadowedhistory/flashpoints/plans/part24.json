@@ -8,13 +8,13 @@
   "shots": [
     {
       "n": 1,
-      "duration": "8",
+      "duration": "10",
       "prompt": "Vertical framing. Rapid sweeping view from high above the dramatic mountain peaks of northern China, following the snaking path of weathered gray brick battlements as they blend entirely into dry rocky ridges and misty ravines under sharp afternoon sunlight.",
       "seed": null
     },
     {
       "n": 2,
-      "duration": "8",
+      "duration": "10",
       "prompt": "Vertical framing. Perspective from inside a spacecraft cabin window looking down onto the vast expanse of Earth's curved blue horizon, continents and mountain textures clearly visible while human-built walls dissolve into total invisibility against the vast continental terrain.",
       "seed": null
     }
@@ -27,5 +27,5 @@
     "subtitle": "Low Earth Orbit, 1969"
   },
   "hook_shot": 2,
-  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
 }

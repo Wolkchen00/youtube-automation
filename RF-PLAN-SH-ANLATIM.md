@@ -153,3 +153,76 @@ Proof komutu:
 Regresyon komutu (mevcut ses testleri kirilmamali):
 
     python -X utf8 -m pytest tests/test_rocka_audio_master.py tests/test_diegetic_audio.py tests/test_doctrine_gate.py -q
+
+
+---
+
+## KAPANIS: Level 10 incelemesi (2026-09-01)
+
+**Integrator (Codex gpt-5.6-sol, effort high) tur 1:** R1-R5 uygulandi, 7 offline
+kanit yazildi, `tests/test_doctrine_gate.py`'nin eski pinleri yazma listesi
+disinda oldugu icin dogru sekilde `BLOCKED` verdi (uydurmadi).
+
+**Visionary incelemesi:** tam diff okundu, bagimsiz dusman testi yazilip
+kosuldu (`tests/test_visionary_adversarial_anlatim.py`). Uc kusur bulundu:
+
+1. **Ses goruntuyu asiyordu.** `mix_voiceover` uzatma dalinda ses zaman
+   cizelgesini tempo-ONCESI sureden, videoyu tempo-SONRASI sureden turetiyordu.
+   Olculdu: 19,0 sn video + 21,0 sn anlatim -> video 20,40 sn / ses 21,40 sn,
+   yani son karenin otesinde 1,00 sn goruntusuz ses. Duzeltildi: tek `timeline`
+   degeri hem tpad hem iki atrim icin kullaniliyor.
+2. **Gereksiz yeniden kodlama.** Hizlandirma tek basina yettiginde bile
+   `tpad=...:stop_duration=0.000` + libx264 yolu seciliyordu. Duzeltildi: tempo
+   once hesaplaniyor, yetiyorsa tarihsel `-c:v copy` komutu kullaniliyor.
+3. **Kapsam sizintisi.** Yeni `elif narrated:` dali event-horizon (3 cekim),
+   could-you-survive (6) ve time-witness (6) serilerine "Shot 2 devam etsin"
+   kuralini dayatiyordu. Duzeltildi: `auto_replenish.voiceover_continuity`
+   opt-in bayragi. Kanit: golden karsilastirmasinda 9 serinin `contents` ve
+   `system_instruction` alani BIT-BIT ayni kaldi.
+
+**Incelemede bulunan iki ek is (sozlesmede yoktu, kapsama alindi):**
+
+4. **Doktrin hatayi emrediyordu.** `shadowedhistory/KONSEPT.md` v1.6 hem
+   "sert, kendinden emin, HIZLI fakt anlatimi" hem "son cumle yarim birakilip
+   basa baglanir" diyordu; yani kullanicinin sikayet ettigi iki davranis
+   yazili kuraldi. v1.8 eklendi, iki kural acikca IPTAL edildi, SHA-256 yeniden
+   hesaplanip series.json ve part22-25 damgalari guncellendi
+   (`10c4b3fb...e483`). preflight dort bolumde de TEMIZ.
+5. **Kelime kabul bandi eski miksor tavanina bagliydi.** `wmax * 1.15` sabiti
+   miksorun eski 1,15x tavanindan geliyordu; tavan 1,05'e inince band
+   uyusmayacak ve her bolumde video donacakti. Band `NARRATION_MAX_TEMPO`
+   sabitine baglandi (import edildi, bir daha kayamaz).
+
+**Integrator tur 2 calistirilamadi:** Codex kullanim limitine takildi
+("You've hit your usage limit ... try again at 8:32 PM") ve hicbir dosyaya
+dokunmadan dustu. Direksiyon Visionary'ye gecti; 1-5 numarali duzeltmeler
+Visionary tarafindan yazildi.
+
+**Proof (Visionary tarafindan kosuldu, Codex ciktisi kanit sayilmadi):**
+
+    tests/test_sh_anlatim_temposu.py + test_visionary_adversarial_anlatim.py
+      -> 11 passed
+    tests/ (tam paket)
+      -> 473 passed, 2 skipped, 163 subtests passed
+    preflight part22..25
+      -> hepsi TEMIZ
+
+**Uretim simulasyonu** (19,0 sn video, sentetik ses, ag yok):
+
+| senaryo | ses | video | atempo | uzatma | sonuc |
+|---|---|---|---|---|---|
+| 26 kelime @2,0 k/sn | 13,0 | 19,00 | yok | yok | tam, es zamanli |
+| 36 kelime @2,0 k/sn (hedef ust) | 18,0 | 19,00 | yok | yok | tam, es zamanli |
+| 38 kelime @2,05 k/sn (band ucu) | 18,5 | 19,00 | yok | yok | tam, es zamanli |
+| Gemini %15 tasti (21,0 sn) | 21,0 | 20,40 | 1,050 | 1,40 | tam, es zamanli |
+| felaket (30,0 sn) | 30,0 | 22,00 | 1,050 | 3,00 | kesildi + WARNING |
+
+Yani normal bantta anlatim NE hizlandiriliyor NE kesiliyor.
+
+## Devredilen (bu rock'a alinmadi)
+
+- `from-scratch` serisinin planlayici prompt'u `tests/golden/fixedframe_prompts.json`
+  ile uyusmuyor. TABAN commit'te de uyusmuyordu (kanitlandi: stash ile HEAD
+  uzerinde kosuldu), yani bu degisiklikten gelmiyor; aimagine KONSEPT v1.4 -> v2.1
+  gecisinden kalma eski bir golden. Hicbir test bunu assert etmedigi icin sessiz
+  duruyor. Ayri bir isde tazelenmeli.

@@ -1,7 +1,7 @@
 {
   "slug": "flashpoints",
   "base_title": "Shadowed History",
-  "logline": "One verified historical shock, delivered in the hardest 14 seconds in the feed.",
+  "logline": "One verified historical shock, delivered in the hardest 20 seconds in the feed.",
   "language": "en",
   "upload_profile": "shad0wedhistory",
   "platforms": [
@@ -16,19 +16,20 @@
   "priority": 999,
   "total_parts": 25,
   "next_part": 22,
-  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5",
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483",
   "auto_replenish": {
     "enabled": true,
     "batch": 5,
     "min_queue": 2,
     "shots": 2,
-    "shot_seconds": "8",
+    "shot_seconds": "10",
+    "voiceover_continuity": true,
     "title_card": true,
     "music_prompt": true,
     "humans": "historical",
     "narration": {
       "min_words": 26,
-      "max_words": 38
+      "max_words": 36
     },
     "families": [
       "yanılgı kırıcı",

@@ -204,6 +204,9 @@ def measure_audio_loudness(path: str | Path) -> dict[str, float] | None:
 # teslim ise her platformun native kabul ettigi orandadir (Instagram/TikTok 44.1-48 kHz).
 LIMITER_OVERSAMPLE_HZ = 96000
 DELIVERY_SAMPLE_RATE_HZ = 48000
+NARRATION_TAIL_PAD = 0.4
+NARRATION_MAX_TEMPO = 1.05
+NARRATION_MAX_EXTEND = 3.0
 
 
 def _loudnorm_json(stderr: str) -> dict:
@@ -1517,41 +1520,94 @@ def mix_voiceover(
     output_path = Path(output_path)
 
     try:
-        # Süre uyumu: amix duration=first + -shortest yüzünden videodan uzun TTS cümle
-        # ORTASINDA sert kesilir. Sığmayan anlatım hafifçe hızlandırılarak sığdırılır
-        # (atempo; doğallık tavanı 1.15x — üstü robotik duyulur). Tavan da yetmezse
-        # kesilme yine olur ama artık loglanır (Telegram onay önizlemesinde duyulur).
+        # Strateji: ses videoya SIGDIRILMAZ, gerekirse VIDEO sese yer acar.
+        #   1) Anlatim zaten siginca tarihsel komut bit-bit korunur (-c:v copy).
+        #   2) Sigmayinca once duyulmaz bir hizlandirma denenir (tavan 1.05x).
+        #      Bu tek basina yetiyorsa yine tarihsel komut kullanilir; video
+        #      bosuna yeniden kodlanmaz.
+        #   3) Hala sigmiyorsa son kare klonlanarak video uzatilir. Video ve ses
+        #      TEK zaman cizelgesinde (timeline) biter; ses son karenin otesine
+        #      tasmaz. Uzatma tavani NARRATION_MAX_EXTEND'dir; ona da sigmayan
+        #      anlatim kesilir ama artik sessizce degil, WARNING ile.
         vo_chain = f"volume={voice_volume}"
+        extend = False
+        vid_dur = 0.0
+        vo_dur = 0.0
+        tempo = 1.0
+        video_extend = 0.0
+        timeline = 0.0
+        capped = False
         try:
             vid_dur = get_video_duration(video_path)
             vo_dur = get_video_duration(voiceover_path)
-            if vid_dur > 1.0 and vo_dur > vid_dur - 0.4:
-                tempo = vo_dur / max(vid_dur - 0.4, 0.1)
-                if tempo > 1.15:
-                    logger.warning(f"⚠️ Anlatım 1.15x hızda bile videoya sığmıyor "
-                                   f"(ses {vo_dur:.1f}s / video {vid_dur:.1f}s) — sonu kesilebilir")
-                    tempo = 1.15
-                vo_chain += f",atempo={tempo:.3f}"
-                logger.info(f"🎙️ Anlatım {tempo:.2f}x hızlandırılarak videoya sığdırıldı "
-                            f"({vo_dur:.1f}s → ~{vid_dur - 0.4:.1f}s)")
+            if vid_dur > 1.0 and vo_dur + NARRATION_TAIL_PAD > vid_dur:
+                tempo = min(vo_dur / max(vid_dur - NARRATION_TAIL_PAD, 0.1),
+                            NARRATION_MAX_TEMPO)
+                # ffmpeg'e yazilan deger 3 haneye yuvarlandigi icin hesap da
+                # yuvarlanmis tempoyla yapilir; yoksa sinir vakalarda sapar.
+                tempo = round(max(1.0, tempo), 3)
+                adjusted_vo_dur = vo_dur / tempo
+                need = adjusted_vo_dur + NARRATION_TAIL_PAD
+                if need > vid_dur:
+                    extend = True
+                    video_extend = min(need - vid_dur, NARRATION_MAX_EXTEND)
+                    capped = need - vid_dur > NARRATION_MAX_EXTEND
+                    timeline = vid_dur + video_extend
+                if tempo > 1.0:
+                    vo_chain += f",atempo={tempo:.3f}"
         except Exception:
-            pass  # süre ölçülemezse eski davranış (best-effort)
+            pass  # sure olculemezse eski davranis (best-effort)
         normalize_suffix = "" if amix_normalize else ":normalize=0"
-        cmd = [
-            "ffmpeg", "-y",
-            "-i", str(video_path),
-            "-i", str(voiceover_path),
-            "-filter_complex",
-            f"[0:a]volume={bg_duck}[bg];"
-            f"[1:a]{vo_chain}[vo];"
-            f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2{normalize_suffix}[aout]",
-            "-map", "0:v",
-            "-map", "[aout]",
-            "-c:v", "copy",
-            "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
-            "-shortest",
-            str(output_path)
-        ]
+
+        if not extend:
+            cmd = [
+                "ffmpeg", "-y",
+                "-i", str(video_path),
+                "-i", str(voiceover_path),
+                "-filter_complex",
+                f"[0:a]volume={bg_duck}[bg];"
+                f"[1:a]{vo_chain}[vo];"
+                f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2{normalize_suffix}[aout]",
+                "-map", "0:v",
+                "-map", "[aout]",
+                "-c:v", "copy",
+                "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+                "-shortest",
+                str(output_path)
+            ]
+        else:
+            if capped:
+                logger.warning(
+                    f"⚠️ Anlatim {NARRATION_MAX_TEMPO:.2f}x hiz ve "
+                    f"{NARRATION_MAX_EXTEND:.1f}s uzatmada bile videoya sigmiyor "
+                    f"(ses {vo_dur:.1f}s / video {vid_dur:.1f}s) ,  sonu kesilebilir"
+                )
+            # TEK zaman cizelgesi: video da ses de tam 'timeline' saniyede biter.
+            # atrim ikisini de ayni yere kilitler, apad kisa kalani sessizlikle
+            # doldurur; boylece son karenin otesinde ses kuyrugu kalmaz.
+            filter_complex = (
+                f"[0:v]tpad=stop_mode=clone:stop_duration={video_extend:.3f}[vout];"
+                f"[0:a]volume={bg_duck},apad,atrim=0:{timeline:.3f}[bg];"
+                f"[1:a]{vo_chain},apad,atrim=0:{timeline:.3f}[vo];"
+                f"[bg][vo]amix=inputs=2:duration=longest:dropout_transition=2"
+                f"{normalize_suffix}[aout]"
+            )
+            cmd = [
+                "ffmpeg", "-y",
+                "-i", str(video_path),
+                "-i", str(voiceover_path),
+                "-filter_complex", filter_complex,
+                "-map", "[vout]",
+                "-map", "[aout]",
+                "-c:v", "libx264", "-crf", FFMPEG_CRF,
+                "-preset", FFMPEG_PRESET,
+                "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+                str(output_path)
+            ]
+            logger.info(
+                f"🎙️ Anlatim {tempo:.2f}x hizla, video {video_extend:.2f}s "
+                f"uzatilarak yerlestirildi ({vo_dur:.1f}s / {vid_dur:.1f}s)"
+            )
 
         subprocess.run(cmd, capture_output=True, check=True, timeout=180)
         logger.info(f"🎙️ Voiceover mixed: {output_path.name}")

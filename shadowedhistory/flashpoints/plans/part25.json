@@ -8,13 +8,13 @@
   "shots": [
     {
       "n": 1,
-      "duration": "8",
+      "duration": "10",
       "prompt": "Vertical framing. Medium tracking shot through a 1960s sun-drenched East African classroom as uniformed female students clutch their sides and desks in overwhelming emotional exhaustion and hysterical laughter, while textbooks slide off wooden tables onto concrete floors.",
       "seed": null
     },
     {
       "n": 2,
-      "duration": "8",
+      "duration": "10",
       "prompt": "Vertical framing. Outdoor wide view of the school gates padlocked shut with an official wooden closure notice in the village of Kashasha, with bewildered elders and medical workers standing in dust-blown courtyards under tall eucalyptus trees.",
       "seed": null
     }
@@ -27,5 +27,5 @@
     "subtitle": "Kashasha, 1962"
   },
   "hook_shot": 1,
-  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
 }

@@ -246,10 +246,10 @@ CHANNEL_NARRATION_CONFIG = {
     "shadowedhistory": {
         "voice": "Charon",  # Deep male voice ,  documentary
         "instruction": (
-            "Deliver hard historical facts fast, with a firm, confident voice. "
-            "State the claim itself in the first sentence. Use one short pause only, "
-            "immediately before the twist. Keep the pace tight for a roughly 16-second video. "
-            "No heavy documentary delivery and no long dramatic pauses."
+            "Speak at a measured documentary pace, with clear pronunciation and a firm, "
+            "confident voice. State the claim itself in the first sentence. Pause naturally "
+            "just before the twist, then complete the thought without rushing. Keep the "
+            "delivery calm and unhurried for a roughly 19-second video."
         ),
     },
     "galactic_experiment": {

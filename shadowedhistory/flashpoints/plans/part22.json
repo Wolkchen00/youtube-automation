@@ -8,13 +8,13 @@
   "shots": [
     {
       "n": 1,
-      "duration": "8",
+      "duration": "10",
       "prompt": "Vertical framing. High-angle kinetic shot across sunlit limestone blocks of a towering half-built desert pyramid, hundreds of ancient builders hauling heavy ropes, then seamlessly panning toward cold blowing mist over rocky Arctic tundra where a massive woolly mammoth stomps through frosted gravel under a low pale sun.",
       "seed": null
     },
     {
       "n": 2,
-      "duration": "8",
+      "duration": "10",
       "prompt": "Vertical framing. Extreme close-up of a mammoth's curved ivory tusk scraping against frozen permafrost ground, thick shaggy brown fur whipping in harsh coastal winds against the dramatic backdrop of crashing icy waves and distant jagged glaciers.",
       "seed": null
     }
@@ -27,5 +27,5 @@
     "subtitle": "Arctic Ocean, 2500 BC"
   },
   "hook_shot": 2,
-  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
 }

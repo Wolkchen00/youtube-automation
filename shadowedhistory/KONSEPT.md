@@ -1,4 +1,4 @@
-# SHAD0WED HISTORY, KANAL KONSEPT DOKTRİNİ v1.7
+# SHAD0WED HISTORY, KANAL KONSEPT DOKTRİNİ v1.8
 **Tarih:** 2026-07-29 · **Karar sahibi:** İhsan · **Statü:** ONAYLANDI (İhsan, 2026-07-29, "FAZ 3 ONAY")
 **v1.1 (aynı gün, Codex Same Page turu 1):** zaman çıpası BCE/çağ biçimlerini kapsar; caption
 ve fact_captions kaldırıldı (motor gerçeği); kelime bütçesi doğrulayıcıda birebir uygulanır;
@@ -26,6 +26,21 @@ doğal olarak söylenen aralığın %10-20 üstünde yazıyor ve hedefi kovalama
 kural: hedef aralık prompt'ta aynen; doğrulayıcı MİKSÖR PAYIYLA kabul eder (min×0.85 ..
 max×1.15; TTS miksörü 1.15x hızlandırmayı zaten karşılar, ölçüsüz eski 0.7-1.35 toleransı
 geri gelmedi).
+**v1.8 (2026-09-01, Ihsan karari, anlatim temposu):** izleyici geri bildirimi "konusmaci cok
+hizli konusuyor ve cumlesini bitiremeden video bitiyor". Kok neden bu dokumanin kendisiydi:
+v1.6 hem HIZLI anlatim hem YARIM BIRAKILAN son cumle emrediyordu, miksor de sigmayan sesi
+1.15x hizlandirip sonunu kesiyordu. Yeni kurallar:
+(a) bolum 2 x 8 sn -> 2 x 10 sn, final video ~19 sn (kredi 320 -> 400, bolum tavani 900);
+(b) anlatim butcesi 26-38 -> 26-36 kelime, olculu belgesel temposunda (~2 kelime/sn) okunur,
+    konusma penceresi 18,3 sn;
+(c) "son cumle yarim birakilip basa baglanir" kurali IPTAL: anlatim daima TAM CUMLEYLE biter;
+(d) "sert, kendinden emin, HIZLI fakt anlatimi" register'i IPTAL: register olculu ve acele
+    etmeyen belgesel anlatimidir;
+(e) cekim 2, cekim 1'in ayni anini surdurur; kesitte soylenen cumle bolunmemis duyulur
+    (series.json auto_replenish.voiceover_continuity = true);
+(f) miksor artik anlatimi ASLA kesmez: hizlandirma tavani 1.15x -> 1.05x, sigmayan sure son
+    kare klonlanarak videoya eklenir (tavan 3 sn), ses ve goruntu ayni anda biter. Kelime
+    kabul bandi da bu tavana baglandi (wmax x 1,05), yoksa her bolumde video donardi.
 **Kanal:** `UCUdp0KLBh4EeeSgVbwS_DhA` · @shad0wedhistory357 · upload_profile: `shad0wedhistory` · narration register: `shadowedhistory`
 
 > S4 kararı (2026-07-27): 10-16 sn tekil tarih-faktı formatına dönüş. Bu doküman o kararın
@@ -62,16 +77,17 @@ izlenme, 123 abone, 30 günlük medyan 77,5.
 - **Beklenti matematiği:** kırılma tipik ilk 20-25 videoda gelir ya da o mekanikte hiç gelmez;
   25 bölüm dolmadan format hakkında hüküm verilmez.
 
-## 3. KONSEPT: "FLASHPOINTS", 16 saniyede bir tarih çarpması
+## 3. KONSEPT: "FLASHPOINTS", 19 saniyede bir tarih çarpması
 
 **Konumlandırma:** Her bölüm, izleyicinin bildiğini sandığı tarihten TEK çarpıcı ve
-DOĞRULANABİLİR faktı ~16 saniyede patlatır (kanıt bandı 10-16 sn'nin üst ucu). İddia daha ilk
+DOĞRULANABİLİR faktı ~19 saniyede patlatır (kanıt bandının üst ucu 16 sn idi; v1.8'de
+anlatımın olculu tempoda tam cümleyle bitmesi için 19 sn'ye çıkarıldı). İddia daha ilk
 cümlede ve ilk karede; kanıt/büküm ikinci çekimde. Kanal vaadi: **"Tarih kitabının dipnotu,
-feed'in en sert 16 saniyesi."**
+feed'in en sert 19 saniyesi."**
 
 **Formül:** gerçek fakt + ilk karede iddia + iki çekim + tek nefes anlatım + loop dikişi.
 
-### 3.1 İmza format, İKİ ÇEKİM (2 × 8 sn = ~16 sn; motor gerçeği: Kie Omni süresi 4/6/8/10
+### 3.1 İmza format, İKİ ÇEKİM (2 × 10 sn = ~19 sn final; motor gerçeği: Kie Omni süresi 4/6/8/10
 enum'udur, ara değer yoktur)
 
 | Çekim | Adı | Kural |
@@ -79,7 +95,7 @@ enum'udur, ara değer yoktur)
 | 1 | **ÇARPMA** | Soğuk açılış, faktın EN görsel anının ortasından. İlk kare tek başına konuyu ve tuhaflığı okutur; establishing shot, harita üzerinde yavaş zoom, atmosfer kurulumu YASAK. Anlatımın ilk cümlesi = başlıktaki iddianın kendisi. |
 | 2 | **KANIT/BÜKÜM** | Faktın en tuhaf detayı ya da sonucu; görsel olarak çekim 1'den daha yakın/daha sert. Kompozisyon çekim 1'in ilk karesine rimlenerek döner, eylem sürerken biter (loop dikişi). Kapanış karti, "follow for more" jesti YASAK. |
 
-`hook_teaser` kapalı kalabilir (video zaten 14 sn; teaser toplam süreyi yer).
+`hook_teaser` kapalı kalabilir (video zaten ~19 sn; teaser toplam süreyi yer).
 
 ### 3.2 Fakt ailesi rotasyonu (top-10 kanıtından türetildi; aynı aile üst üste iki bölümde kullanılmaz)
 
@@ -116,11 +132,16 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
 
 ### 3.4 Ses
 
-- Register `shadowedhistory` (Charon) kalır; talimat 16 sn temposuna güncellenir: belgesel
-  ağırlığı yerine **sert, kendinden emin, hızlı fakt anlatımı**; "dramatic pause" 16 sn'de
-  lüks, tek kısa duraklama büküm öncesinde.
-- Metin 26-38 kelime (Gemini'nin doğal fakt-anlatım uzunluğu; 16 sn'de rahat tempo); ilk
-  cümle iddia (5-9 kelime), son cümle yarım bırakılıp başa bağlanır.
+- Register `shadowedhistory` (Charon) kalır; talimat ~19 sn temposundadır: **ölçülü, acele
+  etmeyen belgesel anlatımı**, net telaffuz, büküm öncesinde doğal bir duraklama. v1.6'nın
+  "sert, kendinden emin, hızlı fakt anlatımı" register'i v1.8'de İPTAL edilmiştir.
+- Metin 26-36 kelime, ~2 kelime/sn ölçülü tempoda okunur; konuşma penceresi 18,3 sn
+  (2 x 10 sn eksi micro_trim eksi giriş/nefes payı). İlk cümle iddia (5-9 kelime).
+  **Anlatım daima TAM CÜMLEYLE biter.** v1.6'nın "son cümle yarım bırakılıp başa bağlanır"
+  kuralı v1.8'de İPTAL edilmiştir: yarım cümle, "..." ile asılma ve cliffhanger fragmanı yasak.
+- Çekim 2, çekim 1'in aynı anını/sahnesini sürdürür; kesitte söylenen cümle bölünmemiş duyulur.
+- Miksör anlatımı ASLA kesmez: hızlandırma tavanı 1,05x, sığmayan süre son kare klonlanarak
+  videoya eklenir (tavan 3 sn) ve ses ile görüntü aynı anda biter.
 - Selamlama, CTA, "did you know" kalıbı YASAK (ilk kelime doğrudan faktır).
 
 ### 3.5 Paketleme
@@ -151,7 +172,7 @@ güncellenir. Gemini'nin kendi fakt icat etmesi yasaktır (#15 benzeri kaynaklı
 | Metrik | Sağlıklı | Alarm | Ölçüm kaynağı |
 |--------|----------|-------|---------------|
 | İlk ≥48 saat snapshot izlenmesi (bölüm başına; "48h" tam 48 saat değil, yayının 48. saatinden SONRAKİ ilk günlük snapshot'tır) | Ocak-Mart bandına tırmanış (400+) | <100 kalıcı → ilk kare/iddia zayıf | analytics_data/daily (seri-bazlı medyan FAZ 4'e kadar MANUEL: published.json eşlemesiyle elle bakılır) |
-| Ortalama izlenme yüzdesi (APV) | ≥%90 (16 sn'de) | <%70 → büküm geç geliyor | ÖLÇÜLEMEZ API katmanında; YouTube Studio'dan haftalık MANUEL bakış |
+| Ortalama izlenme yüzdesi (APV) | ≥%90 (19 sn'de) | <%70 → büküm geç geliyor | ÖLÇÜLEMEZ API katmanında; YouTube Studio'dan haftalık MANUEL bakış |
 | APV >%100 (loop/rewatch VEKİLİ; doğrudan loop ölçümü değildir) | >%100 hedef | kapanış jesti sızmış mı denetle | ÖLÇÜLEMEZ; Studio'dan MANUEL |
 
 - **Kill gate:** 25 bölüm sonunda medyan <350 VE tavan <3K → aile ağırlıkları değişir
@@ -204,11 +225,11 @@ kaynaklar FAZ3 doğrulama kayıtlarında):
   `upload_profile: shad0wedhistory`, `publish_mode: approval`, `status: active`,
   `priority: 999`, `total_parts: 0`, `next_part: 1` (ilk replenish part 1'den başlasın),
   platformlar youtube+instagram+tiktok, hashtag §3.5.
-- auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 2, shot_seconds: "8",
-  title_card: true, music_prompt: true, humans: historical,
-  narration: {min_words: 26, max_words: 38}}` (hedef aralık prompt'ta; doğrulayıcı miksör
-  payıyla kabul eder: 22-44; caption/fact_captions YOK; süre Kie enum gerçeği gereği 8 sn,
-  bölüm ~16 sn)
+- auto_replenish: `{enabled: true, batch: 5, min_queue: 2, shots: 2, shot_seconds: "10",
+  voiceover_continuity: true, title_card: true, music_prompt: true, humans: historical,
+  narration: {min_words: 26, max_words: 36}}` (hedef aralık prompt'ta; doğrulayıcı miksör
+  payıyla kabul eder: 22-38, pay artık miksörün gerçek tavanına (1,05x) bağlıdır;
+  caption/fact_captions YOK; süre Kie enum gerçeği gereği 10 sn, bölüm ~19 sn)
   + `families`: ["yanılgı kırıcı", "imkânsız mühendislik", "tuhaf savaş", "unutulmuş kişi",
   "efsane vs kayıt", "zaman çarpması"] (kanonik enum; doğrulayıcı bunun dışını RED eder,
   ardışık aynı aile RED)

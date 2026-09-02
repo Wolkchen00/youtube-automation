@@ -445,7 +445,7 @@ class InstalledSeriesTests(unittest.TestCase):
 
     def test_new_series_load_with_effective_values(self):
         detailed = {
-            "flashpoints": ("shad0wedhistory", 2, "8", (26, 38), 6, 27),
+            "flashpoints": ("shad0wedhistory", 2, "10", (26, 36), 6, 27),
             "event-horizon": ("galacticexperimet", 3, "6", (30, 44), 6, 27),
             "from-scratch": ("Youtube", 6, "10", None, 6, 0),
         }
@@ -467,7 +467,7 @@ class InstalledSeriesTests(unittest.TestCase):
                 self.assertNotIn("narration", cfg)
 
         expected = {
-            "flashpoints": (2, "8", False),
+            "flashpoints": (2, "10", False),   # v1.8: 2 x 8 sn -> 2 x 10 sn
             "event-horizon": (3, "6", False),
             "from-scratch": (6, "10", True),
         }
@@ -567,8 +567,10 @@ class InstalledSeriesTests(unittest.TestCase):
         galactic = narration.CHANNEL_NARRATION_CONFIG["galactic_experiment"]
         self.assertEqual(shadow["voice"], "Charon")
         self.assertEqual(galactic["voice"], "Charon")
-        self.assertIn("fast", shadow["instruction"])
-        self.assertIn("one short pause", shadow["instruction"])
+        # v1.8 (2026-09-01): register hizli anlatimdan olculu belgesel temposuna gecti.
+        self.assertIn("measured documentary pace", shadow["instruction"])
+        self.assertIn("Pause naturally", shadow["instruction"])
+        self.assertNotIn("fast", shadow["instruction"])
         self.assertIn("18-second", galactic["instruction"])
         self.assertIn("never let the delivery drag", galactic["instruction"])
 
