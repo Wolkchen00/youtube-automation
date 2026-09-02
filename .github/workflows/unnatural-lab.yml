@@ -72,6 +72,9 @@ jobs:
       - name: Prepare dirs
         run: mkdir -p logs output
 
+      - name: Kritik alarm outbox'ini bosalt
+        run: python -X utf8 -m series.series_runner --series unnatural-lab --drain-alerts-only
+
       - name: Onay kuyrugunu isle (Telegram)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -123,3 +126,19 @@ jobs:
           path: output/series/unnatural-lab/episodes/*/stems/
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Checkout'tan bagimsiz kritik hata bildirimi
+        if: failure()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl --silent --max-time 20 --request POST \
+              "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=🚨 Unnatural Lab workflow basarisiz: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              >/dev/null 2>&1 || true
+          fi

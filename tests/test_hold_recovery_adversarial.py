@@ -57,7 +57,9 @@ def test_migration_never_leaves_pointer_on_a_blocking_state(tmp_path):
     meta = _meta(next_part=2, parts={
         "2": {"status": "awaiting_approval", "hold_reason": "server"},
     })
-    series_runner.migrate_malformed_approval_holds(meta, _bible())
+    # Sentetik fixture gercek series_data/ agacini kirletmesin.
+    with mock.patch.object(meta, "save"):
+        series_runner.migrate_malformed_approval_holds(meta, _bible())
     state = meta.get_part(2)["status"]
     assert state not in ("awaiting_approval", "needs_human"), (
         f"göç işaretçiyi bloklayan duruma soktu: {state} , kuyu yeniden açıldı"
@@ -76,7 +78,8 @@ def test_migration_of_exhausted_record_would_block_the_channel(tmp_path):
     meta = _meta(next_part=2, parts={
         "2": {"status": "awaiting_approval", "retry_count": 3, "hold_reason": "x"},
     })
-    series_runner.migrate_malformed_approval_holds(meta, _bible())
+    with mock.patch.object(meta, "save"):
+        series_runner.migrate_malformed_approval_holds(meta, _bible())
     assert meta.get_part(2)["status"] == "needs_human"
     # ve bu durumda run_next gerçekten bloklar (işaretçi ilerlemez)
     with mock.patch.object(series_runner, "SeriesMeta") as SM, \
@@ -96,7 +99,9 @@ def test_dead_letter_never_parks_pointer_on_needs_human():
     """
     meta = _meta(next_part=1, total=3, parts={"1": {"status": "qc_retry", "retry_count": 2}})
     res = ProduceResult("generation_fail", reason="yine", reason_code="UNKNOWN")
-    advanced = series_runner._record_recoverable_failure(meta, 1, res)
+    # Sentetik fixture gercek series_data/advers durumunu veya alarm outbox'ini kirletmesin.
+    with mock.patch.object(meta, "save_atomic"), mock.patch.object(series_runner, "_alert"):
+        advanced = series_runner._record_recoverable_failure(meta, 1, res)
     assert advanced is True
     assert meta.get_part(1)["status"] == "needs_human"
     assert meta.next_part == 2, "işaretçi ölü-mektubun üzerinde bırakıldı , kuyu!"

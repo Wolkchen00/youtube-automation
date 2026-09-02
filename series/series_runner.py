@@ -12,6 +12,7 @@ Kullanım:
 """
 
 import os
+from contextvars import ContextVar
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
@@ -36,15 +37,37 @@ import subprocess
 # GitHub Actions GITHUB_REPOSITORY'yi otomatik set eder; yerelde varsayılan.
 REPO = os.environ.get("GITHUB_REPOSITORY", "Wolkchen00/youtube-automation")
 
+_ALERT_SLUG: ContextVar[str | None] = ContextVar("series_alert_slug", default=None)
+_FAILED_ALERT_SLUGS: set[str] = set()
 
-def _alert(msg: str) -> None:
-    """Telegram'a sessizce uyarı gönder (token/chat yoksa no-op). Üretim/yayın
-    başarısızlıklarının GÜNLERCE fark edilmeden geçmesini engeller."""
+
+def _alert(msg: str) -> bool:
+    """Kritik alarmi duz metin gonder; basarisizsa kalici outbox'a yaz."""
+    slug = _ALERT_SLUG.get()
     try:
-        if notifier.enabled():
-            notifier.send_message(msg)
+        result = notifier.send_plain_message(msg)
+        if result.delivered:
+            return True
+        if slug:
+            _FAILED_ALERT_SLUGS.add(slug)
+            notifier.enqueue_critical_alert(slug, msg, result.error)
+        else:
+            logger.error("❌ Kritik alarm teslim edilemedi; seri slug'i bulunamadi.")
+        return False
     except Exception as e:
-        logger.warning(f"⚠️ Uyarı bildirimi gönderilemedi: {e}")
+        if slug:
+            _FAILED_ALERT_SLUGS.add(slug)
+        logger.error(f"❌ Kritik alarm islenemedi ({type(e).__name__})")
+        return False
+
+
+def _series_alert(slug: str, msg: str) -> bool:
+    """_alert icin seri baglamini kur ve teslim sonucunu cagirina tasir."""
+    token = _ALERT_SLUG.set(slug)
+    try:
+        return _alert(msg)
+    finally:
+        _ALERT_SLUG.reset(token)
 
 
 def _balance_value(data) -> int | None:
@@ -336,7 +359,7 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
         request_id = failure.get("request_id") or "-"
         job_id = failure.get("job_id") or "-"
         reason = failure.get("reason") or "belirsiz asenkron durum"
-        _alert(
+        _series_alert(meta.slug,
             f"⚠️ *{meta.base_title}* Part {n}: {plat.upper()} yayını doğrulanamadı. "
             f"Neden: {reason}. request_id={request_id}, job_id={job_id}"
         )
@@ -445,7 +468,7 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
     if code in _NON_RETRYABLE_REASON_CODES:
         status = "budget_exhausted" if code == "BUDGET_EXHAUSTED" else "needs_human"
         _terminalize_failure(meta, n, status, result)
-        _alert(
+        _series_alert(meta.slug,
             f"🚨 *{meta.base_title}* Part {n} terminal duruma alındı: "
             f"{status} ({code}). Kuyruk sonraki bölüme ilerledi."
         )
@@ -466,7 +489,7 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
         logger.error(
             f"🚨 Part {n} üç başarısız denemeden sonra needs_human; kuyruktan düşürüldü."
         )
-        _alert(
+        _series_alert(meta.slug,
             f"🚨 *{meta.base_title}* Part {n} üç denemeden sonra needs_human. "
             "Kuyruk sonraki bölüme ilerledi."
         )
@@ -593,7 +616,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
             logger.error(
                 f"❌ Kredi başlangıç kapısı kapalı: bakiye={balance}, eşik={threshold:g}"
             )
-            _alert(
+            _series_alert(meta.slug,
                 f"❌ *{meta.base_title}* Part {n} kredi kapısında durdu. "
                 f"bakiye={balance}, esik={threshold:g}"
             )
@@ -606,7 +629,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
                 f"❌ Aylık kredi tavanı üretimi durdurdu: "
                 f"bölüm={cap_value}, tavan={monthly_cap_value}"
             )
-            _alert(
+            _series_alert(meta.slug,
                 f"❌ *{meta.base_title}* Part {n} aylik tavan nedeniyle durdu. "
                 f"bolum={cap_value}, tavan={monthly_cap_value}"
             )
@@ -645,7 +668,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         part["hold_reason"] = result.reason or "mandatory QC could not be evaluated"
         meta.save()
         logger.error(f"⏸️ Part {n} QC HOLD — durum awaiting_approval; yayın bloke edildi.")
-        _alert(
+        _series_alert(meta.slug,
             f"⏸️ *{meta.base_title}* Part {n} zorunlu QC tarafından değerlendirilemedi. "
             "Durum awaiting_approval; otomatik üretim ve yayın durduruldu."
         )
@@ -653,8 +676,11 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     video = result.path
     if result.status != "ok" or not video:
         logger.error(f"❌ Part {n} üretilemedi ,  durum ilerletilmedi (sonraki çalıştırmada tekrar denenir).")
-        _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLEMEDİ (içerik filtresi / motor hatası olabilir). "
-               f"Bu kanala video çıkmadı ,  plan/prompt kontrol edilmeli.")
+        _series_alert(
+            meta.slug,
+            f"❌ *{meta.base_title}* Part {n} ÜRETİLEMEDİ (içerik filtresi / motor hatası olabilir). "
+            f"Bu kanala video çıkmadı ,  plan/prompt kontrol edilmeli.",
+        )
         return False
     meta.mark_produced(n, video, subtitle)
     # Zincir: bu bölümün son karesini sonraki bölüm için series.json'a yaz (bulut-kalıcı).
@@ -717,8 +743,11 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.info(f"🎉 Part {n} yayınlandı ({', '.join(ok)}): {meta.title_for(n, subtitle)}")
         return True
     logger.error(f"❌ Part {n} hiçbir platforma yayınlanamadı ,  durum ilerletilmedi (yarın tekrar denenir).")
-    _alert(f"❌ *{meta.base_title}* Part {n} ÜRETİLDİ ama hiçbir platforma YAYINLANAMADI "
-           f"(upload-post / hesap bağlantısı kontrol edilmeli).")
+    _series_alert(
+        meta.slug,
+        f"❌ *{meta.base_title}* Part {n} ÜRETİLDİ ama hiçbir platforma YAYINLANAMADI "
+        f"(upload-post / hesap bağlantısı kontrol edilmeli).",
+    )
     return False
 
 
@@ -750,8 +779,11 @@ def run_all(dry_run: bool = False, publish: bool = True) -> bool:
     slugs = list_active_series()
     if not slugs:
         logger.info("Aktif seri yok.")
-        _alert("ℹ️ *Seri otomasyonu:* Aktif seri kalmadı ,  tüm diziler tamamlandı. "
-               "Yeni sezon/part eklenene kadar bu kanallara yeni video ÇIKMAYACAK.")
+        # Bilgilendirme mesaji kritik ariza degildir; mevcut Markdown sunumunu korur.
+        notifier.send_message(
+            "ℹ️ *Seri otomasyonu:* Aktif seri kalmadı ,  tüm diziler tamamlandı. "
+            "Yeni sezon/part eklenene kadar bu kanallara yeni video ÇIKMAYACAK."
+        )
         return True
     slugs.sort(key=lambda s: (_priority(s), s))
     chosen, waiting = slugs[0], slugs[1:]
@@ -760,15 +792,46 @@ def run_all(dry_run: bool = False, publish: bool = True) -> bool:
     return run_next(chosen, dry_run=dry_run, publish=publish)
 
 
+def _outbox_slugs(slug: str | None) -> list[str]:
+    if slug:
+        return [slug]
+    from series.bible import all_series_dirs
+
+    return sorted(all_series_dirs())
+
+
+def _drain_outboxes(slugs: list[str]) -> bool:
+    """Uretimden once tum kritik alarmlari yeniden teslim etmeyi dene."""
+    all_empty = True
+    for item in slugs:
+        _FAILED_ALERT_SLUGS.discard(item)
+        if not notifier.drain_critical_alerts(item):
+            all_empty = False
+    return all_empty
+
+
+def _outboxes_empty(slugs: list[str]) -> bool:
+    return not any(
+        item in _FAILED_ALERT_SLUGS or notifier.has_pending_critical_alerts(item)
+        for item in slugs
+    )
+
+
 def main(argv: list[str]):
     dry = "--dry-run" in argv
     no_pub = "--no-publish" in argv
     force = "--force" in argv   # günde-1 kilidini aş (bilerek aynı gün 2. video)
+    drain_only = "--drain-alerts-only" in argv
     slug = None
     if "--series" in argv:
         i = argv.index("--series")
         if i + 1 < len(argv):
             slug = argv[i + 1]
+    outbox_slugs = _outbox_slugs(slug)
+    if not _drain_outboxes(outbox_slugs):
+        logger.error("❌ Kritik alarm outbox bos degil; uretim devam edecek, kosu sonda kirmizi olacak.")
+    if drain_only:
+        return
     if slug:
         ok = run_next(slug, dry_run=dry, publish=not no_pub, force=force)
     else:
@@ -776,7 +839,7 @@ def main(argv: list[str]):
     # Video ÇIKMAYAN her koşu KIRMIZI görünsün (sessiz 'success' yerine): üretim/yayın
     # hatası, kredi kapısı ve aylık tavan dahil. 2026-08-09..12 dört kanalın kredi
     # kapısında sessizce (yeşil) durması bu satırın 'ok is False' halinden kaynaklandı.
-    if not dry and ok is not True:
+    if not dry and (ok is not True or not _outboxes_empty(outbox_slugs)):
         sys.exit(1)
 
 
