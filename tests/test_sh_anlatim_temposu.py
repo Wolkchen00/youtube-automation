@@ -231,8 +231,11 @@ def test_shadowedhistory_tts_talimati_ve_diger_kanallar():
     } == expected
 
 
-def test_kuyruktaki_planlar_10_saniye_part21_8_saniye():
-    for number in range(22, 26):
+def test_kuyruktaki_planlar_10_saniye_yayinlananlar_8_saniye():
+    # part22 2026-09-01 22:53 UTC'de ESKI ayarlarla yayinlandi (published.json,
+    # YouTube nH-BdFphWRQ); yayinlanmis bolumun plani tarihsel gercegi korur.
+    # Kuyruk part23'ten baslar (series.json next_part).
+    for number in range(23, 26):
         plan = json.loads(
             (FLASHPOINTS / "plans" / f"part{number:02d}.json").read_text(
                 encoding="utf-8"
@@ -240,7 +243,8 @@ def test_kuyruktaki_planlar_10_saniye_part21_8_saniye():
         )
         assert all(shot["duration"] == "10" for shot in plan["shots"])
 
-    part21 = json.loads(
-        (FLASHPOINTS / "plans" / "part21.json").read_text(encoding="utf-8")
-    )
-    assert all(shot["duration"] == "8" for shot in part21["shots"])
+    for number in (21, 22):
+        yayinlanan = json.loads(
+            (FLASHPOINTS / "plans" / f"part{number}.json").read_text(encoding="utf-8")
+        )
+        assert all(shot["duration"] == "8" for shot in yayinlanan["shots"])

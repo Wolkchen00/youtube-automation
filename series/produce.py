@@ -75,6 +75,10 @@ class ProduceResult:
     status: Literal["ok", "qc_hold", "generation_fail"]
     path: Path | None = None
     reason: str | None = None
+    reason_code: Literal[
+        "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
+        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "UNKNOWN",
+    ] = "UNKNOWN"
 
     def __post_init__(self):
         if self.status not in ("ok", "qc_hold", "generation_fail"):
@@ -83,6 +87,16 @@ class ProduceResult:
             raise ValueError("ok ProduceResult requires a path")
         if self.status != "ok" and self.path is not None:
             raise ValueError("non-ok ProduceResult cannot carry a final path")
+        if self.reason_code not in (
+            "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
+            "CONTENT_REJECT", "BUDGET_EXHAUSTED", "UNKNOWN",
+        ):
+            raise ValueError(f"unknown ProduceResult reason_code: {self.reason_code}")
+
+
+def _qc_api_reason_code(reason: str | None) -> Literal["QUOTA", "UNKNOWN"]:
+    """Critic'in tipli API kategorisini dış durum koduna çevir; mesaj metni okunmaz."""
+    return "QUOTA" if reason == "quota" else "UNKNOWN"
 
 
 def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
@@ -169,6 +183,33 @@ def episode_credit_cap(bible: Bible) -> int:
     except (TypeError, ValueError):
         return 0
     return cap if cap > 0 else 0
+
+
+def minimum_remaining_completion_cost(slug: str, number: int, bible: Bible,
+                                      plan: dict) -> float | None:
+    """Eksik ana çekimlerin korumacı asgari tamamlanma maliyetini hesapla.
+
+    Bilinmeyen motor/süre maliyeti güvenli biçimde ``None`` döndürür. Var olan dolu
+    çekim dosyaları idempotent üretimde yeniden ücretli çağrı gerektirmez.
+    """
+    total = 0.0
+    shot_root = shots_dir(slug, number)
+    for shot in plan.get("shots") or []:
+        try:
+            shot_number = int(shot.get("n"))
+        except (TypeError, ValueError):
+            return None
+        cached = shot_root / f"shot_{shot_number:02d}.mp4"
+        if cached.exists() and cached.stat().st_size > 0:
+            continue
+        engine = (shot.get("engine") or bible.engine).lower()
+        estimate = cost_tracker.conservative_credit_estimate(
+            "main_shot", engine, shot.get("duration")
+        )
+        if estimate is None:
+            return None
+        total += float(estimate)
+    return total
 
 
 def series_monthly_credit_cap(bible: Bible) -> int | None:
@@ -512,7 +553,7 @@ def _verify_audio_master(path: Path, target_lufs: float) -> bool:
 
 def _audio_master_hold(reason: str) -> ProduceResult:
     logger.error(f"❌ Ses master teslimatı QC hold: {reason}")
-    return ProduceResult("qc_hold", reason=reason)
+    return ProduceResult("qc_hold", reason=reason, reason_code="AUDIO_MASTER")
 
 
 # ─── 4K master (opt-in: bible.upscale; best-effort) ───────────────────────────
@@ -1260,7 +1301,10 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         object_ref_bytes = critic.fetch_object_reference(plan)
         if object_ref_bytes is None:
             logger.error("⏸️ QC HOLD: [REFERENCE OBJECT] indirilemedi")
-            return ProduceResult("qc_hold", reason="reference object could not be downloaded")
+            return ProduceResult(
+                "qc_hold", reason="reference object could not be downloaded",
+                reason_code="REF_DOWNLOAD",
+            )
 
     if not dry_run:
         check_credit()  # ücretsiz okuma — başlangıç bakiyesi loglanır
@@ -1472,7 +1516,12 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     if qc_status == "hold":
                         return ProduceResult(
                             "qc_hold", reason=qc_budget.get("hold_reason")
-                            or f"mandatory QC unavailable for shot {n}"
+                            or f"mandatory QC unavailable for shot {n}",
+                            reason_code=(
+                                _qc_api_reason_code(qc_budget.get("hold_reason"))
+                                if qc_budget.get("hold_reason")
+                                else "FRAME_EXTRACT"
+                            ),
                         )
                     status = "qc_skip" if qc_status == "skip" else "qc_fail"
                     if bible.require_all_shots:
@@ -1619,7 +1668,12 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 if qc_status == "hold":
                     return ProduceResult(
                         "qc_hold", reason=qc_budget.get("hold_reason")
-                        or f"mandatory QC unavailable for shot {n}"
+                        or f"mandatory QC unavailable for shot {n}",
+                        reason_code=(
+                            _qc_api_reason_code(qc_budget.get("hold_reason"))
+                            if qc_budget.get("hold_reason")
+                            else "FRAME_EXTRACT"
+                        ),
                     )
                 status = "qc_skip" if qc_status == "skip" else "qc_fail"
                 if bible.require_all_shots:
@@ -1877,7 +1931,10 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 "reasons": [f"QC API deneme politikası tükendi ({error.reason})"],
                 "clip": Path(final_ep).name,
             }, experiment_id=experiment_id)
-            return ProduceResult("qc_hold", reason=error.reason)
+            return ProduceResult(
+                "qc_hold", reason=error.reason,
+                reason_code=_qc_api_reason_code(error.reason),
+            )
         if not native_audio_ok:
             return None
 

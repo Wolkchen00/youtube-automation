@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 25,
-  "next_part": 22,
+  "next_part": 23,
   "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483",
   "auto_replenish": {
     "enabled": true,
@@ -420,6 +420,19 @@
         "tiktok"
       ],
       "published_at": "2026-08-31T22:29:24.034544+00:00"
+    },
+    "22": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep22/ep22_narrated_music_titled.mp4",
+      "subtitle": "Wrangel Mammoths: The Last Survivors",
+      "stack_sha256": "f289f6a285b625f1e8c0de24e00624096d688a752789a440d4cd9afcb457e6a6",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-01T22:53:01.335990+00:00"
     }
   }
 }

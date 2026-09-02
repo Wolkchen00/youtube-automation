@@ -14,7 +14,7 @@ from pathlib import Path
 
 from core.config import logger
 from core.stack_fingerprint import STACK_VERSION, fingerprint
-from .bible import data_dir, ensure_dirs
+from .bible import atomic_write_json, data_dir, ensure_dirs
 
 DEFAULT_PLATFORMS = ["youtube", "instagram", "tiktok"]
 
@@ -154,6 +154,20 @@ class SeriesMeta:
         if self.next_part > self.total_parts:
             self.data["status"] = "completed"
 
+    def terminalize_and_advance(self, n: int, status: str, **fields):
+        """Bölümü terminal yap ve işaretçiyi tek atomik JSON yazımında ilerlet."""
+        if int(n) != self.next_part:
+            raise ValueError(
+                f"terminal bölüm işaretçiyle eşleşmiyor: part={n}, next_part={self.next_part}"
+            )
+        part = self.get_part(n)
+        part.update(fields)
+        part["status"] = status
+        self.data["next_part"] = int(n) + 1
+        if self.next_part > self.total_parts:
+            self.data["status"] = "completed"
+        self.save_atomic()
+
     # -- IO --
     def save(self) -> Path:
         ensure_dirs(self.slug)
@@ -161,6 +175,12 @@ class SeriesMeta:
         p = series_meta_path(self.slug)
         p.write_text(json.dumps(self.data, ensure_ascii=False, indent=2), encoding="utf-8")
         return p
+
+    def save_atomic(self) -> Path:
+        """Durum + işaretçi gibi birlikte kalması gereken geçişleri atomik yaz."""
+        ensure_dirs(self.slug)
+        plans_dir(self.slug).mkdir(parents=True, exist_ok=True)
+        return atomic_write_json(series_meta_path(self.slug), self.data)
 
     @classmethod
     def create(cls, slug: str, base_title: str, total_parts: int,

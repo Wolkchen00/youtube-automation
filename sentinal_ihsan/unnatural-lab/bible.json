@@ -2,6 +2,7 @@
   "series": {
     "slug": "unnatural-lab",
     "title": "Unnatural Lab",
+    "state_machine_version": 2,
     "aspect_ratio": "9:16",
     "resolution": "1080p",
     "master_lufs": -14,

@@ -1,0 +1,21 @@
+{
+  "slug": "advers",
+  "base_title": "advers",
+  "total_parts": 3,
+  "next_part": 2,
+  "status": "active",
+  "publish_mode": "auto",
+  "upload_profile": "p",
+  "platforms": [
+    "youtube"
+  ],
+  "parts": {
+    "1": {
+      "status": "needs_human",
+      "retry_count": 3,
+      "first_held_at": "2026-09-02T00:05:22.060042+00:00",
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "yine"
+    }
+  }
+}
