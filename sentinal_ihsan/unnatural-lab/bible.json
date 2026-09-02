@@ -3,6 +3,9 @@
     "slug": "unnatural-lab",
     "title": "Unnatural Lab",
     "state_machine_version": 2,
+    "required_platforms": [
+      "youtube"
+    ],
     "aspect_ratio": "9:16",
     "resolution": "1080p",
     "master_lufs": -14,
@@ -39,6 +42,7 @@
       "structured_positive_corrections": true,
       "scene_cut_scan": true,
       "scene_cut_fail": false,
+      "min_shots": 3,
       "require_all_shots": true
     },
     "credit_cap_note": "2026-09-02 Ihsan karari, TEK SEFERLIK DENEY: 800 -> 1000. part26'ya iki basarisiz denemede 428 kredi yandi, kalan 372 dort ana cekimin muhafazakar tabani ~400'un altinda kaldi ve butce kapisi uretimi baslatmiyordu. Defter SIFIRLANMADI (gercek harcama korunuyor); yalniz tavan gecici yukseltildi. chain_frames deneyi bittikten sonra 800'e geri dondurulecek.",

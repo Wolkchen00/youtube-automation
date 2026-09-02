@@ -143,11 +143,16 @@ class SeriesMeta:
             p["stack_sha256"] = None
             p["stack_version"] = None
 
-    def mark_published(self, n: int, platforms_ok: list[str]):
+    def mark_published(self, n: int, platforms_ok: list[str], *,
+                       dropped_shots: list[int] | None = None,
+                       dropped_shot_roles: dict[str, str] | None = None):
         p = self.get_part(n)
         p["status"] = "published"
         p["platforms_ok"] = platforms_ok
         p["published_at"] = datetime.now(timezone.utc).isoformat()
+        if dropped_shots:
+            p["dropped_shots"] = list(dropped_shots)
+            p["dropped_shot_roles"] = dict(dropped_shot_roles or {})
 
     def advance(self):
         self.data["next_part"] = self.next_part + 1

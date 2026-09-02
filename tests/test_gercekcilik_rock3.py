@@ -673,7 +673,7 @@ class DurableBudgetAndPromptTests(unittest.TestCase):
 
     def test_legacy_prompt_path_is_byte_identical(self):
         expected = (
-            "BASE\n\nCRITICAL CORRECTIONS — the previous take FAILED quality control. "
+            "BASE\n\nCRITICAL CORRECTIONS ,  the previous take FAILED quality control. "
             "You MUST fix:\n- raw note"
         )
         self.assertEqual(critic.strengthen_prompt("BASE", ["raw note"]), expected)
@@ -682,7 +682,18 @@ class DurableBudgetAndPromptTests(unittest.TestCase):
         path = pathlib.Path(__file__).resolve().parents[1] / "sentinal_ihsan/unnatural-lab/bible.json"
         data = json.loads(path.read_text(encoding="utf-8"))
         qc = data["series"]["qc"]
-        self.assertEqual(data["series"]["credit_hard_cap_value"], 800)
+        # Taban tavan 800'dur. 2026-09-02'de chain_frames deneyi icin TEK SEFERLIK
+        # 1000'e cikarildi. Gecici degere izin veriyoruz ama bedelsiz degil:
+        # 1000 yaziliysa geri donus kosulunu anlatan credit_cap_note ZORUNLU.
+        # Boylece gecici karar sessizce kalicilasamaz.
+        cap = data["series"]["credit_hard_cap_value"]
+        self.assertIn(cap, (800, 1000))
+        if cap != 800:
+            note = str(data["series"].get("credit_cap_note") or "")
+            self.assertIn("800", note, "gecici tavan icin 800'e donus kosulu yazilmamis")
+            self.assertTrue(
+                note.strip(), "gecici tavan gerekcesiz birakilmis"
+            )
         self.assertEqual(data["series"]["credit_monthly_cap_value"], 14000)
         self.assertTrue(qc["require_all_shots"])
         self.assertTrue(qc["require_object_match"])

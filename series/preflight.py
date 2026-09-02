@@ -20,6 +20,43 @@ from .series_meta import SeriesMeta
 from .shots import load_plan, resolve_shot, validate_plan
 
 
+def validate_min_shots(bible: Bible, plan: dict) -> list[str]:
+    """QC min_shots sözleşmesini ücretli çağrılardan önce doğrula."""
+    qc = bible.data["series"].get("qc") or {}
+    if not isinstance(qc, dict) or "min_shots" not in qc:
+        return []
+    value = qc.get("min_shots")
+    shots = plan.get("shots") if isinstance(plan, dict) else None
+    shot_count = len(shots) if isinstance(shots, list) else 0
+    if isinstance(value, bool) or not isinstance(value, int):
+        return ["bible: qc.min_shots bool olmayan bir tam sayı olmalı"]
+    if value < 1:
+        return ["bible: qc.min_shots en az 1 olmalı"]
+    if value > shot_count:
+        return [
+            f"bible: qc.min_shots ({value}) plan çekim sayısını ({shot_count}) aşamaz"
+        ]
+    return []
+
+
+def validate_required_platforms(bible: Bible, meta: SeriesMeta) -> list[str]:
+    """Opt-in required_platforms alanını yayın başlamadan doğrula."""
+    series = bible.data["series"]
+    if "required_platforms" not in series:
+        return []
+    value = series.get("required_platforms")
+    if (not isinstance(value, list) or not value
+            or any(not isinstance(item, str) or not item.strip() for item in value)):
+        return ["bible: required_platforms boş olmayan platform adları listesi olmalı"]
+    normalized = [item.strip().lower() for item in value]
+    if len(set(normalized)) != len(normalized):
+        return ["bible: required_platforms benzersiz olmalı"]
+    unknown = sorted(set(normalized) - set(meta.platforms))
+    if unknown:
+        return [f"bible: required_platforms seri platformlarında yok: {unknown}"]
+    return []
+
+
 def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
     """Return ``(errors, chain_trace)`` without making any network calls or writes."""
     errors: list[str] = []
@@ -87,6 +124,8 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
         errors.append(f"bible: bilinmeyen required_layers: {sorted(unknown_layers)}")
     generic = validate_plan(plan, bible)
     errors.extend(f"plan: {error}" for error in generic["errors"])
+    errors.extend(validate_min_shots(bible, plan))
+    errors.extend(validate_required_platforms(bible, meta))
 
     chain_url = None
     if bible.chain_frames and bible.chain_scope == "series":

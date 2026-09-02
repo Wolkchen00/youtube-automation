@@ -237,6 +237,14 @@ class Bible:
         return [str(item).strip() for item in value if str(item).strip()]
 
     @property
+    def required_platforms(self) -> list[str]:
+        """Yayının tamamlanması için doğrulanması gereken platformlar (opt-in)."""
+        value = self.data["series"].get("required_platforms")
+        if not isinstance(value, list):
+            return []
+        return [str(item).strip().lower() for item in value if str(item).strip()]
+
+    @property
     def audio_fade(self) -> float:
         """Per-clip native-audio fade used by smooth concatenation."""
         raw = self.data["series"].get("audio_fade", 0.25)
@@ -399,6 +407,14 @@ class Bible:
         """Whether missing, QC-failed, or QC-skipped shots block delivery."""
         value = self.data["series"].get("qc") or {}
         return bool(isinstance(value, dict) and value.get("require_all_shots"))
+
+    @property
+    def min_shots(self) -> int | None:
+        """Kısmi yayın için gereken en az çekim sayısı; yoksa legacy kapı kullanılır."""
+        value = self.data["series"].get("qc") or {}
+        if not isinstance(value, dict) or "min_shots" not in value:
+            return None
+        return value.get("min_shots")
 
     @property
     def transitions(self) -> dict:

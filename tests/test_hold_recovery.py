@@ -169,7 +169,12 @@ def test_third_attempt_dead_letters_then_produces_next_with_pointer_already_adva
     def producer(*args, **kwargs):
         produced_parts.append(meta.next_part)
         if len(produced_parts) <= 3:
-            return ProduceResult("qc_hold", reason="geçici API", reason_code="QUOTA")
+            # Bu testin konusu SIRALAMA: terminal kayit + isaretci, sonraki bolum
+            # uretilmeden ONCE diske yazilmis olmali. Vasita olarak ICERIK kodu
+            # kullanilir. QUOTA artik ROCK 3d ile ayri altyapi butcesinden
+            # harcadigi icin ucuncu denemede olmez; onun sonlu butcesi
+            # tests/test_qc_backoff.py icinde ayrica kanitlanir.
+            return ProduceResult("qc_hold", reason="geçici API", reason_code="UNKNOWN")
         # Yeni bölüm başlamadan önce terminal kayıt ve işaretçi diske yazılmış olmalı.
         assert any(
             snap["next_part"] == 2

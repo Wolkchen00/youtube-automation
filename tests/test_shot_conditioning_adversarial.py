@@ -40,14 +40,19 @@ def test_eleven_other_lines_are_untouched_chain_off_is_the_default():
     assert len(others) >= 5
 
 
-def test_unnatural_lab_got_scope_but_NOT_chaining():
-    """4b kosullandirmayi ACMAZ , acma karari 4a pilotunun isi."""
+def test_unnatural_lab_chaining_stays_episode_scoped():
+    """Zincir 4a pilotuyla BILINCLI acildi; kapsam korumasi yine de sert kalir.
+
+    Tarihce: 4b kosullandirmayi acmadi, acma karari 4a pilotunun isiydi ve
+    commit 84a9192 (2026-09-01) onu bilincli olarak acti. Bu testin KORUDUGU
+    sey chain_frames'in kapali olmasi degil, zincirin BOLUM ICINDE kalmasidir:
+    capraz-bolum tasima hala ucuncu bir acik bayrak ister.
+    """
     s = json.loads((REPO / "sentinal_ihsan" / "unnatural-lab" / "bible.json")
                    .read_text(encoding="utf-8"))["series"]
     assert s.get("chain_scope") == "episode", "chain_scope episode olarak yazilmamis"
-    assert s.get("chain_frames") in (False, None), \
-        "chain_frames ACILMIS , bu rock onu acmamaliydi (4a pilotunun isi)"
-    assert s.get("allow_cross_episode_chaining") is not True
+    assert s.get("allow_cross_episode_chaining") is not True, \
+        "capraz-bolum zinciri sessizce acilmis"
 
 
 def test_chain_off_bible_needs_no_new_fields():

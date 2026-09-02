@@ -129,6 +129,40 @@ def generate_narration_script(concept_name: str, hook: str, style: dict = None) 
         return None
 
 
+def shorten_narration_for_duration(narration_text: str, target_seconds: float,
+                                   planned_seconds: float) -> str | None:
+    """Rewrite a narration as complete sentences for a shorter partial episode."""
+    if not GEMINI_API_KEY or not narration_text.strip():
+        return None
+    source_words = len(narration_text.split())
+    if planned_seconds <= 0 or target_seconds <= 0:
+        return None
+    ratio = min(1.0, target_seconds / planned_seconds)
+    max_words = max(6, int(source_words * ratio * 0.8))
+    prompt = (
+        "Shorten the English voiceover below so every sentence remains complete and the "
+        f"result is at most {max_words} words. Preserve its first-person casual vlog tone, "
+        "meaning, and final question when possible. Return only the rewritten voiceover, "
+        "with no quotes or commentary.\n\n"
+        f"VOICEOVER:\n{narration_text.strip()}"
+    )
+    try:
+        genai.configure(api_key=GEMINI_API_KEY)
+        model = genai.GenerativeModel("gemini-2.0-flash")
+        response = model.generate_content(prompt)
+        rewritten = str(response.text or "").strip().strip('"')
+        if not rewritten or len(rewritten.split()) > max_words:
+            logger.warning("⚠️ Kısaltılmış anlatım kelime sınırını doğrulamadı")
+            return None
+        logger.info(
+            f"✂️ Anlatım kısaltıldı: {source_words} -> {len(rewritten.split())} kelime"
+        )
+        return rewritten
+    except Exception as error:
+        logger.warning(f"⚠️ Anlatım kısaltılamadı: {error}")
+        return None
+
+
 def generate_voiceover(
     text: str,
     output_path: str | Path = None,

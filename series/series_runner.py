@@ -411,6 +411,30 @@ def _channel_published_today(meta: SeriesMeta) -> str | None:
 
 _NON_RETRYABLE_REASON_CODES = frozenset({"CONTENT_REJECT", "BUDGET_EXHAUSTED"})
 
+# ROCK 3d: altyapi arizasi icerik reddi DEGILDIR ve icerik sayacini yakmamalidir.
+# Gemini kotasi bitti diye bolum "insan baksin"a dusmemeli; ama altyapinin da
+# SONSUZ hakki yoktur, yoksa kalici billing arizasinda hat her gun sessizce
+# yeniden dener ve kimse haberdar olmaz. Bu yuzden ayri, SONLU bir butce.
+_INFRA_REASON_CODES = frozenset({"QUOTA", "TRANSIENT_INFRA"})
+_INFRA_RETRY_LIMIT = 6
+_INFRA_MAX_AGE_HOURS = 48.0
+
+
+def _infra_budget_spent(part: dict, count: int) -> tuple[bool, str]:
+    """Altyapi butcesi doldu mu; dolduysa insana ne soylenecek."""
+    if count >= _INFRA_RETRY_LIMIT:
+        return True, f"{count} altyapi denemesi ({_INFRA_RETRY_LIMIT} hak) tukendi"
+    started = part.get("first_infra_held_at")
+    if started:
+        try:
+            age = (datetime.now(timezone.utc)
+                   - datetime.fromisoformat(str(started))).total_seconds() / 3600.0
+        except (TypeError, ValueError):
+            return False, ""
+        if age >= _INFRA_MAX_AGE_HOURS:
+            return True, f"altyapi arizasi {age:.0f} saattir surüyor"
+    return False, ""
+
 
 def _approval_artifacts_complete(part: dict) -> bool:
     """Onay durumunun erişilebilir video, Release ve mesaj kimliği sözleşmesi."""
@@ -429,7 +453,7 @@ def migrate_malformed_approval_holds(meta: SeriesMeta, bible) -> bool:
     now = datetime.now(timezone.utc).isoformat()
     valid_codes = {
         "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
-        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "UNKNOWN",
+        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
     }
     for part in meta.parts().values():
         if part.get("status") != "awaiting_approval" or _approval_artifacts_complete(part):
@@ -485,11 +509,46 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
         return True
 
     part = meta.get_part(n)
+    now = datetime.now(timezone.utc).isoformat()
+
+    # ROCK 3d: altyapi kaynakli hold ICERIK sayacini artirmaz, kendi sonlu
+    # butcesinden harcar. Butce dolunca (deneme sayisi VEYA yas esigi) yine
+    # insana devredilir; sessiz sonsuz dongu olusmaz.
+    if code in _INFRA_REASON_CODES:
+        try:
+            infra_count = int(part.get("infra_retry_count", 0)) + 1
+        except (TypeError, ValueError):
+            infra_count = 1
+        part.setdefault("first_held_at", now)
+        part.setdefault("first_infra_held_at", now)
+        part["infra_retry_count"] = infra_count
+        part["last_reason_code"] = code
+        part["hold_reason"] = result.reason or "üretim nedeni bilinmiyor"
+        spent, why = _infra_budget_spent(part, infra_count)
+        if spent:
+            _terminalize_failure(meta, n, "needs_human", result)
+            logger.error(
+                f"🚨 Part {n} altyapi butcesi doldu ({why}); needs_human."
+            )
+            _series_alert(
+                meta.slug,
+                f"🚨 *{meta.base_title}* Part {n} altyapi arizasi giderilemedi "
+                f"({why}, neden={code}). needs_human; kuyruk ilerledi.",
+            )
+            return True
+        part["status"] = "qc_retry"
+        meta.save()
+        logger.warning(
+            f"🔁 Part {n} altyapi yeniden denemesi "
+            f"({infra_count}/{_INFRA_RETRY_LIMIT}, neden={code}); "
+            f"icerik sayaci {int(part.get('retry_count', 0) or 0)}/3'te KORUNDU."
+        )
+        return False
+
     try:
         retry_count = int(part.get("retry_count", 0)) + 1
     except (TypeError, ValueError):
         retry_count = 1
-    now = datetime.now(timezone.utc).isoformat()
     part.setdefault("first_held_at", now)
     part["retry_count"] = retry_count
     part["last_reason_code"] = code
@@ -563,7 +622,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     # A QC hold is stronger than publish mode: later cron runs neither regenerate
     # nor publish until a human changes the part state.
     if meta.get_part(n).get("status") in ("awaiting_approval", "needs_human"):
-        logger.info(f"⏳ Part {n} zorunlu QC/onay bekliyor — üretim ve yayın atlandı.")
+        logger.info(f"⏳ Part {n} zorunlu QC/onay bekliyor ,  üretim ve yayın atlandı.")
         return True
 
     # GÜNDE-1 KİLİDİ (KANAL başına ,  İhsan kuralı 2026-07-03: "günde sadece 1 video").
@@ -583,6 +642,13 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.error(f"❌ Part planı yok: {plan_path}")
         return False
     plan = load_plan(plan_path)
+    from series.preflight import validate_required_platforms
+    platform_errors = validate_required_platforms(bible, meta)
+    if platform_errors:
+        for error in platform_errors:
+            logger.error(f"❌ {error}")
+        logger.error("required_platforms hatası nedeniyle üretim kredi harcamadan durduruldu.")
+        return False
     subtitle = plan.get("episode", {}).get("title", "")
     logger.info(f"🎬 '{meta.base_title}' Part {n}/{meta.total_parts} ,  {subtitle} (mod={mode})")
 
@@ -681,7 +747,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         part["status"] = "awaiting_approval"
         part["hold_reason"] = result.reason or "mandatory QC could not be evaluated"
         meta.save()
-        logger.error(f"⏸️ Part {n} QC HOLD — durum awaiting_approval; yayın bloke edildi.")
+        logger.error(f"⏸️ Part {n} QC HOLD ,  durum awaiting_approval; yayın bloke edildi.")
         _series_alert(meta.slug,
             f"⏸️ *{meta.base_title}* Part {n} zorunlu QC tarafından değerlendirilemedi. "
             "Durum awaiting_approval; otomatik üretim ve yayın durduruldu."
@@ -751,12 +817,52 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         return False
 
     ok = _publish_part(meta, n, video, subtitle, caption=caption)
-    if ok:
-        meta.mark_published(n, ok)
+    required_platforms = set(bible.required_platforms) if bible else set()
+    # Iki taraf da kucuk harfe indirgenir: bible.required_platforms zaten
+    # normalize edilir, ama yayinci "YouTube" dondururse zorunlu platform
+    # sessizce "dogrulanmadi" sayilip kanali gereksiz yere karanlikta birakirdi.
+    published_platforms = {str(p).strip().lower() for p in (ok or [])}
+    publish_complete = bool(ok) and required_platforms.issubset(published_platforms)
+    if publish_complete:
+        dropped_roles = {
+            str(shot_n): (
+                "cold_open" if shot_n == 1
+                else "loop_seam" if shot_n == len(plan.get("shots", []))
+                else "episode_body"
+            )
+            for shot_n in result.dropped_shots
+        }
+        meta.mark_published(
+            n, ok,
+            dropped_shots=result.dropped_shots or None,
+            dropped_shot_roles=dropped_roles or None,
+        )
         meta.advance()
         meta.save()
         logger.info(f"🎉 Part {n} yayınlandı ({', '.join(ok)}): {meta.title_for(n, subtitle)}")
+        if result.dropped_shots:
+            role_text = ", ".join(
+                f"çekim {shot_n} ({dropped_roles[str(shot_n)]})"
+                for shot_n in result.dropped_shots
+            )
+            _series_alert(
+                meta.slug,
+                f"⚠️ *{meta.base_title}* Part {n} eksik çekimle yayınlandı. "
+                f"Düşen roller: {role_text}.",
+            )
         return True
+    if ok and required_platforms:
+        missing = sorted(required_platforms - published_platforms)
+        logger.error(
+            f"❌ Part {n} zorunlu platformlara yayınlanamadı: {', '.join(missing)}; "
+            "durum ve işaretçi ilerletilmedi."
+        )
+        _series_alert(
+            meta.slug,
+            f"❌ *{meta.base_title}* Part {n} üretildi ancak zorunlu platformlar "
+            f"doğrulanmadı: {', '.join(missing)}. Part yayınlandı sayılmadı.",
+        )
+        return False
     logger.error(f"❌ Part {n} hiçbir platforma yayınlanamadı ,  durum ilerletilmedi (yarın tekrar denenir).")
     _series_alert(
         meta.slug,

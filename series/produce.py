@@ -1,5 +1,5 @@
 """
-Üretim Orkestrasyonu — Gemini Omni mini-dizi.
+Üretim Orkestrasyonu ,  Gemini Omni mini-dizi.
 
 İki ana akış:
   setup_references(slug)  → referans görseller (üret/yükle) + ses + karakter kaydı (bible.json'a yazar)
@@ -12,7 +12,7 @@ import hashlib
 import json
 import re
 import shutil
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Literal
 from urllib.parse import urlparse
@@ -86,8 +86,9 @@ class ProduceResult:
     reason: str | None = None
     reason_code: Literal[
         "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
-        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "UNKNOWN",
+        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
     ] = "UNKNOWN"
+    dropped_shots: list[int] = field(default_factory=list)
 
     def __post_init__(self):
         if self.status not in ("ok", "qc_hold", "generation_fail"):
@@ -98,14 +99,50 @@ class ProduceResult:
             raise ValueError("non-ok ProduceResult cannot carry a final path")
         if self.reason_code not in (
             "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
-            "CONTENT_REJECT", "BUDGET_EXHAUSTED", "UNKNOWN",
+            "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
         ):
             raise ValueError(f"unknown ProduceResult reason_code: {self.reason_code}")
 
 
-def _qc_api_reason_code(reason: str | None) -> Literal["QUOTA", "UNKNOWN"]:
-    """Critic'in tipli API kategorisini dış durum koduna çevir; mesaj metni okunmaz."""
-    return "QUOTA" if reason == "quota" else "UNKNOWN"
+def _qc_api_reason_code(
+    reason: str | None,
+) -> Literal["QUOTA", "TRANSIENT_INFRA", "UNKNOWN"]:
+    """Critic'in tipli API kategorisini dış durum koduna çevir; mesaj metni okunmaz.
+
+    ROCK 3c: sunucu arizasi (503 UNAVAILABLE, baglanti kesintisi) ARTIK "quota"
+    diye adlandirilmaz, ayri TRANSIENT_INFRA kodu alir. Ikisi de altyapidir ve
+    icerik reddi DEGILDIR; ama teshiste birbirine karismazlar. "auth" bilinerek
+    disarida birakildi: yanlis anahtar altyapi dalgalanmasi degil, insanin
+    duzeltmesi gereken bir yapilandirma hatasidir.
+    """
+    if reason == "quota":
+        return "QUOTA"
+    if reason in ("server", "parse", "logging"):
+        return "TRANSIENT_INFRA"
+    return "UNKNOWN"
+
+
+def _required_shot_count(bible: Bible, shot_count: int) -> int:
+    """Derive the only shot-count threshold while preserving legacy defaults."""
+    if bible.min_shots is not None:
+        return int(bible.min_shots)
+    return shot_count if bible.require_all_shots else 1
+
+
+def _narration_fits_without_truncation(video_path: Path, audio_path: Path) -> bool:
+    """Mirror mix_voiceover limits and reject any path that would trim narration."""
+    video_duration = ffmpeg_tools.get_video_duration(video_path)
+    voice_duration = ffmpeg_tools.get_video_duration(audio_path)
+    if video_duration <= 0 or voice_duration <= 0:
+        return False
+    available = max(video_duration - ffmpeg_tools.NARRATION_TAIL_PAD, 0.1)
+    tempo = min(
+        voice_duration / available,
+        ffmpeg_tools.NARRATION_MAX_TEMPO,
+    )
+    tempo = round(max(1.0, tempo), 3)
+    needed = voice_duration / tempo + ffmpeg_tools.NARRATION_TAIL_PAD
+    return needed - video_duration <= ffmpeg_tools.NARRATION_MAX_EXTEND + 1e-6
 
 
 def decide_shot_chain(shot: dict, next_shot: dict | None, chain_frames: bool,
@@ -461,7 +498,7 @@ def _generate_visual_clip(engine: str, prompt: str, start_url: str | None,
 def _gen_omni_with_fallback(kwargs: dict, before_call=None) -> dict | None:
     """Omni çekimi üret; sesli çekim başarısızsa sesi düşürüp SESSİZ görsel olarak
     bir kez daha dene. GÜVENLİK AĞI: içerik filtresi en sık KONUŞAN İNSAN (audio_ids)
-    çekimlerini 'flagged content' diye reddeder — anlatım zaten post'ta eklendiği için
+    çekimlerini 'flagged content' diye reddeder ,  anlatım zaten post'ta eklendiği için
     seri tamamen durmaz (bir dizinin günlerce sessizce çökmesini engeller)."""
     if before_call is not None and not before_call():
         return None
@@ -506,7 +543,8 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                   required_music: bool = False,
                   music_reserved: bool = False, *,
                   output_area: str | Path | None = None,
-                  isolated: bool = False) -> Path | None:
+                  isolated: bool = False,
+                  dropped_shots: list[int] | None = None) -> Path | None:
     """Final videoya anlatım (narration) + SÜREKLİ müzik ekle (best-effort).
 
     Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
@@ -520,9 +558,27 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     out = final_ep
     number = plan.get("episode", {}).get("number", 1)
     narr_cfg = bible.narration
-    narr_text = (plan.get("narration") or "").strip()
+    original_narr_text = (plan.get("narration") or "").strip()
+    narr_text = original_narr_text
     narration_ok = False
+    narration_failure = None
     music_ok = False
+
+    if dropped_shots and narr_cfg.get("channel") and original_narr_text:
+        try:
+            from core.narration import shorten_narration_for_duration
+            target_seconds = ffmpeg_tools.get_video_duration(out)
+            planned_seconds = sum(
+                float(shot.get("duration") or 0) for shot in plan.get("shots", [])
+            )
+            narr_text = shorten_narration_for_duration(
+                original_narr_text, target_seconds, planned_seconds
+            ) or ""
+            if not narr_text:
+                narration_failure = "kısaltılmış anlatım metni üretilemedi"
+        except Exception as error:
+            narration_failure = f"anlatım kısaltma hatası: {error}"
+            narr_text = ""
 
     if narr_cfg.get("channel") and narr_text:
         try:
@@ -533,10 +589,17 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                 narrated = out.parent / f"{out.stem}_narrated.mp4"
                 # Adı legacy kalsa da bg_duck sidechain değildir; bütün klip boyunca
                 # native sese uygulanan sabit seviye çarpanıdır.
-                ffmpeg_tools.mix_voiceover(str(out), str(audio_path), str(narrated),
-                                           voice_volume=1.0,
-                                           bg_duck=bible.native_mix_level,
-                                           amix_normalize=bible.master_lufs is None)
+                if dropped_shots and not _narration_fits_without_truncation(
+                    out, Path(audio_path)
+                ):
+                    narration_failure = "kısaltılmış anlatım videoya tam sığmadı"
+                else:
+                    ffmpeg_tools.mix_voiceover(
+                        str(out), str(audio_path), str(narrated),
+                        voice_volume=1.0,
+                        bg_duck=bible.native_mix_level,
+                        amix_normalize=bible.master_lufs is None,
+                    )
                 if narrated.exists() and narrated.stat().st_size > 0:
                     out = narrated
                     narration_ok = True
@@ -545,13 +608,14 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
             logger.warning(f"⚠️ Anlatım atlandı: {e}")
 
     # Anlatım BEKLENEN seride TTS başarısızsa sessiz kalma (the-signal dersi: sessiz
-    # başarısızlık günlerce fark edilmez) — video müzik-only çıkar ama Telegram'a haber ver.
-    if narr_cfg.get("channel") and narr_text and not narration_ok:
+    # başarısızlık günlerce fark edilmez) ,  video müzik-only çıkar ama Telegram'a haber ver.
+    if narr_cfg.get("channel") and original_narr_text and not narration_ok:
         from series.series_runner import _series_alert
         _series_alert(
             bible.slug,
-            f"⚠️ *{bible.title}* ep{number}: anlatım (TTS) üretilemedi — "
-            f"video anlatımsız (müzik-only) yayınlanacak.",
+            f"⚠️ *{bible.title}* ep{number}: anlatım üretilemedi "
+            f"({narration_failure or 'TTS başarısız'}); video anlatımsız "
+            f"(müzik-only) yayınlanacak.",
         )
 
     if bible.music:
@@ -646,7 +710,7 @@ def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path, *,
         return True
 
     message = (
-        f"❌ Zorunlu teslimat katmanı doğrulanamadı: native_audio — {failure}. "
+        f"❌ Zorunlu teslimat katmanı doğrulanamadı: native_audio ,  {failure}. "
         "Yayın durduruldu; ELLE BAK."
     )
     logger.error(message)
@@ -689,12 +753,12 @@ def _upscale_master(bible: Bible, number: int, src: Path, *, hard_cap=None,
                     isolated: bool = False) -> Path:
     """Final videoyu 4K master'a yükselt (bible.upscale açıksa).
 
-    Birincil yol: Kie 'topaz/video-upscale' — kareyi yeniden inşa eder (gerçek detay).
+    Birincil yol: Kie 'topaz/video-upscale' ,  kareyi yeniden inşa eder (gerçek detay).
       Akış: yerel final → Kie geçici deposu (3 gün) → upscale görevi → 4K indir.
-    Yedek yol: yerel ffmpeg lanczos ×2 — API başarısızsa bile 4K konteyner garanti.
+    Yedek yol: yerel ffmpeg lanczos ×2 ,  API başarısızsa bile 4K konteyner garanti.
     Yan ürün: 1080p kaynak episode_dir/delivery_1080.mp4 olarak saklanır; yayında
-    IG/TikTok bunu alır (4K yalnız YouTube'a gider — diğerleri zaten 1080p'ye kodlar).
-    Her iki yol da başarısızsa 1080p final döner — yayın hiçbir koşulda durmaz."""
+    IG/TikTok bunu alır (4K yalnız YouTube'a gider ,  diğerleri zaten 1080p'ye kodlar).
+    Her iki yol da başarısızsa 1080p final döner ,  yayın hiçbir koşulda durmaz."""
     cfg = bible.upscale
     if not cfg:
         return src
@@ -769,7 +833,7 @@ def _upscale_master(bible: Bible, number: int, src: Path, *, hard_cap=None,
                         return out
         except Exception as e:
             logger.warning(f"⚠️ Topaz upscale hatası: {e}")
-        logger.warning("⚠️ Topaz yolu başarısız — yerel lanczos yedeğine geçiliyor")
+        logger.warning("⚠️ Topaz yolu başarısız ,  yerel lanczos yedeğine geçiliyor")
 
     # 2) Yerel lanczos yedeği
     try:
@@ -778,7 +842,7 @@ def _upscale_master(bible: Bible, number: int, src: Path, *, hard_cap=None,
             logger.info(f"🔍 4K master hazır (lanczos ×{factor}): {out.name}")
             return out
     except Exception as e:
-        logger.warning(f"⚠️ Lanczos upscale de başarısız: {e} — 1080p yayınlanacak")
+        logger.warning(f"⚠️ Lanczos upscale de başarısız: {e} ,  1080p yayınlanacak")
     return src
 
 
@@ -813,7 +877,7 @@ def _prep_shot_clip(bible: Bible, plan: dict, shot: dict, src: Path) -> Path:
     """Kurguya girmeden önce çekimi hazırla (opt-in): micro_trim + CCTV giydirme.
 
     Çıktı yan dosyada cache'lenir (*_prep.mp4) → yarım kalan koşular idempotent.
-    Kare zinciri (chain_frames) HAM klipten beslenmeye devam eder — yakılan
+    Kare zinciri (chain_frames) HAM klipten beslenmeye devam eder ,  yakılan
     timestamp/grain bir sonraki çekimin başlangıç karesine sızmaz. Her adım
     best-effort: hazırlık başarısızsa ham klip kullanılır, gece koşusu durmaz."""
     cfg = bible.cctv
@@ -844,7 +908,7 @@ def _prep_shot_clip(bible: Bible, plan: dict, shot: dict, src: Path) -> Path:
         if prep.exists() and prep.stat().st_size > 0:
             return prep
     except Exception as e:
-        logger.warning(f"⚠️ Çekim hazırlığı başarısız ({src.name}): {e} — ham klip kullanılacak")
+        logger.warning(f"⚠️ Çekim hazırlığı başarısız ({src.name}): {e} ,  ham klip kullanılacak")
     return src
 
 
@@ -1183,7 +1247,7 @@ def ensure_character_registration(bible: Bible, ch: dict, dry_run: bool = False)
 # ─── Referans kurulumu (tüm bible) ─────────────────────────────────────────────
 
 def setup_references(slug: str, dry_run: bool = False) -> Bible | None:
-    """Bible'daki tüm referansları hazırla. Idempotent — tamamlananı atlar."""
+    """Bible'daki tüm referansları hazırla. Idempotent ,  tamamlananı atlar."""
     bible = Bible.load(slug)
     if not bible:
         return None
@@ -1318,7 +1382,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             logger.error("Plan/cfg hataları nedeniyle üretim kredi harcamadan durduruldu.")
             return None
 
-    # Doğrulama — 7-birim kota / ses yalnız OMNI çekimleri için geçerli.
+    # Doğrulama ,  7-birim kota / ses yalnız OMNI çekimleri için geçerli.
     v = validate_plan(plan, bible)
     for w in v["warnings"]:
         logger.warning(f"⚠️ {w}")
@@ -1331,6 +1395,15 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     ):
         logger.error("Plan hataları nedeniyle üretim durduruldu.")
         return None
+
+    from .preflight import validate_min_shots
+    min_shot_errors = validate_min_shots(bible, plan)
+    if min_shot_errors:
+        for error in min_shot_errors:
+            logger.error(f"❌ {error}")
+        logger.error("qc.min_shots hatası nedeniyle üretim kredi harcamadan durduruldu.")
+        return None
+    required_shot_count = _required_shot_count(bible, len(plan["shots"]))
 
     external_hard_cap = hard_cap is not None
     isolated = output_area is not None
@@ -1415,7 +1488,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             qc_budget["allocator"] = critic.CapAwareRegenAllocator(
                 hard_cap, estimates, int(qc_cfg["max_regens_per_shot"])
             )
-        logger.info(f"🔍 Critic-QC AÇIK — kare={qc_cfg['frames']}, eşik={qc_cfg['artifact_threshold']}, "
+        logger.info(f"🔍 Critic-QC AÇIK ,  kare={qc_cfg['frames']}, eşik={qc_cfg['artifact_threshold']}, "
                     f"çekim regen≤{qc_cfg['max_regens_per_shot']}, "
                     f"regen modu={'dinamik-cap' if dynamic_regens else qc_budget['left']}")
 
@@ -1430,13 +1503,14 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             )
 
     if not dry_run:
-        check_credit()  # ücretsiz okuma — başlangıç bakiyesi loglanır
+        check_credit()  # ücretsiz okuma ,  başlangıç bakiyesi loglanır
 
     # Bölüm kapsamı dışarıdan yanlışlıkla verilmiş eski sidecar URL'ini de okumaz/kullanmaz.
     chain_url = _initial_chain_url(bible, chain_start_url)
     last_frame_url = None
     chain_reset_pending = False
     shot_files: list[Path] = []
+    dropped_shots: list[int] = []
     shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
     running = 0.0
     previous_shot_dropped = False
@@ -1447,6 +1521,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         out_file = sdir / f"shot_{int(n):02d}.mp4"
         shot_engine = (shot.get("engine") or default_engine).lower()
         next_shot = plan["shots"][shot_index + 1] if shot_index + 1 < len(plan["shots"]) else None
+        broken_anchor = bool(chain_reset_pending or previous_shot_dropped)
         chain_decision = decide_shot_chain(shot, next_shot, chaining, chain_url)
         if chain_decision.error:
             if chain_reset_pending and chain_decision.require_previous:
@@ -1542,7 +1617,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             char_names = [bible.get_character(c).get("name", c)
                           for c in shot.get("characters", []) if bible.get_character(c)]
             if qc_cfg:
-                # HAM çekim promptu — art_style'ın genel 'clothing' metni denetimi köreltmesin
+                # HAM çekim promptu ,  art_style'ın genel 'clothing' metni denetimi köreltmesin
                 for w in critic.lint_prompt(bible, shot, shot.get("prompt") or ""):
                     logger.warning(f"🧹 QC-lint çekim {n}: {w}")
             if dry_run:
@@ -1591,7 +1666,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 download_kwargs = {"hardened": True} if qc_cfg and qc_cfg.get("harden_downloads") else {}
                 if download_file(video_url, out_file, **download_kwargs):
                     status = "ok"
-            # Critic-QC (opt-in): bozuk klip kurguya giremez — REDde fix_notes'lu
+            # Critic-QC (opt-in): bozuk klip kurguya giremez ,  REDde fix_notes'lu
             # prompt + taze seed ile otomatik regen; eşiği geçemeyen çekim düşer.
             if status == "ok" and qc_budget is not None:
                 def _regen_omni(fixed_prompt, _kw=kwargs):
@@ -1630,6 +1705,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     qc_context["object_ref"] = object_ref_bytes
                 if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
                     qc_context["previous_clip"] = previous_accepted_clip
+                    qc_context["continuity_exempt"] = broken_anchor
                 # ROCK B: anomali imzasi plandan, ihlal gozlemi cekimden, tasinan iz
                 # ONCEKI cekimden gelir (iz yalnız bir sonraki cekime karsi olculur).
                 rb_card = (plan.get("object_card") or {}) if isinstance(plan, dict) else {}
@@ -1669,8 +1745,6 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                             ),
                         )
                     status = "qc_skip" if qc_status == "skip" else "qc_fail"
-                    if bible.require_all_shots:
-                        return None
                 if hard_cap is not None and hard_cap.blocked:
                     return None
             if status == "ok":
@@ -1712,13 +1786,22 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     last_frame_url = next_frame.url
             previous_shot_dropped = status != "ok"
             if previous_shot_dropped:
+                dropped_shots.append(int(n))
                 chain_url = None
+                remaining_shots = len(plan["shots"]) - shot_index - 1
+                if len(shot_files) + remaining_shots < required_shot_count:
+                    logger.error(
+                        f"❌ En az çekim kapısı artık karşılanamaz: "
+                        f"kabul={len(shot_files)}, kalan={remaining_shots}, "
+                        f"gerekli={required_shot_count}"
+                    )
+                    return None
             continue
 
         # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
         rv = resolve_visual_shot(bible, shot, chain_url=chain_decision.start_url)
         if qc_cfg:
-            # HAM çekim promptu — art_style'ın genel 'clothing' metni denetimi köreltmesin
+            # HAM çekim promptu ,  art_style'ın genel 'clothing' metni denetimi köreltmesin
             for w in critic.lint_prompt(bible, shot, shot.get("prompt") or ""):
                 logger.warning(f"🧹 QC-lint çekim {n}: {w}")
         if dry_run:
@@ -1763,7 +1846,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             download_kwargs = {"hardened": True} if qc_cfg and qc_cfg.get("harden_downloads") else {}
             if download_file(video_url, out_file, **download_kwargs):
                 status = "ok"
-        # Critic-QC (opt-in): ucuz motorlarda seed parametresi yok — düzeltilmiş
+        # Critic-QC (opt-in): ucuz motorlarda seed parametresi yok ,  düzeltilmiş
         # prompt + modelin doğal varyasyonu regen'i çeşitlendirir.
         if status == "ok" and qc_budget is not None:
             def _regen_visual(fixed_prompt, _rv=rv, _eng=shot_engine):
@@ -1792,6 +1875,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 qc_context["object_ref"] = object_ref_bytes
             if qc_cfg.get("require_continuity") and 2 <= int(n) <= 4:
                 qc_context["previous_clip"] = previous_accepted_clip
+                qc_context["continuity_exempt"] = broken_anchor
             # ROCK B: anomali imzasi plandan, ihlal gozlemi cekimden, tasinan iz
             # ONCEKI cekimden gelir (iz yalnız bir sonraki cekime karsi olculur).
             rb_card = (plan.get("object_card") or {}) if isinstance(plan, dict) else {}
@@ -1831,8 +1915,6 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                         ),
                     )
                 status = "qc_skip" if qc_status == "skip" else "qc_fail"
-                if bible.require_all_shots:
-                    return None
             if hard_cap is not None and hard_cap.blocked:
                 return None
         if status == "ok":
@@ -1873,15 +1955,25 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 last_frame_url = next_frame.url
         previous_shot_dropped = status != "ok"
         if previous_shot_dropped:
+            dropped_shots.append(int(n))
             chain_url = None
+            remaining_shots = len(plan["shots"]) - shot_index - 1
+            if len(shot_files) + remaining_shots < required_shot_count:
+                logger.error(
+                    f"❌ En az çekim kapısı artık karşılanamaz: "
+                    f"kabul={len(shot_files)}, kalan={remaining_shots}, "
+                    f"gerekli={required_shot_count}"
+                )
+                return None
 
     if dry_run:
-        logger.info("[dry-run] Simülasyon bitti — dosya/kredi harcanmadı.")
+        logger.info("[dry-run] Simülasyon bitti ,  dosya/kredi harcanmadı.")
         return None
 
-    if bible.require_all_shots and len(shot_files) != len(plan["shots"]):
+    if len(shot_files) < required_shot_count:
         logger.error(
-            f"❌ require_all_shots kapısı: {len(shot_files)}/{len(plan['shots'])} çekim hazır; "
+            f"❌ En az çekim kapısı: {len(shot_files)}/{len(plan['shots'])} çekim hazır, "
+            f"gerekli={required_shot_count}; "
             "bölüm birleştirilmeyecek/yayınlanmayacak"
         )
         return None
@@ -1897,7 +1989,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     xf = bible.transitions
     if xf and len(shot_files) >= 2:
         # Sinematik crossfade (opt-in, the__footnote formatı): sahneler birbirinin
-        # içinde erir. Ses birleştirmede atılır — müzik post'ta TEK ses olur
+        # içinde erir. Ses birleştirmede atılır ,  müzik post'ta TEK ses olur
         # (replace_original), o yüzden yalnız anlatımsız müzikli serilerde açılmalı.
         fade = max(0.2, min(1.5, float(xf.get("duration", 0.6))))
         try:
@@ -1908,7 +2000,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 shot_offsets[sn] = max(0.0, shot_offsets[sn] - i * fade)
             merged = True
         except Exception as e:
-            logger.warning(f"⚠️ Crossfade birleştirme başarısız ({e}) — düz kesmeye dönülüyor")
+            logger.warning(f"⚠️ Crossfade birleştirme başarısız ({e}) ,  düz kesmeye dönülüyor")
     if not merged:
         if bible.audio_smooth:
             # Atmosfer/müzik kanalları: çekim sınırlarında sesi yumuşat (pop/boşluk gider).
@@ -1927,12 +2019,13 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         required_music="music" in required_layers,
         music_reserved=music_reservation is True,
         output_area=output_area, isolated=isolated,
+        dropped_shots=dropped_shots,
     )
     if final_ep is None:
         return None
 
     # Açılış kancası (opt-in): doruk çekimden kısa bir kesit videonun EN BAŞINA
-    # eklenir — ilk 1-2 saniyede 'olağandışı an' görünmezse Shorts'ta kaydırılır.
+    # eklenir ,  ilk 1-2 saniyede 'olağandışı an' görünmezse Shorts'ta kaydırılır.
     # Müzik/anlatımdan SONRA yapılır ki kesit sesiyle birlikte gelsin.
     teaser_len = 0.0   # kanca kesiti eklenirse tüm gövde bu kadar kayar (fact-caption sync'i için)
     teaser_ok = False
@@ -2002,7 +2095,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             logger.warning(f"⚠️ Künye eklenemedi (video künyesiz yayınlanır): {e}")
 
     # Senkron fact-caption'lar (opt-in): her çekimin shot['fact']'i (kısa sert bilgi)
-    # o çekimin FINAL zaman çizgisindeki anına — kanca kaymasi (teaser_len) dahil —
+    # o çekimin FINAL zaman çizgisindeki anına ,  kanca kaymasi (teaser_len) dahil , 
     # alt üçlüğe yazılır (üst=künye / alt=fact, çakışmaz). Künyeden SONRA, upscale'den
     # ÖNCE uygulanır ki 4K master da IG/TikTok kopyası da yazıyı taşısın. shot['fact']
     # olmayan planlar (eski/anlatımsız) hiç etkilenmez.
@@ -2106,7 +2199,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             return None
 
     # Parçalar arası zincir: bölümün son karesini sonraki bölüm için sakla (sidecar).
-    # chain_scope="episode" ise bölümler arası taşıma YOK — sidecar yazılmaz.
+    # chain_scope="episode" ise bölümler arası taşıma YOK ,  sidecar yazılmaz.
     if chaining and bible.chain_scope == "series":
         if not last_frame_url:
             logger.error(
@@ -2122,7 +2215,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     logger.info(f"🎉 Bölüm hazır: {final_ep}")
     logger.info(f"   📊 {summary['başarılı']}/{summary['çekim_sayısı']} çekim, "
                 f"{summary['toplam_kredi']} kredi (~${summary['toplam_dolar']})")
-    return final_ep
+    return ProduceResult("ok", Path(final_ep), dropped_shots=dropped_shots)
 
 
 def produce_episode(slug: str, plan, dry_run: bool = False,

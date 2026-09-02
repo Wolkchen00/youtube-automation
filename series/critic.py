@@ -1,14 +1,14 @@
 """
-Critic-QC — üretilen her klibin Gemini vision denetimi + otomatik regen (opt-in).
+Critic-QC ,  üretilen her klibin Gemini vision denetimi + otomatik regen (opt-in).
 
 director-studio PLAN §5'in Faz 0 yaması (İhsan şikâyeti: "ters kafa, el-ayak
 karışımı hatalar yayına çıkıyor"). Üç adım:
-  1. lint_prompt()  — üretimden ÖNCE ücretsiz ön-denetim (kıyafet yazılı mı,
+  1. lint_prompt()  ,  üretimden ÖNCE ücretsiz ön-denetim (kıyafet yazılı mı,
      riskli kompozisyon var mı) → sadece uyarı loglar, prompt'a DOKUNMAZ.
-  2. review_clip()  — üretimden SONRA klipten eşit aralıklı kareler çıkarılır,
+  2. review_clip()  ,  üretimden SONRA klipten eşit aralıklı kareler çıkarılır,
      Gemini 2.5 Flash vision zorunlu-JSON kararı verir (anatomi / yüz-referans
      eşleşmesi / kıyafet / dönem / gömülü yazı / artifact skoru).
-  3. qc_shot()      — RED verilen klip fix_notes'la güçlendirilmiş prompt + yeni
+  3. qc_shot()      ,  RED verilen klip fix_notes'la güçlendirilmiş prompt + yeni
      seed ile otomatik yeniden üretilir (çekim başına maks 2; bölüm başına
      ~çekim_sayısı/2 = PLAN'daki +%50 maliyet tavanı). Hâlâ REDse çekim bölümden
      düşer + Telegram'a kare albümü gider ("elle bak"), bölüm kalanlarla devam eder.
@@ -32,6 +32,7 @@ import subprocess
 import tempfile
 import time
 import uuid
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -56,6 +57,8 @@ QC_DEFAULTS = {
 
 QC_REVIEW_RETRY_DELAY = 0.05
 QC_HOLD_REASONS = frozenset({"quota", "auth", "server", "parse", "logging"})
+QC_MAX_SINGLE_DELAY = 30.0
+QC_MAX_EPISODE_WAIT = 300.0
 
 
 _QC_KEY_SOURCE_LOGGED = False
@@ -100,6 +103,21 @@ class QCApiExhausted(RuntimeError):
         super().__init__(detail or reason)
 
 
+@dataclass
+class QCWaitBudget:
+    """Bir bölümdeki tüm QC çağrılarının paylaştığı sonlu bekleme bütçesi."""
+
+    max_total: float = QC_MAX_EPISODE_WAIT
+    max_single: float = QC_MAX_SINGLE_DELAY
+    waited: float = 0.0
+
+    def claim(self, requested: float) -> float:
+        remaining = max(0.0, float(self.max_total) - float(self.waited))
+        delay = min(max(0.0, float(requested)), float(self.max_single), remaining)
+        self.waited += delay
+        return delay
+
+
 def qc_config(bible: Bible) -> dict:
     """Etkinse varsayılanlarla birleşik QC ayarı, değilse {} döndür.
     bible.json → "series" → "qc": {"enabled": true, ...} (diğer opt-in katmanlarla aynı desen)."""
@@ -122,28 +140,28 @@ _WARDROBE_WORDS = (
 
 _RISKY_PATTERNS = (
     (r"close[- ]?up[^.]{0,50}\b(hand|hands|finger|fingers)\b",
-     "el/parmak yakın planı — anatomi riski yüksek; bel-üstü plan veya 'hands relaxed, below frame' düşün"),
+     "el/parmak yakın planı ,  anatomi riski yüksek; bel-üstü plan veya 'hands relaxed, below frame' düşün"),
     (r"\b(handshake|shaking hands|holding hands|intertwined fingers)\b",
-     "el sıkışma / el ele — parmak karışımı riski"),
+     "el sıkışma / el ele ,  parmak karışımı riski"),
     (r"\b(barefoot|bare feet|toes)\b",
-     "çıplak ayak — ayak parmağı riski"),
+     "çıplak ayak ,  ayak parmağı riski"),
     (r"\b(crowd of|crowded|dozens of people|hundreds of people|many people)\b",
-     "kalabalık sahne — çoklu figürde anatomi bozulması riski"),
+     "kalabalık sahne ,  çoklu figürde anatomi bozulması riski"),
     (r"\b(fingers|palms)\s+(visible|extended|spread|outstretched)\b",
-     "parmak vurgusu — anatomi riski"),
+     "parmak vurgusu ,  anatomi riski"),
 )
 
 
 def lint_prompt(bible: Bible, shot: dict, prompt: str) -> list[str]:
     """Üretimden önce ücretsiz denetim. Uyarı listesi döndürür (prompt'u DEĞİŞTİRMEZ).
-    07 Tem dersi: character_id YÜZÜ kilitler, KIYAFETİ kilitlemez — insanlı çekimde
+    07 Tem dersi: character_id YÜZÜ kilitler, KIYAFETİ kilitlemez ,  insanlı çekimde
     kıyafet tarifsiz prompt en sık bozulma kaynağıdır.
-    NOT: buraya HAM çekim promptu verilmeli (art_style'sız) — art_style'lar genel
+    NOT: buraya HAM çekim promptu verilmeli (art_style'sız) ,  art_style'lar genel
     'clothing' kuralları içerir ve birleşik metinde kıyafet denetimini köreltir."""
     warns: list[str] = []
     p = (prompt or "").lower()
     if shot.get("characters") and not any(w in p for w in _WARDROBE_WORDS):
-        warns.append("insanlı çekimde KIYAFET tarifi yok — character_id kıyafeti kilitlemez; "
+        warns.append("insanlı çekimde KIYAFET tarifi yok ,  character_id kıyafeti kilitlemez; "
                      "prompt'a dönem/konsept kıyafetini açıkça yaz")
     for rx, msg in _RISKY_PATTERNS:
         if re.search(rx, p):
@@ -163,14 +181,14 @@ Inspect EVERY frame for AI-generation defects and answer with STRICT JSON only:
   "face_match": bool | null,   // ONLY when a REFERENCE FACE is provided: is the main character clearly the SAME person in every frame (ignore lighting/expression/period styling)? null if no reference given.
   "wardrobe_ok": bool | null,  // if the prompt states clothing requirements (e.g. period-appropriate dress, no modern items): are they respected? null if the prompt has no clothing requirement or no human appears.
   "era_ok": bool | null,       // if the prompt specifies a historical period or setting: no anachronisms (modern objects, clothing, materials, vehicles, lights)? null if not applicable.
-  "unwanted_text": bool,       // burned-in OVERLAY text stamped over the image: captions, subtitles, watermarks, logos, timestamps or UI graphics (overlays are added later in post — the raw clip must contain NONE). Text that exists naturally INSIDE the scene (a sign, an engraving, a book page, a screen that is part of the set) is NOT unwanted unless the prompt explicitly forbids it.
+  "unwanted_text": bool,       // burned-in OVERLAY text stamped over the image: captions, subtitles, watermarks, logos, timestamps or UI graphics (overlays are added later in post ,  the raw clip must contain NONE). Text that exists naturally INSIDE the scene (a sign, an engraving, a book page, a screen that is part of the set) is NOT unwanted unless the prompt explicitly forbids it.
   "forbidden_elements": bool,  // the prompt explicitly forbids elements (e.g. "no people", "no faces", "no text", "no modern objects") and a frame clearly shows one.
   "artifact_score": int,       // 0-10 severity of AI defects across ALL frames judged at the WORST moment: morphing/melting geometry, duplicated or broken objects, impossible physics, glitch frames. 0 = flawless, 10 = unusable.
   "issues": [string],          // short list of concrete problems seen (empty if clean).
   "fix_notes": [string]        // 1-3 short imperative English instructions to append to a REGENERATION prompt to avoid these defects (e.g. "keep the man's head facing forward with a natural neck", "show hands relaxed at his sides, no close-up of fingers"). Empty if clean.
 }
 
-Be STRICT on anatomy — a single twisted head, backwards body or six-fingered hand in ANY frame means anatomy_ok=false.
+Be STRICT on anatomy ,  a single twisted head, backwards body or six-fingered hand in ANY frame means anatomy_ok=false.
 Be TOLERANT of film grain, motion blur, compression, artistic color grading and stylization: they are NOT defects.
 Return ONLY the JSON object."""
 
@@ -219,6 +237,15 @@ work surface are readable, object pose and geometry are intentional, hands/limbs
 and no transient blur, occlusion, cut, duplicated element, glitch, or accepted-but-imperfect
 artifact would be amplified by conditioning the next shot. Always return a JSON boolean."""
 
+_CHAIN_FRAME_IDENTITY_ADDENDUM = """
+
+CHAIN FRAME IDENTITY CONTRACT: the source shot intentionally ends in this carried state:
+{state_carry_expected}
+Judge state_carry_ok against this exact terminal state. An intentional deformation that
+matches this state is still the episode's same physical hero object. A different object,
+unrelated material, or a terminal state that contradicts this expectation is an identity
+failure. Keep object_match and state_carry_ok as separate required fields."""
+
 
 def _parse_json(txt: str):
     """Gemini çıktısını kurtarıcı ayrıştırma (replenish kalıbı): ```json çiti / kırpık uçlar tolere edilir."""
@@ -246,6 +273,26 @@ def _parse_response_json(response):
     return _parse_json(text or "")
 
 
+_DAILY_QUOTA_MARKERS = (
+    "PER_DAY", "PER DAY", "DAILY QUOTA", "FREE_TIER_REQUESTS",
+    "GENERATE_CONTENT_FREE_TIER_REQUESTS", "REQUESTS/DAY", "REQUESTS PER DAY",
+    "PERPROJECTPERMODEL-FREETIER", "GENERATEREQUESTSPERDAY",
+)
+
+
+def _is_daily_quota_error(error: Exception) -> bool:
+    """GUNLUK kota tavani mi (dakikalik 429 degil)?
+
+    Yalnizca beklemenin anlamli olup olmadigina karar vermek icin kullanilir.
+    C1 hold siniflandirmasini DEGISTIRMEZ: `_classify_api_error` her 429'a
+    "quota" demeye devam eder, cunku dis dunyaya verilen tipli sozlesme odur.
+    """
+    message = str(error).upper()
+    if "429" not in message and "RESOURCE_EXHAUSTED" not in message:
+        return False
+    return any(marker in message for marker in _DAILY_QUOTA_MARKERS)
+
+
 def _classify_api_error(error: Exception) -> str:
     """Gemini/taşıma hatasını dondurulmuş C1 hold sınıflarına indirger."""
     if isinstance(error, json.JSONDecodeError):
@@ -259,6 +306,105 @@ def _classify_api_error(error: Exception) -> str:
     )):
         return "auth"
     return "server"
+
+
+def _duration_seconds(value) -> float | None:
+    if value is None or isinstance(value, bool):
+        return None
+    if isinstance(value, (int, float)):
+        return max(0.0, float(value))
+    if isinstance(value, str):
+        match = re.fullmatch(r"\s*(\d+(?:\.\d+)?)\s*(ms|s|sec|seconds?)?\s*", value,
+                             flags=re.IGNORECASE)
+        if not match:
+            return None
+        amount = float(match.group(1))
+        return amount / 1000.0 if (match.group(2) or "s").lower() == "ms" else amount
+    if isinstance(value, dict):
+        for key in ("retryDelay", "retry_delay"):
+            if key in value:
+                parsed = _duration_seconds(value[key])
+                if parsed is not None:
+                    return parsed
+        if "seconds" in value:
+            seconds = _duration_seconds(value.get("seconds"))
+            nanos = _duration_seconds(value.get("nanos")) or 0.0
+            return None if seconds is None else seconds + nanos / 1_000_000_000.0
+        for nested in value.values():
+            parsed = _duration_seconds(nested)
+            if parsed is not None:
+                return parsed
+        return None
+    if isinstance(value, (list, tuple)):
+        for nested in value:
+            parsed = _duration_seconds(nested)
+            if parsed is not None:
+                return parsed
+        return None
+    total_seconds = getattr(value, "total_seconds", None)
+    if callable(total_seconds):
+        try:
+            return max(0.0, float(total_seconds()))
+        except (TypeError, ValueError):
+            pass
+    for attr in ("retry_delay", "retryDelay"):
+        if hasattr(value, attr):
+            parsed = _duration_seconds(getattr(value, attr))
+            if parsed is not None:
+                return parsed
+    if hasattr(value, "seconds"):
+        seconds = _duration_seconds(getattr(value, "seconds"))
+        nanos = _duration_seconds(getattr(value, "nanos", 0)) or 0.0
+        return None if seconds is None else seconds + nanos / 1_000_000_000.0
+    return None
+
+
+def _retry_delay_from_error(error: Exception) -> float | None:
+    """Önce SDK metadata, sonra hata metnindeki retryDelay değerini oku."""
+    for attr in ("retry_delay", "retryDelay", "details", "metadata", "response"):
+        if hasattr(error, attr):
+            parsed = _duration_seconds(getattr(error, attr))
+            if parsed is not None:
+                return parsed
+    message = str(error)
+    match = re.search(
+        r"retry[_ ]?delay[\"']?\s*[:=]\s*[\"']?\s*(\d+(?:\.\d+)?)\s*(ms|s|sec|seconds?)",
+        message, flags=re.IGNORECASE,
+    )
+    if not match:
+        return None
+    amount = float(match.group(1))
+    return amount / 1000.0 if match.group(2).lower() == "ms" else amount
+
+
+def _wait_for_qc_retry(error: Exception, attempt: int, max_tries: int, *,
+                       response_received: bool, wait_budget: QCWaitBudget | None,
+                       label: str, model: str) -> bool:
+    """Tüm QC yolları için sunucu gecikmesini ve ortak bölüm bütçesini uygula."""
+    if attempt >= max_tries:
+        return False
+    # GUNLUK kota saniyeler icinde acilmaz; beklemek workflow suresini bosa yakar.
+    # Dakikalik 429 ise gecicidir ve beklenerek asilir, o yuzden ayrimi burada
+    # yapariz. Siniflandirma (C1 hold siniflari) DEGISMEZ: her 429 "quota"dir.
+    if not response_received and _is_daily_quota_error(error):
+        logger.warning(f"⚠️ {label} günlük kota sinyali aldı; yeniden deneme beklemeden kesildi")
+        return False
+    if not response_received and not _is_transient_api_error(error):
+        return False
+    requested = 3.0 if response_received else (
+        _retry_delay_from_error(error) or min(5.0 * attempt, 15.0)
+    )
+    budget = wait_budget or QCWaitBudget()
+    delay = budget.claim(requested)
+    if delay <= 0:
+        logger.warning(f"⚠️ {label} bölüm geneli QC bekleme bütçesi tükendi")
+        return False
+    logger.warning(
+        f"⚠️ {label} {model} geçici hata ({str(error)[:60]}) , "
+        f"{delay:g}s sonra tekrar"
+    )
+    time.sleep(delay)
+    return True
 
 
 def _is_transient_api_error(error: Exception) -> bool:
@@ -347,7 +493,7 @@ def _fetch_ref_face(bible: Bible, shot: dict) -> bytes | None:
                 _REF_IMAGE_CACHE[url] = r.content
                 return r.content
         except Exception as e:
-            logger.warning(f"⚠️ QC: referans yüz indirilemedi ({e}) — face_match denetimsiz")
+            logger.warning(f"⚠️ QC: referans yüz indirilemedi ({e}) ,  face_match denetimsiz")
         return None
     return None
 
@@ -401,6 +547,8 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    violation_observation: str | None = None,
                    state_carry_expected: str | None = None,
                    chain_frame_suitability: bool = False,
+                   chain_frame_identity: bool = False,
+                   wait_budget: QCWaitBudget | None = None,
                    slug: str, episode: int | None, shot: int | None,
                    experiment_id: str | None = None) -> dict | None:
     """Send explicitly labeled visual groups to Gemini and parse strict JSON."""
@@ -456,6 +604,10 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
         instruction += _state_carry_addendum(state_carry_expected)
     if chain_frame_suitability:
         instruction += _CHAIN_FRAME_QC_ADDENDUM
+    if chain_frame_identity and state_carry_expected:
+        instruction += _CHAIN_FRAME_IDENTITY_ADDENDUM.format(
+            state_carry_expected=state_carry_expected
+        )
     try:
         client = genai.Client(api_key=qc_key)
         config = types.GenerateContentConfig(
@@ -485,9 +637,11 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                 message = str(error)
                 bad_json = response_received
                 last_reason = "parse" if bad_json else _classify_api_error(error)
-                transient = _is_transient_api_error(error)
-                if (transient or bad_json) and attempt < max_tries:
-                    time.sleep(3 if bad_json else min(5 * attempt, 15))
+                if _wait_for_qc_retry(
+                    error, attempt, max_tries,
+                    response_received=bad_json, wait_budget=wait_budget,
+                    label="Görsel QC", model=model,
+                ):
                     continue
                 logger.warning(f"⚠️ QC {model} başarısız: {message[:120]}")
                 break
@@ -612,10 +766,22 @@ def _decide(review: dict, qc: dict, has_ref: bool,
         if type(value) is not bool:
             unevaluated.append("zorunlu obje kimliği alanı doğrulanamadı")
         elif not value:
-            reasons.append("obje referansla aynı fiziksel obje değil")
+            carried_state = _parse_rb_field(review.get("state_carry_ok"))
+            intended_terminal_identity = bool(
+                qc.get("_chain_frame_identity")
+                and carried_state is not None
+                and carried_state[0] is True
+                and carried_state[1] is True
+                and carried_state[2] >= 0.5
+                and review.get("chain_frame_suitable") is True
+            )
+            if not intended_terminal_identity:
+                reasons.append("obje referansla aynı fiziksel obje değil")
     if qc.get("require_continuity") and 2 <= int(shot_n) <= 4:
         value = review.get("continuity_ok")
-        if type(value) is not bool:
+        if qc.get("_continuity_exempt"):
+            pass
+        elif type(value) is not bool:
             unevaluated.append("zorunlu çekimler arası süreklilik alanı doğrulanamadı")
         elif not value:
             reasons.append("çekimler arası tezgâh, ışık veya obje-durumu sürekliliği bozuk")
@@ -656,12 +822,15 @@ def review_chain_frame(bible: Bible, shot: dict, frame_path: Path, prompt: str,
                        experiment_id: str | None = None) -> tuple[bool, list[str]]:
     """Son karenin bir sonraki çekimi zehirlemeyeceğini zorunlu olarak denetle."""
     config = {**QC_DEFAULTS, **(qc or {})}
+    state_carry_expected = str(shot.get("state_carry") or "").strip() or None
     review = _review_frames(
         [Path(frame_path)], None, prompt, str(config.get("notes") or ""),
         require_no_face=bool(config.get("require_no_face")),
         object_ref=object_ref,
         require_object_match=bool(config.get("require_object_match") and object_ref),
+        state_carry_expected=state_carry_expected,
         chain_frame_suitability=True,
+        chain_frame_identity=bool(state_carry_expected),
         slug=bible.slug, episode=episode, shot=int(shot.get("n") or 0),
         experiment_id=experiment_id,
     )
@@ -675,6 +844,7 @@ def review_chain_frame(bible: Bible, shot: dict, frame_path: Path, prompt: str,
         "require_continuity": False,
         "require_first_frame": False,
         "enforce": {},
+        "_chain_frame_identity": bool(state_carry_expected),
     }
     verdict, reasons = _decide(
         review, frame_config, bool(config.get("require_object_match") and object_ref),
@@ -726,7 +896,8 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         return None, ("hold" if mandatory else "skip"), ["denetim karesi çıkarılamadı"], []
     if qc.get("require_object_match") and object_ref is None:
         return None, "hold", ["zorunlu obje referansı indirilemedi"], frames
-    if qc.get("require_continuity") and 2 <= shot_n <= 4 and previous_frame is None:
+    if (qc.get("require_continuity") and 2 <= shot_n <= 4
+            and previous_frame is None and not qc.get("_continuity_exempt")):
         return None, "hold", ["önceki onaylı çekimin son karesi çıkarılamadı"], frames
     if qc.get("require_first_frame") and shot_n == 1 and opening_frame is None:
         return None, "hold", ["izleyici açılış karesi çıkarılamadı"], frames
@@ -747,6 +918,7 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         anomaly_descriptor=anomaly_descriptor,
         violation_observation=violation_observation,
         state_carry_expected=state_carry_expected,
+        wait_budget=qc.get("_wait_budget"),
     )
     if review is None:
         if qc.get("require_no_face"):
@@ -818,14 +990,14 @@ def strengthen_prompt(prompt: str, fix_notes: list[str], *,
         if not notes:
             notes = ["render all human figures with strictly correct anatomy: one head facing "
                      "a natural direction, two arms, two legs, five fingers per hand"]
-        block = "CRITICAL CORRECTIONS — the previous take FAILED quality control. You MUST fix:\n" \
+        block = "CRITICAL CORRECTIONS ,  the previous take FAILED quality control. You MUST fix:\n" \
                 + "\n".join(f"- {note}" for note in notes)
         return f"{prompt.rstrip()}\n\n{block}"
     source = [note for note in (fix_notes or []) if str(note or "").strip()] or ["anatomy"]
     corrections = list(dict.fromkeys(
         positive_correction(note, environment=environment) for note in source
     ))
-    block = "QUALITY TARGETS — render this take with:\n" \
+    block = "QUALITY TARGETS ,  render this take with:\n" \
             + "\n".join(f"- {correction}" for correction in corrections)
     return f"{prompt.rstrip()}\n\n{block}"
 
@@ -1049,7 +1221,7 @@ def log_scene_cut_scan(slug: str, episode: int, shot: int,
 
 
 def _clean_sidecars(clip_path: Path) -> None:
-    """Regen öncesi eski klibin türev dosyalarını sil — bayat prep/trim/lastframe
+    """Regen öncesi eski klibin türev dosyalarını sil ,  bayat prep/trim/lastframe
     cache'i yeni klibin yerine kurguya girmesin."""
     for suffix in ("_prep.mp4", "_trim.mp4", "_lastframe.png"):
         try:
@@ -1091,7 +1263,8 @@ Return ONLY the JSON object."""
 
 def _review_audio(audio_path: Path, max_tries: int = 3, *,
                   slug: str, episode: int | None, shot: int | None = None,
-                  experiment_id: str | None = None) -> dict | None:
+                  experiment_id: str | None = None,
+                  wait_budget: QCWaitBudget | None = None) -> dict | None:
     """Send an extracted audio sample to Gemini using the clip-QC retry/model pattern."""
     if not slug:
         raise QCApiExhausted("logging", "ses QC günlüğü için seri kimliği belirlenemedi")
@@ -1145,14 +1318,11 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
                 message = str(error)
                 bad_json = response_received
                 last_reason = "parse" if bad_json else _classify_api_error(error)
-                transient = _is_transient_api_error(error)
-                if (transient or bad_json) and attempt < max_tries:
-                    wait = 3 if bad_json else min(5 * attempt, 15)
-                    logger.warning(
-                        f"⚠️ Ses QC {model} geçici hata ({message[:60]}…) — "
-                        f"{wait}s sonra tekrar"
-                    )
-                    time.sleep(wait)
+                if _wait_for_qc_retry(
+                    error, attempt, max_tries,
+                    response_received=bad_json, wait_budget=wait_budget,
+                    label="Teslimat ses QC", model=model,
+                ):
                     continue
                 logger.warning(f"⚠️ Ses QC {model} başarısız: {message[:120]}")
                 break
@@ -1176,7 +1346,8 @@ Use notes for one concise observation. Return ONLY the JSON object."""
 
 def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
                              slug: str, episode: int | None, shot: int | None,
-                             experiment_id: str | None = None) -> dict | None:
+                             experiment_id: str | None = None,
+                             wait_budget: QCWaitBudget | None = None) -> dict | None:
     """Review one persisted raw WAV stem with the native-audio schema."""
     qc_key, qc_key_source = _qc_api_key(slug)
     if not qc_key:
@@ -1226,14 +1397,11 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
                 message = str(error)
                 bad_json = response_received
                 last_reason = "parse" if bad_json else _classify_api_error(error)
-                transient = _is_transient_api_error(error)
-                if (transient or bad_json) and attempt < max_tries:
-                    wait = 3 if bad_json else min(5 * attempt, 15)
-                    logger.warning(
-                        f"⚠️ Ham ses QC {model} geçici hata ({message[:60]}…) — "
-                        f"{wait}s sonra tekrar"
-                    )
-                    time.sleep(wait)
+                if _wait_for_qc_retry(
+                    error, attempt, max_tries,
+                    response_received=bad_json, wait_budget=wait_budget,
+                    label="Ham ses QC", model=model,
+                ):
                     continue
                 logger.warning(f"⚠️ Ham ses QC {model} başarısız: {message[:120]}")
                 break
@@ -1244,7 +1412,8 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
 def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
                             episode: int, attempt: int, *,
                             output_dir: str | Path | None = None,
-                            experiment_id: str | None = None) -> tuple[
+                            experiment_id: str | None = None,
+                            wait_budget: QCWaitBudget | None = None) -> tuple[
                                 dict | None, str, list[str], Path | None
                             ]:
     """Persist and review a raw shot stem; unavailable/invalid review fails closed."""
@@ -1261,6 +1430,7 @@ def review_raw_native_audio(bible: Bible, shot: dict, clip_path: Path,
     review = _review_raw_native_audio(
         extracted, slug=bible.slug, episode=episode, shot=shot_number,
         experiment_id=experiment_id,
+        wait_budget=wait_budget,
     )
     valid = (
         isinstance(review, dict)
@@ -1307,7 +1477,8 @@ def _log_audio(path: Path, **values) -> None:
 def qc_audio(path: str | Path, *, slug: str | None = None,
              episode: int | None = None, shot: int | None = None,
              experiment_id: str | None = None,
-             api_fail_closed: bool = False) -> dict | None:
+             api_fail_closed: bool = False,
+             wait_budget: QCWaitBudget | None = None) -> dict | None:
     """Verify the first 60 seconds of delivered audio with strict Gemini JSON."""
     media_path = Path(path)
     journal_slug = slug or _audio_slug(media_path)
@@ -1327,6 +1498,7 @@ def qc_audio(path: str | Path, *, slug: str | None = None,
             review = _review_audio(
                 sample, slug=journal_slug or "", episode=episode, shot=shot,
                 experiment_id=experiment_id,
+                wait_budget=wait_budget,
             )
     except QCApiExhausted:
         raise
@@ -1369,6 +1541,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
              experiment_id: str | None = None,
              anomaly_descriptor: str | None = None,
              state_carry_expected: str | None = None,
+             continuity_exempt: bool = False,
              ) -> tuple[Path | None, float, str]:
     """Review and optionally regenerate one clip.
 
@@ -1426,6 +1599,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     bible, shot, clip_path, episode, attempt,
                     output_dir=clip_path.parent.parent if experiment_id is not None else None,
                     experiment_id=experiment_id,
+                    wait_budget=budget.get("wait_budget"),
                 )
             except QCApiExhausted as error:
                 review, verdict, stem = None, "hold", None
@@ -1456,6 +1630,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 "_api_episode": episode,
                 "_api_experiment_id": experiment_id,
                 "_api_fail_closed": True,
+                "_continuity_exempt": bool(continuity_exempt),
+                "_wait_budget": budget.get("wait_budget"),
             }
             while True:
                     review_kwargs = {}
@@ -1544,7 +1720,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
             # P9 (filo riski): API tükenmesi HER ZAMAN yüksek sesle raporlanır, ama
             # bölümü yalnız ZORUNLU kapısı olan seride durdurur. Zorunlu kapısı
             # olmayan seriler (bugün from-scratch, event-horizon) eskisi gibi
-            # QC'siz devam eder — aksi hâlde tek bir Gemini kota tükenmesi, ayrı QC
+            # QC'siz devam eder ,  aksi hâlde tek bir Gemini kota tükenmesi, ayrı QC
             # anahtarı (ROCK C2) hazır olmadan canlı kanalları birden susturur.
             # Sessizlik değil, sesli devam: alarm + defter kaydı aşağıda yazılır.
             if not _api_fail_open(qc):
@@ -1552,7 +1728,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 reasons = [*reasons, f"QC API tükenmesi giderilemedi ({api_hold_reason})"]
             else:
                 reasons = [*reasons,
-                           f"QC API tükenmesi ({api_hold_reason}) — seride zorunlu kapı "
+                           f"QC API tükenmesi ({api_hold_reason}) ,  seride zorunlu kapı "
                            f"yok, bölüm QC'siz sürüyor"]
                 notify_qc_exhaustion(bible.title, episode, api_hold_reason, n,
                                      blocking=False, slug=slug)
@@ -1678,14 +1854,14 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                    if regen_fn is not None and shot_regen_limit < int(qc["max_regens_per_shot"])
                    else "dinamik kredi payı doldu" if allocator is not None
                    else "çekim regen limiti doldu" if regen_fn is not None else "regen kapalı")
-            logger.error(f"❌ QC: çekim {n} eşiği geçemedi ({why}) — çekim bölümden düşürüldü, ELLE BAK")
+            logger.error(f"❌ QC: çekim {n} eşiği geçemedi ({why}) ,  çekim bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "final_reject", "episode": episode, "shot": n,
                               "attempts": attempt, "reasons": reasons},
                        experiment_id=experiment_id)
-            _notify(f"🔍❌ *QC RED — {bible.title}* ep{episode} çekim {n}\n"
+            _notify(f"🔍❌ *QC RED ,  {bible.title}* ep{episode} çekim {n}\n"
                     f"Nedenler: {'; '.join(reasons)}\n"
                     f"{attempt} regen denendi, eşik geçilemedi → çekim bölümden ÇIKARILDI. "
-                    f"Bölüm kalan çekimlerle hazırlanıyor — yayın öncesi elle bak.",
+                    f"Bölüm kalan çekimlerle hazırlanıyor ,  yayın öncesi elle bak.",
                     frames=frames, slug=slug)
             return None, extra_credits, "fail"
 
@@ -1730,10 +1906,10 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         if not (result and result.get("url")
                 and download_file(result["url"], clip_path, **download_kwargs)
                 and clip_path.exists() and clip_path.stat().st_size > 0):
-            logger.error(f"❌ QC regen üretimi başarısız — çekim {n} bölümden düşürüldü, ELLE BAK")
+            logger.error(f"❌ QC regen üretimi başarısız ,  çekim {n} bölümden düşürüldü, ELLE BAK")
             _log_event(slug, {"event": "regen_failed", "episode": episode, "shot": n,
                               "attempt": attempt}, experiment_id=experiment_id)
-            _notify(f"🔍❌ *QC — {bible.title}* ep{episode} çekim {n}: klip QC'den geçemedi ve "
+            _notify(f"🔍❌ *QC ,  {bible.title}* ep{episode} çekim {n}: klip QC'den geçemedi ve "
                     f"yeniden üretim de başarısız → çekim bölümden ÇIKARILDI (elle bak).",
                     frames=frames, slug=slug)
             return None, extra_credits, "fail"

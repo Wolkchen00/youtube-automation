@@ -147,3 +147,72 @@ Uc turda 27 bulgu kabul edildi, sifir bulgu reddedildi.
 Kabul edilen bulgulardan besi kanalin yayinlamasini dogrudan engelleyen,
 ilk planin kacirdigi sorunlardi (kimlik sozlesmesi, anlatim, kirmizi test
 takimi, anlatim kesilmesi, platform ayrimi yapmayan yayin kurali).
+
+## Insa: Codex kotasi bitti, Visionary direksiyonu aldi
+
+Codex insanin ORTASINDA kullanim limitine takildi ("You've hit your usage limit").
+Birakigi kismi is: 8 dosya degismis, 2 test dosyasi yazilmis; ROCK 3'un yarisi,
+ROCK 4 ve test_qc_backoff.py HIC yapilmamis, ve HICBIR test calistirilmamisti.
+
+Ilk deneme ayrica bosa gitti: `--sandbox workspace-write` ile Codex Windows'ta
+hicbir dosyaya yazamadi, `BLOCKED` deyip durdu. Ikinci kosu sandbox'siz ama
+git worktree izolasyonunda yapildi; ana depo bastan sona dokunulmadan kaldi
+(kosu oncesi ve sonrasi `git status` karsilastirildi, ayni).
+
+### Codex'in kismi isinde bulunan ve duzeltilen HATALAR
+
+Taban: `origin/main` uzerinde 599 gecti / 2 kaldi. Codex'in kismi isiyle
+takim **9 kaldi** , yani 7 testi BOZMUSTU. Kanit kendi kosumdan:
+
+1. **`_classify_api_error` tipli sozlesmeyi bozdu.** Duz `429`'u artik "quota"
+   saymiyordu (yalniz gunluk isaretli olanlari). ROCK C1 sozlesmesi buna
+   dayaniyor; 5 test kirildi. DUZELTME: siniflandirma eski haline dondu, gunluk
+   kota ayrimi yalnizca BEKLEME kararina taşındı (`_is_daily_quota_error`).
+2. **Yedek modeli atlayan `break` (GERCEK REGRESYON).** Codex model dongusune
+   `if last_reason == "quota": break` koymustu. Ucretsiz katman kotasi MODEL
+   BASINA ayrilir (canli 429 govdesi:
+   `GenerateRequestsPerDayPerProjectPerModel-FreeTier`), yani birincil model
+   kotayi doldurdu diye yedek modeli hic denememek tam da kota krizinde
+   dayanikliligi DUSURURDU. Uc yerden kaldirildi. Mutasyon testiyle dogrulandi:
+   `break` geri konunca test kirmizi, kaldirilinca yesil.
+3. **ROCK 3c ve 3d hic yapilmamisti.** `TRANSIENT_INFRA` kodu eklendi;
+   altyapi hold'u artik ICERIK `retry_count` sayacini yakmiyor, kendi SONLU
+   butcesinden (6 deneme VEYA 48 saat) harciyor ve butce dolunca yine
+   `needs_human` + alarm uretiyor.
+4. **ROCK 4 hic yapilmamisti.** Iki bayat kirmizi test, KORUDUKLARI davranis
+   zayiflatilmadan bugunku bilincli kararlara hizalandi (1000 tavan icin
+   `credit_cap_note`'ta 800'e donus kosulu artik ZORUNLU; chain_frames testi
+   kapsam korumasini , chain_scope=episode + capraz-bolum kapali , koruyor).
+5. **Platform karsilastirmasi buyuk/kucuk harfe duyarliydi.** Yayinci
+   "YouTube" dondurse zorunlu platform "dogrulanmadi" sayilip kanal gereksiz
+   yere karanlikta kalirdi. Iki taraf da normalize edildi.
+
+### Kendi testlerimde bulunan ve duzeltilen HATA (bende)
+
+Yazdigim `test_qc_backoff.py` GERCEK `sentinal_ihsan/unnatural-lab/series.json`
+dosyasini EZDI: `terminalize_and_advance()` iceride `save_atomic()` cagirip
+slug'dan turetilen gercek dosyaya yaziyor, ben yalniz `save`'i mocklamistim.
+327 satirlik canli yapilandirma (logline, hashtags, auto_replenish brief,
+families, music_style) 21 satirlik fixture'a dondu ve `next_part` 27 oldu.
+Dort planner/golden testinin aniden kirmizi olmasi bu yuzdendi.
+Dosya git'ten geri alindi (327 satir, next_part 26, auto_replenish yerinde),
+ANA DEPO hic etkilenmedi. Testler artik uydurma slug kullaniyor ve
+`save` + `save_atomic` ikisi de autouse fixture ile kapatiliyor.
+
+### Eklenen kanitlar
+
+- `tests/test_qc_backoff.py` (20 test): ROCK 3'un (a)-(g) vakalari, arti kendi
+  adversarial eklerim , absurt sunucu gecikmesi (86400s) workflow'u asamaz,
+  negatif/sifir gecikme negatif uykuya donmez, bolum butcesi CAGRI BASINA
+  degil PAYLASILAN olmalı, ve gunluk kotada yedek model YINE denenir.
+- `tests/test_chain_exemption_plumbing.py` (4 test): Codex'in zincir testleri
+  muafiyeti yalniz `_decide()` seviyesinde dogruluyordu, yani "bayrak verilirse
+  dogru davranir" diyordu. Kanali olduren hata ise bayragin HIC VERILMEMESIYDI.
+  Bu dosya canli ariza senaryosunu (3 -> 4 sifirlanmasi) uretim dongusunde
+  tekrar oynatip bayragin `qc_shot`'a ULASTIGINI kanitliyor, muafiyetin
+  sonraki cekime SIZMADIGINI da. Mutasyon testiyle dogrulandi.
+
+### Sonuc
+
+`python -m pytest tests/ -q` -> **648 gecti, 0 kaldi** (taban: 599 gecti, 2 kaldi).
+Testler sirasinda hicbir canli durum dosyasi yazilmadi.
