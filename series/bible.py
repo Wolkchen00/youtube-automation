@@ -210,6 +210,16 @@ class Bible:
         return v if v in ("series", "episode") else "series"
 
     @property
+    def state_machine_version(self) -> int:
+        """Seri koşucusu durum makinesi sürümü; yazılmamışsa tam eski davranış."""
+        value = self.data["series"].get("state_machine_version", 1)
+        try:
+            version = int(value)
+        except (TypeError, ValueError):
+            return 1
+        return version if version >= 1 else 1
+
+    @property
     def required_layers(self) -> list[str]:
         """Delivery layers that must succeed for this episode (opt-in)."""
         value = self.data["series"].get("required_layers")

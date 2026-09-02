@@ -12,6 +12,7 @@ Kullanım:
 """
 
 import os
+from datetime import datetime, timezone
 from pathlib import Path
 import sys
 import time
@@ -375,6 +376,134 @@ def _channel_published_today(meta: SeriesMeta) -> str | None:
     return None
 
 
+_NON_RETRYABLE_REASON_CODES = frozenset({"CONTENT_REJECT", "BUDGET_EXHAUSTED"})
+
+
+def _approval_artifacts_complete(part: dict) -> bool:
+    """Onay durumunun erişilebilir video, Release ve mesaj kimliği sözleşmesi."""
+    return all(part.get(key) for key in ("video", "release_tag", "approval_msg_id"))
+
+
+def migrate_malformed_approval_holds(meta: SeriesMeta, bible) -> bool:
+    """Sürüm 2 serilerindeki çıkışsız eski onay kayıtlarını bir kez sınıflandır.
+
+    Serbest metin hiçbir zaman sınıflandırmaya katılmaz. Eski kayıtta tipli kod yoksa
+    güvenli varsayılan ``UNKNOWN`` olur ve yeniden denenebilir sayılır.
+    """
+    if not bible or bible.state_machine_version < 2:
+        return False
+    changed = False
+    now = datetime.now(timezone.utc).isoformat()
+    valid_codes = {
+        "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
+        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "UNKNOWN",
+    }
+    for part in meta.parts().values():
+        if part.get("status") != "awaiting_approval" or _approval_artifacts_complete(part):
+            continue
+        code = part.get("last_reason_code")
+        if code not in valid_codes:
+            code = "UNKNOWN"
+        try:
+            retry_count = max(0, int(part.get("retry_count", 0)))
+        except (TypeError, ValueError):
+            retry_count = 0
+        part["last_reason_code"] = code
+        part["retry_count"] = retry_count
+        part.setdefault("first_held_at", now)
+        if code == "BUDGET_EXHAUSTED":
+            part["status"] = "budget_exhausted"
+        elif code == "CONTENT_REJECT" or retry_count >= 3:
+            part["status"] = "needs_human"
+        else:
+            part["status"] = "qc_retry"
+        changed = True
+    if changed:
+        meta.save()
+        logger.info("♻️ Bozuk awaiting_approval kayıtları sürüm 2 durumlarına geçirildi.")
+    return changed
+
+
+def _terminalize_failure(meta: SeriesMeta, n: int, status: str,
+                         result: produce.ProduceResult) -> None:
+    """Terminal kayıt ile kuyruk ilerlemesini üretimden önce atomik kalıcılaştır."""
+    part = meta.get_part(n)
+    fields = {
+        "hold_reason": result.reason or "üretim nedeni bilinmiyor",
+        "last_reason_code": result.reason_code,
+        "retry_count": int(part.get("retry_count", 0) or 0),
+    }
+    if part.get("first_held_at"):
+        fields["first_held_at"] = part["first_held_at"]
+    meta.terminalize_and_advance(n, status, **fields)
+
+
+def _record_recoverable_failure(meta: SeriesMeta, n: int,
+                                result: produce.ProduceResult) -> bool:
+    """Hata durumunu yaz; işaretçi ilerlediyse True, yeniden denenecekse False."""
+    code = result.reason_code
+    if code in _NON_RETRYABLE_REASON_CODES:
+        status = "budget_exhausted" if code == "BUDGET_EXHAUSTED" else "needs_human"
+        _terminalize_failure(meta, n, status, result)
+        _alert(
+            f"🚨 *{meta.base_title}* Part {n} terminal duruma alındı: "
+            f"{status} ({code}). Kuyruk sonraki bölüme ilerledi."
+        )
+        return True
+
+    part = meta.get_part(n)
+    try:
+        retry_count = int(part.get("retry_count", 0)) + 1
+    except (TypeError, ValueError):
+        retry_count = 1
+    now = datetime.now(timezone.utc).isoformat()
+    part.setdefault("first_held_at", now)
+    part["retry_count"] = retry_count
+    part["last_reason_code"] = code
+    part["hold_reason"] = result.reason or "üretim nedeni bilinmiyor"
+    if retry_count >= 3:
+        _terminalize_failure(meta, n, "needs_human", result)
+        logger.error(
+            f"🚨 Part {n} üç başarısız denemeden sonra needs_human; kuyruktan düşürüldü."
+        )
+        _alert(
+            f"🚨 *{meta.base_title}* Part {n} üç denemeden sonra needs_human. "
+            "Kuyruk sonraki bölüme ilerledi."
+        )
+        return True
+    part["status"] = "qc_retry"
+    meta.save()
+    logger.warning(
+        f"🔁 Part {n} qc_retry ({retry_count}/3, neden={code}); sonraki koşuda yeniden üretilecek."
+    )
+    return False
+
+
+def _budget_failure(slug: str, n: int, bible, plan: dict) -> produce.ProduceResult | None:
+    """Ücretli işe başlamadan kalan çekimlerin korumacı tamamlanma tabanını denetle."""
+    minimum = produce.minimum_remaining_completion_cost(slug, n, bible, plan)
+    spent = produce.episode_spent(slug, n)
+    cap = produce.episode_credit_cap(bible)
+    remaining = None if spent is None else max(0.0, float(cap) - float(spent))
+    if minimum is not None and remaining is not None and remaining >= minimum:
+        return None
+    reason = (
+        f"kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan={remaining}, "
+        f"asgari={minimum}, tavan={cap}"
+    )
+    return produce.ProduceResult(
+        "generation_fail", reason=reason, reason_code="BUDGET_EXHAUSTED"
+    )
+
+
+def _continue_after_terminal(meta: SeriesMeta, slug: str, *, dry_run: bool,
+                             publish: bool, force: bool) -> bool:
+    """Kuyrukta bölüm kaldıysa devam et; yoksa terminal hatayı başarı diye sunma."""
+    if meta.status != "active" or meta.next_part > meta.total_parts:
+        return False
+    return run_next(slug, dry_run=dry_run, publish=publish, force=force)
+
+
 def run_next(slug: str, dry_run: bool = False, publish: bool = True,
              force: bool = False) -> bool:
     """Serinin sıradaki part'ını üret + yayınla + durumu ilerlet."""
@@ -385,12 +514,18 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.info(f"✅ '{slug}' tamamlandı (part {meta.total_parts}/{meta.total_parts}).")
         return True
 
+    from series.bible import Bible, episode_dir
+    bible = Bible.load(slug)
+    new_state_machine = bool(bible and bible.state_machine_version >= 2)
+    if new_state_machine:
+        migrate_malformed_approval_holds(meta, bible)
+
     n = meta.next_part
     mode = meta.data.get("publish_mode", "auto")
 
     # A QC hold is stronger than publish mode: later cron runs neither regenerate
     # nor publish until a human changes the part state.
-    if meta.get_part(n).get("status") == "awaiting_approval":
+    if meta.get_part(n).get("status") in ("awaiting_approval", "needs_human"):
         logger.info(f"⏳ Part {n} zorunlu QC/onay bekliyor — üretim ve yayın atlandı.")
         return True
 
@@ -427,13 +562,20 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     # 'Bitmeyen yolculuk' ,  önceki bölümün son karesinden devam (parçalar arası zincir).
     # Bulutta her koşu temiz checkout olduğu için son kare URL'i git'li series.json'da tutulur.
     # chain_scope="episode" ise zincir yalnız bölüm içi → önceki bölümün karesi OKUNMAZ.
-    from series.bible import Bible, episode_dir
-    bible = Bible.load(slug)
     chain_start_url = _episode_chain_start(bible, meta)
     if chain_start_url:
         logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
 
     # 1) Üret (idempotent ,  yarım kalmışsa sadece eksik çekimi üretir)
+    if new_state_machine and not dry_run:
+        budget_result = _budget_failure(slug, n, bible, plan)
+        if budget_result is not None:
+            _record_recoverable_failure(meta, n, budget_result)
+            logger.error(f"💸 Part {n} budget_exhausted; ücretli çağrı başlatılmadı.")
+            return _continue_after_terminal(
+                meta, slug, dry_run=dry_run, publish=publish, force=force
+            )
+
     reserved = False
     cap_value = produce.episode_credit_cap(bible) if bible else credit_gate.episode_cap()
     series_monthly_limit = produce.series_monthly_credit_cap(bible) if bible else None
@@ -488,6 +630,15 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         result = produce.ProduceResult("ok", Path(produced))
     else:
         result = produce.ProduceResult("generation_fail")
+    if new_state_machine and result.status != "ok":
+        advanced = _record_recoverable_failure(meta, n, result)
+        if advanced:
+            # Terminal kayıt ile next_part aynı atomik yazımda tamamlandı. Yeni
+            # bölüm üretimi ancak bu noktadan sonra başlayabilir.
+            return _continue_after_terminal(
+                meta, slug, dry_run=dry_run, publish=publish, force=force
+            )
+        return False
     if result.status == "qc_hold":
         part = meta.get_part(n)
         part["status"] = "awaiting_approval"
@@ -524,9 +675,25 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         else:
             logger.warning("⚠️ Telegram kapalı (token/chat yok) ,  onay mesajı gönderilemedi.")
         part = meta.get_part(n)
-        part["status"] = "awaiting_approval"
         part["release_tag"] = tag
         part["approval_msg_id"] = msg_id
+        if new_state_machine and not _approval_artifacts_complete(part):
+            missing = [
+                key for key in ("video", "release_tag", "approval_msg_id")
+                if not part.get(key)
+            ]
+            artifact_result = produce.ProduceResult(
+                "generation_fail",
+                reason=f"onay artefaktları eksik: {', '.join(missing)}",
+                reason_code="UNKNOWN",
+            )
+            advanced = _record_recoverable_failure(meta, n, artifact_result)
+            if advanced:
+                return _continue_after_terminal(
+                    meta, slug, dry_run=dry_run, publish=publish, force=force
+                )
+            return False
+        part["status"] = "awaiting_approval"
         meta.save()
         logger.info(f"📨 Part {n} onaya gönderildi (Telegram). Yayın İhsan onayına bağlı.")
         return True
