@@ -51,5 +51,9 @@
   "family": "impossible-behaviour",
   "music": "Sparse percussive bed starting with a soft metallic click in the first second. A slow, steady pulse of low woody hits and quiet taps. One quiet sustained tone hums softly underneath, maintaining a dry, negative-space-heavy atmosphere to match the quiet, eerie movement of the metal.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/nqvdRLHT/ep26-metal-fork.png"
+  ],
+  "ref_prompt_sha256": "3621cc9789691b5f290ea0e35696a2f782e666c6fb11c99045950e6e03347cd3"
 }
