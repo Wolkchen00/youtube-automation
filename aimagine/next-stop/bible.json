@@ -25,6 +25,13 @@
   "narration": {},
   "music": false,
   "characters": [],
-  "environments": [],
+  "environments": [
+    {
+      "id": "carriage",
+      "name": "Glass observation carriage",
+      "desc": "The glass observation carriage interior: the left wall is one continuous pane curving up into a glass roof with thin dark ribs, repeating arched window frames receding down the car, ceiling strip lights, vertical floor-to-ceiling grab poles along the right edge, floor grating. This is the room and surface: keep the same carriage, the same surface and the same interior light in every shot.",
+      "ref_image_url": "https://i.ibb.co/m5gqcvXP/carriage-ref.jpg"
+    }
+  ],
   "props": []
 }

@@ -154,3 +154,13 @@ Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
   melt"), doğrulayici da tam onu yasakliyor. Onarim bunu tedavi ediyor ama
   ortadan kaldirmiyor; kalici cozum bu geriliminin prompt tarafinda
   cozulmesidir (golden testler once guncellenmeli).
+## I-9 (orta) , replenish `environment` alanini zorunlu dogrulamiyor
+
+`series/replenish.py:_validate_batch` (1163-1167) uretilen cekimde `environment`
+alanini VARSA korur, ZORUNLU KILMAZ. Alani tasimayan bir plan dogrulamadan gecip
+kuyruga girebilir; o cekim zincir yedeksiz kalir.
+
+Bu dongude ertelendi (Same Page Meeting tur 3, Nemotron bulgusu). Gerekce: en
+kotu ihtimalde bugunku davranisa donuluyor, regresyon degil; part05-09 elle
+yamalandi; muhafiz testi CI'da yakaliyor; kodla dayatmak `replenish.py` demek,
+o da dort kanalin ORTAK dosyasi. Kalici cozum icin motor dokunusu gerekiyor.
