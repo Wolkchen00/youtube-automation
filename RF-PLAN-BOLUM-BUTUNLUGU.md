@@ -62,8 +62,8 @@ Ogretici olan ikisi, preset olarak DEGIL gramer olarak:
 - **CLAY FIGURINE**: "eller seni hamur gibi sikar, HER GOCUK YERINDE KALIR."
   Kalici iz = bizim `state_carry` kuralimizin ta kendisi.
 
-Ikisi de serinin ZATEN uyguladigi grameri dogruluyor. Yeni kural gerekmiyor;
-ROCK 3 bunu senaryo denetimine olcut olarak yaziyor.
+Ikisi de serinin ZATEN uyguladigi grameri dogruluyor. Yeni kural gerekmiyor,
+ve dogrulama bunu tesyid etti: ROCK 3 bu yuzden KILL edildi (asagida).
 
 ## Non-goals
 
@@ -157,32 +157,31 @@ fikir yeniden onerilmesin.
 
 ---
 
-## ROCK 2 (yeni numara): Senaryo gercekciligi olcutu (ikmal denetimine ek)
+## ROCK 3: KILL , senaryo gercekciligi kurallari ZATEN zorunlu
 
-**Done looks like:** ikmalin urettigi plan, mevcut sert dogrulamaya EK OLARAK
-uc gercekcilik olcutunden gecer. Ucu de deterministik, LLM cagrisi yok:
+Bu rock, higgsfield gramerini (adlandirilmis tek donusum + neyin gercek kaldigi
++ kalici iz) senaryo olcutu olarak eklemeyi oneriyordu ve "yeni kural icat etme,
+once linterin neyi kapsadigini DOGRULA" diyordu. Dogrulama yapildi: ucu de
+zaten zorunlu.
 
-1. **Tek donusum yazili mi:** `object_card.anomaly_descriptor` var ve en az 10
-   kelime (bugunku kural) VE cekim promptlarinda birebir geciyor (bugunku
-   kural). Bu ICE STATUE grameridir: donusum ADLANDIRILMIS olmali.
-2. **Neyin gercek kaldigi yazili mi:** her cekim prompt'unda objenin kimligini
-   koruyan `descriptor` birebir geciyor (bugunku kural) VE ortam tarifi
-   degismiyor: dort cekimin `environment` degeri AYNI id.
-3. **Kalici iz zinciri:** cekim 1-3'te `state_carry` var ve bir sonraki cekimde
-   birebir geciyor (bugunku kural), son cekimde YOK (bugunku kural). Bu
-   CLAY FIGURINE grameridir: her gocuk yerinde kalir.
+| Higgsfield grameri | unnatural-lab'da nerede zorunlu |
+|---|---|
+| Adlandirilmis tek donusum (ICE STATUE) | `object_card.anomaly_descriptor` en az 10 kelime VE her cekim prompt'unda birebir gecmeli (`shots.py`) |
+| Neyin gercek kaldigi yazili | `descriptor` her cekimde birebir; ayrica `shots.py:182` dort cekimin de `environment` degerini `object_card.environment`'a esitler |
+| Kalici iz (CLAY FIGURINE) | `state_carry` cekim 1-3'te zorunlu, bir sonraki cekimin prompt'unda BIREBIR gecmeli, son cekimde YASAK |
 
-**Dikkat:** uc olcutun de buyuk kismi ZATEN `series/shots.py` icinde var. Bu
-rock yeni kural icat ETMEZ; eksik olan tek parcayi (dort cekimin ayni
-`environment` id'sini kullanmasi) ekler ve ucunu tek bir "gercekcilik" raporu
-altinda gorunur kilar. Yeni kural eklemeden once mevcut linterin neyi zaten
-kapsadigi dosyadan DOGRULANIR; tekrar eden kural yazilmaz.
+Eklenecek tek parca sandigim "dort cekim ayni ortami kullanmali" kurali
+`series/shots.py:182`'de zaten var:
 
-**Proof:** `python -m pytest tests/test_scenario_realism.py -q` (yeni). Vakalar:
-(a) dort cekim ayni ortam -> gecer; (b) cekim 3 baska ortam -> REDDEDILIR;
-(c) mevcut canli planlar (part 27, 28) bu olcutten TEMIZ gecer (regresyon).
+    if env_id and shot.get("environment") != env_id:
+        errors.append(f"cekim {number} environment tam {env_id!r} olmali")
 
----
+**Karar: KILL.** Senaryo gercekciliginin KURAL tarafi kapali. Gercek eksik
+kurallarda degil, modelin urettigi ICERIKTE: ikmal Gemini'si bu kurallari
+saglayan metin yazmakta zorlaniyor. O sorun ayri bir madde olarak
+`ISSUES.md`'de zaten kayitli (kismi kabul + alan onarimi ile hafifletildi, kok
+neden cekim 1'in "anomali zaten suruyor" kuralinin modeli olumsuz kurmaya
+itmesi). Ayni isi ikinci kez yazmak deger uretmez.
 
 ## Kabul kaniti (unit testler YETMEZ)
 
