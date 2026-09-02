@@ -319,9 +319,9 @@
     "26": {
       "status": "qc_retry",
       "first_held_at": "2026-09-02T03:42:00.292304+00:00",
-      "retry_count": 1,
-      "last_reason_code": "UNKNOWN",
-      "hold_reason": "server"
+      "retry_count": 2,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota"
     }
   }
 }
