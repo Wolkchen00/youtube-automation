@@ -409,6 +409,26 @@ class Bible:
         return bool(isinstance(value, dict) and value.get("require_all_shots"))
 
     @property
+    def duration_band(self) -> tuple[float, float] | None:
+        """Bolumun hedeflenen sure bandi (opt-in); yoksa None.
+
+        unnatural-lab icin [14, 41]: canli YouTube olcumu (bkz.
+        .github/workflows/unnatural-lab.yml basligi, n=148). Alan yoksa
+        bolum suresi RAPORLANIR ama bant disi sayilmaz, boylece diger uc
+        kanalin davranisi degismez.
+        """
+        value = self.data["series"].get("duration_band")
+        if not isinstance(value, (list, tuple)) or len(value) != 2:
+            return None
+        low, high = value
+        for item in (low, high):
+            if isinstance(item, bool) or not isinstance(item, (int, float)):
+                return None
+        if low > high:
+            return None
+        return (float(low), float(high))
+
+    @property
     def min_shots(self) -> int | None:
         """Kısmi yayın için gereken en az çekim sayısı; yoksa legacy kapı kullanılır."""
         value = self.data["series"].get("qc") or {}

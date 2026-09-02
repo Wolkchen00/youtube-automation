@@ -291,7 +291,8 @@ def test_every_runner_critical_callsite_uses_the_outbox_routing_helper():
     # QC hold, uretim hatasi ve tum-platform yayin hatasi. Yayin acil turu (ROCK 2)
     # ikisini ekledi: eksik cekimle yayin bildirimi ve zorunlu platform dogrulanamadi.
     # ROCK 3d ucuncusunu ekledi: altyapi butcesi dolunca needs_human bildirimi.
-    assert len(routed) == 12
+    # Bolum butunlugu denetimi dordunculeyi ekledi: yayinlandi ama kusurlu.
+    assert len(routed) == 13
     assert len(direct) == 2  # _series_alert delegasyonu + evsiz filo alarmi fallback'i
     source = inspect.getsource(series_runner)
     for fragment in (

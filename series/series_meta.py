@@ -145,7 +145,8 @@ class SeriesMeta:
 
     def mark_published(self, n: int, platforms_ok: list[str], *,
                        dropped_shots: list[int] | None = None,
-                       dropped_shot_roles: dict[str, str] | None = None):
+                       dropped_shot_roles: dict[str, str] | None = None,
+                       coherence: dict | None = None):
         p = self.get_part(n)
         p["status"] = "published"
         p["platforms_ok"] = platforms_ok
@@ -153,6 +154,8 @@ class SeriesMeta:
         if dropped_shots:
             p["dropped_shots"] = list(dropped_shots)
             p["dropped_shot_roles"] = dict(dropped_shot_roles or {})
+        if coherence:
+            p["coherence"] = dict(coherence)
 
     def advance(self):
         self.data["next_part"] = self.next_part + 1

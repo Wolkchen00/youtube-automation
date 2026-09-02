@@ -43,6 +43,7 @@ from .omni_api import (
     register_audio, register_character, generate_omni_shot, build_omni_payload,
     validate_ref_units,
 )
+from .episode_coherence import episode_coherence_report
 from .series_meta import SeriesMeta, part_plan_path
 from .shots import (
     TEK_OBJE_FORMAT,
@@ -89,6 +90,7 @@ class ProduceResult:
         "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
     ] = "UNKNOWN"
     dropped_shots: list[int] = field(default_factory=list)
+    coherence: dict | None = None
 
     def __post_init__(self):
         if self.status not in ("ok", "qc_hold", "generation_fail"):
@@ -544,7 +546,8 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                   music_reserved: bool = False, *,
                   output_area: str | Path | None = None,
                   isolated: bool = False,
-                  dropped_shots: list[int] | None = None) -> Path | None:
+                  dropped_shots: list[int] | None = None,
+                  status: dict | None = None) -> Path | None:
     """Final videoya anlatım (narration) + SÜREKLİ müzik ekle (best-effort).
 
     Ses tasarımı (kullanıcı geri bildirimi): her AI çekiminin kendi 'native' sesi
@@ -664,6 +667,14 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                     logger.info("🎵 Müzik eklendi" + ("" if narration_ok else " (tek/sürekli ses)"))
         except Exception as e:
             logger.warning(f"⚠️ Müzik atlandı: {e}")
+
+    # Bolum duzeyi denetim anlatimin GERCEKTEN cikip cikmadigini bilmek zorunda.
+    # Bu bilgi bugune kadar bu fonksiyonun icinde kalip kayboluyordu; part 27
+    # tam bu yuzden anlatimsiz yayinlandi ve part kaydinda izi kalmadi.
+    if status is not None:
+        status["narration_ok"] = bool(narration_ok)
+        status["narration_expected"] = bool(narr_cfg.get("channel") and original_narr_text)
+        status["music_ok"] = bool(music_ok)
 
     if required_music and not music_ok:
         logger.error("❌ Zorunlu teslimat katmanı üretilemedi: music")
@@ -2014,12 +2025,14 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     ffmpeg_tools.final_export(raw_ep, final_ep)
 
     # Anlatım (narration) + arka plan müziği (best-effort)
+    post_status: dict = {}
     final_ep = _post_process(
         bible, plan, final_ep, hard_cap=hard_cap,
         required_music="music" in required_layers,
         music_reserved=music_reservation is True,
         output_area=output_area, isolated=isolated,
         dropped_shots=dropped_shots,
+        status=post_status,
     )
     if final_ep is None:
         return None
@@ -2215,7 +2228,18 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     logger.info(f"🎉 Bölüm hazır: {final_ep}")
     logger.info(f"   📊 {summary['başarılı']}/{summary['çekim_sayısı']} çekim, "
                 f"{summary['toplam_kredi']} kredi (~${summary['toplam_dolar']})")
-    return ProduceResult("ok", Path(final_ep), dropped_shots=dropped_shots)
+    coherence = episode_coherence_report(
+        [int(shot.get("n") or 0) for shot in plan["shots"]],
+        dropped_shots,
+        narration_expected=bool(post_status.get("narration_expected")),
+        narration_ok=bool(post_status.get("narration_ok")),
+        duration_s=ffmpeg_tools.get_video_duration(final_ep),
+        duration_band=bible.duration_band,
+    )
+    if coherence["degraded"]:
+        logger.warning(f"⚠️ Bölüm bütünlüğü kusurlu: {coherence}")
+    return ProduceResult("ok", Path(final_ep), dropped_shots=dropped_shots,
+                         coherence=coherence)
 
 
 def produce_episode(slug: str, plan, dry_run: bool = False,

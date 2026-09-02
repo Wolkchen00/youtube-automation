@@ -836,6 +836,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
             n, ok,
             dropped_shots=result.dropped_shots or None,
             dropped_shot_roles=dropped_roles or None,
+            coherence=result.coherence or None,
         )
         meta.advance()
         meta.save()
@@ -849,6 +850,23 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
                 meta.slug,
                 f"⚠️ *{meta.base_title}* Part {n} eksik çekimle yayınlandı. "
                 f"Düşen roller: {role_text}.",
+            )
+        coherence = result.coherence or {}
+        if coherence.get("degraded"):
+            eksikler = []
+            if coherence.get("loop_closed") is False:
+                eksikler.append("loop kapanmadi")
+            if coherence.get("narration_delivered") is False:
+                eksikler.append("anlatim cikmadi")
+            if coherence.get("duration_in_band") is False:
+                eksikler.append(f"sure bant disi ({coherence.get('duration_s')} sn)")
+            roller = coherence.get("arc_roles_missing") or []
+            if roller:
+                eksikler.append("dusen roller: " + ", ".join(roller))
+            _series_alert(
+                meta.slug,
+                f"⚠️ *{meta.base_title}* Part {n} YAYINLANDI ama bölüm bütünlüğü "
+                f"kusurlu: {'; '.join(eksikler)}. Kayıt part'ta 'coherence' altında.",
             )
         return True
     if ok and required_platforms:

@@ -120,8 +120,9 @@ def test_only_explicit_presentation_sites_may_call_markdown_send_message():
         "replenish.py": 1,
         # Yayin acil turu (ROCK 2) iki yeni routed alarm ekledi: eksik cekimle
         # yayin bildirimi ve zorunlu platform dogrulanamadi bildirimi. ROCK 3d
-        # ucuncusunu ekledi: altyapi butcesi dolunca needs_human bildirimi.
-        "series_runner.py": 12,
+        # ucuncusunu ekledi: altyapi butcesi dolunca needs_human bildirimi. Bolum
+        # butunlugu denetimi dordunculeyi ekledi: yayinlandi ama kusurlu.
+        "series_runner.py": 13,
     }
     for filename, expected_count in expected_plain_routes.items():
         tree = ast.parse((ROOT / "series" / filename).read_text(encoding="utf-8"))
