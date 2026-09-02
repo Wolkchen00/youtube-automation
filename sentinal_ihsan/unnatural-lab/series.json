@@ -10,7 +10,7 @@
     "tiktok"
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
-  "total_parts": 26,
+  "total_parts": 30,
   "next_part": 26,
   "status": "active",
   "priority": 999,
@@ -319,9 +319,10 @@
     "26": {
       "status": "qc_retry",
       "first_held_at": "2026-09-02T03:42:00.292304+00:00",
-      "retry_count": 2,
+      "retry_count": 0,
       "last_reason_code": "QUOTA",
-      "hold_reason": "quota"
+      "hold_reason": "quota",
+      "retry_reset_note": "2026-09-02 Ihsan karari: sayac sifirlandi. Basarisizliklarin ikisi de QUOTA idi (ucretsiz katman gunde 20 istek, bir bolum 43 istiyor) , bolumun icerigiyle ilgisi yok. Kota kesintisi 3-vurus kuralini tuketip bolumu oldurmemeli."
     }
   }
 }
