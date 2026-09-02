@@ -1,0 +1,58 @@
+{
+  "episode": {
+    "number": 27,
+    "title": "Something Is WRONG With This ICE CUBE"
+  },
+  "synopsis": "A man takes one ice cube out for his coffee and the cube holds its sharp square edges while frost blooms outward across the warm kitchen counter.",
+  "narration": "Grabbed ice for my coffee and the whole counter went white around it. Landlord thinks I left the freezer open. Should I call someone?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A single clear ice cube with sharp square edges and a faintly frosted surface. frost spreading outward from the ice in fine white feathers across the warm stone. The frame remains completely locked from a tight low angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt rest on the counter beside the ice, the cube filling the centre of the frame. The ice holds its sharp square edges while a widening ring of white frost around the sharp cube creeps further over the dry warm stone, bright and even under the morning daylight.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the ice holds its sharp square edges while frost widens across the warm stone",
+      "state_carry": "a widening ring of white frost around the sharp cube"
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A single clear ice cube with sharp square edges and a faintly frosted surface. frost spreading outward from the ice in fine white feathers across the warm stone. The frame remains completely locked from a tight low angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt press a warm metal teaspoon down against the ice, a widening ring of white frost around the sharp cube reaching further over the stone as the metal touches it, with frost climbing the warm spoon in fine white feathers and the cube edges staying crisp and square.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "frost climbs onto the warm spoon where the metal touches the ice",
+      "state_carry": "frost climbing the warm spoon in fine white feathers"
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A single clear ice cube with sharp square edges and a faintly frosted surface. frost spreading outward from the ice in fine white feathers across the warm stone. The frame remains completely locked from a tight low angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lift the teaspoon slowly away, frost climbing the warm spoon in fine white feathers while the white bloom spreading wide across the counter reaches the tiled backsplash, the cube holding its bright square shape at the centre.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the frost bloom spreads wider and reaches the tiled backsplash",
+      "state_carry": "the white bloom spreading wide across the counter"
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A single clear ice cube with sharp square edges and a faintly frosted surface. frost spreading outward from the ice in fine white feathers across the warm stone. The frame remains completely locked from a tight low angle across the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt settle back onto the counter beside the ice exactly as at the opening, the white bloom spreading wide across the counter around the cube, the ice holding its sharp square edges as the frost feathers reach further over the stone under even morning daylight.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the frost feathers reach further as the cube holds its square edges"
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Ice cube",
+    "descriptor": "A single clear ice cube with sharp square edges and a faintly frosted surface",
+    "environment": "kitchen_counter",
+    "framing": "The frame remains completely locked from a tight low angle across the kitchen counter.",
+    "anomaly_descriptor": "frost spreading outward from the ice in fine white feathers across the warm stone"
+  },
+  "face_visible": false,
+  "family": "impossible-state-change",
+  "music": "Sparse percussive bed opening with one soft icy tick in the very first second. A slow, steady pulse of low woody hits and quiet dry taps carries underneath, spaced far apart with plenty of silence between them. One quiet sustained tone hums softly below the surface, keeping a dry, negative-space-heavy atmosphere that matches the slow creeping spread of frost across warm stone.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}
