@@ -1,0 +1,57 @@
+{
+  "episode": {
+    "number": 32,
+    "title": "This NAPKIN Never ENDS!"
+  },
+  "synopsis": "A man tries to unfold a simple cloth napkin, only to discover it contains an impossible, endless supply of fabric within its small, unchanging form.",
+  "narration": "This napkin is doing a crazy thing. I keep pulling, and it just never seems to end! I've already got a huge pile here, but the original still...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A neatly folded square white cloth napkin, soft linen with a subtle weave, appearing impossibly thick and dense, its visible edges hinting at an internal, endless fabric mass. The napkin contains an infinitely unfolding internal space, allowing endless amounts of fabric to be pulled from its center while its external dimensions remain unchanged. The composition is a fixed, eye-level view of hands interacting with the napkin on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A pair of hands wearing a plain black crew-neck t-shirt already pulls a long, flowing length of crisp white linen fabric from the center of a neatly folded square napkin, which remains fully visible on the dark wood surface.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "A continuous length of fabric visibly emerges from the center of the folded napkin, which remains unchanged in size."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A neatly folded square white cloth napkin, soft linen with a subtle weave, appearing impossibly thick and dense, its visible edges hinting at an internal, endless fabric mass. The napkin contains an infinitely unfolding internal space, allowing endless amounts of fabric to be pulled from its center while its external dimensions remain unchanged. The composition is a fixed, eye-level view of hands interacting with the napkin on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A pair of hands wearing a plain black crew-neck t-shirt continues to pull a continuous stream of white linen fabric from the center of the folded napkin, the fabric flowing endlessly onto the dark wood table.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The hands pull a visibly long, continuous stream of fabric from the napkin, the napkin's size remaining constant.",
+      "state_carry": "A large pile of white linen fabric accumulates on the dark wood table next to the napkin."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A neatly folded square white cloth napkin, soft linen with a subtle weave, appearing impossibly thick and dense, its visible edges hinting at an internal, endless fabric mass. The napkin contains an infinitely unfolding internal space, allowing endless amounts of fabric to be pulled from its center while its external dimensions remain unchanged. The composition is a fixed, eye-level view of hands interacting with the napkin on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A large pile of white linen fabric accumulates on the dark wood table next to the napkin. A pair of hands wearing a plain black crew-neck t-shirt continues to pull fabric from the folded napkin, creating a large, soft pile of white linen on the dark wood surface, while the napkin's original size remains constant.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The pile of fabric grows significantly larger, yet the folded napkin from which it emerges retains its original size.",
+      "state_carry": "A massive pile of white linen fabric is gathered on the dark wood table."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A neatly folded square white cloth napkin, soft linen with a subtle weave, appearing impossibly thick and dense, its visible edges hinting at an internal, endless fabric mass. The napkin contains an infinitely unfolding internal space, allowing endless amounts of fabric to be pulled from its center while its external dimensions remain unchanged. The composition is a fixed, eye-level view of hands interacting with the napkin on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A massive pile of white linen fabric is gathered on the dark wood table. A pair of hands wearing a plain black crew-neck t-shirt gathers the massive pile of white linen fabric, and it actively retracts and disappears back into the small, neatly folded napkin on the dark wood table.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The extensive pile of fabric visibly shrinks and disappears into the napkin, and the napkin's external dimensions remain constant."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "folded white cloth napkin",
+    "descriptor": "A neatly folded square white cloth napkin, soft linen with a subtle weave, appearing impossibly thick and dense, its visible edges hinting at an internal, endless fabric mass.",
+    "environment": "living_room_table",
+    "framing": "The composition is a fixed, eye-level view of hands interacting with the napkin on the dark wood living room table.",
+    "anomaly_descriptor": "The napkin contains an infinitely unfolding internal space, allowing endless amounts of fabric to be pulled from its center while its external dimensions remain unchanged."
+  },
+  "face_visible": false,
+  "family": "impossible-continuity",
+  "music": "A minimal, dry percussive track built with soft, brushing textures and gentle, hollow thuds on wood, creating a quiet, looping rhythm. It features no melodic elements or swells, focusing on negative space, starting immediately with a soft brush sound.",
+  "hook_shot": 2,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}

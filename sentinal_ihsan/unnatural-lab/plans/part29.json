@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 29,
+    "title": "Something Is WRONG With This SOAP"
+  },
+  "synopsis": "A man attempts to use a bar of soap that behaves like a dense, unyielding piece of metal, resisting all attempts to lather or cut it.",
+  "narration": "Okay, so I swear this bar of soap isn't right. It feels incredibly dense, like a solid ingot, and makes a strange metallic sound. I've tried using it for days, but it's just...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A solid, rectangular bar of soap, a deep metallic silver with polished, mirror-like facets along its edges, and a smooth, cool-to-the-touch surface that gleams under the light. The soap's surface exhibits a hard, reflective, metallic sheen and density, remaining completely rigid and unyielding to pressure, with sharp, unblemished edges. The composition is a fixed, eye-level view of hands interacting with the bar of soap on the dark, speckled stone-look bathroom counter. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. A pair of hands wearing a plain black crew-neck t-shirt tries to press a thumb firmly into the center of the deep metallic silver bar of soap, which rests on the bathroom sink, but its surface remains perfectly rigid and unyielding.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "The bar of soap maintains its solid, rigid form under significant thumb pressure."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A solid, rectangular bar of soap, a deep metallic silver with polished, mirror-like facets along its edges, and a smooth, cool-to-the-touch surface that gleams under the light. The soap's surface exhibits a hard, reflective, metallic sheen and density, remaining completely rigid and unyielding to pressure, with sharp, unblemished edges. The composition is a fixed, eye-level view of hands interacting with the bar of soap on the dark, speckled stone-look bathroom counter. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. A pair of hands wearing a plain black crew-neck t-shirt attempts to slice into the metallic bar of soap with a sharp kitchen knife. The blade scrapes across its unyielding, polished surface, and the surface maintains its original, unblemished state.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "The sharp knife blade scrapes against the soap's surface, creating metallic sparks but failing to penetrate or cut the material."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A solid, rectangular bar of soap, a deep metallic silver with polished, mirror-like facets along its edges, and a smooth, cool-to-the-touch surface that gleams under the light. The soap's surface exhibits a hard, reflective, metallic sheen and density, remaining completely rigid and unyielding to pressure, with sharp, unblemished edges. The composition is a fixed, eye-level view of hands interacting with the bar of soap on the dark, speckled stone-look bathroom counter. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. A pair of hands wearing a plain black crew-neck t-shirt holds the metallic bar of soap above the bathroom sink and drops it; it lands with a distinct, resonant metallic clang against the hard counter surface.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "The bar of soap produces a clear, loud metallic clang when dropped onto the counter, consistent with a heavy metal object."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A solid, rectangular bar of soap, a deep metallic silver with polished, mirror-like facets along its edges, and a smooth, cool-to-the-touch surface that gleams under the light. The soap's surface exhibits a hard, reflective, metallic sheen and density, remaining completely rigid and unyielding to pressure, with sharp, unblemished edges. The composition is a fixed, eye-level view of hands interacting with the bar of soap on the dark, speckled stone-look bathroom counter. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. A pair of hands wearing a plain black crew-neck t-shirt holds the metallic bar of soap under a stream of running water, rubbing it vigorously between the palms as if to wash. The hands and soap surfaces remain smooth and unfoamed.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "The bar of soap is vigorously scrubbed under running water; the water remains clear."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "bar of soap",
+    "descriptor": "A solid, rectangular bar of soap, a deep metallic silver with polished, mirror-like facets along its edges, and a smooth, cool-to-the-touch surface that gleams under the light.",
+    "environment": "bathroom_sink",
+    "framing": "The composition is a fixed, eye-level view of hands interacting with the bar of soap on the dark, speckled stone-look bathroom counter.",
+    "anomaly_descriptor": "The soap's surface exhibits a hard, reflective, metallic sheen and density, remaining completely rigid and unyielding to pressure, with sharp, unblemished edges."
+  },
+  "face_visible": false,
+  "family": "impossible-material",
+  "music": "A sparse, dry percussion bed with soft, woody taps and low, resonant thuds, maintaining a slow, steady pulse. No melodic lines or ethereal pads, just deep, clear percussive hits, opening with a distinct low thud in the first second.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}

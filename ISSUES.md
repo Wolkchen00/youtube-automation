@@ -117,7 +117,7 @@ Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
   teaser uretilemez. Canli `hook_teaser.enabled=false` oldugu icin bugun zararsiz;
   teaser acilirsa once bu yedek yazilmali.
 
-- **[YUKSEK, KANALI YINE KARARTIR] Oto-ikmal Gemini'si sert dogrulamadan gecemiyor.**
+- **[COZULDU 2026-09-02, izlenmeye devam] Oto-ikmal Gemini'si sert dogrulamadan gecemiyor.**
   Kuyruk sayimi 2026-09-02'de duzeldi ve ikmal artik Gemini'yi CAGIRIYOR, ama
   uretilen planlar ALTI denemenin altisinda da reddediliyor. Iki ayri canli
   kosuda (33658009710 ve elle calistirma) ayni tablo:
@@ -138,3 +138,19 @@ Kaynak: `RF-PLAN-SENTINAL-DIRILIS.md` bolum 6. Bu cevrimde bilerek yapilmadi.
   bitti ve part 27 yayinlandi; `credit_cap_note` 800'e donusu sart kosuyor.
   test_gercekcilik_rock3 artik 1000'e izin veriyor ama SADECE note geri donus
   kosulunu yaziyorsa. Deney degerlendirilip 800'e donulmeli.
+
+  **COZUM (2026-09-02):** iki katman eklendi. (1) Parti artik HEP-YA-HIC degil:
+  dogrulamayi tek basina gecen en uzun BAS PARCA kabul ediliyor (bosluk
+  acilmiyor, cunku uretim sirayla isler). (2) Mekanik ihlaller (olumsuz dil,
+  zaman-otesi violation_observation, anlatim kelime butcesi) alan alan yeniden
+  yazdirilip onariliyor; tespit dogrulayicinin KENDI regexleriyle yapiliyor ve
+  her onarim kabul edilmeden once ayni regexten geciyor, yani onarim durumu
+  kotulestiremiyor. Onarim butcesi calistirma basina 20 cagri ile sinirli.
+  Paylasilan planner prompt'una DOKUNULMADI, golden testler bozulmadi.
+  Canli sonuc: onceden 0 bolum + sert hata; simdi part 29-32 (4/5) yazildi,
+  besi de plan_lint TEMIZ.
+  **Kalan:** kok neden hala uretim tarafinda. Ozellikle cekim 1'in "anomali
+  zaten suruyor" kurali modeli olumsuz kurmaya itiyor ("the ice does not
+  melt"), doğrulayici da tam onu yasakliyor. Onarim bunu tedavi ediyor ama
+  ortadan kaldirmiyor; kalici cozum bu geriliminin prompt tarafinda
+  cozulmesidir (golden testler once guncellenmeli).

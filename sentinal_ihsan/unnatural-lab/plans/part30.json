@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 30,
+    "title": "This BANANA Pushes Objects AWAY!"
+  },
+  "synopsis": "A man encounters a banana that inexplicably repels nearby objects and resists being peeled, as if possessing an invisible force field.",
+  "narration": "This banana is just weird. It keeps pushing things away on the counter, like it has its own little force field. Even peeling it, the skin just won't stay put...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "The composition is a fixed, eye-level view of hands interacting with the banana on the dark speckled stone-look kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A ripe yellow banana, gently curved, with small brown speckles across its smooth peel, feeling unnaturally light yet impossibly dense, suggesting an internal repulsion field. The banana exerts a constant, gentle outward force, causing nearby light objects to subtly drift away and making it difficult to keep still on a flat surface. An eye-level view shows a lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt is visible, positioned near the banana on the dark speckled stone-look kitchen counter. A simple metal pen rests near the ripe yellow banana. The pen slowly and visibly slides away from the banana, propelled by the banana's outward force.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The metal pen slides away from the banana across the counter, propelled by an unseen force."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A ripe yellow banana, gently curved, with small brown speckles across its smooth peel, feeling unnaturally light yet impossibly dense, suggesting an internal repulsion field. The banana exerts a constant, gentle outward force, causing nearby light objects to subtly drift away and making it difficult to keep still on a flat surface. The composition is a fixed, eye-level view of hands interacting with the banana on the dark speckled stone-look kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt attempts to hold the ripe yellow banana steady on the dark speckled stone-look kitchen counter, but the banana subtly vibrates and resists, causing the hands to visibly slide against its peel.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The banana subtly vibrates and pushes against the hands, making it difficult to hold steady on the counter."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A ripe yellow banana, gently curved, with small brown speckles across its smooth peel, feeling unnaturally light yet impossibly dense, suggesting an internal repulsion field. The banana exerts a constant, gentle outward force, causing nearby light objects to subtly drift away and making it difficult to keep still on a flat surface. The composition is a fixed, eye-level view of hands interacting with the banana on the dark speckled stone-look kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt brings a second, identical ripe yellow banana close to the first one on the dark speckled stone-look kitchen counter; as they approach, an invisible force visibly pushes the second banana away.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The second banana is visibly pushed away from the first banana by an unseen force as they get close."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A ripe yellow banana, gently curved, with small brown speckles across its smooth peel, feeling unnaturally light yet impossibly dense, suggesting an internal repulsion field. The banana exerts a constant, gentle outward force, causing nearby light objects to subtly drift away and making it difficult to keep still on a flat surface. The composition is a fixed, eye-level view of hands interacting with the banana on the dark speckled stone-look kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt attempts to peel the ripe yellow banana, but the peel actively pushes away from the fruit in visible ripples, resisting separation.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The banana peel physically separates and pushes away from the inner fruit, creating a visible gap through natural separation."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "yellow banana",
+    "descriptor": "A ripe yellow banana, gently curved, with small brown speckles across its smooth peel, feeling unnaturally light yet impossibly dense, suggesting an internal repulsion field.",
+    "environment": "kitchen_counter",
+    "framing": "The composition is a fixed, eye-level view of hands interacting with the banana on the dark speckled stone-look kitchen counter.",
+    "anomaly_descriptor": "The banana exerts a constant, gentle outward force, causing nearby light objects to subtly drift away and making it difficult to keep still on a flat surface."
+  },
+  "face_visible": false,
+  "family": "impossible-behaviour",
+  "music": "A dry, percussive bed featuring soft, rhythmic clicks and gentle, echoing woodblock strikes, complemented by a low, humming drone that enters briefly. The tempo is deliberate and steady, with plenty of negative space, opening with a distinct click.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}

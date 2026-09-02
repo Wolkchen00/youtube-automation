@@ -69,7 +69,14 @@ from series.bible import (
     doctrine_sha256,
 )
 from series.series_meta import SeriesMeta, part_plan_path, plans_dir
-from series.shots import OBJECT_CARD_FIELDS, TEK_OBJE_FORMAT, validate_plan
+from series.shots import (
+    NEGATIVE_VIDEO_LANGUAGE,
+    OBJECT_CARD_FIELDS,
+    SHOT1_ONSET_LANGUAGE,
+    TEK_OBJE_FORMAT,
+    TEMPORAL_OVERREACH,
+    validate_plan,
+)
 
 REPLENISH_MODEL = "gemini-2.5-flash"
 REPLENISH_MODEL_FALLBACK = "gemini-flash-latest"
@@ -1322,14 +1329,222 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     return errors
 
 
+# Bir ikmal calistirmasinin harcayabilecegi TOPLAM alan onarimi cagrisi.
+# 2026-09-02 canli olcumu: bir onarim cagrisi ~10 sn; part 29-32'yi kurtarmak
+# icin ~15 cagri gerekti. 20 hem yeterli hem sinirli (~3,5 dk), boylece kotu
+# bir tur 120 dakikalik workflow'u yemez.
+REPAIR_BUDGET = 20
+
+_REPAIR_SYSTEM = (
+    "You repair ONE field of a video shot plan so it passes a strict automated "
+    "linter. Keep the meaning, the scene and the style identical; change only what "
+    "the rules force you to change. Return ONLY JSON of the shape "
+    '{"text": "<the rewritten field>"}.'
+)
+
+
+def _repair_text(text: str, rules: str, must_keep: list[str]) -> str | None:
+    """Tek bir alani kurallara uyacak sekilde yeniden yazdir (kucuk, ucuz cagri)."""
+    keep_block = ""
+    if must_keep:
+        keep_block = (
+            "\n\nThese exact phrases MUST appear in your answer, character for "
+            "character, unchanged:\n"
+            + "\n".join(f"- {phrase}" for phrase in must_keep)
+        )
+    contents = (
+        f"RULES THE TEXT MUST OBEY:\n{rules}{keep_block}\n\nTEXT TO REPAIR:\n{text}"
+    )
+    try:
+        data = _gen_json(contents, _REPAIR_SYSTEM, temperature=0.2, max_tries=2)
+    except Exception as error:
+        logger.warning(f"⚠️ Alan onarımı çağrısı başarısız: {str(error)[:120]}")
+        return None
+    out = str((data or {}).get("text") or "").strip()
+    return out or None
+
+
+_POSITIVE_RULE = (
+    "Describe only what IS visible and happening, in positive terms. These words are "
+    "forbidden: no, not, never, nothing, neither, nor, without, cannot, can't, don't, "
+    "doesn't, isn't, aren't, won't, absent, lacks, lacking, avoid. The construction "
+    '"instead of" is forbidden too. Write "the shell stays whole" rather than '
+    '"the shell does not crack".'
+)
+_OBSERVATION_RULE = (
+    _POSITIVE_RULE
+    + " It must also avoid time claims a single six-second shot cannot show: never, "
+    "always, forever, eventually. Use at least four words."
+)
+
+
+def _repair_episode_fields(plan: dict, wmin: int, wmax: int, budget: list[int]) -> int:
+    """Mekanik ihlalleri alan alan onar; onarilan alan sayisini dondur.
+
+    Tespit, dogrulayicinin KENDI regexleriyle yapilir (hata metni ayristirilmaz).
+    Her onarim, kabul edilmeden once ayni regexten gecirilir; gecemezse orijinal
+    metin korunur. Boylece onarim durumu asla kotulestiremez.
+    """
+    if not isinstance(plan, dict):
+        return 0
+    fixed = 0
+    card = plan.get("object_card") or {}
+    anchors = [str(card.get(key) or "").strip()
+               for key in ("descriptor", "anomaly_descriptor")]
+    anchors = [a for a in anchors if a]
+    shots = plan.get("shots") or []
+
+    for index, shot in enumerate(shots):
+        if budget[0] <= 0:
+            break
+        if not isinstance(shot, dict):
+            continue
+        prompt = str(shot.get("prompt") or "")
+        if prompt and NEGATIVE_VIDEO_LANGUAGE.search(prompt):
+            keep = list(anchors)
+            previous = shots[index - 1] if index else None
+            if isinstance(previous, dict):
+                carry = str(previous.get("state_carry") or "").strip()
+                if carry:
+                    keep.append(carry)
+            rules = _POSITIVE_RULE
+            if index == 0:
+                rules += (
+                    " This is the opening shot: the impossible property is ALREADY "
+                    'running in the first frame, so avoid onset phrasing such as '
+                    '"begins to" or "starts to"; describe an ongoing STATE.'
+                )
+            budget[0] -= 1
+            candidate = _repair_text(prompt, rules, keep)
+            if (candidate
+                    and not NEGATIVE_VIDEO_LANGUAGE.search(candidate)
+                    and all(phrase in candidate for phrase in keep)
+                    and not (index == 0 and SHOT1_ONSET_LANGUAGE.search(candidate))):
+                shot["prompt"] = candidate
+                fixed += 1
+
+        observation = str(shot.get("violation_observation") or "")
+        if observation and (NEGATIVE_VIDEO_LANGUAGE.search(observation)
+                            or TEMPORAL_OVERREACH.search(observation)):
+            if budget[0] <= 0:
+                break
+            budget[0] -= 1
+            candidate = _repair_text(observation, _OBSERVATION_RULE, [])
+            if (candidate
+                    and not NEGATIVE_VIDEO_LANGUAGE.search(candidate)
+                    and not TEMPORAL_OVERREACH.search(candidate)
+                    and len(candidate.split()) >= 4):
+                shot["violation_observation"] = candidate
+                fixed += 1
+
+    narration = str(plan.get("narration") or "").strip()
+    if narration and budget[0] > 0:
+        count = len(narration.split())
+        lo = max(1, int(wmin * 0.85))
+        hi = int(wmax * 1.15 + 0.999)
+        if not (lo <= count <= hi):
+            budget[0] -= 1
+            target = (wmin + wmax) // 2
+            rules = (
+                f"Rewrite this first-person casual voice-over so it is between {wmin} "
+                f"and {wmax} words; aim for {target}. Keep every sentence complete, "
+                "keep the casual spoken tone, and keep the closing question if there "
+                "is one. Count the words before answering."
+            )
+            candidate = _repair_text(narration, rules, [])
+            if candidate and lo <= len(candidate.split()) <= hi:
+                plan["narration"] = candidate
+                fixed += 1
+    return fixed
+
+
+def _repaired_prefix(episodes, bible: Bible, start: int,
+                     existing_titles: set[str], cfg: dict,
+                     history: list[dict],
+                     calibration: Mapping | None,
+                     budget: list[int] | None = None) -> list[dict]:
+    """Bas parcayi, gereken en az sayida alan onarimiyla uzatmaya calis.
+
+    Bolumler bastan ele alinir ve ilk onarilamayan bolumde durulur; kuyruk icin
+    gereken sey zaten bir kac TEMIZ bolumdur, tam parti degil. Onarim butcesi
+    sinirlidir, boylece kotu bir tur sonsuz Gemini cagrisina donusmez.
+    """
+    if not isinstance(episodes, list):
+        return []
+    narr_cfg = cfg.get("narration")
+    if narr_cfg is True:
+        narr_cfg = {}
+    wmin = int((narr_cfg or {}).get("min_words", 95))
+    wmax = int((narr_cfg or {}).get("max_words", 125))
+    # Butce TUM ikmal calistirmasi icin tektir. Deneme basina sifirlansaydi alti
+    # deneme x 12 onarim = 72 Gemini cagrisi ederdi ve workflow suresini yerdi.
+    if budget is None:
+        budget = [REPAIR_BUDGET]
+    accepted: list[dict] = []
+    for plan in episodes:
+        candidate = accepted + [json.loads(json.dumps(plan, ensure_ascii=False))]
+        if not _validate_batch(candidate, bible, start, len(candidate),
+                               existing_titles, cfg, history, calibration):
+            accepted = candidate
+            continue
+        if budget[0] <= 0:
+            break
+        attempt = accepted + [json.loads(json.dumps(plan, ensure_ascii=False))]
+        if not _repair_episode_fields(attempt[-1], wmin, wmax, budget):
+            break
+        if not _validate_batch(attempt, bible, start, len(attempt),
+                               existing_titles, cfg, history, calibration):
+            logger.info(f"🩹 Part {start + len(attempt) - 1} alan onarımıyla kurtarıldı.")
+            accepted = attempt
+            continue
+        break
+    return accepted
+
+
+def _longest_valid_prefix(episodes, bible: Bible, start: int,
+                          existing_titles: set[str], cfg: dict,
+                          history: list[dict],
+                          calibration: Mapping | None) -> list[dict]:
+    """Partinin, TEK BASINA sert dogrulamayi gecen en uzun bas parcasini dondur.
+
+    Neden bas parcasi: uretim bolumleri SIRAYLA isler ve `part_plan_path`
+    bosluk kaldirmaz; 28 ile 30'u yazip 29'u atlamak isaretciyi kilitler.
+
+    Neden mesaj ayristirmak yerine yeniden dogrulama: hata metinlerinden
+    "part N" ayiklamak kirilgan olurdu ve partiler-arasi kurallari (baslik
+    tekrari, ardisik family, kart cesitliligi) yakalayamazdi. Adayi GERCEK
+    dogrulayicidan gecirmek tek yetkili cevaptir; API cagrisi yoktur, sadece
+    CPU. Normalizasyonun idempotent oldugu olculdu, bu yuzden zaten
+    normalize edilmis bolumleri yeniden dogrulamak guvenlidir.
+    """
+    if not isinstance(episodes, list):
+        return []
+    for size in range(len(episodes) - 1, 0, -1):
+        candidate = json.loads(json.dumps(episodes[:size], ensure_ascii=False))
+        if not _validate_batch(candidate, bible, start, size, existing_titles,
+                               cfg, history, calibration):
+            return candidate
+    return []
+
+
 def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
                    start: int, batch: int,
                    calibration: Mapping | None = None) -> list[dict]:
-    """TEK Gemini çağrısıyla batch adet bölüm planı üret. 3 semantik deneme:
-    her başarısız denemenin hataları sonraki prompt'a geri beslenir."""
+    """TEK Gemini çağrısıyla batch adet bölüm planı üret. 6 semantik deneme:
+    her başarısız denemenin hataları sonraki prompt'a geri beslenir.
+
+    Parti HEP-YA-HIC degildir. 2026-09-02'de kanal tam bu yuzden karardi:
+    alti denemenin hepsinde GECERLI bolumler uretildi, ama partide tek bir
+    kotu kelime kalinca besinin besi de cope gitti (2. denemede part 28 ve 29
+    temizdi; min_queue yalnizca 2). Tam parti hala hedeftir; tutmazsa en uzun
+    gecerli bas parca kabul edilir, cunku iki temiz bolum sifir bolumden
+    kiyaslanamayacak kadar iyidir.
+    """
     history = _episode_history(meta.slug)
     existing = {_norm_title(h["title"]) for h in history if h.get("title")}
     errors: list[str] | None = None
+    best_partial: list[dict] = []
+    repair_budget = [REPAIR_BUDGET]
     for attempt in (1, 2, 3, 4, 5, 6):
         contents, sysins = _build_prompt(meta, bible, cfg, start, batch, history,
                                          fix_errors=errors, calibration=calibration)
@@ -1341,6 +1556,29 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
         if not errors:
             return episodes
         logger.warning(f"⚠️ İkmal doğrulaması geçmedi ({attempt}. deneme): {errors[:4]}")
+        partial = _repaired_prefix(
+            episodes, bible, start, existing, cfg, history, calibration,
+            budget=repair_budget,
+        )
+        if len(partial) < len(episodes or []):
+            plain = _longest_valid_prefix(
+                episodes, bible, start, existing, cfg, history, calibration
+            )
+            if len(plain) > len(partial):
+                partial = plain
+        if len(partial) > len(best_partial):
+            best_partial = partial
+    if best_partial:
+        last = start + len(best_partial) - 1
+        logger.warning(
+            f"⚠️ Tam parti {batch} bölüm doğrulanamadı; KISMİ kabul: "
+            f"part {start}-{last} ({len(best_partial)}/{batch}). "
+            f"Kuyruk boş kalmıyor, kalan bölümler sonraki koşuda yeniden denenecek."
+        )
+        _alert(meta.slug, f"⚠️ *{meta.base_title}* oto-ikmal KISMİ: {len(best_partial)}/{batch} "
+                          f"bölüm doğrulamayı geçti (part {start}-{last}). "
+                          f"Kuyruk sürüyor ama üretim kalitesi düşük ,  ISSUES'a bak.")
+        return best_partial
     forbidden_family = _previous_family(history) if cfg.get("families") else ""
     forbidden_note = (
         f"; ilk bölüm {start} için yasak family: {forbidden_family!r}"
@@ -1424,6 +1662,12 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
     logger.info(f"🔁 {slug}: kuyruk {pending} < {min_q} → Gemini part {start}-{end} yazıyor…")
     try:
         episodes = generate_plans(meta, bible, cfg, start, batch, calibration)
+        # Kismi kabul devrede: gelen bolum sayisi `batch`ten AZ olabilir. `end`
+        # istenen partiden degil GERCEKTEN yazilacak bolumlerden turetilir,
+        # yoksa total_parts yazilmamis planlarin onune gecer ve isaretci
+        # bos bir numarada kilitlenir (2026-09-02'de yasanan tuzak).
+        written = len(episodes)
+        end = start + written - 1
 
         # 1) Önce plan dosyaları (çökme güvenliği: sayaç sonra; öksüzler sonraki koşuda sahiplenilir)
         for i, plan in enumerate(episodes):
@@ -1447,7 +1691,7 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
 
         titles = ", ".join(p["episode"]["title"] for p in episodes)
         logger.info(f"🔁 {slug}: part {start}-{end} planlandı → {titles}")
-        _alert(slug, f"🔁 *{meta.base_title}*: {batch} yeni bölüm planlandı (Part {start}-{end}: "
+        _alert(slug, f"🔁 *{meta.base_title}*: {written} yeni bölüm planlandı (Part {start}-{end}: "
                      f"{titles}) ,  kanal kesintisiz devam ediyor.")
         return True
     except Exception as e:

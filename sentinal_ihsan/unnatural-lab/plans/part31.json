@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 31,
+    "title": "This PLASTIC Bottle Turns To STONE!"
+  },
+  "synopsis": "A man discovers a plastic water bottle that instantly transforms into a rigid, stone-like material when touched, then reverts to flexible plastic when released.",
+  "narration": "This water bottle has been doing this weird thing all morning. When I touch it, it just turns hard, like stone, then softens right back. It's truly baffling...",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A translucent blue plastic water bottle, standard commercial size, with a perfectly smooth, unblemished surface that feels hard and brittle like stone, possessing a deep, resonant quality when tapped. The plastic's molecular structure rapidly reconfigures, transforming it into a dense, grey, stone-like material upon manipulation, which then reverts to flexible plastic when released. The composition is a fixed, eye-level view of hands interacting with the water bottle on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A pair of hands wearing a plain black crew-neck t-shirt firmly grips a translucent blue plastic water bottle resting on the dark wood living room table; the area under the grip is already solid, grey, and stone-like, visibly contrasting with the plastic top.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The portion of the bottle under the hand's grip is visibly transformed into a solid, grey, stone-like material."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A translucent blue plastic water bottle, standard commercial size, with a perfectly smooth, unblemished surface that feels hard and brittle like stone, possessing a deep, resonant quality when tapped. The plastic's molecular structure rapidly reconfigures, transforming it into a dense, grey, stone-like material upon manipulation, which then reverts to flexible plastic when released. The composition is a fixed, eye-level view of hands interacting with the water bottle on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A pair of hands wearing a plain black crew-neck t-shirt attempts to squeeze the solid, stone-like portion of the translucent blue water bottle, but it remains utterly rigid and immovable, maintaining its shape.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The stone-like part of the bottle remains completely rigid and maintains its shape when squeezed by the hands."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A translucent blue plastic water bottle, standard commercial size, with a perfectly smooth, unblemished surface that feels hard and brittle like stone, possessing a deep, resonant quality when tapped. The plastic's molecular structure rapidly reconfigures, transforming it into a dense, grey, stone-like material upon manipulation, which then reverts to flexible plastic when released. The composition is a fixed, eye-level view of hands interacting with the water bottle on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A pair of hands wearing a plain black crew-neck t-shirt presses down on the translucent blue water bottle, causing its entire body to rapidly transform into solid, grey stone, then the hands release it, and it instantly reverts to flexible plastic.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The bottle visibly transforms entirely into a solid, grey stone material when pressed, and then instantly reverts to flexible plastic when released."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A translucent blue plastic water bottle, standard commercial size, with a perfectly smooth, unblemished surface that feels hard and brittle like stone, possessing a deep, resonant quality when tapped. The plastic's molecular structure rapidly reconfigures, transforming it into a dense, grey, stone-like material upon manipulation, which then reverts to flexible plastic when released. The composition is a fixed, eye-level view of hands interacting with the water bottle on the dark wood living room table. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A pair of hands wearing a plain black crew-neck t-shirt tilts the translucent blue water bottle to pour water, the bottle flexing normally as it pours, but as it is set down, its lower half instantly and visibly turns into solid grey stone.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The lower half of the bottle visibly and instantly transforms into solid grey stone as it is set down."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "plastic water bottle",
+    "descriptor": "A translucent blue plastic water bottle, standard commercial size, with a perfectly smooth, unblemished surface that feels hard and brittle like stone, possessing a deep, resonant quality when tapped.",
+    "environment": "living_room_table",
+    "framing": "The composition is a fixed, eye-level view of hands interacting with the water bottle on the dark wood living room table.",
+    "anomaly_descriptor": "The plastic's molecular structure rapidly reconfigures, transforming it into a dense, grey, stone-like material upon manipulation, which then reverts to flexible plastic when released."
+  },
+  "face_visible": false,
+  "family": "impossible-state-change",
+  "music": "A sparse and dry percussive arrangement featuring crisp, snapping sounds and hollow, resonant taps on wood, underlined by a deep, sustained low frequency drone. The rhythm is slow and steady, with ample quiet space, commencing with a sharp snap.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}
