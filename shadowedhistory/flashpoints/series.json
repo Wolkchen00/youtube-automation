@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 25,
-  "next_part": 23,
+  "next_part": 24,
   "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483",
   "auto_replenish": {
     "enabled": true,
@@ -433,6 +433,35 @@
         "tiktok"
       ],
       "published_at": "2026-09-01T22:53:01.335990+00:00"
+    },
+    "23": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep23/ep23_music_titled.mp4",
+      "subtitle": "How A Brewery Flooded London In 1814!",
+      "stack_sha256": "f2aacc64ca0251194bc23269b8f0cdd88e224f2954e8a979a05a406fcfd04863",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-02T22:56:38.762032+00:00",
+      "dropped_shots": [
+        1
+      ],
+      "dropped_shot_roles": {
+        "1": "cold_open"
+      },
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": false,
+        "arc_roles_missing": [
+          "cold_open"
+        ],
+        "duration_s": 9.5,
+        "duration_in_band": null,
+        "degraded": true
+      }
     }
   }
 }
