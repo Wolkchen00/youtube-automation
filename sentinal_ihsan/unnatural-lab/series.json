@@ -318,11 +318,20 @@
     },
     "26": {
       "status": "qc_retry",
-      "first_held_at": "2026-09-02T03:42:00.292304+00:00",
-      "retry_count": 2,
-      "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor",
-      "retry_reset_note": "2026-09-02 Ihsan karari: sayac sifirlandi. Basarisizliklarin ikisi de QUOTA idi (ucretsiz katman gunde 20 istek, bir bolum 43 istiyor) , bolumun icerigiyle ilgisi yok. Kota kesintisi 3-vurus kuralini tuketip bolumu oldurmemeli."
+      "retry_count": 0,
+      "retry_history": [
+        {
+          "archived_at": "2026-09-02T16:50:00Z",
+          "previous": {
+            "retry_count": 2,
+            "last_reason_code": "UNKNOWN",
+            "hold_reason": "üretim nedeni bilinmiyor",
+            "first_held_at": "2026-09-02T03:42:00.292304+00:00",
+            "retry_reset_note": "2026-09-02 Ihsan karari: sayac sifirlandi. Basarisizliklarin ikisi de QUOTA idi (ucretsiz katman gunde 20 istek, bir bolum 43 istiyor) , bolumun icerigiyle ilgisi yok. Kota kesintisi 3-vurus kuralini tuketip bolumu oldurmemeli."
+          }
+        }
+      ],
+      "operator_override": "2026-09-02, Ihsan karari, ACIK OPERATOR OVERRIDE. Onceki gerekce ('iki basarisizlik da QUOTA idi') depo kanitiyla CELISIYORDU: 05:04 ve 05:30 kosulari cekim 2 ve cekim 4 icin continuity final_reject ile bitti, yani ICERIK reddiydi. Sayac, o icerik reddinin KOK NEDENI duzeldigi icin sifirlaniyor: zincir karesi denetimi kasitli terminal hali (state_carry) artik kimlik kaymasi saymiyor, ve gercek reset olunca sonraki cekim tek seferlik sureklilik muafiyeti aliyor. Ayrica qc.min_shots=3 ile 4 cekimin 3'u gecerse bolum yayinlanabiliyor. Altyapi kaynakli hold'lar bundan boyle ayri infra_retry_count sayacindan harciyor, icerik sayacini yakmiyor."
     }
   }
 }
