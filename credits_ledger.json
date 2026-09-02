@@ -863,6 +863,14 @@
       "reserved": 624,
       "actual": 252.0,
       "ts": "2026-09-02T05:06:07.384145+00:00"
+    },
+    {
+      "month": "2026-09",
+      "series": "unnatural-lab",
+      "part": 26,
+      "reserved": 572,
+      "actual": 504.0,
+      "ts": "2026-09-02T05:32:30.321520+00:00"
     }
   ],
   "episode_spend": {
@@ -870,6 +878,6 @@
     "unnatural-lab:23": 436.0,
     "unnatural-lab:24": 512.0,
     "unnatural-lab:25": 436.0,
-    "unnatural-lab:26": 428.0
+    "unnatural-lab:26": 932.0
   }
 }
