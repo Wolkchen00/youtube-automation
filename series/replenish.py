@@ -58,6 +58,7 @@ if _ROOT not in sys.path:
     sys.path.insert(0, _ROOT)
 
 from core.config import GEMINI_API_KEY, logger
+from core.utils import normalize_title
 from core.ffmpeg_tools import NARRATION_MAX_TEMPO
 from series import notifier
 from series.bible import (
@@ -334,8 +335,13 @@ def _alert(slug: str, msg: str) -> bool:
 # ─── Geçmiş / durum yardımcıları ───────────────────────────────────────────────
 
 def _norm_title(t: str) -> str:
-    """Başlık karşılaştırması için normalize et (küçük harf, noktalama at)."""
-    return re.sub(r"[^a-z0-9]+", " ", (t or "").lower()).strip()
+    """Başlık karşılaştırması için normalize et (küçük harf, noktalama at).
+
+    Gövde core.utils.normalize_title'a devredildi: yayın kapısı (uploader) ile bu
+    dedup AYNI normalizasyonu kullanmak zorunda. Ayrışırlarsa bir başlık burada
+    geçip kapıda takılır ve günlük video sessizce eksik platformla çıkar.
+    """
+    return normalize_title(t)
 
 
 def _episode_history(slug: str) -> list[dict]:

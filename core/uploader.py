@@ -5,12 +5,14 @@ Publishes videos to YouTube Shorts, Instagram Reels, and TikTok
 via the Upload-Post.com API.
 """
 
+import re
 import time
 
 import requests
 from pathlib import Path
 
 from .config import UPLOAD_POST_API_KEY, UPLOAD_USERS, CHANNEL_PLATFORMS, logger
+from .utils import normalize_title
 
 
 UPLOAD_POST_URL = "https://api.upload-post.com/api/upload"
@@ -35,6 +37,66 @@ MAX_UPLOAD_MB = 80
 _DELIVERY_MAXRATE = "6500k"
 _DELIVERY_BUFSIZE = "13M"
 
+
+
+# Mukerrer-baslik kapisi. 2026-09-02'de kanalda "Next Stop: The Deep" 3, "Next Stop:
+# Hell" 5 kez birikmisti: ne gunluk boru hatti ne elle yayin, hicbiri yuklemeden
+# once kanala bakmiyordu. Kapi upload_to_platform icindedir cunku olculen TEK
+# tikanma noktasi orasi (cagiranlar: publish_video, series_runner:336).
+# Onbellek modul duzeyindedir: bir bolumun youtube/instagram/tiktok cagrilari
+# arasinda yasar, boylece bolum basina en fazla 1 RSS istegi atilir.
+_channel_titles_cache: dict[str, set[str] | None] = {}
+
+YOUTUBE_FEED_URL = "https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+CHANNEL_FEED_TIMEOUT = 5
+
+
+def _channel_id_for_user(user: str) -> str | None:
+    """Yukleme profilinden (ornegin 'Youtube') kanal kimligini coz."""
+    from .analytics import CHANNELS  # dongusel import olmasin diye fonksiyon icinde
+
+    hedef = str(user or "").strip().lower()
+    if not hedef:
+        return None
+    for kanal_adi, profil in UPLOAD_USERS.items():
+        if str(profil).strip().lower() == hedef:
+            for kanal in CHANNELS:
+                if kanal.get("name") == kanal_adi:
+                    return kanal.get("channel_id")
+    return None
+
+
+def channel_recent_titles(user: str) -> set[str] | None:
+    """Kanalin son yuklemelerinin normalize basliklari; DOGRULANAMAZSA None.
+
+    None her zaman "kontrol edilemedi" demektir ve cagiran tarafta fail-open'a
+    dusurur: bilinmeyen bir ag hatasi gunluk kanali karartmamali. Bu bilincli bir
+    takas; kapi bir emniyet kemeri, kilit degil.
+    """
+    channel_id = _channel_id_for_user(user)
+    if not channel_id:
+        return None
+    if channel_id in _channel_titles_cache:
+        return _channel_titles_cache[channel_id]
+
+    sonuc: set[str] | None = None
+    try:
+        resp = requests.get(
+            YOUTUBE_FEED_URL.format(channel_id=channel_id),
+            timeout=CHANNEL_FEED_TIMEOUT,
+        )
+        if resp.status_code == 200:
+            basliklar = re.findall(
+                r"<entry>.*?<title>(.*?)</title>", resp.text, re.S
+            )
+            if basliklar:
+                sonuc = {normalize_title(b) for b in basliklar}
+    except Exception as error:  # ag, zaman asimi, bozuk XML: hepsi ayni kova
+        logger.warning(f"⚠️ Kanal akisi okunamadi ({user}): {error}")
+        sonuc = None
+
+    _channel_titles_cache[channel_id] = sonuc
+    return sonuc
 
 def _delivery_copy(video_path: Path) -> Path:
     """Dosya MAX_UPLOAD_MB'ı aşıyorsa yükleme için sıkıştırılmış kopya döndür.
@@ -389,7 +451,8 @@ def upload_to_platform(
     platform: str = "youtube",
     privacy: str = "public",
     tags: str = "",
-    social_caption: str = ""
+    social_caption: str = "",
+    allow_duplicate_title: bool = False
 ) -> dict | None:
     """Upload video to a single platform via Upload-Post.com.
 
@@ -405,6 +468,24 @@ def upload_to_platform(
     if not video_path.exists():
         logger.error(f"❌ Video not found: {video_path}")
         return None
+
+    # Mukerrer-baslik kapisi. Yalniz YouTube: kanal gorunurlugumuz orada var, ve
+    # YouTube gecip IG/TikTok dustugunde yapilan yeniden deneme tum yayini degil
+    # sadece YouTube'u atlamali.
+    if str(platform).strip().lower() == "youtube" and not allow_duplicate_title:
+        kanal_basliklari = channel_recent_titles(user)
+        if kanal_basliklari is None:
+            logger.warning(
+                "⚠️ Kanal dogrulanamadi; mukerrer kontrolu atlandi ve yayina "
+                "devam ediliyor."
+            )
+        elif normalize_title(title) in kanal_basliklari:
+            logger.error(
+                f"❌ Mukerrer baslik: '{title}' bu kanalda zaten var; YouTube "
+                "yuklemesi ATLANDI. Bilerek ikinci kez yayinlamak icin "
+                "allow_duplicate_title=True."
+            )
+            return None
 
     # Büyük dosya → akış ortasında kesilme (10054). Gerekirse sıkıştırılmış kopya yükle.
     video_path = _delivery_copy(Path(video_path))
@@ -506,7 +587,8 @@ def publish_video(
     title: str,
     description: str,
     channel_name: str,
-    platforms: list[str] | None = None
+    platforms: list[str] | None = None,
+    allow_duplicate_title: bool = False
 ) -> dict:
     """Publish video to all configured platforms for a channel.
 
@@ -532,6 +614,7 @@ def publish_video(
             description=description,
             user=upload_user,
             platform=platform,
+            allow_duplicate_title=allow_duplicate_title,
         )
         results[platform] = result
 

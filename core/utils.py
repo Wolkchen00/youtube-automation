@@ -115,3 +115,12 @@ def format_duration(seconds: float) -> str:
     """Convert seconds to mm:ss."""
     m, s = divmod(int(seconds), 60)
     return f"{m:02d}:{s:02d}"
+
+def normalize_title(t: str) -> str:
+    """Baslik karsilastirmasi icin normalize et (kucuk harf, noktalama ve emoji at).
+
+    Yayin kapisi ile replenish AYNI fonksiyonu kullanir. Ayrisirlarsa bir baslik
+    replenish'ten gecip kapida takilir ve gunluk video sessizce eksik platformla
+    cikar; bu yuzden tek kaynak burasidir.
+    """
+    return re.sub(r"[^a-z0-9]+", " ", (t or "").lower()).strip()
