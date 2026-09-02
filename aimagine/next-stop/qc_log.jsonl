@@ -1,3 +1,18 @@
 {"ts": "2026-09-02T17:52:13Z", "event": "qc_api_attempt", "attempt_id": "8f1ff183afe3406fae0d9d6e47a98cba", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 1}
 {"ts": "2026-09-02T17:52:23Z", "event": "qc_api_result", "attempt_id": "8f1ff183afe3406fae0d9d6e47a98cba", "outcome": "ok"}
 {"ts": "2026-09-02T17:52:23Z", "event": "chain_frame_failure", "episode": 5, "shot": 1, "next_shot": 2, "verdict": "fail_closed", "reason": "unsuitable", "reasons": ["anatomi bozuk", "The hand of the rightmost passenger is unnatural and could be amplified if used as a conditioning frame."], "canonical_source": null}
+{"ts": "2026-09-02T20:33:42Z", "event": "qc_api_attempt", "attempt_id": "acbe350bb266473d8a1a48f03b9e07a6", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 1}
+{"ts": "2026-09-02T20:33:59Z", "event": "qc_api_result", "attempt_id": "acbe350bb266473d8a1a48f03b9e07a6", "outcome": "ok"}
+{"ts": "2026-09-02T20:34:01Z", "event": "chain_frame_suitability", "episode": 5, "shot": 1, "next_shot": 2, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}
+{"ts": "2026-09-02T20:38:07Z", "event": "qc_api_attempt", "attempt_id": "c7536ddb1f0e463984632c3b9a2909b2", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 2}
+{"ts": "2026-09-02T20:38:17Z", "event": "qc_api_result", "attempt_id": "c7536ddb1f0e463984632c3b9a2909b2", "outcome": "ok"}
+{"ts": "2026-09-02T20:38:19Z", "event": "chain_frame_suitability", "episode": 5, "shot": 2, "next_shot": 3, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}
+{"ts": "2026-09-02T20:41:25Z", "event": "qc_api_attempt", "attempt_id": "63a12ee1197c4b498e6b97a83c3f3606", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 3}
+{"ts": "2026-09-02T20:41:36Z", "event": "qc_api_result", "attempt_id": "63a12ee1197c4b498e6b97a83c3f3606", "outcome": "ok"}
+{"ts": "2026-09-02T20:41:38Z", "event": "chain_frame_suitability", "episode": 5, "shot": 3, "next_shot": 4, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}
+{"ts": "2026-09-02T20:44:14Z", "event": "qc_api_attempt", "attempt_id": "659985ff66e8484aaff41430d5194a59", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 4}
+{"ts": "2026-09-02T20:44:25Z", "event": "qc_api_result", "attempt_id": "659985ff66e8484aaff41430d5194a59", "outcome": "ok"}
+{"ts": "2026-09-02T20:44:25Z", "event": "chain_frame_reset", "episode": 5, "shot": 4, "next_shot": 5, "verdict": "canonical_reset", "reason": "unsuitable", "reasons": ["Passengers are calm and not reacting to the appearance of the leviathan, which contradicts the prompt's requirement for passenger physics at this moment. This frame would establish an incorrect emotional and physical state for the next shot."], "canonical_source": "omni_image_references"}
+{"ts": "2026-09-02T20:48:01Z", "event": "qc_api_attempt", "attempt_id": "6f0f73ee459e496a883314a8e2285ce3", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 5}
+{"ts": "2026-09-02T20:48:18Z", "event": "qc_api_result", "attempt_id": "6f0f73ee459e496a883314a8e2285ce3", "outcome": "ok"}
+{"ts": "2026-09-02T20:48:20Z", "event": "chain_frame_suitability", "episode": 5, "shot": 5, "next_shot": 6, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}

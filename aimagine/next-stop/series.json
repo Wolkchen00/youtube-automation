@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 1,
   "total_parts": 9,
-  "next_part": 5,
+  "next_part": 6,
   "parts": {
     "1": {
       "status": "published",
@@ -68,6 +68,27 @@
         "tiktok"
       ],
       "published_at": "2026-09-01T17:46:00.274505+00:00"
+    },
+    "5": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep05/ep05_hooked_titled.mp4",
+      "subtitle": "Next Stop: Kepler-186f 🪐✨",
+      "stack_sha256": "7995636c611626b1eeee071a9308b93cbe133bad5bea180fbb1f37ee40a3b0dd",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-02T21:01:01.980386+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 56.2,
+        "duration_in_band": null,
+        "degraded": false
+      }
     }
   },
   "auto_replenish": {
