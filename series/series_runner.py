@@ -70,6 +70,15 @@ def _series_alert(slug: str, msg: str) -> bool:
         _ALERT_SLUG.reset(token)
 
 
+def _fleet_alert(msg: str) -> bool:
+    """Filo alarmını mevcut drain'in ziyaret ettiği tek bir seri outbox'ına bağla."""
+    known_slugs = _outbox_slugs(None)
+    if known_slugs:
+        return _series_alert(known_slugs[0], msg)
+    # Henüz hiçbir seri dizini yoksa outbox evi de yoktur; yine düz gönder ve kırmızı dön.
+    return _alert(msg)
+
+
 def _balance_value(data) -> int | None:
     """Kie kredi yanıtını tek bir tam sayı bakiyeye indir."""
     if isinstance(data, (int, float)):
@@ -779,12 +788,10 @@ def run_all(dry_run: bool = False, publish: bool = True) -> bool:
     slugs = list_active_series()
     if not slugs:
         logger.info("Aktif seri yok.")
-        # Bilgilendirme mesaji kritik ariza degildir; mevcut Markdown sunumunu korur.
-        notifier.send_message(
+        return _fleet_alert(
             "ℹ️ *Seri otomasyonu:* Aktif seri kalmadı ,  tüm diziler tamamlandı. "
             "Yeni sezon/part eklenene kadar bu kanallara yeni video ÇIKMAYACAK."
         )
-        return True
     slugs.sort(key=lambda s: (_priority(s), s))
     chosen, waiting = slugs[0], slugs[1:]
     logger.info(f"🎯 Günde-1 tavanı: bugün '{chosen}' üretilecek"

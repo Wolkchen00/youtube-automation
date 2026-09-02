@@ -287,10 +287,10 @@ def test_every_runner_critical_callsite_uses_the_outbox_routing_helper():
         and node.func.id == "_alert"
     ]
 
-    # Async dogrulama, iki terminal dal, iki kredi kapisi, QC hold,
-    # uretim hatasi ve tum-platform yayin hatasi.
-    assert len(routed) == 8
-    assert len(direct) == 1  # yalniz _series_alert -> _alert delegasyonu
+    # Filo bos alarmi, async dogrulama, iki terminal dal, iki kredi kapisi,
+    # QC hold, uretim hatasi ve tum-platform yayin hatasi.
+    assert len(routed) == 9
+    assert len(direct) == 2  # _series_alert delegasyonu + evsiz filo alarmi fallback'i
     source = inspect.getsource(series_runner)
     for fragment in (
         "request_id={request_id}",
@@ -301,6 +301,7 @@ def test_every_runner_critical_callsite_uses_the_outbox_routing_helper():
         "awaiting_approval",
         "ÜRETİLEMEDİ",
         "YAYINLANAMADI",
+        "Aktif seri kalmadı",
     ):
         assert fragment in source
 

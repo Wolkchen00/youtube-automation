@@ -14,7 +14,7 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from core import cost_tracker, ffmpeg_tools
 from series import bible as bible_module
-from series import critic, notifier, preflight, produce
+from series import critic, preflight, produce, series_runner
 from series.bible import Bible
 
 
@@ -138,16 +138,15 @@ class AudioConfigAndQCTests(unittest.TestCase):
                     mock.patch.object(
                         produce.ffmpeg_tools, "measure_mean_volume", return_value=-20.0
                     ), mock.patch.object(produce.critic, "qc_audio", return_value=review), \
-                    mock.patch.object(notifier, "enabled", return_value=True), \
-                    mock.patch.object(notifier, "send_message") as send:
+                    mock.patch.object(series_runner, "_series_alert") as send:
                 self.assertFalse(produce._verify_native_audio_delivery(bible, 1, final))
                 send.assert_called_once()
-                self.assertIn("ELLE BAK", send.call_args.args[0])
+                self.assertIn("ELLE BAK", send.call_args.args[1])
 
         with mock.patch.object(
             produce.ffmpeg_tools, "measure_mean_volume", return_value=-20.0
         ), mock.patch.object(produce.critic, "qc_audio", return_value=good), \
-                mock.patch.object(notifier, "send_message") as send:
+                mock.patch.object(series_runner, "_series_alert") as send:
             self.assertTrue(produce._verify_native_audio_delivery(bible, 1, final))
             send.assert_not_called()
 
@@ -281,8 +280,7 @@ class ProductionIntegrationTests(unittest.TestCase):
         with self._media_fakes(), mock.patch.object(
             produce.ffmpeg_tools, "measure_mean_volume", return_value=-80.0
         ), mock.patch.object(produce.critic, "qc_audio") as audio_qc, \
-                mock.patch.object(notifier, "enabled", return_value=True), \
-                mock.patch.object(notifier, "send_message") as send:
+                mock.patch.object(series_runner, "_series_alert") as send:
             self.assertIsNone(produce.produce_episode(self.slug, plan))
         audio_qc.assert_not_called()
         send.assert_called_once()

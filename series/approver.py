@@ -23,7 +23,13 @@ from pathlib import Path
 from core.config import logger, OUTPUT_DIR
 from series import notifier
 from series.series_meta import SeriesMeta, list_active_series
-from series.series_runner import _publish_part, REPO
+from series.series_runner import (
+    REPO,
+    _drain_outboxes,
+    _outboxes_empty,
+    _publish_part,
+    _series_alert,
+)
 
 
 def match_decision(data: str, slug: str, n: int,
@@ -77,7 +83,10 @@ def _publish_approved(meta: SeriesMeta, n: int, part: dict) -> bool:
         lv = part.get("video")
         video = Path(lv) if lv and Path(lv).exists() else None
     if not video:
-        notifier.send_message(f"⚠️ *Part {n}* videosu bulunamadı (Release yok). Üretim tekrar gerekebilir.")
+        _series_alert(
+            meta.slug,
+            f"⚠️ *Part {n}* videosu bulunamadı (Release yok). Üretim tekrar gerekebilir.",
+        )
         logger.error(f"Part {n}: onaylandı ama video yok.")
         return False
 
@@ -90,7 +99,10 @@ def _publish_approved(meta: SeriesMeta, n: int, part: dict) -> bool:
         notifier.send_message(f"✅ *Part {n}* yayınlandı: {', '.join(ok)} 🎉")
         logger.info(f"Part {n} yayınlandı: {ok}")
         return True
-    notifier.send_message(f"⚠️ *Part {n}* onaylandı ama yayın başarısız (platform hatası). Sonraki kontrolde tekrar denenecek.")
+    _series_alert(
+        meta.slug,
+        f"⚠️ *Part {n}* onaylandı ama yayın başarısız (platform hatası). Sonraki kontrolde tekrar denenecek.",
+    )
     logger.error(f"Part {n}: yayın başarısız (onay kayıtlı, retry edilecek).")
     return False
 
@@ -181,8 +193,12 @@ def main(argv: list):
     if not slugs:
         logger.info("Aktif seri yok.")
         return
+    if not _drain_outboxes(slugs):
+        logger.error("❌ Kritik alarm outbox boş değil; onay kontrolü sürecek, koşu sonda kırmızı olacak.")
     for s in slugs:
         process(s)
+    if not _outboxes_empty(slugs):
+        sys.exit(1)
 
 
 if __name__ == "__main__":

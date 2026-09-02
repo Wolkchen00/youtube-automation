@@ -316,13 +316,12 @@ def _gen_json(contents: str, system_instruction: str,
     raise RuntimeError(f"Gemini ikmal çağrısı başarısız: {last_err}")
 
 
-def _alert(msg: str) -> None:
-    """Telegram'a sessizce bildir (token yoksa no-op) ,  series_runner._alert eşleniği."""
-    try:
-        if notifier.enabled():
-            notifier.send_message(msg)
-    except Exception as e:
-        logger.warning(f"⚠️ İkmal bildirimi gönderilemedi: {e}")
+def _alert(slug: str, msg: str) -> bool:
+    """İkmal alarmını runner'ın düz metin ve kalıcı outbox yolundan gönder."""
+    # series_runner replenish'i çalışma anında içe aktardığı için döngüyü burada kapat.
+    from series.series_runner import _series_alert
+
+    return _series_alert(slug, msg)
 
 
 # ─── Geçmiş / durum yardımcıları ───────────────────────────────────────────────
@@ -1430,13 +1429,13 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
 
         titles = ", ".join(p["episode"]["title"] for p in episodes)
         logger.info(f"🔁 {slug}: part {start}-{end} planlandı → {titles}")
-        _alert(f"🔁 *{meta.base_title}*: {batch} yeni bölüm planlandı (Part {start}-{end}: "
-               f"{titles}) ,  kanal kesintisiz devam ediyor.")
+        _alert(slug, f"🔁 *{meta.base_title}*: {batch} yeni bölüm planlandı (Part {start}-{end}: "
+                     f"{titles}) ,  kanal kesintisiz devam ediyor.")
         return True
     except Exception as e:
         logger.error(f"❌ {slug} oto-ikmal başarısız: {e}")
-        _alert(f"❌ *{meta.base_title}* oto-ikmal BAŞARISIZ: {str(e)[:200]}\n"
-               f"Kuyrukta {pending} part kaldı ,  kuyruk biterse bu kanala video çıkmaz.")
+        _alert(slug, f"❌ *{meta.base_title}* oto-ikmal BAŞARISIZ: {str(e)[:200]}\n"
+                     f"Kuyrukta {pending} part kaldı ,  kuyruk biterse bu kanala video çıkmaz.")
         return False
 
 
@@ -1452,18 +1451,25 @@ def replenish_all(dry_run: bool = False) -> None:
 
 
 def main(argv: list[str]) -> None:
+    from series.series_runner import _drain_outboxes, _outboxes_empty, _outbox_slugs
+
     dry = "--dry-run" in argv
     slug = None
     if "--series" in argv:
         i = argv.index("--series")
         if i + 1 < len(argv):
             slug = argv[i + 1]
+    outbox_slugs = _outbox_slugs(slug)
+    if not _drain_outboxes(outbox_slugs):
+        logger.error("❌ Kritik alarm outbox boş değil; ikmal sürecek, koşu sonda kırmızı olacak.")
     if slug:
         ok = replenish(slug, dry_run=dry)
-        if not dry and ok is False:
+        if not dry and (ok is False or not _outboxes_empty(outbox_slugs)):
             sys.exit(1)
     else:
         replenish_all(dry_run=dry)
+        if not dry and not _outboxes_empty(outbox_slugs):
+            sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -423,13 +423,12 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     # Anlatım BEKLENEN seride TTS başarısızsa sessiz kalma (the-signal dersi: sessiz
     # başarısızlık günlerce fark edilmez) — video müzik-only çıkar ama Telegram'a haber ver.
     if narr_cfg.get("channel") and narr_text and not narration_ok:
-        try:
-            from series import notifier
-            if notifier.enabled():
-                notifier.send_message(f"⚠️ *{bible.title}* ep{number}: anlatım (TTS) üretilemedi — "
-                                      f"video anlatımsız (müzik-only) yayınlanacak.")
-        except Exception:
-            pass
+        from series.series_runner import _series_alert
+        _series_alert(
+            bible.slug,
+            f"⚠️ *{bible.title}* ep{number}: anlatım (TTS) üretilemedi — "
+            f"video anlatımsız (müzik-only) yayınlanacak.",
+        )
 
     if bible.music:
         try:
@@ -527,12 +526,8 @@ def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path, *,
         "Yayın durduruldu; ELLE BAK."
     )
     logger.error(message)
-    try:
-        from series import notifier
-        if notifier.enabled():
-            notifier.send_message(f"🔊 *{bible.title}* ep{number}: {message}")
-    except Exception as error:
-        logger.warning(f"⚠️ Diegetik ses kapısı bildirimi gönderilemedi: {error}")
+    from series.series_runner import _series_alert
+    _series_alert(bible.slug, f"🔊 *{bible.title}* ep{number}: {message}")
     return False
 
 
@@ -1924,7 +1919,9 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 bible, number, final_ep, experiment_id=experiment_id
             )
         except critic.QCApiExhausted as error:
-            critic.notify_qc_exhaustion(bible.title, number, error.reason)
+            critic.notify_qc_exhaustion(
+                bible.title, number, error.reason, slug=slug
+            )
             critic._log_event(slug, {
                 "event": "qc_hold", "episode": number, "shot": None,
                 "reason": error.reason,

@@ -789,7 +789,8 @@ def _log_event(slug: str, entry: dict, *,
 
 
 def notify_qc_exhaustion(title: str, episode: int, reason: str,
-                         shot: int | None = None, *, blocking: bool = True) -> None:
+                         shot: int | None = None, *, blocking: bool = True,
+                         slug: str) -> None:
     """Kota tükenmesini kota-dışı QC arızalarından açıkça ayır.
 
     blocking=False: seride zorunlu kapı yok, bölüm QC'siz devam ediyor. Sessiz
@@ -801,12 +802,14 @@ def notify_qc_exhaustion(title: str, episode: int, reason: str,
     if reason == "quota":
         _notify(
             f"🚨 *QC KOTA TÜKENDİ: {title}* {target}\n"
-            f"Gemini 429 denemeleri tükendi. {outcome}"
+            f"Gemini 429 denemeleri tükendi. {outcome}",
+            slug=slug,
         )
     else:
         _notify(
             f"🚨 *QC KOTA-DIŞI TÜKENME: {title}* {target}\n"
-            f"Neden: `{reason}`. {outcome}"
+            f"Neden: `{reason}`. {outcome}",
+            slug=slug,
         )
 
 
@@ -999,16 +1002,17 @@ def _clean_sidecars(clip_path: Path) -> None:
             pass
 
 
-def _notify(msg: str, frames: list[Path] | None = None) -> None:
-    """Telegram'a best-effort bildir (token yoksa no-op)."""
+def _notify(msg: str, frames: list[Path] | None = None, *, slug: str) -> None:
+    """QC alarmını düz metin/outbox yoluna, kanıt karelerini medya yoluna gönder."""
     try:
         from series import notifier
-        if not notifier.enabled():
-            return
         if frames:
+            if not notifier.enabled():
+                return
             notifier.send_media_group([str(f) for f in frames[:4]], caption=msg)
         else:
-            notifier.send_message(msg)
+            from series.series_runner import _series_alert
+            _series_alert(slug, msg)
     except Exception as e:
         logger.warning(f"⚠️ QC bildirimi gönderilemedi: {e}")
 
@@ -1493,7 +1497,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                            f"QC API tükenmesi ({api_hold_reason}) — seride zorunlu kapı "
                            f"yok, bölüm QC'siz sürüyor"]
                 notify_qc_exhaustion(bible.title, episode, api_hold_reason, n,
-                                     blocking=False)
+                                     blocking=False, slug=slug)
                 _log_event(slug, {
                     "event": "qc_api_exhausted_open",
                     "episode": episode, "shot": n, "attempt": attempt,
@@ -1503,7 +1507,9 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         if verdict == "hold":
             if api_hold_reason is not None:
                 budget["hold_reason"] = api_hold_reason
-                notify_qc_exhaustion(bible.title, episode, api_hold_reason, n)
+                notify_qc_exhaustion(
+                    bible.title, episode, api_hold_reason, n, slug=slug
+                )
             held = clip_path.parent / f"{clip_path.stem}_qchold{attempt}{clip_path.suffix}"
             try:
                 clip_path.replace(held)
@@ -1558,7 +1564,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                 _log_event(slug, pass_event, experiment_id=experiment_id)
                 if attempt:
                     _notify(f"🔍 *{bible.title}* ep{episode} çekim {n}: QC {attempt}. regen'de GEÇTİ "
-                            f"(nedenler: {'; '.join(all_fix_notes[:3]) or 'anatomi'}) ✅")
+                            f"(nedenler: {'; '.join(all_fix_notes[:3]) or 'anatomi'}) ✅",
+                            slug=slug)
             else:
                 reason_text = "; ".join(reasons)
                 logger.warning(
@@ -1575,6 +1582,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     f"{review_try + 1} denetim denemesi sonuçsuz kaldı. "
                     f"Klip RED almadığı için kabul edildi. Neden: {reason_text}",
                     frames=frames,
+                    slug=slug,
                 )
             if allocator is not None:
                 allocator.mark_complete(n)
@@ -1620,7 +1628,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                     f"Nedenler: {'; '.join(reasons)}\n"
                     f"{attempt} regen denendi, eşik geçilemedi → çekim bölümden ÇIKARILDI. "
                     f"Bölüm kalan çekimlerle hazırlanıyor — yayın öncesi elle bak.",
-                    frames=frames)
+                    frames=frames, slug=slug)
             return None, extra_credits, "fail"
 
         budget["left"] -= 1
@@ -1669,5 +1677,5 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                               "attempt": attempt}, experiment_id=experiment_id)
             _notify(f"🔍❌ *QC — {bible.title}* ep{episode} çekim {n}: klip QC'den geçemedi ve "
                     f"yeniden üretim de başarısız → çekim bölümden ÇIKARILDI (elle bak).",
-                    frames=frames)
+                    frames=frames, slug=slug)
             return None, extra_credits, "fail"
