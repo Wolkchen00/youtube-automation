@@ -105,12 +105,17 @@ def test_replenish_konfigi_gelecek_bolumlere_de_alani_yazdiriyor():
     )
 
 
-def test_next_stop_hala_aktif_ve_kanal_tek_seride_bagli():
-    """Onarim, seridin kendisi kapaliysa anlamsiz."""
+def test_next_stop_duraklatildi_ama_zincir_ayarlari_duruyor():
+    """DURAKLATILDI 2026-09-03: kanal korku kaydiragi formatina gecti.
+
+    Bu test eskiden seridin 'active' kalmasini sart kosuyordu. Artik tersi:
+    'paused' olmali. Ama zincir onarimi SILINMEDI, cunku seri geri acilirsa
+    (status='active') ayni onarim gerekecek. Asagidaki zincir testleri o yuzden
+    aynen duruyor.
+    """
     seri = _json(SERI_DIZIN / "series.json")
-    assert seri["status"] == "active", (
-        f"next-stop 'active' olmali, kanalin tek uretim seridi o. "
-        f"Bulunan: {seri['status']!r}"
+    assert seri["status"] == "paused", (
+        f"next-stop duraklatildi, 'paused' olmali. Bulunan: {seri['status']!r}"
     )
 
 

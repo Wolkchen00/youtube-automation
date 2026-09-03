@@ -66,11 +66,17 @@ def test_from_scratch_has_workflow_dispatch():
     assert has_active_workflow_dispatch(text), "from-scratch.yml must have active workflow_dispatch"
 
 
-def test_next_stop_exactly_one_cron():
+def test_next_stop_cron_yok():
+    """DURAKLATILDI 2026-09-03: kanal korku kaydiragi formatina gecti.
+
+    Bu test eskiden cron'un VAR olmasini sarti kosuyordu. Duraklatma kararindan
+    sonra tersine cevrildi: zamanlanmis kosu OLMAMALI. Seriyi geri acmak isteyen
+    next-stop.yml icindeki schedule yorumunu kaldirir ve bu testi de geri cevirir.
+    """
     workflows_dir = Path(__file__).resolve().parents[1] / ".github" / "workflows"
     text = (workflows_dir / "next-stop.yml").read_text(encoding="utf-8")
     crons = get_active_crons(text)
-    assert crons == ['20 13 * * *'], f"next-stop.yml must have exactly one cron '20 13 * * *', got {crons}"
+    assert crons == [], f"next-stop.yml duraklatildi, aktif cron OLMAMALI, bulunan: {crons}"
 
 
 def test_next_stop_has_workflow_dispatch():
@@ -188,11 +194,27 @@ def test_from_scratch_kaldigi_bolumden_devam_edebilir():
     )
 
 
-def test_next_stop_hala_aktif():
-    """Ayakta kalan tek serit yanlislikla duraklatilmamis olmali."""
+def test_next_stop_duraklatildi():
+    """DURAKLATILDI 2026-09-03 (Ihsan karari): kanal korku kaydiragi formatina gecti.
+
+    status='paused' uc yolu birden kapatir: cron, next-stop.yml workflow_dispatch
+    (series_runner.py run_next) ve series.yml workflow_dispatch (list_active_series).
+    'paused' makine tarafindan ASLA diriltilmez.
+    """
     durum = _seri("next-stop")["status"]
-    assert durum == "active", (
-        f"next-stop 'active' kalmali, kanalin tek uretim seridi o. Bulunan: {durum!r}"
+    assert durum == "paused", (
+        f"next-stop 'paused' olmali, seri duraklatildi. Bulunan: {durum!r}"
+    )
+
+
+def test_next_stop_ilerlemesi_korundu():
+    """Duraklatma bir SIFIRLAMA degil. Geri acilirsa kaldigi bolumden devam etmeli."""
+    seri = _seri("next-stop")
+    assert seri["next_part"] == 7, (
+        f"next_part 7 olmali (part 6 yayinlandi, sirada 7 var). Bulunan: {seri['next_part']!r}"
+    )
+    assert seri["auto_replenish"]["enabled"] is False, (
+        "auto_replenish kapali olmali; acik kalirsa Gemini kendiliginden yeni durak yazar"
     )
 
 

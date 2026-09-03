@@ -11,8 +11,15 @@ name: Next Stop Daily
 # kie-uretim concurrency grubu hatlari serilestirir.
 
 on:
-  schedule:
-    - cron: '20 13 * * *'   # 13:20 UTC, aimagine yayin penceresinin hemen oncesi
+  # DURAKLATILDI 2026-09-03 (Ihsan karari): aimagine kanali tren serisinden
+  # korku kaydiragi formatina geciyor. Son yayinlanan bolum part 6
+  # "Next Stop: Bifrost", 2026-09-03T17:36 UTC, uc platformda da cikti.
+  # Seri durumu series.json icinde 'paused' yapildi ve auto_replenish
+  # kapatildi; next_part=7 ve total_parts=9 KORUNDU, yani asagidaki
+  # schedule yorumunu kaldirip status'u 'active' yapmak seriyi tam
+  # kaldigi bolumden geri acar. workflow_dispatch bilerek acik birakildi.
+  # schedule:
+  #   - cron: '20 13 * * *'   # 13:20 UTC, aimagine yayin penceresinin hemen oncesi
   workflow_dispatch:
     inputs:
       force:

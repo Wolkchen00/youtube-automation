@@ -12,7 +12,7 @@
   "hashtags": "#shorts #nextstop #train #liminal #surreal #scifi #whatif #fyp",
   "standalone": true,
   "publish_mode": "auto",
-  "status": "active",
+  "status": "paused",
   "priority": 1,
   "total_parts": 9,
   "next_part": 7,
@@ -113,7 +113,7 @@
     }
   },
   "auto_replenish": {
-    "enabled": true,
+    "enabled": false,
     "batch": 5,
     "min_queue": 2,
     "shots": 6,

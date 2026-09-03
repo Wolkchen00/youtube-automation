@@ -191,12 +191,20 @@ def test_next_stop_kuyrugunda_baslik_tekrari_yok():
     assert not tekrar, f"kuyrukta tekrar eden durak var: {tekrar}"
 
 
-def test_next_stop_gunluk_yayina_acik():
-    """Kapi ve dedup, serit kapaliysa anlamsiz."""
+def test_next_stop_duraklatildi_gunluk_yayin_kosmuyor():
+    """DURAKLATILDI 2026-09-03: kanal korku kaydiragi formatina gecti.
+
+    Bu test eskiden seridin gunluk yayina ACIK olmasini sart kosuyordu.
+    Karar tersine dondu: ne 'active' status ne de aktif cron olmali. Mukerrer
+    yayin kapisinin KENDI testleri (bu dosyadaki digerleri) aynen duruyor,
+    cunku kapi seri geri acilirsa yine gerekli ve published.json korundu.
+    """
     seri = json.loads(
         (KOK / "aimagine" / "next-stop" / "series.json").read_text(encoding="utf-8"))
-    assert seri["status"] == "active"
+    assert seri["status"] == "paused", (
+        f"next-stop duraklatildi, 'paused' olmali. Bulunan: {seri['status']!r}"
+    )
     wf = (KOK / ".github" / "workflows" / "next-stop.yml").read_text(encoding="utf-8")
     aktif_cron = [s for s in wf.splitlines()
                   if "cron:" in s and not s.lstrip().startswith("#")]
-    assert aktif_cron, "next-stop cron'u kapali; gunluk yayin kosmaz"
+    assert not aktif_cron, f"next-stop cron'u kapali olmali, bulunan: {aktif_cron}"
