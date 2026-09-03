@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 25,
-  "next_part": 24,
+  "next_part": 25,
   "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483",
   "auto_replenish": {
     "enabled": true,
@@ -459,6 +459,35 @@
           "cold_open"
         ],
         "duration_s": 9.5,
+        "duration_in_band": null,
+        "degraded": true
+      }
+    },
+    "24": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep24/ep24_narrated_music_titled.mp4",
+      "subtitle": "The Great Wall: Fact Or Ancient Propaganda?",
+      "stack_sha256": "f2aacc64ca0251194bc23269b8f0cdd88e224f2954e8a979a05a406fcfd04863",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-03T22:54:07.355505+00:00",
+      "dropped_shots": [
+        2
+      ],
+      "dropped_shot_roles": {
+        "2": "loop_seam"
+      },
+      "coherence": {
+        "loop_closed": false,
+        "narration_delivered": true,
+        "arc_roles_missing": [
+          "loop_seam"
+        ],
+        "duration_s": 9.43,
         "duration_in_band": null,
         "degraded": true
       }
