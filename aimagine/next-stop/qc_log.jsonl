@@ -16,3 +16,18 @@
 {"ts": "2026-09-02T20:48:01Z", "event": "qc_api_attempt", "attempt_id": "6f0f73ee459e496a883314a8e2285ce3", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 5, "shot": 5}
 {"ts": "2026-09-02T20:48:18Z", "event": "qc_api_result", "attempt_id": "6f0f73ee459e496a883314a8e2285ce3", "outcome": "ok"}
 {"ts": "2026-09-02T20:48:20Z", "event": "chain_frame_suitability", "episode": 5, "shot": 5, "next_shot": 6, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}
+{"ts": "2026-09-03T17:09:55Z", "event": "qc_api_attempt", "attempt_id": "58a69c00d8024291ba2a2fc25e4066e6", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 6, "shot": 1}
+{"ts": "2026-09-03T17:10:04Z", "event": "qc_api_result", "attempt_id": "58a69c00d8024291ba2a2fc25e4066e6", "outcome": "ok"}
+{"ts": "2026-09-03T17:10:04Z", "event": "chain_frame_reset", "episode": 6, "shot": 1, "next_shot": 2, "verdict": "canonical_reset", "reason": "unsuitable", "reasons": ["The primary visual element (the light grid) has inconsistent and wavy lines, making it appear like a 2D overlay rather than a stable 3D structure. The train tracks also exhibit perspective distortion. These inconsistencies could be amplified if used as a conditioning frame."], "canonical_source": "omni_image_references"}
+{"ts": "2026-09-03T17:12:34Z", "event": "qc_api_attempt", "attempt_id": "a49e8be59b9a419485f4326e60379974", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 6, "shot": 2}
+{"ts": "2026-09-03T17:12:44Z", "event": "qc_api_result", "attempt_id": "a49e8be59b9a419485f4326e60379974", "outcome": "ok"}
+{"ts": "2026-09-03T17:12:44Z", "event": "chain_frame_reset", "episode": 6, "shot": 2, "next_shot": 3, "verdict": "canonical_reset", "reason": "unsuitable", "reasons": ["anatomi bozuk"], "canonical_source": "omni_image_references"}
+{"ts": "2026-09-03T17:16:00Z", "event": "qc_api_attempt", "attempt_id": "1f30792696234fae94bcb474fdab6f48", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 6, "shot": 3}
+{"ts": "2026-09-03T17:16:13Z", "event": "qc_api_result", "attempt_id": "1f30792696234fae94bcb474fdab6f48", "outcome": "ok"}
+{"ts": "2026-09-03T17:16:13Z", "event": "chain_frame_reset", "episode": 6, "shot": 3, "next_shot": 4, "verdict": "canonical_reset", "reason": "unsuitable", "reasons": ["anatomi bozuk", "The frame contains a prominent rainbow artifact and an indistinct, blob-like hand which could be amplified if used for conditioning."], "canonical_source": "omni_image_references"}
+{"ts": "2026-09-03T17:18:30Z", "event": "qc_api_attempt", "attempt_id": "669e9a061edc4976ba5695ee948bc3ff", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 6, "shot": 4}
+{"ts": "2026-09-03T17:18:45Z", "event": "qc_api_result", "attempt_id": "669e9a061edc4976ba5695ee948bc3ff", "outcome": "ok"}
+{"ts": "2026-09-03T17:18:47Z", "event": "chain_frame_suitability", "episode": 6, "shot": 4, "next_shot": 5, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}
+{"ts": "2026-09-03T17:21:33Z", "event": "qc_api_attempt", "attempt_id": "9152adcbcda44136852e3643f94fe14e", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 6, "shot": 5}
+{"ts": "2026-09-03T17:21:55Z", "event": "qc_api_result", "attempt_id": "9152adcbcda44136852e3643f94fe14e", "outcome": "ok"}
+{"ts": "2026-09-03T17:21:57Z", "event": "chain_frame_suitability", "episode": 6, "shot": 5, "next_shot": 6, "verdict": "pass", "reason": null, "reasons": [], "canonical_source": null}

@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 1,
   "total_parts": 9,
-  "next_part": 6,
+  "next_part": 7,
   "parts": {
     "1": {
       "status": "published",
@@ -81,6 +81,27 @@
         "tiktok"
       ],
       "published_at": "2026-09-02T21:01:01.980386+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 56.2,
+        "duration_in_band": null,
+        "degraded": false
+      }
+    },
+    "6": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep06/ep06_hooked_titled.mp4",
+      "subtitle": "Next Stop: Bifrost 🌈🌉",
+      "stack_sha256": "1520e5bc0a7a43a8b31d7cee7fe96bbd5aad8885cfab46b5bd27346997de3779",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-03T17:36:19.764957+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
