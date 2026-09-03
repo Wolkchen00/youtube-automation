@@ -1,0 +1,114 @@
+name: Fear Slide Daily
+
+# 'KORKU KAYDIRAGI' gunluk seridi (aimagine kanali, @aimagine_._357).
+# fearvisionofficiel formatinin tersine muhendislikle cozulmus uyarlamasi.
+# Format: TEK kesintisiz 15 sn dikey 9:16 POV klip, seffaf kaydiraktan sehrin
+# uzerinde asagi kayip havuza dusme. Klip zinciri YOK, bir rota = bir prompt = bir video.
+# Motor: Kie / bytedance/seedance-2, 720p, native ses (konusma dahil).
+# Sehir donusumu: Vegas -> Tokyo -> New York -> Dubai -> Toronto -> Paris -> Shanghai.
+#
+# 2026-09-03 Ihsan karari: kanal tren serisinden bu formata gecti. next-stop
+# duraklatildi (commit 2ed94dc), aimagine altinda baska AKTIF seri yok, bu kosu
+# kanalin tek uretim hatti.
+#
+# Saat duzeni: bu kosu 13:20 UTC (next-stop'tan bosalan pencere) -> event-horizon
+# 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
+# kie-uretim concurrency grubu hatlari serilestirir (Kie kredi guvenligi).
+
+on:
+  schedule:
+    - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
+  workflow_dispatch:
+    inputs:
+      sehir:
+        description: "Sirayi atla, bu rotayi uret (ornek: tokyo-skytree-mor-yagmur)"
+        type: string
+        required: false
+        default: ""
+      allow_same_day:
+        description: "Ayni gune ikinci video koy (gunde-1 kilidini as)"
+        type: boolean
+        required: false
+        default: false
+
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs
+
+      - name: Prompt dogrulamasi (uretimden ONCE, kredi harcamaz)
+        run: python -X utf8 AImagine-Fear/build.py --check
+
+      - name: Prompt testleri
+        run: python -X utf8 -m pytest AImagine-Fear/tests -q
+
+      - name: Uret, denetle, yayinla
+        id: produce
+        env:
+          KIE_AI_API_KEY: ${{ secrets.KIE_AI_API_KEY }}
+        # shell: bash = pipefail; tee'nin 0'i python'un exit kodunu maskeliyordu.
+        shell: bash
+        run: |
+          ARGS=""
+          if [ -n "${{ inputs.sehir }}" ]; then ARGS="$ARGS --sehir ${{ inputs.sehir }}"; fi
+          if [ "${{ inputs.allow_same_day }}" = "true" ]; then ARGS="$ARGS --allow-same-day"; fi
+          python -X utf8 AImagine-Fear/tools/gunluk.py $ARGS 2>&1 | tee logs/fear_slide_run.log
+
+      - name: Uretim sonucunu kaydet
+        if: always()
+        run: |
+          raw_outcome="${{ steps.produce.outcome }}"
+          outcome=failure
+          if [ "$raw_outcome" = "success" ]; then outcome=success; fi
+          printf '{"ts":"%s","outcome":"%s","raw_outcome":"%s","run_id":%s}\n' \
+            "$(date -u +'%Y-%m-%dT%H:%M:%SZ')" "$outcome" "$raw_outcome" "${{ github.run_id }}" \
+            > AImagine-Fear/last_run.json
+
+      - name: Persist state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: fear-slide durumunu ilerlet [skip ci]" \
+            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fear-slide-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7

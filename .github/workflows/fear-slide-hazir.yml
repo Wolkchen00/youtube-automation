@@ -1,0 +1,77 @@
+name: Fear Slide Hazir Video
+
+# HAZIR (onceden uretilmis) bir korku kaydiragi videosunu yayinlar. Uretim YAPMAZ,
+# yani Kie kredisi HARCAMAZ. AImagine-Fear/hazir/ altindaki dosyalari kullanir.
+#
+# Ihsan istegi 2026-09-03: gunun ilk videosundan 6 saat sonra ikinci bir video.
+# 17:26 Los Angeles PDT = 00:26 UTC (ertesi gun).
+#
+# NEDEN CRON KENDINI KAPATMIYOR: yayinla.py sha256 tabanli mukerrer yayin kapisi
+# tutuyor (yayin.jsonl). Ayni dosya ikinci kez yayinlanamaz, kosu "ZATEN YAYINLANDI"
+# deyip cikar. Yani bu cron her gun tetiklense de tek bir kez yayin yapar.
+# Yeni bir hazir video koymak istersen hazir/ icerigini degistirmen yeterli.
+
+on:
+  schedule:
+    - cron: '26 0 * * *'   # 00:26 UTC = 17:26 Los Angeles PDT
+  workflow_dispatch:
+
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish-ready:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs
+
+      - name: Hazir video yayinla
+        id: publish
+        shell: bash
+        run: |
+          python -X utf8 AImagine-Fear/tools/yayinla.py \
+            AImagine-Fear/hazir/vegas-ihsan-v1.mp4 \
+            --caption-file AImagine-Fear/hazir/vegas-ihsan-v1.caption.txt \
+            --title "POV: Dropping off the STRAT Tower in the rain #shorts" \
+            --allow-same-day --skip-if-published 2>&1 | tee logs/fear_slide_hazir.log
+
+      - name: Persist state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: fear-slide hazir video yayin kaydi [skip ci]" \
+            AImagine-Fear/yayin.jsonl
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fear-slide-hazir-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
