@@ -40,7 +40,10 @@ jobs:
           cache: 'pip'
 
       - name: Install dependencies
-        run: pip install requests
+        # core/config.py python-dotenv kullaniyor. Sadece requests kurunca
+        # ModuleNotFoundError: No module named 'dotenv' verdi (kosu 33807471604).
+        # Depodaki diger butun is akislari da requirements.txt kuruyor.
+        run: pip install -r requirements.txt
 
       - name: Create .env
         run: |
