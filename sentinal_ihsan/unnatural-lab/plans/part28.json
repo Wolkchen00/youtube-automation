@@ -54,5 +54,9 @@
   "family": "reversed-physics",
   "music": "Sparse percussive bed opening with one soft glassy tap in the very first second. A slow, steady pulse of low woody hits and quiet dry ticks carries underneath, spaced far apart with generous silence between them. One quiet sustained tone hums softly below the surface, holding a dry, negative-space-heavy atmosphere that matches the slow upward crawl of thick amber honey.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/HfR2WyZ8/ep28-honey-jar.png"
+  ],
+  "ref_prompt_sha256": "1a0d4bbe8fa760d29110dabb726b80cb3977898b23e87ed7b18796b09b0974bf"
 }

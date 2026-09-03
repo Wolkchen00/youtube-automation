@@ -353,6 +353,13 @@
       "dropped_shot_roles": {
         "4": "loop_seam"
       }
+    },
+    "28": {
+      "status": "qc_retry",
+      "first_held_at": "2026-09-03T21:41:41.337732+00:00",
+      "retry_count": 1,
+      "last_reason_code": "AUDIO_MASTER",
+      "hold_reason": "final ses doğrulaması başarısız"
     }
   }
 }
