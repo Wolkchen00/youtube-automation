@@ -123,4 +123,4 @@ jobs:
         with:
           name: next-stop-logs-${{ github.run_number }}
           path: logs/
-          retention-days: 7"" 
+          retention-days: 7
