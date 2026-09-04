@@ -204,6 +204,7 @@ def measure_audio_loudness(path: str | Path) -> dict[str, float] | None:
 # teslim ise her platformun native kabul ettigi orandadir (Instagram/TikTok 44.1-48 kHz).
 LIMITER_OVERSAMPLE_HZ = 96000
 DELIVERY_SAMPLE_RATE_HZ = 48000
+MIX_PEAK_LIMIT_DB = -1.0
 NARRATION_TAIL_PAD = 0.4
 NARRATION_MAX_TEMPO = 1.05
 NARRATION_MAX_EXTEND = 3.0
@@ -251,40 +252,87 @@ def master_audio(
     if measure.returncode != 0:
         raise RuntimeError(f"loudnorm ölçüm geçişi başarısız: {measure.stderr.strip()}")
     values = _loudnorm_measurement(measure.stderr)
-    # loudnorm 192 kHz'de true-peak sınırlar; 96 kHz AAC dönüşümü bu malzemede
-    # codec-arası tepe üretiyor. Son örnekleme alanındaki 2 dB güvenlik payı,
-    # teslim decode edildiğinde sözleşmedeki -1 dBTP tavanını korur.
-    delivery_limit = 10.0 ** ((float(target_tp) - 2.0) / 20.0)
-    apply_filter = (
-        f"loudnorm={target}"
-        f":measured_I={values['input_i']:g}"
-        f":measured_TP={values['input_tp']:g}"
-        f":measured_LRA={values['input_lra']:g}"
-        f":measured_thresh={values['input_thresh']:g}"
-        f":offset={values['target_offset']:g}"
-        ":linear=true:print_format=json"
-        f",aresample={LIMITER_OVERSAMPLE_HZ},alimiter=limit={delivery_limit:.6f}:level=false"
-        # 96 kHz YALNIZ limiter'in asiri orneklemesi icindir, teslim bicimi degildir.
-        # Instagram 29.08.2026'da part22'yi tam da bu yuzden yeniden kodladi
-        # ("AAC 128k [44100, 48000] stereo (got 96000Hz)"): platform kabul etmeyince
-        # master'i kendi encoder'iyla eziyor ve R128 garantisi bizim elimizden cikiyor.
-        # Limitten SONRA 48 kHz'e inip teslimi her platformun native kabul ettigi
-        # orana sabitliyoruz; sinirlama hala 96 kHz alaninda yapiliyor.
-        f",aresample={DELIVERY_SAMPLE_RATE_HZ}"
-    )
     metadata_path = output_path.with_suffix(".audio_master.json")
     try:
-        apply = subprocess.run(
-            ["ffmpeg", "-y", "-hide_banner", "-nostats", "-i", str(input_path),
-             "-map", "0:v?", "-map", "0:a:0", "-c:v", "copy",
-             "-af", apply_filter, "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
-             "-movflags", "+faststart", str(output_path)],
-            capture_output=True, text=True, check=True, timeout=600,
-        )
-        apply_report = _loudnorm_json(apply.stderr)
-        normalization_type = str(apply_report.get("normalization_type") or "").strip().lower()
-        if normalization_type not in ("linear", "dynamic"):
-            raise RuntimeError("loudnorm uygulama modu raporlanmadı")
+        limiter_db = float(target_tp)
+        attempts = []
+        for attempt_number in range(1, 4):
+            delivery_limit = 10.0 ** (limiter_db / 20.0)
+            apply_filter = (
+                f"loudnorm={target}"
+                f":measured_I={values['input_i']:g}"
+                f":measured_TP={values['input_tp']:g}"
+                f":measured_LRA={values['input_lra']:g}"
+                f":measured_thresh={values['input_thresh']:g}"
+                f":offset={values['target_offset']:g}"
+                ":linear=true:print_format=json"
+                f",aresample={LIMITER_OVERSAMPLE_HZ},"
+                f"alimiter=limit={delivery_limit:.6f}:level=false"
+                # 96 kHz yalniz limiter'in asiri orneklemesi icindir.
+                f",aresample={DELIVERY_SAMPLE_RATE_HZ}"
+            )
+            # Her deneme degismemis premaster'dan uretilir. Onceki AAC teslimi
+            # girdi yapmak kumulatif kayip ve olcum kaymasi yaratir.
+            apply = subprocess.run(
+                ["ffmpeg", "-y", "-hide_banner", "-nostats", "-i", str(input_path),
+                 "-map", "0:v?", "-map", "0:a:0", "-c:v", "copy",
+                 "-af", apply_filter, "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
+                 "-movflags", "+faststart", str(output_path)],
+                capture_output=True, text=True, check=True, timeout=600,
+            )
+            apply_report = _loudnorm_json(apply.stderr)
+            normalization_type = str(
+                apply_report.get("normalization_type") or ""
+            ).strip().lower()
+            if normalization_type not in ("linear", "dynamic"):
+                raise RuntimeError("loudnorm uygulama modu raporlanmadı")
+            delivered = measure_audio_loudness(output_path)
+            if delivered is None:
+                raise RuntimeError("master teslim true-peak ölçümü başarısız")
+            attempts.append({
+                "attempt": attempt_number,
+                "limit_db": limiter_db,
+                "limit": delivery_limit,
+                "integrated_lufs": delivered["integrated_lufs"],
+                "true_peak_dbtp": delivered["true_peak_dbtp"],
+            })
+            true_peak_ok = delivered["true_peak_dbtp"] <= float(target_tp)
+            loudness_ok = (
+                abs(delivered["integrated_lufs"] - float(target_i)) <= 1.0
+            )
+            if true_peak_ok and loudness_ok:
+                break
+            if not true_peak_ok:
+                overshoot = delivered["true_peak_dbtp"] - float(target_tp)
+                limiter_db -= overshoot
+                logger.warning(
+                    f"⚠️ Master true-peak deneme {attempt_number}/3: "
+                    f"{delivered['true_peak_dbtp']:.1f} dBTP > "
+                    f"{float(target_tp):.1f}; tavan {overshoot:.1f} dB geri çekiliyor"
+                )
+            if not loudness_ok:
+                logger.warning(
+                    f"⚠️ Master LUFS deneme {attempt_number}/3: "
+                    f"{delivered['integrated_lufs']:.1f} LUFS, hedef "
+                    f"{float(target_i):.1f} ± 1.0"
+                )
+        else:
+            last_attempt = attempts[-1]
+            violations = []
+            if last_attempt["true_peak_dbtp"] > float(target_tp):
+                violations.append(
+                    f"true-peak {last_attempt['true_peak_dbtp']:.1f} dBTP > "
+                    f"{float(target_tp):.1f} dBTP"
+                )
+            if abs(last_attempt["integrated_lufs"] - float(target_i)) > 1.0:
+                violations.append(
+                    f"LUFS {last_attempt['integrated_lufs']:.1f}, hedef "
+                    f"{float(target_i):.1f} ± 1.0"
+                )
+            raise RuntimeError(
+                "master teslim sözleşmesi 3 denemede tutulamadı: "
+                + "; ".join(violations)
+            )
         metadata = {
             "target": {
                 "integrated_lufs": float(target_i),
@@ -303,6 +351,7 @@ def master_audio(
                 "oversample_rate_hz": LIMITER_OVERSAMPLE_HZ,
                 "delivery_rate_hz": DELIVERY_SAMPLE_RATE_HZ,
                 "limit": delivery_limit,
+                "attempts": attempts,
             },
         }
         metadata_path.write_text(
@@ -1042,6 +1091,7 @@ def mix_background_music(
     output_path: str | Path = None,
     music_volume: float = 0.18,
     replace_original: bool = False,
+    limit_mix_peak: bool = False,
 ) -> Path:
     """Mix a CONTINUOUS background-music bed into a video.
 
@@ -1063,6 +1113,7 @@ def mix_background_music(
         output_path: Output file (default: _music suffix)
         music_volume: Music volume (bed ≈0.18-0.3; as sole track ≈0.9)
         replace_original: If True, output audio = looped music only.
+        limit_mix_peak: True ise normalize=0 toplamindan sonra tepeyi sinirla.
 
     Returns:
         Path to the mixed video.
@@ -1085,7 +1136,14 @@ def mix_background_music(
             full_filter = f"{bed}[aout]"
         else:
             # Continuous bed UNDER the existing program audio.
-            full_filter = f"{bed}[bg];[0:a][bg]amix=inputs=2:duration=first:dropout_transition=0:normalize=0[aout]"
+            mix_limit = ""
+            if limit_mix_peak:
+                limit = 10.0 ** (MIX_PEAK_LIMIT_DB / 20.0)
+                mix_limit = f",alimiter=limit={limit:.6f}:level=false"
+            full_filter = (
+                f"{bed}[bg];[0:a][bg]amix=inputs=2:duration=first:"
+                f"dropout_transition=0:normalize=0{mix_limit}[aout]"
+            )
 
         cmd = [
             "ffmpeg", "-y",
@@ -1558,6 +1616,10 @@ def mix_voiceover(
         except Exception:
             pass  # sure olculemezse eski davranis (best-effort)
         normalize_suffix = "" if amix_normalize else ":normalize=0"
+        mix_limit = ""
+        if not amix_normalize:
+            limit = 10.0 ** (MIX_PEAK_LIMIT_DB / 20.0)
+            mix_limit = f",alimiter=limit={limit:.6f}:level=false"
 
         if not extend:
             cmd = [
@@ -1567,7 +1629,8 @@ def mix_voiceover(
                 "-filter_complex",
                 f"[0:a]volume={bg_duck}[bg];"
                 f"[1:a]{vo_chain}[vo];"
-                f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2{normalize_suffix}[aout]",
+                f"[bg][vo]amix=inputs=2:duration=first:dropout_transition=2"
+                f"{normalize_suffix}{mix_limit}[aout]",
                 "-map", "0:v",
                 "-map", "[aout]",
                 "-c:v", "copy",
@@ -1590,7 +1653,7 @@ def mix_voiceover(
                 f"[0:a]volume={bg_duck},apad,atrim=0:{timeline:.3f}[bg];"
                 f"[1:a]{vo_chain},apad,atrim=0:{timeline:.3f}[vo];"
                 f"[bg][vo]amix=inputs=2:duration=longest:dropout_transition=2"
-                f"{normalize_suffix}[aout]"
+                f"{normalize_suffix}{mix_limit}[aout]"
             )
             cmd = [
                 "ffmpeg", "-y",

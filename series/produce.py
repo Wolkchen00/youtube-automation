@@ -655,7 +655,8 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                     # anlatım/yatak değişimi +0,42 dB). Legacy yol 0.28 kalır.
                     music_volume = 0.50 if bible.master_lufs is not None else 0.28
                     ffmpeg_tools.mix_background_music(
-                        out, music_path, music_out, music_volume=music_volume
+                        out, music_path, music_out, music_volume=music_volume,
+                        limit_mix_peak=bible.master_lufs is not None,
                     )
                 else:
                     # saf görsel: müzik TEK sürekli ses olsun (gappy native atılır)
