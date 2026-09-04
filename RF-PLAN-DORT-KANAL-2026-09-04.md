@@ -1,10 +1,16 @@
-# RF-PLAN , dort kanalin gunluk otomatik yayini geri gelsin
+# RF-PLAN , dort kanalin gunluk otomatik yayini geri gelsin (r4)
 
 **Tarih:** 2026-09-04 · **Surucu:** Claude (Visionary) · **Inceleyen:** Codex (Integrator)
-**Kapsam:** `Wolkchen00/youtube-automation`, dort kanal: sentinal ihsan, AImagine,
-Galactic Experiment, shad0wedhistory.
-**Not:** Bu plan bugun bu makinede olculen canli kanitlara dayanir. Her olgu
-asagida kosu numarasi, dosya:satir veya API cevabiyla birlikte verilmistir.
+**Revizyon:** r4 , Codex VERDICT: SAME PAGE (tur 4/5). r1'in KOK NEDENI yanlisti (Codex tur-1 yakaladi, duzeltildi).
+r2'de ROCK sirasini degistirirken **pytest rock'ini dusurdum** (Codex tur-2 KILL ile
+yakaladi, r3'te geri kondu). Iki bagimsiz inceleme hatti (Codex + 14 ajanlik dogrulama
+filosu) ayni uc kusuru birbirinden habersiz buldu.
+
+**Ihsan kararlari (2026-09-04, alindi):**
+1. Duzeltmeler canli repoya push EDILECEK. Push oncesi Visionary tam diff'i okur ve
+   proof'u kendi kosar.
+2. Ses duzeltmesi (ROCK A) sirada ONE alinir; Sentinal'in bu geceki kosusunda bir
+   680 kredi (3,40 $) daha yanmasin.
 
 ## CORE FOCUS (tek cumle)
 
@@ -13,242 +19,332 @@ gostermesin ve durus 24 saat icinde gorunur olsun.
 
 ---
 
-## 1. TESHIS , canli kanit zinciri (2026-09-04, ~18:50 UTC olculdu)
+## 1. CANLI DURUM (2026-09-04 19:16 UTC olculdu)
 
-### Olgu 0 , kanallarin gercek durumu (YouTube'un kendi RSS'i, pipeline degil)
+| Kanal | Son yayin (RSS) | Sessizlik | Bu geceki slot |
+|---|---|---|---|
+| shad0wedhistory | 09-03T22:52Z | 0.8 gun | flashpoints 20:30 UTC , **son bolum (25/25)** |
+| AImagine | 09-03T21:45Z (ELLE tetiklenmis) | 0.9 gun | fear-slide 13:20 , bugun pytest'te oldu |
+| sentinal ihsan | 09-02T17:46Z | **2.0 gun** | unnatural-lab 18:30 , **henuz atesellenmedi** |
+| Galactic Experiment | 08-31T21:52Z | **3.9 gun** | event-horizon 16:30 , **19:03'te kostu, YESIL, sifir video** |
 
-| Kanal | Son yayin | Sessizlik |
-|---|---|---|
-| shad0wedhistory | 2026-09-03T22:52Z | 0.8 gun (saglikli) |
-| AImagine | 2026-09-03T21:45Z | 0.9 gun (tek bacagi kirik) |
-| sentinal ihsan | 2026-09-02T17:46Z | **2.0 gun** |
-| Galactic Experiment | 2026-08-31T21:52Z | **3.9 gun** |
+Kosu 33909183769 (bugun 19:03, canli kanit):
 
-### Olgu 1 , Galactic sessizce oldu, uc kosu YESIL dondu
-
-`gh run list`: Event Horizon Daily 09-01T19:29, 09-02T19:27, 09-03T19:22 , ucu de
-`success`. Ayni gunlerde kanala **sifir video** cikti.
-
-Kosu 33796096381'in uretim logu birebir:
-
-    'event-horizon' Part 26: onay bekleyen yok (status=planned).
     🔁 event-horizon: kuyruk 0 < 2 → Gemini part 26-27 yaziyor…
-    ⚠️ Ikmal dogrulamasi gecmedi (1. deneme): ['part 26: seed_id bu kosunun kart havuzunda yok (n15-32hex)']
-    ⚠️ Ikmal dogrulamasi gecmedi (2. deneme): [... 'anlatim 53 kelime , hedef 30-44 disinda']
-    ⚠️ Ikmal dogrulamasi gecmedi (3. deneme): ['part 26: seed_id konu havuzunda yok (999)']
-    ⚠️ Ikmal dogrulamasi gecmedi (4. deneme): ['part 26: seed_id konu havuzunda yok (1000)']
-    ⚠️ Ikmal dogrulamasi gecmedi (5. deneme): [... 'ardisik iki part ayni family ... (ölçek şoku)']
-    ⚠️ Ikmal dogrulamasi gecmedi (6. deneme): ['part 26: seed_id konu havuzunda yok (99)']
-    ❌ event-horizon oto-ikmal basarisiz: Gemini planlari dogrulamadan gecemedi
+    ⚠️ Ikmal dogrulamasi gecmedi (4. deneme): ["part 26: ardisik iki part ayni family
+       degerini kullanamaz (yasak family: 'olcek soku')", ...]
+    ❌ event-horizon oto-ikmal basarisiz: ... ilk bolum 26 icin yasak family: 'olcek soku'
     ✅ 'event-horizon' tamamlandi (part 25/25).
 
-Kosu exit 0 ile bitti.
+Kosu exit 0. **Dorduncu ust uste yesil yalan.**
 
-### Olgu 2 , ikmalin gecememesinin KOKU: konu havuzu bos
+## 2. r1'IN HATASI
 
-`galactic_experience/event-horizon/calibration.json` -> `"extra_topics": []` (0 kayit),
-`generated_at: 2026-08-30`.
+r1: *"konu havuzu bos (`extra_topics: []`)"*. **Yanlis.** `extra_topics` yalnizca Notion
+UZANTISIDIR. Asil havuz `series.json -> auto_replenish.topic_pool` icindedir ve doludur:
 
-`extra_topics` `series/calibrate.py:885` icinde `_bridge_notion` ile Notion'dan doldurulur.
-Notion konu veritabani bugun salt-okunur sorgulandi (`NOTION_DB_GALACTIC_KONU`):
+    event-horizon : 27 konu, kullanilmayan = {14, 24}
+    flashpoints   : 27 konu, kullanilmayan = {12, 16}
 
-    toplam kart: 4 | has_more: False
-    Durum dagilimi:  Durum=Aday  4
+(`series/replenish.py:410-417` `_topic_pool(cfg)` anahtar olarak `id` okur; kullanim
+`plans/partNN.json` icindeki `seed_id`'den olculur.)
 
-`series/calibrate.py:646-648` koprunun **`Onaylandı`** durumundaki kartlari aradigini
-gosterir. Veritabaninin `Durum` secenekleri mevcut ve dogru
-(`Aday, Onaylandi, Reddedildi, Uretildi, Claimed`), sema saglam. **Onayli tek kart yok**,
-bu yuzden kopru sifir dondurdu, `extra_topics` bos kaldi, Gemini secebilecegi gecerli
-bir `seed_id` bulamadi (`series/replenish.py:1047,1059` reddediyor).
+## 3. GERCEK KOK NEDEN , family kilidi
 
-**Bu bir kod hatasi degil, bos girdi. Ama kod bos girdiyi SESSIZ yutuyor.**
+`series/replenish.py:1020-1023`: ardisik iki part ayni `family`'yi kullanamaz.
 
-### Olgu 3 , yesil isigin tam yeri
+    event-horizon: kalan tohum 14, 24 -> ikisi de family 'olcek soku'
+                   part25 (seed_id=13) -> family 'olcek soku'
+                   => ilk bolum icin aday listesi BOS
+    flashpoints  : kalan tohum 12, 16 -> ikisi de family 'efsane vs kayit'
+                   => AYNI TUZAK, bu gece son bolumunu uretip yarin olur
 
-`series/series_runner.py:604-607`:
+Gemini'ye bos liste sunuluyor; uydurma `seed_id` yaziyor (`999`, `1`, prompt yer
+tutucusu `n15-32hex`, hatta uydurma `e26-...` formati), dogrulayici reddediyor,
+6 deneme bitiyor. **Kisit matematiksel: Gemini ne kadar iyi olursa olsun cozulmez.**
 
-    def run_next(slug, dry_run=False, publish=True, force=False) -> bool:
-        meta = SeriesMeta.load(slug)
-        if not meta:
-            return False
-        if meta.status != "active" or meta.next_part > meta.total_parts:
-            logger.info(f"✅ '{slug}' tamamlandi (part {meta.total_parts}/{meta.total_parts}).")
-            return True
+Daha derin kok: ikmal havuzu YEREL (ikili) kisitla tuketiyor, KURESEL fizibilite
+gozetmiyor. Cesitli family'ler erken harcaniyor, dibe ayni family'den tohum birikiyor.
 
-Hicbir sey uretmeyen ve yayinlamayan kosu `True` doner, workflow adimi yesil olur,
-nobetci sagliklı sanir. Ayni dosyadaki `_continue_after_terminal` docstring'i tam
-tersini soyluyor: *"Kuyrukta bolum kaldiysa devam et; yoksa terminal hatayi basari
-diye sunma."* Niyet var, bu yol onu ihlal ediyor.
+## 4. YESIL YALAN (uc katman)
 
-### Olgu 4 , ayni ucurum shad0wedhistory'yi de bekliyor
+**(a)** `series/series_runner.py:605-607` `return True`; `main()` (:957-980)
+`ok is not True` olmadigi icin exit 0. **Ayni dosyanin :976-978 yorumu "Video CIKMAYAN
+her kosu KIRMIZI gorunsun" diyor** , bu dal kendi niyetini ihlal ediyor.
 
-`shadowedhistory/flashpoints/series.json`: `status=active`, `next_part=25`,
-`total_parts=25`, `calibration.json -> extra_topics: 0`.
-Yani **bir sonraki bolum sonuncusu**; ardindan flashpoints de event-horizon'un
-dustugu yere duser. Kanal bugun saglikli gorunuyor, 1-2 gun sonra olur.
+**(b)** `Oto-ikmal` adiminda `shell: bash` YOK -> pipefail yok -> `replenish.py:1734-1736`
+`sys.exit(1)`'i `tee`'nin 0'i yutuyor. Kardes `Produce` adiminda VAR (yorumu:
+*"tee'nin 0'i python'un exit kodunu maskeliyordu (ROCK 3)"*). Etkilenen bes workflow:
+`event-horizon.yml`, `flashpoints.yml`, `unnatural-lab.yml`, `from-scratch.yml`, `next-stop.yml`.
 
-`series/calibrate.py` icinde `_bridge_notion` govdesinin ilk satiri:
+**(c)** `last_run.json` sifir video uretilen kosuda `"outcome":"success"` yaziyor.
+Panoyu ve nobetciyi besleyen dosya bu.
 
-    if slug != "event-horizon" or not enabled:
-        return retained, notes
+## 5. SENTINAL'IN SES KAPISI
 
-Kopru **yalnizca event-horizon icin** calisiyor. Diger uc serinin havuzu hicbir zaman
-dolmuyor, sadece tukeniyor.
+Anlatim (TTS) yolu commit 2a83147 ile ILK KEZ calisir hale geldi; ep27 sessizce
+ANLATIMSIZ yayinlanmisti, ep28 ilk kez uc katmanli. Uc katman `amix normalize=0`
+ile TAVANSIZ toplaniyor. `core/ffmpeg_tools.py:257` sabit 2 dB teslim marji AAC 128k'nin
+icerige bagli tepe asimindan (0.4-2.2+ dB) kucuk. Olculen: `I=-14.3 (gecer), TP=+0.1 (kalir)`.
 
-### Olgu 5 , AImagine tek bacakta ve o bacak kirik
-
-`.github/workflows/from-scratch.yml` ve `next-stop.yml`: `schedule` bloklari
-Ihsan kararlariyla (02.09 ve 03.09) yorum satirina alinmis, seriler `paused`.
-Geriye aimagine kanalinin **tek gunluk seridi** kaldi: Fear Slide Daily.
-
-Kosu 33897545943 (2026-09-04T16:52) birebir:
-
-    ##[group]Run python -X utf8 AImagine-Fear/build.py --check
-    Built and validated 9 routes.
-    ##[group]Run python -X utf8 -m pytest AImagine-Fear/tests -q
-    /opt/hostedtoolcache/Python/3.11.16/x64/bin/python: No module named pytest
-    ##[error]Process completed with exit code 1.
-
-`requirements.txt` icinde pytest YOK; `fear-slide.yml:80` pytest cagiriyor.
-Kardes is akisi `fear-slide-hazir.yml` pytest cagirmadigi icin basarili.
-Uretim adimina hic gelinmedi, kredi harcanmadi, video cikmadi.
-
-### Olgu 6 , Sentinal'in tikanikligi: master ses kirpiyor
-
-`sentinal_ihsan/unnatural-lab/series.json` part 28:
-`{"status": "qc_retry", "retry_count": 1, "last_reason_code": "AUDIO_MASTER",
-"hold_reason": "final ses dogrulamasi basarisiz"}`
-
-Kosu 33806993734 logu birebir:
-
-    🎚️ Ses master dogrulamasi ep28_narrated_music_mastered.mp4: I=-14.3 LUFS, TP=0.1 dBTP
-    ❌ Ses master teslimati QC hold: final ses dogrulamasi basarisiz
-
-`series/produce.py:_verify_audio_master` kapisi:
-`abs(loudness - target_lufs) <= 1.0 and true_peak <= -1.0`.
-LUFS gecti (0.3 sapma), **true-peak +0.1 dBTP ile kaldi** (tavan -1.0).
-Yani teslim gercekten kirpiyor, kapi hakli.
-
-`core/ffmpeg_tools.py:master_audio` zinciri: iki gecisli loudnorm ->
-`aresample=96000, alimiter=limit=<target_tp - 2 dB>` -> `aresample=48000` -> AAC.
-Limiter -3 dBTP'ye sinirliyor ama teslim +0.1 olcusuyor: **3.1 dB tasma**.
-2 dB guvenlik payi bu malzemede yetmedi. ep27 ayni zincirden gecip yayinlandi,
-yani tasma icerige bagli, sistematik degil.
-
-### Olgu 7 , panonun korlugu (BU CEVRIMDE ZATEN DUZELTILDI, kayit icin)
-
-Panonun okudugu yerel klon origin/main'in 51 commit gerisindeydi; 30 dakikada bir
-kosan senkron gorevi her seferinde `fast-forward basarisiz: your local changes would
-be overwritten` veriyordu. Pano bu yuzden Galactic'i YESIL gosteriyordu.
-Yerel degisiklikler olculdu (9 dosyanin 7'si origin ile birebir ayni, `AImagine-Fear`
-farklarinin 15/16'si sadece CRLF, `yayin.jsonl` yerel icerigi origin'in tam alt kumesi),
-tamami yedeklendi, ff-merge yapildi, pano yeniden uretildi.
-Pano artik Galactic'i KIRMIZI gosteriyor. Bu plana ROCK olarak girmez.
+**Part 28 KURTARILAMAZ**: `credits_ledger.json` `episode_spend["unnatural-lab:28"]=680.0`,
+asgari tamamlanma 400 > kalan 320; cekimler `output/` gitignore'lu, diskte yok.
+Birak `budget_exhausted` olsun. **Hedef: part 29 kapiyi GECSIN.**
 
 ---
 
-## 2. ROCK'LAR (bagimlilik sirasinda)
+## 6. ROCK'LAR
 
-### ROCK 1 , Fear Slide test kapisi acilsin (AImagine bugun geri gelsin)
+**UYGULAMA SIRASI (kritik yol, Codex tur-3):**
 
-**Neden:** aimagine kanalinin TEK gunluk seridi eksik bir gelistirme bagimliligi
-yuzunden uretime hic baslamadan oluyor.
+    A  ->  C  ->  D  ->  E  ->  B
 
-**Ne yapilacak:** `.github/workflows/fear-slide.yml` "Install dependencies" adimina
-pytest kurulumu eklenecek. Test kapisi KALIYOR (kredi harcamadan once kosuyor,
-degerli). `requirements.txt` calisma zamani bagimlilik listesidir, pytest oraya
-EKLENMEZ; is akisinda ayrica kurulur.
+- **A once** (Ihsan karari): unnatural-lab'in 18:30 slotu HENUZ atesellenmedi;
+  duzeltmesiz kosarsa bir 680 kredi daha yanar.
+- **C ve D, E3'ten (pipefail) ONCE**: aksi halde bu gece ikmal kirmiziya doner ve
+  flashpoints'in HALA GECERLI part 25'i atlanir.
+- **B en sona**: Fear Slide'in bugun kalan yayin slotu YOK (13:20 UTC gecti), bu
+  yuzden kritik yolda yer kaplamamali. Yarin 13:20'den once yetismesi yeterli.
 
-**Done looks like:** `fear-slide.yml` pytest kuruyor; YAML gecerli; test kapisi
-yerelde gecıyor.
 
-**PROOF:** `python -X utf8 AImagine-Fear/build.py --check && python -X utf8 -m pytest AImagine-Fear/tests -q`
-(beklenen: `Built and validated 9 routes.` + `28 passed`)
+### ROCK A , master ses tavani gercekten tutsun (SENTINAL, bu gece)
 
-### ROCK 2 , Yesil yalani bitsin (hicbir sey yayinlamayan kosu YESIL olmasin)
+**Neden:** Duzeltme olmazsa bu geceki kosuda part 29 ayni kapida oturur, 3,40 $ daha yanar.
 
-**Neden:** Olgu 1 + Olgu 3. Galactic dort gun oldu ve her gun "success" raporlandi.
-Bu tek basina en pahali kusur: teshis edilemeyen olum.
+**A1 , miks tarafi (kok).** IKI ayri tavansiz miks asamasi var, **ikisi de** kapatilacak:
+- `series/produce.py:600-604` -> `mix_voiceover` (`amix_normalize=bible.master_lufs is None`)
+- `core/ffmpeg_tools.py:1088` -> arka plan muzigi eklenirken IKINCI `normalize=0` amix
+  (Codex tur-2 bulgusu: r2 yalniz birincisini gormustu)
 
-**Ne yapilacak:** `series/series_runner.py` icindeki erken donus, uc durumu
-BIRBIRINDEN AYIRACAK:
+**Kritik kisit:** Tavan **opt-in** olacak, `amix_normalize=False` / `master_lufs`
+yapilandirilmis oldugunda gecilecek. Kosulsuz limiter ANLATIMLI HER SERIYI degistirir.
+`mix_background_music` varsayilan ciktisi DEGISMEYECEK; ayri opt-in parametre eklenecek.
 
-1. `status != "active"` (Ihsan bilerek `paused`/`completed` yapmis) -> bu bir
-   BASARI degil ama HATA da degil. "yapacak is yok" olarak raporlanir, kosu
-   yesil kalabilir ama log ve `last_run.json` bunu **acikca** yazar.
-2. `status == "active"` ve `next_part > total_parts` (seri tukendi, ikmal
-   yapilamadi) -> **BASARISIZLIK**. Kosu kirmizi olmali, Telegram alarmi gitmeli.
-   Bu tam olarak Galactic'in durumu.
-3. Normal uretim yolu , degismez.
+**Izolasyon sarti (Codex tur-3, dogrulandi):** Bu degisiklik baska HICBIR canli seriyi
+etkilemez, cunku `master_lufs` yalniz `unnatural-lab/bible.json`'da tanimli. Ancak bu
+**yalnizca su iki kosul saglanirsa** dogru kalir:
+1. yeni `mix_background_music` secenegi **varsayilan olarak KAPALI** olacak;
+2. `produce.py` bu secenegi **yalnizca `master_lufs is not None` iken** gecirecek.
+Bu iki kosul testle kanitlanacak.
 
-**Kritik kisit:** `paused` seriler (from-scratch, next-stop ve 10+ pasif seri)
-kirmizi YANMAMALI. Ihsan onlari bilerek durdurdu; hepsini kirmiziya cevirmek
-alarm gurultusu yaratir ve gercek alarmi bogar. Ayrim `status` uzerinden yapilir.
+**A2 , teslim tarafi (kapanis).** `core/ffmpeg_tools.py:257` sabit marj yerine olcum
+tabanli kendini duzelten dongu: master'la, `measure_audio_loudness` ile olc,
+`true_peak > -1.0` ise asimi geri besleyip **DEGISMEMIS premaster'dan YENIDEN** master'la,
+en fazla 3 tur, sonra fail-closed. **Her deneme premaster'dan yeniden uretilecek**;
+AAC ciktisini geri beslemek kumulatif kayipli kodlama ve olcum kaymasi yaratir
+(Codex tur-2). Tamami yerel ffmpeg, **0 kredi**.
 
-**Done looks like:** aktif ama tukenmis seri icin `run_next` basarisizlik
-raporlar; pasif seri icin sessiz "yapacak is yok" raporlar; mevcut testler yesil.
+**Kritik kisitlar:**
+- Kapi (`series/produce.py:745 _verify_audio_master`) GEVSETILMEYECEK.
+- Sozlesme sabit: `|I - (-14)| <= 1.0` VE `TP <= -1.0 dBTP`. Limiter'i dusurup
+  LUFS'u kapinin disina itmek KABUL EDILMEZ (Codex tur-1).
+- `master_lufs` yalniz `sentinal_ihsan/unnatural-lab/bible.json`'da; patlama yaricapi
+  bu seriyle sinirli olmali ve bu KANITLANMALI.
+- Part 28 kurtarilmayacak.
 
-**PROOF:** `python -X utf8 -m pytest tests/ -q -k "runner or exhaust or replenish or hold"`
-artı yeni test dosyasi `tests/test_tukenmis_seri_yesil_degil.py` (bu rock'ta
-yazilacak): aktif+tukenmis -> basarisiz, paused -> basarisiz DEGIL.
+**PROOF:** yeni `tests/test_master_true_peak.py`, **duzeltmeden ONCE KIRMIZI olmali.**
+Repoda zaten sinus tabanli bir test var ve o gecerken gercek hata hayatta kaldi
+(Codex tur-1), o yuzden fikstur ffmpeg ile HF yogun / ornekler-arasi tepe ureten uc
+katmanli malzeme kuracak. Test hem `TP <= -1.0` hem `|I+14| <= 1.0` iddia edecek.
+Ayrica ONCEDEN GECEN bir Unnatural girdisi icin regresyon fikstru eklenecek.
+Komut: `python -X utf8 -m pytest tests/test_master_true_peak.py -q`
+artı `python -X utf8 -m pytest tests/ -q -k "audio or ses or master or rock1 or byte"`
 
-### ROCK 3 , Pist uzunlugu alarmi (ucuruma DUSMEDEN once haber ver)
+### ROCK B , Fear Slide test kapisi acilsin (AIMAGINE)
 
-**Neden:** Olgu 4. flashpoints su an 25/25; hicbir sey onu ucurumdan once
-bildirmiyor. Galactic'te de bildirmedi.
+**Neden:** Kanalin TEK otomatik hatti her kosuda ~1 dakikada oluyor. r2'de bu rock
+yanlislikla dusmustu (Codex tur-2 KILL).
 
-**Ne yapilacak:** Aktif her seri icin "pist" olculecek:
-`kalan_bolum = total_parts - next_part + 1` ve `havuzdaki_kullanilabilir_konu`
-(calibration.json `extra_topics` icinden henuz kullanilmamis olanlar).
-Pist esigin altina duserse (varsayilan 3 gun) UYARI uretilir ve Telegram'a gider.
-Pist 0 ise bu ROCK 2'nin basarisizlik yoluyla ayni sinifta raporlanir.
+**Ne yapilacak:** `.github/workflows/fear-slide.yml` "Install dependencies" adimi:
+`pip install -r requirements.txt` -> `pip install -r requirements.txt pytest`.
+**ROCK B kapsaminda baska hicbir satira dokunma.** (ROCK E4 ayni dosyanin sonuc-yazma
+adimini zaten degistirir; bu kisit yalnizca ROCK B icindir , Codex tur-4.)
 
-**Done looks like:** tek bir fonksiyon/CLI aktif serilerin pistini raporlar;
-flashpoints bugun "pist 1 bolum, havuz 0" diye UYARI verir; unnatural-lab
-"pist 4 bolum, havuz 0" verir.
+**Neden `requirements.txt` DEGIL:** o dosyayi depodaki **18** workflow'un HEPSI kuruyor;
+dort kanalin butun canli uretim hatlarinin calisma-zamani manifestosu. Sadece-test
+bagimliligi oraya konmaz. `continue-on-error: true` de KOYULMAYACAK , test kapisi
+kredi korumasidir, kaldirilmaz.
 
-**PROOF:** yeni `tests/test_pist_alarmi.py` + gercek repo verisiyle elle kosu:
-komut flashpoints ve unnatural-lab icin uyari basar.
+**PROOF:** (a) statik: `python -c` ile `fear-slide.yml` YAML'i parse edilip, pytest'i
+CAGIRAN adimdan ONCE gelen bir adimin pytest'i KURDUGU dogrulanacak (yerelde pytest
+zaten kurulu oldugu icin sadece pytest kosmak ispat DEGIL , Codex tur-1);
+(b) `python -X utf8 AImagine-Fear/build.py --check && python -X utf8 -m pytest AImagine-Fear/tests -q`
 
-### ROCK 4 , Master ses true-peak tavani gercekten tutsun (Sentinal geri gelsin)
+### ROCK C , flashpoints bu gece olmesin + Galactic dirilsin (VERI + TEST)
 
-**Neden:** Olgu 6. Kapi hakli, teslim kirpiyor; part 28 bu yuzden asili.
+**Neden:** Bolum 3. Iki seri de family kilidinde. flashpoints'in slotu bu gece.
 
-**Ne yapilacak:** `core/ffmpeg_tools.py:master_audio` teslim zincirinde true-peak
-tavani AAC kodlamasindan SONRA da tutmali. Kok neden arastirilacak:
-limiter'dan sonraki `aresample=48000` yeniden ornekleme tasmasi mi, AAC codec
-tasmasi mi, yoksa guvenlik payi mi yetersiz. Cozum olcumle secilecek, tahminle degil.
+**Ne yapilacak:** Iki `series.json`'da `auto_replenish.topic_pool`'a **en az ucer**
+yeni konu. Her girdi TAM olarak: `{"id": <JSON integer>, "topic": <bos olmayan string>,
+"family": <o serinin auto_replenish.families listesinden>}`.
 
-**Kritik kisit:** Ses hedefi degistirilmeyecek (I=-14 LUFS, TP<=-1.0 dBTP sozlesme).
-Kapi (`_verify_audio_master`) GEVSETILMEYECEK; kapiyi gevsetmek kirpan videoyu
-yayinlamak demektir. Duzeltme uretim tarafinda olacak.
+Kisitlar (hepsi Codex tur-2'den, dogrulandi):
+- `id` JSON integer olacak (`_topic_pool` integer olmayani SESSIZCE atlar, ayni id'yi
+  SESSIZCE ezer), hem havuzda hem plan gecmisinde kullanilmamis olacak.
+- `family` kanonik listede olacak. `validate_replenish_config` bunu KONTROL ETMIYOR;
+  kanonik olmayan family `_unused_topics`'ten gecer ama `replenish.py:1017-1019` veya
+  `1063-1065` her uretilen plani reddeder. **Bu yuzden bu rock havuz girdileri icin
+  acik bir sema dogrulayicisi EKLEYECEK** (id non-boolean integer ve havuz icinde
+  benzersiz, topic bos degil, family kanonik).
+  **YERI (Codex tur-3, dogrulandi):** `validate_replenish_config()`,
+  `replenish.py:125`; bu fonksiyona `1610-1613`'te ulasiliyor ve Gemini `1670`'te
+  cagriliyor, yani dogrulayici kredi harcanmadan ONCE koser.
+  **HATA DAVRANISI:** bozuk girdi -> `replenish()` `False` doner, acik canli cagride
+  exit 1 olur, **hicbir mutasyon yapilmaz ve SIFIR `_gen_json` cagrisi olur.**
+  Not: yeni eklenen id plan gecmisinde de bulunmamalidir, yoksa `_unused_topics()`
+  onu eler. Havuzda pozitiflik kurali YOKTUR.
+- Yeni konularin family'leri hem yasak family'den hem BIRBIRINDEN farkli olacak
+  (yasak: event-horizon 'olcek soku', flashpoints 'efsane vs kayit').
+- Konular Ingilizce, birbirinden farkli, dogrulanabilir olgu.
+- **flashpoints konulari somut yil/donem icerecek** , `replenish.py:1264-1289`
+  title-card zaman-capasi kapisi bunu ariyor (Codex tur-2).
+- `total_parts` ve `status` bu rock'ta DEGISTIRILMEYECEK.
 
-**Done looks like:** ayni girdi malzemesinden uretilen master `TP <= -1.0 dBTP`
-olcusuyor ve `_verify_audio_master` geciyor.
+**Mevcut testi kirmayacak:** `tests/test_doctrine_gate.py:448-460` iki havuzu da tam
+27 girdiye SABITLIYOR (`pool_size` alani). Bu beklenti guncellenecek; tercihen kirilgan
+sayim yerine sema + asgari-boyut iddiasina cevrilecek.
 
-**PROOF:** yeni `tests/test_master_true_peak.py`: ffmpeg ile sentetik yuksek-tepe
-bir girdi uretir, `master_audio` cagirir, `measure_audio_loudness` ile olcer,
-`true_peak <= -1.0` dogrular. Ek olarak mevcut ses testleri yesil kalir.
+**PROOF:** yeni `tests/test_havuz_fizibilite.py`. Kapsam secimi `status == "active"`
+DEGIL (event-horizon `completed`, unnatural-lab'in havuzu YOK , Codex tur-2):
+**`auto_replenish.enabled` VE integer `topic_pool` yapilandirilmis** seriler secilecek,
+event-horizon ve flashpoints ACIKCA kapsanacak. Test sunlari iddia edecek: id'ler
+benzersiz ve integer, family'ler kanonik, yasak family disinda en az bir aday var,
+ve etkin batch icin gecerli bir TAM SIRALAMA mevcut (yalniz "bir alternatif var"
+yeterli degil , Codex tur-2).
+
+**BLOCKING kisit (Codex tur-3):** Sema dogrulamasi DOGRUDAN cagrilarak veya yalniz
+`_validate_batch:959`'a baglanarak test EDILEMEZ , orada krediler zaten harcanmis olur.
+Test **`replenish()` UZERINDEN** kosacak: bozuk yapilandirma verilecek, `_gen_json`
+mock'lanacak, ve su uc sey iddia edilecek: donus `False`, **sifir Gemini cagrisi**,
+**sifir durum mutasyonu**.
+Komut: `python -X utf8 -m pytest tests/test_havuz_fizibilite.py tests/test_doctrine_gate.py -q`
+
+### ROCK D , family kilidi bir daha kanal oldurmesin (KOD)
+
+**Neden:** ROCK C veriyi tazeler ama kural durur; havuz her seride er ya da gec ayni
+sekilde dibe vurur.
+
+**Ne yapilacak:** TEK bir paylasilan "ilk family'yi gevset" karari hesaplanacak ve
+**ALTI noktaya birden tutarli uygulanacak** (Codex tur-2: r2 yalniz 900-910'u
+degistiriyordu, plan yine 1020-1023'te reddedilirdi. Codex tur-3: iki nokta daha
+eksikti):
+- `replenish.py:793-797` , **prompt CUMLESI** (Gemini'ye hala "ardisik bolumler asla
+  ayni family'yi paylasamaz" diyor; gevseme aktifken bu cumle de kosullanacak) **[tur-3]**
+- `replenish.py:799-804` , prompt kurallari
+- `replenish.py:824-828` , ilk tohum havuzu kisiti
+- `replenish.py:900-910` , aday filtresi
+- `replenish.py:1020-1023` , dogrulayici. **Uygulama (Codex tur-3, dogrulandi):**
+  yalnizca `i == 0` gecmis karsilastirmasindan muaf tutulacak, sonra `previous_family`
+  NORMAL sekilde guncellenecek , boylece batch icindeki sonraki tum komsuluklar
+  aynen zorunlu kalir.
+- `replenish.py:1588-1591` , terminal tani mesaji; gevseme sonrasi family'yi hala
+  "yasak" diye etiketlemesin, ayni paylasilan karara kosullanacak **[tur-3]**
+
+Gevseme SADECE aday listesi baska turlu bos kaliyorsa devreye girer. Havuzda baska
+family'den tohum varsa davranis AYNEN korunur.
+Gevseme MEVCUT uyari/alarm yolu uzerinden gorunur olacak (yeni CLI kurulmayacak ,
+Codex tur-1 KILL); kalici alani ve outbox olayi acikca tanimlanip test edilecek.
+
+**PROOF:** yeni `tests/test_family_kilidi_cikisi.py`. Prompt icerigini kontrol etmek
+veya dogrulamayi mock'lamak YETERLI DEGIL (Codex tur-2). Test sunu iddia edecek:
+(a) `_validate_batch` kacinilmaz ILK tekrari KABUL eder;
+(b) batch icindeki IKINCI ardisik tekrari HALA REDDEDER;
+(c) alternatif family varken yasak family SECILMEZ;
+(d) gevseme kalici alana yazilir ve outbox olayi uretilir;
+(e) **uretilen TAM prompt metni yalnizca ILK tekrara izin verir** , 793-797 cumlesi
+    gevseme aktifken celiskili kalmamalidir (Codex tur-3).
+artı mevcut `tests/test_rock2_replenish_family.py` yesil kalir.
+
+### ROCK E , yesil yalan bitsin (KOD + WORKFLOW)
+
+**E1 , `--series` ayristiricisi (PARA HATASI, Codex tur-2).**
+`series_runner.py:963` `if "--series" in argv:` ad-hoc. Degeri eksik/bos olan cagri
+`run_all` yoluna dusuyor ve **alakasiz, parasi odenmis bir bolum uretebiliyor.**
+`argparse`'a cevrilecek; eksik/bos slug REDDEDILECEK.
+
+**E2 , `strict_empty` opt-in.** `run_next(..., strict_empty: bool = False)`.
+`main()` yalnizca gecerli bir `--series <slug>` ile cagrildiginda `True` gecer.
+Oncelik acikca tanimli (Codex tur-2, `completed` iki kurali birden sagliyordu):
+- `status` `paused` / `draft` -> **BASARI** (Ihsan bilerek durdurdu, kirmizi yanmaz)
+- acikca zamanlanmis, `auto_replenish.enabled`, kuyrugu tukenmis seri -> **BASARISIZLIK**
+  + alarm (event-horizon'un tam durumu)
+- `awaiting_approval` / `needs_human` / `budget_exhausted` / `qc_retry` -> **ESKISI GIBI**
+- **[Codex tur-3, eksik kalan durumlar]** `planned` / `produced` -> kurtarma yolu
+  AYNEN korunur (uretime devam edilir, basarisizlik sayilmaz).
+  `auto_replenish` KAPALI, sonlu bir serinin `completed` olmasi -> **BASARI**
+  (dogal bitis, Ihsan'in tasarimi).
+  `next_part`'ta beklenmedik sekilde terminal bir part duruyorsa
+  (`published` / `rejected` / `skipped`) -> **fail-closed**, kirmizi.
+- `--dry-run` sirasinda strict modda **dis alarm GONDERILMEYECEK** (Codex tur-2)
+
+Varsayilan davranis DEGISMEZ; 12 workflow'un cagirdigi paylasilan sozlesme korunur.
+
+**E3 , pipefail.** Bes workflow'un `Oto-ikmal` adimina `shell: bash`.
+Cron saatlerine ve cron yorumlarina DOKUNULMAYACAK.
+
+**E4 , `last_run.json` dogruyu yazsin.** Sonuc dosyasini olusturma isi YAML shell'inden
+alinip **test edilebilir bir repo betigine** tasinacak (`scripts/`), ve **ALTI workflow**
+o betigi cagiracak (Codex tur-2: Python testi gecerken YAML yazici bozuk kalabilirdi):
+`event-horizon.yml`, `flashpoints.yml`, `unnatural-lab.yml`, `from-scratch.yml`,
+`next-stop.yml`, **`fear-slide.yml`**.
+
+**BLOCKING (Codex tur-3):** `fear-slide.yml` bugun `last_run.json` yazan ALTINCI
+kaynaktir ve **yalniz Instagram yayinlandiginda bile basariyla cikip yesil yaziyor.**
+Fear Slide icin kanit alani `yayin.jsonl` -> `results.youtube` olacak.
+
+Betik `outcome=success` yazmadan once **YouTube yayininin dogrulandigini** arayacak;
+aksi halde `no_video` yazacak (Codex tur-2 #24/#31'in dar kabulu).
+**Kanit BU KOSUYA bagli olacak** , eski/bayat YouTube kaydi basari sayilmayacak (tur-3).
+
+**SIRA KISITI (Codex tur-2):** ROCK C ve ROCK D'nin dogrulayici tarafi, ROCK E3'ten
+(pipefail) ONCE gelmelidir. Aksi halde bu gece ikmal kirmiziya doner ve flashpoints'in
+HALA GECERLI part 25'i atlanir.
+
+**PROOF:** yeni `tests/test_tukenmis_seri_yesil_degil.py`, **dosya adiyla acik cagri**
+(`-k` filtresine guvenilmeyecek , Codex tur-1). CLI cikis kodunu, alarm cagrisini
+(ve dry-run'da alarm GONDERILMEDIGINI), yazilan `last_run.json` icerigini,
+ve argparse'in bos `--series` degerini reddettigini dogrulayacak.
+
+**E4 icin ek BLOCKING ispat (Codex tur-3):**
+(a) **statik baglanti testi:** ALTI workflow'un da sonuc betigini cagirdigi YAML'dan
+    dogrulanacak (bir workflow atlanirsa test kirmizi olsun);
+(b) **bayat kanit negatif testi:** onceki bir kosudan kalmis YouTube kaydiyla
+    `outcome=success` YAZILMADIGI dogrulanacak.
+Komut: `python -X utf8 -m pytest tests/test_tukenmis_seri_yesil_degil.py -q`
+artı tam paket `python -X utf8 -m pytest tests/ -q`
 
 ---
 
-## 3. NON-GOALS (bu cevrimde YAPILMAYACAK)
+## 7. NON-GOALS (bu cevrimde YAPILMAYACAK) ve REDDEDILEN BULGULAR
 
-- Notion'daki 4 konu kartini onaylamak. Bu **icerik karari** ve kredi harcatir;
-  Ihsan'a soruldu, kod tarafi degil.
-- `_bridge_notion`'i diger uc seriye acmak. Her kanalin ayri konu veritabani
-  olup olmadigi belirsiz (`.env` icinde yalniz `NOTION_DB_GALACTIC_KONU` var).
-  Once Ihsan'a sorulacak, sonra ayri cevrimde yapilacak. ISSUES'a yazildi.
-- `from-scratch` / `next-stop` serilerini yeniden acmak. Ihsan bilerek durdurdu.
-- Pano (`Proje_Dashboard`) kodu. Ayri repo, ayri is; bu cevrimde yalnizca
-  senkronu kurtarildi.
-- Kanallara elle video yayinlamak.
-- Kie/Gemini kota ve butce mimarisi (`budget_exhausted` part 25-26). ISSUES'a yazildi.
+- **24 saatlik yayin tazelik kapisi.** Codex bunu ertelenemez sayiyor; Visionary
+  KATILMIYOR ve gerekcesini yaziyor: bu kapi `Akilli_Watchdog` AYRI REPOSUNA uzaniyor
+  (`work_evidence_checker.py`, `config.py`), koordineli bir teslim gerektirir ve bu
+  cevrimin dort kanali BUGUN yayina dondurme isini geciktirir. ISSUES'a, ayri cevrim.
+- **Tam "YouTube zorunlu platform" semantigi** (`yayinla.py` tek platform basarisinda
+  0 donuyor; event-horizon/flashpoints `required_platforms` bos). ROCK E4 bunun DAR
+  halini aliyor (sonuc dosyasi YouTube dogrulanmadan `success` yazmaz). Genis hali
+  (uretim hattinin kendisinin kirmizi donmesi) ISSUES'a.
+- **Surdurulebilir konu tedariki** (Notion koprusu / havuz besleme). ROCK C bes
+  bolumluk pist acar; kalici tedarik Ihsan'in ICERIK karari. ISSUES'a.
+- **`_bridge_notion`'i diger uc seriye acmak.** ISSUES'a.
+- **Notion'daki 4 "Aday" konu kartini onaylamak.** Icerik karari.
+- **`from-scratch` / `next-stop` serilerini geri acmak.** Ihsan bilerek durdurdu.
+- **`Akilli_Watchdog` config'i** (`aimagine/from-scratch/last_run.json` yerine
+  `AImagine-Fear/last_run.json` izlenmeli). AYRI REPO. ISSUES'a.
+- **Pano (`Proje_Dashboard/run.py:727`) tazelik/renk duzeltmesi.** AYRI REPO,
+  Visionary kendi yapacak.
+- **Part 28'i kurtarmak.**
+- **Bos `GEMINI_API_KEY_QC_UNNATURAL_LAB` secret'i.** ISSUES'a.
 
-## 4. KISITLAR
+## 8. KISITLAR
 
-- Bu depo CANLI uretim yapar ve gercek para harcar. Hicbir rock uretim tetiklemez.
-- Calisma dizini bir git worktree'dir; ana agac baska oturumlarca kullaniliyor olabilir.
+- Bu depo CANLI uretim yapar ve gercek para harcar.
+  **Hicbir rock uretim tetiklemez, `gh workflow run` cagirmaz, commit/push yapmaz.**
+  Push'u Visionary yapar: tam diff okunur, proof kendi kosulur, sonra push.
+- Calisma dizini izole bir git worktree'dir (ana agac baska oturumlarca kullaniliyor).
 - Mevcut testler yesil kalmali: `python -X utf8 -m pytest tests/ -q`.
-- `.github/workflows/` icindeki cron saatleri DEGISTIRILMEYECEK.
+- `.github/workflows/` icindeki **cron saatleri ve cron yorumlari DEGISTIRILMEYECEK**.
 - Turkce log/yorum uslubu korunacak; dosyalarda em-dash kullanilmayacak.
+- **Her rock'in testi, duzeltmeden ONCE kirmizi olacak sekilde yazilacak.**
+  "Gecerken hatayi kaciran test" bu cevrimde uc kez yakalandi; bu kural pazarlik disi.
