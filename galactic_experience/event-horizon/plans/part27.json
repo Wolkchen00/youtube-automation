@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 27,
+    "title": "The Universe's SLOWEST Particle: Photon's Journey"
+  },
+  "synopsis": "A photon can take tens of thousands of years to escape the Sun's core, then just 8 minutes to reach Earth.",
+  "narration": "Deep within the Sun's core, a single photon can take tens of thousands of years to finally escape. Yet, once it breaks free, that same photon reaches Earth in a mere eight minutes. A staggering cosmic journey of contrasts.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Extreme close-up view deep inside the Sun's chaotic, superheated core, a single, struggling photon bouncing erratically through dense plasma, a blinding dance.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "The photon finally emerging from the Sun's turbulent surface, instantly accelerating into the vacuum of space, a bright streak against the solar corona, camera tracking its rapid departure.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A clear, fast-moving visual of the photon nearing Earth, its light brilliantly illuminating the planet's atmosphere, then quickly reaching its destination, ending with a subtle, bright shimmer.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 14,
+  "music": "An ethereal, slow-building ambient track with subtle, shimmering textures, gradually gaining momentum and complexity. A distinct, accelerating pulse emerges as the photon escapes, leading to a swift, bright flourish.",
+  "hook_shot": 1,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 28,
+    "title": "KELT-9b: Hotter Than MOST Stars"
+  },
+  "synopsis": "Exoplanet KELT-9b, with a dayside temperature reaching 4,600 Kelvin, is hotter than many stars.",
+  "narration": "The exoplanet KELT-9b orbits so close to its star that its dayside atmosphere reaches a blistering 4,600 Kelvin. This infernal world is hotter than many actual stars, making it a true hellish giant in space.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A dynamic, close-orbit view of KELT-9b, its tidally locked dayside glowing intensely, molten and turbulent, casting a searing light on its close-orbiting parent star.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "An immersive surface view of KELT-9b's dayside, where vaporized rock forms shimmering, superheated clouds, and incandescent, glowing molten lava oceans stretch endlessly under a blistering alien sun.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "Comparison shot: KELT-9b's superheated atmosphere, shimmering with extreme thermal energy, juxtaposed against a slightly cooler, smaller red dwarf star, emphasizing the exoplanet's intense glow.",
+      "seed": null
+    }
+  ],
+  "family": "cehennem gezegenler",
+  "seed_id": 29,
+  "music": "An intense, pulsating electronic track with a deep, oppressive bass, evoking extreme heat and alien environments. A rapid, sizzling crescendo builds to a peak at the mention of the temperature, then sustains a driving rhythm.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

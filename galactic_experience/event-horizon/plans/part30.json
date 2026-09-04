@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 30,
+    "title": "Flying to Alpha Centauri: A 5 MILLION Year Trip"
+  },
+  "synopsis": "Traveling to Alpha Centauri, the nearest star system, would require an astonishing 5 million years by passenger jet.",
+  "narration": "Imagine flying to Alpha Centauri, our nearest stellar neighbor, in a conventional passenger jet. This incredible journey would take approximately five million years, a testament to the immense, humbling scale of interstellar distances.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A distant, shimmering view of Alpha Centauri A and B, two bright stars in the cosmic void, appearing as tiny, unreachable points of light against a sea of distant galaxies.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A stylized, abstract representation of a single beam of light, representing a theoretical passenger jet's journey, stretching endlessly across unimaginable interstellar distances, a tiny speck moving between vast star fields.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "The camera pulls back to reveal the minuscule scale of our solar system, with Earth and Sun, fading into the background, as the journey to Alpha Centauri continues, illustrating the overwhelming cosmic emptiness.",
+      "seed": null
+    }
+  ],
+  "family": "ölçek şoku",
+  "seed_id": 24,
+  "music": "A vast, melancholic yet hopeful cosmic ambient track with a deep, sustained drone, slowly evolving with shimmering textures. A subtle, rhythmic pulse suggests endless travel, building to a gentle, reflective swell, then slowly fading.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

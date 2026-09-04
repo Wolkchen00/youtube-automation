@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 29,
+    "title": "Olympus Mons: Towers Over Everest"
+  },
+  "synopsis": "Mars's colossal Olympus Mons volcano rises an astounding 25 kilometers, dwarfing Earth's Mount Everest nearly threefold.",
+  "narration": "On Mars, the colossal volcano Olympus Mons rises 25 kilometers, an elevation almost three times that of Earth's Mount Everest. This shield volcano covers an area comparable to Arizona, a true giant among planetary mountains.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "An orbital sweep over Mars, revealing the vast, circular base of Olympus Mons, stretching across the red Martian landscape, haze clinging to its lower slopes.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A slow, ascending drone shot revealing the immense, gently sloping flanks of Olympus Mons, culminating at its multi-layered caldera, bathed in the faint Martian sunlight.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A striking visual comparison: the colossal silhouette of Olympus Mons rising majestically against a Martian sunset, with a tiny, discernible outline of Mount Everest superimposed near its base for scale.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 30,
+  "music": "A majestic and expansive orchestral piece, evoking grand scale and alien landscapes, with a sustained, awe-inspiring drone that swells as the mountain's height is revealed, ending on an unresolved chord.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

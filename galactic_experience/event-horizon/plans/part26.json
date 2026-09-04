@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 26,
+    "title": "The Sun: Its Fiery END"
+  },
+  "synopsis": "The Sun will eventually swell into a red giant, consuming inner planets, before shrinking into a dense white dwarf.",
+  "narration": "In five billion years, our Sun will transform, expanding into a red giant that engulfs its inner worlds. Eventually, it will shed its outer layers, leaving behind a beautiful, fading white dwarf, marking the silent end of our stellar companion.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A serene view of the current Sun, bright and life-giving, subtly pulsating with hidden energy, camera slowly panning across its surface.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "The Sun rapidly swelling into a terrifying red giant, its bloated, crimson-orange surface filling the frame, consuming Mercury and Venus as Earth appears as a distant, doomed ember.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A small, extremely dense white dwarf, a brilliant, hot pearl, slowly cooling in the vast darkness of space, surrounded by a faint, expanding planetary nebula.",
+      "seed": null
+    }
+  ],
+  "family": "kozmik kader",
+  "seed_id": 28,
+  "music": "A grand, evolving cosmic symphony with a sense of inevitable change, starting with a steady pulse, building to a dramatic swell as the red giant forms, then subtly fading with an unresolved, looping close.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

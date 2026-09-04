@@ -12,10 +12,10 @@
   "hashtags": "#shorts #space #astronomy #universe",
   "standalone": true,
   "publish_mode": "auto",
-  "status": "completed",
+  "status": "active",
   "priority": 999,
-  "total_parts": 25,
-  "next_part": 26,
+  "total_parts": 30,
+  "next_part": 27,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -192,8 +192,8 @@
     "title_style": "a sharp English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes.",
     "brief": "EVENT HORIZON üretim brief'i (dayanak: galactic_experience/KONSEPT.md v1.4, 2026-07-29). >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis, narration, tüm çekim prompt'ları ve müzik tarifi İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: Üç çekim vardır. shot 1 ŞOK: gerçek gök cismi en dramatik halinde, iddia narration ilk cümlesinde; yavaş yıldız alanı, logo ve welcome kurulumu yasak. shot 2 ÖLÇEK: karşılaştırma veya yakınlaşma faktın ölçeğini hissettirir. shot 3 UÇURUM: uç sonuç, kompozisyon shot 1'e rimlenir ve hareket sürerken biter. (2) AİLE ROTASYONU: family her partta zorunludur ve yalnız şu kanonik değerlerden biri olur: güneş sistemi uçları, kozmik kader, derin uzay canavarları, cehennem gezegenler, ölçek şoku, bilim temelli what-if. Aynı aile üst üste iki bölümde kullanılamaz. (3) DOĞRULUK: Fakt gerçek astronomi veya astrofizikten gelir ve yaygın kaynakla doğrulanabilir; sayı uydurulamaz. Konu yalnız runtime enjekte edilen topic_pool girdilerinden seçilir; her partta tam sayı seed_id zorunludur ve yalnız o tohumun konusu ile family değeri kullanılır. Tohum listesi bu brief'te yer almaz. (4) YORUM YEMİ: Bölüm başına en fazla bir yarım-soru; dini veya komplocu kışkırtma ve rage-bait yasak. (5) SES: Narration 30-44 kelimedir; ilk cümle iddianın kendisidir. Selamlama, CTA ve 'did you know' yasak. (6) LOOP DİKİŞİ: Son kompozisyon ilk kareye döner; kapanış kartı, sunum jesti ve kutlama yasak. (7) GÜVENLİK: Korku estetiği ve epilepsi riski yaratan hızlı flaş dizileri yok; ton dehşet değil huşudur. (8) MÜZİK: Huşu odaklı kozmik altlık sabit ileri nabız taşır, ölçek anında tek kısa kabarma yapar ve kesintisiz loop için cümlenin ortasında biter.",
     "last_run": {
-      "at": "2026-08-25T17:08:18.961133+00:00",
-      "parts": "21-25"
+      "at": "2026-09-04T20:33:23.360782+00:00",
+      "parts": "26-30"
     }
   },
   "parts": {
@@ -480,6 +480,35 @@
         "tiktok"
       ],
       "published_at": "2026-08-31T21:53:53.658120+00:00"
+    },
+    "26": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep26/ep26_narrated_music.mp4",
+      "subtitle": "The Sun: Its Fiery END",
+      "stack_sha256": "2fad34182702947da0bd0be3c9d612eefe0263003699c4f3841f8ce64cba2752",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-04T20:45:43.947702+00:00",
+      "dropped_shots": [
+        2
+      ],
+      "dropped_shot_roles": {
+        "2": "episode_body"
+      },
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": true,
+        "arc_roles_missing": [
+          "episode_body"
+        ],
+        "duration_s": 11.02,
+        "duration_in_band": null,
+        "degraded": true
+      }
     }
   }
 }
