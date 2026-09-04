@@ -187,6 +187,126 @@
         "id": 30,
         "topic": "Mars's Olympus Mons rises about 25 kilometers, nearly three times Mount Everest's elevation above sea level.",
         "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 31,
+        "topic": "What if the Sun vanished right now? Earth would keep orbiting for about 8 minutes and 20 seconds, because gravity travels at the speed of light.",
+        "family": "bilim temelli what-if"
+      },
+      {
+        "id": 32,
+        "topic": "What if you fell down a tunnel bored through Earth? Ignoring air, you would reach the far side in about 42 minutes, then fall straight back.",
+        "family": "bilim temelli what-if"
+      },
+      {
+        "id": 33,
+        "topic": "What if Jupiter had been about 80 times more massive? It would have ignited hydrogen fusion and the Solar System would have two stars.",
+        "family": "bilim temelli what-if"
+      },
+      {
+        "id": 34,
+        "topic": "What if Earth had rings like Saturn's? They would blaze across the sky day and night and cast a shadow band that shifts with the seasons.",
+        "family": "bilim temelli what-if"
+      },
+      {
+        "id": 35,
+        "topic": "What if Saturn hung where the Moon does? Its disc would dominate the sky and its rings would stretch from horizon to horizon.",
+        "family": "bilim temelli what-if"
+      },
+      {
+        "id": 36,
+        "topic": "55 Cancri e orbits so close to its star that a year lasts about 18 hours, and its day side may be an ocean of lava.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 37,
+        "topic": "Venus crushes with about 92 times Earth's surface pressure, the same force you would feel roughly 900 meters under the ocean.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 38,
+        "topic": "WASP-12b is being devoured by its star: tidal forces stretch it into an egg shape while it bleeds mass every second.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 39,
+        "topic": "TrES-2b reflects less than one percent of the light that reaches it, making this planet darker than coal.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 40,
+        "topic": "HD 80606 b swings in on a wildly elliptical orbit and heats by hundreds of degrees in only about six hours.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 41,
+        "topic": "The Sun brightens roughly 10 percent every billion years; Earth's oceans will likely boil away long before the red giant phase.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 42,
+        "topic": "Because cosmic expansion is accelerating, every galaxy beyond our Local Group will one day slip past the edge of what we can ever observe.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 43,
+        "topic": "Proxima Centauri, the nearest star, is a red dwarf that will still be burning trillions of years after the Sun has died.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 44,
+        "topic": "Voyager 1's golden record is expected to survive for billions of years, outlasting the continents it was launched from.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 45,
+        "topic": "Earth's spin is slowing by about 1.7 milliseconds per century; in the age of the dinosaurs a day lasted roughly 23 hours.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 46,
+        "topic": "A magnetar's magnetic field is so violent that from a thousand kilometers away it would pull the atoms of your body apart.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 47,
+        "topic": "The fastest known pulsar spins 716 times every second, whipping its surface to nearly a quarter of light speed.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 48,
+        "topic": "A single quasar can outshine its entire host galaxy of hundreds of billions of stars.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 49,
+        "topic": "If Betelgeuse replaced the Sun, its surface would reach out past the orbit of Mars.",
+        "family": "derin uzay canavarları"
+      },
+      {
+        "id": 50,
+        "topic": "Sunlight reaches Earth in 8 minutes, but takes about 5 and a half hours to crawl out to Pluto.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 51,
+        "topic": "Shrink the Sun to a basketball and Earth becomes a grain of sand 26 meters away, while the nearest star sits another basketball 7,000 kilometers off.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 52,
+        "topic": "There are more stars in the observable universe than grains of sand on every beach on Earth.",
+        "family": "ölçek şoku"
+      },
+      {
+        "id": 53,
+        "topic": "Enceladus fires plumes of water from a hidden ocean straight into space, and those plumes build one of Saturn's rings.",
+        "family": "güneş sistemi uçları"
+      },
+      {
+        "id": 54,
+        "topic": "Io is the most volcanically violent world in the Solar System, kneaded and heated by Jupiter's gravity.",
+        "family": "güneş sistemi uçları"
       }
     ],
     "title_style": "a sharp English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes.",
