@@ -458,6 +458,44 @@ def _unused_topics(cfg: dict, history: list[dict]) -> list[dict]:
     return [item for seed_id, item in _topic_pool(cfg).items() if seed_id not in used]
 
 
+def first_family_relaxed(cfg: dict, history: list[dict], calibration: dict) -> bool:
+    """İlk bölüm için ardışık-family kuralı DÜŞMELİ mi? (saf fonksiyon)
+
+    Kural (``_validate_batch``): ardışık iki part aynı ``family`` değerini
+    kullanamaz. Havuz YEREL bir kısıtla tüketiliyor ama KÜRESEL fizibilite hiç
+    gözetilmiyor: çeşitli family'ler erken harcanıyor, dibe aynı family'den
+    tohumlar birikiyor. Kalan TÜM tohumların family'si son bölümünkiyle aynı
+    olduğunda ilk bölüme sunulan aday listesi BOŞALIYOR ve görev matematiksel
+    olarak çözülemez hâle geliyor: Gemini ne yazarsa yazsın doğrulama geçmiyor.
+
+    2026-09-01..04'te Galactic Experiment'i dört gün susturan, shadowedhistory'yi
+    de ertesi gün susturacak olan tam olarak buydu (kalan tohumlar sırasıyla
+    {14,24} 'ölçek şoku' ve {12,16} 'efsane vs kayıt').
+
+    Bu fonksiyon YALNIZCA başka çare kalmadığında True döner. Havuzda farklı
+    family'den bir tohum ya da serbest family seçebilen bir kart varsa kural
+    AYNEN geçerlidir; stil rotasyonu boşuna feda edilmez.
+    """
+    families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
+    if not families:
+        return False
+    previous_family = _previous_family(history)
+    if not previous_family:
+        return False
+    # Kartlar kanonik family'lerden birini serbestçe seçebilir; kart varsa
+    # ilk bölüm çözülebilir demektir.
+    if _unused_cards(calibration, history):
+        return False
+    pool_items = _unused_topics(cfg, history)
+    if not pool_items:
+        # Havuz tamamen boş: sorun family değil, tedarik. Gevşetmek çözmez.
+        return False
+    return not any(
+        str(item.get("family") or "").strip() != previous_family
+        for item in pool_items
+    )
+
+
 def _previous_family(history: list[dict]) -> str:
     """Geçmişte family taşıyan son bölümün kanonik değerini döndür."""
     for item in reversed(history):
@@ -571,6 +609,10 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     compose_object_prompt = format_version == TEK_OBJE_FORMAT
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     previous_family = _previous_family(history) if families else ""
+    # ROCK D: kalan TUM tohumlar yasak family'de ise kural ILK BOLUM icin duser.
+    # Karar TEK yerde hesaplanip asagidaki BUTUN kurallara ayni sekilde uygulanir;
+    # yoksa prompt bir sey der, dogrulayici baskasini bekler, plan yine reddedilir.
+    relax_first = first_family_relaxed(cfg, history, calibration or {})
     pool = _topic_pool(cfg)
     cards = _unused_cards(calibration, history)
     humans_mode = str(cfg.get("humans") or "").strip().lower()
@@ -821,15 +863,29 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     family_rule = (
         "\n- FAMILY: every episode must include one \"family\" chosen exactly from this canonical list: "
         + json.dumps(families, ensure_ascii=False)
-        + ". Consecutive episodes must never use the same family."
+        + (". Consecutive episodes must never use the same family."
+           if not relax_first else
+           ". Consecutive episodes should avoid repeating a family; the ONLY allowed "
+           "exception is the FIRST episode of this batch, where the remaining pool "
+           "offers no other family.")
         if families else ""
     )
-    first_family_rule = (
-        f'\n- CRITICAL FAMILY BLOCK FOR EPISODE {start}: The previous episode used '
-        f'{json.dumps(previous_family, ensure_ascii=False)}, so episode {start} must not use '
-        f'{json.dumps(previous_family, ensure_ascii=False)}.'
-        if previous_family else ""
-    )
+    if previous_family and relax_first:
+        # Havuzda baska family kalmadi: kurali burada UYGULAMAK, Gemini'ye
+        # cozumu olmayan bir gorev vermek demek olurdu.
+        first_family_rule = (
+            f'\n- FAMILY EXCEPTION FOR EPISODE {start}: the remaining pool contains ONLY '
+            f'{json.dumps(previous_family, ensure_ascii=False)} seeds, so episode {start} MAY '
+            f'repeat that family. Episodes after {start} must not repeat their predecessor.'
+        )
+    elif previous_family:
+        first_family_rule = (
+            f'\n- CRITICAL FAMILY BLOCK FOR EPISODE {start}: The previous episode used '
+            f'{json.dumps(previous_family, ensure_ascii=False)}, so episode {start} must not use '
+            f'{json.dumps(previous_family, ensure_ascii=False)}.'
+        )
+    else:
+        first_family_rule = ""
     if cards:
         seed_rule = (
             "\n- TOPIC POOL: every episode must include \"seed_id\" from the runtime pools in the "
@@ -849,7 +905,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'forearms, object and work surface, with the face outside the frame.'
         if face_hidden else ""
     )
-    if pool and previous_family:
+    if pool and previous_family and not relax_first:
         seed_rule += (
             f' For integer seed_id in episode {start}, choose only from the runtime pool explicitly '
             'labeled for the first episode. Later episodes may use the later-episode pool.'
@@ -925,7 +981,7 @@ RULES:
         lines.append(json.dumps(cards, ensure_ascii=False, indent=2))
     if pool:
         unused_topics = _unused_topics(cfg, history)
-        if previous_family:
+        if previous_family and not relax_first:
             first_topics = [
                 item for item in unused_topics
                 if str(item.get("family") or "").strip() != previous_family
@@ -1019,6 +1075,9 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         elif isinstance(seed_id, str):
             used_card_ids.add(seed_id)
     previous_family = _previous_family(history)
+    # Karar _build_prompt ile AYNI saf fonksiyondan gelir; prompt bir sey deyip
+    # dogrulayici baskasini beklerse plan yine reddedilirdi.
+    relax_first = first_family_relaxed(cfg or {}, history, calibration or {})
 
     errors: list[str] = []
     seen = set(existing_titles)
@@ -1045,7 +1104,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 errors.append(f"part {want}: family alanı zorunlu")
             elif family not in families:
                 errors.append(f"part {want}: family kanonik listede değil ({family!r})")
-            if family and previous_family and family == previous_family:
+            # ROCK D: gevseme YALNIZ i == 0 icin ve YALNIZ havuzda baska family
+            # kalmadiginda gecerlidir. previous_family asagida NORMAL guncellenir,
+            # boylece batch icindeki sonraki tum komsuluklar aynen zorunlu kalir.
+            gevsek_ilk = relax_first and i == 0
+            if family and previous_family and family == previous_family and not gevsek_ilk:
                 errors.append(
                     f"part {want}: ardışık iki part aynı family değerini kullanamaz "
                     f"(yasak family: {previous_family!r})"
@@ -1579,6 +1642,15 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
     errors: list[str] | None = None
     best_partial: list[dict] = []
     repair_budget = [REPAIR_BUDGET]
+    # Gevseme kararini KOSU BASINA TEK KEZ duyur. Karar saf bir fonksiyondan
+    # gelir ve alti denemede de ayni olur; her denemede loglamak gurultu olurdu.
+    if first_family_relaxed(cfg, history, calibration or {}):
+        logger.warning(
+            f"⚠️ {meta.slug}: havuzda '{_previous_family(history)}' disinda tohum "
+            f"kalmadi ,  ilk bolum icin ardisik-family kurali DUSURULDU. "
+            f"Stil rotasyonu feda edildi, yayin oncelikli. Havuza yeni family "
+            f"eklenmezse bu her kosuda tekrarlar."
+        )
     for attempt in (1, 2, 3, 4, 5, 6):
         contents, sysins = _build_prompt(meta, bible, cfg, start, batch, history,
                                          fix_errors=errors, calibration=calibration)
@@ -1614,10 +1686,19 @@ def generate_plans(meta: SeriesMeta, bible: Bible, cfg: dict,
                           f"Kuyruk sürüyor ama üretim kalitesi düşük ,  ISSUES'a bak.")
         return best_partial
     forbidden_family = _previous_family(history) if cfg.get("families") else ""
-    forbidden_note = (
-        f"; ilk bölüm {start} için yasak family: {forbidden_family!r}"
-        if forbidden_family else ""
-    )
+    # Gevseme aktifse ilk bolum icin YASAK family YOKTUR; oyle demek teshisi
+    # yanlis yone gonderir (Galactic'te tam bu mesaj dort gun boyunca yanlis
+    # yeri isaret etti).
+    if first_family_relaxed(cfg, history, calibration or {}):
+        forbidden_note = (
+            f"; ilk bölüm {start} için family kuralı DÜŞÜRÜLDÜ "
+            f"(havuzda {forbidden_family!r} dışında tohum kalmamıştı)"
+        )
+    else:
+        forbidden_note = (
+            f"; ilk bölüm {start} için yasak family: {forbidden_family!r}"
+            if forbidden_family else ""
+        )
     raise RuntimeError(
         f"Gemini planları doğrulamadan geçemedi{forbidden_note}; "
         f"başarısız kurallar: {'; '.join(errors)}"

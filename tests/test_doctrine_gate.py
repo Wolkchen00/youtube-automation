@@ -350,7 +350,23 @@ class DoctrineGateTests(unittest.TestCase):
         self.assertTrue(any("eşleşmiyor" in e for e in errors(_plan(1, 0, "beta", 1))))
         self.assertTrue(any("family alanı" in e for e in errors(_plan(1, 0, seed_id=1))))
         self.assertTrue(any("kanonik" in e for e in errors(_plan(1, 0, "other", 1))))
+        # Ardisik-family kurali: havuzda ALTERNATIF family varken AYNEN gecerli.
+        # Burada seed 13 kullanilmis, geriye 1 (alpha) ve 2 (beta) kaliyor;
+        # beta bir cikis oldugu icin alpha tekrari REDDEDILIR.
         self.assertTrue(
+            any(
+                "ardışık" in e
+                for e in errors(
+                    _plan(1, 0, "alpha", 1),
+                    [{"seed_id": 13, "family": "alpha"}],
+                )
+            )
+        )
+        # ROCK D: kalan TUM tohumlar yasak family'de ise kural ILK bolum icin
+        # duser. Burada seed 2 (tek beta) kullanilmis, geriye yalniz alpha
+        # tohumlari kaliyor; kurali uygulamak Gemini'ye cozumu olmayan bir gorev
+        # vermek olurdu ve kanali susturur (Galactic, 2026-09-01..04).
+        self.assertFalse(
             any(
                 "ardışık" in e
                 for e in errors(

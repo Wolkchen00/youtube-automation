@@ -83,21 +83,46 @@ def test_installed_pool_schema_and_effective_batch_are_feasible(slug):
     assert history, f"{slug}: plan geçmişi bulunamadı"
     previous_family = replenish._previous_family(history)
     unused = replenish._unused_topics(cfg, history)
-    batch = min(10, max(1, int(cfg.get("batch", replenish.DEFAULT_BATCH))), len(unused))
+    batch = min(10, max(1, int(cfg.get("batch", replenish.DEFAULT_BATCH))),
+                max(1, len(unused)))
     unused_families = [item["family"] for item in unused]
 
-    problems = []
-    if not any(family != previous_family for family in unused_families):
-        problems.append(
-            f"son family {previous_family!r} dışında kullanılmamış tohum yok; "
-            f"kalan family'ler={unused_families!r}"
-        )
-    if not _has_complete_family_order(unused_families, previous_family, batch):
-        problems.append(
-            f"etkin batch={batch} için tam geçerli sıralama yok; "
+    # PIST: next_part'tan itibaren ARDIŞIK plan dosyası sayısı. Yani "ikmal hiç
+    # çalışmasa bu kanal kaç gün daha yayın yapabilir".
+    meta = SeriesMeta.load(slug)
+    pist = 0
+    n = int(meta.next_part)
+    while replenish.part_plan_path(slug, n).exists():
+        pist += 1
+        n += 1
+
+    # İKMAL ÜRETEBİLİR Mİ: kullanılmamış tohum var VE en az biri yasak family
+    # dışında, YA DA ROCK D gevşemesi devreye giriyor (kalan hepsi yasak
+    # family'de ama havuz boş değil, o zaman ilk bölüm için kural düşer).
+    uretebilir = bool(unused) and (
+        any(f != previous_family for f in unused_families)
+        or replenish.first_family_relaxed(cfg, history, {})
+    )
+    if uretebilir:
+        assert _has_complete_family_order(unused_families, previous_family, batch), (
+            f"{slug}: etkin batch={batch} için tam geçerli sıralama yok; "
             f"son family={previous_family!r}, kalan family'ler={unused_families!r}"
         )
-    assert not problems, f"{slug}: " + "; ".join(problems)
+
+    # ASIL DEĞİŞMEZ: bu kanal sessizleşmek üzere mi?
+    #   pist 0 ve ikmal üretemiyor  -> kanal ZATEN ÖLÜ (event-horizon, 04.09 sabahı)
+    #   pist 1 ve ikmal üretemiyor  -> kanal YARIN ÖLÜR   (flashpoints, 04.09 sabahı)
+    # İkisi de bu sabah gerçekti ve hiçbir yerde görünmüyordu.
+    assert pist >= 1, (
+        f"{slug}: kuyrukta yayınlanacak bölüm YOK (next_part={meta.next_part}); "
+        f"bu kanal bugün sessiz kalır"
+    )
+    assert uretebilir or pist >= 2, (
+        f"{slug}: pist yalnızca {pist} bölüm ve oto-ikmal yeni bölüm ÜRETEMEZ "
+        f"(kullanılmamış tohum={len(unused)}, son family={previous_family!r}, "
+        f"kalan family'ler={unused_families!r}). Bu kanal yarın susar; "
+        f"topic_pool'a yasak family DIŞINDA yeni konu ekleyin."
+    )
 
 
 @pytest.mark.parametrize(
