@@ -450,14 +450,23 @@ class InstalledSeriesTests(unittest.TestCase):
             "from-scratch": ("Youtube", 6, "10", None, 6, 0),
         }
         for slug, values in detailed.items():
-            profile, shots, seconds, word_range, family_count, pool_size = values
+            profile, shots, seconds, word_range, family_count, pool_min_size = values
             meta = SeriesMeta.load(slug)
             cfg = meta.auto_replenish
             self.assertEqual(meta.upload_profile, profile)
             self.assertEqual(cfg["shots"], shots)
             self.assertEqual(cfg["shot_seconds"], seconds)
             self.assertEqual(len(cfg["families"]), family_count)
-            self.assertEqual(len(cfg.get("topic_pool", [])), pool_size)
+            pool = cfg.get("topic_pool", [])
+            self.assertGreaterEqual(len(pool), pool_min_size)
+            self.assertTrue(all(isinstance(item, dict) for item in pool))
+            ids = [item.get("id") for item in pool]
+            self.assertTrue(all(type(seed_id) is int for seed_id in ids))
+            self.assertEqual(len(ids), len(set(ids)))
+            self.assertTrue(
+                all(isinstance(item.get("topic"), str) and item["topic"].strip() for item in pool)
+            )
+            self.assertTrue(all(item.get("family") in cfg["families"] for item in pool))
             if word_range:
                 self.assertEqual(
                     (cfg["narration"]["min_words"], cfg["narration"]["max_words"]),

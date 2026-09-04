@@ -175,6 +175,21 @@
         "id": 27,
         "topic": "Beginning in 1962, a contagious laughing-and-crying epidemic swept through Tanganyikan schools and villages, closing schools for months.",
         "family": "efsane vs kayıt"
+      },
+      {
+        "id": 28,
+        "topic": "In August 1943, Allied troops landed on Kiska after Japan had secretly evacuated; 28 died and 50 were injured in accidents and mistaken-identity fire.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 29,
+        "topic": "In 1849, Henry 'Box' Brown escaped slavery by having himself shipped in a wooden crate from Richmond to Philadelphia.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 30,
+        "topic": "When the Brooklyn Bridge opened in 1883, its 1,595.5-foot main span made it the world's longest suspension bridge.",
+        "family": "imkânsız mühendislik"
       }
     ],
     "title_style": "a punchy English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) 'The Real Reason <subject> <did X>', (2) 'How <subject> <impossible feat> In <YEAR>!', (3) '<Subject>: Fact Or Ancient Propaganda?', (4) '<Subject>: The <striking epithet>'. No emoji, no hashtags, no surrounding quotes. CRITICAL fit rule: choose the ONE pattern that truthfully fits the fact. In pattern 2 the year must be when the feat itself happened, never the year of a modern study or confirmation. Use pattern 3 only for ancient or legendary subjects. A title must never imply a false claim even when the underlying fact is true.",

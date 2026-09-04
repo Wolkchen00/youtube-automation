@@ -123,7 +123,7 @@ def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
 
 
 def validate_replenish_config(cfg: dict) -> list[str]:
-    """Validate only Rock 1 opt-in config fields; legacy configs are untouched."""
+    """Oto-ikmal yapılandırmasını Gemini çağrısından önce doğrula."""
     errors: list[str] = []
     try:
         shots = int(cfg.get("shots", DEFAULT_SHOTS))
@@ -179,6 +179,34 @@ def validate_replenish_config(cfg: dict) -> list[str]:
             _compiled_title_patterns(cfg)
         except ValueError as error:
             errors.append(str(error))
+
+    if "topic_pool" in cfg:
+        topic_pool = cfg.get("topic_pool")
+        if not isinstance(topic_pool, list):
+            errors.append("topic_pool liste olmalı")
+        else:
+            canonical_families = cfg.get("families") or []
+            seen_ids: set[int] = set()
+            for index, item in enumerate(topic_pool, start=1):
+                if not isinstance(item, dict):
+                    errors.append(f"topic_pool[{index}] nesne olmalı")
+                    continue
+                seed_id = item.get("id")
+                if not isinstance(seed_id, int) or isinstance(seed_id, bool):
+                    errors.append(f"topic_pool[{index}].id bool olmayan tam sayı olmalı")
+                elif seed_id in seen_ids:
+                    errors.append(f"topic_pool[{index}].id havuz içinde benzersiz olmalı ({seed_id})")
+                else:
+                    seen_ids.add(seed_id)
+                topic = item.get("topic")
+                if not isinstance(topic, str) or not topic.strip():
+                    errors.append(f"topic_pool[{index}].topic boş olmayan string olmalı")
+                family = item.get("family")
+                if family not in canonical_families:
+                    errors.append(
+                        f"topic_pool[{index}].family kanonik families listesinde olmalı "
+                        f"({family!r})"
+                    )
     return errors
 
 

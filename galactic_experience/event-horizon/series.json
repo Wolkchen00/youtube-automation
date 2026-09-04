@@ -172,6 +172,21 @@
         "id": 27,
         "topic": "Some of Earth's gold was forged in neutron-star collisions before the Solar System existed; how much is still an open mystery.",
         "family": "derin uzay canavarları"
+      },
+      {
+        "id": 28,
+        "topic": "In about 5 billion years, the Sun will expand into a red giant and later shed its outer layers, leaving a white dwarf.",
+        "family": "kozmik kader"
+      },
+      {
+        "id": 29,
+        "topic": "KELT-9b's dayside reaches about 4,600 kelvin, making this exoplanet hotter than most stars.",
+        "family": "cehennem gezegenler"
+      },
+      {
+        "id": 30,
+        "topic": "Mars's Olympus Mons rises about 25 kilometers, nearly three times Mount Everest's elevation above sea level.",
+        "family": "güneş sistemi uçları"
       }
     ],
     "title_style": "a sharp English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes.",
