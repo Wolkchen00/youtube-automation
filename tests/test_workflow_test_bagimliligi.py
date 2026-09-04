@@ -97,5 +97,74 @@ class WorkflowTestBagimliligiTests(unittest.TestCase):
         )
 
 
+class PipefailTests(unittest.TestCase):
+    """`| tee` ile borulanan her adim pipefail ISTEMELIDIR.
+
+    GitHub Actions varsayilan kabugu `bash -e` (pipefail YOK). `python ... | tee`
+    kurulumunda boru hattinin cikis kodu `tee`'nin 0'i olur ve python'un exit 1'i
+    SESSIZCE yutulur. 2026-09-01..04 arasinda Galactic'in oto-ikmali dort gun
+    ust uste basarisiz oldu ama adim hep yesil kaldi; ariza ancak YouTube RSS
+    okunarak gorulebildi. `shell: bash` bu maskeyi kaldirir.
+    """
+
+    # HENUZ DUZELTILMEMIS adimlar. Sessizce atlanmiyorlar: burada ADIYLA
+    # duruyorlar ki gorunur kalsinlar ve liste BUYUYEMESIN (yeni bir ihlal
+    # eklenirse test kirmizi olur). Bunlar kanal yayin hattinda DEGIL; pipefail
+    # eklemek kosuyu o adimda durdurabilecegi icin ayri bir cevrimde,
+    # devaminda ne oldugu incelenerek yapilacak. RF-ISSUES'a yazildi.
+    BILINEN_ACIKLAR = {
+        ("analytics.yml", "Take daily snapshot"),
+        ("analytics.yml", "Generate weekly report"),
+        ("calibrate.yml", "Measure and calibrate"),
+        ("cleanup.yml", "Run cleanup monitor"),
+        ("series-approve.yml", "Check approvals + publish"),
+    }
+
+    def test_tee_ile_borulanan_adimlar_pipefail_istiyor(self):
+        eksik = []
+        incelenen = 0
+        for path in sorted(WORKFLOW_DIR.glob("*.yml")):
+            data = yaml.safe_load(path.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                continue
+            for step in _steps(data):
+                run = _run_text(step)
+                if "| tee" not in run:
+                    continue
+                incelenen += 1
+                kabuk = str(step.get("shell") or "")
+                if "bash" in kabuk:
+                    continue
+                anahtar = (path.name, str(step.get("name") or ""))
+                if anahtar in self.BILINEN_ACIKLAR:
+                    continue
+                eksik.append(f"{path.name}: {step.get('name') or run[:50]!r}")
+        self.assertFalse(
+            eksik,
+            "su adimlar `| tee` kullaniyor ama `shell: bash` (pipefail) yok, "
+            "yani python'un exit kodu yutulur: " + "; ".join(eksik),
+        )
+        self.assertGreater(incelenen, 0, "hic tee'li adim bulunamadi , test kendini kandiriyor")
+
+    def test_bilinen_aciklar_hala_gercek(self):
+        """Liste curumesin: duzeltilen bir adim burada kalmamali."""
+        mevcut = set()
+        for path in sorted(WORKFLOW_DIR.glob("*.yml")):
+            data = yaml.safe_load(path.read_text(encoding="utf-8"))
+            if not isinstance(data, dict):
+                continue
+            for step in _steps(data):
+                if "| tee" not in _run_text(step):
+                    continue
+                if "bash" in str(step.get("shell") or ""):
+                    continue
+                mevcut.add((path.name, str(step.get("name") or "")))
+        cozulmus = self.BILINEN_ACIKLAR - mevcut
+        self.assertFalse(
+            cozulmus,
+            f"bu adimlar artik duzelmis, BILINEN_ACIKLAR listesinden cikarilmali: {cozulmus}",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

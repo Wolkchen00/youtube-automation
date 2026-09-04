@@ -292,7 +292,10 @@ def test_every_runner_critical_callsite_uses_the_outbox_routing_helper():
     # ikisini ekledi: eksik cekimle yayin bildirimi ve zorunlu platform dogrulanamadi.
     # ROCK 3d ucuncusunu ekledi: altyapi butcesi dolunca needs_human bildirimi.
     # Bolum butunlugu denetimi dordunculeyi ekledi: yayinlandi ama kusurlu.
-    assert len(routed) == 13
+    # ROCK E2 besincisini ekledi: tukenmis + oto-ikmalli seri ACIKCA istendiginde
+    # "bu kanala bugun video CIKMIYOR" alarmi (Galactic'in dort gunluk sessizligi
+    # bu alarm olmadigi icin gorunmedi).
+    assert len(routed) == 14
     assert len(direct) == 2  # _series_alert delegasyonu + evsiz filo alarmi fallback'i
     source = inspect.getsource(series_runner)
     for fragment in (

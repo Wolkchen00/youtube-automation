@@ -59,6 +59,10 @@ jobs:
         run: mkdir -p logs output
 
       - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni keşifler yazar — kredi harcamaz)
+        # shell: bash = pipefail. Bu satir olmadan `| tee`
+        # python'un exit kodunu yutuyor ve hata GORUNMUYOR.
+        shell: bash
+        continue-on-error: true
         run: python -X utf8 -m series.replenish --series drowned-history 2>&1 | tee logs/drowned_replenish.log
 
       - name: Produce + publish (Drowned History sıradaki keşif)

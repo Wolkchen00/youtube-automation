@@ -79,9 +79,19 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         continue-on-error: true
+        # shell: bash = pipefail. Bu satir olmadan `| tee`
+        # python'un exit kodunu yutuyor ve hata GORUNMUYOR.
+        shell: bash
         run: python -X utf8 -m series.approver --series unnatural-lab 2>&1 | tee logs/unnatural_lab_approve.log
 
       - name: Oto-ikmal (kuyruk azaldıysa Gemini yeni obje/deney bölümleri yazar ,  kredi harcamaz)
+        # shell: bash = pipefail. Bu adim olmadan `| tee` replenish'in
+        # exit 1'ini yutuyordu ve ikmal basarisizligi ASLA gorunmuyordu
+        # (Galactic 2026-09-01..04 arasi dort gun sessiz, dort yesil kosu).
+        # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum
+        # varsa o gunun yayini iptal olmasin; adim yine KIRMIZI gorunur.
+        shell: bash
+        continue-on-error: true
         run: python -X utf8 -m series.replenish --series unnatural-lab 2>&1 | tee logs/unnatural_lab_replenish.log
 
       - name: Produce + publish (Unnatural Lab sıradaki bölüm)

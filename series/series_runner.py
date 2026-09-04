@@ -597,12 +597,47 @@ def _continue_after_terminal(meta: SeriesMeta, slug: str, *, dry_run: bool,
 
 
 def run_next(slug: str, dry_run: bool = False, publish: bool = True,
-             force: bool = False) -> bool:
-    """Serinin sıradaki part'ını üret + yayınla + durumu ilerlet."""
+             force: bool = False, strict_empty: bool = False) -> bool:
+    """Serinin sıradaki part'ını üret + yayınla + durumu ilerlet.
+
+    ``strict_empty``: koşu bu seriyi AÇIKÇA istediyse (``--series <slug>``) True
+    gelir. O zaman "üretilecek bölüm yok" bir BAŞARI değildir. 2026-09-01..04
+    arasında Galactic dört gün sessiz kaldı ve Event Horizon her gün ``success``
+    raporladı: kuyruk tükenmişti, bu dal ``True`` dönüyordu, ``main()`` exit 0
+    veriyordu. Aynı fonksiyonun 'Video ÇIKMAYAN her koşu KIRMIZI görünsün'
+    sözü tam burada çiğneniyordu.
+
+    Ayrım ``status`` ile DEĞİL, "bu kanal bugün yayın yapabilir miydi" ile
+    yapılır; çünkü tükenen seriyi ``SeriesMeta.advance()`` kendiliğinden
+    ``completed`` yapar, yani ``status`` tek başına niyeti ayırt etmez.
+    """
     meta = SeriesMeta.load(slug)
     if not meta:
         return False
     if meta.status != "active" or meta.next_part > meta.total_parts:
+        # (a) İhsan bilerek durdurmuş: bu bir arıza değil, kırmızı yanmamalı.
+        #     from-scratch, next-stop ve 10+ pasif seri bu daldan geçer;
+        #     hepsini kırmızıya çevirmek gerçek alarmı gürültüde boğardı.
+        if meta.status in ("paused", "draft"):
+            logger.info(f"⏸️ '{slug}' bilerek duraklatılmış (status={meta.status}) ,  yapacak iş yok.")
+            return True
+
+        tukendi = meta.next_part > meta.total_parts
+        ikmal_acik = bool((meta.auto_replenish or {}).get("enabled"))
+
+        # (b) Kendini besleyen bir seri tükendiyse kuyruğu dolduran mekanizma
+        #     başarısız olmuş demektir. Koşu bu seriyi açıkça istediyse bu bir
+        #     ARIZADIR: kanal o gün yayın yapamayacak.
+        if tukendi and ikmal_acik and strict_empty:
+            mesaj = (f"'{slug}' kuyruğu boş (part {meta.next_part}/{meta.total_parts}) ve "
+                     f"oto-ikmal yeni bölüm yazamadı ,  bu kanala bugün video ÇIKMIYOR.")
+            logger.error(f"❌ {mesaj}")
+            if not dry_run:
+                # Kuru koşu dış dünyaya alarm göndermez.
+                _series_alert(slug, f"🔴 *{meta.base_title}*: {mesaj}")
+            return False
+
+        # (c) Sonlu, kendini beslemeyen seri doğal olarak bitti: tasarım böyle.
         logger.info(f"✅ '{slug}' tamamlandı (part {meta.total_parts}/{meta.total_parts}).")
         return True
 
@@ -954,23 +989,56 @@ def _outboxes_empty(slugs: list[str]) -> bool:
     )
 
 
+def _parse_args(argv: list[str]):
+    """CLI'i KATI ayrıştır. Eksik/bozuk ``--series`` değeri PARA yakar.
+
+    Eski hâli ``if "--series" in argv: slug = argv[i+1] if i+1 < len(argv)``
+    idi. İki sessiz tuzağı vardı:
+      1. ``--series`` son argümansa slug None kalır ve koşu ``run_all()`` yoluna
+         düşer: istenmeyen, PARASI ÖDENMİŞ bir bölüm üretilir.
+      2. ``--series --dry-run`` çağrısında slug "--dry-run" olur; seri bulunamaz,
+         hata sebebi görünmez.
+    argparse ikisini de çağrı anında reddeder.
+    """
+    import argparse
+
+    p = argparse.ArgumentParser(
+        prog="series.series_runner",
+        description="Serinin sıradaki bölümünü üret + yayınla.",
+    )
+    p.add_argument("--series", dest="slug", default=None,
+                   help="yalnız bu seriyi koştur (boş bırakılamaz)")
+    p.add_argument("--dry-run", action="store_true")
+    p.add_argument("--no-publish", action="store_true")
+    p.add_argument("--force", action="store_true",
+                   help="günde-1 kilidini aş (bilerek aynı gün 2. video)")
+    p.add_argument("--drain-alerts-only", action="store_true")
+    args = p.parse_args(argv)
+    if args.slug is not None and not str(args.slug).strip():
+        p.error("--series boş olamaz")
+    if args.slug is not None and str(args.slug).startswith("-"):
+        p.error(f"--series bir seçenek değil, seri adı bekler: {args.slug!r}")
+    return args
+
+
 def main(argv: list[str]):
-    dry = "--dry-run" in argv
-    no_pub = "--no-publish" in argv
-    force = "--force" in argv   # günde-1 kilidini aş (bilerek aynı gün 2. video)
-    drain_only = "--drain-alerts-only" in argv
-    slug = None
-    if "--series" in argv:
-        i = argv.index("--series")
-        if i + 1 < len(argv):
-            slug = argv[i + 1]
+    args = _parse_args(argv)
+    dry = args.dry_run
+    no_pub = args.no_publish
+    force = args.force          # günde-1 kilidini aş (bilerek aynı gün 2. video)
+    drain_only = args.drain_alerts_only
+    slug = args.slug
     outbox_slugs = _outbox_slugs(slug)
     if not _drain_outboxes(outbox_slugs):
         logger.error("❌ Kritik alarm outbox bos degil; uretim devam edecek, kosu sonda kirmizi olacak.")
     if drain_only:
         return
     if slug:
-        ok = run_next(slug, dry_run=dry, publish=not no_pub, force=force)
+        # Koşu bu seriyi AÇIKÇA istedi: "üretilecek bölüm yok" başarı sayılmaz.
+        # run_all yolu list_active_series ile tükenmiş serileri zaten eliyor,
+        # bu yüzden ana kuyruk bu katılıktan etkilenmez.
+        ok = run_next(slug, dry_run=dry, publish=not no_pub, force=force,
+                      strict_empty=True)
     else:
         ok = run_all(dry_run=dry, publish=not no_pub)
     # Video ÇIKMAYAN her koşu KIRMIZI görünsün (sessiz 'success' yerine): üretim/yayın
