@@ -51,5 +51,9 @@
   "family": "impossible-material",
   "music": "A sparse, dry percussion bed with soft, woody taps and low, resonant thuds, maintaining a slow, steady pulse. No melodic lines or ethereal pads, just deep, clear percussive hits, opening with a distinct low thud in the first second.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/5hbsbjkV/ep29-bar-of-soap.png"
+  ],
+  "ref_prompt_sha256": "e7a94d8940f26c57d56c582833a9bc649d8eb2c919526bffb9ec170bf5977fcf"
 }

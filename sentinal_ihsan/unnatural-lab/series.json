@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 32,
-  "next_part": 28,
+  "next_part": 30,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -355,11 +355,40 @@
       }
     },
     "28": {
-      "status": "qc_retry",
+      "status": "budget_exhausted",
       "first_held_at": "2026-09-03T21:41:41.337732+00:00",
       "retry_count": 1,
-      "last_reason_code": "AUDIO_MASTER",
-      "hold_reason": "final ses doğrulaması başarısız"
+      "last_reason_code": "BUDGET_EXHAUSTED",
+      "hold_reason": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=320.0, asgari=400.0, tavan=1000"
+    },
+    "29": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep29/ep29_narrated_music_mastered.mp4",
+      "subtitle": "Something Is WRONG With This SOAP",
+      "stack_sha256": "c2498e0eb58e0424c9afa0e94bee969e6db3624458960badb8104cd0bb394638",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-04T21:31:45.563807+00:00",
+      "dropped_shots": [
+        1
+      ],
+      "dropped_shot_roles": {
+        "1": "cold_open"
+      },
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": true,
+        "arc_roles_missing": [
+          "cold_open"
+        ],
+        "duration_s": 16.59,
+        "duration_in_band": true,
+        "degraded": true
+      }
     }
   }
 }
