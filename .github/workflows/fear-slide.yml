@@ -61,7 +61,15 @@ jobs:
         # core/config.py python-dotenv kullaniyor. Sadece requests kurunca
         # ModuleNotFoundError: No module named 'dotenv' verdi (kosu 33807471604).
         # Depodaki diger butun is akislari da requirements.txt kuruyor.
-        run: pip install -r requirements.txt
+        #
+        # pytest AYRICA kuruluyor. requirements.txt bu deponun CALISMA ZAMANI
+        # manifestosudur ve 18 workflow'un hepsi onu kuruyor; sadece-test
+        # bagimliligi oraya konmaz. Asagidaki "Prompt testleri" adimi pytest
+        # cagirdigi icin kosu 33897545943 "No module named pytest" ile exit 1
+        # verdi ve aimagine kanalinin TEK gunluk seridi 2026-09-04'te uretime
+        # hic baslamadan oldu. Test kapisi kredi harcamadan ONCE kostugu icin
+        # KALIYOR; eksik olan bagimlilik kuruluyor.
+        run: pip install -r requirements.txt pytest
 
       - name: Create .env
         run: |
