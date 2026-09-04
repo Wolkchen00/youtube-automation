@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 28,
+    "title": "The Real Reason America Invaded An Empty Island!"
+  },
+  "synopsis": "Allied forces suffered casualties during their 1943 invasion of Kiska, unaware that Japanese troops had secretly evacuated the island weeks prior.",
+  "narration": "In August 1943, Allied forces landed on Kiska, only to discover the Japanese had secretly evacuated. Tragically, 28 soldiers died and 50 were injured from accidents and mistaken identity fire, fighting an invisible enemy.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Vertical wide shot of American soldiers cautiously disembarking from a landing craft onto a misty, rocky Kiska beach in August 1943. Their faces are grim and watchful, weapons ready, as they advance into the fog-shrouded, deserted landscape. Camera slowly tracks their advance.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Close-up on a bewildered young soldier peering into an empty, abandoned Japanese bunker. Rain drips from the ceiling, and scattered, dusty equipment suggests a hurried departure. His expression shifts from tense anticipation to utter confusion, realizing the enemy is gone.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 28,
+  "music": "Fast, tense, percussive underscore with a suspenseful, militaristic feel, featuring staccato brass and driving snare drums, building a sense of ironic tension and tragic miscalculation. The music drives without pause, ending abruptly mid-groove for a seamless loop.",
+  "title_card": {
+    "title": "Kiska Invasion",
+    "subtitle": "Aleutian Islands, 1943"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

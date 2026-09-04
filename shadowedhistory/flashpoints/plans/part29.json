@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 29,
+    "title": "Henry \"Box\" Brown: The Unbreakable Man"
+  },
+  "synopsis": "Henry 'Box' Brown achieved an extraordinary escape from slavery in 1849 by mailing himself in a wooden crate from Virginia to Pennsylvania.",
+  "narration": "In 1849, Henry \"Box\" Brown mailed himself to freedom. Enduring 27 hours in a wooden crate from Richmond to Philadelphia, his courageous escape underscored the brutal reality of slavery and the indomitable human spirit seeking liberty.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Vertical shot, extremely close-up, from the perspective inside a rough wooden shipping crate. Glimmers of light filter through cracks, revealing the texture of the wood and the cramped, dark space. A hand, clasped in determination, is just visible at the bottom of the frame. The crate slightly jostles.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Mid-shot of a heavy wooden crate, stenciled with 'THIS SIDE UP WITH CARE', being roughly loaded onto a horse-drawn wagon by a grunting porter in 1849. The movement is jarring and harsh, emphasizing the perilous journey, with the wagon slowly pulling away down a dusty street.",
+      "seed": null
+    }
+  ],
+  "family": "unutulmuş kişi",
+  "seed_id": 29,
+  "music": "Fast, tense, percussive underscore with a determined, urgent yet hopeful tone, featuring pulsing strings and subtle, driving rhythms, building a sense of desperate courage and the yearning for freedom. The music drives without pause, ending abruptly mid-groove for a seamless loop.",
+  "title_card": {
+    "title": "Henry \"Box\" Brown",
+    "subtitle": "Richmond, 1849"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

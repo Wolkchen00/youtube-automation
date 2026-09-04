@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 27,
+    "title": "The Great Fire Of London: Fact Or Ancient Propaganda?"
+  },
+  "synopsis": "While traditional accounts of the 1666 Great Fire of London claim only six victims, the true death toll was likely far greater than recorded.",
+  "narration": "The Great Fire of London in 1666 consumed 13,200 houses. Official records claim only six deaths, a figure historians now widely dispute. The true human cost, likely buried beneath the ashes, was almost certainly far higher.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Vertical wide shot of smoke-filled London rooftops in 1666, with flames licking from timber buildings. Panic-stricken but resolute citizens, silhouetted against the fiery glow, attempt to salvage belongings. Camera slowly pans across the destructive panorama, emphasizing chaos but avoiding direct suffering.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Close-up on a soot-stained, bewildered older man, his face illuminated by the flickering orange light of the distant blaze. He clutches a small, charred wooden doll, reflecting profound loss and the overwhelming scale of the devastation. Ash gently falls around him.",
+      "seed": null
+    }
+  ],
+  "family": "efsane vs kayıt",
+  "seed_id": 12,
+  "music": "Fast, tense, percussive underscore with a somber, urgent tone, featuring driving strings and deep, echoing drums, building a sense of historical mystery and tragic scale. The music drives without pause, ending abruptly mid-groove for a seamless loop.",
+  "title_card": {
+    "title": "The Great Fire",
+    "subtitle": "London, 1666"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}
