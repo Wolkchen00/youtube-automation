@@ -190,6 +190,126 @@
         "id": 30,
         "topic": "When the Brooklyn Bridge opened in 1883, its 1,595.5-foot main span made it the world's longest suspension bridge.",
         "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 31,
+        "topic": "In 1925 a stray dog crossing the border set off the Greek-Bulgarian War of the Stray Dog, which killed more than 50 people before it ended in days.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 32,
+        "topic": "In 1969 El Salvador and Honduras fought a four-day war that erupted amid World Cup qualifying riots.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 33,
+        "topic": "During the Christmas Truce of 1914, British and German troops climbed out of the trenches to bury their dead and, in places, play football.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 34,
+        "topic": "In 1739 Britain went to war with Spain over a severed ear displayed to Parliament: the War of Jenkins' Ear.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 35,
+        "topic": "The Isles of Scilly and the Netherlands entered a state of war in 1651 that nobody formally ended until 1986.",
+        "family": "tuhaf savaş"
+      },
+      {
+        "id": 36,
+        "topic": "Begun in 1173, the Leaning Tower of Pisa started tilting during construction and was only stabilized in 2001.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 37,
+        "topic": "By 1913 the builders of the Panama Canal had moved enough earth to bury Manhattan nearly three meters deep.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 38,
+        "topic": "Begun in 1859, Joseph Bazalgette's London sewers were so deliberately oversized that much of the network still serves the city.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 39,
+        "topic": "The two halves of the Sydney Harbour Bridge met in mid-air in 1930, closing a gap measured in millimeters, and opened in 1932.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 40,
+        "topic": "Between 1964 and 1968 engineers cut the 13th-century-BC temples of Abu Simbel into blocks and rebuilt them above a rising lake.",
+        "family": "imkânsız mühendislik"
+      },
+      {
+        "id": 41,
+        "topic": "In 1940 Witold Pilecki deliberately got himself imprisoned in Auschwitz to gather intelligence, then escaped in 1943 to report it.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 42,
+        "topic": "In 1983 Soviet officer Stanislav Petrov judged a nuclear launch alarm to be false, and very likely prevented a war.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 43,
+        "topic": "Turned away by the authorities, Mary Seacole funded her own passage to the Crimean War in 1855 and nursed soldiers at the front.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 44,
+        "topic": "In 1854 physician John Snow traced a London cholera outbreak to a single water pump and founded modern epidemiology.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 45,
+        "topic": "In 1943 the teenage siblings Hans and Sophie Scholl were executed in Munich for handing out anti-Nazi leaflets.",
+        "family": "unutulmuş kişi"
+      },
+      {
+        "id": 46,
+        "topic": "France carried out its last execution by guillotine in 1977, the same year Star Wars premiered.",
+        "family": "zaman çarpması"
+      },
+      {
+        "id": 47,
+        "topic": "Harvard University was founded in 1636, two years before Galileo published his final book.",
+        "family": "zaman çarpması"
+      },
+      {
+        "id": 48,
+        "topic": "Betty White was born in 1922, the same year Howard Carter opened Tutankhamun's tomb.",
+        "family": "zaman çarpması"
+      },
+      {
+        "id": 49,
+        "topic": "Vikings never wore horned helmets; the image comes from an opera costume designer in 1876.",
+        "family": "efsane vs kayıt"
+      },
+      {
+        "id": 50,
+        "topic": "The 1938 War of the Worlds broadcast caused far less panic than the newspapers claimed the next morning.",
+        "family": "efsane vs kayıt"
+      },
+      {
+        "id": 51,
+        "topic": "Marie Antoinette almost certainly never said let them eat cake; the phrase was in print before she reached France in 1770.",
+        "family": "efsane vs kayıt"
+      },
+      {
+        "id": 52,
+        "topic": "Educated Europeans knew Earth was round throughout the Middle Ages; the flat-earth story spread from Washington Irving's fictionalized biography of Columbus in 1828.",
+        "family": "yanılgı kırıcı"
+      },
+      {
+        "id": 53,
+        "topic": "Isaac Newton published the Principia in 1687, yet he left behind more writing on alchemy and theology than on physics.",
+        "family": "yanılgı kırıcı"
+      },
+      {
+        "id": 54,
+        "topic": "The Salem witch trials of 1692 ended in hangings and one pressing; nobody was burned at the stake.",
+        "family": "yanılgı kırıcı"
       }
     ],
     "title_style": "a punchy English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) 'The Real Reason <subject> <did X>', (2) 'How <subject> <impossible feat> In <YEAR>!', (3) '<Subject>: Fact Or Ancient Propaganda?', (4) '<Subject>: The <striking epithet>'. No emoji, no hashtags, no surrounding quotes. CRITICAL fit rule: choose the ONE pattern that truthfully fits the fact. In pattern 2 the year must be when the feat itself happened, never the year of a modern study or confirmation. Use pattern 3 only for ancient or legendary subjects. A title must never imply a false claim even when the underlying fact is true.",
