@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 30,
-  "next_part": 27,
+  "next_part": 28,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -626,6 +626,35 @@
           "episode_body"
         ],
         "duration_s": 11.02,
+        "duration_in_band": null,
+        "degraded": true
+      }
+    },
+    "27": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep27/ep27_narrated_music.mp4",
+      "subtitle": "The Universe's SLOWEST Particle: Photon's Journey",
+      "stack_sha256": "7dc76009c4e9e7c6652fed95a011524e74758ba1ac750a92463299d44d16f691",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-05T18:43:11.773967+00:00",
+      "dropped_shots": [
+        3
+      ],
+      "dropped_shot_roles": {
+        "3": "loop_seam"
+      },
+      "coherence": {
+        "loop_closed": false,
+        "narration_delivered": true,
+        "arc_roles_missing": [
+          "loop_seam"
+        ],
+        "duration_s": 11.03,
         "duration_in_band": null,
         "degraded": true
       }
