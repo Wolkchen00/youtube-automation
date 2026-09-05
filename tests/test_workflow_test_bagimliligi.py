@@ -166,5 +166,47 @@ class PipefailTests(unittest.TestCase):
         )
 
 
+class KanalAlarmiTests(unittest.TestCase):
+    """Her KANAL hatti patlayinca Telegram'a haber vermeli.
+
+    2026-09-04 denetimi: dort kanal workflow'undan yalniz unnatural-lab
+    bildirim gonderiyordu. Digerleri sessizdi, yani Galactic / Shadowed History /
+    AImagine kirilirsa Ihsan HIC ogrenmezdi , Galactic'i dort gun sessizce
+    olduren korlugun ta kendisi. Uzaktayken tek gorunurluk Telegram'dir.
+    """
+
+    KANAL_HATLARI = {
+        "event-horizon.yml", "flashpoints.yml",
+        "unnatural-lab.yml", "fear-slide.yml",
+    }
+
+    def test_her_kanal_hatti_basarisizlikta_telegrama_haber_veriyor(self):
+        eksik = []
+        for ad in sorted(self.KANAL_HATLARI):
+            data = yaml.safe_load((WORKFLOW_DIR / ad).read_text(encoding="utf-8"))
+            adimlar = _steps(data)
+            tg = [s for s in adimlar if "api.telegram.org" in _run_text(s)]
+            if not tg:
+                eksik.append(f"{ad}: hic Telegram bildirimi yok")
+                continue
+            if not any("failure()" in str(s.get("if") or "") for s in tg):
+                eksik.append(f"{ad}: bildirim var ama 'if: failure()' degil")
+        self.assertFalse(
+            eksik,
+            "bu kanal hatlari sessizce olebilir: " + "; ".join(eksik),
+        )
+
+    def test_bildirim_kosunun_sonucunu_degistirmiyor(self):
+        """Telegram ulasilamazsa kosu KIRMIZI olmamali (yanlis alarm uretmesin)."""
+        for ad in sorted(self.KANAL_HATLARI):
+            data = yaml.safe_load((WORKFLOW_DIR / ad).read_text(encoding="utf-8"))
+            for s in _steps(data):
+                if "api.telegram.org" in _run_text(s):
+                    self.assertTrue(
+                        s.get("continue-on-error"),
+                        f"{ad}: Telegram adimi continue-on-error tasimiyor",
+                    )
+
+
 if __name__ == "__main__":
     unittest.main()
