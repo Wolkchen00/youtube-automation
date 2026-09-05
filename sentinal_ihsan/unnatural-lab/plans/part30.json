@@ -51,5 +51,9 @@
   "family": "impossible-behaviour",
   "music": "A dry, percussive bed featuring soft, rhythmic clicks and gentle, echoing woodblock strikes, complemented by a low, humming drone that enters briefly. The tempo is deliberate and steady, with plenty of negative space, opening with a distinct click.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/jZR7hLtB/ep30-yellow-banana.png"
+  ],
+  "ref_prompt_sha256": "0fc91528f266316809488c2bc1615f21d047f9c84405cf737694d45f5bc98e25"
 }
