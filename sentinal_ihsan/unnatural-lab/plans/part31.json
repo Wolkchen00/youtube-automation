@@ -51,5 +51,9 @@
   "family": "impossible-state-change",
   "music": "A sparse and dry percussive arrangement featuring crisp, snapping sounds and hollow, resonant taps on wood, underlined by a deep, sustained low frequency drone. The rhythm is slow and steady, with ample quiet space, commencing with a sharp snap.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/Dn8SmY2/ep31-plastic-water-bottle.png"
+  ],
+  "ref_prompt_sha256": "6c9e40696c6cb75d0aeec1993e26dbffff4480168c5ec80acea57eaff4569a17"
 }
