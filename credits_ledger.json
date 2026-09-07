@@ -1007,6 +1007,14 @@
       "reserved": 900,
       "actual": 378.0,
       "ts": "2026-09-06T22:12:27.148407+00:00"
+    },
+    {
+      "month": "2026-09",
+      "series": "event-horizon",
+      "part": 29,
+      "reserved": 900,
+      "actual": 336.0,
+      "ts": "2026-09-07T20:06:36.845078+00:00"
     }
   ],
   "episode_spend": {
