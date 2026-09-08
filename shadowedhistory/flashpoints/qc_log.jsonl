@@ -205,3 +205,11 @@
 {"ts": "2026-09-07T23:00:37Z", "event": "qc_api_result", "attempt_id": "a2c5787dea724f82b615600141d8f895", "outcome": "ok"}
 {"ts": "2026-09-07T23:00:37Z", "event": "review", "episode": 28, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 2, "issues": ["Rain appears somewhat static and unnatural in some frames."], "fix_notes": ["Ensure rain is dynamically animated and realistic."], "clip": "shot_02.mp4"}
 {"ts": "2026-09-07T23:00:37Z", "event": "qc_pass", "episode": 28, "shot": 2, "attempt": 0, "content_sha256": "c543536cf973985b9de410a7c3590e15807a3b4f114862621a2fc807a6a9857e", "clip": "shot_02.mp4"}
+{"ts": "2026-09-08T22:52:34Z", "event": "qc_api_attempt", "attempt_id": "83feed9b33fd4a59a54a6061b4def2cb", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 29, "shot": 1}
+{"ts": "2026-09-08T22:52:40Z", "event": "qc_api_result", "attempt_id": "83feed9b33fd4a59a54a6061b4def2cb", "outcome": "ok"}
+{"ts": "2026-09-08T22:52:40Z", "event": "review", "episode": 29, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-09-08T22:52:40Z", "event": "qc_pass", "episode": 29, "shot": 1, "attempt": 0, "content_sha256": "16c7c4b8146fd457a00400b850d4744e67ff19f418fc8e28829aa5967120b7ad", "clip": "shot_01.mp4"}
+{"ts": "2026-09-08T22:54:32Z", "event": "qc_api_attempt", "attempt_id": "3b613810da064bdbbc6b0f68ec03d5ee", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 29, "shot": 2}
+{"ts": "2026-09-08T22:54:41Z", "event": "qc_api_result", "attempt_id": "3b613810da064bdbbc6b0f68ec03d5ee", "outcome": "ok"}
+{"ts": "2026-09-08T22:54:41Z", "event": "review", "episode": 29, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
+{"ts": "2026-09-08T22:54:41Z", "event": "qc_pass", "episode": 29, "shot": 2, "attempt": 0, "content_sha256": "dfd93b1890100652ac3d7a0a5fffcc8d397ca37a5909c4cba9daf97602b0a562", "clip": "shot_02.mp4"}
