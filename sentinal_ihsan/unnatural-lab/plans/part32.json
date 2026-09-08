@@ -53,5 +53,9 @@
   "family": "impossible-continuity",
   "music": "A minimal, dry percussive track built with soft, brushing textures and gentle, hollow thuds on wood, creating a quiet, looping rhythm. It features no melodic elements or swells, focusing on negative space, starting immediately with a soft brush sound.",
   "hook_shot": 2,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/C5DhBhxg/ep32-folded-white-cloth-napkin.png"
+  ],
+  "ref_prompt_sha256": "dce1e683d10b3528d38b0af70f4c2f169467dc136cd3a315684fb1a16b8b18c7"
 }
