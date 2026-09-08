@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 31,
+    "title": "What If Earth Had Rings? Sky BLADES"
+  },
+  "synopsis": "If Earth possessed rings like Saturn's, they would create dazzling sky phenomena and cast dynamic shadow bands across the planet's surface.",
+  "narration": "What if Earth had rings like Saturn's? They would blaze across our sky day and night, an immense arc stretching from horizon to horizon. These magnificent structures would also cast a colossal shadow, a dark band shifting across continents with the seasons. A truly breathtaking, yet profound, celestial display.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Earth seen from orbit, slowly rotating, serene, clear blue atmosphere. Subtle light, no rings visible initially. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Camera pulls back to reveal immense, detailed rings forming around Earth, catching brilliant sunlight, casting a delicate but distinct shadow on the planet's surface. The rings are prominent and majestic. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A time-lapse view from Earth's surface, showing a vast, bright ring system arching across the sky from horizon to horizon, with its sharp, dynamic shadow band slowly sweeping across a landscape (e.g., mountains, plains) as if the planet rotates or seasons shift. Vertical 9:16 aspect ratio.",
+      "seed": null
+    }
+  ],
+  "family": "bilim temelli what-if",
+  "seed_id": 34,
+  "music": "A grand, sweeping orchestral piece with a sense of wonder and cosmic scale. Starts with a gentle, inquisitive swell, building subtly as the rings appear. A majestic, sustained chord at the moment the shadow band is revealed, then slowly receding with a forward-moving pulse, ending unresolved to facilitate a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

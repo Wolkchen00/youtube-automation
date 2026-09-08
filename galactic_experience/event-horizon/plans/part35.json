@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 35,
+    "title": "Enceladus: Ocean BLASTS into Space"
+  },
+  "synopsis": "Saturn's moon Enceladus expels plumes of water from a hidden subsurface ocean directly into space, contributing material to one of Saturn's iconic rings.",
+  "narration": "Enceladus fires plumes of water from a hidden ocean straight into space, building one of Saturn's rings. This tiny moon, warmed by tidal forces, vents cryovolcanic geysers through cracks in its icy shell. These majestic icy fountains continuously feed the E ring, a testament to Enceladus's dynamic subsurface world.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close-up of Enceladus's icy, fractured surface, with glowing 'tiger stripes' hinting at subsurface activity. No plumes visible yet, just the frozen landscape. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Camera pulls back to reveal Enceladus majestically erupting massive, glowing plumes of water ice and vapor from its south polar region, spraying outward into the vacuum of space. Saturn's rings are visible in the far background. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "The plumes stream away from Enceladus, visibly coalescing and dispersing into a faint, shimmering band that feeds into and becomes a discernible part of one of Saturn's broader, more diffuse rings. Camera tracks the material's trajectory away from the moon. Vertical 9:16 aspect ratio.",
+      "seed": null
+    }
+  ],
+  "family": "güneş sistemi uçları",
+  "seed_id": 53,
+  "music": "An ethereal, shimmering and wondrous piece, featuring delicate synth pads and a gentle, flowing pulse. Starts softly, building with a sense of discovery as Enceladus comes into view. A beautiful, uplifting swell during the plume eruption, then gently returns to a sustained, melodic motif, ending mid-phrase for a smooth loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

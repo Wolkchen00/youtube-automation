@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 33,
+    "title": "The Universe's Greatest Mystery: Vanishing GALAXIES"
+  },
+  "synopsis": "Due to accelerating cosmic expansion, galaxies beyond our local group are destined to recede beyond the observable universe, becoming forever invisible.",
+  "narration": "Because cosmic expansion is accelerating, every galaxy beyond our Local Group will one day slip past the edge of what we can ever observe. These distant islands of stars, once visible, will eventually recede faster than light itself. Our cosmic view will shrink, leaving a vast, empty canvas beyond our reach.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A wide, deep field view of countless vibrant, distant galaxies, some spiraling, some elliptical, against a dark cosmic web. Gentle, slow camera drift through the galactic tapestry. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Camera slowly pans or zooms to show a vast, empty region of space, with only faint, extremely redshifted light from what were once visible galaxies, hinting at their accelerated recession. The sense of vast emptiness is palpable. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A slow, melancholic fade-out of distant galaxy clusters. Individual galaxies appear to dim and redshift, their light stretching and fading into the infinite darkness, emphasizing the accelerating expansion of space and their eventual disappearance. Vertical 9:16 aspect ratio.",
+      "seed": null
+    }
+  ],
+  "family": "kozmik kader",
+  "seed_id": 42,
+  "music": "An expansive, slowly evolving ambient piece with a touch of melancholy and profound mystery. Starts with shimmering, ethereal pads. Gradually introduces a deep, resonating drone as the galaxies appear. A subtle, sustained upward swell at the moment of their 'vanishing,' then slowly fades into silence with a gentle, open-ended motif, making it perfectly loopable.",
+  "hook_shot": 3,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

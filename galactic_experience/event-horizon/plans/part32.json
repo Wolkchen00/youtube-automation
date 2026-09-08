@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 32,
+    "title": "WASP-12b: Planet Being DEVOURED"
+  },
+  "synopsis": "The exoplanet WASP-12b is being stretched into an egg shape and losing mass as its host star slowly devours it.",
+  "narration": "WASP-12b is an exoplanet trapped in a death spiral, being slowly devoured by its star. Intense tidal forces stretch this scorching world into a distorted egg shape, ripping away its atmosphere. Mass bleeds from the planet's surface every second, forming a fiery stream into the hungry star.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "Close up of a dark, scorching exoplanet, WASP-12b, with a visible, turbulent atmosphere glowing faintly from internal heat. No visible star initially, just the planet's fiery surface. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Camera pulls back to reveal the planet is dramatically egg-shaped and tidally locked, distorted by the immense gravitational pull of its nearby, blazing host star. Glimpses of superheated material visibly streaming off its stretched surface. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "The distorted, egg-shaped exoplanet, with clear, luminous streams of superheated material spiraling away from its elongated side, forming a fiery, ethereal arc towards the engulfing star. The stellar surface is visible. Vertical 9:16 aspect ratio.",
+      "seed": null
+    }
+  ],
+  "family": "cehennem gezegenler",
+  "seed_id": 38,
+  "music": "A tense, dramatic, and slightly eerie orchestral piece. Starts with a low, throbbing bass and unsettling high strings. Builds intensity with a sense of inevitable doom as the planet's distortion is revealed, reaching a brief, jarring climax during the mass transfer, then tapering off with a lingering, melancholic drone, designed to loop seamlessly.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}

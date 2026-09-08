@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 34,
+    "title": "Magnetars: Atoms RIPPED Apart"
+  },
+  "synopsis": "The magnetic field of a magnetar is so incredibly powerful that it could tear apart the very atoms of a human body from a vast distance.",
+  "narration": "A magnetar's magnetic field is so violently powerful that from a thousand kilometers away, it would pull the atoms of your body apart. These cosmic giants possess the strongest known magnetic fields in the universe. Such unfathomable forces distort nearby matter and defy our everyday understanding of physics.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "An extreme close-up of a rapidly spinning, dense neutron star, its surface shimmering with high-energy activity and subtle, glowing hotspots, hinting at immense power. Visible magnetic field lines are subtle. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "Camera pulls back to reveal the magnetar, surrounded by incredibly strong, visible magnetic field lines that warp and distort light and nearby cosmic dust, creating a monstrous cosmic engine effect. The field is powerful and overwhelming. Vertical 9:16 aspect ratio.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A stylized visual representation of faint gas clouds or abstract particles being violently stretched, elongated, and disintegrated as they approach the magnetar's intense magnetic field, emphasizing its destructive power. Energy pulses emanate from the magnetar. Vertical 9:16 aspect ratio.",
+      "seed": null
+    }
+  ],
+  "family": "derin uzay canavarları",
+  "seed_id": 46,
+  "music": "A low, intense, industrial drone with high-frequency, almost piercing, synthesized sounds. Begins with a deep, resonant pulse. Builds in a jarring, discordant manner as the magnetar's power is hinted at, reaching a sharp, unsettling peak during the 'ripping apart' moment, then slowly decays into a persistent, vibrating hum, ensuring a seamless loop.",
+  "hook_shot": 2,
+  "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352"
+}
