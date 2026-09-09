@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 32,
+    "title": "How Abu Simbel Moved Mountains In 1968!"
+  },
+  "synopsis": "Between 1964 and 1968, engineers meticulously dismantled and relocated the ancient Abu Simbel temples to save them from a rising lake.",
+  "narration": "From 1964 to 1968, engineers faced an impossible task. They carefully cut the massive 13th-century-BC Abu Simbel temples into thousands of blocks, moving and meticulously rebuilding them, saving them from the rising waters of a new lake.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A wide, sweeping shot showing the gigantic facade of the Great Temple of Ramesses II at Abu Simbel, partially submerged by rising, clear blue lake water. Small, 1960s-era work boats navigate near the base, dwarfed by the ancient monument, hinting at the impending challenge. The scale is immense.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "A dramatic close-up on engineers in hard hats and period clothing, meticulously using modern cutting tools to saw through a colossal stone block, revealing the ancient hieroglyphs beneath the cut. Dust motes dance in the harsh desert light, emphasizing the precision and difficulty of the work.",
+      "seed": null
+    }
+  ],
+  "family": "imkânsız mühendislik",
+  "seed_id": 40,
+  "music": "A powerful, grand, and slightly mysterious orchestral piece, infused with rhythmic percussion and deep brass, evoking the monumental scale of ancient structures and modern engineering. The music should convey a sense of awe and relentless effort, building with a steady, driving pulse that underlines the colossal undertaking, concluding with an open, unresolved chord.",
+  "title_card": {
+    "title": "Abu Simbel",
+    "subtitle": "Nubia, Egypt, 1964-1968"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

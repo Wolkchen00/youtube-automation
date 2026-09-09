@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 34,
+    "title": "The Real Reason France Used Guillotines In 1977!"
+  },
+  "synopsis": "France conducted its final guillotine execution in 1977, an astonishing historical overlap with the premiere of Star Wars.",
+  "narration": "France's final execution by guillotine occurred in 1977, an astonishing fact. This medieval method of capital punishment was still in use the very same year that Star Wars premiered, showcasing a stark contrast in human progress.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A dramatic, low-angle shot of the base of a guillotine, weathered wood and dull metal blades. A single drop of water slowly falls, catching the harsh, clinical light, hinting at its grim function. The composition is stark and cold, emphasizing its outdated brutality.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "A vibrant, colorful, and slightly chaotic close-up of a 1977 movie theater marquee, buzzing with neon lights, prominently displaying \"STAR WARS\" in classic typography. Excited crowds in period fashion mill about in the foreground, their faces alight with anticipation, a stark contrast to the previous shot.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 46,
+  "music": "A dramatically contrasting score. It opens with a dark, ominous, and percussive rhythm reminiscent of historical drama, then subtly shifts to incorporate futuristic, slightly unsettling synth elements, maintaining a driving, almost jarring pace. The music reflects both an antiquated past and an emerging future, creating a sense of temporal dissonance, concluding with an abrupt, unresolved synth chord.",
+  "title_card": {
+    "title": "Guillotine & Star Wars",
+    "subtitle": "France, 1977"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

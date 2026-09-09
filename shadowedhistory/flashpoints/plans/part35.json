@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 35,
+    "title": "Flat Earth: Fact Or Modern Fiction?"
+  },
+  "synopsis": "Educated Europeans understood Earth's spherical shape throughout the Middle Ages, with the flat-earth myth largely originating from an 1828 biography of Columbus.",
+  "narration": "Educated Europeans in the Middle Ages knew Earth was round. The widespread myth of a flat Earth actually spread from Washington Irving's 1828 fictionalized biography of Columbus, proving historical narratives are often shaped by later stories.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A medieval scholar, perhaps a monk in a scriptorium, in a close-up, drawing with a quill on parchment. The camera focuses on the intricate drawing: a detailed world map depicting a clear spherical Earth, complete with known continents and celestial observations, illuminated by natural window light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "A close-up on the cover of an ornate, leather-bound 19th-century book titled \"A History of the Life and Voyages of Christopher Columbus\" by Washington Irving. A hand, perhaps of a modern researcher or reader, turns a page, revealing text describing the challenges Columbus faced against flat-earthers.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 52,
+  "music": "An inquisitive, slightly mysterious, yet ultimately uplifting orchestral piece, driven by rhythmic strings and light percussion. It begins with a subtle, questioning tone, then builds into a confident, revealing melody, conveying the idea of discovery and truth emerging from misconception. The music maintains a steady, engaging pace, ending with a clear, resonant tone for a seamless loop.",
+  "title_card": {
+    "title": "Flat Earth Myth",
+    "subtitle": "Europe, Middle Ages / 1828"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

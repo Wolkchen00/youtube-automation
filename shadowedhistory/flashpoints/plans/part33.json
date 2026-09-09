@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 33,
+    "title": "Stanislav Petrov: The Man Who Saved The World"
+  },
+  "synopsis": "In 1983, Soviet officer Stanislav Petrov defied protocol by judging a nuclear launch alarm false, potentially averting global war.",
+  "narration": "In 1983, Soviet officer Stanislav Petrov faced an unthinkable choice. With alarms blaring, indicating incoming US missiles, he trusted his gut, dismissing the warning as a system malfunction. His solitary decision likely prevented a global nuclear war.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Extreme close-up on the face of a Soviet officer in 1980s uniform, sweat beading on his brow, eyes wide with intense focus as he stares at an analog radar screen filled with blips. The frantic glow of red warning lights illuminates his face.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "A tight shot over the shoulder of the same officer, his hand hovering over a large red button on a complex, dated control panel, his finger hesitating. The screen in front shows a stark, urgent \"LAUNCH DETECTED\" message in Cyrillic, with a countdown clock ticking down, emphasizing the immense pressure of his decision.",
+      "seed": null
+    }
+  ],
+  "family": "unutulmuş kişi",
+  "seed_id": 42,
+  "music": "A tense, minimalist electronic score with a relentless, low-frequency pulse, building gradually with digital textures and sharp, metallic percussive hits. The atmosphere is one of high-stakes pressure and internal conflict, with moments of stark silence broken by unsettling electronic tones, driving forward with an inescapable sense of dread, ending mid-loop.",
+  "title_card": {
+    "title": "Stanislav Petrov",
+    "subtitle": "Soviet Union, 1983"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}
