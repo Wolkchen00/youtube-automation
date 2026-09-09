@@ -279,3 +279,15 @@
 {"ts": "2026-09-08T19:37:42Z", "event": "qc_api_result", "attempt_id": "697f4e702d6b4fa0990625b50fc2c7ee", "outcome": "ok"}
 {"ts": "2026-09-08T19:37:42Z", "event": "review", "episode": 30, "shot": 3, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_03.mp4"}
 {"ts": "2026-09-08T19:37:42Z", "event": "qc_pass", "episode": 30, "shot": 3, "attempt": 0, "content_sha256": "f16653833194273556f4c0a7c55c327fe338727ee8ef6394754b9f99d021c70d", "clip": "shot_03.mp4"}
+{"ts": "2026-09-09T19:25:39Z", "event": "qc_api_attempt", "attempt_id": "5bf1f0e09a584acbac01ea6385585f1f", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 31, "shot": 1}
+{"ts": "2026-09-09T19:25:45Z", "event": "qc_api_result", "attempt_id": "5bf1f0e09a584acbac01ea6385585f1f", "outcome": "ok"}
+{"ts": "2026-09-09T19:25:45Z", "event": "review", "episode": 31, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-09-09T19:25:45Z", "event": "qc_pass", "episode": 31, "shot": 1, "attempt": 0, "content_sha256": "35e07ace43ee8a631019db6afe3a56d86140c4eb9c33feb026fd00cec42ec5c3", "clip": "shot_01.mp4"}
+{"ts": "2026-09-09T19:27:42Z", "event": "qc_api_attempt", "attempt_id": "2ee17a8d81594ebc96fcaaaf453f49d5", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 31, "shot": 2}
+{"ts": "2026-09-09T19:27:51Z", "event": "qc_api_result", "attempt_id": "2ee17a8d81594ebc96fcaaaf453f49d5", "outcome": "ok"}
+{"ts": "2026-09-09T19:27:51Z", "event": "review", "episode": 31, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
+{"ts": "2026-09-09T19:27:51Z", "event": "qc_pass", "episode": 31, "shot": 2, "attempt": 0, "content_sha256": "d3db00e3ed7a5052c4b53a1cfc5daaaf874ce6710bdb5869e349494f08e0cba1", "clip": "shot_02.mp4"}
+{"ts": "2026-09-09T19:29:49Z", "event": "qc_api_attempt", "attempt_id": "139dbd6217444ac3bfd836c9d20700f9", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 31, "shot": 3}
+{"ts": "2026-09-09T19:29:59Z", "event": "qc_api_result", "attempt_id": "139dbd6217444ac3bfd836c9d20700f9", "outcome": "ok"}
+{"ts": "2026-09-09T19:29:59Z", "event": "review", "episode": 31, "shot": 3, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["The landscape does not resemble Earth's surface, despite the prompt specifying 'from Earth's surface'."], "fix_notes": ["Ensure the landscape clearly depicts Earth's surface features."], "clip": "shot_03.mp4"}
+{"ts": "2026-09-09T19:29:59Z", "event": "qc_pass", "episode": 31, "shot": 3, "attempt": 0, "content_sha256": "e1869cefebd191904f7a8f6e0cc03dcee73ecc7d14ec2da3da96aeea32b08e5f", "clip": "shot_03.mp4"}

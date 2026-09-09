@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 35,
-  "next_part": 31,
+  "next_part": 32,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -726,6 +726,27 @@
         "narration_delivered": true,
         "arc_roles_missing": [],
         "duration_s": 16.62,
+        "duration_in_band": null,
+        "degraded": false
+      }
+    },
+    "31": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep31/ep31_narrated_music.mp4",
+      "subtitle": "What If Earth Had Rings? Sky BLADES",
+      "stack_sha256": "6d8fa04adaf0bef1073798a89e48508f15e30e77e101ebe9f21192710927b5a7",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-09T19:35:03.008439+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": true,
+        "arc_roles_missing": [],
+        "duration_s": 19.62,
         "duration_in_band": null,
         "degraded": false
       }
