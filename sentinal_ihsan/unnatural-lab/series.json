@@ -438,6 +438,13 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "33": {
+      "status": "qc_retry",
+      "first_held_at": "2026-09-09T21:32:27.881929+00:00",
+      "retry_count": 1,
+      "last_reason_code": "AUDIO_MASTER",
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: true-peak -0.9 dBTP > -1.0 dBTP"
     }
   }
 }

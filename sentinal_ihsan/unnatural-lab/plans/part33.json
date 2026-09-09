@@ -51,5 +51,9 @@
   "family": "impossible-material",
   "music": "A sparse, dry percussive bed featuring soft, rhythmic taps and low woody hits. A quiet sustained tone underpins a slow, steady pulse with ample negative space. No melody lines, no swells, no ethereal pads, and no vocals, starting immediately.",
   "hook_shot": 3,
-  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/zh8KJ6mD/ep33-lemon.png"
+  ],
+  "ref_prompt_sha256": "1c128c9e6b08032c0a3fb47e644b31640beb9684ce9242835dbf7f80aee81b11"
 }
