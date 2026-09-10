@@ -210,3 +210,45 @@ Kod iddialarinin tamami dosyadan dogrulandi; hicbiri sozune inanilarak kabul edi
   kunye alani da birebir esitlikle test ediliyor; degismeyen alanlarin karsilastirmasi
   **9eec629** temel commit'ine sabitlendi.
 
+## Round 3
+### Integrator findings (Codex, verbatim)
+
+Verified: margin `0.0` preserves the existing three-attempt arithmetic; runtime has no `master_audio` caller outside `produce.py`—only tests do. The two identified sets are the only layer-name vocabularies. All four titles/cards match their source plans, family rotation, patterns, and limits. The degraded gate reaches finite content retry and does not conflict with today’s 300/900 budget result. No protected channel files are listed for modification.
+
+- [FIX] The DOKUNMA section still says `master_audio` behavior does not change, directly contradicting Rock 1’s opt-in behavioral change and leaving implementation instructions ambiguous -> Say that default behavior is unchanged while Event Horizon explicitly opts into the new pullback arithmetic.
+
+- [FIX] Rock 1 and Rock 2 test `master_audio` directly, so every stated test can pass if `produce.py` forgets to forward `bible.master_true_peak_margin_db`, and their constructed mix bypasses the actual `master_lufs` branches that change voice normalization and music gain from 0.28 to 0.50 -> Add one production-path test proving the 0.2 argument is forwarded and measuring the final narration/music ratio, LUFS, and true peak after the real Event Horizon mixing path.
+
+- [FIX] Full preflight is not called by `series_runner.py`, while `produce.py` currently skips `title_card_overlay` when card fields are absent, so a required but missing card can still consume credits and publish without text -> Call the shared required-title-card validator from production before the budget/paid path, or explicitly fail production whenever `title_card` is required but disabled, missing, or blank.
+
+- [FIX] The title-card proof only detects changed upper-third pixels, which can pass for incorrect or unreadable marks without proving the exact queued text reached the final episode -> Add a production-path assertion for the exact title/subtitle arguments and include an actual phone-scale final-frame review in the Level 10 owner evidence.
+
+VERDICT: NOT YET
+
+### Visionary response (Claude)
+
+Codex bu turda bes dogrulama maddesini olumlu kapatti (pay 0,0 esitligi, master_audio'nun
+produce disinda cagricisi olmadigi, iki katman sozlugunun tek oldugu, dort basligin
+kaynak planlarla tutarli oldugu, korumali kanal dosyalarina dokunulmadigi). Kalan dort
+bulgunun ikisi somut kod iddiasiydi ve ikisi de kaynaktan dogrulandi.
+
+- **ACCEPTED** DOKUNMA listesi celiskisi -> "master_audio davranisi degismez" satiri
+  duzeltildi: VARSAYILAN davranis degismez, event-horizon acikca opt-in olur.
+- **ACCEPTED (buyuk)** `master_lufs` uc anahtari birden ceviriyor -> Kaynaktan
+  dogrulandi: `produce.py:604` amix_normalize, `:656` music_volume 0.28 -> **0.50**,
+  `:659` limit_mix_peak. Yani ses masteri acilinca MUZIK de neredeyse iki katina
+  cikiyor. Anlatim tabanli bir kanalda bu, duzeltmeye calistigimiz seyi gomebilirdi
+  ve benim kanitim (zaten miksLENMIS yayinlanmis videoyu master'lamak) bu yolu hic
+  test etmemisti. Plana tablo olarak yazildi ve ROCK 2'nin proof'u gercek karisim
+  yolunu olcen bir URETIM YOLU testiyle degistirildi: pay'in iletildigi, uc dalin
+  secildigi ve anlatimin muzige gore en az 6 dB onde kaldigi olculur.
+- **ACCEPTED** preflight uretim yolunda degil -> `series_runner.py:680` dogrulandi:
+  yalnizca `validate_required_platforms` iceri aliniyor; `preflight.inspect/run` bir
+  CLI aracidir. "Ucretli isten once reddet" garantim YANLISTI. Koruma `produce.py`nin
+  zaten kosan `required_layers` blogona (satir 1345-1364) tasindi; preflight ayni
+  fonksiyonu elle kontrol icin ayna olarak cagirir.
+- **ACCEPTED** kunye piksel testi metni kanitlamiyor -> Test farksal hale getirildi
+  (bos baslikla daha az murekkep) ve uzerine `title_card_overlay`'e gecilen `title` /
+  `subtitle` argumanlarinin plandaki tam metinle birebir esitligini cakan bir uretim
+  yolu testi eklendi. Telefon olceginde final kare Ihsan'a gonderilecek.
+
