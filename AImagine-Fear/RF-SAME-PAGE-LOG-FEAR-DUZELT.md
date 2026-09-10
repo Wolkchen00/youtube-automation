@@ -132,3 +132,109 @@ Bagimsiz dogrulama: `git status --porcelain` bos , read-only tur hicbir dosyaya 
 - Seedance 20/25 sn destegi dogrulandi mi? -> HAYIR, tavan 15 ve depoda yazili. Rotalar
   havuzdan cikti.
 - `master_yolu` neresi? -> `out/<slug>/master/`, ham video glob'unun disinda.
+
+## Round 2
+
+### Integrator bulgulari (Codex, AYNEN)
+
+```
+Önceki bulguların çoğu kapatılmış: ffprobe JSON ayrıştırması, bağlantı testleri, taşınabilir `build.load_route()` kullanımı, kesirli süre reddi, master→audit sırası, master dizini, sidecar kullanımı, ffmpeg kabul kapısı, TITLE tükenmesi, gerçek tags çağrısı, atomik şema göçü, çevrimsel palet iddiasının kaldırılması ve çevrimdışı `--dry`.
+
+- [FIX] r2 hâlâ Rock 2 sorun metninde ve SAME-PAGE logunun sonunda `seedance-2` tavanını kesin olarak 15 saniye ilan ederek kendi doğru “limitler bilinmiyor” analizini çürütüyor -> Kesin tavan ifadelerini kaldırıp yalnızca `seedance-2-fast` limitlerinin belgeli olduğunu yaz.
+- [FIX] `{15}` süre listesi muhafazakâr olsa da yalnızca 15s@720p gözlenmişken 15s@1080p kombinasyonunu yayınlanabilir kabul ediyor -> Yeteneği `(model, süre, çözünürlük)` matrisiyle `verified`/`canary-only` olarak tut ve doğrulanmamış kombinasyonların normal yayınını kodla engelle.
+- [FIX] `--profil 720p` API ve kapıyı 720p’ye çevirirken kanon hâlâ 1080x1920 istediği için kaçış yolu teknik olarak başarılı ama kanona aykırı video üretebilir -> 720p’yi yalnız `--yayinlama` moduna sınırla veya seçili profili prompt FORMAT bölümünün de tek kaynağı yap.
+- [FIX] İlk kanaryayı elle çalıştırma şartı yalnızca prosedürdür ve zamanlanmış workflow birleşmeden sonraki ilk koşuda doğrudan 1080p yayınlayabilir -> Doğrulanmamış profil için kalıcı onay durumu veya SHA-bağlı onay olmadan yayın yolunu açma.
+- [FIX] Rock 1b yalnız ilk örneği gözden geçiriyor ve onaylanan master’ı yayımlama yolu tanımlamadığından sonraki normal koşu yeni, incelenmemiş bir video üretip yayımlar -> Her video için onaylanan SHA’yı saklayan `publish-existing` akışı kur ve yalnız o master’ı yayımla.
+- [FIX] Rock 1b “üret→denetle→master” derken Rock 3 “üret→master→denetle” diyor ve mevcut proof yalnızca publisher’ın çağrılmadığını doğruluyor -> Tek doğru sırayı master→audit→contact olarak yaz ve tam çağrı sırasını bağlantı testinde doğrula.
+- [FIX] `kontrol.py` ffmpeg dönüş kodlarını yok sayıp üretilmemiş kontakt sayfasının yolunu döndürebildiği için kanarya proof’u insan inceleme artefaktı olmadan geçebilir -> `gunluk.py` kontakt dosyasının varlığını ve sıfırdan büyük olduğunu doğrulasın, aksi durumda başarısız çıksın.
+- [FIX] Rock 3’te 80 MB değerinin tekrar sabitlenmesi `core/uploader.MAX_UPLOAD_MB` değiştiğinde denetimsiz delivery transcoding’i yeniden açar -> Eşiği doğrudan read-only core sabitinden oku ve aynı bayt hesabını kullan.
+- [FIX] TITLE havuzu denetiminin üretimden önce yapılacağı söylenmediği için mevcut kontrol akışına göre tükenmiş havuz her gün kredi harcadıktan sonra durabilir -> Başlık seçimi, tükenme ve bütün metadata preflight’ını kredi/API çağrısından önce çalıştır.
+- [FIX] TITLE varyantları yalnız birebir eşitlikte reddedilirken uploader noktalama, emoji ve harf büyüklüğünü `normalize_title()` ile yok ediyor -> Hem build içi benzersizliği hem ledger kullanım kontrolünü uploader ile aynı normalizasyonla yap ve normalize-eşit iki varyant testi ekle.
+- [FIX] “En uzun büyük harfli landmark kelimesi” kuralı verilen örneklerle çelişiyor çünkü Burj Khalifa için `Khalifa`, Empire State Building için `Building` seçilir -> Açık bir `TITLE_KEYWORD` alanı kullan veya deterministik stop-word kuralını gerçek dokuz landmark üzerinde test et.
+- [FIX] `kullanildi` yalnız truthy bir YouTube yanıtından türetilirse gerçek platform post kimliği olmayan belirsiz HTTP 200 yanıtı rotayı ilerletebilir -> `post_id`/`publication_id` çıkarılmadan `kullanildi=true` deme ve truthy-kimliksiz yanıt testi ekle.
+- [FIX] YouTube başarısız ama Instagram başarılı olduğunda mevcut `yayinla.py` yine 0 döneceği için workflow başarılı görünür ve Core Focus ihlali alarm üretmez -> Fear yayıncısının çıkış kodunu doğrulanmış YouTube yayınına bağla ve ters kısmi-başarı vakasını test et.
+- [FIX] Başarısız defter satırları mevcut aynı-gün kapısında hâlâ yayın sayıldığı için `kullanildi=false` olsa bile aynı gün güvenli YouTube tekrarını engeller -> Aynı-gün kapısını da doğrulanmış YouTube başarısına bağla.
+- [FIX] Eski `yayin.jsonl` satırlarında `kullanildi` yok ve geriye dönük doldurma yasak olduğundan yeni okuyucu bunları başarısız sayarsa rota geçmişi sıfırlanır ve eski başlıklar yeniden seçilebilir -> Alan yokken legacy `results.youtube` içinden doğrulanmış başarı çıkaran geriye uyumlu okuma testi ekle.
+- [FIX] Rock 4 başarı seçimi için `kullanildi` semantiğine dayanırken alan Rock 5’te ekleniyor, ayrıca Rock 1b PALET’i Rock 5’ten önce yazdırmayı şart koşuyor -> `kullanildi` semantiğini Rock 4’e taşı ve PALET göçünü Rock 1b’den önce al ya da ara-rock proof’larından paleti çıkar.
+- [DEFER] Platform bazlı yeniden deneme hâlâ çözülmediği için Instagram başarılı/YouTube başarısız koşunun ertesi denemesi Instagram’a farklı bir videoyu tekrar gönderebilir -> Issue #5 kabul edilebilir biçimde ertelenmiş, ancak yukarıdaki YouTube-temelli çıkış ve aynı-gün düzeltmeleri bu cycle’da kalmalı.
+- [FIX] Rock 2 sonrasında aktif `SIRA`da Toronto çıkarıldığı için yalnız bir sıcak rota kalıyor ve Rock 5’in “iki sıcak rota arasındaki çevrimsel boşluk” testi boş/vacuous biçimde geçebilir -> İkinci desteklenen sıcak rota gelene kadar SIRA aralık iddiasını kaldır ve Rock 5’i yalnız doğru etiketleme/telemetriyle sınırla.
+- [FIX] Rock 5 proof’u dokuz rotanın geçtiğini doğruluyor ama Dubai/Toronto sıcak ve diğer yedisinin neon olduğu zorunlu eşlemeyi doğrulamıyor -> Dokuz slug→PALET eşlemesini birebir test et.
+- [FIX] SIRA testi yalnız listedeki sürelerin izinli olduğunu doğruladığı için boş veya eksik SIRA da geçebilir -> SIRA’nın boş olmadığını, tekrar içermediğini ve açıkça tanımlanan aktif rota kümesine tam eşit olduğunu test et.
+- [FIX] Defter proof’u yalnız `palet` ve `kullanildi` alanlarını ararken `rota_suresi`, çözünürlük, gerçek fps, LUFS ve true peak sabit veya eksik kalabilir -> Tüm alanları denetlenen master’dan ölçülen kesin değerlerle doğrulayan kayıt testi ekle.
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+`git status --porcelain` bos , read-only tur yine hicbir dosyaya dokunmadi.
+Round 2'nin 21 bulgusunun TAMAMI kabul edildi. Ikisi plani yapisal olarak degistirdi.
+
+**Kendi dogruladigim, plani en cok degistiren iki bulgu:**
+
+- ACCEPTED , "zamanlanmis workflow birlesmeden sonraki ilk kosuda dogrudan 1080p
+  yayinlayabilir" -> **Dogrulandi ve tehlikeli.** `.github/workflows/fear-slide.yml`
+  `cron: '20 13 * * *'` (06:20 Los Angeles) ile `gunluk.py`'yi cagirip yayinliyor,
+  insan yok. "Ilk kosuyu elle yap" bir prosedur notuydu ve kod bunu zorlamiyordu.
+  Rock 1b yeniden yazildi: **yetenek matrisi** `(model, sure, cozunurluk) ->
+  dogrulandi|kanarya` ve kalici `profil_onay.json`. Kanarya kombinasyonu YAYINLANAMAZ;
+  cron main'de 1080p bulsa bile sessiz yayin yapmaz, acik mesajla durur.
+- ACCEPTED , "`{15}` listesi 15s@1080p'yi yayinlanabilir kabul ediyor, oysa yalniz
+  15s@720p gozlendi" -> Hakli. Sure tek basina yeterli anahtar degil. Izin listesi
+  `(model, sure, cozunurluk)` matrisine cevrildi; kanitlanmis tek kombinasyon
+  `(seedance-2, 15, 720p)`, cunku yayinlanan her video bu.
+
+**Kendi dogruladigim digerleri:**
+
+- ACCEPTED , `--profil 720p` kanona aykiri video uretir -> `canon/MASTER-BLOCK.md`
+  FORMAT bolumu `<<COZUNURLUK>>` / `<<FPS>>` token'larina cevrildi ve `build.py`
+  bunlari aktif profilden dolduruyor. Profil artik prompt'u da ceviriyor; uc kaynak
+  (prompt, API, kapi) tek modulden besleniyor. Round 1'deki "PROFIL tek kaynak degil"
+  bulgusu da boylece tam kapandi.
+- ACCEPTED , TITLE benzersizligi `normalize_title` ile yapilmali -> `core/utils.py:119`
+  okundu: `re.sub(r"[^a-z0-9]+", " ", t.lower()).strip()`, yani noktalama, emoji ve
+  buyuk-kucuk harf ATILIYOR. `"STRAT Tower Drop! #shorts"` ile
+  `"strat tower drop #shorts"` uploader icin AYNI baslik. Birebir esitlik kontrolu
+  yetersizdi; hem build dogrulamasi hem defter kontrolu artik `normalize_title`
+  kullaniyor ve normalize-esit iki varyant testi eklendi.
+- ACCEPTED , "en uzun buyuk harfli landmark kelimesi" kurali kendi orneklerimle
+  celisiyor -> Hakli: Burj Khalifa icin `Khalifa`, Empire State Building icin
+  `Building` secerdi. Kural atildi, yerine acik `TITLE_KEYWORD` alani geldi.
+- ACCEPTED , r2 metni hala "tavan 15 saniye" diyerek kendi analizini curutuyor ->
+  Rock 2'nin sorun metni ve log sonu duzeltildi; artik yalniz `seedance-2-fast`
+  limitlerinin belgeli oldugu yaziyor.
+- ACCEPTED , Rock 1b "uret->denetle->master", Rock 3 "uret->master->denetle" diyordu ->
+  Tek dogru sira yazildi (uret -> master -> denetle -> yayinla) ve cagri sirasi
+  baglanti testiyle dogrulaniyor.
+- ACCEPTED , `kontrol.py` ffmpeg cikis kodunu yok sayip var olmayan kontakt sayfasinin
+  yolunu donduruyor -> `--yayinlama` dosyanin varligini ve boyut > 0 oldugunu dogruluyor,
+  aksi halde basarisiz.
+- ACCEPTED , onaylanan master yayinlanamiyordu, ertesi kosu incelenmemis yeni video
+  uretip yayinlardi -> `--yayinla-mevcut <master>` eklendi, sha `profil_onay.json` ile
+  eslesmezse durur.
+- ACCEPTED , 80 MB yeniden sabitlenmis -> `core.uploader.MAX_UPLOAD_MB` oradan okunuyor,
+  ayni bayt hesabiyla. Test esigi monkeypatch ile 1'e cekiyor: sabit 80 kalsaydi test gecerdi.
+- ACCEPTED , TITLE havuzu tukenmesi uretimden SONRA patlardi -> butun metadata
+  onkontrolu kredi harcayan cagridan ONCE, ve "sifir uretim cagrisi" testiyle.
+- ACCEPTED , `kullanildi` truthy yanittan turetilirse kimliksiz HTTP 200 rotayi
+  ilerletir -> `post_id`/`publication_id` cikarilamazsa `kullanildi=false`.
+- ACCEPTED , YouTube dusup IG gecince `yayinla.py` yine 0 donuyor, workflow "basarili"
+  gorunuyor -> cikis kodu dogrulanmis YouTube yayinina baglandi.
+- ACCEPTED , ayni-gun kapisi basarisiz satirlari da yayin sayiyor -> kapi artik
+  `kullanildi=true` satirlara bakiyor.
+- ACCEPTED , eski `yayin.jsonl` satirlarinda `kullanildi` yok, yeni okuyucu gecmisi
+  sifirlar ve eski basliklar yeniden secilir -> geriye uyumlu okuma
+  (`results.youtube`'dan cikarim) ve testi. Geriye donuk YAZMA yok.
+- ACCEPTED , `kullanildi` Rock 4'te kullaniliyor ama Rock 5'te ekleniyordu; Rock 1b
+  palet basmayi sart kosuyordu -> rock sirasi degisti (palet + defter semasi ARTIK
+  Rock 4, TITLE/etiket Rock 5) ve palet Rock 1b'nin `--dry` kanitindan cikarildi.
+- ACCEPTED , Toronto `SIRA`'dan cikinca tek sicak rota kaliyor, "cevrimsel bosluk"
+  testi BOS gecerdi -> Hakli ve onemli. Aralik iddiasi plandan tamamen cikarildi;
+  Rock 4 artik yalniz dogru etiketleme ve telemetri. Gercek A/B ikinci desteklenen
+  sicak rota yazilinca baslar (issue #7).
+- ACCEPTED , Rock 4 proof'u dokuz slug -> PALET eslemesini dogrulamiyordu -> birebir
+  esleme testi.
+- ACCEPTED , `SIRA` testi bos listeyle de gecerdi -> `SIRA` bos degil, tekrarsiz ve
+  aktif rota kumesine TAM ESIT olmali. "Bos gecen test kanit degildir" genel kural oldu.
+- ACCEPTED , defter proof'u yalniz iki alana bakiyordu, digerleri sabit kalabilirdi ->
+  butun alanlar denetlenen master'dan OLCULEN degerlerle birebir dogrulanir.
+- DEFER kabul , platform bazli yeniden deneme issue #5'te kaliyor; Codex'in istedigi
+  YouTube-temelli cikis kodu ve ayni-gun duzeltmesi bu kosuda KALDI (Rock 4).
