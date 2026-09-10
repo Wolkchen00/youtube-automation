@@ -184,3 +184,9 @@ integrated loudness farki anlatim/muzik dengesini DOGRUDAN verir.
 Codex'in "stem ayrilamayabilir" endisesi yersiz.
 
 Kalan bes soru ACIK.
+
+### KULLANICI KARARI (10 Eylul 2026)
+
+`USER OVERRIDE: yok.` Ihsan "Codex kotasi acilinca devam" dedi.
+**Onay gelmeden hicbir sey insa edilmeyecek.** Toplanti duraklatildi, kapatilmadi.
+Devam notu: `Projeler/Reelyze_Arastirma/codex-toplanti/DEVAM.md`
