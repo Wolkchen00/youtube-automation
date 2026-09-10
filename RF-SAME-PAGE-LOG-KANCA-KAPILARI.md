@@ -321,3 +321,68 @@ gerçekten var. Üçü de kabul edildi.
 En büyük iki değişiklik: B1'in kapsamı okunabilir değişmezlik ifadelerini
 dışarıda bırakacak şekilde DARALTILDI, ve v3'te ertelenen yayın kurtarma
 ROCK E'ye GERİ ALINDI.
+
+## Round 4 , DEGRADED: fresh session, Integrator changed
+
+Codex kota duvarina carpti (usage limit, sifirlanma 17:42 PDT). Ihsan
+Nemotron'a gecilmesini istedi. Bu tur TAZE bir oturumdur: Nemotron,
+Codex'in onceki 54 bulgusunun karsilandigini DOGRULAYAMAZ. Tur sayisi
+devam ediyor, ama sureklilik kirildi ve bu bilerek kayda geciyor.
+Model: nvidia/nemotron-3-ultra-550b-a55b, read-only, 9 dosya okundu.
+
+Ilk cagri adim butcesinde kesildi (bu harness'in belgelenmis davranisi:
+fazla dogrulayip raporu yazmadan duruyor). Analiz saglamdi; kisa bir
+rapor-only devam turuyla yapilandirilmis bulgular alindi.
+
+### Integrator findings (Nemotron, verbatim)
+
+- [FIX] master_audio only adjusts limiter_db when true_peak fails; when true-peak passes but LUFS is out of window, no state changes between attempts -> add LUFS correction step or fail-closed when LUFS drifts beyond window
+- [FIX] target_lra is set in loudnorm but never verified on delivery measurement -> add LRA check to delivery verification alongside true_peak and LUFS
+- [FIX] master_audio loop has no cumulative 3.0 dB bound check and no 0.2 dB margin on pullback -> implement cumulative bound and margin as plan specifies
+- [CLARIFY] ROCK B B1 regex is a structure counter not semantic analyzer; part36 rejection is correct for first-frame readability but plan admits it may miss similar constructions -> confirm whether regex coverage test (adversarial suite) is sufficient or needs expansion
+- [FIX] ROCK E GitHub Release path only downloads at approval time; durable artifacts require upload at production, download+verify at run start, and skip-production logic -> extend approver.py with production-time upload and run-start recovery before ROCK E can work
+- [DEFER] Rock ordering A-D-B-C-E has correct D-before-B dependency but E assumes production pipeline stability; if A/B/C/D introduce regressions, E's recovery tests may pass on fixtures but fail on real runs -> verify A-D-B-C-E integration before E's durability claims
+- [FIX] ROCK A proof (a) only checks ffmpeg filter string for 0.3 dB movement, not actual audio convergence; proof (b) uses single 0.1 dB overshoot case -> add test with progressive overshoot requiring all 3 attempts and verify final output meets both TP and LUFS
+- [FIX] ROCK B proof relies on fixture manifest of parts 22-37; if a new plan uses a grammatical construction not in the 8 adversarial cases, it passes tests but fails in production -> add generative adversarial test that mutates violation_observation patterns beyond the 8 known cases
+
+VERDICT: NOT YET
+### Visionary response (Claude)
+
+Nemotron'un iki ana iddiasi kodda dogrulandi ve ikisi de Codex'in uc turunun
+KACIRDIGI seylerdi. Bu, taze bir model ailesinin gercek degerini gosterdi.
+
+- ACCEPTED (N1) master_audio yalniz true-peak dusunce durum degistiriyor
+  -> KODDA DOGRULANDI. `if not loudness_ok:` dali yalniz log basiyor, hicbir
+  durumu degistirmiyor. Ozdes limiter ayari + ozdes degismemis premaster =
+  ozdes cikti. LUFS-tek-basina basarisizliginda 2. ve 3. denemeler 1. denemenin
+  kopyasi, yani uc ffmpeg kosusu bosa gidiyor ve basarisizlik garanti.
+  ROCK A'ya "Kusur 2" ve onarim maddesi 4 olarak eklendi, kanit (b3) eklendi.
+- ACCEPTED-DEFERRED (N2) target_lra teslimde dogrulanmiyor -> DOGRU, ama bu
+  cevrimde YAPILMIYOR ve ISSUES'a gerekcesiyle dustu. LRA kapisi eklemek YENI
+  bir red kriteridir ve bugun gecen bolumleri dusurmeye baslayabilir; bu planin
+  kurali "ses kapilarini degistirme, yalniz yakinsamayi duzelt".
+- NOTED (N3) kumulatif sinir ve marj -> zaten v4'te planda vardi, Nemotron
+  bagimsiz olarak dogruladi. Degisiklik yok.
+- ACCEPTED (N4) B1 yapisal sayac, kapsam yeterliligi belirsiz -> plan sinirini
+  zaten kaydediyordu; N8 ile birlikte uretken saldirgan test eklendi.
+- ACCEPTED (N5) Release yolu yalniz onay aninda INDIRIYOR, uretim aninda
+  YUKLEMIYOR -> KODDA DOGRULANDI ve bu planin en degerli tek bulgusu oldu.
+  `_persist_release(slug, n, video)` yalniz `if mode == "approval":` blogunun
+  icinden cagriliyor (`series_runner.py:806`), unnatural-lab'in `publish_mode`
+  degeri `auto`. Yani bu seride kalici Release HIC olusturulmuyor. 2.896
+  kredilik kaybin mekanizmasi artik cikarim degil, tek satirlik bir kosul.
+  ROCK E uc parcaya ayrildi: uretim aninda yukleme, kosu basinda kurtarma,
+  uretimi atlama.
+- ACCEPTED (N6) A-D-B-C-E entegrasyon riski -> ISSUES'a dustu: E'nin
+  dayaniklilik testleri fixture uzerinde gecip gercek kosuda dusebilir.
+- ACCEPTED (N7) ROCK A kaniti yalniz filtre dizesine ve tek 0,1 dB vakasina
+  bakiyor -> kanit (b2) eklendi: ARTAN asimli, uc denemeyi de gerektiren
+  senaryoda son ciktinin HEM TP HEM LUFS kapisini sagladigi dogrulanacak.
+- ACCEPTED (N8) sabit fixture manifestosu yeterli kanit degil -> ROCK B
+  kanitina uretken saldirgan test eklendi: `violation_observation` ifadeleri
+  programatik mutasyona ugratilacak ve B1'in kapsami OLCULUP kaydedilecek.
+  Amac mukemmel kapsama degil, sinirin kayda gecmesi.
+
+Ozet: 8 bulgunun 7'si kabul, 1'i kabul edilip ertelendi (N2, LRA).
+Iki bulgu (N1 ve N5) uc Codex turunun kacirdigi GERCEK kusurlardi ve ikisi de
+kodda dogrulandi. Taze model ailesine gecmek, sureklilik kaybina degdi.

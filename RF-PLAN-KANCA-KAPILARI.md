@@ -3,7 +3,10 @@
 Tarih: 2026-09-10 (Los Angeles)
 Kaynak analiz: `sentinal_ihsan/REELYZE-RAPOR.md`
 Kanal: `sentinal_ihsan` / seri `unnatural-lab`
-Revizyon: v4, Same Page turu 3 sonrası (Codex bulguları: tur 1 = 23, tur 2 = 20, tur 3 = 11)
+Revizyon: v5, Same Page turu 4 sonrasi (Codex tur 1-3: 23+20+11 = 54 bulgu;
+Nemotron tur 4, TAZE OTURUM: 8 bulgu). Integrator turu 4'te Codex'ten
+Nemotron'a gecti; kota duvari nedeniyle oturum surekliligi KIRILDI ve
+taze model kendi onceki bulgularini dogrulayamaz.
 
 ## CORE FOCUS
 
@@ -101,8 +104,24 @@ Depo kökündeki `.venv` içinde pytest YOKTUR.
 
 ### ROCK A , master true-peak yakınsaması
 
-**Kusur.** `core/ffmpeg_tools.py::master_audio` her başarısız denemede
+**Kusur 1.** `core/ffmpeg_tools.py::master_audio` her başarısız denemede
 `limiter_db -= overshoot` yapıyor; marj yok, hedef sınırın tam üstüne nişanlı.
+
+**Kusur 2, YENİ (Nemotron turu 4, kodda doğrulandı).** Döngü durumu YALNIZ
+true-peak başarısız olunca değiştiriyor:
+
+```python
+if not true_peak_ok:
+    limiter_db -= overshoot      # durum değişir
+if not loudness_ok:
+    logger.warning(...)          # HİÇBİR DURUM DEĞİŞMEZ
+```
+
+True-peak geçip LUFS penceresi dışında kalırsa `limiter_db` aynı kalır.
+Filtre dizesi aynı, girdi aynı değişmemiş premaster, dolayısıyla çıktı
+BİREBİR AYNI ve ölçüm de aynı. 2. ve 3. denemeler 1. denemenin kopyasıdır:
+üç ffmpeg koşusu boşa gider ve başarısızlık garantidir. Bu kusuru ilk üç
+inceleme turu da kaçırdı.
 
 **Kanıt durumu.** Elimizdeki tek gözlem part 33'ün yuvarlanmış -0,9 dBTP
 sonucu. Deneme telemetrisi siliniyor. "AAC kare-arası tepe ekliyor" bir çıkarım.
@@ -124,6 +143,10 @@ sonucu. Deneme telemetrisi siliniyor. "AAC kare-arası tepe ekliyor" bir çıkar
    limiter tavanı, ölçülen TP ve LUFS değerleri hata mesajına ve `logs/`
    telemetrisine yazılır. Plan, hem TP hem LUFS kapısını sağlayan hiçbir
    ayarın bulunmadığı malzemede BAŞARI VAAT ETMİYOR.
+4. **Kusur 2'nin onarımı.** LUFS-tek-başına başarısızlığında ya durumu
+   DEĞİŞTİREN bir düzeltme adımı uygulanır, ya da döngü DERHAL fail-closed
+   durur ve teşhis üretir. Aynı limiter ayarıyla ikinci bir deneme koşmak
+   YASAKTIR: özdeş girdi ve özdeş filtre özdeş çıktı verir.
 
 **DEĞİŞMEZ.** `target_i=-14.0`, `target_tp=-1.0`, ve
 `produce.py::_verify_audio_master` içindeki `true_peak <= -1.0` fail-closed
@@ -138,6 +161,11 @@ kapısı aynen kalır.
     düzeltilmemiş kodu da yeşil gösterir;
 (b) gerçek AAC ile üretilmiş, 0,1 dB aşımla açılan malzemede döngünün üç
     denemede -1,0 dBTP altında kapandığı;
+(b2) ARTAN aşımlı malzemede (Nemotron turu 4): üç denemenin ÜÇÜNÜ de
+    gerektiren bir senaryoda son çıktının HEM true-peak HEM LUFS kapısını
+    sağladığı. Tek bir 0,1 dB vakası yeterli kanıt değildir;
+(b3) LUFS-tek-başına başarısızlığında iki ÖZDEŞ denemenin koşulmadığı:
+    ya durum değişir ya derhal fail-closed durulur;
 (c) 3,0 dB kümülatif sınıra çarpan malzemede fail-closed durulduğu ve
     teşhisin üretildiği;
 (d) sınır-LUFS malzemesinde iki kapının çelişmesi hâlinde de fail-closed;
@@ -292,6 +320,12 @@ YETMEZ:
   shot 2/3/4 etkilenmez;
 - tarihsel fixture'lar (parts 1-21) DEĞİŞTİRİLMEZ; part 19 için ayrı
   "biçimlendirilmiş eşdeğer" fixture yazılır.
+- **ÜRETKEN SALDIRGAN TEST (Nemotron turu 4).** Sabit manifest yeterli kanıt
+  değildir: 8 bilinen vakanın dışında bir dilbilgisi yapısı kullanan yeni bir
+  plan testleri geçip üretimde patlar. `violation_observation` ifadeleri
+  programatik olarak MUTASYONA uğratılır (zaman kipi, edilgen/etken, araya
+  giren sözcük) ve B1'in davranışı bu üretilmiş küme üzerinde raporlanır.
+  Amaç mükemmel kapsama değil, KAPSAMIN ÖLÇÜLMESİ ve sınırın kayda geçmesidir.
 
 **GERÇEK İKMAL DÖNGÜSÜ TESTİ (Codex turu 3, bulgu 6).** Yukarıdakiler kapıyı
 kanıtlar ama döngüyü kanıtlamaz. `generate_plans` / `replenish` üzerinden iki
@@ -357,13 +391,24 @@ içinde yapıyor. Kabul edilmiş çekimler koşu sınırını geçmiyor; koşu �
 her şey kayboluyor, sonraki koşu sıfırdan üretiyor, kalıcı defter saymaya
 devam ediyor. Ölçülen sonuç: 2.896 kredi, sıfır video.
 
-**DEPOLAMA BACKEND'İ, adıyla (Codex turu 3, CLARIFY).** Yeni depo icat
-EDİLMEZ. Mevcut GitHub Release yolu genişletilir: `series/approver.py`
-içinde `_download_release(tag)` ve `_cleanup_release(tag)` zaten var,
-`series_runner.py:820` bölüm kaydına `release_tag` yazıyor, ve
-`series_runner.py:441` tamamlanmayı `("video", "release_tag", "approval_msg_id")`
-üçlüsüyle ölçüyor. Saklama, anahtar üretimi ve temiz-checkout keşfi bu yolun
-üstüne kurulur ve test edilir.
+**DEPOLAMA BACKEND'İ, adıyla.** Yeni depo icat EDİLMEZ. Mevcut GitHub Release
+yolu genişletilir: `series/approver.py` içinde `_download_release(tag)` ve
+`_cleanup_release(tag)` var, `series_runner.py:147` `gh release create` ile
+videoyu yüklüyor, `:820` bölüm kaydına `release_tag` yazıyor, `:441`
+tamamlanmayı `("video", "release_tag", "approval_msg_id")` üçlüsüyle ölçüyor.
+
+**KÖK SEBEP, satır numarasıyla (Nemotron turu 4, doğrulandı).**
+`_persist_release(slug, n, video)` YALNIZ `if mode == "approval":` bloğunun
+içinden çağrılıyor (`series_runner.py:806`). unnatural-lab'in `publish_mode`
+değeri **`auto`**. Yani bu seride kalıcı Release HİÇ OLUŞTURULMUYOR ve
+üretilen hiçbir şey koşu sınırını geçmiyor. 2.896 kredilik kaybın mekanizması
+budur; artık çıkarım değil, tek satırlık bir koşul.
+
+**Bu yüzden ROCK E üç parçadır:**
+1. ÜRETİM ANINDA yükleme: tamamlanan eser, `approval` moduna bağlı olmadan
+   kalıcılaştırılır. Mevcut `_persist_release` yeniden kullanılır, yeniden yazılmaz.
+2. KOŞU BAŞINDA kurtarma: var olan eser indirilir ve doğrulanır.
+3. ÜRETİMİ ATLAMA: doğrulanmış eser varsa o çekim/master yeniden üretilmez.
 
 **KİMLİK, düzeltilmiş hâliyle (Codex turu 3, bulgu 10).**
 `doctrine_sha256` ve `ref_prompt_sha256` YETMEZ: birincisi planlar arasında
@@ -439,6 +484,15 @@ koşusunu yetkilendirmez.
 
 ## 4. ISSUES listesine ertelenenler
 
+- **`target_lra` teslimde hiç doğrulanmıyor (Nemotron turu 4).**
+  `master_audio` LRA hedefini loudnorm'a veriyor ama teslim ölçümünde yalnız
+  true-peak ve LUFS kontrol ediliyor. Bu çevrimde YAPILMIYOR, çünkü LRA kapısı
+  eklemek YENİ bir red kriteridir ve bugün geçen bölümleri düşürmeye başlayabilir;
+  bu planın kuralı "ses kapılarını değiştirme, yalnız yakınsamayı düzelt".
+  Ölçülüp ayrıca karar verilmeli.
+- Rock sırası A-D-B-C-E entegrasyonu (Nemotron turu 4): E'nin dayanıklılık
+  testleri fixture üzerinde geçip gerçek koşuda düşebilir; E'den önce
+  A/B/C/D'nin gerçek koşuda regresyon üretmediği doğrulanmalı.
 - `series/produce.py` genelinde tipli hata kanıtı: birçok dal hatayı yutup
   `None` döndürüyor.
 - Part 5'in iki kaynak arasındaki çelişkisi; parts 23-24'ün izsiz `skipped` durumu.
