@@ -4,7 +4,7 @@ Tarih: 10 Eylul 2026 (Los Angeles)
 Kaynak analiz: `galactic_experience/REELYZE-RAPOR.md`
 Seri: `event-horizon` (kanal: galactic_experience / galacticexperimet)
 Temel: `git HEAD 9eec629`, `python -m pytest tests/ -q` => 801 passed, 2 skipped, 188 subtests
-Revizyon: r5 (Codex tur 3 bulgulari uygulandi)
+Revizyon: r6 (Codex tur 4 bulgulari uygulandi)
 
 ## Core Focus
 
@@ -330,9 +330,14 @@ Yeni test `tests/test_galactic_master_lufs.py` (ffmpeg gerektirir, SKIP ETMEZ):
    Tur 3 hakli olarak sunu gosterdi: `series_runner.py` preflight'in TAMAMINI
    cagirmiyor, yalnizca `validate_required_platforms`'i iceri aliyor (satir 680).
    `preflight.inspect/run` bir CLI aracidir, uretim yolunda DEGILDIR. Bu yuzden
-   koruma `produce.py`nin zaten kosan `required_layers` dogrulama blogunda
-   (satir 1345-1364) durur: `title_card` zorunluyken kunye yok/bos/kapali ise
-   `produce` cekim uretmeden `None` doner.
+   koruma `produce.py`nin zaten kosan uretim on-dogrulamasinda durur: `title_card`
+   zorunluyken kunye yok/bos/kapali ise `produce` cekim uretmeden `None` doner.
+   **Tam yeri onemli (tur 4 bulgusu)**: `required_layers` blogu satir 1345-1364'te,
+   ama `plan` argumani str/Path olabiliyor ve sozluge ancak satir 1365-1366'da
+   (`if isinstance(plan, (str, Path)): plan = load_plan(plan)`) cevriliyor.
+   `series/cli.py:101` produce_episode'u tam da yol olarak cagiriyor. Guard bu yuzden
+   normalizasyondan HEMEN SONRA konur (satir 1366'nin ardi); orasi hala her ucretli
+   cagridan cok once.
    Ayni dogrulayici fonksiyon `preflight`ten de cagrilir (elle kontrol icin ayna),
    ama uretimin guvencesi produce'daki cagridir.
 5. **Kisayol korunur**: `flashpoints/bible.json` `"title_card": true` (bool kisayolu)
@@ -394,6 +399,13 @@ Yeni test `tests/test_title_card_required_layer.py` (ffmpeg gerektirir, SKIP ETM
   `title_card_overlay`'e gecilen `title` ve `subtitle` argumanlarinin plandaki TAM
   METINLE birebir esit oldugu dogrulanir. Piksel farki tek basina yanlis ya da
   okunaksiz bir isaretle de gecebilir; bu test metnin kendisini cakar.
+- Ayni cagride **`required=True` gecildigi** de cakilir (tur 4 bulgusu: yalniz metni
+  dogrulamak, produce `required` bayragini unutursa testi gecirirdi ve kopyalama
+  yedegi kunyesiz bolumu yayina birakirdi).
+- **Cizim hatasi enjekte edilir**: `title_card_overlay` hata firlatacak sekilde
+  zorlanir ve `series_runner`in yayinci fonksiyonunun HIC cagrilmadigi dogrulanir.
+- Guard, plan bir DOSYA YOLU olarak gecildiginde de calisir (`cli.py` yolu):
+  event-horizon uretimi hem sozluk hem yol formuyla test edilir.
 - Zorunlu katman acikken kunyesi bos bir plan `produce`da cekim uretilmeden reddedilir.
 - Level 10 incelemesinde final kareden telefon olceginde bir goruntu cikarilir ve
   Ihsan'a gonderilir; okunabilirlik karari onun.
