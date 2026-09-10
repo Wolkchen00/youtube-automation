@@ -62,8 +62,11 @@ jobs:
       - name: Install FFmpeg
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
-      - name: Install yt-dlp
-        run: python -m pip install --quiet --upgrade yt-dlp
+      # pytest de burada kuruluyor: asagidaki "Testler" adimi onu cagiriyor ve
+      # temiz bir runner'da kurulu degil. tests/test_workflow_test_bagimliligi.py
+      # bu kurali zorunlu tutuyor.
+      - name: Install yt-dlp ve pytest
+        run: python -m pip install --quiet --upgrade yt-dlp pytest
 
       # Kapi: kod bozuksa hicbir kanala dokunma.
       - name: Testler
