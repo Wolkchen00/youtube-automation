@@ -864,3 +864,272 @@ def test_bilinmeyen_komut_traceback_dokmez(kok):
     proc = calistir(kok, "ornek", komut="boyle-bir-komut-yok")
     traceback_yok(proc)
     assert proc.returncode != 0, "Bilinmeyen komut 0 ile cikmamali"
+
+
+# ===================================================================
+# URETIM TAMLIGI , eksik uretilmis bolum kural cikarimina girmemeli
+# (2026-09-10: beyin "bugunku videoyu 9.44sn ve 26 kelime yap" diyordu;
+#  o degerler QC'nin cekim dusurdugu YARIM bolumlerden geliyordu.)
+# ===================================================================
+
+TAMLIK_KANAL = "flashpoints"          # uretim kaydi olan gercek slug
+TAMLIK_YOL = "shadowedhistory/flashpoints"
+
+
+def _uretim_kur(uretim_kok: Path, published, series=None, planlar=None) -> Path:
+    hedef = uretim_kok / TAMLIK_YOL
+    (hedef / "plans").mkdir(parents=True, exist_ok=True)
+    (hedef / "published.json").write_text(
+        json.dumps(published, ensure_ascii=False), encoding="utf-8")
+    (hedef / "series.json").write_text(
+        json.dumps(series or {"parts": {}}, ensure_ascii=False), encoding="utf-8")
+    for part, sureler in (planlar or {}).items():
+        plan = {"shots": [{"n": i + 1, "duration": s} for i, s in enumerate(sureler)]}
+        (hedef / "plans" / ("part%02d.json" % part)).write_text(
+            json.dumps(plan, ensure_ascii=False), encoding="utf-8")
+    return hedef
+
+
+def _tamlik_defteri(n=15, bozuk_sure=None):
+    """n kayit; istenirse ILK kayit (en yuksek izlenmeli) kisa sureli olur."""
+    satirlar = kayitlar(n)
+    # izlenmeyi tersine cevir: vid000 en yuksek olsun
+    for i, k in enumerate(satirlar):
+        k["sonuc"]["izlenme"] = 10000 - i * 100
+        k["olcum"]["sure"] = 19.0
+    if bozuk_sure is not None:
+        satirlar[0]["olcum"]["sure"] = bozuk_sure
+    return satirlar
+
+
+def _tamlik_yayinlari(n=15):
+    return [{"part": i + 1, "results": {"youtube": "vid%03d" % i}} for i in range(n)]
+
+
+@gerekli
+def test_eksik_bolum_bolum4_hedefi_olmaz(kok, tmp_path, monkeypatch):
+    """EKSIK uretilmis bolumler ust yariyi ele gecirmisse suresi hedef OLMAMALI.
+
+    Gercek vakanin birebir kopyasi (flashpoints, 2026-09-10): ust yaridaki 7
+    videonun 4'u yarim bolumdu, ust yari medyani 9.44sn'ye dustu ve bolum 4
+    "bugunku videoyu 9.44sn civarina hedefle" diyordu. Filtre olmadan bu test
+    GECMEZ , mutasyonla dogrulandi.
+    """
+    uretim = tmp_path / "uretim"
+    _uretim_kur(uretim, _tamlik_yayinlari(),
+                planlar={i + 1: ["10", "10"] for i in range(15)})
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    satirlar = _tamlik_defteri()
+    # ust yarinin cogunlugu yarim bolum: filtresiz medyan 9.44'e duser
+    for i in (0, 1, 2, 3):
+        satirlar[i]["olcum"]["sure"] = 9.44
+    defter_yaz(kok, TAMLIK_KANAL, satirlar)
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    bolum4 = metin.split("## 4. BUGUN ICIN YON")[1].split("## 5.")[0]
+    assert "9.44" not in bolum4
+
+
+@gerekli
+def test_capa_tam_bolum_hedef_olabilir(kok, tmp_path, monkeypatch):
+    """Bos gecmeyi engelleyen capa: ayni kayit TAM ise sure hedefe girebilir."""
+    uretim = tmp_path / "uretim"
+    _uretim_kur(uretim, _tamlik_yayinlari(),
+                planlar={i + 1: ["10", "10"] for i in range(15)})
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    satirlar = _tamlik_defteri()
+    for k in satirlar[:7]:
+        k["olcum"]["sure"] = 19.5
+    for k in satirlar[7:]:
+        k["olcum"]["sure"] = 14.0
+    defter_yaz(kok, TAMLIK_KANAL, satirlar)
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    bolum4 = metin.split("## 4. BUGUN ICIN YON")[1].split("## 5.")[0]
+    assert "19.5" in bolum4
+
+
+@gerekli
+def test_eksik_bolumler_isimle_raporlanir(kok, tmp_path, monkeypatch):
+    uretim = tmp_path / "uretim"
+    _uretim_kur(uretim, _tamlik_yayinlari(),
+                series={"parts": {"1": {"dropped_shots": [2]}}},
+                planlar={i + 1: ["10", "10"] for i in range(15)})
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    defter_yaz(kok, TAMLIK_KANAL, _tamlik_defteri())
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    assert "Kural cikarimina GIRMEYEN bolumler" in metin
+    assert "vid000" in metin
+    assert "dropped_shots" in metin
+
+
+@gerekli
+def test_min_samples_temiz_sayi_uzerinden(kok, tmp_path, monkeypatch):
+    """15 kayittan 6'si eksikse 9 kalir ve bolum 2/4 yetersiz veri demeli."""
+    uretim = tmp_path / "uretim"
+    dusen = {str(i + 1): {"dropped_shots": [2]} for i in range(6)}
+    _uretim_kur(uretim, _tamlik_yayinlari(), series={"parts": dusen},
+                planlar={i + 1: ["10", "10"] for i in range(15)})
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    defter_yaz(kok, TAMLIK_KANAL, _tamlik_defteri())
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    assert metin.count(YETERSIZ) >= 2
+    # Mesaj hem TEMIZ sayiyi hem KAC kaydin elendigini soylemeli; yoksa
+    # "n=15, en az 15 gerekiyor" gibi kendiyle celisen bir cumle cikiyor.
+    assert "n=9" in metin
+    assert "6 tanesi eksik uretildigi icin sayilmadi" in metin
+
+
+@gerekli
+def test_bilinmeyen_tamlik_dislanmaz(kok, tmp_path, monkeypatch):
+    """Uretim kaydi hic yoksa satirlar DUSMEZ , sessiz veri kaybi olmamali."""
+    uretim = tmp_path / "bos"
+    uretim.mkdir()
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    defter_yaz(kok, TAMLIK_KANAL, _tamlik_defteri())
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    assert "Kural cikarimina GIRMEYEN bolumler" not in metin
+    assert YETERSIZ not in metin.split("## 2.")[1].split("## 3.")[0]
+
+
+@gerekli
+def test_herkes_ihlal_ediyorsa_esik_gecersiz_ilan_edilmez(kok, tmp_path, monkeypatch):
+    """Tum videolar esigi ihlal ediyorsa esik 'gecersiz' degil 'hic uygulanmamis'."""
+    uretim = tmp_path / "bos"
+    uretim.mkdir()
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    satirlar = _tamlik_defteri()
+    for k in satirlar:
+        k["olcum"]["lufs"] = -23.0
+    defter_yaz(kok, TAMLIK_KANAL, satirlar)
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    assert "HIC UYGULANMAMIS esikler" in metin
+    assert "~~LUFS -16..-13 hedefi~~" not in metin
+
+
+@gerekli
+def test_bazilari_ihlal_ediyorsa_gecersiz_ilan_edilir(kok, tmp_path, monkeypatch):
+    """Capa: yalniz EN IYI ihlal ediyorsa eski davranis (gecersiz ilan) surer."""
+    uretim = tmp_path / "bos"
+    uretim.mkdir()
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+    satirlar = _tamlik_defteri()
+    satirlar[0]["olcum"]["lufs"] = -23.0
+    for k in satirlar[1:]:
+        k["olcum"]["lufs"] = -14.5
+    defter_yaz(kok, TAMLIK_KANAL, satirlar)
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    assert "~~LUFS -16..-13 hedefi~~" in metin
+
+
+# ===================================================================
+# BOLUM 6 , BASLIK OZNESI
+# ===================================================================
+
+def _ozne_yaz(kok: Path, kanal: str, esleme: dict) -> None:
+    hedef = kok / "kanallar" / kanal / "ozne.json"
+    hedef.parent.mkdir(parents=True, exist_ok=True)
+    hedef.write_text(json.dumps(esleme, ensure_ascii=False), encoding="utf-8")
+
+
+@gerekli
+def test_ozne_bolumu_her_zaman_var_ve_hipotez_diyor(kok):
+    defter_yaz(kok, "ornek", kayitlar(16))
+    metin = basarili_olmali(calistir(kok, "ornek"), kok, "ornek")
+    assert "## 6. BASLIK OZNESI" in metin
+    assert "HIPOTEZ" in metin
+    assert "REELYZE-RAPOR.md" in metin
+
+
+@gerekli
+def test_etiket_yoksa_sayi_uretilmez(kok):
+    defter_yaz(kok, "ornek", kayitlar(16))
+    metin = basarili_olmali(calistir(kok, "ornek"), kok, "ornek")
+    bolum6 = metin.split("## 6. BASLIK OZNESI")[1]
+    assert "| ozne | n | medyan izlenme |" not in bolum6
+    assert "ozne.json" in bolum6
+
+
+@gerekli
+def test_yeterli_etiketle_tablo_cikar(kok):
+    satirlar = kayitlar(16)
+    for i, k in enumerate(satirlar):
+        k["sonuc"]["izlenme"] = 100 if i < 3 else (20 if i < 6 else 5)
+    defter_yaz(kok, "ornek", satirlar)
+    etiketler = {}
+    for i in range(3):
+        etiketler["vid%03d" % i] = "SEY"
+    for i in range(3, 6):
+        etiketler["vid%03d" % i] = "OLAY"
+    for i in range(6, 9):
+        etiketler["vid%03d" % i] = "KISI"
+    _ozne_yaz(kok, "ornek", etiketler)
+    metin = basarili_olmali(calistir(kok, "ornek"), kok, "ornek")
+    bolum6 = metin.split("## 6. BASLIK OZNESI")[1]
+    assert "| ozne | n | medyan izlenme |" in bolum6
+    assert "KESIF DEGIL" in bolum6
+
+
+@gerekli
+def test_tek_grup_etiketi_tablo_uretmez(kok):
+    defter_yaz(kok, "ornek", kayitlar(16))
+    _ozne_yaz(kok, "ornek", {"vid%03d" % i: "SEY" for i in range(5)})
+    metin = basarili_olmali(calistir(kok, "ornek"), kok, "ornek")
+    bolum6 = metin.split("## 6. BASLIK OZNESI")[1]
+    assert "| ozne | n | medyan izlenme |" not in bolum6
+
+
+@gerekli
+@pytest.mark.parametrize("icerik", ["", "{bozuk", "[1,2]", '"metin"'])
+def test_bozuk_ozne_dosyasi_patlatmaz(kok, icerik):
+    defter_yaz(kok, "ornek", kayitlar(16))
+    hedef = kok / "kanallar" / "ornek" / "ozne.json"
+    hedef.parent.mkdir(parents=True, exist_ok=True)
+    hedef.write_text(icerik, encoding="utf-8")
+    metin = basarili_olmali(calistir(kok, "ornek"), kok, "ornek")
+    assert "## 6. BASLIK OZNESI" in metin
+
+
+@gerekli
+def test_bes_baslik_hala_birebir_ve_sirali(kok):
+    """Bolum 6 eklendi , mevcut bes basligin sozlesmesi BOZULMAMALI."""
+    defter_yaz(kok, "ornek", kayitlar(18))
+    metin = basarili_olmali(calistir(kok, "ornek"), kok, "ornek")
+    for baslik in BASLIKLAR:
+        assert metin.count(baslik) == 1
+    yerler = [metin.find(b) for b in BASLIKLAR]
+    assert yerler == sorted(yerler)
+    assert metin.find("## 6. BASLIK OZNESI") > yerler[-1]
+
+
+@gerekli
+def test_bolum2_de_eksik_bolumleri_saymaz(kok, tmp_path, monkeypatch):
+    """Yeterli TEMIZ veri varken bile bolum 2 tablosu eksik bolumleri saymamali.
+
+    Bu testin varlik sebebi gercek bir kacak: bolum 4 ve 5 filtrelenmisti ama
+    bolum 2'nin `rankable` listesi filtresiz kalmisti. flashpoints'te gorunmedi
+    cunku orada temiz kayit 15'in altinda kaliyor ve bolum 2 zaten "yetersiz
+    veri" deyip o satira hic ulasmiyor. Kacak ancak temiz kayit esigi astiginda
+    ortaya cikiyordu: bolum 2 eksik bolumleri sayarken bolum 4 saymiyordu.
+    """
+    uretim = tmp_path / "uretim"
+    toplam = 26
+    eksik = 7
+    # Gercek vakayi taklit et: EKSIK bolumler EN YUKSEK izlenmeli olanlar.
+    # 26 kayitta ust yari 13'tur; 7 eksik satir o yarinin medyanini ele gecirir.
+    # Geriye 19 temiz kayit kalir (>= 15), yani bolum 2 gercekten hesaplar.
+    dusen = {str(i + 1): {"dropped_shots": [2]} for i in range(eksik)}
+    _uretim_kur(uretim, _tamlik_yayinlari(toplam), series={"parts": dusen},
+                planlar={i + 1: ["10", "10"] for i in range(toplam)})
+    monkeypatch.setenv("BEYIN_URETIM_KOK", str(uretim))
+
+    satirlar = kayitlar(toplam)
+    for i, k in enumerate(satirlar):
+        k["sonuc"]["izlenme"] = 10000 - i * 100
+        k["olcum"]["sure"] = 2.0 if i < eksik else 19.0
+    defter_yaz(kok, TAMLIK_KANAL, satirlar)
+
+    metin = basarili_olmali(calistir(kok, TAMLIK_KANAL), kok, TAMLIK_KANAL)
+    bolum2 = metin.split("## 2. BU KANALDA NE ISE YARIYOR")[1].split("## 3.")[0]
+    # yeterli temiz veri var, yani gercekten karsilastirma yapilmis olmali
+    assert YETERSIZ not in bolum2
+    # 2.00 yalniz eksik bolumlerden gelebilir; tabloya sizmamali
+    assert "2.00sn" not in bolum2

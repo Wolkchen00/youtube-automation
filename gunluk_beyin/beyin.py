@@ -25,6 +25,8 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 
+import tamlik
+
 ROOT = os.path.dirname(os.path.abspath(__file__))
 TOOLS = os.path.join(ROOT, "arac")
 
@@ -573,6 +575,31 @@ def cmd_brain(channel):
     rows, skipped = read_ledger(channel)
     total = len(rows)
 
+    # --- uretim tamligi --------------------------------------------------
+    # Rejim damgasi "hangi AYARLARLA uretildi" sorusunu cozer. Bu ise ayri bir
+    # soru: "uretim BASARILI mi oldu". Defter yayinlanmis DOSYAYI olcer, yani
+    # 9,44 saniyelik bir videonun aslinda cekimi dusmus 20 saniyelik bir plan
+    # oldugunu bilemez. Olculen sonuc: flashpoints ust yarisindaki 7 videonun
+    # 4'u yarim bolumdu ve bolum 4 "9.44sn ve 26 kelime hedefle" diyordu , yani
+    # ayni gun min_shots=2 ile durdurulan kusuru ogretiyordu.
+    # "Bilinmiyor" EKSIK demek DEGILDIR: yargilanamayan satir iceride kalir.
+    durations = {}
+    for row in rows:
+        vid = row.get("video_id")
+        value = field(row, "sure")
+        if vid and value is not None:
+            durations[vid] = value
+    try:
+        completeness = tamlik.episode_completeness(channel, durations=durations)
+    except Exception:
+        completeness = {}
+    dropped_ids = set()
+    for row in rows:
+        vid = row.get("video_id")
+        if (completeness.get(vid) or {}).get("complete") is False:
+            dropped_ids.add(vid)
+    clean = [r for r in rows if r.get("video_id") not in dropped_ids]
+
     # --- teslim rejimi ---------------------------------------------------
     # Iki farkli rejimde uretilmis videolari YAN YANA sayarsak beyin izlenme
     # farkini yanlis sebebe baglar. Kural:
@@ -580,12 +607,12 @@ def cmd_brain(channel):
     #   guncel rejim yeterli -> YALNIZ onu kullan
     #   guncel rejim az      -> havuzla, ama kac kaydin guncel oldugunu SOYLE
     regime = delivery_regime(channel)
-    stamped = [r for r in rows if r.get("rejim")]
-    current_rows = ([r for r in rows if r.get("rejim") == regime["id"]]
+    stamped = [r for r in clean if r.get("rejim")]
+    current_rows = ([r for r in clean if r.get("rejim") == regime["id"]]
                     if regime else [])
     regime_note = None
     if not stamped:
-        compare_rows = rows
+        compare_rows = clean
         if regime:
             regime_note = ("Rejim takibi bugun basladi; defterdeki %d kaydin "
                            "hicbirinde damga yok, hepsi birlikte sayiliyor."
@@ -595,7 +622,7 @@ def cmd_brain(channel):
         regime_note = ("Karsilastirma YALNIZ guncel rejimin %d kaydiyla yapildi "
                        "(defterde toplam %d kayit var)." % (len(current_rows), total))
     else:
-        compare_rows = rows
+        compare_rows = clean
         regime_note = ("**DIKKAT: karma orneklem.** Guncel rejimde yalnizca %d "
                        "kayit var, en az %d gerekiyor; bu yuzden asagidaki "
                        "karsilastirma FARKLI ayarlarla uretilmis %d kaydi bir "
@@ -616,10 +643,15 @@ def cmd_brain(channel):
                         "var, yaslar farkli oldugu icin siralamayi dikkatli oku_"
                         % (len(with_24h), total))
 
+    # Eksik uretilen kayitlar elendiyse SAYISINI soyle: yoksa "n=15, en az 15
+    # gerekiyor" gibi kendiyle celisen bir cumle cikiyor ve hata gibi okunuyor.
+    _elenen = total - len(clean)
     not_enough = (
-        "**YETERSIZ VERI** (n=%d, en az %d gerekiyor). Bu kanala ozel kural "
+        "**YETERSIZ VERI** (n=%d, en az %d gerekiyor%s). Bu kanala ozel kural "
         "cikarilamaz, asagidaki genel esikler kullanilmali."
-        % (len(compare_rows), MIN_SAMPLES)
+        % (len(compare_rows), MIN_SAMPLES,
+           "; defterdeki %d kaydin %d tanesi eksik uretildigi icin sayilmadi"
+           % (total, _elenen) if _elenen else "")
     )
 
     out = []
@@ -749,6 +781,31 @@ def cmd_brain(channel):
                            % (item["part"], item["durum"] or "?",
                               item["kod"] or "-", "; ".join(eksik) or "-",
                               item["deneme"] if item["deneme"] is not None else "-"))
+    # Hicbir satir SESSIZCE dusmesin: raporu okuyan ajan NEYIN neden
+    # elendigini gormeli. Yeni bir numarali bolum degil ALT baslik, cunku
+    # tests/test_beyin_bagimsiz.py bes ust basligi birebir sabitliyor.
+    if dropped_ids:
+        out.append("")
+        out.append("### Kural cikarimina GIRMEYEN bolumler")
+        out.append("")
+        out.append("Bu bolumler EKSIK uretilmis (bir cekim dusmus). Yayinlanan")
+        out.append("dosya kisa ve anlatimi otomatik kisaltilmis oldugu icin")
+        out.append("olcumleri bir basari ornegi DEGILDIR; 2., 4. ve 5. bolumlerin")
+        out.append("hicbirine girmiyorlar.")
+        out.append("")
+        out.append("| video | bolum | sebep |")
+        out.append("|---|---|---|")
+        for row in rows:
+            vid = row.get("video_id")
+            if vid not in dropped_ids:
+                continue
+            info = completeness.get(vid) or {}
+            out.append("| `%s` | %s | %s |"
+                       % (vid,
+                          info.get("part") if info.get("part") is not None else "?",
+                          info.get("reason") or "?"))
+        out.append("")
+        out.append("Kalan tam kayit: **%d** (esik %d)." % (len(clean), MIN_SAMPLES))
     out.append("")
 
     # --- 2. what works here
@@ -803,7 +860,9 @@ def cmd_brain(channel):
         out.append("2. bolumdeki farklardan cikan somut hedefler:")
         out.append("")
         advice = []
-        ranked = sorted([r for r in rows if metric(r) is not None],
+        # Bolum 2 ile AYNI kume: hedefler o karsilastirmadan cikiyor, farkli
+        # kume kullanmak iki bolumu celiskiye dusurur.
+        ranked = sorted([r for r in compare_rows if metric(r) is not None],
                         key=lambda r: -metric(r))
         half = len(ranked) // 2
         upper, lower = ranked[:half], ranked[-half:]
@@ -843,7 +902,10 @@ def cmd_brain(channel):
     # hold here. Applying it blindly would break what is working. Measured
     # example: the fleet's best channel has a 17.85 s longest shot.
     best = None
-    ranked_any = [r for r in rows if metric(r) is not None]
+    # En iyi video TAM bolumlerden secilmeli. Bir esigi KUSURLU bir bolume
+    # dayanarak gecersiz ilan etmek, LUFS hedefinin 2026-09-10'da tam olarak
+    # boyle cizilip atilmasina yol acti (o -21.2 LUFS "en iyi" yarim bolumdu).
+    ranked_any = [r for r in clean if metric(r) is not None]
     if ranked_any:
         best = max(ranked_any, key=metric)
 
@@ -853,14 +915,37 @@ def cmd_brain(channel):
         value = as_number((best.get("olcum") or {}).get(name))
         return value is not None and predicate(value)
 
+    def _all_break(name, predicate):
+        """TUM olculen videolar esigi ihliyorsa True.
+
+        En iyi video, baskalarinin tutturdugu bir esigi ihlal ediyorsa o esik
+        gercekten burada kazananlari ayirmiyor demektir. Ama HERKES ihlal
+        ediyorsa bu esik hakkinda hicbir sey soylemez: boru hattinin o esigi
+        HIC UYGULAMADIGINI soyler. Cizip atmak gercek kusuru gizler.
+        Olculen ornek: flashpoints'te 15 kaydin 15'i de -19,6..-25,1 LUFS'ta,
+        cunku mastering hic cagrilmamisti (bible.series.master_lufs yoktu).
+        """
+        seen = [as_number((r.get("olcum") or {}).get(name)) for r in rows]
+        seen = [v for v in seen if v is not None]
+        return bool(seen) and all(predicate(v) for v in seen)
+
     contradicted = []
-    if _best_also_breaks("en_uzun_plan", lambda v: v > 4.0):
-        contradicted.append(("Uzun statik plan", "en uzun plan 4 sn tavani",
-                             as_number((best.get("olcum") or {}).get("en_uzun_plan"))))
-    if _best_also_breaks("lufs", lambda v: not (-16.0 <= v <= -13.0)):
-        contradicted.append(("Ses seviyesi hedef disi", "LUFS -16..-13 hedefi",
-                             as_number((best.get("olcum") or {}).get("lufs"))))
+    never_applied = []
+    for _ad, _tur, _etiket, _kosul in (
+        ("en_uzun_plan", "Uzun statik plan", "en uzun plan 4 sn tavani",
+         lambda v: v > 4.0),
+        ("lufs", "Ses seviyesi hedef disi", "LUFS -16..-13 hedefi",
+         lambda v: not (-16.0 <= v <= -13.0)),
+    ):
+        if not _best_also_breaks(_ad, _kosul):
+            continue
+        _deger = as_number((best.get("olcum") or {}).get(_ad))
+        if _all_break(_ad, _kosul):
+            never_applied.append((_tur, _etiket, _deger))
+        else:
+            contradicted.append((_tur, _etiket, _deger))
     contradicted_kinds = {kind for kind, _, _ in contradicted}
+    never_kinds = {kind for kind, _, _ in never_applied}
 
     problems = []
     for row in rows:
@@ -881,7 +966,21 @@ def cmd_brain(channel):
                              "- **Uzun statik plan**: `%s` en uzun plan %.1f sn "
                              "(tavan 4,0)" % (row.get("video_id"), longest)))
 
-    problems = [(k, text) for k, text in problems if k not in contradicted_kinds]
+    problems = [(k, text) for k, text in problems
+                if k not in contradicted_kinds and k not in never_kinds]
+
+    if never_applied:
+        out.append("### Bu kanalda HIC UYGULANMAMIS esikler")
+        out.append("")
+        out.append("Asagidaki esigi olculen videolarin **TAMAMI** ihlal ediyor.")
+        out.append("Bu, esigin burada calismadigini GOSTERMEZ , boru hattinin o")
+        out.append("esigi hic uygulamadigini gosterir. Esik gecerlidir; eksik olan")
+        out.append("uygulamadir. Duzeltilene kadar bu boyutta karsilastirma yapma.")
+        out.append("")
+        for _, _etiket, _deger in never_applied:
+            out.append("- **%s** , en iyi tam videoda deger: **%.1f** "
+                       "(tum kayitlar ihlalde)" % (_etiket, _deger))
+        out.append("")
 
     if contradicted:
         out.append("### Bu kanalda GECERSIZ esikler")
@@ -914,6 +1013,54 @@ def cmd_brain(channel):
         out.append("Veri yetersiz.")
     else:
         out.append("Olculen kayitlarda teknik esik ihlali yok.")
+    out.append("")
+
+    # --- 6. title subject
+    # Etiketler kanallar/<kanal>/ozne.json icinde ELLE konuluyor ve asagidaki
+    # medyan ayni etiketlerden hesaplaniyor. Bu bir KESIF DEGILDIR; bolum
+    # bunu acikca soyler ve kaynagini her zaman gosterir.
+    # Yeni numarali baslik guvenli: sabitlenen baslik testleri yalniz 1-5'i kapsar.
+    out.append("## 6. BASLIK OZNESI")
+    out.append("")
+    labels = tamlik.read_subject_labels(channel)
+    _kaynak = ("`shadowedhistory/REELYZE-RAPOR.md` , 29 bolumun tamami olculdu, "
+               "10 Eylul 2026")
+    _gruplar = {}
+    for row in clean:
+        _etiket = labels.get(row.get("video_id"))
+        _deger = metric(row)
+        if _etiket and _deger is not None:
+            _gruplar.setdefault(_etiket, []).append(_deger)
+    _dolu = {k: v for k, v in _gruplar.items() if len(v) >= 3}
+
+    out.append("**HIPOTEZ** , baslikin KALIBI degil, OZNESI ayirt ediyor gorunuyor:")
+    out.append("gozde canlanan bir SEY (yapi, eser, hayvan, marka) > OLAY > adiyla")
+    out.append("anilan KISI. Kaynak: %s." % _kaynak)
+    out.append("")
+    if len(_dolu) >= 2:
+        out.append("Bu defterdeki etiketli ve TAM bolumlerde:")
+        out.append("")
+        out.append("| ozne | n | medyan izlenme |")
+        out.append("|---|---|---|")
+        for _etiket in ("SEY", "OLAY", "KISI"):
+            _degerler = _dolu.get(_etiket)
+            if _degerler:
+                out.append("| %s | %d | %s |"
+                           % (_etiket, len(_degerler),
+                              "{:,.0f}".format(st.median(_degerler))))
+        out.append("")
+        out.append("> Etiketler ELLE konuldu ve medyan ayni etiketlerden hesaplandi.")
+        out.append("> Bu bir KESIF DEGIL, kayitli bir HIPOTEZIN bu defterdeki")
+        out.append("> gorunumudur. Korelasyon, nedensellik degil.")
+    else:
+        out.append("Bu defterde HENUZ yeterli etiket yok (en az iki grupta 3'er")
+        out.append("tam bolum gerekiyor), bu yuzden **sayi uretilmedi**.")
+        out.append("Etiket eklemek icin: `kanallar/%s/ozne.json`" % channel)
+        out.append('(`{"<video_id>": "SEY" | "OLAY" | "KISI"}`).')
+    out.append("")
+    out.append("Uygulama notu: kisi konusu ELENMEZ, basligin OZNESI degistirilir.")
+    out.append('Ornek: "John Snow: The Father Of Epidemiology" yerine')
+    out.append("\"The Water Pump That Ended London's Cholera Outbreak\".")
     out.append("")
 
     target = os.path.join(channel_dir(channel), "BEYIN.md")
