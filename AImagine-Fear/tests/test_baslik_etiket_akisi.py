@@ -40,10 +40,14 @@ def test_etiketsiz_caption_bos_dizge() -> None:
 
 
 def test_gercek_rotanin_etiketleri_uretiliyor() -> None:
-    caption = (PROJE_KOKU / "out" / "dubai-burj-altin" / "CAPTION.txt").read_text(
-        encoding="utf-8"
+    # Kaynak rota dosyasi, out/ DEGIL: out/ .gitignore'da ve build.py
+    # calismadan bos olur.
+    import build
+
+    rota = build.load_route(
+        PROJE_KOKU / "routes" / "dubai-burj-altin.md", PROJE_KOKU
     )
-    tags = gunluk.etiketler(caption)
+    tags = gunluk.etiketler(rota.sections["CAPTION"])
     assert tags.startswith("MegaSlideFear,")
     assert "ViralReels" in tags
     # YouTube'un otomatik copu ARTIK gitmiyor
@@ -179,18 +183,33 @@ def test_yayinla_tags_argumanini_yayinlaya_gecirir(monkeypatch, tmp_path: Path) 
 # Kanal geneli: iki rota ayni basligi tasimamali
 # ----------------------------------------------------------------------
 def test_hicbir_iki_rota_ayni_basligi_tasimiyor() -> None:
-    """core/uploader.py mukerrer basligi gorunce YouTube'u ATLIYOR."""
+    """core/uploader.py mukerrer basligi gorunce YouTube'u ATLIYOR.
+
+    Kaynak ROTA DOSYALARI, out/ DEGIL: out/ .gitignore'da ve build.py
+    calismadan bos olur. out/'a bakan bir surum, testin build'den sonra
+    kosmasina bagli kalirdi ve taze bir checkout'ta yanlis sebeple duserdi.
+    """
     import baslik
+    import build
 
     gorulen: dict[str, str] = {}
-    for yol in sorted((PROJE_KOKU / "out").glob("*/TITLE.txt")):
-        slug = yol.parent.name
-        for satir in yol.read_text(encoding="utf-8").splitlines():
+    rotalar = [
+        yol for yol in sorted((PROJE_KOKU / "routes").glob("*.md"))
+        if not yol.name.startswith("_")
+    ]
+    assert rotalar, "hic rota bulunamadi"
+    for yol in rotalar:
+        rota = build.load_route(yol, PROJE_KOKU)
+        for satir in rota.sections["TITLE"].splitlines():
             if not satir.strip():
                 continue
             norm = baslik.normalize(satir)
             assert norm not in gorulen, (
-                "%s ile %s ayni basligi tasiyor: %r" % (gorulen.get(norm), slug, satir)
+                "%s ile %s ayni basligi tasiyor: %r"
+                % (gorulen.get(norm), rota.slug, satir)
             )
-            gorulen[norm] = slug
-    assert len(gorulen) >= 18, "beklenenden az baslik uretildi: %d" % len(gorulen)
+            gorulen[norm] = rota.slug
+    assert len(gorulen) >= 2 * len(rotalar), (
+        "her rotada en az 2 varyant olmali, toplam %d baslik / %d rota"
+        % (len(gorulen), len(rotalar))
+    )
