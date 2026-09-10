@@ -39,6 +39,15 @@ Az veriden kural uydurma, beyin de uydurmuyor.
 notu var. Bunlar yon gosterir, kanun degildir. Beyin "kisa videolar daha iyi gitmis"
 diyorsa bu bir hipotez; fikrini ona gore kur ama tek dogru sanma.
 
+**Kural 4 , beyin 1 GUN GERIDEN gelir.**
+Beyin sadece **24 saatten eski** videolari olcer. Bugun yayinladigin video
+yarinki BEYIN.md ye girer. Bu bilincli: taze videonun izlenmesi sifira yakindir,
+siralamaya sokmak karsilastirmayi bozar. Yani DURUM bolumunde bugunku videonu
+gormezsen bu bir hata degil, tasarim.
+
+Siralama olcusu de yas-adil: yeterince kayitta varsa **24. saat izlenmesi**
+kullanilir, yoksa guncel izlenmeye dusulur ve bu 1. bolumde acikca yazar.
+
 **Kural 3 , beyne rapor gondermene GEREK YOK.**
 Yayinladiktan sonra hicbir sey yazma, hicbir yere kayit dusme. Beyin yayinlanan
 videolari YouTube RSS'ten kendisi buluyor, olcuyor ve deftere ekliyor.

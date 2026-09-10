@@ -56,10 +56,15 @@ def youtube_rss(kanal_id, limit):
         tarih = re.search(r"<published>([^<]+)</published>", e)
         izl = re.search(r'views="(\d+)"', e)
         if vid:
+            ham_tarih = tarih.group(1) if tarih else ""
             satirlar.append({
                 "video_id": vid.group(1),
                 "baslik": html.unescape((baslik.group(1) if baslik else "").strip()),
-                "tarih": (tarih.group(1) if tarih else "")[:10],
+                "tarih": ham_tarih[:10],
+                # TAM zaman damgasi. Yas hesabi bunun uzerinden yapilmali:
+                # sadece gun kullanilirsa gece 23:00'te yayinlanan video
+                # 23 saat daha yasli sanilir ve 24 saat kapisi yanlis acilir.
+                "yayin_ts": ham_tarih,
                 "rss_izlenme": int(izl.group(1)) if izl else None,
             })
     return satirlar
