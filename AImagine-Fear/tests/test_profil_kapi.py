@@ -37,7 +37,32 @@ def _approval(profile_name="1080p", master_sha="abc"):
         "fps": p["beklenen_fps"],
         "master_sha": master_sha,
         "profil_hash": gunluk.profil_hash(),
+        # Onayin kaniti: kapinin gectigi andaki gercek olcumler. Bunlar olmadan
+        # yayin_izni onayi kabul ETMEZ (elle uydurulmus dosyaya karsi koruma).
+        "olculen": {
+            "genislik": p["genislik"],
+            "yukseklik": p["yukseklik"],
+            "fps": p["beklenen_fps"],
+            "sure": 15.0,
+        },
     }
+
+
+def test_olcumsuz_onay_reddedilir(monkeypatch, tmp_path: Path) -> None:
+    """Elle yazilmis ya da bir testin kazara biraktigi onay hicbir sey acmaz."""
+    for bozuk in ({}, {"genislik": 720, "yukseklik": 1280, "fps": 24},
+                  {"genislik": 1080, "yukseklik": 1920, "fps": 30}):
+        onay = _approval()
+        if bozuk:
+            onay["olculen"] = bozuk
+        else:
+            onay.pop("olculen")
+        yol = tmp_path / ("onay-%d.json" % len(str(bozuk)))
+        yol.write_text(json.dumps(onay), encoding="utf-8")
+        monkeypatch.setattr(gunluk, "ONAY_DOSYASI", yol)
+        izinli, durum = gunluk.yayin_izni("1080p", 15)
+        assert izinli is False, "olcumsuz/yanlis olcumlu onay kabul edildi: %s" % bozuk
+        assert "kanarya" in durum
 
 
 def test_profil_tek_kaynak_prompt_api_ve_kapi(tmp_path: Path) -> None:

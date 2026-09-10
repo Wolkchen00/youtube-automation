@@ -399,6 +399,22 @@ def yayin_izni(profil_adi: str, sure: int | float) -> tuple[bool, str]:
         return False, "kanarya; profil.py hash'i degismis"
     if not isinstance(onay.get("master_sha"), str) or not onay["master_sha"]:
         return False, "kanarya; onay master SHA'si yok"
+    # ONAY OLCUM TASIMAK ZORUNDA. Dosyanin varligi yetmez: icinde, kapinin
+    # gectigi ani belgeleyen gercek olcumler olmali ve o olcumler profille
+    # UYUSMALI. Boylece elle uydurulmus ya da bir testin kazara birakmis oldugu
+    # bir dosya hicbir kombinasyonu acamaz.
+    olculen = onay.get("olculen")
+    if not isinstance(olculen, dict):
+        return False, "kanarya; onayda olcum yok (elle yazilmis olabilir)"
+    if (olculen.get("genislik"), olculen.get("yukseklik")) != (
+        profil["genislik"], profil["yukseklik"]
+    ):
+        return False, "kanarya; onaydaki olcum profille uyusmuyor"
+    olculen_fps = olculen.get("fps")
+    if olculen_fps is None or abs(
+        float(olculen_fps) - float(profil["beklenen_fps"])
+    ) > float(profil["fps_tolerans"]):
+        return False, "kanarya; onaydaki fps profille uyusmuyor"
     return True, "dogrulandi (kalici onay)"
 
 
@@ -792,6 +808,12 @@ def main(argv: list[str] | None = None) -> int:
             "profil_hash": profil_hash(),
             "otomatik": True,
             "ts": datetime.now(timezone.utc).isoformat(),
+            # Onayin KANITI. out/ .gitignore'da oldugu icin uretim kaydi CI'ya
+            # tasinmiyor; bu yuzden olcumler onayin KENDI icinde tasiniyor ve
+            # yayin_izni onlari profille karsilastiriyor. Olcumsuz bir onay
+            # dosyasi hicbir sey acmaz.
+            "olculen": olculen,
+            "ses": kayit["ses"],
         }
         ONAY_DOSYASI.write_text(
             json.dumps(onay, ensure_ascii=False, indent=2) + "\n",
