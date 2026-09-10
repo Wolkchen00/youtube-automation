@@ -25,6 +25,7 @@ SEHIRLER = {
     "toronto-cn-red-dusk": None,     # zaten var, elle yazildi
     "dubai-burj-altin": dict(
         sehir="Dubai", landmark="the Burj Khalifa", neon="warm gold-amber",
+        palet="sicak",
         hava="a clear hot night with dust haze on the horizon",
         giysi="black glossy wet-look leggings with the hem at mid-shin",
         havuz="gold-lit", etiket="#DubaiBurjKhalifa",
@@ -87,6 +88,7 @@ DESTINATION: {sehir}
 LANDMARK: {landmark}
 DURATION: 15
 NEON: {neon}
+PALET: {palet}
 LEGWEAR: {giysi}
 WEATHER: {hava}
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
@@ -135,7 +137,11 @@ You're {fiil} {landmark} on a transparent slide above {sehir}. Every {birim} get
 
 def rota_yaz(slug: str, spec: dict) -> Path:
     imza_cumle = spec["imza"][0].upper() + spec["imza"][1:]
-    metin = GOVDE.format(slug=slug, imza_cumle=imza_cumle, **spec)
+    # PALET spec'te yoksa "neon" varsayilir: uretilen rotalarin cogu doygun neon
+    # ve yanlis etiket A/B olcumunu sessizce bozar. Sicak bir rota yaziyorsan
+    # spec'e acikca "palet": "sicak" koy.
+    alanlar = {"palet": "neon", **spec}
+    metin = GOVDE.format(slug=slug, imza_cumle=imza_cumle, **alanlar)
     yol = KOK / "routes" / (slug + ".md")
     yol.write_text(metin, encoding="utf-8")
     return yol

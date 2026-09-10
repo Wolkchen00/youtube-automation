@@ -21,6 +21,10 @@ import sys
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+if str(Path(__file__).resolve().parent.parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+from defter import bugunku_basarili, yayin_kimligi  # noqa: E402
+
 KOK = Path(__file__).resolve().parent.parent      # AImagine-Fear/
 YT_KOK = KOK.parent                                # depo koku, hem Windows hem CI'da dogru
 DEFTER = KOK / "yayin.jsonl"
@@ -61,6 +65,8 @@ def main() -> int:
     p.add_argument("--dry", action="store_true", help="gonderme, sadece ne gidecegini yaz")
     p.add_argument("--allow-same-day", action="store_true",
                    help="ayni gune ikinci videoyu bilerek koy")
+    p.add_argument("--ek-alanlar", default="",
+                   help="defter satirina eklenecek JSON sozluk (gunluk.py gecirir)")
     p.add_argument("--skip-if-published", action="store_true",
                    help="video zaten yayinlandiysa HATA verme, 0 ile cik. "
                         "Tekrarlayan cron'lar icin: kapinin calismasi hata degildir.")
@@ -87,10 +93,12 @@ def main() -> int:
             sys.exit(mesaj)
 
     simdi = datetime.now(LA)
-    bugun = [k for k in gecmis if k.get("ts", "").startswith(simdi.strftime("%Y-%m-%d"))]
+    # Basarisiz denemeler de deftere satir birakiyor. Kapi yalniz DOGRULANMIS
+    # yayinlara bakmali, yoksa sabah patlayan bir kosu gunun geri kalanini kilitler.
+    bugun = bugunku_basarili(gecmis, simdi.strftime("%Y-%m-%d"))
     if bugun and not args.allow_same_day:
-        sys.exit("Bugun bu kanala zaten %d video kondu. Bilerek istiyorsan --allow-same-day ver."
-                 % len(bugun))
+        sys.exit("Bugun bu kanala zaten %d DOGRULANMIS video kondu. "
+                 "Bilerek istiyorsan --allow-same-day ver." % len(bugun))
 
     upload_to_platform, UPLOAD_USERS, CHANNEL_PLATFORMS = _yukleyici()
     kullanici = UPLOAD_USERS.get(args.channel)
@@ -129,6 +137,7 @@ def main() -> int:
         sonuclar[platform] = r
         print("   sonuc: %s" % json.dumps(r, ensure_ascii=False)[:300])
 
+    yt_kimlik = yayin_kimligi(sonuclar.get("youtube"))
     kayit = {
         "ts": simdi.strftime("%Y-%m-%d %H:%M") + " PDT",
         "ts_utc": datetime.now(timezone.utc).isoformat(),
@@ -137,13 +146,35 @@ def main() -> int:
         "channel": args.channel,
         "title": title,
         "results": sonuclar,
+        # Donusumun ve ayni-gun kapisinin tek dayanagi. `success: true` YETMEZ:
+        # kimliksiz bir 200 yaniti yayin kaniti degildir.
+        "kullanildi": yt_kimlik is not None,
+        "youtube_id": yt_kimlik,
     }
+    if args.ek_alanlar:
+        try:
+            ek = json.loads(args.ek_alanlar)
+        except json.JSONDecodeError as hata:
+            sys.exit("--ek-alanlar gecerli JSON degil: %s" % hata)
+        if not isinstance(ek, dict):
+            sys.exit("--ek-alanlar bir JSON sozlugu olmali")
+        # Olcum alanlari kaydin govdesine girer; kullanildi/youtube_id EZILEMEZ.
+        for anahtar in ("kullanildi", "youtube_id", "results", "sha"):
+            ek.pop(anahtar, None)
+        kayit.update(ek)
     with DEFTER.open("a", encoding="utf-8", newline="\n") as f:
         f.write(json.dumps(kayit, ensure_ascii=False) + "\n")
     print("\ndeftere yazildi: %s" % DEFTER)
 
     basarili = sum(1 for v in sonuclar.values() if v and "hata" not in v)
     print("ozet: %d/%d platform" % (basarili, len(platformlar)))
+    print("youtube kimligi: %s" % (yt_kimlik or "YOK"))
+    # Cikis kodu DOGRULANMIS YouTube yayinina bagli. Eski hali herhangi bir
+    # platform basarisinda 0 donuyordu: YouTube dusup IG gecince workflow
+    # "basarili" gorunuyor ve kanalin asil hedefi sessizce kaciriliyordu.
+    if "youtube" in platformlar and yt_kimlik is None:
+        print("YOUTUBE YAYINI DOGRULANAMADI , kosu basarisiz sayiliyor.")
+        return 1
     return 0 if basarili else 1
 
 

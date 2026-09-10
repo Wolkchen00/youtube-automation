@@ -29,6 +29,7 @@ ROUTE_FIELDS = (
     "LANDMARK",
     "DURATION",
     "NEON",
+    "PALET",
     "LEGWEAR",
     "WEATHER",
     "SOURCE",
@@ -57,6 +58,11 @@ TOKEN_FIELDS = {
     "<<CITY>>": "DESTINATION",
     "<<LANDMARK>>": "LANDMARK",
 }
+
+# Palet A/B'si icin olcum etiketi. Yalniz bu iki deger kabul edilir; serbest
+# metin olsaydi "sicak", "Sicak", "warm" hepsi ayri kova olur ve karsilastirma
+# imkansizlasirdi.
+GECERLI_PALETLER = ("sicak", "neon")
 
 PROFIL_TOKENLARI = {
     "<<COZUNURLUK>>": lambda profil: "%dx%d" % (
@@ -676,6 +682,21 @@ def _validate_caption(route: Route, root: Path) -> list[str]:
     return messages
 
 
+def _validate_palet(route: Route, root: Path) -> list[str]:
+    deger = route.fields.get("PALET", "").strip()
+    if deger in GECERLI_PALETLER:
+        return []
+    return [
+        _issue(
+            root,
+            route.path,
+            route.slug,
+            "PALET %r gecersiz; kabul edilenler: %s"
+            % (deger, ", ".join(GECERLI_PALETLER)),
+        )
+    ]
+
+
 def validate_route(
     canon: Canon,
     route: Route,
@@ -695,6 +716,7 @@ def validate_route(
     messages.extend(_validate_states(route, root))
     messages.extend(_validate_lengths(route, root, outputs))
     messages.extend(_validate_caption(route, root))
+    messages.extend(_validate_palet(route, root))
 
     second_render = render_route(canon, route, profil_adi)
     for filename in sorted(outputs):

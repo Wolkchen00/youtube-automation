@@ -198,6 +198,7 @@ def test_yayinlama_runs_generation_without_publish_and_checks_contact(
     monkeypatch.setattr(gunluk, "defter", lambda: [])
     monkeypatch.setattr(gunluk, "kredi", lambda: 1000)
     monkeypatch.setattr(gunluk, "rota_suresi", lambda slug, kok=None: 15)
+    monkeypatch.setattr(gunluk, "rota_paleti", lambda slug, kok=None: "neon")
 
     def fake_run(command, cwd):
         if "kie_uret.py" in " ".join(command):

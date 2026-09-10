@@ -5,6 +5,7 @@ DESTINATION: Toronto
 LANDMARK: the CN Tower
 DURATION: 20
 NEON: hot red-orange
+PALET: sicak
 LEGWEAR: black glossy wet-look shorts cut at mid-thigh, bare legs below them
 WEATHER: clear blue-hour dusk, thin high cloud, the sun already below the horizon
 SOURCE: https://www.instagram.com/reel/Dcv7cfVDQi0/ (fearvisionofficiel, 2026-09-01)

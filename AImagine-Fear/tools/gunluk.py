@@ -19,6 +19,7 @@ if str(KOK) not in sys.path:
 if str(YT_KOK) not in sys.path:
     sys.path.insert(0, str(YT_KOK))
 
+from defter import bugunku_basarili, kullanildi_mi, yayin_kimligi  # noqa: E402
 from profil import (  # noqa: E402
     PROFILLER,
     VARSAYILAN_PROFIL,
@@ -91,6 +92,22 @@ def rota_suresi(slug: str, kok: Path | None = None) -> int:
     return int(sayi)
 
 
+def rota_paleti(slug: str, kok: Path | None = None) -> str:
+    """Rotanin PALET alanini dondur. build.py zaten degeri dogruluyor."""
+    proje = kok or KOK
+    yol = proje / "routes" / (slug + ".md")
+    if not yol.exists():
+        raise SureHatasi("rota dosyasi yok: %s" % yol)
+
+    import build
+
+    try:
+        rota = build.load_route(yol, proje)
+    except build.BuildError as hata:
+        raise SureHatasi("rota ayristirilamadi (%s): %s" % (slug, hata)) from hata
+    return (rota.fields.get("PALET") or "").strip()
+
+
 def log(msg: str) -> None:
     print("[%s] %s" % (datetime.now(LA).strftime("%H:%M:%S"), msg), flush=True)
 
@@ -136,13 +153,19 @@ def kredi() -> float | None:
 
 
 def sirdaki(gecmis: list[dict]) -> str:
-    kullanilmis = [kayit.get("slug") for kayit in gecmis if kayit.get("slug")]
+    # Satirin VARLIGI yeterli degil: yayinla.py basarisiz donmeden ONCE de yaziyor.
+    # Yalniz dogrulanmis YouTube yayini donusumu ilerletir.
+    kullanilmis = [
+        kayit.get("slug")
+        for kayit in gecmis
+        if kayit.get("slug") and kullanildi_mi(kayit)
+    ]
     for slug in SIRA:
         if slug not in kullanilmis:
             return slug
     son: dict[str, int] = {}
     for sira, kayit in enumerate(gecmis):
-        if kayit.get("slug"):
+        if kayit.get("slug") and kullanildi_mi(kayit):
             son[kayit["slug"]] = sira
     return min(SIRA, key=lambda slug: son.get(slug, -1))
 
@@ -265,6 +288,24 @@ def ffprobe_json(video: Path) -> tuple[dict | None, str | None]:
     if not isinstance(veri, dict):
         return None, "ffprobe JSON koku nesne degil"
     return veri, None
+
+
+def ses_olcumleri(master: Path) -> dict:
+    """Sidecar'dan teslim edilen loudness degerleri. Okunamazsa None'lar.
+
+    Yeniden OLCMUYORUZ: master_audio zaten olcup zorluyor ve son denemeyi
+    sidecar'a yaziyor. Ikinci bir olcum hem gereksiz hem de kayabilir.
+    """
+    sidecar = master.with_suffix(".audio_master.json")
+    try:
+        veri = json.loads(sidecar.read_text(encoding="utf-8"))
+        son = veri["delivery_limiter"]["attempts"][-1]
+        return {
+            "lufs": float(son["integrated_lufs"]),
+            "true_peak": float(son["true_peak_dbtp"]),
+        }
+    except (OSError, json.JSONDecodeError, KeyError, IndexError, TypeError, ValueError):
+        return {"lufs": None, "true_peak": None}
 
 
 def ses_denetle(master: Path) -> list[str]:
@@ -426,22 +467,50 @@ def _yayin_komutu(master: Path, slug: str, allow_same_day: bool) -> list[str] | 
     return komut
 
 
-def yayinla(master: Path, slug: str, allow_same_day: bool) -> int:
+def defter_alanlari(slug: str, uretim_kaydi: dict | None) -> dict:
+    """Defter satirinin olcum alanlari. Her alanin kaynagi AYRI ve tanimli.
+
+    slug/palet/rota_suresi  -> uretim kaydi (medya olcumu DEGIL)
+    cozunurluk/fps/sure     -> denetlenen master'in ffprobe olcumu
+    lufs/true_peak          -> <master>.audio_master.json sidecar'i
+    kullanildi              -> YouTube yanitindaki yayin kimligi (yayinla.py yazar)
+    """
+    kayit = uretim_kaydi or {}
+    olculen = kayit.get("olculen") or {}
+    ses = kayit.get("ses") or {}
+    return {
+        "slug": slug,
+        "palet": kayit.get("palet"),
+        "rota_suresi": kayit.get("beklenen_sure"),
+        "cozunurluk": kayit.get("istenen_profil"),
+        "fps": olculen.get("fps"),
+        "sure": olculen.get("sure"),
+        "lufs": ses.get("lufs"),
+        "true_peak": ses.get("true_peak"),
+    }
+
+
+def yayinla(
+    master: Path,
+    slug: str,
+    allow_same_day: bool,
+    uretim_kaydi: dict | None = None,
+) -> int:
     komut = _yayin_komutu(master, slug, allow_same_day)
     if komut is None:
         return 1
+    komut += ["--ek-alanlar", json.dumps(defter_alanlari(slug, uretim_kaydi),
+                                        ensure_ascii=False)]
     log("yayinlaniyor")
     sonuc = kosa(komut, YT_KOK)
     print(sonuc.stdout[-2500:])
     if sonuc.returncode != 0:
         log("YAYIN BASARISIZ:\n" + (sonuc.stderr or "")[-1200:])
         return 1
-    kayitlar = DEFTER.read_text(encoding="utf-8").splitlines()
-    if kayitlar:
-        son = json.loads(kayitlar[-1])
-        son["slug"] = slug
-        kayitlar[-1] = json.dumps(son, ensure_ascii=False)
-        DEFTER.write_text("\n".join(kayitlar) + "\n", encoding="utf-8", newline="\n")
+    # slug'i buradan YAMAMIYORUZ: alanlari yayinla.py kaydin icine yaziyor ve
+    # `kullanildi` bayragini gercek YouTube kimliginden turetiyor. Eski yamama
+    # cikis koduna bakiyordu, yani YouTube dusup IG gecince bile donusumu
+    # ilerletiyordu.
     log("BITTI: %s yayinlandi" % slug)
     return 0
 
@@ -526,12 +595,19 @@ def main(argv: list[str] | None = None) -> int:
         log("DUR: rota suresi okunamadi: %s" % hata)
         return 1
 
+    try:
+        palet = rota_paleti(slug)
+    except SureHatasi as hata:
+        log("DUR: rota paleti okunamadi: %s" % hata)
+        return 1
+
     anahtar = matris_anahtari(MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
     ham_durum = YETENEK_MATRISI.get(anahtar, "matriste yok")
 
     if args.dry:
         print("sirdaki slug : %s" % slug)
         print("sure         : %s" % sure)
+        print("palet        : %s" % palet)
         print(
             "profil       : %s (%dx%d, %s fps)"
             % (args.profil, profil["genislik"], profil["yukseklik"], profil["beklenen_fps"])
@@ -542,6 +618,7 @@ def main(argv: list[str] | None = None) -> int:
 
     log("sirdaki sehir : %s" % slug)
     log("sure          : %s" % sure)
+    log("palet         : %s" % palet)
     log("profil        : %s" % args.profil)
     log("matris        : %s" % ham_durum)
     if anahtar not in YETENEK_MATRISI:
@@ -560,8 +637,11 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     bugun = datetime.now(LA).strftime("%Y-%m-%d")
-    bugunku = [kayit for kayit in gecmis if kayit.get("ts", "").startswith(bugun)]
-    log("bugunku yayin : %d" % len(bugunku))
+    # Basarisiz denemeler de deftere satir birakiyor; ayni-gun kapisi yalniz
+    # DOGRULANMIS yayinlara bakmali, yoksa sabah patlayan bir kosu gunun
+    # geri kalanini kilitler.
+    bugunku = bugunku_basarili(gecmis, bugun)
+    log("bugunku yayin : %d (dogrulanmis)" % len(bugunku))
     if bugunku and not args.allow_same_day and not args.yayinlama:
         log("DUR: bugun zaten yayin var. --allow-same-day ile zorlanabilir.")
         return 0
@@ -614,13 +694,15 @@ def main(argv: list[str] | None = None) -> int:
     master_sha = sha256_dosya(master)
     sorunlar, olculen = denetle(master, sure, profil)
     kayit = {
-        "sema_surumu": 1,
+        "sema_surumu": 2,
         "model": MODEL,
         "istenen_profil": args.profil,
         "profil_hash": profil_hash(),
         "slug": slug,
+        "palet": palet,
         "beklenen_sure": sure,
         "olculen": olculen,
+        "ses": ses_olcumleri(master),
         "denetim_sonucu": "basarili" if not sorunlar else "basarisiz",
         "master_sha": master_sha,
         "ts": datetime.now(timezone.utc).isoformat(),
@@ -642,7 +724,7 @@ def main(argv: list[str] | None = None) -> int:
         log("YAYINLANMADI: gozle kontrolden sonra --onayla %s" % master)
         return 0
 
-    return yayinla(master, slug, args.allow_same_day)
+    return yayinla(master, slug, args.allow_same_day, kayit)
 
 
 if __name__ == "__main__":

@@ -5,6 +5,7 @@ DESTINATION: Las Vegas
 LANDMARK: the STRAT Tower
 DURATION: 20
 NEON: electric cyan-blue
+PALET: neon
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: heavy night rain under a black overcast sky
 SOURCE: https://www.instagram.com/reel/DcynI6Oj8rA/ (fearvisionofficiel, 2026-09-02)

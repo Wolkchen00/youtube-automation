@@ -5,6 +5,7 @@ DESTINATION: Paris
 LANDMARK: the Eiffel Tower
 DURATION: 15
 NEON: cold white-blue
+PALET: neon
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: fine night drizzle, every street lamp wearing a halo
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

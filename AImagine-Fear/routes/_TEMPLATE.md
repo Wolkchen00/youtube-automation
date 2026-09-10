@@ -14,6 +14,7 @@ DESTINATION: Example City
 LANDMARK: the Example Tower
 DURATION: 20
 NEON: acid green
+PALET: neon
 WEATHER: dense fog just after sunset
 SOURCE: (kendi rotamiz, kaynak yok)
 

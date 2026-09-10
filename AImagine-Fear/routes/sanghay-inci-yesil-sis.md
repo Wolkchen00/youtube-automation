@@ -5,6 +5,7 @@ DESTINATION: Shanghai
 LANDMARK: the Oriental Pearl Tower
 DURATION: 15
 NEON: acid green
+PALET: neon
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: thick night fog sitting between the towers
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

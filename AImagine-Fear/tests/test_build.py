@@ -46,6 +46,7 @@ def _route_text(
         "LANDMARK": "the Test Tower",
         "DURATION": "20",
         "NEON": "bright green",
+        "PALET": "neon",
         "LEGWEAR": "black full-length leggings",
         "WEATHER": "steady night rain",
         "SOURCE": "synthetic test route",

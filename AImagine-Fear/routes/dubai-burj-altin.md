@@ -5,6 +5,7 @@ DESTINATION: Dubai
 LANDMARK: the Burj Khalifa
 DURATION: 15
 NEON: warm gold-amber
+PALET: sicak
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: a clear hot night with dust haze on the horizon
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

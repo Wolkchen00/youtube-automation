@@ -5,6 +5,7 @@ DESTINATION: New York
 LANDMARK: the Empire State Building
 DURATION: 15
 NEON: hot magenta-pink
+PALET: neon
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: heavy night snow, fat flakes crossing the lens
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

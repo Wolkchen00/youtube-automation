@@ -5,6 +5,7 @@ DESTINATION: Tokyo
 LANDMARK: the Tokyo Skytree
 DURATION: 15
 NEON: electric violet
+PALET: neon
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: warm night rain, the whole city under a low orange cloud lid
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
