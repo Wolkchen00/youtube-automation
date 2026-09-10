@@ -8,6 +8,8 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Iterable
 
+from profil import PROFILLER, VARSAYILAN_PROFIL
+
 
 ROOT = Path(__file__).resolve().parent
 
@@ -54,6 +56,13 @@ TOKEN_FIELDS = {
     "<<WEATHER>>": "WEATHER",
     "<<CITY>>": "DESTINATION",
     "<<LANDMARK>>": "LANDMARK",
+}
+
+PROFIL_TOKENLARI = {
+    "<<COZUNURLUK>>": lambda profil: "%dx%d" % (
+        profil["genislik"], profil["yukseklik"]
+    ),
+    "<<FPS>>": lambda profil: str(profil["beklenen_fps"]),
 }
 
 LIST_A_PHRASES = (
@@ -304,12 +313,17 @@ def discover_route_paths(root: Path) -> list[Path]:
     )
 
 
-def render_route(canon: Canon, route: Route) -> dict[str, str]:
+def render_route(
+    canon: Canon, route: Route, profil_adi: str = VARSAYILAN_PROFIL
+) -> dict[str, str]:
+    profil = PROFILLER[profil_adi]
     prompt_parts: list[str] = []
     for name in MASTER_SECTIONS:
         body = canon.master[name]
         for token, field in TOKEN_FIELDS.items():
             body = body.replace(token, route.fields[field])
+        for token, deger in PROFIL_TOKENLARI.items():
+            body = body.replace(token, deger(profil))
         prompt_parts.append(f"{name}\n{body}")
 
     prompt_parts.extend(
@@ -667,6 +681,7 @@ def validate_route(
     route: Route,
     outputs: dict[str, str],
     root: Path,
+    profil_adi: str = VARSAYILAN_PROFIL,
 ) -> list[str]:
     messages: list[str] = []
     duration, duration_messages = _parse_duration(route, root)
@@ -681,7 +696,7 @@ def validate_route(
     messages.extend(_validate_lengths(route, root, outputs))
     messages.extend(_validate_caption(route, root))
 
-    second_render = render_route(canon, route)
+    second_render = render_route(canon, route, profil_adi)
     for filename in sorted(outputs):
         if outputs[filename].encode("utf-8") != second_render[filename].encode("utf-8"):
             messages.append(
@@ -695,7 +710,11 @@ def validate_route(
     return messages
 
 
-def build_project(root: Path = ROOT, check: bool = False) -> list[Route]:
+def build_project(
+    root: Path = ROOT,
+    check: bool = False,
+    profil_adi: str = VARSAYILAN_PROFIL,
+) -> list[Route]:
     root = Path(root).resolve()
     canon = load_canon(root)
     messages: list[str] = []
@@ -736,12 +755,12 @@ def build_project(root: Path = ROOT, check: bool = False) -> list[Route]:
         raise BuildError(messages)
 
     for route in routes:
-        outputs = render_route(canon, route)
+        outputs = render_route(canon, route, profil_adi)
         output_dir = root / "out" / route.slug
         for filename, text in outputs.items():
             write_utf8(output_dir / filename, text)
         if check:
-            messages.extend(validate_route(canon, route, outputs, root))
+            messages.extend(validate_route(canon, route, outputs, root, profil_adi))
 
     if messages:
         raise BuildError(messages)
@@ -757,10 +776,16 @@ def main(argv: list[str] | None = None) -> int:
         action="store_true",
         help="validate every generated route and exit 1 on any failure",
     )
+    parser.add_argument(
+        "--profil",
+        choices=tuple(PROFILLER),
+        default=VARSAYILAN_PROFIL,
+        help="promptta kullanilacak ortak uretim profili",
+    )
     args = parser.parse_args(argv)
 
     try:
-        routes = build_project(ROOT, check=args.check)
+        routes = build_project(ROOT, check=args.check, profil_adi=args.profil)
     except (BuildError, OSError) as error:
         print(error, file=sys.stderr)
         return 1

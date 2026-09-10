@@ -4,7 +4,7 @@ name: Fear Slide Daily
 # fearvisionofficiel formatinin tersine muhendislikle cozulmus uyarlamasi.
 # Format: TEK kesintisiz 15 sn dikey 9:16 POV klip, seffaf kaydiraktan sehrin
 # uzerinde asagi kayip havuza dusme. Klip zinciri YOK, bir rota = bir prompt = bir video.
-# Motor: Kie / bytedance/seedance-2, 720p, native ses (konusma dahil).
+# Motor: Kie / bytedance/seedance-2, aktif profil, native ses (konusma dahil).
 # Sehir donusumu: Vegas -> Tokyo -> New York -> Dubai -> Toronto -> Paris -> Shanghai.
 #
 # 2026-09-03 Ihsan karari: kanal tren serisinden bu formata gecti. next-stop
@@ -122,7 +122,7 @@ jobs:
         run: |
           bash scripts/persist_state.sh \
             "chore: fear-slide durumunu ilerlet [skip ci]" \
-            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json
+            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json
 
       - name: Upload logs artifact
         if: always()

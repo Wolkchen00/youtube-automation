@@ -9,7 +9,7 @@ OPENING STATE, TIMELINE, VOICE, END STATE, NEGATIVE.
 
 ## FORMAT
 
-Create a single continuous <<DURATION>>-second vertical 9:16 video at 1080x1920, 30 frames per second. Photorealistic live-action action-camera footage, not animation, not a render, not a game. Record the WHOLE video as ONE SINGLE UNBROKEN CONTINUOUS TAKE from the first frame to the last. There is no cut, no transition and no seam anywhere. The footage must feel like a real waterproof action camera recording one real ride in real time.
+Create a single continuous <<DURATION>>-second vertical 9:16 video at <<COZUNURLUK>>, <<FPS>> frames per second. Photorealistic live-action action-camera footage, not animation, not a render, not a game. Record the WHOLE video as ONE SINGLE UNBROKEN CONTINUOUS TAKE from the first frame to the last. There is no cut, no transition and no seam anywhere. The footage must feel like a real waterproof action camera recording one real ride in real time.
 
 ## INDEPENDENCE NOTE
 
