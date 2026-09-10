@@ -125,6 +125,7 @@ class InstalledBibleOptInTests(unittest.TestCase):
                 if "master_lufs" in data.get("series", {}):
                     found.append((path, data["series"]["master_lufs"]))
         expected = [
+            (REPO_ROOT / "galactic_experience" / "event-horizon" / "bible.json", -14),
             (REPO_ROOT / "shadowedhistory" / "flashpoints" / "bible.json", -14),
             (REPO_ROOT / "sentinal_ihsan" / "unnatural-lab" / "bible.json", -14),
         ]

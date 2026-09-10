@@ -453,7 +453,8 @@ def migrate_malformed_approval_holds(meta: SeriesMeta, bible) -> bool:
     now = datetime.now(timezone.utc).isoformat()
     valid_codes = {
         "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
-        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
+        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA",
+        "EPISODE_DEGRADED", "UNKNOWN",
     }
     for part in meta.parts().values():
         if part.get("status") != "awaiting_approval" or _approval_artifacts_complete(part):
@@ -586,6 +587,25 @@ def _budget_failure(slug: str, n: int, bible, plan: dict) -> produce.ProduceResu
     return produce.ProduceResult(
         "generation_fail", reason=reason, reason_code="BUDGET_EXHAUSTED"
     )
+
+
+def _degraded_episode_reason(coherence: dict) -> str:
+    """Explain an opted-in coherence failure in the operator alert."""
+    missing = []
+    if coherence.get("loop_closed") is False:
+        missing.append("loop kapanmadi")
+    if coherence.get("narration_delivered") is False:
+        missing.append("anlatim cikmadi")
+    if coherence.get("duration_in_band") is None:
+        missing.append("sure olculemedi")
+    elif coherence.get("duration_in_band") is False:
+        missing.append(f"sure bant disi ({coherence.get('duration_s')} sn)")
+    roles = coherence.get("arc_roles_missing") or []
+    if roles:
+        missing.append("dusen roller: " + ", ".join(map(str, roles)))
+    if not missing:
+        missing.append("bolum butunlugu kusurlu")
+    return "; ".join(missing)
 
 
 def _continue_after_terminal(meta: SeriesMeta, slug: str, *, dry_run: bool,
@@ -768,6 +788,22 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         result = produce.ProduceResult("ok", Path(produced))
     else:
         result = produce.ProduceResult("generation_fail")
+    if bible and bible.block_degraded_publish and result.status == "ok":
+        coherence = result.coherence or {}
+        if coherence.get("degraded") is True or coherence.get("duration_in_band") is not True:
+            reason = _degraded_episode_reason(coherence)
+            result = produce.ProduceResult(
+                "qc_hold",
+                reason=f"bolum butunlugu yayin kapisinda reddedildi: {reason}",
+                reason_code="EPISODE_DEGRADED",
+                dropped_shots=list(result.dropped_shots),
+                coherence=result.coherence,
+            )
+            _series_alert(
+                meta.slug,
+                f"⏸️ *{meta.base_title}* Part {n} kusurlu teslimat: {reason}. "
+                "Yayin bloke edildi; bolum yeniden denenecek.",
+            )
     if new_state_machine and result.status != "ok":
         advanced = _record_recoverable_failure(meta, n, result)
         if advanced:

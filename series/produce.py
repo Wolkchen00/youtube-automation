@@ -87,7 +87,8 @@ class ProduceResult:
     reason: str | None = None
     reason_code: Literal[
         "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
-        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
+        "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA",
+        "EPISODE_DEGRADED", "UNKNOWN",
     ] = "UNKNOWN"
     dropped_shots: list[int] = field(default_factory=list)
     coherence: dict | None = None
@@ -101,7 +102,8 @@ class ProduceResult:
             raise ValueError("non-ok ProduceResult cannot carry a final path")
         if self.reason_code not in (
             "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
-            "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA", "UNKNOWN",
+            "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA",
+            "EPISODE_DEGRADED", "UNKNOWN",
         ):
             raise ValueError(f"unknown ProduceResult reason_code: {self.reason_code}")
 
@@ -1352,11 +1354,14 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     try:
         bible.audio_fade
         bible.master_lufs
+        bible.master_true_peak_margin_db
+        bible.title_card
+        bible.block_degraded_publish
     except ValueError as error:
         logger.error(f"❌ {error}")
         return None
     required_layers = set(bible.required_layers)
-    unknown_layers = required_layers - {"hook_teaser", "music", "native_audio"}
+    unknown_layers = required_layers - {"hook_teaser", "music", "native_audio", "title_card"}
     if unknown_layers:
         logger.error(
             f"❌ Bilinmeyen zorunlu teslimat katmanı: {', '.join(sorted(unknown_layers))}"
@@ -1364,6 +1369,14 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         return None
     if isinstance(plan, (str, Path)):
         plan = load_plan(plan)
+    if "title_card" in required_layers:
+        from .replenish import validate_title_card
+        card_errors = validate_title_card(bible, plan, required=True)
+        if card_errors:
+            for error in card_errors:
+                logger.error(f"Zorunlu title card: {error}")
+            logger.error("Zorunlu title card hatasi nedeniyle uretim kredi harcamadan durduruldu.")
+            return None
     plan_digest = str(plan.get("doctrine_sha256") or "").strip().lower()
     if "doctrine_sha256" in meta.data:
         if not plan_digest:
@@ -2101,12 +2114,22 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 title=str(tc.get("title") or ""),
                 subtitle=str(tc.get("subtitle") or ""),
                 duration=float(tc_cfg.get("duration", 3.0)),
+                required="title_card" in required_layers,
+                preserve_case=bool(tc_cfg.get("preserve_case", False)),
             )
             if titled.exists() and titled.stat().st_size > 0:
                 final_ep = titled
                 logger.info(f"🪧 Künye bindirildi: {tc.get('title') or tc.get('subtitle')}")
         except Exception as e:
+            if "title_card" in required_layers:
+                logger.error(f"Zorunlu title card eklenemedi: {e}")
+                return None
             logger.warning(f"⚠️ Künye eklenemedi (video künyesiz yayınlanır): {e}")
+
+        if "title_card" in required_layers and (
+                not titled.exists() or titled.stat().st_size == 0):
+            logger.error("Zorunlu teslimat katmanı üretilemedi: title_card")
+            return None
 
     # Senkron fact-caption'lar (opt-in): her çekimin shot['fact']'i (kısa sert bilgi)
     # o çekimin FINAL zaman çizgisindeki anına ,  kanca kaymasi (teaser_len) dahil , 
@@ -2159,6 +2182,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             ffmpeg_tools.master_audio(
                 source_1080, mastered_1080,
                 target_i=master_lufs, target_tp=-1.0, target_lra=11.0,
+                true_peak_margin_db=bible.master_true_peak_margin_db,
             )
         except Exception as error:
             return _audio_master_hold(f"mastering başarısız: {error}")
