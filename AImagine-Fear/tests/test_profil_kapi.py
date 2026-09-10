@@ -140,12 +140,67 @@ def test_matrix_key_includes_canonical_fps() -> None:
     assert key24 != key30
 
 
-def test_canary_publish_stops_before_credit_or_subprocess(monkeypatch, tmp_path: Path) -> None:
+def test_canary_runs_automatically_but_downgrade_still_blocks(
+    monkeypatch, tmp_path: Path
+) -> None:
+    """Kanarya artik OTOMATIK kosuyor (sistem tam otomatik olsun diye), ama
+    model sessizce 720p'ye duserse yayin YINE de engelleniyor.
+
+    Yani insan kapidan cikarildi, teknik kapi cikarilmadi."""
+    slug = "test-slug"
+    monkeypatch.setattr(gunluk, "KOK", tmp_path)
+    monkeypatch.setattr(gunluk, "DEFTER", tmp_path / "yayin.jsonl")
     monkeypatch.setattr(gunluk, "ONAY_DOSYASI", tmp_path / "missing.json")
+    cikti = tmp_path / "out" / slug
+    (cikti / "video").mkdir(parents=True)
+    ham = cikti / "video" / "test_gunluk_1.mp4"
+    ham.write_bytes(b"raw")
+    (cikti / "CAPTION.txt").write_text("caption #Tag", encoding="utf-8")
+    (cikti / "TITLE.txt").write_text(
+        "Test Tower glass drop #shorts\nI slid off the Test Tower #shorts",
+        encoding="utf-8",
+    )
     monkeypatch.setattr(gunluk, "defter", lambda: [])
-    monkeypatch.setattr(gunluk, "kredi", lambda: (_ for _ in ()).throw(AssertionError("credit")))
-    monkeypatch.setattr(gunluk, "kosa", lambda *a: (_ for _ in ()).throw(AssertionError("process")))
-    assert gunluk.main([]) == 1
+    monkeypatch.setattr(gunluk, "kredi", lambda: 1000)
+    monkeypatch.setattr(gunluk, "rota_suresi", lambda s, kok=None: 15)
+    monkeypatch.setattr(gunluk, "rota_paleti", lambda s, kok=None: "neon")
+    monkeypatch.setattr(gunluk, "sha256_dosya", lambda p: "s" * 64)
+    monkeypatch.setattr(gunluk, "ses_olcumleri", lambda m: {"lufs": -14.0, "true_peak": -1.2})
+
+    def _master(kaynak, hedef, **kw):
+        Path(hedef).parent.mkdir(parents=True, exist_ok=True)
+        Path(hedef).write_bytes(b"master")
+
+    monkeypatch.setattr("core.ffmpeg_tools.master_audio", _master)
+    yayinlandi = []
+    monkeypatch.setattr(
+        gunluk, "kosa",
+        lambda cmd, cwd: type("R", (), {"returncode": 0, "stdout": "", "stderr": ""})(),
+    )
+    monkeypatch.setattr(
+        gunluk, "yayinla",
+        lambda *a, **k: yayinlandi.append(a) or 0,
+    )
+
+    # 1) Model SESSIZCE 720p dondurdu -> kapi engeller, otomatik onay YOK
+    monkeypatch.setattr(
+        gunluk, "denetle",
+        lambda m, s, p: (["istendi 1080p, geldi 720x1280 - model sessizce dusurdu"],
+                         {"fps": 24.0, "sure": 15.0}),
+    )
+    assert gunluk.main(["--sehir", slug]) == 1
+    assert yayinlandi == [], "sessiz dusurmede yayinlandi"
+    assert not (tmp_path / "missing.json").exists(), "kapida kalan kosu ONAY yazdi"
+
+    # 2) Kapi temiz -> kanarya kendini otomatik onaylar ve YAYINLANIR
+    monkeypatch.setattr(
+        gunluk, "denetle", lambda m, s, p: ([], {"fps": 24.0, "sure": 15.0})
+    )
+    assert gunluk.main(["--sehir", slug, "--allow-same-day"]) == 0
+    assert yayinlandi, "kapi temizken yayinlanmadi"
+    onay = json.loads((tmp_path / "missing.json").read_text(encoding="utf-8"))
+    assert onay["otomatik"] is True
+    assert onay["cozunurluk"] == "1080p" and onay["fps"] == 24
 
 
 def test_bad_approval_cases_stay_closed(monkeypatch, tmp_path: Path) -> None:

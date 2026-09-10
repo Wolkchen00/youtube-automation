@@ -38,6 +38,7 @@ def test_dokuz_rotanin_palet_eslemesi_birebir() -> None:
         "vegas-strat-blue-rain": "neon",
         "vegas-strat-blue-rain-15": "neon",
         "vegas-strat-blue-rain-25": "neon",
+        "istanbul-camlica-amber-sicak": "sicak",
     }
     gercek = {
         yol.stem: build.load_route(yol, PROJE_KOKU).fields["PALET"]
@@ -188,3 +189,32 @@ def test_uretim_kaydi_semasi_2_ve_palet_tasiyor() -> None:
     kaynak = (PROJE_KOKU / "tools" / "gunluk.py").read_text(encoding="utf-8")
     assert '"sema_surumu": 2' in kaynak
     assert '"palet": palet' in kaynak
+
+
+# ----------------------------------------------------------------------
+# Palet A/B artik GERCEKTEN kosabilir: iki sicak rota aktif sirada.
+# Bu test daha once BOS gecerdi (tek sicak rota vardi) ve o yuzden
+# yazilmamisti. Artik gercek bir iddia.
+# ----------------------------------------------------------------------
+def test_sicak_rotalar_siraya_esit_dagilmis() -> None:
+    paletler = [gunluk.rota_paleti(slug) for slug in gunluk.SIRA]
+    sicak_indeksler = [i for i, p in enumerate(paletler) if p == "sicak"]
+    assert len(sicak_indeksler) >= 2, (
+        "A/B icin en az iki sicak rota gerekiyor, su an: %d" % len(sicak_indeksler)
+    )
+    n = len(gunluk.SIRA)
+    # Dairesel araliklar: son sicaktan bassa donen mesafe de sayilir
+    araliklar = [
+        (sicak_indeksler[(k + 1) % len(sicak_indeksler)] - sicak_indeksler[k]) % n
+        for k in range(len(sicak_indeksler))
+    ]
+    assert max(araliklar) - min(araliklar) <= 1, (
+        "sicak rotalar esit dagilmamis, dairesel araliklar: %s" % araliklar
+    )
+
+
+def test_sira_hem_sicak_hem_neon_iceriyor() -> None:
+    paletler = {gunluk.rota_paleti(slug) for slug in gunluk.SIRA}
+    assert paletler == {"sicak", "neon"}, (
+        "A/B icin sirada her iki palet de olmali, su an: %s" % paletler
+    )

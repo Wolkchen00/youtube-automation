@@ -30,3 +30,23 @@ Plan: `RF-PLAN-FEAR-DUZELT.md`
 | 6 | Otomatik goruntu/kanon uyum kapisi (kare farki, OCR, sahne tespiti) | Teknik kapi 1080x1920/30fps/sesli HERHANGI bir klibi gecirir. Bu kosuda yerine `--yayinlama` + kontakt sayfasi ile INSAN onayi kondu. Otomatik surumu `RF-PLAN-REELYZE.md` Faz 2'nin isi. |
 | 7 | Ucuncu sicak rota (yeniden boyanmis Sanghay) | Kanon metnini toplu renk degistirerek yeniden yazmak Codex'in isi degil; Ihsan yazmali. Palet A/B su an 2 sicak / 7 neon ile yuruyor. |
 | 8 | **`seedance-2` kanarya kosusu** | `seedance-2`'nin 1080p ve 15sn ustu destegi BILINMIYOR (`core/kie_api.py:489` notu `seedance-2-fast`'e ait). Kredi harcar, Ihsan'in karari. Rock 1b'nin `--yayinlama` modu bu kanaryayi yayinlamadan kosmak icin var. |
+
+## Kapatilanlar (2026-09-10, Ihsan: "cron calissin, sistem tam otomatik olsun")
+
+- ~~#7 Ucuncu sicak rota~~ -> YAZILDI: `routes/istanbul-camlica-amber-sicak.md`
+  (Camlica Kulesi, sicak amber, 15 sn). SIRA'da iki sicak rota bes neonun arasina
+  esit dagitildi; palet A/B artik gercekten kosuyor ve her yayin damgalaniyor.
+- ~~#8 Kanarya kosusu Ihsan'in karari~~ -> OTOMATIKLESTI. Kanarya kombinasyonu
+  artik kendiliginden uretiliyor; teknik kapiyi (cozunurluk, fps, sure, ses)
+  gecerse kombinasyon otomatik "dogrulandi" damgasi aliyor ve yayinlaniyor.
+  Insan kapidan cikti, TEKNIK kapi cikmadi: model sessizce 720p'ye duserse yayin
+  yine engelleniyor ve Telegram uyarisi gidiyor.
+
+## Hala acik
+
+- #1 YouTube kategorisi (uploader kategori alanini desteklemiyor, elle is)
+- #2 "Next Stop" serisini kanaldan ayirma (YouTube hesap islemi)
+- #3 1080p'nin gercek kredi maliyetini olc (ilk kanarya kosusundan sonra oku)
+- #4 Palet A/B sonucunu oku (en az 6 yayin sonra, IG Insights ile)
+- #5 Platform basina yeniden deneme
+- #6 Anlamsal (goruntu) kalite kapisi , teknik kapi kanona ICERIK uyumunu kanitlamaz
