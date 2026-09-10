@@ -161,11 +161,18 @@ motor isi, bes oturumun ortasinda yapilmaz. Ayri bir rock.
   uretirse gecebilir. Rock 2'nin `min_shots: 2` esigi ALT siniri korur, UST siniri
   korumaz. (Codex turu 1 bulgusu; dogrulanmasi gerek.)
 
-- **[DUSUK] 11. bolum hic yayinlanmamis.** `published.json` part 11'i icermiyor
-  (1-10 ve 12-30 var). `plans/part11.json` mevcut. Sebep arastirilmadi.
+- **[DUSUK] 11. bolum uretildi ama hicbir platforma cikmadi.** DUZELTME (10 Eylul,
+  ikinci olcum): ilk yazdigim *"published.json part 11'i icermiyor"* YANLISTI , kayit
+  VAR, ama `results` icindeki uc platformun ucu de null. Yani bolum uretildi (kredi
+  harcandi), yukleme basarisiz oldu ve `next_part` yine de ilerledi; bolum bir daha
+  denenmedi. Tek vaka (30 bolumde 1). Yukleme basarisizliginda durumun neden
+  ilerledigi arastirilmali.
 
-- **[DUSUK] Instagram ve TikTok hic yayinlanmamis.** `series.json` uc platform
-  listeliyor; 29 kaydin tamaminda `instagram: null`, `tiktok: null`.
+- **[KAPANDI , iddiam YANLISTI] Instagram ve TikTok calisiyor.** Ilk yazdigim
+  *"29 kaydin tamaminda instagram/tiktok null"* YANLISTI: `published.json`'in yalniz
+  ilk iki kaydina bakip genellemisim. Gercek dagilim: part 1-20 tek platform (YouTube),
+  **part 21'den (31 Agustos) itibaren 10 bolumun 10'unda da Instagram ve TikTok dolu.**
+  Cok platformlu yayin calisiyor, yapilacak is yok. Bu madde kapatildi.
 
 - **[ORTA] Kredi butcesi dort kanalda ortak.** `core/credit_gate.py:267-279`: kanallar
   ayni Kie cuzdanini ve aylik defteri paylasiyor. Rock 2'nin urettigi ek yeniden
