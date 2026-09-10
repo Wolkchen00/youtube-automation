@@ -108,7 +108,19 @@ dogru; eksik olan yalniz kanal konfigurasyonu. Baska kanalin bible dosyasina dok
 
 **Sorun:** `min_shots` tanimsiz, esik 1'e dusuyor, iki cekimlik plan tek cekimle cikiyor.
 
-**Yapilacak:** `bible.json` -> `qc` blogunun icine `"min_shots": 2`.
+**Yapilacak:** `bible.json` -> `qc` blogunun icine IKI alan:
+```json
+"min_shots": 2,
+"harden_downloads": true
+```
+
+`harden_downloads` Codex turu 3'te eklendi. Gerekcesi dogrudan Rock 2'nin kendisi:
+Rock 2 yeniden denemeleri sıklastiriyor ve bu risk sinifinin tamami "yarim bir dosyanin
+sonraki denemeye sagkalmasi". `core/utils.py:29-99` `hardened=True` sunlari verir:
+uc deneme + geri cekilme, ayni dizinde GECICI dosyaya indirme, ffprobe ile video akisi
+dogrulamasi, ve atomik `os.replace` , yani yarim medya `shot_NN.mp4` yolunda ASLA
+gorunmez. Basarili indirmede davranis degismez, fail-closed bir kapi acmaz, ek kredi
+harcamaz. Bedeli olmayan bir sertlestirme.
 
 **Done looks like:** `_required_shot_count(bible, 2) == 2`. Bir cekim final_reject
 alirsa `produce_episode` None doner, bolum yayinlanmaz.
@@ -125,7 +137,12 @@ alirsa `produce_episode` None doner, bolum yayinlanmaz.
   medyani 23, iki cekimli 15 sn kovasinin medyani 33: iki hit tek cekimin
   ustunlugunu gostermiyor, kovadaki diger yedi bolum 2-64 arasinda.
 
-**DOKUNMA:** `series/preflight.py`, `series/produce.py`.
+**Artik kredi butcesi paylasimi (Codex turu 3):** dort kanal ayni Kie cuzdanini ve
+aylik defteri paylasiyor (`core/credit_gate.py:267-279`). Rock 2'nin urettigi ek
+yeniden denemeler baska bir kanalin kredi ayirmasini engelleyebilir. Kabul edilen
+bedele bu da dahil.
+
+**DOKUNMA:** `series/preflight.py`, `series/produce.py`, `core/utils.py`.
 
 ---
 
@@ -150,10 +167,14 @@ duzeltmesi sessizce geri alinabilir.
 Test sunlari dogrulamali (gercek repo dosyalarini okuyarak, motoru mocklamadan):
 
 1. `Bible.load("flashpoints").master_lufs == -14.0`
-2. **Uc mikser yan etkisi olculur** (yalniz sayiyi degil davranisi kilitler):
-   flashpoints bible'i ile `bible.master_lufs is None` False, yani
-   `amix_normalize` False, `limit_mix_peak` True ve anlatimli yol `music_volume`
-   0.50 secer (`produce.py:656` ifadesi birebir dogrulanir, 0.28 DEGIL)
+2. **Uc mikser yan etkisi**: flashpoints bible'i ile `bible.master_lufs is None`
+   False, yani `amix_normalize` False, `limit_mix_peak` True ve anlatimli yol
+   `music_volume` 0.50 secer (`produce.py:656` ifadesi birebir dogrulanir, 0.28 DEGIL).
+   SINIR (Codex turu 3, kabul edildi): bu kontrol konfigurasyon + kod-sekli
+   duzeyindedir; uretimin bu degerleri fiilen mikser cagrisina GECIRDIGINI kanitlamaz.
+   Gercek kanit bir uctan uca ses render'i olurdu ve bu kosunun kapsami disindadir.
+   Sessizce gecilmiyor, sinir olarak yaziliyor.
+7. `qc.harden_downloads is True` (Rock 2 ile gelen sertlestirme)
 3. `series.produce._required_shot_count(bible, 2) == 2`, VE kontrol capasi:
    `min_shots` alani cikarilmis bir bible kopyasinda ayni cagri `1` doner
 4. **Bos gecmeyen min_shots kaniti:** `plans/part31.json`'un TEK cekimli bir kopyasi

@@ -230,3 +230,72 @@ Bunlar plani saglamlastirdi. Ardindan kalan iki rock'a yuklendi:
 **Sonuc:** rock sayisi degismedi (2), ama Rock 1'in yan etki envanteri eksikti ve
 tamamlandi, proof iki yerde bos gecebilirdi ve kapatildi, iki yeni [YUKSEK] mesele
 (kati dogrulama, yayin modu) ortaya cikti.
+
+## Round 3
+
+NOT: turu 3 ilk denemede Codex kota limitine takildi (exit 1, `-o` dosyasi hic
+olusmadi). Basarisizlik merdivenine uyularak AYNI thread id ile ve YENI cikti
+dosyasiyla bir kez tekrar denendi (12:26 PDT); ikinci deneme basarili.
+
+### Integrator findings (Codex, verbatim)
+
+```
+- [DEFER] Deferral (a) holds for this cycle because neither rock increases the likelihood of generating oversized plans; `min_shots: 2` improves the existing minimum without enforcing completeness for larger plans -> Keep strict validation deferred pending the proposed report, and retain that limitation explicitly.
+
+- [DEFER] Deferral (b) is defensible for the daily workflow, which uses a fresh Ubuntu runner and restores no shot cache, but 17 historical `qc_pass` events do not measure today’s reusable cache -> Base eventual activation on actual retained clips and matching hashes, not historical episode counts.
+
+- [FIX] Deferral (b) leaves a concrete regression for retained-workspace retries: one shot succeeds, another download leaves a nonempty partial file, `min_shots: 2` prevents publication, and the next run counts the partial file as an accepted shot without QC (`produce.py:1570`) -> Enable existing `qc.harden_downloads: true` in the Flashpoints bible to prevent partial downloads reaching the final filename without requiring historical QC hashes.
+
+- [FIX] The cache-risk narrowing is correct only when the rename succeeds, because `critic.py:1845–1849` catches rename failures and continues, potentially leaving the rejected `shot_NN.mp4` available for unchecked reuse -> State “successful `_qcfail` rename frees the path” and retain rename failure as a residual cache risk.
+
+- [FIX] Proof item 2 can still pass with broken mixer behavior because reproducing the conditional or checking its source text does not prove the production calls receive those values -> Exercise `_post_process` with controlled audio-provider inputs and assert the actual calls use `amix_normalize=False`, `music_volume=0.50`, and `limit_mix_peak=True`.
+
+- [DEFER] Proof items 1, 3, and 4 remain valid configuration/helper checks but can pass if production stops using those helpers; the revised honest-limit paragraph correctly acknowledges the missing runtime proof -> Keep their claims restricted to configuration and helper behavior; items 5–6 adequately test their stated configuration invariants.
+
+- [DEFER] I found no cross-series configuration leakage: `Bible.load(slug)` reads that slug’s file, and expanding the registry test to exactly the two approved `(path, -14)` entries preserves its protection for other scanned series -> Keep exact, order-independent equality and preserve the scan scope and existing behavioral tests.
+
+- [DEFER] Operational isolation is incomplete because channels share Kie credits and the default monthly ledger, so additional paid Flashpoints retries can leave another channel unable to reserve credits (`credit_gate.py:267–279`) -> Include shared-budget consumption in the accepted retry cost; no shared-engine edit is required for this review.
+
+VERDICT: NOT YET```
+
+### Visionary response (Claude)
+
+Codex bu turda iki ertelemeyi de ONAYLADI ve capraz-seri sizintisi olmadigini
+dogruladi (`Bible.load(slug)` yalniz kendi slug dosyasini okur; kayit testini iki
+girdiye genisletmek digerleri icin korumayi surduruyor). Kalan uc bulgu:
+
+- **ACCEPTED , plana eklendi** , `qc.harden_downloads: true`
+  -> Codex somut bir regresyon tarif etti: bir cekim basarili olur, digerinin indirmesi
+  bos olmayan yarim bir dosya birakir, `min_shots: 2` yayini engeller, sonraki kosu o
+  yarim dosyayi QC'siz kabul eder (`produce.py:1570`).
+  -> Anahtarin varligi dogrulandi (`produce.py:1678`, `:1858`, `critic.py:1905`) ve ne
+  yaptigi okundu (`core/utils.py:29-99`): uc deneme, gecici dosyaya indirme, ffprobe
+  video akisi dogrulamasi, atomik `os.replace`. Basarili indirmede davranis degismez,
+  fail-closed kapi acmaz, ek kredi harcamaz.
+  -> Kabul edildi cunku bu risk sinifini dogrudan Rock 2 sıklastiriyor. Rock 2'nin
+  ikinci alani olarak plana girdi ve bagimsiz kanit betigime assert eklendi.
+
+- **ACCEPTED (duzeltme , yine kendi ifadem)** , `_qcfail` daralmasi kosullu
+  -> Codex hakli: `critic.py:1845-1849` yeniden adlandirma hatasini YAKALAYIP devam
+  ediyor. Yani "reddedilen klip yolu bosaltir" ancak rename BASARILIYSA dogru.
+  Basarisiz rename artik risk olarak RF-ISSUES'ta duruyor.
+
+- **ACCEPTED (sinir olarak yazildi)** , Proof 2 uretim cagrisini kanitlamiyor
+  -> Codex hakli: kosullu ifadeyi yeniden uretmek ya da kaynak metnini denetlemek,
+  uretimin bu degerleri fiilen mikser cagrisina GECIRDIGINI kanitlamaz. Gercek kanit
+  uctan uca bir ses render'i olurdu.
+  -> Mock'lu bir `_post_process` kosum harness'i bu kosunun kapsami disinda birakildi;
+  bunun yerine sinir plana ACIKCA yazildi. Bir konfigurasyon degisikliginin
+  konfigurasyon duzeyinde kanitlanmasi durust bir sinirdir, gizlenmiyor.
+
+- **ACCEPTED (bedele eklendi)** , kredi butcesi dort kanalda ortak
+  -> `core/credit_gate.py:267-279` dogrulandi. Rock 2'nin ek yeniden denemeleri baska
+  bir kanalin kredi ayirmasini engelleyebilir. Rock 2'nin "kabul edilen bedel"
+  listesine ve RF-ISSUES'a yazildi.
+
+- **NOT (Codex'in erteleme (b) uzerine getirdigi nuans)** , gunluk kosu taze
+  `ubuntu-latest` is alaninda calisiyor ve cekim cache'i geri yuklenmiyor
+  (`.github/workflows/flashpoints.yml` dogrulandi: `actions/cache` yok). Yani
+  cross-run cache senaryosu CI'da zaten olusmuyor; erteleme (b) daha da guvenli
+  hale geldi. Ayrica "17 gecmis qc_pass" sayisinin bugunku cache'i olcmedigi uyarisi
+  dogru , RF-ISSUES'taki olcum tarifi buna gore duzeltildi.

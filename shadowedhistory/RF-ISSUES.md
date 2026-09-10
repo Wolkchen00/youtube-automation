@@ -104,10 +104,22 @@ motor isi, bes oturumun ortasinda yapilmaz. Ayri bir rock.
   ICERIK HASH'iyle eslesen bir `qc_pass` kaydi arar, bulamazsa dosyayi
   `_stale_<hash>` diye ayirir).
 
-  QC REDDI bu deligi kullanmaz , reddedilen klip zaten `_qcfail<n>` olarak yeniden
+  QC REDDI bu deligi normalde kullanmaz , reddedilen klip `_qcfail<n>` olarak yeniden
   adlandiriliyor (`series/critic.py:1845-1848`), yani dosya yolu bosaliyor ve yeniden
-  uretiliyor. Risk dar: YARIM/BOZUK INDIRME `shot_NN.mp4` olarak hayatta kalirsa
-  sonraki kosu onu denetimsiz kabul eder.
+  uretiliyor. DUZELTME (Codex turu 3, hakli): bu yalnizca yeniden adlandirma
+  BASARILIYSA gecerli , `:1847-1849` hatayi yakalayip devam ediyor, yani basarisiz bir
+  rename reddedilen klibi `shot_NN.mp4` olarak birakabilir. Artik risk olarak duruyor.
+
+  YARIM/BOZUK INDIRME kolu ise bu kosuda `qc.harden_downloads: true` ile KAPATILDI
+  (Rock 2'ye eklendi): atomik rename sayesinde yarim medya final yola hic ulasmiyor.
+  Geriye kalan `revalidate_cache` acigi yalnizca "gecmiste QC gecmis ama kaydi
+  eslesmeyen" klipler icin gecerli.
+
+  NOT (Codex turu 3): gunluk kosu `ubuntu-latest` uzerinde taze is alaninda calisiyor
+  (`.github/workflows/flashpoints.yml`, cekim cache'i geri yuklenmiyor), yani cross-run
+  cache senaryosu CI'da zaten olusmuyor; risk yerel/elle kosulara ozgu. Ayrica 17
+  gecmis `qc_pass` sayisi BUGUNKU yeniden kullanilabilir cache'i olcmez , acilacaksa
+  olcum gercekten saklanan klipler uzerinden yapilmali.
 
   **Neden bu kosuda yapilmadi:** Rock 2 yeniden denemeleri ~%31'e cikariyor, yani bu
   yol cok daha sik islenecek , acmak icin gecerli bir gerekce. Ama `qc_pass_exists`
@@ -154,6 +166,11 @@ motor isi, bes oturumun ortasinda yapilmaz. Ayri bir rock.
 
 - **[DUSUK] Instagram ve TikTok hic yayinlanmamis.** `series.json` uc platform
   listeliyor; 29 kaydin tamaminda `instagram: null`, `tiktok: null`.
+
+- **[ORTA] Kredi butcesi dort kanalda ortak.** `core/credit_gate.py:267-279`: kanallar
+  ayni Kie cuzdanini ve aylik defteri paylasiyor. Rock 2'nin urettigi ek yeniden
+  denemeler baska bir kanalin kredi ayirmasini engelleyebilir. Izlenmeli.
+  (Codex turu 3 bulgusu.)
 
 ## Reddedildi (rapordaki madde, yapilmayacak)
 
