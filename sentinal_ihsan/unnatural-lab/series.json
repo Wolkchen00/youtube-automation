@@ -11,7 +11,7 @@
   ],
   "hashtags": "#shorts #asmr #oddlysatisfying #isitreal #unnaturallab",
   "total_parts": 37,
-  "next_part": 33,
+  "next_part": 34,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -440,11 +440,37 @@
       }
     },
     "33": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-09-09T21:32:27.881929+00:00",
       "retry_count": 1,
       "last_reason_code": "AUDIO_MASTER",
-      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: true-peak -0.9 dBTP > -1.0 dBTP"
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: true-peak -0.9 dBTP > -1.0 dBTP",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/unnatural-lab/episodes/ep33/ep33_narrated_music_mastered.mp4",
+      "subtitle": "This LEMON BOUNCES like RUBBER!",
+      "stack_sha256": "21de6eb771807f80753b7eeb46006ae3f70fd41e3bf124e008f2893223e90e29",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-10T21:23:29.806233+00:00",
+      "dropped_shots": [
+        1
+      ],
+      "dropped_shot_roles": {
+        "1": "cold_open"
+      },
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": true,
+        "arc_roles_missing": [
+          "cold_open"
+        ],
+        "duration_s": 16.59,
+        "duration_in_band": true,
+        "degraded": true
+      }
     }
   }
 }
