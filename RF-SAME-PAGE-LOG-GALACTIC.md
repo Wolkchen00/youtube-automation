@@ -252,3 +252,25 @@ bulgunun ikisi somut kod iddiasiydi ve ikisi de kaynaktan dogrulandi.
   `subtitle` argumanlarinin plandaki tam metinle birebir esitligini cakan bir uretim
   yolu testi eklendi. Telefon olceginde final kare Ihsan'a gonderilecek.
 
+## Round 4
+### Integrator findings (Codex, verbatim)
+
+The core design now holds: opt-in mastering preserves other series, the real mixing path is covered, degraded episodes enter finite retry, titles/cards are valid, and protected channel files remain untouched. Two build-contract gaps remain.
+
+- [FIX] The required-title-card guard is assigned to `produce.py:1345-1364`, but `produce_episode` does not convert its supported string/Path plan argument into a dictionary until afterward, and `series/cli.py` uses that path form -> Load the plan before the guard or make the shared validator accept both forms, then test Event Horizon production with a plan-path argument.
+
+- [FIX] The production-path title-card proof asserts only the exact title and subtitle, so it can pass if production forgets `required=True`, leaving the default copy-through fallback able to publish an untitled episode -> Assert `required=True` at the production call and inject an overlay failure through produce/runner to prove no publisher call occurs.
+
+VERDICT: NOT YET
+
+### Visionary response (Claude)
+
+- **ACCEPTED** guard yanlis yerde -> Kaynaktan dogrulandi: `produce.py:1365-1366`
+  `plan`'i str/Path'ten sozluge ancak `required_layers` blogundan SONRA ceviriyor ve
+  `series/cli.py:101` produce_episode'u yol olarak cagiriyor. Guard normalizasyondan
+  hemen sonraya alindi (hala her ucretli cagridan cok once) ve her iki cagri formu
+  test edilecek.
+- **ACCEPTED** `required=True` cakilmiyordu -> Uretim yolu testi artik hem tam metni
+  hem `required=True` bayragini cakiyor; ayrica cizim hatasi enjekte edilip yayinci
+  fonksiyonunun hic cagrilmadigi dogrulaniyor.
+
