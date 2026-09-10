@@ -4,7 +4,7 @@ Tarih: 10 Eylul 2026 (Los Angeles)
 Kaynak analiz: `galactic_experience/REELYZE-RAPOR.md`
 Seri: `event-horizon` (kanal: galactic_experience / galacticexperimet)
 Temel: `git HEAD 9eec629`, `python -m pytest tests/ -q` => 801 passed, 2 skipped, 188 subtests
-Revizyon: r4 (Codex tur 2 bulgulari uygulandi)
+Revizyon: r5 (Codex tur 3 bulgulari uygulandi)
 
 ## Core Focus
 
@@ -230,6 +230,21 @@ ediyor. YouTube sessiz videoyu YUKSELTMEZ, sadece yuksek olani kisar.
 "master_lufs": -14
 ```
 
+**DIKKAT: bu alan bir anahtar degil, UC anahtari birden ceviriyor** (tur 3 bulgusu,
+kaynaktan dogrulandi):
+
+| yer | `master_lufs` yokken | `master_lufs` varken |
+|---|---|---|
+| `produce.py:604` | `amix_normalize=True` | `amix_normalize=False` |
+| `produce.py:656` | `music_volume = 0.28` | **`music_volume = 0.50`** |
+| `produce.py:659` | `limit_mix_peak=False` | `limit_mix_peak=True` |
+
+Yani ses masteri acildiginda MUZIK de neredeyse iki katina cikiyor. Anlatim tabanli
+bir kanalda bu, tam da duzeltmeye calistigimiz seyi gomebilir. Tasarim tutarli
+(`unnatural-lab` bu ucluyle -14,3 olcuyor ve anlatimi anlasilir), ama event-horizon
+icin KANITLANMASI gerekir; varsayilamaz. Bu yuzden ROCK 2'nin proof'u artik
+`master_audio`'yu tek basina degil, GERCEK karisim yolunu olcer.
+
 **Zorunlu yan degisiklik**: `tests/test_rocka_audio_master.py::test_only_unnatural_lab_has_master_lufs`
 su an filoda `master_lufs` tanimli TEK serinin `unnatural-lab` oldugunu iddia ediyor
 ve bu degisiklikle KIRILIR. Test, tam olarak `unnatural-lab` ve `event-horizon`
@@ -258,6 +273,16 @@ Yeni test `tests/test_galactic_master_lufs.py` (ffmpeg gerektirir, SKIP ETMEZ):
   RMS'i tek basina muzikten de yukselebilir" dedi; olculen sey artik seviye degil ORAN.
 - Anlatim tek basina da yukselmis olmali: master sonrasi konusma bandi RMS'i master
   oncesine gore en az 6 dB yuksek.
+- **URETIM YOLU testi (tur 3 bulgusu)**: yukaridakiler `master_audio`'yu dogrudan
+  cagirdigi icin, `produce.py` `bible.master_true_peak_margin_db` degerini iletmeyi
+  UNUTSA bile hepsi gecerdi. Bu yuzden ayrica: event-horizon bible'i ile gercek
+  karisim + mastering yolu kosulur (ucretli cagrilar sahte), ve
+  (a) `master_audio`'ya `true_peak_margin_db=0.2` GECILDIGI,
+  (b) `music_volume=0.50`, `amix_normalize=False`, `limit_mix_peak=True` dallarinin
+      gercekten secildigi,
+  (c) teslim dosyasinin LUFS/true-peak ve anlatim/muzik oraninin sozlesmeyi tuttugu
+  dogrulanir. Muzigin 0,28'den 0,50'ye ciktigi halde anlatimin muzige gore en az
+  6 dB onde kaldigi olculur.
 - Bu test bir INSAN dinleme kontrolunun yerine gecmez. Level 10 incelemesinde
   yayinlanmis part 24'un master oncesi ve sonrasi ses ornekleri Ihsan'a gonderilir;
   kulakla onay ONUN.
@@ -299,10 +324,17 @@ Yeni test `tests/test_galactic_master_lufs.py` (ffmpeg gerektirir, SKIP ETMEZ):
    `title_card_overlay` kopyalama-yedegine DUSMEZ, hata firlatir; `produce.py`
    istisnayi yutmaz, `None` dondurup bolumu durdurur.
    Zorunlu degilken bugunku fail-open davranisi AYNEN korunur (uc seri korunuyor).
-4. **Ucretli isten ONCE dogrulama**: `title_card` zorunlu katmansa ve plan'da
-   `title_card.title` yok/bos ise, `preflight` bunu kredi harcanmadan reddeder.
-   Bugun ne preflight ne produce bunu kontrol ediyor; zorunlu katman bayragi tek
-   basina bos bir kunyeyi yakalamaz, sadece cizim hatasini yakalar.
+4. **Ucretli isten ONCE dogrulama, DOGRU YERDE**: `title_card` zorunlu katmansa ve
+   plan'da `title_card.title` yok/bos ise ya da bible'da kunye kapaliysa, is kredi
+   harcanmadan reddedilir.
+   Tur 3 hakli olarak sunu gosterdi: `series_runner.py` preflight'in TAMAMINI
+   cagirmiyor, yalnizca `validate_required_platforms`'i iceri aliyor (satir 680).
+   `preflight.inspect/run` bir CLI aracidir, uretim yolunda DEGILDIR. Bu yuzden
+   koruma `produce.py`nin zaten kosan `required_layers` dogrulama blogunda
+   (satir 1345-1364) durur: `title_card` zorunluyken kunye yok/bos/kapali ise
+   `produce` cekim uretmeden `None` doner.
+   Ayni dogrulayici fonksiyon `preflight`ten de cagrilir (elle kontrol icin ayna),
+   ama uretimin guvencesi produce'daki cagridir.
 5. **Kisayol korunur**: `flashpoints/bible.json` `"title_card": true` (bool kisayolu)
    kullaniyor. `bible.title_card` bunu `{"enabled": True}` yapiyor ve
    `.get("year_required", True)` dogru sonucu veriyor. Bu kisayol BOZULMAZ ve test edilir.
@@ -355,7 +387,16 @@ Yeni test `tests/test_title_card_required_layer.py` (ffmpeg gerektirir, SKIP ETM
 - Gercek bir kisa video uretilir, `title_card_overlay(required=True)` bozuk bir yazi
   tipi/parametreyle cagrilir: kopyalama yedegi DEVREYE GIRMEZ, istisna yukselir.
 - Basarili cizimde cikti karesinin **ust ucte birinden** piksel ornegi alinir ve
-  girdiye gore belirgin parlaklik farki oldugu dogrulanir (yazi gercekten cizildi).
+  girdiye gore belirgin parlaklik farki oldugu dogrulanir; AYRICA ayni render bos
+  baslikla tekrarlanir ve belirgin daha az murekkep uretmesi beklenir (farksal test:
+  "bir sey degisti" degil, "yazi cizildi").
+- **URETIM YOLU testi**: event-horizon plani ile produce kosulur ve
+  `title_card_overlay`'e gecilen `title` ve `subtitle` argumanlarinin plandaki TAM
+  METINLE birebir esit oldugu dogrulanir. Piksel farki tek basina yanlis ya da
+  okunaksiz bir isaretle de gecebilir; bu test metnin kendisini cakar.
+- Zorunlu katman acikken kunyesi bos bir plan `produce`da cekim uretilmeden reddedilir.
+- Level 10 incelemesinde final kareden telefon olceginde bir goruntu cikarilir ve
+  Ihsan'a gonderilir; okunabilirlik karari onun.
 - `required=False` cagrisinda bugunku fail-open kopyalama davranisi AYNEN korunur.
 
 ---
@@ -500,7 +541,10 @@ makinesinde her hold kanali susturur.
 - `shadowedhistory/**`, `aimagine/**`, `AImagine-Fear/**`, `sentinal_ihsan/**`:
   baska ajanlarin alani. Tek satir bile degismez. (`tests/test_rocka_audio_master.py`
   bir TEST dosyasidir, `sentinal_ihsan/` altinda degildir; guncellenmesi serbesttir.)
-- `core/ffmpeg_tools.py`: `master_audio` ve `fact_captions_overlay` davranisi degismez.
+- `core/ffmpeg_tools.py`: `fact_captions_overlay` davranisi hic degismez.
+  `master_audio` VARSAYILAN davranisi degismez (`true_peak_margin_db=0.0` bugunku
+  aritmetigin birebir aynisi); yalnizca `master_true_peak_margin_db` tanimlayan seri
+  yeni geri cekme aritmetigine OPT-IN olur ve bu turda o seri sadece event-horizon'dur.
   `title_card_overlay` yalniz yeni `required` bayragiyla genisler; bayraksiz cagri
   bugunku davranisi bit bit korur.
 - `galactic_experience/event-horizon/published.json`, `series_log.*`, `qc_log.jsonl`:
