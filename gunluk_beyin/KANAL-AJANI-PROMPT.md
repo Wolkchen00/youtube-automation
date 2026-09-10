@@ -13,7 +13,7 @@ kosunun basinda yapistir). `<KANAL>` yerine kanalin slug'ini yaz:
 Su dosyayi oku:
 
 ```
-C:\Users\ihsan\Desktop\Antigravity\Projeler\Gunluk_Beyin\kanallar\<KANAL>\BEYIN.md
+C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\<KANAL>\BEYIN.md
 ```
 
 Bu dosya HER GUN yeniden yaziliyor ve bu kanalin **kendi olculmus sonuclarindan**
@@ -58,7 +58,7 @@ Tek yonlu bagimlilik, bozulacak el sikismasi yok.
 Dosya yoksa ya da tarihi bugunden eskiyse su komutu calistir:
 
 ```
-cd C:\Users\ihsan\Desktop\Antigravity\Projeler\Gunluk_Beyin
+cd C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin
 python beyin.py olc <KANAL>
 python beyin.py topla <KANAL>
 python beyin.py beyin <KANAL>

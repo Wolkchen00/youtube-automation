@@ -223,24 +223,38 @@ def komut_topla(kanal):
 
 # --------------------------------------------------------------- beyin
 
-def _karsilastir(ust, alt, ad, gosterim, birim):
-    """Iki yarinin medyanini karsilastir. Veri yoksa None doner."""
-    a = [alan(k, ad) for k in ust]
-    b = [alan(k, ad) for k in alt]
-    a = [x for x in a if x is not None]
-    b = [x for x in b if x is not None]
+# Iki yarinin medyanlari arasindaki BAGIL fark bunun altindaysa, bu bir yon
+# degil GURULTUDUR ve oyle raporlanir. Olculmus ornek: event-horizon suresi
+# 16.54 vs 16.52 (0,02 sn) "ust yari DAHA YUKSEK" diye cikiyordu ve 4. bolum
+# "16.54sn hedefle" diyordu. Anlamsiz tavsiye, guven kirar.
+ASGARI_BAGIL_FARK = 0.10
+
+
+def _olc_fark(ust, alt, ad):
+    """(ma, mb, anlamli) dondurur. Veri yetersizse None."""
+    a = [x for x in (alan(k, ad) for k in ust) if x is not None]
+    b = [x for x in (alan(k, ad) for k in alt) if x is not None]
     if len(a) < 3 or len(b) < 3:
         return None
     ma, mb = st.median(a), st.median(b)
-    fark = ma - mb
-    if abs(fark) < 1e-9:
-        yon = "fark yok"
-    elif fark > 0:
+    olcek = max(abs(ma), abs(mb), 1e-9)
+    bagil = abs(ma - mb) / olcek
+    return ma, mb, len(a), len(b), bagil >= ASGARI_BAGIL_FARK
+
+
+def _karsilastir(ust, alt, ad, gosterim, birim):
+    r = _olc_fark(ust, alt, ad)
+    if r is None:
+        return None
+    ma, mb, na, nb, anlamli = r
+    if not anlamli:
+        yon = "**anlamli fark yok**"
+    elif ma > mb:
         yon = "ust yari DAHA YUKSEK"
     else:
         yon = "ust yari DAHA DUSUK"
     return ("| %s | %.2f%s | %.2f%s | %s | n=%d/%d |"
-            % (gosterim, ma, birim, mb, birim, yon, len(a), len(b)))
+            % (gosterim, ma, birim, mb, birim, yon, na, nb))
 
 
 def komut_beyin(kanal):
@@ -355,19 +369,31 @@ def komut_beyin(kanal):
         orta = len(sirali) // 2
         ust, alt = sirali[:orta], sirali[-orta:]
         for ad, gosterim, birim in ALANLAR + UST_ALANLAR:
-            a = [alan(k, ad) for k in ust]
-            a = [x for x in a if x is not None]
-            b = [alan(k, ad) for k in alt]
-            b = [x for x in b if x is not None]
-            if len(a) < 3 or len(b) < 3:
+            r = _olc_fark(ust, alt, ad)
+            if r is None:
                 continue
-            ma, mb = st.median(a), st.median(b)
-            if abs(ma - mb) < 1e-9:
+            ma, mb, _, _, anlamli = r
+            # Anlamsiz farktan TAVSIYE URETME. Gurultuyu hedef diye vermek
+            # ajani yaniltir ve sistemin guvenilirligini bitirir.
+            if not anlamli:
+                continue
+            # Sifira dogru iten tavsiye verme: "kesme sayisini 0 yap" gibi
+            # oneriler kor korelasyondan cikar ve aktif olarak zararlidir.
+            if ad == "kesme_per_10sn" and ma < 0.5:
+                oneri.append("- **%s**: ust yari %.2f, alt yari %.2f. Fark var ama "
+                             "hedef olarak VERILMIYOR (sifira yakin kesme onerisi "
+                             "zararli olur). Bu, format farkinin yan urunu olabilir."
+                             % (gosterim, ma, mb))
                 continue
             oneri.append("- **%s**: ust yarinin medyani %.2f%s (alt yari %.2f%s). "
                          "Bugunku videoyu %.2f%s civarina hedefle."
                          % (gosterim, ma, birim, mb, birim, ma, birim))
-        L.extend(oneri if oneri else ["- Anlamli fark bulunamadi."])
+        if oneri:
+            L.extend(oneri)
+        else:
+            L.append("- Olculen alanlarin hicbirinde **anlamli fark yok** "
+                     "(bagil fark esigi %%%d). Genel esiklere gore uret."
+                     % int(ASGARI_BAGIL_FARK * 100))
     L.append("")
 
     # ---- 5. KACIN
