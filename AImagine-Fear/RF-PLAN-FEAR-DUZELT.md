@@ -4,7 +4,7 @@ Tarih: 10 Eylul 2026 (Los Angeles)
 Dal: `codex-fear-duzelt` (worktree; ana agacta baska oturumlarin islenmemis isi var)
 Kaynak analiz: `AImagine-Fear/REELYZE-RAPOR.md`
 Taban: 9eec629, `python -m pytest AImagine-Fear/tests -q` = 28 passed (olculdu 07:50 PDT)
-Revizyon: **r5** (Codex round 1-4, 60 bulgu islendi , `RF-SAME-PAGE-LOG-FEAR-DUZELT.md`)
+Revizyon: **r6** (Codex round 1-5 TAMAMLANDI, 63 bulgunun hepsi islendi , `RF-SAME-PAGE-LOG-FEAR-DUZELT.md`)
 
 ## Core Focus (tek cumle)
 
@@ -191,6 +191,17 @@ ortak). Goruntunun kanona ICERIK olarak uydugunu dogrulamak.
   Matrise bakan HER yol (Rock 1b onayi, Rock 2 onkontrolu) bu fonksiyonu cagirir.
   Iki yerde elle demet kurulmaz; aksi halde biri uc elemanli biri dort elemanli anahtar
   uretir ve **butun kombinasyonlar reddedilir.**
+- **fps anahtari OLCULEN kesirden degil profilin `beklenen_fps`'inden kurulur.**
+  Kapi `24000/1001`'i (= 23,976) tolerans icinde 24 sayiyor; ama matris anahtarina
+  olculen degeri koysaydik anahtar `23.976` olur, matriste `24` ararken TUTMAZDI ,
+  yani kapi GECER, onay PATLARDI. Anahtar her zaman kanonik `beklenen_fps`.
+- **Kayit sema surumu:** `sema_surumu` alani olmayan ya da 1 olan kayitlarda
+  `palet`, `caption`, `secilen_baslik`, `etiketler` YOKTUR. Nihai kod bu alanlari
+  **dogrudan okumaz**, `uretim_kaydi_bul()` uzerinden geri duser: `palet` rota
+  dosyasindan, caption `out/<slug>/CAPTION.txt`'ten, baslik/etiket o anki kanondan
+  turetilir (slug kayittan geldigi icin hepsi DOGRU rotaya aittir). Boylece ilk
+  commit sirasinda uretilip onaylanmis bir master, Rock 5 kodu yerine gectikten
+  sonra da yayinlanabilir.
 - **Uretim kaydi**, her uretimde **master sha'si altinda DEGISMEZ** yazilir:
   `out/<slug>/uretim/<master_sha>.json`. Tek bir `uretim.json` OLMAZ , ayni slug icin
   B uretilince A'nin kaniti silinir ve A bir daha ne onaylanabilir ne yayinlanabilirdi.
@@ -276,6 +287,11 @@ kendi testiyle gelir.
 - **ayni slug icin A sonra B uretilir; A'nin kaydi hala okunur ve A yayinlanabilir**
   (degismez kayit kaniti; tek `uretim.json` olsaydi test KALIRDI)
 - uretim kaydindaki `profil_hash` guncel profille uyusmuyorsa `--onayla` REDDEDER
+- **uctan uca `24000/1001` vakasi:** boyle bir video kapiyi GECER **ve** ayni kosuda
+  `--onayla` BASARIR (anahtar kanonik 24'ten kuruldugunun kaniti; olculen kesirden
+  kurulsaydi kapi gecer onay patlardi)
+- **`sema_surumu: 1` kayit + nihai kod -> `--yayinla-mevcut` DOGRU metadata ile
+  yayinlar** (palet rotadan, caption CAPTION.txt'ten); alan eksik diye patlamaz
 - `--dry` bugun yayin VARKEN bile alanlari basar, 0 doner, `requests` HIC cagrilmaz
 
 ---
@@ -357,7 +373,7 @@ ONCE deftere yaziyor**, yani tam basarisiz yayin bile donusumu ilerletir.
 
   | Alan | Kaynak |
   |---|---|
-  | `slug`, `palet`, `rota_suresi` | uretim kaydi (`out/<slug>/uretim.json`) |
+  | `slug`, `palet`, `rota_suresi` | uretim kaydi, **`uretim_kaydi_bul(master_sha)` ile** (`out/<slug>/uretim/<master_sha>.json`) |
   | `cozunurluk`, `fps`, `sure` | denetlenen master'in ffprobe olcumu |
   | `lufs`, `true_peak` | `<master>.audio_master.json` sidecar'i |
   | `kullanildi` | YouTube yanitindan cikarilan yayin kimligi |

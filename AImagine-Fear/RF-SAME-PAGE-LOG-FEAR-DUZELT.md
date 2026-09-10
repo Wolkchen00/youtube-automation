@@ -387,3 +387,50 @@ benim planimin kendi ic tutarsizligiydi, yeni kapsam degil.
 - ACCEPTED , ilk atomik commit palet ve TITLE'i sart kosuyordu ama o alanlar Rock 4
   ve 5'te olusuyor -> `sema_surumu` alani ve rock sinirlarinda buyuyen sema tablosu
   eklendi; ilk commit'in testleri palet ya da TITLE istemiyor.
+
+## Round 5 (TUR TAVANI)
+
+### Integrator bulgulari (Codex, AYNEN)
+
+```
+- [FIX] Capability approval does not define how an accepted observed FPS such as 24000/1001 maps to the exact matrix key `24`, so gate tests can pass while approval fails -> Build matrix keys from the profile’s canonical expected FPS and add an end-to-end 24000/1001 approval test.
+- [FIX] Rock 4 still names the obsolete `out/<slug>/uretim.json` as its ledger source, contradicting the immutable `out/<slug>/uretim/<master_sha>.json` contract -> Replace every singleton-record reference with one shared master-SHA record resolver.
+- [FIX] Immutable records created before Rocks 4/5 never acquire `palet`, `caption`, `secilen_baslik`, or `etiketler`, yet final `--yayinla-mevcut` is specified to read those fields directly -> Define schema-version fallbacks or migration and prove a version-1 record publishes correctly under the final code.
+
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+`git status --porcelain` bos. **Uc bulgunun uceu de kabul edildi ve r6'da duzeltildi.**
+Ucu de yine benim ic tutarsizligimdi, yeni kapsam degil.
+
+- ACCEPTED , `24000/1001` -> matris anahtari `24` eslemesi tanimsizdi. Gercek bir
+  catlak: kapi 23,976'yi tolerans icinde 24 sayiyor, ama matris anahtarina OLCULEN
+  degeri koysaydik anahtar `23.976` olur ve matriste `24` ararken tutmazdi , yani
+  **kapi GECER, onay PATLARDI.** Anahtar artik her zaman profilin kanonik
+  `beklenen_fps`'inden kuruluyor, ve uctan uca `24000/1001` testi eklendi.
+- ACCEPTED , Rock 4 hala eski tekil `out/<slug>/uretim.json` yolunu kaynak gosteriyordu,
+  degismez `uretim/<master_sha>.json` sozlesmesiyle celisiyordu -> tek ortak cozucu
+  `uretim_kaydi_bul(master_sha)`.
+- ACCEPTED , ilk commit'te olusan `sema_surumu: 1` kayitlar `palet`, `caption`,
+  `secilen_baslik`, `etiketler` alanlarini HIC kazanmiyor, ama nihai `--yayinla-mevcut`
+  bunlari dogrudan okuyor diye yaziliydi -> yani ilk asamada uretilip ONAYLANMIS bir
+  master, Rock 5 kodu gelince yayinlanamaz olurdu. Geri dusme tanimlandi (palet rotadan,
+  caption `CAPTION.txt`'ten, slug kayittan geldigi icin hepsi dogru rotaya ait) ve
+  "v1 kayit + nihai kod -> dogru metadata ile yayinlanir" testi eklendi.
+
+### Tur tavani durumu
+
+Bes tur doldu, son verdict `NOT YET`. Ama **acik bulgu KALMADI**: round 5'in uc
+maddesi de r6'da kapatildi. Bulgu egrisi 22 -> 21 -> 11 -> 6 -> 3 ile yakinsiyor ve
+son iki turun tamami kapsam itirazi degil ic tutarsizlik duzeltmesiydi. Codex reddedilen
+tek maddeyi (per-video sha onayi) round 4'te acikca kabul etti.
+
+Tavanda karar Owner's Box'a (Ihsan) aittir. Kayit asagiya dusulecek.
+
+### Not: oturum modeli iki kez degisti
+
+`~/.codex/config.toml` bu kosu sirasinda disaridan degistirildi.
+Round 1-2: `gpt-5.6-sol` | Round 3-4: `gpt-6-astra` | Round 5: `gpt-5.6-sol`.
+Sohbet gecmisi her seferinde tasindi (Codex onceki turlarin bulgularina numarayla
+dogru atif yapti), ama toplantinin tamami tek modelin yargisi DEGIL.
