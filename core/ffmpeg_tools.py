@@ -238,6 +238,7 @@ def master_audio(
     target_i: float = -14.0,
     target_tp: float = -1.0,
     target_lra: float = 11.0,
+    true_peak_margin_db: float = 0.0,
 ) -> Path:
     """Sesi iki geçişli loudnorm ile master'la; hata halinde istisna yükselt."""
     input_path = Path(input_path)
@@ -304,11 +305,12 @@ def master_audio(
                 break
             if not true_peak_ok:
                 overshoot = delivered["true_peak_dbtp"] - float(target_tp)
-                limiter_db -= overshoot
+                limiter_db -= overshoot + float(true_peak_margin_db)
                 logger.warning(
                     f"⚠️ Master true-peak deneme {attempt_number}/3: "
                     f"{delivered['true_peak_dbtp']:.1f} dBTP > "
-                    f"{float(target_tp):.1f}; tavan {overshoot:.1f} dB geri çekiliyor"
+                    f"{float(target_tp):.1f}; tavan "
+                    f"{overshoot + float(true_peak_margin_db):.1f} dB geri çekiliyor"
                 )
             if not loudness_ok:
                 logger.warning(
@@ -1365,6 +1367,8 @@ def title_card_overlay(
     title: str,
     subtitle: str = "",
     duration: float = 3.0,
+    required: bool = False,
+    preserve_case: bool = False,
 ) -> Path:
     """Burn an opening title card (e.g. artifact name + region/year) over the
     first seconds of a FINISHED episode.
@@ -1402,11 +1406,16 @@ def title_card_overlay(
 
     # Bir drawtext PER LINE (ffmpeg 8 çok-satır tuzağı — cctv_overlay'deki çözümle aynı).
     rows: list[tuple[str, int, str]] = []   # (metin, fontsize, renk)
-    for line in textwrap.wrap((title or "").upper(), width=24):
+    # preserve_case: gok cismi adlarinda kucuk harf anlam tasir (WASP-12b gezegen,
+    # WASP-12B yildiz esi). Varsayilan False tarih kanallarinin davranisini korur.
+    title_text = (title or "") if preserve_case else (title or "").upper()
+    for line in textwrap.wrap(title_text, width=24):
         rows.append((line, title_fs, "white"))
     for line in textwrap.wrap(subtitle or "", width=36):
         rows.append((line, sub_fs, "white@0.92"))
     if not rows:
+        if required:
+            raise RuntimeError("zorunlu title card metni bos")
         import shutil
         shutil.copy2(str(input_path), str(output_path))
         return output_path
@@ -1436,6 +1445,8 @@ def title_card_overlay(
         logger.info(f"🪧 Title card ('{title}') → {output_path.name}")
     except subprocess.CalledProcessError as e:
         err = (e.stderr or b"").decode(errors="replace")[-400:] if e.stderr else str(e)
+        if required:
+            raise RuntimeError(f"zorunlu title card cizilemedi: {err}") from e
         logger.warning(f"⚠️ Title card failed (using original): {err}")
         import shutil
         shutil.copy2(str(input_path), str(output_path))

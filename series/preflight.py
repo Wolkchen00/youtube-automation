@@ -13,6 +13,7 @@ from .omni_api import validate_ref_units
 from .produce import chain_configuration_error, decide_shot_chain
 from .replenish import (
     strict_plan_validation_enabled,
+    validate_title_card,
     validate_plan_against_config,
     validate_replenish_config,
 )
@@ -83,6 +84,10 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
             errors.append("bible: required_layers benzersiz, boş olmayan string listesi olmalı")
     try:
         bible.audio_fade
+        bible.master_lufs
+        bible.master_true_peak_margin_db
+        bible.title_card
+        bible.block_degraded_publish
     except ValueError as error:
         errors.append(f"bible: {error}")
     try:
@@ -119,13 +124,19 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
         errors.extend(f"plan/cfg: {error}" for error in validate_plan_against_config(plan, cfg))
     if "chain_breaks" in cfg and not bible.chain_frames:
         errors.append("cfg: chain_breaks için bible.series.chain_frames=true olmalı")
-    unknown_layers = set(bible.required_layers) - {"hook_teaser", "music", "native_audio"}
+    unknown_layers = set(bible.required_layers) - {
+        "hook_teaser", "music", "native_audio", "title_card"
+    }
     if unknown_layers:
         errors.append(f"bible: bilinmeyen required_layers: {sorted(unknown_layers)}")
     generic = validate_plan(plan, bible)
     errors.extend(f"plan: {error}" for error in generic["errors"])
     errors.extend(validate_min_shots(bible, plan))
     errors.extend(validate_required_platforms(bible, meta))
+    if meta.auto_replenish.get("title_card") or "title_card" in bible.required_layers:
+        errors.extend(validate_title_card(
+            bible, plan, required="title_card" in bible.required_layers
+        ))
 
     chain_url = None
     if bible.chain_frames and bible.chain_scope == "series":

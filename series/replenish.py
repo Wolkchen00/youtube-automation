@@ -217,6 +217,54 @@ def strict_plan_validation_enabled(cfg: dict) -> bool:
     ))
 
 
+def validate_title_card(bible: Bible, plan: dict, *, required: bool = False) -> list[str]:
+    """Validate the rendered title-card contract shared by replenish and delivery."""
+    config = bible.title_card
+    if required and not config:
+        return ["bible.series.title_card etkin olmali"]
+    raw = plan.get("title_card") if isinstance(plan, dict) else None
+    if not required and raw is None:
+        return []
+    if not isinstance(raw, dict):
+        return ["title_card.title ve .subtitle zorunlu"]
+
+    title = str(raw.get("title") or "").strip()
+    subtitle = str(raw.get("subtitle") or "").strip()
+    year_required = config.get("year_required", True) if config else True
+    title_limit, subtitle_limit = (40, 48) if year_required is False else (60, 60)
+    if (not title or not subtitle
+            or len(title) > title_limit or len(subtitle) > subtitle_limit):
+        return [
+            "title_card.title ve .subtitle zorunlu "
+            f"(≤{title_limit}/≤{subtitle_limit} karakter)"
+        ]
+
+    if not year_required:
+        return []
+    anchor_text = f"{title} {subtitle}"
+    has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", anchor_text))
+    if bible.slug == "flashpoints":
+        has_year = has_year or bool(re.search(
+            r"\b(?:\d{1,4}\s*(?:BCE|BC|CE|AD)|"
+            r"(?:BCE|BC|CE|AD)\s*\d{1,4})\b|"
+            r"\b(?:1[0-9]{3}|20[0-9]{2})s\b|"
+            r"\b\d{1,2}(?:st|nd|rd|th)\s+century\b",
+            anchor_text,
+            re.IGNORECASE,
+        ))
+        if not has_year:
+            return [
+                "title_card 4-haneli yil veya cag cipasi icermeli "
+                f"(gelen: {title!r} / {subtitle!r})"
+            ]
+    elif not has_year:
+        return [
+            "title_card 4-haneli bir yil icermeli "
+            f"(gelen: {title!r} / {subtitle!r})"
+        ]
+    return []
+
+
 def _prompt_content(prompt, shot_plan_prefix: str | None = None) -> str:
     """Return the actual shot description, excluding an echoed shot-plan prefix."""
     content = str(prompt or "").strip()
@@ -601,6 +649,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     vo_continuity = narrated and bool(cfg.get("voiceover_continuity"))
     speech_window = shots * int(sec) - shots * 2 * bible.micro_trim - 0.7
     want_tc = bool(cfg.get("title_card"))
+    tc_year_required = bible.title_card.get("year_required", True) if want_tc else True
     want_fc = bool(cfg.get("fact_captions"))
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
@@ -692,8 +741,13 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                   f"flowing prose, no camera directions, no shot numbers; follow the CREATIVE BRIEF strictly."
                   + narr_pace_rule)
                  if narrated else "")
-    tc_rule = ('\n- TITLE_CARD: "title" = the subject/site name (max 40 chars); "subtitle" = place and year '
-               'exactly as the CREATIVE BRIEF instructs (max 48 chars).' if want_tc else "")
+    if want_tc and tc_year_required is False:
+        tc_rule = ('\n- TITLE_CARD: "title" = the celestial subject name (max 40 chars); '
+                   '"subtitle" = the anomaly itself (max 48 chars); no year is required.')
+    else:
+        tc_rule = ('\n- TITLE_CARD: "title" = the subject/site name (max 40 chars); '
+                   '"subtitle" = place and year exactly as the CREATIVE BRIEF instructs '
+                   '(max 48 chars).' if want_tc else "")
     fact_rule = ('\n- FACT_CAPTIONS: give a "fact" to 2-4 shots ,  a punchy 2-5 word hard fact from the entry '
                  'that is literally on screen in THAT shot (a depth, an age, a count, a death toll, a date), '
                  'e.g. "45 METERS DEEP", "2,000 YEARS OLD", "ONE DIVER DIED". They are burned low on screen '
@@ -1348,7 +1402,16 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                               f"(kabul 20-140) dışında")
             else:
                 normalized["music"] = mtext
-        if want_tc:
+        if want_tc and bible.title_card.get("year_required", True) is False:
+            title_card_errors = validate_title_card(bible, plan, required=True)
+            errors.extend(f"part {want}: {error}" for error in title_card_errors)
+            if not title_card_errors:
+                tcv = plan.get("title_card") or {}
+                normalized["title_card"] = {
+                    "title": str(tcv.get("title") or "").strip(),
+                    "subtitle": str(tcv.get("subtitle") or "").strip(),
+                }
+        if want_tc and bible.title_card.get("year_required", True):
             tcv = plan.get("title_card") or {}
             tt = str(tcv.get("title") or "").strip()
             ts = str(tcv.get("subtitle") or "").strip()

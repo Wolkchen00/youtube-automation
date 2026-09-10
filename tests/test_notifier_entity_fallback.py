@@ -295,7 +295,9 @@ def test_every_runner_critical_callsite_uses_the_outbox_routing_helper():
     # ROCK E2 besincisini ekledi: tukenmis + oto-ikmalli seri ACIKCA istendiginde
     # "bu kanala bugun video CIKMIYOR" alarmi (Galactic'in dort gunluk sessizligi
     # bu alarm olmadigi icin gorunmedi).
-    assert len(routed) == 14
+    # Bolum butunlugu yayin kapisi besincisini ekledi: kusurlu bolum yayinlanmak
+    # yerine tutuldu bildirimi.
+    assert len(routed) == 15
     assert len(direct) == 2  # _series_alert delegasyonu + evsiz filo alarmi fallback'i
     source = inspect.getsource(series_runner)
     for fragment in (
