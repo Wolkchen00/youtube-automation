@@ -350,3 +350,51 @@ duzenek insa etmesi gerekmedigini dusundum. Codex yarisini duzeltti: izolasyon
 var ama ayni-kaynak A/B yok. Ikisi birlestirildi: mevcut harness KULLANILIR,
 uzerine bible override + replay eklenir.
 
+
+## Round 5 , TUR SINIRI (5/5)
+
+### Integrator bulgulari (Codex, birebir)
+
+```
+- [FIX] `+3,0 dB` eşiğinin kalibrasyon kanıtı yok, mevcut araç `1,5 dB` kullanıyor ve medyan kısa süreli kelime maskelemesini gizleyebilir -> Eşiği etiketli dinleme örnekleriyle kalibre et ve medyana ek olarak TTS-etkin pencerelerde p95 veya ihlal-oranı sınırı koy.
+- [FIX] Tek sabit replay gelecekteki benzersiz ve loudness-normalize edilmeyen Suno/Lyria yataklarını temsil etmediğinden Rock 1 sonraki bölümlerdeki denge bozulmasını kaçırabilir -> Müzik girdisini miks öncesi sabit seviyeye normalize et veya aynı denge ölçümünü her bölümde üretici kapısı yap.
+- [FIX] `_delivery_copy()` mevcut nonempty cache’i kaynakla ilişkilendirmeden döndürdüğü için teknik olarak geçerli fakat eski bir video doğrulanıp yanlış bölüm olarak yüklenebilir -> Delivery cache’ini tam kaynak hash’iyle anahtarla ve aynı yoldaki kaynak değiştiğinde yeniden kodlandığını test et.
+- [FIX] Kapının merkezileşmesi çağırıcı göçünü ortadan kaldırmaz çünkü zorunlu sözleşme parametresini `yayinla.py`, `_publish_part()`, `publish_video()` ve re-upload yolu hâlâ taşımak zorundadır -> Çağırıcıdan yalnız güvenilir sözleşme kimliği/profil al, matrisi uploader içinde yükle ve bütün doğrudan/transitif çağrıları atomik geçir.
+- [FIX] Tipli `validation_rejected` mevcut `if res`, `bool(res)` ve Fear başarı sayacı tarafından başarı sayılabilir veya `_publish_part()`ın `list[str]` dönüşünde kaybolabilir -> Ayrıştırılmış sonuç tipini bütün katmanlara taşı ve series, Fear ve `video_monitor` için reddin asla başarı sayılamadığını test et.
+- [FIX] Sözleşme matrisi duration ve tolerans değerlerini göstermediği halde validator bunları zorunlu sayıyor ve Event Horizon ile Flashpoints Bible’larında `duration_band` yok -> Fear için sabit süreyi, her seri için artifact’ten bağımsız plan/politika tabanlı süre kuralını ve toleransı matriste açıkça tanımla.
+- [FIX] Doğrulama ve hash sonrasında dosyanın her retry’da yeniden açılması aynı path değiştirilirse kanıtlanandan farklı baytların yüklenmesine izin verir -> Delivery’den content-addressed değişmez snapshot üret, onu doğrula ve bütün POST denemelerinde yalnız o snapshot’ı aç; arada kaynak mutasyonu testini ekle.
+- [FIX] Yerel JSONL yazımı upload öncesi yapılabilir fakat workflow sonundaki Git persist başarısız olursa yayın gerçekleşmişken “kalıcı” kanıt kaybolur -> Upload’dan önce başarıyla onaylanan dayanıklı depoya yaz veya kalıcılık iddiasını kaldırıp persist başarısızlığını ayrı kritik ihlal olarak kabul et.
+- [FIX] Yeni proof dosyaları geçse bile mevcut `test_async_upload_confirmation.py` ve `test_publish_duplicate_gate.py` sözleşmesiz uploader çağrıları nedeniyle kırılabilir ve r5 root testlerini CI’a ekleme şartını düşürmüştür -> Mevcut uploader testlerini sözleşmeli fixture’lara geçir, tam test paketini çalıştır ve root gate testlerini çalıştıran isimli CI adımını geri koy.
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+9 bulgu. Iki tanesini dogruladim, IKISI DE DOGRU:
+
+**_delivery_copy() cache hatasi , CANLI, PLANDAN BAGIMSIZ**
+`core/uploader.py:109-111`:
+```python
+delivery = video_path.parent / f"{video_path.stem}_delivery.mp4"
+if delivery.exists() and delivery.stat().st_size > 0:
+    return delivery
+```
+Cache anahtari sadece kaynak dosya ADI, icerigi degil. Ayni yoldaki kaynak
+yeniden uretilirse (retry, yeniden render, duzeltilmis bolum) ONCEKI icerigin
+`_delivery.mp4` dosyasi donuyor ve YANLIS VIDEO yukleniyor.
+Dokumantasyon "idempotent" diyor ama yol bazinda idempotent, icerik bazinda degil.
+Bu plan olmasa da duzeltilmeli.
+
+**duration_band sadece unnatural-lab da var**
+event-horizon ve flashpoints bible larinda YOK. Sozlesme matrisi sureyi
+bu ikisi icin bible dan alamaz. Not: `master_lufs` de sadece unnatural-lab da.
+Ayni desen: unnatural-lab tek tam yapilandirilmis seri, ve tek iyi performans
+goesteren seri.
+
+### TUR SINIRI , karar Ihsan a birakildi
+
+Motor kurali: "Round cap hit with VERDICT: NOT YET: STOP. Present the unresolved
+findings to the user. A flagged deadlock beats a fake approval."
+
+Yakinsama: 29 -> 17 -> 19 -> 14 -> 9 bulgu. Toplam 88, hicbiri sessizce dusurulmedi,
+reddedilen 0. Son turda KILL yok, temel varsayim itirazi yok; dokuzu da uygulama
+detayi. Plan basladigi yerden cok daha saglam ama SAME PAGE alinmadi.
