@@ -32,7 +32,7 @@ def _approval(profile_name="1080p", master_sha="abc"):
     p = profil.PROFILLER[profile_name]
     return {
         "model": gunluk.MODEL,
-        "sure": gunluk.SURE,
+        "sure": 15,
         "cozunurluk": p["cozunurluk"],
         "fps": p["beklenen_fps"],
         "master_sha": master_sha,
@@ -158,7 +158,7 @@ def test_bad_approval_cases_stay_closed(monkeypatch, tmp_path: Path) -> None:
     ]
     for body in cases:
         approval_path.write_text(body, encoding="utf-8")
-        allowed, _ = gunluk.yayin_izni("1080p")
+        allowed, _ = gunluk.yayin_izni("1080p", 15)
         assert not allowed
 
 
@@ -166,7 +166,7 @@ def test_valid_persistent_approval_opens_canary(monkeypatch, tmp_path: Path) -> 
     approval_path = tmp_path / "profil_onay.json"
     approval_path.write_text(json.dumps(_approval()), encoding="utf-8")
     monkeypatch.setattr(gunluk, "ONAY_DOSYASI", approval_path)
-    assert gunluk.yayin_izni("1080p") == (True, "dogrulandi (kalici onay)")
+    assert gunluk.yayin_izni("1080p", 15) == (True, "dogrulandi (kalici onay)")
 
 
 def test_dry_is_before_same_day_and_never_reads_credit(monkeypatch, capsys) -> None:
@@ -197,6 +197,7 @@ def test_yayinlama_runs_generation_without_publish_and_checks_contact(
     monkeypatch.setattr(gunluk, "DEFTER", tmp_path / "yayin.jsonl")
     monkeypatch.setattr(gunluk, "defter", lambda: [])
     monkeypatch.setattr(gunluk, "kredi", lambda: 1000)
+    monkeypatch.setattr(gunluk, "rota_suresi", lambda slug, kok=None: 15)
 
     def fake_run(command, cwd):
         if "kie_uret.py" in " ".join(command):

@@ -76,7 +76,7 @@ def test_baska_kombinasyonun_onayi_gecerli_sayilmaz(monkeypatch) -> None:
             "master_sha": "a" * 64, "profil_hash": profil_modulu.profil_hash(),
         }), encoding="utf-8")
         monkeypatch.setattr(gunluk, "ONAY_DOSYASI", onay_yolu)
-        izinli, durum = gunluk.yayin_izni("1080p")
+        izinli, durum = gunluk.yayin_izni("1080p", 15)
         assert izinli is False, "baska kombinasyonun onayi 1080p'yi acti"
         assert "kombinasyonu farkli" in durum
     finally:
@@ -109,7 +109,7 @@ def test_profil_dosyasi_gercekten_degisince_onay_duser(monkeypatch) -> None:
         }), encoding="utf-8")
         monkeypatch.setattr(gunluk, "ONAY_DOSYASI", onay_yolu)
         monkeypatch.setattr(gunluk, "profil_hash", lambda *a, **k: yeni_hash)
-        izinli, durum = gunluk.yayin_izni("1080p")
+        izinli, durum = gunluk.yayin_izni("1080p", 15)
         assert izinli is False, "profil degismisken eski onay hala aciyor"
         assert "hash" in durum
     finally:
@@ -232,11 +232,11 @@ def test_varsayilan_profil_onaysiz_yayinlanamaz(monkeypatch) -> None:
     kok = _gecici("varsayilan")
     try:
         monkeypatch.setattr(gunluk, "ONAY_DOSYASI", kok / "yok.json")
-        izinli, durum = gunluk.yayin_izni(profil_modulu.VARSAYILAN_PROFIL)
+        izinli, durum = gunluk.yayin_izni(profil_modulu.VARSAYILAN_PROFIL, 15)
         assert izinli is False
         assert "kanarya" in durum
         # 720p ise gecmiste 27/27 kez uretildigi icin dogrulanmis olmali
-        izinli720, durum720 = gunluk.yayin_izni("720p")
+        izinli720, durum720 = gunluk.yayin_izni("720p", 15)
         assert izinli720 is True, "720p@24 dogrulanmis olmaliydi: %s" % durum720
     finally:
         shutil.rmtree(kok, ignore_errors=True)

@@ -7,6 +7,7 @@ import json
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
+from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from pathlib import Path
 
@@ -34,17 +35,60 @@ DEFTER = KOK / "yayin.jsonl"
 ONAY_DOSYASI = KOK / "profil_onay.json"
 MIN_KREDI = 700
 MODEL = "bytedance/seedance-2"
-SURE = 15  # Rota DURATION okuma Rock 2'nin kapsami.
 
+# Donusum havuzu: yalniz YETENEK_MATRISI'nde karsiligi olan sureli rotalar.
+# toronto-cn-red-dusk (20 sn), vegas-strat-blue-rain (20 sn) ve
+# vegas-strat-blue-rain-25 (25 sn) burada YOK. Sebep bilinen bir model tavani
+# DEGIL: bu surelerin bu modelde calistigi DOGRULANMADI. (core/kie_api.py'deki
+# "4-15s" notu seedance-2-fast'e ait, bu modele degil.) Kanarya kosusuyla
+# dogrulanirsa YETENEK_MATRISI'ne tek satir eklemek rotayi geri getirir.
+# Rota DOSYALARI silinmedi, oldugu yerde duruyor.
 SIRA = [
     "vegas-strat-blue-rain-15",
     "tokyo-skytree-mor-yagmur",
     "newyork-empire-magenta-kar",
     "dubai-burj-altin",
-    "toronto-cn-red-dusk",
     "paris-eyfel-beyaz-cise",
     "sanghay-inci-yesil-sis",
 ]
+
+
+class SureHatasi(ValueError):
+    """Rota suresi okunamadi ya da uretime uygun degil."""
+
+
+def rota_suresi(slug: str, kok: Path | None = None) -> int:
+    """Rotanin DURATION alanini oku ve uretilebilir bir tamsayi olarak dondur.
+
+    Kesirli sure REDDEDILIR: kie_uret.py Seedance suresini `int()` ile ceviriyor,
+    yani 12.5 gonderilirse API 12 uretir ve kapi 12.5 bekler , sessiz uyusmazlik.
+    """
+    proje = kok or KOK
+    yol = proje / "routes" / (slug + ".md")
+    if not yol.exists():
+        raise SureHatasi("rota dosyasi yok: %s" % yol)
+
+    import build  # KOK zaten sys.path'te (yukarida eklendi)
+
+    try:
+        rota = build.load_route(yol, proje)
+    except build.BuildError as hata:
+        raise SureHatasi("rota ayristirilamadi (%s): %s" % (slug, hata)) from hata
+
+    ham = (rota.fields.get("DURATION") or "").strip()
+    if not ham:
+        raise SureHatasi("DURATION alani yok ya da bos: %s" % slug)
+    try:
+        sayi = Decimal(ham)
+    except (InvalidOperation, ValueError) as hata:
+        raise SureHatasi("DURATION sayi degil (%s): %r" % (slug, ham)) from hata
+    if not sayi.is_finite() or sayi <= 0:
+        raise SureHatasi("DURATION pozitif olmali (%s): %r" % (slug, ham))
+    if sayi != sayi.to_integral_value():
+        raise SureHatasi(
+            "DURATION tamsayi olmali (%s): %r , kie_uret int() ile kirpar" % (slug, ham)
+        )
+    return int(sayi)
 
 
 def log(msg: str) -> None:
@@ -242,7 +286,7 @@ def ses_denetle(master: Path) -> list[str]:
 
 def denetle(
     video: Path,
-    beklenen_sure: int | float = SURE,
+    beklenen_sure: int | float,
     istenen_profil: dict | None = None,
 ) -> tuple[list[str], dict]:
     """Son master dosyasini teknik, loudness ve yukleme boyutu icin denetle."""
@@ -289,9 +333,9 @@ def _onay_kombinasyonu(onay: dict) -> tuple | None:
         return None
 
 
-def yayin_izni(profil_adi: str) -> tuple[bool, str]:
+def yayin_izni(profil_adi: str, sure: int | float) -> tuple[bool, str]:
     profil = PROFILLER[profil_adi]
-    anahtar = matris_anahtari(MODEL, SURE, profil["cozunurluk"], profil["beklenen_fps"])
+    anahtar = matris_anahtari(MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
     durum = YETENEK_MATRISI.get(anahtar)
     if durum == "dogrulandi":
         return True, durum
@@ -469,12 +513,25 @@ def main(argv: list[str] | None = None) -> int:
     gecmis = defter()
     slug = args.sehir or sirdaki(gecmis)
     profil = PROFILLER[args.profil]
-    anahtar = matris_anahtari(MODEL, SURE, profil["cozunurluk"], profil["beklenen_fps"])
+
+    # Sure rotadan okunur. Okunamazsa hicbir sey uretilmez ve kredi harcanmaz.
+    try:
+        sure = rota_suresi(slug)
+    except SureHatasi as hata:
+        if args.dry:
+            print("sirdaki slug : %s" % slug)
+            print("sure         : OKUNAMADI (%s)" % hata)
+            print("KURU KOSU. Uretim ve yayin yapilmadi.")
+            return 1
+        log("DUR: rota suresi okunamadi: %s" % hata)
+        return 1
+
+    anahtar = matris_anahtari(MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
     ham_durum = YETENEK_MATRISI.get(anahtar, "matriste yok")
 
     if args.dry:
         print("sirdaki slug : %s" % slug)
-        print("sure         : %s" % SURE)
+        print("sure         : %s" % sure)
         print(
             "profil       : %s (%dx%d, %s fps)"
             % (args.profil, profil["genislik"], profil["yukseklik"], profil["beklenen_fps"])
@@ -484,10 +541,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     log("sirdaki sehir : %s" % slug)
-    log("sure          : %s" % SURE)
+    log("sure          : %s" % sure)
     log("profil        : %s" % args.profil)
     log("matris        : %s" % ham_durum)
-    izinli, izin_durumu = yayin_izni(args.profil)
+    if anahtar not in YETENEK_MATRISI:
+        log(
+            "DUR: (%s, %s sn, %s, %s fps) yetenek matrisinde YOK. Uretim yapilmadi, "
+            "kredi harcanmadi. Bu kombinasyonun calistigi dogrulanmadan yayin yolu acilmaz."
+            % (MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
+        )
+        return 1
+    izinli, izin_durumu = yayin_izni(args.profil, sure)
     if not args.yayinlama and not izinli:
         log(
             "DUR: kombinasyon yayinlanamaz (%s). Kanarya uretimi icin --yayinlama kullanin."
@@ -522,8 +586,8 @@ def main(argv: list[str] | None = None) -> int:
         log("DUR: kredi %s < taban %s. Yukleme yapilmali." % (bakiye, MIN_KREDI))
         return 1
 
-    log("uretim basliyor: %s, %d sn, %s" % (MODEL, SURE, profil["cozunurluk"]))
-    sonuc = kosa(uretim_komutu(slug, SURE, profil), KOK)
+    log("uretim basliyor: %s, %d sn, %s" % (MODEL, sure, profil["cozunurluk"]))
+    sonuc = kosa(uretim_komutu(slug, sure, profil), KOK)
     print(sonuc.stdout[-2500:])
     if sonuc.returncode != 0:
         log("DUR: uretim basarisiz:\n" + (sonuc.stderr or "")[-1200:])
@@ -548,14 +612,14 @@ def main(argv: list[str] | None = None) -> int:
         log("DUR: ses master basarisiz: %s" % error)
         return 1
     master_sha = sha256_dosya(master)
-    sorunlar, olculen = denetle(master, SURE, profil)
+    sorunlar, olculen = denetle(master, sure, profil)
     kayit = {
         "sema_surumu": 1,
         "model": MODEL,
         "istenen_profil": args.profil,
         "profil_hash": profil_hash(),
         "slug": slug,
-        "beklenen_sure": SURE,
+        "beklenen_sure": sure,
         "olculen": olculen,
         "denetim_sonucu": "basarili" if not sorunlar else "basarisiz",
         "master_sha": master_sha,
