@@ -84,3 +84,26 @@ Her bulgu once bagimsiz olarak dogrulandi (kod okumasi + gercek veri), sonra kar
   `title_card.year_required` artik yalnizca JSON bool kabul ediyor, aksi halde
   `ValueError`.
 
+## Turlar arasi: Visionary'nin kendi olcumu (10 Eylul, 08:29 PDT)
+
+Codex kotasi doldugu icin tur 2 beklerken, ROCK 2'nin temel varsayimi gercek veriyle
+sinandi: yayinlanmis part 24 videosu (-24,8 LUFS) motorun kendi
+`core/ffmpeg_tools.master_audio(target_i=-14, target_tp=-1.0)` fonksiyonundan gecirildi.
+
+Sonuc: `RuntimeError: master teslim sozlesmesi 3 denemede tutulamadi:
+true-peak -0.9 dBTP > -1.0 dBTP`.
+
+Yani `master_lufs` alanini eklemek tek basina kanali duzeltmezdi; her bolumu
+`AUDIO_MASTER` hold'una dusururdu. Ne rapor ne Codex tur 1 bunu yakalamisti.
+
+Kok neden tavan supurmesiyle olculdu: teslim true-peak, limiter tavaninin daima
+~0,15 dB ustunde; dongu ise tavani tam olculen tasma kadar (0,1 dB, ffmpeg'in rapor
+cozunurlugu) geri cekiyor, yani hicbir ilerleme kaydetmiyor. Uc deneme
+-1,0 / -1,1 / -1,2'de bitiyor; gectigi yer -1,3.
+
+Onerilen duzeltme ayni gercek ses uzerinde yan yana kosularak kanitlandi: geri cekmeye
+0,2 dB pay eklenince ikinci denemede geciyor (-14,1 LUFS, -1,3 dBTP).
+
+Plana yeni **ROCK 1** olarak eklendi, rock'lar 0..5 diye yeniden numaralandi ve
+tur 2 prompt'una "en sert bunu incele" talimati konuldu.
+
