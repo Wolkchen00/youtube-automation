@@ -46,13 +46,18 @@ class FleetIsolationTest(unittest.TestCase):
 
                 series = bible.data["series"]
 
-                # master_lufs
-                if slug in ("flashpoints", "next-stop"):
+                # master_lufs: flashpoints bu alani 2026-09-10'da BASKA bir ajanin
+                # kendi turunda kazandi (ROCK: "flashpoints ses mastering'i ac").
+                # Bizim turumuzun getirdigi alanlar DEGIL; onlar asagida ayrica
+                # kontrol ediliyor. next-stop hala mastering disinda.
+                if slug == "next-stop":
                     self.assertIsNone(bible.master_lufs)
-                else:  # unnatural-lab
+                else:  # flashpoints ve unnatural-lab
                     self.assertEqual(bible.master_lufs, -14)
 
-                # master_true_peak_margin_db — all three must be 0.0
+                # master_true_peak_margin_db: bu bizim turumuzun alani ve HICBIR
+                # baska seriye sizmamali. flashpoints master_lufs'u acmis olsa bile
+                # payi 0.0, yani eski aritmetikte kaliyor.
                 self.assertEqual(bible.master_true_peak_margin_db, 0.0)
 
                 # block_degraded_publish — all three must be False
