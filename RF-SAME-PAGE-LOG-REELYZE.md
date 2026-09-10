@@ -294,3 +294,59 @@ Bu, raporlara yazilan "muzik anlatimi bogabilir" uyarisini dogruluyor ve mekaniz
 veriyor. Rock 1'in taban/aday karsilastirmasi bu yuzden opsiyonel degil, zorunlu.
 
 Kalan bes soru ACIK.
+
+## Round 4
+
+### Integrator bulgulari (Codex, birebir)
+
+```
+- [CLARIFY] Core Focus beş kanal diyor, fakat `core/analytics.py` ve `core/config.py` yalnızca dört kanal tanımlıyor ve plan da dört canlı hattı kapsıyor -> Beşinci kanal hangisi ve onun yayın sınırı hangi çağrıdır?
+- [FIX] Mevcut `series.experiment.run_experiment()` durumu korur, ancak `produce_episode()` Bible’ı yeniden canlı slug’dan yüklediği ve her koşuda medyayı yeniden ürettiği için aynı kaynaklarla alansız/alanlı A/B sağlayamaz -> Rock 1’e açık Bible override’ı ve aynı ham video, TTS ve müzik dosyalarını yeniden kullanan izole replay harness’ını teslimat olarak ekle.
+- [FIX] `_music.mp4` müzik-only stem değil `_narrated.mp4` artı müzik karışımıdır, dolayısıyla iki dosyanın integrated-loudness farkı müzik/anlatım dengesini doğrudan ölçmez -> `tools/audio_master_check.py` içindeki TTS-etkin pencere yaklaşımını native-sessiz anlatım profiline genişlet ve önceden sabitlenmiş sayısal eşiği kullan.
+- [FIX] Rock 1’in “belirtilen eşik” değeri ve saklanacak kanıtların yolu/şeması tanımsız olduğundan test komutu başarısız bir gerçek A/B olmadan geçebilir -> Eşiği plan içinde sabitle ve kaynak/final hash’leri, ölçümler, dinleme kararı ve değişmeyen durum hash’lerini doğrulayan manifest testi ekle.
+- [FIX] Rock 2 “bağımsız” gösterildiği halde Rock 3/4’ün henüz bulunmayan tam kapısını çalıştırıyor ve Rock 4 aynı dosyayı yeniden doğruluyor -> Rock 2’yi yalnızca ayrı mastered artifact üretimine indir, tek tam doğrulamayı Rock 4 sınırında yap ve bağımlılık grafiğini buna göre düzelt.
+- [FIX] `test_master_sira.py` girdinin baştan uyumlu olmasını yasaklamadığı için `master_audio` no-op olsa bile hedef LUFS ve yayın hash’i kontrolleri geçebilir -> Bilerek uyumsuz bir girdi kullan, girdinin kapıdan kaldığını, çıktının byte/hash olarak değiştiğini ve yalnız çıktının geçtiğini doğrula.
+- [FIX] `_try()` gerçek son sınır değildir çünkü `upload_to_platform()` doğrulamadan sonra `_delivery_copy()` ile yeni veya eski cache’lenmiş bir dosya seçebilir ve `core.video_monitor.py` `_try()` ile `yayinla.py`yi tamamen atlar -> Maddi olarak daha basit çözüm olarak kapıyı `_delivery_copy()` sonrasında ortak uploader katmanına taşı, cache’i kaynak hash’ine bağla ve gerçek gönderilen byte’ları doğrula.
+- [FIX] Plan sözleşmenin taşınmasını tarif ediyor fakat Event Horizon, Flashpoints, Unnatural Lab ve Fear için bağımsız, sürümlü canlı sözleşme kaynaklarını teslimat olarak tanımlamıyor -> Artifact ölçümünden sözleşme türetmeyi yasakla ve her aktif hat/profil için repo-kayıtlı sözleşme matrisi ile factory testi ekle.
+- [FIX] Aktivasyon yalnızca prose ile sıralandığından kapı sözleşmeler hazır olmadan canlıyı durdurabilir veya testler geçtikten sonra süresiz kapalı kalabilir -> Tek atomik rollout tanımla ve kabul kanıtında production enforcement’ın default-on olduğunu, bütün aktif yolların sözleşmeli geçtiğini doğrula.
+- [FIX] Rock 4 yalnız 90 saniyelik iç retry’ı test ediyor, fakat `approver._publish_approved()` her false sonucu `approved=True` bırakarak sonraki workflow koşularında sonsuza kadar yeniden dener -> Tipli `validation_rejected` sonucunu approver’a kadar taşı, part’ı non-retry hold durumuna al ve iki ardışık poll testi ekle.
+- [FIX] “Kalıcı ayrı kayıt” için yol ve workflow persistence değişiklikleri belirtilmemiştir; özellikle iki Fear workflow’u yalnız `yayin.jsonl` ve `last_run.json` dosyalarını saklıyor -> Kanıt defterinin kesin yolunu belirle, yazma hatasını yayın-engelleyici yap ve her workflow’un bu dosyayı persist ettiğini test et.
+- [FIX] Mevcut Fear `sha()` fonksiyonu SHA-256’yı 16 haneye kırpıyor ve “iki ayrı hash” testi tam digest’i kanıtlamıyor -> Kanıtta yeniden hesaplanmış 64 küçük-hex haneli digest ve uploader’ın açtığı gerçek dosyayla birebir eşleşme şartı koy.
+- [FIX] Sözleşmesiz `yayinla.py` negatif testi eksik API anahtarı, aynı-gün kilidi veya başka erken çıkış yüzünden gerçek kapıya ulaşmadan geçebilir -> Diğer korumaları başarıya mock’la, özgül `missing_contract` sonucunu ve sıfır ağ POST’u assert et.
+- [FIX] Dört iş bu cycle için taşınabilir, fakat Rock 3’ü Rock 4’ten ayrı kabul etmek Core Focus sağlamayan kısmi teslimata izin verir -> Hiçbirini erteleme; Rock 3 ve Rock 4’ü tek atomik kabul birimi yap, Rock 1 ve Rock 2’yi onun aktivasyon önkoşulları olarak tut.
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+14 bulgu islendi. Bes dogrulanabilir iddiayi kontrol ettim, BESI DE DOGRU:
+
+- `tools/audio_master_check.py` var, pencereli RMS analizi iceriyor.
+  Benim `_narrated`/`_music` LUFS farki yontemim YANLISTI: `_music.mp4`
+  muzik-only stem degil, `_narrated` + muzik karisimi. Yontem degistirildi.
+- `core/uploader.py:491` `_delivery_copy()` cagiriyor, yeniden kodlayabiliyor;
+  `core/uploader.py:611` `_try` i atliyor.
+- `AImagine-Fear/tools/yayinla.py:46` -> `return h.hexdigest()[:16]`, KIRPIYOR.
+- `series/approver.py:78-79` dokumantasyonu birebir "Basarisizsa approved=True".
+- `series/experiment.py` izole uretim sunuyor ama `produce_episode` bible i
+  canli slug dan yeniden yukluyor, ayni kaynakla A/B YAPILAMAZ.
+
+KABUL, tasarim degisikligi: kapi `_try()` ve `yayinla.py` yerine
+`upload_to_platform()` icine, `_delivery_copy()` SONRASINA tasindi.
+Deponun kendi ilkesi `core/uploader.py:44-45`: "Kapi upload_to_platform icindedir
+cunku olculen TEK tikanma noktasi orasi". Ayni dosyada ayni siniftan bir kapi
+zaten var (mukerrer baslik, 2026-09-02). Cagirici goc isi TAMAMEN kalkti.
+
+KABUL: Rock 3+4 tek atomik kabul birimi. Hicbir sey daha ertelenmedi.
+KABUL: +3,0 dB esigi plana sabitlendi, teste birakilmadi.
+CLARIFY cevabi: bes icerik hatti, dort YouTube kanali; Fear ile next-stop ayni
+kanala basiyor, next-stop paused, plan dort canli hatti kapsiyor.
+
+REDDEDILEN: yok.
+
+### Visionary bagimsiz bulgusu
+
+`series/experiment.py` in varligini Codex sormadan once buldum ve Rock 1 in
+duzenek insa etmesi gerekmedigini dusundum. Codex yarisini duzeltti: izolasyon
+var ama ayni-kaynak A/B yok. Ikisi birlestirildi: mevcut harness KULLANILIR,
+uzerine bible override + replay eklenir.
+
