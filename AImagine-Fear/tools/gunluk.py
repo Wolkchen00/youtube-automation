@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
@@ -19,6 +20,7 @@ if str(KOK) not in sys.path:
 if str(YT_KOK) not in sys.path:
     sys.path.insert(0, str(YT_KOK))
 
+from baslik import ilk_kullanilmamis  # noqa: E402
 from defter import bugunku_basarili, kullanildi_mi, yayin_kimligi  # noqa: E402
 from profil import (  # noqa: E402
     PROFILLER,
@@ -449,18 +451,57 @@ def onayla(master: Path) -> int:
     return 0
 
 
-def _yayin_komutu(master: Path, slug: str, allow_same_day: bool) -> list[str] | None:
+def etiketler(caption_metni: str) -> str:
+    """Caption'daki # etiketlerinden YouTube etiket dizesi turet.
+
+    Kanon tek kaynak kaliyor: ikinci bir etiket listesi tutmuyoruz, yoksa ikisi
+    ayrisir ve hangisinin gittigi belirsizlesir.
+    """
+    bulunan = re.findall(r"#(\w+)", caption_metni)
+    goruldu: list[str] = []
+    for etiket in bulunan:
+        if etiket.lower() not in {g.lower() for g in goruldu}:
+            goruldu.append(etiket)
+    return ",".join(goruldu)
+
+
+def kullanilmis_basliklar(gecmis: list[dict]) -> list[str]:
+    """Defterdeki DOGRULANMIS yayinlarin baslikları."""
+    return [
+        kayit.get("title", "")
+        for kayit in gecmis
+        if kullanildi_mi(kayit) and kayit.get("title")
+    ]
+
+
+def baslik_sec(slug: str, gecmis: list[dict]) -> tuple[str | None, str]:
+    """TITLE.txt'ten henuz kullanilmamis varyanti sec.
+
+    Havuz tukendiyse (None, sebep) doner ve kosu DURUR. Eskisini yeniden
+    gondermek yok: core/uploader.py ayni basligi ikinci kez gorunce YouTube
+    yuklemesini sessizce ATLIYOR, yani "yayinladik" saniriz ama YouTube'da yok.
+    """
+    yol = KOK / "out" / slug / "TITLE.txt"
+    if not yol.exists():
+        return None, "TITLE.txt yok: %s" % yol
+    varyantlar = yol.read_text(encoding="utf-8").splitlines()
+    secilen = ilk_kullanilmamis(varyantlar, kullanilmis_basliklar(gecmis))
+    if secilen is None:
+        return None, ("bu rotanin butun TITLE varyantlari kullanilmis: %s , "
+                      "rotaya yeni varyant yaz" % slug)
+    return secilen, ""
+
+
+def _yayin_komutu(
+    master: Path, slug: str, allow_same_day: bool, baslik: str, tags: str
+) -> list[str] | None:
     caption = KOK / "out" / slug / "CAPTION.txt"
     if not caption.exists():
         log("DUR: CAPTION.txt yok: %s" % caption)
         return None
-    satirlar = caption.read_text(encoding="utf-8").strip().splitlines()
-    if not satirlar:
-        log("DUR: CAPTION.txt bos: %s" % caption)
-        return None
     komut = [
         PY, "-X", "utf8", str(KOK / "tools" / "yayinla.py"), str(master),
-        "--caption-file", str(caption), "--title", satirlar[0][:95],
+        "--caption-file", str(caption), "--title", baslik, "--tags", tags,
     ]
     if allow_same_day:
         komut.append("--allow-same-day")
@@ -495,8 +536,10 @@ def yayinla(
     slug: str,
     allow_same_day: bool,
     uretim_kaydi: dict | None = None,
+    baslik: str = "",
+    tags: str = "",
 ) -> int:
-    komut = _yayin_komutu(master, slug, allow_same_day)
+    komut = _yayin_komutu(master, slug, allow_same_day, baslik, tags)
     if komut is None:
         return 1
     komut += ["--ek-alanlar", json.dumps(defter_alanlari(slug, uretim_kaydi),
@@ -546,7 +589,18 @@ def yayinla_mevcut(master: Path, allow_same_day: bool) -> int:
     if _onay_kombinasyonu(onay) != anahtar:
         log("DUR: onay kombinasyonu uretim kaydiyla uyusmuyor")
         return 1
-    return yayinla(master, kayit["slug"], allow_same_day)
+    slug = kayit["slug"]
+    gecmis = defter()
+    secilen_baslik, baslik_hatasi = baslik_sec(slug, gecmis)
+    if secilen_baslik is None:
+        log("DUR: %s" % baslik_hatasi)
+        return 1
+    caption_yolu = KOK / "out" / slug / "CAPTION.txt"
+    if not caption_yolu.exists():
+        log("DUR: CAPTION.txt yok: %s" % caption_yolu)
+        return 1
+    return yayinla(master, slug, allow_same_day, kayit, secilen_baslik,
+                   etiketler(caption_yolu.read_text(encoding="utf-8")))
 
 
 def _kontakt_uret(master: Path, master_sha: str, sure: float) -> Path:
@@ -651,11 +705,21 @@ def main(argv: list[str] | None = None) -> int:
     if sonuc.returncode != 0:
         log("DUR: build dogrulamasi patladi:\n" + (sonuc.stdout + sonuc.stderr)[:1500])
         return 1
-    caption = KOK / "out" / slug / "CAPTION.txt"
-    if not caption.exists() or not caption.read_text(encoding="utf-8").strip():
-        log("DUR: CAPTION.txt yok veya bos: %s" % caption)
-        return 1
     log("build temiz")
+
+    # Metadata onkontrolu KREDI HARCAMADAN ONCE. Yoksa her gun once uretiriz,
+    # para gider, sonra baslik havuzu tukendigi icin dururuz.
+    caption_yolu = KOK / "out" / slug / "CAPTION.txt"
+    if not caption_yolu.exists() or not caption_yolu.read_text(encoding="utf-8").strip():
+        log("DUR: CAPTION.txt yok veya bos: %s" % caption_yolu)
+        return 1
+    secilen_baslik, baslik_hatasi = baslik_sec(slug, gecmis)
+    if secilen_baslik is None:
+        log("DUR: %s" % baslik_hatasi)
+        return 1
+    yt_etiketleri = etiketler(caption_yolu.read_text(encoding="utf-8"))
+    log("baslik        : %s" % secilen_baslik)
+    log("etiketler     : %s" % yt_etiketleri)
 
     bakiye = kredi()
     log("kredi         : %s (= $%.2f)" % (bakiye, (bakiye or 0) * 0.005))
@@ -724,7 +788,8 @@ def main(argv: list[str] | None = None) -> int:
         log("YAYINLANMADI: gozle kontrolden sonra --onayla %s" % master)
         return 0
 
-    return yayinla(master, slug, args.allow_same_day, kayit)
+    return yayinla(master, slug, args.allow_same_day, kayit,
+                   secilen_baslik, yt_etiketleri)
 
 
 if __name__ == "__main__":

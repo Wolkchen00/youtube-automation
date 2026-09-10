@@ -8,6 +8,7 @@ from decimal import Decimal, InvalidOperation
 from pathlib import Path
 from typing import Iterable
 
+from baslik import varyantlar_gecerli
 from profil import PROFILLER, VARSAYILAN_PROFIL
 
 
@@ -30,6 +31,7 @@ ROUTE_FIELDS = (
     "DURATION",
     "NEON",
     "PALET",
+    "TITLE_KEYWORD",
     "LEGWEAR",
     "WEATHER",
     "SOURCE",
@@ -40,6 +42,7 @@ ROUTE_SECTIONS = (
     "END STATE",
     "VOICE",
     "CAPTION",
+    "TITLE",
 )
 PROMPT_SECTIONS = (
     *MASTER_SECTIONS,
@@ -129,7 +132,9 @@ FIXED_TRAILING_TAGS = (
 INTERVAL_RE = re.compile(
     r"^\[([0-9]+(?:\.[0-9]+)?)-([0-9]+(?:\.[0-9]+)?)\]\s+(.+)$"
 )
-FIELD_RE = re.compile(r"^([A-Z][A-Z ]*):[ \t]*(.*)$")
+# Alt cizgi de kabul edilir (TITLE_KEYWORD). Alanlar yalniz ilk "## " basligindan
+# ONCE ayristirildigi icin bu genisletme metin govdesini etkilemez.
+FIELD_RE = re.compile(r"^([A-Z][A-Z _]*):[ \t]*(.*)$")
 HASHTAG_RE = re.compile(r"#[A-Za-z0-9_]+")
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 
@@ -344,6 +349,7 @@ def render_route(
     return {
         "PROMPT.txt": "\n\n".join(prompt_parts) + "\n",
         "CAPTION.txt": route.sections["CAPTION"] + "\n",
+        "TITLE.txt": route.sections["TITLE"] + "\n",
         "VOICE.txt": route.sections["VOICE"] + "\n",
     }
 
@@ -697,6 +703,16 @@ def _validate_palet(route: Route, root: Path) -> list[str]:
     ]
 
 
+def _validate_title(route: Route, root: Path) -> list[str]:
+    """Kanca basliklarini baslik.py'nin belirlenimci dilbilgisiyle dogrula."""
+    satirlar = route.sections.get("TITLE", "").splitlines()
+    anahtar = route.fields.get("TITLE_KEYWORD", "").strip()
+    return [
+        _issue(root, route.path, route.slug, sorun)
+        for sorun in varyantlar_gecerli(satirlar, anahtar)
+    ]
+
+
 def validate_route(
     canon: Canon,
     route: Route,
@@ -717,6 +733,7 @@ def validate_route(
     messages.extend(_validate_lengths(route, root, outputs))
     messages.extend(_validate_caption(route, root))
     messages.extend(_validate_palet(route, root))
+    messages.extend(_validate_title(route, root))
 
     second_render = render_route(canon, route, profil_adi)
     for filename in sorted(outputs):

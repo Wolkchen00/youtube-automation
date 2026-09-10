@@ -6,6 +6,7 @@ LANDMARK: the Oriental Pearl Tower
 DURATION: 15
 NEON: acid green
 PALET: neon
+TITLE_KEYWORD: Pearl
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: thick night fog sitting between the towers
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
@@ -49,3 +50,9 @@ The rider is floating on her back in a green-lit rooftop pool between dark tower
 You're sliding down past the Oriental Pearl Tower on a transparent slide above Shanghai. Every turn gets blinder, faster, and colder. 🌫️💦
 
 #MegaSlideFear #ShanghaiPearl #WaterSlide #POVReels #CGIAdventure #ViralReels
+
+## TITLE
+
+Pearl Tower fog drop #shorts
+I slid off the Pearl Tower #shorts
+Pearl Tower, no floor #shorts

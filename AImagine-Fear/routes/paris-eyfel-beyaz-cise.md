@@ -6,6 +6,7 @@ LANDMARK: the Eiffel Tower
 DURATION: 15
 NEON: cold white-blue
 PALET: neon
+TITLE_KEYWORD: Eiffel
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: fine night drizzle, every street lamp wearing a halo
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
@@ -49,3 +50,9 @@ The rider is floating on her back in a white-lit rooftop pool between dark tower
 You're dropping past the Eiffel Tower on a transparent slide above Paris. Every second gets faster, lower, and colder. 💧💦
 
 #MegaSlideFear #ParisEiffel #WaterSlide #POVReels #CGIAdventure #ViralReels
+
+## TITLE
+
+Eiffel Tower rain drop #shorts
+I slid off the Eiffel Tower #shorts
+Eiffel Tower, no floor #shorts

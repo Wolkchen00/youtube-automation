@@ -190,7 +190,11 @@ def test_yayinlama_runs_generation_without_publish_and_checks_contact(
     raw.parent.mkdir(parents=True)
     raw.write_bytes(b"raw")
     caption = tmp_path / "out" / slug / "CAPTION.txt"
-    caption.write_text("Title\ncaption", encoding="utf-8")
+    caption.write_text("Title\ncaption #MegaSlideFear #TestTower", encoding="utf-8")
+    (tmp_path / "out" / slug / "TITLE.txt").write_text(
+        "Test Tower glass drop #shorts\nI slid off the Test Tower #shorts",
+        encoding="utf-8",
+    )
     events = []
 
     monkeypatch.setattr(gunluk, "KOK", tmp_path)
@@ -303,9 +307,21 @@ def test_yayinla_mevcut_uses_record_slug_and_no_generation(monkeypatch, tmp_path
     approval_path = tmp_path / "profil_onay.json"
     approval_path.write_text(json.dumps(_approval(master_sha=sha)), encoding="utf-8")
     monkeypatch.setattr(gunluk, "ONAY_DOSYASI", approval_path)
+    monkeypatch.setattr(gunluk, "KOK", tmp_path)
+    monkeypatch.setattr(gunluk, "defter", lambda: [])
+    cikti = tmp_path / "out" / "record-slug"
+    cikti.mkdir(parents=True)
+    (cikti / "CAPTION.txt").write_text("caption #MegaSlideFear #TestTower", encoding="utf-8")
+    (cikti / "TITLE.txt").write_text(
+        "Record slug glass drop #shorts\nRecord slug, no floor #shorts",
+        encoding="utf-8",
+    )
     monkeypatch.setattr(gunluk, "uretim_kaydi_bul", lambda *args: record)
     called = []
-    monkeypatch.setattr(gunluk, "yayinla", lambda path, slug, same: called.append((path, slug)) or 0)
+    monkeypatch.setattr(
+        gunluk, "yayinla",
+        lambda path, slug, same, kayit=None, baslik="", tags="": called.append((path, slug)) or 0,
+    )
     monkeypatch.setattr(gunluk, "uretim_komutu", lambda *a: (_ for _ in ()).throw(AssertionError("generate")))
     assert gunluk.yayinla_mevcut(master, False) == 0
     assert called == [(master, "record-slug")]

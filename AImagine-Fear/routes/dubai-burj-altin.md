@@ -6,6 +6,7 @@ LANDMARK: the Burj Khalifa
 DURATION: 15
 NEON: warm gold-amber
 PALET: sicak
+TITLE_KEYWORD: Burj
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: a clear hot night with dust haze on the horizon
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
@@ -49,3 +50,9 @@ The rider is floating on her back in a gold-lit rooftop pool between dark towers
 You're falling past the Burj Khalifa on a transparent slide above Dubai. Every second gets faster, hotter, and higher. 🌑💦
 
 #MegaSlideFear #DubaiBurjKhalifa #WaterSlide #POVReels #CGIAdventure #ViralReels
+
+## TITLE
+
+Burj Khalifa 828m drop #shorts
+I slid off the Burj tonight #shorts
+Burj Khalifa, no floor #shorts

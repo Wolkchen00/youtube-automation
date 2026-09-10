@@ -6,6 +6,7 @@ LANDMARK: the CN Tower
 DURATION: 20
 NEON: hot red-orange
 PALET: sicak
+TITLE_KEYWORD: CN
 LEGWEAR: black glossy wet-look shorts cut at mid-thigh, bare legs below them
 WEATHER: clear blue-hour dusk, thin high cloud, the sun already below the horizon
 SOURCE: https://www.instagram.com/reel/Dcv7cfVDQi0/ (fearvisionofficiel, 2026-09-01)
@@ -49,3 +50,9 @@ The rider is floating on her back in a lit turquoise rooftop pool in Toronto at 
 You're sliding around the CN Tower on a transparent water slide above Toronto. Every turn takes you faster through the clouds. ☁️💦
 
 #MegaSlideFear #CNTower #WaterSlide #POVReels #CGIAdventure #ViralReels
+
+## TITLE
+
+CN Tower 553m glass drop #shorts
+I stepped off the CN Tower #shorts
+CN Tower, no floor #shorts

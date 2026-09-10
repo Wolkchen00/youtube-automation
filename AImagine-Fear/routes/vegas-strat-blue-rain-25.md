@@ -6,6 +6,7 @@ LANDMARK: the STRAT Tower
 DURATION: 25
 NEON: electric cyan-blue
 PALET: neon
+TITLE_KEYWORD: STRAT
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
 WEATHER: heavy night rain under a black overcast sky
 SOURCE: https://www.instagram.com/reel/DcynI6Oj8rA/ (fearvisionofficiel, 2026-09-02); 20sn kaynak haritasi 25sn'ye yayildi, Sora 2 Pro tek uretimde 25 saniye kaldiriyor
@@ -49,3 +50,9 @@ The rider is floating on her back in a glowing cyan rooftop pool between dark re
 You're falling through glowing neon around the STRAT Tower. Every second gets faster, higher, and crazier above Las Vegas. 🌈💦
 
 #MegaSlideFear #LasVegasSTRAT #WaterSlide #POVReels #CGIAdventure #ViralReels
+
+## TITLE
+
+STRAT Tower, long way down #shorts
+25 seconds off the STRAT #shorts
+STRAT Tower full descent #shorts

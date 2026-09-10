@@ -65,6 +65,10 @@ def main() -> int:
     p.add_argument("--dry", action="store_true", help="gonderme, sadece ne gidecegini yaz")
     p.add_argument("--allow-same-day", action="store_true",
                    help="ayni gune ikinci videoyu bilerek koy")
+    p.add_argument("--tags", default="",
+                   help="YouTube etiketleri, virgulle ayrilmis. core/uploader.py bu "
+                        "parametreyi KABUL ediyordu ama buradan hic gecirilmiyordu, "
+                        "yani kanal YouTube'un otomatik copuyla yayinlaniyordu.")
     p.add_argument("--ek-alanlar", default="",
                    help="defter satirina eklenecek JSON sozluk (gunluk.py gecirir)")
     p.add_argument("--skip-if-published", action="store_true",
@@ -112,6 +116,7 @@ def main() -> int:
     print("video      : %s (%.1f MB, sha %s)" % (video.name, video.stat().st_size / 1e6, parmak))
     print("baslik     : %s" % title)
     print("caption    : %d karakter, %d etiket" % (len(caption), caption.count("#")))
+    print("tags       : %s" % (args.tags or "YOK"))
     print("-" * 62)
     print(caption)
     print("=" * 62)
@@ -131,6 +136,7 @@ def main() -> int:
                 user=kullanici,
                 platform=platform,
                 social_caption=caption,
+                tags=args.tags,
             )
         except Exception as e:
             r = {"hata": str(e)}

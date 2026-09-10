@@ -47,6 +47,7 @@ def _route_text(
         "DURATION": "20",
         "NEON": "bright green",
         "PALET": "neon",
+        "TITLE_KEYWORD": "Test",
         "LEGWEAR": "black full-length leggings",
         "WEATHER": "steady night rain",
         "SOURCE": "synthetic test route",
@@ -73,6 +74,10 @@ def _route_text(
             "You're falling from the Test Tower above Test City. Every second gets "
             "faster, lower, and louder.\n\n"
             "#MegaSlideFear #TestTower #WaterSlide #POVReels #CGIAdventure #ViralReels"
+        ),
+        "TITLE": (
+            "Test Tower glass drop #shorts\n"
+            "I slid off the Test Tower #shorts"
         ),
     }
     if omit_section is not None:
@@ -365,5 +370,6 @@ def test_real_routes_generate_and_validate(tmp_path: Path) -> None:
         assert sorted(path.name for path in output_dir.iterdir()) == [
             "CAPTION.txt",
             "PROMPT.txt",
+            "TITLE.txt",
             "VOICE.txt",
         ]
