@@ -232,3 +232,92 @@ Bunlar ROCK B'nin kanıt temelini çökertti ve rock yeniden tasarlandı.
 En önemli sonuç: ROCK B'nin sert red yetkisi kelime listesinden ALINIP
 yalnız yapısal kurala verildi, ve `violation_observation` zorunlu yapılarak
 kaçış yolu kapatıldı. Bu, İhsan'ın kararıdır (2026-09-10).
+
+## Round 3
+
+### Integrator findings (Codex, verbatim)
+
+- [FIX] B2’s “zero migration” claim is false: queued plans and the prompt contract are compliant, but `tests/test_gercekcilik_rock2.py::raw_plan` and `tests/test_shot1_onset.py::plan_with_actions` omit shot-1 `violation_observation` and break clean-validation/plan-lint tests -> Add a valid shot-1 observation to both builders; update the golden only if prompt wording changes.
+- [FIX] B1 reproduction matches only part 36 among parts 22–37 and no pre-format shot-1 prompt, but `^after`, `regardless of`, and `keeps <verb>ing` can reject readable states such as “Regardless of angle, the blue core is visible” -> Restrict hard rejection to explicit completed-event dependencies and make invariance/ongoing-state phrases observation-only.
+- [FIX] B3’s never-reject contract conflicts with existing hard gates because `never` triggers `NEGATIVE_VIDEO_LANGUAGE`, `always/forever/eventually` trigger `TEMPORAL_OVERREACH`, and an anomaly descriptor is copied into prompts that are also hard-linted -> Define B3 precedence explicitly, exempt only its scoped fields/mechanically composed phrase from those old rejections, and test through actual `validate_plan`.
+- [FIX] B1/B2 in `format_plan_errors` reach `_validate_batch:1417`, `preflight:125`, and `produce:1398/1461` but not direct config calls at `1411/119/1388`, while B3 cannot safely record or alert there because the function returns only errors and those paths invoke it repeatedly -> Add a pure structured-finding scanner, consume rejects in validation, and persist/alert B3 once at a deduplicated lifecycle seam.
+- [FIX] Merely excluding B1 from `_repair_episode_fields` is insufficient because an observation matching both B1 and an existing repairable rule can enter whole-field repair and have B1 cosmetically erased -> Short-circuit all field repair for an episode carrying B1 and test a mixed phrase such as “After being rolled, the dice always land alike.”
+- [FIX] ROCK B’s proof does not exercise the real replenish loop, where a first-position unrepairable failure causes six new-generation attempts then a loud exception, while a later failure yields the longest valid prefix plus an alert -> Add `generate_plans`/`replenish` integration tests for both positions and assert an empty result never returns green.
+- [FIX] ROCK C’s all-family mapping still enforces title shape but makes its family branch tautological, and the plan still omits the literal three regexes, allowing implementation and proof to invent a permissive contract together -> Put the exact `re.fullmatch` patterns and boundary cases in the plan before build.
+- [FIX] ROCK A says the cumulative limiter backoff limit is explicit but provides no numeric limit -> Specify the maximum cumulative dB reduction and exact fail-closed diagnostic at that boundary.
+- [CLARIFY] ROCK A and ROCK E promise persistent or durable artifacts without naming the authoritative storage backend, retention, deterministic key, or clean-checkout discovery mechanism -> Will this extend the existing GitHub Release path, or use another explicitly named store with tested retention and atomic-manifest semantics?
+- [FIX] ROCK E incorrectly treats `doctrine_sha256` and `ref_prompt_sha256` as sufficient identity because the former is shared across plans and the latter excludes shot prompts and actual reference bytes, while restored shots also fail `_revalidate_cached_shot` without restored `qc_log.jsonl` evidence -> Bind checkpoints to a normalized full-plan hash, reference-content hash, QC-policy fingerprint, and persisted QC-pass evidence before completion-cost calculation.
+- [FIX] Deferring publication recovery violates the Core Focus because partial success causes successful Instagram/TikTok posts to be uploaded again, while a lost YouTube acknowledgement can trigger the duplicate-title gate forever without advancing local state -> Include minimal durable per-platform completion/request IDs, reconciliation, and already-successful-platform skipping in ROCK E.
+VERDICT: NOT YET
+### Visionary response (Claude)
+
+Turu 3'ün doğrulanabilir iddialarının hepsi dosyaya karşı kontrol edildi:
+`test_gercekcilik_rock2.py::raw_plan` ve `test_shot1_onset.py::plan_with_actions`
+gerçekten shot 1 gözlemi yazmıyor (ikisinde de sayı sıfır);
+`NEGATIVE_VIDEO_LANGUAGE` gerçekten `never` yakalıyor;
+`series/approver.py::_download_release` ve `series_runner.py:820` `release_tag`
+gerçekten var. Üçü de kabul edildi.
+
+- ACCEPTED (1) B2'nin "sıfır göç" iddiası yanlış -> DOĞRULANDI. İki test
+  kurucusu adıyla plana yazıldı; ikisine geçerli shot 1 gözlemi eklenecek,
+  golden yalnız prompt metni değişirse güncellenecek.
+- ACCEPTED (2) `regardless of` ve `keeps <fiil>ing` okunabilir DEĞİŞMEZLİK
+  durumlarını reddedebilir -> B1'den ÇIKARILDI, çıplak `^after` de çıkarıldı.
+  B1 artık yalnız TAMAMLANMIŞ OLAY bağımlılığını yakalıyor
+  (`after being <fiil-mis>`, `after (it|the|they|each|every) <fiil-mis>`,
+  `once (it|the|they) (is|are|was|were|has|have) <fiil-mis>`,
+  `having been <fiil-mis>`). Part 36 hâlâ yakalanıyor ("After being rolled").
+  Çıkarılan ifadeler B3 bayrağına indi ve okunabilir bir `regardless of`
+  gözleminin REDDEDİLMEDİĞİ ayrı bir regresyon testi olarak yazıldı.
+- ACCEPTED (3) B3'ün "asla reddetmez" sözleşmesi mevcut sert kapılarla çelişiyor
+  -> DOĞRULANDI ve plana açık ÖNCELİK KURALI yazıldı: B3 hiçbir mevcut reddi
+  zayıflatmaz ve hiçbir yeni red eklemez. Üç çakışma adıyla belgelendi
+  (NEGATIVE_VIDEO_LANGUAGE'in `never`i, TEMPORAL_OVERREACH'in dört kelimesi,
+  anomaly_descriptor'ın prompt'a birebir kopyalanması). Öncelik `validate_plan`
+  üzerinden test edilecek.
+- ACCEPTED (4) B3 `format_plan_errors` içinde kayıt/alarm üretemez, o fonksiyon
+  yalnız hata döndürüyor ve tekrar tekrar çağrılıyor -> B3 saf, yan etkisiz bir
+  TARAYICI olarak yazılacak; redler doğrulamada tüketilecek; bayraklar yaşam
+  döngüsünde TEK tekilleştirilmiş noktada kaydedilecek. Mükerrerlik testi eklendi.
+- ACCEPTED (5) B1'i yalnız `_repair_episode_fields` dışında tutmak yetmez
+  -> B1 taşıyan bölümde ALAN ONARIMININ TAMAMI kısa devre yapacak. Codex'in
+  verdiği karışık ifade (`After being rolled, the dice always land alike.`)
+  birebir test vakası olarak plana yazıldı.
+- ACCEPTED (6) kanıt gerçek ikmal döngüsünü çalıştırmıyor -> `generate_plans` /
+  `replenish` üzerinden iki entegrasyon testi eklendi: birinci sıradaki
+  onarılamaz başarısızlık (yeni üretim denemeleri, sonra gürültülü istisna) ve
+  sonraki sıradaki başarısızlık (en uzun geçerli önek artı alarm). Her iki
+  durumda boş sonucun asla yeşil dönmediği iddia ediliyor.
+- ACCEPTED (7) ROCK C literal regexleri hâlâ yok, tüm-aile eşlemesi totolojik
+  -> üç regex ÖLÇÜLEREK yazıldı ve plana literal olarak kondu: parts 22-37'nin
+  16 başlığı kabul (her biri tam bir kalıba), 9 saldırgan varyant red.
+  Tüm-aile eşlemesinin TOTOLOJİK olduğu gizlenmedi, açıkça kabul edildi ve
+  ISSUES'a ayrı madde olarak düştü. Test geçirmek için uydurma dışlama yazılmayacak.
+- ACCEPTED (8) ROCK A kümülatif sınır sayı vermiyordu -> sayı kondu:
+  başlangıç `target_tp` değerinden en fazla 3,0 dB toplam indirim
+  (-1,0 hedefinde tavan en fazla -4,0 dBTP). Sınırda fail-closed davranış ve
+  teşhis çıktısı tanımlandı.
+- ACCEPTED (CLARIFY) depolama backend'i adlandırılmamıştı -> mevcut GitHub
+  Release yolu adıyla seçildi ve doğrulandı: `series/approver.py::_download_release`,
+  `_cleanup_release`, `series_runner.py:820` `release_tag`, `series_runner.py:441`
+  tamamlanma üçlüsü. Yeni depo icat edilmeyecek. ROCK A telemetrisi de
+  adlandırıldı: `logs/` altına yazılacak, çünkü iş akışı
+  (`.github/workflows/unnatural-lab.yml:131-137`) yalnız `logs/` ve stems
+  klasörlerini `always()` ile yüklüyor; bölüm çıktı klasörü yüklenmiyor.
+- ACCEPTED (10) `doctrine_sha256` planlar arasında paylaşılıyor,
+  `ref_prompt_sha256` çekim prompt'larını ve referans baytlarını dışlıyor,
+  geri yüklenen çekim `qc_log.jsonl` kanıtı olmadan `_revalidate_cached_shot`
+  kapısından geçemez -> kimlik dörtlüsü yazıldı: normalize tam plan özeti,
+  referans içerik özeti, QC politika parmak izi, kalıcılaştırılmış QC-geçiş kanıtı.
+- ACCEPTED (11) yayın kurtarmayı ertelemek YENİ TUZAK yaratıyor
+  -> v3'teki erteleme GERİ ALINDI. Codex haklı: eserler kalıcılaşınca kısmi
+  başarıda IG/TikTok yeniden gönderilir ve kaybolan YouTube onayı mükerrer-başlık
+  kapısını sonsuza kadar tetikler. Asgari yayın kurtarma ROCK E kapsamına alındı:
+  platform başına tamamlanma ve bekleyen istek kimlikleri, yeniden göndermeden
+  önce mutabakat, zaten başarılı platformun atlanması, ve
+  "uzak başarılı, yerel çöktü" senaryosunun testi.
+
+Özet: turu 3'ün 11 bulgusunun 11'i de kabul edildi, hiçbiri reddedilmedi.
+En büyük iki değişiklik: B1'in kapsamı okunabilir değişmezlik ifadelerini
+dışarıda bırakacak şekilde DARALTILDI, ve v3'te ertelenen yayın kurtarma
+ROCK E'ye GERİ ALINDI.
