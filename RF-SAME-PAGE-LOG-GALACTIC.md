@@ -107,3 +107,106 @@ Onerilen duzeltme ayni gercek ses uzerinde yan yana kosularak kanitlandi: geri c
 Plana yeni **ROCK 1** olarak eklendi, rock'lar 0..5 diye yeniden numaralandi ve
 tur 2 prompt'una "en sert bunu incele" talimati konuldu.
 
+## Round 2
+### Integrator findings (Codex, verbatim)
+
+Several round-1 findings are addressed: the owner-authorized title work stays; the reason-code additions and earlier degraded gate reach the finite content-retry branch; missing duration fails closed; and `bible` is available at replenish’s validation site. `[14,22]` correctly separates all six recorded episodes: 26/27/29 fail at 11.02/11.03/11.10 seconds; healthy 28/30/31 pass at 16.62/16.62/19.62.
+
+The remaining issues are:
+
+- [FIX] Rock 1 changes Unnatural Lab’s retry behavior despite the explicit other-series behavioral-isolation constraint, and first-attempt equality does not protect episodes that currently succeed on attempts two or three -> Make the revised retry policy an Event Horizon-only opt-in with existing defaults preserved, and reconcile the contradictory “master_audio behavior unchanged” section.
+
+- [FIX] The sweep establishes a three-attempt failure on part24, not a constant 0.15 dB offset, perpetual nonconvergence, failure of every episode, or Unnatural Lab part33’s identical cause -> Narrow the diagnosis to the evidence and preserve a reproducible old-fails/new-passes fixture; the reported sample already passes with the margin and three attempts, so justify or remove the fourth attempt.
+
+- [FIX] The `target_tp - 3.0` cutoff rejects a feasible solution in the existing adversarial test that compensates for 3.1 dB overshoot, while one clip’s LUFS at a −6 dB ceiling cannot establish a universal limit -> Test quiet and heavily limited content against both delivered constraints, preserve legacy behavior, and make any opted-in cutoff raise with cleanup rather than `break`, which bypasses the loop’s failure branch.
+
+- [FIX] Rock 1 cannot leave both existing true-peak test files unchanged and green because they assert three attempts and include the now-rejected 3.1 dB compensation case -> Retain those tests against the legacy default and add separate tests for the Event Horizon retry policy.
+
+- [FIX] The one-decimal `ebur128` summary can report −1.0 for a true peak slightly above −1.0, so the proposed measurement can certify a contract violation -> Use higher-precision decoded-delivery verification or conservative acceptance headroom for the opt-in path; neither sample-peak `astats` nor a pre-encode limiter certifies the final AAC true peak. [FFmpeg filter documentation](https://ffmpeg.org/ffmpeg-filters.html#alimiter)
+
+- [FIX] Rock 0 also activates `_budget_failure`, which treats unknown spend or completion cost as `BUDGET_EXHAUSTED` and immediately advances the queue, potentially skipping multiple parts on a shared accounting-read failure -> Distinguish unavailable accounting from proven exhaustion through an additive opt-in path, and test that an accounting failure preserves the current part and partial work.
+
+- [FIX] Migration can change a malformed approval hold into `needs_human` without advancing `next_part`, after which the existing early-return branch again reports success indefinitely -> Specify and test atomic migration/pointer handling, including exhausted holds and preserved partial artifacts; the current Event Horizon records contain no such hold, but the claimed migration guarantee remains false.
+
+- [FIX] Adding `title_card` only to produce’s required-layer vocabulary leaves `series/preflight.py:122` rejecting every newly opted-in Event Horizon plan -> Update both vocabularies and test the actual four-plan preflight path with `required_layers=["title_card"]`.
+
+- [FIX] Required-overlay exception handling does not cover disabled configuration, missing card fields, or the utility’s separate empty-rows copy-through path, and Rock 5 still omits production from shared card validation -> Validate required cards before spending and enforce them in production, including absent/blank/disabled cases that must never reach publish.
+
+- [FIX] Defaulting `year_required` to true preserves existing replenish rules but does not preserve behavior if newly added preflight or production checks reject legacy plans that previously passed -> Scope new delivery validation to explicit opt-in, preserve Flashpoints’ boolean `title_card: true` shorthand, and compare legacy prompts and acceptance behavior for Flashpoints, Footnotes, and Drowned History.
+
+- [FIX] Event Horizon’s changed brief and title-card prompt invalidate its existing prompt golden in `tests/test_fixedframe.py`, an additional suite migration absent from the plan -> Update only Event Horizon’s expected prompt and retain byte-identical expectations for every unaffected series.
+
+- [FIX] Rock 2’s direct utility test bypasses Event Horizon’s actual narration/music mixing, and increased speech-band RMS can come entirely from music while narration remains inaudible -> Exercise the production-to-publish boundary with recognizable speech, measure the delivered artifact, verify narration independently, and include a phone-speaker listening check.
+
+- [FIX] Rock 3’s upper-third brightness difference can pass with unreadable or incorrect text and does not prove production actually uses the required overlay -> Inspect expected text in the final production artifact at phone display size and test that renderer failure prevents the publisher from being called.
+
+- [FIX] The four titles satisfy the stated character, capitalization, emoji, and family-rotation constraints, but none matches the proposed six-pattern vocabulary exactly -> Reconcile the owner-approved exact titles with the prompt templates; this requires consistent wording, not the deferred regex framework.
+
+- [FIX] “Should Not Be Egg-Shaped” presents an expected tidal deformation as physically anomalous, while “the Sky Will Be EMPTY” erases the Local Group that part33’s own premise preserves -> Keep the title initiative but use an accurate anomaly for WASP-12b and explicitly qualify the disappearing distant galaxies. [NASA’s WASP-12b explanation](https://science.nasa.gov/universe/exoplanets/wasp-12b-an-egg-shaped-planet/)
+
+- [FIX] Rock 5 specifies exact equality only for `episode.title`, despite the claimed byte-equality proof for all title-card strings -> Assert both card fields against the exact table values and pin unchanged-plan comparisons to an explicit baseline commit.
+
+No files modified; the suite and reported media experiment were not rerun.
+
+VERDICT: NOT YET
+### Visionary response (Claude)
+
+Kod iddialarinin tamami dosyadan dogrulandi; hicbiri sozune inanilarak kabul edilmedi.
+
+- **ACCEPTED** ROCK 1 unnatural-lab'i etkiliyor -> Hakli. Duzeltme artik OPT-IN:
+  `master_audio(..., true_peak_margin_db=0.0)` varsayilani bugunku aritmetigin birebir
+  aynisi; pay yalnizca `bible.master_true_peak_margin_db` tanimlayan seride devreye
+  girer. "Ilk deneme esitligi yetmez" itirazi da boylece kapaniyor: opt-in olmayan
+  seride ikinci ve ucuncu deneme de degismiyor.
+- **ACCEPTED** teshis fazla genis, dorduncu deneme dayanaksiz -> Iddia daraltildi.
+  "Her bolum patlar" ve "part 33'un sebebi ayni" cikarildi; part 33 icin yalniz
+  "ayni hata imzasi" deniyor, sesi olculmedi. Deneme sayisi 3'te BIRAKILDI.
+  Teshis de inceltildi: sorun sabit tasma degil, ffmpeg'in 0,1 dB rapor cozunurlugunun
+  gercek 0,15 dB araligi EKSIK olcmesi. Mevcut adversarial testin 3,1 dB'lik sabit
+  tasmayla yakinsamasi bu teshisle celismiyor, onu tamamliyor.
+- **ACCEPTED** `target_tp - 3.0` kesme siniri -> `tests/test_master_true_peak_adversarial.py`
+  okundu: 3,1 dB tasmayi telafi eden cozumu GECERLI sayiyor, sinir onu reddederdi.
+  Sinir PLANDAN CIKARILDI.
+- **ACCEPTED** mevcut true-peak testleri degismeden kalamaz -> Artik kalabiliyor:
+  varsayilan pay 0,0 oldugu icin iki test de tek satir degismeden yesil kalir; yeni
+  davranis ayri bir test dosyasinda.
+- **DEFERRED** ebur128 0,1 dB cozunurlugu -1,04'u "-1,0" diye gecirebilir -> Gercek
+  ama ayri bir is; pay bunu pratikte kapatiyor. Issues listesine alindi.
+- **ACCEPTED + DEFERRED** ROCK 0 `_budget_failure` kapisini da aciyor ->
+  `series_runner.py:708` dogrulandi, kapi gercekten v2 ile aciliyor ve muhasebe
+  okunamadiginda `BUDGET_EXHAUSTED` deyip kuyrugu ilerletiyor. Gercek event-horizon
+  verisiyle OLCULDU: asgari 300, kalan 900, kapi tetiklenmiyor. Olculen degerler
+  ROCK 0 proof'una cakildi; latent duzeltme Issues'a.
+- **ACCEPTED (test)** migration `needs_human` yapip `next_part` ilerletmeyebilir ->
+  Senaryo teste eklendi ve event-horizon kayitlarinda boyle bir kayit OLMADIGI
+  dogrulaniyor. Duzeltme Issues'a.
+- **ACCEPTED** `preflight.py:122` ayri bir katman sozlugu tutuyor -> Dogrulandi,
+  `{"hook_teaser", "music", "native_audio"}`. Yalniz produce'u guncellemek her yeni
+  event-horizon planini reddederdi. IKI sozluk de guncelleniyor ve dort planin
+  gercek preflight yolu test ediliyor.
+- **ACCEPTED** zorunlu katman bos/eksik kunyeyi yakalamiyor -> Ucretli isten ONCE
+  preflight dogrulamasi eklendi (bos/eksik/kapali kunye kredi harcanmadan reddedilir).
+- **ACCEPTED** flashpoints'in `"title_card": true` kisayolu -> Korunuyor ve test edildi.
+  Ayrica uc eski serinin bugun gecen ornek planlarinin degisiklikten sonra da gectigi
+  test ediliyor.
+- **ACCEPTED** `tests/golden/fixedframe_prompts.json` -> `test_fixedframe.py:35`
+  okundu, `event-horizon` golden listesinde. YALNIZ onun beklenen prompt'u guncellenir.
+- **PARTIALLY ACCEPTED** ROCK 2 proof'u anlatimi kanitlamiyor -> Hakli kismi kabul:
+  olculen sey artik seviye degil ANLATIM/MUZIK ORANI (master oncesi ve sonrasi 1 dB'den
+  fazla degismemeli). "Telefon hoparlorunde dinleme kontrolu" bir CI testi olamaz;
+  REDDEDILDI. Yerine: Level 10 incelemesinde master oncesi/sonrasi gercek ses ornekleri
+  Ihsan'a gonderilir, kulak karari onun.
+- **ACCEPTED** kunye piksel testi okunabilirligi kanitlamiyor -> Test farksal hale
+  getirildi (bos baslikla ayni render belirgin daha az mürekkep uretmeli) ve Level 10'da
+  kare gozle incelenir.
+- **ACCEPTED** dort baslik ilan edilen kaliplara uymuyor -> Kalip (6) tekil/cogul ozne
+  ve duz eylemi kapsayacak sekilde yeniden yazildi; dort baslik da ona uyduruldu.
+- **ACCEPTED** iki baslik fakta aykiri -> Ikisi de degistirildi.
+  part 32: yumurta sekli gelgitin BEKLENEN sonucu (NASA zaten "egg-shaped" diyor),
+  anomali degil; baslik yildizin gezegeni yutmasina cevrildi.
+  part 33: "sky will be EMPTY" bolumun kendi onermesiyle (Yerel Grup kalir) celisiyordu;
+  baslik ve kunye "distant galaxies" diyerek duzeltildi.
+- **ACCEPTED** ROCK 5 yalniz `episode.title` icin birebir esitlik ariyordu -> Her iki
+  kunye alani da birebir esitlikle test ediliyor; degismeyen alanlarin karsilastirmasi
+  **9eec629** temel commit'ine sabitlendi.
+
