@@ -145,3 +145,42 @@ Yapisal: eski Rock 2, Rock 6 ya birlestirildi. 7 rock -> 6 rock.
 Her proof artik somut test dosyasi adlandiriyor; olmayan dosyalar teslimat olarak isaretli.
 REDDEDILEN: yok.
 
+
+## Round 3 , TAMAMLANAMADI
+
+Codex kullanim limiti doldu. Akistaki hata birebir:
+```
+"error":{"message":"You've hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro)
+```
+`codex exec` exit=1, `-o` dosyasi HIC olusmadi, stderr bos.
+Akis dosyasi 214 KB, yani Codex 7 dakika calisti ve sonunda kesildi.
+Sozlesme geregi bu BASARISIZLIK sayilir (exit 0 + dolu `-o` + `VERDICT:` sarti).
+Sahte onay uretilmedi.
+
+Model/effort notu: `~/.codex/config.toml` -> `model = "gpt-5.6-sol"`,
+`model_reasoning_effort = "high"`. Yuksek effort limiti hizli yakiyor.
+
+### Codex'e sorulan ama cevapsiz kalan sorular
+1. Rock 1 denge kontrolu uygulanabilir mi (stem ayrilabilir mi)
+2. Rock 2'nin insan kararina bagimliligi plani bloke eder mi
+3. Rock 3 karantinasi rotasyon degismezligini bozar mi
+4. Rock 6 icin `_try()` dogru dikis yeri mi
+5. Hala kirikken gecebilecek proof var mi
+6. Alti rock tek cevrim icin fazla mi
+
+### Soru 1 Visionary tarafindan KENDI BASINA cevaplandi
+
+`series/produce.py` ara dosyalari AYRI AYRI yaziyor:
+```
+produce.py:592   narrated = out.parent / f"{out.stem}_narrated.mp4"   # muzikten ONCE
+produce.py:651   music_out = out.parent / f"{out.stem}_music.mp4"     # muzik eklenmis
+```
+Ayrica `audio_path` ham anlatim dosyasi, `music_path` ham muzik dosyasi.
+
+Yani stem'ler ayrilabilir. `_narrated.mp4` ile `_music.mp4` arasindaki
+integrated loudness farki anlatim/muzik dengesini DOGRUDAN verir.
+`music_volume` 0,28 -> 0,50 degisiminin etkisi bu farkta gorunur.
+**Rock 1'in denge kontrolu uygulanabilir, ayri stem render gerekmiyor.**
+Codex'in "stem ayrilamayabilir" endisesi yersiz.
+
+Kalan bes soru ACIK.
