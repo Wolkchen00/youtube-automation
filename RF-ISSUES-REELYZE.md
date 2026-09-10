@@ -115,3 +115,16 @@ Duraklatilmis seri uretim yapamaz, dogrulama ciktisi da veremez.
 `master_lufs` eklenecekse seri yeniden aktiflestirildiginde ele alinmali.
 Olculen durumu kayda gecsin: -16,1 / -17,1 LUFS, **true peak +0,2 ve +0,7 dBFS**
 (yani dijital kirpma). Seri geri acilirsa bu ilk duzeltilecek sey.
+
+## I-10 , Denge olcumunun surekliligi (r5)
+
+Rock 1 tek sabit replay ile A/B yapiyor. Bu, o bolumun muzik yatagi icin gecerli
+bir sonuc verir ama **gelecekteki benzersiz ve loudness-normalize edilmeyen
+Suno/Lyria yataklarini temsil etmez.** Sonraki bolumlerde denge yeniden bozulabilir.
+
+Iki cozum yolu, ikisi de bu cevrimin disinda:
+1. Muzik girdisini miks oncesi sabit seviyeye normalize et (uretim tarafinda tek sefer)
+2. Ayni denge olcumunu her bolumde **uretici kapisi** yap (surekli, ama her bolume maliyet)
+
+Rock 1 tek seferlik dogrulamadir, surekli koruma DEGILDIR. Bu ayrim planda ve
+manifest'te acikca yazili olmali ki ileride yanlis guven uretmesin.

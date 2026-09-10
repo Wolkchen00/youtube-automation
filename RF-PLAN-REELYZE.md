@@ -73,10 +73,20 @@ TTS-etkin pencere yaklasimi **native-sessiz anlatim profiline genisletilir**.
 > bulundugu bir mikste yapildi; hedef seride miks sadece anlatim + muzik, yani
 > ayni 0,50 anlatima karsi ORANTILI OLARAK DAHA YUKSEK.
 
-**Sabit esik (plana yazildi, teste birakilmadi):**
-TTS-etkin pencerelerde muzik yataginin medyan seviyesi, taban (alansiz) kosuya gore
-**+3,0 dB'den fazla artmayacak**. Asarsa Rock 1 KALIR; `music_volume` veya
-`native_mix_level` ayrica ayarlanir.
+**Sabit esik (r5 duzeltmesi , mevcut araca hizalandi):**
+Onceki taslakta uydurdugum `+3,0 dB` kalibrasyonsuzdu ve `tools/audio_master_check.py`
+zaten **1,5 dB** kullaniyor. Ayrica tek basina medyan, kisa sureli kelime maskelemesini
+gizler. Iki olcut birden:
+
+| Olcut | Sinir |
+|---|---|
+| TTS-etkin pencerelerde muzik yataginin **medyan** artisi (tabana gore) | <= **1,5 dB** |
+| Ayni pencerelerde **p95** artisi | <= **3,0 dB** |
+| Esigi asan pencere **orani** | <= **%5** |
+
+Herhangi biri asilirsa Rock 1 KALIR; `music_volume` veya `native_mix_level` ayrica
+ayarlanir. Esikler etiketlenmis dinleme ornekleriyle kalibre edilir ve kalibrasyon
+kaniti manifest'e yazilir.
 
 **Done looks like:**
 1. Alan eklendi (`series` blogu, `"master_lufs": -14`).
@@ -136,13 +146,22 @@ Olculemeyen "bilinmeyen"dir ve **fail-closed**. Tamsayi puan yok, boyut vekili y
 ### 3b , Sozlesme kaynaklari (r4)
 
 **Artefakt olcumunden sozlesme TURETMEK YASAK.** Her aktif hat ve teslimat profili
-icin depoya kayitli, surumlu sozlesme matrisi:
-```
-unnatural-lab / event-horizon / flashpoints : 1080x1920, 30 fps, I=-14+/-1, TP<=-1
-AImagine-Fear                                : 720x1280,  24 fps, I=-14+/-1, TP<=-1
-(4K master profili varsa ayri satir)
-```
-Factory testi: her hat/profil icin sozlesme uretilebiliyor ve alanlari tam.
+icin depoya kayitli, surumlu sozlesme matrisi. **Sure ve tolerans ACIKCA yazilir**
+(r5: validator bunlari zorunlu sayiyordu ama matris gostermiyordu):
+
+| Hat / profil | Geometri | fps | Sure | Tolerans | I | TP |
+|---|---|---|---|---|---|---|
+| `unnatural-lab` | 1080x1920 | 30 | `duration_band` (bible'da VAR) | +/-1,5 sn | -14 +/-1 | <= -1 |
+| `event-horizon` | 1080x1920 | 30 | **plan/politika tabanli** (bible'da YOK) | +/-1,5 sn | -14 +/-1 | <= -1 |
+| `flashpoints` | 1080x1920 | 30 | **plan/politika tabanli** (bible'da YOK) | +/-1,5 sn | -14 +/-1 | <= -1 |
+| `AImagine-Fear` | 720x1280 | 24 | **sabit 15 sn** | +/-1,5 sn | -14 +/-1 | <= -1 |
+| 4K master profili (varsa) | ayri satir | | | | | |
+
+`duration_band` alani sadece `unnatural-lab/bible.json`'da var; diger ikisinde YOK.
+Bu yuzden sure kurali onlar icin **artefakttan degil, matristen** gelir.
+
+Factory testi: her hat/profil icin sozlesme uretilebiliyor, alanlari tam, ve
+artefakt olcumunden turetilmedigi assert ediliyor.
 
 ### 3c , Kapinin yeri
 
@@ -151,9 +170,44 @@ Factory testi: her hat/profil icin sozlesme uretilebiliyor ve alanlari tam.
 Bu tek yerlesim su cagiranlarin HEPSINI kapsar:
 `AImagine-Fear/tools/yayinla.py:119`, `series_runner:336` (`_try`), `core/uploader.py:611`.
 
-Sozlesme `upload_to_platform`'a parametre olarak gecer; **yoksa fail-closed durur.**
+**r5 duzeltmesi , cagirici gocu TAMAMEN kalkmiyor.** "Tek yerlesim her seyi cozer"
+demistim, fazla iddialiydi: cagiricilar hala sozlesmeyi TASIMAK zorunda.
+Ama is kuculuyor: cagirici **sadece guvenilir bir sozlesme kimligi/profili** verir
+(`contract_id`), matrisi `upload_to_platform` kendi icinde yukler. Boylece cagirici
+tarafinda tasinan sey tek bir string.
+
+Atomik gecirilecek cagirilar (dogrudan ve gecisli):
+`AImagine-Fear/tools/yayinla.py:119`, `series_runner:336` (`_try`),
+`core/uploader.py:611` (yeniden yukleme), ve `publish_video`.
+Sozlesme kimligi yoksa **fail-closed durur.**
+
+### 3c-ek , teslimat anlik goruntusu (r5)
+
+**Mevcut hata:** `core/uploader.py:109-111`
+```python
+delivery = video_path.parent / f"{video_path.stem}_delivery.mp4"
+if delivery.exists() and delivery.stat().st_size > 0:
+    return delivery
+```
+Cache anahtari kaynak dosyanin ADI, icerigi degil. Ayni yoldaki kaynak yeniden
+uretilirse ONCEKI icerigin delivery kopyasi donuyor ve **yanlis video yukleniyor.**
+Bu plandan bagimsiz, canli bir hata.
+
+**Duzeltme:** delivery cache'i **tam kaynak hash'i** ile anahtarlanir.
+Dogrulama ve hash'ten sonra **icerik-adresli, degismez bir anlik goruntu** uretilir;
+butun POST denemeleri YALNIZ o anlik goruntuyu acar (r5: dosya her retry'da yeniden
+aciliyordu, arada kaynak degisirse kanitlanandan farkli baytlar yuklenebilirdi).
+
+Testler: ayni yoldaki kaynak degisince yeniden kodlandigi; dogrulama ile POST
+arasinda kaynak mutasyonu olsa bile yuklenen baytlarin anlik goruntu oldugu.
 
 ### 3d , Red, siradan hatadan AYRI
+
+**r5 duzeltmesi , tipli sonuc her katmanda tasinmali.** Mevcut kod `if res` ve
+`bool(res)` ile basari testi yapiyor; `_publish_part()` `list[str]` donduruyor.
+Tipli red bu kontrollerde **basari sayilabilir veya tamamen kaybolabilir.**
+Ayristirilmis sonuc tipi butun katmanlara tasinir ve reddin ASLA basari sayilmadigi
+uc yerde ayri ayri test edilir: `series`, `Fear` (basari sayaci dahil), `video_monitor`.
 
 Dogrulama reddi tipli `validation_rejected` sonucu dondurur:
 - 90 saniyelik ic yeniden deneme yoluna DUSMEZ
@@ -169,6 +223,12 @@ Dogrulama reddi tipli `validation_rejected` sonucu dondurur:
   reddedilen deneme rotasyonu ve ayni-gun kilidini tuketmemeli
 - **Yazma hatasi yayin-engelleyicidir** (sessizce yutulmaz)
 - Ilk yuklemeden ONCE yazilir
+- **r5 duzeltmesi , "kalici" iddiasi indirildi.** Yerel JSONL yuklemeden once
+  yazilabilir, ama workflow sonundaki git persist basarisiz olursa yayin gerceklesmis
+  olur ve kanit kaybolur. Ikisinden biri:
+  (a) yuklemeden once basariyla onaylanan dayanikli depoya yaz, ya da
+  (b) "kalici" iddiasini kaldir ve **persist basarisizligini AYRI bir kritik ihlal**
+  olarak raporla. Bu planda (b) secilir; (a) icin altyapi yok.
 - **Tam 64 haneli kucuk-hex sha256.** Fear'in `yayinla.py:46` `sha()` fonksiyonu
   `hexdigest()[:16]` ile kirpiyor; kanitta kirpilmis digest KULLANILMAZ.
   Yuklenen gercek dosyayla birebir eslesme sarti.
@@ -182,6 +242,18 @@ suresiz kapali kalabilir). Aktivasyon Rock 1 ve Rock 2 bittikten SONRA, tek adim
 
 ### 3g , `.github/workflows/fear-slide-hazir.yml` ffmpeg kurar
 Su an sadece `actions/setup-python@v5`; ffprobe olmadan kapi calisamaz.
+
+### 3h , Mevcut testler ve CI (r5)
+
+Kapi `upload_to_platform` icine girdigi icin **sozlesmesiz uploader cagrisi yapan
+mevcut testler kirilir.** En az ikisi: `tests/test_async_upload_confirmation.py` ve
+`tests/test_publish_duplicate_gate.py`. Bunlar sozlesmeli fixture'lara gecirilir.
+
+Ayrica r5 taslaginda "kok testleri CI'a ekle" sartini dusurmusum. Geri konuyor:
+**adlandirilmis bir CI adimi** kok sozlesme testlerini calistirir
+(su an sadece `AImagine-Fear/tests` kosuyor).
+
+**Kabul:** tam test paketi yesil, sadece yeni dosyalar degil.
 
 **Proof:** `tests/test_medya_sozlesmesi.py` + `tests/test_yayin_siniri.py` (ikisi de yeni).
 

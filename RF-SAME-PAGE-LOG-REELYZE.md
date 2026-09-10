@@ -398,3 +398,27 @@ findings to the user. A flagged deadlock beats a fake approval."
 Yakinsama: 29 -> 17 -> 19 -> 14 -> 9 bulgu. Toplam 88, hicbiri sessizce dusurulmedi,
 reddedilen 0. Son turda KILL yok, temel varsayim itirazi yok; dokuzu da uygulama
 detayi. Plan basladigi yerden cok daha saglam ama SAME PAGE alinmadi.
+
+### USER OVERRIDE (10 Eylul 2026)
+
+`USER OVERRIDE: 9 bulguyu uygula, Rock 1'i insa et.`
+
+Ihsan tur sinirinda karari verdi: kalan dokuz bulgu plana islenip toplanti kapatilacak,
+insaya Rock 1 ile baslanacak. Dokuzunun hicbiri yeni tasarim karari gerektirmiyordu.
+
+**Uygulananlar:**
+- Esik `+3,0 dB` -> mevcut araca hizalandi: medyan <= 1,5 dB, p95 <= 3,0 dB,
+  ihlal orani <= %5, kalibrasyon kaniti manifest'te
+- Sozlesme matrisine sure ve tolerans acikca yazildi; `duration_band` sadece
+  `unnatural-lab`'da oldugu icin diger ikisinde sure matristen gelir
+- Cagirici gocu iddiasi duzeltildi: cagirici `contract_id` tasir, matrisi uploader yukler
+- `_delivery_copy()` cache'i tam kaynak hash'iyle anahtarlanir; dogrulama sonrasi
+  icerik-adresli degismez anlik goruntu, butun POST denemeleri yalniz onu acar
+- Tipli `validation_rejected` butun katmanlarda tasinir; `if res` / `bool(res)` /
+  `list[str]` yollarinda basari sayilmadigi uc yerde test edilir
+- Kanit "kalici" iddiasi indirildi: persist basarisizligi AYRI kritik ihlal
+- Mevcut uploader testleri sozlesmeli fixture'a gecirilir; adlandirilmis CI adimi
+  kok sozlesme testlerini calistirir; kabul kriteri TAM paket yesil
+- Tek sabit replay'in surekli koruma OLMADIGI I-10 olarak kayda gecti
+
+**Toplanti KAPANDI.** 5 tur, 88 bulgu, reddedilen 0.
