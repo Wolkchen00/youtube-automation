@@ -333,3 +333,57 @@ Acik kalan bes bulgu icin 11 yeni madde verdi. **Onu kabul, biri reddedildi.**
   **profil onayi teknik bir izindir** (bu kombinasyon calisiyor mu), **video onayi
   ayri bir urundur** (bu video iyi mi) ve o issue #6'daki anlamsal kapinin isi.
   Per-video sha baglamasi yalnizca `--yayinla-mevcut` yolunda zorunlu tutuldu.
+
+## Round 4
+
+### Integrator bulgulari (Codex, AYNEN)
+
+```
+Per-video SHA onayını normal yayın yolunda zorunlu tutmama kararını kabul ediyorum; bunun için kapsam dışında ayrı bir teknik itirazım yok. Profil onayı ile ertelenmiş anlamsal kalite kapısı artık açıkça ayrılmış.
+
+Kalan somut kırılmalar nedeniyle plan henüz yazıldığı haliyle hazır değil:
+
+- [FIX] Rock 1b matrisi dört elemanlı `(model, sure, cozunurluk, fps)` anahtar kullanırken Rock 2 hâlâ üç elemanlı anahtar tarif ediyor ve buna uyan uygulama bütün kombinasyonları reddeder -> Tek bir ortak anahtar oluşturucu kullan ve aynı model/süre/çözünürlükte farklı FPS durumlarını gerçek preflight yolundan test et.
+- [FIX] `uretim.json` şemasında caption ve TITLE bulunmadığı halde `--yayinla-mevcut` bunları yalnız o kayıttan okumak zorunda olduğundan belirtilen üretici ve tüketici sözleşmeleri uyuşmuyor -> Kayda caption, seçilmiş başlık ve etiketlerin üretim anındaki değerlerini ekle; sonradan rota değişse bile mevcut master’ın aynı metadata ile yayımlandığını test et.
+- [FIX] Her üretimin aynı `out/<slug>/uretim.json` dosyasını değiştirmesi önceki master’ın kanıtını silerek sonradan onaylanmasını veya yayımlanmasını engeller -> Üretim kaydını master SHA’sı veya üretim kimliği altında değişmez sakla ve aynı slug için A ardından B üretildikten sonra A’nın doğru kaydıyla yayımlanabildiğini test et.
+- [FIX] Üretim kaydı denetimde kullanılan profil hash’ini taşımadığı için profil değiştikten sonra eski `denetim_sonucu=başarılı` kaydı yeniden onaylanıp yeni profil hash’iyle yetkilendirilebilir -> Denetim anındaki profil hash’ini üretim kaydına yaz ve `--onayla` sırasında güncel hash ile eşleşmesini veya yeni denetimin başarıyla tamamlanmasını zorunlu tut.
+- [FIX] Bu worktree’de `core.autocrlf=true` olduğundan `profil.py` dosyasının ham bayt hash’i Windows ile Linux checkout’larında değişebilir ve geçici dizine dosya kopyalayan mevcut proof bunu yakalamaz -> Hash öncesi satır sonlarını LF’ye normalize et veya dosya için LF garantisi koy; CRLF/LF kopyalarının aynı, gerçek profil değişikliğinin farklı hash verdiğini test et.
+- [FIX] İlk atomik commit’teki Rock 1b üretim kaydında PALET’i ve mevcut-yayın proof’unda TITLE’ı zorunlu tutarken bu alanlar ancak Rock 4 ve Rock 5’te oluşturuluyor -> Üretim kaydı şemasının ve proof’larının hangi rock’ta genişlediğini belirt veya gerekli metadata göçünü ilk commit’e taşı; her teslim sınırında gerçek rota dosyalarıyla testlerin geçmesini şart koş.
+
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+`git status --porcelain` bos. Codex per-video sha reddimi kabul etti ("kapsam disinda
+ayri bir teknik itirazim yok"). Kalan alti bulgunun **hepsi kabul edildi**; altisi da
+benim planimin kendi ic tutarsizligiydi, yeni kapsam degil.
+
+- ACCEPTED , **CRLF/LF hash tuzagi.** Dogrulandi ve bu ucuncu insa-kiran hataydi:
+  ```
+  core.autocrlf = true ,  .gitattributes YOK
+  gunluk.py calisma agacinda: 198 CRLF, 0 yalin LF
+  ```
+  `profil.py`'nin HAM BAYT hash'i Windows'ta bir, Linux runner'da baska cikardi.
+  Onay CI'da **kalici olarak gecersiz** olurdu ve cron her sabah yayini reddederdi ,
+  yani kanali korumak icin koydugum kapi kanali oldururdu. Hash artik satir sonu
+  normalize edilerek (`\r\n` -> `\n`) hesaplaniyor, ve CRLF/LF kopyalarinin ayni
+  hash'i verdigi test ediliyor.
+- ACCEPTED , matris anahtari Rock 1b'de dort elemanli, Rock 2'de hala uc elemanliydi ->
+  boyle bir uygulama **butun kombinasyonlari reddederdi**. Tek ortak uretici
+  `profil.matris_anahtari(...)` eklendi, iki yol da onu cagiriyor, ve ayni
+  model/sure/cozunurlukte fps 24 gecip fps 30 kaldigi gercek preflight yolundan
+  test ediliyor.
+- ACCEPTED , tek `uretim.json` her uretimde uzerine yaziliyordu, onceki master'in
+  kaniti silinir ve o master bir daha ne onaylanabilir ne yayinlanabilirdi ->
+  kayit artik `out/<slug>/uretim/<master_sha>.json`, degismez. "Ayni slug icin A
+  sonra B uretilir, A hala yayinlanabilir" testi eklendi.
+- ACCEPTED , uretim kaydi denetim anindaki profil hash'ini tasimiyordu, profil
+  degistikten sonra eski basarili kayit yeni ayarlari yetkilendirebilirdi ->
+  `profil_hash` alani eklendi ve `--onayla` guncel hash ile eslesme sart kosuyor.
+- ACCEPTED , `--yayinla-mevcut` metadata'yi yalniz kayittan okumak zorundaydi ama
+  kayitta caption/TITLE yoktu -> sema tablosu eklendi; ilk commit'te slug kayittan
+  gelip caption `CAPTION.txt`'ten okunuyor (slug dogru oldugu icin rota da dogru),
+  Rock 5'ten sonra caption/baslik/etiket dogrudan kayittan.
+- ACCEPTED , ilk atomik commit palet ve TITLE'i sart kosuyordu ama o alanlar Rock 4
+  ve 5'te olusuyor -> `sema_surumu` alani ve rock sinirlarinda buyuyen sema tablosu
+  eklendi; ilk commit'in testleri palet ya da TITLE istemiyor.

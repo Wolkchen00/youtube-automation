@@ -4,7 +4,7 @@ Tarih: 10 Eylul 2026 (Los Angeles)
 Dal: `codex-fear-duzelt` (worktree; ana agacta baska oturumlarin islenmemis isi var)
 Kaynak analiz: `AImagine-Fear/REELYZE-RAPOR.md`
 Taban: 9eec629, `python -m pytest AImagine-Fear/tests -q` = 28 passed (olculdu 07:50 PDT)
-Revizyon: **r4** (Codex round 1 + 2 + 3, 54 bulgu islendi , `RF-SAME-PAGE-LOG-FEAR-DUZELT.md`)
+Revizyon: **r5** (Codex round 1-4, 60 bulgu islendi , `RF-SAME-PAGE-LOG-FEAR-DUZELT.md`)
 
 ## Core Focus (tek cumle)
 
@@ -93,6 +93,7 @@ degeri soyler. 30 fps'e cikmak prompt isi degil model degisikligi isidir -> issu
 | **27/27 teslim 24 fps** | `yayin.jsonl` -> `"fps": 24.0`, 30 fps HIC yok |
 | Onay dosyasi CI'ya tasinmali | `.github/workflows/fear-slide.yml` `persist_state.sh` yalniz `yayin.jsonl` + `last_run.json` tasiyor |
 | sha kapisi kosulsuz | `tools/yayinla.py:80-87` basarisiz denemede yazilan sha'yi da blokluyor |
+| **CRLF/LF hash tuzagi** | `core.autocrlf=true`, `.gitattributes` YOK; `gunluk.py` calisma agacinda 198 CRLF / 0 yalin LF |
 
 ---
 
@@ -186,15 +187,37 @@ ortak). Goruntunun kanona ICERIK olarak uydugunu dogrulamak.
 - **`"kanarya"` bir kombinasyon YAYINLANAMAZ.** `gunluk.py` uretimden ve krediden ONCE
   bakar; kanarya ise ya `--yayinlama` ister ya da durur. Cron da bu yola girer, yani
   main'e 1080p girse bile ertesi sabah **sessiz yayin olmaz**, kosu acik mesajla durur.
-- **Uretim kaydi (`out/<slug>/uretim.json`)**, her uretimde yazilir:
-  `{model, istenen_profil, slug, beklenen_sure, palet, olculen: {genislik, yukseklik,
-   fps, sure}, denetim_sonucu, master_sha, ts}`.
-  Onay ve `--yayinla-mevcut` **yalniz bu kayittan** beslenir. Boylece denetimden KALMIS
-  ya da baska modelle uretilmis bir dosya dogru kombinasyon etiketiyle onaylanamaz.
+- **Tek ortak anahtar uretici:** `profil.matris_anahtari(model, sure, cozunurluk, fps)`.
+  Matrise bakan HER yol (Rock 1b onayi, Rock 2 onkontrolu) bu fonksiyonu cagirir.
+  Iki yerde elle demet kurulmaz; aksi halde biri uc elemanli biri dort elemanli anahtar
+  uretir ve **butun kombinasyonlar reddedilir.**
+- **Uretim kaydi**, her uretimde **master sha'si altinda DEGISMEZ** yazilir:
+  `out/<slug>/uretim/<master_sha>.json`. Tek bir `uretim.json` OLMAZ , ayni slug icin
+  B uretilince A'nin kaniti silinir ve A bir daha ne onaylanabilir ne yayinlanabilirdi.
+  Icerik:
+  `{sema_surumu, model, istenen_profil, profil_hash, slug, beklenen_sure,
+    olculen: {genislik, yukseklik, fps, sure}, denetim_sonucu, master_sha, ts}`
+  **`profil_hash` denetim ANINDAKI profildir.** `--onayla` bunun guncel hash ile
+  eslesmesini sart kosar; yoksa profil degistikten sonra eski bir
+  `denetim_sonucu=basarili` kaydi yeni ayarlari yetkilendirebilirdi.
+  Onay ve `--yayinla-mevcut` **yalniz bu kayittan** beslenir.
+- **Sema ROCK SINIRLARINDA buyur** (`sema_surumu` alani bunu tasir):
+  | Rock | Eklenen alanlar | O asamada `--yayinla-mevcut` metadata kaynagi |
+  |---|---|---|
+  | 1+1b+3 (ilk commit) | yukaridaki temel alanlar | `out/<slug>/CAPTION.txt`, baslik = caption ilk satiri (BUGUNKU davranis) |
+  | 4 | `palet` | ayni |
+  | 5 | `caption`, `secilen_baslik`, `etiketler` | **kayittan** |
+  Tuketici kendi asamasinda VAR OLAN alanlari okur; ilk commit'in testleri palet ya da
+  TITLE istemez (o alanlar henuz yok). Her teslim sinirinda testler gercek rota
+  dosyalariyla kosar.
 - Onay kalici: `AImagine-Fear/profil_onay.json`. Icerigi: onaylanan
   `(model, sure, cozunurluk, fps)`, onaylanan master'in sha'si, **ve `profil.py`
-  iceriginin hash'i.** Profil dosyasi degisirse onay otomatik GECERSIZ olur
-  (eski onayin yeni ayarlari yetkilendirmesi engellenir).
+  iceriginin hash'i.** Profil dosyasi degisirse onay otomatik GECERSIZ olur.
+  **Hash satir sonu normalize edilerek hesaplanir** (`\r\n` -> `\n`, sonra sha256).
+  Sart, tercih degil: bu depoda `core.autocrlf=true` ve `.gitattributes` YOK
+  (`gunluk.py` calisma agacinda 198 CRLF, 0 yalin LF). Ham bayt hash'i Windows'ta
+  bir, Linux runner'da baska cikar; onay CI'da **kalici olarak gecersiz** olur ve
+  cron her sabah yayini reddeder.
   Ihsan kanaryayi gozle gordukten sonra `--onayla <master>` calistirir; komut once
   uretim kaydini dogrular (denetim GECMIS mi, model ayni mi, sha tutuyor mu),
   sonra kombinasyonu `"dogrulandi"` yapar.
@@ -210,9 +233,11 @@ ortak). Goruntunun kanona ICERIK olarak uydugunu dogrulamak.
   BASARISIZ. Kosuya ozel yol sart: `kontrol.py` ffmpeg cikis kodunu yok sayiyor, ve
   sabit bir yolda onceki kosudan kalan dolu bir PNG yeni basarisizligi gizlerdi.
 - `tools/gunluk.py --yayinla-mevcut <master>`: onaylanmis bir master'i uretim yapmadan
-  yayinlar. **Slug, caption, TITLE ve palet `sirdaki()`'den DEGIL o master'in uretim
-  kaydindan** gelir; yoksa siradaki rota degistiginde onaylanmis videoya baska rotanin
-  metadata'si takilirdi. Sha `profil_onay.json` ile eslesmezse durur.
+  yayinlar. **Slug `sirdaki()`'den DEGIL o master'in uretim kaydindan** gelir; yoksa
+  siradaki rota degistiginde onaylanmis videoya baska rotanin metadata'si takilirdi.
+  Caption/baslik/etiket kaynagi yukaridaki sema tablosuna gore: ilk commit'te
+  `out/<slug>/CAPTION.txt` (slug kayittan geldigi icin yine DOGRU rota), Rock 5'ten
+  sonra dogrudan kayittan. Sha `profil_onay.json` ile eslesmezse durur.
 
 **REDDEDILEN (Codex round 3):** "her videonun kendi SHA onayi zorunlu olsun".
 Bu, gunluk otomatik kanali bitirir , kanal bugune kadar zaten insansiz kosuyor ve
@@ -243,6 +268,14 @@ kendi testiyle gelir.
   yine yakalanir** (kosuya ozel yolun kaniti; sabit yol olsaydi test gecerdi)
 - taze bir checkout'ta (gecici dizine kopyalanan depo) ayni `profil_onay.json` yuklenir
   ve yayin yolu acik kalir (CI kaniti)
+- **`profil.py`'nin CRLF ve LF kopyalari AYNI hash'i verir; gercek bir icerik
+  degisikligi FARKLI hash verir** (autocrlf tuzaginin kaniti)
+- **ayni matris anahtari iki yerde elle kurulmaz:** Rock 2 onkontrolu ile Rock 1b
+  onayi ayni `matris_anahtari()` ciktisini kullanir; ayni model/sure/cozunurlukte
+  fps 24 GECER, fps 30 KALIR (gercek preflight yolundan)
+- **ayni slug icin A sonra B uretilir; A'nin kaydi hala okunur ve A yayinlanabilir**
+  (degismez kayit kaniti; tek `uretim.json` olsaydi test KALIRDI)
+- uretim kaydindaki `profil_hash` guncel profille uyusmuyorsa `--onayla` REDDEDER
 - `--dry` bugun yayin VARKEN bile alanlari basar, 0 doner, `requests` HIC cagrilmaz
 
 ---
@@ -257,8 +290,9 @@ okuyup oldugu gibi gondermek de yanlis: modelin sinirlari bilinmiyor (B) ve
 - Sure `routes/<slug>.md`'den **`build.load_route()` ile** okunur (`parse_sections`
   DEGIL: alanlar ilk `## `'den once geliyor). Import icin `KOK` `sys.path`'e eklenir;
   betik calistirildiginda `sys.path`'e `tools/` giriyor, `AImagine-Fear/` girmiyor.
-- Kesirli, sifir, negatif sure ve matriste karsiligi olmayan `(model, sure, cozunurluk)`
-  **kredi harcanmadan ONCE** durur.
+- Kesirli, sifir, negatif sure ve matriste karsiligi olmayan kombinasyon **kredi
+  harcanmadan ONCE** durur. Anahtar **`profil.matris_anahtari(...)` ile kurulur**,
+  elle demet YAZILMAZ , Rock 1b ile ayni dort elemanli anahtar (fps DAHIL) kullanilir.
 - `SIRA` yalniz matriste `"dogrulandi"` ya da `"kanarya"` karsiligi olan sureli
   rotalari icerir. `toronto-cn-red-dusk` (20), `vegas-strat-blue-rain` (20),
   `vegas-strat-blue-rain-25` (25) havuz DISINDA. Sebep kod icinde tek satir:
