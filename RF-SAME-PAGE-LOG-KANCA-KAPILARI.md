@@ -406,3 +406,75 @@ VERDICT: SAME PAGE
 Tur 5 sekiz bulgunun sekizini de karsilanmis buldu ve VERDICT: SAME PAGE verdi.
 Meeting tur 5'te, yani sert tavanda kapandi. Toplam 62 bulgu islendi
 (Codex 23+20+11 = 54, Nemotron 8). Motorun 1. kurali saglandi: yapim baslayabilir.
+
+---
+
+## BUILD: ROCK A , master true-peak yakinsamasi
+
+Integrator: Nemotron (nvidia/nemotron-3-ultra-550b-a55b), workspace-write.
+Seviye-10 inceleme: Claude, tam diff okundu, kanit kendi kosuldu.
+
+### Ne oldu
+
+1. Ilk yapim cagrisi HICBIR SEY yazmadi: dort dosya okudu, "simdi uygulayayim"
+   dedi ve arac cagirmadan durdu. Harness "model arac cagirmayi birakinca"
+   dongusu kapaniyor; sozlesmenin sonundaki "STOP CALLING TOOLS" satiri erken
+   tetiklendi.
+2. Devam turu bos rapor dondu (exit 1). Kok sebep MEKANIK: harness'in write_file
+   araci dosyayi TAMAMEN yaziyor ("Bir dosyayi TAMAMEN yazar") ve
+   core/ffmpeg_tools.py 67.690 bayt. 20 satirlik bir duzeltme icin 1682 satirin
+   hatasiz yeniden uretilmesi gerekiyordu.
+3. ROCK A, Ihsan'in karariyla YENIDEN BOLUNDU: karar mantigi saf bir fonksiyona
+   cikarildi (core/master_policy.py, YENI dosya = harness'in guclu oldugu is),
+   baglama duzenlemesi Vizyoner'e birakildi. Bunun yan faydasi: Codex'in
+   "mock'lanmis olcum duzeltilmemis kodu da yesil gosterir" itirazi saf
+   fonksiyonda tamamen ortadan kalkiyor.
+
+### Uretilen
+
+- core/master_policy.py (Nemotron): MasterDecision + next_master_step, saf,
+  I/O yok. Uc kural: emniyet marji (overshoot + 0.2, asgari adim 0.3),
+  kumulatif sinir, ve LUFS-tek-basina basarisizliginda DERHAL stop.
+- tests/test_master_policy.py (Claude, bagimsiz): 27 saldirgan test.
+- tests/test_master_true_peak_convergence.py (Claude): 11 baglama testi.
+- core/ffmpeg_tools.py (Claude): dongu karari politikaya devredildi,
+  telemetri logs/ altina yaziliyor, for/else sessiz basariya karsi fail-closed.
+
+### Seviye-10 incelemede YAKALANANLAR
+
+- **NaN sizintisi (benim testim yakaladi).** Nemotron'un ilk surumu NaN
+  measured_tp'yi limiter tavanina sizdiriyordu: `MasterDecision(action='retry',
+  limiter_db=nan)`. Cagiran taraf o sayiyi ffmpeg filtre dizesine basiyor, yani
+  `alimiter=limit=nan`. Gurultulu hata yerine sessizce bozuk filtre.
+  Duzeltme turu ile finite kontrolu eklendi, fail-closed.
+- **3,0 dB sinirini BEN yanlis sectim (mevcut testler yakaladi).** Bes mevcut
+  test kirildi. Sebep: test_master_true_peak_adversarial.py uretimdeki ep28
+  arizasini kaydediyor, gercek tasma 3,1 dB. 3,0 dB siniri yakinsayabilen o
+  vakayi olduruyordu. Sayi 6,0'a cikarildi ve gerekcesi hem koda hem plana
+  yazildi. Testler gevsetilmedi; degisiklik duzeltildi.
+- **Hata mesaji sozlesmesi.** Yeni mesaj "3 denemede" ifadesini dusurmustu;
+  test_three_failed_attempts_fail_closed onu ariyor. Bicim korundu.
+- **Formatter hook kirliligi.** Edit araci PostToolUse hook'unu tetikliyor ve
+  hook dokunmadigim ~25 satirdaki em-dash karakterlerini bozdu (Kural 2 ihlali:
+  yapim diff'ine alakasiz degisiklik). Dosya sifirlanip degisiklikler hook'u
+  tetiklemeyen bir betikle yeniden uygulandi. Diff artik 75 ekleme / 31 silme,
+  sifir alakasiz satir.
+
+### MUTASYON KONTROLU (gecen test dogru sebeple mi geciyor)
+
+Politika ESKI davranisa dondurulup iki kilit test kosuldu:
+  - test_ceiling_moves_at_least_the_minimum_step... -> DUSTU
+  - test_loudness_only_failure_runs_exactly_one_encode -> DUSTU,
+    ciktisi [-1.0, -1.0, -1.0]: ayni tavanda uc birebir ayni encode,
+    yani kusurun kendisi yeniden uretildi.
+Iki kilit test de duzeltilmemis kodda dusuyor. Testler degersiz degil.
+
+### KANIT (Claude kendi kosuldu, Nemotron'un raporuna DEGIL)
+
+  python -m pytest tests/ -q
+  -> 839 passed, 2 skipped, 188 subtests passed
+
+Worktree tabani 801 passed + 2 skipped (iki atlama cevresel: ana agacta duran
+offline pilot fixture worktree'de yok). 839 = 801 + 38 yeni test. Sifir regresyon.
+
+DURUM: ROCK A tamam.

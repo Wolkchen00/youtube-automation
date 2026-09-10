@@ -137,8 +137,19 @@ sonucu. Deneme telemetrisi siliniyor. "AAC kare-arası tepe ekliyor" bir çıkar
 2. Geri çekmeye emniyet marjı: `limiter_db -= (overshoot + margin)`,
    `margin = 0.2` dB, deneme başına asgari hareket 0,3 dB.
 3. **Kümülatif sınır SAYIYLA: başlangıç `target_tp` değerinden en fazla
-   3,0 dB toplam indirim.** Yani -1,0 hedefinde limiter tavanı en fazla
-   -4,0 dBTP'ye çekilir. Bu sınıra çarpıldığında davranış "başarılı gibi
+   6,0 dB toplam indirim.** Yani -1,0 hedefinde limiter tavanı en fazla
+   -7,0 dBTP'ye çekilir.
+
+   **SAPMA, yapım sırasında ölçümle düzeltildi (2026-09-10).** v4'te bu sayı
+   3,0 dB yazıyordu ve o sayıyı ben uydurmuştum; Codex turu 3 "bir sayı ver"
+   dedi, ben verdim, hiçbir ölçüme dayanmıyordu. Yapımda mevcut
+   `tests/test_master_true_peak_adversarial.py` bunu KIRDI: o dosya üretimdeki
+   ep28 arızasını kaydediyor, gerçek taşma **3,1 dB** idi (limiter -3,0 dBTP,
+   teslim +0,1 dBTP). Onu kapatmak 3,1 + 0,2 marj = 3,3 dB çekme istiyor.
+   3,0 dB sınırı o vakayı 0,3 dB farkla fail-closed'a çevirip YAKINSAYABİLEN
+   bir bölümü öldürüyordu. Sayı 6,0'a çıkarıldı: ölçülen en kötü vakanın
+   yaklaşık iki katı pay. Aşırı sessizleşmeye karşı asıl koruma zaten ayrı
+   duran LUFS kapısıdır. Bu sınıra çarpıldığında davranış "başarılı gibi
    yapmak" DEĞİL, teşhis üreterek fail-closed durmaktır: son denemenin
    limiter tavanı, ölçülen TP ve LUFS değerleri hata mesajına ve `logs/`
    telemetrisine yazılır. Plan, hem TP hem LUFS kapısını sağlayan hiçbir
