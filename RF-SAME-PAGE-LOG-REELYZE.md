@@ -248,3 +248,49 @@ Karantina sorunu Codex in dediginden AGIR. `tools/gunluk.py:76-86`:
 ILK denemede kalici kilitlenme; kanal yayin yapmayi tamamen durdurur.
 I-8 e "geri gelirse ZORUNLU parca" olarak yazildi.
 
+
+## Round 4 , TAMAMLANAMADI (kota)
+
+```
+"You've hit your usage limit ... try again at 5:23 PM."
+```
+exit=1, `-o` dosyasi olusmadi, stderr bos, akis 43 KB (r3'un 214 KB'ina gore kisa),
+yani kota r3'un basarili kosusundan sonra neredeyse bitmisti.
+Sozlesme geregi BASARISIZLIK. Sahte onay uretilmedi.
+
+### Codex'e sorulan ama cevapsiz kalan sorular
+1. Rock 1 izole render kosumu: mevcut desteklenen bir yol var mi, yoksa insa mi edilecek
+2. ~~event-horizon ve flashpoints ayni ses yolunu mu paylasiyor~~ **CEVAPLANDI, asagida**
+3. Rock 4 aktivasyon sirasi ifade edilebilir mi, yoksa kapiyi baglamak ilk kosuda
+   canli yayini kirar mi
+4. Rock 4'un cagirici listesi tam mi
+5. Hala kirikken gecebilecek proof var mi
+6. Dort rock tek cevrimde teslim edilebilir mi
+
+### Soru 2 Visionary tarafindan CEVAPLANDI , ve onemli bir incelik cikti
+
+Kod-dali seviyesinde Codex hakli: iki hedef seri de anlatim + muzik yolundan gecer.
+**Ama parametreler farkli ve bu sonucu degistirir.**
+
+```
+sentinal_ihsan/unnatural-lab   narration: {channel: sentinal_vlog, native_mix_level: 0.5}
+galactic_experience/event-horizon   narration: {channel: galactic_experiment}   <- native_mix_level YOK
+shadowedhistory/flashpoints         narration: {channel: shadowedhistory}       <- native_mix_level YOK
+```
+
+`series/bible.py:266-278`:
+> *"Alan yoksa tarihsel davranis korunur: native ses tamamen kapalidir (0.0)."*
+
+Yani:
+- `unnatural-lab` anlatim altinda dogal sesi **0,5** seviyesinde TUTAR
+- `event-horizon` ve `flashpoints` dogal sesi **tamamen kapatir (0,0)**
+
+`music_volume = 0.50` kalibrasyonu `unnatural-lab` uzerinde yapildi ve o miksde
+anlatimin yaninda dogal ses de var. Hedef iki seride anlatim altinda dogal ses YOK,
+yani miks sadece anlatim + muzik. **Ayni 0,50 muzik, referans duruma gore anlatima
+karsi ORANTILI OLARAK DAHA YUKSEK olur.**
+
+Bu, raporlara yazilan "muzik anlatimi bogabilir" uyarisini dogruluyor ve mekanizmasini
+veriyor. Rock 1'in taban/aday karsilastirmasi bu yuzden opsiyonel degil, zorunlu.
+
+Kalan bes soru ACIK.
