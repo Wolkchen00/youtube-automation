@@ -190,3 +190,61 @@ Kalan bes soru ACIK.
 `USER OVERRIDE: yok.` Ihsan "Codex kotasi acilinca devam" dedi.
 **Onay gelmeden hicbir sey insa edilmeyecek.** Toplanti duraklatildi, kapatilmadi.
 Devam notu: `Projeler/Reelyze_Arastirma/codex-toplanti/DEVAM.md`
+
+## Round 3
+
+### Integrator bulgulari (Codex, birebir)
+
+```
+- [FIX] `RF-ISSUES-REELYZE.md:11–14` still asserts that Fear cannot generate 1080p and must change models, contradicting the retraction -> Update I-1 and I-2 so the deferred-work document reflects the current decision.
+- [FIX] Rock 1 can compare retained `narration.wav` and `bg_music.mp3`, but those source levels do not represent their contributions after timing adjustments, mixing, limiting, and mastering -> Render baseline and candidate from identical sources, compare processed levels over aligned intervals, and review the final mix for intelligibility.
+- [FIX] Rock 1 misclassifies the target audio paths because Event Horizon and Flashpoints both use narration plus music with native audio muted by default, while Next Stop uses native audio without either separate stem -> Require narration/music checks for the first two and native-audio checks for Next Stop, marking nonexistent stems not applicable.
+- [FIX] “Music does not exceed narration” can pass while brief music peaks mask words or the mix substantially regresses from its baseline -> Specify acceptable baseline-relative balance changes during narration and require a recorded listening assessment.
+- [FIX] Rock 1’s unspecified no-publish production can alter live state because `run_next(..., publish=False)` advances the episode, while paused Next Stop exits without producing anything -> Define an isolated render harness using fixed episode inputs and assert that live series state and publication records remain unchanged.
+- [FIX] Rock 2’s canary is not reproducible because it omits the slug, complete command, duration, and output identity, while `kie_uret.py` defaults to Sora and 25 seconds -> Specify a concrete built route, explicit standard Seedance model, 15-second duration, audio setting, unique output tag, and retained request/result/probe evidence.
+- [FIX] Rock 2 puts the human decision after spending and does not place the canary inside the shared workflow lock, so its balance delta may include other spending -> Require spending approval and a budget before submission, run under `kie-uretim`, and record balances plus task outcome on success, rejection, and timeout.
+- [FIX] One 1080p canary cannot establish the model’s duration limits, yet Rock 3 already labels 20- and 25-second routes incompatible -> Obtain the exact model’s duration contract or conservatively label unverified durations unsupported by company policy, without claiming a provider limit.
+- [CLARIFY] Rock 2 has no completion branch if Ihsan declines the upgrade or postpones the decision, and Rocks 3 and 4 inherit that dependency -> Define “retain measured 720p/24fps production settings” as a completion option and separate optional capability research from gate delivery.
+- [FIX] `MIN_KREDI = 700` remains protected whenever the model name stays unchanged even though Rock 2 may change resolution and Rock 3 may change duration -> Recalculate the threshold whenever the priced request configuration changes, including within the same model.
+- [FIX] Rock 3’s quarantine proof does not cover both selection branches, manual `--sehir`, or an empty eligible pool -> Filter an ordered eligible list before both the unused-route scan and `min()` fallback, reject quarantined manual selections, and test empty-pool behavior without changing publication history.
+- [FIX] Persisting quarantine or pre-upload evidence in `yayin.jsonl` would affect rotation and same-day locking because current readers treat its rows as publication history -> Store these records separately, or explicitly distinguish event types in every reader and test that rejected attempts consume neither rotation nor the daily slot.
+- [FIX] `_try()` exists at `series_runner.py:329` and can capture a new contract parameter, but Rock 6 omits migration of `run_next()`, `approver._publish_approved()`, Fear’s subprocess arguments, and the ready-video workflow -> Update all callers atomically and persist the contract through approval/download paths before making it mandatory.
+- [FIX] One geometry contract cannot correctly validate both a 4K master and its 1080p delivery copy -> Define explicit delivery-profile contracts and select the appropriate policy alongside `src` inside `_try()`.
+- [FIX] Returning ordinary upload failure for a contract rejection inside `_try()` sends deterministic failures into the existing 90-second retry path -> Represent validation rejection separately, preserve its diagnostic evidence, and exclude it from upload retries.
+- [FIX] Rock 6’s proof can pass with an implementation that blocks every upload because it specifies rejection and evidence cases without requiring successful valid uploads through every caller -> Add positive end-to-end cases plus a valid-contract/corrupt-file case that asserts the selected bad artifact never reaches the uploader.
+- [FIX] Rock 1’s existing test suites skip real-media checks when FFmpeg or pilot fixtures are absent, so nonzero collection does not guarantee execution of the relevant proof -> Make required media tests and retained per-series evidence mandatory acceptance checks, with skipped required cases treated as incomplete.
+- [FIX] The dependency graph allows Rock 6’s strict audio gate before Rocks 1 and 4 prepare compliant outputs, while Rock 4 promises the complete validator implemented only in Rock 5 -> Define explicit activation dependencies and test the complete producer-to-boundary path before enabling enforcement.
+- [DEFER] The six-rock cycle couples the publication gate to optional resolution research, route-policy expansion, and a paused series -> Make Rock 6 the primary delivery with Rock 5 as its implementation dependency, retain necessary active-channel audio remediation, and defer the 1080p experiment and paused Next Stop rollout.
+
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+19 bulgu islendi. Dort dogrulanabilir iddiayi kendim kontrol ettim, DORDU DE DOGRU:
+
+- `aimagine/next-stop/series.json` -> `status: paused`. Rock 1 kapsamindan cikti.
+- `run_next` kendi dokumantasyonu "uret + yayinla + durumu ilerlet" diyor.
+- `_try` gercekten `series_runner.py:329`.
+- `kie_uret.py:112-113` varsayilanlari `sora-2-pro-storyboard` ve `25` saniye.
+  Kanarya tarifim modeli acikca yazmiyordu, YANLIS modeli YANLIS surede
+  calistirip krediyi bosa harcayacakti. I-1 e acik sart olarak yazildi.
+
+KABUL, kapsam karari: alti rock -> DORT rock. 1080p kanaryasi (I-1),
+rota suresi/karantina (I-8) ve next-stop (I-9) ertelendi.
+Bu ayni zamanda r3 un "Ihsan reddederse plan tamamlanamaz" CLARIFY ini cozer:
+sozlesme OLCULEN gercegi kaydeder, bir karar beklemez.
+
+KABUL, duzeltme: I-1 ve I-2 hala geri cekilmis "1080p imkansiz" iddiasini
+tasiyordu. Ikisi de yeniden yazildi.
+
+REDDEDILEN: yok.
+
+### Visionary bagimsiz bulgusu (Codex sormadan once bulundu)
+
+Karantina sorunu Codex in dediginden AGIR. `tools/gunluk.py:76-86`:
+`gecmis` yayin kaydindan geliyor; yayinlanmayan rota oraya hic girmez,
+"kullanilmamis" kalir ve ERTESI GUN YINE secilir. Ikinci dalda
+`son.get(s, -1)` yuzunden ayni sonuc. Yani "en eski hale gelince" degil,
+ILK denemede kalici kilitlenme; kanal yayin yapmayi tamamen durdurur.
+I-8 e "geri gelirse ZORUNLU parca" olarak yazildi.
+
