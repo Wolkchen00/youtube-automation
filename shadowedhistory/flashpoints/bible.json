@@ -4,6 +4,7 @@
     "title": "Flashpoints",
     "aspect_ratio": "9:16",
     "resolution": "1080p",
+    "master_lufs": -14,
     "engine": "omni",
     "chain_frames": false,
     "audio_smooth": true,
@@ -14,6 +15,8 @@
     },
     "qc": {
       "enabled": true,
+      "min_shots": 2,
+      "harden_downloads": true,
       "notes": "The episode must communicate exactly one verified historical fact. No closing gesture, presentation pose, celebration, end card, or follow prompt may appear. No readable counterfeit text, logos, captions, or watermarks may be burned into the generated footage. Historical clothing, architecture, objects, and technology must match the stated time anchor. Graphic violence, blood, bodies, torture, and executions are automatic failures."
     }
   },
