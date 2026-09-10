@@ -150,3 +150,50 @@ DIKKAT: bunlarin hicbiri HIT ile OLU'yu ayirmiyor (ikisinde de ayni). Yani bunla
 - IG gercek izlenme sayilari (Insights gerekiyor; begeniden tahmin ettim)
 - Retention egrileri (YouTube Studio / IG Insights gerekiyor)
 - 1080p'nin Kie kredi maliyeti (olculmedi, tarifeye yazilmadan test edilmeli)
+
+---
+
+## !!! DUZELTME , 1080p sorusu ACIK, kapali degil (10 Eylul, r2 incelemesi)
+
+Yukarida 5. bolumde "Cozunurluk 1080p + kapiyi ayni anda duzelt" yazdim.
+Arada iki kez fikir degistirdim, son durum su ve **su an KANITLANMIS degil**:
+
+### Ne oldu
+1. Once "1080p yapalim" dedim (rapor 5. bolum).
+2. Sonra `core/kie_api.py:489` satirini buldum: *"Seedance duration is an integer
+   4-15s; resolution 480p/720p."* ve "1080p imkansiz" dedim.
+3. Codex ikinci turda yakaladi: **o satir baska bir modeli belgeliyor.**
+
+```
+core/kie_api.py:483   model: str = "bytedance/seedance-2-fast"    <- FAST varyanti
+core/kie_api.py:485   docstring: "Seedance 2.0 Fast"
+AImagine-Fear/tools/gunluk.py:30   MODEL = "bytedance/seedance-2"  <- FAST DEGIL
+```
+
+Yani "480p/720p" ve "4-15 saniye" sinirlari **`seedance-2-fast` icin** yaziyor.
+AImagine-Fear `seedance-2` (fast olmayan) cagiriyor. Bu modelin gercek sinirlari
+depoda hicbir yerde belgelenmemis.
+
+Ek ipucu, ters yonde: `sentinal_ihsan/KONSEPT_v3_TASLAK.md:365`
+*"Seedance 2.5, 720p 20 sn ~1.260 kredi ~6,30 USD/bolum"* , yani bir Seedance
+varyantinda 20 saniye mumkun goeruenuyor.
+
+### Sonuc: bilmiyoruz
+- `seedance-2` 1080p verebilir mi? **Bilmiyoruz.**
+- 15 saniyeden uzun uretebilir mi? **Bilmiyoruz.**
+- 1080p kac krediye mal olur? **Bilmiyoruz.** (Su anki kosu 615 kredi = $3,08)
+
+### Karar verilmeden once yapilmasi gereken
+Tek bir **kanarya uretimi**: ayni rota, `--resolution 1080p` ile, tek sefer.
+Uc sonuctan biri cikar:
+1. Model kabul eder ve 1080x1920 doner -> kredi farkini olc, sonra karar ver
+2. Model reddeder -> 720p tavan, kanon metni duzeltilmeli
+3. Model kabul eder ama 720p doner -> sessiz dusurme, kapi bunu yakalamali
+
+**Kredi harcanacagi icin bu Ihsan in karari.** Kanarya ~615-1.500 kredi
+(yaklasik $3-7,50) tutabilir. Cuzdan dort kanalla ORTAK.
+
+### Degismeyen kisim
+Kanon (`canon/MASTER-BLOCK.md:12`) ile kodun (`tools/gunluk.py:32`) ve kapinin
+(`tools/gunluk.py:99`) uc ayri sey soylemesi **her durumda hatadir**.
+Kanarya hangi sonucu verirse versin, uc kaynagin tek gercege hizalanmasi gerekiyor.

@@ -21,3 +21,12 @@ Plan: `RF-PLAN-FEAR-DUZELT.md`
 
 - Filo geneli yayin oncesi skor karti: `RF-PLAN-REELYZE.md` Faz 2
 - Reelyze trend hasati ve kanca uretici: `RF-PLAN-REELYZE.md` Faz 3
+
+## Round 1 sonrasi eklenenler (Codex bulgulari, bu kosuda YAPILMIYOR)
+
+| # | Is | Neden bu kosuda degil |
+|---|---|---|
+| 5 | Platform basina yeniden deneme: YouTube gecip IG duserse yalniz IG'yi tekrar dene | `yayinla.py`'nin sha ve ayni-gun kapilari tum kosuyu blokluyor. Gercek bir davranis degisikligi ve dort kanalin ortak yukleyicisine yakin. Bu kosuda yalnizca donusumun YouTube basarisina baglanmasi yapildi. |
+| 6 | Otomatik goruntu/kanon uyum kapisi (kare farki, OCR, sahne tespiti) | Teknik kapi 1080x1920/30fps/sesli HERHANGI bir klibi gecirir. Bu kosuda yerine `--yayinlama` + kontakt sayfasi ile INSAN onayi kondu. Otomatik surumu `RF-PLAN-REELYZE.md` Faz 2'nin isi. |
+| 7 | Ucuncu sicak rota (yeniden boyanmis Sanghay) | Kanon metnini toplu renk degistirerek yeniden yazmak Codex'in isi degil; Ihsan yazmali. Palet A/B su an 2 sicak / 7 neon ile yuruyor. |
+| 8 | **`seedance-2` kanarya kosusu** | `seedance-2`'nin 1080p ve 15sn ustu destegi BILINMIYOR (`core/kie_api.py:489` notu `seedance-2-fast`'e ait). Kredi harcar, Ihsan'in karari. Rock 1b'nin `--yayinlama` modu bu kanaryayi yayinlamadan kosmak icin var. |
