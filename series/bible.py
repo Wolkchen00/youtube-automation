@@ -295,6 +295,26 @@ class Bible:
         return value
 
     @property
+    def master_true_peak_margin_db(self) -> float:
+        """Opt-in true-peak retry pullback margin; absent means legacy arithmetic."""
+        raw = self.data["series"].get("master_true_peak_margin_db", 0.0)
+        if isinstance(raw, bool):
+            raise ValueError(
+                "bible.series.master_true_peak_margin_db sonlu, negatif olmayan bir sayi olmali"
+            )
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                "bible.series.master_true_peak_margin_db sonlu, negatif olmayan bir sayi olmali"
+            ) from error
+        if not math.isfinite(value) or value < 0.0:
+            raise ValueError(
+                "bible.series.master_true_peak_margin_db sonlu, negatif olmayan bir sayi olmali"
+            )
+        return value
+
+    @property
     def music(self) -> bool:
         """True ise arka plan müziği eklenir (galactic/shadowedhistory/aimagine atmosferi)."""
         return bool(self.data.get("music", False))
@@ -360,7 +380,22 @@ class Bible:
         v = self.data["series"].get("title_card") or {}
         if v is True:
             return {"enabled": True}
+        if isinstance(v, dict) and "year_required" in v and type(v["year_required"]) is not bool:
+            raise ValueError("bible.series.title_card.year_required JSON boolean olmali")
+        if isinstance(v, dict) and "preserve_case" in v and type(v["preserve_case"]) is not bool:
+            raise ValueError("bible.series.title_card.preserve_case JSON boolean olmali")
         return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
+    def block_degraded_publish(self) -> bool:
+        """Only an explicit JSON true enables the fail-closed coherence gate."""
+        series = self.data["series"]
+        if "block_degraded_publish" not in series:
+            return False
+        value = series["block_degraded_publish"]
+        if type(value) is not bool:
+            raise ValueError("bible.series.block_degraded_publish JSON boolean olmali")
+        return value
 
     @property
     def fact_captions(self) -> dict:

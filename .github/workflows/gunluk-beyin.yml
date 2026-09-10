@@ -1,0 +1,175 @@
+name: Gunluk Beyin
+
+# Her kanal icin yayinlanan videolarin OLCUMLERINI ve SONUCLARINI biriktirir,
+# sonra kanala ozel bir BEYIN.md yazar. Kanal ajanlari ertesi gun bunu okur.
+# Sabit fikir havuzu YOK, beyin her gun olculmus sonuclardan yeniden yazilir.
+#
+# Saat: 05:30 UTC = 22:30 Los Angeles (PDT), bir onceki gun.
+# Neden burasi: son yayin flashpoints 20:30 UTC. Bu kosu ondan ~9 saat sonra,
+# yani dunun videolari bir gecelik izlenme birikmisken olculuyor. Ve ilk uretim
+# olan next-stop 13:20 UTC'den cok once bitiyor, yani BEYIN.md gune hazir.
+#
+# kie-uretim concurrency grubuna GIRMEZ: bu kosu Kie kredisi HARCAMAZ,
+# sadece YouTube RSS okur ve yt-dlp ile video indirir. Kendi grubu var.
+
+on:
+  schedule:
+    - cron: '30 5 * * *'
+  workflow_dispatch:
+    inputs:
+      kanal:
+        description: Tek kanal calistir (bos birakirsan hepsi)
+        required: false
+        default: ''
+        type: choice
+        options:
+          - ''
+          - unnatural-lab
+          - event-horizon
+          - flashpoints
+          - aimagine-fear
+      limit:
+        description: RSS'ten kac video taransin
+        required: false
+        default: '10'
+
+concurrency:
+  group: gunluk-beyin
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  beyin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: gunluk_beyin
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+
+      # pytest de burada kuruluyor: asagidaki "Testler" adimi onu cagiriyor ve
+      # temiz bir runner'da kurulu degil. tests/test_workflow_test_bagimliligi.py
+      # bu kurali zorunlu tutuyor.
+      - name: Install yt-dlp ve pytest
+        run: python -m pip install --quiet --upgrade yt-dlp pytest
+
+      # Kapi: kod bozuksa hicbir kanala dokunma.
+      # TUM tests/ klasoru kosar. Tek dosya adi yazmak, sonradan eklenen test
+      # dosyalarini sessizce CI disinda birakiyordu (rejim ve kusur testleri
+      # boyle olu kalmisti).
+      - name: Testler
+        run: python -m pytest tests/ -q
+
+      - name: Beyni guncelle
+        id: guncelle
+        continue-on-error: true
+        env:
+          KANAL: ${{ inputs.kanal }}
+          LIMIT: ${{ inputs.limit || '10' }}
+        run: |
+          set -u
+          if [ -n "${KANAL}" ]; then
+            KANALLAR="${KANAL}"
+          else
+            KANALLAR="unnatural-lab event-horizon flashpoints aimagine-fear"
+          fi
+
+          basarisiz=""
+          for k in ${KANALLAR}; do
+            echo "::group::${k}"
+            # Her adim ayri ayri denenir: biri patlarsa digerleri calisir,
+            # ve hangi kanalin battigini SONDA raporlariz, sessizce yutmayiz.
+            if ! python -X utf8 beyin.py olc "${k}" --limit "${LIMIT}"; then
+              echo "UYARI: ${k} olc BASARISIZ"
+              basarisiz="${basarisiz} ${k}:olc"
+            fi
+            if ! python -X utf8 beyin.py topla "${k}"; then
+              echo "UYARI: ${k} topla BASARISIZ"
+              basarisiz="${basarisiz} ${k}:topla"
+            fi
+            # beyin adimi defter varsa her zaman calismali
+            if ! python -X utf8 beyin.py beyin "${k}"; then
+              echo "UYARI: ${k} beyin BASARISIZ"
+              basarisiz="${basarisiz} ${k}:beyin"
+            fi
+            echo "::endgroup::"
+          done
+
+          echo "basarisiz=${basarisiz}" >> "$GITHUB_ENV"
+
+      - name: Ozet
+        if: always()
+        run: |
+          echo "### Gunluk Beyin" >> "$GITHUB_STEP_SUMMARY"
+          for f in kanallar/*/BEYIN.md; do
+            [ -e "$f" ] || continue
+            k=$(basename "$(dirname "$f")")
+            n=$(wc -l < "kanallar/${k}/defter.jsonl" 2>/dev/null || echo 0)
+            if grep -q "YETERSIZ VERI" "$f"; then
+              durum="YETERSIZ VERI"
+            else
+              durum="kanala ozel kural VAR"
+            fi
+            echo "- **${k}**: n=${n}, ${durum}" >> "$GITHUB_STEP_SUMMARY"
+          done
+
+      - name: Durumu kaydet
+        if: always()
+        working-directory: .
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: gunluk beyin guncellendi [skip ci]" \
+            gunluk_beyin/kanallar/
+
+      - name: Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gunluk-beyin-${{ github.run_number }}
+          path: gunluk_beyin/kanallar/
+          retention-days: 30
+
+      # Kosu YESIL gorunmesin diye degil, GERCEKTEN kirmizi olsun diye.
+      # Iki delik birden kapaniyor:
+      #   1. tek tek kanal adimlari basarisiz olduysa  -> $basarisiz dolu
+      #   2. "Beyni guncelle" adiminin KENDISI coktuyse -> GITHUB_ENV hic
+      #      yazilmaz ve $basarisiz bos kalir; o yuzden adimin outcome'una
+      #      da bakiyoruz. Yoksa "kosu yesil ama is yapilmadi" olur.
+      - name: Kapi , basarisizlik varsa kosuyu kirmizi yap
+        if: always()
+        env:
+          GUNCELLE_SONUC: ${{ steps.guncelle.outcome }}
+        run: |
+          hata=0
+          if [ "${GUNCELLE_SONUC}" != "success" ]; then
+            echo "ADIM COKTU: Beyni guncelle -> ${GUNCELLE_SONUC}"
+            hata=1
+          fi
+          if [ -n "${basarisiz:-}" ]; then
+            echo "BASARISIZ KANAL ADIMLARI:${basarisiz}"
+            hata=1
+          fi
+          # Hicbir BEYIN.md uretilmediyse de kirmizi olsun.
+          if ! ls kanallar/*/BEYIN.md >/dev/null 2>&1; then
+            echo "HIC BEYIN.md URETILMEDI"
+            hata=1
+          fi
+          if [ "$hata" -ne 0 ]; then
+            exit 1
+          fi
+          echo "butun kanallar tamam"

@@ -114,7 +114,7 @@ class LegacyByteIdentityTests(unittest.TestCase):
 
 
 class InstalledBibleOptInTests(unittest.TestCase):
-    def test_only_unnatural_lab_has_master_lufs(self):
+    def test_master_lufs_registry(self):
         found = []
         for root_name in (
             "aimagine", "sentinal_ihsan", "shadowedhistory",
@@ -124,8 +124,12 @@ class InstalledBibleOptInTests(unittest.TestCase):
                 data = json.loads(path.read_text(encoding="utf-8"))
                 if "master_lufs" in data.get("series", {}):
                     found.append((path, data["series"]["master_lufs"]))
-        expected = REPO_ROOT / "sentinal_ihsan" / "unnatural-lab" / "bible.json"
-        self.assertEqual(found, [(expected, -14)])
+        expected = [
+            (REPO_ROOT / "galactic_experience" / "event-horizon" / "bible.json", -14),
+            (REPO_ROOT / "shadowedhistory" / "flashpoints" / "bible.json", -14),
+            (REPO_ROOT / "sentinal_ihsan" / "unnatural-lab" / "bible.json", -14),
+        ]
+        self.assertCountEqual(found, expected)
 
 
 class ProductionMasterFailureTests(unittest.TestCase):
