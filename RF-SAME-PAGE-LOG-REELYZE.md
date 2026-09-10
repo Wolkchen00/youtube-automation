@@ -104,3 +104,44 @@ Codex bunu maliyet sorusu olarak sormustu; kendi depomuz duz metin olarak yaziyo
 **Planin yapisal degisimi:** 3 faz / 7 rock korundu ama icerik degisti.
 Eski Rock 1 (1080p) OLDU. Yerine `master_lufs` geldi ve plan artik ses ile basliyor,
 cunku olculmus etkisi en yuksek ve riski en dusuk olan o.
+
+## Round 2
+
+### Integrator bulgulari (Codex, birebir)
+
+```
+- [FIX] `core/kie_api.py:489` documents `bytedance/seedance-2-fast`, while Fear calls `bytedance/seedance-2`, so neither the 720p ceiling nor the 4–15-second limit is proven for Fear’s model -> Verify the exact standard endpoint contract and measured credit delta before changing canon or rejecting 1080p.
+- [FIX] Adding `master_lufs` changes Event Horizon and Flashpoints beyond final mastering by disabling `amix` normalization, raising music volume from 0.28 to 0.50, and enabling peak limiting -> Require target-specific nonpublishing A/B checks for narration, music, and native-audio balance in addition to LUFS and true peak.
+- [FIX] Rock 1’s “real file from a dry run” is impossible because `gunluk.py --dry` exits before generation, and one unspecified artifact cannot exercise three different audio paths -> Produce and retain one real no-publish artifact for each target series before rollout.
+- [FIX] Rock 1’s proof currently includes `test_only_unnatural_lab_has_master_lufs`, which must fail after the proposed Bible edits -> Explicitly migrate that test to assert the intended four-series configuration and retain legacy opt-out coverage separately.
+- [FIX] Rocks 2 and 7 validate the same audio fields at the same two publication boundaries, creating duplicate FFmpeg work and two policies that can drift -> Merge Rock 2 into the common Rock 6/7 contract gate and execute audio validation once per upload artifact.
+- [FIX] `MASTER-BLOCK.md` is copied as text and `build.py` has no width, height, or fps tokens, so the prompt cannot reference the Python contract as Rock 3 promises -> Add contract-backed placeholders rendered by `build.py` and test the rendered `PROMPT.txt`, not merely an empty grep result.
+- [FIX] Rock 3 fixes `duration_s` at 15 while Rock 4 says duration comes dynamically from the route, leaving two competing contract sources -> Build one contract object from the validated route and pass that same object to generation and publication validation.
+- [FIX] `build.load_route()` validates presence but does not parse numeric or finite duration; `_parse_duration()` performs that separately -> Expose and reuse one public validated-duration helper instead of treating `load_route()` as sufficient.
+- [FIX] Marking Toronto incompatible without removing or skipping it lets `sirdaki()` select the same unpublished route forever after it becomes oldest -> Shorten/remove incompatible routes or persistently quarantine and skip them while advancing rotation.
+- [KILL] Rock 5’s reservation addition is wallet governance outside the Core Focus, is disabled because workflows do not set `KIE_BALANCE_FLOOR`, and its gitignored local ledger cannot coordinate isolated runners -> Cut it and retain the materially simpler shared `kie-uretim` GitHub concurrency group already serializing the four live workflows.
+- [FIX] If the reservation work is retained, its 900-second inflight TTL expires before Fear’s 1500-second generation timeout and Rock 5 does not require settlement on every exit path -> Add a lease exceeding maximum runtime or heartbeat plus `finally`-based release/settlement tests for success, failure, and timeout.
+- [FIX] Neither `yayinla.py` nor `_publish_part()` receives the complete expected contract or duration tolerance, so `dogrula(video, sozlesme)` cannot deterministically know what to enforce -> Pass a persisted, versioned contract explicitly to each boundary and fail closed when it is absent.
+- [FIX] `_publish_part()` can send a 4K file to YouTube and `delivery_1080.mp4` to Instagram/TikTok, while Rock 7 describes one validation result and one hash -> Validate inside `_try()` after platform source selection and store a full SHA-256 plus evidence for every distinct uploaded artifact.
+- [FIX] The series publication registry deliberately catches and suppresses every write failure, so Rock 7’s proof can pass while live contract evidence silently disappears -> Persist evidence before the first upload or make registry failure publication-blocking.
+- [FIX] Rational parsing alone can let nominal `r_frame_rate` hide VFR cadence, and FFmpeg may report recoverable decode errors without failing unless configured accordingly -> Define CFR evidence using average rate/timestamps and perform full decode with `-xerror` against partially corrupted fixtures.
+- [FIX] `fear-slide-hazir.yml`, the bypass path Rocks 2 and 7 explicitly target, does not install FFmpeg or ffprobe -> Install FFmpeg there and exercise the real boundary gate before allowing upload.
+- [FIX] The Rock 2/3/4/5/7 proof selectors have no dedicated matching tests today, `-k "master veya rezerv"` is invalid pytest syntax, and only `test_medya_sozlesmesi.py` is explicitly named as a deliverable -> Name every new test file/function, use valid selectors, assert nonzero collection, and add the root contract tests to CI workflow coverage.
+
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+17 bulgu islendi. Bes dogrulanabilir iddiayi kendim kontrol ettim, BESI DE DOGRU:
+
+- `core/kie_api.py:483` gercekten `seedance-2-fast` belgeliyor, `gunluk.py:30` ise `seedance-2` cagiriyor. **"1080p imkansiz" iddiam GERI CEKILDI.**
+- `produce.py:604/:656/:659` dogrulandi: `master_lufs` amix_normalize, music_volume (0,28 -> 0,50) ve limit_mix_peak degistiriyor.
+- `tests/test_rocka_audio_master.py:117` var ve kirilacakti.
+- `concurrency: group: kie-uretim` uc workflowda var, cuzdani zaten serilestiriyor.
+- `fear-slide-hazir.yml` ffmpeg kurmuyor.
+
+KABUL: 16 bulgu plana islendi. KILL kabul: rezervasyon rock du silindi (I-7).
+Yapisal: eski Rock 2, Rock 6 ya birlestirildi. 7 rock -> 6 rock.
+Her proof artik somut test dosyasi adlandiriyor; olmayan dosyalar teslimat olarak isaretli.
+REDDEDILEN: yok.
+

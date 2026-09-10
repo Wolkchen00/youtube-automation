@@ -65,3 +65,11 @@ kor bir "4 saniye tavani" kurali onu reddederdi.
 Sadece son 15 video olculdu. `shadowedhistory` 271 video uretmis ve iki aykirisi var
 (1.179 ve 509). Tum gecmisi tarayip aykirilarin ortak ozelligini cikarmak bu kanal
 icin cok degerli olur ama bu planin Core Focus'unda degil.
+
+## I-7 , Kredi rezervasyonu (KILL, r2)
+
+Cuzdan zaten `concurrency: group: kie-uretim` ile serilestirilmis
+(`calibrate.yml`, `event-horizon.yml`, `fear-slide.yml`). Ayrica `KIE_BALANCE_FLOOR`
+workflowlarda set edilmiyor, ve gitignore edilmis yerel defter izole kosucular arasinda
+koordinasyon saglayamaz. 900 sn inflight TTL, Fear in 1500 sn uretim zaman asimindan kisa.
+Basit olan zaten var, karmasik olani eklemeye gerek yok.

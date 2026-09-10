@@ -1,227 +1,199 @@
-# RF-PLAN-REELYZE , uc fazli plan (r2 revizyonu)
+# RF-PLAN-REELYZE , plan (r3 revizyonu)
 
-Tarih: 10 Eylul 2026 (Los Angeles)
-Dal: `codex-reelyze` (worktree)
-Kaynak arastirma: `Projeler/Reelyze_Arastirma/REELYZE-DOSYASI.md`
-Inceleme kaydi: `RF-SAME-PAGE-LOG-REELYZE.md`
+Tarih: 10 Eylul 2026 (Los Angeles) | Dal: `codex-reelyze`
+Inceleme kaydi: `RF-SAME-PAGE-LOG-REELYZE.md` | Ertelenenler: `RF-ISSUES-REELYZE.md`
 
-## Core Focus (tek cumle)
+## Core Focus
 
 Yayinlanan her kisa videonun **medya sozlesmesi** (cozunurluk, fps, sure, ses seviyesi,
-tepe seviye, cozulebilirlik) yayin sinirinda deterministik olarak dogrulansin, boylece
-bes kanalin hicbiri sessizce sozlesmeye uymayan dosya yayinlamasin.
+tepe seviye, cozulebilirlik) **yayin sinirinda**, yuklenen HER dosya icin, deterministik
+olarak dogrulansin ve ihlalde yayin dursun.
 
-## Bu plan neyi COZMEZ
-
-**Erisim (reach) sorununu cozmez.** Olculen gercek: AImagine-Fear teknik olarak en kotu
-ayarlara sahip kanal ve Instagram'da 371.000 begeni aldi. Teknik duzeltme hit uretmez.
-Erisim/format/kanal stratejisi AYRI bir is ve bu planda YOK.
-
-Yaratici olcumler (ilk kare hareketi, kesme temposu, OCR ile ekran yazisi, dongu,
-konusma tespiti) bu plandan CIKARILDI. Bunlar kalibrasyon gerektiren vekil olcumlerdir
-ve kalibre edilmeden yanlis guven uretirler. `RF-ISSUES-REELYZE.md`'ye tasindi.
+## Kapsam disi
+Erisim/format/kanal stratejisi. Yaratici vekil olcumler. Cuzdan yonetisimi.
+Hepsi `RF-ISSUES-REELYZE.md`'de gerekcesiyle.
 
 ---
 
-## r1 incelemesinin degistirdigi iki temel varsayim
+## r2 incelemesinin degistirdigi uc varsayim
 
-### 1. 1080p bu modelde YOK
-`core/kie_api.py:489` birebir: *"Seedance duration is an integer 4-15s; resolution 480p/720p."*
+### 1. Model sozlesmesi BILINMIYOR (r2 beni duzeltti)
+r2'de "1080p imkansiz" demistim. Yanlisti:
+```
+core/kie_api.py:483   model: str = "bytedance/seedance-2-fast"   <- FAST varyanti belgeleniyor
+core/kie_api.py:489   "duration 4-15s; resolution 480p/720p"     <- FAST icin
+AImagine-Fear/tools/gunluk.py:30   MODEL = "bytedance/seedance-2" <- FAST DEGIL
+```
+`seedance-2` (fast olmayan) sinirlari depoda **hicbir yerde belgelenmemis**.
+Ters ipucu: `sentinal_ihsan/KONSEPT_v3_TASLAK.md:365` bir Seedance varyantinda
+"720p 20 sn ~1.260 kredi" diyor.
+**Karar: olcmeden kanona dokunma.** Rock 2 bunu bir kanaryayla cozer.
 
-Yani AImagine-Fear'in 720p uretmesi bir **yanlis ayar degil, modelin tavani**.
-Asil kusur su: `canon/MASTER-BLOCK.md:12` modele *"1080x1920, 30 frames per second"*
-diyor ve model bunu **veremez**. Belge gerceklige yalan soyluyor.
+### 2. `master_lufs` uc davranisi birden ceviriyor
+```
+produce.py:604   amix_normalize = master_lufs is None      -> KAPANIR
+produce.py:656   music_volume = 0.50 if ... else 0.28       -> neredeyse IKI KAT
+produce.py:659   limit_mix_peak = master_lufs is not None   -> ACILIR
+```
+Kalibrasyon `unnatural-lab`in ses profiline gore yapilmis (dogal ses agirlikli).
+`event-horizon` (126-156 WPM) ve `flashpoints` (70-119 WPM) yogun TTS anlatimi.
+**Muzik 0,50'ye cikinca anlatimi bogabilir.** LUFS/TP olcmek yetmez, denge de olculmeli.
 
-Ayrica Kie yuku fps alani ICERMIYOR (`tools/kie_uret.py:135-141`: prompt, duration,
-aspect_ratio, resolution, generate_audio). Her cikti 24 fps. **fps hedeflenemez.**
-
-Karar: kanonu ve kapiyi gerceklige hizala. 1080p istiyorsak MODEL DEGISIKLIGI gerekir;
-bu maliyeti, gorunumu ve kredi tabanini degistirir, dolayisiyla **Ihsan'in karari** ve
-bu planda DEGIL (`RF-ISSUES-REELYZE.md` I-1).
-
-### 2. En yuksek getirili duzeltme planda hic yoktu
-`series/produce.py:2148` `if master_lufs is None:` ise mastering ADIMI TAMAMEN ATLANIYOR.
-`master_lufs` alani filoda **tek bir seride** tanimli.
-
-| Seri | Kanal | master_lufs | Olculen LUFS | 30g medyan izlenme |
-|---|---|---|---|---|
-| `unnatural-lab` | sentinal_ihsan | **-14** | **-14,3 / -14,8** | **1.292** |
-| `event-horizon` | galactic_experience | YOK | -21,9 / -24,7 | 88,5 |
-| `flashpoints` | shadowedhistory | YOK | -20,5 / -25,1 | 27 |
-| `next-stop` | aimagine | YOK | -16,1 / -17,1, tepe **+0,7 KIRPIYOR** | 4 |
-
-Uc bagimsiz yontem ayni yeri gosterdi: ffmpeg EBU R128 olcumu, Codex kod incelemesi,
-tum `bible.json` taramasi. Duzeltme: uc dosyaya birer satir.
+### 3. Cuzdan zaten serilestirilmis
+`.github/workflows/{calibrate,event-horizon,fear-slide,...}.yml` hepsinde
+`concurrency: group: kie-uretim`. Rezervasyon eklemek gereksiz karmasa.
+Rock olarak KILL, `RF-ISSUES-REELYZE.md` I-7.
 
 ---
 
-# FAZ 1 , Ses (filo geneli, en yuksek getiri, en dusuk risk)
+# FAZ 1 , Ses
 
-## Rock 1: `master_lufs` uc seriye ekle ve OLCEREK dogrula
+## Rock 1: `master_lufs` uc seriye, seri basina kanitla
 
-**Done looks like:** `event-horizon`, `flashpoints`, `next-stop` bible.json'larinin
-`series` blogunda `"master_lufs": -14` var. Bir sonraki uretim ciktisi olculdugunde
-integrated loudness -15,0 ile -13,0 arasinda ve true peak <= -1,0 dBTP.
+**Kapsam:** `event-horizon`, `flashpoints`, `next-stop` bible.json `series` blogu.
+`sentinal_ihsan/unnatural-lab` DEGISMEZ (referans).
 
-**Neden guvenli:** `unnatural-lab` ayni degerle 2026-08'den beri uretiyor, regresyon
-riski yok. `sentinal_ihsan`'a DOKUNULMUYOR.
+**Done looks like:**
+1. Alan eklendi.
+2. Her seri icin AYRI, **yayinlanmayan** bir gercek uretim ciktisi uretildi ve saklandi
+   (uc seri uc farkli ses yolundan gecer: anlatim+muzik, anlatim+dogal ses, saf gorsel).
+3. Her cikti icin olculdu: integrated loudness -15,0..-13,0; true peak <= -1,0 dBTP.
+4. **Denge kontrolu:** ayni cikti icin anlatim-only ve muzik-only stem seviyeleri
+   karsilastirildi; muzik anlatimin uzerine cikmiyor. (`music_volume` 0,28 -> 0,50
+   degisimi bu adimda yakalanir.)
+5. `tests/test_rocka_audio_master.py:117` `test_only_unnatural_lab_has_master_lufs`
+   **silinmez**, yeni dogru yapilandirmayi (dort seri) dogrulayacak sekilde guncellenir;
+   alansiz seri davranisinin kapsami ayri bir testte korunur.
 
 **Proof:**
 ```
-python -m pytest tests -q -k "master_lufs or bible"
-python -c "import json;[print(p, json.load(open(p,encoding='utf-8'))['series'].get('master_lufs')) for p in ['galactic_experience/event-horizon/bible.json','shadowedhistory/flashpoints/bible.json','aimagine/next-stop/bible.json','sentinal_ihsan/unnatural-lab/bible.json']]"
+python -m pytest tests/test_rocka_audio_master.py tests/test_master_true_peak.py -q
 ```
-uc dosyada da `-14` yazmali. ARTI: bir kuru uretim kosusundan cikan gercek dosyada
-`core.ffmpeg_tools.measure_audio_loudness` ile olculen I ve TP kabul araligi icinde.
+(sifir toplama = BASARISIZ sayilir) ARTI her uc cikti icin
+`core.ffmpeg_tools.measure_audio_loudness` degerleri kabul araliginda,
+ARTI denge karsilastirmasi kayitli.
 
-> Kanit kurali: `bible.json`'da alanin yazmasi kanit DEGILDIR. Kanit, uretilen
-> GERCEK dosyanin olculmus degeridir.
-
-## Rock 2: Yayin sinirinda ses sozlesmesi kapisi (fail-closed)
-
-**Sorun:** kapilar ureticilere bagli, yayin sinirina degil. `fear-slide-hazir.yml`
-onceden uretilmis mp4'u dogrudan `yayinla.py`'ye veriyor ve denetimi TAMAMEN atliyor.
-Elle `yayinla.py` cagrisi da atliyor.
-
-**Done looks like:** `AImagine-Fear/tools/yayinla.py` ve
-`series/series_runner.py:_publish_part` yuklemeden HEMEN ONCE ayni ses sozlesmesini
-dogrular: integrated loudness hedef +/- 1,5 LU, true peak <= -1,0 dBTP, ses akisi var.
-Olculemezse veya disaridaysa **YAYIN DURUR** (fail-closed), sessizce gecmez.
-
-**Proof:** `python -m pytest tests -q -k "yayin_kapisi"` , hedefte olan dosya gecer;
--22 LUFS gecmez; +0,7 dBTP gecmez; sessiz dosya gecmez; olculemeyen dosya gecmez
-(bu son vaka fail-closed'i kanitlar).
+> `--dry` KULLANILMAZ: `gunluk.py --dry` uretimden ONCE cikar, dosya uretmez.
+> Kanit gercek dosyadir, yapilandirma satiri degil.
 
 ---
 
-# FAZ 2 , AImagine-Fear'i gerceklige hizala
+# FAZ 2 , AImagine-Fear
 
-## Rock 3: Kanon, kod ve kapi ayni seyi soylesin (ATOMIK)
+## Rock 2: Model sozlesmesini OLC, sonra kanonu hizala
 
-**Sorun:** uc kaynak uc farkli sey soyluyor:
-```
-canon/MASTER-BLOCK.md:12   "1080x1920, 30 frames per second"   <- MODEL VEREMEZ
-tools/gunluk.py:32         COZUNURLUK = "720p"                 <- gercek
-tools/gunluk.py:99         kapi 720x1280 bekliyor              <- gercek ama sabit
-core/kie_api.py:489        "resolution 480p/720p"              <- tavan
-```
+**Sorun:** kanon (`MASTER-BLOCK.md:12`) "1080x1920, 30 fps" diyor; kod 720p gonderiyor;
+kapi 720x1280 sabit bekliyor; modelin gercek tavani bilinmiyor.
 
-**Done looks like:** beklenen medya sozlesmesi TEK yerde tanimli (`AImagine-Fear`
-icinde bir sabit sozluk): `{width:720, height:1280, fps:24, duration_s:15}`.
-Kanon metni bu degerleri soyler (yalan iddia kaldirilir). Kapi sozlukten okur.
-fps de dogrulanir. Uc kaynak birbirine referans verir, kopyalanmaz.
+**Done looks like:**
+1. **Kanarya:** tek rota, `--resolution 1080p`, tek uretim. Sonuc uc halden biri:
+   kabul+1080x1920 / red / kabul ama 720p (sessiz dusurme).
+2. Kredi farki olculur (su anki taban: 615 kredi = $3,08).
+3. **Ihsan karar verir** (kredi harcanacak, cuzdan dort kanalla ortak).
+4. Karardan SONRA: medya sozlesmesi tek bir Python nesnesinde tanimlanir.
+   `build.py` bu nesneden `MASTER-BLOCK.md`'ye **placeholder** doldurur
+   (`<<WIDTH>>`, `<<HEIGHT>>`, `<<FPS>>`, `<<DURATION>>` gibi). Metin kopyalanmaz.
+5. Kapi ayni nesneden okur. fps de dogrulanir.
 
-**Neden atomik:** cozunurluk beklentisi ile kapi AYRI commit'lerde giderse yayin durur.
-Tek rock, tek commit.
+**Proof:** `python -m pytest AImagine-Fear/tests/test_sozlesme.py -q` (yeni dosya,
+bu rock'in teslimati). Vakalar: sozlesme nesnesi degistirilince **render edilmis
+`PROMPT.txt`** degisir (bos grep sonucu kanit SAYILMAZ); kapi ayni nesneden okur;
+sozlesme disi geometri/fps reddedilir.
 
-**Proof:** `python -m pytest AImagine-Fear/tests -q -k "sozlesme"` , sozluk degeri
-degistirilirse kapi otomatik takip eder (test bunu dogrular); 1080x1920 girdi
-mevcut sozlesmeye gore REDDEDILIR (cunku model veremez, gelirse bir sey yanlis demektir);
-24 disi fps reddedilir. ARTI: `git grep -n "1080x1920" AImagine-Fear/canon/` bos doner.
+## Rock 3: Sure , tek sozlesme nesnesi, uyumsuz rota karantinasi
 
-## Rock 4: Rota suresini MODEL SOZLESMESINE karsi dogrula
+**Sorun:** `gunluk.py:31` `SURE = 15` sabit; rotalarda `DURATION: 20` ve `25` var,
+okunmuyor. r2 duzeltmesi: `build.load_route()` varligi dogruluyor ama sayisal/sonlu
+dogrulamayi `_parse_duration()` yapiyor; ikisini karistirmayin.
 
-**Sorun:** `tools/gunluk.py:31` `SURE = 15` sabit; rota dosyalari `DURATION: 20` ve
-`DURATION: 25` iceriyor (`routes/toronto-cn-red-dusk.md:6`,
-`routes/vegas-strat-blue-rain-25.md:6`) ve bu deger hic okunmuyor.
+**Done looks like:**
+1. Tek **public** dogrulanmis-sure yardimcisi acilir (mevcut `_parse_duration()`
+   uzerinden), ikinci ayristirici YAZILMAZ.
+2. Sure, Rock 2'nin sozlesme nesnesine girer; **ayni nesne** hem uretime hem yayin
+   dogrulamasina gider. (r2: Rock 3'te sabit 15, Rock 4'te dinamik demek iki rakip
+   kaynak yaratiyordu. Tek nesne.)
+3. Model sozlesmesi disindaki rotalar (`toronto` 20 sn, `vegas-...-25` 25 sn)
+   **kalici olarak karantinaya alinir ve `sirdaki()` tarafindan ATLANIR.**
+   Sadece "uyumsuz" isaretlemek yetmez: yayinlanmadigi icin en eski kalir ve
+   sonsuza kadar tekrar secilir.
+4. Harcama yolundan ONCE reddedilir.
 
-**r1 incelemesinin duzelttigi nokta:** bu degerleri okuyup API'ye gondermek DUZELTME
-DEGIL. `core/kie_api.py:489` sureyi 4-15 saniyeyle sinirliyor. 20 gonderirsek
-kredi harcanir ve istek reddedilir. Dogru davranis: **harcama yolundan ONCE reddet.**
+**Proof:** `AImagine-Fear/tests/test_rota_sure.py` (yeni). Vakalar: uyumlu rota gecer;
+uyumsuz rota **Kie cagrisi yapilmadan** durur (mock ile cagrilmadigi dogrulanir);
+karantinaya alinan rota `sirdaki()` tarafindan bir daha secilmez (rotasyon ilerler);
+`DURATION` eksik/bozuk rota durur.
 
-**Done looks like:** sure `build.load_route()` ile okunur (ikinci ayristirici YAZILMAZ,
-`build.py:246` zaten var ve `:333-349` dogruluyor). Model sozlesmesine (4-15 sn) karsi
-kontrol edilir. Disardaysa kredi cagrisindan ONCE net hatayla durur. Uyumsuz rotalar
-(`toronto` 20 sn, `vegas-...-25` 25 sn) ya kisaltilir ya "bu modelle uyumsuz" diye
-isaretlenir. Kapi da ayni okunan degeri kullanir, kendi sabitini degil.
-
-**Proof:** `python -m pytest AImagine-Fear/tests -q -k "rota_sure"` , 15 sn gecer;
-20 sn kredi cagrisi YAPILMADAN durur (mock ile cagrilmadigi dogrulanir); DURATION
-eksik/bozuk olan rota durur.
-
-## Rock 5: Ses masterlama, DOGRU SIRADA, cuzdan rezervasyonuyla
-
-**r1 incelemesinin duzelttigi nokta:** ilk taslak sesi `denetle()`'den SONRA
-masterliyordu, yani yayinlanan dosya hic kapidan gecmemis oluyordu.
+## Rock 4: Ses masterlama, dogru sirada
 
 **Done looks like:**
 ```
-uret -> master_audio (ayri dosya uret) -> TAM KAPIYI MASTERLENMIS DOSYADA calistir -> yayinla
+uret -> master_audio (AYRI dosya) -> TAM sozlesme kapisi MASTERLENMIS dosyada -> yayinla
 ```
-`core.ffmpeg_tools.master_audio` cagrilir (hedef I=-14, TP=-1,0, LRA=11).
-`sys.path` bootstrap `tools/yayinla.py`'deki ile BIREBIR ayni sekilde yapilir.
-ARTI: `series/balance_floor.py`'nin rezervasyon mekanizmasina katilinir , cuzdan
-dort canli kanalla ORTAK (`tools/kie_uret.py:6`) ve bakiye kontrolu rezervasyon degildir.
+`sys.path` bootstrap `tools/yayinla.py` ile birebir ayni. Yayinlanan dosyanin
+masterlenmis dosya oldugu **sha256 ile** dogrulanir.
 
-**Proof:** `python -m pytest AImagine-Fear/tests -q -k "master veya rezerv"` , temiz
-surecte `import core.ffmpeg_tools` calisir; masterlenmis dosya `measure_audio_loudness`
-ile -15,0..-13,0 ve TP <= -1,0 olcer; yayinlanan dosya yolunun masterlenmis dosya
-oldugu dogrulanir (hash karsilastirmasi); es zamanli iki kosu ayni krediyi rezerve edemez.
+**Proof:** `AImagine-Fear/tests/test_master_sira.py` (yeni). Temiz surecte
+`import core.ffmpeg_tools` calisir; masterlenmis dosya -15,0..-13,0 ve TP <= -1,0;
+yayinlanan yolun hash'i masterlenmis dosyanin hash'i.
 
 ---
 
-# FAZ 3 , Ortak deterministik medya sozlesmesi
+# FAZ 3 , Ortak sozlesme kapisi (Rock 2 r2'de buraya birlestirildi)
 
-## Rock 6: `core/medya_sozlesmesi.py`
+## Rock 5: `core/medya_sozlesmesi.py`
 
-**Kapsam bilerek DAR.** Sadece deterministik, makinece kesin olculebilen seyler:
+Sadece deterministik olcumler. Vekil YOK.
 
-| Olcum | Yontem | Bilinmezlik |
-|---|---|---|
-| Cozulebilirlik | tam decode, sifir olmayan cikis kodu = RED | yok |
-| Akislar | `-select_streams v:0` / `a:0`, acikca | yok |
-| Geometri | genislik x yukseklik | yok |
-| fps | rasyonel ayristirma (`30000/1001` dogru okunur) | yok |
-| Sure | format suresi | yok |
-| Integrated loudness | EBU R128 | ses yoksa "olculemedi" |
-| True peak | EBU R128 peak=true | ses yoksa "olculemedi" |
+| Olcum | Yontem |
+|---|---|
+| Cozulebilirlik | tam decode, **`-xerror`**, sifir olmayan cikis = RED |
+| Akislar | `-select_streams v:0` / `a:0`, acikca |
+| Geometri | genislik x yukseklik |
+| fps | rasyonel ayristirma **+ CFR kaniti** (ortalama hiz/zaman damgalari; nominal `r_frame_rate` VFR'yi gizleyebilir) |
+| Sure | format suresi, tolerans sozlesmede |
+| Integrated loudness / true peak | EBU R128 |
 
-**Done looks like:** `dogrula(video, sozlesme) -> {"gecti": bool, "olcumler": {...},
-"ihlaller": [...], "bilinmeyen": [...], "sozlesme_surumu": "1"}`
-Tek bir tamsayi puan DONDURMEZ (r1: farkli makinelerde kiyaslanamaz ve eksik kaniti gizler).
-Olculemeyen sey "bilinmeyen" olarak isaretlenir, asla varsayilmaz.
-Dosya boyutu vekili YOK (3 MB esigi kaldirilir: bozuk buyuk dosya gecer, verimli
-kucuk dosya reddedilir).
+**Done looks like:** `dogrula(video, sozlesme) -> {gecti, olcumler, ihlaller,
+bilinmeyen, sozlesme_surumu}`. Tamsayi puan YOK. Dosya boyutu vekili YOK.
+Olculemeyen "bilinmeyen"dir ve **fail-closed** sayilir.
 
-**Proof:** `python -m pytest tests/test_medya_sozlesmesi.py -q` (bu dosya bu rock'in
-teslimatidir, mevcut degil). Vakalar: gecerli dosya gecer; bozuk dosya decode'da kalir;
-sessiz dosya "bilinmeyen" doner ve GECMEZ; `30000/1001` fps dogru okunur;
-ses akisi olmayan dosya loudness'i "bilinmeyen" doner.
+**Proof:** `tests/test_medya_sozlesmesi.py` (yeni teslimat). Vakalar: gecerli dosya;
+**kismen bozulmus fixture** `-xerror` ile kalir; sessiz dosya "bilinmeyen" doner ve GECMEZ;
+`30000/1001` dogru okunur; VFR dosya CFR kanitini gecemez.
 
-## Rock 7: Sozlesmeyi YAYIN SINIRINA bagla
+## Rock 6: Sozlesmeyi yayin sinirina bagla, HER dosya icin
 
-**Done looks like:** `AImagine-Fear/tools/yayinla.py` ve
-`series/series_runner.py:_publish_part` (satir 308) yuklemeden hemen once
-`medya_sozlesmesi.dogrula()` cagirir. Deterministik ihlal = YAYIN DURUR.
-Sonuc, yayinlanan dosyanin **sha256'siyla baglanmis surumlu bir kayit semasi** olarak
-`yayin.jsonl` ve seri metadata'sina yazilir.
+**Done looks like:**
+1. `AImagine-Fear/tools/yayinla.py` ve `series/series_runner.py` `_publish_part()`
+   sozlesmeyi **acikca parametre olarak alir**; yoksa **fail-closed** durur
+   (r2: kapilar neyi zorlayacagini bilmiyordu).
+2. `_publish_part()` platforma gore FARKLI dosya gonderebiliyor (YouTube'a 4K,
+   IG/TikTok'a `delivery_1080.mp4`). Dogrulama **`_try()` icinde, platform kaynagi
+   secildikten SONRA** yapilir; her ayri dosya icin ayri sha256 ve ayri kanit.
+3. Kanit **ilk yuklemeden ONCE** kalici yazilir. (Seri yayin kutugu yazma hatalarini
+   bastiriyor; kanit sessizce kaybolabilir.)
+4. `.github/workflows/fear-slide-hazir.yml` **ffmpeg kurar** (su an sadece
+   `actions/setup-python@v5` var; ffprobe olmadan kapi calisamaz).
+5. Yeni test dosyalari CI kapsamina eklenir (su an sadece `AImagine-Fear/tests` kosuyor).
 
-**Neden ureticilere degil sinira:** `fear-slide-hazir.yml`, elle `yayinla.py`,
-onbelleklenmis seri ciktilari ve gelecekteki cagiricilar uretici kapisini atlar.
-Sinir tek gecistir.
-
-**Proof:** `python -m pytest tests -q -k "sinir_kapisi"` , dogrudan `yayinla.py`
-cagrisi (uretici atlanarak) sozlesmesiz dosyayi YUKLEMEZ; `_publish_part` ayni sekilde;
-yayin kaydinda dosya hash'i ve sozlesme surumu bulunur.
+**Proof:** `tests/test_yayin_siniri.py` (yeni). Vakalar: uretici atlanarak dogrudan
+`yayinla.py` cagrisi sozlesmesiz dosyayi YUKLEMEZ; sozlesme parametresi yoksa durur;
+`_publish_part` iki farkli platform dosyasi icin iki ayri kanit yazar;
+kutuk yazma hatasi yaymayi ENGELLER; `fear-slide-hazir.yml` ffprobe bulur.
 
 ---
 
-## Sira ve bagimliliklar
+## Sira
 
 ```
-Rock 1 (bagimsiz, hemen)  ->  Rock 2 (Rock 1'in sonucunu korur)
-Rock 3 (atomik, tek commit)
-Rock 4 (bagimsiz)
-Rock 5 (Rock 3'ten sonra: kapi dogru degerleri bilmeli)
-Rock 6  ->  Rock 7
+Rock 1 (bagimsiz, hemen baslayabilir)
+Rock 2 (KANARYA -> Ihsan karari -> sonra kod)  ->  Rock 3, Rock 4
+Rock 5  ->  Rock 6
 ```
 
 ## Dokunulmayacaklar
-
-- `sentinal_ihsan/unnatural-lab` , filoda dogru calisan tek seri, referans.
-- `canon/NEGATIVES.md:15` ekran yazisi yasagi , kasitli estetik karar,
-  371.000 begeni metinsiz geldi. Degistirilecekse Ihsan'in karari.
-- `MIN_KREDI = 700` , 615 kredilik 720p/15sn kosusuna dayali. Model degismedigi
-  surece gecerli. Model degisirse yeniden turetilmeli (`RF-ISSUES-REELYZE.md` I-1).
-- `yayin.jsonl` gecmis kayitlari.
-- Ortak motorun dort kanali besleyen calisan akisi (Rock 1, 2, 7 disinda).
+- `sentinal_ihsan/unnatural-lab` , dogru calisan tek seri, referans.
+- `canon/NEGATIVES.md:15` ekran yazisi yasagi , 371.000 begeni metinsiz geldi.
+- `MIN_KREDI = 700` , model degismedikce gecerli; degisirse yeniden turetilmeli.
+- `yayin.jsonl` gecmisi.
+- `concurrency: group: kie-uretim` , cuzdani zaten serilestiriyor, dokunma.
