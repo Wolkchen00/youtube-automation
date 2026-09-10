@@ -4,7 +4,7 @@ Tarih: 10 Eylul 2026 (Los Angeles)
 Dal: `codex-fear-duzelt` (worktree; ana agacta baska oturumlarin islenmemis isi var)
 Kaynak analiz: `AImagine-Fear/REELYZE-RAPOR.md`
 Taban: 9eec629, `python -m pytest AImagine-Fear/tests -q` = 28 passed (olculdu 07:50 PDT)
-Revizyon: **r3** (Codex round 1 + round 2, 43 bulgu islendi , `RF-SAME-PAGE-LOG-FEAR-DUZELT.md`)
+Revizyon: **r4** (Codex round 1 + 2 + 3, 54 bulgu islendi , `RF-SAME-PAGE-LOG-FEAR-DUZELT.md`)
 
 ## Core Focus (tek cumle)
 
@@ -20,7 +20,7 @@ kancasiyla ve etiketiyle ulassin, ve hangi paletle uretildigi olculebilir kalsin
 
 ---
 
-## Planin dayandigi UC TEHLIKE (uctu de bu depoda dogrulandi)
+## Planin dayandigi DORT TEHLIKE (dordu de bu depoda dogrulandi)
 
 **A. ffprobe duz sozluge cevrilince ses akisi videonun fps'ini eziyor.**
 Canli olcum, gercek bir yayinlanmis video:
@@ -52,6 +52,22 @@ Yani 1080p varsayilani main'e girerse **ertesi sabah kimse bakmadan dogrulanmami
 profille yayin yapilir.** Bu yuzden "ilk kosuyu elle yap" bir prosedur notu olarak
 YETMEZ; kodda kalici bir onay durumu olmali.
 
+**D. 30 fps ISTENEMIYOR. Parametre yok, ve model 27/27 kez 24 fps verdi.**
+```
+yayin.jsonl  -> "fps": 24.0   (27 kaydin 27'si; 30 fps HIC gorulmedi)
+tools/kie_uret.py:135-140 seedance govdesi:
+    prompt, duration, aspect_ratio, resolution, generate_audio
+    ^ fps / frame rate parametresi YOK
+```
+`canon/MASTER-BLOCK.md` FORMAT bolumu "30 frames per second" diyor ama bu yalnizca
+prompt metni; API'de fps kolu yok ve model metni dinlemiyor. Yani **fps istenen degil
+GOZLENEN bir ozellik.**
+
+Sonuc: REELYZE raporunun 3. maddesi ("fps 30") oldugu gibi uygulanamaz. Daha da
+onemlisi, kapiyi 30'a kurmak **her videoyu dusurur ve kanali tamamen durdurur.**
+Bu planda fps profilin GOZLENEN degeri (24) ile dogrulanir, kanon metni de ayni
+degeri soyler. 30 fps'e cikmak prompt isi degil model degisikligi isidir -> issue.
+
 ---
 
 ## Dogrulanmis durum (her iddia dosya:satir)
@@ -73,6 +89,10 @@ YETMEZ; kodda kalici bir onay durumu olmali.
 | Yeni rota ureticisi var | `tools/sehir_ekle.py:85-89` |
 | Zamanlanmis yayin var | `.github/workflows/fear-slide.yml` cron 13:20 UTC |
 | Kategori degistirilemez | `core/uploader.py`'de `category` YOK -> issue |
+| **fps istenemiyor** | `tools/kie_uret.py:135-140` seedance govdesinde fps parametresi YOK |
+| **27/27 teslim 24 fps** | `yayin.jsonl` -> `"fps": 24.0`, 30 fps HIC yok |
+| Onay dosyasi CI'ya tasinmali | `.github/workflows/fear-slide.yml` `persist_state.sh` yalniz `yayin.jsonl` + `last_run.json` tasiyor |
+| sha kapisi kosulsuz | `tools/yayinla.py:80-87` basarisiz denemede yazilan sha'yi da blokluyor |
 
 ---
 
@@ -103,19 +123,25 @@ sabitini dogruladigi icin sapmayi goremez.
 **Done looks like.**
 - Yeni paylasilan modul `AImagine-Fear/profil.py`:
   `PROFILLER = {"1080p": {...}, "720p": {...}}`, her biri
-  `{"cozunurluk", "genislik", "yukseklik", "fps", "fps_tolerans", "sure_tolerans",
-    "min_bayt"}`. Varsayilan `1080p`.
+  `{"cozunurluk", "genislik", "yukseklik", "beklenen_fps", "fps_tolerans",
+    "sure_tolerans", "min_bayt"}`. Varsayilan `1080p`.
+- **`beklenen_fps` = 24, 30 DEGIL.** fps istenen degil GOZLENEN bir ozellik (bkz. D):
+  API'de fps kolu yok ve model 27/27 teslimde 24 verdi. Kapiyi 30'a kurmak kanali
+  durdururdu. Deger degisirse (yeni model, yeni gozlem) profil guncellenir, kapi
+  otomatik onu izler.
 - **Kanon da bu modulden besleniyor.** `canon/MASTER-BLOCK.md` FORMAT bolumundeki sabit
   "1080x1920, 30 frames per second" metni `<<COZUNURLUK>>` ve `<<FPS>>` token'lariyla
   degistirilir; `build.py` bunlari aktif profilden doldurur (mevcut `TOKEN_FIELDS`
   mekanizmasinin yanina profil token'lari eklenir). Boylece profil degistiginde
-  **prompt da degisir** ve "kanona aykiri video uretme" kacisi kapanir.
+  **prompt da degisir**, ve prompt artik hicbir zaman elde edemedigimiz bir fps'i
+  ISTEMEZ , uc kaynak (prompt, kapi, gerceklik) ayni sayiyi soyler.
 - `tools/gunluk.py` API cagrisini ve kapiyi AYNI profilden besler.
   `--profil {1080p,720p}` bayragi ucunu birden (prompt, API, kapi) birlikte cevirir.
 - **ffprobe JSON** okunur (`-print_format json -show_streams -show_format`) ve **video
   akisi acikca secilir** (`codec_type == "video"`). Duz sozluge cevirme YOK. Ses
   akisinin varligi ayrica kontrol edilir.
-- fps `r_frame_rate` kesrinden hesaplanir; `30/1` ve `30000/1001` ikisi de 30.
+- fps `r_frame_rate` kesrinden hesaplanir ve `beklenen_fps` ile karsilastirilir;
+  `24/1` ve `24000/1001` ikisi de 24 sayilir.
 - **Sessiz dusurme ayri bir hata:** 1080p istenip 720x1280 dondugunde mesaj
   `istendi 1080p, geldi 720x1280 , model sessizce dusurdu` der; genel "cozunurluk
   yanlis" demez.
@@ -127,13 +153,16 @@ ortak). Goruntunun kanona ICERIK olarak uydugunu dogrulamak.
 
 **Proof.** `pytest AImagine-Fear/tests -q -k "profil or kapi or fps"`
 - `uretim_komutu` -> `--resolution 1080p` (saf) VE `subprocess` mock'lu `main()` yolunda AYNI argv (baglanti)
-- ffprobe JSON fixture (video 1080x1920 `30/1` + audio `0/0`) -> BOS liste
-- ayni fixture video `24/1` -> fps sorunu (**ses akisinin `0/0`'i ezmedigi kanit**)
-- `30000/1001` -> sorun YOK
+- ffprobe JSON fixture (video 1080x1920 `24/1` + audio `0/0`) -> BOS liste
+- ayni fixture video `30/1` -> fps sorunu (**ses akisinin `0/0`'i ezmedigi kanit**)
+- `24000/1001` -> sorun YOK
 - 1080p istenip 720x1280 -> mesajda "sessizce dusurdu" gecer
-- `--profil 720p` -> argv `--resolution 720p` VE kapi 720x1280 bekler VE uretilen
-  PROMPT.txt icinde `720x1920`... yani profilin cozunurlugu gecer (uc kaynak birlikte doner)
-- `canon/MASTER-BLOCK.md` icinde artik sabit `1080x1920` YOK, `<<COZUNURLUK>>` var
+- `--profil 720p` -> argv `--resolution 720p` VE kapi TAM OLARAK `720x1280` bekler
+  (`720x1920` DEGIL; en-boy orani 9:16 sabit) VE `gunluk.py`'nin gercek yolu build'e
+  secili profili gecirir, uretilen PROMPT.txt icinde `720x1280` ve `24` gecer
+  (uc kaynagin birlikte dondugunun kaniti)
+- `canon/MASTER-BLOCK.md` icinde artik sabit `1080x1920` da `30 frames` de YOK,
+  `<<COZUNURLUK>>` / `<<FPS>>` var
 - ses akisi yok -> sorun
 
 ---
@@ -145,28 +174,52 @@ ortak). Goruntunun kanona ICERIK olarak uydugunu dogrulamak.
 
 **Done looks like.**
 - `AImagine-Fear/profil.py` icinde **yetenek matrisi**, anahtar
-  `(model, sure, cozunurluk)`, deger `"dogrulandi"` ya da `"kanarya"`:
+  `(model, sure, cozunurluk, fps)`, deger `"dogrulandi"` ya da `"kanarya"`.
+  **fps anahtarin PARCASI** , 720p kombinasyonu yalniz 24 fps'te gozlendi, 30'da degil:
   ```
-  ("bytedance/seedance-2", 15, "720p")  : "dogrulandi"   # yayinlanan her video bu
-  ("bytedance/seedance-2", 15, "1080p") : "kanarya"      # DOGRULANMADI
+  ("bytedance/seedance-2", 15, "720p",  24) : "dogrulandi"  # 27/27 teslim boyle
+  ("bytedance/seedance-2", 15, "720p",  30) : "kanarya"     # HIC gorulmedi
+  ("bytedance/seedance-2", 15, "1080p", 24) : "kanarya"     # DOGRULANMADI
   ```
   Yaninda acik yorum: *`core/kie_api.py:489`'daki "4-15s / 480p-720p" notu
   `seedance-2-fast`'e ait, bu modele DEGIL.*
 - **`"kanarya"` bir kombinasyon YAYINLANAMAZ.** `gunluk.py` uretimden ve krediden ONCE
   bakar; kanarya ise ya `--yayinlama` ister ya da durur. Cron da bu yola girer, yani
   main'e 1080p girse bile ertesi sabah **sessiz yayin olmaz**, kosu acik mesajla durur.
-- Onay kalici ve versiyonlu: `AImagine-Fear/profil_onay.json`, iceriginde onaylanan
-  kombinasyon ve onaylanan master'in sha'si. Ihsan kanaryayi gozle gordukten sonra
-  bu dosyayi yazar (tek komut: `--onayla <master>`), kombinasyon `"dogrulandi"` olur.
+- **Uretim kaydi (`out/<slug>/uretim.json`)**, her uretimde yazilir:
+  `{model, istenen_profil, slug, beklenen_sure, palet, olculen: {genislik, yukseklik,
+   fps, sure}, denetim_sonucu, master_sha, ts}`.
+  Onay ve `--yayinla-mevcut` **yalniz bu kayittan** beslenir. Boylece denetimden KALMIS
+  ya da baska modelle uretilmis bir dosya dogru kombinasyon etiketiyle onaylanamaz.
+- Onay kalici: `AImagine-Fear/profil_onay.json`. Icerigi: onaylanan
+  `(model, sure, cozunurluk, fps)`, onaylanan master'in sha'si, **ve `profil.py`
+  iceriginin hash'i.** Profil dosyasi degisirse onay otomatik GECERSIZ olur
+  (eski onayin yeni ayarlari yetkilendirmesi engellenir).
+  Ihsan kanaryayi gozle gordukten sonra `--onayla <master>` calistirir; komut once
+  uretim kaydini dogrular (denetim GECMIS mi, model ayni mi, sha tutuyor mu),
+  sonra kombinasyonu `"dogrulandi"` yapar.
+- **Onay CI'ya nasil ulasiyor:** `profil_onay.json` depoya islenen bir dosyadir ve
+  cron'un checkout ettigi dalda bulunmalidir. `--onayla` dosyayi yazdiktan sonra
+  Ihsan'in commit'lemesi gerektigi acikca basilir. Ayrica
+  `.github/workflows/fear-slide.yml`'deki `persist_state.sh` listesine eklenir ki
+  kosu onu dusurmesin. (Su an liste yalniz `yayin.jsonl` ve `last_run.json` tasiyor.)
 - `tools/gunluk.py --yayinlama`: uretir, **master'lar, denetler**, `kontrol.py`
-  kontakt sayfasini `out/<slug>/` altina yazar, YAYINLAMAZ, yollari basar.
-  **Kontakt sayfasinin gercekten olustugu ve boyutunun > 0 oldugu dogrulanir**
-  (`kontrol.py` ffmpeg cikis kodunu yok sayip var olmayan bir yol dondurebiliyor);
-  olusmadiysa kosu BASARISIZ.
+  kontakt sayfasini **kosuya ozel yeni bir yola** yazar
+  (`out/<slug>/kontakt/<master_sha>.png`), YAYINLAMAZ, yollari basar.
+  Dosyanin gercekten olustugu ve boyutunun > 0 oldugu dogrulanir; olusmadiysa kosu
+  BASARISIZ. Kosuya ozel yol sart: `kontrol.py` ffmpeg cikis kodunu yok sayiyor, ve
+  sabit bir yolda onceki kosudan kalan dolu bir PNG yeni basarisizligi gizlerdi.
 - `tools/gunluk.py --yayinla-mevcut <master>`: onaylanmis bir master'i uretim yapmadan
-  yayinlar. Boylece kanarya videosu cope gitmez ve "onayladigim video degil, ertesi
-  gun uretilen baska video yayinlandi" tuzagi kapanir. Sha, `profil_onay.json`'daki
-  onayla eslesmezse durur.
+  yayinlar. **Slug, caption, TITLE ve palet `sirdaki()`'den DEGIL o master'in uretim
+  kaydindan** gelir; yoksa siradaki rota degistiginde onaylanmis videoya baska rotanin
+  metadata'si takilirdi. Sha `profil_onay.json` ile eslesmezse durur.
+
+**REDDEDILEN (Codex round 3):** "her videonun kendi SHA onayi zorunlu olsun".
+Bu, gunluk otomatik kanali bitirir , kanal bugune kadar zaten insansiz kosuyor ve
+720p'de de oyleydi, yani bu degisiklik YENI bir risk getirmiyor. Ayirim su:
+**profil onayi teknik bir izindir** (bu kombinasyon calisiyor mu), **video onayi ayri
+bir urundur** (bu video iyi mi) ve o issue #6'da (anlamsal kapi). Per-video sha
+baglamasi yalnizca `--yayinla-mevcut` yolunda zorunlu.
 - `tools/gunluk.py --dry` **cevrimdisi ve belirlenimci**: ag cagrisi yok, kredi okumasi
   yok, ayni-gun kapisindan ONCE calisir, slug + sure + profil + matris durumu basar.
 
@@ -179,8 +232,17 @@ kendi testiyle gelir.
 - kanarya kombinasyonu + yayin yolu -> DURUR, `upload_to_platform` HIC cagrilmaz (mock)
 - kanarya kombinasyonu + `--yayinlama` -> uretim yolu calisir, yayin cagrilmaz
 - `profil_onay.json` dogru kombinasyonu tasiyorsa yayin yolu ACILIR
+- **onay reddi vakalari, her birinde SIFIR uretim VE SIFIR yayin cagrisi:**
+  dosya YOK / JSON BOZUK / kombinasyon YANLIS / `profil.py` hash'i ESKI /
+  uretim kaydinda `denetim_sonucu` BASARISIZ / uretim kaydindaki model FARKLI
 - `--yayinla-mevcut` sha uyusmazsa DURUR
+- `--yayinla-mevcut` metadata'yi uretim kaydindan alir: `sirdaki()` BASKA bir slug
+  donduruyorken bile dogru caption/TITLE/palet gider ve **uretim cagrisi yapilmaz**
 - kontakt sayfasi olusmazsa `--yayinlama` BASARISIZ doner (ffmpeg sahte basarisizligi)
+- **onceki kosudan kalan dolu bir kontakt PNG'si varken yeni ffmpeg basarisizligi
+  yine yakalanir** (kosuya ozel yolun kaniti; sabit yol olsaydi test gecerdi)
+- taze bir checkout'ta (gecici dizine kopyalanan depo) ayni `profil_onay.json` yuklenir
+  ve yayin yolu acik kalir (CI kaniti)
 - `--dry` bugun yayin VARKEN bile alanlari basar, 0 doner, `requests` HIC cagrilmaz
 
 ---
@@ -255,15 +317,26 @@ ONCE deftere yaziyor**, yani tam basarisiz yayin bile donusumu ilerletir.
 - Rotalara `PALET: sicak|neon` alani, `build.py` zorunlu kilar ve yalniz bu ikisini kabul eder.
 - Dokuz rota etiketlenir: `dubai-burj-altin` ve `toronto-cn-red-dusk` **sicak**, kalan
   yedi **neon**.
-- Defter kaydi (`yayin.jsonl`) su alanlari **denetlenen master'dan olculen gercek
-  degerlerle** tasir: `slug`, `palet`, `rota_suresi`, `cozunurluk`, `fps`, `lufs`,
-  `true_peak`, `kullanildi`.
+- Defter kaydi (`yayin.jsonl`) su alanlari tasir. **Her alanin kaynagi ayri ve
+  acikca tanimli** , "hepsi master'dan olculur" demek yanlisti, cunku slug ve palet
+  medya olcumu degil:
+
+  | Alan | Kaynak |
+  |---|---|
+  | `slug`, `palet`, `rota_suresi` | uretim kaydi (`out/<slug>/uretim.json`) |
+  | `cozunurluk`, `fps`, `sure` | denetlenen master'in ffprobe olcumu |
+  | `lufs`, `true_peak` | `<master>.audio_master.json` sidecar'i |
+  | `kullanildi` | YouTube yanitindan cikarilan yayin kimligi |
 - **`kullanildi` yalnizca DOGRULANMIS YouTube yayinindan turetilir:** yanit truthy
   olmasi YETMEZ, icinden bir `post_id` / `publication_id` / video kimligi cikarilabilmeli.
   Cikarilamazsa `kullanildi=false`.
 - `sirdaki()` ve **ayni-gun kapisi** artik `kullanildi=true` satirlara bakar, satirin
-  varligina degil. Boylece basarisiz bir yayin ne donusumu ilerletir ne de ayni gun
-  guvenli tekrari engeller.
+  varligina degil. Boylece basarisiz bir yayin donusumu ilerletmez ve ayni-gun kapisini
+  tetiklemez.
+  **Sinirli iddia:** `yayinla.py`'nin sha kapisi (`tools/yayinla.py:80-87`) basarisiz
+  denemede de yazilmis sha'yi KOSULSUZ engellemeye devam ediyor. Yani ayni dosyanin
+  yeniden gonderimi hala bloke; duzelen yalnizca ayni-gun kapisi ve donusum. Tam
+  platform-bazli tekrar issue #5'te ertelendi ve bu plan onu cozdugunu IDDIA ETMIYOR.
 - `yayinla.py`'nin **cikis kodu** dogrulanmis YouTube yayinina baglanir (su an herhangi
   bir platform basarisi 0 dondurüyor; YouTube dusup IG gecince workflow "basarili"
   gorunuyor ve Core Focus ihlali alarm uretmiyor).
@@ -356,16 +429,22 @@ python AImagine-Fear/tools/gunluk.py --dry    # cevrimdisi; slug, sure, palet, p
 ## Sira ve bagimliliklar
 
 ```
-Rock 1 -> Rock 1b -> Rock 2 -> Rock 3 -> Rock 4 -> Rock 5
+[Rock 1 + Rock 1b + Rock 3]  ->  Rock 2  ->  Rock 4  ->  Rock 5
+        (TEK COMMIT)
 ```
 Hepsi `gunluk.py`'yi degistiriyor; sira sart.
 Rock 4, Rock 5'ten ONCE cunku TITLE varyant secimi `kullanildi` semantigine dayaniyor.
 
 **AYNI COMMIT'TE gitmesi gerekenler:**
-1. Rock 1: profil + kanon token'lari + kapi. Ayrilirsa prompt ile uretim ayrisir ya da yayin durur.
-2. Rock 1b: yetenek matrisi + yayin yolu kapisi. Ayrilirsa cron dogrulanmamis profille yayinlar.
-3. Rock 3: master'lama + denetimin/sha'nin son dosyaya bakmasi.
-4. Rock 4 ve 5: sema gocu (veri + `_TEMPLATE.md` + `sehir_ekle.py` + fixture'lar) + `build.py` dogrulamasi.
+1. **Rock 1 + Rock 1b + Rock 3 birlikte.** Bu uclu ayrilamaz:
+   - Rock 1 tek basina giderse 1080p varsayilani main'e duser ama kapi henuz yok ->
+     **ara surumde cron acigi yeniden acilir** ve ertesi sabah dogrulanmamis profille
+     yayin yapilir. (Codex round 3 bulgusu; onceki surumde bu ucu ayri commit'lerdi.)
+   - Rock 1b'nin `--yayinlama` akisi master'lamaya, yani Rock 3'e muhtac.
+   Bu yuzden profil + kanon token'lari + kapi + yetenek matrisi + onay + master'lama
+   TEK commit.
+2. Rock 4 ve 5: sema gocu (veri + `_TEMPLATE.md` + `sehir_ekle.py` + fixture'lar) +
+   `build.py` dogrulamasi, her biri kendi icinde atomik.
 
 ## Dokunulmayacaklar
 

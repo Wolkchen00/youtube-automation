@@ -238,3 +238,98 @@ Round 2'nin 21 bulgusunun TAMAMI kabul edildi. Ikisi plani yapisal olarak degist
   butun alanlar denetlenen master'dan OLCULEN degerlerle birebir dogrulanir.
 - DEFER kabul , platform bazli yeniden deneme issue #5'te kaliyor; Codex'in istedigi
   YouTube-temelli cikis kodu ve ayni-gun duzeltmesi bu kosuda KALDI (Rock 4).
+
+## Round 3
+
+**NOT , oturum modeli degisti.** Stream uyarisi: *"This session was recorded with
+model `gpt-5.6-sol` but is resuming with `gpt-6-astra`."* `~/.codex/config.toml`
+bu kosu sirasinda disaridan degistirilmis (baska bir oturum ya da codex update).
+Sohbet gecmisi tasindi (Codex round 2 bulgularina numarayla dogru atif yapti),
+yani toplanti tutarli; ama round 1-2 ile round 3 ayni modelin yargisi DEGIL.
+
+### Integrator bulgulari (Codex, AYNEN)
+
+```
+Henüz yazıldığı haliyle tamamlanabilir bir plan değil. Matris, onaysız cron koşusunu kapatıyor; ancak onayın nasıl kazanıldığı, hangi değişikliklerde geçersizleştiği ve sonraki videolara ne yetki verdiği eksik.
+
+Round 2 listesindeki sırayla: **1, 3, 6, 8–16 ve 18–20 tasarım düzeyinde karşılanmış; 17’nin ertelenmesi kabul; 2, 4, 5, 7 ve 21 aşağıdaki nedenlerle tam kapanmamış.** Paletin kapsamına itirazım yok.
+
+- [FIX] Rock 1’in 1080p varsayılanı Rock 1b’nin yayın kapısından önce teslim edilebildiği için belirtilen commit sınırları cron açığını ara sürümde yeniden yaratıyor -> Rock 1 ve Rock 1b’yi birlikte teslim et veya kapıyı önce kur; Rock 1b’nin çalışan master akışı için Rock 3 bağımlılığını da teslim sırasına ekle.
+- [FIX] `--onayla <master>` için yalnız kombinasyon ve SHA belirtilmiş olduğundan başarısız denetlenmiş veya başka modelle üretilmiş bir dosyanın doğru kombinasyon etiketiyle onaylanması engellenmiyor -> Üretim sırasında model, istenen profil, ölçülen sonuçlar ve master SHA’sını içeren kayıt oluştur; onay komutu yalnız bu kaydı doğrulayıp teknik kapıları geçen master’ı onaylasın.
+- [FIX] “Doğru kombinasyonu taşıyan JSON yayın yolunu açar” proof’u bozuk, eksik, eski sürümlü veya farklı FPS ayarına ait onayları reddetmeyi sınamıyor -> Onayı profil içeriğinin sürümüne/hash’ine bağla ve eksik dosya, bozuk JSON, yanlış kombinasyon, eski profil ve başarısız audit vakalarında üretim ve yayın çağrılarının sıfır olduğunu test et.
+- [FIX] Tek kanarya SHA’sının onaylanması kombinasyonu `dogrulandi` yaparak cron’un sonraki incelenmemiş videolarını açıyor, dolayısıyla kabul edilen her-video-SHA-onayı şartı hâlâ sağlanmıyor -> Teknik profil izni ile video yayın onayını ayır ve bütün yayın yollarında gönderilecek master’ın kendi SHA onayını zorunlu tut.
+- [FIX] Defterdeki sekiz teslimin tamamı 24 fps olduğu halde matris 720p kombinasyonunu doğrulanmış ilan ediyor ve FPS’yi onay anahtarının dışında bırakıyor -> 15s/720p üretiminin gözlendiğini 30fps uygunluğundan ayır; 30fps profilini kanarya say ve FPS değişince eski onayı geçersizleştir.
+- [FIX] `profil_onay.json` dosyasının yerelde yazılması GitHub runner’a ulaşmasını sağlamıyor ve mevcut workflow yalnız `yayin.jsonl` ile `last_run.json` dosyalarını kalıcılaştırıyor -> Onayın cron’un checkout yaptığı dala nasıl taşınacağını açıkça tanımla; yeni bir checkout ve süreçte aynı onayın yüklendiğini doğrula.
+- [FIX] `--yayinla-mevcut <master>` için master’ın slug, profil, caption, TITLE ve palet kaynağı tanımlanmadığından mevcut `sirdaki()` seçimi onaylı videoya başka rotanın metadata’sını takabilir -> Bu yolu master’a bağlı üretim kaydından besle ve sıradaki rota farklıyken doğru video/metadata eşleşmesini, üretim çağrısı yapılmadan test et.
+- [FIX] Kontakt sayfasında yalnız varlık ve boyut kontrolü, önceki koşudan kalan dolu PNG bulunduğunda yeni ffmpeg başarısızlığını gizler -> SHA’ya veya koşuya özel yeni çıktı yolu kullan ve eski kontakt dosyası mevcutken yeni üretim başarısızlığı testini ekle.
+- [FIX] Rock 1’in 720p proof’u `PROMPT.txt` içinde açıkça `720x1920` bekleyerek yanlış en-boy oranını kabul kriterine yazmış -> Tam olarak `720x1280` ve seçilen FPS’yi doğrula; gerçek `gunluk.py` yolunun build’e seçili profili ilettiğini de sınayan test kullan.
+- [FIX] Rock 4 bütün alanların master’dan ölçülmesini istiyor ama `slug`, `palet`, `rota_suresi` ve `kullanildi` medya ölçümü değildir, bu yüzden proof yanlış veri kaynaklarını doğrulayabilir -> Kaynakları açıkça ayır: slug/palet/beklenen süre üretim kaydından, gerçek süre/çözünürlük/FPS probe’dan, ses değerleri sidecar’dan ve kullanıldı YouTube sonucundan gelsin.
+- [FIX] Rock 4 “aynı gün güvenli tekrar engellenmez” diyor fakat `yayinla.py:80–87` başarısız denemede de yazılmış SHA’yı hâlâ koşulsuz engelliyor -> Platform tekrarını erteleme kararını koruyorsan iddiayı yalnız aynı-gün kapısıyla sınırla ve başarısız `--yayinla-mevcut` tekrarının hâlâ engellendiğini açıkça belgele.
+
+VERDICT: NOT YET```
+
+### Visionary yaniti (Claude)
+
+`git status --porcelain` bos , read-only tur yine hicbir dosyaya dokunmadi.
+Codex round 2'nin 1, 3, 6, 8-16 ve 18-20 numarali bulgularini kapali sayiyor,
+17'nin ertelenmesini kabul ediyor, paletin daraltilmasina itirazi yok.
+Acik kalan bes bulgu icin 11 yeni madde verdi. **Onu kabul, biri reddedildi.**
+
+**Kendi dogruladigim ve plani en cok degistiren bulgu:**
+
+- ACCEPTED , "defterdeki sekiz teslimin tamami 24 fps oldugu halde matris fps'i onay
+  anahtarinin disinda birakiyor" -> **Dogrulandi ve bu bir insa-kiran hataydi.**
+  Iki olcum:
+  ```
+  yayin.jsonl                  -> "fps": 24.0   (27 kaydin 27'si; 30 fps HIC yok)
+  tools/kie_uret.py:135-140    -> prompt, duration, aspect_ratio, resolution,
+                                  generate_audio   ^ fps parametresi YOK
+  ```
+  Yani 30 fps **istenemiyor bile**; kanon metnindeki "30 frames per second" modelin
+  dinlemedigi bir dilek. Kapiyi 30'a kurmus olsaydim **her video dusecek ve kanal
+  tamamen duracakti.** Plan degisti: fps artik istenen degil GOZLENEN ozellik,
+  `beklenen_fps = 24`, kanon token'i da ayni degeri basiyor, ve fps yetenek
+  matrisinin anahtarina girdi. REELYZE raporunun 3. maddesi ("fps 30") bu haliyle
+  uygulanamaz; 30'a cikmak model degisikligi isi -> issue.
+
+**Kabul edilen digerleri:**
+
+- ACCEPTED , Rock 1'in 1080p varsayilani Rock 1b'nin kapisindan once teslim edilirse
+  ara surumde cron acigi yeniden aciliyor -> Rock 1 + Rock 1b + Rock 3 **tek commit**
+  oldu (Rock 1b'nin `--yayinlama` akisi zaten Rock 3'un master'lamasina muhtacti).
+- ACCEPTED , `--onayla` denetimden KALMIS ya da baska modelle uretilmis dosyayi
+  onaylayabilir -> her uretimde `out/<slug>/uretim.json` yaziliyor (model, istenen
+  profil, olculen degerler, denetim sonucu, master sha) ve onay yalniz bu kayittan
+  besleniyor.
+- ACCEPTED , onay proof'u bozuk/eksik/eski onaylari sinamiyor -> onay `profil.py`
+  iceriginin hash'ine baglandi (profil degisirse onay gecersiz) ve alti ret vakasi
+  (dosya yok, JSON bozuk, kombinasyon yanlis, hash eski, denetim basarisiz, model
+  farkli) her birinde SIFIR uretim VE SIFIR yayin cagrisiyla test ediliyor.
+- ACCEPTED , `profil_onay.json` yerelde yazilinca GitHub runner'a ulasmiyor ->
+  dosya depoya islenen bir dosya; `--onayla` commit gerektigini basiyor ve
+  `persist_state.sh` listesine ekleniyor. Taze checkout testi eklendi.
+- ACCEPTED , `--yayinla-mevcut` metadata kaynagi tanimsiz, `sirdaki()` baska rotanin
+  caption'ini takabilir -> metadata artik uretim kaydindan geliyor; `sirdaki()` baska
+  slug donduruyorken bile dogru metadata gittigi test ediliyor.
+- ACCEPTED , kontakt sayfasinda yalniz varlik/boyut kontrolu onceki kosudan kalan PNG
+  ile aldatilir -> yol kosuya ozel (`out/<slug>/kontakt/<master_sha>.png`) ve "eski
+  dolu PNG varken yeni ffmpeg basarisizligi yine yakalanir" testi eklendi.
+- ACCEPTED , Rock 1'in 720p proof'u `720x1920` yaziyordu -> benim hatam, en-boy orani
+  yanlis. `720x1280` olarak duzeltildi.
+- ACCEPTED , Rock 4 "butun alanlar master'dan olculur" diyor ama slug/palet/sure medya
+  olcumu degil -> alan kaynaklari tabloyla ayrildi (uretim kaydi / probe / sidecar /
+  YouTube sonucu).
+- ACCEPTED , "ayni gun guvenli tekrar engellenmez" iddiasi fazla genis; `yayinla.py:80-87`
+  sha kapisi hala kosulsuz -> iddia daraltildi, plan artik platform tekrarini
+  cozdugunu IDDIA ETMIYOR (issue #5).
+
+**Reddedilen:**
+
+- REJECTED , "tek kanarya sha'sinin onayi kombinasyonu acip cron'un sonraki
+  incelenmemis videolarini yetkilendiriyor; her videonun kendi sha onayi zorunlu olsun"
+  -> Teknik olarak dogru tespit, ama istenen carе gunluk otomatik kanali BITIRIR.
+  Kanal bugune kadar zaten insansiz kosuyordu ve 720p'de de oyleydi; bu degisiklik
+  YENI bir risk getirmiyor, mevcut risk seviyesini koruyor. Ayirim korunuyor:
+  **profil onayi teknik bir izindir** (bu kombinasyon calisiyor mu), **video onayi
+  ayri bir urundur** (bu video iyi mi) ve o issue #6'daki anlamsal kapinin isi.
+  Per-video sha baglamasi yalnizca `--yayinla-mevcut` yolunda zorunlu tutuldu.
