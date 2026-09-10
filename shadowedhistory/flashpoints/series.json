@@ -776,6 +776,10 @@
         "duration_in_band": null,
         "degraded": true
       }
+    },
+    "31": {
+      "status": "awaiting_approval",
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: true-peak -0.4 dBTP > -1.0 dBTP"
     }
   }
 }
