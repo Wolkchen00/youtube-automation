@@ -4,7 +4,7 @@ Tarih: 10 Eylul 2026 (Los Angeles)
 Kaynak analiz: `galactic_experience/REELYZE-RAPOR.md`
 Seri: `event-horizon` (kanal: galactic_experience / galacticexperimet)
 Temel: `git HEAD 9eec629`, `python -m pytest tests/ -q` => 801 passed, 2 skipped, 188 subtests
-Revizyon: r2 (Same Page Meeting tur 1 bulgulari uygulandi)
+Revizyon: r3 (Codex tur 1 bulgulari + Visionary'nin kendi olcumu: limiter hatasi)
 
 ## Core Focus
 
@@ -96,7 +96,107 @@ kalintilari `migrate_malformed_approval_holds` ile bir kez siniflandiriliyor.
 
 ---
 
-## ROCK 1: Ses masteri acilir
+## ROCK 1: master_audio true-peak dongusu yakinsamiyor (ORTAK MOTOR, ONKOSUL)
+
+**Bu bulgu Visionary'nin kendi olcumunden geldi, raporda ve Codex tur 1'de yoktu.**
+
+Yayinlanmis part 24 videosu (-24,8 LUFS) motorun kendi
+`core/ffmpeg_tools.master_audio(target_i=-14, target_tp=-1.0)` fonksiyonundan
+gecirildi. Sonuc:
+
+```
+RuntimeError: master teslim sozlesmesi 3 denemede tutulamadi:
+true-peak -0.9 dBTP > -1.0 dBTP
+```
+
+Yani `master_lufs` alanini eklemek TEK BASINA kanali duzeltmez; her bolumu
+`AUDIO_MASTER` hold'una dusurur.
+
+### Kok neden (olculdu, tahmin degil)
+
+Teslim edilen true-peak, limiter tavaninin daima ~0,15 dB USTUNDE kaliyor
+(96 kHz limitten 48 kHz'e yeniden orneklemenin ve AAC kodlamasinin orneklerarasi
+tepeleri). Tavan supurmesi (ayni gercek ses, ayni boru hatti):
+
+| limiter tavani | teslim true-peak (ebur128) | astats tepe |
+|---|---|---|
+| -1,0 dB | -0,9 | -0,973 |
+| -1,1 dB | -0,9 | -1,043 |
+| -1,2 dB | -0,9 | -1,086 |
+| **-1,3 dB** | **-1,3** | -1,295 |
+| -1,5 dB | -1,3 | -1,415 |
+
+Dongu (`core/ffmpeg_tools.py:305-307`) tavani tam olculen tasma kadar geri cekiyor:
+
+```python
+overshoot = delivered["true_peak_dbtp"] - float(target_tp)   # 0.1
+limiter_db -= overshoot
+```
+
+Tasma 0,1 dB olarak olculuyor (ffmpeg 0,1 dB cozunurlukte raporluyor), ama
+tavan-teslim araligi 0,15 dB. Her adimda kazandigi kadarini geri veriyor.
+Uc deneme -1,0 / -1,1 / -1,2'de bitiyor ve **gectigi yer olan -1,3'e hic varamiyor.**
+
+Bu, `sentinal_ihsan/unnatural-lab` part 33'un su anda `AUDIO_MASTER` hatasiyla
+takili olmasinin da sebebidir.
+
+### Duzeltme (yan yana kosularak kanitlandi)
+
+Geri cekmeye sabit bir pay eklenir ve deneme sayisi 3'ten 4'e cikar:
+
+```python
+TRUE_PEAK_PULLBACK_MARGIN_DB = 0.2   # olculen tavan-teslim araligi 0,15 dB
+limiter_db -= (overshoot + TRUE_PEAK_PULLBACK_MARGIN_DB)
+```
+
+Toplam geri cekme `target_tp - 3.0` dB'yi asarsa dongu erken ve acik mesajla
+biter: -6 dB tavanda teslim LUFS -15,4'e dusuyor, yani sozlesmenin LUFS ayagi
+zaten kirilirdi.
+
+Ayni gercek ses uzerinde olculmus sonuc:
+
+```
+-- mevcut (pay=0.0 dB)
+   deneme 1: tavan -1.00 -> TP  -0.9  LUFS  -14.1  kaldi
+   deneme 2: tavan -1.10 -> TP  -0.9  LUFS  -14.1  kaldi
+   deneme 3: tavan -1.20 -> TP  -0.9  LUFS  -14.1  kaldi
+-- onerilen (pay=0.2 dB)
+   deneme 1: tavan -1.00 -> TP  -0.9  LUFS  -14.1  kaldi
+   deneme 2: tavan -1.30 -> TP  -1.3  LUFS  -14.1  GECTI
+```
+
+**Neden geriye donuk guvenli**: birinci deneme AYNEN eskisi gibi `target_tp`
+tavaniyla kosuyor. Bugun ilk denemede gecen her bolum bit bit ayni cikar.
+Sadece BUGUN BASARISIZ OLAN yol degisiyor.
+
+**Kapsam notu (Ihsan'in dikkatine)**: bu degisiklik `core/ffmpeg_tools.py`
+icinde, yani ORTAK motorda. Baska ajanlarin kanal klasorlerine dokunmuyor, ama
+etkisi `unnatural-lab`'a da yansir: takili part 33'u serbest birakir. Kanal
+dosyalarina dokunmama kurali korunuyor; bu bir motor hata duzeltmesidir ve
+onsuz ROCK 2 imkansizdir.
+
+**Done looks like**: gercek kanal sesi uzerinde `master_audio` sozlesmeyi
+tutturuyor (integrated -14 +/- 1,0 ve true-peak <= -1,0), dort denemeyi asmiyor.
+
+**PROOF**:
+```
+python -m pytest tests/ -q
+```
+Yeni test `tests/test_master_true_peak_convergence.py` (ffmpeg gerektirir, SKIP ETMEZ):
+- Mevcut hatayi yeniden ureten bir sinyal (loudnorm sonrasi tavana yapisan,
+  orneklerarasi tepesi yuksek bir miks) `master_audio(target_i=-14, target_tp=-1.0)`
+  ile master'lanir: istisna FIRLATMAZ, cikti true-peak <= -1,0 ve
+  integrated -14 +/- 1,0 olur.
+- Ilk denemede gecen bir sinyalde tavanin `target_tp` oldugu ve ciktinin
+  degisiklikten ONCEKI ciktiyla bit bit ayni oldugu dogrulanir (geriye uyum).
+- Yakinsamayan uydurma bir olcum enjekte edildiginde dongu `target_tp - 3.0` dB
+  sinirinda, LUFS sozlesmesini bozmadan, acik mesajla durur.
+- `tests/test_master_true_peak.py` ve `test_master_true_peak_adversarial.py`
+  mevcut haliyle yesil kalir.
+
+---
+
+## ROCK 2: Ses masteri acilir (master_lufs)
 
 **Neden**: 8-11 dB eksik ses, anlatim tabanli bir kanalda icerigin kendisini yok
 ediyor. YouTube sessiz videoyu YUKSELTMEZ, sadece yuksek olani kisar.
@@ -113,8 +213,7 @@ beklemeye guncellenir. `sentinal_ihsan` altindaki hicbir dosyaya dokunulmaz.
 
 **Risk (durustce)**: mastering hatasi gercek (unnatural-lab part 33 kaniti).
 ROCK 0 olmadan bu risk "kanal susar"dir. ROCK 0 ile risk "o bolum 3 kez denenir,
-sonra insana devredilir ve kuyruk ilerler" seviyesine iner. ROCK 1, ROCK 0 olmadan
-ASLA yayina alinmaz.
+sonra insana devredilir ve kuyruk ilerler" seviyesine iner. ROCK 2, ROCK 0 ve ROCK 1 olmadan ASLA yayina alinmaz.
 
 **PROOF**:
 ```
@@ -133,7 +232,7 @@ Yeni test `tests/test_galactic_master_lufs.py` (ffmpeg gerektirir, SKIP ETMEZ):
 
 ---
 
-## ROCK 2: Ekran kunyesi acilir (fail-closed)
+## ROCK 3: Ekran kunyesi acilir (fail-closed)
 
 **Neden**: Bu seride hicbir ekran yazisi yok; sessiz izleyici hicbir sey okuyamiyor.
 `core/ffmpeg_tools.py:1362` `title_card_overlay` HAZIR ve `shadowedhistory` kullaniyor.
@@ -206,7 +305,7 @@ Yeni test `tests/test_title_card_required_layer.py` (ffmpeg gerektirir, SKIP ETM
 
 ---
 
-## ROCK 3: Kusurlu bolum yayini durur (yalniz event-horizon)
+## ROCK 4: Kusurlu bolum yayini durur (yalniz event-horizon)
 
 **Neden**: son alti bolumun ucu kusurlu ve ucu de yayinlandi. part 29 anlatimsiz cikti.
 
@@ -268,7 +367,7 @@ Yeni test `tests/test_degraded_publish_gate.py`:
 
 ---
 
-## ROCK 4: Baslik kalibi anomali vaat eder + kuyruk yenilenir
+## ROCK 5: Baslik kalibi anomali vaat eder + kuyruk yenilenir
 
 **Neden**: basliklar konu bildiriyor, merak yaratmiyor. Filodaki tek basarili kanal
 (`sentinal_ihsan`, 1.292 medyan) "This X Is NOT Supposed To Y" kalibini kullaniyor:
@@ -321,8 +420,8 @@ Yeni test `tests/test_galactic_queue_titles.py`:
 
 ## Bagimlilik sirasi
 
-ROCK 0 -> ROCK 1 -> ROCK 2 -> ROCK 3 -> ROCK 4.
-ROCK 0 bir onkosuldur: ROCK 1 ve ROCK 3 yeni hold yollari aciyor ve v1 durum
+ROCK 0 -> ROCK 1 -> ROCK 2 -> ROCK 3 -> ROCK 4 -> ROCK 5.
+ROCK 0 bir onkosuldur: ROCK 2 ve ROCK 4 yeni hold yollari aciyor ve v1 durum
 makinesinde her hold kanali susturur.
 
 ## DOKUNMA listesi
@@ -346,7 +445,8 @@ makinesinde her hold kanali susturur.
 - Cekim basina 4 saniye tavani / 5-7 saniyede pattern interrupt: `shot_seconds` 6'dan
   4'e inmek cekim sayisini ve kredi maliyetini artirir, ayri bir maliyet karari.
 - part 31'in son cekiminin 8,48 saniye surmesi.
-- Diger uc kanalin `master_lufs` eksigi (baska ajanlarin alani).
+- Diger uc kanalin `master_lufs` eksigi (baska ajanlarin alani). ROCK 1'in
+  limiter duzeltmesi onlarin yolunu da acar ama alanlarini biz ACMIYORUZ.
 - Diger serilerin `state_machine_version` 1'de kalmasi: ayni sessiz-susma riski
   onlarda da var, ama kapsam disi.
 - Retention ve CTR verisi: YouTube Studio gerekiyor.
