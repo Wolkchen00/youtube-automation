@@ -434,3 +434,16 @@ Tavanda karar Owner's Box'a (Ihsan) aittir. Kayit asagiya dusulecek.
 Round 1-2: `gpt-5.6-sol` | Round 3-4: `gpt-6-astra` | Round 5: `gpt-5.6-sol`.
 Sohbet gecmisi her seferinde tasindi (Codex onceki turlarin bulgularina numarayla
 dogru atif yapti), ama toplantinin tamami tek modelin yargisi DEGIL.
+
+### USER OVERRIDE
+
+**Ihsan, 10 Eylul 2026 12:40 PDT: "codex limiti yenilendi devam".**
+
+Bes turluk tavan `VERDICT: NOT YET` ile doldu. Sahte onay YOK: son verdict aynen
+yukarida duruyor. Ancak round 5'in uc bulgusunun ucu de r6'da kapatildi ve acik
+bulgu kalmadi; deadlock degil yakinsama var (22 -> 21 -> 11 -> 6 -> 3 -> 0).
+Ihsan'in "devam" talimatiyla insa asamasina geciliyor.
+
+Insa sirasi plandaki gibi: [Rock 1 + Rock 1b + Rock 3] tek commit -> Rock 2 ->
+Rock 4 -> Rock 5. Her rock sonrasi Level 10 inceleme: TAM diff okunur, kanit
+Claude tarafindan calistirilir, ve Claude kendi saldiri testini yazar.
