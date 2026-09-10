@@ -1,15 +1,18 @@
 # BEYIN , flashpoints
 
-Uretim: 2026-09-10T21:05:25.634371+00:00
+Uretim: 2026-09-10T21:45:13.703019+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\flashpoints\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
+Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
+nerede oturdugu gorulur.
 
 ---
 
 ## 1. DURUM
 
 - Olculen video: **15**
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 1/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **24**
 - Aralik: 0 ile 1,179 arasi
 
@@ -24,6 +27,15 @@ Son yayinlar (tekrar etme):
 - 2026-09-07 , The Real Reason America Invaded An Empty Island!
 - 2026-09-06 , The Great Fire Of London: Fact Or Ancient Propaganda?
 - 2026-09-05 , How Brooklyn Bridge Spanned The East River In 1883!
+
+### Teslim rejimi
+
+- Guncel rejim: `fb07fc44`
+- Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
+
+### Yayinlanmayanlar
+
+- Su anda tutulan bolum yok.
 
 ## 2. BU KANALDA NE ISE YARIYOR
 

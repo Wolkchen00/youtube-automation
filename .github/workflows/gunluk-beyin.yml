@@ -69,8 +69,11 @@ jobs:
         run: python -m pip install --quiet --upgrade yt-dlp pytest
 
       # Kapi: kod bozuksa hicbir kanala dokunma.
+      # TUM tests/ klasoru kosar. Tek dosya adi yazmak, sonradan eklenen test
+      # dosyalarini sessizce CI disinda birakiyordu (rejim ve kusur testleri
+      # boyle olu kalmisti).
       - name: Testler
-        run: python -m pytest tests/test_beyin_bagimsiz.py -q
+        run: python -m pytest tests/ -q
 
       - name: Beyni guncelle
         id: guncelle

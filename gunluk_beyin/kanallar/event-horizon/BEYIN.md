@@ -1,15 +1,19 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-10T21:05:25.549431+00:00
+Uretim: 2026-09-10T21:44:29.055363+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\event-horizon\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
+Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
+nerede oturdugu gorulur.
 
 ---
 
 ## 1. DURUM
 
 - Olculen video: **15**
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 0/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
+- _1 video 24 saatten taze, siralamaya girmiyor._
 - Medyan izlenme: **104**
 - Aralik: 13 ile 393 arasi
 
@@ -24,6 +28,15 @@ Son yayinlar (tekrar etme):
 - 2026-09-08 , Flying to Alpha Centauri: A 5 MILLION Year Trip
 - 2026-09-07 , Olympus Mons: Towers Over Everest
 - 2026-09-06 , KELT-9b: Hotter Than MOST Stars
+
+### Teslim rejimi
+
+- Guncel rejim: `aa8804dd`
+- Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
+
+### Yayinlanmayanlar
+
+- Su anda tutulan bolum yok.
 
 ## 2. BU KANALDA NE ISE YARIYOR
 

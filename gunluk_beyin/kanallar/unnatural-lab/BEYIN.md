@@ -1,15 +1,18 @@
 # BEYIN , unnatural-lab
 
-Uretim: 2026-09-10T21:05:25.461822+00:00
+Uretim: 2026-09-10T21:44:28.927900+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\unnatural-lab\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
+Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
+nerede oturdugu gorulur.
 
 ---
 
 ## 1. DURUM
 
 - Olculen video: **15**
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 0/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **1,157**
 - Aralik: 82 ile 1,499 arasi
 
@@ -24,6 +27,26 @@ Son yayinlar (tekrar etme):
 - 2026-09-04 , Something Is WRONG With This SOAP
 - 2026-09-02 , Something Is WRONG With This ICE CUBE
 - 2026-08-28 , Something Is WRONG With This LEMON
+
+### Teslim rejimi
+
+- Guncel rejim: `60ccabd4`
+- Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
+
+### Yayinlanmayanlar
+
+- **8 bolum uretildi ama YAYINLANMADI.** Bunlar YouTube'a cikmadigi icin yukaridaki olcumlere HIC girmiyor; en cok ogrenilecek hatalar bunlardir.
+
+| part | durum | kod | eksik | deneme |
+|---|---|---|---|---|
+| 1 | rejected | - | - | - |
+| 2 | rejected | - | - | - |
+| 23 | skipped | - | - | - |
+| 24 | skipped | - | - | - |
+| 25 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 0 |
+| 26 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 0 |
+| 28 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 1 |
+| 30 | needs_human | UNKNOWN | üretim nedeni bilinmiyor | 3 |
 
 ## 2. BU KANALDA NE ISE YARIYOR
 

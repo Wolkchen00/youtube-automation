@@ -17,6 +17,7 @@ Note on language: identifiers and comments are English; user-facing strings
 agents read them.
 """
 import argparse
+import hashlib
 import json
 import os
 import statistics as st
@@ -34,6 +35,31 @@ CHANNELS = {
     "flashpoints": "UCUdp0KLBh4EeeSgVbwS_DhA",
     "aimagine-fear": "UCCgbHTzYKYawUT6zEo0nlDg",
 }
+
+# Kanal -> seri klasoru. Rejim damgasi ve yayinlanmayan bolumler buradan okunur.
+# aimagine-fear listede YOK: o kanal ayri bir boru hattiyla (build.py) uretiliyor,
+# bible.json/series.json tasimiyor. Eksik olmasi hata degildir.
+SERIES_DIRS = {
+    "unnatural-lab": os.path.join("sentinal_ihsan", "unnatural-lab"),
+    "event-horizon": os.path.join("galactic_experience", "event-horizon"),
+    "flashpoints": os.path.join("shadowedhistory", "flashpoints"),
+}
+
+# TESLIM REJIMI: videoyu fiilen degistiren ayarlar. Iki farkli rejimde uretilmis
+# videolar ayni defterde YAN YANA KARSILASTIRILAMAZ. -22 LUFS ve ekran yazisiz
+# bolumlerle -14 LUFS ve kunyeli bolumler ayni urunun iki ornegi degil, iki ayri
+# urundur; havuzlanirsa beyin izlenme farkini yanlis sebebe baglar.
+REGIME_BIBLE_FIELDS = (
+    "master_lufs", "master_true_peak_margin_db", "title_card", "fact_captions",
+    "required_layers", "duration_band", "block_degraded_publish", "hook_teaser",
+    "upscale", "micro_trim", "audio_smooth", "resolution", "aspect_ratio",
+)
+REGIME_REPLENISH_FIELDS = ("shots", "shot_seconds", "title_style", "narration",
+                           "title_card", "fact_captions")
+
+# series.json'da YAYINLANMIS sayilmayan durumlar zaten "published" disidir;
+# bu ikisi ise kuyrukta sirasini bekleyen normal hallerdir, kusur degildir.
+QUEUED_STATES = ("", "planned", "queued", "pending")
 
 # Minimum ledger size before we derive any channel-specific rule.
 # Below this we claim NOTHING and fall back to the general thresholds.
@@ -83,6 +109,199 @@ def channel_dir(channel, root=None):
 
 def ledger_path(channel, root=None):
     return os.path.join(channel_dir(channel, root), "defter.jsonl")
+
+
+def repo_root(root=None):
+    """gunluk_beyin/ bir alt klasordur; seri dosyalari bir ust dizindedir."""
+    return os.path.dirname(root or ROOT)
+
+
+def series_dir(channel, root=None):
+    """Kanalin seri klasoru. Bilinmeyen kanal ya da yoksa None (hata degil)."""
+    rel = SERIES_DIRS.get(channel)
+    if not rel:
+        return None
+    path = os.path.join(repo_root(root), rel)
+    return path if os.path.isdir(path) else None
+
+
+def _read_json(path):
+    try:
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    except Exception:
+        return None
+
+
+def delivery_regime(channel, root=None):
+    """Bugun bu kanaldan cikan videoyu belirleyen ayarlarin parmak izi.
+
+    Donus: {"id": "<8 hex>", "alanlar": {...}} ya da kaynak yoksa None.
+    Kaynagin bulunamamasi bir HATA DEGILDIR: aimagine-fear'in bible.json'u yok
+    ve testler beyin.py'yi bos bir gecici kokte calistirir.
+    """
+    folder = series_dir(channel, root)
+    if not folder:
+        return None
+    bible = _read_json(os.path.join(folder, "bible.json"))
+    if not isinstance(bible, dict):
+        return None
+    fields = {}
+    series = bible.get("series")
+    if isinstance(series, dict):
+        for key in REGIME_BIBLE_FIELDS:
+            if key in series:
+                fields["bible." + key] = series[key]
+    if "music" in bible:
+        fields["bible.music"] = bible["music"]
+    meta = _read_json(os.path.join(folder, "series.json"))
+    cfg = (meta or {}).get("auto_replenish")
+    if isinstance(cfg, dict):
+        for key in REGIME_REPLENISH_FIELDS:
+            if key in cfg:
+                fields["cfg." + key] = cfg[key]
+    if not fields:
+        return None
+    blob = json.dumps(fields, sort_keys=True, ensure_ascii=False)
+    digest = hashlib.sha256(blob.encode("utf-8")).hexdigest()[:8]
+    return {"id": digest, "alanlar": fields}
+
+
+def regimes_path(channel, root=None):
+    return os.path.join(channel_dir(channel, root), "rejimler.json")
+
+
+def read_regimes(channel, root=None):
+    data = _read_json(regimes_path(channel, root))
+    return data if isinstance(data, dict) else {}
+
+
+def remember_regime(channel, regime, root=None):
+    """Rejimi bir kez kaydet; boylece beyin NEYIN degistigini soyleyebilir."""
+    if not regime:
+        return
+    known = read_regimes(channel, root)
+    if regime["id"] in known:
+        return
+    known[regime["id"]] = {"ilk_gorulme": now_iso(), "alanlar": regime["alanlar"]}
+    os.makedirs(channel_dir(channel, root), exist_ok=True)
+    with open(regimes_path(channel, root), "w", encoding="utf-8") as fh:
+        json.dump(known, fh, ensure_ascii=False, indent=2, sort_keys=True)
+
+
+def regime_diff(older, newer):
+    """Iki rejimin alan sozlukleri arasindaki farki insan diliyle listele."""
+    lines = []
+    for key in sorted(set(older) | set(newer)):
+        before, after = older.get(key, "<yok>"), newer.get(key, "<yok>")
+        if before == after:
+            continue
+        lines.append("%s: %s -> %s"
+                     % (key, json.dumps(before, ensure_ascii=False)[:60],
+                        json.dumps(after, ensure_ascii=False)[:60]))
+    return lines
+
+
+def held_episodes(channel, root=None):
+    """URETILDI ama YAYINLANMADI olan bolumler.
+
+    Beynin kor noktasi tam olarak burasi: defter yalnizca YouTube'a cikani
+    olcer, yani en cok ogrenilecek basarisizliklar kayda hic girmez.
+    Donus: liste, ya da kaynak okunamadiysa None.
+    """
+    folder = series_dir(channel, root)
+    if not folder:
+        return None
+    meta = _read_json(os.path.join(folder, "series.json"))
+    parts = (meta or {}).get("parts")
+    if not isinstance(parts, dict):
+        return None
+    held = []
+    for key, part in parts.items():
+        if not isinstance(part, dict):
+            continue
+        status = str(part.get("status") or "").strip()
+        if status == "published" or status in QUEUED_STATES:
+            continue
+        coherence = part.get("coherence")
+        coherence = coherence if isinstance(coherence, dict) else {}
+        held.append({
+            "part": str(key),
+            "durum": status,
+            "kod": part.get("last_reason_code") or "",
+            "neden": str(part.get("hold_reason") or "")[:120],
+            "deneme": part.get("retry_count"),
+            "dusen_roller": coherence.get("arc_roles_missing") or [],
+            "anlatim": coherence.get("narration_delivered"),
+            "sure": coherence.get("duration_s"),
+            "baslik": str(part.get("subtitle") or "")[:48],
+        })
+    held.sort(key=lambda h: int(h["part"]) if h["part"].isdigit() else 0)
+    return held
+
+
+def faults_path(channel, root=None):
+    return os.path.join(channel_dir(channel, root), "kusur.jsonl")
+
+
+def read_faults(channel, root=None):
+    """Kusur defteri: gecmiste GORULMUS yayinlanmama olaylari."""
+    path = faults_path(channel, root)
+    rows = []
+    if not os.path.exists(path):
+        return rows
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        for raw in fh:
+            raw = raw.strip()
+            if not raw:
+                continue
+            try:
+                row = json.loads(raw)
+            except Exception:
+                continue
+            if isinstance(row, dict) and row.get("anahtar"):
+                rows.append(row)
+    return rows
+
+
+def _fault_key(item):
+    return "%s|%s|%s|%s" % (item["part"], item["durum"], item["kod"],
+                            item["neden"][:40])
+
+
+def record_faults(channel, root=None):
+    """Anlik kusurlari KALICI deftere isle.
+
+    series.json yalnizca SU ANKI durumu tutar: iki gunluk kosu arasinda kendini
+    toparlayan bir hata (ornek: unnatural-lab part 33, AUDIO_MASTER, yeniden
+    denemede yayinlandi) hicbir yerde iz birakmazdi. Burasi o izi birakir.
+    Donus: (toplam_kayit, yeni_eklenen).
+    """
+    held = held_episodes(channel, root)
+    if held is None:
+        return None
+    known = read_faults(channel, root)
+    seen = {row["anahtar"]: row for row in known}
+    added = 0
+    stamp = now_iso()
+    for item in held:
+        key = _fault_key(item)
+        if key in seen:
+            seen[key]["son_gorulme"] = stamp
+            continue
+        row = dict(item)
+        row["anahtar"] = key
+        row["ilk_gorulme"] = stamp
+        row["son_gorulme"] = stamp
+        known.append(row)
+        seen[key] = row
+        added += 1
+    if known:
+        os.makedirs(channel_dir(channel, root), exist_ok=True)
+        with open(faults_path(channel, root), "w", encoding="utf-8") as fh:
+            for row in known:
+                fh.write(json.dumps(row, ensure_ascii=False) + chr(10))
+    return (len(known), added)
 
 
 def read_ledger(channel, root=None):
@@ -209,6 +428,14 @@ def cmd_measure(channel, limit=15):
 
     rows, _ = read_ledger(channel)
     known = {row["video_id"] for row in rows}
+    # Teslim rejimi: bu video HANGI ayarlarla uretildi. Kaynak yoksa damgasiz
+    # gecer; beyin damgasiz kayitlari "bilinmiyor" diye ayri sayar.
+    regime = delivery_regime(channel)
+    remember_regime(channel, regime)
+    if regime:
+        print("teslim rejimi: %s" % regime["id"])
+    else:
+        print("teslim rejimi: kaynak yok (bu kanal icin seri dosyasi bulunamadi)")
     feed = youtube_rss(CHANNELS[channel], limit)
     candidates = [v for v in feed if v["video_id"] not in known]
 
@@ -258,6 +485,7 @@ def cmd_measure(channel, limit=15):
             "wpm": result.get("wpm"),
             "sonuc": {"izlenme": video.get("rss_izlenme"), "begeni": None,
                       "gecmis": []},
+            "rejim": regime["id"] if regime else None,
             "olculdu_ts": now_iso(),
         })
         write_ledger(channel, rows)
@@ -344,7 +572,36 @@ def _comparison_row(upper, lower, name, label, unit):
 def cmd_brain(channel):
     rows, skipped = read_ledger(channel)
     total = len(rows)
-    enough = total >= MIN_SAMPLES
+
+    # --- teslim rejimi ---------------------------------------------------
+    # Iki farkli rejimde uretilmis videolari YAN YANA sayarsak beyin izlenme
+    # farkini yanlis sebebe baglar. Kural:
+    #   damga hic yoksa      -> havuzla, ama takibin YENI basladigini soyle
+    #   guncel rejim yeterli -> YALNIZ onu kullan
+    #   guncel rejim az      -> havuzla, ama kac kaydin guncel oldugunu SOYLE
+    regime = delivery_regime(channel)
+    stamped = [r for r in rows if r.get("rejim")]
+    current_rows = ([r for r in rows if r.get("rejim") == regime["id"]]
+                    if regime else [])
+    regime_note = None
+    if not stamped:
+        compare_rows = rows
+        if regime:
+            regime_note = ("Rejim takibi bugun basladi; defterdeki %d kaydin "
+                           "hicbirinde damga yok, hepsi birlikte sayiliyor."
+                           % total)
+    elif len(current_rows) >= MIN_SAMPLES:
+        compare_rows = current_rows
+        regime_note = ("Karsilastirma YALNIZ guncel rejimin %d kaydiyla yapildi "
+                       "(defterde toplam %d kayit var)." % (len(current_rows), total))
+    else:
+        compare_rows = rows
+        regime_note = ("**DIKKAT: karma orneklem.** Guncel rejimde yalnizca %d "
+                       "kayit var, en az %d gerekiyor; bu yuzden asagidaki "
+                       "karsilastirma FARKLI ayarlarla uretilmis %d kaydi bir "
+                       "arada kullaniyor. Yonu kanun sanma."
+                       % (len(current_rows), MIN_SAMPLES, total))
+    enough = len(compare_rows) >= MIN_SAMPLES
 
     # Age-fair ranking. Comparing a 30-day-old video to a 2-day-old one on
     # current views is unfair; if most rows carry an hour-24 figure, use it.
@@ -361,7 +618,8 @@ def cmd_brain(channel):
 
     not_enough = (
         "**YETERSIZ VERI** (n=%d, en az %d gerekiyor). Bu kanala ozel kural "
-        "cikarilamaz, asagidaki genel esikler kullanilmali." % (total, MIN_SAMPLES)
+        "cikarilamaz, asagidaki genel esikler kullanilmali."
+        % (len(compare_rows), MIN_SAMPLES)
     )
 
     out = []
@@ -417,6 +675,80 @@ def cmd_brain(channel):
         else:
             out.append("- Izlenme verisi yok. `python beyin.py topla %s` calistir."
                        % channel)
+
+    # --- teslim rejimi: neyle uretildi -----------------------------------
+    if regime_note:
+        out.append("")
+        out.append("### Teslim rejimi")
+        out.append("")
+        if regime:
+            out.append("- Guncel rejim: `%s`" % regime["id"])
+        out.append("- %s" % regime_note)
+        by_regime = {}
+        for row in rows:
+            key = row.get("rejim") or "damgasiz"
+            by_regime[key] = by_regime.get(key, 0) + 1
+        if len(by_regime) > 1:
+            out.append("- Defterdeki dagilim: %s"
+                       % ", ".join("`%s` x%d" % (k, v)
+                                   for k, v in sorted(by_regime.items(),
+                                                      key=lambda kv: -kv[1])))
+            known = read_regimes(channel)
+            others = [k for k in by_regime if k not in ("damgasiz",)
+                      and (not regime or k != regime["id"])]
+            if regime and others:
+                previous = known.get(others[0], {}).get("alanlar")
+                if isinstance(previous, dict):
+                    changes = regime_diff(previous, regime["alanlar"])
+                    if changes:
+                        out.append("- Onceki rejime gore degisenler:")
+                        for line in changes[:8]:
+                            out.append("  - %s" % line)
+
+    # --- yayinlanmayanlar: beynin goremedigi hatalar ---------------------
+    fault_stats = record_faults(channel)
+    held = held_episodes(channel)
+    if held is None:
+        # Sessizlik "temiz" diye okunur. Goremedigimizi ACIKCA soyle.
+        out.append("")
+        out.append("### Yayinlanmayanlar")
+        out.append("")
+        out.append("- Bu kanal icin seri kaydi okunamadi (ayri boru hatti ya da "
+                   "dosya yok). Yayinlanmayan bolumler GORUNTULENEMIYOR; "
+                   "bu 'hata yok' demek DEGILDIR.")
+    else:
+        out.append("")
+        out.append("### Yayinlanmayanlar")
+        out.append("")
+        history = fault_stats[0] if fault_stats else 0
+        if not held:
+            out.append("- Su anda tutulan bolum yok.")
+            if history:
+                out.append("- Kusur defterinde gecmisten **%d** olay kayitli "
+                           "(`kusur.jsonl`). series.json yalnizca ANLIK durumu "
+                           "tutar; kendini toparlayan hatalar orada iz birakmaz."
+                           % history)
+        else:
+            out.append("- **%d bolum uretildi ama YAYINLANMADI.** Bunlar YouTube'a "
+                       "cikmadigi icin yukaridaki olcumlere HIC girmiyor; en cok "
+                       "ogrenilecek hatalar bunlardir." % len(held))
+            out.append("")
+            out.append("| part | durum | kod | eksik | deneme |")
+            out.append("|---|---|---|---|---|")
+            for item in held[-8:]:
+                eksik = []
+                if item["dusen_roller"]:
+                    eksik.append("dusen: " + ", ".join(map(str, item["dusen_roller"])))
+                if item["anlatim"] is False:
+                    eksik.append("anlatim cikmadi")
+                if item["sure"]:
+                    eksik.append("%.1f sn" % item["sure"])
+                if not eksik and item["neden"]:
+                    eksik.append(item["neden"][:44])
+                out.append("| %s | %s | %s | %s | %s |"
+                           % (item["part"], item["durum"] or "?",
+                              item["kod"] or "-", "; ".join(eksik) or "-",
+                              item["deneme"] if item["deneme"] is not None else "-"))
     out.append("")
 
     # --- 2. what works here
@@ -426,7 +758,7 @@ def cmd_brain(channel):
     if not enough:
         out.append(not_enough)
     else:
-        rankable = [r for r in rows if metric(r) is not None]
+        rankable = [r for r in compare_rows if metric(r) is not None]
         if len(rankable) < MIN_SAMPLES:
             out.append("**YETERSIZ VERI** (izlenmesi bilinen kayit n=%d, en az %d "
                        "gerekiyor). `topla` komutunu calistir."

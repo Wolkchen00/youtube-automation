@@ -1,15 +1,19 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-10T21:05:25.722134+00:00
+Uretim: 2026-09-10T21:44:55.336188+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\aimagine-fear\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
+Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
+nerede oturdugu gorulur.
 
 ---
 
 ## 1. DURUM
 
 - Olculen video: **15**
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 0/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
+- _1 video 24 saatten taze, siralamaya girmiyor._
 - Medyan izlenme: **16**
 - Aralik: 0 ile 3,165 arasi
 
@@ -24,6 +28,10 @@ Son yayinlar (tekrar etme):
 - 2026-09-08 , You're dropping past the Eiffel Tower on a transparent slide
 - 2026-09-07 , You're sliding around the CN Tower on a transparent water sl
 - 2026-09-06 , You're falling past the Burj Khalifa on a transparent slide 
+
+### Yayinlanmayanlar
+
+- Bu kanal icin seri kaydi okunamadi (ayri boru hatti ya da dosya yok). Yayinlanmayan bolumler GORUNTULENEMIYOR; bu 'hata yok' demek DEGILDIR.
 
 ## 2. BU KANALDA NE ISE YARIYOR
 
