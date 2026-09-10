@@ -3,19 +3,18 @@
 Tarih: 10 Eylul 2026 (Los Angeles)
 Dal: `codex-shadow-kanal` (worktree; ana agacta bes baska oturum calisiyor)
 Kaynak: `shadowedhistory/REELYZE-RAPOR.md` + bu kosuda yapilan olcum
+Revizyon: r2 (Codex Same Page turu 1 sonrasi , dort rock'tan ikisi oldu)
 
 ## Core Focus (tek cumle)
 
-flashpoints'in yayinladigi her bolum, kanalin kendi olculmus en iyi bicimine uysun:
-15 saniye, iki cekim, duyulabilir ses, ekranda okunur bilgi , ve yarim bolum asla
-yayinlanmasin.
+flashpoints'in yayinladigi hicbir bolum sessiz olmasin ve hicbir bolum anlattigi
+faktı yarim birakmasin.
 
 ## Bu plan neyi COZMEZ
 
 Erisim sorununu cozmez. Kanalin iki hitini (1.179 ve 509 izlenme) ne ses ne sure
-acikladi; ikisi de konu tanınırligiyla one cikti ve bu hipotez 29 bolumluk veride
-zayif ciktı (asagida). Bu plan "urettigimiz sey niyetimize uysun" sorununu cozer.
-Konu secimi ayri bir is olarak `RF-ISSUES.md`'ye tasindi.
+acikladi. Bu plan yalnizca "yayinladigimiz sey butun ve duyulabilir olsun" sorununu
+cozer. Sure, konu secimi ve ekran yazisi `RF-ISSUES.md`'ye tasindi.
 
 ---
 
@@ -40,52 +39,19 @@ series/produce.py:126-130  _required_shot_count():
 ```
 
 `flashpoints/bible.json` `qc` blogunda `min_shots` yok, `require_all_shots` yok.
-Yani iki cekimlik bir plan TEK cekimle yayina cikabiliyor. Olculen sonuc:
+Iki cekimlik bir plan TEK cekimle yayina cikabiliyor.
 
-`qc_log.jsonl` -> `final_reject` olayi 8 bolumde (4, 9, 22, 23, 24, 26, 27, 30).
-Yayinlanan sure dagilimina gore toplam 9 bolum tek cekimle cikmis (part 6 QC disi
-bir yoldan cekim kaybetmis).
+`qc_log.jsonl` -> `final_reject` 8 bolumde (4, 9, 22, 23, 24, 26, 27, 30). Yayinlanan
+sure dagilimina gore toplam 9 bolum tek cekimle cikmis (part 6 QC disi bir yoldan
+cekim kaybetmis).
 
 Cekim dustugunde `produce.py:570-583` anlatimi otomatik kisaltiyor
 (`shorten_narration_for_duration`). Plandaki 33-42 kelimelik anlatim ~12 kelimeye
-iniyor. Yani bolum yayinlaniyor ama **anlattigi bilgiyi bitirmiyor.**
+iniyor. Bolum yayinlaniyor ama **anlattigi faktı bitirmiyor.**
 
-### Kanit 3: 15 saniye kanalin en iyi teslim suresi
-
-29 yayinlanmis bolumun tamami yt-dlp ile cekildi (izlenme + sure, 10 Eylul):
-
-| Teslim suresi | Bolum sayisi | Medyan izlenme | En yuksek |
-|---|---|---|---|
-| **15 sn (iki cekim x 8 sn)** | **17** | **33** | 795 |
-| 9-10 sn (tek cekim, 20 sn plandan) | 5 | 23 | 509 |
-| 7 sn (tek cekim, 16 sn plandan) | 4 | 19,5 | 1.179 |
-| 19 sn (iki cekim x 10 sn) | 3 | **19** | 22 |
-
-`series.json` `auto_replenish.shot_seconds` 22. bolumden sonra `"8"` -> `"10"` olmus.
-Plan suresi 16 sn -> 20 sn. O tarihten beri **tek bolum bile 100 izlenmeyi gecmedi**
-(hitler haric, ki ikisi de tek cekimli kazalar). 19 saniyelik uc bolum: 22, 19, 5.
-
-Rapor "12-18 saniyeye cek" diyordu. Kanalin verisi tam olarak 15 saniyeyi isaret ediyor
-ve bu deger kanalda zaten 17 kez calismis. Bu bir deney degil, geri alma.
-
-### Kanit 4: fact_captions kapali, kardes serilerde acik
-
-35 planin **hicbirinde** bir cekimde bile `fact` alani yok. `flashpoints/bible.json`
-`fact_captions` icermiyor; `series.json` `auto_replenish.fact_captions` bayragi yok.
-
-Ayni kanalin diger iki serisi acik:
-`shadowedhistory/drowned-history/bible.json` -> `{"enabled": true, "hold": 2.6}`
-`shadowedhistory/footnotes/bible.json` -> `{"enabled": true, "hold": 2.8}`
-
-Motorun kendi belgesi (`series/bible.py:366-372`): *"Faceless tarih Shorts'larinda
-izlenme/paylasimi en cok artiran kaldirac."* Aktif yayinlanan seri bunu kullanmiyor.
-
-### Kanit 5 (rapordaki iddia CURUDU): kunye zaten her planda var
-
-Rapor "baslik kartinin her videoda basildigini dogrula" diyordu. 35 planin **35'inde**
-de `title_card.title` dolu, `bible.json` `title_card: true`
-(`series/bible.py:360-363` bool degeri `{"enabled": True}`'ya ceviriyor).
-Yapilacak is yok. Bu madde plandan dusuruldu.
+Bu, doktrin v1.8(c)'nin ("anlatim daima TAM CUMLEYLE biter") sessizce ihlalidir:
+Ihsan v1.8'de yarim biten cumleyi ACIKCA yasakladi, ama dusen cekim yolu ayni sonucu
+arka kapidan uretiyor.
 
 ---
 
@@ -93,11 +59,22 @@ Yapilacak is yok. Bu madde plandan dusuruldu.
 
 **Sorun:** `bible.json` `series` blogunda `master_lufs` yok, mastering atlaniyor.
 
-**Yapilacak:** `shadowedhistory/flashpoints/bible.json` -> `series` blogunun icine
-`"master_lufs": -14`. Referans bicim: `sentinal_ihsan/unnatural-lab/bible.json:11`.
+**Yapilacak:**
+1. `shadowedhistory/flashpoints/bible.json` -> `series` blogunun icine
+   `"master_lufs": -14`. Referans bicim: `sentinal_ihsan/unnatural-lab/bible.json:11`.
+2. `tests/test_rocka_audio_master.py::test_only_unnatural_lab_has_master_lufs`
+   guncelle: bu bir YASAK degil, bir KAYIT testidir , hangi serilerin mastering'e
+   opt-in oldugunu tek yerde tutar. Beklenen liste iki girdiye cikar
+   (flashpoints -14 ve unnatural-lab -14), siralamadan bagimsiz karsilastirilir.
+   Test adi da kaydi yansitacak sekilde guncellenir.
 
-**Done looks like:** `Bible(...).master_lufs == -14.0`, `produce.py:2148` dali artik
-`master_audio()` cagiran kola giriyor.
+**Done looks like:** `Bible.load("flashpoints").master_lufs == -14.0`; `produce.py:2148`
+dali artik `master_audio()` cagiran kola giriyor; kayit testi iki seri bekliyor.
+
+**Bilinen yan etki (kabul ediliyor):** `master_lufs` yigin parmak izine giriyor
+(`core/stack_fingerprint.py`), yani `core/killgate.py` karsilastirma penceresi
+sifirlaniyor. Bu dogru davranistir , olcum penceresi ancak ayni yiginda anlamlidir.
+Uretimi durdurmaz (`series_meta.py:133-135`: parmak izi yalniz olcum metadatasidir).
 
 **DOKUNMA:** `core/ffmpeg_tools.py`, `series/produce.py`, `series/bible.py`. Motor
 dogru; eksik olan yalniz kanal konfigurasyonu. Baska kanalin bible dosyasina dokunma.
@@ -109,86 +86,80 @@ dogru; eksik olan yalniz kanal konfigurasyonu. Baska kanalin bible dosyasina dok
 **Yapilacak:** `bible.json` -> `qc` blogunun icine `"min_shots": 2`.
 
 **Done looks like:** `_required_shot_count(bible, 2) == 2`. Bir cekim final_reject
-alirsa bolum yayinlanmaz (kredi zaten harcanmis olur, ama yarim bolum kanala girmez).
-`validate_min_shots` hata vermez (deger plan cekim sayisini asmaz).
+alirsa `produce_episode` None doner, bolum yayinlanmaz.
 
-**Bilinen bedel , acikca kabul ediliyor:** bu kural gecmiste uygulansaydi kanalin iki
-hiti (part 22 = 1.179, part 26 = 509) yayinlanmazdi. Yine de dogru karar: tek cekimli
-kova medyani 23, iki cekimli 15 sn kovasi medyani 33. Iki hit, tek cekimin ustunlugunu
-gostermiyor; 9 bolumluk kovada geri kalan 7'si 2-64 arasi. Bedeli plana yaziyoruz ki
-sonradan surpriz olmasin.
+**Operasyonel bedel , olculdu ve kabul edildi:**
+- Bolum KAYBOLMAZ. `series/series_runner.py:794` , *"Part n uretilemedi, durum
+  ilerletilmedi (sonraki calistirmada tekrar denenir)"* , ve Telegram uyarisi gider.
+  flashpoints'te `state_machine_version` alani yok, yani basit yeniden-deneme yolu
+  gecerli. Bedel bir gunluk gecikme, kayip degil.
+- Harcanan kredi geri gelmez (bkz. `RF-ISSUES.md`). Gecmis oranla (~%29) bu, ayda
+  birkac bolumluk gecikme demektir.
+- Bu kural gecmiste uygulansaydi kanalin iki hiti (part 22 = 1.179, part 26 = 509)
+  o gun yayinlanmaz, ertesi gun tam haliyle yayinlanirdi. Tek cekimli kovanin
+  medyani 23, iki cekimli 15 sn kovasinin medyani 33: iki hit tek cekimin
+  ustunlugunu gostermiyor, kovadaki diger yedi bolum 2-64 arasinda.
 
-## Rock 3: Sureyi 15 saniyeye geri al
-
-**Sorun:** `auto_replenish.shot_seconds` `"10"`; teslim 19 sn; o kovanin medyani 19.
-
-**Yapilacak:**
-1. `shadowedhistory/flashpoints/series.json` -> `auto_replenish.shot_seconds`: `"8"`
-2. Uretilmemis kuyruk planlari `plans/part31.json` .. `plans/part35.json` icindeki her
-   cekimin `duration` alani `"10"` -> `"8"` (`series.json.next_part` = 31, yani 31-35
-   henuz uretilmedi; 1-30 gecmistir, dokunma)
-
-**Done looks like:** `series.json` `shot_seconds == "8"`; part31-35 plan toplam suresi
-16 sn; part01-30 dosyalari degismemis.
-
-**DOKUNMA:** `series/replenish.py`. Sabit kodlu bir sure yok, deger konfigurasyondan
-okunuyor (`replenish.py` `cfg` uzerinden).
-
-## Rock 4: fact_captions'i ac
-
-**Sorun:** kanalin en guclu ekran-ici kaldiraci kapali; kardes iki seride acik.
-
-**Yapilacak:**
-1. `bible.json` -> `series` blogunun icine `"fact_captions": {"enabled": true, "hold": 2.6}`
-2. `series.json` -> `auto_replenish` icine `"fact_captions": true` (yeni uretilen
-   planlar `fact` alani tasisin; `replenish.py:1288` en az iki cekimde zorunlu kilar)
-
-**Done looks like:** `Bible(...).fact_captions == {"enabled": True, "hold": 2.6}`.
-Kuyruktaki 31-35 planlari `fact` tasimadigi icin onlarda hicbir sey cizilmez
-(`produce.py` yorumu: *"shot['fact'] yoksa hicbir sey cizilmez"*) , yani bu degisiklik
-kuyrugu bozmaz, 36. bolumden itibaren devreye girer.
-
-**DOKUNMA:** `plans/part01.json` .. `plans/part35.json` icine elle `fact` yazma.
-Kuyruk planlari uretim bicimini degistirmeden gecmeli.
+**DOKUNMA:** `series/preflight.py`, `series/produce.py`.
 
 ---
 
-## PROOF (tek komut, hepsini kapsar)
+## OLDURULEN ROCK'LAR (Codex turu 1 bunlari yikti, gerekce `RF-ISSUES.md`'de)
 
-Yeni dosya: `tests/test_flashpoints_kanal_sozlesmesi.py`
+- **Sureyi 15 saniyeye geri al.** Ihsan'in 2026-09-01'de izleyici geri bildirimiyle
+  aldigi v1.8 kararini geri alirdi ve tam olarak sikayet edilen kusuru geri getirirdi.
+- **fact_captions'i ac.** Doktrin v1.1'de bilerek kaldirilmis ve iki cekimlik seride
+  dogrulayicisi matematiksel olarak saglanamaz , kanalin plan uretimini kilitlerdi.
 
-Bu dosya bir konfigurasyon sozlesme testidir. Gerekcesi: bu depoda CI durum
-dosyalarini geri yaziyor (`chore: flashpoints durumunu ilerlet [skip ci]`), yani
-`bible.json` ve `series.json` otomatik islemlerin dokundugu dosyalar. Testsiz bir
-konfigurasyon duzeltmesi sessizce geri alinabilir.
+---
 
-Test sunlari dogrulamali (motoru mocklamadan, gercek dosyalari okuyarak):
+## PROOF
 
-1. `Bible` flashpoints bible'ini yukler ve `master_lufs == -14.0` doner
+### Yeni dosya: `tests/test_flashpoints_kanal_sozlesmesi.py`
+
+Bir konfigurasyon sozlesme testi. Gerekcesi: bu depoda CI durum dosyalarini geri
+yaziyor (`chore: flashpoints durumunu ilerlet [skip ci]`), yani `bible.json` ve
+`series.json` otomatik islemlerin dokundugu dosyalar. Testsiz bir konfigurasyon
+duzeltmesi sessizce geri alinabilir.
+
+Test sunlari dogrulamali (gercek repo dosyalarini okuyarak, motoru mocklamadan):
+
+1. `Bible.load("flashpoints").master_lufs == -14.0`
 2. `series.produce._required_shot_count(bible, 2) == 2`
-3. `series.preflight.validate_min_shots(bible, plan)` part31 plani icin bos liste doner
-4. `Bible(...).fact_captions == {"enabled": True, "hold": 2.6}`
-5. `series.json` `auto_replenish.shot_seconds == "8"` ve `fact_captions is True`
-6. `plans/part31.json` .. `part35.json`: her cekimin `duration` degeri `"8"`,
-   plan basina cekim sayisi 2, toplam 16 sn
-7. `plans/part01.json` .. `part30.json` dosyalarinda cekim sureleri DEGISMEMIS
-   (1-22 icin `"8"`, 23-30 icin `"10"` , gecmis kayittir, duzeltilmez)
-8. Regresyon capasi: `sentinal_ihsan/unnatural-lab/bible.json` `master_lufs` hala -14
-   (bu kosu baska kanala dokunmadi)
+   ve karsilastirma capasi: `min_shots` alani gecici olarak kaldirilmis bir bible
+   kopyasinda ayni cagri `1` doner (yani assert bos yere gecmiyor, farki olcuyor)
+3. **Bos gecmeyen min_shots kanit:** `plans/part31.json`'un TEK cekimli bir kopyasi
+   `series.preflight.validate_min_shots(bible, tek_cekimli_plan)` tarafindan
+   REDDEDILIR (hata listesi bos degil ve mesaj `min_shots` gecer); ayni cagri
+   degistirilmemis iki cekimli part31 icin bos liste doner.
+   Codex turu 1 uyarisi: yalniz "iki cekimli plan gecer" demek bos bir iddiadir,
+   cunku `min_shots` hic tanimli degilken de bos liste doner. Farki olcen taraf
+   tek cekimli vakadir.
+4. `Bible.load("flashpoints").fact_captions == {}` , Rock 4 oldurulmustur; bu assert
+   birinin onu sessizce geri acmasini engeller ve `RF-ISSUES.md`'ye atif yapar
+5. `SeriesMeta.load("flashpoints").auto_replenish["shot_seconds"] == "10"` , Rock 3
+   oldurulmustur; doktrin v1.8 ile hizali kalindigini kilitler
+6. `bible.json` `series` blogunda `title_card` hala truthy ve `qc.enabled` hala True
+   (bu kosu mevcut opt-in katmanlarindan hicbirini dusurmedi)
 
-**Calistirma:**
+Codex turu 1'in [KILL] dedigi iki assert (gecmis plan dosyalarinin degismedigi ve
+kardes kanalin bozulmadigi) test dosyasindan CIKARILDI: bunlar Core Focus'u korumaz
+ve dogru araci git diff'tir. Kapsam, Level 10 incelemesinde tam diff okunarak
+dogrulanacak.
+
+### Calistirma (iki komut da yesil olmadan rock kapanmaz)
 
 ```
 python -m pytest tests/test_flashpoints_kanal_sozlesmesi.py -q
 ```
 
-**Regresyon kapisi (mevcut takim bozulmadi):**
-
 ```
-python -m pytest tests/test_min_shots.py tests/test_rocka_audio_master.py tests/test_master_true_peak.py -q
+python -m pytest tests/test_rocka_audio_master.py tests/test_doctrine_gate.py tests/test_min_shots.py tests/test_master_true_peak.py tests/test_stack_fingerprint.py -q
 ```
 
-Iki komut da yesil olmadan rock kapanmaz.
+Ikinci komut regresyon kapisidir. `test_doctrine_gate.py` flashpoints icin
+`shot_seconds == "10"` bekliyor , Rock 3 oldurudugu icin bu test DEGISMEDEN gecmeli.
+Gecmiyorsa kapsam disina tasilmistir.
 
 ---
 
@@ -196,11 +167,18 @@ Iki komut da yesil olmadan rock kapanmaz.
 
 - `core/` ve `series/` altindaki hicbir `.py` , motor dogru, dort kanali birden besliyor
   ve su anda bes ayri oturum ayni depoda calisiyor
+- `shadowedhistory/KONSEPT.md` , doktrin metni; hash'i `series.json` ve her plana
+  pinli (`series/replenish.py:428-432`). Bu kosuda doktrin degistirilmiyor, bu yuzden
+  hash de degismiyor.
+- `shadowedhistory/flashpoints/series.json` , Rock 3 oldu, dokunulmuyor
+- `plans/part01.json` .. `plans/part35.json` , hicbiri duzenlenmiyor
 - `sentinal_ihsan/`, `galactic_experience/`, `aimagine/`, `AImagine-Fear/` , baska
   oturumlarin sahasi
-- `shadowedhistory/drowned-history/`, `footnotes/`, `secrets-anatolia/` , footnotes
-  duraklatilmis, oyle kalsin
+- `shadowedhistory/drowned-history/`, `footnotes/`, `secrets-anatolia/`
 - `published.json`, `qc_log.jsonl`, `series_log.csv`, `calibration.json` , calisma
   zamani durumu, elle duzenlenmez
 - Cozunurluk (1080x1920) ve fps (30) , dogru
-- Konu havuzu icerigi , `RF-ISSUES.md`
+
+**Bu kosuda degisen dosya sayisi: 3.** `flashpoints/bible.json`,
+`tests/test_rocka_audio_master.py`, `tests/test_flashpoints_kanal_sozlesmesi.py` (yeni).
+Arti bu iki artefakt. Baska hicbir sey.
