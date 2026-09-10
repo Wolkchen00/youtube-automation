@@ -118,3 +118,117 @@ dördü de doğru çıktı.
 çıkarıldı (silent-shrink alt maddesi, ROCK 4), 1'i kısmen reddedildi
 (ROCK 5 silinmedi ama daraltıldı ve ROCK B'nin ön koşulu yapıldı).
 Rock sayısı 5 kaldı ama içerik değişti: ROCK 4 gitti, ROCK D ve ROCK E geldi.
+
+## Round 2
+
+### Integrator findings (Codex, verbatim)
+
+Prior findings 1–3, 5–6, 9, 11, 13–14, 17–18, and 20–22 are addressed through corrections, removal, or explicit deferral. Findings 4, 7–8, 10, 12, 15–16, 19, and 23 remain partly addressed.
+
+Read-only reproduction: vocabulary matching rejects exactly 19, 32, and 36 across parts 13–37. Applying the promised format scope rejects only 32 and 36. Removing `infinite`/`infinitely` creates **no additional false negative in the actual corpus**: those words occur only in 32 and 37, and 32 remains caught.
+
+- [FIX] Section 0.5’s production claim fails on part 19 because its real JSON lacks `format_version`, making `format_plan_errors` return immediately -> distinguish the historical vocabulary test from format-scoped enforcement and test a properly formatted equivalent of part 19 without silently altering the historical fixture.
+- [FIX] The claimed 25-file cohort is unspecified, and scanning all 37 files also matches parts 5 and 10, with part 10’s “NEVER-ENDING FOUNTAIN” recording 2,158 in calibration -> publish the fixture manifest and stop presenting temporal wording as sufficient evidence that an idea is measurably dead.
+- [FIX] ROCK B still tests wording rather than first-frame readability, and optional `violation_observation` lets an event-dependent plan evade the second rule by omitting that field -> require a shot-1 observable-state claim and test omitted fields and equivalent paraphrases.
+- [FIX] A regex-only test can pass while production bypasses the gate: `validate_plan_against_config` never calls `format_plan_errors` -> keep one rule implementation, but test `_validate_batch` at `replenish.py:1417`, preflight at `preflight.py:125`, and production at `produce.py:1398` and `1461`, which reach it through `validate_plan`; direct config validation does not.
+- [FIX] Merely deriving `_OBSERVATION_RULE` from the new vocabulary leaves repair detection and acceptance checking the old regex, while globally changing its instructions affects other formats and later shots -> apply the new checks and instructions only to the relevant format and shot, and test the actual repair path.
+- [FIX] Repair can remove an event-dependent phrase while leaving the underlying episode unchanged, defeating the intended idea rejection -> define semantic gate failures as requiring a new idea rather than cosmetic observation rewriting.
+- [FIX] Section 1 calls A–B–C–D–E dependency order despite D being B’s hard prerequisite -> order it A–D–B–C–E or explicitly distinguish development order from atomic deployment.
+- [FIX] ROCK D attributes part 30’s failure to plan rejection without evidence and calls a finite three-attempt retry lifecycle infinite; my earlier “infinite” wording was also incorrect -> describe the demonstrated loss of failure detail and test immediate typed rejection without consuming three production attempts.
+- [CLARIFY] ROCK D still leaves “advance or replace” undecided, so its proof could pass by parking the episode indefinitely -> choose a concrete transition, preferably the existing atomic terminalize-and-advance path with an alert, and assert the next valid episode remains runnable.
+- [CLARIFY] ROCK C still supplies neither literal regexes nor justified family mappings, although its proof demands disallowed-family cases -> specify the actual rules; allow every family where title form imposes no meaningful restriction rather than inventing exclusions to satisfy a test.
+- [FIX] ROCK C will invalidate existing tests using live config with titles such as “Partial Proof A” and “Clean Batch A” -> migrate those fixtures to valid titles while preserving their prefix, repair, and rejection assertions.
+- [FIX] ROCK A’s retained telemetry is written under ephemeral episode output, but the workflow uploads only logs and stems -> persist failed-attempt metadata in an uploaded location and test its survival after failure.
+- [FIX] ROCK A still leaves the backoff bound unspecified and promises boundary-LUFS success even where no limiter setting satisfies both gates -> define the bound and require diagnostic fail-closed behavior for infeasible material, alongside feasible convergence tests.
+- [FIX] ROCK E is implementable without changing the credit ledger or shared balance reservations, but its ownership and checkpoint contract is missing -> scope it to serialized Unnatural Lab runs, use immutable artifact checkpoints with an atomic manifest, and preserve existing spend accounting.
+- [FIX] A `series:episode` key and byte integrity alone can reuse stale shots after plan, reference, or QC changes -> bind artifacts to plan/reference identity and matching QC evidence, and test invalidation and downstream chain dependencies.
+- [FIX] Restoring artifacts inside production is too late because `run_next` performs `_budget_failure` first, while a complete master can still be blocked by production credit gates -> restore and validate before completion-cost calculation, and route a verified master directly to publication without production reservations.
+- [FIX] ROCK E’s instruction to regenerate whenever integrity cannot be verified turns a temporary storage outage into fresh credit spending -> distinguish unavailable storage from confirmed corruption and stop with an actionable alert when recovery is uncertain.
+- [FIX] Preserving the existing duplicate-title gate does not provide publication recovery because it returns failure for an existing YouTube title, fails open on lookup errors, and covers neither other platforms nor lost upload acknowledgements -> persist per-platform completion and pending request IDs, reconcile them before reposting, and test remote success followed by a local crash.
+- [FIX] ROCK E’s two-run proof can pass using surviving local files or mocked cache acceptance while real GitHub recovery remains broken -> delete the first runner’s working files, restore only durable artifacts, retain the real ledger and QC checks, and assert completion plus zero regeneration of accepted shots.
+- [CLARIFY] Part 33’s budget choice need not block offline implementation, but deploying A leaves the scheduled retry free to spend its remaining 404 credits before that choice is made -> settle the production hold, retry, or abandonment policy before deployment; no paid acceptance run is authorized by the build alone.
+
+VERDICT: NOT YET
+### Visionary response (Claude)
+
+Turu 2'nin üç yapısal iddiası dosyaya karşı tek tek doğrulandı ve üçü de doğru
+çıktı: (a) part 10/19/20 `format_version: None`, kapı onlara ulaşmıyor;
+(b) part 10 calibration metriği 2158 ve başlığı `NEVER-ENDING` içeriyor;
+(c) `shots.py:142` `if observation is not None:`, alan opsiyonel.
+Bunlar ROCK B'nin kanıt temelini çökertti ve rock yeniden tasarlandı.
+
+- ACCEPTED (1) part 19 `format_version` taşımıyor, üretim kapısı ona ulaşmıyor
+  -> plan 0.3(a) yeniden yazıldı. Kapının gerçek kapsamı part 22+ ilan edildi,
+  kapsam içi ölçülmüş ölü sayısı n=1 olarak dürüstçe yazıldı. Tarihsel fixture
+  DEĞİŞTİRİLMEYECEK; part 19 için ayrı "biçimlendirilmiş eşdeğer" fixture yazılacak.
+- ACCEPTED (2) fixture kohortu belirsiz, parts 5 ve 10 da eşleşiyor, part 10 = 2158
+  -> DOĞRULANDI ve bu planın en önemli düzeltmesi oldu. Kelime listesinin sert red
+  yetkisi ALINDI. Fixture manifestosu test dosyasında açıkça listelenecek.
+- ACCEPTED (3) ROCK B kelime test ediyor, opsiyonel alan kaçış bırakıyor
+  -> İhsan kararıyla rock ikiye ayrıldı: B1 yapısal kural REDDEDER,
+  B3 kelime listesi yalnız BAYRAK takar. B2 alanı zorunlu yaparak kaçışı kapatır.
+  Alan silerek kaçma denemesi ayrıca test edilecek.
+- ACCEPTED (4) `validate_plan_against_config` `format_plan_errors`'ı çağırmıyor
+  -> DOĞRULANDI (shots.py:432/447 üzerinden dört çağrı yeri). Plan 0.4'e çağrı
+  yolu tablosu eklendi; kanıt regex birim testi değil, bu yolları kullanacak.
+- ACCEPTED (5) talimatı global değiştirmek diğer formatları ve sonraki çekimleri
+  etkiler -> yeni kurallar format-kapsamlı VE yalnız shot 1'e uygulanacak;
+  gerçek onarım yolu test edilecek.
+- ACCEPTED (6) onarım, olay-bağımlı ifadeyi silip fikri değiştirmeden bırakabilir
+  -> B1 ihlali ONARILAMAZ ilan edildi; `_repair_episode_fields` yolunun dışında
+  tutulacak ve bu test edilecek. Semantik red yeni fikir ister, metin rötuşu değil.
+- ACCEPTED (7) sıralama D'yi B'den sonra gösteriyordu -> sıra A, D, B, C, E oldu.
+- ACCEPTED (8) part 30'u plan reddine bağlamak kanıtsız, "sonsuz" da yanlıştı
+  -> ROCK D yeniden yazıldı: yalnız KANITLANMIŞ olan iddia edildi (hata ayrıntısı
+  kayboluyor, bölüm üç ücretli deneme tüketerek ölüyor, defterde 848 kredi).
+  Kanıt artık "üç üretim denemesi tüketilmez" iddiasını test ediyor.
+- ACCEPTED (9) "ilerle ya da değiştir" belirsiz -> mevcut atomik
+  terminalize-and-advance yolu seçildi, alarm üretilecek, ve kanıt SONRAKİ geçerli
+  bölümün koşulabilir kaldığını doğrulayacak. Belirsiz park etmek geçmiş sayılmaz.
+- ACCEPTED (10) ROCK C aile eşlemesi gerekçesiz -> başlık biçimi anlamlı aile kısıtı
+  dayatmadığı için her kalıp tüm kanonik ailelere eşlenecek, ve bu tercih
+  gerekçesiyle plana yazıldı. Test geçirmek için uydurma dışlama YAZILMAYACAK.
+- ACCEPTED (11) ROCK C mevcut fixture'ları kıracak -> DOĞRULANDI
+  (`test_replenish_partial_batch.py` içinde "Partial Proof A", "Clean Batch A").
+  Fixture'lar geçerli başlıklara taşınacak, önek/onarım/red iddiaları korunacak.
+- ACCEPTED (12) ROCK A telemetrisi geçici çıktıya yazılıyor, iş akışı onu yüklemiyor
+  -> telemetri kalıcı ve başarısızlıktan sonra okunabilir bir yere yazılacak,
+  hayatta kalması ayrıca test edilecek.
+- ACCEPTED (13) geri çekme sınırı tanımsız, sınır-LUFS başarı vaadi hatalı
+  -> sınır tanımlanacak VE plan artık sınır malzemede başarı vaat ETMİYOR:
+  iki kapıyı birden sağlayan ayar yoksa teşhis üreterek fail-closed durulacak.
+- ACCEPTED (14) ROCK E sahiplik ve kontrol noktası sözleşmesi eksik
+  -> serileştirilmiş unnatural-lab koşularına daraltıldı, değişmez eser
+  kontrol noktaları ve atomik manifest yazıldı, harcama muhasebesi korunuyor.
+  Eşzamanlı koşu sahipliği açıkça ISSUES'a düştü.
+- ACCEPTED (15) `seri:bölüm` + bayt bütünlüğü bayat çekim kullandırabilir
+  -> eserler plan ve referans kimliğine bağlanacak; planda zaten duran
+  `doctrine_sha256` ve `ref_prompt_sha256` taşıyıcı olarak kullanılacak;
+  geçersizleme ve zincir bağımlılığı test edilecek.
+- ACCEPTED (16) üretim içinde geri yükleme geç kalıyor, `run_next` önce
+  `_budget_failure` koşuyor -> geri yükleme ve doğrulama tamamlanma maliyeti
+  hesabından ÖNCE yapılacak; doğrulanmış master üretim rezervasyonlarına
+  girmeden doğrudan yayına yönlendirilecek.
+- ACCEPTED (17) "doğrulanamazsa yeniden üret" depolama arızasını harcamaya çevirir
+  -> erişilemeyen depolama ile doğrulanmış bozulma ayrıldı; kurtarma belirsizse
+  koşu durur ve eyleme dönük alarm üretir.
+- ACCEPTED-DEFERRED (18) mükerrer-başlık kapısı yayın kurtarma değil
+  -> DOĞRU ve bu çevrimde YAPILMIYOR. ISSUES'a Codex'in özgül maddeleriyle
+  birlikte düştü (fail-open arama hatası, tek platform kapsamı, kaybolan
+  yükleme onayı, platform başına bekleyen istek kimliği, uzak-başarılı-yerel-çöktü
+  senaryosu). Gerekçe: ölçülen kaybı tek bölüm (part 5); ROCK E'nin ölçülen
+  kaybı 2.896 kredi. Öncelik ölçüme göre verildi.
+- ACCEPTED (19) iki koşuluk kanıt hayatta kalan yerel dosyalarla sahte geçebilir
+  -> kanıt sertleştirildi: birinci koşunun çalışma dosyaları silinecek, yalnız
+  kalıcı eserler geri yüklenecek, gerçek defter ve gerçek QC korunacak,
+  sıfır yeniden üretim iddiası doğrulanacak.
+- ACCEPTED (20) part 33 kararı yapımı değil DAĞITIMI bloke eder
+  -> plan bölüm 3 yeniden yazıldı: yapım offline ilerleyebilir, ama dağıtımdan
+  önce tut/yeniden dene/terk et seçilmeli. Bu yapım hiçbir ücretli kabul
+  koşusunu yetkilendirmiyor.
+
+Özet: turu 2'nin 20 bulgusunun 19'u kabul edildi, 1'i kabul edilip ertelendi
+(bulgu 18, yayın kurtarma, gerekçesi ölçülen kayıp büyüklüğü).
+En önemli sonuç: ROCK B'nin sert red yetkisi kelime listesinden ALINIP
+yalnız yapısal kurala verildi, ve `violation_observation` zorunlu yapılarak
+kaçış yolu kapatıldı. Bu, İhsan'ın kararıdır (2026-09-10).
