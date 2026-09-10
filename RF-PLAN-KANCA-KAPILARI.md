@@ -187,14 +187,38 @@ DEĞİŞMEZLİK ya da SÜREGELEN DURUM anlatabilir ve bunlar ilk karede okunabil
 ("Regardless of angle, the blue core is visible"). Bunlar B1'den ÇIKARILDI.
 Çıplak `^after` de çıkarıldı.
 
-B1'in yakaladığı yapılar, yalnız TAMAMLANMIŞ OLAY bağımlılığı:
-- `after being <fiil-mis hali>`
-- `after (it|the|they|each|every) <fiil-mis hali>`
-- `once (it|the|they) (is|are|was|were|has|have) <fiil-mis hali>`
-- `having been <fiil-mis hali>`
+**B1 literal regex** (ROCK C gibi ölçülerek yazıldı, yapımda yorum payı yok):
 
-Ölçülen etki: part 36 reddedilir (`After being rolled, both dice visibly
-land...`). Parts 22-35 ve 37 geçer. Derlemede karşı örneği yoktur.
+```
+\b(?:after being \w+ed
+   |having been \w+ed
+   |after (?:the |a |an |it |they |each |every )?(?:\w+ )?(?:is|are|was|were) \w+ed
+   |after (?:it|the|they|each|every) \w+ed
+   |once (?:it|the|they|the \w+) (?:is|are|was|were|has|have) (?:been )?\w+ed)\b
+```
+
+**Ölçüm.** 16 `tek-obje-4x6` planının tam olarak BİRİ reddediliyor: part 36
+(`After being rolled, both dice visibly land...`). Parts 22-35 ve 37 geçer.
+Eski format planlarının hiçbirinde shot 1 gözlemi yok, yani kapsam dışılar.
+
+Saldırgan küme, 8/8 doğru:
+
+| İfade | Beklenen | Sonuç |
+|---|---|---|
+| `Regardless of angle, the blue core is visible.` | geç | geç |
+| `The surface keeps glowing while the hand rests on it.` | geç | geç |
+| `The stone is embedded in the soap and water runs around it.` | geç | geç |
+| `Water flows upward from the bottle mouth in a steady column.` | geç | geç |
+| `After being rolled, both dice visibly land on their faces.` | RED | RED |
+| `After being rolled, the dice always land alike.` | RED | RED |
+| `After the lid is removed the glow persists.` | RED | RED |
+| `Once the jar is opened the light stays trapped.` | RED | RED |
+
+**Kaydedilen sınır, dürüstçe.** Bu bir YAPI SAYIMIDIR, semantik bir çözümleyici
+değildir. İlk daraltılmış taslak `After the lid is removed...` ifadesini
+KAÇIRIYORDU; ölçüm sırasında yakalandı ve regex genişletildi. Aynı türden
+başka bir kaçak kalmış olabilir. Bu yüzden B1 tek savunma hattı sayılmaz;
+üretim sonrası `require_first_frame` QC kapısı yerinde kalır.
 
 **B2, ZORUNLU ALAN.** `violation_observation` bu formatta shot 1 için zorunlu
 olur; `if observation is not None:` kaçışı kapanır.
