@@ -114,3 +114,119 @@ edilmedi. Dogrulama komutlari ve okunan satirlar asagida.
 
 **Sonuc:** dort rock ikiye indi. Turu 1 iki rock'i oldurdu, birinin proof'unu bos
 gecmekten kurtardi ve iki mevcut testin kirilacagini onceden yakaladi.
+
+## Round 2
+
+### Integrator findings (Codex, verbatim)
+
+```
+Verified: `amix_normalize` flips to `False`, `limit_mix_peak` to `True`, and final mastering is fail-closed at −14 ±1 LUFS and ≤−1 dBTP. Those two flips cannot worsen delivered loudness, though limiting can alter transients. The fingerprint affects measurement eligibility only; failure is caught and cannot halt production. A normal runtime shot rejection returns `generation_fail` through the typed adapter, and legacy `series_runner` leaves `next_part` unchanged.
+
+- [CLARIFY] The revision silently replaces the supplied Core Focus—15 seconds, two shots, audible audio, and readable on-screen fact—with only audible audio and non-partial narration -> Confirm that Ihsan explicitly changed the Core Focus; otherwise killing Rocks 3 and 4 contradicts the governing requirement.
+
+- [FIX] Rock 1 has a third undocumented premaster side effect because narrated music volume changes from `0.28` to `0.50` in addition to both stated flips -> Document all three changes and test the real Flashpoints bible produces `amix_normalize=False`, `music_volume=0.50`, and `limit_mix_peak=True`.
+
+- [FIX] Although final loudness cannot regress without production holding, the added premaster limiters and higher music gain can alter transients or perceived voice/music balance -> Add a Flashpoints-specific audio fixture assertion for final LUFS/true peak and voice-to-bed balance, rather than proving only the numeric config.
+
+- [FIX] Rock 1 introduces a persistent operational hold not documented as a side effect: mastering or verification failure returns `qc_hold`, and the legacy runner marks the part `awaiting_approval`, preventing automatic retry -> Document the manual recovery path and add a runner test proving no publish/advance occurs on mastering failure.
+
+- [FIX] Rock 2 does not guarantee a complete plan because Flashpoints strict plan validation remains disabled, so a 3–6-shot generated plan may lose shots and still satisfy `min_shots: 2` -> Do not defer this Core Focus invariant; enable strict two-shot validation in Flashpoints configuration or expand scope accordingly.
+
+- [FIX] A failed or partial downloaded clip can survive as `shot_NN.mp4`, and without `qc.revalidate_cache` the next run accepts any nonempty cache without QC -> Add `"revalidate_cache": true` beside `min_shots` and prove an unapproved cached shot is moved aside and regenerated.
+
+- [FIX] Proof item 3 now genuinely proves malformed-plan rejection but still does not prove the claimed runtime drop-and-retry behavior -> Add a forced shot-rejection test asserting typed status `generation_fail`, `_publish_part` is never called, and `next_part` remains 31 after `run_next`.
+
+- [FIX] Proof item 4 checks only `Bible.fact_captions == {}`, so it still passes if `auto_replenish.fact_captions` is accidentally enabled and replenishment becomes contradictory -> Replace it with raw assertions that `fact_captions` is absent from both `bible.data["series"]` and `SeriesMeta.auto_replenish`.
+
+- [KILL] Proof item 6 protects `title_card` even though the revised Core Focus explicitly moved screen text out of scope -> Remove the title-card assertion; retain only `qc.enabled` if it is needed by a stated invariant.
+
+- [FIX] RF-ISSUES incorrectly calls the fact-caption contract mathematically impossible and says every batch must fail, because the final-shot prohibition is prompt-only while the two-fact rule is enforced, so a model that puts facts on both shots passes validation -> Describe it accurately as contradictory and nondeterministic; the doctrine decision remains sufficient reason to kill the rock.
+
+- [CLARIFY] `series.json` remains `publish_mode: "auto"` while pinned doctrine says YouTube uses curated approval mode -> Confirm which decision supersedes the other before calling the revised plan doctrine-aligned.
+
+VERDICT: NOT YET```
+
+### Visionary response (Claude)
+
+Codex once turu 1'de ileri surdugum uc iddiayi bagimsiz olarak DOGRULADI:
+`amix_normalize` True->False, `limit_mix_peak` False->True, parmak izi yalniz olcum
+(uretimi durduramaz), ve calisma zamani cekim dususunde `next_part` ilerlemiyor.
+Bunlar plani saglamlastirdi. Ardindan kalan iki rock'a yuklendi:
+
+- **ACCEPTED** , ucuncu yan etki: `music_volume` 0.28 -> 0.50
+  -> `series/produce.py:656` okundu: `music_volume = 0.50 if bible.master_lufs is not None else 0.28`.
+  Kacirmistim. Motorun kendi yorumu (`:654-655`) bunun tasarlanmis bir eslesme
+  oldugunu ve anlatim/yatak dengesinin yalniz +0,42 dB kaydigini soyluyor. Plana
+  tablo olarak yazildi ve proof'a olcum assert'i eklendi.
+
+- **ACCEPTED** , yeni hata modu: mastering basarisizligi kalici `awaiting_approval`
+  -> `produce.py:749` `_audio_master_hold` ve `series_runner.py:781-789` okundu.
+  Dogru: bu bolum otomatik yeniden DENENMEZ, elle mudahale ister. Rock 1 oncesi bu
+  yol flashpoints icin hic acik degildi. Plana "YENI HATA MODU" basligiyla ve
+  kurtarma yoluyla yazildi. Fail-closed davranis dogru kabul edildi.
+
+- **ACCEPTED (duzeltme , kendi hatam)** , RF-ISSUES fact_captions'i fazla guclu anlatti
+  -> Codex hakli. "Matematiksel olarak imkansiz, her parti RED" yazmistim. Son-cekim
+  yasagi yalnizca prompt'ta, kodda zorlanmiyor; iki cekime de fakt yazan bir model
+  gecer. Dogru tanim: imkansizlik degil BELIRSIZLIK , ayni konfigurasyon bazen gecer
+  bazen kalir. RF-ISSUES duzeltildi. Rock'in oldurulmesi degismiyor (doktrin gerekcesi
+  tek basina yeterli).
+
+- **ACCEPTED** , Proof 5 (fact_captions) bayrak kacagina acikti
+  -> `Bible.fact_captions == {}` tek basina yetmiyor: bayrak `auto_replenish`'te
+  acilirsa bible bos donmeye devam eder ama replenish celiskiye girer. Proof, HAM
+  alan yoklugunu iki dosyada birden denetleyecek sekilde degistirildi.
+
+- **ACCEPTED** , Proof `title_card` assert'i [KILL]
+  -> Hakli: revize Core Focus ekran yazisini kapsam disi birakti, o assert korudugu
+  bir degismezi temsil etmiyor. Cikarildi.
+
+- **ACCEPTED (sinir olarak yazildi)** , Proof calisma zamani dus-ve-yeniden-dene'yi
+  kanitlamiyor
+  -> Dogru. Bu iddia kod okumasiyla dogrulandi ama testle degil; tam bir `run_next`
+  entegrasyon testi motoru mocklamayi gerektirir ve kapsam disi. Plana "kapsanamayan
+  , durust sinir" olarak, RF-ISSUES'a da madde olarak yazildi. Sessizce gecilmedi.
+
+- **DEFERRED (Codex "[FIX], erteleme" dedi , gerekceli olarak ERTELENDI)** , kati plan
+  dogrulamasi kapali
+  -> `series/replenish.py:213-217` okundu, Codex tamamen hakli: `strict_plan_validation_enabled`
+  bes anahtardan birini ariyor, flashpoints'te hicbiri yok, dolayisiyla `:244`'teki
+  "cekim sayisi tam N olmali" denetimi hic calismiyor.
+  -> Yine de bu kosuda ACILMADI. Gerekce: bu anahtar URETIM ONCESI fail-closed bir
+  kapi acar, kuyruk 5 plan derinliginde ve bu depoda emsali var (bir dogrulama kilidi
+  ikmali cozulemez hale getirmis, kosu yine yesil donmustu). Once son N plan rapor
+  modunda gecirilmeli. Olcum on kosuluyla RF-ISSUES [YUKSEK].
+  -> Not: Rock 2'nin `min_shots: 2` esigi ALT siniri (yarim bolum) korur ki Core
+  Focus'un ifade ettigi zarar odur. Ust sinir ihlali (3-6 cekimlik plan) 35 planin
+  hicbirinde gorulmedi.
+
+- **DEFERRED** , `qc.revalidate_cache` kapali
+  -> Codex'in tarifi dogru ama kapsami genisti. Bagimsiz olarak dogruladim:
+  `produce.py:1569-1578` cache'i kosulsuz kabul ediyor ve "dogrulanmis cache'de" diye
+  YANLIS logluyor. Ancak QC REDDI bu deligi kullanmaz: `critic.py:1845-1848` reddedilen
+  klibi `_qcfail<n>` olarak yeniden adlandiriyor, yani yol bosaliyor ve yeniden
+  uretiliyor. Risk yalnizca yarim/bozuk INDIRME ile sinirli.
+  -> Acilmadi cunku `qc_pass_exists` icerik-hash esitligi ariyor ve bu kanalda 28
+  bolume karsilik 17 `qc_pass` kaydi var; kaydi olmayan saglam cache de karantinaya
+  alinip yeniden uretilir , her yanlis karantina para yakar. Once olcum. RF-ISSUES [ORTA].
+
+- **CEVAP (CLARIFY)** , "Core Focus'u sessizce degistirdin"
+  -> Adil bir usul itirazi. Netlestirme: turu 1'de Codex'e verdigim Core Focus BENIM
+  rapordan turettigim cumleydi, Ihsan'in yazdigi bir sey degil. Kanalin YAZILI
+  otoritesi `shadowedhistory/KONSEPT.md` doktrini ve o doktrin sureyi (v1.8) ve
+  fact_captions'i (v1.1) benim onerimin TERSINE karara baglamis. Turetilmis bir odak
+  cumlesi, karar sahibinin yazili kararini gecersiz kilamaz , bu yuzden odak daraltildi,
+  gizlenmedi: plandaki "OLDURULEN ROCK'LAR" basligi ve RF-ISSUES gerekceleri acikta.
+  Bu degisiklik yine de Ihsan'a raporlanacak bir karardir, sessizce gecilmeyecek.
+
+- **CEVAP (CLARIFY)** , `publish_mode: auto` vs doktrinin `approval` modu
+  -> Dogrulandi ve GERCEK bir sapma: `KONSEPT.md:225` `publish_mode: approval`,
+  `:165` "kurasyonlu, approval modu", `:75` tam-otomatigi "en riskli arketip" ilan
+  ediyor; `series.json` ise `"auto"`. Bu kosuda DEGISTIRILMEDI: hangisinin digerini
+  gecersiz kildigi kod okumasindan anlasilmiyor ve yayin modunu degistirmek bir
+  kanal politikasi karari. RF-ISSUES'a [YUKSEK , IHSAN KARARI GEREKIYOR] olarak
+  yazildi ve kapanis raporunda ayrica soylenecek.
+
+**Sonuc:** rock sayisi degismedi (2), ama Rock 1'in yan etki envanteri eksikti ve
+tamamlandi, proof iki yerde bos gecebilirdi ve kapatildi, iki yeni [YUKSEK] mesele
+(kati dogrulama, yayin modu) ortaya cikti.

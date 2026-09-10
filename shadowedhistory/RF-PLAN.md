@@ -71,10 +71,35 @@ arka kapidan uretiyor.
 **Done looks like:** `Bible.load("flashpoints").master_lufs == -14.0`; `produce.py:2148`
 dali artik `master_audio()` cagiran kola giriyor; kayit testi iki seri bekliyor.
 
-**Bilinen yan etki (kabul ediliyor):** `master_lufs` yigin parmak izine giriyor
-(`core/stack_fingerprint.py`), yani `core/killgate.py` karsilastirma penceresi
-sifirlaniyor. Bu dogru davranistir , olcum penceresi ancak ayni yiginda anlamlidir.
-Uretimi durdurmaz (`series_meta.py:133-135`: parmak izi yalniz olcum metadatasidir).
+**Bilinen yan etkiler , UCU de dogrulandi ve kabul ediliyor:**
+
+`master_lufs` sadece mastering'i acmaz; uc mikser anahtarini birden cevirir:
+
+| Anahtar | Once | Sonra | Kaynak |
+|---|---|---|---|
+| `amix_normalize` | True | False | `produce.py:605` |
+| `limit_mix_peak` | False | True | `test_master_true_peak.py:132` |
+| `music_volume` (anlatimli) | 0.28 | **0.50** | `produce.py:656` |
+
+Ucuncusunu ilk taslakta kacirdim; Codex turu 2 yakaladi. Motorun kendi yorumu
+(`produce.py:654-655`) bunun tasarlanmis bir eslesme oldugunu soyluyor:
+*"opt-in yatak 0.50'ye eslendi (foley/yatak +6,19 dB; anlatim/yatak degisimi +0,42 dB)"*.
+Yani muzik yatagi yukseliyor ama anlatim/yatak DENGESI yalnizca +0,42 dB kayiyor,
+cunku mastering tumunu -14'e geri normalize ediyor. Kabul ediliyor, ama proof bu
+degeri de olcecek.
+
+**Yigin parmak izi:** `master_lufs` parmak izine giriyor (`core/stack_fingerprint.py`),
+`core/killgate.py` karsilastirma penceresi sifirlaniyor. Dogru davranis; uretimi
+durdurmaz (`series_meta.py:133-135`: parmak izi yalniz olcum metadatasidir, hesabi
+bozulursa uyari yazilir ve gecilir).
+
+**YENI HATA MODU (Codex turu 2, dogrulandi):** mastering veya teslim dogrulamasi
+basarisiz olursa `produce.py:2164` `_audio_master_hold(...)` doner; `series_runner.py:781-789`
+bolumu `awaiting_approval` yapar, yayini bloke eder ve Telegram uyarisi gonderir.
+Bu bolum OTOMATIK yeniden denenmez , elle mudahale ister. Bu fail-closed davranis
+DOGRUDUR (masterlenmemis video yayinlamaktansa beklemek), ama Rock 1 oncesinde bu
+yol flashpoints icin hic acik degildi. Kurtarma: Telegram uyarisi gelir, `series.json`
+`parts.<n>.status` `awaiting_approval` olur; elle incelenip durum geri alinir.
 
 **DOKUNMA:** `core/ffmpeg_tools.py`, `series/produce.py`, `series/bible.py`. Motor
 dogru; eksik olan yalniz kanal konfigurasyonu. Baska kanalin bible dosyasina dokunma.
@@ -125,27 +150,35 @@ duzeltmesi sessizce geri alinabilir.
 Test sunlari dogrulamali (gercek repo dosyalarini okuyarak, motoru mocklamadan):
 
 1. `Bible.load("flashpoints").master_lufs == -14.0`
-2. `series.produce._required_shot_count(bible, 2) == 2`
-   ve karsilastirma capasi: `min_shots` alani gecici olarak kaldirilmis bir bible
-   kopyasinda ayni cagri `1` doner (yani assert bos yere gecmiyor, farki olcuyor)
-3. **Bos gecmeyen min_shots kanit:** `plans/part31.json`'un TEK cekimli bir kopyasi
+2. **Uc mikser yan etkisi olculur** (yalniz sayiyi degil davranisi kilitler):
+   flashpoints bible'i ile `bible.master_lufs is None` False, yani
+   `amix_normalize` False, `limit_mix_peak` True ve anlatimli yol `music_volume`
+   0.50 secer (`produce.py:656` ifadesi birebir dogrulanir, 0.28 DEGIL)
+3. `series.produce._required_shot_count(bible, 2) == 2`, VE kontrol capasi:
+   `min_shots` alani cikarilmis bir bible kopyasinda ayni cagri `1` doner
+4. **Bos gecmeyen min_shots kaniti:** `plans/part31.json`'un TEK cekimli bir kopyasi
    `series.preflight.validate_min_shots(bible, tek_cekimli_plan)` tarafindan
-   REDDEDILIR (hata listesi bos degil ve mesaj `min_shots` gecer); ayni cagri
-   degistirilmemis iki cekimli part31 icin bos liste doner.
-   Codex turu 1 uyarisi: yalniz "iki cekimli plan gecer" demek bos bir iddiadir,
-   cunku `min_shots` hic tanimli degilken de bos liste doner. Farki olcen taraf
-   tek cekimli vakadir.
-4. `Bible.load("flashpoints").fact_captions == {}` , Rock 4 oldurulmustur; bu assert
-   birinin onu sessizce geri acmasini engeller ve `RF-ISSUES.md`'ye atif yapar
-5. `SeriesMeta.load("flashpoints").auto_replenish["shot_seconds"] == "10"` , Rock 3
+   REDDEDILIR (hata listesi bos degil, mesaj `min_shots` gecer); degistirilmemis
+   iki cekimli part31 icin bos liste doner
+5. **Kacis kapisi kapali kalsin , ham alan yoklugu** (Codex turu 2): `fact_captions`
+   anahtari NE `bible.data["series"]` icinde NE de `SeriesMeta.load("flashpoints").auto_replenish`
+   icinde bulunmali. `Bible.fact_captions == {}` tek basina yetmez: bayrak
+   `auto_replenish`'te acilirsa bible bos donmeye devam eder ama replenish
+   celiskiye girer. Iki dosya da denetlenir.
+6. `SeriesMeta.load("flashpoints").auto_replenish["shot_seconds"] == "10"` , Rock 3
    oldurulmustur; doktrin v1.8 ile hizali kalindigini kilitler
-6. `bible.json` `series` blogunda `title_card` hala truthy ve `qc.enabled` hala True
-   (bu kosu mevcut opt-in katmanlarindan hicbirini dusurmedi)
 
 Codex turu 1'in [KILL] dedigi iki assert (gecmis plan dosyalarinin degismedigi ve
-kardes kanalin bozulmadigi) test dosyasindan CIKARILDI: bunlar Core Focus'u korumaz
-ve dogru araci git diff'tir. Kapsam, Level 10 incelemesinde tam diff okunarak
-dogrulanacak.
+kardes kanalin bozulmadigi) ve turu 2'nin [KILL] dedigi `title_card` assert'i test
+dosyasindan CIKARILDI: bunlar Core Focus'u korumaz ve dogru araci git diff'tir.
+Kapsam, Level 10 incelemesinde tam diff okunarak dogrulanacak.
+
+**Kapsanamayan (durust sinir):** Codex turu 2 hakli olarak "calisma zamaninda cekim
+dusunce `next_part` ilerlemiyor" iddiasinin test edilmedigini soyledi. Bu iddia bu
+kosuda KOD OKUMASIYLA dogrulandi (`series_runner.py:791-796`, flashpoints'te
+`state_machine_version` yok, legacy yol gecerli) ama testle kanitlanmadi , tam bir
+`run_next` entegrasyon testi motoru mocklamayi gerektirir ve bu kosunun kapsami
+disindadir. Bu sinir `RF-ISSUES.md`'ye yazildi.
 
 ### Calistirma (iki komut da yesil olmadan rock kapanmaz)
 

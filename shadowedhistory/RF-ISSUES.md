@@ -48,12 +48,18 @@ paylasimi en cok artiran kaldirac"* diyor. 35 planin hicbirinde `fact` alani yok
 1. **Doktrin bilerek kaldirmis.** `KONSEPT.md:3-4` (v1.1): *"caption ve fact_captions
    kaldirildi (motor gercegi)"*. Yani bu bir unutma degil, verilmis bir karar.
 
-2. **Iki cekimlik seride dogrulayici saglanamaz.** `series/replenish.py:697-701`
+2. **Iki cekimlik seride sozlesme kendi kendisiyle celisiyor.** `series/replenish.py:697-701`
    prompt'u modele *"NO 'fact' on the final resolve shot"* diyor; `replenish.py:1287`
-   ise *"en az 2 cekimde 'fact' olmali"* diye REDDEDIYOR. flashpoints'te cekim sayisi
-   2'dir. Son cekim disi kalinca en fazla 1 fakt yazilabilir, esik 2'dir , kosul
-   matematiksel olarak saglanamaz. Bayragi acmak **kanalin plan uretimini tamamen
-   kilitlerdi** (her replenish partisi RED).
+   ise *"en az 2 cekimde 'fact' olmali"* diye REDDEDIYOR. flashpoints'te cekim sayisi 2'dir:
+   kurala uyan model en fazla 1 fakt yazabilir ve partisi reddedilir.
+
+   DUZELTME (Codex turu 2, hakli): ilk yazdigim "matematiksel olarak imkansiz, her
+   parti RED" ifadesi FAZLA GUCLUYDU. Son-cekim yasagi yalnizca PROMPT'ta, kodda
+   zorlanmiyor; iki cekime birden fakt yazan bir model dogrulamayi GECER. Yani sonuc
+   imkansizlik degil **belirsizlik**: ayni konfigurasyon bazen gecer bazen kalir ve
+   kalma sebebi log'da "modelin talimata uymasi" olarak gorunur. Sessiz, aralikli
+   kuyruk kilitlenmesi , daha da kotu bir hata sinifi. Oldurme karari degismiyor;
+   zaten doktrin gerekcesi tek basina yeterli.
 
 **Ne gerekir:** `series/replenish.py` icinde ya esigi cekim sayisina bagli yapmak
 (`min(2, shots - 1)`) ya da 2 cekimli serilerde son-cekim yasagini kaldirmak. Ortak
@@ -62,6 +68,58 @@ motor isi, bes oturumun ortasinda yapilmaz. Ayri bir rock.
 ---
 
 ## Ertelendi
+
+- **[YUKSEK , IHSAN KARARI GEREKIYOR] Kanal doktrinin emrettigi onay modunda degil.**
+  `KONSEPT.md:225` (v1.7 uygulama blogu) `publish_mode: approval` diyor ve `:165`
+  *"YouTube gunde 1 (kurasyonlu, approval modu)"* diyor. `series.json` ise
+  `"publish_mode": "auto"`. Doktrinin kendi risk maddesi (`:75`): *"tam-otomatik
+  uret-yukle en riskli arketip; onay modu + gercek varyasyon + ..."*. Yani su anda
+  kanal, doktrinin acikca "en riskli" dedigi modda calisiyor ve `:124`'te "ikinci
+  kalkan" denen Telegram onayi devre disi. Bu bir hata mi yoksa sonradan alinmis
+  bir karar mi, kod okumasindan anlasilmiyor , bu yuzden bu kosuda DEGISTIRILMEDI.
+  Ihsan'in kararina birakildi. (Codex turu 2 bulgusu.)
+
+- **[YUKSEK] Kati plan dogrulamasi kapali , cekim sayisi ve suresi hic denetlenmiyor.**
+  `series/replenish.py:213-217` `strict_plan_validation_enabled()` su bes anahtardan
+  birini ariyor: `chain_breaks`, `hook_shot`, `shot_plan`, `title_patterns`,
+  `format_version`. flashpoints `auto_replenish`'inde HICBIRI yok, yani `:244`'teki
+  *"cekim sayisi tam N olmali"* ve sure denetimi HIC calismiyor. Model 3-6 cekimlik
+  bir plan uretse gecerdi. Rock 2'nin `min_shots: 2` esigi ALT siniri korur, UST
+  siniri korumaz.
+
+  **Neden bu kosuda yapilmadi:** duzeltme tek satir (`auto_replenish` icine
+  `"hook_shot": 1`; 35 planin 35'i zaten `hook_shot: 1` ve 2 cekim tasiyor). Ama bu
+  anahtar URETIM ONCESI fail-closed bir dogrulayici aciyor ve kuyruk su an 5 plan
+  derinliginde. Bu depoda bunun emsali var: bir dogrulama kilidi konu havuzu
+  cesitliligi bitince ikmali cozulemez hale getirmis ve kosu yine yesil donmustu.
+  Dogru sira: once son N uretilmis plani bu dogrulayicidan RAPOR MODUNDA gecirip
+  kacinin kalacagini olcmek, sonra acmak. Olcum yapilmadan acilmaz.
+  (Codex turu 2 bulgusu, [FIX] demisti; olcum on kosuluyla ertelendi.)
+
+- **[ORTA] `qc.revalidate_cache` kapali , dogrulanmamis cache "dogrulanmis" diye
+  loglaniyor.** `series/produce.py:1569-1578`: cekim dosyasi varsa ve bos degilse
+  `cache_ok = True` (kosulsuz), ve log satiri *"Cekim n dogrulanmis cache'de"* yaziyor
+  , halbuki `revalidate_cache` kapaliyken hicbir sey dogrulanmiyor. Motor cozumu
+  hazir tasiyor (`_revalidate_cached_shot`, `produce.py:407`: medya gecerliligi +
+  ICERIK HASH'iyle eslesen bir `qc_pass` kaydi arar, bulamazsa dosyayi
+  `_stale_<hash>` diye ayirir).
+
+  QC REDDI bu deligi kullanmaz , reddedilen klip zaten `_qcfail<n>` olarak yeniden
+  adlandiriliyor (`series/critic.py:1845-1848`), yani dosya yolu bosaliyor ve yeniden
+  uretiliyor. Risk dar: YARIM/BOZUK INDIRME `shot_NN.mp4` olarak hayatta kalirsa
+  sonraki kosu onu denetimsiz kabul eder.
+
+  **Neden bu kosuda yapilmadi:** Rock 2 yeniden denemeleri ~%31'e cikariyor, yani bu
+  yol cok daha sik islenecek , acmak icin gecerli bir gerekce. Ama `qc_pass_exists`
+  ICERIK HASH'i esitligi ariyor ve bu kanalin log'unda 28 bolume karsilik yalnizca
+  17 `qc_pass` kaydi var. Kaydi olmayan saglam bir cache'i de ayirip yeniden uretir,
+  yani her yanlis karantina para yakar. Once "bugunku cache'in kaci `qc_pass_exists`'i
+  gecer" olculmeli. (Codex turu 2 bulgusu.)
+
+- **[DUSUK] Calisma zamani cekim dususunun `next_part`'i ilerletmedigi TESTLE degil
+  kod okumasiyla dogrulandi.** `series_runner.py:791-796` ve flashpoints'te
+  `state_machine_version` alaninin yoklugu. Tam bir `run_next` entegrasyon testi
+  motoru mocklamayi gerektirir; bu kosunun kapsami disinda. (Codex turu 2 bulgusu.)
 
 - **[YUKSEK] Dusen cekim kredi yakiyor ve artik bolumu de dusurecek.** Rock 2 sonrasi
   bir cekim reddedilirse bolum yayinlanmayacak ve ertesi kosuda bastan denenecek ,
