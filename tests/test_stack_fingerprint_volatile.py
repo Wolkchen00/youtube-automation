@@ -15,11 +15,13 @@ import json
 import pathlib
 import re
 import sys
+import tempfile
 import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from core import stack_fingerprint as sf
+from tests._archived_fixture import archived_search_roots, copy_archived_series
 
 SLUG = "unnatural-lab"
 
@@ -45,6 +47,15 @@ def _all_keys(node):
 
 class VolatileFieldTests(unittest.TestCase):
     def setUp(self):
+        # unnatural-lab 2026-09-10'da arsivlendi. Bu test bible.json'u DEGISTIRDIGI
+        # icin dondurulmus fixture'in gecici bir kopyasi uzerinde calisir.
+        workspace = tempfile.TemporaryDirectory()
+        self.addCleanup(workspace.cleanup)
+        roots = archived_search_roots(
+            channel_root=copy_archived_series(pathlib.Path(workspace.name), SLUG)
+        )
+        roots.start()
+        self.addCleanup(roots.stop)
         self.path = sf.data_dir(SLUG) / "bible.json"
         self.raw = self.path.read_text(encoding="utf-8")
         self.addCleanup(lambda: self.path.write_text(self.raw, encoding="utf-8"))

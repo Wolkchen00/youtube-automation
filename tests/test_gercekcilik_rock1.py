@@ -27,10 +27,24 @@ from series import critic, produce, replenish
 from series.bible import Bible
 from series.series_meta import SeriesMeta
 from series.shots import resolve_shot, resolve_visual_shot, validate_plan
+from tests._archived_fixture import archived_path, archived_search_roots
 
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
-UNNATURAL_ROOT = REPO_ROOT / "sentinal_ihsan" / "unnatural-lab"
+# unnatural-lab 2026-09-10'da arsivlendi: config ve planlar arsivden hemen onceki
+# agacin dondurulmus kopyasindan okunur (tests/_archived_fixture.py).
+UNNATURAL_ROOT = archived_path("sentinal_ihsan/unnatural-lab")
+_ARCHIVED_ROOTS = archived_search_roots()
+
+
+def setUpModule():
+    _ARCHIVED_ROOTS.start()
+
+
+def tearDownModule():
+    _ARCHIVED_ROOTS.stop()
+
+
 ART_STYLE = (
     "Vertical 9:16 real-world footage: a pair of hands working with one ordinary "
     "household object on a fixed everyday surface in a lived-in home. The view stays "

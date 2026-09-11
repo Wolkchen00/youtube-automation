@@ -20,6 +20,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from core import ffmpeg_tools  # noqa: E402
+from series import bible as bible_module  # noqa: E402
 from series import critic, produce  # noqa: E402
 from series.bible import Bible  # noqa: E402
 
@@ -185,33 +186,51 @@ class DeliveryGateBoundaryTests(unittest.TestCase):
 class InstalledSeriesIsolationTests(unittest.TestCase):
     """Diger her kurulu seri BIT-DEGISMEZ kalmali (tur-3 F-10: aimagine/ altindakiler dahil)."""
 
-    OTHERS = [
-        "aimagine/infinite-trip", "aimagine/the-drift", "aimagine/the-vast",
-        "sentinal_ihsan/could-you-survive", "sentinal_ihsan/night-archive",
-        "sentinal_ihsan/night-shift", "sentinal_ihsan/room-408",
-        "sentinal_ihsan/the-signal",
-        "galactic_experience/ava-voyage", "galactic_experience/event-horizon",
-        "galactic_experience/planetfall",
-    ]
+    # ROCK 1'in BILEREK degistirdigi tek seri; "diger" seriler bunun disindaki HERKES.
+    SUBJECT = "aimagine/from-scratch"
+
+    def others(self):
+        """Canli kurulu serilerin, SUBJECT disindaki tam listesi.
+
+        Eski sabit liste (11 seri) 2026-09-10 arsivlemesiyle curudu ve ">= 8"
+        esigi dustu. Sabit sayi yerine: motorun gordugu liste
+        (series.bible.all_series_dirs) BAGIMSIZ bir dosya sistemi taramasina
+        (repo kokunde series.json tasiyan <kanal>/<seri> dizinleri) ESIT olmali
+        ve bos olmamali. Filo testi canli seriyi tarar; fixture kullanmaz.
+        """
+        root = REPO_ROOT.resolve()
+        helper = sorted(
+            folder.resolve().relative_to(root).as_posix()
+            for folder in bible_module.all_series_dirs().values()
+        )
+        scanned = sorted(
+            path.parent.resolve().relative_to(root).as_posix()
+            for path in REPO_ROOT.glob("*/*/series.json")
+        )
+        self.assertEqual(helper, scanned, "motorun seri listesi dosya sistemiyle uyusmuyor")
+        others = [rel for rel in helper if rel != self.SUBJECT]
+        self.assertTrue(others, "kurulu seri listesi bos")
+        return others
 
     def test_no_other_series_gained_audio_fade_or_native_audio(self):
-        checked = 0
-        for rel in self.OTHERS:
+        others = self.others()
+        checked = []
+        for rel in others:
             bible_path = REPO_ROOT / rel / "bible.json"
             if not bible_path.is_file():
                 continue
-            checked += 1
+            checked.append(rel)
             data = json.loads(bible_path.read_text(encoding="utf-8"))
             series = data.get("series", {})
             with self.subTest(series=rel):
                 self.assertNotIn("audio_fade", series)
                 self.assertNotIn("native_audio", series.get("required_layers", []))
-        self.assertGreaterEqual(checked, 8, "kurulu seri listesi bulunamadi")
+        self.assertEqual(checked, others, "kurulu seri listesi bulunamadi")
 
     def test_audio_fade_default_is_unchanged_for_series_without_the_key(self):
         scratch = Bible.load("from-scratch")
         self.assertEqual(scratch.audio_fade, 0.06)
-        for rel in self.OTHERS:
+        for rel in self.others():
             bible_path = REPO_ROOT / rel / "bible.json"
             if not bible_path.is_file():
                 continue

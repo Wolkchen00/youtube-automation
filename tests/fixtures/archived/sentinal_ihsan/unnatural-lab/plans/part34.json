@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 34,
+    "title": "Why Won't This COIN Stick To METAL?"
+  },
+  "synopsis": "A man tries to place a common coin on various metal surfaces, but it actively repels other metal objects with an invisible force.",
+  "narration": "I found this coin in the couch cushions. It seemed normal, but trying to pocket it, the coin kept pushing my keys away. It just wouldn't stay.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A bright, polished copper-colored coin, slightly tarnished around the raised edges of its relief, with a distinct, smooth, cool metallic feel. The coin emits an invisible, focused repulsion field that only affects other ferrous metals, causing them to visibly push away from its surface with a palpable force, defying typical magnetic attraction or simple contact. A close-up view of the coin resting on a dark wood coffee table, with hands interacting with it. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A hand wearing a plain black crew-neck t-shirt gently pushes a bright copper-colored coin across a dark wood coffee table towards a silver key, and the key visibly slides backward across the surface, propelled by the coin's field, a visible space present between the key and the hand. The view maintains a constant position and angle for the whole shot.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "A small, silver key visibly slides backward across the wooden table as the coin approaches its side, a clear space remaining between them."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A bright, polished copper-colored coin, slightly tarnished around the raised edges of its relief, with a distinct, smooth, cool metallic feel. The coin emits an invisible, focused repulsion field that only affects other ferrous metals, causing them to visibly push away from its surface with a palpable force, defying typical magnetic attraction or simple contact. A close-up view of the coin resting on a dark wood coffee table, with hands interacting with it. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A hand wearing a plain black crew-neck t-shirt attempts to place the copper coin directly onto a larger metal wrench, but the coin visibly hovers a few millimeters above the wrench, maintaining a distinct gap. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "The copper coin visibly floats a few millimeters above a larger metal wrench, maintaining a distinct gap."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A bright, polished copper-colored coin, slightly tarnished around the raised edges of its relief, with a distinct, smooth, cool metallic feel. The coin emits an invisible, focused repulsion field that only affects other ferrous metals, causing them to visibly push away from its surface with a palpable force, defying typical magnetic attraction or simple contact. A close-up view of the coin resting on a dark wood coffee table, with hands interacting with it. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. A hand wearing a plain black crew-neck t-shirt gently nudges the copper coin towards a small pile of metal paper clips and screws, causing several of them to visibly scatter and slide away across the wooden table. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "Several small metal paper clips and screws visibly scatter and slide away from the coin as it is gently nudged towards them."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A bright, polished copper-colored coin, slightly tarnished around the raised edges of its relief, with a distinct, smooth, cool metallic feel. The coin emits an invisible, focused repulsion field that only affects other ferrous metals, causing them to visibly push away from its surface with a palpable force, defying typical magnetic attraction or simple contact. A close-up view of the coin resting on a dark wood coffee table, with hands interacting with it. A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight. The copper coin rests stationary on the dark wood coffee table, and a small, flat metal washer nearby visibly hovers motionlessly a few millimeters above the wooden surface, directly beside the coin. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "living_room_table",
+      "violation_observation": "A small, flat metal washer visibly hovers motionlessly a few millimeters above the wooden table, directly beside the copper coin."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Coin",
+    "descriptor": "A bright, polished copper-colored coin, slightly tarnished around the raised edges of its relief, with a distinct, smooth, cool metallic feel.",
+    "environment": "living_room_table",
+    "framing": "A close-up view of the coin resting on a dark wood coffee table, with hands interacting with it.",
+    "anomaly_descriptor": "The coin emits an invisible, focused repulsion field that only affects other ferrous metals, causing them to visibly push away from its surface with a palpable force, defying typical magnetic attraction or simple contact."
+  },
+  "face_visible": false,
+  "family": "reversed-physics",
+  "music": "A sparse, dry percussive bed featuring soft, rhythmic taps and low woody hits. A quiet sustained tone underpins a slow, steady pulse with ample negative space. No melody lines, no swells, no ethereal pads, and no vocals, starting immediately.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}

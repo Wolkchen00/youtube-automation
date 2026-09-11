@@ -5,6 +5,7 @@ verify fleet isolation + malformed-value rejection.
 
 import unittest
 from series.bible import Bible
+from tests._archived_fixture import archived_search_roots
 
 
 class EventHorizonConfigTest(unittest.TestCase):
@@ -35,6 +36,13 @@ class EventHorizonConfigTest(unittest.TestCase):
 
 class FleetIsolationTest(unittest.TestCase):
     """The other three active series must NOT have picked up the new gates."""
+
+    def setUp(self):
+        # unnatural-lab 2026-09-10'da arsivlendi: onun alt testi dondurulmus config'i
+        # okur; flashpoints ve next-stop canli kalir (tests/_archived_fixture.py).
+        roots = archived_search_roots()
+        roots.start()
+        self.addCleanup(roots.stop)
 
     def test_other_series_did_not_inherit_the_new_gates(self):
         slugs = ["flashpoints", "next-stop", "unnatural-lab"]

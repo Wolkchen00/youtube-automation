@@ -16,6 +16,7 @@ import pathlib
 from unittest import mock
 
 from series import notifier
+from tests._archived_fixture import archived_search_roots
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 
@@ -204,8 +205,11 @@ def test_outbox_lives_inside_a_path_persist_state_commits():
     alert_outbox.json serinin data_dir'inde, yani o dizinin altinda olmali.
     """
     from series.bible import data_dir
-    outbox = notifier.alert_outbox_path("unnatural-lab").resolve()
-    assert outbox.parent == data_dir("unnatural-lab").resolve()
+    # unnatural-lab 2026-09-10'da arsivlendi: seri dizini dondurulmus kopyadir
+    # (tests/_archived_fixture.py); goreli yerlesim sentinal_ihsan/ altinda aynidir.
+    with archived_search_roots():
+        outbox = notifier.alert_outbox_path("unnatural-lab").resolve()
+        assert outbox.parent == data_dir("unnatural-lab").resolve()
 
     wf = (REPO / ".github" / "workflows" / "unnatural-lab.yml").read_text(encoding="utf-8")
     assert "sentinal_ihsan/" in wf, "persist adimi sentinal_ihsan/ dizinini commit etmiyor"

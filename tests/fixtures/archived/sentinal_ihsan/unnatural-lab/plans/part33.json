@@ -1,0 +1,59 @@
+{
+  "episode": {
+    "number": 33,
+    "title": "This LEMON BOUNCES like RUBBER!"
+  },
+  "synopsis": "A man discovers a lemon that has the elasticity and bounce of a rubber ball, defying its natural fruit properties.",
+  "narration": "This lemon has been on my counter for days. It always feels different. Today, it completely bounced off the floor! I seriously can't believe it.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A bright yellow, medium-sized oval lemon with a slightly dimpled, waxy skin and one small dark stem scar visible at one end, feeling remarkably elastic and bouncy. The lemon's skin and flesh possess the extreme elasticity and resilience of high-grade rubber, causing it to deform under pressure but instantly spring back to its original shape and bounce vigorously. A close-up view of the lemon on a dark speckled stone-look counter, with hands entering from the sides. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt gently squeeze a bright yellow lemon, which visibly deforms under the pressure but instantly regains its perfect oval shape. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The lemon deforms significantly under gentle finger pressure but immediately snaps back to its perfect spherical shape."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A bright yellow, medium-sized oval lemon with a slightly dimpled, waxy skin and one small dark stem scar visible at one end, feeling remarkably elastic and bouncy. The lemon's skin and flesh possess the extreme elasticity and resilience of high-grade rubber, causing it to deform under pressure but instantly spring back to its original shape and bounce vigorously. A close-up view of the lemon on a dark speckled stone-look counter, with hands entering from the sides. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A pair of hands wearing a plain black crew-neck t-shirt firmly compress the bright yellow lemon between palms, causing it to flatten considerably, before it suddenly springs back out to its original form with a palpable force. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The lemon compresses tightly between two hands, flattening considerably, but then springs back out to its original form with a sudden release."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A bright yellow, medium-sized oval lemon with a slightly dimpled, waxy skin and one small dark stem scar visible at one end, feeling remarkably elastic and bouncy. The lemon's skin and flesh possess the extreme elasticity and resilience of high-grade rubber, causing it to deform under pressure but instantly spring back to its original shape and bounce vigorously. A close-up view of the lemon on a dark speckled stone-look counter, with hands entering from the sides. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A hand wearing a plain black crew-neck t-shirt drops the bright yellow lemon onto the dark speckled stone-look counter from a moderate height, and it bounces with unexpected height and elasticity, rising significantly back towards the hand. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The lemon bounces with unexpected height and elasticity after being dropped onto the hard counter surface."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A bright yellow, medium-sized oval lemon with a slightly dimpled, waxy skin and one small dark stem scar visible at one end, feeling remarkably elastic and bouncy. The lemon's skin and flesh possess the extreme elasticity and resilience of high-grade rubber, causing it to deform under pressure but instantly spring back to its original shape and bounce vigorously. A close-up view of the lemon on a dark speckled stone-look counter, with hands entering from the sides. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A hand wearing a plain black crew-neck t-shirt picks up the bright yellow lemon, and a thumb visibly presses into its side, causing the skin to flex and stretch before returning perfectly smooth. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The lemon's skin visibly flexes and stretches when a thumb presses into its side, then returns perfectly smooth."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Lemon",
+    "descriptor": "A bright yellow, medium-sized oval lemon with a slightly dimpled, waxy skin and one small dark stem scar visible at one end, feeling remarkably elastic and bouncy.",
+    "environment": "kitchen_counter",
+    "framing": "A close-up view of the lemon on a dark speckled stone-look counter, with hands entering from the sides.",
+    "anomaly_descriptor": "The lemon's skin and flesh possess the extreme elasticity and resilience of high-grade rubber, causing it to deform under pressure but instantly spring back to its original shape and bounce vigorously."
+  },
+  "face_visible": false,
+  "family": "impossible-material",
+  "music": "A sparse, dry percussive bed featuring soft, rhythmic taps and low woody hits. A quiet sustained tone underpins a slow, steady pulse with ample negative space. No melody lines, no swells, no ethereal pads, and no vocals, starting immediately.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/zh8KJ6mD/ep33-lemon.png"
+  ],
+  "ref_prompt_sha256": "1c128c9e6b08032c0a3fb47e644b31640beb9684ce9242835dbf7f80aee81b11"
+}
