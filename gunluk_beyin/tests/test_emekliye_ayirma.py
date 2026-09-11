@@ -222,3 +222,57 @@ def test_other_channels_untouched(tmp_path):
     run(tmp_path, "emekli", "unnatural-lab")
     assert not any(r.get("emekli")
                    for r in read_ledger(tmp_path, "flashpoints"))
+
+
+# ─── selective retirement: a removed FORMAT, not the whole channel ───────────
+
+def test_only_named_videos_are_retired(tmp_path):
+    """Olculdu 2026-09-11: aimagine-fear defterinde 9 video 15,1 sn ve 6 video
+    ~56 sn , ayni YouTube kanalina basan IKI AYRI URUN (Fear kaydiragi ve
+    durdurulmus Next Stop). Beyin ikisini havuzlayip 'sure' bulgusunu bu format
+    ayrimindan uyduruyordu."""
+    rows = [row(i) for i in range(4)]
+    seed(tmp_path, "unnatural-lab", rows)
+    proc = run(tmp_path, "emekli", "unnatural-lab",
+               "--video", "v001,v003", "--sebep", "eski format")
+    assert proc.returncode == 0, proc.stderr
+    assert "2 kayit EMEKLIYE AYRILDI" in proc.stdout
+    kayitlar = {r["video_id"]: r for r in read_ledger(tmp_path, "unnatural-lab")}
+    assert kayitlar["v001"].get("emekli") and kayitlar["v003"].get("emekli")
+    assert not kayitlar["v000"].get("emekli")
+    assert not kayitlar["v002"].get("emekli")
+
+
+def test_unknown_video_id_fails_loudly(tmp_path):
+    """Yazim hatasi SESSIZCE hicbir seyi emekliye ayirmamali , kullanici
+    formati kaldirdigini sanip devam ederdi."""
+    seed(tmp_path, "unnatural-lab", [row(i) for i in range(3)])
+    proc = run(tmp_path, "emekli", "unnatural-lab", "--video", "v001,YOKBOYLE")
+    assert proc.returncode != 0
+    assert "YOKBOYLE" in (proc.stdout + proc.stderr)
+    assert not any(r.get("emekli")
+                   for r in read_ledger(tmp_path, "unnatural-lab")), \
+        "hatali listede kismen emekliye ayirdi"
+
+
+def test_selective_retirement_leaves_the_rest_comparable(tmp_path):
+    """Geri kalan kayitlar 15'i buluyorsa kanal kurali URETMEYE DEVAM etmeli:
+    emeklilik, kanali susturmak degil, karisimi ayirmak icin."""
+    rows = [row(i, duration=15.0) for i in range(16)]
+    rows += [row(100 + i, duration=56.0) for i in range(4)]
+    seed(tmp_path, "unnatural-lab", rows)
+    run(tmp_path, "emekli", "unnatural-lab",
+        "--video", ",".join("v%03d" % (100 + i) for i in range(4)))
+    run(tmp_path, "beyin", "unnatural-lab")
+    metin = report(tmp_path, "unnatural-lab")
+    assert "4 kayit EMEKLI" in metin
+    assert "YETERSIZ VERI" not in metin, "16 aktif kayit kaldi, kural uretmeliydi"
+
+
+def test_video_list_tolerates_spaces(tmp_path):
+    seed(tmp_path, "unnatural-lab", [row(i) for i in range(3)])
+    proc = run(tmp_path, "emekli", "unnatural-lab", "--video", " v000 , v002 ")
+    assert proc.returncode == 0, proc.stderr
+    kayitlar = {r["video_id"]: r for r in read_ledger(tmp_path, "unnatural-lab")}
+    assert kayitlar["v000"].get("emekli") and kayitlar["v002"].get("emekli")
+    assert not kayitlar["v001"].get("emekli")

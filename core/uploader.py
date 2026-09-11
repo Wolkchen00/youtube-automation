@@ -5,6 +5,7 @@ Publishes videos to YouTube Shorts, Instagram Reels, and TikTok
 via the Upload-Post.com API.
 """
 
+import hashlib
 import html
 import os
 import re
@@ -181,16 +182,41 @@ def channel_recent_titles(user: str) -> set[str] | None:
     _channel_titles_cache[channel_id] = sonuc
     return sonuc
 
+def _content_key(video_path: Path, chunk: int = 1 << 20) -> str:
+    """Short fingerprint of the file's CONTENT, for cache naming.
+
+    Hashing a whole video would cost seconds per upload for no benefit here:
+    the question is only "is this the same bytes as last time", and a re-render
+    changes size and both ends of the file. So: size + first and last MB.
+    A collision would need an identical size with identical head and tail,
+    which a re-encode does not produce.
+    """
+    size = video_path.stat().st_size
+    digest = hashlib.sha256(str(size).encode())
+    with open(video_path, "rb") as fh:
+        digest.update(fh.read(chunk))
+        if size > chunk * 2:
+            fh.seek(-chunk, os.SEEK_END)
+            digest.update(fh.read(chunk))
+    return digest.hexdigest()[:12]
+
+
 def _delivery_copy(video_path: Path) -> Path:
     """Dosya MAX_UPLOAD_MB'ı aşıyorsa yükleme için sıkıştırılmış kopya döndür.
 
-    Kaynak dosyaya dokunmaz; kopya yanına '<ad>_delivery.mp4' olarak cache'lenir
-    (idempotent). Herhangi bir hatada orijinal yol döner (yükleme yine denenir)."""
+    Kaynak dosyaya dokunmaz; kopya yanına '<ad>-<icerik>_delivery.mp4' olarak
+    cache'lenir. Herhangi bir hatada orijinal yol döner (yükleme yine denenir).
+
+    Cache anahtari KAYNAGIN ICERIGI, adi degil. Eskiden yalnizca dosya adiydi:
+    ayni bolum yeniden uretildiginde (duzeltme, yeniden cekim, farkli kurgu)
+    dosya adi degismedigi icin ONCEKI icerigin kopyasi bulunup yukleniyordu.
+    Yani YANLIS VIDEO yayinlanabiliyordu ve log "delivery hazir" diyordu."""
     try:
         size_mb = video_path.stat().st_size / (1024 * 1024)
         if size_mb <= MAX_UPLOAD_MB:
             return video_path
-        delivery = video_path.parent / f"{video_path.stem}_delivery.mp4"
+        delivery = video_path.parent / (
+            "%s-%s_delivery.mp4" % (video_path.stem, _content_key(video_path)))
         if delivery.exists() and delivery.stat().st_size > 0:
             return delivery
         import subprocess

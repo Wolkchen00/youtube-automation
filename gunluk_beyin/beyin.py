@@ -1464,7 +1464,7 @@ def cmd_brain(channel):
              "kanala ozel kural VAR" if enough else "YETERSIZ VERI"))
 
 
-def cmd_retire(channel, reason=""):
+def cmd_retire(channel, reason="", videos=None):
     """Take the current ledger out of the comparison without deleting it.
 
     For when a channel's concept is replaced rather than tuned. The rows stay,
@@ -1479,6 +1479,18 @@ def cmd_retire(channel, reason=""):
         print("UYARI: %d bozuk satir atlandi." % skipped)
     already = [r for r in rows if r.get("emekli")]
     fresh = [r for r in rows if not r.get("emekli")]
+    if videos:
+        # Secmeli emeklilik: kanalin TAMAMI degil, kaldirilmis bir FORMAT.
+        # Olculdu 2026-09-11: aimagine-fear defterinde 9 video 15,1 sn ve 6
+        # video ~56 sn , ayni kanala basan iki ayri urun (Fear kaydiragi ve
+        # durdurulmus Next Stop). Beyin ikisini havuzluyor ve "sure" bulgusunu
+        # bu format ayrimindan uyduruyor.
+        istenen = set(videos)
+        bulunan = {r["video_id"] for r in rows}
+        eksik = istenen - bulunan
+        if eksik:
+            sys.exit("Defterde olmayan video_id: %s" % ", ".join(sorted(eksik)))
+        fresh = [r for r in fresh if r["video_id"] in istenen]
     if not fresh:
         print("%s: emekliye ayrilacak aktif kayit yok (%d kayit zaten emekli)."
               % (channel, len(already)))
@@ -1586,6 +1598,9 @@ def main():
                         help="askiya-al: YYYY-AA-GG ya da 'acik' (elle kaldirilir)")
     parser.add_argument("--sebep", default="",
                         help="askiya-al / emekli: sebep, raporda gorunur")
+    parser.add_argument("--video", default="",
+                        help="emekli: yalniz bu video_id'ler (virgulle ayrilmis). "
+                             "Verilmezse defterin TAMAMI emekliye ayrilir.")
     args = parser.parse_args()
 
     if args.komut == "askiya-al":
@@ -1598,7 +1613,8 @@ def main():
     if args.komut == "emekli":
         # Aski kontrolunden ONCE: askidayken de defteri emekliye ayirabilmek
         # gerekir, zaten aski tam olarak o gecis icin konuluyor.
-        cmd_retire(args.kanal, reason=args.sebep)
+        secilen = [v.strip() for v in (args.video or "").split(",") if v.strip()]
+        cmd_retire(args.kanal, reason=args.sebep, videos=secilen or None)
         return
 
     # Aski her uc komutu da durdurur. `topla` teknik olarak zararsiz olurdu ama

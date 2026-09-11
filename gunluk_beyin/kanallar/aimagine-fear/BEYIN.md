@@ -1,7 +1,7 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-11T04:56:30.715026+00:00
-Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (15 kayit)
+Uretim: 2026-09-11T08:22:28.150069+00:00
+Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\aimagine-fear\defter.jsonl` (9 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
@@ -11,15 +11,19 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
-- Olculen video: **15**
-- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
-- Medyan izlenme: **17**
-- Aralik: 1 ile 3,216 arasi
+> **6 kayit EMEKLI**, karsilastirmaya girmiyor , sebep: Next Stop formati durduruldu; 56 sn'lik bu videolar 15 sn'lik Fear kaydiragiyla ayni kanalda ama AYRI URUN.
+> Eski konseptin olcumleri yeni format icin yol gosterici
+> degildir. Silinmediler, defterde duruyorlar.
+
+- Olculen video: **9**
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/9 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
+- Medyan izlenme: **52**
+- Aralik: 2 ile 3,216 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
 | EN IYI | 3,216 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
-| EN KOTU | 1 | 2026-09-01 | Next Stop: Xibalba 🏞️💀 |
+| EN KOTU | 2 | 2026-09-10 | You're falling through glowing neon around the S |
 
 Son yayinlar (tekrar etme):
 - 2026-09-10 , You're falling through glowing neon around the STRAT Tower. 
@@ -34,19 +38,7 @@ Son yayinlar (tekrar etme):
 
 ## 2. BU KANALDA NE ISE YARIYOR
 
-Videolar izlenmeye gore siralandi, ust yari ile alt yarinin
-medyanlari karsilastirildi.
-
-| olcum | ust yari | alt yari | yon | n |
-|---|---|---|---|---|
-| sure | 15.10sn | 56.22sn | ust yari DAHA DUSUK | n=7/7 |
-| kesme / 10 sn | 0.00 | 0.53 | ust yari DAHA DUSUK | n=7/7 |
-| en uzun plan | 15.08sn | 15.34sn | **anlamli fark yok** | n=7/7 |
-| ses seviyesi (LUFS) | -15.50 | -16.10 | **anlamli fark yok** | n=7/7 |
-| kelime sayisi | 0.00 | 0.00 | **anlamli fark yok** | n=7/7 |
-
-> **Korelasyon, nedensellik degil.** Bunlar yon gosterir,
-> kanun degildir. Tek dogru sanma, hipotez olarak kullan.
+**YETERSIZ VERI** (n=9, en az 15 gerekiyor). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
 
 ## 3. GENEL ESIKLER
 
@@ -63,10 +55,7 @@ Kanala ozel veri yetersizse veya celiskiliyse bunlar gecerli.
 
 ## 4. BUGUN ICIN YON
 
-2. bolumdeki farklardan cikan somut hedefler:
-
-- **sure**: ust yarinin medyani 15.10sn (alt yari 56.22sn). Bugunku videoyu 15.10sn civarina hedefle.
-- **kesme / 10 sn**: ust yari 0.00, alt yari 0.53. Fark var ama hedef olarak VERILMIYOR (sifira yakin kesme onerisi zararli olur). Bu, format farkinin yan urunu olabilir.
+**YETERSIZ VERI** (n=9, en az 15 gerekiyor). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
 
 ## 5. KACIN
 
@@ -82,11 +71,6 @@ uygulamadir. Duzeltilene kadar bu boyutta karsilastirma yapma.
 - **Ses seviyesi hedef disi**: `MUtJyJ-jOKg` -16.5 LUFS (hedef -16..-13)
 - **Ses seviyesi hedef disi**: `w3KuWLDTCpQ` -16.5 LUFS (hedef -16..-13)
 - **Ses seviyesi hedef disi**: `ttNzWAv2Pnw` -16.1 LUFS (hedef -16..-13)
-- **Ses kirpiyor**: `GHTTxuOYSZ0` true peak 0.7 dBFS (tavan -1,0)
-- **Ses kirpiyor**: `h-i3gAZ4GUs` true peak 0.7 dBFS (tavan -1,0)
-- **Ses kirpiyor**: `SsmjEAKli6M` true peak 0.2 dBFS (tavan -1,0)
-- _Ses kirpiyor: toplam 6 kayitta var, ilk 3 gosterildi._
-- _Ses seviyesi hedef disi: toplam 7 kayitta var, ilk 3 gosterildi._
 
 ## 6. BASLIK OZNESI
 

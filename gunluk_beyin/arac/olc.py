@@ -90,7 +90,15 @@ def olc(mp4):
              "-show_entries", "stream=codec_name,channels,sample_rate",
              "-of", "default=noprint_wrappers=1", mp4])
     fa = dict(re.findall(r"^(\w+)=(.+)$", ra.stdout, re.M))
-    o["ses_var"] = bool(fa.get("codec_name"))
+    if ra.returncode != 0:
+        # ffprobe dustuyse "ses yok" SONUCU CIKARMA: ses olabilir de olmayabilir
+        # de, bilmiyoruz. False demek, sessiz bir videoyu dogrulanmis gibi
+        # gosterirdi ve LUFS'un neden olculmedigini yanlis acikardi.
+        o["ses_var"] = None
+        o.setdefault("hatalar", []).append(
+            "ses akisi sorgulanamadi (ffprobe %d)" % ra.returncode)
+    else:
+        o["ses_var"] = bool(fa.get("codec_name"))
     o["ses_kanal"] = fa.get("channels")
 
     if o["ses_var"]:
@@ -104,12 +112,26 @@ def olc(mp4):
         o["lufs"] = son(r"I:\s*(-?\d+\.\d+)\s*LUFS")
         o["lra"] = son(r"LRA:\s*(-?\d+\.\d+)\s*LU")
         o["true_peak"] = son(r"Peak:\s*(-?\d+\.\d+)\s*dBFS")
+        if rl.returncode != 0 and o["lufs"] is None:
+            o.setdefault("hatalar", []).append(
+                "ses seviyesi olculemedi (ffmpeg %d)" % rl.returncode)
     else:
         o["lufs"] = o["lra"] = o["true_peak"] = None
 
     rs = sh(["ffmpeg", "-nostats", "-i", mp4, "-filter_complex",
              "select='gt(scene,%s)',metadata=print:file=-" % SAHNE_ESIGI,
              "-an", "-f", "null", "-"])
+    if rs.returncode != 0:
+        # EN TEHLIKELI SESSIZ HATA. ffmpeg patlayinca `zamanlar` bos kaliyordu
+        # ve "0 kesme" diye deftere giriyordu: makul gorunen, uygulanabilir,
+        # UYDURMA bir deger. Olculemeyen sey olculemedi diye gecmeli.
+        o["kesme_sayisi"] = o["kesme_per_10sn"] = None
+        o["kesme_zamanlari"] = None
+        o["en_uzun_plan"] = o["ort_plan"] = None
+        o.setdefault("hatalar", []).append(
+            "sahne tespiti basarisiz (ffmpeg %d): %s"
+            % (rs.returncode, (rs.stderr or "")[-160:]))
+        return o
     zamanlar = [round(float(x), 2)
                 for x in re.findall(r"pts_time:(\d+\.?\d*)", rs.stdout or "")]
     o["kesme_sayisi"] = len(zamanlar)
