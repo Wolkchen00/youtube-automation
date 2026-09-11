@@ -780,6 +780,13 @@ def cmd_brain(channel):
                  "  (ya da once %s dosyasini olustur)"
                  % (channel, ", ".join(sorted(CHANNELS)), ledger_path(channel)))
     rows, skipped = read_ledger(channel)
+    # RETIRED rows stay in the ledger but leave the comparison. When a channel's
+    # concept is rewritten from scratch, the old measurements describe a product
+    # that no longer exists; pooling them would have the brain derive this
+    # channel's rules from a dead format. They are NOT deleted: `olc` still sees
+    # them as known video ids and so never re-measures those videos.
+    retired = [r for r in rows if r.get("emekli")]
+    rows = [r for r in rows if not r.get("emekli")]
     total = len(rows)
 
     # --- uretim tamligi --------------------------------------------------
@@ -891,8 +898,24 @@ def cmd_brain(channel):
     # --- 1. status
     out.append("## 1. DURUM")
     out.append("")
+    if retired:
+        sebepler = sorted({(r.get("emekli") or {}).get("sebep") or ""
+                           for r in retired} - {""})
+        out.append("> **%d kayit EMEKLI**, karsilastirmaya girmiyor%s."
+                   % (len(retired),
+                      " , sebep: " + "; ".join(sebepler) if sebepler else ""))
+        out.append("> Eski konseptin olcumleri yeni format icin yol gosterici")
+        out.append("> degildir. Silinmediler, defterde duruyorlar.")
+        out.append("")
     if total == 0:
-        out.append("Defter bos. Once `python beyin.py olc %s` calistir." % channel)
+        if retired:
+            out.append("Aktif kayit yok , defterdeki %d videonun hepsi emekli."
+                       % len(retired))
+            out.append("Yeni formatin ilk videosu yayindan **%.0f saat sonra**"
+                       % MIN_AGE_HOURS)
+            out.append("olculur ve buradan itibaren kanala ozel kural SIFIRDAN kurulur.")
+        else:
+            out.append("Defter bos. Once `python beyin.py olc %s` calistir." % channel)
     else:
         counts = [c for c in (metric(r) for r in rows) if c is not None]
         out.append("- Olculen video: **%d**" % total)
@@ -1310,6 +1333,38 @@ def cmd_brain(channel):
              "kanala ozel kural VAR" if enough else "YETERSIZ VERI"))
 
 
+def cmd_retire(channel, reason=""):
+    """Take the current ledger out of the comparison without deleting it.
+
+    For when a channel's concept is replaced rather than tuned. The rows stay,
+    so `olc` keeps treating those videos as already measured and never spends
+    a download on them again; only the report stops reasoning from them.
+    """
+    safe_slug(channel)
+    if not os.path.exists(ledger_path(channel)):
+        sys.exit("Defter yok: %s" % ledger_path(channel))
+    rows, skipped = read_ledger(channel)
+    if skipped:
+        print("UYARI: %d bozuk satir atlandi." % skipped)
+    already = [r for r in rows if r.get("emekli")]
+    fresh = [r for r in rows if not r.get("emekli")]
+    if not fresh:
+        print("%s: emekliye ayrilacak aktif kayit yok (%d kayit zaten emekli)."
+              % (channel, len(already)))
+        return
+    stamp = {"ts": now_iso(), "sebep": reason or ""}
+    for row in fresh:
+        row["emekli"] = stamp
+    write_ledger(channel, rows)
+    print("%s: %d kayit EMEKLIYE AYRILDI%s."
+          % (channel, len(fresh), " (%d zaten emekliydi)" % len(already)
+             if already else ""))
+    print("  Kayitlar SILINMEDI: defterde duruyorlar ve 'olc' onlari bilinen")
+    print("  sayip yeniden olcmuyor. Sadece karsilastirmaya girmiyorlar.")
+    print("  Bir sonraki 'beyin' kosusu raporu yeniden yazacak:")
+    print("    python beyin.py beyin %s" % channel)
+
+
 def cmd_suspend(channel, days=None, until=None, reason=""):
     """Park a channel: skip its runs and replace BEYIN.md with a notice."""
     folder = channel_dir(channel)
@@ -1358,7 +1413,8 @@ def suspended(channel, command):
 def main():
     parser = argparse.ArgumentParser(description="Gunluk ogrenen beyin")
     parser.add_argument("komut",
-                        choices=["olc", "topla", "beyin", "askiya-al", "devam"])
+                        choices=["olc", "topla", "beyin", "askiya-al", "devam",
+                                 "emekli"])
     parser.add_argument("kanal")
     parser.add_argument("--limit", type=int, default=15,
                         help="olc: kac video taransin")
@@ -1367,7 +1423,7 @@ def main():
     parser.add_argument("--kadar", default=None,
                         help="askiya-al: YYYY-AA-GG ya da 'acik' (elle kaldirilir)")
     parser.add_argument("--sebep", default="",
-                        help="askiya-al: askinin sebebi, raporda gorunur")
+                        help="askiya-al / emekli: sebep, raporda gorunur")
     args = parser.parse_args()
 
     if args.komut == "askiya-al":
@@ -1376,6 +1432,11 @@ def main():
         return
     if args.komut == "devam":
         cmd_resume(args.kanal)
+        return
+    if args.komut == "emekli":
+        # Aski kontrolunden ONCE: askidayken de defteri emekliye ayirabilmek
+        # gerekir, zaten aski tam olarak o gecis icin konuluyor.
+        cmd_retire(args.kanal, reason=args.sebep)
         return
 
     # Aski her uc komutu da durdurur. `topla` teknik olarak zararsiz olurdu ama
