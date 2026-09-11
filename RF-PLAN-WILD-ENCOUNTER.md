@@ -287,11 +287,11 @@ SERI: bir film setinde dev, gercekci bir yaratik performans sanatcisini (Ihsan) 
 
 ### A.5 `bible.series` notlari
 
-- `format_note`: `2026-09-12, plato-3x8. Sahte kamera arkasi: uc cekim x 8 sn, tek set, tek sahne. Vuruslar: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis. Olcum dayanagi: DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor). ep05 22,7 sn, 2 kesme. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan; QC notu vurus tarif etmez, prompttaki SHOT paragrafina bakar.`
-- `chain_note`: `2026-09-12 ACIK. Tek set, tek sahne: cekim 2 ve 3 onceki cekimin son karesinden baslar, set ve isik bolum icinde sabit kalir.`
-- `object_match_note`: `2026-09-12 KAPALI. plato-3x8 icin yaratik referansi RF-PLAN-WILD-ENCOUNTER Rock 4 ile uretiliyor. Kapi ep06 olculmeden ACILMAZ: yeni bir QC kapisi yanlis retle kredi yakar.`
-- `first_frame_note`: `2026-09-12 KAPALI. require_first_frame acilis karesinde imkansiz ozellik arar; bu formatta imkansiz ozellik yok, yaratik bir prop ve ifsa cekim 3'te. Acik olsa her bolumu yanlis sebeple reddeder.`
-- `continuity_note`: `2026-09-12 KAPALI, ep06 olculene kadar. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. chain_frames ve ortam referansi sureklilik sagliyor; kapiyi olcmeden acmak yanlis retle kredi yakma riskidir.`
+- `format_note`: `2026-09-11, plato-3x8. Sahte kamera arkasi: uc cekim x 8 sn, tek set, tek sahne. Vuruslar: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis. Olcum dayanagi: DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor). ep05 22,7 sn, 2 kesme. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan; QC notu vurus tarif etmez, prompttaki SHOT paragrafina bakar.`
+- `chain_note`: `2026-09-11 ACIK. Tek set, tek sahne: cekim 2 ve 3 onceki cekimin son karesinden baslar, set ve isik bolum icinde sabit kalir.`
+- `object_match_note`: `2026-09-11 KAPALI. plato-3x8 icin yaratik referansi RF-PLAN-WILD-ENCOUNTER Rock 4 ile uretiliyor. Kapi ep06 olculmeden ACILMAZ: yeni bir QC kapisi yanlis retle kredi yakar.`
+- `first_frame_note`: `2026-09-11 KAPALI. require_first_frame acilis karesinde imkansiz ozellik arar; bu formatta imkansiz ozellik yok, yaratik bir prop ve ifsa cekim 3'te. Acik olsa her bolumu yanlis sebeple reddeder.`
+- `continuity_note`: `2026-09-11 KAPALI, ep06 olculene kadar. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. chain_frames ve ortam referansi sureklilik sagliyor; kapiyi olcmeden acmak yanlis retle kredi yakma riskidir.`
 
 ### A.6 `characters[ihsan_field].bio`
 
@@ -302,7 +302,7 @@ Kanalin yuzu, Ihsan'in kendi figuru. Her bolumde bir film setinde dev, gercekci 
 ### A.7 DOKTRIN.md "GUNCEL FORMAT" bolumu
 
 ```
-## GUNCEL FORMAT (12 Eylul 2026'dan itibaren gecerli)
+## GUNCEL FORMAT (11 Eylul 2026'dan itibaren gecerli)
 
 Bu bolum asagidaki "Tek cumle", "Degismez kurallar" ve "Neye DOKUNMA"
 bolumlerinin YERINE gecer. Onlar 10 Eylul'un dis mekan / melez yaratik

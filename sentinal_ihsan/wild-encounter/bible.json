@@ -45,16 +45,16 @@
       "scene_cut_fail": false,
       "min_shots": 3,
       "require_all_shots": true,
-      "object_match_note": "2026-09-12 KAPALI. plato-3x8 icin yaratik referansi RF-PLAN-WILD-ENCOUNTER Rock 4 ile uretiliyor. Kapi ep06 olculmeden ACILMAZ: yeni bir QC kapisi yanlis retle kredi yakar.",
-      "first_frame_note": "2026-09-12 KAPALI. require_first_frame acilis karesinde imkansiz ozellik arar; bu formatta imkansiz ozellik yok, yaratik bir prop ve ifsa cekim 3'te. Acik olsa her bolumu yanlis sebeple reddeder.",
-      "continuity_note": "2026-09-12 KAPALI, ep06 olculene kadar. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. chain_frames ve ortam referansi sureklilik sagliyor; kapiyi olcmeden acmak yanlis retle kredi yakma riskidir."
+      "object_match_note": "2026-09-11 KAPALI. plato-3x8 icin yaratik referansi RF-PLAN-WILD-ENCOUNTER Rock 4 ile uretiliyor. Kapi ep06 olculmeden ACILMAZ: yeni bir QC kapisi yanlis retle kredi yakar.",
+      "first_frame_note": "2026-09-11 KAPALI. require_first_frame acilis karesinde imkansiz ozellik arar; bu formatta imkansiz ozellik yok, yaratik bir prop ve ifsa cekim 3'te. Acik olsa her bolumu yanlis sebeple reddeder.",
+      "continuity_note": "2026-09-11 KAPALI, ep06 olculene kadar. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. chain_frames ve ortam referansi sureklilik sagliyor; kapiyi olcmeden acmak yanlis retle kredi yakma riskidir."
     },
     "duration_band": [
       12,
       26
     ],
-    "format_note": "2026-09-12, plato-3x8. Sahte kamera arkasi: uc cekim x 8 sn, tek set, tek sahne. Vuruslar: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis. Olcum dayanagi: DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor). ep05 22,7 sn, 2 kesme. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan; QC notu vurus tarif etmez, prompttaki SHOT paragrafina bakar.",
-    "chain_note": "2026-09-12 ACIK. Tek set, tek sahne: cekim 2 ve 3 onceki cekimin son karesinden baslar, set ve isik bolum icinde sabit kalir.",
+    "format_note": "2026-09-11, plato-3x8. Sahte kamera arkasi: uc cekim x 8 sn, tek set, tek sahne. Vuruslar: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis. Olcum dayanagi: DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor). ep05 22,7 sn, 2 kesme. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan; QC notu vurus tarif etmez, prompttaki SHOT paragrafina bakar.",
+    "chain_note": "2026-09-11 ACIK. Tek set, tek sahne: cekim 2 ve 3 onceki cekimin son karesinden baslar, set ve isik bolum icinde sabit kalir.",
     "credit_cap_note": "2026-09-11: gecici 1300 tavani GERI ALINDI, 1000'e donuldu. Bolum 1'de 1239 kredi birikmisti cunku UC AYRI KONSEPT (ayi-yengec, kaplan-ahtapot, fil-timsah) hep part01 olarak uretildi; defter hepsini tek bolume yazdi. DERS: her tasarim yinelemesi YENI BOLUM NUMARASI almali, yoksa hem tavan yaniltir hem maliyet muhasebesi bozulur.",
     "duration_note": "2026-09-11: tavan 20 -> 26. Ihsan daha UZUN video istedi ve hikayenin uc vurusu (tehdit, yutulma, ifsa) 24 saniye gerektiriyor. NOT, olcumle celisiyor: referans hesabin videolari 24-32 saniyeye cikinca medyani 2.161'den 325 begeniye dusmustu. Ama o olcum KOVALAMA formati icindi; bu format referansi (DckORL2B8gx) 15,2 sn ve 4,4M. 24 saniye ikisinin arasinda. Karar Ihsan'in, gerekce kayda gecti."
   },

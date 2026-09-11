@@ -6,7 +6,7 @@ Kurulus: 10 Eylul 2026. Kanal sifirdan yazildi, onceki sekiz seri arsivde
 Bu belgedeki her sayi OLCULMUSTUR. Kaynak: `sentinal_ihsan/TERSINE-MUHENDISLIK.md`.
 Izlenme sayilari Ihsan'in IG Insights'indan, teknik olcumler bizim (yt-dlp + ffmpeg).
 
-## GUNCEL FORMAT (12 Eylul 2026'dan itibaren gecerli)
+## GUNCEL FORMAT (11 Eylul 2026'dan itibaren gecerli)
 
 Bu bolum asagidaki "Tek cumle", "Degismez kurallar" ve "Neye DOKUNMA"
 bolumlerinin YERINE gecer. Onlar 10 Eylul'un dis mekan / melez yaratik
