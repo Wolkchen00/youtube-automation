@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "This GIANT PRAYING MANTIS Is NOT Real"
+  },
+  "synopsis": "On a built jungle set, a colossal praying mantis takes a performer into its maw, then the crew open its mandibles and he climbs out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "SHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man, who stands his ground and watches its jaws begin to part.\n\nA wide shot of Ihsan, dressed in a safari shirt, standing calmly on the dense jungle set floor. In front of him, a colossal, lifelike praying mantis head practical prop, pale green with rigid, segmented chitinous skin, large compound black eyes, and sharp, serrated mandibles, standing 3.5 metres tall, slowly begins to open its formidable mandibles. Practical haze drifts around the lush foliage. Ambient sound only: rustling leaves, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "SHOT 2, TAKEN INSIDE. The creature's jaws open wide and close over exactly one man until he is completely out of sight inside its mouth, and the creature settles with the man nowhere in frame. The crew keep filming.\n\nA wide shot showing the colossal, lifelike praying mantis head practical prop, pale green with rigid, segmented chitinous skin, large compound black eyes, and sharp, serrated mandibles, standing 3.5 metres tall, its mandibles now fully open, engulfing Ihsan completely. The mandibles then close with a soft thud. The studio lights reflect off the mantis's chitinous surface. Ambient sound only: faint set creaks, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "SHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the creature and push its jaws open, and the same one man climbs out of the mouth onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal.\n\nA wide shot of the colossal, lifelike praying mantis head practical prop, pale green with rigid, segmented chitinous skin, large compound black eyes, and sharp, serrated mandibles, standing 3.5 metres tall. Two crew members in black t-shirts and gloves carefully push its hard, segmented mandibles apart. Ihsan, unharmed, calmly steps out of the hollow interior of the prop onto the jungle set floor, dusting off his safari shirt. Ambient sound only: soft mechanical whirs, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant praying mantis head practical prop",
+    "descriptor": "a colossal, lifelike praying mantis head practical prop, pale green with rigid, segmented chitinous skin, large compound black eyes, and sharp, serrated mandibles, standing 3.5 metres tall",
+    "environment": "jungle_set",
+    "framing": "A wide shot shows the mantis head filling the left side of the frame, towering over Ihsan who stands right of center on the jungle floor.",
+    "anomaly_descriptor": "The mantis's hard, segmented mandibles are clearly pulled apart by crew members' gloved hands, revealing the hollow interior of the prop, made of lightweight plastic and foam."
+  },
+  "family": "insect-giant",
+  "hook_shot": 3,
+  "doctrine_sha256": "8948c0a67f46be436564192e0adff6be0cff086d6508415cdd697fb18ad56b92"
+}

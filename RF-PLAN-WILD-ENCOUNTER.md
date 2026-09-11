@@ -209,6 +209,41 @@ gorsel yolu kullanilir; kayit olculmus bir deneye ertelendi (RF-ISSUES).
      capalarin hazirlanacagini soyler, ucretli cagri yapmaz.
   3. Tam takim: 0 failed / 0 error.
 
+### ROCK 5: wild-encounter gunluk otomasyona baglanir (Ihsan istegi, 11 Eylul ~11:50 PDT)
+
+Ihsan: "sonraki videolar bu otomasyonda oldugundan emin ol"; karar: GUNLUK,
+OTOMATIK YAYIN. Visionary insa etti (Codex kotada), Codex 2:35 PM'de inceler.
+
+Olculen engeller (canli yapilandirmayla ikmal probu, 11 Eylul 11:54 PDT):
+- 6 Gemini denemesinin 6'si da reddedildi: `_validate_batch` formatli her seride
+  sureyi sabit "6" bekliyordu (tek-obje kalintisi), plato 8 sn.
+- Baslik kalibi iki buyuk harfli kelimeyle sinirliydi ("GIANT PRAYING MANTIS" dustu).
+- Formatli seriler icin yazilan obje kurali "anomaliyi her cekime kopyala, cekim 1'de
+  en uc haliyle goster" diyordu: plato'da ifsa cekim 1'de harcanirdi.
+- Aileler melez donemin adlariydi (wrong-skin, wrong-head): Gemini "tuylu yilan" yazdi.
+- Yuz capasi (ihsan_field) planlara garanti girmiyordu.
+- Seri draft, parts bos, next_part 1: ep05/ep06 kayit disiydi (mukerrer riski).
+
+Yapilanlar:
+- replenish.py: sure kontrolu cfg.shot_seconds'tan (tek-obje'de config zaten 6'ya
+  kilitli, mesaj bayt bayt ayni); `PLATO_OBJECT_RULE` (yalniz plato-3x8): tek gercek
+  hayvan, dogal anatomi, habitata uyan set, ifsa yalniz cekim 3, olumsuz kelime yasagi;
+  opt-in `required_characters` her cekime mekanik eklenir, bible'da yoksa cfg hatasi;
+  modelin kismen kopyaladigi SHOT satiri atilir, kanonik satir bir kez kalir.
+- shots.py: `PLATO_FORMAT` sabiti (produce ve replenish buradan alir).
+- series.json: status active, publish_mode auto, enabled true, required_characters,
+  baslik kalibi {0,2}, aileler hayvan turu (reptile, sea-giant, insect-giant,
+  mammal-giant, bird-giant), parts 5 ve 6 published, next_part 7.
+- published.json: ep05 ve ep06 kimlik ve linkleriyle.
+- bible.json: yalniz kurulmus setler (jungle_set, ocean_tank_set, desert_ruins_set);
+  dis mekanlar ve ciplak soundstage cikti.
+- .github/workflows/wild-encounter.yml: 18:30 UTC gunluk; unnatural-lab.yml'e
+  dokunulmadi (bir test onu okuyor). series.yml (run_all) zamanlamasi kapali, cift
+  uretim yok.
+- PROOF: tests/test_replenish_plato.py (13 test, 5 mutasyonun 5'i yakalandi);
+  gercek ikmal kosusu part07-11'i ILK denemede yazdi, hepsi dogrulayicidan temiz,
+  tekrar yok, olumsuz kelime yok, her cekimde yuz kimligi; part07 dry-run temiz.
+
 ## Rocklardan sonra (Visionary, Codex degil)
 
 1. Level 10 inceleme her rock icin: tam diff, kanit kendi kosumum, kendi

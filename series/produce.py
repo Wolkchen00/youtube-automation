@@ -46,6 +46,7 @@ from .omni_api import (
 from .episode_coherence import episode_coherence_report
 from .series_meta import SeriesMeta, part_plan_path
 from .shots import (
+    PLATO_FORMAT,
     TEK_OBJE_FORMAT,
     resolve_shot,
     resolve_visual_shot,
@@ -775,9 +776,9 @@ def _audio_master_hold(reason: str) -> ProduceResult:
 # boylece eski hash tutmaz ve tum referanslar yeniden uretilir.
 REF_PROMPT_TEMPLATE_VERSION = "rb1"
 REFERENCE_IMAGE_MODEL = "nano-banana-2"
-# Fake behind-the-scenes format (wild-encounter). Its anchors are opt-in through
-# bible.series.episode_anchors and use their own prompt template version.
-PLATO_FORMAT = "plato-3x8"
+# Fake behind-the-scenes format (wild-encounter, shots.PLATO_FORMAT). Its anchors
+# are opt-in through bible.series.episode_anchors and use their own prompt
+# template version.
 PLATO_REF_TEMPLATE_VERSION = "plato1"
 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti

@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "This GIANT KOMODO DRAGON Is NOT Real"
+  },
+  "synopsis": "On a desert ruins set, a colossal komodo dragon consumes a performer, and then the crew force its jaws open for him to climb out safely.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "SHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man, who stands his ground and watches its jaws begin to part.\n\nA wide shot of Ihsan, dressed in desert gear, standing on the dusty desert ground of the ruins set. Before him, a colossal, lifelike komodo dragon head practical prop, mottled grey-brown scales with rough, textured skin, beady yellow eyes, and a wide, toothy grin, standing 3.2 metres tall, slowly begins to open its powerful jaws. Ancient-looking rock formations are visible in the background. Ambient sound only: faint rustling, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "desert_ruins_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "SHOT 2, TAKEN INSIDE. The creature's jaws open wide and close over exactly one man until he is completely out of sight inside its mouth, and the creature settles with the man nowhere in frame. The crew keep filming.\n\nA wide shot showing the colossal, lifelike komodo dragon head practical prop, mottled grey-brown scales with rough, textured skin, beady yellow eyes, and a wide, toothy grin, standing 3.2 metres tall, its jaws wide open, completely engulfing Ihsan. The jaws then close with a heavy thud. The dragon's textured scales are highlighted by the studio lights. Ambient sound only: heavy thud, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "desert_ruins_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "SHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the creature and push its jaws open, and the same one man climbs out of the mouth onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal.\n\nA wide shot of the colossal, lifelike komodo dragon head practical prop, mottled grey-brown scales with rough, textured skin, beady yellow eyes, and a wide, toothy grin, standing 3.2 metres tall. Two crew members in thick gloves manually push apart its heavy, scaly jaws with a hydraulic assist. Ihsan, completely unharmed, climbs out of the dark, cavernous interior of the prop onto the dusty desert ground, adjusting his desert gear. Ambient sound only: hydraulic hiss, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "desert_ruins_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant komodo dragon head practical prop",
+    "descriptor": "a colossal, lifelike komodo dragon head practical prop, mottled grey-brown scales with rough, textured skin, beady yellow eyes, and a wide, toothy grin, standing 3.2 metres tall",
+    "environment": "desert_ruins_set",
+    "framing": "A wide shot captures the komodo dragon head at eye level, its mouth slightly agape, with Ihsan standing directly in front of it on the dusty desert ground.",
+    "anomaly_descriptor": "The dragon's heavy, scaly jaws are manually pushed apart by crew members using thick gloves and a hydraulic assist, revealing the dark, cavernous interior of the prop, made of rubber and fiberglass."
+  },
+  "family": "reptile",
+  "hook_shot": 3,
+  "doctrine_sha256": "8948c0a67f46be436564192e0adff6be0cff086d6508415cdd697fb18ad56b92"
+}

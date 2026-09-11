@@ -58,7 +58,8 @@
     "format_note": "2026-09-11, plato-3x8. Sahte kamera arkasi: uc cekim x 8 sn, tek set, tek sahne. Vuruslar: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis. Olcum dayanagi: DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor). ep05 22,7 sn, 2 kesme. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan; QC notu vurus tarif etmez, prompttaki SHOT paragrafina bakar.",
     "chain_note": "2026-09-11 ACIK. Tek set, tek sahne: cekim 2 ve 3 onceki cekimin son karesinden baslar, set ve isik bolum icinde sabit kalir.",
     "credit_cap_note": "2026-09-11: gecici 1300 tavani GERI ALINDI, 1000'e donuldu. Bolum 1'de 1239 kredi birikmisti cunku UC AYRI KONSEPT (ayi-yengec, kaplan-ahtapot, fil-timsah) hep part01 olarak uretildi; defter hepsini tek bolume yazdi. DERS: her tasarim yinelemesi YENI BOLUM NUMARASI almali, yoksa hem tavan yaniltir hem maliyet muhasebesi bozulur.",
-    "duration_note": "2026-09-11: tavan 20 -> 26. Ihsan daha UZUN video istedi ve hikayenin uc vurusu (tehdit, yutulma, ifsa) 24 saniye gerektiriyor. NOT, olcumle celisiyor: referans hesabin videolari 24-32 saniyeye cikinca medyani 2.161'den 325 begeniye dusmustu. Ama o olcum KOVALAMA formati icindi; bu format referansi (DckORL2B8gx) 15,2 sn ve 4,4M. 24 saniye ikisinin arasinda. Karar Ihsan'in, gerekce kayda gecti."
+    "duration_note": "2026-09-11: tavan 20 -> 26. Ihsan daha UZUN video istedi ve hikayenin uc vurusu (tehdit, yutulma, ifsa) 24 saniye gerektiriyor. NOT, olcumle celisiyor: referans hesabin videolari 24-32 saniyeye cikinca medyani 2.161'den 325 begeniye dusmustu. Ama o olcum KOVALAMA formati icindi; bu format referansi (DckORL2B8gx) 15,2 sn ve 4,4M. 24 saniye ikisinin arasinda. Karar Ihsan'in, gerekce kayda gecti.",
+    "environments_note": "2026-09-11: yalniz KURULMUS setler (DOKTRIN kural 5). Eski dis mekanlar (tropical_beach, jungle_river, desert_dunes, rocky_coast) ve ciplak yesil perde (soundstage) oto-ikmal secmesin diye cikarildi; part02-05 tarihi planlardir."
   },
   "art_style": "Vertical 9:16 photoreal behind-the-scenes footage of a real film shoot on a studio stage. One giant, lifelike creature built as a practical effect stands on a dressed set of real materials, with practical haze, overhead studio lighting, crew in black, camera rigs and a green screen wall making the production obvious. Natural colour, true skin tones and real depth of field; everything else obeys ordinary physics.",
   "style_ref_url": null,
@@ -81,34 +82,19 @@
   ],
   "environments": [
     {
-      "id": "tropical_beach",
-      "desc": "A wide tropical beach in bright daylight: wet sand at the waterline reflecting the sky, small breaking waves, palm trees blurred at the far edge of frame, scattered white cloud over open sea.",
-      "ref_image_url": null
-    },
-    {
-      "id": "jungle_river",
-      "desc": "A slow brown river cutting through dense jungle: thick green foliage crowding both banks, hanging vines, humid haze in the air, dappled sunlight breaking through the canopy onto the water.",
-      "ref_image_url": null
-    },
-    {
-      "id": "desert_dunes",
-      "desc": "An open desert of pale wind-carved dunes under a hard blue sky: fine sand streaming off the ridges, heat shimmer near the ground, a few dark rocks half buried in the slope.",
-      "ref_image_url": null
-    },
-    {
-      "id": "rocky_coast",
-      "desc": "A dark volcanic rock shelf at the edge of deep open water: spray bursting against the rock, foam sliding back into the sea, grey-green swell moving beyond, overcast maritime light.",
-      "ref_image_url": null
-    },
-    {
-      "id": "soundstage",
-      "desc": "A large film studio soundstage: a tall bright green screen wall across the back, a shallow water tank in the middle of the floor, overhead lighting grid and scaffolding above, and crew members in black standing along the far edge of the set.",
-      "ref_image_url": null
-    },
-    {
       "id": "jungle_set",
       "desc": "A built jungle set inside a film studio: dense practical foliage, hanging vines and wet leaf litter across the floor, low drifting haze, a tall green screen wall visible beyond the foliage, and an overhead studio lighting grid shining down through the canopy from a high glass-roofed structure.",
       "ref_image_url": "https://i.ibb.co/wZJLBG7T/jungle-set.png"
+    },
+    {
+      "id": "ocean_tank_set",
+      "desc": "A built ocean set inside a film studio: a wide shallow water tank dressed with dark wet rocks, kelp and drifting foam, a painted sea horizon backdrop and a tall green screen wall beyond it, wave machines churning the surface, and an overhead studio lighting grid reflecting on the water.",
+      "ref_image_url": null
+    },
+    {
+      "id": "desert_ruins_set",
+      "desc": "A built desert set inside a film studio: pale sand dunes shaped across the floor, broken sandstone columns and half-buried ruins, wind machines lifting fine sand, a tall green screen wall beyond the set, and a hot overhead studio lighting grid.",
+      "ref_image_url": null
     }
   ],
   "props": []

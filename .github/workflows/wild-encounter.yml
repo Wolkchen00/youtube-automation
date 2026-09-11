@@ -1,0 +1,149 @@
+name: Wild Encounter Daily
+
+# sentinalihsandaily kanalinin gunluk seridi: 'Wild Encounter' (plato-3x8, sahte kamera
+# arkasi). Doktrin: sentinal_ihsan/wild-encounter/DOKTRIN.md, GUNCEL FORMAT bolumu.
+#
+# Ihsan karari 2026-09-11: GUNLUK, OTOMATIK YAYIN (publish_mode="auto"). Onay beklenmez;
+# koruma kapilari: ikmal dogrulamasi (harcamadan once), capa kredi kapisi, Critic-QC
+# (yuz eslesmesi, yapim gorunurlugu, vurus), mukerrer baslik kapisi.
+#
+# Ana kuyruktan (series.yml / run_all) BAGIMSIZ calisir; series.json priority=999.
+# 10 Eylul'e kadar ayni slotu 'unnatural-lab.yml' kullaniyordu (seri arsivde, dosya
+# yalniz workflow_dispatch). Saat duzeni: event-horizon ve flashpoints kendi seritlerinde.
+#
+# Maliyet: bolum basi ~315-436 Kie kredisi (~$1,6-2,2), cuzdan diger kanallarla ortak.
+
+on:
+  schedule:
+    - cron: '30 18 * * *'   # 18:30 UTC = 11:30 California (PDT)
+  workflow_dispatch:
+
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EPISODE_CREDIT_CAP=900
+          MONTHLY_CREDIT_CAP=60000
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Kosu baslangicini damgala
+        # last_run.json'un outcome'u BU KOSUDA dogrulanmis YouTube yayinina bakar.
+        run: echo "KOSU_BASLANGIC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+
+      - name: Kritik alarm outbox'ini bosalt
+        run: python -X utf8 -m series.series_runner --series wild-encounter --drain-alerts-only
+
+      - name: Onay kuyrugunu isle (Telegram)
+        # Otomatik yayinda da kalir: QC'nin bekletip Ihsan'a sordugu bir bolum
+        # varsa onay burada islenir; kuyruk bossa hicbir sey yapmaz.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        shell: bash
+        run: python -X utf8 -m series.approver --series wild-encounter 2>&1 | tee logs/wild_encounter_approve.log
+
+      - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolumleri yazar, Kie kredisi harcamaz)
+        # shell: bash = pipefail; tee python'un exit kodunu yutmasin.
+        # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum varsa o gunun
+        # yayini iptal olmasin; adim yine KIRMIZI gorunur.
+        shell: bash
+        continue-on-error: true
+        run: python -X utf8 -m series.replenish --series wild-encounter 2>&1 | tee logs/wild_encounter_replenish.log
+
+      - name: Produce + publish (Wild Encounter siradaki bolum)
+        id: produce
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: python -X utf8 -m series.series_runner --series wild-encounter 2>&1 | tee logs/wild_encounter_run.log
+
+      - name: Uretim sonucunu kaydet
+        if: always()
+        run: |
+          # Sonuc adimin cikis kodundan DEGIL, gercek YouTube yayin kanitindan turetilir.
+          python -X utf8 scripts/kosu_sonucu_yaz.py \
+            --out sentinal_ihsan/wild-encounter/last_run.json \
+            --run-id "${{ github.run_id }}" \
+            --raw-outcome "${{ steps.produce.outcome }}" \
+            --since "$KOSU_BASLANGIC" \
+            --published-json sentinal_ihsan/wild-encounter/published.json
+
+      - name: Persist series state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: wild-encounter durumunu ilerlet [skip ci]" \
+            sentinal_ihsan/ aimagine/ galactic_experience/ shadowedhistory/ \
+            credits_ledger.json sentinal_ihsan/wild-encounter/last_run.json
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wild-encounter-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+      - name: Upload raw audio stems artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wild-encounter-raw-audio-${{ github.run_number }}
+          path: output/series/wild-encounter/episodes/*/stems/
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Checkout'tan bagimsiz kritik hata bildirimi
+        if: failure()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl --silent --max-time 20 --request POST \
+              "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=🚨 Wild Encounter workflow basarisiz: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              >/dev/null 2>&1 || true
+          fi

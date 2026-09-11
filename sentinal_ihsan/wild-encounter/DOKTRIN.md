@@ -304,3 +304,15 @@ x 105 + cekim 3 x 210 (bir QC regen dahil).
   -14,2 LUFS / -1,4 dBTP, dogrulama gecti).
 - ACIK MADDE: yazi kapisi sahne ici ekipman yazisini bindirme yazidan ayirmali
   (RF-ISSUES).
+
+## OTOMASYON (11 Eylul 2026): gunluk, otomatik yayin
+
+Ihsan karari: sonraki bolumler gunluk seritten (.github/workflows/wild-encounter.yml,
+18:30 UTC = 11:30 PDT) onaysiz yayinlanir. Plan yazicisi Gemini (oto-ikmal); kuyruk
+2'nin altina dusunce 5 bolum yazar. Koruma: ikmal dogrulamasi (harcamadan once),
+capa kredi kapisi, Critic-QC, mukerrer baslik kapisi. Ilk otomatik planlar (part07-11)
+Visionary tarafindan okundu: peygamber devesi, kopekbaligi (okyanus tanki), yunlu
+mamut, kartal, komodo ejderi.
+
+Maliyet: bolum basi ~315-436 Kie kredisi (~$1,6-2,2); gunluk ~13.000 kredi/ay (~$65).
+Cuzdan diger kanallarla ortak; bakiye bitince kosu kredi kapisinda durur.

@@ -35,6 +35,7 @@ from .omni_api import validate_duration, validate_ref_units
 
 
 TEK_OBJE_FORMAT = "tek-obje-4x6"
+PLATO_FORMAT = "plato-3x8"  # sahte kamera arkasi (wild-encounter)
 OBJECT_CARD_FIELDS = ("name", "descriptor", "environment", "framing",
                        "anomaly_descriptor")
 NEGATIVE_VIDEO_LANGUAGE = re.compile(
