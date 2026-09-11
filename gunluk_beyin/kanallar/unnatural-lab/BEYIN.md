@@ -1,7 +1,7 @@
 # BEYIN , unnatural-lab
 
-Uretim: 2026-09-11T02:22:14.986874+00:00
-Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\unnatural-lab\defter.jsonl` (15 kayit)
+Uretim: 2026-09-11T03:52:25.795247+00:00
+Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/unnatural-lab/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
@@ -30,7 +30,7 @@ Son yayinlar (tekrar etme):
 
 ### Teslim rejimi
 
-- Guncel rejim: `60ccabd4`
+- Guncel rejim: `21de6eb7`
 - Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
 
 ### Yayinlanmayanlar
