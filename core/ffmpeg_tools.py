@@ -9,13 +9,53 @@ import math
 import re
 import subprocess
 import statistics
+import time
 from pathlib import Path
 
 from .env import (
     FFMPEG_CRF, FFMPEG_PRESET, FFMPEG_FPS,
     FFMPEG_AUDIO_BITRATE, CROSSFADE_DURATION,
-    logger
+    LOGS_DIR, logger
 )
+from .master_policy import next_master_step
+
+
+# Limiter tavani baslangic hedefinden en fazla bu kadar geri cekilebilir.
+# 6.0 dB uydurma bir sayi DEGIL: tests/test_master_true_peak_adversarial.py
+# uretimdeki ep28 arizasini kaydediyor, tasma 3.1 dB idi (limiter -3.0 dBTP,
+# teslim +0.1 dBTP). Onu kapatmak 3.1 + 0.2 marj = 3.3 dB cekme istiyor.
+# Ilk taslaktaki 3.0 dB sinir o gercek vakayi 0.3 dB farkla fail-closed'a
+# cevirip yakinsayabilen bir bolumu olduruyordu. 6.0, olculen en kotu vakanin
+# yaklasik iki kati pay birakir; asiri sessizlesmeye karsi asil koruma zaten
+# ayri duran LUFS kapisidir.
+MASTER_MAX_TOTAL_REDUCTION_DB = 6.0
+
+
+def _write_master_telemetry(output_path, attempts, reason) -> None:
+    """Persist per-attempt master numbers where a failed CI run can read them.
+
+    The episode output directory is NOT uploaded by the workflow; logs/ is,
+    with if: always(). Writing the attempt table there is what turns
+    "true-peak -0.9, contract not met" into a diagnosable event instead of a
+    dead end. Never raises: losing the telemetry must not mask the mastering
+    failure that caused it.
+    """
+    try:
+        LOGS_DIR.mkdir(parents=True, exist_ok=True)
+        stamp = time.strftime("%Y%m%dT%H%M%SZ", time.gmtime())
+        target = LOGS_DIR / f"master_attempts_{Path(output_path).stem}_{stamp}.json"
+        target.write_text(
+            json.dumps(
+                {"output": str(output_path), "reason": reason,
+                 "attempts": attempts},
+                ensure_ascii=False,
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        logger.warning(f"🧾 Master deneme telemetrisi yazildi: {target}")
+    except Exception as error:  # telemetri kaybi asil hatayi gizlemesin
+        logger.warning(f"⚠️ Master telemetrisi yazilamadi: {error}")
 
 
 def check_ffmpeg() -> bool:
@@ -48,8 +88,8 @@ def get_video_duration(video_path: str | Path) -> float:
         return 5.0
 
 
-def validate_media(video_path: str | Path) -> bool:
-    """Return True only when ffprobe finds a readable video stream."""
+def probe_media(video_path: str | Path) -> bool | None:
+    """Return video-stream presence, or ``None`` when ffprobe itself failed."""
     try:
         result = subprocess.run(
             ["ffprobe", "-v", "error", "-select_streams", "v:0",
@@ -57,9 +97,16 @@ def validate_media(video_path: str | Path) -> bool:
              str(video_path)],
             capture_output=True, text=True, timeout=30,
         )
-        return result.returncode == 0 and "video" in result.stdout.split()
     except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
-        return False
+        return None
+    if result.returncode != 0:
+        return None
+    return "video" in result.stdout.split()
+
+
+def validate_media(video_path: str | Path) -> bool:
+    """Return True only when ffprobe finds a readable video stream."""
+    return probe_media(video_path) is True
 
 
 def extract_frame_at(video_path: str | Path, timestamp: float,
@@ -297,43 +344,52 @@ def master_audio(
                 "integrated_lufs": delivered["integrated_lufs"],
                 "true_peak_dbtp": delivered["true_peak_dbtp"],
             })
-            true_peak_ok = delivered["true_peak_dbtp"] <= float(target_tp)
-            loudness_ok = (
-                abs(delivered["integrated_lufs"] - float(target_i)) <= 1.0
+            # Karar mantigi core/master_policy.py icindeki saf fonksiyonda.
+            # Oradaki kurallar bu dongunun uc kusurunu kapatiyor: emniyet
+            # marji, LUFS-tek-basina basarisizliginda ozdes denemenin
+            # tekrarlanmamasi, ve kumulatif geri cekme siniri.
+            decision = next_master_step(
+                attempt=attempt_number,
+                max_attempts=3,
+                limiter_db=limiter_db,
+                target_tp=float(target_tp),
+                target_i=float(target_i),
+                measured_tp=delivered["true_peak_dbtp"],
+                measured_lufs=delivered["integrated_lufs"],
+                max_total_reduction=MASTER_MAX_TOTAL_REDUCTION_DB,
+                # Paralel oturum bible.series.master_true_peak_margin_db ile
+                # seri-basi ayarlanabilir marj kurmus (bible.py:298,
+                # produce.py:2201, flashpoints sozlesme testi). O deger
+                # KORUNUYOR; 0.2 dB yalniz TABANDIR, seri daha buyuk
+                # isterse onunki gecerli olur.
+                margin=max(float(true_peak_margin_db), 0.2),
             )
-            if true_peak_ok and loudness_ok:
+            if decision.action == "accept":
                 break
-            if not true_peak_ok:
-                overshoot = delivered["true_peak_dbtp"] - float(target_tp)
-                limiter_db -= overshoot + float(true_peak_margin_db)
-                logger.warning(
-                    f"⚠️ Master true-peak deneme {attempt_number}/3: "
-                    f"{delivered['true_peak_dbtp']:.1f} dBTP > "
-                    f"{float(target_tp):.1f}; tavan "
-                    f"{overshoot + float(true_peak_margin_db):.1f} dB geri çekiliyor"
+            if decision.action == "stop":
+                _write_master_telemetry(output_path, attempts, decision.reason)
+                # Mesajin "<n> denemede" bicimi KORUNUYOR: mevcut testler ve
+                # alarm metinleri bu ifadeyi ariyor.
+                raise RuntimeError(
+                    f"master teslim sözleşmesi {attempt_number} denemede "
+                    f"tutulamadı: {decision.reason}"
                 )
-            if not loudness_ok:
-                logger.warning(
-                    f"⚠️ Master LUFS deneme {attempt_number}/3: "
-                    f"{delivered['integrated_lufs']:.1f} LUFS, hedef "
-                    f"{float(target_i):.1f} ± 1.0"
-                )
+            logger.warning(
+                f"⚠️ Master deneme {attempt_number}/3: "
+                f"{delivered['true_peak_dbtp']:.1f} dBTP / "
+                f"{delivered['integrated_lufs']:.1f} LUFS; "
+                f"tavan {limiter_db:.2f} -> {decision.limiter_db:.2f} dB"
+            )
+            limiter_db = decision.limiter_db
         else:
-            last_attempt = attempts[-1]
-            violations = []
-            if last_attempt["true_peak_dbtp"] > float(target_tp):
-                violations.append(
-                    f"true-peak {last_attempt['true_peak_dbtp']:.1f} dBTP > "
-                    f"{float(target_tp):.1f} dBTP"
-                )
-            if abs(last_attempt["integrated_lufs"] - float(target_i)) > 1.0:
-                violations.append(
-                    f"LUFS {last_attempt['integrated_lufs']:.1f}, hedef "
-                    f"{float(target_i):.1f} ± 1.0"
-                )
+            # Ulasilamaz olmali: politika son denemede "retry" donduremez.
+            # Yine de sessiz basariya dusmemek icin fail-closed kaliyoruz.
+            _write_master_telemetry(
+                output_path, attempts, "dongu karar vermeden tukendi"
+            )
             raise RuntimeError(
                 "master teslim sözleşmesi 3 denemede tutulamadı: "
-                + "; ".join(violations)
+                "dongu karar vermeden tukendi"
             )
         metadata = {
             "target": {

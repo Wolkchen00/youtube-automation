@@ -266,3 +266,98 @@ def test_summary_counts_active_rows_not_raw_lines():
 def test_summary_surfaces_measure_failure():
     metin = SUMMARY.read_text(encoding="utf-8")
     assert "olcum-hatasi.json" in metin
+
+
+# ─── Finding 3: partial refresh went green whatever the cause ────────────────
+
+def install_collect_fakes(monkeypatch, batch, batch_error=None, page=None):
+    fake_uploads = types.ModuleType("uploads")
+    fake_uploads.stats_for = lambda ids: (batch, batch_error)
+    fake_kanal = types.ModuleType("kanal")
+    fake_kanal.youtube_canli = lambda vid: (page or {}).get(vid, {})
+    monkeypatch.setitem(sys.modules, "uploads", fake_uploads)
+    monkeypatch.setitem(sys.modules, "kanal", fake_kanal)
+
+
+def read_rows(cwd, channel="flashpoints"):
+    path = cwd / "kanallar" / channel / "defter.jsonl"
+    return [json.loads(l) for l in
+            path.read_text(encoding="utf-8").splitlines() if l.strip()]
+
+
+def test_api_answered_so_a_missing_video_is_information_not_failure(
+        monkeypatch, tmp_path, capsys):
+    """BULGU 3a. API CEVAP VERDIYSE ve bir video listede yoksa o video gercekten
+    silinmis/ozel. Bu bir ariza degil; kosu hakli olarak yesil kalmali ve kayit
+    her gun yeniden alarm uretmemeli."""
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(4)])
+    install_collect_fakes(monkeypatch, {
+        "v000": {"izlenme": 10}, "v001": {"izlenme": 20},
+        "v002": {"izlenme": 30},
+    })
+    beyin.cmd_collect("flashpoints")
+    cikti = capsys.readouterr().out
+    assert "gorunmuyor" in cikti and "ariza DEGIL" in cikti
+    kayitlar = {r["video_id"]: r for r in read_rows(tmp_path)}
+    assert kayitlar["v003"].get("gorunmez"), "gorunmez kaydi isaretlenmedi"
+    assert not kayitlar["v000"].get("gorunmez")
+
+
+def test_a_returning_video_loses_its_invisible_mark(monkeypatch, tmp_path):
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    rows = [ledger_row(i) for i in range(2)]
+    rows[1]["gorunmez"] = {"ts": "2026-09-01T00:00:00+00:00", "sebep": "eski"}
+    seed(tmp_path, "flashpoints", rows)
+    install_collect_fakes(monkeypatch, {"v000": {"izlenme": 1},
+                                        "v001": {"izlenme": 2}})
+    beyin.cmd_collect("flashpoints")
+    kayitlar = {r["video_id"]: r for r in read_rows(tmp_path)}
+    assert not kayitlar["v001"].get("gorunmez"), \
+        "video geri geldi ama hala gorunmez isaretli"
+
+
+def test_api_down_and_most_rows_unreadable_stops_hard(monkeypatch, tmp_path):
+    """BULGU 3b. API DUSTUYSE sayfa kazimaya guveniyoruz. Orada cogu kayit
+    okunamiyorsa kalan sayilar BAYAT ve rapor onlari guncel saniyor , eskiden
+    1/60 tazelenmesi bile kosuyu yesil birakiyordu."""
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(6)])
+    install_collect_fakes(monkeypatch, {}, batch_error="HTTP 403 quotaExceeded",
+                          page={"v000": {"izlenme": 5}})
+    with pytest.raises(SystemExit) as exc:
+        beyin.cmd_collect("flashpoints")
+    mesaj = str(exc.value)
+    assert "BAYAT" in mesaj and "5" in mesaj
+
+
+def test_api_down_but_scraping_mostly_works_stays_green(monkeypatch, tmp_path,
+                                                        capsys):
+    """Esik yarisi: bir iki kayit kacmasi gurultudur, kirmizi yapmamali."""
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(6)])
+    sayfa = {"v%03d" % i: {"izlenme": 10 + i} for i in range(5)}
+    install_collect_fakes(monkeypatch, {}, batch_error="HTTP 500", page=sayfa)
+    beyin.cmd_collect("flashpoints")
+    cikti = capsys.readouterr().out
+    assert "API dustu" in cikti, "API'nin dustugu sessizce gecilmemeli"
+
+
+def test_invisible_rows_are_not_confused_with_api_failure(monkeypatch,
+                                                          tmp_path, capsys):
+    """API dustuyse okunamayan kayit 'gorunmez' diye ISARETLENMEMELI:
+    silinmis olduklarina dair bir kanit yok, sadece ulasamadik."""
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(4)])
+    install_collect_fakes(monkeypatch, {}, batch_error="HTTP 500",
+                          page={"v000": {"izlenme": 1}, "v001": {"izlenme": 2},
+                                "v002": {"izlenme": 3}})
+    beyin.cmd_collect("flashpoints")
+    kayitlar = {r["video_id"]: r for r in read_rows(tmp_path)}
+    assert not kayitlar["v003"].get("gorunmez"), \
+        "ulasilamayan kayit 'silinmis' diye damgalandi"

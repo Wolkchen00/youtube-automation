@@ -127,7 +127,7 @@ class InstalledBibleOptInTests(unittest.TestCase):
         expected = [
             (REPO_ROOT / "galactic_experience" / "event-horizon" / "bible.json", -14),
             (REPO_ROOT / "shadowedhistory" / "flashpoints" / "bible.json", -14),
-            (REPO_ROOT / "sentinal_ihsan" / "unnatural-lab" / "bible.json", -14),
+            (REPO_ROOT / "sentinal_ihsan" / "wild-encounter" / "bible.json", -14),
         ]
         self.assertCountEqual(found, expected)
 

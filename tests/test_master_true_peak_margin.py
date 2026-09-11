@@ -61,8 +61,19 @@ class TruePeakMarginTests(unittest.TestCase):
         import math
         return 20.0 * math.log10(linear)
 
-    def test_sticky_floor_still_fails_with_the_legacy_zero_margin(self):
-        """With margin 0.0 (default/omitted), ceiling walks -1.0, -1.1, -1.2 and fails."""
+    def test_sticky_floor_cannot_happen_even_with_a_zero_margin(self):
+        """Zero margin no longer walks -1.0, -1.1, -1.2 into the sticky floor.
+
+        BU TEST 2026-09-11'de GUCLENDIRILDI, gevsetilmedi. Onceki hali
+        'margin 0.0 ile yapiskan taban HALA basarisiz olur' diye eski
+        KUSURU belgeliyordu ve tavanlarin [-1.0, -1.1, -1.2] yurudugunu
+        iddia ediyordu. ROCK A politikasi (core/master_policy.py) her
+        denemeye ASGARI 0.3 dB hareket sarti koydugu icin o yuruyus artik
+        MUMKUN DEGIL: sifir marjda bile tavan [-1.0, -1.3, -1.6] gider.
+        Yani seri-basi marj (bible.series.master_true_peak_margin_db)
+        KORUNUYOR ve 0.2 dB yalnizca TABAN olarak davraniyor; bu senaryo
+        artik yapiskan tabanin OLUSAMADIGINI kanitlar.
+        """
         STICKY_FLOOR_DBTP = -0.9
 
         def measure(path):
@@ -78,7 +89,11 @@ class TruePeakMarginTests(unittest.TestCase):
 
         # Ceiling sequence in dB, rounded to 1 decimal
         ceilings_db = [round(self._db(lim), 1) for lim in self.applied_limits]
-        self.assertEqual(ceilings_db, [-1.0, -1.1, -1.2])
+        # Eski kusur: [-1.0, -1.1, -1.2]. Asgari adim sarti bunu imkansiz kilar.
+        self.assertEqual(ceilings_db, [-1.0, -1.3, -1.6])
+        for onceki, sonraki in zip(ceilings_db, ceilings_db[1:]):
+            self.assertLessEqual(sonraki, onceki - 0.3 + 1e-9,
+                                 'her deneme en az 0.3 dB hareket etmeli')
 
     def test_margin_converges_on_the_same_signal(self):
         """With margin 0.2, ceiling walks -1.0 then -1.3 and passes on second attempt.

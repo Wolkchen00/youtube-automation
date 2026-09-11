@@ -51,16 +51,28 @@ def until_from_days(days):
     return (_now() + timedelta(days=days)).isoformat()
 
 
+DATED = "tarihli"
+OPEN = "acik-uclu"
+
+
 def write_state(channel_dir, until_iso, reason):
-    """Atomic. A half-written suspension file would read as 'not suspended'."""
+    """Atomic. A half-written suspension file would read as 'not suspended'.
+
+    `tur` is written explicitly. Without it, a file whose `kadar` is null is
+    indistinguishable from a file that simply lost the field: one means "park
+    this channel until I say otherwise", the other means the file is damaged,
+    and guessing either way is wrong. With the marker there is nothing to
+    guess - see `read_state`.
+    """
     os.makedirs(channel_dir, exist_ok=True)
     record = {
+        "tur": OPEN if until_iso is None else DATED,
         "askiya_alindi": _now().isoformat(),
         "kadar": until_iso,          # None = acik uclu
         "sebep": reason or "",
     }
     path = state_path(channel_dir)
-    tmp = path + ".tmp"
+    tmp = "%s.tmp.%d" % (path, os.getpid())
     with open(tmp, "w", encoding="utf-8") as fh:
         json.dump(record, fh, ensure_ascii=False, indent=1)
         fh.flush()
@@ -69,26 +81,54 @@ def write_state(channel_dir, until_iso, reason):
     return record
 
 
+class BozukAski(Exception):
+    """The suspension file exists but cannot be trusted either way."""
+
+
 def read_state(channel_dir):
     """Return (record, active). `active` is False for an expired suspension.
 
-    A broken or unreadable file is treated as NOT suspended, deliberately: the
-    failure mode of a silently suspended channel is worse than an extra run.
+    Three states, and only three:
+      - file absent            -> (None, False). Not suspended.
+      - file understood        -> (record, True/False) per its own terms.
+      - file present, damaged  -> raises BozukAski.
+
+    The third case used to be guessed at, and the guess pointed both ways in
+    the same module: unreadable JSON meant "not suspended", an unparseable
+    date meant "still suspended". Both directions are wrong. Choosing "not
+    suspended" can restart a channel its owner deliberately parked; choosing
+    "suspended" can park a channel nobody meant to park. A damaged file is not
+    a state to infer, it is a thing to fix, so it is raised and the run goes
+    red with the path in the message.
     """
+    path = state_path(channel_dir)
+    if not os.path.exists(path):
+        return None, False
     try:
-        with open(state_path(channel_dir), encoding="utf-8") as fh:
+        with open(path, encoding="utf-8") as fh:
             record = json.load(fh)
-    except Exception:
-        return None, False
+    except Exception as exc:
+        raise BozukAski("okunamadi (%s): %s" % (path, exc))
     if not isinstance(record, dict):
-        return None, False
+        raise BozukAski("icerik bir nesne degil: %s" % path)
+
+    tur = record.get("tur")
     until = record.get("kadar")
-    if until is None:
+    if tur == OPEN:
         return record, True
+    if tur is None and until is None:
+        # Eski surumden kalma ve BELIRSIZ: kasitli acik uclu mu, yoksa alan mi
+        # kayboldu, dosyadan anlasilmiyor.
+        raise BozukAski(
+            "'tur' alani yok ve 'kadar' bos , kasitli acik uclu mu yoksa "
+            "bozuk mu belli degil: %s\n  Duzeltmek icin: "
+            "python beyin.py askiya-al <kanal> --kadar acik" % path)
+    if until is None:
+        raise BozukAski("'tur' %r ama 'kadar' bos: %s" % (tur, path))
     try:
         deadline = datetime.fromisoformat(str(until))
-    except ValueError:
-        return record, True          # okunamayan tarih = hala askida, sessizce acilmasin
+    except (TypeError, ValueError):
+        raise BozukAski("'kadar' okunamiyor (%r): %s" % (until, path))
     if deadline.tzinfo is None:
         deadline = deadline.replace(tzinfo=timezone.utc)
     return record, _now() < deadline

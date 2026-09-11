@@ -90,8 +90,18 @@ def _publish_approved(meta: SeriesMeta, n: int, part: dict) -> bool:
         logger.error(f"Part {n}: onaylandı ama video yok.")
         return False
 
-    ok = _publish_part(meta, n, video, part.get("subtitle", ""))
-    if ok:
+    # ROCK E: onay yolu da idempotent RETRY yapar; kalıcı platform kaydı açıkken
+    # zaten başarılı olan platform yeniden gönderilmez.
+    from series.bible import Bible
+    from series import durable_artifact
+
+    bible = Bible.load(meta.slug)
+    ok = _publish_part(meta, n, video, part.get("subtitle", ""),
+                       durable=durable_artifact.enabled(bible))
+    required_platforms = set(bible.required_platforms) if bible else set()
+    published_platforms = {str(platform).strip().lower() for platform in (ok or [])}
+    publish_complete = bool(ok) and required_platforms.issubset(published_platforms)
+    if publish_complete:
         meta.mark_published(n, ok)
         meta.advance()
         meta.save()

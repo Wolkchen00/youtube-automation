@@ -134,14 +134,21 @@ def test_other_channels_are_untouched(tmp_path):
 
 # ─── expiry: it must let go on its own ───────────────────────────────────────
 
-def write_state_raw(cwd, channel, until, reason="test"):
+def write_state_raw(cwd, channel, until, reason="test", tur="__auto__"):
+    """Durum dosyasini ELLE yaz. `tur` verilmezse iyi bicimli olani secilir;
+    BELIRSIZ dosya uretmek icin acikca tur=None gecilir."""
     folder = cwd / "kanallar" / channel
     folder.mkdir(parents=True, exist_ok=True)
-    (folder / askida.STATE_FILE).write_text(json.dumps({
+    kayit = {
         "askiya_alindi": "2026-09-11T00:00:00+00:00",
         "kadar": until,
         "sebep": reason,
-    }), encoding="utf-8")
+    }
+    if tur == "__auto__":
+        tur = askida.OPEN if until is None else askida.DATED
+    if tur is not None:
+        kayit["tur"] = tur
+    (folder / askida.STATE_FILE).write_text(json.dumps(kayit), encoding="utf-8")
     return folder
 
 
@@ -159,7 +166,7 @@ def test_expired_suspension_runs_again(tmp_path):
 
 def test_open_ended_suspension_never_expires_on_its_own(tmp_path):
     seed_ledger(tmp_path, "unnatural-lab")
-    write_state_raw(tmp_path, "unnatural-lab", None)
+    write_state_raw(tmp_path, "unnatural-lab", None, tur=askida.OPEN)
     proc = run(tmp_path, "beyin", "unnatural-lab")
     assert "ASKIDA" in proc.stdout
     assert "acik uclu" in proc.stdout
@@ -187,27 +194,68 @@ def test_resume_on_a_channel_that_was_not_suspended_is_harmless(tmp_path):
 
 # ─── failing safe ────────────────────────────────────────────────────────────
 
-def test_unreadable_state_file_does_not_park_the_channel(tmp_path):
-    """Bozuk aski dosyasi kanali SESSIZCE durdurmamali.
+def test_unreadable_state_file_stops_loudly(tmp_path):
+    """Bozuk aski dosyasi ne sessizce durdurmali ne sessizce calistirmali.
 
-    Sessizce duran bir kanal, durdugu fark edilmeyen kanaldir. Bozuk dosyanin
-    dogru cevabi 'askida degil' , yanlis bir ekstra kosu, fark edilmeyen bir
-    sessizlikten ucuzdur.
+    Eskiden bu test "bozuksa askida degil" diyordu. O da bir TAHMINDI ve ayni
+    modul iki yone birden tahmin ediyordu: bozuk JSON 'askida degil', bozuk
+    tarih 'hala askida'. Iki yon de yanlis olabilir , biri kullanicinin bilerek
+    durdurdugu kanali yeniden baslatir, digeri kimsenin durdurmadigi kanali
+    susturur. Bozuk dosya cikarilacak bir durum degil, duzeltilecek bir seydir.
     """
     seed_ledger(tmp_path, "unnatural-lab")
     folder = tmp_path / "kanallar" / "unnatural-lab"
     (folder / askida.STATE_FILE).write_text("{bozuk json", encoding="utf-8")
     proc = run(tmp_path, "beyin", "unnatural-lab")
-    assert proc.returncode == 0, proc.stderr
-    assert "ASKIDA" not in proc.stdout
+    assert proc.returncode != 0, "bozuk dosya sessizce gecildi"
+    ciktisi = proc.stdout + proc.stderr
+    assert "BOZUK" in ciktisi
+    assert askida.STATE_FILE in ciktisi, "hangi dosya oldugu soylenmeli"
+    assert not (folder / "BEYIN.md").exists(),         "bozuk durumda rapor yine de yazildi"
 
 
-def test_unparseable_deadline_keeps_it_suspended(tmp_path):
-    """Tarih okunamiyorsa aski SURER. Ters yon, kanali sessizce acardi."""
+def test_unparseable_deadline_stops_loudly(tmp_path):
+    """Okunamayan tarih de bir TAHMIN sebebi degil."""
     seed_ledger(tmp_path, "unnatural-lab")
-    write_state_raw(tmp_path, "unnatural-lab", "her zaman")
+    write_state_raw(tmp_path, "unnatural-lab", "her zaman", tur=askida.DATED)
     proc = run(tmp_path, "beyin", "unnatural-lab")
+    assert proc.returncode != 0
+    assert "BOZUK" in (proc.stdout + proc.stderr)
+
+
+def test_missing_type_with_empty_deadline_is_ambiguous(tmp_path):
+    """ASIL BULGU. `kadar` bos ve `tur` yoksa, kasitli acik uclu aski ile
+    alanini kaybetmis bozuk dosya AYIRT EDILEMEZ. Eskiden ikisi de 'acik uclu
+    askida' sayiliyordu: bozulmus bir dosya kanali sonsuza kadar susturuyordu
+    ve kimse fark etmiyordu."""
+    seed_ledger(tmp_path, "unnatural-lab")
+    write_state_raw(tmp_path, "unnatural-lab", None, tur=None)
+    proc = run(tmp_path, "beyin", "unnatural-lab")
+    assert proc.returncode != 0
+    ciktisi = proc.stdout + proc.stderr
+    assert "BOZUK" in ciktisi
+    assert "--kadar acik" in ciktisi, "duzeltme komutu soylenmeli"
+
+
+def test_explicit_open_ended_is_not_ambiguous(tmp_path):
+    """Ayni dosya, sadece `tur` alani eklenmis: artik belirsiz DEGIL."""
+    seed_ledger(tmp_path, "unnatural-lab")
+    write_state_raw(tmp_path, "unnatural-lab", None, tur=askida.OPEN)
+    proc = run(tmp_path, "beyin", "unnatural-lab")
+    assert proc.returncode == 0, proc.stderr
     assert "ASKIDA" in proc.stdout
+
+
+def test_resume_clears_a_broken_state_file(tmp_path):
+    """`devam` bozuk dosyadan cikisin yolu olmali , ama sessizce degil."""
+    seed_ledger(tmp_path, "unnatural-lab")
+    folder = tmp_path / "kanallar" / "unnatural-lab"
+    (folder / askida.STATE_FILE).write_text("{bozuk", encoding="utf-8")
+    proc = run(tmp_path, "devam", "unnatural-lab")
+    assert proc.returncode == 0, proc.stderr
+    assert "bozuktu" in proc.stdout
+    assert not (folder / askida.STATE_FILE).exists()
+    assert run(tmp_path, "beyin", "unnatural-lab").returncode == 0
 
 
 @pytest.mark.parametrize("kotu", ["2026-13-01", "yarin", "20-09-2026", ""])
@@ -243,3 +291,30 @@ def test_until_a_date_includes_that_whole_day(tmp_path):
 def test_open_ended_parses_to_none():
     assert askida.parse_until("acik") is None
     assert askida.parse_until("ACIK") is None
+
+
+def test_legacy_file_without_type_but_with_a_date_still_works(tmp_path):
+    """Depoda ZATEN bu bicimde bir dosya var (unnatural-lab, 2026-09-11).
+    `tur` alani eklenmeden once yazildi. Gecerli bir tarih tasidigi surece
+    belirsizlik YOKTUR ve calismaya devam etmeli , yoksa bu degisiklik canli
+    bir askiyi bozardi."""
+    seed_ledger(tmp_path, "unnatural-lab")
+    yarin = (datetime.now(timezone.utc) + timedelta(days=1)).isoformat()
+    write_state_raw(tmp_path, "unnatural-lab", yarin, tur=None)
+    proc = run(tmp_path, "beyin", "unnatural-lab")
+    assert proc.returncode == 0, proc.stderr
+    assert "ASKIDA" in proc.stdout
+
+
+def test_new_files_carry_the_type_marker(tmp_path):
+    seed_ledger(tmp_path, "unnatural-lab")
+    run(tmp_path, "askiya-al", "unnatural-lab", "--gun", "2")
+    kayit = json.loads(
+        (tmp_path / "kanallar" / "unnatural-lab" / askida.STATE_FILE)
+        .read_text(encoding="utf-8"))
+    assert kayit["tur"] == askida.DATED
+    run(tmp_path, "askiya-al", "unnatural-lab", "--kadar", "acik")
+    kayit = json.loads(
+        (tmp_path / "kanallar" / "unnatural-lab" / askida.STATE_FILE)
+        .read_text(encoding="utf-8"))
+    assert kayit["tur"] == askida.OPEN and kayit["kadar"] is None

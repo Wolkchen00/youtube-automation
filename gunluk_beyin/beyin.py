@@ -772,6 +772,7 @@ def cmd_collect(channel):
               % batch_error)
 
     updated = 0
+    unread = []
     for row in rows:
         live = batch.get(row["video_id"]) or live_stats(row["video_id"]) or {}
         views = live.get("izlenme")
@@ -781,7 +782,10 @@ def cmd_collect(channel):
         # single most informative data point this brain gets; None is the only
         # value that means "no reading".
         if views is None:
+            unread.append(row)
             continue
+        # It answered, so whatever hid it before is over (unlisted -> public).
+        row.pop("gorunmez", None)
         outcome = row.get("sonuc")
         if not isinstance(outcome, dict):
             outcome = {"gecmis": []}
@@ -803,6 +807,26 @@ def cmd_collect(channel):
                 outcome["izlenme_24s"] = snapshot
         updated += 1
 
+    # Okunamayan kayitlarin IKI ayri sebebi olabilir ve eskiden ikisi de ayni
+    # kovaya giriyordu: "59/60 tazelenemedi" ile "1 video silinmis" ayni
+    # UYARI satirini basiyor, kosu ikisinde de yesil doneyordu.
+    #
+    # Ayrim: API CEVAP VERDIYSE (batch_error yok) ve bir video listede yoksa,
+    # o video gercekten silinmis ya da ozel. Bu bir ariza degil, BILGIDIR.
+    # Isaretlenir, her gun yeniden alarm uretmez, ve kosu hakli olarak yesil
+    # kalir. API DUSTUYSE sayfa kazimaya guveniyoruz demektir; orada okunamayan
+    # kayit gercek bir okuma basarisizligidir.
+    invisible, unreadable = [], []
+    for row in unread:
+        if batch_error:
+            unreadable.append(row)
+        else:
+            invisible.append(row)
+            if not row.get("gorunmez"):
+                row["gorunmez"] = {"ts": now_iso(),
+                                   "sebep": "API listede dondurmedi "
+                                            "(silinmis ya da ozel)"}
+
     write_ledger(channel, rows)
     print("%d/%d kayit guncellendi -> %s"
           % (updated, len(rows), ledger_path(channel)))
@@ -814,10 +838,25 @@ def cmd_collect(channel):
         sys.exit("DUR: %d kaydin HICBIRI icin canli sayi alinamadi.\n"
                  "  Bu bir ag/erisim sorunudur. Defter yazildi ama hicbir yeni\n"
                  "  olcum eklenmedi." % len(rows))
-    # Kismi basarisizlik kirmizi degil ama sessiz de degil: gorunur olsun.
-    if rows and updated < len(rows):
-        print("UYARI: %d kayit icin canli sayi alinamadi (ag veya video kaldirilmis)."
-              % (len(rows) - updated))
+
+    if invisible:
+        print("NOT: %d video artik gorunmuyor (silinmis ya da ozel). "
+              "API cevap verdi, bu bir ariza DEGIL." % len(invisible))
+        for row in invisible[:5]:
+            print("  gorunmez: %s  %s"
+                  % (row["video_id"], (row.get("baslik") or "")[:40]))
+
+    # Sayfa kazimaya dusmusken cogu kayit okunamiyorsa kor uculuyoruz demektir.
+    # Yarisi esigi: altinda gurultu, ustunde sistematik bir sorun var.
+    if unreadable:
+        print("UYARI: API dustu (%s) ve %d kayit sayfa kazimayla da okunamadi."
+              % (batch_error, len(unreadable)))
+        if len(unreadable) * 2 > len(rows):
+            sys.exit("DUR: %d kaydin %d tanesi tazelenemedi ve API de "
+                     "dusmustu.\n"
+                     "  Kalan sayilar BAYAT; rapor bunlari guncel sanir.\n"
+                     "  Bu bir ag/kota sorunudur, 'izlenme degismemis' "
+                     "DEGILDIR." % (len(rows), len(unreadable)))
 
 
 # -------------------------------------------------------------------- brain
@@ -1492,7 +1531,13 @@ def cmd_suspend(channel, days=None, until=None, reason=""):
 def cmd_resume(channel):
     """Lift a suspension. The next run rebuilds BEYIN.md from the ledger."""
     folder = channel_dir(channel)
-    record, active = askida.read_state(folder)
+    try:
+        record, active = askida.read_state(folder)
+    except askida.BozukAski as exc:
+        # `devam` bozuk dosyayi temizlemenin dogru yolu: kullanici zaten
+        # "bu kanal calissin" diyor. Ama ne yaptigimizi SOYLEYEREK.
+        print("UYARI: aski dosyasi bozuktu, siliniyor.\n  %s" % exc)
+        record, active = {"bozuk": True}, True
     if record is None:
         print("%s zaten askida degil." % channel)
         return
@@ -1508,7 +1553,15 @@ def cmd_resume(channel):
 
 def suspended(channel, command):
     """True if this channel is parked. Prints why, so a run is never silent."""
-    record, active = askida.read_state(channel_dir(channel))
+    try:
+        record, active = askida.read_state(channel_dir(channel))
+    except askida.BozukAski as exc:
+        # Tahmin etmiyoruz. Bozuk bir aski dosyasi, kanali sessizce durdurmak
+        # ya da sessizce yeniden baslatmak icin yeterli bilgi degildir; ikisi
+        # de yanlis olabilir. Kirmizi don, dosyayi adiyla soyle.
+        sys.exit("DUR: %s icin aski dosyasi BOZUK.\n  %s\n"
+                 "  Kanal ne durduruldu ne calistirildi. Dosyayi duzelt ya da "
+                 "sil." % (channel, exc))
     if record is None or not active:
         if record is not None:
             print("NOT: %s icin aski suresi dolmus, normal devam ediliyor." % channel)
