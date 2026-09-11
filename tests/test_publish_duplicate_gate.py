@@ -70,8 +70,14 @@ def test_gercek_rss_ayristiriliyor(monkeypatch):
     assert normalize_title("Next Stop: The Deep") in basliklar
 
 
-def test_onbellek_tek_istek_atiyor(monkeypatch):
-    """Bir bolumun 3 platform cagrisi 1 RSS istegine inmeli."""
+def test_onbellek_sonraki_cagrilarda_hic_istek_atmiyor(monkeypatch):
+    """Bir bolumun 3 platform cagrisi TEK bir cekime inmeli.
+
+    Eskiden "tam 1 istek" diye yazilmisti. Bir cekim artik iki kaynagi
+    deneyebiliyor (once Data API, o dusunce RSS), yani sabit sayi cekim
+    maliyetini olcmuyor. Olculmesi gereken sey onbellek: ilk cagridan SONRA
+    ag hic kullanilmamali.
+    """
     xml = FIXTURE.read_text(encoding="utf-8")
     sayac = {"n": 0}
 
@@ -82,9 +88,106 @@ def test_onbellek_tek_istek_atiyor(monkeypatch):
     monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
     monkeypatch.setattr(uploader.requests, "get", _get)
     uploader.channel_recent_titles("Youtube")
+    ilk_cekim = sayac["n"]
+    assert ilk_cekim >= 1, "ilk cagri ag'a gitmeliydi"
     uploader.channel_recent_titles("Youtube")
     uploader.channel_recent_titles("Youtube")
-    assert sayac["n"] == 1, f"beklenen 1 istek, atilan {sayac['n']}"
+    assert sayac["n"] == ilk_cekim, (
+        "onbellek calismiyor: 2 ek cagri %d ek istek atti"
+        % (sayac["n"] - ilk_cekim))
+
+
+# ─── Data API yolu (RSS 2026-09-10'da oldu) ───────────────────────────────────
+
+class _SahteJson:
+    def __init__(self, payload, status_code=200):
+        self._payload = payload
+        self.status_code = status_code
+        self.text = ""
+
+    def json(self):
+        return self._payload
+
+
+def test_api_basliklari_okunuyor_ve_rss_hic_denenmiyor(monkeypatch):
+    cagrilar = []
+
+    def _get(url, *a, **k):
+        cagrilar.append(url)
+        return _SahteJson({"items": [
+            {"snippet": {"title": "Next Stop: The Deep \U0001F686"}},
+            {"snippet": {"title": "Next Stop: Kepler-186f"}},
+        ]})
+
+    monkeypatch.setenv("YOUTUBE_API_KEY", "k")
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    monkeypatch.setattr(uploader.requests, "get", _get)
+    basliklar = uploader.channel_recent_titles("Youtube")
+    assert basliklar == {normalize_title("Next Stop: The Deep"),
+                         normalize_title("Next Stop: Kepler-186f")}
+    assert len(cagrilar) == 1 and "googleapis" in cagrilar[0], \
+        "API isi gordukten sonra RSS'e gidilmemeli"
+
+
+def test_api_dogru_yukleme_listesini_istiyor(monkeypatch):
+    gorulen = {}
+
+    def _get(url, params=None, **k):
+        gorulen.update(params or {})
+        return _SahteJson({"items": []})
+
+    monkeypatch.setenv("YOUTUBE_API_KEY", "k")
+    monkeypatch.setattr(uploader, "_channel_id_for_user",
+                        lambda u: "UCUdp0KLBh4EeeSgVbwS_DhA")
+    monkeypatch.setattr(uploader.requests, "get", _get)
+    uploader.channel_recent_titles("Youtube")
+    assert gorulen.get("playlistId") == "UUUdp0KLBh4EeeSgVbwS_DhA"
+
+
+def test_api_anahtari_yokken_rss_yoluna_dusuyor(monkeypatch):
+    xml = FIXTURE.read_text(encoding="utf-8")
+    cagrilar = []
+
+    def _get(url, *a, **k):
+        cagrilar.append(url)
+        return _SahteYanit(xml)
+
+    monkeypatch.delenv("YOUTUBE_API_KEY", raising=False)
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    monkeypatch.setattr(uploader.requests, "get", _get)
+    assert uploader.channel_recent_titles("Youtube") is not None
+    assert len(cagrilar) == 1 and "feeds/videos.xml" in cagrilar[0], \
+        "anahtar yokken API cagrilmamali"
+
+
+@pytest.mark.parametrize("api_yaniti", [
+    _SahteJson({}, status_code=403),          # kota bitti
+    _SahteJson({"items": []}),                 # bos liste
+    _SahteJson({"items": [{"snippet": {}}]}),  # basliksiz kayit
+])
+def test_api_dusunce_rss_yedegi_devreye_giriyor(monkeypatch, api_yaniti):
+    xml = FIXTURE.read_text(encoding="utf-8")
+
+    def _get(url, *a, **k):
+        if "googleapis" in url:
+            return api_yaniti
+        return _SahteYanit(xml)
+
+    monkeypatch.setenv("YOUTUBE_API_KEY", "k")
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    monkeypatch.setattr(uploader.requests, "get", _get)
+    basliklar = uploader.channel_recent_titles("Youtube")
+    assert basliklar is not None, "API dusunce RSS denenmeliydi"
+    assert normalize_title("Next Stop: The Deep") in basliklar
+
+
+def test_iki_kaynak_da_dusunce_fail_open_kaliyor(monkeypatch):
+    """En onemli ozellik: kapi bir emniyet kemeri, kilit degil."""
+    monkeypatch.setenv("YOUTUBE_API_KEY", "k")
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    monkeypatch.setattr(uploader.requests, "get",
+                        lambda url, *a, **k: _SahteYanit("", status_code=404))
+    assert uploader.channel_recent_titles("Youtube") is None
 
 
 @pytest.mark.parametrize("senaryo", ["http_hata", "bozuk_xml", "istisna", "kanal_yok"])
@@ -208,3 +311,20 @@ def test_next_stop_duraklatildi_gunluk_yayin_kosmuyor():
     aktif_cron = [s for s in wf.splitlines()
                   if "cron:" in s and not s.lstrip().startswith("#")]
     assert not aktif_cron, f"next-stop cron'u kapali olmali, bulunan: {aktif_cron}"
+
+
+def test_api_hata_kodu_logda_gorunuyor(monkeypatch, caplog):
+    """Durum kodu kontrolunun asil isi OPERATORE haber vermek.
+
+    Bos yanit zaten None'a duserdi, yani kod olmadan da yayin dogru surerdi.
+    Fark su: kota bittiginde ya da anahtar iptal oldugunda kimsenin haberi
+    olmaz ve kapi yine SESSIZCE kapali kalir , bu hatanin ta kendisi buydu.
+    """
+    monkeypatch.setenv("YOUTUBE_API_KEY", "k")
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    monkeypatch.setattr(uploader.requests, "get",
+                        lambda url, *a, **k: _SahteJson({}, status_code=403))
+    with caplog.at_level("WARNING"):
+        uploader.channel_recent_titles("Youtube")
+    assert any("403" in kayit.message for kayit in caplog.records), \
+        "kota/yetki hatasi sessizce yutuluyor"

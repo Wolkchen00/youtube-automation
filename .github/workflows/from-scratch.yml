@@ -58,6 +58,7 @@ jobs:
           GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
           # 80 muzik + 6 x 200 ana cekim + 3 x 200 QC regen = 1880; 20 kredi guvenlik payi.

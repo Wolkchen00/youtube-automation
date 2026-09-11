@@ -49,6 +49,7 @@ jobs:
         run: |
           cat > .env << 'EOF'
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
           EOF
 
       - name: Prepare dirs

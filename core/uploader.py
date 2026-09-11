@@ -1,10 +1,11 @@
 """
-Upload-Post.com — Multi-Platform Video Publisher
+Upload-Post.com ,  Multi-Platform Video Publisher
 
 Publishes videos to YouTube Shorts, Instagram Reels, and TikTok
 via the Upload-Post.com API.
 """
 
+import os
 import re
 import time
 
@@ -31,7 +32,7 @@ _LAST_UPLOAD_FAILURES: dict[str, dict] = {}
 
 # Bu boyutun üzerindeki dosyalar yüklenmeden önce bitrate-kapaklı bir 'delivery'
 # kopyasına çevrilir. Upload-Post büyük gövdeleri akış ortasında kesiyor
-# (ConnectionReset 10054) — grain'li/CRF'li kaynaklar 45s'de 140MB'ı aşabiliyor;
+# (ConnectionReset 10054) ,  grain'li/CRF'li kaynaklar 45s'de 140MB'ı aşabiliyor;
 # Shorts zaten platformda ~2-6 Mbps'e yeniden kodlanıyor, kalite kaybı görünmez.
 MAX_UPLOAD_MB = 80
 _DELIVERY_MAXRATE = "6500k"
@@ -48,7 +49,53 @@ _DELIVERY_BUFSIZE = "13M"
 _channel_titles_cache: dict[str, set[str] | None] = {}
 
 YOUTUBE_FEED_URL = "https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+YOUTUBE_API_PLAYLIST_URL = "https://www.googleapis.com/youtube/v3/playlistItems"
 CHANNEL_FEED_TIMEOUT = 5
+CHANNEL_FEED_LOOKBACK = 25
+
+
+def _titles_from_api(channel_id: str) -> set[str] | None:
+    """Son yuklemelerin normalize basliklari, Data API v3 uzerinden.
+
+    2026-09-10'da Atom beslemesi HERKESE 404/500 vermeye basladi (bizim
+    kanallarimiz, MrBeast, Google, hepsi). O gunden beri asagidaki RSS yolu
+    hicbir zaman 200 donmuyor, yani mukerrer kapisi SESSIZCE kapali kaldi:
+    404 bir istisna atmaz, sadece `status_code == 200` kontrolunden dusup
+    None birakir. Kapi fail-open oldugu icin yayin surdu ve kimse fark etmedi.
+
+    Her hatada None doner. None "dogrulanamadi" demektir ve kapiyi fail-open
+    birakir; bu bilincli takas degismedi.
+    """
+    key = (os.getenv("YOUTUBE_API_KEY") or "").strip()
+    if not key:
+        return None
+    try:
+        resp = requests.get(
+            YOUTUBE_API_PLAYLIST_URL,
+            params={
+                "part": "snippet",
+                # Yukleme oynatma listesi = kanal kimliginin UC oneki UU olmusu.
+                "playlistId": "UU" + channel_id[2:],
+                "maxResults": CHANNEL_FEED_LOOKBACK,
+                "key": key,
+            },
+            timeout=CHANNEL_FEED_TIMEOUT,
+        )
+        if resp.status_code != 200:
+            logger.warning(
+                "⚠️ Kanal listesi API'den alinamadi (HTTP %s); RSS'e dusuluyor."
+                % resp.status_code
+            )
+            return None
+        basliklar = {
+            normalize_title(str((item.get("snippet") or {}).get("title") or ""))
+            for item in (resp.json().get("items") or [])
+        }
+        basliklar.discard(normalize_title(""))
+        return basliklar or None
+    except Exception as error:  # ag, zaman asimi, JSON degil: hepsi ayni kova
+        logger.warning(f"⚠️ Kanal listesi API cagrisi basarisiz: {error}")
+        return None
 
 
 def _channel_id_for_user(user: str) -> str | None:
@@ -79,7 +126,12 @@ def channel_recent_titles(user: str) -> set[str] | None:
     if channel_id in _channel_titles_cache:
         return _channel_titles_cache[channel_id]
 
-    sonuc: set[str] | None = None
+    # API once: RSS 2026-09-10'dan beri bu kanallar icin hic 200 donmuyor.
+    sonuc: set[str] | None = _titles_from_api(channel_id)
+    if sonuc is not None:
+        _channel_titles_cache[channel_id] = sonuc
+        return sonuc
+
     try:
         resp = requests.get(
             YOUTUBE_FEED_URL.format(channel_id=channel_id),
@@ -127,7 +179,7 @@ def _delivery_copy(video_path: Path) -> Path:
             logger.info(f"📦 Delivery hazır: {new_mb:.0f}MB ({delivery.name})")
             return delivery
     except Exception as e:
-        logger.warning(f"⚠️ Delivery kopyası üretilemedi ({e}) — orijinal dosya denenecek")
+        logger.warning(f"⚠️ Delivery kopyası üretilemedi ({e}) ,  orijinal dosya denenecek")
     return video_path
 
 
@@ -459,7 +511,7 @@ def upload_to_platform(
     social_caption (opt-in): IG/TikTok'ta 'title' yerine geçen UZUN caption metni.
     Upload-Post, Instagram'da instagram_title'ı ve TikTok'ta tiktok_title'ı post
     caption'ı olarak kullanır (global 'description' bu iki platformda YOK sayılır;
-    TikTok video caption limiti 2.200 karakter). Boş bırakılırsa eski davranış —
+    TikTok video caption limiti 2.200 karakter). Boş bırakılırsa eski davranış , 
     caption = title."""
     if not UPLOAD_POST_API_KEY:
         logger.error("❌ UPLOAD_POST_API_KEY not set!")

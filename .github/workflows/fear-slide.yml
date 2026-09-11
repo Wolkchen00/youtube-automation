@@ -76,6 +76,7 @@ jobs:
           cat > .env << 'EOF'
           KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
           EOF
 
       - name: Prepare dirs
