@@ -46,6 +46,20 @@ class FlashpointsChannelContractTests(unittest.TestCase):
         bible = Bible.load("flashpoints")
         self.assertIs(bible.qc["harden_downloads"], True)
 
+    def test_true_peak_margin_is_set(self):
+        """Pay 0 olursa limiter yakinsamiyor ve bolum awaiting_approval'da kaliyor.
+
+        Canli kanit (2026-09-10, part31): master_lufs acildiktan sonraki ILK kosu
+        "true-peak -0.4 dBTP > -1.0 dBTP, 3 denemede tutulamadi" diyerek bolumu
+        tuttu ve o gun kanala video cikmadi. Geri cekilme tam olarak asim kadar
+        oldugu icin (pay=0) AAC kodlamasi ayni asimi geri ekliyor ve dongu
+        esigin altina hic inmiyor. galactic_experience/event-horizon ayni
+        sorunu 0.2 ile cozmustu.
+        """
+        bible = Bible.load("flashpoints")
+        self.assertGreater(bible.master_true_peak_margin_db, 0.0)
+        self.assertEqual(bible.master_true_peak_margin_db, 0.2)
+
     def test_required_shot_count_and_control(self):
         bible = Bible.load("flashpoints")
         self.assertEqual(produce._required_shot_count(bible, 2), 2)

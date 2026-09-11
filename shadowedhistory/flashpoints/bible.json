@@ -5,6 +5,7 @@
     "aspect_ratio": "9:16",
     "resolution": "1080p",
     "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
     "engine": "omni",
     "chain_frames": false,
     "audio_smooth": true,
