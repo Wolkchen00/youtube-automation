@@ -1,0 +1,111 @@
+{
+  "slug": "next-stop",
+  "base_title": "Next Stop",
+  "logline": "An ordinary commuter train announces an impossible destination, and never stops.",
+  "language": "en",
+  "upload_profile": "Youtube",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #nextstop #train #liminal #surreal #scifi #whatif #fyp",
+  "standalone": true,
+  "publish_mode": "auto",
+  "status": "active",
+  "priority": 1,
+  "total_parts": 8,
+  "next_part": 4,
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep01/ep01_hooked.mp4",
+      "subtitle": "Next Stop: Hell 🚆🔥",
+      "stack_sha256": "e462fbe5716a9ed2b5194a0f209992c2b324a9ed0c3b73901ac9397820554907",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-29T20:10:20.771421+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep02/ep02_hooked.mp4",
+      "subtitle": "Next Stop: Aloran 🚆🌌",
+      "stack_sha256": "e462fbe5716a9ed2b5194a0f209992c2b324a9ed0c3b73901ac9397820554907",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-30T18:01:01.669203+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/next-stop/episodes/ep03/ep03_hooked.mp4",
+      "subtitle": "Next Stop: Valhalla 🚆⚔️",
+      "stack_sha256": "43a4c0b262a5a4224d2027dd3f18c7fe659add4730ee69f2644b3e2812706386",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-08-31T19:57:35.560775+00:00"
+    }
+  },
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 6,
+    "shot_seconds": "10",
+    "hook_shot": 6,
+    "chain_breaks": [
+      1
+    ],
+    "music_prompt": false,
+    "humans": "allowed",
+    "families": [
+      "mitoloji ve öte dünya coğrafyaları",
+      "tarih ve kayıp uygarlıklar",
+      "gerçek bilim ve uzay",
+      "özgün bilim kurgu gelecekleri",
+      "derin zaman ve doğa",
+      "nostalji ve tanıdık mekânlar",
+      "gerilim ve tekinsizlik"
+    ],
+    "title_style": "exactly 'Next Stop: <DESTINATION>' followed by one or two emoji, where <DESTINATION> is the same short name spoken in the announcements",
+    "title_patterns": [
+      {
+        "regex": "Next Stop: .+ (?:[\\U0001F300-\\U0001FAFF\\u2600-\\u27BF]\\ufe0f?){1,2}",
+        "families": [
+          "mitoloji ve öte dünya coğrafyaları",
+          "tarih ve kayıp uygarlıklar",
+          "gerçek bilim ve uzay",
+          "özgün bilim kurgu gelecekleri",
+          "derin zaman ve doğa",
+          "nostalji ve tanıdık mekânlar",
+          "gerilim ve tekinsizlik"
+        ]
+      }
+    ],
+    "shot_plan": [
+      "HOOK. Open already mid-motion on a dull grey routine commute, one ordinary object streaking past the glass at arm's length. At 1.5 seconds a two-note chime cuts in and a calm neutral announcer says the destination line; nobody reacts, one passenger keeps scrolling a phone. The train slams into acceleration. At about 4 seconds the first full occlusion wipes the window and the glass clears further down the same line, where ONE thing in the distance is unmistakably wrong and already growing. At about 7 seconds a harder occlusion wipes the window again: the wrong thing now owns a third of the horizon and the passengers' heads turn to the glass.",
+      "HARD BREACH. Open still inside the previous vista, mid-shake. At about 1 second a full blackout swallows the window with a blow that throws the passengers, and the ordinary world is gone for good: the glass clears onto the threshold of the destination. At about 3.5 seconds a second full occlusion opens onto the far side of the threshold, the line physically committed with no way back. At about 6.5 seconds a third occlusion clears onto the destination's first true landmark entering the leading edge of the window, still distant but growing.",
+      "ARRIVAL EDGE. Open still inside the previous vista, mid-shake. At about 1 second the exposure blows out or crushes to black and recovers with an impact: the first landmark is suddenly much closer, growing past the window until it no longer fits. At about 3.5 seconds a full occlusion clears onto how far down or how far up the place goes ,  the scale must be frightening. At about 6.5 seconds another occlusion clears onto the landmark's mass passing at arm's length, flooding the carriage with its light while the passengers grab the poles and stay braced.",
+      "FLYTHROUGH. Open still inside the previous vista, mid-shake, the landmark's mass strobing past the glass at close range. At about 1 second a full occlusion punches the view INSIDE the destination: structure whipping across the glass with maximum parallax. At about 3.5 seconds a gap opens through a full occlusion onto what lies beyond, revealing the true size of the place. At about 6.5 seconds a last occlusion clears onto a second district of the destination with something larger already entering the leading edge. Each impact rocks the carriage hard.",
+      "DEEPEST SCALE. Open still inside the previous vista, mid-shake. At about 1 second the hardest impact of the episode hits the glass ,  heat, pressure, spray or shockwave that jolts the camera and knocks the focus; the passengers scream. The occlusion clears onto a vista wider and deeper than anything before it. At about 3.5 seconds and about 6.5 seconds two more full occlusions each open a still wider and deeper view; the single most spectacular second of the episode lives in the final vista.",
+      "HEART AND PAYOFF. Open still inside the previous vista, mid-shake, the train passing through or beneath something colossal. At about 3 seconds one full occlusion clears onto the heart of the place, and from 4 to 7 seconds the view stays clear and spectacular ,  the only long look of the episode, still rushing past with violent parallax. At about 8 seconds a calm ordinary commuter announcer quietly says the arrival line. The chime sounds again, the same voice begins only \"Next stop-\" and is cut off mid-word just after 9 seconds while the train is still moving forward and something new is already growing ahead."
+    ],
+    "credit_hard_cap": true,
+    "brief": "NEXT STOP üretim brief'i v2. >>> ÇIKTI DİLİ İNGİLİZCE <<< Bu brief Türkçedir ama bölüm başlığı, synopsis ve tüm çekim prompt'ları İngilizce yazılır. DEĞİŞMEZ KURALLAR: (1) İMZA FORMAT: her bölüm TEK bir imkânsız durağa yapılan altı çekimlik, yaklaşık 60 saniyelik kesintisiz bir tren yolculuğudur. Kamera vagonu ASLA terk etmez ve hep aynı sol pencereden, gidiş yönüne 90 derece yandan bakar. Pencere karenin en az dörtte üçünü kaplar. (2) YOLCULAR İÇERİDE: kameranın tarafında, karenin alt ve sağ kenarında, camdan çok daha yakın birkaç sıradan yolcu vardır ,  karanlık, odak dışı, yüzü hiç seçilmeyen siluetler: ense, omuz, direği kavrayan eller, telefon ışığıyla aydınlanan tek oturan figür. Siluetler pencerenin yalnız en alt altıda birini örtebilir. Camın ÖTESİNDE ve camda YANSIMA olarak hiçbir insan görünmez; camın ötesinde yalnız manzara vardır. Yolcular sismograftır: her darbede savrulur, tutunur, nefesi kesilir, sert darbelerde kısa çığlık atar; darbeler arasında yorgun banliyö sükûnetine döner. Belirli bir yüz, kimlik ya da kalabalık tarif etme. (3) ZİNCİR: çekim 1 sahneyi açar (chain=false), çekim 2-6 önceki son kareden zincirlenir (chain=true) ve her biri ÖNCEKİ VİSTANIN İÇİNDE, sarsıntı ortasında açılır; ilk tam maskesi ~1.0 saniyede gelir. Bölümler arasında zincir yoktur. hook_shot her zaman 6'dır. (4) KADANS ,  HER ÇEKİMDE ÜÇ VISTA, İKİ TAM MASKE: her 10 saniyelik çekim, aynı durağın birbirinden gerçekten farklı ÜÇ görünümünü içerir; maskeler ~3.0 ve ~6.5 saniyededir. İstisna: çekim 1'de maskeler ~4 ve ~7'dedir; çekim 6'da TEK maske ~3'tedir, 4-7 arası tek uzun temiz bakıştır. Sahne değişimi YALNIZ cam tamamen kapalıyken (tünel duvarı, köprü ayağı, karşı tren → tam karartma) ya da pozlama tamamen patlamışken (beyaz) olur; yeşillik/duman/serpinti/kıvılcım kısmi maskedir, doku verir ama sahne DEĞİŞTİRMEZ. Manzara ASLA ekranda dönüşmez, erimez, ışınlanmaz; 'X, Y'ye dönüşür' YASAK; 'maske kareyi kapatır, cam açıldığında Z görünür' yaz. Yeni vista aynı durağın AYNI HAT üzerindeki daha yakın/derin/uç bir kesimidir; maske kısa bir hat aralığını gizler, coğrafi sıçrama yapmaz. (5) HER MASKE BİR DARBEDİR: maske anında vagon sarsılır, kamera silkelenir, direkler takırdar, yolcular savrulur; büyük darbelerde çığlık. Kesme hissi bu darbeden gelir. (6) ZAMANLAMA GÜVENLİĞİ: kritik hiçbir olay (maske, anons, çığlık zirvesi) çekimin ilk 0.5 ve son 0.6 saniyesine yazılmaz; çekim gövdesi shot_plan önekindeki saatlerle ÇELİŞEN başka saat yazamaz, önekin saatlerine kendi vista içeriğini doldurur. Son çekimde varış anonsu ~8.0'da, 'Next stop-' kesilmesi 9.3'ten önce biter. (7) HIZ: tren asla durmaz, yavaşlamaz, varmaz. Cama on metreden yakın her şey kareyi saniyenin beşte birinden kısa sürede geçer; orta mesafe bir saniyenin altında süzülür; sadece ufuk yavaş kayar. 'Yavaşça', 'sakince', 'süzülerek' yasak. (8) SIRADAN DÜNYA EN FAZLA 4 SANİYE: durağın yanlışlığı çekim 1'in 4. saniyesinde ufukta görünmüş olmalı, 7. saniyesinde ufkun üçte birini kaplamalı. (9) VİSTA-İÇİ YAKLAŞMA: vista sürerken landmark pencerenin ön kenarından uzakta girer, cam boyunca büyür, arka kenardan şiddetli paralaksla çıkar; vista içinde hiçbir şey aniden belirmez. (10) ÖLÇEK TIRMANIR: bölümün ~16 vistası boyunca ölçek büyür; her çekimin son vistası öncekilerden büyüktür ve hiçbir çekim durağan, çözülmüş, 'varılmış' bir görüntüyle bitmez (çekim 6 finali dahil ,  o da hâlâ hareket hâlindedir). Aynı görünüm tipi üst üste iki vista tekrar edemez (yakından geçiş, dibe bakış, altından geçiş, gökyüzü, kanyon, şehir dokusu... dönüşümlü). (11) YAZI YOK: tabela, pano, harf, rakam, altyazı hiçbir karede görünmez. Bölüm sonu kancası yalnız SESLEDİR: çan çalar, anons 'Next stop-' derken kesilir. (12) DURAK SEÇİMİ: her bölüm YENİ bir durak seçer, aile rotasyonuna uyar, kullanılmış durağı tekrar etmez. Durak, yan pencereden paralaks üretecek ve üç çekim boyunca farklı 'semtler' sunabilecek katmanlı bir MEKÂN olmalıdır. (13) GÜVENLİK: telifli evren/karakter/yer adı yok; kan, vahşet, işkence, ceset, insan ıstırabı, gerçek dinî figür tasviri yok. Korku ölçekten, ısıdan, karanlıktan, hızdan gelir; çığlıklar irkilmedir, ıstırap değil. (14) ANONS: cümleler tam olarak 'Next stop: X.' ve 'Welcome to X.' biçimindedir; X küresel izleyicinin tek hamlede anladığı kısa bir isimdir. (15) PALET TAAHHÜDÜ: her durak baskın bir renk ve ısı seçer ve ona bağlı kalır. Dışarısı her zaman vagon içinden daha parlak ve daha doygundur. Nötr gri, soluk beton, düşük kontrast yasak. (16) KONTRAST TIRMANIR, YIKANMAZ: eşikten sonra gökyüzü MANZARANIN en karanlık bölgesidir, dış ışık aşağıdan ya da landmark'lardan gelir, vagon içi ondan da karanlıktır. Her çekim öncekinden daha karanlık tepeli ve daha sıcak ışıklıdır; 4., 5. ve 6. çekimin gövdesinde karanlık AÇIKÇA yazılır (kare zinciri kareyi kendiliğinden aydınlatma eğilimindedir). (17) GEÇİŞ FİZİĞİ: her durak bir YÖN seçer ve yön vagonda hissedilir. AŞAĞI: hat öne eğilir, basınç ve ısı artar, ışık pencerenin altına iner. YUKARI VE DIŞARI: önce zeminden kopulur, dünya küçülüp kavis alır, gök maviden siyaha boşalır, varış GERÇEK bir atmosfere girişle başlar. İÇİNDEN: yatay ama gerçek bir sınır katmanından geçilir. Tren fiziksel olarak gidemeyeceği yere varmaz; maskeler yolculuğu atlamaz, kısa aralıkları sıkıştırır. (18) YÖN SADECE ÇEKİM GÖVDESİNDE YAZILIR: canon evrenseldir; bölümün yönü yalnız o bölümün çekim gövdelerinde adım adım anlatılır. Bir bölümün gövdesinde uzay/yıldız/atmosfere giriş geçiyorsa bu yalnız o bölüm içindir.",
+    "last_run": {
+      "at": "2026-08-31T19:37:19.554223+00:00",
+      "parts": "4-8"
+    }
+  }
+}

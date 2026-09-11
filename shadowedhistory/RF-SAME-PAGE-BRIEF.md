@@ -164,9 +164,36 @@ ikinci modelin bagimsiz gozu YOK. Acikca kayda geciyor.
 - Altin diff: 2 satir (yalniz flashpoints `contents` + `system_instruction`)
 - Diger 10 serinin altin kaydi: bit bit AYNI
 
-### Yeni RF-ISSUES maddesi
+### ~~Yeni RF-ISSUES maddesi~~ , GERI CEKILDI (iddia YANLISTI)
 
-- **[ORTA] `aimagine/from-scratch` altin prompt'u bayat.** Uretilen prompt
-  `tests/golden/fixedframe_prompts.json` kaydiyla uyusmuyor ve hicbir test bunu
-  yakalamiyor (GoldenNeutralityTests o slug'i kapsamiyor). Ya altin guncellenmeli
-  ya da prompt'taki kayma geri alinmali , sahibi kim olduguna bakilmali.
+Once soyle yazmistim: *"[ORTA] `aimagine/from-scratch` altin prompt'u bayat ...
+hicbir test bunu yakalamiyor."* **Iddianin iki yani da yanlisti.**
+
+`tests/test_fixedframe.py:505` `test_from_scratch_has_one_explicit_rock2_transition_path`
+tam olarak bu durumu yonetiyor ve IKI hali ayri ele aliyor:
+
+```
+if not opted_in:
+    # Rock 1 state: it is still keyless, so the pre-change bytes remain binding.
+    self.assert_prechange_prompt_golden(slug, expected[slug])
+    return
+# Rock 2 state: only the reviewed from-scratch opt-in may bypass its old prompt.
+self.assertEqual(opted_in, FROM_SCRATCH_ROCK2_AUTO_KEYS)
+self.assertEqual(meta.auto_replenish.get("shots"), 6)
+self.assertEqual(meta.auto_replenish.get("shot_seconds"), "10")
+```
+
+Yani altin kayit, from-scratch'in DEGISIKLIK ONCESI anlik goruntusu olarak
+BILEREK saklaniyor. Seri incelenmis bir opt-in ile v1.4'ten v2.1'e gectigi icin
+bayt esitligi kasitli olarak atlaniyor; yerine opt-in anahtarlarinin TAM OLARAK
+onaylanmis kume oldugu ve 6x10 sn formatinin korundugu denetleniyor.
+
+Canli dogrulama: test GECIYOR; `from-scratch` opt-in anahtarlari
+`['chain_breaks', 'credit_hard_cap', 'hook_shot', 'shot_plan', 'title_patterns']`
+= `FROM_SCRATCH_ROCK2_AUTO_KEYS`; `shots=6`, `shot_seconds="10"`; seri `paused`.
+
+**Yapilacak is yok.** Madde geri cekildi.
+
+Ders: bir altin kaydin uretilenle uyusmamasi TEK BASINA kusur degildir , once o
+kaydi HANGI testin ve NASIL kullandigina bakilmali. Ben "uyusmuyor" gordum ve
+"bayat" diye rapor ettim; kaydin bir 'oncesi/sonrasi' kaydi oldugunu kacirdim.
