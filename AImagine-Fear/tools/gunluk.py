@@ -8,6 +8,7 @@ import re
 import subprocess
 import sys
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from pathlib import Path
@@ -33,9 +34,12 @@ from profil import (  # noqa: E402
 
 
 PY = sys.executable
-LA = timezone(timedelta(hours=-7))
+# Sabit -7 DEGIL: yaz saati bitince gercek yerel saat -8 oluyor ve hem
+# damga hem ayni-gun kapisi bir saat kayardi.
+LA = ZoneInfo("America/Los_Angeles")
 DEFTER = KOK / "yayin.jsonl"
 ONAY_DOSYASI = KOK / "profil_onay.json"
+KANARYA_KILIDI = KOK / "kanarya_basarisiz.json"
 MIN_KREDI = 700
 MODEL = "bytedance/seedance-2"
 
@@ -418,6 +422,55 @@ def yayin_izni(profil_adi: str, sure: int | float) -> tuple[bool, str]:
     return True, "dogrulandi (kalici onay)"
 
 
+def _kanarya_kilidi_oku() -> dict | None:
+    try:
+        veri = json.loads(KANARYA_KILIDI.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, TypeError):
+        return None
+    return veri if isinstance(veri, dict) else None
+
+
+def kanarya_kilitli_mi(anahtar: tuple) -> tuple[bool, str]:
+    """Bu kombinasyon daha once kapida kaldiysa bir daha PARA HARCAMA.
+
+    Kilit olmasaydi su olurdu: kanarya kapida kalir, yayin olmaz, deftere
+    dogrulanmis satir dusmez, ertesi gun sirdaki() AYNI rotayi secer ve AYNI
+    kombinasyonu yeniden uretir. Gunde ~615 kredi (~3 dolar), suresiz, ve cuzdan
+    dort kanalla ORTAK. Kilit bunu ilk basarisizlikta durduruyor.
+    """
+    kilit = _kanarya_kilidi_oku()
+    if kilit is None:
+        return False, ""
+    if kilit.get("profil_hash") != profil_hash():
+        return False, ""  # profil degisti, yeniden denemeye deger
+    if tuple(kilit.get("anahtar") or []) != tuple(str(p) for p in anahtar):
+        return False, ""
+    return True, (
+        "bu kombinasyon %s tarihinde kapida kaldi (%s). Tekrar denemek icin "
+        "profili duzeltin ya da %s dosyasini silin."
+        % (kilit.get("ts", "?"), kilit.get("sebep", "?"), KANARYA_KILIDI.name)
+    )
+
+
+def kanarya_kilidi_yaz(anahtar: tuple, sebep: str) -> None:
+    KANARYA_KILIDI.write_text(
+        json.dumps({
+            "anahtar": [str(p) for p in anahtar],
+            "profil_hash": profil_hash(),
+            "sebep": sebep,
+            "ts": datetime.now(timezone.utc).isoformat(),
+        }, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+
+
+def kanarya_kilidini_kaldir() -> None:
+    try:
+        KANARYA_KILIDI.unlink()
+    except OSError:
+        pass
+
+
 def uretim_kaydi_yaz(slug: str, kayit: dict) -> Path:
     hedef = KOK / "out" / slug / "uretim" / (kayit["master_sha"] + ".json")
     if hedef.exists():
@@ -463,6 +516,10 @@ def onayla(master: Path) -> int:
     onay = {
         "model": anahtar[0], "sure": anahtar[1], "cozunurluk": anahtar[2],
         "fps": anahtar[3], "master_sha": master_sha, "profil_hash": profil_hash(),
+        # yayin_izni olcum SART kosuyor. Bunlar olmadan elle verilen onay kendi
+        # modulu tarafindan reddedilirdi.
+        "olculen": kayit.get("olculen"),
+        "ses": kayit.get("ses"),
     }
     ONAY_DOSYASI.write_text(
         json.dumps(onay, ensure_ascii=False, indent=2) + "\n",
@@ -712,6 +769,11 @@ def main(argv: list[str] | None = None) -> int:
         # "dogrulandi" olarak damgalaniyor ve sonraki kosular dogrudan yayinliyor.
         # Model sessizce 720p'ye duserse kapi bunu ozel mesajla yakalar, kosu
         # basarisiz olur ve Telegram uyarisi gider , sessiz yayin YOK.
+        kilitli, kilit_mesaji = kanarya_kilitli_mi(anahtar)
+        if kilitli:
+            log("DUR: %s" % kilit_mesaji)
+            log("Uretim yapilmadi, kredi harcanmadi.")
+            return 1
         log("kanarya kosusu: %s. Kapi gecerse otomatik onaylanacak." % izin_durumu)
 
     bugun = datetime.now(LA).strftime("%Y-%m-%d")
@@ -819,11 +881,18 @@ def main(argv: list[str] | None = None) -> int:
             json.dumps(onay, ensure_ascii=False, indent=2) + "\n",
             encoding="utf-8", newline="\n",
         )
+        kanarya_kilidini_kaldir()
         izinli = True
         log("OTOMATIK ONAY: %s teknik kapiyi gecti, kombinasyon dogrulandi" % (anahtar,))
         log("profil_onay.json commit'lenmeli (CI persist_state listesinde)")
     if sorunlar:
         log("DUR: denetim kaldi, YAYINLANMADI. Sorunlar: " + "; ".join(sorunlar))
+        if not izinli:
+            # Dogrulanmamis kombinasyon kapida kaldi: KILITLE. Yoksa ertesi gun
+            # ayni rota yeniden uretilir ve her gun ~615 kredi yanar.
+            kanarya_kilidi_yaz(anahtar, "; ".join(sorunlar)[:300])
+            log("KANARYA KILITLENDI: %s , bu kombinasyon bir daha kredi harcamaz."
+                % KANARYA_KILIDI.name)
         return 1
     log("denetim temiz: %s" % master)
 

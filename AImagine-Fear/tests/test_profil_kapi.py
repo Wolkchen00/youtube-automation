@@ -175,7 +175,6 @@ def test_canary_runs_automatically_but_downgrade_still_blocks(
     slug = "test-slug"
     monkeypatch.setattr(gunluk, "KOK", tmp_path)
     monkeypatch.setattr(gunluk, "DEFTER", tmp_path / "yayin.jsonl")
-    monkeypatch.setattr(gunluk, "ONAY_DOSYASI", tmp_path / "missing.json")
     cikti = tmp_path / "out" / slug
     (cikti / "video").mkdir(parents=True)
     ham = cikti / "video" / "test_gunluk_1.mp4"
@@ -215,15 +214,28 @@ def test_canary_runs_automatically_but_downgrade_still_blocks(
     )
     assert gunluk.main(["--sehir", slug]) == 1
     assert yayinlandi == [], "sessiz dusurmede yayinlandi"
-    assert not (tmp_path / "missing.json").exists(), "kapida kalan kosu ONAY yazdi"
+    assert not gunluk.ONAY_DOSYASI.exists(), "kapida kalan kosu ONAY yazdi"
+    # Ve kilit kuruldu: ertesi gun ayni kombinasyon bir daha para yakmayacak
+    assert gunluk.KANARYA_KILIDI.exists(), "kapida kalindi ama kanarya kilidi yazilmadi"
 
-    # 2) Kapi temiz -> kanarya kendini otomatik onaylar ve YAYINLANIR
+    # 1b) Kilit gercekten calisiyor mu: ayni kosu tekrar denenince URETIM YOK
+    def _yasak(cmd, cwd):
+        pytest.fail("kilitliyken uretim cagrisi yapildi")
+
+    eski_kosa = gunluk.kosa
+    monkeypatch.setattr(gunluk, "kosa", _yasak)
+    assert gunluk.main(["--sehir", slug, "--allow-same-day"]) == 1
+    monkeypatch.setattr(gunluk, "kosa", eski_kosa)
+
+    # 2) Profil duzeltildi varsayalim (kilit kalkar) ve kapi temiz ->
+    #    kanarya kendini otomatik onaylar ve YAYINLANIR
+    gunluk.KANARYA_KILIDI.unlink()
     monkeypatch.setattr(
         gunluk, "denetle", lambda m, s, p: ([], {"fps": 24.0, "sure": 15.0})
     )
     assert gunluk.main(["--sehir", slug, "--allow-same-day"]) == 0
     assert yayinlandi, "kapi temizken yayinlanmadi"
-    onay = json.loads((tmp_path / "missing.json").read_text(encoding="utf-8"))
+    onay = json.loads(gunluk.ONAY_DOSYASI.read_text(encoding="utf-8"))
     assert onay["otomatik"] is True
     assert onay["cozunurluk"] == "1080p" and onay["fps"] == 24
 

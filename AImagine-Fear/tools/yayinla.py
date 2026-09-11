@@ -19,16 +19,19 @@ import hashlib
 import json
 import sys
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 if str(Path(__file__).resolve().parent.parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
-from defter import bugunku_basarili, yayin_kimligi  # noqa: E402
+from defter import bugunku_basarili, kullanildi_mi, yayin_kimligi  # noqa: E402
 
 KOK = Path(__file__).resolve().parent.parent      # AImagine-Fear/
 YT_KOK = KOK.parent                                # depo koku, hem Windows hem CI'da dogru
 DEFTER = KOK / "yayin.jsonl"
-LA = timezone(timedelta(hours=-7))  # PDT
+# Sabit -7 DEGIL: yaz saati bitince gercek yerel saat -8 oluyor ve hem
+# damga hem ayni-gun kapisi bir saat kayardi.
+LA = ZoneInfo("America/Los_Angeles")
 
 
 def _yukleyici():
@@ -88,7 +91,11 @@ def main() -> int:
     parmak = sha(video)
     gecmis = defter_oku()
     for k in gecmis:
-        if k.get("sha") == parmak:
+        # Yalniz DOGRULANMIS yayinlar mukerrer sayilir. Basarisiz bir deneme de
+        # deftere sha birakiyor; onu "yayinlandi" saymak ayni dosyanin mesru
+        # yeniden gonderimini kalici olarak bloklardi ve --skip-if-published
+        # hicbir YouTube yayini olmadan 0 dondururdu.
+        if k.get("sha") == parmak and kullanildi_mi(k):
             mesaj = "BU VIDEO ZATEN YAYINLANDI (%s). Mukerrer yayin engellendi." % k.get("ts")
             if args.skip_if_published:
                 print(mesaj)

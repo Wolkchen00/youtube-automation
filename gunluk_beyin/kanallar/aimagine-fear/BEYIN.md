@@ -1,6 +1,6 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-10T21:44:55.336188+00:00
+Uretim: 2026-09-11T02:20:22.947118+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\aimagine-fear\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -13,7 +13,6 @@ nerede oturdugu gorulur.
 
 - Olculen video: **15**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 0/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
-- _1 video 24 saatten taze, siralamaya girmiyor._
 - Medyan izlenme: **16**
 - Aralik: 0 ile 3,165 arasi
 
@@ -71,13 +70,14 @@ Kanala ozel veri yetersizse veya celiskiliyse bunlar gecerli.
 
 ## 5. KACIN
 
-### Bu kanalda GECERSIZ esikler
+### Bu kanalda HIC UYGULANMAMIS esikler
 
-Asagidaki genel esikleri kanalin **en iyi videosu** de ihlal ediyor
-(`Rcn6pC6HfVs`, 3,165 izlenme). Yani bu kanalda o esik calismiyor.
-**Kor uygulama, calisan seyi bozarsin.**
+Asagidaki esigi olculen videolarin **TAMAMI** ihlal ediyor.
+Bu, esigin burada calismadigini GOSTERMEZ , boru hattinin o
+esigi hic uygulamadigini gosterir. Esik gecerlidir; eksik olan
+uygulamadir. Duzeltilene kadar bu boyutta karsilastirma yapma.
 
-- ~~en uzun plan 4 sn tavani~~ , en iyi videoda deger: **15.1**
+- **en uzun plan 4 sn tavani** , en iyi tam videoda deger: **15.1** (tum kayitlar ihlalde)
 
 - **Ses seviyesi hedef disi**: `MUtJyJ-jOKg` -16.5 LUFS (hedef -16..-13)
 - **Ses seviyesi hedef disi**: `w3KuWLDTCpQ` -16.5 LUFS (hedef -16..-13)
@@ -87,3 +87,18 @@ Asagidaki genel esikleri kanalin **en iyi videosu** de ihlal ediyor
 - **Ses kirpiyor**: `SsmjEAKli6M` true peak 0.2 dBFS (tavan -1,0)
 - _Ses kirpiyor: toplam 6 kayitta var, ilk 3 gosterildi._
 - _Ses seviyesi hedef disi: toplam 7 kayitta var, ilk 3 gosterildi._
+
+## 6. BASLIK OZNESI
+
+**HIPOTEZ** , baslikin KALIBI degil, OZNESI ayirt ediyor gorunuyor:
+gozde canlanan bir SEY (yapi, eser, hayvan, marka) > OLAY > adiyla
+anilan KISI. Kaynak: `shadowedhistory/REELYZE-RAPOR.md` , 29 bolumun tamami olculdu, 10 Eylul 2026.
+
+Bu defterde HENUZ yeterli etiket yok (en az iki grupta 3'er
+tam bolum gerekiyor), bu yuzden **sayi uretilmedi**.
+Etiket eklemek icin: `kanallar/aimagine-fear/ozne.json`
+(`{"<video_id>": "SEY" | "OLAY" | "KISI"}`).
+
+Uygulama notu: kisi konusu ELENMEZ, basligin OZNESI degistirilir.
+Ornek: "John Snow: The Father Of Epidemiology" yerine
+"The Water Pump That Ended London's Cholera Outbreak".

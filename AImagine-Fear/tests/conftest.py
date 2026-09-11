@@ -15,17 +15,21 @@ if str(PROJE_KOKU) not in sys.path:
 
 
 @pytest.fixture(autouse=True)
-def _onay_dosyasini_izole_et(tmp_path_factory, monkeypatch):
-    """Hicbir test GERCEK profil_onay.json'a yazamasin.
+def _durum_dosyalarini_izole_et(tmp_path_factory, monkeypatch):
+    """Hicbir test gunluk.py'nin YAZDIGI durum dosyalarina dokunamasin.
 
-    Bu koruma bir kazayla ogrenildi: --yayinlama testi KOK'u izole ediyordu ama
-    ONAY_DOSYASI modul seviyesinde sabit oldugu icin otomatik onay depoya
-    yazildi. O dosya commit'lense cron 1080p'yi hic olculmemisken "dogrulandi"
-    sanacakti. Artik her test kendi gecici yoluna yaziyor.
+    Bu koruma iki kez kaza sonucu ogrenildi. Testler KOK'u izole ediyordu ama
+    bu yollar modul seviyesinde sabit oldugu icin gercek depoya yaziliyordu:
+
+      profil_onay.json      -> commit'lenseydi cron 1080p'yi hic olculmemisken
+                               "dogrulandi" sayardi.
+      kanarya_basarisiz.json -> commit'lenseydi cron kanaryayi HIC calistiramaz,
+                               kanal sessizce dururdu.
+
+    Yeni bir durum dosyasi eklenirse BURAYA da eklenmeli.
     """
     from tools import gunluk
 
-    monkeypatch.setattr(
-        gunluk, "ONAY_DOSYASI",
-        tmp_path_factory.mktemp("onay") / "profil_onay.json",
-    )
+    kok = tmp_path_factory.mktemp("durum")
+    for ad in ("ONAY_DOSYASI", "KANARYA_KILIDI"):
+        monkeypatch.setattr(gunluk, ad, kok / getattr(gunluk, ad).name)

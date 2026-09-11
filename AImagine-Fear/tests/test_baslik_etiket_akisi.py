@@ -213,3 +213,53 @@ def test_hicbir_iki_rota_ayni_basligi_tasimiyor() -> None:
         "her rotada en az 2 varyant olmali, toplam %d baslik / %d rota"
         % (len(gorulen), len(rotalar))
     )
+
+
+# ----------------------------------------------------------------------
+# UCTAN UCA: etiket yayinla.py'nin ICINDEN gecip uploader'a ULASIYOR mu.
+# Onceki testler argv'de duruyordu, yani yayinla.py etiketi dusurse de
+# gecerlerdi. Codex incelemesi bunu "yanlis sebepten gecen kanit" diye
+# isaretledi ve haklıydi.
+# ----------------------------------------------------------------------
+def test_tags_uploader_cagrisina_gercekten_ulasiyor(monkeypatch, tmp_path: Path) -> None:
+    import importlib
+
+    yayinla = importlib.import_module("tools.yayinla")
+
+    video = tmp_path / "m.mp4"
+    video.write_bytes(b"x" * 4_000_000)
+    caption = tmp_path / "CAPTION.txt"
+    caption.write_text(
+        "You're falling.\n\n#MegaSlideFear #CNTower #WaterSlide", encoding="utf-8"
+    )
+    monkeypatch.setattr(yayinla, "DEFTER", tmp_path / "yayin.jsonl")
+    monkeypatch.setattr(yayinla, "defter_oku", lambda: [])
+
+    alinan = {}
+
+    def _sahte_upload(**kw):
+        alinan.update(kw)
+        return {"success": True,
+                "results": {"youtube": {"success": True, "post_id": "XYZ123"}}}
+
+    monkeypatch.setattr(
+        yayinla, "_yukleyici",
+        lambda: (_sahte_upload, {"aimagine": "kullanici"}, {"aimagine": ["youtube"]}),
+    )
+    monkeypatch.setattr(sys, "argv", [
+        "yayinla.py", str(video), "--caption-file", str(caption),
+        "--title", "CN Tower drop #shorts",
+        "--tags", "MegaSlideFear,CNTower,WaterSlide",
+    ])
+    assert yayinla.main() == 0
+
+    # Uploader'in GERCEKTEN aldigi deger
+    assert alinan["tags"] == "MegaSlideFear,CNTower,WaterSlide", (
+        "etiketler yayinla.py icinde kayboldu: %r" % alinan.get("tags")
+    )
+    assert alinan["title"] == "CN Tower drop #shorts"
+
+    # Ve defter satiri dogrulanmis yayin olarak yazildi
+    satir = json.loads((tmp_path / "yayin.jsonl").read_text(encoding="utf-8").strip())
+    assert satir["kullanildi"] is True
+    assert satir["youtube_id"] == "XYZ123"

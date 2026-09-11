@@ -1,6 +1,6 @@
 # BEYIN , unnatural-lab
 
-Uretim: 2026-09-10T21:44:28.927900+00:00
+Uretim: 2026-09-11T02:20:22.487004+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\unnatural-lab\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -48,22 +48,24 @@ Son yayinlar (tekrar etme):
 | 28 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 1 |
 | 30 | needs_human | UNKNOWN | üretim nedeni bilinmiyor | 3 |
 
+### Kural cikarimina GIRMEYEN bolumler
+
+Bu bolumler EKSIK uretilmis (bir cekim dusmus). Yayinlanan
+dosya kisa ve anlatimi otomatik kisaltilmis oldugu icin
+olcumleri bir basari ornegi DEGILDIR; 2., 4. ve 5. bolumlerin
+hicbirine girmiyorlar.
+
+| video | bolum | sebep |
+|---|---|---|
+| `XzABOqtimVE` | 29 | dropped_shots=[1] |
+| `dnsKT8eTWMo` | 27 | dropped_shots=[4] |
+| `FuoWvZCKvf4` | 19 | sure orani 0.69 < 0.7 |
+
+Kalan tam kayit: **12** (esik 15).
+
 ## 2. BU KANALDA NE ISE YARIYOR
 
-Videolar izlenmeye gore siralandi, ust yari ile alt yarinin
-medyanlari karsilastirildi.
-
-| olcum | ust yari | alt yari | yon | n |
-|---|---|---|---|---|
-| sure | 22.22sn | 22.24sn | **anlamli fark yok** | n=7/7 |
-| kesme / 10 sn | 1.35 | 1.35 | **anlamli fark yok** | n=7/7 |
-| en uzun plan | 5.60sn | 5.60sn | **anlamli fark yok** | n=7/7 |
-| ses seviyesi (LUFS) | -21.50 | -23.10 | **anlamli fark yok** | n=7/7 |
-| konusma hizi (WPM) | 78.00 | 81.00 | **anlamli fark yok** | n=6/7 |
-| kelime sayisi | 29.00 | 28.00 | **anlamli fark yok** | n=7/7 |
-
-> **Korelasyon, nedensellik degil.** Bunlar yon gosterir,
-> kanun degildir. Tek dogru sanma, hipotez olarak kullan.
+**YETERSIZ VERI** (n=12, en az 15 gerekiyor; defterdeki 15 kaydin 3 tanesi eksik uretildigi icin sayilmadi). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
 
 ## 3. GENEL ESIKLER
 
@@ -80,21 +82,35 @@ Kanala ozel veri yetersizse veya celiskiliyse bunlar gecerli.
 
 ## 4. BUGUN ICIN YON
 
-2. bolumdeki farklardan cikan somut hedefler:
-
-- Olculen alanlarin hicbirinde **anlamli fark yok** (bagil fark esigi %10). Genel esiklere gore uret.
+**YETERSIZ VERI** (n=12, en az 15 gerekiyor; defterdeki 15 kaydin 3 tanesi eksik uretildigi icin sayilmadi). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
 
 ## 5. KACIN
 
-### Bu kanalda GECERSIZ esikler
+### Bu kanalda HIC UYGULANMAMIS esikler
 
-Asagidaki genel esikleri kanalin **en iyi videosu** de ihlal ediyor
-(`XzABOqtimVE`, 1,499 izlenme). Yani bu kanalda o esik calismiyor.
-**Kor uygulama, calisan seyi bozarsin.**
+Asagidaki esigi olculen videolarin **TAMAMI** ihlal ediyor.
+Bu, esigin burada calismadigini GOSTERMEZ , boru hattinin o
+esigi hic uygulamadigini gosterir. Esik gecerlidir; eksik olan
+uygulamadir. Duzeltilene kadar bu boyutta karsilastirma yapma.
 
-- ~~en uzun plan 4 sn tavani~~ , en iyi videoda deger: **11.0**
+- **en uzun plan 4 sn tavani** , en iyi tam videoda deger: **5.6** (tum kayitlar ihlalde)
 
 - **Ses seviyesi hedef disi**: `5PG5IbbivE0` -24.3 LUFS (hedef -16..-13)
 - **Ses seviyesi hedef disi**: `HeP0V84NXfw` -23.2 LUFS (hedef -16..-13)
 - **Ses seviyesi hedef disi**: `FuoWvZCKvf4` -22.3 LUFS (hedef -16..-13)
 - _Ses seviyesi hedef disi: toplam 10 kayitta var, ilk 3 gosterildi._
+
+## 6. BASLIK OZNESI
+
+**HIPOTEZ** , baslikin KALIBI degil, OZNESI ayirt ediyor gorunuyor:
+gozde canlanan bir SEY (yapi, eser, hayvan, marka) > OLAY > adiyla
+anilan KISI. Kaynak: `shadowedhistory/REELYZE-RAPOR.md` , 29 bolumun tamami olculdu, 10 Eylul 2026.
+
+Bu defterde HENUZ yeterli etiket yok (en az iki grupta 3'er
+tam bolum gerekiyor), bu yuzden **sayi uretilmedi**.
+Etiket eklemek icin: `kanallar/unnatural-lab/ozne.json`
+(`{"<video_id>": "SEY" | "OLAY" | "KISI"}`).
+
+Uygulama notu: kisi konusu ELENMEZ, basligin OZNESI degistirilir.
+Ornek: "John Snow: The Father Of Epidemiology" yerine
+"The Water Pump That Ended London's Cholera Outbreak".

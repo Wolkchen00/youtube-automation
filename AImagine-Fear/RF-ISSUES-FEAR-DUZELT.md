@@ -50,3 +50,16 @@ Plan: `RF-PLAN-FEAR-DUZELT.md`
 - #4 Palet A/B sonucunu oku (en az 6 yayin sonra, IG Insights ile)
 - #5 Platform basina yeniden deneme
 - #6 Anlamsal (goruntu) kalite kapisi , teknik kapi kanona ICERIK uyumunu kanitlamaz
+
+## Codex inceleme turu (2026-09-10 aksami, yayinlanmis kod uzerinde)
+
+Codex main'e alinmis ve push edilmis kodu inceledi. Iki BLOCKER, dokuz FIX,
+bir CLARIFY. Duzeltilenler ayri commit'te; asagidakiler BILEREK ertelendi.
+
+| # | Bulgu | Neden ertelendi |
+|---|---|---|
+| 9 | **Kesinti dayanikliligi.** Kie'ye gorev acildiktan SONRA, defter satiri yazilmadan once surec olurse taskId kaybolur ve para gider. YouTube gecip IG kalmissa sonraki kosu IG'ye MUKERRER gonderebilir. | Tam cozum platform basina kontrol noktasi ister; bu zaten #5'te (platform bazli yeniden deneme) ertelenmisti. Kie'de idempotency ve gorev listeleme YOK, yani otomatik yeniden gonderme TEHLIKELI. Kapi-dusmesi tarafi kanarya kilidiyle kapatildi; kesinti tarafi acik. |
+| 10 | `baslik_sec()` yalniz deftere bakiyor, yukleyici ise CANLI YouTube akisina (`channel_recent_titles`). Defter disi bir mukerrer baslik onkontrolden gecip krediyi harcayabilir, sonra yuklemede reddedilir. | Onkontrole ag cagrisi sokmak demek; kredi kapisindan once YouTube API'sine bagimlilik. Ayri bir karar. |
+| 11 | `scripts/kosu_sonucu_yaz.py` yeni `youtube_id`/`kullanildi` alanlarini bilmiyor; asenkron onaylanan bir yukleme `no_video` diye kaydedilebilir. | Yalniz `last_run.json` raporlamasini etkiliyor, yayini ya da parayi etkilemiyor. Dosya dort kanalin ORTAK betigi, dikkat ister. |
+| 12 | `test_uretim_kaydi_semasi_2_ve_palet_tasiyor` ve `test_schema_one_has_only_frozen_first_commit_fields` kaynak metnine bakiyor, gercek kayda degil. | Gercek defekt degil ama zayif kanit. Etiket akisinin uctan uca testi yazildi; bu ikisi siradaki temizlikte. |
+| 13 | **CLARIFY:** `MIN_KREDI = 700` Fear'in ~85 kredi birakmasina izin veriyor ve filo rezerv mekanizmasini atliyor. Cuzdan dort kanalla ORTAK. | Ihsan'in karari: filo rezervi kac kredi olmali? Cevaplanmadan degistirmek digerlerini ac birakabilir. |

@@ -63,6 +63,11 @@ REGIME_REPLENISH_FIELDS = ("shots", "shot_seconds", "title_style", "narration",
 # bu ikisi ise kuyrukta sirasini bekleyen normal hallerdir, kusur degildir.
 QUEUED_STATES = ("", "planned", "queued", "pending")
 
+# Yayinlanmayan her bolum "uretildi" DEMEK DEGILDIR. Butce kapisi ucretli ise
+# BASLAMADAN once durur, atlanan/reddedilen bolum hic cekilmez. Bunlari
+# "uretildi ama yayinlanmadi" diye sunmak BEYIN.md'yi yalanci yapar.
+UNPRODUCED_STATES = ("budget_exhausted", "skipped", "rejected")
+
 # Minimum ledger size before we derive any channel-specific rule.
 # Below this we claim NOTHING and fall back to the general thresholds.
 MIN_SAMPLES = 15
@@ -237,6 +242,7 @@ def held_episodes(channel, root=None):
             "anlatim": coherence.get("narration_delivered"),
             "sure": coherence.get("duration_s"),
             "baslik": str(part.get("subtitle") or "")[:48],
+            "uretildi": status not in UNPRODUCED_STATES,
         })
     held.sort(key=lambda h: int(h["part"]) if h["part"].isdigit() else 0)
     return held
@@ -633,8 +639,14 @@ def cmd_brain(channel):
     # Age-fair ranking. Comparing a 30-day-old video to a 2-day-old one on
     # current views is unfair; if most rows carry an hour-24 figure, use it.
     # Otherwise fall back to current views AND SAY SO in the report.
+    # MIN_SAMPLES sarti BURADA da gecerli olmali. Aksi halde veri birikirken
+    # sistem GERILER: 11/15 kayitta 24s olcumu varken guncel izlenmeyle kural
+    # uretiliyor, 12/15'e cikinca 24s olcusune geciliyor ama o olcuye sahip
+    # kayit sayisi (12) MIN_SAMPLES'in (15) altinda kaldigi icin 2. bolum
+    # "YETERSIZ VERI" diyor. Yani olcum iyilesirken rapor korlesiyor.
+    # Olculdu 2026-09-10: 0/15 kural VAR, 11/15 kural VAR, 12/15 YETERSIZ, 15/15 kural VAR.
     with_24h = [r for r in rows if views_at_24h(r) is not None]
-    if rows and len(with_24h) >= max(3, int(total * 0.8)):
+    if rows and len(with_24h) >= max(MIN_SAMPLES, int(total * 0.8)):
         metric = views_at_24h
         metric_label = "**24. saat izlenmesi** (yas-adil)"
     else:
@@ -761,12 +773,19 @@ def cmd_brain(channel):
                            "tutar; kendini toparlayan hatalar orada iz birakmaz."
                            % history)
         else:
-            out.append("- **%d bolum uretildi ama YAYINLANMADI.** Bunlar YouTube'a "
-                       "cikmadigi icin yukaridaki olcumlere HIC girmiyor; en cok "
-                       "ogrenilecek hatalar bunlardir." % len(held))
+            uretilen = [h for h in held if h.get("uretildi")]
+            uretilmeyen = [h for h in held if not h.get("uretildi")]
+            out.append("- **%d bolum YAYINLANMADI.** Bunlar YouTube'a cikmadigi "
+                       "icin yukaridaki olcumlere HIC girmiyor." % len(held))
+            if uretilen:
+                out.append("  - %d tanesi URETILDI ama yayina giremedi; en cok "
+                           "ogrenilecek hatalar bunlardir." % len(uretilen))
+            if uretilmeyen:
+                out.append("  - %d tanesi HIC URETILMEDI (butce kapisi, atlandi "
+                           "ya da reddedildi); kredi harcanmadi." % len(uretilmeyen))
             out.append("")
-            out.append("| part | durum | kod | eksik | deneme |")
-            out.append("|---|---|---|---|---|")
+            out.append("| part | uretim | durum | kod | eksik | deneme |")
+            out.append("|---|---|---|---|---|---|")
             for item in held[-8:]:
                 eksik = []
                 if item["dusen_roller"]:
@@ -777,8 +796,10 @@ def cmd_brain(channel):
                     eksik.append("%.1f sn" % item["sure"])
                 if not eksik and item["neden"]:
                     eksik.append(item["neden"][:44])
-                out.append("| %s | %s | %s | %s | %s |"
-                           % (item["part"], item["durum"] or "?",
+                out.append("| %s | %s | %s | %s | %s | %s |"
+                           % (item["part"],
+                              "uretildi" if item.get("uretildi") else "uretilmedi",
+                              item["durum"] or "?",
                               item["kod"] or "-", "; ".join(eksik) or "-",
                               item["deneme"] if item["deneme"] is not None else "-"))
     # Hicbir satir SESSIZCE dusmesin: raporu okuyan ajan NEYIN neden
@@ -941,8 +962,13 @@ def cmd_brain(channel):
             continue
         _deger = as_number((best.get("olcum") or {}).get(_ad))
         if _all_break(_ad, _kosul):
+            # Boru hatti o esigi HIC uygulamamis. Bu bir cikarim degil,
+            # dogrudan olculmus bir olgu; az veriyle de dogrudur, kapisiz gecer.
             never_applied.append((_tur, _etiket, _deger))
-        else:
+        elif enough:
+            # Esik IPTALI kanala ozel bir CIKARIMDIR. n<15 iken tek bir videoya
+            # dayanip genel bir esigi "gecersiz" ilan etmek, 2. ve 4. bolumlerde
+            # yasakladigimiz seyin aynisidir. Ayni `enough` kapisinin arkasinda.
             contradicted.append((_tur, _etiket, _deger))
     contradicted_kinds = {kind for kind, _, _ in contradicted}
     never_kinds = {kind for kind, _, _ in never_applied}

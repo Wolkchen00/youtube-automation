@@ -122,7 +122,7 @@ jobs:
         run: |
           bash scripts/persist_state.sh \
             "chore: fear-slide durumunu ilerlet [skip ci]" \
-            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json
+            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json AImagine-Fear/kanarya_basarisiz.json
 
       - name: Upload logs artifact
         if: always()
