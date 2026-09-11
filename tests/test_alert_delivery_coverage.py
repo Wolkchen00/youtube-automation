@@ -125,7 +125,11 @@ def test_only_explicit_presentation_sites_may_call_markdown_send_message():
         # ROCK E2 besincisini ekledi: tukenmis + oto-ikmalli seri ACIKCA
         # istendiginde "bu kanala bugun video CIKMIYOR" bildirimi. Bu alarm da
         # duz metin yolundan gider, Markdown yoluna eklenmez.
-        "series_runner.py": 14,
+        # ROCK E (kalici bolum eseri) altincisini ekledi: kalici eser
+        # DOGRULANAMADI, kosu kredi harcamadan durdu. Bu sayim bir KAYIT
+        # defteridir: yeni bir kritik alarm eklendiginde burada ACIKCA
+        # gerekcelendirilmek zorundadir; kural gevsemez, sayim buyur.
+        "series_runner.py": 15,
     }
     for filename, expected_count in expected_plain_routes.items():
         tree = ast.parse((ROOT / "series" / filename).read_text(encoding="utf-8"))

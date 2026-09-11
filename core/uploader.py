@@ -1,5 +1,5 @@
 """
-Upload-Post.com — Multi-Platform Video Publisher
+Upload-Post.com ,  Multi-Platform Video Publisher
 
 Publishes videos to YouTube Shorts, Instagram Reels, and TikTok
 via the Upload-Post.com API.
@@ -31,7 +31,7 @@ _LAST_UPLOAD_FAILURES: dict[str, dict] = {}
 
 # Bu boyutun üzerindeki dosyalar yüklenmeden önce bitrate-kapaklı bir 'delivery'
 # kopyasına çevrilir. Upload-Post büyük gövdeleri akış ortasında kesiyor
-# (ConnectionReset 10054) — grain'li/CRF'li kaynaklar 45s'de 140MB'ı aşabiliyor;
+# (ConnectionReset 10054) ,  grain'li/CRF'li kaynaklar 45s'de 140MB'ı aşabiliyor;
 # Shorts zaten platformda ~2-6 Mbps'e yeniden kodlanıyor, kalite kaybı görünmez.
 MAX_UPLOAD_MB = 80
 _DELIVERY_MAXRATE = "6500k"
@@ -127,7 +127,7 @@ def _delivery_copy(video_path: Path) -> Path:
             logger.info(f"📦 Delivery hazır: {new_mb:.0f}MB ({delivery.name})")
             return delivery
     except Exception as e:
-        logger.warning(f"⚠️ Delivery kopyası üretilemedi ({e}) — orijinal dosya denenecek")
+        logger.warning(f"⚠️ Delivery kopyası üretilemedi ({e}) ,  orijinal dosya denenecek")
     return video_path
 
 
@@ -320,6 +320,52 @@ def _status_outcome(body: dict, platform: str) -> tuple[str, str]:
     return "pending", str(body.get("message") or entry_status or top_status or "belirsiz durum")[:300]
 
 
+def reconcile_async_upload(
+    platform: str,
+    *,
+    request_id: str | None = None,
+    job_id: str | None = None,
+) -> tuple[str, str, dict | None]:
+    """ROCK E: kalicilastirilmis BEKLEYEN bir yukleme isini TEK sorguda uzlastir.
+
+    Kosu sinirini gecen bir ``request_id``/``job_id`` icin durum endpoint'ine tek
+    kez bakar. Donus ``("success" | "failure" | "pending", detay, govde|None)``.
+
+    BELIRSIZ HER SEY "pending" DONER (anahtar yok, is kimligi yok, ag hatasi,
+    HTTP != 200, bozuk JSON, terminal olmayan durum). Cagiran bu durumda YENIDEN
+    GONDERMEZ: Instagram/TikTok'a ikinci kez dusen bir gonderi, gec kalmis bir
+    onaydan cok daha pahalidir.
+    """
+    lookup_key = "request_id" if request_id else "job_id"
+    lookup_value = request_id or job_id
+    if not lookup_value:
+        return "pending", "bekleyen is kimligi yok", None
+    if not UPLOAD_POST_API_KEY:
+        return "pending", "UPLOAD_POST_API_KEY tanimsiz", None
+    headers = {"Authorization": f"Apikey {UPLOAD_POST_API_KEY}"}
+    try:
+        response = requests.get(
+            UPLOAD_POST_STATUS_URL,
+            headers=headers,
+            params={lookup_key: lookup_value},
+            timeout=ASYNC_STATUS_REQUEST_TIMEOUT,
+        )
+    except Exception as exc:
+        return "pending", f"durum endpoint'i sorgulanamadi: {exc}", None
+    if response.status_code != 200:
+        return "pending", f"durum endpoint'i HTTP {response.status_code} dondurdu", None
+    try:
+        body = response.json()
+        if not isinstance(body, dict):
+            raise ValueError("JSON koku nesne degil")
+    except Exception as exc:
+        return "pending", f"durum endpoint'i bozuk JSON dondurdu: {exc}", None
+    outcome, detail = _status_outcome(body, platform)
+    if outcome == "success":
+        return "success", detail, _confirmed_async_result(body, platform, request_id, job_id)
+    return outcome, detail, body
+
+
 def _confirmed_async_result(
     status_body: dict,
     platform: str,
@@ -459,7 +505,7 @@ def upload_to_platform(
     social_caption (opt-in): IG/TikTok'ta 'title' yerine geçen UZUN caption metni.
     Upload-Post, Instagram'da instagram_title'ı ve TikTok'ta tiktok_title'ı post
     caption'ı olarak kullanır (global 'description' bu iki platformda YOK sayılır;
-    TikTok video caption limiti 2.200 karakter). Boş bırakılırsa eski davranış —
+    TikTok video caption limiti 2.200 karakter). Boş bırakılırsa eski davranış , 
     caption = title."""
     if not UPLOAD_POST_API_KEY:
         logger.error("❌ UPLOAD_POST_API_KEY not set!")

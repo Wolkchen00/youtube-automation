@@ -11,6 +11,7 @@ Kullanım:
   python -m series.series_runner --series yaris --no-publish  # üret ama yayınlama
 """
 
+import json
 import os
 from contextvars import ContextVar
 from datetime import datetime, timezone
@@ -24,9 +25,15 @@ if _ROOT not in sys.path:
 
 from core.config import logger
 from core.kie_api import check_credit
-from core.uploader import pop_upload_failure, upload_to_platform
+from core.uploader import (
+    pop_upload_failure,
+    reconcile_async_upload,
+    upload_to_platform,
+)
+from series import critic
 from series import produce
 from series import credit_gate
+from series import durable_artifact
 from series import notifier
 from series.series_meta import SeriesMeta, part_plan_path, list_active_series
 from series.shots import load_plan
@@ -134,17 +141,30 @@ def _sample_frames(video_path, count: int = 3) -> list[str]:
     return frames
 
 
-def _persist_release(slug: str, n: int, video_path) -> str | None:
+def _delete_release(tag: str) -> None:
+    """Release'i (ve tag'ini) sil. Depolama katmani DEGISMEZ: hep ayni gh yolu."""
+    gh = shutil.which("gh")
+    if gh and tag:
+        subprocess.run([gh, "release", "delete", tag, "-R", REPO, "-y", "--cleanup-tag"],
+                       capture_output=True, text=True)
+
+
+def _persist_release(slug: str, n: int, video_path, extra_assets=None) -> str | None:
     """Üretilen videoyu GitHub Release asset'i olarak sakla ,  üretim ve onay AYRI bulut
-    koşularında olduğu için video kalıcı bir yerde durmalı. Release tag'ini döndürür."""
+    koşularında olduğu için video kalıcı bir yerde durmalı. Release tag'ini döndürür.
+
+    ``extra_assets`` (ROCK E): videonun YANINA, AYNI Release'e konan sidecar
+    dosyalar (eser manifesti). Yeni bir depo icat edilmez; eserin kimligi de
+    eserle ayni yerde durur ki kurtarma tek indirmede tamamlansin.
+    """
     gh = shutil.which("gh")
     if not gh:
         logger.warning("⚠️ gh CLI yok ,  Release persistence atlandı")
         return None
     tag = f"pending-{slug}-part{n}"
-    subprocess.run([gh, "release", "delete", tag, "-R", REPO, "-y", "--cleanup-tag"],
-                   capture_output=True, text=True)
-    r = subprocess.run([gh, "release", "create", tag, str(video_path), "-R", REPO,
+    _delete_release(tag)
+    assets = [str(video_path)] + [str(item) for item in (extra_assets or [])]
+    r = subprocess.run([gh, "release", "create", tag, *assets, "-R", REPO,
                         "--title", f"Pending {slug} Part {n}",
                         "--notes", "Telegram onayı bekliyor (otomatik)."],
                        capture_output=True, text=True)
@@ -153,6 +173,154 @@ def _persist_release(slug: str, n: int, video_path) -> str | None:
         return None
     logger.info(f"📦 Video Release'e yüklendi: {tag}")
     return tag
+
+
+def _fetch_release_assets(tag: str, dest_dir) -> tuple[dict | None, str]:
+    """Release'in TUM varliklarini indir. Donus: ({ad: yol}, "") | (None, neden).
+
+    ``None`` her zaman "depo bu kosuda ERISILEMEDI" demektir; 404 ile ag/oturum
+    arizasi burada AYIRT EDILMEZ, cunku ikisi de "yeniden uret" kararini
+    hakli cikarmaz. Karar ustteki katmanda verilir ve belirsizlik KOSUYU DURDURUR.
+    """
+    gh = shutil.which("gh")
+    if not gh:
+        return None, "gh CLI yok"
+    if not tag:
+        return None, "release tag yok"
+    dest = Path(dest_dir)
+    dest.mkdir(parents=True, exist_ok=True)
+    r = subprocess.run([gh, "release", "download", tag, "-R", REPO,
+                        "--dir", str(dest), "--clobber"],
+                       capture_output=True, text=True)
+    if r.returncode != 0:
+        detail = (r.stderr or r.stdout or "bilinmeyen gh hatasi").strip()
+        return None, detail[:300]
+    files = {item.name: item for item in dest.iterdir() if item.is_file()}
+    if not files:
+        return None, "release hicbir varlik dondurmedi"
+    return files, ""
+
+
+def _persist_episode_artifact(slug: str, n: int, meta: SeriesMeta, bible, plan: dict,
+                              video, subtitle: str = "", result=None) -> str | None:
+    """ROCK E-1: tamamlanan eseri ONAY MODUNA BAGLI OLMADAN kalicilastir.
+
+    Kusur tam buradaydi: ``_persist_release`` yalniz ``mode == "approval"``
+    dalindan cagriliyordu, bu yuzden ``publish_mode: auto`` olan seride uretilen
+    hicbir sey kosu sinirini gecemiyordu.
+    """
+    manifest = durable_artifact.build_manifest(
+        slug, n, bible, plan, Path(video), subtitle=subtitle,
+        dropped_shots=getattr(result, "dropped_shots", None),
+        coherence=getattr(result, "coherence", None),
+    )
+    if manifest is None:
+        logger.error(
+            f"❌ Part {n} kalıcı eser manifesti üretilemedi; eser kalıcılaştırılmadı. "
+            "Sonraki koşu bu bölümü yeniden üretmek zorunda kalır."
+        )
+        return None
+    manifest_path = Path(video).parent / durable_artifact.MANIFEST_ASSET_NAME
+    try:
+        manifest_path.write_text(
+            json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+    except OSError as error:
+        logger.error(f"❌ Part {n} eser manifesti yazılamadı: {error}")
+        return None
+    tag = f"pending-{slug}-part{n}"
+    part = meta.get_part(n)
+    part["artifact"] = {
+        "release_tag": tag,
+        "manifest_version": manifest["manifest_version"],
+        "video_sha256": manifest["video_sha256"],
+        "plan_sha256": manifest["plan_sha256"],
+        "reference_sha256": manifest["reference_sha256"],
+        "qc_policy_sha256": manifest["qc_policy_sha256"],
+        "confirmed": False,
+        "intent_at": datetime.now(timezone.utc).isoformat(),
+    }
+    meta.save()
+    tag = _persist_release(slug, n, video, extra_assets=[manifest_path])
+    if not tag:
+        return None
+    part["release_tag"] = tag
+    part["artifact"]["release_tag"] = tag
+    part["artifact"]["confirmed"] = True
+    part["artifact"]["persisted_at"] = datetime.now(timezone.utc).isoformat()
+    meta.save()
+    logger.info(f"🧷 Part {n} kalıcı eseri kaydedildi: {tag}")
+    return tag
+
+
+def _recover_episode_artifact(slug: str, n: int, meta: SeriesMeta, bible,
+                              plan: dict):
+    """ROCK E-2: KOŞU BAŞINDA kurtarma; tamamlanma maliyeti hesabından ÖNCE."""
+    part = meta.get_part(n)
+    record = part.get("artifact")
+    tag = str((record or {}).get("release_tag") or "").strip()
+    if (not isinstance(record, dict) or not tag) and part.get("status") == "produced":
+        tag = f"pending-{slug}-part{n}"
+        record = {"release_tag": tag, "confirmed": False}
+        part["artifact"] = record
+        meta.save()
+    elif not isinstance(record, dict) or not tag:
+        return durable_artifact.Verdict("absent")
+    from series.bible import episode_dir
+
+    # İndirme alanı her koşuda SIFIRLANIR: yarım kalmış bir önceki kurtarmadan
+    # artan manifest/video, bu koşuda inen esere yapıştırılamasın.
+    staging = episode_dir(slug, n) / "_recovered"
+    shutil.rmtree(staging, ignore_errors=True)
+    files, error = _fetch_release_assets(tag, staging)
+    if files is None:
+        return durable_artifact.Verdict(
+            "blocked", f"kalıcı depo erişilemedi ({tag}): {error}"
+        )
+    manifest_path = files.get(durable_artifact.MANIFEST_ASSET_NAME)
+    if manifest_path is None:
+        return durable_artifact.Verdict(
+            "blocked", f"eser manifesti Release'te yok ({tag})"
+        )
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError) as error:
+        return durable_artifact.Verdict("blocked", f"eser manifesti okunamadı: {error}")
+    video = None
+    if isinstance(manifest, dict) and manifest.get("video_name"):
+        video = files.get(str(manifest["video_name"]))
+    if video is None:
+        video = next(
+            (path for name, path in sorted(files.items()) if name.endswith(".mp4")),
+            None,
+        )
+    verdict = durable_artifact.verify(slug, n, bible, plan, manifest, video)
+    if verdict.status == "ok" and not record.get("confirmed"):
+        record.update({
+            "release_tag": tag,
+            "manifest_version": manifest.get("manifest_version"),
+            "video_sha256": manifest.get("video_sha256"),
+            "plan_sha256": manifest.get("plan_sha256"),
+            "reference_sha256": manifest.get("reference_sha256"),
+            "qc_policy_sha256": manifest.get("qc_policy_sha256"),
+            "confirmed": True,
+            "persisted_at": datetime.now(timezone.utc).isoformat(),
+        })
+        part["release_tag"] = tag
+        meta.save()
+    return verdict
+
+
+def _artifact_release_for_video(part: dict, video) -> str | None:
+    """Return a Release only when its manifest identity matches these bytes."""
+    record = part.get("artifact")
+    if not isinstance(record, dict) or not record.get("confirmed"):
+        return None
+    actual_hash = critic.content_sha256(Path(video))
+    if not actual_hash or actual_hash != record.get("video_sha256"):
+        return None
+    tag = str(record.get("release_tag") or "").strip()
+    return tag or None
 
 
 def _publish_identifier(result: dict, platform: str) -> str | None:
@@ -305,9 +473,41 @@ def _append_publish_registry(
         logger.warning(f"⚠️ Part {n} yayın registry'si yazılamadı: {e}")
 
 
+def _publish_state(meta: SeriesMeta, n: int) -> dict:
+    """Part kaydındaki KALICI platform-başına yayın durumunu oku."""
+    try:
+        return dict(meta.get_part(n).get("publish_state") or {})
+    except Exception as error:
+        logger.warning(f"⚠️ Part {n} yayın durumu okunamadı: {error}")
+        return {}
+
+
+def _record_publish_state(meta: SeriesMeta, n: int, platform: str, **fields) -> None:
+    """Tek platformun sonucunu ANINDA kalıcılaştır.
+
+    ROCK E eserleri kalıcılaştırınca YENİ bir tuzak doğar: kısmi başarıda
+    Instagram ve TikTok'a başarıyla düşmüş gönderiler sonraki koşuda İKİNCİ kez
+    atılır. Uzak taraf yanıt verdiği anda kaydın diskte olması bunun tek
+    çaresidir; kayıt hiçbir koşulda yayın akışını başarısız yapamaz.
+    """
+    try:
+        part = meta.get_part(n)
+        entry = part.setdefault("publish_state", {}).setdefault(platform, {})
+        entry.update(fields)
+        entry["ts"] = datetime.now(timezone.utc).isoformat()
+        meta.save()
+    except Exception as error:
+        logger.warning(f"⚠️ Part {n} {platform} yayın durumu yazılamadı: {error}")
+
+
 def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
-                  caption: str = "") -> list[str]:
+                  caption: str = "", *, durable: bool = False) -> list[str]:
     """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür.
+
+    ``durable`` (ROCK E, opt-in): platform başına tamamlanma ve BEKLEYEN istek
+    kimlikleri kalıcılaştırılır, yeniden göndermeden önce mutabakat yapılır ve
+    zaten başarılı olan platform ATLANIR. Bayrak kapalıyken davranış bugünküyle
+    birebir aynıdır.
 
     caption (opt-in, plan['caption'] ,  the__footnote formatı): bölümün YAZILI HİKÂYESİ.
     Verilirse YouTube açıklaması bu metin olur ve IG/TikTok'ta da (Upload-Post
@@ -325,6 +525,8 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
     ok: list[str] = []
     upload_results: dict[str, dict] = {}
     async_failures: dict[str, dict] = {}
+    prior_state = _publish_state(meta, n) if durable else {}
+    video_sha256 = critic.content_sha256(Path(video_path)) if durable else None
 
     def _try(plat: str) -> bool:
         src = Path(video_path)
@@ -339,14 +541,93 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
         if res:
             upload_results[plat] = res if isinstance(res, dict) else {}
             async_failures.pop(plat, None)
+            if durable:
+                _record_publish_state(
+                    meta, n, plat, status="ok",
+                    identifier=_publish_identifier(upload_results[plat], plat),
+                    video_sha256=video_sha256,
+                )
         else:
             failure = pop_upload_failure(plat)
             if failure and failure.get("async"):
                 async_failures[plat] = failure
+                if durable:
+                    _record_publish_state(
+                        meta, n, plat, status="pending",
+                        request_id=failure.get("request_id"),
+                        job_id=failure.get("job_id"),
+                        reason=failure.get("reason"),
+                        video_sha256=video_sha256,
+                    )
+            elif durable:
+                _record_publish_state(
+                    meta, n, plat, status="failed", video_sha256=video_sha256
+                )
         return bool(res)
 
+    def _resolve_prior(plat: str):
+        """Kalıcı kayıt bu platformu çözüyorsa True/False, çözmüyorsa None döndür."""
+        entry = prior_state.get(plat) or {}
+        if entry.get("video_sha256") != video_sha256:
+            return None
+        status = str(entry.get("status") or "")
+        if status == "ok":
+            identifier = entry.get("identifier")
+            payload: dict = {"_recovered": True}
+            if identifier:
+                payload["publication_id"] = identifier
+            upload_results[plat] = payload
+            logger.info(
+                f"⏭️ {plat.upper()} zaten yayınlanmış (kalıcı kayıt, "
+                f"kimlik={identifier or '-'}) ,  mükerrer gönderi yapılmadı."
+            )
+            return True
+        if status != "pending":
+            return None
+        outcome, detail, body = reconcile_async_upload(
+            plat, request_id=entry.get("request_id"), job_id=entry.get("job_id")
+        )
+        if outcome == "success":
+            confirmed = body if isinstance(body, dict) else {}
+            upload_results[plat] = confirmed
+            _record_publish_state(
+                meta, n, plat, status="ok",
+                identifier=_publish_identifier(confirmed, plat),
+                reconciled=detail,
+                video_sha256=video_sha256,
+            )
+            logger.info(
+                f"✅ {plat.upper()} bekleyen işi mutabakatta BAŞARILI çıktı "
+                f"({detail}) ,  yeniden gönderilmedi."
+            )
+            return True
+        if outcome == "pending":
+            async_failures[plat] = {
+                "async": True,
+                "reason": f"bekleyen iş hâlâ mutabakata gelmedi: {detail}",
+                "request_id": entry.get("request_id"),
+                "job_id": entry.get("job_id"),
+            }
+            logger.error(
+                f"⏳ {plat.upper()} bekleyen işi doğrulanamadı ({detail}) ,  "
+                "mükerrer gönderi riskine karşı YENİDEN GÖNDERİLMEDİ."
+            )
+            return False
+        logger.warning(
+            f"♻️ {plat.upper()} bekleyen işi terminal BAŞARISIZ ({detail}) ,  "
+            "yeniden gönderiliyor."
+        )
+        return None
+
+    def _attempt(plat: str) -> bool:
+        if durable:
+            resolved = _resolve_prior(plat)
+            if resolved is not None:
+                return resolved
+        return _try(plat)
+
     for plat in meta.platforms:
-        if _try(plat):
+        if _attempt(plat):
             ok.append(plat)
 
     # Telafi turu: upload-post'un geçici arızası (SSL/5xx) bir platformu düşürdüyse,
@@ -704,8 +985,49 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     if chain_start_url:
         logger.info("🔗 Bitmeyen yolculuk: önceki bölümün son karesinden devam ediliyor.")
 
+    # 0) ROCK E-2: KOŞU BAŞINDA kurtarma. Üretimin İÇİNDE geri yüklemek GEÇ kalır:
+    #    run_next önce _budget_failure çalıştırıyor ve tamamlanmış bir master bile
+    #    üretim kredi kapılarına takılabiliyor (part 28: kalan=320 < asgari=400).
+    #    Bu yüzden geri yükleme ve doğrulama tamamlanma maliyeti hesabından ÖNCE
+    #    yapılır; doğrulanmış master üretim rezervasyonlarına hiç girmeden
+    #    doğrudan yayına yönlendirilir.
+    durable_artifacts = durable_artifact.enabled(bible)
+    recovered_video = None
+    recovered_manifest: dict = {}
+    if durable_artifacts and not dry_run:
+        verdict = _recover_episode_artifact(slug, n, meta, bible, plan)
+        if verdict.status == "blocked":
+            # Kurtarma BELİRSİZ. "Doğrulanamazsa yeniden üret" kuralı geçici bir
+            # depolama arızasını taze kredi harcamasına çevirirdi.
+            logger.error(
+                f"🛑 Part {n} kalıcı eseri doğrulanamadı: {verdict.reason}. "
+                "Üretim BAŞLATILMADI, kredi harcanmadı."
+            )
+            _series_alert(
+                meta.slug,
+                f"🛑 *{meta.base_title}* Part {n}: kalıcı bölüm eseri doğrulanamadı "
+                f"({verdict.reason}). Koşu durdu ve TEK kredi harcamadı. "
+                f"Eylem: Release'i geri getir, ya da eser gerçekten yoksa "
+                f"series.json'da part {n} kaydındaki 'artifact' alanını sil.",
+            )
+            return False
+        if verdict.status == "invalid":
+            logger.warning(
+                f"♻️ Part {n} kalıcı eseri GEÇERSİZ ({verdict.reason}); "
+                "eser atıldı, bölüm yeniden üretilecek."
+            )
+            meta.get_part(n).pop("artifact", None)
+            meta.save()
+        elif verdict.status == "ok":
+            recovered_video = Path(verdict.path)
+            recovered_manifest = verdict.manifest or {}
+            logger.info(
+                f"♻️ Part {n} kalıcı eserden geri yüklendi ({recovered_video.name}); "
+                "üretim ve kredi rezervasyonu ATLANDI."
+            )
+
     # 1) Üret (idempotent ,  yarım kalmışsa sadece eksik çekimi üretir)
-    if new_state_machine and not dry_run:
+    if new_state_machine and not dry_run and recovered_video is None:
         budget_result = _budget_failure(slug, n, bible, plan)
         if budget_result is not None:
             _record_recoverable_failure(meta, n, budget_result)
@@ -724,7 +1046,7 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     durable_episode = bool(
         bible and bible.data["series"].get("durable_credit_ledger")
     )
-    if not dry_run:
+    if not dry_run and recovered_video is None:
         balance = _balance_value(check_credit())
         threshold = cap_value * 1.5
         if not credit_gate.run_gate(balance, cap=cap_value):
@@ -750,15 +1072,26 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
             )
             return False
         reserved = True
-    try:
-        produced = produce.produce_episode(
-            slug, plan, dry_run=dry_run, chain_start_url=chain_start_url,
-            typed_result=True,
+    if recovered_video is not None:
+        # ROCK E-3: doğrulanmış eser yeniden ÜRETİLMEZ. Üretim yoluna hiç girmez,
+        # bu yüzden bu koşuda tek bir ücretli çağrı da yapılmaz. Teslim notları
+        # eserle birlikte taşındığı için düşen çekim / bütünlük alarmları
+        # geri yüklenen bölümde de aynen çalışır.
+        produced = produce.ProduceResult(
+            "ok", recovered_video,
+            dropped_shots=[int(item) for item in (recovered_manifest.get("dropped_shots") or [])],
+            coherence=recovered_manifest.get("coherence") or None,
         )
-    finally:
-        if reserved:
-            actual_spent = _actual_episode_spent(slug, n)
-            credit_gate.reconcile(slug, n, actual_spent, cap=cap_value)
+    else:
+        try:
+            produced = produce.produce_episode(
+                slug, plan, dry_run=dry_run, chain_start_url=chain_start_url,
+                typed_result=True,
+            )
+        finally:
+            if reserved:
+                actual_spent = _actual_episode_spent(slug, n)
+                credit_gate.reconcile(slug, n, actual_spent, cap=cap_value)
     if dry_run:
         logger.info(f"[dry-run] Başlık olurdu: {meta.title_for(n, subtitle)}")
         return True
@@ -806,9 +1139,20 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
             meta.data["last_frame_url"] = sidecar.read_text(encoding="utf-8").strip()
     meta.save()
 
+    # 1b) ROCK E-1: ÜRETİM ANINDA yükleme. Tamamlanan eser, yayın moduna BAĞLI
+    #     OLMADAN kalıcılaştırılır. Eski kod bu çağrıyı yalnız "approval" dalında
+    #     yapıyordu; "auto" modundaki seride üretilen hiçbir şey koşu sınırını
+    #     geçemiyor, sonraki koşu sıfırdan üretirken defter saymaya devam ediyordu.
+    if durable_artifacts and recovered_video is None:
+        _persist_episode_artifact(slug, n, meta, bible, plan, video, subtitle,
+                                  result=result)
+
     # 2a) ONAY MODU: videoyu sakla + Telegram'a "Yayınlansın mı?" sor; YAYINLAMA, İLERLETME.
     if mode == "approval":
-        tag = _persist_release(slug, n, video)
+        if durable_artifacts:
+            tag = _artifact_release_for_video(meta.get_part(n), video)
+        else:
+            tag = _persist_release(slug, n, video)
         frames = _sample_frames(video, 3)
         msg_id = None
         if notifier.enabled():
@@ -851,7 +1195,8 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.warning("⚠️ upload_profile boş ,  yayın atlandı. series.json'a upload_profile ekle.")
         return False
 
-    ok = _publish_part(meta, n, video, subtitle, caption=caption)
+    ok = _publish_part(meta, n, video, subtitle, caption=caption,
+                       durable=durable_artifacts)
     required_platforms = set(bible.required_platforms) if bible else set()
     # Iki taraf da kucuk harfe indirgenir: bible.required_platforms zaten
     # normalize edilir, ama yayinci "YouTube" dondururse zorunlu platform
@@ -875,6 +1220,16 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         )
         meta.advance()
         meta.save()
+        # Yayın tamamlandı ve işaretçi KALICI olarak ilerledi; ancak bundan sonra
+        # kalıcı eser bırakılabilir. Sıra önemlidir: silme kaydetmeden önce
+        # yapılsaydı, arada gelen bir çökme bölümü kurtarılamaz hâle getirirdi.
+        if durable_artifacts:
+            part = meta.get_part(n)
+            released_tag = str((part.get("artifact") or {}).get("release_tag") or "")
+            if released_tag:
+                _delete_release(released_tag)
+                part.pop("artifact", None)
+                meta.save()
         logger.info(f"🎉 Part {n} yayınlandı ({', '.join(ok)}): {meta.title_for(n, subtitle)}")
         if result.dropped_shots:
             role_text = ", ".join(

@@ -1144,14 +1144,25 @@ def content_sha256(path: str | Path) -> str | None:
 
 def qc_pass_exists(slug: str, episode: int, shot: int,
                    content_hash: str | None, qc: dict | None = None, *,
-                   experiment_id: str | None = None) -> bool:
-    """Return whether this exact clip passed every currently enabled QC gate."""
+                   experiment_id: str | None = None,
+                   events: list[dict] | None = None) -> bool:
+    """Return whether this exact clip passed every currently enabled QC gate.
+
+    ``events`` (ROCK E): judge an already-loaded evidence list instead of reading
+    ``qc_log.jsonl``. The gate logic stays identical, so a QC-pass record that was
+    persisted next to a durable artifact is re-judged against TODAY's policy by
+    exactly the same predicate the live cache path uses. Omitting it keeps the
+    original behaviour byte for byte.
+    """
     if not content_hash:
         return False
-    try:
-        lines = (data_dir(slug) / "qc_log.jsonl").read_text(encoding="utf-8").splitlines()
-    except OSError:
-        return False
+    if events is not None:
+        lines = [json.dumps(event, ensure_ascii=False) for event in events]
+    else:
+        try:
+            lines = (data_dir(slug) / "qc_log.jsonl").read_text(encoding="utf-8").splitlines()
+        except OSError:
+            return False
     for line in reversed(lines):
         try:
             event = json.loads(line)

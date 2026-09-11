@@ -88,8 +88,8 @@ def get_video_duration(video_path: str | Path) -> float:
         return 5.0
 
 
-def validate_media(video_path: str | Path) -> bool:
-    """Return True only when ffprobe finds a readable video stream."""
+def probe_media(video_path: str | Path) -> bool | None:
+    """Return video-stream presence, or ``None`` when ffprobe itself failed."""
     try:
         result = subprocess.run(
             ["ffprobe", "-v", "error", "-select_streams", "v:0",
@@ -97,9 +97,16 @@ def validate_media(video_path: str | Path) -> bool:
              str(video_path)],
             capture_output=True, text=True, timeout=30,
         )
-        return result.returncode == 0 and "video" in result.stdout.split()
     except (FileNotFoundError, subprocess.TimeoutExpired, OSError):
-        return False
+        return None
+    if result.returncode != 0:
+        return None
+    return "video" in result.stdout.split()
+
+
+def validate_media(video_path: str | Path) -> bool:
+    """Return True only when ffprobe finds a readable video stream."""
+    return probe_media(video_path) is True
 
 
 def extract_frame_at(video_path: str | Path, timestamp: float,
