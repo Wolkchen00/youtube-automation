@@ -45,10 +45,40 @@ def arasi(h, bas, son='"'):
     return h[i:j] if j > i else None
 
 
+def youtube_rss_ex(kanal_id, limit, deneme=3):
+    """(satirlar, hata) dondurur. hata None ise besleme GERCEKTEN okundu.
+
+    `youtube_rss` ag coktugunde de bos liste donduruyordu; cagiran taraf bunu
+    "yeni video yok" saniyor ve exit 0 veriyordu. Yani ag tamamen kopukken
+    gunluk kosu YESIL gorunuyordu. Hatayi ayirt edebilmek icin bu surum var.
+
+    YENIDEN DENEME SART. Olculdu 2026-09-10: ayni kanala arka arkaya bes cagri
+    yapildiginda ILKI 500 dondu, kalan dordu gecti. Tek denemede hatayi kirmizi
+    saymak kosuyu neredeyse her gun gurultulu kirmizi yapardi; insan da kirmiziyi
+    gormezden gelmeye baslardi, ki bu sessiz yesilden daha kotudur.
+    """
+    son_hata = None
+    for i in range(max(1, deneme)):
+        if i:
+            time.sleep(1 + 2 * i)          # 1 sn, 3 sn
+        xml = getir("https://www.youtube.com/feeds/videos.xml?channel_id=" + kanal_id)
+        if xml.startswith("HATA:"):
+            son_hata = xml[5:]
+            continue
+        if "<entry>" not in xml and "<feed" not in xml:
+            # Sayfa geldi ama RSS degil (engel sayfasi, captcha, sema degisikligi).
+            son_hata = "beslemenin sekli beklenmedik (%d bayt)" % len(xml)
+            continue
+        return _rss_ayristir(xml, limit), None
+    return [], "%d denemede basarisiz , son hata: %s" % (deneme, son_hata)
+
+
 def youtube_rss(kanal_id, limit):
-    xml = getir("https://www.youtube.com/feeds/videos.xml?channel_id=" + kanal_id)
-    if xml.startswith("HATA:"):
-        return []
+    """Geriye uyum: sadece satirlari dondurur. Yeni kod `_ex` kullanmali."""
+    return youtube_rss_ex(kanal_id, limit)[0]
+
+
+def _rss_ayristir(xml, limit):
     satirlar = []
     for e in re.findall(r"<entry>(.*?)</entry>", xml, re.S)[:limit]:
         vid = re.search(r"<yt:videoId>([^<]+)</yt:videoId>", e)
