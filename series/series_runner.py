@@ -482,6 +482,37 @@ def migrate_malformed_approval_holds(meta: SeriesMeta, bible) -> bool:
     return changed
 
 
+def _append_hold_log(meta: SeriesMeta, n: int, status: str,
+                     result: produce.ProduceResult) -> None:
+    """Yayina giremeyen her bolumu KALICI bir deftere isle (best-effort).
+
+    series.json yalnizca ANLIK durumu tutar. Bir bolum takilip sonraki kosuda
+    kendini toparlarsa, geriye bakan hicbir arac o hatayi goremez; olculdu:
+    unnatural-lab part 33 AUDIO_MASTER ile takildi, yeniden denemede yayinlandi
+    ve hicbir iz birakmadi. Gunluk beyin bu dosyayi okuyup "dun su kadar bolum
+    tutuldu" diyebilsin diye olay ANINDA yaziyoruz.
+
+    Bu fonksiyon uretimi ASLA durdurmaz: her hata yutulur.
+    """
+    try:
+        import json
+
+        from series.bible import data_dir
+        path = data_dir(meta.slug) / "hold_log.jsonl"
+        row = {
+            "ts": datetime.now(timezone.utc).isoformat(),
+            "part": int(n),
+            "durum": status,
+            "kod": result.reason_code,
+            "neden": str(result.reason or "")[:200],
+            "coherence": result.coherence or None,
+        }
+        with open(path, "a", encoding="utf-8") as fh:
+            fh.write(json.dumps(row, ensure_ascii=False) + chr(10))
+    except Exception as error:  # defter yazilamazsa uretim yine de surer
+        logger.warning(f"⚠️ hold_log yazilamadi: {error}")
+
+
 def _terminalize_failure(meta: SeriesMeta, n: int, status: str,
                          result: produce.ProduceResult) -> None:
     """Terminal kayıt ile kuyruk ilerlemesini üretimden önce atomik kalıcılaştır."""
@@ -493,6 +524,7 @@ def _terminalize_failure(meta: SeriesMeta, n: int, status: str,
     }
     if part.get("first_held_at"):
         fields["first_held_at"] = part["first_held_at"]
+    _append_hold_log(meta, n, status, result)
     meta.terminalize_and_advance(n, status, **fields)
 
 
@@ -538,6 +570,7 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
             )
             return True
         part["status"] = "qc_retry"
+        _append_hold_log(meta, n, "qc_retry", result)
         meta.save()
         logger.warning(
             f"🔁 Part {n} altyapi yeniden denemesi "
@@ -565,6 +598,7 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
         )
         return True
     part["status"] = "qc_retry"
+    _append_hold_log(meta, n, "qc_retry", result)
     meta.save()
     logger.warning(
         f"🔁 Part {n} qc_retry ({retry_count}/3, neden={code}); sonraki koşuda yeniden üretilecek."

@@ -110,8 +110,33 @@ def now_iso():
     return datetime.now(timezone.utc).isoformat()
 
 
+def safe_slug(channel):
+    """Reject slugs that could escape `kanallar/`, return it unchanged if safe.
+
+    Found by an independent adversarial suite on 2026-09-10:
+    `beyin.py beyin "unnatural-lab/../pwned"` exited 0 and wrote
+    `kanallar/unnatural-lab/../pwned/BEYIN.md`, i.e. OUTSIDE the intended tree.
+    Membership in CHANNELS is deliberately NOT required here: `beyin` only reads
+    a ledger and writing reports for ad-hoc slugs is a feature. Safety is not.
+    """
+    text = "" if channel is None else str(channel)
+    if not text.strip():
+        sys.exit("Bilinmeyen kanal , gecersiz slug: bos slug.")
+    if text != text.strip():
+        sys.exit("Bilinmeyen kanal , gecersiz slug: bastaki/sondaki bosluk. -> %r" % text)
+    if os.path.isabs(text) or (len(text) > 1 and text[1] == ":"):
+        sys.exit("Bilinmeyen kanal , gecersiz slug: mutlak yol kabul edilmez. -> %r" % text)
+    if "/" in text or "\\" in text or os.sep in text:
+        sys.exit("Bilinmeyen kanal , gecersiz slug: yol ayraci kabul edilmez. -> %r" % text)
+    if text in (".", "..") or text.startswith("."):
+        sys.exit("Bilinmeyen kanal , gecersiz slug: nokta ile baslayan slug kabul edilmez. -> %r" % text)
+    if any(ord(ch) < 32 for ch in text):
+        sys.exit("Bilinmeyen kanal , gecersiz slug: kontrol karakteri iceriyor.")
+    return text
+
+
 def channel_dir(channel, root=None):
-    return os.path.join(root or os.getcwd(), "kanallar", channel)
+    return os.path.join(root or os.getcwd(), "kanallar", safe_slug(channel))
 
 
 def ledger_path(channel, root=None):
@@ -172,6 +197,64 @@ def delivery_regime(channel, root=None):
     blob = json.dumps(fields, sort_keys=True, ensure_ascii=False)
     digest = hashlib.sha256(blob.encode("utf-8")).hexdigest()[:8]
     return {"id": digest, "alanlar": fields}
+
+
+def _parts_of(channel, root=None):
+    folder = series_dir(channel, root)
+    if not folder:
+        return None
+    meta = _read_json(os.path.join(folder, "series.json"))
+    parts = (meta or {}).get("parts")
+    return parts if isinstance(parts, dict) else None
+
+
+def part_regime(channel, part, root=None):
+    """Bir bolumun URETIM ANINDAKI teslim parmak izi.
+
+    Motor her bolumun uretim stack'ini (kaynak dosyalar + bible + auto_replenish)
+    hashleyip part kaydina `stack_sha256` yaziyor. Bu, olcum aninda yapilandirmayi
+    yeniden okumaktan KESIN olarak daha dogrudur: 24 saat kapisi yuzunden bir video
+    hep ayarlar DEGISMIS olabilecek bir gun sonra olculur. Olculdu: part 32 eski
+    ayarla yayinlandi, ertesi gun yeni ayarlar yururlukteyken olculecek.
+    """
+    parts = _parts_of(channel, root)
+    row = (parts or {}).get(str(part))
+    digest = (row or {}).get("stack_sha256")
+    if isinstance(digest, str) and len(digest) >= 8:
+        return digest[:8]
+    return None
+
+
+def published_regime(channel, video_id, root=None):
+    """video_id -> published.json -> part -> uretim anindaki parmak izi."""
+    folder = series_dir(channel, root)
+    if not folder:
+        return None
+    published = _read_json(os.path.join(folder, "published.json"))
+    if not isinstance(published, list):
+        return None
+    for entry in reversed(published):
+        if not isinstance(entry, dict):
+            continue
+        if (entry.get("results") or {}).get("youtube") == video_id:
+            return part_regime(channel, entry.get("part"), root)
+    return None
+
+
+def latest_regime(channel, root=None):
+    """EN SON yayinlanan bolumun parmak izi = bugunun rejimi."""
+    parts = _parts_of(channel, root)
+    if not parts:
+        return None
+    numaralar = sorted((int(k) for k in parts if str(k).isdigit()), reverse=True)
+    for numara in numaralar:
+        row = parts.get(str(numara)) or {}
+        if row.get("status") != "published":
+            continue
+        digest = row.get("stack_sha256")
+        if isinstance(digest, str) and len(digest) >= 8:
+            return digest[:8]
+    return None
 
 
 def regimes_path(channel, root=None):
@@ -248,6 +331,34 @@ def held_episodes(channel, root=None):
     return held
 
 
+def read_hold_log(channel, root=None):
+    """Motorun OLAY ANINDA yazdigi tutulma defteri.
+
+    series.json anlik durumu tutar, bu dosya ise gecmisi: bir bolum takilip
+    sonraki kosuda toparlanirsa series.json'da iz kalmaz ama burada kalir.
+    Donus: liste (dosya yoksa bos liste).
+    """
+    folder = series_dir(channel, root)
+    if not folder:
+        return []
+    path = os.path.join(folder, "hold_log.jsonl")
+    rows = []
+    if not os.path.exists(path):
+        return rows
+    with open(path, encoding="utf-8", errors="replace") as fh:
+        for raw in fh:
+            raw = raw.strip()
+            if not raw:
+                continue
+            try:
+                row = json.loads(raw)
+            except Exception:
+                continue
+            if isinstance(row, dict) and row.get("part") is not None:
+                rows.append(row)
+    return rows
+
+
 def faults_path(channel, root=None):
     return os.path.join(channel_dir(channel, root), "kusur.jsonl")
 
@@ -313,11 +424,19 @@ def record_faults(channel, root=None):
 
 
 def read_ledger(channel, root=None):
-    """Skip malformed lines instead of crashing. Returns (rows, skipped)."""
+    """Skip malformed lines instead of crashing. Returns (rows, skipped).
+
+    Duplicate `video_id` rows are collapsed to the LAST occurrence and counted
+    as skipped. Without this a duplicated row inflates the sample count and can
+    push a channel past the 15-video gate on fake evidence, which is exactly the
+    kind of false confidence the whole design tries to avoid.
+    """
     path = ledger_path(channel, root)
     rows, skipped = [], 0
     if not os.path.exists(path):
         return rows, skipped
+    by_id = {}
+    order = []
     with open(path, encoding="utf-8", errors="replace") as fh:
         for raw in fh:
             raw = raw.strip()
@@ -328,19 +447,46 @@ def read_ledger(channel, root=None):
             except Exception:
                 skipped += 1
                 continue
-            if isinstance(row, dict) and row.get("video_id"):
-                rows.append(row)
-            else:
+            if not (isinstance(row, dict) and row.get("video_id")):
                 skipped += 1
+                continue
+            vid = row["video_id"]
+            if vid in by_id:
+                skipped += 1          # duplicate, later row wins
+            else:
+                order.append(vid)
+            by_id[vid] = row
+    rows = [by_id[v] for v in order]
     return rows, skipped
 
 
 def write_ledger(channel, rows, root=None):
+    """Atomic write. Either the whole ledger lands, or the old one survives.
+
+    The previous version opened the target with "w", which truncates before the
+    first byte is written: a crash mid-write destroyed the entire ledger, and
+    `olc` calls this inside its per-video loop, so the window was wide open.
+    Now we write a sibling temp file, fsync it, and atomically replace.
+    `os.replace` is atomic on both POSIX and Windows.
+    """
     path = ledger_path(channel, root)
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    with open(path, "w", encoding="utf-8") as fh:
-        for row in rows:
-            fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+    tmp = path + ".tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8") as fh:
+            for row in rows:
+                fh.write(json.dumps(row, ensure_ascii=False) + "\n")
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+    except Exception:
+        # Leave the original untouched and drop the half-written temp file.
+        try:
+            if os.path.exists(tmp):
+                os.remove(tmp)
+        except OSError:
+            pass
+        raise
 
 
 def as_number(value):
@@ -429,7 +575,7 @@ def cmd_measure(channel, limit=15):
                  % (channel, ", ".join(sorted(CHANNELS))))
     sys.path.insert(0, TOOLS)
     try:
-        from kanal import youtube_rss
+        from kanal import youtube_rss_ex
         from olc import tek as measure_one
     except Exception as exc:
         sys.exit("arac/ modulleri yuklenemedi: %s" % exc)
@@ -444,7 +590,14 @@ def cmd_measure(channel, limit=15):
         print("teslim rejimi: %s" % regime["id"])
     else:
         print("teslim rejimi: kaynak yok (bu kanal icin seri dosyasi bulunamadi)")
-    feed = youtube_rss(CHANNELS[channel], limit)
+    # Besleme okunamadiysa DUR. Eskiden bos liste donuyordu ve arac bunu
+    # "yeni video yok" sanip exit 0 veriyordu: ag tamamen kopukken gunluk
+    # kosu YESIL goruunuyordu. Artik fail-closed.
+    feed, feed_error = youtube_rss_ex(CHANNELS[channel], limit)
+    if feed_error:
+        sys.exit("DUR: %s kanalinin RSS beslemesi okunamadi.\n  %s\n"
+                 "  Defter DEGISTIRILMEDI. Bu bir ag/erisim sorunudur, "
+                 "'yeni video yok' DEGILDIR." % (channel, feed_error))
     candidates = [v for v in feed if v["video_id"] not in known]
 
     # 24-hour gate: fresh videos are NOT measured, they arrive tomorrow.
@@ -472,6 +625,7 @@ def cmd_measure(channel, limit=15):
 
     for video in due:
         vid = video["video_id"]
+        yayin_rejimi = published_regime(channel, vid)
         print("  olculuyor: %s  %s" % (vid, (video.get("baslik") or "")[:44]))
         try:
             result = measure_one(
@@ -493,7 +647,11 @@ def cmd_measure(channel, limit=15):
             "wpm": result.get("wpm"),
             "sonuc": {"izlenme": video.get("rss_izlenme"), "begeni": None,
                       "gecmis": []},
-            "rejim": regime["id"] if regime else None,
+            # Once URETIM anindaki parmak izi (dogru olan), o yoksa olcum
+            # anindaki yapilandirma karmasi (yaklasik; kaynagi da yaziliyor).
+            "rejim": yayin_rejimi or (regime["id"] if regime else None),
+            "rejim_kaynak": ("yayin" if yayin_rejimi
+                             else ("olcum" if regime else None)),
             "olculdu_ts": now_iso(),
         })
         write_ledger(channel, rows)
@@ -548,6 +706,18 @@ def cmd_collect(channel):
     print("%d/%d kayit guncellendi -> %s"
           % (updated, len(rows), ledger_path(channel)))
 
+    # Fail-closed: tek bir kayit bile guncellenemediyse bu neredeyse kesinlikle
+    # ag/erisim sorunudur, "izlenme degismemis" DEGILDIR. Eskiden sessizce
+    # exit 0 veriyordu ve gunluk kosu yesil goruunuyordu.
+    if rows and updated == 0:
+        sys.exit("DUR: %d kaydin HICBIRI icin canli sayi alinamadi.\n"
+                 "  Bu bir ag/erisim sorunudur. Defter yazildi ama hicbir yeni\n"
+                 "  olcum eklenmedi." % len(rows))
+    # Kismi basarisizlik kirmizi degil ama sessiz de degil: gorunur olsun.
+    if rows and updated < len(rows):
+        print("UYARI: %d kayit icin canli sayi alinamadi (ag veya video kaldirilmis)."
+              % (len(rows) - updated))
+
 
 # -------------------------------------------------------------------- brain
 
@@ -578,6 +748,16 @@ def _comparison_row(upper, lower, name, label, unit):
 
 
 def cmd_brain(channel):
+    # Yazim hatasi sessizce yeni bir kanal acmamali. `flashpoint` (s eksik)
+    # bugune kadar `kanallar/flashpoint/BEYIN.md` diye BOS bir rapor uretiyordu
+    # ve okuyan onu `flashpoints` sanabilirdi.
+    # Kapi "CHANNELS uyesi VEYA defteri zaten var" seklinde: deneysel/ad-hoc
+    # defterler calismaya devam eder, yazim hatasi durur.
+    safe_slug(channel)
+    if channel not in CHANNELS and not os.path.exists(ledger_path(channel)):
+        sys.exit("Bilinmeyen kanal: %s\n  Gecerli: %s\n"
+                 "  (ya da once %s dosyasini olustur)"
+                 % (channel, ", ".join(sorted(CHANNELS)), ledger_path(channel)))
     rows, skipped = read_ledger(channel)
     total = len(rows)
 
@@ -612,14 +792,18 @@ def cmd_brain(channel):
     #   damga hic yoksa      -> havuzla, ama takibin YENI basladigini soyle
     #   guncel rejim yeterli -> YALNIZ onu kullan
     #   guncel rejim az      -> havuzla, ama kac kaydin guncel oldugunu SOYLE
+    # Guncel rejim = EN SON YAYINLANAN bolumun uretim parmak izi. Yapilandirmayi
+    # SIMDI okumak yaniltir: bugun degistirilen bir ayar dun yayinlanmis videoyu
+    # etkilemez, ama 24 saat kapisi yuzunden olcum hep bir gun sonra yapilir.
     regime = delivery_regime(channel)
+    regime_id = latest_regime(channel) or (regime["id"] if regime else None)
     stamped = [r for r in clean if r.get("rejim")]
-    current_rows = ([r for r in clean if r.get("rejim") == regime["id"]]
-                    if regime else [])
+    current_rows = ([r for r in clean if r.get("rejim") == regime_id]
+                    if regime_id else [])
     regime_note = None
     if not stamped:
         compare_rows = clean
-        if regime:
+        if regime_id:
             regime_note = ("Rejim takibi bugun basladi; defterdeki %d kaydin "
                            "hicbirinde damga yok, hepsi birlikte sayiliyor."
                            % total)
@@ -725,8 +909,8 @@ def cmd_brain(channel):
         out.append("")
         out.append("### Teslim rejimi")
         out.append("")
-        if regime:
-            out.append("- Guncel rejim: `%s`" % regime["id"])
+        if regime_id:
+            out.append("- Guncel rejim: `%s`" % regime_id)
         out.append("- %s" % regime_note)
         by_regime = {}
         for row in rows:
@@ -739,7 +923,7 @@ def cmd_brain(channel):
                                                       key=lambda kv: -kv[1])))
             known = read_regimes(channel)
             others = [k for k in by_regime if k not in ("damgasiz",)
-                      and (not regime or k != regime["id"])]
+                      and k != regime_id]
             if regime and others:
                 previous = known.get(others[0], {}).get("alanlar")
                 if isinstance(previous, dict):
@@ -765,6 +949,13 @@ def cmd_brain(channel):
         out.append("### Yayinlanmayanlar")
         out.append("")
         history = fault_stats[0] if fault_stats else 0
+        engine_log = read_hold_log(channel)
+        if engine_log:
+            son = engine_log[-1]
+            out.append("- Motor tutulma defterinde **%d** olay var "
+                       "(`hold_log.jsonl`); sonuncusu part %s / %s. Bu defter olay "
+                       "ANINDA yazilir, yani kendini toparlayan hatalar da iz birakir."
+                       % (len(engine_log), son.get("part"), son.get("kod") or "?"))
         if not held:
             out.append("- Su anda tutulan bolum yok.")
             if history:

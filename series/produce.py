@@ -566,6 +566,7 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     original_narr_text = (plan.get("narration") or "").strip()
     narr_text = original_narr_text
     narration_ok = False
+    narration_capped = False
     narration_failure = None
     music_ok = False
 
@@ -599,12 +600,15 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                 ):
                     narration_failure = "kısaltılmış anlatım videoya tam sığmadı"
                 else:
+                    mix_report: dict = {}
                     ffmpeg_tools.mix_voiceover(
                         str(out), str(audio_path), str(narrated),
                         voice_volume=1.0,
                         bg_duck=bible.native_mix_level,
                         amix_normalize=bible.master_lufs is None,
+                        report=mix_report,
                     )
+                    narration_capped = bool(mix_report.get("capped"))
                 if narrated.exists() and narrated.stat().st_size > 0:
                     out = narrated
                     narration_ok = True
@@ -614,6 +618,16 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
 
     # Anlatım BEKLENEN seride TTS başarısızsa sessiz kalma (the-signal dersi: sessiz
     # başarısızlık günlerce fark edilmez) ,  video müzik-only çıkar ama Telegram'a haber ver.
+    if narration_capped:
+        # Anlatim videoya sigmadi ve SONU KESILDI. Ses videoda kalir, cunku
+        # kesik anlatim hic anlatimsizdan iyidir; ama "teslim edildi" DEMEK
+        # yalandir ve butunluk kapisinin gormesi gereken sey tam da budur.
+        from series.series_runner import _series_alert
+        _series_alert(
+            bible.slug,
+            f"⚠️ *{bible.title}* ep{number}: anlatim videoya sigmadi, "
+            f"SONU KESILDI. Bolum butunlugu kusurlu sayiliyor.",
+        )
     if narr_cfg.get("channel") and original_narr_text and not narration_ok:
         from series.series_runner import _series_alert
         _series_alert(
@@ -675,7 +689,9 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
     # Bu bilgi bugune kadar bu fonksiyonun icinde kalip kayboluyordu; part 27
     # tam bu yuzden anlatimsiz yayinlandi ve part kaydinda izi kalmadi.
     if status is not None:
-        status["narration_ok"] = bool(narration_ok)
+        # Kirpilmis anlatim TESLIM EDILMIS sayilmaz.
+        status["narration_ok"] = bool(narration_ok and not narration_capped)
+        status["narration_capped"] = bool(narration_capped)
         status["narration_expected"] = bool(narr_cfg.get("channel") and original_narr_text)
         status["music_ok"] = bool(music_ok)
 

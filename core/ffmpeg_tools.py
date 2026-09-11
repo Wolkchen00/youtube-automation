@@ -1568,6 +1568,7 @@ def mix_voiceover(
     voice_volume: float = 1.0,
     bg_duck: float = 0.3,
     amix_normalize: bool = True,
+    report: dict | None = None,
 ) -> Path:
     """Mix voiceover narration into a video at a static original-audio level.
 
@@ -1578,6 +1579,9 @@ def mix_voiceover(
         voice_volume: Voiceover volume (default 1.0 = full)
         bg_duck: Static original-audio level multiplier for the whole mix
         amix_normalize: True = tarihsel ffmpeg varsayılanı; False = normalize=0
+        report: verilirse capped/tempo/video_extend buraya yazilir. Kirpma
+            YALNIZ log'a dusuyordu; cagiran bilmedigi icin anlatimi kesilmis
+            bolum "anlatim teslim edildi" diye kayda geciyordu.
 
     Returns:
         Path to the narrated video.
@@ -1626,6 +1630,10 @@ def mix_voiceover(
                     vo_chain += f",atempo={tempo:.3f}"
         except Exception:
             pass  # sure olculemezse eski davranis (best-effort)
+        if report is not None:
+            report["capped"] = bool(capped)
+            report["tempo"] = float(tempo)
+            report["video_extend"] = float(video_extend)
         normalize_suffix = "" if amix_normalize else ":normalize=0"
         mix_limit = ""
         if not amix_normalize:

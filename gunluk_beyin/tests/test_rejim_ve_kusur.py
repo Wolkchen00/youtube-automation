@@ -409,3 +409,57 @@ def test_beyin_uretilen_ve_uretilmeyeni_ayri_sayar(tmp_path):
     assert "1 tanesi URETILDI" in metin
     assert "1 tanesi HIC URETILMEDI" in metin
     assert "uretildi ama YAYINLANMADI" not in metin
+
+# ------------------------------------------------- rejim: URETIM ANI (dogru olan)
+
+
+def _yayin_kur(tmp_path, parts: dict, published: list):
+    rel = os.path.join("sentinal_ihsan", "unnatural-lab")
+    klasor = _sahte_seri(tmp_path, rel, _bible(), _series_parts(parts))
+    (klasor / "published.json").write_text(json.dumps(published, ensure_ascii=False),
+                                           encoding="utf-8")
+    return _beyin_kok(tmp_path)
+
+
+def test_rejim_olcum_aninda_degil_uretim_aninda_okunur(tmp_path):
+    """24 saat kapisi yuzunden olcum HEP bir gun sonra yapilir. O sirada ayarlar
+    degismis olabilir; dunku videoyu bugunku ayarla damgalamak yanlistir.
+    Motor zaten her bolume stack_sha256 yaziyor, dogru kaynak odur."""
+    m = _modul()
+    kok = _yayin_kur(
+        tmp_path,
+        parts={
+            "31": {"status": "published", "stack_sha256": "6d8fa04a" + "0" * 56},
+            "33": {"status": "published", "stack_sha256": "c623ea0f" + "0" * 56},
+        },
+        published=[
+            {"part": 31, "results": {"youtube": "ESKIVIDEO"}},
+            {"part": 33, "results": {"youtube": "YENIVIDEO"}},
+        ],
+    )
+    assert m.part_regime("unnatural-lab", 31, root=str(kok)) == "6d8fa04a"
+    assert m.part_regime("unnatural-lab", 33, root=str(kok)) == "c623ea0f"
+    assert m.published_regime("unnatural-lab", "ESKIVIDEO", root=str(kok)) == "6d8fa04a"
+    assert m.published_regime("unnatural-lab", "YENIVIDEO", root=str(kok)) == "c623ea0f"
+    assert m.published_regime("unnatural-lab", "YOKBOYLE", root=str(kok)) is None
+
+
+def test_guncel_rejim_en_son_YAYINLANAN_bolumden_gelir(tmp_path):
+    """Tutulan bir bolum rejimi belirlemez: o video kimseye ulasmadi."""
+    m = _modul()
+    kok = _yayin_kur(
+        tmp_path,
+        parts={
+            "33": {"status": "published", "stack_sha256": "c623ea0f" + "0" * 56},
+            "34": {"status": "qc_retry", "stack_sha256": "deadbeef" + "0" * 56},
+        },
+        published=[{"part": 33, "results": {"youtube": "YENIVIDEO"}}],
+    )
+    assert m.latest_regime("unnatural-lab", root=str(kok)) == "c623ea0f"
+
+
+def test_motor_damgasi_yoksa_yapilandirmaya_dusulur(tmp_path):
+    m = _modul()
+    kok = _yayin_kur(tmp_path, parts={"1": {"status": "published"}}, published=[])
+    assert m.latest_regime("unnatural-lab", root=str(kok)) is None
+    assert m.delivery_regime("unnatural-lab", root=str(kok)) is not None
