@@ -389,3 +389,98 @@ dipte kumelenirken (medyan 108) hayvan/yaratik ozneli kanallar tepede (25.500).
 Hayvansiz iki kazanan da "siradan bir adam" degil, superkahraman ve cizgi film.
 
 Karar Ihsan'in; bu not kanitin ne dedigini kayda gecirmek icindir.
+
+---
+
+# EK 4: raselranaai ve motionsbysubh.ai , 10 Eylul 2026
+
+Ihsan'in verdigi iki IG hesabi. Olcum: ig_kaz DOM kazima (189+189 reel),
+shortcode->pk cozumu ile GERCEK kronoloji, secilen reel'ler indirilip ffmpeg.
+
+## 1. TUZAK: izgara sirasi kronoloji DEGIL
+
+motionsbysubh.ai'de en cok begenilen 3 gonderi izgarada 1, 2, 3. siradaydi.
+Shortcode'lar pk'ya cozulunce ortaya cikti: izgara sirasi [4,6,7,5,8], yani
+ilk uc SABITLENMIS gonderi. "Son paylasimlar" penceresi onlarla kirleniyordu.
+Ilk okumam yanlisti, kronoloji cozulerek duzeltildi.
+
+## 2. Iki hesabin durumu (BEGENI, izlenme degil , 11. tuzak)
+
+| | motionsbysubh.ai | raselranaai |
+|---|---|---|
+| reel | 189 | 189 |
+| medyan begeni | 482 | 14 |
+| en iyi | 66.400 | 1.595 |
+| GERCEKTEN en yeni 20, medyan | 325 | 7 |
+| en eski 40, medyan | 2.161 | 9 |
+
+motionsbysubh.ai 6,6 KAT DUSMUS. Ihsan'in gozlemi dogru.
+raselranaai hic tutmamis: 189 reel, medyan 14 begeni.
+
+## 3. YouTube hesaplari , IKISI DE OLU
+
+| Kanal | Abone | Medyan | En iyi | Son paylasimlar |
+|---|---|---|---|---|
+| MOTIONSBYSUBH AI | 92 | 49 | 88.000 | 4-36 |
+| Rasel Rana AI | 29 | 422 | 1.800 | 1-13 |
+
+Bu ONEMLI: format YouTube'a TASINMAMIS. IG'de calisan sey orada calismamis.
+Biz YouTube kanali kuruyorsak bu bir uyaridir, kanit degil ama uyari.
+
+## 4. Zirve ile dip karsilastirmasi (ffmpeg)
+
+| | Zirve 66.400 | Eski hit 65.000 | Yeni dip 20 | Yeni dip 79 |
+|---|---|---|---|---|
+| cozunurluk | 720x1280 | 720x1280 | 720x1280 | 720x1280 |
+| sure | 15,2 sn | 18,9 sn | 24,5 sn | 32,1 sn |
+| kesme | 0 | 1 | 17 | 1 |
+| en uzun plan | 15,2 | 11,2 | 5,5 | 22,4 |
+| LUFS | -14,5 | -14,1 | -14,1 | -14,4 |
+| konusma | yok | yok | yok | yok |
+
+Isabetler KISA ve TEK PLAN. Yeni dusukler UZAMIS (24,5 ve 32,1 sn),
+biri 17 kesmelik montaja donmus. Ses dordunde ayni, ayirt edici DEGIL.
+Cozunurluk dordunde de 720x1280, bizim 1080x1920'den DUSUK.
+
+## 5. Tur ve gorsel ayrim (kareler cikarildi, goz ile bakildi)
+
+Tur: imkansiz bir film sahnesinin SAHTE KAMERA ARKASI.
+
+Zirve: yesil perde duvari, ekip uyeleri net, ON PLANDA iki kamera monitoru
+cekimi gosteriyor, tripodlar. "Bu sahte, iste nasil yapildi" ILK KAREDE okunuyor.
+
+Dip: ayni tur, benzer kalite, ama sahne dunyanin icinde. Yesil perde yok,
+monitor yok, ekip arka planda puslu. Bir FILM KARESI gibi duruyor.
+Ifsa ilk karede OKUNMUYOR.
+
+Bu, eski unnatural-lab dersiyle AYNI kural: odul ilk karede okunmali.
+
+Zirve videoda sol ustte SYNTX.AI filigrani var (sponsor/arac markasi).
+
+## 6. 11,9M iddiasi
+
+Ihsan "instagramda 11.9M izlenen shortsu var" dedi. Begeniye gore zirve
+DckORL2B8gx (66.400 begeni). 66.400/11.900.000 = %0,56 begeni orani,
+Reels icin makul. TAHMINDIR; kesin oynatma IG Insights'ta ya da
+media info API'de (su an 429 veriyor).
+
+## 7. Kopyalanabilecekler ve KACINILACAKLAR
+
+Kopyalanabilir (olculdu):
+- 15-19 saniye, TEK PLAN, 0-1 kesme
+- ifsanin ilk karede okunmasi (yesil perde + ekip + monitor)
+- konusma yok, muzik/ambiyans surukluyor
+- sabit karakter, ortama uygun kiyafet
+
+Kacinilacak (olculdu, bu hesabin kendi dususu):
+- videoyu 24-32 saniyeye uzatmak
+- 17 kesmelik montaja donmek
+- ifsayi kadrajdan cikarip film karesi gibi cekmek
+
+## 8. Olculemedi
+
+- Gercek oynatma sayilari (IG media info API 429 verdi, tekrar denenmeli)
+- retention / izlenme suresi (IG Insights gerekir, hesap bizim degil)
+- raselranaai'nin video icerigi (indirilmedi, sadece sayac olculdu)
+- YouTube hesaplarinin gercekten ayni kisilere ait oldugu DOGRULANMADI;
+  isim benzerligine dayaniyor.
