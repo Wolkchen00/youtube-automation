@@ -1,7 +1,7 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-11T02:20:22.660842+00:00
-Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\event-horizon\defter.jsonl` (15 kayit)
+Uretim: 2026-09-11T03:52:49.941565+00:00
+Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
@@ -12,14 +12,14 @@ nerede oturdugu gorulur.
 ## 1. DURUM
 
 - Olculen video: **15**
-- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 0/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **104**
-- Aralik: 13 ile 393 arasi
+- Aralik: 20 ile 393 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
 | EN IYI | 393 | 2026-09-05 | The Universe's SLOWEST Particle: Photon's Journe |
-| EN KOTU | 13 | 2026-09-10 | WASP-12b: Planet Being DEVOURED |
+| EN KOTU | 20 | 2026-09-10 | WASP-12b: Planet Being DEVOURED |
 
 Son yayinlar (tekrar etme):
 - 2026-09-10 , WASP-12b: Planet Being DEVOURED
@@ -30,7 +30,7 @@ Son yayinlar (tekrar etme):
 
 ### Teslim rejimi
 
-- Guncel rejim: `aa8804dd`
+- Guncel rejim: `c623ea0f`
 - Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
 
 ### Yayinlanmayanlar
