@@ -83,3 +83,14 @@ VERDICT: NOT YET
 - DEFERRED: register_character'in maliyet tahmini yok -> kayit bu tur uretime baglanmiyor (asagida).
 - DEFERRED: mock'lu kanit Kie'nin yaratigi reddetmesini yakalamaz -> kayit icin tek, izole, olculmus deney RF-ISSUES'e.
 - DEFERRED: insan olmayan karakter kaydi dogrulanmamis ucretli API ve cift kosullama -> Rock 4 yalniz referans gorsel (yaratik + set) + zincir. Ihsan'in "karakter olarak kaydet" onayi degil, onun AMACI (tutarlilik) korunuyor; mekanizma farki Ihsan'a acikca bildirildi.
+
+## Round 2: BASARISIZ, Codex kotasi doldu
+
+Stream: "You've hit your usage limit ... try again at 2:35 PM" (exit 1, -o dosyasi
+yok). Yeniden denenmedi (hafiza: kota bitince tekrar deneme ayni hatayi verir).
+
+USER OVERRIDE (Ihsan, 11 Eylul ~10:35 PDT): "Ben yapayim, Codex sonra incelesin".
+Visionary dort rock'u tur-1 ile duzeltilmis plana harfi harfine uyarak insa eder,
+kanitlari kendisi kosar, ep06 uretilir. Codex 2:35 PM sonrasi hem plani (tur 2)
+hem insa diff'ini bagimsiz inceler. Rock 1 ayri bir worktree'de (dal
+codex-we-rock1) bir alt ajana verildi; Visionary onun diff'ini satir satir inceler.
