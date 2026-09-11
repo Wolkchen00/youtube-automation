@@ -81,6 +81,10 @@ jobs:
         env:
           KANAL: ${{ inputs.kanal }}
           LIMIT: ${{ inputs.limit || '10' }}
+          # Yukleme listesinin BIRINCIL kaynagi. RSS 2026-09-10 itibariyle
+          # 404/500 veriyor (bizim kanallarda da, MrBeast'te de), bu anahtar
+          # olmadan `olc` her kanalda fail-closed durur.
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
           set -u
           if [ -n "${KANAL}" ]; then

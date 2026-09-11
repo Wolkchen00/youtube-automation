@@ -1,0 +1,39 @@
+{
+  "aa8804dd": {
+    "alanlar": {
+      "bible.aspect_ratio": "9:16",
+      "bible.audio_smooth": true,
+      "bible.block_degraded_publish": true,
+      "bible.duration_band": [
+        14,
+        22
+      ],
+      "bible.hook_teaser": {
+        "enabled": false
+      },
+      "bible.master_lufs": -14,
+      "bible.master_true_peak_margin_db": 0.2,
+      "bible.micro_trim": 0.25,
+      "bible.music": true,
+      "bible.required_layers": [
+        "title_card"
+      ],
+      "bible.resolution": "1080p",
+      "bible.title_card": {
+        "duration": 2.0,
+        "enabled": true,
+        "preserve_case": true,
+        "year_required": false
+      },
+      "cfg.narration": {
+        "max_words": 44,
+        "min_words": 30
+      },
+      "cfg.shot_seconds": "6",
+      "cfg.shots": 3,
+      "cfg.title_card": true,
+      "cfg.title_style": "a sharp English YouTube Shorts title using ONE of these SIX patterns only, never invent a new one: (1) '<Subject>: <striking epithet>', (2) 'The Universe's <superlative>: <X>', (3) '<Subject>: <impossible fact stated flat>', (4) 'What If <X>? <consequence>' only for the what-if family, (5) 'This <Subject> Should Not <verb>. It Does.', (6) 'This|These <Subject> <verb> <consequence>', with at most one ALL-CAPS word. No emoji, no hashtags, no surrounding quotes."
+    },
+    "ilk_gorulme": "2026-09-11T03:49:26.436946+00:00"
+  }
+}

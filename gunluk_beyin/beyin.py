@@ -575,7 +575,7 @@ def cmd_measure(channel, limit=15):
                  % (channel, ", ".join(sorted(CHANNELS))))
     sys.path.insert(0, TOOLS)
     try:
-        from kanal import youtube_rss_ex
+        from uploads import list_uploads
         from olc import tek as measure_one
     except Exception as exc:
         sys.exit("arac/ modulleri yuklenemedi: %s" % exc)
@@ -590,13 +590,17 @@ def cmd_measure(channel, limit=15):
         print("teslim rejimi: %s" % regime["id"])
     else:
         print("teslim rejimi: kaynak yok (bu kanal icin seri dosyasi bulunamadi)")
-    # Besleme okunamadiysa DUR. Eskiden bos liste donuyordu ve arac bunu
-    # "yeni video yok" sanip exit 0 veriyordu: ag tamamen kopukken gunluk
-    # kosu YESIL goruunuyordu. Artik fail-closed.
-    feed, feed_error = youtube_rss_ex(CHANNELS[channel], limit)
+    # Yukleme listesi okunamadiysa DUR. Eskiden bos liste donuyordu ve arac
+    # bunu "yeni video yok" sanip exit 0 veriyordu: kaynak tamamen kopukken
+    # gunluk kosu YESIL gorunuyordu. Artik fail-closed.
+    #
+    # Kaynak artik RSS DEGIL. Olculdu 2026-09-10: youtube.com/feeds/videos.xml
+    # hem ev IP'sinden hem GitHub runner'indan 404/500 veriyor; MrBeast ve
+    # Google kanallarinda da ayni. Birincil kaynak Data API v3, RSS yedek.
+    feed, feed_error, feed_source = list_uploads(CHANNELS[channel], limit)
     if feed_error:
-        sys.exit("DUR: %s kanalinin RSS beslemesi okunamadi.\n  %s\n"
-                 "  Defter DEGISTIRILMEDI. Bu bir ag/erisim sorunudur, "
+        sys.exit("DUR: %s kanalinin yukleme listesi okunamadi.\n  %s\n"
+                 "  Defter DEGISTIRILMEDI. Bu bir ag/erisim/kota sorunudur, "
                  "'yeni video yok' DEGILDIR." % (channel, feed_error))
     candidates = [v for v in feed if v["video_id"] not in known]
 
@@ -610,8 +614,9 @@ def cmd_measure(channel, limit=15):
         else:
             due.append(video)
 
-    print("kanal: %s  |  RSS: %d  |  defterde yok: %d  |  olculecek: %d"
-          % (channel, len(feed), len(candidates), len(due)))
+    print("kanal: %s  |  kaynak: %s  |  liste: %d  |  defterde yok: %d"
+          "  |  olculecek: %d"
+          % (channel, feed_source, len(feed), len(candidates), len(due)))
     for video, age in held:
         print("  BEKLETILDI (%.1f saat < %.0f): %s  %s"
               % (age, MIN_AGE_HOURS, video["video_id"],
