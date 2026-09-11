@@ -24,6 +24,7 @@ from series import bible as bible_module
 from series import produce, replenish
 from series.bible import Bible
 from series.series_meta import SeriesMeta, part_plan_path
+from tests._archived_fixture import archived_path, archived_search_roots
 
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -456,8 +457,11 @@ class DoctrineGateTests(unittest.TestCase):
 
 class InstalledSeriesTests(unittest.TestCase):
     def test_unnatural_lab_doctrine_regression(self):
-        path = bible_module.doctrine_path("unnatural-lab")
-        self.assertEqual(path, REPO_ROOT / "sentinal_ihsan" / "KONSEPT.md")
+        # unnatural-lab ve sentinal_ihsan/KONSEPT.md 2026-09-10'da arsivlendi; kanal
+        # kurali dondurulmus kopyada sinanir (tests/_archived_fixture.py).
+        with archived_search_roots():
+            path = bible_module.doctrine_path("unnatural-lab")
+        self.assertEqual(path, archived_path("sentinal_ihsan/KONSEPT.md"))
 
     def test_new_series_load_with_effective_values(self):
         detailed = {

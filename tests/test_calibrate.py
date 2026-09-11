@@ -843,19 +843,29 @@ class WorkflowAndCliTests(unittest.TestCase):
 
 class InstalledReadOnlyInvariantTests(unittest.TestCase):
     def test_calibrate_never_mutates_concepts_series_plans_or_published(self):
-        series = {
-            "unnatural-lab": REPO_ROOT / "sentinal_ihsan" / "unnatural-lab",
-            "from-scratch": REPO_ROOT / "aimagine" / "from-scratch",
-            "event-horizon": REPO_ROOT / "galactic_experience" / "event-horizon",
-            "flashpoints": REPO_ROOT / "shadowedhistory" / "flashpoints",
-        }
-        protected = [
-            REPO_ROOT / "sentinal_ihsan" / "KONSEPT.md",
-            REPO_ROOT / "aimagine" / "KONSEPT.md",
-            REPO_ROOT / "galactic_experience" / "KONSEPT.md",
-            REPO_ROOT / "shadowedhistory" / "KONSEPT.md",
-        ]
-        for folder in series.values():
+        # Filo testi CANLI seriyi tarar. Eski sabit liste (kanal basina bir seri +
+        # dort KONSEPT.md) 2026-09-10 arsivlemesiyle curudu: unnatural-lab ve
+        # sentinal_ihsan/KONSEPT.md gitti. Liste artik kalibrasyonun isleyebildigi
+        # (CHANNEL_BY_SLUG) TUM kurulu serilerdir; motorun listesi BAGIMSIZ bir
+        # dosya sistemi taramasina esit olmali ve bos olmamali.
+        installed = sorted(
+            folder.resolve()
+            for slug, folder in bible_module.all_series_dirs().items()
+            if slug in calibrate.CHANNEL_BY_SLUG
+        )
+        scanned = sorted(
+            path.parent.resolve()
+            for path in REPO_ROOT.glob("*/*/series.json")
+            if path.parent.name in calibrate.CHANNEL_BY_SLUG
+        )
+        self.assertEqual(installed, scanned, "motorun seri listesi dosya sistemiyle uyusmuyor")
+        self.assertTrue(installed, "kalibre edilebilir kurulu seri bulunamadi")
+        series = {folder.name: folder for folder in installed}
+        protected = []
+        for slug, folder in series.items():
+            doctrine = bible_module.doctrine_path(slug)
+            self.assertIsNotNone(doctrine, f"{slug}: doktrin (KONSEPT) bulunamadi")
+            protected.append(doctrine)
             protected.append(folder / "series.json")
             protected.extend(sorted((folder / "plans").glob("part*.json")))
             if (folder / "published.json").exists():
@@ -884,7 +894,7 @@ class InstalledReadOnlyInvariantTests(unittest.TestCase):
                     telegram_enabled=False,
                     now=datetime(2026, 7, 29, 13, tzinfo=timezone.utc),
                 )
-        self.assertEqual(write.call_count, 4)
+        self.assertEqual(write.call_count, len(series))
         after = {
             path: hashlib.sha256(path.read_bytes()).hexdigest()
             for path in protected

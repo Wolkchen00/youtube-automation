@@ -1,0 +1,59 @@
+{
+  "episode": {
+    "number": 24,
+    "title": "This MUG Pours UPWARD!"
+  },
+  "synopsis": "A man pours dark coffee from his mug only to watch the liquid stream defy gravity and flow upward in a perfect vertical line.",
+  "narration": "Pouring my first cup this morning and the coffee literally went straight up. My roommate thinks it's some kind of magnet trick. What do you think?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt hold the matte black mug tilted over the counter, the mug filling the lower third of the frame. A smooth column of dark coffee already stands in the air above the rim, one unbroken glossy stream climbing straight up past the top of the frame with a rounded leading edge; the stream holds an even width along its whole length, the coffee left inside the mug sits calm and level, and the counter below stays dry.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the coffee stream leaves the tilted mug and climbs upward through the air"
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt hold an empty clear glass above the tilted mug, catching the rising stream of coffee as it flows upward.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the rising stream reaches the glass held above the mug"
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt lower the clear glass, showing the coffee suspended in the air as a vertical liquid column between the mug and the glass.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the coffee stands still in the air as a vertical column between mug and glass"
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim. a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge. The frame remains completely locked in a close-up profile view of the kitchen counter. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt set the matte black mug upright on the kitchen counter, with the coffee resting quietly inside it.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "the coffee settles inside the upright mug with a level surface"
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Coffee mug",
+    "descriptor": "A matte black ceramic coffee mug with a thick handle and a slightly chipped rim",
+    "environment": "kitchen_counter",
+    "framing": "The frame remains completely locked in a close-up profile view of the kitchen counter.",
+    "anomaly_descriptor": "a smooth vertical column of dark coffee rising in one unbroken glossy stream with a rounded leading edge"
+  },
+  "face_visible": false,
+  "family": "reversed-physics",
+  "music": "Minimalist percussive beat beginning with a soft metallic tap. A slow, steady rhythm of low woody thuds repeats with wide gaps of silence. A single quiet, low-end drone sustains in the background, keeping the focus on the natural environment sounds and preventing any musical climax.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/rGBZn5JK/ep24-coffee-mug.png"
+  ],
+  "ref_prompt_sha256": "991914a7ec724654aa983fb4b255f3cf7903b64e3bab0f92939c1d3813f4392f"
+}

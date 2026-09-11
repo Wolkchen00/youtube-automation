@@ -21,6 +21,7 @@ from series import critic, preflight, produce, replenish, series_runner
 from series.bible import Bible
 from series.credit_gate import HardCreditCap
 from series.series_meta import SeriesMeta
+from tests._archived_fixture import archived_search_roots
 
 
 sys.stdout.reconfigure(encoding="utf-8")
@@ -477,6 +478,14 @@ class HardCapPathTests(unittest.TestCase):
 
 
 class GoldenNeutralityTests(unittest.TestCase):
+    def setUp(self):
+        # could-you-survive, night-archive, time-witness ve unnatural-lab 2026-09-10'da
+        # arsivlendi; onlar dondurulmus kopyadan yuklenir, canli seriler canli kalir
+        # (tests/_archived_fixture.py).
+        roots = archived_search_roots()
+        roots.start()
+        self.addCleanup(roots.stop)
+
     def assert_prechange_prompt_golden(self, slug, golden):
         meta = SeriesMeta.load(slug)
         bible = Bible.load(slug)

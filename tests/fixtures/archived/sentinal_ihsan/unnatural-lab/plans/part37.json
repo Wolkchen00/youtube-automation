@@ -1,0 +1,55 @@
+{
+  "episode": {
+    "number": 37,
+    "title": "Something Is WRONG With This TEA BAG"
+  },
+  "synopsis": "A man discovers a teabag that, when opened, reveals a tiny, impossibly deep living ecosystem complete with miniature plants and flowing water.",
+  "narration": "Just making my morning tea, same routine. But opening this teabag, I saw something truly wild inside. It's like a whole other world.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A small, square paper teabag, white with a familiar crimped edge, one thread with a paper tag attached, and one side already carefully cut open to reveal an impossibly deep, miniature verdant landscape. The interior of the teabag opens into an infinitely deep, self-contained miniature ecosystem, featuring living, microscopic flora, impossibly clear flowing water, and a palpable sense of vastness within its tiny paper confines. A close-up view of the teabag on a dark speckled stone-look counter, with hands interacting with the opening. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A small, white paper teabag is already cut open on a dark speckled stone-look counter, revealing a vibrant, miniature, living landscape inside, with tiny green plants and a visibly flowing stream of water far below its opening. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "The cut-open teabag reveals a vibrant, miniature, living landscape inside, with tiny green plants and a visibly flowing stream of water far below."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A small, square paper teabag, white with a familiar crimped edge, one thread with a paper tag attached, and one side already carefully cut open to reveal an impossibly deep, miniature verdant landscape. The interior of the teabag opens into an infinitely deep, self-contained miniature ecosystem, featuring living, microscopic flora, impossibly clear flowing water, and a palpable sense of vastness within its tiny paper confines. A close-up view of the teabag on a dark speckled stone-look counter, with hands interacting with the opening. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. A fingertip from a hand wearing a plain black crew-neck t-shirt gently taps the edge of the cut-open teabag's opening, causing a visible ripple to spread across the miniature flowing water deep within the impossibly vast interior. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "A fingertip gently taps the edge of the teabag's opening, causing a visible ripple to spread across the miniature flowing water deep within."
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A small, square paper teabag, white with a familiar crimped edge, one thread with a paper tag attached, and one side already carefully cut open to reveal an impossibly deep, miniature verdant landscape. The interior of the teabag opens into an infinitely deep, self-contained miniature ecosystem, featuring living, microscopic flora, impossibly clear flowing water, and a palpable sense of vastness within its tiny paper confines. A close-up view of the teabag on a dark speckled stone-look counter, with hands interacting with the opening. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. Hands wearing a plain black crew-neck t-shirt carefully tilt the cut-open teabag slightly, and the miniature internal landscape visibly shifts, revealing deeper, previously unseen areas and a further-receding horizon within the impossibly deep space. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "As the teabag is carefully tilted, the miniature internal landscape visibly shifts, revealing deeper, unseen areas and a further-receding horizon."
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A small, square paper teabag, white with a familiar crimped edge, one thread with a paper tag attached, and one side already carefully cut open to reveal an impossibly deep, miniature verdant landscape. The interior of the teabag opens into an infinitely deep, self-contained miniature ecosystem, featuring living, microscopic flora, impossibly clear flowing water, and a palpable sense of vastness within its tiny paper confines. A close-up view of the teabag on a dark speckled stone-look counter, with hands interacting with the opening. A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow. The cut-open teabag is held steady by hands wearing a plain black crew-neck t-shirt, and minute, slow-moving currents are clearly visible in the impossibly deep, clear miniature water within its opening, carrying tiny floating particles. The view stays in one unchanging position and angle for the whole shot.",
+      "seed": null,
+      "environment": "kitchen_counter",
+      "violation_observation": "Within the teabag's opening, minute, slow-moving currents are clearly visible in the impossibly deep, clear miniature water, carrying tiny floating particles."
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Teabag",
+    "descriptor": "A small, square paper teabag, white with a familiar crimped edge, one thread with a paper tag attached, and one side already carefully cut open to reveal an impossibly deep, miniature verdant landscape.",
+    "environment": "kitchen_counter",
+    "framing": "A close-up view of the teabag on a dark speckled stone-look counter, with hands interacting with the opening.",
+    "anomaly_descriptor": "The interior of the teabag opens into an infinitely deep, self-contained miniature ecosystem, featuring living, microscopic flora, impossibly clear flowing water, and a palpable sense of vastness within its tiny paper confines."
+  },
+  "face_visible": false,
+  "family": "impossible-interior",
+  "music": "A sparse, dry percussive bed featuring soft, rhythmic taps and low woody hits. A quiet sustained tone underpins a slow, steady pulse with ample negative space. No melody lines, no swells, no ethereal pads, and no vocals, starting immediately.",
+  "hook_shot": 3,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417"
+}

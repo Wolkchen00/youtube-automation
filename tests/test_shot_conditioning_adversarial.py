@@ -14,6 +14,7 @@ import re
 import pytest
 
 from series.bible import Bible
+from tests._archived_fixture import archived_path
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 
@@ -48,7 +49,8 @@ def test_unnatural_lab_chaining_stays_episode_scoped():
     sey chain_frames'in kapali olmasi degil, zincirin BOLUM ICINDE kalmasidir:
     capraz-bolum tasima hala ucuncu bir acik bayrak ister.
     """
-    s = json.loads((REPO / "sentinal_ihsan" / "unnatural-lab" / "bible.json")
+    # unnatural-lab 2026-09-10'da arsivlendi: dondurulmus kopya (tests/_archived_fixture.py).
+    s = json.loads(archived_path("sentinal_ihsan/unnatural-lab/bible.json")
                    .read_text(encoding="utf-8"))["series"]
     assert s.get("chain_scope") == "episode", "chain_scope episode olarak yazilmamis"
     assert s.get("allow_cross_episode_chaining") is not True, \

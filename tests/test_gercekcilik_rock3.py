@@ -17,6 +17,7 @@ from core import utils
 from series import credit_gate, critic, produce, series_runner
 from series.bible import Bible
 from series.series_meta import SeriesMeta
+from tests._archived_fixture import archived_path
 
 
 def rock3_bible(slug="rock3-test"):
@@ -679,7 +680,8 @@ class DurableBudgetAndPromptTests(unittest.TestCase):
         self.assertEqual(critic.strengthen_prompt("BASE", ["raw note"]), expected)
 
     def test_installed_series_enables_only_measure_scene_scan_and_800_cap(self):
-        path = pathlib.Path(__file__).resolve().parents[1] / "sentinal_ihsan/unnatural-lab/bible.json"
+        # unnatural-lab 2026-09-10'da arsivlendi: dondurulmus kopya (tests/_archived_fixture.py).
+        path = archived_path("sentinal_ihsan/unnatural-lab/bible.json")
         data = json.loads(path.read_text(encoding="utf-8"))
         qc = data["series"]["qc"]
         # Taban tavan 800'dur. 2026-09-02'de chain_frames deneyi icin TEK SEFERLIK

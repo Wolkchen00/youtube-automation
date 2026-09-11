@@ -1,0 +1,61 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "Why Won't This SOAP Melt?"
+  },
+  "synopsis": "A man tries to wash his hands only to find that his bar of soap behaves exactly like solid glass, cracking into sharp shards.",
+  "narration": "Washing my hands before dinner and this bar just cracked like a window. It feels like real glass now. Is this even safe to touch?",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt hold the pink bar of soap under a running faucet, the bar filling most of the frame. The bar is already split along a bright conchoidal fracture; its glassy translucent edge throws hard specular glints under the water while the broken face holds a mirror-smooth shine and water beads roll off the sharp facets.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "the soaked bar keeps a bright glassy fracture face with sharp translucent edges",
+      "state_carry": "a bright conchoidal fracture face on the pink bar"
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt turn the bar to show a bright conchoidal fracture face on the pink bar, then tap it against the ceramic rim so a second sharp translucent shard parts cleanly from the glassy break.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "a second translucent shard parts cleanly from the glassy break face",
+      "state_carry": "sharp soap shards rest on the sink edge"
+    },
+    {
+      "n": 3,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. sharp soap shards rest on the sink edge. Hands wearing a plain black crew-neck t-shirt stack the sharp, glass-like shards of pink soap on the edge of the sink, where they catch the light like polished gemstones.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "the stacked shards hold sharp edges and shine like polished glass"
+    },
+    {
+      "n": 4,
+      "duration": "6",
+      "prompt": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge. glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light. The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin. An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light. Hands wearing a plain black crew-neck t-shirt lift the largest broken section of pink soap beside the smaller shards resting on the sink edge.",
+      "seed": null,
+      "environment": "bathroom_sink",
+      "violation_observation": "the lifted broken section keeps rigid glass-like edges in the hand"
+    }
+  ],
+  "format_version": "tek-obje-4x6",
+  "object_card": {
+    "name": "Bar of soap",
+    "descriptor": "A rectangular bar of light pink soap with a faint brand imprint on top and one bright glassy break face along its long edge",
+    "environment": "bathroom_sink",
+    "framing": "The frame remains completely locked from a straight-on eye-level angle looking down into the sink basin.",
+    "anomaly_descriptor": "glass-hard soap with sharp conchoidal fracture edges and glossy translucent shards catching hard specular light"
+  },
+  "face_visible": false,
+  "family": "impossible-state-change",
+  "music": "Dry percussive sequence starting with a sharp plastic click in the first frame. Low, muffled wooden block hits pulse slowly and steadily. A very quiet, low-frequency hum sustains underneath, leaving vast empty spaces between each hit, maintaining a sterile and eerie atmosphere with no melodic elements.",
+  "hook_shot": 2,
+  "doctrine_sha256": "591933e790b87970993ec3d20e569935d81d3e3b72bae0ce08a2ddbeade4e417",
+  "prop_ref_urls": [
+    "https://i.ibb.co/SXPpVG4t/ep23-bar-of-soap.png"
+  ],
+  "ref_prompt_sha256": "fea7d9b3d72ff1b214a668b3299462030e0df90f96eadb91a0e92d35d4b4915f"
+}

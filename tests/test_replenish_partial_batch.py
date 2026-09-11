@@ -16,7 +16,6 @@ from __future__ import annotations
 
 import copy
 import json
-from pathlib import Path
 from unittest import mock
 
 import pytest
@@ -24,11 +23,20 @@ import pytest
 from series import replenish
 from series.bible import Bible
 from series.series_meta import SeriesMeta
+from tests._archived_fixture import archived_path, archived_search_roots
 
 
-REPO = Path(__file__).resolve().parents[1]
-LIVE_PLAN = REPO / "sentinal_ihsan" / "unnatural-lab" / "plans" / "part27.json"
-LIVE_SERIES = REPO / "sentinal_ihsan" / "unnatural-lab" / "series.json"
+# unnatural-lab 2026-09-10'da arsivlendi: "canli" plan ve config artik arsivden
+# hemen onceki agacin dondurulmus kopyasidir (tests/_archived_fixture.py).
+LIVE_PLAN = archived_path("sentinal_ihsan/unnatural-lab/plans/part27.json")
+LIVE_SERIES = archived_path("sentinal_ihsan/unnatural-lab/series.json")
+
+
+@pytest.fixture(scope="module", autouse=True)
+def _archived_unnatural_lab():
+    """Bible.load("unnatural-lab") ve ikmal yolu dondurulmus kopyayi okur."""
+    with archived_search_roots():
+        yield
 
 
 @pytest.fixture(scope="module")
