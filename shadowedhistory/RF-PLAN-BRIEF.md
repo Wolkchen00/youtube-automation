@@ -1,47 +1,65 @@
-# RF-PLAN , flashpoints uretim brief'ini gercege dondur
+# RF-PLAN , flashpoints: brief celiskisini bitir + kunye kuralini kanal ayarina bagla
 
 Tarih: 10 Eylul 2026 (Los Angeles)
 Dal: `codex-brief-v18` (worktree; ana agacta bes baska oturum var)
 Integrator: Codex
+Revizyon: r2 (Codex turu 1 sonrasi , iki temel varsayim duzeltildi)
 
 ## Core Focus (tek cumle)
 
-Uretici modelin OKUDUGU metin, kanalin bugun gecerli kurallariyla ayni seyi
-soylesin , ve kunye taninir bir sey adlandirsin.
+Uretici model tek bir kural kumesi okusun: sayilar tek kaynaktan gelsin ve kunye
+taninir bir sey adlandirsin.
 
 ---
 
-## Sorun , ikisi de olculdu
+## Prompt'un yapisi (turu 1'de dogrulandi, plan bunun uzerine kuruluyor)
 
-### Kusur A: brief v1.6'da kalmis, yapilandirma v1.8'e gecmis
+`series/replenish.py:617` `_build_prompt(...) -> tuple[str, str]` ve docstring'i
+`"(contents, system_instruction) döndür"` diyor. Yani modele IKI AYRI kanal gidiyor:
 
-`series.json` -> `auto_replenish.brief` metni prompt'a "CREATIVE BRIEF for new
-episodes" olarak enjekte ediliyor (`series/replenish.py:1021-1023`) ve prompt
-modele *"follow the CREATIVE BRIEF strictly"* diyor (`:741`). Yani model icin
-KAYNAK metin budur.
+| Kanal | Icerigi | Oncelik |
+|---|---|---|
+| `system_instruction` | JSON semasi, TITLE_CARD kurali (`:748`), sema yer tutucusu (`:701`), NARRATION kurali `{wmin}-{wmax}` (`:740`), tempo/tam-cumle kurallari (`:732-739`) | YUKSEK |
+| `contents` | SERIES/ART STYLE, **CREATIVE BRIEF** (`:1021-1023`), calibration, topic pool, history | kullanici seviyesi |
 
-Ama metin hala v1.6 kurallarini tasiyor:
+Bu, planin ilk surumundeki iki varsayimi curutuyor:
 
-| brief ne diyor | v1.8 ve yapisal config ne diyor |
+**DUZELTME 1 (Codex turu 1, hakliydi):** "v1.8 modele hic ulasmadi" iddiam YANLISTI.
+Sistem prompt'u v1.8'i zaten basiyor , `:740` kelime butcesini yapisal config'ten
+(`{wmin}-{wmax}` = 26-36) uretiyor, `:732-739` ise "measured documentary pace of
+~2 words per second", konusma penceresi ve "must end with a complete sentence"
+kurallarini basiyor (`voiceover_continuity` acik oldugu icin). Gercek kusur
+EKSIKLIK degil, **CELISKI**: brief ayni sayilari farkli soyluyor.
+
+**DUZELTME 2 (Codex turu 1, hakliydi):** kullanici seviyesindeki brief, sistem
+seviyesindeki sabit kurali guvenilir bicimde EZEMEZ. Rock 2'nin ilk surumu bu
+yuzden saglam degildi ve degistirildi.
+
+---
+
+## Kusur A: brief, sistem talimatiyla CELISIYOR
+
+`auto_replenish.brief` metnindeki uc ifade:
+
+| brief (contents) | sistem talimati / yapisal config |
 |---|---|
 | "dayanak: KONSEPT.md **v1.6**, 2026-07-29" | doktrin **v1.8** (2026-09-01) |
-| "Iki cekim vardir, toplam yaklasik **12 sn**" | `shots: 2` x `shot_seconds: "10"` = **~19 sn** |
-| "Narration **26-38** kelimedir" | `narration: {min_words: 26, max_words: 36}` |
+| "Iki cekim vardir, toplam yaklasik **12 sn**" | `shots: 2` x `shot_seconds: "10"` |
+| "Narration **26-38** kelimedir" | `:740` prompt'a **26-36** basiyor |
 
-Yani model her bolumde "12 saniyelik iki cekim, 26-38 kelime" hedefiyle yaziyor,
-boru hatti ise 2x10 sn uretip 26-36 kelime dogruluyor. `KONSEPT.md:29-42` v1.8'i
-Ihsan'in 2026-09-01 karari olarak kaydediyor; gerekcesi izleyici geri bildirimi
-(*"konusmaci cok hizli konusuyor ve cumlesini bitiremeden video bitiyor"*).
-Brief guncellenmedigi icin o karar modele HIC ULASMADI.
+Model ayni prompt icinde hem 26-36 hem 26-38 goruyor. Bu, en iyi ihtimalle
+gurultudur; kotu ihtimalle kullanici metni sistem kuralini gevsetir.
 
-### Kusur B: kunye kurali yok, ve olculen fark tam orada
+## Kusur B: kunye kurali "ozne adini yaz" diyor
 
-Motorun sabit kurali (`series/replenish.py:748`):
-`'- TITLE_CARD: "title" = the subject/site name (max 40 chars)'`
+Iki yerde birden, ikisi de `system_instruction` icinde:
 
-"Ozne adi" demek, konu bilinmeyen bir kisi veya yer oldugunda kunyeye TANINMAYAN
-bir ozel isim yazilmasi demek. Son 1 haftanin olcumu (7 bolum, yt-dlp + ffmpeg,
-kareler goz ile incelendi):
+- `:748` `'- TITLE_CARD: "title" = the subject/site name (max 40 chars)'`
+- `:701` sema yer tutucusu: `"title": "<subject name, max 40 chars>"`
+
+Konu bilinmeyen bir kisi veya yer oldugunda bu, kunyeye TANINMAYAN bir ozel isim
+yazdirir. Son 1 haftanin olcumu (7 bolum, yt-dlp + ffmpeg, kareler goz ile
+incelendi):
 
 | Kunyede yazan | Izlenme |
 |---|---|
@@ -53,64 +71,71 @@ kareler goz ile incelendi):
 | HENRY "BOX" BROWN / Richmond, 1849 | 5 |
 
 Belirleyici kanit Kiska: ilk karesi haftanin **en parlagi** (132/255) ve
-kompozisyonu en iyisi (asker cikarmasi, derinlik, net ozne) , teknik olarak
-kusursuz. YouTube basligi da iyiydi ("The Real Reason America Invaded An Empty
-Island!"). Kunyedeki taninmayan ozel isim tek basina harcadi.
+kompozisyonu en iyisi , teknik olarak kusursuz, YouTube basligi da iyi
+("The Real Reason America Invaded An Empty Island!"). Kunyedeki taninmayan ozel
+isim tek basina harcadi.
 
-Henry Box Brown'da iki kaldirac birden yanlis: bilinmeyen kisi adi ARTI haftanin
-en karanlik karesi (36/255, tahta sandik ici, taninir hicbir sey yok).
-
-Tam katalog (29 bolum) ayni yone isaret ediyor: baslik KALIBI hicbir sey
-ongormuyor (her kalipta hem hit hem sifir var), baslikin OZNESI onguruyor ,
-SEY medyan 80, OLAY 20, KISI 8. Ayrinti: `shadowedhistory/REELYZE-RAPOR.md`
-"EK , BASLIK ANALIZI".
+Tam katalog (29 bolum): baslik KALIBI hicbir sey ongormuyor (her kalipta hem hit
+hem sifir var), baslikin OZNESI onguruyor , SEY medyan 80, OLAY 20, KISI 8.
+Ayrinti: `shadowedhistory/REELYZE-RAPOR.md` "EK , BASLIK ANALIZI".
 
 ---
 
-## Rock 1: brief'i v1.8 ile hizala
+## Rock 1: brief'ten cakisan SAYILARI cikar (yeniden yazmak degil, CIKARMAK)
 
-**Yapilacak:** `shadowedhistory/flashpoints/series.json` ->
-`auto_replenish.brief` metni icinde UC ifade duzeltilir:
+**Yapilacak:** `shadowedhistory/flashpoints/series.json` -> `auto_replenish.brief`:
 
-1. `dayanak: shadowedhistory/KONSEPT.md v1.6, 2026-07-29`
-   -> `dayanak: shadowedhistory/KONSEPT.md v1.8, 2026-09-01`
-2. `(1) IMZA FORMAT: Iki cekim vardir, toplam yaklasik 12 sn.`
-   -> sure ~19 sn olacak sekilde (iki cekim x 10 sn). Metnin geri kalani
-      (shot 1 CARPMA / shot 2 KANIT-BUKUM tarifi) AYNEN kalir.
-3. `(5) SES: Narration 26-38 kelimedir`
-   -> `26-36`. Ayrica v1.8(c) ve v1.8(d) kurallari eklenir: anlatim DAIMA tam
-      cumleyle biter, register olculu ve acele etmeyen belgesel anlatimidir.
-      (Su an brief bunlari hic soylemiyor; v1.8 ikisini de acikca karara bagladi.)
+1. `dayanak: ... KONSEPT.md v1.6, 2026-07-29` -> `v1.8, 2026-09-01`
+2. `(1) IMZA FORMAT` icindeki **"toplam yaklasik 12 sn"** ifadesi SILINIR.
+   Yerine baska bir sure YAZILMAZ. Cumlenin geri kalani (iki cekim, shot 1
+   CARPMA / shot 2 KANIT-BUKUM tarifi) aynen kalir.
+3. `(5) SES` icindeki **"26-38 kelimedir"** ifadesi SILINIR. Yerine baska bir
+   sayi YAZILMAZ; cumle "Narration uzunlugu ve temposu sistem talimatindaki
+   NARRATION kuralina tabidir" gibi bir yonlendirmeye cevrilir.
 
-**DOKUNMA:** `narration.min_words/max_words` (zaten 26-36, dogru),
-`shots`, `shot_seconds` (zaten 2 ve "10", dogru). Yapisal config DOGRU;
-duzeltilecek olan yalniz METIN.
+**Neden yeniden yazmak degil silmek:** sayiyi brief'te de tekrarlamak, bugunku
+kaymanin ta kendisini uretti , config degisti, prose degismedi. Codex turu 1
+ayrica "~19 sn yazmak da sistem prompt'undaki ham sure ifadesiyle catisir" dedi.
+Tek kaynak yapisal config olsun; brief SAYI TASIMASIN.
 
-## Rock 2: kunye kurali brief'e girsin
+**DOKUNMA:** `narration.min_words/max_words`, `shots`, `shot_seconds` , ucu de
+dogru, yapisal config degismiyor.
 
-**Yapilacak:** ayni `brief` metnine YENI bir numarali kural eklenir (mevcut
-kurallarin numaralandirmasi bozulmadan, sona (9) olarak):
+## Rock 2: kunye kuralini kanal ayarina bagla (`title_style` emsaliyle)
 
-Kuralin soylemesi gerekenler:
-- Kunyenin `title` alani, ORTALAMA IZLEYICININ TANIDIGI bir seyi adlandirmali.
-- Konu bilinmeyen bir kisi veya yer ise, kunye O ISMI YAZMAZ , hikayedeki
-  taninir seyi (yapi, nesne, olay tipi, kavram) yazar. Konu ELENMEZ, yalnizca
-  kunyenin OZNESI degisir.
-- Taninir bir ozel isim varsa (Brooklyn Bridge, Colosseum, Eiffel Tower,
-  Hundred Years' War) dogrudan o yazilir.
-- `subtitle` yer + yil tasimaya devam eder, ama yer TANINIR olani olmali
-  (ornek: "Nubia, Egypt" yerine "Abu Simbel, Egypt"; bilinmeyen bolge adi tek
-  basina yazilmaz).
-- Olculen ornekler kurala EK olarak yazilir ki model neyi kastettigimizi gorsun:
-  iyi -> BROOKLYN BRIDGE / New York City, 1883 ; kotu -> KISKA INVASION /
-  Aleutian Islands, 1943.
+**Neden brief yetmiyor:** kural `system_instruction` icinde; brief `contents`
+icinde. Kullanici metni sistem kuralini guvenilir bicimde ezemez.
 
-Metin brief'in geri kalaniyla ayni dilde (Turkce) ve ayni uslupta yazilir.
+**Emsal:** ayni dosyada `:729` `title_rule = title_style or (varsayilan)`.
+YouTube BASLIK kurali zaten kanal ayariyla eziliyor. Kunye kurali icin AYNI
+kalip kullanilacak , yeni bir mimari degil, mevcut kalibin ikinci kullanimi.
 
-**DOKUNMA:** `series/replenish.py` icindeki sabit `TITLE_CARD` kurali. Motor
-dort kanali besliyor ve bu bulgu YALNIZ flashpoints'te olculdu; kanal kapsamli
-kural kanal dosyasina yazilir. Prompt zaten "follow the CREATIVE BRIEF strictly"
-diyor, yani brief motor metnini daraltabilir.
+**Yapilacak:**
+
+1. `series/replenish.py`, `_build_prompt` icinde `title_card_style` oku
+   (`cfg.get("title_card_style")`), ve **IKI yeri birden** ezsin:
+   - `:748` `tc_rule` , ayar varsa onun metni kullanilir
+   - `:701` `tc_shape` yer tutucusu , ayar varsa `"<subject name, max 40 chars>"`
+     yerine ayarin belirttigi tarif yazilir
+   Ayar YOKSA her iki yer de BUGUNKU metni aynen uretir. Diger uc kanalda bu
+   anahtar olmadigi icin ciktilari BIT BIT AYNI kalir.
+2. `shadowedhistory/flashpoints/series.json` -> `auto_replenish.title_card_style`
+   eklenir. Metnin soylemesi gerekenler:
+   - `title`, ORTALAMA IZLEYICININ TANIDIGI bir seyi adlandirir.
+   - Konu bilinmeyen bir kisi veya yer ise o isim kunyeye YAZILMAZ; hikayedeki
+     taninir sey (yapi, nesne, olay tipi, kavram) yazilir. Konu ELENMEZ, yalnizca
+     kunyenin OZNESI degisir.
+   - Taninir bir ozel isim varsa dogrudan o yazilir.
+   - `subtitle` yer + yil tasir; yer TANINIR olani olmali (bilinmeyen bolge adi
+     tek basina yazilmaz).
+   - Olculmus ornekler: iyi -> `BROOKLYN BRIDGE / New York City, 1883`;
+     kotu -> `KISKA INVASION / Aleutian Islands, 1943`, duzeltilmisi ->
+     `EMPTY ISLAND INVASION / Alaska, 1943`.
+   - Uzunluk sinirlari korunur (title <=40, subtitle <=48 veya yil_gerekli
+     modunda <=60/<=60; mevcut `validate_title_card` kurallari degismez).
+
+**DOKUNMA:** `tc_rule`'un `tc_year_required is False` kolu (`:745-746`, celestial
+metni , event-horizon'a ait), `validate_title_card`, `title_style`.
 
 ---
 
@@ -118,36 +143,48 @@ diyor, yani brief motor metnini daraltabilir.
 
 Yeni dosya: `tests/test_flashpoints_brief_sozlesmesi.py`
 
-Bu test METNI degil, MODELE GIDEN PROMPT'U denetler. Gerekcesi: brief'i
-duzeltmek ancak prompt'a girdigi olculde bir sey degistirir; config'e dogru
-cumleyi yazip prompt'un onu tasidigini varsaymak bos bir kanittir.
+Test METNI degil MODELE GIDEN IKI KANALI denetler ve ikisini AYRI AYRI ele alir
+(Codex turu 1: tek siralanmis prompt gibi davranmak yanlis).
 
-Testin olcmesi gerekenler:
+`_build_prompt` cagrilabilirligi turu 1'de dogrulandi: ag, API anahtari,
+calibration veya dolu history gerekmiyor; `series.replenish` import'u
+`python-dotenv` + `requests` istiyor ve import aninda `logs/` ile cikti
+klasorlerini olusturuyor , test depo kokunden calistirilir.
 
-1. **Prompt gercekten kuruluyor.** Kurucu fonksiyon
-   `series.replenish._build_prompt(meta, bible, cfg, start, batch, history,
-   fix_errors=None, calibration=None)` (satir 617) flashpoints'in GERCEK
-   `SeriesMeta` + `Bible` + `auto_replenish` degerleriyle cagrilir; iki elemanli
-   bir demet doner, prompt metni o demettedir. Ciktida `CREATIVE BRIEF for new
-   episodes:` basligi ve brief metni GECER.
-2. **Sure celiskisi bitti:** uretilen prompt'ta "12 sn" IFADESI GECMEZ.
-3. **Kelime butcesi celiskisi bitti:** prompt'ta "26-38" GECMEZ, "26-36" GECER,
-   ve bu deger `auto_replenish.narration` ile AYNIDIR (test iki kaynagi
-   karsilastirir, sabit yazmaz).
-4. **Dayanak guncel:** brief metni "v1.8" gecer, "v1.6" GECMEZ.
-5. **Kunye kurali prompt'ta:** uretilen prompt taninirlik kuralini tasir
-   (anahtar ifadeler test icinde tanimlanir, brief metninden kopyalanmaz ki
-   test metne degil ANLAMA baglansin , en az: "tanin" kokunu iceren kural
-   satiri ve "Brooklyn Bridge" ile "Kiska" ornekleri).
-6. **v1.8 anlatim kurallari prompt'ta:** "tam cumle" ve "belgesel" kurallari
-   gecer.
-7. **Bos gecmeyen capa:** brief alani gecici olarak BOSALTILMIS bir cfg kopyasi
-   ile ayni prompt kurulur ve yukaridaki ifadelerin HICBIRI gecmez. Bu, 1-6'nin
-   bos yere gecmedigini olcer.
-8. **Kapsam:** `series/replenish.py` ve `series/produce.py` bu kosuda
-   DEGISMEMIS olmali (test degil, Level 10 diff incelemesiyle dogrulanir).
-9. **JSON butunlugu:** `series.json` hala gecerli JSON, `topic_pool` girdi
-   sayisi degismemis, `next_part`/`parts` bloklari korunmus.
+1. **Iki kanal ayri ayri alinir.** `contents, system_instruction = _build_prompt(...)`
+   flashpoints'in GERCEK `SeriesMeta`, `Bible` ve `auto_replenish` degerleriyle.
+2. **Brief `contents` icinde, kural `system_instruction` icinde** , test bu
+   ayrimi acikca dogrular (yer degistirirlerse test duser).
+3. **Brief SAYI TASIMIYOR:** `contents` icindeki CREATIVE BRIEF BOLUMU IZOLE
+   EDILIR (baslik satirindan bir sonraki bolum basligina kadar) ve o blokta
+   `\d+\s*-\s*\d+\s*kelime` ile `\d+\s*sn` kaliplarinin HICBIRI eslesmez.
+   Codex turu 1: yalniz "12 sn" ve "26-38" dislamak zayif , baska yanlis bir
+   sayi da gecerdi.
+4. **Sistem talimati sayiyi yapisal config'ten basiyor:** `system_instruction`
+   icindeki NARRATION satirindaki aralik, `auto_replenish.narration` degerleriyle
+   AYNI (test iki kaynagi karsilastirir, sabit yazmaz).
+5. **Dayanak guncel:** brief blogu "v1.8" gecer, "v1.6" GECMEZ.
+6. **Kunye kurali sistem talimatinda:** `system_instruction` taninirlik
+   KURALININ KENDISINI tasir , yalnizca ornekler degil. En az su uc sey ayri ayri
+   aranir: (a) bilinmeyen ismin yazilmayacagi YASAGI, (b) yerine taninir seyin
+   yazilacagi TALIMATI, (c) `EMPTY ISLAND INVASION` duzeltilmis ornegi.
+   Codex turu 1: parcalara bakmak, tersine cevrilmis veya disi sokulmus bir
+   kurali da gecirirdi.
+7. **Sema yer tutucusu da degismis:** `system_instruction` icindeki JSON
+   semasinda `"<subject name, max 40 chars>"` GECMEZ.
+8. **Bos gecmeyen capa (Codex turu 1 [KILL] sonrasi yeniden yazildi):**
+   `title_card_style` ve `brief` BOSALTILMIS bir cfg kopyasiyla ayni cagri
+   yapilir ve YALNIZCA brief'e/ayara AIT isaretler kaybolur:
+   - kaybolmali: taninirlik kurali, `EMPTY ISLAND INVASION`, CREATIVE BRIEF blogu
+   - KAYBOLMAMALI: `{wmin}-{wmax}` araligi, tempo/tam-cumle kurallari, JSON
+     semasi , bunlar yapisal config'ten gelir ve brief bosken de durmalidir.
+   Eski surum "her sey kaybolsun" diyordu ve imkansizdi.
+9. **Diger kanallar bit bit ayni:** `title_card_style` TASIMAYAN bir kanal
+   (`event-horizon`) icin uretilen `system_instruction`, bu kosudan ONCEKI kodla
+   uretilen metinle AYNI olmali. Pratik test: ayar yokken `tc_rule` ve `tc_shape`
+   bugunku sabit metinleri birebir uretir.
+10. **JSON butunlugu:** `series.json` gecerli JSON; `topic_pool` girdi sayisi,
+    `next_part`, `parts` ve `title_style` degismemis.
 
 **Calistirma:**
 
@@ -161,22 +198,24 @@ python -m pytest tests/test_flashpoints_brief_sozlesmesi.py -q
 python -m pytest tests/test_doctrine_gate.py tests/test_flashpoints_kanal_sozlesmesi.py -q
 ```
 
-`test_doctrine_gate.py` flashpoints icin `shot_seconds == "10"`, `shots == 2` ve
-`narration (26, 36)` bekliyor , DEGISMEDEN gecmeli. Gecmiyorsa yapisal config'e
-dokunulmustur, geri al.
-
 ---
 
-## Kapsam disi
+## Kapsam disi , Codex turu 1'de bulundu, GERCEK, ama bu kosuda YOK
 
-- `series/` ve `core/` altindaki hicbir `.py`
-- `shadowedhistory/KONSEPT.md` , doktrin dogru, eksik olan brief metniydi;
-  doktrine dokunmak `doctrine_sha256` pinini kirar ve ikmali durdurur
-- `auto_replenish.title_style` , YouTube BASLIK kaliplarini tutuyor.
-  "Fact Or Ancient Propaganda?" kalibi olculdu (4 kullanim, medyan 24, kanal
-  medyani da 24) ama n=4 ve icinde 143 izlenmeli Colosseum var; kalip
-  kaldirmak icin kanit YETERSIZ. `RF-ISSUES.md`'ye olcum maddesi olarak gider.
-- `topic_pool` icerigi
-- Kuyruktaki `plans/part31-35.json` , part32 ve part33'un kunyeleri bugun
-  ELLE duzeltildi (5d14976); bu kosu onlara dokunmaz
-- `calibration.json` , makine uretimi (`series/calibrate.py`), elle duzenlenmez
+- **`gentle, loopable resolve` celiskisi:** sabit bolum-yayi metni, flashpoints'in
+  "daha yakin ve sert, eylem surerken biten" ikinci cekimiyle catisiyor.
+  Ayri rock; bolum yayi metnini kanal ayarina baglamak gerekir.
+- **`topic_pool` tam sayi tohum varsayimi:** motor `n15-...` bicimli string ID'li
+  calibration kart konulari enjekte edebiliyor ve onlari once istiyor; brief
+  "tam sayi seed_id zorunlu" diyor. Bugun `extra_topics` bos oldugu icin
+  patlamiyor , sessiz bir mayin.
+- **Aile tekrari istisnasi:** brief "ayni aile ust uste kullanilamaz" diyor,
+  motor ise baska aile kalmadiginda ilk bolumde tekrara IZIN veriyor.
+- **Hicbir dogrulayici taninirligi ZORLAMIYOR:** `_validate_batch` uzunluk ve yil
+  disinda kunyeye bakmiyor. Yani bu kosu prompt'u duzeltir, CIKTIYI garanti
+  ETMEZ. Garanti istenirse tohum basina deterministik kunye etiketi veya kanal
+  kapsamli bir dogrulama sozlesmesi gerekir.
+- `auto_replenish.title_style` , "Fact Or Ancient Propaganda?" kalibi olculdu
+  (4 kullanim, medyan 24 = kanal medyani) ama n=4 ve icinde 143 izlenmeli
+  Colosseum var; kalip kaldirmak icin kanit yetersiz.
+- `KONSEPT.md`, `calibration.json`, `topic_pool` icerigi, kuyruktaki planlar.
