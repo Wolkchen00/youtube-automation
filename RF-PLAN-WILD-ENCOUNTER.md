@@ -54,8 +54,18 @@ yerine DONDURULMUS fixture'dan okuyacak hale getir.
   (or. `tests/_archived_fixture.py`). `series_data/<slug>` ya da `Bible.load`
   yoluyla okuyan testler icin mevcut bir enjeksiyon noktasi (monkeypatch ile
   kok dizin) kullanilir.
-- "kurulu seri >= 8" testi: neyi korudugunu raporla, ayni korumayi fixture
-  kaydina karsi yap. Esik sayisini gevsetme.
+- IKI SINIF TEST VAR, ayri ele alinir (SPM tur 1):
+  (a) BELIRLI bir arsiv serisini sabitleyen testler (unnatural-lab
+      config/plan/doktrin, KONSEPT.md): dondurulmus fixture'a gecer.
+  (b) FILO testleri (kurulu TUM serileri tarayip izolasyon / salt-okunur /
+      "baska seri X kazanmadi" gibi degismezleri denetleyenler): CANLI serileri
+      taramaya DEVAM eder. Yalniz arsivin kirdigi sey duzeltilir (sabit slug
+      listesi, sabit sayi esigi). Fixture'a cevirmek canli filodaki gelecek
+      bozulmayi gizler, yasak.
+- Sayi esigi ("kurulu seri >= 8"): sabit sayi yerine, yardimcinin buldugu
+  liste ile BAGIMSIZ bir dosya sistemi taramasinin (series.json tasiyan canli
+  seri dizinleri) ESITLIGI assert edilir, arti bos-olmama korumasi. Bu
+  eskisinden guclu; gerekceyi raporla.
 - Hicbir assert gevsetilmez, test mantigi degismez; degisen yalniz verinin
   kaynagi.
 - ROCK 1 uretim koduna (`series/`, `core/`) DOKUNMAZ. Enjeksiyon noktasi yoksa
@@ -84,6 +94,10 @@ yerine DONDURULMUS fixture'dan okuyacak hale getir.
   (a) `generate_background_music` hic cagrilmaz, (b) `master_audio` muziksiz
   govde yoluyla cagrilir, (c) `"music"` `required_layers` icinde degilse bolum
   muzik yok diye dusmez. En kucuk dikisi (seam) sen sec, sebebini yaz.
+- Modelin KENDI urettigi muzik (SPM tur 1, Q1/Q2): `native_audio_review`
+  `unwanted_music=true` gorunce cekimi reddediyor. Bunu kilitleyen mevcut testi
+  bul ve adini raporla; yoksa sentetik config'le motor duzeyi bir test ekle
+  (canli config okuyan test YAZILMAZ).
 - Done: ep06 muziksiz, mastering'li cikacak sekilde yapilandirildi ve test
   bunu kilitliyor.
 - PROOF: `python -m pytest -q -p no:cacheprovider` -> 0 failed / 0 error; ve
@@ -96,11 +110,13 @@ yerine DONDURULMUS fixture'dan okuyacak hale getir.
 
 ### ROCK 3: Format hijyeni, modelin ve QC'nin okudugu her metin ayni formati anlatir
 
-Tek kaynak ilkesi: cekim vurusunun metni YALNIZ
-`series.json auto_replenish.shot_plan`'da yasar. Her cekim promptu o metinle
-baslar (`validate_plan_against_config` bunu zaten zorluyor). QC notu vurus
-TARIF ETMEZ; prompttaki "SHOT N," paragrafina bakmasini soyler. Boylece
-vurus degisince QC notu bayat kalamaz.
+Tek kaynak ilkesi (SPM tur 1 ile daraltildi): QC'nin olcut aldigi vurus
+TANIMI yalniz `series.json auto_replenish.shot_plan`'dadir. Her cekim promptu
+o metinle baslar (`validate_plan_against_config` zorluyor); QC'ye giden
+birlesik prompt `art_style` ile basladigi icin QC notu "SHOT N, ile baslayan
+paragrafa" bakar, "ilk paragraf" demez. logline, synopsis ve cekim govdesi
+vurusu anlatabilir; ama QC notu ve art_style giris/cikis MEKANIZMASI (kapak,
+agiz vb.) tasimaz. Boylece mekanizma degisince QC notu bayat kalamaz.
 
 Degisecek alanlar, hedef metinler EK A'da harfi harfine:
 
@@ -127,8 +143,8 @@ Degisecek alanlar, hedef metinler EK A'da harfi harfine:
   ifade kalmadi; dry-run cekim 1 promptu yeni art_style ile basliyor.
 - PROOF:
   1. `python -m series.cli produce wild-encounter sentinal_ihsan/wild-encounter/plans/part06.json --dry-run`
-     cikti: dogrulama hatasi yok, uc cekim, cekim 1 prompt'u EK A.1 ile basliyor,
-     muzik adimi yok.
+     cikti: dogrulama hatasi yok, uc cekim, cekim 1 prompt'u EK A.1 ile basliyor.
+     (Dry-run post-process'e ulasmaz; muzik/master kaniti ROCK 2'dedir.)
   2. `python -c` betigi: `validate_replenish_config(cfg) == []` ve
      `validate_plan_against_config(part06, cfg) == []`.
   3. Bayatlik taramasi, yalniz `bible.json` + `series.json` + `part06.json`:
@@ -136,57 +152,59 @@ Degisecek alanlar, hedef metinler EK A'da harfi harfine:
      `hybrid`, `16 saniye`, `2 x 8` -> sifir eslesme (buyuk/kucuk harf duyarsiz).
   4. Tam takim: 0 failed / 0 error.
 
-### ROCK 4: Yaratik ve set capasi (plato-3x8, opt-in)
+### ROCK 4: Yaratik ve set capasi, yalniz referans gorselle (plato-3x8, opt-in)
 
 Amac: her bolumun yaratigi uc cekim boyunca AYNI kalsin, set zengin ve sabit
-olsun. Ihsan'in yuzunu tutan mekanizmanin (kayitli karakter) yaratiga
-uygulanmasi.
+olsun. SPM tur 1 karari: karakter KAYDI (register_character) bu tur uretime
+BAGLANMAZ. Kie'nin insan olmayan ozneyi kabul ettigi kanitlanmadi, ucreti
+bilinmiyor, idempotency yok. Tek-obje formatinda calisan, testli referans
+gorsel yolu kullanilir; kayit olculmus bir deneye ertelendi (RF-ISSUES).
 
 - Opt-in bayrak: `bible.series.episode_anchors: true`. Yalniz wild-encounter
   acar. Bayrak kapaliyken her format icin davranis birebir eskisi
-  (`tek-obje-4x6` yolu dahil).
+  (`tek-obje-4x6` yolu dahil, payload baytlari degismez).
 - Bayrak acik ve `plan.format_version == "plato-3x8"` iken, mevcut
   `ensure_episode_refs` cagri noktasinda (ya da yanindaki kardes fonksiyonda):
   1. ORTAM: `environments[object_card.environment].ref_image_url` yoksa film
-     seti prompt'uyla (EK B.1) uret, yukle, `bible.json`'a atomik yaz.
-     `tek-obje` yolundaki "room and surface ... plain wall ... daylight"
-     prompt'u bu formatta KULLANILMAZ.
-  2. YARATIK GORSELI: `object_card.name` + `descriptor` + ortam tarifinden
-     (EK B.2; `anomaly_descriptor` KULLANILMAZ, yaratik referansta canli
-     gorunmeli) uret, yukle. Hash ile bayatlik: `object_card`'in ad/descriptor
-     alani ya da sablon surumu degisirse yeniden uretilir (mevcut
-     `ref_prompt_sha256` deseni).
-  3. KAYIT: `register_character(descriptor, gorsel_url, audio_ids=None,
-     character_name=object_card.name)` -> `characterId`.
-  4. Plana atomik yaz: `plan["creature_anchor"] = {ref_image_url,
-     character_id|null, ref_prompt_sha256, status: "registered"|"image_only"}`.
-  5. PAYLOAD: omni cekimlerinde `character_ids` = [Ihsan, yaratik]; yaratik
-     gorseli ayrica `role: object` referansi olarak baglanir (mevcut
-     `prop_ref_urls` baglama satiri). Cekim basina karakter <= 3 assert.
+     seti prompt'uyla (EK B.1) uret, yukle, yuklemeden HEMEN SONRA
+     `bible.json`'a atomik yaz. `tek-obje` yolundaki "room and surface ...
+     plain wall ... daylight" prompt'u bu formatta KULLANILMAZ.
+  2. YARATIK: `object_card.name` + `descriptor` + ortam tarifinden (EK B.2;
+     `anomaly_descriptor` KULLANILMAZ, yaratik referansta canli gorunmeli)
+     uret, yukle, yuklemeden HEMEN SONRA plana atomik yaz:
+     `plan["prop_ref_urls"] = [url]` (TEK kanonik alan; mevcut `role: object`
+     baglamasi bunu okur) ve `plan["ref_prompt_sha256"]`. Hash, plato
+     sablonunun kendi surum etiketiyle hesaplanir; ad/descriptor/ortam tarifi
+     ya da sablon degisirse yeniden uretilir.
+  3. PAYLOAD degismez: mevcut `resolve_shot` sirasi chain / object /
+     environment, Ihsan `character_ids` icinde. Omni referans birim siniri (7)
+     preflight'ta zaten denetleniyor; part06 icin sinirin altinda kaldigini
+     test et.
 - Para kurallari (hepsi zorunlu):
   - Her ucretli cagridan ONCE `hard_cap.authorize`, SONRA
     `_record_episode_cost`; mevcut `_generate_uploaded_reference` yeniden
     kullanilir.
-  - `register_character` OTOMATIK YENIDEN DENENMEZ (Kie'de idempotency yok).
-    Basarisizsa: gorsel URL'i planda kalir, `status: "image_only"`, cekimler
-    yalniz gorsel referansla devam eder, `_series_alert` ile haber verilir.
   - Gorsel uretimi basarisizsa fonksiyon False doner, bolum video kredisi
-    harcamadan durur (mevcut davranis).
+    harcamadan durur (mevcut davranis). Otomatik yeniden deneme yok.
   - Tekrar kosu sifir ucretli cagri yapar (idempotent).
-- plato-3x8 planinda `prop_ref_urls` / `creature_anchor` olmasi `tek-obje`'ye
-  ozel kapilari (ROCK B anomaly_match vb.) ACMAMALI. Dogrula ve test et.
+- `object_card.anomaly_descriptor` ROCK B anomaly_match metrigini ister ama
+  kapi yalniz `qc.enforce.anomaly_match` ile acilir (SPM tur 1, Q3);
+  wild-encounter'da `enforce` yok. Bu durumun degismedigini test et.
 - `require_object_match` KAPALI kalir (ep06 olculmeden yeni QC kapisi yok).
 - DOKTRIN.md GUNCEL FORMAT kurallarina 12. madde eklenir (EK A.7 sonu).
-- Done: ep06 dry-run'i capalarin hazirlanacagini gosteriyor; payload iki
-  karakter kimligi ve dogru rol sirasi tasiyor; para yollari testli.
+- Done: ep06 dry-run'i capalarin hazirlanacagini gosteriyor; payload rol
+  sirasi dogru; para yollari testli.
 - PROOF:
   1. Yeni test dosyasi (Kie tamamen mock'lu, SIFIR ag): bayrak kapali ->
-     cagri yok ve payload baytlari degismez; bayrak acik + bos durum -> tam bir
-     ortam gorseli, bir yaratik gorseli, bir kayit; ikinci kosu -> sifir cagri;
-     descriptor degisti -> yaratik yeniden uretilir, ortam uretilmez; kayit
-     hatasi -> tekrar yok, `image_only`, alarm; gorsel hatasi -> False; kredi
-     kapisi reddeder -> ucretli cagri yok; `resolve_shot` part06 icin
-     `character_ids == [ihsan, yaratik]` ve rol sirasi chain/object/environment.
+     cagri yok ve payload baytlari degismez (tek-obje ve plato); bayrak acik +
+     bos durum -> tam bir ortam gorseli ve bir yaratik gorseli, her biri
+     yuklemeden hemen sonra diske yazilmis; ikinci kosu -> sifir cagri;
+     descriptor degisti -> yalniz yaratik yeniden uretilir; ortam gorseli
+     yazildiktan sonra yaratik uretimi coker -> tekrar kosu ortami YENIDEN
+     URETMEZ; gorsel hatasi -> False; kredi kapisi reddeder -> ucretli cagri
+     yok; `resolve_shot` part06 cekim 1 icin roller object/environment ve
+     cekim 2 icin chain/object/environment, Ihsan'in kimligi `character_ids`
+     icinde.
   2. `python -m series.cli produce wild-encounter sentinal_ihsan/wild-encounter/plans/part06.json --dry-run`
      capalarin hazirlanacagini soyler, ucretli cagri yapmaz.
   3. Tam takim: 0 failed / 0 error.
@@ -223,9 +241,9 @@ Vertical 9:16 photoreal behind-the-scenes footage of a real film shoot on a stud
 ```
 SERIES EXEMPTION, READ THIS FIRST: this series is a FAKE BEHIND-THE-SCENES of a film shoot. A giant, lifelike creature stands on a built film set and is revealed at the end to be a practical prop. Ignore the words "impossible anatomy" and "chimera" in your artifact_score definition FOR THAT CREATURE: it is the subject of the clip, not a defect, and it must NEVER raise artifact_score. Reserve the numeric artifact_score for UNINTENDED generation defects only: the man, his hands, his face, the crew, the floor or the set structure melting, duplicating, breaking or glitching.
 
-THE BEAT OF EACH SHOT IS WRITTEN IN ITS OWN PROMPT. Every shot prompt opens with a paragraph that begins "SHOT 1,", "SHOT 2," or "SHOT 3," followed by the beat name. That opening paragraph is the required story beat for that shot and it is authoritative: pass the shot only if the clip performs that beat, and judge it against no other description. The three beats are one continuous scene on one set and their order never changes: the threat, the man taken completely out of sight, and the reveal that the creature is a prop with the man unharmed.
+THE BEAT OF EACH SHOT IS WRITTEN IN ITS OWN PROMPT. Each shot prompt contains a paragraph that begins "SHOT 1,", "SHOT 2," or "SHOT 3," followed by the beat name. That paragraph is the required story beat for that shot and it is authoritative: pass the shot only if the clip performs that beat, and judge the beat against no other description. The three beats are one continuous scene on one set and their order never changes: the threat, the man taken completely out of sight, and the reveal that the creature is a prop with the man unharmed.
 
-THE PRODUCTION MUST READ IN THE FIRST FRAME. A green screen wall, crew, and camera operators or rigs must be visible from the opening moment. Dressed set materials such as foliage, rock, water and haze are EXPECTED. A shot that reads as a real outdoor location with no production visible is a FAIL: the whole format depends on the viewer seeing that this is a film shoot.
+THE PRODUCTION MUST BE VISIBLE IN EVERY SHOT. At least one clear production element, such as the green screen wall, crew, camera operators, rigs or studio lights, must be visible in the sampled frames of every shot. Dressed set materials such as foliage, rock, water and haze are EXPECTED. A shot in which no production element is visible, so that it reads as location footage, is a FAIL: the whole format depends on the viewer seeing that this is a film shoot.
 
 SCALE CARRIES THIS FORMAT. The creature must be LARGE and CLOSE, filling much of the frame. A small or distant creature is a FAIL.
 
@@ -237,7 +255,7 @@ He NEVER speaks and never moves his mouth as if talking; there is no narration. 
 
 Studio equipment, rigging, cables, monitors and camera bodies in frame are EXPECTED and are not defects. Only subtitle bars, captions or watermark-style graphics laid over the footage count as unwanted text. Water spray, haze and lens flare are INTENDED realism.
 
-THE SOUND IS THE SET'S OWN SOUND: ambience, water, the creature rig moving, crew movement and applause. This series has no music bed.
+THE SOUND IS THE SET'S OWN SOUND: ambience, water, the creature rig moving, crew movement and applause.
 
 All three shots are the SAME set and the SAME light. A drifting viewpoint inside a shot is a continuity observation, not a defect score; record it under issues in plain words.
 ```
@@ -327,9 +345,11 @@ oldugu son vurusta anlasilir.
 ROCK 4 bittiginde eklenecek 12. madde:
 
 ```
-12. Her bolumun yaratigi referans gorselle uretilip Kie'de karakter olarak
-    kaydedilir, seti ortam referansiyla capalanir (bible.series.episode_anchors).
-    Kayit basarisizsa bolum yalniz gorsel referansla devam eder ve alarm verir.
+12. Her bolumun yaratigi bir referans gorselle (plan.prop_ref_urls), seti
+    ortam referansiyla capalanir (bible.series.episode_anchors); bolum icinde
+    cekim zinciri de surekliligi tasir. Yaratigi Kie'de KARAKTER olarak kaydetmek
+    olculmus bir denemeden once uretime baglanmaz (insan olmayan ozne ve ucret
+    dogrulanmadi).
 ```
 
 ## EK B: capa prompt'lari (ROCK 4)

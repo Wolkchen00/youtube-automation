@@ -21,3 +21,5 @@ Bu turun rocklari RF-PLAN-WILD-ENCOUNTER.md'de; burada kalanlar ertelendi.
 - [dusuk] alert_outbox Telegram'a gitmiyor (TELEGRAM_BOT_TOKEN yerelde yok); bulutta var mi kontrol
 - [dusuk] IG izlenme olcumu (ig_kaz.py, 12 cagrida 429) ep05 icin 24. saatte
 - [dusuk] series.json `parts` bos ve `next_part` 1: yayinlanan bolumler kayit disi (bkz. hafiza: yayindan once kanali kontrol et)
+- [orta] Yaratigi Kie'de karakter olarak kaydetmek (register_character): insan olmayan ozne ve ucret dogrulanmadi, idempotency yok. Deney: ep06'nin yaratik referans gorseliyle TEK kayit cagrisi, oncesi/sonrasi bakiye olcumu, yaniti kaydet; kabul ederse ayri bir cekimle gorsel-yalniz vs gorsel+kimlik karsilastirmasi. (SPM tur 1)
+- [dusuk] Testlerin izlenen series_data/advers/hold_log.jsonl dosyasina yazmasi ana agacta da kirlilik biriktiriyor (ana agacta su an M). Rock 1 test tarafini duzeltir; ana agactaki birikmis satirlar ayrica temizlenmeli.
