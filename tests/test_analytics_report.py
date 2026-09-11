@@ -146,5 +146,103 @@ class AnalyticsReportTests(unittest.TestCase):
         )
 
 
+class TheUnfinishedOlcumTests(unittest.TestCase):
+    """2026-09-11: The Unfinished olcum hattina girdi, yayin hattina GIRMEDI."""
+
+    def setUp(self):
+        self.tempdir = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tempdir.cleanup)
+        self.data_dir = pathlib.Path(self.tempdir.name) / "analytics_data"
+        data_patch = mock.patch.object(analytics, "DATA_DIR", self.data_dir)
+        data_patch.start()
+        self.addCleanup(data_patch.stop)
+        telegram_patch = mock.patch.object(notifier, "enabled", return_value=False)
+        telegram_patch.start()
+        self.addCleanup(telegram_patch.stop)
+
+    @staticmethod
+    def _kanal_verisi(abone):
+        return {
+            "stats": {"subs": abone, "total_views": abone * 10, "total_videos": 1},
+            "videos": {
+                f"v{abone}": {
+                    "title": "t",
+                    "published": "2026-09-10T07:00:00+00:00",
+                    "views": 5,
+                    "likes": 0,
+                    "comments": 0,
+                }
+            },
+        }
+
+    def test_kanal_kimligi_sabit_ve_uploads_tutarli(self):
+        kanal = {c["name"]: c for c in analytics.CHANNELS}["the_unfinished"]
+        self.assertEqual(kanal["channel_id"], "UCQtDZzk66Um8Oz5er8AsV1A")
+        self.assertEqual(kanal["uploads"], "UUQtDZzk66Um8Oz5er8AsV1A")
+        # Degismez kural HER kanal icin: uploads listesi "UU" + kimligin kalanidir.
+        for c in analytics.CHANNELS:
+            self.assertEqual(c["uploads"], "UU" + c["channel_id"][2:], c["name"])
+        adlar = [c["name"] for c in analytics.CHANNELS]
+        self.assertEqual(len(adlar), len(set(adlar)), "kanal adi tekrar etmemeli")
+
+    def test_snapshot_bes_kanali_yazar(self):
+        def sahte(kanal, _anahtar):
+            return self._kanal_verisi(len(kanal["name"]))
+
+        with mock.patch.object(analytics, "_fetch_channel", side_effect=sahte):
+            snapshot = analytics.take_snapshot(
+                api_key="x", now=datetime(2026, 9, 11, 7, 0, tzinfo=timezone.utc)
+            )
+        self.assertEqual(set(snapshot["channels"]), {c["name"] for c in analytics.CHANNELS})
+        yazilan = json.loads(
+            (self.data_dir / "daily" / "2026-09-11.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("the_unfinished", yazilan["channels"])
+        self.assertEqual(
+            yazilan["channels"]["the_unfinished"]["stats"]["subs"], len("the_unfinished")
+        )
+
+    def test_the_unfinished_patlarsa_digerleri_yine_yazilir(self):
+        def sahte(kanal, _anahtar):
+            if kanal["name"] == "the_unfinished":
+                raise RuntimeError("channels HTTP 403")
+            return self._kanal_verisi(1)
+
+        with mock.patch.object(analytics, "_fetch_channel", side_effect=sahte):
+            snapshot = analytics.take_snapshot(
+                api_key="x", now=datetime(2026, 9, 11, 7, 0, tzinfo=timezone.utc)
+            )
+        self.assertNotIn("the_unfinished", snapshot["channels"])
+        self.assertEqual(len(snapshot["channels"]), len(analytics.CHANNELS) - 1)
+
+    def test_haftalik_rapor_the_unfinished_icerir(self):
+        daily = self.data_dir / "daily"
+        daily.mkdir(parents=True)
+        (daily / "2026-09-11.json").write_text(
+            json.dumps(
+                {
+                    "generated_at": "2026-09-11T07:00:00+00:00",
+                    "channels": {"the_unfinished": self._kanal_verisi(39)},
+                }
+            ),
+            encoding="utf-8",
+        )
+        rapor = analytics.generate_weekly_report(
+            now=datetime(2026, 9, 11, 8, 0, tzinfo=timezone.utc)
+        )
+        self.assertEqual(rapor["channels"]["the_unfinished"]["stats"]["subs"], 39)
+
+    def test_yukleyici_the_unfinished_kanalini_cozmez(self):
+        # Kanal Shorts_Dizi_Fabrikasi'ndan yayinlaniyor; bu deponun uploader'i
+        # onun basliklarini denetlememeli ve ona yuklememeli.
+        from core import uploader
+
+        self.assertIsNone(uploader._channel_id_for_user("TheUnfinishedai"))
+        self.assertEqual(
+            uploader._channel_id_for_user("Youtube"),
+            {c["name"]: c for c in analytics.CHANNELS}["aimagine"]["channel_id"],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

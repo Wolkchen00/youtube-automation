@@ -224,19 +224,23 @@ def test_onay_taze_checkoutta_da_gecerli() -> None:
 
 
 # --------------------------------------------------------------------------
-# 8. BUGUNKU GERCEK DURUM: varsayilan profil yayinlanamaz olmali.
-#    Bu bir hata degil, KASITLI: kanarya onaylanana kadar cron sessizce
-#    dogrulanmamis profille yayin yapmasin diye. Test bunu belgeliyor.
+# 8. BUGUNKU GERCEK DURUM: varsayilan profil 720p, onaysiz yayinlanir.
+#    2026-09-10'da varsayilan 1080p yapildi; 1080p ayni videoyu 615 yerine
+#    1530 krediye uretiyor (Kie creditsConsumed). Ihsan 11 Eylul'de geri
+#    aldirdi. Bu test varsayilanin sessizce pahali profile kaymasini yakalar.
 # --------------------------------------------------------------------------
-def test_varsayilan_profil_onaysiz_yayinlanamaz(monkeypatch) -> None:
+def test_varsayilan_profil_720p_ve_onaysiz_yayinlanir(monkeypatch) -> None:
     kok = _gecici("varsayilan")
     try:
         monkeypatch.setattr(gunluk, "ONAY_DOSYASI", kok / "yok.json")
+        assert profil_modulu.VARSAYILAN_PROFIL == "720p", (
+            "varsayilan 720p olmali: 1080p 2,5 kat pahali, degisiklik Ihsan karari"
+        )
         izinli, durum = gunluk.yayin_izni(profil_modulu.VARSAYILAN_PROFIL, 15)
-        assert izinli is False
-        assert "kanarya" in durum
-        # 720p ise gecmiste 27/27 kez uretildigi icin dogrulanmis olmali
-        izinli720, durum720 = gunluk.yayin_izni("720p", 15)
-        assert izinli720 is True, "720p@24 dogrulanmis olmaliydi: %s" % durum720
+        assert izinli is True, "720p@24 dogrulanmis olmaliydi: %s" % durum
+        # 1080p onaysiz hala kanarya: yanlislikla secilirse sessiz yayin yok
+        izinli1080, durum1080 = gunluk.yayin_izni("1080p", 15)
+        assert izinli1080 is False
+        assert "kanarya" in durum1080
     finally:
         shutil.rmtree(kok, ignore_errors=True)

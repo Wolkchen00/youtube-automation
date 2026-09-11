@@ -1,0 +1,20 @@
+{
+  "model": "bytedance/seedance-2",
+  "sure": 15,
+  "cozunurluk": "1080p",
+  "fps": 24,
+  "master_sha": "6f6e1cc2f49e2ab294ef88e3ee527c0eecea3842fa4e2a327d8c0584f65e45e9",
+  "profil_hash": "54b2f42aa8636ee007615f6adecb699dee35deebdf969675c37b47258f5d6fdb",
+  "otomatik": true,
+  "ts": "2026-09-11T19:23:22.678914+00:00",
+  "olculen": {
+    "genislik": 1080,
+    "yukseklik": 1920,
+    "fps": 24.0,
+    "sure": 15.1
+  },
+  "ses": {
+    "lufs": -14.0,
+    "true_peak": -1.1
+  }
+}

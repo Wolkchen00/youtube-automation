@@ -1,13 +1,13 @@
 {
   "ad": "YouTube Otomasyon Fabrikası",
   "kategori": "İçerik & Topluluk",
-  "ozet": "Dört YouTube kanalının (AImagine, Galactic Experiment, Sentinal, Shadowed History) bölüm üretim hattı. Depoda 16 workflow var ama yalnız 7'si zamanlanmış: beş günlük seri (event-horizon, flashpoints, from-scratch, next-stop, unnatural-lab), günlük+haftalık analitik toplama ve haftalık seri kalibrasyonu. Kalan 9 workflow'un schedule bloğu yorum satırına alınmış; yalnız elle tetiklenirler. Panonun kanal ve birim ekonomi verisi bu depodan gelir (analytics_data ve credits_ledger.json).",
+  "ozet": "Beş YouTube kanalının ölçüm ve bölüm üretim hattı: AImagine, Galactic Experiment, Sentinal ve Shadowed History burada üretilir ve ölçülür; The Unfinished yalnız ölçülür (videoları Shorts_Dizi_Fabrikasi'ndan yayınlanır). Depoda 19 workflow var, 7'si zamanlanmış: iki günlük seri (event-horizon, flashpoints), AImagine korku kaydırağı (fear-slide + fear-slide-hazır), günlük beyin, günlük+haftalık analitik ve haftalık seri kalibrasyonu. Kalan 12 workflow'un schedule bloğu yorum satırında, yalnız elle tetiklenir (from-scratch, next-stop, unnatural-lab dahil). Panonun kanal ve birim ekonomi verisi bu depodan gelir (analytics_data ve credits_ledger.json).",
   "eleme": "olculemiyor: insan doldurmali",
   "model": "olculemiyor: insan doldurmali",
   "sunum": "olculemiyor: insan doldurmali",
   "durum": "aktif",
   "dahil_et": true,
-  "kaynak_notu": "cron 2026-09-01'de panonun KENDİ YAML ayrıştırıcısıyla (filo_kayit._schedule_cikar) ölçüldü: 16 workflow'un 7'si zamanlı. DÜZELTME 1: ilk sürüm naif bir regex kullanmış ve yorum satırındaki cron'ları gerçek sanarak 16 cron yazmıştı; denetim bunu 9 hayalet cron olarak DOĞRU biçimde yakaladı. DÜZELTME 2: \"7 cron, routines.json'daki 7 kayıtla birebir tutuyor\" diye yazmıştım , YANLIŞ. Sayılar eşit ama kümeler değil: analytics.yml İKİ kez kayıtlı (yt_analytics + yt_analytics_snapshot), next-stop.yml ise HİÇ kayıtlı değil. Denetim bunu `kayitsiz_cron: 1` olarak doğru raporluyor; routines.json'a yazmak ISSUES C6 ile KILL edilmiş, karar İhsan'ın. README yok; eleme/model/sunum türetilemedi. Zamanlaması yorumda olan 9 workflow: cleanup.yml, could-you-survive.yml, drowned-history.yml, footnotes.yml, night-archive.yml, planetfall.yml, series-approve.yml, series.yml, time-witness.yml.",
+  "kaynak_notu": "cron 2026-09-01'de panonun KENDİ YAML ayrıştırıcısıyla (filo_kayit._schedule_cikar) ölçüldü: 16 workflow'un 7'si zamanlı. DÜZELTME 1: ilk sürüm naif bir regex kullanmış ve yorum satırındaki cron'ları gerçek sanarak 16 cron yazmıştı; denetim bunu 9 hayalet cron olarak DOĞRU biçimde yakaladı. DÜZELTME 2: \"7 cron, routines.json'daki 7 kayıtla birebir tutuyor\" diye yazmıştım , YANLIŞ. Sayılar eşit ama kümeler değil: analytics.yml İKİ kez kayıtlı (yt_analytics + yt_analytics_snapshot), next-stop.yml ise HİÇ kayıtlı değil. Denetim bunu `kayitsiz_cron: 1` olarak doğru raporluyor; routines.json'a yazmak ISSUES C6 ile KILL edilmiş, karar İhsan'ın. README yok; eleme/model/sunum türetilemedi. Zamanlaması yorumda olan 9 workflow: cleanup.yml, could-you-survive.yml, drowned-history.yml, footnotes.yml, night-archive.yml, planetfall.yml, series-approve.yml, series.yml, time-witness.yml. GÜNCELLEME 2026-09-11: cron listesi yeniden ölçüldü (19 workflow, 7 zamanlı). from-scratch, next-stop ve unnatural-lab çıkarıldı (schedule yorumda); fear-slide, fear-slide-hazır ve gunluk-beyin eklendi (etkin cron). the_unfinished kanalı core/analytics.py CHANNELS'a girdi (UCQtDZzk66Um8Oz5er8AsV1A).",
   "cron": [
     {
       "gh_repo": "Wolkchen00/youtube-automation",
@@ -36,6 +36,22 @@
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",
+      "gh_workflow_path": ".github/workflows/fear-slide-hazir.yml",
+      "gh_workflow_name": "Fear Slide Hazir Video",
+      "cron_ifadeleri_utc": [
+        "26 0 * * *"
+      ]
+    },
+    {
+      "gh_repo": "Wolkchen00/youtube-automation",
+      "gh_workflow_path": ".github/workflows/fear-slide.yml",
+      "gh_workflow_name": "Fear Slide Daily",
+      "cron_ifadeleri_utc": [
+        "20 13 * * *"
+      ]
+    },
+    {
+      "gh_repo": "Wolkchen00/youtube-automation",
       "gh_workflow_path": ".github/workflows/flashpoints.yml",
       "gh_workflow_name": "Flashpoints Daily",
       "cron_ifadeleri_utc": [
@@ -44,26 +60,10 @@
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/from-scratch.yml",
-      "gh_workflow_name": "From Scratch Daily",
+      "gh_workflow_path": ".github/workflows/gunluk-beyin.yml",
+      "gh_workflow_name": "Gunluk Beyin",
       "cron_ifadeleri_utc": [
-        "30 14 * * *"
-      ]
-    },
-    {
-      "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/next-stop.yml",
-      "gh_workflow_name": "Next Stop Daily",
-      "cron_ifadeleri_utc": [
-        "20 13 * * *"
-      ]
-    },
-    {
-      "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/unnatural-lab.yml",
-      "gh_workflow_name": "Unnatural Lab Daily",
-      "cron_ifadeleri_utc": [
-        "30 18 * * *"
+        "30 5 * * *"
       ]
     }
   ]

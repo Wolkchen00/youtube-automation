@@ -40,8 +40,23 @@ LA = ZoneInfo("America/Los_Angeles")
 DEFTER = KOK / "yayin.jsonl"
 ONAY_DOSYASI = KOK / "profil_onay.json"
 KANARYA_KILIDI = KOK / "kanarya_basarisiz.json"
+KREDI_BEKLIYOR = KOK / "kredi_bekliyor.json"
 MIN_KREDI = 700
 MODEL = "bytedance/seedance-2"
+
+# Bu modelin 15 sn'lik isi icin Kie'nin istedigi kredi, cozunurluge gore.
+# Neden var: Kie otomatik yuklemesi bakiye 1500'un ALTINA dusunce tetikleniyor,
+# 1080p is ise 1500'den pahali. Bakiye ikisinin arasinda kalinca (2026-09-11:
+# 1523) createTask 402 donuyor ve yukleme de tetiklenmiyor. Tek basina 700'luk
+# taban bunu goremiyordu. Olculmemis cozunurluk icin tahmin UYDURULMAZ; o zaman
+# yalniz MIN_KREDI gecerli ve 402 yolu ayni damgayi birakir.
+KREDI_15SN = {
+    "720p": 615,  # olculdu 2026-09-03, taskId 7e4efdeddb311cc4f1fd210535d68471
+    # olculdu 2026-09-11, kosu 34637728319, taskId 311e039faf7db184311c7d1d0ed47717.
+    # Iki satir da Kie recordInfo creditsConsumed ile dogrulandi (bakiye farki
+    # degil). 1523'te 402 almasi bununla tutarli.
+    "1080p": 1530,
+}
 
 # Donusum havuzu: yalniz YETENEK_MATRISI'nde karsiligi olan sureli rotalar.
 # toronto-cn-red-dusk (20 sn), vegas-strat-blue-rain (20 sn) ve
@@ -471,6 +486,67 @@ def kanarya_kilidini_kaldir() -> None:
         pass
 
 
+def gerekli_kredi(cozunurluk: str, sure: int) -> float:
+    """Isin olculmus maliyeti ile MIN_KREDI tabanindan buyugu."""
+    olculen = KREDI_15SN.get(cozunurluk)
+    if olculen is None:
+        return float(MIN_KREDI)
+    return max(float(MIN_KREDI), olculen * sure / 15.0)
+
+
+def kredi_reddi_mi(stderr: str) -> bool:
+    """kie_uret createTask'i 402 ile mi reddedildi?
+
+    Yalniz createTask reddi sayilir: gorev HIC olusmadi, kredi HIC harcanmadi,
+    yani ayni gun yeniden denemek cift odeme riski tasimaz. Olusmus bir gorevin
+    sonradan dusmesi burada SAYILMAZ (Kie'de idempotency yok).
+    """
+    metin = stderr or ""
+    return bool(
+        re.search(r"createTask HTTP 402\b", metin)
+        or re.search(r'createTask reddetti:.*"code"\s*:\s*402\b', metin)
+    )
+
+
+def kredi_bekliyor_yaz(bakiye: float | None, gerekli: float, sebep: str) -> None:
+    """Bugun KREDI yuzunden, hic kredi harcanmadan duruldugunu damgala.
+
+    fear-slide.yml'in telafi cron'u yalniz bu damga BUGUNUN tarihini
+    tasiyorsa uretir. Otomatik yukleme baska bir kanalin harcamasiyla
+    tetiklendiginde gunun videosu ayni gun yine cikar.
+    """
+    KREDI_BEKLIYOR.write_text(
+        json.dumps({
+            "tarih": datetime.now(LA).strftime("%Y-%m-%d"),
+            "bakiye": bakiye,
+            "gerekli": round(gerekli),
+            "sebep": sebep,
+            "ts": datetime.now(timezone.utc).isoformat(),
+        }, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8", newline="\n",
+    )
+
+
+def telafi_karari(gecmis: list[dict], bugun: str) -> tuple[bool, str]:
+    """Telafi kosusu calismali mi? Yalniz bugun kredi yuzunden duruldu ve
+    bugun hala dogrulanmis yayin yoksa.
+
+    Yayin varken calismak, sabahki basarili last_run.json kaydini "no_video"
+    ile ezerdi; damga yokken calismak ise baska sebeple (kapi, yayin hatasi)
+    dusmus bir gunu ikinci kez URETIP para yakardi.
+    """
+    try:
+        damga = json.loads(KREDI_BEKLIYOR.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError, TypeError):
+        return False, "kredi damgasi yok, sabah kosusu kredi yuzunden durmadi"
+    if not isinstance(damga, dict) or damga.get("tarih") != bugun:
+        return False, "kredi damgasi bugune ait degil (%s)" % (
+            damga.get("tarih") if isinstance(damga, dict) else "bozuk")
+    if bugunku_basarili(gecmis, bugun):
+        return False, "bugun zaten dogrulanmis yayin var"
+    return True, "bugun kredi yuzunden duruldu (%s), yayin yok" % damga.get("sebep", "?")
+
+
 def uretim_kaydi_yaz(slug: str, kayit: dict) -> Path:
     hedef = KOK / "out" / slug / "uretim" / (kayit["master_sha"] + ".json")
     if hedef.exists():
@@ -699,6 +775,9 @@ def _argumanlar(argv: list[str] | None = None) -> argparse.Namespace:
     kip.add_argument("--yayinlama", action="store_true")
     kip.add_argument("--onayla", type=Path, metavar="MASTER")
     kip.add_argument("--yayinla-mevcut", type=Path, metavar="MASTER")
+    # Is akisinin telafi cron'u icin: stdout'a YALNIZ "calis=true|false"
+    # basar (GITHUB_OUTPUT'a gider), gerekceyi stderr'e yazar.
+    kip.add_argument("--telafi-kapisi", action="store_true")
     parser.add_argument("--profil", choices=tuple(PROFILLER), default=VARSAYILAN_PROFIL)
     parser.add_argument("--sehir")
     parser.add_argument("--allow-same-day", action="store_true")
@@ -711,6 +790,11 @@ def main(argv: list[str] | None = None) -> int:
         return onayla(args.onayla.resolve())
     if args.yayinla_mevcut is not None:
         return yayinla_mevcut(args.yayinla_mevcut.resolve(), args.allow_same_day)
+    if args.telafi_kapisi:
+        calis, gerekce = telafi_karari(defter(), datetime.now(LA).strftime("%Y-%m-%d"))
+        print("telafi: %s" % gerekce, file=sys.stderr)
+        print("calis=%s" % ("true" if calis else "false"))
+        return 0
 
     gecmis = defter()
     slug = args.sehir or sirdaki(gecmis)
@@ -812,8 +896,14 @@ def main(argv: list[str] | None = None) -> int:
     if bakiye is None:
         log("DUR: kredi okunamadi.")
         return 1
-    if bakiye < MIN_KREDI:
-        log("DUR: kredi %s < taban %s. Yukleme yapilmali." % (bakiye, MIN_KREDI))
+    gerekli = gerekli_kredi(profil["cozunurluk"], sure)
+    if bakiye < gerekli:
+        log(
+            "DUR: kredi %s < bu isin gerektirdigi ~%d (%s, %d sn). Kie otomatik "
+            "yuklemesi bakiye 1500'un altina dusmeden tetiklenmez. Kredi harcanmadi; "
+            "telafi kosusu bugun yeniden deneyecek." % (bakiye, gerekli, profil["cozunurluk"], sure)
+        )
+        kredi_bekliyor_yaz(bakiye, gerekli, "on kontrol")
         return 1
 
     log("uretim basliyor: %s, %d sn, %s" % (MODEL, sure, profil["cozunurluk"]))
@@ -821,6 +911,10 @@ def main(argv: list[str] | None = None) -> int:
     print(sonuc.stdout[-2500:])
     if sonuc.returncode != 0:
         log("DUR: uretim basarisiz:\n" + (sonuc.stderr or "")[-1200:])
+        if kredi_reddi_mi(sonuc.stderr):
+            log("Kie createTask'i kredi yetersiz diye reddetti, gorev olusmadi, kredi "
+                "harcanmadi. Telafi kosusu bugun yeniden deneyecek.")
+            kredi_bekliyor_yaz(bakiye, gerekli, "Kie 402")
         return 1
 
     videolar = sorted(

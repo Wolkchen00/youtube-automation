@@ -1,8 +1,8 @@
 # unnatural-lab , ASKIDA
 
-**Bu kanalin beyni 2026-09-12 (UTC gun sonu) tarihine kadar askiya alindi.**
+**Bu kanalin beyni acik uclu , elle kaldirilana kadar tarihine kadar askiya alindi.**
 
-Sebep: sentinal_ihsan konsepti bastan yaziliyor; defterdeki 15 video eski konsepte ait
+Sebep: Konsept arsive kaldirildi (Ihsan, 11 Eylul 2026); kanal beyin listesinden cikarilana kadar acik uclu aski
 
 ## Bu dosyada bugun icin YON YOKTUR
 
@@ -21,4 +21,4 @@ Askiyi kaldirmak icin:
 python beyin.py devam unnatural-lab
 ```
 
-_Askiya alindi: 2026-09-11 04:35_
+_Askiya alindi: 2026-09-11 22:07_
