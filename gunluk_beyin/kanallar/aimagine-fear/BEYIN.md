@@ -1,6 +1,6 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-11T04:56:30.715026+00:00
+Uretim: 2026-09-11T07:41:13.889500+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -14,11 +14,11 @@ nerede oturdugu gorulur.
 - Olculen video: **15**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **17**
-- Aralik: 1 ile 3,216 arasi
+- Aralik: 1 ile 3,218 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
-| EN IYI | 3,216 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
+| EN IYI | 3,218 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
 | EN KOTU | 1 | 2026-09-01 | Next Stop: Xibalba 🏞️💀 |
 
 Son yayinlar (tekrar etme):

@@ -1,6 +1,6 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-11T04:56:29.875856+00:00
+Uretim: 2026-09-11T07:41:12.796284+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -14,12 +14,12 @@ nerede oturdugu gorulur.
 - Olculen video: **15**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **104**
-- Aralik: 20 ile 393 arasi
+- Aralik: 23 ile 393 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
 | EN IYI | 393 | 2026-09-05 | The Universe's SLOWEST Particle: Photon's Journe |
-| EN KOTU | 20 | 2026-09-10 | WASP-12b: Planet Being DEVOURED |
+| EN KOTU | 23 | 2026-09-10 | WASP-12b: Planet Being DEVOURED |
 
 Son yayinlar (tekrar etme):
 - 2026-09-10 , WASP-12b: Planet Being DEVOURED
