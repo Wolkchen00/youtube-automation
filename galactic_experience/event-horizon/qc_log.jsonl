@@ -303,3 +303,15 @@
 {"ts": "2026-09-10T19:19:01Z", "event": "qc_api_result", "attempt_id": "d98efb5d0b3748bcbe2a7574ed58a5a6", "outcome": "ok"}
 {"ts": "2026-09-10T19:19:01Z", "event": "review", "episode": 32, "shot": 3, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_03.mp4"}
 {"ts": "2026-09-10T19:19:01Z", "event": "qc_pass", "episode": 32, "shot": 3, "attempt": 0, "content_sha256": "a807aaebf4ff21228a09803f8d378910e53395951cf9b23281ecca1c81d88fb5", "clip": "shot_03.mp4"}
+{"ts": "2026-09-11T02:11:42Z", "event": "qc_api_attempt", "attempt_id": "7e1e201e51244f3ab550380f49a04a52", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-09-11T02:11:53Z", "event": "qc_api_result", "attempt_id": "7e1e201e51244f3ab550380f49a04a52", "outcome": "ok"}
+{"ts": "2026-09-11T02:11:53Z", "event": "review", "episode": 33, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 1, "issues": ["The depiction of the 'cosmic web' with dark tendrils connecting individual galaxies is stylized and not entirely consistent with NASA-image realism or physically coherent scale at this resolution."], "fix_notes": ["Ensure the cosmic web is depicted with greater scientific accuracy and scale consistency, avoiding overly stylized dark tendrils between individual galaxies."], "clip": "shot_01.mp4"}
+{"ts": "2026-09-11T02:11:53Z", "event": "qc_pass", "episode": 33, "shot": 1, "attempt": 0, "content_sha256": "3eed63092543fe31460838d8e16a9b69fbc1fc8bebe1561d2b4a3075bda6217d", "clip": "shot_01.mp4"}
+{"ts": "2026-09-11T02:13:30Z", "event": "qc_api_attempt", "attempt_id": "c04837f7ff154628988f2ca711932ad9", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 33, "shot": 2}
+{"ts": "2026-09-11T02:13:39Z", "event": "qc_api_result", "attempt_id": "c04837f7ff154628988f2ca711932ad9", "outcome": "ok"}
+{"ts": "2026-09-11T02:13:39Z", "event": "review", "episode": 33, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
+{"ts": "2026-09-11T02:13:39Z", "event": "qc_pass", "episode": 33, "shot": 2, "attempt": 0, "content_sha256": "7af141a53e74deb8408592940036a6c1567b3173acb703dd27b451204318f251", "clip": "shot_02.mp4"}
+{"ts": "2026-09-11T02:15:16Z", "event": "qc_api_attempt", "attempt_id": "8ac0b1e6e4d4468994f2105e3ab732e3", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 33, "shot": 3}
+{"ts": "2026-09-11T02:15:23Z", "event": "qc_api_result", "attempt_id": "8ac0b1e6e4d4468994f2105e3ab732e3", "outcome": "ok"}
+{"ts": "2026-09-11T02:15:23Z", "event": "review", "episode": 33, "shot": 3, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_03.mp4"}
+{"ts": "2026-09-11T02:15:23Z", "event": "qc_pass", "episode": 33, "shot": 3, "attempt": 0, "content_sha256": "047242e6437457f0f24c9621ea46cc2ac7c13eaea2594a2b9c123536f0c80461", "clip": "shot_03.mp4"}
