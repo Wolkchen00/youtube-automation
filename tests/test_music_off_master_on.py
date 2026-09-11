@@ -141,3 +141,9 @@ def test_mastering_is_gated_by_master_lufs_and_never_by_music():
     ]
     assert bound, "master_lufs is expected to be bound in the mastering function"
     assert all(value == "bible.master_lufs" for value in bound), bound
+
+    # The loudness target itself must be that value, not a literal that could drift
+    # away from the series config (SPM round 2: the AST proof was too shallow).
+    keywords = {kw.arg: ast.unparse(kw.value) for kw in calls[0].keywords}
+    assert keywords.get("target_i") == "master_lufs", keywords
+    assert keywords.get("target_tp") == "-1.0", keywords

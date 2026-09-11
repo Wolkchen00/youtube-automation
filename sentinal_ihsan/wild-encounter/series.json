@@ -11,14 +11,14 @@
     "tiktok"
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
-  "total_parts": 0,
-  "next_part": 1,
-  "status": "draft",
+  "total_parts": 11,
+  "next_part": 7,
+  "status": "active",
   "priority": 999,
   "standalone": true,
-  "publish_mode": "approval",
+  "publish_mode": "auto",
   "auto_replenish": {
-    "enabled": false,
+    "enabled": true,
     "format_version": "plato-3x8",
     "batch": 5,
     "min_queue": 2,
@@ -29,12 +29,11 @@
     "music_prompt": false,
     "eerie_ok": true,
     "families": [
-      "predator-armour",
-      "predator-limbs",
-      "aquatic-land",
-      "scale-giant",
-      "wrong-skin",
-      "wrong-head"
+      "reptile",
+      "sea-giant",
+      "insect-giant",
+      "mammal-giant",
+      "bird-giant"
     ],
     "shot_plan": [
       "SHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man, who stands his ground and watches its jaws begin to part.",
@@ -43,20 +42,50 @@
     ],
     "title_patterns": [
       {
-        "regex": "This [A-Z][A-Z]+(?: [A-Z]+)? Is NOT Real",
+        "regex": "This [A-Z][A-Z]+(?: [A-Z]+){0,2} Is NOT Real",
         "families": [
-          "predator-armour",
-          "predator-limbs",
-          "aquatic-land",
-          "scale-giant",
-          "wrong-skin",
-          "wrong-head"
+          "reptile",
+          "sea-giant",
+          "insect-giant",
+          "mammal-giant",
+          "bird-giant"
         ]
       }
     ],
-    "title_style": "a punchy English Shorts title in exactly this pattern: 'This <ANIMAL> Is NOT Real' or 'This GIANT <ANIMAL> Is NOT Real', for example 'This GIANT CROCODILE Is NOT Real'. Every word before 'Is' is in CAPS. Max 60 characters, the validator rejects 61 and above. No hashtags, no surrounding quotes, no emoji in the title field.",
+    "title_style": "a punchy English Shorts title in exactly this pattern: 'This <ANIMAL> Is NOT Real' or 'This GIANT <ANIMAL> Is NOT Real', where the animal name may be one or two words, for example 'This GIANT CROCODILE Is NOT Real' or 'This GIANT PRAYING MANTIS Is NOT Real'. Every word before 'Is' is in CAPS. Max 60 characters, the validator rejects 61 and above. No hashtags, no surrounding quotes, no emoji in the title field.",
     "brief": "SERI: bir film setinde dev, gercekci bir yaratik performans sanatcisini (Ihsan) agzina alir; ekip cenesini elleriyle acar ve Ihsan yara almadan cikar. Yaratigin pratik efekt oldugu son vurusta anlasilir. Kaynak: sentinal_ihsan/wild-encounter/DOKTRIN.md, GUNCEL FORMAT bolumu. >>> CIKTI DILI: bu brief TURKCEDIR ama URETTIGIN HER SEY INGILIZCEDIR: baslik, sinopsis ve TUM cekim promptlari Ingilizce yazilir. <<< DEGISMEZ KURALLAR: (1) ANLATIM VE MUZIK YOKTUR. Voiceover yok, konusma yok, muzik yok. Ses setin kendi sesidir. Cekim promptlarinda 'speaking', 'talking', 'explaining', 'narrating' GECMEZ. Her cekim promptu olumlu bir ses cumlesiyle biter, ornek: 'Ambient sound only: dripping water, studio air handling and distant crew movement.' (2) TEK DEV YARATIK, GERCEKCI, pratik efekt. Donusum yok, birlesme yok, iki hayvan yok. Izleyicinin tanidigi bir hayvan secilir ve cenesi bir insani alacak kadar buyuk olur. (3) UC VURUS, SIRASI DEGISMEZ, TEK SET: her cekim promptu shot_plan'daki metinle HARFI HARFINE baslar, ardindan bos satir ve o bolumun ayrintisi gelir. (4) IHSAN SAHNENIN ICINDE: yuzu ve govdesi net, KAMERAYA BAKMAZ, yaratiga ya da ekibe bakar. Kadrajda TEK Ihsan olur. (5) KIYAFET SETE GORE degisir (orman setinde saha gomlegi, su tankinda dalgic ustu); degismeyen sey adamin kendisidir. (6) OLCEK: yaratik buyuk ve yakin, kadrajin buyuk kismini doldurur. (7) SET: ciplak yesil perde DEGIL, kurulmus dekor: on planda gercek set malzemesi (yaprak, sarmasik, kaya, su, sis), arkada yesil perde, kenarda siyahli ekip, en onde kamera operatorlerinin sirti. Isik tepedeki studyo izgarasindan gelir. (8) SURE: uc cekim, her biri 8 saniye. (9) EKRANA YAZI YOK. (10) GUVENLIK: kan, yaralanma, hayvana eziyet yok; gerilim olcekten ve yutulma anindan gelir. (11) AILE: her bolum 'family' alanindaki kanonik listeden BIR aile secer ve ardisik iki bolum ayni aileyi KULLANAMAZ.",
-    "last_run": null
+    "last_run": {
+      "at": "2026-09-11T22:01:18.992321+00:00",
+      "parts": "7-11"
+    },
+    "required_characters": [
+      "ihsan_field"
+    ],
+    "families_note": "2026-09-11: melez donemin aileleri (wrong-skin, wrong-head, predator-armour...) Gemini'ye melez yaratik yazdiriyordu (olculdu: tuylu yilan). Aileler artik hayvan turu; ardisik iki bolum ayni aileyi kullanamaz."
   },
-  "parts": {}
+  "parts": {
+    "5": {
+      "status": "published",
+      "subtitle": "This GIANT OCTOPUS Is NOT Real",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-11T09:52:41+00:00",
+      "note": "elle yayinlandi (Clarity Break), otomasyon kaydina 2026-09-11'de islendi"
+    },
+    "6": {
+      "status": "published",
+      "subtitle": "This GIANT CROCODILE Is NOT Real",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-11T18:49:55+00:00",
+      "note": "elle yayinlandi (Clarity Break, resmi surum ep06_mastered.mp4)"
+    }
+  },
+  "automation_note": "2026-09-11: Ihsan karari 'gunluk, otomatik yayin'. Serit .github/workflows/wild-encounter.yml, 18:30 UTC. part01-04 deneme bolumleriydi, yayinlanmadi; 05 ve 06 elle yayinlandi ve parts'a islendi. Siradaki bolum 7'yi oto-ikmal yazar."
 }

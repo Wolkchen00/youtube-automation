@@ -94,3 +94,87 @@ Visionary dort rock'u tur-1 ile duzeltilmis plana harfi harfine uyarak insa eder
 kanitlari kendisi kosar, ep06 uretilir. Codex 2:35 PM sonrasi hem plani (tur 2)
 hem insa diff'ini bagimsiz inceler. Rock 1 ayri bir worktree'de (dal
 codex-we-rock1) bir alt ajana verildi; Visionary onun diff'ini satir satir inceler.
+
+## Round 2b: plan turu 2 + insa incelemesi (kota sonrasi)
+
+### Integrator findings (Codex, verbatim)
+
+Round‑1 disposition:
+
+| # | Finding | Status |
+|---|---|---|
+| 1 | Fleet tests converted to historical fixtures | Addressed. Historical tests use frozen fixtures, while fleet tests independently scan all live series. |
+| 2 | Native model music not protected | Partly addressed. Existing tests prove `unwanted_music=true` fails/regenerates, but no test pins that Wild Encounter keeps `native_audio_review` enabled. |
+| 3 | Vacuous dry-run music proof | Addressed; removed. |
+| 4 | QC incorrectly called `SHOT N` the opening paragraph | Addressed; it now identifies the contained paragraph. |
+| 5 | Overbroad single-source claim | Addressed by narrowing it to the QC-authoritative beat definition. |
+| 6 | Stale-text scan matched its own warnings | Addressed. |
+| 7 | First-frame claim unsupported by sampled frames | Addressed by changing the requirement to sampled-frame visibility. |
+| 8 | Stale Ihsan registration | Addressed by recorded ep04–ep06 evidence; retaining the proven face ID is reasonable. |
+| 9 | Duplicate creature anchor field | Addressed; `prop_ref_urls` is canonical. |
+| 10 | Persistence after paid operations | Partly addressed; set persistence between the two anchors works, but failures inside one anchor operation can still cause duplicate payment. |
+| 11 | Unknown registration cost | Addressed by removing registration from this cycle. |
+| 12 | Mock could not prove non-human registration | Addressed by removing registration. |
+| 13 | Simpler image-only alternative | Addressed and implemented; registration should remain deferred. |
+
+The frozen fixture files all match commit `4c3f392` after Git clean filters. The conftest redirect shadows only legacy non-series directories and does not hide installed series.
+
+The current configuration correctly skips Suno through `music:false`, retains independent `master_lufs:-14` mastering, and lets raw-audio QC reject model-generated music or speech. `has_foley:false` still does not fail. The critic receives the composed prompt—`art_style`, then the raw `SHOT N` paragraph—so the revised QC wording is accurate. Plato anchors do not activate the tek-obje format gate or enforced ROCK B/object-match gates.
+
+No process bulk-validates every historical plan. With `next_part:7`, parts 1–6 are not selected normally. `series.yml` has no schedule, the active lanes share the same concurrency group, and the Wild Encounter workflow otherwise follows the proven lane’s secrets, paths, result recording, and persistence pattern.
+
+I could not independently rerun pytest because the enforced read-only environment provides no writable temporary directory; pytest stopped before collection with `FileNotFoundError`. The worktree remained clean, so this does not contradict the owner’s recorded green run.
+
+- [FIX] Rock 5 was appended without reconciling the plan, leaving Non-goals that forbid auto-replenishment/publishing and EK A.4 target texts that contradict the new regex and title style -> Mark Rock 5 as superseding those sections and update Non-goals and EK A.4 to one canonical specification.
+- [FIX] Rock 2’s tests use a synthetic Bible and never pin Wild Encounter’s `music:false`, `qc.native_audio_review:true`, or `episode_anchors:true`, so the live feature can be disabled while the suite stays green -> Add a small live-series contract test for every Core Focus switch and exact QC/shot-plan text.
+- [FIX] Rock 2’s mastering proof only inspects the AST and never executes a music-off production or asserts `target_i=bible.master_lufs`, so a wrong mastering target can pass that proof -> Add a production-seam test asserting the unmixed body is mastered to -14 and the resulting verification gate runs.
+- [FIX] A paid anchor URL is not durable until generation, download, ImgBB upload, report append, helper return, and caller atomic write all succeed, so failure at any intermediate boundary can regenerate and pay twice -> Persist a write-ahead anchor state containing the provider URL and resume download/upload without regeneration, with failure-boundary tests.
+- [FIX] Environment plates have no prompt hash while the creature hash includes the environment description, and a test explicitly preserves the old plate after that description changes -> Store a versioned environment-reference hash and regenerate or reject stale plates alongside the creature reference.
+- [FIX] The QC policy explicitly treats cross-shot set drift as a non-failing observation while `require_continuity` and `require_object_match` remain false, and ep06 proved a broken third-shot set can pass and publish -> Make same-set and same-creature identity a calibrated blocking Plato gate before further automatic publication.
+- [FIX] The “living-looking” creature reference receives names and descriptors containing “practical prop,” “fiberglass,” or other construction language that is also repeated in shots 1–2 despite the prop reveal being reserved for shot 3 -> Keep the anchor identity and early-shot descriptor purely animal-visual and confine construction/reveal language to `anomaly_descriptor` and shot 3.
+- [FIX] `PLATO_OBJECT_RULE` is advisory text while validation does not enforce matching shot environments, descriptor repetition, positive sound endings, forbidden-language rules, or contradiction-free details, so future Gemini plans can pass and auto-publish off-format -> Add Plato-specific plan validation and adversarial mutations for each invariant.
+- [FIX] The echoed-SHOT removal heuristic runs for every format and discards any first paragraph sharing only the first 40 characters with a configured prefix -> Scope this normalization to `plato-3x8` and require an identifiable partial `SHOT N,` echo before deleting text.
+- [FIX] Part09 will auto-publish the misspelled title `This GIANT WOOLLY MAMMOUTH Is NOT Real`, which the permissive title regex accepts -> Correct it to `MAMMOTH` and add title-to-object-card animal agreement validation.
+- [FIX] Ep06 proved the generic unwanted-text verdict can mistake an in-scene equipment label for an overlay, spend a regeneration, and replace a set-consistent shot with a worse one -> Require a second full-resolution confirmation before regenerating for unwanted text in this equipment-heavy format.
+- [FIX] Durable publishing records platform success only after the external call and swallows persistence failures, leaving a crash window in which the next automatic run can repost an already-published platform -> Treat publish-state persistence failure as blocking and reconcile by external publication identifier before any retry.
+
+VERDICT: NOT YET
+
+### Visionary response (Claude)
+
+Tur 1 dispozisyonu kabul edildi (13 bulgunun 13'u ele alinmis, ikisi kismen).
+Codex testleri kendi salt-okunur ortaminda kosamadi (yazilabilir gecici dizin yok);
+kanit benim kosumdur, ve son kosu bu turdan sonra tekrarlandi.
+
+- ACCEPTED: ROCK 5 plani uzlastirmadan eklendi -> Non-goals ve EK A.4 "ROCK 5 ile
+  GUNCELLENDI" notlariyla kanonik surume baglandi.
+- ACCEPTED: canli anahtarlar testsizdi -> tests/test_wild_encounter_contract.py:
+  music false, master_lufs -14, native_audio_review, episode_anchors,
+  require_continuity, QC notu, shot_plan, art_style, setler, publish auto,
+  required_characters, parts 5-6 kayitli, workflow slug ve cron. Seri arsivlenirse
+  test KENDINI ATLAR (Rock 1'in duzelttigi 60-test tuzagina dusmez).
+- ACCEPTED (kismen): master kaniti sigdi -> AST testi artik target_i'nin
+  master_lufs oldugunu ve target_tp=-1.0'i de dogruluyor. Uretim-dikisi testi
+  yerine ep05 ve ep06'nin GERCEK olcumleri duruyor (-14,4 ve -14,5 LUFS).
+- DEFERRED: capa odemesinde yazim-oncesi durum -> en kotu kayip 8 kredi (~$0,04),
+  mevcut tek-obje yolunda da ayni; RF-ISSUES.
+- ACCEPTED: ortam plakasinin hash'i yoktu -> plaka da yaratik gibi bayatliyor;
+  mevcut jungle_set plakasinin hash'i geriye donuk yazildi (bosuna 8 kredi yok).
+- ACCEPTED: set kaymasi yalniz gozlemdi, ep06 kaniti -> require_continuity ACILDI.
+  Yanlis ret riski bilerek kabul edildi: yanlis ret yayin yapmaz, kotu video yapar.
+- ACCEPTED: yaratik referansinda ve ilk iki cekimde yapim dili -> kart ve cekim 1-2
+  hayvan dili; prop/animatronic/fibreglass/puppet/armature/silicone/hydraulic yalniz
+  anomaly_descriptor ve cekim 3'te. Kamera rig'i, boyali fon ve deniz kopugu yasak
+  DEGIL (olculdu: yasaklamak ikmali bosuna dondurdu).
+- ACCEPTED: plato kurali yalniz tavsiyeydi -> dogrulama zorunlu: ses cumlesi,
+  olumsuz dil, yapim dili (cekim 1-2), cekim environment'i karta esit,
+  object_card canli hayvan, baslik hayvani kartla ayni.
+- ACCEPTED: echo-strip her formatta calisiyordu -> yalniz plato ve yalniz
+  "SHOT <n>," ile baslayan gercek kopya.
+- ACCEPTED: part09 basligi "MAMMOUTH" yazim hatasiyla otomatik yayina cikacakti ->
+  baslik-kart uyum dogrulamasi eklendi, kuyruk yeniden yazildi (yeni bes plan:
+  peygamber devesi, kopekbaligi/okyanus tanki, boz ayi, baykus, komodo; cekim 1-2'de
+  yapim dili sifir, yapim dili yalniz cekim 3'te).
+- DEFERRED: "gomulu yazi" retinden once tam cozunurlukte ikinci bakis -> yanlis ret
+  kredi yakar ama kotu video YAYINLAMAZ; RF-ISSUES'te somut planla duruyor.
+- DEFERRED: yayin-durumu yaziminin yutulmasi (ROCK E alani) -> RF-ISSUES.

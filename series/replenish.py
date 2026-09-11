@@ -31,6 +31,7 @@ series.json şeması:
     "chain_breaks": [1, 4], // ops.: bu çekimler chain=false; diğerleri chain=true
     "hook_shot": 4,         // ops.: zorunlu teaser-source çekim numarası
     "shot_plan": ["..."],   // ops.: çekim başına deterministik prompt öneki
+    "required_characters": ["..."],  // ops.: her çekime mekanik eklenen bible karakter id'leri
     "title_patterns": [      // ops.: fullmatch + izinli family kuralları
       {"regex": "...", "families": ["..."]}
     ],
@@ -73,6 +74,7 @@ from series.series_meta import SeriesMeta, part_plan_path, plans_dir
 from series.shots import (
     NEGATIVE_VIDEO_LANGUAGE,
     OBJECT_CARD_FIELDS,
+    PLATO_FORMAT,
     SHOT1_ONSET_LANGUAGE,
     TEK_OBJE_FORMAT,
     TEMPORAL_OVERREACH,
@@ -80,6 +82,49 @@ from series.shots import (
 )
 
 REPLENISH_MODEL = "gemini-2.5-flash"
+
+# plato-3x8 (sahte kamera arkasi, wild-encounter) kendi yaratik kuralini alir.
+# Diger formatli seriler icin yazilan "anomaliyi her cekime kopyala, cekim 1'de
+# en uc haliyle goster" kurali bu formatin ifsasini ilk cekimde harcardi.
+# plato-3x8 dogrulamasi: kural metni TAVSIYEDIR, bunlar ZORUNLULUK. Otomatik yayinda
+# uymayan plan Gemini'ye geri doner; yayina cikmaz.
+# Yalniz YARATIGIN yapim dili. Kamera rig'i, boyali fon ve deniz kopugu bu formatin
+# beklenen set ogeleridir; onlari yasaklamak ikmali bosuna dondururdu (olculdu).
+PLATO_BUILD_LANGUAGE = re.compile(
+    r"\b(prop|props|practical effect|animatronic|fib(?:er|re)glass|puppet|puppets|"
+    r"hydraulic|hydraulics|silicone|armature|mechanism)\b", re.I,
+)
+PLATO_SOUND_LINE = "Ambient sound only"
+PLATO_TITLE_STOPWORDS = {"THIS", "GIANT", "NOT", "REAL"}
+
+PLATO_OBJECT_RULE = (
+    '\n- CREATURE_CARD: output exactly one object_card for the ONE giant creature of this episode. '
+    'name: the animal alone, such as "giant crocodile head". descriptor: how the creature LOOKS '
+    'ALIVE in at least 12 words: animal, colour, skin texture, eyes, teeth and height in metres; '
+    'the pipeline turns it into a reference image, so every shot prompt that shows the creature '
+    'repeats this descriptor word for word. '
+    'The creature is ONE real, recognisable animal with its natural anatomy, colour and skin, '
+    'simply at giant scale. KEEP CONSTRUCTION LANGUAGE OUT of name, descriptor and the shot 1 and '
+    'shot 2 prompts: words such as prop, practical effect, animatronic, fibreglass, puppet, '
+    'armature, silicone and hydraulic belong ONLY in anomaly_descriptor and in the shot 3 reveal, '
+    'because the audience must read the creature as a living animal until the crew open it. '
+    'Camera rigs, crew, haze and a painted backdrop are production elements and stay welcome in '
+    'every shot. '
+    'environment: the available environment id whose built set matches that animal\'s natural '
+    'habitat (sea animals on a water set, desert animals on a desert set, forest animals on a '
+    'jungle set); every shot uses that same id. framing: one sentence for the locked-off studio '
+    'camera. anomaly_descriptor: one sentence on how the crew open the practical jaws by hand in '
+    'the reveal. '
+    'STORY ORDER: shots 1 and 2 show the creature as a living, threatening animal; the practical '
+    'prop is revealed only in shot 3, by crew hands on the jaws. Every shot shows the same one man '
+    '(the series character) dressed for this set, and every shot prompt ends with one positive sound '
+    'sentence such as "Ambient sound only: dripping water, studio air handling and distant crew '
+    'movement." Shot prompts use positive visual language only. FORBIDDEN WORDS in every shot '
+    'prompt (they poison the video model): no, not, never, nothing, neither, nor, without, cannot, '
+    'absent, lacks, avoid, and the construction "instead of". Write "he steps out unharmed" rather '
+    'than "he shows no harm". Each shot prompt holds only its own details; the engine adds the '
+    'SHOT_PLAN line in front of it.'
+)
 REPLENISH_MODEL_FALLBACK = "gemini-flash-latest"
 DEFAULT_BATCH = 5
 DEFAULT_MIN_QUEUE = 2
@@ -207,6 +252,12 @@ def validate_replenish_config(cfg: dict) -> list[str]:
                         f"topic_pool[{index}].family kanonik families listesinde olmalı "
                         f"({family!r})"
                     )
+
+    if "required_characters" in cfg:
+        required = cfg.get("required_characters")
+        if (not isinstance(required, list) or not required
+                or any(not isinstance(cid, str) or not cid.strip() for cid in required)):
+            errors.append("required_characters boş olmayan karakter id listesi olmalı")
     return errors
 
 
@@ -656,6 +707,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     format_version = str(cfg.get("format_version") or "").strip()
     formatted_object = bool(format_version)
     compose_object_prompt = format_version == TEK_OBJE_FORMAT
+    plato = format_version == PLATO_FORMAT
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     previous_family = _previous_family(history) if families else ""
     # ROCK D: kalan TUM tohumlar yasak family'de ise kural ILK BOLUM icin duser.
@@ -885,6 +937,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'translucent edge glinting under the water". '
         'OBJECT IDENTITY AND ANOMALY MUST AGREE: descriptor and anomaly_descriptor are composed into ONE hero reference image, so they must never contradict each other about the same surfaces, edges or material. Write object_card.descriptor as the object LOOKS WHILE the anomaly is active; when the anomaly changes the object\'s own geometry or material, describe the changed object, never its intact "before" state. BAD: descriptor "smooth rounded edges" with anomaly "sharp fracture edges and glossy shards". GOOD: descriptor "one bright glassy break face along its long edge" with anomaly "sharp conchoidal fracture edges and glossy translucent shards".'
         if compose_object_prompt else
+        PLATO_OBJECT_RULE
+        if plato else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
         'into every one of the four shot prompts. Write one framing sentence in object_card.framing '
@@ -1126,6 +1180,11 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     format_version = str(cfg.get("format_version") or "").strip()
     formatted_object = bool(format_version)
     compose_object_prompt = format_version == TEK_OBJE_FORMAT
+    plato = format_version == PLATO_FORMAT
+    required_chars = [str(cid).strip() for cid in (cfg.get("required_characters") or [])]
+    missing_required = [cid for cid in required_chars if not bible.get_character(cid)]
+    if missing_required:
+        return [f"auto_replenish cfg: required_characters bible'da yok: {missing_required}"]
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     pool = _topic_pool(cfg)
     history = history or []
@@ -1285,6 +1344,15 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         and 1 <= shot_number <= len(cfg["shot_plan"])):
                     prefix = cfg["shot_plan"][shot_number - 1].strip() + "\n\n"
                     if not prompt.startswith(prefix):
+                        # Model satiri kismen kopyaladiysa (2026-09-11, part07 cekim 1:
+                        # kisaltilmis kopya + motorun tam satiri = vurus paragrafi IKI kez)
+                        # kopyayi at; kanonik satir bir kez, basta kalir. Yalniz plato-3x8
+                        # ve yalniz "SHOT <n>," ile baslayan gercek bir kopya icin.
+                        head, sep, rest = prompt.partition("\n\n")
+                        if (plato and sep and rest.strip()
+                                and head.strip().startswith(f"SHOT {shot_number},")
+                                and head.strip()[:40] == prefix.strip()[:40]):
+                            prompt = rest.lstrip()
                         prompt = prefix + prompt
                 if len(_prompt_content(prompt, prefix)) < 30:
                     errors.append(f"part {want} çekim {k}: prompt boş/çok kısa")
@@ -1313,8 +1381,14 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         f"part {want} çekim {shot_number}: süre tam "
                         f"{str(cfg.get('shot_seconds', DEFAULT_SHOT_SECONDS)).strip()} olmalı"
                     )
-                if formatted_object and shot.get("duration") != "6":
-                    errors.append(f"part {want} çekim {shot_number}: süre tam '6' string olmalı")
+                # Formatli seriler sureyi string olarak tam cfg degeriyle yazar. Eskiden
+                # burada sabit "6" vardi (tek-obje-4x6'nin degeri; o formatta config
+                # zaten 6'ya kilitli) ve 8 saniyelik plato-3x8 planlarinin HEPSINI reddediyordu.
+                expected_sec = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
+                if formatted_object and shot.get("duration") != expected_sec:
+                    errors.append(
+                        f"part {want} çekim {shot_number}: süre tam {expected_sec!r} string olmalı"
+                    )
                 # Yalnız bilinen alanlar; model karakter/diyalog uydurduysa sessizce atılır.
                 clean = {"n": shot_number, "duration": dur, "prompt": prompt, "seed": None}
                 if strict_chain:
@@ -1337,6 +1411,38 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     env = shot.get("environment")
                     if env is not None:
                         clean["environment"] = env
+                if plato:
+                    body = model_action_text
+                    if PLATO_SOUND_LINE not in body:
+                        errors.append(
+                            f"part {want} çekim {shot_number}: prompt "
+                            f"'{PLATO_SOUND_LINE}: ...' cümlesi içermeli"
+                        )
+                    if NEGATIVE_VIDEO_LANGUAGE.search(body):
+                        errors.append(
+                            f"part {want} çekim {shot_number}: olumsuz dil var; "
+                            "olanı yaz (difüzyon olumsuzu çizer)"
+                        )
+                    if shot_number in (1, 2):
+                        leaked = sorted({m.group(0).lower()
+                                         for m in PLATO_BUILD_LANGUAGE.finditer(body)})
+                        if leaked:
+                            errors.append(
+                                f"part {want} çekim {shot_number}: yapım dili ifşayı erken "
+                                f"harcıyor {leaked}; prop dili yalnız çekim 3'te"
+                            )
+                    card_env = str((raw_card or {}).get("environment") or "").strip()
+                    if card_env and clean.get("environment") != card_env:
+                        errors.append(
+                            f"part {want} çekim {shot_number}: environment tam {card_env!r} olmalı"
+                        )
+                if required_chars:
+                    # Opt-in: serinin yuzu her cekimde. Gemini alani atlasa bile kimlik
+                    # mekanik eklenir; yoksa yuz capasi (characterId) otomatik planda kaybolur
+                    # ve QC yuzu tutmayan her cekimi kredi yakarak reddeder.
+                    clean["characters"] = list(dict.fromkeys(
+                        [*required_chars, *(clean.get("characters") or [])]
+                    ))
                 if compose_object_prompt:
                     for field in ("violation_observation", "state_carry"):
                         value = shot.get(field)
@@ -1354,6 +1460,28 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         if want_fc and clean_shots and fact_count < 2:
             errors.append(f"part {want}: fact_captions açık ,  en az 2 çekimde 'fact' olmalı "
                           f"(gelen: {fact_count})")
+
+        if plato:
+            card_name = str((raw_card or {}).get("name") or "")
+            card_desc = str((raw_card or {}).get("descriptor") or "")
+            leaked = sorted({m.group(0).lower() for m in
+                             PLATO_BUILD_LANGUAGE.finditer(f"{card_name} {card_desc}")})
+            if leaked:
+                errors.append(
+                    f"part {want}: object_card canli hayvani tarif etmeli, yapım dili "
+                    f"taşımamalı {leaked}"
+                )
+            # Basliktaki hayvan adi karttaki hayvanla ayni olmali: "MAMMOUTH" gibi yazim
+            # hatasi otomatik yayina cikmasin (2026-09-11, part09).
+            animal_words = [word for word in re.findall(r"\b[A-Z]{3,}\b", title)
+                            if word not in PLATO_TITLE_STOPWORDS]
+            lowered_name = card_name.lower()
+            missing = [word for word in animal_words if word.lower() not in lowered_name]
+            if missing:
+                errors.append(
+                    f"part {want}: basliktaki {missing} object_card.name "
+                    f"({card_name!r}) icinde gecmiyor"
+                )
 
         hook = plan.get("hook_shot")
         try:

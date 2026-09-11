@@ -46,6 +46,7 @@ from .omni_api import (
 from .episode_coherence import episode_coherence_report
 from .series_meta import SeriesMeta, part_plan_path
 from .shots import (
+    PLATO_FORMAT,
     TEK_OBJE_FORMAT,
     resolve_shot,
     resolve_visual_shot,
@@ -775,9 +776,9 @@ def _audio_master_hold(reason: str) -> ProduceResult:
 # boylece eski hash tutmaz ve tum referanslar yeniden uretilir.
 REF_PROMPT_TEMPLATE_VERSION = "rb1"
 REFERENCE_IMAGE_MODEL = "nano-banana-2"
-# Fake behind-the-scenes format (wild-encounter). Its anchors are opt-in through
-# bible.series.episode_anchors and use their own prompt template version.
-PLATO_FORMAT = "plato-3x8"
+# Fake behind-the-scenes format (wild-encounter, shots.PLATO_FORMAT). Its anchors
+# are opt-in through bible.series.episode_anchors and use their own prompt
+# template version.
 PLATO_REF_TEMPLATE_VERSION = "plato1"
 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
@@ -1304,13 +1305,21 @@ def _ensure_plato_anchors(
     expected_hash = hashlib.sha256(
         f"{PLATO_REF_TEMPLATE_VERSION}|{generation_identity}|{creature_prompt}".encode("utf-8")
     ).hexdigest()
+    expected_env_hash = hashlib.sha256(
+        f"{PLATO_REF_TEMPLATE_VERSION}|{generation_identity}|{env_prompt}".encode("utf-8")
+    ).hexdigest()
     stale_creature = (
         existing_props is not None and plan.get("ref_prompt_sha256") != expected_hash
     )
+    # Set plakasi da bayatlayabilir: ortam tarifi degisince yaratik referansi yeniden
+    # uretiliyordu ama plaka eski tarifin goruntusunde kaliyordu (SPM tur 2 bulgusu).
+    stale_env = bool(existing_env) and environment.get("ref_prompt_sha256") != expected_env_hash
     if stale_creature:
         logger.warning("♻️ Yaratik referansi bayat (prompt bilesenleri degisti); yeniden uretilecek")
+    if stale_env:
+        logger.warning("♻️ Set plakasi bayat (ortam tarifi degisti); yeniden uretilecek")
 
-    missing_env = not existing_env
+    missing_env = not existing_env or stale_env
     missing_creature = existing_props is None or stale_creature
     if not missing_env and not missing_creature:
         return True
@@ -1343,6 +1352,7 @@ def _ensure_plato_anchors(
         if not env_url:
             return False
         environment["ref_image_url"] = env_url
+        environment["ref_prompt_sha256"] = expected_env_hash
         atomic_write_json(
             Path(output_area) / "bible.json" if output_area is not None
             else bible_path(bible.slug),

@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "This GIANT SHARK Is NOT Real"
+  },
+  "synopsis": "On an ocean tank set, a massive great white shark surges forward to swallow a performer, whose reappearance from its maw reveals it to be an elaborate prop.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "SHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man, who stands his ground and watches its jaws begin to part.\n\nSHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators in the foreground. One massive, grey and white great white shark, with rough, abrasive skin texture, cold, dark eyes and rows of razor-sharp triangular teeth, its head alone stretching over six metres high, faces Ihsan, who stands his ground in the shallow water and watches its jaws begin to part. Ambient sound only: gentle lapping water, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "SHOT 2, TAKEN INSIDE. The creature's jaws open wide and close over exactly one man until he is completely out of sight inside its mouth, and the creature settles with the man nowhere in frame. The crew keep filming.\n\nSHOT 2, TAKEN INSIDE. The massive, grey and white great white shark, with rough, abrasive skin texture, cold, dark eyes and rows of razor-sharp triangular teeth, its head alone stretching over six metres high, opens its jaws wide and closes over Ihsan until he is completely out of sight inside its mouth, and the creature settles with Ihsan nowhere in frame. The crew keep filming. Ambient sound only: gentle lapping water, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "SHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the creature and push its jaws open, and the same one man climbs out of the mouth onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal.\n\nSHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the massive shark's jaw and push it open, revealing the intricate mechanism of painted fibreglass teeth, and Ihsan climbs out of the mouth onto the ocean tank set floor unharmed, showing that the creature is a built practical prop rather than a living animal. Ambient sound only: gentle lapping water, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant great white shark head",
+    "descriptor": "a massive, grey and white great white shark, with rough, abrasive skin texture, cold, dark eyes and rows of razor-sharp triangular teeth, its head alone stretching over six metres high",
+    "environment": "ocean_tank_set",
+    "framing": "The camera is locked off, capturing a mid-shot of the creature's head and the man on the ocean tank set.",
+    "anomaly_descriptor": "the shark's mouth is a complex mechanism of painted fibreglass teeth attached to hydraulic pistons, manually pushed open by crew hands to reveal the actor within"
+  },
+  "family": "sea-giant",
+  "hook_shot": 2,
+  "doctrine_sha256": "8059d15cab4ab3018ed5f39d57568000a9d320e811c70e98a7965872b0404fdc"
+}

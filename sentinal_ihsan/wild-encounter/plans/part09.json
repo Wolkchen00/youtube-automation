@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "This GIANT GRIZZLY BEAR Is NOT Real"
+  },
+  "synopsis": "On a dense jungle set, a colossal grizzly bear roars and engulfs a performer in its powerful jaws, which are later opened by crew members to release him.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "SHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man, who stands his ground and watches its jaws begin to part.\n\nSHOT 1, THE THREAT ON SET. A built film set reads immediately: dressed practical set pieces and haze around the frame, a green screen wall visible beyond them, and the backs of camera operators in the foreground. One colossal brown grizzly bear, with thick, shaggy fur, small, intelligent black eyes, and immense, powerful jaws lined with crushing teeth, standing over eight metres tall, faces Ihsan, who stands his ground on the jungle floor and watches its jaws begin to part. Ambient sound only: rustling leaves, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "SHOT 2, TAKEN INSIDE. The creature's jaws open wide and close over exactly one man until he is completely out of sight inside its mouth, and the creature settles with the man nowhere in frame. The crew keep filming.\n\nSHOT 2, TAKEN INSIDE. The colossal brown grizzly bear, with thick, shaggy fur, small, intelligent black eyes, and immense, powerful jaws lined with crushing teeth, standing over eight metres tall, opens its jaws wide and closes over Ihsan until he is completely out of sight inside its mouth, and the creature settles with Ihsan nowhere in frame. The crew keep filming. Ambient sound only: rustling leaves, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "SHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the creature and push its jaws open, and the same one man climbs out of the mouth onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal.\n\nSHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the colossal bear's jaw and pull it open, revealing the sculpted foam and fur shell interior, and Ihsan climbs out of the mouth onto the jungle set floor unharmed, showing that the creature is a built practical prop rather than a living animal. Ambient sound only: rustling leaves, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant grizzly bear head",
+    "descriptor": "a colossal brown grizzly bear, with thick, shaggy fur, small, intelligent black eyes, and immense, powerful jaws lined with crushing teeth, standing over eight metres tall",
+    "environment": "jungle_set",
+    "framing": "The camera is locked off, capturing a wide shot of the creature's head and the man on the jungle set.",
+    "anomaly_descriptor": "the bear's head is a meticulously sculpted foam and fur shell, its articulated jaw system manually unlatched and pulled apart by the crew"
+  },
+  "family": "mammal-giant",
+  "hook_shot": 2,
+  "doctrine_sha256": "8059d15cab4ab3018ed5f39d57568000a9d320e811c70e98a7965872b0404fdc"
+}
