@@ -88,3 +88,32 @@ dogruladim ve plan yeniden yazildi.
   bir ezme ekliyor. Ilk surum "motor degismeyecek" diyordu. Degisiklik mevcut
   `title_style` kalibinin aynisi ve opt-in; ama kapsam degisikligi oldugu icin
   burada acikca kayda geciyor.
+
+## Round 2 , YARIM (Codex kota limitine takildi)
+
+Tur, Codex `You've hit your usage limit` ile duserek bitti; `-o` dosyasi HIC
+olusmadi ve VERDICT satiri YOK. Yani bu tur **tamamlanmadi**, meeting hala
+`VERDICT: NOT YET` durumunda.
+
+Ama olay akisi dusmeden once TEK gercek bulgu birakti (`item_2`, verbatim):
+
+> "The remaining design risk is narrower now: one free-form `title_card_style`
+> string cannot be inserted verbatim into both a compact JSON placeholder and a
+> full rule cleanly."
+
+### Visionary response (Claude)
+
+- **ACCEPTED** , kod okunarak dogrulandi: `:701` `tc_shape` bir JSON sema parcasi
+  (`"title": "<subject name, max 40 chars>"`), `:748` `tc_rule` ise duzyazi bir
+  kural satiri. Tek serbest metin ikisine birden oturmaz; plan ikisine de "ayarin
+  metni yazilir" diyordu ve bu yanlisti.
+- **COZUM:** ayarin metni YALNIZ kurala gider. Sema yer tutucusu ise ayarin
+  metnini almaz, sadece celismeyi birakir: `"<subject name, max 40 chars>"` ->
+  `"<title, max 40 chars>"`. Boylece sema alanin ne oldugunu ve sinirini
+  soylemeye devam eder ama "ozne adini yaz" DAYATMAZ.
+- Plan r3'e islendi.
+
+**Durum:** meeting yarim. Kalan dort soru (motor threading'inin en sadik hali,
+proof 9'un gercekten olculebilirligi, brief metnini baska okuyan var mi, ve
+kunyeye "ozne adi" diyen ucuncu bir yer kaldi mi) CEVAPSIZ. Yapiya gecmeden
+once tamamlanmali.

@@ -113,10 +113,21 @@ kalip kullanilacak , yeni bir mimari degil, mevcut kalibin ikinci kullanimi.
 **Yapilacak:**
 
 1. `series/replenish.py`, `_build_prompt` icinde `title_card_style` oku
-   (`cfg.get("title_card_style")`), ve **IKI yeri birden** ezsin:
-   - `:748` `tc_rule` , ayar varsa onun metni kullanilir
-   - `:701` `tc_shape` yer tutucusu , ayar varsa `"<subject name, max 40 chars>"`
-     yerine ayarin belirttigi tarif yazilir
+   (`cfg.get("title_card_style")`), ve **IKI yeri birden** ezsin , ama AYNI
+   metni iki yere basmayarak:
+
+   - `:748` `tc_rule` , ayar varsa ayarin METNI kullanilir (duzyazi kural).
+   - `:701` `tc_shape` , ayar varsa yer tutucusu YANSIZ hale gelir:
+     `"<subject name, max 40 chars>"` -> `"<title, max 40 chars>"`.
+     Ayarin metni BURAYA BASILMAZ.
+
+   **Gerekce (Codex turu 2, kismi):** *"one free-form `title_card_style` string
+   cannot be inserted verbatim into both a compact JSON placeholder and a full
+   rule cleanly."* Hakli , `tc_shape` bir JSON sema parcasi, `tc_rule` duzyazi
+   bir kural; tek serbest metin ikisine birden oturmaz. Cozum: kural metni
+   yalnizca kurala gider, semadaki yer tutucu ise yalnizca CELISMEYI BIRAKIR
+   (artik "subject name" DAYATMAZ, sadece alanin ne oldugunu ve sinirini soyler).
+
    Ayar YOKSA her iki yer de BUGUNKU metni aynen uretir. Diger uc kanalda bu
    anahtar olmadigi icin ciktilari BIT BIT AYNI kalir.
 2. `shadowedhistory/flashpoints/series.json` -> `auto_replenish.title_card_style`
