@@ -18,6 +18,13 @@ name: Fear Slide Daily
 on:
   schedule:
     - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
+    # KREDI TELAFISI (2026-09-11). Kie otomatik yuklemesi bakiye 1500'un altina
+    # dusunce tetikleniyor, 1080p is ~1530 kredi. Bakiye arada kalinca sabah
+    # kosusu kredi harcamadan durur ve kredi_bekliyor.json damgasini birakir.
+    # Aradaki saatlerde baska kanallarin harcamasi yuklemeyi tetikler; bu kosu
+    # yalniz damga BUGUNE aitse ve bugun yayin yoksa uretir. Satiri degistirirsen
+    # asagidaki "Telafi kapisi" karsilastirmasini da degistir.
+    - cron: '30 21 * * *'   # 21:30 UTC = 14:30 PDT; GitHub gecikmesiyle genelde aksamustu
   workflow_dispatch:
     inputs:
       sehir:
@@ -39,7 +46,36 @@ permissions:
   contents: write
 
 jobs:
+  kapi:
+    # Sabah cron'u ve elle tetikleme her zaman gecer. Telafi cron'u gecmezse
+    # uretim isi ATLANIR: last_run.json'a dokunulmaz (sabahki basarili kaydi
+    # "no_video" ile ezmesin) ve baska sebeple dusmus gun ikinci kez uretilmez.
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      calis: ${{ steps.karar.outputs.calis }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Telafi kapisi
+        id: karar
+        shell: bash
+        run: |
+          if [ "${{ github.event.schedule }}" = "30 21 * * *" ]; then
+            python -X utf8 AImagine-Fear/tools/gunluk.py --telafi-kapisi >> "$GITHUB_OUTPUT"
+          else
+            echo "calis=true" >> "$GITHUB_OUTPUT"
+          fi
+
   produce-and-publish:
+    needs: kapi
+    if: needs.kapi.outputs.calis == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
@@ -123,7 +159,7 @@ jobs:
         run: |
           bash scripts/persist_state.sh \
             "chore: fear-slide durumunu ilerlet [skip ci]" \
-            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json AImagine-Fear/kanarya_basarisiz.json
+            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json AImagine-Fear/kanarya_basarisiz.json AImagine-Fear/kredi_bekliyor.json
 
       - name: Upload logs artifact
         if: always()
@@ -141,10 +177,22 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         shell: bash
         run: |
+          URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          MESAJ="🚨 Fear Slide (AImagine) workflow basarisiz , bu kanala bugun video CIKMAYABILIR: $URL"
+          # Damga BU KOSUDA mi yazildi? Ayni gunun eski damgasi, baska sebeple
+          # dusen bir kosuyu "kredi" diye yanlis raporlamasin.
+          KREDI_DURUSU=$(python -c "import json,os; d=json.load(open('AImagine-Fear/kredi_bekliyor.json',encoding='utf-8')); print('evet' if str(d.get('ts',''))[:19] >= os.environ['KOSU_BASLANGIC'][:19] else 'hayir')" 2>/dev/null || echo hayir)
+          if [ "$KREDI_DURUSU" = "evet" ]; then
+            if [ "${{ github.event.schedule }}" = "30 21 * * *" ]; then
+              MESAJ="🚨 Fear Slide (AImagine): TELAFI kosusu da Kie kredisini yetersiz buldu, bugun video CIKMADI. Kie'ye elle yukleme gerekiyor: $URL"
+            else
+              MESAJ="⚠️ Fear Slide (AImagine): Kie kredisi bu is icin yetersizdi, kredi harcanmadi. Telafi kosusu bugun ogleden sonra otomatik yeniden deneyecek: $URL"
+            fi
+          fi
           if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
             curl --silent --max-time 20 --request POST \
               "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
               --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
-              --data-urlencode "text=🚨 Fear Slide (AImagine) workflow basarisiz , bu kanala bugun video CIKMAYABILIR: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              --data-urlencode "text=$MESAJ" \
               >/dev/null 2>&1 || true
           fi

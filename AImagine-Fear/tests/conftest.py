@@ -25,11 +25,13 @@ def _durum_dosyalarini_izole_et(tmp_path_factory, monkeypatch):
                                "dogrulandi" sayardi.
       kanarya_basarisiz.json -> commit'lenseydi cron kanaryayi HIC calistiramaz,
                                kanal sessizce dururdu.
+      kredi_bekliyor.json    -> commit'lenseydi telafi cron'u sahte bir kredi
+                               durusu icin para harcayabilirdi.
 
     Yeni bir durum dosyasi eklenirse BURAYA da eklenmeli.
     """
     from tools import gunluk
 
     kok = tmp_path_factory.mktemp("durum")
-    for ad in ("ONAY_DOSYASI", "KANARYA_KILIDI"):
+    for ad in ("ONAY_DOSYASI", "KANARYA_KILIDI", "KREDI_BEKLIYOR"):
         monkeypatch.setattr(gunluk, ad, kok / getattr(gunluk, ad).name)

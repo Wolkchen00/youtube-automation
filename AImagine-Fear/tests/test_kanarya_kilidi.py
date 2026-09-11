@@ -98,7 +98,7 @@ def test_kapida_kalan_kanarya_kilidi_YAZAR(tmp_path: Path, monkeypatch) -> None:
         encoding="utf-8",
     )
     monkeypatch.setattr(gunluk, "defter", lambda: [])
-    monkeypatch.setattr(gunluk, "kredi", lambda: 1000)
+    monkeypatch.setattr(gunluk, "kredi", lambda: 10000)  # 1080p is ~1530 ister
     monkeypatch.setattr(gunluk, "rota_suresi", lambda s, kok=None: 15)
     monkeypatch.setattr(gunluk, "rota_paleti", lambda s, kok=None: "neon")
     monkeypatch.setattr(gunluk, "sha256_dosya", lambda p: "s" * 64)

@@ -185,7 +185,7 @@ def test_canary_runs_automatically_but_downgrade_still_blocks(
         encoding="utf-8",
     )
     monkeypatch.setattr(gunluk, "defter", lambda: [])
-    monkeypatch.setattr(gunluk, "kredi", lambda: 1000)
+    monkeypatch.setattr(gunluk, "kredi", lambda: 10000)  # 1080p is ~1530 ister
     monkeypatch.setattr(gunluk, "rota_suresi", lambda s, kok=None: 15)
     monkeypatch.setattr(gunluk, "rota_paleti", lambda s, kok=None: "neon")
     monkeypatch.setattr(gunluk, "sha256_dosya", lambda p: "s" * 64)
@@ -292,7 +292,7 @@ def test_yayinlama_runs_generation_without_publish_and_checks_contact(
     monkeypatch.setattr(gunluk, "KOK", tmp_path)
     monkeypatch.setattr(gunluk, "DEFTER", tmp_path / "yayin.jsonl")
     monkeypatch.setattr(gunluk, "defter", lambda: [])
-    monkeypatch.setattr(gunluk, "kredi", lambda: 1000)
+    monkeypatch.setattr(gunluk, "kredi", lambda: 10000)  # 1080p is ~1530 ister
     monkeypatch.setattr(gunluk, "rota_suresi", lambda slug, kok=None: 15)
     monkeypatch.setattr(gunluk, "rota_paleti", lambda slug, kok=None: "neon")
 
