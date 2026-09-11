@@ -1,6 +1,6 @@
 # BEYIN , flashpoints
 
-Uretim: 2026-09-11T04:41:31.530439+00:00
+Uretim: 2026-09-11T04:56:30.253304+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/flashpoints/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
