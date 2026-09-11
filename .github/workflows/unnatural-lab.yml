@@ -21,8 +21,10 @@ name: Unnatural Lab Daily
 # hiçbir platforma yayınlanmaz. Format kanıtlandıktan sonra publish_mode="auto" yapılır.
 
 on:
-  schedule:
-    - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
+  # 2026-09-10: seri arsive kaldirildi (Antigravity/_arsiv/sentinal_ihsan_2026-09-10).
+  # Kanal sifirdan yazilacak. Yeni seri hazir olunca bu blok geri acilir.
+  # schedule:
+  #   - cron: '30 18 * * *'   # 18:30 UTC ≈ 11:30 California ≈ 21:30 TR
   workflow_dispatch:
 
 concurrency:
