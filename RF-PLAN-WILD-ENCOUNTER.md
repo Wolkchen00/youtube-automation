@@ -60,8 +60,15 @@ yerine DONDURULMUS fixture'dan okuyacak hale getir.
   kaynagi.
 - ROCK 1 uretim koduna (`series/`, `core/`) DOKUNMAZ. Enjeksiyon noktasi yoksa
   ve uretim kodu degismeden olmuyorsa: `BLOCKED: <fonksiyon ve sebep>`.
-- Done: tam takim yesil.
+- Test kirliligi: tam takim kosusu git'te izlenen
+  `series_data/advers/hold_log.jsonl` dosyasina 8 satir ekliyor (olculdu,
+  bu worktree'de). Testler izlenen hicbir dosyaya yazmamali: test altyapisinda
+  (or. conftest autouse fixture ile yolu tmp'ye yonlendirerek) duzelt; uretim
+  koduna dokunmadan olmuyorsa BLOCKED.
+- Done: tam takim yesil ve kosu agaci kirletmiyor.
 - PROOF: `python -m pytest -q -p no:cacheprovider` -> `0 failed`, `0 error`;
+  kosudan SONRA `git status --porcelain` yalniz senin bu rockta ekledigin /
+  degistirdigin dosyalari gosterir (izlenen baska dosya degismez);
   ve `git diff --stat -- series core` bos.
 
 ### ROCK 2: Muzik yatagi kapali, muziksiz govde masterlanir
