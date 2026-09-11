@@ -1,5 +1,5 @@
 """
-Galactic config gates — lock in the new opt-in gates for event-horizon and
+Galactic config gates ,  lock in the new opt-in gates for event-horizon and
 verify fleet isolation + malformed-value rejection.
 """
 
@@ -55,12 +55,31 @@ class FleetIsolationTest(unittest.TestCase):
                 else:  # flashpoints ve unnatural-lab
                     self.assertEqual(bible.master_lufs, -14)
 
-                # master_true_peak_margin_db: bu bizim turumuzun alani ve HICBIR
-                # baska seriye sizmamali. flashpoints master_lufs'u acmis olsa bile
-                # payi 0.0, yani eski aritmetikte kaliyor.
-                self.assertEqual(bible.master_true_peak_margin_db, 0.0)
+                # master_true_peak_margin_db: bu alan bu turda event-horizon icin
+                # eklendi. Amac SIZMAYI yakalamak, yani alani hic istemeyen bir
+                # seride kazara acilmasini.
+                #
+                # 2026-09-10: flashpoints bu payi BILEREK aldi (d4abc8e). Sebep
+                # olculmus bir yayin arizasi: master_lufs acildiktan sonraki ilk
+                # kosuda teslim "true-peak -0.4 dBTP > -1.0" ile tuttu ve o gun
+                # kanala video CIKMADI. Yani bu sizma degil, kasitli benimseme.
+                #
+                # Test yine de sert kaliyor: payi benimsemeyen seriler 0.0'da
+                # olmali, yoksa kazara acilmasi buradan gecerdi.
+                if slug == "flashpoints":
+                    self.assertEqual(
+                        bible.master_true_peak_margin_db, 0.2,
+                        "flashpoints payi bilerek 0.2; degistiyse d4abc8e'nin "
+                        "duzelttigi yayin arizasi geri gelmis olabilir",
+                    )
+                else:  # next-stop ve unnatural-lab payi ISTEMEDI
+                    self.assertEqual(
+                        bible.master_true_peak_margin_db, 0.0,
+                        "%s bu alani hic benimsemedi; 0.0 disinda bir deger "
+                        "sizma demektir" % slug,
+                    )
 
-                # block_degraded_publish — all three must be False
+                # block_degraded_publish ,  all three must be False
                 self.assertFalse(bible.block_degraded_publish)
 
                 # state_machine_version
