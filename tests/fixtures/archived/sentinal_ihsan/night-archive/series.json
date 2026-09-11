@@ -1,0 +1,75 @@
+{
+  "slug": "night-archive",
+  "base_title": "The Night Archive",
+  "logline": "A records archive on sub-level three. Boxes arrive by themselves. The night archivist has one rule: log everything, play nothing. He plays one — and the tapes start filming him back.",
+  "language": "en",
+  "upload_profile": "sentinalihsandaily",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#horror #mystery #vhs #analoghorror #foundfootage #archive #paranormal #creepy #storytime #shorts",
+  "total_parts": 5,
+  "next_part": 5,
+  "status": "paused",
+  "paused_note": "2026-07-07: sentinalihsandaily kanalı korku-DIŞI 'I Woke Up In History' (time-witness) serisine pivot etti (İhsan kararı: 'korku olmasın, bambaşka seri'). Night Archive geri istenirse status'u 'active' yap + time-witness'i pause et (tek kanal = tek aktif seri, günde-1 kilidi).",
+  "priority": 999,
+  "publish_mode": "auto",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 6,
+    "shot_seconds": "8",
+    "brief": "Sonsuz antoloji: her bölüm arşive gelen YENİ bir dosya/kaset (FILE #numarası artarak devam eder) — kendi başına tam bir mini korku hikâyesi + bölüm sonu cliffhanger. DEĞİŞMEZ KURALLAR: (1) Başrol HER bölümde 'ihsan_archivist' karakteridir (kanalın yüzü) — en az 3-4 çekimde masa başında/rafların arasında yakın-orta planda görünür. (2) Her bölümde 1-2 çekim 'crt_screen' ortamında VHS kaset görüntüsü insert'i olsun (izlenen dosyanın içeriği). (3) Anlatım (narration) her zaman arşivcinin İngilizce birinci-şahıs iç monoloğu: sakin, yorgun, gergin — MrBallen tarzı; asla panik/çığlık. (4) Çekimler SESSİZ görsel: kimse konuşmaz, lip-sync yok. (5) Asla kan/vahşet — korku gösterilmeyende, durgunlukta. (6) hook_shot olarak bölümün en ürkütücü çekimini seç. Tema havuzu: tuhaf kasetler (geleceği/izleyeni çeken kayıtlar), imkânsız belgeler ve fotoğraflar, gelen kutuların tekrarlayan desenleri, arşivin kendi kuralları (intake zili, raf ışıkları, 9. koridor), zaman döngüleri, FILE #000 mitosuna ara sıra dokunan meta-bölümler. Her bölüm YENİ bir dosya konsepti kullansın; önceki bölümlerin dosya numaraları ve olaylarıyla tutarlı kal.",
+    "last_run": null
+  },
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep01/ep01_narrated_music_hooked.mp4",
+      "subtitle": "Never Play the Tapes",
+      "platforms_ok": [
+        "instagram",
+        "tiktok",
+        "youtube"
+      ],
+      "published_at": "2026-07-03T20:27:51.493754+00:00",
+      "note": "YT: SSL arizasi sonrasi yerel telafi (2026-07-03 21:17Z) — yeniden uretim + YENI sakin ses (Algieba, fisilti yok, Ihsan geri bildirimi). IG/TikTok'ta v1 (fisiltili Charon) duruyor."
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep02/ep02_narrated_music_hooked.mp4",
+      "subtitle": "The Tape Labeled Tomorrow",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-05T20:22:16.870568+00:00"
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep03/ep03_narrated_music_hooked.mp4",
+      "subtitle": "Aisle Nine",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-06T20:47:39.960940+00:00"
+    },
+    "4": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/night-archive/episodes/ep04/ep04_narrated_music_hooked.mp4",
+      "subtitle": "The Previous Archivist",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-07-07T21:08:55.914061+00:00"
+    }
+  }
+}

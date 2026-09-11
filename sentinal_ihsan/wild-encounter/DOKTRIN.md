@@ -6,7 +6,51 @@ Kurulus: 10 Eylul 2026. Kanal sifirdan yazildi, onceki sekiz seri arsivde
 Bu belgedeki her sayi OLCULMUSTUR. Kaynak: `sentinal_ihsan/TERSINE-MUHENDISLIK.md`.
 Izlenme sayilari Ihsan'in IG Insights'indan, teknik olcumler bizim (yt-dlp + ffmpeg).
 
-## Tek cumle
+## GUNCEL FORMAT (11 Eylul 2026'dan itibaren gecerli)
+
+Bu bolum asagidaki "Tek cumle", "Degismez kurallar" ve "Neye DOKUNMA"
+bolumlerinin YERINE gecer. Onlar 10 Eylul'un dis mekan / melez yaratik
+formatini anlatir; o format olculerek terk edildi (asagidaki basarisizlik
+kayitlari). Kayitlar ders olarak duruyor.
+
+### Tek cumle
+
+Bir film setinde dev, gercekci bir yaratik Ihsan'i agzina alir; ekip
+cenesini elleriyle acar ve Ihsan yara almadan cikar. Yaratigin bir prop
+oldugu son vurusta anlasilir.
+
+### Kurallar
+
+1. ANLATIM YOK, MUZIK YOK. Ses setin kendi sesidir: ortam, su, yaratik
+   mekanizmasi, ekip hareketi, alkis. Diegetik ses kisilmez. Mastering
+   muziksiz govde uzerinde -14 LUFS / -1 dBTP'ye yapilir. (11 Eylul, ep05
+   sonrasi Ihsan karari.)
+2. UC VURUS, SIRASI DEGISMEZ, TEK SET: tehdit, agza alinma, ekibin ceneyi
+   acmasi ve cikis. Vurus metninin TEK KAYNAGI
+   series.json auto_replenish.shot_plan; her cekim promptu o metinle baslar.
+3. QC NOTU VURUS TARIF ETMEZ, prompttaki "SHOT N," paragrafina bakar.
+   Sebep: kural degisip QC notu bayat kalinca dogru video yanlis sebeple
+   reddedildi; 11 Eylul'de uc kez, 483 kredi.
+4. art_style HER cekim promptunun basina eklenir (series/shots.py). Formati
+   degistiren her karar art_style'i ayni anda degistirir.
+5. KURULMUS DEKOR, CIPLAK YESIL PERDE DEGIL. On planda gercek set malzemesi
+   (yaprak, kaya, su, sis), arkada yesil perde, kenarda ekip, en onde kamera
+   operatorlerinin sirti. (DdEArj4BMrV dersi.)
+6. GIRIS AGIZDAN, CIKIS EKIBIN ELLERIYLE. Prop oldugunu kanitlayan sey alkis
+   degil, ellerin dekorun uzerinde olmasi.
+7. TEK YARATIK, DONUSUM YOK. Iki govde birlestirilemiyor (olculdu).
+8. OLCEK: yaratik buyuk ve yakin, kadrajin buyuk kismini doldurur.
+9. TEK IHSAN, konusmaz, kameraya bakmaz. Yuz capasi character_id; kiyafet
+   sete gore degisir.
+10. SURE: 3 x 8 sn, duration_band [12, 26]. ep05 22,7 sn cikti.
+11. EKRANA YAZI YOK. GUVENLIK: kan ve yaralanma yok.
+12. Her bolumun yaratigi bir referans gorselle (plan.prop_ref_urls), seti
+    ortam referansiyla capalanir (bible.series.episode_anchors); bolum icinde
+    cekim zinciri de surekliligi tasir. Yaratigi Kie'de KARAKTER olarak kaydetmek
+    olculmus bir denemeden once uretime baglanmaz (insan olmayan ozne ve ucret
+    dogrulanmadi).
+
+## Tek cumle (ESKI FORMAT, 10 Eylul, artik gecerli degil)
 
 Bir adam gercek bir dogal mekanda, iki gercek hayvanin imkansiz birlesimi olan
 TEK bir yaratikla karsilasir, ve zar zor kurtulur. Hicbir sey aciklanmaz.
@@ -29,7 +73,7 @@ Ucu birden ayri bir parcayi kanitliyor:
 
 Bizim formatimiz ucunun birlesimidir.
 
-## Degismez kurallar
+## Degismez kurallar (ESKI FORMAT, 10 Eylul, artik gecerli degil)
 
 1. **ANLATIM YOKTUR.** Dort referansin DORDUNDE de desifre sifir kelime.
    Voiceover yok, konusma yok, karakter agzini konusur gibi oynatmaz.
@@ -70,7 +114,7 @@ Bizim formatimiz ucunun birlesimidir.
 10. **GUVENLIK.** Kan, yaralanma, hayvana eziyet, insan olumu yok.
     Gerilim kovalamacadan gelir, siddetten degil.
 
-## Neye DOKUNMA
+## Neye DOKUNMA (ESKI FORMAT, 10 Eylul, artik gecerli degil)
 
 - Ses hedefi -14 LUFS. Referanslar -14,1 ila -14,5 olculdu, motorumuz zaten
   ayni hedefte. Degistirme.

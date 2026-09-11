@@ -17,12 +17,23 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from series import critic, produce, replenish
 from series.bible import Bible
 from series.shots import TEK_OBJE_FORMAT, format_plan_errors
+from tests._archived_fixture import archived_path, archived_search_roots
 
-REPO = pathlib.Path(__file__).resolve().parents[1]
+# unnatural-lab 2026-09-10'da arsivlendi; bu moduldeki Bible.load("unnatural-lab")
+# ve plan okumalari dondurulmus kopyadan gelir (tests/_archived_fixture.py).
+_ARCHIVED_ROOTS = archived_search_roots()
+
+
+def setUpModule():
+    _ARCHIVED_ROOTS.start()
+
+
+def tearDownModule():
+    _ARCHIVED_ROOTS.stop()
 
 
 def unnatural_plan(part: int = 23) -> dict:
-    path = REPO / "sentinal_ihsan" / "unnatural-lab" / "plans" / f"part{part}.json"
+    path = archived_path(f"sentinal_ihsan/unnatural-lab/plans/part{part}.json")
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -456,7 +467,7 @@ class EnvironmentNeutralityTests(unittest.TestCase):
 
     def test_series_qc_notes_are_environment_neutral(self):
         data = json.loads(
-            (REPO / "sentinal_ihsan" / "unnatural-lab" / "bible.json").read_text(encoding="utf-8")
+            archived_path("sentinal_ihsan/unnatural-lab/bible.json").read_text(encoding="utf-8")
         )
         self.assertNotIn("bench", data["series"]["qc"]["notes"].lower())
 

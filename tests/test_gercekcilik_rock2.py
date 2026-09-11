@@ -23,6 +23,20 @@ from series.shots import (
     validate_plan,
 )
 from series.series_meta import SeriesMeta
+from tests._archived_fixture import archived_search_roots
+
+
+# unnatural-lab 2026-09-10'da arsivlendi; bu moduldeki slug ile yuklemeler
+# dondurulmus kopyadan okunur (tests/_archived_fixture.py).
+_ARCHIVED_ROOTS = archived_search_roots()
+
+
+def setUpModule():
+    _ARCHIVED_ROOTS.start()
+
+
+def tearDownModule():
+    _ARCHIVED_ROOTS.stop()
 
 
 DESCRIPTOR = (

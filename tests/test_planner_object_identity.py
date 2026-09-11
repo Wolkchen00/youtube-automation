@@ -20,10 +20,23 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from series import replenish
 from series.bible import Bible
 from series.series_meta import SeriesMeta
+from tests._archived_fixture import archived_path, archived_search_roots
 
 REPO = pathlib.Path(__file__).resolve().parents[1]
 GOLDEN = REPO / "tests" / "golden" / "fixedframe_prompts.json"
 KURAL = "OBJECT IDENTITY AND ANOMALY MUST AGREE"
+
+# unnatural-lab 2026-09-10'da arsivlendi; SeriesMeta/Bible.load("unnatural-lab")
+# ve part22 dondurulmus kopyadan okunur (tests/_archived_fixture.py).
+_ARCHIVED_ROOTS = archived_search_roots()
+
+
+def setUpModule():
+    _ARCHIVED_ROOTS.start()
+
+
+def tearDownModule():
+    _ARCHIVED_ROOTS.stop()
 
 
 class PlannerRuleTests(unittest.TestCase):
@@ -54,7 +67,7 @@ class PlannerRuleTests(unittest.TestCase):
     def test_calisan_ornek_part22_kurala_uyuyor(self):
         """Regresyon capasi: gecen bolumun descriptor'u anomalisiyle celismiyor."""
         plan = json.loads(
-            (REPO / "sentinal_ihsan/unnatural-lab/plans/part22.json").read_text(
+            archived_path("sentinal_ihsan/unnatural-lab/plans/part22.json").read_text(
                 encoding="utf-8"
             )
         )

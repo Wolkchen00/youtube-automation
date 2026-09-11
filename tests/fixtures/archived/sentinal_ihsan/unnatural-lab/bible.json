@@ -1,0 +1,100 @@
+{
+  "series": {
+    "slug": "unnatural-lab",
+    "title": "Unnatural Lab",
+    "state_machine_version": 2,
+    "required_platforms": [
+      "youtube"
+    ],
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "master_lufs": -14,
+    "engine": "omni",
+    "chain_frames": true,
+    "chain_scope": "episode",
+    "audio_smooth": true,
+    "micro_trim": 0.25,
+    "face_visible": false,
+    "omit_character_refs": true,
+    "credit_hard_cap": true,
+    "credit_hard_cap_value": 1000,
+    "credit_monthly_cap_value": 14000,
+    "durable_credit_ledger": true,
+    "credit_excludes_music": true,
+    "hook_teaser": {
+      "enabled": false,
+      "duration": 1.2,
+      "offset_in_shot": 1.4
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "SERIES EXEMPTION, READ THIS FIRST: this series is built on ONE scripted impossible behaviour per episode, and the material visibly changing shape because of it. Ignore the words \"impossible physics\" and \"morphing geometry\" in your artifact_score definition for THAT single scripted violation and for the material transforming under it: they are the SUBJECT of this clip, not defects, and they must NEVER raise artifact_score. Reserve the numeric artifact_score for UNINTENDED generation defects only: hands, arms, the object, the surface, the walls, the room or the background melting, duplicating, breaking or glitching.\n\nThe recurring man's hands are the working subject of this format. Whenever hands appear, check them: exactly two hands, five fingers each, correct joints and proportions. Fused, extra or missing fingers is an automatic fail. He wears the same plain black crew-neck t-shirt in every shot of every episode; a changed or wrong sleeve is a fail. Exactly ONE impossible property per episode: a second unrelated physics violation is a fail. The impossible property must already be visible and running in the opening moment of shot 1; a shot 1 that opens with preparation or an empty surface is a fail. The material and the finished object keep consistent shape, colour and scale across the episode unless the impossible property itself changes them.\n\nLOOP SEAM, final shot only: the closing composition returns to the opening framing and the action is still in progress at the last frame so the video loops seamlessly. A person holding up, pointing at or presenting the object, a nod or a look to camera, or a posed finish is a fail.\n\nText that naturally exists on real objects, such as printed labels, packaging and tool markings, is expected and is NOT a defect; only subtitle bars, captions or watermark-style graphics laid over the footage count as unwanted text. Liquid drips, splashes, dust, steam, smears, uneven coating and motion blur are INTENDED realism, not defects.\n\nThe following are continuity observations, not defect scores: a viewpoint that drifts, pans or changes angle inside a shot; a shot that resets the background, the surface or the light; the man appearing to move his mouth; a change in the established look of the room or the tools. Record each of them under issues in plain words so the operator can see them, and do not let them change the numeric artifact score.",
+      "frames": 12,
+      "artifact_threshold": 7,
+      "dynamic_regens": true,
+      "native_audio_review": true,
+      "require_no_face": true,
+      "require_object_match": true,
+      "require_continuity": true,
+      "require_first_frame": true,
+      "revalidate_cache": true,
+      "harden_downloads": true,
+      "structured_positive_corrections": true,
+      "scene_cut_scan": true,
+      "scene_cut_fail": false,
+      "min_shots": 3,
+      "require_all_shots": true
+    },
+    "credit_cap_note": "2026-09-02 Ihsan karari, TEK SEFERLIK DENEY: 800 -> 1000. part26'ya iki basarisiz denemede 428 kredi yandi, kalan 372 dort ana cekimin muhafazakar tabani ~400'un altinda kaldi ve butce kapisi uretimi baslatmiyordu. Defter SIFIRLANMADI (gercek harcama korunuyor); yalniz tavan gecici yukseltildi. chain_frames deneyi bittikten sonra 800'e geri dondurulecek.",
+    "chain_frames_note": "2026-09-02: sureklilik 3 bolumde 6 kez dustu (part24 x2, 25 x2, 26 x2). Metin coozumu tuketildi (cekim1 promptlari + state_carry zinciri). ROCK 4b uc kusuru kapattigi icin gorsel kosullandirma guvenle aciliyor. chain_scope=episode: bolumler arasi tasima YOK.",
+    "duration_band": [
+      14,
+      41
+    ]
+  },
+  "art_style": "Vertical 9:16 real-world footage: a pair of hands working with one ordinary household object on a fixed everyday surface in a lived-in home. The view stays in one unchanging position for the whole shot; the framing remains identical. Slight sensor grain in the shadows; window light clips to white on the surface edge; mixed warm lamp and cool daylight colour. Worn, smudged, imperfect real surfaces with a hint of everyday clutter at the frame edges. The face stays outside the frame. Exactly ONE impossible property is visibly active; everything else behaves normally.",
+  "style_ref_url": null,
+  "music": true,
+  "narration": {
+    "channel": "sentinal_vlog",
+    "native_mix_level": 0.5
+  },
+  "characters": [
+    {
+      "id": "ihsan_maker",
+      "name": "Ihsan",
+      "bio": "Kanalın yüzü, İhsan'ın kendi figürü. Her bölümde sıradan bir malzeme, elleri altında, tek bir fizik ihlali yüzünden gözle görülür biçimde başka bir şeye dönüşür. Kadrajı ağırlıkla elleri, kolu ve siyah tişört kolu doldurur; yüz kadrajın merkezinde değildir. Kamerada ASLA konuşmaz ve ağzını oynatmaz; ses, kurgunun üzerine sonradan bindirilen birinci şahıs voiceover'dır, altında kısık bir müzik yatağı vardır. Her bölümde aynı düz siyah tişört; kıyafet değişmez, bu formatın imzasıdır. Eller ve obje her karede net görünür.",
+      "appearance": "A 30-year-old Turkish man with warm olive skin, dark brown eyes, thick dark eyebrows, and a full, neatly groomed black beard and moustache. Short dark brown-black hair. Athletic lean-muscular build with broad shoulders. A calm, focused, mildly amused expression — a man absorbed in what his hands are doing. He wears a plain black crew-neck t-shirt in EVERY shot of EVERY episode, sleeves at mid-bicep, no print, no logo. No visible tattoos, no watch, no jewellery. Hands clearly visible and anatomically correct: exactly two hands, five fingers each. Realistic, grounded, phone-camera look.",
+      "ref_image_url": "https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg",
+      "voice": {
+        "audio_id": "algieba",
+        "kie_audio_id": null,
+        "custom": null
+      },
+      "character_id": "92369a8131e7497abf00c3b5ba1c92c9"
+    }
+  ],
+  "environments": [
+    {
+      "id": "kitchen_counter",
+      "desc": "A lived-in home kitchen counter: dark speckled stone-look surface with faint scratches and a few crumbs near the edge, a tiled backsplash behind, and morning daylight from a side window mixing with a warm under-cabinet glow.",
+      "ref_image_url": "https://i.ibb.co/v4K14Bss/kitchen-counter.png"
+    },
+    {
+      "id": "bathroom_sink",
+      "desc": "An ordinary home bathroom counter: graphite-grey stone top around a white ceramic basin with a faint water ring, matte tiles behind, and cool daylight from a small frosted window blended with warm mirror light.",
+      "ref_image_url": "https://i.ibb.co/M5jcPDhL/bathroom-sink.png"
+    },
+    {
+      "id": "living_room_table",
+      "desc": "A familiar living-room coffee table: dark wood top with two pale water rings, a folded magazine at the frame edge, the soft blur of a sofa behind, and warm lamp light mixed with grey window daylight.",
+      "ref_image_url": "https://i.ibb.co/ZRvqsg7d/living-room-table.png"
+    },
+    {
+      "id": "workbench_main",
+      "desc": "A worn wooden workbench in a small home workshop corner: dark scratched wood grain, fine sawdust in the corners, a folded rag resting at the frame edge, and daylight from a side window falling across a plain painted wall.",
+      "ref_image_url": null
+    }
+  ],
+  "props": []
+}
