@@ -233,3 +233,15 @@
 {"ts": "2026-09-10T22:46:06Z", "event": "qc_api_result", "attempt_id": "33f831bf043f4b7a8310ad141de84267", "outcome": "ok"}
 {"ts": "2026-09-10T22:46:06Z", "event": "review", "episode": 31, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
 {"ts": "2026-09-10T22:46:06Z", "event": "qc_pass", "episode": 31, "shot": 2, "attempt": 0, "content_sha256": "e205ff1ed37b4bf306099189962e4828e13737f86c81ab348a43d4417ed32011", "clip": "shot_02.mp4"}
+{"ts": "2026-09-11T22:43:51Z", "event": "qc_api_attempt", "attempt_id": "f901818b099e4046895d5bf883e490ab", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 31, "shot": 1}
+{"ts": "2026-09-11T22:43:57Z", "event": "qc_api_result", "attempt_id": "f901818b099e4046895d5bf883e490ab", "outcome": "ok"}
+{"ts": "2026-09-11T22:43:58Z", "event": "review", "episode": 31, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-09-11T22:43:58Z", "event": "qc_pass", "episode": 31, "shot": 1, "attempt": 0, "content_sha256": "07dd3959054fc28ada6117a14dbd4f953f275d25c1e110e4f67ed1df4f9c3337", "clip": "shot_01.mp4"}
+{"ts": "2026-09-11T22:45:52Z", "event": "qc_api_attempt", "attempt_id": "1a1ec5885b874647b323681a0d036aaa", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 31, "shot": 2}
+{"ts": "2026-09-11T22:45:59Z", "event": "qc_api_result", "attempt_id": "1a1ec5885b874647b323681a0d036aaa", "outcome": "ok"}
+{"ts": "2026-09-11T22:45:59Z", "event": "review", "episode": 31, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "fail", "reasons": ["gömülü yazı/watermark", "prompt'un yasakladığı öğe görünüyor"], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_02.mp4"}
+{"ts": "2026-09-11T22:45:59Z", "event": "regen", "episode": 31, "shot": 2, "attempt": 1, "fix_notes": ["gömülü yazı/watermark", "prompt'un yasakladığı öğe görünüyor"]}
+{"ts": "2026-09-11T22:47:47Z", "event": "qc_api_attempt", "attempt_id": "29e3b3257e494e66a6f01d7913c40969", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 31, "shot": 2}
+{"ts": "2026-09-11T22:47:53Z", "event": "qc_api_result", "attempt_id": "29e3b3257e494e66a6f01d7913c40969", "outcome": "ok"}
+{"ts": "2026-09-11T22:47:53Z", "event": "review", "episode": 31, "shot": 2, "attempt": 1, "review_try": 0, "verdict": "fail", "reasons": ["anatomi bozuk"], "artifact_score": 4, "issues": ["One soldier has an unnaturally colored eye (yellow/amber) in frame 7."], "fix_notes": ["Ensure all human eyes are naturally colored."], "clip": "shot_02.mp4"}
+{"ts": "2026-09-11T22:47:53Z", "event": "final_reject", "episode": 31, "shot": 2, "attempts": 1, "reasons": ["anatomi bozuk"]}
