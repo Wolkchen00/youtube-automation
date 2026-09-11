@@ -671,8 +671,9 @@ def cmd_collect(channel):
     sys.path.insert(0, TOOLS)
     try:
         from kanal import youtube_canli as live_stats
+        from uploads import stats_for
     except Exception as exc:
-        sys.exit("arac/kanal.py yuklenemedi: %s" % exc)
+        sys.exit("arac/ modulleri yuklenemedi: %s" % exc)
 
     rows, skipped = read_ledger(channel)
     if not rows:
@@ -681,10 +682,24 @@ def cmd_collect(channel):
     if skipped:
         print("UYARI: %d bozuk satir atlandi." % skipped)
 
+    # One API call covers 50 videos and reports exact counts. The watch-page
+    # scrape stays as the fallback for ids the API did not answer for, because
+    # it has its own blind spots and the two of them miss different videos.
+    batch, batch_error = stats_for([row["video_id"] for row in rows])
+    if batch_error:
+        print("UYARI: toplu istatistik alinamadi (%s), sayfa kazimaya dusuluyor."
+              % batch_error)
+
     updated = 0
     for row in rows:
-        live = live_stats(row["video_id"]) or {}
-        if not live.get("izlenme"):
+        live = batch.get(row["video_id"]) or live_stats(row["video_id"]) or {}
+        views = live.get("izlenme")
+        # `if not views` also threw away a genuine ZERO. Measured 2026-09-11:
+        # flashpoints 6GgIn4roshE is public, 18 days old and has 0 views, and
+        # the ledger kept skipping it as "could not read". A real zero is the
+        # single most informative data point this brain gets; None is the only
+        # value that means "no reading".
+        if views is None:
             continue
         outcome = row.get("sonuc")
         if not isinstance(outcome, dict):
@@ -694,10 +709,10 @@ def cmd_collect(channel):
         # Append, never overwrite: the time series is the point.
         outcome["gecmis"].append({
             "ts": now_iso(),
-            "izlenme": live["izlenme"],
+            "izlenme": views,
             "yas_saat": age_hours(row),
         })
-        outcome["izlenme"] = live["izlenme"]
+        outcome["izlenme"] = views
         if live.get("begeni") is not None:
             outcome["begeni"] = live["begeni"]
         # Once the hour-24 figure is frozen it never changes again.

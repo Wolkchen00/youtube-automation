@@ -403,3 +403,204 @@ def test_brain_holds_fresh_videos_without_writing(monkeypatch, tmp_path):
     beyin.cmd_measure(channel, limit=5)
     assert not os.path.exists(beyin.ledger_path(channel)), \
         "24 saatten taze video olculmemeli"
+
+
+# -------------------------------------------------------------- stats_for
+
+def fake_videos_api(pages, calls=None):
+    queue = list(pages)
+
+    def _get(resource, params, timeout=None, attempts=3):
+        if calls is not None:
+            calls.append(dict(params))
+        if not queue:
+            return {"items": []}, None
+        nxt = queue.pop(0)
+        if isinstance(nxt, str):
+            return None, nxt
+        return nxt, None
+
+    return _get
+
+
+def stat_item(video_id, views, likes=None, duration=None):
+    numbers = {"viewCount": str(views)}
+    if likes is not None:
+        numbers["likeCount"] = str(likes)
+    body = {"id": video_id, "statistics": numbers}
+    if duration:
+        body["contentDetails"] = {"duration": duration}
+    return body
+
+
+def test_stats_for_empty_input_is_not_an_error():
+    stats, error = uploads.stats_for([])
+    assert stats == {} and error is None
+
+
+def test_stats_for_reads_counts_and_duration(monkeypatch):
+    monkeypatch.setattr(uploads, "_api_get", fake_videos_api(
+        [{"items": [stat_item("a", 1234, 56, "PT1M23S")]}]))
+    stats, error = uploads.stats_for(["a"], key="k")
+    assert error is None
+    assert stats == {"a": {"izlenme": 1234, "begeni": 56, "sure_sn": 83}}
+
+
+def test_stats_for_batches_fifty_at_a_time(monkeypatch):
+    calls = []
+    ids = ["v%03d" % i for i in range(120)]
+    monkeypatch.setattr(uploads, "_api_get", fake_videos_api([
+        {"items": [stat_item(v, 1) for v in ids[0:50]]},
+        {"items": [stat_item(v, 1) for v in ids[50:100]]},
+        {"items": [stat_item(v, 1) for v in ids[100:120]]},
+    ], calls=calls))
+    stats, error = uploads.stats_for(ids, key="k")
+    assert error is None and len(stats) == 120
+    assert len(calls) == 3
+    assert len(calls[0]["id"].split(",")) == 50
+    assert len(calls[2]["id"].split(",")) == 20
+
+
+def test_stats_for_deduplicates_ids(monkeypatch):
+    calls = []
+    monkeypatch.setattr(uploads, "_api_get", fake_videos_api(
+        [{"items": [stat_item("a", 5)]}], calls=calls))
+    uploads.stats_for(["a", "a", "a", ""], key="k")
+    assert calls[0]["id"] == "a"
+
+
+def test_stats_for_omits_videos_the_api_did_not_answer_for(monkeypatch):
+    # Asked for two, told about one. The missing one must be ABSENT, not zero:
+    # a zero would be written into the ledger as a real measurement.
+    monkeypatch.setattr(uploads, "_api_get", fake_videos_api(
+        [{"items": [stat_item("a", 10)]}]))
+    stats, error = uploads.stats_for(["a", "gone"], key="k")
+    assert error is None
+    assert "gone" not in stats and stats["a"]["izlenme"] == 10
+
+
+def test_stats_for_skips_items_with_hidden_counts(monkeypatch):
+    hidden = {"id": "h", "statistics": {"likeCount": "3"}}
+    monkeypatch.setattr(uploads, "_api_get", fake_videos_api(
+        [{"items": [hidden, stat_item("a", 7)]}]))
+    stats, _ = uploads.stats_for(["h", "a"], key="k")
+    assert "h" not in stats and "a" in stats
+
+
+def test_stats_for_returns_partial_results_with_the_error(monkeypatch):
+    ids = ["v%03d" % i for i in range(60)]
+    monkeypatch.setattr(uploads, "_api_get", fake_videos_api([
+        {"items": [stat_item(v, 1) for v in ids[0:50]]},
+        "HTTP 403 quotaExceeded",
+    ]))
+    stats, error = uploads.stats_for(ids, key="k")
+    assert "403" in error
+    assert len(stats) == 50, "ilk sayfanin sonucu atilmamali"
+
+
+def test_stats_for_without_key_is_an_error(monkeypatch):
+    monkeypatch.setattr(uploads, "api_key", lambda: "")
+    stats, error = uploads.stats_for(["a"])
+    assert stats == {} and error
+
+
+@pytest.mark.parametrize("text,expected", [
+    ("PT15S", 15),
+    ("PT1M23S", 83),
+    ("PT2H", 7200),
+    ("PT1H2M3S", 3723),
+    ("PT0S", 0),
+    ("P1D", None),          # days are not handled; say so rather than guess
+    ("PT1M23", None),       # trailing number with no unit
+    ("", None),
+    (None, None),
+    ("garbage", None),
+    # Without the PT prefix check these parse from character 2 onward and
+    # return a plausible-looking number for input that is not a duration at
+    # all - a silent wrong answer, which is worse than None.
+    ("1M23S", None),
+    ("XT15S", None),
+    ("PPT15S", None),
+])
+def test_parse_duration(text, expected):
+    assert uploads.parse_iso8601_duration(text) == expected
+
+
+# ------------------------------------------------- zero is a measurement
+
+def _install_collect_fakes(monkeypatch, batch, batch_error=None, page=None):
+    fake_uploads = types.ModuleType("uploads")
+    fake_uploads.stats_for = lambda ids: (batch, batch_error)
+    fake_kanal = types.ModuleType("kanal")
+    fake_kanal.youtube_canli = lambda vid: (page or {}).get(vid, {})
+    monkeypatch.setitem(sys.modules, "uploads", fake_uploads)
+    monkeypatch.setitem(sys.modules, "kanal", fake_kanal)
+
+
+def _seed_ledger(beyin, channel, video_ids):
+    beyin.write_ledger(channel, [
+        {"video_id": v, "kanal": channel, "tarih": "2026-08-24",
+         "yayin_ts": "2026-08-24T10:00:00+00:00", "baslik": v,
+         "olcum": {}, "sonuc": {"izlenme": None, "gecmis": []}}
+        for v in video_ids])
+
+
+def test_collect_records_a_genuine_zero(monkeypatch, tmp_path):
+    # flashpoints 6GgIn4roshE: public, 18 days old, 0 views. `if not views`
+    # skipped it every run, so the worst-performing video never entered the
+    # comparison at all - exactly the video the brain most needs to see.
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    channel = sorted(beyin.CHANNELS)[0]
+    _seed_ledger(beyin, channel, ["zero", "some"])
+    _install_collect_fakes(monkeypatch, {
+        "zero": {"izlenme": 0, "begeni": 0},
+        "some": {"izlenme": 42},
+    })
+    beyin.cmd_collect(channel)
+    rows, _ = beyin.read_ledger(channel)
+    by_id = {r["video_id"]: r for r in rows}
+    assert by_id["zero"]["sonuc"]["izlenme"] == 0
+    assert len(by_id["zero"]["sonuc"]["gecmis"]) == 1, \
+        "sifir izlenme de zaman serisine yazilmali"
+    assert by_id["some"]["sonuc"]["izlenme"] == 42
+
+
+def test_collect_still_skips_a_real_no_reading(monkeypatch, tmp_path):
+    # A second, readable row is needed: cmd_collect deliberately stops hard
+    # when NOTHING could be read, because that is a network outage rather than
+    # a set of unreadable videos.
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    channel = sorted(beyin.CHANNELS)[0]
+    _seed_ledger(beyin, channel, ["unknown", "readable"])
+    _install_collect_fakes(monkeypatch, {"readable": {"izlenme": 3}})
+    beyin.cmd_collect(channel)
+    by_id = {r["video_id"]: r for r in beyin.read_ledger(channel)[0]}
+    assert by_id["unknown"]["sonuc"]["gecmis"] == [], \
+        "okuma yokken uydurma kayit dusulmemeli"
+    assert by_id["unknown"]["sonuc"]["izlenme"] is None
+    assert by_id["readable"]["sonuc"]["izlenme"] == 3
+
+
+def test_collect_stops_when_nothing_at_all_could_be_read(monkeypatch, tmp_path):
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    channel = sorted(beyin.CHANNELS)[0]
+    _seed_ledger(beyin, channel, ["a", "b"])
+    _install_collect_fakes(monkeypatch, {}, batch_error="HTTP 403")
+    with pytest.raises(SystemExit) as exc:
+        beyin.cmd_collect(channel)
+    assert "DUR" in str(exc.value)
+
+
+def test_collect_falls_back_to_page_scrape(monkeypatch, tmp_path):
+    import beyin
+    monkeypatch.chdir(tmp_path)
+    channel = sorted(beyin.CHANNELS)[0]
+    _seed_ledger(beyin, channel, ["only-on-page"])
+    _install_collect_fakes(monkeypatch, {}, batch_error="HTTP 403",
+                          page={"only-on-page": {"izlenme": 9}})
+    beyin.cmd_collect(channel)
+    rows, _ = beyin.read_ledger(channel)
+    assert rows[0]["sonuc"]["izlenme"] == 9

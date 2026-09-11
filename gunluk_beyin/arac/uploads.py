@@ -170,6 +170,70 @@ def from_api(channel_id, limit, key=None):
     return rows[:limit], None
 
 
+def stats_for(video_ids, key=None):
+    """Live view/like counts for many videos at once. Returns (stats, error).
+
+    `stats` maps video_id -> {"izlenme", "begeni", "sure_sn"} for every video
+    the API answered for. Ids that are missing from the reply (deleted, or
+    genuinely private) are simply absent from the map; that is information,
+    not an error.
+
+    Why this exists: `youtube_canli` scrapes `"viewCount":"..."` out of the
+    watch page, which silently misses. Measured 2026-09-11, flashpoints video
+    6GgIn4roshE came back with no count while the API reported it public and
+    processed - so the video was fine and the scrape was not. One API call
+    covers 50 videos and costs 1 quota unit, against 50 page loads.
+    """
+    ids = [v for v in dict.fromkeys(video_ids) if v]
+    if not ids:
+        return {}, None
+    key = key if key is not None else api_key()
+    if not key:
+        return {}, "YOUTUBE_API_KEY yok"
+
+    stats = {}
+    for offset in range(0, len(ids), 50):
+        batch = ids[offset:offset + 50]
+        body, error = _api_get("videos", {
+            "part": "statistics,contentDetails",
+            "id": ",".join(batch),
+            "key": key,
+        })
+        if error:
+            return stats, error
+        for item in body.get("items") or []:
+            numbers = item.get("statistics") or {}
+            views = numbers.get("viewCount")
+            if views is None:
+                # publicStatsViewable=false hides the count. Nothing to store.
+                continue
+            entry = {"izlenme": int(views)}
+            if numbers.get("likeCount") is not None:
+                entry["begeni"] = int(numbers["likeCount"])
+            duration = (item.get("contentDetails") or {}).get("duration")
+            seconds = parse_iso8601_duration(duration)
+            if seconds is not None:
+                entry["sure_sn"] = seconds
+            stats[str(item.get("id"))] = entry
+    return stats, None
+
+
+def parse_iso8601_duration(text):
+    """PT1M23S -> 83. Returns None for anything it cannot read."""
+    if not text or not text.startswith("PT"):
+        return None
+    total, number = 0, ""
+    for char in text[2:]:
+        if char.isdigit():
+            number += char
+        elif char in "HMS" and number:
+            total += int(number) * {"H": 3600, "M": 60, "S": 1}[char]
+            number = ""
+        else:
+            return None
+    return total if not number else None
+
+
 def list_uploads(channel_id, limit, key=None, rss_fn=None):
     """Best available upload list.
 
