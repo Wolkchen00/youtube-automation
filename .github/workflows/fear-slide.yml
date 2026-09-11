@@ -19,7 +19,9 @@ on:
   schedule:
     - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
     # KREDI TELAFISI (2026-09-11). Kie otomatik yuklemesi bakiye 1500'un altina
-    # dusunce tetikleniyor, 1080p is ~1530 kredi. Bakiye arada kalinca sabah
+    # dusunce tetikleniyor, 1080p is ~1530 kredi (varsayilan 11 Eylul'den beri
+    # yine 720p, 615 kredi, yani bu olu bolge artik yalniz --profil 1080p'de
+    # olusur). Bakiye arada kalinca sabah
     # kosusu kredi harcamadan durur ve kredi_bekliyor.json damgasini birakir.
     # Aradaki saatlerde baska kanallarin harcamasi yuklemeyi tetikler; bu kosu
     # yalniz damga BUGUNE aitse ve bugun yayin yoksa uretir. Satiri degistirirsen

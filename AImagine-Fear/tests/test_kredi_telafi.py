@@ -96,9 +96,17 @@ def _sahne(tmp_path: Path, monkeypatch, bakiye: float, uretim_stderr: str | None
     return slug
 
 
+def test_varsayilan_profil_otomatik_yukleme_olu_bolgesine_dusmez() -> None:
+    """Kie otomatik yuklemesi bakiye 1500'un ALTINA dusunce tetikleniyor. Is
+    bundan ucuzsa bakiye hicbir zaman 'yukleme yok ama is de sigmiyor'
+    araliginda kalamaz. 1080p (1530) bu araliga dusuyordu, 720p (615) dusmez."""
+    gerekli = gunluk.gerekli_kredi(gunluk.PROFILLER[gunluk.VARSAYILAN_PROFIL]["cozunurluk"], 15)
+    assert gerekli < 1500
+
+
 def test_on_kontrol_kie_ye_gitmeden_durur_ve_damgalar(tmp_path: Path, monkeypatch) -> None:
     slug = _sahne(tmp_path, monkeypatch, bakiye=1523.0, uretim_stderr=None)
-    assert gunluk.main(["--sehir", slug]) == 1
+    assert gunluk.main(["--sehir", slug, "--profil", "1080p"]) == 1
     damga = json.loads(gunluk.KREDI_BEKLIYOR.read_text(encoding="utf-8"))
     assert damga["tarih"] == _bugun()
     assert damga["sebep"] == "on kontrol"

@@ -78,7 +78,7 @@ def test_kilitliyken_uretim_ve_kredi_HIC_calismaz(tmp_path: Path, monkeypatch) -
         pytest.fail("SUBPROCESS CALISTI: %s" % cmd)
 
     monkeypatch.setattr(gunluk, "kosa", _tuzak)
-    assert gunluk.main(["--sehir", slug]) == 1
+    assert gunluk.main(["--sehir", slug, "--profil", "1080p"]) == 1
 
 
 def test_kapida_kalan_kanarya_kilidi_YAZAR(tmp_path: Path, monkeypatch) -> None:
@@ -121,7 +121,7 @@ def test_kapida_kalan_kanarya_kilidi_YAZAR(tmp_path: Path, monkeypatch) -> None:
     )
     monkeypatch.setattr(gunluk, "yayinla", lambda *a, **k: pytest.fail("YAYINLANDI"))
 
-    assert gunluk.main(["--sehir", slug]) == 1
+    assert gunluk.main(["--sehir", slug, "--profil", "1080p"]) == 1
     assert kilit.exists(), "kapida kalindi ama kilit YAZILMADI, ertesi gun yine yanar"
     veri = json.loads(kilit.read_text(encoding="utf-8"))
     assert veri["anahtar"] == [str(p) for p in ANAHTAR]

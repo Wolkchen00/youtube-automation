@@ -7,7 +7,13 @@ from pathlib import Path
 
 
 KOK = Path(__file__).resolve().parent
-VARSAYILAN_PROFIL = "1080p"
+# 720p, cunku 1080p ayni 15 sn'lik videoyu 2,5 kat pahaliya uretiyor. Kie'nin
+# kendi faturasi (recordInfo creditsConsumed), ayni model/sure/ses:
+#   720p  615 kredi ($3,08)  taskId 7e4efdeddb311cc4f1fd210535d68471
+#   1080p 1530 kredi ($7,65) taskId 311e039faf7db184311c7d1d0ed47717
+# 2026-09-10'da maliyet olculmeden 1080p yapildi, 11 Eylul'de olculunce Ihsan
+# geri aldirdi. 1080p'ye donmek Ihsan'in karari; burayi sessizce degistirme.
+VARSAYILAN_PROFIL = "720p"
 
 PROFILLER = {
     "1080p": {

@@ -212,7 +212,7 @@ def test_canary_runs_automatically_but_downgrade_still_blocks(
         lambda m, s, p: (["istendi 1080p, geldi 720x1280 - model sessizce dusurdu"],
                          {"fps": 24.0, "sure": 15.0}),
     )
-    assert gunluk.main(["--sehir", slug]) == 1
+    assert gunluk.main(["--sehir", slug, "--profil", "1080p"]) == 1
     assert yayinlandi == [], "sessiz dusurmede yayinlandi"
     assert not gunluk.ONAY_DOSYASI.exists(), "kapida kalan kosu ONAY yazdi"
     # Ve kilit kuruldu: ertesi gun ayni kombinasyon bir daha para yakmayacak
@@ -224,7 +224,7 @@ def test_canary_runs_automatically_but_downgrade_still_blocks(
 
     eski_kosa = gunluk.kosa
     monkeypatch.setattr(gunluk, "kosa", _yasak)
-    assert gunluk.main(["--sehir", slug, "--allow-same-day"]) == 1
+    assert gunluk.main(["--sehir", slug, "--profil", "1080p", "--allow-same-day"]) == 1
     monkeypatch.setattr(gunluk, "kosa", eski_kosa)
 
     # 2) Profil duzeltildi varsayalim (kilit kalkar) ve kapi temiz ->
@@ -233,7 +233,7 @@ def test_canary_runs_automatically_but_downgrade_still_blocks(
     monkeypatch.setattr(
         gunluk, "denetle", lambda m, s, p: ([], {"fps": 24.0, "sure": 15.0})
     )
-    assert gunluk.main(["--sehir", slug, "--allow-same-day"]) == 0
+    assert gunluk.main(["--sehir", slug, "--profil", "1080p", "--allow-same-day"]) == 0
     assert yayinlandi, "kapi temizken yayinlanmadi"
     onay = json.loads(gunluk.ONAY_DOSYASI.read_text(encoding="utf-8"))
     assert onay["otomatik"] is True
@@ -270,8 +270,8 @@ def test_dry_is_before_same_day_and_never_reads_credit(monkeypatch, capsys) -> N
     output = capsys.readouterr().out
     assert "sirdaki slug" in output
     assert "sure         : 15" in output
-    assert "profil       : 1080p" in output
-    assert "matris       : kanarya" in output
+    assert "profil       : 720p" in output
+    assert "matris       : dogrulandi" in output
 
 
 def test_yayinlama_runs_generation_without_publish_and_checks_contact(
@@ -313,7 +313,7 @@ def test_yayinlama_runs_generation_without_publish_and_checks_contact(
 
     def fake_audit(master, duration, selected):
         events.append(("audit", master))
-        return [], {"genislik": 1080, "yukseklik": 1920, "fps": 23.976, "sure": 15.0}
+        return [], {"genislik": 720, "yukseklik": 1280, "fps": 23.976, "sure": 15.0}
 
     monkeypatch.setattr(gunluk, "denetle", fake_audit)
 
@@ -329,7 +329,7 @@ def test_yayinlama_runs_generation_without_publish_and_checks_contact(
     assert gunluk.main(["--yayinlama", "--sehir", slug]) == 0
     assert [event[0] for event in events] == ["generate", "master", "audit", "contact"]
     generation = events[0][1]
-    assert generation[generation.index("--resolution") + 1] == "1080p"
+    assert generation[generation.index("--resolution") + 1] == "720p"
 
 
 def test_contact_stale_file_cannot_hide_new_failure(monkeypatch, tmp_path: Path) -> None:

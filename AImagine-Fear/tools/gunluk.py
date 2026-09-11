@@ -52,9 +52,9 @@ MODEL = "bytedance/seedance-2"
 # yalniz MIN_KREDI gecerli ve 402 yolu ayni damgayi birakir.
 KREDI_15SN = {
     "720p": 615,  # olculdu 2026-09-03, taskId 7e4efdeddb311cc4f1fd210535d68471
-    # olculdu 2026-09-11, kosu 34637728319, taskId 311e039faf7db184311c7d1d0ed47717
-    # (bakiye farki 10039 -> 8509; hat kie-uretim grubunda tekti). 1523'te 402
-    # almasi bununla tutarli.
+    # olculdu 2026-09-11, kosu 34637728319, taskId 311e039faf7db184311c7d1d0ed47717.
+    # Iki satir da Kie recordInfo creditsConsumed ile dogrulandi (bakiye farki
+    # degil). 1523'te 402 almasi bununla tutarli.
     "1080p": 1530,
 }
 
