@@ -1,0 +1,41 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "What Happens When AN ELEPHANT Meets A CROCODILE?"
+  },
+  "format_version": "tanik-2x6",
+  "family": "wrong-skin",
+  "face_visible": true,
+  "synopsis": "An ordinary African elephant and an ordinary Nile crocodile stand together on the same desert flat and visibly fuse into one crocodile-armored elephant, which immediately charges after Ihsan through the dust.",
+  "hook_shot": 2,
+  "object_card": {
+    "name": "crocodile-armored elephant",
+    "descriptor": "One continuous animal body with the head, huge fan-shaped ears, long flexible trunk, curved ivory tusks, pillar legs and massive proportions of an adult African elephant. Olive-brown Nile crocodile scales form interlocking armored plates across its shoulders, back and flanks, continuing seamlessly into one long muscular crocodile tail with raised dorsal scutes. The elephant's warm gray skin remains visible on its face, ears, trunk, underside and legs.",
+    "environment": "desert_dunes",
+    "framing": "A continuous desert encounter begins with both ordinary animals sharing a wide frame during their fusion, then moves to a low tracking view with exactly one man escaping in the lower foreground and the charging fused animal close behind, filling most of the vertical frame.",
+    "anomaly_descriptor": "The African elephant structure and Nile crocodile armor form one unbroken torso and one silhouette; four elephant legs drive the body while the armored crocodile tail counterbalances each charging stride."
+  },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "6",
+      "characters": [],
+      "prompt": "SHOT 1, TOGETHER THEN FUSION. An ordinary adult African elephant and an ordinary adult Nile crocodile share the same frame in one continuous real location, then visibly converge and merge on screen as dust and motion briefly veil the joining bodies, and exactly one fused animal emerges.\n\nONE single animal is in frame for the whole shot: a warm-gray adult African elephant with huge fan-shaped ears, a long flexible trunk and two curved ivory tusks, standing alone on a sunlit desert flat. It lowers its head and its whole body tightens and curls, and a burst of pale dust rises around it for about one second. The dust thins and the SAME single elephant rises again, now armoured: olive-brown interlocking crocodile scutes have grown across its shoulders, back and flanks in continuous overlapping rows, rough ridged plates run down its spine, and one long muscular crocodile tail now trails heavily behind it in the sand. Its elephant head, ears, trunk and tusks stay exactly as before. The armoured elephant takes one heavy step toward camera. Tracking shot following the subject, at 24mm, wide-angle dynamic perspective, aperture f/11, deep focus clarity, harsh midday sun, crisp defined shadows. Ambient sound only: heavy footfalls, shifting sand and wind.",
+      "seed": null,
+      "environment": "desert_dunes",
+      "violation_observation": "Olive-brown interlocking crocodile scutes and a long crocodile tail have grown on the body of a single African elephant whose head and tusks are unchanged."
+    },
+    {
+      "n": 2,
+      "duration": "6",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 2, ATTACK AND CHASE. The single fused elephant-crocodile charges close behind exactly one man in the same location; the creature is large, close, and fills most of the low-angle frame while the man escapes through the foreground.\n\nContinue on the same sunlit desert flat with the same crocodile-armored elephant from shot 1: one massive continuous body with an African elephant's warm-gray face, huge fan-shaped ears, long flexible trunk, two curved ivory tusks and four pillar legs, plus olive-brown interlocking crocodile armor across its shoulders, back and flanks and one long muscular crocodile tail with raised dorsal scutes. During one continuous six-second attack beat, the fused animal charges directly toward the retreating camera, filling most of the vertical frame as its feet hammer the sand, its trunk lifts and its armored tail lashes a dense plume of dust behind it. Exactly one 30-year-old Turkish man runs through the lower foreground ahead of the creature. He has warm olive skin, dark brown eyes, thick dark eyebrows, short dark brown-black hair, a full neatly groomed black beard and moustache, broad shoulders and an athletic lean-muscular build. He wears a light sand-colored long-sleeve field shirt, dark olive cargo trousers and trail shoes. His alarmed face stays clear in three-quarter profile as he glances over his shoulder at the charging creature, then fixes his eyes ahead while accelerating; his two anatomically correct hands each show five fingers. Tracking shot following the subject, handheld camera with subtle natural movement, low camera height, at 24mm, wide-angle dynamic perspective, aperture f/11, deep focus clarity, sharp foreground to background, using a premium modern prime lens, harsh midday sun, crisp defined shadows. Photoreal vertical 9:16 wildlife footage with neutral documentary color, forceful scale contrast and thick realistic dust. Ambient sound only: pounding feet, heavy animal breaths, rattling armored scales, scraping shoes, wind and surging dust.",
+      "seed": null,
+      "environment": "desert_dunes",
+      "state_carry": "The fused animal retains the exact elephant features and crocodile armor established at the end of shot 1, and Ihsan remains one anatomically correct man whose face matches the character reference."
+    }
+  ],
+  "music": "A low, sparse instrumental tension bed beneath the desert ambience: a held sub-bass drone begins in the first second, one slow heartbeat-like pulse builds through the fusion, and a single rising swell lands when the fused animal charges. Wind, footfalls and moving sand remain dominant."
+}

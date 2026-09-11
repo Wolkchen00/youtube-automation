@@ -1,0 +1,54 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "This GIANT CROCODILE Is NOT Real"
+  },
+  "format_version": "plato-3x8",
+  "family": "predator-armour",
+  "face_visible": true,
+  "synopsis": "On a built jungle set a giant crocodile takes a performer into its mouth, then the crew push the jaws open and he climbs out unharmed.",
+  "hook_shot": 2,
+  "object_card": {
+    "name": "giant crocodile head practical prop",
+    "descriptor": "a colossal olive-green crocodile head prop, four metres tall at the brow, with wet interlocking scales, pale yellow eyes with vertical pupils and rows of long ivory teeth, built as a physical set piece standing on a dressed jungle set.",
+    "environment": "jungle_set",
+    "framing": "A locked-off view through practical foliage with camera operators in the lower corners and the creature head filling the upper frame.",
+    "anomaly_descriptor": "The crocodile head is a built practical prop whose jaws are wide enough for a standing person and can be pushed open by hand."
+  },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 1, THE THREAT ON SET. A built film set reads immediately: practical foliage and haze around the frame, a green screen wall visible beyond it, and the backs of camera operators with their rigs in the foreground. One giant creature head faces exactly one man, who stands his ground and watches its jaws begin to part.\n\nInside a built jungle set on a film stage: dense practical jungle foliage and hanging vines crowd the edges of frame, low haze drifts across wet leaf litter on the floor, a tall green screen wall shows between the leaves beyond, an overhead studio lighting grid shines down through the canopy from a high glass-roofed structure, and in the immediate foreground the backs of two camera operators and their rigs occupy the lower corners. Facing camera in the middle of the set is a colossal olive-green crocodile head prop, four metres tall at the brow, with wet interlocking scales, pale yellow eyes with vertical pupils and rows of long ivory teeth. A 30-year-old turkish man with warm olive skin, thick dark eyebrows, a full neatly groomed black beard and short dark hair, wearing a dirt-streaked khaki field shirt and dark utility trousers stands on the leaf litter directly in front of it, looking up into its eyes as the jaws slowly part and a thread of water runs off the teeth. Locked-off static camera, at 35mm, natural cinematic perspective, aperture f/4, balanced depth of field, strong rim light separating the subject from the background. Ambient sound only: dripping water, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "violation_observation": "A four-metre crocodile head stands on a dressed jungle set with camera crew and a green screen wall behind the foliage."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 2, TAKEN INSIDE. The creature's jaws open wide and close over exactly one man until he is completely out of sight inside its mouth, and the head settles with the man nowhere in frame. The crew keep filming.\n\nThe same built jungle set, the same foliage, haze and crew. The crocodile head lunges forward and its jaws open wide over a 30-year-old Turkish man with warm olive skin, thick dark eyebrows, a full neatly groomed black beard and short dark hair, wearing a dirt-streaked khaki field shirt and dark utility trousers; the mouth closes around him and he disappears completely from view inside it. The head settles back down with the jaws shut and no man anywhere in frame, while the crew keep their cameras on it. Locked-off static camera, at 35mm, natural cinematic perspective, aperture f/4, balanced depth of field, strong rim light separating the subject from the background. Ambient sound only: a heavy wooden thud, rustling leaves and studio air handling.",
+      "seed": null,
+      "environment": "jungle_set",
+      "state_carry": "Leaf litter is scattered where he stood and haze still drifts across the set."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the creature's head and push the jaws open, and the same one man climbs out of the mouth onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal.\n\nThe same built jungle set, the same foliage, haze and crew. Two crew members in black step in and lay their hands flat on the crocodile head, pushing the upper jaw up and holding it open; the teeth are clearly rigid painted props under their palms. A 30-year-old turkish man with warm olive skin, thick dark eyebrows, a full neatly groomed black beard and short dark hair, wearing a dirt-streaked khaki field shirt and dark utility trousers climbs out of the open mouth and steps down onto the leaf litter, unharmed and smiling, and the crew around him clap. Locked-off static camera, at 35mm, natural cinematic perspective, aperture f/4, balanced depth of field, strong rim light separating the subject from the background. Ambient sound only: applause, creaking rig and studio air handling.",
+      "seed": null,
+      "environment": "jungle_set",
+      "state_carry": "The jaws stay propped open behind him and haze still drifts across the set."
+    }
+  ],
+  "music": "a sparse low jungle-toned bed: a soft sustained hum with insect texture that tightens as the jaws open, one held low note while the head sits closed, and a single warm rising swell as he climbs out, mostly negative space so the water and applause stay in front, opening with sound in its very first second."
+}

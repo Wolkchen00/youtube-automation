@@ -1,0 +1,54 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "This GIANT OCTOPUS Is NOT Real"
+  },
+  "format_version": "plato-3x8",
+  "family": "aquatic-land",
+  "face_visible": true,
+  "synopsis": "A giant octopus on a soundstage takes a performer inside its body, and then a hatch opens and he climbs back out while the crew applaud.",
+  "hook_shot": 2,
+  "object_card": {
+    "name": "giant octopus practical prop",
+    "descriptor": "a colossal deep-red giant Pacific octopus prop three storeys high, with pebbled rust-red skin, dense cream speckles and eight thick muscular arms lined with two rows of ivory suckers, built as a physical set piece standing in a shallow studio water tank.",
+    "environment": "soundstage",
+    "framing": "A locked-off view across the tank with the backs of two camera operators and their monitors in the foreground and the creature filling the upper frame.",
+    "anomaly_descriptor": "The octopus is a built practical prop with a hinged access hatch set into the side of its mantle."
+  },
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 1, THE THREAT ON SET. A film studio soundstage reads immediately: a tall green screen wall behind, crew in black along the far edge, and the backs of camera operators with two monitors in the foreground. One giant creature on the set reaches toward exactly one man, who stands his ground in the water and watches it come.\n\nInside a large film studio soundstage: a tall bright green screen wall fills the back of frame, an overhead lighting grid and scaffolding cross the top, a dozen crew members in black stand along the far edge of a shallow water tank, and in the immediate foreground the backs of two camera operators and two camera monitors showing the shot occupy the bottom of frame. Standing in the tank in the middle of the set is a colossal deep-red giant Pacific octopus prop three storeys high, with pebbled rust-red skin, dense cream speckles and eight thick muscular arms lined with two rows of ivory suckers. A 30-year-old turkish man with warm olive skin, thick dark eyebrows, a full neatly groomed black beard and short dark hair, wearing a black wetsuit top stands waist deep in the water directly in front of it, looking up at the creature as one huge arm uncoils and reaches down toward him, water sheeting off it. Locked-off static camera, at 35mm, natural cinematic perspective, aperture f/4, balanced depth of field, controlled three-point studio lighting. Ambient sound only: sloshing water, studio air handling and distant crew movement.",
+      "seed": null,
+      "environment": "soundstage",
+      "violation_observation": "A three-storey octopus stands inside a studio water tank in front of a green screen with camera crew around it."
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 2, TAKEN INSIDE. The creature closes over exactly one man: its arms wrap him, lift him off his feet and draw him up into its body until he is completely out of sight, and the creature settles with the man nowhere in frame. The crew keep filming.\n\nThe same soundstage, the same green screen wall, the same crew and the same two camera monitors in the foreground. Two thick octopus arms coil around a 30-year-old Turkish man with warm olive skin, thick dark eyebrows, a full neatly groomed black beard and short dark hair, wearing a black wetsuit top and lift him clear of the water; the arms carry him upward against the underside of the huge mantle and fold over him until he is completely hidden from view. The water settles and the creature stands alone in the tank with no man anywhere in frame, while the crew keep their cameras on it. Locked-off static camera, at 35mm, natural cinematic perspective, aperture f/4, balanced depth of field, controlled three-point studio lighting. Ambient sound only: surging water, creaking rig and studio air handling.",
+      "seed": null,
+      "environment": "soundstage",
+      "state_carry": "Water still runs down the prop and the set floor stays wet."
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "characters": [
+        "ihsan_field"
+      ],
+      "prompt": "SHOT 3, THE PRACTICAL REVEAL. A hatch opens in the side of the creature's body and the same one man climbs out of it down onto the set floor, unharmed, while the crew around him applaud, showing that the creature is a built practical prop rather than a living animal.\n\nThe same soundstage, the same green screen wall, the same crew and the same two camera monitors in the foreground. A rectangular hinged hatch swings open in the side of the octopus mantle, revealing a lit metal interior with handrails, and a 30-year-old Turkish man with warm olive skin, thick dark eyebrows, a full neatly groomed black beard and short dark hair, wearing a black wetsuit top climbs out through it and steps down a short ladder onto the wet set floor, dry-faced and smiling. The crew members around the tank clap and raise their hands. The octopus stays completely still, plainly a built prop. Locked-off static camera, at 35mm, natural cinematic perspective, aperture f/4, balanced depth of field, controlled three-point studio lighting. Ambient sound only: applause, dripping water and studio air handling.",
+      "seed": null,
+      "environment": "soundstage",
+      "state_carry": "The tank water is calm again and the hatch stands open behind him."
+    }
+  ],
+  "music": "a sparse low studio-tone bed: a soft sustained hum that tightens as the arms close, one held low note while the creature stands alone, and a single warm rising swell that lands as the hatch opens, mostly negative space so the water and applause stay in front, opening with sound in its very first second."
+}
