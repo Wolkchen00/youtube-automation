@@ -276,3 +276,31 @@ videolarinin hicbirinde muzik yatagi yok. Sahte-kamera-arkasi formatinda muzik
 "gercek cekim" hissini oldurup videoyu reklama benzetiyor.
 
 ep05 muzikli haliyle yayinlandi, cunku etkilesim testi bekletilmedi.
+
+## ep06 OLCUMU (11 Eylul 2026): capalar calisti, yazi kapisi yanlis alarm verdi
+
+Ilk muziksiz bolum. 3 cekim, 22,9 sn, 1 sahne kesmesi, -14,5 LUFS / -1,3 dBTP
+(motor dogrulamasi). Maliyet 436 kredi (~$2,18) = 2 referans x 8 + cekim 1 ve 2
+x 105 + cekim 3 x 210 (bir QC regen dahil).
+
+- CAPALAR CALISTI. Set plakasi (jungle_set) ve yaratik referansi ilk gercek
+  kosuda uretildi ve yuklenir yuklenmez diske yazildi, gorsel basina 8 kredi.
+  Cekim 1 ve 2 ayni kurulmus orman setinde, yaratik tutarli. Kucuk kusur:
+  yaratik referansinda perde MAVI, set plakasinda YESIL; videoya yesil yansidi.
+- YENI QC NOTU DOGRU CALISTI. Agizdan cikis vurusu, "kapak" diyen eski notun
+  yapacagi gibi yanlis sebeple reddedilmedi.
+- YANLIS ALARM, 105 kredi ve daha kotu bir cekim. Cekim 3'un ilk denemesi
+  "gomulu yazi/watermark" ile reddedildi. Tam cozunurluklu kontrol: ust uste
+  bindirilmis yazi, altyazi ya da filigran YOK; tek yazi-benzeri sey stüdyo
+  lambasinin marka etiketi. Bu formatta her karede ekipman var. Yeni tohumla
+  uretilen cekim 3, zincir karesi ve ortam referansi olmasina ragmen orman
+  setini kaybetti (ciplak yesil stüdyo, softbox). Reddedilen ilk deneme ise set
+  surekliligini tam korumustu.
+- IKI SURUM VAR, karar Ihsan'da:
+  `output/series/wild-encounter/episodes/ep06/ep06_mastered.mp4` (resmi, QC
+  gecen, cekim 3'te set kopuyor) ve `.../ep06/alt/ep06_alt_mastered.mp4`
+  (cekim 3 = ilk deneme, set surekli; ayni motor fonksiyonlari: micro_trim
+  0.25, concatenate_audio_smooth fade 0.25, final_export, master_audio;
+  -14,2 LUFS / -1,4 dBTP, dogrulama gecti).
+- ACIK MADDE: yazi kapisi sahne ici ekipman yazisini bindirme yazidan ayirmali
+  (RF-ISSUES).
