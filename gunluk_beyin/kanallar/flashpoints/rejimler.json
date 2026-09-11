@@ -1,0 +1,26 @@
+{
+  "847e317c": {
+    "alanlar": {
+      "bible.aspect_ratio": "9:16",
+      "bible.audio_smooth": true,
+      "bible.hook_teaser": {
+        "enabled": false
+      },
+      "bible.master_lufs": -14,
+      "bible.master_true_peak_margin_db": 0.2,
+      "bible.micro_trim": 0.25,
+      "bible.music": true,
+      "bible.resolution": "1080p",
+      "bible.title_card": true,
+      "cfg.narration": {
+        "max_words": 36,
+        "min_words": 26
+      },
+      "cfg.shot_seconds": "10",
+      "cfg.shots": 2,
+      "cfg.title_card": true,
+      "cfg.title_style": "a punchy English YouTube Shorts title using ONE of these FOUR patterns only, never invent a new one: (1) 'The Real Reason <subject> <did X>', (2) 'How <subject> <impossible feat> In <YEAR>!', (3) '<Subject>: Fact Or Ancient Propaganda?', (4) '<Subject>: The <striking epithet>'. No emoji, no hashtags, no surrounding quotes. CRITICAL fit rule: choose the ONE pattern that truthfully fits the fact. In pattern 2 the year must be when the feat itself happened, never the year of a modern study or confirmation. Use pattern 3 only for ancient or legendary subjects. A title must never imply a false claim even when the underlying fact is true."
+    },
+    "ilk_gorulme": "2026-09-11T03:35:46.948452+00:00"
+  }
+}

@@ -1,7 +1,7 @@
 # BEYIN , flashpoints
 
-Uretim: 2026-09-11T02:20:22.802762+00:00
-Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\flashpoints\defter.jsonl` (15 kayit)
+Uretim: 2026-09-11T03:36:20.227649+00:00
+Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/flashpoints/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
@@ -12,7 +12,7 @@ nerede oturdugu gorulur.
 ## 1. DURUM
 
 - Olculen video: **15**
-- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 0/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 1/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **24**
 - Aralik: 0 ile 1,179 arasi
 
@@ -30,16 +30,13 @@ Son yayinlar (tekrar etme):
 
 ### Teslim rejimi
 
-- Guncel rejim: `847e317c`
+- Guncel rejim: `dbcdc34a`
 - Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
 
 ### Yayinlanmayanlar
 
-- **1 bolum uretildi ama YAYINLANMADI.** Bunlar YouTube'a cikmadigi icin yukaridaki olcumlere HIC girmiyor; en cok ogrenilecek hatalar bunlardir.
-
-| part | durum | kod | eksik | deneme |
-|---|---|---|---|---|
-| 31 | awaiting_approval | - | mastering başarısız: master teslim sözleşmes | - |
+- Su anda tutulan bolum yok.
+- Kusur defterinde gecmisten **1** olay kayitli (`kusur.jsonl`). series.json yalnizca ANLIK durumu tutar; kendini toparlayan hatalar orada iz birakmaz.
 
 ### Kural cikarimina GIRMEYEN bolumler
 
