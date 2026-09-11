@@ -49,5 +49,9 @@
       "environment": "jungle_set",
       "state_carry": "The jaws stay propped open behind him and haze still drifts across the set."
     }
-  ]
+  ],
+  "prop_ref_urls": [
+    "https://i.ibb.co/zTyBvwsV/ep06-giant-crocodile-head-practical-prop.png"
+  ],
+  "ref_prompt_sha256": "978bc69ce07839653ab1b73626c15a5e98f3f1e4d974d1363e59d31e4129b206"
 }
