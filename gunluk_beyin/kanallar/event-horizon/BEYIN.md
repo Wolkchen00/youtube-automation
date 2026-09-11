@@ -1,6 +1,6 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-11T07:41:12.796284+00:00
+Uretim: 2026-09-11T08:39:32.509746+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.

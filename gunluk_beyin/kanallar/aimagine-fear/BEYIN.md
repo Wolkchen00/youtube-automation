@@ -1,7 +1,7 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-11T08:33:57.602749+00:00
-Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\aimagine-fear\defter.jsonl` (9 kayit)
+Uretim: 2026-09-11T08:39:33.709198+00:00
+Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (9 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
