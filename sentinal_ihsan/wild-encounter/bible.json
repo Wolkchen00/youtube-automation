@@ -60,7 +60,7 @@
   },
   "art_style": "Vertical 9:16 photoreal wildlife footage shot on a handheld camera in a real outdoor location: beach, jungle, river, desert or open water, in natural daylight. Grounded documentary look with slight handheld shake, real depth of field, sun haze and visible atmosphere. Colours are natural and slightly desaturated, never stylised or cinematic-graded. Exactly ONE hybrid creature is present and it behaves like a real animal; everything else in the world obeys ordinary physics.",
   "style_ref_url": null,
-  "music": true,
+  "music": false,
   "narration": null,
   "characters": [
     {
