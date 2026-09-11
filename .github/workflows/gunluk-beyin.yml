@@ -10,7 +10,11 @@ name: Gunluk Beyin
 # olan next-stop 13:20 UTC'den cok once bitiyor, yani BEYIN.md gune hazir.
 #
 # kie-uretim concurrency grubuna GIRMEZ: bu kosu Kie kredisi HARCAMAZ,
-# sadece YouTube RSS okur ve yt-dlp ile video indirir. Kendi grubu var.
+# sadece YouTube Data API'yi okur ve yt-dlp ile video indirir. Kendi grubu var.
+#
+# NOT: video listesi artik RSS'ten GELMIYOR. youtube.com/feeds/videos.xml
+# 2026-09-10'dan beri herkese 404/500 veriyor (MrBeast ve Google dahil), bu
+# yuzden YOUTUBE_API_KEY secret'i bu kosu icin ZORUNLU.
 
 on:
   schedule:
