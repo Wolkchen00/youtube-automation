@@ -25,6 +25,7 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 
+import askida
 import tamlik
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -1309,13 +1310,80 @@ def cmd_brain(channel):
              "kanala ozel kural VAR" if enough else "YETERSIZ VERI"))
 
 
+def cmd_suspend(channel, days=None, until=None, reason=""):
+    """Park a channel: skip its runs and replace BEYIN.md with a notice."""
+    folder = channel_dir(channel)
+    if until is not None:
+        until_iso = askida.parse_until(until)
+    else:
+        until_iso = askida.until_from_days(days if days is not None else 2)
+    record = askida.write_state(folder, until_iso, reason)
+    archived = askida.install_notice(channel, folder, record)
+    print("%s ASKIYA ALINDI: %s" % (channel, askida.describe(record)))
+    if archived:
+        print("  onceki rapor saklandi -> %s"
+              % os.path.join(folder, askida.ARCHIVED_REPORT))
+    print("  BEYIN.md yerine aski bildirimi yazildi; kanal ajani artik eski")
+    print("  konseptin tavsiyesini okumuyor.")
+    print("  kaldirmak icin: python beyin.py devam %s" % channel)
+
+
+def cmd_resume(channel):
+    """Lift a suspension. The next run rebuilds BEYIN.md from the ledger."""
+    folder = channel_dir(channel)
+    record, active = askida.read_state(folder)
+    if record is None:
+        print("%s zaten askida degil." % channel)
+        return
+    askida.clear_state(folder)
+    print("%s askidan cikarildi%s." % (channel, "" if active else " (suresi zaten dolmustu)"))
+    print("  BEYIN.md hala aski bildirimi; bir sonraki 'beyin' kosusu")
+    print("  onu olculmus veriyle degistirecek:")
+    print("    python beyin.py beyin %s" % channel)
+
+
+def suspended(channel, command):
+    """True if this channel is parked. Prints why, so a run is never silent."""
+    record, active = askida.read_state(channel_dir(channel))
+    if record is None or not active:
+        if record is not None:
+            print("NOT: %s icin aski suresi dolmus, normal devam ediliyor." % channel)
+        return False
+    print("ATLANDI: %s ASKIDA (%s)" % (channel, askida.describe(record)))
+    print("  '%s' calistirilmadi. Kaldirmak icin: python beyin.py devam %s"
+          % (command, channel))
+    return True
+
+
 def main():
     parser = argparse.ArgumentParser(description="Gunluk ogrenen beyin")
-    parser.add_argument("komut", choices=["olc", "topla", "beyin"])
+    parser.add_argument("komut",
+                        choices=["olc", "topla", "beyin", "askiya-al", "devam"])
     parser.add_argument("kanal")
     parser.add_argument("--limit", type=int, default=15,
-                        help="olc: RSS'ten kac video taransin")
+                        help="olc: kac video taransin")
+    parser.add_argument("--gun", type=int, default=None,
+                        help="askiya-al: kac gun (varsayilan 2)")
+    parser.add_argument("--kadar", default=None,
+                        help="askiya-al: YYYY-AA-GG ya da 'acik' (elle kaldirilir)")
+    parser.add_argument("--sebep", default="",
+                        help="askiya-al: askinin sebebi, raporda gorunur")
     args = parser.parse_args()
+
+    if args.komut == "askiya-al":
+        cmd_suspend(args.kanal, days=args.gun, until=args.kadar,
+                    reason=args.sebep)
+        return
+    if args.komut == "devam":
+        cmd_resume(args.kanal)
+        return
+
+    # Aski her uc komutu da durdurur. `topla` teknik olarak zararsiz olurdu ama
+    # "askida" demek askida demek: yarim calisan bir kanal, kapali olduguna
+    # guvenilemeyen bir kanaldir.
+    safe_slug(args.kanal)
+    if suspended(args.kanal, args.komut):
+        return
 
     if args.komut == "olc":
         cmd_measure(args.kanal, args.limit)
