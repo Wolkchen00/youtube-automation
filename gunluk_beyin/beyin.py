@@ -144,6 +144,48 @@ def ledger_path(channel, root=None):
     return os.path.join(channel_dir(channel, root), "defter.jsonl")
 
 
+def measure_failure_path(channel, root=None):
+    return os.path.join(channel_dir(channel, root), "olcum-hatasi.json")
+
+
+def note_measure_failure(channel, reason, root=None):
+    """Record that measurement did not happen, so the REPORT can admit it.
+
+    Without this the report is rewritten with today's timestamp from an
+    unchanged ledger: it looks current, and nothing in it says that new videos
+    were never measured. The run goes red, but the file a channel agent reads
+    the next morning does not.
+    """
+    path = measure_failure_path(channel, root)
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    tmp = "%s.tmp.%d" % (path, os.getpid())
+    try:
+        with open(tmp, "w", encoding="utf-8") as fh:
+            json.dump({"ts": now_iso(), "sebep": reason}, fh,
+                      ensure_ascii=False, indent=1)
+            fh.flush()
+            os.fsync(fh.fileno())
+        os.replace(tmp, path)
+    except OSError:
+        pass          # raporu damgalayamamak, olcumu durdurmaktan daha az kotu
+
+
+def read_measure_failure(channel, root=None):
+    try:
+        with open(measure_failure_path(channel, root), encoding="utf-8") as fh:
+            record = json.load(fh)
+        return record if isinstance(record, dict) else None
+    except Exception:
+        return None
+
+
+def clear_measure_failure(channel, root=None):
+    try:
+        os.remove(measure_failure_path(channel, root))
+    except OSError:
+        pass
+
+
 def repo_root(root=None):
     """gunluk_beyin/ bir alt klasordur; seri dosyalari bir ust dizindedir."""
     return os.path.dirname(root or ROOT)
@@ -472,7 +514,9 @@ def write_ledger(channel, rows, root=None):
     """
     path = ledger_path(channel, root)
     os.makedirs(os.path.dirname(path), exist_ok=True)
-    tmp = path + ".tmp"
+    # Surec basina ayri ad: iki yazar ayni ".tmp" dosyasini paylasiyordu ve
+    # ayni anda calistiklarinda birbirlerinin yarim ciktisini replace ediyordu.
+    tmp = "%s.tmp.%d" % (path, os.getpid())
     try:
         with open(tmp, "w", encoding="utf-8") as fh:
             for row in rows:
@@ -579,6 +623,10 @@ def cmd_measure(channel, limit=15):
         from uploads import list_uploads
         from olc import tek as measure_one
     except Exception as exc:
+        # Bu da bir olcum basarisizligidir: arac yuklenemezse hicbir video
+        # olculmez, ama `beyin` yine calisip raporu BUGUNUN tarihiyle yeniden
+        # yazar. Rapor bunu soyleyebilsin diye damgayi burada da biraktir.
+        note_measure_failure(channel, "arac/ modulleri yuklenemedi: %s" % exc)
         sys.exit("arac/ modulleri yuklenemedi: %s" % exc)
 
     rows, _ = read_ledger(channel)
@@ -600,10 +648,23 @@ def cmd_measure(channel, limit=15):
     # Google kanallarinda da ayni. Birincil kaynak Data API v3, RSS yedek.
     feed, feed_error, feed_source = list_uploads(CHANNELS[channel], limit)
     if feed_error:
+        note_measure_failure(channel, "yukleme listesi okunamadi: %s"
+                             % feed_error)
         sys.exit("DUR: %s kanalinin yukleme listesi okunamadi.\n  %s\n"
                  "  Defter DEGISTIRILMEDI. Bu bir ag/erisim/kota sorunudur, "
                  "'yeni video yok' DEGILDIR." % (channel, feed_error))
     candidates = [v for v in feed if v["video_id"] not in known]
+
+    # Pencere DOLU mu? `list_uploads` en yeni `limit` videoyu dondurur ve
+    # "defterde yok" suzgeci ONDAN SONRA calisir. Yani birikim limitten
+    # buyukse en eskiler pencereye hic girmez ve bir daha ASLA girmez , kosu
+    # yine yesil doner. Aski ya da bir kesinti sonrasi tam olarak bu olur.
+    if len(feed) >= limit and feed and feed[-1]["video_id"] not in known:
+        print("UYARI: %d'lik pencerenin EN ESKI videosu da defterde yok."
+              % limit)
+        print("  Pencere disinda olculmemis video KALMIS OLABILIR ve otomatik")
+        print("  olarak hic girmezler. Daha genis tara:")
+        print("    python beyin.py olc %s --limit %d" % (channel, limit * 3))
 
     # 24-hour gate: fresh videos are NOT measured, they arrive tomorrow.
     # Their view count is near zero, which would corrupt any ranking.
@@ -629,6 +690,7 @@ def cmd_measure(channel, limit=15):
     workdir = os.path.join(tempfile.gettempdir(), "gunluk-beyin")
     os.makedirs(workdir, exist_ok=True)
 
+    measured, failed = 0, 0
     for video in due:
         vid = video["video_id"]
         yayin_rejimi = published_regime(channel, vid)
@@ -638,10 +700,13 @@ def cmd_measure(channel, limit=15):
                 "https://www.youtube.com/shorts/" + vid, workdir, False)
         except Exception as exc:
             print("    HATA: %s" % exc)
+            failed += 1
             continue
         if result.get("hata"):
             print("    ATLANDI: %s" % result["hata"])
+            failed += 1
             continue
+        measured += 1
         rows.append({
             "video_id": vid,
             "kanal": channel,
@@ -661,6 +726,21 @@ def cmd_measure(channel, limit=15):
             "olculdu_ts": now_iso(),
         })
         write_ledger(channel, rows)
+
+    # Tek tek basarisizliklar `continue` ile geciliyordu ve dongunun sonunda
+    # hicbir sayac yoktu: yt-dlp/ffmpeg coktugunde HER video dusse bile komut
+    # exit 0 verip "defter: 15 kayit" basiyordu. Yani olcum tamamen olmus
+    # olurdu ve kosu yesil kalirdi.
+    if due and measured == 0:
+        note_measure_failure(
+            channel, "%d videonun hicbiri olculemedi" % len(due))
+        sys.exit("DUR: olculecek %d videonun HICBIRI olculemedi.\n"
+                 "  Bu yt-dlp/ffmpeg/ag sorunudur, 'yeni video yok' DEGILDIR.\n"
+                 "  Defterde yeni kayit YOK." % len(due))
+    if failed:
+        print("UYARI: %d video olculemedi, %d tanesi eklendi."
+              % (failed, measured))
+    clear_measure_failure(channel)
     print("defter: %d kayit -> %s" % (len(rows), ledger_path(channel)))
 
 
@@ -898,6 +978,18 @@ def cmd_brain(channel):
     # --- 1. status
     out.append("## 1. DURUM")
     out.append("")
+    # Olcum adimi dustuyse rapor bunu SOYLEMEK zorunda. Aksi halde dosya
+    # bugunun tarihiyle yeniden yazilir, eksiksiz gorunur ve okuyan ajan
+    # yeni videolarin hic olculmedigini bilmez.
+    _hata = read_measure_failure(channel)
+    if _hata:
+        out.append("> **UYARI: son olcum adimi BASARISIZ.** (%s)"
+                   % str(_hata.get("ts", ""))[:16].replace("T", " "))
+        out.append("> %s" % (_hata.get("sebep") or "sebep kaydedilmemis"))
+        out.append("> Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar")
+        out.append("> olculmemis olabilir; bu rapor bugun yazildi diye guncel")
+        out.append("> DEGILDIR.")
+        out.append("")
     if retired:
         sebepler = sorted({(r.get("emekli") or {}).get("sebep") or ""
                            for r in retired} - {""})
@@ -1367,13 +1459,27 @@ def cmd_retire(channel, reason=""):
 
 def cmd_suspend(channel, days=None, until=None, reason=""):
     """Park a channel: skip its runs and replace BEYIN.md with a notice."""
+    safe_slug(channel)
+    # Yazim hatasi SESSIZCE yeni bir kanal acmamali. `askiya-al flashpoint`
+    # (s eksik) bos bir klasor + bildirim uretip exit 0 veriyordu, `flashpoints`
+    # ise hic durmadan calismaya devam ediyordu , yani kullanici kanali
+    # durdurdugunu saniyordu. cmd_brain'de ayni kapi zaten var.
+    if channel not in CHANNELS and not os.path.exists(ledger_path(channel)):
+        sys.exit("Bilinmeyen kanal: %s\n  Gecerli: %s\n"
+                 "  (ad dogruysa once defterini olustur: %s)"
+                 % (channel, ", ".join(sorted(CHANNELS)), ledger_path(channel)))
     folder = channel_dir(channel)
     if until is not None:
         until_iso = askida.parse_until(until)
     else:
         until_iso = askida.until_from_days(days if days is not None else 2)
+    # SIRA ONEMLI: once bildirim, sonra durum dosyasi. Ters sirada, bildirim
+    # yazilamazsa kanal ASKIYA ALINMIS ama eski uygulanabilir raporu yerinde
+    # kalmis olurdu , gunlerce sessizce eski konsepti satardi.
+    archived = askida.install_notice(channel, folder,
+                                     {"askiya_alindi": now_iso(),
+                                      "kadar": until_iso, "sebep": reason or ""})
     record = askida.write_state(folder, until_iso, reason)
-    archived = askida.install_notice(channel, folder, record)
     print("%s ASKIYA ALINDI: %s" % (channel, askida.describe(record)))
     if archived:
         print("  onceki rapor saklandi -> %s"
@@ -1390,7 +1496,10 @@ def cmd_resume(channel):
     if record is None:
         print("%s zaten askida degil." % channel)
         return
-    askida.clear_state(folder)
+    if not askida.clear_state(folder):
+        sys.exit("DUR: %s icin aski dosyasi SILINEMEDI (%s).\n"
+                 "  Kanal HALA askida. Dosyayi elle sil ve tekrar dene."
+                 % (channel, askida.state_path(folder)))
     print("%s askidan cikarildi%s." % (channel, "" if active else " (suresi zaten dolmustu)"))
     print("  BEYIN.md hala aski bildirimi; bir sonraki 'beyin' kosusu")
     print("  onu olculmus veriyle degistirecek:")

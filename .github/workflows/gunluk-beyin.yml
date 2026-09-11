@@ -127,11 +127,27 @@ jobs:
           for f in kanallar/*/BEYIN.md; do
             [ -e "$f" ] || continue
             k=$(basename "$(dirname "$f")")
-            n=$(wc -l < "kanallar/${k}/defter.jsonl" 2>/dev/null || echo 0)
-            if grep -q "YETERSIZ VERI" "$f"; then
+            d="kanallar/${k}/defter.jsonl"
+            # n = AKTIF kayit. Ham satir sayisi emekli kayitlari da sayiyordu:
+            # 15 kaydi emekliye ayrilmis bir kanal ozette "n=15" gorunuyordu.
+            if [ -e "$d" ]; then
+              n=$(grep -vc '"emekli"' "$d" || true)
+              [ -z "$n" ] && n=0
+            else
+              n=0
+            fi
+            # Sira ONEMLI: askidaki kanalin raporunda "YETERSIZ VERI" GECMEZ,
+            # "YON YOKTUR" gecer. Once askiyi sormazsak ozet askidaki kanali
+            # "kanala ozel kural VAR" diye gosteriyordu , gercegin tam tersi.
+            if grep -q "ASKIDA" "$f"; then
+              durum="ASKIDA (rapor yok)"
+            elif grep -q "YETERSIZ VERI" "$f"; then
               durum="YETERSIZ VERI"
             else
               durum="kanala ozel kural VAR"
+            fi
+            if [ -e "kanallar/${k}/olcum-hatasi.json" ]; then
+              durum="${durum} , SON OLCUM BASARISIZ"
             fi
             echo "- **${k}**: n=${n}, ${durum}" >> "$GITHUB_STEP_SUMMARY"
           done

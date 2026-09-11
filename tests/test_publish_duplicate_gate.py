@@ -328,3 +328,80 @@ def test_api_hata_kodu_logda_gorunuyor(monkeypatch, caplog):
         uploader.channel_recent_titles("Youtube")
     assert any("403" in kayit.message for kayit in caplog.records), \
         "kota/yetki hatasi sessizce yutuluyor"
+
+
+# ─── Codex incelemesi 2026-09-11 ─────────────────────────────────────────────
+
+def test_gate_compares_the_title_that_will_actually_be_published(
+        monkeypatch, _yukleme_izleyici):
+    """BULGU 6. Kapi tam `title`i karsilastiriyordu ama gonderilen
+    `title[:100]` idi. 100 haneli mevcut bir baslik, sonuna herhangi bir ek
+    gelmis haliyle yeniden gonderildiginde tam metin listede BULUNMUYOR, kapi
+    aciliyor ve video kirpilarak AYNI baslikla ikinci kez yayinlaniyordu."""
+    mevcut = "A" * uploader.TITLE_LIMIT
+    aday = mevcut + " (yeniden)"
+    assert normalize_title(aday) != normalize_title(mevcut), \
+        "test kurulumu yanlis: iki baslik zaten ayni normalize oluyor"
+    assert normalize_title(aday[:uploader.TITLE_LIMIT]) == normalize_title(mevcut)
+
+    video, cagrilar = _yukleme_izleyici
+    monkeypatch.setattr(uploader, "channel_recent_titles",
+                        lambda u: {normalize_title(mevcut)})
+    sonuc = uploader.upload_to_platform(video, aday, "d",
+                                        user="Youtube", platform="youtube")
+    assert sonuc is None, "mukerrer baslik yayinlandi"
+    assert cagrilar == [], "kapi acildi ve yukleme yapildi"
+
+
+def test_rss_fallback_decodes_xml_entities(monkeypatch):
+    """BULGU 12. Ham `<title>` metni cozulmeden normalize ediliyordu:
+    "Rock &amp; Roll" -> "rock amp roll", aday "Rock & Roll" -> "rock roll".
+    Mukerrer kapiyi geciyordu."""
+    xml = ('<feed><entry><title>Rock &amp; Roll</title></entry></feed>')
+    monkeypatch.delenv("YOUTUBE_API_KEY", raising=False)
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    monkeypatch.setattr(uploader.requests, "get",
+                        lambda url, *a, **k: _SahteYanit(xml))
+    basliklar = uploader.channel_recent_titles("Youtube")
+    assert normalize_title("Rock & Roll") in basliklar, \
+        "XML varligi cozulmedi, mukerrer kapi bunu kaciriyor"
+
+
+def test_publish_updates_the_cached_snapshot(monkeypatch):
+    """BULGU 5b. Kanal listesi surec basina BIR KEZ aliniyor. Ayni kosuda iki
+    bolum yayinlanirsa ikincisi, birincisinin HENUZ yayinlanmadigi ana ait
+    listeye bakiyordu , ayni baslik iki kez cikabiliyordu."""
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    uploader._channel_titles_cache["UC_TEST"] = {normalize_title("Eski Bolum")}
+
+    uploader._remember_published_title("Youtube", "youtube", "Next Stop: The Deep")
+
+    # Ikinci bolum ayni onbellege bakiyor: artik ilkini GORUYOR.
+    basliklar = uploader.channel_recent_titles("Youtube")
+    assert normalize_title("Next Stop: The Deep") in basliklar
+
+
+def test_publish_cache_update_ignores_other_platforms(monkeypatch):
+    """Kapi yalniz YouTube'u koruyor; IG/TikTok yayini listeyi kirletmemeli."""
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    uploader._channel_titles_cache["UC_TEST"] = set()
+    uploader._remember_published_title("Youtube", "instagram", "Bir Baslik")
+    assert uploader._channel_titles_cache["UC_TEST"] == set()
+
+
+def test_unverified_channel_is_not_upgraded_by_a_publish(monkeypatch):
+    """Onbellek None ise kanal DOGRULANAMADI demektir. Tek bir yayinlanmis
+    baslikla kume olusturmak, dogrulanmamis kanali dogrulanmis gosterirdi ve
+    kapi bir anda 'dogrulandi' diye davranmaya baslardi."""
+    monkeypatch.setattr(uploader, "_channel_id_for_user", lambda u: "UC_TEST")
+    uploader._channel_titles_cache["UC_TEST"] = None
+    uploader._remember_published_title("Youtube", "youtube", "Bir Baslik")
+    assert uploader._channel_titles_cache["UC_TEST"] is None
+
+
+def test_success_path_actually_calls_the_cache_update():
+    """Mekanizma dogru ama CAGRILMIYORSA ise yaramaz: iki basari donusunun
+    ikisinde de cagri olmali (senkron ve async onay yolu)."""
+    kaynak = (KOK / "core" / "uploader.py").read_text(encoding="utf-8")
+    govde = kaynak[kaynak.index("def upload_to_platform("):]
+    assert govde.count("_remember_published_title(user, platform, published_title)") == 2,         "basari yollarindan biri onbellegi guncellemiyor"

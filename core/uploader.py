@@ -5,6 +5,7 @@ Publishes videos to YouTube Shorts, Instagram Reels, and TikTok
 via the Upload-Post.com API.
 """
 
+import html
 import os
 import re
 import time
@@ -53,6 +54,10 @@ YOUTUBE_API_PLAYLIST_URL = "https://www.googleapis.com/youtube/v3/playlistItems"
 CHANNEL_FEED_TIMEOUT = 5
 CHANNEL_FEED_LOOKBACK = 25
 
+# Upload-Post basligi bu uzunlukta kirpar. Mukerrer kapisi AYNI degeri
+# kullanmali, yoksa karsilastirdigi metinle yayinladigi metin ayrisir.
+TITLE_LIMIT = 100
+
 
 def _titles_from_api(channel_id: str) -> set[str] | None:
     """Son yuklemelerin normalize basliklari, Data API v3 uzerinden.
@@ -96,6 +101,29 @@ def _titles_from_api(channel_id: str) -> set[str] | None:
     except Exception as error:  # ag, zaman asimi, JSON degil: hepsi ayni kova
         logger.warning(f"⚠️ Kanal listesi API cagrisi basarisiz: {error}")
         return None
+
+
+def _remember_published_title(user: str, platform: str, title: str) -> None:
+    """Add a title we just published to the cached snapshot.
+
+    The snapshot is taken once per channel and then reused for the rest of the
+    process. Without this, two episodes published in the same run both check a
+    list taken BEFORE either of them existed: the second one cannot see the
+    first, and an identical title goes out twice. The 2026-09-02 incident that
+    put this gate here was exactly a repeated title.
+
+    Only YouTube: that is the only platform the gate guards.
+    """
+    if str(platform).strip().lower() != "youtube":
+        return
+    channel_id = _channel_id_for_user(user)
+    if not channel_id:
+        return
+    mevcut = _channel_titles_cache.get(channel_id)
+    # None means "could not verify". Seeding a set from a single known title
+    # would turn an unverified channel into a verified-looking one, so leave it.
+    if isinstance(mevcut, set):
+        mevcut.add(normalize_title(title))
 
 
 def _channel_id_for_user(user: str) -> str | None:
@@ -142,7 +170,10 @@ def channel_recent_titles(user: str) -> set[str] | None:
                 r"<entry>.*?<title>(.*?)</title>", resp.text, re.S
             )
             if basliklar:
-                sonuc = {normalize_title(b) for b in basliklar}
+                # XML varliklarini coz: ham metinde "Rock &amp; Roll"
+                # normalize edilince "rock amp roll" oluyor, aday baslik
+                # "Rock & Roll" ise "rock roll" , mukerrer kapiyi geciyordu.
+                sonuc = {normalize_title(html.unescape(b)) for b in basliklar}
     except Exception as error:  # ag, zaman asimi, bozuk XML: hepsi ayni kova
         logger.warning(f"⚠️ Kanal akisi okunamadi ({user}): {error}")
         sonuc = None
@@ -524,6 +555,12 @@ def upload_to_platform(
     # Mukerrer-baslik kapisi. Yalniz YouTube: kanal gorunurlugumuz orada var, ve
     # YouTube gecip IG/TikTok dustugunde yapilan yeniden deneme tum yayini degil
     # sadece YouTube'u atlamali.
+    # Kapi, YAYINLANACAK basligi karsilastirmali. Eskiden tam `title`
+    # karsilastiriliyordu ama gonderilen `title[:TITLE_LIMIT]` idi: 100 haneli
+    # mevcut bir baslik, sonuna herhangi bir ek gelmis haliyle yeniden
+    # gonderildiginde tam metin listede bulunmuyor, kapi aciliyor ve video
+    # kirpilarak AYNI baslikla ikinci kez yayinlaniyordu.
+    published_title = title[:TITLE_LIMIT]
     if str(platform).strip().lower() == "youtube" and not allow_duplicate_title:
         kanal_basliklari = channel_recent_titles(user)
         if kanal_basliklari is None:
@@ -531,10 +568,10 @@ def upload_to_platform(
                 "⚠️ Kanal dogrulanamadi; mukerrer kontrolu atlandi ve yayina "
                 "devam ediliyor."
             )
-        elif normalize_title(title) in kanal_basliklari:
+        elif normalize_title(published_title) in kanal_basliklari:
             logger.error(
-                f"❌ Mukerrer baslik: '{title}' bu kanalda zaten var; YouTube "
-                "yuklemesi ATLANDI. Bilerek ikinci kez yayinlamak icin "
+                f"❌ Mukerrer baslik: '{published_title}' bu kanalda zaten var; "
+                "YouTube yuklemesi ATLANDI. Bilerek ikinci kez yayinlamak icin "
                 "allow_duplicate_title=True."
             )
             return None
@@ -545,7 +582,7 @@ def upload_to_platform(
     headers = {"Authorization": f"Apikey {UPLOAD_POST_API_KEY}"}
 
     data = {
-        "title": title[:100],
+        "title": published_title,
         "user": user,
         "platform[]": platform,
     }
@@ -594,8 +631,10 @@ def upload_to_platform(
             if response.status_code == 200 and not body_failed:
                 request_id, job_id = _async_reference(result)
                 if not _publication_identifier(result, platform) and (request_id or job_id):
+                    _remember_published_title(user, platform, published_title)
                     return _confirm_async_upload(result, platform, headers)
                 logger.info(f"✅ {platform.upper()} uploaded: {title[:50]}...")
+                _remember_published_title(user, platform, published_title)
                 return result
 
             err = _extract_error(result, platform)
