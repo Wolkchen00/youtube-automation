@@ -1,6 +1,6 @@
 # BEYIN , unnatural-lab
 
-Uretim: 2026-09-11T02:20:22.487004+00:00
+Uretim: 2026-09-11T02:22:14.986874+00:00
 Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\unnatural-lab\defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -35,18 +35,20 @@ Son yayinlar (tekrar etme):
 
 ### Yayinlanmayanlar
 
-- **8 bolum uretildi ama YAYINLANMADI.** Bunlar YouTube'a cikmadigi icin yukaridaki olcumlere HIC girmiyor; en cok ogrenilecek hatalar bunlardir.
+- **8 bolum YAYINLANMADI.** Bunlar YouTube'a cikmadigi icin yukaridaki olcumlere HIC girmiyor.
+  - 1 tanesi URETILDI ama yayina giremedi; en cok ogrenilecek hatalar bunlardir.
+  - 7 tanesi HIC URETILMEDI (butce kapisi, atlandi ya da reddedildi); kredi harcanmadi.
 
-| part | durum | kod | eksik | deneme |
-|---|---|---|---|---|
-| 1 | rejected | - | - | - |
-| 2 | rejected | - | - | - |
-| 23 | skipped | - | - | - |
-| 24 | skipped | - | - | - |
-| 25 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 0 |
-| 26 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 0 |
-| 28 | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 1 |
-| 30 | needs_human | UNKNOWN | üretim nedeni bilinmiyor | 3 |
+| part | uretim | durum | kod | eksik | deneme |
+|---|---|---|---|---|---|
+| 1 | uretilmedi | rejected | - | - | - |
+| 2 | uretilmedi | rejected | - | - | - |
+| 23 | uretilmedi | skipped | - | - | - |
+| 24 | uretilmedi | skipped | - | - | - |
+| 25 | uretilmedi | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 0 |
+| 26 | uretilmedi | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 0 |
+| 28 | uretilmedi | budget_exhausted | BUDGET_EXHAUSTED | kalan bölüm kredisi tamamlanma tabanına yetm | 1 |
+| 30 | uretildi | needs_human | UNKNOWN | üretim nedeni bilinmiyor | 3 |
 
 ### Kural cikarimina GIRMEYEN bolumler
 

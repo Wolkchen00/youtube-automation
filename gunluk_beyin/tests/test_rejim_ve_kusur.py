@@ -372,3 +372,40 @@ def test_kaynak_okunamayinca_beyin_hata_yok_demez(tmp_path):
     metin = _beyin_metni(kok, "aimagine-fear")
     assert "GORUNTULENEMIYOR" in metin
     assert "hata yok" in metin.lower()
+
+def test_uretilmeyen_bolum_uretildi_diye_sunulmaz(tmp_path):
+    """budget_exhausted/skipped/rejected bolumler ucretli ise HIC baslamadi.
+    Bunlari "uretildi ama yayinlanmadi" diye sunmak BEYIN.md'yi yalanci yapar."""
+    m = _modul()
+    kok = _beyin_kok(tmp_path)
+    _sahte_seri(tmp_path, os.path.join("sentinal_ihsan", "unnatural-lab"), _bible(),
+                _series_parts({
+                    "5": {"status": "budget_exhausted",
+                          "last_reason_code": "BUDGET_EXHAUSTED"},
+                    "6": {"status": "skipped"},
+                    "7": {"status": "rejected"},
+                    "8": {"status": "qc_retry", "last_reason_code": "EPISODE_DEGRADED",
+                          "retry_count": 1},
+                }))
+    tutulan = {h["part"]: h["uretildi"] for h in m.held_episodes("unnatural-lab",
+                                                                root=str(kok))}
+    assert tutulan == {"5": False, "6": False, "7": False, "8": True}
+
+
+def test_beyin_uretilen_ve_uretilmeyeni_ayri_sayar(tmp_path):
+    kok = _beyin_kok(tmp_path)
+    _sahte_seri(tmp_path, os.path.join("sentinal_ihsan", "unnatural-lab"), _bible(),
+                _series_parts({
+                    "5": {"status": "budget_exhausted",
+                          "last_reason_code": "BUDGET_EXHAUSTED"},
+                    "8": {"status": "needs_human", "last_reason_code": "CONTENT_REJECT",
+                          "retry_count": 3},
+                }))
+    _defter_yaz(kok, "unnatural-lab", _kayitlar(16))
+    sonuc = _calistir(kok, "unnatural-lab")
+    assert sonuc.returncode == 0, sonuc.stderr
+    metin = _beyin_metni(kok, "unnatural-lab")
+    assert "2 bolum YAYINLANMADI" in metin
+    assert "1 tanesi URETILDI" in metin
+    assert "1 tanesi HIC URETILMEDI" in metin
+    assert "uretildi ama YAYINLANMADI" not in metin
