@@ -117,3 +117,56 @@ Ama olay akisi dusmeden once TEK gercek bulgu birakti (`item_2`, verbatim):
 proof 9'un gercekten olculebilirligi, brief metnini baska okuyan var mi, ve
 kunyeye "ozne adi" diyen ucuncu bir yer kaldi mi) CEVAPSIZ. Yapiya gecmeden
 once tamamlanmali.
+
+## Kapanis , Visionary direksiyonu aldi (Ihsan onayi)
+
+Codex ucuncu kez kotaya takildi ve turu 2 yarim kaldi. Ihsan "dort soruyu ben
+cevaplayip yapayim" dedi. Yani bu rock **VERDICT: SAME PAGE ALMADAN** yapildi;
+ikinci modelin bagimsiz gozu YOK. Acikca kayda geciyor.
+
+### Cevapsiz dort soru , kod okunarak cevaplandi
+
+1. **Threading'in en sadik hali:** `title_style` kalibi (`:674` oku, `:729`
+   `X or varsayilan`). Ayni kalip ikinci kez kullanildi. Ezme EN DISTA konuldu,
+   boylece `tc_year_required is False` kolu (event-horizon celestial metni)
+   dokunulmadan kaldi , test `test_celestial_kolu_sizmiyor` bunu olcuyor.
+2. **"Bit bit ayni" olculebilir mi:** eski kodla karsilastirma gerekmedi ,
+   depo ZATEN altin prompt dosyasi tutuyor (`tests/golden/fixedframe_prompts.json`,
+   11 seri). Benim yazacagim her testten iyi bir kanit: degisiklikten sonra
+   `GoldenNeutralityTests` 9 alt-testi GECTI ve yalniz `slug='flashpoints'`
+   dustu. Yani diger kanallarin prompt'lari bit bit ayni kaldi.
+3. **Brief metnini baska okuyan var mi:** IKI okuyucu bulundu ve ikisi de
+   GUVENLI cikti , `tests/test_rf_prompt_lint.py` `aimagine/from-scratch`'e
+   bakiyor (`SERIES_ROOT`, satir 15), `tools/assert_cadence_v3.py` ise
+   `shot_plan` istiyor (flashpoints'te yok) ve CI'da kosmuyor.
+4. **Kunyeye "ozne adi" diyen UCUNCU bir yer:** YOK. Prompt kuran yolda yalniz
+   `:701` sema ve `:748` kural var; `:745` event-horizon'un kolu. Brief'in tek
+   kart bahsi "kapanis karti yasak" , bitis karti, farkli sey. `title_style`,
+   `music_style` ve sistem onsozu kunyeden hic soz etmiyor.
+
+### Yaparken kendi buldugum iki sey
+
+- **Altin dosya tuzagi:** ilk yeniden uretimde girinti tespitim yanildi (dosya
+  CRLF) ve 11 serinin TAMAMINI yeniden bicimlendirdim (44+/44-). Geri alindi,
+  bicim birebir korunarak yalniz flashpoints girdisi guncellendi , diff 2 satir.
+- **`from-scratch` ZATEN kaymis:** altin kaydiyla uretilen prompt'u uyusmuyor,
+  ve bu benim degisikligimden ONCE de boyleydi (stash ile dogrulandi). Bana ait
+  degil, dokunmadim; `RF-ISSUES` maddesi olarak asagida.
+- **Dil tutarsizligi:** kurali once Turkce yazdim, ama `system_instruction`
+  Ingilizce ve emsal aldigim `title_style` da Ingilizce. Kendi emsalime
+  uymamisim; kural Ingilizce'ye cevrildi.
+
+### Kanit (hepsi Claude tarafindan kosuldu)
+
+- `python -m pytest tests/ -q` -> **866 gecti**, 2 atlandi, 214 alt-test
+- Mutasyon: motor ezmesi kapatilinca 3 alt-test duser; sema yer tutucusu geri
+  alininca 1 test duser; brief'e "12 sn" geri konunca 1 test duser
+- Altin diff: 2 satir (yalniz flashpoints `contents` + `system_instruction`)
+- Diger 10 serinin altin kaydi: bit bit AYNI
+
+### Yeni RF-ISSUES maddesi
+
+- **[ORTA] `aimagine/from-scratch` altin prompt'u bayat.** Uretilen prompt
+  `tests/golden/fixedframe_prompts.json` kaydiyla uyusmuyor ve hicbir test bunu
+  yakalamiyor (GoldenNeutralityTests o slug'i kapsamiyor). Ya altin guncellenmeli
+  ya da prompt'taki kayma geri alinmali , sahibi kim olduguna bakilmali.

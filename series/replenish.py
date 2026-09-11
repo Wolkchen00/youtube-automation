@@ -672,6 +672,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
     eerie_ok = bool(cfg.get("eerie_ok"))
     title_style = str(cfg.get("title_style") or "").strip()
+    # title_card_style: kanal kunye kuralini kendi yazabilir. title_style ile AYNI
+    # kalip (bkz. asagida title_rule). Ayar yoksa varsayilanlar bit bit korunur.
+    title_card_style = str(cfg.get("title_card_style") or "").strip()
     shot_refs = bool(cfg.get("shot_refs")) and not bible.omit_character_refs
     humans_present = (
         humans_historical or humans_featured or humans_hands_only or humans_silent
@@ -698,8 +701,13 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 f"no narration, no characters ,  pure visuals.")
         narr_shape = '""'
 
-    tc_shape = ('\n   "title_card": {"title": "<subject name, max 40 chars>", '
-                '"subtitle": "<max 48 chars>"},') if want_tc else ""
+    # Ayar varsa sema yer tutucusu YANSIZ olur: kural metni buraya BASILMAZ
+    # (kompakt bir JSON yer tutucusu duzyazi bir kurali tasiyamaz), sadece
+    # "ozne adini yaz" dayatmasi kalkar ki kural ile celismesin.
+    tc_placeholder = ("<title, max 40 chars>" if title_card_style
+                      else "<subject name, max 40 chars>")
+    tc_shape = ('\n   "title_card": {"title": "%s", '
+                '"subtitle": "<max 48 chars>"},' % tc_placeholder) if want_tc else ""
     music_shape = ('\n   "music": "<40-90 word instrumental music style prompt '
                    'matched to THIS episode>",') if want_music else ""
     cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
@@ -741,7 +749,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                   f"flowing prose, no camera directions, no shot numbers; follow the CREATIVE BRIEF strictly."
                   + narr_pace_rule)
                  if narrated else "")
-    if want_tc and tc_year_required is False:
+    if want_tc and title_card_style:
+        # Kanal kendi kunye kuralini yazdi: her iki varsayilani da ezer, ama
+        # YALNIZ bu anahtari tasiyan kanalda. Digerlerinde asagidaki iki kol
+        # bugunku metni bit bit uretmeye devam eder.
+        tc_rule = "\n- TITLE_CARD: " + title_card_style
+    elif want_tc and tc_year_required is False:
         tc_rule = ('\n- TITLE_CARD: "title" = the celestial subject name (max 40 chars); '
                    '"subtitle" = the anomaly itself (max 48 chars); no year is required.')
     else:
