@@ -333,11 +333,37 @@ def test_api_key_ignores_blank_environment(monkeypatch, tmp_path):
 
 
 def test_api_key_returns_empty_when_nothing_is_configured(monkeypatch, tmp_path):
-    module_home = tmp_path / "gunluk_beyin" / "arac"
-    module_home.mkdir(parents=True)
-    monkeypatch.setattr(uploads, "__file__", str(module_home / "uploads.py"))
+    # env_candidates() deliberately ends at the automation repo's own .env so
+    # the /reel-analiz copy of this module can find the key from anywhere.
+    # That means "nothing configured" can only be tested with the candidate
+    # list pinned, otherwise this asserts against the developer's real key.
+    monkeypatch.setattr(uploads, "env_candidates",
+                        lambda: [str(tmp_path / "absent.env")])
     monkeypatch.delenv("YOUTUBE_API_KEY", raising=False)
     assert uploads.api_key() == ""
+
+
+def test_api_key_skips_env_files_with_a_blank_value(monkeypatch, tmp_path):
+    empty = tmp_path / "empty.env"
+    empty.write_text("YOUTUBE_API_KEY=\n", encoding="utf-8")
+    real = tmp_path / "real.env"
+    real.write_text("YOUTUBE_API_KEY=second-file\n", encoding="utf-8")
+    monkeypatch.setattr(uploads, "env_candidates",
+                        lambda: [str(empty), str(real)])
+    monkeypatch.delenv("YOUTUBE_API_KEY", raising=False)
+    assert uploads.api_key() == "second-file", \
+        "bos degerli .env aramayi erken bitirmemeli"
+
+
+def test_env_candidates_walks_up_and_ends_at_the_repo(monkeypatch, tmp_path):
+    module_home = tmp_path / "a" / "b" / "c"
+    module_home.mkdir(parents=True)
+    monkeypatch.setattr(uploads, "__file__", str(module_home / "uploads.py"))
+    found = uploads.env_candidates()
+    assert str(module_home / ".env") == found[0]
+    assert str(tmp_path / "a" / ".env") in found, "yukari dogru yurumeli"
+    assert found[-1].endswith(os.path.join("Youtube", ".env")), \
+        "son care otomasyon deposunun .env'i olmali"
 
 
 # ------------------------------------------- brain stops on a dead source

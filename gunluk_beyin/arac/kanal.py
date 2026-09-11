@@ -100,6 +100,31 @@ def _rss_ayristir(xml, limit):
     return satirlar
 
 
+def list_channel_uploads(channel_id, limit):
+    """Recent uploads, from whichever source is alive.
+
+    The Atom feed at youtube.com/feeds/videos.xml started answering 404/500 to
+    everyone on 2026-09-10 (our channels, MrBeast, Google alike), so RSS alone
+    is no longer a source you can build on. `uploads.list_uploads` puts Data
+    API v3 first and keeps RSS as the fallback.
+    """
+    try:
+        import uploads
+    except ImportError:
+        return youtube_rss(channel_id, limit), None, "rss"
+
+    # This file exists in two copies and only one of them has the
+    # error-reporting `_ex` variant, so hand the fallback in explicitly rather
+    # than letting uploads.py guess at an import.
+    def rss_fn(cid, lim):
+        if "youtube_rss_ex" in globals():
+            return youtube_rss_ex(cid, lim)
+        rows = youtube_rss(cid, lim)
+        return rows, None if rows else "RSS bos liste dondurdu"
+
+    return uploads.list_uploads(channel_id, limit, rss_fn=rss_fn)
+
+
 def youtube_canli(vid):
     """RSS bayat olabilir, canli sayfadan gercek sayilari cek."""
     for u in ("https://www.youtube.com/shorts/" + vid,
@@ -174,9 +199,16 @@ def main():
     sonuc = {}
 
     if a.youtube:
-        satirlar = youtube_rss(a.youtube, a.limit)
+        satirlar, hata, kaynak = list_channel_uploads(a.youtube, a.limit)
+        if hata:
+            print("YouTube %s , yukleme listesi ALINAMADI" % a.youtube)
+            print("  %s" % hata)
+            print("  Bu 'video yok' DEGIL. Data API icin YOUTUBE_API_KEY gerekiyor;")
+            print("  RSS 2026-09-10 itibariyle herkese 404/500 veriyor.")
+            satirlar = []
         print("=" * 84)
-        print("YouTube %s  (%d video)" % (a.youtube, len(satirlar)))
+        print("YouTube %s  (%d video, kaynak: %s)"
+              % (a.youtube, len(satirlar), kaynak or "yok"))
         print("  %-13s %10s %10s %8s %5s  %s" % (
             "video_id", "RSS", "CANLI", "begeni", "sn", "baslik"))
         for r in satirlar:

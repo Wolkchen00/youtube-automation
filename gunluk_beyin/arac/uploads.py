@@ -35,24 +35,48 @@ API_TIMEOUT = 45
 RETRY_STATUS = (429, 500, 502, 503, 504)
 
 
-def api_key():
-    """Read YOUTUBE_API_KEY from the environment, then from the repo `.env`.
+def env_candidates():
+    """Where a `.env` holding the key might live, nearest first.
 
-    CI supplies it as an env var. Locally the repo `.env` is the one place the
-    other tools already look, and it is gitignored.
+    This module is copied into the `/reel-analiz` skill as well as living in
+    the repo, so "two directories up" only finds the key in one of those two
+    homes. Walk up instead, then fall back to the automation repo, which is
+    where every other tool already reads its keys from.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    paths = []
+    walk = here
+    for _ in range(5):
+        paths.append(os.path.join(walk, ".env"))
+        parent = os.path.dirname(walk)
+        if parent == walk:
+            break
+        walk = parent
+    paths.append(os.path.join(
+        os.path.expanduser("~"), "Desktop", "Antigravity", "Projeler",
+        "Youtube", ".env"))
+    return paths
+
+
+def api_key():
+    """YOUTUBE_API_KEY from the environment, else from the nearest `.env`.
+
+    CI supplies it as an env var. Locally `.env` is the one place the other
+    tools already look, and it is gitignored.
     """
     key = (os.getenv("YOUTUBE_API_KEY") or "").strip()
     if key:
         return key
-    here = os.path.dirname(os.path.abspath(__file__))
-    repo_env = os.path.join(os.path.dirname(os.path.dirname(here)), ".env")
-    try:
-        with open(repo_env, encoding="utf-8", errors="replace") as handle:
-            for line in handle:
-                if line.startswith("YOUTUBE_API_KEY="):
-                    return line.split("=", 1)[1].strip()
-    except OSError:
-        pass
+    for path in env_candidates():
+        try:
+            with open(path, encoding="utf-8", errors="replace") as handle:
+                for line in handle:
+                    if line.startswith("YOUTUBE_API_KEY="):
+                        found = line.split("=", 1)[1].strip()
+                        if found:
+                            return found
+        except OSError:
+            continue
     return ""
 
 
