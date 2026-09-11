@@ -54,3 +54,46 @@ Bu turda BILEREK yapilmadi. Her biri gerekcesiyle burada duruyor.
 - Retention egrileri ve impressions/CTR: YouTube Studio erisimi gerekiyor.
 - 140 abone ile 88 medyan izlenme arasindaki fark: aboneler gormuyor mu, goruyor da
   tiklamiyor mu? Veri olmadan ayirt edilemez.
+
+---
+
+## 10 Eylul aksami , Codex tarama testi sonrasi durum
+
+Part 33 elle tetiklendi ve 3/3 platforma cikti. Yayinlanmis dosya indirilip
+olculdu: -14,1 LUFS, true peak -1,0 dBTP, 19,83 sn, kunye ekranda.
+
+### DUZELTILDI
+
+- **Kirpilan anlatim sessiz kaliyordu.** `mix_voiceover` anlatimi kesip yalnizca
+  log'a yaziyordu; `coherence.narration_delivered` yine de `true` oluyordu ve
+  bolum sonu kesik anlatimla yayinlanabiliyordu. Opsiyonel `report` sozlugu
+  eklendi, kirpma artik butunluk kapisina ve Telegram'a dusuyor.
+- **Rejim damgasi olcum aninda okunuyordu.** Artik motorun uretim aninda yazdigi
+  `stack_sha256` kullaniliyor (video_id -> published.json -> part).
+- **Kusur defteri yalnizca anlik goruntuydu.** Motor artik her tutulma yolunda
+  olay ANINDA `hold_log.jsonl` yaziyor; iki kosu arasinda dogup olen hata da iz
+  birakiyor.
+- **Yayinlanmayan bolum "uretildi" diye sunuluyordu.** `budget_exhausted`,
+  `skipped` ve `rejected` bolumlerde ucretli is hic baslamiyor; artik ayri
+  sayiliyorlar.
+
+### YANLIS CIKAN BULGU
+
+- Codex "dusen cekim yeniden denemede krediyi tekrar yakar" dedi. Kabul edilen
+  cekimler diske onbellekleniyor ve `_revalidate_cached_shot` ile dogrulanip
+  tekrar kullaniliyor (`produce.py:1583`). Onerilen duzeltme zaten kurulu.
+
+### HALA ERTELENMIS
+
+- **TTS hatasi ucretli cekimlerden SONRA bolumu tutuyor.** Codex anlatimin
+  cekimlerden once uretilmesini onerdi. Siddeti dusuk: cekimler onbellekte
+  oldugu icin yeniden deneme kredi yakmaz, maliyet bir gunluk gecikmedir.
+  Boru hattini yeniden siralamak kendi riskini getirir.
+- **`flashpoints` hala `state_machine_version` 1.** Payi (0.2) kendileri aldi ve
+  takili part 31'i serbest biraktilar, yani aktif sorun yok; ama bir `qc_hold`
+  yine `awaiting_approval` yapip kanali sessizce susturabilir. O kanal baska bir
+  ajanin alani.
+- **`beyin.py` artik `## 6. BASLIK OZNESI` bolumu uretiyor.** Bes basliklik
+  sozlesme testi yalniz o besinin VARLIGINI dogruluyor, fazlasini yasaklamiyor.
+  Bolum baska bir ajanin isi; sozlesmenin "tam bes" mi yoksa "en az bes" mi
+  oldugu onlarin karari.
