@@ -43,6 +43,16 @@ CHANNELS = (
         "channel_id": "UCCgbHTzYKYawUT6zEo0nlDg",
         "uploads": "UUCgbHTzYKYawUT6zEo0nlDg",
     },
+    # 2026-09-11: The Unfinished yalniz OLCULUR. Kanal bu depodan degil
+    # Shorts_Dizi_Fabrikasi hattindan (Upload-Post profili `TheUnfinishedai`)
+    # yayinlaniyor; config.UPLOAD_USERS'ta yok ve olmamali, yani
+    # uploader._channel_id_for_user bu kanali hic cozmez. Kimlik, kanalin
+    # yayinlanmis 4 videosunun Data API `channelId` alanindan cozuldu.
+    {
+        "name": "the_unfinished",
+        "channel_id": "UCQtDZzk66Um8Oz5er8AsV1A",
+        "uploads": "UUQtDZzk66Um8Oz5er8AsV1A",
+    },
 )
 
 
