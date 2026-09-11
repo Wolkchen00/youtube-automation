@@ -254,14 +254,15 @@ Yapilanlar:
    Once/sonra Kie bakiyesi olculur (kayit maliyeti bilinmiyor).
    Kare kare izlerim, sesi olcerim, konumu Ihsan'a veririm; yayin Ihsan onayiyla.
 
-## Non-goals
+## Non-goals (ROCK 5 ile GUNCELLENDI)
 
 - Diger kanallar, diger seriler, gunluk beyin, dashboard.
-- `require_continuity` / `require_object_match` / `require_first_frame`
-  kapilarini acmak (ep06 olculmeden).
-- `families` listesini yeniden tasarlamak.
-- auto_replenish'i acmak.
-- Yayin, push.
+- `require_object_match` / `require_first_frame` kapilarini acmak
+  (ep07 olculmeden). `require_continuity` ROCK 5'te ACILDI: ep06'da set
+  kaymasi yayina cikti, otomatik yayinda kapi sart.
+- ROCK 1-4 turunda gecerliydi, ROCK 5 ile ARTIK GECERLI DEGIL: families
+  yeniden tasarlandi (hayvan turu), auto_replenish acildi, ep06 yayinlandi.
+  Push, Codex incelemesinden sonra yapilir.
 
 ## EK A: hedef metinler (harfi harfine)
 
@@ -308,6 +309,12 @@ SHOT 3, THE PRACTICAL REVEAL. Crew members put their hands on the creature and p
 ```
 
 ### A.4 `series.json` alanlari
+
+> ROCK 5 UYARISI: asagidaki `title_patterns`, `title_style` ve aile listesi
+> ROCK 3'un metinleridir. Kanonik surum ROCK 5'tedir: baslik kalibi
+> `This [A-Z][A-Z]+(?: [A-Z]+){0,2} Is NOT Real` (iki kelimeli hayvan adlari
+> icin), title_style ona gore yazildi ve aileler hayvan turudur
+> (reptile, sea-giant, insect-giant, mammal-giant, bird-giant).
 
 - `logline`: `On a film set, a giant lifelike creature takes the performer into its mouth. Then the crew push its jaws open and he climbs out.`
 - `hashtags`: `#shorts #vfx #behindthescenes #ai`

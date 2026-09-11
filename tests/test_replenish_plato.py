@@ -68,7 +68,7 @@ def _episode(n: int = 7, *, duration: str = "8", characters=None,
             "duration": duration,
             "environment": "jungle_set",
             "prompt": (
-                f"Shot {k} detail: a colossal green praying mantis prop with glossy compound "
+                f"Shot {k} detail: a colossal green praying mantis with glossy compound "
                 "eyes and spiked forelegs looms over the man on the dressed jungle set. "
                 "Ambient sound only: dripping water and studio air handling."
             ),
@@ -84,8 +84,8 @@ def _episode(n: int = 7, *, duration: str = "8", characters=None,
         "family": "scale-giant",
         "hook_shot": 2,
         "object_card": {
-            "name": "giant praying mantis practical prop",
-            "descriptor": "a colossal bright green praying mantis prop, three metres tall, with "
+            "name": "giant praying mantis head",
+            "descriptor": "a colossal bright green praying mantis, three metres tall, with "
                           "glossy compound eyes and spiked forelegs",
             "environment": "jungle_set",
             "framing": "A locked-off studio camera behind two camera operators.",
@@ -208,6 +208,66 @@ def test_other_formatted_series_keep_their_old_object_rule():
     assert "CREATURE_CARD" not in system
     assert "copy THAT verbatim into every shot prompt too" in system
     assert "SHOT 1 ONSET" in system
+
+
+def test_missing_sound_sentence_is_rejected():
+    episode = _episode()
+    episode["shots"][1]["prompt"] = "The jaws close over the man on the dressed jungle set."
+    errors = _validate(episode)
+    assert any("Ambient sound only" in e for e in errors), errors
+
+
+def test_negative_language_in_a_shot_is_rejected():
+    episode = _episode()
+    episode["shots"][2]["prompt"] += " He steps out showing no signs of harm."
+    errors = _validate(episode)
+    assert any("olumsuz dil" in e for e in errors), errors
+
+
+def test_build_language_is_rejected_in_the_first_two_shots_and_allowed_in_the_reveal():
+    episode = _episode()
+    episode["shots"][0]["prompt"] += " The fibreglass prop rests on its rig."
+    errors = _validate(episode)
+    assert any("yapım dili" in e and "çekim 1" in e for e in errors), errors
+
+    reveal_only = _episode()
+    reveal_only["shots"][2]["prompt"] += " Two crew members open the practical prop jaws by hand."
+    assert _validate(reveal_only) == []
+
+
+def test_object_card_must_describe_a_living_animal():
+    episode = _episode()
+    episode["object_card"]["descriptor"] += ", built as an animatronic puppet"
+    errors = _validate(episode)
+    assert any("yapım dili" in e and "object_card" in e for e in errors), errors
+
+
+def test_shot_environment_must_match_the_creature_card():
+    episode = _episode()
+    episode["shots"][1]["environment"] = "another_set"
+    errors = _validate(episode)
+    assert any("environment tam" in e for e in errors), errors
+
+
+def test_misspelled_animal_in_the_title_is_rejected():
+    # Measured: the auto-written part09 said "MAMMOUTH" and the regex accepted it.
+    episode = _episode(title="This GIANT MAMMOUTH Is NOT Real")
+    episode["object_card"]["name"] = "giant woolly mammoth head"
+    errors = _validate(episode)
+    assert any("MAMMOUTH" in e for e in errors), errors
+
+    good = _episode(title="This GIANT WOOLLY MAMMOTH Is NOT Real")
+    good["object_card"]["name"] = "giant woolly mammoth head"
+    good["object_card"]["descriptor"] = (
+        "a colossal shaggy brown woolly mammoth, four metres tall, with matted fur, "
+        "small dark eyes and long curved tusks"
+    )
+    for shot in good["shots"]:
+        shot["prompt"] = (
+            "Shot detail: a colossal shaggy brown woolly mammoth looms over the man on the "
+            "dressed jungle set. Ambient sound only: dripping water and studio air handling."
+        )
+    assert _validate(good) == []
 
 
 def test_plato_rule_does_not_leak_into_the_config_it_was_built_from():

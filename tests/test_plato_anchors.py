@@ -169,14 +169,26 @@ def test_changed_descriptor_regenerates_only_the_creature(tmp_path):
     assert again.operations == ["creature_ref"]
 
 
-def test_changed_set_description_regenerates_the_creature_but_keeps_the_plate(tmp_path):
+def test_changed_set_description_regenerates_both_anchors(tmp_path):
+    # The set description feeds both prompts, so a changed set leaves the old plate
+    # showing the previous set: both anchors go stale together.
     bible, plan, plan_path = _bible(), _plan(), tmp_path / "part06.json"
     _run(bible, plan, plan_path, tmp_path, _Paid())
     bible.get("environments", "jungle_set")["desc"] = ENV_DESC + " Wet stone underfoot."
     again = _Paid()
 
     assert _run(bible, plan, plan_path, tmp_path, again) is True
-    assert again.operations == ["creature_ref"]
+    assert again.operations == ["environment_ref_jungle_set", "creature_ref"]
+
+
+def test_plate_without_a_hash_is_treated_as_stale(tmp_path):
+    bible, plan, plan_path = _bible(), _plan(), tmp_path / "part06.json"
+    _run(bible, plan, plan_path, tmp_path, _Paid())
+    del bible.get("environments", "jungle_set")["ref_prompt_sha256"]
+    again = _Paid()
+
+    assert _run(bible, plan, plan_path, tmp_path, again) is True
+    assert again.operations == ["environment_ref_jungle_set"]
 
 
 def test_crash_after_the_set_plate_never_pays_for_the_plate_again(tmp_path):

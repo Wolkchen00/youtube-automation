@@ -1305,13 +1305,21 @@ def _ensure_plato_anchors(
     expected_hash = hashlib.sha256(
         f"{PLATO_REF_TEMPLATE_VERSION}|{generation_identity}|{creature_prompt}".encode("utf-8")
     ).hexdigest()
+    expected_env_hash = hashlib.sha256(
+        f"{PLATO_REF_TEMPLATE_VERSION}|{generation_identity}|{env_prompt}".encode("utf-8")
+    ).hexdigest()
     stale_creature = (
         existing_props is not None and plan.get("ref_prompt_sha256") != expected_hash
     )
+    # Set plakasi da bayatlayabilir: ortam tarifi degisince yaratik referansi yeniden
+    # uretiliyordu ama plaka eski tarifin goruntusunde kaliyordu (SPM tur 2 bulgusu).
+    stale_env = bool(existing_env) and environment.get("ref_prompt_sha256") != expected_env_hash
     if stale_creature:
         logger.warning("♻️ Yaratik referansi bayat (prompt bilesenleri degisti); yeniden uretilecek")
+    if stale_env:
+        logger.warning("♻️ Set plakasi bayat (ortam tarifi degisti); yeniden uretilecek")
 
-    missing_env = not existing_env
+    missing_env = not existing_env or stale_env
     missing_creature = existing_props is None or stale_creature
     if not missing_env and not missing_creature:
         return True
@@ -1344,6 +1352,7 @@ def _ensure_plato_anchors(
         if not env_url:
             return False
         environment["ref_image_url"] = env_url
+        environment["ref_prompt_sha256"] = expected_env_hash
         atomic_write_json(
             Path(output_area) / "bible.json" if output_area is not None
             else bible_path(bible.slug),

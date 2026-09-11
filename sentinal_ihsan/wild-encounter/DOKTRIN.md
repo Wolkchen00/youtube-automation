@@ -316,3 +316,9 @@ mamut, kartal, komodo ejderi.
 
 Maliyet: bolum basi ~315-436 Kie kredisi (~$1,6-2,2); gunluk ~13.000 kredi/ay (~$65).
 Cuzdan diger kanallarla ortak; bakiye bitince kosu kredi kapisinda durur.
+
+DOKTRIN DAMGASI TUZAGI (11 Eylul, olculdu): her plan yazildigi andaki doktrinin
+sha256'sini tasir. DOKTRIN.md degisince kuyruktaki planlar bayatlar ve uretim
+"legacy plan doktrin damgasi guncel doktrinle eslesmiyor" diyerek DURUR
+(fail-closed, dogru davranis). Doktrini her degistirdiginde kuyrugu yeniden
+yazdir: `python -m series.replenish --series wild-encounter`.
