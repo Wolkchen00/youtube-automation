@@ -44,6 +44,11 @@ oldugu son vurusta anlasilir.
    sete gore degisir.
 10. SURE: 3 x 8 sn, duration_band [12, 26]. ep05 22,7 sn cikti.
 11. EKRANA YAZI YOK. GUVENLIK: kan ve yaralanma yok.
+12. Her bolumun yaratigi bir referans gorselle (plan.prop_ref_urls), seti
+    ortam referansiyla capalanir (bible.series.episode_anchors); bolum icinde
+    cekim zinciri de surekliligi tasir. Yaratigi Kie'de KARAKTER olarak kaydetmek
+    olculmus bir denemeden once uretime baglanmaz (insan olmayan ozne ve ucret
+    dogrulanmadi).
 
 ## Tek cumle (ESKI FORMAT, 10 Eylul, artik gecerli degil)
 

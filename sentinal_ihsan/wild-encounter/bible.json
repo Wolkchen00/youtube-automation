@@ -21,6 +21,8 @@
     "credit_monthly_cap_value": 14000,
     "durable_credit_ledger": true,
     "durable_artifacts": true,
+    "episode_anchors": true,
+    "episode_anchors_note": "2026-09-11 ACIK. plato-3x8 bolumunde ucretli videodan once yaratik referans gorseli (plan.prop_ref_urls) ve set ortam referansi uretilir; her gorsel yuklenir yuklenmez diske yazilir. Karakter kaydi (register_character) olculmus bir denemeden once baglanmadi. RF-PLAN-WILD-ENCOUNTER Rock 4.",
     "credit_excludes_music": true,
     "hook_teaser": {
       "enabled": false,

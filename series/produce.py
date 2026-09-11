@@ -775,6 +775,10 @@ def _audio_master_hold(reason: str) -> ProduceResult:
 # boylece eski hash tutmaz ve tum referanslar yeniden uretilir.
 REF_PROMPT_TEMPLATE_VERSION = "rb1"
 REFERENCE_IMAGE_MODEL = "nano-banana-2"
+# Fake behind-the-scenes format (wild-encounter). Its anchors are opt-in through
+# bible.series.episode_anchors and use their own prompt template version.
+PLATO_FORMAT = "plato-3x8"
+PLATO_REF_TEMPLATE_VERSION = "plato1"
 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
 
@@ -1090,6 +1094,11 @@ def ensure_episode_refs(
     call, logged against the episode, and persisted atomically before returning.
     """
     if plan.get("format_version") != TEK_OBJE_FORMAT:
+        if _plato_anchors_enabled(bible, plan):
+            return _ensure_plato_anchors(
+                bible, plan, plan_path, hard_cap, dry_run,
+                output_area=output_area, isolated=isolated,
+            )
         return True
 
     try:
@@ -1208,6 +1217,151 @@ def ensure_episode_refs(
             return False
         plan["prop_ref_urls"] = [object_url]
         plan["ref_prompt_sha256"] = expected_ref_hash
+        atomic_write_json(plan_path, plan)
+    return True
+
+
+def _plato_anchors_enabled(bible: Bible, plan: dict) -> bool:
+    return (
+        plan.get("format_version") == PLATO_FORMAT
+        and bible.data["series"].get("episode_anchors") is True
+    )
+
+
+def _plato_anchor_prompts(env_desc: str, name: str, descriptor: str) -> tuple[str, str]:
+    """Film-set plate and creature hero prompts (RF-PLAN-WILD-ENCOUNTER, EK B)."""
+    # Both descriptions are sentences in the plan files; the template supplies
+    # its own full stop, so a trailing one would print "..".
+    env_desc = env_desc.rstrip(". ")
+    descriptor = descriptor.rstrip(". ")
+    env_prompt = (
+        f"Reference plate of a built film set for a vertical 9:16 video series: {env_desc}. "
+        "One wide, locked-off composition shows the whole dressed set, the green screen wall "
+        "beyond it, the overhead studio lighting grid and practical haze, in natural colour "
+        "with real depth of field. The set stands empty and ready before the take, with the "
+        "floor clear."
+    )
+    creature_prompt = (
+        f"Hero reference image of one {name} standing on a built film set: {env_desc}. "
+        f"Exact identity: {descriptor}. The whole creature is visible at realistic scale under "
+        "overhead studio light, its colour, skin texture, eyes and teeth sharply readable, and "
+        "the set around it stands empty and ready before the take."
+    )
+    return env_prompt, creature_prompt
+
+
+def _ensure_plato_anchors(
+    bible: Bible,
+    plan: dict,
+    plan_path: str | Path,
+    hard_cap,
+    dry_run: bool,
+    *,
+    output_area: str | Path | None = None,
+    isolated: bool = False,
+) -> bool:
+    """Anchor a plato-3x8 episode's creature and set with reference images.
+
+    The creature image lands in plan.prop_ref_urls, so the existing object
+    binding in resolve_shot carries it into every shot; the set plate lands in
+    the environment's ref_image_url. Each image is written to disk right after
+    its upload, so a crash between the two never pays for the first one twice.
+    anomaly_descriptor stays out of the creature prompt: the reference must show
+    a living-looking animal, not the prop reveal.
+    """
+    try:
+        number = int((plan.get("episode") or {}).get("number"))
+    except (TypeError, ValueError):
+        logger.error("❌ Plato capasi icin gecerli episode.number zorunlu")
+        return False
+    card = plan.get("object_card")
+    if not isinstance(card, dict):
+        logger.error("❌ Plato capasi icin object_card zorunlu")
+        return False
+    env_id = str(card.get("environment") or "").strip()
+    environment = bible.get("environments", env_id)
+    if not environment:
+        logger.error(f"❌ Plato capasi ortami bible'da yok: {env_id!r}")
+        return False
+
+    existing_props = plan.get("prop_ref_urls")
+    if existing_props is not None and not _valid_https_urls(existing_props):
+        logger.error("❌ prop_ref_urls bir veya daha fazla https URL içermeli")
+        return False
+    existing_env = environment.get("ref_image_url")
+    if existing_env is not None and not _valid_https_urls([existing_env], count=1):
+        logger.error(f"❌ Ortam referansı geçerli https URL değil: {env_id}")
+        return False
+
+    name = str(card.get("name") or "creature").strip()
+    descriptor = str(card.get("descriptor") or "").strip()
+    env_desc = str(environment.get("desc") or environment.get("name") or env_id).strip()
+    env_prompt, creature_prompt = _plato_anchor_prompts(env_desc, name, descriptor)
+    generation_identity = json.dumps({
+        "model": REFERENCE_IMAGE_MODEL,
+        "aspect_ratio": bible.aspect_ratio,
+    }, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    expected_hash = hashlib.sha256(
+        f"{PLATO_REF_TEMPLATE_VERSION}|{generation_identity}|{creature_prompt}".encode("utf-8")
+    ).hexdigest()
+    stale_creature = (
+        existing_props is not None and plan.get("ref_prompt_sha256") != expected_hash
+    )
+    if stale_creature:
+        logger.warning("♻️ Yaratik referansi bayat (prompt bilesenleri degisti); yeniden uretilecek")
+
+    missing_env = not existing_env
+    missing_creature = existing_props is None or stale_creature
+    if not missing_env and not missing_creature:
+        return True
+    if dry_run:
+        logger.info(
+            f"[dry-run] ep{number}: plato capalari hazirlanacak "
+            f"(ortam={missing_env}, yaratik={missing_creature})"
+        )
+        return True
+
+    if hard_cap is None:
+        spent = episode_spent(bible.slug, number)
+        if spent is None:
+            logger.error("❌ Referans kredi kapısı: bölüm harcaması okunamadı")
+            return False
+        hard_cap = credit_gate.HardCreditCap(
+            episode_credit_cap(bible), spent,
+            durable_ledger=bool(bible.data["series"].get("durable_credit_ledger")),
+        )
+
+    if missing_env:
+        env_file = _refs_work_dir(
+            bible.slug, "environments", output_area
+        ) / f"{sanitize_filename(env_id)}.png"
+        env_url = _generate_uploaded_reference(
+            bible, env_prompt, env_file, hard_cap, number,
+            f"environment_ref_{sanitize_filename(env_id)}",
+            isolated=isolated, report_output_dir=output_area,
+        )
+        if not env_url:
+            return False
+        environment["ref_image_url"] = env_url
+        atomic_write_json(
+            Path(output_area) / "bible.json" if output_area is not None
+            else bible_path(bible.slug),
+            bible.data,
+        )
+
+    if missing_creature:
+        creature_file = (
+            _refs_work_dir(bible.slug, "props", output_area)
+            / f"ep{number:02d}_{sanitize_filename(name)}.png"
+        )
+        creature_url = _generate_uploaded_reference(
+            bible, creature_prompt, creature_file, hard_cap, number, "creature_ref",
+            isolated=isolated, report_output_dir=output_area,
+        )
+        if not creature_url:
+            return False
+        plan["prop_ref_urls"] = [creature_url]
+        plan["ref_prompt_sha256"] = expected_hash
         atomic_write_json(plan_path, plan)
     return True
 
@@ -1486,7 +1640,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
 
     # Yeni URL'ler bellekteki bible/plan'a da işlendi; Omni kota dahil son sözleşmeyi
     # ücretli video çağrısından hemen önce yeniden doğrula.
-    if plan.get("format_version") == TEK_OBJE_FORMAT and not dry_run:
+    if (plan.get("format_version") == TEK_OBJE_FORMAT
+            or _plato_anchors_enabled(bible, plan)) and not dry_run:
         post_ref_validation = validate_plan(plan, bible)
         if post_ref_validation["errors"]:
             for error in post_ref_validation["errors"]:
