@@ -12,13 +12,13 @@
   "hashtags": "#shorts #space #astronomy #universe",
   "standalone": true,
   "publish_mode": "auto",
-  "status": "paused",
+  "status": "active",
   "priority": 999,
   "total_parts": 35,
   "next_part": 35,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
-    "enabled": false,
+    "enabled": true,
     "batch": 5,
     "min_queue": 2,
     "shots": 3,
@@ -815,13 +815,5 @@
         "degraded": false
       }
     }
-  },
-  "rafa_kaldirildi": {
-    "tarih": "2026-09-12",
-    "karar": "Ihsan: aylardir yayin var ama izlenme kotu, kanal konsepti degisiyor.",
-    "olculen": "30 gunluk medyan 88,5 izlenme / 140 abone / 199 video (10 Eylul olcumu). Defterdeki 15 kayitta medyan 104, aralik 24-393.",
-    "durdurulan": "event-horizon serisi + .github/workflows/event-horizon.yml cron'u (30 16 * * *) yorumda.",
-    "geri_alma": "status=active, auto_replenish.enabled=true, workflow'daki schedule blogunun yorumunu kaldir. Yayinlanan 33 bolum YouTube'da duruyor.",
-    "arsiv": "galactic_experience/_surumler/2026-09-12_event-horizon-rafta/"
   }
 }

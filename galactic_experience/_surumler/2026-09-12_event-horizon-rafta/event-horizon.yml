@@ -9,14 +9,8 @@ name: Event Horizon Daily
 # from-scratch DURAKLATILDI. kie-uretim concurrency grubu 4 hatti fiilen serilestirir (FAZ 1 kurali).
 
 on:
-  # 2026-09-12 IHSAN KARARI: 'event-horizon' konsepti RAFA KALDIRILDI. Aylardir gunluk
-  # yayin var ama izlenme kotu (30 gunluk medyan 88,5 / 140 abone / 199 video, 10 Eylul
-  # olcumu; defterde medyan 104, aralik 24-393). galacticexperimet kanali YENI konseptle
-  # sifirdan yazilacak. series.json status=paused + auto_replenish.enabled=false.
-  # Arsiv: galactic_experience/_surumler/2026-09-12_event-horizon-rafta/
-  # Geri acmak icin: asagidaki iki satirin yorumunu kaldir + series.json'u eski haline al.
-  # schedule:
-  #   - cron: '30 16 * * *'   # 16:30 UTC, galactic kanalinin tarihsel yayin penceresi
+  schedule:
+    - cron: '30 16 * * *'   # 16:30 UTC, galactic kanalinin tarihsel yayin penceresi
   workflow_dispatch:
 
 concurrency:

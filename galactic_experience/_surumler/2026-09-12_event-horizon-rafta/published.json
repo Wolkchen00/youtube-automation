@@ -1,0 +1,446 @@
+[
+  {
+    "part": 1,
+    "subtitle": "HD 189733b: Glass Rains SIDEWAYS",
+    "ts": "2026-07-30T20:08:52.774669+00:00",
+    "results": {
+      "youtube": "KhWGFlMwJ-w",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 2,
+    "subtitle": "Neutron Stars: A Cube Weighs MOUNT Everest",
+    "ts": "2026-07-31T18:21:49.518732+00:00",
+    "results": {
+      "youtube": "tshcQQCLwdM",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 3,
+    "subtitle": "What If the Moon Vanished? Earth's Tides COLLAPSE",
+    "ts": "2026-08-01T17:45:26.772160+00:00",
+    "results": {
+      "youtube": "jyGtbJWG_gk",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 4,
+    "subtitle": "The Universe's Saddest Goodbye: Solar ECLIPSES",
+    "ts": "2026-08-02T17:44:36.681396+00:00",
+    "results": {
+      "youtube": "rn9jgOQ7G0g",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 5,
+    "subtitle": "Venus: A Day Is LONGER Than Its Year",
+    "ts": "2026-08-03T18:30:00.216168+00:00",
+    "results": {
+      "youtube": "_482wLxaXXI",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 6,
+    "subtitle": "TON 618: The Universe's Giga-Black Hole",
+    "ts": "2026-08-07T17:42:37.135417+00:00",
+    "results": {
+      "youtube": "WASLc0rFPvM",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 7,
+    "subtitle": "Saturn: It Would Float on Water",
+    "ts": "2026-08-08T17:13:47.609765+00:00",
+    "results": {
+      "youtube": "uLSjJ40sByk",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 8,
+    "subtitle": "WASP-76b: Iron Rains from the Sky",
+    "ts": "2026-08-09T17:17:17.628916+00:00",
+    "results": {
+      "youtube": "JTlRJteJzi8",
+      "instagram": null,
+      "tiktok": null
+    }
+  },
+  {
+    "part": 9,
+    "subtitle": "What If Earth Stopped Spinning? TOTAL DESTRUCTION",
+    "ts": "2026-08-13T17:44:15.498593+00:00",
+    "results": {
+      "youtube": "eIw6nx2S6WY",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=a124b85fc1b04f8bb824ed72edefb4a7. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'a124b85fc1b04f8bb824ed72edefb4a7', 'total_platforms': 1, 'job_id': 'd439893c624c4930a1b6cd66375a4a79'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=554cb0dc56484e4ea0e6fa533177a2fb. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '554cb0dc56484e4ea0e6fa533177a2fb', 'total_platforms': 1, 'job_id': '6b7b5364b8d94a7c8a290debbea24018'}"
+    }
+  },
+  {
+    "part": 10,
+    "subtitle": "Milky Way and Andromeda: A COSMIC COIN FLIP",
+    "ts": "2026-08-14T17:48:27.891797+00:00",
+    "results": {
+      "youtube": "B3UHsf030ZE",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=eb63bdbc46754a859a1eabed3926affc. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'eb63bdbc46754a859a1eabed3926affc', 'total_platforms': 1, 'job_id': '4babadd725df49738502cb7491614aee'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=64cf75c74740476abffde09c693923ee. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '64cf75c74740476abffde09c693923ee', 'total_platforms': 1, 'job_id': 'c3a61838437042938046a6097852c3c9'}"
+    }
+  },
+  {
+    "part": 11,
+    "subtitle": "Solar Eclipse: A COSMIC Ballet",
+    "ts": "2026-08-15T17:06:23.782031+00:00",
+    "results": {
+      "youtube": "ugugo5e823A",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=d61ed7f2426c41d0a3fbd0206284419f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'd61ed7f2426c41d0a3fbd0206284419f', 'total_platforms': 1, 'job_id': '0f934d8dcdee452aba83b40f81ed7c2c'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=622157a3b34f470e9ff52ba40986533f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '622157a3b34f470e9ff52ba40986533f', 'total_platforms': 1, 'job_id': '86f585e73b7d405ea2df4ad9dd1a6e4c'}"
+    }
+  },
+  {
+    "part": 12,
+    "subtitle": "Black Holes: They SING at Us",
+    "ts": "2026-08-16T17:04:37.304908+00:00",
+    "results": {
+      "youtube": "WUErzXuC-9g",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b0b150a2d83247df907b54326bab8d2e. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b0b150a2d83247df907b54326bab8d2e', 'total_platforms': 1, 'job_id': 'd8c93d339e964a188ee64ceea5f0e12a'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=709467fd92ee4009bb3b8ded0659033c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '709467fd92ee4009bb3b8ded0659033c', 'total_platforms': 1, 'job_id': 'd1ff113acc894085b56e94d7400a4ea4'}"
+    }
+  },
+  {
+    "part": 13,
+    "subtitle": "Jupiter's Red Spot: It's DISAPPEARING",
+    "ts": "2026-08-17T17:10:35.578820+00:00",
+    "results": {
+      "youtube": "D159HcF5xc0",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=6e179ca6159c4c22a8d42e8b85e26f23. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '6e179ca6159c4c22a8d42e8b85e26f23', 'total_platforms': 1, 'job_id': '4d65c0a4f92946dc96f62822b535d562'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=86a4b875df294b75ba4e3acebcef3286. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '86a4b875df294b75ba4e3acebcef3286', 'total_platforms': 1, 'job_id': '09cddcf2e07f461ba88b1e721d8b20af'}"
+    }
+  },
+  {
+    "part": 14,
+    "subtitle": "Earth's Trees: More Than Milky Way Stars",
+    "ts": "2026-08-18T17:50:29.210279+00:00",
+    "results": {
+      "youtube": "d8uLmNOV3o0",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=dff8b234dfeb49a183f91568f4241a3f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'dff8b234dfeb49a183f91568f4241a3f', 'total_platforms': 1, 'job_id': '4dfe58966d224abda84582d412e810c5'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=86a3afbd92764e5586aa9d3d8bcb6d46. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '86a3afbd92764e5586aa9d3d8bcb6d46', 'total_platforms': 1, 'job_id': '00256c3696ed4a99bf98f6bb8191cb0e'}"
+    }
+  },
+  {
+    "part": 15,
+    "subtitle": "Sun and Jupiter: They Don't Share a Center",
+    "ts": "2026-08-20T17:13:33.394333+00:00",
+    "results": {
+      "youtube": "U1TF0puCXkU",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b3c6a680575d47049f14e3c0b0b6568c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b3c6a680575d47049f14e3c0b0b6568c', 'total_platforms': 1, 'job_id': '52d7d7de4bd3448ea7cd1cd0d38723f9'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=72758e9b38c9485f99dbaa90b8e333f6. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '72758e9b38c9485f99dbaa90b8e333f6', 'total_platforms': 1, 'job_id': '4be78f7abc9048af884aad980586633c'}"
+    }
+  },
+  {
+    "part": 16,
+    "subtitle": "Sagittarius A*: The Galactic HEARTBEAT",
+    "ts": "2026-08-21T17:16:54.319938+00:00",
+    "results": {
+      "youtube": "sbf-AZzRDog",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=f4006c15d9fb4b04afe8262432813d12. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'f4006c15d9fb4b04afe8262432813d12', 'total_platforms': 1, 'job_id': 'd774b014a93a46628474344d8471a731'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b13617781882491cb9a91d8b9be5d2e1. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b13617781882491cb9a91d8b9be5d2e1', 'total_platforms': 1, 'job_id': '7234c2d4c94a44408bad5acf1a6df719'}"
+    }
+  },
+  {
+    "part": 17,
+    "subtitle": "Uranus: The Tilted Giant",
+    "ts": "2026-08-22T17:09:52.408176+00:00",
+    "results": {
+      "youtube": "FGVRYNHIKQI",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=efc57afe88144f238a7ecca99b5c9586. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'efc57afe88144f238a7ecca99b5c9586', 'total_platforms': 1, 'job_id': '46c8d08ef1024807b6f0d8f7c1e48016'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7fdd36ebb22b4c138d8b18837f7c378a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7fdd36ebb22b4c138d8b18837f7c378a', 'total_platforms': 1, 'job_id': '84c5822379d14334aea7f02c451d992a'}"
+    }
+  },
+  {
+    "part": 18,
+    "subtitle": "The ISS: 16 Sunrises DAILY",
+    "ts": "2026-08-23T17:05:02.586094+00:00",
+    "results": {
+      "youtube": "m3KiVW7pLwY",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=49cb91e688b94200a24a58ba0e9b1e10. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '49cb91e688b94200a24a58ba0e9b1e10', 'total_platforms': 1, 'job_id': '8f794b4dc7cb47789c15bb609ef684b6'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=08fad50db1e24d40b8907f64f5f57a5b. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '08fad50db1e24d40b8907f64f5f57a5b', 'total_platforms': 1, 'job_id': '1f427f8af8f14d4b9f7a88ee8f8ddfa4'}"
+    }
+  },
+  {
+    "part": 19,
+    "subtitle": "Titan: Lakes of LIQUID Methane",
+    "ts": "2026-08-24T17:18:57.272415+00:00",
+    "results": {
+      "youtube": "K86IObBKX0s",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=9f33cbc617f04695ac2d84b042966fc7. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '9f33cbc617f04695ac2d84b042966fc7', 'total_platforms': 1, 'job_id': 'ee6c5cfffe694eb1a6c285a45bbd3f6a'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b869a27eabf34746b506b183d46bd959. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b869a27eabf34746b506b183d46bd959', 'total_platforms': 1, 'job_id': 'ef771084407e40e788c9d5426c4f7fb6'}"
+    }
+  },
+  {
+    "part": 20,
+    "subtitle": "Earth's Gold: Forged in STAR COLLISIONS",
+    "ts": "2026-08-25T17:19:11.124329+00:00",
+    "results": {
+      "youtube": "LX8xNFvUeo0",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=7dd04a01d6c546d494644b3d74a90ae4. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '7dd04a01d6c546d494644b3d74a90ae4', 'total_platforms': 1, 'job_id': 'a05878541941453eb3e394eb2561b557'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=2a20b89462fc47098d251e732d3ba74c. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '2a20b89462fc47098d251e732d3ba74c', 'total_platforms': 1, 'job_id': 'c10c71bae66f41c0a00411099d7d247d'}"
+    }
+  },
+  {
+    "part": 21,
+    "subtitle": "Mercury: The Universe's LONELY Neighbor",
+    "ts": "2026-08-26T18:36:38.111730+00:00",
+    "results": {
+      "youtube": "3wIKN2SajIw",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=ace20ec40d574271a9cc8114f359ba8f. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'ace20ec40d574271a9cc8114f359ba8f', 'total_platforms': 1, 'job_id': '1975b0faf7dc4097a177f88285d9124a'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=c4c5ebaef48a4b16ae30ec1497ac2d5a. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'c4c5ebaef48a4b16ae30ec1497ac2d5a', 'total_platforms': 1, 'job_id': 'aab942a82de14f499537b6909356df7b'}"
+    }
+  },
+  {
+    "part": 22,
+    "subtitle": "Venus: The Sun Rises in the WEST",
+    "ts": "2026-08-28T01:14:25.526781+00:00",
+    "results": {
+      "youtube": "EI5aLoNH86Q",
+      "instagram": null,
+      "tiktok": null
+    },
+    "results_raw": {
+      "instagram": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=b45259706c574263b7d4595f19fad275. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': 'b45259706c574263b7d4595f19fad275', 'total_platforms': 1, 'job_id': '0e9c3ae9440b40148599678f3ed49325'}",
+      "tiktok": "{'success': True, 'message': 'Upload initiated successfully in background. Your synchronous request was taking too long and has been durably handed off to the upload worker. Check its status with GET /api/uploadposts/status?request_id=4755754ee736439d8e5bb532bffd0960. Docs: https://docs.upload-post.com/api/upload-status', 'request_id': '4755754ee736439d8e5bb532bffd0960', 'total_platforms': 1, 'job_id': 'b2dfaa3aef234273ae40d802c1a66642'}"
+    }
+  },
+  {
+    "part": 23,
+    "subtitle": "Galactic Center: Light From the ICE AGE",
+    "ts": "2026-08-29T01:04:52.538989+00:00",
+    "results": {
+      "youtube": "5c3g86vKTYg",
+      "instagram": "17965011810173052",
+      "tiktok": "7679252983183314190"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DcmthpBiDA4/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7679252983183314190"
+    }
+  },
+  {
+    "part": 24,
+    "subtitle": "Neptune: Its Year is LONGER Than a LIFETIME",
+    "ts": "2026-08-30T19:41:53.157296+00:00",
+    "results": {
+      "youtube": "TVXhCHS5vUg",
+      "instagram": "18125941480826720",
+      "tiktok": "7679911752699612430"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DcrSIVQlGVo/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7679911752699612430"
+    }
+  },
+  {
+    "part": 25,
+    "subtitle": "The Sun: Master of the Solar System",
+    "ts": "2026-08-31T21:53:53.657449+00:00",
+    "results": {
+      "youtube": "MMo5TmN8OsY",
+      "instagram": "18410936344159989",
+      "tiktok": "v_inbox_file~v2.7680317034634201118"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DcuGIaAlEAL/",
+      "tiktok": "Video sent to Inbox (No Public URL)"
+    }
+  },
+  {
+    "part": 26,
+    "subtitle": "The Sun: Its Fiery END",
+    "ts": "2026-09-04T20:45:43.946975+00:00",
+    "results": {
+      "youtube": "DFIc-OD3ASw",
+      "instagram": "18472597333118864",
+      "tiktok": "7681783844197895438"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/Dc4RchqFHRm/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7681783844197895438"
+    }
+  },
+  {
+    "part": 27,
+    "subtitle": "The Universe's SLOWEST Particle: Photon's Journey",
+    "ts": "2026-09-05T18:43:11.773312+00:00",
+    "results": {
+      "youtube": "VS8yd--FZsg",
+      "instagram": "17930498283142010",
+      "tiktok": "7682123290101517582"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/Dc6oOBqjh7x/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7682123290101517582"
+    }
+  },
+  {
+    "part": 28,
+    "subtitle": "KELT-9b: Hotter Than MOST Stars",
+    "ts": "2026-09-06T18:50:09.889722+00:00",
+    "results": {
+      "youtube": "vAPFikT8qxo",
+      "instagram": "18112987396812815",
+      "tiktok": "7682496056810147085"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/Dc9NwTPFckm/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7682496056810147085"
+    }
+  },
+  {
+    "part": 29,
+    "subtitle": "Olympus Mons: Towers Over Everest",
+    "ts": "2026-09-07T20:20:15.315070+00:00",
+    "results": {
+      "youtube": "2Cs_MsKcImA",
+      "instagram": "18091188179539346",
+      "tiktok": "7682890468723657998"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/Dc_85qlgs7A/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7682890468723657998"
+    }
+  },
+  {
+    "part": 30,
+    "subtitle": "Flying to Alpha Centauri: A 5 MILLION Year Trip",
+    "ts": "2026-09-08T19:43:12.451003+00:00",
+    "results": {
+      "youtube": "AGZ39fUhxVU",
+      "instagram": "17865508251658026",
+      "tiktok": "7683252066252262669"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DdCddraDA8W/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7683252066252262669"
+    }
+  },
+  {
+    "part": 31,
+    "subtitle": "What If Earth Had Rings? Sky BLADES",
+    "ts": "2026-09-09T19:35:03.007652+00:00",
+    "results": {
+      "youtube": "Enq3rtRayIg",
+      "instagram": "18145305043598126",
+      "tiktok": "7683620936091847950"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DdFBV9fkZO3/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7683620936091847950"
+    }
+  },
+  {
+    "part": 32,
+    "subtitle": "WASP-12b: Planet Being DEVOURED",
+    "ts": "2026-09-10T19:24:55.644099+00:00",
+    "results": {
+      "youtube": "an7n2iO_3fg",
+      "instagram": "17982080769077858",
+      "tiktok": "7683989501936536846"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DdHk-K3EnoW/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7683989501936536846"
+    }
+  },
+  {
+    "part": 33,
+    "subtitle": "These Galaxies Are Leaving Us Forever",
+    "ts": "2026-09-11T02:20:13.458309+00:00",
+    "results": {
+      "youtube": "sHP4Aw9Hyeo",
+      "instagram": "18233603788321757",
+      "tiktok": "7684096482235993358"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DdIUeg3got9/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7684096482235993358"
+    }
+  },
+  {
+    "part": 34,
+    "subtitle": "This Star Rips ATOMS Apart",
+    "ts": "2026-09-12T18:50:09.952444+00:00",
+    "results": {
+      "youtube": "k5FVftVNm5I",
+      "instagram": "17935168527122183",
+      "tiktok": "7684722679982673165"
+    },
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DdMqoF8E28P/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7684722679982673165"
+    }
+  }
+]

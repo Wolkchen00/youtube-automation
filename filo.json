@@ -1,13 +1,13 @@
 {
   "ad": "YouTube Otomasyon Fabrikası",
   "kategori": "İçerik & Topluluk",
-  "ozet": "Beş YouTube kanalının ölçüm ve bölüm üretim hattı: AImagine, Galactic Experiment, Sentinal ve Shadowed History burada üretilir ve ölçülür; The Unfinished yalnız ölçülür (videoları Shorts_Dizi_Fabrikasi'ndan yayınlanır). Depoda 19 workflow var, 7'si zamanlanmış: iki günlük seri (event-horizon, flashpoints), AImagine korku kaydırağı (fear-slide + fear-slide-hazır), günlük beyin, günlük+haftalık analitik ve haftalık seri kalibrasyonu. Kalan 12 workflow'un schedule bloğu yorum satırında, yalnız elle tetiklenir (from-scratch, next-stop, unnatural-lab dahil). Panonun kanal ve birim ekonomi verisi bu depodan gelir (analytics_data ve credits_ledger.json).",
+  "ozet": "Beş YouTube kanalının ölçüm ve bölüm üretim hattı: AImagine, Galactic Experiment, Sentinal ve Shadowed History burada üretilir ve ölçülür; The Unfinished yalnız ölçülür (videoları Shorts_Dizi_Fabrikasi'ndan yayınlanır). Depoda 19 workflow var, 6'sı zamanlanmış: bir günlük seri (flashpoints), AImagine korku kaydırağı (fear-slide + fear-slide-hazır), günlük beyin, günlük+haftalık analitik ve haftalık seri kalibrasyonu. Kalan 13 workflow'un schedule bloğu yorum satırında, yalnız elle tetiklenir (event-horizon, from-scratch, next-stop, unnatural-lab dahil). Panonun kanal ve birim ekonomi verisi bu depodan gelir (analytics_data ve credits_ledger.json).",
   "eleme": "olculemiyor: insan doldurmali",
   "model": "olculemiyor: insan doldurmali",
   "sunum": "olculemiyor: insan doldurmali",
   "durum": "aktif",
   "dahil_et": true,
-  "kaynak_notu": "cron 2026-09-01'de panonun KENDİ YAML ayrıştırıcısıyla (filo_kayit._schedule_cikar) ölçüldü: 16 workflow'un 7'si zamanlı. DÜZELTME 1: ilk sürüm naif bir regex kullanmış ve yorum satırındaki cron'ları gerçek sanarak 16 cron yazmıştı; denetim bunu 9 hayalet cron olarak DOĞRU biçimde yakaladı. DÜZELTME 2: \"7 cron, routines.json'daki 7 kayıtla birebir tutuyor\" diye yazmıştım , YANLIŞ. Sayılar eşit ama kümeler değil: analytics.yml İKİ kez kayıtlı (yt_analytics + yt_analytics_snapshot), next-stop.yml ise HİÇ kayıtlı değil. Denetim bunu `kayitsiz_cron: 1` olarak doğru raporluyor; routines.json'a yazmak ISSUES C6 ile KILL edilmiş, karar İhsan'ın. README yok; eleme/model/sunum türetilemedi. Zamanlaması yorumda olan 9 workflow: cleanup.yml, could-you-survive.yml, drowned-history.yml, footnotes.yml, night-archive.yml, planetfall.yml, series-approve.yml, series.yml, time-witness.yml. GÜNCELLEME 2026-09-11: cron listesi yeniden ölçüldü (19 workflow, 7 zamanlı). from-scratch, next-stop ve unnatural-lab çıkarıldı (schedule yorumda); fear-slide, fear-slide-hazır ve gunluk-beyin eklendi (etkin cron). the_unfinished kanalı core/analytics.py CHANNELS'a girdi (UCQtDZzk66Um8Oz5er8AsV1A).",
+  "kaynak_notu": "cron 2026-09-01'de panonun KENDİ YAML ayrıştırıcısıyla (filo_kayit._schedule_cikar) ölçüldü: 16 workflow'un 7'si zamanlı. DÜZELTME 1: ilk sürüm naif bir regex kullanmış ve yorum satırındaki cron'ları gerçek sanarak 16 cron yazmıştı; denetim bunu 9 hayalet cron olarak DOĞRU biçimde yakaladı. DÜZELTME 2: \"7 cron, routines.json'daki 7 kayıtla birebir tutuyor\" diye yazmıştım , YANLIŞ. Sayılar eşit ama kümeler değil: analytics.yml İKİ kez kayıtlı (yt_analytics + yt_analytics_snapshot), next-stop.yml ise HİÇ kayıtlı değil. Denetim bunu `kayitsiz_cron: 1` olarak doğru raporluyor; routines.json'a yazmak ISSUES C6 ile KILL edilmiş, karar İhsan'ın. README yok; eleme/model/sunum türetilemedi. Zamanlaması yorumda olan 9 workflow: cleanup.yml, could-you-survive.yml, drowned-history.yml, footnotes.yml, night-archive.yml, planetfall.yml, series-approve.yml, series.yml, time-witness.yml. GÜNCELLEME 2026-09-11: cron listesi yeniden ölçüldü (19 workflow, 7 zamanlı). from-scratch, next-stop ve unnatural-lab çıkarıldı (schedule yorumda); fear-slide, fear-slide-hazır ve gunluk-beyin eklendi (etkin cron). the_unfinished kanalı core/analytics.py CHANNELS'a girdi (UCQtDZzk66Um8Oz5er8AsV1A). GÜNCELLEME 2026-09-12 (İhsan kararı): galacticexperimet kanalının konsepti rafa kaldırıldı, `event-horizon.yml` cron'u yoruma alındı ve bu listeden ÇIKARILDI, seri paused. Gerekçe ölçülmüş: 30 günlük medyan 88,5 izlenme / 140 abone / 199 video. Arşiv: galactic_experience/_surumler/2026-09-12_event-horizon-rafta/. Kanal yeni konseptle yazılacak; şerit geri açılınca bu kayıt da geri eklenmeli.",
   "cron": [
     {
       "gh_repo": "Wolkchen00/youtube-automation",
@@ -24,14 +24,6 @@
       "gh_workflow_name": "Weekly Series Calibration",
       "cron_ifadeleri_utc": [
         "0 9 * * 0"
-      ]
-    },
-    {
-      "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/event-horizon.yml",
-      "gh_workflow_name": "Event Horizon Daily",
-      "cron_ifadeleri_utc": [
-        "30 16 * * *"
       ]
     },
     {
