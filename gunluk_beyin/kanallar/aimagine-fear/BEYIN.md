@@ -1,6 +1,6 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-11T09:55:59.462395+00:00
+Uretim: 2026-09-12T09:31:22.193487+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (9 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -18,12 +18,12 @@ nerede oturdugu gorulur.
 - Olculen video: **9**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/9 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **52**
-- Aralik: 12 ile 3,218 arasi
+- Aralik: 15 ile 3,221 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
-| EN IYI | 3,218 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
-| EN KOTU | 12 | 2026-09-10 | You're falling through glowing neon around the S |
+| EN IYI | 3,221 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
+| EN KOTU | 15 | 2026-09-10 | You're falling through glowing neon around the S |
 
 Son yayinlar (tekrar etme):
 - 2026-09-10 , You're falling through glowing neon around the STRAT Tower. 

@@ -1,6 +1,6 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-11T09:55:58.267846+00:00
+Uretim: 2026-09-12T09:31:20.851380+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -11,15 +11,21 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
+> **UYARI: son olcum adimi BASARISIZ.** (2026-09-12 09:31)
+> 1 videonun hicbiri olculemedi
+> Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
+> olculmemis olabilir; bu rapor bugun yazildi diye guncel
+> DEGILDIR.
+
 - Olculen video: **15**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **104**
-- Aralik: 23 ile 393 arasi
+- Aralik: 24 ile 393 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
 | EN IYI | 393 | 2026-09-05 | The Universe's SLOWEST Particle: Photon's Journe |
-| EN KOTU | 23 | 2026-09-10 | WASP-12b: Planet Being DEVOURED |
+| EN KOTU | 24 | 2026-08-28 | Venus: The Sun Rises in the WEST |
 
 Son yayinlar (tekrar etme):
 - 2026-09-10 , WASP-12b: Planet Being DEVOURED
