@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 35,
-  "next_part": 34,
+  "next_part": 35,
   "doctrine_sha256": "fa35557a1314100cd26e966da92e1b8337b1a54a545d6fbd0eb32132c804f352",
   "auto_replenish": {
     "enabled": true,
@@ -790,6 +790,27 @@
         "narration_delivered": true,
         "arc_roles_missing": [],
         "duration_s": 19.79,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "34": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/event-horizon/episodes/ep34/ep34_narrated_music_titled_mastered.mp4",
+      "subtitle": "This Star Rips ATOMS Apart",
+      "stack_sha256": "de8c65016dca63fa827d2aa53d411e228bf36a831e726d7a09b323fcd98c1cf2",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-12T18:50:09.953204+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": true,
+        "arc_roles_missing": [],
+        "duration_s": 18.99,
         "duration_in_band": true,
         "degraded": false
       }
