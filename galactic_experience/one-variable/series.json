@@ -16,7 +16,7 @@
   "priority": 999,
   "total_parts": 5,
   "next_part": 1,
-  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "doctrine_sha256": "93b8f45199713c6bd071ea13eea3cb75e14b9a53244d07391f5bc781507da3fc",
   "kurulum_notu": "12 Eylul 2026'da kuruldu, event-horizon'un yerine. status='draft' ve cron YORUMDA: Ihsan KONSEPT.md v2.0'i onaylayana kadar hicbir sey uretilmez. Acma sirasi: (1) KONSEPT.md statusunu ONAYLANDI yap ve doctrine_sha256'yi YENILE, (2) buradaki status'u 'active' yap, (3) .github/workflows/one-variable.yml icindeki schedule blogunun yorumunu kaldir, (4) filo.json cron listesine kaydi ekle.",
   "auto_replenish": {
     "enabled": true,
@@ -35,7 +35,8 @@
       "su deneyi",
       "atmosfer deneyi",
       "yerçekimi deneyi",
-      "ışık ve zaman deneyi"
+      "ışık ve zaman deneyi",
+      "şekil deneyi"
     ],
     "shot_plan": [
       "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the named real geography and the single altered variable already at maximum strength. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. Diegetic sound is present at seconds 0-1, thins toward near-silence through seconds 3-5, and surges to its strongest impact during seconds 6-8."
@@ -161,6 +162,31 @@
         "id": 24,
         "topic": "The Sun swapped for Sirius, harder blue-white light and sharper shadows across the Pacific cloud tops.",
         "family": "ışık ve zaman deneyi"
+      },
+      {
+        "id": 25,
+        "topic": "Earth reshaped as a flat disc, seen from high above as the terminator sweeps straight across it instead of curving.",
+        "family": "şekil deneyi"
+      },
+      {
+        "id": 26,
+        "topic": "Earth reshaped as a flat disc ringed by a continuous ice wall at its rim, the ocean ending against that wall.",
+        "family": "şekil deneyi"
+      },
+      {
+        "id": 27,
+        "topic": "Earth reshaped as a cube, its six flat faces meeting at edges where the oceans pool toward the centre of each face.",
+        "family": "şekil deneyi"
+      },
+      {
+        "id": 28,
+        "topic": "Earth reshaped as a torus, a ring world with its own inner sea and the far side of the ring visible overhead.",
+        "family": "şekil deneyi"
+      },
+      {
+        "id": 29,
+        "topic": "Earth reshaped as a hollow shell open at one pole, the interior surface curving up and away on both sides.",
+        "family": "şekil deneyi"
       }
     ]
   }

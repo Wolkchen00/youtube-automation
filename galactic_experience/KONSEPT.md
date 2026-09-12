@@ -1,6 +1,6 @@
 # GALACTIC EXPERIMENT, KANAL KONSEPT DOKTRİNİ v2.0
 
-**Tarih:** 2026-09-12 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor)
+**Tarih:** 2026-09-12 · **Karar sahibi:** İhsan · **Statü:** TASLAK (İhsan onayı bekliyor) · v2.1 12 Eylül akşamı: bölüm 7.1 üretimden gelen prompt dersleriyle, bölüm 6 `şekil deneyi` ailesiyle genişletildi
 **Önceki sürüm:** v1.5 "EVENT HORIZON" (29 Temmuz 2026). 12 Eylül 2026'da İhsan kararıyla
 RAFA KALDIRILDI, tam arşivi `_surumler/2026-09-12_event-horizon-rafta/` içinde.
 
@@ -191,6 +191,12 @@ Kanonik aile listesi (`auto_replenish.families` ile birebir aynı olmak zorunda)
 4. `atmosfer deneyi` , havanın bileşimini, yoğunluğunu veya davranışını değiştirmek
 5. `yerçekimi deneyi` , yerçekimini artırmak, azaltmak veya yönünü değiştirmek
 6. `ışık ve zaman deneyi` , güneş ışığı, gölge, dönme hızı, gün uzunluğu
+7. `şekil deneyi` , gezegenin kendi geometrisini değiştirmek (düz disk, küp, simit,
+   içi boş kabuk). **Ölçülen en güçlü aile.** @earthimpacts25'in 500.228 beğenili en
+   büyük videosu düz dünya gün batımı, ikinci bir düz dünya videosu da 48.703 beğeni
+   almış; hesabın medyanı 804. Bu aile bizde DÜRÜST kalır: caption gerçek fiziğin ne
+   dediğini yazar ve simülasyon olduğunu söyler. Komplo teorisi savunulmaz, "şu olsaydı
+   gökyüzü şöyle görünürdü" denip gerçeği anlatılır.
 
 **Ardışık iki bölüm aynı aileden olamaz.** Motor bunu mekanik olarak reddeder.
 
@@ -215,6 +221,40 @@ bu dersin kaynağıdır.
 - **İkinci bir değişken.** Adı üstünde: tek değişken.
 
 ---
+
+## 7.1 ÜRETİMDEN ÖĞRENİLEN PROMPT KURALLARI (12 Eylül 2026, canlı ölçüm)
+
+Bunlar teori değil, üretilen ve QC'den geçen/düşen bölümlerden çıktı.
+
+1. **Ünlü bir yer adı imkânsız ölçeği ÖLDÜRÜR.** Prompt'a "Gold Coast, Queensland"
+   yazıldığında model gerçek bir Gold Coast havadan çekimi çizdi ve kule boyu dalgayı
+   NORMAL boyutta yaptı. QC gerekçesi: *"the promised wall of water is entirely absent;
+   the wave shown is of normal size."* Yer adı kaldırılıp şehir jenerik ama somut
+   (konteyner limanı, vinçler, nehir ağzı) tarif edilince ölçek geldi.
+   **Kural: ölçek anomalisi olan bölümlerde yer ADLANDIRILMAZ, TARİF EDİLİR.**
+   Bölüm 6'daki "gerçek ve tanınabilir yer" kuralı bu durumda yer adına değil,
+   tanınabilir coğrafi ÖZELLİKLERE uygulanır.
+2. **Anomali prompt'un İLK CÜMLESİ olmalı.** Coğrafya önce gelirse model stok bir
+   havadan çekimi çizip anomaliyi es geçiyor. Ölçülen: anomali sona konduğunda QC
+   skoru 8/10 (red), başa alındığında 6/10 (sınırda).
+3. **Su kütlesini "kıvrılan dalga" diye değil "dikey beyaz püskürtü duvarı" diye
+   tarif et.** Referansın 42.195 beğenili videosunda ekranda görünen şey mavi bir
+   dalga değil, şehirden yüksek dikey bir köpük/sis cephesidir. Motor bunu çizmekte
+   çok daha başarılı.
+4. **Motor 8 saniyelik kilitli kamerayı TAM tutmuyor.** Bir bölümde kamera belirgin
+   biçimde yakınlaştı ve konu kadrajdan çıktı. Prompt'ta kamera parametrelerini tek tek
+   saymak (position, orientation, focal length, focus, exposure) ve "the coastlines
+   remain pinned to identical pixels" gibi piksel-düzeyi bir ifade kullanmak yardımcı
+   oluyor ama garanti değil. Her bölümün son karesi kontrol edilmeli.
+5. **`art_style`'da "spacecraft-window" gibi bir NESNE adı geçirme.** Model lomboz
+   çerçevesi çizdi ve kadrajın beşte birini yedi. Bakış açısı NESNEYLE değil,
+   görüntünün NİTELİĞİYLE tarif edilir.
+6. **Motorun native sesi bölümden bölüme 10 dB oynuyor.** Ölçülen iki bölüm:
+   -26,18 LUFS ve -15,58 LUFS. İlki mastering kapısına takıldı, ikincisi yalnız
+   tepe kırpması düzeltilerek yayına uygun hale geldi. **Her bölümün teslim LUFS'u
+   ayrı ölçülmeli**, tek bir mastering reçetesi ikisine birden uymuyor:
+   sesi zaten -16..-13 bandındaki bölümde dinamik loudnorm LRA'yı 13,1'den 2,3'e
+   düşürüp çarpmayı öldürüyor; orada yalnız limiter uygulanmalı.
 
 ## 8. ÖLÇÜM VE KARAR KURALLARI
 

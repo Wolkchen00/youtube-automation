@@ -739,6 +739,50 @@
           "actual": 63.0,
           "ts": "2026-09-12T21:30:53.896182+00:00",
           "settled_ts": "2026-09-12T21:32:41.919726+00:00"
+        },
+        {
+          "reservation_id": "747812dbbe554ea19bbf8eb06eb48cb4",
+          "stage": "bakeoff",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "8",
+          "reserved": 160.0,
+          "actual": 105.0,
+          "ts": "2026-09-12T21:49:58.447628+00:00",
+          "settled_ts": "2026-09-12T21:51:31.234120+00:00"
+        },
+        {
+          "reservation_id": "6e69d564b36f4409a32c1c410d1a9094",
+          "stage": "bakeoff",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "8",
+          "reserved": 160.0,
+          "actual": 105.0,
+          "ts": "2026-09-12T21:51:47.732268+00:00",
+          "settled_ts": "2026-09-12T21:53:19.961350+00:00"
+        },
+        {
+          "reservation_id": "2303116e39f6491189bdc4d0800a52f6",
+          "stage": "bakeoff",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "8",
+          "reserved": 160.0,
+          "actual": 105.0,
+          "ts": "2026-09-12T21:56:53.310086+00:00",
+          "settled_ts": "2026-09-12T21:58:25.911082+00:00"
+        },
+        {
+          "reservation_id": "f1a5d9acda6e4ea18e0c856b47c089c1",
+          "stage": "bakeoff",
+          "call_type": "qc_regen",
+          "engine": "omni",
+          "duration": "8",
+          "reserved": 160.0,
+          "actual": 105.0,
+          "ts": "2026-09-12T21:58:41.839228+00:00",
+          "settled_ts": "2026-09-12T22:00:44.927919+00:00"
         }
       ],
       "measurements": []
