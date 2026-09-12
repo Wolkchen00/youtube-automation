@@ -47,5 +47,9 @@
   },
   "family": "insect-giant",
   "hook_shot": 2,
-  "doctrine_sha256": "8059d15cab4ab3018ed5f39d57568000a9d320e811c70e98a7965872b0404fdc"
+  "doctrine_sha256": "8059d15cab4ab3018ed5f39d57568000a9d320e811c70e98a7965872b0404fdc",
+  "prop_ref_urls": [
+    "https://i.ibb.co/rft5DCkB/ep07-giant-praying-mantis-head.png"
+  ],
+  "ref_prompt_sha256": "abe2e7d9614230f5a58e9a1c552558ae35d884806b90282e266d9bff146de9a7"
 }

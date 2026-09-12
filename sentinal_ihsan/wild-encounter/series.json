@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 11,
-  "next_part": 7,
+  "next_part": 8,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -85,6 +85,48 @@
       ],
       "published_at": "2026-09-11T18:49:55+00:00",
       "note": "elle yayinlandi (Clarity Break, resmi surum ep06_mastered.mp4)"
+    },
+    "7": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep07/ep07_mastered.mp4",
+      "subtitle": "This GIANT PRAYING MANTIS Is NOT Real",
+      "stack_sha256": "106f4a403a5b45514471bf170ad8b8dbf4d56ec2f8e5491aa8b511e1fefe6279",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part7",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "Cs6gHuxf7A4",
+          "video_sha256": "2e6b12f7301789c1a97cf657f2f3684c365599e621f6431d098ca4d7b717fa98",
+          "ts": "2026-09-12T21:06:39.755742+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18093234308437480",
+          "video_sha256": "2e6b12f7301789c1a97cf657f2f3684c365599e621f6431d098ca4d7b717fa98",
+          "ts": "2026-09-12T21:07:51.282056+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7684758472436501773",
+          "video_sha256": "2e6b12f7301789c1a97cf657f2f3684c365599e621f6431d098ca4d7b717fa98",
+          "ts": "2026-09-12T21:09:02.864094+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-12T21:09:02.865636+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 22.87,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-11: Ihsan karari 'gunluk, otomatik yayin'. Serit .github/workflows/wild-encounter.yml, 18:30 UTC. part01-04 deneme bolumleriydi, yayinlanmadi; 05 ve 06 elle yayinlandi ve parts'a islendi. Siradaki bolum 7'yi oto-ikmal yazar."

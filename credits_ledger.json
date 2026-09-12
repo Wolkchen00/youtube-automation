@@ -1135,6 +1135,14 @@
       "reserved": 900,
       "actual": 252.0,
       "ts": "2026-09-12T18:38:29.148642+00:00"
+    },
+    {
+      "month": "2026-09",
+      "series": "wild-encounter",
+      "part": 7,
+      "reserved": 1000,
+      "actual": 533.0,
+      "ts": "2026-09-12T20:47:23.745403+00:00"
     }
   ],
   "episode_spend": {
@@ -1149,6 +1157,7 @@
     "unnatural-lab:30": 848.0,
     "unnatural-lab:31": 428.0,
     "unnatural-lab:32": 596.0,
-    "unnatural-lab:33": 932.0
+    "unnatural-lab:33": 932.0,
+    "wild-encounter:7": 533.0
   }
 }
