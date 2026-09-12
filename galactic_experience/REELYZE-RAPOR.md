@@ -679,3 +679,141 @@ A'nın tek üstünlüğü **maliyet**: 105 krediye karşı 189 kredi, yani B yak
 - Suno'nun vuruşunun kesmeye milisaniye hassasiyetinde oturup oturmadığı
   ölçülmedi; ölçülen şey 0,5 saniyelik dilimlerde yükselişin kesme dilimine
   denk geldiğidir.
+
+---
+
+# EK 5 , GİRDAP VİDEOSU ANATOMİSİ (12 Eylül 2026)
+
+İhsan direktifi: "bu girdap videosunu detaylıca incele, tam promptunu çıkart, bir
+sonraki hedef bu videonun aynısını çıkartabilmek olmalı."
+
+Kaynak: `instagram.com/reel/DQfOoo4ChGR/` , @earthimpacts25, 31 Ekim 2025.
+Hesabın **ikinci en büyük** videosu.
+
+## 1. Ölçüm
+
+| | Değer |
+|---|---|
+| Beğeni | **382.016** |
+| Yorum | 2.873 |
+| Süre | **8,01 sn** |
+| Kesme | **0** |
+| Çözünürlük / fps | 720x1280 / 24 |
+| Integrated LUFS | **-14,0** |
+| True peak | -1,0 dBFS |
+| **LRA** | **0,9** |
+| Konuşma | 0 kelime |
+
+Yorum/beğeni oranı: 2.873 / 382.016 = **%0,75**. Tsunami videosunda %0,90.
+
+## 2. EN ÖNEMLİ BULGU: kadraj bir UÇAK PENCERESİ
+
+Bu videonun kancası girdap değil, **nereden bakıldığı.**
+
+Ekranda görünen: yolcu uçağının oval kabin penceresi, yuvarlatılmış köşeleriyle
+kadrajın alt ve sol kenarını sarıyor; sağ üstte kanat ve winglet; altta kıyı kasabası,
+liman ve mendirek; denizde ortası simsiyah, kolları köpüklü dev bir girdap.
+
+**Yani video "biri uçakta telefonuyla çekmiş" gibi duruyor.** İmkânsız şeyi gerçek
+gösteren şey bu. Temiz bir sinematik havadan çekim olsaydı AI olduğu anında okunurdu.
+
+### Bu, benim daha önceki kararımı TERSİNE ÇEVİRİYOR
+
+Bake-off'ta A varyantında model `art_style`'daki "spacecraft-window" ifadesini
+birebir alıp lomboz çerçevesi çizmişti ve ben bunu kusur sayıp ifadeyi kaldırdım
+(doktrin v2.1, bölüm 7.1, kural 5).
+
+**Yörünge çekimi için o karar doğruydu, ama bu format için yanlış olurdu.** Burada
+çerçeve kusur değil, formatın kendisi. Doğru kural şu: *çerçeve BİLEREK istenirse
+formatın parçasıdır; istenmeden gelirse kusurdur.* Yani nesne adı yasağı mutlak
+değil, bakış modu bölüm bazında seçilmeli.
+
+## 3. Ses: tsunami videosunun TAM TERSİ
+
+```
+  0,0 sn  -12,9 dB      4,0 sn  -14,5 dB
+  1,5 sn  -16,0 dB      6,0 sn  -15,3 dB
+  2,5 sn  -14,0 dB      7,5 sn  -13,9 dB
+```
+
+Sekiz saniye boyunca **-13 ile -16 dB arası, dümdüz**. LRA 0,9.
+
+Sessizlik anı yok, çarpma yok, ark yok. Sadece sabit ve gür bir uçak kabini uğultusu
+artı rüzgâr. Tsunami videosunda LRA 8,6 ve 16 dB'lik iniş çıkış vardı.
+
+**Ders: ses arkı OLAYA bağlı, formata değil.** Çarpma olayı varsa sessizlik-sonra-darbe;
+süregiden bir olay (girdap, dönme, akış) varsa sabit ve gür yatak. İkisi de -14 LUFS.
+
+## 4. Hareket
+
+Kamera pencereye sabit ama tam kilitli değil: sekiz saniyede hafif bir içeri itme var.
+İlk ve son kare kompozisyon olarak neredeyse aynı; değişen şey girdabın açılması,
+boğazının derinleşmesi ve köpük kollarının keskinleşmesi. Kesme yok.
+
+## 5. Caption: AI olduğunu AÇIKÇA söylüyor
+
+> Off the northeast coast of Britain, the sea moves in slow, endless motion , a vast
+> whirlpool circling with calm precision, as if the ocean itself is breathing. From above...
+>
+> #earthimpacts #fblifestyle #unrealviews #oceandreams #aiartcommunity #visualexploration
+>
+> **This content isn't real , it's a simulated 'what if' scenario created by AI for
+> visual exploration.**
+
+382 bin beğenili video AI olduğunu açıkça yazıyor ve bu performansını düşürmemiş.
+Bizim doktrinimizin dürüstlük kuralı bu ölçümle desteklenmiş oluyor.
+
+Ayrıca yer BURADA adlandırılıyor ("northeast coast of Britain") , ama caption'da,
+görüntüde değil. Bölüm 7.1 kural 1'le çelişmiyor: kural prompt'a yer adı yazmakla
+ilgili, caption'la değil.
+
+## 6. Üretim promptu (tersine çıkarıldı)
+
+`tools/tersine_prompt.py` çıktısı, Gemini vision 8 kare üzerinden:
+
+> The shot opens looking out of an airplane window, revealing a vast expanse of
+> grey-blue ocean. The white wing of the aircraft is visible in the upper right,
+> partially framing the view. Below, a colossal, swirling whirlpool dominates the
+> water, its frothing white foam contrasting with the dark, deep center. Beyond the
+> turbulent vortex, a sprawling coastal city with sandy beaches and a busy harbor
+> stretches along the distant shoreline under an overcast sky. The camera gently
+> pushes forward, subtly magnifying the intricate details of the whirlpool, before
+> slowly pulling back to reveal the full panoramic view again. A steady, low hum of
+> airplane engines fills the air, consistent and unwavering, with a subtle, constant
+> whoosh of wind passing the fuselage. The sound remains at a stable, moderate level
+> throughout the shot, creating a continuous ambient drone.
+
+Aracın kendi risk listesi:
+- Uçak penceresi ve kanadın çekim boyunca TUTARLI kalması
+- Girdabın su dokusunun ve hareketinin gerçekçiliği
+- Girdap ile uzaktaki şehir arasındaki ölçek dengesi
+
+## 7. Kopyalamak için gereken, madde madde
+
+1. **Bakış: yolcu uçağı penceresi.** Oval kabin çerçevesi alt ve sol kenarda, sağ
+   üstte kanat ve winglet. Çerçeve BİLEREK istenir.
+2. **Hava: kapalı.** Gri bulut örtüsü, gri-yeşil deniz. Güneşli değil. Bu, amatör
+   çekim hissini güçlendiriyor.
+3. **Kıyı uzakta.** Kasaba, liman, mendirek üst üçlükte ve KÜÇÜK. Girdap ana özne.
+4. **Girdap: ortası SİMSİYAH açık boğaz**, çevresinde spiral köpük kolları.
+5. **Hareket: çok hafif içeri itme.** Kilitli değil ama kamera hareketi de değil.
+6. **Ses: sabit kabin uğultusu + rüzgâr, -14 LUFS, ark YOK.**
+7. **Caption AI beyanını taşır.**
+
+## 8. Doktrin için açık soru
+
+Bizim doktrinimiz bakış açısını "yörüngeden ya da yüksek hava" diye tanımlıyor
+(bölüm 3). Bu video **üçüncü bir mod** gösteriyor: yolcu POV'u. Hesabın ikinci en
+büyük videosu bu modda.
+
+Ek fayda: pencere çerçevesi modele güçlü bir kompozisyon çapası veriyor, bu da
+bölüm 7.1 kural 4'teki "motor kilitli kamerayı tam tutmuyor" sorununu hafifletebilir.
+
+**Karar İhsan'ın:** bu mod doktrine eklensin mi?
+
+## 9. Ölçülemeyenler
+
+- Gerçek izlenme sayısı (IG API 429; 26M rakamı İhsan'ın gördüğü sayıdır).
+- Hangi motorla üretildiği.
+- Pencere çerçevesinin performansa katkısı izole edilmedi; n=1, aynı hesapta
+  çerçevesiz videolar da büyük vuruş yapmış (tsunami 42K, düz dünya 500K).
