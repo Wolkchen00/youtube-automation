@@ -520,3 +520,162 @@ reel'de kullanıldığı **ölçülemedi**.
 - Retention eğrileri.
 - 84 reel'in tarihleri (izgara kaydırması tarih vermiyor), bu yüzden
   "hesap düşüşte mi" sorusu cevaplanamadı, yalnız izgara sırası biliniyor.
+
+---
+
+# EK 4 , A/B BAKE-OFF SONUCU (12 Eylül 2026)
+
+İhsan direktifi: "iki konsept için de 1'er video üret böylelikle hangisini daha iyi
+yarattığımızı görebiliriz."
+
+İki varyant gerçekten üretildi. Yayına ÇIKMADI: `series.experiment run` izole çıktı
+ağacına yazdı, kredi `experiments_ledger.json` içine işlendi.
+Deney kimliği: `exp-2026-09-bakeoff-ses`, aşama `bakeoff`.
+
+Konu ikisinde de aynı (Satürn'ün halkaları Dünya'da), prompt gövdeleri aynı coğrafi
+çapaları kullanıyor, `master_lufs` ikisinde de -14. Yani ölçülen şey FORMAT.
+
+## 1. Ölçülen sonuç
+
+| | **A** tek plan + native ses | **B** 2 plan + kesme + müzik |
+|---|---|---|
+| Süre | 8,00 sn | 8,03 sn |
+| Kesme | **0** | **1 adet, 4,03 sn** |
+| Çözünürlük / fps | 1080x1920 / 30 | 1080x1920 / 30 |
+| **Integrated LUFS** | **-27,3** ❌ | **-14,3** ✅ |
+| True peak | -0,5 dBFS | -1,5 dBFS |
+| LRA | 7,8 | 6,6 |
+| **Mastering kapısı** | **BAŞARISIZ, yayın tutuldu** | **GEÇTİ** |
+| Kredi | **105** | **189** |
+| Üretim süresi | ~2 dakika | ~6 dakika |
+| QC | çekim 1 ilk denemede geçti | çekim 1 RED (gömülü yazı) → regen → geçti |
+
+## 2. A neden kapıya takıldı
+
+Motorun verdiği native ses **-26,18 LUFS**. Eski event-horizon formatının öldüğü
+yerin aynısı, hatta daha kötü (-21,9 idi).
+
+Mastering üç kez denedi:
+
+```
+deneme 1: limiter -1,0 dB  ->  -15,9 LUFS, TP +1,1  (tepe taşıyor)
+deneme 2: limiter -3,3 dB  ->  -16,7 LUFS, TP -0,6
+deneme 3: limiter -3,9 dB  ->  -17,0 LUFS, TP -3,0  (pes etti)
+```
+
+Sebep `core/ffmpeg_tools.py` `master_audio`: zincir `loudnorm(linear=true) + alimiter`.
+`linear=true` yalnız sabit kazanç uygular, sıkıştırma yapmaz. Yatak -25 dB'de
+dururken tek bir tepe -0,5 dB'de olunca limiter o tepeyi ezmek için tavanı indiriyor,
+tavan inince gürlük de düşüyor. Kendi kendini kovalıyor.
+
+**Kapı doğru çalıştı.** Fail-closed olmasaydı bu video sessizce -17 LUFS yayına çıkardı.
+
+### İstediğimiz darbe geldi, yatak gelmedi
+
+A'nın ses eğrisi 0,5 saniyelik dilimlerde:
+
+```
+  0,0 - 6,0 sn   -23 ile -26 dB arası, DÜMDÜZ
+  6,5 sn         -20,1 dB  (6,80-6,90 arasında tepe -0,5 dB'ye fırlıyor)
+  7,0 - 7,5 sn   -27 dB
+```
+
+6,80-6,90 arası ses 50 milisaniyede -17 dB'den -0,5 dB'ye çıkıp sönüyor. Yani
+prompt'ta "6-8. saniyede patlasın" dediğimiz darbe **tam yerinde geldi**. Sorun
+darbe değil, yatağın 10 dB fazla sessiz olması.
+
+### Zorla düzeltmek işe yaramıyor
+
+Motoru değiştirmeden dinamik loudnorm denendi:
+
+| | LUFS | LRA |
+|---|---:|---:|
+| Ham | -26,18 | **7,60** |
+| Dinamik master | -15,35 | **1,20** |
+
+Seviye düzeliyor ama dinamik aralık 7,6'dan 1,2'ye çöküyor, yani "sessizlik sonra
+çarpma" şekli tamamen düzleşiyor. Kazandığımız şeyi kaybediyoruz.
+
+## 3. B'de müzik gerçekten kesmeye oturdu
+
+B'nin ses eğrisi:
+
+```
+  0,0 sn   -40,3 dB   <- FADE-IN, kusur
+  1,5 sn   -22,0 dB
+  3,0 sn   -16,3 dB
+  3,5 sn   -15,9 dB
+  4,0 sn   -13,3 dB   <- KESME 4,03 sn'de. Müzik tam buraya yükseldi.
+  6,5 sn   -14,4 dB
+  7,5 sn   -26,7 dB   <- FADE-OUT, kusur
+```
+
+Müzik kesmeye yükseliyor. Nebula'da ölçtüğümüz etki üretildi.
+
+**İki kusur var ve ikisi de konseptten değil, mikserden geliyor:**
+
+```
+core/ffmpeg_tools.py:1191
+  afade=t=in:st=0:d=1.0,afade=t=out:st={fade_out_st}:d=1.5
+```
+
+- **1 saniyelik fade-in** ilk kareyi sessiz bırakıyor. İlk saniye kancanın en
+  önemli saniyesi; ölçtüğümüz rakiplerin hiçbirinde fade-in yok.
+- **1,5 saniyelik fade-out** döngüyü kırıyor. Doktrin "son kare başa rimlenir"
+  diyor, fade-out bunu imkânsız kılıyor.
+
+Müzik prompt'una "ilk saniyeden itibaren tam atmosferle aç" ve "ortada bitir"
+yazılmıştı; Suno'nun değil mikserin sorunu.
+
+## 4. Görsel karşılaştırma (kareler gözle incelendi)
+
+**A:**
+- Model `art_style`'daki "spacecraft-window" ifadesini birebir almış ve ekrana
+  **lomboz çerçevesi** çizmiş. Kadrajın yaklaşık beşte biri koyu çerçeve.
+- **Kamera kilitli kalmamış.** İlk karede halkalar sağda ve altta kadrajı sarıyor;
+  7,8. saniyede belirgin biçimde yakınlaşmış ve halkalar büyük ölçüde kadrajdan
+  çıkmış. Yani bölümün vaadi sonunda zayıflıyor.
+  (Not: kaba koyu-piksel ölçümü bunu ayırt edemedi çünkü lomboz vinyeti sabit ve
+  baskın; tespit kareleri gözle karşılaştırmaya dayanıyor.)
+- Coğrafya iyi: Japonya, Filipinler, Avustralya okunuyor.
+
+**B:**
+- Lomboz yok, kadraj tam dolu.
+- **Halka gölgeleri Pasifik bulut örtüsüne düşüyor**, prompt'ta istenen tam bu.
+- Kesme sonrası **ölçek sıçraması çalışıyor**: halka düzleminin içinde, ev
+  büyüklüğünde buz ve kaya blokları kadrajı dolduruyor, Dünya'nın kenarı çok
+  aşağıda. Nebula'nın kalıbı birebir üretildi.
+- QC ilk denemede çekim 1'i gömülü yazı yüzünden reddetti, regen sonrası geçti.
+  Yani QC katmanı çalışıyor.
+
+## 5. Karar için okuma
+
+Ölçüme göre **B önde**, üç ayrı sebeple:
+
+1. Teslim edilebiliyor. A mastering kapısına takıldı, B geçti.
+2. Görseli daha iyi. Lomboz yok, kadraj kilitli kalıyor, ölçek sıçraması vuruyor.
+3. Aranan ses etkisi üretildi.
+
+A'nın tek üstünlüğü **maliyet**: 105 krediye karşı 189 kredi, yani B yaklaşık
+1,8 kat pahalı. Günlük 1 video için 189 kredi kabul edilebilir.
+
+### B seçilirse kapatılması gereken üç kusur
+
+1. **Müzik fade'lerini kaldır.** `ffmpeg_tools.py:1191`. Bu ortak motor kodu,
+   `footnotes` ve `the-vast` gibi müzikli seriler de kullanıyor; değişiklik
+   opt-in bayrakla yapılmalı, yoksa onların çıktısı da değişir.
+2. **Kesme %50'de, olması gereken %37.** Motor süre enum'u 4/6/8/10 olduğu için
+   2,93 sn üretilemiyor. Çözüm: 3+5 saniyelik iki çekim mümkün değil, ama 8 sn
+   tek klip üretip post'ta 2,93'te kesmek mümkün. Motor işi.
+3. **`art_style`'dan "spacecraft-window" ifadesini çıkar.** A'da lomboz çizdirdi.
+
+## 6. Ölçülemeyenler
+
+- İzleyici tepkisi. Bu bir üretim kalitesi karşılaştırmasıdır, performans ölçümü
+  değildir. Hangi formatın daha çok izlendiğini ancak yayınlayıp 44 saat bekleyerek
+  öğreniriz.
+- n=1. Her varyanttan tek video üretildi. Motorun varyansı ölçülmedi.
+- A'nın kamera kayması tek bölümde gözlendi, kaç bölümde tekrarlandığı bilinmiyor.
+- Suno'nun vuruşunun kesmeye milisaniye hassasiyetinde oturup oturmadığı
+  ölçülmedi; ölçülen şey 0,5 saniyelik dilimlerde yükselişin kesme dilimine
+  denk geldiğidir.
