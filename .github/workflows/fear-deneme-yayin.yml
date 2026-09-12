@@ -1,0 +1,125 @@
+name: Fear Deneme Yayin (iki hazir video, 24 saat arayla)
+
+# BULUT GECISI DENEMESI , 2026-09-12 Ihsan karari.
+#
+# Elde onceden uretilmis IKI video var, ikisi de taipei-101-bulut rotasindan.
+# Fark yalnizca bacak: 1. surumde bacaklar ciplak, 2. surumde tayt var.
+# Amac ikisinin etkilesimini 24 saat arayla, birbirine karismadan olcmek.
+#
+# Bu kosu URETIM YAPMAZ, Kie kredisi HARCAMAZ. Yalniz AImagine-Fear/hazir/
+# altindaki hazir dosyalari yayinlar.
+#
+# SIRA BILEREK BOYLE: once ciplak surum. O surumde 6. saniyedeki bulut korlugu
+# gercekten olustu ve kanca sehri koruyor, yani iki videonun iyisi o. Iyi olan
+# temiz atisi alsin diye one alindi.
+#
+# UYARI , MUKERRER ICERIK RISKI: iki video ayni landmark (Taipei 101), ayni
+# beat haritasi, ayni gecis. Bu kanalda tekrarlanan landmark uc kez denendi ve
+# ucu de tutmadi (STRAT 52/17/17). Ikinci video mukerrer sayilabilir. Risk
+# bilerek alindi; baslik ve caption metinleri bu yuzden iki surumde FARKLI.
+#
+# Tek seferlik zamanlama: cron'lar gun ve ay tasiyor, yani yalniz 13 ve 14
+# Eylul'de tetiklenir. GitHub'in cron gecikmesi bu filoda ~1.5 saate kadar
+# cikabiliyor; iki kosu da benzer gecikir, aradaki 24 saat korunur.
+# Deneme bitince bu dosyayi silin.
+
+on:
+  schedule:
+    - cron: '39 16 13 9 *'   # 2026-09-13 16:39 UTC , 1. video (ciplak)
+    - cron: '39 16 14 9 *'   # 2026-09-14 16:39 UTC , 2. video (tayt)
+  workflow_dispatch:
+    inputs:
+      video:
+        description: "Elle calistirirken hangisi: 1 (ciplak) ya da 2 (tayt)"
+        type: choice
+        options: ['1', '2']
+        default: '1'
+
+concurrency:
+  group: fear-deneme-yayin
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs
+
+      - name: Hangi video
+        id: sec
+        shell: bash
+        run: |
+          set -euo pipefail
+          SECIM="${{ github.event.inputs.video }}"
+          if [ -z "$SECIM" ]; then
+            # Zamanlanmis kosu: UTC tarihine gore sec.
+            GUN="$(date -u +%Y-%m-%d)"
+            case "$GUN" in
+              2026-09-13) SECIM=1 ;;
+              2026-09-14) SECIM=2 ;;
+              *)
+                echo "Bu tarihte ($GUN) planlanmis yayin yok. Cikiliyor."
+                echo "atla=1" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+            esac
+          fi
+          if [ "$SECIM" = "1" ]; then
+            echo "slug=taipei-bulut-1-ciplak" >> "$GITHUB_OUTPUT"
+            echo "baslik=Taipei 101, into the cloud #shorts" >> "$GITHUB_OUTPUT"
+          else
+            echo "slug=taipei-bulut-2-tayt" >> "$GITHUB_OUTPUT"
+            echo "baslik=Taipei 101, through the clouds #shorts" >> "$GITHUB_OUTPUT"
+          fi
+          echo "atla=0" >> "$GITHUB_OUTPUT"
+
+      - name: Hazir video yayinla
+        if: steps.sec.outputs.atla == '0'
+        shell: bash
+        run: |
+          python -X utf8 AImagine-Fear/tools/yayinla.py \
+            "AImagine-Fear/hazir/${{ steps.sec.outputs.slug }}.mp4" \
+            --caption-file "AImagine-Fear/hazir/${{ steps.sec.outputs.slug }}.caption.txt" \
+            --title "${{ steps.sec.outputs.baslik }}" \
+            --allow-same-day --skip-if-published 2>&1 | tee logs/fear_deneme_yayin.log
+
+      - name: Persist state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: fear deneme yayin kaydi [skip ci]" \
+            AImagine-Fear/yayin.jsonl
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fear-deneme-yayin-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7

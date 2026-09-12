@@ -4,7 +4,7 @@ SLUG: toronto-cn-red-dusk
 DESTINATION: Toronto
 LANDMARK: the CN Tower
 DURATION: 20
-NEON: blood red
+NEON: hot red-orange
 PALET: sicak
 TITLE_KEYWORD: CN
 LEGWEAR: black glossy wet-look shorts cut at mid-thigh, bare legs below them
@@ -13,7 +13,7 @@ SOURCE: https://www.instagram.com/reel/Dcv7cfVDQi0/ (fearvisionofficiel, 2026-09
 
 ## OPENING STATE
 
-The rider stands barefoot on the glass floor of the CN Tower observation deck in Toronto at blue-hour dusk. Her two bare feet and short black glossy wet-look shorts fill the bottom third of the frame. Beneath the glass, straight down through it, the city is already visible: a dense grid of lit streets and small towers, and beyond the city Lake Ontario and the long dark spit of the Toronto Islands reaching out into the water. The sky is deep blue, the sun is gone, and a band of thin high cloud lies across a bowed fisheye horizon. Directly ahead on the deck, waiting, is the open mouth of a fully transparent acrylic slide, its two upswept edges outlined by a continuous blood red electroluminescent strip. A second red LED strip runs along the deck edge in front of her feet. The red light is the only warm colour in an otherwise blue frame.
+The rider stands barefoot on the glass floor of the CN Tower observation deck in Toronto at blue-hour dusk. Her two bare feet and short black glossy wet-look shorts fill the bottom third of the frame. Beneath the glass, straight down through it, the city is already visible: a dense grid of lit streets and small towers, and beyond the city Lake Ontario and the long dark spit of the Toronto Islands reaching out into the water. The sky is deep blue, the sun is gone, and a band of thin high cloud lies across a bowed fisheye horizon. Directly ahead on the deck, waiting, is the open mouth of a fully transparent acrylic slide, its two upswept edges outlined by a continuous hot red-orange electroluminescent strip. A second red LED strip runs along the deck edge in front of her feet. The red light is the only warm colour in an otherwise blue frame.
 
 ## BEATS
 

@@ -4,7 +4,7 @@ SLUG: istanbul-camlica-amber-sicak
 DESTINATION: Istanbul
 LANDMARK: the Camlica Tower
 DURATION: 15
-NEON: champagne gold
+NEON: warm amber-gold
 PALET: sicak
 TITLE_KEYWORD: Camlica
 LEGWEAR: black glossy wet-look shorts cut at mid-thigh, bare legs below them
@@ -13,7 +13,7 @@ SOURCE: fearvisionofficiel formatinin AImagine uyarlamasi; palet A/B'sinin SICAK
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a glass observation deck near the top of the Camlica Tower in Istanbul, on a clear warm night. Her two bare feet and short black glossy wet-look shorts fill the bottom third of the frame, her skin lit warm amber from below. Beneath the glass, straight down through it, the city is already visible: dense hills of low buildings glowing with warm street light, and beyond them the Bosphorus lying black and wide, crossed by a lit suspension bridge whose cables burn warm orange. Ferry lights crawl across the water as single points. Lit mosque domes and thin minarets stand out of the amber haze on both shores. Far ahead on the deck sits the open mouth of a fully transparent acrylic slide, its two upswept edges outlined by a continuous champagne gold electroluminescent strip that matches the colour of the city below. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a glass observation deck near the top of the Camlica Tower in Istanbul, on a clear warm night. Her two bare feet and short black glossy wet-look shorts fill the bottom third of the frame, her skin lit warm amber from below. Beneath the glass, straight down through it, the city is already visible: dense hills of low buildings glowing with warm street light, and beyond them the Bosphorus lying black and wide, crossed by a lit suspension bridge whose cables burn warm orange. Ferry lights crawl across the water as single points. Lit mosque domes and thin minarets stand out of the amber haze on both shores. Far ahead on the deck sits the open mouth of a fully transparent acrylic slide, its two upswept edges outlined by a continuous warm amber-gold electroluminescent strip that matches the colour of the city below. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

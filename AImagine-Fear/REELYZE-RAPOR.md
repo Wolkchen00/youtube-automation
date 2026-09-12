@@ -197,3 +197,142 @@ Uc sonuctan biri cikar:
 Kanon (`canon/MASTER-BLOCK.md:12`) ile kodun (`tools/gunluk.py:32`) ve kapinin
 (`tools/gunluk.py:99`) uc ayri sey soylemesi **her durumda hatadir**.
 Kanarya hangi sonucu verirse versin, uc kaynagin tek gercege hizalanmasi gerekiyor.
+
+---
+
+# 12 Eylul 2026 , "son iki video izlenmedi" incelemesi
+
+Soru: aimagine kanalinda 06-09 Eylul videolari 1.4k-3.2k bandina cikti,
+10 ve 11 Eylul videolari 100 izlenmeyi bile gecmedi. YouTube neden boyle yapar?
+
+Yontem: `/reel-analiz`. Data API v3 meta verisi, `analytics_data/daily/`
+snapshot arsivinden izlenme egrisi, `yt-dlp` + `ffmpeg` ile dosya olcumu,
+`/shorts/` uc noktasindan siniflandirma testi. Retention ve trafik kaynagi
+OLCULEMEDI: depoda YouTube Analytics OAuth belirteci yok, sadece genel
+Data API anahtari var.
+
+## 1. En onemli bulgu: iki videodan biri icin karar vermek icin COK ERKEN
+
+Snapshot arsivi yasa gore eslestirilince tablo su:
+
+| Video | Landmark | ~18-24 saatte | Sonraki | Bugun |
+|---|---|---|---|---|
+| Rcn6pC6HfVs 06 Eyl | Burj Khalifa | **1** | 44s=1.568 | 3.221 |
+| uU3YkRI7fYo 07 Eyl | CN Tower | 1.331 | 42s=1.387 | 1.412 |
+| qFYCRHr7604 08 Eyl | Eiffel | 1.427 | 43s=1.491 | 1.741 |
+| w3KuWLDTCpQ 09 Eyl | Oriental Pearl | 1.773 | 48s=2.640 | 2.652 |
+| MUtJyJ-jOKg 10 Eyl | STRAT (3. kez) | 15 | 47s=17 | 17 |
+| OLZ4_AwFBE4 11 Eyl | Camlica | **4-6 (21s)** | , | , |
+
+Kanalin en buyuk videosu Burj Khalifa **21. saatte 1 izlenmedeydi.**
+44. saatte 1.568 oldu. Yani bu kanalda gec atesleme gercek bir desen.
+
+Sonuc ikiye ayrilir:
+- **MUtJyJ-jOKg (10 Eyl) gercekten tutmadi.** 47 saatlik, Burj'un patladigi
+  44. saat esigini gecti, hicbir sey olmadi. Bu bir kayip.
+- **OLZ4_AwFBE4 (11 Eyl) icin "tutmadi" demek veriye dayanmiyor.** 21 saatlik
+  ve 4-6 izlenmede. Burj ayni yasta 1 izlenmedeydi. Karar ani 13 Eylul
+  ~15:00 UTC, yani 44. saat. O ana kadar olu ilan etmek yanlis olur.
+  Dengeli soylemek gerekirse: 4 kazanandan 3'u 18. saatte zaten 1.300'un
+  ustundeydi, o yuzden ihtimal zayif. Ama kapali degil.
+
+## 2. YouTube ceza kesmedi , bu olculdu
+
+- 10 videonun tamami `public` + `processed`, `madeForKids: false`,
+  bolge kisiti yok, `rejectionReason` yok.
+- 10 videonun tamami `/shorts/<id>` adresinde 200 donuyor, yani hepsi
+  Shorts olarak siniflanmis. Yanlis siniflandirma yok.
+- Aboneler olu gunlerde de artti: 98 (03 Eyl) -> 107 (11 Eyl).
+- 10 Eylul'de MUtJyJ 15 izlenmede kalirken **ayni gun** w3KuWLDTCpQ
+  1.773'ten 2.640'a cikti. Kanal seviyesinde bir kisitlama bunu yapamaz.
+
+## 3. Dagilim iki tepeli, yani bu bir gecti/kaldi kapisi
+
+Son 10 videonun izlenmeleri: 4, 9, 17, 17, 19, 40, 52 ve 1.412, 1.741,
+2.640, 3.221. **52 ile 1.412 arasinda tek bir video yok.**
+
+Izleyici begenisi kademeli bir egri uretir. Iki tepeli dagilim kademeli
+degildir. Bu, her Short'un ayri ayri kucuk bir test havuzunda denendigini
+ve ya gectigini ya kaldigini gosterir. 107 abonelik kanalda kendi
+seyircisi yok, yani her video sifirdan teste giriyor.
+
+Dogru soru "YouTube neden bastirdi" degil. Dogru soru "bu video kaydirma
+testini neden gecemedi".
+
+## 4. Teknik hata DEGIL , kaybeden ile kazanan dosya ayni
+
+MUtJyJ-jOKg (17 izlenme) ile w3KuWLDTCpQ (2.652 izlenme) olcumleri:
+
+| | MUtJyJ (kaybetti) | w3KuWLDTCpQ (kazandi) |
+|---|---|---|
+| cozunurluk | 720x1280 | 720x1280 |
+| fps / sure | 24 / 15,12 sn | 24 / 15,10 sn |
+| kesme | 0 | 0 |
+| LUFS | **-16,5** | **-16,5** |
+| true peak | -5,0 | -3,5 |
+
+Ayni spesifikasyon, 155 kat fark. Uretim kalitesini duzeltmek bu farki
+aciklamaz ve kapatmaz.
+
+## 5. Palet hipotezi CURUDU
+
+`references/kanallarimiz.md` "doygun neon palet fotogercekcigi bozuyor,
+o yuzden tutmuyor" diyordu. Kare olcumu bunu desteklemiyor:
+
+- w3KuWLDTCpQ Oriental Pearl: **parlak yesil neon**, 2.652 izlenme
+- Rcn6pC6HfVs Burj Khalifa: amber, 3.221 izlenme
+- MUtJyJ-jOKg STRAT: camgobegi neon, 17 izlenme
+
+Neon hem en cok hem en az izlenen tarafta var. Palet ayirt etmiyor.
+Kanca kareleri zaten neredeyse birebir ayni kompozisyonda: gece sehri,
+parlayan kaydirak agzi, alt kadrajda ciplak ayaklar.
+
+## 6. Geriye kalan tek tutarli fark: LANDMARK
+
+06 Eylul'den sonraki "sicak" pencerede:
+
+| Tarih | Landmark | Taninirlik | Sonuc |
+|---|---|---|---|
+| 06 Eyl | Burj Khalifa | kuresel ikon | 3.221 |
+| 07 Eyl | CN Tower | kuresel ikon | 1.412 |
+| 08 Eyl | Eiffel | kuresel ikon | 1.741 |
+| 09 Eyl | Oriental Pearl | kuresel ikon | 2.652 |
+| 10 Eyl | STRAT Tower, **3. kez** | niche | 17 |
+| 11 Eyl | Camlica Tower | niche | 4-6, beklemede |
+
+STRAT Tower kanalda uc kez kullanildi: 52, 17, 17. Uc uc kaybetti.
+n=6, bu bir hipotez, kanit degil. Ama olculebilir tek ayirici fark bu.
+
+## 7. Uyari: 11 Eylul videosunda ayni anda uc sey degisti
+
+OLZ4_AwFBE4, kazananlardan uc noktada ayriliyor:
+
+1. **1080x1920** (digerlerinin hepsi 720x1280). Sebep `4fab199`, profil
+   varsayilani 1080p yapildi. `b9ecc55` bunu 11 Eyl 13:51 PDT'de geri aldi,
+   video 12:23 PDT'de yayinlanmisti, yani 1080p kalan **tek** video bu.
+2. **Yeni baslik semasi** (`17227d8`): uzun betimleyici cumle yerine
+   "Camlica Tower 369m drop #shorts".
+3. **2 kesme ve LUFS -14,0 / TP -1,1** (kazananlar 0 kesme, ~-15,5 / -3,5).
+
+Ustune landmark da niche. Dort degisken ayni bolumde birden degisti.
+Bu video ne yaparsa yapsin **hangi degiskenin sebep oldugu ogrenilemez.**
+
+`17227d8` "gercek YouTube etiketleri" diyor ama API'de 10 videonun
+hicbirinde `snippet.tags` yok. Etiketler yayina gitmemis. Yukleme
+Upload-Post uzerinden yapiliyor, etiket alani orada dusuyor olabilir.
+
+## 8. Oneri
+
+1. **13 Eylul 44. saatte OLZ4'u tekrar olc.** Karar oncesi baska is yapma.
+2. **Bir sonraki dort bolumu kuresel ikonlara ayir** (Sydney Opera, Big Ben,
+   Petronas, Christ the Redeemer gibi). STRAT Tower'i rotasyondan cikar.
+3. **Tek seferde tek degisken degistir.** 720p'ye donuldu, baslik semasi
+   yeni. Baslik semasini da geri al, once landmark hipotezini test et.
+4. Etiketlerin neden yayina gitmedigini Upload-Post tarafinda kontrol et.
+
+## Olculemeyenler , durust liste
+- Retention, ortalama izlenme yuzdesi, kaydirma orani: OAuth yok.
+- Gosterim sayisi ve tiklama orani: Analytics API gerekiyor.
+- Trafik kaynagi (Shorts akisi mi, arama mi): Analytics API gerekiyor.
+Bu uc olcu olmadan "kaydirma testini gecemedi" mekanizmasi cikarimdir,
+dogrudan olcum degildir. Dayanagi 3. maddedeki iki tepeli dagilimdir.

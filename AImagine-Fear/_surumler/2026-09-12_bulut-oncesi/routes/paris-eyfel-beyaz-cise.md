@@ -4,7 +4,7 @@ SLUG: paris-eyfel-beyaz-cise
 DESTINATION: Paris
 LANDMARK: the Eiffel Tower
 DURATION: 15
-NEON: ice white
+NEON: cold white-blue
 PALET: neon
 TITLE_KEYWORD: Eiffel
 LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
@@ -13,17 +13,17 @@ SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Eiffel Tower in Paris, at night. The weather is fine night drizzle, every street lamp wearing a halo. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Paris, seen from vertically above: the pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ice white electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Eiffel Tower in Paris, at night. The weather is fine night drizzle, every street lamp wearing a halo. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Paris, seen from vertically above: the pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous cold white-blue electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 
-[0.0-2.0] The rider stands still at the edge and the camera on her chest holds the drop dead centre. Her toes flex against the wet black deck. The transparent slide mouth waits ahead of her, its ice white rims the only saturated colour in the frame. The whole of Paris lies directly beneath her feet, the pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes, and nothing separates her from it. She does not move yet. The stillness is the fear.
+[0.0-2.0] The rider stands still at the edge and the camera on her chest holds the drop dead centre. Her toes flex against the wet black deck. The transparent slide mouth waits ahead of her, its cold white-blue rims the only saturated colour in the frame. The whole of Paris lies directly beneath her feet, the pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes, and nothing separates her from it. She does not move yet. The stillness is the fear.
 
 [2.0-4.0] She edges forward toward the mouth in short unsteady steps. The mouth grows continuously and never jumps in size: first a small outline, then a pair of upswept transparent rims taller than her shins, then a wide open throat. Behind it Paris keeps its exact place in the frame, sliding down slightly as she closes on the edge. Her legs shake visibly.
 
-[4.0-6.0] She sits and drops into the throat of the slide. The deck leaves the frame entirely and does not come back. The two ice white rims snap into hard converging perspective, running away from her hips to a vanishing point far below, and the solid clear floor between them is readable the whole way down. Through it there is nothing but open air and the lights of Paris directly under her. The first steep pitch takes her and the horizon is thrown up and out of the top of the frame.
+[4.0-6.0] She sits and drops into the throat of the slide. The deck leaves the frame entirely and does not come back. The two cold white-blue rims snap into hard converging perspective, running away from her hips to a vanishing point far below, and the solid clear floor between them is readable the whole way down. Through it there is nothing but open air and the lights of Paris directly under her. The first steep pitch takes her and the horizon is thrown up and out of the top of the frame.
 
-[6.0-8.0] The slide bottoms out and a wall of white water bursts up around her hips and across the lens. Spray floods the frame for a moment, lit ice white from beneath by the rims, then clears in streaks. Her legs are soaked and both feet stay separately visible through it. The camera pumps its exposure as the frame swings from dark sky to bright water and back. Speed becomes obvious: the two rims are now streaming past the frame edges.
+[6.0-8.0] The slide bottoms out and a wall of white water bursts up around her hips and across the lens. Spray floods the frame for a moment, lit cold white-blue from beneath by the rims, then clears in streaks. Her legs are soaked and both feet stay separately visible through it. The camera pumps its exposure as the frame swings from dark sky to bright water and back. Speed becomes obvious: the two rims are now streaming past the frame edges.
 
 [8.0-10.0] The slide banks hard and the entire city rotates around her legs while her legs stay in the same place in the frame. The pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes tilts up one side of the frame and the night sky fills the other. Ahead and already visible, the slide runs into one long continuous banked curve carried on thin support struts, growing as she closes on it.
 

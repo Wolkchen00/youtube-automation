@@ -12,8 +12,13 @@ name: Fear Slide Hazir Video
 # Yeni bir hazir video koymak istersen hazir/ icerigini degistirmen yeterli.
 
 on:
-  schedule:
-    - cron: '26 0 * * *'   # 00:26 UTC = 17:26 Los Angeles PDT
+  # ===== DONDURULDU 2026-09-12 (Ihsan karari) =====
+  # Sebep: elde iki hazir deneme videosu var, once onlarin olcumu aliniyor.
+  # Otomasyon bu surecte YENI VIDEO URETMEYECEK ve YAYINLAMAYACAK.
+  # Geri acmak: asagidaki 'schedule:' ve 'cron:' satirlarinin basindaki
+  # '# ' isaretini kaldir, baska hicbir sey degistirme.
+  # schedule:
+  #   - cron: '26 0 * * *'   # 00:26 UTC = 17:26 Los Angeles PDT
   workflow_dispatch:
 
 concurrency:

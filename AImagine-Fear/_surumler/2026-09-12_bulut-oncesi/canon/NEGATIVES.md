@@ -10,7 +10,7 @@ NO face. NO head. NO hair. NO hands. NO arms. NO shoulders. NO torso. NO selfie 
 NO second rider. NO other people anywhere in the frame.
 NO third-person view. NO drone view. NO aerial camera. NO exterior view of the slide. NO shot showing the camera or its mount.
 NO pan, NO tilt, NO zoom, NO dolly, NO orbit, NO gimbal smoothing, NO cinematic stabilisation, NO camera that moves independently of the rider's body.
-NO opaque slide. NO solid floor under the rider. NO enclosed dark tunnel. NO passage that removes the city for longer than two seconds: inside any cloud the slide floor stays transparent and the city glow stays readable through it. NO glowing line that leaves the slide surface.
+NO opaque slide. NO solid floor under the rider. NO enclosed dark tunnel that hides the city. NO glowing line that leaves the slide surface.
 NO slow motion. NO speed ramp. NO time-lapse. NO frozen moment. NO bullet time.
 NO on-screen text. NO caption. NO watermark. NO logo. NO UI. NO timestamp. NO progress bar.
 NO daylight with the sun high overhead. NO flat midday lighting.

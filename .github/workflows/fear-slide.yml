@@ -16,8 +16,13 @@ name: Fear Slide Daily
 # kie-uretim concurrency grubu hatlari serilestirir (Kie kredi guvenligi).
 
 on:
-  schedule:
-    - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
+  # ===== DONDURULDU 2026-09-12 (Ihsan karari) =====
+  # Sebep: elde iki hazir deneme videosu var, once onlarin olcumu aliniyor.
+  # Otomasyon bu surecte YENI VIDEO URETMEYECEK ve YAYINLAMAYACAK.
+  # Geri acmak: asagidaki 'schedule:' ve 'cron:' satirlarinin basindaki
+  # '# ' isaretini kaldir, baska hicbir sey degistirme.
+  # schedule:
+  #   - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
     # KREDI TELAFISI (2026-09-11). Kie otomatik yuklemesi bakiye 1500'un altina
     # dusunce tetikleniyor, 1080p is ~1530 kredi (varsayilan 11 Eylul'den beri
     # yine 720p, 615 kredi, yani bu olu bolge artik yalniz --profil 1080p'de
@@ -26,7 +31,7 @@ on:
     # Aradaki saatlerde baska kanallarin harcamasi yuklemeyi tetikler; bu kosu
     # yalniz damga BUGUNE aitse ve bugun yayin yoksa uretir. Satiri degistirirsen
     # asagidaki "Telafi kapisi" karsilastirmasini da degistir.
-    - cron: '30 21 * * *'   # 21:30 UTC = 14:30 PDT; GitHub gecikmesiyle genelde aksamustu
+  #   - cron: '30 21 * * *'   # 21:30 UTC = 14:30 PDT; GitHub gecikmesiyle genelde aksamustu
   workflow_dispatch:
     inputs:
       sehir:

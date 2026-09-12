@@ -3,10 +3,6 @@ Bu dosya sadece sablondur. build.py alt cizgi ile baslayan dosyalari rota saymaz
 Yeni sehir eklemek icin bu dosyayi <sehir-renk-hava>.md adiyla kopyala.
 Butun rota metinleri INGILIZCE yazilir. Basliklar da Ingilizce kalir.
 BEATS 0.0'dan DURATION'a bosluksuz ve cakismasiz gitmeli, en az 5 aralik olmali.
-NEON rengi her rotada FARKLI olmali, paleti koyudan parlaga yay.
-2026-09-12 itibariyle kullanimda olanlar (yeni rota bunlardan birini SECMEZ):
-ember orange, champagne gold, hot magenta-pink, ice white, acid green,
-electric violet, blood red, electric cyan-blue.
 OPENING STATE ve END STATE metinlerinde "frame one" ya da "final frame" YAZMA;
 uretici cerceveyi kendi ekler.
 -->
