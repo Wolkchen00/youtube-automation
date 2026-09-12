@@ -1,0 +1,23 @@
+{
+  "slug": "one-variable-b",
+  "base_title": "Galactic Experiments",
+  "logline": "Bake-off varyanti B: ayni deney, iki cekim, olcek sicramasi kesmesi ve tek ses olarak muzik.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #space #physics #earth #simulation",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "draft",
+  "priority": 999,
+  "total_parts": 1,
+  "next_part": 1,
+  "kurulum_notu": "12 Eylul 2026, Ihsan direktifi: 'iki konsept icin de 1er video uret'. Bu seri SADECE karsilastirma icindir, yayin hatti YOK ve olmayacak: kendi workflow'u yoktur, cron'u yoktur, status kalici olarak 'draft'tir. A varyanti = galactic_experience/one-variable (tek 8 sn plan, kesme yok, motorun native ortam sesi, muzik yok). B varyanti = burasi (2 x 4 sn, tek sert kesme, kesme bir OLCEK SICRAMASIDIR, native ses kapali, tek ses Suno muzigi). Iki varyantta da KONU AYNI (Saturn'un halkalari Dunya'da) ki karsilastirma formati olcsun, konuyu degil. Kazanan secildikten sonra bu klasor silinir ya da kazanan A'ya tasinir.",
+  "auto_replenish": {
+    "enabled": false
+  }
+}

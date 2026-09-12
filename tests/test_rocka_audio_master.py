@@ -132,6 +132,11 @@ class InstalledBibleOptInTests(unittest.TestCase):
             # DEGIL: kanalin eski formati tam da -22 LUFS teslim ettigi icin oldu
             # (bkz. galactic_experience/KONSEPT.md v2.0 bolum 1.1).
             (REPO_ROOT / "galactic_experience" / "one-variable" / "bible.json", -14),
+            # one-variable-b GECICI karsilastirma varyanti (12 Eylul 2026, Ihsan
+            # direktifi "iki konsept icin de 1er video uret"). A ile ayni -14 LUFS
+            # tasimasi SART, yoksa karsilastirma sesi olcer, formati degil.
+            # Kazanan secilince bu klasor ve bu satir birlikte silinir.
+            (REPO_ROOT / "galactic_experience" / "one-variable-b" / "bible.json", -14),
         ]
         self.assertCountEqual(found, expected)
 

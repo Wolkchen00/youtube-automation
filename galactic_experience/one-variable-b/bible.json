@@ -1,0 +1,39 @@
+{
+  "series": {
+    "slug": "one-variable-b",
+    "title": "One Variable (B, muzikli kesme varyanti)",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "state_machine_version": 2,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0,
+    "native_audio": false,
+    "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
+    "block_degraded_publish": true,
+    "duration_band": [
+      7,
+      9
+    ],
+    "hook_teaser": {
+      "enabled": false
+    },
+    "title_card": {
+      "enabled": false
+    },
+    "qc": {
+      "enabled": true,
+      "require_all_shots": true,
+      "min_shots": 2,
+      "notes": "Bake-off variant B. Exactly TWO shots of one real, recognisable place with exactly ONE physical variable changed, joined by a single hard cut that is a SCALE JUMP: shot 2 shows the SAME subject much closer, never a new subject or a new location. Fail the shot if a second variable is altered, if the camera pans, tracks, orbits or follows within a shot, or if the impossible element is not already readable in the very first frame of shot 1. Readable text, captions, subtitles, logos, watermarks and closing cards are automatic failures. Human figures, bodies, panicking crowds and close-ups of inhabited buildings being destroyed are forbidden: this channel shows physics and scale, not casualties. The geography must stay a believable version of the real place named in the plan; invented place names are a failure. Record any of these under issues.",
+      "api_fail_open": true
+    }
+  },
+  "art_style": "Photoreal orbital or high-aerial documentary footage composed for vertical 9:16 at 24 fps. Preserve the named site's real coastlines, relief, rivers, ice, and city-light patterns at geographically credible scale; atmospheric effects follow the episode's altered variable. Render the single physical change with coherent materials, gravity, illumination, motion, and cause-and-effect. Natural motivated light, restrained documentary colour, deep space blacks, fine terrain texture, stable exposure, and legible scale cues create a real satellite, high-altitude aircraft, or spacecraft-window image. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Every frame maintains one continuous viewpoint and scene. Wide uninhabited geography fills the image, with clean natural surfaces and a final active physical state suited to a seamless loop.",
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

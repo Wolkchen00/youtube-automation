@@ -1,0 +1,27 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Saturn's Rings Around Earth"
+  },
+  "synopsis": "Bake-off B: identical experiment to variant A, told in two 4-second shots joined by one hard scale-jump cut, with a generated score as the only sound.",
+  "narration": "",
+  "caption": "The experiment: place Saturn's ring system around Earth.\n\nOne variable changed. Earth receives the same broad disk of orbiting ice and rock while its size, orbit, and sunlight stay fixed.\n\nReal physics would make the rings brightest across equatorial skies and cast seasonal bands of shadow across the atmosphere. Their particles would orbit at different speeds, collide, spread, and clump according to Earth's gravity and the Moon's pull.\n\nA Saturn-like system could not remain stable here. Earth's different Roche limit and nearby Moon would reshape it into a changing disk rather than preserve Saturn's ordered rings.\n\nThis is a simulation, not real footage. Would you trade today's sky for these shadows?",
+  "hashtags": "#Saturn #Earth #RingSystem #Orbit #Astronomy #Physics #SpaceSimulation #Shorts",
+  "music": "Cinematic orbital ambient score for a single 8-second piece. Deep sustained string drone and a low synth pad open immediately with full atmosphere from the very first second, joined by sparse glassy bell tones. At the four-second mark the arrangement opens hard: brass and low strings enter together with a single deep timpani-like impact and the whole bed lifts several decibels into a wide sustained swell that holds to the end. Instrumental only, no vocals, no spoken words, no drum groove. Awe and scale, cold and vast, in the register of orchestral space documentary scoring. It ends mid-phrase so the loop is seamless.",
+  "hook_shot": 2,
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "One continuous 4-second take at 24 fps from a physically fixed orbital mount, WIDE. Pacific-centered Earth sits in the lower two thirds with Japan, the Philippine island arc, eastern Australia, Hawaii, and the west coasts of the Americas fixing the real geography. Frame one shows Saturn's complete ring system already spanning the planet at full width: layered cream, ochre and ice-blue particle bands, the Cassini Division, a bright near arc and a razor-thin far arc crossing Earth's limb against black star-flecked space. Sunlight from upper right lays several crisp parallel ring shadows across the white cloud deck. Camera position, orientation, focal length, focus and exposure stay identical for all four seconds while orbital motion carries those shadow bands eastward over a spiral typhoon and darkens its eye wall band by band. The coastlines remain pinned to identical pixels throughout.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "One continuous 4-second take at 24 fps from a physically fixed orbital mount, MUCH CLOSER on the SAME rings. Frame one is already deep inside the ring plane: individual ice and rock particles the size of houses and buses drift in dense parallel lanes that fill the vertical frame, their surfaces frosted white and dusty ochre, edges catching hard sunlight from upper right and throwing long shadows onto the lane behind them. Earth's blue limb and the white Pacific cloud deck curve across the lower third far below, small and distant now, with the same coastlines readable at reduced scale. Camera position, orientation, focal length, focus and exposure stay identical for all four seconds while the particle lanes stream steadily past and collision sparks of fine ice dust bloom between the larger bodies.",
+      "seed": null
+    }
+  ],
+  "_not": "Karsilastirma bolumu. A varyanti = galactic_experience/one-variable/plans/part01.json, ayni konu, tek 8 sn plan, kesme yok, native ortam sesi. Fark SADECE format ve ses."
+}
