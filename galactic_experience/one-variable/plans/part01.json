@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Saturn's Rings Around Earth"
+  },
+  "synopsis": "Saturn's full ring system is placed around Earth and the ring shadow sweeps across the Pacific cloud deck in one locked orbital shot.",
+  "family": "yörünge deneyi",
+  "seed_id": 1,
+  "narration": "",
+  "caption": "The experiment: give Earth Saturn's rings.\n\nOne variable changed. Nothing else. Same planet, same orbit, same Sun, with roughly 280,000 kilometres of ring material wrapped around the equator.\n\nReal physics answers immediately. The rings would cast a hard shadow that sweeps the surface, and winter in one hemisphere would fall under a band of permanent shade while the other side burns. From the ground they would read as a bright arch across the sky, edge-on and invisible at the equator.\n\nIt cannot happen. Earth's Roche limit sits far too close, and any ring this wide would grind itself into the atmosphere.\n\nThis is a simulation, not footage. Would you want the shadow overhead?",
+  "hashtags": "#Saturn #Earth #RingSystem #Orbit #Astronomy #Physics #SpaceSimulation #Shorts",
+  "hook_shot": 1,
+  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "ONE locked, unbroken 8-second shot seen from orbit or from high altitude. The camera position and angle never change: no pan, tilt, orbit, tracking or handheld drift. The real place and the single changed variable are BOTH fully readable in the very first frame; the shot then lets the consequence develop and land inside the same take.\n\nA fixed orbital vantage high above the Pacific, Earth's curved limb crossing the lower third of the vertical frame with the thin blue atmospheric line above it and black star-flecked space beyond. Saturn's complete ring system already encircles the planet in the very first frame: pale ice-and-rock bands in tan, cream and grey, the Cassini gap clearly cut through them, the rings passing edge-on across the far limb and arching wide and bright on the near side. Sunlight comes from the upper right. Across the eight seconds the hard-edged shadow of the rings creeps over the white cyclonic cloud deck below, turning ocean blue to deep slate in broad parallel stripes, while fine ring particles glitter as they catch the light. The camera never moves; only the shadow advances. Natural sound only: the near-silent hiss of vacuum and a faint low-frequency hull hum that thins to almost nothing around the fourth second, then swells into a deep sustained resonance as the shadow bands lock across the ocean.",
+      "seed": null
+    }
+  ]
+}

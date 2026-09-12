@@ -1,0 +1,167 @@
+{
+  "slug": "one-variable",
+  "base_title": "Galactic Experiments",
+  "logline": "One real place, one physical variable changed, one unbroken 8-second shot from above.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #space #physics #earth #simulation",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "draft",
+  "priority": 999,
+  "total_parts": 5,
+  "next_part": 1,
+  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "kurulum_notu": "12 Eylul 2026'da kuruldu, event-horizon'un yerine. status='draft' ve cron YORUMDA: Ihsan KONSEPT.md v2.0'i onaylayana kadar hicbir sey uretilmez. Acma sirasi: (1) KONSEPT.md statusunu ONAYLANDI yap ve doctrine_sha256'yi YENILE, (2) buradaki status'u 'active' yap, (3) .github/workflows/one-variable.yml icindeki schedule blogunun yorumunu kaldir, (4) filo.json cron listesine kaydi ekle.",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 1,
+    "shot_seconds": "8",
+    "caption": true,
+    "music_prompt": false,
+    "credit_hard_cap": true,
+    "title_style": "the experiment itself, stated plainly, in the pattern '<familiar thing> + <the single changed variable>' (e.g. 'Saturn's Rings Around Earth', 'The Pacific Ocean, Drained', 'The Moon at Space Station Altitude'). Max 70 characters. The SUBJECT must be a thing the reader can picture instantly. No clickbait punctuation, no hashtags, no surrounding quotes, no question marks, no first-person claim of having filmed anything.",
+    "caption_style": "\"caption\" = the post's WRITTEN STORY, 70-140 words of flowing English prose; separate paragraphs with \\n\\n. Write it in this exact order, one short paragraph each: (1) name the experiment in one line; (2) state the SINGLE variable that was changed and nothing else; (3) say plainly what real physics does in response, in concrete terms a non-scientist can picture; (4) say why this cannot actually happen, or what it would really take; (5) close with ONE question to the viewer. The caption MUST state in its own words that this is a simulation, never real footage. Every number you write must be real and checkable; when you are unsure of a number, leave it out entirely rather than estimate. Never claim anyone filmed or captured this.\n- HASHTAGS: \"hashtags\" = 6-9 space-separated tags: the real place or body involved, the physical quantity that was changed, plus 3-4 broad space and physics tags. Each tag starts with # and contains no spaces.",
+    "families": [
+      "yörünge deneyi",
+      "ölçek deneyi",
+      "su deneyi",
+      "atmosfer deneyi",
+      "yerçekimi deneyi",
+      "ışık ve zaman deneyi"
+    ],
+    "shot_plan": [
+      "ONE locked, unbroken 8-second shot seen from orbit or from high altitude. The camera position and angle never change: no pan, tilt, orbit, tracking or handheld drift. The real place and the single changed variable are BOTH fully readable in the very first frame; the shot then lets the consequence develop and land inside the same take."
+    ],
+    "brief": "SONSUZ TEK-DEĞİŞKEN DENEY ANTOLOJİSİ. Her bölüm GERÇEK ve TANINABİLİR bir yerde (gerçek kıyı, gerçek dağ, gerçek çöl, gerçek şehir silueti, gerçek gezegen) TEK BİR fiziksel değişkeni değiştirir ve sonucu yukarıdan, TEK KESİNTİSİZ 8 SANİYELİK PLANDA gösterir.\n\nDEĞİŞMEZ KURALLAR:\n(1) TEK DEĞİŞKEN. Bölümde değişen tam olarak bir şey vardır. İki şey değişiyorsa bölüm yanlıştır. Değişkeni synopsis'te tek cümleyle adla.\n(2) TEK PLAN. Kesme, geçiş, sahne sıfırlaması, ikinci çekim YOK. Sekiz saniyenin tamamı tek kesintisiz andır.\n(3) KAMERA KİLİTLİ. Kamera durur, olay kadrajın içinde gelişir. Kamera olayı takip etmez, döndürmez, yakınlaşmaz.\n(4) İLK KARE HER ŞEYİ SÖYLER. Tanıdık yer ve imkânsız müdahale ilk karede aynı anda okunur. 'Yavaşça belirir', 'ufukta görünmeye başlar', 'sonra ortaya çıkar' gibi kurulum ifadeleri YASAK; sekiz saniyede kurulum lüksü yoktur. Müdahale ilk karede zaten en uç halindedir, sonra SONUCU gelişir.\n(5) GERÇEK COĞRAFYA. Yer gerçek ve tanınabilir olmalı; uydurma yer adı kullanma. Ölçek referansı buradan gelir.\n(6) İNSAN YOK, CAN KAYBI YOK. İnsan figürü, kalabalık, ceset, panik, meskûn binanın yıkılışının yakın planı YASAK. Bu kanal fizik ve ölçek gösterir, felaket pornosu yapmaz. Ölçek zaten yeterince etkileyicidir.\n(7) SES PLANIN İÇİNDEDİR. Anlatım, konuşma, müzik YOK. Çekimin kendi doğal sesi tek sestir; prompt sesin ne olduğunu da tarif etsin (suyun uğultusu, buzun çatlaması, rüzgârın basıncı, derin bir gümbürtü). ÖZELLİKLE İSTENEN ŞEKİL: sonucun gerçekleştiği ana kadar ses SAKİNLEŞSİN, sonra ansızın ve tok biçimde YÜKSELSİN. Ölçtüğümüz en iyi örnekte bu iniş çıkış 16 dB idi.\n(8) EKRANDA YAZI YOK. Künye, altyazı, logo, filigran, kapanış kartı, imza yok.\n(9) CAPTION HİKÂYEYİ TAŞIR. 70-140 kelime: deneyin tanımı, değiştirilen tek değişken, gerçek fiziğin ne dediği, gerçekte neden olamayacağı, izleyiciye TEK soru. Caption bunun bir SİMÜLASYON olduğunu açıkça yazar. Emin olmadığın sayıyı hiç yazma; yazdığın her sayı doğru olsun.\n(10) 'Bunu ben çektim' tipi birinci şahıs gerçeklik iddiası YASAK.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "Saturn's ring system placed around Earth, seen from orbit above the Pacific with the ring shadow falling across the cloud deck.",
+        "family": "yörünge deneyi"
+      },
+      {
+        "id": 2,
+        "topic": "The Moon moved to the International Space Station's altitude, 400 km up, filling the sky above the Atlantic.",
+        "family": "yörünge deneyi"
+      },
+      {
+        "id": 3,
+        "topic": "Jupiter put where the Moon is, rising over the Himalayan ridgeline at true angular size.",
+        "family": "yörünge deneyi"
+      },
+      {
+        "id": 4,
+        "topic": "Earth given a second moon in a closer orbit, both visible at once above the Sahara.",
+        "family": "yörünge deneyi"
+      },
+      {
+        "id": 5,
+        "topic": "Mars's Olympus Mons set down on the Arizona desert beside the Grand Canyon at true scale.",
+        "family": "ölçek deneyi"
+      },
+      {
+        "id": 6,
+        "topic": "The Mariana Trench stood upright next to Mount Everest so both full heights are in one frame.",
+        "family": "ölçek deneyi"
+      },
+      {
+        "id": 7,
+        "topic": "Valles Marineris, the Martian canyon system, cut across the continental United States at true length.",
+        "family": "ölçek deneyi"
+      },
+      {
+        "id": 8,
+        "topic": "All of Earth's water gathered into a single sphere floating beside the planet, showing how small it is.",
+        "family": "ölçek deneyi"
+      },
+      {
+        "id": 9,
+        "topic": "The Pacific Ocean drained away, the bare seafloor and its trenches exposed from orbit.",
+        "family": "su deneyi"
+      },
+      {
+        "id": 10,
+        "topic": "The Mediterranean emptied, the Strait of Gibraltar standing dry between two continents.",
+        "family": "su deneyi"
+      },
+      {
+        "id": 11,
+        "topic": "Antarctica's ice sheet lifted and set down on the Sahara, seen from orbit.",
+        "family": "su deneyi"
+      },
+      {
+        "id": 12,
+        "topic": "Earth's oceans turned to ice from the surface down, the Atlantic locked white from pole to pole.",
+        "family": "su deneyi"
+      },
+      {
+        "id": 13,
+        "topic": "Earth's atmosphere made as dense as Venus's, the surface disappearing under a crushing yellow shell.",
+        "family": "atmosfer deneyi"
+      },
+      {
+        "id": 14,
+        "topic": "Earth's atmosphere removed entirely, the sky above the Alps black at midday with the Sun still burning.",
+        "family": "atmosfer deneyi"
+      },
+      {
+        "id": 15,
+        "topic": "Earth's clouds replaced by Jupiter's banded storm belts, wrapping the planet in ochre and cream.",
+        "family": "atmosfer deneyi"
+      },
+      {
+        "id": 16,
+        "topic": "Titan's orange methane haze wrapped around Earth, the continents dissolving into amber murk.",
+        "family": "atmosfer deneyi"
+      },
+      {
+        "id": 17,
+        "topic": "Earth's gravity doubled, the oceans pulled flat and the atmosphere pressed into a thin bright line.",
+        "family": "yerçekimi deneyi"
+      },
+      {
+        "id": 18,
+        "topic": "Earth's spin increased until the equator can no longer hold its water, the bulge visible from orbit.",
+        "family": "yerçekimi deneyi"
+      },
+      {
+        "id": 19,
+        "topic": "The Moon's tidal pull increased tenfold, a standing wall of water raised along an open coastline.",
+        "family": "yerçekimi deneyi"
+      },
+      {
+        "id": 20,
+        "topic": "Earth's gravity reduced to the Moon's, dust and spray from a coastal cliff hanging far longer than they should.",
+        "family": "yerçekimi deneyi"
+      },
+      {
+        "id": 21,
+        "topic": "The Sun swapped for the red giant it will become, its disc swallowing the sky beyond Earth's limb.",
+        "family": "ışık ve zaman deneyi"
+      },
+      {
+        "id": 22,
+        "topic": "Earth's rotation stopped, the day-night terminator frozen in place across Africa.",
+        "family": "ışık ve zaman deneyi"
+      },
+      {
+        "id": 23,
+        "topic": "Earth tipped to Uranus's 98-degree tilt, the north pole aimed straight at the Sun.",
+        "family": "ışık ve zaman deneyi"
+      },
+      {
+        "id": 24,
+        "topic": "The Sun swapped for Sirius, harder blue-white light and sharper shadows across the Pacific cloud tops.",
+        "family": "ışık ve zaman deneyi"
+      }
+    ]
+  }
+}

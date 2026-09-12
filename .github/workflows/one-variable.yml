@@ -1,0 +1,154 @@
+name: One Variable Daily
+
+# 'ONE VARIABLE' gunluk seridi (galactic kanali, @galacticexperiment-x6l).
+# Dayanak: galactic_experience/KONSEPT.md v2.0. Ihsan karari 2026-09-12: eski
+# 'event-horizon' konsepti rafa kaldirildi (son 50 videonun medyani 127 izlenme),
+# kanal yeni konseptle yaziliyor. Kanal adi ve eski videolar DEGISMEDI.
+#
+# Format, olcumden geliyor (REELYZE-RAPOR.md EK 3): gercek ve taninabilir bir yerde
+# TEK degisken degistirilir ve sonuc TEK KESINTISIZ 8 SANIYELIK PLANDA gosterilir.
+# Anlatim YOK, muzik YOK, ekran yazisi YOK. Motorun kendi native sesi TEK sestir ve
+# -14 LUFS'a masterlanir. Olculen kazanan anatomi: 8 sn tek plan -> 500K/401K/42K
+# begeni; 24 sn 3 kesme -> 8,6K; 48 sn 5 kesme -> 306.
+#
+# Eski format tam da seste oldu: motor 33 bolumde ortam sesini uretti, bible'da
+# native_mix_level yoktu (0,0) ve ses sifirla carpilip atildi, yerine TTS kondu;
+# master_lufs de yoktu, miks -22 LUFS cikti. Bu seride narration alani YOK ve
+# qc.native_audio_review ACIK, yani sessiz teslimat yapisal olarak imkansiz.
+#
+# publish_mode="approval": onay gelmeden hicbir platforma yayin yok.
+# Doktrin kapisi: kosu basinda KONSEPT SHA-256 loglanir, pin/damga eslesmezse fail-closed.
+# kie-uretim concurrency grubu hatlari fiilen serilestirir.
+
+on:
+  # KAPALI. series.json status='draft' ve Ihsan KONSEPT.md v2.0'i henuz onaylamadi.
+  # Acma sirasi series.json icindeki 'kurulum_notu' alaninda yazili.
+  # Acilinca slot 16:30 UTC olacak (galactic kanalinin tarihsel yayin penceresi,
+  # event-horizon'dan bosaldi).
+  # schedule:
+  #   - cron: '30 16 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EPISODE_CREDIT_CAP=900
+          MONTHLY_CREDIT_CAP=60000
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Kosu baslangicini damgala
+        # last_run.json'un outcome'u BU KOSUDA dogrulanmis YouTube yayinina
+        # bakar. Damga olmadan dunku bir yayin kaydi bugunku sessizligi orter.
+        run: echo "KOSU_BASLANGIC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+
+      - name: Onay kuyrugunu isle (Telegram)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        # shell: bash = pipefail. Bu satir olmadan `| tee`
+        # python'un exit kodunu yutuyor ve hata GORUNMUYOR.
+        shell: bash
+        run: python -X utf8 -m series.approver --series one-variable 2>&1 | tee logs/one_variable_approve.log
+
+      - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolum planlari yazar, kredi harcamaz)
+        # shell: bash = pipefail. Bu adim olmadan `| tee` replenish'in
+        # exit 1'ini yutuyordu ve ikmal basarisizligi ASLA gorunmuyordu
+        # (Galactic 2026-09-01..04 arasi dort gun sessiz, dort yesil kosu).
+        # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum
+        # varsa o gunun yayini iptal olmasin; adim yine KIRMIZI gorunur.
+        shell: bash
+        continue-on-error: true
+        run: python -X utf8 -m series.replenish --series one-variable 2>&1 | tee logs/one_variable_replenish.log
+
+      - name: Produce + publish (One Variable siradaki bolum)
+        id: produce
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; tee'nin 0'i python'un exit kodunu maskeliyordu (ROCK 3).
+        shell: bash
+        run: python -X utf8 -m series.series_runner --series one-variable 2>&1 | tee logs/one_variable_run.log
+
+      - name: Uretim sonucunu kaydet
+        if: always()
+        run: |
+          # Sonuc adimin cikis kodundan DEGIL, gercek YouTube yayin
+          # kanitindan turetilir. Eski hali sifir video ureten kosuya
+          # 'success' yaziyordu (event-horizon, 2026-09-03T19:26 , o dersin mirasi).
+          python -X utf8 scripts/kosu_sonucu_yaz.py \
+            --out galactic_experience/one-variable/last_run.json \
+            --run-id "${{ github.run_id }}" \
+            --raw-outcome "${{ steps.produce.outcome }}" \
+            --since "$KOSU_BASLANGIC" \
+            --published-json galactic_experience/one-variable/published.json
+
+      - name: Persist series state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: one-variable durumunu ilerlet [skip ci]" \
+            sentinal_ihsan/ aimagine/ galactic_experience/ shadowedhistory/ \
+            credits_ledger.json galactic_experience/one-variable/last_run.json
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: one-variable-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+      - name: Basarisizlikta Telegram'a haber ver
+        if: failure()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl --silent --max-time 20 --request POST \
+              "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=🚨 One Variable (Galactic Experiment) workflow basarisiz , bu kanala bugun video CIKMAYABILIR: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              >/dev/null 2>&1 || true
+          fi

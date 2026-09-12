@@ -189,8 +189,11 @@ def validate_replenish_config(cfg: dict) -> list[str]:
     fixedframe_keys = (
         "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version"
     )
-    if any(key in cfg for key in fixedframe_keys) and not (2 <= shots <= 6):
-        errors.append("shots 2..6 aralığında tam sayı olmalı")
+    # shots=1 (tek kesintisiz plan) 12 Eylul 2026'da acildi: olcum kesme sayisi
+    # arttikca performansin dustugunu gosterdi (bkz. galactic_experience/KONSEPT.md
+    # v2.0 bolum 1.2). Ust sinir ve diger seriler degismedi.
+    if any(key in cfg for key in fixedframe_keys) and not (1 <= shots <= 6):
+        errors.append("shots 1..6 aralığında tam sayı olmalı")
     if any(key in cfg for key in fixedframe_keys):
         duration = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
         if duration not in VALID_DURATIONS:
@@ -670,7 +673,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                   calibration: Mapping | None = None) -> tuple[str, str]:
     """(contents, system_instruction) döndür. Kurallar salt-görsel, zincir-uyumlu
     (her çekim öncekinin son karesinden morf eder) ve içerik-filtresi-güvenlidir."""
-    shots = max(2, int(cfg.get("shots", DEFAULT_SHOTS)))
+    shots = max(1, int(cfg.get("shots", DEFAULT_SHOTS)))
+    # Tek-plan serisi (shots == 1): kesme yok, zincir yok, "cekimler arasi akis" yok.
+    # Asagidaki TUM tek-plan metinleri bu bayraga bagli; shots >= 2 olan her seri
+    # bugunku prompt'u bayt bayt aynen uretmeye devam eder.
+    single_shot = shots == 1
+    shot_word = "shot" if single_shot else "shots"
     sec = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
     if sec not in VALID_DURATIONS:
         sec = DEFAULT_SHOT_SECONDS
@@ -686,6 +694,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     # title_style: "<metin>" → başlık kuralını değiştirir (ör. haber-kancası cümle başlıklar)
     # shot_refs: true → çekimler bible'daki characters/environment id'lerini kullanabilir
     # caption: true → bölüm başına 'caption' (yazılı hikâye) + 'hashtags' istenir
+    # caption_style: "<metin>" → caption+hashtag kuralını tamamen değiştirir (title_style kalıbı)
     narr_cfg = cfg.get("narration")
     if narr_cfg is True:
         narr_cfg = {}
@@ -724,6 +733,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     humans_silent = humans_mode in ("silent", "silent-masked", "allowed")
     eerie_ok = bool(cfg.get("eerie_ok"))
     title_style = str(cfg.get("title_style") or "").strip()
+    # caption_style: kanal kendi caption kuralini yazabilir. Ayar YOKSA asagidaki
+    # varsayilan (the__footnote tarih formati) bit bit korunur.
+    caption_style = str(cfg.get("caption_style") or "").strip()
     # title_card_style: kanal kunye kuralini kendi yazabilir. title_style ile AYNI
     # kalip (bkz. asagida title_rule). Ayar yoksa varsayilanlar bit bit korunur.
     title_card_style = str(cfg.get("title_card_style") or "").strip()
@@ -745,6 +757,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 f"through SILENT cinematic shots ,  the musical score is the only sound.\n"
                 f"Every episode is a STANDALONE ~{shots * int(sec)}-second piece: {shots} consecutive shots (each ONE\n"
                 f"continuous moment of {sec} seconds). No dialogue, no narration, no lip-sync.")
+        narr_shape = '""'
+    elif single_shot:
+        head = (f"You are the showrunner of an endless, VISUAL-ONLY vertical (9:16) YouTube Shorts series.\n"
+                f"Every episode is ONE single unbroken shot of exactly {sec} seconds ,  no cuts, no second\n"
+                f"shot, no scene change. The whole episode IS that one continuous moment. No dialogue, no\n"
+                f"narration, no characters ,  pure visuals plus the shot's own natural sound.")
         narr_shape = '""'
     else:
         head = (f"You are the showrunner of an endless, VISUAL-ONLY vertical (9:16) YouTube Shorts series.\n"
@@ -843,6 +861,10 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 '\n- HASHTAGS: "hashtags" = 6-9 space-separated tags: the city, the event name, the '
                 '4-digit year, the country or people, plus 2-3 broad history tags. Each tag starts '
                 'with # and contains no spaces.' if want_caption else "")
+    if want_caption and caption_style:
+        # Kanal kendi caption kuralini yazdi: yukaridaki tarih-belgeseli kalibinin
+        # yerine gecer. YALNIZ bu anahtari tasiyan seride; digerleri degismez.
+        cap_rule = "\n- CAPTION: " + caption_style
     if formatted_object:
         refs_rule = (
             '\n- ENVIRONMENT: every shot must set "environment" to the object_card.environment id, '
@@ -900,6 +922,10 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                       f"voice-over. {cont_lead}; the cut "
                       "must not reset the location or open a new scene. The spoken sentence remains audibly "
                       "unbroken across the cut.")
+    elif single_shot:
+        chain_rule = ("- SINGLE SHOT: the episode is ONE continuous take. There is no cut, no transition and no\n"
+                      "  second shot to fall back on, so everything the viewer must see happens inside this one\n"
+                      "  take, in front of a locked camera that never pans, tilts, orbits or follows.")
     else:
         chain_rule = ("- SCENE FLOW: shots are DISTINCT cinematic tableaux joined in post by soft transitions , \n"
                       "  each shot may open a new angle, location or moment of the SAME story; order them so the\n"
@@ -959,6 +985,10 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         "- EPISODE ARC: All shots share ONE fixed composition on the same everyday surface in "
         "the same light; the cuts are jumps in time only."
         if formatted_object else
+        "- EPISODE ARC inside the single take: the first frame already shows the whole premise, the\n"
+        "  middle lets it develop, and the last seconds deliver the payoff. No slow build-up, no\n"
+        "  withheld reveal, no closing gesture ,  there is no time for setup in one shot."
+        if single_shot else
         "- EPISODE ARC: striking opening → build → peak spectacle → gentle, loopable resolve."
     )
     prompts_rule = (
@@ -1031,7 +1061,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
             f' For integer seed_id in episode {start}, choose only from the runtime pool explicitly '
             'labeled for the first episode. Later episodes may use the later-episode pool.'
         )
-    if "hook_shot" in cfg:
+    if single_shot:
+        hook_rule = '- "hook_shot" MUST be 1. The episode has only one shot.'
+    elif "hook_shot" in cfg:
         hook_rule = (
             f'- "hook_shot" MUST be {int(cfg["hook_shot"])}. That shot is the teaser source.'
         )
@@ -1070,7 +1102,7 @@ Return STRICT JSON ONLY, exactly this shape:
 
 RULES:
 - Produce EXACTLY {batch} episodes, numbered {start} to {end}, in this order.{first_family_rule}
-- Each episode has EXACTLY {shots} shots, every shot with "duration": "{sec}".
+- Each episode has EXACTLY {shots} {shot_word}, every shot with "duration": "{sec}".
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is

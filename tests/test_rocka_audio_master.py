@@ -128,6 +128,10 @@ class InstalledBibleOptInTests(unittest.TestCase):
             (REPO_ROOT / "galactic_experience" / "event-horizon" / "bible.json", -14),
             (REPO_ROOT / "shadowedhistory" / "flashpoints" / "bible.json", -14),
             (REPO_ROOT / "sentinal_ihsan" / "wild-encounter" / "bible.json", -14),
+            # one-variable 12 Eylul 2026'da kuruldu. Bu seride mastering opsiyonel
+            # DEGIL: kanalin eski formati tam da -22 LUFS teslim ettigi icin oldu
+            # (bkz. galactic_experience/KONSEPT.md v2.0 bolum 1.1).
+            (REPO_ROOT / "galactic_experience" / "one-variable" / "bible.json", -14),
         ]
         self.assertCountEqual(found, expected)
 

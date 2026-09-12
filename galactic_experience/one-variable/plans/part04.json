@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Earth Without Its Atmosphere"
+  },
+  "synopsis": "Earth's atmosphere is removed entirely and the sky above the Alps goes black at midday with the Sun still burning, in one locked high shot.",
+  "family": "atmosfer deneyi",
+  "seed_id": 14,
+  "narration": "",
+  "caption": "The experiment: take away Earth's atmosphere.\n\nOne variable changed. The air is gone. The Sun, the rock and the ice stay exactly where they are.\n\nWithout air there is no scattering, so the daytime sky turns black and the stars come out beside the Sun. Shadows lose their fill light and go absolutely dark. Sound has nothing to travel through, so an avalanche makes no noise at all, and surface ice sublimates straight from solid to vapour.\n\nIt cannot happen. Earth's gravity holds its atmosphere, and stripping it would take energy on a planetary scale.\n\nThis is a simulation, not footage. Which change would unsettle you more, the black sky or the silence?",
+  "hashtags": "#Atmosphere #Alps #Vacuum #Physics #Earth #Astronomy #SpaceSimulation #Shorts",
+  "hook_shot": 1,
+  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "ONE locked, unbroken 8-second shot seen from orbit or from high altitude. The camera position and angle never change: no pan, tilt, orbit, tracking or handheld drift. The real place and the single changed variable are BOTH fully readable in the very first frame; the shot then lets the consequence develop and land inside the same take.\n\nA fixed vantage high above the Alpine range at local noon, snow-capped ridges, glacier tongues and deep valleys filling the lower two thirds of the vertical frame. In the very first frame the sky above the peaks is already pure black and dense with stars, with the Sun burning as a small hard white disc in the upper right, unsoftened and surrounded by visible corona. There is no blue, no haze, no cloud anywhere: every distant ridge is as sharp as the near ones, shadows are pitch black with no fill light, and the terminator between sunlit rock and shadowed rock is a knife edge. Over the eight seconds surface ice sublimates directly into thin white jets that rise straight and unbending from the glaciers, dust lifted from a slope travels in a perfect ballistic arc and drops without slowing, and a snow cornice collapses in complete silence. The camera stays locked. Natural sound only: an almost total vacuum silence with a faint structural hum, dropping to nothing at the fourth second, then a deep sub-bass pressure swell as the cornice falls and strikes the rock.",
+      "seed": null
+    }
+  ]
+}

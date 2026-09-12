@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "The Pacific Ocean, Drained"
+  },
+  "synopsis": "Every drop of the Pacific is removed and the bare seafloor, its ridges and the Mariana Trench stand exposed under open sky in one locked high-altitude shot.",
+  "family": "su deneyi",
+  "seed_id": 9,
+  "narration": "",
+  "caption": "The experiment: remove the Pacific Ocean.\n\nOne variable changed. The water is gone. The basin, the crust and the atmosphere stay exactly as they are.\n\nWhat you are left with is the real shape of the planet. The deepest point, Challenger Deep in the Mariana Trench, is about 10,900 metres down, deeper than Everest is tall. Mid-ocean ridges become the longest mountain range on Earth, and they were always there.\n\nIt cannot happen. There is nowhere to put that much water, and the climate would collapse long before the basin emptied.\n\nThis is a simulation, not footage. Which part of the seafloor would you walk first?",
+  "hashtags": "#PacificOcean #MarianaTrench #Seafloor #Geology #Earth #Physics #SpaceSimulation #Shorts",
+  "hook_shot": 1,
+  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "ONE locked, unbroken 8-second shot seen from orbit or from high altitude. The camera position and angle never change: no pan, tilt, orbit, tracking or handheld drift. The real place and the single changed variable are BOTH fully readable in the very first frame; the shot then lets the consequence develop and land inside the same take.\n\nA fixed high-altitude vantage looking down on the western Pacific basin, the vertical frame filled from edge to edge with a seabed that is already completely dry in the first frame. Abyssal plains in grey-brown sediment, the long spine of a mid-ocean ridge running diagonally, seamounts standing as isolated cones, and the Mariana Trench cutting a black gash eleven kilometres deep across the lower frame. The familiar arc of island coastlines now reads as the rim of an enormous dry canyon, their beaches ending in cliffs that drop away into nothing. Low sunlight rakes from the left and throws kilometre-long shadows off the ridge. Over the eight seconds fine pale dust lifts off the exposed plain and drifts in slow sheets, and residual moisture steams from the trench floor. The camera stays locked. Natural sound only: a dry wind moving over open ground, thinning almost to silence near the fourth second, then rising into a deep hollow roar as the dust sheets sweep across the trench mouth.",
+      "seed": null
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Olympus Mons on the Arizona Desert"
+  },
+  "synopsis": "Mars's Olympus Mons is set down beside the Grand Canyon at true scale, its escarpment towering over Arizona in one locked aerial shot.",
+  "family": "ölçek deneyi",
+  "seed_id": 5,
+  "narration": "",
+  "caption": "The experiment: put Olympus Mons in Arizona.\n\nOne variable changed. The mountain moves. Earth's gravity, air and geology stay exactly as they are.\n\nOlympus Mons is about 21,900 metres high and roughly 600 kilometres wide, so its base alone would cover most of a US state and its summit would stand well above the weather. The Grand Canyon, 446 kilometres long, becomes a scratch beside it.\n\nIt cannot happen here. Earth's stronger gravity and moving plates would never let a shield volcano grow this tall in one place.\n\nThis is a simulation, not footage. Could Earth ever hold a mountain this size?",
+  "hashtags": "#OlympusMons #Mars #GrandCanyon #Arizona #Scale #Geology #SpaceSimulation #Shorts",
+  "hook_shot": 1,
+  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "ONE locked, unbroken 8-second shot seen from orbit or from high altitude. The camera position and angle never change: no pan, tilt, orbit, tracking or handheld drift. The real place and the single changed variable are BOTH fully readable in the very first frame; the shot then lets the consequence develop and land inside the same take.\n\nA fixed high aerial vantage over northern Arizona at mid-morning, the red-rock plateau, the branching gorge of the Grand Canyon and thin desert highways laid out across the lower half of the vertical frame. Olympus Mons already fills the upper half in the first frame at its true size: a shallow-sloped shield volcano roughly 600 kilometres across whose basal escarpment rises as a continuous cliff several kilometres high, dwarfing the canyon below it into a hairline crack. Its flanks are dusty ochre and rust, layered with old lava lobes, the summit caldera complex just visible at the top of frame above the haze layer. The mountain is so tall its peak stands above the cloud deck, and thin cirrus wraps its lower slopes. Over the eight seconds a dust plume rolls down the escarpment onto the desert floor and morning shadow retreats across the flank. The camera never moves. Natural sound only: high thin wind, falling almost silent near the fourth second, then breaking into a deep rolling rumble as the dust front reaches the plateau.",
+      "seed": null
+    }
+  ]
+}

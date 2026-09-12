@@ -1,0 +1,40 @@
+{
+  "series": {
+    "slug": "one-variable",
+    "title": "One Variable",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "state_machine_version": 2,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0,
+    "native_audio": true,
+    "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
+    "block_degraded_publish": true,
+    "duration_band": [
+      7,
+      9
+    ],
+    "hook_teaser": {
+      "enabled": false
+    },
+    "title_card": {
+      "enabled": false
+    },
+    "qc": {
+      "enabled": true,
+      "require_all_shots": true,
+      "min_shots": 1,
+      "native_audio_review": true,
+      "notes": "Every episode is ONE unbroken 8-second shot of a real, recognisable place with exactly ONE physical variable changed. Fail the shot if a second variable is altered, if the camera pans, tracks, orbits or follows the event instead of staying locked, if any cut, fade, dissolve or scene reset appears inside the shot, or if the impossible element is not already readable in the very first frame. Readable text, captions, subtitles, logos, watermarks and closing cards are automatic failures. Human figures, bodies, panicking crowds and close-ups of inhabited buildings being destroyed are forbidden: this channel shows physics and scale, not casualties. The geography must stay a believable version of the real place named in the plan; invented place names are a failure. Record any of these under issues.",
+      "api_fail_open": false
+    }
+  },
+  "art_style": "Photoreal orbital and high-aerial realism in vertical 9:16, shot as if from a real satellite, a high-altitude aircraft or a spacecraft window. Real Earth geography with accurate coastlines, terrain, cloud decks and city light patterns; natural motivated light only, deep blacks, restrained documentary colour, visible atmospheric haze and true scale relationships. The camera position and angle are LOCKED for the entire shot: no pan, no tilt, no orbit, no tracking, no handheld drift; the event moves through the frame while the camera stays still. No on-screen text, no captions, no logos, no watermarks, no human figures, no closing gesture.",
+  "music": false,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

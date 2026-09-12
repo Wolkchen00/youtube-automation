@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Earth With Its Rotation Stopped"
+  },
+  "synopsis": "Earth's spin is halted and the day-night terminator freezes in place across Africa, in one locked orbital shot.",
+  "family": "ışık ve zaman deneyi",
+  "seed_id": 22,
+  "narration": "",
+  "caption": "The experiment: stop Earth spinning.\n\nOne variable changed. The rotation goes to zero. The orbit around the Sun, the tilt and the atmosphere stay as they are.\n\nThe terminator stops moving, so one face of the planet holds permanent day and the other permanent night, and a fixed wall of storm cloud forms where they meet. The equatorial bulge that spin creates would relax, and ocean water would migrate toward the poles.\n\nIt cannot happen. Stopping a planet carrying this much angular momentum has no physical mechanism behind it.\n\nThis is a simulation, not footage. Which side would you choose to live on?",
+  "hashtags": "#Earth #Rotation #Terminator #Africa #Astronomy #Physics #SpaceSimulation #Shorts",
+  "hook_shot": 1,
+  "doctrine_sha256": "26e617527647192b5bad686572890f4036a93e883e00fabc450d0ffb39e6535d",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "ONE locked, unbroken 8-second shot seen from orbit or from high altitude. The camera position and angle never change: no pan, tilt, orbit, tracking or handheld drift. The real place and the single changed variable are BOTH fully readable in the very first frame; the shot then lets the consequence develop and land inside the same take.\n\nA fixed orbital vantage above the African continent, the full disc curving through the vertical frame with the Sahara, the Congo basin and the Great Rift Valley readable below. In the very first frame the day-night terminator is already frozen as a hard stationary line running north to south down the middle of the continent: everything west of it sits in deep night lit only by dense orange city lights, everything east of it bakes under unmoving vertical noon sun. There is no dawn band and no dusk band, just a sharp division. Over the eight seconds the consequences build in place: towering white convective storm cloud piles up in a fixed wall along the sunlit side of the line, ice haze creeps outward across the dark side, and the ocean surface on the left of frame shows the beginnings of a redistributed equatorial bulge draining toward the poles. Nothing rotates, nothing drifts. The camera never moves. Natural sound only: a low orbital hum, thinning to near silence at the fourth second, then opening into a vast sustained roar as the storm wall builds along the terminator.",
+      "seed": null
+    }
+  ]
+}
