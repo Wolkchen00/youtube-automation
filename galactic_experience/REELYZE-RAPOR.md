@@ -198,3 +198,154 @@ Alani ekleyip dogrudan yayinlamayin. Sirasiyla:
 Bu test tam olarak "sadece unnatural-lab da olsun" diye yazilmis. Alan eklenince
 KIRILACAK. Testi silmeyin, **yeni dogru yapilandirmayi dogrulayacak sekilde
 guncelleyin** ve alansiz seri davranisinin kapsamini ayrica koruyun.
+
+---
+
+# EK 2 , YENİ KONSEPT ARAŞTIRMASI (12 Eylül 2026)
+
+Bağlam: İhsan konsepti rafa kaldırdı, önce rakip araştırması istedi.
+Kanal adı ve kimliği aynı kalıyor, eski 199 video duruyor.
+
+Yöntem: YouTube Data API v3 ile 10 sorgu (45 gün, `videoDuration=short`,
+`order=viewCount`) tarandı, 323 shorts bulundu. Aday kanalların **son 50
+videosunun tamamı** ayrıca çekildi, yani aşağıdaki medyanlar sadece hitleri
+değil o kanalın tam çıktısını ölçüyor.
+
+## 1. Niş ölü değil, biz ölüyüz
+
+Aynı nişteki kanalların son 50 videosunun medyanı:
+
+| Kanal | Abone | Medyan izlenme | Medyan süre | İzlenme/abone |
+|---|---:|---:|---:|---:|
+| Astro Creo | 203.000 | 961.894 | 16 sn | 4,74 |
+| Science Of Infinity | 1.470.000 | 570.054 | 28 sn | 0,39 |
+| Cosmic Void | 95.200 | 450.884 | 59 sn | 4,74 |
+| Jupiter TV | 143.000 | 219.890 | 36 sn | 1,54 |
+| Dark Cosmic Explained | 53.200 | 83.586 | 30 sn | 1,57 |
+| Astro Boom | 44.900 | 49.684 | 28 sn | 1,11 |
+| **AstroX** | **15.400** | **42.320** | 24 sn | **2,75** |
+| **BİZ (galactic_experiment)** | **141** | **127** | 17 sn | **0,90** |
+
+AstroX bizim büyüklüğümüze en yakın kanal ve **333 kat** fazla izleniyor.
+Üstelik Endonezce yayın yapıyor, yani dil avantajı bile bizde.
+
+**Sonuç: konu seçimi sorun değil. Uzay nişi küçük kanala da izlenme veriyor.**
+
+## 2. İhsan'ın bulduğu format , ölçüldü
+
+`instagram.com/reel/DbXH3hTMQj9/` , @space_art.ai, "Infinite Neighborhood🌍"
+
+| Ölçülen | Değer | Bizim son videolarımız |
+|---|---|---|
+| Süre | **7,15 sn** | 17 sn |
+| Kesme sayısı | **0 (tek plan)** | 2 |
+| Konuşma | **0 kelime, anlatım YOK** | 126-156 WPM yoğun anlatım |
+| LUFS | **-14,1** | -21,9 / -24,7 |
+| True peak | **-1,3 dBFS** | -6,2 / -10,7 |
+| LRA | 0,9 (sabit, tek müzik yatağı) | 1,6-3,0 |
+| Çözünürlük | 1088x1936, 20,27 fps | 1080x1920, 30 fps |
+| Beğeni | 836.079 | , |
+| Yorum | 4.463 | , |
+| Yayın | 29 Temmuz 2026 | , |
+
+Görsel: banliyö evleri ve bir yol, Dünya'nın üzerinde uzaya doğru giden dev bir
+halkanın üstüne kurulmuş. Tek kare, neredeyse hareketsiz, çok yavaş bir sürüklenme.
+Ekranda yazı yok, jenerik yok, kapanış kartı yok. Kavramın adı **caption'da**.
+
+İzlenme ölçülemedi (IG giriş duvarı). Beğeni/izlenme oranı %4-5,8 formülüyle
+836K beğeni ≈ 14-21M izlenme eder, İhsan'ın gördüğü ~15M ile tutarlı. **Tahmindir.**
+
+⚠️ **n=1.** Hesabın diğer gönderileri IG giriş duvarı yüzünden listelenemedi,
+yt-dlp ve WebFetch ikisi de bloklandı. Bu tek videonun ölçümüdür, hesabın
+ortalaması DEĞİLDİR.
+
+## 3. Aynı tür YouTube Shorts'ta da tutuyor
+
+"İmkânsız mekân" türünü YouTube'da ayrıca ölçtüm (son 50 video, tamamı):
+
+| Kanal | Abone | Kuruluş | Medyan izlenme | Medyan süre |
+|---|---:|---|---:|---:|
+| LimitNook | 16.100 | Haz 2024 | 155.756 | 49 sn |
+| **Dark Narr** | **30.700** | **Kas 2025** | **57.050** | 44 sn |
+| **VoidNubis** | **6.700** | Eki 2024 | **54.434** | **11 sn** |
+
+Dark Narr **10 aylık** bir kanal ve 57 bin medyan yapıyor.
+VoidNubis 6.700 abone ile 11 saniyelik videolarda 54 bin medyan yapıyor.
+
+⚠️ **Seçim yanlılığı:** bu kanalları izlenmeye göre sıralanmış aramayla buldum,
+yani kazananları görüyorum. Aynı türde batmış kanalları göremiyorum. Kanal
+medyanları dürüst (50 videonun hepsi sayıldı) ama kanal KÜMESİ yanlı.
+
+## 4. "Created with @openart_ai" , araştırıldı
+
+OpenArt (openart.ai) bir model toplayıcı arayüz. Kendi modeli yok, altında
+Seedance gibi motorları çalıştırıyor. Fiyat: 7-120 $/ay kredi paketleri,
+video başına yaklaşık 0,45-0,70 $.
+
+**Bizim bu araca ihtiyacımız yok. Aynı motor zaten depoda:**
+
+```
+core/kie_api.py:475   generate_seedance_video(..., model="bytedance/seedance-2-fast")
+core/kie_api.py:508   first_frame_url  ->  görselden videoya (image-to-video)
+```
+
+Yani space_art.ai'nin reçetesinin tamamı elimizde:
+görsel üret (`generate_image`) -> Seedance ile tek plana çevir -> Suno müziği
+(`core/music_generator.py`) -> `core/ffmpeg_tools.master_audio` ile -14 LUFS.
+OpenArt aboneliği bize yeni bir yetenek getirmez, sadece aynı işi arayüzle yapar.
+
+**Araç fark değil. Fark KONSEPT ve PROMPT.**
+
+## 5. Neden bizim video tutmadı , üç ölçülmüş sebep
+
+1. **Ses 6-11 dB fazla sessiz.** Kazanan videonun -14,1 LUFS'una karşı bizde
+   -21,9 ile -24,7. `master_lufs` alanı bible'a ancak 11 Eylül'de eklendi,
+   yayınlanan 33 bölümün neredeyse hepsi sessiz çıktı.
+2. **Kanca görsel değil, sözel.** Bizim ilk karemiz bir uzay fotoğrafı, vaadi
+   anlatım taşıyor. Kazananlarda ilk kare TEK BAŞINA imkânsız bir şey gösteriyor
+   ve ses kapalı da olsa izleten o.
+3. **Başlıklar ansiklopedi maddesi.** "Olympus Mons: Towers Over Everest" bilgi
+   veriyor ama merak yaratmıyor. Kazananlarda başlık ya birinci şahıs iddia
+   ("I Captured Something Crossing The Moon") ya da kavram adı ("Infinite
+   Neighborhood"). Bizim yorum oranımız **1000 izlenmede 0,00**, nişte 0,11-0,72.
+   Kimse konuşmuyor, yani kimse takılmıyor.
+
+## 6. Üç aday konsept
+
+Hepsi "Galactic Experiment" adının altına oturur, kanal kimliği değişmez.
+
+### A , İMKÂNSIZ UZAY MEKÂNLARI  (önerilen)
+Her bölüm tek bir imkânsız yapı/mekân: uzaya uzanan banliyö, halka üstünde
+otoyol, Satürn'ün halkasında tren istasyonu. Fotogerçekçi, tek plan, 8-10 sn,
+anlatım yok, tek müzik. Başlık = mekânın adı.
+- Kanıt: space_art.ai (ölçülen tek video 836K beğeni), VoidNubis 6,7K aboneyle
+  54K medyan, Dark Narr 10 ayda 30,7K abone.
+- Üretim: **şu ankinden UCUZ.** 3 çekim yerine 1, TTS yok, anlatım riski yok.
+- Risk: tür hızlı doyuyor, görsel fikir kalitesi her şey. Fikir havuzu şart.
+
+### B , ÖLÇEK KARŞILAŞTIRMASI
+"Jupiter vs Black Hole vs Sun" kalıbı. 30 sn, ekran yazılı, artan gerilim.
+- Kanıt: Dark Cosmic Explained 53,2K aboneyle 83,5K medyan.
+- Üretim: mevcut motorla doğrudan yapılır, ekran yazısı katmanı zaten var.
+- Risk: türde çok kalabalık, ayırt edicilik düşük.
+
+### C , "BUNU YAKALADIM" TELESKOP POV'U
+Astro Creo'nun kalıbı, 203K aboneyle 962K medyan. **Önermiyorum:** format
+"bunu kendi teleskobumla çektim" iddiası üzerine kurulu. Bizim üretimimiz AI,
+bu iddia yalan olur. Kanalı da riske atar.
+
+## 7. Konsept ne olursa olsun değişmeyecek dört teknik kural
+
+Bunlar ölçümle sabit, tartışma konusu değil:
+
+1. `master_lufs: -14`, true peak -1,0 dBTP. Bible'da var, çıktıda DOĞRULANACAK.
+2. İlk kare tek başına durmalı. Ses kapalıyken de izletmeli.
+3. Kapanış kartı, jenerik, imza yok. Son kare başa rimlenir (loop).
+4. Yorum oranı ana sinyal. Beğeni değil yorum ölçülecek (nişte 0,11-0,72 / 1000).
+
+## 8. Ölçülemeyenler
+
+- space_art.ai'nin gerçek izlenmesi ve hesap ortalaması (IG giriş duvarı).
+- Retention eğrileri (YouTube Studio gerekiyor).
+- Bizim 141 abonemiz videoları görüyor mu (impressions/CTR verisi yok).
+- Rakip kanalların gerçek üretim maliyeti.
