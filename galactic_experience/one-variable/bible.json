@@ -32,7 +32,7 @@
       "api_fail_open": false
     }
   },
-  "art_style": "Photoreal orbital and high-aerial realism in vertical 9:16, shot as if from a real satellite, a high-altitude aircraft or a spacecraft window. Real Earth geography with accurate coastlines, terrain, cloud decks and city light patterns; natural motivated light only, deep blacks, restrained documentary colour, visible atmospheric haze and true scale relationships. The camera position and angle are LOCKED for the entire shot: no pan, no tilt, no orbit, no tracking, no handheld drift; the event moves through the frame while the camera stays still. No on-screen text, no captions, no logos, no watermarks, no human figures, no closing gesture.",
+  "art_style": "Photoreal orbital or high-aerial documentary footage composed for vertical 9:16 at 24 fps. Preserve the named site's real coastlines, relief, rivers, ice, and city-light patterns at geographically credible scale; atmospheric effects follow the episode's altered variable. Render the single physical change with coherent materials, gravity, illumination, motion, and cause-and-effect. Natural motivated light, restrained documentary colour, deep space blacks, fine terrain texture, stable exposure, and legible scale cues create a real satellite, high-altitude aircraft, or spacecraft-window image. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Every frame maintains one continuous viewpoint and scene. Wide uninhabited geography fills the image, with clean natural surfaces and a final active physical state suited to a seamless loop. Diegetic environmental audio alone follows the visible event.",
   "music": false,
   "characters": [],
   "environments": [],
