@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 35,
-  "next_part": 31,
+  "next_part": 32,
   "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483",
   "auto_replenish": {
     "enabled": true,
@@ -779,7 +779,25 @@
       }
     },
     "31": {
-      "status": "planned"
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flashpoints/episodes/ep31/ep31_narrated_music_titled_mastered.mp4",
+      "subtitle": "The Real Reason A Stray Dog Started A War!",
+      "stack_sha256": "6d8449e34e58b17e320829d998e9ad8a2e2250ffefbde9cf8d37ce1243259228",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-12T22:38:14.754565+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": true,
+        "arc_roles_missing": [],
+        "duration_s": 18.98,
+        "duration_in_band": null,
+        "degraded": false
+      }
     }
   }
 }
