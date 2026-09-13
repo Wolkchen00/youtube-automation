@@ -368,3 +368,132 @@ Havuzda 19 konu kalmis, `next_part` 31 / `total_parts` 35.
 **Onerilen test:** sonraki 8 bolumun 4'unu SEY oznesiyle, 4'unu KISI oznesiyle uret
 (konu havuzundan ayni aile karisimini koruyarak) ve karsilastir. Bu, hipotezi 8 bolumde
 kesin olarak dogrular ya da curutur.
+
+---
+
+# EK , @one__create referans analizi (13 Eylul 2026)
+
+Ihsan kanali gelecek temali, ANLATIMSIZ bir konsepte cevirme karari verdi ve
+kopyalanacak referans olarak `instagram.com/one__create` hesabindan 5 video verdi.
+
+Yontem: 5 video `yt-dlp` ile en yuksek dikey rendition'da indirildi,
+`ffmpeg`/`ffprobe` + EBU R128 ile olculdu, kontakt sayfalari goz ile incelendi.
+Etkilesim sayilari IG meta verisinden alindi. Dosyalar oturum scratchpad'inde.
+
+## 1. Olculen bicim , 5/5 videoda ayni
+
+| Olcu | Deger | Not |
+|---|---|---|
+| Cozunurluk | 1080x1920 (4/5), 1440x2560 (1/5) | dikey |
+| fps | 24 (4/5), 30 (1/5) | sinema hissi |
+| Sure | 5,5 / 6,9 / 7,1 / 8,1 / **10,1** sn | cok kisa |
+| Kesme | 1 (4/5), 2 (1/5) | yani **2 cekim** |
+| LUFS | **-14,0 .. -14,1** | bes videonun besi de |
+| True peak | -1,6 .. -2,7 dBFS | ,  |
+| LRA | **1,0 .. 1,5** | neredeyse sifir dinamik |
+| Desifre | **0 kelime** | anlatim YOK, dogrulandi |
+
+## 2. "Derin ses" olculdu , alcak geciren drone
+
+Bant enerjisi (mean_volume, dB):
+
+| video | 20-80Hz | 80-250 | 250-2k | 2k-8k | 8k-16k |
+|---|---|---|---|---|---|
+| TOKYO 2247 | -21,6 | -22,4 | -21,5 | -47,9 | -62,4 |
+| monsun | -21,9 | -22,4 | -21,4 | -50,4 | -90,3 |
+| buz kubbe | -22,0 | -22,0 | -21,8 | -51,0 | -81,9 |
+| col kubbe | -22,1 | -22,0 | -21,9 | -51,1 | -90,3 |
+| duvar carsi | -22,9 | -21,9 | -21,6 | -51,0 | -76,5 |
+
+Okuma: 20 Hz , 2 kHz arasi **duz ve guclu** (-21..-22 dB), 2-8 kHz **29 dB asagida**,
+8 kHz ustu pratikte **yok**. Bu bir muzik parcasi degil: ~2 kHz'de tavanlanmis,
+LRA 1,0-1,5 ile neredeyse hic dalgalanmayan **sabit derin ugultu**. Tiz yok,
+vurus yok, konusma yok. Ihsan'in "hepsinde derin bir ses var" gozlemi bu.
+
+## 3. Baslik karti , DAKTILO efekti
+
+4 fps kontakt sayfasiyla kare kare izlendi:
+
+- t=0,00 `TO` , t=0,25 `TOKYO 22` , t=0,50 `TOKYO 2247` (tamam)
+- Ikinci videoda ayni: `EAR` , `EARTH 224` , `EARTH 2247`
+
+Yani basliktaki harfler **tek tek yaziliyor, ~0,5 sn'de bitiyor**. Sonra ilk cekim
+boyunca duruyor ve **kesmede ~0,4 sn icinde soluyor**; ikinci cekimde baslik YOK.
+
+Yerlesim: sol ust, ~%6 sol kenar bosluğu, ~%20 ustten. Tamami buyuk harf,
+kalin sikisik grotesk. **Yazi tipi tam teshis edilemedi**; Anton / Archivo Black
+ailesine benziyor, kesin ad iddia etmiyorum.
+
+Renk kontrasta gore secilmis: acik gokyuzu zeminde SIYAH (4/5), yogun koyu
+sehir zemininde BEYAZ (1/5).
+
+## 4. Etkilesim , ve kazanani ayiran sey
+
+| video | begeni | yorum | yorum/begeni |
+|---|---|---|---|
+| **TOKYO 2247** | **46.042** | **848** | %1,84 |
+| monsun / ikinci zemin | 2.597 | 36 | %1,39 |
+| col kubbe | 328 | 1 | %0,30 |
+| buz kubbe | 307 | 1 | %0,33 |
+| duvar ici carsi | 124 | 2 | %1,61 |
+
+Ihsan TOKYO videosunun **5,6M izlendigini** soyledi. IG oynatma sayisi meta veriden
+CEKILEMEDI (yalniz begeni geliyor, 3. ve 11. tuzak), yani 5,6M Ihsan'in beyani
+olarak duruyor, bizim olcumumuz degil. Begeni/izlenme = 46.042/5,6M = **%0,82**,
+bu 11. maddedeki %0,8-4,6 bandina oturuyor, %4-5,8 formulune DEGIL.
+
+**Kritik: ayni kanal, ayni format, ayni ses, ayni baslik , ama 46.042 ile 124 arasinda
+371 kat fark var.** Bu iki tepeli dagilim, bizim aimagine olcumumuzun birebir aynisi
+(gecti/kaldi kapisi, kanal cezasi degil).
+
+Ayiran degisken, kareler karsilastirildiginda: **tanınır gercek yer.**
+
+| video | yer | acilis kadraji | sonuc |
+|---|---|---|---|
+| TOKYO 2247 | Tokyo , Tokyo Kulesi + Skytree kadrajda | tanri-gozu genis, yapinin TAMAMI tek karede | 46.042 |
+| monsun | tanınır kiyi megakenti | genis kurulus | 2.597 |
+| buz kubbe | isimsiz donmus ova | genis ama jenerik | 307 |
+| col kubbe | isimsiz col | orta plan, tek kubbe | 328 |
+| duvar carsi | isimsiz ic mekan | **zaten ICERIDE basliyor** | 124 |
+
+Iki kural birlikte calisiyor gorunuyor:
+1. **Tanınır yer** , izleyicinin bildigi bir sehir/ikon kadrajda olacak
+2. **Acilista tanri-gozu genis plan** , imkansiz yapi TEK karede okunacak
+
+**Dikkat:** bu n=5. Iki kural da korelasyon, kanit degil. Ama 1. kural bizim
+aimagine olcumumuzle (ikonlar 4/4 tuttu, tekrarlanan jenerik 3/3 kaybetti)
+BAGIMSIZ olarak ortusuyor , iki ayri kanalda ayni yone isaret ediyor.
+
+## 5. Kurgu grameri
+
+Kesme anlari: 5,04 / 1,73+5,77 / 2,08 / 1,88 / 2,50 sn.
+
+Kazanan (10,1 sn) **2 x 5 sn esit blok**. Kesme SERT ve eslesen-hareket DEGIL:
+ayni yerin cok farkli iki bakis acisi. Cekim 1 tepeden, yapinin tamamini gosteriyor;
+cekim 2 alcaktan, insan olcegine yakin, ayni yeri "gercek" gibi satiyor.
+
+Kalan 4 videoda ilk cekim 1,7-2,5 sn ile cok kisa , ve hepsi dusuk performansli.
+**Hipotez:** kazanan formul 2 x 5 sn, kaybedenler ilk cekime yeterli zaman vermiyor.
+n=5'te ayirt edilemez, test edilmeli.
+
+## 6. Caption
+
+Ingilizce + Japonca cift dil, kisa satirlar. "A fictional future world created with AI"
+ibaresi aciklamada acikca geciyor. Hashtag'te yil marka olarak kullaniliyor (#EARTH2247).
+
+## 7. Kopyalanacak sozlesme , olculen degerler
+
+- Sure **8-10 sn**, 2 cekim, ilk cekim ~5 sn
+- **Anlatim YOK.** Tek ses: ~2 kHz'de kesilmis derin drone, **-14 LUFS**, LRA < 2
+- Baslik sol ustte, daktilo ile ~0,5 sn'de yazilir, kesmede soluar
+- Acilis kadraji tanri-gozu genis, imkansiz yapi tek karede okunur
+- **Tanınır gercek sehir/ikon zorunlu** , isimsiz kubbe/col/ova YASAK
+- 1080x1920, 24 fps
+
+## 8. Olculemeyenler
+
+- IG oynatma sayilari (giris duvari). Yalniz begeni alinabildi.
+- Retention egrileri , yok.
+- Yazi tipinin kesin adi , teshis edilemedi.
+- Kanalin toplam video sayisi ve takipci sayisi , bu kosuda cekilmedi.
+- Hangi AI modeliyle uretildigi , bilinmiyor.
