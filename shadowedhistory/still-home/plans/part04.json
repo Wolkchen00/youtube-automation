@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Dubai Moved Underground And Left The Tower"
+  },
+  "synopsis": "Burj Khalifa rises out of a standing wall of desert sand while the living city has moved into lit underground boulevards beneath it.",
+  "family": "asagi indi",
+  "seed_id": 4,
+  "narration": "",
+  "caption": "Dubai, 2512. The desert moved in and buried the streets.\n\nThe city went down rather than away. The boulevards were cut into the rock below the old grid, and everyone kept their address.\n\nDaylight comes down through shafts, on a schedule people plan their afternoons around. The Burj is still standing up there, visible from the bottom of every shaft, used now mostly as a landmark.\n\nA fictional future, created with AI.\n\nWould you rather live near a shaft or deep in the quiet?",
+  "hashtags": "#Dubai #BurjKhalifa #Underground #Desert #FutureCity #Architecture #AIart #STILLHOME2512",
+  "hook_shot": 1,
+  "doctrine_sha256": "ee9d2466254477e0155032a364871bde1e3f60818f4ba0e588b0b149fa40525b",
+  "title_card": {
+    "title": "DUBAI 2512",
+    "subtitle": ""
+  },
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps: a wide god's-eye view from high aerial or near-orbital height. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable. One slow, single-direction camera move only (a descent or a forward glide); no pan, orbit, whip or cut inside the shot. No setup, no approach, no delayed reveal: what the episode is about is legible in frame one.\n\nThe Dubai coast fills frame one under a fixed high-aerial camera, a standing front of pale dune sand banked deep across the whole city grid and smoothed into long ridges by wind. The Burj Khalifa rises clean out of the sand at the centre of frame, its stepped spire intact and bright against a hard blue sky, with the tops of neighbouring towers breaking the surface around it like a submerged skyline. Circular shafts and ramped openings punch down through the sand in a regular pattern, each ringed with steel and glowing warm from far below. The camera glides slowly forward on one heading for the full duration, holding altitude, so the shafts pass steadily underneath and the tower grows at centre.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps: a low, human-scale view of the SAME place after a hard cut, from a completely different vantage point. People are visible and going about ordinary daily life: walking, trading, carrying, eating, queueing. Warm practical light from windows, stalls and signage fills the frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only.\n\nA low view inside a wide underground boulevard directly beneath the shafts, the rock and concrete ceiling arching overhead and one shaft opening high above, letting a clean column of daylight fall through with the Burj Khalifa's spire visible far up through the opening. Lit shopfronts, glass cafes and planted beds line the boulevard, and a dense evening crowd moves along the polished floor. Warm signage and cool daylight mix across the surfaces. The camera glides forward slowly down the centre of the boulevard at a constant height for the full duration.",
+      "seed": null
+    }
+  ]
+}

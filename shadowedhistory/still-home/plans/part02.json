@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "New York Lifted Its Streets Above The Sea"
+  },
+  "synopsis": "Manhattan's streets sit on raised platforms above the risen Atlantic while the Empire State Building still stands and a boat neighbourhood lives in the shade beneath.",
+  "family": "su yukseldi",
+  "seed_id": 2,
+  "narration": "",
+  "caption": "New York, 2512. The Atlantic came up, so the city went up with it.\n\nPeople stayed on the island. They raised the streets onto piers and kept the addresses.\n\nThe old ground floors are boat country now: families moor where the avenues used to run, and goods come down on ropes from the deck above. The towers never moved.\n\nA fictional future, created with AI.\n\nWould you live up on the deck or down in the channel?",
+  "hashtags": "#NewYork #Manhattan #EmpireStateBuilding #SeaLevel #FutureCity #Architecture #AIart #STILLHOME2512",
+  "hook_shot": 1,
+  "doctrine_sha256": "ee9d2466254477e0155032a364871bde1e3f60818f4ba0e588b0b149fa40525b",
+  "title_card": {
+    "title": "NEW YORK 2512",
+    "subtitle": ""
+  },
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps: a wide god's-eye view from high aerial or near-orbital height. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable. One slow, single-direction camera move only (a descent or a forward glide); no pan, orbit, whip or cut inside the shot. No setup, no approach, no delayed reveal: what the episode is about is legible in frame one.\n\nLower and midtown Manhattan fill frame one under a fixed high-aerial camera, the entire street grid raised onto pale concrete platforms that stand clear above a risen sea. The Empire State Building rises from the middle of the lifted grid, its setbacks and mast sharp against haze, and the Chrysler crown catches sun beside it. Open water runs between the platform piers where avenues used to meet the shoreline, and small boats thread the shaded channels below. The camera glides slowly forward on one fixed heading for the full duration, holding altitude, so the platform edges sweep steadily past and the tower grows at the centre of frame.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps: a low, human-scale view of the SAME place after a hard cut, from a completely different vantage point. People are visible and going about ordinary daily life: walking, trading, carrying, eating, queueing. Warm practical light from windows, stalls and signage fills the frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only.\n\nA low view from a boat channel directly under the raised platforms, looking up along a concrete pier toward daylight, with the Empire State Building visible far above through the gap between decks. A dense floating neighbourhood of moored houseboats fills the channel, strung with lines of laundry and warm lamps, and people step between decks carrying crates and buckets. A vendor hands goods down from the platform edge overhead. Light from the opening above falls in a bright band across the water. The camera drifts forward slowly along the channel at a constant low height for the full duration.",
+      "seed": null
+    }
+  ]
+}

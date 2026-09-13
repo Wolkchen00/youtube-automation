@@ -140,6 +140,12 @@ class InstalledBibleOptInTests(unittest.TestCase):
             # tasimasi SART, yoksa karsilastirma sesi olcer, formati degil.
             # Kazanan secilince bu klasor ve bu satir birlikte silinir.
             (REPO_ROOT / "galactic_experience" / "one-variable-b" / "bible.json", -14),
+            # still-home 13 Eylul 2026'da kuruldu, flashpoints'in yerine. Bu seride
+            # de mastering opsiyonel DEGIL: olculen referansin (@one__create) bes
+            # videosunun besi de -14,0..-14,1 LUFS teslim ediyor ve ses TEK katman
+            # (anlatim yok), yani mastering kacarsa karsilastirilacak baska bir
+            # sey kalmiyor. Bkz. shadowedhistory/KONSEPT.md v1.0 bolum 3.2.
+            (REPO_ROOT / "shadowedhistory" / "still-home" / "bible.json", -14),
         ]
         self.assertCountEqual(found, expected)
 

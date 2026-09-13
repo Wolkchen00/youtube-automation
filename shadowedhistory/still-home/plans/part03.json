@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Paris Turned The Eiffel Tower Into A Farm"
+  },
+  "synopsis": "The Eiffel Tower has become the frame of a vertical farm and the whole city is terraced in green, with a market running at the tower's feet.",
+  "family": "yesile donustu",
+  "seed_id": 3,
+  "narration": "",
+  "caption": "Paris, 2512. The city turned itself into farmland, one terrace at a time.\n\nNobody left. They planted the boulevards, the roofs, and finally the tower.\n\nThe Eiffel lattice is a growing frame now, and the crop comes down on hoists to the market on the Champ de Mars. The old street plan is still exactly where it was.\n\nA fictional future, created with AI.\n\nWhat would you grow on your level?",
+  "hashtags": "#Paris #EiffelTower #VerticalFarming #FutureCity #GreenCity #Architecture #AIart #STILLHOME2512",
+  "hook_shot": 1,
+  "doctrine_sha256": "ee9d2466254477e0155032a364871bde1e3f60818f4ba0e588b0b149fa40525b",
+  "title_card": {
+    "title": "PARIS 2512",
+    "subtitle": ""
+  },
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps: a wide god's-eye view from high aerial or near-orbital height. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable. One slow, single-direction camera move only (a descent or a forward glide); no pan, orbit, whip or cut inside the shot. No setup, no approach, no delayed reveal: what the episode is about is legible in frame one.\n\nParis fills frame one beneath a fixed high-aerial camera, every boulevard and rooftop terraced into planted green levels that follow the old Haussmann street pattern exactly. The Eiffel Tower stands at the centre of the frame with its iron lattice filled in by stacked growing decks, dense with foliage that spills between the girders from base to summit. The Seine runs clear through the green city and the Arc de Triomphe reads as a hub of radiating planted avenues. The camera descends slowly and straight down for the full duration on one heading, so the terraces resolve into individual rows and the tower rises steadily in frame.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps: a low, human-scale view of the SAME place after a hard cut, from a completely different vantage point. People are visible and going about ordinary daily life: walking, trading, carrying, eating, queueing. Warm practical light from windows, stalls and signage fills the frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only.\n\nA low view on the Champ de Mars directly at the foot of the tower, the planted iron lattice filling the background and rising out of the top of frame. A busy produce market runs across the gravel under canvas awnings, tables piled with greens, tomatoes, herbs and bread, and a thick crowd moves between the stalls with baskets. Growers lower crates on a hoist from the first growing deck above. Late afternoon sun comes through the leaves and lands in warm patches on the tables. The camera glides forward slowly between the stalls at a constant height for the full duration.",
+      "seed": null
+    }
+  ]
+}

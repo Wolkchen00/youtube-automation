@@ -1,0 +1,229 @@
+{
+  "slug": "still-home",
+  "base_title": "Still Home",
+  "logline": "One real, world-famous city in the year 2512, and the ordinary life still going on inside what it became.",
+  "language": "en",
+  "upload_profile": "shad0wedhistory",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #future #futurecity #ai #worldbuilding",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "draft",
+  "priority": 999,
+  "total_parts": 5,
+  "next_part": 1,
+  "doctrine_sha256": "ee9d2466254477e0155032a364871bde1e3f60818f4ba0e588b0b149fa40525b",
+  "kurulum_notu": "13 Eylul 2026'da kuruldu, flashpoints'in (TARIH konsepti) yerine. status='draft' ve cron YORUMDA: Ihsan KONSEPT.md v1.0'i onaylayana kadar hicbir sey uretilmez. Acma sirasi: (1) KONSEPT.md statusunu ONAYLANDI yap ve doctrine_sha256'yi YENILE (scripts/doktrin_pin.py ya da series.bible.doctrine_sha256), (2) buradaki status'u 'active' yap, (3) .github/workflows/still-home.yml icindeki schedule blogunun yorumunu kaldir, (4) filo.json cron listesine kaydi ekle, (5) gunluk_beyin/beyin.py SERIES_DIRS ve tamlik.py PRODUCTION_DIRS icindeki 'flashpoints' anahtarini 'still-home'a cevir. Slot 20:30 UTC olacak (shadowedhistory kanalinin tarihsel yayin penceresi, flashpoints'ten bosaldi).",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 2,
+    "shot_seconds": "4",
+    "caption": true,
+    "music_prompt": true,
+    "title_card": true,
+    "credit_hard_cap": true,
+    "title_style": "the city and what it became, stated plainly, in the pattern '<Real City> <what happened to it>' (e.g. 'Istanbul Under One Roof', 'Paris Grew Its Own Food', 'New York Lifted Its Streets'). Max 70 characters. The city MUST be a real, world-famous one and MUST be the first word. No clickbait punctuation, no hashtags, no surrounding quotes, no question marks, no year in the title (the year lives on the title card), no first-person claim of having filmed anything.",
+    "caption_style": "\"caption\" = the entire WRITTEN STORY because the video has zero narration: 60-120 words of lean, specific English prose in five short blocks separated with \\n\\n. Follow this exact order: (1) name the real city and say in one sentence what happened to it; (2) say plainly that the people did NOT leave, and what they built instead; (3) give two or three concrete, picturable details of ordinary life there now (what is grown, where people shop, how they move, what the light is like); (4) write the exact standalone sentence \"A fictional future, created with AI.\"; (5) close with ONE concrete question about how the viewer would live there. Keep the tone durable and warm, never apocalyptic: this is a place that is still home. Use commas, colons or full stops rather than em dashes. Omit any number you are not sure of.\n- HASHTAGS: \"hashtags\" = 6-9 specific, space-separated tags covering the named city, the adaptation shown, and 3-4 broad future, architecture or AI categories. Always include #STILLHOME2512. Each tag starts with # and contains no spaces; skip generic engagement tags.",
+    "families": [
+      "su yukseldi",
+      "ortu altinda",
+      "yukari buyudu",
+      "asagi indi",
+      "yesile donustu",
+      "cole donustu"
+    ],
+    "shot_plan": [
+      "Shot 1, exactly 4 seconds at 24 fps: a wide god's-eye view from high aerial or near-orbital height. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable. One slow, single-direction camera move only (a descent or a forward glide); no pan, orbit, whip or cut inside the shot. No setup, no approach, no delayed reveal: what the episode is about is legible in frame one.",
+      "Shot 2, exactly 4 seconds at 24 fps: a low, human-scale view of the SAME place after a hard cut, from a completely different vantage point. People are visible and going about ordinary daily life: walking, trading, carrying, eating, queueing. Warm practical light from windows, stalls and signage fills the frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only."
+    ],
+    "brief": "SONSUZ GELECEK-SEHRI ANTOLOJISI. Her bolum, gercek ve dunyaca taninan TEK bir sehrin 2512 yilindaki halini IKI CEKIMDE gosterir. Gorsel promptlar ve caption Ingilizce yazilir.\n\nDEGISMEZ KURALLAR:\n(1) TANINIR GERCEK SEHIR. Sehri gercek adiyla kullan ve onu ilk karede tanitan dunyaca bilinen EN AZ BIR yapi ya da siluet secilsin (Ayasofya, Eyfel, Empire State, Burj Khalifa, Tokyo Kulesi, Kolezyum, Opera Binasi gibi). Uydurma sehir, isimsiz kubbe, jenerik sci-fi manzara YASAK. Olculdu: ayni kanalda taninir sehir 46.042 begeni aldi, isimsiz kubbe 124.\n(2) SUREKLILIK, DISTOPYA DEGIL. Her bolumun tek mesaji sudur: dunya degisti, insanlar GITMEDI, kaldilar ve orayi ev yaptilar. Sicak pencere isigi, carsi, kalabalik, ticaret, cocuk, yesil. Harabe estetigi, ceset, panik, savas, silah, terk edilmislik ve bos sokak YASAK.\n(3) YAPI AYAKTA AMA DONUSMUS. 2512 cok uzak bir yil. Taninir yapi yikilmaz, DONUSUR: bir ortunun altinda kalir, bir kulenin iskeleti olur, bir platformun ustune cikar. Taninirlik korunur, gecen zaman da okunur.\n(4) IKI CEKIM, SERT KESME. Cekim 1 yukaridan ve genis, cekim 2 alcaktan ve insan olceginde. Kesme eslesen hareket DEGIL, ayni yerin cok farkli iki bakis acisidir. Cekim 2'de insanlar GORUNUR ve siradan islerini yapar; bu opsiyonel degildir.\n(5) ILK KARE TAM VAATTIR. Cekim 1'in ilk karesi hem taninir sehri hem de ona ne oldugunu ayni anda gosterir. Kurulum, yaklasma, gecikmeli ortaya cikis ve once normal halini gosterme yasaktir.\n(6) TEK YONLU KAMERA. Her cekimde tek, yavas, tek yonlu bir hareket. Pan, orbit, takip, sarsinti, zoom-in-out salinimi, cekim ICINDE kesme ve sahne sifirlamasi yok.\n(7) SOMUT UYARLAMA. Sehri ayakta tutan seyi malzemeyle ve olcekle yaz: beton perde, camli ortu, yukseltilmis platform, yer alti bulvari, teras tarim, deniz duvari, golgeleme agi. Her bolumde uyarlama TEK ve acikca adlandirilmis olsun; ikinci bir buyuk mudahale ekleme.\n(8) POZITIF VIDEO DILI. Gorsel prompt yalniz kadrajda BULUNAN seyleri soyler. Su Ingilizce sozcukleri gorsel paragrafta kullanma: no, not, never, nothing, without, avoid, cannot, absent, lacks, lacking. 'Instead of' kalibini da kullanma. Olumsuz komut yerine istenen pozitif durumu yaz.\n(9) SES: TEK DERIN DRONE. Anlatim, konusma ve ritmik muzik YOKTUR. 'music' alani TEK bir surekli derin ugultu tarif eder: dusuk frekansli, sabit seviyeli, vurussuz, melodisiz, tiz icermeyen, baslangic ve bitis vurgusu olmayan. Referansta olculdu: 20Hz-2kHz duz, 2-8kHz 29 dB asagida, 8kHz ustu yok.\n(10) KUNYE MOTORUN ISI. 'title_card' alani {\"title\": \"<SEHIR> 2512\", \"subtitle\": \"\"} bicimindedir, sehir adi BUYUK harfle. Videonun icinde okunabilir yazi, altyazi, logo, filigran URETME: kunye sonradan ffmpeg ile binir.\n(11) GORSEL GUVENLIK. Yuz yakin plani yok; insanlar kalabalik ve siluet olceginde. Gercek marka, sirket logosu ve gercek kisi yok.\n(12) BASLIK SEHIRDIR. En fazla 70 karakter, ilk kelime gercek sehir adi, sonra ona ne oldugu. Tiklama tuzagi, soru isareti, hashtag ve yil kullanma.\n(13) CAPTION HIKAYEYI TASIR. 60-120 Ingilizce kelime; sehri ve olani adlandir, insanlarin kalip ne kurdugunu soyle, iki-uc somut gunluk hayat ayrintisi ver, 'A fictional future, created with AI.' cumlesini aynen yaz ve tek somut soruyla bitir.\n(14) AILE VE CESITLILIK. Yalniz kanonik ailelerden birini aynen sec. Ardisik iki bolum ayni aileden olamaz. Ayni sehri tekrar kullanma ve onceki bolumun uyarlamasini hafifce degistirip tekrar etme.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "Istanbul in 2512: the Bosphorus is roofed over by a vast glass canopy and Hagia Sophia and the Blue Mosque stand beneath it, with ferry docks and covered markets lit underneath.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 2,
+        "topic": "New York in 2512: Manhattan's streets are lifted onto platforms above the risen sea, with the Empire State Building still standing and a boat neighbourhood living in the shade below.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 3,
+        "topic": "Paris in 2512: the Eiffel Tower has become the frame of a vertical farm and the whole city is terraced in green, with a market at the tower's feet.",
+        "family": "yesile donustu"
+      },
+      {
+        "id": 4,
+        "topic": "Dubai in 2512: Burj Khalifa rises out of a standing wall of sand and the city has moved into lit underground boulevards beneath it.",
+        "family": "asagi indi"
+      },
+      {
+        "id": 5,
+        "topic": "Tokyo in 2512: the city has grown upward into stacked tiers around Tokyo Tower and Skytree, with street life running along bridges between them.",
+        "family": "yukari buyudu"
+      },
+      {
+        "id": 6,
+        "topic": "London in 2512: a tidal barrier rings the old city, Tower Bridge and Big Ben stand inside a lagoon, and floating streets fill the water.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 7,
+        "topic": "Cairo in 2512: the Pyramids of Giza sit under long shading canopies and the city has spread into cool colonnaded arcades beneath them.",
+        "family": "cole donustu"
+      },
+      {
+        "id": 8,
+        "topic": "Rome in 2512: the Colosseum is the anchor of a covered green district and vines and orchards terrace the seven hills.",
+        "family": "yesile donustu"
+      },
+      {
+        "id": 9,
+        "topic": "Sydney in 2512: the Opera House shells are extended into a floating harbour city and markets run across pontoon streets.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 10,
+        "topic": "Venice in 2512: St Mark's Campanile rises from a city rebuilt entirely on raised decks above the lagoon, with canals running underneath.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 11,
+        "topic": "Agra in 2512: the Taj Mahal stands under a climate canopy and the surrounding city is a shaded garden district of walkways and stalls.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 12,
+        "topic": "Hong Kong in 2512: Victoria Harbour is bridged over by stacked platform levels and the skyline continues upward above them.",
+        "family": "yukari buyudu"
+      },
+      {
+        "id": 13,
+        "topic": "Rio de Janeiro in 2512: Christ the Redeemer overlooks a city terraced into the hillsides with farms on every level.",
+        "family": "yesile donustu"
+      },
+      {
+        "id": 14,
+        "topic": "San Francisco in 2512: the Golden Gate Bridge carries a linear town along its deck while the bay city sits on raised ground.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 15,
+        "topic": "Moscow in 2512: St Basil's Cathedral stands inside a glazed warm-shell district built against long deep winters.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 16,
+        "topic": "Athens in 2512: the Acropolis is sheltered under a light canopy and the city below has moved into cool sunken courtyards.",
+        "family": "asagi indi"
+      },
+      {
+        "id": 17,
+        "topic": "Barcelona in 2512: the Sagrada Familia's towers are woven into a canopied city grid of shaded blocks and rooftop gardens.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 18,
+        "topic": "Singapore in 2512: Marina Bay Sands anchors a city grown vertically into layered green towers above the water.",
+        "family": "yukari buyudu"
+      },
+      {
+        "id": 19,
+        "topic": "Beijing in 2512: the Forbidden City sits at the centre of a vast shaded district, with the modern city built in cool tiers around it.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 20,
+        "topic": "Amsterdam in 2512: the canal rings have become a floating city of decked streets and houseboats beneath raised walkways.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 21,
+        "topic": "Mumbai in 2512: the Gateway of India stands at the foot of a stacked vertical city rising above the monsoon waterline.",
+        "family": "yukari buyudu"
+      },
+      {
+        "id": 22,
+        "topic": "Bangkok in 2512: Wat Arun rises from a canal city rebuilt on stilted levels with floating markets between them.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 23,
+        "topic": "Shanghai in 2512: the Oriental Pearl Tower is the core of a city stacked into bridged tiers above the Huangpu.",
+        "family": "yukari buyudu"
+      },
+      {
+        "id": 24,
+        "topic": "Petra in 2512: the rock-cut facades anchor a living city carved deeper into the canyon walls, cool and lamplit inside.",
+        "family": "asagi indi"
+      },
+      {
+        "id": 25,
+        "topic": "Marrakesh in 2512: the Koutoubia minaret stands over a city retreated into shaded sunken souks against the widened desert.",
+        "family": "cole donustu"
+      },
+      {
+        "id": 26,
+        "topic": "Seoul in 2512: Namsan Tower crowns a city grown into terraced green levels stepping up the mountainsides.",
+        "family": "yesile donustu"
+      },
+      {
+        "id": 27,
+        "topic": "Berlin in 2512: the Brandenburg Gate opens onto a glazed winter-city district of warm covered boulevards.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 28,
+        "topic": "Lisbon in 2512: the 25 de Abril Bridge spans a risen Tagus and the hillside city sits above a harbour of floating streets.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 29,
+        "topic": "Mexico City in 2512: the Angel of Independence stands above a city rebuilt downward into cool lamplit levels as the basin dried.",
+        "family": "asagi indi"
+      },
+      {
+        "id": 30,
+        "topic": "Toronto in 2512: the CN Tower rises from a city sealed into linked warm galleries against long deep winters.",
+        "family": "ortu altinda"
+      },
+      {
+        "id": 31,
+        "topic": "Phoenix in 2512: the desert city has moved beneath wide shading canopies and into cool underground arcades.",
+        "family": "cole donustu"
+      },
+      {
+        "id": 32,
+        "topic": "Cusco in 2512: the Inca stonework anchors a high city terraced into farms climbing every surrounding slope.",
+        "family": "yesile donustu"
+      },
+      {
+        "id": 33,
+        "topic": "Cape Town in 2512: Table Mountain overlooks a city stepped up the slope above a risen Atlantic shoreline.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 34,
+        "topic": "Alexandria in 2512: the Qaitbay Citadel stands on a sea wall and the city lives on raised decks behind it.",
+        "family": "su yukseldi"
+      },
+      {
+        "id": 35,
+        "topic": "Las Vegas in 2512: the Strip is roofed over against the heat and the city continues beneath a long shaded gallery.",
+        "family": "cole donustu"
+      },
+      {
+        "id": 36,
+        "topic": "Reykjavik in 2512: Hallgrimskirkja rises from a city enclosed in warm glazed shells lit through the long dark months.",
+        "family": "ortu altinda"
+      }
+    ]
+  }
+}

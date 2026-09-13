@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Tokyo Built A Second City In The Air"
+  },
+  "synopsis": "Tokyo has grown upward into stacked tiers around Tokyo Tower and Skytree, with street life running along bridges strung between them.",
+  "family": "yukari buyudu",
+  "seed_id": 5,
+  "narration": "",
+  "caption": "Tokyo, 2512. The city ran out of ground, so it kept building upward.\n\nPeople stayed exactly where they were. The wards were rebuilt as three stacked levels, each one a full street plan of its own.\n\nThe ramen counters moved to the bridge decks. Tokyo Tower runs through all three tiers and is still orange. Fuji is still on the horizon from the top level on a clear day.\n\nA fictional future, created with AI.\n\nWhich level would you want to live on?",
+  "hashtags": "#Tokyo #TokyoTower #Skytree #FutureCity #Cyberpunk #Architecture #AIart #STILLHOME2512",
+  "hook_shot": 1,
+  "doctrine_sha256": "ee9d2466254477e0155032a364871bde1e3f60818f4ba0e588b0b149fa40525b",
+  "title_card": {
+    "title": "TOKYO 2512",
+    "subtitle": ""
+  },
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps: a wide god's-eye view from high aerial or near-orbital height. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable. One slow, single-direction camera move only (a descent or a forward glide); no pan, orbit, whip or cut inside the shot. No setup, no approach, no delayed reveal: what the episode is about is legible in frame one.\n\nTokyo fills frame one beneath a fixed high-aerial camera, the city grown upward into three clear stacked tiers of decks and bridges that follow the old ward boundaries. Tokyo Tower rises orange and intact through all three levels near the centre of frame, and Skytree stands taller beyond it, both threaded by walkways that radiate outward to the surrounding decks. Tokyo Bay reads at the edge of frame and Mount Fuji sits clean on the horizon. Lit windows and signage glow across every tier while the lowest level lies in soft shadow. The camera glides slowly forward on a single heading for the full duration, holding altitude, so the tiers pass steadily beneath and the two towers rise at centre.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps: a low, human-scale view of the SAME place after a hard cut, from a completely different vantage point. People are visible and going about ordinary daily life: walking, trading, carrying, eating, queueing. Warm practical light from windows, stalls and signage fills the frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only.\n\nA low view on a mid-tier bridge deck strung between buildings, Tokyo Tower's orange lattice filling the background and rising past the upper level. The deck is a dense evening street: ramen counters, vending machines, hanging lanterns and vertical signage crowd both sides, steam rising into the cool air, and a thick commuter crowd moves along the walkway. The tier above reads as a lit ceiling of girders and windows, and the city glows far below through the gaps in the deck. The camera glides forward slowly along the bridge at a constant height for the full duration.",
+      "seed": null
+    }
+  ]
+}

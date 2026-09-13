@@ -1,0 +1,49 @@
+{
+  "series": {
+    "slug": "still-home",
+    "title": "Still Home",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "state_machine_version": 2,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0,
+    "native_audio": false,
+    "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
+    "music_lowpass_hz": 2000,
+    "block_degraded_publish": true,
+    "duration_band": [
+      7,
+      9
+    ],
+    "hook_teaser": {
+      "enabled": false
+    },
+    "title_card": {
+      "enabled": true,
+      "duration": 4.0,
+      "typewriter": 0.5,
+      "align": "left",
+      "margin_pct": 6,
+      "color": "black",
+      "box": false,
+      "subtitle_required": false,
+      "year_required": true
+    },
+    "qc": {
+      "enabled": true,
+      "require_all_shots": true,
+      "min_shots": 2,
+      "native_audio_review": false,
+      "notes": "Every episode is TWO shots of ONE real, world-recognisable city in the year 2512. Shot 1 is a wide god's-eye view in which the altered city is already fully readable in the very first frame; shot 2 is a low, human-scale view of the same place with ordinary life visible. Fail the episode if no world-famous landmark or skyline is recognisable, if the place is an invented or generic location, if shot 1 opens close or inside instead of wide, if the two shots do not read as the same city, or if shot 2 contains no people going about ordinary life. This channel shows CONTINUITY, not apocalypse: ruins-only imagery, corpses, panic, warfare, weapons and abandoned emptiness are automatic failures, and so are close-ups of faces. Readable on-screen text, captions, subtitles, logos and watermarks are automatic failures because the title card is burned in afterwards. Record any of these under issues.",
+      "api_fail_open": false
+    }
+  },
+  "art_style": "Photoreal documentary footage of a real, named present-day city as it exists in the year 2512, composed for vertical 9:16 at 24 fps. The city's genuine geography and its world-famous landmarks stay recognisable at credible scale, visibly transformed by the adaptation this episode shows rather than destroyed by it. Natural motivated light, restrained documentary colour, deep shadows, fine architectural texture, stable exposure and clear scale cues give the image the clarity and grain of real aerial and street photography. Warm interior and street lighting reads throughout: lit windows, market stalls, signage glow and moving crowds establish that the place is lived in. The frame edge is the image edge and the view is unobstructed. Surfaces are maintained and inhabited, never ruined; the mood is durable, ordinary and quietly hopeful.",
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}
