@@ -333,10 +333,16 @@ def _publish_identifier(result: dict, platform: str) -> str | None:
     if isinstance(results, dict) and isinstance(results.get(platform), dict):
         platform_result = results[platform]
 
+    # `platform_post_id` ve `publish_id`: uploader'ın doğrulanmış yanıtı bunları
+    # zaten `publication_id`ye çeviriyor, buradaki kayıtlar doğrulamadan GEÇMİŞ
+    # yüklemeler için tutuluyor; senkron dönen bir gövdede bu iki şekil de
+    # görülebiliyor (TikTok `publish_id`, Instagram `platform_post_id`).
     preferred_keys = (
         f"{platform}_id",
+        "platform_post_id",
         "video_id",
         "post_id",
+        "publish_id",
         "media_id",
         "publication_id",
         "platform_id",

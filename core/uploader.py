@@ -475,6 +475,51 @@ def reconcile_async_upload(
     return outcome, detail, body
 
 
+def _confirmed_publication_identifier(status_body: dict, platform: str) -> str | None:
+    """YAYINLANDIĞI KANITLANMIŞ bir işin kimliği. Tek farkı `publish_id`'yi kabul eder.
+
+    Bu alanı genel `_publication_identifier`a EKLEYEMEYİZ: o çıkarıcı, işin henüz
+    kuyrukta olduğu yanıtlarda da çalışıyor (upload_to_platform, satır ~705) ve
+    orada `publish_id` "platformda gönderi oluştu" değil "yükleme oturumu açıldı"
+    demek olurdu; kuyruğa kabul edilen iş yayınla karıştırılamaz. Burada ise
+    `_status_outcome` zaten success döndürmüş oluyor.
+
+    Ölçülen vaka (13 Eylül 2026, galacticexperimet part 93): TikTok terminal
+    yanıtı `platform_post_id`/`post_url` DEĞİL `publish_id`/`url` döndürdü,
+    kimlik çıkarılamadı ve defterde TikTok null kaldı.
+    """
+    found = _publication_identifier(status_body, platform)
+    if found:
+        return found
+    entry = _status_platform_result(status_body, platform) or _platform_result(status_body, platform)
+    if isinstance(entry, dict):
+        # `original_publish_id` BİLEREK yok: o, yayının değil yükleme oturumunun
+        # kimliği ("v_pub_file~v2-1...") ve platformda bir gönderiyi göstermez.
+        value = entry.get("publish_id")
+        if value is not None and not isinstance(value, (dict, list, bool)):
+            text = str(value).strip()
+            if text:
+                return text
+    return None
+
+
+def _confirmed_post_url(status_body: dict, platform: str) -> str | None:
+    """Doğrulanmış işin platform gönderi URL'si; YALNIZ o platformun girdisinden.
+
+    `url` anahtarı ancak platform girdisinin İÇİNDE gönderi URL'si demektir; gövde
+    genelinde arandığında belge/araç bağlantılarını yakalayabilir, o yüzden arama
+    burada kapsamlıdır.
+    """
+    entry = _status_platform_result(status_body, platform) or _platform_result(status_body, platform)
+    if not isinstance(entry, dict):
+        return None
+    for key in ("post_url", "url"):
+        value = entry.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return None
+
+
 def _confirmed_async_result(
     status_body: dict,
     platform: str,
@@ -490,10 +535,15 @@ def _confirmed_async_result(
         "request_id": request_id,
         "job_id": job_id,
     }
-    identifier = _publication_identifier(status_body, platform)
+    identifier = _confirmed_publication_identifier(status_body, platform)
     if identifier:
         # series_runner'ın mevcut kimlik çıkarıcısı publication_id'yi zaten tanır.
         confirmed.setdefault("publication_id", identifier)
+    post_url = _confirmed_post_url(status_body, platform)
+    if post_url:
+        # Registry'nin URL arayıcısı `post_url` anahtarını tanıyor; platforma özgü
+        # şekli burada, platformun bilindiği tek yerde normalleştiriyoruz.
+        confirmed.setdefault("post_url", post_url)
     return confirmed
 
 

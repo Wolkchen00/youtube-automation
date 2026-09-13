@@ -401,3 +401,128 @@ def test_job_id_is_used_when_request_id_is_absent(tmp_path, monkeypatch):
 
     assert _upload(tmp_path, platform="tiktok")
     assert get.call_args.kwargs["params"] == {"job_id": "job-only"}
+
+
+# ── TikTok `publish_id` / `url` şekli (13 Eylül 2026, galacticexperimet part 93) ──
+# Gerçek terminal yanıt: yayın BAŞARILI ama kimlik `platform_post_id`de değil
+# `publish_id`de, URL de `post_url`da değil `url`de geliyordu. İki çıkarıcı da bu
+# anahtarları tanımadığı için defterde TikTok kimliği ve URL'si null kalmıştı.
+PART93_TIKTOK_TERMINAL_RESPONSE = {
+    "request_id": "b1d1f5e5f38b4443863c1ebe469fcb53",
+    "job_id": "277911022fe24cebb64011b667bf4d05",
+    "status": "completed",
+    "scheduler_status": "running",
+    "completed": 1,
+    "failed": 0,
+    "retryable": 0,
+    "skipped": 0,
+    "total": 1,
+    "results": [{
+        "platform": "tiktok",
+        "success": True,
+        "publish_id": "7685081779044224270",
+        "original_publish_id": "v_pub_file~v2-1.7685081517546326046",
+        "status": "PUBLISH_COMPLETE",
+        "url": "https://www.tiktok.com/@galacticexperimet/video/7685081779044224270",
+        "video_was_transcoded": False,
+        "changes": [],
+    }],
+    "external_id": None,
+}
+
+
+def test_tiktok_publish_id_shape_reaches_registry_with_identity_and_url(tmp_path, monkeypatch):
+    monkeypatch.setattr(
+        uploader.requests, "post",
+        mock.Mock(return_value=FakeResponse(dict(PART22_ASYNC_RESPONSE))),
+    )
+    monkeypatch.setattr(
+        uploader.requests, "get",
+        mock.Mock(return_value=FakeResponse(PART93_TIKTOK_TERMINAL_RESPONSE)),
+    )
+    monkeypatch.setattr("series.bible.data_dir", lambda slug: tmp_path)
+
+    result = _upload(tmp_path, platform="tiktok")
+
+    assert result
+    assert result["publication_id"] == "7685081779044224270"
+    assert result["post_url"] == (
+        "https://www.tiktok.com/@galacticexperimet/video/7685081779044224270"
+    )
+
+    series_runner._append_publish_registry("fixture", 93, "Girdap", {"tiktok": result})
+
+    registry = json.loads((tmp_path / "published.json").read_text(encoding="utf-8"))
+    assert registry[0]["results"] == {"tiktok": "7685081779044224270"}
+    assert registry[0]["post_urls"] == {
+        "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7685081779044224270"
+    }
+    # Kimlik çıkarılabildiğine göre ham yanıt yedeği YAZILMAMALI.
+    assert "results_raw" not in registry[0]
+
+
+def test_queued_publish_id_is_not_treated_as_a_publication(tmp_path, monkeypatch):
+    """`publish_id` tek başına 'yayınlandı' demek DEĞİL: iş hâlâ doğrulanmalı.
+
+    TikTok yükleme oturumu açıldığı anda da publish_id veriyor. Genel çıkarıcı bunu
+    kimlik sayarsa kuyruğa kabul edilen iş yayın sanılır ve durum sorgusu hiç
+    yapılmaz.
+    """
+    accepted = {
+        "success": True,
+        "request_id": "req-kuyruk",
+        "job_id": "job-kuyruk",
+        "results": [{
+            "platform": "tiktok",
+            "success": False,
+            "status": "PROCESSING_UPLOAD",
+            "publish_id": "7685081779044224270",
+        }],
+    }
+    failed = {
+        "status": "failed",
+        "completed": 0,
+        "failed": 1,
+        "results": [{"platform": "tiktok", "status": "failed", "success": False}],
+    }
+    monkeypatch.setattr(uploader.requests, "post", mock.Mock(return_value=FakeResponse(accepted)))
+    get = mock.Mock(return_value=FakeResponse(failed))
+    monkeypatch.setattr(uploader.requests, "get", get)
+
+    assert _upload(tmp_path, platform="tiktok") is None
+    assert get.call_count == 1
+
+
+def test_upload_session_id_and_foreign_url_are_not_recorded_as_publication(tmp_path, monkeypatch):
+    """`original_publish_id` kimlik, gövdedeki yabancı `url` de gönderi URL'si değildir."""
+    body = {
+        "status": "completed",
+        "completed": 1,
+        "failed": 0,
+        "docs": {"url": "https://docs.upload-post.com/api/upload-status"},
+        "results": [{
+            "platform": "tiktok",
+            "success": True,
+            "original_publish_id": "v_pub_file~v2-1.7685081517546326046",
+            "status": "PUBLISH_COMPLETE",
+        }],
+    }
+    monkeypatch.setattr(
+        uploader.requests, "post",
+        mock.Mock(return_value=FakeResponse(dict(PART22_ASYNC_RESPONSE))),
+    )
+    monkeypatch.setattr(uploader.requests, "get", mock.Mock(return_value=FakeResponse(body)))
+    monkeypatch.setattr("series.bible.data_dir", lambda slug: tmp_path)
+
+    result = _upload(tmp_path, platform="tiktok")
+
+    assert result
+    assert "publication_id" not in result
+    assert "post_url" not in result
+
+    series_runner._append_publish_registry("fixture", 94, "Kimliksiz", {"tiktok": result})
+
+    registry = json.loads((tmp_path / "published.json").read_text(encoding="utf-8"))
+    assert registry[0]["results"] == {"tiktok": None}
+    assert "post_urls" not in registry[0]
+    assert "results_raw" in registry[0]
