@@ -1,4 +1,5 @@
 {
+  "_rafa_kaldirma_notu": "13 Eylul 2026, Ihsan karari: 'Saturn halkalari kaldir, biraz bekle, bu konuyla ilgilenecegim.' Bolum kuyruktan CIKARILDI, silinmedi. Geri almak icin: bu dosyayi plans/part01.json olarak yeniden adlandir ve series.json icindeki next_part'i 1 yap. Not: bu konu A/B ses bake-off'unda iki kez uretildi (output/experiments/exp-2026-09-bakeoff-ses/one-variable-part01 ve one-variable-b-part01), ikisi de YAYINLANMADI.",
   "episode": {
     "number": 1,
     "title": "Saturn's Rings Around Earth"

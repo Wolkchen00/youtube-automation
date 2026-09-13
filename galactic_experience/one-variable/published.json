@@ -1,0 +1,35 @@
+[
+  {
+    "part": 92,
+    "subtitle": "One Wave Along the Whole Coast",
+    "ts": "2026-09-12T22:07:00+00:00",
+    "results": {
+      "youtube": "gJ4qf_rupvk",
+      "instagram": "18112367687089818",
+      "tiktok": "7684774344140115214"
+    },
+    "post_urls": {
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7684774344140115214"
+    },
+    "kaynak": "elle yayin , deney klasoru one-variable-part92/YAYIN_tsunami_v2.mp4 (kimlikler commit 9135964)"
+  },
+  {
+    "part": 93,
+    "subtitle": "One Whirlpool That Never Closes",
+    "ts": "2026-09-13T18:03:47.944405+00:00",
+    "results": {
+      "youtube": "gBy13Y6qrEA",
+      "instagram": "18163268719470745",
+      "tiktok": "7685081779044224270"
+    },
+    "kaynak": "elle yayin , deney klasoru one-variable-part93/ep93_mastered.mp4",
+    "post_urls": {
+      "instagram": "https://www.instagram.com/reel/DdPJzFYAfBE/",
+      "tiktok": "https://www.tiktok.com/@galacticexperimet/video/7685081779044224270",
+      "youtube": "https://www.youtube.com/watch?v=gBy13Y6qrEA"
+    },
+    "results_raw": {
+      "tiktok": "{'request_id': 'b1d1f5e5f38b4443863c1ebe469fcb53', 'job_id': '277911022fe24cebb64011b667bf4d05', 'status': 'completed', 'scheduler_status': 'running', 'completed': 1, 'failed': 0, 'retryable': 0, 'skipped': 0, 'total': 1, 'results': [{'success': True, 'publish_id': '7685081779044224270', 'original_publish_id': 'v_pub_file~v2-1.7685081517546326046', 'status': 'PUBLISH_COMPLETE', 'url': 'https://www.tiktok.com/@galacticexperimet/video/7685081779044224270', 'video_was_transcoded': False, 'changes': [], 'prevalidation_metadata': {'width': 1080, 'height': 1920, 'fps': 30.0, 'duration': 8.0, 'contai"
+    }
+  }
+]

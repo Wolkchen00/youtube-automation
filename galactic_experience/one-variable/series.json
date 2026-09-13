@@ -15,7 +15,7 @@
   "status": "draft",
   "priority": 999,
   "total_parts": 5,
-  "next_part": 1,
+  "next_part": 2,
   "doctrine_sha256": "93b8f45199713c6bd071ea13eea3cb75e14b9a53244d07391f5bc781507da3fc",
   "kurulum_notu": "12 Eylul 2026'da kuruldu, event-horizon'un yerine. status='draft' ve cron YORUMDA: Ihsan KONSEPT.md v2.0'i onaylayana kadar hicbir sey uretilmez. Acma sirasi: (1) KONSEPT.md statusunu ONAYLANDI yap ve doctrine_sha256'yi YENILE, (2) buradaki status'u 'active' yap, (3) .github/workflows/one-variable.yml icindeki schedule blogunun yorumunu kaldir, (4) filo.json cron listesine kaydi ekle.",
   "auto_replenish": {
