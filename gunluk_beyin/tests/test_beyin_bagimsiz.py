@@ -872,8 +872,8 @@ def test_bilinmeyen_komut_traceback_dokmez(kok):
 #  o degerler QC'nin cekim dusurdugu YARIM bolumlerden geliyordu.)
 # ===================================================================
 
-TAMLIK_KANAL = "flashpoints"          # uretim kaydi olan gercek slug
-TAMLIK_YOL = "shadowedhistory/flashpoints"
+TAMLIK_KANAL = "still-home"          # uretim kaydi olan gercek slug
+TAMLIK_YOL = "shadowedhistory/still-home"
 
 
 def _uretim_kur(uretim_kok: Path, published, series=None, planlar=None) -> Path:
@@ -910,7 +910,7 @@ def _tamlik_yayinlari(n=15):
 def test_eksik_bolum_bolum4_hedefi_olmaz(kok, tmp_path, monkeypatch):
     """EKSIK uretilmis bolumler ust yariyi ele gecirmisse suresi hedef OLMAMALI.
 
-    Gercek vakanin birebir kopyasi (flashpoints, 2026-09-10): ust yaridaki 7
+    Gercek vakanin birebir kopyasi (still-home, 2026-09-10): ust yaridaki 7
     videonun 4'u yarim bolumdu, ust yari medyani 9.44sn'ye dustu ve bolum 4
     "bugunku videoyu 9.44sn civarina hedefle" diyordu. Filtre olmadan bu test
     GECMEZ , mutasyonla dogrulandi.
@@ -1105,7 +1105,7 @@ def test_bolum2_de_eksik_bolumleri_saymaz(kok, tmp_path, monkeypatch):
     """Yeterli TEMIZ veri varken bile bolum 2 tablosu eksik bolumleri saymamali.
 
     Bu testin varlik sebebi gercek bir kacak: bolum 4 ve 5 filtrelenmisti ama
-    bolum 2'nin `rankable` listesi filtresiz kalmisti. flashpoints'te gorunmedi
+    bolum 2'nin `rankable` listesi filtresiz kalmisti. still-home'te gorunmedi
     cunku orada temiz kayit 15'in altinda kaliyor ve bolum 2 zaten "yetersiz
     veri" deyip o satira hic ulasmiyor. Kacak ancak temiz kayit esigi astiginda
     ortaya cikiyordu: bolum 2 eksik bolumleri sayarken bolum 4 saymiyordu.

@@ -10,7 +10,7 @@ No static idea pool. The brain is rewritten every day from measured outcomes.
     python beyin.py topla <channel>   refresh view counts (time series)
     python beyin.py beyin <channel>   read ledger, write BEYIN.md
 
-Channel slugs: unnatural-lab, event-horizon, flashpoints, aimagine-fear
+Channel slugs: unnatural-lab, event-horizon, still-home, aimagine-fear
 
 Note on language: identifiers and comments are English; user-facing strings
 (the report body and log lines) stay Turkish because Ihsan and the channel
@@ -35,7 +35,7 @@ TOOLS = os.path.join(ROOT, "arac")
 CHANNELS = {
     "unnatural-lab": "UC-Aht8VqAUMTUKYRQA3agYQ",
     "event-horizon": "UCVCRWrQYrIHW6csOsw9bDNw",
-    "flashpoints": "UCUdp0KLBh4EeeSgVbwS_DhA",
+    "still-home": "UCUdp0KLBh4EeeSgVbwS_DhA",   # shadowedhistory kanali (eski anahtar: flashpoints)
     "aimagine-fear": "UCCgbHTzYKYawUT6zEo0nlDg",
 }
 
@@ -45,7 +45,7 @@ CHANNELS = {
 SERIES_DIRS = {
     "unnatural-lab": os.path.join("sentinal_ihsan", "unnatural-lab"),
     "event-horizon": os.path.join("galactic_experience", "event-horizon"),
-    "flashpoints": os.path.join("shadowedhistory", "flashpoints"),
+    "still-home": os.path.join("shadowedhistory", "still-home"),
 }
 
 # TESLIM REJIMI: videoyu fiilen degistiren ayarlar. Iki farkli rejimde uretilmis

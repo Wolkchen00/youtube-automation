@@ -30,7 +30,7 @@ def run(cwd, *args):
         errors="replace")
 
 
-def ledger_row(i, channel="flashpoints"):
+def ledger_row(i, channel="still-home"):
     return {
         "video_id": "v%03d" % i, "kanal": channel,
         "tarih": "2026-08-%02d" % (i + 1),
@@ -72,14 +72,14 @@ def test_all_measurements_failing_stops_hard(monkeypatch, tmp_path):
     geciliyordu ve komut exit 0 verip 'defter: N kayit' basiyordu."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(3)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(3)])
 
     def hep_patla(url, workdir, flag):
         raise RuntimeError("ffmpeg yok")
 
     install_measure_fakes(monkeypatch, [feed_row(i) for i in range(4)], hep_patla)
     with pytest.raises(SystemExit) as exc:
-        beyin.cmd_measure("flashpoints", limit=10)
+        beyin.cmd_measure("still-home", limit=10)
     assert "HICBIRI olculemedi" in str(exc.value)
 
 
@@ -87,7 +87,7 @@ def test_partial_measurement_failure_is_reported_but_proceeds(monkeypatch,
                                                               tmp_path, capsys):
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(3)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(3)])
 
     def bazen(url, workdir, flag):
         if url.endswith("new00"):
@@ -95,7 +95,7 @@ def test_partial_measurement_failure_is_reported_but_proceeds(monkeypatch,
         return {"hata": "indirilemedi"}
 
     install_measure_fakes(monkeypatch, [feed_row(i) for i in range(3)], bazen)
-    beyin.cmd_measure("flashpoints", limit=10)
+    beyin.cmd_measure("still-home", limit=10)
     cikti = capsys.readouterr().out
     assert "2 video olculemedi" in cikti, "kismi kayip sessizce gecilmemeli"
 
@@ -106,7 +106,7 @@ def test_measure_failure_is_stamped_into_the_report(monkeypatch, tmp_path):
     bilemiyordu."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(16)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(16)])
 
     fake_uploads = types.ModuleType("uploads")
     fake_uploads.list_uploads = lambda cid, limit: ([], "API: 403 | RSS: 404", None)
@@ -115,12 +115,12 @@ def test_measure_failure_is_stamped_into_the_report(monkeypatch, tmp_path):
     monkeypatch.setitem(sys.modules, "uploads", fake_uploads)
     monkeypatch.setitem(sys.modules, "olc", fake_olc)
     with pytest.raises(SystemExit) as exc:
-        beyin.cmd_measure("flashpoints", limit=10)
+        beyin.cmd_measure("still-home", limit=10)
     assert "yukleme listesi okunamadi" in str(exc.value),         "test kurulumu yanlis: baska bir yerden cikti"
 
-    proc = run(tmp_path, "beyin", "flashpoints")
+    proc = run(tmp_path, "beyin", "still-home")
     assert proc.returncode == 0, proc.stderr
-    metin = (tmp_path / "kanallar" / "flashpoints" / "BEYIN.md").read_text(
+    metin = (tmp_path / "kanallar" / "still-home" / "BEYIN.md").read_text(
         encoding="utf-8")
     assert "son olcum adimi BASARISIZ" in metin
     assert "403" in metin
@@ -129,14 +129,14 @@ def test_measure_failure_is_stamped_into_the_report(monkeypatch, tmp_path):
 def test_successful_measure_clears_the_stamp(monkeypatch, tmp_path):
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(3)])
-    beyin.note_measure_failure("flashpoints", "eski hata")
-    assert beyin.read_measure_failure("flashpoints")
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(3)])
+    beyin.note_measure_failure("still-home", "eski hata")
+    assert beyin.read_measure_failure("still-home")
 
     install_measure_fakes(monkeypatch, [feed_row(0)],
                           lambda url, w, f: {"olcum": {"sure": 9.0}})
-    beyin.cmd_measure("flashpoints", limit=10)
-    assert beyin.read_measure_failure("flashpoints") is None, \
+    beyin.cmd_measure("still-home", limit=10)
+    assert beyin.read_measure_failure("still-home") is None, \
         "olcum duzeldi ama rapor hala 'basarisiz' diyecek"
 
 
@@ -148,11 +148,11 @@ def test_saturated_window_warns(monkeypatch, tmp_path, capsys):
     olculmezdi ve kosu yesil donerdi."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [])
+    seed(tmp_path, "still-home", [])
     feed = [feed_row(i) for i in range(5)]
     install_measure_fakes(monkeypatch, feed,
                           lambda url, w, f: {"olcum": {"sure": 9.0}})
-    beyin.cmd_measure("flashpoints", limit=5)
+    beyin.cmd_measure("still-home", limit=5)
     cikti = capsys.readouterr().out
     assert "EN ESKI videosu da defterde yok" in cikti
     assert "--limit 15" in cikti
@@ -161,11 +161,11 @@ def test_saturated_window_warns(monkeypatch, tmp_path, capsys):
 def test_unsaturated_window_stays_quiet(monkeypatch, tmp_path, capsys):
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [])
+    seed(tmp_path, "still-home", [])
     feed = [feed_row(i) for i in range(3)]
     install_measure_fakes(monkeypatch, feed,
                           lambda url, w, f: {"olcum": {"sure": 9.0}})
-    beyin.cmd_measure("flashpoints", limit=10)
+    beyin.cmd_measure("still-home", limit=10)
     assert "EN ESKI" not in capsys.readouterr().out, "gereksiz alarm"
 
 
@@ -194,7 +194,7 @@ def test_notice_is_written_before_the_state_file(tmp_path, monkeypatch):
     import beyin
     import askida
     monkeypatch.chdir(tmp_path)
-    folder = seed(tmp_path, "flashpoints", [ledger_row(0)])
+    folder = seed(tmp_path, "still-home", [ledger_row(0)])
     (folder / "BEYIN.md").write_text("# gercek rapor\nhedef 15 sn\n",
                                      encoding="utf-8")
 
@@ -203,7 +203,7 @@ def test_notice_is_written_before_the_state_file(tmp_path, monkeypatch):
 
     monkeypatch.setattr(askida, "install_notice", patla)
     with pytest.raises(OSError):
-        beyin.cmd_suspend("flashpoints", days=2)
+        beyin.cmd_suspend("still-home", days=2)
     assert not (folder / askida.STATE_FILE).exists(), \
         "bildirim yazilamadi ama kanal yine de askiya alindi"
 
@@ -212,11 +212,11 @@ def test_resume_reports_a_failed_state_removal(tmp_path, monkeypatch):
     import beyin
     import askida
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(0)])
-    beyin.cmd_suspend("flashpoints", days=2)
+    seed(tmp_path, "still-home", [ledger_row(0)])
+    beyin.cmd_suspend("still-home", days=2)
     monkeypatch.setattr(askida, "clear_state", lambda folder: False)
     with pytest.raises(SystemExit) as exc:
-        beyin.cmd_resume("flashpoints")
+        beyin.cmd_resume("still-home")
     assert "SILINEMEDI" in str(exc.value)
 
 
@@ -235,7 +235,7 @@ def test_ledger_temp_name_is_process_specific(tmp_path, monkeypatch):
         return gercek_open(path, *a, **k)
 
     monkeypatch.setattr("builtins.open", izle)
-    beyin.write_ledger("flashpoints", [ledger_row(0)])
+    beyin.write_ledger("still-home", [ledger_row(0)])
     assert gorulen, "gecici dosya hic kullanilmadi"
     assert str(os.getpid()) in gorulen[0], \
         "iki surec ayni .tmp adini paylasiyor: %s" % gorulen[0]
@@ -279,7 +279,7 @@ def install_collect_fakes(monkeypatch, batch, batch_error=None, page=None):
     monkeypatch.setitem(sys.modules, "kanal", fake_kanal)
 
 
-def read_rows(cwd, channel="flashpoints"):
+def read_rows(cwd, channel="still-home"):
     path = cwd / "kanallar" / channel / "defter.jsonl"
     return [json.loads(l) for l in
             path.read_text(encoding="utf-8").splitlines() if l.strip()]
@@ -292,12 +292,12 @@ def test_api_answered_so_a_missing_video_is_information_not_failure(
     her gun yeniden alarm uretmemeli."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(4)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(4)])
     install_collect_fakes(monkeypatch, {
         "v000": {"izlenme": 10}, "v001": {"izlenme": 20},
         "v002": {"izlenme": 30},
     })
-    beyin.cmd_collect("flashpoints")
+    beyin.cmd_collect("still-home")
     cikti = capsys.readouterr().out
     assert "gorunmuyor" in cikti and "ariza DEGIL" in cikti
     kayitlar = {r["video_id"]: r for r in read_rows(tmp_path)}
@@ -310,10 +310,10 @@ def test_a_returning_video_loses_its_invisible_mark(monkeypatch, tmp_path):
     monkeypatch.chdir(tmp_path)
     rows = [ledger_row(i) for i in range(2)]
     rows[1]["gorunmez"] = {"ts": "2026-09-01T00:00:00+00:00", "sebep": "eski"}
-    seed(tmp_path, "flashpoints", rows)
+    seed(tmp_path, "still-home", rows)
     install_collect_fakes(monkeypatch, {"v000": {"izlenme": 1},
                                         "v001": {"izlenme": 2}})
-    beyin.cmd_collect("flashpoints")
+    beyin.cmd_collect("still-home")
     kayitlar = {r["video_id"]: r for r in read_rows(tmp_path)}
     assert not kayitlar["v001"].get("gorunmez"), \
         "video geri geldi ama hala gorunmez isaretli"
@@ -325,11 +325,11 @@ def test_api_down_and_most_rows_unreadable_stops_hard(monkeypatch, tmp_path):
     1/60 tazelenmesi bile kosuyu yesil birakiyordu."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(6)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(6)])
     install_collect_fakes(monkeypatch, {}, batch_error="HTTP 403 quotaExceeded",
                           page={"v000": {"izlenme": 5}})
     with pytest.raises(SystemExit) as exc:
-        beyin.cmd_collect("flashpoints")
+        beyin.cmd_collect("still-home")
     mesaj = str(exc.value)
     assert "BAYAT" in mesaj and "5" in mesaj
 
@@ -339,10 +339,10 @@ def test_api_down_but_scraping_mostly_works_stays_green(monkeypatch, tmp_path,
     """Esik yarisi: bir iki kayit kacmasi gurultudur, kirmizi yapmamali."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(6)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(6)])
     sayfa = {"v%03d" % i: {"izlenme": 10 + i} for i in range(5)}
     install_collect_fakes(monkeypatch, {}, batch_error="HTTP 500", page=sayfa)
-    beyin.cmd_collect("flashpoints")
+    beyin.cmd_collect("still-home")
     cikti = capsys.readouterr().out
     assert "API dustu" in cikti, "API'nin dustugu sessizce gecilmemeli"
 
@@ -353,11 +353,11 @@ def test_invisible_rows_are_not_confused_with_api_failure(monkeypatch,
     silinmis olduklarina dair bir kanit yok, sadece ulasamadik."""
     import beyin
     monkeypatch.chdir(tmp_path)
-    seed(tmp_path, "flashpoints", [ledger_row(i) for i in range(4)])
+    seed(tmp_path, "still-home", [ledger_row(i) for i in range(4)])
     install_collect_fakes(monkeypatch, {}, batch_error="HTTP 500",
                           page={"v000": {"izlenme": 1}, "v001": {"izlenme": 2},
                                 "v002": {"izlenme": 3}})
-    beyin.cmd_collect("flashpoints")
+    beyin.cmd_collect("still-home")
     kayitlar = {r["video_id"]: r for r in read_rows(tmp_path)}
     assert not kayitlar["v003"].get("gorunmez"), \
         "ulasilamayan kayit 'silinmis' diye damgalandi"

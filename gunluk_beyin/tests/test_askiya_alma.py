@@ -124,12 +124,12 @@ def test_every_command_stops_while_suspended(tmp_path, komut):
 
 def test_other_channels_are_untouched(tmp_path):
     seed_ledger(tmp_path, "unnatural-lab")
-    seed_ledger(tmp_path, "flashpoints")
+    seed_ledger(tmp_path, "still-home")
     run(tmp_path, "askiya-al", "unnatural-lab", "--gun", "2")
-    proc = run(tmp_path, "beyin", "flashpoints")
+    proc = run(tmp_path, "beyin", "still-home")
     assert proc.returncode == 0, proc.stderr
     assert "ASKIDA" not in proc.stdout
-    assert (tmp_path / "kanallar" / "flashpoints" / "BEYIN.md").is_file()
+    assert (tmp_path / "kanallar" / "still-home" / "BEYIN.md").is_file()
 
 
 # ─── expiry: it must let go on its own ───────────────────────────────────────
@@ -186,8 +186,8 @@ def test_resume_lifts_it(tmp_path):
 
 
 def test_resume_on_a_channel_that_was_not_suspended_is_harmless(tmp_path):
-    seed_ledger(tmp_path, "flashpoints")
-    proc = run(tmp_path, "devam", "flashpoints")
+    seed_ledger(tmp_path, "still-home")
+    proc = run(tmp_path, "devam", "still-home")
     assert proc.returncode == 0
     assert "zaten askida degil" in proc.stdout
 

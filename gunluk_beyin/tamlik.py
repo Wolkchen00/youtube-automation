@@ -12,7 +12,7 @@ COMPLETE_DURATION_RATIO = 0.70
 PRODUCTION_DIRS = {
     "unnatural-lab": "sentinal_ihsan/unnatural-lab",
     "event-horizon": "galactic_experience/event-horizon",
-    "flashpoints": "shadowedhistory/flashpoints",
+    "still-home": "shadowedhistory/still-home",
     "aimagine-fear": None,
 }
 

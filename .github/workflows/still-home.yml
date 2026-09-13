@@ -16,17 +16,21 @@ name: Still Home Daily
 # taninir sehir 46.042 begeni aldi, isimsiz kubbe 124 (371 kat fark). Bu bulgu
 # bizim aimagine olcumumuzle bagimsiz olarak ortusuyor.
 #
-# publish_mode="approval": onay gelmeden hicbir platforma yayin yok.
+# publish_mode="auto": uretilen bolum dogrudan 3 platforma cikar. Canli gunluk
+# seridin (wild-encounter) filo gelenegiyle ayni. Gunde-1 kanal kilidi yine
+# gecerli, yani bir gunde ikinci video CIKMAZ.
 # Doktrin kapisi: kosu basinda KONSEPT SHA-256 loglanir, pin/damga eslesmezse
 # fail-closed. kie-uretim concurrency grubu hatlari fiilen serilestirir.
 
+# CANLI , 13 Eylul 2026. Ihsan karari: "tamam bunu paylasalim, yeni pipeline bunu
+# yerlestirelim ... her gun yeni bir populer sehir olsun". KONSEPT.md v1.0 ONAYLANDI,
+# series.json status=active + publish_mode=auto. Part 1 (ISTANBUL 2512) elle
+# yayinlandi (3/3 platform), bu serit part 2'den itibaren devraliyor.
+# Durdurmak icin: asagidaki schedule blogunu yorumla + series.json status='paused'.
+
 on:
-  # KAPALI. series.json status='draft' ve Ihsan KONSEPT.md v1.0'i henuz onaylamadi.
-  # Acma sirasi series.json icindeki 'kurulum_notu' alaninda yazili.
-  # Acilinca slot 20:30 UTC olacak (shadowedhistory kanalinin tarihsel yayin
-  # penceresi, flashpoints'ten bosaldi).
-  # schedule:
-  #   - cron: '30 20 * * *'
+  schedule:
+    - cron: '30 20 * * *'   # 20:30 UTC, shadowedhistory kanalinin tarihsel yayin penceresi
   workflow_dispatch:
 
 concurrency:

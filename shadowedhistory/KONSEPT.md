@@ -1,6 +1,6 @@
 # shadowedhistory , KANAL KONSEPTI v1.0 "STILL HOME"
 
-Durum: TASLAK , Ihsan onaylamadi.
+Durum: ONAYLANDI , Ihsan karari 13 Eylul 2026 ("tamam bunu paylasalim, yeni pipeline bunu yerlestirelim").
 Tarih: 13 Eylul 2026
 Kanal: @shad0wedhistory357
 Onceki konsept: TARIH (flashpoints ve 3 seri) , ARSIVDE,
@@ -188,8 +188,29 @@ arkada ya da ufukta hala okunur, boylece iki cekim ayni yerdir.
 
 Anlatim olmadigi icin hikaye caption'dadir.
 
-**Caption IKI DILLIDIR: once Ingilizce, sonra Turkce.** (Ihsan karari, 13 Eylul.
-Referans @one__create Ingilizce + Japonca kullaniyor; ayni kalibin Turkce hali.)
+**Caption IKI DILLIDIR: once Ingilizce, sonra O SEHRIN KENDI DILI.**
+
+Ihsan karari (13 Eylul): "ingilizce ve altina o bolgenin dilinde yazilsin
+boylece kendi halkina hitap etmis oluruz ... ama ilk her zaman ingilizce".
+
+Yani ikinci dil sabit DEGIL, **sehre gore degisir**:
+
+| Sehir | Ikinci dil | Sehir | Ikinci dil |
+|---|---|---|---|
+| Istanbul | Turkce | Tokyo | Japonca |
+| Paris | Fransizca | Berlin | Almanca |
+| Dubai, Kahire | Arapca | Moskova | Rusca |
+| Roma, Venedik | Italyanca | Seul | Korece |
+| Barselona, Meksiko | Ispanyolca | Pekin, Sanghay | Cince |
+
+Hangi dil oldugu havuzdaki konunun **`local_language`** alaninda yazili
+(36 sehrin 36'sinda da dolu). Yazi sistemi o dilin gercek yazi sistemidir:
+Japonca Japon alfabesiyle, Arapca Arap alfabesiyle, Rusca Kirille.
+
+**Yerel dil zaten Ingilizce ise** (New York, Londra, Sydney, Toronto) yalniz
+Ingilizce blok yazilir. Ayni metin iki kez tekrarlanmaz.
+
+Hashtag'ler TEK sefer ve Latin harfleriyle yazilir, dile bolunmez.
 
 Ingilizce blok:
 - 60-120 kelime, kisa satirlar, bos satirla ayrilmis
@@ -199,14 +220,17 @@ Ingilizce blok:
 - (4) tam su cumle: "A fictional future, created with AI."
 - (5) tek somut soruyla bitir
 
-Turkce blok:
-- Ingilizce blogun AYNI yapisi, ceviri degil ayni hikayenin Turkcesi
-- Kisa cumle, sade dil, **em-dash YOK** (depo kurali)
-- (4)'un karsiligi tam su cumle: "Kurgusal bir gelecek, yapay zeka ile uretildi."
+Yerel dil blogu:
+- Ingilizce blogun AYNI bes adimi, **ceviri degil** o dilde dogal anlatim
+- Kisa cumle, sade dil, **em-dash YOK**
+- (4)'un karsiligi ayni beyan cumlesinin o dildeki dogal hali
+  (Turkce: "Kurgusal bir gelecek, yapay zeka ile uretildi.")
 - Ayni soruyla biter
 
-Ikisinin arasina `\n\n` konur. Toplam kelime motor dogrulamasinin 40-220
-araliginda kalir (olculdu: iki dilli caption ~145-175 kelime).
+Ikisinin arasina `\n\n` konur. Motor dogrulamasi caption'i 40-220 "kelime"
+araliginda ister; bosluksuz yazilan dillerde (Japonca, Cince) bu sayac dusuk
+okur, ama Ingilizce blok tek basina zaten 60-120 kelime oldugu icin alt sinir
+guvende.
 
 Emin olmadigin sayi YOK.
 Hashtag: 6-9 tane, sehir + gelecek + AI kategorileri, `#STILLHOME2512` dahil.
@@ -244,13 +268,13 @@ Hashtag'ler TEK sefer yazilir, iki dile bolunmez.
 
 Verilenler (13 Eylul):
 - **Yil: 2512.** Once 2190 onerildi, Ihsan "cok yakin" dedi.
-- **Caption ikinci dili: TURKCE.** Bolum 6'ya islendi.
+- **Caption ikinci dili: SEHRIN KENDI DILI.** Once Turkce sabitlenmisti, ayni
+  gun "o bolgenin dilinde yazilsin, kendi halkina hitap edelim" diye
+  degistirildi. Bolum 6'ya islendi, havuzdaki 36 sehrin dili etiketli.
 - **Yayin ritmi: AYNI.** Gunluk 20:30 UTC (flashpoints'ten bosalan slot).
 - **Kanal adi DEGISECEK, handle kalacak** (@shad0wedhistory357). Onerilen ad:
   "Still Home". Bu YouTube Studio'dan elle yapilir, depoda karsiligi yok.
 - **Eski 271 video KALIR.** Silme ya da gizleme yok.
 
-Bekleyen:
-1. **Bu dokumanin (KONSEPT.md v1.0) onayi.** Onaylanmadan serit acilmaz.
-   Onaylandiginda: bu satiri "ONAYLANDI" yap, `series.json` icindeki
-   `doctrine_sha256`'yi YENILE ve `kurulum_notu`'ndaki 5 adimi uygula.
+Bekleyen: YOK. Serit 13 Eylul 2026'da CANLIYA ALINDI.
+Ilk bolum (ISTANBUL 2512) elle yayinlandi, gunluk cron 20:30 UTC'de acildi.
