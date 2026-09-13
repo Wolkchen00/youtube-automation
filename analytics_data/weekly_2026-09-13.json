@@ -1,0 +1,313 @@
+{
+  "generated_at": "2026-09-13T13:12:34.725326+00:00",
+  "snapshot_date": "2026-09-13",
+  "period": "2026-09-07 to 2026-09-13",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 127,
+        "total_views": 111815,
+        "total_videos": 276
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "3nggGZtFf6k",
+          "title": "The Real Reason A Stray Dog Started A War!",
+          "published": "2026-09-12T22:36:04Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "sO6q52tZaqg",
+          "title": "The Real Reason The Hundred Years' War Lasted 116 Years!",
+          "published": "2026-09-09T22:51:30Z",
+          "views": 137,
+          "views_48h": 128,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "to7T1zjXpaU",
+          "title": "Henry \"Box\" Brown: The Unbreakable Man",
+          "published": "2026-09-08T22:59:25Z",
+          "views": 5,
+          "views_48h": 5,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Rt8lp7mJxYE",
+          "title": "The Real Reason America Invaded An Empty Island!",
+          "published": "2026-09-07T23:05:12Z",
+          "views": 17,
+          "views_48h": 14,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "IkqbnHyj-Ms",
+          "title": "The Great Fire Of London: Fact Or Ancient Propaganda?",
+          "published": "2026-09-06T22:22:21Z",
+          "views": 23,
+          "views_48h": 22,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 24
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 132,
+        "total_views": 132029,
+        "total_videos": 178
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Cs6gHuxf7A4",
+          "title": "This GIANT PRAYING MANTIS Is NOT Real",
+          "published": "2026-09-12T21:06:56Z",
+          "views": 119,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "2scmbwTq4sQ",
+          "title": "The Fight in the Burning Forest",
+          "published": "2026-09-11T20:45:05Z",
+          "views": 517,
+          "views_48h": 517,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "TiJ8Uv7vhzs",
+          "title": "This GIANT CROCODILE Is NOT Real",
+          "published": "2026-09-11T18:49:09Z",
+          "views": 2645,
+          "views_48h": 2645,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "TO_SK8dIyLQ",
+          "title": "This GIANT OCTOPUS Is NOT Real",
+          "published": "2026-09-11T09:51:42Z",
+          "views": 2706,
+          "views_48h": 2706,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "XNEw5jkObdw",
+          "title": "This LEMON BOUNCES like RUBBER!",
+          "published": "2026-09-10T21:21:05Z",
+          "views": 1507,
+          "views_48h": 1291,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "bGN9DDrPUeQ",
+          "title": "This NAPKIN Never ENDS!",
+          "published": "2026-09-08T21:53:56Z",
+          "views": 162,
+          "views_48h": 144,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "3k7qal307DQ",
+          "title": "This PLASTIC Bottle Turns To STONE!",
+          "published": "2026-09-07T22:18:46Z",
+          "views": 1159,
+          "views_48h": 1118,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1207
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 141,
+        "total_views": 65933,
+        "total_videos": 207
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "gJ4qf_rupvk",
+          "title": "One Wave Along the Whole Coast",
+          "published": "2026-09-12T22:07:15Z",
+          "views": 1054,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "k5FVftVNm5I",
+          "title": "This Star Rips ATOMS Apart",
+          "published": "2026-09-12T18:48:42Z",
+          "views": 18,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "sHP4Aw9Hyeo",
+          "title": "These Galaxies Are Leaving Us Forever",
+          "published": "2026-09-11T02:18:03Z",
+          "views": 40,
+          "views_48h": 40,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "an7n2iO_3fg",
+          "title": "WASP-12b: Planet Being DEVOURED",
+          "published": "2026-09-10T19:22:41Z",
+          "views": 39,
+          "views_48h": 31,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Enq3rtRayIg",
+          "title": "What If Earth Had Rings? Sky BLADES",
+          "published": "2026-09-09T19:32:59Z",
+          "views": 294,
+          "views_48h": 297,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "AGZ39fUhxVU",
+          "title": "Flying to Alpha Centauri: A 5 MILLION Year Trip",
+          "published": "2026-09-08T19:40:38Z",
+          "views": 342,
+          "views_48h": 335,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "2Cs_MsKcImA",
+          "title": "Olympus Mons: Towers Over Everest",
+          "published": "2026-09-07T20:18:09Z",
+          "views": 132,
+          "views_48h": 111,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "vAPFikT8qxo",
+          "title": "KELT-9b: Hotter Than MOST Stars",
+          "published": "2026-09-06T18:47:10Z",
+          "views": 222,
+          "views_48h": 221,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 106.5
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 107,
+        "total_views": 150681,
+        "total_videos": 257
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "iOJ252anMPg",
+          "title": "Skytree 634m rain drop #shorts",
+          "published": "2026-09-12T16:24:14Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "OLZ4_AwFBE4",
+          "title": "Camlica Tower 369m drop #shorts",
+          "published": "2026-09-11T19:23:54Z",
+          "views": 10,
+          "views_48h": 10,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "MUtJyJ-jOKg",
+          "title": "You're falling through glowing neon around the STRAT Tower. Every second gets faster, higher, a",
+          "published": "2026-09-10T17:06:17Z",
+          "views": 17,
+          "views_48h": 15,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "w3KuWLDTCpQ",
+          "title": "You're sliding down past the Oriental Pearl Tower on a transparent slide above Shanghai. Every",
+          "published": "2026-09-09T17:46:54Z",
+          "views": 2652,
+          "views_48h": 2640,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "qFYCRHr7604",
+          "title": "You're dropping past the Eiffel Tower on a transparent slide above Paris. Every second gets fas",
+          "published": "2026-09-08T17:21:20Z",
+          "views": 1754,
+          "views_48h": 1491,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "uU3YkRI7fYo",
+          "title": "You're sliding around the CN Tower on a transparent water slide above Toronto. Every turn takes",
+          "published": "2026-09-07T18:20:05Z",
+          "views": 1419,
+          "views_48h": 1387,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Rcn6pC6HfVs",
+          "title": "You're falling past the Burj Khalifa on a transparent slide above Dubai. Every second gets fast",
+          "published": "2026-09-06T16:23:28Z",
+          "views": 3220,
+          "views_48h": 1568,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 11.0
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 41,
+        "total_views": 16866,
+        "total_videos": 13
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "9ZL1KoPiWdQ",
+          "title": "Oğlumdan uzak dur. ☕",
+          "published": "2026-09-12T16:04:44Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "VTKi4u976NQ",
+          "title": "Önce annemi, sonra evimi kaybettim. 📦",
+          "published": "2026-09-11T07:12:55Z",
+          "views": 1180,
+          "views_48h": 1180,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "QV8iqKgT8vo",
+          "title": "Annemi toprağa verdiğimiz gün babam da oradaydı. 🕊️",
+          "published": "2026-09-08T18:01:23Z",
+          "views": 42,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "WdqUlCsgPmo",
+          "title": "Yalan söylüyorsunuz! Annemi göreceğim ben! 🏥",
+          "published": "2026-09-07T18:01:12Z",
+          "views": 1281,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "qj85wLVmh7Y",
+          "title": "Ambulanstan aradım. Sesim titriyordu. 🚑",
+          "published": "2026-09-06T18:00:57Z",
+          "views": 1307,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        }
+      ],
+      "views_30d_median": 1327.0
+    }
+  }
+}
