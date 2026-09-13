@@ -94,7 +94,8 @@
     {
       "id": "desert_ruins_set",
       "desc": "A minimal built desert set inside a film studio: bare studio concrete around a shallow island of pale sand with a few broken sandstone blocks, one bare log and sparse dry grass, a tall blue screen wall with pale blue cross tracking markers rising behind it, and a wide overhead grid of white diffusion softboxes lighting the stage. The air is clear.",
-      "ref_image_url": null
+      "ref_image_url": "https://i.ibb.co/7Ngbzd8v/desert-ruins-set.png",
+      "ref_prompt_sha256": "b280618fa1c4e211c14ceb45206b2c4a15577e96bb27e33a41bcfbe0f174fa30"
     }
   ],
   "props": []

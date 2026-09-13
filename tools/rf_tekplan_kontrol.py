@@ -84,7 +84,7 @@ def main() -> int:
         ("series.json auto_replenish.shots", ar.get("shots"), 1),
         ("series.json auto_replenish.shot_seconds", str(ar.get("shot_seconds")), "10"),
         ("series.json auto_replenish.format_version", ar.get("format_version"), "plato-3x8"),
-        ("series.json status", series.get("status"), "paused"),
+        ("series.json status", series.get("status"), "active"),
         ("bible.json series.duration_band", s.get("duration_band"), [9, 11]),
         ("bible.json series.chain_frames", s.get("chain_frames"), False),
         ("bible.json series.micro_trim", s.get("micro_trim"), 0),
@@ -149,13 +149,12 @@ def main() -> int:
                                     "not expected set elements")):
             hatalar.append(f"{ad}: sis yasagi acikca yazili degil")
 
-    # Tarif degisti: eski sisli/yesil gorseller yeni prompta sizmamali.
-    for e in bible.get("environments", []):
-        if e.get("ref_image_url"):
-            hatalar.append(
-                f"bible.json environments[{e['id']}].ref_image_url dolu; "
-                "tarif degistigi icin bosaltilmaliydi"
-            )
+    # Ortam referans gorselleri: goc aninda BOSALTILMISTI (eski sisli/yesil
+    # gorsel yeni prompta sizmasin diye). Seri canlandiktan sonra bunlari CAPA
+    # sistemi dolduruyor ve tarif degisirse kendisi yeniliyor: hem yaratik hem
+    # ortam hash'i PLATO_REF_TEMPLATE_VERSION ve tarif metnini iceriyor
+    # (series/produce.py:1305-1323). Bu yuzden burada "dolu olmasin" demek
+    # artik yanlis alarm olurdu; tazelik kontrolu capa katmaninin isi.
 
     # ---------------------------------------------------------- part08 plani
     p08 = SERI / "plans" / "part08.json"
@@ -186,24 +185,26 @@ def main() -> int:
     # kuyrukta cok cekimli uretilmemis plan kalmamali
     for yol in sorted((SERI / "plans").glob("part*.json")):
         n = int(yol.stem.replace("part", ""))
-        if n < 8:
-            continue  # part05-07 yayinlandi, tarihi kayit
+        if n < 9:
+            continue  # part05-08 yayinlandi, tarihi kayit
         plan = json.loads(yol.read_text(encoding="utf-8"))
         if len(plan.get("shots") or []) != 1:
             hatalar.append(f"{yol.name}: kuyrukta {len(plan.get('shots') or [])} cekimli plan var")
 
-    # ------------------------------------------------- yayin defteri degismez
+    # --------------------------------------------------------- yayin defteri
+    # 13 Eylul: format gocu sirasinda burada "published.json DEGISMEDI" kontrolu
+    # vardi. Goc bitti ve seri CANLI; defter artik her yayinda buyuyor. Yerine
+    # tek plan formatinin ILK bolumunun gercekten yayinlandigi dogrulaniyor.
     pub = SERI / "published.json"
     ozet = hashlib.sha256(pub.read_bytes()).hexdigest()
-    try:
-        r = subprocess.run(
-            ["git", "diff", "--quiet", "HEAD", "--", str(pub.relative_to(KOK))],
-            cwd=KOK, capture_output=True,
-        )
-        if r.returncode == 1:
-            hatalar.append("published.json DEGISMIS; yayin defteri dokunulmaz olmaliydi")
-    except OSError:
-        pass  # git yoksa sessiz gec, ozet yine de basilir
+    kayitlar = json.loads(pub.read_text(encoding="utf-8"))
+    p8_kayit = [e for e in kayitlar if e.get("part") == 8]
+    if not p8_kayit:
+        hatalar.append("published.json: part 8 (ilk tek plan bolumu) kayitli degil")
+    else:
+        sonuc = p8_kayit[0].get("results") or {}
+        if not sonuc.get("youtube"):
+            hatalar.append("published.json: part 8 YouTube kimligi yok (zorunlu platform)")
 
     # ----------------------------------------------------------------- rapor
     if hatalar:
@@ -216,7 +217,7 @@ def main() -> int:
     print(f"  cekim=1 sure=10sn band={s['duration_band']} status={series['status']}")
     print(f"  zincir={s['chain_frames']} micro_trim={s['micro_trim']} min_shots={s['qc']['min_shots']}")
     print(f"  part08={json.loads(p08.read_text(encoding='utf-8'))['episode']['title']}")
-    print(f"  published.json sha256={ozet[:16]}... (degismedi)")
+    print(f"  yayin defteri: {len(kayitlar)} bolum, sha256={ozet[:16]}...")
     return 0
 
 

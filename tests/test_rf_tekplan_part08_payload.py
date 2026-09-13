@@ -108,17 +108,25 @@ def test_part08_omni_yuku_dogru(calisma):
         assert yasak not in dusuk, f"prompt yasak set dili tasiyor: {yasak}"
 
 
-def test_part08_omni_yuku_yalniz_beklenen_uyariyi_verir(calisma):
-    """Tek beklenen uyari: ortam referans gorseli henuz yok.
+def test_part08_omni_yuku_beklenmedik_uyari_uretmez(calisma):
+    """Tek kabul edilen uyari: ortam referans gorseli HENUZ yoksa.
 
-    Bu KASITLI: 13 Eylul'de set tarifi mavi perdeye ve sissiz minimal sete
-    cevrildi, bu yuzden environments[].ref_image_url alanlari bosaltildi
-    (eski sisli/yesil gorsel yeni prompta sizmasin). Uretim capa asamasinda
-    (bible.series.episode_anchors) yeni tarife gore yeniden uretir.
-    Baska bir uyari cikarsa yuk bozulmus demektir.
+    13 Eylul'de set tarifi mavi perdeye ve sissiz minimal sete cevrildi, bu
+    yuzden environments[].ref_image_url alanlari BOSALTILDI (eski sisli/yesil
+    gorsel yeni prompta sizmasin). Capa sistemi (bible.series.episode_anchors)
+    ilk uretimde yeni tarife gore uretip geri yaziyor, yani alan dolduktan
+    sonra bu uyari da kaybolur. Test iki durumu da kabul eder; baska HERHANGI
+    bir uyari yukun bozuldugu anlamina gelir.
     """
     plan = load_plan(calisma)
+    bible_data = json.loads(BIBLE.read_text(encoding="utf-8"))
+    env_id = plan["shots"][0]["environment"]
+    env = next(e for e in bible_data["environments"] if e["id"] == env_id)
+
     cozum = resolve_shot(_bible(), plan["shots"][0], plan=plan)
-    beklenen = "Ortam 'desert_ruins_set' referans görseli yok"
-    assert cozum["warnings"] == [beklenen], cozum["warnings"]
+    if env.get("ref_image_url"):
+        kabul = []          # capa uretildi: uyari kalmamali
+    else:
+        kabul = [f"Ortam '{env_id}' referans görseli yok"]
+    assert cozum["warnings"] == kabul, cozum["warnings"]
     assert cozum["units"] <= 7, "7-birim referans kotasi asildi"

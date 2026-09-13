@@ -27,5 +27,9 @@
   },
   "family": "reptile",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/3ymg9Q8M/ep08-giant-anaconda.png"
+  ],
+  "ref_prompt_sha256": "89f2ba9aac0e1f3ba3a2865229980903daff21bc1e9a62ea2a49441a9241f699"
 }

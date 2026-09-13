@@ -96,15 +96,15 @@ def test_only_built_sets_are_offered_to_the_plan_writer():
     assert envs == {"jungle_set", "ocean_tank_set", "desert_ruins_set"}
 
 
-def test_daily_lane_is_paused_for_the_single_shot_test_episode():
-    """13 Eylul: format tek plan 10 sn'ye cevrildi, seri DURAKLATILDI.
+def test_daily_lane_publishes_the_single_shot_format_automatically():
+    """13 Eylul: tek plan 10 sn formati CANLI.
 
-    Ihsan karari: once ELLE tek test bolumu. Cron dosyasina dokunulmadi;
-    otomatik yayini durduran sey serinin kendi status alani. Test begenilirse
-    burasi tekrar "active" olur, bu test de o gun guncellenir.
+    Sira: format cevrildi -> seri gecici PAUSED -> part08 (dev anakonda) elle
+    uretildi -> Ihsan izleyip onayladi -> 3 platforma yayinlandi -> ACTIVE.
+    Cron dosyasina hic dokunulmadi; yayini durduran ve acan sey status alani.
     """
     series = _json("series.json")
-    assert series["status"] == "paused"
+    assert series["status"] == "active"
     assert series["publish_mode"] == "auto"
     replenish_cfg = series["auto_replenish"]
     assert replenish_cfg["enabled"] is True

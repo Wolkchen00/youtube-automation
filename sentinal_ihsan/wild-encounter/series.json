@@ -12,8 +12,8 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 11,
-  "next_part": 8,
-  "status": "paused",
+  "next_part": 9,
+  "status": "active",
   "priority": 999,
   "standalone": true,
   "publish_mode": "auto",
@@ -125,7 +125,36 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "8": {
+      "status": "published",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "mYUqbRjJoVs",
+          "video_sha256": "8e0990a2efde4fbd62ce56fc348d98dd1699da551d7ed991c80792d632be78fb",
+          "ts": "2026-09-13T20:39:59.688423+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18331736983275868",
+          "video_sha256": "8e0990a2efde4fbd62ce56fc348d98dd1699da551d7ed991c80792d632be78fb",
+          "ts": "2026-09-13T20:40:44.576371+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7685122561423805709",
+          "video_sha256": "8e0990a2efde4fbd62ce56fc348d98dd1699da551d7ed991c80792d632be78fb",
+          "ts": "2026-09-13T20:42:29.232783+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-13T20:42:29.237531+00:00"
     }
   },
-  "automation_note": "2026-09-13: status PAUSED. Format 3x8'den tek plan 10 sn'ye cevrildi; Ihsan once ELLE tek test bolumu gormek istedi. .github/workflows/wild-encounter.yml DEGISMEDI; seri duraklatilmis oldugu icin gunluk kosu ikmal ve yayin yapmadan cikar (series/replenish.py, series/series_runner.py). Elle uretim: python -X utf8 -m series.cli produce wild-encounter sentinal_ihsan/wild-encounter/plans/part08.json  (uretir, YAYINLAMAZ, next_part ilerletmez). Test begenilirse status tekrar 'active' yapilir. ESKI KAYIT: 2026-09-11: Ihsan karari 'gunluk, otomatik yayin'. Serit .github/workflows/wild-encounter.yml, 18:30 UTC. part01-04 deneme bolumleriydi, yayinlanmadi; 05 ve 06 elle yayinlandi ve parts'a islendi. Siradaki bolum 7'yi oto-ikmal yazar."
+  "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."
 }
