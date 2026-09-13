@@ -1,6 +1,6 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-12T09:31:22.193487+00:00
+Uretim: 2026-09-13T10:29:03.602118+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (9 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -11,6 +11,12 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
+> **UYARI: son olcum adimi BASARISIZ.** (2026-09-13 10:29)
+> 1 videonun hicbiri olculemedi
+> Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
+> olculmemis olabilir; bu rapor bugun yazildi diye guncel
+> DEGILDIR.
+
 > **6 kayit EMEKLI**, karsilastirmaya girmiyor , sebep: Next Stop formati durduruldu; 56 sn'lik bu videolar 15 sn'lik Fear kaydiragiyla ayni kanalda ama AYRI URUN.
 > Eski konseptin olcumleri yeni format icin yol gosterici
 > degildir. Silinmediler, defterde duruyorlar.
@@ -18,12 +24,12 @@ nerede oturdugu gorulur.
 - Olculen video: **9**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/9 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **52**
-- Aralik: 15 ile 3,221 arasi
+- Aralik: 17 ile 3,220 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
-| EN IYI | 3,221 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
-| EN KOTU | 15 | 2026-09-10 | You're falling through glowing neon around the S |
+| EN IYI | 3,220 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
+| EN KOTU | 17 | 2026-09-03 | POV: Dropping off the STRAT Tower in the rain #s |
 
 Son yayinlar (tekrar etme):
 - 2026-09-10 , You're falling through glowing neon around the STRAT Tower. 

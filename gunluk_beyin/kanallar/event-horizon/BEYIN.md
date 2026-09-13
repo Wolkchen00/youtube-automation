@@ -1,6 +1,6 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-12T09:31:20.851380+00:00
+Uretim: 2026-09-13T10:29:01.575740+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -11,7 +11,7 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
-> **UYARI: son olcum adimi BASARISIZ.** (2026-09-12 09:31)
+> **UYARI: son olcum adimi BASARISIZ.** (2026-09-13 10:29)
 > 1 videonun hicbiri olculemedi
 > Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
 > olculmemis olabilir; bu rapor bugun yazildi diye guncel
@@ -36,7 +36,7 @@ Son yayinlar (tekrar etme):
 
 ### Teslim rejimi
 
-- Guncel rejim: `c623ea0f`
+- Guncel rejim: `de8c6501`
 - Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
 
 ### Yayinlanmayanlar

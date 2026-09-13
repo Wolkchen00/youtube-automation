@@ -1,6 +1,6 @@
 # BEYIN , flashpoints
 
-Uretim: 2026-09-12T09:31:21.512705+00:00
+Uretim: 2026-09-13T10:29:02.101462+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/flashpoints/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -30,7 +30,7 @@ Son yayinlar (tekrar etme):
 
 ### Teslim rejimi
 
-- Guncel rejim: `dbcdc34a`
+- Guncel rejim: `6d8449e3`
 - Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
 
 ### Yayinlanmayanlar
@@ -104,7 +104,7 @@ Bu defterdeki etiketli ve TAM bolumlerde:
 | ozne | n | medyan izlenme |
 |---|---|---|
 | SEY | 3 | 105 |
-| OLAY | 3 | 19 |
+| OLAY | 3 | 18 |
 | KISI | 3 | 5 |
 
 > Etiketler ELLE konuldu ve medyan ayni etiketlerden hesaplandi.
