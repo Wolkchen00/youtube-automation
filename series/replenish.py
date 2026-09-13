@@ -125,6 +125,28 @@ PLATO_OBJECT_RULE = (
     'than "he shows no harm". Each shot prompt holds only its own details; the engine adds the '
     'SHOT_PLAN line in front of it.'
 )
+PLATO_SINGLE_SHOT_OBJECT_RULE = (
+    '\n- CREATURE_CARD: output exactly one object_card for the ONE giant creature of this episode. '
+    'name: the real, recognisable animal alone, such as "giant crocodile". descriptor: how the '
+    'creature LOOKS ALIVE in at least 12 words: animal, colour, skin texture, eyes, teeth and height '
+    'in metres; the pipeline turns it into a reference image, so the shot prompt repeats this '
+    'descriptor word for word. The creature keeps its natural anatomy, colour and skin at giant '
+    'scale. KEEP CONSTRUCTION LANGUAGE OUT of name and descriptor: words such as prop, practical '
+    'effect, animatronic, fibreglass, puppet, armature, silicone and hydraulic belong ONLY in '
+    'anomaly_descriptor and the final-seconds reveal inside the shot prompt. The film studio uses '
+    'a blue screen with tracking markers and clear air. environment: the available environment id '
+    'whose minimal built set matches the animal\'s natural habitat; the shot uses that same id. '
+    'framing: one sentence for a slow continuous push-in from a wide establishing frame toward the '
+    'action. anomaly_descriptor: one sentence on how the crew open the practical jaws by hand in '
+    'the reveal. STORY ORDER INSIDE THE SAME SHOT: the creature first appears alive and threatening, '
+    'takes the recurring man into its mouth, then the crew open its jaws and the man steps out '
+    'unharmed in the final seconds. The shot prompt ends with one positive sound sentence such as '
+    '"Ambient sound only: footsteps on sand, studio air handling and crew movement." Shot prompts '
+    'use positive visual language only. FORBIDDEN WORDS in the shot prompt (they poison the video '
+    'model): no, not, never, nothing, neither, nor, without, cannot, absent, lacks, avoid, and the '
+    'construction "instead of". Write "he steps out unharmed" rather than "he shows no harm". '
+    'The engine adds the SHOT_PLAN line in front of it.'
+)
 REPLENISH_MODEL_FALLBACK = "gemini-flash-latest"
 DEFAULT_BATCH = 5
 DEFAULT_MIN_QUEUE = 2
@@ -720,9 +742,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     want_music = bool(cfg.get("music_prompt"))
     want_caption = bool(cfg.get("caption"))
     format_version = str(cfg.get("format_version") or "").strip()
+    # formatted_object yapisal sozlesmenin sahibidir; Plato dahil formatli planlarin
+    # dogrulama ve normalizasyonunda korunur. Sabit-obje PROMPT dili ayrica secilir.
     formatted_object = bool(format_version)
     compose_object_prompt = format_version == TEK_OBJE_FORMAT
     plato = format_version == PLATO_FORMAT
+    fixed_object_prompt = formatted_object and not (plato and single_shot)
     families = [str(v).strip() for v in (cfg.get("families") or []) if str(v).strip()]
     previous_family = _previous_family(history) if families else ""
     # ROCK D: kalan TUM tohumlar yasak family'de ise kural ILK BOLUM icin duser.
@@ -757,6 +782,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                 f"continuous moment of {sec} seconds) that flow into one another, plus ONE narration script\n"
                 f"({wmin}-{wmax} words) recorded separately and laid over the finished edit. No dialogue, no lip-sync.")
         narr_shape = f'"<{wmin}-{wmax} word English voice-over script>"'
+    elif humans_present and single_shot:
+        head = (f"You are the showrunner of an endless, NARRATION-FREE vertical (9:16) Shorts series told\n"
+                f"through ONE single unbroken shot of exactly {sec} seconds ,  no cuts, no second shot,\n"
+                f"no scene change. The whole episode IS that one continuous moment, with ambient natural\n"
+                f"sound from the set only. No dialogue, no narration, no lip-sync, no musical score.")
+        narr_shape = '""'
     elif humans_present:
         # Anlatımsız ama İNSANLI seri (the__footnote formatı): tek ses = müzik.
         head = (f"You are the showrunner of an endless, NARRATION-FREE vertical (9:16) Shorts series told\n"
@@ -789,7 +820,16 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
                  '\n   "hashtags": "<#Tag1 #Tag2 ... 6-9 tags>",') if want_caption else ""
     face_shape = '\n   "face_visible": false,' if face_hidden else ""
+    plato_format_shape = (
+        f'\n   "format_version": {json.dumps(format_version)},'
+        '\n   "object_card": {"name": "<real recognisable giant animal name>", '
+        '"descriptor": "<living animal appearance: colour + skin + eyes + teeth + height, at least 12 words>", '
+        '"environment": "<available environment id>", '
+        '"framing": "<slow continuous push-in sentence>", "anomaly_descriptor": "<how crew open the practical jaws in the final reveal>"},'
+    )
     format_shape = (
+        plato_format_shape
+        if plato and single_shot else
         f'\n   "format_version": {json.dumps(format_version)},'
         '\n   "object_card": {"name": "<ordinary object name>", '
         '"descriptor": "<colour + material + size + one distinguishing mark, at least 12 words>", '
@@ -803,7 +843,9 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         shot_fields += ', "chain": <bool>'
     if shot_refs:
         shot_fields += ', "characters": ["<ref id, optional>"], "environment": "<ref id, optional>"'
-    elif formatted_object:
+    elif plato and single_shot:
+        shot_fields += ', "environment": "<object_card.environment>"'
+    elif fixed_object_prompt:
         shot_fields += ', "environment": "<object_card.environment>"'
         shot_fields += (', "violation_observation": "<one positive, observable outcome of the impossible property in THIS shot>"'
                         ', "state_carry": "<optional: a lasting trace this shot leaves for the NEXT shot>"')
@@ -885,6 +927,11 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                        "as if talking (the score is the only voice); when the story involves a real "
                        "named person, shot prompts describe them ONLY by appearance, age, dress and "
                        "role ,  never by name,")
+    elif humans_featured and plato and single_shot:
+        humans_rule = ("the recurring lead character (see AVAILABLE REFERENCES) MAY appear in clear close-up, "
+                       "mid and wide views and is the emotional anchor of the episode, but must remain silent "
+                       "and keep natural closed-mouth expressions; other crew may appear around him, and the "
+                       "set's ambient sound is the only audio,")
     elif humans_featured:
         humans_rule = ("the recurring lead character (see AVAILABLE REFERENCES) MAY appear in clear close-up, "
                        "mid and wide shots and is the emotional anchor of the episode, but must NEVER speak, "
@@ -902,7 +949,11 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     # Kare zinciri AÇIK serilerde çekimler tek kesintisiz morf akışıdır; zincirsiz
     # serilerde (chain_frames=false, ör. footnotes) her çekim AYRI bir sinematik
     # tablodur ,  kurgu bunları crossfade/kesme ile bağlar.
-    if formatted_object:
+    if plato and single_shot:
+        chain_rule = ("- SINGLE SHOT: the episode is ONE continuous take. A slow continuous push-in moves from\n"
+                      "  a wide establishing view toward the action while every ordered beat and the final\n"
+                      "  reveal happen inside that same unbroken take.")
+    elif formatted_object:
         chain_rule = (
             "- FIXED COMPOSITION: All shots share ONE fixed composition on the same everyday "
             "surface in the same light; the cuts are jumps in time only."
@@ -969,7 +1020,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'translucent edge glinting under the water". '
         'OBJECT IDENTITY AND ANOMALY MUST AGREE: descriptor and anomaly_descriptor are composed into ONE hero reference image, so they must never contradict each other about the same surfaces, edges or material. Write object_card.descriptor as the object LOOKS WHILE the anomaly is active; when the anomaly changes the object\'s own geometry or material, describe the changed object, never its intact "before" state. BAD: descriptor "smooth rounded edges" with anomaly "sharp fracture edges and glossy shards". GOOD: descriptor "one bright glassy break face along its long edge" with anomaly "sharp conchoidal fracture edges and glossy translucent shards".'
         if compose_object_prompt else
-        PLATO_OBJECT_RULE
+        (PLATO_SINGLE_SHOT_OBJECT_RULE if single_shot else PLATO_OBJECT_RULE)
         if plato else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '
@@ -988,9 +1039,13 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         if formatted_object else ""
     )
     episode_arc_rule = (
+        "- EPISODE ARC inside the single take: the first frame establishes the giant animal and the\n"
+        "  threatened man; the animal takes him into its mouth, then crew open the jaws and he exits\n"
+        "  unharmed. Preserve this order and deliver the practical reveal in the final seconds."
+        if plato and single_shot else
         "- EPISODE ARC: All shots share ONE fixed composition on the same everyday surface in "
         "the same light; the cuts are jumps in time only."
-        if formatted_object else
+        if fixed_object_prompt else
         "- EPISODE ARC inside the single take: the first frame already shows the whole premise, the\n"
         "  middle lets it develop, and the last seconds deliver the payoff. No slow build-up, no\n"
         "  withheld reveal, no closing gesture ,  there is no time for setup in one shot."
@@ -1002,7 +1057,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         "same light; the cuts are jumps in time only. Use rich visual language for motion, "
         "geometry, light and color within that composition. The series art style is automatically "
         "prefixed to every shot at production; stay inside it."
-        if formatted_object else
+        if fixed_object_prompt else
         "- PROMPTS: rich visual language ,  motion, geometry, light, color, camera flow. The\n"
         "  series art style is automatically prefixed to every shot at production; do NOT restate\n"
         "  it wholesale, but stay inside it."
@@ -1010,7 +1065,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     hard_limits_rule = (
         f"- HARD LIMITS: {humans_rule} natural lived-in unlabeled surfaces and grounded safe "
         "everyday home activity fill the frame. English only."
-        if formatted_object else
+        if fixed_object_prompt else
         f"- HARD LIMITS: {humans_rule} no readable text/letters/logos/watermarks,\n"
         f"  {tone_tail} English only."
     )
@@ -1219,6 +1274,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
     formatted_object = bool(format_version)
     compose_object_prompt = format_version == TEK_OBJE_FORMAT
     plato = format_version == PLATO_FORMAT
+    single_shot = int(cfg.get("shots", DEFAULT_SHOTS)) == 1
     required_chars = [str(cid).strip() for cid in (cfg.get("required_characters") or [])]
     missing_required = [cid for cid in required_chars if not bible.get_character(cid)]
     if missing_required:
@@ -1355,9 +1411,9 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             errors.append(
                 f"part {want}: çekim sayısı tam {expected_shots} olmalı (gelen: {len(raw_shots)})"
             )
-        if not isinstance(raw_shots, list) or not (2 <= len(raw_shots) <= 6):
+        if not isinstance(raw_shots, list) or not (1 <= len(raw_shots) <= 6):
             got = len(raw_shots) if isinstance(raw_shots, list) else "yok"
-            errors.append(f"part {want}: çekim sayısı 2-6 olmalı (gelen: {got})")
+            errors.append(f"part {want}: çekim sayısı 1-6 olmalı (gelen: {got})")
         else:
             if strict_structure:
                 raw_numbers = [
@@ -1461,7 +1517,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                             f"part {want} çekim {shot_number}: olumsuz dil var; "
                             "olanı yaz (difüzyon olumsuzu çizer)"
                         )
-                    if shot_number in (1, 2):
+                    if not single_shot and shot_number in (1, 2):
                         leaked = sorted({m.group(0).lower()
                                          for m in PLATO_BUILD_LANGUAGE.finditer(body)})
                         if leaked:

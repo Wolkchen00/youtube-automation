@@ -781,7 +781,7 @@ REFERENCE_IMAGE_MODEL = "nano-banana-2"
 # Fake behind-the-scenes format (wild-encounter, shots.PLATO_FORMAT). Its anchors
 # are opt-in through bible.series.episode_anchors and use their own prompt
 # template version.
-PLATO_REF_TEMPLATE_VERSION = "plato1"
+PLATO_REF_TEMPLATE_VERSION = "plato2"
 
 TOPAZ_INPUT_LIMIT_MB = 50   # topaz/video-upscale girdi dosya limiti
 
@@ -1239,10 +1239,11 @@ def _plato_anchor_prompts(env_desc: str, name: str, descriptor: str) -> tuple[st
     descriptor = descriptor.rstrip(". ")
     env_prompt = (
         f"Reference plate of a built film set for a vertical 9:16 video series: {env_desc}. "
-        "One wide, locked-off composition shows the whole dressed set, the green screen wall "
-        "beyond it, the overhead studio lighting grid and practical haze, in natural colour "
-        "with real depth of field. The set stands empty and ready before the take, with the "
-        "floor clear."
+        "One static wide reference plate shows the whole minimal dressed set, the blue screen "
+        "wall with pale blue cross tracking markers beyond it, the overhead studio lighting "
+        "grid, and bare studio concrete surrounding a shallow island of sand and earth with a "
+        "few scattered rocks, one bare log and sparse grass. Clean clear air, natural colour "
+        "and real depth of field. The set stands empty and ready before the take."
     )
     creature_prompt = (
         f"Hero reference image of one {name} standing on a built film set: {env_desc}. "

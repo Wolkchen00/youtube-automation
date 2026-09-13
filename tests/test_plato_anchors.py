@@ -17,7 +17,7 @@ from series import critic, produce
 from series.bible import Bible
 from series.shots import resolve_shot
 
-ENV_DESC = "A built jungle set inside a film studio: dense practical foliage and low haze."
+ENV_DESC = "A minimal sand island inside a film studio with a few rocks and sparse dry grass."
 DESCRIPTOR = "a colossal olive-green crocodile head prop with pale yellow eyes and ivory teeth"
 ANOMALY = "The crocodile head is a built practical prop whose jaws can be pushed open by hand."
 _ABSENT = object()
@@ -137,7 +137,12 @@ def test_first_run_makes_one_set_plate_then_one_creature_and_persists_each(tmp_p
 
     assert paid.operations == ["environment_ref_jungle_set", "creature_ref"]
     env_prompt, creature_prompt = (prompt for _, prompt in paid.calls)
-    assert "built film set" in env_prompt and "foliage and low haze. One wide" in env_prompt
+    lowered_plate = env_prompt.lower()
+    assert "built film set" in env_prompt and "static wide reference plate" in lowered_plate
+    assert "blue screen" in lowered_plate and "tracking markers" in lowered_plate
+    assert "haze" not in lowered_plate and "green screen" not in lowered_plate
+    assert "locked-off" not in lowered_plate
+    assert all(word not in lowered_plate for word in ("push-in", "dolly", "pan", "tilt"))
     assert DESCRIPTOR in creature_prompt and "built film set" in creature_prompt
     assert "pushed open by hand" not in creature_prompt  # the reveal stays out
 
@@ -148,6 +153,10 @@ def test_first_run_makes_one_set_plate_then_one_creature_and_persists_each(tmp_p
     disk_plan = _disk(plan_path)
     assert disk_plan["prop_ref_urls"] == ["https://i.ibb.co/creature_ref.png"]
     assert len(disk_plan["ref_prompt_sha256"]) == 64
+
+
+def test_plato_reference_template_version_is_bumped():
+    assert produce.PLATO_REF_TEMPLATE_VERSION == "plato2"
 
 
 def test_second_run_pays_nothing(tmp_path):
