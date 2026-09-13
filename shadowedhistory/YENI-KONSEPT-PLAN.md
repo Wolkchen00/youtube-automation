@@ -42,10 +42,10 @@ zaman gecmisligi de okunur.
 
 | Alan | Deger | Kaynak |
 |---|---|---|
-| Sure | 9 sn (band 8-10) | referans 5,5-10,1; kazanan 10,1 |
+| Sure | **8 sn** (band 7-9) | asagidaki MOTOR KISITI notuna bak |
 | Cekim | **2** | referansin 5/5'i |
-| Cekim 1 | ~5 sn, tanri-gozu genis | kazananda kesme 5,04 sn'de |
-| Cekim 2 | ~4 sn, alcak / insan olcegi | ,  |
+| Cekim 1 | **4 sn**, tanri-gozu genis | ,  |
+| Cekim 2 | **4 sn**, alcak / insan olcegi | ,  |
 | Kesme | SERT, eslesen hareket DEGIL | ayni yerin cok farkli iki acisi |
 | fps | 24 | referansin 4/5'i |
 | Cozunurluk | 1080x1920 | ,  |
@@ -53,6 +53,48 @@ zaman gecmisligi de okunur.
 | Ses | derin drone, **-14 LUFS, LRA < 2** | 5/5 videoda -14,0..-14,1 |
 | Ses bandi | ~2 kHz'de kesik | 2-8kHz 29 dB asagi, 8k ustu yok |
 | Kunye | **SEHIR + 2512**, daktilo | kazanan tek sehir-adli video |
+
+### MOTOR KISITLARI , plan bunlara gore DUZELTILDI (13 Eylul, kod okundu)
+
+Uc kisit dogrulandi. Bunlar plani degistirdi, yok sayma.
+
+**(1) `shot_seconds` bir motor enum'u: 4 / 6 / 8 / 10.**
+Kanit: `series/replenish.py:198-200` (`VALID_DURATIONS` disi deger hata),
+`series/replenish.py:132` (`DEFAULT_SHOT_SECONDS = "8"`, yorum "motor enum'u").
+Ayrica TEK deger butun cekimlere uygulanir, cekim basina farkli sure YOK.
+
+Sonuc: referansin 5,04 + 5,06 sn kalibi **ifade edilemez**. En yakin
+ifade edilebilir hal **2 x 4 = 8 sn**. Alternatif 2 x 6 = 12 sn, o da
+referansin olculen bandinin (5,5-10,1 sn) TAMAMEN disinda kaliyor.
+Secim: **2 x 4 = 8 sn**, `duration_band` [7, 9].
+
+Durust not: bu, olculen kazananin (10,1 sn) kisaltilmis halidir.
+"2 x 5 sn kazandirir" hipotezi zaten n=5'te ayirt edilememisti; 8 sn
+referansin bandi icinde kaliyor. Test edilecek varsayim olarak isaretle.
+
+**(2) Yil regex'i 2512'yi TANIMIYOR.**
+Kanit: `series/replenish.py:299`, `:1597`, `:1630` , uc yerde de
+`r"\b(1[0-9]{3}|20[0-9]{2})\b"`. Bu 1000-1999 ve 2000-2099 demektir.
+2512 eslesmiyor, yani "ISTANBUL 2512" kunyesi `year_required` acikken
+dogrulamadan GECEMEZ.
+
+Cozum: regex'i `r"\b(1[0-9]{3}|2[0-9]{3})\b"` yap. Bu bir GENISLETME,
+daralma degil , su an gecen hicbir plan gecmemeye baslamaz. Uc yerin
+ucunu de degistir.
+
+**(3) Kunyede `title` VE `subtitle` ikisi de zorunlu.**
+Kanit: `series/replenish.py:287-292` , ikisinden biri bos olursa hata,
+ve bu kontrol `year_required` dalindan ONCE geliyor, yani
+`year_required: false` yapmak bunu kurtarmaz.
+
+Referansin kunyesi TEK satir ("TOKYO 2247"). Cozum: opt-in
+`"subtitle_required": false` alani ekle, **varsayilan `true`** olsun.
+Boylece mevcut butun seriler birebir korunur, yalniz still-home tek
+satira izinli olur.
+
+`bible.py:374-388` ekstra alanlari zaten gecirir (yalniz `year_required`
+ve `preserve_case` tip denetimli), yani Bolum 7'deki yeni alanlar
+bible semasindan sorunsuz gecer.
 
 ## 3. Iki degismez kural , olculen kazanma sartlari
 
@@ -116,6 +158,7 @@ one-variable'in kopyasi olur.
 | 4 | 5 launch bolum plani | `still-home/plans/` |
 | 5 | Konu havuzu + replenish brief | `series.json` icinde |
 | 6 | Daktilo kunye modu | `core/ffmpeg_tools.py` |
+| 6b | Yil regex genisletme + `subtitle_required` | `series/replenish.py` |
 | 7 | Workflow yml (cron YORUMDA) | `.github/workflows/still-home.yml` |
 | 8 | Testler | `tests/` |
 | 9 | beyin.py + tamlik.py slug haritasi | `gunluk_beyin/` |
@@ -129,15 +172,20 @@ birebir korur** , next-stop ve diger kanallar etkilenmez.
 ```
 bible.series.title_card = {
   "enabled": true,
-  "duration": 5.0,          # cekim 1 kadar; kesmede soluyor
+  "duration": 4.0,          # cekim 1 kadar (4 sn); kesmede soluyor
   "typewriter": 0.5,        # 0 / yok = kapali (varsayilan), mevcut davranis
   "align": "left",          # varsayilan "center"
   "margin_pct": 6,          # sol kenar boslugu, align=left iken
   "color": "black",         # varsayilan "white"
   "box": false,             # varsayilan true
+  "subtitle_required": false,  # varsayilan true , MOTOR KISITI (3)
   "preserve_case": false
 }
 ```
+
+Ayrica `series/replenish.py` icinde iki degisiklik (MOTOR KISITLARI bolumu):
+- yil regex'i uc yerde `2[0-9]{3}`'u da kabul edecek (satir 299, 1597, 1630)
+- `validate_title_card` `subtitle_required: false` iken bos subtitle'a izin verecek
 
 Daktilo uygulamasi: harf sayisi kadar `drawtext`, her biri kendi
 `enable='gte(t,<harfin_zamani>)'` ile. Tek gecis, ek kodek yok.
