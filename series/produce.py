@@ -675,12 +675,17 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                         out, music_path, music_out, music_volume=music_volume,
                         limit_mix_peak=bible.master_lufs is not None,
                         lowpass_hz=bible.music_lowpass_hz,
+                        fade_in=bible.music_fade[0], fade_out=bible.music_fade[1],
+                        offset_sec=bible.music_offset_sec,
                     )
                 else:
                     # saf görsel: müzik TEK sürekli ses olsun (gappy native atılır)
                     ffmpeg_tools.mix_background_music(out, music_path, music_out,
                                                       music_volume=0.9, replace_original=True,
-                                                      lowpass_hz=bible.music_lowpass_hz)
+                                                      lowpass_hz=bible.music_lowpass_hz,
+                                                      fade_in=bible.music_fade[0],
+                                                      fade_out=bible.music_fade[1],
+                                                      offset_sec=bible.music_offset_sec)
                 if music_out.exists() and music_out.stat().st_size > 0:
                     out = music_out
                     music_ok = True
@@ -2218,9 +2223,10 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             )
         else:
             # Diyalog kanalları: düz birleştir (söz baş/sonu kırpılmasın).
-            ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir)
+            ffmpeg_tools.concatenate_simple(shot_files, raw_ep, clips_dir=sdir,
+                                            fps=bible.fps)
     final_ep = work_dir / f"ep{int(number):02d}.mp4"
-    ffmpeg_tools.final_export(raw_ep, final_ep)
+    ffmpeg_tools.final_export(raw_ep, final_ep, fps=bible.fps)
 
     # Anlatım (narration) + arka plan müziği (best-effort)
     post_status: dict = {}
@@ -2371,7 +2377,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         try:
             ffmpeg_tools.master_audio(
                 source_1080, mastered_1080,
-                target_i=master_lufs, target_tp=-1.0, target_lra=11.0,
+                target_i=master_lufs, target_tp=-1.0, target_lra=bible.master_lra,
                 true_peak_margin_db=bible.master_true_peak_margin_db,
             )
         except Exception as error:

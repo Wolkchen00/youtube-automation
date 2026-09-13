@@ -298,3 +298,123 @@ class MusicLowpassRenderTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SabitDroneOptInTests(unittest.TestCase):
+    """fps / master_lra / music_fade / music_offset_sec bible alanlari.
+
+    Hepsi 13 Eylul 2026'da still-home ep01 OLCULDUKTEN sonra eklendi:
+    teslim -13,1 LUFS ve LRA 7,1 cikmisti, referans -14,0 ve LRA 1,0-1,5.
+    """
+
+    def test_varsayilanlar_eski_davranis(self):
+        b = _make_bible({"series": {"slug": "t"}})
+        self.assertIsNone(b.fps)
+        self.assertEqual(b.master_lra, 11.0)
+        self.assertEqual(b.music_fade, (None, None))
+        self.assertIsNone(b.music_offset_sec)
+
+    def test_still_home_degerleri(self):
+        b = _make_bible({"series": {"slug": "t", "fps": 24, "master_lra": 1.5,
+                                    "music_fade": {"in": 0.05, "out": 0.05},
+                                    "music_offset_sec": 12}})
+        self.assertEqual(b.fps, 24)
+        self.assertEqual(b.master_lra, 1.5)
+        self.assertEqual(b.music_fade, (0.05, 0.05))
+        self.assertEqual(b.music_offset_sec, 12.0)
+
+    def test_sifir_ve_negatif_degerler(self):
+        self.assertIsNone(_make_bible({"series": {"slug": "t", "fps": 0}}).fps)
+        self.assertIsNone(
+            _make_bible({"series": {"slug": "t", "music_offset_sec": 0}}).music_offset_sec)
+        with self.assertRaises(ValueError):
+            _ = _make_bible({"series": {"slug": "t", "music_offset_sec": -1}}).music_offset_sec
+        with self.assertRaises(ValueError):
+            _ = _make_bible({"series": {"slug": "t", "master_lra": 0}}).master_lra
+
+    def test_bozuk_tipler_ValueError(self):
+        for alan, deger in [("fps", "yirmidort"), ("master_lra", "az"),
+                            ("music_offset_sec", "on"), ("music_fade", [0.1, 0.1])]:
+            with self.subTest(alan=alan):
+                with self.assertRaises(ValueError):
+                    getattr(_make_bible({"series": {"slug": "t", alan: deger}}),
+                            {"music_fade": "music_fade"}.get(alan, alan))
+
+
+@unittest.skipUnless(FFMPEG, "ffmpeg/ffprobe gerekiyor")
+class SabitDroneRenderTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        import tempfile
+        cls.tmp = pathlib.Path(tempfile.mkdtemp(prefix="drone_"))
+        cls.src = cls.tmp / "src.mp4"
+        cls.music = cls.tmp / "m.wav"
+        subprocess.run(
+            ["ffmpeg", "-y", "-v", "error", "-f", "lavfi",
+             "-i", "color=c=black:s=540x960:d=6:r=24",
+             "-f", "lavfi", "-i", "sine=f=100:d=6",
+             "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "aac", "-shortest",
+             str(cls.src)], check=True, capture_output=True)
+        # Ilk 4 sn SESSIZ, sonra sabit ton , Suno parcalarinin olculen bicimi.
+        subprocess.run(
+            ["ffmpeg", "-y", "-v", "error",
+             "-f", "lavfi", "-i", "anullsrc=r=48000:cl=stereo:d=4",
+             "-f", "lavfi", "-i", "sine=f=120:d=20:sample_rate=48000",
+             "-filter_complex", "[0:a][1:a]concat=n=2:v=0:a=1[a]",
+             "-map", "[a]", "-c:a", "pcm_s16le", str(cls.music)],
+            check=True, capture_output=True)
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.tmp, ignore_errors=True)
+
+    def test_offset_sessiz_girisi_atlar(self):
+        """ASIL BULGU: parcanin sessiz girisini kullanmak LRA'yi patlatiyor."""
+        bastan = self.tmp / "bastan.mp4"
+        kaydirmali = self.tmp / "kaydirmali.mp4"
+        ffmpeg_tools.mix_background_music(
+            self.src, self.music, bastan, music_volume=0.9, replace_original=True,
+            fade_in=0.05, fade_out=0.05)
+        ffmpeg_tools.mix_background_music(
+            self.src, self.music, kaydirmali, music_volume=0.9, replace_original=True,
+            fade_in=0.05, fade_out=0.05, offset_sec=8)
+
+        def lra(path):
+            out = subprocess.run(
+                ["ffmpeg", "-i", str(path), "-af", "ebur128=framelog=verbose",
+                 "-f", "null", "-"],
+                capture_output=True, text=True, encoding="utf-8", errors="replace")
+            for line in (out.stderr or "").splitlines():
+                if "LRA:" in line and "low" not in line and "high" not in line:
+                    return float(line.split("LRA:")[1].replace("LU", "").strip())
+            raise AssertionError("LRA okunamadi")
+
+        self.assertGreater(lra(bastan) - lra(kaydirmali), 2.0,
+                           "sessiz girisi atlamak LRA'yi belirgin dusurmeli")
+
+    def test_offset_verilmeyince_ses_birebir_ayni(self):
+        a, b = self.tmp / "a.mp4", self.tmp / "b.mp4"
+        ffmpeg_tools.mix_background_music(
+            self.src, self.music, a, music_volume=0.9, replace_original=True)
+        ffmpeg_tools.mix_background_music(
+            self.src, self.music, b, music_volume=0.9, replace_original=True,
+            offset_sec=None, fade_in=None, fade_out=None)
+        self.assertEqual(a.read_bytes(), b.read_bytes())
+
+    def test_fps_override_uygulanir(self):
+        out24 = self.tmp / "f24.mp4"
+        ffmpeg_tools.final_export(self.src, out24, fps=24)
+        r = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0",
+             "-show_entries", "stream=r_frame_rate", "-of", "csv=p=0", str(out24)],
+            capture_output=True, text=True)
+        self.assertEqual(r.stdout.strip(), "24/1")
+
+    def test_fps_verilmeyince_varsayilan_30(self):
+        out = self.tmp / "fdef.mp4"
+        ffmpeg_tools.final_export(self.src, out)
+        r = subprocess.run(
+            ["ffprobe", "-v", "error", "-select_streams", "v:0",
+             "-show_entries", "stream=r_frame_rate", "-of", "csv=p=0", str(out)],
+            capture_output=True, text=True)
+        self.assertEqual(r.stdout.strip(), "30/1")

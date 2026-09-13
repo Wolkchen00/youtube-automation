@@ -37,9 +37,17 @@
       "require_all_shots": true,
       "min_shots": 2,
       "native_audio_review": false,
-      "notes": "Every episode is TWO shots of ONE real, world-recognisable city in the year 2512. Shot 1 is a wide god's-eye view in which the altered city is already fully readable in the very first frame; shot 2 is a low, human-scale view of the same place with ordinary life visible. Fail the episode if no world-famous landmark or skyline is recognisable, if the place is an invented or generic location, if shot 1 opens close or inside instead of wide, if the two shots do not read as the same city, or if shot 2 contains no people going about ordinary life. This channel shows CONTINUITY, not apocalypse: ruins-only imagery, corpses, panic, warfare, weapons and abandoned emptiness are automatic failures, and so are close-ups of faces. Readable on-screen text, captions, subtitles, logos and watermarks are automatic failures because the title card is burned in afterwards. Record any of these under issues.",
-      "api_fail_open": false
-    }
+      "notes": "Every episode is TWO shots of ONE real, world-recognisable city in the year 2512. SHOT 1 IS AERIAL: the camera is high in the open sky, above every rooftop, tower, dome and canopy, looking down, and the whole adapted city fills the frame. Fail shot 1 if the camera is at ground level, indoors, or underneath a roof, canopy, bridge or shelter, and fail it if the city does not read as seen from the air. SHOT 2 IS GROUND LEVEL among people. Fail the episode if no world-famous landmark or skyline is recognisable, if the place is an invented or generic location, if the two shots do not read as the same city, or if shot 2 contains no people going about ordinary life. This channel shows CONTINUITY, not apocalypse: ruins-only imagery, corpses, panic, warfare, weapons and abandoned emptiness are automatic failures, and so are close-ups of faces. Readable on-screen text, captions, subtitles, logos and watermarks are automatic failures because the title card is burned in afterwards. Record any of these under issues.",
+      "api_fail_open": false,
+      "require_first_frame": true
+    },
+    "fps": 24,
+    "master_lra": 1.5,
+    "music_fade": {
+      "in": 0.05,
+      "out": 0.05
+    },
+    "music_offset_sec": 12
   },
   "art_style": "Photoreal documentary footage of a real, named present-day city as it exists in the year 2512, composed for vertical 9:16 at 24 fps. The city's genuine geography and its world-famous landmarks stay recognisable at credible scale, visibly transformed by the adaptation this episode shows rather than destroyed by it. Natural motivated light, restrained documentary colour, deep shadows, fine architectural texture, stable exposure and clear scale cues give the image the clarity and grain of real aerial and street photography. Warm interior and street lighting reads throughout: lit windows, market stalls, signage glow and moving crowds establish that the place is lived in. The frame edge is the image edge and the view is unobstructed. Surfaces are maintained and inhabited, never ruined; the mood is durable, ordinary and quietly hopeful.",
   "music": true,

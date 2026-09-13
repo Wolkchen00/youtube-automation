@@ -92,7 +92,7 @@ class OfflineEpisodeHarness:
         pathlib.Path(target).write_bytes(b"merged")
 
     @staticmethod
-    def _final_export(_source, target):
+    def _final_export(_source, target, **_kwargs):
         pathlib.Path(target).write_bytes(b"final")
 
     def _resolve(self, _bible, shot, chain_url=None):

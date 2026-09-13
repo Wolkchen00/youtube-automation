@@ -320,6 +320,90 @@ class Bible:
         return bool(self.data.get("music", False))
 
     @property
+    def fps(self) -> int | None:
+        """Teslim kare hizi. Alan yoksa None = motorun varsayilani (30).
+
+        Kie 24 fps klip uretiyor; boru hatti 30'a cikarinca karelerin ~%20'si
+        KOPYA oluyor ve hareket titriyor (still-home ep01 olcumu: kaynak 96
+        kare/4 sn, teslim 241 kare/8,1 sn). 24 yazan seri kaynagin kadansini
+        korur.
+        """
+        raw = self.data["series"].get("fps")
+        if raw is None:
+            return None
+        try:
+            value = int(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.series.fps tam sayi olmali") from error
+        if value <= 0:
+            return None
+        return value
+
+    @property
+    def master_lra(self) -> float:
+        """Master'in hedef gurluk araligi (LU). Alan yoksa 11,0 (eski davranis).
+
+        Olculdu (still-home ep01): loudnorm girdi cok sessiz olunca `dynamic`
+        moda dusuyor, zamanla degisen kazanc uyguluyor ve LRA'yi 3,1'den 3,9'a
+        ACIYOR. Sabit seviyeli drone isteyen seride hedefi dusuk vermek dinamik
+        modu genisletici degil SIKISTIRICI yapar.
+        """
+        raw = self.data["series"].get("master_lra", 11.0)
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.series.master_lra sayi olmali") from error
+        if value <= 0:
+            raise ValueError("bible.series.master_lra pozitif olmali")
+        return value
+
+    @property
+    def music_fade(self) -> tuple[float | None, float | None]:
+        """Muzik yataginin (giris, cikis) kisma sureleri. Alan yoksa (None, None)
+        = 1,0 / 1,5 sn, eski davranis birebir.
+
+        8 sn'lik videoda 1,0+1,5 sn kisma SURENIN %31'idir ve olculen LRA'yi
+        3,2'den 5,4'e cikarir (still-home ep01, 13 Eylul 2026).
+        """
+        raw = self.data["series"].get("music_fade")
+        if raw is None:
+            return (None, None)
+        if not isinstance(raw, dict):
+            raise ValueError("bible.series.music_fade JSON nesnesi olmali")
+        out = []
+        for key in ("in", "out"):
+            v = raw.get(key)
+            if v is None:
+                out.append(None); continue
+            try:
+                f = float(v)
+            except (TypeError, ValueError) as error:
+                raise ValueError(f"bible.series.music_fade.{key} sayi olmali") from error
+            if f < 0:
+                raise ValueError(f"bible.series.music_fade.{key} negatif olamaz")
+            out.append(f)
+        return (out[0], out[1])
+
+    @property
+    def music_offset_sec(self) -> float | None:
+        """Muzik yataginin parcanin kacinci saniyesinden alinacagi.
+
+        Alan yoksa None = bastan, eski davranis. Olculdu: Suno parcalari
+        SESSIZLIKTEN basliyor; 8 sn'lik bir bolumde parcanin ilk 8 saniyesi
+        LRA 5,4 verirken 10. saniyeden alinan dilim LRA 1,7 veriyor.
+        """
+        raw = self.data["series"].get("music_offset_sec")
+        if raw is None:
+            return None
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.series.music_offset_sec sayi olmali") from error
+        if value < 0:
+            raise ValueError("bible.series.music_offset_sec negatif olamaz")
+        return value or None
+
+    @property
     def music_lowpass_hz(self) -> float | None:
         """Muzik yataginin tiz tavani (Hz). Alan yoksa None = filtre YOK.
 

@@ -550,8 +550,14 @@ def extract_audio(video_path: str | Path, output_path: str | Path = None) -> Pat
     return None
 
 
-def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Path = None) -> Path:
-    """Concatenate videos without transitions."""
+def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Path = None,
+                       fps: int | str | None = None) -> Path:
+    """Concatenate videos without transitions.
+
+    fps: opt-in cikis kare hizi. None (varsayilan) = FFMPEG_FPS, eski davranis
+        birebir. Motor 24 fps klip uretip boru hatti 30'a cikarinca karelerin
+        ~%20'si KOPYA oluyor ve hareket titriyor; 24 fps teslim eden seriler
+        (still-home) bu alanla kaynagin kadansini korur."""
     import shutil
     output_path = Path(output_path)
 
@@ -578,7 +584,7 @@ def concatenate_simple(video_files: list, output_path: str | Path, clips_dir: Pa
         "-c:v", "libx264", "-crf", FFMPEG_CRF,
         "-preset", FFMPEG_PRESET,
         "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
-        "-r", FFMPEG_FPS,
+        "-r", str(fps) if fps else FFMPEG_FPS,
         str(output_path)
     ]
 
@@ -866,9 +872,12 @@ def trim_to_duration(
 
 def final_export(
     input_path: str | Path,
-    output_path: str | Path
+    output_path: str | Path,
+    fps: int | str | None = None,
 ) -> Path:
-    """Final export: 1080x1920 vertical, H.264, 30fps, AAC audio."""
+    """Final export: 1080x1920 vertical, H.264, AAC audio.
+
+    fps: opt-in kare hizi. None (varsayilan) = FFMPEG_FPS (30), eski davranis."""
     output_path = Path(output_path)
 
     cmd = [
@@ -878,7 +887,7 @@ def final_export(
         "-preset", FFMPEG_PRESET,
         "-c:a", "aac", "-b:a", FFMPEG_AUDIO_BITRATE,
         "-vf", "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2",
-        "-r", FFMPEG_FPS,
+        "-r", str(fps) if fps else FFMPEG_FPS,
         "-movflags", "+faststart",
         str(output_path)
     ]
@@ -1151,6 +1160,9 @@ def mix_background_music(
     replace_original: bool = False,
     limit_mix_peak: bool = False,
     lowpass_hz: float | None = None,
+    fade_in: float | None = None,
+    fade_out: float | None = None,
+    offset_sec: float | None = None,
 ) -> Path:
     """Mix a CONTINUOUS background-music bed into a video.
 
@@ -1176,6 +1188,19 @@ def mix_background_music(
         lowpass_hz: Opt-in. Verilirse yatak bu frekansta alcak-gecirenden
             gecirilir (24 dB/oktav). None/0 (varsayilan) = filtre YOK,
             eski davranis birebir korunur.
+        offset_sec: Opt-in. Yatak parcanin BASINDAN degil bu saniyesinden
+            alinir. None/0 (varsayilan) = bastan, eski davranis birebir.
+            OLCULDU (still-home ep01, 13 Eylul 2026): Suno parcalari
+            SESSIZLIKTEN basliyor , ilk saniyenin RMS'i -107 dB, sonra
+            sicriyor. 135 sn'lik parcanin ilk 8,1 sn'si LRA 5,4 verirken
+            10. saniyeden alinan ayni uzunluktaki dilim LRA 1,7 veriyor
+            ve -16,4 yerine -14,8 LUFS geliyor. Sabit seviyeli drone
+            isteyen seride bu alan olmadan hedef TUTMUYOR.
+        fade_in / fade_out: Opt-in kisma sureleri (sn). None (varsayilan) =
+            1,0 / 1,5, eski davranis birebir. SABIT SEVIYELI drone isteyen
+            seriler icin kritik: 8 sn'lik bir videoda 1,0+1,5 sn kisma
+            SURENIN %31'i demektir ve olculen LRA'yi 3,2'den 5,4'e cikarir
+            (still-home ep01, 13 Eylul 2026).
 
     Returns:
         Path to the mixed video.
@@ -1188,7 +1213,9 @@ def mix_background_music(
 
     try:
         vid_duration = get_video_duration(video_path)
-        fade_out_st = max(0.0, vid_duration - 1.5)
+        f_in = 1.0 if fade_in is None else max(0.0, float(fade_in))
+        f_out = 1.5 if fade_out is None else max(0.0, float(fade_out))
+        fade_out_st = max(0.0, vid_duration - f_out)
 
         # lowpass_hz (opt-in): yatagin tizini keser. None/0 = filtre YOK, eski
         # davranis birebir. Olculen referansta (@one__create) ses ~2 kHz'de
@@ -1198,9 +1225,11 @@ def mix_background_music(
         lp = ""
         if lowpass_hz:
             lp = f",lowpass=f={float(lowpass_hz):.0f}:poles=2" * 2
-        bed = (f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS{lp},"
+        off = max(0.0, float(offset_sec or 0.0))
+        bed = (f"[1:a]atrim={off:.2f}:{off + vid_duration:.2f},"
+               f"asetpts=PTS-STARTPTS{lp},"
                f"volume={music_volume},"
-               f"afade=t=in:st=0:d=1.0,afade=t=out:st={fade_out_st:.2f}:d=1.5")
+               f"afade=t=in:st=0:d={f_in:g},afade=t=out:st={fade_out_st:.2f}:d={f_out:g}")
         if replace_original:
             # Music is the ONLY audio → no per-shot seams can exist.
             full_filter = f"{bed}[aout]"

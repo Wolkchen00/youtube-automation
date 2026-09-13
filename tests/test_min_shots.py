@@ -120,7 +120,7 @@ def _produce_with_drops(tmp_path: Path, drops: set[int], *, min_shots=_ABSENT):
         ))
         stack.enter_context(mock.patch.object(
             produce.ffmpeg_tools, "final_export",
-            side_effect=lambda _src, dst: write_video([], dst),
+            side_effect=lambda _src, dst, **_kw: write_video([], dst),
         ))
         stack.enter_context(mock.patch.object(
             produce, "_post_process", side_effect=lambda _b, _p, path, **_k: Path(path)

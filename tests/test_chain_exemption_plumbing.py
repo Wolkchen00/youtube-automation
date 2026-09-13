@@ -133,7 +133,7 @@ def _run(tmp_path: Path, *, reset_after: set[int] = frozenset(),
         p(produce.ffmpeg_tools, "concatenate_simple", side_effect=write_video)
         p(produce.ffmpeg_tools, "concatenate_audio_smooth", side_effect=write_video)
         p(produce.ffmpeg_tools, "final_export",
-          side_effect=lambda _src, dst: write_video([], dst))
+          side_effect=lambda _src, dst, **_kw: write_video([], dst))
         p(produce, "_post_process", side_effect=lambda _b, _pl, path, **_k: Path(path))
         p(produce, "_record_episode_cost", return_value=True)
         p(produce.report, "append_row")
