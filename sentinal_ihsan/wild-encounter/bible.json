@@ -10,10 +10,10 @@
     "resolution": "1080p",
     "master_lufs": -14,
     "engine": "omni",
-    "chain_frames": true,
+    "chain_frames": false,
     "chain_scope": "episode",
     "audio_smooth": true,
-    "micro_trim": 0.25,
+    "micro_trim": 0,
     "face_visible": true,
     "omit_character_refs": false,
     "credit_hard_cap": true,
@@ -31,7 +31,7 @@
     },
     "qc": {
       "enabled": true,
-      "notes": "SERIES EXEMPTION, READ THIS FIRST: this series is a FAKE BEHIND-THE-SCENES of a film shoot. A giant, lifelike creature stands on a built film set and is revealed at the end to be a practical prop. Ignore the words \"impossible anatomy\" and \"chimera\" in your artifact_score definition FOR THAT CREATURE: it is the subject of the clip, not a defect, and it must NEVER raise artifact_score. Reserve the numeric artifact_score for UNINTENDED generation defects only: the man, his hands, his face, the crew, the floor or the set structure melting, duplicating, breaking or glitching.\n\nTHE BEAT OF EACH SHOT IS WRITTEN IN ITS OWN PROMPT. Each shot prompt contains a paragraph that begins \"SHOT 1,\", \"SHOT 2,\" or \"SHOT 3,\" followed by the beat name. That paragraph is the required story beat for that shot and it is authoritative: pass the shot only if the clip performs that beat, and judge the beat against no other description. The three beats are one continuous scene on one set and their order never changes: the threat, the man taken completely out of sight, and the reveal that the creature is a prop with the man unharmed.\n\nTHE PRODUCTION MUST BE VISIBLE IN EVERY SHOT. At least one clear production element, such as the green screen wall, crew, camera operators, rigs or studio lights, must be visible in the sampled frames of every shot. Dressed set materials such as foliage, rock, water and haze are EXPECTED. A shot in which no production element is visible, so that it reads as location footage, is a FAIL: the whole format depends on the viewer seeing that this is a film shoot.\n\nSCALE CARRIES THIS FORMAT. The creature must be LARGE and CLOSE, filling much of the frame. A small or distant creature is a FAIL.\n\nTHERE IS NO TRANSFORMATION IN THIS SERIES. Nothing morphs, nothing fuses. A creature that changes shape or species is a FAIL. This was measured: the model cannot fuse two bodies, and that failure is why this format was chosen.\n\nONE MAN ONLY, in all three shots. One face, two hands, five fingers each. A second copy of him anywhere is an automatic fail. His face must match the reference: Turkish man, warm olive skin, full neatly groomed black beard, thick dark eyebrows, short dark hair. A different face is an automatic fail; this is the single most important check. Crew members are expected and are NOT copies of him.\n\nHe NEVER speaks and never moves his mouth as if talking; there is no narration. A posed look into the lens is a fail; watching the creature or the crew is correct.\n\nStudio equipment, rigging, cables, monitors and camera bodies in frame are EXPECTED and are not defects. Only subtitle bars, captions or watermark-style graphics laid over the footage count as unwanted text. Water spray, haze and lens flare are INTENDED realism.\n\nTHE SOUND IS THE SET'S OWN SOUND: ambience, water, the creature rig moving, crew movement and applause.\n\nAll three shots are the SAME set and the SAME light. A drifting viewpoint inside a shot is a continuity observation, not a defect score; record it under issues in plain words.",
+      "notes": "SERIES EXEMPTION, READ THIS FIRST: this series is a FAKE BEHIND-THE-SCENES of a film shoot. A giant, lifelike creature stands on a built film set and is revealed at the end to be a practical prop. Ignore the words \"impossible anatomy\" and \"chimera\" in your artifact_score definition FOR THAT CREATURE: it is the subject of the clip, not a defect, and it must NEVER raise artifact_score. Reserve the numeric artifact_score for UNINTENDED generation defects only: the man, his hands, his face, the crew, the floor or the set structure melting, duplicating, breaking or glitching.\n\nTHIS EPISODE IS ONE SINGLE UNCUT SHOT of about 10 seconds. The beat is written in the shot's own prompt, in the paragraph that begins \"ONE CONTINUOUS\". That paragraph is authoritative: pass the clip only if it performs that beat, and judge it against no other description. The ordered beats all happen inside that one take and their order never changes: the threat, the man taken completely out of sight inside the mouth, and the reveal that the creature is a prop with the man unharmed. The reveal belongs to the final seconds. A visible cut, edit or scene change is a FAIL.\n\nTHE PRODUCTION MUST BE VISIBLE. At least one clear production element, such as the blue screen wall, crew, camera operators, rigs or studio lights, must be visible in the sampled frames. Dressed set materials such as sand, rock and scattered props are EXPECTED. A clip in which no production element is visible, so that it reads as location footage, is a FAIL: the whole format depends on the viewer seeing that this is a film shoot.\n\nTHE AIR IS CLEAR. Fog, haze, smoke and atmospheric diffusion are NOT expected set elements in this format and should be recorded under issues when they fill the frame. This was measured: in the reference sample the videos that carried haze all failed.\n\nSCALE CARRIES THIS FORMAT. The creature must be LARGE and CLOSE, filling much of the frame. A small or distant creature is a FAIL.\n\nTHE CREATURE IS ONE REAL, RECOGNISABLE ANIMAL at giant scale. THERE IS NO TRANSFORMATION IN THIS SERIES. Nothing morphs, nothing fuses. A creature that changes shape or species is a FAIL. This was measured: the model cannot fuse two bodies, and that failure is why this format was chosen.\n\nONE MAN ONLY. One face, two hands, five fingers each. A second copy of him anywhere is an automatic fail. His face must match the reference: Turkish man, warm olive skin, full neatly groomed black beard, thick dark eyebrows, short dark hair. A different face is an automatic fail; this is the single most important check. Crew members are expected and are NOT copies of him.\n\nHe NEVER speaks and never moves his mouth as if talking; there is no narration. A posed look into the lens is a fail; watching the creature or the crew is correct.\n\nStudio equipment, rigging, cables, monitors and camera bodies in frame are EXPECTED and are not defects. Only subtitle bars, captions or watermark-style graphics laid over the footage count as unwanted text.\n\nTHE SOUND IS THE SET'S OWN SOUND: ambience, footsteps, the creature rig moving, studio air handling and crew movement.\n\nTHE CAMERA MOVES. A slow continuous push-in from a wide frame toward the action is CORRECT and is not a continuity defect. A hard cut is.",
       "frames": 12,
       "artifact_threshold": 7,
       "dynamic_regens": true,
@@ -45,23 +45,23 @@
       "structured_positive_corrections": true,
       "scene_cut_scan": true,
       "scene_cut_fail": false,
-      "min_shots": 3,
+      "min_shots": 1,
       "require_all_shots": true,
       "object_match_note": "2026-09-11 KAPALI. plato-3x8 icin yaratik referansi RF-PLAN-WILD-ENCOUNTER Rock 4 ile uretiliyor. Kapi ep06 olculmeden ACILMAZ: yeni bir QC kapisi yanlis retle kredi yakar.",
       "first_frame_note": "2026-09-11 KAPALI. require_first_frame acilis karesinde imkansiz ozellik arar; bu formatta imkansiz ozellik yok, yaratik bir prop ve ifsa cekim 3'te. Acik olsa her bolumu yanlis sebeple reddeder.",
       "continuity_note": "2026-09-11 ACIK. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. ep06 ACIK KANIT: cekim 3 yeniden uretilince set degisti (orman gitti, ciplak yesil studyo geldi) ve QC bunu 'gozlem' sayip gecirdi; otomatik yayinda bu kabul edilemez. Yanlis ret riski kabul edildi: kapi yanlis reddederse bolum yayinlanmaz, kotu video yayinlanmaz. ep07 sonrasi olcup gozden gecir."
     },
     "duration_band": [
-      12,
-      26
+      9,
+      11
     ],
-    "format_note": "2026-09-11, plato-3x8. Sahte kamera arkasi: uc cekim x 8 sn, tek set, tek sahne. Vuruslar: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis. Olcum dayanagi: DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor). ep05 22,7 sn, 2 kesme. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan; QC notu vurus tarif etmez, prompttaki SHOT paragrafina bakar.",
-    "chain_note": "2026-09-11 ACIK. Tek set, tek sahne: cekim 2 ve 3 onceki cekimin son karesinden baslar, set ve isik bolum icinde sabit kalir.",
+    "format_note": "2026-09-13, TEK PLAN 10 sn. Sahte kamera arkasi: BIR cekim x 10 sn, tek set, tek sahne, sifir kesme. Vuruslar ayni cekimin icinde: tehdit, yaratigin agzina alinma, ekibin ceneyi elle acmasi ve cikis; ifsa son saniyelerde. Olcum dayanagi: REFERANS-AYUSH-ANALIZ.md, @ayush_0_ai'nin 11 reeli, 11/11 -> 10,01 sn / 24 fps / 1080x1920 / 0 kesme. Kazananlari ayiran: sis yok, gercek temas (agza alinma), sonda ekip acar, tanidik gercek hayvan. Vurus metninin TEK kaynagi series.json auto_replenish.shot_plan. ESKI KAYIT (2026-09-11, plato-3x8): uc cekim x 8 sn; dayanak DckORL2B8gx (15,2 sn, 0 kesme, 4,4M) ve DdEArj4BMrV (15,18 sn, 0 kesme, kurulmus dekor); ep05 22,7 sn, 2 kesme.",
+    "chain_note": "2026-09-13 KAPALI. Tek kesintisiz cekimde zincirlenecek ikinci cekim yok; sureklilik tek planin kendi surekliligidir. shot_refs ve kilitli karakter zincirden BAGIMSIZ cozulur (series/replenish.py normalizasyonu, series/shots.py referans cozumu). ESKI KAYIT (2026-09-11 ACIK): cekim 2 ve 3 onceki cekimin son karesinden basliyordu.",
     "credit_cap_note": "2026-09-11: gecici 1300 tavani GERI ALINDI, 1000'e donuldu. Bolum 1'de 1239 kredi birikmisti cunku UC AYRI KONSEPT (ayi-yengec, kaplan-ahtapot, fil-timsah) hep part01 olarak uretildi; defter hepsini tek bolume yazdi. DERS: her tasarim yinelemesi YENI BOLUM NUMARASI almali, yoksa hem tavan yaniltir hem maliyet muhasebesi bozulur.",
-    "duration_note": "2026-09-11: tavan 20 -> 26. Ihsan daha UZUN video istedi ve hikayenin uc vurusu (tehdit, yutulma, ifsa) 24 saniye gerektiriyor. NOT, olcumle celisiyor: referans hesabin videolari 24-32 saniyeye cikinca medyani 2.161'den 325 begeniye dusmustu. Ama o olcum KOVALAMA formati icindi; bu format referansi (DckORL2B8gx) 15,2 sn ve 4,4M. 24 saniye ikisinin arasinda. Karar Ihsan'in, gerekce kayda gecti.",
-    "environments_note": "2026-09-11: yalniz KURULMUS setler (DOKTRIN kural 5). Eski dis mekanlar (tropical_beach, jungle_river, desert_dunes, rocky_coast) ve ciplak yesil perde (soundstage) oto-ikmal secmesin diye cikarildi; part02-05 tarihi planlardir."
+    "duration_note": "2026-09-13: band [12, 26] -> [9, 11]. Ihsan karari, olcume dayaniyor: referans hesabin 11 reelinin 11'i de 10,01 sn ve tek plan; ayni hesapta uzun varyant yok. Ayrica 3 x 8 formati iki kesme uretiyordu ve ep07 kesik cikmisti. ESKI KAYIT (2026-09-11): tavan 20 -> 26 yapilmisti. Ihsan daha UZUN video istedi ve uc vurus 24 saniye gerektiriyor denmisti. O not zaten kendi icinde celiskiyi kaydetmisti: referans videolar 24-32 saniyeye cikinca medyan 2.161'den 325 begeniye dusmustu.",
+    "environments_note": "2026-09-13: uc set de MAVI perdeye ve sissiz minimal tarife cevrildi (studyo betonu gorunur + sig kum/toprak adasi + birkac kaya). Tarif degistigi icin eski ref_image_url ve ref_prompt_sha256 alanlari BOSALTILDI: eski sisli/yesil perdeli gorsel yeni prompta sizmasin. ESKI KAYIT (2026-09-11): yalniz kurulmus setler; eski dis mekanlar ve ciplak yesil perde oto-ikmal secmesin diye cikarilmisti."
   },
-  "art_style": "Vertical 9:16 photoreal behind-the-scenes footage of a real film shoot on a studio stage. One giant, lifelike creature built as a practical effect stands on a dressed set of real materials, with practical haze, overhead studio lighting, crew in black, camera rigs and a green screen wall making the production obvious. Natural colour, true skin tones and real depth of field; everything else obeys ordinary physics.",
+  "art_style": "Vertical 9:16 photoreal behind-the-scenes footage of a real film shoot on a studio stage, filmed as ONE continuous uncut shot whose camera pushes in slowly from a wide establishing frame toward the action. One giant, lifelike creature built as a practical effect stands on a minimal dressed set: bare studio concrete around a shallow island of sand and earth with a few scattered rocks, one bare log and sparse dry grass. A tall blue screen wall with pale blue cross tracking markers rises behind it, a wide overhead grid of white diffusion softboxes lights the stage, and crew in dark clothing, camera rigs on a dolly track and cables make the production obvious. The air is clear. Natural colour, true skin tones and real depth of field; everything else obeys ordinary physics.",
   "style_ref_url": null,
   "music": false,
   "narration": null,
@@ -83,18 +83,17 @@
   "environments": [
     {
       "id": "jungle_set",
-      "desc": "A built jungle set inside a film studio: dense practical foliage, hanging vines and wet leaf litter across the floor, low drifting haze, a tall green screen wall visible beyond the foliage, and an overhead studio lighting grid shining down through the canopy from a high glass-roofed structure.",
-      "ref_image_url": "https://i.ibb.co/wZJLBG7T/jungle-set.png",
-      "ref_prompt_sha256": "de89e63a26f38b00cc912d63e0ac26f3d44cfd995c0d2e4cd628f0cc1b99592e"
+      "desc": "A minimal built set inside a film studio: bare studio concrete around a shallow island of dry earth and leaf litter with a few scattered rocks, one bare log and sparse dry grass, a tall blue screen wall with pale blue cross tracking markers rising behind it, and a wide overhead grid of white diffusion softboxes lighting the stage. The air is clear.",
+      "ref_image_url": null
     },
     {
       "id": "ocean_tank_set",
-      "desc": "A built ocean set inside a film studio: a wide shallow water tank dressed with dark wet rocks, kelp and drifting foam, a painted sea horizon backdrop and a tall green screen wall beyond it, wave machines churning the surface, and an overhead studio lighting grid reflecting on the water.",
+      "desc": "A minimal built water set inside a film studio: bare studio concrete around a shallow water tank dressed with a few dark wet rocks and a little kelp, a tall blue screen wall with pale blue cross tracking markers rising behind it, and a wide overhead grid of white diffusion softboxes reflecting on the still surface. The air is clear.",
       "ref_image_url": null
     },
     {
       "id": "desert_ruins_set",
-      "desc": "A built desert set inside a film studio: pale sand dunes shaped across the floor, broken sandstone columns and half-buried ruins, wind machines lifting fine sand, a tall green screen wall beyond the set, and a hot overhead studio lighting grid.",
+      "desc": "A minimal built desert set inside a film studio: bare studio concrete around a shallow island of pale sand with a few broken sandstone blocks, one bare log and sparse dry grass, a tall blue screen wall with pale blue cross tracking markers rising behind it, and a wide overhead grid of white diffusion softboxes lighting the stage. The air is clear.",
       "ref_image_url": null
     }
   ],

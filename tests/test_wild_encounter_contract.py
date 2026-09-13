@@ -48,23 +48,47 @@ def test_episode_anchors_and_continuity_gate_are_on():
 
 def test_qc_notes_point_at_the_shot_paragraph_and_carry_no_mechanism():
     notes = _json("bible.json")["series"]["qc"]["notes"]
-    assert "THE BEAT OF EACH SHOT IS WRITTEN IN ITS OWN PROMPT" in notes
+    # Tek plan sozlesmesi: vurus, promptun "ONE CONTINUOUS" paragrafinda yazili.
+    assert "ONE SINGLE UNCUT SHOT" in notes
+    assert "ONE CONTINUOUS" in notes
     lowered = notes.lower()
-    for stale in ("hatch", "real outdoor location", "both shots", "music bed"):
+    for stale in ("hatch", "real outdoor location", "both shots", "music bed",
+                  "all three shots", "shot 1", "shot 2", "shot 3"):
         assert stale not in lowered, f"QC notu bayat ifade tasiyor: {stale}"
+    # 13 Eylul olcumu: sis kaybedenlerde var, kazananlarda yok. QC notu artik
+    # sisi BEKLENEN set ogesi olarak saymamali ve perde MAVI olmali.
+    assert "haze are EXPECTED" not in notes
+    assert "green screen" not in lowered
+    assert "blue screen" in lowered
+    assert "the air is clear" in lowered
 
 
 def test_shot_plan_is_the_single_beat_source():
     plan_lines = _json("series.json")["auto_replenish"]["shot_plan"]
-    assert len(plan_lines) == 3
-    for index, line in enumerate(plan_lines, start=1):
-        assert line.startswith(f"SHOT {index},"), line[:40]
+    # Tek kesintisiz cekim: tek vurus paragrafi, uc vurus da onun icinde.
+    assert len(plan_lines) == 1
+    tek = plan_lines[0]
+    assert tek.startswith("ONE CONTINUOUS TAKE, NO CUTS."), tek[:48]
+    for vurus in ("jaws open wide", "out of sight", "push its", "climbs out"):
+        assert vurus in tek, f"vurus eksik: {vurus}"
+    assert "pushes in slowly" in tek
+    dusuk = tek.lower()
+    assert "blue screen" in dusuk
+    for yasak in ("haze", "fog", "green screen"):
+        assert yasak not in dusuk, f"shot_plan yasak terim tasiyor: {yasak}"
 
 
 def test_art_style_describes_the_studio_format():
     art = _json("bible.json")["art_style"].lower()
     assert "behind-the-scenes" in art and "studio stage" in art
     assert "real outdoor location" not in art
+    # 13 Eylul olcumu: tek kesintisiz plan, yavas push-in, MAVI perde, temiz hava.
+    assert "one continuous uncut shot" in art
+    assert "pushes in slowly" in art
+    assert "blue screen" in art
+    assert "the air is clear" in art
+    for yasak in ("haze", "fog", "green screen"):
+        assert yasak not in art, f"art_style yasak terim tasiyor: {yasak}"
 
 
 def test_only_built_sets_are_offered_to_the_plan_writer():
@@ -72,15 +96,34 @@ def test_only_built_sets_are_offered_to_the_plan_writer():
     assert envs == {"jungle_set", "ocean_tank_set", "desert_ruins_set"}
 
 
-def test_daily_lane_publishes_automatically_with_the_series_face_pinned():
+def test_daily_lane_is_paused_for_the_single_shot_test_episode():
+    """13 Eylul: format tek plan 10 sn'ye cevrildi, seri DURAKLATILDI.
+
+    Ihsan karari: once ELLE tek test bolumu. Cron dosyasina dokunulmadi;
+    otomatik yayini durduran sey serinin kendi status alani. Test begenilirse
+    burasi tekrar "active" olur, bu test de o gun guncellenir.
+    """
     series = _json("series.json")
-    assert series["status"] == "active"
+    assert series["status"] == "paused"
     assert series["publish_mode"] == "auto"
     replenish_cfg = series["auto_replenish"]
     assert replenish_cfg["enabled"] is True
     assert replenish_cfg["required_characters"] == ["ihsan_field"]
+    # Format anahtari DEGISMEDI: davranis anahtari, sadece etiket degil.
     assert replenish_cfg["format_version"] == "plato-3x8"
-    assert replenish_cfg["shots"] == 3 and replenish_cfg["shot_seconds"] == "8"
+    assert replenish_cfg["shots"] == 1 and replenish_cfg["shot_seconds"] == "10"
+
+
+def test_single_shot_geometry_is_locked_in_the_bible():
+    """Tek plan formatinin olculmus geometrisi."""
+    series_cfg = _json("bible.json")["series"]
+    assert series_cfg["duration_band"] == [9, 11]
+    assert series_cfg["chain_frames"] is False, "tek cekimde zincirlenecek cekim yok"
+    assert series_cfg["micro_trim"] == 0, "tek klipte uc kirpmasi 10 sn'yi kisaltir"
+    assert series_cfg["qc"]["min_shots"] == 1
+    # scene_cut_fail hala OLU bir ayar (critic.py her zaman gated=False yaziyor);
+    # gercek kapi ayri bir is olarak RF-ISSUES'ta duruyor.
+    assert series_cfg["qc"]["scene_cut_fail"] is False
 
 
 def test_published_episodes_are_recorded_so_the_lane_cannot_repeat_them():

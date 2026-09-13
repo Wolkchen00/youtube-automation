@@ -6,49 +6,68 @@ Kurulus: 10 Eylul 2026. Kanal sifirdan yazildi, onceki sekiz seri arsivde
 Bu belgedeki her sayi OLCULMUSTUR. Kaynak: `sentinal_ihsan/TERSINE-MUHENDISLIK.md`.
 Izlenme sayilari Ihsan'in IG Insights'indan, teknik olcumler bizim (yt-dlp + ffmpeg).
 
-## GUNCEL FORMAT (11 Eylul 2026'dan itibaren gecerli)
+## GUNCEL FORMAT (13 Eylul 2026'dan itibaren gecerli)
 
 Bu bolum asagidaki "Tek cumle", "Degismez kurallar" ve "Neye DOKUNMA"
 bolumlerinin YERINE gecer. Onlar 10 Eylul'un dis mekan / melez yaratik
 formatini anlatir; o format olculerek terk edildi (asagidaki basarisizlik
 kayitlari). Kayitlar ders olarak duruyor.
 
+11 Eylul'un 3 x 8 sn formati da 13 Eylul'de olculerek birakildi. Dayanak:
+REFERANS-AYUSH-ANALIZ.md, @ayush_0_ai hesabinin 11 reeli indirilip olculdu.
+11/11 video 10,01 sn, 24 fps, 1080x1920 ve SIFIR sahne kesmesi. Kazananlari
+kaybedenlerden ayiran dort sey: sis yok, yaratik insani gercekten agzina
+aliyor, sonda ekip yaratigi acip insani cikariyor, ve yaratik TANIDIK gercek
+bir hayvan. Kaybedenlerde sis var ve temas yok (dev zurafa 135 begeni:
+gercek hayvan, dev olcek, temiz set, ama temas yok).
+
 ### Tek cumle
 
 Bir film setinde dev, gercekci bir yaratik Ihsan'i agzina alir; ekip
-cenesini elleriyle acar ve Ihsan yara almadan cikar. Yaratigin bir prop
-oldugu son vurusta anlasilir.
+cenesini elleriyle acar ve Ihsan yara almadan cikar. Hepsi TEK KESINTISIZ
+10 saniyelik cekimde olur ve yaratigin bir prop oldugu son saniyelerde
+anlasilir.
 
 ### Kurallar
 
-1. ANLATIM YOK, MUZIK YOK. Ses setin kendi sesidir: ortam, su, yaratik
-   mekanizmasi, ekip hareketi, alkis. Diegetik ses kisilmez. Mastering
-   muziksiz govde uzerinde -14 LUFS / -1 dBTP'ye yapilir. (11 Eylul, ep05
-   sonrasi Ihsan karari.)
-2. UC VURUS, SIRASI DEGISMEZ, TEK SET: tehdit, agza alinma, ekibin ceneyi
-   acmasi ve cikis. Vurus metninin TEK KAYNAGI
-   series.json auto_replenish.shot_plan; her cekim promptu o metinle baslar.
-3. QC NOTU VURUS TARIF ETMEZ, prompttaki "SHOT N," paragrafina bakar.
+1. ANLATIM YOK, MUZIK YOK. Ses setin kendi sesidir: ortam, ayak sesi, stüdyo
+   havalandirmasi, ekip hareketi. Diegetik ses kisilmez. Mastering muziksiz
+   govde uzerinde -14 LUFS / -1 dBTP'ye yapilir. (11 Eylul, ep05 sonrasi
+   Ihsan karari.)
+2. TEK KESINTISIZ CEKIM. Bolum tek plandir: kesme yok, ikinci cekim yok,
+   sahne degisimi yok. Uc vurus (tehdit, agza alinma, ekibin ceneyi acmasi
+   ve cikis) sirasi degismeden AYNI cekimin icinde gecer. Vurus metninin TEK
+   KAYNAGI series.json auto_replenish.shot_plan.
+3. QC NOTU VURUS TARIF ETMEZ, prompttaki SHOT paragrafina bakar.
    Sebep: kural degisip QC notu bayat kalinca dogru video yanlis sebeple
    reddedildi; 11 Eylul'de uc kez, 483 kredi.
 4. art_style HER cekim promptunun basina eklenir (series/shots.py). Formati
    degistiren her karar art_style'i ayni anda degistirir.
-5. KURULMUS DEKOR, CIPLAK YESIL PERDE DEGIL. On planda gercek set malzemesi
-   (yaprak, kaya, su, sis), arkada yesil perde, kenarda ekip, en onde kamera
-   operatorlerinin sirti. (DdEArj4BMrV dersi.)
-6. GIRIS AGIZDAN, CIKIS EKIBIN ELLERIYLE. Prop oldugunu kanitlayan sey alkis
-   degil, ellerin dekorun uzerinde olmasi.
-7. TEK YARATIK, DONUSUM YOK. Iki govde birlestirilemiyor (olculdu).
-8. OLCEK: yaratik buyuk ve yakin, kadrajin buyuk kismini doldurur.
-9. TEK IHSAN, konusmaz, kameraya bakmaz. Yuz capasi character_id; kiyafet
-   sete gore degisir.
-10. SURE: 3 x 8 sn, duration_band [12, 26]. ep05 22,7 sn cikti.
-11. EKRANA YAZI YOK. GUVENLIK: kan ve yaralanma yok.
-12. Her bolumun yaratigi bir referans gorselle (plan.prop_ref_urls), seti
-    ortam referansiyla capalanir (bible.series.episode_anchors); bolum icinde
-    cekim zinciri de surekliligi tasir. Yaratigi Kie'de KARAKTER olarak kaydetmek
-    olculmus bir denemeden once uretime baglanmaz (insan olmayan ozne ve ucret
-    dogrulanmadi).
+5. MINIMAL KURULMUS DEKOR, MAVI PERDE. Arkada izleme isaretli MAVI perde,
+   zeminde stüdyo betonu GORUNUR ve uzerinde sig bir kum/toprak adasi,
+   birkac kaya, bir kutuk ve seyrek ot. Kenarda siyahli ekip, en onde kamera
+   operatorlerinin sirti, dolly rayi ve kablolar. Isik tepedeki genis beyaz
+   difuzyon izgarasindan gelir.
+   SIS YASAK. 11 Eylul kurali sisi beklenen set malzemesi sayiyordu;
+   13 Eylul olcumu bunu ters cevirdi: sis kaybeden videolarda var,
+   kazananlarda yok.
+6. KAMERA: tek kesintisiz elde/gimbal plan, genis kurulus kadrajindan yakina
+   dogru YAVAS PUSH-IN. Sabit tripod degil, kesme ve gecis yok.
+7. GIRIS AGIZDAN, CIKIS EKIBIN ELLERIYLE. Prop oldugunu kanitlayan sey alkis
+   degil, ellerin dekorun uzerinde olmasi. Ifsa son saniyelere aittir.
+8. TEK YARATIK, DONUSUM YOK, TANIDIK GERCEK HAYVAN. Iki govde
+   birlestirilemiyor (olculdu). Uydurma yaratik da tutmuyor (referansta
+   ejderha 42 begeni). Izleyicinin tanidigi bir hayvan secilir ve cenesi bir
+   insani alacak kadar buyuk olur.
+9. OLCEK: yaratik buyuk ve yakin, kadrajin buyuk kismini doldurur.
+10. TEK IHSAN, konusmaz, kameraya bakmaz. Yuz capasi character_id; kiyafet
+    sete gore degisir.
+11. SURE: 1 x 10 sn, duration_band [9, 11].
+12. EKRANA YAZI YOK. GUVENLIK: kan ve yaralanma yok.
+13. Her bolumun yaratigi bir referans gorselle (plan.prop_ref_urls), seti
+    ortam referansiyla capalanir (bible.series.episode_anchors). Tek cekimde
+    cekim zinciri yoktur (chain_frames kapali); sureklilik tek planin kendi
+    surekliligidir.
 
 ## Tek cumle (ESKI FORMAT, 10 Eylul, artik gecerli degil)
 
