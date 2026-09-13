@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "The Colosseum: Fact Or Ancient Propaganda?"
+  },
+  "synopsis": "Ancient Roman accounts describe the newly built Colosseum being flooded for mock naval battles during its inaugural games.",
+  "narration": "Roman historians recorded the Colosseum's opening in AD 80 with mock naval battles. This spectacular feat involved flooding the arena, a testament to Roman engineering. Was it real, or exaggerated for propaganda? The scale is immense.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical shot looking down into the newly constructed Colosseum arena, the ground partially covered with shallow, shimmering water. Spectators in vibrant Roman attire fill the tiers, their faces a mix of anticipation and awe. Warm Roman sunlight highlights the scale and engineering.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close-up, low-angle shot within the flooded Colosseum arena, capturing a small, ornate Roman warship, propelled by oarsmen, engaging in a staged battle. Water splashes dynamically around the vessel, reflecting the grand arches above. The action is contained but visually striking, emphasizing the spectacle.",
+      "seed": null
+    }
+  ],
+  "family": "efsane vs kayıt",
+  "seed_id": 14,
+  "music": "Intense, epic orchestral percussion with deep brass swells and rapid string ostinatos. Evokes the grandeur and brutal spectacle of Roman games, building dramatic tension without pause. The music drives with an unrelenting energy, hinting at both awe and violence, and concludes abruptly, ready to loop seamlessly.",
+  "title_card": {
+    "title": "The Colosseum",
+    "subtitle": "Rome, AD 80"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

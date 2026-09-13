@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Divers Found a 2,000-Year-Old Computer"
+  },
+  "title_card": {
+    "title": "The Antikythera Mechanism",
+    "subtitle": "Aegean Sea, Greece — found 1901"
+  },
+  "synopsis": "A recovery team descends onto the Roman-era Antikythera wreck, drifts past its half-dissolved marble statues and pulls a corroded bronze lump from the silt — the 2,000-year-old geared mechanism that still defies explanation.",
+  "hook_shot": 4,
+  "narration": "In the spring of 1901, sponge divers rose from the waters off Antikythera, Greece, pale and shaking. Forty-five meters down, they had found a Roman shipwreck — and among its statues, a lump of corroded bronze no one could explain. Inside it were gears. Precision gears — cut two thousand years ago. The Antikythera Mechanism predicted eclipses and tracked the planets: a computer built centuries before such a thing should exist. The sea did not give it up gently. One diver died bringing this cargo into the light, and two more never walked again. Eighty-two fragments survive in Athens. We still do not fully understand them.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "POV descent down a taut anchor line into deep blue-black open water, headlamp beam sweeping below, marine snow streaming upward past the lens, two teammate divers sinking ahead as dark silhouettes with torches. Ends on: a sloping seabed of pale rubble emerging from the gloom below.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The same sloping seabed drawing closer: the camera drifts forward over an ancient wreck debris field — rows of encrusted clay amphorae half-buried in grey silt, a broken marble arm rising out of the sediment, torch beams crossing the site. Ends on: a teammate diver's torch pointing at a low dark mound between the amphorae.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Moving in past the amphorae toward the dark mound: half-dissolved marble statue faces stare up out of the silt, eroded and pitted after two thousand years underwater, the torch light crawling across them; a fin kick stirs a slow curtain of silt that dims the view. Ends on: the beam settling on a small corroded lump wedged between two amphorae.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Close on the corroded lump as gloved hands gently fan away the silt: under the crust, the unmistakable teeth of a bronze gear wheel catch the torch light and glint, ancient and machine-precise, bubbles drifting up past the lens. Ends on: the exposed gear face filling the beam, silt settling around it.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The gloved hands ease the gear-bearing lump into a rigid mesh recovery basket beside it; a second diver clips the basket to a lift line and gives a slow OK signal, silt blooming softly around them. Ends on: the basket rising past the camera into dark water on its line.",
+      "seed": null
+    },
+    {
+      "n": 6,
+      "duration": "8",
+      "prompt": "POV ascent following the lift line upward: far above, a faint pale disc of surface light slowly grows; below, the wreck site fades into blackness with two torch beams still crossing over it. Ends on: darkness swallowing the site below while the surface glow widens overhead.",
+      "seed": null
+    }
+  ]
+}

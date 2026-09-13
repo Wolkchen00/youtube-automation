@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "An ancient Arabian ship full of Chinese gold was found"
+  },
+  "synopsis": "The Belitung wreck, an Arabian dhow, was discovered carrying an immense cargo of Tang-dynasty ceramics and gold, a testament to 9th-century maritime trade.",
+  "narration": "In 1998, off the Indonesian island of Belitung, sea-cucumber divers uncovered an astounding vessel: a 9th-century Arabian dhow. What lay within its timbers was even more remarkable—a vast cargo of over 60,000 Tang dynasty ceramics and precious gold and silver objects. This extraordinary find, known as the Belitung wreck, provided irrefutable evidence of a sophisticated maritime Silk Road connecting China to the Middle East centuries earlier than historical records suggested. The dhow's incredible journey ended far from home, leaving behind a frozen snapshot of global trade in the early medieval era.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into murky, warm-looking tropical waters. Visibility is limited, creating a sense of anticipation. Hints of biodiverse marine life drift past in the headlamp beam, suggesting an active environment. Muted dark green-blue palette.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The diver approaches a large, indistinct mound on the seabed. As they draw closer, the heavily concreted and encrusted timbers of an ancient wooden hull begin to take shape, revealing the significant size of the shipwreck. A teammate diver is visible examining a hull section.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The diver hovers over a partially exposed cargo hold within the ship's remains. Thousands of ceramic bowls and jars, stacked tightly and still surprisingly intact, are visible under the torchlight. Some are broken, but many retain their original form, creating a vast, intricate pattern.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The torchlight lands on a breathtaking sight: amidst the ceramics, a treasure trove of intricate Tang dynasty pottery and small gold items – perhaps cups or plates – gleam brilliantly. The vibrant glazes of the ceramics and the lustrous gold stand out against the dark, encrusted seabed.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand carefully brushes away sediment from a particularly fine ceramic piece, revealing its delicate artistry. Another diver records the find. The diver then begins a slow ascent, looking back as the immense and valuable cargo slowly recedes into the murky depths, a testament to ancient trade.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Belitung wreck",
+    "subtitle": "Java Sea, Indonesia — found 1998"
+  },
+  "hook_shot": 4
+}

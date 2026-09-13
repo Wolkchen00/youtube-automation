@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Researchers found the lost church of Rungholt under the mud"
+  },
+  "synopsis": "Researchers located the lost church of Rungholt, a trading town in the Wadden Sea that was swallowed by the great storm flood of 1362, under the mudflats.",
+  "narration": "In 2023, after centuries of legend and speculation, researchers finally located the lost church of Rungholt in the Wadden Sea, Germany. This trading town was famously swallowed by the devastating Grote Mandrenke storm flood of 1362, an event that reshaped the North Sea coast. The discovery of its ecclesiastical foundations beneath the mudflats confirmed the existence of this fabled medieval settlement. Once a bustling port, Rungholt now lies submerged, its tragic fate a stark reminder of nature's power. Local lore says its church bells still ring on stormy nights, a haunting echo from the deep.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into extremely murky, silty, shallow water. Visibility is very poor, only a few feet in front of the headlamp. The bottom is an indistinct, dark mud. Muted grays and browns dominate the claustrophobic scene.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The diver navigates slowly across a flat, featureless mud landscape. The diver's fins gently disturb the fine sediment, creating small clouds of silt. Dark, waterlogged timbers, barely visible, occasionally emerge from the mud, hinting at buried structures.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The faint, imposing outline of a large, square stone structure begins to emerge from the pervasive mud and sediment. It's heavily overgrown with marine algae, but its unnatural geometry hints at human construction, distinct from the surrounding environment. A ghostly, eerie presence.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The diver's torchlight sweeps across the eroded but clearly identifiable stone foundations and lower walls of the lost Rungholt church. Ancient, rough-hewn blocks are visible, perhaps with a hint of a collapsed archway. The scale suggests a significant, once-proud building now consumed by the sea.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The diver hovers over the submerged remains of the church, a silent testament to a forgotten tragedy. A teammate's silhouette is visible in the distance, carefully mapping the site. The diver then begins a slow, almost melancholic ascent towards the diffused, distant light above, as the lost church sinks back into the murk below.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Rungholt",
+    "subtitle": "Wadden Sea, Germany — flooded 1362"
+  },
+  "hook_shot": 4
+}

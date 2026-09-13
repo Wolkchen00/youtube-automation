@@ -1150,6 +1150,7 @@ def mix_background_music(
     music_volume: float = 0.18,
     replace_original: bool = False,
     limit_mix_peak: bool = False,
+    lowpass_hz: float | None = None,
 ) -> Path:
     """Mix a CONTINUOUS background-music bed into a video.
 
@@ -1172,6 +1173,9 @@ def mix_background_music(
         music_volume: Music volume (bed ≈0.18-0.3; as sole track ≈0.9)
         replace_original: If True, output audio = looped music only.
         limit_mix_peak: True ise normalize=0 toplamindan sonra tepeyi sinirla.
+        lowpass_hz: Opt-in. Verilirse yatak bu frekansta alcak-gecirenden
+            gecirilir (24 dB/oktav). None/0 (varsayilan) = filtre YOK,
+            eski davranis birebir korunur.
 
     Returns:
         Path to the mixed video.
@@ -1186,7 +1190,15 @@ def mix_background_music(
         vid_duration = get_video_duration(video_path)
         fade_out_st = max(0.0, vid_duration - 1.5)
 
-        bed = (f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS,"
+        # lowpass_hz (opt-in): yatagin tizini keser. None/0 = filtre YOK, eski
+        # davranis birebir. Olculen referansta (@one__create) ses ~2 kHz'de
+        # tavanlaniyor: 2-8 kHz bandi 29 dB asagida, 8 kHz ustu pratikte yok.
+        # Iki kutuplu iki asama = 24 dB/oktav, tek asamanin yumusak egrisi
+        # o imzayi vermiyor.
+        lp = ""
+        if lowpass_hz:
+            lp = f",lowpass=f={float(lowpass_hz):.0f}:poles=2" * 2
+        bed = (f"[1:a]atrim=0:{vid_duration:.2f},asetpts=PTS-STARTPTS{lp},"
                f"volume={music_volume},"
                f"afade=t=in:st=0:d=1.0,afade=t=out:st={fade_out_st:.2f}:d=1.5")
         if replace_original:
@@ -1425,6 +1437,11 @@ def title_card_overlay(
     duration: float = 3.0,
     required: bool = False,
     preserve_case: bool = False,
+    typewriter: float = 0.0,
+    align: str = "center",
+    margin_pct: float = 6.0,
+    color: str = "white",
+    box: bool = True,
 ) -> Path:
     """Burn an opening title card (e.g. artifact name + region/year) over the
     first seconds of a FINISHED episode.
@@ -1435,6 +1452,21 @@ def title_card_overlay(
     the text) and fades out over the last 0.5s of `duration`. Only drawtext is
     applied — the footage look is not altered (no fps/eq/noise like the CCTV
     dressing).
+
+    Opt-in gorunum alanlari (HEPSININ VARSAYILANI ESKI DAVRANISI BIREBIR KORUR,
+    yani mevcut seriler etkilenmez):
+
+        typewriter: >0 ise baslik harf harf belirir ve bu kadar saniyede
+            tamamlanir. 0 (varsayilan) = tek parca, eski davranis.
+            Olculen referans (@one__create): ~0,5 sn'de tamamlaniyor.
+        align: "left" ise yazi sola yaslanir, "center" (varsayilan) ortalar.
+        margin_pct: align="left" iken sol kenar bosluğu, GENISLIGIN yuzdesi.
+        color: yazi rengi ("black", "white"). Varsayilan "white".
+        box: False ise yazinin arkasindaki koyu kutu cizilmez.
+            Varsayilan True.
+
+    Daktilo sola yaslanmis kullanilmak icindir: ortali hizalamada her yeni harf
+    metni yeniden ortaladigi icin yazi titrer.
     """
     import textwrap
 
@@ -1461,14 +1493,15 @@ def title_card_overlay(
     title_lh, sub_lh = title_fs + px(24), sub_fs + px(18)
 
     # Bir drawtext PER LINE (ffmpeg 8 çok-satır tuzağı — cctv_overlay'deki çözümle aynı).
-    rows: list[tuple[str, int, str]] = []   # (metin, fontsize, renk)
+    rows: list[tuple[str, int, str, bool]] = []   # (metin, fontsize, renk, baslik_mi)
     # preserve_case: gok cismi adlarinda kucuk harf anlam tasir (WASP-12b gezegen,
     # WASP-12B yildiz esi). Varsayilan False tarih kanallarinin davranisini korur.
     title_text = (title or "") if preserve_case else (title or "").upper()
+    # color varsayilani "white" → eski davranis birebir (baslik white, alt white@0.92).
     for line in textwrap.wrap(title_text, width=24):
-        rows.append((line, title_fs, "white"))
+        rows.append((line, title_fs, color, True))
     for line in textwrap.wrap(subtitle or "", width=36):
-        rows.append((line, sub_fs, "white@0.92"))
+        rows.append((line, sub_fs, f"{color}@0.92", False))
     if not rows:
         if required:
             raise RuntimeError("zorunlu title card metni bos")
@@ -1476,15 +1509,55 @@ def title_card_overlay(
         shutil.copy2(str(input_path), str(output_path))
         return output_path
 
+    # box varsayilani True → eski davranis birebir. False iken kutu hic cizilmez
+    # (referans kunye kutusuz: acik zeminde siyah yazi tek basina duruyor).
+    boxarg = f"box=1:boxcolor=black@0.45:boxborderw={px(16)}:" if box else ""
+    # align varsayilani "center" → x=(w-text_w)/2, eski davranis birebir.
+    # "left" iken kenar bosluğu GENISLIGIN yuzdesidir, cozunurlukten bagimsiz.
+    xarg = f"w*{float(margin_pct) / 100.0:.4f}" if align == "left" else "(w-text_w)/2"
+
+    # Daktilo (opt-in): baslik harf harf belirir. typewriter<=0 iken tek drawtext
+    # per satir cizilir, yani eski davranis birebir korunur.
+    type_secs = max(0.0, float(typewriter or 0.0))
+    title_chars = sum(len(t) for t, _, _, is_t in rows if is_t)
+    typing = type_secs > 0.0 and title_chars > 0
+
     vf_parts = []
     y = px(320)   # Shorts üst ikon bölgesinin altı, alt UI'ın çok üstü
-    for text, fs, color in rows:
-        vf_parts.append(
-            f"drawtext={fontarg}text='{_drawtext_escape(text)}':fontsize={fs}:"
-            f"fontcolor={color}:box=1:boxcolor=black@0.45:boxborderw={px(16)}:"
-            f"x=(w-text_w)/2:y={y}:alpha='{alpha}'"
-        )
-        y += title_lh if fs == title_fs else sub_lh
+    seen_chars = 0                      # daktilo zaman cizelgesinde kac harf gecti
+    for text, fs, col, is_title in rows:
+        esc_full = _drawtext_escape(text)
+        common = (f"fontsize={fs}:fontcolor={col}:{boxarg}"
+                  f"x={xarg}:y={y}")
+        if typing and is_title:
+            # Her onek kendi penceresinde; SON onek (tam satir) kalici ve solan.
+            # Satir bitince kalici kalir, boylece alt satir yazilirken ustu durur.
+            for i in range(1, len(text) + 1):
+                start = (seen_chars + i - 1) / title_chars * type_secs
+                esc = _drawtext_escape(text[:i])
+                if i == len(text):
+                    vf_parts.append(
+                        f"drawtext={fontarg}text='{esc}':{common}:"
+                        f"alpha='{alpha}':enable='gte(t,{start:.3f})'"
+                    )
+                else:
+                    stop = (seen_chars + i) / title_chars * type_secs
+                    vf_parts.append(
+                        f"drawtext={fontarg}text='{esc}':{common}:"
+                        f"enable='gte(t,{start:.3f})*lt(t,{stop:.3f})'"
+                    )
+            seen_chars += len(text)
+        elif typing:
+            # Alt satir daktilo bitince tek parca belirir.
+            vf_parts.append(
+                f"drawtext={fontarg}text='{esc_full}':{common}:"
+                f"alpha='{alpha}':enable='gte(t,{type_secs:.3f})'"
+            )
+        else:
+            vf_parts.append(
+                f"drawtext={fontarg}text='{esc_full}':{common}:alpha='{alpha}'"
+            )
+        y += title_lh if is_title else sub_lh
     vf_parts.append("format=yuv420p")
 
     cmd = [

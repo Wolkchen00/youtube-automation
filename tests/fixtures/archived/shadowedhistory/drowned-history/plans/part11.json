@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "A lost Spanish treasure galleon was found in the deep"
+  },
+  "synopsis": "A deep-sea robot located the San José galleon, a Spanish treasure ship sunk in 1708, with its fabled gold cargo still on the seabed at extreme depths.",
+  "narration": "In 2015, a deep-water robot made an extraordinary discovery off the coast of Cartagena, Colombia: the San José galleon. This legendary Spanish treasure ship, carrying a vast fortune of gold, silver, and emeralds, had been sunk in battle by British warships in 1708. For over three centuries, its fabled cargo lay undisturbed, an estimated 600 meters below the surface. The discovery confirmed the vessel's identity and its immense historical and monetary value. To this day, the wreck remains a protected site, its untold riches still resting in the profound darkness of the deep ocean.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, deep dark water, descending slowly. Only the diver's headlamp beam cuts through the extreme murk, revealing drifting silt. Distant, vague lights of a modern ROV (remotely operated vehicle) hint at immense depth. Muted deep blue and black palette.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Continuing descent, the diver approaches a vast, indistinct debris field on a soft seabed. The vague, heavily concreted outlines of a very large shipwreck emerge from the gloom. The ROV, a dark silhouette with bright lights, is scanning nearby. The water is still, cold, and immensely dark.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The diver glides slowly over the expansive wreck site. Scattered cannons, broken timbers, and deep-sea coral formations are visible under the torchlight. The sheer scale of the sunken galleon is hinted at by the endless field of debris stretching into the darkness, a teammate diver appears as a distant silhouette.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "The diver's torch beam lands on a spectacular sight: a cluster of gold coins and raw emeralds spilling from a half-buried, broken wooden chest. The precious metals glint brightly under the artificial light, contrasting with the dark, encrusted debris around them. The sense of immense wealth is palpable.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "An ROV's robotic arm carefully extends to take a sample near the gleaming gold and jewels. The diver observes, exhaled bubbles drifting upwards. The scene slowly pulls back, beginning a gentle ascent, the valuable cargo and the vast wreck site fading into the impenetrable darkness below.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "San José galleon",
+    "subtitle": "Cartagena, Colombia — located 2015"
+  },
+  "hook_shot": 4
+}

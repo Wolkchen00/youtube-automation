@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "Western Front, 1914 — The Day the Guns Fell Silent"
+  },
+  "synopsis": "On Christmas Day, 1914, soldiers on opposing sides of World War I momentarily lay down their arms, emerging from their trenches to share a spontaneous, unofficial truce.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Western Front, 1914. A desolate, muddy trench at dusk. Young soldiers, bundled in thick greatcoats, huddle together against the cold. The air is heavy with the distant sound of artillery, but a quiet moment settles as one soldier lights a small, makeshift Christmas candle. The flickering flame casts warm shadows on weary faces.",
+      "seed": null,
+      "fact": "DECEMBER 25, 1914"
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Western Front, 1914. A close-up of a German soldier, early 20s, in his trench. He cautiously raises a small, decorated Christmas tree above the parapet. In the background, across the muddy expanse of no-man's-land, faint candlelight flickers from the opposing British trench, and the sound of distant carols drifts through the cold air.",
+      "seed": null,
+      "fact": "NO-MAN'S-LAND"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Western Front, 1914. Two soldiers, one British, one German, tentatively meet in the middle of no-man's-land. The barbed wire and shell holes are visible, but for this moment, they are ignored. They exchange a small, hesitant smile and offer each other cigarettes and chocolate, their hands briefly touching in a gesture of shared humanity. The sun is low, casting long shadows.",
+      "seed": null,
+      "fact": "TRADING SOUVENIRS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Western Front, 1914. A wide shot of a spontaneous football match taking place in no-man's-land. Dozens of British and German soldiers, some still in their helmets, are kicking a makeshift football. Laughter and cheers echo across the desolate landscape, replacing the usual sounds of war. The scene is bathed in a soft, ethereal winter light.",
+      "seed": null,
+      "fact": "IMPROMPTU FOOTBALL"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Western Front, 1914. As night falls, the soldiers slowly return to their respective trenches. A final lingering shot of a single British soldier and a single German soldier, standing on their parapets, silently waving goodbye across the now empty no-man's-land. The brief moment of peace dissolves back into the grim reality of war, but a flicker of hope remains.",
+      "seed": null
+    }
+  ],
+  "music": "A poignant and melancholic instrumental piece, blending traditional folk elements with a sparse orchestral arrangement. It features a yearning acoustic guitar melody, supported by gentle, mournful strings (violins, cello) and a soft, breathy flute. The tempo is slow, creating a reflective mood. It builds subtly with a sense of bittersweet hope, peaking with a warm, shared chord, then fades into a quiet, almost fragile resolution, leaving a lingering feeling of humanity amidst conflict.",
+  "title_card": {
+    "title": "The Christmas Truce",
+    "subtitle": "Western Front, 1914"
+  },
+  "caption": "Western Front, 1914. The first winter of the Great War had descended, trapping soldiers in muddy, frozen trenches.\n\nAs Christmas Eve arrived, an extraordinary phenomenon began along various sections of the Western Front. German soldiers placed small Christmas trees, lit with candles, atop their parapets, and began singing carols.\n\nBritish and French troops, cautiously at first, responded with their own songs. Soon, shouts of 'Merry Christmas!' echoed across no-man's-land. The next morning, on December 25, 1914, soldiers from opposing sides, still wary, began to emerge from their trenches.\n\nThey met in the desolate strip of land between the lines, exchanging cigarettes, plum puddings, and souvenirs. Impromptu football matches broke out, and the solemn task of burying the dead was respectfully carried out together. This unofficial Christmas Truce, a fleeting moment of shared humanity amidst unimaginable brutality, remains one of the most remarkable stories of World War I, a testament to the enduring human spirit even in the face of conflict.",
+  "hashtags": "#ChristmasTruce #1914 #WW1 #WesternFront #History #Peace #Humanity #WorldWar1 #NoMansLand",
+  "hook_shot": 4
+}

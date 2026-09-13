@@ -674,11 +674,13 @@ def _post_process(bible: Bible, plan: dict, final_ep: Path,
                     ffmpeg_tools.mix_background_music(
                         out, music_path, music_out, music_volume=music_volume,
                         limit_mix_peak=bible.master_lufs is not None,
+                        lowpass_hz=bible.music_lowpass_hz,
                     )
                 else:
                     # saf görsel: müzik TEK sürekli ses olsun (gappy native atılır)
                     ffmpeg_tools.mix_background_music(out, music_path, music_out,
-                                                      music_volume=0.9, replace_original=True)
+                                                      music_volume=0.9, replace_original=True,
+                                                      lowpass_hz=bible.music_lowpass_hz)
                 if music_out.exists() and music_out.stat().st_size > 0:
                     out = music_out
                     music_ok = True
@@ -2297,6 +2299,12 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 duration=float(tc_cfg.get("duration", 3.0)),
                 required="title_card" in required_layers,
                 preserve_case=bool(tc_cfg.get("preserve_case", False)),
+                # Gorunum alanlari opt-in; varsayilanlar eski davranisi korur.
+                typewriter=float(tc_cfg.get("typewriter", 0.0) or 0.0),
+                align=str(tc_cfg.get("align", "center")),
+                margin_pct=float(tc_cfg.get("margin_pct", 6.0)),
+                color=str(tc_cfg.get("color", "white")),
+                box=bool(tc_cfg.get("box", True)),
             )
             if titled.exists() and titled.stat().st_size > 0:
                 final_ep = titled

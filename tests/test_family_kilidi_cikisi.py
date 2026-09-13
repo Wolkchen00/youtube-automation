@@ -19,6 +19,8 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
+from _archived_fixture import archived_search_roots
+
 from series import replenish  # noqa: E402
 
 FAMILIES = ["alfa", "beta", "gama"]
@@ -69,6 +71,17 @@ class KararTests(unittest.TestCase):
 
 class DogrulayiciTests(unittest.TestCase):
     """Gevseme YALNIZ ilk ogede; batch ici komsuluklar aynen zorunlu."""
+    # flashpoints 2026-09-13'te ARSIVLENDI; bu testler onu yalniz ORNEK bir
+    # bible/meta olarak kullanir, veri DONDURULMUS fixture'dan gelir.
+    @classmethod
+    def setUpClass(cls):
+        cls._arsiv = archived_search_roots()
+        cls._arsiv.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._arsiv.stop()
+
 
     def _bolum(self, no, family, seed_id, baslik):
         return {"episode": {"number": no, "title": baslik, "synopsis": "s"},
@@ -115,6 +128,17 @@ class DogrulayiciTests(unittest.TestCase):
 
 class PromptTests(unittest.TestCase):
     """Prompt bir sey deyip dogrulayici baskasini beklerse plan yine reddedilir."""
+    # flashpoints 2026-09-13'te ARSIVLENDI; bu testler onu yalniz ORNEK bir
+    # bible/meta olarak kullanir, veri DONDURULMUS fixture'dan gelir.
+    @classmethod
+    def setUpClass(cls):
+        cls._arsiv = archived_search_roots()
+        cls._arsiv.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._arsiv.stop()
+
 
     def _prompt(self, c, h):
         from series.bible import Bible

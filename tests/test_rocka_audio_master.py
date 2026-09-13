@@ -126,7 +126,10 @@ class InstalledBibleOptInTests(unittest.TestCase):
                     found.append((path, data["series"]["master_lufs"]))
         expected = [
             (REPO_ROOT / "galactic_experience" / "event-horizon" / "bible.json", -14),
-            (REPO_ROOT / "shadowedhistory" / "flashpoints" / "bible.json", -14),
+            # flashpoints 2026-09-13'te arsivlendi (kanal gelecek temali yeni
+            # bir konsepte geciyor); bible.json canli agacta yok. -14 LUFS
+            # sozlesmesi tests/test_flashpoints_kanal_sozlesmesi.py icinde
+            # DONDURULMUS fixture uzerinden korunuyor.
             (REPO_ROOT / "sentinal_ihsan" / "wild-encounter" / "bible.json", -14),
             # one-variable 12 Eylul 2026'da kuruldu. Bu seride mastering opsiyonel
             # DEGIL: kanalin eski formati tam da -22 LUFS teslim ettigi icin oldu

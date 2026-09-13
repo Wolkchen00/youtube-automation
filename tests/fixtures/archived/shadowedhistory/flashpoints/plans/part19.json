@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 19,
+    "title": "The Real Reason Romans Used Urine For Laundry"
+  },
+  "synopsis": "Ancient Romans utilized fermented urine for laundry, valuing its ammonia content, a practice even taxed by Emperor Vespasian.",
+  "narration": "Ancient Romans used fermented human urine for cleaning clothes. Its ammonia content made it an effective detergent and bleaching agent. This practice was so common, Emperor Vespasian even imposed a tax on its collection and sale. A surprising historical hygiene fact.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Bustling Roman fullonica (laundry), workers in tunics vigorously stomping clothes in large vats. The air is steamy, and the scene is full of practical, physical labor. Focus on the expressions of concentration and the textures of wet fabric and stone vats.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Close-up, gritty shot of a Roman citizen pouring liquid from a clay amphora into a larger collection vat, specifically designed for 'fuller's earth' and urine. The liquid is a murky yellow, emphasizing the raw, functional aspect of the process. Background hints at a public collection point or street.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 15,
+  "music": "Quirky, slightly unsettling but fast-paced industrial percussion mixed with a low, rumbling brass section. Creates a sense of the unexpected and slightly gross, driving forward with an insistent, almost comedic, rhythmic urgency. The track is designed to be punchy and peculiar, cutting off cleanly for a loop.",
+  "title_card": {
+    "title": "Roman Laundry",
+    "subtitle": "Ancient Rome, 1st Century AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

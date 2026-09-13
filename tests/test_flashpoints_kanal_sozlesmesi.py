@@ -13,13 +13,26 @@ from series import produce
 from series.bible import Bible
 from series.preflight import validate_min_shots
 from series.series_meta import SeriesMeta
+from _archived_fixture import ARCHIVED_ROOT, archived_search_roots
 
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
-PART31_PATH = REPO_ROOT / "shadowedhistory" / "flashpoints" / "plans" / "part31.json"
+# flashpoints 2026-09-13'te ARSIVLENDI (Ihsan karari: kanal gelecek temali yeni
+# bir konsepte geciyor). Bu dosya arsivlenen konseptin kanal sozlesmesini
+# sabitler, o yuzden veri canli agactan degil DONDURULMUS kopyadan okunur.
+PART31_PATH = ARCHIVED_ROOT / "shadowedhistory" / "flashpoints" / "plans" / "part31.json"
 
 
 class FlashpointsChannelContractTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls._arsiv = archived_search_roots()
+        cls._arsiv.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._arsiv.stop()
+
     def test_master_lufs_is_minus_14(self):
         bible = Bible.load("flashpoints")
         self.assertEqual(bible.master_lufs, -14.0)

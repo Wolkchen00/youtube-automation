@@ -22,8 +22,14 @@ if str(REPO_ROOT) not in sys.path:
 from series.bible import Bible                      # noqa: E402
 from series.series_meta import SeriesMeta           # noqa: E402
 from series.replenish import _build_prompt          # noqa: E402
+from _archived_fixture import (                     # noqa: E402
+    ARCHIVED_ROOT, archived_search_roots,
+)
 
-SERIES_JSON = REPO_ROOT / "shadowedhistory" / "flashpoints" / "series.json"
+# flashpoints 2026-09-13'te ARSIVLENDI (Ihsan karari: kanal gelecek temali yeni
+# bir konsepte geciyor). Bu dosya arsivlenen konseptin prompt sozlesmesini
+# sabitler, o yuzden veri canli agactan degil DONDURULMUS kopyadan okunur.
+SERIES_JSON = (ARCHIVED_ROOT / "shadowedhistory" / "flashpoints" / "series.json")
 BRIEF_BASLIK = "CREATIVE BRIEF for new episodes:"
 
 # Kunye kuralinin OPERATIF parcalari. Yalniz orneklere bakmak, tersine cevrilmis
@@ -44,8 +50,9 @@ def _prompt(cfg_ustu=None):
     cfg_ustu verilirse auto_replenish'in KOPYASI uzerinde uygulanir; diskteki
     dosya degismez.
     """
-    meta = SeriesMeta.load("flashpoints")
-    bible = Bible.load("flashpoints")
+    with archived_search_roots():
+        meta = SeriesMeta.load("flashpoints")
+        bible = Bible.load("flashpoints")
     cfg = copy.deepcopy(meta.auto_replenish)
     if cfg_ustu:
         cfg.update(cfg_ustu)
@@ -165,7 +172,10 @@ class FlashpointsPromptContractTests(unittest.TestCase):
         self.assertEqual(ar["shot_seconds"], "10")
         self.assertEqual(ar["narration"], {"min_words": 26, "max_words": 36})
         self.assertEqual(len(ar["topic_pool"]), 54)
-        self.assertEqual(d["next_part"], 31)
+        # 32, arsivlendigi andaki deger. Bu assert eskiden 31'i sabitliyordu ve
+        # otomasyon next_part'i her yayinda ilerlettigi icin bayatliyordu; seri
+        # artik DONDURULMUS oldugu icin deger bir daha degismez.
+        self.assertEqual(d["next_part"], 32)
         self.assertIn("title_style", ar)
         self.assertTrue(ar["title_style"].startswith("a punchy English"))
 

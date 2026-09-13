@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Barcelona, 1909 — The Week the City Burned"
+  },
+  "synopsis": "The Tragic Week of Barcelona, July 1909: a colonial call-up the poor could not buy their way out of ignites a general strike, 80 religious buildings burn, and educator Francisco Ferrer is executed at Montjuïc on October 13, 1909.",
+  "narration": "",
+  "caption": "Barcelona, 1909. The proudest, most modern city in Spain.\n\nIn July, the army called up reservists to fight a colonial war in Morocco. The wealthy could pay 1,500 pesetas and stay home. The poor boarded ships at the harbor while a military band played them away.\n\nOn July 26th, the city answered with a general strike. Within days it became an uprising — the week Spain remembers as the Tragic Week.\n\nMore than 80 churches, convents and religious schools burned. The army declared martial law. Over a hundred people died in the streets.\n\nThen the government chose a culprit: Francisco Ferrer, a freethinking educator who had not led the revolt. At dawn on October 13, 1909, he was executed in the moat of Montjuïc castle.\n\nEurope erupted in protest. Barcelona never forgot.",
+  "hashtags": "#Barcelona #TragicWeek #1909 #SpanishHistory #Catalonia #FerrerGuardia #hiddenhistory",
+  "music": "Mournful Spanish classical guitar over a deep cello drone, joined by tragic orchestral strings and a distant solo trumpet with a Spanish tinge. Slow, dignified tempo. Opens with a lone guitar in immediate atmosphere, swells with restrained snare and timpani as unrest grows, breaks into a powerful sorrowful orchestral peak with two deep cinematic percussion hits, then falls away to a single fragile guitar line that fades like a memory. Deeply emotional, elegiac. Instrumental only, no vocals.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Barcelona in the summer of 1909, golden morning aerial drifting over the Eixample district: ornate modernist apartment blocks with stone balconies, horse carts and early electric trams on wide tree-lined boulevards, church spires and factory chimneys against the Mediterranean, laundry lines and striped awnings, warm haze. The city feels proud, modern and alive.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Barcelona harbor, July 1909: young conscripted soldiers in period Spanish uniforms file up a gangway onto a steamship clutching cloth bundles; weeping mothers and wives in long skirts and shawls press against a rope line; a small military brass band plays on the stone quay; coal smoke drifts from the funnel, gulls wheel overhead in hard summer light.",
+      "seed": null,
+      "fact": "1,500 PESETAS TO STAY HOME"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "A wide Barcelona boulevard on July 26, 1909: a general strike floods the street — thousands of workers in flat caps and aprons, halted trams with empty windows, shuttered shops; men pry up paving stones and pile carts and furniture into barricades; thin smoke begins to rise over distant rooftops; tense, restless energy, no violence shown.",
+      "seed": null,
+      "fact": "JULY 26 — THE STRIKE BEGINS"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Barcelona at night in late July 1909, sweeping rooftop panorama: dozens of church towers and convent roofs burning across the skyline, columns of orange flame and swirling embers against black smoke, crowds as tiny dark silhouettes in the streets far below, firelight reflected in the harbor water. Apocalyptic, tragic grandeur — scale, not injury.",
+      "seed": null,
+      "fact": "80 RELIGIOUS BUILDINGS BURNED"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Dawn fog inside the stone moat of Montjuïc castle above Barcelona, October 1909: a line of soldiers marches away into the mist with rifles shouldered, seen from behind; in the foreground on the wet ground lie a pair of round wire spectacles and a fallen open book; high fortress walls loom; a cold quiet light rises over the distant sleeping city.",
+      "seed": null,
+      "fact": "OCTOBER 13, 1909 — SHOT AT DAWN"
+    }
+  ],
+  "title_card": {
+    "title": "Barcelona, 1909",
+    "subtitle": "The Tragic Week"
+  },
+  "hook_shot": 4
+}

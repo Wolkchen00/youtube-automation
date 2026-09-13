@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "How Tree Rings Proved Vikings Reached America In 1021!"
+  },
+  "synopsis": "Scientific analysis of tree rings, marked by a solar storm, precisely dated the Viking settlement at L'Anse aux Meadows to 1021 AD.",
+  "narration": "Tree rings, marked by a powerful solar storm, precisely dated the Viking settlement at L'Anse aux Meadows. This cosmic event left a distinct signal, allowing scientists to confirm that Norse explorers were present in Newfoundland exactly in 1021 AD.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A close-up, dramatic shot of a cross-section of ancient, petrified wood. A gloved archaeologist's hand with a magnifying glass points to a specific, unusually thick tree ring. The wood grain is intricate and detailed.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A wide, establishing shot of a reconstructed sod-roofed Viking longhouse nestled on a windswept, grassy coastal bluff in Newfoundland. A few period-accurate Norse settlers work near the entrance, under a dramatic, cloudy sky.",
+      "seed": null
+    }
+  ],
+  "family": "imkânsız mühendislik",
+  "seed_id": 8,
+  "music": "A mysterious, driving score with a deep, resonant percussive pulse and sweeping, ancient-sounding string motifs. It evokes both the vastness of the ocean and the precision of scientific discovery, building with a sense of revelation and historical weight, ending mid-phrase.",
+  "title_card": {
+    "title": "Viking Newfoundland Camp",
+    "subtitle": "L'Anse aux Meadows, 1021 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

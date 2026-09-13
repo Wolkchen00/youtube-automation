@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "How Australia Lost The Emu War In 1932!"
+  },
+  "synopsis": "In 1932, the Australian military launched an unsuccessful operation using machine guns against emus to protect farmlands.",
+  "narration": "In 1932, Australia declared war on emus, deploying soldiers with Lewis machine guns against the birds. Despite their firepower, the military failed to control the resilient emu population. The birds outmaneuvered the soldiers, claiming victory in this bizarre conflict.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A wide shot of a dusty, parched Australian farmland landscape. Three military soldiers in 1930s uniforms, sweating, struggle to set up a tripod-mounted Lewis machine gun. A distant flock of large emus casually grazes, oblivious, in the golden light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A tight, dynamic tracking shot follows a single emu, eyes wide, sprinting powerfully through tall dry grass, kicking up dust. In the background, out of focus, a soldier in uniform raises his rifle in frustration. The action is fast and chaotic.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 10,
+  "music": "A frantic, percussive military-style drumbeat with a driving, slightly comical brass and string arrangement. The tempo is relentless, building a sense of absurd urgency and futility, featuring sharp staccato accents and a marching feel. It ends abruptly mid-phrase to loop seamlessly without a fade.",
+  "title_card": {
+    "title": "The Emu War",
+    "subtitle": "Western Australia, 1932"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "The Real Reason America Almost Fought Britain In 1859!"
+  },
+  "synopsis": "In 1859, the United States and Britain nearly clashed over a single pig, leading to the 'Pig War' where the animal was the sole casualty.",
+  "narration": "In 1859, America and Britain teetered on the brink of war, not over land or power, but a pig. A lone pig, shot for rooting in a garden on San Juan Island, sparked an international crisis. Astonishingly, the pig remained the conflict's only casualty.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Close-up, low-angle shot of a startled, large black pig, mid-trot, rooting vigorously in a vegetable garden, scattering dirt and torn lettuce leaves. It's a sunny, rural scene on an island, 1850s setting. A shadow of a man with a musket falls over the pig. The camera follows the pig's frantic movements, then sharply cuts to a wider view as it bolts.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A tense, wide shot of a dirt road on a forested island. Two lines of armed men, one British (redcoats) and one American (blue uniforms), stand facing each other, muskets at the ready, just feet apart. Between them, a single, deceased pig lies on the ground. A worried British officer in his 40s and an equally tense American captain in his 30s stare each other down across the pig. The camera slowly zooms in on the pig, highlighting the absurd tension.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 22,
+  "music": "A quirky, tense, and slightly humorous march with a driving drum beat and staccato brass. It maintains a lighthearted yet urgent feel, reflecting the absurdity of the conflict. The energy remains consistent, ending with a sharp, percussive cut for a seamless loop.",
+  "title_card": {
+    "title": "The Pig War",
+    "subtitle": "San Juan Island, 1859 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Hiroo Onoda: The Last Samurai"
+  },
+  "synopsis": "Japanese intelligence officer Hiroo Onoda continued fighting World War II in the Philippines until 1974, unaware the war had ended.",
+  "narration": "Japanese intelligence officer Hiroo Onoda fought World War II in the Philippines for 29 years after it ended. Unaware of Japan’s surrender, he continued his isolated guerrilla campaign until his former commanding officer was brought to order his formal surrender in 1974.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A younger Japanese soldier in faded jungle camouflage, eyes sharp, meticulously setting a tripwire booby trap in dense, humid Philippine jungle foliage. He is lean and focused, bathed in dappled sunlight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "An older, gaunt, and weathered Japanese soldier, still in tattered jungle uniform, standing in a small clearing. He is formally handing his rifle to a man in a civilian suit who is bowing respectfully. The jungle looms behind them.",
+      "seed": null
+    }
+  ],
+  "family": "unutulmuş kişi",
+  "seed_id": 7,
+  "music": "A tense, somber, percussive score with driving, low strings and a persistent, ticking rhythm. It builds with a sense of isolated determination and a touch of melancholy, reflecting a long, forgotten struggle and unwavering commitment, ending mid-measure for a smooth loop.",
+  "title_card": {
+    "title": "Hiroo Onoda",
+    "subtitle": "Philippines, 1944-1974"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Strasbourg, 1518 — The City Danced Itself Sick"
+  },
+  "synopsis": "In the summer of 1518, hundreds in Strasbourg succumb to a bizarre 'dancing plague,' compulsively dancing for weeks until exhaustion or death.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Strasbourg, 1518. Bustling market square in a picturesque Alsatian town. People in period clothing go about their daily lives, buying produce, chatting. A woman in a simple dress, Frau Troffea, stands alone in the middle of the square, her body beginning to sway subtly, almost imperceptibly, as if to an unheard rhythm. Morning light, busy but calm.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Strasbourg, 1518. Medium shot, a few more people have joined Frau Troffea, now dancing more vigorously in the square. Their movements are jerky, desperate, and uncoordinated, not joyful. Other townsfolk watch, confused and concerned, some pointing. A sense of unease begins to spread. Overhead, the sun beats down.",
+      "seed": null,
+      "fact": "JULY 1518"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Strasbourg, 1518. Wide shot from above, looking down on the town square. Hundreds of people are now dancing, a chaotic, swirling mass of bodies. Some collapse from exhaustion, only to be trampled or drag themselves up to continue. Musicians play frantically on a makeshift stage, trying to control the rhythm, but the dancers are beyond reason. Overcast, oppressive atmosphere.",
+      "seed": null,
+      "fact": "HUNDREDS DANCED"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Strasbourg, 1518. Close-up on the face of a young man, sweat pouring down his temples, eyes wide and bloodshot, fixed in a vacant stare as his body convulses in a dance. His breathing is labored, his mouth open in a silent scream. The frantic music plays on. His hands are raw and bruised. Late afternoon light, harsh.",
+      "seed": null,
+      "fact": "WEEKS OF DANCING"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Strasbourg, 1518. Quiet, empty cobblestone street at dusk. The only signs of the recent event are discarded clothing and a few abandoned musical instruments. The air is still and heavy, a profound silence has settled over the city. A single, flickering gas lamp casts long shadows. Camera slowly pulls back.",
+      "seed": null
+    }
+  ],
+  "music": "An unsettling, macabre Renaissance-era ensemble piece, featuring recorder, lute, and hurdy-gurdy, opening with a deceptively cheerful but slightly off-key jig. It quickly devolves into a frantic, dissonant and repetitive melodic pattern with an increasing tempo, evoking a sense of uncontrolled, almost terrifying mania. The climax is a cacophony of instruments, before abruptly fading into a quiet, exhausted drone. Fast tempo, then slow.",
+  "title_card": {
+    "title": "The Dancing Plague",
+    "subtitle": "Strasbourg, 1518"
+  },
+  "caption": "Strasbourg, 1518. The midsummer heat settled heavily over the bustling Alsatian city, a time for harvest and celebration.\n\nBut in July, a bizarre phenomenon began: a woman named Frau Troffea stepped into the street and began to dance, uncontrollably.\n\nShe danced for days without rest, and within a week, dozens joined her. Soon, hundreds of citizens were consumed by an inexplicable compulsion, their bodies writhing and feet moving in a terrifying, relentless rhythm.\n\nOfficials, believing it was a fever, encouraged more dancing, setting up stages and hiring musicians, only for the numbers to swell. The 'dancing plague' lasted for weeks, claiming lives through exhaustion, heart attack, and stroke.\n\nBy September, the strange affliction vanished as mysteriously as it appeared, leaving behind a bewildered city and a chilling historical enigma.",
+  "hashtags": "#Strasbourg #DancingPlague #1518 #Renaissance #Mystery #MassHysteria #EuropeanHistory #MedievalOddities",
+  "hook_shot": 3
+}

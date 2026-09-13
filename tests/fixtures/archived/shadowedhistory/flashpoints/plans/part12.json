@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Gladiators: Fact Or Ancient Propaganda?"
+  },
+  "synopsis": "Despite popular belief, most Roman gladiator fights did not end in death, as gladiators were valuable assets often spared in defeat.",
+  "narration": "Hollywood often depicts gladiator combat as a fight to the death. However, most gladiatorial contests spared the defeated. Gladiators were expensive, highly trained athletes, and their owners rarely allowed such valuable investments to be destroyed, subverting the brutal myth.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Wide shot inside the Colosseum arena, sand stained, with two muscular, costumed gladiators, one kneeling defeated, the other standing victorious, holding a trident. The defeated gladiator gestures for mercy, looking up at the roaring crowd in the packed stands. Sunlight streams from an opening above, casting dramatic shadows. The camera slowly zooms out, revealing the immense scale of the arena.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Closer shot, from behind the victorious gladiator's shoulder, focusing on the kneeling, defeated figure, a strong man in his 30s, helmet removed, showing a grim but hopeful expression. His arm is outstretched, pleading. A Roman official, in rich robes, stands nearby, deliberating, looking towards the stands, then nodding subtly. The crowd noise fades, replaced by a tense silence. Camera slowly tracks around the official, revealing the gladiator's fate.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 24,
+  "music": "Driving, powerful percussive track with deep, resonant drums and a relentless, epic brass melody. A sense of ancient drama and unexpected revelation, maintaining high energy throughout. No gentle fade, the rhythm pushes forward without pause, ending sharply and ready to loop.",
+  "title_card": {
+    "title": "Roman Gladiators",
+    "subtitle": "Ancient Rome, 1st-4th century AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

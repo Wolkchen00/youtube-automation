@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 31,
+    "title": "The Real Reason A Stray Dog Started A War!"
+  },
+  "synopsis": "In 1925, a stray dog's border crossing inadvertently triggered a brief, deadly conflict between Greece and Bulgaria.",
+  "narration": "A stray dog crossing a border sparked the Greek-Bulgarian War of 1925. Over 50 people died in days, until the League of Nations intervened, proving even small incidents can ignite major conflicts.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "A dramatic close-up of a scruffy, medium-sized stray dog with alert eyes, trotting purposefully across a dusty, ill-defined line in dry, sparse grassland, suggesting a border in rural 1920s Balkans. The camera tracks the dog's movement, emphasizing its independence and indifference to human boundaries.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Over-the-shoulder perspective of 1920s Bulgarian border guards in period uniforms, their faces etched with confusion and sudden alarm, as they witness a Greek soldier pursuing the dog across the same dusty border line. The scene is tense, with soldiers raising rifles in a defensive posture, a sudden, unexpected confrontation brewing.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 31,
+  "music": "A fast-paced, percussive track with a sense of urgency and escalating tension, featuring driving snare drums, staccato strings, and a low, rumbling bassline. The music builds quickly from the opening claim, maintaining a relentless, almost chaotic energy that hints at unexpected conflict, ending abruptly mid-phrase for a seamless loop.",
+  "title_card": {
+    "title": "The Stray Dog War",
+    "subtitle": "Greece vs. Bulgaria, 1925"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

@@ -15,7 +15,8 @@ from series.bible import Bible
 from series.series_meta import SeriesMeta
 
 
-REQUIRED_SERIES = {"event-horizon", "flashpoints"}
+# flashpoints 2026-09-13 arsivlemesiyle canli filodan cikti.
+REQUIRED_SERIES = {"event-horizon"}
 
 
 def _configured_integer_pools():

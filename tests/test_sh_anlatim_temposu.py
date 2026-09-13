@@ -22,7 +22,11 @@ from series.series_meta import SeriesMeta
 
 
 REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
-FLASHPOINTS = REPO_ROOT / "shadowedhistory" / "flashpoints"
+from _archived_fixture import ARCHIVED_ROOT  # noqa: E402
+
+# flashpoints 2026-09-13'te ARSIVLENDI (Ihsan karari: kanal gelecek temali
+# yeni bir konsepte geciyor). Veri DONDURULMUS kopyadan okunur.
+FLASHPOINTS = ARCHIVED_ROOT / "shadowedhistory" / "flashpoints"
 
 
 @pytest.fixture(autouse=True, scope="module")

@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 20,
+    "title": "Vienna 1913: The Unthinkable Coincidence"
+  },
+  "synopsis": "In early 1913, a remarkable historical overlap saw Hitler, Stalin, Trotsky, and Freud residing simultaneously in Vienna.",
+  "narration": "In early 1913, a shocking alignment occurred in Vienna. Adolf Hitler, Joseph Stalin, Leon Trotsky, and Sigmund Freud all lived in the same city. The future architects of global conflict and modern thought, unknowingly sharing the same streets. A profound historical coincidence.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Dynamic vertical street scene in bustling Vienna, 1913. Pedestrians in period clothing (top hats, long coats, elegant dresses) hurry past grand, ornate architecture. Focus on the anonymous faces in the crowd, hinting at hidden historical figures moving within the urban flow. Rainy, reflective cobblestone street.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Intimate, slightly claustrophobic interior of a traditional Viennese coffeehouse in 1913. Ornate decor and dark wood, with a mix of patrons: some engrossed in newspapers, others in quiet conversation. A solitary, intense-looking young man with a mustache sketches in a notebook in the foreground, his face partially obscured, hinting at a hidden identity. Low, warm lighting.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 20,
+  "music": "Dark, sophisticated spy-thriller style with a driving, complex drum beat and a dissonant, brooding string section. Builds suspense and a sense of impending historical significance, maintaining an urgent, propulsive energy. The atmosphere is tense and reflective, ending mid-cycle to prompt a continuous loop.",
+  "title_card": {
+    "title": "Vienna 1913",
+    "subtitle": "Austria-Hungary, Early 20th Century"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

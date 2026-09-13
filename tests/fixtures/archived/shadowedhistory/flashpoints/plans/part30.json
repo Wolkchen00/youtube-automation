@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 30,
+    "title": "The Real Reason The Hundred Years' War Lasted 116 Years!"
+  },
+  "synopsis": "The conflict popularly known as the Hundred Years' War actually spanned 116 years, from 1337 to 1453, far exceeding its namesake.",
+  "narration": "Despite its name, the Hundred Years' War actually lasted 116 years. This series of conflicts between England and France, from 1337 to 1453, spanned generations, forever reshaping the political landscape of medieval Europe.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Vertical wide shot of a medieval European battlefield in winter, a vast, muddy expanse under a grey, somber sky. Two armies, banners flying, stand poised for engagement. The scale of the opposing forces emphasizes the drawn-out nature of the conflict. Camera slowly pushes in, showing the desolate landscape.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Close-up on the weary, mud-caked face of a grizzled medieval knight, perhaps in his late 40s or early 50s, helmet removed, looking out over the battle-scarred landscape. His eyes convey exhaustion and a profound sense of prolonged struggle, hinting at a lifetime spent in conflict.",
+      "seed": null
+    }
+  ],
+  "family": "efsane vs kayıt",
+  "seed_id": 16,
+  "music": "Fast, tense, percussive underscore with a historical, martial feel, featuring driving medieval-inspired percussion and powerful string sections, building a sense of relentless, enduring conflict. The music drives without pause, ending abruptly mid-groove for a seamless loop.",
+  "title_card": {
+    "title": "Hundred Years' War",
+    "subtitle": "Europe, 1337-1453"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

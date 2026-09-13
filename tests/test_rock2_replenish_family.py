@@ -12,21 +12,25 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 from series import replenish
 from series.bible import Bible
 from series.series_meta import SeriesMeta
+from _archived_fixture import archived_search_roots
 
 
 sys.stdout.reconfigure(encoding="utf-8")
 
 
-# DİKKAT: bu testler CANLI flashpoints durumunu okur ve o durum her yayınla ilerler.
-# Bu yüzden sıradaki part numarası ve yasak family SABİT YAZILMAZ, koşu anında türetilir.
-# (2026-08-07: ikmal canlıda part 6-10'u yazdı, sabit "6" ve "zaman çarpması" varsayan
-# eski sürüm anında kırıldı.)
+# Bu testler flashpoints yapilandirmasini okur. Seri 2026-09-13'te ARSIVLENDI
+# (Ihsan karari: kanal gelecek temali yeni bir konsepte geciyor), yani veri artik
+# DONDURULMUS fixture'dan gelir ve ilerlemez. Sabit part numarasi yazmak yine de
+# YASAK: asagidaki `live_position()` turetme mantigi, seri bir gun geri
+# acilirsa dogru calismaya devam etsin diye korunuyor.
+# (2026-08-07: ikmal canlida part 6-10'u yazdi, sabit "6" varsayan surum kirilmisti.)
 
 
 def flashpoints_context():
-    meta = SeriesMeta.load("flashpoints")
-    bible = Bible.load("flashpoints")
-    history = replenish._episode_history("flashpoints")
+    with archived_search_roots():
+        meta = SeriesMeta.load("flashpoints")
+        bible = Bible.load("flashpoints")
+        history = replenish._episode_history("flashpoints")
     if meta is None or bible is None:
         raise AssertionError("flashpoints gerçek yapılandırması yüklenemedi")
     return meta, bible, meta.auto_replenish, history
@@ -41,6 +45,21 @@ def live_position():
     _meta, _bible, _cfg, history = flashpoints_context()
     last = max((int(h["n"]) for h in history if h.get("n") is not None), default=0)
     return last + 1, replenish._previous_family(history)
+
+
+def seed_for_family(cfg, family):
+    """Konu havuzunda `family` ailesine ait ILK seed_id.
+
+    Seed'i SABIT yazmak kirilgandir: dogrulayici once "family seed_id ile
+    eslesiyor mu" kuralini isletir, yani ailesi tutmayan bir seed verildiginde
+    test'in olcmek istedigi ARDISIK-AILE kurali hic calismaz. Yasak aile
+    kosu aninda turetildigi icin seed de burada turetilir.
+    """
+    for entry in cfg.get("topic_pool") or []:
+        if entry.get("family") == family:
+            # Havuz girdisi anahtari "id", plandaki karsiligi "seed_id".
+            return entry.get("seed_id", entry.get("id"))
+    raise AssertionError(f"konu havuzunda '{family}' ailesinden seed yok")
 
 
 def pool_markers(start, end):
@@ -97,6 +116,19 @@ def model_plan(number, seed_id, family, title):
 
 
 class Rock2ReplenishFamilyTests(unittest.TestCase):
+    # flashpoints ARSIVLENDI: seri klasoru canli agacta yok. Yama SINIF
+    # duzeyinde durur cunku `generate_plans` gibi cagrilar geçmisi KENDI
+    # icinde yeniden okur; yalniz yardimci fonksiyonu sarmalamak yetmez
+    # (yama disinda gecmis BOS doner ve aile kurali hic islemez).
+    @classmethod
+    def setUpClass(cls):
+        cls._arsiv = archived_search_roots()
+        cls._arsiv.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._arsiv.stop()
+
     def test_prompt_names_forbidden_family_and_filters_only_first_position(self):
         meta, bible, cfg, history = flashpoints_context()
         start, forbidden = live_position()
@@ -142,11 +174,12 @@ class Rock2ReplenishFamilyTests(unittest.TestCase):
         meta, bible, cfg, _history = flashpoints_context()
         start, forbidden = live_position()
         self.assertTrue(forbidden)
+        seed = seed_for_family(cfg, forbidden)
 
         def rejected_response(*_args, **_kwargs):
             return {
                 "episodes": [copy.deepcopy(model_plan(
-                    start, 2, forbidden, "How Oxford Predated An Empire In 1096!"
+                    start, seed, forbidden, "How Oxford Predated An Empire In 1096!"
                 ))]
             }
 

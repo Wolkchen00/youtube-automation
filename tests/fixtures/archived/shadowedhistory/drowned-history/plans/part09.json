@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "Divers found a giant underwater monument carved from stone"
+  },
+  "synopsis": "Off Japan, divers explore the colossal stepped stone terraces of the Yonaguni Monument, an enigmatic structure that continues to spark debate between natural formation and ancient human construction.",
+  "narration": "Off the coast of Yonaguni, Japan, an extraordinary underwater structure challenges our understanding of ancient history. Discovered in 1986, the Yonaguni Monument is a colossal formation of stepped stone terraces, some reaching 25 meters deep. Its sharp angles, flat surfaces, and geometric precision have fueled intense debate among scientists: Is this a natural geological formation, shaped by millennia of seismic activity and erosion? Or is it evidence of a lost civilization, an ancient city carved by human hands? Divers navigate its immense scale, exploring its intricate features, yet the monument holds its secrets, a silent, imposing enigma beneath the waves.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "First-person POV, descending into clear, deep blue-grey water, sunlight dappling from far above, illuminating vast, ambiguous shapes in the distance; a lone diver's silhouette ahead, moving towards the grand, unseen structure.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Camera approaches an immense, angular stone edifice emerging from the blue, its surface rough and ancient; the scale is overwhelming as the diver swims alongside a towering, flat rock face, hinting at a colossal, man-made structure.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Gliding over a series of massive, perfectly horizontal stone steps, each several meters high, forming a staircase-like arrangement; the camera moves along a straight, narrow 'path' cut into the stone, its edges precise and sharp, defying natural erosion.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Torchlight sweeps across a vast, flat, almost perfectly rectangular stone platform, then reveals a distinct, deep, V-shaped cut or 'groove' running across its surface, suggesting deliberate carving; the camera holds on the unusual geometric precision, emphasizing the debate surrounding its origin.",
+      "seed": null
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "A gloved hand gently traces the edge of a deep, straight cut in the stone, then pulls away; the camera ascends slowly, pulling back to reveal the full grandeur of the monument, its colossal stepped terraces receding into the deep blue-grey water, the sunlight filtering down creating a haunting, ethereal glow as the mystery lingers.",
+      "seed": null
+    }
+  ],
+  "title_card": {
+    "title": "Yonaguni Monument",
+    "subtitle": "Off Yonaguni, Japan — found 1986"
+  },
+  "hook_shot": 4
+}

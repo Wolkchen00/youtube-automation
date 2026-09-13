@@ -320,6 +320,25 @@ class Bible:
         return bool(self.data.get("music", False))
 
     @property
+    def music_lowpass_hz(self) -> float | None:
+        """Muzik yataginin tiz tavani (Hz). Alan yoksa None = filtre YOK.
+
+        Olculen referansta (@one__create, 5/5 video) ses ~2 kHz'de tavanlaniyor:
+        2-8 kHz bandi 29 dB asagida, 8 kHz ustu pratikte yok. "Derin ses"
+        dedigimiz sey bu. Ayrinti: shadowedhistory/REELYZE-RAPOR.md.
+        """
+        raw = self.data["series"].get("music_lowpass_hz")
+        if raw is None:
+            return None
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError("bible.series.music_lowpass_hz sayi olmali") from error
+        if value <= 0:
+            return None
+        return value
+
+    @property
     def native_audio(self) -> bool:
         """Ucuz motorun (Seedance) kendi sesini üretsin mi? Anlatım-odaklı kanallarda
         False önerilir (anlatım+müzik temiz kalsın); 'trip' kanalında serbest."""

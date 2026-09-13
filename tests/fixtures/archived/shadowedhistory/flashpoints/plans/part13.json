@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "The Eiffel Tower: The Swaying Colossus"
+  },
+  "synopsis": "The Eiffel Tower's summit subtly traces a 15-centimeter circle on hot days due to solar expansion, a testament to its dynamic engineering.",
+  "narration": "Built in 1889, the Eiffel Tower's iron structure constantly reacts to temperature. On hot days, its summit subtly shifts, tracing a 15-centimeter circle as the metal expands away from the sun. An engineering marvel, dynamically alive against the Parisian sky.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "High-angle shot looking down from the top platform of the Eiffel Tower on a hot, clear Parisian day. The intricate iron latticework dominates the foreground, with the city stretching out in the background. The camera holds steady, subtly highlighting the vastness and the precise, riveted metal structure. A faint shimmer of heat haze distorts the distant cityscape.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Extreme close-up on a specific, exposed iron beam near the summit, directly hit by bright sunlight. A small, almost imperceptible tremor or expansion is visible in the metal as if breathing. Rivets and aged paint are in sharp focus. The camera slowly zooms out and tilts up slightly, emphasizing the immense scale of the iron structure that moves with the sun's heat.",
+      "seed": null
+    }
+  ],
+  "family": "imkânsız mühendislik",
+  "seed_id": 19,
+  "music": "Elegant yet urgent, with a blend of pizzicato strings and a driving, mechanical rhythm section. Features a light, soaring melody that reflects the tower's height, underpinned by a tense, persistent beat. The music builds in intensity, then cuts, ready to loop seamlessly.",
+  "title_card": {
+    "title": "Eiffel Tower",
+    "subtitle": "Paris, France, 1889 AD"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

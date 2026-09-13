@@ -18,16 +18,22 @@ from series import replenish                  # noqa: E402
 from series.bible import Bible                # noqa: E402
 from series.series_meta import SeriesMeta     # noqa: E402
 
+from _archived_fixture import archived_search_roots
+
 sys.stdout.reconfigure(encoding="utf-8")
 
 BLOCK_MARKER = "CRITICAL FAMILY BLOCK"
 CLASSIC_POOL = "RUNTIME UNUSED TOPIC POOL. Use each seed_id at most once:"
 
 
+# flashpoints 2026-09-13'te ARSIVLENDI (Ihsan karari: kanal gelecek temali
+# yeni bir konsepte geciyor). Veri artik canli agactan degil DONDURULMUS
+# fixture'dan okunur (tests/fixtures/archived/shadowedhistory/).
 def ctx():
-    meta = SeriesMeta.load("flashpoints")
-    bible = Bible.load("flashpoints")
-    history = replenish._episode_history("flashpoints")
+    with archived_search_roots():
+        meta = SeriesMeta.load("flashpoints")
+        bible = Bible.load("flashpoints")
+        history = replenish._episode_history("flashpoints")
     assert meta is not None and bible is not None
     return meta, bible, copy.deepcopy(meta.auto_replenish), history
 
@@ -39,6 +45,19 @@ def prompt_text(meta, bible, cfg, start, batch, history):
 
 
 class BackwardCompatibility(unittest.TestCase):
+    # flashpoints ARSIVLENDI: seri klasoru canli agacta yok. Yama SINIF
+    # duzeyinde durur cunku `generate_plans` gibi cagrilar geçmisi KENDI
+    # icinde yeniden okur; yalniz yardimci fonksiyonu sarmalamak yetmez
+    # (yama disinda gecmis BOS doner ve aile kurali hic islemez).
+    @classmethod
+    def setUpClass(cls):
+        cls._arsiv = archived_search_roots()
+        cls._arsiv.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._arsiv.stop()
+
     # B1 ,  families tanimsizsa davranis ESKISIYLE ayni kalmali
     def test_b1_series_without_families_is_untouched(self):
         meta, bible, cfg, history = ctx()
@@ -73,6 +92,19 @@ class BackwardCompatibility(unittest.TestCase):
 
 
 class NoWastedAttempts(unittest.TestCase):
+    # flashpoints ARSIVLENDI: seri klasoru canli agacta yok. Yama SINIF
+    # duzeyinde durur cunku `generate_plans` gibi cagrilar geçmisi KENDI
+    # icinde yeniden okur; yalniz yardimci fonksiyonu sarmalamak yetmez
+    # (yama disinda gecmis BOS doner ve aile kurali hic islemez).
+    @classmethod
+    def setUpClass(cls):
+        cls._arsiv = archived_search_roots()
+        cls._arsiv.start()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls._arsiv.stop()
+
     # B5 ,  gecerli cevap ILK denemede kabul edilmeli (3 deneme tavan, kota degil)
     def test_b5_valid_first_response_is_not_retried(self):
         meta, bible, cfg, history = ctx()

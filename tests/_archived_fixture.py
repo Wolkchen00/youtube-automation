@@ -30,6 +30,13 @@ ARCHIVED_ROOT = REPO_ROOT / "tests" / "fixtures" / "archived"
 SOURCE_COMMIT = "4c3f392"
 ARCHIVED_CHANNEL = "sentinal_ihsan"
 
+# 2026-09-13: shadowedhistory kanalinin TARIH konsepti de arsivlendi (Ihsan
+# karari, kanal gelecek temali yeni bir konsepte geciyor). flashpoints'i
+# sabitleyen testler veriyi buradan okur; dosyalar `git show 3ecee4a:<yol>`
+# ciktisiyla bayt-bayt aynidir (3ecee4a = o arsivden hemen onceki agac).
+SHADOWEDHISTORY_SOURCE_COMMIT = "3ecee4a"
+ARCHIVED_CHANNELS = ("sentinal_ihsan", "shadowedhistory")
+
 
 def archived_path(relative: str) -> pathlib.Path:
     """Orijinal goreli yolun (or. 'sentinal_ihsan/KONSEPT.md') dondurulmus kopyasi."""
@@ -45,12 +52,19 @@ def archived_search_roots(channel_root: pathlib.Path | None = None):
     arsiv slug'larini dondurulmus kopyaya cozer. Canli seriler canli kalir,
     cunku fixture kokunde yalniz arsiv serileri vardir. Liste cagri aninda
     kurulur; `with`, `.start()` / `.stop()` ile kullanilir.
+
+    Argumansiz cagrildiginda arsivlenmis TUM kanal kokleri one eklenir
+    (`ARCHIVED_CHANNELS`), boylece hangi kanaldan arsivlendigi fark etmeksizin
+    her arsiv slug'i cozulur. Slug'lar kanallar arasinda cakismaz.
     """
     from series import bible as bible_module
 
-    root = channel_root if channel_root is not None else ARCHIVED_ROOT / ARCHIVED_CHANNEL
+    if channel_root is not None:
+        roots = [pathlib.Path(channel_root)]
+    else:
+        roots = [ARCHIVED_ROOT / name for name in ARCHIVED_CHANNELS]
     return mock.patch.object(
-        bible_module, "_SEARCH_ROOTS", [root, *bible_module._SEARCH_ROOTS]
+        bible_module, "_SEARCH_ROOTS", [*roots, *bible_module._SEARCH_ROOTS]
     )
 
 

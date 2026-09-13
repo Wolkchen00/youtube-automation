@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Isfahan, 1598 — The Jewel of Persia Awakened"
+  },
+  "synopsis": "Isfahan transforms into a magnificent capital under Shah Abbas I, becoming 'half the world' with its stunning architecture, vibrant markets, and cultural richness.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Isfahan, 1598. Sweeping aerial shot of the nascent Naqsh-e Jahan Square in Isfahan. Construction is underway on the grand public spaces, with scaffolds surrounding emerging turquoise domes and minarets. Workers are busy, but the potential grandeur is already visible. Golden hour light bathes the scene in a warm glow.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Isfahan, 1598. Medium shot focusing on skilled artisans applying intricate tilework to a mosque facade. Their hands carefully place small, colorful tiles to form complex geometric and calligraphic patterns. The vibrant blues and greens catch the light. A young apprentice watches intently, learning. Detail-focused, rich textures.",
+      "seed": null,
+      "fact": "SHAH ABBAS THE GREAT"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "Isfahan, 1598. Epic wide shot of the completed Naqsh-e Jahan Square, bustling with life. The Imam Mosque and Sheikh Lotfollah Mosque stand majestically, their turquoise domes glistening. Merchants display goods in the bazaar arcades, courtiers ride horses, and families stroll. A vibrant, prosperous scene under a clear sky. The square is teeming with activity.",
+      "seed": null,
+      "fact": "HALF THE WORLD"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "Isfahan, 1598. Low angle shot looking up at the majestic thirty-three arches of the Si-o-se Pol bridge over the Zayandeh River at dusk. People are silhouetted, walking across the bridge. Lanterns begin to glow, casting warm reflections on the water below. A sense of peace and grandeur. Soft, romantic light.",
+      "seed": null,
+      "fact": "49 BRIDGES"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "Isfahan, 1598. Close-up on the face of an elderly Persian scholar, perhaps a poet, sitting in a beautiful garden, gently tracing patterns on a piece of paper. His eyes reflect deep wisdom and contentment, gazing out at the lush greenery and distant architecture. The air is still, a slight breeze rustles leaves. Serene, contemplative.",
+      "seed": null
+    }
+  ],
+  "music": "A majestic and ethereal Persian classical piece, opening with the haunting melody of a ney (flute) and the rich resonance of an oud, setting a grand, contemplative mood. It builds gracefully with shimmering santur (hammered dulcimer) and a gentle daf (frame drum) rhythm, creating a sense of wonder and warmth. The piece swells to a panoramic, celebratory peak with layered strings and sustained melodic lines, then gently concludes with the peaceful, echoing tones of the ney and oud. Slow to moderate tempo.",
+  "title_card": {
+    "title": "Isfahan: Half the World",
+    "subtitle": "Isfahan, 1598"
+  },
+  "caption": "Isfahan, 1598. The heart of Persia, under the visionary rule of Shah Abbas the Great, was about to embark on an unparalleled transformation.\n\nRecognizing its strategic importance, Shah Abbas moved his capital to Isfahan, initiating an ambitious building program that would redefine urban splendor.\n\nArchitects, artisans, and poets flocked to the city, constructing vast squares, ornate mosques with turquoise domes, and intricate bridges over the Zayandeh River.\n\nNaqsh-e Jahan Square, one of the largest in the world, became the vibrant hub of this new empire, bustling with merchants, scholars, and royal processions.\n\nBy the early 17th century, Isfahan was famously known as 'Nesf-e Jahan,' or 'Half the World,' a testament to its breathtaking beauty, cultural achievements, and economic prosperity, forever enshrined in its golden age.",
+  "hashtags": "#Isfahan #SafavidEmpire #ShahAbbas #1598 #Persia #IslamicArt #GoldenAge #Architecture #History",
+  "hook_shot": 3
+}

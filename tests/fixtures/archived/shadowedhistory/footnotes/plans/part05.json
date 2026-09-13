@@ -1,0 +1,52 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Krakatoa, 1883 — The Sound That Circled the Earth"
+  },
+  "synopsis": "The eruption of Krakatoa on August 27, 1883 — the loudest sound in recorded history, heard nearly 4,800 km away; tsunamis kill about 36,000 and the world's sunsets burn red for months.",
+  "narration": "",
+  "caption": "Sunda Strait, 1883. Between Java and Sumatra rose a green volcanic island that sailors used as a landmark.\n\nThrough the summer of 1883, Krakatoa smoked and rumbled. Ships passed under skies of drifting ash. People came out to watch.\n\nOn the morning of August 27th, the island tore itself apart. The explosion was the loudest sound in recorded history — heard nearly 4,800 kilometers away. Its shockwave circled the Earth several times, recorded by barometers on every continent.\n\nIt was the sea that did the killing: tsunamis swept the shores of Java and Sumatra, and about 36,000 people were lost.\n\nFor months afterward, sunsets around the world burned blood-red with ash.\n\nWhere the island had stood, there was only sea.",
+  "hashtags": "#Krakatoa #1883 #Indonesia #Volcano #SundaStrait #NaturalHistory #hiddenhistory",
+  "music": "Vast Indonesian-flavored cataclysm score. Soft gamelan bells and bamboo flute shimmer over a calm ocean drone in immediate atmosphere; a slow menacing orchestral swell with deep rumbling taiko-like drums as the sky darkens; ONE cataclysmic percussion-and-brass hit at the eruption, followed by ringing near-silence and a single high violin; closes with mournful gamelan and deep strings under a dying red glow. Awe, terror, elegy. Instrumental only, no vocals.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "The Sunda Strait between Java and Sumatra in 1883: a lush cone-shaped volcanic island rising from a turquoise sea, a thin ribbon of white steam curling from its forested peak; Dutch sailing ships and native outrigger fishing boats on calm glittering water; palm-lined shores and stilt-house villages in the distance under a bright tropical sky.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "The Sunda Strait in August 1883: a monstrous black ash column boils kilometers into the sky from the island volcano, veined with branching volcanic lightning; the sea has turned grey with rafts of floating pumice; a three-masted sailing ship flees under shortened sail, its crew tiny on deck, dark ash drifting down like black snow.",
+      "seed": null,
+      "fact": "AUGUST 27, 1883"
+    },
+    {
+      "n": 3,
+      "duration": "8",
+      "prompt": "The final explosion of Krakatoa on August 27, 1883, from very high above the strait: the island rips apart in a blinding eruption, a colossal white shockwave ring expanding across the ocean surface for kilometers, the ash cloud mushrooming up through the stratosphere, ships like specks on the sea far below. Apocalyptic, planetary scale.",
+      "seed": null,
+      "fact": "HEARD 4,800 KM AWAY"
+    },
+    {
+      "n": 4,
+      "duration": "8",
+      "prompt": "A coastal lowland on the Java shore, August 1883, seen from a safe height: an immense dark swell rises far out at sea and rolls toward an empty palm-lined shoreline, fishing boats already abandoned on the sand, palm crowns bending in the pressure wind, birds streaming inland; no people visible. Dread and enormity.",
+      "seed": null,
+      "fact": "36,000 LIVES LOST"
+    },
+    {
+      "n": 5,
+      "duration": "8",
+      "prompt": "The empty Sunda Strait months after 1883 at twilight: a violently red and violet sky burning over calm open water where the island once stood, a single jagged black rock remaining above the surface; drifting rafts of pale pumice catch the crimson light stretching to the horizon. Vast, silent, elegiac.",
+      "seed": null,
+      "fact": "THE ISLAND WAS GONE"
+    }
+  ],
+  "title_card": {
+    "title": "Krakatoa, 1883",
+    "subtitle": "The Loudest Sound on Earth"
+  },
+  "hook_shot": 3
+}

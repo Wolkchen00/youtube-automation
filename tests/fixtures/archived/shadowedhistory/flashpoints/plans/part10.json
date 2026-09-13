@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "The Real Reason The Eiffel Tower Still Stands!"
+  },
+  "synopsis": "The Eiffel Tower was originally intended for demolition after its 20-year permit expired, but its use as a radio antenna secured its permanent survival by 1909.",
+  "narration": "The Eiffel Tower was designed for demolition after its 20-year permit. However, by 1909, its strategic value as a long-distance radio antenna made it indispensable. This innovative communication technology ultimately saved the iconic landmark from being dismantled.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A dramatic, low-angle wide shot of the Eiffel Tower's base, looking up through its intricate iron lattice. Early 20th-century Parisian men and women in period attire stroll below, some glancing up with a sense of awe and contemplation under a slightly overcast sky.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A dynamic, upward-looking close-up shot of the Eiffel Tower's upper sections, focusing on newly installed, intricate radio antenna wires and insulators against a vibrant clear blue sky. Birds fly past, emphasizing the height and scale.",
+      "seed": null
+    }
+  ],
+  "family": "efsane vs kayıt",
+  "seed_id": 6,
+  "music": "A majestic, driving orchestral score featuring prominent brass and soaring strings, underpinned by a persistent, dramatic percussive beat. It conveys a sense of enduring grandeur and technological triumph, building with an optimistic, resolute energy, ending mid-climax for a strong loop.",
+  "title_card": {
+    "title": "The Eiffel Tower",
+    "subtitle": "Paris, 1909"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

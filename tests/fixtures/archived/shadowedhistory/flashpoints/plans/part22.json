@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 22,
+    "title": "Wrangel Mammoths: The Last Survivors"
+  },
+  "synopsis": "A surviving population of woolly mammoths endured on an isolated Arctic island centuries after the Great Pyramid was completed.",
+  "narration": "While thousands of Egyptian stonemasons raised the Great Pyramid of Giza, woolly mammoths still roamed the icy tundra of Wrangel Island. The Ice Age ended centuries after human civilization began building colossal stone monuments.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical framing. High-angle kinetic shot across sunlit limestone blocks of a towering half-built desert pyramid, hundreds of ancient builders hauling heavy ropes, then seamlessly panning toward cold blowing mist over rocky Arctic tundra where a massive woolly mammoth stomps through frosted gravel under a low pale sun.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Vertical framing. Extreme close-up of a mammoth's curved ivory tusk scraping against frozen permafrost ground, thick shaggy brown fur whipping in harsh coastal winds against the dramatic backdrop of crashing icy waves and distant jagged glaciers.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 4,
+  "music": "Aggressive low-end war drum strikes and rapid frozen taiko pulses driving immediate kinetic momentum, layered with resonant brass stabs and sharp gravel shakers that maintain unrelenting speed, cutting off sharply mid-groove on a heavy sub-bass beat to ensure an endless loop.",
+  "title_card": {
+    "title": "Wrangel Island Mammoths",
+    "subtitle": "Arctic Ocean, 2500 BC"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

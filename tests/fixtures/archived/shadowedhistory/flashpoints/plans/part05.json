@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "The Real Reason Nintendo Made Playing Cards"
+  },
+  "synopsis": "Founded in 1889 during the Ottoman era, Nintendo originally produced hand-painted playing cards in Kyoto.",
+  "narration": "In 1889, Nintendo was founded in Kyoto to craft handmade Hanafuda playing cards while the Ottoman Empire still ruled from Istanbul. Decades before video games existed, artisan hands carefully painted floral card decks under lantern light.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "Vertical 9:16 shot inside a sunlit 1889 Kyoto workshop, where delicate hands dip fine brushes into red ink, painting intricate floral patterns onto stiff Mulberry paper Hanafuda cards. Stacked wooden card boxes sit beside paper lanterns in rich warm timber shadows.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "Tight macro shot of finished Japanese playing cards sliding into a carved cherrywood display box, capturing vibrant pigment textures and dark wood grain as traditional workshop tools rest quietly on the tatami mat floor.",
+      "seed": null
+    }
+  ],
+  "family": "zaman çarpması",
+  "seed_id": 18,
+  "music": "Fast, tense, percussive underscore driven by rapid wooden shamisen plucks, tight taiko rimshots, and pulsing dark synthesizer bass lines. Launches instantly with high-speed rhythmic precision, holding high tension without fading, stopping abruptly in mid-pattern for a flawless seamless loop.",
+  "title_card": {
+    "title": "Nintendo's Founding",
+    "subtitle": "Kyoto, 1889"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

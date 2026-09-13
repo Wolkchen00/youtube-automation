@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 26,
+    "title": "How Brooklyn Bridge Spanned The East River In 1883!"
+  },
+  "synopsis": "The Brooklyn Bridge, a marvel of 19th-century engineering, became the world's longest suspension bridge upon its completion.",
+  "narration": "In 1883, the Brooklyn Bridge was completed, its 1,595-foot main span a world record. A monumental feat of 19th-century engineering, it connected Manhattan and Brooklyn, forever changing the urban landscape with its iconic design and scale.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Vertical wide shot looking up at the colossal steel cables and intricate lattice work of the Brooklyn Bridge under construction. Sunlight glints off riveted steel, with tiny, detailed workers visible on catwalks, emphasizing the immense scale. Camera slowly cranes upwards, revealing the dizzying height.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "10",
+      "prompt": "Close-up of a group of gritty, determined 19th-century construction workers, their faces streaked with grime, tightening massive bolts on a support beam high above the East River. The air is hazy with industrial smoke, and the sense of precarious work is palpable. Camera holds steady on their focused effort.",
+      "seed": null
+    }
+  ],
+  "family": "imkânsız mühendislik",
+  "seed_id": 30,
+  "music": "Fast, tense, percussive underscore with a grand, industrial scale, featuring driving brass and pounding percussion, building a sense of awe and relentless progress. The music drives without pause, ending abruptly mid-groove for a seamless loop.",
+  "title_card": {
+    "title": "Brooklyn Bridge",
+    "subtitle": "New York City, 1883"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "10c4b3fb4705744eab222f55815bf1ecd306e86e32cb52e340559e13b418e483"
+}

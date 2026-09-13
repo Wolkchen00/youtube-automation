@@ -464,8 +464,12 @@ class InstalledSeriesTests(unittest.TestCase):
         self.assertEqual(path, archived_path("sentinal_ihsan/KONSEPT.md"))
 
     def test_new_series_load_with_effective_values(self):
+        # flashpoints 2026-09-13'te arsivlendi (kanal gelecek temali yeni bir
+        # konsepte geciyor) -> canli filodan cikti. Arsivlenen konseptin
+        # sozlesmesi tests/test_flashpoints_*.py icinde DONDURULMUS fixture
+        # uzerinden korunuyor. Bu sozluk KURULU serileri tarar, o yuzden
+        # burada yeri yok.
         detailed = {
-            "flashpoints": ("shad0wedhistory", 2, "10", (26, 36), 6, 27),
             "event-horizon": ("galacticexperimet", 3, "6", (30, 44), 6, 27),
             "from-scratch": ("Youtube", 6, "10", None, 6, 0),
         }
@@ -496,7 +500,7 @@ class InstalledSeriesTests(unittest.TestCase):
                 self.assertNotIn("narration", cfg)
 
         expected = {
-            "flashpoints": (2, "10", False),   # v1.8: 2 x 8 sn -> 2 x 10 sn
+            # flashpoints cikti: 2026-09-13 arsivlemesi (yukaridaki nota bak).
             "event-horizon": (3, "6", False),
             "from-scratch": (6, "10", True),
         }
@@ -521,8 +525,6 @@ class InstalledSeriesTests(unittest.TestCase):
                 self.assertEqual(meta.auto_replenish["shot_seconds"], seconds)
                 self.assertEqual(bool(bible.hook_teaser), teaser)
                 self.assertTrue(bible.qc)
-        flash = Bible.load("flashpoints")
-        self.assertTrue(flash.title_card)
         scratch = Bible.load("from-scratch")
         self.assertNotIn("narration", scratch.data)
         self.assertTrue(scratch.chain_frames)

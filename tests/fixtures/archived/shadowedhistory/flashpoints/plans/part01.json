@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "How Britain Won History's Shortest War In 1896!"
+  },
+  "synopsis": "The Anglo-Zanzibar War of 1896 ended in under forty-five minutes when naval gunfire crippled the royal palace.",
+  "narration": "In 1896, the shortest war in recorded history broke out and concluded in under forty-five minutes. British Royal Navy warships bombarded the royal palace of Zanzibar until the sultan fled, ending the conflict almost immediately.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "In 9:16 vertical view, smoke billows over the ornate waterfront palace of Zanzibar in 1896 as naval artillery shells burst in mid-air above decorated coral-stone balconies. Dense grey haze drifts fast across sunlit turquoise sea while British armored cruisers fire from the harbor, sparks snapping off carved wooden doors.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A tight, dramatic close-up of a brass marine clock on a warship deck ticking rapidly past thirty-eight minutes, its glass face reflecting lingering smoke plumes and the royal banner sliding down a scorched flagpole in the background, framing a silent, still resolve.",
+      "seed": null
+    }
+  ],
+  "family": "tuhaf savaş",
+  "seed_id": 1,
+  "music": "Fast, tense, percussive underscore driven by rapid brass hits, aggressive snare rolls, and heavy wooden percussion. The arrangement opens instantly at full speed, maintaining unrelenting rhythmic pressure with dramatic low-register orchestral swells, ending abruptly mid-beat to allow seamless video looping.",
+  "title_card": {
+    "title": "Anglo-Zanzibar War",
+    "subtitle": "Zanzibar, 1896"
+  },
+  "hook_shot": 1,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

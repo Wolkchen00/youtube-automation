@@ -285,18 +285,24 @@ def validate_title_card(bible: Bible, plan: dict, *, required: bool = False) -> 
     title = str(raw.get("title") or "").strip()
     subtitle = str(raw.get("subtitle") or "").strip()
     year_required = config.get("year_required", True) if config else True
+    # subtitle_required varsayilani True: mevcut butun serilerin davranisi aynen
+    # korunur. False yalniz TEK SATIRLIK kunye kullanan seriler icindir
+    # (still-home: "ISTANBUL 2512"), olculen referansin kunyesi de tek satir.
+    subtitle_required = config.get("subtitle_required", True) if config else True
     title_limit, subtitle_limit = (40, 48) if year_required is False else (60, 60)
-    if (not title or not subtitle
+    if (not title
+            or (subtitle_required and not subtitle)
             or len(title) > title_limit or len(subtitle) > subtitle_limit):
         return [
-            "title_card.title ve .subtitle zorunlu "
-            f"(≤{title_limit}/≤{subtitle_limit} karakter)"
+            ("title_card.title zorunlu " if not subtitle_required
+             else "title_card.title ve .subtitle zorunlu ")
+            + f"(≤{title_limit}/≤{subtitle_limit} karakter)"
         ]
 
     if not year_required:
         return []
     anchor_text = f"{title} {subtitle}"
-    has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", anchor_text))
+    has_year = bool(re.search(r"\b(1[0-9]{3}|2[0-9]{3})\b", anchor_text))
     if bible.slug == "flashpoints":
         has_year = has_year or bool(re.search(
             r"\b(?:\d{1,4}\s*(?:BCE|BC|CE|AD)|"
@@ -1588,13 +1594,13 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             tcv = plan.get("title_card") or {}
             tt = str(tcv.get("title") or "").strip()
             ts = str(tcv.get("subtitle") or "").strip()
-            # Künye GERÇEK bir 4-haneli yıl taşımalı (1000-2099) ,  başlıkta VEYA alt
+            # Künye GERÇEK bir 4-haneli yıl taşımalı (1000-2999) ,  başlıkta VEYA alt
             # yazıda (footnotes formatı yılı başlığa koyar: 'Barcelona, 1909'; drowned
             # alt yazıya: '… ,  found 1901'). Ekrana basılan tarih doğruluğu güvencesi:
             # model tarihi düşürür ya da uydurursa batch reddedilir → Gemini yeniden
             # dener (brief: yıl DOĞRUDAN kaynak kayıttan kopyalanır).
             anchor_text = f"{tt} {ts}"
-            has_year = bool(re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", anchor_text))
+            has_year = bool(re.search(r"\b(1[0-9]{3}|2[0-9]{3})\b", anchor_text))
             if bible.slug == "flashpoints":
                 has_year = has_year or bool(
                     re.search(
@@ -1627,7 +1633,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             if not (40 <= cwc <= 220):
                 errors.append(f"part {want}: caption {cwc} kelime ,  70-140 hedef "
                               f"(kabul 40-220) dışında")
-            elif not re.search(r"\b(1[0-9]{3}|20[0-9]{2})\b", cap):
+            elif not re.search(r"\b(1[0-9]{3}|2[0-9]{3})\b", cap):
                 errors.append(f"part {want}: caption gerçek bir 4-haneli yıl içermeli")
             else:
                 normalized["caption"] = cap

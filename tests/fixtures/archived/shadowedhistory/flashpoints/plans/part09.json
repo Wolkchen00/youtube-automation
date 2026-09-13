@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "The Real Reason America Sold Tomato Pills In The 1830s!"
+  },
+  "synopsis": "During the 1830s, American quack doctors falsely marketed tomato extract and pills as a universal cure-all.",
+  "narration": "In the 1830s, American entrepreneurs falsely marketed tomato extract as a medical cure-all. Claimed to treat everything from indigestion to cholera, these \"tomato pills\" became a popular, yet ultimately ineffective, snake oil sensation across the nation.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A charismatic, flamboyant charlatan in a top hat and ornate waistcoat, gesturing grandly with a bottle of 'Dr. Miles' Compound Extract of Tomato'. He stands before an eager, diverse 1830s American crowd in a bustling outdoor market, bathed in warm afternoon light.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "8",
+      "prompt": "A tight, focused close-up on a small, amber glass vial filled with dark, irregularly shaped pills labeled 'Tomato Pills'. The vial rests on an antique wooden counter next to a spilled pile of fresh, ripe red tomatoes, in a dimly lit apothecary.",
+      "seed": null
+    }
+  ],
+  "family": "yanılgı kırıcı",
+  "seed_id": 9,
+  "music": "A jaunty, slightly comedic but relentless percussive rhythm with a driving, upbeat fiddle and brass melody. It has a theatrical, persuasive quality, building a sense of mischievous deception and fast-paced salesmanship, ending mid-beat for a seamless, continuous loop.",
+  "title_card": {
+    "title": "Tomato Pills",
+    "subtitle": "United States, 1830s"
+  },
+  "hook_shot": 2,
+  "doctrine_sha256": "1a74c6cf64fa796f15f91cf602cc8df86b5f2393f0033443b763ae0d88103cd5"
+}

@@ -1,0 +1,40 @@
+{
+  "series": {
+    "slug": "footnotes",
+    "title": "Footnotes of History",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "native_audio": false,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0.25,
+    "transitions": {
+      "enabled": true,
+      "duration": 0.6
+    },
+    "hook_teaser": {
+      "enabled": true,
+      "duration": 1.4,
+      "offset_in_shot": 1.6
+    },
+    "title_card": {
+      "enabled": true,
+      "duration": 3.2
+    },
+    "fact_captions": {
+      "enabled": true,
+      "hold": 2.8
+    },
+    "qc": {
+      "enabled": true,
+      "notes": "Period-accuracy IS the product: any object, garment, hairstyle, vehicle or building from a LATER era than the one stated in the prompt is an automatic fail (cars or wristwatches before their time, plastic, modern eyeglasses, printed T-shirts, power lines in pre-electric eras, modern haircuts). Featured people must have correct anatomy (hands, faces); distant background crowds may be soft. People must NEVER appear to speak or lip-sync. Smoke, dust, rain, snow, fire glow, embers and film grain are INTENDED atmosphere, not defects. No burned-in text of any kind (all overlays are added in post)."
+    }
+  },
+  "art_style": "Prestige cinematic historical reenactment — a photoreal, period-perfect, emotionally charged documentary drama. Vertical 9:16. Every shot is a real place in a REAL stated year, rendered with obsessive historical accuracy: authentic architecture, clothing, tools, ships, vehicles and street life of that exact era — never anything from a later period. Rich atmospheric, motivated light only: golden dawn, candle and gaslight, smoke, dust, rain, embers, volumetric god rays. Slow deliberate camera moves — push-ins, drifts, sweeping aerial establishing shots — with shallow depth of field on human details (hands, eyes, objects) and vast awe-inducing wides for scale. People are expressive but NEVER speak, lip-sync or mouth words — there is no dialogue; the musical score is the only voice. Slightly desaturated film grade with warm highlights and deep shadows, subtle grain — like a prestige history drama. Intense and moving but NEVER gory, bloody or graphic — tragedy is shown through scale, faces, objects and aftermath, not injury. No on-screen text, no captions, no logos, no watermarks (all overlays are added in post).",
+  "style_ref_url": null,
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}
