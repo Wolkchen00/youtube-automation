@@ -1,5 +1,5 @@
 """
-Cost Tracking — Kie AI Credit & Dollar Cost Calculator
+Cost Tracking ,  Kie AI Credit & Dollar Cost Calculator
 
 Based on real Kie AI pricing: $0.005 per credit.
 
@@ -66,7 +66,14 @@ CREDIT_COSTS = {
 CONSERVATIVE_VIDEO_CREDITS = {
     # Omni 6s measured 84 credits on 2026-08-23; 100 keeps a 16-credit margin.
     "omni": {"4": 80, "6": 100, "8": 160, "10": 200},
-    "seedance": {"4": 40, "6": 50, "8": 60, "10": 75},
+    # Seedance: 4-10 sn satirlari ESKI model olcumlerinden kalma ve Seedance 2.0
+    # icin COK DUSUK. 13 Eylul 2026 OLCUMU: 15 sn'lik tek cekim 372 kredi harcadi
+    # (~24,8 kredi/saniye), yani ilk eklenen 115'lik tahmin gerceğin 3,2 katı
+    # altındaydı. Tahmin rezervasyon icindir ve gercegin ALTINDA kalamaz, bu yuzden
+    # butun satirlar olculen ~25 kredi/saniye egimine %15 pay eklenerek yenilendi.
+    # Yeni bir sure olculdukce bu satir guncellenir; gercek maliyet her kosuda
+    # API'nin bildirdigi creditsConsumed ile deftere yazilir.
+    "seedance": {"4": 115, "6": 175, "8": 230, "10": 290, "12": 345, "15": 430},
     "veo3_lite": {"4": 40, "6": 60, "8": 80, "10": 100},
     "veo3_fast": {"4": 50, "6": 70, "8": 90, "10": 115},
     "kling": {"4": 40, "6": 55, "8": 70, "10": 90},
@@ -233,8 +240,8 @@ def print_cost_report():
     logger.info("=" * 65)
 
     logger.info("\n💡 MALİYET OPTİMİZASYONU:")
-    logger.info("  ✅ Nano Banana 2 (8cr/$0.04) — GPT Image 1.5 (20cr/$0.10) yerine")
-    logger.info("  ✅ Kling 3.0 std (48cr/$0.24) — pro (150cr/$0.75) yerine")
+    logger.info("  ✅ Nano Banana 2 (8cr/$0.04) ,  GPT Image 1.5 (20cr/$0.10) yerine")
+    logger.info("  ✅ Kling 3.0 std (48cr/$0.24) ,  pro (150cr/$0.75) yerine")
     logger.info("  ✅ Gemini Flash = ÜCRETSİZ")
     logger.info("  ✅ ImgBB = ÜCRETSİZ")
 

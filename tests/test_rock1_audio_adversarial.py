@@ -212,6 +212,12 @@ class InstalledSeriesIsolationTests(unittest.TestCase):
         self.assertTrue(others, "kurulu seri listesi bos")
         return others
 
+    # 13 Eylul 2026: flythrough (galactic konsept C adayi) native_audio'yu BILEREK
+    # zorunlu teslim katmani yapar, cunku o konseptte motorun kendi senkron sesi
+    # formatin kendisidir (olcum: galactic_experience/REELYZE-RAPOR.md EK 7).
+    # Koruma zayiflamaz: bu listede OLMAYAN bir seri katmani kazanirsa test kirilir.
+    NATIVE_AUDIO_IZINLI = {"galactic_experience/flythrough"}
+
     def test_no_other_series_gained_audio_fade_or_native_audio(self):
         others = self.others()
         checked = []
@@ -224,7 +230,8 @@ class InstalledSeriesIsolationTests(unittest.TestCase):
             series = data.get("series", {})
             with self.subTest(series=rel):
                 self.assertNotIn("audio_fade", series)
-                self.assertNotIn("native_audio", series.get("required_layers", []))
+                if rel not in self.NATIVE_AUDIO_IZINLI:
+                    self.assertNotIn("native_audio", series.get("required_layers", []))
         self.assertEqual(checked, others, "kurulu seri listesi bulunamadi")
 
     def test_audio_fade_default_is_unchanged_for_series_without_the_key(self):

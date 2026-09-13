@@ -1,0 +1,22 @@
+{
+  "slug": "infinite-places",
+  "base_title": "Infinite Places",
+  "logline": "An ordinary human place, standing somewhere it could never stand.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "draft",
+  "priority": 999,
+  "total_parts": 2,
+  "next_part": 1,
+  "doctrine": "galactic_experience/infinite-places/KONSEPT-B.md",
+  "doctrine_sha256": "fe85ad7e1708a5e051db71091863bf2196be5f81ef2b68d12202fc3ee99b2071",
+  "kurulum_notu": "13 Eylul 2026, Ihsan direktifi: 'basla, tek video testini yap'. Bu seri KONSEPT B'nin tek-video testidir ve one-variable ile YARISIR. Yayin hatti YOK: kendi workflow'u yoktur, cron'u yoktur, status kalici olarak 'draft'tir, publish_mode 'approval'dir. Uretim series.experiment ile izole klasorde yapilir, yayin elle ve Ihsan onayiyla olur. Kaynak olcum: REELYZE-RAPOR.md EK 5 ve EK 6. Plan: RF-PLAN-GALACTIC-KONSEPT-B.md."
+}

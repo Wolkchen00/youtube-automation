@@ -45,14 +45,15 @@
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/konsept-b-yayin.yml",
-      "gh_workflow_name": "Konsept B Yayin (iki hazir video, 12 saat arayla)",
+      "gh_workflow_path": ".github/workflows/konsept-testi-yayin.yml",
+      "gh_workflow_name": "Konsept Testi Yayin (uc hazir video, 12 saat arayla)",
       "cron_ifadeleri_utc": [
         "0 22 13 9 *",
-        "0 10 14 9 *"
+        "0 10 14 9 *",
+        "0 22 14 9 *"
       ],
       "beklenen_aralik_saat": 12,
-      "not": "Tek seferlik: yalniz 13 ve 14 Eylul 2026. Deneme bitince workflow silinir."
+      "not": "Tek seferlik: 13 ve 14 Eylul 2026. Uc konsept adayini 12 saat arayla yayinlar. Deneme bitince workflow silinir."
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",

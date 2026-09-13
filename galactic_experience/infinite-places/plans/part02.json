@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 2,
+    "title": "Infinite Neighborhood"
+  },
+  "synopsis": "Konsept B ikinci deneme, Ihsan direktifi: referanstaki gibi yolun iki yaninda sira sira ev olsun. Dunya'yi saran halkanin uzerinde banliyo sokagi; hareket eden tek ozne yine tek araba.",
+  "family": "sonsuz yol",
+  "seed_id": 2,
+  "narration": "",
+  "caption": "Infinite Neighborhood🌍",
+  "hashtags": "",
+  "music": "Cinematic ambient space score in B minor. Sustained low strings and a dark synth pad holding a B drone with G and F sharp above it. No drums, no percussion, no hi-hats, no cymbals, no vocals. Nothing bright above 8 kHz. Slow heavy swells roughly every 2.5 seconds. The piece grows continuously and reaches its loudest, fullest point at the very end. Warm, wide, muffled, no silence anywhere.",
+  "hook_shot": 1,
+  "doctrine_sha256": "fe85ad7e1708a5e051db71091863bf2196be5f81ef2b68d12202fc3ee99b2071",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A colossal suburban street wraps the entire curve of Earth at night, already complete and continuous in the very first frame. Down the middle runs an ordinary two-lane road with painted centre line and evenly spaced sodium street lamps. Along BOTH sides of the road stand rows of ordinary two-storey suburban houses, one after another without a gap: pitched roofs, lit windows, front lawns, driveways, mailboxes and small trees between them, the rows receding into the distance and following the curve of the band until they thin into a line of warm light. ONE single car drives along the empty road, small and clearly readable, its headlights throwing a narrow cone of light forward; it is the only moving thing in the frame. The whole street sits on a narrow band of rock and soil that arcs across the frame from the lower left and curves away over the planet's limb. Below and beyond it the night side of Earth is clearly readable: deep blue atmospheric limb, white cloud systems, orange city light networks threading across dark continents. Above, the black of space and a dense star field. Natural motivated light only: cold blue earthlight on the roofs and the rock, warm yellow light from the windows and the street lamps, two small white headlight beams. Photoreal orbital photography, restrained documentary colour, deep space blacks, fine surface texture, stable exposure. One continuous 8-second take at 24 fps. Camera position, orientation, focal length, focus and exposure stay identical for all eight seconds except for one very slow forward push along the street's direction; the horizon and the planet's limb stay pinned to the same pixels. No cut, no fade, no scene change. No text, no captions, no logos, no watermark. No people.",
+      "seed": null
+    }
+  ]
+}

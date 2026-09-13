@@ -1,5 +1,5 @@
 """
-Shot / Episode Plan — bir bölümün çekim listesi, doğrulaması ve Omni parametrelerine çevirimi.
+Shot / Episode Plan ,  bir bölümün çekim listesi, doğrulaması ve Omni parametrelerine çevirimi.
 
 episode_plan.json şeması:
 {
@@ -372,11 +372,11 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None,
     # Bütçe / limit kontrolleri
     ok, units = validate_ref_units(image_urls, character_ids)
     if not ok:
-        warnings.append(f"7-birim kotası AŞILDI ({units} birim) — bu çekim reddedilir")
+        warnings.append(f"7-birim kotası AŞILDI ({units} birim) ,  bu çekim reddedilir")
     if len(audio_ids) > 3:
-        warnings.append(f"3'ten fazla ses ({len(audio_ids)}) — yalnızca ilk 3 kullanılır")
+        warnings.append(f"3'ten fazla ses ({len(audio_ids)}) ,  yalnızca ilk 3 kullanılır")
     if len(character_ids) > 3:
-        warnings.append(f"3'ten fazla karakter ({len(character_ids)}) — yalnızca ilk 3 kullanılır")
+        warnings.append(f"3'ten fazla karakter ({len(character_ids)}) ,  yalnızca ilk 3 kullanılır")
 
     kwargs = {
         "prompt": prompt,
@@ -394,15 +394,48 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None,
     return result
 
 
+# Seedance 2.0 tek cekimde 4-15 saniye kabul ediyor (core/kie_api.py:475 ayni
+# araligi kelepceliyor). Omni'nin 4/6/8/10 enum'u ona DAYATILAMAZ: 13 Eylul 2026'da
+# 15 saniyelik bir plan sessizce 8 saniyeye dusuruldu ve format bozuldu. 15 sn bu
+# konseptin tanimidir (olcum: galactic_experience/REELYZE-RAPOR.md EK 7).
+SEEDANCE_DURATION_RANGE = (4, 15)
+_SEEDANCE_ENGINES = ("seedance", "seedance-2", "seedance_fast", "bytedance/seedance-2-fast")
+
+
+def validate_visual_duration(duration, engine: str | None) -> str:
+    """Omni-DISI motorlar icin sureyi motorun kendi araligina gore dogrula.
+
+    Seedance: 4-15 saniye tamsayi, aralik disi deger KIRPILIR (sessizce 8'e
+    dusurulmez). Diger ucuz motorlar (Veo, Kling) Omni enum'unda kalir.
+    """
+    eng = str(engine or "").strip().lower()
+    if eng not in _SEEDANCE_ENGINES:
+        return validate_duration(duration)
+    ham = str(duration).strip()
+    try:
+        d = int(float(ham))
+    except (TypeError, ValueError):
+        logger.warning(f"⚠️ Seedance süresi '{duration}' sayı değil → 8s")
+        return "8"
+    alt, ust = SEEDANCE_DURATION_RANGE
+    if d < alt or d > ust:
+        kirpilmis = max(alt, min(ust, d))
+        logger.warning(
+            f"⚠️ Seedance süresi {d}s aralık dışında ({alt}-{ust}) → {kirpilmis}s"
+        )
+        return str(kirpilmis)
+    return str(d)
+
+
 def resolve_visual_shot(bible: Bible, shot: dict, chain_url: str | None = None) -> dict:
     """Bir çekimi Omni-DIŞI ucuz motorlar (Seedance / Veo / Kling) için çöz.
 
     Omni'nin karakter/ses kaydı YOK; sadece (prompt + başlangıç görseli + süre) gerekir.
     Başlangıç görseli önceliği:
-      1) chain_url  — 'bitmeyen yolculuk' zinciri (önceki çekimin son karesi)
+      1) chain_url  ,  'bitmeyen yolculuk' zinciri (önceki çekimin son karesi)
       2) ortam referans görseli (environment)
-      3) ilk karakterin referans görseli (figür kamera önündeyse — ucuz modelde tek kare)
-      4) None — saf text-to-video
+      3) ilk karakterin referans görseli (figür kamera önündeyse ,  ucuz modelde tek kare)
+      4) None ,  saf text-to-video
     Dönüş: {"prompt", "start_image_url", "duration"}
     """
     base_prompt = (shot.get("prompt") or "").strip()
@@ -426,7 +459,9 @@ def resolve_visual_shot(bible: Bible, shot: dict, chain_url: str | None = None) 
     return {
         "prompt": prompt,
         "start_image_url": start_url,
-        "duration": validate_duration(shot.get("duration", "8")),
+        "duration": validate_visual_duration(
+            shot.get("duration", "8"), shot.get("engine") or bible.engine
+        ),
     }
 
 
@@ -452,16 +487,22 @@ def validate_plan(plan: dict, bible: Bible) -> dict:
             errors.append("Plan'daki her çekim JSON nesnesi olmalı")
             continue
         n = shot.get("n", "?")
+        # Sure dogrulamasi MOTORA gore: Seedance 4-15 sn, digerleri Omni enum'u.
         dur = str(shot.get("duration", "8")).strip()
-        if dur not in ("4", "6", "8", "10"):
-            warnings.append(f"Çekim {n}: süre '{dur}' geçersiz → 8s'ye düşürülecek")
-        res = resolve_shot(bible, shot, plan)
-        for w in res["warnings"]:
-            # Kota aşımı = hata, diğerleri uyarı
-            if "AŞILDI" in w:
-                errors.append(f"Çekim {n}: {w}")
-            else:
-                warnings.append(f"Çekim {n}: {w}")
+        cozulen = validate_visual_duration(dur, shot.get("engine") or bible.engine)
+        if cozulen != dur:
+            warnings.append(f"Çekim {n}: süre '{dur}' geçersiz → {cozulen}s'ye düşürülecek")
+        # Referans/ses/karakter kotasi YALNIZ Omni cekimlerinde vardir. Omni-disi
+        # bir cekimi resolve_shot'tan gecirmek, Omni sure enum'unu ve 7-birim
+        # kotasini o motora dayatiyor ve yaniltici uyari basiyordu.
+        if (shot.get("engine") or bible.engine or "").strip().lower() == "omni":
+            res = resolve_shot(bible, shot, plan)
+            for w in res["warnings"]:
+                # Kota aşımı = hata, diğerleri uyarı
+                if "AŞILDI" in w:
+                    errors.append(f"Çekim {n}: {w}")
+                else:
+                    warnings.append(f"Çekim {n}: {w}")
 
     return {"errors": errors, "warnings": warnings}
 
@@ -471,5 +512,5 @@ def plan_summary(plan: dict) -> str:
     shots = plan.get("shots", [])
     total = sum(int(str(s.get("duration", "8")).strip() or 8) for s in shots)
     ep = plan.get("episode", {})
-    return (f"Bölüm {ep.get('number', '?')} — {ep.get('title', '')}: "
+    return (f"Bölüm {ep.get('number', '?')} ,  {ep.get('title', '')}: "
             f"{len(shots)} çekim, ~{total} sn toplam")

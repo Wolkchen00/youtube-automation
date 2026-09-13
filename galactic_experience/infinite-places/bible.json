@@ -1,0 +1,43 @@
+{
+  "series": {
+    "slug": "infinite-places",
+    "title": "Infinite Places",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "state_machine_version": 2,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0,
+    "native_audio": false,
+    "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
+    "block_degraded_publish": true,
+    "required_layers": [
+      "music"
+    ],
+    "duration_band": [
+      7,
+      9
+    ],
+    "hook_teaser": {
+      "enabled": false
+    },
+    "title_card": {
+      "enabled": false
+    },
+    "qc": {
+      "enabled": true,
+      "require_all_shots": true,
+      "min_shots": 1,
+      "native_audio_review": false,
+      "api_fail_open": false,
+      "notes": "Every episode is ONE unbroken 7-9 second shot in which an ordinary, instantly recognisable human-made object sits in an impossible cosmic geometry. Fail the shot if any cut, fade, dissolve or scene reset appears inside it, if the camera pans, tracks, orbits or follows instead of one very slow forward push, or if the impossible element is not already readable in the very first frame. Earth must stay recognisable as Earth at night: blue atmospheric limb, white clouds, orange city light networks; an invented or unrecognisable planet is a failure. There must be exactly ONE small identifiable subject in the frame (a single car, a single boat): a crowd of subjects is a failure. Readable text, captions, subtitles, logos, watermarks and closing cards are automatic failures. Human figures and close-ups of people are forbidden. Record any of these under issues."
+    }
+  },
+  "art_style": "Photoreal orbital and high-aerial photography composed for vertical 9:16 at 24 fps. Cold blue base tone with warm point lights as the only saturated element: sodium lamps, headlights and city light networks glow orange against deep space black and the blue limb of Earth. Natural motivated light, restrained documentary colour, fine surface texture, stable exposure, credible geographic scale. The frame edge is the image edge: the picture reaches every side with open sky, terrain or space, and the view is unobstructed. The camera is rigidly fixed in orientation, focal length, focus distance and exposure for the whole take, moving only in one very slow forward push. Every frame keeps one continuous viewpoint and scene. No text, no logos, no watermarks, no human figures.",
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

@@ -146,6 +146,16 @@ class InstalledBibleOptInTests(unittest.TestCase):
             # (anlatim yok), yani mastering kacarsa karsilastirilacak baska bir
             # sey kalmiyor. Bkz. shadowedhistory/KONSEPT.md v1.0 bolum 3.2.
             (REPO_ROOT / "shadowedhistory" / "still-home" / "bible.json", -14),
+            # infinite-places 13 Eylul 2026'da kuruldu (galactic konsept B adayi).
+            # Tek ses muzik yatagidir ve olculen referansin bes videosunun besi de
+            # -14,0..-14,1 LUFS teslim ediyor; mastering kacarsa konsept
+            # karsilastirmasi sesi olcer, formati degil. Bkz. REELYZE-RAPOR.md EK 6.
+            (REPO_ROOT / "galactic_experience" / "infinite-places" / "bible.json", -14),
+            # flythrough 13 Eylul 2026'da kuruldu (galactic konsept C adayi).
+            # Burada ses MOTORUN KENDI sesi, yine -14 LUFS'a masterlanir; olculen
+            # referans -15,0 LUFS ve -0,3 dBTP, yani kirpma sinirinda: gurlugu
+            # aliyoruz, kirpmayi almiyoruz. Bkz. REELYZE-RAPOR.md EK 7.
+            (REPO_ROOT / "galactic_experience" / "flythrough" / "bible.json", -14),
         ]
         self.assertCountEqual(found, expected)
 

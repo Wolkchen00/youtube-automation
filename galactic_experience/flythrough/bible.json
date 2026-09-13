@@ -1,0 +1,40 @@
+{
+  "series": {
+    "slug": "flythrough",
+    "title": "Flythrough",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "seedance",
+    "state_machine_version": 2,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0,
+    "native_audio": true,
+    "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
+    "block_degraded_publish": true,
+    "duration_band": [
+      14,
+      16
+    ],
+    "hook_teaser": {
+      "enabled": false
+    },
+    "title_card": {
+      "enabled": false
+    },
+    "qc": {
+      "enabled": true,
+      "require_all_shots": true,
+      "min_shots": 1,
+      "native_audio_review": true,
+      "api_fail_open": false,
+      "notes": "Every episode is ONE unbroken 15-second first-person flight that starts wide and calm, accelerates into a real astronomical body, races through an obstacle field, and ends inside a climax in the final two seconds. Fail the shot if any cut, fade, dissolve or scene reset appears, if the camera ever stops or hovers, if the frame opens on black, or if the flight never reaches an obstacle field. The body must be a real one (Saturn, its rings, a real nebula): an invented planet is a failure. Readable text, captions, subtitles, logos, watermarks and closing cards are automatic failures. Human figures, spacecraft parts, cockpit frames and HUD elements are forbidden: the camera is the vehicle and nothing of it is visible. Record any of these under issues. The engine's own synchronised sound is the format: music, speech and silence are failures, but the sound is verified by the per-shot native audio review, not by the construction-sound delivery gate."
+    }
+  },
+  "art_style": "Photoreal cinematic space cinematography shot as a first-person flight, composed for vertical 9:16 at 24 fps. Hard directional sunlight with deep black shadow, volumetric haze, motion blur on fast-moving foreground debris, shallow depth of field on the nearest objects. Restrained documentary colour: cold grey-blue ice, warm sand-coloured planet bands, no artificial saturation. Real astronomical scale and credible orbital mechanics. The frame edge is the image edge and the view is unobstructed: no vehicle parts, no cockpit, no instruments. Continuous forward motion, never stopping, one unbroken viewpoint for the whole take.",
+  "music": false,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

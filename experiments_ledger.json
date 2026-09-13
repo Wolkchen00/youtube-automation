@@ -797,6 +797,80 @@
         }
       ],
       "measurements": []
+    },
+    "exp-2026-09-konsept-b": {
+      "total_cap": 1200.0,
+      "stage_caps": {
+        "pilot": 600.0,
+        "bakeoff": 600.0
+      },
+      "reservations": [
+        {
+          "reservation_id": "989c331f77394a1fb7ec233714518da7",
+          "stage": "pilot",
+          "call_type": "music",
+          "engine": "suno",
+          "duration": null,
+          "reserved": 80.0,
+          "actual": null,
+          "ts": "2026-09-13T19:09:30.073301+00:00",
+          "floor_inflight_id": null
+        },
+        {
+          "reservation_id": "e05d1960b378450487114b4da8c9414b",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "8",
+          "reserved": 160.0,
+          "actual": 105.0,
+          "ts": "2026-09-13T19:09:30.399281+00:00",
+          "settled_ts": "2026-09-13T19:11:02.572760+00:00"
+        },
+        {
+          "reservation_id": "a87914c6469145178794457bc6167afe",
+          "stage": "bakeoff",
+          "call_type": "music",
+          "engine": "suno",
+          "duration": null,
+          "reserved": 80.0,
+          "actual": null,
+          "ts": "2026-09-13T19:34:23.421612+00:00",
+          "floor_inflight_id": null
+        },
+        {
+          "reservation_id": "96aceb4b0a8f45abb2bba03f3f2902f1",
+          "stage": "bakeoff",
+          "call_type": "main_shot",
+          "engine": "omni",
+          "duration": "8",
+          "reserved": 160.0,
+          "actual": 105.0,
+          "ts": "2026-09-13T19:34:23.777132+00:00",
+          "settled_ts": "2026-09-13T19:35:55.916654+00:00"
+        }
+      ],
+      "measurements": []
+    },
+    "exp-2026-09-konsept-c": {
+      "total_cap": 900.0,
+      "stage_caps": {
+        "pilot": 900.0
+      },
+      "reservations": [
+        {
+          "reservation_id": "33c87641d19947bda4fb3deda51c56b7",
+          "stage": "pilot",
+          "call_type": "main_shot",
+          "engine": "seedance",
+          "duration": "15",
+          "reserved": 115.0,
+          "actual": 372.0,
+          "ts": "2026-09-13T20:46:33.803710+00:00",
+          "settled_ts": "2026-09-13T20:50:24.333074+00:00"
+        }
+      ],
+      "measurements": []
     }
   }
 }

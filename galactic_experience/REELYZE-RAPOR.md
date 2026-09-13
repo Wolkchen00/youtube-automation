@@ -817,3 +817,222 @@ bölüm 7.1 kural 4'teki "motor kilitli kamerayı tam tutmuyor" sorununu hafifle
 - Hangi motorla üretildiği.
 - Pencere çerçevesinin performansa katkısı izole edilmedi; n=1, aynı hesapta
   çerçevesiz videolar da büyük vuruş yapmış (tsunami 42K, düz dünya 500K).
+
+---
+
+# EK 6 , @space_art.ai BES VIDEOLUK KARSILASTIRMA (13 Eylul 2026)
+
+Ihsan bes link verdi: uc tanesi ilk turda (14,5M / 2,1M / 65K), iki tanesi ikinci
+turda (268K / 78K). Hepsi TEK hesaptan, ayni format. Bu, hesabin kendi icinde
+dogal bir deney demek: teknik degiskenler sabit, performans 223 kat degisiyor.
+
+Izlenme sayilari Ihsan'in uygulamadan okudugu degerlerdir; **biz olcemedik**
+(IG izlenmeyi disariya vermiyor). Geri kalan her sey 13 Eylul'de `yt-dlp` +
+`ffmpeg` ile olculdu.
+
+## 1. Olcum tablosu
+
+| | A | B | D | E | C |
+|---|---|---|---|---|---|
+| reel | `DbXH3hTMQj9` | `DcXi8TRM9Q9` | `DbgKZG1M83B` | `DbqjAQSMEAk` | `DcEbu_hs_jE` |
+| konu | banliyo halkasi, Dunya | sonsuz banliyo adasi | tek yelkenli, halka kanali | marina, halka kanali | banliyo halkasi, pembe gezegen |
+| tarih | 29 Tem | 23 Agu | 1 Agu | 5 Agu | 15 Agu |
+| **izlenme** | **14.500.000** | **2.100.000** | **268.000** | **78.000** | **65.000** |
+| begeni | 841.865 | 172.188 | 16.808 | 2.810 | 5.337 |
+| yorum | 4.480 | 843 | 142 | 33 | 23 |
+| begeni/izlenme | %5,81 | %8,20 | %6,27 | %3,60 | %8,21 |
+| yorum/1000 izlenme | 0,31 | 0,40 | 0,53 | 0,42 | 0,35 |
+| sure | 7,15 sn | 7,52 sn | 8,10 sn | 8,15 sn | 7,41 sn |
+| kesme | 0 | 0 | 0 | 0 | 0 |
+| fps | 20,27 | 60 | 24 | 30 | 50 |
+| LUFS | -14,1 | -14,0 | -14,0 | -14,1 | -14,1 |
+| true peak | -1,3 | -1,2 | -1,1 | -5,1 | -2,7 |
+| LRA | 0,9 | 0,9 | 2,1 | 0,8 | 1,4 |
+| konusma | 0 | 0 | 0 | 0 | 0 |
+| hashtag | yok | yok | yok | yok | yok |
+| caption | Infinite Neighborhood🌍 | Infinite floating island♾️ | Maybe this is where dreams go✨ | The Ring Marina🪐⛵ | Infinite Neighborhood🩷 |
+
+## 2. Teknik format performansi ACIKLAMIYOR
+
+Bes videonun hepsi: 7-8 sn, tek plan, sifir kesme, sifir kelime, -14 LUFS, dikey.
+En iyi ile en kotu arasinda 223 kat fark var ve teknik parmak izleri ayni.
+**Teknik format giris bileti, ayirt edici degil.**
+
+Izleyici basina etkilesim de neredeyse sabit: yorum/1000 izlenme 0,31 ile 0,53
+arasinda ve siralamayla ILGISIZ (en yuksek yorum orani 268K'lik videoda).
+Yani kotu performans "izleyici sevmedi" demek degil, **"video izleyiciye
+ulasmadi"** demek. Ulasimi belirleyen sinyaller (ilk saniye tutma, paylasim,
+kaydetme) IG'de disariya kapali, olcemedik.
+
+## 3. En temiz ortusme: SES SONA DOGRU BUYUYOR MU
+
+Her videonun ses zarfi olculdu (ilk ceyrek ortalamasi -> son ceyrek ortalamasi,
+normalize RMS):
+
+| video | izlenme | ses zarfi | yon |
+|---|---|---|---|
+| A | 14,5M | 0,61 -> 0,69 | **yukseliyor** |
+| B | 2,1M | 0,60 -> 0,68 | **yukseliyor** |
+| D | 268K | 0,30 -> 0,61 | **yukseliyor (en keskin)** |
+| E | 78K | 0,70 -> 0,71 | duz |
+| C | 65K | 0,58 -> 0,52 | dusuyor |
+
+**Sesi yukselen uc video, en iyi uc video. Yukselmeyen iki video, en kotu iki
+video.** n=5 ve tek hesap, yani kanit degil; ama bu kadar temiz bir ayrim
+gorulduginde test edilmeye deger. Bizim kendi girdap videomuzda sabit gur bir
+yatak vardi, yukselen bir kapanis YOKTU.
+
+## 4. A ile B ayni muzigi kullaniyor, C, D, E farkli
+
+Capraz korelasyon (1,0 = ayni kayit): **A-B 0,998.** Diger butun ciftler 0,05'in
+altinda. Yani hesap 14,5M ve 2,1M'lik iki videosunda ayni parcayi, ayni
+baslangic noktasindan kullanmis.
+
+Kazanan parcanin olculen kimligi: si minor duragan pad (B3 247 Hz, G4 382 Hz,
+B4 494 Hz), 8 kHz ustu enerji %0,7 (davul, vurmali, hi-hat YOK), enerjinin %85'i
+200-2000 Hz, yaklasik 2,5 saniyede bir agir vurus (1,18 / 3,8 / 6,1 sn).
+
+**Bunun bizim icin anlami:** ayni sesi bolumden bolume tekrar kullanmak
+performansi dusurmemis. B, A'nin sesini aynen kullanip 2,1M almis. Yani tek marka
+sesi tutarli bir secim; tekrar eden sey GORUNTU oldugunda is degisiyor (bkz. 5).
+
+## 5. Iki kez tekrar eden oruntu: AYNI DUNYAYI IKINCI KEZ CEKMEK COKUYOR
+
+Tarih sirasina dizince:
+
+1. **A**, 29 Tem, banliyo halkasi + Dunya , **14,5M**
+2. **D**, 1 Agu, halka kanalinda TEK yelkenli , **268K**
+3. **E**, 5 Agu, ayni halka kanali ama MARINA (yuzlerce tekne) , **78K** , D'nin
+   dunyasinin 4 gun sonraki tekrari, **3,4 kat dusus**
+4. **C**, 15 Agu, A'nin kompozisyonu ama pembe uydurma gezegen, **ayni baslik** ,
+   **65K** , A'nin 17 gun sonraki tekrari, **223 kat dusus**
+5. **B**, 23 Agu, YENI dunya (sonsuz ada) + A'nin muzigi , **2,1M**
+
+Ornek sayisi 2/2. Yeni dunya kurulunca buyuk, ayni dunya tekrarlaninca kucuk.
+B bu oruntuyu ayirt etmeyi saglayan vaka: muzik tekrarlanmis ama gorsel dunya
+yeni, sonuc 2,1M. **Tekrarlanmamasi gereken sey gorsel dunya.**
+
+Bu bulgu bizim kendi `aimagine` olcumumuzle de ortusuyor: tekrarlanan landmark
+uc denemede uc kez kaybetmisti.
+
+## 6. D ile E arasindaki farki SAYIYLA bulamadim, bakarak buldum
+
+Iki goruntu istatistigi denendi ve ikisi de siralamayi ACIKLAMADI:
+
+| video | kenar yogunlugu (kalabalik olcusu) | en parlak %2'nin dagilimi (odak olcusu) |
+|---|---|---|
+| D 268K | 8,84 | 15/180 hucre |
+| E 78K | 6,14 | 9/180 hucre |
+
+Kalabalik gorunen marina daha DUSUK kenar yogunlugu verdi (tekneler koyu ve
+dusuk kontrastli), odak olcusu de kaybedeni daha "odakli" gosterdi. Yani bu iki
+metrik bu isi olcmuyor, boyle yaziyorum.
+
+Gozle gorulen fark su: **D'de kadrajda tek bir tanimlanabilir ozne var** , dev
+gezegenin yanindaki kucucuk bir yelkenli. Izleyici kendini o teknenin icine
+koyabiliyor. **E'de yuzlerce tekne var ve hicbiri ozne degil**; ayni dunyanin
+altyapisi gosteriliyor, insanin yerlesecegi bir nokta yok.
+
+Caption da ayni yonde: D "Maybe this is where dreams go" (duygu), E "The Ring
+Marina" (etiket).
+
+## 7. Uretime giren kurallar
+
+1. Ses klibin SONUNA dogru buyusun. Duz ya da dusen zarf iki kaybedende de var.
+2. Tek marka sesi tekrar kullanilabilir; **gorsel dunya tekrar edilemez.**
+3. Kadrajda bir tane tanimlanabilir, insan olcegine yakin ozne olsun.
+4. Caption kisa kalsin (2-4 kelime + emoji) ve hashtag olmasin , bes videoda da
+   boyle. **Duygu mu etiket mi sorusu CEVAPSIZ:** D duygu yazip 268K almis, E
+   etiket yazip 78K, ama 14,5M'lik A da etiket yaziyor ("Infinite Neighborhood").
+   Yani caption tonu bu veriyle ayirt edilmiyor, iddia etmiyorum.
+5. Taninabilir gercek yer (Dunya) uydurma gezegeni yeniyor (EK 5 ve bu ekteki A-C
+   karsilastirmasi).
+
+## 8. Olcemediklerimiz
+
+Izlenme (Ihsan'in okudugu deger), paylasim, kaydetme, tutma egrisi, muzigin adi,
+IG ses sayfasindan gelen trafik, hangi motorla uretildigi.
+
+---
+
+# EK 7 , @synthhorizon.ai (KONSEPT 3 ADAYI), 13 Eylul 2026
+
+Ihsan uc link verdi ve "en cok izlenen 752K'lik videoyu aynen kopyalayabiliriz"
+dedi. Hesap `synthhorizon.ai` (goruntulenen ad "infinite loop"), space_art.ai'den
+BASKA bir hesap ve BASKA bir formul: uzun, hizli, FPV ucus.
+
+## 1. Olcum
+
+| | **X , 752K** | **Y** | **Z** |
+|---|---|---|---|
+| post | `DcX3cXfoFP4` | `Dcc9KKDIXVA` | `DdJAIElo1A0` |
+| konu | Saturn halkalarinin icinden ucus | Uranus halkalarina dalis | Yengec Bulutsusu suzulusu |
+| tarih | 23 Agu | 25 Agu | 11 Eyl |
+| izlenme | **752.000** (Ihsan) | olcemedik | olcemedik |
+| begeni | 34.415 | **515** | 1.536 |
+| yorum | 66 | 7 | 5 |
+| sure | **15,21 sn** | 15,05 sn | **17,04 sn** |
+| kesme | 1 (13,5 sn'de beyaz patlama) | 0 | 0 |
+| fps | 23,86 | 24 | 24 |
+| LUFS / TP / LRA | -15,0 / **-0,3** / **12,7** | -14,7 / **+0,1** / 11,2 | -14,3 / -0,9 / 5,4 |
+| caption | uzun + CTA + 5 hashtag | uzun + 5 hashtag | kisa + 5 hashtag |
+
+Not: bu hesapta true peak 0 dBTP'ye dayaniyor, yani **kirpma riski var** (bizim
+kapimiz -1 dBTP). Kopyalarken bunu kopyalamayacagiz.
+
+## 2. Formul , space_art.ai'nin TERSI
+
+| | space_art.ai (EK 6) | synthhorizon.ai |
+|---|---|---|
+| sure | 7-8 sn | 15-17 sn |
+| kamera | sabit, cok yavas ileri itme | FPV, hizli dalis, savrulma |
+| ses | duragan pad, LRA 0,9 | ses tasarimi, LRA 12,7, 15 sert vurus |
+| ses zarfi | dolu baslar, hafif buyur | **neredeyse sessiz baslar** (0,08), 14. sn'de patlar (0,97) |
+| kanca | ilk karede imkansiz sey | ilk kare SIYAH, acilim fade ile |
+| caption | 2-4 kelime, hashtag yok | uzun cumle + CTA + hashtag |
+
+X'in anatomisi: 0-4 sn genis Saturn ve halka duzlemi (sakin) -> 4-6 sn halkaya
+dalis, ilk buz parcalari -> 6-13 sn parcalarin arasindan hizli ucus, carpmalar,
+hiz bulanikligi -> 13,3-13,6 sn beyaz patlama (tek kesme) -> 14-15 sn buz
+kristallerinin icinde kapanis. Ses bu olaylarla BIREBIR senkron: vuruslar 6,3 /
+9,6 / 10,5 / 13,3-13,6. Enerjinin %35'i 200 Hz altinda, yani derin ugultu.
+
+## 3. Ayni tekrar oruntusu, ucuncu kez
+
+X (Saturn halkasina dalis) 23 Agustos'ta 34.415 begeni aldi. Y (Uranus
+halkasina dalis, ayni anatomi) **iki gun sonra** ciktu ve 515 begenide kaldi,
+yani 67 kat dusus. Bu, ayni bulgunun ucuncu tekrari:
+C-A'dan sonra, E-D'den sonra, simdi Y-X'ten sonra. **Ayni dunyayi iki kez
+cekmek her uc vakada da cokme getirdi.**
+
+## 4. Hangi AI , KANITLANAMADI, en guclu hipotez Seedance 2.0
+
+Dosyada uretici bilgisi YOK: Instagram her seyi kendi VP9 kodlamasiyla
+(`encoder=VPC Coding`) yeniden sikistiriyor. Caption'larda da arac adi gecmiyor
+(space_art.ai "Created with @openart_ai" yaziyordu, bu hesap yazmiyor).
+
+Ihsan'in tahmini (Seedance 2.0, 15 sn) olculebilir kanitlarla UYUMLU:
+1. Iki videonun suresi 15,21 ve 15,05 sn , Seedance 2.0'in tek cekim tavani 4-15 sn.
+2. Ses gorsel olaylarla birebir senkron ve muzikal degil, ses tasarimi.
+   Seedance 2.0'in ayri bir ses dali var ve senkron efekt uretiyor.
+3. Filigran yok (Sora uygulama ciktisi filigran tasir).
+4. 24 fps.
+
+Uyusmayan tek veri: ucuncu video 17,04 sn ve kesmesiz. Bu, 15 sn tavanini asiyor;
+ya Seedance'in "extend" ozelligi kullanilmis (son kareden 4-15 sn uzatma, dikissiz)
+ya da baska bir model. **Kanit degil, hipotez.**
+
+Pratik sonuc: Seedance 2.0 zaten bizim depomuzda
+(`core/kie_api.py:475 generate_seedance_video`, 4-15 sn, `sound=True`). Hipotezi
+test etmenin yolu bir bolum uretip yan yana koymaktir; fiyati depoda yazili degil,
+ilk kosuda API'nin bildirdigi `creditsConsumed` ile olculur.
+
+## 5. Bu konsepti secersek ne degisir
+
+- Sure 8 sn degil 15 sn , kredi maliyeti yaklasik iki kati.
+- Motorun kendi sesi KULLANILIR (bizim mevcut iki konseptimizde ses ya atiliyor
+  ya muzikle degistiriliyor). QC'nin `native_audio_review` kapisi acilmali.
+- Ilk kare siyahtan aciliyor; bizim doktrinimiz "ilk karede imkansiz sey okunsun"
+  diyor. Bu konsept o kurali BOZUYOR ve yine de 752K almis. Yani kural evrensel
+  degil, formata bagli.
+- Kirpma riski (TP 0 dBTP) kopyalanmaz, -1 dBTP kapimiz kalir.

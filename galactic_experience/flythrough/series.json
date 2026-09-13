@@ -1,0 +1,22 @@
+{
+  "slug": "flythrough",
+  "base_title": "Flythrough",
+  "logline": "You do not look at it. You fly through it.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "",
+  "standalone": true,
+  "publish_mode": "approval",
+  "status": "draft",
+  "priority": 999,
+  "total_parts": 1,
+  "next_part": 1,
+  "doctrine": "galactic_experience/flythrough/KONSEPT-C.md",
+  "doctrine_sha256": "58459b79235642caa2a054c4df885faaedc22fd10e14371d39662874d3cecd9e",
+  "kurulum_notu": "13 Eylul 2026, Ihsan direktifi: '3. konseptten bi video uret'. Ucuncu konsept adayi; one-variable ve infinite-places ile YARISIR. Yayin hatti YOK: workflow yok, cron yok, status kalici 'draft', publish_mode 'approval'. Kaynak olcum REELYZE-RAPOR.md EK 7."
+}

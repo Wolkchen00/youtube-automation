@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Infinite Highway"
+  },
+  "synopsis": "Konsept B tek video testi. Siradan bir gece otoyolu Dunya'nin etrafini saran bir halkanin uzerinde; kadrajdaki tek ozne farlari yanan tek araba.",
+  "family": "sonsuz yol",
+  "seed_id": 1,
+  "narration": "",
+  "caption": "Infinite Highway🌍",
+  "hashtags": "",
+  "music": "Cinematic ambient space score in B minor. Sustained low strings and a dark synth pad holding a B drone with G and F sharp above it. No drums, no percussion, no hi-hats, no cymbals, no vocals. Nothing bright above 8 kHz. Slow heavy swells roughly every 2.5 seconds. The piece grows continuously and reaches its loudest, fullest point at the very end. Warm, wide, muffled, no silence anywhere.",
+  "hook_shot": 1,
+  "doctrine_sha256": "fe85ad7e1708a5e051db71091863bf2196be5f81ef2b68d12202fc3ee99b2071",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A colossal illuminated highway wraps the entire curve of Earth at night, already complete and continuous in the very first frame. The road is an ordinary four-lane motorway with painted lane markings, steel guardrails and evenly spaced sodium street lamps. It is empty except for ONE single car, small and clearly readable, its headlights throwing a narrow cone of light forward as it drives along the empty road. No other traffic anywhere in the frame. The road surface sits on a narrow band of rock and soil that arcs across the frame from the lower left, curving away over the planet's limb and thinning to a line of light in the distance. Below and beyond it the night side of Earth is clearly readable: deep blue atmospheric limb, white cloud systems, orange city light networks threading across dark continents. Above, the black of space and a dense star field. Natural motivated light only: cold blue earthlight on the rock, warm sodium orange pooling under each lamp, two small white headlight beams. Photoreal orbital photography, restrained documentary colour, deep space blacks, fine surface texture, stable exposure. One continuous 8-second take at 24 fps. Camera position, orientation, focal length, focus and exposure stay identical for all eight seconds except for one very slow forward push along the highway's direction; the horizon and the planet's limb stay pinned to the same pixels. No cut, no fade, no scene change. No text, no captions, no logos, no watermark. No people.",
+      "seed": null
+    }
+  ]
+}

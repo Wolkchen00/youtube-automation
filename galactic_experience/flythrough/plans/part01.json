@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 1,
+    "title": "Through the Rings of Saturn"
+  },
+  "synopsis": "Konsept C tek video testi. Saturn'un halkalarina birinci sahis dalis: sakin genis plan, hizlanma, buz parcalarinin arasindan ucus, sonda kristal bulutunda doruk.",
+  "family": "dalis",
+  "seed_id": 1,
+  "narration": "",
+  "caption": "Flying through the rings of Saturn🪐",
+  "hashtags": "",
+  "hook_shot": 1,
+  "doctrine_sha256": "58459b79235642caa2a054c4df885faaedc22fd10e14371d39662874d3cecd9e",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "A single unbroken 15-second first-person flight through the rings of Saturn, filmed as if the camera itself is the spacecraft. It begins calm and wide: Saturn fills the left of the frame as a vast banded crescent lit hard from the side, its ring plane running away from the camera as a thin bright line, the distant sun flaring at the edge of frame. The camera is already drifting forward. Over the next two seconds it accelerates toward the ring plane and the first ice boulders slide into frame, tumbling slowly, catching the sunlight. Then the camera races through the ring itself: house-sized and car-sized blocks of dirty water ice and dark rock rush past on both sides and overhead, some so close they blur, fine ice grains streak past the lens like snow at speed, boulders collide with each other and burst into glittering fragments, and Saturn's banded surface keeps showing through the gaps. In the last two seconds the camera plunges into the densest part of the ring and the frame fills with a bright cloud of glittering ice crystals lit from behind by the sun, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Photoreal, hard sunlight, deep black shadows, volumetric haze, heavy motion blur on the nearest debris. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen. A deep low rumble runs under the whole flight, quiet and distant at the start; as the camera enters the ring, sharp impacts and cracks hit exactly when boulders collide, ice grains hiss past, and the whole sound field grows continuously, reaching its loudest and fullest in the final two seconds as the camera enters the crystal cloud. No music, no voice, no narration.",
+      "seed": null
+    }
+  ]
+}

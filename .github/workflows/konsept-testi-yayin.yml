@@ -1,0 +1,167 @@
+name: Konsept Testi Yayin (uc hazir video, 12 saat arayla)
+
+# UC KONSEPTIN YAYIN TESTI , 2026-09-13 Ihsan karari: "3'u de sirayla yayina
+# alip deneyelim", 12 saat arayla.
+#
+# Kanalda su an UC konsept yarisiyor:
+#   A , one-variable    : gercek yerde TEK degisken, 8 sn, tek plan, motorun sesi
+#                         (part 93 "girdap" 13 Eylul 18:00 UTC'de ELLE yayinlandi)
+#   B , infinite-places : imkansiz yer, 8 sn, tek ses Suno muzigi (iki surum)
+#   C , flythrough      : 15 sn FPV dalis, motorun kendi senkron sesi, Seedance 2.0
+#
+# Bu workflow B'nin iki surumunu ve C'yi 12 saat arayla yayinlar. A zaten canli.
+#
+# Bu kosu URETIM YAPMAZ, Kie kredisi HARCAMAZ. Yalniz galactic_experience/hazir/
+# altindaki hazir dosyalari yayinlar.
+#
+# Kayit: her video KENDI serisinin published.json'ina dusulur
+# (infinite-places part 2 ve part 1, flythrough part 1).
+#
+# Tek seferlik zamanlama: cron'lar gun ve ay tasiyor, yani yalniz 13 ve 14
+# Eylul'de tetiklenir. GitHub'in cron gecikmesi bu filoda ~1,5 saate kadar
+# cikabiliyor; uc kosu da benzer gecikir, aradaki 12 saat korunur.
+# Deneme bitince bu dosyayi silin.
+#
+# NOT , gunde-1 kilidi: bu kanalda otomatik yayin YOK (butun seriler draft ya da
+# paused, hicbir serinin cron'u yok). Girdap 13 Eylul 18:00 UTC'de elle cikti;
+# ilk yayin 22:00'ye alinarak arasina 4 saat konuldu.
+
+on:
+  schedule:
+    - cron: '0 22 13 9 *'   # 2026-09-13 22:00 UTC , 1. video (B evli: Infinite Neighborhood)
+    - cron: '0 10 14 9 *'   # 2026-09-14 10:00 UTC , 2. video (B bos yol: Infinite Highway)
+    - cron: '0 22 14 9 *'   # 2026-09-14 22:00 UTC , 3. video (C: Saturn halkalarina dalis)
+  workflow_dispatch:
+    inputs:
+      video:
+        description: "Elle calistirirken hangisi: 1 (B evli), 2 (B bos yol), 3 (C Saturn)"
+        type: choice
+        options: ['1', '2', '3']
+        default: '1'
+
+concurrency:
+  group: konsept-testi-yayin
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs
+
+      - name: Hangi video
+        id: sec
+        shell: bash
+        run: |
+          set -euo pipefail
+          SECIM="${{ github.event.inputs.video }}"
+          if [ -z "$SECIM" ]; then
+            # Zamanlanmis kosu: UTC tarihine VE saatine gore sec. 14 Eylul'de iki
+            # ayri kosu var (10:00 ve 22:00), o yuzden saat de bakilir. GitHub
+            # cron'u gec atesleyebildigi icin sinir 16:00 UTC'den gecirildi.
+            GUN="$(date -u +%Y-%m-%d)"
+            SAAT="$(date -u +%H)"
+            case "$GUN" in
+              2026-09-13) SECIM=1 ;;
+              2026-09-14)
+                if [ "$SAAT" -lt 16 ]; then SECIM=2; else SECIM=3; fi
+                ;;
+              *)
+                echo "Bu tarihte ($GUN) planlanmis yayin yok. Cikiliyor."
+                echo "atla=1" >> "$GITHUB_OUTPUT"
+                exit 0
+                ;;
+            esac
+          fi
+          case "$SECIM" in
+            1)
+              echo "slug=infinite-neighborhood" >> "$GITHUB_OUTPUT"
+              echo "baslik=Infinite Neighborhood" >> "$GITHUB_OUTPUT"
+              echo "seri=infinite-places" >> "$GITHUB_OUTPUT"
+              echo "part=2" >> "$GITHUB_OUTPUT"
+              ;;
+            2)
+              echo "slug=infinite-highway" >> "$GITHUB_OUTPUT"
+              echo "baslik=Infinite Highway" >> "$GITHUB_OUTPUT"
+              echo "seri=infinite-places" >> "$GITHUB_OUTPUT"
+              echo "part=1" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "slug=saturn-rings-flythrough" >> "$GITHUB_OUTPUT"
+              echo "baslik=Through the Rings of Saturn" >> "$GITHUB_OUTPUT"
+              echo "seri=flythrough" >> "$GITHUB_OUTPUT"
+              echo "part=1" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+          echo "atla=0" >> "$GITHUB_OUTPUT"
+
+      - name: Hazir video yayinla
+        if: steps.sec.outputs.atla == '0'
+        shell: bash
+        run: |
+          python -X utf8 tools/hazir_yayinla.py \
+            "galactic_experience/hazir/${{ steps.sec.outputs.slug }}.mp4" \
+            --seri "${{ steps.sec.outputs.seri }}" \
+            --part "${{ steps.sec.outputs.part }}" \
+            --baslik "${{ steps.sec.outputs.baslik }}" \
+            --caption-dosya "galactic_experience/hazir/${{ steps.sec.outputs.slug }}.caption.txt" \
+            --yt-ek "#shorts" \
+            --atla-yayinlandiysa 2>&1 | tee logs/konsept_testi_yayin.log
+
+      - name: Persist state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: konsept testi yayin kaydi [skip ci]" \
+            galactic_experience/infinite-places/published.json \
+            galactic_experience/flythrough/published.json
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: konsept-testi-yayin-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+      - name: Basarisizlikta Telegram'a haber ver
+        if: failure()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl --silent --max-time 20 --request POST \
+              "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=🚨 Konsept testi yayini basarisiz , galactic'e video CIKMADI: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              >/dev/null 2>&1 || true
+          fi
