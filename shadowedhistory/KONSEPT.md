@@ -188,14 +188,29 @@ arkada ya da ufukta hala okunur, boylece iki cekim ayni yerdir.
 
 Anlatim olmadigi icin hikaye caption'dadir.
 
-- 60-120 Ingilizce kelime, kisa satirlar, bos satirla ayrilmis
+**Caption IKI DILLIDIR: once Ingilizce, sonra Turkce.** (Ihsan karari, 13 Eylul.
+Referans @one__create Ingilizce + Japonca kullaniyor; ayni kalibin Turkce hali.)
+
+Ingilizce blok:
+- 60-120 kelime, kisa satirlar, bos satirla ayrilmis
 - (1) sehri ve ona ne oldugunu adlandir
 - (2) insanlarin ne yaptigini soyle , GITMEDILER, uyarladilar
 - (3) somut bir ayrinti ver (ne yetistiriyorlar, nerede aliveris ediyorlar)
 - (4) tam su cumle: "A fictional future, created with AI."
 - (5) tek somut soruyla bitir
-- Em-dash YOK. Emin olmadigin sayi YOK.
-- Hashtag: 6-9 tane, sehir + gelecek + AI kategorileri, `#STILLHOME2512` dahil
+
+Turkce blok:
+- Ingilizce blogun AYNI yapisi, ceviri degil ayni hikayenin Turkcesi
+- Kisa cumle, sade dil, **em-dash YOK** (depo kurali)
+- (4)'un karsiligi tam su cumle: "Kurgusal bir gelecek, yapay zeka ile uretildi."
+- Ayni soruyla biter
+
+Ikisinin arasina `\n\n` konur. Toplam kelime motor dogrulamasinin 40-220
+araliginda kalir (olculdu: iki dilli caption ~145-175 kelime).
+
+Emin olmadigin sayi YOK.
+Hashtag: 6-9 tane, sehir + gelecek + AI kategorileri, `#STILLHOME2512` dahil.
+Hashtag'ler TEK sefer yazilir, iki dile bolunmez.
 
 ---
 
@@ -225,10 +240,17 @@ Anlatim olmadigi icin hikaye caption'dadir.
 
 ---
 
-## 9. ACIK , Ihsan karari bekleyen
+## 9. IHSAN KARARLARI
 
-1. **Kanal adi.** Ihsan "kanal adini degistir, handle kalsin" dedi.
-   Onerilen: **Still Home**. Alternatif: Earth 2512.
-2. **Caption ikinci dili.** Referans Japonca kullaniyor. Turkce mi, Japonca mi,
-   yok mu.
-3. **Yayin ritmi.** Eski serit gunluk 20:30 UTC idi. Ayni kalsin mi.
+Verilenler (13 Eylul):
+- **Yil: 2512.** Once 2190 onerildi, Ihsan "cok yakin" dedi.
+- **Caption ikinci dili: TURKCE.** Bolum 6'ya islendi.
+- **Yayin ritmi: AYNI.** Gunluk 20:30 UTC (flashpoints'ten bosalan slot).
+- **Kanal adi DEGISECEK, handle kalacak** (@shad0wedhistory357). Onerilen ad:
+  "Still Home". Bu YouTube Studio'dan elle yapilir, depoda karsiligi yok.
+- **Eski 271 video KALIR.** Silme ya da gizleme yok.
+
+Bekleyen:
+1. **Bu dokumanin (KONSEPT.md v1.0) onayi.** Onaylanmadan serit acilmaz.
+   Onaylandiginda: bu satiri "ONAYLANDI" yap, `series.json` icindeki
+   `doctrine_sha256`'yi YENILE ve `kurulum_notu`'ndaki 5 adimi uygula.
