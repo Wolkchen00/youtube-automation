@@ -25,20 +25,28 @@ from tools import gunluk  # noqa: E402
 # ----------------------------------------------------------------------
 # PALET alani: veri, dogrulama ve uretici birlikte gocmus olmali
 # ----------------------------------------------------------------------
-def test_dokuz_rotanin_palet_eslemesi_birebir() -> None:
+def test_rotalarin_palet_eslemesi_birebir() -> None:
     """Sadece "hepsi geciyor" demek yetmez; hangi rotanin hangi palette
-    oldugu A/B'nin TEK olcum dayanagi."""
+    oldugu A/B'nin TEK olcum dayanagi.
+
+    Yeni rota eklerken bu sozluge de satir eklenir. Testin adi bilerek sayi
+    icermiyor: eskiden "dokuz" diyordu ve on rota varken bile gecti."""
     beklenen = {
         "dubai-burj-altin": "sicak",
-        "toronto-cn-red-dusk": "sicak",
+        "hongkong-icc-indigo-bulut": "neon",
+        "istanbul-camlica-amber-sicak": "sicak",
+        "kualalumpur-petronas-sari-bulut": "neon",
+        "londra-shard-amber-bulut": "sicak",
         "newyork-empire-magenta-kar": "neon",
         "paris-eyfel-beyaz-cise": "neon",
         "sanghay-inci-yesil-sis": "neon",
+        "singapur-marina-turkuaz-bulut": "neon",
+        "sydney-harbour-yesil-bulut": "neon",
         "tokyo-skytree-mor-yagmur": "neon",
+        "toronto-cn-red-dusk": "sicak",
         "vegas-strat-blue-rain": "neon",
         "vegas-strat-blue-rain-15": "neon",
         "vegas-strat-blue-rain-25": "neon",
-        "istanbul-camlica-amber-sicak": "sicak",
     }
     gercek = {
         yol.stem: build.load_route(yol, PROJE_KOKU).fields["PALET"]

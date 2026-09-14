@@ -70,14 +70,40 @@ KREDI_15SN = {
 # oldugunca esit dagitildi. Dairesel aralik uzunluklari 3 ve 2, yani birbirinden
 # en fazla 1 farkli. Hipotez REELYZE-RAPOR.md bolum 3'te: doygun neon palet
 # fotogercekcigi bozuyor, sicak/dogal gece isigi bozmuyor.
+# 2026-09-14 Ihsan karari: kanal canliya geri alindi ve BULUT konseptinden
+# devam ediliyor. 13 Eylul'de elle yayinlanan taipei-bulut-1 Instagram'da
+# 768.000 izlenme aldi, hesap 14 gunde gunde 1,5M+ gosterime cikti.
+# 12 Eylul'de dondurma sebebi TEKRARDI: asagidaki yedi rotanin hepsi
+# kullanilmisti, listenin sonuna gelinince basa donuyordu ve on videonun
+# bitis cumlesi birebir ayniydi. Bu yuzden cron'u geri acmak tek basina
+# yetmez, havuza YENI rota girmesi gerekiyordu.
+#
+# Bes yeni bulut rotasi listenin BASINA alindi. sirdaki() once SIRA icinde
+# KULLANILMAMIS olan ilk slug'i dondurur, yani bu besi sirayla bes gun
+# uretilir, ondan sonra eski yediye doner. Besinci gunden once yeni rota
+# yaz, yoksa tekrar basa donulur.
+#
+# Hepsi 15 sn, cunku YETENEK_MATRISI'nde seedance-2 icin yalniz 15 sn 720p 24
+# fps "dogrulandi" durumunda. Landmark secimi olcume dayali: REELYZE-RAPOR.md
+# bolum 5, kuresel ikonlar 4/4 kazandi, niche ve tekrarlanan kuleler kaybetti.
+# Palet yeni rotalarda bilerek tekrar kullanildi (londra ember, sydney acid):
+# rapor bolum 4'te palet hipotezi CURUDU, renk ayirt etmiyor, landmark ediyor.
+#
+# Sicak rotalar 3, 7 ve 11'de duruyor, yani dairesel aralik 4-4-4. Palet A/B'si
+# bozulmadan yeni rotalar araya girsin diye bu dizilim secildi; testi de bu.
 SIRA = [
-    "dubai-burj-altin",              # sicak
+    "singapur-marina-turkuaz-bulut",    # neon, bulut
+    "kualalumpur-petronas-sari-bulut",  # neon, bulut
+    "hongkong-icc-indigo-bulut",        # neon, bulut
+    "londra-shard-amber-bulut",         # sicak, bulut
+    "sydney-harbour-yesil-bulut",       # neon, bulut
     "vegas-strat-blue-rain-15",      # neon
     "tokyo-skytree-mor-yagmur",      # neon
+    "dubai-burj-altin",              # sicak
     "newyork-empire-magenta-kar",    # neon
-    "istanbul-camlica-amber-sicak",  # sicak
     "paris-eyfel-beyaz-cise",        # neon
     "sanghay-inci-yesil-sis",        # neon
+    "istanbul-camlica-amber-sicak",  # sicak
 ]
 
 

@@ -16,13 +16,16 @@ name: Fear Slide Daily
 # kie-uretim concurrency grubu hatlari serilestirir (Kie kredi guvenligi).
 
 on:
-  # ===== DONDURULDU 2026-09-12 (Ihsan karari) =====
-  # Sebep: elde iki hazir deneme videosu var, once onlarin olcumu aliniyor.
-  # Otomasyon bu surecte YENI VIDEO URETMEYECEK ve YAYINLAMAYACAK.
-  # Geri acmak: asagidaki 'schedule:' ve 'cron:' satirlarinin basindaki
-  # '# ' isaretini kaldir, baska hicbir sey degistirme.
-  # schedule:
-  #   - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
+  # ===== GERI ACILDI 2026-09-14 (Ihsan karari) =====
+  # 12 Eylul'de donduruldu, iki hazir deneme videosunun olcumu icin. Olcum
+  # geldi: 13 Eylul'de yayinlanan taipei-bulut-1 Instagram'da 768.000 izlenme
+  # aldi ve hesap 14 gunde gunde 1,5M+ gosterime cikti. Karar: kanal canliya
+  # geri aliniyor ve BULUT konseptinden devam ediliyor.
+  # Dondurma sebebi tekrardi, o yuzden cron'u acmak tek basina yetmedi:
+  # tools/gunluk.py SIRA listesine bes yeni bulut rotasi girdi (singapur,
+  # kualalumpur, hongkong, londra, sydney) ve sira onlarla basliyor.
+  schedule:
+    - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
     # KREDI TELAFISI (2026-09-11). Kie otomatik yuklemesi bakiye 1500'un altina
     # dusunce tetikleniyor, 1080p is ~1530 kredi (varsayilan 11 Eylul'den beri
     # yine 720p, 615 kredi, yani bu olu bolge artik yalniz --profil 1080p'de
@@ -31,7 +34,7 @@ on:
     # Aradaki saatlerde baska kanallarin harcamasi yuklemeyi tetikler; bu kosu
     # yalniz damga BUGUNE aitse ve bugun yayin yoksa uretir. Satiri degistirirsen
     # asagidaki "Telafi kapisi" karsilastirmasini da degistir.
-  #   - cron: '30 21 * * *'   # 21:30 UTC = 14:30 PDT; GitHub gecikmesiyle genelde aksamustu
+    - cron: '30 21 * * *'   # 21:30 UTC = 14:30 PDT; GitHub gecikmesiyle genelde aksamustu
   workflow_dispatch:
     inputs:
       sehir:
