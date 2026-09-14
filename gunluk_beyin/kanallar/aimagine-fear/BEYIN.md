@@ -1,6 +1,6 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-13T10:29:03.602118+00:00
+Uretim: 2026-09-14T10:54:17.172468+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (9 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -11,8 +11,8 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
-> **UYARI: son olcum adimi BASARISIZ.** (2026-09-13 10:29)
-> 1 videonun hicbiri olculemedi
+> **UYARI: son olcum adimi BASARISIZ.** (2026-09-14 10:54)
+> 2 videonun hicbiri olculemedi
 > Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
 > olculmemis olabilir; bu rapor bugun yazildi diye guncel
 > DEGILDIR.

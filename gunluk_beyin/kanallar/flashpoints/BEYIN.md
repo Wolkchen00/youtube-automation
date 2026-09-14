@@ -1,6 +1,6 @@
 # BEYIN , flashpoints
 
-Uretim: 2026-09-13T10:29:02.101462+00:00
+Uretim: 2026-09-14T10:54:14.388030+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/flashpoints/defter.jsonl` (15 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -28,37 +28,26 @@ Son yayinlar (tekrar etme):
 - 2026-09-06 , The Great Fire Of London: Fact Or Ancient Propaganda?
 - 2026-09-05 , How Brooklyn Bridge Spanned The East River In 1883!
 
-### Teslim rejimi
-
-- Guncel rejim: `6d8449e3`
-- Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
-
 ### Yayinlanmayanlar
 
-- Su anda tutulan bolum yok.
-- Kusur defterinde gecmisten **1** olay kayitli (`kusur.jsonl`). series.json yalnizca ANLIK durumu tutar; kendini toparlayan hatalar orada iz birakmaz.
-
-### Kural cikarimina GIRMEYEN bolumler
-
-Bu bolumler EKSIK uretilmis (bir cekim dusmus). Yayinlanan
-dosya kisa ve anlatimi otomatik kisaltilmis oldugu icin
-olcumleri bir basari ornegi DEGILDIR; 2., 4. ve 5. bolumlerin
-hicbirine girmiyorlar.
-
-| video | bolum | sebep |
-|---|---|---|
-| `sO6q52tZaqg` | 30 | dropped_shots=[2] |
-| `IkqbnHyj-Ms` | 27 | dropped_shots=[1] |
-| `lMSL80iP3Cg` | 26 | dropped_shots=[2] |
-| `f-TYvhYuvQg` | 24 | dropped_shots=[2] |
-| `bhTaWCiP6c4` | 23 | dropped_shots=[1] |
-| `nH-BdFphWRQ` | 22 | sure orani 0.46 < 0.7 |
-
-Kalan tam kayit: **9** (esik 15).
+- Bu kanal icin seri kaydi okunamadi (ayri boru hatti ya da dosya yok). Yayinlanmayan bolumler GORUNTULENEMIYOR; bu 'hata yok' demek DEGILDIR.
 
 ## 2. BU KANALDA NE ISE YARIYOR
 
-**YETERSIZ VERI** (n=9, en az 15 gerekiyor; defterdeki 15 kaydin 6 tanesi eksik uretildigi icin sayilmadi). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
+Videolar izlenmeye gore siralandi, ust yari ile alt yarinin
+medyanlari karsilastirildi.
+
+| olcum | ust yari | alt yari | yon | n |
+|---|---|---|---|---|
+| sure | 9.44sn | 15.04sn | ust yari DAHA DUSUK | n=7/7 |
+| kesme / 10 sn | 3.32 | 1.99 | ust yari DAHA YUKSEK | n=7/7 |
+| en uzun plan | 3.60sn | 7.27sn | ust yari DAHA DUSUK | n=7/7 |
+| ses seviyesi (LUFS) | -23.60 | -22.10 | **anlamli fark yok** | n=7/7 |
+| konusma hizi (WPM) | 152.00 | 133.50 | ust yari DAHA YUKSEK | n=7/6 |
+| kelime sayisi | 26.00 | 38.00 | ust yari DAHA DUSUK | n=7/7 |
+
+> **Korelasyon, nedensellik degil.** Bunlar yon gosterir,
+> kanun degildir. Tek dogru sanma, hipotez olarak kullan.
 
 ## 3. GENEL ESIKLER
 
@@ -75,7 +64,13 @@ Kanala ozel veri yetersizse veya celiskiliyse bunlar gecerli.
 
 ## 4. BUGUN ICIN YON
 
-**YETERSIZ VERI** (n=9, en az 15 gerekiyor; defterdeki 15 kaydin 6 tanesi eksik uretildigi icin sayilmadi). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
+2. bolumdeki farklardan cikan somut hedefler:
+
+- **sure**: ust yarinin medyani 9.44sn (alt yari 15.04sn). Bugunku videoyu 9.44sn civarina hedefle.
+- **kesme / 10 sn**: ust yarinin medyani 3.32 (alt yari 1.99). Bugunku videoyu 3.32 civarina hedefle.
+- **en uzun plan**: ust yarinin medyani 3.60sn (alt yari 7.27sn). Bugunku videoyu 3.60sn civarina hedefle.
+- **konusma hizi (WPM)**: ust yarinin medyani 152.00 (alt yari 133.50). Bugunku videoyu 152.00 civarina hedefle.
+- **kelime sayisi**: ust yarinin medyani 26.00 (alt yari 38.00). Bugunku videoyu 26.00 civarina hedefle.
 
 ## 5. KACIN
 
@@ -86,7 +81,7 @@ Bu, esigin burada calismadigini GOSTERMEZ , boru hattinin o
 esigi hic uygulamadigini gosterir. Esik gecerlidir; eksik olan
 uygulamadir. Duzeltilene kadar bu boyutta karsilastirma yapma.
 
-- **LUFS -16..-13 hedefi** , en iyi tam videoda deger: **-23.8** (tum kayitlar ihlalde)
+- **LUFS -16..-13 hedefi** , en iyi tam videoda deger: **-21.2** (tum kayitlar ihlalde)
 
 - **Uzun statik plan**: `sO6q52tZaqg` en uzun plan 8.3 sn (tavan 4,0)
 - **Uzun statik plan**: `to7T1zjXpaU` en uzun plan 9.6 sn (tavan 4,0)
@@ -103,8 +98,8 @@ Bu defterdeki etiketli ve TAM bolumlerde:
 
 | ozne | n | medyan izlenme |
 |---|---|---|
-| SEY | 3 | 105 |
-| OLAY | 3 | 18 |
+| SEY | 6 | 124 |
+| OLAY | 6 | 20 |
 | KISI | 3 | 5 |
 
 > Etiketler ELLE konuldu ve medyan ayni etiketlerden hesaplandi.
