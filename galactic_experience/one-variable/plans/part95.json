@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 95,
+    "title": "A Tornado Wider Than a City Over Kansas"
+  },
+  "synopsis": "An impossibly vast tornado, spanning several kilometers, grinds slowly across the flat farmlands of Kansas, dwarfing entire towns and grain elevators beneath its cyclonic base.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of the flat farmland grid of Kansas, USA, and an impossibly wide tornado already at maximum strength and maximum extent, its base spanning multiple kilometers. Only its visible physical consequence develops through seconds 1-5 as the immense vortex continues its slow, destructive rotation, and delivers a decisive payoff during seconds 6-8 as dust and debris are continuously churned up from the ground. Grain elevators stay in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, holding one steady, full, unbroken level from second 0 to second 8, as the continuous low thrum of the immense vortex dominates. The camera remains rigidly fixed, offering an uninterrupted view of the colossal atmospheric phenomenon.",
+      "seed": null
+    }
+  ],
+  "family": "atmosfer afeti",
+  "seed_id": 10,
+  "caption": "A gigantic tornado, wider than any city, grinds slowly across the flat farmland grid of Kansas, USA.\n\nThe impossible tornado is over 5 kilometers wide, its immense base dwarfing entire rural towns and iconic grain elevators beneath its cyclonic fury.\n\nThe widest tornado on record, the 2013 El Reno tornado, was 4.2 kilometers wide but short-lived. Most powerful tornadoes are typically 1-2 kilometers wide.\n\nThe formation of such an immense supercell would require atmospheric shear and instability on a planetary scale. The energy required to sustain a rotating column of air this wide, resisting dissipation, is astronomical, demanding sustained updrafts and pressure differentials far beyond Earth's capabilities.\n\nThis is a simulation, not real footage.\n\nHow much destruction would a tornado this size cause to the landscape?",
+  "hashtags": "#Tornado #Kansas #GreatPlains #AtmosphericScience #ExtremeWeather #Simulation #Vortex",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

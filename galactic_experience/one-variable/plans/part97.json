@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 97,
+    "title": "Pyroclastic Flow Engulfing the Bay of Naples"
+  },
+  "synopsis": "A vast pyroclastic flow erupts from Mount Vesuvius, rapidly spreading across the entire Bay of Naples, engulfing coastal cities and harbor structures under a lethal cloud of ash and gas.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of the Bay of Naples, Italy, with Mount Vesuvius, and an impossibly vast pyroclastic flow already at maximum strength and maximum extent, rapidly spreading from the volcano. Only its visible physical consequence develops through seconds 1-5 as the dense, turbulent cloud expands across the bay, and delivers a decisive payoff during seconds 6-8 as it completely engulfs the harbor moles and coastal cities. The harbour moles and city outlines stay in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, holding one steady, full, unbroken level from second 0 to second 8, from the continuous hissing and rumbling of the pyroclastic flow. The camera maintains a perfectly fixed orbital position, offering a clear, unobstructed view of the engulfing disaster.",
+      "seed": null
+    }
+  ],
+  "family": "ates afeti",
+  "seed_id": 19,
+  "caption": "A massive pyroclastic flow erupts from Mount Vesuvius, rapidly spreading across the entire Bay of Naples, Italy.\n\nThis impossible flow covers an area of over 100 square kilometers within seconds, reaching speeds of 500 km/h and engulfing coastal cities and harbor moles under a lethal cloud of ash and gas.\n\nPyroclastic flows are deadly, fast-moving currents of hot gas and volcanic debris. The 79 AD eruption of Vesuvius buried Pompeii and Herculaneum, with flows extending a few tens of kilometers. A similar devastating eruption occurred in 1631.\n\nWhile devastating, even the largest historical pyroclastic flows are confined by topography and dissipate energy over distance. For a flow to cover an entire bay, it would require an eruption column and energy release orders of magnitude greater than any known supervolcanic event, defying conservation of mass and energy for the Earth's scale.\n\nThis is a simulation, not real footage.\n\nCould any human structure withstand the force of such a flow?",
+  "hashtags": "#Vesuvius #PyroclasticFlow #BayOfNaples #Volcano #Geology #DisasterSimulation #Italy",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

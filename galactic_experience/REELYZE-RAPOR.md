@@ -1036,3 +1036,109 @@ ilk kosuda API'nin bildirdigi `creditsConsumed` ile olculur.
   diyor. Bu konsept o kurali BOZUYOR ve yine de 752K almis. Yani kural evrensel
   degil, formata bagli.
 - Kirpma riski (TP 0 dBTP) kopyalanmaz, -1 dBTP kapimiz kalir.
+
+---
+
+# EK 8 , KENDI UC KONSEPTIMIZIN BAKE-OFF SONUCU (14 Eylul 2026)
+
+Olcum: 14 Eylul 2026, YouTube Data API v3 (izlenme/begeni/yorum), TikTok `yt-dlp`,
+IG `yt-dlp` (izlenme giris duvarinda, yalniz begeni geldi). Teknik olcumler
+yayinlanan yerel master dosyalarindan, `ffmpeg`.
+
+13 Eylul'de Ihsan karariyla uc konsept adayi ayni kanala basildi. Bu ek onlarin
+uctan uca olcumudur. Yayin kayitlari `<seri>/published.json`.
+
+## 1. Olcum tablosu
+
+| | konsept | yayin (UTC) | yas | YouTube | YT izl/saat | TikTok | IG begeni |
+|---|---|---|---|---:|---:|---:|---:|
+| One Wave Along the Whole Coast (p92) | A one-variable | 12 Eyl 22:07 | 46,6 s | 1.060 | 22,7 | **9.545** | , |
+| One Whirlpool That Never Closes (p93) | A one-variable | 13 Eyl 18:03 | 26,7 s | **1.676** | 62,8 | 367 | 2 |
+| Infinite Neighborhood | B infinite-places | 13 Eyl 22:24 | 22,3 s | **77** | 3,5 | 306 | 5 |
+| Through the Rings of Saturn | C flythrough | 14 Eyl 16:16 | 4,4 s | 431 | **98,0** | 170 | **30** |
+
+Kiyas: rafa kaldirilan event-horizon formatinin 15 bolumluk medyani **104**
+(`gunluk_beyin/kanallar/event-horizon/defter.jsonl`, 23 Agu , 10 Eyl).
+Yorum sayisi dort videoda da 0-3, yani ana sinyal olarak kullanilamadi.
+
+**Yas esit degil.** C olcum aninda 4,4 saatlikti, 44 saatlik pencere dolmadi.
+C icin asagidaki hicbir sonuc kesin degildir.
+
+## 2. Teknik olcum , dordu de
+
+| | fps | sure | LUFS | true peak | LRA | kesme | ses zarfi ilk>son | ilk 1 sn parlaklik |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| A p92 tsunami | 24 | 8,0 | -17,9 | -0,9 | 13,3 | 0 | **+17,0 dB** | 124,8 |
+| A p93 girdap | 30 | 8,0 | -14,1 | -2,2 | 0,9 | 0 | +2,2 dB | 129,9 |
+| B mahalle | 30 | 8,0 | -13,9 | -2,2 | 2,6 | 0 | +3,4 dB | 56,9 |
+| C saturn | 30 | 15,1 | -13,6 | -3,7 | 12,1 | 0 | +6,2 dB | 53,0 |
+
+`olc.py` C'de 3 kesme raporladi (12,43 / 13,27 / 14,10 sn). **Yanlis pozitif**,
+gozle dogrulandi: o anlar buz alanindaki hiz bulaniklig, kamera kesintisiz.
+Skill'in 9. tuzagi (`scene=0.3` hizli hareketi kesme sanar) burada gerceklesti.
+C tek plan kuralini BOZMUYOR.
+
+## 3. B'nin cokusunu ACIKLAMAYAN olculer
+
+B en kotu video (YT 77, kanalin olu formatinin bile altinda). Su hipotezlerin
+hepsi olculdu ve hepsi B'yi ayirmakta BASARISIZ:
+
+1. **Ses seviyesi degil.** B -13,9 LUFS ile hedefin tam ortasinda. Kazanan tsunami
+   -17,9 ile hedefin 4 dB disinda ve true peak'i kirpma sinirinda (-0,9).
+2. **Ses zarfi degil.** B'de +3,4 dB, kazanan girdapta +2,2 dB. B kurali daha iyi sagliyor.
+3. **Hareket miktari degil.** Kare farki ortalamasi B 0,0061, girdap 0,0070. Fark yok.
+   Ayrica en az hareketli video (tsunami, 0,0022) TikTok'ta 9.545 aldi.
+4. **Parlaklik degil.** B 56,9 ile karanlik, ama C 53,0 ile daha da karanlik ve tutuyor.
+5. **Yayin saati degil.** Tsunami 22:07 UTC'de cikip 1.060 aldi, B 22:24'te cikip 77 aldi.
+6. **Doktrin uyumu degil.** B kendi doktrinine harfiyen uyuyor: tek plan, 8 sn, yazi yok,
+   anlatim yok, hashtag yok, -14 LUFS, zarf yukseliyor.
+
+Teknik olcumlerde B, dordun en "ortalama" videosu. Cokus teknikte degil.
+
+## 4. Geriye kalan tek fark: OZNENIN GERCEKLIGI
+
+Kareler gozle incelendi (0 / 2 / 4 / 6 / 7,8 sn, C'de 0 / 3 / 6 / 9 / 14,9 sn).
+
+| video | ozne | gercek mi | ilk karede olay var mi | 8 sn boyunca degisim |
+|---|---|---|---|---|
+| tsunami | dev dalga + sahil sehri | **gercek olay, gercek sehir** | evet, dalga sehre yikiliyor | dalga limani yutuyor |
+| girdap | dev girdap + kiyi kasabasi | **gercek olay, gercek kiyi** | evet, girdap aciliyor | girdap buyuyor ve derinlesiyor |
+| Saturn | Saturn halkalari | **gercek gok cismi** | hayir, sakin genis plan | dalis, hiz, doruk |
+| mahalle | Dunya'yi saran ev halkasi | Dunya gercek, **halka uydurma** | hayir | **bes kare neredeyse ayni** |
+
+Tutan uc videonun oznesi gercek: tsunami, girdap, Saturn. Tutmayanin oznesi uydurma
+bir geometri. Bu, konsept B'nin KENDI doktrininin 8. maddesidir ("uydurma gezegen
+olculen en buyuk kayip sebebi, 223 kat dusus", EK 5).
+
+Ikinci gozlem, olculdu ama tek ornek: B'de 8 saniye boyunca hicbir sey olmuyor.
+Bes ornek kare neredeyse ayni. Diger uc videoda her karede durum degisiyor.
+
+**Bu tek bir B videosudur, tek ornekten kural cikmaz.** Ancak filoda ayni yonde
+UC bagimsiz olcum var:
+- `shadowedhistory/still-home`: taninan sehir 46.042 begeni, isimsiz kubbe 124 (371 kat)
+- `AImagine-Fear`: ikonik landmark 4/4 tuttu, tekrarlanan uydurma rota 3/3 kayip
+- bu ek: gercek ozne 3/3 tuttu, uydurma ozne 1/1 kaybetti
+
+Dort kanalda ayni yon. Hipotez kanit degil, ama tesaduf olarak aciklamak zorlasti.
+
+## 5. Platform ayrisiyor, konsept secimini tek platformdan yapma
+
+Ayni konseptin iki bolumu iki ayri platformda patladi:
+- tsunami TikTok'ta 9.545, YouTube'da 1.060
+- girdap YouTube'da 1.676, TikTok'ta 367
+
+C, IG'de 4,4 saatte 30 begeni aldi; diger ucu 2, 5 ve olculemedi. IG izlenmesi
+giris duvarinda, bu yuzden C'nin IG ustunlugu **begeni uzerinden**, izlenme degil.
+
+## 6. Karar icin ne eksik
+
+- C'nin 44 saatlik olcumu (16 Eylul ~12:00 UTC'de tamamlanir).
+- Uc videoda da yorum 0-3. Doktrinin ana sinyali yorum oraniydi, bu orneklemde CALISMADI.
+- IG izlenme sayilari (giris yapmis oturum gerekiyor, `ig_medya_bilgi.py`).
+
+## 7. Olcemediklerimiz
+
+- Retention ve skip rate: platform paneli gerekiyor, disaridan olculemez.
+- Kac izlenmenin onerilenden, kac tanesinin aramadan geldigi.
+- B'nin cokusunun izleyici tarafindaki sebebi. Elimizdeki tek sey kare
+  karsilastirmasi, bu bir yorumdur, olcum degil.

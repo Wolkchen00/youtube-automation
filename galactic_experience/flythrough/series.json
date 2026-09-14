@@ -9,14 +9,166 @@
     "instagram",
     "tiktok"
   ],
-  "hashtags": "",
+  "hashtags": "#shorts #space #astronomy #simulation",
   "standalone": true,
-  "publish_mode": "approval",
-  "status": "draft",
-  "priority": 999,
-  "total_parts": 1,
-  "next_part": 1,
+  "publish_mode": "auto",
+  "status": "active",
+  "priority": 10,
+  "total_parts": 6,
+  "next_part": 2,
   "doctrine": "galactic_experience/flythrough/KONSEPT-C.md",
-  "doctrine_sha256": "58459b79235642caa2a054c4df885faaedc22fd10e14371d39662874d3cecd9e",
-  "kurulum_notu": "13 Eylul 2026, Ihsan direktifi: '3. konseptten bi video uret'. Ucuncu konsept adayi; one-variable ve infinite-places ile YARISIR. Yayin hatti YOK: workflow yok, cron yok, status kalici 'draft', publish_mode 'approval'. Kaynak olcum REELYZE-RAPOR.md EK 7."
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1",
+  "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off'ta part 1 (Saturn) tuttu, serit SONSUZ ANTOLOJIYE cevrildi. Metot degismedi, hedef degisiyor. Doktrin: flythrough/KONSEPT-C.md v2.0. EN BUYUK RISK tekrar tuzagi: ayni anatomiyi ikinci kez cekmek uc kez olculdu ve 67 kata kadar dusus getirdi, bu yuzden families DALINAN ORTAM TURUNU tanimlar ve ardisik iki bolum ayni aileden olamaz. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi CIFT olan gunlerde bu serit uretilir, TEK gunlerde one-variable. Bu seride shot_seconds 15: Seedance 4-15 sn uretir, replenish sure dogrulamasi 14 Eylul'de motor-farkinda yapildi.",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 1,
+    "shot_seconds": "15",
+    "caption": true,
+    "music_prompt": false,
+    "credit_hard_cap": true,
+    "title_style": "plain English, max 70 characters, naming the real body and the act of flying into it, in the pattern 'Through <the real body>' or '<Verb>ing into <the real body>' (e.g. 'Through the Rings of Saturn', 'Into the Great Red Spot'). The body must be a real, named astronomical object a reader recognises instantly. No clickbait punctuation, no hashtags, no surrounding quotes, no question marks, no first-person claim of having filmed anything.",
+    "caption_style": "\"caption\" = the entire WRITTEN STORY because the video has zero narration: 70-140 words of lean, specific English prose in five compact paragraphs separated with \\n\\n. Follow this exact order: (1) name the real body and the flight through it in one direct sentence; (2) describe what the obstacle field is actually made of, with verified sizes, distances or densities; (3) name a REAL spacecraft that visited or observed this body and give the four-digit year, then say what it actually saw; (4) explain the physical reason a flight like this one is impossible, through a clear cause-and-effect chain a non-scientist can picture, such as closing speed, impact energy, radiation or heat; (5) write the exact standalone sentence \"This is a simulation, not real footage.\" and close with ONE concrete question about the viewer's judgement, prediction or observation. Every sentence must add a fact or advance the thought. Use verified quantities only, with units and useful context; omit any uncertain number. Make zero first-person claims of filming or capture. Use commas, colons, or full stops rather than em dashes.\n- HASHTAGS: \"hashtags\" = 6-9 specific, space-separated tags covering the named body, the kind of environment flown through, and 3-4 broad space, astronomy or simulation categories. Each tag starts with # and contains no spaces; skip generic engagement tags.",
+    "families": [
+      "firtina dalisi",
+      "bulutsu suzulusu",
+      "kaya alani",
+      "buz gayzeri",
+      "volkanik dalis",
+      "yildiz yakini",
+      "kuyruk gecisi",
+      "halka dalisi"
+    ],
+    "shot_plan": [
+      "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration."
+    ],
+    "brief": "SONSUZ FPV DALIS ANTOLOJISI. Her bolum, GERCEK bir gok cisminin icinden gecen TEK KESINTISIZ 15 SANIYELIK birinci sahis ucusudur. Izleyici bir seye BAKMAZ, bir seyin ICINDEN GECER. Gorsel promptlar ve caption Ingilizce yazilir.\n\nMETOT DEGISMEZ, HEDEF DEGISIR. Ihsan'in direktifi: \"Metot ayni kalacak, metodu degistirmiyoruz: loop seklinde iceri giriyor, en son bir yere carpip video bitiyor. Ilk yaptigimiz video mukemmel olmustu, ayni sekilde tekrar edilmesini istiyorum.\" Bu yuzden asagidaki zaman cizelgesi ve kamera kurallari pazarliga kapalidir.\n\nEN BUYUK RISK: TEKRAR TUZAGI. Olculdu, uc kez dogrulandi. Bir hesapta Saturn halkalarina dalis 34.415 begeni aldi; iki gun sonra ayni anatomiyle cekilen Uranus halkasi dalisi 515'te kaldi, yani 67 KAT dusus, ve aralarindaki tek fark gezegenin adiydi. Ucuncu video FARKLI TURDE bir hedefti (bulutsu) ve Uranus'un uc katini aldi. Sonuc: gezegenin adini degistirmek YETMEZ, DALINAN ORTAMIN TURU degismek zorundadir. Bu yuzden aileler gok cismini degil ortam turunu tanimlar ve ardisik iki bolum ayni aileden olamaz.\n\nDEGISMEZ KURALLAR:\n(1) GERCEK GOK CISMI. Saturn, Jupiter, Io, Enceladus, Yengec Bulutsusu, ana asteroit kusagi gibi gercek ve adi konmus cisimler. Uydurma gezegen, uydurma bulutsu ve uydurma yer adi yasaktir. Olculen en buyuk kayip sebebi uydurma hedeftir.\n(2) TEK KESINTISIZ 15 SANIYE, 24 fps. Kesme, gecis, fade, sahne sifirlamasi yok. Kamera hic durmaz, hic asili kalmaz, hic geri gitmez.\n(3) DORT BOLUMLU ZAMAN CIZELGESI, referanstan birebir olculdu. 0-4 saniye sakin genis plan, cisim ve engel alani tanitilir. 4-6 saniye hizlanma, ilk engeller kadraja girer. 6-13 saniye engellerin arasindan hizli ucus, carpmalar, hiz bulanikligi. 13-15 saniye doruk: yogun alana giris ya da patlama, en gur an SONDADIR. Bolum bir dorukta biter, sonerek bitmez.\n(4) KAMERA ARACIN KENDISIDIR. Kokpit cercevesi, govde parcasi, kanat, gosterge, HUD ve arac golgesi kadrajda bulunmaz. Kadrajin kenari goruntunun kenaridir.\n(5) ILK KARE GORUNTUYLE BASLAR. Referans siyahtan fade ile aciliyor, biz KOPYALAMIYORUZ: ilk kareden itibaren goruntu vardir. Ilk kare sakin bir genis plan olabilir, bu seride ilk karede doruk aranmaz.\n(6) SES FORMATIN KENDISIDIR. Motorun urettigi diegetic senkron ses TEK ses katmanidir. Muzik, anlatim, konusma ve sessizlik yasaktir. Ses gorsel olaylarla birebir senkron olur: her carpma isitilir. Enerjinin buyuk kismi derin ugultuda toplanir.\n(7) SES SONA DOGRU BUYUR, BU SERIDE KURAL DAHA SERTTIR. Son ceyrek ilk ceyregin en az IKI KATI gurlukte olur. Ucus sakin ve uzak baslar, doruk en gur andir.\n(8) OLCEK VE HIZ OKUNUR OLMALI. Engellerin boyutunu somut karsilastirmayla yaz: ev buyuklugunde blok, araba buyuklugunde parca, toz taneciği. En yakin nesnelerde hiz bulanikligi bulunur, uzaktakiler net kalir.\n(9) POZITIF VIDEO DILI, IKI ISTISNAYLA. Gorsel paragraf kadrajda bulunan seyleri anlatir. Iki kalip ISTISNADIR ve aynen korunur, cunku olculen kazanan bolum bu iki kalibi tasiyordu ve tuttu: sureklilik cumlesi (no cut, no fade, no scene change, the camera never stops) ve gorunmezlik listesi (nothing of the vehicle is visible; no text, no logos, no people). Bunlarin disinda olumsuz komut yerine istenen pozitif durumu yaz.\n(10) GORSEL PARAGRAF STANDARDI. shot.prompt icindeki ozgun gorsel paragraf 150-240 Ingilizce kelime olsun. Cismin gorunumu, isik yonu, engel alaninin malzemesi, dort bolumun her birinde ne oldugu, hiz hissi ve saniyeye bagli ses egrisi icersin. Mekanik olarak eklenen shot_plan onekini ve art_style metnini yeniden anlatma.\n(11) INSAN VE YAZI YOK. Kadrajda insan figuru, uzay giysisi, istasyon ve yerlesim bulunmaz. Okunabilir yazi, altyazi, kunye, logo, filigran, imza ve kapanis karti uretme.\n(12) BASLIK HEDEFI SOYLER. En fazla 70 karakterlik duz Ingilizce baslikta gercek cismi ve icinden gecme eylemini soyle.\n(13) CAPTION HIKAYEYI TASIR. 70-140 Ingilizce kelimede gercek gok cismini ve ucusu adlandir, engel alaninin neden yapildigini sayiyla soyle, o cismi ziyaret etmis GERCEK bir uzay aracini ve dort haneli yilini ver, boyle bir ucusun neden imkansiz oldugunu acikla, bunun simulasyon oldugunu acikca yaz ve tek somut soruyla bitir. Part 1 kisa bir caption'la elle yayinlanmisti; boru hattinin caption kapisi 40-220 kelime ve en az 3 hashtag istiyor, bu yuzden serit uzun caption'a gecti. Gorsel format DEGISMEDI.\n(14) AILE VE CESITLILIK. Yalnizca kanonik ailelerden birini aynen sec. Ardisik iki bolum ayni aileden olamaz. Ayni gok cismini ikinci kez cekme: part 1 Saturn halkalarini kullandi, o cisim kapandi.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "A first-person flight into Jupiter's Great Red Spot, down through the banded cloud walls of the storm.",
+        "family": "firtina dalisi"
+      },
+      {
+        "id": 2,
+        "topic": "A flight into Neptune's Great Dark Spot through streaks of white methane cloud.",
+        "family": "firtina dalisi"
+      },
+      {
+        "id": 3,
+        "topic": "A flight into the hexagonal storm over Saturn's north pole, along its straight cloud edges.",
+        "family": "firtina dalisi"
+      },
+      {
+        "id": 4,
+        "topic": "A descent through the sulphuric acid cloud decks of Venus toward the glowing surface below.",
+        "family": "firtina dalisi"
+      },
+      {
+        "id": 5,
+        "topic": "A glide through the Crab Nebula, between filaments of glowing gas toward the pulsar at its centre.",
+        "family": "bulutsu suzulusu"
+      },
+      {
+        "id": 6,
+        "topic": "A flight through the Pillars of Creation in the Eagle Nebula, past towers of dust taller than a solar system.",
+        "family": "bulutsu suzulusu"
+      },
+      {
+        "id": 7,
+        "topic": "A pass through the Orion Nebula toward the Trapezium stars burning at its core.",
+        "family": "bulutsu suzulusu"
+      },
+      {
+        "id": 8,
+        "topic": "A flight through the Carina Nebula, between walls of ionised gas lit from within.",
+        "family": "bulutsu suzulusu"
+      },
+      {
+        "id": 9,
+        "topic": "A flight through the main asteroid belt between Mars and Jupiter, past tumbling rock the size of mountains.",
+        "family": "kaya alani"
+      },
+      {
+        "id": 10,
+        "topic": "A flight past Vesta through the debris field left by the impact that carved its south pole.",
+        "family": "kaya alani"
+      },
+      {
+        "id": 11,
+        "topic": "A flight through the Kuiper Belt, past dark icy bodies drifting in the faint distant sunlight.",
+        "family": "kaya alani"
+      },
+      {
+        "id": 12,
+        "topic": "A flight through the Trojan asteroids that share Jupiter's orbit, the giant planet filling the background.",
+        "family": "kaya alani"
+      },
+      {
+        "id": 13,
+        "topic": "A flight through the ice geysers erupting from the south pole of Enceladus, into the plume itself.",
+        "family": "buz gayzeri"
+      },
+      {
+        "id": 14,
+        "topic": "A flight low over the cracked ice crust of Europa and down into one of its open fractures.",
+        "family": "buz gayzeri"
+      },
+      {
+        "id": 15,
+        "topic": "A flight through the nitrogen geysers of Triton, across its pink frozen plains.",
+        "family": "buz gayzeri"
+      },
+      {
+        "id": 16,
+        "topic": "A flight through the sulphur eruption plumes of Io, above its yellow volcanic plains.",
+        "family": "volkanik dalis"
+      },
+      {
+        "id": 17,
+        "topic": "A flight low across the lava channels of Venus toward an erupting shield volcano.",
+        "family": "volkanik dalis"
+      },
+      {
+        "id": 18,
+        "topic": "A flight through the Sun's corona, between arching loops of plasma.",
+        "family": "yildiz yakini"
+      },
+      {
+        "id": 19,
+        "topic": "A flight past the surface of Betelgeuse, through the dust it is shedding into space.",
+        "family": "yildiz yakini"
+      },
+      {
+        "id": 20,
+        "topic": "A flight across a sunspot on the Sun's surface, through the towering granulation around it.",
+        "family": "yildiz yakini"
+      },
+      {
+        "id": 21,
+        "topic": "A flight through the dust tail of Halley's Comet, particles streaming past toward the far sun.",
+        "family": "kuyruk gecisi"
+      },
+      {
+        "id": 22,
+        "topic": "A flight through the coma of Comet 67P, between jets bursting from its dark double-lobed nucleus.",
+        "family": "kuyruk gecisi"
+      },
+      {
+        "id": 23,
+        "topic": "A flight into the rings of Uranus, edge-on and far darker than Saturn's, the tilted planet behind them.",
+        "family": "halka dalisi"
+      },
+      {
+        "id": 24,
+        "topic": "A flight through the narrow ring arcs of Neptune, clumped and uneven against the blue planet.",
+        "family": "halka dalisi"
+      }
+    ],
+    "last_run": {
+      "at": "2026-09-14T21:50:17.887209+00:00",
+      "parts": "2-6"
+    }
+  }
 }

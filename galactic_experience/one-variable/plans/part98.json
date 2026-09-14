@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 98,
+    "title": "Jakobshavn Glacier Collapsing Along Its Width"
+  },
+  "synopsis": "The entire vast calving front of Greenland's Jakobshavn Glacier spectacularly collapses at once into the fjord, releasing an unimaginable volume of ice into the ocean.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of Jakobshavn Glacier in Greenland and its entire vast calving front already at maximum strength and maximum extent, beginning to collapse into the fjord. Only its visible physical consequence develops through seconds 1-5, as massive ice blocks fracture and begin their fall, and delivers a decisive payoff during seconds 6-8 as the entire front dramatically crumbles and plunges into the water. Distant coastal settlements and the fjord entrance stay in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows a single impact event: the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8 with the thunderous roar of fracturing ice and water displacement. The camera remains fixed in its high-aerial viewpoint, offering an unobstructed, wide-angle view of the cataclysmic event.",
+      "seed": null
+    }
+  ],
+  "family": "buz afeti",
+  "seed_id": 22,
+  "caption": "The entire calving front of Jakobshavn Glacier in Greenland spectacularly collapses at once into the fjord.\n\nThis impossible event sees the glacier's entire 7-kilometer-wide front crumble simultaneously, releasing an estimated 500 billion tons of ice in mere seconds.\n\nJakobshavn Isbræ is one of Greenland's fastest-flowing glaciers, often calving large icebergs. Its annual ice loss averages about 35 billion tons, with individual calving events releasing much smaller, though still massive, amounts of ice, as observed in 2012 and 2010.\n\nWhile calving is natural, a simultaneous collapse across the entire width of such a massive glacier front would require an instantaneous, uniform structural failure along the entire face, triggered by an impossible, synchronized force. The sheer volume of ice, unsupported and fracturing simultaneously, defies the principles of material mechanics and stress distribution on this scale.\n\nThis is a simulation, not real footage.\n\nWhat would be the immediate global impact of such an event?",
+  "hashtags": "#JakobshavnGlacier #Greenland #GlacierCalving #IceSheet #ClimateChange #Arctic #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

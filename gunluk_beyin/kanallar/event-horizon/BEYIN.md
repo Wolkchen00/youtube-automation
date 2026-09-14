@@ -1,7 +1,7 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-14T10:54:14.277407+00:00
-Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (15 kayit)
+Uretim: 2026-09-14T20:52:06.714221+00:00
+Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\event-horizon\defter.jsonl` (2 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
@@ -11,57 +11,36 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
-> **UYARI: son olcum adimi BASARISIZ.** (2026-09-14 10:54)
-> 3 videonun hicbiri olculemedi
-> Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
-> olculmemis olabilir; bu rapor bugun yazildi diye guncel
-> DEGILDIR.
+> **17 kayit EMEKLI**, karsilastirmaya girmiyor , sebep: event-horizon konsepti 12 Eylul 2026'da rafa kaldirildi (KONSEPT.md v2.0). Kanal uc yeni konsept adayi test ediyor: one-variable, infinite-places, flythrough. Eski format olcumleri yeni formatla havuzlanirsa beyin olu formatin kuralini uretir..
+> Eski konseptin olcumleri yeni format icin yol gosterici
+> degildir. Silinmediler, defterde duruyorlar.
 
-- Olculen video: **15**
-- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/15 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
-- Medyan izlenme: **104**
-- Aralik: 24 ile 395 arasi
+- Olculen video: **2**
+- Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/2 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
+- Medyan izlenme: **1,368**
+- Aralik: 1,060 ile 1,676 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
-| EN IYI | 395 | 2026-09-05 | The Universe's SLOWEST Particle: Photon's Journe |
-| EN KOTU | 24 | 2026-08-28 | Venus: The Sun Rises in the WEST |
+| EN IYI | 1,676 | 2026-09-13 | One Whirlpool That Never Closes |
+| EN KOTU | 1,060 | 2026-09-12 | One Wave Along the Whole Coast |
 
 Son yayinlar (tekrar etme):
-- 2026-09-10 , WASP-12b: Planet Being DEVOURED
-- 2026-09-09 , What If Earth Had Rings? Sky BLADES
-- 2026-09-08 , Flying to Alpha Centauri: A 5 MILLION Year Trip
-- 2026-09-07 , Olympus Mons: Towers Over Everest
-- 2026-09-06 , KELT-9b: Hotter Than MOST Stars
+- 2026-09-13 , One Whirlpool That Never Closes
+- 2026-09-12 , One Wave Along the Whole Coast
 
 ### Teslim rejimi
 
 - Guncel rejim: `de8c6501`
-- Rejim takibi bugun basladi; defterdeki 15 kaydin hicbirinde damga yok, hepsi birlikte sayiliyor.
+- **DIKKAT: karma orneklem.** Guncel rejimde yalnizca 0 kayit var, en az 15 gerekiyor; bu yuzden asagidaki karsilastirma FARKLI ayarlarla uretilmis 2 kaydi bir arada kullaniyor. Yonu kanun sanma.
 
 ### Yayinlanmayanlar
 
 - Su anda tutulan bolum yok.
 
-### Kural cikarimina GIRMEYEN bolumler
-
-Bu bolumler EKSIK uretilmis (bir cekim dusmus). Yayinlanan
-dosya kisa ve anlatimi otomatik kisaltilmis oldugu icin
-olcumleri bir basari ornegi DEGILDIR; 2., 4. ve 5. bolumlerin
-hicbirine girmiyorlar.
-
-| video | bolum | sebep |
-|---|---|---|
-| `2Cs_MsKcImA` | 29 | dropped_shots=[3] |
-| `VS8yd--FZsg` | 27 | dropped_shots=[3] |
-| `DFIc-OD3ASw` | 26 | dropped_shots=[2] |
-| `TVXhCHS5vUg` | 24 | sure orani 0.61 < 0.7 |
-
-Kalan tam kayit: **11** (esik 15).
-
 ## 2. BU KANALDA NE ISE YARIYOR
 
-**YETERSIZ VERI** (n=11, en az 15 gerekiyor; defterdeki 15 kaydin 4 tanesi eksik uretildigi icin sayilmadi). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
+**YETERSIZ VERI** (n=2, en az 15 gerekiyor). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
 
 ## 3. GENEL ESIKLER
 
@@ -78,7 +57,7 @@ Kanala ozel veri yetersizse veya celiskiliyse bunlar gecerli.
 
 ## 4. BUGUN ICIN YON
 
-**YETERSIZ VERI** (n=11, en az 15 gerekiyor; defterdeki 15 kaydin 4 tanesi eksik uretildigi icin sayilmadi). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
+**YETERSIZ VERI** (n=2, en az 15 gerekiyor). Bu kanala ozel kural cikarilamaz, asagidaki genel esikler kullanilmali.
 
 ## 5. KACIN
 
@@ -89,10 +68,10 @@ Bu, esigin burada calismadigini GOSTERMEZ , boru hattinin o
 esigi hic uygulamadigini gosterir. Esik gecerlidir; eksik olan
 uygulamadir. Duzeltilene kadar bu boyutta karsilastirma yapma.
 
-- **en uzun plan 4 sn tavani** , en iyi tam videoda deger: **5.6** (tum kayitlar ihlalde)
-- **LUFS -16..-13 hedefi** , en iyi tam videoda deger: **-22.1** (tum kayitlar ihlalde)
+- **en uzun plan 4 sn tavani** , en iyi tam videoda deger: **8.0** (tum kayitlar ihlalde)
 
-Olculen kayitlarda teknik esik ihlali yok.
+- **Ses kirpiyor**: `gJ4qf_rupvk` true peak -0.9 dBFS (tavan -1,0)
+- **Ses seviyesi hedef disi**: `gJ4qf_rupvk` -17.9 LUFS (hedef -16..-13)
 
 ## 6. BASLIK OZNESI
 

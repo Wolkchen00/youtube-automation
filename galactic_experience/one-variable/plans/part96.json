@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 96,
+    "title": "A Fissure Opening Along the San Andreas"
+  },
+  "synopsis": "An impossibly deep and wide fissure tears open along the San Andreas Fault, rending the California landscape apart and severing major highways as the chasm rapidly expands.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of the California landscape with the San Andreas Fault, and an impossibly wide and deep fissure already at maximum strength and maximum extent, carving through the terrain. Only its visible physical consequence develops through seconds 1-5, as the fissure continues to slowly widen and deepen, and delivers a decisive payoff during seconds 6-8 as more rock crumbles into the abyss and dust plumes rise. Highways are seen ending abruptly at both lips of the chasm, staying in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, holding one steady, full, unbroken level from second 0 to second 8, from the continuous grinding and groaning of the Earth's crust. The camera is absolutely fixed, providing an unchanging perspective on the monumental geological rupture.",
+      "seed": null
+    }
+  ],
+  "family": "yer afeti",
+  "seed_id": 13,
+  "caption": "An impossibly wide and deep fissure tears open along the San Andreas Fault across the California landscape, USA.\n\nThe chasm is over 500 meters wide and kilometers deep, rapidly expanding as it severs major highways and consumes the terrain. Its raw, exposed rock walls glitter in the sun.\n\nThe San Andreas Fault is a transform fault where plates slide past each other, causing earthquakes, not gaping chasms. Surface ruptures are typically a few meters wide, like the 1906 San Francisco earthquake's offset of up to 6 meters.\n\nEarth's crust is not brittle enough to sustain such an open void; gravity and lithostatic pressure would immediately cause the walls to collapse. The energy needed to instantaneously separate such a massive volume of rock and keep it open would far exceed the planet's tectonic forces.\n\nThis is a simulation, not real footage.\n\nWhat other landscape features would vanish into such a rift?",
+  "hashtags": "#Earthquake #SanAndreasFault #California #Geology #Tectonics #Fissure #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

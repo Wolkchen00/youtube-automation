@@ -1,0 +1,198 @@
+name: Galactic Daily (iki serit, gun asiri)
+
+# GALACTIC EXPERIMENT kanalinin (@galacticexperiment-x6l) TEK yayin hatti.
+#
+# 14 Eylul 2026, Ihsan karari: bake-off'tan IKI konsept sag cikti ve ikisi de ayni
+# kanalda yayinlanacak, gun asiri:
+#   TEK parite gunu  -> one-variable (Planet Scale)  , dev olcekli dogal afet, 8 sn
+#   CIFT parite gunu -> flythrough                   , gercek gok cismine FPV dalis, 15 sn
+#
+# Olcum (REELYZE-RAPOR.md EK 8): one-variable 2/2 tuttu (1.060 ve 1.676 izlenme,
+# kanal medyani 104), flythrough part 1 dort videonun en hizli ivmesini yapti
+# (4,4 saatte 431 izlenme, IG'de 30 begeni). Elenen ucuncu konsept (infinite-places)
+# 77 izlenmede kaldi ve BU HATTA GIRMEZ.
+#
+# Ihsan'in gerekcesi: "Iki konsepti de ayni kanalda paylasarak iki farkli izleyici
+# kitlesini cekmis olacagiz. Ilerleyen gunlerde duruma bakariz."
+#
+# NEDEN TEK WORKFLOW:
+#   1. Alternasyon tek yerde tanimli. Iki ayri cron dosyasi paritesi kayarsa ayni gun
+#      iki video cikar ya da hic cikmaz; burada o imkansiz.
+#   2. GitHub Actions cron'u "gun asiri" ifade edemez. '*/2' AYIN GUNUDUR ve 31 cekan
+#      aylarda pariteyi ters cevirir. Epoch gun sayaci (1970'ten beri gecen gun)
+#      boyle bir kaymaya sahip degildir.
+#   3. series_runner'in gunde-1 KANAL kilidi (upload_profile basina) ikinci guvenlik
+#      katmani olarak altta durmaya devam eder.
+#
+# one-variable.yml ve (varsa) flythrough'un kendi workflow'u KAPALI KALIR. Onlarin
+# cron'unu acmak bu hatta CIFT YAYIN demektir.
+#
+# publish_mode iki seride de "auto": onay beklemeden yayinlanir. QC acik ve
+# block_degraded_publish=true, yani bozuk teslimat yayina cikamaz.
+# Doktrin kapisi: kosu basinda SHA-256 loglanir, pin tutmazsa fail-closed durur.
+
+on:
+  schedule:
+    # 16:30 UTC , galactic kanalinin tarihsel yayin penceresi (event-horizon'dan bosaldi).
+    # GitHub cron'u bu filoda ~1,5 saate kadar gecikebiliyor, bu normaldir.
+    - cron: '30 16 * * *'
+  workflow_dispatch:
+    inputs:
+      serit:
+        description: 'Elle kosuda hangi serit uretilsin (bos = gun paritesi karar verir)'
+        required: false
+        type: choice
+        default: ''
+        options:
+          - ''
+          - one-variable
+          - flythrough
+
+concurrency:
+  group: kie-uretim
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          EPISODE_CREDIT_CAP=900
+          MONTHLY_CREDIT_CAP=60000
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Bugunun seridini sec
+        id: sec
+        shell: bash
+        run: |
+          set -euo pipefail
+          ELLE="${{ github.event.inputs.serit }}"
+          if [ -n "$ELLE" ]; then
+            SERIT="$ELLE"
+            SEBEP="elle secildi (workflow_dispatch)"
+          else
+            # Epoch gun sayaci: 1970-01-01'den beri gecen TAM gun. Her gun bir artar,
+            # ay ve yil sinirlarinda kaymaz. Ayin gunu (%d) ile yapilan '*/2' hilesi
+            # 31 cekan aylarda pariteyi ters cevirirdi.
+            GUN=$(( $(date -u +%s) / 86400 ))
+            if [ $(( GUN % 2 )) -eq 1 ]; then
+              SERIT="one-variable"
+            else
+              SERIT="flythrough"
+            fi
+            SEBEP="epoch gun $GUN, parite $(( GUN % 2 ))"
+          fi
+          echo "serit=$SERIT" >> "$GITHUB_OUTPUT"
+          echo "🎬 Bugunun seridi: $SERIT  ($SEBEP)"
+
+      - name: Kosu baslangicini damgala
+        # last_run.json'un outcome'u BU KOSUDA dogrulanmis YouTube yayinina bakar.
+        # Damga olmadan dunku bir yayin kaydi bugunku sessizligi orter.
+        run: echo "KOSU_BASLANGIC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+
+      - name: Onay kuyrugunu isle (Telegram)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        # shell: bash = pipefail. Bu satir olmadan `| tee` python'un exit kodunu yutuyor.
+        shell: bash
+        run: |
+          python -X utf8 -m series.approver --series "${{ steps.sec.outputs.serit }}" 2>&1 \
+            | tee "logs/${{ steps.sec.outputs.serit }}_approve.log"
+
+      - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolum planlari yazar, kredi harcamaz)
+        # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum varsa o gunun
+        # yayini iptal olmasin; adim yine KIRMIZI gorunur.
+        shell: bash
+        continue-on-error: true
+        run: |
+          python -X utf8 -m series.replenish --series "${{ steps.sec.outputs.serit }}" 2>&1 \
+            | tee "logs/${{ steps.sec.outputs.serit }}_replenish.log"
+
+      - name: Produce + publish (bugunun seridi)
+        id: produce
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          python -X utf8 -m series.series_runner --series "${{ steps.sec.outputs.serit }}" 2>&1 \
+            | tee "logs/${{ steps.sec.outputs.serit }}_run.log"
+
+      - name: Uretim sonucunu kaydet
+        if: always()
+        shell: bash
+        run: |
+          # Sonuc adimin cikis kodundan DEGIL, gercek YouTube yayin kanitindan turetilir.
+          # Eski hali sifir video ureten kosuya 'success' yaziyordu (event-horizon dersi).
+          SERIT="${{ steps.sec.outputs.serit }}"
+          python -X utf8 scripts/kosu_sonucu_yaz.py \
+            --out "galactic_experience/$SERIT/last_run.json" \
+            --run-id "${{ github.run_id }}" \
+            --raw-outcome "${{ steps.produce.outcome }}" \
+            --since "$KOSU_BASLANGIC" \
+            --published-json "galactic_experience/$SERIT/published.json"
+
+      - name: Persist series state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: galactic gunluk durumu ilerlet [skip ci]" \
+            galactic_experience/ credits_ledger.json
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: galactic-daily-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+      - name: Basarisizlikta Telegram'a haber ver
+        if: failure()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl --silent --max-time 20 --request POST \
+              "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=🚨 Galactic Daily (${{ steps.sec.outputs.serit }}) workflow basarisiz , bu kanala bugun video CIKMAYABILIR: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              >/dev/null 2>&1 || true
+          fi

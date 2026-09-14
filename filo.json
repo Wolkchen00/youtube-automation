@@ -7,7 +7,7 @@
   "sunum": "olculemiyor: insan doldurmali",
   "durum": "aktif",
   "dahil_et": true,
-  "kaynak_notu": "cron 2026-09-01'de panonun KENDİ YAML ayrıştırıcısıyla (filo_kayit._schedule_cikar) ölçüldü: 16 workflow'un 7'si zamanlı. DÜZELTME 1: ilk sürüm naif bir regex kullanmış ve yorum satırındaki cron'ları gerçek sanarak 16 cron yazmıştı; denetim bunu 9 hayalet cron olarak DOĞRU biçimde yakaladı. DÜZELTME 2: \"7 cron, routines.json'daki 7 kayıtla birebir tutuyor\" diye yazmıştım , YANLIŞ. Sayılar eşit ama kümeler değil: analytics.yml İKİ kez kayıtlı (yt_analytics + yt_analytics_snapshot), next-stop.yml ise HİÇ kayıtlı değil. Denetim bunu `kayitsiz_cron: 1` olarak doğru raporluyor; routines.json'a yazmak ISSUES C6 ile KILL edilmiş, karar İhsan'ın. README yok; eleme/model/sunum türetilemedi. Zamanlaması yorumda olan 9 workflow: cleanup.yml, could-you-survive.yml, drowned-history.yml, footnotes.yml, night-archive.yml, planetfall.yml, series-approve.yml, series.yml, time-witness.yml. GÜNCELLEME 2026-09-11: cron listesi yeniden ölçüldü (19 workflow, 7 zamanlı). from-scratch, next-stop ve unnatural-lab çıkarıldı (schedule yorumda); fear-slide, fear-slide-hazır ve gunluk-beyin eklendi (etkin cron). the_unfinished kanalı core/analytics.py CHANNELS'a girdi (UCQtDZzk66Um8Oz5er8AsV1A). GÜNCELLEME 2026-09-12 (İhsan kararı): galacticexperimet kanalının konsepti rafa kaldırıldı, `event-horizon.yml` cron'u yoruma alındı ve bu listeden ÇIKARILDI, seri paused. Gerekçe ölçülmüş: 30 günlük medyan 88,5 izlenme / 140 abone / 199 video. Arşiv: galactic_experience/_surumler/2026-09-12_event-horizon-rafta/. Kanal yeni konseptle yazılacak; şerit geri açılınca bu kayıt da geri eklenmeli. AYNI GÜN cron envanteri baştan ölçüldü (19 workflow'un YAML'ı ayrıştırıldı): fear-slide ve fear-slide-hazır kartta duruyordu ama schedule blokları yorumda, yani AImagine otomasyonu donmuş , çıkarıldı. Buna karşılık wild-encounter (18:30 UTC, sentinal_ihsan'ın yeni şeridi) ve tek seferlik fear-deneme-yayin (13-14 Eylül 16:39 UTC) kartta HİÇ yoktu , eklendi. Etkin cron: 6. GUNCELLEME 2026-09-13 (Ihsan karari): shadowedhistory kanalinin TARIH konsepti arsive kaldirildi, flashpoints.yml cron u yoruma alindi ve bu listeden CIKARILDI, dort seri paused. Gerekce olculmus: gunluk beyin defterinde 15 videonun medyani 24 izlenme, aralik 0-1.179. Arsiv: _arsiv/shadowedhistory_2026-09-13/. Yerine gelecek temali ANLATIMSIZ still-home serisi kuruldu (shadowedhistory/still-home), status=draft ve still-home.yml cron u YORUMDA: Ihsan KONSEPT.md v1.0 i onaylayinca 20:30 UTC slotuyla acilacak ve bu listeye eklenmeli. Etkin cron: 5. AYNI GUN CANLIYA ALINDI: Ihsan KONSEPT.md v1.0 i onayladi (\"tamam bunu paylasalim\"), still-home status=active + publish_mode=auto, still-home.yml cron u 20:30 UTC de ACILDI ve bu listeye eklendi. Part 1 (ISTANBUL 2512) elle yayinlandi, 3/3 platform. NOT: cron sayisi bu notta SABIT YAZILMIYOR, ayni gun baska seritler de eklendi; guncel liste asagidaki cron dizisidir.",
+  "kaynak_notu": "cron 2026-09-01'de panonun KENDİ YAML ayrıştırıcısıyla (filo_kayit._schedule_cikar) ölçüldü: 16 workflow'un 7'si zamanlı. DÜZELTME 1: ilk sürüm naif bir regex kullanmış ve yorum satırındaki cron'ları gerçek sanarak 16 cron yazmıştı; denetim bunu 9 hayalet cron olarak DOĞRU biçimde yakaladı. DÜZELTME 2: \"7 cron, routines.json'daki 7 kayıtla birebir tutuyor\" diye yazmıştım , YANLIŞ. Sayılar eşit ama kümeler değil: analytics.yml İKİ kez kayıtlı (yt_analytics + yt_analytics_snapshot), next-stop.yml ise HİÇ kayıtlı değil. Denetim bunu `kayitsiz_cron: 1` olarak doğru raporluyor; routines.json'a yazmak ISSUES C6 ile KILL edilmiş, karar İhsan'ın. README yok; eleme/model/sunum türetilemedi. Zamanlaması yorumda olan 9 workflow: cleanup.yml, could-you-survive.yml, drowned-history.yml, footnotes.yml, night-archive.yml, planetfall.yml, series-approve.yml, series.yml, time-witness.yml. GÜNCELLEME 2026-09-11: cron listesi yeniden ölçüldü (19 workflow, 7 zamanlı). from-scratch, next-stop ve unnatural-lab çıkarıldı (schedule yorumda); fear-slide, fear-slide-hazır ve gunluk-beyin eklendi (etkin cron). the_unfinished kanalı core/analytics.py CHANNELS'a girdi (UCQtDZzk66Um8Oz5er8AsV1A). GÜNCELLEME 2026-09-12 (İhsan kararı): galacticexperimet kanalının konsepti rafa kaldırıldı, `event-horizon.yml` cron'u yoruma alındı ve bu listeden ÇIKARILDI, seri paused. Gerekçe ölçülmüş: 30 günlük medyan 88,5 izlenme / 140 abone / 199 video. Arşiv: galactic_experience/_surumler/2026-09-12_event-horizon-rafta/. Kanal yeni konseptle yazılacak; şerit geri açılınca bu kayıt da geri eklenmeli. AYNI GÜN cron envanteri baştan ölçüldü (19 workflow'un YAML'ı ayrıştırıldı): fear-slide ve fear-slide-hazır kartta duruyordu ama schedule blokları yorumda, yani AImagine otomasyonu donmuş , çıkarıldı. Buna karşılık wild-encounter (18:30 UTC, sentinal_ihsan'ın yeni şeridi) ve tek seferlik fear-deneme-yayin (13-14 Eylül 16:39 UTC) kartta HİÇ yoktu , eklendi. Etkin cron: 6. GUNCELLEME 2026-09-13 (Ihsan karari): shadowedhistory kanalinin TARIH konsepti arsive kaldirildi, flashpoints.yml cron u yoruma alindi ve bu listeden CIKARILDI, dort seri paused. Gerekce olculmus: gunluk beyin defterinde 15 videonun medyani 24 izlenme, aralik 0-1.179. Arsiv: _arsiv/shadowedhistory_2026-09-13/. Yerine gelecek temali ANLATIMSIZ still-home serisi kuruldu (shadowedhistory/still-home), status=draft ve still-home.yml cron u YORUMDA: Ihsan KONSEPT.md v1.0 i onaylayinca 20:30 UTC slotuyla acilacak ve bu listeye eklenmeli. Etkin cron: 5. AYNI GUN CANLIYA ALINDI: Ihsan KONSEPT.md v1.0 i onayladi (\"tamam bunu paylasalim\"), still-home status=active + publish_mode=auto, still-home.yml cron u 20:30 UTC de ACILDI ve bu listeye eklendi. Part 1 (ISTANBUL 2512) elle yayinlandi, 3/3 platform. NOT: cron sayisi bu notta SABIT YAZILMIYOR, ayni gun baska seritler de eklendi; guncel liste asagidaki cron dizisidir. GUNCELLEME 2026-09-14 (Ihsan karari): galacticexperimet konsept bake-off'u BITTI. Uc adaydan ikisi secildi ve kanal yeniden yayina alindi: one-variable (dogal afet antolojisi, 8 sn) ve flythrough (gercek gok cismine FPV dalis, 15 sn). Ikisi ayni kanalda GUN ASIRI yayinlanir ve tek bir workflow'dan surulur: galactic-daily.yml, 16:30 UTC, epoch gun paritesi. Iki serinin de status=active ve publish_mode=auto. Elenen ucuncu aday infinite-places (77 izlenme) draft kaldi ve hicbir cron'a bagli degil. Tek seferlik konsept-testi-yayin.yml GitHub'da 'disabled_manually' yapildi ve bu listeden CIKARILDI: son cron'u 14 Eylul 22:00 UTC'de Saturn videosunu IKINCI KEZ yayinlayacakti, o video 16:16'da elle cikmisti. Etkin cron: bu listenin uzunlugu.",
   "cron": [
     {
       "gh_repo": "Wolkchen00/youtube-automation",
@@ -37,23 +37,21 @@
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",
+      "gh_workflow_path": ".github/workflows/galactic-daily.yml",
+      "gh_workflow_name": "Galactic Daily (iki serit, gun asiri)",
+      "cron_ifadeleri_utc": [
+        "30 16 * * *"
+      ],
+      "beklenen_aralik_saat": 24,
+      "not": "galacticexperimet kanalinin TEK yayin hatti. Her gun kosar, epoch gun paritesine gore serit secer: TEK gun one-variable (dogal afet, 8 sn), CIFT gun flythrough (gok cismine FPV dalis, 15 sn). Gunde bir video cikar, iki serit degil. one-variable.yml cron'u KAPALI kalir, acilirsa cift yayin olur."
+    },
+    {
+      "gh_repo": "Wolkchen00/youtube-automation",
       "gh_workflow_path": ".github/workflows/gunluk-beyin.yml",
       "gh_workflow_name": "Gunluk Beyin",
       "cron_ifadeleri_utc": [
         "30 5 * * *"
       ]
-    },
-    {
-      "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/konsept-testi-yayin.yml",
-      "gh_workflow_name": "Konsept Testi Yayin (uc hazir video, 12 saat arayla)",
-      "cron_ifadeleri_utc": [
-        "0 22 13 9 *",
-        "0 10 14 9 *",
-        "0 22 14 9 *"
-      ],
-      "beklenen_aralik_saat": 12,
-      "not": "Tek seferlik: 13 ve 14 Eylul 2026. Uc konsept adayini 12 saat arayla yayinlar. Deneme bitince workflow silinir."
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",

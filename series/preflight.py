@@ -119,9 +119,14 @@ def inspect(slug: str, plan_path: str | Path) -> tuple[list[str], list[dict]]:
             errors.append("plan doctrine_sha256 damgası güncel doktrinle eşleşmiyor")
 
     cfg = meta.auto_replenish
-    errors.extend(f"cfg: {error}" for error in validate_replenish_config(cfg))
+    # Gecerli cekim sureleri motora bagli (Omni 4/6/8/10, Seedance 4-15), motor bible'da.
+    engine = bible.engine if bible else None
+    errors.extend(f"cfg: {error}" for error in validate_replenish_config(cfg, engine=engine))
     if strict_plan_validation_enabled(cfg):
-        errors.extend(f"plan/cfg: {error}" for error in validate_plan_against_config(plan, cfg))
+        errors.extend(
+            f"plan/cfg: {error}"
+            for error in validate_plan_against_config(plan, cfg, engine=engine)
+        )
     if "chain_breaks" in cfg and not bible.chain_frames:
         errors.append("cfg: chain_breaks için bible.series.chain_frames=true olmalı")
     unknown_layers = set(bible.required_layers) - {

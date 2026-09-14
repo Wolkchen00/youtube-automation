@@ -21,10 +21,13 @@ name: One Variable Daily
 # kie-uretim concurrency grubu hatlari fiilen serilestirir.
 
 on:
-  # KAPALI. series.json status='draft' ve Ihsan KONSEPT.md v2.0'i henuz onaylamadi.
-  # Acma sirasi series.json icindeki 'kurulum_notu' alaninda yazili.
-  # Acilinca slot 16:30 UTC olacak (galactic kanalinin tarihsel yayin penceresi,
-  # event-horizon'dan bosaldi).
+  # ⛔ BU CRON BIR DAHA ACILMAZ , 14 Eylul 2026.
+  # Bu serit artik .github/workflows/galactic-daily.yml tarafindan surulur: o hat
+  # gun asiri one-variable ile flythrough arasinda gecis yapar. Buradaki schedule'i
+  # acmak ayni kanala AYNI GUN IKI VIDEO demektir (galactic-daily zaten 16:30'da
+  # kosuyor). series_runner'in gunde-1 kanal kilidi ikinciyi muhtemelen durdurur ama
+  # ona guvenilmez: kilit yalniz YAYINI engeller, URETIM krediyi zaten harcamis olur.
+  # Bu dosya yalniz ELLE tek bolum uretmek icin durur.
   # schedule:
   #   - cron: '30 16 * * *'
   workflow_dispatch:

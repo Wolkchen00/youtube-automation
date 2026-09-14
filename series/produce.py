@@ -1586,7 +1586,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     from .replenish import strict_plan_validation_enabled, validate_plan_against_config
     strict_plan = strict_plan_validation_enabled(cfg)
     if strict_plan:
-        cfg_errors = validate_plan_against_config(plan, cfg)
+        cfg_errors = validate_plan_against_config(plan, cfg, engine=bible.engine)
         if "chain_breaks" in cfg and not bible.chain_frames:
             cfg_errors.append("chain_breaks için bible.series.chain_frames=true olmalı")
         if cfg_errors:

@@ -153,6 +153,15 @@ DEFAULT_MIN_QUEUE = 2
 DEFAULT_SHOTS = 4          # bölüm başına çekim
 DEFAULT_SHOT_SECONDS = "8" # çekim süresi (motor enum'u: 4/6/8/10)
 VALID_DURATIONS = ("4", "6", "8", "10")
+# Seedance 2.0 tek cekimde 4-15 sn uretir (core/kie_api.py:494 dur = max(4, min(15, dur))).
+# Omni enum'u 4/6/8/10 ile sinirli (core/env.py:63). Sure dogrulamasi motora gore secilir;
+# motor bilinmiyorsa Omni listesi kullanilir, yani eski davranis korunur.
+SEEDANCE_VALID_DURATIONS = tuple(str(value) for value in range(4, 16))
+
+
+def valid_durations(engine: str | None = None) -> tuple[str, ...]:
+    """O motorun kabul ettigi cekim sureleri."""
+    return SEEDANCE_VALID_DURATIONS if (engine or "").strip().lower() == "seedance" else VALID_DURATIONS
 
 
 def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
@@ -189,7 +198,7 @@ def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
     return compiled
 
 
-def validate_replenish_config(cfg: dict) -> list[str]:
+def validate_replenish_config(cfg: dict, engine: str | None = None) -> list[str]:
     """Oto-ikmal yapılandırmasını Gemini çağrısından önce doğrula."""
     errors: list[str] = []
     try:
@@ -218,8 +227,9 @@ def validate_replenish_config(cfg: dict) -> list[str]:
         errors.append("shots 1..6 aralığında tam sayı olmalı")
     if any(key in cfg for key in fixedframe_keys):
         duration = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
-        if duration not in VALID_DURATIONS:
-            errors.append("shot_seconds 4/6/8/10 değerlerinden biri olmalı")
+        allowed = valid_durations(engine)
+        if duration not in allowed:
+            errors.append(f"shot_seconds {'/'.join(allowed)} değerlerinden biri olmalı")
 
     if "chain_breaks" in cfg:
         breaks = cfg.get("chain_breaks")
@@ -358,13 +368,17 @@ def _prompt_content(prompt, shot_plan_prefix: str | None = None) -> str:
     return content
 
 
-def validate_plan_against_config(plan: dict, cfg: dict) -> list[str]:
-    """Strict, non-normalizing plan validation used by replenish/produce/preflight."""
-    errors = list(validate_replenish_config(cfg))
+def validate_plan_against_config(plan: dict, cfg: dict, engine: str | None = None) -> list[str]:
+    """Strict, non-normalizing plan validation used by replenish/produce/preflight.
+
+    ``engine`` gecerli cekim surelerini secer (Omni 4/6/8/10, Seedance 4-15).
+    Verilmezse Omni listesi kullanilir, yani eski davranis korunur."""
+    errors = list(validate_replenish_config(cfg, engine=engine))
     if errors or not strict_plan_validation_enabled(cfg):
         return errors
     shots_expected = int(cfg.get("shots", DEFAULT_SHOTS))
     duration_expected = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
+    _allowed_durations = valid_durations(engine)
     format_version = str(cfg.get("format_version") or "").strip()
     if format_version and plan.get("format_version") != format_version:
         errors.append(f"plan format_version tam {format_version!r} olmalı")
@@ -708,7 +722,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
     single_shot = shots == 1
     shot_word = "shot" if single_shot else "shots"
     sec = str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip()
-    if sec not in VALID_DURATIONS:
+    if sec not in valid_durations(bible.engine):
         sec = DEFAULT_SHOT_SECONDS
     end = start + batch - 1
 
@@ -1254,7 +1268,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         return [f"'episodes' tam {batch} bölüm olmalı (gelen: {got})"]
 
     cfg = cfg or {}
-    cfg_errors = validate_replenish_config(cfg)
+    cfg_errors = validate_replenish_config(cfg, engine=bible.engine)
     if cfg_errors:
         return [f"auto_replenish cfg: {error}" for error in cfg_errors]
     if "chain_breaks" in cfg and not bible.chain_frames:
@@ -1467,9 +1481,10 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     dur = str(int(float(str(shot.get("duration", "")).strip() or "0")))
                 except (TypeError, ValueError):
                     dur = ""
-                if dur not in VALID_DURATIONS:
+                allowed_dur = valid_durations(bible.engine)
+                if dur not in allowed_dur:
                     errors.append(f"part {want} çekim {k}: süre {shot.get('duration')!r} "
-                                  f"geçersiz (4/6/8/10 olmalı)")
+                                  f"geçersiz ({'/'.join(allowed_dur)} olmalı)")
                 if strict_chain and dur != str(cfg.get("shot_seconds", DEFAULT_SHOT_SECONDS)).strip():
                     errors.append(
                         f"part {want} çekim {shot_number}: süre tam "
@@ -1706,7 +1721,7 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
         episodes[i] = normalized
 
         if strict_plan_validation_enabled(cfg):
-            for error in validate_plan_against_config(normalized, cfg):
+            for error in validate_plan_against_config(normalized, cfg, engine=bible.engine):
                 surfaced = f"part {want}: {error}"
                 if surfaced not in errors:
                     errors.append(surfaced)
@@ -2014,16 +2029,18 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
     cfg = meta.auto_replenish
     if not cfg:
         return True   # opt-in değil ,  dokunma
-    cfg_errors = validate_replenish_config(cfg)
+    # Bible cfg dogrulamasindan ONCE yuklenir: gecerli cekim sureleri motora bagli
+    # (Omni 4/6/8/10, Seedance 4-15) ve motor yalniz bible'da yazili.
+    bible = Bible.load(slug)
+    if not bible:
+        logger.warning(f"⚠️ {slug}: bible.json yok ,  ikmal atlandı.")
+        return True
+    cfg_errors = validate_replenish_config(cfg, engine=bible.engine)
     if cfg_errors:
         logger.error(f"❌ HATA {slug}: auto_replenish cfg geçersiz: {'; '.join(cfg_errors)}")
         return False
     if meta.status not in ("active", "completed"):
         logger.info(f"⏸️ {slug}: status={meta.status} (insan kararı) ,  ikmal yapılmaz.")
-        return True
-    bible = Bible.load(slug)
-    if not bible:
-        logger.warning(f"⚠️ {slug}: bible.json yok ,  ikmal atlandı.")
         return True
 
     adopted = _adopt_orphans(meta)

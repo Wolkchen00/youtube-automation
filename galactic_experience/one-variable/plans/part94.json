@@ -1,0 +1,22 @@
+{
+  "episode": {
+    "number": 94,
+    "title": "A Wave Taller Than the Copacabana Skyline"
+  },
+  "synopsis": "A single, colossal tsunami wave stands impossibly high along the entire length of Rio de Janeiro's iconic Copacabana beach, its crest towering above the beachfront skyscrapers before crashing.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of Copacabana beach in Rio de Janeiro, Brazil, and an impossibly tall, perfect tsunami wave already at maximum strength and maximum extent, its crest towering above the beachfront high-rise buildings. Only its visible physical consequence develops through seconds 1-5, as the colossal wave holds its impossible height, and delivers a decisive payoff during seconds 6-8 as it begins to break and crash onto the shore. The beachfront towers of Copacabana stay in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows a single impact event: the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8 with the thunderous roar of collapsing water. The camera is fixed in a high-aerial position, capturing the entire sweep of the bay and the impending impact.",
+      "seed": null
+    }
+  ],
+  "family": "su afeti",
+  "seed_id": 1,
+  "caption": "A colossal tsunami wave looms over the iconic Copacabana shoreline in Rio de Janeiro, Brazil.\n\nThis impossible wave is over 200 meters tall, its crest dwarfing the tallest beachfront buildings along the entire 4-kilometer stretch.\n\nReal tsunami waves rarely exceed 30 meters on impact; the 2004 Indian Ocean tsunami reached up to 30 meters on Sumatra's coast, but most tsunamis are barely noticeable in the deep ocean.\n\nSuch a wave would require an immense, instantaneous displacement of ocean mass far beyond any known geological event. The energy needed to sustain its height against gravity and hydrodynamic forces is unfathomable, requiring a scale of energy release the Earth cannot produce.\n\nThis is a simulation, not real footage.\n\nCould any geological force generate this much energy at once?",
+  "hashtags": "#Tsunami #Copacabana #RioDeJaneiro #Oceanography #CoastalDisaster #Simulation #Hydrodynamics",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}
