@@ -1,0 +1,35 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "This GIANT POLAR BEAR Is NOT Real"
+  },
+  "synopsis": "On a minimal studio water set, a colossal polar bear takes a performer into its mouth, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS TAKE, NO CUTS. A built film set reads immediately: bare studio concrete around a shallow island of sand and earth with a few scattered rocks, a tall blue screen wall with pale blue cross tracking markers behind it, a wide overhead grid of white diffusion softboxes above, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera pushes in slowly from the wide establishing frame toward the action throughout, in one unbroken take.\n\nA colossal polar bear, its fur thick and creamy white, with rough, textured skin under the fur, deep black eyes, massive blunt teeth, and standing 6 meters tall, faces Ihsan on the minimal ocean_tank_set. The giant polar bear's jaws open wide, slowly engulfing Ihsan entirely within its mouth. Crew members quickly move into position, placing their hands firmly on the polar bear's head and lower jaw, then manually pushing its articulated jaws wide open. In the final seconds, Ihsan climbs out onto the set floor, showing himself completely unharmed. Ambient sound only: footsteps on wet concrete, the hum of studio equipment, and crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant polar bear",
+    "descriptor": "A colossal polar bear, its fur thick and creamy white, with rough, textured skin under the fur, deep black eyes, massive blunt teeth, and standing 6 meters tall.",
+    "environment": "ocean_tank_set",
+    "framing": "The camera executes a slow, continuous push-in, starting from a wide view of the polar bear and Ihsan on the water set, moving steadily toward the unfolding action.",
+    "anomaly_descriptor": "Crew members rush in, placing their hands firmly on the polar bear's head and lower jaw, then manually pushing its articulated jaws wide open."
+  },
+  "family": "mammal-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/1fCQfHkX/ep09-giant-polar-bear.png"
+  ],
+  "ref_prompt_sha256": "adcffc043cfa9d7682299c6621af5746fceeba4eedcb902d758d00d5d3a4f31b"
+}

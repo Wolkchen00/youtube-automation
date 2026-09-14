@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "This GIANT SQUID Is NOT Real"
+  },
+  "synopsis": "On a minimal studio water set, a colossal squid takes a performer into its beak, then the crew force its practical beak open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS TAKE, NO CUTS. A built film set reads immediately: bare studio concrete around a shallow island of sand and earth with a few scattered rocks, a tall blue screen wall with pale blue cross tracking markers behind it, a wide overhead grid of white diffusion softboxes above, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera pushes in slowly from the wide establishing frame toward the action throughout, in one unbroken take.\n\nA colossal Humboldt squid, its skin a shimmering reddish-brown with white spots, smooth and firm to the touch, large luminous green eyes, a powerful chitinous beak, and extending 12 meters in length, faces Ihsan on the minimal ocean_tank_set. The giant squid's beak opens wide, taking Ihsan completely out of sight inside its mouth. Crew members, wearing specialized gloves, carefully grip the squid's head and lower mantle, applying leverage to manually force its beak open. In the final seconds, Ihsan climbs out onto the set floor, showing himself completely unharmed. Ambient sound only: splashing water, studio ventilation, and crew activity.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant squid",
+    "descriptor": "A colossal Humboldt squid, its skin a shimmering reddish-brown with white spots, smooth and firm to the touch, large luminous green eyes, a powerful chitinous beak, and extending 12 meters in length.",
+    "environment": "ocean_tank_set",
+    "framing": "The camera initiates a slow, continuous push-in, from a wide establishing shot of the squid and Ihsan in the ocean tank, progressively nearing the central event.",
+    "anomaly_descriptor": "Crew members, wearing specialized gloves, carefully grip the squid's head and lower mantle, applying leverage to manually force its beak open."
+  },
+  "family": "sea-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

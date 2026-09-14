@@ -11,8 +11,8 @@
     "tiktok"
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
-  "total_parts": 11,
-  "next_part": 9,
+  "total_parts": 13,
+  "next_part": 10,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -53,8 +53,8 @@
     "title_style": "a punchy English Shorts title in exactly this pattern: 'This <ANIMAL> Is NOT Real' or 'This GIANT <ANIMAL> Is NOT Real', where the animal name may be one or two words, for example 'This GIANT CROCODILE Is NOT Real' or 'This GIANT PRAYING MANTIS Is NOT Real'. Every word before 'Is' is in CAPS. Max 60 characters, the validator rejects 61 and above. No hashtags, no surrounding quotes, no emoji in the title field.",
     "brief": "SERI: bir film setinde dev, gercekci bir yaratik performans sanatcisini (Ihsan) agzina alir; ekip cenesini elleriyle acar ve Ihsan yara almadan cikar. Yaratigin pratik efekt oldugu son saniyelerde anlasilir. HEPSI TEK KESINTISIZ CEKIMDE OLUR. Kaynak: sentinal_ihsan/wild-encounter/DOKTRIN.md, GUNCEL FORMAT bolumu; olcum dayanagi sentinal_ihsan/wild-encounter/REFERANS-AYUSH-ANALIZ.md. >>> CIKTI DILI: bu brief TURKCEDIR ama URETTIGIN HER SEY INGILIZCEDIR: baslik, sinopsis ve cekim promptu Ingilizce yazilir. <<< DEGISMEZ KURALLAR: (1) ANLATIM VE MUZIK YOKTUR. Voiceover yok, konusma yok, muzik yok. Ses setin kendi sesidir. Cekim promptunda 'speaking', 'talking', 'explaining', 'narrating' GECMEZ. Cekim promptu olumlu bir ses cumlesiyle biter, ornek: 'Ambient sound only: footsteps on sand, studio air handling and crew movement.' (2) TEK DEV YARATIK, GERCEKCI, pratik efekt. Donusum yok, birlesme yok, iki hayvan yok. Izleyicinin TANIDIGI gercek bir hayvan secilir ve cenesi bir insani alacak kadar buyuk olur. Uydurma yaratik (ejderha, canavar) SECILMEZ: olculdu, tutmuyor. (3) TEK CEKIM, UC VURUS AYNI CEKIMDE, SIRASI DEGISMEZ: tehdit, agza alinma, ekibin ceneyi acmasi ve cikis. Cekim promptu shot_plan'daki metinle HARFI HARFINE baslar, ardindan bos satir ve o bolumun ayrintisi gelir. Ifsa son saniyelere aittir. (4) IHSAN SAHNENIN ICINDE: yuzu ve govdesi net, KAMERAYA BAKMAZ, yaratiga ya da ekibe bakar. Kadrajda TEK Ihsan olur. (5) KIYAFET SETE GORE degisir (col setinde saha gomlegi, su tankinda dalgic ustu); degismeyen sey adamin kendisidir. (6) OLCEK: yaratik buyuk ve yakin, kadrajin buyuk kismini doldurur. (7) SET: MINIMAL kurulmus dekor ve MAVI perde. Zeminde studyo betonu GORUNUR, uzerinde sig bir kum/toprak adasi, birkac kaya, bir kutuk, seyrek ot. Arkada izleme isaretli MAVI perde, kenarda siyahli ekip, en onde kamera operatorlerinin sirti, dolly rayi ve kablolar. Isik tepedeki genis beyaz difuzyon izgarasindan gelir. HAVA TEMIZDIR: sis, duman ve pus YASAK (olculdu: sis kaybeden videolarda var, kazananlarda yok). Yesil perde YOK. Yogun bitki ortusu YOK. (8) SURE: TEK cekim, 10 saniye. (9) KAMERA: tek kesintisiz elde/gimbal plan; genis kurulus kadrajindan yakina dogru YAVAS PUSH-IN. Kesme, gecis, sahne degisimi YOK. (10) EKRANA YAZI YOK. (11) GUVENLIK: kan, yaralanma, hayvana eziyet yok; gerilim olcekten ve yutulma anindan gelir. (12) AILE: her bolum 'family' alanindaki kanonik listeden BIR aile secer ve ardisik iki bolum ayni aileyi KULLANAMAZ.",
     "last_run": {
-      "at": "2026-09-11T22:01:18.992321+00:00",
-      "parts": "7-11"
+      "at": "2026-09-14T22:00:29.777552+00:00",
+      "parts": "9-13"
     },
     "required_characters": [
       "ihsan_field"
@@ -154,6 +154,48 @@
         "tiktok"
       ],
       "published_at": "2026-09-13T20:42:29.237531+00:00"
+    },
+    "9": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep09/ep09_mastered.mp4",
+      "subtitle": "This GIANT POLAR BEAR Is NOT Real",
+      "stack_sha256": "5c7add9c2d40caaa516c4ef0ba8f73f9d180ebf02fca8442b5d40c11d6ca9064",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part9",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "wuuu02K2hPc",
+          "video_sha256": "c1c6d182e9505950739ae05d129625d92ef87c5466b3746f92c27342cde901a3",
+          "ts": "2026-09-14T22:05:01.376759+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18068318912495676",
+          "video_sha256": "c1c6d182e9505950739ae05d129625d92ef87c5466b3746f92c27342cde901a3",
+          "ts": "2026-09-14T22:06:48.671485+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7685515816200195341",
+          "video_sha256": "c1c6d182e9505950739ae05d129625d92ef87c5466b3746f92c27342cde901a3",
+          "ts": "2026-09-14T22:07:58.041171+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-14T22:07:58.042923+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.01,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."

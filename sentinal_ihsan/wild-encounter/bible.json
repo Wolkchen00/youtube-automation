@@ -89,7 +89,8 @@
     {
       "id": "ocean_tank_set",
       "desc": "A minimal built water set inside a film studio: bare studio concrete around a shallow water tank dressed with a few dark wet rocks and a little kelp, a tall blue screen wall with pale blue cross tracking markers rising behind it, and a wide overhead grid of white diffusion softboxes reflecting on the still surface. The air is clear.",
-      "ref_image_url": null
+      "ref_image_url": "https://i.ibb.co/1JYnCh6Y/ocean-tank-set.png",
+      "ref_prompt_sha256": "5195b0b6c8296ad679d7551026208f3e92c774aa20260272d47b790c1cb1a3a1"
     },
     {
       "id": "desert_ruins_set",

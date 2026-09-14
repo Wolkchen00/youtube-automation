@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "This GIANT KOMODO DRAGON Is NOT Real"
+  },
+  "synopsis": "On a minimal studio jungle set, a colossal komodo dragon takes a performer into its mouth, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS TAKE, NO CUTS. A built film set reads immediately: bare studio concrete around a shallow island of sand and earth with a few scattered rocks, a tall blue screen wall with pale blue cross tracking markers behind it, a wide overhead grid of white diffusion softboxes above, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera pushes in slowly from the wide establishing frame toward the action throughout, in one unbroken take.\n\nA colossal Komodo dragon, its scales a rough grey-brown, leathery and textured skin, beady black eyes, serrated powerful teeth, and standing 3 meters tall, faces Ihsan on the minimal jungle_set. The giant Komodo dragon's jaws open wide, slowly engulfing Ihsan entirely within its mouth. Crew members rush in, gripping the Komodo dragon's head and lower jaw, then manually prying its articulated jaws apart. In the final seconds, Ihsan climbs out onto the set floor, showing himself completely unharmed. Ambient sound only: soft studio noises, faint rustling, and crew positioning.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant komodo dragon",
+    "descriptor": "A colossal Komodo dragon, its scales a rough grey-brown, leathery and textured skin, beady black eyes, serrated powerful teeth, and standing 3 meters tall.",
+    "environment": "jungle_set",
+    "framing": "The camera executes a slow, continuous push-in, from a wide frame encompassing the komodo dragon and Ihsan on the jungle set, drawing closer to the point of focus.",
+    "anomaly_descriptor": "Crew members rush in, gripping the komodo dragon's head and lower jaw, then manually prying its articulated jaws apart."
+  },
+  "family": "reptile",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

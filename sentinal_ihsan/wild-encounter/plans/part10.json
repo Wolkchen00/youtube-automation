@@ -1,0 +1,31 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "This GIANT OWL Is NOT Real"
+  },
+  "synopsis": "On a minimal studio jungle set, a colossal owl takes a performer into its beak, then the crew force its practical beak open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS TAKE, NO CUTS. A built film set reads immediately: bare studio concrete around a shallow island of sand and earth with a few scattered rocks, a tall blue screen wall with pale blue cross tracking markers behind it, a wide overhead grid of white diffusion softboxes above, and the backs of camera operators with their rigs in the foreground. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera pushes in slowly from the wide establishing frame toward the action throughout, in one unbroken take.\n\nA colossal great horned owl, its feathers a mottled brown and grey with dark stripes, soft and downy skin visible around its face, large golden-yellow eyes, a sharp, curved dark beak, and standing 4 meters tall, faces Ihsan on the minimal jungle_set. The giant owl's beak opens, taking Ihsan completely out of sight inside its mouth. Crew members quickly surround the owl's head, positioning their hands on its upper and lower beak to manually pry them apart. In the final seconds, Ihsan climbs out onto the set floor, showing himself completely unharmed. Ambient sound only: rustling of the minimal set foliage, studio air handling, and crew shuffling.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ]
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant owl",
+    "descriptor": "A colossal great horned owl, its feathers a mottled brown and grey with dark stripes, soft and downy skin visible around its face, large golden-yellow eyes, a sharp, curved dark beak, and standing 4 meters tall.",
+    "environment": "jungle_set",
+    "framing": "The camera performs a slow, continuous push-in, beginning with a wide shot of the owl and Ihsan on the jungle set, gradually tightening on their interaction.",
+    "anomaly_descriptor": "Crew members quickly surround the owl's head, positioning their hands on its upper and lower beak to manually pry them apart."
+  },
+  "family": "bird-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}
