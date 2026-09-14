@@ -7,13 +7,13 @@ DURATION: 15
 NEON: acid green
 PALET: neon
 TITLE_KEYWORD: Sydney
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a cool night with a low sea cloud drifting across the harbour
 SOURCE: bulut gecisi konsepti, iki ikon ayni kadrajda
 
 ## OPENING STATE
 
-The rider stands barefoot on the summit walkway at the top of the steel arch of the Sydney Harbour Bridge in Sydney, at night. The weather is a cool night with a low sea cloud drifting across the harbour. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. The riveted steel of the arch runs away under her feet on both sides. Ahead and below, a low sheet of sea cloud drifts across the harbour and the white shells of the Sydney Opera House stand lit just beyond the near edge of it. Far ahead on the walkway, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous acid green strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot on the summit walkway at the top of the steel arch of the Sydney Harbour Bridge in Sydney, at night. The weather is a cool night with a low sea cloud drifting across the harbour. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. The riveted steel of the arch runs away under her feet on both sides. Ahead and below, a low sheet of sea cloud drifts across the harbour and the white shells of the Sydney Opera House stand lit just beyond the near edge of it. Far ahead on the walkway, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous acid green strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

@@ -7,13 +7,13 @@ DURATION: 15
 NEON: deep indigo
 PALET: neon
 TITLE_KEYWORD: Hong Kong
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a humid night with sea fog rolling in off the harbour
 SOURCE: bulut gecisi konsepti, deniz sisi kolu
 
 ## OPENING STATE
 
-The rider stands barefoot on a narrow open ledge at the very top of the ICC tower in Hong Kong, at night. The weather is a humid night with sea fog rolling in off the harbour. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Below her the harbour is half swallowed: a thick bank of sea fog lies on the water and the towers of the island across it stand up out of the fog in a wall of coloured light. Far ahead on the ledge, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous deep indigo strip, running off the ledge and down toward the fog. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot on a narrow open ledge at the very top of the ICC tower in Hong Kong, at night. The weather is a humid night with sea fog rolling in off the harbour. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Below her the harbour is half swallowed: a thick bank of sea fog lies on the water and the towers of the island across it stand up out of the fog in a wall of coloured light. Far ahead on the ledge, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous deep indigo strip, running off the ledge and down toward the fog. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

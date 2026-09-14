@@ -7,13 +7,13 @@ DURATION: 15
 NEON: electric turquoise
 PALET: neon
 TITLE_KEYWORD: Marina
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a warm night with a low cloud bank drifting in off the bay
 SOURCE: bulut gecisi konseptinin ilk rotasi, taipei-bulut denemesinin devami
 
 ## OPENING STATE
 
-The rider stands barefoot on the outer lip of the long boat-shaped roof deck laid across the three towers of the Marina Bay Sands in Singapore, at night. The weather is a warm night with a low cloud bank drifting in off the bay. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge there is no ground at all: a flat white cloud bank lies below her, and the lit towers of the financial district push up through it. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous electric turquoise strip. It runs off the deck edge and down into the cloud. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot on the outer lip of the long boat-shaped roof deck laid across the three towers of the Marina Bay Sands in Singapore, at night. The weather is a warm night with a low cloud bank drifting in off the bay. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Beyond the deck edge there is no ground at all: a flat white cloud bank lies below her, and the lit towers of the financial district push up through it. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous electric turquoise strip. It runs off the deck edge and down into the cloud. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

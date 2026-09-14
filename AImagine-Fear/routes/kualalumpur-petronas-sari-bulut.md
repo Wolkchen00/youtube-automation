@@ -7,13 +7,13 @@ DURATION: 15
 NEON: electric yellow
 PALET: neon
 TITLE_KEYWORD: Petronas
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a warm monsoon night with fine rain and low cloud caught between the towers
 SOURCE: bulut gecisi konsepti, ikinci rota
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer end of the open steel skybridge that joins the two Petronas Towers in Kuala Lumpur, at night. The weather is a warm monsoon night with fine rain and low cloud caught between the towers. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. On both sides of her the two ribbed steel towers rise out of the top of the frame and drop out of the bottom of it, lit silver-white all the way down. Between them, directly under her feet, a wedge of grey cloud sits trapped in the gap and hides the street. Far ahead on the bridge, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous electric yellow strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer end of the open steel skybridge that joins the two Petronas Towers in Kuala Lumpur, at night. The weather is a warm monsoon night with fine rain and low cloud caught between the towers. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. On both sides of her the two ribbed steel towers rise out of the top of the frame and drop out of the bottom of it, lit silver-white all the way down. Between them, directly under her feet, a wedge of grey cloud sits trapped in the gap and hides the street. Far ahead on the bridge, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous electric yellow strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

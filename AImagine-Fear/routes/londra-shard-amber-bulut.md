@@ -7,13 +7,13 @@ DURATION: 15
 NEON: ember orange
 PALET: sicak
 TITLE_KEYWORD: Shard
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: cold drizzle with a low cloud ceiling sitting on the river
 SOURCE: bulut gecisi konsepti, sicak palet kolu
 
 ## OPENING STATE
 
-The rider stands barefoot on the open steel platform at the broken glass tip of the Shard in London, at night. The weather is cold drizzle with a low cloud ceiling sitting on the river. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. She is above the weather: a flat grey cloud ceiling lies under her feet from one edge of the frame to the other, and only the dark silhouettes of the tallest towers push up through it. Nothing of the city is visible yet. Far ahead on the platform, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ember orange strip, running off the platform edge and down into the grey. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot on the open steel platform at the broken glass tip of the Shard in London, at night. The weather is cold drizzle with a low cloud ceiling sitting on the river. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. She is above the weather: a flat grey cloud ceiling lies under her feet from one edge of the frame to the other, and only the dark silhouettes of the tallest towers push up through it. Nothing of the city is visible yet. Far ahead on the platform, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ember orange strip, running off the platform edge and down into the grey. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 
