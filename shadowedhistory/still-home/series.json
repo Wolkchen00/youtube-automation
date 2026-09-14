@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 5,
-  "next_part": 2,
+  "next_part": 3,
   "doctrine_sha256": "1acbf65d04b9fd85b0252e6626d897d6a48bf0dbd4b30ea9b176baeecfb0fc56",
   "kurulum_notu": "13 Eylul 2026'da kuruldu (flashpoints'in yerine) ve AYNI GUN CANLIYA ALINDI. Ihsan karari: 'tamam bunu paylasalim, yeni pipeline bunu yerlestirelim, her gun yeni bir populer sehir olsun'. Ilk bolum ISTANBUL 2512 elle yayinlandi, sonrasi still-home.yml 20:30 UTC cron'una birakildi. publish_mode=auto, canli gunluk seridin (wild-encounter) filo gelenegiyle ayni. Durdurmak icin: status='paused' + still-home.yml schedule blogunu yorumla.",
   "auto_replenish": {
@@ -271,6 +271,27 @@
         "tiktok"
       ],
       "published_at": "2026-09-13T20:49:04.311086+00:00"
+    },
+    "2": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/still-home/episodes/ep02/ep02_music_titled_mastered.mp4",
+      "subtitle": "New York Lifted Its Streets Above The Sea",
+      "stack_sha256": "bd4602786f4eea758b2b0bfa1986deedaa54a2d2843312b70883b8c3d47a77e5",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-14T23:26:29.524134+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   }
 }
