@@ -84,7 +84,8 @@
     {
       "id": "jungle_set",
       "desc": "A minimal built set inside a film studio: bare studio concrete around a shallow island of dry earth and leaf litter with a few scattered rocks, one bare log and sparse dry grass, a tall blue screen wall with pale blue cross tracking markers rising behind it, and a wide overhead grid of white diffusion softboxes lighting the stage. The air is clear.",
-      "ref_image_url": null
+      "ref_image_url": "https://i.ibb.co/4RbS0NDY/jungle-set.png",
+      "ref_prompt_sha256": "768cb3a013f489ad36b98cb266bf2a2a9e96f20106234b97a5e645dcb337daf8"
     },
     {
       "id": "ocean_tank_set",
