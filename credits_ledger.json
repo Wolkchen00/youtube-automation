@@ -1191,6 +1191,14 @@
       "reserved": 984,
       "actual": 0,
       "ts": "2026-09-15T23:03:20.576422+00:00"
+    },
+    {
+      "month": "2026-09",
+      "series": "still-home",
+      "part": 3,
+      "reserved": 900,
+      "actual": 269.0,
+      "ts": "2026-09-15T23:08:15.755308+00:00"
     }
   ],
   "episode_spend": {
@@ -1207,6 +1215,7 @@
     "unnatural-lab:32": 596.0,
     "unnatural-lab:33": 932.0,
     "wild-encounter:1": 1239.0,
+    "wild-encounter:10": 16.0,
     "wild-encounter:2": 84.0,
     "wild-encounter:3": 84.0,
     "wild-encounter:4": 210.0,
@@ -1214,7 +1223,6 @@
     "wild-encounter:6": 436.0,
     "wild-encounter:7": 533.0,
     "wild-encounter:8": 142.0,
-    "wild-encounter:9": 142.0,
-    "wild-encounter:10": 16.0
+    "wild-encounter:9": 142.0
   }
 }

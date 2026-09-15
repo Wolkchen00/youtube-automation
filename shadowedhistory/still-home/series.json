@@ -292,6 +292,13 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "3": {
+      "status": "qc_retry",
+      "first_held_at": "2026-09-15T23:13:31.670990+00:00",
+      "retry_count": 1,
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "üretim nedeni bilinmiyor"
     }
   }
 }
