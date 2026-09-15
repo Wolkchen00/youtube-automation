@@ -1,4 +1,4 @@
-# aimagine-fear , ASKIDA
+# still-home , ASKIDA
 
 **Bu kanalin beyni acik uclu , elle kaldirilana kadar tarihine kadar askiya alindi.**
 
@@ -18,7 +18,7 @@ yol gosterici degildir; kor uygularsan yeni konsepti eskisine benzetirsin.
 Askiyi kaldirmak icin:
 
 ```
-python beyin.py devam aimagine-fear
+python beyin.py devam still-home
 ```
 
-_Askiya alindi: 2026-09-15 23:07_
+_Askiya alindi: 2026-09-15 23:08_

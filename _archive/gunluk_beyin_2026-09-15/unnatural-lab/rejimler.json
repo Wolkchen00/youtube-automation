@@ -1,0 +1,29 @@
+{
+  "60ccabd4": {
+    "alanlar": {
+      "bible.aspect_ratio": "9:16",
+      "bible.audio_smooth": true,
+      "bible.duration_band": [
+        14,
+        41
+      ],
+      "bible.hook_teaser": {
+        "duration": 1.2,
+        "enabled": false,
+        "offset_in_shot": 1.4
+      },
+      "bible.master_lufs": -14,
+      "bible.micro_trim": 0.25,
+      "bible.music": true,
+      "bible.resolution": "1080p",
+      "cfg.narration": {
+        "max_words": 28,
+        "min_words": 20
+      },
+      "cfg.shot_seconds": "6",
+      "cfg.shots": 4,
+      "cfg.title_style": "a punchy English YouTube Shorts title using ONE of these THREE patterns only, never invent a new one: (1) 'Something Is WRONG With This <OBJECT>' — first-thing-you-noticed bait; (2) 'This <OBJECT> <impossible action, 2-4 words, present tense>!' — a concrete claim that the clip visibly proves; use an exact number ONLY if the viewer can count it on screen; (3) 'Why Won't This <OBJECT> <expected behavior>?' — a question form inviting answers. Put the OBJECT and one or two key words in CAPS. Max 75 characters. Never use the words 'AI' or 'real or fake'. No hashtags, no surrounding quotes, no emoji in the title field."
+    },
+    "ilk_gorulme": "2026-09-11T03:49:25.883905+00:00"
+  }
+}

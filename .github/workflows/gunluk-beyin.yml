@@ -16,9 +16,19 @@ name: Gunluk Beyin
 # 2026-09-10'dan beri herkese 404/500 veriyor (MrBeast ve Google dahil), bu
 # yuzden YOUTUBE_API_KEY secret'i bu kosu icin ZORUNLU.
 
+# ⛔ DONDURULDU , Ihsan karari, 15 Eylul 2026.
+# Gunluk cron KAPATILDI: "bosuna is yuku, gerekirse elle calistiririm".
+# Dort kanalin dordu de `beyin.py askiya-al ... --kadar acik` ile ASKIDA;
+# askidaki kanalda olc/topla/beyin komutlari hicbir sey yapmaz.
+# Kanal verisinin o gunku kopyasi: _archive/gunluk_beyin_2026-09-15/
+#
+# Yeniden acmak icin: asagidaki `schedule` blogunun yorumunu kaldir VE
+# ilgili kanali `python beyin.py devam <kanal>` ile askidan cikar.
+# Elle calistirmak icin cron'a dokunmadan Actions > Gunluk Beyin > Run workflow.
+
 on:
-  schedule:
-    - cron: '30 5 * * *'
+  # schedule:
+  #   - cron: '30 5 * * *'
   workflow_dispatch:
     inputs:
       kanal:
@@ -30,7 +40,7 @@ on:
           - ''
           - unnatural-lab
           - event-horizon
-          - flashpoints
+          - still-home
           - aimagine-fear
       limit:
         description: RSS'ten kac video taransin
@@ -94,7 +104,7 @@ jobs:
           if [ -n "${KANAL}" ]; then
             KANALLAR="${KANAL}"
           else
-            KANALLAR="unnatural-lab event-horizon flashpoints aimagine-fear"
+            KANALLAR="unnatural-lab event-horizon still-home aimagine-fear"
           fi
 
           basarisiz=""

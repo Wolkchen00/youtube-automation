@@ -1,8 +1,8 @@
-# aimagine-fear , ASKIDA
+# unnatural-lab , ASKIDA
 
 **Bu kanalin beyni acik uclu , elle kaldirilana kadar tarihine kadar askiya alindi.**
 
-Sebep: Ihsan karari 2026-09-15: gunluk beyin DONDURULDU (bosuna is yuku). Cron kapatildi, gerekirse elle calistirilacak; kanal verisi _archive/gunluk_beyin_2026-09-15/ altina kopyalandi.
+Sebep: Konsept arsive kaldirildi (Ihsan, 11 Eylul 2026); kanal beyin listesinden cikarilana kadar acik uclu aski
 
 ## Bu dosyada bugun icin YON YOKTUR
 
@@ -18,7 +18,7 @@ yol gosterici degildir; kor uygularsan yeni konsepti eskisine benzetirsin.
 Askiyi kaldirmak icin:
 
 ```
-python beyin.py devam aimagine-fear
+python beyin.py devam unnatural-lab
 ```
 
-_Askiya alindi: 2026-09-15 23:07_
+_Askiya alindi: 2026-09-11 22:07_
