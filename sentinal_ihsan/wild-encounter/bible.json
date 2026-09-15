@@ -9,6 +9,8 @@
     "aspect_ratio": "9:16",
     "resolution": "1080p",
     "master_lufs": -14,
+    "fps": 24,
+    "fps_note": "2026-09-15 EKLENDI. Alan yokken boru hatti 30 fps'e cikariyordu. Yayindaki ep09 olculdu: 300 kare / 10,01 sn, mpdecimate 242 benzersiz kare birakti, yani 58 kare (%19,3) KOPYA. Kie kaynagi 24 fps uretiyor; 24 yazmak kaynagin kadansini korur. Referans hesap da 11/11 24 fps (REFERANS-AYUSH-ANALIZ.md). Ayni duzeltme still-home'da zaten yapilmisti.",
     "engine": "omni",
     "chain_frames": false,
     "chain_scope": "episode",

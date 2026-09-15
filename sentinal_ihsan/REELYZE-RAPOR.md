@@ -484,3 +484,530 @@ Kacinilacak (olculdu, bu hesabin kendi dususu):
 - raselranaai'nin video icerigi (indirilmedi, sadece sayac olculdu)
 - YouTube hesaplarinin gercekten ayni kisilere ait oldugu DOGRULANMADI;
   isim benzerligine dayaniyor.
+
+---
+
+# 12 Eylul 2026 , 2M begenili referansin olcumu (Db6U9BbBa1k)
+
+Istek: Ihsan bu videoyu verdi, "cok kaliteli, 2M like almis, sentinalihsan
+icin uygulanabilir mi" dedi.
+Yontem: giris yapmis IG oturum cerezi ile yt-dlp, ffmpeg/ffprobe, EBU R128,
+faster-whisper (VAD), kare kare goz.
+
+## 1. BULGU 1: bu video doktrinimizin ucuncu referansinin AYNISI DEGIL, RAKIBI
+
+Ayni sahne, ayni format, iki ayri video. Ikisini de indirip olctum.
+
+| | **Db6U9BbBa1k** (Ihsan'in verdigi) | **DdEArj4BMrV** (doktrin referans 3) |
+|---|---|---|
+| Hesap | @drkelsofficial | @motionsbysubh.ai |
+| Tarih | 11 Agustos 2026 | 10 Eylul 2026 |
+| **Begeni** | **2.035.670** | **78** |
+| Yorum | 13.854 | 5 |
+| Uretim | beyan yok, `#animatronic` | caption'da yazili: **Seedance 2.5 / Syntx AI** |
+| Cozunurluk | 720x1280, 24 fps | 1080x1920, 30 fps |
+| Sure | 15,05 sn | 15,10 sn |
+| Kesme (esik 0,30) | 0 | 0 |
+| Kesme (esik 0,20) | **0** | 1 |
+| Kesme (esik 0,10) | **0** | **25** |
+| LUFS | -15,1 | -15,2 |
+| True peak | -0,1 dBTP | +0,6 dBTP (kirpiyor) |
+| **LRA** | **16,0** | 10,3 |
+| Konusma | 1 seslenme (asagida) | 0 kelime |
+| Filigran | yok | her karede SYNTX.AI |
+
+Ayni sahneyi, ayni sureyi, daha yuksek cozunurlukle kopyalayan AI versiyonu
+**78 begeni** aldi. 2 milyonluk olan teknik olarak daha DUSUK: 720p, 24 fps.
+
+Bu, filonun AImagine-Fear dersinin ikinci bagimsiz kaniti:
+**teknik duzeltme hit uretmez.**
+
+### Doktrine duzeltme
+
+`DOKTRIN.md` ve `bible.json:format_note`, DdEArj4BMrV'yi "720x1280, 15,18 sn"
+diye kaydediyor. **Yanlis.** O olcum anonim yt-dlp'nin verdigi dusuk rendition'di.
+Giris yapmis cerezle gercek rendition **1080x1920, 30 fps** cikiyor.
+Ayni sebeple "0 kesme" de yanlis: 0,10 esiginde 25 kesme adayi var, yani o video
+zincirlenmis. Hedef video ise 0,10 esiginde bile **0** veriyor, gercekten tek plan.
+
+## 2. Vurus zaman cizelgesi (kare + RMS olcumu)
+
+| Zaman | Vurus | Ses (RMS) |
+|---|---|---|
+| 0,0-0,6 sn | Sessizlige yakin acilis, **set seslenmesi** | -48 dB -> -29 dB |
+| 0,6-4,5 sn | Tehdit: kafa arkada yukselir, cene acilir, kadin donuk, yuzu KAMERAYA DONUK | ~-24 dB |
+| 4,5-6,0 sn | Yutulma: cene kapanir, kafa kameranin onunden gecer | **-9,2 dB tepe** |
+| 6,0-10,5 sn | **OLU VURUS: yaratik durur, kadin kadrajda YOK, ekip bakar** | **-29 ila -35 dB** |
+| 10,5-15,0 sn | Ifsa: ekip kafanin tabanindaki **DIKDORTGEN KAPAGI** acar, kadini cikarir | -22 ila -28 dB |
+
+Toplam ses salinimi ~26 dB. Bizim ep06'mizin LRA'si 9,1, bu videonunki 16,0.
+
+**Konusma:** 0,00-0,56 sn arasi tek seslenme var. Whisper "Action!" okuyor.
+Ham dosyada kelime guveni 0,44; ilk 1,2 saniyeyi +12 dB yukseltip tekrar
+kosunca no_speech 0,06'ya dustu, kelime guveni 0,59'a cikti. Yani **seslenme
+kesin var**, metnin "Action" oldugu yuksek olasilikli ama kesin degil.
+Bu anlatim DEGIL, setin kendi sesi. Kural 1'i ihlal etmez.
+
+## 3. Bizim ep06 ile yan yana
+
+| Olcum | 2M referans | ep06 (bizim) | ref3 (78 begeni) |
+|---|---|---|---|
+| Sure | **15,05 sn** | 22,87 sn | 15,10 sn |
+| Kesme | 0 (0,10 esiginde de) | 1 | 25 (0,10 esiginde) |
+| Cozunurluk | 720x1280 / 24 fps | 1080x1920 / 30 fps | 1080x1920 / 30 fps |
+| LUFS | -15,1 | -14,5 | -15,2 |
+| True peak | -0,1 | **-1,3 (en iyisi bizde)** | +0,6 |
+| **LRA** | **16,0** | 9,1 | 10,3 |
+| Acilis yuzu | kameraya donuk, korku okunur | **PROFILDEN**, ekip siluetleri onde | kameraya donuk |
+| Fon | siyah duvak + beyaz yansitici | **parlak yesil perde** | orman dekoru + yesil |
+| Kiyafet | sade siyah tisort, gri esofman, sirilsiklam | haki macera gomlegi | Lara Croft tarzi kostum |
+| Cikis yolu | **kafa tabaninda kapak** | agizdan | agizdan |
+| Bitis duygusu | **sarsilmis, nefes nefese, ekip kollarindan tutuyor** | alkis + gulumseme | alkis + cakistirma |
+
+## 4. Sekiz maddelik skor karti , 2M referans
+
+Madde 1, 3, 5, 8 insan yargisi (olcutler.md notu).
+
+1. Ilk kare: yuz + hareket + arkada yaratik, ucu birden. **1**
+2. Acilis "problemi" adlandiriyor mu: gorsel olarak evet, "bu kadin yutulacak". **1**
+3. Ekran yazisi: **YOK. 0**
+4. Vaat: 3. saniyede ne alacagini biliyorsun (yutulacak, sonra ifsa). **1**
+5. Tempo: 0 kesme ama olay surekli ilerliyor, anomali pattern interrupt goruyor. **1**
+6. Ses: muzik yok, ilk seslenme 0,3 sn'de, diegetik ses tam dinamikte. **1**
+7. Aciklama metni: "shout out to our super stars" , videoda olmayan bir sey
+   katiyor (ekibi ovuyor) ama net eylem yok. **0**
+8. Odul: 15 saniye boyunca kaydirmak istemedim; olu vurus merak uretiyor. **1**
+
+**6/8. Yayinlanabilir uste.** Kaybettigi iki madde ekran yazisi ve CTA.
+Bizim doktrinimiz zaten ekran yazisini yasakliyor (kural 11), yani o madde
+bilincli bir kayip. 371.000 begenili Burj Khalifa da yazisiz gelmisti.
+
+## 5. UYGULANABILIR , en degerliden en ucuza
+
+Her madde icin: ne olculdu, motorda nereye dokunur, ne kadar kesin.
+
+### A. OLU VURUS'a zaman ve SESSIZLIK ver (en buyuk eksik, en ucuz)
+
+Olculen: 6,0-10,5 sn arasi 4,5 saniye boyunca yaratik durur, kadin kadrajda
+yoktur, ses 25 dB DUSER. Merak tam burada uretiliyor.
+Bizim `shot_plan` 2. maddesi bunu zaten yaziyor ("the creature settles with the
+man nowhere in frame") ama sure vermiyor ve mastering sessizligi duzlestiriyor.
+Dokunulacak yer: `series.json auto_replenish.shot_plan[2]` + mastering zinciri.
+Kesinlik: yapisal olarak olculdu, etkisi test edilmedi.
+
+### B. Ses dinamigini KORU (LRA 16,0 vs 9,1)
+
+Olculen: referansin salinimi 26 dB, bizimki dar. -14 LUFS hedefi dogru, sorun
+hedef degil, sessiz bolumun sikistirilmasi.
+Dokunulacak yer: `master_audio` limiter/kompresor ayari. Bunu kod tarafinda
+DOGRULAMADIM, sadece ciktinin LRA'sini olctum. Once olcum, sonra degisiklik.
+
+### C. Acilisa diegetik set seslenmesi
+
+Olculen: 0,0-0,56 sn, sessizlige yakin kare uzerine tek seslenme.
+"Bu gercek bir cekim" sinyalini bedavaya veriyor.
+UYARI: QC'de `native_audio_review` acik ve ep01'de tam da "ham native seste
+istenmeyen konusma var" diye RED verdi. Bu maddeyi eklersen QC notunu AYNI ANDA
+guncellemen sart. Doktrinin kendi 3. dersi bu.
+
+### D. Yuzu KAMERAYA DONDUR (bakis degil, yon)
+
+Olculen: referansta ilk karede yuz kameraya donuk ve korku okunuyor.
+ep06'da Ihsan profilden ve ekip siluetlerinin arkasinda.
+`characters[0].bio` "kameraya degil yaratiga ya da ekibe bakar" diyor. Bu kalsin.
+Eklenecek: **govde ve yuz kadraja donuk olsun, goz merceye bakmasin.**
+Kesinlik: iki referansin ikisinde de var (2M ve 78'lik), yani format kurali,
+performans ayirt edicisi degil. Yine de bizde EKSIK.
+
+### E. Sure ve cekim sayisi , KARAR SENIN
+
+Olculen: tutan uc referansin ucu de 15,0-15,2 sn. Bizim ep06 22,87 sn.
+`bible.json:duration_note` senin 26 sn kararini kaydediyor, gerekce "uc vurus
+24 saniye gerektiriyor".
+**Bu gerekce olcumle curudu:** 2M referans DORT vurusu (tehdit, yutulma,
+olu vurus, ifsa) 15,05 saniyede yapiyor. Yani uc vurus 24 saniye gerektirmiyor.
+Onerim 2x8 = ~15-16 sn. Ama bu senin verdigin karardi, degistirmeden sormam gerek.
+
+### F. A/B testine ACIK, kural yapma (n cok kucuk)
+
+Bu uclu 2M ile 78 arasinda ayrisiyor ama tek ornek cifti. Kural yazma, test et:
+
+- **Siyah duvak vs yesil perde.** 2M'de fon siyah duvak + beyaz yansitici.
+  Ama 4,4M'lik DckORL2B8gx'te yesil perde VAR (TERSINE-MUHENDISLIK bolum 6).
+  Yani yesil perde diskalifiye degil. Degisken olarak isaretle.
+- **Sade kiyafet vs kostum.** 2M'de islak sade tisort + esofman. 78'lik ve
+  bizim ep06'da kostum. Hipotez: kostum kurguya benziyor, sade kiyafet belgeye.
+- **Sarsilmis bitis vs alkisli bitis.** 2M'de kadin nefes nefese, ekip kollarindan
+  tutuyor, gulumseme YOK. 78'lik ve bizim ep06'da alkis ve cakistirma var.
+- **Kapaktan cikis vs agizdan cikis.** 2M'de ekip kafanin tabanindaki dikdortgen
+  kapagi aciyor. Doktrin kural 6 "cikis agizdan" diyor ve bu kural **78 begenili
+  videodan** turetildi. Giris agizdan kalmali, cikis tartismali.
+
+### G. Cozunurluge para harcama (teyit)
+
+2M'lik video 720x1280 / 24 fps. Bizimki 1080x1920 / 30 fps. Ayrica bizim true
+peak'imiz (-1,3) ucunun de en iyisi. Teknik kalemde onlerindeyiz ve fark bu degil.
+
+## 6. Olculemedi
+
+- **Izlenme sayisi.** Sadece begeni ve yorum geldi. TERSINE-MUHENDISLIK bolum 0
+  bu hesaplarda begeniden izlenme turetmenin gecersiz oldugunu olctu (%0,55 ile
+  %3,66 arasi, 6,6 kat oynuyor). **Tahmin yazmadim.**
+- **Videonun AI mi gercek mi oldugu.** Caption `#animatronic` diyor ve ekibi
+  ovuyor. 15,05 saniyelik, 0,10 esiginde bile kesmesiz tek plan, tutarli su
+  fizigi ve mekanik olarak makul bir kapak var. Degerlendirmem (olcum degil):
+  bugunku video modelleri icin bu zor, gercek set kaydi olma ihtimali yuksek.
+  **Dogrulayamadim.** Onemi su: gercekse dokusunun bir kismi kopyalanamaz.
+- **@drkelsofficial'in diger gonderileri.** yt-dlp profil listelemesi hata verdi,
+  hesabin tek isabet mi yoksa surekli mi ustledigi bilinmiyor.
+- **Retention.** Hesap bizim degil.
+
+## 7. BUGUNE DAIR OPERASYON UYARISI
+
+Bu rapor 12 Eylul 10:22 PDT'de yazildi. `wild-encounter.yml` bugun 11:30 PDT'de
+ep07'yi otomatik yayinlayacak.
+
+**DOKTRIN.md'ye bugun kosudan ONCE dokunma.** Doktrin damgasi degisince kuyruktaki
+part07-11 bayatlar ve uretim "legacy plan doktrin damgasi guncel doktrinle
+eslesmiyor" diyerek fail-closed durur. Bugun yayin cikmaz.
+
+Dogru sira: ep07 ciksin, olculsun, sonra degisiklik, sonra
+`python -m series.replenish --series wild-encounter` ile kuyruk yeniden yazilsin.
+
+---
+
+# 12 Eylul 2026, ikinci ekleme , UCUNCU ORNEK ANALIZI DEGISTIRDI (DcFKOMIql0L)
+
+Ihsan ikinci bir ornek verdi. Olctum ve **yukaridaki 5. bolumun oncelik siralamasi
+gecersiz kaldi.** Uc ornek yan yana gelince hangi degiskenin ayirt ettigi degisti.
+
+## 1. Uc referans, tek tablo
+
+| | **Db6U9BbBa1k** | **DcFKOMIql0L** | **DdEArj4BMrV** |
+|---|---|---|---|
+| Hesap | @drkelsofficial | @dreamina_lumi1 | @motionsbysubh.ai |
+| Yayin | 11 Agu 2026 | 16 Agu 2026 | 10 Eyl 2026 |
+| **Begeni** | **2.035.670** | **23.167** | **78** |
+| Yorum | 13.854 | 303 | 5 |
+| Yas (olcum ani) | ~32 gun | ~27 gun | **~2 gun** |
+| Uretim | beyan yok, `#animatronic` | **Dreamina Seedance 2.5** (beyan) | Seedance 2.5 / Syntx AI (beyan) |
+| Cozunurluk | 720x1280 / 24 fps | 1080x1920 / 30 fps | 1080x1920 / 30 fps |
+| Sure | 15,05 sn | 10,05 sn | 15,10 sn |
+| **Kesme (esik 0,10)** | **0** | **0** | **25** |
+| LUFS | -15,1 | -14,7 | -15,2 |
+| True peak | -0,1 | +0,2 | +0,6 |
+| LRA | 16,0 | 8,5 | 10,3 |
+| **Set seslenmesi** | **"Action!" 0,00-0,56** | **"Action!" 0,00-0,58 + "Cut!" 8,08-8,59** | **YOK** |
+| Fon | siyah duvak | **cıplak MAVI perde** | kurulmus orman dekoru + sis |
+| Set malzemesi | su tanki | kum serit + tahta iskele + can simidi | yaprak, sarmasik, sis, tepe isigi |
+| Ifsa vurusu | kapaktan cikis | **YOK** | agizdan cikis |
+| Yuz | kameraya donuk | **yuzukoyun, yuz gorunmuyor** | kameraya donuk |
+| Filigran | yok | Dreamina reklam bindirmesi | SYNTX.AI |
+
+## 2. AYIRT EDEN UC DEGISKEN
+
+Iki kazanan ile kaybedeni ayiran, uc ornekte de tutarli olan UC sey var.
+
+### 1. Gercekten tek plan (kesintisiz)
+
+0,10 esiginde: 2M -> 0 kesme adayi, 23K -> 0, 78 -> **25**.
+Iki kazanan tek cekimde uretilmis. Kaybeden zincirlenmis ve yumusak birlestirilmis.
+23K'lik video 10,05 sn, yani tek Seedance uretimi. Yani **AI ile tek plan MUMKUN**,
+sure tek uretimi asmayinca.
+
+### 2. Diegetik set seslenmesi
+
+2M: "Action!" 0,00-0,56 sn. 23K: "Action!" 0,00-0,58 **ve "Cut!" 8,08-8,59**.
+78: sifir kelime.
+Ikisi de sessizlige yakin bir kareden aciliyor, uzerine tek seslenme biniyor
+(2M'de -48 dB -> -29 dB, 23K'de -43 dB -> -24 dB).
+
+Bu videonun kancasi. Ilk yarim saniyede "bu gercek bir cekim, kayit basliyor"
+diyor. Anlatim degil, setin kendi sesi. Doktrin kural 1'i ihlal etmez.
+**En ucuz ve en tekrarlanabilir madde bu.**
+
+### 3. CIPLAK CALISAN DUZENEK, atmosferik dekor DEGIL
+
+- 2M: siyah duvak, su tanki, beyaz yansitici. Dekor yok.
+- 23K: cıplak mavi perde, kum serit, bir tahta, bir can simidi. Dekor yok.
+- 78: sarmasik, yaprak, sis, tepeden atmosferik isik. **Dekor dolu.**
+
+Perdenin RENGI onemsiz: kazananlarda siyah ve mavi, TERSINE-MUHENDISLIK'teki
+4,4M'lik DckORL2B8gx'te yesil. Onemli olan **sis ve dekor giydirmesinin YOKLUGU**.
+
+Bu maddenin ikinci, bagimsiz destegi TERSINE-MUHENDISLIK bolum 6'da zaten var:
+motionsbysubh'un dusen videolarinda "yesil perde ve monitor YOK, ekip arka planda
+puslu; bir film karesi gibi duruyor" ve medyan 2.161'den 325'e dusmustu.
+Yani ayni desen hem hesaplar arasi hem hesap ici olculdu.
+
+**DOKTRIN KURAL 5 BU BULGUYLA TERS.** Kural su an "KURULMUS DEKOR, CIPLAK YESIL
+PERDE DEGIL. On planda gercek set malzemesi (yaprak, kaya, su, sis)" diyor ve
+kaynak olarak **78 begenili videoyu** gosteriyor. `art_style` de "practical haze"
+yani sis istiyor. Iki kazananda da sis ve dekor YOK.
+
+Ayrim sanirim su: **islevsel set malzemesi** (su tanki, kum, tahta) kaliyor,
+**atmosferik giydirme** (sarmasik, yaprak doseme, sis, kanopi isigi) gidiyor.
+
+## 3. AYIRT ETMEYEN degiskenler , yukaridaki 5. bolumu duzeltiyor
+
+Uc ornek gelince su maddeler ayirt edici OLMAKTAN CIKTI. Onceki bolumde
+fazla one koymustum.
+
+| Degisken | 2M | 23K | 78 | Ayirt ediyor mu |
+|---|---|---|---|---|
+| LRA (ses salinimi) | 16,0 | **8,5** | 10,3 | **HAYIR.** 23K bizim ep06'dan (9,1) bile dar |
+| True peak | -0,1 | +0,2 | +0,6 | HAYIR. Bizim -1,3 ucunun de en iyisi |
+| Cozunurluk | 720p | 1080p | 1080p | HAYIR |
+| Sure | 15,05 | 10,05 | 15,10 | HAYIR. 78'lik de 15 saniye |
+| Ifsa vurusu | var | **YOK** | var | HAYIR. 23K ifsasiz 23 bin aldi |
+| Yuz kameraya donuk | evet | **hayir** | evet | HAYIR. 23K'de kadin yuzukoyun |
+| Olu vurus | 4,5 sn | ~1,5 sn | yok | Zayif sinyal, sadece en buyukte belirgin |
+
+Yani onceki eklemedeki **B (ses dinamigi) ve D (yuz yonu) maddelerini geri
+aliyorum.** Olcum onlari desteklemiyor. A (olu vurus) sadece en buyuk ornekte
+belirgin, hipotez olarak kalsin, oncelik degil.
+
+## 4. ONEMLI CEKINCE: yas esit degil
+
+78 begenili video olcum aninda **~2 gunluk**, digerleri ~1 aylik.
+`olcutler.md` bolum 11 "karar genelde ilk 30-60 dakikada, basarisiz demeden once
+24-48 saat bekle" diyor; 48 saat sinirdayiz. Ayrica AImagine-Fear'da olculmus bir
+**gec atesleme** vakasi var (Burj Khalifa 21. saatte 1 izlenme, 44. saatte 1.568).
+
+78 ile 23.167 arasindaki fark yasla kapanacak kadar kucuk degil, ama sayiyi
+kesin hukum gibi kullanma. **Uc gun sonra DdEArj4BMrV'yi tekrar olc.**
+
+## 5. GUNCELLENMIS UYGULAMA SIRASI
+
+Once yapilacaklar (uc ornekte de tutarli, ucu de ucuz):
+
+1. **Acilisa "Action!" set seslenmesi.** Sessizlige yakin ilk kare, uzerine tek
+   seslenme. Istersen sona "Cut!" de eklenebilir (23K'de var).
+   UYARI: QC'de `native_audio_review` acik, ep01'de tam da bu sebeple RED verdi.
+   Kural degisirse QC notu AYNI ANDA degisecek. Doktrinin kendi 3. dersi.
+2. **Sis ve dekor giydirmesini kaldir.** `art_style` icindeki "practical haze"
+   ve `environments.jungle_set` icindeki "hanging vines, wet leaf litter,
+   low drifting haze" iki kazananda da yok. Islevsel malzeme kalsin
+   (su, kum, tahta, kaya), atmosferik giydirme ciksin.
+   Bu **DOKTRIN kural 5'i tersine cevirmek** demek, karar senin.
+3. **Cekim sayisini dusur, tek plan hissini koru.** Iki kazanan da 0,10 esiginde
+   0 kesme veriyor. Bizim ep06 22,87 sn ve 1 kesme. 23K'lik ornek tek uretimin
+   suresinde kalarak (10 sn) bunu bedavaya aliyor.
+
+Test edilecekler (tek ornek cifti, kural yapma):
+
+4. Sade kiyafet vs kostum (2M sade tisort+esofman, 23K mayo, 78 macera kostumu).
+5. Kapaktan cikis vs agizdan cikis (2M kapak, 78 agiz).
+6. Olu vurusa sure vermek (sadece 2M'de belirgin).
+
+Yapma:
+
+7. Cozunurluk, LUFS, true peak tarafina para ve zaman harcama. Uc olcumde de
+   performansla iliskisi yok ve bizim degerlerimiz zaten en iyisi.
+
+## 6. Ek gozlem: baslik kalibimiz zaten dogru tarafta
+
+23K'lik videonun basligi: "This Beach Shark Scene Looks Way Too Real".
+Bizim `title_style`: "This GIANT <ANIMAL> Is NOT Real".
+Ayni kalip, ters kutup. Degistirmeye gerek yok, ama "Looks Way Too Real"
+yonu de test edilebilir.
+
+## 7. Bu eklemede olculemedi
+
+- Uc hesabin izlenme sayilari (yalniz begeni ve yorum geldi; begeniden izlenme
+  turetmek TERSINE-MUHENDISLIK bolum 0'da gecersiz olctuldu).
+- DcFKOMIql0L'nin ifsasiz bitisinin retention'a etkisi.
+- Hesap boyutlari ve takipci sayilari (karsilastirma hesap olcegine gore
+  normalize EDILMEDI, bu tablonun en buyuk zayifligi).
+
+---
+
+# 15 Eylul 2026 , ep09 (dev kutup ayisi) olcumu + otomasyon denetimi
+
+Istek: "son video YouTube'da cok iyi izlendi, /reel-analiz DdSKzasgRsV, video
+hatali ama neyi dogru yaptik, otomasyon calisacak mi, kac gun konsept var".
+Yontem: yt-dlp ile IG kopyasi indirildi, ffprobe/ffmpeg + EBU R128 ile olculdu,
+7 ek kare (t=4,0 / 5,0 / 6,0 / 7,0 / 8,0 / 9,0 / 9,8) goz ile incelendi,
+izlenmeler canli watch sayfasindan cekildi, kosu loglari `gh run view` ile okundu.
+
+## 1. Kanal olcumu (15 Eylul, canli sayaclar)
+
+| Video | Format | sn | Izlenme | Begeni |
+|---|---|---|---|---|
+| `wuuu02K2hPc` GIANT POLAR BEAR | tek plan | 10 | **26.456** | 131 |
+| `mYUqbRjJoVs` GIANT ANACONDA | tek plan | 10 | **6.820** | 52 |
+| `TiJ8Uv7vhzs` GIANT CROCODILE | 3x8 | 23 | 3.857 | 29 |
+| `TO_SK8dIyLQ` GIANT OCTOPUS | 3x8 | 23 | 2.870 | 16 |
+| `Cs6gHuxf7A4` GIANT PRAYING MANTIS | 3x8 (kesik) | 23 | 296 | 4 |
+| `XNEw5jkObdw` LEMON BOUNCES | unnatural-lab | 17 | 1.541 | 17 |
+| `XzABOqtimVE` SOAP | unnatural-lab | 17 | 1.509 | 5 |
+| `3k7qal307DQ` PLASTIC BOTTLE | unnatural-lab | 22 | 1.164 | 9 |
+| `2scmbwTq4sQ` Burning Forest | , | 29 | 736 | 5 |
+| `bGN9DDrPUeQ` NAPKIN | unnatural-lab | 22 | 172 | 2 |
+
+- 10 sn TEK PLAN medyani: **16.638**. 23 sn 3x8 medyani: **2.870**. Oran **5,8 kat**.
+- ep09, kanalin tum zamanlarinin en iyisi ve daha ~1 gunluk.
+- TikTok'ta ayni video: **499 izlenme / 3 begeni**. Instagram olculemedi (hiz siniri).
+  Yani patlama YouTube'a ozel; tek platformdan kanal karari verme.
+- Orneklem tek plan tarafinda n=2. Yon guclu, kural degil.
+
+## 2. ep09 teknik olcumu (IG kopyasi `DdSKzasgRsV`)
+
+| Olcum | Deger | Esik | Sonuc |
+|---|---|---|---|
+| Cozunurluk | 1080x1920 | 1080x1920 | OK |
+| Sure | 10,01 sn | referans 11/11 = 10,01 | OK, birebir |
+| Sahne kesmesi | **0**, tek plan 10,01 sn | 0 | OK |
+| Integrated loudness | **-14,1 LUFS** | -16 ... -13 | OK |
+| True peak | **-2,0 dBTP** | <= -1,0 | OK |
+| LRA | 6,6 | ~4 | kabul |
+| Konusma | 0 kelime | anlatim yok | OK |
+| Kare hizi | **30 fps** | referans 24 | KUSUR, bkz 5.4 |
+
+## 3. NEYI DOGRU YAPTIK , kare kare dogrulandi
+
+REFERANS-AYUSH-ANALIZ.md'nin olctugu dort ayirt edici ozellikten ucu tam,
+biri yarim tuttu:
+
+- **(a) SIS YOK.** Yedi karenin yedisinde hava temiz, duman/pus yok. Kaybeden
+  referans videolarin ortak ozelligi olan sis bizde hic yok.
+- **(c) IFSA VAR VE GUCLU.** t=7,0'da ekip kosarak geliyor, t=9,0'da elleriyle
+  ceneyi aciyor, t=9,8'de Ihsan sag salim disarda. Referansin 675K'lik videosunu
+  kazandiran vurus bizde de videonun icinde veriliyor.
+- **(d) TANIDIK GERCEK HAYVAN.** Kutup ayisi. Uydurma yaratik degil.
+- **(b) TEMAS , YARIM.** Asagida 4. bolum.
+
+Gorsel gramerin tamami tuttu: mavi perde + acik mavi arti marker'lari, gorunur
+studyo betonu, sig kum adasi + birkac kaya + kutuk + seyrek ot, tavanda beyaz
+difuzyon izgarasi, koyu kiyafetli ekip ve on planda kamera operatorlerinin sirti,
+genis kadrajdan yakina yavas push-in, ekranda yazi yok, muzik yok, anlatim yok.
+Ses -14,1 LUFS ile filonun hedefinde.
+
+**Tek cumleyle: 10 saniye + tek plan + sifir kesme + temiz hava + tanidik hayvan +
+sondaki kurtarma karari dogru cikti. 3x8 formatindan tek plana gecis olculdu ve tuttu.**
+
+## 4. KUSURLAR , goz ile gorulen (kare kanit, olcum degil)
+
+1. **Yutulma vurusu eksik teslim edildi.** t=5,0'da Ihsan ayakta duruyor, sadece
+   bas/ust govde agizda; bacaklari ve govdesinin buyuk kismi kadrajda. Doktrin ve
+   QC notu "the man taken completely out of sight inside the mouth" diyor.
+   Referansin kazanan videolarinda kisi TAMAMEN kayboluyor. En pahali kusur bu.
+2. **Cikis suregi kopuk.** t=9,0'da ekip hala ceneyi acmaya calisirken Ihsan zaten
+   agzin onunde ayakta. "Icinden cikti" hareketi gosterilmiyor; adam sahnede yer
+   degistiriyor.
+3. **Anatomi kusurlari.** t=9,0'da cenenin etrafinda fazladan el/kol var, soldaki
+   ekip uyesinin kolu bozuk. QC bunu gormedi (`artifact_score` 0, `issues` bos).
+4. **Merceğe bakis.** t=9,8'de Ihsan gulumseyerek kameraya dogru yuruyor ve merceğe
+   cok yakin bakiyor. Doktrin kural 4 ve QC notu bunu acikca yasakliyor.
+5. **Yaratik canli okunuyor.** Ayi yuruyor, kukruyor, goz kirpiyor. Ifsayi yalniz
+   ekibin mudahalesi tasiyor. (Referansin kazananlarinda da boyle, bu yuzden
+   listenin en altinda.)
+
+## 5. OTOMASYON DENETIMI
+
+### 5.1 Bugunku kosu BASARISIZ , part 10 uretilemedi
+
+`gh run 35026600878`, 15 Eylul 21:36 UTC, 6 dk 2 sn, sonuc **failure**.
+
+- Konu: Part 10/13, "This GIANT OWL Is NOT Real".
+- Iki referans gorseli uretildi (jungle_set + dev baykus), 16 kredi harcandi.
+- Sonra Kie Omni **5 denemenin 5'inde** `Internal Error, Please try again later.`
+  dondu, her biri gorev olusturulduktan ~30 sn sonra.
+- `En az cekim kapisi artik karsilanamaz: kabul=0, kalan=0, gerekli=1`
+- Part 10 `qc_retry (1/3, neden=UNKNOWN)`.
+
+**Kie coktu mu? Hayir.** Ayni gun `Galactic Daily` 19:45 UTC'de **ayni Omni
+motorunu** basariyla kullandi (8 sn, 105 kredi). Fear Slide 17:41'de Seedance ile
+gecti. Yani ariza Kie geneli degil; bu istege ozel ya da o bes dakikalik pencereye ait.
+
+**Para yanmadi:** kosu icinde okunan bakiye 5.474, simdi olculen bakiye de **5.474**.
+Basarisiz Omni denemeleri faturalanmamis. Defterde `wild-encounter:10 , 16.0` yaziyor
+ve dogru.
+
+### 5.2 Yarin ne olacak , sayilarla
+
+Cron degismedi: `.github/workflows/wild-encounter.yml`, **18:30 UTC her gun**.
+
+- 16 Eylul: part 10 yeniden uretilir. Tutarsa ep10 uc platforma cikar.
+- Tutmazsa `retry_count` 2/3 olur, 17 Eylul'de 3/3 olur ve part 10 `needs_human`a
+  dusup **kuyruk part 11'e ilerler** (`series/series_runner.py:877`).
+- En kotu senaryo: **ilk yayin 18 Eylul**, uc gun yayinsiz.
+- Sonsuz dongu riski yok, sayac sinirli.
+
+**Zayiflik:** Kie'nin "Internal Error"u `UNKNOWN` olarak siniflandiriliyor ve ICERIK
+sayacini (3 hak) yakiyor. Altyapi sayaci (`TRANSIENT_INFRA`, 6 hak + 48 saat)
+devreye girmiyor. Motor tarafli bir ariza bolumu "insan baksin"a dusurebiliyor.
+
+### 5.3 QC'de gercek bosluk , kusur 1, 2 ve 4 kapiya takilamaz
+
+`bible.series.qc.notes` yutulma vurusunu ve "merceğe bakis fail" kuralini yaziyor.
+Ama `series/critic.py:_decide` **yalniz su alanlara bakiyor**: `anatomy_ok`,
+`face_match`, `wardrobe_ok`, `era_ok`, `unwanted_text`, `forbidden_elements`,
+`artifact_score` ve terfi edilmis ROCK-B alanlari. Vurus teslimi icin **karar alani
+yok**; `issues` listesi karara girmiyor.
+
+Bu seride terfi etmis tek ROCK-B alani `anomaly_match` ve o da
+`object_card.anomaly_descriptor`i, yani **ekibin ceneyi acmasini** denetliyor.
+Yutulma vurusu denetimsiz. Nitekim ep09 QC kaydi: `verdict: pass`,
+`artifact_score: 0`, `issues: []`, `anomaly_match: true/visible/1.0`.
+
+Ayrica ep09 kosusunda **yuz denetimi hic yapilmadi**: `QC: referans yuz indirilemedi
+(i.ibb.co read timeout) , face_match denetimsiz`. Kapinin sessizce dusmesi kosuyu
+durdurmuyor, yalniz WARNING basiyor. Doktrinin "en onemli denetim" dedigi kapi o gun
+kapaliydi.
+
+### 5.4 UYGULANAN DUZELTME , teslim 24 fps'e cekildi
+
+Olcum: yayindaki ep09 **300 kare / 10,01 sn**; `mpdecimate` **242 benzersiz kare**
+birakiyor. Yani **58 kare (%19,3) KOPYA**. Kie kaynagi 24 fps uretiyor, boru hatti
+30'a cikariyor ve hareket titriyor. `series/bible.py:323` bunu zaten yaziyor ve
+`still-home` icin duzeltilmisti; **wild-encounter'a uygulanmamisti**.
+
+`sentinal_ihsan/wild-encounter/bible.json` -> `series.fps = 24` eklendi (+ gerekce
+`fps_note`). `final_export` artik `-r 24` ile cagrilacak.
+Testler: `tests/test_wild_encounter_contract.py` 11/11, fps/bible/export secimi 19/19.
+
+### 5.5 Denetlenmeyen kalan
+
+**Gunluk beyin wild-encounter'i olcmuyor.** `Gunluk Beyin` is akisi 14 ve 15 Eylul'de
+ust uste basarisiz (`event-horizon:olc`, `flashpoints:olc`, `flashpoints:topla`,
+`aimagine-fear:olc`) ve listesindeki kanallar arasinda wild-encounter YOK. Filonun
+en iyi seridi gunluk ogrenen deftere girmiyor.
+
+## 6. KAC GUN KONSEPT VAR
+
+Kuyrukta **dort yazili plan** var (`plans/part10..13.json`):
+
+| Part | Baslik | Aile | Set |
+|---|---|---|---|
+| 10 | This GIANT OWL Is NOT Real | bird-giant | jungle_set (tutuldu) |
+| 11 | This GIANT SQUID Is NOT Real | sea-giant | ocean_tank_set |
+| 12 | This GIANT RHINOCEROS BEETLE Is NOT Real | insect-giant | desert_ruins_set |
+| 13 | This GIANT KOMODO DRAGON Is NOT Real | reptile | jungle_set |
+
+**Ama dogru cevap "4 gun" degil: kuyruk kendi kendini dolduruyor.**
+`auto_replenish`: `min_queue: 2`, `batch: 5`. Bekleyen plan 2'nin altina inince
+Gemini bes yeni bolum yaziyor ve bu **Kie kredisi harcamiyor**. Bu seride
+`topic_pool` yok ve kalibrasyon karti yok, yani **sonlu bir konu havuzu yok**.
+
+Pratikte siniri koyan uc sey:
+1. **Tanidik, cenesi bir insani alacak kadar buyutulebilir gercek hayvan sayisi.**
+   Su ana kadar 9 tane kullanildi. Gercekci havuz 30-50 bandinda, yani **~1 ay bu
+   kalipla**; sonra kalip ya da hayvan tanimi genisletilmeli.
+2. **Baslik benzersizligi.** Dogrulayici her yeni basligi TUM plan gecmisine karsi
+   benzersiz istiyor (`series/replenish.py:1179`). Havuz daralinca ikmal reddedilir.
+3. **Kredi.** ep08 ve ep09 defterde **142'ser kredi**. Bakiye 5.474 = **~38 bolum**.
+   Aylik tavan 14.000 = ~98 bolum, bagli degil.
+
+**Kisa cevap: makine tarafindan sinirsiz, konsept tarafindan yaklasik bir ay.**
+
+## 7. Bu incelemede olculemedi
+
+- Instagram izlenme ve begeni (hiz siniri / giris duvari). Uc platform
+  karsilastirmasi eksik kaldi.
+- Retention egrisi ve tamamlanma orani (YouTube Studio verisi gerekiyor; 26.456
+  izlenmenin ne kadari dongu bilinmiyor).
+- ep09'un neden ep08'in 3,9 kati aldigi. Iki bolum arasinda format ayni; degisen
+  sey hayvan (anakonda -> kutup ayisi). **Tek cift, kural cikarma.**
+- Kie "Internal Error"unun sebebi. Istek govdesi loglanmiyor; ayni istek yeniden
+  gonderilmeden ayirt edilemez.
