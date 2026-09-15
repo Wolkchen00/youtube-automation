@@ -79,7 +79,8 @@
         "kie_audio_id": null,
         "custom": null
       },
-      "character_id": "92369a8131e7497abf00c3b5ba1c92c9"
+      "character_id": null,
+      "character_id_note": "2026-09-15 OLCULDU: Kie'nin `character_ids` alani bu hesapta 500 'Internal Error' veriyor. Izole edildi , ayni prompt + ayni referans gorseller, character_ids YOKKEN BASARILI (126 kredi), character_ids VARKEN 4 saniyelik zararsiz promptta bile FAIL. Yeniden kayit da cozmedi (yeni id e2b9801046134dbfba5668716d8d661d ayni sekilde 500 verdi), yani ariza tek kayitta degil alanin kendisinde. character_id null birakilinca series/shots.py:305 ref_image_url'u gorsel referans olarak kullanir. Kie duzelince eski capa: 92369a8131e7497abf00c3b5ba1c92c9 (yedek yeni kayit: e2b9801046134dbfba5668716d8d661d)."
     }
   ],
   "environments": [

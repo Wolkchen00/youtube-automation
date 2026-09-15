@@ -27,6 +27,7 @@ SERI = Path(__file__).resolve().parents[1] / "sentinal_ihsan" / "wild-encounter"
 PART08 = SERI / "plans" / "part08.json"
 BIBLE = SERI / "bible.json"
 IHSAN_CID = "92369a8131e7497abf00c3b5ba1c92c9"
+IHSAN_REF = "https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg"
 
 
 def _ozet(p: Path) -> str:
@@ -87,7 +88,15 @@ def test_part08_omni_yuku_dogru(calisma):
 
     assert kw["duration"] == "10", f"sure {kw['duration']!r}, motora 10 gitmeli"
     assert kw["aspect_ratio"] == "9:16"
-    assert IHSAN_CID in (kw["character_ids"] or []), "Ihsan'in yuzu yuke baglanmamis"
+    # Degismez sart: Ihsan'in yuzu ucretli cagriya BAGLI olmali. Hangi yoldan
+    # baglandigi Kie'nin durumuna gore degisir: normalde `character_ids`, ama
+    # 2026-09-15'te olculdugu gibi Kie'nin karakter alani 500 verirken
+    # bible.characters[0].character_id null yapilip `ref_image_url` gorsel
+    # referans olarak baglanir (series/shots.py:305). Ikisi de kabul; HICBIRI
+    # baglanmamissa yuk bozuktur.
+    yuz_capasi = (IHSAN_CID in (kw["character_ids"] or [])
+                  or IHSAN_REF in (kw["image_urls"] or []))
+    assert yuz_capasi, "Ihsan'in yuzu yuke baglanmamis (ne characterId ne gorsel)"
 
     prompt = kw["prompt"]
     dusuk = prompt.lower()
@@ -124,9 +133,12 @@ def test_part08_omni_yuku_beklenmedik_uyari_uretmez(calisma):
     env = next(e for e in bible_data["environments"] if e["id"] == env_id)
 
     cozum = resolve_shot(_bible(), plan["shots"][0], plan=plan)
-    if env.get("ref_image_url"):
-        kabul = []          # capa uretildi: uyari kalmamali
-    else:
-        kabul = [f"Ortam '{env_id}' referans görseli yok"]
+    kabul = []
+    if not env.get("ref_image_url"):
+        kabul.append(f"Ortam '{env_id}' referans görseli yok")
+    # Karakter gorsel-referans yedegindeyken (Kie karakter alani 500 verirken)
+    # resolve_shot bunu bilerek bildirir; bu bir bozulma degil, secilen yol.
+    if not (bible_data["characters"][0].get("character_id")):
+        kabul.append("Karakter 'ihsan_field' henüz kaydedilmemiş → referans görsel kullanılıyor")
     assert cozum["warnings"] == kabul, cozum["warnings"]
     assert cozum["units"] <= 7, "7-birim referans kotasi asildi"

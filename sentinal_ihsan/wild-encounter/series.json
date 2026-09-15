@@ -200,9 +200,9 @@
     "10": {
       "status": "qc_retry",
       "first_held_at": "2026-09-15T21:42:39.870007+00:00",
-      "retry_count": 2,
-      "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "retry_count": 0,
+      "last_reason_code": "TRANSIENT_INFRA",
+      "hold_reason": "2026-09-15: iki kosuda 10/10 Omni denemesi 500 verdi. Sebep ISTEK DEGIL ALTYAPI: Kie'nin character_ids alani bu hesapta bozulmus. Izole edildi , ayni prompt character_ids YOKKEN basarili (126 kredi), 4 saniyelik zararsiz promptta bile character_ids VARKEN fail; yeniden kayit da cozmedi. bible.characters[0].character_id null yapildi, yuz ref_image_url ile baglaniyor ve bu yol CANLI dogrulandi (1080x1920 / 24 fps / 240 kare klip uretti). Icerik sayaci 2'den 0'a alindi: harcanan iki hak icerik reddi degildi, altyapi arizasiydi."
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."

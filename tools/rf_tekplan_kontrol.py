@@ -100,9 +100,12 @@ def main() -> int:
             f"series.json auto_replenish.shot_plan: {len(ar.get('shot_plan') or [])} oge, 1 olmali"
         )
 
-    # Ihsan'in yuzu DEGISMEZ (Ihsan karari, 13 Eylul).
+    # Ihsan'in yuzu DEGISMEZ (Ihsan karari, 13 Eylul). Baglanma YOLU degisebilir:
+    # 2026-09-15'te Kie'nin `character_ids` alani 500 vermeye basladi, character_id
+    # null birakildi ve yuz ref_image_url uzerinden gorsel referans olarak baglaniyor
+    # (series/shots.py:305). Kabul edilen iki deger: eski capa ya da null.
     kar = (bible.get("characters") or [{}])[0]
-    if kar.get("character_id") != "92369a8131e7497abf00c3b5ba1c92c9":
+    if kar.get("character_id") not in (None, "92369a8131e7497abf00c3b5ba1c92c9"):
         hatalar.append("bible.json characters[0].character_id degismis (Ihsan'in yuzu)")
     if not str(kar.get("ref_image_url") or "").startswith("https://"):
         hatalar.append("bible.json characters[0].ref_image_url bos ya da bozuk")
