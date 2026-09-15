@@ -1,0 +1,231 @@
+"""routes/ altindaki her rotayi uretime girmeden once denetler.
+
+Bu dosya olmadan rota kurallari yalniz _TEMPLATE.md yorumunda yaziyordu ve
+kimse zorlamiyordu. Sessiz uyusmazlik gecmisi var: rota DURATION alani bir
+sure hic okunmadi, 20 ve 25 saniyelik rotalar kirpildi.
+
+Denetlenen kurallar:
+  1. build.py'nin istedigi butun alanlar ve bolumler var
+  2. SLUG dosya adiyla ayni ve build.py'nin SLUG_RE kalibina uyuyor
+  3. DURATION tam sayi ve 15 (seedance-2 icin dogrulanmis tek sure)
+  4. BEATS 0.0'dan DURATION'a bosluksuz, cakismasiz, en az 5 aralik
+  5. NEON butun rotalarda BENZERSIZ
+  6. LEGWEAR kanon metniyle birebir ayni (2026-09-14 Ihsan karari)
+  7. OPENING/END STATE icinde "frame one" veya "final frame" yok
+  8. CAPTION kazanan kalibi tutuyor ve etiketleri tam
+  9. TITLE en az bir satir ve "#shorts" ile bitiyor
+ 10. VOICE zaman damgalari DURATION icinde kaliyor
+
+Kullanim:
+    python tools/rota_denetim.py            # hepsi
+    python tools/rota_denetim.py <slug>     # tek rota
+Cikis 0 temiz, 1 en az bir kural kirik.
+"""
+
+import io
+import os
+import re
+import sys
+
+KOK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROUTES = os.path.join(KOK, "routes")
+
+ALANLAR = ("SLUG", "DESTINATION", "LANDMARK", "DURATION", "NEON", "PALET",
+           "TITLE_KEYWORD", "LEGWEAR", "WEATHER", "SOURCE")
+BOLUMLER = ("OPENING STATE", "BEATS", "END STATE", "VOICE", "CAPTION", "TITLE")
+
+SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+ARALIK_RE = re.compile(r"^\[(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\]")
+
+# 2026-09-14 Ihsan karari. Degistirilmez.
+KANON_LEGWEAR = "a black high-cut one-piece swimsuit, legs bare from the hip down"
+GEREKLI_ETIKETLER = ("#MegaSlideFear", "#WaterSlide", "#POVReels",
+                     "#CGIAdventure", "#ViralReels")
+GECERLI_SURE = 15
+
+HATA = []
+
+
+def hata(slug, mesaj):
+    HATA.append("%s , %s" % (slug, mesaj))
+
+
+def alanlari_oku(metin):
+    alan = {}
+    for satir in metin.split("\n"):
+        if satir.startswith("## "):
+            break
+        m = re.match(r"^([A-Z][A-Z_]*):\s*(.*)$", satir)
+        if m:
+            alan[m.group(1)] = m.group(2).strip()
+    return alan
+
+
+def bolumleri_oku(metin):
+    bolum = {}
+    ad = None
+    birikim = []
+    for satir in metin.split("\n"):
+        if satir.startswith("## "):
+            if ad:
+                bolum[ad] = "\n".join(birikim).strip()
+            ad = satir[3:].strip()
+            birikim = []
+        elif ad:
+            birikim.append(satir)
+    if ad:
+        bolum[ad] = "\n".join(birikim).strip()
+    return bolum
+
+
+def beats_dogrula(slug, govde, sure):
+    araliklar = []
+    for satir in govde.split("\n"):
+        satir = satir.strip()
+        if not satir:
+            continue
+        m = ARALIK_RE.match(satir)
+        if m:
+            araliklar.append((float(m.group(1)), float(m.group(2))))
+        elif satir.startswith("["):
+            hata(slug, "BEATS satiri okunamadi: %s" % satir[:40])
+
+    if len(araliklar) < 5:
+        hata(slug, "BEATS %d aralik, en az 5 olmali" % len(araliklar))
+        return
+
+    if abs(araliklar[0][0]) > 0.001:
+        hata(slug, "BEATS %.1f'den basliyor, 0.0 olmali" % araliklar[0][0])
+    if abs(araliklar[-1][1] - sure) > 0.001:
+        hata(slug, "BEATS %.1f'de bitiyor, DURATION %d olmali"
+             % (araliklar[-1][1], sure))
+
+    for i in range(len(araliklar) - 1):
+        bit = araliklar[i][1]
+        bas = araliklar[i + 1][0]
+        if abs(bit - bas) > 0.001:
+            hata(slug, "BEATS %d ile %d arasinda kopukluk: %.1f -> %.1f"
+                 % (i + 1, i + 2, bit, bas))
+
+    for bas, bit in araliklar:
+        if bit <= bas:
+            hata(slug, "BEATS ters veya sifir aralik: [%.1f-%.1f]" % (bas, bit))
+
+
+def voice_dogrula(slug, govde, sure):
+    for satir in govde.split("\n"):
+        satir = satir.strip()
+        if not satir:
+            continue
+        m = ARALIK_RE.match(satir)
+        if not m:
+            if satir.startswith("["):
+                hata(slug, "VOICE satiri okunamadi: %s" % satir[:40])
+            continue
+        bas, bit = float(m.group(1)), float(m.group(2))
+        if bit > sure + 0.001:
+            hata(slug, "VOICE %.1f'de bitiyor, DURATION %d'i asiyor" % (bit, sure))
+        if bas < -0.001:
+            hata(slug, "VOICE negatif zamanda basliyor: %.1f" % bas)
+
+
+def rota_denetle(yol, neon_sahipleri):
+    dosya = os.path.basename(yol)
+    slug_dosya = dosya[:-3]
+    metin = io.open(yol, encoding="utf-8").read()
+    alan = alanlari_oku(metin)
+    bolum = bolumleri_oku(metin)
+
+    for a in ALANLAR:
+        if a not in alan or not alan[a]:
+            hata(slug_dosya, "eksik alan: %s" % a)
+    for b in BOLUMLER:
+        if b not in bolum or not bolum[b]:
+            hata(slug_dosya, "eksik bolum: %s" % b)
+    if HATA and any(h.startswith(slug_dosya + " , eksik") for h in HATA):
+        return
+
+    slug = alan["SLUG"]
+    if slug != slug_dosya:
+        hata(slug_dosya, "SLUG '%s' dosya adiyla ayni degil" % slug)
+    if not SLUG_RE.fullmatch(slug):
+        hata(slug, "SLUG kalibi bozuk, beklenen ^[a-z0-9]+(-[a-z0-9]+)*$")
+
+    try:
+        sure = int(alan["DURATION"])
+    except ValueError:
+        hata(slug, "DURATION tam sayi degil: %r" % alan["DURATION"])
+        return
+    if sure != GECERLI_SURE:
+        hata(slug, "DURATION %d, uretime giren tek sure %d (seedance-2)"
+             % (sure, GECERLI_SURE))
+
+    neon = alan["NEON"].lower()
+    if neon in neon_sahipleri:
+        hata(slug, "NEON '%s' zaten %s rotasinda kullanilmis"
+             % (neon, neon_sahipleri[neon]))
+    else:
+        neon_sahipleri[neon] = slug
+
+    if alan["LEGWEAR"] != KANON_LEGWEAR:
+        hata(slug, "LEGWEAR kanondan farkli (2026-09-14 karari degistirilemez)")
+
+    for b in ("OPENING STATE", "END STATE"):
+        dusuk = bolum[b].lower()
+        for yasak in ("frame one", "final frame"):
+            if yasak in dusuk:
+                hata(slug, "%s icinde yasak ifade: '%s'" % (b, yasak))
+
+    beats_dogrula(slug, bolum["BEATS"], sure)
+    voice_dogrula(slug, bolum["VOICE"], sure)
+
+    cap = bolum["CAPTION"]
+    if not cap.lower().startswith("you're"):
+        hata(slug, "CAPTION \"You're\" ile baslamiyor, kazanan kalip bu")
+    for et in GEREKLI_ETIKETLER:
+        if et not in cap:
+            hata(slug, "CAPTION'da eksik etiket: %s" % et)
+    dest = alan["DESTINATION"]
+    if dest.lower() not in cap.lower():
+        hata(slug, "CAPTION sehir adini (%s) gecmiyor" % dest)
+
+    basliklar = [s for s in bolum["TITLE"].split("\n") if s.strip()]
+    if not basliklar:
+        hata(slug, "TITLE bos")
+    for b in basliklar:
+        if not b.strip().endswith("#shorts"):
+            hata(slug, "TITLE satiri '#shorts' ile bitmiyor: %s" % b.strip()[:40])
+    kw = alan["TITLE_KEYWORD"]
+    if basliklar and not any(kw.lower() in b.lower() for b in basliklar):
+        hata(slug, "hicbir TITLE satiri TITLE_KEYWORD '%s' icermiyor" % kw)
+
+
+def main():
+    hedef = sys.argv[1] if len(sys.argv) > 1 else None
+    yollar = sorted(
+        os.path.join(ROUTES, f) for f in os.listdir(ROUTES)
+        if f.endswith(".md") and not f.startswith("_"))
+    if hedef:
+        yollar = [y for y in yollar if os.path.basename(y)[:-3] == hedef]
+        if not yollar:
+            print("rota bulunamadi: %s" % hedef)
+            return 1
+
+    neon_sahipleri = {}
+    for y in yollar:
+        rota_denetle(y, neon_sahipleri)
+
+    print("denetlenen rota: %d" % len(yollar))
+    print("benzersiz NEON: %d" % len(neon_sahipleri))
+    print("=" * 58)
+    if HATA:
+        print("SONUC: %d BULGU" % len(HATA))
+        for h in HATA:
+            print("  - %s" % h)
+        return 1
+    print("SONUC: TEMIZ. Butun rotalar uretime uygun.")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
