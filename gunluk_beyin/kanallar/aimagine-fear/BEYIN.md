@@ -1,6 +1,6 @@
 # BEYIN , aimagine-fear
 
-Uretim: 2026-09-14T10:54:17.172468+00:00
+Uretim: 2026-09-15T10:18:13.418028+00:00
 Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/aimagine-fear/defter.jsonl` (9 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
@@ -11,8 +11,8 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
-> **UYARI: son olcum adimi BASARISIZ.** (2026-09-14 10:54)
-> 2 videonun hicbiri olculemedi
+> **UYARI: son olcum adimi BASARISIZ.** (2026-09-15 10:18)
+> 3 videonun hicbiri olculemedi
 > Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
 > olculmemis olabilir; bu rapor bugun yazildi diye guncel
 > DEGILDIR.
@@ -24,11 +24,11 @@ nerede oturdugu gorulur.
 - Olculen video: **9**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/9 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
 - Medyan izlenme: **52**
-- Aralik: 17 ile 3,220 arasi
+- Aralik: 17 ile 3,221 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
-| EN IYI | 3,220 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
+| EN IYI | 3,221 | 2026-09-06 | You're falling past the Burj Khalifa on a transp |
 | EN KOTU | 17 | 2026-09-03 | POV: Dropping off the STRAT Tower in the rain #s |
 
 Son yayinlar (tekrar etme):

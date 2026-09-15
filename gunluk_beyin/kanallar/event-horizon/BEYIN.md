@@ -1,7 +1,7 @@
 # BEYIN , event-horizon
 
-Uretim: 2026-09-14T20:52:06.714221+00:00
-Kaynak: `C:\Users\ihsan\Desktop\Antigravity\Projeler\Youtube\gunluk_beyin\kanallar\event-horizon\defter.jsonl` (2 kayit)
+Uretim: 2026-09-15T10:18:09.468456+00:00
+Kaynak: `/home/runner/work/youtube-automation/youtube-automation/gunluk_beyin/kanallar/event-horizon/defter.jsonl` (2 kayit)
 
 Bu dosya HER GUN yeniden yazilir. Sabit fikir havuzu yoktur.
 Sadece **24 saatten eski** videolar olculur, boylece izlenmenin
@@ -11,18 +11,24 @@ nerede oturdugu gorulur.
 
 ## 1. DURUM
 
+> **UYARI: son olcum adimi BASARISIZ.** (2026-09-15 10:18)
+> 1 videonun hicbiri olculemedi
+> Asagidaki sayilar ESKI deftere aittir. Yeni yayinlar
+> olculmemis olabilir; bu rapor bugun yazildi diye guncel
+> DEGILDIR.
+
 > **17 kayit EMEKLI**, karsilastirmaya girmiyor , sebep: event-horizon konsepti 12 Eylul 2026'da rafa kaldirildi (KONSEPT.md v2.0). Kanal uc yeni konsept adayi test ediyor: one-variable, infinite-places, flythrough. Eski format olcumleri yeni formatla havuzlanirsa beyin olu formatin kuralini uretir..
 > Eski konseptin olcumleri yeni format icin yol gosterici
 > degildir. Silinmediler, defterde duruyorlar.
 
 - Olculen video: **2**
 - Siralama olcusu: guncel izlenme , _24. saat olcumu henuz 2/2 kayitta var, yaslar farkli oldugu icin siralamayi dikkatli oku_
-- Medyan izlenme: **1,368**
-- Aralik: 1,060 ile 1,676 arasi
+- Medyan izlenme: **1,410**
+- Aralik: 1,060 ile 1,760 arasi
 
 | | izlenme | tarih | baslik |
 |---|---|---|---|
-| EN IYI | 1,676 | 2026-09-13 | One Whirlpool That Never Closes |
+| EN IYI | 1,760 | 2026-09-13 | One Whirlpool That Never Closes |
 | EN KOTU | 1,060 | 2026-09-12 | One Wave Along the Whole Coast |
 
 Son yayinlar (tekrar etme):
