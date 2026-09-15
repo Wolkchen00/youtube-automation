@@ -1,6 +1,6 @@
 name: Next Stop Daily
 
-# 'NEXT STOP' gunluk serisi (aimagine kanali, @aimagine_._357).
+# 'NEXT STOP' gunluk serisi (aimagine kanali, @aimagine357).
 # Format: 6 x 10 sn, ~60 sn, tek kesintisiz tren yolculugu. Kamera vagondan hic cikmaz ve
 # hep ayni sol pencereden 90 derece yandan bakar. Sureklilik KARE ZINCIRIYLE saglanir:
 # cekim 1 sahneyi acar (chain=false), cekim 2-6 onceki son kareden zincirlenir. hook_shot = 6.
