@@ -78,10 +78,11 @@ KREDI_15SN = {
 # bitis cumlesi birebir ayniydi. Bu yuzden cron'u geri acmak tek basina
 # yetmez, havuza YENI rota girmesi gerekiyordu.
 #
-# Bes yeni bulut rotasi listenin BASINA alindi. sirdaki() once SIRA icinde
-# KULLANILMAMIS olan ilk slug'i dondurur, yani bu besi sirayla bes gun
-# uretilir, ondan sonra eski yediye doner. Besinci gunden once yeni rota
-# yaz, yoksa tekrar basa donulur.
+# Bulut rotalari listenin BASINA alindi. sirdaki() once SIRA icinde
+# KULLANILMAMIS olan ilk slug'i dondurur. 2026-09-15 itibariyle 13 bulut
+# rotasi var (ilk bes 09-14'te, sonraki sekiz 09-15'te yazildi), ondan sonra
+# eski yediye doner. Eski yedinin LEGWEAR'i de 09-15'te kanona cevrildi.
+# Stok bitmeden yeni rota yaz: tools/rota_denetim.py ile dogrula.
 #
 # Hepsi 15 sn, cunku YETENEK_MATRISI'nde seedance-2 icin yalniz 15 sn 720p 24
 # fps "dogrulandi" durumunda. Landmark secimi olcume dayali: REELYZE-RAPOR.md
@@ -97,6 +98,18 @@ SIRA = [
     "hongkong-icc-indigo-bulut",        # neon, bulut
     "londra-shard-amber-bulut",         # sicak, bulut
     "sydney-harbour-yesil-bulut",       # neon, bulut
+    # 2026-09-15 ikinci bulut dalgasi. Landmark secimi olcume dayali:
+    # REELYZE-RAPOR bolum 5, kuresel ikonlar 4/4 kazandi. Her rotada bulutun
+    # FIZIGI farkli, cunku ayni kaydirak yedi kez tekrarlanirsa tekrar tuzagina
+    # duseriz; kanal bunu STRAT ile zaten kanitladi (3/3 kayip).
+    "sanfrancisco-goldengate-bakir-sis",   # sicak, sis katmani
+    "rio-cristo-kobalt-bulut",             # neon, zirveyi saran bulut
+    "capetown-tablemountain-zumrut-bulut", # neon, AKAN bulut (tablecloth)
+    "niagara-selale-akuamarin-serpinti",   # neon, SESLI serpinti perdesi
+    "bavyera-neuschwanstein-bronz-bulut",  # sicak, vadiyi dolduran bulut
+    "santorini-oia-rozegold-deniz-sisi",   # sicak, KAPALI kase sisi
+    "zermatt-matterhorn-kizil-bulut",      # neon, YATAY akan banner bulut
+    "seattle-spaceneedle-lavanta-sis",     # neon, DONEN cam zemin
     "vegas-strat-blue-rain-15",      # neon
     "tokyo-skytree-mor-yagmur",      # neon
     "dubai-burj-altin",              # sicak

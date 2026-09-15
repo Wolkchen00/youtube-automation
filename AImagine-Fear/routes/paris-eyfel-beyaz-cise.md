@@ -7,13 +7,13 @@ DURATION: 15
 NEON: ice white
 PALET: neon
 TITLE_KEYWORD: Eiffel
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: fine night drizzle, every street lamp wearing a halo
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Eiffel Tower in Paris, at night. The weather is fine night drizzle, every street lamp wearing a halo. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Paris, seen from vertically above: the pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ice white electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Eiffel Tower in Paris, at night. The weather is fine night drizzle, every street lamp wearing a halo. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Paris, seen from vertically above: the pale stone rooftops all at the same low height, cut by wide boulevards that radiate outward from single points like spokes. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ice white electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

@@ -7,13 +7,13 @@ DURATION: 15
 NEON: electric cyan-blue
 PALET: neon
 TITLE_KEYWORD: STRAT
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: heavy night rain under a black overcast sky
 SOURCE: https://www.instagram.com/reel/DcynI6Oj8rA/ (fearvisionofficiel, 2026-09-02); 20sn harita 15sn'ye sikistirildi, bytedance/seedance-2 tavani 15 saniye
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the STRAT Tower in Las Vegas, at night, in heavy rain. Her two bare feet and black glossy wet-look leggings fill the bottom third of the frame, wet and shining. Rain beads are scattered across the black glass under and around her feet and a thin film of water crawls across it toward the edge. Beyond the deck edge the frame is filled entirely by the city, seen from vertically above: a black grid cut by long straight rivers of amber and white vehicle light that run away to a bowed, fisheye-curved horizon. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept edges outlined by a continuous electric cyan-blue electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the STRAT Tower in Las Vegas, at night, in heavy rain. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Rain beads are scattered across the black glass under and around her feet and a thin film of water crawls across it toward the edge. Beyond the deck edge the frame is filled entirely by the city, seen from vertically above: a black grid cut by long straight rivers of amber and white vehicle light that run away to a bowed, fisheye-curved horizon. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept edges outlined by a continuous electric cyan-blue electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

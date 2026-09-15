@@ -29,6 +29,7 @@ import sys
 
 KOK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROUTES = os.path.join(KOK, "routes")
+GUNLUK = os.path.join(KOK, "tools", "gunluk.py")
 
 ALANLAR = ("SLUG", "DESTINATION", "LANDMARK", "DURATION", "NEON", "PALET",
            "TITLE_KEYWORD", "LEGWEAR", "WEATHER", "SOURCE")
@@ -44,10 +45,36 @@ GEREKLI_ETIKETLER = ("#MegaSlideFear", "#WaterSlide", "#POVReels",
 GECERLI_SURE = 15
 
 HATA = []
+UYARI = []
+
+
+def sira_oku():
+    """gunluk.py'deki SIRA listesini oku.
+
+    Uretime giren rotalar bunlar. Uretime hic girmeyen bir rotanin bulgusu
+    cikis kodunu bozmamali: hep kirmizi yanan denetim gormezden gelinir ve
+    o zaman gercek bir ariza da gozden kacar.
+    """
+    try:
+        metin = io.open(GUNLUK, encoding="utf-8").read()
+    except IOError:
+        return None
+    m = re.search(r"^SIRA = \[(.*?)^\]", metin, re.S | re.M)
+    if not m:
+        return None
+    return set(re.findall(r'"([^"]+)"', m.group(1)))
+
+
+SIRA = sira_oku()
 
 
 def hata(slug, mesaj):
-    HATA.append("%s , %s" % (slug, mesaj))
+    """SIRA'daki rotada BULGU, disindakinde UYARI."""
+    satir = "%s , %s" % (slug, mesaj)
+    if SIRA is None or slug in SIRA:
+        HATA.append(satir)
+    else:
+        UYARI.append(satir)
 
 
 def alanlari_oku(metin):
@@ -217,13 +244,24 @@ def main():
 
     print("denetlenen rota: %d" % len(yollar))
     print("benzersiz NEON: %d" % len(neon_sahipleri))
+    if SIRA is None:
+        print("UYARI: gunluk.py SIRA listesi okunamadi, hepsi uretimde sayildi")
+    else:
+        print("SIRA'da (uretime giren): %d" % len(SIRA))
+
+    if UYARI:
+        print("-" * 58)
+        print("UYARI: %d bulgu, SIRA DISI rotalarda. Uretimi etkilemez." % len(UYARI))
+        for u in UYARI:
+            print("  ~ %s" % u)
+
     print("=" * 58)
     if HATA:
-        print("SONUC: %d BULGU" % len(HATA))
+        print("SONUC: %d BULGU, uretime giren rotalarda" % len(HATA))
         for h in HATA:
             print("  - %s" % h)
         return 1
-    print("SONUC: TEMIZ. Butun rotalar uretime uygun.")
+    print("SONUC: TEMIZ. Uretime giren butun rotalar uygun.")
     return 0
 
 

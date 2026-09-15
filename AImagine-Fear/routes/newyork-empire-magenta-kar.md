@@ -7,13 +7,13 @@ DURATION: 15
 NEON: hot magenta-pink
 PALET: neon
 TITLE_KEYWORD: Empire
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: heavy night snow, fat flakes crossing the lens
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Empire State Building in New York, at night. The weather is heavy night snow, fat flakes crossing the lens. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by New York, seen from vertically above: the perfect rectangular grid of Manhattan avenues glowing amber to the water on both sides. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous hot magenta-pink electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Empire State Building in New York, at night. The weather is heavy night snow, fat flakes crossing the lens. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by New York, seen from vertically above: the perfect rectangular grid of Manhattan avenues glowing amber to the water on both sides. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous hot magenta-pink electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

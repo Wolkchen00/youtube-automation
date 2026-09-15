@@ -7,13 +7,13 @@ DURATION: 15
 NEON: ember orange
 PALET: sicak
 TITLE_KEYWORD: Burj
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a clear hot night with dust haze on the horizon
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Burj Khalifa in Dubai, at night. The weather is a clear hot night with dust haze on the horizon. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Dubai, seen from vertically above: the dead-straight strip of Sheikh Zayed Road running to the horizon and the black emptiness of the desert beyond the last towers. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ember orange electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Burj Khalifa in Dubai, at night. The weather is a clear hot night with dust haze on the horizon. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Dubai, seen from vertically above: the dead-straight strip of Sheikh Zayed Road running to the horizon and the black emptiness of the desert beyond the last towers. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous ember orange electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

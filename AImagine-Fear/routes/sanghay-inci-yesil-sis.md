@@ -7,13 +7,13 @@ DURATION: 15
 NEON: acid green
 PALET: neon
 TITLE_KEYWORD: Pearl
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: thick night fog sitting between the towers
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Oriental Pearl Tower in Shanghai, at night. The weather is thick night fog sitting between the towers. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Shanghai, seen from vertically above: the wide black curve of the Huangpu river splitting the lights, with the old low waterfront on one bank and the tower cluster on the other. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous acid green electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Oriental Pearl Tower in Shanghai, at night. The weather is thick night fog sitting between the towers. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Shanghai, seen from vertically above: the wide black curve of the Huangpu river splitting the lights, with the old low waterfront on one bank and the tower cluster on the other. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous acid green electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 

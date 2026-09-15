@@ -7,13 +7,13 @@ DURATION: 15
 NEON: electric violet
 PALET: neon
 TITLE_KEYWORD: Skytree
-LEGWEAR: black glossy wet-look leggings with the hem at mid-shin
+LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: warm night rain, the whole city under a low orange cloud lid
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi
 
 ## OPENING STATE
 
-The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Tokyo Skytree in Tokyo, at night. The weather is warm night rain, the whole city under a low orange cloud lid. Her two bare feet and black glossy wet-look leggings with the hem at mid-shin fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Tokyo, seen from vertically above: the endless low grey sprawl with no grid at all, cut by white expressway lines curving between the blocks. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous electric violet electroluminescent strip. There is no railing anywhere between her feet and the drop.
+The rider stands barefoot at the outer lip of a black glass observation deck on the very top of the Tokyo Skytree in Tokyo, at night. The weather is warm night rain, the whole city under a low orange cloud lid. Her two bare legs and bare feet fill the bottom third of the frame, wet and shining. Beyond the deck edge the frame is filled entirely by Tokyo, seen from vertically above: the endless low grey sprawl with no grid at all, cut by white expressway lines curving between the blocks. Far ahead on the deck, small in the distance, sits the open mouth of a fully transparent acrylic slide, its two upswept rims outlined by a continuous electric violet electroluminescent strip. There is no railing anywhere between her feet and the drop.
 
 ## BEATS
 
