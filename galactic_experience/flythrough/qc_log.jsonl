@@ -7,3 +7,10 @@
 {"ts": "2026-09-13T20:50:38Z", "event": "qc_pass", "episode": 1, "shot": 1, "attempt": 0, "content_sha256": "52dcdb556ada2d756833cd022211bf34144c4b5a67fc9f65b9dfccd688f92994", "clip": "shot_01.mp4", "experiment_id": "exp-2026-09-konsept-c"}
 {"ts": "2026-09-13T20:50:53Z", "event": "qc_api_attempt", "attempt_id": "dcf61f1809c3497697b5d6a1c3b3e7ea", "task_type": "delivery_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 1, "shot": null, "experiment_id": "exp-2026-09-konsept-c"}
 {"ts": "2026-09-13T20:51:10Z", "event": "qc_api_result", "attempt_id": "dcf61f1809c3497697b5d6a1c3b3e7ea", "outcome": "ok", "experiment_id": "exp-2026-09-konsept-c"}
+{"ts": "2026-09-16T19:40:39Z", "event": "qc_api_attempt", "attempt_id": "64c46fbbd1fb450ca03015c32944c9d8", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 2, "shot": 1}
+{"ts": "2026-09-16T19:40:42Z", "event": "qc_api_result", "attempt_id": "64c46fbbd1fb450ca03015c32944c9d8", "outcome": "ok"}
+{"ts": "2026-09-16T19:40:42Z", "event": "native_audio_review", "episode": 2, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Audio depicts a train passing followed by a crash.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-09-16T19:40:43Z", "event": "qc_api_attempt", "attempt_id": "6728382802bc4dc2a30d9d2baf6af4e5", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 2, "shot": 1}
+{"ts": "2026-09-16T19:40:53Z", "event": "qc_api_result", "attempt_id": "6728382802bc4dc2a30d9d2baf6af4e5", "outcome": "ok"}
+{"ts": "2026-09-16T19:40:53Z", "event": "review", "episode": 2, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-09-16T19:40:53Z", "event": "qc_pass", "episode": 2, "shot": 1, "attempt": 0, "content_sha256": "105b3362437c8be85534c353293019870a8cebc8a53cb0afadbc42bec4ea1ebb", "clip": "shot_01.mp4"}
