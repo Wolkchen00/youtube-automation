@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Tokyo Built A Second City In The Air"
+  },
+  "synopsis": "Tokyo has grown upward into stacked tiers around Tokyo Tower and Skytree, with street life running along bridges strung between them.",
+  "family": "yukari buyudu",
+  "seed_id": 5,
+  "narration": "",
+  "caption": "Tokyo, 2512. The city ran out of ground, so it kept building upward.\n\nPeople stayed exactly where they were. The wards were rebuilt as three stacked levels, each one a full street plan of its own.\n\nThe ramen counters moved to the bridge decks. Tokyo Tower runs through all three tiers and is still orange. Fuji is still on the horizon from the top level on a clear day.\n\nA fictional future, created with AI.\n\nWhich level would you want to live on?\n\n東京、2512年。土地が足りなくなり、街は上へ伸び続けた。\n\n人々はその場所に残った。区は三層に建て直され、それぞれが独自の街路を持つ。\n\nラーメン屋台は橋のデッキへ移った。東京タワーは三層すべてを貫き、今もオレンジ色のままだ。晴れた日には最上層から富士山が見える。\n\n架空の未来、AIで制作。\n\nあなたならどの層に住みますか。",
+  "hashtags": "#Tokyo #TokyoTower #Skytree #FutureCity #Cyberpunk #Architecture #AIart #STILLHOME2512",
+  "hook_shot": 1,
+  "doctrine_sha256": "1acbf65d04b9fd85b0252e6626d897d6a48bf0dbd4b30ea9b176baeecfb0fc56",
+  "title_card": {
+    "title": "TOKYO 2512",
+    "subtitle": ""
+  },
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, AERIAL. The camera flies high in the open sky, far ABOVE every rooftop, tower, dome and canopy in the city, and looks DOWN on it from there. The whole adapted city lies below the camera and spreads across the frame from edge to edge; the horizon and open sky sit in the top third. Think satellite, helicopter or drone at altitude. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable, so a viewer who sees only this one frame already knows which city it is and what happened to it. One slow, single-direction camera move only, a straight descent or a forward glide, and the camera stays above the structures for the entire four seconds. Keep the camera outdoors and airborne throughout: ground level, street level, interiors, and any position beneath a roof, canopy, bridge or shelter belong to shot 2. No pan, orbit, whip, cut or scene reset inside the shot, and no setup, approach or delayed reveal.\n\nA high aerial view looking down over Tokyo from far above the towers. The city has grown upward into three clear stacked tiers of decks and bridges that follow the old ward boundaries, and lit windows and lantern strings glow across every tier while the lowest level lies in soft shadow. Tokyo Tower rises orange and intact through all three levels near the centre of frame, and Skytree stands taller beyond it, both threaded by walkways radiating out to the surrounding decks. Tokyo Bay reads at the edge of frame and Mount Fuji sits clean on the horizon across the top third. The camera glides slowly forward on a single heading for the full duration, holding altitude above the towers, so the tiers pass steadily beneath.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, GROUND LEVEL. After a hard cut, the camera stands among people at human eye height in the SAME city, in a completely different vantage point from shot 1. People go about ordinary daily life: walking, trading, carrying, eating, queueing. People read clearly from the middle ground outward, at full height and mostly from behind or in three-quarter view, hands occupied with baskets, tools, crates and cloth; the nearest stretch of the frame stays clear of any figure. Warm practical light from windows, stalls, lamps and cooking fires falls across the scene. Signs, boards, awnings and banners carry painted symbols, numerals-free colour fields and plain weave instead of words, so no lettering or logo is legible anywhere in frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only, at a constant height.\n\nStreet level on a mid-tier bridge deck strung between buildings, camera at eye height among the commuters. Tokyo Tower's orange lattice fills the background and rises past the upper level. The deck is a dense evening street: ramen counters, vending machines, hanging lanterns and tall cloth banners in plain colour fields line both sides, steam rising into the cool air, and commuters move along the walkway ahead of the camera, seen from behind. The tier above reads as a lit ceiling of girders and windows, and the city glows far below through the gaps in the deck. The camera glides forward slowly along the bridge at a constant height for the full duration.",
+      "seed": null
+    }
+  ]
+}

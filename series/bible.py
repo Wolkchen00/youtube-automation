@@ -320,6 +320,22 @@ class Bible:
         return bool(self.data.get("music", False))
 
     @property
+    def music_fixed(self) -> str | None:
+        """Bölümden bölüme DEĞIŞMEYEN, kanonik müzik prompt'u (opt-in).
+
+        Alan doluysa ikmal modelden müzik prompt'u ISTEMEZ, bu metni aynen kullanır.
+        still-home için: doktrin sesin her bölümde AYNI olduğunu söylüyor (tek derin
+        drone, vuruş yok, melodi yok) ve yayınlanan iki bölümün prompt'u zaten
+        harfi harfine aynıydı. Değişken olmayan bir alanı modele yazdırmak sadece
+        sapma riski üretir: 15 Eylül 2026'da ikmalin yazdığı beş planda piyano,
+        yaylı, kreskendo ve akor çözümü belirdi."""
+        value = self.data["series"].get("music_fixed")
+        if value is None:
+            return None
+        text = str(value).strip()
+        return text or None
+
+    @property
     def fps(self) -> int | None:
         """Teslim kare hizi. Alan yoksa None = motorun varsayilani (30).
 

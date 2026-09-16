@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Dubai Moved Underground And Left The Tower"
+  },
+  "synopsis": "Burj Khalifa rises out of a standing wall of desert sand while the living city has moved into lit underground boulevards beneath it.",
+  "family": "asagi indi",
+  "seed_id": 4,
+  "narration": "",
+  "caption": "Dubai, 2512. The desert moved in and buried the streets.\n\nThe city went down rather than away. The boulevards were cut into the rock below the old grid, and everyone kept their address.\n\nDaylight comes down through shafts, on a schedule people plan their afternoons around. The Burj is still standing up there, visible from the bottom of every shaft, used now mostly as a landmark.\n\nA fictional future, created with AI.\n\nWould you rather live near a shaft or deep in the quiet?\n\nدبي، 2512. زحفت الصحراء ودفنت الشوارع.\n\nالمدينة نزلت إلى الأسفل بدل أن ترحل. حُفرت الجادات في الصخر تحت المخطط القديم، واحتفظ الجميع بعناوينهم.\n\nينزل ضوء النهار عبر الفتحات في أوقات ينظم الناس يومهم حولها. لا يزال برج خليفة واقفًا في الأعلى، يُرى من قاع كل فتحة.\n\nمستقبل خيالي، صُنع بالذكاء الاصطناعي.\n\nهل كنت ستسكن قرب فتحة الضوء أم في العمق الهادئ؟",
+  "hashtags": "#Dubai #BurjKhalifa #Underground #Desert #FutureCity #Architecture #AIart #STILLHOME2512",
+  "hook_shot": 1,
+  "doctrine_sha256": "1acbf65d04b9fd85b0252e6626d897d6a48bf0dbd4b30ea9b176baeecfb0fc56",
+  "title_card": {
+    "title": "DUBAI 2512",
+    "subtitle": ""
+  },
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, AERIAL. The camera flies high in the open sky, far ABOVE every rooftop, tower, dome and canopy in the city, and looks DOWN on it from there. The whole adapted city lies below the camera and spreads across the frame from edge to edge; the horizon and open sky sit in the top third. Think satellite, helicopter or drone at altitude. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the full extent of what was built to keep it liveable, so a viewer who sees only this one frame already knows which city it is and what happened to it. One slow, single-direction camera move only, a straight descent or a forward glide, and the camera stays above the structures for the entire four seconds. Keep the camera outdoors and airborne throughout: ground level, street level, interiors, and any position beneath a roof, canopy, bridge or shelter belong to shot 2. No pan, orbit, whip, cut or scene reset inside the shot, and no setup, approach or delayed reveal.\n\nA high aerial view looking down over Dubai from far above the towers. A standing front of pale dune sand is banked deep across the whole city grid and smoothed into long ridges by wind. The Burj Khalifa rises clean out of the sand at the centre of frame with its stepped spire bright against a hard blue sky, and the tops of neighbouring towers break the surface around it like a half-buried skyline. Circular shafts and ramped openings punch down through the sand in a regular pattern, each ringed with steel and glowing warm from far below. The desert city fills the frame with sky across the top third. The camera glides slowly forward on one heading for the full duration, holding altitude, so the shafts pass beneath.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, GROUND LEVEL. After a hard cut, the camera stands among people at human eye height in the SAME city, in a completely different vantage point from shot 1. People go about ordinary daily life: walking, trading, carrying, eating, queueing. People read clearly from the middle ground outward, at full height and mostly from behind or in three-quarter view, hands occupied with baskets, tools, crates and cloth; the nearest stretch of the frame stays clear of any figure. Warm practical light from windows, stalls, lamps and cooking fires falls across the scene. Signs, boards, awnings and banners carry painted symbols, numerals-free colour fields and plain weave instead of words, so no lettering or logo is legible anywhere in frame. The same recognisable landmark stays readable somewhere in the background or on the horizon so the two shots read as one city. One slow, single-direction camera move only, at a constant height.\n\nStreet level inside a wide underground boulevard beneath the shafts, camera at eye height among the crowd. The rock and concrete ceiling arches overhead and one shaft opens high above, letting a clean column of daylight fall through with the Burj Khalifa's spire visible far up through the opening. Lit shopfronts, glass cafes and planted beds line the boulevard, and an evening crowd moves along the polished floor deeper in the boulevard, seen from behind. Warm shopfront glow and cool daylight mix across the surfaces, the lit panels carrying colour and painted symbols rather than words. The camera glides forward slowly down the centre of the boulevard at a constant height for the full duration.",
+      "seed": null
+    }
+  ]
+}

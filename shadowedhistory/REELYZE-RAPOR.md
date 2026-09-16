@@ -497,3 +497,223 @@ ibaresi aciklamada acikca geciyor. Hashtag'te yil marka olarak kullaniliyor (#EA
 - Yazi tipinin kesin adi , teshis edilemedi.
 - Kanalin toplam video sayisi ve takipci sayisi , bu kosuda cekilmedi.
 - Hangi AI modeliyle uretildigi , bilinmiyor.
+
+---
+
+# EK , PART 2 KANCA ANALIZI ve v2.0 KARARI (15 Eylul 2026)
+
+Istek (Ihsan, iki direktif ayni oturumda):
+1. "daha hizli gecisler lazim tek videoda 3 sahne gecisi istiyorum"
+2. "ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun,
+   videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine
+   teknolojinin nasil gelistigini anlatan bir video olsun"
+
+Analiz edilen video: `instagram.com/reel/DdST1bqDJzG` = **part 2, NEW YORK 2512**
+(YouTube `ZDRrC5r7Vek`, TikTok `7685536040630766862`).
+
+## 1. Olculen degerler
+
+Arac: `yt-dlp` + `ffmpeg` (reel-analiz skill'i, `scripts/olc.py`).
+
+| Olcu | Deger | Hedef / yorum |
+|---|---|---|
+| Cozunurluk | 1080x1920 | tamam |
+| fps | 24,0 | tamam, doktrin 24 |
+| Sure | 8,04 sn | doktrin bandi 7-9, tamam |
+| Kesme sayisi | **1** (t=4,04) | SORUN , direktifin konusu |
+| Plan uzunluklari | 4,04 + 4,00 sn | SORUN |
+| Kesme / 10 sn | **1,24** | SORUN |
+| LUFS | -14,1 | tamam, referans -14,0..-14,1 |
+| True peak | -1,5 dBFS | tamam, kirpma yok |
+| LRA | 2,0 | doktrin hedefi < 2, sinirda |
+| Desifre | 0 kelime | tamam, anlatimsiz |
+
+Ses zarfi (ceyrek saniyelik RMS): -19,4 ile -11,4 dBFS arasi, **duz**. Tek
+belirgin hareket t=3,75-4,00'da (-11,4 dB) , drone kesmeye dogru hafifce
+yukseliyor. Bu iyi ve **korunmali**.
+
+## 2. Kanca teshisi , kesme sayisi asil sorun DEGIL
+
+2 fps'lik kontakt sayfasi (16 kare / 8 sn) cikarildi ve goz ile bakildi.
+Bulgu, kesme sayisindan daha sert:
+
+**Cekim 1'in sekiz karesi pratik olarak AYNI. Cekim 2'nin sekiz karesi de
+pratik olarak AYNI.** Kamera "yavas, tek yonlu hareket" kuralina uyuyor ama
+hareket ekranda okunmuyor. Video, iki fotografin 4'er saniye tutulmasi gibi
+izleniyor.
+
+Ilk saniyede degisen tek sey, daktilo kunyesinin harfleriydi:
+
+- t=0,00 kadrajda "N"
+- t=0,25 "NEW YO"
+- t=0,50 "NEW YORK 2512" tamamlandi
+- t=0,50 , 3,50 arasi **hicbir sey degismiyor**
+- t=4,04 tek kesme
+
+Yani izleyicinin karar penceresinde (0-1,5 sn) videonun sundugu tek devinim
+yazi animasyonuydu.
+
+**Iyi olan:** t=0,00 karesi vaadi ZATEN tasiyor , Empire State + Chrysler
+silueti + yukseltilmis platformlar + su ayni karede. Kanca KOMPOZISYON olarak
+dogru kurulmus. Sorun kompozisyonda degil, **ritimde**.
+
+**Ikinci sorun , odul cok gec:** videonun duygusal karsiligi (platformun
+altindaki tekne mahallesi, camasirlar, isikli pencereler, insanlar) t=4,04'te
+basliyor. Kanalin en iyi karesi, izleyicilerin cogunun coktan kaydirdigi
+yerde duruyor.
+
+## 3. Ikinci direktifin olculebilir dayanagi
+
+Ihsan "yikimdan sonrasi gibi" dedi. Kadrajda gorunen: gri beton platformlar,
+yukselmis deniz, bugunku bina stoku. **Gorunur tek bir calisan teknoloji yok.**
+
+Konfigurasyon tarafinda sebep net: v1.0'in alti ailesinin ALTISI da bir
+tehdide verilen cevapti (`su yukseldi`, `cole donustu`, `ortu altinda`,
+`asagi indi`, `yukari buyudu`, `yesile donustu`) ve 36 konunun 36'si
+"sehir bir seye karsi siginmis" diye yazilmisti. Ekrandaki his tesaduf degil,
+doktrinin dogrudan ciktisiydi.
+
+## 4. Kiyas tabani (v2.0 bunun uzerine olculecek)
+
+| Bolum | YouTube | TikTok | IG |
+|---|---|---|---|
+| P1 ISTANBUL (13 Eyl) | 643 izlenme / 4 begeni | , | giris duvari |
+| P2 NEW YORK (14 Eyl) | 716 izlenme / 7 begeni | **5.400 izlenme / 15 begeni** | giris duvari |
+
+Not: TikTok YouTube'un ~7,5 kati getiriyor. Bu **olculdu ama aciklanmadi**,
+n=1. IG oynatma sayisi yine cekilemedi (og:description hiz siniri, tuzak 3).
+Eski kanal medyani 27 izlenmeydi, yani v1.0 zaten ~24 kat yukarida.
+
+## 5. Yapilan degisiklik , v2.0
+
+### 5.1 Ritim
+
+Motorun alt siniri 4 saniye oldugu icin "4 cekim x 2,5 sn" DOGRUDAN
+uretilemez. Iki adimda cozuldu:
+
+1. 4 cekim x **4 sn** uretilir (Omni enum'u 4/6/8/10).
+2. `micro_trim: 0.75` her klibin iki ucundan keser -> cekim basina **2,5 sn**.
+
+Gercek uretim fonksiyonu (`core.ffmpeg_tools.trim_head_tail`) ile dogrulandi:
+4 x 4,00 sn -> 4 x 2,50 sn -> birlesik **10,00 sn**, kesmeler 2,5 / 5,0 / 7,5.
+
+| | v1.0 | v2.0 |
+|---|---|---|
+| Cekim | 2 | **4** |
+| Kesme | 1 | **3** |
+| Kesme / 10 sn | 1,24 | **3,0** |
+| Sure | 8,04 sn | **10,0 sn** |
+| Odul (insanlar) | 4,04 sn'de | **2,5 sn'de** |
+
+10,0 sn ayni zamanda olculen referans kazananinin (10,1 sn) uzerine oturuyor;
+v1.0'in 8 sn'si o kazananin kisaltilmis haliydi.
+
+`trim_head_tail` kalan sure 2,0 sn'nin altina duserse kirpmayi reddedip klibi
+oldugu gibi kopyalar, yani 4 sn'lik klipte `micro_trim` **en fazla 1,0**
+olabilir. 0,75 guvenli payla secildi.
+
+Ayrica cekim 1 artik **kameradan bagimsiz hareket** tasimak zorunda (gecen
+kapsul, akan drone, yuruyen isik). Donuk ilk saniye artik sablon tarafindan
+engelleniyor.
+
+### 5.2 Yon
+
+Alti aile de teknoloji alani oldu: `havada ulasim`, `robotik insaat`,
+`enerji mimarisi`, `yasayan malzeme`, `otomatik uretim`, `yorunge baglantisi`.
+36 konunun 36'si yeniden yazildi. `art_style` ve `qc.notes` artik felaket
+estetigini (moloz, catlak, branda, sel, kum firtinasi, duman, terk edilmislik)
+**otomatik fail** sayiyor, ayrica "gorunur calisan teknoloji yoksa fail" kurali
+eklendi.
+
+Havuzdan **Phoenix ve Cusco cikarildi** (dunyaca taninan silueti yok, kanalin
+olculen tek kazanma sarti ise taninirlik , 371 kat). Yerlerine Chicago ve
+Machu Picchu geldi. Ikisi de kullanilmamisti.
+
+`id -> sehir` eslesmesi korundu: `_unused_topics` yayinlanmis bolumleri plan
+dosyalarindaki `seed_id` ile izliyor, eslesme bozulsa Istanbul ve New York
+havuza geri donerdi.
+
+### 5.3 Risk dagilimi
+
+Dort cekim yuzeysel olarak "dort kat fail sansi" gibi gorunur. Gercekte
+anatomi riski tasiyan cekim **yalniz birdir** (cekim 2). Cekim 1 havadan ve
+insansiz, cekim 3 makine olcegi, cekim 4 nesne ayrintisi. v1.0'da iki cekimin
+biri riskliydi, yani risk orani 1/2'den **1/4'e dustu**.
+
+Ayrica `qc.max_regens_per_episode: 8` eklendi. Adil pay `total // shot_count`
+oldugu icin alan yazilmadiginda 4 cekim yine cekim basina 1 regen alirdi ,
+part 3'u 15 Eylul'de dusuren tam olarak buydu ("cekim adil payi doldu").
+8 // 4 = 2, yani her cekim `max_regens_per_shot` kadar hak aliyor.
+`EPISODE_CREDIT_CAP` 900'den 1200'e cikti (4 x 80 + muzik 80 + en kotu
+8 x 80 = 1040).
+
+## 6. Yol boyunca bulunan IKI GERCEK ARIZA
+
+### 6.1 Kunye kapisi TERS calisiyordu (kod hatasi, bugune kadar gizliydi)
+
+`_validate_batch` icinde iki ayri kunye dali vardi. `year_required: true` olan
+dal alt yaziyi **kosulsuz** zorunlu tutuyordu ve `subtitle_required: false`
+alanini hic okumuyordu. Sonuc:
+
+- Kanalin **dogru** kunyesi `{"title": "PARIS 2512", "subtitle": ""}` ->
+  **REDDEDILIYORDU**
+- **Yanlis** kunye `{"title": "Eiffel Tower: Energy Spine",
+  "subtitle": "Paris, France 2512"}` -> **KABUL EDILIYORDU** (yil kontrolu alt
+  yazidan geciyordu)
+
+Bugune kadar gorulmemesinin sebebi: kurulustaki bes plan (911855c) ELLE
+yazilmisti. 15 Eylul, ikmalin still-home icin plan yazdigi **ilk gundu** ve
+bes planin BESI de bozuk kunye uretti. Yani bu hata benim degisikligimden
+bagimsiz olarak ilk otomatik ikmalde patlayacakti.
+
+Duzeltme: iki dal birlestirildi, tek kapi `validate_title_card`. Ustune
+opt-in **bicim kapisi** eklendi (`title_card.title_pattern` /
+`subtitle_pattern`); still-home icin `[A-Z][A-Z0-9' .-]{1,28} 2512` ve alt
+yazi bos. Kanit: yeniden uretimde Gemini'nin 1. denemesi dort bozuk kunyeyle
+**reddedildi**, 2. denemesi temiz gecti.
+
+### 6.2 Muzik prompt'u doktrinden kaciyordu
+
+Yeni uretilen bes planin besinde de piyano, yayli, kreskendo, akor cozumu ve
+"rising harmonic progression" belirdi , doktrin ise tek, sabit, vurussuz,
+melodisiz derin drone istiyor. Yayinlanmis iki bolumun prompt'u ise harfi
+harfine AYNIYDI.
+
+Degismeyen bir alani modele yazdirmak sadece sapma riski uretir. Yeni
+`bible.series.music_fixed` alani eklendi: doluysa ikmal modelden muzik
+istemez, kanonik metni aynen kullanir. still-home'a part 1/2'nin olculmus
+(-14,1 LUFS, LRA 2,0) metni pinlendi.
+
+## 7. Yeniden uretilen kuyruk (dogrulandi)
+
+| Part | Baslik | Kunye | Aile |
+|---|---|---|---|
+| 3 | Paris Powers Its Own Tower | PARIS 2512 | enerji mimarisi |
+| 4 | Dubai Grows Its Own Skin | DUBAI 2512 | yasayan malzeme |
+| 5 | Tokyo Feeds Itself From Below | TOKYO 2512 | otomatik uretim |
+| 6 | London Connects Earth To Orbit | LONDON 2512 | yorunge baglantisi |
+| 7 | Cairo Moves Its People By Air | CAIRO 2512 | havada ulasim |
+
+Besi de: 4 cekim x 4 sn, kanonik drone, tek satirlik dogru kunye. Part 3'un
+dort prompt'unda yazi-riski kelimesi ve olumsuz dil **yok**; icerik olarak
+isildayan enerji omurgasi, akan isik hatlari, otonom temizlik dronlari ve
+otomatik cam temizleyici var , istenen robotik/ileri teknoloji yonu.
+
+Kucuk sapma: part 3 cekim 4 "slowly pans across the balcony" diyor, doktrin
+pan'i yasakliyor. Tek yonlu yavas hareket olarak zararsiz kabul edildi,
+yeniden uretim tetiklenmedi.
+
+## 8. OLCULMEMIS , iddia edilmiyor
+
+- **v2.0 olculmedi.** "Uc gecis tek gecisten iyi tutar" ve "ileri teknoloji
+  yonu felaket yonunden iyi tutar" IKI AYRI hipotez ve ayni bolumde birlikte
+  degistiler. Part 3 ve sonrasi bunlari **birbirinden ayiramaz**. Ayirmak
+  isteniyorsa ayri bir test kurulmalidir.
+- Kontakt sayfasindaki "hareket yok" bulgusu GOZLE tespit edildi; hareket
+  miktari (ornegin kare-farki enerjisi) sayisal olarak olculmedi.
+- TikTok'un YouTube'un 7,5 kati getirmesi n=1'dir, aciklanmadi.
+- Kesme sayaci sentetik dogrulama klibinde 3 kesmeden 2'sini gordu (duz renk
+  alanlarinda `scene=0.3` esigi yetersiz kaliyor, tuzak 9). Uc kesmenin de
+  yerinde oldugu kare renkleri orneklenerek ayrica dogrulandi.
+- v2.0 ile uretilmis GERCEK bir bolum henuz yok. Yukaridaki 10,0 sn ve 3 kesme
+  sentetik klip uzerinde, gercek uretim fonksiyonuyla dogrulandi.

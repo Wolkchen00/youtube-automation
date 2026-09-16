@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "Cairo Moves Its People By Air"
+  },
+  "synopsis": "Magnetic transit lines crisscross the Giza plateau in Cairo, with the Pyramids standing beside the illuminated spans that carry the city.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, AERIAL. The camera flies high in the open sky, far ABOVE every rooftop, tower and mast in the city, and looks DOWN on it from there. The whole city lies below the camera and spreads across the frame from edge to edge; the horizon and open sky sit in the top third. Think satellite, helicopter or drone at altitude. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the advanced technology this episode is about, built at city scale and visibly running, so a viewer who sees only this one frame already knows which city it is and what it became. Something inside the city MOVES independently of the camera for the whole four seconds: transit pods travelling their line, craft crossing their corridor, cargo drones streaming between towers, light pulsing along a structure. One slow, single-direction camera move only, a straight descent or a forward glide, and the camera stays outdoors and above the structures for the entire four seconds. The shot holds one continuous unbroken view from first frame to last.\n\nAERIAL. The camera glides forward high above Cairo. The Giza plateau is crisscrossed by luminous magnetic transit lines, with sleek, glowing pods moving silently along them. The Great Pyramids stand majestically beside these lit spans, seamlessly integrated into the futuristic transport network. The desert landscape stretches to the horizon, dotted with distant city structures. The camera performs a straight forward glide.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, GROUND LEVEL. After a hard cut, the camera stands at human eye height in a busy public place in the SAME city, at a completely different vantage point from shot 1. People go about ordinary daily life around the technology, walking, riding, trading, carrying and queueing, while autonomous machines work alongside them at the same easy pace. Every human figure reads at roughly one sixth of the frame height or smaller and stands in the middle ground or further back, seen from behind or in three-quarter view, so the crowd reads as movement and warmth at a distance. The nearest third of the frame is held by architecture, machinery, planting or open floor. Warm practical light from windows, canopies, lamps and the technology's own glow falls across the scene. Surfaces carry painted symbols and plain colour fields, so every surface stays clear of lettering. The same recognisable landmark stays readable in the background or on the horizon so the shots read as one city. One slow, single-direction camera move only, at a constant height.\n\nGROUND LEVEL. The camera moves slowly at human eye height through a public viewing area on the Giza plateau, near one of the magnetic transit lines. People, small in the frame, stand and observe the Pyramids, which are framed by the elegant, lit structural spans of the transit system. Glowing pods glide past silently in the middle distance. The scene is bathed in warm desert light. The camera moves slowly forward at a constant height.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, MACHINE SCALE. After a hard cut, the camera is close to the advanced technology itself while it works: an autonomous builder arm laying material, a transit pod sliding through its guide, an energy column drawing light up its length, a fabricator filling a crate, a machine-tended canopy of growing green. The mechanism fills most of the frame and its motion is continuous, purposeful, precise and unhurried. Machined metal, glass and structural light carry fine surface detail. The recognisable landmark or skyline stays visible past the mechanism so the city remains identified. Human presence reads only as small distant figures far behind the machine. One slow, single-direction camera move only.\n\nMACHINE SCALE. The camera is close to a section of the magnetic transit line, focusing on a glowing transit pod as it glides smoothly and silently along its rail. The pod's surface is sleek, reflecting the desert light and the internal glow of its propulsion. The intricate, luminous guide mechanism of the track fills most of the frame. Distant figures are visible near the base of one of the Pyramids, providing a sense of scale. The camera slowly tracks alongside the moving pod.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, WARM DETAIL. After a hard cut, the camera rests close on one small piece of everyday home life inside this advanced city: a lit balcony thick with plants above a glowing street, a small delivery drone settling onto a window ledge, laundry moving in warm air beside a luminous wall panel, a cat asleep on a warm machined sill, steam rising from a food counter, a child's bicycle leaning against a rail of light. The detail fills the frame and is lit warmly from inside the home. Motion is gentle and continuous: leaves stirring, steam curling, light breathing, the drone settling. Any person present reads as a small silhouette or a shoulder passing at the frame edge, well behind the subject. A sliver of the recognisable skyline or landmark sits softly out of focus in the background so the place stays identified. One slow, single-direction camera move only.\n\nWARM DETAIL. The camera rests on a close-up of a warm, lit interior window in a modern Cairo dwelling. A small, intricately patterned, glowing light panel illuminates a comfortable seating area. Through the window, a sliver of the distant Giza Pyramids is visible, softly silhouetted against the evening sky, with the faint glow of the magnetic transit lines passing in the far background. The light in the room pulses gently. The camera slowly pans across the interior detail.",
+      "seed": null
+    }
+  ],
+  "family": "havada ulasim",
+  "seed_id": 7,
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "CAIRO 2512",
+    "subtitle": ""
+  },
+  "caption": "Cairo in 2512 boasts magnetic transit lines running straight across the Giza plateau, with the Pyramids standing beside the lit spans that carry the city to them. This revolutionary transport system seamlessly connects ancient sites with modern urban centers, eliminating traffic and noise. Sleek, glowing pods glide silently above the desert landscape, distant figures view the pyramids from elevated platforms, and the city's pulse becomes one of effortless, silent motion.\n\nA fictional future, created with AI.\n\nHow would a city designed for silent, effortless movement change your daily commute?\n\nالقاهرة في عام 2512 تفخر بخطوط نقل مغناطيسية تمتد مباشرة عبر هضبة الجيزة، وتقف الأهرامات بجانب الجسور المضاءة التي تحمل المدينة إليها. لقد أعاد نظام النقل الثوري هذا تعريف الربط بين المواقع القديمة والمراكز الحضرية الحديثة بسلاسة، مما قضى على الازدحام المروري والضوضاء. تنزلق كبسولات مضيئة أنيقة بصمت فوق المناظر الطبيعية الصحراوية، وتشاهد شخصيات بعيدة الأهرامات من منصات مرتفعة، ويصبح نبض المدينة حركة سهلة وصامتة.\n\nمستقبل خيالي، صنعه الذكاء الاصطناعي.\n\nكيف سيغير التنقل الصامت والسلس في مدينة مصممة لذلك رحلتك اليومية؟",
+  "hashtags": "#Cairo2512 #MagneticTransit #GizaPlateau #FutureMobility #Pyramids #UrbanPlanning #SmartTransport #STILLHOME2512",
+  "hook_shot": 2,
+  "doctrine_sha256": "89b31cebd427f20118d4ee82668e61b6971a39ec2876da54a42a455dd1ccea99"
+}

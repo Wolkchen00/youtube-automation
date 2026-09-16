@@ -1,0 +1,45 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "London Connects Earth To Orbit"
+  },
+  "synopsis": "An orbital elevator ribbon ascends from the Thames in London, with Tower Bridge and Big Ben anchoring its terrestrial terminal.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, AERIAL. The camera flies high in the open sky, far ABOVE every rooftop, tower and mast in the city, and looks DOWN on it from there. The whole city lies below the camera and spreads across the frame from edge to edge; the horizon and open sky sit in the top third. Think satellite, helicopter or drone at altitude. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the advanced technology this episode is about, built at city scale and visibly running, so a viewer who sees only this one frame already knows which city it is and what it became. Something inside the city MOVES independently of the camera for the whole four seconds: transit pods travelling their line, craft crossing their corridor, cargo drones streaming between towers, light pulsing along a structure. One slow, single-direction camera move only, a straight descent or a forward glide, and the camera stays outdoors and above the structures for the entire four seconds. The shot holds one continuous unbroken view from first frame to last.\n\nAERIAL. The camera glides forward high above London. An orbital elevator ribbon, luminous and slender, rises majestically from a terminal on the Thames, disappearing into the clouds. Tower Bridge and Big Ben stand at the foot of this colossal structure. Sleek, glowing transport modules are visible ascending the ribbon at a steady pace. The city spreads below, bathed in the soft morning light. The camera performs a straight forward glide.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, GROUND LEVEL. After a hard cut, the camera stands at human eye height in a busy public place in the SAME city, at a completely different vantage point from shot 1. People go about ordinary daily life around the technology, walking, riding, trading, carrying and queueing, while autonomous machines work alongside them at the same easy pace. Every human figure reads at roughly one sixth of the frame height or smaller and stands in the middle ground or further back, seen from behind or in three-quarter view, so the crowd reads as movement and warmth at a distance. The nearest third of the frame is held by architecture, machinery, planting or open floor. Warm practical light from windows, canopies, lamps and the technology's own glow falls across the scene. Surfaces carry painted symbols and plain colour fields, so every surface stays clear of lettering. The same recognisable landmark stays readable in the background or on the horizon so the shots read as one city. One slow, single-direction camera move only, at a constant height.\n\nGROUND LEVEL. The camera moves slowly at human eye height through a bustling public plaza at the base of the orbital elevator terminal, near Tower Bridge. People, small in the frame, gather and move, observing the immense ribbon ascending. Cargo shuttles are gently docking and departing from designated areas. The iconic arch of Tower Bridge and the clock tower of Big Ben are clearly visible in the background. The camera moves slowly forward at a constant height.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, MACHINE SCALE. After a hard cut, the camera is close to the advanced technology itself while it works: an autonomous builder arm laying material, a transit pod sliding through its guide, an energy column drawing light up its length, a fabricator filling a crate, a machine-tended canopy of growing green. The mechanism fills most of the frame and its motion is continuous, purposeful, precise and unhurried. Machined metal, glass and structural light carry fine surface detail. The recognisable landmark or skyline stays visible past the mechanism so the city remains identified. Human presence reads only as small distant figures far behind the machine. One slow, single-direction camera move only.\n\nMACHINE SCALE. The camera is close to the base of the orbital elevator ribbon where a glowing transport module is slowly and silently ascending. The module's smooth, machined surfaces reflect the soft, engineered light of the terminal. The intricate mechanism of the ribbon's guide system is visible, moving with precise, unhurried motion. Distant figures can be seen on observation decks. The upper structure of Big Ben is visible in the background. The camera slowly tracks upwards alongside the module.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, WARM DETAIL. After a hard cut, the camera rests close on one small piece of everyday home life inside this advanced city: a lit balcony thick with plants above a glowing street, a small delivery drone settling onto a window ledge, laundry moving in warm air beside a luminous wall panel, a cat asleep on a warm machined sill, steam rising from a food counter, a child's bicycle leaning against a rail of light. The detail fills the frame and is lit warmly from inside the home. Motion is gentle and continuous: leaves stirring, steam curling, light breathing, the drone settling. Any person present reads as a small silhouette or a shoulder passing at the frame edge, well behind the subject. A sliver of the recognisable skyline or landmark sits softly out of focus in the background so the place stays identified. One slow, single-direction camera move only.\n\nWARM DETAIL. The camera rests on a small, illuminated window nook in a London home, adorned with a few personal items and a small, antique-looking telescope pointed skyward. The window offers a soft, out-of-focus view of the distant orbital elevator ribbon ascending into the blue. A cat is asleep on a warm, machined sill. The light is warm and inviting. The camera slowly zooms in slightly on the telescope.",
+      "seed": null
+    }
+  ],
+  "family": "yorunge baglantisi",
+  "seed_id": 6,
+  "music": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "LONDON 2512",
+    "subtitle": ""
+  },
+  "caption": "London in 2512 has an orbital elevator ribbon climbing from the Thames into the sky, with Tower Bridge and Big Ben standing proudly at the foot of its terminal. This monumental achievement redefined global travel and trade, connecting Earth directly to orbit and beyond. Sleek transport modules glide silently up the ribbon, cargo shuttles gently dock near historic landmarks, and the air above the Thames hums with a quiet, purposeful energy.\n\nA fictional future, created with AI.\n\nIf space travel became as routine as a train ride, what would be the first place you'd visit?",
+  "hashtags": "#London2512 #OrbitalElevator #Spaceport #FutureTravel #Thames #BigBen #EngineeringMarvel #STILLHOME2512",
+  "hook_shot": 2,
+  "doctrine_sha256": "89b31cebd427f20118d4ee82668e61b6971a39ec2876da54a42a455dd1ccea99"
+}

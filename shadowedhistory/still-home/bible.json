@@ -8,38 +8,41 @@
     "state_machine_version": 2,
     "chain_frames": false,
     "audio_smooth": false,
-    "micro_trim": 0,
+    "micro_trim": 0.75,
     "native_audio": false,
     "master_lufs": -14,
     "master_true_peak_margin_db": 0.2,
     "music_lowpass_hz": 2000,
     "block_degraded_publish": true,
     "duration_band": [
-      7,
-      9
+      9,
+      11
     ],
     "hook_teaser": {
       "enabled": false
     },
     "title_card": {
       "enabled": true,
-      "duration": 4.0,
+      "duration": 2.5,
       "typewriter": 0.5,
       "align": "left",
       "margin_pct": 6,
       "color": "black",
       "box": false,
       "subtitle_required": false,
-      "year_required": true
+      "year_required": true,
+      "title_pattern": "[A-Z][A-Z0-9'’ .-]{1,28} 2512",
+      "subtitle_pattern": ""
     },
     "qc": {
       "enabled": true,
       "require_all_shots": true,
-      "min_shots": 2,
+      "min_shots": 4,
       "native_audio_review": false,
-      "notes": "Every episode is TWO shots of ONE real, world-recognisable city in the year 2512. SHOT 1 IS AERIAL: the camera is high in the open sky, above every rooftop, tower, dome and canopy, looking down, and the whole adapted city fills the frame. Fail shot 1 if the camera is at ground level, indoors, or underneath a roof, canopy, bridge or shelter, and fail it if the city does not read as seen from the air. SHOT 2 IS GROUND LEVEL among people. Fail the episode if no world-famous landmark or skyline is recognisable, if the place is an invented or generic location, if the two shots do not read as the same city, or if shot 2 contains no people going about ordinary life. This channel shows CONTINUITY, not apocalypse: ruins-only imagery, corpses, panic, warfare, weapons and abandoned emptiness are automatic failures, and so are close-ups of faces. Readable on-screen text, captions, subtitles, logos and watermarks are automatic failures because the title card is burned in afterwards. Record any of these under issues.",
+      "notes": "Every episode is FOUR shots of ONE real, world-recognisable city in the year 2512, and the subject of every episode is a piece of ADVANCED WORKING TECHNOLOGY that the city built and runs. SHOT 1 IS AERIAL: the camera is high in the open sky, above every rooftop, tower and mast, looking down, and the whole city fills the frame. Fail shot 1 if the camera is at ground level, indoors, or underneath a roof, canopy, bridge or shelter, and fail it if the city does not read as seen from the air. SHOT 2 IS GROUND LEVEL among people. SHOT 3 IS A CLOSE VIEW OF THE TECHNOLOGY ITSELF while it works. SHOT 4 IS ONE SMALL WARM DETAIL of everyday home life. Fail the episode if no world-famous landmark or skyline is recognisable, if the place is an invented or generic location, if the four shots do not read as the same city, or if no advanced technology is visibly working. THIS CHANNEL SHOWS A CITY THAT ADVANCED, NOT A CITY THAT SURVIVED A CATASTROPHE: rubble, ruins, cracked or damaged structure, makeshift or salvaged construction, scaffolding of lashed poles, tarpaulin shelters, floodwater standing in streets, sandstorms, smoke, fire, corpses, panic, warfare, weapons, refugee camps and abandoned emptiness are automatic failures. A merely old, weathered, pre-industrial or present-day-looking city with no visible advanced technology is also a failure. Close-ups of faces are automatic failures, and so is any human figure whose hands, limbs or body read as malformed. Readable on-screen text, captions, subtitles, lettering on signs or panels, logos and watermarks are automatic failures because the title card is burned in afterwards. Record any of these under issues.",
       "api_fail_open": false,
-      "require_first_frame": true
+      "require_first_frame": true,
+      "max_regens_per_episode": 8
     },
     "fps": 24,
     "master_lra": 1.5,
@@ -48,9 +51,10 @@
       "out": 0.05
     },
     "music_offset_sec": 12,
-    "art_style_note": "2026-09-15 DUZELTME: art_style 'signage glow' diyordu ve her cekim promptunun basina ekleniyordu, ama bible.series.qc.notes 'readable on-screen text ... automatic failures' diyor. Yani seri kendi QC kapisina prompt'la saldiriyordu. Part 3 (Paris) cekim 2 tam bu yuzden dustu: QC gerekcesi 'readable text is present on a market stall sign'. Yazi artik olumsuz dille degil YONLENDIRMEYLE engelleniyor (boyali sembol + renk alani)."
+    "art_style_note": "2026-09-15 v2.0 (Ihsan direktifi): (a) konsept yikim-sonrasi okunuyordu -> art_style ve butun konu havuzu ILERI TEKNOLOJI yonune cevrildi; (b) 2 cekim -> 4 cekim, micro_trim 0,75 ile her cekim 2,5 sn, yani 3 sert gecis ve 10,0 sn. 2026-09-15 v1.1 notu gecerliligini koruyor: art_style'in istedigi seyi qc.notes YASAKLAYAMAZ. Bu yuzden art_style tabela, yazi, ekran ve logo ISTEMEZ; yazinin isini boyali sembol ve renk alani yapar.",
+    "music_fixed": "A single sustained sub-bass drone at one steady level for the whole duration, built from deep low-frequency air and distant structural resonance. It holds the same volume from the first second to the last, stays free of percussion, rhythm, melody, vocals and high frequencies, and ends mid-tone so the loop is seamless."
   },
-  "art_style": "Photoreal documentary footage of a real, named present-day city as it exists in the year 2512, composed for vertical 9:16 at 24 fps. The city's genuine geography and its world-famous landmarks stay recognisable at credible scale, visibly transformed by the adaptation this episode shows rather than destroyed by it. Natural motivated light, restrained documentary colour, deep shadows, fine architectural texture, stable exposure and clear scale cues give the image the clarity and grain of real aerial and street photography. Warm interior and street lighting reads throughout: lit windows, market stalls, hanging lamps and moving crowds establish that the place is lived in; painted symbols and colour fields do the work that lettering would, so no readable words appear on any surface. The frame edge is the image edge and the view is unobstructed. Surfaces are maintained and inhabited, never ruined; the mood is durable, ordinary and quietly hopeful.",
+  "art_style": "Photoreal documentary footage of a real, named present-day city as it exists in the year 2512, composed for vertical 9:16 at 24 fps. The city's genuine geography and its world-famous landmarks stay recognisable at credible scale, carried forward and built upon by five centuries of engineering. Advanced working technology is the subject of the frame: precision-machined alloy and glass, luminous structural edges, autonomous machines moving with purpose, transit gliding along its own lines, energy reading as steady light. Natural motivated light mixes with the engineered glow of the city itself; restrained documentary colour, deep shadows, fine machined texture, stable exposure and clear scale cues give the image the clarity and grain of real aerial and street photography. Surfaces are immaculate and continuously maintained by the machines that live on them. The city is prosperous, busy and bright: lit interiors, moving crowds, cargo in motion and engineered green establish a place that is doing well. Painted symbols and pure colour fields do the work that lettering would, so every surface stays clear of readable words. The frame edge is the image edge and the view is unobstructed. The mood is confident, advanced and warm.",
   "music": true,
   "characters": [],
   "environments": [],

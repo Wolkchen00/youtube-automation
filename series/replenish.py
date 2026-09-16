@@ -331,6 +331,26 @@ def validate_title_card(bible: Bible, plan: dict, *, required: bool = False) -> 
             + f"(≤{title_limit}/≤{subtitle_limit} karakter)"
         ]
 
+    # Opt-in BICIM kapisi. Bir seri kunyesinin sabit bir kalibi varsa onu veriyle
+    # soyler ve model uyduramaz. still-home'un kunyesi markanin kendisi: tek
+    # satir, BUYUK harf sehir adi + " 2512". 15 Eylul 2026'da ikmalin urettigi
+    # bes planin besi de bunun yerine iki satirli "Eiffel Tower: Energy Spine" /
+    # "Paris, France 2512" yazdi ve yil kontrolu ALT YAZIDAN gecti. Uzunluk ve
+    # yil kontrolu bicimi denetlemiyor; bu alan denetliyor.
+    for field, value in (("title", title), ("subtitle", subtitle)):
+        pattern = (config or {}).get(f"{field}_pattern")
+        if pattern is None:
+            continue   # "" GECERLI bir kalip: "bu alan bos olmali" demek
+        try:
+            matched = re.fullmatch(str(pattern), value) is not None
+        except re.error as error:
+            return [f"title_card.{field}_pattern gecersiz duzenli ifade: {error}"]
+        if not matched:
+            return [
+                f"title_card.{field} seri kalibina uymuyor "
+                f"({pattern!r}); gelen: {value!r}"
+            ]
+
     if not year_required:
         return []
     anchor_text = f"{title} {subtitle}"
@@ -346,13 +366,15 @@ def validate_title_card(bible: Bible, plan: dict, *, required: bool = False) -> 
         ))
         if not has_year:
             return [
-                "title_card 4-haneli yil veya cag cipasi icermeli "
-                f"(gelen: {title!r} / {subtitle!r})"
+                "title_card 4-haneli yıl veya çağ çıpası içermeli "
+                "(ör. 'Zanzibar, 1896', 'Egypt, 69 BCE', 'Pompeii, AD 79'); "
+                f"gelen: {title!r} / {subtitle!r}"
             ]
     elif not has_year:
         return [
-            "title_card 4-haneli bir yil icermeli "
-            f"(gelen: {title!r} / {subtitle!r})"
+            "title_card 4-haneli bir yıl içermeli (başlıkta 'City, 1909' ya da "
+            "alt yazıda '… ,  found 1901') ,  "
+            f"gelen: {title!r} / {subtitle!r}"
         ]
     return []
 
@@ -1645,14 +1667,29 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             normalized["card_page_id"] = card["page_id"]
             normalized["card_topic"] = card["topic"]
         if want_music:
-            mtext = str(plan.get("music") or "").strip()
-            mwc = len(mtext.split())
-            if not (20 <= mwc <= 140):
-                errors.append(f"part {want}: music prompt {mwc} kelime ,  40-90 hedef "
-                              f"(kabul 20-140) dışında")
+            # bible.series.music_fixed varsa ses SERİ SABİTİDİR: modelin yazdığı
+            # metin okunmaz bile. Bkz. Bible.music_fixed.
+            if bible.music_fixed:
+                normalized["music"] = bible.music_fixed
             else:
-                normalized["music"] = mtext
-        if want_tc and bible.title_card.get("year_required", True) is False:
+                mtext = str(plan.get("music") or "").strip()
+                mwc = len(mtext.split())
+                if not (20 <= mwc <= 140):
+                    errors.append(f"part {want}: music prompt {mwc} kelime ,  40-90 hedef "
+                                  f"(kabul 20-140) dışında")
+                else:
+                    normalized["music"] = mtext
+        if want_tc:
+            # TEK kapi. Onceden iki ayri dal vardi ve `year_required: true` olan dal
+            # alt yaziyi KOSULSUZ zorunlu tutuyordu. Bu, `subtitle_required: false`
+            # tasiyan tek satirlik kunyeyi (still-home: "ISTANBUL 2512" / "")
+            # REDDEDIYOR, iki satirlik yanlisini KABUL EDIYORDU ,  yani kapi ters
+            # calisiyordu. Kurulusta bes plan ELLE yazildigi icin hata 15 Eylul
+            # 2026'ya kadar gorulmedi: o gun ikmal still-home icin ilk kez plan
+            # yazdi ve besinin BESI de "Eiffel Tower: Energy Spine" /
+            # "Paris, France 2512" bicimini uretti. validate_title_card zaten
+            # subtitle_required, uzunluk, yil ve flashpoints cag cipasini birlikte
+            # ele aliyor; iki dalin ayri durmasi icin bir sebep yoktu.
             title_card_errors = validate_title_card(bible, plan, required=True)
             errors.extend(f"part {want}: {error}" for error in title_card_errors)
             if not title_card_errors:
@@ -1661,42 +1698,6 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                     "title": str(tcv.get("title") or "").strip(),
                     "subtitle": str(tcv.get("subtitle") or "").strip(),
                 }
-        if want_tc and bible.title_card.get("year_required", True):
-            tcv = plan.get("title_card") or {}
-            tt = str(tcv.get("title") or "").strip()
-            ts = str(tcv.get("subtitle") or "").strip()
-            # Künye GERÇEK bir 4-haneli yıl taşımalı (1000-2999) ,  başlıkta VEYA alt
-            # yazıda (footnotes formatı yılı başlığa koyar: 'Barcelona, 1909'; drowned
-            # alt yazıya: '… ,  found 1901'). Ekrana basılan tarih doğruluğu güvencesi:
-            # model tarihi düşürür ya da uydurursa batch reddedilir → Gemini yeniden
-            # dener (brief: yıl DOĞRUDAN kaynak kayıttan kopyalanır).
-            anchor_text = f"{tt} {ts}"
-            has_year = bool(re.search(r"\b(1[0-9]{3}|2[0-9]{3})\b", anchor_text))
-            if bible.slug == "flashpoints":
-                has_year = has_year or bool(
-                    re.search(
-                        r"\b(?:\d{1,4}\s*(?:BCE|BC|CE|AD)|"
-                        r"(?:BCE|BC|CE|AD)\s*\d{1,4})\b|"
-                        r"\b(?:1[0-9]{3}|20[0-9]{2})s\b|"
-                        r"\b\d{1,2}(?:st|nd|rd|th)\s+century\b",
-                        anchor_text,
-                        re.IGNORECASE,
-                    )
-                )
-            if not tt or not ts or len(tt) > 60 or len(ts) > 60:
-                errors.append(f"part {want}: title_card.title ve .subtitle zorunlu (≤60 karakter)")
-            elif not has_year and bible.slug == "flashpoints":
-                errors.append(
-                    f"part {want}: title_card 4-haneli yıl veya çağ çıpası içermeli "
-                    f"(ör. 'Zanzibar, 1896', 'Egypt, 69 BCE', 'Pompeii, AD 79'); "
-                    f"gelen: {tt!r} / {ts!r}"
-                )
-            elif not has_year:
-                errors.append(f"part {want}: title_card 4-haneli bir yıl içermeli (başlıkta "
-                              f"'City, 1909' ya da alt yazıda '… ,  found 1901') ,  "
-                              f"gelen: {tt!r} / {ts!r}")
-            else:
-                normalized["title_card"] = {"title": tt, "subtitle": ts}
         if want_caption:
             # Opt-in (the__footnote formatı): yazılı hikâye + bölüme-özgü etiketler.
             cap = str(plan.get("caption") or "").strip()

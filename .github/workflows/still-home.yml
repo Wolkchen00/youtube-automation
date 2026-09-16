@@ -6,11 +6,16 @@ name: Still Home Daily
 # ANLATIMSIZ yeni bir konseptle yaziliyor. Olculen gerekce: flashpoints'in 15
 # videosunda medyan 24 izlenme, aralik 0-1.179.
 #
-# Format, olcumden geliyor (shadowedhistory/REELYZE-RAPOR.md, @one__create EK):
-# gercek ve DUNYACA TANINAN bir sehrin 2512'deki hali IKI CEKIMDE gosterilir.
-# Cekim 1 tanri-gozu genis (4 sn), sert kesme, cekim 2 insan olceginde (4 sn).
+# Format v2.0 (Ihsan direktifi 15 Eylul 2026): gercek ve DUNYACA TANINAN bir
+# sehrin 2512'deki hali DORT CEKIMDE, UC SERT GECISLE gosterilir. Cekimler
+# olcek sirasindadir: havadan sehir -> yer seviyesi insanlar+makineler ->
+# makine olcegi -> sicak ev ayrintisi. Motor 4 sn'nin altinda klip uretemedigi
+# icin 4 x 4 sn uretilir ve micro_trim 0,75 ile her biri 2,5 sn'ye iner:
+# bolum 10,0 sn. Konu, sehrin basina gelen bir felaket DEGIL sehrin KURDUGU
+# calisan teknolojidir (manyetik ulasim, otonom insaat, enerji mimarisi,
+# yasayan malzeme, otomatik uretim, yorunge baglantisi).
 # Anlatim YOK. Tek ses: ~2 kHz'de kesik derin drone, -14 LUFS. Kunye ekrana
-# DAKTILO ile yazilir (SEHIR + 2512) ve kesmede soluar.
+# DAKTILO ile yazilir (SEHIR + 2512) ve ILK kesmede (2,5 sn) soluar.
 #
 # Olculen kazanma sarti: TANINIR SEHIR. Referansta ayni kanal ve ayni formatta
 # taninir sehir 46.042 begeni aldi, isimsiz kubbe 124 (371 kat fark). Bu bulgu
@@ -73,7 +78,11 @@ jobs:
           YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
-          EPISODE_CREDIT_CAP=900
+          # v2.0: bolum 2 cekimden 4 cekime cikti. Omni 4 sn = 80 kredi
+          # (muhafazakar tahmin), yani 4 ana cekim 320 + muzik 80 = 400.
+          # qc.max_regens_per_episode=8 en kotu durumda 8 x 80 = 640 daha
+          # ister; 1040 toplam. 900 tavani regen'leri ortasinda keserdi.
+          EPISODE_CREDIT_CAP=1200
           MONTHLY_CREDIT_CAP=60000
           EOF
 
