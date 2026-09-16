@@ -15,7 +15,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 7,
-  "next_part": 3,
+  "next_part": 4,
   "doctrine_sha256": "89b31cebd427f20118d4ee82668e61b6971a39ec2876da54a42a455dd1ccea99",
   "kurulum_notu": "13 Eylul 2026'da kuruldu (flashpoints'in yerine) ve AYNI GUN CANLIYA ALINDI. Ihsan karari: 'tamam bunu paylasalim, yeni pipeline bunu yerlestirelim, her gun yeni bir populer sehir olsun'. Ilk bolum ISTANBUL 2512 elle yayinlandi, sonrasi still-home.yml 20:30 UTC cron'una birakildi. publish_mode=auto, canli gunluk seridin (wild-encounter) filo gelenegiyle ayni. Durdurmak icin: status='paused' + still-home.yml schedule blogunu yorumla. | 2026-09-15 v2.0 (Ihsan iki direktifi): (1) 'daha hizli gecisler lazim tek videoda 3 sahne gecisi istiyorum' -> 2 cekim 4 cekime cikti, micro_trim 0,75 ile bolum 4 x 2,5 = 10,0 sn ve 3 sert kesme tasiyor. (2) 'ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun, videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine teknolojinin nasil gelistigini anlatan bir video olsun' -> konsept yikim-sonrasi uyarlamadan ILERI TEKNOLOJIYE cevrildi: alti aile de degisti, 36 konunun 36'si yeniden yazildi, art_style ve qc.notes felaket estetigini otomatik fail sayiyor.",
   "auto_replenish": {
@@ -296,6 +296,27 @@
         "narration_delivered": null,
         "arc_roles_missing": [],
         "duration_s": 8.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/still-home/episodes/ep03/ep03_music_titled_mastered.mp4",
+      "subtitle": "Paris Powers Its Own Tower",
+      "stack_sha256": "140b243ff7426fd2e3df8e0d621a4c896d8c32b2faa21736dfd48f74cdc0699b",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-16T23:29:50.175762+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
         "duration_in_band": true,
         "degraded": false
       }
