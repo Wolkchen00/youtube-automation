@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 13,
-  "next_part": 10,
+  "next_part": 11,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -198,11 +198,50 @@
       }
     },
     "10": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-09-15T21:42:39.870007+00:00",
       "retry_count": 0,
       "last_reason_code": "TRANSIENT_INFRA",
-      "hold_reason": "2026-09-15: iki kosuda 10/10 Omni denemesi 500 verdi. Sebep ISTEK DEGIL ALTYAPI: Kie'nin character_ids alani bu hesapta bozulmus. Izole edildi , ayni prompt character_ids YOKKEN basarili (126 kredi), 4 saniyelik zararsiz promptta bile character_ids VARKEN fail; yeniden kayit da cozmedi. bible.characters[0].character_id null yapildi, yuz ref_image_url ile baglaniyor ve bu yol CANLI dogrulandi (1080x1920 / 24 fps / 240 kare klip uretti). Icerik sayaci 2'den 0'a alindi: harcanan iki hak icerik reddi degildi, altyapi arizasiydi."
+      "hold_reason": "2026-09-15: iki kosuda 10/10 Omni denemesi 500 verdi. Sebep ISTEK DEGIL ALTYAPI: Kie'nin character_ids alani bu hesapta bozulmus. Izole edildi , ayni prompt character_ids YOKKEN basarili (126 kredi), 4 saniyelik zararsiz promptta bile character_ids VARKEN fail; yeniden kayit da cozmedi. bible.characters[0].character_id null yapildi, yuz ref_image_url ile baglaniyor ve bu yol CANLI dogrulandi (1080x1920 / 24 fps / 240 kare klip uretti). Icerik sayaci 2'den 0'a alindi: harcanan iki hak icerik reddi degildi, altyapi arizasiydi.",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep10/ep10_mastered.mp4",
+      "subtitle": "This GIANT OWL Is NOT Real",
+      "stack_sha256": "e8c0a69ccae375a175ff705d1dc5304ce68cf0fa71746a86257edfa6256cb985",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part10",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "MXKmeVqDDXQ",
+          "video_sha256": "093497e695ab0582c21e6d871535c6b4ff0a0925c89aa4f7ba095f3edbb766df",
+          "ts": "2026-09-16T01:51:42.924697+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18233800012318288",
+          "video_sha256": "093497e695ab0582c21e6d871535c6b4ff0a0925c89aa4f7ba095f3edbb766df",
+          "ts": "2026-09-16T01:52:54.431654+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7685945250879245582",
+          "video_sha256": "093497e695ab0582c21e6d871535c6b4ff0a0925c89aa4f7ba095f3edbb766df",
+          "ts": "2026-09-16T01:54:07.454368+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-16T01:54:07.455993+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."
