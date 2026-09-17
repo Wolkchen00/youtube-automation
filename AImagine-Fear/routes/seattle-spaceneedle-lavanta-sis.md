@@ -52,5 +52,5 @@ You're dropping through the marine fog off the Space Needle on a transparent wat
 ## TITLE
 
 Space Needle, into the fog #shorts
-Space Needle, 184m glass-floor drop #shorts
+Space Needle, 184m glass drop #shorts
 Space Needle, no ground #shorts

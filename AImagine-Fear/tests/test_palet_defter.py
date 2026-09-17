@@ -32,14 +32,21 @@ def test_rotalarin_palet_eslemesi_birebir() -> None:
     Yeni rota eklerken bu sozluge de satir eklenir. Testin adi bilerek sayi
     icermiyor: eskiden "dokuz" diyordu ve on rota varken bile gecti."""
     beklenen = {
+        "bavyera-neuschwanstein-bronz-bulut": "sicak",
+        "capetown-tablemountain-zumrut-bulut": "neon",
         "dubai-burj-altin": "sicak",
         "hongkong-icc-indigo-bulut": "neon",
         "istanbul-camlica-amber-sicak": "sicak",
         "kualalumpur-petronas-sari-bulut": "neon",
         "londra-shard-amber-bulut": "sicak",
         "newyork-empire-magenta-kar": "neon",
+        "niagara-selale-akuamarin-serpinti": "neon",
         "paris-eyfel-beyaz-cise": "neon",
+        "rio-cristo-kobalt-bulut": "neon",
+        "sanfrancisco-goldengate-bakir-sis": "sicak",
         "sanghay-inci-yesil-sis": "neon",
+        "santorini-oia-rozegold-deniz-sisi": "sicak",
+        "seattle-spaceneedle-lavanta-sis": "neon",
         "singapur-marina-turkuaz-bulut": "neon",
         "sydney-harbour-yesil-bulut": "neon",
         "tokyo-skytree-mor-yagmur": "neon",
@@ -47,6 +54,7 @@ def test_rotalarin_palet_eslemesi_birebir() -> None:
         "vegas-strat-blue-rain": "neon",
         "vegas-strat-blue-rain-15": "neon",
         "vegas-strat-blue-rain-25": "neon",
+        "zermatt-matterhorn-kizil-bulut": "neon",
     }
     gercek = {
         yol.stem: build.load_route(yol, PROJE_KOKU).fields["PALET"]

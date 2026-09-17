@@ -51,6 +51,6 @@ You're dropping inside the tablecloth cloud off the edge of Table Mountain on a 
 
 ## TITLE
 
-Table Mountain, into the tablecloth #shorts
+Table Mountain, the tablecloth #shorts
 Table Mountain, 1000m drop #shorts
 Table Mountain, no ground #shorts

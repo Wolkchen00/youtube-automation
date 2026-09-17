@@ -52,5 +52,5 @@ You're dropping through the mist of the Horseshoe Falls on a transparent water s
 ## TITLE
 
 Niagara Falls, into the mist #shorts
-Niagara, 160m drop beside the falls #shorts
+Niagara Falls, 160m drop #shorts
 Niagara Falls, no ground #shorts

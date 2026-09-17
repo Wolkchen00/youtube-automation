@@ -17,7 +17,7 @@ The rider stands barefoot on the narrow maintenance deck at the top of the north
 
 ## BEATS
 
-[0.0-2.0] The rider stands still at the tower edge and the camera on her chest holds the drop dead centre. Her toes curl over the wet rivets. The transparent slide mouth waits ahead of her, its molten copper rims the only saturated colour in the frame. Below her feet there is no bridge and no water, only the flat grey top of the fog bank with the far tower standing up out of it. She does not move yet. The stillness is the fear.
+[0.0-2.0] The rider stands still at the tower edge and the camera on her chest holds the drop dead centre. Her toes grip the wet rivets. The transparent slide mouth waits ahead of her, its molten copper rims the only saturated colour in the frame. Below her feet there is no bridge and no water, only the flat grey top of the fog bank with the far tower standing up out of it. She does not move yet. The stillness is the fear.
 
 [2.0-4.0] She edges forward toward the mouth in short unsteady steps. The mouth grows continuously and never jumps in size: first a small outline, then a pair of upswept transparent rims taller than her shins, then a wide open throat. Behind it the fog bank keeps its exact place in the frame and the slide is visible entering it far below, a copper line going into grey. Her legs shake visibly.
 

@@ -151,20 +151,32 @@ Herhangi biri patlarsa dosya adi, rota ve sebep yazilir ve cikis kodu 1 olur.
    cerceveyi uretici ekler.
 6. **Uzunluk.** Iki ayri olcum, ikisi de bosluga gore kelime sayar:
 
-   - `PROMPT.txt` toplami **1800 ile 2800** kelime arasinda olmalidir.
    - Rotanin kendi yazdigi bolumlerin toplami, yani
      `OPENING STATE` + `TIMELINE` + `VOICE` + `END STATE`, **600 ile 1000** kelime
-     arasinda olmalidir.
+     arasinda olmalidir. Asil kural budur.
+   - Promptun rotadan gelmeyen kismi, yani **sabit yuk** (kanon bolumleri +
+     `NEGATIVE` + etiketler), **1500 ile 2000** kelime arasinda olmalidir.
 
-   Gerekce: kanon 1190 kelime ve negatif blok 245 kelime, ikisi de sabit. Yani toplam
-   bandi asil belirleyen sey rotanin uzunlugu. Ikinci olcum, asil kayma riskini
-   dogrudan yakalar: yeni bir sehir yazan kisinin 200 kelimelik ici bos ya da 2000
-   kelimelik dagilmis bir rota yazmasini engeller. Iki mevcut rota 855 ve 813
-   kelimedir, yani bandin ortasindadir.
+   `PROMPT.txt` toplami bu ikisinin TOPLAMIDIR ve ayrica sinirlanmaz. Bugun sabit
+   yuk 1878 kelime, yani toplam fiilen 2478 ile 2878 arasindadir.
 
-   UYARI: bu bant sistemin urettigi seye gore konuldu, modelde OLCULMEDI. 2300
-   kelimelik bir promptun Veo/Sora uzerinde seyrelme yapip yapmadigi ayri bir A/B
-   testinin isidir ve bu rockun kapsaminda degildir.
+   Gerekce: eskiden toplam icin ayri bir "1800-2800" kapisi vardi ve o kapi
+   kanon 1190 + negatif 245 = 1435 kelimeyken turetilmisti. Kanon zamanla 1550,
+   negatif 276 kelimeye buyudu, sabit yuk 1878 oldu, ama toplam tavan yeniden
+   turetilmedi. Boylece iki kural CELISTI: belgelenmis rota tavanina (1000
+   kelime) uyan bir rota 2878 kelime uretiyor ve 2800 kapisina takiliyordu.
+   15 Eylul'de yazilan alti rota tam buraya dustu (939-989 kelime, hepsi
+   600-1000 bandinin icinde) ve **kanal 16-17 Eylul'de hic video cikaramadi.**
+
+   Toplami turetmek bu celiskiyi imkansiz kilar. Sabit yuke kendi bandini vermek
+   de toplam kapisinin asil isini geri getirir: kanon buyudugunde artik rota
+   bandini sessizce yemez, dogrudan kirmizi yanar.
+
+   Modelin GERCEK siniri kelime degil karakterdir ve `tools/kie_uret.py` icinde
+   seedance-2 icin 20000 karakterde zorlanir; bugunku en uzun prompt 16211
+   karakter. Kelime bantlari model sinirini degil, YAZIM kaymasini yakalar.
+
+   UYARI: bu bantlar sistemin urettigi seye gore konuldu, modelde OLCULMEDI.
 7. **Aciklama.** CAPTION bolumu tam 6 etiket icermeli, sonuncu bes tanesi sirasiyla
    `#WaterSlide #POVReels #CGIAdventure #ViralReels` ile bitmeli ve ilki `#MegaSlideFear`
    olmalidir. Ilk satir `You're` ile baslamalidir.

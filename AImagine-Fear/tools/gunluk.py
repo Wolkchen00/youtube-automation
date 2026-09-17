@@ -90,13 +90,21 @@ KREDI_15SN = {
 # Palet yeni rotalarda bilerek tekrar kullanildi (londra ember, sydney acid):
 # rapor bolum 4'te palet hipotezi CURUDU, renk ayirt etmiyor, landmark ediyor.
 #
-# Sicak rotalar 3, 7 ve 11'de duruyor, yani dairesel aralik 4-4-4. Palet A/B'si
-# bozulmadan yeni rotalar araya girsin diye bu dizilim secildi; testi de bu.
+# Palet A/B'sinin sarti: sicak rotalar siraya ESIT aralikla dagilmis olmali,
+# yoksa "sicak mi neon mu tutuyor" sorusu takvimle karisir. 20 rotada 6 sicak
+# var, yani dairesel aralik 3-4-3-3-4-3; testi test_palet_defter.py yapiyor.
+#
+# 2026-09-15'te sekiz yeni rota araya girdi ve bu dagilim BOZULDU (araliklar
+# 2-4-1-5-4-4 oldu, ustteki eski yorum da yanlis kaldi: sicaklar 3, 7, 11'de
+# degil 3, 5, 9, 10, 15, 19'daydi). 17 Eylul'de londra 2'ye, santorini 12'ye
+# alinarak duzeltildi. Sirasi degisen yalniz bu ikisi ve aralarinda kayan
+# zermatt ile seattle; hangi rotanin URETILECEGI degismedi, cunku sirdaki()
+# kullanilmamis ILK slug'i dondurur ve o hala kualalumpur.
 SIRA = [
     "singapur-marina-turkuaz-bulut",    # neon, bulut
     "kualalumpur-petronas-sari-bulut",  # neon, bulut
-    "hongkong-icc-indigo-bulut",        # neon, bulut
     "londra-shard-amber-bulut",         # sicak, bulut
+    "hongkong-icc-indigo-bulut",        # neon, bulut
     "sydney-harbour-yesil-bulut",       # neon, bulut
     # 2026-09-15 ikinci bulut dalgasi. Landmark secimi olcume dayali:
     # REELYZE-RAPOR bolum 5, kuresel ikonlar 4/4 kazandi. Her rotada bulutun
@@ -107,9 +115,9 @@ SIRA = [
     "capetown-tablemountain-zumrut-bulut", # neon, AKAN bulut (tablecloth)
     "niagara-selale-akuamarin-serpinti",   # neon, SESLI serpinti perdesi
     "bavyera-neuschwanstein-bronz-bulut",  # sicak, vadiyi dolduran bulut
-    "santorini-oia-rozegold-deniz-sisi",   # sicak, KAPALI kase sisi
     "zermatt-matterhorn-kizil-bulut",      # neon, YATAY akan banner bulut
     "seattle-spaceneedle-lavanta-sis",     # neon, DONEN cam zemin
+    "santorini-oia-rozegold-deniz-sisi",   # sicak, KAPALI kase sisi
     "vegas-strat-blue-rain-15",      # neon
     "tokyo-skytree-mor-yagmur",      # neon
     "dubai-burj-altin",              # sicak

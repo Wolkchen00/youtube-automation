@@ -51,6 +51,6 @@ You're dropping through the cloud off the terrace under Christ the Redeemer on a
 
 ## TITLE
 
-Christ the Redeemer, into the cloud #shorts
+Christ the Redeemer, into the cloud bank #shorts
 Christ the Redeemer, 700m drop #shorts
 Christ the Redeemer, no ground #shorts

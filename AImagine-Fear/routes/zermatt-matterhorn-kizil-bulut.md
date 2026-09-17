@@ -51,6 +51,6 @@ You're dropping through the banner cloud off the Matterhorn ridge on a transpare
 
 ## TITLE
 
-Matterhorn, into the banner cloud #shorts
+Matterhorn, the banner cloud #shorts
 Matterhorn, 1500m glacier drop #shorts
 Matterhorn, no ground #shorts

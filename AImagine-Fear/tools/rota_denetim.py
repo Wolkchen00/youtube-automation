@@ -25,6 +25,7 @@ Cikis 0 temiz, 1 en az bir kural kirik.
 import io
 import os
 import re
+import subprocess
 import sys
 
 KOK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -227,6 +228,40 @@ def rota_denetle(yol, neon_sahipleri):
         hata(slug, "hicbir TITLE satiri TITLE_KEYWORD '%s' icermiyor" % kw)
 
 
+def uretim_kapilari():
+    """Uretim is akisinin kendi kapilarini burada da kostur.
+
+    2026-09-15'te sekiz rota bu betikle dogrulandi, betik TEMIZ dedi ve
+    rotalar push edildi. Ama uretim is akisi baska iki kapi kosuyor,
+    `build.py --check` ve `pytest AImagine-Fear/tests`, ve ikisi de
+    KIRMIZIYDI. Kanal 16 ve 17 Eylul'de hic video cikaramadi.
+
+    Bu betigin yesil yanip uretimin kirmizi yanmasi bir daha olmasin diye
+    ayni iki kapi buradan da cagriliyor. build.py --check out/ altini
+    yeniden URETIR (deterministik), yani bu betik artik salt okunur degil.
+    """
+    sorun = []
+    for ad, komut in (
+        ("build.py --check", [sys.executable, "-X", "utf8",
+                              os.path.join(KOK, "build.py"), "--check"]),
+        ("pytest tests", [sys.executable, "-X", "utf8", "-m", "pytest",
+                          os.path.join(KOK, "tests"), "-q"]),
+    ):
+        try:
+            sonuc = subprocess.run(komut, cwd=KOK, capture_output=True, text=True)
+        except OSError as hata_:
+            sorun.append("%s kosturulamadi: %s" % (ad, hata_))
+            continue
+        if sonuc.returncode != 0:
+            govde = (sonuc.stdout or "") + (sonuc.stderr or "")
+            satirlar = [s for s in govde.splitlines() if s.strip()][-12:]
+            girinti = "\n    "
+            sorun.append("%s KIRMIZI (cikis %d):%s%s"
+                         % (ad, sonuc.returncode, girinti,
+                            girinti.join(satirlar)))
+    return sorun
+
+
 def main():
     hedef = sys.argv[1] if len(sys.argv) > 1 else None
     yollar = sorted(
@@ -255,13 +290,22 @@ def main():
         for u in UYARI:
             print("  ~ %s" % u)
 
+    # Tek rota denetlenirken de tam kapi kosar: kelime tavani ve baslik
+    # kesme kurallari rotalar arasi degil, dosya ici kurallardir ve asil
+    # uretimi durduran da bunlardi.
+    kapi_sorunlari = uretim_kapilari()
+
     print("=" * 58)
-    if HATA:
-        print("SONUC: %d BULGU, uretime giren rotalarda" % len(HATA))
-        for h in HATA:
-            print("  - %s" % h)
+    if HATA or kapi_sorunlari:
+        if HATA:
+            print("SONUC: %d BULGU, uretime giren rotalarda" % len(HATA))
+            for h in HATA:
+                print("  - %s" % h)
+        for k in kapi_sorunlari:
+            print("  - %s" % k)
         return 1
-    print("SONUC: TEMIZ. Uretime giren butun rotalar uygun.")
+    print("SONUC: TEMIZ. Rota kurallari ve uretim kapilari (build --check,")
+    print("       pytest) birlikte gecti.")
     return 0
 
 

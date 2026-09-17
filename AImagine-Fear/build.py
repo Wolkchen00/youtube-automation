@@ -631,13 +631,33 @@ def _validate_lengths(
         len(route.sections[name].split())
         for name in ("OPENING STATE", "BEATS", "VOICE", "END STATE")
     )
-    if not 1800 <= prompt_words <= 2800:
+    # Sabit yuk = kanon bolumleri + NEGATIVE + etiketler, yani promptun
+    # rotadan gelmeyen kismi. Rotaya gore birkac kelime oynar (<<CITY>>
+    # "Bavaria" ya da "Rio de Janeiro" olabilir), o yuzden bant genis.
+    #
+    # 2026-09-17: burada eskiden sabit "1800-2800 toplam kelime" kapisi
+    # vardi ve KANAL IKI GUN KARANLIK KALDI. Sebep: kanon 1190'dan 1550,
+    # NEGATIVE 245'ten 276 kelimeye buyudu, sabit yuk 1435'ten 1878'e
+    # cikti ama toplam tavan yeniden turetilmedi. Boylece belgelenmis rota
+    # tavani (1000 kelime) ULASILAMAZ hale geldi: kurala uygun 1000
+    # kelimelik bir rota 2878 kelime uretiyor ve 2800 kapisina takiliyordu.
+    # 15 Eylul'de yazilan alti rota tam buraya dustu (939-989 kelime,
+    # hepsi 600-1000 bandinin ICINDE) ve 16-17 Eylul uretimlerini oldurdu.
+    #
+    # Toplam artik TURETILIYOR: prompt = rota + sabit yuk, iki parca da
+    # ayri ayri baglaniyor. Boylece iki kural bir daha celisemez, ve kanon
+    # buyudugunde rota bandini SESSIZCE yemek yerine burasi kirmizi yanar.
+    # Modelin gercek siniri karakter cinsindendir, tools/kie_uret.py icinde
+    # 20000'de zorlanir; en uzun prompt bugun 16211 karakter.
+    sabit_yuk = prompt_words - route_words
+    if not 1500 <= sabit_yuk <= 2000:
         messages.append(
             _issue(
                 root,
-                root / "out" / route.slug / "PROMPT.txt",
+                root / "canon",
                 route.slug,
-                f"total word count {prompt_words} is outside 1800-2800",
+                f"kanon sabit yuku {sabit_yuk} kelime, 1500-2000 disinda; "
+                "kanon buyuduyse rota bandini da yeniden turet",
             )
         )
     if not 600 <= route_words <= 1000:

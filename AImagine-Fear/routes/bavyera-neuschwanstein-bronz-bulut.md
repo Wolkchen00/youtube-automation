@@ -17,7 +17,7 @@ The rider stands barefoot on the timber planks of the Marienbrucke footbridge ac
 
 ## BEATS
 
-[0.0-2.0] The rider stands still on the planks and the camera on her chest holds the drop dead centre. Her toes curl over the edge of a plank and the gap beside them shows white cloud a long way down. The transparent slide mouth waits ahead of her, its bronze rims the only saturated colour in the frame. Below her feet there is no gorge floor, only the flat still top of the cloud filling it. She does not move yet. The stillness is the fear, and the floor is already showing her the fall.
+[0.0-2.0] The rider stands still on the planks and the camera on her chest holds the drop dead centre. Her toes grip the edge of a plank and the gap beside them shows white cloud a long way down. The transparent slide mouth waits ahead of her, its bronze rims the only saturated colour in the frame. Below her feet there is no gorge floor, only the flat still top of the cloud filling it. She does not move yet. The stillness is the fear, and the floor is already showing her the fall.
 
 [2.0-4.0] She edges forward toward the mouth in short unsteady steps, and each step lands on a plank with another gap beside it. The mouth grows continuously and never jumps in size: first a small outline, then a pair of upswept transparent rims taller than her shins, then a wide open throat. Behind it the cloud keeps its exact place in the frame and the slide is visible entering it far below, a bronze line going into white. Her legs shake visibly.
 
@@ -51,6 +51,6 @@ You're dropping through the gorge cloud under Neuschwanstein Castle on a transpa
 
 ## TITLE
 
-Neuschwanstein Castle, into the cloud #shorts
-Neuschwanstein, off the gorge bridge #shorts
+Neuschwanstein, into the cloud #shorts
+Neuschwanstein, off the bridge #shorts
 Neuschwanstein, no ground #shorts
