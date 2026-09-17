@@ -7,6 +7,7 @@ DURATION: 15
 NEON: acid green
 PALET: neon
 TITLE_KEYWORD: Pearl
+SEHIR_ISIGI: kirmizi-tabela
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: thick night fog sitting between the towers
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

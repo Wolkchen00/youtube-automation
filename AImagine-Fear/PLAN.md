@@ -155,7 +155,8 @@ Herhangi biri patlarsa dosya adi, rota ve sebep yazilir ve cikis kodu 1 olur.
      `OPENING STATE` + `TIMELINE` + `VOICE` + `END STATE`, **600 ile 1000** kelime
      arasinda olmalidir. Asil kural budur.
    - Promptun rotadan gelmeyen kismi, yani **sabit yuk** (kanon bolumleri +
-     `NEGATIVE` + etiketler), **1500 ile 2000** kelime arasinda olmalidir.
+     `NEGATIVE` + etiketler), **1500 ile 2400** kelime arasinda olmalidir.
+   - `PROMPT.txt` **19000 karakteri** gecmemelidir.
 
    `PROMPT.txt` toplami bu ikisinin TOPLAMIDIR ve ayrica sinirlanmaz. Bugun sabit
    yuk 1878 kelime, yani toplam fiilen 2478 ile 2878 arasindadir.
@@ -172,28 +173,58 @@ Herhangi biri patlarsa dosya adi, rota ve sebep yazilir ve cikis kodu 1 olur.
    de toplam kapisinin asil isini geri getirir: kanon buyudugunde artik rota
    bandini sessizce yemez, dogrudan kirmizi yanar.
 
-   Modelin GERCEK siniri kelime degil karakterdir ve `tools/kie_uret.py` icinde
-   seedance-2 icin 20000 karakterde zorlanir; bugunku en uzun prompt 16211
-   karakter. Kelime bantlari model sinirini degil, YAZIM kaymasini yakalar.
+   Sabit yukun 2400 tavani da turetildi, keyfi degil: kelime basina ~5,7
+   karakter, rota tavani 1000 kelime, model siniri 20000 karakter. 2400 +
+   1000 = 3400 kelime ~ 19300 karakter, yani tam karakter sinirinin dibi.
+   Daha dar bir tavan (ornegin 2000) kanona 70 kelime eklenince patlardi ve
+   bu, 16-17 Eylul'de kanali karartan arizanin AYNISI olurdu. Kapi
+   anormalligi yakalamalidir, normal evrimi degil.
+
+   Modelin GERCEK siniri kelime degil karakterdir ve `tools/kie_uret.py`
+   icinde seedance-2 icin 20000'de zorlanir. Ayni sinir artik en erken
+   kapida da, 19000 karakterle ve %5 payla denetlenir: gonderim aninda
+   patlamak gunu kaybettirir, burada patlamak hicbir sey harcamaz.
 
    UYARI: bu bantlar sistemin urettigi seye gore konuldu, modelde OLCULMEDI.
 7. **Aciklama.** CAPTION bolumu tam 6 etiket icermeli, sonuncu bes tanesi sirasiyla
    `#WaterSlide #POVReels #CGIAdventure #ViralReels` ile bitmeli ve ilki `#MegaSlideFear`
    olmalidir. Ilk satir `You're` ile baslamalidir.
-8. **Zorunlu alanlar.** Eksik baslik anahtari ya da eksik/bos bolum HATADIR.
-9. **Belirlenimcilik.** Ayni girdi iki kez calistirildiginda byte olarak ayni cikti
+8. **Sehir isigi, cercevenin ASIL rengi.** `SEHIR_ISIGI` zorunlu alandir ve
+   degeri `build.py` icindeki `SEHIR_ISIGI_SOZLUK` anahtarlarindan biri olmalidir.
+   Her anahtarin bir prompt karsiligi ve bir renk AILESI vardir. `SIRA` icinde
+   **yan yana iki rota ayni aileyi kullanamaz** (liste dairesel, son rotadan basa
+   donen komsuluk da sayilir); bunu `tools/rota_denetim.py` ve
+   `tests/test_palet_defter.py` birlikte denetler.
+
+   Gerekce OLCULDU (2026-09-17). Ihsan "kanal hep ayni renkler oluyor" dedi.
+   Yayinlanmis alti video indirilip kare basina doygunluk agirlikli hue
+   histogrami cikarildi: **altinin DORDUNDE baskin ton amberdi (hue ~25)**,
+   rotada yazan NEON `electric violet` ya da `electric yellow` olmasina ragmen.
+
+   Sebep kanondaki TEK satirdi: sehir isigi `warm amber` diye SABIT yaziliydi.
+   POV asagi baktigi icin kareyi sehir dolduruyor; neon serit ince bir cizgi ve
+   kutlesi kucuk. Yani renk NEON alaninda degil burada belirleniyordu. Ayni
+   olcum kanondaki bir iddiayi da yanlisladi: SLIDE bolumu neon seritler icin
+   "dominant colour of the entire frame" diyordu, degildi. Metin duzeltildi,
+   seritler artik "en parlak renk", cercevenin rengini sehir isigi tasiyor.
+
+   Serbest metin degil sozluk, cunku `amber`, `Amber`, `warm amber` ayri kova
+   olsaydi "her video farkli renk" kurali olculemezdi.
+
+9. **Zorunlu alanlar.** Eksik baslik anahtari ya da eksik/bos bolum HATADIR.
+10. **Belirlenimcilik.** Ayni girdi iki kez calistirildiginda byte olarak ayni cikti
    uretilmelidir.
 
-10. **Slug bicimi.** `SLUG` yalnizca kucuk harf, rakam ve tire icerebilir, yani
+11. **Slug bicimi.** `SLUG` yalnizca kucuk harf, rakam ve tire icerebilir, yani
     `^[a-z0-9]+(-[a-z0-9]+)*$`. Nokta, bosluk, egik cizgi, ters egik cizgi ve `..`
     HATADIR. Gerekce: `SLUG` dogrudan cikti dizini adi oluyor; `../..` iceren bir slug
     `out/` disina yaziyor. Bu bir varsayim degil, olculdu.
 
-11. **Slug tekilligi.** Iki rota dosyasi ayni `SLUG` degerini kullanamaz. Gerekce: cikti
+12. **Slug tekilligi.** Iki rota dosyasi ayni `SLUG` degerini kullanamaz. Gerekce: cikti
     yolu slug'dan turedigi icin ikinci rota birincinin ciktisini SESSIZCE eziyor. Bir
     rota dosyasini kopyalayip slug'i degistirmeyi unutmak, bu sistemde en olasi hata.
 
-12. **Bos rota dizini.** `routes/` icinde islenebilir hicbir rota bulunamazsa bu bir
+13. **Bos rota dizini.** `routes/` icinde islenebilir hicbir rota bulunamazsa bu bir
     HATADIR. "0 rota dogrulandi" diyip sifir kodla cikmak yanlis guven verir.
 
 ### Kabul kaniti (PROOF)

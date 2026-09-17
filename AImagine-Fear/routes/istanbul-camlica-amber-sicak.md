@@ -7,6 +7,7 @@ DURATION: 15
 NEON: champagne gold
 PALET: sicak
 TITLE_KEYWORD: Camlica
+SEHIR_ISIGI: mavi-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a clear warm night with soft haze lying on the water and the far shore
 SOURCE: fearvisionofficiel formatinin AImagine uyarlamasi; palet A/B'sinin SICAK yarisi icin yazildi (bkz. REELYZE-RAPOR.md bolum 3)

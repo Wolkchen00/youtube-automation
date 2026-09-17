@@ -7,6 +7,7 @@ DURATION: 15
 NEON: molten copper
 PALET: sicak
 TITLE_KEYWORD: Golden Gate
+SEHIR_ISIGI: buz-mavi
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a cold night with the marine fog pouring in through the strait
 SOURCE: taipei-bulut kazanan kalibinin referans uygulamasi; landmark secimi REELYZE-RAPOR bolum 5, bulut gecisi taipei-bulut-1

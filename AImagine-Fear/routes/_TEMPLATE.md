@@ -15,6 +15,18 @@ ember orange, champagne gold, hot magenta-pink, ice white, acid green,
 electric violet, blood red, electric cyan-blue.
 OPENING STATE ve END STATE metinlerinde "frame one" ya da "final frame" YAZMA;
 uretici cerceveyi kendi ekler.
+
+SEHIR_ISIGI cercevenin ASIL rengidir, NEON degil. Olculdu 2026-09-17: yayinlanan
+alti videonun dordunde baskin ton amberdi, cunku sehir isigi kanonda sabit "warm
+amber" yaziyordu ve POV asagi baktigi icin kareyi sehir dolduruyor. Artik rota
+basina secilir. Gecerli anahtarlar build.py SEHIR_ISIGI_SOZLUK icinde:
+sodyum-amber, mum-amber (amber) / led-beyaz, civa-beyaz (beyaz) / mavi-beyaz,
+buz-mavi (mavi) / kirmizi-tabela (kirmizi) / yesil-civa (yesil) / mor-tabela (mor)
+/ renkli-yikama (karisik).
+
+SIRA'da YAN YANA iki rota ayni renk AILESINI alamaz; tools/rota_denetim.py bunu
+denetler. Kanalin sikayeti "hep ayni renk" idi, kural bunu engellemek icin var.
+
 -->
 
 # ROUTE
@@ -26,6 +38,7 @@ DURATION: 15
 NEON: acid green
 PALET: neon
 TITLE_KEYWORD: Example
+SEHIR_ISIGI: led-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: dense fog just after sunset
 SOURCE: (kendi rotamiz, kaynak yok)

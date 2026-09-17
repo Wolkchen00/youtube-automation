@@ -7,6 +7,7 @@ DURATION: 15
 NEON: ice white
 PALET: neon
 TITLE_KEYWORD: Eiffel
+SEHIR_ISIGI: civa-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: fine night drizzle, every street lamp wearing a halo
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

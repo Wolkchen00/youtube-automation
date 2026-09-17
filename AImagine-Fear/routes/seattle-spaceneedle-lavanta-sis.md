@@ -7,6 +7,7 @@ DURATION: 15
 NEON: pale lavender
 PALET: neon
 TITLE_KEYWORD: Space Needle
+SEHIR_ISIGI: sodyum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a cool night with the marine fog layer pushing in off Puget Sound
 SOURCE: bulut gecisi serisi; bu rotada ZEMININ KENDISI CAM ve DONUYOR , kaydirak agzi binicinin altindaki dosemeyle birlikte ona dogru kayiyor

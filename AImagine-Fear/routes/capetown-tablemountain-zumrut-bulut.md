@@ -7,6 +7,7 @@ DURATION: 15
 NEON: emerald green
 PALET: neon
 TITLE_KEYWORD: Table Mountain
+SEHIR_ISIGI: civa-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a mild night with the tablecloth cloud spilling over the flat summit edge
 SOURCE: bulut gecisi serisi; bu rotada bulut DURAGAN DEGIL, kenardan asagi akiyor ve binici onunla birlikte iniyor

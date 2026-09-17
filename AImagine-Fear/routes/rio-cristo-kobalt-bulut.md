@@ -7,6 +7,7 @@ DURATION: 15
 NEON: cobalt blue
 PALET: neon
 TITLE_KEYWORD: Christ the Redeemer
+SEHIR_ISIGI: yesil-civa
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a warm night with cloud wrapping the peak in slow drifts
 SOURCE: bulut gecisi serisi, taipei-bulut kazanan kalibi; kuresel ikon secimi REELYZE-RAPOR bolum 5

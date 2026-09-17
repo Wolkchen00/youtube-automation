@@ -7,6 +7,7 @@ DURATION: 15
 NEON: rose gold
 PALET: sicak
 TITLE_KEYWORD: Santorini
+SEHIR_ISIGI: led-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a warm night with sea mist sitting inside the caldera bowl
 SOURCE: bulut gecisi serisi; bu rotada bulut KAPALI BIR KASE , katman degil, kaldera icine hapsolmus sis

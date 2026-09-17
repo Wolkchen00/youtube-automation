@@ -7,6 +7,7 @@ DURATION: 15
 NEON: hot magenta-pink
 PALET: neon
 TITLE_KEYWORD: Empire
+SEHIR_ISIGI: sodyum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: heavy night snow, fat flakes crossing the lens
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

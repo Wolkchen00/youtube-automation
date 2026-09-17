@@ -7,6 +7,7 @@ DURATION: 15
 NEON: bronze
 PALET: sicak
 TITLE_KEYWORD: Neuschwanstein
+SEHIR_ISIGI: mum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a cold night with alpine cloud filling the gorge below the bridge
 SOURCE: bulut gecisi serisi; bu rotada zemin DELIKLI , binici daha ilk karede tahta aralarindan dususe bakiyor

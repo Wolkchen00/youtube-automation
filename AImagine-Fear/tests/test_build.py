@@ -48,6 +48,7 @@ def _route_text(
         "NEON": "bright green",
         "PALET": "neon",
         "TITLE_KEYWORD": "Test",
+        "SEHIR_ISIGI": "led-beyaz",
         "LEGWEAR": "black full-length leggings",
         "WEATHER": "steady night rain",
         "SOURCE": "synthetic test route",

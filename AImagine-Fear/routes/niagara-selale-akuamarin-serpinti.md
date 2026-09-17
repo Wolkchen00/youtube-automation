@@ -7,6 +7,7 @@ DURATION: 15
 NEON: aquamarine
 PALET: neon
 TITLE_KEYWORD: Niagara
+SEHIR_ISIGI: renkli-yikama
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a cold night with the mist column from the falls standing in the air
 SOURCE: bulut gecisi serisi; bu rotada bulut SESLI ve agir , serpinti perdesi, sessiz bulut degil

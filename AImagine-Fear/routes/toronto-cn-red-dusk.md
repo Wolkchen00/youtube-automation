@@ -7,6 +7,7 @@ DURATION: 20
 NEON: blood red
 PALET: sicak
 TITLE_KEYWORD: CN
+SEHIR_ISIGI: led-beyaz
 LEGWEAR: black glossy wet-look shorts cut at mid-thigh, bare legs below them
 WEATHER: clear blue-hour dusk, thin high cloud, the sun already below the horizon
 SOURCE: https://www.instagram.com/reel/Dcv7cfVDQi0/ (fearvisionofficiel, 2026-09-01)

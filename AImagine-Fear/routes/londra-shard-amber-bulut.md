@@ -7,6 +7,7 @@ DURATION: 15
 NEON: burnt sienna
 PALET: sicak
 TITLE_KEYWORD: Shard
+SEHIR_ISIGI: led-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: cold drizzle with a low cloud ceiling sitting on the river
 SOURCE: bulut gecisi konsepti, sicak palet kolu

@@ -7,6 +7,7 @@ DURATION: 15
 NEON: electric turquoise
 PALET: neon
 TITLE_KEYWORD: Marina
+SEHIR_ISIGI: sodyum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a warm night with a low cloud bank drifting in off the bay
 SOURCE: bulut gecisi konseptinin ilk rotasi, taipei-bulut denemesinin devami

@@ -28,12 +28,15 @@ import re
 import subprocess
 import sys
 
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import build
+
 KOK = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROUTES = os.path.join(KOK, "routes")
 GUNLUK = os.path.join(KOK, "tools", "gunluk.py")
 
 ALANLAR = ("SLUG", "DESTINATION", "LANDMARK", "DURATION", "NEON", "PALET",
-           "TITLE_KEYWORD", "LEGWEAR", "WEATHER", "SOURCE")
+           "TITLE_KEYWORD", "SEHIR_ISIGI", "LEGWEAR", "WEATHER", "SOURCE")
 BOLUMLER = ("OPENING STATE", "BEATS", "END STATE", "VOICE", "CAPTION", "TITLE")
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
@@ -63,7 +66,9 @@ def sira_oku():
     m = re.search(r"^SIRA = \[(.*?)^\]", metin, re.S | re.M)
     if not m:
         return None
-    return set(re.findall(r'"([^"]+)"', m.group(1)))
+    # Liste, kume DEGIL: "yan yana iki rota ayni rengi alamaz" kurali siraya
+    # bakar. `slug in SIRA` uyelik testi listede de calisir.
+    return re.findall(r'"([^"]+)"', m.group(1))
 
 
 SIRA = sira_oku()
@@ -262,6 +267,38 @@ def uretim_kapilari():
     return sorun
 
 
+def renk_ardisikligi_denetle():
+    """SIRA'da yan yana iki rota ayni sehir-isigi AILESINI alamaz.
+
+    Ihsan'in sikayeti "kanal hep ayni renkler oluyor" idi ve 2026-09-17
+    olcumu dogruladi: yayinlanan alti videonun dordunde baskin ton amberdi.
+    Sebep kanonda sabit yazan "warm amber" sehir isigiydi; POV asagi baktigi
+    icin kareyi sehir dolduruyor, ince neon serit degil.
+
+    Renk artik rota basina secilebiliyor, ama secilebilir olmasi yetmez:
+    arka arkaya iki amber rota yazilirsa izleyici yine ayni kanali gorur.
+    Kural siraya bakar, tek tek rotaya degil, o yuzden burada denetlenir.
+    Liste dairesel: son rotadan basa donen komsuluk da sayilir.
+    """
+    if not SIRA:
+        return
+    aile = {}
+    for slug in SIRA:
+        yol = os.path.join(ROUTES, slug + ".md")
+        try:
+            alan = alanlari_oku(io.open(yol, encoding="utf-8").read())
+        except IOError:
+            continue
+        aile[slug] = build.sehir_isigi_ailesi(alan.get("SEHIR_ISIGI", ""))
+    sirali = [s for s in SIRA if s in aile]
+    for i, slug in enumerate(sirali):
+        sonraki = sirali[(i + 1) % len(sirali)]
+        if aile[slug] and aile[slug] == aile[sonraki]:
+            hata(slug, "SIRA'da bir sonraki rota (%s) ayni renk ailesini "
+                       "kullaniyor: %s , yan yana iki video ayni renkte cikar"
+                       % (sonraki, aile[slug]))
+
+
 def main():
     hedef = sys.argv[1] if len(sys.argv) > 1 else None
     yollar = sorted(
@@ -276,6 +313,10 @@ def main():
     neon_sahipleri = {}
     for y in yollar:
         rota_denetle(y, neon_sahipleri)
+
+    # Tek rota denetlenirken de kosar: renk ardisikligi rotanin kendi ici
+    # degil, SIRA'nin ozelligidir ve tek rota degistirmek onu bozabilir.
+    renk_ardisikligi_denetle()
 
     print("denetlenen rota: %d" % len(yollar))
     print("benzersiz NEON: %d" % len(neon_sahipleri))

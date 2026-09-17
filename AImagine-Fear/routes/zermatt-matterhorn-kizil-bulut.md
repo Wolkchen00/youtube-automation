@@ -7,6 +7,7 @@ DURATION: 15
 NEON: crimson
 PALET: neon
 TITLE_KEYWORD: Matterhorn
+SEHIR_ISIGI: buz-mavi
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a freezing night with the banner cloud streaming sideways off the ridge
 SOURCE: bulut gecisi serisi; bu rotada bulut YATAY ve hizli akiyor , binici katmana inmiyor, icinden YANLAMASINA geciyor

@@ -234,3 +234,64 @@ def test_sira_hem_sicak_hem_neon_iceriyor() -> None:
     assert paletler == {"sicak", "neon"}, (
         "A/B icin sirada her iki palet de olmali, su an: %s" % paletler
     )
+
+
+# ----------------------------------------------------------------------
+# Sehir isigi: cercevenin ASIL rengi
+#
+# 2026-09-17 olcumu: yayinlanan alti videonun DORDUNDE baskin ton amberdi
+# (hue ~25), rotada yazan NEON "electric violet" ya da "electric yellow"
+# olmasina ragmen. Sebep kanonda sabit yazan tek satirdi. Bu testler o
+# satirin geri gelmesini ve renklerin yan yana tekrarlamasini engeller.
+# ----------------------------------------------------------------------
+
+
+def test_kanon_sehir_isigini_sabitlemiyor() -> None:
+    kanon = (PROJE_KOKU / "canon" / "MASTER-BLOCK.md").read_text(encoding="utf-8")
+    assert "<<SEHIR_ISIGI>>" in kanon, (
+        "kanon sehir isigini rota basina almiyor; renk cesitliligi imkansiz olur"
+    )
+    assert "rivers of warm amber" not in kanon, (
+        "sehir isigi yeniden SABIT amber yazilmis, kanal tekrar tek renge doner"
+    )
+
+
+def test_her_rotanin_gecerli_sehir_isigi_var() -> None:
+    for yol in sorted((PROJE_KOKU / "routes").glob("*.md")):
+        if yol.name.startswith("_"):
+            continue
+        rota = build.load_route(yol, PROJE_KOKU)
+        deger = rota.fields["SEHIR_ISIGI"]
+        assert deger in build.SEHIR_ISIGI_SOZLUK, (
+            "%s: SEHIR_ISIGI %r sozlukte yok" % (yol.name, deger)
+        )
+
+
+def test_sirada_yan_yana_iki_rota_ayni_renkte_degil() -> None:
+    """Asil sikayet buydu: "kanal hep ayni renkler oluyor".
+
+    Rota basina renk secilebilir olmasi yetmez; arka arkaya iki amber rota
+    yazilirsa izleyici yine ayni kanali gorur. Liste dairesel, cunku sira
+    basa donuyor."""
+    aileler = []
+    for slug in gunluk.SIRA:
+        rota = build.load_route(PROJE_KOKU / "routes" / (slug + ".md"), PROJE_KOKU)
+        aileler.append(build.sehir_isigi_ailesi(rota.fields["SEHIR_ISIGI"]))
+    n = len(aileler)
+    catisma = [
+        (gunluk.SIRA[i], gunluk.SIRA[(i + 1) % n], aileler[i])
+        for i in range(n)
+        if aileler[i] == aileler[(i + 1) % n]
+    ]
+    assert not catisma, "SIRA'da yan yana ayni renk ailesi: %s" % catisma
+
+
+def test_sirada_en_az_dort_farkli_renk_ailesi_var() -> None:
+    aileler = set()
+    for slug in gunluk.SIRA:
+        rota = build.load_route(PROJE_KOKU / "routes" / (slug + ".md"), PROJE_KOKU)
+        aileler.add(build.sehir_isigi_ailesi(rota.fields["SEHIR_ISIGI"]))
+    assert len(aileler) >= 4, (
+        "sirada yalniz %d renk ailesi var: %s , kanal yine tekduze gorunur"
+        % (len(aileler), sorted(aileler))
+    )

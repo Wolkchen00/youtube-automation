@@ -7,6 +7,7 @@ DURATION: 15
 NEON: electric yellow
 PALET: neon
 TITLE_KEYWORD: Petronas
+SEHIR_ISIGI: kirmizi-tabela
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a warm monsoon night with fine rain and low cloud caught between the towers
 SOURCE: bulut gecisi konsepti, ikinci rota

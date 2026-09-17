@@ -32,6 +32,7 @@ ROUTE_FIELDS = (
     "NEON",
     "PALET",
     "TITLE_KEYWORD",
+    "SEHIR_ISIGI",
     "LEGWEAR",
     "WEATHER",
     "SOURCE",
@@ -66,6 +67,54 @@ TOKEN_FIELDS = {
 # metin olsaydi "sicak", "Sicak", "warm" hepsi ayri kova olur ve karsilastirma
 # imkansizlasirdi.
 GECERLI_PALETLER = ("sicak", "neon")
+
+# SEHIR ISIGI, cercevenin ASIL rengi.
+#
+# 2026-09-17 olcumu (yayinlanmis alti video, kare basina doygunluk agirlikli
+# hue histogrami): altinin DORDUNDE baskin ton amber (hue ~25) cikti, rotada
+# yazan NEON "electric violet" ya da "electric yellow" olmasina ragmen. Ihsan
+# "kanal hep ayni renkler oluyor" derken tam olarak bunu goruyordu.
+#
+# Sebep kanondaki TEK satirdi: sehir isigi "warm amber" diye SABIT yaziliydi.
+# POV asagi baktigi icin cerceveyi sehir dolduruyor; neon serit ince bir cizgi
+# ve kutlesi kucuk. Yani renk cesitliligi NEON alaninda degil, burada belirlenir.
+#
+# Serbest metin degil SOZLUK, cunku "amber", "Amber", "warm amber" ayri kova
+# olsaydi "her video farkli renk" kurali olculemezdi. Rota anahtari yazar,
+# promptta karsiligi genisler, AILE ise ardisiklik denetiminde kullanilir
+# (tools/rota_denetim.py: SIRA'da yan yana iki rota ayni aileyi alamaz).
+SEHIR_ISIGI_SOZLUK = {
+    "sodyum-amber":   ("a warm sodium amber", "amber"),
+    "mum-amber":      ("a dim candle amber", "amber"),
+    "led-beyaz":      ("a cold white LED", "beyaz"),
+    "civa-beyaz":     ("a pale mercury white", "beyaz"),
+    "mavi-beyaz":     ("a blue-white", "mavi"),
+    "buz-mavi":       ("an icy steel blue", "mavi"),
+    "kirmizi-tabela": ("a deep red shop-sign", "kirmizi"),
+    "yesil-civa":     ("a green-tinged mercury", "yesil"),
+    "mor-tabela":     ("a violet and pink signage", "mor"),
+    "renkli-yikama":  ("a multicoloured magenta and green floodlight", "karisik"),
+}
+
+
+def sehir_isigi_metni(deger: str) -> str:
+    """Sozluk anahtarini prompt metnine cevirir.
+
+    Gecersiz anahtarda CAKMAZ, degeri oldugu gibi dondurur: render dogrulamadan
+    ONCE kosuyor ve KeyError'in okunmaz izi yerine _validate_sehir_isigi'nin
+    duzgun mesaji gorunsun."""
+    kayit = SEHIR_ISIGI_SOZLUK.get(deger.strip())
+    return kayit[0] if kayit else deger
+
+
+def sehir_isigi_ailesi(deger: str) -> str:
+    kayit = SEHIR_ISIGI_SOZLUK.get(deger.strip())
+    return kayit[1] if kayit else ""
+
+
+TUREV_TOKENLAR = {
+    "<<SEHIR_ISIGI>>": lambda fields: sehir_isigi_metni(fields["SEHIR_ISIGI"]),
+}
 
 PROFIL_TOKENLARI = {
     "<<COZUNURLUK>>": lambda profil: "%dx%d" % (
@@ -333,6 +382,8 @@ def render_route(
         body = canon.master[name]
         for token, field in TOKEN_FIELDS.items():
             body = body.replace(token, route.fields[field])
+        for token, uret in TUREV_TOKENLAR.items():
+            body = body.replace(token, uret(route.fields))
         for token, deger in PROFIL_TOKENLARI.items():
             body = body.replace(token, deger(profil))
         prompt_parts.append(f"{name}\n{body}")
@@ -650,14 +701,35 @@ def _validate_lengths(
     # Modelin gercek siniri karakter cinsindendir, tools/kie_uret.py icinde
     # 20000'de zorlanir; en uzun prompt bugun 16211 karakter.
     sabit_yuk = prompt_words - route_words
-    if not 1500 <= sabit_yuk <= 2000:
+    # Ust sinir 2400 KEYFI DEGIL, gercek sinirdan turetildi: prompt kelime
+    # basina ~5,7 karakter, rota tavani 1000 kelime, modelin siniri 20000
+    # karakter. 2400 + 1000 = 3400 kelime ~ 19300 karakter, yani tam da
+    # karakter sinirinin dibi. Daha dar bir bant (ornegin 2000) kanona 70
+    # kelime eklenince patlardi ve bu, 16-17 Eylul'de kanali iki gun
+    # karartan arizanin AYNISI olurdu; kapi anormalligi yakalamali, normal
+    # evrimi degil.
+    if not 1500 <= sabit_yuk <= 2400:
         messages.append(
             _issue(
                 root,
                 root / "canon",
                 route.slug,
-                f"kanon sabit yuku {sabit_yuk} kelime, 1500-2000 disinda; "
+                f"kanon sabit yuku {sabit_yuk} kelime, 1500-2400 disinda; "
                 "kanon buyuduyse rota bandini da yeniden turet",
+            )
+        )
+    # Modelin GERCEK siniri. tools/kie_uret.py bunu gonderim aninda 20000'de
+    # zorluyor, ama orada patlamak gunu kaybettirir. Ayni sinir en erken
+    # kapida ve %5 pay birakarak: burada yakalanirsa hicbir sey harcanmaz.
+    prompt_chars = len(outputs["PROMPT.txt"])
+    if prompt_chars > 19000:
+        messages.append(
+            _issue(
+                root,
+                root / "out" / route.slug / "PROMPT.txt",
+                route.slug,
+                f"prompt {prompt_chars} karakter, guvenli tavan 19000 "
+                "(seedance-2 siniri 20000, tools/kie_uret.py)",
             )
         )
     if not 600 <= route_words <= 1000:
@@ -708,6 +780,21 @@ def _validate_caption(route: Route, root: Path) -> list[str]:
     return messages
 
 
+def _validate_sehir_isigi(route: Route, root: Path) -> list[str]:
+    deger = route.fields.get("SEHIR_ISIGI", "").strip()
+    if deger in SEHIR_ISIGI_SOZLUK:
+        return []
+    return [
+        _issue(
+            root,
+            route.path,
+            route.slug,
+            "SEHIR_ISIGI %r gecersiz; kabul edilenler: %s"
+            % (deger, ", ".join(sorted(SEHIR_ISIGI_SOZLUK))),
+        )
+    ]
+
+
 def _validate_palet(route: Route, root: Path) -> list[str]:
     deger = route.fields.get("PALET", "").strip()
     if deger in GECERLI_PALETLER:
@@ -753,6 +840,7 @@ def validate_route(
     messages.extend(_validate_lengths(route, root, outputs))
     messages.extend(_validate_caption(route, root))
     messages.extend(_validate_palet(route, root))
+    messages.extend(_validate_sehir_isigi(route, root))
     messages.extend(_validate_title(route, root))
 
     second_render = render_route(canon, route, profil_adi)

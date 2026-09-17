@@ -7,6 +7,7 @@ DURATION: 15
 NEON: ember orange
 PALET: sicak
 TITLE_KEYWORD: Burj
+SEHIR_ISIGI: mavi-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a clear hot night with dust haze on the horizon
 SOURCE: tools/sehir_ekle.py ile uretildi; fearvisionofficiel formatinin AImagine uyarlamasi

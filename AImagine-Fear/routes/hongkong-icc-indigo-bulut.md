@@ -7,6 +7,7 @@ DURATION: 15
 NEON: deep indigo
 PALET: neon
 TITLE_KEYWORD: Hong Kong
+SEHIR_ISIGI: kirmizi-tabela
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a humid night with sea fog rolling in off the harbour
 SOURCE: bulut gecisi konsepti, deniz sisi kolu

@@ -7,6 +7,7 @@ DURATION: 15
 NEON: jade green
 PALET: neon
 TITLE_KEYWORD: Sydney
+SEHIR_ISIGI: sodyum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a cool night with a low sea cloud drifting across the harbour
 SOURCE: bulut gecisi konsepti, iki ikon ayni kadrajda
