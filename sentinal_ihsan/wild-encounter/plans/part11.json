@@ -27,5 +27,9 @@
   },
   "family": "sea-giant",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/bj0tzgvR/ep11-giant-squid.png"
+  ],
+  "ref_prompt_sha256": "1bdfc20a16ff930f3b910993483428468361d7b7afe17c895db5406371b2c122"
 }
