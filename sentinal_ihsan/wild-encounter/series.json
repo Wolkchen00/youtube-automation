@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 13,
-  "next_part": 11,
+  "next_part": 12,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -244,11 +244,50 @@
       }
     },
     "11": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-09-17T21:43:09.403004+00:00",
       "retry_count": 2,
       "last_reason_code": "AUDIO_MASTER",
-      "hold_reason": "mastering başarısız: master teslim sözleşmesi 2 denemede tutulamadı: True-peak gate passed (-1.30 <= -1.00) but loudness gate failed: measured LUFS=-16.10 is outside target window [-15.00, -13.00]. The 2.10 dB correction needed exceeds the 2.00 dB makeup bound; this is a broken premaster, not a mastering nudge."
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 2 denemede tutulamadı: True-peak gate passed (-1.30 <= -1.00) but loudness gate failed: measured LUFS=-16.10 is outside target window [-15.00, -13.00]. The 2.10 dB correction needed exceeds the 2.00 dB makeup bound; this is a broken premaster, not a mastering nudge.",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep11/ep11_mastered.mp4",
+      "subtitle": "This GIANT SQUID Is NOT Real",
+      "stack_sha256": "bcd1cfd4c8cc9a223c95edded0c9eb612569a3ce2d849325876337d1ad3f6e05",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part11",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "4cdvxPh_mE8",
+          "video_sha256": "fef39ec86059abe7a512f75c13c5f7053561c76fcc41cb6ebfcc9b2371e1bc63",
+          "ts": "2026-09-18T17:49:38.324043+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "17994521682032262",
+          "video_sha256": "fef39ec86059abe7a512f75c13c5f7053561c76fcc41cb6ebfcc9b2371e1bc63",
+          "ts": "2026-09-18T17:50:49.399537+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7686934251110960397",
+          "video_sha256": "fef39ec86059abe7a512f75c13c5f7053561c76fcc41cb6ebfcc9b2371e1bc63",
+          "ts": "2026-09-18T17:52:01.196727+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-18T17:52:01.198253+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."
