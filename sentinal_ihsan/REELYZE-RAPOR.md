@@ -1011,3 +1011,443 @@ Pratikte siniri koyan uc sey:
   sey hayvan (anakonda -> kutup ayisi). **Tek cift, kural cikarma.**
 - Kie "Internal Error"unun sebebi. Istek govdesi loglanmiyor; ayni istek yeniden
   gonderilmeden ayirt edilemez.
+
+---
+
+# EK , 18 Eylul 2026: dis video analizi (8,1M motosiklet POV) + Ihsan direktifi
+
+Hedef: `https://www.youtube.com/shorts/daOYkiaV5rQ`
+Yontem: yt-dlp ile indirildi, ffmpeg/ffprobe + EBU R128 ile olculdu, kare farki
+ve bas bandi enerjisi ayrica hesaplandi, kareler goz ile incelendi.
+Kiyas olarak kendi rekorumuz `wuuu02K2hPc` (wild-encounter ep09) ayni yontemle olculdu.
+
+## 1. Hedef video , olculen degerler
+
+| | Deger |
+|---|---|
+| Kanal | `@Mafiajeon1`, **7.490 abone**, 353 video |
+| Yuklenme | 8 Eylul 2026 (olcum gunu ile arasi **10 gun**) |
+| Izlenme | **8.111.300** |
+| Begeni | 131.431 (**%1,62**) |
+| Yorum | 971 (**%0,0120**) |
+| Kanal medyani | **7.900 izlenme** (353 video) |
+| **Medyan kati** | **1.025x** |
+| Abone kati | 1.083x |
+| Cozunurluk | 720x1280 (YouTube'un sundugu en yuksek dikey de bu) |
+| fps / sure | 29,88 / **15,78 sn** |
+| Kesme | **0** |
+| LUFS / true peak / LRA | **-14,7** / -5,1 dBFS / **1,1** |
+| Desifre | konusma YOK, 0 kelime |
+
+**Kesme sayisi dogrulandi.** `scene` esigi 0,05'e kadar dusuruldu, hicbir kesme
+vermedi. Ayrica kare kare fark hesaplandi: en buyuk iki fark **17,3 ve 16,6** (0-255).
+Gercek bir kesme 40-80 bandinda olur. Yani video **tek, kesintisiz cekim**.
+t=1,87 ve t=6,46'daki tepeler kesme degil, kameranin savrulmasi.
+
+### Yerlesim , piksel piksel olculdu (720x1280 kare uzerinde)
+
+| Bolge | Piksel | Oran |
+|---|---|---|
+| Ust siyah serit | 0-174 | %13,7 |
+| **Beyaz metin banti** | **176-315** | **%11,0** |
+| Goruntu alani | 316-1158 (**720x843**) | %65,9 |
+| Alt siyah serit | 1159-1279 | %9,5 |
+
+Uc sey buradan cikiyor:
+
+1. **Goruntu karenin sadece %65,9'u.** Altta yatan AI klip neredeyse kare
+   (720x843, 1:1,17). 9:16'ya doldurulmamis, **ortaya oturtulmus**.
+2. **Metin banti ust ucte bir'de.** `references/olcutler.md` bolum 2'nin
+   soyledigi yer tam olarak burasi.
+3. **Alt %9,5 siyah.** YouTube'un kullanici adi ve dugmeleri goruntunun uzerine
+   degil, siyahin uzerine biniyor. Kadrajin hicbir yeri UI'ya feda edilmemis.
+
+### Ekrandaki metin
+
+```
+SOMEONE : OK BYE, SEE YOU TOMORROW!!
+("Sometimes, Tomorrow Never Comes...!!")
+```
+
+Ust satir **6 kelime** (esik 7'nin altinda), alt satir parantez icinde 5 kelime.
+Metin 0. kareden son kareye kadar **hic degismeden** duruyor. Fade yok.
+Ust satir kurulum, alt satir vurus. Yani **hikayeyi metin anlatiyor, video kanit.**
+
+## 2. Zaman cizelgesi , goruntu ve bas bandi yan yana
+
+Genel ses seviyesi bastan sona **duz**: 0,1 sn'den sonra hep -13 ile -23 dBFS
+arasinda. LRA 1,1 bunu dogruluyor. Ama bu, muzigin duz oldugu anlamina GELMIYOR.
+Dinamik **bas bandinda (40-160 Hz)**. Ortalamaya gore normalize edilmis hali:
+
+| t (sn) | Goruntude ne var | Bas |
+|---|---|---|
+| 0,0 | POV baslar, islak yol, onde beyaz kamyon, gosterge 90 | 0,24 |
+| 0,5-3,0 | Sollama, hiz, karsi seride gecis | 1,31 -> **2,08** |
+| 3,0-5,0 | **Mavi kamyon karsidan, kare doluyor** | 0,85 -> **0,13** |
+| 5,0-6,2 | Mavi kamyon ile beyaz kamyonet arasinda sikisma | 1,11 -> 1,68 |
+| **6,3-6,5** | **Carpma. Kamera savruluyor** (en buyuk kare farki) | 1,63 |
+| 7,0 | Yerde. Yol kenarinda bir geyik duruyor | **0,13** |
+| 7,5-10,0 | Kamyon izgarasi tepede, kask ve parcalar asfaltta | 1,08 -> **1,79** |
+| 10,5-12,5 | **Kamera bedeni terk ediyor**, ucuncu sahis, beden motorun uzerinde | 0,30 -> **0,11** |
+| 13,0-13,5 | Genis plan, beden ve motor yolda | **2,11 (parcanin en yuksegi)** |
+| 14,0 | Kamera asfalta duser | 0,20 |
+| 14,5-15,8 | **Seffaf beyaz figur, eller havada. Ruh.** | 0,92 -> 1,39 |
+
+Onset olcumu: 49 vurus, medyan aralik 0,224 sn, yani **~134 BPM**.
+Bas bandi araligi: **19,2 kat**. 31 yarim saniyelik kovanin **11'inde** bas
+neredeyse yok.
+
+**Olculen sonuc: muzigin dort sessizlesme ve yukselme ani, anlatinin dort
+donum noktasina oturuyor.** Kamyon karsidayken bas cekiliyor, carpmada geri
+geliyor, beden yerdeyken tamamen bosaliyor, ruh belirmeden hemen once en yuksek
+noktasina cikiyor.
+
+**Ama nedensellik iddia etmiyorum.** Olculen sey hizalanma. 134 BPM'lik bir
+parcada 15,8 saniye yaklasik 4 olcu eder; rastgele bir baslangic noktasi da
+bir miktar ortusme uretir. Dort olayin dordunun birden tutmasi tesadufe gore
+zayif bir ihtimal, ama tek ornekle kanit olmaz.
+
+## 3. Ihsan'in iddiasi test edildi
+
+> "muzik cok mukemmel oturmus bu yuzden youtubeda 8.1M izlenmeye ulasmis"
+
+**Hizalanma dogru cikti** (yukaridaki tablo). **Tek basina sebep oldugu olcumle
+celisiyor.** Uc kanit:
+
+**1. Kendi rekorumuzun ses dinamigi daha genis, ustelik muziksiz.**
+
+| | 8,1M motor | Bizim ep09 (kutup ayisi) |
+|---|---|---|
+| Izlenme | 8.111.300 | 36.070 |
+| Cozunurluk | 720x1280 | **1080x1920** |
+| Sure / kesme | 15,78 sn / 0 | 10,02 sn / 0 |
+| LUFS | -14,7 | -14,8 |
+| True peak | -5,1 | **-3,0** |
+| LRA | 1,1 | **6,6** |
+| Bas bandi araligi | 19,2 kat | **28,8 kat** |
+| Muzik | var | **YOK** (`bible.json` `"music": false`) |
+
+Bizim video **her teknik eksende esit ya da daha iyi**. Aradaki fark 225 kat.
+Teknik ayar bu farki aciklamiyor.
+
+**2. Ayni kanalin 2. ve 3. videosu teknik olarak BOZUK, yine de patlamis.**
+
+| Video | Izlenme | Sure | Kesme | LUFS | True peak |
+|---|---|---|---|---|---|
+| `-XQ5KiWvW7k` (tisort sakasi, gercek cekim) | 788.000 | 5,28 sn | 1 | -9,6 | **+0,7 KIRPIYOR** |
+| `umOCuQNjDSI` | 225.000 | 5,8 sn | 6 | -8,0 | **+1,1 KIRPIYOR** |
+
+Ikisi de esigin cok disinda ve kirpiyor. Bu kanalda teknik kalite kapi degil.
+
+**3. Kanalin kendisi bunu tekrarlayamiyor.** 353 videoda medyan 7.900.
+Bu video medyanin **1.025 kati**. Ayni kisi, ayni sablon, ayni muzik pratigi,
+353 deneme, bir tane patlama. Formul olsaydi ikinci bir tane olurdu.
+
+### Peki muzik onemsiz mi? Hayir, ve burada gercek bir acik var
+
+Filonun **gunluk yayin yapan iki hattinda da muzik KAPALI**:
+
+- `sentinal_ihsan/wild-encounter/bible.json` -> `"music": false`
+- `AImagine-Fear` -> `build.py` icinde ses adimi yok; ustelik `LIST_B_PHRASES`
+  listesinde `"background music"` ve `"soundtrack"` **yasakli ifade** olarak
+  duruyor (`AImagine-Fear/build.py:148`)
+
+Yani muzik, filonun bilerek kapattigi bir kol. Ihsan'in isaret ettigi sey
+**patlamanin sebebi degil ama denenmemis bir degisken.** Ucuz test var,
+bolum 6'da.
+
+## 4. Gercekten ayiran sey , olculen ve varsayilan
+
+**Olculen (kanit var):**
+
+- **Begeni orani 3,7 kat yuksek.** %1,62'ye karsi bizim %0,44. Bu dagitim
+  farki degil, izleyen kisi basina duygusal tepki farki. Video izletmekle
+  kalmiyor, parmak hareket ettiriyor.
+- **Yorum orani cok dusuk: %0,0120.** `references/olcutler.md` bolum 3'un
+  olctugu ayirt edici bant %0,038-0,058. Bu video onun ucte biri.
+  Yani video **tartisilmiyor, sessizce tuketiliyor ve paylasiliyor.**
+- **Metin hikayenin kendisi.** Video tek basina bir kaza klibi. Bant onu
+  "veda etmek" hakkinda bir cumleye ceviriyor. Paylasilabilir cumle metinde,
+  goruntude degil.
+- **Kesme yok, konusma yok, dil yok.** Hicbir dile bagli degil. 15,78 saniye
+  boyunca tek cekim. Kuresel dagitima uygun.
+
+**Varsayim (kanit yok, boyle isaretliyorum):**
+
+- Konu **birinci sahis olum**. Izleyici kaza izlemiyor, kazayi YASIYOR ve
+  sonunda kendi bedenine yukaridan bakiyor. Bu, kaydirilmasi zor bir sey.
+- Ilk karede hareket var, gosterge yaniyor, yol islak. `olcutler.md` bolum
+  12'nin 1. maddesi.
+
+## 5. IHSAN DIREKTIFI: "motorda olan kisi ben olmaliyim, videoda acikca belli olsun"
+
+### Once teknik gercek: bu formatta yuz gosterilecek TEK bir yer var
+
+POV formatinin gucu, izleyicinin surucu OLMASI. Yuz gosterirsen POV biter.
+Ama bu video POV'da kalmiyor. Olculen zaman cizelgesi:
+
+- **0,0-10,0 sn (%63):** birinci sahis. Yuz yok, olamaz da.
+- **10,5-14,5 sn (4 saniye):** kamera bedeni terk ediyor, **ucuncu sahis**.
+  Surucu kadrajda, motorun uzerinde, yandan gorunuyor.
+- **14,5-15,8 sn:** seffaf ruh figuru, eller havada.
+
+**Orijinal video bu 4 saniyeyi harciyor: surucunun kafasinda bastan sona
+kapali siyah kask var.** Kim oldugu hicbir karede belli degil.
+
+**Ihsan'in istedigi sey tam olarak o bos slotu doldurmak.** Format zaten bir
+kimlik penceresi aciyor, orijinal onu kullanmamis.
+
+### Uretim sartnamesi
+
+| Blok | Sure | Ne olacak |
+|---|---|---|
+| POV | 0-10 sn | Yuz YOK. Sadece gidon, kol, gosterge, yol. Kimlik ipucu kol ve ceket. |
+| **Kimlik penceresi** | **10,5-14,5 sn** | Kamera bedeni terk eder. **Kask yok ya da vizor acik. Ihsan'in yuzu net.** |
+| Kapanis | 14,5-15,8 sn | Kapanis plani **ayni yuzu tasir**. Kimlik iki kez dogrulanir. |
+
+Uc sert kural:
+
+1. **Yuz 4 saniyede ve kucuk ekranda okunmali.** Tek kare degil, en az 2,5
+   saniye kesintisiz. Profil degil, dortte uc aci.
+2. **Kol ve ceket 0. saniyeden itibaren ayni.** POV'da gordugu kol ile 10,5'te
+   gordugu adam ayni kisi olmali, yoksa kimlik penceresi ise yaramaz.
+3. **Yuz baglama yolu: `character_id` DEGIL `ref_image_url`.** Kie'nin
+   `character_ids` alani bu hesapta bozuk, 15 Eylul'de izole edildi
+   (`wild-encounter/bible.json:85`). Calisan yol `character_id: null` +
+   `ref_image_url`, `series/shots.py:305` onu gorsel referans olarak kullaniyor.
+   Ihsan'in mevcut referansi: `https://i.ibb.co/PGFFjg1m/Karakter-Referans.jpg`.
+   **Bu URL `face_match` QC'sinde ep09'da timeout verdi**, yani kimlik
+   dogrulamasi o kosuda hic calismadi. Kimligin urunun kendisi oldugu bir
+   bolumde bu kabul edilemez, referans once kendi barindirdigimiz bir yere tasinmali.
+
+### Iki gercek sorun, karar Ihsan'in
+
+**1. Bu, Ihsan'in kendi olumunu gosteren bir video.** Yuz acikca taninirsa,
+tanidiklari baglamsiz gorur ve yuzu kalici olarak bir olum goruntusune baglanir.
+Bunu soylemek benim isim, karar Ihsan'in.
+
+**2. Kurulu karakter sozlesmesiyle celisiyor.** `wild-encounter/bible.json`
+karakter bio'su aynen soyle diyor: "yaratik onu agzina alir, ekip cenesini acar,
+**o yara almadan cikar**". Kanalin 36.000'lik rekoru bu sozlesmeyle geldi.
+Olum bolumu onu bozar.
+
+**Onerim (ikisini de coz):** kaza **kil payi atlatilan** bir an olsun, olum degil.
+Kimlik penceresi aynen kalir, ruh planinin yerine **surucu yerde, kaskini
+cikariyor, kamyon yanindan geciyor** gelir. Metin banti ayni gerilimi tasir:
+`"SOMEONE : OK BYE, SEE YOU TOMORROW!!"` -> `("Almost Didn't...!!")`.
+Format, sure, kimlik penceresi, muzik yayi degismez. Degisen tek sey son 1,3 saniye.
+Bu hem `wild-encounter`in "yara almadan cikar" sozlesmesini korur hem de
+1. maddeyi ortadan kaldirir. Ihsan olum versiyonunu isterse yapilir, ama
+o zaman ayri bir seride yapilmali, bu kanalda degil.
+
+## 6. Filoda ne degismeli , somut
+
+**A. Metin banti.** Motor zaten metin basabiliyor: `core/ffmpeg_tools.py:1498`
+`title_card_overlay(title, subtitle, duration, box=True)`. Iki satir ve kutu
+yapisi birebir tutuyor. Iki eksik var:
+- `duration` bittiginde son 0,5 sn'de **fade out** yapiyor. Viral videoda bant
+  **hic kaybolmuyor**. Fade'siz secenek ya da sure > klip uzunlugu gerekiyor.
+- Bant goruntunun **uzerine** basiliyor. Viral videoda goruntu %65,9'a kucultulup
+  bant **ustune, bos serite** oturtulmus. Bu yeni bir geometri, `pad` ile eklenir.
+
+**B. `AImagine-Fear` kanonu bu formatla dogrudan celisiyor.** `canon/NEGATIVES.md`
+sunlari yasakliyor: `NO on-screen text`, `NO third-person view`, `NO face. NO head.`
+Yani Fear hatti **yapisal olarak Ihsan'i gosteremez.** Bu isin evi Fear degil,
+`sentinal_ihsan`. Fear kanonuna dokunmak ayri bir karar, 371.000 begeni o kanonla
+geldi.
+
+**C. Muzik testi (ucuz, tek degisken).** `wild-encounter/bible.json` `"music": false`.
+Bir sonraki iki bolumun **birine** muzik ac, digerini aynen birak. Ayni hafta,
+ayni saat, benzer hayvan. Muzik acilinca `produce.py:604, 656, 659` uc davranis
+birden degisiyor (`amix_normalize` kapanir, `music_volume` 0,28'den 0,50'ye cikar,
+`limit_mix_peak` acilir), yani **yayinlamadan once `tools/audio_master_check.py`
+kosulmali.** Bu seride anlatim yok, sadece dogal ses ve muzik olacak.
+
+**D. Kimlik referansini kendi barindirmamiza tasi.** `i.ibb.co` ep09'da timeout
+verdi ve QC'yi sessizce atlatti.
+
+## 7. Bu incelemede olculemedi
+
+- **Retention egrisi ve tamamlanma orani.** Baskasinin videosu, Studio verisi yok.
+  15,78 sn'nin ne kadarinin izlendigi, dongu olup olmadigi bilinmiyor.
+- **Paylasim sayisi.** YouTube disaridan vermiyor. `olcutler.md` bolum 3 paylasimi
+  begeninin ustune koyuyor, o sinyal bu raporda YOK.
+- **Muzigin kimligi.** Parca tanimlanamadi; aciklama alanindaki etiketler spam
+  (kpop ve BTS etiketleri icerige ait degil). Tempo (~134 BPM) ve yapi olculdu,
+  eser adi olculmedi.
+- **Hizalamanin kasitli olup olmadigi.** Kurgucunun muzigi videoya mi, videoyu
+  muzige mi oturttugu disaridan ayirt edilemez.
+- **8,1M'in ne kadarinin YouTube disi trafikten geldigi.** Kanal aciklamasi
+  klip ve sesin kendisine ait olmadigini soyluyor; kaynak video baska yerde
+  viral olmus olabilir.
+
+## 8. Karar ve yapilan is , 18 Eylul 2026
+
+**Ihsan karari (ayni gun, iki asamada):**
+
+1. Kil payi versiyonu secildi. Olum plani yok: Ihsan yerde, kaskini cikariyor,
+   kamyon yanindan geciyor. Bolum 5'teki iki gerekce de bu kararla kapandi.
+2. **"Sadece bir video uretecegiz, otomasyona baglamiyoruz."** Yeni seri,
+   `auto_replenish`, aile havuzu, cron ve yayin akisi KURULMADI. Uretilen sey
+   tek bir dosya.
+
+### Motor kisiti , once bu olculdu, format onu takip etti
+
+| Motor | Sure | Yuz referansi |
+|---|---|---|
+| **Omni** | **en fazla 10 sn** (`OMNI_VALID_DURATIONS` = 4/6/8/10) | `image_urls` ile CALISIR |
+| Seedance | 4-15 sn | yalniz `first_frame_url`, karakter referansi YOK |
+
+Referans video 15,78 saniye. Ama yuzun baglanabildigi tek motor 10 saniyede
+duruyor, Seedance ise sadece ilk kareyi aliyor ve POV acilisinda kadrajda yuz
+olmadigi icin kimligi tasiyamaz. **Yuz urunun kendisi oldugu icin 10 saniye
+secildi.** Kayip degil: kanalin rekoru (ep09, 36.000) zaten 10 sn tek plan.
+
+Bloklarin 15,78 sn'den 10 sn'ye tasinmasi:
+
+| Blok | Referans | Bizim |
+|---|---|---|
+| POV, yuz yok | 0-10,0 sn | 0-4,0 sn |
+| Carpma / kacinma | 6,3-6,5 sn | 4,0-5,5 sn |
+| **Kimlik penceresi, yuz net** | 10,5-14,5 sn | **5,5-10,0 sn (4,5 sn)** |
+
+Kimlik penceresi ORANSAL OLARAK BUYUDU (%25 -> %45). Referansta o pencere
+kapali kaskla harcanmisti; burada islevi kimligin kendisi.
+
+### Motordaki eksik kapandi (bolum 6A)
+
+`core/ffmpeg_tools.py` icine **`caption_banner_overlay()`** eklendi.
+`title_card_overlay`'den uc farki var ve ucu de olcumden geliyor:
+bant erimez, goruntunun ustune degil disina basilir, metin hikayeyi anlatir.
+
+Dogrulandi:
+
+- **Geometri referansla birebir**: ust serit %13,7 / bant %11,0 / goruntu %65,9 /
+  alt serit %9,5. Gercek dosyada olculdu, tahmin degil.
+- **Cikti cozunurlugu korunuyor.** Ilk surum oransal `pad` kullaniyordu ve
+  yuvarlama kaymasi 1920'yi **1918'e** dusuruyordu. Mutlak piksele cevrildi.
+- Uzun baslik banda sigmazsa font kucultulur, bant TASMAZ ve goruntunun yeri
+  kaymaz.
+- Kesme isareti iceren altyazi (`("I Almost Didn't...!!")`) drawtext'i kirmiyor.
+
+Baglanti: `series/bible.py` icinde `caption_banner` opt-in alani,
+`series/produce.py` icinde kunyeden SONRA / fact-caption'lardan ONCE uygulanan
+blok, ve `caption_banner` artik taninan bir zorunlu teslimat katmani.
+
+**Mevcut seriler etkilenmiyor.** Alan yazilmamis her bible icin deger `{}`,
+yani blok hic calismiyor. `tests/test_caption_banner.py` bunu kilitliyor:
+dort canli hattin bible'larinda alanin BULUNMADIGI ayrica test ediliyor.
+6 test gecti. Depo genelinde 1140 test gecti, 5 test kirik , o 5 test
+degisiklikler geri alinmis halde de kirik, yani bu isle ilgisiz
+(`test_experiment_runner` 4 + `test_rock5_containment` 1).
+
+### Bant metni
+
+```
+SOMEONE : OK BYE, SEE YOU TOMORROW!!
+("I Almost Didn't...!!")
+```
+
+Referansin kurulum/vurus kalibi korundu, sonuc olumden kurtulusa cevrildi.
+Alt satir BIRINCI SAHIS: kimligi metin de tasiyor, sadece yuz degil.
+
+### Bu videodan kural cikarilamaz
+
+Tek dosya uretildi ve ayni anda uc sey birden degisti: konsept, ekran yazisi ve
+muzik. Tuttugunda ya da tutmadiginda **hangisinin yaptigi ayristirilamaz.**
+Muzigi tek degisken olarak olcmek hala bolum 6C'deki `wild-encounter` A/B
+testini gerektiriyor; bu video onun yerine GECMEZ.
+
+## 9. Uretim , 18 Eylul 2026, iki surum teslim edildi
+
+Klasor: `output/tek_seferlik/motor_kilpayi/`
+
+| Dosya | Nedir |
+|---|---|
+| `05_SURUM_A_motor_sesli.mp4` | motor sesi + muzik birlikte |
+| `05_SURUM_B_muzik_tek.mp4` | **muzik tek ses** (referans videonun yaptigi sey) |
+| `00_ilk_kare.jpg` / `00_son_kare.jpg` | kilitlenen iki kare |
+| `01_ham.mp4` / `02_muzik.mp3` | ham klip ve Suno parcasi |
+
+### Olculen sonuc
+
+| | Bizim video | Referans (8,1M) |
+|---|---|---|
+| Cozunurluk | 720x1280 | 720x1280 |
+| Sure | 10,1 sn | 15,78 sn |
+| **Kesme** | **0** | **0** |
+| LUFS (A / B) | -14,1 / -14,9 | -14,7 |
+| True peak (A / B) | -2,7 / -1,3 | -5,1 |
+| Kredi | 248 (video) + gorseller | , |
+
+Yerlesim referansla ayni: ust serit %13,7 / bant %11,0 / goruntu %65,9 /
+alt serit %9,5. Bant 0. kareden son kareye kadar degismiyor.
+
+Zaman cizelgesi kare olcumuyle dogrulandi: 0-2 POV ve kamyon yaklasiyor,
+3 kamyon kadraji dolduruyor, 4 kacinma ve kamyon siyiriyor, 5-6 kamera yerde
+ve geri cekiliyor, **7-10 Ihsan'in yuzu net**. Kimlik penceresi 3,5 saniye,
+2,5 sn tabanini gecti.
+
+### Uretim yolu , iki motor dustugu icin ucuncu yol kullanildi
+
+Planlanan yol Omni idi (yuzu `ref_image_url` ile baglar). Kosmadi:
+
+| Deneme | Sonuc |
+|---|---|
+| Omni, tam prompt + yuz referansi | 5/5 "Internal Error" |
+| **Omni, zararsiz 4 sn prompt, GORSEL YOK** | **basarisiz , arizanin promptla ilgisi yok** |
+| Veo `REFERENCE_2_VIDEO` + yuz referansi | 2/2 "Internal Error" |
+| Seedance, yalniz son kare | HTTP 422 "Not supporting only transmitting the last frame" |
+| **Seedance, ilk kare + son kare** | **basarili, 248 kredi** |
+| Kredi bakiyesi | 9.997, sorun bakiye degil |
+
+Calisan yol: kimlik penceresi videonun SONUNDA oldugu icin yuzu **son kare**
+kilitliyor. Son kare `generate_image` ile Ihsan'in referansindan uretildi ve
+**goz ile onaylandiktan sonra** video kredisi harcandi. Ilk kare de POV
+acilisini kilitliyor; ikisi arasindaki kaza Seedance tarafindan uretiliyor.
+Bu, referans gorsel kabul eden motorlar dustugunde kimligi tasimanin
+calisan yolu olarak duruyor.
+
+### ⛔ CANLI ARIZA , bu videoyla ilgili degil, filoyu ilgilendiriyor
+
+Kie'nin **Omni ucu dusmus.** Arizanin baslangici 18 Eylul 17:45 ile 18:18 UTC
+arasi. Kanit tek makineden degil, bulut kosularindan:
+
+- `Wild Encounter Daily` 17:45 UTC **basarili** (arizadan once)
+- `Still Home Daily` 18:18 UTC **basarisiz**: Omni "Internal Error", 5/5 deneme,
+  "En az cekim kapisi artik karsilanamaz: kabul=0"
+- Bizim denemeler 18:24 UTC sonrasi, ayni hata
+
+**Omni'de kosan hatlar:** `wild-encounter`, `one-variable`, `still-home`.
+`flythrough` Seedance kullaniyor, etkilenmiyor. Ariza surerse yarinki
+kosularda bu uc hat da duser.
+
+### Olculen ders: motor sesi ile muzigin yayı ayni anda olmuyor
+
+Ihsan'in isaret ettigi sey muzigin yayiydi. Suno istenen yapiyi gercekten
+uretti: ham parcada bas bandi araligi **43,8 kat** (referans videoda 19,2 kat),
+2,5-3,5 sn arasinda bas tamamen cekiliyor ve 4,0'da geri carpiyor.
+
+Ama miksten sonra yay kayboldu. Olculdu:
+
+| Miks | Bas bandi araligi |
+|---|---|
+| Muzik 0,45, motor sesi acik | **2,9 kat** |
+| Muzik 0,85, motor sesi acik | **3,0 kat** |
+| **Muzik tek ses** | **43,7 kat** |
+
+**Muzigi yukseltmek ise yaramiyor.** Basi dolduran sey motor ve lastik sesi;
+surekli ve genis bantli oldugu icin muzigin sustugu anlari kapatiyor, sonra
+loudnorm hepsini yeniden normalize ediyor. Yay ancak dogal ses TAMAMEN
+cikarilinca yasiyor.
+
+Referans video da zaten muzik-tek ses: LRA 1,1, dogal ses yok. Yani
+8,1M'lik video bu tercihi yapmis. **Surum B o tercihi kopyaliyor, surum A
+gercekcilik icin motor sesini koruyor ve bunun bedeli olculmus haliyle
+yayin %93'u.**
+
+### Bu videodan hala kural cikarilamaz
+
+Bolum 8'in sonundaki uyari gecerli: konsept, ekran yazisi ve muzik ayni anda
+degisti. Ayrica surum A ile B arasindaki fark da ayri bir degisken. Tuttugunda
+hangisinin yaptigi ayristirilamaz.

@@ -1894,3 +1894,132 @@ def mix_voiceover(
         shutil.copy2(str(video_path), str(output_path))
 
     return output_path
+
+
+def caption_banner_overlay(
+    input_path: str | Path,
+    output_path: str | Path,
+    title: str,
+    subtitle: str = "",
+    required: bool = False,
+    top_pct: float = 13.7,
+    banner_pct: float = 11.0,
+    picture_pct: float = 65.9,
+    crop_bias: float = 0.5,
+    banner_color: str = "white",
+    text_color: str = "black",
+    bg_color: str = "black",
+    preserve_case: bool = False,
+) -> Path:
+    """Kalici ust metin banti (opt-in). Goruntu kucultulup asagi kaydirilir ve
+    ustte acilan bos serite iki satirlik metin basilir.
+
+    title_card_overlay'den UC farki var, ucu de olcumden geliyor (18 Eylul 2026,
+    8,1M izlenmeli referans video daOYkiaV5rQ, olcum sentinal_ihsan/REELYZE-RAPOR.md):
+
+      1. Bant HIC KAYBOLMAZ. title_card suresi dolunca erir; burasi 0. kareden
+         son kareye kadar durur. Referansta 15,78 saniye boyunca tek karede
+         bile degismiyor.
+      2. Bant goruntunun USTUNE degil DISINA basilir. Referansta goruntu
+         karenin %65,9'u, ustunde %11 bant, en ustte %13,7 ve en altta %9,5
+         bos serit. Yazi goruntuyu hic kapatmaz ve alttaki platform dugmeleri
+         de goruntunun uzerine binmez.
+      3. Metin goruntuyu etiketlemez, hikayeyi ANLATIR: ust satir kurulum,
+         alt satir vurus. Referans: "SOMEONE : OK BYE, SEE YOU TOMORROW!!" +
+         "(Sometimes, Tomorrow Never Comes...!!)".
+
+    Kaynak 9:16 geldigi icin bant penceresine ORTADAN KIRPILARAK oturur
+    (crop_bias 0 ust kenar, 1 alt kenar, 0.5 orta). Cikti cozunurlugu
+    girdiyle AYNI kalir.
+    """
+    import textwrap
+
+    input_path = Path(input_path)
+    output_path = Path(output_path)
+
+    title_text = (title or "") if preserve_case else (title or "").upper()
+    sub_text = subtitle or ""
+    if not title_text.strip() and not sub_text.strip():
+        if required:
+            raise RuntimeError("zorunlu caption banner metni bos")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+        return output_path
+
+    height = get_video_height(input_path) or 1920
+    scale = height / 1920.0
+
+    def px(v: float) -> int:
+        return max(1, round(v * scale))
+
+    top = max(0.0, float(top_pct)) / 100.0
+    band = max(0.01, float(banner_pct)) / 100.0
+    pic = min(0.999, max(0.10, float(picture_pct) / 100.0))
+    bias = min(1.0, max(0.0, float(crop_bias)))
+
+    font = _find_font(mono=False)
+    fontarg = f"fontfile='{font.replace(':', chr(92) + ':')}':" if font else ""
+
+    title_fs, sub_fs = px(52), px(34)
+    title_lh, sub_lh = title_fs + px(14), sub_fs + px(10)
+
+    rows: list[tuple[str, int, int]] = []
+    t_lines = textwrap.wrap(title_text, width=30) if title_text.strip() else []
+    s_lines = textwrap.wrap(sub_text, width=46) if sub_text.strip() else []
+    block = len(t_lines) * title_lh + len(s_lines) * sub_lh
+
+    # Bant sabit yukseklikte; metin sigmiyorsa font kucultulur. Boylece uzun
+    # baslik bandi tasirmaz, goruntunun yerini kaydirmaz.
+    band_px = height * band
+    if block > band_px * 0.86 and block > 0:
+        k = (band_px * 0.86) / block
+        title_fs, sub_fs = max(1, round(title_fs * k)), max(1, round(sub_fs * k))
+        title_lh, sub_lh = max(1, round(title_lh * k)), max(1, round(sub_lh * k))
+        block = len(t_lines) * title_lh + len(s_lines) * sub_lh
+
+    for line in t_lines:
+        rows.append((line, title_fs, title_lh))
+    for line in s_lines:
+        rows.append((line, sub_fs, sub_lh))
+
+    y = height * top + (band_px - block) / 2.0
+
+    # Mutlak piksel: oransal pad yuvarlama kaymasi biriktirip cikti yuksekligini
+    # 1920'den 1918'e dusuruyordu (olculdu). Yukseklik girdiyle BIREBIR kalmali.
+    pic_h = round(height * pic)
+    pad_y = round(height * (top + band))
+    vf_parts = [
+        f"crop=iw:{pic_h}:0:(ih-{pic_h})*{bias:.3f}",
+        f"pad=iw:{height}:0:{pad_y}:{bg_color}",
+        (f"drawbox=x=0:y={round(height * top)}:w=iw:h={round(height * band)}:"
+         f"color={banner_color}:t=fill"),
+    ]
+    for text, fs, lh in rows:
+        esc = _drawtext_escape(text)
+        vf_parts.append(
+            f"drawtext={fontarg}text='{esc}':fontsize={fs}:"
+            f"fontcolor={text_color}:x=(w-text_w)/2:y={round(y)}"
+        )
+        y += lh
+    vf_parts.append("format=yuv420p")
+
+    cmd = [
+        "ffmpeg", "-y",
+        "-i", str(input_path),
+        "-vf", ",".join(vf_parts),
+        "-c:v", "libx264", "-crf", FFMPEG_CRF,
+        "-preset", FFMPEG_PRESET,
+        "-c:a", "copy",
+        str(output_path)
+    ]
+    try:
+        subprocess.run(cmd, capture_output=True, check=True, timeout=300)
+        logger.info(f"🪧 Caption banner ('{title}') -> {output_path.name}")
+    except subprocess.CalledProcessError as e:
+        err = (e.stderr or b"").decode(errors="replace")[-400:] if e.stderr else str(e)
+        if required:
+            raise RuntimeError(f"zorunlu caption banner cizilemedi: {err}") from e
+        logger.warning(f"⚠️ Caption banner failed (using original): {err}")
+        import shutil
+        shutil.copy2(str(input_path), str(output_path))
+    return output_path

@@ -1599,7 +1599,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         logger.error(f"❌ {error}")
         return None
     required_layers = set(bible.required_layers)
-    unknown_layers = required_layers - {"hook_teaser", "music", "native_audio", "title_card"}
+    unknown_layers = required_layers - {"hook_teaser", "music", "native_audio",
+                                        "title_card", "caption_banner"}
     if unknown_layers:
         logger.error(
             f"❌ Bilinmeyen zorunlu teslimat katmanı: {', '.join(sorted(unknown_layers))}"
@@ -2383,6 +2384,42 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 not titled.exists() or titled.stat().st_size == 0):
             logger.error("Zorunlu teslimat katmanı üretilemedi: title_card")
             return None
+
+    # Kalici ust metin banti (opt-in). Kunye ERIR, bant ERIMEZ: video boyunca
+    # durur. Goruntu kucultulup asagi kaydirilir ve ustte acilan bos serite iki
+    # satirlik hikaye yazilir, yani yazi goruntuyu hic kapatmaz. Metin
+    # plan['caption_banner'] = {"title","subtitle"} alanindan gelir.
+    # Olcum dayanagi: sentinal_ihsan/REELYZE-RAPOR.md, 18 Eylul 2026.
+    cb_cfg = bible.caption_banner
+    cb = plan.get("caption_banner") or {}
+    if cb_cfg and (cb.get("title") or cb.get("subtitle")):
+        banded = Path(final_ep).parent / f"{Path(final_ep).stem}_banner.mp4"
+        try:
+            ffmpeg_tools.caption_banner_overlay(
+                final_ep, banded,
+                title=str(cb.get("title") or ""),
+                subtitle=str(cb.get("subtitle") or ""),
+                required="caption_banner" in required_layers,
+                top_pct=float(cb_cfg.get("top_pct", 13.7)),
+                banner_pct=float(cb_cfg.get("banner_pct", 11.0)),
+                picture_pct=float(cb_cfg.get("picture_pct", 65.9)),
+                crop_bias=float(cb_cfg.get("crop_bias", 0.5)),
+                banner_color=str(cb_cfg.get("banner_color", "white")),
+                text_color=str(cb_cfg.get("text_color", "black")),
+                bg_color=str(cb_cfg.get("bg_color", "black")),
+                preserve_case=bool(cb_cfg.get("preserve_case", False)),
+            )
+            if banded.exists() and banded.stat().st_size > 0:
+                final_ep = banded
+                logger.info(f"BANT bindirildi: {cb.get('title') or cb.get('subtitle')}")
+            elif "caption_banner" in required_layers:
+                logger.error("Zorunlu teslimat katmani uretilemedi: caption_banner")
+                return None
+        except Exception as e:
+            if "caption_banner" in required_layers:
+                logger.error(f"Zorunlu metin banti eklenemedi: {e}")
+                return None
+            logger.warning(f"Metin banti eklenemedi (video bantsiz yayinlanir): {e}")
 
     # Senkron fact-caption'lar (opt-in): her çekimin shot['fact']'i (kısa sert bilgi)
     # o çekimin FINAL zaman çizgisindeki anına ,  kanca kaymasi (teaser_len) dahil , 

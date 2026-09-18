@@ -536,6 +536,21 @@ class Bible:
         return v if isinstance(v, dict) and v.get("enabled") else {}
 
     @property
+    def caption_banner(self) -> dict:
+        """Kalici ust metin banti (opt-in). title_card'in AKSINE video boyunca
+        durur ve goruntunun USTUNE degil, goruntu kucultulerek acilan bos
+        serite basilir. Metni plan'daki caption_banner={'title','subtitle'}
+        verir. Olcum dayanagi: sentinal_ihsan/REELYZE-RAPOR.md, 18 Eylul 2026
+        (8,1M izlenmeli referans videoda bant %11, goruntu %65,9).
+        Orn: "caption_banner": {"enabled": true, "crop_bias": 0.5}"""
+        v = self.data["series"].get("caption_banner") or {}
+        if v is True:
+            return {"enabled": True}
+        if isinstance(v, dict) and "preserve_case" in v and type(v["preserve_case"]) is not bool:
+            raise ValueError("bible.series.caption_banner.preserve_case JSON boolean olmali")
+        return v if isinstance(v, dict) and v.get("enabled") else {}
+
+    @property
     def block_degraded_publish(self) -> bool:
         """Only an explicit JSON true enables the fail-closed coherence gate."""
         series = self.data["series"]
