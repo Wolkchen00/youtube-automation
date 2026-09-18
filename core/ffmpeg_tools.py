@@ -303,9 +303,22 @@ def master_audio(
     metadata_path = output_path.with_suffix(".audio_master.json")
     try:
         limiter_db = float(target_tp)
+        # Ikinci kol: limiter ONCESI telafi kazanci. loudnorm linear modda
+        # kazanci TP tavanina carpmamak icin kisitliyor, bu yuzden tepe
+        # noktasi yuksek malzemede hedef LUFS'a ULASAMIYOR. O farki kapatan
+        # tek dogru kol budur; tavani limiter zaten tutuyor.
+        gain_db = 0.0
         attempts = []
         for attempt_number in range(1, 4):
             delivery_limit = 10.0 ** (limiter_db / 20.0)
+            # Kazanc SIFIRKEN filtre dizgisi bit-degismez kalir: telafi
+            # gerekmeyen bolumler eskisiyle ayni ciktiyi uretir.
+            # Kazanc DOGRUSAL katsayi olarak yazilir; 'dB' son eki ffmpeg'in
+            # ifade ayristiricisina birakilmaz.
+            makeup = (
+                f",volume={10.0 ** (gain_db / 20.0):.6f}"
+                if abs(gain_db) > 1e-9 else ""
+            )
             apply_filter = (
                 f"loudnorm={target}"
                 f":measured_I={values['input_i']:g}"
@@ -314,6 +327,7 @@ def master_audio(
                 f":measured_thresh={values['input_thresh']:g}"
                 f":offset={values['target_offset']:g}"
                 ":linear=true:print_format=json"
+                f"{makeup}"
                 f",aresample={LIMITER_OVERSAMPLE_HZ},"
                 f"alimiter=limit={delivery_limit:.6f}:level=false"
                 # 96 kHz yalniz limiter'in asiri orneklemesi icindir.
@@ -341,6 +355,7 @@ def master_audio(
                 "attempt": attempt_number,
                 "limit_db": limiter_db,
                 "limit": delivery_limit,
+                "makeup_gain_db": gain_db,
                 "integrated_lufs": delivered["integrated_lufs"],
                 "true_peak_dbtp": delivered["true_peak_dbtp"],
             })
@@ -363,6 +378,7 @@ def master_audio(
                 # KORUNUYOR; 0.2 dB yalniz TABANDIR, seri daha buyuk
                 # isterse onunki gecerli olur.
                 margin=max(float(true_peak_margin_db), 0.2),
+                gain_db=gain_db,
             )
             if decision.action == "accept":
                 break
@@ -374,13 +390,18 @@ def master_audio(
                     f"master teslim sözleşmesi {attempt_number} denemede "
                     f"tutulamadı: {decision.reason}"
                 )
+            next_gain_db = (
+                gain_db if decision.gain_db is None else float(decision.gain_db)
+            )
             logger.warning(
                 f"⚠️ Master deneme {attempt_number}/3: "
                 f"{delivered['true_peak_dbtp']:.1f} dBTP / "
                 f"{delivered['integrated_lufs']:.1f} LUFS; "
-                f"tavan {limiter_db:.2f} -> {decision.limiter_db:.2f} dB"
+                f"tavan {limiter_db:.2f} -> {decision.limiter_db:.2f} dB, "
+                f"telafi {gain_db:+.2f} -> {next_gain_db:+.2f} dB"
             )
             limiter_db = decision.limiter_db
+            gain_db = next_gain_db
         else:
             # Ulasilamaz olmali: politika son denemede "retry" donduremez.
             # Yine de sessiz basariya dusmemek icin fail-closed kaliyoruz.
