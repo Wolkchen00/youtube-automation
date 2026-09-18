@@ -8,12 +8,13 @@ Isigin kapali hali oldugu icin motor once bugunun Paris'ini cizdi ve isigi
 ve bolum 21 izlenmede kaldi (P1 648, P2 875). Bu denetim ayni kazayi bir
 daha ucret odemeden yakalar.
 
-Denetlenen dort kural:
+Denetlenen bes kural:
   1. Cekim 1'de durum-gecisi dili YASAK (once/sonra hali olan her kalip).
   2. Zayiflik dili YASAK: kanca "subtle" olamaz.
   3. Isik surucu aileler (enerji mimarisi, yasayan malzeme) GECE ya da
      alacakaranlik gecer.
-  4. Plan damgasi guncel doktrinle eslesir.
+  4. HER cekimde pozitif dil (doktrin kural 9), SABLON on-eki dahil.
+  5. Plan damgasi guncel doktrinle eslesir.
 
 Kullanim:
     py -X utf8 tools/siluet_denetim.py
@@ -52,6 +53,15 @@ DURUM_GECISI = [
 # Kanca zayif olamaz.
 ZAYIFLIK = ["subtle", "subtly", "softly", "gently", "faintly", "barely", "hint of"]
 
+# Doktrin kural 9: gorsel prompt yalniz kadrajda BULUNAN seyleri soyler.
+# Difuzyon olumsuzu cizer. Bu liste TAM prompt'a uygulanir (sablon on-eki
+# DAHIL), cunku forbidden_phrases yalniz modelin yazdigi kisma bakar ve
+# 18 Eylul'de sablonun kendisi kurali uc kez cignedi.
+OLUMSUZ_DIL = (
+    "no", "not", "never", "nothing", "neither", "nor", "without",
+    "avoid", "cannot", "absent", "lacks", "lacking",
+)
+
 ISIK_SURUCU_AILELER = {"enerji mimarisi", "yasayan malzeme"}
 KARANLIK = ["night", "dusk", "evening", "after dark", "twilight", "nightfall",
             "moonlit", "at dark"]
@@ -77,6 +87,19 @@ def denetle(plan_yolu: pathlib.Path, guncel_damga: str | None) -> list[str]:
     cekim1 = str(cekimler[0].get("prompt") or "")
     bulgular += _bulgular_prompt(cekim1, DURUM_GECISI, "cekim 1 durum-gecisi dili")
     bulgular += _bulgular_prompt(cekim1, ZAYIFLIK, "cekim 1 zayiflik dili")
+
+    # Kural 9, HER cekimde ve TAM prompt uzerinde (sablon on-eki dahil).
+    for cekim in cekimler:
+        n = cekim.get("n") or "?"
+        metin = str(cekim.get("prompt") or "")
+        hits = sorted({
+            kelime for kelime in OLUMSUZ_DIL
+            if re.search(rf"\b{re.escape(kelime)}\b", metin, re.I)
+        })
+        if hits:
+            bulgular.append(
+                f"cekim {n} olumsuz dil (doktrin kural 9): " + ", ".join(repr(h) for h in hits)
+            )
 
     aile = str(plan.get("family") or "")
     if aile in ISIK_SURUCU_AILELER:

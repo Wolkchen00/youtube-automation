@@ -195,6 +195,35 @@ tam da yasakladigimiz ramp'a itiyordu.
 reveals, begins to, comes to life, powers up, activates, lights up, flickers
 on, awakens. Hepsinin bir ONCE/SONRA hali vardir ve motor onceyi de cizer.
 
+### 2.2.1.1 SINAV KODA AITTIR, GORSEL PROMPT'A DEGIL (18 Eylul, ayni gun duzeltildi)
+
+Siluet kuralinin ilk yazimi hatalidiydi ve serinin KENDI kural 9'unu cigniyordu.
+Cekim 1 sablonuna sunlar girmisti:
+
+> "Reduce that first frame to a flat black silhouette in your mind ... could
+> **never** be mistaken for a photograph of the city as it exists today ... and
+> **NEVER** the only thing that says 2512 ... it does **not** switch on, warm up,
+> brighten, awaken, unfold, assemble or reveal itself."
+
+Iki ayri kusur:
+
+1. **Olumsuz dil.** Kural 9 acikca `no / not / never / without / cannot` yasakliyor
+   cunku difuzyon olumsuzu CIZER. "does not switch on, warm up, brighten" cumlesi
+   modele tam olarak istemedigimiz seylerin listesini veriyordu.
+2. **Sinav talimati gorsel prompt'a girmisti.** "Bunu zihninde siyah siluete
+   indir" bir DENETIM adimidir, kadrajda bulunan bir sey degildir. Gorsel prompt
+   yalniz kadraji tarif eder.
+
+**Kural: siluet SINAVI koda aittir.** Dort yerde duruyor ve hicbiri gorsel
+prompt degildir: bu doktrin, `auto_replenish.forbidden_phrases`,
+`tools/siluet_denetim.py` ve `qc.first_frame_rule`. Sablon yalnizca POZITIF
+tarif eder: "yapi ilk karede bitmis, tam boyutta ve tam calisir halde durur",
+"isik bastan sona tek ve sabit parlaklikta", "bir sey kareyi kat eder".
+
+`tools/siluet_denetim.py` artik kural 9'u **TAM prompt uzerinde** (sablon on-eki
+DAHIL) denetliyor. `forbidden_phrases` yalniz MODELIN yazdigi kisma bakar, yani
+sablonun kendi gerilemesini goremezdi , bu ariza tam o boslukta olustu.
+
 ### 2.2.2 Kapinin kendisi tutmuyordu , duzeltildi
 
 `qc.require_first_frame` bu seride ACIKTI, ama kapiya giden metin
