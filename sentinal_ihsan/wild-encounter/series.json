@@ -246,9 +246,9 @@
     "11": {
       "status": "qc_retry",
       "first_held_at": "2026-09-17T21:43:09.403004+00:00",
-      "retry_count": 1,
+      "retry_count": 2,
       "last_reason_code": "AUDIO_MASTER",
-      "hold_reason": "mastering başarısız: master teslim sözleşmesi 2 denemede tutulamadı: True-peak gate passed (-1.20 <= -1.00) but loudness gate failed: measured LUFS=-15.40 is outside target window [-15.00, -13.00]. Lowering the limiter cannot recover integrated loudness; further attempts would be byte-identical."
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 2 denemede tutulamadı: True-peak gate passed (-1.30 <= -1.00) but loudness gate failed: measured LUFS=-16.10 is outside target window [-15.00, -13.00]. The 2.10 dB correction needed exceeds the 2.00 dB makeup bound; this is a broken premaster, not a mastering nudge."
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."
