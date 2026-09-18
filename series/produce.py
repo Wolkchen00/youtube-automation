@@ -2379,6 +2379,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 source_1080, mastered_1080,
                 target_i=master_lufs, target_tp=-1.0, target_lra=bible.master_lra,
                 true_peak_margin_db=bible.master_true_peak_margin_db,
+                lufs_floor=bible.master_lufs_floor,
             )
         except Exception as error:
             return _audio_master_hold(f"mastering başarısız: {error}")

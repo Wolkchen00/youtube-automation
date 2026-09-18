@@ -295,6 +295,36 @@ class Bible:
         return value
 
     @property
+    def master_lufs_floor(self) -> float | None:
+        """Opt-in loudness floor; absent means the strict target window stands.
+
+        Some material cannot reach the target at any gain. Measured 2026-09-18
+        on wild-encounter: native shot audio at -27.1 LUFS with 3.0 dB of peak
+        headroom asymptotes at -16.6 LUFS under an explicit gain sweep. For such
+        a series the floor says how quiet a delivery may honestly be before it
+        counts as broken, instead of discarding the episode outright.
+        """
+        raw = self.data["series"].get("master_lufs_floor")
+        if raw is None:
+            return None
+        if isinstance(raw, bool):
+            raise ValueError("bible.series.master_lufs_floor sonlu bir sayi olmali")
+        try:
+            value = float(raw)
+        except (TypeError, ValueError) as error:
+            raise ValueError(
+                "bible.series.master_lufs_floor sonlu bir sayi olmali"
+            ) from error
+        if not math.isfinite(value):
+            raise ValueError("bible.series.master_lufs_floor sonlu bir sayi olmali")
+        if value >= self.master_lufs:
+            raise ValueError(
+                "bible.series.master_lufs_floor master_lufs'tan KUCUK olmali "
+                f"(taban={value:g}, hedef={self.master_lufs:g})"
+            )
+        return value
+
+    @property
     def master_true_peak_margin_db(self) -> float:
         """Opt-in true-peak retry pullback margin; absent means legacy arithmetic."""
         raw = self.data["series"].get("master_true_peak_margin_db", 0.0)

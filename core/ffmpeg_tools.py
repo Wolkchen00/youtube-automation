@@ -286,8 +286,15 @@ def master_audio(
     target_tp: float = -1.0,
     target_lra: float = 11.0,
     true_peak_margin_db: float = 0.0,
+    lufs_floor: float | None = None,
 ) -> Path:
-    """Sesi iki geçişli loudnorm ile master'la; hata halinde istisna yükselt."""
+    """Sesi iki geçişli loudnorm ile master'la; hata halinde istisna yükselt.
+
+    ``lufs_floor`` verilirse, telafi kolu sonuna kadar harcandiktan sonra
+    hedef pencerenin ALTINDA kalan ama tabanin uzerindeki teslim KABUL
+    edilir. Sessiz ama yayinlanabilir malzemeyi cope atmamak icindir;
+    ``None`` eski kati sozlesmeyi korur.
+    """
     input_path = Path(input_path)
     output_path = Path(output_path)
     output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -379,8 +386,17 @@ def master_audio(
                 # isterse onunki gecerli olur.
                 margin=max(float(true_peak_margin_db), 0.2),
                 gain_db=gain_db,
+                lufs_floor=lufs_floor,
             )
             if decision.action == "accept":
+                # Taban kabulu SESSIZ OLMAZ. Hedefin altinda teslim etmek
+                # mesru ama kaydedilmesi gereken bir istisnadir; telemetri
+                # logs/ altina yazilir cunku bolum dizini yuklenmiyor.
+                if decision.reason:
+                    logger.warning(f"\u26a0\ufe0f Master taban kabulu: {decision.reason}")
+                    _write_master_telemetry(
+                        output_path, attempts, decision.reason
+                    )
                 break
             if decision.action == "stop":
                 _write_master_telemetry(output_path, attempts, decision.reason)

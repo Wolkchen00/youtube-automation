@@ -7,6 +7,10 @@ confirm it. The three defects this policy replaces, for context:
      boundary with no margin;
   2. when true-peak passed but loudness failed it changed nothing and re-ran a
      byte-identical attempt, burning two encodes on a guaranteed failure;
+     (2026-09-18: the cure for this was over-applied. Refusing to retry AT ALL
+     threw away two finished wild-encounter episodes over a fraction of a dB.
+     The rule is now "never re-run without moving a lever", and makeup gain is
+     the lever the original policy did not have.)
   3. it had no bound on how far the limiter could be pulled down.
 """
 
@@ -143,18 +147,75 @@ def test_no_returned_ceiling_ever_sits_below_the_floor():
 
 # ------------------------------------------------ defect 2, the identical rerun
 
-@pytest.mark.parametrize("lufs", [-11.0, -17.0, -9.5, -20.0])
-def test_loudness_only_failure_stops_immediately_and_never_retries(lufs):
-    """The defect this module exists to kill.
+@pytest.mark.parametrize("lufs", [-11.0, -9.5])
+def test_loudness_above_the_window_stops_immediately_and_never_retries(lufs):
+    """The defect this module exists to kill, in the direction it still applies.
 
-    True-peak passes, loudness does not. The limiter is the wrong lever, so a
-    second attempt at the same ceiling would be byte-identical. Any "retry" here
-    is the old bug wearing a new coat.
+    True-peak passes, loudness is ABOVE the window by more than the makeup
+    bound. Attenuation is exact and free, so a premaster still this hot is
+    wrong rather than merely loud, and there is nothing to re-run.
     """
     d = step(measured_tp=-1.4, measured_lufs=lufs, attempt=1, max_attempts=3)
     assert d.action == "stop", "loudness-only failure must never schedule another encode"
     assert d.limiter_db is None
     assert d.reason
+
+
+@pytest.mark.parametrize("lufs", [-17.0, -20.0])
+def test_loudness_below_the_window_retries_but_only_by_moving_the_gain(lufs):
+    """Updated 2026-09-18, and the reason matters more than the assertion.
+
+    This case used to stop, on the grounds that the limiter is the wrong lever
+    and a second attempt would therefore be byte-identical. The first half of
+    that was right and the conclusion did not follow: pre-limiter makeup gain
+    is a lever, so the retry it schedules is NOT identical.
+
+    What the original test was protecting is preserved below and generalised in
+    test_a_retry_always_changes_something: the policy must never re-run an
+    encode it has no reason to expect a different answer from. Deleting that
+    guarantee would be the old bug wearing a new coat. Weakening "never retry"
+    to "never retry WITHOUT changing something" is not.
+    """
+    d = step(measured_tp=-1.4, measured_lufs=lufs, attempt=1, max_attempts=3)
+    assert d.action == "retry"
+    assert d.gain_db is not None and d.gain_db > 0, (
+        "a retry on quiet material must move the only lever that can help"
+    )
+    assert d.limiter_db == pytest.approx(TP), "the ceiling is not the lever here"
+
+
+@pytest.mark.parametrize("lufs", [-11.0, -17.0, -9.5, -20.0, -15.4, -12.6])
+def test_a_retry_always_changes_something(lufs):
+    """The generalised invariant: no retry may be byte-identical to its parent."""
+    d = step(measured_tp=-1.4, measured_lufs=lufs, attempt=1, max_attempts=3,
+             limiter_db=TP, gain_db=0.0)
+    if d.action != "retry":
+        return
+    moved_ceiling = d.limiter_db != pytest.approx(TP)
+    moved_gain = d.gain_db is not None and d.gain_db != pytest.approx(0.0)
+    assert moved_ceiling or moved_gain, (
+        f"retry at LUFS={lufs} changes neither ceiling nor gain: identical encode"
+    )
+
+
+def test_quiet_material_terminates_instead_of_retrying_forever():
+    """The lever is bounded, so the retry chain has to end.
+
+    Walk the loop the way master_audio does and assert it reaches a terminal
+    decision. An unbounded lever would spin until the attempt budget ran out
+    and hide the real problem behind 'max attempts exhausted'.
+    """
+    limiter, gain = TP, 0.0
+    for attempt in range(1, 4):
+        d = step(measured_tp=-1.4, measured_lufs=-19.0, attempt=attempt,
+                 max_attempts=3, limiter_db=limiter, gain_db=gain)
+        if d.action != "retry":
+            assert d.action == "stop", "no floor configured, so quiet must be fatal"
+            assert d.gain_db is None
+            return
+        assert abs(d.gain_db) <= 2.0 + 1e-9, "the lever escaped its bound"
+        limiter, gain = d.limiter_db, d.gain_db
+    pytest.fail("the retry chain never terminated")
 
 
 def test_loudness_only_failure_stops_on_the_very_first_attempt():

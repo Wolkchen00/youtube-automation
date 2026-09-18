@@ -9,6 +9,8 @@
     "aspect_ratio": "9:16",
     "resolution": "1080p",
     "master_lufs": -14,
+    "master_lufs_floor": -18.0,
+    "master_lufs_floor_note": "2026-09-18 OLCUMLE eklendi. Bu serinin sesi Kie Omni'nin yerel sesidir, muzik yatagi YOK (music_prompt false). ep11 ham cekimi -27,1 LUFS ve tepe boslugu 3,0 dB; acik kazanc suprusu gurlugun -16,6 LUFS'ta DOYDUGUNU gosterdi (+17 dB girdi, 14 dB kirpma, hedefe hala 2,6 LU uzak). Yani -14 hedefi bu malzeme icin hicbir zincirle ULASILABILIR DEGIL. Kati pencere 17 ve 18 Eylul'de iki bolumu, kredi harcandiktan SONRA cope atti. Taban -18: olculen teslim araligi -14 ile -16,1 arasinda, taban bunun 2 LU altinda kaliyor, yani gercekten bozuk ses hala reddedilir. Teslim pencerenin altina dustugunde kosu WARNING basar ve telemetri logs/ altina yazilir; sessizce gecmez. Gurluk kalici olarak -16 civarinda kalirsa dogru cozum tabani indirmek DEGIL, seriye muzik yatagi eklemektir.",
     "fps": 24,
     "fps_note": "2026-09-15 EKLENDI. Alan yokken boru hatti 30 fps'e cikariyordu. Yayindaki ep09 olculdu: 300 kare / 10,01 sn, mpdecimate 242 benzersiz kare birakti, yani 58 kare (%19,3) KOPYA. Kie kaynagi 24 fps uretiyor; 24 yazmak kaynagin kadansini korur. Referans hesap da 11/11 24 fps (REFERANS-AYUSH-ANALIZ.md). Ayni duzeltme still-home'da zaten yapilmisti.",
     "engine": "omni",

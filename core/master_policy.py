@@ -15,8 +15,10 @@ class MasterDecision:
     Attributes:
         action: One of "accept", "retry", or "stop".
         limiter_db: The next limiter ceiling in dB, only when action == "retry".
-        reason: Empty string when action == "accept"; otherwise a human-readable
-            diagnosis explaining the decision.
+        reason: Empty string on a clean accept; otherwise a human-readable
+            diagnosis. An accept CAN carry a reason: that is the floor accept,
+            where delivery is quieter than the window but honest, and the
+            caller is expected to log it rather than ship it silently.
         gain_db: The next cumulative pre-limiter makeup gain in dB, only when
             action == "retry". The true-peak branch carries the current gain
             through unchanged; the loudness branch is the one that moves it.
@@ -42,6 +44,7 @@ def next_master_step(
     lufs_tolerance: float = 1.0,
     gain_db: float = 0.0,
     max_total_gain: float = 2.0,
+    lufs_floor: float | None = None,
 ) -> MasterDecision:
     """Decide the next mastering step based on measured audio metrics.
 
@@ -60,7 +63,11 @@ def next_master_step(
         gain_db: Pre-limiter makeup gain already applied, in dB (default 0.0).
         max_total_gain: Absolute bound on that makeup gain, in dB (default 2.0).
             A nudge is a legitimate lever; a shove buys loudness with limiter
-            distortion, so anything larger is treated as a broken premaster.
+            distortion, so the lever is spent up to this bound and no further.
+        lufs_floor: Lowest integrated loudness that may still be delivered once
+            the makeup lever is spent, in LUFS. ``None`` (the default) keeps the
+            strict contract: outside the window is fatal. Series whose material
+            cannot physically reach the target opt in to a floor.
 
     Returns:
         A MasterDecision with action, next limiter_db (if retry), and reason.
@@ -138,69 +145,116 @@ def next_master_step(
     # Rule 4: TP passes but loudness fails.
     #
     # Lowering the limiter is still the wrong lever: it produces a byte-identical
-    # encode, which is the defect this module was written to kill. But it is not
-    # the ONLY lever. Pre-limiter makeup gain moves integrated loudness directly,
-    # and the limiter downstream is exactly what holds the peaks it creates under
-    # the ceiling. So a SMALL miss is recoverable, and refusing to recover it
-    # throws away a paid-for episode over a fraction of a decibel nobody can hear.
-    # (2026-09-17, wild-encounter Part 11: LUFS -15.40 against a [-15, -13]
-    # window. 0.40 LU killed the run after the Kie credits were already spent.)
+    # encode, which is the defect this module was written to kill. Two things are
+    # true of this material that were not true when that rule was written.
     #
-    # The bound is what keeps this honest. Past max_total_gain the premaster is
-    # not slightly off, it is wrong, and shoving that much into a limiter buys
-    # loudness with audible distortion. That still stops.
+    # First, pre-limiter makeup gain IS a lever. It moves integrated loudness
+    # directly, and the limiter downstream is exactly what holds the peaks it
+    # creates under the ceiling, so a retry that moves the gain is not identical.
+    #
+    # Second, and this is the part that cost two episodes: for sparse, quiet
+    # native audio the target can be unreachable at ANY gain. Measured 2026-09-18
+    # on wild-encounter ep11, the raw shot sits at -27.1 LUFS with 3.0 dB of peak
+    # headroom, and an explicit sweep showed integrated loudness ASYMPTOTING at
+    # -16.6 LUFS: +17 dB in, 14 dB of limiting, still 2.6 LU short of the window.
+    # A contract the material cannot meet is not a quality standard, it is a coin
+    # flip that throws away work already paid for in Kie credits.
+    #
+    # So: spend the lever up to its bound, THEN judge what came out.
+    #   * Too LOUD stays strict. Attenuation is exact and free, so a premaster
+    #     still hot past the bound is wrong, not merely hot.
+    #   * Too QUIET is delivered down to an explicit floor, and only once the
+    #     lever is spent, so the master is always as loud as this material
+    #     honestly gets. With no floor configured the old strict contract stands.
     window_lo = target_i - lufs_tolerance
     window_hi = target_i + lufs_tolerance
     shortfall = target_i - measured_lufs       # > 0 too quiet, < 0 too loud
-    candidate_gain = gain_db + shortfall
 
-    if abs(shortfall) > max_total_gain + EPS:
+    if shortfall < 0.0:
+        candidate_gain = gain_db + shortfall
+        if abs(candidate_gain) > max_total_gain + EPS:
+            return MasterDecision(
+                action="stop",
+                limiter_db=None,
+                reason=(
+                    f"True-peak gate passed ({measured_tp:.2f} <= {target_tp:.2f}) but "
+                    f"loudness gate failed ABOVE the window: measured LUFS="
+                    f"{measured_lufs:.2f} against [{window_lo:.2f}, {window_hi:.2f}]. "
+                    f"The {abs(candidate_gain):.2f} dB attenuation needed exceeds the "
+                    f"{max_total_gain:.2f} dB bound; this is a broken premaster."
+                ),
+            )
+        if attempt >= max_attempts:
+            return MasterDecision(
+                action="stop",
+                limiter_db=None,
+                reason=(
+                    f"Max attempts ({max_attempts}) exhausted with loudness above "
+                    f"[{window_lo:.2f}, {window_hi:.2f}]. "
+                    f"Measured TP={measured_tp:.2f} dB, LUFS={measured_lufs:.2f}."
+                ),
+            )
         return MasterDecision(
-            action="stop",
-            limiter_db=None,
+            action="retry",
+            limiter_db=limiter_db,
+            reason=(
+                f"Loudness {measured_lufs:.2f} is ABOVE the window "
+                f"[{window_lo:.2f}, {window_hi:.2f}]. Attenuating "
+                f"{shortfall:+.2f} dB before the limiter "
+                f"({gain_db:+.2f} to {candidate_gain:+.2f} dB)."
+            ),
+            gain_db=candidate_gain,
+        )
+
+    # Too quiet. Spend whatever of the makeup bound is still unspent.
+    headroom = max_total_gain - gain_db
+    applied = min(shortfall, headroom)
+    if applied > EPS and attempt < max_attempts:
+        candidate_gain = gain_db + applied
+        short_note = (
+            "" if applied >= shortfall - EPS
+            else f" (bound allows only {applied:.2f} of the {shortfall:.2f} dB needed)"
+        )
+        return MasterDecision(
+            action="retry",
+            limiter_db=limiter_db,
             reason=(
                 f"True-peak gate passed ({measured_tp:.2f} <= {target_tp:.2f}) but "
-                f"loudness gate failed: measured LUFS={measured_lufs:.2f} is outside "
-                f"target window [{window_lo:.2f}, {window_hi:.2f}]. "
-                f"The {abs(shortfall):.2f} dB correction needed exceeds the "
-                f"{max_total_gain:.2f} dB makeup bound; this is a broken premaster, "
-                f"not a mastering nudge."
+                f"loudness gate failed: measured LUFS={measured_lufs:.2f} is below "
+                f"[{window_lo:.2f}, {window_hi:.2f}]. Applying {applied:+.2f} dB of "
+                f"pre-limiter makeup gain ({gain_db:+.2f} to {candidate_gain:+.2f} dB)"
+                f"{short_note}; the limiter still holds the ceiling at "
+                f"{limiter_db:.2f} dB."
             ),
+            gain_db=candidate_gain,
         )
 
-    if abs(candidate_gain) > max_total_gain + EPS:
+    # The lever is spent, or there is no attempt left to spend it in.
+    if lufs_floor is not None and measured_lufs >= lufs_floor - EPS:
         return MasterDecision(
-            action="stop",
+            action="accept",
             limiter_db=None,
             reason=(
-                f"Cumulative makeup gain bound exceeded: candidate gain "
-                f"{candidate_gain:.2f} dB is outside the {max_total_gain:.2f} dB bound "
-                f"(already applied {gain_db:.2f} dB). "
-                f"Measured TP={measured_tp:.2f} dB, LUFS={measured_lufs:.2f}."
-            ),
-        )
-
-    if attempt >= max_attempts:
-        return MasterDecision(
-            action="stop",
-            limiter_db=None,
-            reason=(
-                f"Max attempts ({max_attempts}) exhausted with loudness still outside "
-                f"[{window_lo:.2f}, {window_hi:.2f}]. "
-                f"Measured TP={measured_tp:.2f} dB, LUFS={measured_lufs:.2f}."
+                f"Delivered QUIET: LUFS={measured_lufs:.2f} is below the target "
+                f"window [{window_lo:.2f}, {window_hi:.2f}] but at or above the "
+                f"{lufs_floor:.2f} LUFS floor, with the {max_total_gain:.2f} dB "
+                f"makeup bound already spent ({gain_db:+.2f} dB). This material "
+                f"does not reach the target at any gain."
             ),
         )
 
     return MasterDecision(
-        action="retry",
-        limiter_db=limiter_db,
+        action="stop",
+        limiter_db=None,
         reason=(
             f"True-peak gate passed ({measured_tp:.2f} <= {target_tp:.2f}) but "
-            f"loudness gate failed: measured LUFS={measured_lufs:.2f} is outside "
-            f"target window [{window_lo:.2f}, {window_hi:.2f}]. "
-            f"Applying {shortfall:+.2f} dB of pre-limiter makeup gain "
-            f"({gain_db:+.2f} to {candidate_gain:+.2f} dB); the limiter still holds "
-            f"the ceiling at {limiter_db:.2f} dB."
+            f"loudness gate failed: measured LUFS={measured_lufs:.2f} is below "
+            f"[{window_lo:.2f}, {window_hi:.2f}] with the {max_total_gain:.2f} dB "
+            f"makeup bound spent ({gain_db:+.2f} dB)"
+            + (
+                f" and below the {lufs_floor:.2f} LUFS floor."
+                if lufs_floor is not None else
+                ", and no loudness floor is configured for this series."
+            )
         ),
-        gain_db=candidate_gain,
     )
