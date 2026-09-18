@@ -127,6 +127,26 @@ def _qc_api_reason_code(
     return "UNKNOWN"
 
 
+def _min_shot_gate_result(engine_failed_shots: list[int]):
+    """En az cekim kapisi kapandiginda dondurulecek sonucu sec.
+
+    Motor hic klip teslim etmediyse (saglayici 5xx / "Internal Error") bu bir
+    ALTYAPI arizasidir ve icerik yeniden-deneme butcesini tuketmemelidir;
+    aksi halde ust uste uc saglayici kesintisi kusursuz bir bolumu
+    `needs_human` yapip kuyruktan dusurur. QC icerigi reddettiyse eski
+    davranis (None -> UNKNOWN -> icerik sayaci) aynen korunur.
+    """
+    if not engine_failed_shots:
+        return None
+    liste = ", ".join(str(n) for n in engine_failed_shots)
+    return ProduceResult(
+        "qc_hold",
+        reason=(f"video motoru cekim {liste} icin klip teslim etmedi "
+                "(saglayici tarafinda gecici ariza)"),
+        reason_code="TRANSIENT_INFRA",
+    )
+
+
 def _required_shot_count(bible: Bible, shot_count: int) -> int:
     """Derive the only shot-count threshold while preserving legacy defaults."""
     if bible.min_shots is not None:
@@ -1725,6 +1745,9 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
     chain_reset_pending = False
     shot_files: list[Path] = []
     dropped_shots: list[int] = []
+    # Motorun hic klip teslim etmedigi cekimler (status == "FAIL").
+    # QC'nin icerik reddinden AYRI tutulur: biri altyapi, digeri icerik.
+    engine_failed_shots: list[int] = []
     shot_offsets: dict[int, float] = {}   # kanca için: çekim n → birleşik videodaki başlangıç sn
     running = 0.0
     previous_shot_dropped = False
@@ -2001,6 +2024,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             previous_shot_dropped = status != "ok"
             if previous_shot_dropped:
                 dropped_shots.append(int(n))
+                if status == "FAIL":
+                    engine_failed_shots.append(int(n))
                 chain_url = None
                 remaining_shots = len(plan["shots"]) - shot_index - 1
                 if len(shot_files) + remaining_shots < required_shot_count:
@@ -2009,7 +2034,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                         f"kabul={len(shot_files)}, kalan={remaining_shots}, "
                         f"gerekli={required_shot_count}"
                     )
-                    return None
+                    return _min_shot_gate_result(engine_failed_shots)
             continue
 
         # ── Ucuz görsel motor (seedance / veo / kling) ────────────────────────
@@ -2170,6 +2195,8 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
         previous_shot_dropped = status != "ok"
         if previous_shot_dropped:
             dropped_shots.append(int(n))
+            if status == "FAIL":
+                engine_failed_shots.append(int(n))
             chain_url = None
             remaining_shots = len(plan["shots"]) - shot_index - 1
             if len(shot_files) + remaining_shots < required_shot_count:
@@ -2178,7 +2205,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                     f"kabul={len(shot_files)}, kalan={remaining_shots}, "
                     f"gerekli={required_shot_count}"
                 )
-                return None
+                return _min_shot_gate_result(engine_failed_shots)
 
     if dry_run:
         logger.info("[dry-run] Simülasyon bitti ,  dosya/kredi harcanmadı.")
@@ -2190,7 +2217,7 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
             f"gerekli={required_shot_count}; "
             "bölüm birleştirilmeyecek/yayınlanmayacak"
         )
-        return None
+        return _min_shot_gate_result(engine_failed_shots)
 
     if not shot_files:
         logger.error("❌ Hiç çekim üretilemedi, bölüm oluşturulamadı.")
