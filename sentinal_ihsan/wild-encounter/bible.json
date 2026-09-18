@@ -53,7 +53,11 @@
       "require_all_shots": true,
       "object_match_note": "2026-09-11 KAPALI. plato-3x8 icin yaratik referansi RF-PLAN-WILD-ENCOUNTER Rock 4 ile uretiliyor. Kapi ep06 olculmeden ACILMAZ: yeni bir QC kapisi yanlis retle kredi yakar.",
       "first_frame_note": "2026-09-11 KAPALI. require_first_frame acilis karesinde imkansiz ozellik arar; bu formatta imkansiz ozellik yok, yaratik bir prop ve ifsa cekim 3'te. Acik olsa her bolumu yanlis sebeple reddeder.",
-      "continuity_note": "2026-09-11 ACIK. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. ep06 ACIK KANIT: cekim 3 yeniden uretilince set degisti (orman gitti, ciplak yesil studyo geldi) ve QC bunu 'gozlem' sayip gecirdi; otomatik yayinda bu kabul edilemez. Yanlis ret riski kabul edildi: kapi yanlis reddederse bolum yayinlanmaz, kotu video yayinlanmaz. ep07 sonrasi olcup gozden gecir."
+      "continuity_note": "2026-09-11 ACIK. Eski gerekce cekimlerin farkli mekanlarda gecmesiydi; plato-3x8'de tek set var. ep06 ACIK KANIT: cekim 3 yeniden uretilince set degisti (orman gitti, ciplak yesil studyo geldi) ve QC bunu 'gozlem' sayip gecirdi; otomatik yayinda bu kabul edilemez. Yanlis ret riski kabul edildi: kapi yanlis reddederse bolum yayinlanmaz, kotu video yayinlanmaz. ep07 sonrasi olcup gozden gecir.",
+      "enforce": {
+        "violation_reads": true
+      },
+      "enforce_note": "2026-09-18 ACILDI. Oncesinde enforce null idi, yani HICBIR ROCK-B alani kapi degildi; ustelik bu seride violation_observation hic yazilmadigi icin alan istenmiyordu bile. Sonuc: vurusu hic teslim etmeyen klip 'pass, artifact 0/10' alip yayinlandi (ep11 dev kalamar, 18 Eyl). Kare olcumu: ep09 kutup ayisi vurusu tam teslim etti ve 36.070 izlenme ile kanal rekoru; ep11 temas/kaybolma/cikis ucunu de teslim etmedi. Kapi ARTIK vurusun VARLIGINI denetliyor, uslubunu degil: agiz adamin uzerine kapanir, adam gozden kaybolur, ekip agzi acar, ayni adam disari cikar. Bunlarin biri eksikse klip REDDEDILIR ve yeniden uretilir. Uslup inceligi (adam ALINIYOR mu yoksa kendi mi giriyor) bilerek kapiya BAGLANMADI: belirsiz bir kriter yanlis retle kredi yakar, once olcum."
     },
     "duration_band": [
       9,

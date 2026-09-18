@@ -95,6 +95,23 @@ PLATO_BUILD_LANGUAGE = re.compile(
     r"hydraulic|hydraulics|silicone|armature|mechanism)\b", re.I,
 )
 PLATO_SOUND_LINE = "Ambient sound only"
+# plato tek-plan: VURUS her bolumde ayni, yalniz yaratik degisir. Bu yuzden QC'nin
+# denetleyecegi gozlem MODELDEN ISTENMEZ, doktrinden turetilir. Model yazsaydi
+# bolumden bolume kayardi ve kapi neyi olctugunu bilemezdi (still-home'daki
+# music_fixed dersi, ayni sebep).
+#
+# Neden bu cumle: 18 Eylul 2026'da yayindaki uc bolum kare kare olculdu.
+# ep09 kutup ayisi (36.070 izlenme, kanal rekoru) vurusu TESLIM ETTI: temas,
+# adamin agiz icinde kaybolmasi, ekibin ceneyi elle acmasi, adamin cikmasi.
+# ep11 dev kalamar HICBIRINI teslim etmedi: adam yana yuruyup kadrajdan
+# kayboldu, ekip bos yaratigi itti, kimse cikmadi. QC "pass, artifact 0/10"
+# dedi cunku bu seride HIC ROCK-B alani istenmiyordu, yani vurusu denetleyen
+# bir karar alani YOKTU. Bu gozlem o bosluğu dolduruyor.
+PLATO_SINGLE_SHOT_OBSERVATION = (
+    "The {creature}'s mouth closes over the man until his whole body is hidden "
+    "inside it, then crew members put their hands on the {creature} and force its "
+    "mouth open, and the same man climbs out onto the set floor."
+)
 PLATO_TITLE_STOPWORDS = {"THIS", "GIANT", "NOT", "REAL"}
 
 PLATO_OBJECT_RULE = (
@@ -1618,6 +1635,14 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         errors.append(
                             f"part {want} çekim {shot_number}: environment tam {card_env!r} olmalı"
                         )
+                if plato and single_shot:
+                    # Gozlem object_card.name'den kurulur; model katkisi yok.
+                    creature = str((raw_card or {}).get("name") or "").strip()
+                    clean["violation_observation"] = (
+                        PLATO_SINGLE_SHOT_OBSERVATION.format(
+                            creature=creature or "creature"
+                        )
+                    )
                 if required_chars:
                     # Opt-in: serinin yuzu her cekimde. Gemini alani atlasa bile kimlik
                     # mekanik eklenir; yoksa yuz capasi (characterId) otomatik planda kaybolur
