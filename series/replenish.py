@@ -198,6 +198,24 @@ def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
     return compiled
 
 
+def _banned_phrases(cfg: dict, shot_number) -> list[str]:
+    """Bu çekim için yasaklanmış kalıpları küçük harfe indirip döndür.
+
+    ``cfg["forbidden_phrases"]`` biçimi: {"1": ["softly", ...], "*": [...]}.
+    Anahtar çekim numarasıdır; ``"*"`` her çekime uygulanır. Anahtar yoksa
+    liste boştur ve hiçbir şey denetlenmez (geriye dönük uyumlu).
+    """
+    table = cfg.get("forbidden_phrases")
+    if not isinstance(table, dict):
+        return []
+    out: list[str] = []
+    for key in (str(shot_number), "*"):
+        value = table.get(key)
+        if isinstance(value, list):
+            out.extend(str(item).strip().lower() for item in value if str(item).strip())
+    return out
+
+
 def validate_replenish_config(cfg: dict, engine: str | None = None) -> list[str]:
     """Oto-ikmal yapılandırmasını Gemini çağrısından önce doğrula."""
     errors: list[str] = []
@@ -218,7 +236,7 @@ def validate_replenish_config(cfg: dict, engine: str | None = None) -> list[str]
         errors.append("tek-obje-4x6 formatında shot_seconds tam 6 olmalı")
 
     fixedframe_keys = (
-        "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version"
+        "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version", "forbidden_phrases"
     )
     # shots=1 (tek kesintisiz plan) 12 Eylul 2026'da acildi: olcum kesme sayisi
     # arttikca performansin dustugunu gosterdi (bkz. galactic_experience/KONSEPT.md
@@ -230,6 +248,24 @@ def validate_replenish_config(cfg: dict, engine: str | None = None) -> list[str]
         allowed = valid_durations(engine)
         if duration not in allowed:
             errors.append(f"shot_seconds {'/'.join(allowed)} değerlerinden biri olmalı")
+
+    if "forbidden_phrases" in cfg:
+        table = cfg.get("forbidden_phrases")
+        if not isinstance(table, dict) or not table:
+            errors.append("forbidden_phrases boş olmayan bir nesne olmalı")
+        else:
+            for key, value in table.items():
+                if key != "*" and not (str(key).isdigit() and 1 <= int(key) <= shots):
+                    errors.append(
+                        f"forbidden_phrases anahtarı '*' ya da 1..{shots} çekim "
+                        f"numarası olmalı (gelen: {key!r})"
+                    )
+                if (not isinstance(value, list) or not value
+                        or any(not isinstance(item, str) or not item.strip()
+                               for item in value)):
+                    errors.append(
+                        f"forbidden_phrases[{key!r}] boş olmayan metin listesi olmalı"
+                    )
 
     if "chain_breaks" in cfg:
         breaks = cfg.get("chain_breaks")
@@ -299,7 +335,7 @@ def validate_replenish_config(cfg: dict, engine: str | None = None) -> list[str]
 def strict_plan_validation_enabled(cfg: dict) -> bool:
     """The pre-spend validator is opt-in through Rock 1 plan config keys."""
     return any(key in cfg for key in (
-        "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version"
+        "chain_breaks", "hook_shot", "shot_plan", "title_patterns", "format_version", "forbidden_phrases"
     ))
 
 
@@ -1486,6 +1522,21 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                         prompt = prefix + prompt
                 if len(_prompt_content(prompt, prefix)) < 30:
                     errors.append(f"part {want} çekim {k}: prompt boş/çok kısa")
+                # Seri-kapsamlı yasak kalıp listesi. Doktrinin brief içinde
+                # yazılı olması yetmiyor: still-home'da "softly" iki planda
+                # yine geçti. Buradaki hata ikmalin kendi yeniden-deneme
+                # döngüsünü besler, yani bozuk plan kuyruğa HİÇ girmez.
+                # Yalnız MODELİN yazdığı metne bakar; kanonik şablon satırı
+                # _prompt_content ile zaten ayıklanmıştır.
+                banned = _banned_phrases(cfg, shot_number)
+                if banned:
+                    written = _prompt_content(prompt, prefix).lower()
+                    hits = sorted({phrase for phrase in banned if phrase in written})
+                    if hits:
+                        errors.append(
+                            f"part {want} çekim {k}: yasak kalıp kullanıldı: "
+                            + ", ".join(repr(h) for h in hits)
+                        )
                 if compose_object_prompt:
                     composed_action_text = prompt
                     prompt = " ".join(part for part in (

@@ -217,14 +217,31 @@ Compare [PREVIOUS SHOT LAST FRAME] with this shot. Require the same room and sur
 composition, lighting, physical object identity, and a coherent object-state lineage.
 continuity_ok must always be a JSON boolean."""
 
-_FIRST_FRAME_QC_ADDENDUM = """
+_FIRST_FRAME_QC_HEADER = """
 
 VIEWER-VISIBLE FIRST-FRAME GATE (mandatory for shot 1): add these required fields:
   "first_frame_ok": bool,
   "first_frame_notes": string
-Judge [OPENING FRAME] as one standalone frame. The episode's impossible property must
-already be active and readable in this exact frame, and the object must fill a large
-share of the frame. first_frame_ok must always be a JSON boolean."""
+Judge [OPENING FRAME] as one standalone frame."""
+
+# Varsayilan kural unnatural-lab'in dilini konusur: tezgah ustunde TEK bir
+# obje ve onun imkansiz ozelligi. Sehir olcegindeki bir seride o soru bosa
+# duser, cunku kadrajda "obje" yoktur. Olculdu: still-home part 3'un acilis
+# karesi (bugunku Paris'ten ayirt edilemeyen bir hava cekimi) bu kapidan IKI
+# KEZ first_frame_ok=true alarak gecti. Seri kendi kuralini
+# bible.series.qc.first_frame_rule ile yazabilir.
+_FIRST_FRAME_QC_DEFAULT_RULE = (
+    "The episode's impossible property must already be active and readable in "
+    "this exact frame, and the object must fill a large share of the frame."
+)
+
+_FIRST_FRAME_QC_TAIL = " first_frame_ok must always be a JSON boolean."
+
+
+def _first_frame_addendum(rule: str | None = None) -> str:
+    """Ilk-kare kapisinin metnini uret; seri kuralı varsa varsayilanin yerine koy."""
+    body = str(rule or "").strip() or _FIRST_FRAME_QC_DEFAULT_RULE
+    return f"{_FIRST_FRAME_QC_HEADER} {body}{_FIRST_FRAME_QC_TAIL}"
 
 _CHAIN_FRAME_QC_ADDENDUM = """
 
@@ -543,6 +560,7 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                    require_object_match: bool = False,
                    require_continuity: bool = False,
                    require_first_frame: bool = False, *,
+                   first_frame_rule: str | None = None,
                    anomaly_descriptor: str | None = None,
                    violation_observation: str | None = None,
                    state_carry_expected: str | None = None,
@@ -595,7 +613,7 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
     if require_continuity:
         instruction += _CONTINUITY_QC_ADDENDUM
     if require_first_frame:
-        instruction += _FIRST_FRAME_QC_ADDENDUM
+        instruction += _first_frame_addendum(first_frame_rule)
     if anomaly_descriptor:
         instruction += _anomaly_addendum(anomaly_descriptor)
     if violation_observation:
@@ -913,6 +931,7 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         require_object_match=bool(qc.get("require_object_match")),
         require_continuity=bool(qc.get("require_continuity") and 2 <= shot_n <= 4),
         require_first_frame=bool(qc.get("require_first_frame") and shot_n == 1),
+        first_frame_rule=qc.get("first_frame_rule"),
         slug=bible.slug, episode=episode, shot=shot_n,
         experiment_id=experiment_id,
         anomaly_descriptor=anomaly_descriptor,

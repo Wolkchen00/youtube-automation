@@ -14,10 +14,10 @@
   "publish_mode": "auto",
   "status": "active",
   "priority": 999,
-  "total_parts": 7,
+  "total_parts": 8,
   "next_part": 4,
-  "doctrine_sha256": "89b31cebd427f20118d4ee82668e61b6971a39ec2876da54a42a455dd1ccea99",
-  "kurulum_notu": "13 Eylul 2026'da kuruldu (flashpoints'in yerine) ve AYNI GUN CANLIYA ALINDI. Ihsan karari: 'tamam bunu paylasalim, yeni pipeline bunu yerlestirelim, her gun yeni bir populer sehir olsun'. Ilk bolum ISTANBUL 2512 elle yayinlandi, sonrasi still-home.yml 20:30 UTC cron'una birakildi. publish_mode=auto, canli gunluk seridin (wild-encounter) filo gelenegiyle ayni. Durdurmak icin: status='paused' + still-home.yml schedule blogunu yorumla. | 2026-09-15 v2.0 (Ihsan iki direktifi): (1) 'daha hizli gecisler lazim tek videoda 3 sahne gecisi istiyorum' -> 2 cekim 4 cekime cikti, micro_trim 0,75 ile bolum 4 x 2,5 = 10,0 sn ve 3 sert kesme tasiyor. (2) 'ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun, videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine teknolojinin nasil gelistigini anlatan bir video olsun' -> konsept yikim-sonrasi uyarlamadan ILERI TEKNOLOJIYE cevrildi: alti aile de degisti, 36 konunun 36'si yeniden yazildi, art_style ve qc.notes felaket estetigini otomatik fail sayiyor.",
+  "doctrine_sha256": "d16a25484d6d78eb65d92116a23d0d8604bd453b94a4d358daaedab34af358d6",
+  "kurulum_notu": "13 Eylul 2026'da kuruldu (flashpoints'in yerine) ve AYNI GUN CANLIYA ALINDI. Ihsan karari: 'tamam bunu paylasalim, yeni pipeline bunu yerlestirelim, her gun yeni bir populer sehir olsun'. Ilk bolum ISTANBUL 2512 elle yayinlandi, sonrasi still-home.yml 20:30 UTC cron'una birakildi. publish_mode=auto, canli gunluk seridin (wild-encounter) filo gelenegiyle ayni. Durdurmak icin: status='paused' + still-home.yml schedule blogunu yorumla. | 2026-09-15 v2.0 (Ihsan iki direktifi): (1) 'daha hizli gecisler lazim tek videoda 3 sahne gecisi istiyorum' -> 2 cekim 4 cekime cikti, micro_trim 0,75 ile bolum 4 x 2,5 = 10,0 sn ve 3 sert kesme tasiyor. (2) 'ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun, videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine teknolojinin nasil gelistigini anlatan bir video olsun' -> konsept yikim-sonrasi uyarlamadan ILERI TEKNOLOJIYE cevrildi: alti aile de degisti, 36 konunun 36'si yeniden yazildi, art_style ve qc.notes felaket estetigini otomatik fail sayiyor. | 2026-09-18 v3.0 (Ihsan direktifi 'izleyenleri ilk 3 saniye ekrana kitlememiz lazim'): SILUET KURALI. Teknoloji artik siluet degistiren FIZIKSEL bir yapidir ve ilk karede tamamlanmis durur; isik tek basina 2512 diyemez. Isik surucu iki aile (enerji mimarisi, yasayan malzeme) GECE geciyor. 36 konunun 18'i siluet-onceli yeniden yazildi. Cekim 2'ye gecis (traversal) zorunlulugu geldi (olculen olu bolge: hareket 5 vs cekim 3'te 15). Ilk-kare QC kapisi seri-farkindali yapildi (critic.py first_frame_rule): eski metin unnatural-lab icin yazilmisti ve part 3'un bugunku Paris'ini IKI KEZ gecirdi. Kesme sayisi DEGISMEDI, 3 kesme olculdu ve korundu.",
   "auto_replenish": {
     "enabled": true,
     "batch": 5,
@@ -39,12 +39,12 @@
       "yorunge baglantisi"
     ],
     "shot_plan": [
-      "Shot 1, exactly 4 seconds at 24 fps, AERIAL. The camera flies high in the open sky, far ABOVE every rooftop, tower and mast in the city, and looks DOWN on it from there. The whole city lies below the camera and spreads across the frame from edge to edge; the horizon and open sky sit in the top third. Think satellite, helicopter or drone at altitude. The very first frame already contains BOTH the real city's recognisable landmark or skyline AND the advanced technology this episode is about, built at city scale and visibly running, so a viewer who sees only this one frame already knows which city it is and what it became. Something inside the city MOVES independently of the camera for the whole four seconds: transit pods travelling their line, craft crossing their corridor, cargo drones streaming between towers, light pulsing along a structure. One slow, single-direction camera move only, a straight descent or a forward glide, and the camera stays outdoors and above the structures for the entire four seconds. The shot holds one continuous unbroken view from first frame to last.",
-      "Shot 2, exactly 4 seconds at 24 fps, GROUND LEVEL. After a hard cut, the camera stands at human eye height in a busy public place in the SAME city, at a completely different vantage point from shot 1. People go about ordinary daily life around the technology, walking, riding, trading, carrying and queueing, while autonomous machines work alongside them at the same easy pace. Every human figure reads at roughly one sixth of the frame height or smaller and stands in the middle ground or further back, seen from behind or in three-quarter view, so the crowd reads as movement and warmth at a distance. The nearest third of the frame is held by architecture, machinery, planting or open floor. Warm practical light from windows, canopies, lamps and the technology's own glow falls across the scene. Surfaces carry painted symbols and plain colour fields, so every surface stays clear of lettering. The same recognisable landmark stays readable in the background or on the horizon so the shots read as one city. One slow, single-direction camera move only, at a constant height.",
+      "Shot 1, exactly 4 seconds at 24 fps, AERIAL. The camera flies high in the open sky, far ABOVE every rooftop, tower and mast in the city, and looks DOWN on it from there. The whole city lies below the camera and spreads across the frame from edge to edge; the horizon and open sky sit in the top third. Think satellite, helicopter or drone at altitude. SILHOUETTE GATE, the single most important rule of this channel: the advanced technology of this episode is a PHYSICAL STRUCTURE that changes the shape of the city against the sky, and in the VERY FIRST FRAME it already stands there complete, at full size, at full power and in full operation. Reduce that first frame to a flat black silhouette in your mind: the new structure must still be obvious as a shape, so that the frame could never be mistaken for a photograph of the city as it exists today. The real recognisable landmark stands in the same frame, physically joined to that structure. A glow, a light strip or a coloured surface is decoration on top of the structure and NEVER the only thing that says 2512. The technology is at its full working state from the first frame onward and its condition never changes during the four seconds: it does not switch on, warm up, brighten, awaken, unfold, assemble or reveal itself. Something inside the city TRAVELS across the frame for the whole four seconds, covering real distance from one part of the frame toward another: transit capsules running their line, craft crossing their corridor, cargo drones streaming between towers, a shuttle climbing its ribbon. One slow, single-direction camera move only, a straight descent or a forward glide, and the camera stays outdoors and above the structures for the entire four seconds. The shot holds one continuous unbroken view from first frame to last.",
+      "Shot 2, exactly 4 seconds at 24 fps, GROUND LEVEL. After a hard cut, the camera stands at human eye height in a busy public place in the SAME city, at a completely different vantage point from shot 1. People go about ordinary daily life around the technology, walking, riding, trading, carrying and queueing, while autonomous machines work alongside them at the same easy pace. TRAVERSAL IS MANDATORY: one large element crosses the frame from one edge toward the other across the whole four seconds, close enough to read clearly, for example a transit capsule passing through the space, a machine rolling through on its route, a cargo platform gliding overhead, a crowd streaming steadily across the foreground. A scene of people standing still is a failed shot. Every human figure reads at roughly one sixth of the frame height or smaller and stands in the middle ground or further back, seen from behind or in three-quarter view, so the crowd reads as movement and warmth at a distance. The nearest third of the frame is held by architecture, machinery, planting or open floor. Warm practical light from windows, canopies, lamps and the technology's own glow falls across the scene. Surfaces carry painted symbols and plain colour fields, so every surface stays clear of lettering. The same recognisable landmark stays readable in the background or on the horizon so the shots read as one city. One slow, single-direction camera move only, at a constant height.",
       "Shot 3, exactly 4 seconds at 24 fps, MACHINE SCALE. After a hard cut, the camera is close to the advanced technology itself while it works: an autonomous builder arm laying material, a transit pod sliding through its guide, an energy column drawing light up its length, a fabricator filling a crate, a machine-tended canopy of growing green. The mechanism fills most of the frame and its motion is continuous, purposeful, precise and unhurried. Machined metal, glass and structural light carry fine surface detail. The recognisable landmark or skyline stays visible past the mechanism so the city remains identified. Human presence reads only as small distant figures far behind the machine. One slow, single-direction camera move only.",
       "Shot 4, exactly 4 seconds at 24 fps, WARM DETAIL. After a hard cut, the camera rests close on one small piece of everyday home life inside this advanced city: a lit balcony thick with plants above a glowing street, a small delivery drone settling onto a window ledge, laundry moving in warm air beside a luminous wall panel, a cat asleep on a warm machined sill, steam rising from a food counter, a child's bicycle leaning against a rail of light. The detail fills the frame and is lit warmly from inside the home. Motion is gentle and continuous: leaves stirring, steam curling, light breathing, the drone settling. Any person present reads as a small silhouette or a shoulder passing at the frame edge, well behind the subject. A sliver of the recognisable skyline or landmark sits softly out of focus in the background so the place stays identified. One slow, single-direction camera move only."
     ],
-    "brief": "SONSUZ ILERI-TEKNOLOJI SEHRI ANTOLOJISI. Her bolum, gercek ve dunyaca taninan TEK bir sehrin 2512 yilindaki halini DORT CEKIMDE gosterir. Anlatilan sey sehrin basina gelen bir felaket DEGIL, sehrin KURDUGU TEKNOLOJIDIR. Gorsel promptlar ve caption Ingilizce yazilir.\n\nDEGISMEZ KURALLAR:\n(1) TANINIR GERCEK SEHIR. Sehri gercek adiyla kullan ve onu ilk karede tanitan dunyaca bilinen EN AZ BIR yapi ya da siluet secilsin (Ayasofya, Eyfel, Empire State, Burj Khalifa, Tokyo Kulesi, Kolezyum, Opera Binasi gibi). Uydurma sehir, isimsiz kubbe, jenerik sci-fi manzara YASAK. Olculdu: ayni kanalda taninir sehir 46.042 begeni aldi, isimsiz kubbe 124.\n(2) ILERLEME, FELAKET DEGIL. Her bolumun tek mesaji sudur: teknoloji ilerledi ve sehir bu sayede daha iyi yasiyor. Bolumun konusu sehri bir tehditten KORUYAN bir siginak degil, sehre yeni bir yetenek KAZANDIRAN calisan bir teknolojidir. Yukselen deniz, col, sel, kuraklik, firtina, iklim siginagi, set, deniz duvari, golgeleme ortusu gibi savunma ve hayatta-kalma temalari YASAK. Harabe, catlak, moloz, derme catma yapi, branda, terk edilmislik, duman, yangin, panik, savas, silah da YASAK.\n(3) TEKNOLOJI GORUNUR VE CALISIR DURUMDA. Her bolumde TEK ve acikca adlandirilmis bir teknoloji vardir ve kadrajda calisirken gorunur: manyetik ulasim hatti, otonom insaat makinesi, enerji kulesi, kendini onaran yapi malzemesi, otomatik uretim tesisi, yorunge asansoru. Ikinci bir buyuk teknoloji ekleme. Sadece 'parlak sehir' yetmez, MEKANIZMA gorunmelidir.\n(4) TANINIR YAPI AYAKTA VE SISTEME BAGLI. 2512 cok uzak bir yil. Taninir yapi yikilmaz ve muzelik de kalmaz: yeni teknolojinin bir parcasi olur. Eyfel bir enerji omurgasinin govdesidir, Ayasofya bir manyetik hattin durak meydanidir. Taninirlik korunur, gecen zaman da okunur.\n(5) DORT CEKIM, UC SERT KESME, DORT AYRI OLCEK. Cekim 1 HAVADAN (sehir olcegi, kanca). Cekim 2 YER SEVIYESI (insanlar ve makineler birlikte, gunluk hayat). Cekim 3 MAKINE OLCEGI (teknolojinin kendisi calisirken, yakindan). Cekim 4 SICAK AYRINTI (bir evin isigi, bir saksi, bir teslimat dronu). Kesmeler eslesen hareket DEGIL, olcek sicramasidir.\n(6) ILK KARE TAM VAATTIR. Cekim 1'in ilk karesi hem taninir sehri hem de teknolojisini ayni anda gosterir; yalniz o tek kareyi goren biri sehri tanimali ve neyin degistigini anlamalidir. Kurulum, yaklasma, gecikmeli ortaya cikis yasaktir. Ayrica cekim 1'de kameradan BAGIMSIZ bir hareket bulunmalidir (gecen arac, akan drone, yuruyen isik): ilk saniyede donuk duran kadraj kaydirilir.\n(7) TEK YONLU KAMERA. Her cekimde tek, yavas, tek yonlu bir hareket. Pan, orbit, takip, sarsinti, zoom salinimi, cekim ICINDE kesme ve sahne sifirlamasi yok.\n(8) INSAN OLCEGI KUCUK KALIR. Insanlar orta plandan geriye, kare yuksekliginin en fazla alti'da biri kadar, arkadan ya da uc-ceyrek acidan gorunur. Yuz yakin plani, tam kare dolduran figur ve on planda el yok. Bu bir estetik tercih degil, QC'nin anatomi kapisidir: 15 Eylul'de part 3 tam bu yuzden dustu.\n(9) POZITIF VIDEO DILI. Gorsel prompt yalniz kadrajda BULUNAN seyleri soyler. Su Ingilizce sozcukleri gorsel paragrafta kullanma: no, not, never, nothing, without, avoid, cannot, absent, lacks, lacking. 'Instead of' kalibini da kullanma.\n(10) YAZI ISTEME. Tabela, pano, ekran, hologram yazisi, afis, marka ve logo gorsel promptta GECMEZ. Yazinin isini boyali sembol ve duz renk alani yapar. qc.notes okunabilir yaziyi otomatik fail sayar, yani istedigin sey seni dusuruyor.\n(11) SES: TEK DERIN DRONE. Anlatim, konusma ve ritmik muzik YOKTUR. 'music' alani TEK bir surekli derin ugultu tarif eder: dusuk frekansli, sabit seviyeli, vurussuz, melodisiz, tiz icermeyen, baslangic ve bitis vurgusu olmayan. Referansta olculdu: 20Hz-2kHz duz, 2-8kHz 29 dB asagida, 8kHz ustu yok.\n(12) KUNYE MOTORUN ISI. 'title_card' alani {\"title\": \"<SEHIR> 2512\", \"subtitle\": \"\"} bicimindedir, sehir adi BUYUK harfle. Videonun icinde okunabilir yazi, altyazi, logo, filigran URETME: kunye sonradan ffmpeg ile biner.\n(13) BASLIK SEHIRDIR. En fazla 70 karakter, ilk kelime gercek sehir adi, sonra sehrin NE KURDUGU. Tiklama tuzagi, soru isareti, hashtag ve yil kullanma.\n(14) CAPTION HIKAYEYI TASIR VE IKI DILLIDIR. Once Ingilizce blok: 60-120 kelime, sehri ve kurdugu teknolojiyi adlandir, bunun gunluk hayati nasil degistirdigini soyle, iki-uc somut ayrinti ver, 'A fictional future, created with AI.' cumlesini aynen yaz ve tek somut soruyla bitir. Sonra bos satir, sonra AYNI hikaye SEHRIN KENDI DILINDE: hangi dil oldugu secilen konunun 'local_language' alaninda yazili (Istanbul Turkce, Tokyo Japonca, Berlin Almanca, Kahire Arapca...). O dilin gercek yazi sistemini kullan. Kisa cumle, sade dil, em-dash yok. Amac o sehrin KENDI HALKINA hitap etmek. YEREL DIL INGILIZCE ISE (New York, Londra, Sydney, Toronto gibi) yalniz Ingilizce blok yazilir, ayni metin iki kez tekrarlanmaz. Hashtag'ler TEK sefer ve Latin harfleriyle.\n(15) AILE VE CESITLILIK. Yalniz kanonik ailelerden birini aynen sec. Ardisik iki bolum ayni aileden olamaz. Ayni sehri tekrar kullanma ve onceki bolumun teknolojisini hafifce degistirip tekrar etme.",
+    "brief": "SONSUZ ILERI-TEKNOLOJI SEHRI ANTOLOJISI. Her bolum, gercek ve dunyaca taninan TEK bir sehrin 2512 yilindaki halini DORT CEKIMDE gosterir. Anlatilan sey sehrin basina gelen bir felaket DEGIL, sehrin KURDUGU TEKNOLOJIDIR. Gorsel promptlar ve caption Ingilizce yazilir.\n\nDEGISMEZ KURALLAR:\n(1) TANINIR GERCEK SEHIR. Sehri gercek adiyla kullan ve onu ilk karede tanitan dunyaca bilinen EN AZ BIR yapi ya da siluet secilsin (Ayasofya, Eyfel, Empire State, Burj Khalifa, Tokyo Kulesi, Kolezyum, Opera Binasi gibi). Uydurma sehir, isimsiz kubbe, jenerik sci-fi manzara YASAK. Olculdu: ayni kanalda taninir sehir 46.042 begeni aldi, isimsiz kubbe 124.\n(2) ILERLEME, FELAKET DEGIL. Her bolumun tek mesaji sudur: teknoloji ilerledi ve sehir bu sayede daha iyi yasiyor. Bolumun konusu sehri bir tehditten KORUYAN bir siginak degil, sehre yeni bir yetenek KAZANDIRAN calisan bir teknolojidir. Yukselen deniz, col, sel, kuraklik, firtina, iklim siginagi, set, deniz duvari, golgeleme ortusu gibi savunma ve hayatta-kalma temalari YASAK. Harabe, catlak, moloz, derme catma yapi, branda, terk edilmislik, duman, yangin, panik, savas, silah da YASAK.\n(3) TEKNOLOJI GORUNUR VE CALISIR DURUMDA. Her bolumde TEK ve acikca adlandirilmis bir teknoloji vardir ve kadrajda calisirken gorunur: manyetik ulasim hatti, otonom insaat makinesi, enerji kulesi, kendini onaran yapi malzemesi, otomatik uretim tesisi, yorunge asansoru. Ikinci bir buyuk teknoloji ekleme. Sadece 'parlak sehir' yetmez, MEKANIZMA gorunmelidir.\n(4) TANINIR YAPI AYAKTA VE SISTEME BAGLI. 2512 cok uzak bir yil. Taninir yapi yikilmaz ve muzelik de kalmaz: yeni teknolojinin bir parcasi olur. Eyfel bir enerji omurgasinin govdesidir, Ayasofya bir manyetik hattin durak meydanidir. Taninirlik korunur, gecen zaman da okunur.\n(5) DORT CEKIM, UC SERT KESME, DORT AYRI OLCEK. Cekim 1 HAVADAN (sehir olcegi, kanca). Cekim 2 YER SEVIYESI (insanlar ve makineler birlikte, gunluk hayat). Cekim 3 MAKINE OLCEGI (teknolojinin kendisi calisirken, yakindan). Cekim 4 SICAK AYRINTI (bir evin isigi, bir saksi, bir teslimat dronu). Kesmeler eslesen hareket DEGIL, olcek sicramasidir. Cekim 2 videonun olculen olu bolgesidir (hareket 5, cekim 3'te 15): duran insan kalabaligi degil, kareyi KAT EDEN buyuk bir hareket ister.\n(6) SILUET KURALI , KANALIN EN ONEMLI KURALI. Bolumun teknolojisi sehrin SILUETINI degistiren FIZIKSEL BIR YAPI olmak zorundadir, ve cekim 1'in ILK KARESINDE tamamlanmis, tam boyutta ve tam calisir halde zaten oradadir. Sinav sudur: o ilk kareyi simsiyah bir siluete indirgersen, yeni yapi hala bir SEKIL olarak okunuyor mu? Okunmuyorsa konu reddedilir. Sebep olculdu: part 3'te teknoloji bir ISIKTI (Eyfel'in enerji omurgasi), isigin kapali hali oldugu icin motor once bugunun Paris'ini cizdi ve isigi 1,25 saniyede ACTI; ilk kare bugunun drone fotografindan ayirt edilemiyordu ve bolum 21 izlenmede kaldi (P1 648, P2 875). Isima, isik seridi ve renkli yuzey yapinin UZERINE binen sustur, 2512 diyen TEK sey OLAMAZ. Teknolojinin durumu dort saniye boyunca DEGISMEZ: acilmaz, isinmaz, parlamaz, uyanmaz, acilip yayilmaz, kendini gostermez. Cekim 1'deki hareket YER DEGISTIRMEDIR: kareyi kat eden bir kapsul, akan dronlar, seridini tirmanan bir mekik. 'Bir yapinin boyunca yuruyen isik' artik ornek DEGILDIR, cunku motoru tam da yasakladigimiz ac-kapa rampasina itiyor.\n(7) TEK YONLU KAMERA. Her cekimde tek, yavas, tek yonlu bir hareket. Pan, orbit, takip, sarsinti, zoom salinimi, cekim ICINDE kesme ve sahne sifirlamasi yok.\n(8) INSAN OLCEGI KUCUK KALIR. Insanlar orta plandan geriye, kare yuksekliginin en fazla alti'da biri kadar, arkadan ya da uc-ceyrek acidan gorunur. Yuz yakin plani, tam kare dolduran figur ve on planda el yok. Bu bir estetik tercih degil, QC'nin anatomi kapisidir: 15 Eylul'de part 3 tam bu yuzden dustu.\n(9) POZITIF VIDEO DILI. Gorsel prompt yalniz kadrajda BULUNAN seyleri soyler. Su Ingilizce sozcukleri gorsel paragrafta kullanma: no, not, never, nothing, without, avoid, cannot, absent, lacks, lacking. 'Instead of' kalibini da kullanma.\n(10) YAZI ISTEME. Tabela, pano, ekran, hologram yazisi, afis, marka ve logo gorsel promptta GECMEZ. Yazinin isini boyali sembol ve duz renk alani yapar. qc.notes okunabilir yaziyi otomatik fail sayar, yani istedigin sey seni dusuruyor.\n(11) SES: TEK DERIN DRONE. Anlatim, konusma ve ritmik muzik YOKTUR. 'music' alani TEK bir surekli derin ugultu tarif eder: dusuk frekansli, sabit seviyeli, vurussuz, melodisiz, tiz icermeyen, baslangic ve bitis vurgusu olmayan. Referansta olculdu: 20Hz-2kHz duz, 2-8kHz 29 dB asagida, 8kHz ustu yok.\n(12) KUNYE MOTORUN ISI. 'title_card' alani {\"title\": \"<SEHIR> 2512\", \"subtitle\": \"\"} bicimindedir, sehir adi BUYUK harfle. Videonun icinde okunabilir yazi, altyazi, logo, filigran URETME: kunye sonradan ffmpeg ile biner.\n(13) BASLIK SEHIRDIR. En fazla 70 karakter, ilk kelime gercek sehir adi, sonra sehrin NE KURDUGU. Tiklama tuzagi, soru isareti, hashtag ve yil kullanma.\n(14) CAPTION HIKAYEYI TASIR VE IKI DILLIDIR. Once Ingilizce blok: 60-120 kelime, sehri ve kurdugu teknolojiyi adlandir, bunun gunluk hayati nasil degistirdigini soyle, iki-uc somut ayrinti ver, 'A fictional future, created with AI.' cumlesini aynen yaz ve tek somut soruyla bitir. Sonra bos satir, sonra AYNI hikaye SEHRIN KENDI DILINDE: hangi dil oldugu secilen konunun 'local_language' alaninda yazili (Istanbul Turkce, Tokyo Japonca, Berlin Almanca, Kahire Arapca...). O dilin gercek yazi sistemini kullan. Kisa cumle, sade dil, em-dash yok. Amac o sehrin KENDI HALKINA hitap etmek. YEREL DIL INGILIZCE ISE (New York, Londra, Sydney, Toronto gibi) yalniz Ingilizce blok yazilir, ayni metin iki kez tekrarlanmaz. Hashtag'ler TEK sefer ve Latin harfleriyle.\n(15) AILE VE CESITLILIK. Yalniz kanonik ailelerden birini aynen sec. Ardisik iki bolum ayni aileden olamaz. Ayni sehri tekrar kullanma ve onceki bolumun teknolojisini hafifce degistirip tekrar etme.\n(16) ISIK SURUCU AILELERDE GECE ZORUNLU. 'enerji mimarisi' ve 'yasayan malzeme' ailelerinin anlattigi sey isiktir. Ogle vaktinde soluk mavi gokyuzunun altinda isima gorunmez; part 3 bunun kanitidir. Bu iki ailenin bolumleri ALACAKARANLIK ya da GECE gecer ve isima kadraji tasiyan ana isik kaynagidir. Diger dort aile gunduz de gecebilir, ama siluet kurali onlarda da aynen gecerlidir.\n(17) YASAK DURUM-GECISI DILI (cekim 1). Su Ingilizce kaliplari gorsel paragrafta kullanma: subtle, softly, gradually, slowly reveals, begins to, comes to life, powers up, activates, lights up, flickers on, awakens. Hepsinin bir ONCE hali vardir ve motor onceyi de cizer. Teknolojiyi tamamlanmis bir olgu olarak, simdiki zamanda anlat.",
     "topic_pool": [
       {
         "id": 1,
@@ -60,19 +60,19 @@
       },
       {
         "id": 3,
-        "topic": "Paris in 2512: the Eiffel Tower has become the city's energy spine, drawing light up its full height and feeding a skyline that glows from its own power.",
+        "topic": "Paris in 2512 at night: the Eiffel Tower is now the base of a colossal energy mast that rises many times its old height, ringed by broad collector vanes that turn slowly far above the rooftops and change the whole shape of the skyline.",
         "family": "enerji mimarisi",
         "local_language": "French"
       },
       {
         "id": 4,
-        "topic": "Dubai in 2512: Burj Khalifa is sheathed in living engineered material that grows, mends itself and glows softly along every edge of the city.",
+        "topic": "Dubai in 2512 at night: living engineered material has grown the Burj Khalifa outward into a vast branching tower with broad leaf-shaped terraces stepping off it, and the same grown structures rise all across the city.",
         "family": "yasayan malzeme",
         "local_language": "Arabic"
       },
       {
         "id": 5,
-        "topic": "Tokyo in 2512: Tokyo Tower and Skytree rise above automated growing halls and machine-run workshops that make everything the city eats and uses.",
+        "topic": "Tokyo in 2512: immense cylindrical growing towers stand in ranks across the city, each one broader and taller than a district block, and Tokyo Tower and Skytree rise among them as the two shapes the eye still knows.",
         "family": "otomatik uretim",
         "local_language": "Japanese"
       },
@@ -96,19 +96,19 @@
       },
       {
         "id": 9,
-        "topic": "Sydney in 2512: the Opera House shells sit among tidal and solar arrays that light the whole harbour from the water's own motion.",
+        "topic": "Sydney in 2512 at dusk: enormous tidal turbine arches stride across the harbour on tall legs, each arch standing higher than the Harbour Bridge and turning steadily, with the Opera House shells small and white beneath them.",
         "family": "enerji mimarisi",
         "local_language": "English"
       },
       {
         "id": 10,
-        "topic": "Venice in 2512: St Mark's Campanile rises from decks of living engineered stone that mend themselves and glow gently across the lagoon at night.",
+        "topic": "Venice in 2512 at night: living engineered stone has grown new arched decks and vaulted bridges high above the canals, a second city stacked over the old one, with St Mark's Campanile rising through it.",
         "family": "yasayan malzeme",
         "local_language": "Italian"
       },
       {
         "id": 11,
-        "topic": "Agra in 2512: the Taj Mahal faces terraces of automated growing halls that make the whole plain green and feed the city from its own ground.",
+        "topic": "Agra in 2512: colossal tiered growing towers step up from the plain in a long row facing the Taj Mahal, their stacked green terraces rising far above the old rooflines.",
         "family": "otomatik uretim",
         "local_language": "Hindi"
       },
@@ -132,19 +132,19 @@
       },
       {
         "id": 15,
-        "topic": "Moscow in 2512: tall fusion light towers warm and illuminate the whole city and St Basil's Cathedral stands bright beneath them through the winter.",
+        "topic": "Moscow in 2512 on a winter night: three colossal fusion towers stand over the city like new mountains, their tapered bodies rising far above every roof, and St Basil's Cathedral sits bright and small at their feet.",
         "family": "enerji mimarisi",
         "local_language": "Russian"
       },
       {
         "id": 16,
-        "topic": "Athens in 2512: the Acropolis is built of living marble that repairs itself and the city below is faced in the same quietly luminous stone.",
+        "topic": "Athens in 2512 at dusk: living marble has grown vast new colonnades and stepped terraces down the slopes below the Acropolis, reshaping the whole hill in stone, and the Parthenon crowns the silhouette.",
         "family": "yasayan malzeme",
         "local_language": "Greek"
       },
       {
         "id": 17,
-        "topic": "Barcelona in 2512: the Sagrada Familia stands at the centre of a district of automated workshops and growing towers that supply the whole city.",
+        "topic": "Barcelona in 2512: the Sagrada Familia is ringed by a crown of enormous fabrication towers whose spires answer its own, and the district skyline is now a field of matching points.",
         "family": "otomatik uretim",
         "local_language": "Spanish"
       },
@@ -168,19 +168,19 @@
       },
       {
         "id": 21,
-        "topic": "Mumbai in 2512: the Gateway of India stands before a coastline of energy towers that light the entire city from the sea and the sun.",
+        "topic": "Mumbai in 2512 at dusk: a chain of immense energy towers walks out to sea from the Gateway of India on wide legs, each carrying a great tilted collector disc, and the masts turn the coastline into a new skyline.",
         "family": "enerji mimarisi",
         "local_language": "Hindi"
       },
       {
         "id": 22,
-        "topic": "Bangkok in 2512: Wat Arun rises among towers of living engineered material that flower along the canals and light the water after dark.",
+        "topic": "Bangkok in 2512 after dark: towers of living engineered material have grown into huge branching canopies that arch right over the canals, and Wat Arun stands beneath their spreading crowns.",
         "family": "yasayan malzeme",
         "local_language": "Thai"
       },
       {
         "id": 23,
-        "topic": "Shanghai in 2512: the Oriental Pearl Tower stands among automated fabrication towers that make everything the city needs on the spot.",
+        "topic": "Shanghai in 2512: the Oriental Pearl Tower stands among vast fabrication towers that dwarf the old skyline, each one a smooth column crowned with wide working platforms.",
         "family": "otomatik uretim",
         "local_language": "Chinese (Simplified)"
       },
@@ -204,19 +204,19 @@
       },
       {
         "id": 27,
-        "topic": "Berlin in 2512: the Brandenburg Gate opens onto boulevards lit and powered by luminous energy columns that run the length of every avenue.",
+        "topic": "Berlin in 2512 at night: colossal energy columns stand in a long line down every boulevard, far taller than any building around them, and the Brandenburg Gate is the arch you pass through to enter their avenue.",
         "family": "enerji mimarisi",
         "local_language": "German"
       },
       {
         "id": 28,
-        "topic": "Lisbon in 2512: the 25 de Abril Bridge spans a Tagus lined with hillsides of living engineered stone that glows warmly through the evening.",
+        "topic": "Lisbon in 2512 in the evening: living engineered stone has grown the hillsides into immense stepped terraces that tower over the Tagus, and the 25 de Abril Bridge runs between them.",
         "family": "yasayan malzeme",
         "local_language": "Portuguese"
       },
       {
         "id": 29,
-        "topic": "Mexico City in 2512: the Angel of Independence stands among automated growing halls that supply the whole valley from inside the city itself.",
+        "topic": "Mexico City in 2512: giant stepped growing pyramids rise out of the valley floor around the Angel of Independence, their terraces climbing high above every surrounding roof.",
         "family": "otomatik uretim",
         "local_language": "Spanish"
       },
@@ -240,19 +240,19 @@
       },
       {
         "id": 33,
-        "topic": "Cape Town in 2512: Table Mountain overlooks a coast of wind and tidal energy arrays that trace the shoreline in steady light.",
+        "topic": "Cape Town in 2512 at dusk: a row of towering wind rotors marches along the coast beneath Table Mountain, each rotor wider than a city block, and their masts redraw the whole shape of the shoreline against the sky.",
         "family": "enerji mimarisi",
         "local_language": "English"
       },
       {
         "id": 34,
-        "topic": "Alexandria in 2512: the Qaitbay Citadel stands beside a harbour of living engineered sea-stone that repairs itself and glows along the waterline.",
+        "topic": "Alexandria in 2512 at night: living sea-stone has grown a vast ring of curved breakwater walls far out into the Mediterranean, their arcs rising high above the water, with the Qaitbay Citadel small at the harbour mouth.",
         "family": "yasayan malzeme",
         "local_language": "Arabic"
       },
       {
         "id": 35,
-        "topic": "Las Vegas in 2512: the Strip stands over automated production halls and desert growing towers that make the whole valley self-supplying.",
+        "topic": "Las Vegas in 2512: enormous desert growing towers stand in a ring around the Strip, each one taller than the old casino towers, and their silhouettes turn the valley edge into a new skyline.",
         "family": "otomatik uretim",
         "local_language": "English"
       },
@@ -265,8 +265,48 @@
     ],
     "shot_plan_note": "2026-09-15 v2.0 (Ihsan): 2 cekim -> 4 cekim, 3 sert gecis. micro_trim 0,75 ile her ham 4 sn klip 2,5 sn'ye iner, bolum 10,0 sn olur (olculen referans kazanani 10,1 sn). Cekimler OLCEK sirasina gore dizildi: havadan -> yer seviyesi -> makine -> sicak ayrinti. Odul (insanlar) 4,0 sn yerine 2,5 sn'de gelir. v1.1 dersi korunuyor: cekim 2 sablonu iki kapiya birden carpiyordu, (a) 'signage' istiyordu ama qc.notes okunabilir yaziyi otomatik fail sayiyor, (b) 'People fill the frame' + goz hizasi kalabalik QC'nin SIKI anatomi kapisi icin en riskli kompozisyon. Figurler artik kare yuksekliginin 1/6'si ve orta plandan geriye; on ucte bir bos. Cekim 3 ve 4 zaten insansiz, yani dort cekimin yalniz BIRI anatomi riski tasiyor.",
     "last_run": {
-      "at": "2026-09-16T02:43:13.941069+00:00",
-      "parts": "3-7"
+      "at": "2026-09-18T17:47:11.993635+00:00",
+      "parts": "4-6"
+    },
+    "title_card_style": "\"title\" = the real city's name in CAPITAL LETTERS, then a single space, then the year 2512, and NOTHING else. Correct: \"DUBAI 2512\", \"TOKYO 2512\", \"NEW YORK 2512\", \"CAPE TOWN 2512\". Wrong: \"Orbital Tether\", \"Burj Khalifa\", \"Dubai's Living Skin\", \"DUBAI 2512 - Living Skin\". Max 34 characters. \"subtitle\" = ALWAYS the empty string \"\". Never write the landmark, the country, the technology, a tagline or any other text into \"subtitle\"; the field must be exactly \"\".",
+    "forbidden_phrases": {
+      "1": [
+        "activates",
+        "activating",
+        "assembles",
+        "assembling",
+        "awakening",
+        "awakens",
+        "barely",
+        "begins to",
+        "brightening",
+        "brightens",
+        "comes online",
+        "comes to life",
+        "emerges",
+        "emerging",
+        "fades in",
+        "faintly",
+        "flickers",
+        "gently",
+        "gradually",
+        "hint of",
+        "lighting up",
+        "lights up",
+        "powering up",
+        "powers up",
+        "reveals itself",
+        "slowly reveals",
+        "softly",
+        "springs to life",
+        "starts to",
+        "subtle",
+        "subtly",
+        "switches on",
+        "turns on",
+        "unfolding",
+        "unfolds"
+      ]
     }
   },
   "parts": {

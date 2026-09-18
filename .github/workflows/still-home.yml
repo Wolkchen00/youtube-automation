@@ -1,7 +1,7 @@
 name: Still Home Daily
 
 # 'STILL HOME' gunluk seridi (shadowedhistory kanali, @shad0wedhistory357).
-# Dayanak: shadowedhistory/KONSEPT.md v1.0. Ihsan karari 2026-09-13: eski TARIH
+# Dayanak: shadowedhistory/KONSEPT.md v3.0. Ihsan karari 2026-09-13: eski TARIH
 # konsepti (flashpoints ve 3 seri) arsive kaldirildi, kanal gelecek temali ve
 # ANLATIMSIZ yeni bir konseptle yaziliyor. Olculen gerekce: flashpoints'in 15
 # videosunda medyan 24 izlenme, aralik 0-1.179.
@@ -20,6 +20,15 @@ name: Still Home Daily
 # Olculen kazanma sarti: TANINIR SEHIR. Referansta ayni kanal ve ayni formatta
 # taninir sehir 46.042 begeni aldi, isimsiz kubbe 124 (371 kat fark). Bu bulgu
 # bizim aimagine olcumumuzle bagimsiz olarak ortusuyor.
+#
+# Format v3.0 (Ihsan direktifi 18 Eylul 2026, "ilk 3 saniye ekrana kitlensin"):
+# SILUET KURALI. Bolumun teknolojisi sehrin siluetini degistiren FIZIKSEL bir
+# yapidir ve ilk karede tamamlanmis, tam calisir halde durur. Olculen gerekce:
+# part 3'te teknoloji bir ISIKTI, motor once bugunun Paris'ini cizip isigi
+# 1,25 sn'de acti, ilk kare bugunun drone fotografindan ayirt edilemedi ve
+# bolum 21 izlenmede kaldi (P1 648, P2 875). Isik surucu iki aile artik gece
+# geciyor. Kesme sayisi DEGISMEDI: 3 kesme olculdu (2,54 / 5,04 / 7,54) ve
+# korunuyor.
 #
 # publish_mode="auto": uretilen bolum dogrudan 3 platforma cikar. Canli gunluk
 # seridin (wild-encounter) filo gelenegiyle ayni. Gunde-1 kanal kilidi yine
@@ -78,11 +87,18 @@ jobs:
           YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
           TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
-          # v2.0: bolum 2 cekimden 4 cekime cikti. Omni 4 sn = 80 kredi
-          # (muhafazakar tahmin), yani 4 ana cekim 320 + muzik 80 = 400.
-          # qc.max_regens_per_episode=8 en kotu durumda 8 x 80 = 640 daha
-          # ister; 1040 toplam. 900 tavani regen'leri ortasinda keserdi.
-          EPISODE_CREDIT_CAP=1200
+          # 18 Eylul 2026: 1200 -> 900. Sebep OLCULDU. Baslangic kapisi
+          # bakiyeden 1,5 x cap ister, yani 1200 cap = 1800 esik ve bu
+          # filonun EN YUKSEK kapisiydi (digerleri 900 -> 1350). Ama
+          # bu seri filonun en UCUZ islerinden birini yapiyor: part 3
+          # regen'leriyle birlikte defterde 189 kredi (part 2: 206).
+          # Yani 189 kredilik is icin kasada 1800 bekleniyordu ve hat
+          # gecenin sonunda kostugu icin artakalani buluyordu: 17 Eylul
+          # bakiye=1632 ile kapiya carpti, o gun kanal karanlik kaldi.
+          # 900 muhafazakar tahminle 4 ana cekim (320) + muzik (80) +
+          # 6 regen (480) tasir; part 3'un gercekte kullandigi en yogun
+          # bolum 4 ana + 4 regen'di, yani pay hala var.
+          EPISODE_CREDIT_CAP=900
           MONTHLY_CREDIT_CAP=60000
           EOF
 

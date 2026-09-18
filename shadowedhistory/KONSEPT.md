@@ -1,4 +1,4 @@
-# shadowedhistory , KANAL KONSEPTI v2.0 "STILL HOME"
+# shadowedhistory , KANAL KONSEPTI v3.0 "STILL HOME"
 
 Durum: ONAYLANDI , Ihsan karari 13 Eylul 2026 ("tamam bunu paylasalim, yeni pipeline bunu yerlestirelim").
 v2.0 revizyonu: Ihsan karari 15 Eylul 2026, iki direktif:
@@ -6,7 +6,12 @@ v2.0 revizyonu: Ihsan karari 15 Eylul 2026, iki direktif:
   (2) "ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun,
        videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine
        teknolojinin nasil gelistigini anlatan bir video olsun"
-Tarih: 13 Eylul 2026 (v1.0) , 15 Eylul 2026 (v2.0)
+v3.0 revizyonu: Ihsan direktifi 18 Eylul 2026: "izleyenleri ilk 3 saniye
+ekrana kitlememiz lazim, sahne gecisi bu arada olsun". Sahne gecisi zaten
+canliydi (olculdu: 3 kesme), bu yuzden v3.0 yalniz ILK KAREYE dokunur:
+siluet kurali, isik surucu ailelerde zorunlu gece, ve seri-farkindali
+ilk-kare kapisi. Bkz. 2.2.1 , 2.2.3.
+Tarih: 13 Eylul 2026 (v1.0) , 15 Eylul 2026 (v2.0) , 18 Eylul 2026 (v3.0)
 Kanal: @shad0wedhistory357
 Onceki konsept: TARIH (flashpoints ve 3 seri) , ARSIVDE,
 `_arsiv/shadowedhistory_2026-09-13/`
@@ -130,6 +135,99 @@ okunmuyor. Ilk saniyede degisen tek sey daktilo kunyesinin bes harfiydi.
 Bu yuzden cekim 1 artik kameradan BAGIMSIZ bir hareket tasimak zorundadir:
 gecen bir ulasim kapsulu, akan kargo dronlari, bir yapinin boyunca yuruyen
 isik. Kadrajin kendisi hareket etmeli, yalniz kamera degil.
+
+### 2.2.1 SILUET KURALI , v3.0 (18 Eylul 2026, OLCULDU)
+
+v2.0'in ilk otomatik bolumu olculdu ve ilk kare kapisi COKTU.
+
+| Bolum | Bicim | YouTube izlenme |
+|---|---|---|
+| P1 ISTANBUL (13 Eyl) | v1.0, 2 cekim | 648 |
+| P2 NEW YORK (14 Eyl) | v1.0, 2 cekim | 875 |
+| **P3 PARIS (16 Eyl)** | **v2.0, 4 cekim** | **21** (42. saat) |
+
+Bicim tarafi dogru calisti. Yayinlanan dosya olculdu: sure 10,17 sn, 24 fps,
+kesmeler **2,54 / 5,04 / 7,54** (yani 3 sert gecis, Ihsan'in direktifi CANLI),
+LUFS -14,0, tepe -1,0 dBFS. Ritim sorunu COZULMUS durumda.
+
+Coken sey ilk karedir. Cekim 1'in ilk 2,5 saniyesi 6 kareye bolunup goz ile
+incelendi:
+
+- t=0,00 , Eyfel Kulesi KOYU, caddeler sonuk, gokyuzu soluk mavi.
+  **Kare, bugunun Paris'inden cekilmis bir drone fotografindan ayirt edilemiyor.**
+- t=0,42 , kulede ilk isik izi belirmeye basliyor
+- t=0,83 , caddelerdeki isik seritleri ortaya cikiyor
+- t=1,25 , vaat nihayet tam
+
+Yani bolumun tek "2512" kaniti, izleyicinin karar penceresi KAPANDIKTAN sonra
+ekrana geliyor. Doktrin "gecikmeli ortaya cikis yasaktir" diyordu; motor tam
+olarak gecikmeli ortaya cikis uretti.
+
+**Kok sebep:** bolumun teknolojisi bir ISIKTI. Isigin KAPALI hali vardir, ve
+video modeli kapali-acik gecisini animasyon firsati sayar. Konu "Eyfel enerji
+omurgasi oldu" diye yazildiginda model once bugunun kulesini kurar, sonra
+yakar. Bu bir prompt kazasi degil, konunun cinsinin dogrudan sonucudur.
+
+**KURAL: bolumun teknolojisi sehrin SILUETINI degistirmek zorundadir.**
+
+Siluet geometridir. Geometrinin kapali hali yoktur, bu yuzden ilk karede
+zaten oradadir. Isik bu siluetin uzerine binebilir ama "2512" diyen TEK sey
+olamaz.
+
+**Siluet testi (yazim asamasinda uygulanir):** acilis karesini simsiyah bir
+siluete indirgersen, sehrin bugunku halinden BASKA bir sey oldugu hala okunuyor
+mu? Okunmuyorsa bolum fikri reddedilir, para harcanmadan once.
+
+Referansla tutarli: 46.042 begenili TOKYO 2247'de tek karede okunan sey
+IMKANSIZ YAPIYDI; 124 begenili bolumde okunacak bir yapi yoktu.
+
+**Isik surucu ailelerde zorunlu gece.** `enerji mimarisi` ve `yasayan malzeme`
+ailelerinin anlattigi sey isiktir. Ogle vaktinde soluk mavi gokyuzunun altinda
+bir isima gorunmez, P3 bunun kanitidir. Bu iki ailenin bolumleri **alacakaranlik
+ya da gece** gecer, ve isima kadraji tasiyan ana kaynaktir.
+
+**Cekim 1'de hareket = YER DEGISTIRME, durum degisikligi DEGIL.** Kadrajda
+hareket eden sey kareyi kat etmelidir (gecen kapsul, akan dronlar, yol alan
+mekik). "Bir yapinin boyunca yuruyen isik" ornegi sablondan CIKARILDI: modeli
+tam da yasakladigimiz ramp'a itiyordu.
+
+**Yasak durum-gecisi dili (cekim 1):** subtle, softly, gradually, slowly
+reveals, begins to, comes to life, powers up, activates, lights up, flickers
+on, awakens. Hepsinin bir ONCE/SONRA hali vardir ve motor onceyi de cizer.
+
+### 2.2.2 Kapinin kendisi tutmuyordu , duzeltildi
+
+`qc.require_first_frame` bu seride ACIKTI, ama kapiya giden metin
+`series/critic.py` icinde unnatural-lab icin yazilmisti:
+
+> "The episode's **impossible property** must already be active and readable in
+> this exact frame, and the **object** must fill a large share of the frame."
+
+Sehir olcegindeki bir hava cekiminde "obje" diye bir sey yoktur ve "imkansiz
+ozellik" sorusu bosa duser. Sonuc olculdu: **P3'un bugunku Paris'i gosteren
+acilis karesi bu kapidan IKI KEZ `first_frame_ok=true` alarak gecti**
+(`qc_log.jsonl`, episode 3 shot 1).
+
+18 Eylul duzeltmesi: ilk-kare kapisi seri-farkindali yapildi.
+`bible.series.qc.first_frame_rule` yazilirsa varsayilan metnin YERINE gecer.
+still-home'un kurali siluet testini ve karanlik-teknoloji yasagini dogrudan
+sorar.
+
+### 2.2.3 Cekim 2 olu bolgedir , olculdu
+
+Kare-farki ile hareket olculdu (Y kanali, ardisik kare mutlak farki):
+
+| Cekim | Aralik | Hareket |
+|---|---|---|
+| 1 havadan | 0,0-2,5 sn | 9 |
+| **2 yer seviyesi** | **2,5-5,0 sn** | **5** |
+| 3 makine olcegi | 5,0-7,5 sn | 15 |
+| 4 sicak ayrinti | 7,5-10,0 sn | 10 |
+
+Cekim 2 videonun en donuk yeridir: mermer bir meydanda elinde tablet tutan,
+duran insanlar. Sablon "sabit yukseklikte tek yonlu yavas hareket" istiyordu
+ve model bunu "hicbir sey olmuyor" diye okudu. Cekim 2 artik kareyi KAT EDEN
+bir hareket tasimak zorundadir.
 
 ### 2.3 GORUNUR CALISAN TEKNOLOJI ZORUNLU , v2.0
 
@@ -459,3 +557,29 @@ Verilenler (13 Eylul):
 
 Bekleyen: YOK. Serit 13 Eylul 2026'da CANLIYA ALINDI, 15 Eylul 2026'da v2.0'a
 gecti. Gunluk cron 20:30 UTC.
+
+### v3.0 kararlari (18 Eylul 2026)
+
+Ihsan: "shadowedhistory kanali gunlerdir video paylasmiyor sebebini ogren ve
+ayrica videolar viral olmuyor izlenmiyor izleyenleri ilk 3 saniye ekrana
+kitlememiz lazim sahne gecisi bu arada olsun kanali duzelt ve viral olacak
+videolarla ilerleyelim"
+
+Bulunan iki ayri arizanin ikisi de kaydedildi:
+
+1. **Yayin durusu , iki farkli sebep, tek semptom.**
+   - 15 Eylul: QC. Cekim 2 iki denemede de kaldi (gomulu yazi, sonra bozuk
+     anatomi), `min_shots=4` karsilanamadi, bolum dustu.
+   - 17 Eylul ve 18 Eylul: kredi baslangic kapisi. `bakiye=1632 < esik=1800`.
+     Kok sebep asimetri: still-home'un `EPISODE_CREDIT_CAP`'i 1200'du, esik
+     `1,5 x cap = 1800` ile filonun EN YUKSEGIYDI, ama olculen gercek harcamasi
+     filonun en dusuklerinden biridir (part 3 = **189 kredi**). Yani 189
+     kredilik is icin kasada 1800 isteniyordu. Ustelik hat gecenin EN SONUNDA
+     kosuyor, yani onundeki uc hat harcadiktan sonra artakalani buluyor. Cift
+     ceza. 18 Eylul: cap 1200 -> 900, esik 1800 -> 1350, filonun geri kalaniyla
+     ayni.
+
+2. **Kanca , ilk kare bugunu gosteriyordu.** Tam olcum ve kural 2.2.1'de.
+
+Ihsan'in "sahne gecisi" maddesi DEGISMEDI: 3 kesme olculdu ve korunuyor.
+

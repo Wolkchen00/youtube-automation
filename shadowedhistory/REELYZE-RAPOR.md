@@ -717,3 +717,165 @@ yeniden uretim tetiklenmedi.
   yerinde oldugu kare renkleri orneklenerek ayrica dogrulandi.
 - v2.0 ile uretilmis GERCEK bir bolum henuz yok. Yukaridaki 10,0 sn ve 3 kesme
   sentetik klip uzerinde, gercek uretim fonksiyonuyla dogrulandi.
+
+---
+
+# EK , v2.0'in ilk gercek bolumu olculdu (18 Eylul 2026)
+
+Istek (Ihsan): "shadowedhistory kanali gunlerdir video paylasmiyor sebebini
+ogren ve ayrica videolar viral olmuyor izlenmiyor izleyenleri ilk 3 saniye
+ekrana kitlememiz lazim sahne gecisi bu arada olsun".
+
+Olculen dosya: YouTube `Y-GE8XB8JJY` = **part 3, PARIS 2512**, v2.0 ile
+uretilen ILK otomatik bolum (16 Eylul 23:28 UTC). Arac: `yt-dlp` + `ffmpeg`.
+
+## 1. Bicim , v2.0 SOZU TUTTU
+
+| Olcu | v1.0 (P2) | **v2.0 (P3)** | Doktrin |
+|---|---|---|---|
+| Sure | 8,04 sn | **10,17 sn** | 9-11 tamam |
+| Kesme sayisi | 1 | **3** | tamam |
+| Kesme anlari | 4,04 | **2,54 / 5,04 / 7,54** | 2,5 aralikli, tamam |
+| fps | 24 | **24** | tamam |
+| LUFS | -14,1 | **-14,0** | tamam |
+| True peak | -1,5 dBFS | **-1,0 dBFS** | tamam |
+
+**Ihsan'in "3 sahne gecisi" direktifi CANLI ve dogrulandi.** Bu maddede
+yapilacak bir sey yok, v3.0 buna DOKUNMADI.
+
+## 2. Sonuc , format duzeldi, izlenme cokdu
+
+| Bolum | Bicim | YouTube izlenme | Begeni |
+|---|---|---|---|
+| P1 ISTANBUL (13 Eyl) | v1.0, 2 cekim | 648 | 4 |
+| P2 NEW YORK (14 Eyl) | v1.0, 2 cekim | 875 | 7 |
+| **P3 PARIS (16 Eyl)** | **v2.0, 4 cekim** | **21** | 0 |
+
+P3 42. saatinde olculdu. Kanalin kendi "44 saat dolmadan olu ilan etme"
+kurali geregi bu sayi HENUZ nihai degildir, ama P1 ve P2'nin ayni yastaki
+degerlerinin iki kat buyuklugunde altinda.
+
+## 3. Kanca teshisi , ilk kare BUGUNU gosteriyor
+
+Cekim 1'in ilk 2,5 saniyesi 6 kareye bolundu ve goz ile incelendi:
+
+| t | kadrajda ne var |
+|---|---|
+| **0,00** | Eyfel Kulesi KOYU demir renginde, caddeler sonuk, gokyuzu soluk mavi. **Kare, bugunun Paris'inden cekilmis bir drone fotografindan ayirt edilemiyor.** |
+| 0,25 | kulede ilk isik izi |
+| 0,50 | caddelerde isik seritleri belirmeye basliyor |
+| 0,75 | kule beyaz isiyor, seritler net |
+| 1,25 | vaat nihayet tam |
+
+Destekleyici olcum: kadrajin orta ucte birinin ortalama parlakligi
+t=0,00'da 109,6 iken t=0,75'te 127,8'e cikiyor (+%16,6), sonra 2,38'de
+106,6'ya dusuyor. Yani sahnenin en aydinlik ani ilk kare DEGIL.
+
+Bolumun tek "2512" kaniti, izleyicinin karar penceresi kapandiktan SONRA
+ekrana geliyor. Doktrin "gecikmeli ortaya cikis yasaktir" diyordu; motor tam
+olarak gecikmeli ortaya cikis uretti.
+
+**Kok sebep, ve bu bir prompt kazasi DEGIL:** bolumun teknolojisi bir ISIKTI.
+Isigin kapali hali vardir ve video modeli kapali-acik gecisini animasyon
+firsati sayar. "Eyfel enerji omurgasi oldu" diye yazilan bir konu, modele
+once bugunun kulesini kurdurur sonra yaktirir. Konunun CINSI ilk kareyi
+belirliyor.
+
+## 4. Ikinci bulgu , kapinin kendisi tutmuyordu
+
+`qc.require_first_frame` bu seride ACIKTI. Ama kapiya giden metin
+`series/critic.py` icinde unnatural-lab kanali icin yazilmisti:
+
+> "The episode's **impossible property** must already be active and readable
+> in this exact frame, and the **object** must fill a large share of the frame."
+
+Sehir olcegindeki bir hava cekiminde "obje" diye bir sey yoktur, "imkansiz
+ozellik" sorusu da bosa duser. Sonuc `qc_log.jsonl`'de duruyor: **P3'un
+bugunku Paris'i gosteren acilis karesi bu kapidan IKI KEZ
+`first_frame_ok=true` alarak gecti.**
+
+Kapi acikti, calisiyor gorunuyordu, ve hicbir seyi tutmuyordu.
+
+## 5. Ucuncu bulgu , cekim 2 olu bolge
+
+Kare-farki ile hareket olculdu (Y kanali, ardisik kare mutlak farki):
+
+| Cekim | Aralik | Hareket |
+|---|---|---|
+| 1 havadan | 0,0-2,5 sn | 9 |
+| **2 yer seviyesi** | **2,5-5,0 sn** | **5** |
+| 3 makine olcegi | 5,0-7,5 sn | 15 |
+| 4 sicak ayrinti | 7,5-10,0 sn | 10 |
+
+Cekim 2 videonun en donuk yeridir: mermer bir meydanda elinde tablet tutan,
+DURAN insanlar. Sablon "sabit yukseklikte tek yonlu yavas hareket" istiyordu,
+model bunu "hicbir sey olmuyor" diye okudu.
+
+## 6. Yayin durusu , kanca ile ILGISIZ, iki ayri sebep
+
+| Gun | Sonuc | Sebep |
+|---|---|---|
+| 14 Eyl | yayin | , |
+| **15 Eyl** | **yayin YOK** | QC: cekim 2 iki denemede de kaldi (gomulu yazi, sonra bozuk anatomi), `min_shots=4` karsilanamadi |
+| 16 Eyl | yayin (P3) | , |
+| **17 Eyl** | **yayin YOK** | Kredi baslangic kapisi: `bakiye=1632 < esik=1800` |
+| **18 Eyl** | **yayin YOK (beklenen)** | ayni kapi: bakiye 1017 |
+
+Kredi kapisinin kok sebebi asimetriydi. Kapi bakiyeden `1,5 x EPISODE_CREDIT_CAP`
+ister. still-home'un cap'i 1200'du, yani **esik 1800 ile filonun EN YUKSEGI**
+(digerleri 900 -> 1350). Ama bu seri filonun en UCUZ islerinden birini yapiyor:
+
+| Bolum | Rezerve | **Gercek harcama** |
+|---|---|---|
+| P2 | 900 | **206** |
+| P3 | 1200 | **189** |
+
+189 kredilik bir is icin kasada 1800 bekleniyordu. Ustelik hat gecenin EN
+SONUNDA kosuyor (17 Eyl: galactic 19:46, wild-encounter 21:35, still-home
+22:58), yani onundeki hatlar harcadiktan sonra artakalani buluyor. Cift ceza.
+
+**Havuz seviyesinde ayri bir bulgu:** `fear-slide` (aimagine) ayni Kie
+anahtarini kullanir, seedance ile 15 sn'lik cekim uretir (olculen 372 kredi)
+ve **hicbir kredi kapisi ya da bolum tavani yoktur**. Kapili hatlar, kapisiz
+hattin arkasindan geliyor. Bu karar Ihsan'a aittir, bu turda degistirilmedi.
+
+## 7. Yapilan degisiklik , v3.0
+
+1. **SILUET KURALI.** Teknoloji artik sehrin siluetini degistiren FIZIKSEL
+   bir yapidir ve ilk karede tamamlanmis, tam calisir halde durur. Siluet
+   geometridir, geometrinin kapali hali yoktur. Isik yapinin uzerine binen
+   sustur, "2512" diyen TEK sey olamaz. Sinav: ilk kareyi simsiyah siluete
+   indirgersen yeni yapi hala okunuyor mu?
+2. **Isik surucu iki aile GECE gecer** (`enerji mimarisi`, `yasayan malzeme`).
+   Ogle vaktinde soluk gokyuzu altinda isima gorunmez, P3 bunun kanitidir.
+3. **36 konunun 18'i yeniden yazildi**: isik surucu 12 konu + siluet gucu
+   zayif 6 `otomatik uretim` konusu ("halls" alcaktir, "towers" siluet yapar).
+4. **Cekim 1'de hareket = YER DEGISTIRME.** "Bir yapinin boyunca yuruyen isik"
+   ornegi sablondan cikarildi: modeli tam da yasakladigimiz rampaya itiyordu.
+5. **Cekim 2'ye gecis (traversal) zorunlulugu** geldi; duran kalabalik
+   basarisiz cekimdir.
+6. **Ilk-kare QC kapisi seri-farkindali yapildi.** `series/critic.py` artik
+   `bible.series.qc.first_frame_rule` yazan serinin kendi kuralini varsayilanin
+   YERINE koyar. still-home'un kurali siluet testini ve karanlik-teknoloji
+   yasagini dogrudan sorar.
+7. **Kredi cap'i 1200 -> 900**, esik 1800 -> 1350, filonun geri kalaniyla ayni.
+8. **`tools/siluet_denetim.py`** eklendi: kuyruktaki planlari ucretli cagri
+   YAPMADAN denetler (durum-gecisi dili, zayiflik dili, isik ailelerinde gece,
+   doktrin damgasi). Arsivlenen eski part 4 (DUBAI, "glows softly") bu araca
+   verildiginde 4 bulgu uretti, yani arac gercek kazayi yakaliyor.
+
+## 8. OLCULMEMIS , iddia edilmiyor
+
+- **P3'un 21 izlenmesi NIHAI DEGIL** (42. saat). Kanalin kendi kurali 44
+  saattir. Sayi yukselebilir.
+- **v2.0'in iki hipotezi hala ayrisamiyor** (uc gecis vs ileri teknoloji
+  yonu). v3.0 ustune UCUNCU bir degisken ekliyor (siluet + gece). P4 ve
+  sonrasi bu ucunu de birbirinden ayiramaz. Ayirmak isteniyorsa ayri test.
+- Siluet kuralinin izlenmeyi yukseltecegi **kanitlanmadi**. Dayanagi iki
+  bagimsiz korelasyon: referansta taninir/imkansiz yapi 46.042 vs 124, ve
+  bizim aimagine olcumumuz (landmark 4/4, jenerik tekrar 3/3 kayip).
+- Parlaklik olcumu kamera hareketinden de etkilenir; ilk karedeki gecikmenin
+  BIRINCIL kaniti kontakt sayfasidir, parlaklik yalniz destekleyicidir.
+- Cekim 2'nin olu olmasinin izlenmeye etkisi olculmedi, yalniz kare-farki
+  olculdu.
+
