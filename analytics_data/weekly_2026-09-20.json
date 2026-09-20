@@ -1,0 +1,265 @@
+{
+  "generated_at": "2026-09-20T12:57:23.660919+00:00",
+  "snapshot_date": "2026-09-20",
+  "period": "2026-09-14 to 2026-09-20",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 128,
+        "total_views": 113511,
+        "total_videos": 280
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "QuTtqTaAke4",
+          "title": "San Francisco Widened Its Golden Gate",
+          "published": "2026-09-18T22:59:14Z",
+          "views": 654,
+          "views_48h": 654,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Y-GE8XB8JJY",
+          "title": "Paris Powers Its Own Tower",
+          "published": "2026-09-16T23:28:13Z",
+          "views": 33,
+          "views_48h": 21,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "ZDRrC5r7Vek",
+          "title": "New York Lifted Its Streets Above The Sea",
+          "published": "2026-09-14T23:24:25Z",
+          "views": 870,
+          "views_48h": 716,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "bqDZHfEa2hg",
+          "title": "Istanbul Put A Roof Over The Bosphorus",
+          "published": "2026-09-13T20:46:49Z",
+          "views": 649,
+          "views_48h": 628,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 26.5
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 160,
+        "total_views": 181771,
+        "total_videos": 182
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "4cdvxPh_mE8",
+          "title": "This GIANT SQUID Is NOT Real",
+          "published": "2026-09-18T17:49:58Z",
+          "views": 298,
+          "views_48h": 298,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "MXKmeVqDDXQ",
+          "title": "This GIANT OWL Is NOT Real",
+          "published": "2026-09-16T01:52:02Z",
+          "views": 3148,
+          "views_48h": 3245,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "wuuu02K2hPc",
+          "title": "This GIANT POLAR BEAR Is NOT Real",
+          "published": "2026-09-14T22:05:26Z",
+          "views": 35908,
+          "views_48h": 29975,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "mYUqbRjJoVs",
+          "title": "This GIANT ANACONDA Is NOT Real",
+          "published": "2026-09-13T20:40:15Z",
+          "views": 6930,
+          "views_48h": 6815,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1414.0
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 148,
+        "total_views": 73237,
+        "total_videos": 215
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "PeoPrnoke4A",
+          "title": "A Fissure Opening Along the San Andreas",
+          "published": "2026-09-19T18:43:39Z",
+          "views": 48,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "XM0TaR_E7bA",
+          "title": "Into Enceladus' Geysers",
+          "published": "2026-09-18T19:10:55Z",
+          "views": 59,
+          "views_48h": 59,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "ruozyw2b6eI",
+          "title": "A Tornado Wider Than a City Over Kansas",
+          "published": "2026-09-17T19:56:43Z",
+          "views": 1821,
+          "views_48h": 1819,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "OH4lYYuquNY",
+          "title": "Through the Crab Nebula",
+          "published": "2026-09-16T19:42:01Z",
+          "views": 753,
+          "views_48h": 754,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "tMEn9s9hJJ4",
+          "title": "A Wave Taller Than the Copacabana Skyline",
+          "published": "2026-09-15T19:48:11Z",
+          "views": 906,
+          "views_48h": 903,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "0i0WTn7Fj_o",
+          "title": "Through the Rings of Saturn",
+          "published": "2026-09-14T16:14:21Z",
+          "views": 507,
+          "views_48h": 501,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "HKSZ450F5Lc",
+          "title": "Infinite Neighborhood",
+          "published": "2026-09-13T22:22:11Z",
+          "views": 159,
+          "views_48h": 152,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "gBy13Y6qrEA",
+          "title": "One Whirlpool That Never Closes",
+          "published": "2026-09-13T17:59:29Z",
+          "views": 1864,
+          "views_48h": 1760,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 150.0
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 106,
+        "total_views": 150863,
+        "total_videos": 263
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "GerRy3JGjk0",
+          "title": "Hong Kong, into the sea fog #shorts",
+          "published": "2026-09-19T16:39:45Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "TBBbpBmhU84",
+          "title": "The Shard, into the cloud #shorts",
+          "published": "2026-09-18T17:12:27Z",
+          "views": 2,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "fhiTiYsydlc",
+          "title": "Petronas Towers, into the cloud #shorts",
+          "published": "2026-09-17T19:51:04Z",
+          "views": 11,
+          "views_48h": 10,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "WqW9NzYkK6U",
+          "title": "Marina Bay Sands, into the cloud #shorts",
+          "published": "2026-09-15T17:46:52Z",
+          "views": 6,
+          "views_48h": 3,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "pCl5mRYyZ3E",
+          "title": "Taipei 101, through the clouds #shorts",
+          "published": "2026-09-14T19:45:25Z",
+          "views": 11,
+          "views_48h": 9,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "bvIyf9ocL3E",
+          "title": "Taipei 101, into the cloud #shorts",
+          "published": "2026-09-13T17:55:33Z",
+          "views": 16,
+          "views_48h": 13,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 11
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 49,
+        "total_views": 24835,
+        "total_videos": 17
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "DCRmCGoOWY8",
+          "title": "Para teklif etti, anneannem kapıyı tuttu. 🚪",
+          "published": "2026-09-19T18:38:46Z",
+          "views": 1001,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "b-P-RMXmEX0",
+          "title": "Anneannem kapıyı açtı, sonra o kadın geldi. 🚪",
+          "published": "2026-09-15T19:27:44Z",
+          "views": 1390,
+          "views_48h": 1360,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "yPcVS9n1NWk",
+          "title": "Birkaç gün mü dedin? Hemen buraya geliyorsunuz. ☎️",
+          "published": "2026-09-14T16:59:34Z",
+          "views": 3921,
+          "views_48h": 2570,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "qRX-bja4BwM",
+          "title": "Süreniz doldu. Evi bugün boşaltacaksınız. 📦",
+          "published": "2026-09-13T17:49:03Z",
+          "views": 1585,
+          "views_48h": 1383,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1364.0
+    }
+  }
+}
