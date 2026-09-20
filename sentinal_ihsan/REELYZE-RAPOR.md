@@ -1451,3 +1451,88 @@ yayin %93'u.**
 Bolum 8'in sonundaki uyari gecerli: konsept, ekran yazisi ve muzik ayni anda
 degisti. Ayrica surum A ile B arasindaki fark da ayri bir degisken. Tuttugunda
 hangisinin yaptigi ayristirilamaz.
+
+
+# EK 9 , 20 Eylul 2026: "gercekcilik yok" olculdu, sebep OPTIK
+
+Ihsan iki referans reel gosterdi ve "videolar cok cok cok kotu cikiyor,
+gercekcilik yok, bu yuzden izlenmiyor" dedi. Ayrica "tek video, tek karede
+her sey" istedi.
+
+## 1. Bicim SUCSUZ , ve "tek kare" zaten var
+
+| Video | Coz. | fps | Sure | Kesme | Kelime | LUFS |
+|---|---|---|---|---|---|---|
+| ref DcVUi14TlS7 | 1080x1920 | 24 | 12,06 | **0** | 0 | -14,2 |
+| ref DcYBduSzf-A | 1080x1920 | 24 | 12,24 | **0** | 0 | -14,5 |
+| ep09 (26.456 izlenme) | 1080x1920 | 30 | 10,02 | **0** | 0 | -14,8 |
+| ep11 | 1080x1920 | 24 | 10,12 | **0** | 0 | -14,4 |
+| ep13 | 1080x1920 | 24 | 10,12 | **0** | 0 | -14,2 |
+
+Bes videonun da kesme sayisi SIFIR. "Tek karede her sey" istegi bu seride
+11 Eylul'den beri KARSILANIYOR; degistirecek bir sey yok. Cozunurluk, kare
+hizi, sessizlik ve gurluk de referanslarla ayni. **Bicim tartismasi kapandi.**
+Tek fark sure: referanslar 12,1-12,2 sn, biz 10,1 sn.
+
+## 2. Ayrisan tek olcu: keskinligin kareye YAYILMASI
+
+Karenin yuzde kaci esigin uzerinde keskin (t=0 / t=3):
+
+| Video | keskin% |
+|---|---|
+| ref DcVUi14TlS7 | **12,5 / 8,8** |
+| ref DcYBduSzf-A | **4,0 / 9,3** |
+| ep09 | 41,5 / 42,4 |
+| ep11 | 41,6 / 34,4 |
+| ep13 | 32,4 / 33,5 |
+
+Ortusme YOK: referans tavani %12,5, bizim tabanimiz %32,4.
+
+Fotografik bir goruntude keskinlik DARDIR , sig alan derinligi ve hareket
+bulanikligi kareye bir derinlik ekseni verir. Sentetik render'da kare bastan
+basa keskindir. Olculen sey tam olarak budur.
+
+## 3. Sikistirma hipotezi CURUTULDU
+
+Instagram daha dusuk bit hiziyla servis ediyor (1,60-1,67 Mbps vs bizim
+2,08-4,33 Mbps) ve bu tek basina yumusakligi aciklayabilirdi.
+Kontrol: ep09 referanslarin bit hizina (1600k) yeniden kodlandi ve ayni
+olcu tekrarlandi. **%42,4 -> %42,6.** Degismedi.
+Fark kodlamadan degil OPTIKTEN geliyor.
+
+## 4. Kok sebep: dort belge kadraji konusuyordu, ikiye bolunmuslerdi
+
+| Belge | Ne diyordu | Motora gidiyor mu |
+|---|---|---|
+| series.json shot_plan | "from the wide establishing frame" | **EVET** |
+| replenish.py framing cumlesi | "push-in from a wide establishing frame" | **EVET** |
+| DOKTRIN.md kural 9 | "yaratik buyuk ve yakin, kareyi doldurur" | hayir |
+| bible qc.notes | "LARGE and CLOSE... small or distant is a FAIL" | hayir |
+
+Motora gidenler kazandi. Ustelik qc.notes karara HIC girmiyor (bkz. EK'ler:
+"notlar karara girmez"). ep13 bu yuzden %33 keskinlikle ve kucuk, uzak bir
+yaratikla `artifact 0/10` alip yayinlandi.
+
+**Sentetik gorunum bir uslup tercihi degildi, genis kadrajin SONUCUYDU:**
+her sey ayni uzaklikta olunca odaklanacak derinlik kalmiyor.
+
+## 5. Yapilan (c45b323)
+
+- shot_plan yakin kadraja cevrildi: alcak ve yakin kamera, yaratik ILK
+  saniyede kareyi doldurur, on planda odak disi ekip omzu/rig, arkada odak
+  disi mavi perde, tek yanli sert anahtar isik, elde kamera, sig alan
+  derinligi, hareket bulanikligi.
+- Kadraj cumlesi koddan cikarildi, `auto_replenish.framing_style` ile seri
+  basina ayarlanir oldu (title_card_style ile ayni kalip). Varsayilan metin
+  korundu, tek tuketici wild-encounter.
+- `tools/kadraj_optik.py` eklendi. **KAPI DEGIL, OLCER.** Serinin kendi dersi
+  "once olcum, sonra kapi"; esik yalniz isaretler.
+
+## 6. Acik kalan , bundan kural cikarma
+
+n kucuk: iki referans, uc bolum. Ayrim total ama nedensellik KANITLANMADI.
+Kanal ici veri de hipotezi ZORLUYOR: ep09 %41,5 keskinlikle kanal rekoru
+(26.456). Yani "yayilmis keskinlik" tek basina izlenmeyi acikliyor olamaz;
+acikladigi sey Ihsan'in GORDUGU fark. Yeni kadrajla 3-5 bolum ciktiktan
+sonra keskin% ile izlenme birlikte olculmeli.
+Sure farki (12,1 vs 10,1 sn) de ayri bir degisken, DENENMEDI.
