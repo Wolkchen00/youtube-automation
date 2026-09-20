@@ -777,8 +777,26 @@ def _verify_native_audio_delivery(bible: Bible, number: int, final_ep: Path, *,
     return False
 
 
-def _verify_audio_master(path: Path, target_lufs: float) -> bool:
-    """Master teslimini fail-closed LUFS/true-peak kapısından geçir."""
+# core.master_policy taban karsilastirmasini ayni toleransla yapar
+# (EPS = 1e-9). Iki kapi ayni sayiyi kullanmak zorunda, yoksa taban
+# sinirindaki bir teslim birinde gecip digerinde kalir.
+MASTER_FLOOR_EPS = 1e-9
+
+
+def _verify_audio_master(path: Path, target_lufs: float,
+                         lufs_floor: float | None = None) -> bool:
+    """Master teslimini fail-closed LUFS/true-peak kapısından geçir.
+
+    ``lufs_floor`` verilirse, HEDEFIN ALTINDA ama tabanin uzerinde kalan
+    teslim kabul edilir, tipki core.master_policy'nin taban kabulu gibi.
+    Ikisi ayni sozlesmeyi konusmak ZORUNDA: 20 Eylul 2026'da konusmuyorlardi
+    ve wild-encounter ep12 bu yuzden oldu. master_audio "bu malzeme hicbir
+    kazancla hedefe ulasmiyor, taban kabulu" deyip -15,5 LUFS teslim etti,
+    bu dogrulayici tabandan habersiz oldugu icin ayni dosyayi bir satir
+    sonra [-15, -13] penceresine vurup bolumu QC hold'a dusurdu. Kanal o gun
+    yine karanlik kalacakti. Sessiz teslim mesru, SESSIZCE gecmek degil:
+    kabul edilen her taban teslimi loglanir. Hedefin USTU asla affedilmez.
+    """
     measured = ffmpeg_tools.measure_audio_loudness(path)
     if measured is None:
         logger.error(f"❌ Ses master doğrulaması ölçülemedi: {path}")
@@ -789,7 +807,19 @@ def _verify_audio_master(path: Path, target_lufs: float) -> bool:
         f"🎚️ Ses master doğrulaması {path.name}: "
         f"I={loudness:.1f} LUFS, TP={true_peak:.1f} dBTP"
     )
-    return abs(loudness - target_lufs) <= 1.0 and true_peak <= -1.0
+    if true_peak > -1.0:
+        return False
+    if abs(loudness - target_lufs) <= 1.0:
+        return True
+    if lufs_floor is not None and loudness < target_lufs:
+        if loudness >= float(lufs_floor) - MASTER_FLOOR_EPS:
+            logger.warning(
+                f"⚠️ Ses master taban kabulu {path.name}: I={loudness:.1f} LUFS "
+                f"hedef {target_lufs:.1f} altinda ama {float(lufs_floor):.1f} "
+                f"tabaninin uzerinde, teslim KABUL edildi."
+            )
+            return True
+    return False
 
 
 def _audio_master_hold(reason: str) -> ProduceResult:
@@ -2428,13 +2458,16 @@ def _produce_episode_impl(slug: str, plan, dry_run: bool = False,
                 ffmpeg_tools.remux_audio(upscaled, mastered_1080, upscaled)
             except Exception as error:
                 return _audio_master_hold(f"4K master ses remux başarısız: {error}")
-            if not _verify_audio_master(delivery_1080, master_lufs):
+            if not _verify_audio_master(delivery_1080, master_lufs,
+                                        bible.master_lufs_floor):
                 return _audio_master_hold("delivery_1080 ses doğrulaması başarısız")
-            if not _verify_audio_master(upscaled, master_lufs):
+            if not _verify_audio_master(upscaled, master_lufs,
+                                        bible.master_lufs_floor):
                 return _audio_master_hold("4K master ses doğrulaması başarısız")
             final_ep = upscaled
         else:
-            if not _verify_audio_master(mastered_1080, master_lufs):
+            if not _verify_audio_master(mastered_1080, master_lufs,
+                                        bible.master_lufs_floor):
                 return _audio_master_hold("final ses doğrulaması başarısız")
             final_ep = mastered_1080
 
