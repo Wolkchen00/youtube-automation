@@ -1536,3 +1536,51 @@ Kanal ici veri de hipotezi ZORLUYOR: ep09 %41,5 keskinlikle kanal rekoru
 acikladigi sey Ihsan'in GORDUGU fark. Yeni kadrajla 3-5 bolum ciktiktan
 sonra keskin% ile izlenme birlikte olculmeli.
 Sure farki (12,1 vs 10,1 sn) de ayri bir degisken, DENENMEDI.
+
+## 7. UCUNCU REFERANS (IG DcB774HzWs1), ayni gun
+
+Ihsan ucuncu bir reel gosterdi. 1080x1920 / 24 fps / **0 kesme** / 0 kelime /
+-14,2 LUFS. Bicim yine AYNI.
+
+### Imza 1 dogrulandi, n=3
+
+keskin%: **5,0 / 4,6**. Referans araligi artik **%4,0-12,5** (uc video, alti
+olcum), bizimki **%32,4-42,4** (uc bolum, alti olcum). Ortusme YOK.
+
+### Imza 2 olculdu: kamera EKIBIN ARKASINDA
+
+Uc referansin ucunde de alt ucte buyuk, koyu, odak disi kafa siluetleri var.
+
+| Video | alt ucte koyu piksel | alt/orta parlaklik |
+|---|---|---|
+| ref DcB774HzWs1 | **%86,4** | **0,36** |
+| ref DcYBduSzf-A | **%78,2** | **0,59** |
+| ref DcVUi14TlS7 | **%69,4** | **0,83** |
+| ep11 | %53,3 | 0,62 |
+| ep13 | %6,9 | **1,50** |
+| ep09 | %4,7 | **1,43** |
+
+Referanslarda alt uc her zaman ortadan KOYU (oran < 1). ep09 ve ep13'te alt uc
+ortadan AYDINLIK (1,43 ve 1,50), cunku orada isikli bos studyo zemini var.
+Ikisi de 'dusuk ayrinti' bolge ama biri derinlik ipucu, oteki olu alan.
+ep11 bu olcude kismen referans kalibinda, yani ayrim imza 1 kadar keskin DEGIL.
+
+shot_plan buna gore keskinlestirildi: 'odak disi omuz' yerine 'alt kenari
+dolduran iki uc koyu, odak disi kafa'.
+
+### Imza 3: SURE, ve bu bizde MOTOR SINIRI
+
+Uc referans da bizden uzun: **12,06 / 12,24 / 15,14 sn** vs bizim 10,0-10,1 sn.
+Uc-uce, ortusme yok. Ama bu bir tercih degil KISIT: Kie Omni sure enum'u
+4/6/8/10 (core/env.py). 12-15 sn icin motor Seedance olmali (4-15 sn,
+flythrough seridi zaten orada kosuyor).
+
+**DENENMEDI.** 13 Eylul olcumu 10 sn TEK PLAN ile 23 sn 3x8'i kiyasladi ve tek
+plani kazandirdi; 12-15 sn TEK PLAN hic test edilmedi. Motor degisimi ayri bir
+karar, Ihsan'a birakildi.
+
+### Hala kural cikarma
+
+Iki imza da Ihsan'in GORDUGU farki acikliyor, izlenmeyi DEGIL. ep09 her iki
+olcude de bizim en kotumuz (keskin %41,5, alt koyu %4,7) ve kanal rekoru
+(26.456). Yeni kadrajla 3-5 bolum ciktiktan sonra birlikte olculmeli.
