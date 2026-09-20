@@ -104,6 +104,30 @@ def test_only_built_sets_are_offered_to_the_plan_writer():
     assert envs == {"jungle_set", "ocean_tank_set", "desert_ruins_set"}
 
 
+def test_full_frame_creature_still_feeds_the_production_gate():
+    """Yaratık kareyi doldurur AMA yapım öğesi kareden çıkmaz.
+
+    20 Eylul 2026 Ihsan karari: yaratik kareyi TAMAMEN doldursun (referans
+    DcYBduSzf-A kalibi). Bu tek basina bible qc.notes'taki kapiyla celisirdi:
+    "THE PRODUCTION MUST BE VISIBLE ... A clip in which no production element
+    is visible, so that it reads as location footage, is a FAIL." Kapi klibi
+    kredi HARCANDIKTAN SONRA reddeder, yani celiski dogrudan karanlik gun
+    demektir. Referansin kendisi cozumu gosteriyor: timsah kafasi tum kareyi
+    kapliyor ve sag altta bir ekipman kasasi duruyor.
+
+    Bu test iki ifadenin birlikte durdugunu kilitler. Biri silinirse kirmizi
+    yanar, sessizce kredi yakmaz.
+    """
+    tek = _json("series.json")["auto_replenish"]["shot_plan"][0].lower()
+    assert "fills the whole frame" in tek
+    assert "production element" in tek, "yapim ogesi kareden cikarilmis"
+    assert "blue screen" in tek, "ikinci yapim ogesi kareden cikarilmis"
+    notes = _json("bible.json")["series"]["qc"]["notes"]
+    assert "THE PRODUCTION MUST BE VISIBLE" in notes, (
+        "kapi metni degismis, shot_plan ile birlikte gozden gecir"
+    )
+
+
 def test_daily_lane_publishes_the_single_shot_format_automatically():
     """13 Eylul: tek plan 10 sn formati CANLI.
 

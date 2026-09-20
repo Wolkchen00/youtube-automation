@@ -1584,3 +1584,59 @@ karar, Ihsan'a birakildi.
 Iki imza da Ihsan'in GORDUGU farki acikliyor, izlenmeyi DEGIL. ep09 her iki
 olcude de bizim en kotumuz (keskin %41,5, alt koyu %4,7) ve kanal rekoru
 (26.456). Yeni kadrajla 3-5 bolum ciktiktan sonra birlikte olculmeli.
+
+## 8. DUZELTME: keskinlik farki kadrajdan DEGIL, motordan geliyor
+
+Ihsan itiraz etti: "adamlar Seedance 2.0 ile tek videodan cok iyi performans
+aliyorlar, biz Omni kullaniyoruz". Kendi Seedance seridimiz olculdu.
+
+| Video | Motor | keskin% |
+|---|---|---|
+| flythrough Halley RYLhgm7WDJ0 | **Seedance** | 2,2 / 2,7 |
+| flythrough Crab Nebula OH4lYYuquNY | **Seedance** | 5,3 |
+| flythrough Enceladus XM0TaR_E7bA | **Seedance** | 8,2 |
+| ref DcYBduSzf-A | ? | 4,0 / 9,3 |
+| ref DcB774HzWs1 | ? | 4,6 / 5,0 |
+| ref DcVUi14TlS7 | ? | 8,8 / 12,5 |
+| ep09 / ep11 / ep13 | **Omni** | 32,4 - 42,4 |
+
+Bizim Seedance seridimiz referanslarla AYNI BANDA dusuyor, Omni seridimiz
+ikisine de yaklasmiyor. Ustelik flythrough tamamen farkli bir kadraj: uzayda
+genis FPV dalis, ekip yok, on planda engel yok. **Yani dusuk keskinligi kadraj
+uretmiyor.** EK 9 bolum 4'teki "kok sebep kadraj celiskisi" ifadesi FAZLA
+IDDIALIYDI: kadraj celiskisi gercek ve duzeltmesi yerinde, ama olculen
+keskinlik farkinin sahibi o degil.
+
+Confound tam elenmedi: uzay goruntusu dogasi geregi daha duz. Ama en dokulu
+Seedance karesi (Enceladus, buz yuzeyi ve gayzerler) %8,2 ve bu hala Omni
+tabanimizin (%32,4) dort kati altinda.
+
+### Ayrica iki olgu duzeltildi
+
+- "2 tane 10 sn video kullaniyoruz" bugun DOGRU DEGIL: ep13 olculdu, tek klip,
+  0 kesme, 10,12 sn; yapilandirma `shots=1, shot_seconds=10`. Depoda
+  `shots=2, sn=10` olan tek seri arsivlenmis `flashpoints`.
+- "Seedance 720p'ye dusurur" ifadem yaniltiyordu: `kie_api.py:501` istegi 720p'ye
+  kelepceliyor ama YAYINLANAN flythrough 1080x1920. Kaynak 720p, boru hatti
+  1080'e cikariyor; yumusakligin bir kismi muhtemelen buradan geliyor.
+
+### Ihsan karari (20 Eylul)
+
+1. **Seedance'e GECILMEYECEK.** Once yeni kadrajin olcusu alinacak.
+2. **Yaratik kareyi TAMAMEN doldursun** (DcYBduSzf-A kalibi).
+
+Ikinci karar tek basina `qc.notes`'taki yapim-gorunurlugu kapisiyla
+CELISIRDI ve klip kredi harcandiktan SONRA reddedilirdi. Referansin kendisi
+cozumu gosteriyor: timsah kafasi tum kareyi kapliyor ve sag altta ekipman
+kasasi duruyor. shot_plan artik ikisini birlikte yaziyor (alt kenarda tek
+koyu yapim ogesi + arkada odak disi mavi perde). Kapiya DOKUNULMADI.
+Kilit: `tests/test_wild_encounter_contract.py::
+test_full_frame_creature_still_feeds_the_production_gate`.
+
+### Acik kalan olcum
+
+Seedance hipotezi UCUZ VE KESIN test edilebilir: tek wild-encounter bolumu
+Seedance 15 sn ile uretilir ve keskin% olculur (~430 kredi). Ihsan simdilik
+hayir dedi. Yapilirsa tek is, bolum basina KOMPOZE ILK KARE uretmek:
+`resolve_visual_shot` bugun ya ortam referansini ya karakter portresini
+veriyor, ikisi de sahne degil (series/shots.py:430).
