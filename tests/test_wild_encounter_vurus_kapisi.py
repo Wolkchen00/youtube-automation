@@ -149,7 +149,11 @@ def test_every_queued_plan_carries_an_observation_naming_its_creature():
             assert name in observation, (
                 f"{path.name}: gozlem yaratigi adlandirmiyor, kapi neyi arayacagini bilemez"
             )
-    assert checked, "kuyrukta uretilecek plan yok"
+    if not checked:
+        # Son bolum yayinlandiktan sonra, bir sonraki ikmale kadar kuyruk
+        # mesru olarak BOSTUR. Bunu kirmiziya cevirmek gercek arizalari
+        # golgeleyen gunluk bir yanlis alarm uretiyordu.
+        pytest.skip("kuyruk su an bos (son bolum yayinlandi, ikmal bekleniyor)")
 
 
 @pytest.mark.parametrize("creature", [

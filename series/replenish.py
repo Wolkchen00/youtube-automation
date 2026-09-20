@@ -142,7 +142,26 @@ PLATO_OBJECT_RULE = (
     'than "he shows no harm". Each shot prompt holds only its own details; the engine adds the '
     'SHOT_PLAN line in front of it.'
 )
-PLATO_SINGLE_SHOT_OBJECT_RULE = (
+# Kadraj cumlesi 20 Eylul 2026'da SERI-AYARLI yapildi. Oncesinde burada
+# 'slow continuous push-in from a WIDE ESTABLISHING FRAME' SABIT yaziyordu ve
+# object_card.framing araciligiyla her cekim promptuna mekanik olarak giriyordu.
+# Ayni anda doktrin kural 9 ve bible qc.notes 'creature must be LARGE and CLOSE,
+# filling much of the frame, a small or distant creature is a FAIL' diyordu.
+# Yani MOTORA giden iki belge GENIS, YARGILAYAN iki belge YAKIN istiyordu ve
+# motora gidenler kazaniyordu. Olcum: referans reel'lerde karenin yalniz
+# %4-13'u keskin (sig alan derinligi + hareket bulanikligi), bizim uc
+# bolumumuzde %32-42, yani kare bastan basa keskin. Bit hizi esitlenerek
+# kontrol edildi (ep09 1600k'ya indirildi: %42,6, degismedi), yani fark
+# sikistirma degil OPTIK. Varsayilan metin KORUNUYOR, seri istedigini yazar.
+PLATO_SINGLE_SHOT_DEFAULT_FRAMING = (
+    'one sentence for a slow continuous push-in from a wide establishing frame '
+    'toward the action'
+)
+
+
+def plato_single_shot_object_rule(framing_style: str | None = None) -> str:
+    framing_style = (framing_style or PLATO_SINGLE_SHOT_DEFAULT_FRAMING).strip().rstrip('.')
+    return (
     '\n- CREATURE_CARD: output exactly one object_card for the ONE giant creature of this episode. '
     'name: the real, recognisable animal alone, such as "giant crocodile". descriptor: how the '
     'creature LOOKS ALIVE in at least 12 words: animal, colour, skin texture, eyes, teeth and height '
@@ -153,8 +172,7 @@ PLATO_SINGLE_SHOT_OBJECT_RULE = (
     'anomaly_descriptor and the final-seconds reveal inside the shot prompt. The film studio uses '
     'a blue screen with tracking markers and clear air. environment: the available environment id '
     'whose minimal built set matches the animal\'s natural habitat; the shot uses that same id. '
-    'framing: one sentence for a slow continuous push-in from a wide establishing frame toward the '
-    'action. anomaly_descriptor: one sentence on how the crew open the practical jaws by hand in '
+    'framing: ' + framing_style + '. anomaly_descriptor: one sentence on how the crew open the practical jaws by hand in '
     'the reveal. STORY ORDER INSIDE THE SAME SHOT: the creature first appears alive and threatening, '
     'takes the recurring man into its mouth, then the crew open its jaws and the man steps out '
     'unharmed in the final seconds. The shot prompt ends with one positive sound sentence such as '
@@ -1125,7 +1143,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         'translucent edge glinting under the water". '
         'OBJECT IDENTITY AND ANOMALY MUST AGREE: descriptor and anomaly_descriptor are composed into ONE hero reference image, so they must never contradict each other about the same surfaces, edges or material. Write object_card.descriptor as the object LOOKS WHILE the anomaly is active; when the anomaly changes the object\'s own geometry or material, describe the changed object, never its intact "before" state. BAD: descriptor "smooth rounded edges" with anomaly "sharp fracture edges and glossy shards". GOOD: descriptor "one bright glassy break face along its long edge" with anomaly "sharp conchoidal fracture edges and glossy translucent shards".'
         if compose_object_prompt else
-        (PLATO_SINGLE_SHOT_OBJECT_RULE if single_shot else PLATO_OBJECT_RULE)
+        (plato_single_shot_object_rule(cfg.get("framing_style"))
+         if single_shot else PLATO_OBJECT_RULE)
         if plato else
         '\n- OBJECT_CARD: output exactly one object_card. Its descriptor states colour, material, '
         'size and one distinguishing mark in at least 12 words. Copy that descriptor VERBATIM '

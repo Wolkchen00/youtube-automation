@@ -71,7 +71,15 @@ def test_shot_plan_is_the_single_beat_source():
     assert tek.startswith("ONE CONTINUOUS TAKE, NO CUTS."), tek[:48]
     for vurus in ("jaws open wide", "out of sight", "push its", "climbs out"):
         assert vurus in tek, f"vurus eksik: {vurus}"
-    assert "pushes in slowly" in tek
+    # 20 Eylul 2026: "pushes in slowly from the wide establishing frame"
+    # KALDIRILDI. Olcum: referans reel'lerde karenin %4-13'u keskin, bizim
+    # uc bolumumuzde %32-42; fark sikistirma degil OPTIK (ep09 referans bit
+    # hizina indirilince %42,6 ile degismedi). Genis acilis her seyi ayni
+    # uzakliga koyuyor, yani odaklanacak derinlik BIRAKMIYOR.
+    assert "wide establishing" not in tek.lower()
+    for optik in ("low and close", "shallow depth of field", "out of focus",
+                  "motion blur"):
+        assert optik in tek.lower(), f"kadraj sozlesmesi eksik: {optik}"
     dusuk = tek.lower()
     assert "blue screen" in dusuk
     for yasak in ("haze", "fog", "green screen"):
@@ -104,7 +112,11 @@ def test_daily_lane_publishes_the_single_shot_format_automatically():
     Cron dosyasina hic dokunulmadi; yayini durduran ve acan sey status alani.
     """
     series = _json("series.json")
-    assert series["status"] == "active"
+    # "completed" MAKINE durumudur: son bolum yayinlaninca yazilir ve bir
+    # sonraki kosuda replenish onu "active"e geri cevirir (replenish.py:2226).
+    # Testin yalniz "active" kabul etmesi, her son-bolum gununde yanlis
+    # alarm uretiyordu. Insan karari olan "paused"/"draft" HALA reddedilir.
+    assert series["status"] in ("active", "completed"), series["status"]
     assert series["publish_mode"] == "auto"
     replenish_cfg = series["auto_replenish"]
     assert replenish_cfg["enabled"] is True
