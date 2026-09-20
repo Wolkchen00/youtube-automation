@@ -14,7 +14,7 @@
   "publish_mode": "auto",
   "status": "active",
   "priority": 999,
-  "total_parts": 8,
+  "total_parts": 11,
   "next_part": 6,
   "doctrine_sha256": "720aedb47ff8920afee4b50490bcdddd80d3fbf68e086f113336894cd0e03a6b",
   "kurulum_notu": "13 Eylul 2026'da kuruldu (flashpoints'in yerine) ve AYNI GUN CANLIYA ALINDI. Ihsan karari: 'tamam bunu paylasalim, yeni pipeline bunu yerlestirelim, her gun yeni bir populer sehir olsun'. Ilk bolum ISTANBUL 2512 elle yayinlandi, sonrasi still-home.yml 20:30 UTC cron'una birakildi. publish_mode=auto, canli gunluk seridin (wild-encounter) filo gelenegiyle ayni. Durdurmak icin: status='paused' + still-home.yml schedule blogunu yorumla. | 2026-09-15 v2.0 (Ihsan iki direktifi): (1) 'daha hizli gecisler lazim tek videoda 3 sahne gecisi istiyorum' -> 2 cekim 4 cekime cikti, micro_trim 0,75 ile bolum 4 x 2,5 = 10,0 sn ve 3 sert kesme tasiyor. (2) 'ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun, videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine teknolojinin nasil gelistigini anlatan bir video olsun' -> konsept yikim-sonrasi uyarlamadan ILERI TEKNOLOJIYE cevrildi: alti aile de degisti, 36 konunun 36'si yeniden yazildi, art_style ve qc.notes felaket estetigini otomatik fail sayiyor. | 2026-09-18 v3.0 (Ihsan direktifi 'izleyenleri ilk 3 saniye ekrana kitlememiz lazim'): SILUET KURALI. Teknoloji artik siluet degistiren FIZIKSEL bir yapidir ve ilk karede tamamlanmis durur; isik tek basina 2512 diyemez. Isik surucu iki aile (enerji mimarisi, yasayan malzeme) GECE geciyor. 36 konunun 18'i siluet-onceli yeniden yazildi. Cekim 2'ye gecis (traversal) zorunlulugu geldi (olculen olu bolge: hareket 5 vs cekim 3'te 15). Ilk-kare QC kapisi seri-farkindali yapildi (critic.py first_frame_rule): eski metin unnatural-lab icin yazilmisti ve part 3'un bugunku Paris'ini IKI KEZ gecirdi. Kesme sayisi DEGISMEDI, 3 kesme olculdu ve korundu.",
@@ -265,8 +265,8 @@
     ],
     "shot_plan_note": "2026-09-15 v2.0 (Ihsan): 2 cekim -> 4 cekim, 3 sert gecis. micro_trim 0,75 ile her ham 4 sn klip 2,5 sn'ye iner, bolum 10,0 sn olur (olculen referans kazanani 10,1 sn). Cekimler OLCEK sirasina gore dizildi: havadan -> yer seviyesi -> makine -> sicak ayrinti. Odul (insanlar) 4,0 sn yerine 2,5 sn'de gelir. v1.1 dersi korunuyor: cekim 2 sablonu iki kapiya birden carpiyordu, (a) 'signage' istiyordu ama qc.notes okunabilir yaziyi otomatik fail sayiyor, (b) 'People fill the frame' + goz hizasi kalabalik QC'nin SIKI anatomi kapisi icin en riskli kompozisyon. Figurler artik kare yuksekliginin 1/6'si ve orta plandan geriye; on ucte bir bos. Cekim 3 ve 4 zaten insansiz, yani dort cekimin yalniz BIRI anatomi riski tasiyor.",
     "last_run": {
-      "at": "2026-09-18T17:47:11.993635+00:00",
-      "parts": "4-6"
+      "at": "2026-09-20T22:44:14.047882+00:00",
+      "parts": "7-11"
     },
     "title_card_style": "\"title\" = the real city's name in CAPITAL LETTERS, then a single space, then the year 2512, and NOTHING else. Correct: \"DUBAI 2512\", \"TOKYO 2512\", \"NEW YORK 2512\", \"CAPE TOWN 2512\". Wrong: \"Orbital Tether\", \"Burj Khalifa\", \"Dubai's Living Skin\", \"DUBAI 2512 - Living Skin\". Max 34 characters. \"subtitle\" = ALWAYS the empty string \"\". Never write the landmark, the country, the technology, a tagline or any other text into \"subtitle\"; the field must be exactly \"\".",
     "forbidden_phrases": {
