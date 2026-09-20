@@ -57,7 +57,17 @@
       "enforce": {
         "violation_reads": true
       },
-      "enforce_note": "2026-09-18 ACILDI. Oncesinde enforce null idi, yani HICBIR ROCK-B alani kapi degildi; ustelik bu seride violation_observation hic yazilmadigi icin alan istenmiyordu bile. Sonuc: vurusu hic teslim etmeyen klip 'pass, artifact 0/10' alip yayinlandi (ep11 dev kalamar, 18 Eyl). Kare olcumu: ep09 kutup ayisi vurusu tam teslim etti ve 36.070 izlenme ile kanal rekoru; ep11 temas/kaybolma/cikis ucunu de teslim etmedi. Kapi ARTIK vurusun VARLIGINI denetliyor, uslubunu degil: agiz adamin uzerine kapanir, adam gozden kaybolur, ekip agzi acar, ayni adam disari cikar. Bunlarin biri eksikse klip REDDEDILIR ve yeniden uretilir. Uslup inceligi (adam ALINIYOR mu yoksa kendi mi giriyor) bilerek kapiya BAGLANMADI: belirsiz bir kriter yanlis retle kredi yakar, once olcum."
+      "enforce_note": "2026-09-18 ACILDI. Oncesinde enforce null idi, yani HICBIR ROCK-B alani kapi degildi; ustelik bu seride violation_observation hic yazilmadigi icin alan istenmiyordu bile. Sonuc: vurusu hic teslim etmeyen klip 'pass, artifact 0/10' alip yayinlandi (ep11 dev kalamar, 18 Eyl). Kare olcumu: ep09 kutup ayisi vurusu tam teslim etti ve 36.070 izlenme ile kanal rekoru; ep11 temas/kaybolma/cikis ucunu de teslim etmedi. Kapi ARTIK vurusun VARLIGINI denetliyor, uslubunu degil: agiz adamin uzerine kapanir, adam gozden kaybolur, ekip agzi acar, ayni adam disari cikar. Bunlarin biri eksikse klip REDDEDILIR ve yeniden uretilir. Uslup inceligi (adam ALINIYOR mu yoksa kendi mi giriyor) bilerek kapiya BAGLANMADI: belirsiz bir kriter yanlis retle kredi yakar, once olcum.",
+      "correction_lexicon": {
+        "audio": "Let the only sound be the creature's movement, the man's footsteps and the quiet room tone of the studio stage.",
+        "face": "Keep the man's face clearly visible and matching the reference portrait exactly in bone structure, hairline, beard and skin tone.",
+        "object": "Match the creature's exact shape, colour, scale, material and skin markings in every frame.",
+        "continuity": "Continue from the established studio stage, preserving its lighting, the creature's position and the man's position from the previous moment.",
+        "opening": "Open on a wide establishing frame of the studio stage with the creature and the production equipment both clearly visible.",
+        "anatomy": "Render the man and every crew member with natural anatomy, one head, two arms, two legs, and five fingers on each hand.",
+        "text": "Show a clean studio stage image filled only with real set detail: bare concrete, sand, rock, rigs, cables and the blue screen wall.",
+        "generic": "Render a coherent realistic take with stable geometry, lighting, materials, and motion."
+      }
     },
     "duration_band": [
       9,

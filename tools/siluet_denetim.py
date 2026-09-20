@@ -8,13 +8,22 @@ Isigin kapali hali oldugu icin motor once bugunun Paris'ini cizdi ve isigi
 ve bolum 21 izlenmede kaldi (P1 648, P2 875). Bu denetim ayni kazayi bir
 daha ucret odemeden yakalar.
 
-Denetlenen bes kural:
+Denetlenen alti kural:
   1. Cekim 1'de durum-gecisi dili YASAK (once/sonra hali olan her kalip).
   2. Zayiflik dili YASAK: kanca "subtle" olamaz.
   3. Isik surucu aileler (enerji mimarisi, yasayan malzeme) GECE ya da
      alacakaranlik gecer.
   4. HER cekimde pozitif dil (doktrin kural 9), SABLON on-eki dahil.
   5. Plan damgasi guncel doktrinle eslesir.
+  6. KISI BICIMLI ANIT ya da gercek kisi adi YASAK (doktrin kural 7).
+
+Kural 6'nin olculen gerekcesi (19 Eylul 2026, kosu 35473217835): part 5
+Rio'nun cekim 1 ve cekim 3 prompt'lari "Christ the Redeemer" yaziyordu.
+Doktrin 7 zaten "gercek kisi YOK" diyordu ama hicbir kapi bunu denetlemiyordu.
+Cekim 3'un regen'i saglayicida "flagged for containing a prominent public
+figure" ile 5/5 bloklandi, cekim dustu, min_shots=4 kapisi bolumu oldurdu ve
+kanal o gun karanlik kaldi. Ayni sinif KONSEPT 8.1'de zaten yaziliydi:
+qc.notes'un (ve doktrinin) YASAKLADIGINI prompt ISTEYEMEZ.
 
 Kullanim:
     py -X utf8 tools/siluet_denetim.py
@@ -62,6 +71,14 @@ OLUMSUZ_DIL = (
     "avoid", "cannot", "absent", "lacks", "lacking",
 )
 
+# Doktrin kural 7: "Marka, gercek sirket logosu, gercek kisi YOK".
+# Liste TEK yerde durur (series/omni_api.py), cunku ayni adlar calisma aninda
+# da temizleniyor. Kapi ile kurtarma yolunun ayni listeyi gormesi sarttir.
+try:
+    from series.omni_api import PUBLIC_FIGURE_SUBJECTS
+except Exception:                      # denetim, import yuzunden COKMEZ
+    PUBLIC_FIGURE_SUBJECTS = ()
+
 ISIK_SURUCU_AILELER = {"enerji mimarisi", "yasayan malzeme"}
 KARANLIK = ["night", "dusk", "evening", "after dark", "twilight", "nightfall",
             "moonlit", "at dark"]
@@ -101,6 +118,22 @@ def denetle(plan_yolu: pathlib.Path, guncel_damga: str | None) -> list[str]:
                 f"cekim {n} olumsuz dil (doktrin kural 9): " + ", ".join(repr(h) for h in hits)
             )
 
+    # Kural 7: kisi bicimli anit / gercek kisi. Prompt'un yani sira caption ve
+    # kunye de denetlenir, cunku ad oralardan da sizabilir.
+    for etiket, metin in (
+        [(f"cekim {c.get('n') or '?'}", str(c.get("prompt") or "")) for c in cekimler]
+        + [("caption", str(plan.get("caption") or "")),
+           ("kunye", json.dumps(plan.get("title_card") or {}, ensure_ascii=False))]
+    ):
+        dusuk = metin.lower()
+        adlar = sorted({ad for ad in PUBLIC_FIGURE_SUBJECTS if ad in dusuk})
+        if adlar:
+            bulgular.append(
+                f"{etiket} kisi bicimli anit/gercek kisi adi geciyor "
+                "(doktrin kural 7, saglayici bunu 'prominent public figure' diye "
+                "bloklar): " + ", ".join(repr(a) for a in adlar)
+            )
+
     aile = str(plan.get("family") or "")
     if aile in ISIK_SURUCU_AILELER:
         govde = (cekim1 + " " + str(plan.get("synopsis") or "")).lower()
@@ -123,6 +156,8 @@ def main(argv: list[str] | None = None) -> int:
         description="still-home kuyrugunu siluet kuralina gore denetle")
     ayristirici.add_argument("--plan", action="append", default=None,
                              help="tek bir plan dosyasi (yinelenebilir)")
+    ayristirici.add_argument("--next-only", action="store_true",
+                             help="yalniz next_part'i denetle (uretim oncesi sert kapi)")
     args = ayristirici.parse_args(argv)
 
     try:
@@ -155,11 +190,23 @@ def main(argv: list[str] | None = None) -> int:
     except Exception:
         siradaki = 1
 
+    # --next-only: yalniz BU KOSUDA uretilecek bolum. Uretim oncesi sert kapi
+    # boyle kurulur, cunku kuyrugun ilerisindeki bir bulgu bu gecenin yayinini
+    # oldurmemeli; para harcanacak bolum neyse kapi onu denetler.
+    if args.next_only and not args.plan:
+        hedef = SERIES_DIR / "plans" / f"part{siradaki:02d}.json"
+        if not hedef.is_file():
+            print(f"HATA: siradaki bolum plani yok: {hedef}")
+            return 2
+        planlar = [hedef]
+        print(f"Sert kapi: yalniz part {siradaki} denetleniyor (uretilecek bolum).")
+
     toplam = 0
     denetlenen = 0
     for plan_yolu in planlar:
         eslesme = PART_NAME.search(plan_yolu.name)
-        if eslesme and not args.plan and int(eslesme.group(1)) < siradaki:
+        if (eslesme and not args.plan and not args.next_only
+                and int(eslesme.group(1)) < siradaki):
             continue
         denetlenen += 1
         bulgular = denetle(plan_yolu, guncel_damga)

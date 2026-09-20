@@ -126,6 +126,24 @@ jobs:
         continue-on-error: true
         run: python -X utf8 -m series.replenish --series still-home 2>&1 | tee logs/still_home_replenish.log
 
+      - name: Doktrin kapisi (uretimden ONCE, kredi harcamaz)
+        # tools/siluet_denetim.py 18 Eylul'de yazildi ama HICBIR yerde
+        # kosmuyordu: ne burada, ne testlerde. 19 Eylul'de part 5'in cekim 1 ve
+        # cekim 3 prompt'lari "Christ the Redeemer" yaziyordu, yani doktrin
+        # kural 7'yi ("gercek kisi YOK") aciktan cigniyordu. Kimse bakmadigi
+        # icin plan kuyruga girdi, cekim 3'un regen'i saglayicida "flagged for
+        # containing a prominent public figure" ile 5/5 bloklandi, min_shots=4
+        # kapisi bolumu oldurdu: 315 kredi, sifir video, karanlik kanal.
+        #
+        # Kapi SERT ve ikmalden SONRA kosar (yeni yazilan plani da gorur).
+        # Yalniz o gece uretilecek bolume bakar: kuyrugun ilerisindeki bir
+        # bulgu bu gecenin yayinini oldurmemeli.
+        #
+        # shell: bash = pipefail. Bu satir olmadan `| tee` python'un exit
+        # kodunu yutar ve kapi sessizce acik kalir (ROCK 3 dersi).
+        shell: bash
+        run: python -X utf8 tools/siluet_denetim.py --next-only 2>&1 | tee logs/still_home_doktrin.log
+
       - name: Produce + publish (Still Home siradaki bolum)
         id: produce
         env:

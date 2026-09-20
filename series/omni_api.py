@@ -12,6 +12,7 @@ Omni'ye özel:
 
 import json
 import random
+import re
 import time
 import requests
 
@@ -152,8 +153,12 @@ def poll_omni_task(task_id: str, max_attempts: int | None = None) -> dict | None
                 logger.info(f"✅ Omni klip hazır! ({attempt} poll, kredi={credits})")
                 return {"url": urls[0] if urls else None, "credits": credits, "raw": data}
             elif state in ("fail", "failed"):
-                logger.error(f"❌ Omni başarısız: {data.get('failMsg', '?')}")
-                return None
+                fail_msg = str(data.get("failMsg") or "?")
+                logger.error(f"❌ Omni başarısız: {fail_msg}")
+                # url YOK: cagiranin basarisizlik testi (result.get('url'))
+                # aynen calisir, ama sebep artik siniflandirilabilir.
+                return {"url": None, "credits": data.get("creditsConsumed"),
+                        "fail_msg": fail_msg, "raw": data}
             elif attempt % 5 == 0:
                 logger.info(f"⏳ Omni {state} ({attempt}/{attempts})")
         except Exception as e:
@@ -161,6 +166,79 @@ def poll_omni_task(task_id: str, max_attempts: int | None = None) -> dict | None
 
     logger.error(f"❌ Omni zaman aşımı ({attempts} deneme)")
     return None
+
+
+# ─── Icerik moderasyonu ─────────────────────────────────────────
+
+# Saglayici MODERASYONU gecici arizadan ayri ele alinir.
+#
+# OLCULEN GEREKCE (19 Eylul 2026, still-home ep05 cekim 3, kosu 35473217835):
+# regen prompt'u "Request blocked: The input content was flagged for containing
+# a prominent public figure" ile 5/5 reddedildi ve bolum oldu. Olcum: her blok
+# 15-46 sn icinde dondu, basarili uretim ise 75-90 sn suruyor. Yani karar
+# URETIM ONCESI, GIRDI METNI uzerinde veriliyor. Seed girdiyi degistirmedigi
+# icin bes denemenin besi de ayni cevabi aldi; eski koddaki "seed degisince
+# farkli kare uretilir, filtreden gecme sansi artar" varsayimi CIKTI tarafi
+# moderasyonu icin dogru, GIRDI tarafi blogu icin yanlisti.
+#
+# 20 Eylul'de AYNI metin yeniden olculdu ve GECTI (93 sn, 63 kredi): blok
+# kalici degil, olasiliksal. Dogru davranis bu yuzden "ayni metni tekrar dene"
+# degil, "blogun ADINI verdigi tetikleyiciyi metinden cikar, oyle dene".
+_MODERATION_MARKERS = (
+    "request blocked", "flagged", "public figure", "prominent people",
+    "prominent_people", "content policy", "safety filter", "blocked by",
+)
+
+# Kisi bicimli anitlar ve gercek kisiler.
+# shadowedhistory/KONSEPT.md 7 zaten "Marka, gercek sirket logosu, gercek kisi
+# YOK" diyor. Bu liste ayni kurali CALISMA ANINDA uygular: plan kurali cignemis
+# olsa bile cekim, metin temizlenerek kurtarilir.
+PUBLIC_FIGURE_SUBJECTS = (
+    "christ the redeemer", "cristo redentor", "statue of liberty",
+    "mount rushmore", "lincoln memorial", "the motherland calls",
+    "little mermaid statue", "manneken pis", "spring temple buddha",
+    "tian tan buddha", "great buddha", "statue of unity", "guanyin statue",
+    "buddha statue", "lenin statue", "mao statue", "david statue",
+    "ataturk monument", "atatürk monument", "jesus",
+)
+
+# Blok surerse kac deneme yapilir. Eski bes deneme ayni uc dakikalik pencereye
+# sigiyordu ve besi de ayni cevabi aliyordu; olcum blogun saatler icinde
+# gectigini gosterdi, yani ayni pencereyi zorlamanin degeri yok.
+_MODERATION_ATTEMPT_LIMIT = 3
+
+_SENTENCE_SPLIT = re.compile(r"(?<=[.?!])\s+")
+
+
+def is_moderation_block(fail_msg) -> bool:
+    """Saglayicinin mesaji icerik moderasyonunu mu anlatiyor?"""
+    text = str(fail_msg or "").lower()
+    return any(marker in text for marker in _MODERATION_MARKERS)
+
+
+def sanitize_public_figures(prompt: str) -> tuple[str, list[str]]:
+    """Kisi bicimli anit adini GECEN cumleleri prompt'tan dusur.
+
+    Cumlenin tamami dusurulur, cunku yalniz ad cikarilinca geriye "The
+    recognizable form of statue is visible past the mechanism" gibi bozuk bir
+    cumle kalir. Donus: (yeni_prompt, dusurulen_adlar). Hicbir sey bulunmazsa
+    ya da butun cumleler dusecekse prompt AYNEN doner.
+    """
+    text = str(prompt or "")
+    if not text.strip():
+        return text, []
+    found: list[str] = []
+    kept: list[str] = []
+    for sentence in _SENTENCE_SPLIT.split(text):
+        lowered = sentence.lower()
+        hits = [s for s in PUBLIC_FIGURE_SUBJECTS if s in lowered]
+        if hits:
+            found.extend(hits)
+        else:
+            kept.append(sentence)
+    if not found or not kept:
+        return text, []
+    return " ".join(part.strip() for part in kept if part.strip()), sorted(set(found))
 
 
 # ─── Yüksek seviye: tek çekim üret ─────────────────────────────────────────────
@@ -179,21 +257,55 @@ def generate_omni_shot(prompt: str, image_urls: list | None = None,
     if not ok:
         return None
     backoff = [10, 20, 30]
-    for attempt in range(1, max_retry + 1):
-        # Her denemede TAZE seed: içerik filtresi sabit payload'da hep aynı kareyi üretip
-        # hep takılır. Seed değişince farklı kare üretilir → filtreden geçme şansı artar.
+    working_prompt = prompt
+    sanitized = False
+    moderation_hits = 0
+    attempt = 0
+    while attempt < max_retry:
+        attempt += 1
+        # Her denemede TAZE seed: bu CIKTI tarafi moderasyonuna karsi ise yarar,
+        # cunku farkli kare uretilir. GIRDI tarafi blogunu seed COZMEZ; onu
+        # asagidaki metin temizligi cozer.
         attempt_seed = seed if (seed is not None and attempt == 1) else random.randint(1, 2_000_000_000)
-        payload = build_omni_payload(prompt, image_urls, audio_ids, character_ids,
+        payload = build_omni_payload(working_prompt, image_urls, audio_ids, character_ids,
                                      duration, aspect_ratio, resolution, attempt_seed)
         try:
             task_id = create_task(payload)
         except ServerError as e:
             logger.error(f"🚫 Omni create_task sunucu hatası (HTTP 500, geçici): {e}")
             task_id = None
+        fail_msg = ""
         if task_id:
             result = poll_omni_task(task_id)
             if result and result.get("url"):
                 return result
+            fail_msg = (result or {}).get("fail_msg") or ""
+
+        if is_moderation_block(fail_msg):
+            moderation_hits += 1
+            if not sanitized:
+                cleaned, removed = sanitize_public_figures(working_prompt)
+                if removed:
+                    working_prompt = cleaned
+                    sanitized = True
+                    logger.warning(
+                        "🧹 Omni icerik blogu: prompt'tan kisi bicimli anit "
+                        f"DUSURULDU ({', '.join(removed)}), cekim yeniden deneniyor. "
+                        "Plan bu adi hic yazmamaliydi (KONSEPT 7: gercek kisi YOK)."
+                    )
+                    continue
+                logger.warning(
+                    "⚠️ Omni icerik blogu, ama prompt'ta bilinen kisi bicimli "
+                    "anit YOK; temizlenecek metin bulunamadi."
+                )
+            if moderation_hits >= _MODERATION_ATTEMPT_LIMIT:
+                logger.error(
+                    f"⛔ Omni icerik blogu {moderation_hits} denemede surdu "
+                    f"(son mesaj: {fail_msg[:120]}). Blogun saatler icinde gectigi "
+                    "olculdu; ayni pencereyi zorlamak sure ve kredi yakar, birakiliyor."
+                )
+                return None
+
         if attempt < max_retry:
             wait = backoff[min(attempt - 1, len(backoff) - 1)]
             logger.warning(f"⚠️ Omni çekim denemesi {attempt}/{max_retry} başarısız — {wait}s sonra tekrar (seed değişiyor)")

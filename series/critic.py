@@ -964,51 +964,109 @@ def review_clip(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
 # ─── 3) Regen döngüsü ──────────────────────────────────────────────────────────
 
-def positive_correction(issue: str, *, environment: str | None = None) -> str:
-    """Turn one issue into one positive imperative without copying negative prose."""
+# Duzeltme sozlugu: kategori -> TEK olumlu cumle.
+# Taban sozluk unnatural-lab'in atolye dilidir, cunku yapilandirilmis duzeltme
+# yolunu (ROCK 3) ilk kullanan seri oydu. Baska konsepteki seriler kendi dilini
+# bible'da qc.correction_lexicon ile verir. Sozluk seri-korduyse atolye cumlesi
+# yanlis diziye sizar (olculdu: wild-encounter ep12, 19 Eylul 2026).
+_CORRECTION_LEXICON: dict[str, str] = {
+    # 19 Eylul 2026 (7b44efa): metin artik kadraj varsaymiyor, basarisizligin
+    # kendisini, yani insan sesini, olumlu bicimde hedefliyor.
+    "audio": ("Keep the soundtrack limited to natural foley produced by the visible "
+              "action, materials, and surfaces, with every person in frame staying "
+              "silent."),
+    "face": ("Frame only the hands, forearms, object, and the surface it rests on, "
+             "keeping the face outside the frame."),
+    "object": ("Match the reference object's exact shape, colour, scale, material, and "
+               "distinguishing markings in every frame."),
+    "continuity": ("Continue from the established bench, lighting, object position, and "
+                   "transformation state shown in the previous shot."),
+    "opening": ("Open with the impossible property visibly active and readable as the "
+                "object fills most of the frame."),
+    "anatomy": ("Render every human figure with natural anatomy, one head, two arms, two "
+                "legs, and five fingers on each hand."),
+    "text": "Show a clean workshop image filled only with natural scene detail.",
+    "generic": ("Render a coherent realistic take with stable geometry, lighting, "
+                "materials, and motion."),
+}
+
+# Yonlendirme KELIME SINIRIYLA yapilir, alt-dizeyle DEGIL.
+#
+# OLCULEN GEREKCE (19 Eylul 2026, wild-encounter ep12, kosu 35468775939):
+# ses arizasinda motora giden duzeltme "Frame only the hands, forearms, object,
+# and the surface it rests on" oluyordu. Sebep eski `any(word in lowered ...)`
+# taramasiydi: ses duzeltmesinin kendi metni "...and surface." ile bitiyor ve
+# "face" in "surface" -> True. Yani SES dali hic calismiyordu, her ses arizasi
+# YUZ dalina dusuyordu ve regen problemi hic gormuyordu; uc uretim (378 kredi)
+# bosa gitti ve bolum oldu.
+#
+# 7b44efa ses cumlesini duzeltti ama yeni metin de "surfaces" tasidigi icin dal
+# HALA ulasilamazdi; asagidaki kelime siniri o duzeltmeyi CALISIR hale getirir.
+#
+# "audio" EN BASTA durur: ses duzeltmesinin metni "action" ve "surfaces"
+# kelimelerini tasir, ikinci tura girdiginde yine ses dalina dusmelidir.
+_CORRECTION_ROUTES: tuple[tuple[str, tuple[str, ...]], ...] = (
+    ("audio", ("audio", "music", "musical", "speech", "speaking", "spoken", "voice",
+               "voices", "voiceover", "narration", "dialogue", "foley", "soundtrack",
+               "sound", "ses", "sesi", "seste", "müzik", "konuşma", "konusma")),
+    ("face", ("face", "faces", "facial", "yüz", "yuz", "yüzü", "surat")),
+    ("object", ("object", "objects", "obje", "shape", "colour", "color", "scale",
+                "marking", "markings", "reference")),
+    ("continuity", ("continuity", "continuous", "continue", "continues", "bench",
+                    "light", "lighting", "lineage", "state", "tezgah", "tezgâh",
+                    "sürekli", "süreklilik", "sureklilik")),
+    ("opening", ("opening", "first frame", "opening frame", "ilk kare", "açılış",
+                 "acilis")),
+    ("anatomy", ("anatomy", "anatomical", "anatomi", "hand", "hands", "finger",
+                 "fingers", "limb", "limbs", "head", "neck", "parmak", "eller")),
+    ("text", ("text", "texts", "lettering", "letters", "watermark", "watermarks",
+              "caption", "captions", "subtitle", "subtitles", "logo", "logos",
+              "signage", "yazı", "yazi", "filigran")),
+)
+
+_ROUTE_PATTERNS: tuple[tuple[str, "re.Pattern[str]"], ...] = tuple(
+    (category, re.compile(
+        r"(?<!\w)(?:" + "|".join(re.escape(word) for word in words) + r")(?!\w)",
+        re.IGNORECASE,
+    ))
+    for category, words in _CORRECTION_ROUTES
+)
+
+
+def correction_lexicon(overrides: dict | None = None) -> dict[str, str]:
+    """Taban sozluk + serinin kendi dili. Bilinmeyen anahtarlar yok sayilir."""
+    lexicon = dict(_CORRECTION_LEXICON)
+    if isinstance(overrides, dict):
+        for key, value in overrides.items():
+            if key in lexicon and isinstance(value, str) and value.strip():
+                lexicon[key] = " ".join(value.strip().split())
+    return lexicon
+
+
+def correction_category(issue: str) -> str:
+    """Bir QC gerekcesini duzeltme kategorisine yolla (kelime siniriyla)."""
     raw = " ".join(str(issue or "").strip().split())
-    lowered = raw.lower()
-    if any(word in lowered for word in ("face", "yüz")):
-        return ("Frame only the hands, forearms, object, and the surface it rests on, "
-                "keeping the face outside the frame.")
-    if any(word in lowered for word in ("audio", "music", "speech", "foley", "ses", "müzik")):
-        # Eski metin "visible hands, object, material, and surface" diyordu; bu
-        # unnatural-lab'in tezgah kadrajidir. wild-encounter'da el de yok, tezgah
-        # ustunde obje de yok, yani regen duzeltmesi BASKA bir dizinin sahnesini
-        # tarif ediyordu (19 Eylul 2026 olcumu). Metin artik kadraj varsaymiyor ve
-        # basarisizligin kendisini, yani insan sesini, olumlu bicimde hedefliyor.
-        return ("Keep the soundtrack limited to natural foley produced by the visible "
-                "action, materials, and surfaces, with every person in frame staying "
-                "silent.")
-    if any(word in lowered for word in (
-        "object", "obje", "shape", "colour", "color", "scale", "marking", "reference",
-    )):
-        return ("Match the reference object's exact shape, colour, scale, material, and "
-                "distinguishing markings in every frame.")
-    if any(word in lowered for word in (
-        "continu", "bench", "light", "lineage", "state", "tezg", "sürekl",
-    )):
-        if environment:
-            return (f"Continue from the established {environment}, preserving its lighting, "
-                    "object position, and transformation state shown in the previous shot.")
-        return ("Continue from the established bench, lighting, object position, and "
-                "transformation state shown in the previous shot.")
-    if any(word in lowered for word in ("opening", "first frame", "ilk kare", "açılış")):
-        return ("Open with the impossible property visibly active and readable as the "
-                "object fills most of the frame.")
-    if any(word in lowered for word in (
-        "anatom", "hand", "finger", "limb", "head", "neck", "parmak", "el ",
-    )):
-        return ("Render every human figure with natural anatomy, one head, two arms, two "
-                "legs, and five fingers on each hand.")
-    if any(word in lowered for word in ("text", "watermark", "caption", "logo", "yazı")):
-        return "Show a clean workshop image filled only with natural scene detail."
-    return "Render a coherent realistic take with stable geometry, lighting, materials, and motion."
+    for category, pattern in _ROUTE_PATTERNS:
+        if pattern.search(raw):
+            return category
+    return "generic"
+
+
+def positive_correction(issue: str, *, environment: str | None = None,
+                        lexicon: dict | None = None) -> str:
+    """Turn one issue into one positive imperative without copying negative prose."""
+    table = correction_lexicon(lexicon)
+    category = correction_category(issue)
+    if category == "continuity" and environment:
+        return (f"Continue from the established {environment}, preserving its lighting, "
+                "object position, and transformation state shown in the previous shot.")
+    return table[category]
 
 
 def strengthen_prompt(prompt: str, fix_notes: list[str], *,
                       structured: bool = False,
-                      environment: str | None = None) -> str:
+                      environment: str | None = None,
+                      lexicon: dict | None = None) -> str:
     """Keep legacy bytes by default; ROCK 3 opts into positive structured rewrites."""
     if not structured:
         notes = [n.strip() for n in (fix_notes or []) if n and n.strip()]
@@ -1020,7 +1078,8 @@ def strengthen_prompt(prompt: str, fix_notes: list[str], *,
         return f"{prompt.rstrip()}\n\n{block}"
     source = [note for note in (fix_notes or []) if str(note or "").strip()] or ["anatomy"]
     corrections = list(dict.fromkeys(
-        positive_correction(note, environment=environment) for note in source
+        positive_correction(note, environment=environment, lexicon=lexicon)
+        for note in source
     ))
     block = "QUALITY TARGETS ,  render this take with:\n" \
             + "\n".join(f"- {correction}" for correction in corrections)
@@ -1589,6 +1648,9 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         return Path(clip_path), 0.0, "pass"
     clip_path = Path(clip_path)
     slug, n = bible.slug, int(shot.get("n") or 0)
+    # Duzeltme dili SERIYE aittir. Bkz _CORRECTION_LEXICON: atolye cumlesinin
+    # hayvan serisine sizdigi olculdu (wild-encounter ep12, 19 Eylul 2026).
+    series_lexicon = correction_lexicon(qc.get("correction_lexicon"))
     budget.pop("hold_reason", None)
     extra_credits = 0.0
     all_fix_notes: list[str] = []
@@ -1860,15 +1922,9 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
 
         logger.warning(f"🔍 QC RED: çekim {n} (deneme {attempt}): {'; '.join(reasons)}")
         if audio_failure:
-            current_fix_notes = [
-                "Keep the soundtrack limited to natural foley from the visible hands, "
-                "object, material, and surface."
-            ]
+            current_fix_notes = [series_lexicon["audio"]]
         elif qc.get("require_no_face") and (review or {}).get("face_present") is True:
-            current_fix_notes = [
-                "Frame only the hands, forearms, object, and the surface it rests on, "
-                "keeping the face outside the frame."
-            ]
+            current_fix_notes = [series_lexicon["face"]]
         else:
             current_fix_notes = (review or {}).get("fix_notes") or reasons
         all_fix_notes.extend(current_fix_notes)
@@ -1914,6 +1970,7 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
             prompt, all_fix_notes,
             structured=bool(qc.get("structured_positive_corrections")),
             environment=environment_desc,
+            lexicon=series_lexicon,
         )
         logger.info(f"♻️ QC regen {attempt}/{shot_regen_limit}: çekim {n} "
                     f"yapılandırılmış olumlu prompt ile yeniden üretiliyor "
@@ -1923,7 +1980,8 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
         }
         if qc.get("structured_positive_corrections"):
             regen_event["corrections"] = [
-                positive_correction(note, environment=environment_desc)
+                positive_correction(note, environment=environment_desc,
+                                    lexicon=series_lexicon)
                 for note in all_fix_notes
             ]
         else:

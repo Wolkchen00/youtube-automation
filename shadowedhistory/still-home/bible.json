@@ -43,7 +43,18 @@
       "api_fail_open": false,
       "require_first_frame": true,
       "max_regens_per_episode": 8,
-      "first_frame_rule": "This is a city-scale AERIAL frame, so there is no single close-up object to look for; judge the frame as a whole. Two things must be true at once in this exact frame. FIRST, the city must be a real, world-famous one and its landmark or skyline must be recognisable here. SECOND, the episode's advanced technology must be a PHYSICAL STRUCTURE that visibly changes the shape of the city against the sky, and it must already stand complete and fully operating in this frame. Set first_frame_ok to false if this frame could pass as a photograph of that city as it exists today, if the only futuristic element is a glow, a light strip or a coloured surface added to otherwise present-day buildings, if the technology reads as dark, dim, switched off, half built or still appearing, or if you cannot tell which real city this is."
+      "first_frame_rule": "This is a city-scale AERIAL frame, so there is no single close-up object to look for; judge the frame as a whole. Two things must be true at once in this exact frame. FIRST, the city must be a real, world-famous one and its landmark or skyline must be recognisable here. SECOND, the episode's advanced technology must be a PHYSICAL STRUCTURE that visibly changes the shape of the city against the sky, and it must already stand complete and fully operating in this frame. Set first_frame_ok to false if this frame could pass as a photograph of that city as it exists today, if the only futuristic element is a glow, a light strip or a coloured surface added to otherwise present-day buildings, if the technology reads as dark, dim, switched off, half built or still appearing, or if you cannot tell which real city this is.",
+      "correction_lexicon": {
+        "audio": "Keep the soundtrack to the city's own ambience: transit movement, working machinery and open air.",
+        "face": "Keep every human figure small and turned away, reading as a distant silhouette in the middle ground.",
+        "object": "Match the episode's technology in exact shape, colour, scale and material across every shot.",
+        "continuity": "Continue from the established city, preserving its skyline, its recognisable landmark, the light level and the technology's position from the previous shot.",
+        "opening": "Open on the finished structure already standing at full size against the open sky, with the city's landmark recognisable in the same frame.",
+        "anatomy": "Render every human figure with natural anatomy, one head, two arms, two legs, and five fingers on each hand, at one sixth of the frame height or smaller and seen from behind or in three-quarter view.",
+        "text": "Let painted symbols and pure colour fields carry every surface, so panels, boards and screens read as clean shape and colour alone.",
+        "generic": "Render a coherent realistic take with stable geometry, lighting, materials, and motion."
+      },
+      "structured_positive_corrections": true
     },
     "fps": 24,
     "master_lra": 1.5,
