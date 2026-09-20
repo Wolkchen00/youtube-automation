@@ -19,6 +19,10 @@ import sys
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from series.bible import Bible
+from series.replenish import (
+    strict_plan_validation_enabled,
+    validate_plan_against_config,
+)
 from series.shots import validate_plan
 
 
@@ -65,8 +69,15 @@ def lint_series(series: str, repo: pathlib.Path = REPO) -> int:
         try:
             plan = json.loads(path.read_text(encoding="utf-8"))
             result = validate_plan(plan, bible)
-            errors = result.get("errors", [])
-            warnings = result.get("warnings", [])
+            errors = list(result.get("errors", []))
+            warnings = list(result.get("warnings", []))
+            # Denetci URETIM KAPISININ AYNISINI kosar. Oncesinde yalniz
+            # validate_plan cagriliyordu, yani produce.py'nin kredi harcamadan
+            # once kostugu plan/cfg kapisi buradan GORUNMUYORDU: kuyruk "TEMIZ"
+            # raporlanirken bulutta ayni plan reddedilebiliyordu.
+            cfg = meta.get("auto_replenish") or {}
+            if strict_plan_validation_enabled(cfg):
+                errors += validate_plan_against_config(plan, cfg, engine=bible.engine)
         except (OSError, json.JSONDecodeError) as error:
             errors = [f"plan okunamadı: {error}"]
             warnings = []

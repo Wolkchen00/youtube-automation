@@ -972,8 +972,14 @@ def positive_correction(issue: str, *, environment: str | None = None) -> str:
         return ("Frame only the hands, forearms, object, and the surface it rests on, "
                 "keeping the face outside the frame.")
     if any(word in lowered for word in ("audio", "music", "speech", "foley", "ses", "müzik")):
-        return ("Keep the soundtrack limited to natural foley from the visible hands, "
-                "object, material, and surface.")
+        # Eski metin "visible hands, object, material, and surface" diyordu; bu
+        # unnatural-lab'in tezgah kadrajidir. wild-encounter'da el de yok, tezgah
+        # ustunde obje de yok, yani regen duzeltmesi BASKA bir dizinin sahnesini
+        # tarif ediyordu (19 Eylul 2026 olcumu). Metin artik kadraj varsaymiyor ve
+        # basarisizligin kendisini, yani insan sesini, olumlu bicimde hedefliyor.
+        return ("Keep the soundtrack limited to natural foley produced by the visible "
+                "action, materials, and surfaces, with every person in frame staying "
+                "silent.")
     if any(word in lowered for word in (
         "object", "obje", "shape", "colour", "color", "scale", "marking", "reference",
     )):

@@ -479,6 +479,22 @@ def validate_plan_against_config(plan: dict, cfg: dict, engine: str | None = Non
             prefix = cfg["shot_plan"][index - 1].strip() + "\n\n"
         if len(_prompt_content(shot.get("prompt"), prefix)) < 30:
             errors.append(f"çekim {shot.get('n', index)} prompt boş/çok kısa")
+        # Yasak kalip denetimi URETIM ANINDA da kosar. Ikmal dongusundeki
+        # denetim yalniz YENI yazilan plani korur; kuyrukta ZATEN duran bir plan
+        # hicbir zaman yeniden okunmuyordu. 19 Eylul 2026, wild-encounter part12:
+        # plan "Ambient sound only: ... and crew commands." yaziyordu, komut
+        # konusmadir, motor uc denemede de konusma uretti, ham ses QC ucunu de
+        # reddetti ve bolum 378 kredi yakarak oldu. Bu kapi ayni plani kredi
+        # harcanmadan durdurur.
+        banned = _banned_phrases(cfg, shot.get("n", index))
+        if banned:
+            written = _prompt_content(shot.get("prompt"), prefix).lower()
+            hits = sorted({phrase for phrase in banned if phrase in written})
+            if hits:
+                errors.append(
+                    f"çekim {shot.get('n', index)}: yasak kalıp kullanıldı: "
+                    + ", ".join(repr(hit) for hit in hits)
+                )
     if "chain_breaks" in cfg:
         breaks = set(cfg["chain_breaks"])
         for index, shot in enumerate(shots, start=1):
