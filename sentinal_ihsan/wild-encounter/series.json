@@ -12,8 +12,8 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 13,
-  "next_part": 12,
-  "status": "active",
+  "next_part": 14,
+  "status": "completed",
   "priority": 999,
   "standalone": true,
   "publish_mode": "auto",
@@ -312,11 +312,53 @@
       }
     },
     "12": {
-      "status": "qc_retry",
+      "status": "needs_human",
       "first_held_at": "2026-09-19T21:02:47.635094+00:00",
-      "retry_count": 2,
+      "retry_count": 3,
       "last_reason_code": "AUDIO_MASTER",
-      "hold_reason": "final ses doğrulaması başarısız"
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=-0.90 dB, LUFS=-15.30."
+    },
+    "13": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep13/ep13_mastered.mp4",
+      "subtitle": "This GIANT KOMODO DRAGON Is NOT Real",
+      "stack_sha256": "f2fd393b99476fb8931669c5f7926c625cf4ed33c687d9c7ddc956418d5c23af",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part13",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "n0bBTtIWt7k",
+          "video_sha256": "690e9fc363a0c3a24559d3d64bcef7d2baf0ef9fdde88e3b42c7951cca7a45de",
+          "ts": "2026-09-20T17:36:18.746532+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18111216016845008",
+          "video_sha256": "690e9fc363a0c3a24559d3d64bcef7d2baf0ef9fdde88e3b42c7951cca7a45de",
+          "ts": "2026-09-20T17:37:28.725736+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7687672929974324493",
+          "video_sha256": "690e9fc363a0c3a24559d3d64bcef7d2baf0ef9fdde88e3b42c7951cca7a45de",
+          "ts": "2026-09-20T17:38:38.755290+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-20T17:38:38.757155+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."
