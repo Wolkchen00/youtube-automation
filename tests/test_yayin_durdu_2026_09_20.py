@@ -230,5 +230,98 @@ class CanliKuyrukTemiz(unittest.TestCase):
         self.assertIn("statue of liberty", yasak)
 
 
+class CaptionIkiDilli(unittest.TestCase):
+    """Kural 14: once Ingilizce blok, sonra SEHRIN KENDI DILI.
+
+    Bu kusur yayini durdurmaz, erisimi yariya dusurur: video anlatimsiz oldugu
+    icin caption HIKAYENIN KENDISIDIR ve yerel blok o sehirde yasayanlara
+    hitap eder. 20 Eylul 2026'da kuyrukta IKI plan birden tek dilliydi
+    (part05 Rio/Portekizce, part06 Tokyo/Japonca) ve hicbir kapi bakmiyordu.
+
+    Denetim aracinda UYARI, burada SERT kural: uretim kapisini caption yuzunden
+    kapatmak gunun videosunu oldururdu, ama gelistirme sirasinda sessizce
+    gecmesi de yasak.
+    """
+
+    def _kurulum(self):
+        import tools.siluet_denetim as sd
+        seri = REPO / "shadowedhistory" / "still-home"
+        meta = json.loads((seri / "series.json").read_text(encoding="utf-8"))
+        return sd, seri, meta
+
+    def test_bekleyen_planlarin_caption_dili_dogru(self):
+        sd, seri, meta = self._kurulum()
+        havuz = (meta.get("auto_replenish") or {}).get("topic_pool") or []
+        siradaki = int(meta.get("next_part") or 1)
+        bakilan = 0
+        for yol in sorted((seri / "plans").glob("part*.json")):
+            if int(yol.stem.replace("part", "")) < siradaki:
+                continue
+            bakilan += 1
+            plan = json.loads(yol.read_text(encoding="utf-8"))
+            self.assertEqual(sd.caption_uyarilari(plan, havuz), [], yol.name)
+        self.assertGreater(bakilan, 0, "denetlenecek bekleyen plan yok")
+
+    def test_ingilizce_sehirde_tek_blok_dogru_sayilir(self):
+        sd, _, meta = self._kurulum()
+        havuz = (meta.get("auto_replenish") or {}).get("topic_pool") or []
+        plan = {
+            "title_card": {"title": "NEW YORK 2512"},
+            "caption": ("New York built something.\n\n"
+                        f"{sd.INGILIZCE_KUNYE}\n\nWhat would you build?"),
+        }
+        self.assertEqual(sd.caption_uyarilari(plan, havuz), [])
+
+    def test_tek_dilli_yerel_sehir_yakalanir(self):
+        sd, _, meta = self._kurulum()
+        havuz = (meta.get("auto_replenish") or {}).get("topic_pool") or []
+        plan = {
+            "title_card": {"title": "TOKYO 2512"},
+            "caption": ("Tokyo built something.\n\n"
+                        f"{sd.INGILIZCE_KUNYE}\n\nWhat would you build?"),
+        }
+        uyarilar = sd.caption_uyarilari(plan, havuz)
+        self.assertTrue(any("TEK DILLI" in u for u in uyarilar), uyarilar)
+        self.assertTrue(any("yazi sistemi" in u for u in uyarilar), uyarilar)
+
+    def test_caption_uyarisi_cikis_kodunu_etkilemez(self):
+        """Denetim araci caption yuzunden uretimi KAPATMAZ."""
+        sd, seri, _ = self._kurulum()
+        kod = sd.main(["--plan", str(seri / "plans" / "part06.json")])
+        self.assertEqual(kod, 0)
+
+    def test_kural_TEK_kaynakta_yasar(self):
+        """Denetim araci kurali KOPYALAMAZ, replenish'ten alir.
+
+        Iki kopya kacinilmaz olarak ayrisir: 7b44efa ses cumlesini duzeltti
+        ama qc_shot icindeki ikinci kopya eski kaldi ve duzeltme tutmadi.
+        """
+        import tools.siluet_denetim as sd
+        from series import replenish
+        self.assertFalse(hasattr(sd, "YAZI_ARALIKLARI"),
+                         "denetim araci yazi tablosunu KOPYALAMIS")
+        self.assertTrue(hasattr(replenish, "CAPTION_SCRIPT_RANGES"))
+
+    def test_ikmal_dongusu_tek_dilli_captioni_reddeder(self):
+        """Bozuk parti kredi harcanmadan yeniden yazdirilir."""
+        from series.replenish import caption_language_errors
+        _, seri, meta = self._kurulum()
+        cfg = meta["auto_replenish"]
+        plan = json.loads((seri / "plans" / "part06.json").read_text(encoding="utf-8"))
+        self.assertEqual(caption_language_errors(plan, cfg), [])
+        bozuk = dict(plan)
+        bozuk["caption"] = plan["caption"].split("2512年")[0].strip()
+        self.assertTrue(caption_language_errors(bozuk, cfg))
+
+    def test_kapi_yalniz_yapilandirma_yaziliysa_calisir(self):
+        """Anahtari olmayan seriler ETKILENMEZ."""
+        from series.replenish import caption_language_errors
+        _, seri, meta = self._kurulum()
+        plan = json.loads((seri / "plans" / "part06.json").read_text(encoding="utf-8"))
+        plan["caption"] = "English only, no local block."
+        kapali = {"topic_pool": meta["auto_replenish"]["topic_pool"]}
+        self.assertEqual(caption_language_errors(plan, kapali), [])
+
+
 if __name__ == "__main__":
     unittest.main()

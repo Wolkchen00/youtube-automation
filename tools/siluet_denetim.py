@@ -8,7 +8,7 @@ Isigin kapali hali oldugu icin motor once bugunun Paris'ini cizdi ve isigi
 ve bolum 21 izlenmede kaldi (P1 648, P2 875). Bu denetim ayni kazayi bir
 daha ucret odemeden yakalar.
 
-Denetlenen alti kural:
+Denetlenen yedi kural:
   1. Cekim 1'de durum-gecisi dili YASAK (once/sonra hali olan her kalip).
   2. Zayiflik dili YASAK: kanca "subtle" olamaz.
   3. Isik surucu aileler (enerji mimarisi, yasayan malzeme) GECE ya da
@@ -16,6 +16,9 @@ Denetlenen alti kural:
   4. HER cekimde pozitif dil (doktrin kural 9), SABLON on-eki dahil.
   5. Plan damgasi guncel doktrinle eslesir.
   6. KISI BICIMLI ANIT ya da gercek kisi adi YASAK (doktrin kural 7).
+  7. Caption IKI DILLI (kural 14). Bu kural UYARI uretir, cikis kodunu
+     etkilemez: eksik caption yayini durdurmaz, yalniz erisimi yariya
+     dusurur. Sert kapisi tests/test_yayin_durdu_2026_09_20.py icinde.
 
 Kural 6'nin olculen gerekcesi (19 Eylul 2026, kosu 35473217835): part 5
 Rio'nun cekim 1 ve cekim 3 prompt'lari "Christ the Redeemer" yaziyordu.
@@ -79,6 +82,28 @@ try:
 except Exception:                      # denetim, import yuzunden COKMEZ
     PUBLIC_FIGURE_SUBJECTS = ()
 
+# Caption kural 14: once INGILIZCE blok, sonra SEHRIN KENDI DILI.
+# Bu kusur yayini DURDURMAZ, erisimi yariya dusurur, bu yuzden UYARI olarak
+# raporlanir ve cikis kodunu etkilemez: gunun videosunu eksik caption yuzunden
+# oldurmek daha kotu bir takas olurdu. Sert kapi testlerdedir
+# (tests/test_yayin_durdu_2026_09_20.py).
+#
+# Olculen gerekce (20 Eylul 2026): part05 (Rio/Portekizce) ve part06
+# (Tokyo/Japonca) caption'lari TEK DILLIYDI, yani kural 14 kuyrukta iki kez
+# cignenmisti ve hicbir kapi bakmiyordu.
+# Caption kural 14: once INGILIZCE blok, sonra SEHRIN KENDI DILI.
+# Kural ve yazi sistemi tablosu series/replenish.py icinde TEK yerde durur;
+# burada yalniz kunye cumlesi tutulur, cunku o seriye aittir.
+#
+# Bu kusur yayini DURDURMAZ, erisimi yariya dusurur: bu yuzden UYARI olarak
+# raporlanir ve cikis kodunu etkilemez. Gunun videosunu eksik caption yuzunden
+# oldurmek daha kotu bir takas olurdu. Sert kapi testlerdedir
+# (tests/test_yayin_durdu_2026_09_20.py) ve ikmal dongusundedir.
+#
+# Olculen gerekce (20 Eylul 2026): part05 (Rio/Portekizce) ve part06
+# (Tokyo/Japonca) caption'lari TEK DILLIYDI ve hicbir kapi bakmiyordu.
+INGILIZCE_KUNYE = "A fictional future, created with AI."
+
 ISIK_SURUCU_AILELER = {"enerji mimarisi", "yasayan malzeme"}
 KARANLIK = ["night", "dusk", "evening", "after dark", "twilight", "nightfall",
             "moonlit", "at dark"]
@@ -87,6 +112,24 @@ KARANLIK = ["night", "dusk", "evening", "after dark", "twilight", "nightfall",
 def _bulgular_prompt(metin: str, kalipar: list[str], etiket: str) -> list[str]:
     dusuk = metin.lower()
     return [f"{etiket}: {k!r}" for k in kalipar if k in dusuk]
+
+
+def caption_uyarilari(plan: dict, havuz: list) -> list[str]:
+    """Kural 14 uyarilari. Kural TEK YERDE yasar: series/replenish.py.
+
+    Burada kopyalanmaz, cunku ayni kuralin iki kopyasi kacinilmaz olarak
+    ayrisir. Ikmal dongusu ayni fonksiyonu HATA olarak, bu arac UYARI olarak
+    kullanir: eksik caption yayini durdurmaz, yalniz erisimi yariya dusurur.
+    """
+    try:
+        from series.replenish import caption_language_errors
+    except Exception as hata:          # denetim, import yuzunden COKMEZ
+        return [f"caption denetimi yuklenemedi: {hata}"]
+    cfg = {
+        "topic_pool": havuz or [],
+        "caption_bilingual_disclosure": INGILIZCE_KUNYE,
+    }
+    return caption_language_errors(plan, cfg)
 
 
 def denetle(plan_yolu: pathlib.Path, guncel_damga: str | None) -> list[str]:
@@ -184,9 +227,11 @@ def main(argv: list[str] | None = None) -> int:
 
     # Yalniz kuyrukta bekleyen bolumleri denet: yayinlanmis bolumu geri
     # donup suclamak yanlis alarm uretir.
+    havuz: list = []
     try:
         meta = json.loads((SERIES_DIR / "series.json").read_text(encoding="utf-8"))
         siradaki = int(meta.get("next_part") or 1)
+        havuz = (meta.get("auto_replenish") or {}).get("topic_pool") or []
     except Exception:
         siradaki = 1
 
@@ -202,6 +247,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Sert kapi: yalniz part {siradaki} denetleniyor (uretilecek bolum).")
 
     toplam = 0
+    toplam_uyari = 0
     denetlenen = 0
     for plan_yolu in planlar:
         eslesme = PART_NAME.search(plan_yolu.name)
@@ -210,16 +256,28 @@ def main(argv: list[str] | None = None) -> int:
             continue
         denetlenen += 1
         bulgular = denetle(plan_yolu, guncel_damga)
+        try:
+            plan = json.loads(plan_yolu.read_text(encoding="utf-8"))
+            uyarilar = caption_uyarilari(plan, havuz)
+        except Exception as hata:
+            uyarilar = [f"caption denetlenemedi: {hata}"]
         if bulgular:
             toplam += len(bulgular)
             print(f"\n[BULGU] {plan_yolu.name}")
             for b in bulgular:
                 print(f"   - {b}")
-        else:
+        elif not uyarilar:
             print(f"[temiz] {plan_yolu.name}")
+        # Caption kusuru yayini DURDURMAZ: UYARI olarak basilir ve cikis
+        # kodunu etkilemez. Sert kapi testlerdedir.
+        if uyarilar:
+            toplam_uyari += len(uyarilar)
+            print(f"[UYARI] {plan_yolu.name}")
+            for u in uyarilar:
+                print(f"   ! {u}")
 
     print(f"\nDenetlenen plan: {denetlenen} (part {siradaki} ve sonrasi), "
-          f"bulgu: {toplam}")
+          f"bulgu: {toplam}, uyari: {toplam_uyari}")
     return 1 if toplam else 0
 
 

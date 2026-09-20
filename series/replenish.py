@@ -48,6 +48,7 @@ Kullanım (yerel):
 import json
 import os
 import re
+import unicodedata
 import sys
 import time
 from datetime import datetime, timezone
@@ -231,6 +232,87 @@ def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
             raise ValueError(f"title_patterns[{index}] bozuk regex: {error}") from error
         compiled.append((pattern, allowed))
     return compiled
+
+
+# ---- Caption dil kapisi -----------------------------------------------------
+#
+# Anlatimsiz seride caption HIKAYENIN KENDISIDIR. still-home kural 14 once
+# INGILIZCE blok, sonra SEHRIN KENDI DILI ister; yerel blok o sehirde
+# yasayanlara hitap eder ve erisimin yarisini o tasir.
+#
+# OLCULEN GEREKCE (20 Eylul 2026): kuyrukta IKI plan birden tek dilliydi
+# (part05 Rio/Portekizce, part06 Tokyo/Japonca) ve hicbir kapi bakmiyordu.
+# Kapi BURADA durur, cunku _validate_batch yalniz ikmal dongusunden cagrilir:
+# bozuk parti kredi harcanmadan yeniden yazdirilir. URETIM kapisina
+# konmaz, eksik caption gunun videosunu oldurmeyi hak etmez.
+#
+# Kapi yalniz cfg["caption_bilingual_disclosure"] yaziliysa calisir, yani
+# diger seriler etkilenmez.
+
+# Latin disi yazi sistemleri DOGRUDAN olculebilir.
+CAPTION_SCRIPT_RANGES = {
+    "arabic": "\u0600-\u06ff",
+    "chinese (simplified)": "\u4e00-\u9fff",
+    "chinese (traditional)": "\u4e00-\u9fff",
+    "greek": "\u0370-\u03ff",
+    "hindi": "\u0900-\u097f",
+    "japanese": "\u3040-\u30ff\u4e00-\u9fff",
+    "korean": "\uac00-\ud7af",
+    "russian": "\u0400-\u04ff",
+    "thai": "\u0e00-\u0e7f",
+}
+
+
+def _caption_sade(metin) -> str:
+    """Aksani dusur ki 'Sao Paulo' ile 'Sao Paulo' eslesebilsin."""
+    ayrik = unicodedata.normalize("NFKD", str(metin or ""))
+    return "".join(k for k in ayrik if not unicodedata.combining(k)).lower().strip()
+
+
+def caption_local_language(plan: dict, cfg: dict) -> tuple[str, str | None]:
+    """Plandan (sehir, yerel dil). Dil cozulemezse (sehir, None)."""
+    baslik = str((plan.get("title_card") or {}).get("title") or "")
+    sehir = _caption_sade(re.sub(r"\b\d{4}\b", "", baslik))
+    if not sehir:
+        return "", None
+    for konu in cfg.get("topic_pool") or []:
+        if _caption_sade(konu.get("topic", "")).startswith(sehir):
+            return sehir, konu.get("local_language")
+    return sehir, None
+
+
+def caption_language_errors(plan: dict, cfg: dict) -> list[str]:
+    """Caption iki dilli mi. Kapi kapaliysa ya da yerel dil Ingilizce ise bos."""
+    kunye = str(cfg.get("caption_bilingual_disclosure") or "").strip()
+    if not kunye:
+        return []
+    caption = str(plan.get("caption") or "")
+    if not caption.strip():
+        return ["caption bos"]
+    sehir, dil = caption_local_language(plan, cfg)
+    if not dil:
+        return [f"caption dili denetlenemedi: {sehir!r} konu havuzunda yok"]
+    if _caption_sade(dil) == "english":
+        return []                      # tek blok DOGRU (kural 14 istisnasi)
+
+    hatalar: list[str] = []
+    bloklar = [b for b in re.split(r"\n\s*\n", caption) if b.strip()]
+    try:
+        kunye_i = next(i for i, b in enumerate(bloklar) if kunye in b)
+    except StopIteration:
+        return [f"caption'da zorunlu Ingilizce kunye cumlesi yok: {kunye!r}"]
+    if len(bloklar) - kunye_i <= 2:
+        hatalar.append(
+            f"caption TEK DILLI: yerel dil {dil!r} ama Ingilizce sorudan sonra "
+            "hicbir blok yok"
+        )
+    aralik = CAPTION_SCRIPT_RANGES.get(_caption_sade(dil))
+    if aralik and not re.search(f"[{aralik}]", caption):
+        hatalar.append(
+            f"caption'da {dil} yazi sistemi HIC gecmiyor; yerel blok o dilin "
+            "kendi alfabesiyle yazilmali"
+        )
+    return hatalar
 
 
 def _banned_phrases(cfg: dict, shot_number) -> list[str]:
@@ -1837,6 +1919,12 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                 surfaced = f"part {want}: {error}"
                 if surfaced not in errors:
                     errors.append(surfaced)
+
+        # Caption dil kapisi: bozuk parti kredi harcanmadan yeniden yazilir.
+        for error in caption_language_errors(normalized, cfg):
+            surfaced = f"part {want}: {error}"
+            if surfaced not in errors:
+                errors.append(surfaced)
 
         # Motorun kendi doğrulaması (Omni kota vb.) ,  hatalar batch'i düşürür.
         v = validate_plan(normalized, bible)
