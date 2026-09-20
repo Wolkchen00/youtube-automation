@@ -21,3 +21,10 @@
 {"ts": "2026-09-18T19:09:52Z", "event": "qc_api_result", "attempt_id": "17c6388f15e64937b64146253ea6d90e", "outcome": "ok"}
 {"ts": "2026-09-18T19:09:52Z", "event": "review", "episode": 3, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 2, "issues": ["Initial ice geysers appear too solid and smoky, lacking the diffuse quality of ice vapor"], "fix_notes": ["Render ice geysers as more diffuse and ethereal plumes of vapor, less like solid smoke pillars"], "clip": "shot_01.mp4"}
 {"ts": "2026-09-18T19:09:52Z", "event": "qc_pass", "episode": 3, "shot": 1, "attempt": 0, "content_sha256": "2148a9c6e7e1c95c16d73cef90a9f3389b8a1e32bd43ed01a7042ece8149085a", "clip": "shot_01.mp4"}
+{"ts": "2026-09-20T19:00:00Z", "event": "qc_api_attempt", "attempt_id": "74360c9ba5b84f9da3fcb991479d2677", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 4, "shot": 1}
+{"ts": "2026-09-20T19:00:03Z", "event": "qc_api_result", "attempt_id": "74360c9ba5b84f9da3fcb991479d2677", "outcome": "ok"}
+{"ts": "2026-09-20T19:00:03Z", "event": "native_audio_review", "episode": 4, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Audio features sounds of water movement and sloshing.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-09-20T19:00:04Z", "event": "qc_api_attempt", "attempt_id": "f45938adfa1f4d1caf1cd95d833deb84", "task_type": "visual_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 4, "shot": 1}
+{"ts": "2026-09-20T19:00:12Z", "event": "qc_api_result", "attempt_id": "f45938adfa1f4d1caf1cd95d833deb84", "outcome": "ok"}
+{"ts": "2026-09-20T19:00:12Z", "event": "review", "episode": 4, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 0, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-09-20T19:00:12Z", "event": "qc_pass", "episode": 4, "shot": 1, "attempt": 0, "content_sha256": "bbd52d603328a5247978b3332dc0537e001a812a41cf1e82a80594a7a65df07c", "clip": "shot_01.mp4"}
