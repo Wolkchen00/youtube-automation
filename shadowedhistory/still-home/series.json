@@ -434,6 +434,14 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "6": {
+      "status": "qc_retry",
+      "first_held_at": "2026-09-21T23:40:44.011676+00:00",
+      "first_infra_held_at": "2026-09-21T23:40:44.011676+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "TRANSIENT_INFRA",
+      "hold_reason": "video motoru cekim 2 icin klip teslim etmedi (saglayici tarafinda gecici ariza)"
     }
   }
 }
