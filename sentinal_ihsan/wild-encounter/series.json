@@ -11,8 +11,8 @@
     "tiktok"
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
-  "total_parts": 13,
-  "next_part": 14,
+  "total_parts": 14,
+  "next_part": 15,
   "status": "completed",
   "priority": 999,
   "standalone": true,
@@ -75,8 +75,8 @@
     "title_style": "a punchy English Shorts title in exactly this pattern: 'This <ANIMAL> Is NOT Real' or 'This GIANT <ANIMAL> Is NOT Real', where the animal name may be one or two words, for example 'This GIANT CROCODILE Is NOT Real' or 'This GIANT PRAYING MANTIS Is NOT Real'. Every word before 'Is' is in CAPS. Max 60 characters, the validator rejects 61 and above. No hashtags, no surrounding quotes, no emoji in the title field.",
     "brief": "SERI: bir film setinde dev, gercekci bir yaratik performans sanatcisini (Ihsan) agzina alir; ekip cenesini elleriyle acar ve Ihsan yara almadan cikar. Yaratigin pratik efekt oldugu son saniyelerde anlasilir. HEPSI TEK KESINTISIZ CEKIMDE OLUR. Kaynak: sentinal_ihsan/wild-encounter/DOKTRIN.md, GUNCEL FORMAT bolumu; olcum dayanagi sentinal_ihsan/wild-encounter/REFERANS-AYUSH-ANALIZ.md. >>> CIKTI DILI: bu brief TURKCEDIR ama URETTIGIN HER SEY INGILIZCEDIR: baslik, sinopsis ve cekim promptu Ingilizce yazilir. <<< DEGISMEZ KURALLAR: (1) ANLATIM VE MUZIK YOKTUR. Voiceover yok, konusma yok, muzik yok. Ses setin kendi sesidir. Cekim promptunda 'speaking', 'talking', 'explaining', 'narrating' GECMEZ. Cekim promptu olumlu bir ses cumlesiyle biter, ornek: 'Ambient sound only: footsteps on sand, studio air handling and crew movement.' EKIP ancak HAREKETLE anlatilir: 'crew movement', 'crew shuffling', 'crew positioning', 'crew activity' serbesttir. SES CIKARAN ekip YASAKTIR: 'crew commands', 'shouts', 'calls out', 'chatter', 'voices', 'cheering' ve benzerleri planı doğrulamadan geçirmez, cunku komut da bagirma da konusmadir ve motor bunlari duyulabilir konusma olarak uretir (19 Eylul 2026, part12: uc deneme, 378 kredi, yayin yok). (2) TEK DEV YARATIK, GERCEKCI, pratik efekt. Donusum yok, birlesme yok, iki hayvan yok. Izleyicinin TANIDIGI gercek bir hayvan secilir ve cenesi bir insani alacak kadar buyuk olur. AGIZ KAPANMA TESTI (18 Eyl 2026, olcumle eklendi): secilen hayvanin, kafasinin ON tarafinda, DISARIDAN gorunen ve bir insanin uzerine KAPANABILEN bir agzi olmali. Kutup ayisi, timsah, komodo, baykus, yilan bu testi gecer. Kalamar ve ahtapot GECMEZ: gagalari mantonun altinda gizlidir ve bir insanin uzerine kapanan gorunur bir cene olusturmaz. Sebep olculdu: ep11 dev kalamar kare kare incelendi, agza alinma HIC gerceklesmedi, adam yaratigin yanindan gecip kadrajdan kayboldu ve kimse disari cikmadi; ayni vurusu kutup ayisi (ep09) eksiksiz teslim etti ve 36.070 izlenme ile kanal rekoru oldu. Bu test bir zevk meselesi degil: vurus artik QC kapisi (qc.enforce.violation_reads) ve agzi kapanmayan hayvan o kapiyi gecemez, yani bos yere Kie kredisi yakar. Uydurma yaratik (ejderha, canavar) SECILMEZ: olculdu, tutmuyor. (3) TEK CEKIM, UC VURUS AYNI CEKIMDE, SIRASI DEGISMEZ: tehdit, agza alinma, ekibin ceneyi acmasi ve cikis. Cekim promptu shot_plan'daki metinle HARFI HARFINE baslar, ardindan bos satir ve o bolumun ayrintisi gelir. Ifsa son saniyelere aittir. (4) IHSAN SAHNENIN ICINDE: yuzu ve govdesi net, KAMERAYA BAKMAZ, yaratiga ya da ekibe bakar. Kadrajda TEK Ihsan olur. (5) KIYAFET SETE GORE degisir (col setinde saha gomlegi, su tankinda dalgic ustu); degismeyen sey adamin kendisidir. (6) OLCEK: yaratik buyuk ve yakin, kadrajin buyuk kismini doldurur. (7) SET: MINIMAL kurulmus dekor ve MAVI perde. Zeminde studyo betonu GORUNUR, uzerinde sig bir kum/toprak adasi, birkac kaya, bir kutuk, seyrek ot. Arkada izleme isaretli MAVI perde, kenarda siyahli ekip, en onde kamera operatorlerinin sirti, dolly rayi ve kablolar. Isik tepedeki genis beyaz difuzyon izgarasindan gelir. HAVA TEMIZDIR: sis, duman ve pus YASAK (olculdu: sis kaybeden videolarda var, kazananlarda yok). Yesil perde YOK. Yogun bitki ortusu YOK. (8) SURE: TEK cekim, 10 saniye. (9) KAMERA: tek kesintisiz elde/gimbal plan; genis kurulus kadrajindan yakina dogru YAVAS PUSH-IN. Kesme, gecis, sahne degisimi YOK. (10) EKRANA YAZI YOK. (11) GUVENLIK: kan, yaralanma, hayvana eziyet yok; gerilim olcekten ve yutulma anindan gelir. (12) AILE: her bolum 'family' alanindaki kanonik listeden BIR aile secer ve ardisik iki bolum ayni aileyi KULLANAMAZ.",
     "last_run": {
-      "at": "2026-09-14T22:00:29.777552+00:00",
-      "parts": "9-13"
+      "at": "2026-09-21T22:11:47.387670+00:00",
+      "parts": "14-14"
     },
     "required_characters": [
       "ihsan_field"
@@ -353,6 +353,48 @@
         "tiktok"
       ],
       "published_at": "2026-09-20T17:38:38.757155+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "14": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep14/ep14_mastered.mp4",
+      "subtitle": "This GIANT LION Is NOT Real",
+      "stack_sha256": "b427336f0e0d1dcc5a74ee4caa40dc73b10c108e68147f8e80f97c7a82cc0483",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part14",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "wSXBMvwfVcs",
+          "video_sha256": "5c2a07f704f4a0500fdb29bf49e5d77997dd866f1a73e71fb812c12c2a1cc2ed",
+          "ts": "2026-09-21T22:21:01.820148+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18128588302839006",
+          "video_sha256": "5c2a07f704f4a0500fdb29bf49e5d77997dd866f1a73e71fb812c12c2a1cc2ed",
+          "ts": "2026-09-21T22:21:52.473468+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7688117320748731662",
+          "video_sha256": "5c2a07f704f4a0500fdb29bf49e5d77997dd866f1a73e71fb812c12c2a1cc2ed",
+          "ts": "2026-09-21T22:23:02.871689+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-21T22:23:02.872913+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
