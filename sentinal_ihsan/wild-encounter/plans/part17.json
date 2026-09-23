@@ -1,0 +1,32 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "This GIANT SHARK Is NOT Real"
+  },
+  "synopsis": "On a minimal studio water tank set, a colossal shark takes a performer into its mouth, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nShot 1: ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal, streamlined great white shark, with smooth, grey skin fading to white, dead black eyes, and rows of razor-sharp teeth, measuring 10 metres long, glides forward, its massive mouth agape, on a water tank set. Ihsan stands bravely in its path. The shark's jaws close over Ihsan, submerging him completely within its cavernous mouth. Several crew members immediately approach the shark's head, physically unlatching and pulling apart the practical shark's articulated jaw sections, revealing the internal metal framework and cables as Ihsan steps out unharmed onto the wet set. Ambient sound only: water splashing, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant shark's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant shark and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant shark",
+    "descriptor": "a colossal, streamlined great white shark, with smooth, grey skin fading to white, dead black eyes, and rows of razor-sharp teeth, measuring 10 metres long",
+    "environment": "ocean_tank_set",
+    "framing": "A handheld camera is held low and close, keeping the colossal shark's head and gaping jaws sharp as it fills the frame, with a dark production element at the bottom edge and the blue screen studio wall out of focus behind it.",
+    "anomaly_descriptor": "Crew members physically unlatch and pull apart the practical shark's articulated jaw sections, revealing the internal metal framework and cables."
+  },
+  "family": "sea-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

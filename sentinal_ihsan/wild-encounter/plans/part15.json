@@ -1,0 +1,32 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "This GIANT COBRA Is NOT Real"
+  },
+  "synopsis": "On a minimal studio jungle set, a colossal cobra takes a performer into its mouth, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nShot 1: ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal, glistening black cobra with smooth, iridescent scales, piercing golden eyes, and small, sharp fangs, rising 8 metres high, rears up, its hood flared wide as Ihsan stands directly in front of it. The cobra's jaws open impossibly wide, and it lunges forward, engulfing Ihsan completely within its dark mouth. Several crew members quickly move into frame, grasping the cobra's head. They manually unlatch and pull open the practical cobra's constructed jaw mechanism, revealing internal support structures and wiring as Ihsan steps out unharmed onto the studio concrete. Ambient sound only: footsteps on concrete, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant cobra's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant cobra and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant cobra",
+    "descriptor": "a colossal, glistening black cobra with smooth, iridescent scales, piercing golden eyes, and small, sharp fangs, rising 8 metres high",
+    "environment": "jungle_set",
+    "framing": "A handheld camera is held low and close, keeping the colossal cobra's head and raised body sharp as it fills the frame, with a dark production element at the bottom edge and the blue screen studio wall out of focus behind it.",
+    "anomaly_descriptor": "Crew members manually unlatch and pull open the practical cobra's constructed jaw mechanism, revealing internal support structures and wiring."
+  },
+  "family": "reptile",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

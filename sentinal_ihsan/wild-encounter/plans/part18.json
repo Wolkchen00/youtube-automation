@@ -1,0 +1,32 @@
+{
+  "episode": {
+    "number": 18,
+    "title": "This GIANT EAGLE Is NOT Real"
+  },
+  "synopsis": "On a minimal studio jungle set, a colossal eagle takes a performer into its beak, then the crew force its practical beak open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nShot 1: ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal, regal brown eagle with keen, golden eyes, powerful feathered wings, and a sharp, curved yellow beak, standing 5 metres tall, lowers its head towards Ihsan on a minimal jungle set. The eagle's beak opens wide and then snaps shut around Ihsan, completely concealing him within its mouth. Crew members quickly move into position around the eagle's head, leveraging a hand-crank system to slowly pry open the practical eagle's hinged beak, exposing internal gears and servos as Ihsan steps out unharmed onto the studio floor. Ambient sound only: footsteps on earth, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "jungle_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant eagle's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant eagle and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant eagle",
+    "descriptor": "a colossal, regal brown eagle with keen, golden eyes, powerful feathered wings, and a sharp, curved yellow beak, standing 5 metres tall",
+    "environment": "jungle_set",
+    "framing": "A handheld camera is held low and close, keeping the colossal eagle's head and sharp beak sharp as it fills the frame, with a dark production element at the bottom edge and the blue screen studio wall out of focus behind it.",
+    "anomaly_descriptor": "Crew members leverage a hand-crank system to slowly pry open the practical eagle's hinged beak, exposing internal gears and servos."
+  },
+  "family": "bird-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

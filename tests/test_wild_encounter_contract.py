@@ -68,7 +68,12 @@ def test_shot_plan_is_the_single_beat_source():
     # Tek kesintisiz cekim: tek vurus paragrafi, uc vurus da onun icinde.
     assert len(plan_lines) == 1
     tek = plan_lines[0]
-    assert tek.startswith("ONE CONTINUOUS TAKE, NO CUTS."), tek[:48]
+    assert tek.startswith("ONE CONTINUOUS UNBROKEN TAKE."), tek[:48]
+    # 22-23 Eylul 2026: kalip "NO CUTS" diyordu, model onu her plana kopyaladi ve
+    # ikmal kapisi (NEGATIVE_VIDEO_LANGUAGE) bes plani da alti denemede reddetti,
+    # kuyruk bos kaldi, kanal karardi. Kalip kapinin kendi olcusunden gecmeli.
+    from series.shots import NEGATIVE_VIDEO_LANGUAGE
+    assert not NEGATIVE_VIDEO_LANGUAGE.search(tek), NEGATIVE_VIDEO_LANGUAGE.findall(tek)
     for vurus in ("jaws open wide", "out of sight", "push its", "climbs out"):
         assert vurus in tek, f"vurus eksik: {vurus}"
     # 20 Eylul 2026: "pushes in slowly from the wide establishing frame"
