@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 99,
+    "title": "A Whirlpool Spanning All of Tokyo Bay"
+  },
+  "synopsis": "An impossibly vast whirlpool opens in Tokyo Bay, its immense vortex spanning from shore to shore and threatening the massive container terminal at its edge.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nShot 1: One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\nAn orbital view of Tokyo Bay, its distinctive curved shores clearly visible, dominated by a titanic, permanent whirlpool. The whirlpool's central vortex is an enormous, deep void of churning dark water, spanning the entire width of the bay, from Chiba coastline to Kanagawa shore. Numerous ships are tiny specks on the turbulent surface, indicating the scale. A prominent container terminal, with its rectilinear pattern of stacked containers and tall cranes, sits precariously at the vortex's edge in the foreground, providing immediate scale. Throughout seconds 1-5, the water around the terminal churns and visibly drops, and structures list and begin to collapse inwards, with a decisive surge of water dragging parts of the terminal into the spiraling depths during seconds 6-8. The camera remains fixed, capturing the entire bay and its massive disaster. The diegetic sound of a continuous, powerful, roaring maelstrom holds a steady, full, unbroken level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How fast do you think a ship would be pulled into this current?",
+  "family": "su afeti",
+  "seed_id": 6,
+  "caption": "An impossible whirlpool dominates Tokyo Bay, its vast vortex reaching from the Chiba coastline to the Kanagawa shore. This colossal maelstrom would measure over 15 kilometers in diameter, engulfing the Odaiba waterfront and drawing the container terminal at its rim into its churning depths. Real whirlpools, like Japan's Naruto Strait, are typically much smaller, peaking at around 20 meters wide with current speeds up to 20 km/h. Historical records from 1928 mention minor whirlpools intensified by seismic activity but never at this scale.\n\nSuch an immense, permanent vortex in Tokyo Bay cannot exist. It would require an unsustainable, constant source of titanic energy to overcome friction and maintain its scale, far exceeding any tidal or seismic forces the Earth could generate.\n\nThis is a simulation, not real footage. What visible changes to the container terminal suggest its impending doom?",
+  "hashtags": "#TokyoBay #Whirlpool #SuAfeti #Oceanography #CoastalDisaster #Japan #Hydrodynamics #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

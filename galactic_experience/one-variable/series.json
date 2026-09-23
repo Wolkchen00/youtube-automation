@@ -14,8 +14,8 @@
   "publish_mode": "auto",
   "status": "active",
   "priority": 10,
-  "total_parts": 98,
-  "next_part": 98,
+  "total_parts": 103,
+  "next_part": 99,
   "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce",
   "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off sonrasi konsept DARALDI. Artik 'tek degisken deneyi' degil, GERCEK bir dogal afet turu IMKANSIZ olcekte. Slug KORUNDU (published.json, last_run.json, filo.json bu slug'a bagli). Doktrin: one-variable/KONSEPT-A.md v2.0. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi TEK olan gunlerde bu serit uretilir, CIFT gunlerde flythrough. one-variable.yml cron'u KAPALI KALIR, yalniz elle tetiklenir; iki hattin ayni gun calismasi cift yayin demektir.",
   "auto_replenish": {
@@ -179,8 +179,8 @@
       }
     ],
     "last_run": {
-      "at": "2026-09-14T21:53:25.367688+00:00",
-      "parts": "94-98"
+      "at": "2026-09-23T19:47:06.228378+00:00",
+      "parts": "99-103"
     }
   },
   "doctrine": "galactic_experience/one-variable/KONSEPT-A.md",
@@ -260,6 +260,27 @@
         "tiktok"
       ],
       "published_at": "2026-09-21T20:34:18.330025+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "98": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep98/ep98_mastered.mp4",
+      "subtitle": "Jakobshavn Glacier Collapsing Along Its Width",
+      "stack_sha256": "f12afe43132a920f54f6d21495152feb83f95052ab3d34eb6207be347f8ac6c0",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-23T19:52:11.037825+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,

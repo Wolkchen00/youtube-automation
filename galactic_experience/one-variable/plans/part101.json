@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 101,
+    "title": "A Rift Opening Through All of Kenya"
+  },
+  "synopsis": "An immense fissure rapidly tears open along Kenya's Great Rift Valley, extending past Lake Magadi towards the horizon, revealing an impossible chasm.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nShot 1: One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\nA high-aerial view of Kenya's Great Rift Valley, showcasing its distinctive fault lines and the shimmering expanse of Lake Magadi in the middle distance. An impossibly wide, dark fissure already dominates the landscape, running from the foreground, past Lake Magadi's shore, and extending towards the distant horizon. In the foreground, a prominent section of a major paved road is already broken and displaced by the fissure, providing clear scale. Throughout seconds 1-5, the crack visibly widens and deepens, with rock faces crumbling into the abyss, and small sections of landscape along its edges falling away. During seconds 6-8, a large, identifiable section of the road in the mid-ground decisively shears and drops into the expanding chasm, sending a plume of dust upwards. The camera remains fixed, capturing the relentless expansion of the rift. The diegetic sound of continuous, grinding earth movement and rockfall holds a steady, full, unbroken level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How deep do you think this rift would actually go? 🤔",
+  "family": "yer afeti",
+  "seed_id": 14,
+  "caption": "An impossible fissure rapidly tears open along Kenya's Great Rift Valley, a colossal chasm extending from the foreground past the salt flats of Lake Magadi towards the horizon. This crack would span hundreds of kilometers, splitting the Earth's crust with unprecedented speed. Real rifting events, like those observed in 2018 in Kenya, are typically far smaller, often meters wide, and occur over geological timescales, not in a matter of seconds.\n\nSuch an instantaneous, continent-spanning rupture is physically impossible. The energy required to overcome the crustal strength and propagate a fracture at this speed would be astronomical, far exceeding the elastic strain accumulated along tectonic plates. No known mechanism could unleash such force.\n\nThis is a simulation, not real footage. What tells you Lake Magadi is a salt lake without tasting it?",
+  "hashtags": "#GreatRiftValley #Kenya #Earthquake #Geology #Tectonics #Landslide #YerAfeti #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

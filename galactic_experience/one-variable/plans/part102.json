@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 102,
+    "title": "A Lava Fountain Taller Than Mount Etna"
+  },
+  "synopsis": "An impossibly tall lava fountain erupts from Mount Etna, soaring higher than the mountain itself, with the Sicilian coast road visible far below.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nShot 1: One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\nAn orbital view showcases the distinct conical shape of Mount Etna, its summit crater glowing intensely, with the clear blue waters of the Sicilian coast and its coastal road visible far below. An impossibly tall, incandescent lava fountain already erupts from the summit, soaring kilometers into the atmosphere, dwarfing the entire mountain. The plume is a vibrant cascade of molten rock, throwing glowing projectiles outwards. A segment of the Sicilian coast road, dotted with tiny vehicles, remains visible in the lower frame, providing critical scale. Throughout seconds 1-5, the fountain visibly pulses and widens at its base, sending more material higher and wider. During seconds 6-8, a colossal surge of lava and gas decisively expands the fountain's crown, momentarily eclipsing more of the sky and scattering fiery fragments. The camera remains fixed, capturing the relentless power of the eruption. The diegetic sound of a continuous, thunderous roar and explosive bursts holds a steady, full, unbroken level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How far away do you think the heat from this fountain would be felt?",
+  "family": "ates afeti",
+  "seed_id": 18,
+  "caption": "An impossible lava fountain erupts from Mount Etna, its fiery plume soaring dramatically higher than the mountain's 3,357-meter peak, dominating the Sicilian sky. This colossal column of molten rock would stretch kilometers into the stratosphere. Real lava fountains, like those from Stromboli, typically reach hundreds of meters, with Etna's own eruptions, such as in 2021, occasionally producing fountains over a kilometer high for brief periods.\n\nMaintaining a lava fountain of this scale is physically impossible. It would require sustained magma pressure and gas release far exceeding Earth's geological capabilities, along with a vent opening of immense diameter, and an energy output that dwarfs any natural volcanic event.\n\nThis is a simulation, not real footage. How do the colors of the eruption indicate its temperature?",
+  "hashtags": "#MountEtna #LavaFountain #Volcano #Sicily #Geology #FireDisaster #AtesAfeti #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 103,
+    "title": "An Ice Shelf Fracture to the Horizon"
+  },
+  "synopsis": "An enormous Antarctic ice shelf spectacularly breaks away from the Ross Sea edge in one continuous fracture that extends to the horizon, releasing a colossal ice mass.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nShot 1: One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\nAn orbital view presents the vast, featureless expanse of an Antarctic ice shelf, meeting the dark, open water of the Ross Sea at a sharp edge. A massive, impossibly straight fracture line already extends from the foreground edge of the frame, across the ice shelf, and towards the distant horizon, signifying the immense scale of the impending break. A large research vessel, appearing as a tiny white speck against the ice edge, provides an immediate scale reference. Throughout seconds 1-5, the fracture visibly widens along its entire length, revealing deeper, darker crevasses and sending smaller ice chunks falling into the water. During seconds 6-8, a monumental, decisive collapse occurs along the entire fracture, as the main ice shelf separates further, creating a roaring, thunderous cascade of ice into the ocean and generating a powerful wave. The camera remains fixed, capturing the continental-scale event. The diegetic sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8, following the single impact of the colossal break.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How long would an iceberg this big float before melting away?",
+  "family": "buz afeti",
+  "seed_id": 23,
+  "caption": "An impossible fracture rapidly propagates across an Antarctic ice shelf, tearing away from the Ross Sea edge in a single, colossal piece that stretches to the horizon. This fracture would be hundreds of kilometers long and instantly release an ice mass the size of a small country. Real calving events, like the 2017 separation of iceberg A68 from the Larsen C Ice Shelf, produced icebergs up to 5,800 square kilometers, but occurred over weeks or months.\n\nSuch an instantaneous, continent-scale fracture is physically impossible. The shear forces and energy required to shatter an ice shelf of this magnitude across its entire width in mere seconds far exceed any natural stress accumulation. Ice fractures propagate much slower, influenced by tidal flex, meltwater, and internal stresses.\n\nThis is a simulation, not real footage. What features on the ice surface indicate its slow, historical movement?",
+  "hashtags": "#Antarctica #IceShelf #Calving #Glaciology #RossSea #BuzAfeti #PolarRegions #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

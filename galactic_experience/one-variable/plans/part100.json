@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 100,
+    "title": "A Sand Wall Towering Five Kilometers High"
+  },
+  "synopsis": "A colossal wall of Saharan sand, five kilometers high, inexorably advances across the desert dunes towards the distant Atlas Mountains, dwarfing the landscape.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nShot 1: One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\nAn orbital perspective reveals vast Saharan dunefields, stretching towards the distant, rugged outline of the Atlas Mountains under a hazy, orange sky. A colossal wall of sand, rising vertically an impossible five kilometers high, dominates the frame, already at maximum extent. Its leading edge forms a sharp, turbulent front, slowly advancing across the desert floor. In the foreground, a major highway, appearing as a thin ribbon with tiny vehicles, cuts across the dunes, providing immediate scale. Throughout seconds 1-5, the lower portion of the sand wall visibly churns and rolls forward, steadily engulfing more dunes and approaching the highway. During seconds 6-8, the leading edge decisively sweeps over and submerges a section of the highway, obscuring it entirely beneath the moving sand. The camera remains fixed, showcasing the immense scale of the advancing dust. The diegetic sound of a continuous, powerful, roaring sandstorm holds a steady, full, unbroken level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could this much sand actually bury a mountain range?",
+  "family": "atmosfer afeti",
+  "seed_id": 8,
+  "caption": "A five-kilometer-high wall of Saharan sand sweeps across the vast dunefields, an impossible front advancing relentlessly towards the distant, jagged peaks of the Atlas Mountains. This immense dust front, reaching 5,000 meters into the atmosphere, dwarfs any real-world phenomenon. Major haboobs, like the Phoenix event in 2011, typically rise to 1-2 kilometers and are driven by thunderstorm outflows, covering areas of hundreds of square kilometers.\n\nSuch a sustained, five-kilometer-high sand wall is physically impossible on Earth. It would demand atmospheric lift and wind speeds far beyond what is observed, coupled with an unimaginable volume of fine particulate matter, maintained over vast distances without dispersing.\n\nThis is a simulation, not real footage. What geological features in the Atlas Mountains hint at their ancient formation?",
+  "hashtags": "#SaharanDust #Sandstorm #AtmosphericPhenomena #AtlasMountains #Desert #Geology #AtmosphereAfeti #Simulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}
