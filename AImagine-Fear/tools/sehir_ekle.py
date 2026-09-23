@@ -131,7 +131,7 @@ The rider is floating on her back in a {havuz} rooftop pool between dark towers 
 
 You're {fiil} {landmark} on a transparent slide above {sehir}. Every {birim} gets {sifatlar}. {emoji}
 
-#MegaSlideFear {etiket} #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear {etiket} #WaterSlide #POVReels #CGIAdventure
 """
 
 

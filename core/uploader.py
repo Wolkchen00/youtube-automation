@@ -661,11 +661,15 @@ def upload_to_platform(
 ) -> dict | None:
     """Upload video to a single platform via Upload-Post.com.
 
-    social_caption (opt-in): IG/TikTok'ta 'title' yerine geçen UZUN caption metni.
-    Upload-Post, Instagram'da instagram_title'ı ve TikTok'ta tiktok_title'ı post
-    caption'ı olarak kullanır (global 'description' bu iki platformda YOK sayılır;
-    TikTok video caption limiti 2.200 karakter). Boş bırakılırsa eski davranış , 
-    caption = title."""
+    social_caption (opt-in): IG/TikTok'ta post caption'i olan UZUN metin.
+    Global 'description' bu iki platformda YOK sayilir; caption tavani 2.200.
+    Bos birakilirsa eski davranis: caption = title.
+
+    DIKKAT: Instagram'da `instagram_title` TEK BASINA YETMIYOR. Belgelenmis
+    davranis "instagram_title, yoksa title" seklinde ama olculen davranis farkli:
+    parametre kabul ediliyor, yanitta `post_title` olarak geri geliyor, Instagram'a
+    ise `title` iniyor. Bu yuzden caption her iki alana da yaziliyor.
+    Olcum 2026-09-22, canli kanit reel Ddj2SZ9jPWj. Bkz. tests/test_ig_caption_alani.py"""
     if not UPLOAD_POST_API_KEY:
         logger.error("❌ UPLOAD_POST_API_KEY not set!")
         return None
@@ -718,7 +722,17 @@ def upload_to_platform(
         data["media_type"] = "REELS"
         data["share_to_feed"] = "true"
         if social_caption:
+            # OLCULDU 2026-09-22: `instagram_title` TEK BASINA yetmiyor.
+            # Upload-Post parametreyi kabul ediyor ve kendi yanitinda
+            # `post_title` olarak caption'i geri veriyor, ama Instagram'a
+            # giden metin `title` oluyor.
+            # Canli kanit: reel Ddj2SZ9jPWj (21 Eyl), IG'nin og:description'i
+            # "Golden Gate Bridge, into the fog #shorts" , yani gonderdigimiz
+            # BASLIK. Caption'in govdesi ve alti etiketinin HICBIRI sayfada yok.
+            # Bu yuzden caption'i inen alana da yaziyoruz. IG caption tavani
+            # 2.200; TITLE_LIMIT=100 yalniz YouTube icindir ve burada gecersiz.
             data["instagram_title"] = social_caption[:2100]
+            data["title"] = social_caption[:2100]
     elif platform == "tiktok":
         data["privacy_level"] = "PUBLIC_TO_EVERYONE"
         if social_caption:

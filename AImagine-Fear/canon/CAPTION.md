@@ -9,15 +9,21 @@ Instagram'in ayni izleyici kitlesine dusurmesini saglamak.
 You're <fiil-ing> <edat> <LANDMARK> on a transparent water slide above <CITY>.
 Every <birim> <takes/gets> you <sifat>, <sifat>, and <sifat>. <iki emoji>
 
-#MegaSlideFear #<LandmarkEtiketi> #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #<LandmarkEtiketi> #WaterSlide #POVReels #CGIAdventure
 ```
 
 ## Sabit etiketler (her videoda aynen)
 
-`#MegaSlideFear` `#WaterSlide` `#POVReels` `#CGIAdventure` `#ViralReels`
+`#MegaSlideFear` `#WaterSlide` `#POVReels` `#CGIAdventure`
 
-Bu bes etiket kaynak kanalin iki videosunda da harfi harfine ayni. Degistirmiyoruz:
+Bu dort etiket kaynak kanalin iki videosunda da harfi harfine ayni. Degistirmiyoruz:
 algoritmanin bizi ayni ilgi kumesine yazmasini istiyoruz.
+
+Degisken etiketle birlikte TOPLAM BES eder ve bu bir tavandir, tercih degil:
+Instagram 18 Aralik 2025'te gonderi basina etiket tavanini 30'dan 5'e indirdi
+ve tavan caption ile yorumlari BIRLIKTE sayar, yani etiketi ilk yoruma tasimak
+yer acmaz. 22 Eylul 2026'da `#ViralReels` dusuruldu: jenerik erisim etiketiydi,
+konu bilgisi tasimiyordu.
 
 ## Degisken etiket
 

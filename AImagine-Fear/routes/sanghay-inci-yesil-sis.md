@@ -50,7 +50,7 @@ The rider is floating on her back in a green-lit rooftop pool between dark tower
 
 You're sliding down past the Oriental Pearl Tower on a transparent slide above Shanghai. Every turn gets blinder, faster, and colder. 🌫️💦
 
-#MegaSlideFear #ShanghaiPearl #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #ShanghaiPearl #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

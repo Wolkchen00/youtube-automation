@@ -48,7 +48,7 @@ The rider treads water in a narrow yellow-lit pool on a podium roof at the foot 
 
 You're dropping through the cloud between the Petronas Towers on a transparent water slide above Kuala Lumpur. Every second gets faster, tighter, and louder. 🌧️💦
 
-#MegaSlideFear #PetronasTowers #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #PetronasTowers #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

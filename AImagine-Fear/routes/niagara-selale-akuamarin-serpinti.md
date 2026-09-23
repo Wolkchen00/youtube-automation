@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of an aquamarine-lit pool on the Table
 
 You're dropping through the mist of the Horseshoe Falls on a transparent water slide above Niagara Falls. Every second gets faster, louder, and closer. 🌫️💦
 
-#MegaSlideFear #NiagaraFalls #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #NiagaraFalls #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

@@ -77,4 +77,4 @@ etraftaki binalar, gokyuzu, geride kalan landmark.
 
 You're falling past the Example Tower on a transparent water slide above Example City. Every second takes you faster, lower, and louder. 🌫️💦
 
-#MegaSlideFear #ExampleTower #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #ExampleTower #WaterSlide #POVReels #CGIAdventure

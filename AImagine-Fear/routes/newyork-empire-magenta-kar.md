@@ -50,7 +50,7 @@ The rider is floating on her back in a pink-lit rooftop pool between dark towers
 
 You're dropping past the Empire State Building on a transparent slide above New York. Every second gets colder, faster, and steeper. ❄️💦
 
-#MegaSlideFear #NYCEmpireState #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #NYCEmpireState #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

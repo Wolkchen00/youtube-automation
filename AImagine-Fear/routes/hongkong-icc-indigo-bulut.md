@@ -48,7 +48,7 @@ The rider stands waist deep in a square indigo-lit pool on a harbour-front podiu
 
 You're dropping through the sea fog off the ICC tower on a transparent water slide above Hong Kong. Every second gets faster, wetter, and closer. 🌫️💦
 
-#MegaSlideFear #HongKongICC #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #HongKongICC #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

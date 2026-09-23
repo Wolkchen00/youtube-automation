@@ -45,7 +45,7 @@ ARALIK_RE = re.compile(r"^\[(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\]")
 # 2026-09-14 Ihsan karari. Degistirilmez.
 KANON_LEGWEAR = "a black high-cut one-piece swimsuit, legs bare from the hip down"
 GEREKLI_ETIKETLER = ("#MegaSlideFear", "#WaterSlide", "#POVReels",
-                     "#CGIAdventure", "#ViralReels")
+                     "#CGIAdventure")
 GECERLI_SURE = 15
 
 HATA = []

@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a lavender-lit pool on a pier rooft
 
 You're dropping through the marine fog off the Space Needle on a transparent water slide above Seattle. Every second gets faster, greyer, and closer. 🌫️💦
 
-#MegaSlideFear #SpaceNeedle #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #SpaceNeedle #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

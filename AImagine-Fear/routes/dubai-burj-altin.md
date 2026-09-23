@@ -50,7 +50,7 @@ The rider is floating on her back in a gold-lit rooftop pool between dark towers
 
 You're falling past the Burj Khalifa on a transparent slide above Dubai. Every second gets faster, hotter, and higher. 🌑💦
 
-#MegaSlideFear #DubaiBurjKhalifa #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #DubaiBurjKhalifa #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

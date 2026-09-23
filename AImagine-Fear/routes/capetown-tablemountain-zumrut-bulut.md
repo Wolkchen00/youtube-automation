@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of an emerald-lit rooftop pool above t
 
 You're dropping inside the tablecloth cloud off the edge of Table Mountain on a transparent water slide above Cape Town. Every second gets faster, whiter, and closer. 🌫️💦
 
-#MegaSlideFear #TableMountain #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #TableMountain #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

@@ -50,7 +50,7 @@ The rider is floating on her back in a lit turquoise rooftop pool in Toronto at 
 
 You're sliding around the CN Tower on a transparent water slide above Toronto. Every turn takes you faster through the clouds. ☁️💦
 
-#MegaSlideFear #CNTower #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #CNTower #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

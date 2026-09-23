@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a crimson-lit thermal pool on a ter
 
 You're dropping through the banner cloud off the Matterhorn ridge on a transparent water slide above Zermatt. Every second gets faster, colder, and closer. 🌫️💦
 
-#MegaSlideFear #Matterhorn #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #Matterhorn #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

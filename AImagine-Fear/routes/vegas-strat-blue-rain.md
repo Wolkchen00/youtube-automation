@@ -50,7 +50,7 @@ The rider is floating on her back in a glowing cyan rooftop pool between dark re
 
 You're falling through glowing neon around the STRAT Tower. Every second gets faster, higher, and crazier above Las Vegas. 🌈💦
 
-#MegaSlideFear #LasVegasSTRAT #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #LasVegasSTRAT #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

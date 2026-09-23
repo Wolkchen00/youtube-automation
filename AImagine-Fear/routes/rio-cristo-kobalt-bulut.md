@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a cobalt-lit pool on a terrace deck
 
 You're dropping through the cloud off the terrace under Christ the Redeemer on a transparent water slide above Rio de Janeiro. Every second gets faster, whiter, and closer. 🌫️💦
 
-#MegaSlideFear #ChristTheRedeemer #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #ChristTheRedeemer #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

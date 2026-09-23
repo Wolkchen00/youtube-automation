@@ -24,10 +24,10 @@ def test_etiketler_captiondan_turetiliyor() -> None:
     caption = (
         "You're falling past the Burj Khalifa above Dubai.\n\n"
         "#MegaSlideFear #DubaiBurjKhalifa #WaterSlide #POVReels "
-        "#CGIAdventure #ViralReels"
+        "#CGIAdventure"
     )
     assert gunluk.etiketler(caption) == (
-        "MegaSlideFear,DubaiBurjKhalifa,WaterSlide,POVReels,CGIAdventure,ViralReels"
+        "MegaSlideFear,DubaiBurjKhalifa,WaterSlide,POVReels,CGIAdventure"
     )
 
 
@@ -49,7 +49,10 @@ def test_gercek_rotanin_etiketleri_uretiliyor() -> None:
     )
     tags = gunluk.etiketler(rota.sections["CAPTION"])
     assert tags.startswith("MegaSlideFear,")
-    assert "ViralReels" in tags
+    assert "CGIAdventure" in tags
+    # 22 Eyl 2026: Instagram tavani 5. Jenerik erisim etiketi dusuruldu.
+    assert "ViralReels" not in tags
+    assert len(tags.split(",")) == 5
     # YouTube'un otomatik copu ARTIK gitmiyor
     assert "camera" not in tags.lower() and "sharing" not in tags.lower()
 

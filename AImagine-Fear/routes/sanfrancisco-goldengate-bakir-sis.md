@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a copper-lit pool on the pier deck 
 
 You're dropping through the fog off the top of the Golden Gate Bridge on a transparent water slide above San Francisco. Every second gets faster, colder, and closer. 🌫️💦
 
-#MegaSlideFear #GoldenGateBridge #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #GoldenGateBridge #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

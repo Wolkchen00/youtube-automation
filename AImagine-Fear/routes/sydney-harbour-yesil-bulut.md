@@ -48,7 +48,7 @@ The rider holds the tiled edge of a long green-lit swimming pool set into a ston
 
 You're dropping through the sea cloud off the Sydney Harbour Bridge on a transparent water slide above Sydney. Every second gets faster, colder, and closer. 🌫️💦
 
-#MegaSlideFear #SydneyHarbourBridge #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #SydneyHarbourBridge #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

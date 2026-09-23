@@ -50,7 +50,7 @@ The rider is floating on her back in a white-lit rooftop pool between dark tower
 
 You're dropping past the Eiffel Tower on a transparent slide above Paris. Every second gets faster, lower, and colder. 💧💦
 
-#MegaSlideFear #ParisEiffel #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #ParisEiffel #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

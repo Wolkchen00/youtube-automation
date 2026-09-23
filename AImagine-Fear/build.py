@@ -175,8 +175,12 @@ FIXED_TRAILING_TAGS = (
     "#WaterSlide",
     "#POVReels",
     "#CGIAdventure",
-    "#ViralReels",
 )
+# 2026-09-22: #ViralReels DUSURULDU. Instagram 18 Aralik 2025'te etiket tavanini
+# 30'dan 5'e indirdi ve tavan caption ile yorumlari BIRLIKTE sayiyor. Dusen etiket
+# jenerik erisim etiketiydi; konu bilgisi tasimiyordu ve ayni aile
+# Notion_Video_Caption_Yazici/data/kurallar.json "erisim etiketi" kuralinda zaten
+# yasakli. Kalan bes: marka + landmark + konsept + bicim + ortam.
 
 INTERVAL_RE = re.compile(
     r"^\[([0-9]+(?:\.[0-9]+)?)-([0-9]+(?:\.[0-9]+)?)\]\s+(.+)$"
@@ -761,7 +765,7 @@ def _validate_caption(route: Route, root: Path) -> list[str]:
         )
     hashtags = HASHTAG_RE.findall(route.sections["CAPTION"])
     valid_tags = (
-        len(hashtags) == 6
+        len(hashtags) == 5
         and hashtags[0] == "#MegaSlideFear"
         and tuple(hashtags[2:]) == FIXED_TRAILING_TAGS
     )
@@ -771,7 +775,7 @@ def _validate_caption(route: Route, root: Path) -> list[str]:
                 root,
                 caption_path,
                 route.slug,
-                "expected exactly 6 hashtags with #MegaSlideFear first and "
+                "expected exactly 5 hashtags with #MegaSlideFear first and "
                 + " ".join(FIXED_TRAILING_TAGS)
                 + " last",
                 "CAPTION",

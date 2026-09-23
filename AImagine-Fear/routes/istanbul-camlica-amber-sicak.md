@@ -50,7 +50,7 @@ The rider is floating on her back in a glowing amber rooftop pool between dark h
 
 You're falling past the Camlica Tower on a transparent slide above Istanbul. Every second gets faster, warmer, and higher. 🌇💦
 
-#MegaSlideFear #IstanbulCamlicaTower #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #IstanbulCamlicaTower #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

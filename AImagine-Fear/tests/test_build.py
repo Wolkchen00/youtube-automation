@@ -74,7 +74,7 @@ def _route_text(
         or (
             "You're falling from the Test Tower above Test City. Every second gets "
             "faster, lower, and louder.\n\n"
-            "#MegaSlideFear #TestTower #WaterSlide #POVReels #CGIAdventure #ViralReels"
+            "#MegaSlideFear #TestTower #WaterSlide #POVReels #CGIAdventure"
         ),
         "TITLE": (
             "Test Tower glass drop #shorts\n"
@@ -221,11 +221,11 @@ def test_voice_time_outside_duration_fails(tmp_path: Path) -> None:
     (
         (
             "You're falling above Test City.\n\n"
-            "#MegaSlideFear #TestTower #WaterSlide #POVReels #ViralReels"
+            "#MegaSlideFear #TestTower #WaterSlide #POVReels"
         ),
         (
             "You're falling above Test City.\n\n"
-            "#MegaSlideFear #TestTower #POVReels #WaterSlide #CGIAdventure #ViralReels"
+            "#MegaSlideFear #TestTower #POVReels #WaterSlide #CGIAdventure"
         ),
     ),
 )
@@ -233,7 +233,7 @@ def test_caption_missing_or_misordered_tags_fails(
     tmp_path: Path, caption: str
 ) -> None:
     message = _failure(tmp_path, _route_text(caption=caption))
-    assert "expected exactly 6 hashtags" in message
+    assert "expected exactly 5 hashtags" in message
 
 
 def test_route_word_count_under_600_fails(tmp_path: Path) -> None:

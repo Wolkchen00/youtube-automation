@@ -48,7 +48,7 @@ The rider kneels in the shallow end of a long amber-lit pool on a riverside bric
 
 You're dropping through the cloud ceiling off the Shard on a transparent water slide above London. Every second gets faster, colder, and lower. 🌧️💦
 
-#MegaSlideFear #TheShardLondon #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #TheShardLondon #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

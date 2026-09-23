@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a bronze-lit pool on a lakeside ter
 
 You're dropping through the gorge cloud under Neuschwanstein Castle on a transparent water slide above Bavaria. Every second gets faster, colder, and closer. 🌫️💦
 
-#MegaSlideFear #Neuschwanstein #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #Neuschwanstein #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

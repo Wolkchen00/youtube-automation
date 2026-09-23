@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a rose gold-lit infinity pool cut i
 
 You're dropping into the caldera mist off the cliffs of Oia on a transparent water slide above Santorini. Every second gets faster, whiter, and closer. 🌫️💦
 
-#MegaSlideFear #Santorini #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #Santorini #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 

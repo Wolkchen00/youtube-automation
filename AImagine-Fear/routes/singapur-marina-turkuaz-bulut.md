@@ -48,7 +48,7 @@ The rider hangs at the open overflow edge of a turquoise-lit rooftop pool in Sin
 
 You're dropping through a cloud bank off the Marina Bay Sands on a transparent water slide above Singapore. Every second gets faster, whiter, and closer. 🌫️💦
 
-#MegaSlideFear #MarinaBaySands #WaterSlide #POVReels #CGIAdventure #ViralReels
+#MegaSlideFear #MarinaBaySands #WaterSlide #POVReels #CGIAdventure
 
 ## TITLE
 
