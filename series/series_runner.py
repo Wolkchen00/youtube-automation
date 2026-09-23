@@ -35,6 +35,11 @@ from series import produce
 from series import credit_gate
 from series import durable_artifact
 from series import notifier
+from series.engagement import (
+    insert_caption_question,
+    pick_caption_question,
+    pick_first_comment,
+)
 from series.series_meta import SeriesMeta, part_plan_path, list_active_series
 from series.shots import load_plan
 
@@ -507,7 +512,8 @@ def _record_publish_state(meta: SeriesMeta, n: int, platform: str, **fields) -> 
 
 
 def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
-                  caption: str = "", *, durable: bool = False) -> list[str]:
+                  caption: str = "", *, durable: bool = False,
+                  first_comment: str = "", caption_question: str = "") -> list[str]:
     """Part'ı serinin profilinden tüm platformlara yayınla. Başarılı platformları döndür.
 
     ``durable`` (ROCK E, opt-in): platform başına tamamlanma ve BEKLEYEN istek
@@ -524,7 +530,18 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
     delivery kopyasını alır ,  iki platform da videoyu zaten 1080p'ye yeniden
     kodladığı için 4K oraya sadece upload süresi/riski demek."""
     title = meta.title_for(n, subtitle)
-    desc = (caption or meta.description_for(n, subtitle))[:4900]
+    base_desc = caption or meta.description_for(n, subtitle)
+    desc_with_question = insert_caption_question(base_desc, caption_question)
+    desc = desc_with_question[:4900]
+    social_caption = caption
+    if caption:
+        social_caption = insert_caption_question(caption, caption_question)
+    elif desc_with_question != base_desc and "?" not in title:
+        # Captionsiz plan (wild-encounter): IG/TikTok eskiden yalniz basligi
+        # aliyordu. Simdi baslik + soru alir. Etiket EKLENMEZ, yani etiket
+        # sayisi eskisiyle ayni kalir. Soru YouTube aciklamasina girmediyse
+        # buraya da girmez, iki platform ayni kararla cikar.
+        social_caption = f"{title}\n\n{caption_question}"
     from series.bible import episode_dir
     delivery = episode_dir(meta.slug, n) / "delivery_1080.mp4"
     has_delivery = delivery.exists() and delivery.stat().st_size > 0
@@ -543,7 +560,8 @@ def _publish_part(meta: SeriesMeta, n: int, video_path, subtitle: str = "",
             logger.info(f"📤 {plat.upper()} → {title}")
         res = upload_to_platform(src, title, desc,
                                  user=meta.upload_profile, platform=plat,
-                                 tags=meta.hashtags, social_caption=caption)
+                                 tags=meta.hashtags, social_caption=social_caption,
+                                 first_comment=first_comment)
         if res:
             upload_results[plat] = res if isinstance(res, dict) else {}
             async_failures.pop(plat, None)
@@ -1032,11 +1050,14 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     # yazılı hikâyesi + bölüme-özgü etiketler + serinin marka etiketleri tek metinde
     # birleşir ve YT açıklaması + IG/TikTok caption'ı olur. Alan yoksa eski davranış.
     caption = str(plan.get("caption") or "").strip()
+    caption_question = pick_caption_question(meta.data, n)
     if caption:
         tags = " ".join(t for t in (str(plan.get("hashtags") or "").strip(),
                                     meta.hashtags.strip()) if t)
         if tags:
             caption = f"{caption}\n\n{tags}"
+        caption = insert_caption_question(caption, caption_question)
+    first_comment = pick_first_comment(plan, meta.data, n)
 
     # 'Bitmeyen yolculuk' ,  önceki bölümün son karesinden devam (parçalar arası zincir).
     # Bulutta her koşu temiz checkout olduğu için son kare URL'i git'li series.json'da tutulur.
@@ -1271,8 +1292,11 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         logger.warning("⚠️ upload_profile boş ,  yayın atlandı. series.json'a upload_profile ekle.")
         return False
 
-    ok = _publish_part(meta, n, video, subtitle, caption=caption,
-                       durable=durable_artifacts)
+    ok = _publish_part(
+        meta, n, video, subtitle, caption=caption,
+        durable=durable_artifacts, first_comment=first_comment,
+        caption_question=caption_question,
+    )
     required_platforms = set(bible.required_platforms) if bible else set()
     # Iki taraf da kucuk harfe indirgenir: bible.required_platforms zaten
     # normalize edilir, ama yayinci "YouTube" dondururse zorunlu platform

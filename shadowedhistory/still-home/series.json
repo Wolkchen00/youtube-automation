@@ -461,5 +461,17 @@
         "degraded": false
       }
     }
+  },
+  "engagement": {
+    "first_comment_pool": [
+      "Which city should we visit in 2512 next? 🌆",
+      "Would you live here in 2512? Yes or no?",
+      "Which city do you think changes the most by 2512?",
+      "What should your city build by 2512?",
+      "Would you visit or move here? Pick one.",
+      "Which building from today should still stand in 2512?",
+      "Which city do you want to see in the future?",
+      "Better or worse than today? One word."
+    ]
   }
 }

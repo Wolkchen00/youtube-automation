@@ -72,6 +72,7 @@ from series.bible import (
     doctrine_sha256,
 )
 from series.series_meta import SeriesMeta, part_plan_path, plans_dir
+from series.engagement import engagement_block, valid_engagement_question
 from series.shots import (
     NEGATIVE_VIDEO_LANGUAGE,
     OBJECT_CARD_FIELDS,
@@ -1024,6 +1025,12 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
                    'matched to THIS episode>",') if want_music else ""
     cap_shape = ('\n   "caption": "<70-140 word written story of the episode>",'
                  '\n   "hashtags": "<#Tag1 #Tag2 ... 6-9 tags>",') if want_caption else ""
+    # Kanalin ilk yorumu (Upload-Post first_comment). OPT-IN: yalniz series.json'da
+    # "engagement" bloku olan seride istenir; digerlerinin istemi bayt bayt ayni kalir
+    # (tests/golden ve tests/fixtures/rf_tekplan_golden bunu korur).
+    want_first_comment = bool(engagement_block(getattr(meta, "data", None)))
+    first_comment_shape = ('\n   "first_comment": "<one short question about this episode>",'
+                           if want_first_comment else "")
     face_shape = '\n   "face_visible": false,' if face_hidden else ""
     plato_format_shape = (
         f'\n   "format_version": {json.dumps(format_version)},'
@@ -1118,6 +1125,13 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         # Kanal kendi caption kuralini yazdi: yukaridaki tarih-belgeseli kalibinin
         # yerine gecer. YALNIZ bu anahtari tasiyan seride; digerleri degismez.
         cap_rule = "\n- CAPTION: " + caption_style
+    first_comment_rule = "" if not want_first_comment else (
+        '\n- FIRST_COMMENT: "first_comment" = ONE short, casual, specific question about '
+        'THIS episode\'s subject that a viewer can answer in a few words, written as the '
+        'channel speaking. It must differ from the caption\'s question, be at most 150 '
+        'characters, contain a question mark, contain no hashtags or links, and use at '
+        'most one emoji. Use the same language as the caption\'s first language block.'
+    )
     if formatted_object:
         refs_rule = (
             '\n- ENVIRONMENT: every shot must set "environment" to the object_card.environment id, '
@@ -1361,7 +1375,7 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
 Return STRICT JSON ONLY, exactly this shape:
 {{"episodes": [
   {{"episode": {{"number": <int>, "title": "<title>"}},
-   "synopsis": "<one sentence>",{face_shape}{format_shape}
+   "synopsis": "<one sentence>",{face_shape}{format_shape}{first_comment_shape}
    "hook_shot": <int>,{family_shape}{seed_shape}
    "narration": {narr_shape},{tc_shape}{music_shape}{cap_shape}
    "shots": [{{{shot_fields}}}]}}
@@ -1373,7 +1387,7 @@ RULES:
 - TITLES: {title_rule} All {batch} titles must be distinct from each other AND from every
   EXISTING episode listed in the input; never repeat or lightly reword one.
 - "synopsis": ONE specific sentence describing this episode (it is
-  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{refs_rule}{face_rule}{object_rule}
+  stored and used to keep future episodes fresh).{family_rule}{seed_rule}{narr_rule}{tc_rule}{fact_rule}{music_rule}{cap_rule}{first_comment_rule}{refs_rule}{face_rule}{object_rule}
 {chain_rule}{shot_plan_rule}
 {episode_arc_rule}
 {hook_rule}
@@ -1842,6 +1856,9 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
                       "synopsis": str(plan.get("synopsis") or "").strip()[:300],
                       "narration": ntext,
                       "shots": clean_shots}
+        first_comment = plan.get("first_comment")
+        if valid_engagement_question(first_comment):
+            normalized["first_comment"] = first_comment.strip()
         if formatted_object:
             normalized["format_version"] = plan.get("format_version")
             normalized["object_card"] = (

@@ -1,0 +1,23 @@
+{
+  "_not": "Yayin aninda eklenir, rota dosyalarina yazilmaz. caption_questions caption'da etiketlerin hemen ustune tek satir girer. first_comments kanalin kendi ilk yorumudur (Upload-Post first_comment). Etiket ve link YASAK: Instagram'in 5 etiket tavani caption ve yorumu birlikte sayar.",
+  "caption_questions": [
+    "Would you ride this one? Yes or no?",
+    "Which city should we slide over next?",
+    "Would you keep your eyes open the whole way?",
+    "Which landmark should get the next slide?",
+    "How many seconds would you last on this?",
+    "Would you go first or watch someone else try?",
+    "Which part scared you more, the drop or the height?",
+    "Would you ride it again right after?"
+  ],
+  "first_comments": [
+    "Which city should we build the next slide over? 🌍",
+    "Be honest, would you take this ride?",
+    "Where would you scream first, the start or the drop?",
+    "Name your city and we might build a slide there. Deal?",
+    "Eyes open or closed the whole way down?",
+    "Would you do it at night or during the day?",
+    "Which landmark do you want to slide past next?",
+    "Rate this ride from 1 to 10. How scary?"
+  ]
+}

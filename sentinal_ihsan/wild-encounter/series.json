@@ -447,5 +447,27 @@
       }
     }
   },
-  "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti."
+  "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti.",
+  "engagement": {
+    "first_comment_pool": [
+      "Which giant creature should we build next? 🦖",
+      "Would you climb out calm or panic the whole time?",
+      "Be honest, how long before you noticed it's a set?",
+      "Which one scared you more, the teeth or the tongue?",
+      "Would you volunteer for this shot? Yes or no?",
+      "Which animal would you never let near your face?",
+      "What should the crew build bigger next time?",
+      "Rate the creature from 1 to 10. Real enough?"
+    ],
+    "caption_question_pool": [
+      "Would you trust the crew to open those jaws?",
+      "Which part looked the most real to you?",
+      "Could you keep a straight face in there?",
+      "How many takes do you think this needed?",
+      "Which set should we build next: jungle, desert or ocean?",
+      "Would you do it again for a second take?",
+      "Real enough to fool your friends?",
+      "Would you rather be the performer or the crew?"
+    ]
+  }
 }

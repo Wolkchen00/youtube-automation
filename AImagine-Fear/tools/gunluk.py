@@ -694,6 +694,29 @@ def baslik_sec(slug: str, gecmis: list[dict]) -> tuple[str | None, str]:
     return secilen, ""
 
 
+ETKILESIM = KOK / "canon" / "ETKILESIM.json"
+
+
+def etkilesim_sec(gun: int | None = None, yol: Path = ETKILESIM) -> tuple[str, str]:
+    """Gunun caption sorusu ve ilk yorumu. Gune gore doner, yani her gun farkli.
+
+    Dosya yoksa ya da bozuksa yalniz uyari yazar ve ("", "") doner: yayin
+    bugunku haliyle, sorusuz ve yorumsuz cikar. Etkilesim yayini ASLA durdurmaz.
+    """
+    if gun is None:
+        gun = datetime.now(LA).date().toordinal()
+    try:
+        veri = json.loads(yol.read_text(encoding="utf-8"))
+        sorular = [s for s in veri.get("caption_questions") or [] if isinstance(s, str) and s.strip()]
+        yorumlar = [s for s in veri.get("first_comments") or [] if isinstance(s, str) and s.strip()]
+    except (OSError, ValueError, AttributeError, TypeError) as hata:
+        log("UYARI: %s okunamadi (%s), soru ve ilk yorum eklenmeden yayinlanacak" % (yol.name, hata))
+        return "", ""
+    soru = sorular[gun % len(sorular)].strip() if sorular else ""
+    yorum = yorumlar[gun % len(yorumlar)].strip() if yorumlar else ""
+    return soru, yorum
+
+
 def _yayin_komutu(
     master: Path, slug: str, allow_same_day: bool, baslik: str, tags: str
 ) -> list[str] | None:
@@ -705,6 +728,11 @@ def _yayin_komutu(
         PY, "-X", "utf8", str(KOK / "tools" / "yayinla.py"), str(master),
         "--caption-file", str(caption), "--title", baslik, "--tags", tags,
     ]
+    soru, yorum = etkilesim_sec()
+    if soru:
+        komut += ["--caption-question", soru]
+    if yorum:
+        komut += ["--first-comment", yorum]
     if allow_same_day:
         komut.append("--allow-same-day")
     return komut

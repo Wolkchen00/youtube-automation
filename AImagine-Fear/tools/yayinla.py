@@ -45,6 +45,19 @@ def _yukleyici():
     return upload_to_platform, UPLOAD_USERS, CHANNEL_PLATFORMS
 
 
+def soru_ekle(caption: str, soru: str) -> str:
+    """Soruyu etiket satirinin hemen ustune tek paragraf olarak koyar.
+
+    Govdede zaten soru varsa ya da soru gecersizse caption AYNEN doner. Etiket
+    sayisi degismez; kural seri motoruyla ortak (series/engagement.py).
+    """
+    if str(YT_KOK) not in sys.path:
+        sys.path.insert(0, str(YT_KOK))
+    from series.engagement import insert_caption_question
+
+    return insert_caption_question(caption, (soru or "").strip())
+
+
 def sha(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -74,6 +87,12 @@ def main() -> int:
                         "yani kanal YouTube'un otomatik copuyla yayinlaniyordu.")
     p.add_argument("--ek-alanlar", default="",
                    help="defter satirina eklenecek JSON sozluk (gunluk.py gecirir)")
+    p.add_argument("--caption-question", default="",
+                   help="caption'da etiketlerin ustune eklenecek tek soru "
+                        "(govdede zaten soru varsa eklenmez)")
+    p.add_argument("--first-comment", default="",
+                   help="kanalin kendi ilk yorumu; Upload-Post first_comment. "
+                        "Etiket ve link iceremez, icerirse yorum atlanir.")
     p.add_argument("--skip-if-published", action="store_true",
                    help="video zaten yayinlandiysa HATA verme, 0 ile cik. "
                         "Tekrarlayan cron'lar icin: kapinin calismasi hata degildir.")
@@ -87,6 +106,8 @@ def main() -> int:
         sys.exit("Caption yok: %s" % cap_path)
     caption = cap_path.read_text(encoding="utf-8").strip()
     title = args.title or caption.splitlines()[0][:95]
+    if args.caption_question:
+        caption = soru_ekle(caption, args.caption_question)
 
     parmak = sha(video)
     gecmis = defter_oku()
@@ -124,6 +145,7 @@ def main() -> int:
     print("baslik     : %s" % title)
     print("caption    : %d karakter, %d etiket" % (len(caption), caption.count("#")))
     print("tags       : %s" % (args.tags or "YOK"))
+    print("ilk yorum  : %s" % (args.first_comment or "YOK"))
     print("-" * 62)
     print(caption)
     print("=" * 62)
@@ -144,6 +166,7 @@ def main() -> int:
                 platform=platform,
                 social_caption=caption,
                 tags=args.tags,
+                first_comment=args.first_comment,
             )
         except Exception as e:
             r = {"hata": str(e)}

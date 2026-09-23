@@ -242,5 +242,17 @@
       "last_reason_code": "UNKNOWN",
       "hold_reason": "üretim nedeni bilinmiyor"
     }
+  },
+  "engagement": {
+    "first_comment_pool": [
+      "Where should we fly through next? 🚀",
+      "Which planet would you dive into first?",
+      "Would you take this ride? Yes or no?",
+      "Which place in space do you want to see from inside?",
+      "Which was the wildest part of the ride?",
+      "Pick one: Saturn's rings or Jupiter's storm?",
+      "How long would you last on this flight?",
+      "Which moon should we fly into next?"
+    ]
   }
 }

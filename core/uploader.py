@@ -60,6 +60,38 @@ CHANNEL_FEED_LOOKBACK = 25
 TITLE_LIMIT = 100
 
 
+def clean_first_comment(text) -> str:
+    """Normalize a safe Upload-Post first comment, or reject it completely."""
+    value = str(text or "").strip()
+    if not value:
+        return ""
+    if "#" in value:
+        logger.warning(
+            "First comment atlandi: hashtag Instagram'in caption + yorum sinirina girer."
+        )
+        return ""
+    lowered = value.lower()
+    if "http" in lowered or "www." in lowered:
+        logger.warning("First comment atlandi: link icermemeli.")
+        return ""
+    value = re.sub(r"\s*[\r\n]+\s*", " ", value)
+    if len(value) <= 300:
+        return value
+    clipped = value[:300]
+    boundary = clipped.rfind(" ")
+    return clipped[:boundary].rstrip() if boundary >= 0 else clipped
+
+
+def _log_upload_warnings(result: dict) -> None:
+    """Surface non-fatal Upload-Post warnings without changing success semantics."""
+    warnings = result.get("warnings") if isinstance(result, dict) else None
+    if not isinstance(warnings, list):
+        return
+    for warning in warnings:
+        if str(warning).strip():
+            logger.warning("Upload-Post warning: %s" % warning)
+
+
 def _titles_from_api(channel_id: str) -> set[str] | None:
     """Son yuklemelerin normalize basliklari, Data API v3 uzerinden.
 
@@ -657,6 +689,7 @@ def upload_to_platform(
     privacy: str = "public",
     tags: str = "",
     social_caption: str = "",
+    first_comment: str = "",
     allow_duplicate_title: bool = False
 ) -> dict | None:
     """Upload video to a single platform via Upload-Post.com.
@@ -712,6 +745,9 @@ def upload_to_platform(
         "user": user,
         "platform[]": platform,
     }
+    cleaned_first_comment = clean_first_comment(first_comment)
+    if cleaned_first_comment:
+        data["first_comment"] = cleaned_first_comment
 
     if platform == "youtube":
         data["description"] = description[:5000]
@@ -768,9 +804,13 @@ def upload_to_platform(
                 request_id, job_id = _async_reference(result)
                 if not _publication_identifier(result, platform) and (request_id or job_id):
                     _remember_published_title(user, platform, published_title)
-                    return _confirm_async_upload(result, platform, headers)
+                    confirmed = _confirm_async_upload(result, platform, headers)
+                    if confirmed:
+                        _log_upload_warnings(confirmed)
+                    return confirmed
                 logger.info(f"✅ {platform.upper()} uploaded: {title[:50]}...")
                 _remember_published_title(user, platform, published_title)
+                _log_upload_warnings(result)
                 return result
 
             err = _extract_error(result, platform)
@@ -782,6 +822,16 @@ def upload_to_platform(
                 return None
 
             logger.error(f"❌ {platform.upper()} upload error (HTTP {response.status_code}): {err}")
+            # Ilk yorum emniyeti: Upload-Post belgelerine gore yorum hatasi
+            # `warnings` olarak doner ve yayini dusurmez. Yine de 4xx'te istek
+            # hic kabul edilmemistir (video yuklenmedi, mukerrer riski yok);
+            # yorum yuzunden bir video kaybolmasin diye BIR KEZ yorumsuz denenir.
+            if 400 <= response.status_code < 500 and "first_comment" in data:
+                logger.warning(
+                    f"⚠️ {platform.upper()} ilk yorumlu istek reddedildi, yorumsuz yeniden deneniyor"
+                )
+                data.pop("first_comment")
+                continue
             # Don't retry on auth/client errors (4xx)
             if 400 <= response.status_code < 500:
                 return None

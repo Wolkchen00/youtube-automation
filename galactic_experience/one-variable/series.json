@@ -269,5 +269,17 @@
         "degraded": false
       }
     }
+  },
+  "engagement": {
+    "first_comment_pool": [
+      "Which place should we test next? 🌋",
+      "Would you watch this from above or run? One word.",
+      "Which disaster scares you the most?",
+      "Which place do you want to see hit next?",
+      "Which was worse, the sound or the scale?",
+      "How far away would you want to be from this?",
+      "Pick one: flood, fire, quake or ice?",
+      "Which landmark should face the next one?"
+    ]
   }
 }
