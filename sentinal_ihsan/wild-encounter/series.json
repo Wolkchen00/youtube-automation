@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 19,
-  "next_part": 15,
+  "next_part": 16,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -395,6 +395,48 @@
         "tiktok"
       ],
       "published_at": "2026-09-21T22:23:02.872913+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "15": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep15/ep15_mastered.mp4",
+      "subtitle": "This GIANT COBRA Is NOT Real",
+      "stack_sha256": "fcace58ea86499a498754fd1b1e142ab4855cc23dd5ebf284d665019cf326171",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part15",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "aCJ66hoUHCg",
+          "video_sha256": "8ea5b86ae53e6094c051f1ff3f994a19589ee37003b1801becb7e70503183b1d",
+          "ts": "2026-09-23T19:23:01.696195+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "17992506419840926",
+          "video_sha256": "8ea5b86ae53e6094c051f1ff3f994a19589ee37003b1801becb7e70503183b1d",
+          "ts": "2026-09-23T19:24:14.504891+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7688813766296751373",
+          "video_sha256": "8ea5b86ae53e6094c051f1ff3f994a19589ee37003b1801becb7e70503183b1d",
+          "ts": "2026-09-23T19:25:57.057179+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-23T19:25:57.059169+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
