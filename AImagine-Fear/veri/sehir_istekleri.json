@@ -1,0 +1,37 @@
+{
+  "guncellendi": "2026-09-24T18:05:23.547592+00:00",
+  "gun": 14,
+  "kaynak_post_sayisi": 39,
+  "yorum_sayisi": 322,
+  "sayilan_yorum": 303,
+  "kimlik_notu": "Instagram yorumcu adini vermiyor; Instagram'da her yorum ayri kisi sayilir.",
+  "sehirler": [
+    {
+      "sehir": "Dubai",
+      "kullanici_sayisi": 1,
+      "yorum_sayisi": 1,
+      "ornek_yorumlar": [
+        "Syddd burj khalifa wala hoyga"
+      ],
+      "var": true
+    },
+    {
+      "sehir": "Jakarta",
+      "kullanici_sayisi": 1,
+      "yorum_sayisi": 1,
+      "ornek_yorumlar": [
+        "Autograph Tower, Jakarta Indonesia please"
+      ],
+      "var": false
+    },
+    {
+      "sehir": "Tashkent",
+      "kullanici_sayisi": 1,
+      "yorum_sayisi": 1,
+      "ornek_yorumlar": [
+        "Tashkent?"
+      ],
+      "var": false
+    }
+  ]
+}
