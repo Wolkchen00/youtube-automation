@@ -59,6 +59,68 @@ CHANNEL_FEED_LOOKBACK = 25
 # kullanmali, yoksa karsilastirdigi metinle yayinladigi metin ayrisir.
 TITLE_LIMIT = 100
 
+_HASHTAG_RE = re.compile(r"(?<!\w)#\w+", re.UNICODE)
+_URL_RE = re.compile(r"(?:https?://|www\.)\S+", re.IGNORECASE)
+
+
+def cap_instagram_hashtags(text, limit=5) -> str:
+    """Keep the first ``limit`` unique hashtags and remove all later ones.
+
+    Hashtags inside HTTP(S)/www URL tokens are not considered Instagram tags.
+    Cleanup is deliberately conditional: when nothing is removed, the input is
+    returned byte-for-byte unchanged.
+    """
+    value = str(text or "")
+    url_spans = [match.span() for match in _URL_RE.finditer(value)]
+    hashtags = [
+        match
+        for match in _HASHTAG_RE.finditer(value)
+        if not any(start <= match.start() < end for start, end in url_spans)
+    ]
+
+    seen = set()
+    removed = []
+    maximum = max(0, int(limit))
+    for match in hashtags:
+        key = match.group(0).casefold()
+        if key in seen or len(seen) >= maximum:
+            removed.append(match.span())
+        else:
+            seen.add(key)
+
+    if not removed:
+        return value
+
+    marker = "\x00"
+    while marker in value:
+        marker += "\x00"
+    pieces = []
+    cursor = 0
+    for start, end in removed:
+        pieces.extend((value[cursor:start], marker))
+        cursor = end
+    pieces.append(value[cursor:])
+
+    cleaned_lines = []
+    for line in "".join(pieces).splitlines(keepends=True):
+        if marker not in line:
+            cleaned_lines.append(line)
+            continue
+
+        if line.endswith("\r\n"):
+            body, ending = line[:-2], "\r\n"
+        elif line.endswith(("\n", "\r")):
+            body, ending = line[:-1], line[-1]
+        else:
+            body, ending = line, ""
+        body = body.replace(marker, "")
+        body = re.sub(r"[ \t]{2,}", " ", body)
+        body = re.sub(r"[ \t]+(?=[,.;:!?])", "", body).rstrip(" \t")
+        if body.strip(" \t"):
+            cleaned_lines.append(body + ending)
+
+    return "".join(cleaned_lines).rstrip(" \t\r\n")
+
 
 def clean_first_comment(text) -> str:
     """Normalize a safe Upload-Post first comment, or reject it completely."""
@@ -767,8 +829,9 @@ def upload_to_platform(
             # BASLIK. Caption'in govdesi ve alti etiketinin HICBIRI sayfada yok.
             # Bu yuzden caption'i inen alana da yaziyoruz. IG caption tavani
             # 2.200; TITLE_LIMIT=100 yalniz YouTube icindir ve burada gecersiz.
-            data["instagram_title"] = social_caption[:2100]
-            data["title"] = social_caption[:2100]
+            instagram_caption = cap_instagram_hashtags(social_caption)[:2100]
+            data["instagram_title"] = instagram_caption
+            data["title"] = instagram_caption
     elif platform == "tiktok":
         data["privacy_level"] = "PUBLIC_TO_EVERYONE"
         if social_caption:

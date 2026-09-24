@@ -21,7 +21,7 @@ from core import uploader
 
 CAPTION = (
     "You're dropping through the fog off the Golden Gate Bridge.\n\n"
-    "#MegaSlideFear #GoldenGateBridge #WaterSlide #POVReels #CGIAdventure #ViralReels"
+    "#MegaSlideFear #GoldenGateBridge #WaterSlide #POVReels #CGIAdventure"
 )
 BASLIK = "Golden Gate Bridge, into the fog #shorts"
 
