@@ -92,3 +92,14 @@ iki sabit baslik kalibi.
 Ihsan'in elle yapacaklari (A1 icin): Google Cloud'da YouTube Analytics + Data API ac,
 OAuth izin ekranini "production" yap (Testing'de token 7 gunde olur), bes kanal icin
 izin yardimcisini kos, GitHub secret'lari ekle; TikTok'u Upload-Post'ta yeniden bagla.
+
+
+## ILERLEME 24 Eyl ogleden sonra
+
+- ADIM 1 BITTI (1b507f4, push): 7 uretim duzeltmesi + taze goz 6 bulgusu. Kohortlar: s48 ve
+  oturmus (s7g, yoksa omur). Canli: wild-encounter kutup ayisi/anakonda kazanan, peygamber
+  devesi kaybeden -> planlayiciya gidiyor; still-home yeterli oturmus part yok (birkac gun).
+- OLCULDU: Upload-Post post_metrics'te izlenme SURESI/retention YOK (IG: views/reach/likes/
+  comments/saves/shares/impressions; YT: views/likes/comments/favorites; TikTok: views/likes/
+  comments/shares). Yani A1 icin YouTube Analytics OAuth ZORUNLU.
+- SIRADAKI: A1 (Ihsan'in Google Cloud OAuth + kanal izinleri). Ihsan'a adim adim anlatilacak.
