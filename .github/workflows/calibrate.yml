@@ -10,6 +10,7 @@ on:
 # tarafin hardened rebase-retry persist'i ve dosya basina ayrik yazim yonetir.
 concurrency:
   group: kie-uretim
+  queue: max
   cancel-in-progress: false
 
 permissions:

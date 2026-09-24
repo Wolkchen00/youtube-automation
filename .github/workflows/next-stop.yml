@@ -30,6 +30,7 @@ on:
 
 concurrency:
   group: kie-uretim
+  queue: max
   cancel-in-progress: false
 
 permissions:

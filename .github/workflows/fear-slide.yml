@@ -11,7 +11,7 @@ name: Fear Slide Daily
 # duraklatildi (commit 2ed94dc), aimagine altinda baska AKTIF seri yok, bu kosu
 # kanalin tek uretim hatti.
 #
-# Saat duzeni: bu kosu 13:20 UTC (next-stop'tan bosalan pencere) -> event-horizon
+# Saat duzeni: ana kosu 11:13 UTC -> event-horizon
 # 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
 # kie-uretim concurrency grubu hatlari serilestirir (Kie kredi guvenligi).
 
@@ -25,7 +25,7 @@ on:
   # tools/gunluk.py SIRA listesine bes yeni bulut rotasi girdi (singapur,
   # kualalumpur, hongkong, londra, sydney) ve sira onlarla basliyor.
   schedule:
-    - cron: '20 13 * * *'   # 13:20 UTC = 06:20 Los Angeles PDT
+    - cron: '13 11 * * *'   # Hedef yayin: 15:00 UTC / 08:00 California (PDT); olculen gecikme: 3.2-5.5 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
     # KREDI TELAFISI (2026-09-11). Kie otomatik yuklemesi bakiye 1500'un altina
     # dusunce tetikleniyor, 1080p is ~1530 kredi (varsayilan 11 Eylul'den beri
     # yine 720p, 615 kredi, yani bu olu bolge artik yalniz --profil 1080p'de
@@ -50,6 +50,7 @@ on:
 
 concurrency:
   group: kie-uretim
+  queue: max
   cancel-in-progress: false
 
 permissions:

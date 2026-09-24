@@ -33,9 +33,7 @@ name: Galactic Daily (iki serit, gun asiri)
 
 on:
   schedule:
-    # 16:30 UTC , galactic kanalinin tarihsel yayin penceresi (event-horizon'dan bosaldi).
-    # GitHub cron'u bu filoda ~1,5 saate kadar gecikebiliyor, bu normaldir.
-    - cron: '30 16 * * *'
+    - cron: '17 12 * * *'   # Hedef yayin: 16:00 UTC / 09:00 California (PDT); olculen gecikme: 2.2-4.0 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
   workflow_dispatch:
     inputs:
       serit:
@@ -50,6 +48,7 @@ on:
 
 concurrency:
   group: kie-uretim
+  queue: max
   cancel-in-progress: false
 
 permissions:

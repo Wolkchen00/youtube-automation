@@ -44,11 +44,12 @@ name: Still Home Daily
 
 on:
   schedule:
-    - cron: '30 20 * * *'   # 20:30 UTC, shadowedhistory kanalinin tarihsel yayin penceresi
+    - cron: '43 11 * * *'   # Hedef yayin: 15:30 UTC / 08:30 California (PDT); olculen gecikme: 1.9-3.0 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
   workflow_dispatch:
 
 concurrency:
   group: kie-uretim
+  queue: max
   cancel-in-progress: false
 
 permissions:

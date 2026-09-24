@@ -15,11 +15,12 @@ name: Wild Encounter Daily
 
 on:
   schedule:
-    - cron: '30 18 * * *'   # 18:30 UTC = 11:30 California (PDT)
+    - cron: '13 7 * * *'   # Hedef yayin: 11:00 UTC / 04:00 California (PDT); olculen gecikme: 2.4-3.6 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
   workflow_dispatch:
 
 concurrency:
   group: kie-uretim
+  queue: max
   cancel-in-progress: false
 
 permissions:
