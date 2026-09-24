@@ -123,6 +123,7 @@ jobs:
           KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
           UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
           YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
           EOF
 
       - name: Prepare dirs
@@ -151,6 +152,11 @@ jobs:
           if [ "${{ inputs.allow_same_day }}" = "true" ]; then ARGS="$ARGS --allow-same-day"; fi
           python -X utf8 AImagine-Fear/tools/gunluk.py $ARGS 2>&1 | tee logs/fear_slide_run.log
 
+      - name: Sehir isteklerini say
+        if: always()
+        continue-on-error: true
+        run: python -X utf8 AImagine-Fear/tools/sehir_istekleri.py
+
       - name: Uretim sonucunu kaydet
         if: always()
         run: |
@@ -169,7 +175,7 @@ jobs:
         run: |
           bash scripts/persist_state.sh \
             "chore: fear-slide durumunu ilerlet [skip ci]" \
-            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json AImagine-Fear/kanarya_basarisiz.json AImagine-Fear/kredi_bekliyor.json
+            AImagine-Fear/yayin.jsonl AImagine-Fear/last_run.json AImagine-Fear/profil_onay.json AImagine-Fear/kanarya_basarisiz.json AImagine-Fear/kredi_bekliyor.json AImagine-Fear/veri/sehir_istekleri.json
 
       - name: Upload logs artifact
         if: always()

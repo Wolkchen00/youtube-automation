@@ -1,5 +1,6 @@
 {
   "_not": "Yayin aninda eklenir, rota dosyalarina yazilmaz. caption_questions caption'da etiketlerin hemen ustune tek satir girer. first_comments kanalin kendi ilk yorumudur (Upload-Post first_comment). Etiket ve link YASAK: Instagram'in 5 etiket tavani caption ve yorumu birlikte sayar.",
+  "kendi_hesaplar": ["aimagine357", "aimagine_._", "@aimagine_._"],
   "caption_questions": [
     "Would you ride this one? Yes or no?",
     "Which city should we slide over next?",
