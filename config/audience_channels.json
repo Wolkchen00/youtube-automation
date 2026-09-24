@@ -1,0 +1,37 @@
+[
+  {
+    "kanal": "shadowedhistory",
+    "youtube_channel_id": "UCUdp0KLBh4EeeSgVbwS_DhA",
+    "upload_post_profile": "shad0wedhistory",
+    "secret_adi": "YT_ANALYTICS_TOKEN_SHADOWEDHISTORY",
+    "dogrulandi": true
+  },
+  {
+    "kanal": "sentinal_ihsan",
+    "youtube_channel_id": "UC-Aht8VqAUMTUKYRQA3agYQ",
+    "upload_post_profile": "sentinalihsandaily",
+    "secret_adi": "YT_ANALYTICS_TOKEN_SENTINAL_IHSAN",
+    "dogrulandi": true
+  },
+  {
+    "kanal": "galactic_experiment",
+    "youtube_channel_id": "UCVCRWrQYrIHW6csOsw9bDNw",
+    "upload_post_profile": "galacticexperimet",
+    "secret_adi": "YT_ANALYTICS_TOKEN_GALACTIC_EXPERIMENT",
+    "dogrulandi": true
+  },
+  {
+    "kanal": "aimagine",
+    "youtube_channel_id": "UCCgbHTzYKYawUT6zEo0nlDg",
+    "upload_post_profile": "Youtube",
+    "secret_adi": "YT_ANALYTICS_TOKEN_AIMAGINE",
+    "dogrulandi": false
+  },
+  {
+    "kanal": "craftcalm",
+    "youtube_channel_id": "UCgV4xX-1CDkt8GIS8z8XV2g",
+    "upload_post_profile": null,
+    "secret_adi": "YT_ANALYTICS_TOKEN_CRAFTCALM",
+    "dogrulandi": false
+  }
+]
