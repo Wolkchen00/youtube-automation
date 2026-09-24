@@ -1415,6 +1415,14 @@
       "reserved": 900,
       "actual": 0,
       "ts": "2026-09-24T20:05:49.791011+00:00"
+    },
+    {
+      "month": "2026-09",
+      "series": "wild-encounter",
+      "part": 16,
+      "reserved": 1000,
+      "actual": 260.0,
+      "ts": "2026-09-24T21:43:19.483642+00:00"
     }
   ],
   "episode_spend": {
@@ -1444,6 +1452,7 @@
     "wild-encounter:12": 890.0,
     "wild-encounter:13": 260.0,
     "wild-encounter:14": 134.0,
-    "wild-encounter:15": 260.0
+    "wild-encounter:15": 260.0,
+    "wild-encounter:16": 260.0
   }
 }

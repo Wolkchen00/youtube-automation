@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 16,
+  "next_part": 17,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -438,6 +438,48 @@
         "tiktok"
       ],
       "published_at": "2026-09-23T19:25:57.059169+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "16": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep16/ep16_mastered.mp4",
+      "subtitle": "This GIANT WASP Is NOT Real",
+      "stack_sha256": "547b043d250397a5a48b6e1ab622e49aa125fa1206d8691362bf03b4091a41e2",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part16",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "rTrY095FxvE",
+          "video_sha256": "3fd9e9731657b2e28b128340e27808b599a888bcab75175e6af322c98e0f06a1",
+          "ts": "2026-09-24T21:52:15.876893+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "17894742279437077",
+          "video_sha256": "3fd9e9731657b2e28b128340e27808b599a888bcab75175e6af322c98e0f06a1",
+          "ts": "2026-09-24T21:53:26.155351+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7689223337075150093",
+          "video_sha256": "3fd9e9731657b2e28b128340e27808b599a888bcab75175e6af322c98e0f06a1",
+          "ts": "2026-09-24T21:54:50.960078+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-24T21:54:50.962267+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,

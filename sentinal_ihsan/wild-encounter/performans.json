@@ -1,0 +1,1256 @@
+{
+  "series": "wild-encounter",
+  "guncellendi": "2026-09-24T21:41:26.381384+00:00",
+  "medyanlar": {
+    "oturmus": {
+      "youtube": 3158,
+      "instagram": 1214.5,
+      "tiktok": 177
+    }
+  },
+  "parts": [
+    {
+      "part": 5,
+      "post_ids": {
+        "youtube": "TO_SK8dIyLQ",
+        "tiktok": "7684212725060341005"
+      },
+      "request_ids": {
+        "youtube": "520fd7750d8f4a84b4bea3ffd70fdecf",
+        "tiktok": "1420dd1425514efaae775d1d4cde9adf"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 323.813,
+          "youtube": {
+            "views": 2869,
+            "likes": 16,
+            "comments": 1,
+            "favorites": 0
+          },
+          "tiktok": {
+            "views": 137,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": true,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-11T09:52:41+00:00",
+      "subtitle": "This GIANT OCTOPUS Is NOT Real",
+      "anlik": {
+        "omur": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 323.813,
+            "youtube": {
+              "views": 2869,
+              "likes": 16,
+              "comments": 1,
+              "favorites": 0
+            },
+            "tiktok": {
+              "views": 137,
+              "likes": 3,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 323.813,
+            "youtube": {
+              "views": 2869,
+              "likes": 16,
+              "comments": 1,
+              "favorites": 0
+            },
+            "tiktok": {
+              "views": 137,
+              "likes": 3,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 0.908486,
+        "tiktok": 0.774011
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 2869,
+          "likes": 16,
+          "comments": 1,
+          "favorites": 0
+        },
+        "tiktok": {
+          "views": 137,
+          "likes": 3,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 0.908486,
+      "etiket": "orta"
+    },
+    {
+      "part": 6,
+      "post_ids": {
+        "youtube": "TiJ8Uv7vhzs",
+        "instagram": "18107993459165438",
+        "tiktok": "7684351502235831566"
+      },
+      "request_ids": {
+        "youtube": "fdbce6b42f2246979842db81e377dfa4",
+        "instagram": "f57c1444c8004a718cae720008e4547c",
+        "tiktok": "87d3bff101f24f29b3c25a1f650b6af3"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 314.859,
+          "youtube": {
+            "views": 3880,
+            "likes": 29,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 22,
+            "comments": 0,
+            "views": 1024,
+            "impressions": 1024,
+            "reach": 866,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 177,
+            "likes": 4,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": true,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-11T18:49:55+00:00",
+      "subtitle": "This GIANT CROCODILE Is NOT Real",
+      "anlik": {
+        "omur": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 314.859,
+            "youtube": {
+              "views": 3880,
+              "likes": 29,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 22,
+              "comments": 0,
+              "views": 1024,
+              "impressions": 1024,
+              "reach": 866,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 177,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 314.859,
+            "youtube": {
+              "views": 3880,
+              "likes": 29,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 22,
+              "comments": 0,
+              "views": 1024,
+              "impressions": 1024,
+              "reach": 866,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 177,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 314.859,
+            "youtube": {
+              "views": 3880,
+              "likes": 29,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 22,
+              "comments": 0,
+              "views": 1024,
+              "impressions": 1024,
+              "reach": 866,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 177,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 1.228626,
+        "instagram": 0.843145,
+        "tiktok": 1.0
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 3880,
+          "likes": 29,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 22,
+          "comments": 0,
+          "views": 1024,
+          "impressions": 1024,
+          "reach": 866,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 177,
+          "likes": 4,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 1.228626,
+      "etiket": "orta"
+    },
+    {
+      "part": 7,
+      "post_ids": {
+        "youtube": "Cs6gHuxf7A4",
+        "instagram": "18093234308437480",
+        "tiktok": "7684758472436501773"
+      },
+      "request_ids": {
+        "youtube": "f0a20357b36243ea9ccfd5c55b07fb25",
+        "instagram": "d1bbfc19cf8744c6a72443914b7f2416",
+        "tiktok": "6571f82857874fc69a1aca501aad79a4"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 288.54,
+          "youtube": {
+            "views": 303,
+            "likes": 4,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 10,
+            "comments": 0,
+            "views": 350,
+            "impressions": 350,
+            "reach": 261,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 107,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": true,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-12T21:09:02.865330+00:00",
+      "subtitle": "This GIANT PRAYING MANTIS Is NOT Real",
+      "anlik": {
+        "omur": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 288.54,
+            "youtube": {
+              "views": 303,
+              "likes": 4,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 10,
+              "comments": 0,
+              "views": 350,
+              "impressions": 350,
+              "reach": 261,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 107,
+              "likes": 1,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 288.54,
+            "youtube": {
+              "views": 303,
+              "likes": 4,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 10,
+              "comments": 0,
+              "views": 350,
+              "impressions": 350,
+              "reach": 261,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 107,
+              "likes": 1,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 288.54,
+            "youtube": {
+              "views": 303,
+              "likes": 4,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 10,
+              "comments": 0,
+              "views": 350,
+              "impressions": 350,
+              "reach": 261,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 107,
+              "likes": 1,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 0.095947,
+        "instagram": 0.288184,
+        "tiktok": 0.60452
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 303,
+          "likes": 4,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 10,
+          "comments": 0,
+          "views": 350,
+          "impressions": 350,
+          "reach": 261,
+          "saves": 1,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 107,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 0.60452,
+      "etiket": "orta"
+    },
+    {
+      "part": 8,
+      "post_ids": {
+        "youtube": "mYUqbRjJoVs",
+        "instagram": "18331736983275868",
+        "tiktok": "7685122561423805709"
+      },
+      "request_ids": {
+        "youtube": "a1a38857f57049d6b4b8ca11de4c95bc",
+        "instagram": "624e644fe9aa4403917dc372e10cc7d3",
+        "tiktok": "2517800e7f68485db834533fc432807c"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 264.983,
+          "youtube": {
+            "views": 6931,
+            "likes": 53,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 25,
+            "comments": 0,
+            "views": 2232,
+            "impressions": 2232,
+            "reach": 1337,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 824,
+            "likes": 9,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": true,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-13T20:42:29.237531+00:00",
+      "subtitle": "This GIANT ANACONDA Is NOT Real",
+      "anlik": {
+        "omur": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 264.983,
+            "youtube": {
+              "views": 6931,
+              "likes": 53,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 25,
+              "comments": 0,
+              "views": 2232,
+              "impressions": 2232,
+              "reach": 1337,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 824,
+              "likes": 9,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 264.983,
+            "youtube": {
+              "views": 6931,
+              "likes": 53,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 25,
+              "comments": 0,
+              "views": 2232,
+              "impressions": 2232,
+              "reach": 1337,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 824,
+              "likes": 9,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 264.983,
+            "youtube": {
+              "views": 6931,
+              "likes": 53,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 25,
+              "comments": 0,
+              "views": 2232,
+              "impressions": 2232,
+              "reach": 1337,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 824,
+              "likes": 9,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 2.194744,
+        "instagram": 1.837793,
+        "tiktok": 4.655367
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 6931,
+          "likes": 53,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 25,
+          "comments": 0,
+          "views": 2232,
+          "impressions": 2232,
+          "reach": 1337,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 824,
+          "likes": 9,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 4.655367,
+      "etiket": "kazanan"
+    },
+    {
+      "part": 9,
+      "post_ids": {
+        "youtube": "wuuu02K2hPc",
+        "instagram": "18068318912495676",
+        "tiktok": "7685515816200195341"
+      },
+      "request_ids": {
+        "youtube": "b724552e796549b6acfc5de7bea2bacd",
+        "instagram": "b1ddfdedeb0644ff875deb6cc431aad6",
+        "tiktok": "1d4a54e559e44a03a81ae2ab40e42e11"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 239.558,
+          "youtube": {
+            "views": 35901,
+            "likes": 159,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 19,
+            "comments": 0,
+            "views": 1746,
+            "impressions": 1746,
+            "reach": 1068,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 583,
+            "likes": 4,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": true,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-14T22:07:58.042603+00:00",
+      "subtitle": "This GIANT POLAR BEAR Is NOT Real",
+      "anlik": {
+        "s7g": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 239.558,
+            "youtube": {
+              "views": 35901,
+              "likes": 159,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 19,
+              "comments": 0,
+              "views": 1746,
+              "impressions": 1746,
+              "reach": 1068,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 583,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 239.558,
+            "youtube": {
+              "views": 35901,
+              "likes": 159,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 19,
+              "comments": 0,
+              "views": 1746,
+              "impressions": 1746,
+              "reach": 1068,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 583,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 239.558,
+            "youtube": {
+              "views": 35901,
+              "likes": 159,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 19,
+              "comments": 0,
+              "views": 1746,
+              "impressions": 1746,
+              "reach": 1068,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 583,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 11.368271,
+        "instagram": 1.437629,
+        "tiktok": 3.293785
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 35901,
+          "likes": 159,
+          "comments": 1,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 19,
+          "comments": 0,
+          "views": 1746,
+          "impressions": 1746,
+          "reach": 1068,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 583,
+          "likes": 4,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 11.368271,
+      "etiket": "kazanan"
+    },
+    {
+      "part": 10,
+      "post_ids": {
+        "youtube": "MXKmeVqDDXQ",
+        "instagram": "18233800012318288",
+        "tiktok": "7685945250879245582"
+      },
+      "request_ids": {
+        "youtube": "5730a8bc2bb341119368756fc8f9fd3c",
+        "instagram": "a84343f91e5a4234a04bcc980e8c91a5",
+        "tiktok": "9473172cebc84091ac53145ff0529134"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 211.789,
+          "youtube": {
+            "views": 3158,
+            "likes": 19,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 10,
+            "comments": 0,
+            "views": 911,
+            "impressions": 911,
+            "reach": 535,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 428,
+            "likes": 11,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": true,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-16T01:54:07.455649+00:00",
+      "subtitle": "This GIANT OWL Is NOT Real",
+      "anlik": {
+        "s7g": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 211.789,
+            "youtube": {
+              "views": 3158,
+              "likes": 19,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 10,
+              "comments": 0,
+              "views": 911,
+              "impressions": 911,
+              "reach": 535,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 428,
+              "likes": 11,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 211.789,
+            "youtube": {
+              "views": 3158,
+              "likes": 19,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 10,
+              "comments": 0,
+              "views": 911,
+              "impressions": 911,
+              "reach": 535,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 428,
+              "likes": 11,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 211.789,
+            "youtube": {
+              "views": 3158,
+              "likes": 19,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 10,
+              "comments": 0,
+              "views": 911,
+              "impressions": 911,
+              "reach": 535,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 428,
+              "likes": 11,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 1.0,
+        "instagram": 0.750103,
+        "tiktok": 2.418079
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 3158,
+          "likes": 19,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 10,
+          "comments": 0,
+          "views": 911,
+          "impressions": 911,
+          "reach": 535,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 428,
+          "likes": 11,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 2.418079,
+      "etiket": "kazanan"
+    },
+    {
+      "part": 11,
+      "post_ids": {
+        "youtube": "4cdvxPh_mE8",
+        "instagram": "17994521682032262",
+        "tiktok": "7686934251110960397"
+      },
+      "request_ids": {
+        "youtube": "36eea59eb5714b41b73b3dcfd8cf73f5",
+        "instagram": "3c3054ccc397432eb6aeaa3cb13dc4f3",
+        "tiktok": "4ca33f363ede483aa1972dfeffe803f1"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 147.824,
+          "youtube": {
+            "views": 341,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 15,
+            "comments": 0,
+            "views": 1405,
+            "impressions": 1405,
+            "reach": 920,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 45,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-18T17:52:01.197990+00:00",
+      "subtitle": "This GIANT SQUID Is NOT Real",
+      "anlik": {
+        "s7g": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 147.824,
+            "youtube": {
+              "views": 341,
+              "likes": 3,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 15,
+              "comments": 0,
+              "views": 1405,
+              "impressions": 1405,
+              "reach": 920,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 45,
+              "likes": 1,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 147.824,
+            "youtube": {
+              "views": 341,
+              "likes": 3,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 15,
+              "comments": 0,
+              "views": 1405,
+              "impressions": 1405,
+              "reach": 920,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 45,
+              "likes": 1,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 147.824,
+            "youtube": {
+              "views": 341,
+              "likes": 3,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 15,
+              "comments": 0,
+              "views": 1405,
+              "impressions": 1405,
+              "reach": 920,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 45,
+              "likes": 1,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 0.10798,
+        "instagram": 1.156855,
+        "tiktok": 0.254237
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 341,
+          "likes": 3,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 15,
+          "comments": 0,
+          "views": 1405,
+          "impressions": 1405,
+          "reach": 920,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 45,
+          "likes": 1,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 1.156855,
+      "etiket": "orta"
+    },
+    {
+      "part": 13,
+      "post_ids": {
+        "youtube": "n0bBTtIWt7k",
+        "instagram": "18111216016845008",
+        "tiktok": "7687672929974324493"
+      },
+      "request_ids": {
+        "youtube": "d5bb6efd13ad4d5a964a8eff4723e853",
+        "instagram": "2dfab0fa7acb4b8887ef0e4cb85c1fe8",
+        "tiktok": "7bf82cdfe02c4d8b9d04eec7db8d145c"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 100.047,
+          "youtube": {
+            "views": 229,
+            "likes": 5,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 42,
+            "comments": 0,
+            "views": 5980,
+            "impressions": 5980,
+            "reach": 3795,
+            "saves": 2,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 418,
+            "likes": 5,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-20T17:38:38.756777+00:00",
+      "subtitle": "This GIANT KOMODO DRAGON Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    },
+    {
+      "part": 14,
+      "post_ids": {
+        "youtube": "wSXBMvwfVcs",
+        "instagram": "18128588302839006",
+        "tiktok": "7688117320748731662"
+      },
+      "request_ids": {
+        "youtube": "57c81dad26b94d11bc7ec208351c527a",
+        "instagram": "77322d896f3b41528ab10de5cd6c8280",
+        "tiktok": "3fa08bc03cf74ca9a253445d3242b638"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 71.307,
+          "youtube": {
+            "views": 42,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 17,
+            "comments": 0,
+            "views": 1475,
+            "impressions": 1475,
+            "reach": 887,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 212,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-21T22:23:02.872677+00:00",
+      "subtitle": "This GIANT LION Is NOT Real",
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 71.307,
+            "youtube": {
+              "views": 42,
+              "likes": 2,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 17,
+              "comments": 0,
+              "views": 1475,
+              "impressions": 1475,
+              "reach": 887,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 212,
+              "likes": 3,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 71.307,
+            "youtube": {
+              "views": 42,
+              "likes": 2,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 17,
+              "comments": 0,
+              "views": 1475,
+              "impressions": 1475,
+              "reach": 887,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 212,
+              "likes": 3,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-24T21:41:26.381384+00:00",
+            "yas_saat": 71.307,
+            "youtube": {
+              "views": 42,
+              "likes": 2,
+              "comments": 0,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 17,
+              "comments": 0,
+              "views": 1475,
+              "impressions": 1475,
+              "reach": 887,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 212,
+              "likes": 3,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    },
+    {
+      "part": 15,
+      "post_ids": {
+        "youtube": "aCJ66hoUHCg",
+        "instagram": "17992506419840926",
+        "tiktok": "7688813766296751373"
+      },
+      "request_ids": {
+        "youtube": "7ac8e461dccb4b889d1e21eeb9edad4e",
+        "instagram": "d4c734dff7f243fbb7b99c42932ac447",
+        "tiktok": "e35bb716105e43ac83c8e0606c5e4503"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-24T21:41:26.381384+00:00",
+          "yas_saat": 26.258,
+          "youtube": {
+            "views": 53,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 14,
+            "comments": 0,
+            "views": 2201,
+            "impressions": 2201,
+            "reach": 1358,
+            "saves": 4,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 626,
+            "likes": 7,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-23T19:25:57.058725+00:00",
+      "subtitle": "This GIANT COBRA Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    }
+  ],
+  "api_cagrilari": 58
+}

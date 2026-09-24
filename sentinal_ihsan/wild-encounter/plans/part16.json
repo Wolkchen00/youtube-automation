@@ -28,5 +28,9 @@
   },
   "family": "insect-giant",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/JjCXwRXg/ep16-giant-wasp.png"
+  ],
+  "ref_prompt_sha256": "ecc1730e131a890fe49426bd4330f1e0d7fd4ad4db2489ab276d4124dcb4d1e4"
 }
