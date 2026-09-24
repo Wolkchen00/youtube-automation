@@ -112,7 +112,7 @@ def test_channel_mismatch_saves_nothing_and_exits_2(
     assert not (tmp_path / "secrets_local").exists()
     assert "Yanlis Kanal" in capsys.readouterr().out
     flow.run_local_server.assert_called_once_with(
-        port=8765, open_browser=True, access_type="offline", prompt="consent"
+        port=0, open_browser=True, access_type="offline", prompt="consent"
     )
 
 

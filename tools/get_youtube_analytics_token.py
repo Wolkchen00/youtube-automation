@@ -110,7 +110,7 @@ def yeni_yetki_al(channel: dict[str, Any], client_secret: str | None) -> Credent
     )
     flow = InstalledAppFlow.from_client_config(client_config, SCOPES)
     return flow.run_local_server(
-        port=8765,
+        port=0,  # 0 = bos bir yerel kapi; 8765 baska bir programda dolu cikti (24 Eyl)
         open_browser=True,
         access_type="offline",
         prompt="consent",
