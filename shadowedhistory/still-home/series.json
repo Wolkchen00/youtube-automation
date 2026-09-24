@@ -12,6 +12,7 @@
   "hashtags": "#shorts #future #futurecity #robotics #ai #worldbuilding",
   "standalone": true,
   "publish_mode": "auto",
+  "performance_feedback": true,
   "status": "active",
   "priority": 999,
   "total_parts": 11,

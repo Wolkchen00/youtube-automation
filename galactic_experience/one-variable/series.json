@@ -12,6 +12,7 @@
   "hashtags": "#shorts #disaster #nature #earth #simulation",
   "standalone": true,
   "publish_mode": "auto",
+  "performance_feedback": true,
   "status": "active",
   "priority": 10,
   "total_parts": 103,

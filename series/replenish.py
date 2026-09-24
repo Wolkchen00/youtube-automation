@@ -73,6 +73,8 @@ from series.bible import (
 )
 from series.series_meta import SeriesMeta, part_plan_path, plans_dir
 from series.engagement import engagement_block, valid_engagement_question
+from series.performans import score_performance
+from series.performans_istem import build_performance_block
 from series.shots import (
     NEGATIVE_VIDEO_LANGUAGE,
     OBJECT_CARD_FIELDS,
@@ -80,6 +82,7 @@ from series.shots import (
     SHOT1_ONSET_LANGUAGE,
     TEK_OBJE_FORMAT,
     TEMPORAL_OVERREACH,
+    load_plan,
     validate_plan,
 )
 
@@ -902,6 +905,31 @@ def _unused_cards(calibration: Mapping | None, history: list[dict]) -> list[dict
 
 # ─── Gemini yönetmen promptu ───────────────────────────────────────────────────
 
+def _performance_feedback_block(meta: SeriesMeta) -> str:
+    """Load, re-score, and format opt-in performance history; fail closed."""
+    meta_data = getattr(meta, "data", None)
+    if not isinstance(meta_data, dict) or meta_data.get("performance_feedback") is not True:
+        return ""
+    try:
+        performance_path = data_dir(meta.slug) / "performans.json"
+        performance_document = json.loads(performance_path.read_text(encoding="utf-8"))
+        scored_document = score_performance(performance_document)
+        plans = {}
+        for part in scored_document.get("parts", []):
+            if not isinstance(part, dict) or part.get("etiket") not in {
+                "kazanan", "kaybeden"
+            }:
+                continue
+            try:
+                part_number = int(part.get("part"))
+                plans[part_number] = load_plan(part_plan_path(meta.slug, part_number))
+            except (OSError, ValueError, TypeError, json.JSONDecodeError, UnicodeError):
+                continue
+        return build_performance_block(scored_document, plans)
+    except (OSError, ValueError, TypeError, json.JSONDecodeError, UnicodeError):
+        return ""
+
+
 def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: int,
                   history: list[dict], fix_errors: list[str] | None = None,
                   calibration: Mapping | None = None) -> tuple[str, str]:
@@ -1458,6 +1486,9 @@ RULES:
         lines.extend(f"- {e}" for e in fix_errors)
     lines.append(f"\nWrite episodes {start}-{end} now. Each episode picks a FRESH theme "
                  f"and color palette, clearly different from the existing episodes.")
+    performance_block = _performance_feedback_block(meta)
+    if performance_block:
+        lines.append("\n" + performance_block)
     return "\n".join(lines), system_instruction
 
 
