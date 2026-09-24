@@ -134,6 +134,12 @@ jobs:
           python -X utf8 -m series.approver --series "${{ steps.sec.outputs.serit }}" 2>&1 \
             | tee "logs/${{ steps.sec.outputs.serit }}_approve.log"
 
+      - name: Iki seridin performans geri beslemesini topla
+        continue-on-error: true
+        run: |
+          python -X utf8 -m series.performans --series one-variable
+          python -X utf8 -m series.performans --series flythrough
+
       - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolum planlari yazar, kredi harcamaz)
         # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum varsa o gunun
         # yayini iptal olmasin; adim yine KIRMIZI gorunur.

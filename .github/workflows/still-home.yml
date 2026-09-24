@@ -119,6 +119,10 @@ jobs:
         shell: bash
         run: python -X utf8 -m series.approver --series still-home 2>&1 | tee logs/still_home_approve.log
 
+      - name: Performans geri beslemesini topla
+        continue-on-error: true
+        run: python -X utf8 -m series.performans --series still-home
+
       - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolum planlari yazar, kredi harcamaz)
         # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum
         # varsa o gunun yayini iptal olmasin; adim yine KIRMIZI gorunur.

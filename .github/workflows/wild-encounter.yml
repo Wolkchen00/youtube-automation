@@ -81,6 +81,10 @@ jobs:
         shell: bash
         run: python -X utf8 -m series.approver --series wild-encounter 2>&1 | tee logs/wild_encounter_approve.log
 
+      - name: Performans geri beslemesini topla
+        continue-on-error: true
+        run: python -X utf8 -m series.performans --series wild-encounter
+
       - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolumleri yazar, Kie kredisi harcamaz)
         # shell: bash = pipefail; tee python'un exit kodunu yutmasin.
         # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum varsa o gunun
