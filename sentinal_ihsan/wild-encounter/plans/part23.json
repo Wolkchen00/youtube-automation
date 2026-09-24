@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "This GIANT OSTRICH Is NOT Real"
+  },
+  "synopsis": "On a built desert set, a colossal ostrich takes a performer into its beak, then the crew force its practical beak open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nShot 1: ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal brown ostrich, its coarse feather-covered body features large, expressive brown eyes, a strong, wide beak, and stands at 5 metres tall, facing Ihsan on a desert_ruins_set. The ostrich's massive beak gapes wide, then snaps shut, completely enclosing Ihsan. Several crew members in dark clothing rush into frame, their hands positioning on the ostrich's head and beak, applying force. The practical beak slowly separates, revealing Ihsan as he carefully climbs out onto the set floor, his clothes dusty from the prop's interior. Ambient sound only: footsteps on sand, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "desert_ruins_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant ostrich's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant ostrich and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "first_comment": "What do you think of this giant ostrich's feathers?",
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant ostrich",
+    "descriptor": "A colossal brown ostrich, its coarse feather-covered body features large, expressive brown eyes, a strong, wide beak, and stands at 5 metres tall.",
+    "environment": "desert_ruins_set",
+    "framing": "A handheld camera is held low and close so the colossal ostrich fills the whole frame from the first second, with shallow depth of field keeping the creature sharp while one dark out-of-focus production element stays at the bottom edge and the studio behind falls away.",
+    "anomaly_descriptor": "Crew members manually pry apart the massive, articulated beak of the practical ostrich prop."
+  },
+  "family": "bird-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}
