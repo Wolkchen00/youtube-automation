@@ -103,3 +103,21 @@ izin yardimcisini kos, GitHub secret'lari ekle; TikTok'u Upload-Post'ta yeniden 
   comments/saves/shares/impressions; YT: views/likes/comments/favorites; TikTok: views/likes/
   comments/shares). Yani A1 icin YouTube Analytics OAuth ZORUNLU.
 - SIRADAKI: A1 (Ihsan'in Google Cloud OAuth + kanal izinleri). Ihsan'a adim adim anlatilacak.
+
+
+## ILERLEME 24 Eyl aksam
+
+- A1 izin: shadowedhistory, sentinal_ihsan, galactic_experiment, aimagine CANLI izin verildi
+  (secrets_local/, git disi). YouTube Analytics API proje 114387446382'de acildi; cok
+  izlenen videolarda 100 noktalik retention geliyor. ACIK: OAuth izin ekrani "Testing"
+  ise tokenlar 7 gunde duser (Ihsan kontrol edecek); GitHub secret'lara yukleme Ihsan
+  onayi ile A2'de. CraftCalm ve The Unfinished izni alinmadi.
+- YAYIN SAATLERI CANLI (5e3e7d4): sentinal 11:00, aimagine 15:00, shadowedhistory 15:30,
+  galactic 16:00 UTC hedef; cron = hedef - olculen gecikme; kie-uretim queue: max.
+  Tam dakika tasarimi ertelendi: RF-PLAN-YAYIN-SAATI.md + RF-SAME-PAGE-LOG-YAYIN-SAATI.md.
+  Iki hafta sonra: performans.json yayin zamanlari + goruntulenmeleri eski saatlerle kiyasla.
+- CANLI BULGU: aimagine Instagram'da ilk yorum SESSIZCE dusmuyor (uyari yok); YouTube'da
+  var. galactic/shadowedhistory IG'de calisiyor. Olasi sebep: aimagine IG baglantisi
+  yorum izni olmadan yapilmis -> Upload-Post Manage Users'ta yeniden bagla (TikTok ile).
+- SIRADAKI (Codex ile): A2 retention toplayici + PERFORMANCE MEMORY'ye "izleyici nerede
+  kaciyor", sonra B1/B2 bes kanal yorum madenciligi, C1 tek/cift baslik kalibi.
