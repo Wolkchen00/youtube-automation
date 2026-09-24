@@ -1,6 +1,6 @@
 # DEVIR 2026-09-24: performans geri beslemesi + sehir istekleri
 
-Durum: dort rock da yazildi, **HICBIRI CANLIDA DEGIL.** Hepsi `codex-geribesleme`
+Durum (GUNCEL 24 Eyl gece): dort rock da CANLIDA, main 02ebdb4 push edildi. Asagidaki eski durum notu: dort rock `codex-geribesleme`
 dalinda (Projeler/Youtube deposu), main'e alinmadi, push edilmedi.
 Plan: `RF-PLAN-GERIBESLEME.md` (ayni dalda). Kod Codex'e yazdirildi (Ihsan istegi),
 Claude her rock'i satir satir okudu ve kendisi kostu.
@@ -72,3 +72,23 @@ sehir istekleri. Kalan:
   `seriler/bir-kez-olsun/etkilesim.json` yerelde duruyor.
 - aimagine rota stogu ~27 Eyl'de bitiyor; yeni rota yazarken `veri/sehir_istekleri.json`
   listesinden sec.
+
+
+## GUNCEL SIRA (24 Eyl gece, Codex'in plani)
+
+Dort rock CANLIDA (02ebdb4). Kalan isin frozen plani Codex'e yazdirildi:
+`RF-PLAN-GERIBESLEME-2.md` (read-only kosu, thread 01a0d1ff-ebc6-75c2-845f-ffda94a2baf4).
+Ihsan karari: kalan isler CODEX ile yurutulecek (/codex BUILD A ROCK, her rock sonrasi
+Claude diff okur + kanitlari kendisi kosar).
+
+Sira: (1) plandaki 8 uretim duzeltmesi (IG baslik dalinda etiket tavani, performans yas
+karsilastirilabilirligi 48h/7d adli anlik goruntuler, erken olcumle donma, izlenme sure
+alanlari atiliyor, bozuk performans.json gecmisi silebilir, 6-part kapisi retention'i
+gizler, yorum sayfasi limit=50, Gemini eksik id kontrolu) -> (2) A1 izin + yetenek
+yoklamasi -> (3) A2 retention -> (4) B1 bes kanal yorum madenciligi -> (5) B2 tuketiciler
+-> (6) C1 baslik: otomatik A/B KILL (Shorts Test&Compare'e girmiyor), yerine tek/cift part
+iki sabit baslik kalibi.
+
+Ihsan'in elle yapacaklari (A1 icin): Google Cloud'da YouTube Analytics + Data API ac,
+OAuth izin ekranini "production" yap (Testing'de token 7 gunde olur), bes kanal icin
+izin yardimcisini kos, GitHub secret'lari ekle; TikTok'u Upload-Post'ta yeniden bagla.
