@@ -112,6 +112,38 @@ def test_6_etiketli_caption_instagrama_ilk_5_etiketle_gider(tmp_path):
     assert data["title"] == expected
 
 
+def test_bos_social_caption_ile_7_etiketli_baslik_5_etikete_indirilir(tmp_path):
+    title = "Title #one #two #three #four #five #six #seven"
+    video = tmp_path / "v.mp4"
+    video.write_bytes(b"0")
+    captured = {}
+
+    class _Response:
+        status_code = 200
+        content = b"{}"
+
+        def json(self):
+            return {"success": True, "results": {"instagram": {"success": True}}}
+
+    def _post(url, headers=None, data=None, files=None, timeout=None):
+        captured.update(data or {})
+        return _Response()
+
+    with mock.patch.object(uploader, "UPLOAD_POST_API_KEY", "x"), \
+         mock.patch.object(uploader, "_delivery_copy", lambda p: Path(p)), \
+         mock.patch.object(uploader.requests, "post", _post):
+        uploader.upload_to_platform(
+            video_path=video,
+            title=title,
+            description="",
+            user="Youtube",
+            platform="instagram",
+        )
+
+    assert captured["title"] == "Title #one #two #three #four #five"
+    assert "instagram_title" not in captured
+
+
 @pytest.mark.parametrize("platform", ["youtube", "tiktok"])
 def test_diger_platformlarin_metni_degismez(tmp_path, platform):
     data = _gonderilen_data(tmp_path, platform, STILL_HOME_CAPTION)

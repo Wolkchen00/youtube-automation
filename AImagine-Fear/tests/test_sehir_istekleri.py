@@ -147,6 +147,7 @@ def test_pagination_uses_after_and_stops_after_five_pages():
     assert calls[0].get("after") is None
     assert calls[1]["after"] == "c1"
     assert all("cursor" not in params for params in calls)
+    assert all(params["limit"] == 50 for params in calls)
 
 
 def test_pagination_stops_when_page_has_zero_new_comment_ids():
@@ -269,6 +270,51 @@ def test_invalid_gemini_json_leaves_existing_file_untouched(monkeypatch, tmp_pat
     monkeypatch.setattr(genai, "Client", lambda **_kwargs: Client())
     assert mod.calistir(now=NOW, get=get) is None
     assert output.read_text(encoding="utf-8") == '{"old": true}\n'
+
+
+def test_gemini_coverage_below_90_percent_leaves_existing_file_untouched(monkeypatch, tmp_path):
+    row = _row(NOW, results={"youtube": {"post_id": "yt"}})
+    output = _isolated_run(monkeypatch, tmp_path, [row])
+    output.write_text('{"old": true}\n', encoding="utf-8")
+    comments = [_comment(str(index), "Tokyo") for index in range(10)]
+
+    result = mod.calistir(
+        now=NOW,
+        get=lambda *_args, **_kwargs: Response(_page(comments)),
+        extractor=lambda prepared, _key: [
+            {"comment_id": item["comment_id"], "city": "Tokyo", "landmark": None}
+            for item in prepared[:8]
+        ],
+    )
+
+    assert result is None
+    assert output.read_text(encoding="utf-8") == '{"old": true}\n'
+
+
+def test_gemini_same_comment_can_credit_paris_and_rome(monkeypatch, tmp_path):
+    row = _row(NOW, results={"youtube": {"post_id": "yt"}})
+    output = _isolated_run(monkeypatch, tmp_path, [row])
+    comments = [_comment("1", "Paris and Rome")]
+
+    def extractor(prepared, _key):
+        assert [item["comment_id"] for item in prepared] == ["1"]
+        return [
+            {"comment_id": "1", "city": "Paris", "landmark": None},
+            {"comment_id": "1", "city": "paris", "landmark": "duplicate"},
+            {"comment_id": "1", "city": "Rome", "landmark": None},
+        ]
+
+    result = mod.calistir(
+        now=NOW,
+        get=lambda *_args, **_kwargs: Response(_page(comments)),
+        extractor=extractor,
+    )
+
+    assert [(item["sehir"], item["yorum_sayisi"]) for item in result["sehirler"]] == [
+        ("Paris", 1),
+        ("Rome", 1),
+    ]
+    assert json.loads(output.read_text(encoding="utf-8")) == result
 
 
 def test_run_counts_filters_sorts_and_writes_atomically(monkeypatch, tmp_path):

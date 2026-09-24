@@ -832,6 +832,10 @@ def upload_to_platform(
             instagram_caption = cap_instagram_hashtags(social_caption)[:2100]
             data["instagram_title"] = instagram_caption
             data["title"] = instagram_caption
+        else:
+            capped_title = cap_instagram_hashtags(data["title"])
+            if capped_title != data["title"]:
+                data["title"] = capped_title
     elif platform == "tiktok":
         data["privacy_level"] = "PUBLIC_TO_EVERYONE"
         if social_caption:

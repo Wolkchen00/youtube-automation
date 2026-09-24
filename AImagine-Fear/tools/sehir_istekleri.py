@@ -184,7 +184,7 @@ def yorumlari_topla(
             if calls >= AZAMI_HTTP:
                 stop = True
                 break
-            params = {"user": profile, "platform": platform, "post_id": post_id}
+            params = {"user": profile, "platform": platform, "post_id": post_id, "limit": 50}
             if after:
                 params["after"] = after
             try:
@@ -376,6 +376,40 @@ def yorumlari_hazirla(
     return prepared[:AZAMI_YORUM]
 
 
+def _gemini_yanitini_dogrula(comments: list[dict], parsed: Any) -> list[dict]:
+    if not isinstance(parsed, list):
+        raise GeminiHatasi("Gemini yaniti JSON listesi degil")
+    valid: list[dict] = []
+    response_ids: set[str] = set()
+    seen_rows: set[tuple[str, str | None]] = set()
+    for item in parsed:
+        if not isinstance(item, dict) or "comment_id" not in item or "city" not in item:
+            raise GeminiHatasi("Gemini yanit semasi gecersiz")
+        comment_id = item.get("comment_id")
+        city = item.get("city")
+        landmark = item.get("landmark")
+        if not isinstance(comment_id, (str, int)) or not (
+            city is None or isinstance(city, str)
+        ) or not (landmark is None or isinstance(landmark, str)):
+            raise GeminiHatasi("Gemini yanit alan turleri gecersiz")
+        normalized_id = str(comment_id)
+        response_ids.add(normalized_id)
+        row_key = (
+            normalized_id,
+            city.casefold() if isinstance(city, str) else None,
+        )
+        if row_key in seen_rows:
+            continue
+        seen_rows.add(row_key)
+        valid.append({"comment_id": normalized_id, "city": city, "landmark": landmark})
+
+    input_ids = {str(item["comment_id"]) for item in comments}
+    covered = input_ids.intersection(response_ids)
+    if len(covered) * 10 < len(input_ids) * 9:
+        raise GeminiHatasi("Gemini yaniti yorumlarin yuzde 90'ini kapsamiyor")
+    return valid
+
+
 def gemini_sehirleri(comments: list[dict], api_key: str) -> list[dict]:
     if not api_key:
         raise GeminiHatasi("GEMINI_API_KEY tanimli degil")
@@ -406,21 +440,7 @@ def gemini_sehirleri(comments: list[dict], api_key: str) -> list[dict]:
         parsed = json.loads(response.text or "")
     except Exception as exc:
         raise GeminiHatasi("Gemini cagrisi/JSON yaniti basarisiz: %s" % exc) from exc
-    if not isinstance(parsed, list):
-        raise GeminiHatasi("Gemini yaniti JSON listesi degil")
-    valid: list[dict] = []
-    for item in parsed:
-        if not isinstance(item, dict) or "comment_id" not in item or "city" not in item:
-            raise GeminiHatasi("Gemini yanit semasi gecersiz")
-        comment_id = item.get("comment_id")
-        city = item.get("city")
-        landmark = item.get("landmark")
-        if not isinstance(comment_id, (str, int)) or not (
-            city is None or isinstance(city, str)
-        ) or not (landmark is None or isinstance(landmark, str)):
-            raise GeminiHatasi("Gemini yanit alan turleri gecersiz")
-        valid.append({"comment_id": str(comment_id), "city": city, "landmark": landmark})
-    return valid
+    return _gemini_yanitini_dogrula(comments, parsed)
 
 
 def _ad_norm(value: str) -> str:
@@ -538,6 +558,7 @@ def calistir(
     if prepared:
         try:
             extracted = (extractor or gemini_sehirleri)(prepared, GEMINI_API_KEY)
+            extracted = _gemini_yanitini_dogrula(prepared, extracted)
         except Exception as exc:
             _uyari(str(exc) + "; mevcut dosya korunuyor")
             return None

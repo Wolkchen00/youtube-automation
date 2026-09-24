@@ -9,6 +9,7 @@ from typing import Mapping
 MAX_BLOCK_CHARS = 1500
 MEASURED_LABELS = {"kazanan", "kaybeden", "orta"}
 PLATFORMS = ("youtube", "instagram", "tiktok")
+SNAPSHOT_TAGS = {"s48": "@48h", "oturmus": "@7d+"}
 
 _HEADER = (
     "PERFORMANCE MEMORY (measured on this series' own history, not a universal target)"
@@ -73,6 +74,7 @@ def _metrics(part: dict) -> str:
     scored_metrics = part.get("puanlanan_metrikler")
     if not isinstance(ratios, dict) or not isinstance(scored_metrics, dict):
         return ""
+    snapshot_tag = SNAPSHOT_TAGS.get(part.get("yargi_anligi"), "")
     values = []
     ordered = list(PLATFORMS)
     ordered.extend(key for key in ratios if key not in PLATFORMS)
@@ -82,7 +84,8 @@ def _metrics(part: dict) -> str:
         views = _finite_number(metrics.get("views")) if isinstance(metrics, dict) else None
         if ratio is None or views is None:
             continue
-        values.append(f"{platform} {int(round(views))} views/{ratio:.1f}x")
+        suffix = f" {snapshot_tag}" if snapshot_tag else ""
+        values.append(f"{platform} {int(round(views))} views/{ratio:.1f}x{suffix}")
     return ", ".join(values)
 
 
@@ -208,7 +211,3 @@ def build_performance_block(scored_document: dict, plans: Mapping) -> str:
             return ""
         block = _render(winner_entries, loser_entries)
     return block
-
-
-# A concise Turkish alias keeps the module pleasant to use from local tooling.
-performans_istem_blogu = build_performance_block

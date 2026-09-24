@@ -14,6 +14,7 @@ import json
 import math
 import os
 from pathlib import Path
+import shutil
 from statistics import median
 import time
 from typing import Any, Callable
@@ -26,11 +27,10 @@ from .series_meta import SeriesMeta
 
 
 PLATFORMS = ("youtube", "instagram", "tiktok")
-METRIC_FIELDS = ("views", "likes", "comments", "shares", "saves", "reach")
+COHORTS = ("s48", "oturmus")
+RETENTION_FIELDS = {"retention", "retention_curve", "audience_retention"}
 UPLOAD_POST_ANALYTICS = "https://api.upload-post.com/api/uploadposts/post-analytics"
 YOUTUBE_VIDEOS = "https://www.googleapis.com/youtube/v3/videos"
-MIN_SCORE_AGE_HOURS = 44.0
-MIN_LOSER_AGE_HOURS = 96.0
 FREEZE_AGE_HOURS = 8 * 24.0
 MIN_MEDIAN_PARTS = 5
 MAX_API_CALLS = 60
@@ -77,14 +77,37 @@ def _number(value: Any) -> int | float | None:
     return None
 
 
-def _clean_metrics(value: Any) -> dict[str, int | float] | None:
+def _clean_retention(value: Any) -> list[Any] | None:
+    if not isinstance(value, list):
+        return None
+    cleaned: list[Any] = []
+    for point in value:
+        number = _number(point)
+        if number is not None:
+            cleaned.append(number)
+            continue
+        if not isinstance(point, dict):
+            return None
+        x = _number(point.get("x"))
+        y = _number(point.get("y"))
+        if x is None or y is None:
+            return None
+        cleaned.append({"x": x, "y": y})
+    return cleaned[:200]
+
+
+def _clean_metrics(value: Any) -> dict[str, Any] | None:
     if not isinstance(value, dict):
         return None
-    cleaned = {}
-    for field in METRIC_FIELDS:
-        number = _number(value.get(field))
+    cleaned: dict[str, Any] = {}
+    for field, raw in value.items():
+        number = _number(raw)
         if number is not None:
             cleaned[field] = number
+        elif field in RETENTION_FIELDS:
+            retention = _clean_retention(raw)
+            if retention is not None:
+                cleaned[field] = retention
     return cleaned or None
 
 
@@ -105,67 +128,134 @@ def _parts(document: dict) -> list[dict]:
     return []
 
 
-def _latest_eligible_metrics(part: dict, platform: str) -> dict | None:
-    latest = None
-    for measurement in part.get("olcumler", []):
-        if not isinstance(measurement, dict):
-            continue
+def _measurements(part: dict) -> list[dict]:
+    value = part.get("olcumler")
+    return [item for item in value if isinstance(item, dict)] if isinstance(value, list) else []
+
+
+def _closest_measurement(
+    measurements: list[dict],
+    platform: str,
+    target: float,
+    minimum: float,
+    maximum: float,
+) -> dict | None:
+    eligible = []
+    for index, measurement in enumerate(measurements):
         age = _number(measurement.get("yas_saat"))
         metrics = _clean_metrics(measurement.get(platform))
-        if age is not None and age >= MIN_SCORE_AGE_HOURS and metrics is not None:
-            latest = metrics
-    return latest
+        views = _number(metrics.get("views")) if metrics is not None else None
+        if age is not None and minimum <= age <= maximum and views is not None:
+            eligible.append((abs(age - target), index, measurement))
+    return min(eligible, key=lambda item: (item[0], item[1]))[2] if eligible else None
 
 
-def _latest_eligible_age(part: dict) -> int | float | None:
-    latest = None
-    for measurement in part.get("olcumler", []):
-        if not isinstance(measurement, dict):
-            continue
-        age = _number(measurement.get("yas_saat"))
-        if age is not None and age >= MIN_SCORE_AGE_HOURS:
-            latest = age
-    return latest
+def _derive_snapshots(part: dict) -> dict[str, dict]:
+    measurements = _measurements(part)
+    snapshots: dict[str, dict] = {}
+    for platform in PLATFORMS:
+        s48 = _closest_measurement(measurements, platform, 48.0, 44.0, 96.0)
+        s7g = _closest_measurement(measurements, platform, 168.0, 144.0, 240.0)
+        if s48 is not None:
+            snapshots.setdefault("s48", {})[platform] = s48
+        if s7g is not None:
+            snapshots.setdefault("s7g", {})[platform] = s7g
+        lifetime = []
+        for index, measurement in enumerate(measurements):
+            age = _number(measurement.get("yas_saat"))
+            metrics = _clean_metrics(measurement.get(platform))
+            views = _number(metrics.get("views")) if metrics is not None else None
+            if age is not None and age > 240.0 and views is not None:
+                lifetime.append((age, index, measurement))
+        if lifetime:
+            snapshots.setdefault("omur", {})[platform] = min(
+                lifetime, key=lambda item: (item[0], item[1])
+            )[2]
+    return snapshots
+
+
+def _cohort_measurements(snapshots: dict[str, dict]) -> dict[str, dict]:
+    cohorts: dict[str, dict[str, dict]] = {}
+    s48 = snapshots.get("s48") if isinstance(snapshots.get("s48"), dict) else {}
+    if s48:
+        cohorts["s48"] = s48
+    s7g = snapshots.get("s7g") if isinstance(snapshots.get("s7g"), dict) else {}
+    lifetime = snapshots.get("omur") if isinstance(snapshots.get("omur"), dict) else {}
+    settled = {}
+    for platform in PLATFORMS:
+        if platform in s7g:
+            settled[platform] = s7g[platform]
+        elif platform in lifetime:
+            settled[platform] = lifetime[platform]
+    if settled:
+        cohorts["oturmus"] = settled
+    return cohorts
+
+
+def _has_freezing_snapshot(measurements: list[dict]) -> bool:
+    return any(
+        (age := _number(measurement.get("yas_saat"))) is not None and age >= 144.0
+        for measurement in measurements
+    )
 
 
 def score_performance(document: dict) -> dict:
     """Return a scored deep copy of *document* without performing I/O.
 
-    Each part contributes at most one (its latest eligible) view count to a
-    platform median, so frequent snapshots cannot give a part extra weight.
+    Each part contributes at most one view count to the early or settled
+    cohort. Settled medians pool the part's s7g snapshot, or its omur fallback.
     """
     scored = deepcopy(document) if isinstance(document, dict) else {}
     parts = _parts(scored)
-    medians: dict[str, int | float] = {}
-    latest: dict[tuple[int, str], dict] = {}
+    medians: dict[str, dict[str, int | float]] = {}
+    cohort_metrics: dict[tuple[int, str, str], dict] = {}
 
-    for platform in PLATFORMS:
-        values = []
-        for index, part in enumerate(parts):
-            metrics = _latest_eligible_metrics(part, platform)
-            if metrics is None:
-                continue
-            views = _number(metrics.get("views"))
-            if views is None:
-                continue
-            latest[(index, platform)] = metrics
-            values.append(views)
-        if len(values) >= MIN_MEDIAN_PARTS:
-            medians[platform] = median(values)
+    for index, part in enumerate(parts):
+        snapshots = _derive_snapshots(part)
+        part["anlik"] = snapshots
+        for cohort_name, platform_measurements in _cohort_measurements(snapshots).items():
+            for platform, measurement in platform_measurements.items():
+                metrics = _clean_metrics(measurement.get(platform))
+                if metrics is not None:
+                    cohort_metrics[(index, cohort_name, platform)] = metrics
+
+    for cohort_name in COHORTS:
+        cohort_medians: dict[str, int | float] = {}
+        for platform in PLATFORMS:
+            values = []
+            for index in range(len(parts)):
+                metrics = cohort_metrics.get((index, cohort_name, platform))
+                views = _number(metrics.get("views")) if metrics is not None else None
+                if views is not None:
+                    values.append(views)
+            if len(values) >= MIN_MEDIAN_PARTS:
+                cohort_medians[platform] = median(values)
+        if cohort_medians:
+            medians[cohort_name] = cohort_medians
 
     for index, part in enumerate(parts):
         part.pop("etiket_notu", None)
-        ratios = {}
-        platform_metrics = {}
-        for platform, platform_median in medians.items():
-            metrics = latest.get((index, platform))
-            if metrics is None or platform_median <= 0:
-                continue
-            views = _number(metrics.get("views"))
-            if views is None:
-                continue
-            ratios[platform] = round(views / platform_median, 6)
-            platform_metrics[platform] = metrics
+        judgement = None
+        ratios: dict[str, float] = {}
+        platform_metrics: dict[str, dict] = {}
+        for cohort_name in ("oturmus", "s48"):
+            candidate_ratios: dict[str, float] = {}
+            candidate_metrics: dict[str, dict] = {}
+            for platform, platform_median in medians.get(cohort_name, {}).items():
+                metrics = cohort_metrics.get((index, cohort_name, platform))
+                if metrics is None or platform_median <= 0:
+                    continue
+                views = _number(metrics.get("views"))
+                if views is None:
+                    continue
+                candidate_ratios[platform] = round(views / platform_median, 6)
+                candidate_metrics[platform] = metrics
+            if candidate_ratios:
+                judgement = cohort_name
+                ratios = candidate_ratios
+                platform_metrics = candidate_metrics
+                break
+        part["yargi_anligi"] = judgement
 
         part["oranlar"] = ratios
         part["puanlanan_metrikler"] = platform_metrics
@@ -176,10 +266,7 @@ def score_performance(document: dict) -> dict:
         part["puan"] = max(ratios.values())
         if part["puan"] >= 2:
             part["etiket"] = "kazanan"
-        elif (
-            all(ratio <= 0.5 for ratio in ratios.values())
-            and (_latest_eligible_age(part) or 0) >= MIN_LOSER_AGE_HOURS
-        ):
+        elif all(ratio <= 0.5 for ratio in ratios.values()) and judgement == "oturmus":
             part["etiket"] = "kaybeden"
         elif all(ratio <= 0.5 for ratio in ratios.values()):
             part["etiket"] = "orta"
@@ -192,14 +279,49 @@ def score_performance(document: dict) -> dict:
     return scored
 
 
-def _read_json(path: Path, default: Any, label: str) -> Any:
+def _read_json(path: Path, default: Any, label: str, *, encoding: str = "utf-8") -> Any:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding=encoding))
     except FileNotFoundError:
         return deepcopy(default)
     except (OSError, json.JSONDecodeError, UnicodeError) as exc:
         logger.warning("%s okunamadi; temiz baslanacak: %s", label, exc)
         return deepcopy(default)
+
+
+def _corrupt_backup_path(path: Path, current: datetime) -> Path:
+    base = path.with_name(f"{path.name}.bozuk-{current.strftime('%Y%m%dT%H%M%S')}")
+    candidate = base
+    suffix = 1
+    while candidate.exists():
+        candidate = path.with_name(f"{base.name}-{suffix}")
+        suffix += 1
+    return candidate
+
+
+def _read_performance_json(path: Path, slug: str, current: datetime) -> dict:
+    try:
+        value = json.loads(path.read_text(encoding="utf-8-sig"))
+        if not isinstance(value, dict):
+            raise ValueError("JSON koku nesne degil")
+        return value
+    except FileNotFoundError:
+        return _new_document(slug)
+    except (OSError, ValueError, json.JSONDecodeError, UnicodeError) as exc:
+        backup = _corrupt_backup_path(path, current)
+        try:
+            path.rename(backup)
+            preservation = "yeniden adlandirildi"
+        except OSError:
+            shutil.copy2(path, backup)
+            preservation = "kopyalandi"
+        logger.warning(
+            "performans.json bozuk (%s); %s dosyasina %s, temiz baslanacak",
+            exc,
+            backup.name,
+            preservation,
+        )
+        return _new_document(slug)
 
 
 def _atomic_write_json(path: Path, value: dict) -> None:
@@ -243,6 +365,7 @@ def _merge_published(document: dict, published: list[dict]) -> list[dict]:
         existing.setdefault("request_ids", {})
         existing.setdefault("olcumler", [])
         existing.setdefault("donduruldu", False)
+        existing.setdefault("gec_bos_deneme", 0)
         indexed[number] = existing
 
     for entry in published:
@@ -260,6 +383,7 @@ def _merge_published(document: dict, published: list[dict]) -> list[dict]:
                 "request_ids": {},
                 "olcumler": [],
                 "donduruldu": False,
+                "gec_bos_deneme": 0,
             },
         )
         part["yayin_zamani"] = entry.get("ts")
@@ -373,10 +497,7 @@ def collect_series_performance(
     current = _utc_now(now)
     directory = data_dir(slug)
     output_path = directory / "performans.json"
-    existing = _read_json(output_path, _new_document(slug), "performans.json")
-    if not isinstance(existing, dict):
-        logger.warning("performans.json koku nesne degil; temiz baslanacak")
-        existing = _new_document(slug)
+    existing = _read_performance_json(output_path, slug, current)
     existing["series"] = slug
     parts = _merge_published(existing, _published_parts(directory / "published.json"))
     existing["parts"] = parts
@@ -401,7 +522,13 @@ def collect_series_performance(
     run_records: list[tuple[dict, dict[str, dict], float | None]] = []
     stopped = False
 
-    for part in parts:
+    oldest = datetime.min.replace(tzinfo=timezone.utc)
+    visit_order = sorted(
+        parts,
+        key=lambda part: _parse_datetime(part.get("yayin_zamani")) or oldest,
+        reverse=True,
+    )
+    for part in visit_order:
         published_at = _parse_datetime(part.get("yayin_zamani"))
         age_hours = (
             max(0.0, (current - published_at).total_seconds() / 3600.0)
@@ -412,8 +539,12 @@ def collect_series_performance(
         if not isinstance(measurements, list):
             measurements = []
             part["olcumler"] = measurements
-        if age_hours is not None and age_hours > FREEZE_AGE_HOURS and measurements:
-            part["donduruldu"] = True
+        attempts = part.get("gec_bos_deneme")
+        if isinstance(attempts, bool) or not isinstance(attempts, int) or attempts < 0:
+            attempts = 0
+        part["gec_bos_deneme"] = attempts
+        if age_hours is not None and age_hours > FREEZE_AGE_HOURS:
+            part["donduruldu"] = _has_freezing_snapshot(measurements) or attempts >= 2
         if part.get("donduruldu"):
             continue
 
@@ -467,8 +598,13 @@ def collect_series_performance(
             }
             measurement.update(run_metrics)
             measurements.append(measurement)
-        if age_hours is not None and age_hours > FREEZE_AGE_HOURS and measurements:
-            part["donduruldu"] = True
+            part["gec_bos_deneme"] = 0
+        elif age_hours is not None and age_hours > FREEZE_AGE_HOURS:
+            part["gec_bos_deneme"] += 1
+        if age_hours is not None and age_hours > FREEZE_AGE_HOURS:
+            part["donduruldu"] = (
+                _has_freezing_snapshot(measurements) or part["gec_bos_deneme"] >= 2
+            )
 
     existing["guncellendi"] = current.isoformat()
     existing["api_cagrilari"] = api.calls
@@ -497,7 +633,9 @@ def _dry_run(slug: str) -> dict:
     if not path.exists():
         print(f"performans.json yok: {path}")
         return _new_document(slug)
-    document = _read_json(path, _new_document(slug), "performans.json")
+    document = _read_json(
+        path, _new_document(slug), "performans.json", encoding="utf-8-sig"
+    )
     if not isinstance(document, dict):
         document = _new_document(slug)
     scored = score_performance(document)

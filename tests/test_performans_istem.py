@@ -17,6 +17,7 @@ def _part(number: int, label: str, score: float, *, views: int = 100) -> dict:
         "subtitle": f"Fallback {number}",
         "etiket": label,
         "puan": score,
+        "yargi_anligi": "oturmus",
         "oranlar": {"youtube": score},
         "puanlanan_metrikler": {"youtube": {"views": views}},
     }
@@ -34,7 +35,7 @@ def _plan(number: int, *, synopsis: str = "A concise episode synopsis.") -> dict
 
 
 def _scored(parts: list[dict]) -> dict:
-    return {"medyanlar": {"youtube": 100}, "parts": parts}
+    return {"medyanlar": {"oturmus": {"youtube": 100}}, "parts": parts}
 
 
 def _prompt_inputs(data: dict | None = None):
@@ -76,8 +77,8 @@ def test_block_has_winners_losers_plan_fields_and_rounded_ratios():
     assert "Title 1" in block and "Title 2" in block
     assert "family=family-1" in block and "seed_id=1" in block
     assert "card_topic=topic-1" in block and "object=object-1" in block
-    assert "youtube 1234 views/2.6x" in block
-    assert "youtube 12 views/0.2x" in block
+    assert "youtube 1234 views/2.6x @7d+" in block
+    assert "youtube 12 views/0.2x @7d+" in block
     assert "Lean toward the shared traits of winners" in block
     assert "Move away from the shared traits of losers" in block
     assert "Never repeat an existing subject or title" in block
@@ -128,7 +129,7 @@ def _raw_performance() -> dict:
                 # Deliberately stale and wrong; replenish must re-score.
                 "etiket": "kaybeden" if index == 6 else "kazanan",
                 "puan": 99,
-                "olcumler": [{"yas_saat": 120, "youtube": {"views": value}}],
+                "olcumler": [{"yas_saat": 168, "youtube": {"views": value}}],
             }
             for index, value in enumerate(views, start=1)
         ]
@@ -160,7 +161,7 @@ def test_loader_rescores_stale_labels_and_skips_missing_plan(tmp_path):
     assert "WINNERS" in block and "Title 6" in block
     assert "LOSERS" not in block
     assert "Title 1" not in block
-    assert "youtube 300 views/3.0x" in block
+    assert "youtube 300 views/3.0x @7d+" in block
 
 
 def test_corrupt_performance_json_and_missing_file_return_no_block(tmp_path):
