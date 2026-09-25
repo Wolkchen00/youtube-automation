@@ -28,5 +28,9 @@
   },
   "family": "sea-giant",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/HfJ5hvZQ/ep17-giant-shark.png"
+  ],
+  "ref_prompt_sha256": "e10f573e9a63f14c2668a9092b4f64f8dd50110d011e0520da8f432f465be264"
 }

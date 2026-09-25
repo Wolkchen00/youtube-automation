@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 17,
+  "next_part": 18,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -480,6 +480,48 @@
         "tiktok"
       ],
       "published_at": "2026-09-24T21:54:50.962267+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "17": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep17/ep17_mastered.mp4",
+      "subtitle": "This GIANT SHARK Is NOT Real",
+      "stack_sha256": "547b043d250397a5a48b6e1ab622e49aa125fa1206d8691362bf03b4091a41e2",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part17",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "f7Oz9Gpau7M",
+          "video_sha256": "9bb7260b28925e59dcd111fb8c9b79b23df8155d0475336e1ef0fe6b1cb9193d",
+          "ts": "2026-09-25T12:50:40.337724+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "17969456097150603",
+          "video_sha256": "9bb7260b28925e59dcd111fb8c9b79b23df8155d0475336e1ef0fe6b1cb9193d",
+          "ts": "2026-09-25T12:51:49.454880+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7689454652223524110",
+          "video_sha256": "9bb7260b28925e59dcd111fb8c9b79b23df8155d0475336e1ef0fe6b1cb9193d",
+          "ts": "2026-09-25T12:52:59.236853+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-25T12:52:59.239290+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
