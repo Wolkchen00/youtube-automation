@@ -1,6 +1,6 @@
 {
   "series": "still-home",
-  "guncellendi": "2026-09-24T21:55:36.520148+00:00",
+  "guncellendi": "2026-09-25T15:59:35.921862+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -298,7 +298,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-16T23:29:50.175426+00:00",
       "subtitle": "Paris Powers Its Own Tower",
@@ -424,13 +424,140 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-09-25T15:59:35.921862+00:00",
+          "yas_saat": 160.911,
+          "youtube": {
+            "views": 676,
+            "likes": 6,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 56,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 124.58,
+            "engaged_views": 213,
+            "subscribers_gained": 1,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 0,
+            "views": 156,
+            "impressions": 156,
+            "reach": 113,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 3038,
+            "likes": 37,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-18T23:04:55.875345+00:00",
       "subtitle": "San Francisco Widened Its Golden Gate",
-      "anlik": {},
+      "anlik": {
+        "s7g": {
+          "youtube": {
+            "ts": "2026-09-25T15:59:35.921862+00:00",
+            "yas_saat": 160.911,
+            "youtube": {
+              "views": 676,
+              "likes": 6,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 56,
+              "average_view_duration_seconds": 13,
+              "average_view_percentage": 124.58,
+              "engaged_views": 213,
+              "subscribers_gained": 1,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 0,
+              "views": 156,
+              "impressions": 156,
+              "reach": 113,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 3038,
+              "likes": 37,
+              "comments": 0,
+              "shares": 1
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-25T15:59:35.921862+00:00",
+            "yas_saat": 160.911,
+            "youtube": {
+              "views": 676,
+              "likes": 6,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 56,
+              "average_view_duration_seconds": 13,
+              "average_view_percentage": 124.58,
+              "engaged_views": 213,
+              "subscribers_gained": 1,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 0,
+              "views": 156,
+              "impressions": 156,
+              "reach": 113,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 3038,
+              "likes": 37,
+              "comments": 0,
+              "shares": 1
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-25T15:59:35.921862+00:00",
+            "yas_saat": 160.911,
+            "youtube": {
+              "views": 676,
+              "likes": 6,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 56,
+              "average_view_duration_seconds": 13,
+              "average_view_percentage": 124.58,
+              "engaged_views": 213,
+              "subscribers_gained": 1,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 0,
+              "views": 156,
+              "impressions": 156,
+              "reach": 113,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 3038,
+              "likes": 37,
+              "comments": 0,
+              "shares": 1
+            }
+          }
+        }
+      },
       "yargi_anligi": null,
       "oranlar": {},
       "puanlanan_metrikler": {},
@@ -470,6 +597,37 @@
           },
           "tiktok": {
             "views": 978,
+            "likes": 27,
+            "comments": 1,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-09-25T15:59:35.921862+00:00",
+          "yas_saat": 117.565,
+          "youtube": {
+            "views": 693,
+            "likes": 12,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 58,
+            "average_view_duration_seconds": 16,
+            "average_view_percentage": 150.28,
+            "engaged_views": 172,
+            "subscribers_gained": 1,
+            "shares": 2
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 0,
+            "views": 162,
+            "impressions": 162,
+            "reach": 118,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 979,
             "likes": 27,
             "comments": 1,
             "shares": 0
@@ -520,6 +678,37 @@
           },
           "tiktok": {
             "views": 1064,
+            "likes": 17,
+            "comments": 1,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-09-25T15:59:35.921862+00:00",
+          "yas_saat": 64.325,
+          "youtube": {
+            "views": 407,
+            "likes": 4,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 21,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 118.99,
+            "engaged_views": 90,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 0,
+            "views": 146,
+            "impressions": 146,
+            "reach": 111,
+            "saves": 1,
+            "shares": 2
+          },
+          "tiktok": {
+            "views": 1098,
             "likes": 17,
             "comments": 1,
             "shares": 0
@@ -652,6 +841,37 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-25T15:59:35.921862+00:00",
+          "yas_saat": 40.669,
+          "youtube": {
+            "views": 10,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 8,
+            "comments": 1,
+            "views": 211,
+            "impressions": 211,
+            "reach": 148,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 452,
+            "likes": 6,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -666,5 +886,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 42
+  "api_cagrilari": 12
 }

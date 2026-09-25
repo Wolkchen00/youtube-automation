@@ -96,5 +96,28 @@
       "instagram": "https://www.instagram.com/reel/DdpeIWClYre/",
       "tiktok": "https://www.tiktok.com/@shad0wedhistory/video/7688874011966590222"
     }
+  },
+  {
+    "part": 8,
+    "subtitle": "Moscow Powers Its Own Winter",
+    "ts": "2026-09-25T16:41:32.519076+00:00",
+    "results": {
+      "tiktok": "7689513579791256846"
+    },
+    "post_urls": {
+      "tiktok": "https://www.tiktok.com/@shad0wedhistory/video/7689513579791256846"
+    },
+    "unconfirmed": {
+      "youtube": {
+        "reason": "600s doğrulama zaman aşımı; son durum=Upload queued and waiting for worker execution",
+        "request_id": "89875950cd1b4260b87aa6015d9aba02",
+        "job_id": "e54d60f519aa4afa86037bd5d78a1908"
+      },
+      "instagram": {
+        "reason": "600s doğrulama zaman aşımı; son durum=Upload queued and waiting for worker execution",
+        "request_id": "76e8e47ef9804892886ba133491830e0",
+        "job_id": "6b69afe5940c4b99aef439a521d9faf2"
+      }
+    }
   }
 ]

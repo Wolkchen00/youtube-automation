@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 11,
-  "next_part": 8,
+  "next_part": 9,
   "doctrine_sha256": "720aedb47ff8920afee4b50490bcdddd80d3fbf68e086f113336894cd0e03a6b",
   "kurulum_notu": "13 Eylul 2026'da kuruldu (flashpoints'in yerine) ve AYNI GUN CANLIYA ALINDI. Ihsan karari: 'tamam bunu paylasalim, yeni pipeline bunu yerlestirelim, her gun yeni bir populer sehir olsun'. Ilk bolum ISTANBUL 2512 elle yayinlandi, sonrasi still-home.yml 20:30 UTC cron'una birakildi. publish_mode=auto, canli gunluk seridin (wild-encounter) filo gelenegiyle ayni. Durdurmak icin: status='paused' + still-home.yml schedule blogunu yorumla. | 2026-09-15 v2.0 (Ihsan iki direktifi): (1) 'daha hizli gecisler lazim tek videoda 3 sahne gecisi istiyorum' -> 2 cekim 4 cekime cikti, micro_trim 0,75 ile bolum 4 x 2,5 = 10,0 sn ve 3 sert kesme tasiyor. (2) 'ortamlari daha futuristik yapmani istiyorum robotik gelecek gibi olsun, videolar hep bi yikimdan sonrasini gosteriyor gibi olmus, onun yerine teknolojinin nasil gelistigini anlatan bir video olsun' -> konsept yikim-sonrasi uyarlamadan ILERI TEKNOLOJIYE cevrildi: alti aile de degisti, 36 konunun 36'si yeniden yazildi, art_style ve qc.notes felaket estetigini otomatik fail sayiyor. | 2026-09-18 v3.0 (Ihsan direktifi 'izleyenleri ilk 3 saniye ekrana kitlememiz lazim'): SILUET KURALI. Teknoloji artik siluet degistiren FIZIKSEL bir yapidir ve ilk karede tamamlanmis durur; isik tek basina 2512 diyemez. Isik surucu iki aile (enerji mimarisi, yasayan malzeme) GECE geciyor. 36 konunun 18'i siluet-onceli yeniden yazildi. Cekim 2'ye gecis (traversal) zorunlulugu geldi (olculen olu bolge: hareket 5 vs cekim 3'te 15). Ilk-kare QC kapisi seri-farkindali yapildi (critic.py first_frame_rule): eski metin unnatural-lab icin yazilmisti ve part 3'un bugunku Paris'ini IKI KEZ gecirdi. Kesme sayisi DEGISMEDI, 3 kesme olculdu ve korundu.",
   "auto_replenish": {
@@ -484,11 +484,27 @@
       }
     },
     "8": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-09-24T22:02:40.328366+00:00",
       "retry_count": 1,
       "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/still-home/episodes/ep08/ep08_music_titled_mastered.mp4",
+      "subtitle": "Moscow Powers Its Own Winter",
+      "stack_sha256": "67e17f320f871cc8d46140790fd31ce4b7a6be9ffcf12b0a3555655f1eea3b34",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "tiktok"
+      ],
+      "published_at": "2026-09-25T16:41:32.519591+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "engagement": {
