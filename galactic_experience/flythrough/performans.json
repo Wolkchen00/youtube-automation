@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-09-24T20:05:11.645350+00:00",
+  "guncellendi": "2026-09-25T17:13:17.090088+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -302,6 +302,37 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-25T17:13:17.090088+00:00",
+          "yas_saat": 166.004,
+          "youtube": {
+            "views": 63,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 3,
+            "average_view_duration_seconds": 14,
+            "average_view_percentage": 89.9,
+            "engaged_views": 8,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 0,
+            "views": 227,
+            "impressions": 227,
+            "reach": 190,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 261,
+            "likes": 8,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -311,8 +342,8 @@
       "anlik": {
         "s7g": {
           "youtube": {
-            "ts": "2026-09-24T20:05:11.645350+00:00",
-            "yas_saat": 144.87,
+            "ts": "2026-09-25T17:13:17.090088+00:00",
+            "yas_saat": 166.004,
             "youtube": {
               "views": 63,
               "likes": 1,
@@ -335,15 +366,15 @@
               "shares": 0
             },
             "tiktok": {
-              "views": 260,
+              "views": 261,
               "likes": 8,
               "comments": 1,
               "shares": 0
             }
           },
           "instagram": {
-            "ts": "2026-09-24T20:05:11.645350+00:00",
-            "yas_saat": 144.87,
+            "ts": "2026-09-25T17:13:17.090088+00:00",
+            "yas_saat": 166.004,
             "youtube": {
               "views": 63,
               "likes": 1,
@@ -366,15 +397,15 @@
               "shares": 0
             },
             "tiktok": {
-              "views": 260,
+              "views": 261,
               "likes": 8,
               "comments": 1,
               "shares": 0
             }
           },
           "tiktok": {
-            "ts": "2026-09-24T20:05:11.645350+00:00",
-            "yas_saat": 144.87,
+            "ts": "2026-09-25T17:13:17.090088+00:00",
+            "yas_saat": 166.004,
             "youtube": {
               "views": 63,
               "likes": 1,
@@ -397,7 +428,7 @@
               "shares": 0
             },
             "tiktok": {
-              "views": 260,
+              "views": 261,
               "likes": 8,
               "comments": 1,
               "shares": 0
@@ -454,6 +485,37 @@
             "comments": 1,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-09-25T17:13:17.090088+00:00",
+          "yas_saat": 118.149,
+          "youtube": {
+            "views": 1315,
+            "likes": 8,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 125,
+            "average_view_duration_seconds": 14,
+            "average_view_percentage": 92.71,
+            "engaged_views": 442,
+            "subscribers_gained": 1,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 0,
+            "views": 197,
+            "impressions": 197,
+            "reach": 164,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 417,
+            "likes": 14,
+            "comments": 1,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -466,7 +528,63 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 5,
+      "post_ids": {
+        "youtube": "iwN3KYSuYac",
+        "instagram": "18063782510530672",
+        "tiktok": "7689197104824110349"
+      },
+      "request_ids": {
+        "youtube": "8b7d4baa4427403eaed5c28bb3e31653",
+        "instagram": "5b1870c307884301b840a356bead9c56",
+        "tiktok": "1779e6a65b494a94863c41d9ae66f124"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-25T17:13:17.090088+00:00",
+          "yas_saat": 20.997,
+          "youtube": {
+            "views": 562,
+            "likes": 8,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 11,
+            "comments": 1,
+            "views": 1864,
+            "impressions": 1864,
+            "reach": 1301,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 313,
+            "likes": 5,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-24T20:13:27.231198+00:00",
+      "subtitle": "Into Io's Sulfur Plumes",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 24
+  "api_cagrilari": 12
 }
