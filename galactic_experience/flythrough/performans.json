@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-09-25T17:13:17.090088+00:00",
+  "guncellendi": "2026-09-26T16:25:32.223179+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -333,6 +333,37 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-26T16:25:32.223179+00:00",
+          "yas_saat": 189.209,
+          "youtube": {
+            "views": 63,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 3,
+            "average_view_duration_seconds": 14,
+            "average_view_percentage": 89.9,
+            "engaged_views": 8,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 0,
+            "views": 228,
+            "impressions": 228,
+            "reach": 191,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 263,
+            "likes": 8,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -516,6 +547,37 @@
             "comments": 1,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-09-26T16:25:32.223179+00:00",
+          "yas_saat": 141.353,
+          "youtube": {
+            "views": 1315,
+            "likes": 8,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 127,
+            "average_view_duration_seconds": 14,
+            "average_view_percentage": 92.61,
+            "engaged_views": 451,
+            "subscribers_gained": 1,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 0,
+            "views": 197,
+            "impressions": 197,
+            "reach": 164,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 420,
+            "likes": 14,
+            "comments": 1,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -572,13 +634,140 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-26T16:25:32.223179+00:00",
+          "yas_saat": 44.201,
+          "youtube": {
+            "views": 855,
+            "likes": 10,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 11,
+            "comments": 1,
+            "views": 1875,
+            "impressions": 1875,
+            "reach": 1312,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 326,
+            "likes": 9,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-24T20:13:27.231198+00:00",
       "subtitle": "Into Io's Sulfur Plumes",
-      "anlik": {},
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-09-26T16:25:32.223179+00:00",
+            "yas_saat": 44.201,
+            "youtube": {
+              "views": 855,
+              "likes": 10,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 11,
+              "comments": 1,
+              "views": 1875,
+              "impressions": 1875,
+              "reach": 1312,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 326,
+              "likes": 9,
+              "comments": 1,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-26T16:25:32.223179+00:00",
+            "yas_saat": 44.201,
+            "youtube": {
+              "views": 855,
+              "likes": 10,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 11,
+              "comments": 1,
+              "views": 1875,
+              "impressions": 1875,
+              "reach": 1312,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 326,
+              "likes": 9,
+              "comments": 1,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-26T16:25:32.223179+00:00",
+            "yas_saat": 44.201,
+            "youtube": {
+              "views": 855,
+              "likes": 10,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 11,
+              "comments": 1,
+              "views": 1875,
+              "impressions": 1875,
+              "reach": 1312,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 326,
+              "likes": 9,
+              "comments": 1,
+              "shares": 0
+            }
+          }
+        }
+      },
       "yargi_anligi": null,
       "oranlar": {},
       "puanlanan_metrikler": {},
@@ -586,5 +775,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 12
+  "api_cagrilari": 9
 }

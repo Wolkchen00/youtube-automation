@@ -1,7 +1,13 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-09-25T17:13:07.453598+00:00",
-  "medyanlar": {},
+  "guncellendi": "2026-09-26T16:25:17.972426+00:00",
+  "medyanlar": {
+    "oturmus": {
+      "youtube": 1072,
+      "instagram": 243,
+      "tiktok": 1024
+    }
+  },
   "parts": [
     {
       "part": 92,
@@ -125,11 +131,37 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 1.0,
+        "instagram": 1.411523,
+        "tiktok": 12.573242
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 1072,
+          "likes": 3,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 6,
+          "comments": 0,
+          "views": 343,
+          "impressions": 343,
+          "reach": 196,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 12875,
+          "likes": 57,
+          "comments": 5,
+          "shares": 3
+        }
+      },
+      "puan": 12.573242,
+      "etiket": "kazanan"
     },
     {
       "part": 93,
@@ -253,11 +285,37 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 1.750933,
+        "instagram": 0.909465,
+        "tiktok": 0.400391
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 1877,
+          "likes": 9,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 4,
+          "comments": 0,
+          "views": 221,
+          "impressions": 221,
+          "reach": 153,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 410,
+          "likes": 10,
+          "comments": 1,
+          "shares": 0
+        }
+      },
+      "puan": 1.750933,
+      "etiket": "orta"
     },
     {
       "part": 94,
@@ -381,11 +439,37 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 0.847948,
+        "instagram": 1.0,
+        "tiktok": 1.0
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 909,
+          "likes": 4,
+          "comments": 0,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 9,
+          "comments": 0,
+          "views": 243,
+          "impressions": 243,
+          "reach": 156,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 1024,
+          "likes": 23,
+          "comments": 1,
+          "shares": 0
+        }
+      },
+      "puan": 1.0,
+      "etiket": "orta"
     },
     {
       "part": 95,
@@ -457,7 +541,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-17T19:59:15.833676+00:00",
       "subtitle": "A Tornado Wider Than a City Over Kansas",
@@ -540,11 +624,37 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 1.617537,
+        "instagram": 0.769547,
+        "tiktok": 0.374023
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 1734,
+          "likes": 9,
+          "comments": 2,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 4,
+          "comments": 0,
+          "views": 187,
+          "impressions": 187,
+          "reach": 114,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 383,
+          "likes": 2,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 1.617537,
+      "etiket": "orta"
     },
     {
       "part": 96,
@@ -614,18 +724,177 @@
             "comments": 8,
             "shares": 11
           }
+        },
+        {
+          "ts": "2026-09-26T16:25:17.972426+00:00",
+          "yas_saat": 165.669,
+          "youtube": {
+            "views": 55,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 4,
+            "average_view_duration_seconds": 17,
+            "average_view_percentage": 194.93,
+            "engaged_views": 12,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 0,
+            "views": 243,
+            "impressions": 243,
+            "reach": 158,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 13808,
+            "likes": 83,
+            "comments": 8,
+            "shares": 12
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-19T18:45:10.224060+00:00",
       "subtitle": "A Fissure Opening Along the San Andreas",
-      "anlik": {},
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "anlik": {
+        "s7g": {
+          "youtube": {
+            "ts": "2026-09-26T16:25:17.972426+00:00",
+            "yas_saat": 165.669,
+            "youtube": {
+              "views": 55,
+              "likes": 0,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 4,
+              "average_view_duration_seconds": 17,
+              "average_view_percentage": 194.93,
+              "engaged_views": 12,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 0,
+              "views": 243,
+              "impressions": 243,
+              "reach": 158,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 13808,
+              "likes": 83,
+              "comments": 8,
+              "shares": 12
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-26T16:25:17.972426+00:00",
+            "yas_saat": 165.669,
+            "youtube": {
+              "views": 55,
+              "likes": 0,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 4,
+              "average_view_duration_seconds": 17,
+              "average_view_percentage": 194.93,
+              "engaged_views": 12,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 0,
+              "views": 243,
+              "impressions": 243,
+              "reach": 158,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 13808,
+              "likes": 83,
+              "comments": 8,
+              "shares": 12
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-26T16:25:17.972426+00:00",
+            "yas_saat": 165.669,
+            "youtube": {
+              "views": 55,
+              "likes": 0,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 4,
+              "average_view_duration_seconds": 17,
+              "average_view_percentage": 194.93,
+              "engaged_views": 12,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 0,
+              "views": 243,
+              "impressions": 243,
+              "reach": 158,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 13808,
+              "likes": 83,
+              "comments": 8,
+              "shares": 12
+            }
+          }
+        }
+      },
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "youtube": 0.051306,
+        "instagram": 1.0,
+        "tiktok": 13.484375
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 55,
+          "likes": 0,
+          "comments": 0,
+          "favorites": 0,
+          "watch_time_minutes": 4,
+          "average_view_duration_seconds": 17,
+          "average_view_percentage": 194.93,
+          "engaged_views": 12,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 4,
+          "comments": 0,
+          "views": 243,
+          "impressions": 243,
+          "reach": 158,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 13808,
+          "likes": 83,
+          "comments": 8,
+          "shares": 12
+        }
+      },
+      "puan": 13.484375,
+      "etiket": "kazanan"
     },
     {
       "part": 97,
@@ -692,6 +961,37 @@
           "tiktok": {
             "views": 9675,
             "likes": 73,
+            "comments": 1,
+            "shares": 1
+          }
+        },
+        {
+          "ts": "2026-09-26T16:25:17.972426+00:00",
+          "yas_saat": 115.85,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 0,
+            "views": 264,
+            "impressions": 264,
+            "reach": 177,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 10080,
+            "likes": 75,
             "comments": 1,
             "shares": 1
           }
@@ -854,6 +1154,37 @@
             "comments": 2,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-26T16:25:17.972426+00:00",
+          "yas_saat": 68.552,
+          "youtube": {
+            "views": 173,
+            "likes": 4,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 7,
+            "average_view_duration_seconds": 11,
+            "average_view_percentage": 125.58,
+            "engaged_views": 35,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 22,
+            "comments": 3,
+            "views": 3310,
+            "impressions": 3310,
+            "reach": 2005,
+            "saves": 0,
+            "shares": 1
+          },
+          "tiktok": {
+            "views": 525,
+            "likes": 10,
+            "comments": 2,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -962,7 +1293,63 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 99,
+      "post_ids": {
+        "youtube": "wpn-frweLZw",
+        "instagram": "17905786698577690",
+        "tiktok": "7689523747245591822"
+      },
+      "request_ids": {
+        "youtube": "2920a0da3efc418bb92a065dcde52bfa",
+        "instagram": "998ed73ed0fc42c8a753893540a1ef3c",
+        "tiktok": "03a185f858064a69ab36c83b693fd8b0"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-26T16:25:17.972426+00:00",
+          "yas_saat": 23.078,
+          "youtube": {
+            "views": 17,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 16,
+            "comments": 1,
+            "views": 1677,
+            "impressions": 1677,
+            "reach": 1159,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 852,
+            "likes": 12,
+            "comments": 0,
+            "shares": 6
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-25T17:20:37.373476+00:00",
+      "subtitle": "A Whirlpool Spanning All of Tokyo Bay",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 12
+  "api_cagrilari": 15
 }
