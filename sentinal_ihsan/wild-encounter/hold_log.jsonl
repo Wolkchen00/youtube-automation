@@ -5,3 +5,4 @@
 {"ts": "2026-09-19T21:02:47.635131+00:00", "part": 12, "durum": "qc_retry", "kod": "UNKNOWN", "neden": "", "coherence": null}
 {"ts": "2026-09-20T17:18:59.720214+00:00", "part": 12, "durum": "qc_retry", "kod": "AUDIO_MASTER", "neden": "final ses doğrulaması başarısız", "coherence": null}
 {"ts": "2026-09-20T17:28:15.538468+00:00", "part": 12, "durum": "needs_human", "kod": "AUDIO_MASTER", "neden": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=-0.90 dB, LUFS=-15.30.", "coherence": null}
+{"ts": "2026-09-26T12:19:03.074600+00:00", "part": 18, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
