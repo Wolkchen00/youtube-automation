@@ -1,6 +1,6 @@
 {
   "series": "still-home",
-  "guncellendi": "2026-09-25T15:59:35.921862+00:00",
+  "guncellendi": "2026-09-26T15:08:03.598860+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -455,6 +455,37 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-09-26T15:08:03.598860+00:00",
+          "yas_saat": 184.052,
+          "youtube": {
+            "views": 678,
+            "likes": 6,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 56,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 124.58,
+            "engaged_views": 213,
+            "subscribers_gained": 1,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 0,
+            "views": 157,
+            "impressions": 157,
+            "reach": 114,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 3480,
+            "likes": 46,
+            "comments": 0,
+            "shares": 2
+          }
         }
       ],
       "donduruldu": false,
@@ -632,6 +663,37 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-26T15:08:03.598860+00:00",
+          "yas_saat": 140.706,
+          "youtube": {
+            "views": 693,
+            "likes": 12,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 58,
+            "average_view_duration_seconds": 16,
+            "average_view_percentage": 150.28,
+            "engaged_views": 171,
+            "subscribers_gained": 1,
+            "shares": 2
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 0,
+            "views": 163,
+            "impressions": 163,
+            "reach": 119,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 992,
+            "likes": 27,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -710,6 +772,37 @@
           "tiktok": {
             "views": 1098,
             "likes": 17,
+            "comments": 1,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-09-26T15:08:03.598860+00:00",
+          "yas_saat": 87.466,
+          "youtube": {
+            "views": 409,
+            "likes": 4,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 25,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 122.71,
+            "engaged_views": 103,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 0,
+            "views": 146,
+            "impressions": 146,
+            "reach": 111,
+            "saves": 1,
+            "shares": 2
+          },
+          "tiktok": {
+            "views": 1138,
+            "likes": 19,
             "comments": 1,
             "shares": 0
           }
@@ -872,12 +965,170 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-26T15:08:03.598860+00:00",
+          "yas_saat": 63.81,
+          "youtube": {
+            "views": 16,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 11,
+            "average_view_percentage": 107.97,
+            "engaged_views": 3,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 9,
+            "comments": 1,
+            "views": 212,
+            "impressions": 212,
+            "reach": 150,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 489,
+            "likes": 6,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-23T23:19:26.011069+00:00",
       "subtitle": "Cairo Rides Its Own Plateaus",
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-09-26T15:08:03.598860+00:00",
+            "yas_saat": 63.81,
+            "youtube": {
+              "views": 16,
+              "likes": 1,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 11,
+              "average_view_percentage": 107.97,
+              "engaged_views": 3,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 9,
+              "comments": 1,
+              "views": 212,
+              "impressions": 212,
+              "reach": 150,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 489,
+              "likes": 6,
+              "comments": 1,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-09-26T15:08:03.598860+00:00",
+            "yas_saat": 63.81,
+            "youtube": {
+              "views": 16,
+              "likes": 1,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 11,
+              "average_view_percentage": 107.97,
+              "engaged_views": 3,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 9,
+              "comments": 1,
+              "views": 212,
+              "impressions": 212,
+              "reach": 150,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 489,
+              "likes": 6,
+              "comments": 1,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-09-26T15:08:03.598860+00:00",
+            "yas_saat": 63.81,
+            "youtube": {
+              "views": 16,
+              "likes": 1,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 11,
+              "average_view_percentage": 107.97,
+              "engaged_views": 3,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 9,
+              "comments": 1,
+              "views": 212,
+              "impressions": 212,
+              "reach": 150,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 489,
+              "likes": 6,
+              "comments": 1,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    },
+    {
+      "part": 8,
+      "post_ids": {
+        "tiktok": "7689513579791256846"
+      },
+      "request_ids": {
+        "tiktok": "d7478849f4684702b097ca1063e2abc2"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-09-26T15:08:03.598860+00:00",
+          "yas_saat": 22.442,
+          "tiktok": {
+            "views": 323,
+            "likes": 3,
+            "comments": 2,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-25T16:41:32.519076+00:00",
+      "subtitle": "Moscow Powers Its Own Winter",
       "anlik": {},
       "yargi_anligi": null,
       "oranlar": {},
@@ -886,5 +1137,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 12
+  "api_cagrilari": 14
 }
