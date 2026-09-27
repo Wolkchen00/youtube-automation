@@ -1,0 +1,249 @@
+{
+  "generated_at": "2026-09-27T13:42:55.691778+00:00",
+  "snapshot_date": "2026-09-27",
+  "period": "2026-09-21 to 2026-09-27",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 129,
+        "total_views": 115763,
+        "total_videos": 284
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "zsPZ2CG-G6o",
+          "title": "Moscow Powers Its Own Winter",
+          "published": "2026-09-25T16:33:55Z",
+          "views": 511,
+          "views_48h": 511,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "mNpdVnuHKDE",
+          "title": "Cairo Rides Its Own Plateaus",
+          "published": "2026-09-23T23:17:20Z",
+          "views": 19,
+          "views_48h": 10,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "zL2qI9pM-g0",
+          "title": "Tokyo Grew Its Own Districts",
+          "published": "2026-09-22T23:37:36Z",
+          "views": 409,
+          "views_48h": 261,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "9A3_9frmnRs",
+          "title": "Rio De Janeiro Linked Its Hills With Light",
+          "published": "2026-09-20T18:24:03Z",
+          "views": 693,
+          "views_48h": 688,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 30.5
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 162,
+        "total_views": 182252,
+        "total_videos": 187
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "f7Oz9Gpau7M",
+          "title": "This GIANT SHARK Is NOT Real",
+          "published": "2026-09-25T12:51:06Z",
+          "views": 168,
+          "views_48h": 168,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "rTrY095FxvE",
+          "title": "This GIANT WASP Is NOT Real",
+          "published": "2026-09-24T21:52:33Z",
+          "views": 40,
+          "views_48h": 31,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "aCJ66hoUHCg",
+          "title": "This GIANT COBRA Is NOT Real",
+          "published": "2026-09-23T19:23:17Z",
+          "views": 75,
+          "views_48h": 67,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "wSXBMvwfVcs",
+          "title": "This GIANT LION Is NOT Real",
+          "published": "2026-09-21T22:21:21Z",
+          "views": 46,
+          "views_48h": 36,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "n0bBTtIWt7k",
+          "title": "This GIANT KOMODO DRAGON Is NOT Real",
+          "published": "2026-09-20T17:36:35Z",
+          "views": 231,
+          "views_48h": 215,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1164
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 150,
+        "total_views": 75739,
+        "total_videos": 220
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "wpn-frweLZw",
+          "title": "A Whirlpool Spanning All of Tokyo Bay",
+          "published": "2026-09-25T17:18:36Z",
+          "views": 18,
+          "views_48h": 18,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "iwN3KYSuYac",
+          "title": "Into Io's Sulfur Plumes",
+          "published": "2026-09-24T20:10:42Z",
+          "views": 996,
+          "views_48h": 800,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "IyqgheFwf_Q",
+          "title": "Jakobshavn Glacier Collapsing Along Its Width",
+          "published": "2026-09-23T19:49:32Z",
+          "views": 173,
+          "views_48h": 159,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "YiJJNBiYito",
+          "title": "Pyroclastic Flow Engulfing the Bay of Naples",
+          "published": "2026-09-21T20:32:49Z",
+          "views": 4,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "RYLhgm7WDJ0",
+          "title": "Through Halley's Comet Tail",
+          "published": "2026-09-20T19:02:00Z",
+          "views": 1317,
+          "views_48h": 1269,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 200
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 108,
+        "total_views": 157425,
+        "total_videos": 270
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "pT54RU0HW9U",
+          "title": "Matterhorn, the banner cloud #shorts",
+          "published": "2026-09-26T15:04:34Z",
+          "views": 1183,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "LUFQFiuvn9w",
+          "title": "Neuschwanstein, into the cloud #shorts",
+          "published": "2026-09-25T15:54:46Z",
+          "views": 1310,
+          "views_48h": 1310,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "mvdh4rZMjwI",
+          "title": "Niagara Falls, into the mist #shorts",
+          "published": "2026-09-24T17:59:21Z",
+          "views": 1860,
+          "views_48h": 1663,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "E0UiRefq4RI",
+          "title": "Table Mountain, the tablecloth #shorts",
+          "published": "2026-09-23T18:02:59Z",
+          "views": 1403,
+          "views_48h": 1361,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "kYPMUKY3vsw",
+          "title": "Christ the Redeemer, into the cloud bank #shorts",
+          "published": "2026-09-22T17:46:42Z",
+          "views": 1505,
+          "views_48h": 1267,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "bzy49_pcotk",
+          "title": "Golden Gate Bridge, into the fog #shorts",
+          "published": "2026-09-21T18:53:01Z",
+          "views": 469,
+          "views_48h": 11,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Mc6o4W2MCyc",
+          "title": "Sydney Harbour Bridge, no floor #shorts",
+          "published": "2026-09-20T16:58:44Z",
+          "views": 3,
+          "views_48h": 2,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 14
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 53,
+        "total_views": 28816,
+        "total_videos": 20
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Kt6AnOzXcaw",
+          "title": "Haliç'te pusuyu kim bildi? 🦁 | Av Mevsimi 1. Bölüm",
+          "published": "2026-09-25T18:52:38Z",
+          "views": 419,
+          "views_48h": 419,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Ikzjn7gPqCs",
+          "title": "Annesi kapıyı kapattı, anneannesi sofrasını açtı. 🤍",
+          "published": "2026-09-24T16:07:59Z",
+          "views": 1557,
+          "views_48h": 1455,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "ikPVZKPT8Sc",
+          "title": "Zengin kadın çaresiz kaldı, hocaya gidiyor 🔮",
+          "published": "2026-09-23T19:12:33Z",
+          "views": 1070,
+          "views_48h": 847,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1356
+    }
+  }
+}
