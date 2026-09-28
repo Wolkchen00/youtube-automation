@@ -361,3 +361,31 @@
 {"ts": "2026-09-27T13:06:04Z", "event": "qc_api_result", "attempt_id": "759580efc81345dbb81bdb8a606d9ab4", "outcome": "429"}
 {"ts": "2026-09-27T13:06:04Z", "event": "native_audio_review", "episode": 18, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
 {"ts": "2026-09-27T13:06:05Z", "event": "qc_hold", "episode": 18, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-09-28T15:52:37Z", "event": "qc_api_attempt", "attempt_id": "595a108dd2b948328a5d297e13669f46", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 18, "shot": 1}
+{"ts": "2026-09-28T15:52:37Z", "event": "qc_api_result", "attempt_id": "595a108dd2b948328a5d297e13669f46", "outcome": "429"}
+{"ts": "2026-09-28T15:53:07Z", "event": "qc_api_attempt", "attempt_id": "fd4c8df04f944cb39090735cec0b010a", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 18, "shot": 1}
+{"ts": "2026-09-28T15:53:07Z", "event": "qc_api_result", "attempt_id": "fd4c8df04f944cb39090735cec0b010a", "outcome": "429"}
+{"ts": "2026-09-28T15:53:37Z", "event": "qc_api_attempt", "attempt_id": "0b6f631ceea946af8371bc75ee864135", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 18, "shot": 1}
+{"ts": "2026-09-28T15:53:38Z", "event": "qc_api_result", "attempt_id": "0b6f631ceea946af8371bc75ee864135", "outcome": "429"}
+{"ts": "2026-09-28T15:53:38Z", "event": "qc_api_attempt", "attempt_id": "4f572d01e3484c6baaa7dff1ab1dfcf0", "task_type": "native_audio_review", "model": "gemini-flash-latest", "is_fallback": true, "episode": 18, "shot": 1}
+{"ts": "2026-09-28T15:53:38Z", "event": "qc_api_result", "attempt_id": "4f572d01e3484c6baaa7dff1ab1dfcf0", "outcome": "429"}
+{"ts": "2026-09-28T15:54:08Z", "event": "qc_api_attempt", "attempt_id": "2c9ed064f15d45a8b06726677686336c", "task_type": "native_audio_review", "model": "gemini-flash-latest", "is_fallback": true, "episode": 18, "shot": 1}
+{"ts": "2026-09-28T15:54:08Z", "event": "qc_api_result", "attempt_id": "2c9ed064f15d45a8b06726677686336c", "outcome": "429"}
+{"ts": "2026-09-28T15:54:38Z", "event": "qc_api_attempt", "attempt_id": "4bf2f719264544b4b450970d4a8b544b", "task_type": "native_audio_review", "model": "gemini-flash-latest", "is_fallback": true, "episode": 18, "shot": 1}
+{"ts": "2026-09-28T15:54:39Z", "event": "qc_api_result", "attempt_id": "4bf2f719264544b4b450970d4a8b544b", "outcome": "429"}
+{"ts": "2026-09-28T15:54:39Z", "event": "native_audio_review", "episode": 18, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
+{"ts": "2026-09-28T15:54:40Z", "event": "qc_hold", "episode": 18, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-09-28T16:00:11Z", "event": "qc_api_attempt", "attempt_id": "7c1753d637b94182a03e42334dd71855", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 19, "shot": 1}
+{"ts": "2026-09-28T16:00:11Z", "event": "qc_api_result", "attempt_id": "7c1753d637b94182a03e42334dd71855", "outcome": "429"}
+{"ts": "2026-09-28T16:00:41Z", "event": "qc_api_attempt", "attempt_id": "7d0655c36d544fd6934d8a65311cc980", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 19, "shot": 1}
+{"ts": "2026-09-28T16:00:42Z", "event": "qc_api_result", "attempt_id": "7d0655c36d544fd6934d8a65311cc980", "outcome": "429"}
+{"ts": "2026-09-28T16:01:12Z", "event": "qc_api_attempt", "attempt_id": "230882dd6c0541ec8c855de567f2938d", "task_type": "native_audio_review", "model": "gemini-2.5-flash", "is_fallback": false, "episode": 19, "shot": 1}
+{"ts": "2026-09-28T16:01:12Z", "event": "qc_api_result", "attempt_id": "230882dd6c0541ec8c855de567f2938d", "outcome": "429"}
+{"ts": "2026-09-28T16:01:12Z", "event": "qc_api_attempt", "attempt_id": "ef467ed405124d748ad288bf0cc348f7", "task_type": "native_audio_review", "model": "gemini-flash-latest", "is_fallback": true, "episode": 19, "shot": 1}
+{"ts": "2026-09-28T16:01:13Z", "event": "qc_api_result", "attempt_id": "ef467ed405124d748ad288bf0cc348f7", "outcome": "429"}
+{"ts": "2026-09-28T16:01:43Z", "event": "qc_api_attempt", "attempt_id": "3801c04ee8ef48a09a3ab85debcf2004", "task_type": "native_audio_review", "model": "gemini-flash-latest", "is_fallback": true, "episode": 19, "shot": 1}
+{"ts": "2026-09-28T16:01:43Z", "event": "qc_api_result", "attempt_id": "3801c04ee8ef48a09a3ab85debcf2004", "outcome": "429"}
+{"ts": "2026-09-28T16:02:13Z", "event": "qc_api_attempt", "attempt_id": "421c5335234346d3ad0338e5debbfe54", "task_type": "native_audio_review", "model": "gemini-flash-latest", "is_fallback": true, "episode": 19, "shot": 1}
+{"ts": "2026-09-28T16:02:13Z", "event": "qc_api_result", "attempt_id": "421c5335234346d3ad0338e5debbfe54", "outcome": "429"}
+{"ts": "2026-09-28T16:02:13Z", "event": "native_audio_review", "episode": 19, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
+{"ts": "2026-09-28T16:02:14Z", "event": "qc_hold", "episode": 19, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
