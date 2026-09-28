@@ -862,6 +862,9 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
         # yazilmaz; yoksa kredi yuklendikten sonraki ILK siradan 503 bolumu
         # dusururdu. Saat bir sonraki GERCEK altyapi arizasinda yeniden baslar.
         part.pop("first_infra_held_at", None)
+        # Sonraki kosularda bu bolumun yoklamasi iki asamali olur (bkz.
+        # _BILLING_CONFIRM_SECONDS): bu bolum yoklama gectigi halde 402 yedi.
+        part["billing_seen_at"] = now
         part["last_reason_code"] = code
         part["hold_reason"] = result.reason or "Gemini on odemeli kredisi bitti"
         part["status"] = "qc_retry"
@@ -971,6 +974,11 @@ def _degraded_episode_reason(coherence: dict) -> str:
     return "; ".join(missing)
 
 
+# Yakin zamanda odeme engeli gormus bolumde yoklamanin ikinci dogrulamasi
+# icin bekleme (bkz. critic.probe_qc_access). 28 Eyl'de "acik gorunen" pencere
+# 109 sn'den kisaydi.
+_BILLING_CONFIRM_SECONDS = 75.0
+
 _PROBE_MESSAGES = {
     "auth": "Gemini QC anahtarı yok ya da geçersiz",
     "daily_quota": "Gemini günlük kotası doldu",
@@ -992,7 +1000,9 @@ def _qc_access_blocked(meta: SeriesMeta, bible, n: int) -> bool:
     qc = critic.qc_config(bible) if bible else {}
     if not qc:
         return False
-    status, detail = critic.probe_qc_access(meta.slug)
+    part = meta.get_part(n)
+    confirm = _BILLING_CONFIRM_SECONDS if part.get("billing_seen_at") else 0.0
+    status, detail = critic.probe_qc_access(meta.slug, confirm_after_s=confirm)
     if status not in critic.PROBE_BLOCKING:
         if status != "ok":
             logger.warning(
@@ -1012,8 +1022,11 @@ def _qc_access_blocked(meta: SeriesMeta, bible, n: int) -> bool:
         f"🛑 {headline}: '{meta.slug}' Part {n} uretimi BASLATILMADI, "
         f"Kie kredisi harcanmadi. Ayrinti: {detail[:200]}"
     )
-    part = meta.get_part(n)
-    if part.pop("first_infra_held_at", None) is not None:
+    changed = part.pop("first_infra_held_at", None) is not None
+    if status == "billing":
+        part["billing_seen_at"] = datetime.now(timezone.utc).isoformat()
+        changed = True
+    if changed:
         meta.save()
     if status == "billing":
         action = COZUM_METNI

@@ -342,12 +342,16 @@ def test_blocking_probe_spends_nothing_and_leaves_the_part_untouched(tmp_path, s
     assert ok is False, "video cikmayan kosu yesil gorundu"
     producer.assert_not_called()
     assert reserved == 0, "kredi rezervasyonu yapildi"
-    # Denenmeyen gun altyapi yas saatine yazilmaz; baska HICBIR alan degismez.
+    # Denenmeyen gun altyapi yas saatine yazilmaz; odeme engeli gorulduyse bir
+    # sonraki yoklama iki asamali olsun diye isaretlenir. Baska HICBIR alan degismez.
+    after = dict(meta.get_part(1))
+    seen = after.pop("billing_seen_at", None)
     expected = {k: v for k, v in before.items() if k != "first_infra_held_at"}
-    assert meta.get_part(1) == expected, "yoklama bolum durumunu degistirdi"
+    assert after == expected, "yoklama bolum durumunu degistirdi"
+    assert (seen is not None) == (status == "billing")
     assert meta.next_part == 1
     assert len(alerts) == 1 and "harcanmadı" in alerts[0]
-    probe.assert_called_once_with(slug)
+    probe.assert_called_once_with(slug, confirm_after_s=0.0)
 
 
 def test_fail_open_series_without_gates_is_not_blocked_by_the_probe(tmp_path):
@@ -388,6 +392,57 @@ def test_spend_cap_probe_alert_says_cap_not_credits(tmp_path):
         assert series_runner.run_next(slug, publish=True, force=True) is False
     producer.assert_not_called()
     assert "harcama tavanı DOLDU" in alerts[0]
+
+
+@pytest.mark.gercek_gemini_yoklamasi
+def test_confirmed_probe_catches_a_flickering_billing_window():
+    """28 Eyl 18:45: bakiye sifirken tek yoklama gecti, 109 sn sonra QC 402 yedi.
+
+    Iki asamali yoklamada ilk "ok" tek basina yetmez; ikinci cagri 402 ise
+    sonuc billing olur ve aradaki bekleme gercekten uygulanir.
+    """
+    fake = _FakeGemini({critic.QC_MODEL: ["OK", RuntimeError(BILLING_402)]})
+    with ExitStack() as stack:
+        slept = _gemini_context(stack, fake)
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG, confirm_after_s=75.0)
+    assert status == "billing"
+    assert fake.calls == [critic.QC_MODEL, critic.QC_MODEL]
+    slept.assert_called_once_with(75.0)
+
+
+@pytest.mark.gercek_gemini_yoklamasi
+def test_normal_probe_is_a_single_call_without_waiting():
+    fake = _FakeGemini({critic.QC_MODEL: ["OK"]})
+    with ExitStack() as stack:
+        slept = _gemini_context(stack, fake)
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG)
+    assert status == "ok"
+    assert fake.calls == [critic.QC_MODEL]
+    slept.assert_not_called()
+
+
+def test_part_that_saw_billing_gets_the_two_step_probe(tmp_path):
+    slug = "probe-two-step"
+    video = tmp_path / "episode.mp4"
+    producer = mock.Mock(return_value=ProduceResult("ok", video))
+    _ok, _meta, _alerts, probe, _ = _run_with_probe(
+        tmp_path, "ok", producer, slug=slug,
+        part={"status": "qc_retry", "last_reason_code": "BILLING",
+              "billing_seen_at": "2026-09-28T18:47:34+00:00"},
+    )
+    probe.assert_called_once_with(
+        slug, confirm_after_s=series_runner._BILLING_CONFIRM_SECONDS,
+    )
+    assert series_runner._BILLING_CONFIRM_SECONDS >= 60
+
+
+def test_billing_hold_marks_the_part_for_the_two_step_probe():
+    meta = _state_meta({"status": "qc_retry"})
+    with mock.patch.object(meta, "save"), mock.patch.object(series_runner, "_series_alert"):
+        series_runner._record_recoverable_failure(
+            meta, 18, ProduceResult("qc_hold", reason="402", reason_code="BILLING"),
+        )
+    assert meta.get_part(18).get("billing_seen_at")
 
 
 def test_billing_probe_alert_tells_the_human_how_to_fix_it(tmp_path):
@@ -604,3 +659,22 @@ def test_retry_delay_ignores_the_http_code_in_the_sdk_details_body():
 def test_probe_blocking_set_is_exactly_the_non_waitable_failures():
     assert critic.PROBE_BLOCKING == {"billing", "auth", "daily_quota"}
     assert "billing" in critic.QC_HOLD_REASONS
+
+
+def test_billing_hold_does_not_re_review_the_same_clip(tmp_path):
+    """28 Eyl still-home: ayni klip odeme arizasinda uc kez denetlendi (3 x 402)."""
+    bible = _qc_bible(_FIXTURE_SLUG)
+    bible.data["series"]["qc"] = {"enabled": True, "qc_review_retries": 2}
+    clip = tmp_path / "shot_01.mp4"
+    clip.write_bytes(b"clip")
+    with mock.patch.object(
+        critic, "review_clip",
+        side_effect=critic.QCApiExhausted("billing", BILLING_402),
+    ) as review, mock.patch.object(critic, "_log_event"), \
+            mock.patch.object(critic, "_notify"), \
+            mock.patch.object(critic.time, "sleep"):
+        _path, _credits, status = critic.qc_shot(
+            bible, {"n": 1}, clip, "prompt", None, episode=9, budget={"left": 0},
+        )
+    assert status == "hold"
+    assert review.call_count == 1, "odeme arizasinda ayni klip yeniden denetlendi"

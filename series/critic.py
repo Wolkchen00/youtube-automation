@@ -96,7 +96,8 @@ def _qc_api_key(slug: str | None = None) -> tuple[str | None, str]:
 PROBE_BLOCKING = frozenset({"billing", "auth", "daily_quota"})
 
 
-def probe_qc_access(slug: str | None = None) -> tuple[str, str]:
+def probe_qc_access(slug: str | None = None, *,
+                    confirm_after_s: float = 0.0) -> tuple[str, str]:
     """Ucretli uretimden ONCE, QC'nin kullanacagi anahtarla tek ve en ucuz Gemini cagrisi.
 
     26-28 Eyl 2026: QC Kie klibi ODENDIKTEN ~28 dk sonra ilk kez Gemini'ye
@@ -111,10 +112,29 @@ def probe_qc_access(slug: str | None = None) -> tuple[str, str]:
       "transient"   dakikalik 429 / 5xx / ag; QC'nin kendi deneme politikasi karsilar
     Yalniz ``PROBE_BLOCKING`` icindekiler uretimi durdurur. Belirsiz hata uretimi
     DURDURMAZ: yoklama bir erken uyari, zorunlu kapi yine QC'nin kendisidir.
+
+    ``confirm_after_s``: 28 Eyl 18:45'te bakiye sifirken tek yoklama GECTI, 109 sn
+    sonra QC 402 aldi ve 63 kredilik klip cope gitti (ayni gun 30/30 yoklama 402).
+    On odeme kaydi arada kisa sure acik gorunebiliyor. Bu yuzden yakin zamanda
+    odeme engeli gormus bolumde "ok" ancak aradan sonra IKINCI kez gecerse
+    kabul edilir. Normal gunlerde 0: ek bekleme yok.
     """
     qc_key, source = _qc_api_key(slug)
     if not qc_key:
         return "auth", f"{source} tanimli degil"
+    status, detail = _probe_once(qc_key)
+    if status == "ok" and confirm_after_s > 0:
+        logger.info(
+            f"🔁 Gemini yoklamasi gecti ama bu bolum yakin zamanda odeme engeli gordu; "
+            f"{confirm_after_s:g} sn sonra ikinci kez dogrulaniyor"
+        )
+        time.sleep(confirm_after_s)
+        status, detail = _probe_once(qc_key)
+    return status, detail
+
+
+def _probe_once(qc_key: str) -> tuple[str, str]:
+    """Tek ucuz generate_content; sonucu yoklama durumlarina indirger."""
     try:
         from google import genai
         from google.genai import types
@@ -1883,7 +1903,9 @@ def qc_shot(bible: Bible, shot: dict, clip_path: Path, prompt: str,
                             (opening_metrics or {}).get("sharpness_proxy") if n == 1 else "n/a"
                         )
                     _log_event(slug, event, experiment_id=experiment_id)
-                    if verdict not in ("skip", "hold") or review_try >= review_retries:
+                    if (verdict not in ("skip", "hold") or review_try >= review_retries
+                            or api_hold_reason == "billing"):
+                        # Odeme arizasi ayni klibi yeniden denetleyince acilmaz.
                         break
                     review_try += 1
                     wait = QC_REVIEW_RETRY_DELAY * review_try

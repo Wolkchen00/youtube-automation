@@ -34,7 +34,8 @@ def _gemini_yoklamasi_aga_cikmasin(request, monkeypatch):
         return
     from series import critic
 
-    monkeypatch.setattr(critic, "probe_qc_access", lambda slug=None: ("ok", "test-saplamasi"))
+    monkeypatch.setattr(critic, "probe_qc_access",
+                        lambda slug=None, **_kwargs: ("ok", "test-saplamasi"))
 
 
 @pytest.fixture(autouse=True)
