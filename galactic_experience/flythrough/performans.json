@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-09-27T16:59:42.124936+00:00",
+  "guncellendi": "2026-09-28T19:41:54.378245+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -611,7 +611,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-20T19:04:20.185718+00:00",
       "subtitle": "Through Halley's Comet Tail",
@@ -823,6 +823,31 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-28T19:41:54.378245+00:00",
+          "yas_saat": 95.474,
+          "youtube": {
+            "views": 1291,
+            "likes": 12,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 11,
+            "comments": 1,
+            "views": 1879,
+            "impressions": 1879,
+            "reach": 1322,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 341,
+            "likes": 10,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -933,5 +958,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }
