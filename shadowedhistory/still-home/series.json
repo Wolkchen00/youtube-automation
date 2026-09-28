@@ -505,6 +505,12 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "9": {
+      "status": "qc_retry",
+      "first_held_at": "2026-09-28T18:47:34.691537+00:00",
+      "last_reason_code": "BILLING",
+      "hold_reason": "billing"
     }
   },
   "engagement": {

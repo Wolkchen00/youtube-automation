@@ -1,6 +1,6 @@
 {
   "series": "still-home",
-  "guncellendi": "2026-09-27T15:48:48.020819+00:00",
+  "guncellendi": "2026-09-28T18:45:29.353059+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 676,
@@ -843,7 +843,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-20T18:25:42.034637+00:00",
       "subtitle": "Rio De Janeiro Linked Its Hills With Light",
@@ -1112,6 +1112,31 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-28T18:45:29.353059+00:00",
+          "yas_saat": 139.09,
+          "youtube": {
+            "views": 409,
+            "likes": 4,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 0,
+            "views": 146,
+            "impressions": 146,
+            "reach": 111,
+            "saves": 1,
+            "shares": 2
+          },
+          "tiktok": {
+            "views": 1274,
+            "likes": 22,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1333,6 +1358,31 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-28T18:45:29.353059+00:00",
+          "yas_saat": 115.434,
+          "youtube": {
+            "views": 19,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 9,
+            "comments": 1,
+            "views": 217,
+            "impressions": 217,
+            "reach": 153,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 537,
+            "likes": 9,
+            "comments": 2,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1470,6 +1520,16 @@
             "comments": 2,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-28T18:45:29.353059+00:00",
+          "yas_saat": 74.066,
+          "tiktok": {
+            "views": 376,
+            "likes": 4,
+            "comments": 2,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1497,5 +1557,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 10
+  "api_cagrilari": 7
 }
