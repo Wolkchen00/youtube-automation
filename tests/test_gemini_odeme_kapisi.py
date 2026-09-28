@@ -72,6 +72,17 @@ SPEND_CAP_PROJECT_429 = (
     "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your project has "
     "exceeded its monthly spending cap.', 'status': 'RESOURCE_EXHAUSTED'}}"
 )
+# Ucretsiz katmanin DAKIKALIK 429'u: metrik adi ve quotaId soneki gunlukle AYNI,
+# yalniz "PerMinute" ayirir. Gunluk sanilirsa yoklama butun gunu karartir.
+FREE_TIER_PER_MINUTE = (
+    "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your "
+    "current quota. Quota exceeded for metric: "
+    "generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 10, "
+    "model: gemini-2.5-flash', 'status': 'RESOURCE_EXHAUSTED', 'details': [{'@type': "
+    "'type.googleapis.com/google.rpc.QuotaFailure', 'violations': [{'quotaId': "
+    "'GenerateRequestsPerMinutePerProjectPerModel-FreeTier'}]}, {'@type': "
+    "'type.googleapis.com/google.rpc.RetryInfo', 'retryDelay': '21s'}]}}"
+)
 # Gercek 429 govdeleri "plan and billing details" der; bu ODEME arizasi DEGILDIR.
 QUOTA_WITH_BILLING_WORD = (
     "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'You exceeded your "
@@ -242,8 +253,8 @@ def test_billing_alert_names_the_real_cause_and_the_fix():
     [
         ("OK", "ok"),
         (RuntimeError(BILLING_402), "billing"),
-        (RuntimeError(QUOTA_DAILY), "daily_quota"),
         (RuntimeError(QUOTA_PER_MINUTE), "transient"),
+        (RuntimeError(FREE_TIER_PER_MINUTE), "transient"),
         (RuntimeError(SERVER_503), "transient"),
         (RuntimeError("400 INVALID_ARGUMENT API key not valid"), "auth"),
     ],
@@ -282,6 +293,38 @@ def test_probe_checks_the_same_billing_account_qc_will_use():
 class _ModelsOK:
     def generate_content(self, **_kwargs):
         return SimpleNamespace(text="")
+
+
+def test_free_tier_per_minute_limit_is_not_a_daily_limit():
+    """Ucretsiz katmana donuste (28 Eyl) bu ayrim canli: dakikalik takilma beklenir."""
+    assert critic._is_daily_quota_error(RuntimeError(QUOTA_DAILY)) is True
+    assert critic._is_daily_quota_error(RuntimeError(FREE_TIER_PER_MINUTE)) is False
+
+
+@pytest.mark.gercek_gemini_yoklamasi
+def test_probe_falls_back_when_only_the_primary_models_day_is_used_up():
+    """Ucretsiz katmanda kota model basina: QC yedek modelle gecer, gun kararmamali."""
+    fake = _FakeGemini({
+        critic.QC_MODEL: [RuntimeError(QUOTA_DAILY)],
+        critic.QC_MODEL_FALLBACK: ["OK"],
+    })
+    with ExitStack() as stack:
+        _gemini_context(stack, fake)
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG)
+    assert status == "ok"
+    assert fake.calls == [critic.QC_MODEL, critic.QC_MODEL_FALLBACK]
+
+
+@pytest.mark.gercek_gemini_yoklamasi
+def test_probe_blocks_only_when_both_models_are_out_for_the_day():
+    fake = _FakeGemini({
+        critic.QC_MODEL: [RuntimeError(QUOTA_DAILY)],
+        critic.QC_MODEL_FALLBACK: [RuntimeError(QUOTA_DAILY)],
+    })
+    with ExitStack() as stack:
+        _gemini_context(stack, fake)
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG)
+    assert status == "daily_quota"
 
 
 @pytest.mark.gercek_gemini_yoklamasi

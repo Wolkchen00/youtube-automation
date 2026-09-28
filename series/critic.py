@@ -122,18 +122,31 @@ def probe_qc_access(slug: str | None = None, *,
     qc_key, source = _qc_api_key(slug)
     if not qc_key:
         return "auth", f"{source} tanimli degil"
-    status, detail = _probe_once(qc_key)
+    status, detail = _probe_models(qc_key)
     if status == "ok" and confirm_after_s > 0:
         logger.info(
             f"🔁 Gemini yoklamasi gecti ama bu bolum yakin zamanda odeme engeli gordu; "
             f"{confirm_after_s:g} sn sonra ikinci kez dogrulaniyor"
         )
         time.sleep(confirm_after_s)
-        status, detail = _probe_once(qc_key)
+        status, detail = _probe_models(qc_key)
     return status, detail
 
 
-def _probe_once(qc_key: str) -> tuple[str, str]:
+def _probe_models(qc_key: str) -> tuple[str, str]:
+    """Ana modeli yokla; ana modelin GUNLUK kotasi bittiyse yedegi de yokla.
+
+    Ucretsiz katmanda kota MODEL BASINA ayrilir ve QC ana model tukenince yedek
+    modelle calisir. Yalniz ana modele bakip "gunluk kota" deyip durmak, QC'nin
+    yine de gececegi bir gunu karartirdi.
+    """
+    status, detail = _probe_once(qc_key, QC_MODEL)
+    if status == "daily_quota":
+        status, detail = _probe_once(qc_key, QC_MODEL_FALLBACK)
+    return status, detail
+
+
+def _probe_once(qc_key: str, model: str = QC_MODEL) -> tuple[str, str]:
     """Tek ucuz generate_content; sonucu yoklama durumlarina indirger."""
     try:
         from google import genai
@@ -141,7 +154,7 @@ def _probe_once(qc_key: str) -> tuple[str, str]:
 
         client = genai.Client(api_key=qc_key)
         client.models.generate_content(
-            model=QC_MODEL,
+            model=model,
             contents="ping",
             config=types.GenerateContentConfig(max_output_tokens=1, temperature=0.0),
         )
@@ -355,10 +368,14 @@ def _parse_response_json(response):
     return _parse_json(text or "")
 
 
+# Yalniz GUN bildiren isaretler. Ucretsiz katmanin DAKIKALIK 429'u da ayni
+# metrik adini ("generate_content_free_tier_requests") ve ayni quotaId sonekini
+# ("...PerProjectPerModel-FreeTier") tasir; ayirt eden tek sey quotaId'deki
+# "PerDay" / "PerMinute". Eski listede metrik adi ve sonek de vardi, yani
+# dakikalik bir takilma "gun bitti" okunuyor, beklenmeden vazgeciliyordu.
 _DAILY_QUOTA_MARKERS = (
-    "PER_DAY", "PER DAY", "DAILY QUOTA", "FREE_TIER_REQUESTS",
-    "GENERATE_CONTENT_FREE_TIER_REQUESTS", "REQUESTS/DAY", "REQUESTS PER DAY",
-    "PERPROJECTPERMODEL-FREETIER", "GENERATEREQUESTSPERDAY",
+    "PER_DAY", "PER DAY", "PERDAY", "DAILY QUOTA", "REQUESTS/DAY",
+    "REQUESTS PER DAY",
 )
 
 
