@@ -674,6 +674,16 @@ def _gen_json(contents: str, system_instruction: str,
             except Exception as e:
                 last_err = e
                 msg = str(e)
+                # 402 / on odemeli kredi bitti: beklemek de yedek model de (ayni fatura
+                # hesabi) ise yaramaz. 26 Eyl'de 8 cagri ve ~60 sn bosa gitti, alarm
+                # ise kesilmis Ingilizce JSON'du.
+                from series.gemini_odeme import COZUM_METNI, is_billing_error
+                if is_billing_error(e):
+                    logger.error(f"⛔ ikmal {model}: Gemini on odemeli kredisi bitti (402)")
+                    raise RuntimeError(
+                        "Gemini ön ödemeli kredisi BİTTİ (402), yeni bölüm yazılamadı. "
+                        + COZUM_METNI
+                    ) from e
                 # Bozuk JSON şans işidir ,  AYNI modelden taze üretim genelde geçer;
                 # yedek modeli buna harcama.
                 bad_json = isinstance(e, json.JSONDecodeError)
@@ -2374,7 +2384,7 @@ def replenish(slug: str, dry_run: bool = False) -> bool:
         return True
     except Exception as e:
         logger.error(f"❌ {slug} oto-ikmal başarısız: {e}")
-        _alert(slug, f"❌ *{meta.base_title}* oto-ikmal BAŞARISIZ: {str(e)[:200]}\n"
+        _alert(slug, f"❌ *{meta.base_title}* oto-ikmal BAŞARISIZ: {str(e)[:420]}\n"
                      f"Kuyrukta {pending} part kaldı ,  kuyruk biterse bu kanala video çıkmaz.")
         return False
 

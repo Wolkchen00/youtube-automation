@@ -721,6 +721,7 @@ _NON_RETRYABLE_REASON_CODES = frozenset({"CONTENT_REJECT", "BUDGET_EXHAUSTED"})
 # SONSUZ hakki yoktur, yoksa kalici billing arizasinda hat her gun sessizce
 # yeniden dener ve kimse haberdar olmaz. Bu yuzden ayri, SONLU bir butce.
 _INFRA_REASON_CODES = frozenset({"QUOTA", "TRANSIENT_INFRA"})
+_BILLING_REASON_CODE = "BILLING"
 _INFRA_RETRY_LIMIT = 6
 _INFRA_MAX_AGE_HOURS = 48.0
 
@@ -757,7 +758,7 @@ def migrate_malformed_approval_holds(meta: SeriesMeta, bible) -> bool:
     changed = False
     now = datetime.now(timezone.utc).isoformat()
     valid_codes = {
-        "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
+        "QUOTA", "BILLING", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
         "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA",
         "EPISODE_DEGRADED", "UNKNOWN",
     }
@@ -848,6 +849,25 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
 
     part = meta.get_part(n)
     now = datetime.now(timezone.utc).isoformat()
+
+    # 402 / on odemeli kredi bitti: ne icerik ne altyapi sayacini yakar ve bolumu
+    # ASLA needs_human'a dusurmez. 26-28 Eyl 2026'da bu ariza QUOTA sanildi,
+    # 48 saatte Part 18 kuyruktan dustu ve ayni kosu Part 19'a da para odedi.
+    # Sessiz sonsuz dongu riski yok: her kosu bastaki yoklamada (probe) kredi
+    # harcamadan durur ve her gun acik Turkce alarm gonderir. Kredi yuklenince
+    # ayni bolum kaldigi yerden devam eder.
+    if code == _BILLING_REASON_CODE:
+        part.setdefault("first_held_at", now)
+        part["last_reason_code"] = code
+        part["hold_reason"] = result.reason or "Gemini on odemeli kredisi bitti"
+        part["status"] = "qc_retry"
+        _append_hold_log(meta, n, "qc_retry", result)
+        meta.save()
+        logger.error(
+            f"⛔ Part {n} odeme bekliyor (neden={code}); icerik ve altyapi "
+            "sayaclari KORUNDU, kredi yuklenince ayni bolum yeniden denenecek."
+        )
+        return False
 
     # ROCK 3d: altyapi kaynakli hold ICERIK sayacini artirmaz, kendi sonlu
     # butcesinden harcar. Butce dolunca (deneme sayisi VEYA yas esigi) yine
@@ -945,6 +965,51 @@ def _degraded_episode_reason(coherence: dict) -> str:
     if not missing:
         missing.append("bolum butunlugu kusurlu")
     return "; ".join(missing)
+
+
+_PROBE_MESSAGES = {
+    "billing": "Gemini ön ödemeli kredisi BİTTİ (402)",
+    "auth": "Gemini QC anahtarı yok ya da geçersiz",
+    "daily_quota": "Gemini günlük kotası doldu",
+}
+
+
+def _qc_access_blocked(meta: SeriesMeta, bible, n: int) -> bool:
+    """Zorunlu QC'nin Gemini'si bugun calismayacaksa ucretli uretimi HIC baslatma.
+
+    Bolum durumu DEGISMEZ: sayac yok, needs_human yok, kuyruk ilerlemez. Kosu
+    kirmizi biter (bu kanala bugun video cikmadi) ve tek, anlasilir alarm gider.
+    """
+    if not bible or not critic.qc_config(bible):
+        return False
+    status, detail = critic.probe_qc_access(meta.slug)
+    if status not in critic.PROBE_BLOCKING:
+        if status != "ok":
+            logger.warning(
+                f"⚠️ Gemini yoklamasi belirsiz ({status}: {detail[:120]}); "
+                "uretim suruyor, QC kendi deneme politikasini uygular."
+            )
+        return False
+    headline = _PROBE_MESSAGES[status]
+    logger.error(
+        f"🛑 {headline}: '{meta.slug}' Part {n} uretimi BASLATILMADI, "
+        f"Kie kredisi harcanmadi. Ayrinti: {detail[:200]}"
+    )
+    if status == "billing":
+        from series.gemini_odeme import COZUM_METNI
+        action = COZUM_METNI
+    elif status == "auth":
+        action = ("Çözüm: GitHub Secrets'taki GEMINI_API_KEY_QC değerini kontrol et. "
+                  "Anahtar düzelince seri kendiliğinden devam eder.")
+    else:
+        action = "Kota gün dönünce açılır; seri yarınki koşuda kendiliğinden devam eder."
+    _series_alert(
+        meta.slug,
+        f"🛑 {meta.base_title} Part {n}: {headline}. Video kontrolü yapılamayacağı "
+        f"için üretim BAŞLATILMADI, video kredisi harcanmadı, bölüm kuyrukta "
+        f"bekliyor. Bu kanala bugün video çıkmıyor.\n{action}",
+    )
+    return True
 
 
 def _continue_after_terminal(meta: SeriesMeta, slug: str, *, dry_run: bool,
@@ -1128,6 +1193,8 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
         bible and bible.data["series"].get("durable_credit_ledger")
     )
     if not dry_run and recovered_video is None:
+        if _qc_access_blocked(meta, bible, n):
+            return False
         balance = _balance_value(check_credit())
         threshold = cap_value * 1.5
         if not credit_gate.run_gate(balance, cap=cap_value):
@@ -1201,6 +1268,17 @@ def run_next(slug: str, dry_run: bool = False, publish: bool = True,
     if new_state_machine and result.status != "ok":
         advanced = _record_recoverable_failure(meta, n, result)
         if advanced:
+            if result.reason_code in _INFRA_REASON_CODES:
+                # Altyapi butcesi doldu diye bolum insana devredildi; ama ariza
+                # (kota, sunucu) buyuk olasilikla HALA suruyor. Ayni kosuda sonraki
+                # bolume para odemek onu da cope atar: 28 Eyl'de Part 18'in hemen
+                # ardindan Part 19 icin 134 kredi boyle yandi. Sonraki bolum yarinki
+                # kosuda, arizanin gecip gecmedigi yeniden olculerek uretilir.
+                logger.error(
+                    f"🛑 Part {n} altyapi arizasiyla kapandi; ayni kosuda sonraki "
+                    "bolume kredi HARCANMADI."
+                )
+                return False
             # Terminal kayıt ile next_part aynı atomik yazımda tamamlandı. Yeni
             # bölüm üretimi ancak bu noktadan sonra başlayabilir.
             return _continue_after_terminal(

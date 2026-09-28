@@ -11,6 +11,32 @@ var oldugu icin test_hold_recovery_adversarial'in sentetik "advers" serisi
 import pytest
 
 
+def pytest_configure(config):
+    config.addinivalue_line(
+        "markers",
+        "gercek_gemini_yoklamasi: critic.probe_qc_access'in gercek govdesini "
+        "(sahte genai modulu ile) kosar; varsayilan saplama devre disi kalir.",
+    )
+
+
+@pytest.fixture(autouse=True)
+def _gemini_yoklamasi_aga_cikmasin(request, monkeypatch):
+    """Kosu basi Gemini yoklamasi testte GERCEK aga cikmasin.
+
+    `series_runner.run_next` QC'si acik her seride ucretli uretimden once
+    `critic.probe_qc_access` cagirir. Yerel .env gercek anahtar tasidigi icin
+    saplanmazsa test gercek Gemini'ye istek atar ve sonucu (402, kota) testin
+    kaderini belirler. Varsayilan: yoklama gecer. Yoklamanin kendisini sinayan
+    testler `gercek_gemini_yoklamasi` isaretiyle saplamayi kapatir; run_next
+    uzerinden yoklamayi sinayanlar kendi `mock.patch`'leriyle bunu ezer.
+    """
+    if request.node.get_closest_marker("gercek_gemini_yoklamasi"):
+        return
+    from series import critic
+
+    monkeypatch.setattr(critic, "probe_qc_access", lambda slug=None: ("ok", "test-saplamasi"))
+
+
 @pytest.fixture(autouse=True)
 def _eski_series_data_kokunu_izole_et(tmp_path_factory, monkeypatch):
     """Eski series_data/ kokunde SERI OLMAYAN dizinleri ve yeni-slug dususunu tmp'ye cevir.

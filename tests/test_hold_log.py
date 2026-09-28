@@ -101,8 +101,9 @@ class HoldLogWiringTests(unittest.TestCase):
         ])
 
     def test_uc_tutulma_yolunun_hepsi_deftere_yazar(self):
-        """terminal (needs_human/budget_exhausted), altyapi retry, icerik retry."""
-        self.assertEqual(self._cagri_sayisi(), 3,
+        """terminal (needs_human/budget_exhausted), altyapi retry, icerik retry,
+        odeme bekleyisi (BILLING, 28 Eyl 2026: 402 artik altyapi sayilmiyor)."""
+        self.assertEqual(self._cagri_sayisi(), 4,
                          "tutulma yollarindan biri deftere yazmiyor")
 
     def test_defter_yazimi_kendi_hatasini_yutar(self):

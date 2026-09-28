@@ -42,6 +42,7 @@ from core.config import GEMINI_API_KEY, logger
 from core import ffmpeg_tools
 from core.utils import download_file
 from .bible import Bible, data_dir, episode_dir
+from .gemini_odeme import COZUM_METNI, is_billing_error
 
 QC_MODEL = "gemini-2.5-flash"
 QC_MODEL_FALLBACK = "gemini-flash-latest"
@@ -56,7 +57,7 @@ QC_DEFAULTS = {
 }
 
 QC_REVIEW_RETRY_DELAY = 0.05
-QC_HOLD_REASONS = frozenset({"quota", "auth", "server", "parse", "logging"})
+QC_HOLD_REASONS = frozenset({"quota", "billing", "auth", "server", "parse", "logging"})
 QC_MAX_SINGLE_DELAY = 30.0
 QC_MAX_EPISODE_WAIT = 300.0
 
@@ -90,6 +91,50 @@ def _qc_api_key(slug: str | None = None) -> tuple[str | None, str]:
         logger.info(f"🔑 QC anahtar kaynagi: {source}")
         _QC_KEY_SOURCE_LOGGED = True
     return key, source
+
+
+PROBE_BLOCKING = frozenset({"billing", "auth", "daily_quota"})
+
+
+def probe_qc_access(slug: str | None = None) -> tuple[str, str]:
+    """Ucretli uretimden ONCE, QC'nin kullanacagi anahtarla tek ve en ucuz Gemini cagrisi.
+
+    26-28 Eyl 2026: QC Kie klibi ODENDIKTEN ~28 dk sonra ilk kez Gemini'ye
+    dokunuyordu. Gemini 402 donunce klip cope gitti, her gun yeniden odendi.
+    Bu yoklama o sirayi ters cevirir: kapi acilamayacaksa para hic harcanmaz.
+
+    Donus (durum, ayrinti). Durumlar:
+      "ok"          cagri gecti
+      "billing"     402 / on odemeli kredi bitti; yalniz insan kredi yukleyince acilir
+      "auth"        anahtar yok ya da gecersiz; yapilandirma hatasi
+      "daily_quota" gunluk kota doldu; gun donmeden acilmaz
+      "transient"   dakikalik 429 / 5xx / ag; QC'nin kendi deneme politikasi karsilar
+    Yalniz ``PROBE_BLOCKING`` icindekiler uretimi durdurur. Belirsiz hata uretimi
+    DURDURMAZ: yoklama bir erken uyari, zorunlu kapi yine QC'nin kendisidir.
+    """
+    qc_key, source = _qc_api_key(slug)
+    if not qc_key:
+        return "auth", f"{source} tanimli degil"
+    try:
+        from google import genai
+        from google.genai import types
+
+        client = genai.Client(api_key=qc_key)
+        client.models.generate_content(
+            model=QC_MODEL,
+            contents="ping",
+            config=types.GenerateContentConfig(max_output_tokens=1, temperature=0.0),
+        )
+    except Exception as error:
+        detail = str(error)[:300]
+        if is_billing_error(error):
+            return "billing", detail
+        if _is_daily_quota_error(error):
+            return "daily_quota", detail
+        if _classify_api_error(error) == "auth":
+            return "auth", detail
+        return "transient", detail
+    return "ok", ""
 
 
 class QCApiExhausted(RuntimeError):
@@ -314,6 +359,10 @@ def _classify_api_error(error: Exception) -> str:
     """Gemini/taşıma hatasını dondurulmuş C1 hold sınıflarına indirger."""
     if isinstance(error, json.JSONDecodeError):
         return "parse"
+    # 402 / on odeme bitti: 429 ile ayni RESOURCE_EXHAUSTED statusunu tasir ama
+    # beklemeyle ACILMAZ. "quota" dersek gecici sanilir (bkz. gemini_odeme.py).
+    if is_billing_error(error):
+        return "billing"
     message = str(error).upper()
     if "429" in message or "RESOURCE_EXHAUSTED" in message:
         return "quota"
@@ -399,6 +448,9 @@ def _wait_for_qc_retry(error: Exception, attempt: int, max_tries: int, *,
                        label: str, model: str) -> bool:
     """Tüm QC yolları için sunucu gecikmesini ve ortak bölüm bütçesini uygula."""
     if attempt >= max_tries:
+        return False
+    # Odeme arizasi hic beklemeyle acilmaz: tek saniye bile uyuma.
+    if not response_received and is_billing_error(error):
         return False
     # GUNLUK kota saniyeler icinde acilmaz; beklemek workflow suresini bosa yakar.
     # Dakikalik 429 ise gecicidir ve beklenerek asilir, o yuzden ayrimi burada
@@ -655,6 +707,10 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
                 message = str(error)
                 bad_json = response_received
                 last_reason = "parse" if bad_json else _classify_api_error(error)
+                if last_reason == "billing":
+                    # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
+                    logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
+                    raise QCApiExhausted("billing", message) from error
                 if _wait_for_qc_retry(
                     error, attempt, max_tries,
                     response_received=bad_json, wait_budget=wait_budget,
@@ -1113,7 +1169,14 @@ def notify_qc_exhaustion(title: str, episode: int, reason: str,
     target = f"ep{episode}" + (f" çekim {shot}" if shot is not None else "")
     outcome = ("Bölüm QC HOLD; yayınlanmayacak." if blocking else
                "Seride zorunlu kapı yok: bölüm QC'SİZ devam ediyor, elle bak.")
-    if reason == "quota":
+    if reason == "billing":
+        _notify(
+            f"🛑 GEMİNİ KREDİSİ BİTTİ: {title} {target}\n"
+            f"Video kontrolü yapılamadı (402, ön ödemeli bakiye sıfır). {outcome}\n"
+            f"{COZUM_METNI}",
+            slug=slug,
+        )
+    elif reason == "quota":
         _notify(
             f"🚨 *QC KOTA TÜKENDİ: {title}* {target}\n"
             f"Gemini 429 denemeleri tükendi. {outcome}",
@@ -1413,6 +1476,10 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
                 message = str(error)
                 bad_json = response_received
                 last_reason = "parse" if bad_json else _classify_api_error(error)
+                if last_reason == "billing":
+                    # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
+                    logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
+                    raise QCApiExhausted("billing", message) from error
                 if _wait_for_qc_retry(
                     error, attempt, max_tries,
                     response_received=bad_json, wait_budget=wait_budget,
@@ -1492,6 +1559,10 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
                 message = str(error)
                 bad_json = response_received
                 last_reason = "parse" if bad_json else _classify_api_error(error)
+                if last_reason == "billing":
+                    # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
+                    logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
+                    raise QCApiExhausted("billing", message) from error
                 if _wait_for_qc_retry(
                     error, attempt, max_tries,
                     response_received=bad_json, wait_budget=wait_budget,

@@ -132,7 +132,11 @@ def test_only_explicit_presentation_sites_may_call_markdown_send_message():
         # DOGRULANAMADI, kosu kredi harcamadan durdu. Bu sayim bir KAYIT
         # defteridir: yeni bir kritik alarm eklendiginde burada ACIKCA
         # gerekcelendirilmek zorundadir; kural gevsemez, sayim buyur.
-        "series_runner.py": 16,
+        # Gemini odeme yoklamasi (28 Eyl 2026) on yedincisini ekledi: zorunlu
+        # QC'nin Gemini'si 402/anahtar/gunluk kota yuzunden calismayacaksa
+        # uretim kredi harcamadan durur ve "bu kanala bugun video cikmiyor,
+        # cozum su" bildirimi gider. Duz metin yolundan gider.
+        "series_runner.py": 17,
     }
     for filename, expected_count in expected_plain_routes.items():
         tree = ast.parse((ROOT / "series" / filename).read_text(encoding="utf-8"))

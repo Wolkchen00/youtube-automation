@@ -300,7 +300,10 @@ def test_every_runner_critical_callsite_uses_the_outbox_routing_helper():
     # ROCK E (kalici bolum eseri) altincisini ekledi: kalici eser DOGRULANAMADI,
     # kosu tek kredi harcamadan durdu ve eyleme donuk alarm uretti. Sayim bir
     # KAYIT defteridir; her yeni kritik alarm burada gerekcelendirilir.
-    assert len(routed) == 16
+    # Gemini odeme yoklamasi (28 Eyl 2026) yedincisini ekledi: zorunlu QC'nin
+    # Gemini'si 402 / anahtar / gunluk kota yuzunden calismayacaksa uretim kredi
+    # harcamadan durur ve sebebi + cozumu soyleyen alarm gider.
+    assert len(routed) == 17
     assert len(direct) == 2  # _series_alert delegasyonu + evsiz filo alarmi fallback'i
     source = inspect.getsource(series_runner)
     for fragment in (

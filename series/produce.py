@@ -87,7 +87,7 @@ class ProduceResult:
     path: Path | None = None
     reason: str | None = None
     reason_code: Literal[
-        "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
+        "QUOTA", "BILLING", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
         "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA",
         "EPISODE_DEGRADED", "UNKNOWN",
     ] = "UNKNOWN"
@@ -102,7 +102,7 @@ class ProduceResult:
         if self.status != "ok" and self.path is not None:
             raise ValueError("non-ok ProduceResult cannot carry a final path")
         if self.reason_code not in (
-            "QUOTA", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
+            "QUOTA", "BILLING", "REF_DOWNLOAD", "FRAME_EXTRACT", "AUDIO_MASTER",
             "CONTENT_REJECT", "BUDGET_EXHAUSTED", "TRANSIENT_INFRA",
             "EPISODE_DEGRADED", "UNKNOWN",
         ):
@@ -111,7 +111,7 @@ class ProduceResult:
 
 def _qc_api_reason_code(
     reason: str | None,
-) -> Literal["QUOTA", "TRANSIENT_INFRA", "UNKNOWN"]:
+) -> Literal["QUOTA", "BILLING", "TRANSIENT_INFRA", "UNKNOWN"]:
     """Critic'in tipli API kategorisini dış durum koduna çevir; mesaj metni okunmaz.
 
     ROCK 3c: sunucu arizasi (503 UNAVAILABLE, baglanti kesintisi) ARTIK "quota"
@@ -119,7 +119,12 @@ def _qc_api_reason_code(
     icerik reddi DEGILDIR; ama teshiste birbirine karismazlar. "auth" bilinerek
     disarida birakildi: yanlis anahtar altyapi dalgalanmasi degil, insanin
     duzeltmesi gereken bir yapilandirma hatasidir.
+
+    "billing" (402, on odemeli kredi bitti) QUOTA DEGILDIR: beklemeyle acilmaz,
+    yalniz kredi yuklenince acilir. Kosucu onu altyapi butcesinden HARCAMAZ.
     """
+    if reason == "billing":
+        return "BILLING"
     if reason == "quota":
         return "QUOTA"
     if reason in ("server", "parse", "logging"):
