@@ -1001,7 +1001,9 @@ def _qc_access_blocked(meta: SeriesMeta, bible, n: int) -> bool:
     if not qc:
         return False
     part = meta.get_part(n)
-    confirm = _BILLING_CONFIRM_SECONDS if part.get("billing_seen_at") else 0.0
+    saw_billing = (part.get("billing_seen_at")
+                   or part.get("last_reason_code") == _BILLING_REASON_CODE)
+    confirm = _BILLING_CONFIRM_SECONDS if saw_billing else 0.0
     status, detail = critic.probe_qc_access(meta.slug, confirm_after_s=confirm)
     if status not in critic.PROBE_BLOCKING:
         if status != "ok":

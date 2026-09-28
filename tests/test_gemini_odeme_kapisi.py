@@ -421,14 +421,17 @@ def test_normal_probe_is_a_single_call_without_waiting():
     slept.assert_not_called()
 
 
-def test_part_that_saw_billing_gets_the_two_step_probe(tmp_path):
+@pytest.mark.parametrize("part", [
+    {"status": "qc_retry", "billing_seen_at": "2026-09-28T18:47:34+00:00"},
+    # cd617b5 oncesi kod billing_seen_at yazmiyordu (still-home Part 9 kaydi).
+    {"status": "qc_retry", "last_reason_code": "BILLING", "hold_reason": "billing"},
+])
+def test_part_that_saw_billing_gets_the_two_step_probe(tmp_path, part):
     slug = "probe-two-step"
     video = tmp_path / "episode.mp4"
     producer = mock.Mock(return_value=ProduceResult("ok", video))
     _ok, _meta, _alerts, probe, _ = _run_with_probe(
-        tmp_path, "ok", producer, slug=slug,
-        part={"status": "qc_retry", "last_reason_code": "BILLING",
-              "billing_seen_at": "2026-09-28T18:47:34+00:00"},
+        tmp_path, "ok", producer, slug=slug, part=part,
     )
     probe.assert_called_once_with(
         slug, confirm_after_s=series_runner._BILLING_CONFIRM_SECONDS,
