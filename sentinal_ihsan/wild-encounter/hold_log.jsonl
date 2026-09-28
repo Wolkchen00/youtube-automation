@@ -9,3 +9,4 @@
 {"ts": "2026-09-27T13:06:05.661250+00:00", "part": 18, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
 {"ts": "2026-09-28T15:54:40.316947+00:00", "part": 18, "durum": "needs_human", "kod": "QUOTA", "neden": "quota", "coherence": null}
 {"ts": "2026-09-28T16:02:14.302306+00:00", "part": 19, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
+{"ts": "2026-09-28T23:51:30.249293+00:00", "part": 18, "durum": "qc_retry", "kod": "AUDIO_MASTER", "neden": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=-0.40 dB, LUFS=-14.40.", "coherence": null}
