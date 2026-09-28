@@ -858,6 +858,10 @@ def _record_recoverable_failure(meta: SeriesMeta, n: int,
     # ayni bolum kaldigi yerden devam eder.
     if code == _BILLING_REASON_CODE:
         part.setdefault("first_held_at", now)
+        # Odeme beklenen gunler altyapi arizasinin 48 saatlik yas saatine
+        # yazilmaz; yoksa kredi yuklendikten sonraki ILK siradan 503 bolumu
+        # dusururdu. Saat bir sonraki GERCEK altyapi arizasinda yeniden baslar.
+        part.pop("first_infra_held_at", None)
         part["last_reason_code"] = code
         part["hold_reason"] = result.reason or "Gemini on odemeli kredisi bitti"
         part["status"] = "qc_retry"
@@ -968,7 +972,6 @@ def _degraded_episode_reason(coherence: dict) -> str:
 
 
 _PROBE_MESSAGES = {
-    "billing": "Gemini ön ödemeli kredisi BİTTİ (402)",
     "auth": "Gemini QC anahtarı yok ya da geçersiz",
     "daily_quota": "Gemini günlük kotası doldu",
 }
@@ -977,10 +980,17 @@ _PROBE_MESSAGES = {
 def _qc_access_blocked(meta: SeriesMeta, bible, n: int) -> bool:
     """Zorunlu QC'nin Gemini'si bugun calismayacaksa ucretli uretimi HIC baslatma.
 
-    Bolum durumu DEGISMEZ: sayac yok, needs_human yok, kuyruk ilerlemez. Kosu
-    kirmizi biter (bu kanala bugun video cikmadi) ve tek, anlasilir alarm gider.
+    Sayac yok, needs_human yok, kuyruk ilerlemez. Kosu kirmizi biter (bu kanala
+    bugun video cikmadi) ve tek, anlasilir alarm gider. Yazilan TEK sey: bolumun
+    altyapi yas saati (``first_infra_held_at``) durdurulur, cunku bugun bolum
+    denenmedi; o saat yalniz gercekten denenip altyapiya takilan gunleri sayar.
+
+    QC'si ``api_fail_open`` olan ve zorunlu kapisi bulunmayan seri (P9) Gemini
+    yokken de QC'siz yayin yapmayi SECMISTIR; onu yoklama durdurmaz, QC kendi
+    yuksek sesli "QC'siz devam" alarmini gonderir.
     """
-    if not bible or not critic.qc_config(bible):
+    qc = critic.qc_config(bible) if bible else {}
+    if not qc:
         return False
     status, detail = critic.probe_qc_access(meta.slug)
     if status not in critic.PROBE_BLOCKING:
@@ -990,16 +1000,27 @@ def _qc_access_blocked(meta: SeriesMeta, bible, n: int) -> bool:
                 "uretim suruyor, QC kendi deneme politikasini uygular."
             )
         return False
-    headline = _PROBE_MESSAGES[status]
+    if critic._api_fail_open(qc):
+        logger.warning(
+            f"⚠️ Gemini yoklamasi {status}: '{meta.slug}' zorunlu kapisiz ve "
+            "api_fail_open, bolum QC'siz uretilecek (P9)."
+        )
+        return False
+    from series.gemini_odeme import COZUM_METNI, billing_headline
+    headline = billing_headline(detail) if status == "billing" else _PROBE_MESSAGES[status]
     logger.error(
         f"🛑 {headline}: '{meta.slug}' Part {n} uretimi BASLATILMADI, "
         f"Kie kredisi harcanmadi. Ayrinti: {detail[:200]}"
     )
+    part = meta.get_part(n)
+    if part.pop("first_infra_held_at", None) is not None:
+        meta.save()
     if status == "billing":
-        from series.gemini_odeme import COZUM_METNI
         action = COZUM_METNI
     elif status == "auth":
-        action = ("Çözüm: GitHub Secrets'taki GEMINI_API_KEY_QC değerini kontrol et. "
+        _key, source = critic._qc_api_key(meta.slug)
+        action = (f"Çözüm: GitHub Secrets'taki {source} değerini kontrol et "
+                  "(proje askıya alındıysa ya da Gemini API kapalıysa aynı hata gelir). "
                   "Anahtar düzelince seri kendiliğinden devam eder.")
     else:
         action = "Kota gün dönünce açılır; seri yarınki koşuda kendiliğinden devam eder."

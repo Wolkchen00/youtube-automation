@@ -27,6 +27,7 @@ from __future__ import annotations
 import sys
 from contextlib import ExitStack
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 import pytest
@@ -35,7 +36,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from series import critic, produce, replenish, series_runner  # noqa: E402
 from series.bible import Bible  # noqa: E402
-from series.gemini_odeme import AI_STUDIO_URL, is_billing_error  # noqa: E402
+from series.gemini_odeme import (  # noqa: E402
+    AI_STUDIO_URL,
+    billing_headline,
+    is_billing_error,
+    is_spend_cap_error,
+)
 from series.produce import ProduceResult  # noqa: E402
 from series.series_meta import SeriesMeta  # noqa: E402
 from tests.test_hold_recovery import _meta as _runner_meta  # noqa: E402
@@ -54,6 +60,17 @@ BILLING_402 = (
     "manage your project and billing. Learn more at "
     "https://ai.google.dev/gemini-api/docs/billing#prepay. ', "
     "'status': 'RESOURCE_EXHAUSTED'}}"
+)
+# Google'in faturalama belgesindeki aylik tavan govdeleri: 429 ama beklemeyle acilmaz,
+# servis ayin 1'ine kadar durur.
+SPEND_CAP_ACCOUNT_429 = (
+    "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your billing account "
+    "has exceeded its monthly spending cap. Please go to AI Studio at "
+    "https://aistudio.google.com to manage your billing.', 'status': 'RESOURCE_EXHAUSTED'}}"
+)
+SPEND_CAP_PROJECT_429 = (
+    "429 RESOURCE_EXHAUSTED. {'error': {'code': 429, 'message': 'Your project has "
+    "exceeded its monthly spending cap.', 'status': 'RESOURCE_EXHAUSTED'}}"
 )
 # Gercek 429 govdeleri "plan and billing details" der; bu ODEME arizasi DEGILDIR.
 QUOTA_WITH_BILLING_WORD = (
@@ -93,6 +110,25 @@ def test_every_429_stays_quota_even_when_it_mentions_billing(body):
     """ADVERSARIAL: 'billing details' kelimesi 429'u odeme arizasina CEVIRMEZ."""
     assert critic._classify_api_error(RuntimeError(body)) == "quota"
     assert not is_billing_error(RuntimeError(body))
+
+
+@pytest.mark.parametrize("body", [SPEND_CAP_ACCOUNT_429, SPEND_CAP_PROJECT_429])
+def test_monthly_spend_cap_429_is_billing_not_a_waitable_quota(body):
+    """ADVERSARIAL (denetim bulgusu): tavan 429 doner ama ayin 1'ine kadar acilmaz.
+
+    Eski siniflandirma onu dakikalik kota sayardi; yoklama 'transient' der, Kie
+    klibi her gun odenip cope giderdi. Otomatik yukleme acildiktan sonra sirada
+    bekleyen sinir tam budur.
+    """
+    error = RuntimeError(body)
+    assert is_spend_cap_error(error)
+    assert is_billing_error(error)
+    assert critic._classify_api_error(error) == "billing"
+    assert billing_headline(body) == "Gemini aylık harcama tavanı DOLDU"
+
+
+def test_prepay_headline_is_the_402_text():
+    assert billing_headline(BILLING_402) == "Gemini ön ödemeli kredisi BİTTİ (402)"
 
 
 def test_server_error_classification_is_unchanged():
@@ -165,6 +201,23 @@ def test_raw_audio_review_stops_after_one_call_on_billing(tmp_path):
     slept.assert_not_called()
 
 
+def test_delivery_audio_review_stops_after_one_call_on_billing(tmp_path):
+    """Ucuncu dongu (teslimat sesi) da ayni sozlesmeye bagli: tek cagri, yedek yok."""
+    audio = tmp_path / "delivery.mp3"
+    audio.write_bytes(b"ID3mp3")
+    fake = _FakeGemini({
+        critic.QC_MODEL: [RuntimeError(BILLING_402)] * 3,
+        critic.QC_MODEL_FALLBACK: [RuntimeError(BILLING_402)] * 3,
+    })
+    with ExitStack() as stack:
+        slept = _gemini_context(stack, fake)
+        with pytest.raises(critic.QCApiExhausted) as caught:
+            critic._review_audio(audio, slug=_FIXTURE_SLUG, episode=18)
+    assert caught.value.reason == "billing"
+    assert fake.calls == [critic.QC_MODEL]
+    slept.assert_not_called()
+
+
 def test_billing_alert_names_the_real_cause_and_the_fix():
     sent: list[str] = []
     with mock.patch.object(critic, "_notify",
@@ -172,7 +225,8 @@ def test_billing_alert_names_the_real_cause_and_the_fix():
         critic.notify_qc_exhaustion("Wild Encounter", 18, "billing", 1,
                                     slug=_FIXTURE_SLUG)
     assert len(sent) == 1
-    assert "KREDİSİ BİTTİ" in sent[0]
+    assert "ÖDEME SINIRI" in sent[0]
+    assert "kredi bitti" in sent[0] and "harcama" in sent[0]
     assert "429" not in sent[0], "odeme arizasi 429 diye raporlandi"
     assert AI_STUDIO_URL in sent[0]
     assert "auto-reload" in sent[0]
@@ -202,6 +256,32 @@ def test_probe_classifies_the_one_cheap_call(outcome, expected):
         status, _detail = critic.probe_qc_access(_FIXTURE_SLUG)
     assert status == expected
     assert fake.calls == [critic.QC_MODEL], "yoklama tek cagridan fazlasini yapti"
+
+
+@pytest.mark.gercek_gemini_yoklamasi
+def test_probe_checks_the_same_billing_account_qc_will_use():
+    """Yoklama QC'nin anahtariyla yapilmali; yoksa baska hesabi yoklar, QC yine 402 yer."""
+    seen: list[str] = []
+    fake = _FakeGemini({critic.QC_MODEL: ["OK"]})
+    fake.genai.Client = lambda **kwargs: (
+        seen.append(kwargs.get("api_key")) or SimpleNamespace(models=_ModelsOK())
+    )
+    env = {
+        "GEMINI_API_KEY_QC_GEMINI_ODEME_FIXTURE": "seri-qc-anahtari",
+        "GEMINI_API_KEY_QC": "filo-qc-anahtari",
+    }
+    with ExitStack() as stack:
+        stack.enter_context(mock.patch.dict(sys.modules, fake.modules()))
+        stack.enter_context(mock.patch.object(critic, "GEMINI_API_KEY", "uretim-anahtari"))
+        stack.enter_context(mock.patch.dict("os.environ", env, clear=False))
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG)
+    assert status == "ok"
+    assert seen == ["seri-qc-anahtari"]
+
+
+class _ModelsOK:
+    def generate_content(self, **_kwargs):
+        return SimpleNamespace(text="")
 
 
 @pytest.mark.gercek_gemini_yoklamasi
@@ -262,10 +342,52 @@ def test_blocking_probe_spends_nothing_and_leaves_the_part_untouched(tmp_path, s
     assert ok is False, "video cikmayan kosu yesil gorundu"
     producer.assert_not_called()
     assert reserved == 0, "kredi rezervasyonu yapildi"
-    assert meta.get_part(1) == before, "yoklama bolum durumunu degistirdi"
+    # Denenmeyen gun altyapi yas saatine yazilmaz; baska HICBIR alan degismez.
+    expected = {k: v for k, v in before.items() if k != "first_infra_held_at"}
+    assert meta.get_part(1) == expected, "yoklama bolum durumunu degistirdi"
     assert meta.next_part == 1
     assert len(alerts) == 1 and "harcanmadı" in alerts[0]
     probe.assert_called_once_with(slug)
+
+
+def test_fail_open_series_without_gates_is_not_blocked_by_the_probe(tmp_path):
+    """P9: zorunlu kapisiz + api_fail_open seri Gemini yokken QC'siz yayini SECMISTIR."""
+    slug = "probe-fail-open"
+    meta = _runner_meta(slug, version_parts=3, parts={"1": {}})
+    bible = _qc_bible(slug)
+    bible.data["series"]["qc"] = {"enabled": True, "api_fail_open": True}
+    plan_path = tmp_path / "part01.json"
+    plan_path.write_text("{}", encoding="utf-8")
+    video = tmp_path / "episode.mp4"
+    producer = mock.Mock(return_value=ProduceResult("ok", video))
+    with _runner_stack(meta, bible, plan_path, _plan(), producer) as stack:
+        stack.enter_context(mock.patch.object(
+            critic, "probe_qc_access", return_value=("billing", BILLING_402),
+        ))
+        stack.enter_context(mock.patch.object(series_runner, "_series_alert"))
+        assert series_runner.run_next(slug, publish=True, force=True) is True
+    producer.assert_called_once()
+
+
+def test_spend_cap_probe_alert_says_cap_not_credits(tmp_path):
+    slug = "probe-spend-cap"
+    meta = _runner_meta(slug, version_parts=3, parts={"1": {}})
+    bible = _qc_bible(slug)
+    plan_path = tmp_path / "part01.json"
+    plan_path.write_text("{}", encoding="utf-8")
+    alerts: list[str] = []
+    producer = mock.Mock(side_effect=AssertionError("ucretli uretim baslatildi"))
+    with _runner_stack(meta, bible, plan_path, _plan(), producer) as stack:
+        stack.enter_context(mock.patch.object(
+            critic, "probe_qc_access", return_value=("billing", SPEND_CAP_ACCOUNT_429[:300]),
+        ))
+        stack.enter_context(mock.patch.object(
+            series_runner, "_series_alert",
+            side_effect=lambda _slug, text: alerts.append(text) or True,
+        ))
+        assert series_runner.run_next(slug, publish=True, force=True) is False
+    producer.assert_not_called()
+    assert "harcama tavanı DOLDU" in alerts[0]
 
 
 def test_billing_probe_alert_tells_the_human_how_to_fix_it(tmp_path):
@@ -343,6 +465,31 @@ def test_billing_hold_burns_no_counter_and_never_goes_to_needs_human():
     assert part["last_reason_code"] == "BILLING"
     assert meta.next_part == 18
     alert.assert_not_called()  # QC kendi alarmini zaten gonderdi; cift alarm yok
+
+
+def test_after_a_billing_outage_one_ordinary_infra_error_does_not_drop_the_part():
+    """Denetim bulgusu: odeme beklenen gunler 48 saatlik altyapi saatini doldurmamali.
+
+    Gun 0 gercek altyapi arizasi (saat baslar), 3 gun 402, kredi yuklenir, ilk
+    siradan 503: eski kodda bolum needs_human olup kuyruktan dusuyordu.
+    """
+    meta = _state_meta({
+        "infra_retry_count": 1,
+        "first_infra_held_at": "2026-09-20T00:00:00+00:00",
+        "status": "qc_retry",
+    })
+    with mock.patch.object(meta, "save"), mock.patch.object(series_runner, "_series_alert"):
+        series_runner._record_recoverable_failure(
+            meta, 18, ProduceResult("qc_hold", reason="402", reason_code="BILLING"),
+        )
+        advanced = series_runner._record_recoverable_failure(
+            meta, 18, ProduceResult("qc_hold", reason="503", reason_code="TRANSIENT_INFRA"),
+        )
+    part = meta.get_part(18)
+    assert advanced is False, "kredi yuklendikten sonraki ilk 503 bolumu dusurdu"
+    assert part["status"] == "qc_retry"
+    assert part["infra_retry_count"] == 2
+    assert meta.next_part == 18
 
 
 def test_qc_billing_hold_reaches_the_runner_as_billing_through_produce(tmp_path):
@@ -437,6 +584,21 @@ def test_replenish_still_retries_a_real_transient_429():
         stack.enter_context(mock.patch.object(replenish.time, "sleep"))
         assert replenish._gen_json("prompt", "system") == {"episodes": []}
     assert fake.calls == [replenish.REPLENISH_MODEL, replenish.REPLENISH_MODEL]
+
+
+def test_retry_delay_ignores_the_http_code_in_the_sdk_details_body():
+    """Denetim bulgusu: gercek SDK hatasi error.details'e tum govdeyi koyar.
+
+    Ilk ciplak sayi HTTP kodudur (429/503); onu saniye sanmak her gecici hatayi
+    30 sn tavanina uyutuyordu. Gercek bir google.genai hatasiyla sinanir.
+    """
+    errors = pytest.importorskip("google.genai.errors")
+    body_429 = {"error": {"code": 429, "message": "Quota exceeded", "status": "RESOURCE_EXHAUSTED",
+                          "details": [{"@type": "type.googleapis.com/google.rpc.RetryInfo",
+                                       "retryDelay": "9s"}]}}
+    body_503 = {"error": {"code": 503, "message": "high demand", "status": "UNAVAILABLE"}}
+    assert critic._retry_delay_from_error(errors.ClientError(429, body_429)) == pytest.approx(9.0)
+    assert critic._retry_delay_from_error(errors.ServerError(503, body_503)) is None
 
 
 def test_probe_blocking_set_is_exactly_the_non_waitable_failures():

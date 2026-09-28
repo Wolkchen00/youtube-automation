@@ -396,13 +396,20 @@ def _duration_seconds(value) -> float | None:
             seconds = _duration_seconds(value.get("seconds"))
             nanos = _duration_seconds(value.get("nanos")) or 0.0
             return None if seconds is None else seconds + nanos / 1_000_000_000.0
+        # Yalniz ic ice YAPILARA in: gercek SDK hatasinda error.details tum
+        # govdedir ({'error': {'code': 429, ...}}) ve ilk ciplak sayi HTTP
+        # kodudur. Onu saniye sanmak her gecici hatada 30 sn tavanina uyutuyordu.
         for nested in value.values():
+            if not isinstance(nested, (dict, list, tuple)):
+                continue
             parsed = _duration_seconds(nested)
             if parsed is not None:
                 return parsed
         return None
     if isinstance(value, (list, tuple)):
         for nested in value:
+            if not isinstance(nested, (dict, list, tuple)):
+                continue
             parsed = _duration_seconds(nested)
             if parsed is not None:
                 return parsed
@@ -1171,8 +1178,9 @@ def notify_qc_exhaustion(title: str, episode: int, reason: str,
                "Seride zorunlu kapı yok: bölüm QC'SİZ devam ediyor, elle bak.")
     if reason == "billing":
         _notify(
-            f"🛑 GEMİNİ KREDİSİ BİTTİ: {title} {target}\n"
-            f"Video kontrolü yapılamadı (402, ön ödemeli bakiye sıfır). {outcome}\n"
+            f"🛑 GEMİNİ ÖDEME SINIRI: {title} {target}\n"
+            f"Video kontrolü yapılamadı: ön ödemeli kredi bitti ya da aylık harcama "
+            f"tavanı doldu. {outcome}\n"
             f"{COZUM_METNI}",
             slug=slug,
         )
