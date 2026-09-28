@@ -724,3 +724,88 @@ def test_billing_hold_does_not_re_review_the_same_clip(tmp_path):
         )
     assert status == "hold"
     assert review.call_count == 1, "odeme arizasinda ayni klip yeniden denetlendi"
+
+
+
+# ---------------------------------------------------------------------------
+# 7) Ucretsiz katman: dort modellik sira (28 Eyl 2026)
+# ---------------------------------------------------------------------------
+
+@pytest.mark.gercek_model_sirasi
+def test_production_chain_has_four_distinct_models_and_skips_retired_2_5():
+    """Yeni projede gemini-2.5-flash 404 ("no longer available to new users")."""
+    assert len(critic.QC_MODELS) == 4
+    assert len(set(critic.QC_MODELS)) == 4, "ayni model iki kez = ayni kota"
+    assert "gemini-2.5-flash" not in critic.QC_MODELS
+    assert critic.QC_MODEL == critic.QC_MODELS[0]
+
+
+@pytest.mark.gercek_model_sirasi
+def test_replenish_starts_on_models_qc_does_not_lead_with():
+    """Bolum yazari QC'nin ilk iki modelinin gunluk hakkini yemesin."""
+    assert replenish.REPLENISH_MODELS[0] not in critic.QC_MODELS[:2]
+    assert replenish.REPLENISH_MODELS[1] not in critic.QC_MODELS[:2]
+    assert "gemini-2.5-flash" not in replenish.REPLENISH_MODELS
+
+
+def test_model_chain_can_be_changed_without_code(monkeypatch):
+    from series.gemini_odeme import model_chain
+
+    monkeypatch.setenv("GEMINI_QC_MODELS", " gemini-9-flash , gemini-8-flash ,")
+    assert model_chain("GEMINI_QC_MODELS", ("x",)) == ("gemini-9-flash", "gemini-8-flash")
+    monkeypatch.setenv("GEMINI_QC_MODELS", "  ")
+    assert model_chain("GEMINI_QC_MODELS", ("x",)) == ("x",)
+
+
+_CHAIN = ("m-a", "m-b", "m-c", "m-d")
+
+
+@pytest.mark.gercek_model_sirasi
+@pytest.mark.gercek_gemini_yoklamasi
+def test_probe_walks_the_whole_chain_before_calling_a_day_lost(monkeypatch):
+    monkeypatch.setattr(critic, "QC_MODELS", _CHAIN)
+    fake = _FakeGemini({
+        "m-a": [RuntimeError(QUOTA_DAILY)],
+        "m-b": [RuntimeError(QUOTA_DAILY)],
+        "m-c": [RuntimeError(QUOTA_DAILY)],
+        "m-d": ["OK"],
+    })
+    with ExitStack() as stack:
+        _gemini_context(stack, fake)
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG)
+    assert status == "ok"
+    assert fake.calls == list(_CHAIN)
+
+
+@pytest.mark.gercek_model_sirasi
+@pytest.mark.gercek_gemini_yoklamasi
+def test_probe_blocks_when_every_model_in_the_chain_is_out_for_the_day(monkeypatch):
+    monkeypatch.setattr(critic, "QC_MODELS", _CHAIN)
+    fake = _FakeGemini({m: [RuntimeError(QUOTA_DAILY)] for m in _CHAIN})
+    with ExitStack() as stack:
+        _gemini_context(stack, fake)
+        status, _ = critic.probe_qc_access(_FIXTURE_SLUG)
+    assert status == "daily_quota"
+    assert fake.calls == list(_CHAIN)
+
+
+@pytest.mark.gercek_model_sirasi
+def test_visual_qc_survives_high_demand_on_the_first_two_models(tmp_path, monkeypatch):
+    """28 Eyl canli olcum: 3.8 ve 3.7 "high demand" 503, 3.6 hemen cevap verdi."""
+    monkeypatch.setattr(critic, "QC_MODELS", _CHAIN)
+    frame = tmp_path / "frame.png"
+    frame.write_bytes(b"png")
+    fake = _FakeGemini({
+        "m-a": [RuntimeError(SERVER_503)] * 3,
+        "m-b": [RuntimeError(SERVER_503)] * 3,
+        "m-c": ['{"artifact_score": 1, "issues": []}'],
+    })
+    with ExitStack() as stack:
+        _gemini_context(stack, fake)
+        review = critic._review_frames(
+            [frame], None, "prompt", "notes",
+            slug=_FIXTURE_SLUG, episode=18, shot=1,
+        )
+    assert review == {"artifact_score": 1, "issues": []}
+    assert fake.calls[-1] == "m-c"
+    assert "m-d" not in fake.calls

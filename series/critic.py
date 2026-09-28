@@ -42,10 +42,19 @@ from core.config import GEMINI_API_KEY, logger
 from core import ffmpeg_tools
 from core.utils import download_file
 from .bible import Bible, data_dir, episode_dir
-from .gemini_odeme import COZUM_METNI, is_billing_error
+from .gemini_odeme import COZUM_METNI, is_billing_error, model_chain
 
-QC_MODEL = "gemini-2.5-flash"
-QC_MODEL_FALLBACK = "gemini-flash-latest"
+# 28 Eyl 2026: QC ucretsiz katmana dondu. Yeni projede gemini-2.5-flash
+# "no longer available to new users" (404). Ucretsiz kota MODEL BASINA
+# (gunde 20, dakikada 5) ve ucretsiz katmanda anlik 503 "high demand" sik;
+# bu yuzden dort ayri modellik sira: biri doluysa/yogunsa sonraki denenir.
+# Bolum yazari (replenish) 3.6/3.5 ile basladigi icin QC'nin basini yemez.
+# GEMINI_QC_MODELS="a,b,c" ile kod degismeden degistirilebilir.
+QC_MODELS = model_chain("GEMINI_QC_MODELS", (
+    "gemini-3.8-flash", "gemini-3.7-flash", "gemini-3.6-flash", "gemini-3.5-flash",
+))
+QC_MODEL = QC_MODELS[0]
+QC_MODEL_FALLBACK = QC_MODELS[1] if len(QC_MODELS) > 1 else QC_MODELS[0]
 
 QC_DEFAULTS = {
     "frames": 8,                # klipten örneklenecek kare sayısı
@@ -134,15 +143,17 @@ def probe_qc_access(slug: str | None = None, *,
 
 
 def _probe_models(qc_key: str) -> tuple[str, str]:
-    """Ana modeli yokla; ana modelin GUNLUK kotasi bittiyse yedegi de yokla.
+    """Sirayla yokla; bir modelin GUNLUK kotasi bittiyse siradakine gec.
 
-    Ucretsiz katmanda kota MODEL BASINA ayrilir ve QC ana model tukenince yedek
-    modelle calisir. Yalniz ana modele bakip "gunluk kota" deyip durmak, QC'nin
-    yine de gececegi bir gunu karartirdi.
+    Ucretsiz katmanda kota MODEL BASINA ayrilir ve QC tukenen modelden sonrakine
+    gecer. Yalniz ana modele bakip "gunluk kota" deyip durmak, QC'nin yine de
+    gececegi bir gunu karartirdi. Yalniz TUM sira gunu doldurduysa durdurur.
     """
-    status, detail = _probe_once(qc_key, QC_MODEL)
-    if status == "daily_quota":
-        status, detail = _probe_once(qc_key, QC_MODEL_FALLBACK)
+    status, detail = "daily_quota", ""
+    for model in QC_MODELS:
+        status, detail = _probe_once(qc_key, model)
+        if status != "daily_quota":
+            return status, detail
     return status, detail
 
 
@@ -733,7 +744,7 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
         raise QCApiExhausted(_classify_api_error(error), str(error)) from error
     last_error: Exception | None = None
     last_reason = "server"
-    for model_index, model in enumerate((QC_MODEL, QC_MODEL_FALLBACK)):
+    for model_index, model in enumerate(QC_MODELS):
         for attempt in range(1, max_tries + 1):
             response_received = False
             try:
@@ -1502,7 +1513,7 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
         raise QCApiExhausted(_classify_api_error(error), str(error)) from error
     last_error: Exception | None = None
     last_reason = "server"
-    for model_index, model in enumerate((QC_MODEL, QC_MODEL_FALLBACK)):
+    for model_index, model in enumerate(QC_MODELS):
         for attempt in range(1, max_tries + 1):
             response_received = False
             try:
@@ -1585,7 +1596,7 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
         raise QCApiExhausted(_classify_api_error(error), str(error)) from error
     last_error: Exception | None = None
     last_reason = "server"
-    for model_index, model in enumerate((QC_MODEL, QC_MODEL_FALLBACK)):
+    for model_index, model in enumerate(QC_MODELS):
         for attempt in range(1, max_tries + 1):
             response_received = False
             try:

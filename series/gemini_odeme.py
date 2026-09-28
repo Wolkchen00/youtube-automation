@@ -63,6 +63,19 @@ def is_billing_error(error: BaseException) -> bool:
     return is_spend_cap_error(error)
 
 
+def model_chain(env_name: str, default: tuple[str, ...]) -> tuple[str, ...]:
+    """Model sirasi: ortam degiskeni (virgullu liste) varsa o, yoksa varsayilan.
+
+    Google modelleri emekliye ayiriyor ("no longer available to new users");
+    sira kod degistirmeden GitHub degiskeniyle guncellenebilsin.
+    """
+    import os
+
+    raw = os.environ.get(env_name, "")
+    chain = tuple(item.strip() for item in raw.split(",") if item.strip())
+    return chain or default
+
+
 def billing_headline(detail: str) -> str:
     """Alarm basligi: hangi odeme siniri doldu."""
     if is_spend_cap_error(RuntimeError(detail)):

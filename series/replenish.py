@@ -86,7 +86,15 @@ from series.shots import (
     validate_plan,
 )
 
-REPLENISH_MODEL = "gemini-2.5-flash"
+# 28 Eyl 2026 ucretsiz katman: 2.5-flash yeni projeye kapali. QC 3.8/3.7 ile
+# basladigi icin bolum yazari 3.6/3.5 ile baslar; ikisi ayni gun ayni modelin
+# 20'lik gunluk hakkini paylasmasin. GEMINI_REPLENISH_MODELS ile degistirilir.
+from series.gemini_odeme import model_chain as _model_chain
+
+REPLENISH_MODELS = _model_chain("GEMINI_REPLENISH_MODELS", (
+    "gemini-3.6-flash", "gemini-3.5-flash", "gemini-3.7-flash",
+))
+REPLENISH_MODEL = REPLENISH_MODELS[0]
 
 # plato-3x8 (sahte kamera arkasi, wild-encounter) kendi yaratik kuralini alir.
 # Diger formatli seriler icin yazilan "anomaliyi her cekime kopyala, cekim 1'de
@@ -187,7 +195,7 @@ def plato_single_shot_object_rule(framing_style: str | None = None) -> str:
     'construction "instead of". Write "he steps out unharmed" rather than "he shows no harm". '
     'The engine adds the SHOT_PLAN line in front of it.'
 )
-REPLENISH_MODEL_FALLBACK = "gemini-flash-latest"
+REPLENISH_MODEL_FALLBACK = REPLENISH_MODELS[1] if len(REPLENISH_MODELS) > 1 else REPLENISH_MODEL
 DEFAULT_BATCH = 5
 DEFAULT_MIN_QUEUE = 2
 DEFAULT_SHOTS = 4          # bölüm başına çekim
@@ -666,7 +674,7 @@ def _gen_json(contents: str, system_instruction: str,
         temperature=temperature,
     )
     last_err = None
-    for model in (REPLENISH_MODEL, REPLENISH_MODEL_FALLBACK):
+    for model in REPLENISH_MODELS:
         for attempt in range(1, max_tries + 1):
             try:
                 resp = client.models.generate_content(model=model, contents=contents, config=cfg)

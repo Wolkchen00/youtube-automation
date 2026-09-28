@@ -42,7 +42,9 @@ ETKILESIM = KOK / "canon" / "ETKILESIM.json"
 ROTA_KLASORU = KOK / "routes"
 CIKTI = KOK / "veri" / "sehir_istekleri.json"
 YORUM_URL = "https://api.upload-post.com/api/uploadposts/comments"
-GEMINI_MODEL = "gemini-2.5-flash"  # series/replenish.py ile ayni birincil model
+# 28 Eyl 2026: anahtar ucretsiz katmana dondu; gemini-2.5-flash yeni projeye kapali (404).
+# Hafif model gunde 500 istek verir ve QC/ikmal sirasindaki modellerin hakkini yemez.
+GEMINI_MODEL = "gemini-3.5-flash-lite"
 PLATFORMLAR = ("instagram", "youtube", "tiktok")
 AZAMI_SAYFA = 5
 AZAMI_HTTP = 80

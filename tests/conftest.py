@@ -17,6 +17,32 @@ def pytest_configure(config):
         "gercek_gemini_yoklamasi: critic.probe_qc_access'in gercek govdesini "
         "(sahte genai modulu ile) kosar; varsayilan saplama devre disi kalir.",
     )
+    config.addinivalue_line(
+        "markers",
+        "gercek_model_sirasi: QC/ikmal model sirasini iki modele sabitlemez; "
+        "uretimdeki uzun sirayi sinar.",
+    )
+
+
+@pytest.fixture(autouse=True)
+def _model_sirasi_iki_modelde(request, monkeypatch):
+    """Eski QC/ikmal testleri iki modellik sira (ana + yedek) varsayar.
+
+    28 Eyl 2026'da ucretsiz katmana donuste sira dort modele cikti (kota model
+    basina, 503 "high demand" sik). Deneme/tutma anlamini sinayan eski testler
+    sira uzunlugundan bagimsizdir; sahte istemcileri yalniz iki modeli
+    senaryolastirir. Uzun sirayi sinayan testler `gercek_model_sirasi` ile
+    bu sabitlemeyi kapatir.
+    """
+    if request.node.get_closest_marker("gercek_model_sirasi"):
+        return
+    from series import critic, replenish
+
+    monkeypatch.setattr(critic, "QC_MODELS", (critic.QC_MODEL, critic.QC_MODEL_FALLBACK))
+    monkeypatch.setattr(
+        replenish, "REPLENISH_MODELS",
+        (replenish.REPLENISH_MODEL, replenish.REPLENISH_MODEL_FALLBACK),
+    )
 
 
 @pytest.fixture(autouse=True)
