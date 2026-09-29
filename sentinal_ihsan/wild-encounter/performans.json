@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-09-28T23:47:54.142988+00:00",
+  "guncellendi": "2026-09-29T03:06:50.335437+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 2869,
@@ -1628,6 +1628,31 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-29T03:06:50.335437+00:00",
+          "yas_saat": 172.73,
+          "youtube": {
+            "views": 46,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 18,
+            "comments": 0,
+            "views": 1497,
+            "impressions": 1497,
+            "reach": 904,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 212,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2039,6 +2064,31 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-29T03:06:50.335437+00:00",
+          "yas_saat": 127.681,
+          "youtube": {
+            "views": 75,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 16,
+            "comments": 0,
+            "views": 2263,
+            "impressions": 2263,
+            "reach": 1404,
+            "saves": 4,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 893,
+            "likes": 14,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2340,6 +2390,31 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-09-29T03:06:50.335437+00:00",
+          "yas_saat": 101.2,
+          "youtube": {
+            "views": 40,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 20,
+            "comments": 1,
+            "views": 2058,
+            "impressions": 2058,
+            "reach": 1320,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 911,
+            "likes": 24,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2607,6 +2682,31 @@
           "tiktok": {
             "views": 644,
             "likes": 8,
+            "comments": 0,
+            "shares": 1
+          }
+        },
+        {
+          "ts": "2026-09-29T03:06:50.335437+00:00",
+          "yas_saat": 86.231,
+          "youtube": {
+            "views": 178,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 150,
+            "comments": 2,
+            "views": 26722,
+            "impressions": 26722,
+            "reach": 17488,
+            "saves": 4,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 650,
+            "likes": 9,
             "comments": 0,
             "shares": 1
           }
