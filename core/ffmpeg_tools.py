@@ -7,6 +7,7 @@ Merge clips, add crossfades, create seamless loops, export to 9:16 vertical.
 import json
 import math
 import re
+import shutil
 import subprocess
 import statistics
 import time
@@ -308,6 +309,16 @@ def master_audio(
         raise RuntimeError(f"loudnorm ölçüm geçişi başarısız: {measure.stderr.strip()}")
     values = _loudnorm_measurement(measure.stderr)
     metadata_path = output_path.with_suffix(".audio_master.json")
+    # 28 Eyl 2026 wild-encounter Part 18: deneme 1 teslim edilebilirdi
+    # (-1.0 dBTP / -15.4 LUFS, taban -18 ustu). Politika sesi yukseltmeyi
+    # denedi; AAC kodlamasi tepeyi tavanin ustune tasidi (-0.7, sonra -0.4) ve
+    # son deneme reddedilince ELDEKI IYI master da cope gitti, klip parasiyla
+    # birlikte. Taban tanimli seride teslim edilebilir her deneme kenara
+    # kopyalanir; sonraki denemeler bozulursa o teslim edilir.
+    fallback_path = output_path.with_name(
+        f"{output_path.stem}_teslim_edilebilir{output_path.suffix}"
+    )
+    fallback: dict | None = None
     try:
         limiter_db = float(target_tp)
         # Ikinci kol: limiter ONCESI telafi kazanci. loudnorm linear modda
@@ -388,6 +399,22 @@ def master_audio(
                 gain_db=gain_db,
                 lufs_floor=lufs_floor,
             )
+            deliverable = (
+                lufs_floor is not None
+                and delivered["true_peak_dbtp"] <= float(target_tp) + 1e-9
+                and float(lufs_floor) - 1e-9
+                <= delivered["integrated_lufs"]
+                <= float(target_i) + 1.0 + 1e-9
+            )
+            if deliverable and decision.action != "accept":
+                shutil.copyfile(output_path, fallback_path)
+                fallback = {
+                    "attempt": attempt_number,
+                    "apply_report": apply_report,
+                    "normalization_type": normalization_type,
+                    "delivery_limit": delivery_limit,
+                    "delivered": dict(delivered),
+                }
             if decision.action == "accept":
                 # Taban kabulu SESSIZ OLMAZ. Hedefin altinda teslim etmek
                 # mesru ama kaydedilmesi gereken bir istisnadir; telemetri
@@ -397,6 +424,23 @@ def master_audio(
                     _write_master_telemetry(
                         output_path, attempts, decision.reason
                     )
+                break
+            if decision.action == "stop" and fallback is not None:
+                # Son deneme reddedildi ama daha onceki bir deneme sozlesmeyi
+                # (tavan + taban) tutuyordu. O teslim edilir; SESSIZCE degil.
+                shutil.copyfile(fallback_path, output_path)
+                reason = (
+                    f"son deneme reddedildi ({decision.reason}); deneme "
+                    f"{fallback['attempt']} teslim edildi: "
+                    f"{fallback['delivered']['true_peak_dbtp']:.2f} dBTP / "
+                    f"{fallback['delivered']['integrated_lufs']:.2f} LUFS, "
+                    f"{float(lufs_floor):.2f} LUFS floor ustu"
+                )
+                logger.warning(f"\u26a0\ufe0f Master geri donus: {reason}")
+                _write_master_telemetry(output_path, attempts, reason)
+                apply_report = fallback["apply_report"]
+                normalization_type = fallback["normalization_type"]
+                delivery_limit = fallback["delivery_limit"]
                 break
             if decision.action == "stop":
                 _write_master_telemetry(output_path, attempts, decision.reason)
@@ -456,6 +500,8 @@ def master_audio(
         output_path.unlink(missing_ok=True)
         metadata_path.unlink(missing_ok=True)
         raise
+    finally:
+        fallback_path.unlink(missing_ok=True)
     if not output_path.exists() or output_path.stat().st_size == 0:
         raise RuntimeError("loudnorm uygulama geçişi çıktı üretmedi")
     logger.info(
