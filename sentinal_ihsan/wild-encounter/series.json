@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 18,
+  "next_part": 19,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -532,11 +532,19 @@
       }
     },
     "18": {
-      "status": "qc_retry",
+      "status": "budget_exhausted",
       "first_held_at": "2026-09-28T23:51:30.249237+00:00",
       "retry_count": 1,
-      "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "last_reason_code": "BUDGET_EXHAUSTED",
+      "hold_reason": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=110.0, asgari=200.0, tavan=1000"
+    },
+    "19": {
+      "status": "qc_retry",
+      "first_held_at": "2026-09-29T14:07:27.868558+00:00",
+      "first_infra_held_at": "2026-09-29T14:07:27.868558+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "TRANSIENT_INFRA",
+      "hold_reason": "server"
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti.",

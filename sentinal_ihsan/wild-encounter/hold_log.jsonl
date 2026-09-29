@@ -11,3 +11,5 @@
 {"ts": "2026-09-28T16:02:14.302306+00:00", "part": 19, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
 {"ts": "2026-09-28T23:51:30.249293+00:00", "part": 18, "durum": "qc_retry", "kod": "AUDIO_MASTER", "neden": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=-0.40 dB, LUFS=-14.40.", "coherence": null}
 {"ts": "2026-09-29T03:22:32.441777+00:00", "part": 18, "durum": "qc_retry", "kod": "UNKNOWN", "neden": "", "coherence": null}
+{"ts": "2026-09-29T14:02:54.148229+00:00", "part": 18, "durum": "budget_exhausted", "kod": "BUDGET_EXHAUSTED", "neden": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=110.0, asgari=200.0, tavan=1000", "coherence": null}
+{"ts": "2026-09-29T14:07:27.868628+00:00", "part": 19, "durum": "qc_retry", "kod": "TRANSIENT_INFRA", "neden": "server", "coherence": null}
