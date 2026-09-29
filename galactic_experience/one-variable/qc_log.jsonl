@@ -103,3 +103,30 @@
 {"ts": "2026-09-27T17:03:37Z", "event": "qc_api_result", "attempt_id": "6399f8bb498a495aab55437b31cf91ff", "outcome": "429"}
 {"ts": "2026-09-27T17:03:37Z", "event": "native_audio_review", "episode": 100, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
 {"ts": "2026-09-27T17:03:38Z", "event": "qc_hold", "episode": 100, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-09-29T00:14:08Z", "event": "qc_api_attempt", "attempt_id": "57bbbb4ee2384ffbb71c8acc2d782949", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:14:10Z", "event": "qc_api_result", "attempt_id": "57bbbb4ee2384ffbb71c8acc2d782949", "outcome": "error"}
+{"ts": "2026-09-29T00:14:15Z", "event": "qc_api_attempt", "attempt_id": "b647a52e543a4332bac539b754ba523b", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:14:19Z", "event": "qc_api_result", "attempt_id": "b647a52e543a4332bac539b754ba523b", "outcome": "error"}
+{"ts": "2026-09-29T00:14:29Z", "event": "qc_api_attempt", "attempt_id": "41f03c890cf1418d8d864a4ffc6389a9", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:14:29Z", "event": "qc_api_result", "attempt_id": "41f03c890cf1418d8d864a4ffc6389a9", "outcome": "429"}
+{"ts": "2026-09-29T00:14:29Z", "event": "qc_api_attempt", "attempt_id": "328c200caa754083bc08c8e83d457fe0", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:14:34Z", "event": "qc_api_result", "attempt_id": "328c200caa754083bc08c8e83d457fe0", "outcome": "ok"}
+{"ts": "2026-09-29T00:14:34Z", "event": "native_audio_review", "episode": 100, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Continuous natural rushing water and wave ambient sounds.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-09-29T00:14:35Z", "event": "qc_api_attempt", "attempt_id": "c861de4320854a55931c23c5e2b40fdc", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:14:36Z", "event": "qc_api_result", "attempt_id": "c861de4320854a55931c23c5e2b40fdc", "outcome": "429"}
+{"ts": "2026-09-29T00:14:36Z", "event": "qc_api_attempt", "attempt_id": "a6f2bc9a16b64750bf5dc77b5ae7eb19", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:14:53Z", "event": "qc_api_result", "attempt_id": "a6f2bc9a16b64750bf5dc77b5ae7eb19", "outcome": "error"}
+{"ts": "2026-09-29T00:14:58Z", "event": "qc_api_attempt", "attempt_id": "fa62cab592b9434cba79caa66f418406", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:15:07Z", "event": "qc_api_result", "attempt_id": "fa62cab592b9434cba79caa66f418406", "outcome": "error"}
+{"ts": "2026-09-29T00:15:17Z", "event": "qc_api_attempt", "attempt_id": "e3b2fbf772ca413d82dfe2b1a8aab544", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:15:23Z", "event": "qc_api_result", "attempt_id": "e3b2fbf772ca413d82dfe2b1a8aab544", "outcome": "error"}
+{"ts": "2026-09-29T00:15:23Z", "event": "qc_api_attempt", "attempt_id": "e0de2a16c2524517bbadd3dcaf833f02", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:15:31Z", "event": "qc_api_result", "attempt_id": "e0de2a16c2524517bbadd3dcaf833f02", "outcome": "error"}
+{"ts": "2026-09-29T00:15:36Z", "event": "qc_api_attempt", "attempt_id": "5c3c7db410ab4b5c8d4ba35df33a9bda", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:15:38Z", "event": "qc_api_result", "attempt_id": "5c3c7db410ab4b5c8d4ba35df33a9bda", "outcome": "error"}
+{"ts": "2026-09-29T00:15:48Z", "event": "qc_api_attempt", "attempt_id": "9157ad214f774c65a0f038aa6899cbc9", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:15:56Z", "event": "qc_api_result", "attempt_id": "9157ad214f774c65a0f038aa6899cbc9", "outcome": "error"}
+{"ts": "2026-09-29T00:15:56Z", "event": "qc_api_attempt", "attempt_id": "0adc4b0252484c47b471822f1c58283d", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 100, "shot": 1}
+{"ts": "2026-09-29T00:16:03Z", "event": "qc_api_result", "attempt_id": "0adc4b0252484c47b471822f1c58283d", "outcome": "ok"}
+{"ts": "2026-09-29T00:16:03Z", "event": "review", "episode": 100, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["The dust storm is nearly static and fails to advance or submerge the highway as requested."], "fix_notes": ["Ensure the sand wall visibly rolls forward and completely covers the highway in the final frames."], "clip": "shot_01.mp4"}
+{"ts": "2026-09-29T00:16:03Z", "event": "qc_pass", "episode": 100, "shot": 1, "attempt": 0, "content_sha256": "81a39748e9164b0f3dd1f5dd6372b20ff0a8acae5b74ccb70a2de8624742a2f9", "clip": "shot_01.mp4"}
