@@ -262,8 +262,13 @@
       }
     },
     "6": {
-      "status": "planned",
-      "billing_seen_at": "2026-09-28T19:42:02.032564+00:00"
+      "status": "qc_retry",
+      "billing_seen_at": "2026-09-28T19:42:02.032564+00:00",
+      "first_held_at": "2026-09-30T18:10:14.962515+00:00",
+      "first_infra_held_at": "2026-09-30T18:10:14.962515+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "TRANSIENT_INFRA",
+      "hold_reason": "server"
     }
   },
   "engagement": {
