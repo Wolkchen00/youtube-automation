@@ -345,3 +345,80 @@
 {"ts": "2026-09-29T00:05:38Z", "event": "qc_api_result", "attempt_id": "f4af878dd58343b28ad13ca0fe4f992c", "outcome": "ok"}
 {"ts": "2026-09-29T00:05:38Z", "event": "review", "episode": 9, "shot": 4, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
 {"ts": "2026-09-29T00:05:38Z", "event": "qc_pass", "episode": 9, "shot": 4, "attempt": 0, "content_sha256": "fae47f234cad5dd7abffe0c1f53231fe81c7ac16c8258a3ccfe64ca49923c303", "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-09-30T17:03:26Z", "event": "qc_api_attempt", "attempt_id": "d846848efe6942c090022d4367ad5f34", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:04:24Z", "event": "qc_api_result", "attempt_id": "d846848efe6942c090022d4367ad5f34", "outcome": "error"}
+{"ts": "2026-09-30T17:04:29Z", "event": "qc_api_attempt", "attempt_id": "96f647d358354165ad57a7d8f50e1c13", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:04:36Z", "event": "qc_api_result", "attempt_id": "96f647d358354165ad57a7d8f50e1c13", "outcome": "error"}
+{"ts": "2026-09-30T17:04:46Z", "event": "qc_api_attempt", "attempt_id": "6f063539e7f84ea9a2feb0c5cc387758", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:04:53Z", "event": "qc_api_result", "attempt_id": "6f063539e7f84ea9a2feb0c5cc387758", "outcome": "error"}
+{"ts": "2026-09-30T17:04:53Z", "event": "qc_api_attempt", "attempt_id": "b5eab0dcb2e04af8baa0f2dc52845481", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:05:10Z", "event": "qc_api_result", "attempt_id": "b5eab0dcb2e04af8baa0f2dc52845481", "outcome": "error"}
+{"ts": "2026-09-30T17:05:15Z", "event": "qc_api_attempt", "attempt_id": "ab82dbaa91be4abd86c3866ec8124821", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:05:17Z", "event": "qc_api_result", "attempt_id": "ab82dbaa91be4abd86c3866ec8124821", "outcome": "error"}
+{"ts": "2026-09-30T17:05:27Z", "event": "qc_api_attempt", "attempt_id": "73f110463e3542e58028d12d62c8edd5", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:05:38Z", "event": "qc_api_result", "attempt_id": "73f110463e3542e58028d12d62c8edd5", "outcome": "error"}
+{"ts": "2026-09-30T17:05:38Z", "event": "qc_api_attempt", "attempt_id": "7471d358e4b9428088f94a5b9525e328", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:05:45Z", "event": "qc_api_result", "attempt_id": "7471d358e4b9428088f94a5b9525e328", "outcome": "error"}
+{"ts": "2026-09-30T17:05:50Z", "event": "qc_api_attempt", "attempt_id": "ca50804a03f44555ab92f209863267f1", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:05:59Z", "event": "qc_api_result", "attempt_id": "ca50804a03f44555ab92f209863267f1", "outcome": "error"}
+{"ts": "2026-09-30T17:06:09Z", "event": "qc_api_attempt", "attempt_id": "6b11851cf1404363bbfcbd8c3af1026c", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:06:10Z", "event": "qc_api_result", "attempt_id": "6b11851cf1404363bbfcbd8c3af1026c", "outcome": "error"}
+{"ts": "2026-09-30T17:06:10Z", "event": "qc_api_attempt", "attempt_id": "20f2bdcc06064cfc9528e644c0247a55", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:06:16Z", "event": "qc_api_result", "attempt_id": "20f2bdcc06064cfc9528e644c0247a55", "outcome": "error"}
+{"ts": "2026-09-30T17:06:21Z", "event": "qc_api_attempt", "attempt_id": "0b1311fc72ca4629873cb4b4d7932a51", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:06:22Z", "event": "qc_api_result", "attempt_id": "0b1311fc72ca4629873cb4b4d7932a51", "outcome": "error"}
+{"ts": "2026-09-30T17:06:32Z", "event": "qc_api_attempt", "attempt_id": "5366a310ba0f48e4a3831c1eb1957ee8", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:06:33Z", "event": "qc_api_result", "attempt_id": "5366a310ba0f48e4a3831c1eb1957ee8", "outcome": "error"}
+{"ts": "2026-09-30T17:06:33Z", "event": "review", "episode": 10, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (server)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_01.mp4", "first_frame_ok": null, "first_frame_notes": null, "opening_frame_luma_contrast_proxy": 99.0, "opening_frame_sharpness_proxy": 3921.5318}
+{"ts": "2026-09-30T17:06:34Z", "event": "qc_api_attempt", "attempt_id": "2bb9449e90fe410cbaeacd37cc43c0bc", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:08:23Z", "event": "qc_api_result", "attempt_id": "2bb9449e90fe410cbaeacd37cc43c0bc", "outcome": "error"}
+{"ts": "2026-09-30T17:08:28Z", "event": "qc_api_attempt", "attempt_id": "2d0adad1e2b84fb68a6162be9651340a", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:08:53Z", "event": "qc_api_result", "attempt_id": "2d0adad1e2b84fb68a6162be9651340a", "outcome": "error"}
+{"ts": "2026-09-30T17:09:03Z", "event": "qc_api_attempt", "attempt_id": "f4ad5f65f7a94b3292e6775df7396bea", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:09:57Z", "event": "qc_api_result", "attempt_id": "f4ad5f65f7a94b3292e6775df7396bea", "outcome": "error"}
+{"ts": "2026-09-30T17:09:57Z", "event": "qc_api_attempt", "attempt_id": "768f6ea4b3ca453d8278f54f2c7dad5c", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:10:38Z", "event": "qc_api_result", "attempt_id": "768f6ea4b3ca453d8278f54f2c7dad5c", "outcome": "error"}
+{"ts": "2026-09-30T17:10:43Z", "event": "qc_api_attempt", "attempt_id": "7e550f6db150483fbac335ea9d2fc060", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:11:10Z", "event": "qc_api_result", "attempt_id": "7e550f6db150483fbac335ea9d2fc060", "outcome": "error"}
+{"ts": "2026-09-30T17:11:20Z", "event": "qc_api_attempt", "attempt_id": "a5015ffa31c64cac8eb4a6faba6567a5", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:11:21Z", "event": "qc_api_result", "attempt_id": "a5015ffa31c64cac8eb4a6faba6567a5", "outcome": "error"}
+{"ts": "2026-09-30T17:11:21Z", "event": "qc_api_attempt", "attempt_id": "cfa8a7477a9648b3953a5a10b6e0bf10", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:11:31Z", "event": "qc_api_result", "attempt_id": "cfa8a7477a9648b3953a5a10b6e0bf10", "outcome": "error"}
+{"ts": "2026-09-30T17:11:36Z", "event": "qc_api_attempt", "attempt_id": "a801e35d7bfc4834ab025b110cf9d52d", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:11:38Z", "event": "qc_api_result", "attempt_id": "a801e35d7bfc4834ab025b110cf9d52d", "outcome": "error"}
+{"ts": "2026-09-30T17:11:48Z", "event": "qc_api_attempt", "attempt_id": "2ea862f410844e97bd46dc213d2264a6", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-09-30T17:11:57Z", "event": "qc_api_result", "attempt_id": "2ea862f410844e97bd46dc213d2264a6", "outcome": "ok"}
+{"ts": "2026-09-30T17:11:57Z", "event": "review", "episode": 10, "shot": 1, "attempt": 0, "review_try": 1, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Recognizable Dubai skyline with the Burj Khalifa featuring a complete futuristic branching structure.", "opening_frame_luma_contrast_proxy": 99.0, "opening_frame_sharpness_proxy": 3921.5318}
+{"ts": "2026-09-30T17:11:57Z", "event": "qc_pass", "episode": 10, "shot": 1, "attempt": 0, "content_sha256": "092626e2d117c85a9683e67fedd273e2f0ba852773c283600149437442b4ba0c", "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Recognizable Dubai skyline with the Burj Khalifa featuring a complete futuristic branching structure.", "opening_frame_luma_contrast_proxy": 99.0, "opening_frame_sharpness_proxy": 3921.5318}
+{"ts": "2026-09-30T17:16:08Z", "event": "qc_api_attempt", "attempt_id": "921796f2e628425c86818d726c6a6b40", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 2}
+{"ts": "2026-09-30T17:16:14Z", "event": "qc_api_result", "attempt_id": "921796f2e628425c86818d726c6a6b40", "outcome": "error"}
+{"ts": "2026-09-30T17:16:19Z", "event": "qc_api_attempt", "attempt_id": "51125486e950443489ad7efe79d430e6", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 2}
+{"ts": "2026-09-30T17:16:20Z", "event": "qc_api_result", "attempt_id": "51125486e950443489ad7efe79d430e6", "outcome": "error"}
+{"ts": "2026-09-30T17:16:30Z", "event": "qc_api_attempt", "attempt_id": "33f018845354429cb5ae1953e259bf21", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 2}
+{"ts": "2026-09-30T17:16:32Z", "event": "qc_api_result", "attempt_id": "33f018845354429cb5ae1953e259bf21", "outcome": "error"}
+{"ts": "2026-09-30T17:16:32Z", "event": "qc_api_attempt", "attempt_id": "8a0c2cfdecaf4837b9a4dc74c4bf36ca", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 2}
+{"ts": "2026-09-30T17:16:44Z", "event": "qc_api_result", "attempt_id": "8a0c2cfdecaf4837b9a4dc74c4bf36ca", "outcome": "error"}
+{"ts": "2026-09-30T17:16:49Z", "event": "qc_api_attempt", "attempt_id": "2af25596743e48939632f9aaaf510a5e", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 2}
+{"ts": "2026-09-30T17:16:57Z", "event": "qc_api_result", "attempt_id": "2af25596743e48939632f9aaaf510a5e", "outcome": "ok"}
+{"ts": "2026-09-30T17:16:57Z", "event": "review", "episode": 10, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_02.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-09-30T17:16:57Z", "event": "qc_pass", "episode": 10, "shot": 2, "attempt": 0, "content_sha256": "37a37dc447064c7adcca7c6d7ffb5959bd0660339ae3b616f1bb7930c9d621a3", "clip": "shot_02.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-09-30T17:22:37Z", "event": "qc_api_attempt", "attempt_id": "28733570a5eb473f9c405b59bda13457", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:22:43Z", "event": "qc_api_result", "attempt_id": "28733570a5eb473f9c405b59bda13457", "outcome": "error"}
+{"ts": "2026-09-30T17:22:48Z", "event": "qc_api_attempt", "attempt_id": "5517cc408df44604af139fba340f1312", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:23:01Z", "event": "qc_api_result", "attempt_id": "5517cc408df44604af139fba340f1312", "outcome": "error"}
+{"ts": "2026-09-30T17:23:11Z", "event": "qc_api_attempt", "attempt_id": "f82730550c0b43b6be9215a21e0ba54e", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:23:19Z", "event": "qc_api_result", "attempt_id": "f82730550c0b43b6be9215a21e0ba54e", "outcome": "error"}
+{"ts": "2026-09-30T17:23:19Z", "event": "qc_api_attempt", "attempt_id": "7db283f0f9474cbdb23679ccfa6c7a7b", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:23:31Z", "event": "qc_api_result", "attempt_id": "7db283f0f9474cbdb23679ccfa6c7a7b", "outcome": "error"}
+{"ts": "2026-09-30T17:23:36Z", "event": "qc_api_attempt", "attempt_id": "b047afc247f04caa8a32563bc63dc4ae", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:23:38Z", "event": "qc_api_result", "attempt_id": "b047afc247f04caa8a32563bc63dc4ae", "outcome": "error"}
+{"ts": "2026-09-30T17:23:48Z", "event": "qc_api_attempt", "attempt_id": "ce7dad886c68424b9e18d80582895851", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:24:04Z", "event": "qc_api_result", "attempt_id": "ce7dad886c68424b9e18d80582895851", "outcome": "error"}
+{"ts": "2026-09-30T17:24:04Z", "event": "qc_api_attempt", "attempt_id": "448f387c43614cf5b9abbc91c5a1aa02", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 3}
+{"ts": "2026-09-30T17:24:31Z", "event": "qc_api_result", "attempt_id": "448f387c43614cf5b9abbc91c5a1aa02", "outcome": "ok"}
+{"ts": "2026-09-30T17:24:31Z", "event": "review", "episode": 10, "shot": 3, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Minor morphing in internal glowing light patterns"], "fix_notes": ["Maintain consistent internal light geometry across lateral camera movement"], "clip": "shot_03.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-09-30T17:24:31Z", "event": "qc_pass", "episode": 10, "shot": 3, "attempt": 0, "content_sha256": "c28157b9ac4a76e8297f0fe3b7dcee00e0e8ed7f51ec9cf1964dd40f109c2b3a", "clip": "shot_03.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-09-30T17:28:39Z", "event": "qc_api_attempt", "attempt_id": "1ac386892a32414eb2907507adeaf2ba", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 4}
+{"ts": "2026-09-30T17:28:44Z", "event": "qc_api_result", "attempt_id": "1ac386892a32414eb2907507adeaf2ba", "outcome": "ok"}
+{"ts": "2026-09-30T17:28:44Z", "event": "review", "episode": 10, "shot": 4, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": ["Detached leaves float unnaturally through the interior space."], "fix_notes": ["Prevent leaves from detaching and floating indoors."], "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-09-30T17:28:44Z", "event": "qc_pass", "episode": 10, "shot": 4, "attempt": 0, "content_sha256": "e583bfb55a72c156bea469edbaf47cc8faf030e350e918256ede63cb5a002827", "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
