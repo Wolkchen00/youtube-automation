@@ -542,7 +542,7 @@
       "status": "qc_retry",
       "first_held_at": "2026-09-29T14:07:27.868558+00:00",
       "first_infra_held_at": "2026-09-29T14:07:27.868558+00:00",
-      "infra_retry_count": 1,
+      "infra_retry_count": 2,
       "last_reason_code": "TRANSIENT_INFRA",
       "hold_reason": "server"
     }
