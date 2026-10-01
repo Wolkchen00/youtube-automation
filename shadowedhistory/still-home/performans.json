@@ -1,11 +1,11 @@
 {
   "series": "still-home",
-  "guncellendi": "2026-09-30T17:00:08.172140+00:00",
+  "guncellendi": "2026-10-01T17:50:45.664388+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 647,
       "instagram": 156,
-      "tiktok": 1084
+      "tiktok": 829.0
     }
   },
   "parts": [
@@ -135,7 +135,7 @@
       "oranlar": {
         "youtube": 1.0,
         "instagram": 0.814103,
-        "tiktok": 0.222325
+        "tiktok": 0.290712
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -289,7 +289,7 @@
       "oranlar": {
         "youtube": 1.344668,
         "instagram": 1.166667,
-        "tiktok": 6.104244
+        "tiktok": 7.981906
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -314,7 +314,7 @@
           "shares": 2
         }
       },
-      "puan": 6.104244,
+      "puan": 7.981906,
       "etiket": "kazanan"
     },
     {
@@ -443,7 +443,7 @@
       "oranlar": {
         "youtube": 0.051005,
         "instagram": 0.980769,
-        "tiktok": 0.274908
+        "tiktok": 0.359469
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -677,7 +677,7 @@
       "oranlar": {
         "youtube": 1.044822,
         "instagram": 1.0,
-        "tiktok": 2.802583
+        "tiktok": 3.664656
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -708,7 +708,7 @@
           "shares": 1
         }
       },
-      "puan": 2.802583,
+      "puan": 3.664656,
       "etiket": "kazanan"
     },
     {
@@ -948,7 +948,7 @@
       "oranlar": {
         "youtube": 1.071097,
         "instagram": 1.044872,
-        "tiktok": 1.0
+        "tiktok": 1.3076
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -979,7 +979,7 @@
           "shares": 0
         }
       },
-      "puan": 1.071097,
+      "puan": 1.3076,
       "etiket": "orta"
     },
     {
@@ -1214,7 +1214,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-22T23:40:04.871216+00:00",
       "subtitle": "Tokyo Grew Its Own Districts",
@@ -1378,7 +1378,7 @@
       "oranlar": {
         "youtube": 0.632148,
         "instagram": 0.948718,
-        "tiktok": 1.238007
+        "tiktok": 1.618818
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -1403,7 +1403,7 @@
           "shares": 0
         }
       },
-      "puan": 1.238007,
+      "puan": 1.618818,
       "etiket": "orta"
     },
     {
@@ -1636,6 +1636,31 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-01T17:50:45.664388+00:00",
+          "yas_saat": 186.522,
+          "youtube": {
+            "views": 20,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 9,
+            "comments": 1,
+            "views": 221,
+            "impressions": 221,
+            "reach": 156,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 580,
+            "likes": 13,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1820,7 +1845,7 @@
       "oranlar": {
         "youtube": 0.029366,
         "instagram": 1.410256,
-        "tiktok": 0.52952
+        "tiktok": 0.6924
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -1916,6 +1941,16 @@
             "comments": 2,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-01T17:50:45.664388+00:00",
+          "yas_saat": 145.154,
+          "tiktok": {
+            "views": 420,
+            "likes": 11,
+            "comments": 2,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1934,13 +1969,34 @@
               "shares": 0
             }
           }
+        },
+        "s7g": {
+          "tiktok": {
+            "ts": "2026-10-01T17:50:45.664388+00:00",
+            "yas_saat": 145.154,
+            "tiktok": {
+              "views": 420,
+              "likes": 11,
+              "comments": 2,
+              "shares": 0
+            }
+          }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "oturmus",
+      "oranlar": {
+        "tiktok": 0.506634
+      },
+      "puanlanan_metrikler": {
+        "tiktok": {
+          "views": 420,
+          "likes": 11,
+          "comments": 2,
+          "shares": 0
+        }
+      },
+      "puan": 0.506634,
+      "etiket": "orta"
     },
     {
       "part": 9,
@@ -2004,12 +2060,165 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-01T17:50:45.664388+00:00",
+          "yas_saat": 65.658,
+          "youtube": {
+            "views": 600,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 17,
+            "impressions": 17,
+            "reach": 11,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 418,
+            "likes": 5,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-29T00:11:16.869846+00:00",
       "subtitle": "Rome Rebuilt Its Seven Hills",
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-01T17:50:45.664388+00:00",
+            "yas_saat": 65.658,
+            "youtube": {
+              "views": 600,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 3,
+              "comments": 1,
+              "views": 17,
+              "impressions": 17,
+              "reach": 11,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 418,
+              "likes": 5,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-01T17:50:45.664388+00:00",
+            "yas_saat": 65.658,
+            "youtube": {
+              "views": 600,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 3,
+              "comments": 1,
+              "views": 17,
+              "impressions": 17,
+              "reach": 11,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 418,
+              "likes": 5,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-01T17:50:45.664388+00:00",
+            "yas_saat": 65.658,
+            "youtube": {
+              "views": 600,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 3,
+              "comments": 1,
+              "views": 17,
+              "impressions": 17,
+              "reach": 11,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 418,
+              "likes": 5,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    },
+    {
+      "part": 10,
+      "post_ids": {
+        "youtube": "5UA0dti4OMY",
+        "instagram": "18115679777092546",
+        "tiktok": "7691382488932912397"
+      },
+      "request_ids": {
+        "youtube": "eaec0a15399148558ab3f9c9c819b433",
+        "instagram": "f3ca55f65b504061b2b9ea6aaff94734",
+        "tiktok": "f8e5cceb5f104e0aa5629ad8ab818307"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-01T17:50:45.664388+00:00",
+          "yas_saat": 24.283,
+          "youtube": {
+            "views": 3,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 7,
+            "comments": 1,
+            "views": 144,
+            "impressions": 144,
+            "reach": 114,
+            "saves": 2,
+            "shares": 2
+          },
+          "tiktok": {
+            "views": 554,
+            "likes": 12,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-09-30T17:33:47.320922+00:00",
+      "subtitle": "Dubai Grows Its Own Skyline",
       "anlik": {},
       "yargi_anligi": null,
       "oranlar": {},
@@ -2018,5 +2227,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 10
+  "api_cagrilari": 13
 }
