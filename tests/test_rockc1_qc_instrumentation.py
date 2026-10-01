@@ -159,6 +159,8 @@ class EpisodeHarness(unittest.TestCase):
             stack.enter_context(mock.patch.dict(sys.modules, fake.modules()))
             stack.enter_context(mock.patch.object(critic, "GEMINI_API_KEY", "test-key"))
             stack.enter_context(mock.patch.object(critic.time, "sleep"))
+            # Soguma butcesi surec geneli; her kosu temiz butceyle baslar.
+            stack.enter_context(mock.patch.object(critic, "_OVERLOAD_WAITED", 0.0))
             stack.enter_context(mock.patch.object(critic.ffmpeg_tools, "sample_frames", return_value=[self.frame]))
             stack.enter_context(mock.patch.object(critic.ffmpeg_tools, "detect_scene_cuts", return_value=[1.25]))
             stack.enter_context(mock.patch.object(produce, "ensure_episode_refs", return_value=True))
@@ -309,10 +311,16 @@ class InstrumentationTests(EpisodeHarness):
             "parse": None,
             "logging": PermissionError("journal unavailable"),
         }
+        # Bir tur = iki model x uc deneme. Gecici sunucu hatasi (server) artik
+        # soguma turlariyla yeniden denenir; hold icin ariza TUM turlar boyunca
+        # surmeli. Diger siniflar sogumayla acilmaz, tek turda tukenir.
+        per_round = 6
+        rounds = len(critic.QC_OVERLOAD_COOLDOWNS) + 1
         for reason, failure in cases.items():
             with self.subTest(reason=reason):
+                count = per_round * rounds if reason == "server" else per_round
                 fake = FakeGemini(
-                    ["not-json"] * 6 if reason == "parse" else [failure] * 6
+                    ["not-json"] * count if reason == "parse" else [failure] * count
                 )
                 strict_patch = (
                     mock.patch.object(critic, "_strict_log_event", side_effect=failure)
@@ -333,6 +341,16 @@ class InstrumentationTests(EpisodeHarness):
                 else:
                     self.assertIn("QC KOTA-DIŞI TÜKENME", alert)
 
+
+    def test_short_server_overload_is_ridden_out_with_a_cooldown_not_held(self):
+        """29-30 Eylul 2026: 503 firtinasi tum sirayi bir dakikada dusurdu ve
+        kanal iki gun karardi. Firtina bir turdan kisa surerse bolum CIKAR."""
+        fake = FakeGemini([RuntimeError("503 UNAVAILABLE high demand")] * 6)
+        with self.run_context(fake), mock.patch.object(critic, "_notify"),                 mock.patch.object(critic.time, "sleep") as slept:
+            result = self.produce(fake)
+        self.assertEqual((result.status, result.reason), ("ok", None))
+        self.assertIn(mock.call(critic.QC_OVERLOAD_COOLDOWNS[0]), slept.call_args_list)
+        self.assertGreater(fake.calls, 6)
 
 class ReportingTests(unittest.TestCase):
     def test_crash_gap_is_reported_as_one_unknown_unmatched_attempt(self):

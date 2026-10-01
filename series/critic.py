@@ -70,6 +70,15 @@ QC_HOLD_REASONS = frozenset({"quota", "billing", "auth", "server", "parse", "log
 QC_MAX_SINGLE_DELAY = 30.0
 QC_MAX_EPISODE_WAIT = 300.0
 
+# 1 Ekim 2026: 29 ve 30 Eylul'de ucretsiz katmanin "503 high demand" firtinasi
+# dort modellik sirayi ~1 dakikada dusurdu, bolum QC HOLD'a gitti ve kanal iki
+# gun video cikarmadi. 1 Ekim'de ayni firtina 4 dakikada dindi ve video cikti.
+# Sira tamamen GECICI sunucu hatasiyla duserse soguma beklenir ve sira bastan
+# denenir. Toplam soguma SUREC basina sinirli (workflow 120 dakika).
+QC_OVERLOAD_COOLDOWNS = (60.0, 120.0, 240.0)
+QC_OVERLOAD_PROCESS_CAP = 900.0
+_OVERLOAD_WAITED = 0.0
+
 
 _QC_KEY_SOURCE_LOGGED = False
 
@@ -539,6 +548,36 @@ def _is_transient_api_error(error: Exception) -> bool:
     ))
 
 
+def _overload_cooldown(label: str, round_no: int, last_reason: str,
+                       last_error: Exception | None,
+                       wait_budget: QCWaitBudget | None = None) -> bool:
+    """Tum model sirasi GECICI sunucu hatasiyla dustuyse soguma bekle.
+
+    True: sira bastan denenir. Kota, odeme, yetki ve bozuk JSON sogumayla
+    acilmaz; onlarda hic beklenmez."""
+    global _OVERLOAD_WAITED
+    if last_reason != "server" or last_error is None:
+        return False
+    if not _is_transient_api_error(last_error) or round_no >= len(QC_OVERLOAD_COOLDOWNS):
+        return False
+    delay = min(QC_OVERLOAD_COOLDOWNS[round_no],
+                QC_OVERLOAD_PROCESS_CAP - _OVERLOAD_WAITED)
+    if wait_budget is not None:
+        delay = min(delay, max(0.0, float(wait_budget.max_total) - float(wait_budget.waited)))
+    if delay <= 0:
+        logger.warning(f"⚠️ {label}: yoğunluk soğuma bütçesi tükendi")
+        return False
+    _OVERLOAD_WAITED += delay
+    if wait_budget is not None:
+        wait_budget.waited += delay
+    logger.warning(
+        f"⏳ {label}: tüm modeller geçici hatada ({str(last_error)[:60]}), "
+        f"{delay:g}s soğuma, sonra sıra baştan (tur {round_no + 2})"
+    )
+    time.sleep(delay)
+    return True
+
+
 def _strict_log_event(slug: str, entry: dict, *,
                       experiment_id: str | None = None) -> None:
     """QC olayını append + flush + fsync ile yaz; hiçbir hatayı yutma."""
@@ -744,36 +783,41 @@ def _review_frames(frames: list[Path], ref_face: bytes | None,
         raise QCApiExhausted(_classify_api_error(error), str(error)) from error
     last_error: Exception | None = None
     last_reason = "server"
-    for model_index, model in enumerate(QC_MODELS):
-        for attempt in range(1, max_tries + 1):
-            response_received = False
-            try:
-                response = _generate_content_recorded(
-                    client, model=model, contents=parts, config=config,
-                    slug=slug, episode=episode, shot=shot, task_type="visual_review",
-                    is_fallback=model_index > 0, experiment_id=experiment_id,
-                )
-                response_received = True
-                return _parse_response_json(response)
-            except QCApiExhausted:
-                raise
-            except Exception as error:
-                last_error = error
-                message = str(error)
-                bad_json = response_received
-                last_reason = "parse" if bad_json else _classify_api_error(error)
-                if last_reason == "billing":
-                    # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
-                    logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
-                    raise QCApiExhausted("billing", message) from error
-                if _wait_for_qc_retry(
-                    error, attempt, max_tries,
-                    response_received=bad_json, wait_budget=wait_budget,
-                    label="Görsel QC", model=model,
-                ):
-                    continue
-                logger.warning(f"⚠️ QC {model} başarısız: {message[:120]}")
-                break
+    for round_no in range(len(QC_OVERLOAD_COOLDOWNS) + 1):
+        if round_no and not _overload_cooldown(
+            "Görsel QC", round_no - 1, last_reason, last_error, wait_budget,
+        ):
+            break
+        for model_index, model in enumerate(QC_MODELS):
+            for attempt in range(1, max_tries + 1):
+                response_received = False
+                try:
+                    response = _generate_content_recorded(
+                        client, model=model, contents=parts, config=config,
+                        slug=slug, episode=episode, shot=shot, task_type="visual_review",
+                        is_fallback=model_index > 0, experiment_id=experiment_id,
+                    )
+                    response_received = True
+                    return _parse_response_json(response)
+                except QCApiExhausted:
+                    raise
+                except Exception as error:
+                    last_error = error
+                    message = str(error)
+                    bad_json = response_received
+                    last_reason = "parse" if bad_json else _classify_api_error(error)
+                    if last_reason == "billing":
+                        # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
+                        logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
+                        raise QCApiExhausted("billing", message) from error
+                    if _wait_for_qc_retry(
+                        error, attempt, max_tries,
+                        response_received=bad_json, wait_budget=wait_budget,
+                        label="Görsel QC", model=model,
+                    ):
+                        continue
+                    logger.warning(f"⚠️ QC {model} başarısız: {message[:120]}")
+                    break
     logger.warning(f"⚠️ QC denetimi yapılamadı ({last_error})")
     raise QCApiExhausted(last_reason, str(last_error or "bilinmeyen hata"))
 
@@ -1513,37 +1557,42 @@ def _review_audio(audio_path: Path, max_tries: int = 3, *,
         raise QCApiExhausted(_classify_api_error(error), str(error)) from error
     last_error: Exception | None = None
     last_reason = "server"
-    for model_index, model in enumerate(QC_MODELS):
-        for attempt in range(1, max_tries + 1):
-            response_received = False
-            try:
-                response = _generate_content_recorded(
-                    client, model=model, contents=parts, config=cfg,
-                    slug=slug, episode=episode, shot=shot,
-                    task_type="delivery_audio_review", is_fallback=model_index > 0,
-                    experiment_id=experiment_id,
-                )
-                response_received = True
-                return _parse_response_json(response)
-            except QCApiExhausted:
-                raise
-            except Exception as error:
-                last_error = error
-                message = str(error)
-                bad_json = response_received
-                last_reason = "parse" if bad_json else _classify_api_error(error)
-                if last_reason == "billing":
-                    # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
-                    logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
-                    raise QCApiExhausted("billing", message) from error
-                if _wait_for_qc_retry(
-                    error, attempt, max_tries,
-                    response_received=bad_json, wait_budget=wait_budget,
-                    label="Teslimat ses QC", model=model,
-                ):
-                    continue
-                logger.warning(f"⚠️ Ses QC {model} başarısız: {message[:120]}")
-                break
+    for round_no in range(len(QC_OVERLOAD_COOLDOWNS) + 1):
+        if round_no and not _overload_cooldown(
+            "Teslimat ses QC", round_no - 1, last_reason, last_error, wait_budget,
+        ):
+            break
+        for model_index, model in enumerate(QC_MODELS):
+            for attempt in range(1, max_tries + 1):
+                response_received = False
+                try:
+                    response = _generate_content_recorded(
+                        client, model=model, contents=parts, config=cfg,
+                        slug=slug, episode=episode, shot=shot,
+                        task_type="delivery_audio_review", is_fallback=model_index > 0,
+                        experiment_id=experiment_id,
+                    )
+                    response_received = True
+                    return _parse_response_json(response)
+                except QCApiExhausted:
+                    raise
+                except Exception as error:
+                    last_error = error
+                    message = str(error)
+                    bad_json = response_received
+                    last_reason = "parse" if bad_json else _classify_api_error(error)
+                    if last_reason == "billing":
+                        # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
+                        logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
+                        raise QCApiExhausted("billing", message) from error
+                    if _wait_for_qc_retry(
+                        error, attempt, max_tries,
+                        response_received=bad_json, wait_budget=wait_budget,
+                        label="Teslimat ses QC", model=model,
+                    ):
+                        continue
+                    logger.warning(f"⚠️ Ses QC {model} başarısız: {message[:120]}")
+                    break
     logger.warning(f"⚠️ Ses QC yapılamadı ({last_error})")
     raise QCApiExhausted(last_reason, str(last_error or "bilinmeyen hata"))
 
@@ -1596,37 +1645,42 @@ def _review_raw_native_audio(audio_path: Path, max_tries: int = 3, *,
         raise QCApiExhausted(_classify_api_error(error), str(error)) from error
     last_error: Exception | None = None
     last_reason = "server"
-    for model_index, model in enumerate(QC_MODELS):
-        for attempt in range(1, max_tries + 1):
-            response_received = False
-            try:
-                response = _generate_content_recorded(
-                    client, model=model, contents=parts, config=cfg,
-                    slug=slug, episode=episode, shot=shot,
-                    task_type="native_audio_review", is_fallback=model_index > 0,
-                    experiment_id=experiment_id,
-                )
-                response_received = True
-                return _parse_response_json(response)
-            except QCApiExhausted:
-                raise
-            except Exception as error:
-                last_error = error
-                message = str(error)
-                bad_json = response_received
-                last_reason = "parse" if bad_json else _classify_api_error(error)
-                if last_reason == "billing":
-                    # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
-                    logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
-                    raise QCApiExhausted("billing", message) from error
-                if _wait_for_qc_retry(
-                    error, attempt, max_tries,
-                    response_received=bad_json, wait_budget=wait_budget,
-                    label="Ham ses QC", model=model,
-                ):
-                    continue
-                logger.warning(f"⚠️ Ham ses QC {model} başarısız: {message[:120]}")
-                break
+    for round_no in range(len(QC_OVERLOAD_COOLDOWNS) + 1):
+        if round_no and not _overload_cooldown(
+            "Ham ses QC", round_no - 1, last_reason, last_error, wait_budget,
+        ):
+            break
+        for model_index, model in enumerate(QC_MODELS):
+            for attempt in range(1, max_tries + 1):
+                response_received = False
+                try:
+                    response = _generate_content_recorded(
+                        client, model=model, contents=parts, config=cfg,
+                        slug=slug, episode=episode, shot=shot,
+                        task_type="native_audio_review", is_fallback=model_index > 0,
+                        experiment_id=experiment_id,
+                    )
+                    response_received = True
+                    return _parse_response_json(response)
+                except QCApiExhausted:
+                    raise
+                except Exception as error:
+                    last_error = error
+                    message = str(error)
+                    bad_json = response_received
+                    last_reason = "parse" if bad_json else _classify_api_error(error)
+                    if last_reason == "billing":
+                        # Yedek model AYNI fatura hesabinda: o da 402 doner, denemek bosa.
+                        logger.error(f"⛔ QC {model}: Gemini on odemeli kredisi bitti (402)")
+                        raise QCApiExhausted("billing", message) from error
+                    if _wait_for_qc_retry(
+                        error, attempt, max_tries,
+                        response_received=bad_json, wait_budget=wait_budget,
+                        label="Ham ses QC", model=model,
+                    ):
+                        continue
+                    logger.warning(f"⚠️ Ham ses QC {model} başarısız: {message[:120]}")
+                    break
     logger.warning(f"⚠️ Ham ses QC yapılamadı ({last_error})")
     raise QCApiExhausted(last_reason, str(last_error or "bilinmeyen hata"))
 

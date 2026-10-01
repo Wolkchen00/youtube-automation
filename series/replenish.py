@@ -458,7 +458,90 @@ def validate_replenish_config(cfg: dict, engine: str | None = None) -> list[str]
         if (not isinstance(required, list) or not required
                 or any(not isinstance(cid, str) or not cid.strip() for cid in required)):
             errors.append("required_characters boş olmayan karakter id listesi olmalı")
+    if "lookalike_groups" in cfg:
+        errors.extend(_lookalike_config_errors(cfg.get("lookalike_groups")))
     return errors
+
+
+# ─── Benzer hayvan kapisi (opt-in: auto_replenish.lookalike_groups) ───────────
+# 1 Ekim 2026: baslik kapisi yalniz AYNI adi reddediyordu. Kuyrukta "GIANT
+# ALLIGATOR" ve "GIANT CAIMAN" vardi; ikisi de part06'daki dev timsahla izleyici
+# gozunde AYNI video. Grup tablosu seri dosyasinda durur; yazar promptu ve
+# dogrulayici AYNI fonksiyonu kullanir, yani ikisi ayrisamaz.
+
+def _lookalike_phrase(text: str) -> str:
+    return " ".join(re.sub(r"[^a-z]+", " ", str(text).lower()).split())
+
+
+def _lookalike_config_errors(table) -> list[str]:
+    if not isinstance(table, dict) or not table:
+        return ["lookalike_groups boş olmayan bir nesne olmalı"]
+    errors: list[str] = []
+    owner: dict[str, str] = {}
+    for group, phrases in table.items():
+        if not isinstance(phrases, list) or not phrases:
+            errors.append(f"lookalike_groups[{group!r}] boş olmayan liste olmalı")
+            continue
+        for phrase in phrases:
+            norm = _lookalike_phrase(phrase) if isinstance(phrase, str) else ""
+            if not norm:
+                errors.append(f"lookalike_groups[{group!r}] boş/harfsiz ifade içeriyor")
+            elif norm in owner and owner[norm] != group:
+                errors.append(
+                    f"lookalike_groups: {norm!r} iki grupta birden ({owner[norm]!r}, {group!r})"
+                )
+            else:
+                owner[norm] = str(group)
+    return errors
+
+
+def _lookalike_table(cfg: Mapping | None) -> list[tuple[str, str]]:
+    """(ifade, grup) çiftleri, uzun ifade önce: 'tiger shark' 'tiger'dan önce eşleşir."""
+    table = (cfg or {}).get("lookalike_groups")
+    if not isinstance(table, dict):
+        return []
+    pairs = [
+        (_lookalike_phrase(phrase), str(group))
+        for group, phrases in table.items() if isinstance(phrases, list)
+        for phrase in phrases if isinstance(phrase, str) and _lookalike_phrase(phrase)
+    ]
+    return sorted(pairs, key=lambda item: -len(item[0]))
+
+
+_GIANT_TITLE = re.compile(r"^\s*this\s+(?:giant\s+)?(.+?)\s+is\s+not\s+real\s*$", re.I)
+
+
+def creature_name(plan: Mapping | None = None, title: str = "") -> str:
+    """Planın hayvanı: object_card.name, yoksa 'This GIANT X Is NOT Real' başlığındaki X."""
+    card = (plan or {}).get("object_card") if isinstance(plan, Mapping) else None
+    name = str(card.get("name") or "").strip() if isinstance(card, Mapping) else ""
+    if name:
+        return name
+    match = _GIANT_TITLE.match(str(title or ""))
+    return match.group(1).strip() if match else str(title or "").strip()
+
+
+def lookalike_group(name: str, cfg: Mapping | None) -> str | None:
+    """Hayvan adının benzer-hayvan grubu; tabloda yoksa None (ad kapısı yeter)."""
+    text = f" {_lookalike_phrase(name)} "
+    for phrase, group in _lookalike_table(cfg):
+        if f" {phrase} " in text:
+            return group
+    return None
+
+
+def used_lookalike_groups(history: list[dict], cfg: Mapping | None) -> dict[str, tuple]:
+    """Geçmişte (yayınlanan + kuyruktaki + düşen tüm planlar) kullanılan gruplar:
+    grup -> (ilk part, hayvan adı). Başlık kapısı da tüm planları sayar."""
+    used: dict[str, tuple] = {}
+    if not _lookalike_table(cfg):
+        return used
+    for item in history or []:
+        name = item.get("creature") or creature_name(None, item.get("title", ""))
+        group = lookalike_group(name, cfg)
+        if group and group not in used:
+            used[group] = (item.get("n"), name)
+    return used
 
 
 def strict_plan_validation_enabled(cfg: dict) -> bool:
@@ -747,9 +830,11 @@ def _episode_history(slug: str) -> list[dict]:
             shots = plan.get("shots") or []
             if shots:
                 syn = str((shots[0] or {}).get("prompt") or "").strip()[:140]
-        out.append({"n": ep.get("number"), "title": str(ep.get("title") or "").strip(),
+        title = str(ep.get("title") or "").strip()
+        out.append({"n": ep.get("number"), "title": title,
                     "synopsis": syn, "seed_id": plan.get("seed_id"),
-                    "family": str(plan.get("family") or "").strip()})
+                    "family": str(plan.get("family") or "").strip(),
+                    "creature": creature_name(plan, title)})
     out.sort(key=lambda item: int(item["n"]) if isinstance(item.get("n"), int) else -1)
     return out
 
@@ -1499,6 +1584,18 @@ RULES:
             n = h.get("n")
             tag = f"{int(n):02d}" if isinstance(n, int) else "??"
             lines.append(f"{tag}. {h['title']} ,  {h['synopsis']}")
+    used_groups = used_lookalike_groups(history, cfg)
+    if used_groups:
+        table = cfg.get("lookalike_groups") or {}
+        lines.append(
+            "\nLOOK-ALIKE RULE: viewers read a near-identical animal as a REPEAT. These "
+            "animal groups are ALREADY USED; do NOT pick ANY animal from them, not even "
+            "another species of the same group:"
+        )
+        for group in sorted(used_groups):
+            lines.append(f"- {group}: " + ", ".join(str(p) for p in table.get(group, [])))
+        lines.append("Every new episode must also use a different look-alike group "
+                     "from the other new episodes.")
     if fix_errors:
         lines.append("\nYOUR PREVIOUS ATTEMPT WAS REJECTED. Fix ALL of these problems:")
         lines.extend(f"- {e}" for e in fix_errors)
@@ -1570,6 +1667,8 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
 
     errors: list[str] = []
     seen = set(existing_titles)
+    used_groups = used_lookalike_groups(history, cfg)
+    lookalike_on = bool(_lookalike_table(cfg))
     for i, plan in enumerate(episodes):
         want = start + i
         if not isinstance(plan, dict):
@@ -1586,6 +1685,18 @@ def _validate_batch(episodes, bible: Bible, start: int, batch: int,
             if nt in seen:
                 errors.append(f"part {want}: başlık tekrarı ('{title}') ,  özgün başlık gerekli")
             seen.add(nt)
+        if lookalike_on and isinstance(plan, dict):
+            creature = creature_name(plan, title)
+            group = lookalike_group(creature, cfg)
+            earlier = used_groups.get(group) if group else None
+            if earlier:
+                errors.append(
+                    f"part {want}: benzer hayvan tekrarı: {creature!r} {group!r} grubunda ve "
+                    f"o grup part {earlier[0]} ({earlier[1]!r}) ile kullanıldı. Pick a "
+                    f"completely different animal outside every used look-alike group."
+                )
+            elif group:
+                used_groups[group] = (want, creature)
 
         family = str(plan.get("family") or "").strip()
         if families:

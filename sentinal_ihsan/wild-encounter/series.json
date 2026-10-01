@@ -84,7 +84,228 @@
     ],
     "families_note": "2026-09-11: melez donemin aileleri (wrong-skin, wrong-head, predator-armour...) Gemini'ye melez yaratik yazdiriyordu (olculdu: tuylu yilan). Aileler artik hayvan turu; ardisik iki bolum ayni aileyi kullanamaz.",
     "framing_style": "one sentence for a handheld camera held low and close so the creature fills the whole frame from the first second, with shallow depth of field keeping the creature sharp while one dark out-of-focus production element stays at the bottom edge and the studio behind falls away",
-    "framing_style_note": "20 Eylul 2026 OLCULEREK degistirildi. Ihsan iki referans reel gosterdi (IG DcVUi14TlS7 ve DcYBduSzf-A) ve 'gercekcilik yok' dedi. Bicim SUCSUZ cikti: iki referans da 1080x1920 / 24 fps / 0 kesme / 0 kelime / -14,2 ve -14,5 LUFS, yani bizim olculerimizin AYNISI. Ayrisan tek sey OPTIK: referanslarda karenin yalniz %4-13'u keskin, bizim ep09/ep11/ep13'umuzde %32-42. Referanslar sig alan derinligi ve hareket bulanikligiyla cekilmis gibi duruyor, bizimkiler kare bastan basa keskin, yani sentetik. Sikistirma elendi: ep09 referanslarin bit hizina (1600k) indirilip yeniden olculdu, %42,6 cikti, degismedi. Kok sebep BELGE CELISKISIYDI: shot_plan ve replenish.py'deki kadraj cumlesi GENIS ACILIS istiyordu, doktrin kural 9 ve bible qc.notes ise YAKIN VE BUYUK istiyordu; motora giden iki belge kazaniyordu. Ikisi de yakin kadraja cevrildi. OLCUM ARACI: tools/kadraj_optik.py (esik kapi DEGIL, once olcum). GUNCELLEME ayni gun, UCUNCU referans (IG DcB774HzWs1) geldi ve iki imzayi da dogruladi: keskin %5,0/%4,6 (referans araligi artik %4,0-12,5, bizimki %32,4-42,4, ORTUSME YOK). Ikinci imza olculdu: uc referansin UCUNDE de kamera EKIBIN ARKASINDA, alt ucte buyuk koyu odak disi kafa siluetleri var. Alt ucteki koyu piksel orani referanslarda %69-86, bizde %5-53; alt/orta parlaklik orani referanslarda 0,36-0,83 (alt KOYU), ep09 ve ep13'te 1,43 ve 1,50 (alt AYDINLIK, yani isikli bos studyo zemini). shot_plan bu yuzden 'odak disi omuz' yerine 'alt kenari dolduran iki uc koyu kafa' diyor. UYARI: ikisi de Ihsan'in GORDUGU farki acikliyor, izlenmeyi DEGIL , ep09 iki olcude de en kotusu ama kanal rekoru. IHSAN KARARI ayni gun: yaratik kareyi TAMAMEN doldursun (DcYBduSzf-A kalibi), ve Seedance'e GECILMESIN, once bu kadrajin olcusu alinsin. Kareyi tamamen doldurmak bible qc.notes'taki 'THE PRODUCTION MUST BE VISIBLE ... reads as location footage is a FAIL' kapisiyla CELISEBILIRDI; referansin kendisi cozumu gosteriyor, DcYBduSzf-A'da timsah kafasi tum kareyi kapliyor ve sag altta bir ekipman kasasi duruyor. shot_plan bu yuzden 'alt kenarda TEK koyu yapim ogesi' ve 'arkada odak disi mavi perde' diyor: yaratik kareyi doldurur, kapi yine de beslenir. Kapiya dokunulmadi."
+    "framing_style_note": "20 Eylul 2026 OLCULEREK degistirildi. Ihsan iki referans reel gosterdi (IG DcVUi14TlS7 ve DcYBduSzf-A) ve 'gercekcilik yok' dedi. Bicim SUCSUZ cikti: iki referans da 1080x1920 / 24 fps / 0 kesme / 0 kelime / -14,2 ve -14,5 LUFS, yani bizim olculerimizin AYNISI. Ayrisan tek sey OPTIK: referanslarda karenin yalniz %4-13'u keskin, bizim ep09/ep11/ep13'umuzde %32-42. Referanslar sig alan derinligi ve hareket bulanikligiyla cekilmis gibi duruyor, bizimkiler kare bastan basa keskin, yani sentetik. Sikistirma elendi: ep09 referanslarin bit hizina (1600k) indirilip yeniden olculdu, %42,6 cikti, degismedi. Kok sebep BELGE CELISKISIYDI: shot_plan ve replenish.py'deki kadraj cumlesi GENIS ACILIS istiyordu, doktrin kural 9 ve bible qc.notes ise YAKIN VE BUYUK istiyordu; motora giden iki belge kazaniyordu. Ikisi de yakin kadraja cevrildi. OLCUM ARACI: tools/kadraj_optik.py (esik kapi DEGIL, once olcum). GUNCELLEME ayni gun, UCUNCU referans (IG DcB774HzWs1) geldi ve iki imzayi da dogruladi: keskin %5,0/%4,6 (referans araligi artik %4,0-12,5, bizimki %32,4-42,4, ORTUSME YOK). Ikinci imza olculdu: uc referansin UCUNDE de kamera EKIBIN ARKASINDA, alt ucte buyuk koyu odak disi kafa siluetleri var. Alt ucteki koyu piksel orani referanslarda %69-86, bizde %5-53; alt/orta parlaklik orani referanslarda 0,36-0,83 (alt KOYU), ep09 ve ep13'te 1,43 ve 1,50 (alt AYDINLIK, yani isikli bos studyo zemini). shot_plan bu yuzden 'odak disi omuz' yerine 'alt kenari dolduran iki uc koyu kafa' diyor. UYARI: ikisi de Ihsan'in GORDUGU farki acikliyor, izlenmeyi DEGIL , ep09 iki olcude de en kotusu ama kanal rekoru. IHSAN KARARI ayni gun: yaratik kareyi TAMAMEN doldursun (DcYBduSzf-A kalibi), ve Seedance'e GECILMESIN, once bu kadrajin olcusu alinsin. Kareyi tamamen doldurmak bible qc.notes'taki 'THE PRODUCTION MUST BE VISIBLE ... reads as location footage is a FAIL' kapisiyla CELISEBILIRDI; referansin kendisi cozumu gosteriyor, DcYBduSzf-A'da timsah kafasi tum kareyi kapliyor ve sag altta bir ekipman kasasi duruyor. shot_plan bu yuzden 'alt kenarda TEK koyu yapim ogesi' ve 'arkada odak disi mavi perde' diyor: yaratik kareyi doldurur, kapi yine de beslenir. Kapiya dokunulmadi.",
+    "lookalike_groups": {
+      "crocodilian": [
+        "crocodile",
+        "croc",
+        "alligator",
+        "caiman",
+        "gharial"
+      ],
+      "bear": [
+        "bear",
+        "polar bear",
+        "grizzly",
+        "grizzly bear",
+        "brown bear",
+        "black bear",
+        "kodiak"
+      ],
+      "lion": [
+        "lion",
+        "lioness",
+        "white lion"
+      ],
+      "tiger": [
+        "tiger",
+        "white tiger",
+        "bengal tiger",
+        "siberian tiger"
+      ],
+      "spotted big cat": [
+        "leopard",
+        "snow leopard",
+        "jaguar",
+        "cheetah",
+        "panther",
+        "black panther"
+      ],
+      "cougar": [
+        "cougar",
+        "puma",
+        "mountain lion"
+      ],
+      "snake": [
+        "snake",
+        "anaconda",
+        "python",
+        "boa",
+        "boa constrictor",
+        "cobra",
+        "king cobra",
+        "viper",
+        "pit viper",
+        "rattlesnake",
+        "mamba",
+        "black mamba",
+        "taipan",
+        "sea snake"
+      ],
+      "monitor lizard": [
+        "komodo",
+        "komodo dragon",
+        "monitor lizard",
+        "monitor"
+      ],
+      "shark": [
+        "shark",
+        "great white",
+        "great white shark",
+        "tiger shark",
+        "bull shark",
+        "mako",
+        "mako shark",
+        "hammerhead",
+        "hammerhead shark",
+        "megalodon",
+        "whale shark"
+      ],
+      "orca and dolphin": [
+        "orca",
+        "killer whale",
+        "dolphin",
+        "porpoise"
+      ],
+      "whale": [
+        "whale",
+        "sperm whale",
+        "humpback",
+        "humpback whale",
+        "blue whale",
+        "beluga",
+        "narwhal"
+      ],
+      "cephalopod": [
+        "octopus",
+        "squid",
+        "cuttlefish",
+        "kraken",
+        "nautilus"
+      ],
+      "great ape": [
+        "gorilla",
+        "silverback",
+        "chimpanzee",
+        "chimp",
+        "bonobo",
+        "orangutan"
+      ],
+      "monkey": [
+        "monkey",
+        "baboon",
+        "mandrill",
+        "macaque"
+      ],
+      "eagle and hawk": [
+        "eagle",
+        "bald eagle",
+        "golden eagle",
+        "harpy eagle",
+        "hawk",
+        "falcon",
+        "osprey"
+      ],
+      "vulture": [
+        "vulture",
+        "condor"
+      ],
+      "owl": [
+        "owl",
+        "barn owl",
+        "snowy owl",
+        "eagle owl",
+        "great horned owl"
+      ],
+      "ratite": [
+        "ostrich",
+        "emu",
+        "rhea",
+        "cassowary"
+      ],
+      "spider": [
+        "spider",
+        "tarantula",
+        "black widow",
+        "wolf spider",
+        "jumping spider",
+        "huntsman spider"
+      ],
+      "wasp and bee": [
+        "wasp",
+        "hornet",
+        "murder hornet",
+        "bee",
+        "bumblebee",
+        "yellowjacket"
+      ],
+      "beetle": [
+        "beetle",
+        "rhinoceros beetle",
+        "stag beetle",
+        "hercules beetle",
+        "scarab"
+      ],
+      "mantis": [
+        "mantis",
+        "praying mantis",
+        "orchid mantis"
+      ],
+      "hippo": [
+        "hippo",
+        "hippopotamus"
+      ],
+      "rhino": [
+        "rhino",
+        "rhinoceros",
+        "white rhino",
+        "black rhino"
+      ],
+      "wolf and dog": [
+        "wolf",
+        "gray wolf",
+        "grey wolf",
+        "coyote",
+        "jackal",
+        "dingo",
+        "wild dog",
+        "husky"
+      ],
+      "seal": [
+        "seal",
+        "sea lion",
+        "leopard seal",
+        "elephant seal"
+      ],
+      "turtle": [
+        "turtle",
+        "tortoise",
+        "snapping turtle",
+        "alligator snapping turtle",
+        "sea turtle",
+        "leatherback"
+      ],
+      "frog": [
+        "frog",
+        "toad",
+        "bullfrog"
+      ],
+      "eel": [
+        "eel",
+        "moray",
+        "moray eel"
+      ],
+      "crab": [
+        "crab",
+        "king crab",
+        "coconut crab"
+      ],
+      "elephant": [
+        "elephant",
+        "mammoth"
+      ]
+    },
+    "lookalike_groups_note": "1 Ekim 2026 Ihsan karari: izleyici birbirine cok benzeyen hayvanlari TEKRAR sayar. Kuyrukta GIANT ALLIGATOR (part20) ve GIANT CAIMAN (part25) vardi, ikisi de part06 dev timsahla ayni video; baslik kapisi yalniz ayni adi reddettigi icin gecmislerdi. Bir gruptan hayvan kullanildiysa (yayinlanan, kuyruktaki ya da dusen plan, baslik kapisi gibi) o gruptan bir daha hayvan secilmez. Yazar promptu ve dogrulayici ayni tabloyu okur (replenish.lookalike_group). Uzun ifade once eslesir: 'tiger shark' shark, 'sea lion' seal, 'alligator snapping turtle' turtle. Tabloda olmayan hayvan kendi adiyla tekildir. Grup ayrimi GORUNUSE gore: aslan ile kaplan ayri, leopar ile jaguar ayni."
   },
   "parts": {
     "5": {

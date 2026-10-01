@@ -20,7 +20,10 @@ sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1]))
 
 from series.bible import Bible
 from series.replenish import (
+    creature_name,
+    lookalike_group,
     strict_plan_validation_enabled,
+    used_lookalike_groups,
     validate_plan_against_config,
 )
 from series.shots import validate_plan
@@ -55,6 +58,36 @@ def _queued_plans(series_dir: pathlib.Path, meta: dict) -> list[pathlib.Path]:
     return [path for _, path in sorted(queued)]
 
 
+def _lookalike_warnings(series_dir: pathlib.Path, cfg: dict, plan: dict,
+                        number: int) -> list[str]:
+    """Kuyruktaki planın hayvanı, ÖNCEKİ bir planın benzer-hayvan grubunda mı.
+
+    Uyarıdır, hata değil: üretim kapısı bunu denetlemez (yazar kapısı denetler),
+    lint hatası ise "üretim reddeder" anlamına gelir."""
+    history = []
+    for path in (series_dir / "plans").glob("part*.json"):
+        match = PART_NAME.fullmatch(path.name)
+        if not match or int(match.group(1)) >= number:
+            continue
+        try:
+            earlier = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            continue
+        title = str((earlier.get("episode") or {}).get("title") or "")
+        history.append({"n": int(match.group(1)), "title": title,
+                        "creature": creature_name(earlier, title)})
+    history.sort(key=lambda item: item["n"])
+    used = used_lookalike_groups(history, cfg)
+    title = str((plan.get("episode") or {}).get("title") or "")
+    creature = creature_name(plan, title)
+    group = lookalike_group(creature, cfg)
+    if group and group in used:
+        first, name = used[group]
+        return [f"benzer hayvan tekrarı: {creature!r} {group!r} grubunda, "
+                f"o grup part {first} ({name!r}) ile kullanıldı"]
+    return []
+
+
 def lint_series(series: str, repo: pathlib.Path = REPO) -> int:
     meta_path = _series_path(series, repo)
     series_dir = meta_path.parent
@@ -78,6 +111,9 @@ def lint_series(series: str, repo: pathlib.Path = REPO) -> int:
             cfg = meta.get("auto_replenish") or {}
             if strict_plan_validation_enabled(cfg):
                 errors += validate_plan_against_config(plan, cfg, engine=bible.engine)
+            match = PART_NAME.fullmatch(path.name)
+            if match:
+                warnings += _lookalike_warnings(series_dir, cfg, plan, int(match.group(1)))
         except (OSError, json.JSONDecodeError) as error:
             errors = [f"plan okunamadı: {error}"]
             warnings = []
