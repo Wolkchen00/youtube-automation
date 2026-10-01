@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 2,
-  "next_part": 1,
+  "next_part": 2,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -185,7 +185,29 @@
       ]
     }
   },
-  "parts": {},
+  "parts": {
+    "1": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep01/ep01_music_titled_mastered.mp4",
+      "subtitle": "Many Easter Island Heads Have Hidden Bodies",
+      "stack_sha256": "16f8c3dd1937641945935caaba62753ef9eb859f13eb4133aa73048c7df4512d",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-01T20:22:51.302200+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.05,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    }
+  },
   "engagement": {
     "first_comment_pool": [
       "Did you already know this? Yes or no.",
