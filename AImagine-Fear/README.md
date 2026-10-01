@@ -20,6 +20,10 @@ FELAKETin icinde, kelime yok, felaket kamerayi yutar ve kararir. Havuz yok.
   `out/<slug>/ILK_KARE.txt` ile nano-banana-2'den uretir ve kamerayi sildirir
   (`tools/ilk_kare.py`). Yeni rota icin onay: `python tools/ilk_kare.py <slug> --onayla`.
 - Hazir video gunleri: `hazir/takvim.json`. Kaydi olan gun uretim yapilmaz.
+- **30 sn (iki parcali) video KURALI, Ihsan 1 Ekim:** korku basladiktan sonra ikinci
+  parca aydinlik ya da mutlu bir dunyayla ACILAMAZ (B'de firtina bulutundan sonra parlak
+  sonbahar acildi, Ihsan bunu kancanin kaybi saydi). Karanlik daha kotu bir karanliga
+  gider; sakin dunya yalniz en basta olur. Bu duzeltme yapilmadan 30 sn video uretilmez.
 - Neden ilk kare: metinden video bacaklari bozdu (bilekte kayis, kaynasmis tek bacak).
   Kanit ve ornekler: `reference/ref-DdvYhkUEbxn/`, `REELYZE-RAPOR.md` 1 Ekim bolumu.
 

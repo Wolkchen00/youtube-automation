@@ -416,3 +416,11 @@ Ihsan: iki ornek de yayinlansin (A 2 Ekim, B 3 Ekim), iki gun uretim olmasin, so
   cikti (kamera tabelanin arkasindaydi), rota "onden, sehir tarafindan" diye duzeltildi;
   Rushmore'un kamera silme gecisi bir kez bos dondu, artik ham gorselle devam ediliyor.
 - SIRA yalniz kapi rotalari: sicak 0-3-7-10, yedi renk ailesi, ayni felaket yan yana yok.
+
+## Ihsan notu: B'deki gerilim kirilmasi (1 Ekim)
+
+B'de birinci parca yaz firtinasi bulutuyla karariyor ve korku basliyor; ikinci parca
+parlak sonbaharla acilinca "tekrar bir mutluluk basliyor". Ihsan bunu izleyiciyi
+kaybettiren kesinti saydi. KURAL: iki parcali videoda gerilim tek yonlu tirmanir, ek
+yerinin iki yani da karanlik ve tehlikeli kalir, sakin dunya yalniz en basta olur.
+Bu duzeltme yapilmadan 30 sn video uretilmez (README kapi bolumu).
