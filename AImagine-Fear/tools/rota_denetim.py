@@ -15,6 +15,9 @@ Denetlenen kurallar:
   8. CAPTION kazanan kalibi tutuyor ve etiketleri tam
   9. TITLE en az bir satir ve "#shorts" ile bitiyor
  10. VOICE zaman damgalari DURATION icinde kaliyor
+ 11. KONSEPT: kapi rotasi FELAKET alani ve ILK KARE bolumu tasiyor, VOICE'u
+     kelimesiz (tirnak yok); onayli baslangic gorseli (ilk_kare/<slug>.jpg)
+     yoksa UYARI: uretim gorseli o gun kendisi uretir ama gozden gecmemis olur
 
 Kullanim:
     python tools/rota_denetim.py            # hepsi
@@ -38,6 +41,10 @@ GUNLUK = os.path.join(KOK, "tools", "gunluk.py")
 ALANLAR = ("SLUG", "DESTINATION", "LANDMARK", "DURATION", "NEON", "PALET",
            "TITLE_KEYWORD", "SEHIR_ISIGI", "LEGWEAR", "WEATHER", "SOURCE")
 BOLUMLER = ("OPENING STATE", "BEATS", "END STATE", "VOICE", "CAPTION", "TITLE")
+# KONSEPT: kapi (2026-10-01) ekleri. build.py ile ayni liste.
+KAPI_ALANLAR = build.KAPI_FIELDS
+KAPI_BOLUMLER = build.KAPI_SECTIONS
+ILK_KARE_KLASORU = os.path.join(KOK, "ilk_kare")
 
 SLUG_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
 ARALIK_RE = re.compile(r"^\[(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)\]")
@@ -169,10 +176,12 @@ def rota_denetle(yol, neon_sahipleri):
     alan = alanlari_oku(metin)
     bolum = bolumleri_oku(metin)
 
-    for a in ALANLAR:
+    konsept = alan.get("KONSEPT", "havuz") or "havuz"
+    kapi = konsept == "kapi"
+    for a in ALANLAR + (KAPI_ALANLAR if kapi else ()):
         if a not in alan or not alan[a]:
             hata(slug_dosya, "eksik alan: %s" % a)
-    for b in BOLUMLER:
+    for b in BOLUMLER + (KAPI_BOLUMLER if kapi else ()):
         if b not in bolum or not bolum[b]:
             hata(slug_dosya, "eksik bolum: %s" % b)
     if HATA and any(h.startswith(slug_dosya + " , eksik") for h in HATA):
@@ -211,6 +220,16 @@ def rota_denetle(yol, neon_sahipleri):
 
     beats_dogrula(slug, bolum["BEATS"], sure)
     voice_dogrula(slug, bolum["VOICE"], sure)
+
+    if kapi:
+        if '"' in bolum["VOICE"]:
+            hata(slug, "kapi konseptinde VOICE kelimesiz olmali, tirnakli replik var")
+        onayli = any(os.path.isfile(os.path.join(ILK_KARE_KLASORU, slug + u))
+                     for u in (".jpg", ".png"))
+        if not onayli and (SIRA is None or slug in SIRA):
+            UYARI.append("%s , onayli baslangic gorseli yok (ilk_kare/%s.jpg); uretim "
+                         "o gun gorseli kendisi uretecek, gozden gecmemis olacak"
+                         % (slug, slug))
 
     cap = bolum["CAPTION"]
     if not cap.lower().startswith("you're"):
@@ -327,7 +346,8 @@ def main():
 
     if UYARI:
         print("-" * 58)
-        print("UYARI: %d bulgu, SIRA DISI rotalarda. Uretimi etkilemez." % len(UYARI))
+        print("UYARI: %d bulgu. Uretimi durdurmaz (SIRA disi rota ya da onaysiz "
+              "baslangic gorseli)." % len(UYARI))
         for u in UYARI:
             print("  ~ %s" % u)
 

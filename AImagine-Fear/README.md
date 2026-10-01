@@ -6,6 +6,23 @@ AImagine icin yeniden kurulmus prompt sistemi.
 **Bir rota = bir prompt = bir video.** Klip zinciri yok, birlestirme yok. Kaynak kanal da
 oyle yapiyor: olculdu, `reference/TERSINE-MUHENDISLIK.md`.
 
+## 2026-10-01'den beri: KAPI konsepti
+
+Kanal tekrara dustu (son 16 basligin 10'u "into the cloud"). Ihsan bir referans reel
+secti, mevsim kapisi A/B'si uretildi, 15 sn'lik A secildi. Gunluk uretim artik bu
+konseptle: unlu yerin ustunden ILK KAREDEN dusus, bulut bir kapi, altinda ayni yer bir
+FELAKETin icinde, kelime yok, felaket kamerayi yutar ve kararir. Havuz yok.
+
+- Kanon: `canon/kapi/` (MASTER-BLOCK, NEGATIVES, ILK-KARE). Eski `canon/` havuz rotalari icin duruyor.
+- Rota: `KONSEPT: kapi` + `FELAKET:` alani + `## ILK KARE` bolumu. Rotalar
+  `tools/kapi_ekle.py` veri tablosundan uretilir: `python tools/kapi_ekle.py --hepsi`.
+- Baslangic gorseli: `ilk_kare/<slug>.jpg` gozle onayli kare. Yoksa gunluk kosu
+  `out/<slug>/ILK_KARE.txt` ile nano-banana-2'den uretir ve kamerayi sildirir
+  (`tools/ilk_kare.py`). Yeni rota icin onay: `python tools/ilk_kare.py <slug> --onayla`.
+- Hazir video gunleri: `hazir/takvim.json`. Kaydi olan gun uretim yapilmaz.
+- Neden ilk kare: metinden video bacaklari bozdu (bilekte kayis, kaynasmis tek bacak).
+  Kanit ve ornekler: `reference/ref-DdvYhkUEbxn/`, `REELYZE-RAPOR.md` 1 Ekim bolumu.
+
 ## Uretim
 
 ```powershell

@@ -45,6 +45,15 @@ ROUTE_SECTIONS = (
     "CAPTION",
     "TITLE",
 )
+# KONSEPT (2026-10-01): rota hangi kanonla kurulacagini kendisi soyler.
+#   havuz : canon/              eski kalip, sehir ustunden havuza dusus (alan yoksa bu)
+#   kapi  : canon/kapi/         ilk kareden baslar, bulut bir kapi, altinda FELAKET
+# kapi rotasi ayrica FELAKET alanini ve ILK KARE bolumunu ister.
+KONSEPTLER = ("havuz", "kapi")
+KAPI_FIELDS = ("FELAKET",)
+KAPI_SECTIONS = ("ILK KARE",)
+KAPI_TOKEN_FIELDS = {"<<FELAKET>>": "FELAKET"}
+
 PROMPT_SECTIONS = (
     *MASTER_SECTIONS,
     "OPENING STATE",
@@ -204,6 +213,7 @@ class BuildError(RuntimeError):
 class Canon:
     master: dict[str, str]
     negative: str
+    ilk_kare: str = ""
 
 
 @dataclass(frozen=True)
@@ -215,6 +225,10 @@ class Route:
     @property
     def slug(self) -> str:
         return self.fields["SLUG"]
+
+    @property
+    def konsept(self) -> str:
+        return self.fields.get("KONSEPT", "havuz")
 
 
 def read_utf8(path: Path) -> str:
@@ -286,9 +300,10 @@ def _issue(
     return f"{location} [{route}]{details}: {reason}"
 
 
-def load_canon(root: Path) -> Canon:
-    master_path = root / "canon" / "MASTER-BLOCK.md"
-    negative_path = root / "canon" / "NEGATIVES.md"
+def load_canon(root: Path, konsept: str = "havuz") -> Canon:
+    kanon_dir = root / "canon" if konsept == "havuz" else root / "canon" / konsept
+    master_path = kanon_dir / "MASTER-BLOCK.md"
+    negative_path = kanon_dir / "NEGATIVES.md"
     master_all = parse_sections(read_utf8(master_path), master_path)
     negative_all = parse_sections(read_utf8(negative_path), negative_path)
     messages: list[str] = []
@@ -307,12 +322,22 @@ def load_canon(root: Path) -> Canon:
                 "missing or empty section NEGATIVE",
             )
         )
+    ilk_kare = ""
+    if konsept == "kapi":
+        ilk_kare_path = kanon_dir / "ILK-KARE.md"
+        ilk_kare = parse_sections(read_utf8(ilk_kare_path), ilk_kare_path).get("ILK KARE", "")
+        if "<<ILK_KARE>>" not in ilk_kare:
+            messages.append(
+                _issue(root, ilk_kare_path, "kapi routes",
+                       "missing ILK KARE section or its <<ILK_KARE>> token")
+            )
     if messages:
         raise BuildError(messages)
 
     return Canon(
         master={name: master_all[name] for name in MASTER_SECTIONS},
         negative=negative_all["NEGATIVE"],
+        ilk_kare=ilk_kare,
     )
 
 
@@ -335,12 +360,20 @@ def load_route(path: Path, root: Path) -> Route:
             fields[key] = value.strip()
 
     route_name = fields.get("SLUG") or path.stem
-    for key in ROUTE_FIELDS:
+    konsept = fields.get("KONSEPT", "havuz").strip() or "havuz"
+    if konsept not in KONSEPTLER:
+        messages.append(
+            _issue(root, path, route_name,
+                   f"KONSEPT {konsept!r} gecersiz; kabul edilenler: {', '.join(KONSEPTLER)}")
+        )
+    gerekli_alanlar = ROUTE_FIELDS + (KAPI_FIELDS if konsept == "kapi" else ())
+    gerekli_bolumler = ROUTE_SECTIONS + (KAPI_SECTIONS if konsept == "kapi" else ())
+    for key in gerekli_alanlar:
         if not fields.get(key, "").strip():
             messages.append(
                 _issue(root, path, route_name, f"missing or empty required field {key}")
             )
-    for name in ROUTE_SECTIONS:
+    for name in gerekli_bolumler:
         if not sections.get(name, "").strip():
             messages.append(
                 _issue(root, path, route_name, f"missing or empty required section {name}")
@@ -358,10 +391,13 @@ def load_route(path: Path, root: Path) -> Route:
     if messages:
         raise BuildError(messages)
 
+    secilen_alanlar = {key: fields[key] for key in gerekli_alanlar}
+    if konsept != "havuz":
+        secilen_alanlar["KONSEPT"] = konsept
     return Route(
         path=path,
-        fields={key: fields[key] for key in ROUTE_FIELDS},
-        sections={name: sections[name] for name in ROUTE_SECTIONS},
+        fields=secilen_alanlar,
+        sections={name: sections[name] for name in gerekli_bolumler},
     )
 
 
@@ -381,10 +417,13 @@ def render_route(
     canon: Canon, route: Route, profil_adi: str = VARSAYILAN_PROFIL
 ) -> dict[str, str]:
     profil = PROFILLER[profil_adi]
+    token_alanlari = dict(TOKEN_FIELDS)
+    if route.konsept == "kapi":
+        token_alanlari.update(KAPI_TOKEN_FIELDS)
     prompt_parts: list[str] = []
     for name in MASTER_SECTIONS:
         body = canon.master[name]
-        for token, field in TOKEN_FIELDS.items():
+        for token, field in token_alanlari.items():
             body = body.replace(token, route.fields[field])
         for token, uret in TUREV_TOKENLAR.items():
             body = body.replace(token, uret(route.fields))
@@ -401,12 +440,18 @@ def render_route(
             "NEGATIVE\n" + canon.negative,
         )
     )
-    return {
+    outputs = {
         "PROMPT.txt": "\n\n".join(prompt_parts) + "\n",
         "CAPTION.txt": route.sections["CAPTION"] + "\n",
         "TITLE.txt": route.sections["TITLE"] + "\n",
         "VOICE.txt": route.sections["VOICE"] + "\n",
     }
+    if route.konsept == "kapi":
+        ilk_kare = canon.ilk_kare.replace("<<ILK_KARE>>", route.sections["ILK KARE"])
+        for token, field in token_alanlari.items():
+            ilk_kare = ilk_kare.replace(token, route.fields[field])
+        outputs["ILK_KARE.txt"] = ilk_kare + "\n"
+    return outputs
 
 
 def _parse_duration(route: Route, root: Path) -> tuple[Decimal | None, list[str]]:
@@ -545,6 +590,21 @@ def _validate_voice(route: Route, root: Path, duration: Decimal) -> list[str]:
                 )
             )
     return messages
+
+
+def _validate_kapi_voice(route: Route, root: Path) -> list[str]:
+    """Kapi konseptinde rider KONUSMAZ (Ihsan 2026-10-01: kelime yok, nefes ve ciglik).
+
+    Tirnak icindeki her sey modele replik diye gider; o yuzden VOICE'ta tirnak yasak."""
+    if route.konsept != "kapi":
+        return []
+    return [
+        _issue(root, route.path, route.slug,
+               "kapi konseptinde VOICE kelimesiz olmali, tirnakli replik var",
+               "VOICE", line_number)
+        for line_number, line in enumerate(route.sections["VOICE"].splitlines(), start=1)
+        if '"' in line or "\u201c" in line or "\u201d" in line
+    ]
 
 
 def _section_for_prompt_line(line: str, current: str) -> str:
@@ -837,6 +897,7 @@ def validate_route(
     if duration is not None:
         messages.extend(_validate_beats(route, root, duration))
         messages.extend(_validate_voice(route, root, duration))
+    messages.extend(_validate_kapi_voice(route, root))
     messages.extend(_validate_tokens(route, root, outputs))
     messages.extend(_validate_banned_phrases(route, root, outputs))
     messages.extend(_validate_triggers(route, root, outputs))
@@ -867,7 +928,7 @@ def build_project(
     profil_adi: str = VARSAYILAN_PROFIL,
 ) -> list[Route]:
     root = Path(root).resolve()
-    canon = load_canon(root)
+    canons = {"havuz": load_canon(root)}
     messages: list[str] = []
     routes: list[Route] = []
     route_paths = discover_route_paths(root)
@@ -906,6 +967,9 @@ def build_project(
         raise BuildError(messages)
 
     for route in routes:
+        if route.konsept not in canons:
+            canons[route.konsept] = load_canon(root, route.konsept)
+        canon = canons[route.konsept]
         outputs = render_route(canon, route, profil_adi)
         output_dir = root / "out" / route.slug
         for filename, text in outputs.items():

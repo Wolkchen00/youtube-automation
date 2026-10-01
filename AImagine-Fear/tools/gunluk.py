@@ -100,7 +100,40 @@ KREDI_15SN = {
 # alinarak duzeltildi. Sirasi degisen yalniz bu ikisi ve aralarinda kayan
 # zermatt ile seattle; hangi rotanin URETILECEGI degismedi, cunku sirdaki()
 # kullanilmamis ILK slug'i dondurur ve o hala kualalumpur.
+# 2026-10-01 Ihsan karari: KAPI konsepti. Kanal tekrara dusmustu (son 16 basligin
+# 10'u "into the cloud"); mevsim kapisi A/B'sinde 15 sn'lik A secildi ve "farkli
+# felaketler, farkli hava sartlari" ile devam istendi. SIRA artik YALNIZ kapi
+# rotalari: eski havuz rotalari dosya olarak duruyor ama uretime girmiyor
+# (rota_denetim.py onlari UYARI olarak gosterir). 2-3 Ekim hazir video gunu
+# (hazir/takvim.json). 4 Ekim de takvimde: giza 1 Ekim'de bu hatla uctan uca
+# uretilip gozle kontrol edildi, hazir video olarak cikar. Ilk gercek uretim
+# 5 Ekim newyork.
+#
+# Dizilis uc kurala uyuyor (testleri: test_palet_defter.py):
+#   - sicak rotalar 0, 3, 7, 10'da: dairesel araliklar 3-4-3-4
+#   - yan yana iki rota ayni renk ailesini almiyor (SEHIR_ISIGI burada FELAKET
+#     dunyasinin baskin renk ailesi), yedi aile var
+#   - ayni tur felaket arka arkaya gelmiyor (hortum 5 ve 11, sel 7 ve 13)
+# Stok 14 gun, 17 Ekim'de biter; bitmeden tools/kapi_ekle.py'ye yeni rota yaz
+# ve baslangic gorselini onayla (python tools/ilk_kare.py <slug> --onayla).
 SIRA = [
+    "giza-piramit-kum-firtinasi",    # sicak, kum firtinasi
+    "newyork-ozgurluk-kasirga",      # neon, kasirga
+    "roma-kolezyum-dolu",            # neon, dolu
+    "losangeles-hollywood-yangin",   # sicak, orman yangini
+    "sydney-opera-tsunami",          # neon, tsunami
+    "rushmore-hortum",               # neon, hortum
+    "napoli-vezuv-yanardag",         # neon, yanardag
+    "grandcanyon-yildirim",          # sicak, yildirim firtinasi
+    "moskova-vasil-buz-firtinasi",   # neon, buz firtinasi
+    "machupicchu-heyelan",           # neon, heyelan
+    "cinseddi-deprem",               # sicak, deprem
+    "barselona-sagrada-hortum",      # neon, deniz hortumu
+    "stonehenge-meteor",             # neon, meteor yagmuru
+    "petra-hazine-sel",              # neon, sel
+]
+
+ESKI_HAVUZ_SIRASI = [
     "singapur-marina-turkuaz-bulut",    # neon, bulut
     "kualalumpur-petronas-sari-bulut",  # neon, bulut
     "londra-shard-amber-bulut",         # sicak, bulut
@@ -182,6 +215,26 @@ def rota_paleti(slug: str, kok: Path | None = None) -> str:
     return (rota.fields.get("PALET") or "").strip()
 
 
+def rota_konsepti(slug: str, kok: Path | None = None) -> str:
+    """Rotanin KONSEPT'i: 'havuz' (alan yoksa) ya da 'kapi'. build.py dogruluyor.
+
+    Dosya yoksa 'havuz': main() dosyanin varligini rota_suresi ile zaten
+    kanitliyor; burada ikinci kez durmak yalniz o kontrolu taklit eden testleri
+    kirardi."""
+    proje = kok or KOK
+    yol = proje / "routes" / (slug + ".md")
+    if not yol.exists():
+        return "havuz"
+
+    import build
+
+    try:
+        rota = build.load_route(yol, proje)
+    except build.BuildError as hata:
+        raise SureHatasi("rota ayristirilamadi (%s): %s" % (slug, hata)) from hata
+    return rota.konsept
+
+
 def log(msg: str) -> None:
     print("[%s] %s" % (datetime.now(LA).strftime("%H:%M:%S"), msg), flush=True)
 
@@ -252,8 +305,13 @@ def sha256_dosya(path: Path) -> str:
     return ozet.hexdigest()
 
 
-def uretim_komutu(slug: str, sure: int, profil: dict) -> list[str]:
-    """Secili profil ile Kie sarmalayicisinin tam argv'sini kur."""
+def uretim_komutu(
+    slug: str, sure: int, profil: dict, ilk_kare_url: str | None = None
+) -> list[str]:
+    """Secili profil ile Kie sarmalayicisinin tam argv'sini kur.
+
+    ilk_kare_url verilirse (KAPI konsepti) video o gorselden baslar."""
+    ek = ["--first-frame-url", ilk_kare_url] if ilk_kare_url else []
     return [
         PY,
         "tools/kie_uret.py",
@@ -268,7 +326,7 @@ def uretim_komutu(slug: str, sure: int, profil: dict) -> list[str]:
         "gunluk",
         "--max-wait",
         "1500",
-    ]
+    ] + ek
 
 
 def _fps(r_frame_rate: object) -> float | None:
@@ -820,6 +878,8 @@ def defter_alanlari(slug: str, uretim_kaydi: dict | None) -> dict:
     return {
         "slug": slug,
         "palet": kayit.get("palet"),
+        # Eski kayitlarda alan yok; onlar havuz konseptiydi.
+        "konsept": kayit.get("konsept", "havuz"),
         "rota_suresi": kayit.get("beklenen_sure"),
         "cozunurluk": kayit.get("istenen_profil"),
         "fps": olculen.get("fps"),
@@ -969,8 +1029,9 @@ def main(argv: list[str] | None = None) -> int:
 
     try:
         palet = rota_paleti(slug)
+        konsept = rota_konsepti(slug)
     except SureHatasi as hata:
-        log("DUR: rota paleti okunamadi: %s" % hata)
+        log("DUR: rota paleti/konsepti okunamadi: %s" % hata)
         return 1
 
     anahtar = matris_anahtari(MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
@@ -982,6 +1043,7 @@ def main(argv: list[str] | None = None) -> int:
         print("sirdaki slug : %s" % slug)
         print("sure         : %s" % sure)
         print("palet        : %s" % palet)
+        print("konsept      : %s" % konsept)
         print(
             "profil       : %s (%dx%d, %s fps)"
             % (args.profil, profil["genislik"], profil["yukseklik"], profil["beklenen_fps"])
@@ -993,6 +1055,7 @@ def main(argv: list[str] | None = None) -> int:
     log("sirdaki sehir : %s" % slug)
     log("sure          : %s" % sure)
     log("palet         : %s" % palet)
+    log("konsept       : %s" % konsept)
     log("profil        : %s" % args.profil)
     log("matris        : %s" % ham_durum)
     if anahtar not in YETENEK_MATRISI:
@@ -1054,6 +1117,10 @@ def main(argv: list[str] | None = None) -> int:
         log("DUR: kredi okunamadi.")
         return 1
     gerekli = gerekli_kredi(profil["cozunurluk"], sure)
+    if konsept == "kapi":
+        from tools import ilk_kare as ilk_kare_modulu
+
+        gerekli += ilk_kare_modulu.KREDI
     if bakiye < gerekli:
         log(
             "DUR: kredi %s < bu isin gerektirdigi ~%d (%s, %d sn). Kie otomatik "
@@ -1063,8 +1130,18 @@ def main(argv: list[str] | None = None) -> int:
         kredi_bekliyor_yaz(bakiye, gerekli, "on kontrol")
         return 1
 
+    ilk_kare_url = None
+    if konsept == "kapi":
+        # Baslangic gorseli Seedance'ten ONCE: gorsel yoksa video da yok, kredi yanmaz.
+        try:
+            ilk_kare_url, ilk_kare_kaynagi = ilk_kare_modulu.hazirla(slug)
+        except Exception as hata:
+            log("DUR: baslangic gorseli hazirlanamadi: %s" % hata)
+            return 1
+        log("ilk kare      : %s (%s)" % (ilk_kare_url, ilk_kare_kaynagi))
+
     log("uretim basliyor: %s, %d sn, %s" % (MODEL, sure, profil["cozunurluk"]))
-    sonuc = kosa(uretim_komutu(slug, sure, profil), KOK)
+    sonuc = kosa(uretim_komutu(slug, sure, profil, ilk_kare_url), KOK)
     print(sonuc.stdout[-2500:])
     if sonuc.returncode != 0:
         log("DUR: uretim basarisiz:\n" + (sonuc.stderr or "")[-1200:])
@@ -1101,6 +1178,7 @@ def main(argv: list[str] | None = None) -> int:
         "profil_hash": profil_hash(),
         "slug": slug,
         "palet": palet,
+        "konsept": konsept,
         "beklenen_sure": sure,
         "olculen": olculen,
         "ses": ses_olcumleri(master),

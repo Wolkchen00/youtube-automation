@@ -11,6 +11,11 @@ name: Fear Slide Daily
 # duraklatildi (commit 2ed94dc), aimagine altinda baska AKTIF seri yok, bu kosu
 # kanalin tek uretim hatti.
 #
+# 2026-10-01 Ihsan karari: KAPI konsepti. Kanal tekrara dusmustu. Gunluk uretim
+# artik ilk kareden baslayan "bulut kapisi -> felaket" videosu (canon/kapi/,
+# tools/ilk_kare.py, rotalar tools/kapi_ekle.py). 2 ve 3 Ekim hazir video gunu:
+# hazir/takvim.json'da kaydi olan gun gunluk.py URETMEZ, o videoyu yayinlar.
+#
 # Saat duzeni: ana kosu 11:13 UTC -> event-horizon
 # 16:30 -> unnatural-lab 18:30 -> flashpoints 20:30.
 # kie-uretim concurrency grubu hatlari serilestirir (Kie kredi guvenligi).

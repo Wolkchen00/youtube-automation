@@ -377,7 +377,8 @@ Tam analiz ve tersine prompt: `reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md`
 Ornek: Fuji Dagi (dort mevsimin en taninan yeri). Promptlar
 `reference/ref-DdvYhkUEbxn/ornek/` (yaz_promptlar.py tek kaynaktan uretir).
 Maliyet (gunluk.py KREDI_15SN, olculmus): 15 sn 720p 615 kredi, 1080p 1530 kredi.
-Gunluk yayin 1080p; 30 sn format gunluk maliyeti IKIYE katlar.
+DUZELTME (ayni gun): gunluk yayin 720p (profil.py VARSAYILAN_PROFIL), yani 15 sn
+~615 kredi; profil_onay.json'daki 1080p eski bir kanarya kaydi. 30 sn format maliyeti ikiye katlar.
 
 ## Ornek uretimi (1 Ekim, ayni gun)
 
@@ -401,3 +402,17 @@ Ciktilar: `out/ornek-mevsim-fuji/SECIM/` (A_15sn, B_26sn, referans). Yayinlanmad
    (nefes, no_speech 0,64).
 
 Harcama (bakiye 10942 -> 7779): **3163 kredi**, 5 video (5 x 615) + 3 gorsel.
+
+## Otomasyona gecis (1 Ekim aksami)
+
+Ihsan: iki ornek de yayinlansin (A 2 Ekim, B 3 Ekim), iki gun uretim olmasin, sonra
+15 sn'lik A konseptiyle "farkli felaketler, farkli hava" devam.
+
+- Takvim: `hazir/takvim.json`, gunluk.py kaydi olan gun uretmez (commit fee4d5e).
+- KAPI konsepti: `canon/kapi/`, `KONSEPT: kapi` rotalari, `tools/kapi_ekle.py` (14 rota,
+  4-17 Ekim), `tools/ilk_kare.py` (onayli kare `ilk_kare/<slug>.jpg`, yoksa
+  nano-banana-2 + kamera silme), gunluk.py ilk kare URL'sini `--first-frame-url` ile verir.
+- 14 baslangic gorseli gozle kontrol edildi: Hollywood tabelasi ilk uretimde AYNALI
+  cikti (kamera tabelanin arkasindaydi), rota "onden, sehir tarafindan" diye duzeltildi;
+  Rushmore'un kamera silme gecisi bir kez bos dondu, artik ham gorselle devam ediliyor.
+- SIRA yalniz kapi rotalari: sicak 0-3-7-10, yedi renk ailesi, ayni felaket yan yana yok.

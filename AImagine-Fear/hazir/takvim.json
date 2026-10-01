@@ -1,5 +1,5 @@
 {
-  "_aciklama": "Tarihi gelen gun gunluk.py URETIM YAPMAZ, o gunun hazir videosunu yayinlar. Tarih Los Angeles saatine gore. 2026-10-01 Ihsan karari: mevsim kapisi A/B testi, A (15 sn) 2 Ekim, B (26 sn) 3 Ekim; 4 Ekim'den itibaren otomasyon kapi konseptiyle uretir. Kaynak analiz: reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md",
+  "_aciklama": "Tarihi gelen gun gunluk.py URETIM YAPMAZ, o gunun hazir videosunu yayinlar. Tarih Los Angeles saatine gore. 2026-10-01 Ihsan karari: mevsim kapisi A/B testi, A (15 sn) 2 Ekim, B (26 sn) 3 Ekim; 4 Ekim'den itibaren otomasyon kapi konseptiyle uretir. Kaynak analiz: reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md 2026-10-04: KAPI konseptinin ilk videosu (giza), 1 Ekim'de gunluk.py --yayinlama ile uctan uca uretilip gozle kontrol edildi; slug defterde giza olarak kalir, SIRA 5 Ekim'de newyork ile devam eder.",
   "gunler": [
     {
       "tarih": "2026-10-02",
@@ -14,6 +14,13 @@
       "video": "hazir/mevsim-fuji-b26.mp4",
       "caption": "hazir/mevsim-fuji-b26.caption.txt",
       "baslik": "Mount Fuji, four seasons drop #shorts"
+    },
+    {
+      "tarih": "2026-10-04",
+      "slug": "giza-piramit-kum-firtinasi",
+      "video": "hazir/giza-piramit-kum-firtinasi.mp4",
+      "caption": "hazir/giza-piramit-kum-firtinasi.caption.txt",
+      "baslik": "Pyramids of Giza sandstorm drop #shorts"
     }
   ]
 }
