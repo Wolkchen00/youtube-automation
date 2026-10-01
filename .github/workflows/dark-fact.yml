@@ -1,0 +1,170 @@
+name: Dark Fact Daily
+
+# 'DARK FACT' gunluk seridi (shadowedhistory kanali, @shad0wedhistory357).
+# Dayanak: shadowedhistory/DARK-FACT.md v1.0. Ihsan karari 2026-10-01: still-home
+# (gelecek sehirleri) durduruldu, kanal tarihe donuyor. Her bolum TEK bir sasirtici
+# ama DOGRU tarih bilgisi; bilgi ilk kareden son kareye ekranda yazili, anlatim yok.
+#
+# Iki surum 2 hafta gun asiri sirayla cikar (Ihsan: gunde 1 video):
+#   tek gun (yilin gunu tek)  -> dark-fact-a : tek kesintisiz sahne, 10 sn
+#   cift gun                  -> dark-fact-b : 4 sahne x 2,5 sn, 3 sert kesme
+# Elle tetiklerken 'seri' girdisiyle secim ezilebilir. Gunde-1 kanal kilidi iki
+# seriyi de korur (ayni upload profili), yani ayni gun ikinci video cikmaz.
+
+on:
+  schedule:
+    - cron: '43 11 * * *'   # still-home ile ayni saat. Hedef yayin: 15:30 UTC / 08:30 California (PDT); olculen gecikme: 1.9-3.0 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
+  workflow_dispatch:
+    inputs:
+      seri:
+        description: 'Bos = gun asiri otomatik secim; ya da dark-fact-a / dark-fact-b'
+        required: false
+        default: ''
+
+concurrency:
+  group: kie-uretim
+  queue: max
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  produce-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install FFmpeg
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg fonts-dejavu-core
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env
+        run: |
+          cat > .env << 'EOF'
+          KIE_AI_API_KEY=${{ secrets.KIE_AI_API_KEY }}
+          IMGBB_API_KEY=${{ secrets.IMGBB_API_KEY }}
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_QC=${{ secrets.GEMINI_API_KEY_QC }}
+          UPLOAD_POST_API_KEY=${{ secrets.UPLOAD_POST_API_KEY }}
+          YOUTUBE_API_KEY=${{ secrets.YOUTUBE_API_KEY }}
+          TELEGRAM_BOT_TOKEN=${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID=${{ secrets.TELEGRAM_CHAT_ID }}
+          # 1 Ekim 2026: 700. A = 1 Omni 10 sn (200) + muzik (80) + 2 regen
+          # (400) = 680. B = 4 Omni 4 sn (320) + muzik (80) + 3 regen (240)
+          # = 640; tavan dolunca regen kendiliginden durur. Baslangic kapisi
+          # 1,5 x tavan = 1050 kredi ister (still-home 1350 isterdi).
+          EPISODE_CREDIT_CAP=700
+          MONTHLY_CREDIT_CAP=60000
+          EOF
+
+      - name: Prepare dirs
+        run: mkdir -p logs output
+
+      - name: Seriyi sec (gun asiri A/B)
+        shell: bash
+        run: |
+          SECIM="${{ github.event.inputs.seri }}"
+          if [ -z "$SECIM" ]; then
+            GUN=$((10#$(date -u +%j)))
+            if [ $((GUN % 2)) -eq 1 ]; then SECIM=dark-fact-a; else SECIM=dark-fact-b; fi
+          fi
+          case "$SECIM" in
+            dark-fact-a|dark-fact-b) ;;
+            *) echo "Gecersiz seri: $SECIM"; exit 1 ;;
+          esac
+          echo "SERI=$SECIM" >> "$GITHUB_ENV"
+          echo "Bugunun serisi: $SECIM"
+
+      - name: Kosu baslangicini damgala
+        # last_run.json'un outcome'u BU KOSUDA dogrulanmis YouTube yayinina
+        # bakar. Damga olmadan dunku bir yayin kaydi bugunku sessizligi orter.
+        run: echo "KOSU_BASLANGIC=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> "$GITHUB_ENV"
+
+      - name: Onay kuyrugunu isle (Telegram)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+        # shell: bash = pipefail. Bu satir olmadan `| tee`
+        # python'un exit kodunu yutuyor ve hata GORUNMUYOR.
+        shell: bash
+        run: python -X utf8 -m series.approver --series "$SERI" 2>&1 | tee logs/dark_fact_approve.log
+
+      - name: Performans geri beslemesini topla
+        continue-on-error: true
+        # Iki surumun olcumu HER GUN toplanir; karsilastirma ikisine de bakar.
+        run: |
+          python -X utf8 -m series.performans --series dark-fact-a || echo "performans dark-fact-a atlandi"
+          python -X utf8 -m series.performans --series dark-fact-b
+
+      - name: Oto-ikmal (kuyruk azaldiysa Gemini yeni bolum planlari yazar, kredi harcamaz)
+        # continue-on-error: ikmal patlasa bile kuyrukta gecerli bolum
+        # varsa o gunun yayini iptal olmasin; adim yine KIRMIZI gorunur.
+        shell: bash
+        continue-on-error: true
+        run: python -X utf8 -m series.replenish --series "$SERI" 2>&1 | tee logs/dark_fact_replenish.log
+
+      - name: Produce + publish (Dark Fact siradaki bolum)
+        id: produce
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # shell: bash = pipefail; tee'nin 0'i python'un exit kodunu maskeliyordu (ROCK 3).
+        shell: bash
+        run: python -X utf8 -m series.series_runner --series "$SERI" 2>&1 | tee logs/dark_fact_run.log
+
+      - name: Uretim sonucunu kaydet
+        if: always()
+        run: |
+          # Sonuc adimin cikis kodundan DEGIL, gercek YouTube yayin
+          # kanitindan turetilir. Eski hali sifir video ureten kosuya
+          # 'success' yaziyordu (event-horizon, 2026-09-03T19:26 , o dersin mirasi).
+          python -X utf8 scripts/kosu_sonucu_yaz.py \
+            --out "shadowedhistory/$SERI/last_run.json" \
+            --run-id "${{ github.run_id }}" \
+            --raw-outcome "${{ steps.produce.outcome }}" \
+            --since "$KOSU_BASLANGIC" \
+            --published-json "shadowedhistory/$SERI/published.json"
+
+      - name: Persist series state
+        if: always()
+        run: |
+          bash scripts/persist_state.sh \
+            "chore: dark-fact durumunu ilerlet [skip ci]" \
+            sentinal_ihsan/ aimagine/ galactic_experience/ shadowedhistory/ \
+            credits_ledger.json "shadowedhistory/$SERI/last_run.json"
+
+      - name: Upload logs artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dark-fact-logs-${{ github.run_number }}
+          path: logs/
+          retention-days: 7
+
+      - name: Basarisizlikta Telegram'a haber ver
+        if: failure()
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        shell: bash
+        run: |
+          if [ -n "$TELEGRAM_BOT_TOKEN" ] && [ -n "$TELEGRAM_CHAT_ID" ]; then
+            curl --silent --max-time 20 --request POST \
+              "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+              --data-urlencode "text=🚨 Dark Fact (Shadowed History, $SERI) workflow basarisiz , bu kanala bugun video CIKMAYABILIR: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              >/dev/null 2>&1 || true
+          fi

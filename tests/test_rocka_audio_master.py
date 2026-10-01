@@ -156,6 +156,12 @@ class InstalledBibleOptInTests(unittest.TestCase):
             # referans -15,0 LUFS ve -0,3 dBTP, yani kirpma sinirinda: gurlugu
             # aliyoruz, kirpmayi almiyoruz. Bkz. REELYZE-RAPOR.md EK 7.
             (REPO_ROOT / "galactic_experience" / "flythrough" / "bible.json", -14),
+            # dark-fact-a ve dark-fact-b 1 Ekim 2026'da still-home'un yerine
+            # kuruldu (shadowedhistory/DARK-FACT.md). Iki surum gun asiri cikar ve
+            # tek degisken kesme sayisidir; ikisi de -14 LUFS tasimak ZORUNDA,
+            # yoksa karsilastirma sesi olcer, formati degil.
+            (REPO_ROOT / "shadowedhistory" / "dark-fact-a" / "bible.json", -14),
+            (REPO_ROOT / "shadowedhistory" / "dark-fact-b" / "bible.json", -14),
         ]
         self.assertCountEqual(found, expected)
 

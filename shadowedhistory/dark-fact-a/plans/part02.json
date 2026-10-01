@@ -1,0 +1,27 @@
+{
+ "episode": {
+  "number": 2,
+  "title": "In 1814 A Wave Of Beer Flooded London"
+ },
+ "synopsis": "In 1814 a giant vat burst at a London brewery and a wave of beer flooded the surrounding streets.",
+ "narration": "",
+ "family": "tuhaf felaketler",
+ "seed_id": 11,
+ "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+ "title_card": {
+  "title": "In 1814, beer flooded London.",
+  "subtitle": "A giant brewery vat burst into the streets."
+ },
+ "caption": "In 1814 a wave of beer flooded the streets of London.\n\nOn 17 October 1814 a huge vat at a brewery near Tottenham Court Road burst, and more than a million litres of beer poured out. The wave smashed through walls and flooded the cellars of nearby homes in the St Giles area. Eight people lost their lives.\n\nVisuals created with AI.\n\nHad you ever heard of the London Beer Flood?",
+ "hashtags": "#history #historyfacts #london #beerflood #1814",
+ "first_comment": "Would you have believed this without proof?",
+ "hook_shot": 1,
+ "shots": [
+  {
+   "n": 1,
+   "duration": "10",
+   "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nA narrow cobbled street in London at night in 1814, lined with old brick houses, warm oil lamps on iron brackets lighting the wet stones. From the first frame a surging wave of dark brown foaming beer rushes down the street toward the camera, carrying broken wooden barrel staves and planks and splashing up against the walls and doorways. At the end of the street the huge wooden vat of a brewery stands split open, beer pouring out of it in a torrent. Only a few distant figures watch from an upper window, seen from behind. The camera slowly pulls back as the wave advances. Grainy archival 16mm film look, lamplight on wet cobbles, deep shadows.",
+   "seed": null
+  }
+ ]
+}

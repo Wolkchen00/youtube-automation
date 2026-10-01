@@ -1,0 +1,45 @@
+{
+ "episode": {
+  "number": 1,
+  "title": "Many Easter Island Heads Have Hidden Bodies"
+ },
+ "synopsis": "Many of the giant stone heads on Easter Island have full bodies buried beneath the ground.",
+ "narration": "",
+ "family": "kayip harikalar",
+ "seed_id": 8,
+ "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+ "title_card": {
+  "title": "Many Easter Island heads have bodies.",
+  "subtitle": "Their stone torsos are buried underground."
+ },
+ "caption": "Many of the giant stone heads on Easter Island have full bodies buried underground.\n\nThe statues, called moai, were carved by the Rapa Nui people centuries ago. Over time soil and debris buried many of them up to their shoulders, so only the heads showed. Excavations have revealed carved torsos reaching deep into the ground.\n\nVisuals created with AI.\n\nDid you think they were only heads?",
+ "hashtags": "#history #historyfacts #easterisland #moai #archaeology",
+ "first_comment": "Did you already know this? Yes or no.",
+ "hook_shot": 1,
+ "shots": [
+  {
+   "n": 1,
+   "duration": "4",
+   "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nA giant moai stone head on a grassy slope of Easter Island under an overcast sky. From the first frame the head fills most of the frame, its long nose and heavy brow sharply lit by low late-afternoon sun. Wind moves the long grass around it. Slow push-in.",
+   "seed": null
+  },
+  {
+   "n": 2,
+   "duration": "4",
+   "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nA deep excavation trench dug beside the moai, revealing its carved stone torso and long arms, the hands resting on its belly, buried deep in brown earth. Loose soil trickles down the trench wall. Slow downward glide along the buried body.",
+   "seed": null
+  },
+  {
+   "n": 3,
+   "duration": "4",
+   "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nA wide view of the grassy hillside with many moai heads poking out of the ground, and one fully excavated statue standing in its trench, twice the height of the tiny distant archaeologists seen from behind beside it. Slow lateral glide.",
+   "seed": null
+  },
+  {
+   "n": 4,
+   "duration": "4",
+   "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nLow angle looking up at the fully excavated moai standing in its trench, head and whole torso revealed against a dramatic dusk sky, wind moving the grass at the rim of the trench. Slow push-in.",
+   "seed": null
+  }
+ ]
+}

@@ -1,0 +1,27 @@
+{
+ "episode": {
+  "number": 1,
+  "title": "The Great Pyramid Was Once Bright White"
+ },
+ "synopsis": "The Great Pyramid of Giza was once covered in polished white limestone casing stones that made it gleam in the sun.",
+ "narration": "",
+ "family": "kayip harikalar",
+ "seed_id": 1,
+ "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+ "title_card": {
+  "title": "The Great Pyramid was once white.",
+  "subtitle": "Polished limestone made it shine in the sun."
+ },
+ "caption": "The Great Pyramid of Giza was once covered in polished white limestone.\n\nAround 4,500 years ago its outer faces were sheathed in smooth casing stones of fine white limestone that reflected the sun. Over the centuries most of them were stripped away and reused as building stone, leaving the stepped core we see today. A few casing stones still survive at its base.\n\nVisuals created with AI.\n\nWould you rather see it white or the way it looks now?",
+ "hashtags": "#history #historyfacts #egypt #pyramids #ancientegypt",
+ "first_comment": "Did you already know this? Yes or no.",
+ "hook_shot": 1,
+ "shots": [
+  {
+   "n": 1,
+   "duration": "10",
+   "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nThe Great Pyramid of Giza at sunrise around 2500 BC, its four faces still covered in smooth, polished white limestone casing that catches the low golden sun and gleams brightly against a pale sky. From the first frame the pyramid fills most of the frame, its sharp clean edges and flat bright faces clearly visible. Far below, tiny distant figures pulling stone sledges move slowly along the sand at its base, giving its scale. Fine sand drifts across the desert floor in the wind. The camera glides slowly forward toward the pyramid. Grainy archival 16mm film look, muted warm colour, deep shadow on the shaded face.",
+   "seed": null
+  }
+ ]
+}

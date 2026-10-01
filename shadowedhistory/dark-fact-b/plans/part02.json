@@ -1,0 +1,45 @@
+{
+ "episode": {
+  "number": 2,
+  "title": "In 1919 A Wave Of Molasses Flooded Boston"
+ },
+ "synopsis": "In 1919 a wave of molasses swept through Boston at about 56 kilometres per hour.",
+ "narration": "",
+ "family": "tuhaf felaketler",
+ "seed_id": 12,
+ "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+ "title_card": {
+  "title": "In 1919, molasses flooded Boston.",
+  "subtitle": "The wave moved at about 56 kilometres per hour."
+ },
+ "caption": "In 1919 a wave of molasses swept through Boston.\n\nOn 15 January 1919 a giant storage tank in the North End burst and released millions of litres of molasses. The sticky wave rushed through the streets at about 56 kilometres per hour, knocking buildings off their foundations and damaging an elevated railway. Twenty-one people died.\n\nVisuals created with AI.\n\nWhich would you rather outrun, beer or molasses?",
+ "hashtags": "#history #historyfacts #boston #molassesflood #1919",
+ "first_comment": "Would you have believed this without proof?",
+ "hook_shot": 1,
+ "shots": [
+  {
+   "n": 1,
+   "duration": "4",
+   "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nA Boston waterfront street on a winter day in 1919. From the first frame a giant cylindrical steel storage tank is bursting open and a thick brown wave of molasses pours out of it and surges toward the camera, the torn tank and the wave filling the frame. Low winter sun lights the glossy wave.",
+   "seed": null
+  },
+  {
+   "n": 2,
+   "duration": "4",
+   "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nA closer view of the thick, glossy dark brown molasses wave rolling over the cobblestones, carrying broken wooden crates and planks, steam rising from it in the cold air.",
+   "seed": null
+  },
+  {
+   "n": 3,
+   "duration": "4",
+   "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nA wide view of the street with old brick warehouses and a steel elevated railway overhead, the brown molasses flood filling the whole street to the height of a cart wheel, tiny distant figures on rooftops seen from behind. Slow lateral glide.",
+   "seed": null
+  },
+  {
+   "n": 4,
+   "duration": "4",
+   "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nThe aftermath at low winter sunset: the whole street coated in glossy brown molasses, the twisted steel remains of the burst tank and a bent girder of the elevated railway, everything still. Slow push-in.",
+   "seed": null
+  }
+ ]
+}

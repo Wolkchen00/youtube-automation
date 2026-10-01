@@ -1,0 +1,71 @@
+{
+  "series": {
+    "slug": "dark-fact-a",
+    "title": "Dark Fact A",
+    "aspect_ratio": "9:16",
+    "resolution": "1080p",
+    "engine": "omni",
+    "state_machine_version": 2,
+    "chain_frames": false,
+    "audio_smooth": false,
+    "micro_trim": 0,
+    "native_audio": false,
+    "master_lufs": -14,
+    "master_true_peak_margin_db": 0.2,
+    "music_lowpass_hz": 4000,
+    "block_degraded_publish": true,
+    "duration_band": [
+      9,
+      11
+    ],
+    "hook_teaser": {
+      "enabled": false
+    },
+    "title_card": {
+      "enabled": true,
+      "duration": 30.0,
+      "align": "center",
+      "color": "white",
+      "box": true,
+      "preserve_case": true,
+      "subtitle_required": true,
+      "year_required": false
+    },
+    "qc": {
+      "enabled": true,
+      "require_all_shots": true,
+      "min_shots": 1,
+      "native_audio_review": false,
+      "notes": "This channel shows ONE surprising but true historical fact per episode as period footage. The intended look is grainy archival film: soft film grain, gate weave, muted colour, deep shadows and low-key light are DELIBERATE and are never defects on their own. Judge whether the subject is readable: fail a shot if the fact's subject (the monument, ship, object, animal or place) is too dark to recognise, is missing, or is the wrong thing. Anachronisms are failures: modern vehicles, power lines, plastic, modern clothing or modern buildings in a pre-modern scene. Close-ups of faces are automatic failures, and so is any human figure whose hands, limbs or body read as malformed. Blood, corpses, wounds and gore are automatic failures. Readable on-screen text, captions, subtitles, lettering on walls, signs, banners or ships, logos and watermarks are automatic failures because the text is burned in afterwards. Record any of these under issues.",
+      "api_fail_open": false,
+      "require_first_frame": true,
+      "max_regens_per_episode": 2,
+      "first_frame_rule": "This is the opening frame of a history fact video. The fact's subject (the monument, ship, object, animal or place named in the episode) must already be in this exact frame, large enough and lit well enough to recognise at a glance on a phone screen. Set first_frame_ok to false if the subject is absent, hidden in darkness, tiny in the distance, or only appears later in the shot, or if the frame is mostly black.",
+      "correction_lexicon": {
+        "audio": "Keep the sound to the scene's own quiet ambience.",
+        "face": "Keep every human figure in the middle ground or further, seen from behind or as a silhouette.",
+        "object": "Keep the episode's subject in the same exact shape, colour, scale and material for the whole shot.",
+        "continuity": "Continue from the established place, preserving the subject, the light level and the period.",
+        "opening": "Open with the episode's subject already large and clearly lit by the low sun, firelight or torchlight in the very first frame.",
+        "anatomy": "Render every human figure with natural anatomy, one head, two arms, two legs and five fingers on each hand, small in the frame and seen from behind.",
+        "text": "Let plain stone, wood, cloth and metal carry every surface, so walls, hulls and banners read as texture and colour alone.",
+        "generic": "Render a coherent realistic take with stable geometry, lighting, materials and motion."
+      },
+      "structured_positive_corrections": true
+    },
+    "fps": 24,
+    "master_lra": 1.5,
+    "music_fade": {
+      "in": 0.05,
+      "out": 0.05
+    },
+    "music_offset_sec": 12,
+    "art_style_note": "2026-10-01 v1.0 DARK FACT. Doktrin shadowedhistory/DARK-FACT.md. Yazi ilk kareden son kareye ekranda (title_card duration 30 sn > video, hic solmaz). A: tek kesintisiz sahne, 10 sn.",
+    "music_fixed": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless."
+  },
+  "art_style": "Grainy archival film footage, as if a camera from the time had captured the real moment: worn 16mm film stock with soft grain and gentle gate weave, muted desaturated colour, deep shadows and low-key light. The subject of the frame is always lit by a motivated light source, low sun, dawn, dusk, firelight or torchlight, so its shape reads clearly even though the mood is dark. Composed for vertical 9:16 at 24 fps. Everything is period-accurate to the moment of the fact: architecture, clothing, tools, ships and landscape belong to that year and place. Human figures stay in the middle ground or further away, seen from behind or as silhouettes. Stone, wood, cloth and metal carry their natural texture and plain colour, so every surface stays free of words. The frame edge is the image edge and the view is unobstructed. The mood is mysterious, quiet and documentary.",
+  "music": true,
+  "characters": [],
+  "environments": [],
+  "props": []
+}

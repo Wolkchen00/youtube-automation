@@ -10,7 +10,7 @@ WORKFLOWS = ROOT / ".github" / "workflows"
 EXPECTED_SCHEDULES = {
     "wild-encounter.yml": ["13 7 * * *"],
     "fear-slide.yml": ["13 11 * * *", "30 21 * * *"],
-    "still-home.yml": ["43 11 * * *"],
+    "dark-fact.yml": ["43 11 * * *"],
     "galactic-daily.yml": ["17 12 * * *"],
 }
 
@@ -28,6 +28,7 @@ EXPECTED_KIE_WORKFLOWS = {
     "planetfall.yml",
     "series.yml",
     "still-home.yml",
+    "dark-fact.yml",
     "unnatural-lab.yml",
     "wild-encounter.yml",
 }
@@ -67,3 +68,10 @@ def test_kie_uretim_kuyrugu_tum_workflowlarda_max():
     for filename, concurrency in kie_workflows.items():
         assert concurrency.get("queue") == "max", filename
         assert concurrency.get("cancel-in-progress") is not True, filename
+
+
+def test_still_home_zamanlamasi_kapali():
+    """1 Ekim 2026: still-home durduruldu, kanal dark-fact'e gecti. Iki hat ayni
+    kanala yayin yapar; ikisinin birden zamanli olmasi gunde-1 kilidine dayanir."""
+    triggers = _triggers(_load_workflow(WORKFLOWS / "still-home.yml"))
+    assert "schedule" not in triggers

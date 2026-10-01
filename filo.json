@@ -1,7 +1,7 @@
 {
   "ad": "YouTube Otomasyon Fabrikası",
   "kategori": "İçerik & Topluluk",
-  "ozet": "Beş YouTube kanalının ölçüm ve bölüm üretim hattı: AImagine, Galactic Experiment, Sentinal ve Shadowed History burada üretilir ve ölçülür; The Unfinished yalnız ölçülür (videoları Shorts_Dizi_Fabrikasi'ndan yayınlanır). Depoda 19 workflow var, 6'sı zamanlanmış: bir günlük seri (still-home), AImagine korku kaydırağı (fear-slide + fear-slide-hazır), günlük beyin, günlük+haftalık analitik ve haftalık seri kalibrasyonu. Kalan 13 workflow'un schedule bloğu yorum satırında, yalnız elle tetiklenir (event-horizon, from-scratch, next-stop, unnatural-lab dahil). Panonun kanal ve birim ekonomi verisi bu depodan gelir (analytics_data ve credits_ledger.json).",
+  "ozet": "Beş YouTube kanalının ölçüm ve bölüm üretim hattı: AImagine, Galactic Experiment, Sentinal ve Shadowed History burada üretilir ve ölçülür; The Unfinished yalnız ölçülür (videoları Shorts_Dizi_Fabrikasi'ndan yayınlanır). Depoda 19 workflow var, 6'sı zamanlanmış: bir günlük seri (dark-fact, gün aşırı A/B; still-home 1 Ekim 2026'da durduruldu), AImagine korku kaydırağı (fear-slide + fear-slide-hazır), günlük beyin, günlük+haftalık analitik ve haftalık seri kalibrasyonu. Kalan 13 workflow'un schedule bloğu yorum satırında, yalnız elle tetiklenir (event-horizon, from-scratch, next-stop, unnatural-lab dahil). Panonun kanal ve birim ekonomi verisi bu depodan gelir (analytics_data ve credits_ledger.json).",
   "eleme": "olculemiyor: insan doldurmali",
   "model": "olculemiyor: insan doldurmali",
   "sunum": "olculemiyor: insan doldurmali",
@@ -55,12 +55,13 @@
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",
-      "gh_workflow_path": ".github/workflows/still-home.yml",
-      "gh_workflow_name": "Still Home Daily",
+      "gh_workflow_path": ".github/workflows/dark-fact.yml",
+      "gh_workflow_name": "Dark Fact Daily",
       "cron_ifadeleri_utc": [
-        "30 20 * * *"
+        "43 11 * * *"
       ],
-      "beklenen_aralik_saat": 24
+      "beklenen_aralik_saat": 24,
+      "not": "shadowedhistory kanalinin TEK yayin hatti (1 Ekim 2026). Gun paritesine gore seri secer: TEK gun dark-fact-a (tek sahne 10 sn), CIFT gun dark-fact-b (4 x 2,5 sn). still-home.yml cron'u KAPALI."
     },
     {
       "gh_repo": "Wolkchen00/youtube-automation",

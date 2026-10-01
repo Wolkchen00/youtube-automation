@@ -1,0 +1,196 @@
+{
+  "slug": "dark-fact-a",
+  "base_title": "Dark Fact",
+  "logline": "One surprising but true history fact per episode, shown as dark archival footage with the fact on screen from the first frame.",
+  "language": "en",
+  "upload_profile": "shad0wedhistory",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#history #historyfacts #didyouknow #shorts",
+  "standalone": true,
+  "publish_mode": "auto",
+  "performance_feedback": true,
+  "status": "active",
+  "priority": 999,
+  "total_parts": 2,
+  "next_part": 1,
+  "doctrine": "shadowedhistory/DARK-FACT.md",
+  "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 4,
+    "min_queue": 2,
+    "shots": 1,
+    "shot_seconds": "10",
+    "caption": true,
+    "music_prompt": true,
+    "title_card": true,
+    "credit_hard_cap": true,
+    "humans": "silent",
+    "eerie_ok": true,
+    "title_style": "the fact itself as a plain headline in Title Case, max 70 characters, e.g. 'The Great Pyramid Was Once Bright White', 'Vikings Never Wore Horned Helmets', 'Cologne Cathedral Took 632 Years To Build'. Numbers and years copied exactly from the FACT. No clickbait punctuation, no question marks, no hashtags, no surrounding quotes, no first-person claim of having filmed anything.",
+    "caption_style": "\"caption\" = the written story under the video, in English only, 50-100 words in four short blocks separated with \\n\\n: (1) restate the fact plainly in one sentence; (2) two or three sentences of real, specific context (where, when, how we know) taken from the FACT and well-established history, with no invented numbers or names of people; (3) the exact standalone sentence \"Visuals created with AI.\"; (4) ONE short question to the viewer about the fact. \"hashtags\" = exactly 5 tags, the first two always #history and #historyfacts, the other three specific to this episode (place, era or subject).",
+    "title_card_style": "\"title\" = THE CLAIM: the episode's surprising fact as ONE short plain sentence in sentence case, ending with a full stop, at most 40 characters including spaces. It must be understandable on its own in two seconds. \"subtitle\" = THE PROOF OR TWIST: one short sentence in sentence case, ending with a full stop, at most 48 characters, that makes the claim concrete (a number, a place, a reason). Copy every number and year EXACTLY from the chosen FACT; never round, change or invent one. If the FACT says \"Ancient writers say\", the title must keep that hedge. No question marks, no exclamation marks, no emoji, no hashtags, no quotes, no ALL CAPS. Good: {\"title\": \"The Great Pyramid was once white.\", \"subtitle\": \"Polished limestone made it shine in the sun.\"} Good: {\"title\": \"Romans washed clothes in urine.\", \"subtitle\": \"The ammonia lifted dirt and stains.\"}",
+    "families": [
+      "kayip harikalar",
+      "tuhaf felaketler",
+      "gizli muhendislik",
+      "garip gercekler",
+      "zamanin izi"
+    ],
+    "shot_plan": [
+      "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows."
+    ],
+    "brief": "ENDLESS DARK HISTORY FACT SERIES for the channel Shadowed History. Every episode shows ONE surprising but TRUE historical fact, taken from the chosen topic_pool entry. The video is period footage in a grainy archival film look; the fact itself is burned on screen from the first frame to the last as the title card, so the picture only has to SHOW the subject.\n\nRULES:\n(1) TRUTH FIRST. Use only the FACT text of the chosen entry. Copy every number and year exactly. Never invent a detail, a number, a date or a person. If the FACT is hedged ('Ancient writers say'), keep the hedge.\n(2) THE SUBJECT IS IN THE FIRST FRAME. Shot 1 opens with the fact's subject already large and clearly lit. Never open on darkness, on an empty landscape, or on a detail that only makes sense later. Use the entry's VISUAL as the starting point.\n(3) DARK MOOD, READABLE PICTURE. Low-key archival look, but the subject is lit by a motivated source: low sun, dawn, dusk, fire or torches. Night scenes need a visible light source on the subject.\n(4) NO NAMED PEOPLE in any prompt. Describe roles ('a king from Mali', 'two lookouts'), never names. People stay in the middle ground or further, seen from behind or as silhouettes. No close-up faces.\n(5) NO GORE. No blood, wounds, corpses or suffering bodies. Disasters are shown through places, water, fire, ash, ruins and landscapes only.\n(6) NO WORDS IN THE PICTURE. The text is added afterwards. Never ask for inscriptions, signs, lettering, banners with words, plaques, maps with labels or screens.\n(7) PERIOD ACCURATE. Everything in the frame belongs to that year and place. Nothing modern in a pre-modern scene.\n(8) MOTION. Something in the frame moves for the whole shot (water, smoke, fog, fire, snow, animals, distant people, ships), plus one slow single-direction camera move.\n(9) Each entry is used once. Consecutive episodes use different families.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "FACT: The Great Pyramid of Giza was once covered in polished white limestone casing stones that made it gleam in the sun. VISUAL: The Great Pyramid at sunrise with its smooth, bright white polished casing intact, catching low golden light, tiny distant figures at its base for scale.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 3,
+        "topic": "FACT: Woolly mammoths were still alive on a remote Arctic island when the Great Pyramid was being built, about 4,500 years ago. VISUAL: A small herd of woolly mammoths walking across a snowy Arctic tundra under a grey sky, breath steaming, low sun on the horizon.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 5,
+        "topic": "FACT: The Terracotta Army in China was originally painted in bright colours, not the grey we see today. VISUAL: Long rows of life-size clay soldiers standing in an excavation pit, lit by warm lamplight, faint traces of red, green and blue paint on their armour.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 7,
+        "topic": "FACT: The stones of Machu Picchu fit together so tightly that a knife blade cannot slide between them. VISUAL: A massive mortarless granite wall of perfectly fitted stones in drifting mountain mist, Machu Picchu's terraces and peak emerging behind it.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 9,
+        "topic": "FACT: Some of Stonehenge's stones were hauled from Wales, about 240 kilometres away. VISUAL: Stonehenge on a misty plain at dawn, the great stone circle complete, a long line of distant figures dragging a huge stone on wooden rollers toward it.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 11,
+        "topic": "FACT: In 1814 a giant vat burst at a London brewery and a wave of beer flooded the surrounding streets. VISUAL: A narrow cobbled London street at night in 1814, a surging wave of dark foaming beer rushing between the brick houses, splintered wooden vat staves in the flow.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 13,
+        "topic": "FACT: In 1518 hundreds of people in Strasbourg started dancing in the streets and could not stop for days. VISUAL: A medieval square in Strasbourg at dusk, the cathedral spire behind, many distant figures dancing wildly in the street lit by torches.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 15,
+        "topic": "FACT: In 1908 a mysterious explosion in Siberia flattened about 80 million trees. VISUAL: A vast Siberian forest flattened in every direction, thousands of bare tree trunks lying in a radiating pattern under a hazy grey sky.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 17,
+        "topic": "FACT: The Great Fire of London in 1666 destroyed over 13,000 houses, yet only six deaths were officially recorded. VISUAL: Seventeenth-century London burning at night seen across the River Thames, flames along the riverfront, the old cathedral silhouetted against the glow, small boats on the water.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 19,
+        "topic": "FACT: In 1816 it snowed in June in New England, the year without a summer. VISUAL: A New England farm in June 1816, green summer fields and leafy trees covered in fresh snow, a wooden farmhouse with smoke from its chimney.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 21,
+        "topic": "FACT: Roman concrete can heal its own cracks, which is why Roman sea walls still stand after 2,000 years. VISUAL: An ancient Roman concrete harbour wall at dusk with waves crashing against it, the surface rough and weathered but intact.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 23,
+        "topic": "FACT: Derinkuyu, an underground city carved beneath Turkey, could shelter around 20,000 people. VISUAL: Deep underground tunnels and chambers carved from soft rock, a massive round stone door, oil lamps flickering along a stairway descending into darkness.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 25,
+        "topic": "FACT: The Romans built more than 80,000 kilometres of paved roads. VISUAL: A straight paved Roman road running over rolling hills to the horizon, a column of distant legionaries marching along it, evening light.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 27,
+        "topic": "FACT: The Leaning Tower of Pisa started to lean before it was even finished. VISUAL: A partly built white marble bell tower already visibly tilting, wooden scaffolding on its upper storey, medieval workers far below, Pisa cathedral beside it.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 29,
+        "topic": "FACT: In England a 27-metre ship was buried in a field as a royal grave. VISUAL: A long wooden ship lying in a deep trench dug into a grassy English field under a burial mound, low dawn mist.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 31,
+        "topic": "FACT: Ancient Romans used urine to wash their clothes. VISUAL: An ancient Roman laundry with stone vats and basins, workers seen from behind treading cloth in the vats, steam and dim light from a courtyard.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 33,
+        "topic": "FACT: The shortest war in history lasted about 40 minutes. VISUAL: A white palace on a tropical shore under clouds of smoke, old steam warships firing from the bay, palm trees bending in the wind, 1896.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 35,
+        "topic": "FACT: In 1324 a king from Mali gave away so much gold in Cairo that its value crashed for years. VISUAL: An enormous caravan of camels laden with gold crossing the desert toward Cairo at sunset, the line of travellers stretching to the horizon.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 37,
+        "topic": "FACT: The Titanic's lookouts had no binoculars on the night she struck the iceberg. VISUAL: A great ocean liner's crow's nest on a freezing starlit night, two lookouts seen from behind, a pale iceberg looming out of the dark sea ahead.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 39,
+        "topic": "FACT: Archaeologists found loaves of bread from 79 AD preserved inside an oven in Pompeii. VISUAL: Inside a ruined Pompeii bakery, a brick dome oven holding round blackened loaves of bread, volcanic ash on the floor, Vesuvius visible through a doorway.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 41,
+        "topic": "FACT: The cave paintings of Lascaux are about 17,000 years old. VISUAL: A dark cave lit by a single flickering torch, huge painted horses, bulls and deer covering the rock ceiling and walls.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 43,
+        "topic": "FACT: Petra's famous Treasury was carved from the top of the cliff downward. VISUAL: The rose-red carved facade of Petra's Treasury at the end of a narrow sandstone gorge, early light on the stone, a few distant figures at its base.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 45,
+        "topic": "FACT: In the 1960s the temples of Abu Simbel were cut into blocks and moved 65 metres uphill. VISUAL: The colossal seated statues of Abu Simbel cut into huge numbered stone blocks, one giant stone face block being lifted by a crane, desert and river behind.",
+        "family": "gizli muhendislik"
+      }
+    ],
+    "forbidden_phrases": {
+      "*": [
+        "inscription",
+        "inscriptions",
+        "lettering",
+        "signage",
+        "signboard",
+        "plaque",
+        "caption",
+        "subtitle",
+        "cleopatra",
+        "mansa musa",
+        "ramesses",
+        "napoleon",
+        "julius caesar",
+        "henry viii",
+        "mehmed"
+      ]
+    }
+  },
+  "parts": {},
+  "engagement": {
+    "first_comment_pool": [
+      "Did you already know this? Yes or no.",
+      "What history fact should we show next?",
+      "Would you have believed this without proof?",
+      "Which fact surprised you more, this one or the last one?",
+      "Rate this fact from 1 to 10.",
+      "Tag someone who needs to know this."
+    ]
+  }
+}

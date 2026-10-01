@@ -1,0 +1,199 @@
+{
+  "slug": "dark-fact-b",
+  "base_title": "Dark Fact",
+  "logline": "One surprising but true history fact per episode, shown as dark archival footage with the fact on screen from the first frame.",
+  "language": "en",
+  "upload_profile": "shad0wedhistory",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#history #historyfacts #didyouknow #shorts",
+  "standalone": true,
+  "publish_mode": "auto",
+  "performance_feedback": true,
+  "status": "active",
+  "priority": 999,
+  "total_parts": 2,
+  "next_part": 1,
+  "doctrine": "shadowedhistory/DARK-FACT.md",
+  "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 4,
+    "min_queue": 2,
+    "shots": 4,
+    "shot_seconds": "4",
+    "caption": true,
+    "music_prompt": true,
+    "title_card": true,
+    "credit_hard_cap": true,
+    "humans": "silent",
+    "eerie_ok": true,
+    "title_style": "the fact itself as a plain headline in Title Case, max 70 characters, e.g. 'The Great Pyramid Was Once Bright White', 'Vikings Never Wore Horned Helmets', 'Cologne Cathedral Took 632 Years To Build'. Numbers and years copied exactly from the FACT. No clickbait punctuation, no question marks, no hashtags, no surrounding quotes, no first-person claim of having filmed anything.",
+    "caption_style": "\"caption\" = the written story under the video, in English only, 50-100 words in four short blocks separated with \\n\\n: (1) restate the fact plainly in one sentence; (2) two or three sentences of real, specific context (where, when, how we know) taken from the FACT and well-established history, with no invented numbers or names of people; (3) the exact standalone sentence \"Visuals created with AI.\"; (4) ONE short question to the viewer about the fact. \"hashtags\" = exactly 5 tags, the first two always #history and #historyfacts, the other three specific to this episode (place, era or subject).",
+    "title_card_style": "\"title\" = THE CLAIM: the episode's surprising fact as ONE short plain sentence in sentence case, ending with a full stop, at most 40 characters including spaces. It must be understandable on its own in two seconds. \"subtitle\" = THE PROOF OR TWIST: one short sentence in sentence case, ending with a full stop, at most 48 characters, that makes the claim concrete (a number, a place, a reason). Copy every number and year EXACTLY from the chosen FACT; never round, change or invent one. If the FACT says \"Ancient writers say\", the title must keep that hedge. No question marks, no exclamation marks, no emoji, no hashtags, no quotes, no ALL CAPS. Good: {\"title\": \"The Great Pyramid was once white.\", \"subtitle\": \"Polished limestone made it shine in the sun.\"} Good: {\"title\": \"Romans washed clothes in urine.\", \"subtitle\": \"The ammonia lifted dirt and stains.\"}",
+    "families": [
+      "kayip harikalar",
+      "tuhaf felaketler",
+      "gizli muhendislik",
+      "garip gercekler",
+      "zamanin izi"
+    ],
+    "shot_plan": [
+      "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.",
+      "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.",
+      "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.",
+      "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows."
+    ],
+    "brief": "ENDLESS DARK HISTORY FACT SERIES for the channel Shadowed History. Every episode shows ONE surprising but TRUE historical fact, taken from the chosen topic_pool entry. The video is period footage in a grainy archival film look; the fact itself is burned on screen from the first frame to the last as the title card, so the picture only has to SHOW the subject.\n\nRULES:\n(1) TRUTH FIRST. Use only the FACT text of the chosen entry. Copy every number and year exactly. Never invent a detail, a number, a date or a person. If the FACT is hedged ('Ancient writers say'), keep the hedge.\n(2) THE SUBJECT IS IN THE FIRST FRAME. Shot 1 opens with the fact's subject already large and clearly lit. Never open on darkness, on an empty landscape, or on a detail that only makes sense later. Use the entry's VISUAL as the starting point.\n(3) DARK MOOD, READABLE PICTURE. Low-key archival look, but the subject is lit by a motivated source: low sun, dawn, dusk, fire or torches. Night scenes need a visible light source on the subject.\n(4) NO NAMED PEOPLE in any prompt. Describe roles ('a king from Mali', 'two lookouts'), never names. People stay in the middle ground or further, seen from behind or as silhouettes. No close-up faces.\n(5) NO GORE. No blood, wounds, corpses or suffering bodies. Disasters are shown through places, water, fire, ash, ruins and landscapes only.\n(6) NO WORDS IN THE PICTURE. The text is added afterwards. Never ask for inscriptions, signs, lettering, banners with words, plaques, maps with labels or screens.\n(7) PERIOD ACCURATE. Everything in the frame belongs to that year and place. Nothing modern in a pre-modern scene.\n(8) MOTION. Something in the frame moves for the whole shot (water, smoke, fog, fire, snow, animals, distant people, ships), plus one slow single-direction camera move.\n(9) Each entry is used once. Consecutive episodes use different families.",
+    "topic_pool": [
+      {
+        "id": 2,
+        "topic": "FACT: Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid. VISUAL: The Great Pyramid and its neighbours at dusk under a large pale Moon, ancient and weathered, a lone distant traveller with a camel crossing the sand.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 4,
+        "topic": "FACT: Gobekli Tepe in Turkey is about 6,000 years older than Stonehenge. VISUAL: Huge carved T-shaped stone pillars standing in a circle on a bare hilltop at dusk, carved animal reliefs on the stone, wind moving the dry grass.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 6,
+        "topic": "FACT: Ancient Greek marble statues were originally painted in vivid colours. VISUAL: Inside a lamplit ancient Greek temple a tall marble statue painted in vivid colours, blue robe, gold trim and skin tones, smoke drifting through shafts of light.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 8,
+        "topic": "FACT: Many of the giant stone heads on Easter Island have full bodies buried beneath the ground. VISUAL: A giant moai head on a grassy slope with a deep excavation trench beside it revealing the carved stone torso buried underground, overcast sky.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 10,
+        "topic": "FACT: Divers found a 2,000-year-old geared computer in a Greek shipwreck. VISUAL: On a dark seabed lit by a diver's lamp, a corroded green bronze mechanism of interlocking gears lies among broken amphorae from an ancient wreck.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 12,
+        "topic": "FACT: In 1919 a wave of molasses swept through Boston at about 56 kilometres per hour. VISUAL: A 1919 Boston harbour street, a giant torn steel storage tank and a thick brown wave of molasses rolling through the street past old brick buildings and an elevated railway.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 14,
+        "topic": "FACT: The 1883 eruption of Krakatoa was heard almost 4,800 kilometres away. VISUAL: A volcanic island erupting on the horizon of a dark sea in 1883, an enormous ash column rising into the sky, seen from the deck of a sailing ship.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 16,
+        "topic": "FACT: In 1859 a solar storm made telegraph wires spark and lit up auroras as far south as the Caribbean. VISUAL: A tropical Caribbean beach at night with palm trees under a sky filled with glowing red and green aurora curtains, waves rolling in.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 18,
+        "topic": "FACT: An entire medieval English port town, Dunwich, slowly fell into the sea. VISUAL: A lone ruined medieval church on the edge of a crumbling sandy cliff above a stormy grey North Sea, waves eating at the cliff base.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 20,
+        "topic": "FACT: The Swedish warship Vasa sank in 1628 after sailing only about 1,300 metres on her maiden voyage. VISUAL: A towering ornate seventeenth-century warship heeling over in Stockholm harbour, sails full, water pouring into her open gun ports, crowds watching from the shore.",
+        "family": "tuhaf felaketler"
+      },
+      {
+        "id": 22,
+        "topic": "FACT: In 1453 the Ottomans hauled their warships over a hill on greased logs to reach the Golden Horn. VISUAL: At night on a hill above a dark bay, a large wooden galley being hauled uphill on greased logs by long lines of men and oxen, lit by torches.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 24,
+        "topic": "FACT: Ancient writers say the Colosseum was flooded for mock naval battles. VISUAL: The Colosseum arena flooded with water, two small ancient warships with oars facing each other inside it, the stands packed with distant spectators.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 26,
+        "topic": "FACT: Cologne Cathedral took 632 years to finish, and a medieval crane stood on its unfinished tower for centuries. VISUAL: The half-built Cologne Cathedral with one stunted unfinished tower and a large wooden medieval crane standing on top of it, grey sky, old town roofs below.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 28,
+        "topic": "FACT: Hagia Sophia was the largest cathedral in the world for nearly 1,000 years. VISUAL: The vast dome interior of Hagia Sophia, golden mosaics, shafts of daylight through the ring of windows, tiny figures on the marble floor far below.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 30,
+        "topic": "FACT: When the Spanish arrived, the Aztec capital Tenochtitlan was a city on a lake, larger than any city in Spain. VISUAL: Tenochtitlan on a wide lake at sunrise, great stepped temple pyramids, long causeways across the water, canoes gliding through canals.",
+        "family": "kayip harikalar"
+      },
+      {
+        "id": 32,
+        "topic": "FACT: Vikings never actually wore horned helmets. VISUAL: A Viking longship gliding through thick fog on a dark fjord, warriors in plain rounded iron helmets with no horns standing at the rail.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 34,
+        "topic": "FACT: The Hundred Years' War actually lasted 116 years. VISUAL: A medieval battlefield in morning fog, rows of distant knights and archers, banners hanging limp, a castle on a ridge behind.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 36,
+        "topic": "FACT: Oxford University is older than the Aztec Empire. VISUAL: A medieval stone college quadrangle at dusk, gothic arches and towers, a few robed figures crossing the courtyard in lamplight.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 38,
+        "topic": "FACT: In 1959 Hashima Island in Japan was one of the most densely populated places on Earth. VISUAL: A small concrete island packed with tall grey apartment blocks rising out of the sea, surrounded by a high sea wall, waves breaking, overcast sky.",
+        "family": "zamanin izi"
+      },
+      {
+        "id": 40,
+        "topic": "FACT: You cannot see the Great Wall of China from the Moon with the naked eye. VISUAL: The Great Wall of China snaking over steep green mountain ridges in drifting mist, watchtowers fading into the distance.",
+        "family": "garip gercekler"
+      },
+      {
+        "id": 42,
+        "topic": "FACT: Venice stands on millions of wooden piles driven into the mud, some of them over 1,000 years old. VISUAL: A cutaway view below a Venice canal showing countless dark wooden piles driven into mud supporting stone foundations, the canal and palaces above at dusk.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 44,
+        "topic": "FACT: At Chichen Itza, the equinox sun casts the shadow of a serpent down the pyramid's steps. VISUAL: The stepped pyramid of Chichen Itza at sunset, a rippling zigzag shadow running down the edge of its staircase toward a carved serpent head at the base.",
+        "family": "gizli muhendislik"
+      },
+      {
+        "id": 46,
+        "topic": "FACT: The oldest known message in a bottle spent more than 130 years at sea. VISUAL: An old green glass bottle with a rolled paper inside lying half buried in the sand of a windswept beach at dawn, waves washing around it.",
+        "family": "zamanin izi"
+      }
+    ],
+    "forbidden_phrases": {
+      "*": [
+        "inscription",
+        "inscriptions",
+        "lettering",
+        "signage",
+        "signboard",
+        "plaque",
+        "caption",
+        "subtitle",
+        "cleopatra",
+        "mansa musa",
+        "ramesses",
+        "napoleon",
+        "julius caesar",
+        "henry viii",
+        "mehmed"
+      ]
+    }
+  },
+  "parts": {},
+  "engagement": {
+    "first_comment_pool": [
+      "Did you already know this? Yes or no.",
+      "What history fact should we show next?",
+      "Would you have believed this without proof?",
+      "Which fact surprised you more, this one or the last one?",
+      "Rate this fact from 1 to 10.",
+      "Tag someone who needs to know this."
+    ]
+  }
+}
