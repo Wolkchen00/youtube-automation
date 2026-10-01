@@ -117,6 +117,8 @@ def main() -> int:
     parser.add_argument("--tag", default="", help="cikti dosya adina eklenecek etiket")
     parser.add_argument("--max-wait", type=int, default=1500)
     parser.add_argument("--dry", action="store_true", help="istek govdesini yaz, gonderme")
+    parser.add_argument("--first-frame-url", default="",
+                        help="yalniz seedance-2: ilk kare kilidi (zincir, onceki uretimin son karesi)")
     args = parser.parse_args()
 
     if args.prompt_file:
@@ -139,6 +141,8 @@ def main() -> int:
             "resolution": args.resolution,
             "generate_audio": True,
         }
+        if args.first_frame_url:
+            block["first_frame_url"] = args.first_frame_url
         # 2500 DEGIL. Yerel _skills/kie-ai-video-production/models/seedance-2.0.md
         # dosyasindaki "max 2500 karakter" satiri YANLIS ve bu projeyi yanlis
         # yonlendirdi: kanon gereksiz yere kirpildi ve orta ucte bir bozuldu.

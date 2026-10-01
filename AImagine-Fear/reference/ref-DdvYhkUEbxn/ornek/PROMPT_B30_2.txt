@@ -1,0 +1,113 @@
+## FORMAT
+
+Create a single continuous 15-second vertical 9:16 video at 720p, 24 frames per second. Photorealistic live-action action-camera footage, not animation, not a render, not a game. ONE SINGLE UNBROKEN CONTINUOUS TAKE from the first frame to the last.
+
+The video begins EXACTLY on the provided first image: the rider is inside a dark grey storm cloud, sliding fast down the transparent slide, her two bare legs and both feet in the lower third of the frame, the two electric cyan rims converging ahead. Continue that same ride from that exact frame with the same camera, the same legs, the same slide and the same speed. Nothing about the camera, the rider or the slide changes.
+
+## CAMERA
+
+The camera is a waterproof action camera rigidly strapped to the rider's own chest. It points forward and slightly down, along the rider's own body, so the rider's legs and feet run away from the camera toward the centre of the frame.
+
+Use an ultra-wide fisheye lens of roughly 150 degrees with strong barrel distortion. The horizon is visibly BOWED: it curves downward at the left and right edges of the frame and lifts in the middle. This bowing is present in every single frame.
+
+The camera is bolted to the rider's torso and never moves independently of it. There is no pan, no tilt, no zoom, no dolly, no gimbal smoothing, no cinematic stabilisation. When the slide banks, the ENTIRE WORLD rotates around the rider's legs while the legs stay in the same place in the frame. When the slide drops, the horizon is thrown up and out of the top of the frame.
+
+The camera NEVER turns back to look at the rider. No face is ever visible. No selfie angle. No mirror. No third-person view. No drone view. No exterior shot of the slide.
+
+Keep real action-camera artefacts: rolling-shutter skew in fast rotation, auto-exposure pumping when the frame swings from dark cloud to bright sky, lens flare, water beads and snowflakes sitting on the lens and streaking away, brief blur when spray or snow hits the glass, smeared real-time motion blur.
+
+## RIDER
+
+The only visible part of the rider is the lower body, and it is visible in every frame.
+
+Two legs run from the bottom edge of the frame toward the centre, converging in perspective. Two bare feet sit at the end of them, close together, soles away from the camera, toes pointing up and forward. The skin is light tan, wet, and shines with the reflected colour of the slide's electric cyan strips. The legs are symmetrical around the vertical centre line of the frame.
+
+The rider wears a black high-cut one-piece swimsuit, legs bare from the hip down, soaked. Nothing else is visible. The feet and ankles are completely bare: nothing on them, no straps, no shoes, no sandals, no bindings, nothing tying the legs together.
+
+NEVER show hands, arms, shoulders, torso, hair, or a face. There is no other person anywhere in the shot.
+
+THE TWO LEGS ARE ALWAYS TWO. In every single frame the left leg and the right leg are separately readable, with a visible gap between them, and BOTH bare feet are separately visible. They never merge into one dark mass and never lose a foot, not even inside a cloud, a storm or a blizzard.
+
+A thin bright electric cyan edge-light runs down the inner edge of each leg, so the two legs are separated by light and never by darkness alone.
+
+The legs react physically and continuously: toes flex and splay on a drop, ankles roll on a bank, knees lift slightly on impact, the whole lower body slides a few centimetres left or right in a hard turn and settles back.
+
+## SLIDE
+
+The slide is a fully TRANSPARENT clear acrylic half-pipe, wide enough for one rider. Its solid walls rise on both sides from beside the rider's hips and curve up into the lower left and lower right corners of the frame. You look straight THROUGH its floor and see the empty air and the land directly beneath the rider's feet at all times. This transparency is the single most important element in the shot and must never be lost.
+
+Both upper rims of the half-pipe carry a continuous electric cyan electroluminescent strip built into the acrylic itself. There are exactly TWO such strips, one per rim. They run away from the camera and converge at the vanishing point ahead. They are lit in EVERY SINGLE FRAME from the first to the last, at full strength, inside every cloud and every storm. Every glowing line in the frame is one of these two rims. Nothing glows in open air: there is no glowing bar across the frame, no web of extra lines, no third strip.
+
+A thin sheet of water runs down the slide with the rider. It fans out around the hips, throws spray up past the shins, and hits the lens. The faster the ride, the more spray.
+
+The slide is one continuous physical object. Every drop and turn is visible AHEAD before the rider reaches it, grows continuously during the approach, and is then actually travelled. It never appears out of nowhere and never breaks.
+
+## MOTION AND GRAVITY
+
+THE RIDER IS ALWAYS MOVING FORWARD AND DOWNWARD AND ALWAYS ACCELERATING, from the very first frame to the last. The slide pitches steeply DOWN, like the first plunge of a giant water slide, and keeps plunging, banking hard left and right between drops so the whole world tilts around the legs. Near objects (trees, rocks, branches, the pagoda roof) rush past close to the slide so the speed is obvious. There is no standing start and no waiting at an edge. The ride never stops, never slows to a halt, never reverses and never floats.
+
+THE APPROACH RULE: every cloud bank, lake, pagoda, storm, forest and snow slope must already be visible ahead before it is reached, must grow continuously as the rider closes on it, and must pass alongside or beneath the slide. Nothing appears suddenly. Nothing teleports.
+
+THE CLOUD GATE RULE: every cloud bank the slide dives into separates two seasons. Above the cloud is one season. Inside the cloud the frame becomes an even, flat, featureless grey-white murk in which only the two legs, both feet and the two electric cyan rims stay readable. Then the slide drops out of the underside of the cloud and the SAME mountain lies below in a DIFFERENT season. The season changes only inside the cloud, never in clear view.
+
+## WORLD
+
+Mount Fuji, Japan, real, recognisable and photorealistic: the single perfect volcanic cone, seen from high above and in front of it, with a lake at its foot and the five-storey red pagoda on the wooded hillside facing it. In every clear section of the ride Mount Fuji stands beyond the rider's feet, near the centre of the frame, so the viewer always knows exactly where they are. Real atmospheric depth and honest scale: the pagoda is a small red mark, the lake is a mirror, forests are texture.
+
+## AUDIO
+
+No music. Ever. No soundtrack, no score, no beat.
+
+Raw waterproof action-camera microphone, close to the rider's chest, slightly clipped and compressed. Wind roar rises continuously with speed. Water hisses directly under the rider's body. The acrylic tube rumbles and creaks. Every season sounds different: spring is soft wind and birds far below, summer is thunder and rain hammering the tube, autumn is a howling gale with leaves rattling against the acrylic, winter is a screaming blizzard and the deep growing rumble of moving snow.
+
+THE RIDER NEVER SPEAKS. No words in any language. No talking, no narration, no counting, no exclamations made of words. Her only sounds are breath and wordless voice from the same cheap chest microphone: a sharp gasp, ragged panting, a held breath, short wordless screams.
+
+The overall loudness climbs from the first frame to the last.
+
+## TIMELINE
+
+[0.0-2.0] Still inside the grey murk, the slide keeps dropping. A warm orange glow grows below and the first red leaves fly up through the fog past her shins.
+
+[2.0-5.0] She drops out of the underside of the cloud into deep autumn. It is the same mountain: Mount Fuji with a fresh white cap, its lower slopes and the lakeside blazing red and gold with maples, the red pagoda glowing among them. A gale whips a torrent of red leaves across the lens and the slide shakes in the wind.
+
+[5.0-7.0] A violent gust: a whole wall of leaves and snapped twigs hits the slide and the lens. Ahead, already visible, a heavy white snow cloud lies across the slope, and the slide dives into it.
+
+[7.0-8.5] Inside the snow cloud: an even, flat white murk. Only her two legs, both feet and the two electric cyan rims stay readable. Snowflakes start to hit the lens.
+
+[8.5-11.0] She drops out into deep winter in a full blizzard. Mount Fuji stands entirely white against a dark slate storm sky, the pagoda a dark shape under heavy snow, the maples bare black branches rushing past beside the slide. Thundersnow: a violet-white bolt strikes the slope ahead and the boom shakes the slide. A crack runs through the acrylic under her feet.
+
+[11.0-13.0] High on Fuji's flank a huge slab of snow breaks away. An avalanche pours down the mountainside toward the slide from the upper right of the frame: a towering rolling wall of snow with dark rocks and snapped black tree trunks tumbling inside it, clearly readable against the dark sky, growing every second.
+
+[13.0-15.0] The slide runs straight into it. The avalanche slams into the camera: white powder smashes across the lens, the frame goes pure white, then dims to deep blue-black as the snow packs over the lens and buries the camera.
+
+## VOICE
+
+[0.0-2.0] Fast panting.
+[5.0-5.8] A short wordless scream as the gust hits.
+[9.5-10.2] A sharp wordless cry at the lightning crack.
+[13.0-15.0] A long wordless scream swallowed by the roar of the snow, cut off as the snow buries the camera.
+
+## END STATE
+
+The camera is buried under the avalanche. The frame is almost black, with only the faint blue of packed snow pressed against the lens. The roar is dying away, muffled.
+
+## NEGATIVE
+
+NO music of any kind. NO soundtrack, score or beat.
+NO spoken words, NO talking, NO narration, NO dialogue in any language. Only gasps, breathing and wordless screams.
+NO edit, NO transition effect, NO jump in time. The clip is one unbroken take.
+NO face. NO head. NO hair. NO hands. NO arms. NO shoulders. NO torso. NO mirror or reflection showing a person.
+NO second rider. NO other people anywhere in the frame.
+NO drone view. NO aerial camera. NO exterior view of the slide. NO shot showing the camera or its mount.
+NO pan, NO tilt, NO zoom, NO dolly, NO orbit, NO gimbal smoothing, NO camera that moves independently of the rider's body.
+NO opaque slide. NO solid floor under the rider. NO glowing line that leaves the slide surface.
+NO speed ramp. NO frozen moment. NO bullet time.
+NO on-screen text. NO caption. NO watermark. NO logo. NO UI.
+NO flat midday lighting.
+NO morphing, NO teleporting geography, NO season change in clear view: seasons change only inside a cloud.
+NO cartoon, NO 3D render look, NO video-game look, NO CGI sheen, NO anime, NO illustration.
+NO warped or duplicated feet. NO extra limbs. NO more than two legs. NO more than two feet.
+NO ride that stops, slows to a halt, reverses or floats.
+NO landing pool. NO splash-down into water at the end.
+NO straps, bindings, shoes or sandals on the feet or ankles. NO legs fused into one shape.
+NO action camera, chest mount or harness visible in the frame.

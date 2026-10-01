@@ -336,3 +336,68 @@ Upload-Post uzerinden yapiliyor, etiket alani orada dusuyor olabilir.
 - Trafik kaynagi (Shorts akisi mi, arama mi): Analytics API gerekiyor.
 Bu uc olcu olmadan "kaydirma testini gecemedi" mekanizmasi cikarimdir,
 dogrudan olcum degildir. Dayanagi 3. maddedeki iki tepeli dagilimdir.
+
+---
+
+# 1 Ekim 2026 , "kanal kendini tekrarliyor" + referans reel incelemesi
+
+Ihsan: son videolar izlenmiyor, ayni kitleye ayni sey dusuyor. Referans:
+instagram.com/p/DdvYhkUEbxn (idesignmedia.ai, 26 Eyl, 118.573 begeni, 558 yorum).
+Tam analiz ve tersine prompt: `reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md`.
+
+## Olculen
+
+- Referans: Seedance (kendi etiketi `#Seedance`), 1080x1920, 24 fps, **29,38 sn**,
+  0 sert kesme. Tek uretim 15 sn sinirinda oldugu icin **en az iki uretim**; ek yerleri
+  ayrintisiz karelere saklanmis (bulut ici std 16, karanlik magara, parlak tunel).
+- **Kanca:** ilk 1 sn kareler arasi hareket referansta 10,1, bizim 1 Ekim Eyfel'de 0,9.
+  Ilk 3 sn ortalama 12,2'ye 2,1. Bizimki 3,5 sn kenarda ayakta bekliyor.
+- **Acilis sayisi:** referansta 9 (3-5 sn'de bir yeni sey), bizde 1.
+- **Ses:** referansta konusma yok (whisper bos), yalniz efekt.
+- **Tekrar:** son 16 basligin 10'u "..., into the cloud/fog/mist" kalibinda (yayin.jsonl);
+  her rota ayni yay: kenarda dur, dus, havuza in, kahkaha.
+
+## Olculemeyen
+
+- Kendi IG oynatma sayilarimiz: `ig_kaz.py liste --hesap aimagine357` dort denemede
+  429 aldi (1 Ekim ~11:45 PDT). "Son videolar izlenmiyor" Ihsan'in gozlemi, bu
+  oturumda sayiyla dogrulanmadi.
+- Referansin izlenmesi ve hesabin normal performansi (rakip hesapta oynatma API'si
+  kullanilmadi). Begeniden tahmin ~2-3M, TAHMIN.
+- Referansin ek yerlerinin tam zamani.
+
+## Ihsan kararlari (1 Ekim)
+
+1. A/B: ayni fikir, A 15 sn tek uretim, B 30 sn iki uretim (ilk kare zinciri).
+2. Fikir: **mevsim kapisi** , ayni landmark, her bulut gecisinde mevsim degisir,
+   tehlike dogadan (yildirim, cig, catlayan buz).
+3. Ses: kelime yok, yalniz nefes, cigliklar, efekt.
+4. Bitis: tehlikeyle bitsin (cig gomer, ekran kararir). Havuz bitisi yok.
+
+Ornek: Fuji Dagi (dort mevsimin en taninan yeri). Promptlar
+`reference/ref-DdvYhkUEbxn/ornek/` (yaz_promptlar.py tek kaynaktan uretir).
+Maliyet (gunluk.py KREDI_15SN, olculmus): 15 sn 720p 615 kredi, 1080p 1530 kredi.
+Gunluk yayin 1080p; 30 sn format gunluk maliyeti IKIYE katlar.
+
+## Ornek uretimi (1 Ekim, ayni gun)
+
+Ciktilar: `out/ornek-mevsim-fuji/SECIM/` (A_15sn, B_26sn, referans). Yayinlanmadi.
+
+1. **Metinden video (ilk kare yok) iki uretimde de bozdu.** A v1: bileklerde siyah
+   kayis, egim dik degil, kis 8 sn gri ve sonuk, cig okunmuyor. B v1: iki bacak tek
+   govdeye kaynasti, kaydiraga ait olmayan yatay isik cizgisi. 1230 kredi bu iki denemeye gitti.
+2. **Cozum ilk kare kilidi.** nano-banana-2 ile ilk kare (`ornek/ilk_kare.py`), sonra
+   duzenlemeyle gogus kamerasi silindi (`ornek/duzelt.py`). A ve B ayni kareden
+   basladi, bacaklar iki uretimde de bastan sona ayri.
+3. **A v2 olculdu:** konusma yok, LUFS -13,0, ilk 1 sn hareket 5,6 (eski Eyfel 0,9,
+   referans 10,1), kis kontrasti 47-54 (v1'de 35-39). Fuji kista gorunuyor, yildirim
+   ve sag ustten kayali cig okunuyor, son 0,8 sn karanlik.
+4. **B: zincir ek yeri olu bekleme yaratti.** Birinci uretimin son 4,3 sn'si duz gri
+   bulut (ust bolge std 21-27). 12,0 sn'de kesilip ikinciye 0,3 sn gecisle baglandi
+   (`ornek/birlestir.py`), son da 14,5'te kesildi: 30 sn -> **26,2 sn**. Ek yeri gri
+   karede gorunmuyor. Ders: zincirlenecek uretimde bulut payini 1,5-2 sn yaz, 4 degil.
+5. Kalan kusurlar: rimler fisheye'da ekrani yatay kesen cizgi gibi duruyor; B sonbaharda
+   bacaklarin arasinda gri yari saydam bir serit; B ilk 0 sn'de whisper "Oh" duydu
+   (nefes, no_speech 0,64).
+
+Harcama (bakiye 10942 -> 7779): **3163 kredi**, 5 video (5 x 615) + 3 gorsel.

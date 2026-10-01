@@ -1,0 +1,31 @@
+[
+ {
+  "hedef": "ref.mp4",
+  "olcum": {
+   "genislik": 1080,
+   "yukseklik": 1920,
+   "cozunurluk": "1080x1920",
+   "fps": 24.0,
+   "kodek": "vp9",
+   "sure": 29.38,
+   "boyut_mb": 5.27,
+   "ses_var": true,
+   "ses_kanal": "2",
+   "lufs": -14.3,
+   "lra": 7.3,
+   "true_peak": -0.3,
+   "kesme_sayisi": 0,
+   "kesme_zamanlari": [],
+   "kesme_per_10sn": 0.0,
+   "plan_uzunluklari": [
+    29.38
+   ],
+   "en_uzun_plan": 29.38,
+   "en_kisa_plan": 29.38,
+   "ort_plan": 29.38,
+   "kesme_notu": "scene=0.3 esigi su spreyini/flash'i kesme sanabilir, su veya hizli hareket iceren videoda kareleri gozle dogrula"
+  },
+  "kelime": 0,
+  "wpm": null
+ }
+]

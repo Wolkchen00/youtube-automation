@@ -594,6 +594,74 @@ def telafi_karari(gecmis: list[dict], bugun: str) -> tuple[bool, str]:
     return True, "bugun kredi yuzunden duruldu (%s), yayin yok" % damga.get("sebep", "?")
 
 
+# ----------------------------------------------------------------------
+# TAKVIM: hazir video gunleri
+#
+# 2026-10-01 Ihsan karari: mevsim kapisi A/B testi. Iki hazir video 1 gun
+# arayla yayinlanacak (2 ve 3 Ekim) ve o iki gun otomasyon URETMEYECEK. Takvim
+# dosyasinda bugune kayit varsa kosu rota uretmez, o kaydin videosunu yayinlar.
+# Kredi harcamaz. Kayit yoksa kosu her zamanki gibi uretir.
+#
+# Neden ayri is akisi (fear-slide-hazir.yml) degil: o elle tetikleniyor ve dosya
+# adi icine gomulu. Takvim gunluk cron'un icinde oldugu icin gunde-1 kilidi,
+# telafi kosusu ve Telegram uyarisi aynen gecerli.
+# ----------------------------------------------------------------------
+def takvim_kaydi(bugun: str, yol: Path | None = None) -> dict | None:
+    """Bugune ayrilmis hazir video kaydi, yoksa None.
+
+    Dosya bozuksa None DEGIL istisna: bozuk takvim sessizce uretime dusup
+    hazir videonun gununu yemesin, kosu kirmizi yansin."""
+    yol = yol or KOK / "hazir" / "takvim.json"
+    if not yol.exists():
+        return None
+    veri = json.loads(yol.read_text(encoding="utf-8"))
+    for kayit in veri.get("gunler") or []:
+        if isinstance(kayit, dict) and kayit.get("tarih") == bugun:
+            return kayit
+    return None
+
+
+def takvim_yayinla(kayit: dict, gecmis: list[dict], bugun: str, allow_same_day: bool) -> int:
+    video = KOK / kayit.get("video", "")
+    caption = KOK / kayit.get("caption", "")
+    baslik = (kayit.get("baslik") or "").strip()
+    if not kayit.get("video") or not kayit.get("caption"):
+        log("DUR: takvim kaydinda video ya da caption alani yok")
+        return 1
+    for yol in (video, caption):
+        if not yol.is_file():
+            log("DUR: takvim kaydinin dosyasi yok: %s" % yol)
+            return 1
+    if not baslik:
+        log("DUR: takvim kaydinda baslik yok")
+        return 1
+    if bugunku_basarili(gecmis, bugun) and not allow_same_day:
+        log("DUR: bugun zaten yayin var. --allow-same-day ile zorlanabilir.")
+        return 0
+    komut = [
+        PY, "-X", "utf8", str(KOK / "tools" / "yayinla.py"), str(video),
+        "--caption-file", str(caption), "--title", baslik,
+        "--tags", etiketler(caption.read_text(encoding="utf-8")),
+        "--skip-if-published",
+        "--ek-alanlar", json.dumps({"slug": kayit.get("slug"), "kaynak": "takvim"},
+                                   ensure_ascii=False),
+    ]
+    _, yorum = etkilesim_sec()
+    if yorum:
+        komut += ["--first-comment", yorum]
+    if allow_same_day:
+        komut.append("--allow-same-day")
+    log("TAKVIM: bugun hazir video gunu, uretim YOK: %s" % kayit.get("slug"))
+    log("baslik        : %s" % baslik)
+    sonuc = kosa(komut, YT_KOK)
+    print(sonuc.stdout[-2500:])
+    if sonuc.returncode != 0:
+        log("YAYIN BASARISIZ:\n" + (sonuc.stderr or "")[-1200:])
+        return 1
+    log("BITTI: takvim videosu %s yayinlandi" % kayit.get("slug"))
+    return 0
+
+
 def uretim_kaydi_yaz(slug: str, kayit: dict) -> Path:
     hedef = KOK / "out" / slug / "uretim" / (kayit["master_sha"] + ".json")
     if hedef.exists():
@@ -866,12 +934,24 @@ def main(argv: list[str] | None = None) -> int:
     if args.yayinla_mevcut is not None:
         return yayinla_mevcut(args.yayinla_mevcut.resolve(), args.allow_same_day)
     if args.telafi_kapisi:
-        calis, gerekce = telafi_karari(defter(), datetime.now(LA).strftime("%Y-%m-%d"))
+        bugun = datetime.now(LA).strftime("%Y-%m-%d")
+        gecmis = defter()
+        calis, gerekce = telafi_karari(gecmis, bugun)
+        # Takvim gunu sabah yayini dusmusse telafi yeniden dener; kredi harcamaz.
+        if not calis and takvim_kaydi(bugun) and not bugunku_basarili(gecmis, bugun):
+            calis, gerekce = True, "bugun takvim gunu ve yayin yok, hazir video yeniden denenecek"
         print("telafi: %s" % gerekce, file=sys.stderr)
         print("calis=%s" % ("true" if calis else "false"))
         return 0
 
     gecmis = defter()
+    # Takvim yalniz kendiliginden kosuda gecerli: elle --sehir verilmisse
+    # kullanici o rotayi URETMEK istiyor demektir.
+    if not args.sehir and not args.dry and not args.yayinlama:
+        bugun = datetime.now(LA).strftime("%Y-%m-%d")
+        kayit = takvim_kaydi(bugun)
+        if kayit is not None:
+            return takvim_yayinla(kayit, gecmis, bugun, args.allow_same_day)
     slug = args.sehir or sirdaki(gecmis)
     profil = PROFILLER[args.profil]
 
@@ -897,6 +977,8 @@ def main(argv: list[str] | None = None) -> int:
     ham_durum = YETENEK_MATRISI.get(anahtar, "matriste yok")
 
     if args.dry:
+        takvim = takvim_kaydi(datetime.now(LA).strftime("%Y-%m-%d"))
+        print("takvim bugun : %s" % (takvim.get("slug") if takvim else "yok"))
         print("sirdaki slug : %s" % slug)
         print("sure         : %s" % sure)
         print("palet        : %s" % palet)

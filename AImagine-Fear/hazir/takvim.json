@@ -1,0 +1,19 @@
+{
+  "_aciklama": "Tarihi gelen gun gunluk.py URETIM YAPMAZ, o gunun hazir videosunu yayinlar. Tarih Los Angeles saatine gore. 2026-10-01 Ihsan karari: mevsim kapisi A/B testi, A (15 sn) 2 Ekim, B (26 sn) 3 Ekim; 4 Ekim'den itibaren otomasyon kapi konseptiyle uretir. Kaynak analiz: reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md",
+  "gunler": [
+    {
+      "tarih": "2026-10-02",
+      "slug": "mevsim-fuji-a15",
+      "video": "hazir/mevsim-fuji-a15.mp4",
+      "caption": "hazir/mevsim-fuji-a15.caption.txt",
+      "baslik": "Mount Fuji, spring to blizzard #shorts"
+    },
+    {
+      "tarih": "2026-10-03",
+      "slug": "mevsim-fuji-b26",
+      "video": "hazir/mevsim-fuji-b26.mp4",
+      "caption": "hazir/mevsim-fuji-b26.caption.txt",
+      "baslik": "Mount Fuji, four seasons drop #shorts"
+    }
+  ]
+}
