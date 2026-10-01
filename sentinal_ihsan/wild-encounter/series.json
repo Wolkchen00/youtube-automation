@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 19,
+  "next_part": 20,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -539,12 +539,51 @@
       "hold_reason": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=110.0, asgari=200.0, tavan=1000"
     },
     "19": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-09-29T14:07:27.868558+00:00",
       "first_infra_held_at": "2026-09-29T14:07:27.868558+00:00",
       "infra_retry_count": 2,
       "last_reason_code": "TRANSIENT_INFRA",
-      "hold_reason": "server"
+      "hold_reason": "server",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep19/ep19_mastered.mp4",
+      "subtitle": "This GIANT GRIZZLY BEAR Is NOT Real",
+      "stack_sha256": "25bdcc3fcb666dc2f76ad2691c5138bef4478bc618631b3e20c62c2c5917fcec",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part19",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "mHZ4NC8zxnc",
+          "video_sha256": "8e2e6a9f69e47ef767fe628829034b399d9c79109d10d19b604adcd8e4f5a69d",
+          "ts": "2026-10-01T14:37:23.191630+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18625557922025510",
+          "video_sha256": "8e2e6a9f69e47ef767fe628829034b399d9c79109d10d19b604adcd8e4f5a69d",
+          "ts": "2026-10-01T14:38:36.995958+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7691708771420114189",
+          "video_sha256": "8e2e6a9f69e47ef767fe628829034b399d9c79109d10d19b604adcd8e4f5a69d",
+          "ts": "2026-10-01T14:39:47.253135+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-01T14:39:47.255181+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti.",
