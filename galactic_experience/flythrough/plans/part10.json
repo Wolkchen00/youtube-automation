@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "Through the Corona of the Sun"
+  },
+  "synopsis": "A high-speed flight through superheated plasma arcs in the Sun's outer corona.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nA relentless first-person view flies through the outer atmosphere of the Sun. Seconds 0-4 display a breathtaking wide view of towering plasma prominences curving over the blinding solar surface, lit by brilliant white-gold thermal emission against black space. Seconds 4-6 accelerate toward a glowing magnetic loop as fiery filaments rush into the peripheral frame. Seconds 6-13 race through a dense stream of ionized hydrogen, where blinding plasma tendrils whip past the camera with heavy motion blur, magnetic arc loops snap and recombine with energetic flares, and glowing ember particles swirl violently while the golden solar surface glows behind them. Seconds 13-15 plunge directly into the core of a massive coronal mass ejection loop, engulfing the entire vertical frame in overwhelming white-hot light and incandescent plasma before terminating in a blinding flash. Sound begins as a low electromagnetic hum, escalates with crackling plasma snaps during flare recombinations, and reaches a peak roaring resonance in the final two seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How close do you think solar probes can actually get? ☀️",
+  "family": "yildiz yakini",
+  "seed_id": 18,
+  "caption": "A rapid flight sweeps directly through the blazing corona of the Sun amidst towering loops of superheated plasma.\n\nThe solar atmosphere is composed of ionized hydrogen and helium gas heated to temperatures exceeding one million degrees Celsius.\n\nNASA's Parker Solar Probe touched the solar atmosphere in 2021, measuring intense magnetic fields and energetic particle solar wind stream flows.\n\nPassing through this zone is impossible because extreme radiation and temperatures near two million degrees would vaporize any spacecraft material within a fraction of a second.\n\nThis is a simulation, not real footage. Could humanity ever build materials capable of enduring the solar corona?",
+  "hashtags": "#Sun #SolarCorona #Plasma #Astrophysics #SpaceFlight #Simulation #CGI",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}

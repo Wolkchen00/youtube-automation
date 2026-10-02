@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-01T18:46:10.655088+00:00",
+  "guncellendi": "2026-10-02T17:53:49.483984+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 760,
@@ -1066,6 +1066,31 @@
           },
           "tiktok": {
             "views": 384,
+            "likes": 16,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-02T17:53:49.483984+00:00",
+          "yas_saat": 189.673,
+          "youtube": {
+            "views": 1387,
+            "likes": 12,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 12,
+            "comments": 1,
+            "views": 1879,
+            "impressions": 1879,
+            "reach": 1322,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 385,
             "likes": 16,
             "comments": 0,
             "shares": 0

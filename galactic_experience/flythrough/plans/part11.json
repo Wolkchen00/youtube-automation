@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Through the Coma of Comet 67P"
+  },
+  "synopsis": "A plunge into the active dust jet coma surrounding Comet 67P/Churyumov-Gerasimenko.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nA continuous first-person perspective flies into the dusty coma of Comet 67P/Churyumov-Gerasimenko. Seconds 0-4 capture the dark, irregular double-lobed nucleus illuminated by harsh, direct sunlight, venting luminous jets of gas and dust into black space. Seconds 4-6 accelerate toward the active neck region as dark dusty filaments enter the frame edges. Seconds 6-13 rush through supersonic gas jets, where car-sized icy debris and dark dust grains streak past with extreme motion blur, colliding fragments disintegrate into glowing particles, and the dark terrain of the nucleus glimmers behind the hazy coma jets. Seconds 13-15 plunge directly into a high-density dust vent bursting from the nucleus surface, swarming the vertical frame with an intense blizzard of illuminated particles before slamming into the dark comet wall. Audio begins with a quiet low-frequency whistle, adds sharp clicking impacts as dust particles hit, and swells into a overwhelming roaring blast in the final two seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you land a probe on a active comet? ☄️",
+  "family": "kuyruk gecisi",
+  "seed_id": 22,
+  "caption": "A continuous pass flies into the dusty coma of Comet 67P/Churyumov-Gerasimenko near its dark double-lobed nucleus.\n\nThe enveloping cloud is composed of water vapor, carbon dioxide gas, and fine silicates escaping from active surface vents.\n\nESA's Rosetta spacecraft rendezvoused with the comet in 2014, mapping its surface and tracking dust jets during perihelion.\n\nPenetrating this dusty envelope is impossible because high-velocity dust impacts at tens of kilometers per second would erode optical sensors and destroy structural integrity instantly.\n\nThis is a simulation, not real footage. Which cometary target should space agencies visit next?",
+  "hashtags": "#Comet67P #Rosetta #Comet #SpaceExploration #Astronomy #Simulation #3DAnimation",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}
