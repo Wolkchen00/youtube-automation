@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 20,
+  "next_part": 21,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -797,6 +797,48 @@
         "tiktok"
       ],
       "published_at": "2026-10-01T14:39:47.255181+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "20": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep20/ep20_mastered.mp4",
+      "subtitle": "This GIANT SNAPPING TURTLE Is NOT Real",
+      "stack_sha256": "1c15062470408354254ca7f3622dd8b98f5c94033ba05d13b647e9c92a35ddfd",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part20",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "LrnhF7lj_lw",
+          "video_sha256": "dfe423b3876fc4bfd768c5ce8269e84de7a7173889e5030f176a08430805412c",
+          "ts": "2026-10-02T14:22:36.708603+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18138076405722605",
+          "video_sha256": "dfe423b3876fc4bfd768c5ce8269e84de7a7173889e5030f176a08430805412c",
+          "ts": "2026-10-02T14:23:52.584619+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7692076014960168206",
+          "video_sha256": "dfe423b3876fc4bfd768c5ce8269e84de7a7173889e5030f176a08430805412c",
+          "ts": "2026-10-02T14:25:03.963907+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-02T14:25:03.965791+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,

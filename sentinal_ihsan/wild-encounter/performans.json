@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-01T14:26:43.335041+00:00",
+  "guncellendi": "2026-10-02T13:50:21.481190+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 322.0,
@@ -2215,7 +2215,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-23T19:25:57.058725+00:00",
       "subtitle": "This GIANT COBRA Is NOT Real",
@@ -2759,6 +2759,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-02T13:50:21.481190+00:00",
+          "yas_saat": 183.925,
+          "youtube": {
+            "views": 40,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 3,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 113.25,
+            "engaged_views": 17,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 21,
+            "comments": 1,
+            "views": 2063,
+            "impressions": 2063,
+            "reach": 1322,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1016,
+            "likes": 25,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3274,6 +3305,37 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-10-02T13:50:21.481190+00:00",
+          "yas_saat": 168.956,
+          "youtube": {
+            "views": 181,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 18,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 123.95,
+            "engaged_views": 77,
+            "subscribers_gained": 1,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 149,
+            "comments": 2,
+            "views": 26749,
+            "impressions": 26749,
+            "reach": 17506,
+            "saves": 4,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 760,
+            "likes": 13,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -3378,8 +3440,8 @@
         },
         "s7g": {
           "youtube": {
-            "ts": "2026-10-01T14:26:43.335041+00:00",
-            "yas_saat": 145.562,
+            "ts": "2026-10-02T13:50:21.481190+00:00",
+            "yas_saat": 168.956,
             "youtube": {
               "views": 181,
               "likes": 2,
@@ -3387,30 +3449,30 @@
               "favorites": 0,
               "watch_time_minutes": 18,
               "average_view_duration_seconds": 13,
-              "average_view_percentage": 124.48,
-              "engaged_views": 76,
+              "average_view_percentage": 123.95,
+              "engaged_views": 77,
               "subscribers_gained": 1,
               "shares": 0
             },
             "instagram": {
               "likes": 149,
               "comments": 2,
-              "views": 26744,
-              "impressions": 26744,
+              "views": 26749,
+              "impressions": 26749,
               "reach": 17506,
               "saves": 4,
               "shares": 0
             },
             "tiktok": {
-              "views": 747,
+              "views": 760,
               "likes": 13,
               "comments": 0,
               "shares": 1
             }
           },
           "instagram": {
-            "ts": "2026-10-01T14:26:43.335041+00:00",
-            "yas_saat": 145.562,
+            "ts": "2026-10-02T13:50:21.481190+00:00",
+            "yas_saat": 168.956,
             "youtube": {
               "views": 181,
               "likes": 2,
@@ -3418,30 +3480,30 @@
               "favorites": 0,
               "watch_time_minutes": 18,
               "average_view_duration_seconds": 13,
-              "average_view_percentage": 124.48,
-              "engaged_views": 76,
+              "average_view_percentage": 123.95,
+              "engaged_views": 77,
               "subscribers_gained": 1,
               "shares": 0
             },
             "instagram": {
               "likes": 149,
               "comments": 2,
-              "views": 26744,
-              "impressions": 26744,
+              "views": 26749,
+              "impressions": 26749,
               "reach": 17506,
               "saves": 4,
               "shares": 0
             },
             "tiktok": {
-              "views": 747,
+              "views": 760,
               "likes": 13,
               "comments": 0,
               "shares": 1
             }
           },
           "tiktok": {
-            "ts": "2026-10-01T14:26:43.335041+00:00",
-            "yas_saat": 145.562,
+            "ts": "2026-10-02T13:50:21.481190+00:00",
+            "yas_saat": 168.956,
             "youtube": {
               "views": 181,
               "likes": 2,
@@ -3449,22 +3511,22 @@
               "favorites": 0,
               "watch_time_minutes": 18,
               "average_view_duration_seconds": 13,
-              "average_view_percentage": 124.48,
-              "engaged_views": 76,
+              "average_view_percentage": 123.95,
+              "engaged_views": 77,
               "subscribers_gained": 1,
               "shares": 0
             },
             "instagram": {
               "likes": 149,
               "comments": 2,
-              "views": 26744,
-              "impressions": 26744,
+              "views": 26749,
+              "impressions": 26749,
               "reach": 17506,
               "saves": 4,
               "shares": 0
             },
             "tiktok": {
-              "views": 747,
+              "views": 760,
               "likes": 13,
               "comments": 0,
               "shares": 1
@@ -3475,8 +3537,8 @@
       "yargi_anligi": "oturmus",
       "oranlar": {
         "youtube": 0.562112,
-        "instagram": 15.317297,
-        "tiktok": 1.729167
+        "instagram": 15.32016,
+        "tiktok": 1.759259
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -3486,30 +3548,86 @@
           "favorites": 0,
           "watch_time_minutes": 18,
           "average_view_duration_seconds": 13,
-          "average_view_percentage": 124.48,
-          "engaged_views": 76,
+          "average_view_percentage": 123.95,
+          "engaged_views": 77,
           "subscribers_gained": 1,
           "shares": 0
         },
         "instagram": {
           "likes": 149,
           "comments": 2,
-          "views": 26744,
-          "impressions": 26744,
+          "views": 26749,
+          "impressions": 26749,
           "reach": 17506,
           "saves": 4,
           "shares": 0
         },
         "tiktok": {
-          "views": 747,
+          "views": 760,
           "likes": 13,
           "comments": 0,
           "shares": 1
         }
       },
-      "puan": 15.317297,
+      "puan": 15.32016,
       "etiket": "kazanan"
+    },
+    {
+      "part": 19,
+      "post_ids": {
+        "youtube": "mHZ4NC8zxnc",
+        "instagram": "18625557922025510",
+        "tiktok": "7691708771420114189"
+      },
+      "request_ids": {
+        "youtube": "1703be4564d54e2b8fe6c59b800685bb",
+        "instagram": "392e264bbd454b05abb1ca2b46516040",
+        "tiktok": "3a5311d1171d40f48e8ac7125ea2e6a2"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-02T13:50:21.481190+00:00",
+          "yas_saat": 23.176,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 45,
+            "comments": 1,
+            "views": 8510,
+            "impressions": 8510,
+            "reach": 5595,
+            "saves": 2,
+            "shares": 4
+          },
+          "tiktok": {
+            "views": 171,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-01T14:39:47.254704+00:00",
+      "subtitle": "This GIANT GRIZZLY BEAR Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 12
 }
