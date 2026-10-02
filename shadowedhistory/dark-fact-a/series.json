@@ -182,7 +182,15 @@
       ]
     }
   },
-  "parts": {},
+  "parts": {
+    "1": {
+      "status": "qc_retry",
+      "first_held_at": "2026-10-02T17:01:19.292349+00:00",
+      "retry_count": 1,
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "üretim nedeni bilinmiyor"
+    }
+  },
   "engagement": {
     "first_comment_pool": [
       "Did you already know this? Yes or no.",

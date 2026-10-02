@@ -1,7 +1,58 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-01T20:05:30.081558+00:00",
+  "guncellendi": "2026-10-02T16:49:37.476896+00:00",
   "medyanlar": {},
-  "parts": [],
-  "api_cagrilari": 0
+  "parts": [
+    {
+      "part": 1,
+      "post_ids": {
+        "youtube": "gRySBsAtPdg",
+        "instagram": "18018554405943424",
+        "tiktok": "7691797243950615822"
+      },
+      "request_ids": {
+        "youtube": "078ba0665ced4bee85a8ba08122bf0c7",
+        "instagram": "c4bd9c4714f34e7189e64d346c9b42c5",
+        "tiktok": "ad1b21218e6e48aaae3e9f899fc2889b"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-02T16:49:37.476896+00:00",
+          "yas_saat": 20.446,
+          "youtube": {
+            "views": 254,
+            "likes": 4,
+            "comments": 2,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 185,
+            "impressions": 185,
+            "reach": 131,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1009,
+            "likes": 17,
+            "comments": 0,
+            "shares": 1
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-01T20:22:51.301912+00:00",
+      "subtitle": "Many Easter Island Heads Have Hidden Bodies",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    }
+  ],
+  "api_cagrilari": 6
 }
