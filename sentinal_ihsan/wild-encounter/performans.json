@@ -1,7 +1,12 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-02T13:50:21.481190+00:00",
+  "guncellendi": "2026-10-03T12:30:04.577585+00:00",
   "medyanlar": {
+    "s48": {
+      "youtube": 75,
+      "instagram": 2251,
+      "tiktok": 593
+    },
     "oturmus": {
       "youtube": 322.0,
       "instagram": 1746,
@@ -2792,7 +2797,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-24T21:54:50.961781+00:00",
       "subtitle": "This GIANT WASP Is NOT Real",
@@ -3336,6 +3341,37 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-10-03T12:30:04.577585+00:00",
+          "yas_saat": 191.618,
+          "youtube": {
+            "views": 182,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 18,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 123.95,
+            "engaged_views": 77,
+            "subscribers_gained": 1,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 149,
+            "comments": 2,
+            "views": 26762,
+            "impressions": 26762,
+            "reach": 17513,
+            "saves": 4,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 760,
+            "likes": 13,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -3615,12 +3651,227 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-03T12:30:04.577585+00:00",
+          "yas_saat": 45.838,
+          "youtube": {
+            "views": 75,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 45,
+            "comments": 1,
+            "views": 8584,
+            "impressions": 8584,
+            "reach": 5676,
+            "saves": 2,
+            "shares": 4
+          },
+          "tiktok": {
+            "views": 171,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-01T14:39:47.254704+00:00",
       "subtitle": "This GIANT GRIZZLY BEAR Is NOT Real",
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-03T12:30:04.577585+00:00",
+            "yas_saat": 45.838,
+            "youtube": {
+              "views": 75,
+              "likes": 3,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 45,
+              "comments": 1,
+              "views": 8584,
+              "impressions": 8584,
+              "reach": 5676,
+              "saves": 2,
+              "shares": 4
+            },
+            "tiktok": {
+              "views": 171,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-03T12:30:04.577585+00:00",
+            "yas_saat": 45.838,
+            "youtube": {
+              "views": 75,
+              "likes": 3,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 45,
+              "comments": 1,
+              "views": 8584,
+              "impressions": 8584,
+              "reach": 5676,
+              "saves": 2,
+              "shares": 4
+            },
+            "tiktok": {
+              "views": 171,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-03T12:30:04.577585+00:00",
+            "yas_saat": 45.838,
+            "youtube": {
+              "views": 75,
+              "likes": 3,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 45,
+              "comments": 1,
+              "views": 8584,
+              "impressions": 8584,
+              "reach": 5676,
+              "saves": 2,
+              "shares": 4
+            },
+            "tiktok": {
+              "views": 171,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 1.0,
+        "instagram": 3.813416,
+        "tiktok": 0.288364
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 75,
+          "likes": 3,
+          "comments": 0,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 45,
+          "comments": 1,
+          "views": 8584,
+          "impressions": 8584,
+          "reach": 5676,
+          "saves": 2,
+          "shares": 4
+        },
+        "tiktok": {
+          "views": 171,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 3.813416,
+      "etiket": "kazanan"
+    },
+    {
+      "part": 20,
+      "post_ids": {
+        "youtube": "LrnhF7lj_lw",
+        "instagram": "18138076405722605",
+        "tiktok": "7692076014960168206"
+      },
+      "request_ids": {
+        "youtube": "59301e0b095743a6b0b0a38fe327992b",
+        "instagram": "cbd60476cdf7414898a8c1290372a8fc",
+        "tiktok": "dc56565cfb1a404e8fd3752b69610e4e"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-03T12:30:04.577585+00:00",
+          "yas_saat": 22.084,
+          "youtube": {
+            "views": 253,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 17,
+            "comments": 1,
+            "views": 1855,
+            "impressions": 1855,
+            "reach": 1168,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-02T14:25:03.965328+00:00",
+      "subtitle": "This GIANT SNAPPING TURTLE Is NOT Real",
       "anlik": {},
       "yargi_anligi": null,
       "oranlar": {},

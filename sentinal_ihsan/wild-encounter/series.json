@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 21,
+  "next_part": 22,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -839,6 +839,48 @@
         "tiktok"
       ],
       "published_at": "2026-10-02T14:25:03.965791+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "21": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep21/ep21_mastered.mp4",
+      "subtitle": "This GIANT TARANTULA Is NOT Real",
+      "stack_sha256": "1c15062470408354254ca7f3622dd8b98f5c94033ba05d13b647e9c92a35ddfd",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part21",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "ZeYA8oeM7f4",
+          "video_sha256": "9dfbe2eaa1b2060e925e0d8a8b9c2c7c2c80514668c2a73c8adecb76279066e2",
+          "ts": "2026-10-03T12:38:09.348770+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18432537136182813",
+          "video_sha256": "9dfbe2eaa1b2060e925e0d8a8b9c2c7c2c80514668c2a73c8adecb76279066e2",
+          "ts": "2026-10-03T12:39:49.647768+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7692420188569914638",
+          "video_sha256": "9dfbe2eaa1b2060e925e0d8a8b9c2c7c2c80514668c2a73c8adecb76279066e2",
+          "ts": "2026-10-03T12:41:00.141860+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-03T12:41:00.144035+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
