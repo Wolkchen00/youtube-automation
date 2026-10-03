@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-02T17:53:37.293585+00:00",
+  "guncellendi": "2026-10-03T16:19:10.887365+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 542.5,
@@ -2017,6 +2017,31 @@
             "comments": 1,
             "shares": 6
           }
+        },
+        {
+          "ts": "2026-10-03T16:19:10.887365+00:00",
+          "yas_saat": 190.976,
+          "youtube": {
+            "views": 23,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 18,
+            "comments": 1,
+            "views": 1707,
+            "impressions": 1707,
+            "reach": 1180,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1036,
+            "likes": 16,
+            "comments": 1,
+            "shares": 6
+          }
         }
       ],
       "donduruldu": false,
@@ -2337,6 +2362,31 @@
           },
           "tiktok": {
             "views": 347,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-03T16:19:10.887365+00:00",
+          "yas_saat": 111.999,
+          "youtube": {
+            "views": 440,
+            "likes": 5,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 7,
+            "comments": 1,
+            "views": 270,
+            "impressions": 270,
+            "reach": 177,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 350,
             "likes": 6,
             "comments": 0,
             "shares": 0
