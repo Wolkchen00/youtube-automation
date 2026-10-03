@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "Ottomans Hauled Warships Over Land"
+  },
+  "synopsis": "During the siege of Constantinople in 1453, Ottoman forces transported entire ships over hills to reach the Golden Horn.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, a massive wooden Ottoman galley sitting at the base of a dark hill under flickering torchlight, its hull resting on thick wooden logs glistening with grease, ropes strained tight.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, a close-up of the heavy wooden logs groaning and turning under the massive weight of the ship's keel, thick grease squeezing out as the vessel slowly glides forward.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, a wide view looking up the steep hill as the silhouette of the warship rises against the night sky, pulled by hundreds of men and oxen walking in slow rhythm.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, the warship reaching the crest of the hill, framed against the distant fires of Constantinople, the camera slowly pushing in as the vessel begins its descent toward the water.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Imagine waking up to see an enemy fleet suddenly floating in your closed harbor! How would you react? 🚢",
+  "family": "gizli muhendislik",
+  "seed_id": 22,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Ottomans hauled warships over a hill.",
+    "subtitle": "In 1453 greased logs bypassed sea walls."
+  },
+  "caption": "In 1453 the Ottomans hauled their warships over a hill on greased logs to reach the Golden Horn.\n\nDuring the final siege of Constantinople, Sultan Mehmed II bypassed the Byzantine harbor chain by dragging seventy ships overland overnight. This shocking engineering feat changed the course of history.\n\nVisuals created with AI.\n\nCould you imagine dragging a warship over land?",
+  "hashtags": "#history #historyfacts #constantinople #militaryhistory #engineering",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

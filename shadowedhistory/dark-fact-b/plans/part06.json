@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "Hashima Island Was Densely Populated"
+  },
+  "synopsis": "In 1959, the coal-mining island of Hashima in Japan reached an astonishing population density before its sudden abandonment.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, the towering grey concrete seawall of Hashima Island under a gloomy, overcast sky, packed with tall, brutalist apartment blocks rising directly out of the crashing waves.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, a close-up looking up a narrow, dark alleyway between massive concrete buildings, wet with ocean spray, laundry lines empty and swaying in the cold wind.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, a wide aerial-style view from a boat looking at the entire compact fortress-island, surrounded by turbulent grey ocean water, looking like a concrete battleship frozen in time.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, a slow push-in on an empty, rusted balcony overlooking the ocean, deep shadows casting a quiet, ghost-town atmosphere over the decaying concrete structures.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Living packed together on a tiny concrete rock in the middle of the ocean... would you survive the isolation? 🏚️",
+  "family": "zamanin izi",
+  "seed_id": 38,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Hashima was the most crowded island.",
+    "subtitle": "A concrete coal fortress packed with lives."
+  },
+  "caption": "In 1959 Hashima Island in Japan was one of the most densely populated places on Earth.\n\nThis tiny concrete battleship island housed over five thousand coal miners and their families within just sixteen acres. When the coal mines closed in 1974, the entire city was abandoned to the sea.\n\nVisuals created with AI.\n\nWould you dare to explore this abandoned concrete ghost island?",
+  "hashtags": "#history #historyfacts #hashima #abandonedplaces #japan",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

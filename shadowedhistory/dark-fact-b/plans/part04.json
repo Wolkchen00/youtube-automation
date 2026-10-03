@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "Vikings Never Wore Horned Helmets"
+  },
+  "synopsis": "Historical evidence shows that Norse warriors wore plain iron and leather helmets rather than the iconic horned design.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, a fierce Viking warrior standing on the deck of a longship in thick morning fog, wearing a simple, rounded iron dome helmet without horns, looking out over the dark water.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, a close-up of the hand-beaten iron plates and rivet details of a plain Norse helmet, wet with sea spray, reflecting the faint orange light of a deck brazier.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, a wide view of multiple longships gliding silently through a narrow, dark Norwegian fjord, warriors standing like still statues at the rails in their plain iron gear.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, a slow push-in on a single warrior seen from a low angle, his silhouette dark against the misty cliffs, holding a battleaxe as the boat slowly sways.",
+      "seed": null
+    }
+  ],
+  "first_comment": "No horns at all! Do you think the real, plain iron helmets look cooler than the myth? ⚔️",
+  "family": "garip gercekler",
+  "seed_id": 32,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Vikings never wore horned helmets.",
+    "subtitle": "The horns were added by Victorian artists."
+  },
+  "caption": "Vikings never actually wore horned helmets.\n\nExcavated helmets from the Viking Age, dating between the years 793 and 1066, are simple dome shapes made of iron and leather. The famous horned myth was popularized by 19th-century costume designers for Wagnerian operas.\n\nVisuals created with AI.\n\nDid you grow up believing Vikings wore horns?",
+  "hashtags": "#history #historyfacts #vikings #norse #archaeology",
+  "hook_shot": 2,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

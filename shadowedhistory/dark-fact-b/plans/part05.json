@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "Krakatoa Eruption Heard 4800 Kilometres Away"
+  },
+  "synopsis": "The colossal 1883 eruption of the Krakatoa volcano generated a sound so powerful it was heard across vast oceans.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, a towering dark volcanic island on the distant horizon of a stormy sea, a massive black ash column beginning to boil violently up into the overcast sky.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, a close-up of the sailing ship's rigging and wooden deck vibrating violently as the sea ripples with deep, invisible shockwaves under a bruised orange sunset.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, a wide view from the deck of a wooden sailing ship looking toward the colossal eruption, with tiny crew silhouettes holding the railings as a dark wall of ash blocks the sun.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, a slow push-in on the boiling, red-lit underside of the massive ash cloud, lightning cracking inside the black smoke as it spreads across the entire sky.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Hearing an explosion from thousands of miles away must have been terrifying. What would you think it was? 🌋",
+  "family": "tuhaf felaketler",
+  "seed_id": 14,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Krakatoa was heard 4,800 km away.",
+    "subtitle": "The loudest sound in recorded history."
+  },
+  "caption": "The 1883 eruption of Krakatoa was heard almost 4,800 kilometres away.\n\nOn August 27, 1883, the volcanic island of Krakatoa exploded with a force so immense it ruptured the eardrums of sailors 40 miles away. The shocking sound wave circled the entire globe four times.\n\nVisuals created with AI.\n\nCan you imagine a sound so loud it travels across oceans?",
+  "hashtags": "#history #historyfacts #krakatoa #volcano #naturaldisaster",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
