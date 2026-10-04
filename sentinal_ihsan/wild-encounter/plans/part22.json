@@ -29,5 +29,9 @@
   },
   "family": "sea-giant",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/j9fNZWnF/ep22-giant-orca.png"
+  ],
+  "ref_prompt_sha256": "bee6b43fa5582d08ac13c100424ff890935584ce22e1b5a240f3eb8842cf87f0"
 }

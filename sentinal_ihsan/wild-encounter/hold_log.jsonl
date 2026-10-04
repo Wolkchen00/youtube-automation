@@ -14,3 +14,4 @@
 {"ts": "2026-09-29T14:02:54.148229+00:00", "part": 18, "durum": "budget_exhausted", "kod": "BUDGET_EXHAUSTED", "neden": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=110.0, asgari=200.0, tavan=1000", "coherence": null}
 {"ts": "2026-09-29T14:07:27.868628+00:00", "part": 19, "durum": "qc_retry", "kod": "TRANSIENT_INFRA", "neden": "server", "coherence": null}
 {"ts": "2026-09-30T13:50:00.746758+00:00", "part": 19, "durum": "qc_retry", "kod": "TRANSIENT_INFRA", "neden": "server", "coherence": null}
+{"ts": "2026-10-04T13:26:05.115133+00:00", "part": 22, "durum": "qc_retry", "kod": "UNKNOWN", "neden": "", "coherence": null}

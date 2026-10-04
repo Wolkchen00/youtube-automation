@@ -1,11 +1,11 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-03T12:30:04.577585+00:00",
+  "guncellendi": "2026-10-04T13:10:55.845426+00:00",
   "medyanlar": {
     "s48": {
-      "youtube": 75,
-      "instagram": 2251,
-      "tiktok": 593
+      "youtube": 75.0,
+      "instagram": 2152.0,
+      "tiktok": 402.5
     },
     "oturmus": {
       "youtube": 322.0,
@@ -3374,7 +3374,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-25T12:52:59.238716+00:00",
       "subtitle": "This GIANT SHARK Is NOT Real",
@@ -3682,6 +3682,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-04T13:10:55.845426+00:00",
+          "yas_saat": 70.519,
+          "youtube": {
+            "views": 104,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 46,
+            "comments": 1,
+            "views": 8601,
+            "impressions": 8601,
+            "reach": 5701,
+            "saves": 2,
+            "shares": 4
+          },
+          "tiktok": {
+            "views": 171,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3788,8 +3819,8 @@
       "yargi_anligi": "s48",
       "oranlar": {
         "youtube": 1.0,
-        "instagram": 3.813416,
-        "tiktok": 0.288364
+        "instagram": 3.988848,
+        "tiktok": 0.424845
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -3820,7 +3851,7 @@
           "shares": 0
         }
       },
-      "puan": 3.813416,
+      "puan": 3.988848,
       "etiket": "kazanan"
     },
     {
@@ -3866,12 +3897,227 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-04T13:10:55.845426+00:00",
+          "yas_saat": 46.764,
+          "youtube": {
+            "views": 290,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 18,
+            "comments": 1,
+            "views": 1936,
+            "impressions": 1936,
+            "reach": 1220,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-02T14:25:03.965328+00:00",
       "subtitle": "This GIANT SNAPPING TURTLE Is NOT Real",
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-04T13:10:55.845426+00:00",
+            "yas_saat": 46.764,
+            "youtube": {
+              "views": 290,
+              "likes": 2,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 18,
+              "comments": 1,
+              "views": 1936,
+              "impressions": 1936,
+              "reach": 1220,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-04T13:10:55.845426+00:00",
+            "yas_saat": 46.764,
+            "youtube": {
+              "views": 290,
+              "likes": 2,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 18,
+              "comments": 1,
+              "views": 1936,
+              "impressions": 1936,
+              "reach": 1220,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-04T13:10:55.845426+00:00",
+            "yas_saat": 46.764,
+            "youtube": {
+              "views": 290,
+              "likes": 2,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 18,
+              "comments": 1,
+              "views": 1936,
+              "impressions": 1936,
+              "reach": 1220,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 3.866667,
+        "instagram": 0.899628,
+        "tiktok": 0.0
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 290,
+          "likes": 2,
+          "comments": 0,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 18,
+          "comments": 1,
+          "views": 1936,
+          "impressions": 1936,
+          "reach": 1220,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 3.866667,
+      "etiket": "kazanan"
+    },
+    {
+      "part": 21,
+      "post_ids": {
+        "youtube": "ZeYA8oeM7f4",
+        "instagram": "18432537136182813",
+        "tiktok": "7692420188569914638"
+      },
+      "request_ids": {
+        "youtube": "fbcd1588216f4a78895a1a2ada4a9854",
+        "instagram": "9229a7e7069a408abc9083231ddabc28",
+        "tiktok": "3796670cb4274223a5806e8137fd9426"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-04T13:10:55.845426+00:00",
+          "yas_saat": 24.499,
+          "youtube": {
+            "views": 147,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 37,
+            "comments": 1,
+            "views": 5485,
+            "impressions": 5485,
+            "reach": 3702,
+            "saves": 2,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-03T12:41:00.143522+00:00",
+      "subtitle": "This GIANT TARANTULA Is NOT Real",
       "anlik": {},
       "yargi_anligi": null,
       "oranlar": {},
