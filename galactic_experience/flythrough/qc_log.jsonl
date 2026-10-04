@@ -153,3 +153,22 @@
 {"ts": "2026-10-02T18:01:57Z", "event": "qc_api_result", "attempt_id": "479bc4ed94104758a306afed61a6db91", "outcome": "ok"}
 {"ts": "2026-10-02T18:01:57Z", "event": "review", "episode": 6, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-10-02T18:01:57Z", "event": "qc_pass", "episode": 6, "shot": 1, "attempt": 0, "content_sha256": "4df0a8f71840928bd5778bc25d6b4ce3437d7ac0d8bf8c2d4c82c84da9e8b64d", "clip": "shot_01.mp4"}
+{"ts": "2026-10-04T16:55:17Z", "event": "qc_api_attempt", "attempt_id": "1595cadb9a1b429984456936fcf9a1fc", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:55:33Z", "event": "qc_api_result", "attempt_id": "1595cadb9a1b429984456936fcf9a1fc", "outcome": "error"}
+{"ts": "2026-10-04T16:55:38Z", "event": "qc_api_attempt", "attempt_id": "01d34a12ae764e1cb6f67022d7cdecf5", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:55:39Z", "event": "qc_api_result", "attempt_id": "01d34a12ae764e1cb6f67022d7cdecf5", "outcome": "429"}
+{"ts": "2026-10-04T16:55:39Z", "event": "qc_api_attempt", "attempt_id": "47210dfb154f40d2b0e1ee6a2282a03e", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:55:40Z", "event": "qc_api_result", "attempt_id": "47210dfb154f40d2b0e1ee6a2282a03e", "outcome": "error"}
+{"ts": "2026-10-04T16:55:45Z", "event": "qc_api_attempt", "attempt_id": "a914c2a99940460d8963ba3aaa8f7357", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:55:46Z", "event": "qc_api_result", "attempt_id": "a914c2a99940460d8963ba3aaa8f7357", "outcome": "error"}
+{"ts": "2026-10-04T16:55:56Z", "event": "qc_api_attempt", "attempt_id": "489469ada0bf44b6bb04b0fe0cec5def", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:55:58Z", "event": "qc_api_result", "attempt_id": "489469ada0bf44b6bb04b0fe0cec5def", "outcome": "error"}
+{"ts": "2026-10-04T16:55:58Z", "event": "qc_api_attempt", "attempt_id": "ddf241bdaf9147aa9652740f3ef7860e", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:56:00Z", "event": "qc_api_result", "attempt_id": "ddf241bdaf9147aa9652740f3ef7860e", "outcome": "error"}
+{"ts": "2026-10-04T16:56:05Z", "event": "qc_api_attempt", "attempt_id": "2062b14efd2e4698989399f8592a9db8", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:56:08Z", "event": "qc_api_result", "attempt_id": "2062b14efd2e4698989399f8592a9db8", "outcome": "ok"}
+{"ts": "2026-10-04T16:56:08Z", "event": "native_audio_review", "episode": 7, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Deep ambient rumbling and swooshing sound effects.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-10-04T16:56:09Z", "event": "qc_api_attempt", "attempt_id": "9335b0cab44847939584882a85ec31a2", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 7, "shot": 1}
+{"ts": "2026-10-04T16:56:30Z", "event": "qc_api_result", "attempt_id": "9335b0cab44847939584882a85ec31a2", "outcome": "ok"}
+{"ts": "2026-10-04T16:56:30Z", "event": "review", "episode": 7, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Abrupt transition between wide framing and interior debris field", "Excessive radial smearing on foreground geometry"], "fix_notes": ["Smooth out the acceleration into the debris field to prevent jump cuts", "Maintain structural sharpness on fast-moving foreground rocks"], "clip": "shot_01.mp4"}
+{"ts": "2026-10-04T16:56:30Z", "event": "qc_pass", "episode": 7, "shot": 1, "attempt": 0, "content_sha256": "b066c9b8a26196d513aa51811af4dcfc48ecf60e7e15f7cca739dd65ae063ed6", "clip": "shot_01.mp4"}

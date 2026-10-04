@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-03T16:19:10.887365+00:00",
+  "guncellendi": "2026-10-04T16:51:39.357330+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 542.5,
@@ -2044,7 +2044,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-25T17:20:37.373476+00:00",
       "subtitle": "A Whirlpool Spanning All of Tokyo Bay",
@@ -2391,6 +2391,31 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-04T16:51:39.357330+00:00",
+          "yas_saat": 136.54,
+          "youtube": {
+            "views": 439,
+            "likes": 5,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 8,
+            "comments": 1,
+            "views": 277,
+            "impressions": 277,
+            "reach": 181,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 388,
+            "likes": 7,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2481,7 +2506,57 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 101,
+      "post_ids": {
+        "youtube": "zOZaitZbw-Y",
+        "instagram": "18424556740146416",
+        "tiktok": "7692478016609373453"
+      },
+      "request_ids": {
+        "youtube": "26e8f240eb814b6986ccf90c142cb5f3",
+        "instagram": "1a5b90b5404b4c968b5ff5a5f5053548",
+        "tiktok": "3f21ddf256504b5e8efffb26b0a12d9c"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-04T16:51:39.357330+00:00",
+          "yas_saat": 24.447,
+          "youtube": {
+            "views": 5,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 42,
+            "comments": 1,
+            "views": 9726,
+            "impressions": 9726,
+            "reach": 4819,
+            "saves": 2,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 33174,
+            "likes": 171,
+            "comments": 10,
+            "shares": 13
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-03T16:24:50.315574+00:00",
+      "subtitle": "A Rift Opening Through All of Kenya",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 9
 }
