@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-10-04T13:50:06.137925+00:00",
+  "snapshot_date": "2026-10-04",
+  "period": "2026-09-28 to 2026-10-04",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 131,
+        "total_views": 117266,
+        "total_videos": 288
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "z7ltk_qHKP0",
+          "title": "In 1919 A Wave Of Molasses Flooded Boston",
+          "published": "2026-10-03T15:29:08Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "gRySBsAtPdg",
+          "title": "Many Easter Island Heads Have Hidden Bodies",
+          "published": "2026-10-01T20:21:13Z",
+          "views": 626,
+          "views_48h": 478,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "5UA0dti4OMY",
+          "title": "Dubai Grows Its Own Skyline",
+          "published": "2026-09-30T17:31:07Z",
+          "views": 8,
+          "views_48h": 5,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "whOZh1ccMZI",
+          "title": "Rome Rebuilt Its Seven Hills",
+          "published": "2026-09-29T00:07:38Z",
+          "views": 599,
+          "views_48h": 600,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 276.0
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 161,
+        "total_views": 182445,
+        "total_videos": 190
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "ZeYA8oeM7f4",
+          "title": "This GIANT TARANTULA Is NOT Real",
+          "published": "2026-10-03T12:38:26Z",
+          "views": 151,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "LrnhF7lj_lw",
+          "title": "This GIANT SNAPPING TURTLE Is NOT Real",
+          "published": "2026-10-02T14:23:00Z",
+          "views": 290,
+          "views_48h": 290,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "mHZ4NC8zxnc",
+          "title": "This GIANT GRIZZLY BEAR Is NOT Real",
+          "published": "2026-10-01T14:37:40Z",
+          "views": 104,
+          "views_48h": 75,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 538.0
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 152,
+        "total_views": 76701,
+        "total_videos": 223
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "zOZaitZbw-Y",
+          "title": "A Rift Opening Through All of Kenya",
+          "published": "2026-10-03T16:22:45Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "BDfDWujkecI",
+          "title": "Into Neptune's Great Dark Spot",
+          "published": "2026-10-02T18:03:05Z",
+          "views": 559,
+          "views_48h": 559,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "b39SheeZNy0",
+          "title": "A Sand Wall Towering Five Kilometers High",
+          "published": "2026-09-29T00:16:45Z",
+          "views": 439,
+          "views_48h": 441,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 265.5
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 109,
+        "total_views": 160418,
+        "total_videos": 277
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "8cNvcVu6GIk",
+          "title": "Mount Fuji, four seasons drop #shorts",
+          "published": "2026-10-03T15:10:22Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "fMi9Bsq6C4o",
+          "title": "Mount Fuji, spring to blizzard #shorts",
+          "published": "2026-10-02T16:38:34Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "czt-dq03xdI",
+          "title": "Eiffel Tower rain drop #shorts",
+          "published": "2026-10-01T17:26:41Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "MOO6E8wIdJI",
+          "title": "Burj Khalifa 828m drop #shorts",
+          "published": "2026-09-30T16:54:30Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "aALp-aQOnAA",
+          "title": "Empire State snow drop #shorts",
+          "published": "2026-09-29T16:59:07Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "eLV-mkHQieg",
+          "title": "Santorini, into the caldera mist #shorts",
+          "published": "2026-09-28T18:41:46Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "RWLRqih8cfw",
+          "title": "Space Needle, into the fog #shorts",
+          "published": "2026-09-27T15:44:29Z",
+          "views": 1302,
+          "views_48h": 1302,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 17
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 64,
+        "total_views": 32786,
+        "total_videos": 24
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "9TGLHVirSME",
+          "title": "Büyünün premium paketi varmış. 💸",
+          "published": "2026-10-03T16:03:15Z",
+          "views": 354,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "IN9Bb8aZyW8",
+          "title": "Araya bir kadın girmiş... Saçları da varmış. 😂",
+          "published": "2026-10-02T16:00:50Z",
+          "views": 755,
+          "views_48h": 755,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "s2HVUAZC75o",
+          "title": "Annesi bana savaş açtı. Kızı ise yanıma oturdu. 🤍",
+          "published": "2026-10-01T23:48:32Z",
+          "views": 1666,
+          "views_48h": 1480,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "8ztADFAKccc",
+          "title": "Garson diye aşağıladı, sevgilisi herkesin önünde susturdu. 💔",
+          "published": "2026-09-27T18:32:56Z",
+          "views": 1943,
+          "views_48h": 1084,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1298
+    }
+  }
+}
