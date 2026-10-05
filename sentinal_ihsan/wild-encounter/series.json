@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 25,
-  "next_part": 22,
+  "next_part": 23,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -891,11 +891,50 @@
       }
     },
     "22": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-10-04T13:26:05.115068+00:00",
       "retry_count": 1,
       "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep22/ep22_mastered.mp4",
+      "subtitle": "This GIANT ORCA Is NOT Real",
+      "stack_sha256": "1c15062470408354254ca7f3622dd8b98f5c94033ba05d13b647e9c92a35ddfd",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part22",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "NE_oJ4NoHwY",
+          "video_sha256": "3d16ea7bb03b3afb50127826894014959bf68afbc2f643be5897f7cb64466756",
+          "ts": "2026-10-05T16:06:09.064574+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18092904578448012",
+          "video_sha256": "3d16ea7bb03b3afb50127826894014959bf68afbc2f643be5897f7cb64466756",
+          "ts": "2026-10-05T16:07:19.724388+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7693215971623865614",
+          "video_sha256": "3d16ea7bb03b3afb50127826894014959bf68afbc2f643be5897f7cb64466756",
+          "ts": "2026-10-05T16:08:29.251287+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-05T16:08:29.254006+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti.",
