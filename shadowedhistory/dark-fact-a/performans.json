@@ -1,7 +1,160 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-04T15:58:33.181264+00:00",
+  "guncellendi": "2026-10-06T17:48:51.304988+00:00",
   "medyanlar": {},
-  "parts": [],
-  "api_cagrilari": 0
+  "parts": [
+    {
+      "part": 1,
+      "post_ids": {
+        "youtube": "TebH8YqFkug",
+        "instagram": "18104279018118624",
+        "tiktok": "7692845081199529229"
+      },
+      "request_ids": {
+        "youtube": "57d26ef3fd7a470d809710cde5782f86",
+        "instagram": "7d2654ff912d463e9bc205bf2f86ea5c",
+        "tiktok": "a5f6ae58e7de4676b8fb19697ecfae41"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-06T17:48:51.304988+00:00",
+          "yas_saat": 49.65,
+          "youtube": {
+            "views": 1155,
+            "likes": 10,
+            "comments": 2,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 12,
+            "comments": 2,
+            "views": 1599,
+            "impressions": 1599,
+            "reach": 1155,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1321,
+            "likes": 32,
+            "comments": 2,
+            "shares": 1
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-04T16:09:50.268034+00:00",
+      "subtitle": "The Great Pyramid Was Once Bright White",
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-06T17:48:51.304988+00:00",
+            "yas_saat": 49.65,
+            "youtube": {
+              "views": 1155,
+              "likes": 10,
+              "comments": 2,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 12,
+              "comments": 2,
+              "views": 1599,
+              "impressions": 1599,
+              "reach": 1155,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1321,
+              "likes": 32,
+              "comments": 2,
+              "shares": 1
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-06T17:48:51.304988+00:00",
+            "yas_saat": 49.65,
+            "youtube": {
+              "views": 1155,
+              "likes": 10,
+              "comments": 2,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 12,
+              "comments": 2,
+              "views": 1599,
+              "impressions": 1599,
+              "reach": 1155,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1321,
+              "likes": 32,
+              "comments": 2,
+              "shares": 1
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-06T17:48:51.304988+00:00",
+            "yas_saat": 49.65,
+            "youtube": {
+              "views": 1155,
+              "likes": 10,
+              "comments": 2,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 12,
+              "comments": 2,
+              "views": 1599,
+              "impressions": 1599,
+              "reach": 1155,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1321,
+              "likes": 32,
+              "comments": 2,
+              "shares": 1
+            }
+          }
+        }
+      },
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
+    }
+  ],
+  "api_cagrilari": 6
 }

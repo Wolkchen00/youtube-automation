@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-04T15:58:33.320766+00:00",
+  "guncellendi": "2026-10-06T17:48:56.931483+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -86,6 +86,37 @@
           },
           "tiktok": {
             "views": 1088,
+            "likes": 20,
+            "comments": 0,
+            "shares": 1
+          }
+        },
+        {
+          "ts": "2026-10-06T17:48:56.931483+00:00",
+          "yas_saat": 117.435,
+          "youtube": {
+            "views": 648,
+            "likes": 7,
+            "comments": 2,
+            "favorites": 0,
+            "watch_time_minutes": 43,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 109.66,
+            "engaged_views": 178,
+            "subscribers_gained": 2,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 188,
+            "impressions": 188,
+            "reach": 134,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1130,
             "likes": 20,
             "comments": 0,
             "shares": 1
@@ -218,13 +249,140 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-06T17:48:56.931483+00:00",
+          "yas_saat": 74.288,
+          "youtube": {
+            "views": 2,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 176,
+            "impressions": 176,
+            "reach": 147,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1007,
+            "likes": 22,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-03T15:31:40.632741+00:00",
       "subtitle": "In 1919 A Wave Of Molasses Flooded Boston",
-      "anlik": {},
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-06T17:48:56.931483+00:00",
+            "yas_saat": 74.288,
+            "youtube": {
+              "views": 2,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 1,
+              "views": 176,
+              "impressions": 176,
+              "reach": 147,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1007,
+              "likes": 22,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-06T17:48:56.931483+00:00",
+            "yas_saat": 74.288,
+            "youtube": {
+              "views": 2,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 1,
+              "views": 176,
+              "impressions": 176,
+              "reach": 147,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1007,
+              "likes": 22,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-06T17:48:56.931483+00:00",
+            "yas_saat": 74.288,
+            "youtube": {
+              "views": 2,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 1,
+              "views": 176,
+              "impressions": 176,
+              "reach": 147,
+              "saves": 0,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1007,
+              "likes": 22,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
       "yargi_anligi": null,
       "oranlar": {},
       "puanlanan_metrikler": {},
@@ -232,5 +390,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 6
 }
