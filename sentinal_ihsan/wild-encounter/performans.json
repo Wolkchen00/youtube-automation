@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-05T15:58:43.166939+00:00",
+  "guncellendi": "2026-10-06T14:09:43.658328+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 75,
@@ -3744,6 +3744,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-06T14:09:43.658328+00:00",
+          "yas_saat": 119.499,
+          "youtube": {
+            "views": 104,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 5,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 122.64,
+            "engaged_views": 19,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 46,
+            "comments": 1,
+            "views": 8618,
+            "impressions": 8618,
+            "reach": 5713,
+            "saves": 2,
+            "shares": 4
+          },
+          "tiktok": {
+            "views": 171,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3990,6 +4021,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-06T14:09:43.658328+00:00",
+          "yas_saat": 95.744,
+          "youtube": {
+            "views": 296,
+            "likes": 2,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 19,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 118.62,
+            "engaged_views": 76,
+            "subscribers_gained": 1,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 18,
+            "comments": 1,
+            "views": 1945,
+            "impressions": 1945,
+            "reach": 1231,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -4205,6 +4267,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-06T14:09:43.658328+00:00",
+          "yas_saat": 73.479,
+          "youtube": {
+            "views": 220,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 39,
+            "comments": 1,
+            "views": 5566,
+            "impressions": 5566,
+            "reach": 3757,
+            "saves": 2,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -4345,7 +4438,63 @@
       },
       "puan": 2.613333,
       "etiket": "kazanan"
+    },
+    {
+      "part": 22,
+      "post_ids": {
+        "youtube": "NE_oJ4NoHwY",
+        "instagram": "18092904578448012",
+        "tiktok": "7693215971623865614"
+      },
+      "request_ids": {
+        "youtube": "e77620b984cf4ac48df7dddceca32ac8",
+        "instagram": "f7bf4262106d4467925f12f5304bf78b",
+        "tiktok": "7f47df50953b4eb59c78111f550e743c"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-06T14:09:43.658328+00:00",
+          "yas_saat": 22.021,
+          "youtube": {
+            "views": 59,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 24,
+            "comments": 1,
+            "views": 5048,
+            "impressions": 5048,
+            "reach": 3391,
+            "saves": 3,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-05T16:08:29.253425+00:00",
+      "subtitle": "This GIANT ORCA Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 15
 }
