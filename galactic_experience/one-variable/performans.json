@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-06T18:23:40.777002+00:00",
+  "guncellendi": "2026-10-07T19:09:45.891202+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 44,
@@ -2454,7 +2454,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-09-29T00:19:14.360846+00:00",
       "subtitle": "A Sand Wall Towering Five Kilometers High",
@@ -2738,6 +2738,37 @@
             "comments": 14,
             "shares": 25
           }
+        },
+        {
+          "ts": "2026-10-07T19:09:45.891202+00:00",
+          "yas_saat": 98.749,
+          "youtube": {
+            "views": 45,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 4,
+            "average_view_duration_seconds": 14,
+            "average_view_percentage": 164.78,
+            "engaged_views": 18,
+            "subscribers_gained": 0,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 117,
+            "comments": 1,
+            "views": 21994,
+            "impressions": 21994,
+            "reach": 9841,
+            "saves": 12,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 48583,
+            "likes": 247,
+            "comments": 14,
+            "shares": 26
+          }
         }
       ],
       "donduruldu": false,
@@ -2880,5 +2911,5 @@
       "etiket": "kazanan"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }

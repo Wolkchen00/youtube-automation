@@ -1727,6 +1727,14 @@
       "reserved": 700,
       "actual": 332.0,
       "ts": "2026-10-07T18:34:21.712583+00:00"
+    },
+    {
+      "month": "2026-10",
+      "series": "one-variable",
+      "part": 102,
+      "reserved": 900,
+      "actual": 105.0,
+      "ts": "2026-10-07T19:10:07.989699+00:00"
     }
   ],
   "episode_spend": {
@@ -1754,16 +1762,16 @@
     "wild-encounter:18": 890.0,
     "wild-encounter:19": 512.0,
     "wild-encounter:2": 84.0,
+    "wild-encounter:20": 134.0,
+    "wild-encounter:21": 260.0,
+    "wild-encounter:22": 512.0,
+    "wild-encounter:23": 260.0,
     "wild-encounter:3": 84.0,
     "wild-encounter:4": 210.0,
     "wild-encounter:5": 315.0,
     "wild-encounter:6": 436.0,
     "wild-encounter:7": 533.0,
     "wild-encounter:8": 142.0,
-    "wild-encounter:9": 142.0,
-    "wild-encounter:20": 134.0,
-    "wild-encounter:21": 260.0,
-    "wild-encounter:22": 512.0,
-    "wild-encounter:23": 260.0
+    "wild-encounter:9": 142.0
   }
 }

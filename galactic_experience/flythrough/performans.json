@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-06T18:23:45.782982+00:00",
+  "guncellendi": "2026-10-07T19:09:49.096505+00:00",
   "medyanlar": {
     "oturmus": {
       "youtube": 760,
@@ -1400,6 +1400,37 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-07T19:09:49.096505+00:00",
+          "yas_saat": 121.079,
+          "youtube": {
+            "views": 635,
+            "likes": 15,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 68,
+            "average_view_duration_seconds": 17,
+            "average_view_percentage": 108.94,
+            "engaged_views": 216,
+            "subscribers_gained": 2,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 32,
+            "comments": 1,
+            "views": 2046,
+            "impressions": 2046,
+            "reach": 1442,
+            "saves": 4,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1137,
+            "likes": 54,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1534,6 +1565,37 @@
             "comments": 3,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-07T19:09:49.096505+00:00",
+          "yas_saat": 74.17,
+          "youtube": {
+            "views": 69,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 4,
+            "average_view_duration_seconds": 15,
+            "average_view_percentage": 97.72,
+            "engaged_views": 14,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 11,
+            "comments": 1,
+            "views": 740,
+            "impressions": 740,
+            "reach": 584,
+            "saves": 2,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 603,
+            "likes": 15,
+            "comments": 3,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1644,5 +1706,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 6
 }
