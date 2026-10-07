@@ -923,3 +923,78 @@
 {"ts": "2026-10-06T14:38:54Z", "event": "qc_api_result", "attempt_id": "88a893ce8cb84601bd96edf3e7bec2c8", "outcome": "429"}
 {"ts": "2026-10-06T14:38:54Z", "event": "review", "episode": 23, "shot": 1, "attempt": 0, "review_try": 2, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_01.mp4", "continuity_ok": "n/a", "continuity_notes": "n/a"}
 {"ts": "2026-10-06T14:38:56Z", "event": "qc_hold", "episode": 23, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-10-07T14:36:49Z", "event": "qc_api_attempt", "attempt_id": "37808123a66a4246a6367b0a4a1ba154", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:36:50Z", "event": "qc_api_result", "attempt_id": "37808123a66a4246a6367b0a4a1ba154", "outcome": "error"}
+{"ts": "2026-10-07T14:36:55Z", "event": "qc_api_attempt", "attempt_id": "4c82547987004d6cb8b6b6e0c5ca952a", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:36:56Z", "event": "qc_api_result", "attempt_id": "4c82547987004d6cb8b6b6e0c5ca952a", "outcome": "error"}
+{"ts": "2026-10-07T14:37:06Z", "event": "qc_api_attempt", "attempt_id": "b086e4d334d647ca8a48849c2f2a683b", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:07Z", "event": "qc_api_result", "attempt_id": "b086e4d334d647ca8a48849c2f2a683b", "outcome": "error"}
+{"ts": "2026-10-07T14:37:07Z", "event": "qc_api_attempt", "attempt_id": "e57f40fa855e418b8d934d90a580d4fb", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:07Z", "event": "qc_api_result", "attempt_id": "e57f40fa855e418b8d934d90a580d4fb", "outcome": "error"}
+{"ts": "2026-10-07T14:37:12Z", "event": "qc_api_attempt", "attempt_id": "0fe3c69ee52b4718bab0b6c555de18c3", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:13Z", "event": "qc_api_result", "attempt_id": "0fe3c69ee52b4718bab0b6c555de18c3", "outcome": "error"}
+{"ts": "2026-10-07T14:37:23Z", "event": "qc_api_attempt", "attempt_id": "ece256f961834112acd06cafed53e930", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:24Z", "event": "qc_api_result", "attempt_id": "ece256f961834112acd06cafed53e930", "outcome": "error"}
+{"ts": "2026-10-07T14:37:24Z", "event": "qc_api_attempt", "attempt_id": "d8b4e76c304e45dfb2adf9044af6081d", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:25Z", "event": "qc_api_result", "attempt_id": "d8b4e76c304e45dfb2adf9044af6081d", "outcome": "error"}
+{"ts": "2026-10-07T14:37:30Z", "event": "qc_api_attempt", "attempt_id": "c5cae17848a84bc3b462c2a057bee453", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:30Z", "event": "qc_api_result", "attempt_id": "c5cae17848a84bc3b462c2a057bee453", "outcome": "error"}
+{"ts": "2026-10-07T14:37:40Z", "event": "qc_api_attempt", "attempt_id": "62d565c565ea44bf99c7a292c70a300e", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:42Z", "event": "qc_api_result", "attempt_id": "62d565c565ea44bf99c7a292c70a300e", "outcome": "error"}
+{"ts": "2026-10-07T14:37:42Z", "event": "qc_api_attempt", "attempt_id": "6bff468c2cb445799754cc912dfcd08b", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:42Z", "event": "qc_api_result", "attempt_id": "6bff468c2cb445799754cc912dfcd08b", "outcome": "error"}
+{"ts": "2026-10-07T14:37:47Z", "event": "qc_api_attempt", "attempt_id": "318a940e1b914980803307a1fe22b8b1", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:48Z", "event": "qc_api_result", "attempt_id": "318a940e1b914980803307a1fe22b8b1", "outcome": "error"}
+{"ts": "2026-10-07T14:37:58Z", "event": "qc_api_attempt", "attempt_id": "5e860df334404afd8e3582bb57f6bf0c", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:37:59Z", "event": "qc_api_result", "attempt_id": "5e860df334404afd8e3582bb57f6bf0c", "outcome": "error"}
+{"ts": "2026-10-07T14:38:59Z", "event": "qc_api_attempt", "attempt_id": "ee14f32a94e54db895aef98684f0a3ee", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:38:59Z", "event": "qc_api_result", "attempt_id": "ee14f32a94e54db895aef98684f0a3ee", "outcome": "error"}
+{"ts": "2026-10-07T14:39:04Z", "event": "qc_api_attempt", "attempt_id": "af610a7b751944bfb556265261885b79", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:39:06Z", "event": "qc_api_result", "attempt_id": "af610a7b751944bfb556265261885b79", "outcome": "error"}
+{"ts": "2026-10-07T14:39:16Z", "event": "qc_api_attempt", "attempt_id": "52fffe4567344db9a6109710bc63733a", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:39:16Z", "event": "qc_api_result", "attempt_id": "52fffe4567344db9a6109710bc63733a", "outcome": "error"}
+{"ts": "2026-10-07T14:39:16Z", "event": "qc_api_attempt", "attempt_id": "f558e9ad28fb42fe8fa60f6ec9211152", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:39:19Z", "event": "qc_api_result", "attempt_id": "f558e9ad28fb42fe8fa60f6ec9211152", "outcome": "error"}
+{"ts": "2026-10-07T14:39:24Z", "event": "qc_api_attempt", "attempt_id": "f85b748317b34a6faa0e80301fde8b72", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:40:39Z", "event": "qc_api_result", "attempt_id": "f85b748317b34a6faa0e80301fde8b72", "outcome": "error"}
+{"ts": "2026-10-07T14:40:49Z", "event": "qc_api_attempt", "attempt_id": "1438d408afbf491eb6b3d59bfe2d75dd", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:40:50Z", "event": "qc_api_result", "attempt_id": "1438d408afbf491eb6b3d59bfe2d75dd", "outcome": "error"}
+{"ts": "2026-10-07T14:40:50Z", "event": "qc_api_attempt", "attempt_id": "8eb651e8973c481ab4b7d3a810781dc8", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:40:51Z", "event": "qc_api_result", "attempt_id": "8eb651e8973c481ab4b7d3a810781dc8", "outcome": "error"}
+{"ts": "2026-10-07T14:40:56Z", "event": "qc_api_attempt", "attempt_id": "151a65fc43ec4a93bf81605489786f7b", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:40:56Z", "event": "qc_api_result", "attempt_id": "151a65fc43ec4a93bf81605489786f7b", "outcome": "error"}
+{"ts": "2026-10-07T14:41:06Z", "event": "qc_api_attempt", "attempt_id": "57b1a3be2f0e425fae06ca929e31aa18", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:41:07Z", "event": "qc_api_result", "attempt_id": "57b1a3be2f0e425fae06ca929e31aa18", "outcome": "error"}
+{"ts": "2026-10-07T14:41:07Z", "event": "qc_api_attempt", "attempt_id": "4c3e79a3ec7a4dd298bf4d118273ac09", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:41:08Z", "event": "qc_api_result", "attempt_id": "4c3e79a3ec7a4dd298bf4d118273ac09", "outcome": "error"}
+{"ts": "2026-10-07T14:41:13Z", "event": "qc_api_attempt", "attempt_id": "38d5e3f878584729af66a3a35f44046d", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:41:13Z", "event": "qc_api_result", "attempt_id": "38d5e3f878584729af66a3a35f44046d", "outcome": "error"}
+{"ts": "2026-10-07T14:41:23Z", "event": "qc_api_attempt", "attempt_id": "832dd0fdf3b5428598020d4bf3ee7e7d", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:41:24Z", "event": "qc_api_result", "attempt_id": "832dd0fdf3b5428598020d4bf3ee7e7d", "outcome": "error"}
+{"ts": "2026-10-07T14:43:24Z", "event": "qc_api_attempt", "attempt_id": "11e2ad58128f4aea8e81ab40185d2971", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:43:24Z", "event": "qc_api_result", "attempt_id": "11e2ad58128f4aea8e81ab40185d2971", "outcome": "error"}
+{"ts": "2026-10-07T14:43:29Z", "event": "qc_api_attempt", "attempt_id": "cbe50daeb3cb42aaba920b4543246acb", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:43:30Z", "event": "qc_api_result", "attempt_id": "cbe50daeb3cb42aaba920b4543246acb", "outcome": "error"}
+{"ts": "2026-10-07T14:43:40Z", "event": "qc_api_attempt", "attempt_id": "1ce8d589a35a4e6eb35502c0db79699c", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:43:41Z", "event": "qc_api_result", "attempt_id": "1ce8d589a35a4e6eb35502c0db79699c", "outcome": "error"}
+{"ts": "2026-10-07T14:43:41Z", "event": "qc_api_attempt", "attempt_id": "2eaec59e3270447494130716694425c7", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:43:43Z", "event": "qc_api_result", "attempt_id": "2eaec59e3270447494130716694425c7", "outcome": "error"}
+{"ts": "2026-10-07T14:43:48Z", "event": "qc_api_attempt", "attempt_id": "701546f89fee4a868488eee6d288867a", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:43:48Z", "event": "qc_api_result", "attempt_id": "701546f89fee4a868488eee6d288867a", "outcome": "error"}
+{"ts": "2026-10-07T14:43:58Z", "event": "qc_api_attempt", "attempt_id": "b66cd18e52c24557aa9ce4f2e790ef95", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:03Z", "event": "qc_api_result", "attempt_id": "b66cd18e52c24557aa9ce4f2e790ef95", "outcome": "error"}
+{"ts": "2026-10-07T14:44:03Z", "event": "qc_api_attempt", "attempt_id": "ae66fc6024374fbc8daa4fed166d954b", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:04Z", "event": "qc_api_result", "attempt_id": "ae66fc6024374fbc8daa4fed166d954b", "outcome": "error"}
+{"ts": "2026-10-07T14:44:09Z", "event": "qc_api_attempt", "attempt_id": "dce390701651428da1b886bd65af563f", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:10Z", "event": "qc_api_result", "attempt_id": "dce390701651428da1b886bd65af563f", "outcome": "error"}
+{"ts": "2026-10-07T14:44:20Z", "event": "qc_api_attempt", "attempt_id": "09dbb995dc504cc385a1e72a409fb338", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:21Z", "event": "qc_api_result", "attempt_id": "09dbb995dc504cc385a1e72a409fb338", "outcome": "error"}
+{"ts": "2026-10-07T14:44:21Z", "event": "qc_api_attempt", "attempt_id": "22e1cdc34719496590f8f70a0014ff6c", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:28Z", "event": "qc_api_result", "attempt_id": "22e1cdc34719496590f8f70a0014ff6c", "outcome": "error"}
+{"ts": "2026-10-07T14:44:33Z", "event": "qc_api_attempt", "attempt_id": "5f31aa6580924e46993bc860335573d1", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:33Z", "event": "qc_api_result", "attempt_id": "5f31aa6580924e46993bc860335573d1", "outcome": "error"}
+{"ts": "2026-10-07T14:44:43Z", "event": "qc_api_attempt", "attempt_id": "05dbb14b72d7402e92927ae15d2776a9", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:44:46Z", "event": "qc_api_result", "attempt_id": "05dbb14b72d7402e92927ae15d2776a9", "outcome": "error"}
+{"ts": "2026-10-07T14:48:46Z", "event": "qc_api_attempt", "attempt_id": "213e73564dda431b81eb2e6f1ff9ba73", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-10-07T14:48:54Z", "event": "qc_api_result", "attempt_id": "213e73564dda431b81eb2e6f1ff9ba73", "outcome": "error"}
+{"ts": "2026-10-07T14:48:59Z", "event": "qc_api_attempt", "attempt_id": "8e86baf3df754d3eae7bcadfa6986220", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
