@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-06T17:48:51.304988+00:00",
+  "guncellendi": "2026-10-07T18:33:22.388997+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -42,6 +42,37 @@
           },
           "tiktok": {
             "views": 1321,
+            "likes": 32,
+            "comments": 2,
+            "shares": 1
+          }
+        },
+        {
+          "ts": "2026-10-07T18:33:22.388997+00:00",
+          "yas_saat": 74.392,
+          "youtube": {
+            "views": 1171,
+            "likes": 10,
+            "comments": 2,
+            "favorites": 0,
+            "watch_time_minutes": 63,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 117.37,
+            "engaged_views": 260,
+            "subscribers_gained": 0,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 13,
+            "comments": 2,
+            "views": 1614,
+            "impressions": 1614,
+            "reach": 1166,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1353,
             "likes": 32,
             "comments": 2,
             "shares": 1
@@ -156,5 +187,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }

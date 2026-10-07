@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 6,
-  "next_part": 3,
+  "next_part": 4,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -223,6 +223,27 @@
         "tiktok"
       ],
       "published_at": "2026-10-03T15:31:40.633180+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep03/ep03_music_titled_mastered.mp4",
+      "subtitle": "Ottomans Hauled Warships Over Land",
+      "stack_sha256": "ca29653eb3c3360ee51893e03bd7144e93c4f6aa9bbd01e60370cd123b267079",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-07T19:05:05.136905+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
