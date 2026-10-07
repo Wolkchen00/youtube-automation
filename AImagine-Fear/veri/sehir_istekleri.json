@@ -1,19 +1,9 @@
 {
-  "guncellendi": "2026-10-06T17:18:52.047325+00:00",
+  "guncellendi": "2026-10-07T17:58:47.806820+00:00",
   "gun": 14,
   "kaynak_post_sayisi": 45,
   "yorum_sayisi": 37,
-  "sayilan_yorum": 23,
+  "sayilan_yorum": 22,
   "kimlik_notu": "Instagram yorumcu adini vermiyor; Instagram'da her yorum ayri kisi sayilir.",
-  "sehirler": [
-    {
-      "sehir": "Jakarta",
-      "kullanici_sayisi": 1,
-      "yorum_sayisi": 1,
-      "ornek_yorumlar": [
-        "Autograph Tower, Jakarta Indonesia please"
-      ],
-      "var": false
-    }
-  ]
+  "sehirler": []
 }
