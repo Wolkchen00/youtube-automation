@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-07T19:09:45.891202+00:00",
+  "guncellendi": "2026-10-08T18:52:02.892999+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 44,
@@ -2769,6 +2769,37 @@
             "comments": 14,
             "shares": 26
           }
+        },
+        {
+          "ts": "2026-10-08T18:52:02.892999+00:00",
+          "yas_saat": 122.453,
+          "youtube": {
+            "views": 45,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 4,
+            "average_view_duration_seconds": 14,
+            "average_view_percentage": 164.78,
+            "engaged_views": 18,
+            "subscribers_gained": 0,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 131,
+            "comments": 1,
+            "views": 23375,
+            "impressions": 23375,
+            "reach": 10552,
+            "saves": 12,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 50092,
+            "likes": 257,
+            "comments": 14,
+            "shares": 26
+          }
         }
       ],
       "donduruldu": false,
@@ -2909,7 +2940,63 @@
       },
       "puan": 50.382637,
       "etiket": "kazanan"
+    },
+    {
+      "part": 102,
+      "post_ids": {
+        "youtube": "i-RxYluz_Tg",
+        "instagram": "18074912942741946",
+        "tiktok": "7694006571017227534"
+      },
+      "request_ids": {
+        "youtube": "5887806cf3144e43ba1d83c24246d630",
+        "instagram": "576956cd00dd4a3196f71b6e3cb8bc8b",
+        "tiktok": "107b64dfaa1c4230863a0fdeaf2ac987"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-08T18:52:02.892999+00:00",
+          "yas_saat": 23.594,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 42,
+            "impressions": 42,
+            "reach": 146,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 556,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-07T19:16:26.096723+00:00",
+      "subtitle": "A Lava Fountain Taller Than Mount Etna",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }

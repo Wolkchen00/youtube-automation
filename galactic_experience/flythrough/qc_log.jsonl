@@ -182,3 +182,22 @@
 {"ts": "2026-10-06T18:26:43Z", "event": "qc_api_result", "attempt_id": "23d8edfd77ca459e8d0cfd4da0085c72", "outcome": "429"}
 {"ts": "2026-10-06T18:26:43Z", "event": "native_audio_review", "episode": 8, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
 {"ts": "2026-10-06T18:26:44Z", "event": "qc_hold", "episode": 8, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_attempt", "attempt_id": "b0a3f00bdfc04e39b88789a889899ede", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_result", "attempt_id": "b0a3f00bdfc04e39b88789a889899ede", "outcome": "429"}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_attempt", "attempt_id": "69469174949f4b0facd2da8520bef5a1", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_result", "attempt_id": "69469174949f4b0facd2da8520bef5a1", "outcome": "429"}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_attempt", "attempt_id": "aa2fbb1e4c35461d9ed7e2fdc2d17f71", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_result", "attempt_id": "aa2fbb1e4c35461d9ed7e2fdc2d17f71", "outcome": "429"}
+{"ts": "2026-10-08T18:55:43Z", "event": "qc_api_attempt", "attempt_id": "13b54d0e63814722b046ef6d1fec8dd1", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:46Z", "event": "qc_api_result", "attempt_id": "13b54d0e63814722b046ef6d1fec8dd1", "outcome": "ok"}
+{"ts": "2026-10-08T18:55:46Z", "event": "native_audio_review", "episode": 8, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Loud rushing wind or jet engine sound effect.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_attempt", "attempt_id": "2342362189334bd1b5fdd7065e30fe2d", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_result", "attempt_id": "2342362189334bd1b5fdd7065e30fe2d", "outcome": "429"}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_attempt", "attempt_id": "c2e3698b9bae409cb585d029cbfcd627", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_result", "attempt_id": "c2e3698b9bae409cb585d029cbfcd627", "outcome": "429"}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_attempt", "attempt_id": "06b35acbaeaa406c85cca11ff0e0572a", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_result", "attempt_id": "06b35acbaeaa406c85cca11ff0e0572a", "outcome": "429"}
+{"ts": "2026-10-08T18:55:47Z", "event": "qc_api_attempt", "attempt_id": "ffaec17525124ee181e6d7693952697e", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 8, "shot": 1}
+{"ts": "2026-10-08T18:55:59Z", "event": "qc_api_result", "attempt_id": "ffaec17525124ee181e6d7693952697e", "outcome": "ok"}
+{"ts": "2026-10-08T18:55:59Z", "event": "review", "episode": 8, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": ["Heavy radial motion blur obscures cloud details in the latter half of the clip."], "fix_notes": ["Maintain structural cloud definition during high-speed descent.", "Reduce extreme radial blur to preserve atmospheric textures."], "clip": "shot_01.mp4"}
+{"ts": "2026-10-08T18:55:59Z", "event": "qc_pass", "episode": 8, "shot": 1, "attempt": 0, "content_sha256": "5d750e34dd96c2466a97aeeb469fa33351e6a6177cbc03bee957ab00cd708c3c", "clip": "shot_01.mp4"}
