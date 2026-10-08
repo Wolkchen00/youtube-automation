@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 5,
+    "title": "In The 1960s Abu Simbel Was Cut And Moved 65 Metres Uphill"
+  },
+  "synopsis": "The historic colossal temples of Abu Simbel are meticulously dismantled and relocated 65 metres uphill in the 1960s.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nThe colossal seated statues of Abu Simbel cut into massive numbered stone blocks. A giant stone face block is being slowly lifted by a heavy industrial crane, with the dry desert and the Nile river visible in the background. Sand blows across the archaeological site. The camera performs a slow, smooth lateral tracking shot. Grainy 16mm archival film look, bright but dusty low sun casting long shadows, muted desert tones.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you have the patience to cut up and rebuild a giant ancient monument? 🏗️",
+  "family": "gizli muhendislik",
+  "seed_id": 45,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Abu Simbel temples were moved.",
+    "subtitle": "In the 1960s they went 65 metres uphill."
+  },
+  "caption": "In the 1960s, the ancient temples of Abu Simbel were cut into blocks and moved 65 metres uphill.\n\nTo save the massive historic monuments from flooding due to the construction of the Aswan High Dam, an international team began work in 1964. They dismantled the giant stone structures piece by piece.\n\nVisuals created with AI.\n\nCould we pull off a rescue like this today?",
+  "hashtags": "#history #historyfacts #egypt #archaeology #abusimbel",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

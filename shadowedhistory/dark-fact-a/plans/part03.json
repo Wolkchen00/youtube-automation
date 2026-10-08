@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 3,
+    "title": "In 1324 A King From Mali Crashed The Value Of Gold"
+  },
+  "synopsis": "A king from Mali distributes so much gold during his pilgrimage to Cairo in 1324 that the local economy crashes for years.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nAn enormous caravan of camels laden with heavy chests of gold crossing the Sahara desert toward Cairo at sunset. The line of travellers and camels stretches to the distant horizon. Warm, golden sunlight reflects off the dust and sand. The camera performs a slow lateral glide, tracking the movement of the caravan. Worn 16mm film stock with soft grain, deep shadows, and low-key twilight illumination.",
+      "seed": null
+    }
+  ],
+  "first_comment": "If you had unlimited gold, what is the very first thing you would buy? 🪙",
+  "family": "garip gercekler",
+  "seed_id": 35,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A king from Mali gave away gold.",
+    "subtitle": "In 1324 it crashed Cairo's economy."
+  },
+  "caption": "In 1324, a king from Mali gave away so much gold in Cairo that its value crashed for years.\n\nDuring his famous pilgrimage to Mecca in 1324, the emperor distributed vast fortunes of gold to the people. This sudden influx of wealth severely depreciated the metal's value across Egypt for over a decade.\n\nVisuals created with AI.\n\nWould you travel with this much wealth?",
+  "hashtags": "#history #historyfacts #mali #gold #cairo",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

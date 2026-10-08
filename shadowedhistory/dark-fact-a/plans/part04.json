@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 4,
+    "title": "The Great Fire Of London In 1666 Recorded Only Six Deaths"
+  },
+  "synopsis": "The Great Fire of London in 1666 destroys thousands of homes while miraculously recording only six official deaths.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nSeventeenth-century London burning at night, seen across the dark River Thames. Huge orange flames engulf the riverfront buildings, casting bright light on the water. The silhouette of the old cathedral stands tall against the fiery glow. Small wooden boats slowly row across the moving water. The camera performs a slow, smooth push-in. Grainy 16mm archival film look, flickering firelight, heavy smoke, and deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Imagine losing your home but surviving a massive fire like this. How would you rebuild? 🏛️",
+  "family": "tuhaf felaketler",
+  "seed_id": 17,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "London burned in a great fire.",
+    "subtitle": "In 1666 only six deaths were recorded."
+  },
+  "caption": "The Great Fire of London in 1666 destroyed over 13,000 houses, yet only six deaths were officially recorded.\n\nStarting in a bakery on Pudding Lane in September 1666, the devastating blaze consumed the medieval city inside the old Roman wall. While thousands lost their homes, the official death toll remained miraculously low.\n\nVisuals created with AI.\n\nDo you think the official count was accurate?",
+  "hashtags": "#history #historyfacts #london #fire #1666",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

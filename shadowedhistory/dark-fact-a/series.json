@@ -15,7 +15,7 @@
   "performance_feedback": true,
   "status": "active",
   "priority": 999,
-  "total_parts": 2,
+  "total_parts": 6,
   "next_part": 2,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
@@ -180,6 +180,10 @@
         "henry viii",
         "mehmed"
       ]
+    },
+    "last_run": {
+      "at": "2026-10-08T18:14:10.052751+00:00",
+      "parts": "3-6"
     }
   },
   "parts": {
@@ -213,8 +217,9 @@
       "first_held_at": "2026-10-06T17:53:03.286927+00:00",
       "first_infra_held_at": "2026-10-06T17:53:03.286927+00:00",
       "infra_retry_count": 1,
-      "last_reason_code": "QUOTA",
-      "hold_reason": "quota"
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "retry_count": 1
     }
   },
   "engagement": {

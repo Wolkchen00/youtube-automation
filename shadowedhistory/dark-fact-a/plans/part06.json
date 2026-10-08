@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 6,
+    "title": "The Shortest War In History In 1896 Lasted About 40 Minutes"
+  },
+  "synopsis": "A brief colonial conflict in 1896 results in the shortest war in recorded history, lasting only about 40 minutes.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nA white royal palace on a tropical shore under heavy clouds of grey smoke in 1896. Old ironclad steam warships fire their cannons from the bay, creating bright flashes. Palm trees bend sharply in the strong wind, and waves crash on the beach. The camera executes a slow, smooth push-in. Worn 16mm archival film stock with soft grain, muted desaturated colors, and deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What is the longest period you would survive in a real battle? ⚓",
+  "family": "garip gercekler",
+  "seed_id": 33,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "The shortest war lasted 40 minutes.",
+    "subtitle": "The Anglo-Zanzibar war was in 1896."
+  },
+  "caption": "The shortest war in history lasted about 40 minutes.\n\nIn 1896, the conflict broke out between the United Kingdom and the Zanzibar Sultanate after a new sultan ascended without British approval. Royal Navy warships quickly bombarded the palace, ending the dispute.\n\nVisuals created with AI.\n\nDid you know a war could be this short?",
+  "hashtags": "#history #historyfacts #war #zanzibar #1896",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

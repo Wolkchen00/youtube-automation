@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-07T18:33:22.388997+00:00",
+  "guncellendi": "2026-10-08T18:07:01.801760+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -73,6 +73,37 @@
           },
           "tiktok": {
             "views": 1353,
+            "likes": 32,
+            "comments": 2,
+            "shares": 1
+          }
+        },
+        {
+          "ts": "2026-10-08T18:07:01.801760+00:00",
+          "yas_saat": 97.953,
+          "youtube": {
+            "views": 1209,
+            "likes": 10,
+            "comments": 2,
+            "favorites": 0,
+            "watch_time_minutes": 63,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 117.37,
+            "engaged_views": 260,
+            "subscribers_gained": 0,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 13,
+            "comments": 2,
+            "views": 1616,
+            "impressions": 1616,
+            "reach": 1166,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1366,
             "likes": 32,
             "comments": 2,
             "shares": 1
