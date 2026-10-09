@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 107,
+    "title": "An Avalanche Across the Entire Alps Range"
+  },
+  "synopsis": "A massive snow avalanche collapses down the entire south face of the Alps, burying the valley of Chamonix under a sheet of white.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take from a fixed high-altitude aerial mount. The camera remains locked, framing the massive snow-covered peak of Mont Blanc and the winding Chamonix valley highway far below, which serves as the scale reference. From second 1 to 5, the entire mountainside fractures simultaneously, releasing a colossal, cascading wall of white powder and ice blocks that rushes downward. During seconds 6 to 8, the massive white cloud fills the valley floor, completely obscuring the highway in a dense, turbulent fog of snow. Diegetic sound of a roaring, thunderous rumble begins quietly at second 1, fading into near-silence at second 4, and surging to a deafening roar at second 7 as the slide impacts the valley.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could the sheer wind pressure of this slide destroy buildings before the snow even hits? 🏔️",
+  "family": "buz afeti",
+  "seed_id": 24,
+  "caption": "A colossal, multi-kilometer snow avalanche sweeps down the south face of the Alps above Chamonix.\n\nThis impossible slide of snow and ice covers forty kilometers of the mountain range simultaneously, falling from a height of four thousand meters.\n\nReal historic avalanches, like the devastating Huascaran event of 1970, involve millions of cubic meters of debris but remain confined to single valleys or glacier paths.\n\nAn avalanche spanning the entire mountain face requires all snowpacks across multiple distinct microclimates to lose structural cohesion at the exact same millisecond, ignoring local wind, temperature, and slope variations.\n\nThis is a simulation, not real footage. Do you think any valley structures could survive the massive air blast preceding this slide?",
+  "hashtags": "#Avalanche #Alps #Chamonix #Glaciology #Geology #Simulation #SnowSlide",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

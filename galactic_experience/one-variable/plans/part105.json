@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 105,
+    "title": "One Wave Along the Entire Dubai Coast"
+  },
+  "synopsis": "An impossibly high tsunami wave sweeps across the entire coastline of Dubai, completely engulfing the Palm Jumeirah.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take from a fixed high-aerial mount over the Persian Gulf. The camera remains locked in a static southwest-facing position. The entire crescent of the Palm Jumeirah is visible below, with the distinctive sail-shaped Burj Al Arab hotel serving as the scale reference. From second 1 to 5, a giant, unbroken turquoise wave cresting at three hundred meters rolls over the outer breakwaters, engulfing the luxury villas. During seconds 6 to 8, the wave slams directly into the base of the coastal skyscraper line, sending massive white spray rising hundreds of meters into the air. Diegetic sound of roaring ocean water holds one steady, deafening level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Do you think the Burj Khalifa could survive the hydrostatic pressure of a wave this high? 🏢",
+  "family": "su afeti",
+  "seed_id": 4,
+  "caption": "A massive, continuous wave surges across the entire Persian Gulf coastline at Dubai.\n\nThis impossible wall of water stands three hundred meters high, extending along seventy kilometers of beachfront.\n\nThe largest recorded tsunami in real history occurred in Lituya Bay in 1958, reaching a localized run-up height of five hundred twenty-four meters but covering only a narrow inlet.\n\nA wave of this height along an open coast requires a sudden displacement of thousands of cubic kilometers of water, an energy input equivalent to a massive asteroid impact that the shallow Persian Gulf cannot physically contain.\n\nThis is a simulation, not real footage. Will the tallest skyscrapers remain standing after the crest passes?",
+  "hashtags": "#Tsunami #Dubai #PalmJumeirah #Oceanography #Hydrology #Simulation #Megawave",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

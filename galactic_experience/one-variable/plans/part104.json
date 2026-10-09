@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 104,
+    "title": "A Sinkhole Wider Than the Yucatan Peninsula"
+  },
+  "synopsis": "An impossibly massive sinkhole opens across the Yucatan peninsula, swallowing vast stretches of ancient jungle in a single collapse.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take from a fixed orbital altitude of five hundred kilometers. The camera remains completely still, maintaining a locked nadir viewpoint over the Yucatan Peninsula. In the center, a perfectly circular chasm eighty kilometers wide slices through the green jungle canopy. A long coastal highway with visible tourist resorts at the edge serves as the scale reference. From second 1 to 5, the limestone rim fractures, sending massive blocks of bedrock and entire forests sliding into the deep black void. During seconds 6 to 8, a colossal dust plume billows upward from the depths, filling the crater rim. Diegetic sound of deep grinding limestone and crumbling rock surges from near-silence at second 3 to its peak volume at second 7.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How long would it take for the ocean to completely fill a crater of this size? 🌊",
+  "family": "yer afeti",
+  "seed_id": 17,
+  "caption": "A colossal sinkhole tears open across the Yucatan Peninsula near Tulum.\n\nThis impossible geological void spans over eighty kilometers in diameter, swallowing entire ecosystems in seconds.\n\nReal sinkholes, like the Great Blue Hole or the cenotes of Mexico, typically reach diameters of only three hundred meters, formed over thousands of years as seen during the major collapse events of 2010.\n\nFor an eighty-kilometer sinkhole to open instantly, the entire subterranean carbonate platform would have to dissolve simultaneously, requiring a massive acidic reservoir larger than the Gulf of Mexico to suddenly flush through the bedrock.\n\nThis is a simulation, not real footage. Do you think the surrounding ocean will completely submerge this massive inland crater?",
+  "hashtags": "#Sinkhole #Yucatan #Tulum #Geology #EarthScience #Simulation #NaturalDisaster",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

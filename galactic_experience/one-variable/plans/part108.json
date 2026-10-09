@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 108,
+    "title": "A Lava River Along the Entire Hawaiian Coastline"
+  },
+  "synopsis": "A massive lava river from Kilauea reaches the Pacific Ocean along the entire coastline of Hawaii in one continuous, glowing front.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take from a fixed aerial position over the coastline of Hawaii. The camera remains locked in a steep downward angle, showing the dark volcanic rock and a coastal lighthouse serving as the scale reference. From second 1 to 5, an unbroken, fifty-kilometer-wide sheet of glowing orange lava surges forward, spilling over the cliffs. During seconds 6 to 8, the molten rock hits the ocean water, triggering a massive, continuous wall of white steam that rises hundreds of meters into the air. Diegetic sound of sizzling steam and exploding rock holds one steady, roaring level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How long would the massive steam clouds from this eruption block out the sun? 🌋",
+  "family": "ates afeti",
+  "seed_id": 20,
+  "caption": "A colossal river of molten basaltic lava pours from Kilauea into the Pacific Ocean.\n\nThis impossible volcanic flow extends along fifty kilometers of the Hawaiian coastline, spilling directly into the sea in a solid wall of fire.\n\nReal basaltic eruptions, such as the active phases of Kilauea in 2018, channel lava through narrow tubes and localized entry points that shift over weeks.\n\nFor a continuous fifty-kilometer front to flow simultaneously, the entire eastern rift zone of the volcano must split open from end to end, discharging magma at a rate that would deplete the mantle reservoir in hours.\n\nThis is a simulation, not real footage. How much would the local ocean temperature rise from this massive thermal shock?",
+  "hashtags": "#Volcano #Kilauea #Hawaii #Volcanology #Geology #Simulation #LavaFlow",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

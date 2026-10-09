@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 106,
+    "title": "A Dust Storm Covering the North China Plain"
+  },
+  "synopsis": "A colossal dust front originating from the Gobi Desert rolls across the North China Plain, swallowing entire cities in darkness.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nOne continuous 8-second take from a fixed orbital platform above East Asia. The camera maintains a locked nadir view centered on the North China Plain. The sprawling, glowing street-light grid of Beijing serves as the scale reference in the upper portion of the frame. From second 1 to 5, a thick, rolling orange wall of dust advances rapidly from the northwest, extinguishing the city lights section by section. During seconds 6 to 8, the entire metropolitan area is completely buried under the dense, turbulent dust cloud, leaving only a textured sea of orange silt visible. Diegetic sound of roaring, high-velocity wind holds one steady, heavy level from second 0 to second 8.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How many days of complete darkness would a storm of this scale cause? 🌪️",
+  "family": "atmosfer afeti",
+  "seed_id": 12,
+  "caption": "A massive wall of dense orange dust sweeps off the Gobi Desert and engulfs the North China Plain.\n\nThis impossible dust storm towers ten kilometers into the atmosphere, stretching across one thousand kilometers of land.\n\nReal severe sandstorms, such as the historic Beijing event of 2002, carry millions of tons of particulate matter but rarely exceed heights of one kilometer or block out all sunlight over an entire agricultural basin.\n\nFor a dust front to reach ten kilometers high and maintain its density, it would require a continuous atmospheric pressure gradient and wind velocities exceeding those of a Category 5 hurricane across the entire continent.\n\nThis is a simulation, not real footage. How long would it take for a region to recover from this level of dust accumulation?",
+  "hashtags": "#DustStorm #GobiDesert #Beijing #AtmosphericScience #Meteorology #Simulation #Sandstorm",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}
