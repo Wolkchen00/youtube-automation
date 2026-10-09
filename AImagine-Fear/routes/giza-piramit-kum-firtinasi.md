@@ -12,7 +12,7 @@ SEHIR_ISIGI: sodyum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a still golden desert sunrise, the air clear and cool
 FELAKET: a towering haboob sandstorm with lightning inside it
-SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti
+SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, yuruyus acilisi (2026-10-09)
 
 ## ILK KARE
 
@@ -20,21 +20,23 @@ Far below and ahead, filling the upper half of the frame: the three Pyramids of 
 
 ## OPENING STATE
 
-The rider is already sliding fast, feet first, at the top of a steep plunge on the transparent slide high above the Great Pyramid of Giza in Giza. Far below and ahead, filling the upper half of the frame: the three Pyramids of Giza at sunrise, the Great Pyramid largest and nearest, its stone faces glowing gold, long blue shadows stretching west across the sand. The low sun sits just above the desert horizon. The green band of the Nile and the edge of Cairo lie far beyond. A thick white cloud bank lies across the desert below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet fill the lower half of the frame, wet and shining, the two electric cyan rims converging ahead toward the cloud below. The weather is a still golden desert sunrise, the air clear and cool.
+The rider is already walking briskly, barefoot and mid-stride, along a narrow walkway of clear glass high above the Great Pyramid of Giza in Giza, a few steps from the open mouth of the transparent slide. Far below and ahead, filling the upper half of the frame: the three Pyramids of Giza at sunrise, the Great Pyramid largest and nearest, its stone faces glowing gold, long blue shadows stretching west across the sand. The low sun sits just above the desert horizon. The green band of the Nile and the edge of Cairo lie far beyond. A thick white cloud bank lies across the desert below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet step forward in the lower half of the frame, wet and shining, and just ahead the two electric cyan rims of the slide mouth run away and down toward the cloud below. There is no railing. The weather is a still golden desert sunrise, the air clear and cool.
 
 ## BEATS
 
-[0.0-2.5] From the very first moment the rider is already dropping fast down the steep plunge. The Great Pyramid fills the centre of the frame, its gold stone faces sharp in the low sun, the two smaller pyramids beside it and their long shadows across the sand. The slide drops past the very tip of the Great Pyramid close enough to see the individual stone blocks rush up and past on the left. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
+[0.0-2.0] From the very first moment the rider is already walking briskly barefoot along the narrow glass walkway toward the slide, left foot, right foot, never stopping. Through the clear glass under her feet there is only empty air and the land far below. The open mouth of the slide grows with every step, its two electric cyan rims curving away and down toward the cloud, and the Great Pyramid of Giza waits far below and ahead beyond it. She never stands still and never hesitates.
 
-[2.5-5.0] The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; only her two legs, both feet and the two electric cyan rims stay readable. The air turns hot and dry, the light inside the cloud turns dirty yellow, and the first grains of sand start to tick against the lens.
+[2.0-4.0] She reaches the mouth, sits straight down into it feet first and pushes off, and the slide takes her at once into the steep plunge. The Great Pyramid fills the centre of the frame, its gold stone faces sharp in the low sun, the two smaller pyramids beside it and their long shadows across the sand. The slide drops past the very tip of the Great Pyramid close enough to see the individual stone blocks rush up and past on the left. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
 
-[5.0-7.5] She drops out of the underside of the cloud into the same desert swallowed by a haboob. The three pyramids stand dark against a wall of rolling brown sand taller than the Great Pyramid itself, filling the whole horizon and boiling forward. The sky above it is black-brown. Sand streams sideways across the lens and drums on the acrylic.
+[4.0-6.0] The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; only her two legs, both feet and the two electric cyan rims stay readable. The air turns hot and dry, the light inside the cloud turns dirty yellow, and the first grains of sand start to tick against the lens.
 
-[7.5-10.0] Lightning flickers violet-white deep inside the sand wall and lights the pyramids for an instant, every stone edge flashing white. Gusts throw grit across the frame in long streaks, the slide shudders and bucks in the wind, and sand hisses over the clear floor under her feet. The Great Pyramid's apex is already disappearing into the brown, and the desert floor below goes dark as the shadow of the storm races across it.
+[6.0-8.5] She drops out of the underside of the cloud into the same desert swallowed by a haboob. The three pyramids stand dark against a wall of rolling brown sand taller than the Great Pyramid itself, filling the whole horizon and boiling forward. The sky above it is black-brown. Sand streams sideways across the lens and drums on the acrylic.
 
-[10.0-12.5] The sand wall reaches the pyramids and swallows the two smaller ones whole. It rolls straight toward the slide from the right side of the frame, a boiling cliff of dark sand with torn palm fronds and flying debris inside it, growing every second and filling more and more of the frame.
+[8.5-10.5] Lightning flickers violet-white deep inside the sand wall and lights the pyramids for an instant, every stone edge flashing white. Gusts throw grit across the frame in long streaks, the slide shudders and bucks in the wind, and sand hisses over the clear floor under her feet. The Great Pyramid's apex is already disappearing into the brown, and the desert floor below goes dark as the shadow of the storm races across it.
 
-[12.5-15.0] The slide runs straight into it, both legs and both feet still separately visible and the two electric cyan rims still burning. The sand wall slams into the camera: grit blasts across the lens, the frame goes solid dirty brown, then dims to near black as sand piles over the lens.
+[10.5-13.0] The sand wall reaches the pyramids and swallows the two smaller ones whole. It rolls straight toward the slide from the right side of the frame, a boiling cliff of dark sand with torn palm fronds and flying debris inside it, growing every second and filling more and more of the frame.
+
+[13.0-15.0] The slide runs straight into it, both legs and both feet still separately visible and the two electric cyan rims still burning. The sand wall slams into the camera: grit blasts across the lens, the frame goes solid dirty brown, then dims to near black as sand piles over the lens.
 
 ## END STATE
 
@@ -42,10 +44,11 @@ The camera is buried inside the sandstorm. The frame is almost black, with only 
 
 ## VOICE
 
-[0.0-1.5] A sharp gasp, then a held breath.
-[3.0-5.0] Ragged panting inside the cloud.
-[7.6-8.4] A short wordless scream at the lightning flash.
-[12.5-15.0] A long wordless scream swallowed by the roar of the sand, cut off as the sand buries the camera.
+[0.0-1.8] Quick nervous breathing in time with her bare footsteps on the glass.
+[2.0-3.2] A sharp gasp, then a held breath.
+[4.4-6.0] Ragged panting inside the cloud.
+[8.6-9.2] A short wordless scream at the lightning flash.
+[13.0-15.0] A long wordless scream swallowed by the roar of the sand, cut off as the sand buries the camera.
 
 ## CAPTION
 

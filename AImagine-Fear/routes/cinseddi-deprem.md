@@ -12,7 +12,7 @@ SEHIR_ISIGI: mum-amber
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
 WEATHER: a golden autumn afternoon over the ridges
 FELAKET: an earthquake tearing the mountain ridge apart
-SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti
+SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, yuruyus acilisi (2026-10-09)
 
 ## ILK KARE
 
@@ -20,21 +20,23 @@ Far below and ahead, filling the upper half of the frame: the Great Wall of Chin
 
 ## OPENING STATE
 
-The rider is already sliding fast, feet first, at the top of a steep plunge on the transparent slide high above the Great Wall of China in China. Far below and ahead, filling the upper half of the frame: the Great Wall of China running along the crest of steep mountain ridges on a golden autumn afternoon, its grey stone walkway and square watchtowers rising and falling with every peak. The hillsides are covered in red, orange and yellow autumn trees. Ridge after ridge fades into a soft blue haze beyond. A thick white cloud bank lies across the valley below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet fill the lower half of the frame, wet and shining, the two electric teal rims converging ahead toward the cloud below. The weather is a golden autumn afternoon over the ridges.
+The rider is already walking briskly, barefoot and mid-stride, along a narrow walkway of clear glass high above the Great Wall of China in China, a few steps from the open mouth of the transparent slide. Far below and ahead, filling the upper half of the frame: the Great Wall of China running along the crest of steep mountain ridges on a golden autumn afternoon, its grey stone walkway and square watchtowers rising and falling with every peak. The hillsides are covered in red, orange and yellow autumn trees. Ridge after ridge fades into a soft blue haze beyond. A thick white cloud bank lies across the valley below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet step forward in the lower half of the frame, wet and shining, and just ahead the two electric teal rims of the slide mouth run away and down toward the cloud below. There is no railing. The weather is a golden autumn afternoon over the ridges.
 
 ## BEATS
 
-[0.0-2.5] From the very first moment the rider is already dropping fast down the steep plunge. The Great Wall fills the centre of the frame, snaking up and over the ridges in both directions, its notched parapets and square stone watchtowers glowing warm in the afternoon sun. The slide drops past the top of a watchtower close enough to see the grey bricks and the arched windows rush up and past on the left, the steep stone steps of the walkway and the blazing autumn trees below. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
+[0.0-2.0] From the very first moment the rider is already walking briskly barefoot along the narrow glass walkway toward the slide, left foot, right foot, never stopping. Through the clear glass under her feet there is only empty air and the land far below. The open mouth of the slide grows with every step, its two electric teal rims curving away and down toward the cloud, and the Great Wall of China waits far below and ahead beyond it. She never stands still and never hesitates.
 
-[2.5-5.0] The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; only her two legs, both feet and the two electric teal rims stay readable. A deep low rumble rises from somewhere beneath the cloud, the slide trembles, and the murk inside the cloud turns a dusty amber.
+[2.0-4.0] She reaches the mouth, sits straight down into it feet first and pushes off, and the slide takes her at once into the steep plunge. The Great Wall fills the centre of the frame, snaking up and over the ridges in both directions, its notched parapets and square stone watchtowers glowing warm in the afternoon sun. The slide drops past the top of a watchtower close enough to see the grey bricks and the arched windows rush up and past on the left, the steep stone steps of the walkway and the blazing autumn trees below. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
 
-[5.0-7.5] She drops out of the underside of the cloud into the same ridges shaking apart. The Great Wall runs along the crest under a dark brown sky thick with dust, the whole mountain shuddering. A long crack is tearing open along the ridge beside it, and a watchtower ahead leans and crumbles, its bricks sliding down the hillside in a cloud of tan dust. The autumn trees shake and sway.
+[4.0-6.0] The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; only her two legs, both feet and the two electric teal rims stay readable. A deep low rumble rises from somewhere beneath the cloud, the slide trembles, and the murk inside the cloud turns a dusty amber.
 
-[7.5-10.0] The ground lurches. A whole section of the wall breaks away and slides down the slope in a cascade of grey bricks and stones, and the crack in the ridge opens into a deep dark gap, low amber sunlight blazing through the dust above it. Rocks bounce down the hillside and clatter across the slide, the acrylic shudders, and the clear floor under her feet fills with grit and gravel.
+[6.0-8.5] She drops out of the underside of the cloud into the same ridges shaking apart. The Great Wall runs along the crest under a dark brown sky thick with dust, the whole mountain shuddering. A long crack is tearing open along the ridge beside it, and a watchtower ahead leans and crumbles, its bricks sliding down the hillside in a cloud of tan dust. The autumn trees shake and sway.
 
-[10.0-12.5] The mountainside collapses. A massive rockfall pours down toward the slide from the right side of the frame, a roaring avalanche of grey boulders, broken wall stones and splintered trees inside a towering cloud of amber dust, the watchtowers of the Great Wall toppling into it one after another, growing every second and filling more and more of the frame.
+[8.5-10.5] The ground lurches. A whole section of the wall breaks away and slides down the slope in a cascade of grey bricks and stones, and the crack in the ridge opens into a deep dark gap, low amber sunlight blazing through the dust above it. Rocks bounce down the hillside and clatter across the slide, the acrylic shudders, and the clear floor under her feet fills with grit and gravel.
 
-[12.5-15.0] The slide runs straight into it, both legs and both feet still separately visible and the two electric teal rims still burning. The rockfall hits the camera: stones and dust blast across the lens, the frame floods choking amber, then dims to near black as gravel and dust pile over the lens and bury it.
+[10.5-13.0] The mountainside collapses. A massive rockfall pours down toward the slide from the right side of the frame, a roaring avalanche of grey boulders, broken wall stones and splintered trees inside a towering cloud of amber dust, the watchtowers of the Great Wall toppling into it one after another, growing every second and filling more and more of the frame.
+
+[13.0-15.0] The slide runs straight into it, both legs and both feet still separately visible and the two electric teal rims still burning. The rockfall hits the camera: stones and dust blast across the lens, the frame floods choking amber, then dims to near black as gravel and dust pile over the lens and bury it.
 
 ## END STATE
 
@@ -42,10 +44,11 @@ The camera is buried under the rubble. The frame is almost black, with only a fa
 
 ## VOICE
 
-[0.0-1.5] A happy gasp, then a held breath.
-[3.0-5.0] Nervous breathing as the rumble grows.
-[7.5-8.5] A short wordless scream as the wall breaks away.
-[12.5-15.0] A long wordless scream swallowed by the roar of the rockfall, cut off as the rubble buries the camera.
+[0.0-1.8] Quick nervous breathing in time with her bare footsteps on the glass.
+[2.0-3.2] A happy gasp, then a held breath.
+[4.4-6.0] Nervous breathing as the rumble grows.
+[8.5-9.3] A short wordless scream as the wall breaks away.
+[13.0-15.0] A long wordless scream swallowed by the roar of the rockfall, cut off as the rubble buries the camera.
 
 ## CAPTION
 

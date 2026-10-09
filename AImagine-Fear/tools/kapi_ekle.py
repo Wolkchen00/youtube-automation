@@ -6,19 +6,28 @@ havasini ve felaketini getirir. Iskelet 2026-10-01 mevsim kapisi A v2'nin
 (reference/ref-DdvYhkUEbxn/ornek/PROMPT_A15.txt) zaman cizelgesidir; o video
 Ihsan'in sectigi format.
 
+2026-10-09 Ihsan: video YURUYUSLE acilir. Ilk 2 sn rider cam yolda kaydiragin
+agzina yurur (iskelette, rota verisi gerekmez), sonra oturup kayar. Eski bulut
+rotalarindaki yuruyus izleyiciyi "nereye yuruyor" merakiyla tutuyordu; dogrudan
+kayarak acilan KAPI videolarinda Instagram'da baslangic izlenmesi dustu. Kayis
+kalan 13 sn'ye sikisir; rota verisindeki ses zamanlari eski 0-15 cizelgesine
+gore yazili, YURUYUS_HARITASI ile yeni cizelgeye tasinir.
+
 Rota alanlari:
   sehir, landmark, neon, palet, anahtar (TITLE_KEYWORD), isik (SEHIR_ISIGI: bu
   konseptte FELAKET dunyasinin baskin renk ailesi, renk ardisikligi kurali icin),
   hava (bulutun ustu), felaket (bulutun alti, kisa ad),
   ilk_kare  : baslangic gorselinde uzakta ne var (landmark, isik, mevsim)
-  acilis    : [0.0-2.5] ilk dusus, landmark yakindan
-  kapi_ici  : [2.5-5.0] bulutun icinde felaketin ilk isareti
-  ortaya    : [5.0-7.5] bulutun altinda AYNI yer felaketin icinde
-  tirmanis  : [7.5-10.0] felaket buyur, kaydiraga ilk darbe
-  doruk     : [10.0-12.5] asil tehdit yaklasir, kareyi doldurur
-  son       : [12.5-15.0] tehdit kamerayi yutar (kararma iskelette)
+  (yuruyus) : [0.0-2.0] cam yolda kaydiragin agzina yuruyus (iskelet)
+  acilis    : [2.0-4.0] oturur, ilk dusus, landmark yakindan
+  kapi_ici  : [4.0-6.0] bulutun icinde felaketin ilk isareti
+  ortaya    : [6.0-8.5] bulutun altinda AYNI yer felaketin icinde
+  tirmanis  : [8.5-10.5] felaket buyur, kaydiraga ilk darbe
+  doruk     : [10.5-13.0] asil tehdit yaklasir, kareyi doldurur
+  son       : [13.0-15.0] tehdit kamerayi yutar (kararma iskelette)
   son_durum : END STATE
-  ses       : VOICE icin kelimesiz uc an (kendi zamanlariyla)
+  ses       : VOICE icin kelimesiz uc an (ESKI 0-15 cizelgesinin zamanlariyla;
+              rota_metni yeni cizelgeye tasir ve yuruyus nefesini kendisi ekler)
   caption   : "You're ..." ile baslar, sehir adini gecer, soruyla biter
   emoji, etiket (#LandmarkEtiketi), basliklar (2-5, #shorts, anahtar ilk 40 karakterde)
 
@@ -1085,34 +1094,68 @@ ROTALAR: dict[str, dict] = {
 }
 
 
+# Eski kayis cizelgesinin kirilma noktalari -> yuruyuslu cizelgedeki karsiliklari.
+# Kayis 0.0'da degil 2.0'da baslar; aradaki her an dogrusal tasinir.
+YURUYUS_HARITASI = (
+    (0.0, 2.0), (2.5, 4.0), (5.0, 6.0), (7.5, 8.5), (10.0, 10.5), (12.5, 13.0), (15.0, 15.0),
+)
+YURUYUS_SESI = ("0.0-1.8", "Quick nervous breathing in time with her bare footsteps on the glass.")
+
+
+def yuruyus_zamani(eski: float) -> float:
+    """Eski 0-15 kayis cizelgesindeki bir ani yuruyuslu cizelgeye tasir."""
+    for (e0, y0), (e1, y1) in zip(YURUYUS_HARITASI, YURUYUS_HARITASI[1:]):
+        if e0 <= eski <= e1:
+            return round(y0 + (eski - e0) * (y1 - y0) / (e1 - e0), 1)
+    raise ValueError("zaman 0-15 disinda: %s" % eski)
+
+
+def yuruyus_sesleri(ses: tuple) -> list[tuple[str, str]]:
+    tasinan = [YURUYUS_SESI]
+    for zaman, metin in ses:
+        bas, bit = (float(parca) for parca in zaman.split("-"))
+        tasinan.append(("%.1f-%.1f" % (yuruyus_zamani(bas), yuruyus_zamani(bit)), metin))
+    return tasinan
+
+
 def rota_metni(slug: str, r: dict) -> str:
     """Bir rotanin tam markdown metni. Iskelet sabit, degisken yalniz r."""
     neon = r["neon"]
     acilis_durumu = (
-        "The rider is already sliding fast, feet first, at the top of a steep plunge on the "
-        "transparent slide high above %s in %s. %s Her two separate bare legs and bare feet "
-        "fill the lower half of the frame, wet and shining, the two %s rims converging ahead "
-        "toward the cloud below. The weather is %s."
+        "The rider is already walking briskly, barefoot and mid-stride, along a narrow "
+        "walkway of clear glass high above %s in %s, a few steps from the open mouth of the "
+        "transparent slide. %s Her two separate bare legs and bare feet step forward in the "
+        "lower half of the frame, wet and shining, and just ahead the two %s rims of the "
+        "slide mouth run away and down toward the cloud below. There is no railing. The "
+        "weather is %s."
         % (r["landmark"], r["sehir"], r["ilk_kare"], neon, r["hava"])
     )
     beats = [
-        ("0.0-2.5",
-         "From the very first moment the rider is already dropping fast down the steep plunge. "
+        ("0.0-2.0",
+         "From the very first moment the rider is already walking briskly barefoot along the "
+         "narrow glass walkway toward the slide, left foot, right foot, never stopping. "
+         "Through the clear glass under her feet there is only empty air and the land far "
+         "below. The open mouth of the slide grows with every step, its two %s rims curving "
+         "away and down toward the cloud, and %s waits far below and ahead beyond it. She "
+         "never stands still and never hesitates." % (neon, r["landmark"])),
+        ("2.0-4.0",
+         "She reaches the mouth, sits straight down into it feet first and pushes off, and the "
+         "slide takes her at once into the steep plunge. "
          + r["acilis"] + " Below, the white sea of cloud rushes up toward her and the slide "
          "dives straight into it."),
-        ("2.5-5.0",
+        ("4.0-6.0",
          "The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; "
          "only her two legs, both feet and the two %s rims stay readable. " % neon
          + r["kapi_ici"]),
-        ("5.0-7.5",
+        ("6.0-8.5",
          "She drops out of the underside of the cloud into " + r["ortaya"]),
-        ("7.5-10.0", r["tirmanis"]),
-        ("10.0-12.5", r["doruk"]),
-        ("12.5-15.0",
+        ("8.5-10.5", r["tirmanis"]),
+        ("10.5-13.0", r["doruk"]),
+        ("13.0-15.0",
          "The slide runs straight into it, both legs and both feet still separately visible "
          "and the two %s rims still burning. " % neon + r["son"]),
     ]
-    ses = "\n".join("[%s] %s" % (zaman, metin) for zaman, metin in r["ses"])
+    ses = "\n".join("[%s] %s" % (zaman, metin) for zaman, metin in yuruyus_sesleri(r["ses"]))
     caption = "%s %s\n\n#MegaSlideFear %s %s" % (
         r["caption"], r["emoji"], r["etiket"], SABIT_ETIKETLER)
     return "\n".join([
@@ -1130,7 +1173,8 @@ def rota_metni(slug: str, r: dict) -> str:
         "LEGWEAR: %s" % LEGWEAR,
         "WEATHER: %s" % r["hava"],
         "FELAKET: %s" % r["felaket"],
-        "SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti",
+        "SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, "
+        "yuruyus acilisi (2026-10-09)",
         "",
         "## ILK KARE",
         "",

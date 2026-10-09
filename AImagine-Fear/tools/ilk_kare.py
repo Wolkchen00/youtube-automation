@@ -37,9 +37,9 @@ KREDI = 70
 DUZELTME = (
     "Edit this photo. Remove any action camera, chest mount, strap or harness visible at "
     "the bottom of the frame; in its place show only the black high-cut one-piece swimsuit "
-    "at the hips and the clear transparent slide. If there is no camera, change nothing. "
-    "Keep everything else exactly identical: the two bare legs, the feet, the slide, the "
-    "glowing rims, the landmark, the sky, the clouds, the light and the framing."
+    "at the hips and the clear glass walkway. If there is no camera, change nothing. "
+    "Keep everything else exactly identical: the two bare legs, the feet, the glass "
+    "walkway, the slide, the glowing rims, the landmark, the sky, the clouds, the light and the framing."
 )
 
 
