@@ -252,6 +252,13 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "4": {
+      "status": "qc_retry",
+      "first_held_at": "2026-10-09T17:54:00.902462+00:00",
+      "retry_count": 1,
+      "last_reason_code": "AUDIO_MASTER",
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=0.10 dB, LUFS=-14.90."
     }
   },
   "engagement": {

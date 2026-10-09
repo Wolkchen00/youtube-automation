@@ -1,0 +1,1 @@
+{"ts": "2026-10-09T17:54:00.902550+00:00", "part": 4, "durum": "qc_retry", "kod": "AUDIO_MASTER", "neden": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=0.10 dB, LUFS=-14.90.", "coherence": null}
