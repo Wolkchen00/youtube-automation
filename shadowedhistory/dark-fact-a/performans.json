@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-09T17:39:18.002673+00:00",
+  "guncellendi": "2026-10-10T16:22:45.224940+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -139,6 +139,37 @@
             "comments": 2,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-10-10T16:22:45.224940+00:00",
+          "yas_saat": 144.215,
+          "youtube": {
+            "views": 1211,
+            "likes": 10,
+            "comments": 2,
+            "favorites": 0,
+            "watch_time_minutes": 113,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 117.17,
+            "engaged_views": 466,
+            "subscribers_gained": 0,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 13,
+            "comments": 2,
+            "views": 1619,
+            "impressions": 1619,
+            "reach": 1168,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1443,
+            "likes": 34,
+            "comments": 2,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -236,6 +267,101 @@
             "tiktok": {
               "views": 1321,
               "likes": 32,
+              "comments": 2,
+              "shares": 1
+            }
+          }
+        },
+        "s7g": {
+          "youtube": {
+            "ts": "2026-10-10T16:22:45.224940+00:00",
+            "yas_saat": 144.215,
+            "youtube": {
+              "views": 1211,
+              "likes": 10,
+              "comments": 2,
+              "favorites": 0,
+              "watch_time_minutes": 113,
+              "average_view_duration_seconds": 12,
+              "average_view_percentage": 117.17,
+              "engaged_views": 466,
+              "subscribers_gained": 0,
+              "shares": 1
+            },
+            "instagram": {
+              "likes": 13,
+              "comments": 2,
+              "views": 1619,
+              "impressions": 1619,
+              "reach": 1168,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1443,
+              "likes": 34,
+              "comments": 2,
+              "shares": 1
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-10T16:22:45.224940+00:00",
+            "yas_saat": 144.215,
+            "youtube": {
+              "views": 1211,
+              "likes": 10,
+              "comments": 2,
+              "favorites": 0,
+              "watch_time_minutes": 113,
+              "average_view_duration_seconds": 12,
+              "average_view_percentage": 117.17,
+              "engaged_views": 466,
+              "subscribers_gained": 0,
+              "shares": 1
+            },
+            "instagram": {
+              "likes": 13,
+              "comments": 2,
+              "views": 1619,
+              "impressions": 1619,
+              "reach": 1168,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1443,
+              "likes": 34,
+              "comments": 2,
+              "shares": 1
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-10T16:22:45.224940+00:00",
+            "yas_saat": 144.215,
+            "youtube": {
+              "views": 1211,
+              "likes": 10,
+              "comments": 2,
+              "favorites": 0,
+              "watch_time_minutes": 113,
+              "average_view_duration_seconds": 12,
+              "average_view_percentage": 117.17,
+              "engaged_views": 466,
+              "subscribers_gained": 0,
+              "shares": 1
+            },
+            "instagram": {
+              "likes": 13,
+              "comments": 2,
+              "views": 1619,
+              "impressions": 1619,
+              "reach": 1168,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 1443,
+              "likes": 34,
               "comments": 2,
               "shares": 1
             }
