@@ -1791,6 +1791,14 @@
       "reserved": 700,
       "actual": 0,
       "ts": "2026-10-10T16:28:39.573267+00:00"
+    },
+    {
+      "month": "2026-10",
+      "series": "flythrough",
+      "part": 9,
+      "reserved": 900,
+      "actual": 372.0,
+      "ts": "2026-10-10T17:21:51.378153+00:00"
     }
   ],
   "episode_spend": {

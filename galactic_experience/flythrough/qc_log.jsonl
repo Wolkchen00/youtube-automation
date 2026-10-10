@@ -201,3 +201,12 @@
 {"ts": "2026-10-08T18:55:59Z", "event": "qc_api_result", "attempt_id": "ffaec17525124ee181e6d7693952697e", "outcome": "ok"}
 {"ts": "2026-10-08T18:55:59Z", "event": "review", "episode": 8, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": ["Heavy radial motion blur obscures cloud details in the latter half of the clip."], "fix_notes": ["Maintain structural cloud definition during high-speed descent.", "Reduce extreme radial blur to preserve atmospheric textures."], "clip": "shot_01.mp4"}
 {"ts": "2026-10-08T18:55:59Z", "event": "qc_pass", "episode": 8, "shot": 1, "attempt": 0, "content_sha256": "5d750e34dd96c2466a97aeeb469fa33351e6a6177cbc03bee957ab00cd708c3c", "clip": "shot_01.mp4"}
+{"ts": "2026-10-10T17:24:54Z", "event": "qc_api_attempt", "attempt_id": "1f9dd735358d4b9c968314714d57e098", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 9, "shot": 1}
+{"ts": "2026-10-10T17:24:55Z", "event": "qc_api_result", "attempt_id": "1f9dd735358d4b9c968314714d57e098", "outcome": "error"}
+{"ts": "2026-10-10T17:25:00Z", "event": "qc_api_attempt", "attempt_id": "8dc48533067a427cad1746a0c44c21bb", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 9, "shot": 1}
+{"ts": "2026-10-10T17:25:02Z", "event": "qc_api_result", "attempt_id": "8dc48533067a427cad1746a0c44c21bb", "outcome": "ok"}
+{"ts": "2026-10-10T17:25:02Z", "event": "native_audio_review", "episode": 9, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Deep rumbling impacts and debris foley without speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-10-10T17:25:03Z", "event": "qc_api_attempt", "attempt_id": "955b1aa20fd443f6b71c9d1376c36572", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 9, "shot": 1}
+{"ts": "2026-10-10T17:25:15Z", "event": "qc_api_result", "attempt_id": "955b1aa20fd443f6b71c9d1376c36572", "outcome": "ok"}
+{"ts": "2026-10-10T17:25:15Z", "event": "review", "episode": 9, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-10-10T17:25:15Z", "event": "qc_pass", "episode": 9, "shot": 1, "attempt": 0, "content_sha256": "bd323bdcfee6c0bdce7c78a6754acbad6573ebd03db97b60732938c94d36603e", "clip": "shot_01.mp4"}
