@@ -29,5 +29,9 @@
   },
   "family": "mammal-giant",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/NnFf52nG/ep24-giant-gorilla.png"
+  ],
+  "ref_prompt_sha256": "18b6263fff42042712dfae3228e77596789f016939d8d243d10e666915e462ff"
 }

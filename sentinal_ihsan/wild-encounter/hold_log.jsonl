@@ -18,3 +18,5 @@
 {"ts": "2026-10-06T14:38:56.319696+00:00", "part": 23, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
 {"ts": "2026-10-08T15:12:34.284571+00:00", "part": 23, "durum": "qc_retry", "kod": "AUDIO_MASTER", "neden": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: True-peak gate passed (-2.00 <= -1.00) but loudness gate failed: measured LUFS=-18.90 is below [-15.00, -13.00] with the 2.00 dB ma", "coherence": null}
 {"ts": "2026-10-09T14:37:53.850895+00:00", "part": 23, "durum": "qc_retry", "kod": "UNKNOWN", "neden": "", "coherence": null}
+{"ts": "2026-10-10T13:37:29.512133+00:00", "part": 23, "durum": "budget_exhausted", "kod": "BUDGET_EXHAUSTED", "neden": "kalan bölüm kredisi tamamlanma tabanına yetmiyor: kalan=110.0, asgari=200.0, tavan=1000", "coherence": null}
+{"ts": "2026-10-10T14:13:54.577462+00:00", "part": 24, "durum": "qc_retry", "kod": "UNKNOWN", "neden": "", "coherence": null}
