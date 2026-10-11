@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-10T17:21:32.274386+00:00",
+  "guncellendi": "2026-10-11T17:42:29.534319+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 31.5,
@@ -2864,7 +2864,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-03T16:24:50.315574+00:00",
       "subtitle": "A Rift Opening Through All of Kenya",
@@ -3203,6 +3203,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-11T17:42:29.534319+00:00",
+          "yas_saat": 94.434,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 3,
+            "average_view_percentage": 42.11,
+            "engaged_views": 1,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 62,
+            "impressions": 62,
+            "reach": 156,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 603,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3345,5 +3376,5 @@
       "etiket": "orta"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }
