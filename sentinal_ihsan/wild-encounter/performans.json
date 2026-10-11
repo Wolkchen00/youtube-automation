@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-10T13:37:21.025212+00:00",
+  "guncellendi": "2026-10-11T13:59:58.968266+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 77.0,
@@ -4366,7 +4366,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-02T14:25:03.965328+00:00",
       "subtitle": "This GIANT SNAPPING TURTLE Is NOT Real",
@@ -4831,7 +4831,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-03T12:41:00.143522+00:00",
       "subtitle": "This GIANT TARANTULA Is NOT Real",
@@ -5232,6 +5232,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-11T13:59:58.968266+00:00",
+          "yas_saat": 141.858,
+          "youtube": {
+            "views": 83,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 6,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 86.45,
+            "engaged_views": 38,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 26,
+            "comments": 1,
+            "views": 5122,
+            "impressions": 5122,
+            "reach": 3477,
+            "saves": 3,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5374,5 +5405,5 @@
       "etiket": "orta"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 3
 }
