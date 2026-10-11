@@ -1,0 +1,241 @@
+{
+  "generated_at": "2026-10-11T14:47:50.947097+00:00",
+  "snapshot_date": "2026-10-11",
+  "period": "2026-10-05 to 2026-10-11",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 131,
+        "total_views": 118686,
+        "total_videos": 291
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "1f_hZhTWAu0",
+          "title": "In 1814 A Wave Of Beer Flooded London",
+          "published": "2026-10-10T16:37:09Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "mSAmyhVJun8",
+          "title": "Ottomans Hauled Warships Over Land",
+          "published": "2026-10-07T19:03:16Z",
+          "views": 10,
+          "views_48h": 8,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "TebH8YqFkug",
+          "title": "The Great Pyramid Was Once Bright White",
+          "published": "2026-10-04T16:07:21Z",
+          "views": 1211,
+          "views_48h": 1153,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 572
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 161,
+        "total_views": 183126,
+        "total_videos": 191
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "NE_oJ4NoHwY",
+          "title": "This GIANT ORCA Is NOT Real",
+          "published": "2026-10-05T16:06:23Z",
+          "views": 83,
+          "views_48h": 79,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 283.0
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 153,
+        "total_views": 77497,
+        "total_videos": 227
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "FHqP1a8ONgs",
+          "title": "Into the Fractures of Europa",
+          "published": "2026-10-10T17:26:32Z",
+          "views": 622,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "xKqXxBCFqL0",
+          "title": "Into Saturn's Hexagonal Storm",
+          "published": "2026-10-08T19:01:48Z",
+          "views": 29,
+          "views_48h": 24,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "i-RxYluz_Tg",
+          "title": "A Lava Fountain Taller Than Mount Etna",
+          "published": "2026-10-07T19:14:23Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "mBG12nom1T0",
+          "title": "Through the Main Asteroid Belt",
+          "published": "2026-10-04T16:57:35Z",
+          "views": 73,
+          "views_48h": 55,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 176
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 110,
+        "total_views": 160834,
+        "total_videos": 285
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "nawwzMMXRwI",
+          "title": "Vesuvius slide into an eruption #shorts",
+          "published": "2026-10-10T16:14:39Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "CIcgUD0CnJI",
+          "title": "Pregnant slide over the Taj Mahal #shorts",
+          "published": "2026-10-09T19:22:11Z",
+          "views": 2,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "1jQWskSxqks",
+          "title": "Rushmore slide into a tornado #shorts",
+          "published": "2026-10-09T17:35:53Z",
+          "views": 3,
+          "views_48h": 3,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "SCnr6Rh-lyE",
+          "title": "Opera House slide into a tsunami #shorts",
+          "published": "2026-10-08T18:02:31Z",
+          "views": 165,
+          "views_48h": 164,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "gnINd1eOZ9Y",
+          "title": "Hollywood sign slide into fire #shorts",
+          "published": "2026-10-07T17:55:43Z",
+          "views": 157,
+          "views_48h": 134,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "aG0f1v80hRI",
+          "title": "Colosseum hail the size of fists #shorts",
+          "published": "2026-10-06T17:16:06Z",
+          "views": 4,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "I-S2gp48g-s",
+          "title": "Liberty slide into a hurricane #shorts",
+          "published": "2026-10-05T19:45:05Z",
+          "views": 135,
+          "views_48h": 100,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "RdlIX9QC6DI",
+          "title": "Pyramids of Giza sandstorm drop #shorts",
+          "published": "2026-10-04T15:48:09Z",
+          "views": 62,
+          "views_48h": 60,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 14
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 116,
+        "total_views": 42588,
+        "total_videos": 31
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "u7OD02eSq2Y",
+          "title": "Amcam kızını zorla evlendirecekti. Anneannem yüzüne söyledi. 👵🔥",
+          "published": "2026-10-10T16:04:47Z",
+          "views": 2324,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "oykIEF_PmYY",
+          "title": "\"Çocuksam beni neden evlendiriyorsunuz baba?\" 💔",
+          "published": "2026-10-09T16:05:19Z",
+          "views": 1809,
+          "views_48h": 1809,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "GrIiKwYrlOo",
+          "title": "\"Sahipsiz mi?!\" Anneannem torunlarını kimseye ezdirmedi. 👵🔥",
+          "published": "2026-10-08T16:01:01Z",
+          "views": 15151,
+          "views_48h": 8619,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "4F0c0DQG-Rw",
+          "title": "Cezaevindeki babama ilk kez korkmadan cevap verdim. 💔",
+          "published": "2026-10-08T04:12:33Z",
+          "views": 2255,
+          "views_48h": 2094,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "tEYr1MwLN_U",
+          "title": "Babam cezaevinden abime yazmış. Abim bana söylemedi. 💔",
+          "published": "2026-10-06T16:03:46Z",
+          "views": 1481,
+          "views_48h": 1217,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "q0txKcuYiKQ",
+          "title": "\"O benim misafirim değil, hayatımdaki kadın.\" ❤️",
+          "published": "2026-10-05T16:02:08Z",
+          "views": 52,
+          "views_48h": 15,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "CjTk9JRoRMg",
+          "title": "Cinlere zam gelmiş. Zehra teyze tütsüyle geldi. 🧿",
+          "published": "2026-10-04T16:01:22Z",
+          "views": 3684,
+          "views_48h": 2146,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1538
+    }
+  }
+}
