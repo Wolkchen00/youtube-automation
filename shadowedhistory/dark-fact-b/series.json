@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 6,
-  "next_part": 4,
+  "next_part": 5,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -254,11 +254,29 @@
       }
     },
     "4": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-10-09T17:54:00.902462+00:00",
       "retry_count": 1,
       "last_reason_code": "AUDIO_MASTER",
-      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=0.10 dB, LUFS=-14.90."
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=0.10 dB, LUFS=-14.90.",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep04/ep04_music_titled_mastered.mp4",
+      "subtitle": "Vikings Never Wore Horned Helmets",
+      "stack_sha256": "ca29653eb3c3360ee51893e03bd7144e93c4f6aa9bbd01e60370cd123b267079",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-11T17:05:27.023011+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "engagement": {

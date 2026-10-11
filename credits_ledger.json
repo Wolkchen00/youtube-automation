@@ -1807,6 +1807,14 @@
       "reserved": 614,
       "actual": null,
       "ts": "2026-10-11T14:00:10.600738+00:00"
+    },
+    {
+      "month": "2026-10",
+      "series": "dark-fact-b",
+      "part": 4,
+      "reserved": 700,
+      "actual": 0,
+      "ts": "2026-10-11T16:51:57.665673+00:00"
     }
   ],
   "episode_spend": {

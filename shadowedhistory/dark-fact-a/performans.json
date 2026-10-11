@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-10T16:22:45.224940+00:00",
+  "guncellendi": "2026-10-11T16:51:40.408428+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -170,6 +170,37 @@
             "comments": 2,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-10-11T16:51:40.408428+00:00",
+          "yas_saat": 168.697,
+          "youtube": {
+            "views": 1211,
+            "likes": 10,
+            "comments": 2,
+            "favorites": 0,
+            "watch_time_minutes": 117,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 114.8,
+            "engaged_views": 494,
+            "subscribers_gained": 0,
+            "shares": 1
+          },
+          "instagram": {
+            "likes": 13,
+            "comments": 2,
+            "views": 1619,
+            "impressions": 1619,
+            "reach": 1168,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1498,
+            "likes": 36,
+            "comments": 2,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -274,17 +305,17 @@
         },
         "s7g": {
           "youtube": {
-            "ts": "2026-10-10T16:22:45.224940+00:00",
-            "yas_saat": 144.215,
+            "ts": "2026-10-11T16:51:40.408428+00:00",
+            "yas_saat": 168.697,
             "youtube": {
               "views": 1211,
               "likes": 10,
               "comments": 2,
               "favorites": 0,
-              "watch_time_minutes": 113,
+              "watch_time_minutes": 117,
               "average_view_duration_seconds": 12,
-              "average_view_percentage": 117.17,
-              "engaged_views": 466,
+              "average_view_percentage": 114.8,
+              "engaged_views": 494,
               "subscribers_gained": 0,
               "shares": 1
             },
@@ -298,24 +329,24 @@
               "shares": 0
             },
             "tiktok": {
-              "views": 1443,
-              "likes": 34,
+              "views": 1498,
+              "likes": 36,
               "comments": 2,
               "shares": 1
             }
           },
           "instagram": {
-            "ts": "2026-10-10T16:22:45.224940+00:00",
-            "yas_saat": 144.215,
+            "ts": "2026-10-11T16:51:40.408428+00:00",
+            "yas_saat": 168.697,
             "youtube": {
               "views": 1211,
               "likes": 10,
               "comments": 2,
               "favorites": 0,
-              "watch_time_minutes": 113,
+              "watch_time_minutes": 117,
               "average_view_duration_seconds": 12,
-              "average_view_percentage": 117.17,
-              "engaged_views": 466,
+              "average_view_percentage": 114.8,
+              "engaged_views": 494,
               "subscribers_gained": 0,
               "shares": 1
             },
@@ -329,24 +360,24 @@
               "shares": 0
             },
             "tiktok": {
-              "views": 1443,
-              "likes": 34,
+              "views": 1498,
+              "likes": 36,
               "comments": 2,
               "shares": 1
             }
           },
           "tiktok": {
-            "ts": "2026-10-10T16:22:45.224940+00:00",
-            "yas_saat": 144.215,
+            "ts": "2026-10-11T16:51:40.408428+00:00",
+            "yas_saat": 168.697,
             "youtube": {
               "views": 1211,
               "likes": 10,
               "comments": 2,
               "favorites": 0,
-              "watch_time_minutes": 113,
+              "watch_time_minutes": 117,
               "average_view_duration_seconds": 12,
-              "average_view_percentage": 117.17,
-              "engaged_views": 466,
+              "average_view_percentage": 114.8,
+              "engaged_views": 494,
               "subscribers_gained": 0,
               "shares": 1
             },
@@ -360,8 +391,8 @@
               "shares": 0
             },
             "tiktok": {
-              "views": 1443,
-              "likes": 34,
+              "views": 1498,
+              "likes": 36,
               "comments": 2,
               "shares": 1
             }
@@ -373,7 +404,63 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 2,
+      "post_ids": {
+        "youtube": "1f_hZhTWAu0",
+        "instagram": "18012529490761625",
+        "tiktok": "7695079373468192013"
+      },
+      "request_ids": {
+        "youtube": "2d99fdbeee904657bfa3a5ac1923a822",
+        "instagram": "0b2e2317187f4271a5bae3d5523c654e",
+        "tiktok": "083c543029994848acbeab24cb7a5ff3"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-11T16:51:40.408428+00:00",
+          "yas_saat": 24.206,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 134,
+            "impressions": 134,
+            "reach": 116,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 895,
+            "likes": 23,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-10T16:39:18.002261+00:00",
+      "subtitle": "In 1814 A Wave Of Beer Flooded London",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
