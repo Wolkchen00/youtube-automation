@@ -1805,7 +1805,7 @@
       "series": "wild-encounter",
       "part": 24,
       "reserved": 614,
-      "actual": null,
+      "actual": 252.0,
       "ts": "2026-10-11T14:00:10.600738+00:00"
     },
     {
@@ -1861,6 +1861,6 @@
     "wild-encounter:7": 533.0,
     "wild-encounter:8": 142.0,
     "wild-encounter:9": 142.0,
-    "wild-encounter:24": 512.0
+    "wild-encounter:24": 638.0
   }
 }
