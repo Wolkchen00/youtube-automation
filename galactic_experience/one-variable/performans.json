@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-11T17:42:29.534319+00:00",
+  "guncellendi": "2026-10-12T21:17:43.129783+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 31.5,
@@ -3234,6 +3234,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-12T21:17:43.129783+00:00",
+          "yas_saat": 122.021,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 3,
+            "average_view_percentage": 42.11,
+            "engaged_views": 1,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 62,
+            "impressions": 62,
+            "reach": 156,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 605,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3374,7 +3405,63 @@
       },
       "puan": 0.768317,
       "etiket": "orta"
+    },
+    {
+      "part": 103,
+      "post_ids": {
+        "youtube": "x7EPXCRHzKI",
+        "instagram": "18119563859284476",
+        "tiktok": "7695470014203301133"
+      },
+      "request_ids": {
+        "youtube": "4f7ff386d0d544478dc7d6c843bbaae4",
+        "instagram": "5347ebeaced14ecd82fdd1ae93e122e7",
+        "tiktok": "61ae31ab9533456ea002bfda43e4e40b"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-12T21:17:43.129783+00:00",
+          "yas_saat": 27.372,
+          "youtube": {
+            "views": 7,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 18,
+            "comments": 1,
+            "views": 2521,
+            "impressions": 2521,
+            "reach": 1650,
+            "saves": 2,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1077,
+            "likes": 10,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-11T17:55:23.267416+00:00",
+      "subtitle": "An Ice Shelf Fracture to the Horizon",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
