@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 6,
-  "next_part": 3,
+  "next_part": 4,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
   "auto_replenish": {
@@ -230,6 +230,27 @@
         "tiktok"
       ],
       "published_at": "2026-10-10T16:39:18.002772+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "3": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-a/episodes/ep03/ep03_music_titled_mastered.mp4",
+      "subtitle": "In 1324 A King From Mali Crashed The Value Of Gold",
+      "stack_sha256": "460d4a019ca1b1f7eeb13a88eb0ee280aebfaf09f00eb5998f8c0a7dce71999b",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-12T20:32:32.270119+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,

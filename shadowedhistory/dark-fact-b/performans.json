@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-11T16:51:50.407196+00:00",
+  "guncellendi": "2026-10-12T20:26:17.388268+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -923,6 +923,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-12T20:26:17.388268+00:00",
+          "yas_saat": 121.353,
+          "youtube": {
+            "views": 28,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 90.0,
+            "engaged_views": 4,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 79,
+            "impressions": 79,
+            "reach": 73,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1051,
+            "likes": 12,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1031,7 +1062,63 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 4,
+      "post_ids": {
+        "youtube": "Pf2ACuOxjRw",
+        "instagram": "18151643269535792",
+        "tiktok": "7695457164780981518"
+      },
+      "request_ids": {
+        "youtube": "143bd9abd3a74c4f811dcf03c79297e5",
+        "instagram": "d1aaba4c6715421ca14b6bc4d0a54d68",
+        "tiktok": "baa15517b657475a82a39d03e23c3d22"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-12T20:26:17.388268+00:00",
+          "yas_saat": 27.347,
+          "youtube": {
+            "views": 655,
+            "likes": 4,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 292,
+            "impressions": 292,
+            "reach": 247,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 419,
+            "likes": 4,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-11T17:05:27.022545+00:00",
+      "subtitle": "Vikings Never Wore Horned Helmets",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
