@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-12T21:17:54.327512+00:00",
+  "guncellendi": "2026-10-13T19:19:02.665616+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 581,
@@ -2317,6 +2317,37 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-13T19:19:02.665616+00:00",
+          "yas_saat": 120.298,
+          "youtube": {
+            "views": 29,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 1,
+            "average_view_duration_seconds": 7,
+            "average_view_percentage": 45.41,
+            "engaged_views": 9,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 158,
+            "impressions": 158,
+            "reach": 126,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 313,
+            "likes": 7,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2528,6 +2559,37 @@
           },
           "tiktok": {
             "views": 166,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-13T19:19:02.665616+00:00",
+          "yas_saat": 73.83,
+          "youtube": {
+            "views": 622,
+            "likes": 7,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 40,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 90.32,
+            "engaged_views": 135,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 9,
+            "comments": 1,
+            "views": 209,
+            "impressions": 209,
+            "reach": 152,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 167,
             "likes": 3,
             "comments": 0,
             "shares": 0

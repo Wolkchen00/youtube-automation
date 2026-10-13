@@ -202,3 +202,17 @@
 {"ts": "2026-10-11T17:52:44Z", "event": "qc_api_result", "attempt_id": "f9d9aedce4404286bba51265a8de1988", "outcome": "ok"}
 {"ts": "2026-10-11T17:52:44Z", "event": "review", "episode": 103, "shot": 1, "attempt": 1, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 5, "issues": ["Sudden morphing of ice shelf elevation along the fracture in later frames"], "fix_notes": ["Maintain consistent ice shelf height and structure during the collapse without sudden volumetric growth"], "clip": "shot_01.mp4"}
 {"ts": "2026-10-11T17:52:44Z", "event": "qc_pass", "episode": 103, "shot": 1, "attempt": 1, "content_sha256": "4a56b633b4563172c5362fb892b9b8fe394cfcdc4816eb2701a9d3edfbe8de72", "clip": "shot_01.mp4"}
+{"ts": "2026-10-13T19:20:56Z", "event": "qc_api_attempt", "attempt_id": "051a5aa314c84fe9a243f92eb8788610", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 104, "shot": 1}
+{"ts": "2026-10-13T19:20:57Z", "event": "qc_api_result", "attempt_id": "051a5aa314c84fe9a243f92eb8788610", "outcome": "error"}
+{"ts": "2026-10-13T19:21:02Z", "event": "qc_api_attempt", "attempt_id": "4a6f6095dda34dbf93d09b5f468fadd8", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 104, "shot": 1}
+{"ts": "2026-10-13T19:21:03Z", "event": "qc_api_result", "attempt_id": "4a6f6095dda34dbf93d09b5f468fadd8", "outcome": "error"}
+{"ts": "2026-10-13T19:21:13Z", "event": "qc_api_attempt", "attempt_id": "ee88f1c50d07499ca99baee366959f44", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 104, "shot": 1}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_result", "attempt_id": "ee88f1c50d07499ca99baee366959f44", "outcome": "429"}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_attempt", "attempt_id": "998f631efcd04694bb2c76f5429fc522", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 104, "shot": 1}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_result", "attempt_id": "998f631efcd04694bb2c76f5429fc522", "outcome": "429"}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_attempt", "attempt_id": "12d3deea64fc4ec2b6c62ed540ab0de3", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 104, "shot": 1}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_result", "attempt_id": "12d3deea64fc4ec2b6c62ed540ab0de3", "outcome": "429"}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_attempt", "attempt_id": "f873c4c886224ffb8c1a7a2e61995b24", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 104, "shot": 1}
+{"ts": "2026-10-13T19:21:14Z", "event": "qc_api_result", "attempt_id": "f873c4c886224ffb8c1a7a2e61995b24", "outcome": "429"}
+{"ts": "2026-10-13T19:21:14Z", "event": "native_audio_review", "episode": 104, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
+{"ts": "2026-10-13T19:21:15Z", "event": "qc_hold", "episode": 104, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
