@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-12T20:26:17.388268+00:00",
+  "guncellendi": "2026-10-13T18:29:50.146605+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -954,6 +954,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-13T18:29:50.146605+00:00",
+          "yas_saat": 143.413,
+          "youtube": {
+            "views": 28,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 90.0,
+            "engaged_views": 4,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 79,
+            "impressions": 79,
+            "reach": 73,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 1059,
+            "likes": 12,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1106,13 +1137,140 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-13T18:29:50.146605+00:00",
+          "yas_saat": 49.406,
+          "youtube": {
+            "views": 660,
+            "likes": 4,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 309,
+            "impressions": 309,
+            "reach": 260,
+            "saves": 1,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 423,
+            "likes": 4,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-11T17:05:27.022545+00:00",
       "subtitle": "Vikings Never Wore Horned Helmets",
-      "anlik": {},
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-13T18:29:50.146605+00:00",
+            "yas_saat": 49.406,
+            "youtube": {
+              "views": 660,
+              "likes": 4,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 309,
+              "impressions": 309,
+              "reach": 260,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 423,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-13T18:29:50.146605+00:00",
+            "yas_saat": 49.406,
+            "youtube": {
+              "views": 660,
+              "likes": 4,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 309,
+              "impressions": 309,
+              "reach": 260,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 423,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-13T18:29:50.146605+00:00",
+            "yas_saat": 49.406,
+            "youtube": {
+              "views": 660,
+              "likes": 4,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 309,
+              "impressions": 309,
+              "reach": 260,
+              "saves": 1,
+              "shares": 0
+            },
+            "tiktok": {
+              "views": 423,
+              "likes": 4,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
       "yargi_anligi": null,
       "oranlar": {},
       "puanlanan_metrikler": {},
@@ -1120,5 +1278,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 6
 }

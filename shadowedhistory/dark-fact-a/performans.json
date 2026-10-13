@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-12T20:26:14.186990+00:00",
+  "guncellendi": "2026-10-13T18:29:41.894434+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -479,6 +479,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-13T18:29:41.894434+00:00",
+          "yas_saat": 73.84,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 142,
+            "impressions": 142,
+            "reach": 124,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 919,
+            "likes": 26,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -587,7 +618,63 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 3,
+      "post_ids": {
+        "youtube": "_Ojrh-bubrA",
+        "instagram": "18127898353844450",
+        "tiktok": "7695881618514283790"
+      },
+      "request_ids": {
+        "youtube": "5937a7fd721d4054ade233dfb43c457e",
+        "instagram": "5fc5499cab624852b9a2ecd7a9a032dd",
+        "tiktok": "15a0c6c8904a4024970fb12bc389cf96"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-13T18:29:41.894434+00:00",
+          "yas_saat": 21.953,
+          "youtube": {
+            "views": 2,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 34,
+            "impressions": 34,
+            "reach": 31,
+            "saves": 0,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 231,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-12T20:32:32.269666+00:00",
+      "subtitle": "In 1324 A King From Mali Crashed The Value Of Gold",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
