@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-12T16:42:52.735275+00:00",
+  "guncellendi": "2026-10-13T15:00:24.472095+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 77.0,
@@ -5294,6 +5294,37 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-13T15:00:24.472095+00:00",
+          "yas_saat": 190.865,
+          "youtube": {
+            "views": 83,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 6,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 86.45,
+            "engaged_views": 38,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 26,
+            "comments": 1,
+            "views": 5127,
+            "impressions": 5127,
+            "reach": 3477,
+            "saves": 3,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5529,7 +5560,63 @@
       },
       "puan": 2.483762,
       "etiket": "kazanan"
+    },
+    {
+      "part": 24,
+      "post_ids": {
+        "youtube": "nPsKTUUl1GA",
+        "instagram": "17957760057255826",
+        "tiktok": "7695824267283418381"
+      },
+      "request_ids": {
+        "youtube": "8788a2b57584445d989f78a09b7a9462",
+        "instagram": "0fe151adcaee410aad3d1f1eeb9c5e51",
+        "tiktok": "d75513d07dd04a77966ac5850048739e"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-13T15:00:24.472095+00:00",
+          "yas_saat": 22.171,
+          "youtube": {
+            "views": 42,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 69,
+            "comments": 1,
+            "views": 14919,
+            "impressions": 14919,
+            "reach": 9512,
+            "saves": 3,
+            "shares": 0
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-12T16:50:07.620679+00:00",
+      "subtitle": "This GIANT GORILLA Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
