@@ -226,3 +226,23 @@
 {"ts": "2026-10-12T21:25:02Z", "event": "qc_api_result", "attempt_id": "64d4135a611347808685af66519c71db", "outcome": "ok"}
 {"ts": "2026-10-12T21:25:02Z", "event": "review", "episode": 10, "shot": 1, "attempt": 1, "review_try": 0, "verdict": "fail", "reasons": ["prompt'un yasakladığı öğe görünüyor"], "artifact_score": 5, "issues": ["Helmet or cockpit structure visible at bottom of final frame"], "fix_notes": ["Keep camera perspective completely unobstructed without cockpit or helmet geometry"], "clip": "shot_01.mp4"}
 {"ts": "2026-10-12T21:25:02Z", "event": "final_reject", "episode": 10, "shot": 1, "attempts": 1, "reasons": ["prompt'un yasakladığı öğe görünüyor"]}
+{"ts": "2026-10-14T17:15:20Z", "event": "qc_api_attempt", "attempt_id": "e96395d1f3eb487891dbcfd6efb75e5f", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:20Z", "event": "qc_api_result", "attempt_id": "e96395d1f3eb487891dbcfd6efb75e5f", "outcome": "error"}
+{"ts": "2026-10-14T17:15:25Z", "event": "qc_api_attempt", "attempt_id": "df24617a9c314d1aa0bd8cebcad49a33", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:26Z", "event": "qc_api_result", "attempt_id": "df24617a9c314d1aa0bd8cebcad49a33", "outcome": "error"}
+{"ts": "2026-10-14T17:15:36Z", "event": "qc_api_attempt", "attempt_id": "d2621af7550e43149b5d0343564d5537", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:37Z", "event": "qc_api_result", "attempt_id": "d2621af7550e43149b5d0343564d5537", "outcome": "error"}
+{"ts": "2026-10-14T17:15:37Z", "event": "qc_api_attempt", "attempt_id": "103360bdf7284809a7e7b0890bc38e96", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:37Z", "event": "qc_api_result", "attempt_id": "103360bdf7284809a7e7b0890bc38e96", "outcome": "error"}
+{"ts": "2026-10-14T17:15:42Z", "event": "qc_api_attempt", "attempt_id": "c0cdeb4037664798876165ec8aea09af", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:43Z", "event": "qc_api_result", "attempt_id": "c0cdeb4037664798876165ec8aea09af", "outcome": "error"}
+{"ts": "2026-10-14T17:15:53Z", "event": "qc_api_attempt", "attempt_id": "084c2f446d9e443ab41dae5a7a9947e5", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:54Z", "event": "qc_api_result", "attempt_id": "084c2f446d9e443ab41dae5a7a9947e5", "outcome": "error"}
+{"ts": "2026-10-14T17:15:54Z", "event": "qc_api_attempt", "attempt_id": "35d7007cd0fb4a1e8418c8a7a3970569", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:15:54Z", "event": "qc_api_result", "attempt_id": "35d7007cd0fb4a1e8418c8a7a3970569", "outcome": "error"}
+{"ts": "2026-10-14T17:15:59Z", "event": "qc_api_attempt", "attempt_id": "4f67788633e34596a563432ff03e57c7", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:16:00Z", "event": "qc_api_result", "attempt_id": "4f67788633e34596a563432ff03e57c7", "outcome": "429"}
+{"ts": "2026-10-14T17:16:00Z", "event": "qc_api_attempt", "attempt_id": "3149afee38c14575a7b81719207000d0", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 10, "shot": 1}
+{"ts": "2026-10-14T17:16:00Z", "event": "qc_api_result", "attempt_id": "3149afee38c14575a7b81719207000d0", "outcome": "429"}
+{"ts": "2026-10-14T17:16:00Z", "event": "native_audio_review", "episode": 10, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
+{"ts": "2026-10-14T17:16:00Z", "event": "qc_hold", "episode": 10, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
