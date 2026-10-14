@@ -1,11 +1,11 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-13T15:00:24.472095+00:00",
+  "guncellendi": "2026-10-14T12:51:31.992972+00:00",
   "medyanlar": {
     "s48": {
-      "youtube": 77.0,
-      "instagram": 3678.0,
-      "tiktok": 191.5
+      "youtube": 75,
+      "instagram": 5105,
+      "tiktok": 171
     },
     "oturmus": {
       "youtube": 276.0,
@@ -5327,7 +5327,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-05T16:08:29.253425+00:00",
       "subtitle": "This GIANT ORCA Is NOT Real",
@@ -5604,19 +5604,203 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-14T12:51:31.992972+00:00",
+          "yas_saat": 44.023,
+          "youtube": {
+            "views": 69,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 69,
+            "comments": 1,
+            "views": 15081,
+            "impressions": 15081,
+            "reach": 9635,
+            "saves": 3,
+            "shares": 0,
+            "likes_insight": 69,
+            "comments_insight": 1,
+            "total_interactions": 75,
+            "ig_reels_avg_watch_time": 9489,
+            "ig_reels_video_view_total_time": 87926822
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-12T16:50:07.620679+00:00",
       "subtitle": "This GIANT GORILLA Is NOT Real",
-      "anlik": {},
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-14T12:51:31.992972+00:00",
+            "yas_saat": 44.023,
+            "youtube": {
+              "views": 69,
+              "likes": 1,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 69,
+              "comments": 1,
+              "views": 15081,
+              "impressions": 15081,
+              "reach": 9635,
+              "saves": 3,
+              "shares": 0,
+              "likes_insight": 69,
+              "comments_insight": 1,
+              "total_interactions": 75,
+              "ig_reels_avg_watch_time": 9489,
+              "ig_reels_video_view_total_time": 87926822
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-14T12:51:31.992972+00:00",
+            "yas_saat": 44.023,
+            "youtube": {
+              "views": 69,
+              "likes": 1,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 69,
+              "comments": 1,
+              "views": 15081,
+              "impressions": 15081,
+              "reach": 9635,
+              "saves": 3,
+              "shares": 0,
+              "likes_insight": 69,
+              "comments_insight": 1,
+              "total_interactions": 75,
+              "ig_reels_avg_watch_time": 9489,
+              "ig_reels_video_view_total_time": 87926822
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-14T12:51:31.992972+00:00",
+            "yas_saat": 44.023,
+            "youtube": {
+              "views": 69,
+              "likes": 1,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 69,
+              "comments": 1,
+              "views": 15081,
+              "impressions": 15081,
+              "reach": 9635,
+              "saves": 3,
+              "shares": 0,
+              "likes_insight": 69,
+              "comments_insight": 1,
+              "total_interactions": 75,
+              "ig_reels_avg_watch_time": 9489,
+              "ig_reels_video_view_total_time": 87926822
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 0.92,
+        "instagram": 2.954163,
+        "tiktok": 0.0
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 69,
+          "likes": 1,
+          "comments": 0,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 69,
+          "comments": 1,
+          "views": 15081,
+          "impressions": 15081,
+          "reach": 9635,
+          "saves": 3,
+          "shares": 0,
+          "likes_insight": 69,
+          "comments_insight": 1,
+          "total_interactions": 75,
+          "ig_reels_avg_watch_time": 9489,
+          "ig_reels_video_view_total_time": 87926822
+        },
+        "tiktok": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 2.954163,
+      "etiket": "kazanan"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 3
 }
