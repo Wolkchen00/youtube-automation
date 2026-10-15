@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-14T16:08:26.015726+00:00",
+  "guncellendi": "2026-10-15T15:45:47.765043+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -546,6 +546,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-15T15:45:47.765043+00:00",
+          "yas_saat": 119.108,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 144,
+            "impressions": 144,
+            "reach": 126,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 4254,
+            "ig_reels_video_view_total_time": 531784
+          },
+          "tiktok": {
+            "views": 924,
+            "likes": 26,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -734,13 +770,160 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-15T15:45:47.765043+00:00",
+          "yas_saat": 67.221,
+          "youtube": {
+            "views": 4,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 40,
+            "impressions": 40,
+            "reach": 36,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 2,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 2620,
+            "ig_reels_video_view_total_time": 89086
+          },
+          "tiktok": {
+            "views": 242,
+            "likes": 2,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-12T20:32:32.269666+00:00",
       "subtitle": "In 1324 A King From Mali Crashed The Value Of Gold",
-      "anlik": {},
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-15T15:45:47.765043+00:00",
+            "yas_saat": 67.221,
+            "youtube": {
+              "views": 4,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 40,
+              "impressions": 40,
+              "reach": 36,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 2,
+              "comments_insight": 1,
+              "total_interactions": 3,
+              "ig_reels_avg_watch_time": 2620,
+              "ig_reels_video_view_total_time": 89086
+            },
+            "tiktok": {
+              "views": 242,
+              "likes": 2,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-15T15:45:47.765043+00:00",
+            "yas_saat": 67.221,
+            "youtube": {
+              "views": 4,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 40,
+              "impressions": 40,
+              "reach": 36,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 2,
+              "comments_insight": 1,
+              "total_interactions": 3,
+              "ig_reels_avg_watch_time": 2620,
+              "ig_reels_video_view_total_time": 89086
+            },
+            "tiktok": {
+              "views": 242,
+              "likes": 2,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-15T15:45:47.765043+00:00",
+            "yas_saat": 67.221,
+            "youtube": {
+              "views": 4,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 40,
+              "impressions": 40,
+              "reach": 36,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 2,
+              "comments_insight": 1,
+              "total_interactions": 3,
+              "ig_reels_avg_watch_time": 2620,
+              "ig_reels_video_view_total_time": 89086
+            },
+            "tiktok": {
+              "views": 242,
+              "likes": 2,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
       "yargi_anligi": null,
       "oranlar": {},
       "puanlanan_metrikler": {},
