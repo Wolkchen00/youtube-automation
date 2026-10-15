@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-14T17:12:16.734154+00:00",
+  "guncellendi": "2026-10-15T17:47:00.908490+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 19,
@@ -3332,6 +3332,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-15T17:47:00.908490+00:00",
+          "yas_saat": 190.51,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 3,
+            "average_view_percentage": 42.11,
+            "engaged_views": 1,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 7,
+            "comments": 1,
+            "views": 68,
+            "impressions": 68,
+            "reach": 157,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 7,
+            "comments_insight": 1,
+            "total_interactions": 8,
+            "ig_reels_avg_watch_time": 6366,
+            "ig_reels_video_view_total_time": 986820
+          },
+          "tiktok": {
+            "views": 614,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3694,6 +3730,42 @@
           },
           "tiktok": {
             "views": 1084,
+            "likes": 10,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-15T17:47:00.908490+00:00",
+          "yas_saat": 95.86,
+          "youtube": {
+            "views": 8,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 92.26,
+            "engaged_views": 3,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 19,
+            "comments": 1,
+            "views": 2542,
+            "impressions": 2542,
+            "reach": 1665,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 19,
+            "comments_insight": 1,
+            "total_interactions": 22,
+            "ig_reels_avg_watch_time": 6614,
+            "ig_reels_video_view_total_time": 10914603
+          },
+          "tiktok": {
+            "views": 1090,
             "likes": 10,
             "comments": 0,
             "shares": 0
