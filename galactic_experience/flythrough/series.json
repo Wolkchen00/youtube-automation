@@ -363,7 +363,7 @@
       "last_reason_code": "QUOTA",
       "hold_reason": "quota",
       "first_infra_held_at": "2026-10-14T17:16:00.884109+00:00",
-      "infra_retry_count": 1
+      "infra_retry_count": 2
     }
   },
   "engagement": {

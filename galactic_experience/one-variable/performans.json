@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-15T17:47:00.908490+00:00",
+  "guncellendi": "2026-10-16T16:41:11.312231+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 19,
@@ -3370,7 +3370,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-07T19:16:26.096723+00:00",
       "subtitle": "A Lava Fountain Taller Than Mount Etna",
@@ -3770,6 +3770,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-16T16:41:11.312231+00:00",
+          "yas_saat": 118.763,
+          "youtube": {
+            "views": 8,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 92.26,
+            "engaged_views": 3,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 19,
+            "comments": 1,
+            "views": 2542,
+            "impressions": 2542,
+            "reach": 1665,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 19,
+            "comments_insight": 1,
+            "total_interactions": 22,
+            "ig_reels_avg_watch_time": 6614,
+            "ig_reels_video_view_total_time": 10914603
+          },
+          "tiktok": {
+            "views": 1101,
+            "likes": 10,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3910,7 +3946,68 @@
       },
       "puan": 1.484136,
       "etiket": "orta"
+    },
+    {
+      "part": 104,
+      "post_ids": {
+        "youtube": "XQrxhpkIUEE",
+        "instagram": "18113225246155565",
+        "tiktok": "7696957785270996237"
+      },
+      "request_ids": {
+        "youtube": "11283b7049b54cbfb7d05736f7806a2c",
+        "instagram": "e8289481a6034899a0012619faaa2d2d",
+        "tiktok": "43a376073cab4c44aabc21ddca618cc5"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-16T16:41:11.312231+00:00",
+          "yas_saat": 22.547,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 715,
+            "impressions": 715,
+            "reach": 475,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 4,
+            "comments_insight": 1,
+            "total_interactions": 5,
+            "ig_reels_avg_watch_time": 6816,
+            "ig_reels_video_view_total_time": 3149227
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-15T18:08:21.084374+00:00",
+      "subtitle": "A Sinkhole Wider Than the Yucatan Peninsula",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 9
 }
