@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-15T15:45:54.304592+00:00",
+  "guncellendi": "2026-10-16T15:32:42.071967+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -1059,7 +1059,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-07T19:05:05.136454+00:00",
       "subtitle": "Ottomans Hauled Warships Over Land",
@@ -1422,6 +1422,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-16T15:32:42.071967+00:00",
+          "yas_saat": 118.454,
+          "youtube": {
+            "views": 677,
+            "likes": 5,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 46,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 85.69,
+            "engaged_views": 236,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 313,
+            "impressions": 313,
+            "reach": 264,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 4694,
+            "ig_reels_video_view_total_time": 1234570
+          },
+          "tiktok": {
+            "views": 437,
+            "likes": 5,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1532,5 +1568,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }
