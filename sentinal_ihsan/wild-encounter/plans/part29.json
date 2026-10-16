@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 29,
+    "title": "This GIANT CENTIPEDE Is NOT Real"
+  },
+  "synopsis": "On a minimal studio desert set, a colossal centipede takes a performer into its venomous mandibles, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal centipede with rust-red chitinous plating, glossy black compound eyes, curved black piercing mandibles and a height of three metres rears upward on the studio desert set. Ihsan stands on the sand bed in a brown expedition shirt, gazing up at the looming arthropod. The enormous mandibles sweep outward and clamp shut around Ihsan, pulling him into the central mouth cavity until he is completely concealed. Studio crew in dark work clothes rush into frame, grab the rigid pincer arms and pull the mechanical jaws apart. In the final seconds, Ihsan climbs out onto the sand unharmed. Ambient sound only: shifting sand, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "desert_ruins_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant centipede's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant centipede and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "first_comment": "How would you react if this giant centipede lunged at you?",
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant centipede",
+    "descriptor": "A colossal centipede with rust-red chitinous plating, glossy black compound eyes, curved black piercing mandibles and a height of three metres.",
+    "environment": "desert_ruins_set",
+    "framing": "A handheld camera stays low and close while pushing in slowly so the giant centipede fills the whole frame from the first second, keeping its armored head sharp while an out-of-focus flight case corner stays at the lower edge and the blue screen falls away.",
+    "anomaly_descriptor": "Crew members rush forward to grip the heavy chitin pincers and manually pry the counterbalanced jaws open."
+  },
+  "family": "insect-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 27,
+    "title": "This GIANT MORAY EEL Is NOT Real"
+  },
+  "synopsis": "On a minimal studio ocean tank set, a colossal moray eel takes a performer into its toothy maw, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal moray eel with mottled yellow-green slimy skin, pale glassy eyes, translucent needle teeth and a height of three metres rises from the studio water tank set. Ihsan stands ankle-deep in the shallow tank wearing a dark neoprene wetsuit top, facing the undulating predator. The creature's mouth gapes wide and snaps shut over Ihsan, hiding him entirely from view. Stagehands in black stage gear step into the shallow water, grip the upper palate and lever the hinged jaw open. In the final seconds, Ihsan climbs out onto the shallow tank platform unharmed. Ambient sound only: splashing water, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant moray eel's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant moray eel and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "first_comment": "Could you stay calm inside a giant moray eel mouth?",
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant moray eel",
+    "descriptor": "A colossal moray eel with mottled yellow-green slimy skin, pale glassy eyes, translucent needle teeth and a height of three metres.",
+    "environment": "ocean_tank_set",
+    "framing": "A handheld camera stays low and close while pushing in slowly so the giant moray eel fills the whole frame from the first second, keeping its toothy head sharp while an out-of-focus cable bundle stays at the lower edge and the blue screen falls away.",
+    "anomaly_descriptor": "Crew members rush forward to grab the silicone snout and push the hinged mechanical jaws wide open by hand."
+  },
+  "family": "sea-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 28,
+    "title": "This GIANT PELICAN Is NOT Real"
+  },
+  "synopsis": "On a minimal studio ocean tank set, a colossal pelican takes a performer into its expandable pouch, then the crew force its practical bill open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal pelican with chalk-white downy feathers, dark bead eyes, a serrated yellow beak with an expandable pink pouch and a height of four metres towers over the water tank stage. Ihsan stands on the studio rim wearing a grey drysuit, watching the bird's massive head tilt downward. The gigantic lower beak stretches wide and swallows Ihsan whole, closing shut until he vanishes inside the elastic pouch. Stage technicians in dark outfits rush forward, seize the bill margins and pry the mechanical beak apart. In the final seconds, Ihsan climbs out onto the set deck unharmed. Ambient sound only: water ripples, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant pelican's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant pelican and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "first_comment": "Did you expect him to fit inside that giant pelican beak?",
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant pelican",
+    "descriptor": "A colossal pelican with chalk-white downy feathers, dark bead eyes, a serrated yellow beak with an expandable pink pouch and a height of four metres.",
+    "environment": "ocean_tank_set",
+    "framing": "A handheld camera stays low and close while pushing in slowly so the giant pelican fills the whole frame from the first second, keeping its massive beak sharp while an out-of-focus dolly rail stays at the lower edge and the blue screen falls away.",
+    "anomaly_descriptor": "Crew members rush forward to grasp the foam beak edges and spread the tensioned jaw hinges apart by hand."
+  },
+  "family": "bird-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

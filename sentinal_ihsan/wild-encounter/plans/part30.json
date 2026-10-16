@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 30,
+    "title": "This GIANT MARINE IGUANA Is NOT Real"
+  },
+  "synopsis": "On a minimal studio ocean tank set, a colossal marine iguana takes a performer into its blunt jaws, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nA colossal marine iguana with charcoal-black encrusted scales, hooded ruby eyes, sharp triangular white teeth and a height of three metres perches on the rocks of the water set. Ihsan stands at the water edge in a dark sleeveless rashguard, staring directly at the broad reptilian face. The heavy black jaws part wide and close over Ihsan, concealing him completely inside the mouth. Stage crew in dark clothing hurry forward, place their hands along the jawline and pry the mechanical maw open. In the final seconds, Ihsan climbs out onto the studio concrete unharmed. Ambient sound only: water lap, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant marine iguana's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant marine iguana and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "first_comment": "Would you dare step inside this giant marine iguana?",
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant marine iguana",
+    "descriptor": "A colossal marine iguana with charcoal-black encrusted scales, hooded ruby eyes, sharp triangular white teeth and a height of three metres.",
+    "environment": "ocean_tank_set",
+    "framing": "A handheld camera stays low and close while pushing in slowly so the giant marine iguana fills the whole frame from the first second, keeping its scaly snout sharp while an out-of-focus studio light stand stays at the lower edge and the blue screen falls away.",
+    "anomaly_descriptor": "Crew members rush forward to grasp the textured snout and haul the counterweighted jaws wide open by hand."
+  },
+  "family": "reptile",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}

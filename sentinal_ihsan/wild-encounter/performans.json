@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-15T12:38:45.972143+00:00",
+  "guncellendi": "2026-10-16T12:22:47.753018+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 75,
@@ -5669,6 +5669,42 @@
             "total_interactions": 76,
             "ig_reels_avg_watch_time": 9485,
             "ig_reels_video_view_total_time": 88085176
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-16T12:22:47.753018+00:00",
+          "yas_saat": 91.544,
+          "youtube": {
+            "views": 88,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 4,
+            "average_view_duration_seconds": 22,
+            "average_view_percentage": 200.1,
+            "engaged_views": 11,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 71,
+            "comments": 1,
+            "views": 15134,
+            "impressions": 15134,
+            "reach": 9647,
+            "saves": 3,
+            "shares": 0,
+            "likes_insight": 71,
+            "comments_insight": 1,
+            "total_interactions": 77,
+            "ig_reels_avg_watch_time": 9478,
+            "ig_reels_video_view_total_time": 88128480
           },
           "tiktok": {
             "views": 0,
