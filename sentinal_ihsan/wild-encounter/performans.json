@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-16T12:22:47.753018+00:00",
+  "guncellendi": "2026-10-17T11:34:43.498534+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 75,
@@ -5712,6 +5712,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-17T11:34:43.498534+00:00",
+          "yas_saat": 114.743,
+          "youtube": {
+            "views": 88,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 9,
+            "average_view_duration_seconds": 16,
+            "average_view_percentage": 149.55,
+            "engaged_views": 31,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 72,
+            "comments": 1,
+            "views": 15290,
+            "impressions": 15290,
+            "reach": 9729,
+            "saves": 3,
+            "shares": 0,
+            "likes_insight": 72,
+            "comments_insight": 1,
+            "total_interactions": 78,
+            "ig_reels_avg_watch_time": 9489,
+            "ig_reels_video_view_total_time": 88963451
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5872,7 +5908,68 @@
       },
       "puan": 2.954163,
       "etiket": "kazanan"
+    },
+    {
+      "part": 25,
+      "post_ids": {
+        "youtube": "MBjwQBpFHWM",
+        "instagram": "18114928448120772",
+        "tiktok": "7697242995267095822"
+      },
+      "request_ids": {
+        "youtube": "f4d7b3e962a4482d998be1c8866206c7",
+        "instagram": "c21eaf593dcf46049030d9f50fc6a869",
+        "tiktok": "d45041eaa2d0410b8985fb0e5c034240"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-17T11:34:43.498534+00:00",
+          "yas_saat": 22.983,
+          "youtube": {
+            "views": 39,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 111,
+            "comments": 1,
+            "views": 26671,
+            "impressions": 26671,
+            "reach": 15067,
+            "saves": 15,
+            "shares": 15,
+            "likes_insight": 111,
+            "comments_insight": 1,
+            "total_interactions": 154,
+            "ig_reels_avg_watch_time": 10271,
+            "ig_reels_video_view_total_time": 152874219
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-16T12:35:43.034803+00:00",
+      "subtitle": "This GIANT CHAMELEON Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
