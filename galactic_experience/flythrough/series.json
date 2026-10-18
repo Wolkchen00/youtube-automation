@@ -359,9 +359,9 @@
     "10": {
       "status": "qc_retry",
       "first_held_at": "2026-10-12T21:25:04.496757+00:00",
-      "retry_count": 1,
-      "last_reason_code": "QUOTA",
-      "hold_reason": "quota",
+      "retry_count": 2,
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "üretim nedeni bilinmiyor",
       "first_infra_held_at": "2026-10-14T17:16:00.884109+00:00",
       "infra_retry_count": 2
     }

@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-17T15:37:11.920270+00:00",
+  "guncellendi": "2026-10-18T15:53:55.477070+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 581,
@@ -2957,6 +2957,42 @@
           },
           "tiktok": {
             "views": 170,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-18T15:53:55.477070+00:00",
+          "yas_saat": 190.411,
+          "youtube": {
+            "views": 621,
+            "likes": 7,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 40,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 86.98,
+            "engaged_views": 135,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 9,
+            "comments": 1,
+            "views": 210,
+            "impressions": 210,
+            "reach": 153,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 9,
+            "comments_insight": 1,
+            "total_interactions": 10,
+            "ig_reels_avg_watch_time": 6693,
+            "ig_reels_video_view_total_time": 1037495
+          },
+          "tiktok": {
+            "views": 172,
             "likes": 3,
             "comments": 0,
             "shares": 0
