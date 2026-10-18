@@ -1,11 +1,11 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-17T11:34:43.498534+00:00",
+  "guncellendi": "2026-10-18T12:03:13.598372+00:00",
   "medyanlar": {
     "s48": {
-      "youtube": 75,
-      "instagram": 5105,
-      "tiktok": 171
+      "youtube": 75.0,
+      "instagram": 5333.5,
+      "tiktok": 85.5
     },
     "oturmus": {
       "youtube": 276.0,
@@ -5748,6 +5748,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-18T12:03:13.598372+00:00",
+          "yas_saat": 139.218,
+          "youtube": {
+            "views": 88,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 9,
+            "average_view_duration_seconds": 16,
+            "average_view_percentage": 146.68,
+            "engaged_views": 33,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 74,
+            "comments": 1,
+            "views": 15472,
+            "impressions": 15472,
+            "reach": 9810,
+            "saves": 4,
+            "shares": 0,
+            "likes_insight": 74,
+            "comments_insight": 1,
+            "total_interactions": 81,
+            "ig_reels_avg_watch_time": 9518,
+            "ig_reels_video_view_total_time": 90058687
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5869,7 +5905,7 @@
       "yargi_anligi": "s48",
       "oranlar": {
         "youtube": 0.92,
-        "instagram": 2.954163,
+        "instagram": 2.827599,
         "tiktok": 0.0
       },
       "puanlanan_metrikler": {
@@ -5906,7 +5942,7 @@
           "shares": 0
         }
       },
-      "puan": 2.954163,
+      "puan": 2.827599,
       "etiket": "kazanan"
     },
     {
@@ -5957,19 +5993,203 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-18T12:03:13.598372+00:00",
+          "yas_saat": 47.458,
+          "youtube": {
+            "views": 41,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 197,
+            "comments": 2,
+            "views": 50237,
+            "impressions": 50237,
+            "reach": 27153,
+            "saves": 31,
+            "shares": 15,
+            "likes_insight": 197,
+            "comments_insight": 2,
+            "total_interactions": 274,
+            "ig_reels_avg_watch_time": 11406,
+            "ig_reels_video_view_total_time": 303275420
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-16T12:35:43.034803+00:00",
       "subtitle": "This GIANT CHAMELEON Is NOT Real",
-      "anlik": {},
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-18T12:03:13.598372+00:00",
+            "yas_saat": 47.458,
+            "youtube": {
+              "views": 41,
+              "likes": 0,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 197,
+              "comments": 2,
+              "views": 50237,
+              "impressions": 50237,
+              "reach": 27153,
+              "saves": 31,
+              "shares": 15,
+              "likes_insight": 197,
+              "comments_insight": 2,
+              "total_interactions": 274,
+              "ig_reels_avg_watch_time": 11406,
+              "ig_reels_video_view_total_time": 303275420
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-18T12:03:13.598372+00:00",
+            "yas_saat": 47.458,
+            "youtube": {
+              "views": 41,
+              "likes": 0,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 197,
+              "comments": 2,
+              "views": 50237,
+              "impressions": 50237,
+              "reach": 27153,
+              "saves": 31,
+              "shares": 15,
+              "likes_insight": 197,
+              "comments_insight": 2,
+              "total_interactions": 274,
+              "ig_reels_avg_watch_time": 11406,
+              "ig_reels_video_view_total_time": 303275420
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-18T12:03:13.598372+00:00",
+            "yas_saat": 47.458,
+            "youtube": {
+              "views": 41,
+              "likes": 0,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 197,
+              "comments": 2,
+              "views": 50237,
+              "impressions": 50237,
+              "reach": 27153,
+              "saves": 31,
+              "shares": 15,
+              "likes_insight": 197,
+              "comments_insight": 2,
+              "total_interactions": 274,
+              "ig_reels_avg_watch_time": 11406,
+              "ig_reels_video_view_total_time": 303275420
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 0.546667,
+        "instagram": 9.419143,
+        "tiktok": 0.0
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 41,
+          "likes": 0,
+          "comments": 0,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 197,
+          "comments": 2,
+          "views": 50237,
+          "impressions": 50237,
+          "reach": 27153,
+          "saves": 31,
+          "shares": 15,
+          "likes_insight": 197,
+          "comments_insight": 2,
+          "total_interactions": 274,
+          "ig_reels_avg_watch_time": 11406,
+          "ig_reels_video_view_total_time": 303275420
+        },
+        "tiktok": {
+          "views": 0,
+          "likes": 0,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 9.419143,
+      "etiket": "kazanan"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 6
 }

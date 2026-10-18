@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 30,
-  "next_part": 26,
+  "next_part": 27,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -1039,12 +1039,51 @@
       }
     },
     "26": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-10-17T11:42:21.862017+00:00",
       "first_infra_held_at": "2026-10-17T11:42:21.862017+00:00",
       "infra_retry_count": 1,
       "last_reason_code": "TRANSIENT_INFRA",
-      "hold_reason": "video motoru cekim 1 icin klip teslim etmedi (saglayici tarafinda gecici ariza)"
+      "hold_reason": "video motoru cekim 1 icin klip teslim etmedi (saglayici tarafinda gecici ariza)",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep26/ep26_mastered.mp4",
+      "subtitle": "This GIANT HIPPOPOTAMUS Is NOT Real",
+      "stack_sha256": "402794227728e8997b57e567d6c713f30e41db87c73caffb2cb7249499b397f5",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part26",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "08hrHHYr3bs",
+          "video_sha256": "27bd7121f7d6efb167cb5150a5e8b084409ee323a9bda10bba74f47433ba24b0",
+          "ts": "2026-10-18T12:11:31.305205+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "17917255341465211",
+          "video_sha256": "27bd7121f7d6efb167cb5150a5e8b084409ee323a9bda10bba74f47433ba24b0",
+          "ts": "2026-10-18T12:12:43.244963+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7697979397315300622",
+          "video_sha256": "27bd7121f7d6efb167cb5150a5e8b084409ee323a9bda10bba74f47433ba24b0",
+          "ts": "2026-10-18T12:13:53.367956+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-18T12:13:53.372663+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti.",
