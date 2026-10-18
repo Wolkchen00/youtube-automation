@@ -1,0 +1,225 @@
+{
+  "generated_at": "2026-10-18T12:31:19.852423+00:00",
+  "snapshot_date": "2026-10-18",
+  "period": "2026-10-12 to 2026-10-18",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 131,
+        "total_views": 119556,
+        "total_videos": 294
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "5ox-NEry1ys",
+          "title": "Krakatoa Eruption Heard 4800 Kilometres Away",
+          "published": "2026-10-17T14:38:31Z",
+          "views": 3,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "_Ojrh-bubrA",
+          "title": "In 1324 A King From Mali Crashed The Value Of Gold",
+          "published": "2026-10-12T20:30:32Z",
+          "views": 4,
+          "views_48h": 4,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Pf2ACuOxjRw",
+          "title": "Vikings Never Wore Horned Helmets",
+          "published": "2026-10-11T17:03:26Z",
+          "views": 677,
+          "views_48h": 659,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 492.0
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 160,
+        "total_views": 183393,
+        "total_videos": 193
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "MBjwQBpFHWM",
+          "title": "This GIANT CHAMELEON Is NOT Real",
+          "published": "2026-10-16T12:33:44Z",
+          "views": 39,
+          "views_48h": 39,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "nPsKTUUl1GA",
+          "title": "This GIANT GORILLA Is NOT Real",
+          "published": "2026-10-12T16:47:51Z",
+          "views": 88,
+          "views_48h": 69,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 105
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 153,
+        "total_views": 78214,
+        "total_videos": 229
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "XQrxhpkIUEE",
+          "title": "A Sinkhole Wider Than the Yucatan Peninsula",
+          "published": "2026-10-15T18:06:34Z",
+          "views": 3,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "x7EPXCRHzKI",
+          "title": "An Ice Shelf Fracture to the Horizon",
+          "published": "2026-10-11T17:53:14Z",
+          "views": 8,
+          "views_48h": 7,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 66.0
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 110,
+        "total_views": 161149,
+        "total_videos": 292
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "kYdFDS69cY8",
+          "title": "Petra Treasury flash flood drop #shorts",
+          "published": "2026-10-17T14:18:57Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "Z8KeO_XSeGY",
+          "title": "Stonehenge under a meteor storm #shorts",
+          "published": "2026-10-16T15:28:34Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "4-P8SUHHBlQ",
+          "title": "Sagrada Familia waterspout drop #shorts",
+          "published": "2026-10-15T15:42:12Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "X0YKECUEPmE",
+          "title": "Great Wall earthquake drop #shorts",
+          "published": "2026-10-14T16:00:03Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "K0kWU1V-bSI",
+          "title": "Machu Picchu landslide drop #shorts",
+          "published": "2026-10-13T18:25:16Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "eNmcHQl16dM",
+          "title": "St. Basil's domes in a blizzard #shorts",
+          "published": "2026-10-12T20:23:14Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "6TP2eqyofKk",
+          "title": "Grand Canyon drop into lightning #shorts",
+          "published": "2026-10-11T16:48:33Z",
+          "views": 4,
+          "views_48h": 2,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 5
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 191,
+        "total_views": 94213,
+        "total_videos": 38
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Y9JBVfIfKmE",
+          "title": "47-48. \"Bilseydin gelme mi diyecektin?\" Babaanne kayınvalideyi susturdu. 😂",
+          "published": "2026-10-17T16:05:24Z",
+          "views": 1054,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "Gyp92SXyMJ4",
+          "title": "45-46. \"Artık gelinimiz olacaksın. Çalışmana ne gerek var?\" 💼",
+          "published": "2026-10-16T16:04:19Z",
+          "views": 1513,
+          "views_48h": 1513,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "iT5SICN0K-E",
+          "title": "43-44. \"Peki. Evlensinler.\" Ama gülüşü başka bir şey söylüyordu. 💍",
+          "published": "2026-10-15T16:07:02Z",
+          "views": 1292,
+          "views_48h": 1193,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "KNskqDf0aHw",
+          "title": "41-42. \"Kaça vazgeçersin oğlumdan?\" Annesi kapıma boş çekle geldi. 💍",
+          "published": "2026-10-14T16:06:54Z",
+          "views": 2228,
+          "views_48h": 2023,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "j5AR6TP_WcE",
+          "title": "39-40. \"Amacın beni kendine aşık etmekse, başardın.\" ❤️",
+          "published": "2026-10-13T16:04:37Z",
+          "views": 1281,
+          "views_48h": 1178,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "MXKNE_6o8z4",
+          "title": "37-38. \"Parası mı yok? Soyadı mı yeterince büyük değil?\" 💔",
+          "published": "2026-10-12T16:06:49Z",
+          "views": 6732,
+          "views_48h": 4116,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "IjSP9sOOsCA",
+          "title": "35-36. Bana evlenme teklif etti. Annesi ise başka bir gelin seçmişti. 💍",
+          "published": "2026-10-11T16:03:15Z",
+          "views": 4823,
+          "views_48h": 3826,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1747.5
+    }
+  }
+}
