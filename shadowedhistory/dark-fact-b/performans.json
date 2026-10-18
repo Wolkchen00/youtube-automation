@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-17T14:24:32.926066+00:00",
+  "guncellendi": "2026-10-18T14:47:45.530477+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -1494,6 +1494,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-18T14:47:45.530477+00:00",
+          "yas_saat": 165.705,
+          "youtube": {
+            "views": 677,
+            "likes": 5,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 47,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 85.6,
+            "engaged_views": 240,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 314,
+            "impressions": 314,
+            "reach": 264,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 4,
+            "comments_insight": 1,
+            "total_interactions": 7,
+            "ig_reels_avg_watch_time": 4687,
+            "ig_reels_video_view_total_time": 1237377
+          },
+          "tiktok": {
+            "views": 442,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -1595,6 +1631,116 @@
               "shares": 0
             }
           }
+        },
+        "s7g": {
+          "youtube": {
+            "ts": "2026-10-18T14:47:45.530477+00:00",
+            "yas_saat": 165.705,
+            "youtube": {
+              "views": 677,
+              "likes": 5,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 47,
+              "average_view_duration_seconds": 9,
+              "average_view_percentage": 85.6,
+              "engaged_views": 240,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 1,
+              "views": 314,
+              "impressions": 314,
+              "reach": 264,
+              "saves": 1,
+              "shares": 0,
+              "likes_insight": 4,
+              "comments_insight": 1,
+              "total_interactions": 7,
+              "ig_reels_avg_watch_time": 4687,
+              "ig_reels_video_view_total_time": 1237377
+            },
+            "tiktok": {
+              "views": 442,
+              "likes": 6,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-18T14:47:45.530477+00:00",
+            "yas_saat": 165.705,
+            "youtube": {
+              "views": 677,
+              "likes": 5,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 47,
+              "average_view_duration_seconds": 9,
+              "average_view_percentage": 85.6,
+              "engaged_views": 240,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 1,
+              "views": 314,
+              "impressions": 314,
+              "reach": 264,
+              "saves": 1,
+              "shares": 0,
+              "likes_insight": 4,
+              "comments_insight": 1,
+              "total_interactions": 7,
+              "ig_reels_avg_watch_time": 4687,
+              "ig_reels_video_view_total_time": 1237377
+            },
+            "tiktok": {
+              "views": 442,
+              "likes": 6,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-18T14:47:45.530477+00:00",
+            "yas_saat": 165.705,
+            "youtube": {
+              "views": 677,
+              "likes": 5,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 47,
+              "average_view_duration_seconds": 9,
+              "average_view_percentage": 85.6,
+              "engaged_views": 240,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 4,
+              "comments": 1,
+              "views": 314,
+              "impressions": 314,
+              "reach": 264,
+              "saves": 1,
+              "shares": 0,
+              "likes_insight": 4,
+              "comments_insight": 1,
+              "total_interactions": 7,
+              "ig_reels_avg_watch_time": 4687,
+              "ig_reels_video_view_total_time": 1237377
+            },
+            "tiktok": {
+              "views": 442,
+              "likes": 6,
+              "comments": 0,
+              "shares": 0
+            }
+          }
         }
       },
       "yargi_anligi": null,
@@ -1602,7 +1748,68 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 5,
+      "post_ids": {
+        "youtube": "5ox-NEry1ys",
+        "instagram": "18124679356926700",
+        "tiktok": "7697646141990653197"
+      },
+      "request_ids": {
+        "youtube": "81975404ae2440af8a28f0ac7ddb06d5",
+        "instagram": "913dd84e74c44afba8ad1960e9329379",
+        "tiktok": "6634ecd097da42c39cb141efc75899f8"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-18T14:47:45.530477+00:00",
+          "yas_saat": 24.131,
+          "youtube": {
+            "views": 3,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 192,
+            "impressions": 192,
+            "reach": 143,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 2,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 5977,
+            "ig_reels_video_view_total_time": 860819
+          },
+          "tiktok": {
+            "views": 863,
+            "likes": 29,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-17T14:39:55.487221+00:00",
+      "subtitle": "Krakatoa Eruption Heard 4800 Kilometres Away",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }

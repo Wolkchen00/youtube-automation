@@ -267,7 +267,7 @@
       "infra_retry_count": 1,
       "last_reason_code": "UNKNOWN",
       "hold_reason": "üretim nedeni bilinmiyor",
-      "retry_count": 1
+      "retry_count": 2
     }
   },
   "engagement": {
