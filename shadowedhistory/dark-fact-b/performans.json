@@ -1,7 +1,13 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-18T14:47:45.530477+00:00",
-  "medyanlar": {},
+  "guncellendi": "2026-10-19T17:45:30.752596+00:00",
+  "medyanlar": {
+    "s48": {
+      "youtube": 8,
+      "instagram": 188,
+      "tiktok": 1007
+    }
+  },
   "parts": [
     {
       "part": 1,
@@ -394,11 +400,37 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 78.75,
+        "instagram": 1.0,
+        "tiktok": 1.080437
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 630,
+          "likes": 7,
+          "comments": 2,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 4,
+          "comments": 1,
+          "views": 188,
+          "impressions": 188,
+          "reach": 133,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 1088,
+          "likes": 20,
+          "comments": 0,
+          "shares": 1
+        }
+      },
+      "puan": 78.75,
+      "etiket": "kazanan"
     },
     {
       "part": 2,
@@ -790,11 +822,43 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 0.25,
+        "instagram": 0.93617,
+        "tiktok": 1.0
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 2,
+          "likes": 0,
+          "comments": 1,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 4,
+          "comments": 1,
+          "views": 176,
+          "impressions": 176,
+          "reach": 147,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 1007,
+          "likes": 22,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 1.0,
+      "etiket": "orta"
     },
     {
       "part": 3,
@@ -1270,11 +1334,43 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 1.0,
+        "instagram": 0.409574,
+        "tiktok": 1.020854
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 8,
+          "likes": 0,
+          "comments": 1,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 5,
+          "comments": 1,
+          "views": 77,
+          "impressions": 77,
+          "reach": 72,
+          "saves": 0,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 1028,
+          "likes": 11,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 1.020854,
+      "etiket": "orta"
     },
     {
       "part": 4,
@@ -1532,7 +1628,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-11T17:05:27.022545+00:00",
       "subtitle": "Vikings Never Wore Horned Helmets",
@@ -1743,11 +1839,43 @@
           }
         }
       },
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 82.5,
+        "instagram": 1.643617,
+        "tiktok": 0.42006
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 660,
+          "likes": 4,
+          "comments": 1,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 2,
+          "comments": 1,
+          "views": 309,
+          "impressions": 309,
+          "reach": 260,
+          "saves": 1,
+          "shares": 0
+        },
+        "tiktok": {
+          "views": 423,
+          "likes": 4,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 82.5,
+      "etiket": "kazanan"
     },
     {
       "part": 5,
@@ -1797,19 +1925,203 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-19T17:45:30.752596+00:00",
+          "yas_saat": 51.093,
+          "youtube": {
+            "views": 3,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 201,
+            "impressions": 201,
+            "reach": 149,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 2,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 6067,
+            "ig_reels_video_view_total_time": 910170
+          },
+          "tiktok": {
+            "views": 960,
+            "likes": 37,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-17T14:39:55.487221+00:00",
       "subtitle": "Krakatoa Eruption Heard 4800 Kilometres Away",
-      "anlik": {},
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-19T17:45:30.752596+00:00",
+            "yas_saat": 51.093,
+            "youtube": {
+              "views": 3,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 201,
+              "impressions": 201,
+              "reach": 149,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 2,
+              "comments_insight": 1,
+              "total_interactions": 3,
+              "ig_reels_avg_watch_time": 6067,
+              "ig_reels_video_view_total_time": 910170
+            },
+            "tiktok": {
+              "views": 960,
+              "likes": 37,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-19T17:45:30.752596+00:00",
+            "yas_saat": 51.093,
+            "youtube": {
+              "views": 3,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 201,
+              "impressions": 201,
+              "reach": 149,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 2,
+              "comments_insight": 1,
+              "total_interactions": 3,
+              "ig_reels_avg_watch_time": 6067,
+              "ig_reels_video_view_total_time": 910170
+            },
+            "tiktok": {
+              "views": 960,
+              "likes": 37,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-19T17:45:30.752596+00:00",
+            "yas_saat": 51.093,
+            "youtube": {
+              "views": 3,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 2,
+              "comments": 1,
+              "views": 201,
+              "impressions": 201,
+              "reach": 149,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 2,
+              "comments_insight": 1,
+              "total_interactions": 3,
+              "ig_reels_avg_watch_time": 6067,
+              "ig_reels_video_view_total_time": 910170
+            },
+            "tiktok": {
+              "views": 960,
+              "likes": 37,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 0.375,
+        "instagram": 1.069149,
+        "tiktok": 0.953327
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 3,
+          "likes": 0,
+          "comments": 1,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 2,
+          "comments": 1,
+          "views": 201,
+          "impressions": 201,
+          "reach": 149,
+          "saves": 0,
+          "shares": 0,
+          "likes_insight": 2,
+          "comments_insight": 1,
+          "total_interactions": 3,
+          "ig_reels_avg_watch_time": 6067,
+          "ig_reels_video_view_total_time": 910170
+        },
+        "tiktok": {
+          "views": 960,
+          "likes": 37,
+          "comments": 0,
+          "shares": 0
+        }
+      },
+      "puan": 1.069149,
+      "etiket": "orta"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 3
 }
