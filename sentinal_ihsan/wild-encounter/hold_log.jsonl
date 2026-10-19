@@ -22,3 +22,4 @@
 {"ts": "2026-10-10T14:13:54.577462+00:00", "part": 24, "durum": "qc_retry", "kod": "UNKNOWN", "neden": "", "coherence": null}
 {"ts": "2026-10-14T13:06:41.522552+00:00", "part": 25, "durum": "qc_retry", "kod": "TRANSIENT_INFRA", "neden": "video motoru cekim 1 icin klip teslim etmedi (saglayici tarafinda gecici ariza)", "coherence": null}
 {"ts": "2026-10-17T11:42:21.862086+00:00", "part": 26, "durum": "qc_retry", "kod": "TRANSIENT_INFRA", "neden": "video motoru cekim 1 icin klip teslim etmedi (saglayici tarafinda gecici ariza)", "coherence": null}
+{"ts": "2026-10-19T14:44:22.969811+00:00", "part": 27, "durum": "qc_retry", "kod": "TRANSIENT_INFRA", "neden": "video motoru cekim 1 icin klip teslim etmedi (saglayici tarafinda gecici ariza)", "coherence": null}

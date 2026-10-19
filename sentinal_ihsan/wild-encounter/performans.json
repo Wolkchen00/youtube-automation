@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-18T12:03:13.598372+00:00",
+  "guncellendi": "2026-10-19T14:38:58.758712+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 75.0,
@@ -8,9 +8,9 @@
       "tiktok": 85.5
     },
     "oturmus": {
-      "youtube": 276.0,
-      "instagram": 2063,
-      "tiktok": 194.5
+      "youtube": 255,
+      "instagram": 2147.5,
+      "tiktok": 177
     }
   },
   "parts": [
@@ -84,8 +84,8 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 10.394928,
-        "tiktok": 0.70437
+        "youtube": 11.25098,
+        "tiktok": 0.774011
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -101,7 +101,7 @@
           "shares": 0
         }
       },
-      "puan": 10.394928,
+      "puan": 11.25098,
       "etiket": "kazanan"
     },
     {
@@ -228,9 +228,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 14.057971,
-        "instagram": 0.496365,
-        "tiktok": 0.910026
+        "youtube": 15.215686,
+        "instagram": 0.476834,
+        "tiktok": 1.0
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -255,7 +255,7 @@
           "shares": 0
         }
       },
-      "puan": 14.057971,
+      "puan": 15.215686,
       "etiket": "kazanan"
     },
     {
@@ -382,9 +382,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 1.097826,
-        "instagram": 0.169656,
-        "tiktok": 0.550129
+        "youtube": 1.188235,
+        "instagram": 0.16298,
+        "tiktok": 0.60452
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -409,7 +409,7 @@
           "shares": 0
         }
       },
-      "puan": 1.097826,
+      "puan": 1.188235,
       "etiket": "orta"
     },
     {
@@ -536,9 +536,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 25.112319,
-        "instagram": 1.08192,
-        "tiktok": 4.236504
+        "youtube": 27.180392,
+        "instagram": 1.039348,
+        "tiktok": 4.655367
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -563,7 +563,7 @@
           "shares": 0
         }
       },
-      "puan": 25.112319,
+      "puan": 27.180392,
       "etiket": "kazanan"
     },
     {
@@ -690,9 +690,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 130.076087,
-        "instagram": 0.84634,
-        "tiktok": 2.997429
+        "youtube": 140.788235,
+        "instagram": 0.813038,
+        "tiktok": 3.293785
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -717,7 +717,7 @@
           "shares": 0
         }
       },
-      "puan": 130.076087,
+      "puan": 140.788235,
       "etiket": "kazanan"
     },
     {
@@ -844,9 +844,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 11.442029,
-        "instagram": 0.44159,
-        "tiktok": 2.200514
+        "youtube": 12.384314,
+        "instagram": 0.424214,
+        "tiktok": 2.418079
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -871,7 +871,7 @@
           "shares": 0
         }
       },
-      "puan": 11.442029,
+      "puan": 12.384314,
       "etiket": "kazanan"
     },
     {
@@ -1078,9 +1078,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 1.235507,
-        "instagram": 0.682016,
-        "tiktok": 0.231362
+        "youtube": 1.337255,
+        "instagram": 0.65518,
+        "tiktok": 0.254237
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -1111,7 +1111,7 @@
           "shares": 0
         }
       },
-      "puan": 1.235507,
+      "puan": 1.337255,
       "etiket": "orta"
     },
     {
@@ -1380,9 +1380,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.836957,
-        "instagram": 2.906447,
-        "tiktok": 2.241645
+        "youtube": 0.905882,
+        "instagram": 2.792084,
+        "tiktok": 2.463277
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -1413,7 +1413,7 @@
           "shares": 0
         }
       },
-      "puan": 2.906447,
+      "puan": 2.792084,
       "etiket": "kazanan"
     },
     {
@@ -1853,9 +1853,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.166667,
-        "instagram": 0.725642,
-        "tiktok": 1.089974
+        "youtube": 0.180392,
+        "instagram": 0.69709,
+        "tiktok": 1.19774
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -1880,7 +1880,7 @@
           "shares": 0
         }
       },
-      "puan": 1.089974,
+      "puan": 1.19774,
       "etiket": "orta"
     },
     {
@@ -2418,9 +2418,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.271739,
-        "instagram": 1.096946,
-        "tiktok": 5.218509
+        "youtube": 0.294118,
+        "instagram": 1.053783,
+        "tiktok": 5.734463
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -2451,7 +2451,7 @@
           "shares": 0
         }
       },
-      "puan": 5.218509,
+      "puan": 5.734463,
       "etiket": "kazanan"
     },
     {
@@ -2995,9 +2995,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.144928,
-        "instagram": 1.0,
-        "tiktok": 5.22365
+        "youtube": 0.156863,
+        "instagram": 0.960652,
+        "tiktok": 5.740113
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -3028,7 +3028,7 @@
           "shares": 0
         }
       },
-      "puan": 5.22365,
+      "puan": 5.740113,
       "etiket": "kazanan"
     },
     {
@@ -3572,9 +3572,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.655797,
-        "instagram": 12.966069,
-        "tiktok": 3.907455
+        "youtube": 0.709804,
+        "instagram": 12.455879,
+        "tiktok": 4.293785
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -3605,7 +3605,7 @@
           "shares": 1
         }
       },
-      "puan": 12.966069,
+      "puan": 12.455879,
       "etiket": "kazanan"
     },
     {
@@ -4068,9 +4068,9 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.376812,
-        "instagram": 4.178866,
-        "tiktok": 0.884319
+        "youtube": 0.407843,
+        "instagram": 4.014435,
+        "tiktok": 0.971751
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -4101,7 +4101,7 @@
           "shares": 0
         }
       },
-      "puan": 4.178866,
+      "puan": 4.014435,
       "etiket": "kazanan"
     },
     {
@@ -4564,8 +4564,8 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 1.076087,
-        "instagram": 0.949103,
+        "youtube": 1.164706,
+        "instagram": 0.911758,
         "tiktok": 0.0
       },
       "puanlanan_metrikler": {
@@ -4597,7 +4597,7 @@
           "shares": 0
         }
       },
-      "puan": 1.076087,
+      "puan": 1.164706,
       "etiket": "orta"
     },
     {
@@ -5029,8 +5029,8 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.923913,
-        "instagram": 2.713039,
+        "youtube": 1.0,
+        "instagram": 2.606286,
         "tiktok": 0.0
       },
       "puanlanan_metrikler": {
@@ -5062,7 +5062,7 @@
           "shares": 0
         }
       },
-      "puan": 2.713039,
+      "puan": 2.606286,
       "etiket": "kazanan"
     },
     {
@@ -5525,8 +5525,8 @@
       },
       "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.300725,
-        "instagram": 2.483762,
+        "youtube": 0.32549,
+        "instagram": 2.38603,
         "tiktok": 0.0
       },
       "puanlanan_metrikler": {
@@ -5558,7 +5558,7 @@
           "shares": 0
         }
       },
-      "puan": 2.483762,
+      "puan": 2.38603,
       "etiket": "kazanan"
     },
     {
@@ -5784,6 +5784,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-19T14:38:58.758712+00:00",
+          "yas_saat": 165.814,
+          "youtube": {
+            "views": 89,
+            "likes": 1,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 9,
+            "average_view_duration_seconds": 16,
+            "average_view_percentage": 146.68,
+            "engaged_views": 33,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 74,
+            "comments": 1,
+            "views": 15550,
+            "impressions": 15550,
+            "reach": 9845,
+            "saves": 4,
+            "shares": 0,
+            "likes_insight": 74,
+            "comments_insight": 1,
+            "total_interactions": 82,
+            "ig_reels_avg_watch_time": 9549,
+            "ig_reels_video_view_total_time": 90746057
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5900,40 +5936,150 @@
               "shares": 0
             }
           }
+        },
+        "s7g": {
+          "youtube": {
+            "ts": "2026-10-19T14:38:58.758712+00:00",
+            "yas_saat": 165.814,
+            "youtube": {
+              "views": 89,
+              "likes": 1,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 9,
+              "average_view_duration_seconds": 16,
+              "average_view_percentage": 146.68,
+              "engaged_views": 33,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 74,
+              "comments": 1,
+              "views": 15550,
+              "impressions": 15550,
+              "reach": 9845,
+              "saves": 4,
+              "shares": 0,
+              "likes_insight": 74,
+              "comments_insight": 1,
+              "total_interactions": 82,
+              "ig_reels_avg_watch_time": 9549,
+              "ig_reels_video_view_total_time": 90746057
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-19T14:38:58.758712+00:00",
+            "yas_saat": 165.814,
+            "youtube": {
+              "views": 89,
+              "likes": 1,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 9,
+              "average_view_duration_seconds": 16,
+              "average_view_percentage": 146.68,
+              "engaged_views": 33,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 74,
+              "comments": 1,
+              "views": 15550,
+              "impressions": 15550,
+              "reach": 9845,
+              "saves": 4,
+              "shares": 0,
+              "likes_insight": 74,
+              "comments_insight": 1,
+              "total_interactions": 82,
+              "ig_reels_avg_watch_time": 9549,
+              "ig_reels_video_view_total_time": 90746057
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-19T14:38:58.758712+00:00",
+            "yas_saat": 165.814,
+            "youtube": {
+              "views": 89,
+              "likes": 1,
+              "comments": 0,
+              "favorites": 0,
+              "watch_time_minutes": 9,
+              "average_view_duration_seconds": 16,
+              "average_view_percentage": 146.68,
+              "engaged_views": 33,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 74,
+              "comments": 1,
+              "views": 15550,
+              "impressions": 15550,
+              "reach": 9845,
+              "saves": 4,
+              "shares": 0,
+              "likes_insight": 74,
+              "comments_insight": 1,
+              "total_interactions": 82,
+              "ig_reels_avg_watch_time": 9549,
+              "ig_reels_video_view_total_time": 90746057
+            },
+            "tiktok": {
+              "views": 0,
+              "likes": 0,
+              "comments": 0,
+              "shares": 0
+            }
+          }
         }
       },
-      "yargi_anligi": "s48",
+      "yargi_anligi": "oturmus",
       "oranlar": {
-        "youtube": 0.92,
-        "instagram": 2.827599,
+        "youtube": 0.34902,
+        "instagram": 7.240978,
         "tiktok": 0.0
       },
       "puanlanan_metrikler": {
         "youtube": {
-          "views": 69,
+          "views": 89,
           "likes": 1,
           "comments": 0,
           "favorites": 0,
-          "watch_time_minutes": 0,
-          "average_view_duration_seconds": 0,
-          "average_view_percentage": 0.0,
-          "engaged_views": 0,
+          "watch_time_minutes": 9,
+          "average_view_duration_seconds": 16,
+          "average_view_percentage": 146.68,
+          "engaged_views": 33,
           "subscribers_gained": 0,
           "shares": 0
         },
         "instagram": {
-          "likes": 69,
+          "likes": 74,
           "comments": 1,
-          "views": 15081,
-          "impressions": 15081,
-          "reach": 9635,
-          "saves": 3,
+          "views": 15550,
+          "impressions": 15550,
+          "reach": 9845,
+          "saves": 4,
           "shares": 0,
-          "likes_insight": 69,
+          "likes_insight": 74,
           "comments_insight": 1,
-          "total_interactions": 75,
-          "ig_reels_avg_watch_time": 9489,
-          "ig_reels_video_view_total_time": 87926822
+          "total_interactions": 82,
+          "ig_reels_avg_watch_time": 9549,
+          "ig_reels_video_view_total_time": 90746057
         },
         "tiktok": {
           "views": 0,
@@ -5942,7 +6088,7 @@
           "shares": 0
         }
       },
-      "puan": 2.827599,
+      "puan": 7.240978,
       "etiket": "kazanan"
     },
     {
@@ -6022,6 +6168,42 @@
             "total_interactions": 274,
             "ig_reels_avg_watch_time": 11406,
             "ig_reels_video_view_total_time": 303275420
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-10-19T14:38:58.758712+00:00",
+          "yas_saat": 74.054,
+          "youtube": {
+            "views": 46,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 1,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 81.12,
+            "engaged_views": 10,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 215,
+            "comments": 2,
+            "views": 53830,
+            "impressions": 53830,
+            "reach": 29088,
+            "saves": 33,
+            "shares": 15,
+            "likes_insight": 215,
+            "comments_insight": 2,
+            "total_interactions": 300,
+            "ig_reels_avg_watch_time": 11445,
+            "ig_reels_video_view_total_time": 325350220
           },
           "tiktok": {
             "views": 0,
@@ -6189,7 +6371,68 @@
       },
       "puan": 9.419143,
       "etiket": "kazanan"
+    },
+    {
+      "part": 26,
+      "post_ids": {
+        "youtube": "08hrHHYr3bs",
+        "instagram": "17917255341465211",
+        "tiktok": "7697979397315300622"
+      },
+      "request_ids": {
+        "youtube": "c4982f1404a74301902e278daae75520",
+        "instagram": "501d8b3d7095433e9ca3b36fbe5f9f89",
+        "tiktok": "7ed0246061db4dca956e039370f0d5be"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-19T14:38:58.758712+00:00",
+          "yas_saat": 26.418,
+          "youtube": {
+            "views": 405,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 53,
+            "comments": 1,
+            "views": 11913,
+            "impressions": 11913,
+            "reach": 6913,
+            "saves": 7,
+            "shares": 1,
+            "likes_insight": 53,
+            "comments_insight": 1,
+            "total_interactions": 66,
+            "ig_reels_avg_watch_time": 9448,
+            "ig_reels_video_view_total_time": 63105056
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-18T12:13:53.372006+00:00",
+      "subtitle": "This GIANT HIPPOPOTAMUS Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 12
 }
