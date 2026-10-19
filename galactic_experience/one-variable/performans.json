@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-18T15:53:48.066896+00:00",
+  "guncellendi": "2026-10-19T18:44:18.452824+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 13.0,
@@ -3880,7 +3880,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-11T17:55:23.267416+00:00",
       "subtitle": "An Ice Shelf Fracture to the Horizon",
@@ -4254,6 +4254,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-19T18:44:18.452824+00:00",
+          "yas_saat": 96.599,
+          "youtube": {
+            "views": 7,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 104.22,
+            "engaged_views": 1,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 1,
+            "views": 780,
+            "impressions": 780,
+            "reach": 515,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 5,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 6870,
+            "ig_reels_video_view_total_time": 3455675
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -4416,5 +4452,5 @@
       "etiket": "orta"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }

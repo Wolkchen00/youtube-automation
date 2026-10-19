@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-18T15:53:55.477070+00:00",
+  "guncellendi": "2026-10-19T18:44:22.076451+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 581,
@@ -2999,7 +2999,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-10T17:29:16.384598+00:00",
       "subtitle": "Into the Fractures of Europa",
@@ -3254,5 +3254,5 @@
       "etiket": "orta"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 0
 }

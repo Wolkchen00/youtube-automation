@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 10,
   "total_parts": 108,
-  "next_part": 105,
+  "next_part": 106,
   "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce",
   "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off sonrasi konsept DARALDI. Artik 'tek degisken deneyi' degil, GERCEK bir dogal afet turu IMKANSIZ olcekte. Slug KORUNDU (published.json, last_run.json, filo.json bu slug'a bagli). Doktrin: one-variable/KONSEPT-A.md v2.0. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi TEK olan gunlerde bu serit uretilir, CIFT gunlerde flythrough. one-variable.yml cron'u KAPALI KALIR, yalniz elle tetiklenir; iki hattin ayni gun calismasi cift yayin demektir.",
   "auto_replenish": {
@@ -427,11 +427,29 @@
       }
     },
     "105": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-10-17T15:42:07.413504+00:00",
       "retry_count": 1,
       "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep105/ep105_mastered.mp4",
+      "subtitle": "One Wave Along the Entire Dubai Coast",
+      "stack_sha256": "95e5b1e47d69a6794783c2f41fbcbd0403a8fcf508ba432088dd2e5fbce1d3b4",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-19T19:05:46.849836+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "engagement": {
