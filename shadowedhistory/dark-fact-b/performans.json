@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-19T17:45:30.752596+00:00",
+  "guncellendi": "2026-10-20T15:50:43.826919+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 8,
@@ -1961,6 +1961,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-20T15:50:43.826919+00:00",
+          "yas_saat": 73.18,
+          "youtube": {
+            "views": 3,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 201,
+            "impressions": 201,
+            "reach": 149,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 2,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 6067,
+            "ig_reels_video_view_total_time": 910170
+          },
+          "tiktok": {
+            "views": 972,
+            "likes": 38,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2121,7 +2157,68 @@
       },
       "puan": 1.069149,
       "etiket": "orta"
+    },
+    {
+      "part": 6,
+      "post_ids": {
+        "youtube": "haQkN8WxBO8",
+        "instagram": "18123304525723764",
+        "tiktok": "7698441063337299214"
+      },
+      "request_ids": {
+        "youtube": "a754c23162084ecab892d29caf5baa9e",
+        "instagram": "94eeb8cbc03c49bfa6c11f659505f9d8",
+        "tiktok": "33e3143a3bc1469bb7b44197a18e6fb7"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-20T15:50:43.826919+00:00",
+          "yas_saat": 21.772,
+          "youtube": {
+            "views": 292,
+            "likes": 2,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 1306,
+            "impressions": 1306,
+            "reach": 1014,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 4,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 6243,
+            "ig_reels_video_view_total_time": 6405782
+          },
+          "tiktok": {
+            "views": 364,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-19T18:04:23.424081+00:00",
+      "subtitle": "Hashima Island Was Densely Populated",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
