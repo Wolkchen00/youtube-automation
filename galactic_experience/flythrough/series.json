@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 10,
   "total_parts": 11,
-  "next_part": 10,
+  "next_part": 11,
   "doctrine": "galactic_experience/flythrough/KONSEPT-C.md",
   "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1",
   "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off'ta part 1 (Saturn) tuttu, serit SONSUZ ANTOLOJIYE cevrildi. Metot degismedi, hedef degisiyor. Doktrin: flythrough/KONSEPT-C.md v2.0. EN BUYUK RISK tekrar tuzagi: ayni anatomiyi ikinci kez cekmek uc kez olculdu ve 67 kata kadar dusus getirdi, bu yuzden families DALINAN ORTAM TURUNU tanimlar ve ardisik iki bolum ayni aileden olamaz. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi CIFT olan gunlerde bu serit uretilir, TEK gunlerde one-variable. Bu seride shot_seconds 15: Seedance 4-15 sn uretir, replenish sure dogrulamasi 14 Eylul'de motor-farkinda yapildi.",
@@ -357,13 +357,13 @@
       }
     },
     "10": {
-      "status": "qc_retry",
+      "status": "needs_human",
       "first_held_at": "2026-10-12T21:25:04.496757+00:00",
       "retry_count": 2,
-      "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor",
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota",
       "first_infra_held_at": "2026-10-14T17:16:00.884109+00:00",
-      "infra_retry_count": 2
+      "infra_retry_count": 3
     }
   },
   "engagement": {
