@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-20T12:42:06.557176+00:00",
+  "guncellendi": "2026-10-21T12:55:04.254856+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 75,
@@ -5858,7 +5858,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-12T16:50:07.620679+00:00",
       "subtitle": "This GIANT GORILLA Is NOT Real",
@@ -6283,6 +6283,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-21T12:55:04.254856+00:00",
+          "yas_saat": 120.323,
+          "youtube": {
+            "views": 45,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 2,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 76.38,
+            "engaged_views": 13,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 227,
+            "comments": 2,
+            "views": 56841,
+            "impressions": 56841,
+            "reach": 30643,
+            "saves": 34,
+            "shares": 15,
+            "likes_insight": 227,
+            "comments_insight": 2,
+            "total_interactions": 319,
+            "ig_reels_avg_watch_time": 11513,
+            "ig_reels_video_view_total_time": 344514045
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -6521,6 +6557,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-21T12:55:04.254856+00:00",
+          "yas_saat": 72.686,
+          "youtube": {
+            "views": 644,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 24,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 119.21,
+            "engaged_views": 99,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 56,
+            "comments": 1,
+            "views": 12439,
+            "impressions": 12439,
+            "reach": 7204,
+            "saves": 6,
+            "shares": 1,
+            "likes_insight": 56,
+            "comments_insight": 1,
+            "total_interactions": 69,
+            "ig_reels_avg_watch_time": 9496,
+            "ig_reels_video_view_total_time": 66115470
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -6674,7 +6746,68 @@
       },
       "puan": 8.426667,
       "etiket": "kazanan"
+    },
+    {
+      "part": 27,
+      "post_ids": {
+        "youtube": "PZ_AmpoUVHo",
+        "instagram": "17934247713143983",
+        "tiktok": "7698732153617583374"
+      },
+      "request_ids": {
+        "youtube": "93e782da0df14bd7bf1ebfa9d38c8ba5",
+        "instagram": "03a07e45e0e0439287e2421126f4d453",
+        "tiktok": "bd796220b5f7407eae5d1f037160175d"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-21T12:55:04.254856+00:00",
+          "yas_saat": 24.019,
+          "youtube": {
+            "views": 150,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 14,
+            "comments": 1,
+            "views": 2971,
+            "impressions": 2971,
+            "reach": 2050,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 14,
+            "comments_insight": 1,
+            "total_interactions": 18,
+            "ig_reels_avg_watch_time": 7975,
+            "ig_reels_video_view_total_time": 15831317
+          },
+          "tiktok": {
+            "views": 0,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-20T12:53:54.153128+00:00",
+      "subtitle": "This GIANT MORAY EEL Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 12
 }
