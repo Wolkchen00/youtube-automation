@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-20T15:50:40.352796+00:00",
+  "guncellendi": "2026-10-21T16:10:34.482673+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -1206,7 +1206,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-12T20:32:32.269666+00:00",
       "subtitle": "In 1324 A King From Mali Crashed The Value Of Gold",
@@ -1437,7 +1437,68 @@
       "puanlanan_metrikler": {},
       "puan": null,
       "etiket": "olculmemis"
+    },
+    {
+      "part": 5,
+      "post_ids": {
+        "youtube": "V5J5IqiBCSc",
+        "instagram": "17992448523100474",
+        "tiktok": "7698785458926505230"
+      },
+      "request_ids": {
+        "youtube": "c54cd038b9af4d27ad055623cc2189ff",
+        "instagram": "82a9b61b999346acb386c65987c8a52a",
+        "tiktok": "7c21fcc280044aa5b976a12a0ee4529e"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-21T16:10:34.482673+00:00",
+          "yas_saat": 23.823,
+          "youtube": {
+            "views": 209,
+            "likes": 5,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 137,
+            "impressions": 137,
+            "reach": 120,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 3165,
+            "ig_reels_video_view_total_time": 383043
+          },
+          "tiktok": {
+            "views": 900,
+            "likes": 24,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-20T16:21:12.239357+00:00",
+      "subtitle": "In The 1960s Abu Simbel Was Cut And Moved 65 Metres Uphill",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 6
 }
