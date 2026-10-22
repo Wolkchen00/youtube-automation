@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-21T16:10:34.482673+00:00",
+  "guncellendi": "2026-10-22T16:08:20.308268+00:00",
   "medyanlar": {},
   "parts": [
     {
@@ -1486,13 +1486,160 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-22T16:08:20.308268+00:00",
+          "yas_saat": 47.786,
+          "youtube": {
+            "views": 289,
+            "likes": 7,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 138,
+            "impressions": 138,
+            "reach": 121,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 3144,
+            "ig_reels_video_view_total_time": 383626
+          },
+          "tiktok": {
+            "views": 916,
+            "likes": 26,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-20T16:21:12.239357+00:00",
       "subtitle": "In The 1960s Abu Simbel Was Cut And Moved 65 Metres Uphill",
-      "anlik": {},
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-10-22T16:08:20.308268+00:00",
+            "yas_saat": 47.786,
+            "youtube": {
+              "views": 289,
+              "likes": 7,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 1,
+              "comments": 1,
+              "views": 138,
+              "impressions": 138,
+              "reach": 121,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 1,
+              "comments_insight": 1,
+              "total_interactions": 2,
+              "ig_reels_avg_watch_time": 3144,
+              "ig_reels_video_view_total_time": 383626
+            },
+            "tiktok": {
+              "views": 916,
+              "likes": 26,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "instagram": {
+            "ts": "2026-10-22T16:08:20.308268+00:00",
+            "yas_saat": 47.786,
+            "youtube": {
+              "views": 289,
+              "likes": 7,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 1,
+              "comments": 1,
+              "views": 138,
+              "impressions": 138,
+              "reach": 121,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 1,
+              "comments_insight": 1,
+              "total_interactions": 2,
+              "ig_reels_avg_watch_time": 3144,
+              "ig_reels_video_view_total_time": 383626
+            },
+            "tiktok": {
+              "views": 916,
+              "likes": 26,
+              "comments": 0,
+              "shares": 0
+            }
+          },
+          "tiktok": {
+            "ts": "2026-10-22T16:08:20.308268+00:00",
+            "yas_saat": 47.786,
+            "youtube": {
+              "views": 289,
+              "likes": 7,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 1,
+              "comments": 1,
+              "views": 138,
+              "impressions": 138,
+              "reach": 121,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 1,
+              "comments_insight": 1,
+              "total_interactions": 2,
+              "ig_reels_avg_watch_time": 3144,
+              "ig_reels_video_view_total_time": 383626
+            },
+            "tiktok": {
+              "views": 916,
+              "likes": 26,
+              "comments": 0,
+              "shares": 0
+            }
+          }
+        }
+      },
       "yargi_anligi": null,
       "oranlar": {},
       "puanlanan_metrikler": {},
@@ -1500,5 +1647,5 @@
       "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }
