@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 30,
-  "next_part": 29,
+  "next_part": 30,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -1175,11 +1175,50 @@
       }
     },
     "29": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-10-22T13:33:12.329623+00:00",
       "retry_count": 1,
       "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep29/ep29_mastered.mp4",
+      "subtitle": "This GIANT CENTIPEDE Is NOT Real",
+      "stack_sha256": "402794227728e8997b57e567d6c713f30e41db87c73caffb2cb7249499b397f5",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part29",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "uStAlCUb1Wc",
+          "video_sha256": "407f06b51ec2a9bfeb237e9d95135c2c492bae1458f0203f334cde15b083c01a",
+          "ts": "2026-10-23T12:56:44.165709+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "17936727930391131",
+          "video_sha256": "407f06b51ec2a9bfeb237e9d95135c2c492bae1458f0203f334cde15b083c01a",
+          "ts": "2026-10-23T12:57:55.911588+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7699846657126436109",
+          "video_sha256": "407f06b51ec2a9bfeb237e9d95135c2c492bae1458f0203f334cde15b083c01a",
+          "ts": "2026-10-23T12:59:06.060903+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-23T12:59:06.063098+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "automation_note": "2026-09-13: TEK PLAN 10 sn formati CANLI. Ihsan ep08'i (dev anakonda) izleyip onayladi ve 3 platforma yayinlandi (YouTube mYUqbRjJoVs, IG DdPcNTejwn3, TikTok 7685122561423805709); ardindan status paused -> ACTIVE. Gunluk cron .github/workflows/wild-encounter.yml 18:30 UTC bundan sonra tek plan 10 sn uretir. Format dayanagi: REFERANS-AYUSH-ANALIZ.md. ESKI KAYIT: format 3x8'den tek plana cevrilirken test icin gecici PAUSED yapilmisti.",
