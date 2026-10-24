@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-23T17:10:35.845811+00:00",
+  "guncellendi": "2026-10-24T15:57:55.898078+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 7,
@@ -4436,7 +4436,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-15T18:08:21.084374+00:00",
       "subtitle": "A Sinkhole Wider Than the Yucatan Peninsula",
@@ -4861,6 +4861,42 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-10-24T15:57:55.898078+00:00",
+          "yas_saat": 116.869,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 225,
+            "impressions": 225,
+            "reach": 128,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 4,
+            "ig_reels_avg_watch_time": 7720,
+            "ig_reels_video_view_total_time": 1019080
+          },
+          "tiktok": {
+            "views": 23769,
+            "likes": 59,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -5021,7 +5057,68 @@
       },
       "puan": 21.379421,
       "etiket": "kazanan"
+    },
+    {
+      "part": 106,
+      "post_ids": {
+        "youtube": "kPX3EihsO_I",
+        "instagram": "18031747094909100",
+        "tiktok": "7699914461682961677"
+      },
+      "request_ids": {
+        "youtube": "ee925740e0054c35bcd25c9968720c15",
+        "instagram": "4d70eaed67cc40db800797e44f57df47",
+        "tiktok": "e27d4fda81564548b6dc2e2dda0c2abd"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-24T15:57:55.898078+00:00",
+          "yas_saat": 22.597,
+          "youtube": {
+            "views": 11,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 140,
+            "impressions": 140,
+            "reach": 116,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 2,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 3399,
+            "ig_reels_video_view_total_time": 401142
+          },
+          "tiktok": {
+            "views": 636,
+            "likes": 8,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-23T17:22:08.172353+00:00",
+      "subtitle": "A Dust Storm Covering the North China Plain",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 9
 }

@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "Descending into the Clouds of Venus"
+  },
+  "synopsis": "A descent through the dense sulphuric acid cloud decks of Venus toward its glowing atmosphere.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nFirst-person perspective drifting forward into the upper atmosphere of Venus. From seconds 0 to 4, calm wide view reveals yellowish sulfuric acid clouds filling the lower frame, illuminated hard by side lighting from the distant sun with dark shadows below. From seconds 4 to 6, camera accelerates downward into dense fog as golden mist wisps enter the frame edge. From seconds 6 to 13, rapid transit through turbulent acid vapour corridors with thick droplets streaking past the lens, dense yellow haze rushing overhead and yellow lightning flashes illuminating cloud walls on both sides. From seconds 13 to 15, plunge into an impenetrable glowing cloud wall of orange and yellow atmosphere, filling the frame completely at peak velocity. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound is a low atmospheric roar that builds in volume, peaking with loud thunderous rumbles in the final two seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Which planet in our solar system has the most extreme atmosphere? ☁️",
+  "family": "firtina dalisi",
+  "seed_id": 4,
+  "caption": "This flight descends into the dense sulphuric acid clouds of Venus.\n\nThe deck consists of droplets of concentrated acid suspended in carbon dioxide at densities ninety times that of Earth's atmospheric pressure.\n\nNASA's Pioneer Venus Orbiter arrived in 1978 and mapped thick cloud layers spanning depths of over twenty kilometres.\n\nExtreme pressure and ambient temperatures above four hundred degrees Celsius would crush and melt electronic components within minutes.\n\nThis is a simulation, not real footage. Would you expect probes to survive longer in Venusian clouds or on its surface?",
+  "hashtags": "#Venus #VenusAtmosphere #AcidClouds #Space #Astronomy #SpaceExploration #Simulation #PlanetaryScience",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}

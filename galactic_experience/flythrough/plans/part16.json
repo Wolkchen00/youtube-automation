@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "Through the Dust of Betelgeuse"
+  },
+  "synopsis": "A flight through the massive ejected dust clouds surrounding the red supergiant Betelgeuse.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nFirst-person perspective flying toward the massive pulsating surface of red supergiant Betelgeuse. From seconds 0 to 4, calm wide view reveals towering dust shells and orange gas plumes surrounding the gigantic star under stark stellar glare. From seconds 4 to 6, camera accelerates into the ejected dust field as glowing silicate grains drift into frame. From seconds 6 to 13, high-speed pass through dense dust plumes with reddish grain trails rushing past on both sides, glowing ash streaking across the lens, and heated dust clouds colliding in bright bursts. From seconds 13 to 15, camera plunges directly into an expanding glowing dust wall, filling the frame with intense orange brilliance at maximum speed. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound starts as a deep low thermal rumble, intensifying continuously to a overpowering roar during the final two seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How close would you dare to get to a giant red star? 🌟",
+  "family": "yildiz yakini",
+  "seed_id": 19,
+  "caption": "This flight travels through the expanding dust shell shedding from the supergiant star Betelgeuse.\n\nMassive clouds of carbonaceous dust and silicate grains drift outward across distances exceeding several astronomical units.\n\nThe European Southern Observatory's Very Large Telescope observed Betelgeuse in 2019 and imaged massive surface dust ejection events.\n\nExtreme radiation pressure and stellar wind speeds reaching tens of kilometres per second scour metallic hulls through continuous impact erosion.\n\nThis is a simulation, not real footage. Do you predict Betelgeuse will collapse into a supernova during our lifetime?",
+  "hashtags": "#Betelgeuse #RedSupergiant #StellarDust #Space #Astronomy #Astrophysics #Simulation #Star",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}

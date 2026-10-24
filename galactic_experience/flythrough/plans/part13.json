@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Through the Pillars of Creation"
+  },
+  "synopsis": "A flight through the towering hydrogen pillars of creation in the Eagle Nebula.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nFirst-person perspective drifting toward the vast dark dust pillars of the Eagle Nebula. From seconds 0 to 4, calm wide shot of colossal cold grey gas towers towering against background starfields, lit from the side by bright ultraviolet light from newborn stars. From seconds 4 to 6, camera accelerates into the towering dust pillars as soft gas veils slide into frame. From seconds 6 to 13, high-speed flight between giant pillar walls where fine glowing dust streams rush past both sides, illuminated gas particles blur across the lens, and stellar winds carve chaotic shapes through dense brown cloud shafts. From seconds 13 to 15, dive directly into the core dust pillar as radiant starlight bursts through dense glowing hydrogen walls, filling the entire frame at maximum speed. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound starts as a quiet deep cosmic drone, increasing smoothly to an intense roaring vibration in the final two seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you travel to the Eagle Nebula if speed was no object? ✨",
+  "family": "bulutsu suzulusu",
+  "seed_id": 6,
+  "caption": "This flight passes through the iconic Pillars of Creation within the Eagle Nebula.\n\nThese giant structures consist of interstellar hydrogen gas and dust spanning four light-years across.\n\nThe Hubble Space Telescope observed the pillars in 1995 and captured vast towers being eroded by radiation from nearby stars.\n\nIntense stellar ultraviolet light strips away molecular hydrogen, creating destructive shockwaves that destroy dust grains at high speeds.\n\nThis is a simulation, not real footage. Do you think the pillars will completely evaporate within the next million years?",
+  "hashtags": "#PillarsOfCreation #EagleNebula #DeepSpace #Space #Astronomy #Astrophysics #Simulation #Nebula",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}
