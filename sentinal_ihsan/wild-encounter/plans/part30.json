@@ -29,5 +29,9 @@
   },
   "family": "reptile",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/C3cjLJRC/ep30-giant-marine-iguana.png"
+  ],
+  "ref_prompt_sha256": "196df25115b61a96b550f0d006fbc69eec23b457cda6a742e4b57fd53b07f3ec"
 }

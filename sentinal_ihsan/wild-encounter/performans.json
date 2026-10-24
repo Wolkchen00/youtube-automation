@@ -1,6 +1,6 @@
 {
   "series": "wild-encounter",
-  "guncellendi": "2026-10-23T12:36:11.492359+00:00",
+  "guncellendi": "2026-10-24T11:59:26.988506+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 75,
@@ -6391,6 +6391,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-24T11:59:26.988506+00:00",
+          "yas_saat": 191.396,
+          "youtube": {
+            "views": 45,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 2,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 77.55,
+            "engaged_views": 14,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 227,
+            "comments": 2,
+            "views": 56929,
+            "impressions": 56929,
+            "reach": 30719,
+            "saves": 34,
+            "shares": 15,
+            "likes_insight": 227,
+            "comments_insight": 2,
+            "total_interactions": 319,
+            "ig_reels_avg_watch_time": 11502,
+            "ig_reels_video_view_total_time": 344826510
+          },
+          "tiktok": {
+            "views": 1,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -6854,6 +6890,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-24T11:59:26.988506+00:00",
+          "yas_saat": 143.759,
+          "youtube": {
+            "views": 644,
+            "likes": 3,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 53,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 122.51,
+            "engaged_views": 214,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 57,
+            "comments": 1,
+            "views": 13090,
+            "impressions": 13090,
+            "reach": 7491,
+            "saves": 7,
+            "shares": 1,
+            "likes_insight": 57,
+            "comments_insight": 1,
+            "total_interactions": 71,
+            "ig_reels_avg_watch_time": 9570,
+            "ig_reels_video_view_total_time": 69999061
+          },
+          "tiktok": {
+            "views": 1,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -7128,6 +7200,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-24T11:59:26.988506+00:00",
+          "yas_saat": 95.092,
+          "youtube": {
+            "views": 193,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 19,
+            "average_view_duration_seconds": 13,
+            "average_view_percentage": 125.94,
+            "engaged_views": 79,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 14,
+            "comments": 1,
+            "views": 3006,
+            "impressions": 3006,
+            "reach": 2081,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 14,
+            "comments_insight": 1,
+            "total_interactions": 18,
+            "ig_reels_avg_watch_time": 7936,
+            "ig_reels_video_view_total_time": 15968462
+          },
+          "tiktok": {
+            "views": 1,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -7366,6 +7474,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-24T11:59:26.988506+00:00",
+          "yas_saat": 70.831,
+          "youtube": {
+            "views": 35,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 9,
+            "average_view_percentage": 81.89,
+            "engaged_views": 5,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 37,
+            "comments": 1,
+            "views": 6269,
+            "impressions": 6269,
+            "reach": 3613,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 37,
+            "comments_insight": 1,
+            "total_interactions": 41,
+            "ig_reels_avg_watch_time": 10089,
+            "ig_reels_video_view_total_time": 34565106
+          },
+          "tiktok": {
+            "views": 1,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -7519,7 +7663,68 @@
       },
       "puan": 1.122078,
       "etiket": "orta"
+    },
+    {
+      "part": 29,
+      "post_ids": {
+        "youtube": "uStAlCUb1Wc",
+        "instagram": "17936727930391131",
+        "tiktok": "7699846657126436109"
+      },
+      "request_ids": {
+        "youtube": "7ab5a3173130401188f6bcefee329c26",
+        "instagram": "23bcd1c30313419fa568582d9b0b5553",
+        "tiktok": "e17eae3c6b4b43f9baac0cf3507fee30"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-24T11:59:26.988506+00:00",
+          "yas_saat": 23.006,
+          "youtube": {
+            "views": 2,
+            "likes": 0,
+            "comments": 0,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 18,
+            "comments": 1,
+            "views": 4762,
+            "impressions": 4762,
+            "reach": 3045,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 18,
+            "comments_insight": 1,
+            "total_interactions": 23,
+            "ig_reels_avg_watch_time": 8820,
+            "ig_reels_video_view_total_time": 25834996
+          },
+          "tiktok": {
+            "views": 1,
+            "likes": 0,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-23T12:59:06.062548+00:00",
+      "subtitle": "This GIANT CENTIPEDE Is NOT Real",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 12
+  "api_cagrilari": 18
 }

@@ -1,0 +1,33 @@
+{
+  "episode": {
+    "number": 31,
+    "title": "This GIANT WALRUS Is NOT Real"
+  },
+  "synopsis": "On a minimal studio water set, a colossal walrus takes a performer into its mouth, then the crew force its practical jaws open and he steps out unharmed.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nShot 1: ONE CONTINUOUS UNBROKEN TAKE. The camera is low and close, so the giant creature fills the whole frame from the very first second, its head and jaws reaching past the edges of the picture. One dark production element stays at the bottom edge of the frame, an out-of-focus crew head or the corner of a camera rig or a flight case, and the blue screen wall with its pale blue cross tracking markers sits far behind the creature and reads out of focus, so the shot still reads as a film set. A shallow depth of field keeps the creature's head sharp while everything behind it falls away. A hard directional lamp rakes the creature from one side and lays real shadows, while the space behind the creature stays darker than the creature itself. One giant creature faces exactly one man. The creature's jaws open wide and close over him until he is completely out of sight inside its mouth. Crew members rush in, put their hands on the creature and push its jaws open, and in the final seconds the same one man climbs out onto the set floor unharmed, showing that the creature is a built practical prop rather than a living animal. The camera stays close and handheld throughout, drifting with the action, with natural motion blur.\n\nThe giant walrus with wrinkled pinkish-brown thick skin, dark glossy eyes, massive white ivory tusks, wet whiskers, eight metres tall looms over Ihsan (ihsan_field) on the ocean_tank_set floor. The massive tusks and heavy jaws clamp down softly around Ihsan until he disappears from view. Crew members quickly enter the shot, grasping the animatronic jaw joints and pulling the practical mouth open wide. Ihsan climbs out safely onto the set. Ambient sound only: footsteps on wet concrete, studio air handling and crew movement.",
+      "seed": null,
+      "environment": "ocean_tank_set",
+      "characters": [
+        "ihsan_field"
+      ],
+      "violation_observation": "The giant walrus's mouth closes over the man until his whole body is hidden inside it, then crew members put their hands on the giant walrus and force its mouth open, and the same man climbs out onto the set floor."
+    }
+  ],
+  "first_comment": "How do you think they made those massive ivory tusks look so real? 🦭",
+  "format_version": "plato-3x8",
+  "object_card": {
+    "name": "giant walrus",
+    "descriptor": "wrinkled pinkish-brown thick skin, dark glossy eyes, massive white ivory tusks, wet whiskers, eight metres tall",
+    "environment": "ocean_tank_set",
+    "framing": "A handheld camera held low and close pushes in slowly as the gigantic walrus fills the frame with shallow depth of field.",
+    "anomaly_descriptor": "Crew members rush forward in the final seconds and pull open the practical rubber jaws by hand."
+  },
+  "family": "mammal-giant",
+  "hook_shot": 1,
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+}
