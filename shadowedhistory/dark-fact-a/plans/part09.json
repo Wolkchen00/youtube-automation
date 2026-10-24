@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "Machu Picchu Stone Joints Leave No Room For A Knife"
+  },
+  "synopsis": "Inca masons fitted massive granite stones at Machu Picchu so precisely that not even a knife blade fits between them.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, a massive mortarless granite wall of perfectly interlocking stone blocks dominates the left frame, lit by the warm, low beam of a rising morning sun. Mountain fog drifts continuously across the stone terraces and jagged Andean peaks in the background over the full ten seconds. The camera slowly pushes forward along the textured surface of the granite wall, keeping the seamless joints in razor focus. Muted mountain earth tones, deep shadow contrast, soft 16mm film grain.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could modern builders recreate this mortarless stone wall today? 🏔️",
+  "family": "gizli muhendislik",
+  "seed_id": 7,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Machu Picchu stones fit seamlessly.",
+    "subtitle": "Built around 1450 without mortar or gaps."
+  },
+  "caption": "The granite stones of Machu Picchu fit together so tightly that a knife blade cannot slide between them.\n\nConstructed around 1450 high in the Andes Mountains, the mortarless dry-stone masonry has survived centuries of earthquakes. The precision cutting allowed massive boulders to lock securely in place.\n\nVisuals created with AI.\n\nHow do you think ancient builders shaped stone so precisely?",
+  "hashtags": "#history #historyfacts #machupicchu #peru #incas",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

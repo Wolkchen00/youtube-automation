@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "In 1908 A Siberian Blast Flattened 80 Million Trees"
+  },
+  "synopsis": "A mysterious explosion in 1908 flattened 80 million trees across thousands of square kilometres in Siberia.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, thousands of charred, limbless tree trunks lie flattened in a giant radial pattern across a vast Siberian taiga under a low, hazy grey dusk sky. A faint lingering smoke curls up from the blackened earth continuously across the entire ten seconds, drifted by a soft freezing wind. The camera glides slowly forward over the fallen timber landscape in one unbroken direction. Muted monochrome-grey palette, deep moody shadows, heavy archival 16mm grain.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Do you think a meteor caused the massive 1908 Siberian blast? ☄️",
+  "family": "tuhaf felaketler",
+  "seed_id": 15,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A 1908 blast flattened Siberian forest.",
+    "subtitle": "About 80 million trees fell in seconds."
+  },
+  "caption": "In 1908 a mysterious explosion in Siberia flattened about 80 million trees across the wilderness.\n\nThe massive blast occurred near the Tunguska River in June 1908, scorching the earth and knocking down forest across thousands of square kilometres without leaving an impact crater.\n\nVisuals created with AI.\n\nWhat do you think caused this sudden Siberian explosion?",
+  "hashtags": "#history #historyfacts #siberia #tunguska #mystery",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

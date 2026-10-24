@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "The Leaning Tower Of Pisa Leaned Before Completion"
+  },
+  "synopsis": "The Leaning Tower of Pisa began tilting into soft soil early during its medieval construction before it was finished.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, the white marble bell tower of Pisa stands visibly tilting against a twilight sky, surrounded by wooden construction scaffolding on its upper levels. Low evening light illuminates the pale stone facade, contrasting against deep shadows on the shadowed side. Throughout the full ten seconds, banner pennants flutter in the breeze and faint smoke rises from oil lamps at the base where silhouetted workers move slowly. The camera executes a slow lateral glide across the foreground plaza. Grainy 16mm archival aesthetic, desaturated palette, dark mood.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Have you ever visited the Leaning Tower of Pisa in person? 🏛️",
+  "family": "zamanin izi",
+  "seed_id": 27,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Pisa Tower leaned before completion.",
+    "subtitle": "Built in 1173 on soft ground it tilted early."
+  },
+  "caption": "The Leaning Tower of Pisa started to lean before construction was even finished.\n\nWork on the bell tower began in 1173 on unstable soil that soon gave way under the heavy marble weight. Builders attempted to compensate as upper storeys were added over the decades.\n\nVisuals created with AI.\n\nWould you dare to climb this famous leaning bell tower?",
+  "hashtags": "#history #historyfacts #pisa #italy #architecture",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

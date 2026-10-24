@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "In 1518 Hundreds Danced In Strasbourg Nonstop"
+  },
+  "synopsis": "In 1518 a sudden dancing mania seized hundreds of citizens in Strasbourg, causing them to dance uncontrollably in the streets for days.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, a cobblestone medieval square in Strasbourg is filled with dozens of exhausted, wild dancers lit by flickering street torches at dusk. The towering Gothic cathedral spire looms in deep atmospheric shadow behind them. Throughout the entire ten seconds, figures sway, spin, and collapse under the dim orange flame, while heavy smoke drifts across the scene. The camera performs a slow, subtle push-in toward the central crowd. Muted desaturated tones, heavy film grain, deep shadow contrast.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What would you do if everyone in your city started dancing? 💃",
+  "family": "tuhaf felaketler",
+  "seed_id": 13,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Hundreds danced without stopping.",
+    "subtitle": "In 1518 a strange mania struck Strasbourg."
+  },
+  "caption": "In 1518 hundreds of people in Strasbourg started dancing in the streets and could not stop for days.\n\nThe mysterious dancing plague broke out in July 1518 within the Holy Roman Empire. Dancers collapsed from exhaustion as local authorities struggled to comprehend the affliction.\n\nVisuals created with AI.\n\nWhat do you think triggered this strange dancing outbreak?",
+  "hashtags": "#history #historyfacts #strasbourg #medieval #dancingplague",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
