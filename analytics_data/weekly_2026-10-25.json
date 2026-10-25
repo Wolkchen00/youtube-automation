@@ -1,0 +1,249 @@
+{
+  "generated_at": "2026-10-25T13:04:25.564074+00:00",
+  "snapshot_date": "2026-10-25",
+  "period": "2026-10-19 to 2026-10-25",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 133,
+        "total_views": 120300,
+        "total_videos": 297
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "4GC6IKp7alM",
+          "title": "The Shortest War In History In 1896 Lasted About 40 Minutes",
+          "published": "2026-10-24T15:03:56Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "V5J5IqiBCSc",
+          "title": "In The 1960s Abu Simbel Was Cut And Moved 65 Metres Uphill",
+          "published": "2026-10-20T16:19:09Z",
+          "views": 318,
+          "views_48h": 252,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "haQkN8WxBO8",
+          "title": "Hashima Island Was Densely Populated",
+          "published": "2026-10-19T17:59:45Z",
+          "views": 291,
+          "views_48h": 291,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 291
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 159,
+        "total_views": 184620,
+        "total_videos": 198
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "914qz34MsuM",
+          "title": "This GIANT MARINE IGUANA Is NOT Real",
+          "published": "2026-10-24T12:15:51Z",
+          "views": 4,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "uStAlCUb1Wc",
+          "title": "This GIANT CENTIPEDE Is NOT Real",
+          "published": "2026-10-23T12:57:46Z",
+          "views": 4,
+          "views_48h": 4,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "SawBpGQEhoU",
+          "title": "This GIANT PELICAN Is NOT Real",
+          "published": "2026-10-21T13:07:11Z",
+          "views": 43,
+          "views_48h": 25,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "PZ_AmpoUVHo",
+          "title": "This GIANT MORAY EEL Is NOT Real",
+          "published": "2026-10-20T12:52:14Z",
+          "views": 194,
+          "views_48h": 191,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 143.5
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 153,
+        "total_views": 78243,
+        "total_videos": 232
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Neuzt9BFbPo",
+          "title": "Through the Coma of Comet 67P",
+          "published": "2026-10-24T16:10:11Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "kPX3EihsO_I",
+          "title": "A Dust Storm Covering the North China Plain",
+          "published": "2026-10-23T17:20:00Z",
+          "views": 11,
+          "views_48h": 11,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "hRQ1KKcDPUU",
+          "title": "One Wave Along the Entire Dubai Coast",
+          "published": "2026-10-19T19:02:54Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 29
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 111,
+        "total_views": 161845,
+        "total_videos": 299
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "C3bl7TcXAi0",
+          "title": "Vesuvius drop into lava bombs #shorts",
+          "published": "2026-10-24T14:35:21Z",
+          "views": 99,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "Ghx2ekgS7Xo",
+          "title": "Mount Rushmore under a green sky #shorts",
+          "published": "2026-10-23T16:21:48Z",
+          "views": 146,
+          "views_48h": 146,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "nH30hWXgBbY",
+          "title": "Opera House, then the sea rises #shorts",
+          "published": "2026-10-22T15:59:22Z",
+          "views": 241,
+          "views_48h": 231,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "rWKyDCNOJ1A",
+          "title": "Hollywood hills, then the fire #shorts",
+          "published": "2026-10-21T16:05:22Z",
+          "views": 2,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "_NAkOJVi6Gk",
+          "title": "Colosseum sunset, then the hail #shorts",
+          "published": "2026-10-20T15:46:36Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "MryNCis_Yg4",
+          "title": "Liberty's torch, then the surge #shorts",
+          "published": "2026-10-19T17:36:18Z",
+          "views": 2,
+          "views_48h": 2,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "3nYwz8WLZRc",
+          "title": "Pyramids slide into a haboob #shorts",
+          "published": "2026-10-18T14:42:43Z",
+          "views": 3,
+          "views_48h": 3,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 9
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 230,
+        "total_views": 115014,
+        "total_videos": 45
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "UnI5QsVa3tE",
+          "title": "59. \"Bu yüzük bir daha çıkmayacak!\" Kayınvalide gelinine sahip çıktı. 👏",
+          "published": "2026-10-24T16:07:30Z",
+          "views": 1234,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "bHN1rzFTI_g",
+          "title": "58. \"Kızımı benim yerime öp.\" Kayınpederinin sırrını duydu. 😱",
+          "published": "2026-10-23T16:07:48Z",
+          "views": 1229,
+          "views_48h": 1229,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "SXgU8lcFu9E",
+          "title": "57. \"Evimden çık!\" Kayınvalide gelinine el kaldıran babayı kovdu. 👏",
+          "published": "2026-10-22T16:03:27Z",
+          "views": 2231,
+          "views_48h": 1766,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "HlIm6_qty_c",
+          "title": "55-56. \"Tek suçum kız olarak doğmak mıydı?\" Babasına yıllardır sustuklarını haykırdı. 💔",
+          "published": "2026-10-21T16:06:48Z",
+          "views": 3433,
+          "views_48h": 2506,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Wa-gQym89lc",
+          "title": "53-54. \"Kimse yokken bile iyilik yapıyor.\" Kayınvalide gelinini gizlice izledi. 🥹",
+          "published": "2026-10-20T16:07:36Z",
+          "views": 6165,
+          "views_48h": 3423,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "-Js5jmUOXMc",
+          "title": "51-52. \"Sen bana yalan söyleyemezsin.\" Babası cezaevinden çıktı. 💔",
+          "published": "2026-10-19T16:06:25Z",
+          "views": 578,
+          "views_48h": 395,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "wXYJe0EAzhA",
+          "title": "49-50. \"Annesini kaybetmiş bir kıza bunu mu reva görüyorsunuz?\" 💔",
+          "published": "2026-10-18T16:02:00Z",
+          "views": 1511,
+          "views_48h": 1363,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 2212.0
+    }
+  }
+}
