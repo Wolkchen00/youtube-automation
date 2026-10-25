@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 35,
-  "next_part": 31,
+  "next_part": 32,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -1253,6 +1253,48 @@
         "tiktok"
       ],
       "published_at": "2026-10-24T12:17:53.696750+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "31": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep31/ep31_mastered.mp4",
+      "subtitle": "This GIANT WALRUS Is NOT Real",
+      "stack_sha256": "6abbffb3dd649c206ad464a41d412c5d74e5d055bba4f80e00903d441d30674b",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part31",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "HRBhGznl6G0",
+          "video_sha256": "815f0d35500e7a2244f0f1f92043e382923e512eefaa867efe08c5d08eaf7987",
+          "ts": "2026-10-25T12:49:14.794300+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18114236615167843",
+          "video_sha256": "815f0d35500e7a2244f0f1f92043e382923e512eefaa867efe08c5d08eaf7987",
+          "ts": "2026-10-25T12:50:24.984446+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7700586860745133325",
+          "video_sha256": "815f0d35500e7a2244f0f1f92043e382923e512eefaa867efe08c5d08eaf7987",
+          "ts": "2026-10-25T12:51:36.331755+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-25T12:51:36.335556+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
