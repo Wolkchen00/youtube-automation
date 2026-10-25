@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-24T14:52:00.012082+00:00",
+  "guncellendi": "2026-10-25T15:10:47.887793+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 149.5,
@@ -2164,7 +2164,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-17T14:39:55.487221+00:00",
       "subtitle": "Krakatoa Eruption Heard 4800 Kilometres Away",
@@ -2625,6 +2625,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-25T15:10:47.887793+00:00",
+          "yas_saat": 141.107,
+          "youtube": {
+            "views": 291,
+            "likes": 2,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 12,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 79.95,
+            "engaged_views": 49,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 1352,
+            "impressions": 1352,
+            "reach": 1051,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 4,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 6254,
+            "ig_reels_video_view_total_time": 6642272
+          },
+          "tiktok": {
+            "views": 461,
+            "likes": 8,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2787,5 +2823,5 @@
       "etiket": "kazanan"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }
