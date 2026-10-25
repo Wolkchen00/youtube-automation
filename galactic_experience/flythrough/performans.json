@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-24T15:58:06.505782+00:00",
+  "guncellendi": "2026-10-25T16:21:46.925064+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 581,
@@ -3252,7 +3252,68 @@
       },
       "puan": 1.0,
       "etiket": "orta"
+    },
+    {
+      "part": 11,
+      "post_ids": {
+        "youtube": "Neuzt9BFbPo",
+        "instagram": "18012623699986730",
+        "tiktok": "7700267562126347534"
+      },
+      "request_ids": {
+        "youtube": "bae6c860fdd64f15bbc9c11136a2e2bc",
+        "instagram": "0c96caa05c4b42119a45951491950221",
+        "tiktok": "48341ddfbe674c949e53e62c2474d131"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-25T16:21:46.925064+00:00",
+          "yas_saat": 24.159,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 157,
+            "impressions": 157,
+            "reach": 110,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 6,
+            "comments_insight": 1,
+            "total_interactions": 7,
+            "ig_reels_avg_watch_time": 7848,
+            "ig_reels_video_view_total_time": 863317
+          },
+          "tiktok": {
+            "views": 425,
+            "likes": 8,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-24T16:12:15.881558+00:00",
+      "subtitle": "Through the Coma of Comet 67P",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 0
+  "api_cagrilari": 6
 }
