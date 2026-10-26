@@ -12,7 +12,7 @@
   ],
   "hashtags": "#shorts #vfx #behindthescenes #ai",
   "total_parts": 35,
-  "next_part": 32,
+  "next_part": 33,
   "status": "active",
   "priority": 999,
   "standalone": true,
@@ -1295,6 +1295,48 @@
         "tiktok"
       ],
       "published_at": "2026-10-25T12:51:36.335556+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "32": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/wild-encounter/episodes/ep32/ep32_mastered.mp4",
+      "subtitle": "This GIANT ANGLERFISH Is NOT Real",
+      "stack_sha256": "6abbffb3dd649c206ad464a41d412c5d74e5d055bba4f80e00903d441d30674b",
+      "stack_version": "sf2",
+      "release_tag": "pending-wild-encounter-part32",
+      "publish_state": {
+        "youtube": {
+          "status": "ok",
+          "identifier": "1OnuPx7yYsU",
+          "video_sha256": "b38628d30645616d4313a5416b45f2d2d664327bdf3fe19eca31a082ce2e4a46",
+          "ts": "2026-10-26T14:46:46.969936+00:00"
+        },
+        "instagram": {
+          "status": "ok",
+          "identifier": "18111157754186979",
+          "video_sha256": "b38628d30645616d4313a5416b45f2d2d664327bdf3fe19eca31a082ce2e4a46",
+          "ts": "2026-10-26T14:47:57.412186+00:00"
+        },
+        "tiktok": {
+          "status": "ok",
+          "identifier": "7700988392418381070",
+          "video_sha256": "b38628d30645616d4313a5416b45f2d2d664327bdf3fe19eca31a082ce2e4a46",
+          "ts": "2026-10-26T14:49:08.924822+00:00"
+        }
+      },
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-26T14:49:08.927904+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
