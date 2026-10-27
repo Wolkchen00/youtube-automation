@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 10,
+    "title": "The Medieval Town Of Dunwich Fell Into The Sea"
+  },
+  "synopsis": "An entire medieval English port town, Dunwich, slowly fell into the sea due to severe coastal erosion.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. A lone ruined medieval stone church standing precarious on the edge of a crumbling sandy cliff at dawn above a churning grey North Sea. High waves crash against the base, tearing chunks of earth away. Camera glides slowly right. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A closer view of carved gothic stone masonry and fractured church archways tumbling off the muddy cliff face into white ocean surf below. Sea spray and mist fill the low morning air. Camera glides downward slowly. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide vista along miles of rugged coastline where submerged stone foundations poke through low tide surf, showing where streets once stood. Two tiny silhouetted travelers walk along the cliff edge far above. Camera tracks back slowly. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A lingering view of cold grey waves sweeping over smooth stones and submerged medieval arch contours under a overcast twilight sky. Slow push-in on the churning tide. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What would you think if an entire city near you vanished into the ocean? 🌊",
+  "family": "zamanin izi",
+  "seed_id": 18,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A medieval town fell into the sea.",
+    "subtitle": "Coastal erosion slowly submerged Dunwich."
+  },
+  "caption": "An entire medieval English port town, Dunwich, slowly fell into the sea.\n\nDunwich was once a thriving, prosperous English port city with massive churches and bustling harbour docks. Beginning with a catastrophic storm surge in 1286, centuries of relentless coastal erosion gradually eroded the soft sandy cliffs, dragging entire streets and churchyards into the ocean.\n\nVisuals created with AI.\n\nHave you ever seen places where nature completely reclaimed human settlements?",
+  "hashtags": "#history #historyfacts #england #dunwich #ocean",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

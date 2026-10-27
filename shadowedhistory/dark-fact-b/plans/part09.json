@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 9,
+    "title": "In 1859 A Solar Storm Lit Up The Caribbean"
+  },
+  "synopsis": "In 1859 a solar storm made telegraph wires spark and lit up auroras as far south as the Caribbean.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. A tropical Caribbean beach at night surrounded by dark silhouetted palm trees, under a sky pulsating with bright glowing red and violet aurora curtains. Gentle waves roll onto glowing wet sand. Camera glides slowly forward along the shoreline. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A closer shot of an early nineteenth-century telegraph brass receiver inside a dim office lit by torchlight, where blue electrical sparks crackle and arc spontaneously from heavy copper wires. Smoke wisps rise from scorched paper tape. Camera tracks slowly right. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide shot looking across a tropical island harbor with wooden ships anchored at sea, backlit by magnificent crimson aurora waves dancing across the entire night horizon. Tiny distant figures stand on wooden docks looking up. Camera pans slowly. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A serene upward view looking through palm fronds toward shimmering emerald and ruby light curtains in the tropical night sky. Slow push-in toward the radiant zenith. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How strange would it be to see bright auroras glowing over a tropical beach? 🌌",
+  "family": "tuhaf felaketler",
+  "seed_id": 16,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A solar storm hit Earth in 1859.",
+    "subtitle": "Auroras reached as far south as the Caribbean."
+  },
+  "caption": "In 1859 a solar storm made telegraph wires spark and lit up auroras as far south as the Caribbean.\n\nIn 1859, the geomagnetic storm known as the Carrington Event struck Earth. The storm produced auroras so intensely bright that people in the Caribbean could read night newspapers under the red sky while telegraph operators reported electrical sparks jumping from their equipment.\n\nVisuals created with AI.\n\nWhat would happen if a solar storm of this power struck our modern power grid today?",
+  "hashtags": "#history #historyfacts #astronomy #caribbean #space",
+  "hook_shot": 2,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

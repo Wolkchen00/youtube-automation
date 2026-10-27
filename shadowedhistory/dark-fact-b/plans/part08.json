@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 8,
+    "title": "Cologne Cathedral Took 632 Years To Finish"
+  },
+  "synopsis": "Cologne Cathedral took 632 years to finish, and a medieval crane stood on its unfinished tower for centuries.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. The half-built stone facade of Cologne Cathedral illuminated by low late afternoon twilight, featuring one completed gothic section alongside a stunted tower. Atop the unfinished stone tower stands a massive wooden medieval treadwheel crane. Wind moves clouds past. Camera moves slowly upward. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A detailed close view of the massive weather-worn timber treads and iron gears of the ancient wooden crane, resting high on raw carved masonry. Ropes gently sway in the cold breeze as dust drifts through warm low sunlight. Camera glides slowly right. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A sweeping high-angle wide view showing the massive unfinished cathedral rising above dense gabled roofs of a medieval town under grey skies. Tiny silhouetted townspeople walk along narrow timber streets far below. Camera pulls back continuously. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A striking low-angle look looking up the soaring carved gothic stone spires toward the darkening sky as rain mist drifts around the ancient wooden crane silhouette. Slow push-in toward the towering stone facade. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Can you imagine seeing a giant wooden crane sitting on a cathedral for centuries? 🏗️",
+  "family": "gizli muhendislik",
+  "seed_id": 26,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Cologne Cathedral took 632 years.",
+    "subtitle": "A crane stood on its tower for centuries."
+  },
+  "caption": "Cologne Cathedral took 632 years to finish, and a medieval crane stood on its unfinished tower for centuries.\n\nConstruction began in 1248 but halted in 1560, leaving a massive wooden crane perched on the incomplete south tower. For over three hundred years, the skyline remained unchanged until building resumed and finished in 1880.\n\nVisuals created with AI.\n\nCould you spend generations building something you would never see finished?",
+  "hashtags": "#history #historyfacts #architecture #cologne #germany",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

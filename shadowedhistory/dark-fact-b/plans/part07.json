@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 7,
+    "title": "The Swedish Warship Vasa Sank In 1628"
+  },
+  "synopsis": "The Swedish warship Vasa sank in 1628 after sailing only about 1,300 metres on her maiden voyage.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. A towering ornate seventeenth-century warship in Stockholm harbour during late afternoon dusk, her giant sails caught in a sharp wind as she begins heeling dramatically to one side. Water splashes furiously against her wooden hull. Camera glides slowly parallel to the tilting ship. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A closer view of the lower gun deck port carved in dark oak, where dark sea water suddenly surges through the open wooden hatch into the interior. Foam and spray fly across the dark wood in low golden sunlight. Camera glides down slowly. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide vista from the rocky shoreline looking out across the wind-rippled harbour as the magnificent warship slips beneath the dark water, mast tops tilting heavily. Tiny silhouetted crowds watch from the shore. Camera slowly pans left. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A final striking shot of the wooden tip of the warship's tall mainmast breaking the surface of the dark water under a chilly dusk sky, ripples fanning outward. Slow push-in on the submerged timber. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you have dared to sail on a giant warship in 1628? ⛵",
+  "family": "tuhaf felaketler",
+  "seed_id": 20,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "The warship Vasa sank in 1628.",
+    "subtitle": "It sank after sailing only 1,300 metres."
+  },
+  "caption": "The Swedish warship Vasa sank in 1628 after sailing only about 1,300 metres on her maiden voyage.\n\nIn 1628, the royal warship Vasa set sail from Stockholm harbour. A sudden gust of wind caused the top-heavy vessel to heel over, allowing water to flood open gun ports and sink her within minutes before crowds of onlookers.\n\nVisuals created with AI.\n\nWhy do you think such an expensive warship was rushed into service?",
+  "hashtags": "#history #historyfacts #sweden #maritime #vasa",
+  "hook_shot": 2,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
