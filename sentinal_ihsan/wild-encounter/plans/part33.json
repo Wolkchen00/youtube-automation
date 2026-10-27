@@ -29,5 +29,9 @@
   },
   "family": "insect-giant",
   "hook_shot": 1,
-  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b"
+  "doctrine_sha256": "8a8ca9f20bc61ffa3176897701be5d7e887570dd297e28b5888dff3ecb99b58b",
+  "prop_ref_urls": [
+    "https://i.ibb.co/fV6mD1nQ/ep33-giant-scorpion.png"
+  ],
+  "ref_prompt_sha256": "6c167994d5107adebd277ac8aa161729a036fa8689e302882092709ac7d29e8e"
 }

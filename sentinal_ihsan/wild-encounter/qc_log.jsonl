@@ -1442,3 +1442,43 @@
 {"ts": "2026-10-26T14:46:13Z", "event": "review", "episode": 32, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4", "anomaly_match": {"value": true, "visible": true, "confidence": 0.85}, "violation_reads": {"value": true, "visible": true, "confidence": 0.88}, "continuity_ok": "n/a", "continuity_notes": "n/a"}
 {"ts": "2026-10-26T14:46:13Z", "event": "qc_pass", "episode": 32, "shot": 1, "attempt": 0, "content_sha256": "4b603beae079e96e28684f1e4c293da267153402894874676764e61d6c3afb7b", "clip": "shot_01.mp4", "anomaly_match": {"value": true, "visible": true, "confidence": 0.85}, "violation_reads": {"value": true, "visible": true, "confidence": 0.88}, "continuity_ok": "n/a", "continuity_notes": "n/a"}
 {"ts": "2026-10-26T14:46:14Z", "event": "scene_cut_scan", "episode": 32, "shot": 1, "threshold": 0.2, "height": 270, "count": 0, "timestamps": [], "status": "measured", "gated": false, "clip": "shot_01.mp4"}
+{"ts": "2026-10-27T13:15:48Z", "event": "qc_api_attempt", "attempt_id": "4f34b7ac61124938b33ac282e8847c20", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:23:44Z", "event": "qc_api_result", "attempt_id": "4f34b7ac61124938b33ac282e8847c20", "outcome": "error"}
+{"ts": "2026-10-27T13:23:44Z", "event": "qc_api_attempt", "attempt_id": "d5417d27da344ea98d318fa7eddf0379", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:28:37Z", "event": "qc_api_result", "attempt_id": "d5417d27da344ea98d318fa7eddf0379", "outcome": "error"}
+{"ts": "2026-10-27T13:28:37Z", "event": "qc_api_attempt", "attempt_id": "44aa4d161d3f45d5b2e8a4b779bad040", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:28:37Z", "event": "qc_api_result", "attempt_id": "44aa4d161d3f45d5b2e8a4b779bad040", "outcome": "error"}
+{"ts": "2026-10-27T13:28:42Z", "event": "qc_api_attempt", "attempt_id": "a6225a39c84745b5b76687b9d168b651", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:28:43Z", "event": "qc_api_result", "attempt_id": "a6225a39c84745b5b76687b9d168b651", "outcome": "error"}
+{"ts": "2026-10-27T13:28:53Z", "event": "qc_api_attempt", "attempt_id": "ec202dd45a134ff680757b2e28a7eabf", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:28:54Z", "event": "qc_api_result", "attempt_id": "ec202dd45a134ff680757b2e28a7eabf", "outcome": "error"}
+{"ts": "2026-10-27T13:28:54Z", "event": "qc_api_attempt", "attempt_id": "4e63538f8fab42e99b4ae0ec0a468245", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:28:55Z", "event": "qc_api_result", "attempt_id": "4e63538f8fab42e99b4ae0ec0a468245", "outcome": "error"}
+{"ts": "2026-10-27T13:29:00Z", "event": "qc_api_attempt", "attempt_id": "47050f72ea754555acf5834119dd47ce", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:29:04Z", "event": "qc_api_result", "attempt_id": "47050f72ea754555acf5834119dd47ce", "outcome": "error"}
+{"ts": "2026-10-27T13:29:14Z", "event": "qc_api_attempt", "attempt_id": "d753837e87cd4fbaa752b9b92fcd7581", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:29:20Z", "event": "qc_api_result", "attempt_id": "d753837e87cd4fbaa752b9b92fcd7581", "outcome": "error"}
+{"ts": "2026-10-27T13:30:20Z", "event": "qc_api_attempt", "attempt_id": "0f9f8726eb5e4cf99f5161f421a98d6c", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:30:26Z", "event": "qc_api_result", "attempt_id": "0f9f8726eb5e4cf99f5161f421a98d6c", "outcome": "error"}
+{"ts": "2026-10-27T13:30:31Z", "event": "qc_api_attempt", "attempt_id": "6fe2d4ff57e54b3c9da0d5c6627dea83", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:30:34Z", "event": "qc_api_result", "attempt_id": "6fe2d4ff57e54b3c9da0d5c6627dea83", "outcome": "error"}
+{"ts": "2026-10-27T13:30:44Z", "event": "qc_api_attempt", "attempt_id": "bc988a2246ac445f95614056c5c1a97a", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:30:45Z", "event": "qc_api_result", "attempt_id": "bc988a2246ac445f95614056c5c1a97a", "outcome": "error"}
+{"ts": "2026-10-27T13:30:45Z", "event": "qc_api_attempt", "attempt_id": "e50014a9b3404582a01758aa0b212d38", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:36:17Z", "event": "qc_api_result", "attempt_id": "e50014a9b3404582a01758aa0b212d38", "outcome": "error"}
+{"ts": "2026-10-27T13:36:17Z", "event": "qc_api_attempt", "attempt_id": "6d39d96fb14e4dad8fca544705437c66", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:36:20Z", "event": "qc_api_result", "attempt_id": "6d39d96fb14e4dad8fca544705437c66", "outcome": "error"}
+{"ts": "2026-10-27T13:36:25Z", "event": "qc_api_attempt", "attempt_id": "94581186fdd74b4992ca8b9a1508490a", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:36:31Z", "event": "qc_api_result", "attempt_id": "94581186fdd74b4992ca8b9a1508490a", "outcome": "ok"}
+{"ts": "2026-10-27T13:36:31Z", "event": "native_audio_review", "episode": 33, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Foley sounds of a sliding door, footsteps, and a creaking door are present without speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-10-27T13:36:33Z", "event": "qc_api_attempt", "attempt_id": "99ca3fcb8d404d47ae9b374073984dfd", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:36:34Z", "event": "qc_api_result", "attempt_id": "99ca3fcb8d404d47ae9b374073984dfd", "outcome": "error"}
+{"ts": "2026-10-27T13:36:39Z", "event": "qc_api_attempt", "attempt_id": "9e45715cbcde44f298655bdba55c5d32", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:36:42Z", "event": "qc_api_result", "attempt_id": "9e45715cbcde44f298655bdba55c5d32", "outcome": "error"}
+{"ts": "2026-10-27T13:36:52Z", "event": "qc_api_attempt", "attempt_id": "38100bcdbbbe4b1bb017822d026dddb6", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:37:21Z", "event": "qc_api_result", "attempt_id": "38100bcdbbbe4b1bb017822d026dddb6", "outcome": "error"}
+{"ts": "2026-10-27T13:37:21Z", "event": "qc_api_attempt", "attempt_id": "4dfb5e749d9b4a0f9ead3d06549be10e", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:37:23Z", "event": "qc_api_result", "attempt_id": "4dfb5e749d9b4a0f9ead3d06549be10e", "outcome": "error"}
+{"ts": "2026-10-27T13:37:28Z", "event": "qc_api_attempt", "attempt_id": "288979e1c6e44493a41317c0c496a4ce", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 33, "shot": 1}
+{"ts": "2026-10-27T13:37:31Z", "event": "qc_api_result", "attempt_id": "288979e1c6e44493a41317c0c496a4ce", "outcome": "error"}
+{"ts": "2026-10-27T13:37:41Z", "event": "qc_api_attempt", "attempt_id": "55885976864c4bc5b7d4011df3822ad1", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 33, "shot": 1}
