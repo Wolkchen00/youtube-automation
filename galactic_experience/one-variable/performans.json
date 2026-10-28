@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-10-27T18:38:51.907260+00:00",
+  "guncellendi": "2026-10-28T18:23:07.921371+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 9.0,
@@ -5007,7 +5007,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-19T19:05:46.849153+00:00",
       "subtitle": "One Wave Along the Entire Dubai Coast",
@@ -5432,6 +5432,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-28T18:23:07.921371+00:00",
+          "yas_saat": 121.017,
+          "youtube": {
+            "views": 11,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 8,
+            "average_view_percentage": 91.74,
+            "engaged_views": 3,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 151,
+            "impressions": 151,
+            "reach": 120,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 4,
+            "ig_reels_avg_watch_time": 3578,
+            "ig_reels_video_view_total_time": 447365
+          },
+          "tiktok": {
+            "views": 888,
+            "likes": 10,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5594,5 +5630,5 @@
       "etiket": "orta"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }

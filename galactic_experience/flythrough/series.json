@@ -391,8 +391,9 @@
       "first_held_at": "2026-10-26T18:44:54.144119+00:00",
       "first_infra_held_at": "2026-10-26T18:44:54.144119+00:00",
       "infra_retry_count": 1,
-      "last_reason_code": "QUOTA",
-      "hold_reason": "quota"
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "retry_count": 1
     }
   },
   "engagement": {
