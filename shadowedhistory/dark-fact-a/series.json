@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 7,
+  "next_part": 8,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
   "auto_replenish": {
@@ -317,12 +317,30 @@
       }
     },
     "7": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-10-26T18:23:17.066668+00:00",
       "first_infra_held_at": "2026-10-26T18:23:17.066668+00:00",
       "infra_retry_count": 1,
       "last_reason_code": "QUOTA",
-      "hold_reason": "quota"
+      "hold_reason": "quota",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-a/episodes/ep07/ep07_music_titled_mastered.mp4",
+      "subtitle": "In 1518 Hundreds Danced In Strasbourg Nonstop",
+      "stack_sha256": "5df9ca9e92f43d23b91ba3e9ee0bb1a3339f165445856fcf3bc9dfe8952c4613",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-28T17:37:27.607504+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "engagement": {
