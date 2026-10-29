@@ -388,3 +388,28 @@
 {"ts": "2026-10-25T16:27:21Z", "event": "qc_api_result", "attempt_id": "2cf0c88792234edc866a535a47411189", "outcome": "ok"}
 {"ts": "2026-10-25T16:27:21Z", "event": "native_audio_review", "episode": 107, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Wind rushing and deep breathing/whooshing sounds are heard with no speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
 {"ts": "2026-10-25T16:27:22Z", "event": "qc_api_attempt", "attempt_id": "5853aec196974e199785d425beecbcfb", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:32:25Z", "event": "qc_api_attempt", "attempt_id": "69c0717b1a7b4f1baa2015e0a32c9071", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:32:28Z", "event": "qc_api_result", "attempt_id": "69c0717b1a7b4f1baa2015e0a32c9071", "outcome": "error"}
+{"ts": "2026-10-29T18:32:33Z", "event": "qc_api_attempt", "attempt_id": "247ce02562cb483dbaf4f997ec8580b3", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:32:34Z", "event": "qc_api_result", "attempt_id": "247ce02562cb483dbaf4f997ec8580b3", "outcome": "429"}
+{"ts": "2026-10-29T18:32:34Z", "event": "qc_api_attempt", "attempt_id": "e20db61e1f5c413ea27f77829f6d6087", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:33:06Z", "event": "qc_api_result", "attempt_id": "e20db61e1f5c413ea27f77829f6d6087", "outcome": "error"}
+{"ts": "2026-10-29T18:33:11Z", "event": "qc_api_attempt", "attempt_id": "dbf36264243042be84340059e8d3c007", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:37:31Z", "event": "qc_api_result", "attempt_id": "dbf36264243042be84340059e8d3c007", "outcome": "error"}
+{"ts": "2026-10-29T18:37:31Z", "event": "qc_api_attempt", "attempt_id": "18ed834486b74fed8547289b82abbd74", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:37:34Z", "event": "qc_api_result", "attempt_id": "18ed834486b74fed8547289b82abbd74", "outcome": "ok"}
+{"ts": "2026-10-29T18:37:34Z", "event": "native_audio_review", "episode": 107, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Heavy wind swoosh and ambient rumble sound effects are present.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-10-29T18:37:35Z", "event": "qc_api_attempt", "attempt_id": "fa73655d2caa45ce9cd99327551f8576", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:37:36Z", "event": "qc_api_result", "attempt_id": "fa73655d2caa45ce9cd99327551f8576", "outcome": "429"}
+{"ts": "2026-10-29T18:37:36Z", "event": "qc_api_attempt", "attempt_id": "517e39de22744a45b68b7fd64b51ac35", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:38:17Z", "event": "qc_api_result", "attempt_id": "517e39de22744a45b68b7fd64b51ac35", "outcome": "error"}
+{"ts": "2026-10-29T18:38:22Z", "event": "qc_api_attempt", "attempt_id": "514b6b6e474f438c8ec433014b1926f0", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:38:23Z", "event": "qc_api_result", "attempt_id": "514b6b6e474f438c8ec433014b1926f0", "outcome": "429"}
+{"ts": "2026-10-29T18:38:23Z", "event": "qc_api_attempt", "attempt_id": "5c4cb54a44f94d36883ecd3934e12fc9", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:38:31Z", "event": "qc_api_result", "attempt_id": "5c4cb54a44f94d36883ecd3934e12fc9", "outcome": "error"}
+{"ts": "2026-10-29T18:38:36Z", "event": "qc_api_attempt", "attempt_id": "7b29370ccbaa4234bec27df1b237ae35", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:38:41Z", "event": "qc_api_result", "attempt_id": "7b29370ccbaa4234bec27df1b237ae35", "outcome": "error"}
+{"ts": "2026-10-29T18:38:51Z", "event": "qc_api_attempt", "attempt_id": "ce479280febb4177bb7fe2ef7fc602e0", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 107, "shot": 1}
+{"ts": "2026-10-29T18:39:07Z", "event": "qc_api_result", "attempt_id": "ce479280febb4177bb7fe2ef7fc602e0", "outcome": "ok"}
+{"ts": "2026-10-29T18:39:07Z", "event": "review", "episode": 107, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Disaster is not visible or at maximum strength in the initial frame."], "fix_notes": ["Ensure the avalanche is already active and visible from the first frame."], "clip": "shot_01.mp4"}
+{"ts": "2026-10-29T18:39:07Z", "event": "qc_pass", "episode": 107, "shot": 1, "attempt": 0, "content_sha256": "80c75d5a1182593e4de42dd872d9ca8d59e990973e0cc88605035004ad3af515", "clip": "shot_01.mp4"}
