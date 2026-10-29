@@ -2141,7 +2141,7 @@
       "series": "wild-encounter",
       "part": 33,
       "reserved": 1000,
-      "actual": null,
+      "actual": 134.0,
       "ts": "2026-10-27T13:11:22.590577+00:00"
     },
     {
