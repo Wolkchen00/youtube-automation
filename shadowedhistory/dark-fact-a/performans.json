@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-10-28T17:21:07.820428+00:00",
+  "guncellendi": "2026-10-29T17:41:38.512957+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 4,
@@ -2236,6 +2236,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-10-29T17:41:38.512957+00:00",
+          "yas_saat": 122.585,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 322,
+            "impressions": 322,
+            "reach": 254,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 6243,
+            "ig_reels_video_view_total_time": 1610756
+          },
+          "tiktok": {
+            "views": 1031,
+            "likes": 40,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -2396,7 +2432,68 @@
       },
       "puan": 2.267606,
       "etiket": "kazanan"
+    },
+    {
+      "part": 7,
+      "post_ids": {
+        "youtube": "2g-UTTWL8zo",
+        "instagram": "18120637393762969",
+        "tiktok": "7701773806938967310"
+      },
+      "request_ids": {
+        "youtube": "32c75c119c98477082b07d5ebe43376c",
+        "instagram": "9048f5c81a654ce4b314485e3448ae79",
+        "tiktok": "96b76b9e4ebc407eb68963f95181baae"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-29T17:41:38.512957+00:00",
+          "yas_saat": 24.07,
+          "youtube": {
+            "views": 56,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 10,
+            "impressions": 10,
+            "reach": 10,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 2863,
+            "ig_reels_video_view_total_time": 25775
+          },
+          "tiktok": {
+            "views": 941,
+            "likes": 22,
+            "comments": 0,
+            "shares": 1
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-28T17:37:27.606797+00:00",
+      "subtitle": "In 1518 Hundreds Danced In Strasbourg Nonstop",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
