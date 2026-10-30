@@ -487,3 +487,20 @@ stok bitince ayni ilk kareyi yeniden kullanmama korumasi, abone plani
 
 **Olculemeyen:** IG elde tutma egrisi, kaydirma orani, trafik kaynagi, hesap durumu
 (onerilebilirlik). Tarayicidaki oturum aimagine hesabi DEGIL, takip eden baska hesap.
+
+### Ek (29 Ekim aksami): Grand Canyon iki uretimin IG elde tutma verisi (Ihsan, Insights)
+
+| | 11 Eki (144K) | 25 Eki tekrar (5K) |
+|---|---|---|
+| Kaydirma (skip) | %36,6 | %32,5 |
+| Ilk 3 sn | %69 | %73 |
+| 12-13 sn | %51 | %51 |
+| Tum video | %38 | %47 |
+
+Tekrar videosu izleyiciyi DAHA IYI tuttu ama 28 kat az gosterildi. Yani cokus
+izleyicinin kaydirmasindan degil, DAGITIMDAN: Instagram videoyu takip etmeyenlere
+gostermedi. Iki aday: (a) ilk saniyeleri eski bir gonderiyle neredeyse ayni video
+"ozgun degil" sayilip onerilmedi, (b) hesap genelinde oneri kisitlamasi. Ayirt
+edici iki olcum: iki videonun "takipci / takipci olmayan" erisim orani ve Hesap
+Durumu ekrani. Saha testi: 30 Ekim Atina (yeni yer, yeni acilis). Takipci-disi
+erisim yine dusukse sebep (b), normale donerse (a).
