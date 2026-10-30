@@ -124,3 +124,22 @@ def test_gercek_takvimin_dosyalari_depoda() -> None:
         assert (PROJE_KOKU / kayit["video"]).is_file(), kayit["video"]
         assert (PROJE_KOKU / kayit["caption"]).is_file(), kayit["caption"]
         assert kayit["baslik"].endswith("#shorts")
+
+
+def test_takvim_gunu_rotanin_kendi_ilk_yorumunu_kullanir(tmp_path, monkeypatch) -> None:
+    kok = _takvimli_kok(tmp_path, _bugun())
+    yol = tmp_path / "isim.json"
+    yol.write_text(json.dumps({"test-hazir": {"ilk_yorum": "Comment your name"}}), encoding="utf-8")
+    monkeypatch.setattr(gunluk, "KOK", kok)
+    monkeypatch.setattr(gunluk, "DEFTER", kok / "yayin.jsonl")
+    monkeypatch.setattr(gunluk.rota_ilk_yorumu, "__defaults__", (yol,))
+    cagrilar = []
+
+    def _kosa(cmd, cwd):
+        cagrilar.append([str(c) for c in cmd])
+        return _uretim_yasak(cmd, cwd)
+
+    monkeypatch.setattr(gunluk, "kosa", _kosa)
+    assert gunluk.main([]) == 0
+    komut = cagrilar[0]
+    assert komut[komut.index("--first-comment") + 1] == "Comment your name"

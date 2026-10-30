@@ -52,7 +52,29 @@ C. Asagidaki Part 2 (7) abonenin KALMASI icin, cekmek icin degil.
 - B ABONE DEGIL TAKIPCI icin: "Takip et, adini yorum yaz, sonraki kaydirakta senin adin."
   Tek deneme, tutarsa devam.
 
-**B denemesi: 31 Ekim Paris (paris-eyfel-dolu), ad MIGUEL** (@miguelangel_blancog,
+**30 Ekim Ihsan duzeltmesi (gecerli olan bu):** tek ad DEGIL. "NEW FOLLOWERS" basligi
+ve altinda 10-20 yeni takipcinin adi; ilk 3 saniyede slide'in zemininde, kadin kayarken
+de gorunsun. Gerekce: birden fazla ad = herkes "benim adim da cikar" der, daha cok takip.
+- Adlar: aimagine357 takipci listesinin ilk sayfasi (Instagram'in en yeni sirasi), 30 Ekim.
+  Okunakli Latin adi olan 12 kisi, yalniz ad: Ange, Edgar, Michael, Dave, Bilal, Maria,
+  Bella, Helia, Fernanda, Ashok, Pallavi, George. Isletme ve yapay zeka sayfalari alinmadi.
+- Gorsel: nano-banana listeyi iki kez yazdi (slide agzi + yuruyus yolu); yalniz slide
+  agzindaki parca orijinal karenin ustune maskeyle kondu. 12 ad yakindan kontrol edildi.
+- Video 30 Ekim'de elle uretildi (gunluk.py --yayinlama, 627 kredi). Kare kare: kazili
+  liste 0-0,79 sn net, ama kadin 1. saniyede oturuyor ve Seedance listeyi 20. karede
+  (0,83 sn) birakiyor. Ihsan 3 sn + kayarken istedi: ayni liste 20. karede ayni yerde
+  devralinip yukari suzulur, 3,2 sn'ye kadar ekranda kalir, soner (ffmpeg katmani,
+  Arial Bold, beyaz + isik). Ust uste binen kare yok. Gerisi: Eyfel, bulut, firtina,
+  dev beyaz dolu duvari, karanlik son; bacaklarda hafif pembe cizgi artefakti.
+- `hazir/paris-eyfel-dolu.mp4` + takvim 2026-10-31: CI o gun uretmez, bunu yayinlar
+  (YouTube, Instagram, TikTok), ilk yorum ISIM_KAYDIRAK.json'dan.
+- Devam ederse: Seedance kazili adi ~0,8 sn tutuyor; ayni katman yontemi her gun
+  kullanilir (kazi + devralma). Ad listesi her gun takipci listesinin ilk sayfasindan
+  ve "comment your name" yorumlarindan.
+
+Asagidaki MIGUEL tasarimi bunun yerine gecti (tarihce):
+
+**B denemesi (ilk tasarim, iptal): 31 Ekim Paris, ad MIGUEL** (@miguelangel_blancog,
 Giza ve Roma'ya tekrar tekrar "Excelente video" yazan takipci).
 - Ad slide agzinin seffaf zeminine kazili, beyaz parlak. 4 gorsel denendi (~64 kredi):
   yuruyus yoluna yazilinca bacak "G"yi kapatti ("MIUEL"); slide agzinda tek ve tam okunan

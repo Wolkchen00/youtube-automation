@@ -1,5 +1,5 @@
 {
-  "_aciklama": "Tarihi gelen gun gunluk.py URETIM YAPMAZ, o gunun hazir videosunu yayinlar. Tarih Los Angeles saatine gore. 2026-10-01 Ihsan karari: mevsim kapisi A/B testi, A (15 sn) 2 Ekim, B (26 sn) 3 Ekim; 4 Ekim'den itibaren otomasyon kapi konseptiyle uretir. Kaynak analiz: reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md 2026-10-04: KAPI konseptinin ilk videosu (giza), 1 Ekim'de gunluk.py --yayinlama ile uctan uca uretilip gozle kontrol edildi; slug defterde giza olarak kalir, SIRA 5 Ekim'de newyork ile devam eder. 2026-10-10: yuruyus acilisinin (Ihsan 2026-10-09) ilk videosu (napoli), 9 Ekim'de gunluk.py --yayinlama ile uretilip kare kare kontrol edildi; slug defterde napoli olarak kalir, SIRA 11 Ekim'de grandcanyon ile devam eder.",
+  "_aciklama": "Tarihi gelen gun gunluk.py URETIM YAPMAZ, o gunun hazir videosunu yayinlar. Tarih Los Angeles saatine gore. 2026-10-01 Ihsan karari: mevsim kapisi A/B testi, A (15 sn) 2 Ekim, B (26 sn) 3 Ekim; 4 Ekim'den itibaren otomasyon kapi konseptiyle uretir. Kaynak analiz: reference/ref-DdvYhkUEbxn/TERSINE-MUHENDISLIK.md 2026-10-04: KAPI konseptinin ilk videosu (giza), 1 Ekim'de gunluk.py --yayinlama ile uctan uca uretilip gozle kontrol edildi; slug defterde giza olarak kalir, SIRA 5 Ekim'de newyork ile devam eder. 2026-10-10: yuruyus acilisinin (Ihsan 2026-10-09) ilk videosu (napoli), 9 Ekim'de gunluk.py --yayinlama ile uretilip kare kare kontrol edildi; slug defterde napoli olarak kalir, SIRA 11 Ekim'de grandcanyon ile devam eder. 2026-10-31: 'Adin kaydirakta' denemesi (Ihsan 30 Ekim): NEW FOLLOWERS + 12 yeni takipci adi. 30 Ekim'de gunluk.py --yayinlama ile uretildi; Seedance kazili listeyi 0,83 sn'de biraktigi icin ayni liste o karede devralinip 3,2 sn'ye kadar ekranda tutuldu (abone/ABONE-PLANI.md). Slug defterde paris olarak kalir, SIRA 1 Kasim'da fuji-yanardag ile devam eder.",
   "gunler": [
     {
       "tarih": "2026-10-02",
@@ -28,6 +28,13 @@
       "video": "hazir/napoli-vezuv-yanardag.mp4",
       "caption": "hazir/napoli-vezuv-yanardag.caption.txt",
       "baslik": "Vesuvius slide into an eruption #shorts"
+    },
+    {
+      "tarih": "2026-10-31",
+      "slug": "paris-eyfel-dolu",
+      "video": "hazir/paris-eyfel-dolu.mp4",
+      "caption": "hazir/paris-eyfel-dolu.caption.txt",
+      "baslik": "Eiffel Tower slide into hail #shorts"
     }
   ]
 }

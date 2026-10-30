@@ -761,6 +761,7 @@ def takvim_yayinla(kayit: dict, gecmis: list[dict], bugun: str, allow_same_day: 
                                    ensure_ascii=False),
     ]
     _, yorum = etkilesim_sec()
+    yorum = rota_ilk_yorumu(kayit.get("slug") or "") or yorum
     if yorum:
         komut += ["--first-comment", yorum]
     if allow_same_day:
