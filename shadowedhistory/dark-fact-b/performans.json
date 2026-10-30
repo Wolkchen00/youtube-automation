@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-29T17:41:51.300318+00:00",
+  "guncellendi": "2026-10-30T17:09:51.985428+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 149.5,
@@ -3003,7 +3003,68 @@
       },
       "puan": 6.828283,
       "etiket": "kazanan"
+    },
+    {
+      "part": 7,
+      "post_ids": {
+        "youtube": "ZZuM0OwRAiY",
+        "instagram": "17955882435039218",
+        "tiktok": "7702154155934158094"
+      },
+      "request_ids": {
+        "youtube": "0602b908245b4fafa691d1aeb0b5d722",
+        "instagram": "101694546ab44e52aa8abcf194793d05",
+        "tiktok": "62fb226877e74621bafc1e0edbf378d3"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-10-30T17:09:51.985428+00:00",
+          "yas_saat": 22.948,
+          "youtube": {
+            "views": 261,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 1609,
+            "impressions": 1609,
+            "reach": 1093,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 6,
+            "comments_insight": 1,
+            "total_interactions": 8,
+            "ig_reels_avg_watch_time": 9173,
+            "ig_reels_video_view_total_time": 10044544
+          },
+          "tiktok": {
+            "views": 1009,
+            "likes": 17,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-29T18:12:59.108476+00:00",
+      "subtitle": "The Swedish Warship Vasa Sank In 1628",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 0
+  "api_cagrilari": 6
 }
