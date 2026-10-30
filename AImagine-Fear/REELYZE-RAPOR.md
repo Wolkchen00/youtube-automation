@@ -504,3 +504,11 @@ gostermedi. Iki aday: (a) ilk saniyeleri eski bir gonderiyle neredeyse ayni vide
 edici iki olcum: iki videonun "takipci / takipci olmayan" erisim orani ve Hesap
 Durumu ekrani. Saha testi: 30 Ekim Atina (yeni yer, yeni acilis). Takipci-disi
 erisim yine dusukse sebep (b), normale donerse (a).
+
+Ihsan 29 Ekim gece: **Hesap Durumu temiz.** Takip etmeyen erisim orani 11 Eki %96,
+25 Eki %98 (144K izlenmenin %96'si takipci olamaz, o gun takipci ~10-16K; yani bu
+oran takip ETMEYENLERIN payi). Tekrar videosu da yeni insanlara gosterilmis, ama
+kucuk bir deneme kitlesinden sonra buyutulmemis. (b) hesap kisitlamasi ELENDI.
+Kalan aciklama: Instagram ilk saniyeleri ayni hesabin eski gonderisine cok benzeyen
+videoyu ozgun saymayip yaymiyor; izleyici davranisi (elde tutma daha iyi) bunu
+aciklamiyor. Acik kalan tek olcum: paylasim/kaydetme orani.
