@@ -116,6 +116,20 @@ KREDI_15SN = {
 #   - ayni tur felaket arka arkaya gelmiyor (hortum 5 ve 11, sel 7 ve 13)
 # Stok 14 gun, 17 Ekim'de biter; bitmeden tools/kapi_ekle.py'ye yeni rota yaz
 # ve baslangic gorselini onayla (python tools/ilk_kare.py <slug> --onayla).
+#
+# 2026-10-29: stok 17 Ekim'de bitti ve 18 Ekim'den beri sirdaki() en eski
+# kullanilan rotaya donup TEKRAR yayinliyordu. Ayni onayli ilk kareyle acilan
+# tekrarlar 6/6 coktu (Grand Canyon 144K -> 5K, Machu Picchu 154K -> 4.3K).
+# 14 yeni kapi rotasi listenin SONUNA eklendi: sirdaki() kullanilmamis ilk
+# slug'i dondurdugu icin once bunlar uretilir, eskiler sonra doner. Uc kural
+# 28 rotalik dairesel listede de tutuyor:
+#   - sicak rotalar 0, 3, 7, 10, 14, 17, 21, 24'te: araliklar 3-4-3-4-3-4-3-4
+#   - yan yana iki rota ayni renk ailesini almiyor (petra mavi -> atina amber,
+#     londra mor -> giza amber dahil)
+#   - ayni tur felaket arka arkaya gelmiyor (yildirim 17, 22, 27; toz 14, 24)
+# Ilk yeni rota atina: 29 Ekim'de barselona (mor, hortum) yayinlandi, ardindan
+# amber toz firtinasi geliyor. Yeni rotalarin onayli ilk_kare'si henuz yok; gunluk
+# kosu gorseli kendisi uretir (rota_denetim bunu UYARI olarak gosterir).
 SIRA = [
     "giza-piramit-kum-firtinasi",    # sicak, kum firtinasi
     "newyork-ozgurluk-kasirga",      # neon, kasirga
@@ -131,6 +145,21 @@ SIRA = [
     "barselona-sagrada-hortum",      # neon, deniz hortumu
     "stonehenge-meteor",             # neon, meteor yagmuru
     "petra-hazine-sel",              # neon, sel
+    # 2026-10-29 ikinci kapi dalgasi
+    "atina-akropol-toz-firtinasi",       # sicak, amber, toz firtinasi
+    "paris-eyfel-dolu",                  # neon, yesil, dolu
+    "fuji-yanardag",                     # neon, kirmizi, yanardag
+    "dubai-burj-yildirim",               # sicak, mor, yildirim firtinasi
+    "sanfrancisco-goldengate-dev-dalga", # neon, mavi, firtina dalgasi
+    "everest-cig",                       # neon, beyaz, cig
+    "tokyo-kule-tayfun",                 # neon, kirmizi, tayfun
+    "agra-tacmahal-sel",                 # sicak, beyaz, muson seli
+    "rio-cristo-yildirim",               # neon, mavi, yildirim firtinasi
+    "venedik-sanmarco-taskin",           # neon, amber, firtina kabarmasi
+    "lasvegas-strip-kum-firtinasi",      # sicak, karisik, toz firtinasi (haboob)
+    "chichenitza-piramit-kasirga",       # neon, mavi, kasirga
+    "bavyera-neuschwanstein-heyelan",    # neon, yesil, heyelan
+    "londra-bigben-yildirim",            # neon, mor, yildirim firtinasi
 ]
 
 ESKI_HAVUZ_SIRASI = [
@@ -295,6 +324,33 @@ def sirdaki(gecmis: list[dict]) -> str:
         if kayit.get("slug") and kullanildi_mi(kayit):
             son[kayit["slug"]] = sira
     return min(SIRA, key=lambda slug: son.get(slug, -1))
+
+
+# 2026-10-29: 14 rotalik stok 17 Ekim'de bitti ve kimse fark etmedi; sirdaki()
+# sessizce tekrara dondu. Ayni onayli ilk kareyle yeniden uretilen tekrarlar
+# Instagram'da 6/6 coktu (Grand Canyon 144K -> 5K, REELYZE-RAPOR.md 29 Ekim).
+# Stok azalinca kosu uyarir, tekrar kosusu onayli kareyi KULLANMAZ.
+STOK_UYARI_ESIGI = 3
+
+
+def tekrar_mi(slug: str, gecmis: list[dict]) -> bool:
+    return any(kayit.get("slug") == slug and kullanildi_mi(kayit) for kayit in gecmis)
+
+
+def kalan_stok(gecmis: list[dict]) -> list[str]:
+    kullanilmis = {kayit.get("slug") for kayit in gecmis if kullanildi_mi(kayit)}
+    return [slug for slug in SIRA if slug not in kullanilmis]
+
+
+def stok_uyarisi(gecmis: list[dict]) -> str | None:
+    kalan = kalan_stok(gecmis)
+    if len(kalan) > STOK_UYARI_ESIGI:
+        return None
+    if not kalan:
+        return ("ROTA STOGU BITTI: SIRA'daki her rota en az bir kez yayinlandi, kosu tekrar "
+                "uretiyor. tools/kapi_ekle.py'ye yeni rota yaz.")
+    return ("ROTA STOGU AZALDI: %d yeni rota kaldi (%s). tools/kapi_ekle.py'ye yeni rota "
+            "yaz." % (len(kalan), ", ".join(kalan)))
 
 
 def sha256_dosya(path: Path) -> str:
@@ -1014,6 +1070,12 @@ def main(argv: list[str] | None = None) -> int:
             return takvim_yayinla(kayit, gecmis, bugun, args.allow_same_day)
     slug = args.sehir or sirdaki(gecmis)
     profil = PROFILLER[args.profil]
+    tekrar = tekrar_mi(slug, gecmis)
+    uyari = stok_uyarisi(gecmis)
+    if uyari:
+        log("UYARI: " + uyari)
+        # GitHub Actions bunu kosu ozetinde sari uyari olarak gosterir.
+        print("::warning::" + uyari)
 
     # Sure rotadan okunur. Okunamazsa hicbir sey uretilmez ve kredi harcanmaz.
     try:
@@ -1134,7 +1196,13 @@ def main(argv: list[str] | None = None) -> int:
     if konsept == "kapi":
         # Baslangic gorseli Seedance'ten ONCE: gorsel yoksa video da yok, kredi yanmaz.
         try:
-            ilk_kare_url, ilk_kare_kaynagi = ilk_kare_modulu.hazirla(slug)
+            if tekrar:
+                log("UYARI: %s daha once yayinlandi, onayli ilk kare atlaniyor, yeni "
+                    "acilis uretiliyor." % slug)
+                ilk_kare_url, ilk_kare_kaynagi = ilk_kare_modulu.hazirla(
+                    slug, onayliyi_atla=True)
+            else:
+                ilk_kare_url, ilk_kare_kaynagi = ilk_kare_modulu.hazirla(slug)
         except Exception as hata:
             log("DUR: baslangic gorseli hazirlanamadi: %s" % hata)
             return 1

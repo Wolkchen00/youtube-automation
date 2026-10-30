@@ -424,3 +424,66 @@ parlak sonbaharla acilinca "tekrar bir mutluluk basliyor". Ihsan bunu izleyiciyi
 kaybettiren kesinti saydi. KURAL: iki parcali videoda gerilim tek yonlu tirmanir, ek
 yerinin iki yani da karanlik ve tehlikeli kalir, sakin dunya yalniz en basta olur.
 Bu duzeltme yapilmadan 30 sn video uretilmez (README kapi bolumu).
+
+## 29 Ekim 2026: KAPI stogu bitti, tekrarlar coktu (saniye saniye cift analizi)
+
+Kaynak: IG izlenmeleri giris yapmis tarayicidan `/reels/` izgarasi (rozet bu tarihte
+IZLENME), ham veri `veri/ig_izlenme_2026-10-29.json`. Videolar YouTube kopyasindan
+indirildi (ayni dosya, `yayin.jsonl` sha). Olcum: saniyede 8 kare parlaklik/hareket,
+saniye basi ses dBFS, ilk 2 sn gri kare korelasyonu, Higgsfield sahne cozumlemesi
+(YouTube linkiyle, bedava, 10 video).
+
+**Durum.** Takipci 16,3K. 14 KAPI rotasi 17 Ekim'de bitti; `sirdaki()` en eski
+kullanilani dondurdugu icin 18 Ekim'den beri her gun TEKRAR yayinlandi. 21 Ekim'den
+29 Ekim'e dokuz video ust uste 3,9K-12,4K (Eylul 15'te reel ortancasi 142K idi).
+YouTube zaten olu (tek hane), karar IG'de.
+
+**Bulgu 1, en guclu: ilk 2 saniye ayniysa tekrar coker.** Ayni rotanin 1. ve 2. uretimi:
+
+| rota | 1. | 2. | oran | ilk 2 sn benzerligi |
+|---|---|---|---|---|
+| giza | 7.575 | 137.000 | 18,1 | 0,50 |
+| roma | 7.229 | 96.600 | 13,4 | 0,13 |
+| newyork | 7.849 | 73.500 | 9,4 | 0,14 |
+| hollywood | 5.876 | 8.242 | 1,4 | 0,30 |
+| sydney | 17.900 | 12.400 | 0,69 | 0,28 |
+| rushmore | 20.900 | 8.427 | 0,40 | 0,15 |
+| barselona | 9.098 | 5.517* | 0,61 | 0,70 |
+| cinseddi | 9.080 | 3.896 | 0,43 | 0,88 |
+| moskova | 18.200 | 5.835 | 0,32 | 0,88 |
+| napoli | 40.400 | 8.843 | 0,22 | 0,87 |
+| grandcanyon | 144.000 | 5.069 | 0,04 | 0,82 |
+| machupicchu | 154.000 | 4.332 | 0,03 | 0,73 |
+
+(*birkac saatlik.) Benzerlik >=0,70 olan 6 tekrarin 6'si da dustu, ikisi 150K'dan
+5K'ya. Benzerlik dusuk olan 6 tekrarin 3'u 9-18 kat buyudu. Sebep: 9 Ekim yuruyus
+acilisindan ONCE uretilen rotalarin ilk karesi 9 Ekim'de yeniden secildi, yani
+giza/roma/newyork tekrari izleyiciye yeni bir acilis gosterdi; 9 Ekim'den sonraki
+rotalar ayni onayli `ilk_kare/<slug>.jpg` ile yeniden uretildi.
+**Karistirici:** ayni-acilisli tekrarlarin hepsi 24-29 Ekim'de, ve 21-23 Ekim'deki
+farkli-acilisli uc tekrar da zayif. Takvim etkisi (hesap genelinde dusus) disarida
+birakilamiyor. Iki aciklama da ayni ilaci soyluyor: yeni yer, yeni acilis.
+
+**Bulgu 2: yenilik patlamasi, tekrar sonmesi.** Kanalin uc buyugu (Burj 23,2M,
+Taipei 8,9M, Skytree 794K) formatin ilk haftasindan (6-14 Eyl). 15 Eyl-8 Eki ortanca
+~13K. 9-20 Eki (yeni KAPI + yuruyus acilisi) 12 videonun 6'si 40K ustu. 21 Eki
+sonrasi 0/9. Her format yeniyken patliyor, tekrarlandikca soner.
+
+**Bulgu 3 (hipotez, n kucuk): felaket okunur bir "dev" olmali.** Higgsfield
+cozumlemesine gore kazananlarda buluttan cikinca tek dev tehdit var (Grand Canyon
+mor yildirim supercell, Giza kum hortumu). Cin Seddi depreminde Seedance felaketi
+cizemedi, yerine YANARDAG koydu; Machu Picchu 2. uretimde de yanardag cikti. Barselona
+1. uretim havuza dusup bitiyor, felaket yan tarafta. Kaybedenlerde ses "woo" heyecani
+(korku degil). Ama Roma 2 (96K) dolu yerine kar + su cizdi ve yine tuttu, yani
+icerik kalitesi tek basina belirleyici degil.
+
+**Teknik ayarlar ayirt etmiyor:** hepsi 720x1280, 24 fps, 15,07-15,1 sn. Ilk saniye
+ses seviyesi: 9 Ekim oncesi -15/-19 dB (gurultulu baslangic), sonrasi -32/-47 dB
+(sessiz yuruyus); hem kazanan hem kaybeden iki grupta da var.
+
+**Yapilan (29 Ekim):** 14 yeni rota (yeni yer, yeni acilis, kanitli felaket tipleri),
+stok bitince ayni ilk kareyi yeniden kullanmama korumasi, abone plani
+(`abone/ABONE-PLANI.md`).
+
+**Olculemeyen:** IG elde tutma egrisi, kaydirma orani, trafik kaynagi, hesap durumu
+(onerilebilirlik). Tarayicidaki oturum aimagine hesabi DEGIL, takip eden baska hesap.

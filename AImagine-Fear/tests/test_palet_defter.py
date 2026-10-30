@@ -70,6 +70,21 @@ def test_rotalarin_palet_eslemesi_birebir() -> None:
         "rushmore-hortum": "neon",  # kapi
         "stonehenge-meteor": "neon",  # kapi
         "sydney-opera-tsunami": "neon",  # kapi
+        # 2026-10-29 ikinci KAPI dalgasi
+        "agra-tacmahal-sel": "sicak",  # kapi
+        "atina-akropol-toz-firtinasi": "sicak",  # kapi
+        "bavyera-neuschwanstein-heyelan": "neon",  # kapi
+        "chichenitza-piramit-kasirga": "neon",  # kapi
+        "dubai-burj-yildirim": "sicak",  # kapi
+        "everest-cig": "neon",  # kapi
+        "fuji-yanardag": "neon",  # kapi
+        "lasvegas-strip-kum-firtinasi": "sicak",  # kapi
+        "londra-bigben-yildirim": "neon",  # kapi
+        "paris-eyfel-dolu": "neon",  # kapi
+        "rio-cristo-yildirim": "neon",  # kapi
+        "sanfrancisco-goldengate-dev-dalga": "neon",  # kapi
+        "tokyo-kule-tayfun": "neon",  # kapi
+        "venedik-sanmarco-taskin": "neon",  # kapi
     }
     gercek = {
         yol.stem: build.load_route(yol, PROJE_KOKU).fields["PALET"]

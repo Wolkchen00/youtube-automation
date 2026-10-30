@@ -121,10 +121,15 @@ def uret(prompt: str, hedef: Path) -> str:
     return temiz
 
 
-def hazirla(slug: str, kok: Path | None = None) -> tuple[str, str]:
-    """(url, kaynak) dondurur; kaynak 'onayli' ya da 'uretildi'."""
+def hazirla(slug: str, kok: Path | None = None, onayliyi_atla: bool = False) -> tuple[str, str]:
+    """(url, kaynak) dondurur; kaynak 'onayli' ya da 'uretildi'.
+
+    onayliyi_atla: rota TEKRAR uretiliyorsa onayli gorsel kullanilmaz, yeni gorsel
+    uretilir. 2026-10-29 olcumu: ilk 2 sn'si onceki videoyla ayni olan tekrarlar 6/6
+    coktu (Grand Canyon 144K -> 5K), acilisi farkli olanlarin 3'u 9-18 kat buyudu.
+    """
     kok = kok or KOK
-    onayli = onayli_yol(slug, kok / "ilk_kare")
+    onayli = None if onayliyi_atla else onayli_yol(slug, kok / "ilk_kare")
     if onayli is not None:
         return yukle(onayli), "onayli:%s" % onayli.name
     prompt_yolu = kok / "out" / slug / "ILK_KARE.txt"

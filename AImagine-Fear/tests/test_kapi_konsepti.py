@@ -139,6 +139,45 @@ def test_ilk_kare_hazirlanamazsa_seedance_cagrilmaz(tmp_path, monkeypatch) -> No
     assert not [c for c in cagrilar if "kie_uret.py" in " ".join(c)], "kredi yanardi"
 
 
+def test_tekrar_kosusu_onayli_ilk_kareyi_kullanmaz(tmp_path, monkeypatch) -> None:
+    cagrilar: list = []
+    slug = _kapi_sahnesi(tmp_path, monkeypatch, cagrilar)
+    monkeypatch.setattr(gunluk, "defter", lambda: [{"slug": slug, "kullanildi": True}])
+    istekler: list = []
+
+    def _hazirla(s, kok=None, onayliyi_atla=False):
+        istekler.append(onayliyi_atla)
+        return "https://kare/yeni.jpg", "uretildi"
+
+    monkeypatch.setattr(ilk_kare, "hazirla", _hazirla)
+    assert gunluk.main(["--sehir", slug]) == 1
+    assert istekler == [True]
+
+
+def test_ilk_kosu_onayli_ilk_kareyi_kullanir(tmp_path, monkeypatch) -> None:
+    cagrilar: list = []
+    slug = _kapi_sahnesi(tmp_path, monkeypatch, cagrilar)
+    istekler: list = []
+
+    def _hazirla(s, kok=None, onayliyi_atla=False):
+        istekler.append(onayliyi_atla)
+        return "https://kare/1.jpg", "onayli"
+
+    monkeypatch.setattr(ilk_kare, "hazirla", _hazirla)
+    assert gunluk.main(["--sehir", slug]) == 1
+    assert istekler == [False]
+
+
+def test_stok_uyarisi_esikte_baslar(monkeypatch) -> None:
+    monkeypatch.setattr(gunluk, "SIRA", ["a", "b", "c", "d", "e"])
+    kullan = lambda *s: [{"slug": x, "kullanildi": True} for x in s]  # noqa: E731
+    assert gunluk.stok_uyarisi(kullan("a")) is None
+    assert "AZALDI" in gunluk.stok_uyarisi(kullan("a", "b"))
+    assert "BITTI" in gunluk.stok_uyarisi(kullan("a", "b", "c", "d", "e"))
+    # Basarisiz (dogrulanmamis) yayin stoktan dusmez.
+    assert gunluk.stok_uyarisi([{"slug": "a", "kullanildi": False}]) is None
+
+
 def test_kapi_kredi_on_kontrolu_gorsel_payini_sayar(tmp_path, monkeypatch) -> None:
     cagrilar: list = []
     slug = _kapi_sahnesi(tmp_path, monkeypatch, cagrilar)
@@ -158,6 +197,17 @@ def test_onayli_gorsel_varsa_uretilmez(tmp_path, monkeypatch) -> None:
     monkeypatch.setattr(ilk_kare, "uret", lambda *a: pytest.fail("onayli varken uretildi"))
     url, kaynak = ilk_kare.hazirla("r", tmp_path)
     assert url == "https://yuklendi/r.jpg" and kaynak.startswith("onayli")
+
+
+def test_tekrar_rotada_onayli_gorsel_atlanir(tmp_path, monkeypatch) -> None:
+    # 2026-10-29: ayni acilisla tekrar 6/6 coktu, tekrarda gorsel yeniden uretilir.
+    (tmp_path / "ilk_kare").mkdir()
+    (tmp_path / "ilk_kare" / "r.jpg").write_bytes(b"jpg")
+    (tmp_path / "out" / "r").mkdir(parents=True)
+    (tmp_path / "out" / "r" / "ILK_KARE.txt").write_text("sahne", encoding="utf-8")
+    monkeypatch.setattr(ilk_kare, "yukle", lambda yol: pytest.fail("onayli gorsel kullanildi"))
+    monkeypatch.setattr(ilk_kare, "uret", lambda prompt, hedef: "https://uretildi/" + prompt)
+    assert ilk_kare.hazirla("r", tmp_path, onayliyi_atla=True) == ("https://uretildi/sahne", "uretildi")
 
 
 def test_onayli_yoksa_ilk_kare_promptundan_uretir(tmp_path, monkeypatch) -> None:
