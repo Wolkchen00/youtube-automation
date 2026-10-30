@@ -118,3 +118,39 @@ def test_canli_etkilesim_havuzu_gecerli():
             assert valid_engagement_question(satir), satir
             assert len(satir) <= 120, satir
             assert "subscribe" not in satir.lower(), satir
+
+
+def test_isim_kaydirak_rotasi_kendi_ilk_yorumunu_kullanir(monkeypatch, tmp_path):
+    gunluk = importlib.import_module("tools.gunluk")
+    out = tmp_path / "out" / "x"
+    out.mkdir(parents=True)
+    (out / "CAPTION.txt").write_text(CAP, encoding="utf-8")
+    yol = tmp_path / "isim.json"
+    yol.write_text(json.dumps({"x": {"ilk_yorum": "Comment your name"}}), encoding="utf-8")
+    monkeypatch.setattr(gunluk, "KOK", tmp_path)
+    monkeypatch.setattr(gunluk, "ISIM_KAYDIRAK", yol)
+    monkeypatch.setattr(gunluk.rota_ilk_yorumu, "__defaults__", (yol,))
+    monkeypatch.setattr(gunluk, "etkilesim_sec", lambda: ("Q one?", "C one?"))
+    komut = gunluk._yayin_komutu(tmp_path / "m.mp4", "x", False, "T", "a,b")
+    assert komut[komut.index("--first-comment") + 1] == "Comment your name"
+    assert komut[komut.index("--caption-question") + 1] == "Q one?"
+
+
+@pytest.mark.parametrize("icerik", ["{bozuk", "[]", '{"x": 5}', '{"x": {"ilk_yorum": 3}}'])
+def test_bozuk_isim_dosyasi_gunun_yorumuna_duser(tmp_path, icerik):
+    gunluk = importlib.import_module("tools.gunluk")
+    yol = tmp_path / "isim.json"
+    yol.write_text(icerik, encoding="utf-8")
+    assert gunluk.rota_ilk_yorumu("x", yol) == ""
+
+
+def test_canli_isim_kaydirak_yorumlari_gecerli():
+    veri = json.loads((KOK / "canon" / "ISIM_KAYDIRAK.json").read_text(encoding="utf-8"))
+    for slug, kayit in veri.items():
+        if slug.startswith("_"):
+            continue
+        assert (KOK / "routes" / (slug + ".md")).is_file(), slug
+        yorum = kayit["ilk_yorum"]
+        assert "#" not in yorum and "http" not in yorum.lower(), slug
+        rota = (KOK / "routes" / (slug + ".md")).read_text(encoding="utf-8")
+        assert kayit["isim"] in rota, "rota adi yazmiyor: %s" % slug

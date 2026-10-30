@@ -899,6 +899,24 @@ def etkilesim_sec(gun: int | None = None, yol: Path = ETKILESIM) -> tuple[str, s
     return soru, yorum
 
 
+ISIM_KAYDIRAK = KOK / "canon" / "ISIM_KAYDIRAK.json"
+
+
+def rota_ilk_yorumu(slug: str, yol: Path = ISIM_KAYDIRAK) -> str:
+    """'Adin kaydirakta' rotasinin kendi ilk yorumu; yoksa "" (gunun yorumu kalir).
+
+    2026-10-30 denemesi: videoda bir takipcinin adi yazar, ilk yorum herkesi kendi
+    adini yazmaya cagirir. Gunun donen sorusu bu cagriyla celismesin diye yerine gecer.
+    """
+    try:
+        veri = json.loads(yol.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return ""
+    kayit = veri.get(slug) if isinstance(veri, dict) else None
+    yorum = kayit.get("ilk_yorum") if isinstance(kayit, dict) else None
+    return yorum.strip() if isinstance(yorum, str) else ""
+
+
 def _yayin_komutu(
     master: Path, slug: str, allow_same_day: bool, baslik: str, tags: str
 ) -> list[str] | None:
@@ -911,6 +929,7 @@ def _yayin_komutu(
         "--caption-file", str(caption), "--title", baslik, "--tags", tags,
     ]
     soru, yorum = etkilesim_sec()
+    yorum = rota_ilk_yorumu(slug) or yorum
     if soru:
         komut += ["--caption-question", soru]
     if yorum:

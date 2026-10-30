@@ -46,6 +46,26 @@ B. **"Adin kaydirakta."** Her gunun herkese acik videosunda bir abonenin adi cam
    kare gozle kontrol. Atina testi okunmadan BASLAMAZ.
 C. Asagidaki Part 2 (7) abonenin KALMASI icin, cekmek icin degil.
 
+**30 Ekim Ihsan kararlari:**
+- A (ruya) BEKLER: 10-20 abone olunca acilir, insanlar sirayla istesin, deger kazansin.
+  Tek aboneye mesaj atilmadi (gerek kalmadi; zaten Chrome'daki hesap aimagine degil).
+- B ABONE DEGIL TAKIPCI icin: "Takip et, adini yorum yaz, sonraki kaydirakta senin adin."
+  Tek deneme, tutarsa devam.
+
+**B denemesi: 31 Ekim Paris (paris-eyfel-dolu), ad MIGUEL** (@miguelangel_blancog,
+Giza ve Roma'ya tekrar tekrar "Excelente video" yazan takipci).
+- Ad slide agzinin seffaf zeminine kazili, beyaz parlak. 4 gorsel denendi (~64 kredi):
+  yuruyus yoluna yazilinca bacak "G"yi kapatti ("MIUEL"); slide agzinda tek ve tam okunan
+  secildi -> `ilk_kare/paris-eyfel-dolu.jpg` (eski onayli gorsel git gecmisinde).
+- Rota OPENING STATE + [0-2] + [2-4] adi anar (Seedance silmesin). Kanon NEGATIVE
+  "NO on-screen text" diyor; ad sahnenin parcasi olarak yazildi. Risk: video adi
+  bozabilir, yayindan sonra ilk 2 sn gozle bakilacak.
+- Caption "You're" ile baslar (kural), tesekkur + cagri ikinci paragraf. Ilk yorum
+  `canon/ISIM_KAYDIRAK.json`'dan: "Comment your name 👇 The next slide could carry it."
+- Olcut (48 saat): ad yazan yorum sayisi. Son reel'lerde yorum 0-10 arasi. 15+ ad
+  yorumu = TUTTU, devam (her gun bir takipci adi). 5'ten az = birakilir.
+  Ek: takipci 29 Ekim 16,3K, gunluk artisa bak.
+
 **Ilk tur:**
 7. **"Kapinin obur tarafi" (Part 2).** Herkese acik video karanlikta biter;
    abone devamini gorur: kasirganin gozunun ici, kraterin ici, selin alti. Herkese
