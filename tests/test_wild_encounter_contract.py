@@ -145,7 +145,9 @@ def test_daily_lane_publishes_the_single_shot_format_automatically():
     # sonraki kosuda replenish onu "active"e geri cevirir (replenish.py:2226).
     # Testin yalniz "active" kabul etmesi, her son-bolum gununde yanlis
     # alarm uretiyordu. Insan karari olan "paused"/"draft" HALA reddedilir.
-    assert series["status"] in ("active", "completed"), series["status"]
+    # 30 Ekim 2026 Ihsan karari: kanal kisisel kanala donuyor, seri PAUSED.
+    # Yeniden acilirsa bu satir "active"/"completed" kabul edecek sekilde geri alinir.
+    assert series["status"] == "paused", series["status"]
     assert series["publish_mode"] == "auto"
     replenish_cfg = series["auto_replenish"]
     assert replenish_cfg["enabled"] is True
@@ -176,8 +178,10 @@ def test_published_episodes_are_recorded_so_the_lane_cannot_repeat_them():
     assert {5, 6} <= registry_parts
 
 
-def test_the_workflow_runs_this_slug_on_a_schedule():
+def test_the_workflow_runs_this_slug_by_hand_only():
+    """30 Ekim 2026: zamanlama kapatildi (kredi yakmasin), elle tetikleme durur."""
     text = WORKFLOW.read_text(encoding="utf-8")
     assert "--series wild-encounter" in text
-    assert "cron:" in text and "schedule:" in text
+    assert "workflow_dispatch:" in text
+    assert "\n  schedule:" not in text, "zamanlama yeniden acilmis"
     assert "sentinal_ihsan/wild-encounter/published.json" in text

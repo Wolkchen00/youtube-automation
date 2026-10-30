@@ -8,7 +8,6 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = ROOT / ".github" / "workflows"
 
 EXPECTED_SCHEDULES = {
-    "wild-encounter.yml": ["13 7 * * *"],
     "fear-slide.yml": ["13 11 * * *", "30 21 * * *"],
     "dark-fact.yml": ["43 11 * * *"],
     "galactic-daily.yml": ["17 12 * * *"],
@@ -75,3 +74,11 @@ def test_still_home_zamanlamasi_kapali():
     kanala yayin yapar; ikisinin birden zamanli olmasi gunde-1 kilidine dayanir."""
     triggers = _triggers(_load_workflow(WORKFLOWS / "still-home.yml"))
     assert "schedule" not in triggers
+
+
+def test_wild_encounter_zamanlamasi_kapali():
+    """30 Ekim 2026: sentinal kanali Ihsan'in Ingilizce kisisel kanalina donuyor,
+    hayvan seridi kredi yakmasin diye durduruldu. Elle tetikleme acik kalir."""
+    triggers = _triggers(_load_workflow(WORKFLOWS / "wild-encounter.yml"))
+    assert "schedule" not in triggers
+    assert "workflow_dispatch" in triggers

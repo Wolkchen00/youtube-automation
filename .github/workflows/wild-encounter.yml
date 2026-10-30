@@ -14,8 +14,10 @@ name: Wild Encounter Daily
 # Maliyet: bolum basi ~315-436 Kie kredisi (~$1,6-2,2), cuzdan diger kanallarla ortak.
 
 on:
-  schedule:
-    - cron: '13 7 * * *'   # Hedef yayin: 11:00 UTC / 04:00 California (PDT); olculen gecikme: 2.4-3.6 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
+  # 2026-10-30 Ihsan karari: kanal Ihsan'in Ingilizce KISISEL kanalina donuyor (yeni isim),
+  # hayvan seridi kredi yakmasin diye DURDURULDU. Elle tetikleme acik.
+  # schedule:
+  #   - cron: '13 7 * * *'   # Hedef yayin: 11:00 UTC / 04:00 California (PDT); olculen gecikme: 2.4-3.6 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
   workflow_dispatch:
 
 concurrency:
