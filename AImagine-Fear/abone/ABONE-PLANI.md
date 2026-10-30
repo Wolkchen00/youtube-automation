@@ -23,6 +23,17 @@ ve 1 aboneyle bu donmez.
 5. **Haftanin uzun yolculugu.** 30 sn iki parcali surum, yalniz abonelere.
    30 sn KURALI gecerli: korku basladiktan sonra ikinci parca aydinlik acilamaz.
 
+**Abone ozel VIDEO onerileri (29 Ekim, Ihsan "ilgi cekici bir sey lazim"):**
+7. **ONERILEN: "Kapinin obur tarafi" (Part 2).** Herkese acik video karanlikta biter;
+   abone devamini gorur: kasirganin gozunun ici, kraterin ici, selin alti. Herkese
+   acik videonun SON karesinden baslar, korku surer, aydinliga DONMEZ (30 sn kurali).
+   Her herkese acik video aboneligin reklami olur: caption'a tek satir
+   "Part 2 is for subscribers." Bu satir Atina testi (30 Ekim) okunana kadar EKLENMEZ,
+   iki degisken ayni anda degismesin. ~615 kredi, haftada 1.
+8. **Yasak rotalar.** Kimsenin gidemeyecegi yerler: Mariana Cukuru dibine cam tup,
+   Bermuda Seytan Ucgeni, Antarktika buzul yarigi, Buyuk Piramit'in kapali odasi,
+   kasirganin gozu. Herkese acik rota stogunu harcamaz. ~615 kredi.
+
 **Abone 20'yi gecince:**
 6. **Senin sehrin.** Ayda bir, bir abonenin istedigi yer, caption'da adiyla.
 
