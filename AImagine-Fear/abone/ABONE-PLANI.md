@@ -23,8 +23,31 @@ ve 1 aboneyle bu donmez.
 5. **Haftanin uzun yolculugu.** 30 sn iki parcali surum, yalniz abonelere.
    30 sn KURALI gecerli: korku basladiktan sonra ikinci parca aydinlik acilamaz.
 
-**Abone ozel VIDEO onerileri (29 Ekim, Ihsan "ilgi cekici bir sey lazim"):**
-7. **ONERILEN: "Kapinin obur tarafi" (Part 2).** Herkese acik video karanlikta biter;
+**Ikinci tur (29 Ekim, Ihsan "insanlari iceri cekmemiz lazim"):**
+
+Olculen: IG yorumlari, 8 reel, 159 yorum (giris yapmis tarayici, media/comments).
+En cok begenilen yorumlarin neredeyse hepsi RUYA: Taipei "The types of dream I'm
+having" 12.748 begeni, Arapca "ikindi uykusunda ruyalarim" 6.018, Burj "POV: How my
+dreams be like" 4.687; ayrica "I wish that was real" 2.371, "I hate that its ai cause it
+look so fun". "Hangi uygulama / prompt" soran yorum YOK: kitle yapay zeka ureticisi
+degil, genis ve cok dilli (Arapca, Portekizce, Tayca, Endonezce). Afet videolarinda
+yorum cok az (4-10). Abone teklifi teknik degil, duygusal olmali.
+
+Kural: abone icerigi disaridan gorunmezse kimseyi iceri cekmez. Her teklifin herkese
+acik akista bir PENCERESI olmali.
+
+A. **ONERILEN: "Ruyani gonder, kaydiralim."** Abone tek cumleyle ruyasini yazar
+   ("Istanbul'un ustunde pamuk sekeri bulutlarin icinden kayiyorum"). Haftada biri
+   secilir, video olur. Herkese acik caption: "This was a subscriber's dream. Send me
+   yours." Pencere: herkese acik video. ~615 kredi/hafta.
+B. **"Adin kaydirakta."** Her gunun herkese acik videosunda bir abonenin adi cam
+   yolda ya da gokyuzunde yazar; caption'da tesekkur. Ek uretim YOK, ilk kareye yazilir.
+   Ayni zamanda her gun farkli ilk kare (tekrar algisina karsi). Yazi bozulabilir, ilk
+   kare gozle kontrol. Atina testi okunmadan BASLAMAZ.
+C. Asagidaki Part 2 (7) abonenin KALMASI icin, cekmek icin degil.
+
+**Ilk tur:**
+7. **"Kapinin obur tarafi" (Part 2).** Herkese acik video karanlikta biter;
    abone devamini gorur: kasirganin gozunun ici, kraterin ici, selin alti. Herkese
    acik videonun SON karesinden baslar, korku surer, aydinliga DONMEZ (30 sn kurali).
    Her herkese acik video aboneligin reklami olur: caption'a tek satir
