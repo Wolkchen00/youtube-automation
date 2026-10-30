@@ -143,3 +143,38 @@ def test_takvim_gunu_rotanin_kendi_ilk_yorumunu_kullanir(tmp_path, monkeypatch) 
     assert gunluk.main([]) == 0
     komut = cagrilar[0]
     assert komut[komut.index("--first-comment") + 1] == "Comment your name"
+
+
+def _yarim_yayin_defteri(kok: Path) -> None:
+    """Bugun YouTube dusmus, Instagram yuklenmis bir satir (dogrulanmis SAYILMAZ)."""
+    satir = {"ts": _bugun() + " 08:00 PDT", "sha": "abc", "kullanildi": False, "results": {
+        "youtube": {"success": False, "error": "kota"},
+        "instagram": {"status": "completed", "results": [{"platform": "instagram", "success": True}]},
+    }}
+    (kok / "yayin.jsonl").write_text(json.dumps(satir) + "\n", encoding="utf-8")
+
+
+def test_telafi_bir_platforma_gitmis_takvim_gununu_tekrarlamaz(tmp_path, monkeypatch, capsys) -> None:
+    kok = _takvimli_kok(tmp_path, _bugun())
+    _yarim_yayin_defteri(kok)
+    monkeypatch.setattr(gunluk, "KOK", kok)
+    monkeypatch.setattr(gunluk, "DEFTER", kok / "yayin.jsonl")
+    assert gunluk.main(["--telafi-kapisi"]) == 0
+    assert "calis=false" in capsys.readouterr().out
+
+
+def test_takvim_gunu_bir_platforma_gitmisse_ikinci_kez_yayinlamaz(tmp_path, monkeypatch) -> None:
+    kok = _takvimli_kok(tmp_path, _bugun())
+    _yarim_yayin_defteri(kok)
+    monkeypatch.setattr(gunluk, "KOK", kok)
+    monkeypatch.setattr(gunluk, "DEFTER", kok / "yayin.jsonl")
+    monkeypatch.setattr(gunluk, "kosa", lambda cmd, cwd: pytest.fail("ikinci yayin denenmemeli"))
+    assert gunluk.main([]) == 0
+
+
+def test_gercek_defterde_bugun_platform_tespiti() -> None:
+    """Canli defterin her satiri en az bir platformda basarili okunmali; okunamazsa
+    yeni kapi gercek yayini goremiyor demektir."""
+    satirlar = [json.loads(s) for s in (PROJE_KOKU / "yayin.jsonl").read_text(encoding="utf-8").splitlines() if s.strip()]
+    son = satirlar[-1]
+    assert gunluk.bugun_platforma_gitti(satirlar, str(son["ts"])[:10])

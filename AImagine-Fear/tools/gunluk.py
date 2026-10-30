@@ -708,6 +708,30 @@ def telafi_karari(gecmis: list[dict], bugun: str) -> tuple[bool, str]:
     return True, "bugun kredi yuzunden duruldu (%s), yayin yok" % damga.get("sebep", "?")
 
 
+def bugun_platforma_gitti(gecmis: list[dict], bugun: str) -> bool:
+    """Bugun HERHANGI bir platform yuklemeyi basarili dondurdu mu?
+
+    bugunku_basarili yalniz YouTube kimligine bakar. YouTube duser ama Instagram ya
+    da TikTok yuklenirse, takvim gununun telafisi ayni videoyu ikinci kez atardi.
+    2026-10-30 Ihsan: "yarin 2 video paylasilmayacagindan emin ol".
+    """
+    def _basari(dugum, derinlik: int = 0) -> bool:
+        if derinlik > 6:
+            return False
+        if isinstance(dugum, dict):
+            return dugum.get("success") is True or any(
+                _basari(deger, derinlik + 1) for deger in dugum.values())
+        if isinstance(dugum, list):
+            return any(_basari(deger, derinlik + 1) for deger in dugum)
+        return False
+
+    return any(
+        isinstance(kayit, dict) and str(kayit.get("ts", "")).startswith(bugun)
+        and _basari(kayit.get("results"))
+        for kayit in gecmis
+    )
+
+
 # ----------------------------------------------------------------------
 # TAKVIM: hazir video gunleri
 #
@@ -749,7 +773,7 @@ def takvim_yayinla(kayit: dict, gecmis: list[dict], bugun: str, allow_same_day: 
     if not baslik:
         log("DUR: takvim kaydinda baslik yok")
         return 1
-    if bugunku_basarili(gecmis, bugun) and not allow_same_day:
+    if (bugunku_basarili(gecmis, bugun) or bugun_platforma_gitti(gecmis, bugun)) and not allow_same_day:
         log("DUR: bugun zaten yayin var. --allow-same-day ile zorlanabilir.")
         return 0
     komut = [
@@ -1074,7 +1098,8 @@ def main(argv: list[str] | None = None) -> int:
         gecmis = defter()
         calis, gerekce = telafi_karari(gecmis, bugun)
         # Takvim gunu sabah yayini dusmusse telafi yeniden dener; kredi harcamaz.
-        if not calis and takvim_kaydi(bugun) and not bugunku_basarili(gecmis, bugun):
+        if (not calis and takvim_kaydi(bugun) and not bugunku_basarili(gecmis, bugun)
+                and not bugun_platforma_gitti(gecmis, bugun)):
             calis, gerekce = True, "bugun takvim gunu ve yayin yok, hazir video yeniden denenecek"
         print("telafi: %s" % gerekce, file=sys.stderr)
         print("calis=%s" % ("true" if calis else "false"))
