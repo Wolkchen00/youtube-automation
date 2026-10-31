@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 8,
+  "next_part": 9,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -347,6 +347,27 @@
         "narration_delivered": null,
         "arc_roles_missing": [],
         "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "8": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep08/ep08_music_titled_mastered.mp4",
+      "subtitle": "Cologne Cathedral Took 632 Years To Finish",
+      "stack_sha256": "870efa5ca5a5bef1492a6ca1f8797afa7e82f9df6f005ec0c339a4b8b3126d40",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-31T16:46:23.616727+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 9.9,
         "duration_in_band": true,
         "degraded": false
       }
