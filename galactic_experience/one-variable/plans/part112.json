@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 112,
+    "title": "A Whirlpool Open Across the Strait of Messina"
+  },
+  "synopsis": "A massive open whirlpool seals the Strait of Messina between Sicily and the Italian mainland.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh-aerial perspective looking down at the narrow turquoise waters of the Strait of Messina separating Sicily from mainland Italy. A giant spinning whirlpool four hundred meters deep stretches across the entire channel between the two shorelines. A concrete ferry pier and harbour wall stay stationary on the Messina coast as a clear human scale reference. From zero to one second, the swirling funnel drains the channel water down to dark exposed sea floor. From one to three seconds, spiraling white ocean foam accelerates down the funnel walls into the central vortex. From three to five seconds, powerful currents pull surrounding coastal sea water inward with visible ripples. From six to eight seconds, violent white water surges outward from the vortex base, churning up dark seabed sediment across the harbour entrance. The camera remains rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full eight seconds. Continuous roaring water audio holds a steady loud level from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you dare sail anywhere near the edge of this vortex? 🌀",
+  "family": "su afeti",
+  "seed_id": 2,
+  "caption": "A massive whirlpool opens in the Strait of Messina between Sicily and mainland Italy.\n\nThe spinning vortex drains seawater to a depth of 400 meters across the entire narrow channel.\n\nReal tidal whirlpools like Saltstraumen formed during the 1995 oceanographic survey reach speeds of 40 kilometers per hour, but span only tens of meters.\n\nMaintaining a continuous open vortex of this size requires steady bedrock drainage that ocean floor friction suppresses within minutes.\n\nThis is a simulation, not real footage. Could a cargo vessel navigate around the outer edge of this vortex?",
+  "hashtags": "#StraitOfMessina #Sicily #Italy #Whirlpool #Oceanography #Hydrodynamics #Simulation #PlanetScale",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

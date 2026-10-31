@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 110,
+    "title": "A Hurricane Covering the Whole Gulf of Mexico"
+  },
+  "synopsis": "A hyper-cyclone spans from coast to coast across the entire Gulf of Mexico.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh orbital perspective over the Gulf of Mexico framing the entire blue sea basin anchored by the green Florida peninsula and the Yucatan peninsula on opposite sides. A hyper-cyclone cloud wall spans fifteen hundred kilometers across the ocean surface, spinning counter-clockwise around a wide open eye. A oil drilling platform stays visible near the northern bay edge as a tiny human-made scale reference. From zero to one second, the cloud spiral fills the entire marine horizon. From one to three seconds, dense white rainbands sweep over the coastal shallows, turning turquoise waters into churning gray foam. From three to five seconds, violent thunderhead towers bulge upward along the eyewall. From six to eight seconds, the outer cloud arm collides with the Florida coastline, casting dark shadows over the landmass. The camera remains rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full eight seconds. Continuous deep howling wind and ocean roar audio holds one steady full level from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could any coastal city survive a hurricane of this scale? 🌀",
+  "family": "atmosfer afeti",
+  "seed_id": 7,
+  "caption": "A hyper-cyclone engulfs the entire Gulf of Mexico from the Yucatan Channel to the Florida Keys.\n\nThe cloud system spans 1,500 kilometers in diameter, filling the basin from shore to shore.\n\nTyphoon Tip in 1979 set the real record at 2,220 kilometers wide, but atmospheric drag limits intense wind walls to compact cores.\n\nSustaining hurricane force winds across this entire surface would require warm sea water down to a depth of three kilometers.\n\nThis is a simulation, not real footage. How long would coastal weather take to recover after a storm this size?",
+  "hashtags": "#GulfOfMexico #Florida #Hurricane #ExtremeWeather #Meteorology #Simulation #PlanetScale #SatelliteView",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

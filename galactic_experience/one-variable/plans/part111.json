@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 111,
+    "title": "An Eruption Column Over the Whole Yellowstone Caldera"
+  },
+  "synopsis": "A supervolcanic eruption column soars seventy kilometers above the Yellowstone plateau.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh-aerial satellite view centered over the dark green forests and volcanic plateaus of Yellowstone National Park in Wyoming. A supervolcanic eruption plume seventy kilometers wide towers directly out of the central caldera basin. A concrete dam and spillway along the park reservoir remains anchored in the lower left corner as a human scale reference. From zero to one second, the dark gray ash column stands fully formed against the blue upper atmosphere. From one to three seconds, glowing pyroclastic material spreads laterally across the cloud top like an expanding umbrella. From three to five seconds, dense grey ash falls onto the surrounding pine forest canopy. From six to eight seconds, a massive shockwave ring expands outward through the cloud layer, bending the plume edges in a dramatic radial wave. The camera remains rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full eight seconds. Single impact explosive audio thins to quiet atmosphere through seconds three to five and surges to a loud deep roar during seconds six to eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Where would you head first if Yellowstone erupted like this? 🌋",
+  "family": "ates afeti",
+  "seed_id": 21,
+  "caption": "A supervolcanic eruption column towers above the Yellowstone caldera in Wyoming.\n\nAsh and glowing gas erupt to a height of 70 kilometers, filling the entire high-altitude sky.\n\nThe real Mount Pinatubo eruption in 1991 produced an ash plume reaching 35 kilometers into the stratosphere.\n\nLaunch of millions of tons of magma into the mesosphere requires internal reservoir pressures that would breach the continental plate instantly.\n\nThis is a simulation, not real footage. Which continent would receive the heaviest ash fall from an eruption this tall?",
+  "hashtags": "#Yellowstone #Wyoming #Volcano #Eruption #Geology #Supervolcano #Simulation #PlanetScale",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

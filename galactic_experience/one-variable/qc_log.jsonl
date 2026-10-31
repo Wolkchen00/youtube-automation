@@ -413,3 +413,13 @@
 {"ts": "2026-10-29T18:39:07Z", "event": "qc_api_result", "attempt_id": "ce479280febb4177bb7fe2ef7fc602e0", "outcome": "ok"}
 {"ts": "2026-10-29T18:39:07Z", "event": "review", "episode": 107, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Disaster is not visible or at maximum strength in the initial frame."], "fix_notes": ["Ensure the avalanche is already active and visible from the first frame."], "clip": "shot_01.mp4"}
 {"ts": "2026-10-29T18:39:07Z", "event": "qc_pass", "episode": 107, "shot": 1, "attempt": 0, "content_sha256": "80c75d5a1182593e4de42dd872d9ca8d59e990973e0cc88605035004ad3af515", "clip": "shot_01.mp4"}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_attempt", "attempt_id": "be74b33ab1b8419689f419847a955061", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 108, "shot": 1}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_result", "attempt_id": "be74b33ab1b8419689f419847a955061", "outcome": "429"}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_attempt", "attempt_id": "5a5819a36c5044158c3a938a8a7b7e05", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 108, "shot": 1}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_result", "attempt_id": "5a5819a36c5044158c3a938a8a7b7e05", "outcome": "429"}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_attempt", "attempt_id": "471f6d3ff1cf47f4a2631cbc49992fee", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 108, "shot": 1}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_result", "attempt_id": "471f6d3ff1cf47f4a2631cbc49992fee", "outcome": "429"}
+{"ts": "2026-10-31T17:19:49Z", "event": "qc_api_attempt", "attempt_id": "334534000f8e4536885dd667fcfc74a8", "task_type": "native_audio_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 108, "shot": 1}
+{"ts": "2026-10-31T17:19:50Z", "event": "qc_api_result", "attempt_id": "334534000f8e4536885dd667fcfc74a8", "outcome": "429"}
+{"ts": "2026-10-31T17:19:50Z", "event": "native_audio_review", "episode": 108, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
+{"ts": "2026-10-31T17:19:50Z", "event": "qc_hold", "episode": 108, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}

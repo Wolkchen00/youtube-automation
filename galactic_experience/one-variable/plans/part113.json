@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 113,
+    "title": "A Meteor Strike Over the Siberian Taiga"
+  },
+  "synopsis": "A gigantic meteor illuminates the atmospheric sky above the Siberian Tunguska basin.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh-aerial orbital view over the vast green taiga forest and winding rivers of the Tunguska region in Siberia. A brilliant glowing meteor trail three hundred kilometers long cuts diagonally through the upper atmosphere. A steel weather monitoring tower remains anchored on a forested ridge as a distinct scale reference. From zero to one second, the intense white fireball illuminates the entire landscape below with sharp shadows. From one to three seconds, a thick trail of glowing ionized gas and smoke expands along the flight path. From three to five seconds, the ground shadow of the fireball sweeps across the river bends. From six to eight seconds, a blinding flash erupts at the trail head, sending a white thermal pulse across fifty kilometers of forest canopy. The camera remains rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full eight seconds. Single impact audio thins to quiet atmosphere through seconds three to five and surges to a massive explosive roar during seconds six to eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Did you spot the weather tower on the ridge before the flash? ☄️",
+  "family": "gok afeti",
+  "seed_id": 26,
+  "caption": "A massive meteor enters the upper atmosphere above the Siberian taiga near the Tunguska basin.\n\nThe glowing firetrail extends across 300 kilometers of sky while illuminating thousands of square kilometers of forest below.\n\nThe real 1908 Tunguska airburst flattened 2,150 square kilometers of forest without creating a major crater on the ground.\n\nA meteor this immense would fragment into smaller pieces under atmospheric friction long before maintaining a continuous luminescent line across the horizon.\n\nThis is a simulation, not real footage. Do you think the sonic shockwave would reach the arctic ocean?",
+  "hashtags": "#Tunguska #Siberia #Meteor #SpaceScience #Astronomy #Impact #Simulation #PlanetScale",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

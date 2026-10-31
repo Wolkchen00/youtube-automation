@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 109,
+    "title": "A Rift Widening Across All of Thingvellir"
+  },
+  "synopsis": "The Thingvellir rift in Iceland violently opens into a wide canyon across the tectonic valley.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh-aerial orbital view looking directly down onto the green mossy basalt plains and blue waters of Lake Thingvallavatn in Iceland. The ancient Thingvellir fault line opens instantly as a vast gaping chasm twelve kilometers wide across the lava fields. A two-lane paved highway bridge remains visible on the northern rim as a small scale reference. From zero to one second, the dark rift stands completely open across the terrain. From one to three seconds, huge basalt boulders and dark soil tumble into the expanding abyss as dust clouds puff outward. From three to five seconds, deep blue lake water surges into the southern canyon gap with violent white foam. From six to eight seconds, the water meets the falling rock wall, creating a massive rising spray cloud as the rift continues to widen. The camera remains rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full eight seconds. Continuous low rumble audio of grinding basalt rocks and roaring water maintains one steady full volume level from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How deep do you think this rift goes before hitting magma? 🌋",
+  "family": "yer afeti",
+  "seed_id": 16,
+  "caption": "A colossal rift opens along the Thingvellir Valley in southwestern Iceland.\n\nThe canyon expands to a width of 12 kilometers in seconds, fracturing the volcanic landscape.\n\nReal tectonic drift along the Mid-Atlantic Ridge moves at just 2.5 centimeters per year, as measured during the 1789 eruption rift collapse.\n\nMoving basaltic crust thousands of times faster requires volcanic energy that would melt the entire island crust.\n\nThis is a simulation, not real footage. Would a rift this wide drain the surrounding lakes completely?",
+  "hashtags": "#Thingvellir #Iceland #Geology #EarthScience #RiftValley #Simulation #PlanetScale #Disaster",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

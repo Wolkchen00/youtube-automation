@@ -15,7 +15,7 @@
   "performance_feedback": true,
   "status": "active",
   "priority": 10,
-  "total_parts": 108,
+  "total_parts": 113,
   "next_part": 108,
   "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce",
   "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off sonrasi konsept DARALDI. Artik 'tek degisken deneyi' degil, GERCEK bir dogal afet turu IMKANSIZ olcekte. Slug KORUNDU (published.json, last_run.json, filo.json bu slug'a bagli). Doktrin: one-variable/KONSEPT-A.md v2.0. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi TEK olan gunlerde bu serit uretilir, CIFT gunlerde flythrough. one-variable.yml cron'u KAPALI KALIR, yalniz elle tetiklenir; iki hattin ayni gun calismasi cift yayin demektir.",
@@ -180,8 +180,8 @@
       }
     ],
     "last_run": {
-      "at": "2026-10-09T18:32:27.982629+00:00",
-      "parts": "104-108"
+      "at": "2026-10-31T17:17:42.499666+00:00",
+      "parts": "109-113"
     }
   },
   "doctrine": "galactic_experience/one-variable/KONSEPT-A.md",
@@ -497,6 +497,14 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "108": {
+      "status": "qc_retry",
+      "first_held_at": "2026-10-31T17:19:50.686815+00:00",
+      "first_infra_held_at": "2026-10-31T17:19:50.686815+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota"
     }
   },
   "engagement": {
