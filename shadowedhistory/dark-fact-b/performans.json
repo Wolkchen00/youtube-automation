@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-10-31T16:18:38.566405+00:00",
+  "guncellendi": "2026-11-01T17:17:34.966837+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 280,
@@ -3088,6 +3088,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-01T17:17:34.966837+00:00",
+          "yas_saat": 71.077,
+          "youtube": {
+            "views": 281,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 20,
+            "average_view_duration_seconds": 11,
+            "average_view_percentage": 108.15,
+            "engaged_views": 92,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 7,
+            "comments": 1,
+            "views": 1634,
+            "impressions": 1634,
+            "reach": 1109,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 7,
+            "comments_insight": 1,
+            "total_interactions": 9,
+            "ig_reels_avg_watch_time": 9190,
+            "ig_reels_video_view_total_time": 10210545
+          },
+          "tiktok": {
+            "views": 1068,
+            "likes": 17,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3248,7 +3284,68 @@
       },
       "puan": 8.124378,
       "etiket": "kazanan"
+    },
+    {
+      "part": 8,
+      "post_ids": {
+        "youtube": "QbFq_87ZidA",
+        "instagram": "18132671234501936",
+        "tiktok": "7702873956876864781"
+      },
+      "request_ids": {
+        "youtube": "af6171e6a3b242d7a8de88446b309024",
+        "instagram": "91fe92b447e84ed7a3b5defdbb69b2fe",
+        "tiktok": "c7ed87f85d1745ee8ed497a26901cc3e"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-01T17:17:34.966837+00:00",
+          "yas_saat": 24.52,
+          "youtube": {
+            "views": 8,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 8,
+            "comments": 1,
+            "views": 824,
+            "impressions": 824,
+            "reach": 607,
+            "saves": 4,
+            "shares": 0,
+            "likes_insight": 8,
+            "comments_insight": 1,
+            "total_interactions": 13,
+            "ig_reels_avg_watch_time": 7257,
+            "ig_reels_video_view_total_time": 4383773
+          },
+          "tiktok": {
+            "views": 1030,
+            "likes": 29,
+            "comments": 2,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-10-31T16:46:23.616140+00:00",
+      "subtitle": "Cologne Cathedral Took 632 Years To Finish",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
