@@ -468,3 +468,14 @@
 {"ts": "2026-10-30T18:10:54Z", "event": "qc_api_result", "attempt_id": "c116d94ff9364d4091f695ea3c42df05", "outcome": "ok"}
 {"ts": "2026-10-30T18:10:54Z", "event": "review", "episode": 12, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-10-30T18:10:54Z", "event": "qc_pass", "episode": 12, "shot": 1, "attempt": 0, "content_sha256": "8233f1f0de78909e66a96bcd8f2e9d9b482c9fb84c3c40ee4a9f273781376229", "clip": "shot_01.mp4"}
+{"ts": "2026-11-01T18:00:53Z", "event": "qc_api_attempt", "attempt_id": "579ba95e348f472b8b467d63fc47e45e", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-01T18:04:14Z", "event": "qc_api_result", "attempt_id": "579ba95e348f472b8b467d63fc47e45e", "outcome": "ok"}
+{"ts": "2026-11-01T18:04:14Z", "event": "native_audio_review", "episode": 13, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Low-frequency atmospheric rumble and wind noise with faint mechanical sounds, without any speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-01T18:04:15Z", "event": "qc_api_attempt", "attempt_id": "f996a163ca934989bfbeb34f6202765d", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-01T18:04:20Z", "event": "qc_api_result", "attempt_id": "f996a163ca934989bfbeb34f6202765d", "outcome": "error"}
+{"ts": "2026-11-01T18:04:25Z", "event": "qc_api_attempt", "attempt_id": "f2224a7d5dfe477cb141208a8223989b", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-01T18:04:31Z", "event": "qc_api_result", "attempt_id": "f2224a7d5dfe477cb141208a8223989b", "outcome": "error"}
+{"ts": "2026-11-01T18:04:41Z", "event": "qc_api_attempt", "attempt_id": "736e432b5c274839a3f518ea7e666fb0", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-01T18:05:48Z", "event": "qc_api_result", "attempt_id": "736e432b5c274839a3f518ea7e666fb0", "outcome": "ok"}
+{"ts": "2026-11-01T18:05:48Z", "event": "review", "episode": 13, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-11-01T18:05:48Z", "event": "qc_pass", "episode": 13, "shot": 1, "attempt": 0, "content_sha256": "c77cb05fabf799ff83d3aa60ea4e3677cecfb58cf7a8d3e9f934ccff40928556", "clip": "shot_01.mp4"}

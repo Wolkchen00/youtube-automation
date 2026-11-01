@@ -1,11 +1,11 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-10-31T17:15:54.305834+00:00",
+  "guncellendi": "2026-11-01T17:56:36.640852+00:00",
   "medyanlar": {
     "s48": {
-      "youtube": 319.0,
-      "instagram": 473.0,
-      "tiktok": 393.0
+      "youtube": 57,
+      "instagram": 208,
+      "tiktok": 326
     },
     "oturmus": {
       "youtube": 565.5,
@@ -3519,7 +3519,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-24T16:12:15.881558+00:00",
       "subtitle": "Through the Coma of Comet 67P",
@@ -3836,19 +3836,203 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-11-01T17:56:36.640852+00:00",
+          "yas_saat": 47.722,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 51,
+            "impressions": 51,
+            "reach": 43,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 4831,
+            "ig_reels_video_view_total_time": 212603
+          },
+          "tiktok": {
+            "views": 267,
+            "likes": 1,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-30T18:13:19.044784+00:00",
       "subtitle": "Descending into the Clouds of Venus",
-      "anlik": {},
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-11-01T17:56:36.640852+00:00",
+            "yas_saat": 47.722,
+            "youtube": {
+              "views": 0,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 1,
+              "comments": 1,
+              "views": 51,
+              "impressions": 51,
+              "reach": 43,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 1,
+              "comments_insight": 1,
+              "total_interactions": 2,
+              "ig_reels_avg_watch_time": 4831,
+              "ig_reels_video_view_total_time": 212603
+            },
+            "tiktok": {
+              "views": 267,
+              "likes": 1,
+              "comments": 0,
+              "shares": 1
+            }
+          },
+          "instagram": {
+            "ts": "2026-11-01T17:56:36.640852+00:00",
+            "yas_saat": 47.722,
+            "youtube": {
+              "views": 0,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 1,
+              "comments": 1,
+              "views": 51,
+              "impressions": 51,
+              "reach": 43,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 1,
+              "comments_insight": 1,
+              "total_interactions": 2,
+              "ig_reels_avg_watch_time": 4831,
+              "ig_reels_video_view_total_time": 212603
+            },
+            "tiktok": {
+              "views": 267,
+              "likes": 1,
+              "comments": 0,
+              "shares": 1
+            }
+          },
+          "tiktok": {
+            "ts": "2026-11-01T17:56:36.640852+00:00",
+            "yas_saat": 47.722,
+            "youtube": {
+              "views": 0,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0,
+              "watch_time_minutes": 0,
+              "average_view_duration_seconds": 0,
+              "average_view_percentage": 0.0,
+              "engaged_views": 0,
+              "subscribers_gained": 0,
+              "shares": 0
+            },
+            "instagram": {
+              "likes": 1,
+              "comments": 1,
+              "views": 51,
+              "impressions": 51,
+              "reach": 43,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 1,
+              "comments_insight": 1,
+              "total_interactions": 2,
+              "ig_reels_avg_watch_time": 4831,
+              "ig_reels_video_view_total_time": 212603
+            },
+            "tiktok": {
+              "views": 267,
+              "likes": 1,
+              "comments": 0,
+              "shares": 1
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 0.0,
+        "instagram": 0.245192,
+        "tiktok": 0.819018
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 0,
+          "likes": 0,
+          "comments": 1,
+          "favorites": 0,
+          "watch_time_minutes": 0,
+          "average_view_duration_seconds": 0,
+          "average_view_percentage": 0.0,
+          "engaged_views": 0,
+          "subscribers_gained": 0,
+          "shares": 0
+        },
+        "instagram": {
+          "likes": 1,
+          "comments": 1,
+          "views": 51,
+          "impressions": 51,
+          "reach": 43,
+          "saves": 0,
+          "shares": 0,
+          "likes_insight": 1,
+          "comments_insight": 1,
+          "total_interactions": 2,
+          "ig_reels_avg_watch_time": 4831,
+          "ig_reels_video_view_total_time": 212603
+        },
+        "tiktok": {
+          "views": 267,
+          "likes": 1,
+          "comments": 0,
+          "shares": 1
+        }
+      },
+      "puan": 0.819018,
+      "etiket": "orta"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 3
 }
