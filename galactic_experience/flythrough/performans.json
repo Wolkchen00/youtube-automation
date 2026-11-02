@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-11-01T17:56:36.640852+00:00",
+  "guncellendi": "2026-11-02T21:43:51.244999+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 57,
@@ -3872,6 +3872,42 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-11-02T21:43:51.244999+00:00",
+          "yas_saat": 75.509,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 53,
+            "impressions": 53,
+            "reach": 44,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 4722,
+            "ig_reels_video_view_total_time": 217214
+          },
+          "tiktok": {
+            "views": 277,
+            "likes": 1,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -4032,7 +4068,68 @@
       },
       "puan": 0.819018,
       "etiket": "orta"
+    },
+    {
+      "part": 13,
+      "post_ids": {
+        "youtube": "GKnmYDv047k",
+        "instagram": "17938978620126500",
+        "tiktok": "7703267173589994766"
+      },
+      "request_ids": {
+        "youtube": "d020e6282bea46108a8390d288b8a5b9",
+        "instagram": "13d7ce5e652440e68bfd726a72392c37",
+        "tiktok": "0f48cea80f254b958fa52c8cf2ab4274"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-02T21:43:51.244999+00:00",
+          "yas_saat": 27.527,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 155,
+            "impressions": 155,
+            "reach": 117,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 5,
+            "ig_reels_avg_watch_time": 5284,
+            "ig_reels_video_view_total_time": 634150
+          },
+          "tiktok": {
+            "views": 323,
+            "likes": 7,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-01T18:12:13.278758+00:00",
+      "subtitle": "Through the Pillars of Creation",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 3
+  "api_cagrilari": 9
 }
