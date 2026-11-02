@@ -536,10 +536,10 @@ acilisti: gece, kanat gibi parlayan kaydirak agzi, cok asagida sehir isiklari.
 Ihsan karari (2 Kasim, uc ornek gorsel gosterildi: one dev dalga, gece, catlayan cam):
 **"felaket ve geceyle devam"**. Kalan 10 rota iki kancayla sirayla:
 gece = goldengate, tokyo, rio, lasvegas, neuschwanstein;
-tehlike (felaket ilk karede ufukta) = everest, agra, venedik, chichenitza, bigben.
+tehlike (felaket ilk karede ufukta) = dubai, everest, agra, venedik, chichenitza, bigben.
 Yuruyus (9 Ekim) ve bulut kapisi korundu; degisen yalniz hava, ilk kare ve 2-4 sn.
 10 yeni ilk kare gozle onayli (Everest ve Venedik ikinci uretim, ilkinde felaket
-gorunmuyordu). 2 Kasim Dubai eski kalipla cikti (degistirmeye vakit yoktu).
+gorunmuyordu). Dubai (2 Kasim) sabah kosusundan once tehlikeye cevrildi, ilk deneme o.
 
 Olcut: taban 3-4K. Bir kanca 3 denemede 15K'yi gecerse kalan stok o kancaya cevrilir.
 Ikisi de tabanda kalirsa sorun acilis degil format yorgunlugu; yeni konsept gerekir.

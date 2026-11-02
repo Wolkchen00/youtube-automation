@@ -1335,23 +1335,28 @@ ROTALAR: dict[str, dict] = {
     "dubai-burj-yildirim": dict(
         sehir="Dubai", landmark="the Burj Khalifa", neon="electric chartreuse",
         palet="sicak", anahtar="Burj Khalifa", isik="mor-tabela",
-        hava="a hazy golden desert evening, the air hot and still",
+        kanca="tehlike",
+        hava=(
+            "a hot, hazy desert evening, still where she walks, with a black storm already "
+            "towering over the desert beyond the city"
+        ),
         felaket="a desert lightning supercell with violet lightning, hail and a wall of dust",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: the Burj Khalifa in "
-            "Dubai seen from the FRONT on a hazy golden desert evening, the tallest tower on "
-            "Earth rising in stepped silver tiers to a needle-thin spire, its glass catching "
-            "the low sun. The glittering towers of downtown Dubai cluster around its foot, "
-            "the pale desert stretches away to the horizon on one side and the calm blue "
-            "Gulf lies on the other. A thick white cloud bank lies across the city below the "
+            "Dubai seen from the FRONT, the tallest tower on Earth rising in stepped silver "
+            "tiers to a needle-thin spire, the glittering towers of downtown Dubai clustered "
+            "around its foot. Directly behind it a colossal black desert supercell towers over "
+            "the whole horizon, far taller than the Burj Khalifa, violet lightning forking down"
+            " out of its base onto the desert, and under it a brown wall of dust is already "
+            "rolling toward the city. A thick white cloud bank lies across the city below the "
             "slide, and the slide dives down toward it."
         ),
         acilis=(
             "The Burj Khalifa fills the centre of the frame, its silver glass tiers stepping "
-            "inward toward the spire, gold light sliding over the panels. The slide drops "
-            "past the very top of the spire close enough to see the steel ribs, the red "
-            "warning lights and the glass panels rush up and past on the left, the tops of "
-            "the other skyscrapers tiny far below."
+            "inward toward the spire, pale against the black storm behind it, violet flashes "
+            "flickering in its glass. The slide drops past the very top of the spire close "
+            "enough to see the steel ribs, the red warning lights and the glass panels rush up "
+            "and past on the left, the tops of the other skyscrapers tiny far below."
         ),
         kapi_ici=(
             "The air turns hot and electric, the murk inside the cloud flickers violet from "
