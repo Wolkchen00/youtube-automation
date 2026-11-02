@@ -19,6 +19,10 @@ Uc fark eski kanondan:
    izleyiciyi "nereye yuruyor" merakiyla 1-2 sn tutuyordu; dogrudan kayarak acilan
    KAPI videolarinda Instagram'da baslangic izlenmesi dustu. Yuruyus DURAGAN degil:
    ilk kareden hareket var (ref-DdvYhkUEbxn dersi: ilk saniyede hareket), duraklama yok.
+5. (2026-11-02 Ihsan) Bulutun ustu artik hep "sakin, parlak, guzel" DEGIL: kanca gece
+   (gece, parlayan kaydirak agzi, sehir isiklari) ya da tehlike (felaket ufukta, ilk
+   karede gorunur). Havanin tarifi tamamen rotanin WEATHER alaninda. Bkz.
+   tools/kapi_ekle.py basi.
 
 Bolum sirasi uretimde sabittir:
 FORMAT, INDEPENDENCE NOTE, CAMERA, RIDER, SLIDE, MOTION AND GRAVITY, WORLD, AUDIO,
@@ -86,7 +90,7 @@ THE CLOUD GATE RULE: the cloud bank the slide dives into separates two worlds. A
 
 <<CITY>>, real, recognisable and photorealistic, seen from high above and in front of <<LANDMARK>>. In every clear section of the ride <<LANDMARK>> stands beyond the rider's feet, near the centre of the frame, so the viewer always knows exactly where they are. It stays recognisable even inside the disaster.
 
-Above the cloud the weather is <<WEATHER>>: calm, bright and beautiful. Below the cloud the same place is caught in <<FELAKET>>. The disaster world is darker, harder and more contrasted than the opening world: dark sky, dark debris and one bright hazard, so every threat reads clearly against its background. Real atmospheric depth and honest scale.
+Above the cloud the weather is <<WEATHER>>. Below the cloud the same place is caught in <<FELAKET>>. The disaster world is darker, harder and more contrasted than the opening world: dark sky, dark debris and one bright hazard, so every threat reads clearly against its background. Real atmospheric depth and honest scale.
 
 ## AUDIO
 

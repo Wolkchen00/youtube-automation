@@ -10,23 +10,23 @@ PALET: neon
 TITLE_KEYWORD: Tokyo Tower
 SEHIR_ISIGI: kirmizi-tabela
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
-WEATHER: a clear blue late-summer afternoon over the bay
+WEATHER: a clear warm late-summer night over the bay, the city lights blazing to the horizon
 FELAKET: a super typhoon with a towering wall of wind-driven rain
-SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, yuruyus acilisi (2026-10-09)
+SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, yuruyus acilisi (2026-10-09); kanca gece (2026-11-02)
 
 ## ILK KARE
 
-Far below and ahead, filling the upper half of the frame: Tokyo Tower seen from the FRONT on a clear blue late-summer afternoon, its orange-red and white steel lattice rising from a green park, the curved grey temple roofs of Zojo-ji at its foot. The endless grey and white city of Tokyo spreads to the horizon around it, and the blue water of Tokyo Bay lies beyond, crossed by a long white suspension bridge. A thick white cloud bank lies across the city below the slide, and the slide dives down toward it.
+Far below and ahead, filling the upper half of the frame: Tokyo Tower seen from the FRONT at night, its orange-red and white steel lattice lit up in glowing orange from top to bottom, rising from a dark park beside the curved temple roofs of Zojo-ji. The endless lights of Tokyo spread to the horizon around it, and the black water of Tokyo Bay lies beyond, crossed by a long suspension bridge strung with lights. The two neon mint rims of the slide mouth flare open like a pair of glowing wings, blazing against the dark and lighting her wet legs and the glass. A thick cloud bank, lit softly from below by the glow of the lights, lies across the city below the slide, and the slide dives down toward it.
 
 ## OPENING STATE
 
-The rider is already walking briskly, barefoot and mid-stride, along a narrow walkway of clear glass high above Tokyo Tower in Tokyo, a few steps from the open mouth of the transparent slide. Far below and ahead, filling the upper half of the frame: Tokyo Tower seen from the FRONT on a clear blue late-summer afternoon, its orange-red and white steel lattice rising from a green park, the curved grey temple roofs of Zojo-ji at its foot. The endless grey and white city of Tokyo spreads to the horizon around it, and the blue water of Tokyo Bay lies beyond, crossed by a long white suspension bridge. A thick white cloud bank lies across the city below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet step forward in the lower half of the frame, wet and shining, and just ahead the two neon mint rims of the slide mouth run away and down toward the cloud below. There is no railing. The weather is a clear blue late-summer afternoon over the bay.
+The rider is already walking briskly, barefoot and mid-stride, along a narrow walkway of clear glass high above Tokyo Tower in Tokyo, a few steps from the open mouth of the transparent slide. Far below and ahead, filling the upper half of the frame: Tokyo Tower seen from the FRONT at night, its orange-red and white steel lattice lit up in glowing orange from top to bottom, rising from a dark park beside the curved temple roofs of Zojo-ji. The endless lights of Tokyo spread to the horizon around it, and the black water of Tokyo Bay lies beyond, crossed by a long suspension bridge strung with lights. The two neon mint rims of the slide mouth flare open like a pair of glowing wings, blazing against the dark and lighting her wet legs and the glass. A thick cloud bank, lit softly from below by the glow of the lights, lies across the city below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet step forward in the lower half of the frame, wet and shining, and just ahead the two neon mint rims of the slide mouth run away and down toward the cloud below. There is no railing. The weather is a clear warm late-summer night over the bay, the city lights blazing to the horizon.
 
 ## BEATS
 
 [0.0-2.0] From the very first moment the rider is already walking briskly barefoot along the narrow glass walkway toward the slide, left foot, right foot, never stopping. Through the clear glass under her feet there is only empty air and the land far below. The open mouth of the slide grows with every step, its two neon mint rims curving away and down toward the cloud, and Tokyo Tower waits far below and ahead beyond it. She never stands still and never hesitates.
 
-[2.0-4.0] She reaches the mouth, sits straight down into it feet first and pushes off, and the slide takes her at once into the steep plunge. Tokyo Tower fills the centre of the frame, its orange and white bands of steel narrowing toward the antenna, the two observation decks wrapped in glass. The slide drops past the upper observation deck close enough to see the painted steel beams, the rivets and the red warning lights rush up and past on the right, the green park and the temple roofs far below. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
+[2.0-4.0] She reaches the mouth, sits straight down into it feet first and pushes off, and the slide takes her at once into the steep plunge. Tokyo Tower fills the centre of the frame, its glowing orange steel narrowing toward the antenna, the two observation decks bright with light. The slide drops past the upper observation deck close enough to see the lit steel beams, the rivets and the blinking red warning lights rush up and past on the right, the dark park and the temple roofs far below. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
 
 [4.0-6.0] The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; only her two legs, both feet and the two neon mint rims stay readable. The air turns warm and soaking wet, the murk inside the cloud darkens to slate grey, and rain begins to blast sideways across the lens.
 
@@ -52,7 +52,7 @@ The camera is caught inside the typhoon. The frame is almost black, with only a 
 
 ## CAPTION
 
-You're sliding past Tokyo Tower on a summer afternoon, then through a cloud into a super typhoon over Tokyo. Would you stay on the slide? 🗼🌀
+You're sliding past Tokyo Tower on a summer night, then through a cloud into a super typhoon over Tokyo. Would you stay on the slide? 🗼🌀
 
 #MegaSlideFear #TokyoTower #WaterSlide #POVReels #CGIAdventure
 

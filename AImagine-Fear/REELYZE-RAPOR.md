@@ -512,3 +512,34 @@ kucuk bir deneme kitlesinden sonra buyutulmemis. (b) hesap kisitlamasi ELENDI.
 Kalan aciklama: Instagram ilk saniyeleri ayni hesabin eski gonderisine cok benzeyen
 videoyu ozgun saymayip yaymiyor; izleyici davranisi (elde tutma daha iyi) bunu
 aciklamiyor. Acik kalan tek olcum: paylasim/kaydetme orani.
+
+## 2 Kasim 2026: yeni yer de tutmadi, sorun acilis kalibi (kanca degisimi)
+
+Kaynak: IG `/reels/` izgarasi, giris yapmis Chrome, 2 Kasim 08:55 PST (rozet = izlenme).
+
+| tarih | rota | IG izlenme | yas |
+|---|---|---|---|
+| 29 Eki | barselona (tekrar) | 9.024 | ~4 gun |
+| 30 Eki | atina (YENI yer, yeni acilis) | 3.969 | ~71 sa |
+| 31 Eki | paris (YENI, NEW FOLLOWERS denemesi) | 3.726 | ~48 sa |
+| 1 Kas | fuji (YENI) | 3.291 | ~24 sa |
+
+29 Ekim teshisi "tekrar coker, yeni yer + yeni acilis kurtarir" idi. Atina testi bunu
+YANLISLADI: uc yeni yer de tekrarlardan (4-9K) dusuk. Kontakt sayfasi (7 kazanan, 4
+kaybeden, 0-9 sn kareleri) gosteriyor: 9 Ekim'den beri her video AYNI kompozisyonla
+aciliyor (gunduz kartpostali ustte, cam yol + kaydirak ortada, bacaklar altta, beyaz
+bulut). Ekim kazananlari (154K/144K/137K) ile Kasim kaybedenleri ilk 2 sn'de ayirt
+edilemiyor; fark yenilik. Kalip 3 hafta her gun tekrarlaninca hem izleyici hem dagitim
+"ayni video" goruyor. Eylul'un dort buyugu (23,5M, 8,9M, 795K, 444K) ise BASKA bir
+acilisti: gece, kanat gibi parlayan kaydirak agzi, cok asagida sehir isiklari.
+
+Ihsan karari (2 Kasim, uc ornek gorsel gosterildi: one dev dalga, gece, catlayan cam):
+**"felaket ve geceyle devam"**. Kalan 10 rota iki kancayla sirayla:
+gece = goldengate, tokyo, rio, lasvegas, neuschwanstein;
+tehlike (felaket ilk karede ufukta) = everest, agra, venedik, chichenitza, bigben.
+Yuruyus (9 Ekim) ve bulut kapisi korundu; degisen yalniz hava, ilk kare ve 2-4 sn.
+10 yeni ilk kare gozle onayli (Everest ve Venedik ikinci uretim, ilkinde felaket
+gorunmuyordu). 2 Kasim Dubai eski kalipla cikti (degistirmeye vakit yoktu).
+
+Olcut: taban 3-4K. Bir kanca 3 denemede 15K'yi gecerse kalan stok o kancaya cevrilir.
+Ikisi de tabanda kalirsa sorun acilis degil format yorgunlugu; yeni konsept gerekir.

@@ -10,23 +10,23 @@ PALET: sicak
 TITLE_KEYWORD: Taj Mahal
 SEHIR_ISIGI: led-beyaz
 LEGWEAR: a black high-cut one-piece swimsuit, legs bare from the hip down
-WEATHER: a soft golden sunrise over the river, the air warm and hazy
+WEATHER: a hot, heavy monsoon afternoon, still where she walks, with a black storm wall already rising behind the river
 FELAKET: a monsoon flash flood of the Yamuna river under a black sky
-SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, yuruyus acilisi (2026-10-09)
+SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, yuruyus acilisi (2026-10-09); kanca tehlike (2026-11-02)
 
 ## ILK KARE
 
-Far below and ahead, filling the upper half of the frame: the Taj Mahal seen from the FRONT, from the end of its long garden, at a soft golden sunrise, the white marble dome and the four slender minarets glowing pale pink and gold, perfectly centred and symmetrical. A long straight water channel and rows of dark cypress trees lead up to it through the green garden, and a red sandstone mosque stands on one side. The wide brown Yamuna river runs behind it. A thick white cloud bank lies across the garden below the slide, and the slide dives down toward it.
+Far below and ahead, filling the upper half of the frame: the Taj Mahal seen from the FRONT, from the end of its long garden, the white marble dome and the four slender minarets pale, perfectly centred and symmetrical. Directly behind it a colossal black monsoon storm wall towers over the river, far taller than the dome, forked lightning flickering inside it and grey curtains of rain already falling from its base onto the far bank. A long straight water channel and rows of dark cypress trees lead up to the Taj Mahal through the green garden. A thick white cloud bank lies across the garden below the slide, and the slide dives down toward it.
 
 ## OPENING STATE
 
-The rider is already walking briskly, barefoot and mid-stride, along a narrow walkway of clear glass high above the Taj Mahal in Agra, a few steps from the open mouth of the transparent slide. Far below and ahead, filling the upper half of the frame: the Taj Mahal seen from the FRONT, from the end of its long garden, at a soft golden sunrise, the white marble dome and the four slender minarets glowing pale pink and gold, perfectly centred and symmetrical. A long straight water channel and rows of dark cypress trees lead up to it through the green garden, and a red sandstone mosque stands on one side. The wide brown Yamuna river runs behind it. A thick white cloud bank lies across the garden below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet step forward in the lower half of the frame, wet and shining, and just ahead the two neon saffron rims of the slide mouth run away and down toward the cloud below. There is no railing. The weather is a soft golden sunrise over the river, the air warm and hazy.
+The rider is already walking briskly, barefoot and mid-stride, along a narrow walkway of clear glass high above the Taj Mahal in Agra, a few steps from the open mouth of the transparent slide. Far below and ahead, filling the upper half of the frame: the Taj Mahal seen from the FRONT, from the end of its long garden, the white marble dome and the four slender minarets pale, perfectly centred and symmetrical. Directly behind it a colossal black monsoon storm wall towers over the river, far taller than the dome, forked lightning flickering inside it and grey curtains of rain already falling from its base onto the far bank. A long straight water channel and rows of dark cypress trees lead up to the Taj Mahal through the green garden. A thick white cloud bank lies across the garden below the slide, and the slide dives down toward it. Her two separate bare legs and bare feet step forward in the lower half of the frame, wet and shining, and just ahead the two neon saffron rims of the slide mouth run away and down toward the cloud below. There is no railing. The weather is a hot, heavy monsoon afternoon, still where she walks, with a black storm wall already rising behind the river.
 
 ## BEATS
 
 [0.0-2.0] From the very first moment the rider is already walking briskly barefoot along the narrow glass walkway toward the slide, left foot, right foot, never stopping. Through the clear glass under her feet there is only empty air and the land far below. The open mouth of the slide grows with every step, its two neon saffron rims curving away and down toward the cloud, and the Taj Mahal waits far below and ahead beyond it. She never stands still and never hesitates.
 
-[2.0-4.0] She reaches the mouth, sits straight down into it feet first and pushes off, and the slide takes her at once into the steep plunge. The Taj Mahal fills the centre of the frame, its great white onion dome rising over the tall arched gateway of the main hall, the four minarets standing at the corners of the marble platform. The slide drops past the gold finial on top of the dome close enough to see the white marble panels and the inlaid flowers of coloured stone rush up and past on the left, the long garden and the cypress trees far below. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
+[2.0-4.0] She reaches the mouth, sits straight down into it feet first and pushes off, and the slide takes her at once into the steep plunge. The Taj Mahal fills the centre of the frame, its great white onion dome rising over the tall arched gateway of the main hall, pale against the black storm wall behind it. The slide drops past the gold finial on top of the dome close enough to see the white marble panels and the inlaid flowers of coloured stone rush up and past on the left, the long garden and the cypress trees bending in the first gusts far below. Below, the white sea of cloud rushes up toward her and the slide dives straight into it.
 
 [4.0-6.0] The slide plunges into the cloud. The frame becomes an even, flat grey-white murk; only her two legs, both feet and the two neon saffron rims stay readable. The air turns heavy and steaming wet, the murk inside the cloud darkens to slate grey, and warm monsoon rain starts to stream down the lens.
 
@@ -52,7 +52,7 @@ The camera is under the flood. The frame is almost black, with only a faint whit
 
 ## CAPTION
 
-You're sliding over the dome of the Taj Mahal in Agra at sunrise, then through a cloud into a monsoon flood. Would you keep sliding? 🕌🌊
+You're sliding over the dome of the Taj Mahal in Agra as a storm rolls in, then through a cloud into a monsoon flood. Would you keep sliding? 🕌🌊
 
 #MegaSlideFear #TajMahal #WaterSlide #POVReels #CGIAdventure
 

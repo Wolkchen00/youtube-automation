@@ -13,7 +13,17 @@ kayarak acilan KAPI videolarinda Instagram'da baslangic izlenmesi dustu. Kayis
 kalan 13 sn'ye sikisir; rota verisindeki ses zamanlari eski 0-15 cizelgesine
 gore yazili, YURUYUS_HARITASI ile yeni cizelgeye tasinir.
 
+2026-11-02 Ihsan: 21 Ekim'den beri her video ayni gunduz kartpostaliyla aciliyordu ve
+IG izlenmesi 3-4K'ya dustu (yeni yerler dahil: Atina, Paris, Fuji). Kalan rotalar iki
+kancayla sirayla acilir, yuruyus ve bulut kapisi ayni kalir:
+  gece    : gece, kaydirak agzi kanat gibi parlar, cok asagida sehir isiklari (Eylul'un
+            23,5M / 8,9M kazananlarinin gorunumu)
+  tehlike : felaket ilk karede ufukta gorunur ve yaklasir; bulutun altinda gelmis olur
+Olcum ve sonuc: REELYZE-RAPOR.md, 2 Kasim bolumu.
+
 Rota alanlari:
+  kanca (istege bagli): gece | tehlike, yalniz SOURCE satirina yazilir; metni hava,
+  ilk_kare ve acilis tasir
   sehir, landmark, neon, palet, anahtar (TITLE_KEYWORD), isik (SEHIR_ISIGI: bu
   konseptte FELAKET dunyasinin baskin renk ailesi, renk ardisikligi kurali icin),
   hava (bulutun ustu), felaket (bulutun alti, kisa ad),
@@ -1399,23 +1409,30 @@ ROTALAR: dict[str, dict] = {
     "sanfrancisco-goldengate-dev-dalga": dict(
         sehir="San Francisco", landmark="the Golden Gate Bridge", neon="electric gold",
         palet="neon", anahtar="Golden Gate", isik="buz-mavi",
-        hava="a bright clear winter morning over the bay, the water calm and blue",
+        kanca="gece",
+        hava=(
+            "a clear cold night over the bay, the air still and the city lights glittering far "
+            "below"
+        ),
         felaket="a Pacific storm driving giant storm waves through the Golden Gate",
         ilk_kare=(
-            "Far below and ahead, filling the upper half of the frame: the Golden Gate "
-            "Bridge seen from the FRONT, from the ocean side, on a bright clear winter "
-            "morning, its two tall red-orange towers and the long sweep of its cables "
-            "spanning the strait, the green Marin Headlands on the left and the city of San "
-            "Francisco on the right. The calm blue water of the strait sparkles beneath it, "
-            "and the bay opens out beyond. A thick white cloud bank lies across the strait "
-            "below the slide, and the slide dives down toward it."
+            "Far below and ahead, filling the upper half of the frame: the Golden Gate Bridge "
+            "seen from the FRONT, from the ocean side, at night, its two tall red-orange towers"
+            " floodlit against the black sky and the long sweep of its cables traced in warm "
+            "lights, the dark Marin Headlands on the left and the glittering lights of San "
+            "Francisco spreading away on the right. The black water of the strait reflects the "
+            "lights beneath it. The two electric gold rims of the slide mouth flare open like a"
+            " pair of glowing wings, blazing against the dark and lighting her wet legs and the"
+            " glass. A thick cloud bank, lit softly from below by the glow of the lights, lies "
+            "across the strait below the slide, and the slide dives down toward it."
         ),
         acilis=(
-            "The Golden Gate Bridge fills the centre of the frame, its two red-orange towers "
-            "rising high above the deck, the great cables sagging between them and hundreds "
-            "of thin cables hanging straight down to the road. The slide drops past the top "
-            "of the nearest tower close enough to see the riveted steel panels and the red "
-            "paint rush up and past on the left, the calm blue strait far below."
+            "The Golden Gate Bridge fills the centre of the frame, its two floodlit red-orange "
+            "towers glowing against the night sky, the great cables strung with lights sagging "
+            "between them and the headlights of cars crawling along the deck. The slide drops "
+            "past the top of the nearest tower close enough to see the riveted steel panels and"
+            " the red warning lights rush up and past on the left, the black strait and its "
+            "reflected lights far below."
         ),
         kapi_ici=(
             "The air turns cold and salty, the murk inside the cloud darkens to blue-grey, "
@@ -1472,33 +1489,39 @@ ROTALAR: dict[str, dict] = {
     "everest-cig": dict(
         sehir="Nepal", landmark="Mount Everest", neon="neon scarlet",
         palet="neon", anahtar="Everest", isik="civa-beyaz",
-        hava="a clear cold morning high in the Himalaya, the sky deep blue",
+        kanca="tehlike",
+        hava=(
+            "a cold, darkening afternoon high in the Himalaya, still where she walks, with a "
+            "storm already breaking over the mountain ahead"
+        ),
         felaket="a colossal avalanche pouring down the face of the mountain",
         ilk_kare=(
-            "Far below and ahead, filling the upper half of the frame: Mount Everest seen "
-            "from the FRONT on a clear cold morning, its dark rock summit pyramid rising "
-            "above every other peak, a long white plume of snow blowing off the top into the "
-            "deep blue sky. The huge ice walls of Lhotse and Nuptse stand beside it, and the "
-            "broken white river of the Khumbu glacier runs down from its foot. A thick white "
-            "cloud bank lies across the valley below the slide, and the slide dives down "
+            "Far below and ahead, filling the upper half of the frame: Mount Everest seen from "
+            "the FRONT under a darkening grey storm sky, its dark rock summit pyramid rising "
+            "above every other peak. Across its huge white face a colossal avalanche is already"
+            " roaring down the mountain: a towering, boiling white cloud of snow, taller than "
+            "the summit ridge, pours down the face toward the glaciers, with blocks of blue ice"
+            " tumbling at its front. The ice walls of Lhotse and Nuptse stand beside it, and "
+            "the broken white river of the Khumbu glacier runs down from its foot. A thick "
+            "white cloud bank lies across the valley below the slide, and the slide dives down "
             "toward it."
         ),
         acilis=(
             "Mount Everest fills the centre of the frame, its black rock summit pyramid "
-            "streaked with snow and ice, the plume of blowing snow glittering in the sun. The "
-            "slide drops past the summit ridge close enough to see the wind-carved snow, the "
-            "blue ice and the dark bands of rock rush up and past on the right, the white "
-            "glaciers thousands of metres below."
+            "streaked with snow and ice under the darkening storm sky, snow already streaming "
+            "down its face. The slide drops past the summit ridge close enough to see the wind-"
+            "carved snow, the blue ice and the dark bands of rock rush up and past on the "
+            "right, the white glaciers thousands of metres below."
         ),
         kapi_ici=(
             "The air turns bitterly cold and thin, the murk inside the cloud turns a hard "
             "bluish white, and frost spreads in feathers across the edges of the lens."
         ),
         ortaya=(
-            "the same mountain as the snow lets go. A grey storm sky hangs over Everest, and "
-            "across its huge white face a long crack has torn open in the snow. A whole slab "
-            "of the mountain breaks away and a white avalanche begins pouring down the face, "
-            "throwing up a rising cloud of snow taller than the ridge."
+            "the same mountain as the whole face lets go. A grey storm sky hangs over Everest, "
+            "and the first avalanche has set off a second, far bigger one: a whole slab of the "
+            "mountain breaks away and pours down the face, throwing up a rising cloud of snow "
+            "taller than the ridge."
         ),
         tirmanis=(
             "The avalanche thunders down the face and grows, its white cloud boiling higher "
@@ -1543,23 +1566,29 @@ ROTALAR: dict[str, dict] = {
     "tokyo-kule-tayfun": dict(
         sehir="Tokyo", landmark="Tokyo Tower", neon="neon mint",
         palet="neon", anahtar="Tokyo Tower", isik="kirmizi-tabela",
-        hava="a clear blue late-summer afternoon over the bay",
+        kanca="gece",
+        hava=(
+            "a clear warm late-summer night over the bay, the city lights blazing to the "
+            "horizon"
+        ),
         felaket="a super typhoon with a towering wall of wind-driven rain",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: Tokyo Tower seen from "
-            "the FRONT on a clear blue late-summer afternoon, its orange-red and white steel "
-            "lattice rising from a green park, the curved grey temple roofs of Zojo-ji at "
-            "its foot. The endless grey and white city of Tokyo spreads to the horizon "
-            "around it, and the blue water of Tokyo Bay lies beyond, crossed by a long white "
-            "suspension bridge. A thick white cloud bank lies across the city below the "
-            "slide, and the slide dives down toward it."
+            "the FRONT at night, its orange-red and white steel lattice lit up in glowing "
+            "orange from top to bottom, rising from a dark park beside the curved temple roofs "
+            "of Zojo-ji. The endless lights of Tokyo spread to the horizon around it, and the "
+            "black water of Tokyo Bay lies beyond, crossed by a long suspension bridge strung "
+            "with lights. The two neon mint rims of the slide mouth flare open like a pair of "
+            "glowing wings, blazing against the dark and lighting her wet legs and the glass. A"
+            " thick cloud bank, lit softly from below by the glow of the lights, lies across "
+            "the city below the slide, and the slide dives down toward it."
         ),
         acilis=(
-            "Tokyo Tower fills the centre of the frame, its orange and white bands of steel "
-            "narrowing toward the antenna, the two observation decks wrapped in glass. The "
-            "slide drops past the upper observation deck close enough to see the painted "
-            "steel beams, the rivets and the red warning lights rush up and past on the "
-            "right, the green park and the temple roofs far below."
+            "Tokyo Tower fills the centre of the frame, its glowing orange steel narrowing "
+            "toward the antenna, the two observation decks bright with light. The slide drops "
+            "past the upper observation deck close enough to see the lit steel beams, the "
+            "rivets and the blinking red warning lights rush up and past on the right, the dark"
+            " park and the temple roofs far below."
         ),
         kapi_ici=(
             "The air turns warm and soaking wet, the murk inside the cloud darkens to slate "
@@ -1604,7 +1633,7 @@ ROTALAR: dict[str, dict] = {
                           "as the storm swallows the camera."),
         ),
         caption=(
-            "You're sliding past Tokyo Tower on a summer afternoon, then through a cloud "
+            "You're sliding past Tokyo Tower on a summer night, then through a cloud "
             "into a super typhoon over Tokyo. Would you stay on the slide?"
         ),
         emoji="\U0001F5FC\U0001F300", etiket="#TokyoTower",
@@ -1617,25 +1646,30 @@ ROTALAR: dict[str, dict] = {
     "agra-tacmahal-sel": dict(
         sehir="Agra", landmark="the Taj Mahal", neon="neon saffron",
         palet="sicak", anahtar="Taj Mahal", isik="led-beyaz",
-        hava="a soft golden sunrise over the river, the air warm and hazy",
+        kanca="tehlike",
+        hava=(
+            "a hot, heavy monsoon afternoon, still where she walks, with a black storm wall "
+            "already rising behind the river"
+        ),
         felaket="a monsoon flash flood of the Yamuna river under a black sky",
         ilk_kare=(
-            "Far below and ahead, filling the upper half of the frame: the Taj Mahal seen "
-            "from the FRONT, from the end of its long garden, at a soft golden sunrise, the "
-            "white marble dome and the four slender minarets glowing pale pink and gold, "
-            "perfectly centred and symmetrical. A long straight water channel and rows of "
-            "dark cypress trees lead up to it through the green garden, and a red sandstone "
-            "mosque stands on one side. The wide brown Yamuna river runs behind it. A thick "
-            "white cloud bank lies across the garden below the slide, and the slide dives "
-            "down toward it."
+            "Far below and ahead, filling the upper half of the frame: the Taj Mahal seen from "
+            "the FRONT, from the end of its long garden, the white marble dome and the four "
+            "slender minarets pale, perfectly centred and symmetrical. Directly behind it a "
+            "colossal black monsoon storm wall towers over the river, far taller than the dome,"
+            " forked lightning flickering inside it and grey curtains of rain already falling "
+            "from its base onto the far bank. A long straight water channel and rows of dark "
+            "cypress trees lead up to the Taj Mahal through the green garden. A thick white "
+            "cloud bank lies across the garden below the slide, and the slide dives down toward"
+            " it."
         ),
         acilis=(
             "The Taj Mahal fills the centre of the frame, its great white onion dome rising "
-            "over the tall arched gateway of the main hall, the four minarets standing at the "
-            "corners of the marble platform. The slide drops past the gold finial on top of "
-            "the dome close enough to see the white marble panels and the inlaid flowers of "
-            "coloured stone rush up and past on the left, the long garden and the cypress "
-            "trees far below."
+            "over the tall arched gateway of the main hall, pale against the black storm wall "
+            "behind it. The slide drops past the gold finial on top of the dome close enough to"
+            " see the white marble panels and the inlaid flowers of coloured stone rush up and "
+            "past on the left, the long garden and the cypress trees bending in the first gusts"
+            " far below."
         ),
         kapi_ici=(
             "The air turns heavy and steaming wet, the murk inside the cloud darkens to "
@@ -1679,7 +1713,7 @@ ROTALAR: dict[str, dict] = {
                           "as the water closes over the camera."),
         ),
         caption=(
-            "You're sliding over the dome of the Taj Mahal in Agra at sunrise, then through "
+            "You're sliding over the dome of the Taj Mahal in Agra as a storm rolls in, then through "
             "a cloud into a monsoon flood. Would you keep sliding?"
         ),
         emoji="\U0001F54C\U0001F30A", etiket="#TajMahal",
@@ -1692,24 +1726,28 @@ ROTALAR: dict[str, dict] = {
     "rio-cristo-yildirim": dict(
         sehir="Rio de Janeiro", landmark="Christ the Redeemer", neon="neon green",
         palet="neon", anahtar="Christ the Redeemer", isik="mavi-beyaz",
-        hava="a warm humid afternoon over the bay, the sky bright and blue",
+        kanca="gece",
+        hava="a warm humid night over the bay, the sky black and clear",
         felaket="a tropical lightning storm striking the statue",
         ilk_kare=(
-            "Far below and ahead, filling the upper half of the frame: Christ the Redeemer "
-            "seen from the FRONT on a warm afternoon, the huge pale stone statue standing "
-            "with its arms spread wide on the summit of the steep granite peak of Corcovado, "
-            "its face toward the camera. Thick green rainforest pours down the steep slopes "
-            "around it, and the city of Rio de Janeiro, its beaches and the blue sea curve "
-            "along the shore far below. A thick white cloud bank lies across the city below "
-            "the slide, and the slide dives down toward it."
+            "Far below and ahead, filling the upper half of the frame: Christ the Redeemer seen"
+            " from the FRONT at night, the huge pale stone statue floodlit brilliant white "
+            "against the black sky, standing with its arms spread wide on the summit of the "
+            "steep dark peak of Corcovado, its face toward the camera. The dark rainforest "
+            "falls away down the slopes around it, and the lights of Rio de Janeiro, its curved"
+            " beaches traced in orange streetlights beside the black sea, glitter along the "
+            "shore far below. The two neon green rims of the slide mouth flare open like a pair"
+            " of glowing wings, blazing against the dark and lighting her wet legs and the "
+            "glass. A thick cloud bank, lit softly from below by the glow of the lights, lies "
+            "across the city below the slide, and the slide dives down toward it."
         ),
         acilis=(
-            "Christ the Redeemer fills the centre of the frame, the pale stone statue "
-            "standing tall on its pedestal, arms stretched straight out to each side, the "
-            "folds of its robe sharp in the afternoon sun. The slide drops past its "
-            "outstretched right hand close enough to see the small pale soapstone tiles and "
-            "the thin lightning rods on the fingers rush up and past on the left, the green "
-            "forest dropping away far below."
+            "Christ the Redeemer fills the centre of the frame, the floodlit white statue "
+            "standing tall on its pedestal, arms stretched straight out to each side, the folds"
+            " of its robe sharp in the hard white light. The slide drops past its outstretched "
+            "right hand close enough to see the small pale soapstone tiles and the thin "
+            "lightning rods on the fingers rush up and past on the left, the dark forest "
+            "dropping away far below."
         ),
         kapi_ici=(
             "The air turns hot and heavy, the murk inside the cloud flashes blue-white, and "
@@ -1767,24 +1805,30 @@ ROTALAR: dict[str, dict] = {
     "venedik-sanmarco-taskin": dict(
         sehir="Venice", landmark="St. Mark's Square", neon="sapphire blue",
         palet="neon", anahtar="Venice", isik="sodyum-amber",
-        hava="a calm golden autumn afternoon over the lagoon, the water flat and bright",
+        kanca="tehlike",
+        hava=(
+            "a grey, darkening autumn afternoon, still where she walks, with a gale front "
+            "already sweeping in over the lagoon"
+        ),
         felaket="a storm surge flood driven in from the lagoon by a gale",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: St. Mark's Square in "
-            "Venice seen from the FRONT, from the lagoon, on a calm golden autumn afternoon: "
-            "the tall red brick bell tower of the Campanile with its green pointed spire and "
-            "gold angel, the pink and white arches of the Doge's Palace along the waterfront, "
-            "and the domes of St. Mark's Basilica behind. Black gondolas are moored in a row "
-            "along the stone quay, and the flat lagoon sparkles in front. A thick white cloud "
-            "bank lies across the lagoon below the slide, and the slide dives down toward it."
+            "Venice seen from the FRONT, from the lagoon: the tall red brick bell tower of the "
+            "Campanile with its green pointed spire and gold angel, the pink and white arches "
+            "of the Doge's Palace along the waterfront, and the domes of St. Mark's Basilica "
+            "behind. A black gale front fills the sky over the city, and out on the lagoon a "
+            "huge dark wall of storm water, taller than the Doge's Palace, is already rolling "
+            "toward the city, its crest breaking white, the moored black gondolas tossing in "
+            "front of it. A thick white cloud bank lies across the lagoon below the slide, and "
+            "the slide dives down toward it."
         ),
         acilis=(
             "St. Mark's Square fills the centre of the frame, the Campanile rising high above "
-            "the rooftops, the long arcades of the Doge's Palace and the gold mosaics of the "
-            "basilica glowing in the low sun. The slide drops past the top of the Campanile "
-            "close enough to see the gold angel, the green copper spire and the white stone "
-            "arches of the belfry rush up and past on the right, the gondolas tiny on the "
-            "quay far below."
+            "the rooftops, the long arcades of the Doge's Palace and the domes of the basilica "
+            "pale under the black sky coming in from the lagoon. The slide drops past the top "
+            "of the Campanile close enough to see the gold angel, the green copper spire and "
+            "the white stone arches of the belfry rush up and past on the right, the gondolas "
+            "tossing on the quay far below."
         ),
         kapi_ici=(
             "The air turns cold and wet, a hard wind howls inside the cloud, the murk darkens "
@@ -1840,24 +1884,26 @@ ROTALAR: dict[str, dict] = {
     "lasvegas-strip-kum-firtinasi": dict(
         sehir="Nevada", landmark="the Las Vegas Strip", neon="cherry red",
         palet="sicak", anahtar="Las Vegas", isik="renkli-yikama",
-        hava="a hot golden desert evening, the sky clear and orange",
+        kanca="gece",
+        hava="a hot clear desert night, the sky black and the Strip blazing with light",
         felaket="a haboob, a towering wall of desert dust rolling over the city",
         ilk_kare=(
-            "Far below and ahead, filling the upper half of the frame: the Las Vegas Strip "
-            "seen from the FRONT, from the south end, on a hot golden desert evening, the "
-            "long boulevard of giant casino hotel towers in gold glass and white concrete "
-            "running straight away from the camera, their bright signs and giant screens "
-            "just lighting up pink, green and blue. The bare brown desert and the rocky "
-            "mountains surround the city on every side under a clear orange sky. A thick "
-            "white cloud bank lies across the desert below the slide, and the slide dives "
-            "down toward it."
+            "Far below and ahead, filling the upper half of the frame: the Las Vegas Strip seen"
+            " from the FRONT, from the south end, at night, the long boulevard of giant casino "
+            "hotel towers running straight away from the camera, every tower, sign and giant "
+            "screen blazing with gold, pink, green and blue light and the boulevard below a "
+            "river of headlights. The black desert and the dark mountains surround the glowing "
+            "city on every side. The two cherry red rims of the slide mouth flare open like a "
+            "pair of glowing wings, blazing against the dark and lighting her wet legs and the "
+            "glass. A thick cloud bank, lit softly from below by the glow of the lights, lies "
+            "across the desert below the slide, and the slide dives down toward it."
         ),
         acilis=(
-            "The Las Vegas Strip fills the centre of the frame, a canyon of giant curved "
-            "hotel towers lining the boulevard, the casino lights and giant screens glowing "
-            "pink, green and blue in the dusk. The slide drops past the roof of the tallest "
-            "gold tower close enough to see the gold glass panels and the roof lights rush up "
-            "and past on the left, the traffic on the boulevard far below."
+            "The Las Vegas Strip fills the centre of the frame, a canyon of giant curved hotel "
+            "towers lining the boulevard, the casino lights and giant screens blazing pink, "
+            "green and blue in the night. The slide drops past the roof of the tallest gold "
+            "tower close enough to see the lit gold glass panels and the roof lights rush up "
+            "and past on the left, the river of headlights on the boulevard far below."
         ),
         kapi_ici=(
             "The air turns hot and dry, the murk inside the cloud turns a dirty brown, and "
@@ -1901,7 +1947,7 @@ ROTALAR: dict[str, dict] = {
                           "as the sand buries the camera."),
         ),
         caption=(
-            "You're sliding over the Las Vegas Strip in Nevada at sunset, then through a "
+            "You're sliding over the Las Vegas Strip in Nevada at night, then through a "
             "cloud into a sandstorm taller than the casinos. Would you take this bet?"
         ),
         emoji="\U0001F3B0\U0001F32A️", etiket="#LasVegasStrip",
@@ -1914,23 +1960,29 @@ ROTALAR: dict[str, dict] = {
     "chichenitza-piramit-kasirga": dict(
         sehir="Mexico", landmark="the pyramid of Chichen Itza", neon="sunflower yellow",
         palet="neon", anahtar="Chichen Itza", isik="buz-mavi",
-        hava="a bright humid morning over the jungle, the sky clear and blue",
+        kanca="tehlike",
+        hava=(
+            "a hot, eerie morning over the jungle, still where she walks, with the wall of a "
+            "hurricane already filling the horizon"
+        ),
         felaket="a major hurricane, its eyewall tearing across the jungle",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: the great stepped "
-            "pyramid of Chichen Itza seen from the FRONT on a bright morning, its nine grey "
-            "stone terraces rising to the square temple on top, the steep central staircase "
-            "facing the camera with carved stone serpent heads at its foot. Wide green lawns "
-            "surround it, and flat green jungle stretches away to the horizon on every side, "
-            "with other ancient stone ruins half hidden among the trees. A thick white cloud "
-            "bank lies across the jungle below the slide, and the slide dives down toward it."
+            "pyramid of Chichen Itza seen from the FRONT, its nine grey stone terraces rising "
+            "to the square temple on top, the steep central staircase facing the camera with "
+            "carved stone serpent heads at its foot. Behind it the dark curving wall of a "
+            "hurricane fills the whole horizon, a towering curved wall of black and grey cloud far "
+            "taller than the pyramid, and the flat green jungle in front of it is already "
+            "bending under the wind. A thick white cloud bank lies across the jungle below the "
+            "slide, and the slide dives down toward it."
         ),
         acilis=(
             "The pyramid of Chichen Itza fills the centre of the frame, its stepped grey "
-            "terraces sharp in the morning sun, the four staircases climbing to the temple on "
-            "its summit. The slide drops past the top of the temple close enough to see the "
-            "carved stone doorway, the weathered limestone blocks and the moss in the cracks "
-            "rush up and past on the left, the green lawn and the jungle far below."
+            "terraces dark against the hurricane wall filling the sky behind it, the four "
+            "staircases climbing to the temple on its summit. The slide drops past the top of "
+            "the temple close enough to see the carved stone doorway, the weathered limestone "
+            "blocks and the moss in the cracks rush up and past on the left, the jungle far "
+            "below already bending in the wind."
         ),
         kapi_ici=(
             "The air turns warm, wet and roaring with wind, the murk inside the cloud darkens "
@@ -1988,24 +2040,28 @@ ROTALAR: dict[str, dict] = {
     "bavyera-neuschwanstein-heyelan": dict(
         sehir="Bavaria", landmark="Neuschwanstein Castle", neon="flamingo pink",
         palet="neon", anahtar="Neuschwanstein", isik="yesil-civa",
-        hava="a fresh early autumn morning in the Alps, the sky clear and pale blue",
+        kanca="gece",
+        hava="a still, clear autumn night in the Alps, the sky black and full of stars",
         felaket="an Alpine cloudburst and a landslide of mud and rock",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: Neuschwanstein Castle "
-            "seen from the FRONT, from the valley meadows, on a fresh early autumn morning, "
-            "its white limestone walls, tall slender towers and grey-blue pointed roofs "
-            "standing on a rocky ridge above a deep wooded gorge. Steep Alpine mountains "
-            "covered in dark green pine and golden beech forest rise right behind it, and "
-            "green meadows and a blue lake lie in the valley below. A thick white cloud bank "
-            "lies across the valley below the slide, and the slide dives down toward it."
+            "seen from the FRONT, from the valley meadows, at night, its white limestone walls,"
+            " tall slender towers and pointed roofs floodlit warm gold against the black sky on"
+            " a rocky ridge above a deep dark gorge. The steep Alpine mountains rise black "
+            "behind it under the stars, and the lights of a small village glitter beside a dark"
+            " lake in the valley below. The two flamingo pink rims of the slide mouth flare "
+            "open like a pair of glowing wings, blazing against the dark and lighting her wet "
+            "legs and the glass. A thick cloud bank, lit softly from below by the glow of the "
+            "lights, lies across the valley below the slide, and the slide dives down toward "
+            "it."
         ),
         acilis=(
-            "Neuschwanstein Castle fills the centre of the frame, its white towers and "
-            "turrets crowding along the narrow ridge, the gilded weather vanes and the "
-            "grey-blue slate roofs bright in the morning sun. The slide drops past the top of "
-            "the tallest tower close enough to see the white stone, the arched windows and "
-            "the slate tiles rush up and past on the right, the deep wooded gorge and its "
-            "waterfall far below."
+            "Neuschwanstein Castle fills the centre of the frame, its floodlit white towers and"
+            " turrets crowding along the narrow ridge, the gilded weather vanes glinting in the"
+            " light. The slide drops past the top of the tallest tower close enough to see the "
+            "lit white stone, the arched windows glowing yellow and the slate tiles rush up and"
+            " past on the right, the black gorge and the pale thread of its waterfall far "
+            "below."
         ),
         kapi_ici=(
             "The air turns wet and heavy, the murk inside the cloud darkens to grey-green, "
@@ -2063,23 +2119,29 @@ ROTALAR: dict[str, dict] = {
     "londra-bigben-yildirim": dict(
         sehir="London", landmark="Big Ben", neon="electric amber",
         palet="neon", anahtar="Big Ben", isik="mor-tabela",
-        hava="a bright clear summer evening over the Thames, the sky soft blue",
+        kanca="tehlike",
+        hava=(
+            "a warm summer evening over the Thames, still where she walks, with a black-violet "
+            "storm already towering over the far side of the city"
+        ),
         felaket="a violet lightning supercell over Westminster",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: Big Ben seen from the "
-            "FRONT, from across the river Thames, on a bright clear summer evening, the tall "
-            "golden stone clock tower with its pointed green and gold spire, its clock face "
-            "toward the camera and reading correctly, never mirrored. It stands at the end of "
-            "the long gothic Houses of Parliament, which stretch away to its left along the "
-            "water, and Westminster Bridge crosses the river at its foot. A thick white cloud "
-            "bank lies across the river below the slide, and the slide dives down toward it."
+            "FRONT, from across the river Thames, the tall golden stone clock tower with its "
+            "pointed green and gold spire, its clock face toward the camera and reading "
+            "correctly, never mirrored. It stands at the end of the long gothic Houses of "
+            "Parliament, which stretch away to its left along the water, and Westminster Bridge"
+            " crosses the river at its foot. Beyond it a towering black-violet supercell "
+            "already hangs over the far side of London, far taller than the tower, and violet "
+            "lightning forks down out of it onto the distant rooftops. A thick white cloud bank"
+            " lies across the river below the slide, and the slide dives down toward it."
         ),
         acilis=(
-            "Big Ben fills the centre of the frame, the great clock face toward the camera "
-            "with its black hands, the carved golden stone of the tower glowing in the "
-            "evening sun. The slide drops past the gilded spire on top of the tower close "
-            "enough to see the gold crosses, the green iron roof tiles and the carved stone "
-            "rush up and past on the right, the river and the bridge far below."
+            "Big Ben fills the centre of the frame, the great clock face toward the camera with"
+            " its black hands, the carved golden stone of the tower lit by the last light under"
+            " the advancing black storm. The slide drops past the gilded spire on top of the "
+            "tower close enough to see the gold crosses, the green iron roof tiles and the "
+            "carved stone rush up and past on the right, the river and the bridge far below."
         ),
         kapi_ici=(
             "The air turns warm and electric, the murk inside the cloud flickers violet from "
@@ -2218,7 +2280,8 @@ def rota_metni(slug: str, r: dict) -> str:
         "WEATHER: %s" % r["hava"],
         "FELAKET: %s" % r["felaket"],
         "SOURCE: tools/kapi_ekle.py ile uretildi; mevsim kapisi A (2026-10-01) iskeleti, "
-        "yuruyus acilisi (2026-10-09)",
+        "yuruyus acilisi (2026-10-09)"
+        + ("; kanca %s (2026-11-02)" % r["kanca"] if r.get("kanca") else ""),
         "",
         "## ILK KARE",
         "",
