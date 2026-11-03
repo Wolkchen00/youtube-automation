@@ -479,3 +479,26 @@
 {"ts": "2026-11-01T18:05:48Z", "event": "qc_api_result", "attempt_id": "736e432b5c274839a3f518ea7e666fb0", "outcome": "ok"}
 {"ts": "2026-11-01T18:05:48Z", "event": "review", "episode": 13, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-11-01T18:05:48Z", "event": "qc_pass", "episode": 13, "shot": 1, "attempt": 0, "content_sha256": "c77cb05fabf799ff83d3aa60ea4e3677cecfb58cf7a8d3e9f934ccff40928556", "clip": "shot_01.mp4"}
+{"ts": "2026-11-03T19:37:18Z", "event": "qc_api_attempt", "attempt_id": "a94df833ad8a437f9c15f2bc44921b7e", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:37:45Z", "event": "qc_api_result", "attempt_id": "a94df833ad8a437f9c15f2bc44921b7e", "outcome": "error"}
+{"ts": "2026-11-03T19:37:50Z", "event": "qc_api_attempt", "attempt_id": "7cd8744efcba41c2bf963d7b94d7d89e", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:37:52Z", "event": "qc_api_result", "attempt_id": "7cd8744efcba41c2bf963d7b94d7d89e", "outcome": "error"}
+{"ts": "2026-11-03T19:38:02Z", "event": "qc_api_attempt", "attempt_id": "3b8a6e4a2d654ca4aa77f50a2b880415", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:13Z", "event": "qc_api_result", "attempt_id": "3b8a6e4a2d654ca4aa77f50a2b880415", "outcome": "error"}
+{"ts": "2026-11-03T19:38:13Z", "event": "qc_api_attempt", "attempt_id": "69db63f86d934fa0b842370ee91672ff", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:13Z", "event": "qc_api_result", "attempt_id": "69db63f86d934fa0b842370ee91672ff", "outcome": "429"}
+{"ts": "2026-11-03T19:38:13Z", "event": "qc_api_attempt", "attempt_id": "50afd90061ac440d8c2207e6a8762235", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:23Z", "event": "qc_api_result", "attempt_id": "50afd90061ac440d8c2207e6a8762235", "outcome": "error"}
+{"ts": "2026-11-03T19:38:28Z", "event": "qc_api_attempt", "attempt_id": "d083706322224ad3af923b1be49ecf4c", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:34Z", "event": "qc_api_result", "attempt_id": "d083706322224ad3af923b1be49ecf4c", "outcome": "ok"}
+{"ts": "2026-11-03T19:38:34Z", "event": "native_audio_review", "episode": 14, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Heavy rumbling and crashing sounds of debris falling.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-03T19:38:35Z", "event": "qc_api_attempt", "attempt_id": "c04e710a360a4643baf3ba13ef6740b8", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:35Z", "event": "qc_api_result", "attempt_id": "c04e710a360a4643baf3ba13ef6740b8", "outcome": "429"}
+{"ts": "2026-11-03T19:38:35Z", "event": "qc_api_attempt", "attempt_id": "8320d44af7d045d9bc3dd59de6ad1eb5", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:36Z", "event": "qc_api_result", "attempt_id": "8320d44af7d045d9bc3dd59de6ad1eb5", "outcome": "429"}
+{"ts": "2026-11-03T19:38:36Z", "event": "qc_api_attempt", "attempt_id": "efa54f627a81495498f9aae72526a0f4", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:38:53Z", "event": "qc_api_result", "attempt_id": "efa54f627a81495498f9aae72526a0f4", "outcome": "error"}
+{"ts": "2026-11-03T19:38:58Z", "event": "qc_api_attempt", "attempt_id": "8154d70c7a4a46acb671c305093a23a6", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 14, "shot": 1}
+{"ts": "2026-11-03T19:39:14Z", "event": "qc_api_result", "attempt_id": "8154d70c7a4a46acb671c305093a23a6", "outcome": "ok"}
+{"ts": "2026-11-03T19:39:14Z", "event": "review", "episode": 14, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Heavy radial motion blur causes rock distortion in final frames."], "fix_notes": ["Maintain solid rock geometry during fast forward motion.", "Reduce excessive radial motion blur smearing."], "clip": "shot_01.mp4"}
+{"ts": "2026-11-03T19:39:14Z", "event": "qc_pass", "episode": 14, "shot": 1, "attempt": 0, "content_sha256": "9cc09fad67a07db77fa85989ab3270e0b3908b80d8d1e511cb305759efe81db4", "clip": "shot_01.mp4"}
