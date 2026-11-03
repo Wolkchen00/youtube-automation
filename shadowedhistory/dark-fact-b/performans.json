@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-11-02T20:54:13.201063+00:00",
+  "guncellendi": "2026-11-03T18:41:01.678258+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 146.5,
@@ -3160,6 +3160,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-03T18:41:01.678258+00:00",
+          "yas_saat": 120.467,
+          "youtube": {
+            "views": 283,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 22,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 112.47,
+            "engaged_views": 96,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 7,
+            "comments": 1,
+            "views": 1635,
+            "impressions": 1635,
+            "reach": 1111,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 7,
+            "comments_insight": 1,
+            "total_interactions": 9,
+            "ig_reels_avg_watch_time": 9184,
+            "ig_reels_video_view_total_time": 10213234
+          },
+          "tiktok": {
+            "views": 1089,
+            "likes": 17,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3405,6 +3441,42 @@
             "comments": 2,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-03T18:41:01.678258+00:00",
+          "yas_saat": 73.911,
+          "youtube": {
+            "views": 15,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 6,
+            "average_view_percentage": 64.18,
+            "engaged_views": 4,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 8,
+            "comments": 1,
+            "views": 827,
+            "impressions": 827,
+            "reach": 610,
+            "saves": 4,
+            "shares": 0,
+            "likes_insight": 8,
+            "comments_insight": 1,
+            "total_interactions": 13,
+            "ig_reels_avg_watch_time": 7239,
+            "ig_reels_video_view_total_time": 4394387
+          },
+          "tiktok": {
+            "views": 1067,
+            "likes": 29,
+            "comments": 2,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3565,7 +3637,68 @@
       },
       "puan": 3.243137,
       "etiket": "kazanan"
+    },
+    {
+      "part": 9,
+      "post_ids": {
+        "youtube": "Ca9aGUjmQeM",
+        "instagram": "17911209249564556",
+        "tiktok": "7703687253142342925"
+      },
+      "request_ids": {
+        "youtube": "54b11fea7cdf4b138f50f8df95e8af1b",
+        "instagram": "561331f7fa524b8b842e618d3de2bda5",
+        "tiktok": "ac58fb07a9f04792b99d95d0e9f9a0ba"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-03T18:41:01.678258+00:00",
+          "yas_saat": 21.311,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 228,
+            "impressions": 228,
+            "reach": 188,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 4265,
+            "ig_reels_video_view_total_time": 810399
+          },
+          "tiktok": {
+            "views": 251,
+            "likes": 2,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-02T21:22:20.376177+00:00",
+      "subtitle": "In 1859 A Solar Storm Lit Up The Caribbean",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 12
 }
