@@ -434,3 +434,22 @@
 {"ts": "2026-11-02T21:50:55Z", "event": "qc_api_result", "attempt_id": "55865818e37d4c2bb8e8c07965ae0267", "outcome": "ok"}
 {"ts": "2026-11-02T21:50:55Z", "event": "review", "episode": 108, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Abrupt steam cloud generation with stylized radial tendrils spreading over the ocean surface."], "fix_notes": ["Simulate continuous, turbulent steam dispersion rather than a sudden explosive plume."], "clip": "shot_01.mp4"}
 {"ts": "2026-11-02T21:50:55Z", "event": "qc_pass", "episode": 108, "shot": 1, "attempt": 0, "content_sha256": "0adfd497de4332247b06de23c88127b410f35a1f71777befb3f8ffaa01571f62", "clip": "shot_01.mp4"}
+{"ts": "2026-11-04T20:12:36Z", "event": "qc_api_attempt", "attempt_id": "4eb16a10f10d4f4e89cb711888b4cb75", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:12:37Z", "event": "qc_api_result", "attempt_id": "4eb16a10f10d4f4e89cb711888b4cb75", "outcome": "error"}
+{"ts": "2026-11-04T20:12:42Z", "event": "qc_api_attempt", "attempt_id": "51b0ca5625b0486a86cdc7671c60c32e", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:12:47Z", "event": "qc_api_result", "attempt_id": "51b0ca5625b0486a86cdc7671c60c32e", "outcome": "error"}
+{"ts": "2026-11-04T20:12:57Z", "event": "qc_api_attempt", "attempt_id": "f9e98b94605a4eb38f0f9a51913e98d4", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:12:57Z", "event": "qc_api_result", "attempt_id": "f9e98b94605a4eb38f0f9a51913e98d4", "outcome": "429"}
+{"ts": "2026-11-04T20:12:57Z", "event": "qc_api_attempt", "attempt_id": "4ecbe06a54da4790bd30b9391ca304be", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:12:58Z", "event": "qc_api_result", "attempt_id": "4ecbe06a54da4790bd30b9391ca304be", "outcome": "429"}
+{"ts": "2026-11-04T20:12:58Z", "event": "qc_api_attempt", "attempt_id": "74957c71fe1f4b2d96bf3000d1a20026", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:13:01Z", "event": "qc_api_result", "attempt_id": "74957c71fe1f4b2d96bf3000d1a20026", "outcome": "ok"}
+{"ts": "2026-11-04T20:13:01Z", "event": "native_audio_review", "episode": 109, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Low atmospheric rumble and deep mechanical humming.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-04T20:13:02Z", "event": "qc_api_attempt", "attempt_id": "32b20d3434534a5c838051a2d914d540", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:13:02Z", "event": "qc_api_result", "attempt_id": "32b20d3434534a5c838051a2d914d540", "outcome": "429"}
+{"ts": "2026-11-04T20:13:02Z", "event": "qc_api_attempt", "attempt_id": "8c6e4a673f83475d97288c6709c34ef3", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:13:03Z", "event": "qc_api_result", "attempt_id": "8c6e4a673f83475d97288c6709c34ef3", "outcome": "429"}
+{"ts": "2026-11-04T20:13:03Z", "event": "qc_api_attempt", "attempt_id": "46382ee579a249bfa667b6e0164d942a", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 109, "shot": 1}
+{"ts": "2026-11-04T20:13:18Z", "event": "qc_api_result", "attempt_id": "46382ee579a249bfa667b6e0164d942a", "outcome": "ok"}
+{"ts": "2026-11-04T20:13:18Z", "event": "review", "episode": 109, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["abrupt landscape morphing as rift expands into water body", "disaster not fully active in first frame"], "fix_notes": ["ensure disaster effects are present starting from the first frame", "maintain stable rock geometry during water displacement"], "clip": "shot_01.mp4"}
+{"ts": "2026-11-04T20:13:18Z", "event": "qc_pass", "episode": 109, "shot": 1, "attempt": 0, "content_sha256": "a62592b08d1f383d1b05cd511c98c538da1071397d18f5059d5b2afbf5fd834a", "clip": "shot_01.mp4"}
