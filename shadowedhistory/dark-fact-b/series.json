@@ -13,10 +13,10 @@
   "standalone": true,
   "publish_mode": "auto",
   "performance_feedback": true,
-  "status": "active",
+  "status": "completed",
   "priority": 999,
   "total_parts": 10,
-  "next_part": 10,
+  "next_part": 11,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -384,6 +384,27 @@
         "tiktok"
       ],
       "published_at": "2026-11-02T21:22:20.376726+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 9.9,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "10": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep10/ep10_music_titled_mastered.mp4",
+      "subtitle": "The Medieval Town Of Dunwich Fell Into The Sea",
+      "stack_sha256": "870efa5ca5a5bef1492a6ca1f8797afa7e82f9df6f005ec0c339a4b8b3126d40",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-04T19:25:26.465294+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
