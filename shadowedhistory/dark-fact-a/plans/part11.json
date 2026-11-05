@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Terracotta Army Was Originally Brightly Painted"
+  },
+  "synopsis": "The Terracotta Army in China was originally painted in vivid colors instead of the grey clay seen today.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, long rows of life-size clay terracotta soldiers stand inside a dimly lit earthen pit, lit by warm flickering oil lamps. Traces of vibrant red, green, and cobalt paint are visible on their textured chest armour. Faint dust particles drift lazily through the warm light rays for the entire ten seconds. The camera slowly pushes in on the ranks of motionless silhouetted warriors. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Which detail of the painted terracotta army surprises you most? 🎨",
+  "family": "kayip harikalar",
+  "seed_id": 5,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Terracotta soldiers were colorful.",
+    "subtitle": "Vibrant paint once covered the clay armour."
+  },
+  "caption": "The Terracotta Army in China was originally painted in bright colours rather than plain grey.\n\nExcavators who uncovered the subterranean pits near Xi'an in 1974 discovered traces of red, blue, and green pigments on the clay warriors. The synthetic pigments quickly flaked off upon exposure to dry air.\n\nVisuals created with AI.\n\nDid you know these ancient statues were once painted?",
+  "hashtags": "#history #historyfacts #terracottaarmy #ancientchina #archaeology",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

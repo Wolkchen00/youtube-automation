@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "A 27-Metre Ship Was Buried As A Royal Grave"
+  },
+  "synopsis": "An Anglo-Saxon royal burial in England placed a 27-metre wooden ship inside an earthen mound.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, a massive twenty-seven-metre wooden ship rests inside a deep excavated earthen trench under an ancient burial mound at dawn. Low morning fog drifts slowly across the dark timber hull and surrounding grassy field for the entire ten seconds. The camera executes a smooth slow push-in toward the stern of the buried vessel. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What item would you want buried in your burial ship? ⛵",
+  "family": "zamanin izi",
+  "seed_id": 29,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A 27-metre ship was buried.",
+    "subtitle": "Ancient Anglo Saxons used it as a tomb."
+  },
+  "caption": "In England, a 27-metre ship was buried in a grassy field as a royal grave.\n\nExcavations at Sutton Hoo in 1939 revealed the intact timber outline of an Anglo-Saxon burial vessel. The ship contained rich grave goods intended for a 7th-century ruler.\n\nVisuals created with AI.\n\nWould you want a giant ship as your grave?",
+  "hashtags": "#history #historyfacts #suttonhoo #archaeology #england",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

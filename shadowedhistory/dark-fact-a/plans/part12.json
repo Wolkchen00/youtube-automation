@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 12,
+    "title": "In 1816 It Snowed In June In New England"
+  },
+  "synopsis": "A volcanic summer without sun caused fresh snow to fall across New England in June 1816.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, a rustic 19th-century wooden farmhouse sits amid leafy green summer trees heavily weighted with fresh white snow under a gloomy sky. Thick dark smoke billows steadily from the stone chimney throughout the entire shot while soft snowflakes fall. The camera performs a slow lateral glide across the snow-covered summer garden. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Imagine waking up to snowfall in June! How would you react? ❄️",
+  "family": "tuhaf felaketler",
+  "seed_id": 19,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "In 1816 it snowed during June.",
+    "subtitle": "New England froze in a summer without sun."
+  },
+  "caption": "In 1816, snow fell across New England during the month of June.\n\nThe catastrophic volcanic eruption of Mount Tambora in 1815 blocked sunlight worldwide and disrupted global weather patterns. Historical records from 1816 describe severe summer frosts destroying crops across North America.\n\nVisuals created with AI.\n\nCould you survive a summer with freezing snow?",
+  "hashtags": "#history #historyfacts #weather #1816 #newengland",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

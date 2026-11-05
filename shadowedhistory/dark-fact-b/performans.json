@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-11-04T18:53:26.502384+00:00",
+  "guncellendi": "2026-11-05T18:57:12.426127+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 13,
@@ -3232,6 +3232,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-05T18:57:12.426127+00:00",
+          "yas_saat": 168.737,
+          "youtube": {
+            "views": 283,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 22,
+            "average_view_duration_seconds": 12,
+            "average_view_percentage": 112.38,
+            "engaged_views": 97,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 7,
+            "comments": 1,
+            "views": 1635,
+            "impressions": 1635,
+            "reach": 1111,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 7,
+            "comments_insight": 1,
+            "total_interactions": 9,
+            "ig_reels_avg_watch_time": 9184,
+            "ig_reels_video_view_total_time": 10213234
+          },
+          "tiktok": {
+            "views": 1092,
+            "likes": 17,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -3351,8 +3387,8 @@
         },
         "s7g": {
           "youtube": {
-            "ts": "2026-11-04T18:53:26.502384+00:00",
-            "yas_saat": 144.674,
+            "ts": "2026-11-05T18:57:12.426127+00:00",
+            "yas_saat": 168.737,
             "youtube": {
               "views": 283,
               "likes": 0,
@@ -3380,15 +3416,15 @@
               "ig_reels_video_view_total_time": 10213234
             },
             "tiktok": {
-              "views": 1091,
+              "views": 1092,
               "likes": 17,
               "comments": 0,
               "shares": 0
             }
           },
           "instagram": {
-            "ts": "2026-11-04T18:53:26.502384+00:00",
-            "yas_saat": 144.674,
+            "ts": "2026-11-05T18:57:12.426127+00:00",
+            "yas_saat": 168.737,
             "youtube": {
               "views": 283,
               "likes": 0,
@@ -3416,15 +3452,15 @@
               "ig_reels_video_view_total_time": 10213234
             },
             "tiktok": {
-              "views": 1091,
+              "views": 1092,
               "likes": 17,
               "comments": 0,
               "shares": 0
             }
           },
           "tiktok": {
-            "ts": "2026-11-04T18:53:26.502384+00:00",
-            "yas_saat": 144.674,
+            "ts": "2026-11-05T18:57:12.426127+00:00",
+            "yas_saat": 168.737,
             "youtube": {
               "views": 283,
               "likes": 0,
@@ -3452,7 +3488,7 @@
               "ig_reels_video_view_total_time": 10213234
             },
             "tiktok": {
-              "views": 1091,
+              "views": 1092,
               "likes": 17,
               "comments": 0,
               "shares": 0
@@ -3464,7 +3500,7 @@
       "oranlar": {
         "youtube": 1.0,
         "instagram": 7.97561,
-        "tiktok": 1.027307
+        "tiktok": 1.028249
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -3494,7 +3530,7 @@
           "ig_reels_video_view_total_time": 10213234
         },
         "tiktok": {
-          "views": 1091,
+          "views": 1092,
           "likes": 17,
           "comments": 0,
           "shares": 0
@@ -3655,6 +3691,42 @@
           },
           "tiktok": {
             "views": 1069,
+            "likes": 29,
+            "comments": 2,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-11-05T18:57:12.426127+00:00",
+          "yas_saat": 122.18,
+          "youtube": {
+            "views": 17,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 4,
+            "average_view_percentage": 46.79,
+            "engaged_views": 7,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 8,
+            "comments": 1,
+            "views": 828,
+            "impressions": 828,
+            "reach": 611,
+            "saves": 4,
+            "shares": 0,
+            "likes_insight": 8,
+            "comments_insight": 1,
+            "total_interactions": 13,
+            "ig_reels_avg_watch_time": 7236,
+            "ig_reels_video_view_total_time": 4399938
+          },
+          "tiktok": {
+            "views": 1074,
             "likes": 29,
             "comments": 2,
             "shares": 0
@@ -3904,6 +3976,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-05T18:57:12.426127+00:00",
+          "yas_saat": 69.581,
+          "youtube": {
+            "views": 14,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 236,
+            "impressions": 236,
+            "reach": 195,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 4363,
+            "ig_reels_video_view_total_time": 864026
+          },
+          "tiktok": {
+            "views": 268,
+            "likes": 2,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -4064,7 +4172,68 @@
       },
       "puan": 1.0,
       "etiket": "orta"
+    },
+    {
+      "part": 10,
+      "post_ids": {
+        "youtube": "ULvJzLlhLoE",
+        "instagram": "18108012620627127",
+        "tiktok": "7704399216893807886"
+      },
+      "request_ids": {
+        "youtube": "680d9833a83a444b80963ef67609f1fd",
+        "instagram": "23ff220bfca94175b02848d4a6bce9d0",
+        "tiktok": "07907448a2654471997194e10ce7527b"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-05T18:57:12.426127+00:00",
+          "yas_saat": 23.529,
+          "youtube": {
+            "views": 315,
+            "likes": 3,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 185,
+            "impressions": 185,
+            "reach": 149,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 4845,
+            "ig_reels_video_view_total_time": 726855
+          },
+          "tiktok": {
+            "views": 303,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-04T19:25:26.464693+00:00",
+      "subtitle": "The Medieval Town Of Dunwich Fell Into The Sea",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 15
 }

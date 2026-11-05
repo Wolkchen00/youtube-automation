@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "Petra Treasury Was Carved Top Downward"
+  },
+  "synopsis": "Masons sculpted the iconic facade of Petra's Treasury from the top of the cliff downward.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, the colossal rose-red facade of Petra's Treasury fills the tall frame at the end of a narrow sandstone canyon, illuminated by low golden morning sun. Wisps of windborne sand swirl gently across the carved stone columns and upper pediment during the whole shot. The camera slowly glides forward along the shaded canyon floor toward the towering facade. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you have guessed Petra was carved from the top down? 🏛️",
+  "family": "gizli muhendislik",
+  "seed_id": 43,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Petra Treasury was carved top down.",
+    "subtitle": "Masons cut the cliff facade from above."
+  },
+  "caption": "Petra's famous Treasury building was carved from the top of the cliff downward.\n\nRediscovered by travellers in 1812, the rose-red facade was sculpted directly into the rock face by Nabataean stonemasons. Working from wooden scaffolding above, workers avoided needing lower supports.\n\nVisuals created with AI.\n\nHave you ever visited the ancient city of Petra?",
+  "hashtags": "#history #historyfacts #petra #engineering #ancientjordan",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
