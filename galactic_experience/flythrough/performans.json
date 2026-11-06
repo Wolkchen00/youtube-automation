@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-11-05T19:59:30.903812+00:00",
+  "guncellendi": "2026-11-06T19:26:10.289194+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 57,
@@ -4010,6 +4010,42 @@
             "comments": 0,
             "shares": 1
           }
+        },
+        {
+          "ts": "2026-11-06T19:26:10.289194+00:00",
+          "yas_saat": 169.214,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 56,
+            "impressions": 56,
+            "reach": 47,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 4,
+            "ig_reels_avg_watch_time": 5222,
+            "ig_reels_video_view_total_time": 245460
+          },
+          "tiktok": {
+            "views": 340,
+            "likes": 1,
+            "comments": 0,
+            "shares": 1
+          }
         }
       ],
       "donduruldu": false,
@@ -4129,8 +4165,8 @@
         },
         "s7g": {
           "youtube": {
-            "ts": "2026-11-05T19:59:30.903812+00:00",
-            "yas_saat": 145.77,
+            "ts": "2026-11-06T19:26:10.289194+00:00",
+            "yas_saat": 169.214,
             "youtube": {
               "views": 1,
               "likes": 0,
@@ -4158,15 +4194,15 @@
               "ig_reels_video_view_total_time": 245460
             },
             "tiktok": {
-              "views": 339,
+              "views": 340,
               "likes": 1,
               "comments": 0,
               "shares": 1
             }
           },
           "instagram": {
-            "ts": "2026-11-05T19:59:30.903812+00:00",
-            "yas_saat": 145.77,
+            "ts": "2026-11-06T19:26:10.289194+00:00",
+            "yas_saat": 169.214,
             "youtube": {
               "views": 1,
               "likes": 0,
@@ -4194,15 +4230,15 @@
               "ig_reels_video_view_total_time": 245460
             },
             "tiktok": {
-              "views": 339,
+              "views": 340,
               "likes": 1,
               "comments": 0,
               "shares": 1
             }
           },
           "tiktok": {
-            "ts": "2026-11-05T19:59:30.903812+00:00",
-            "yas_saat": 145.77,
+            "ts": "2026-11-06T19:26:10.289194+00:00",
+            "yas_saat": 169.214,
             "youtube": {
               "views": 1,
               "likes": 0,
@@ -4230,7 +4266,7 @@
               "ig_reels_video_view_total_time": 245460
             },
             "tiktok": {
-              "views": 339,
+              "views": 340,
               "likes": 1,
               "comments": 0,
               "shares": 1
@@ -4242,7 +4278,7 @@
       "oranlar": {
         "youtube": 0.001961,
         "instagram": 0.266667,
-        "tiktok": 0.882812
+        "tiktok": 0.885417
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -4272,13 +4308,13 @@
           "ig_reels_video_view_total_time": 245460
         },
         "tiktok": {
-          "views": 339,
+          "views": 340,
           "likes": 1,
           "comments": 0,
           "shares": 1
         }
       },
-      "puan": 0.882812,
+      "puan": 0.885417,
       "etiket": "orta"
     },
     {
@@ -4427,6 +4463,42 @@
           },
           "tiktok": {
             "views": 348,
+            "likes": 7,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-11-06T19:26:10.289194+00:00",
+          "yas_saat": 121.233,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 159,
+            "impressions": 159,
+            "reach": 122,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 5443,
+            "ig_reels_video_view_total_time": 658624
+          },
+          "tiktok": {
+            "views": 354,
             "likes": 7,
             "comments": 0,
             "shares": 0
@@ -4666,6 +4738,42 @@
           },
           "tiktok": {
             "views": 326,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-11-06T19:26:10.289194+00:00",
+          "yas_saat": 71.728,
+          "youtube": {
+            "views": 690,
+            "likes": 6,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 0,
+            "average_view_percentage": 0.0,
+            "engaged_views": 0,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 1,
+            "views": 140,
+            "impressions": 140,
+            "reach": 111,
+            "saves": 2,
+            "shares": 0,
+            "likes_insight": 5,
+            "comments_insight": 1,
+            "total_interactions": 8,
+            "ig_reels_avg_watch_time": 4980,
+            "ig_reels_video_view_total_time": 572734
+          },
+          "tiktok": {
+            "views": 328,
             "likes": 3,
             "comments": 0,
             "shares": 0
