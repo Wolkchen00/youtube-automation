@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 14,
+    "title": "The Oldest Message In A Bottle Spent Over 130 Years At Sea"
+  },
+  "synopsis": "An ocean bottle containing a message drifted at sea for over 130 years before being found on a beach.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. An old thick green glass bottle partially buried in wet sand at dawn, low sunlight reflecting off its weathered surface as small ocean foam waves lap against it continuously. One slow right-to-left camera tracking movement. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a close-up detail shot inside the tinted green glass, revealing a tightly rolled yellowed parchment document sealed with aged string. Water droplets trickle across the glass exterior. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide shore perspective of a deserted windswept beach under grey morning storm clouds, with a distant silhouetted beachcomber standing far in the background. One slow backward camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, a low shore-level shot of the green glass bottle resting in tide foam as the ocean recedes, held steady with a gentle slow push-in. Muted desaturated colors, deep shadows, grainy archival 16mm film look.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What would you write in a message bottle thrown to sea? 🍾",
+  "family": "zamanin izi",
+  "seed_id": 46,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A message in a bottle floated 130 years.",
+    "subtitle": "It spent more than 130 years at sea."
+  },
+  "caption": "The oldest known message in a bottle spent more than 130 years at sea.\n\nJettisoned in 1886 from a German sailing ship into the Indian Ocean, the bottle was finally retrieved in 2018 on an Australian beach. A hand-written note inside revealed details of the voyage.\n\nVisuals created with AI.\n\nWould you open a mysterious washed-up bottle?",
+  "hashtags": "#history #historyfacts #ocean #archeology #discovery",
+  "hook_shot": 2,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

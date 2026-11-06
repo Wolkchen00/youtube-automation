@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 11,
+    "title": "Divers Found A 2000 Year Old Computer In A Shipwreck"
+  },
+  "synopsis": "Divers discovered a 2,000-year-old bronze geared mechanism inside an ancient Greek shipwreck.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. On a dark seabed illuminated by a beam of diver torchlight, a corroded green bronze mechanical gear lies embedded in silt next to ancient clay amphorae. Water currents gently move silt particles across the scene. One slow forward camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, an extreme close-up of interlocking, oxidized bronze gear teeth and ancient gear shafts encrusted with sea growth, lit by flickering underwater light rays. Floating sediment drifts past the mechanism. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view of the ancient Greek shipwreck scattered across the murky ocean floor, with tiny silhouettes of sponge divers floating near the massive wooden hull timbers. One slow downward camera boom. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, a striking low-angle shot of the bronze mechanism sitting on the dimly lit sea floor, held steady with a slow push-in. Muted teal tones, deep shadows, grainy archival 16mm film look.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you have guessed the ancient Greeks built mechanical computers? ⚙️",
+  "family": "gizli muhendislik",
+  "seed_id": 10,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "A 2,000-year-old computer was found.",
+    "subtitle": "It was recovered from an ancient shipwreck."
+  },
+  "caption": "Divers recovered a 2,000-year-old geared computer from an ancient Greek shipwreck.\n\nDiscovered in 1901 near the island of Antikythera, the mechanical device calculated astronomical positions and eclipses with remarkable precision. Scholars determined it contained dozens of fine bronze gears.\n\nVisuals created with AI.\n\nWhat ancient mystery surprises you most?",
+  "hashtags": "#history #historyfacts #greece #archeology #antikythera",
+  "hook_shot": 2,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

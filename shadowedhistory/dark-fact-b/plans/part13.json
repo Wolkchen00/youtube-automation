@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 13,
+    "title": "Hagia Sophia Was The Largest Cathedral For Nearly 1000 Years"
+  },
+  "synopsis": "Hagia Sophia stood as the largest cathedral in the world for nearly ten centuries after its construction.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. Inside the vast dome interior of Hagia Sophia at morning light, golden ceiling mosaics catch warm shafts of sunlight cutting through arched windows. Incense smoke curls slowly through bright light rays. One continuous upward camera tilt. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a close shot of ancient gilded mosaic tiles shimmering under soft candlelight on a high arch, with fine dust motes swirling in the air. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view showing the massive central nave and gigantic dome towering above, with tiny silhouetted figures standing on the polished marble floor far below. One slow backward camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, a dramatic wide low-angle view looking directly up toward the massive apex of the grand dome, held steady with a slow push-in. Deep shadows, muted amber tones, grainy archival 16mm film look.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Have you ever seen the massive dome of Hagia Sophia? 🕌",
+  "family": "kayip harikalar",
+  "seed_id": 28,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Hagia Sophia was the largest cathedral.",
+    "subtitle": "It kept the record for nearly 1,000 years."
+  },
+  "caption": "Hagia Sophia remained the world's largest cathedral for nearly 1,000 years.\n\nCompleted in 537 AD in Constantinople, the massive domed structure held the record until the completion of Seville Cathedral in 1520. Its architectural engineering reshaped world history.\n\nVisuals created with AI.\n\nHave you ever visited Hagia Sophia?",
+  "hashtags": "#history #historyfacts #hagiasophia #istanbul #architecture",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
