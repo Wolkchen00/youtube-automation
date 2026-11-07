@@ -555,3 +555,20 @@
 {"ts": "2026-11-05T20:43:32Z", "event": "qc_api_result", "attempt_id": "59004f9f7d07419894d21681fc4fda39", "outcome": "429"}
 {"ts": "2026-11-05T20:43:32Z", "event": "review", "episode": 15, "shot": 1, "attempt": 0, "review_try": 2, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_01.mp4"}
 {"ts": "2026-11-05T20:43:32Z", "event": "qc_hold", "episode": 15, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-11-07T17:53:25Z", "event": "qc_api_attempt", "attempt_id": "baa8884e09ce4a8abe94843fa419bdf6", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T17:54:48Z", "event": "qc_api_result", "attempt_id": "baa8884e09ce4a8abe94843fa419bdf6", "outcome": "ok"}
+{"ts": "2026-11-07T17:54:48Z", "event": "native_audio_review", "episode": 15, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Natural ambient sound of roaring, rushing water and crashing waves with no speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-07T17:54:48Z", "event": "qc_api_attempt", "attempt_id": "4117b6f6414d452fa0b8b222de8daabb", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T17:54:55Z", "event": "qc_api_result", "attempt_id": "4117b6f6414d452fa0b8b222de8daabb", "outcome": "error"}
+{"ts": "2026-11-07T17:55:00Z", "event": "qc_api_attempt", "attempt_id": "5cb7a8c3d5e94f81a5182b888608e04c", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T17:55:04Z", "event": "qc_api_result", "attempt_id": "5cb7a8c3d5e94f81a5182b888608e04c", "outcome": "error"}
+{"ts": "2026-11-07T17:55:14Z", "event": "qc_api_attempt", "attempt_id": "f41c7cda3f48468b82100119b2f472c7", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T17:55:21Z", "event": "qc_api_result", "attempt_id": "f41c7cda3f48468b82100119b2f472c7", "outcome": "error"}
+{"ts": "2026-11-07T17:55:21Z", "event": "qc_api_attempt", "attempt_id": "5efbb907bd574864b2e59fba74a2c489", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T17:55:27Z", "event": "qc_api_result", "attempt_id": "5efbb907bd574864b2e59fba74a2c489", "outcome": "error"}
+{"ts": "2026-11-07T17:55:32Z", "event": "qc_api_attempt", "attempt_id": "8c25da1aa28d4e5d8a4ec9663f5bff43", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T18:00:12Z", "event": "qc_api_result", "attempt_id": "8c25da1aa28d4e5d8a4ec9663f5bff43", "outcome": "error"}
+{"ts": "2026-11-07T18:00:12Z", "event": "qc_api_attempt", "attempt_id": "1f1fddc33c674c009887ec979083e6df", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 15, "shot": 1}
+{"ts": "2026-11-07T18:00:20Z", "event": "qc_api_result", "attempt_id": "1f1fddc33c674c009887ec979083e6df", "outcome": "ok"}
+{"ts": "2026-11-07T18:00:20Z", "event": "review", "episode": 15, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Heavy motion blur and visual smear during high-speed transition into the plume core."], "fix_notes": ["Maintain clearer particle clarity and structural detail during high-velocity forward motion."], "clip": "shot_01.mp4"}
+{"ts": "2026-11-07T18:00:20Z", "event": "qc_pass", "episode": 15, "shot": 1, "attempt": 0, "content_sha256": "853bfa9fc89a7586f4e7f38508c4b91876451b1dd9fae16592753abc3f5dfa04", "clip": "shot_01.mp4"}
