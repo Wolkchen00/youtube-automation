@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 14,
-  "next_part": 12,
+  "next_part": 13,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
   "auto_replenish": {
@@ -417,6 +417,27 @@
         "tiktok"
       ],
       "published_at": "2026-11-05T19:15:20.454376+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "12": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-a/episodes/ep12/ep12_music_titled_mastered.mp4",
+      "subtitle": "In 1816 It Snowed In June In New England",
+      "stack_sha256": "67fafc0c4c681357187c734f294dc9fef8d86704118cee5d75b25cbc55483916",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-07T17:11:18.130815+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
