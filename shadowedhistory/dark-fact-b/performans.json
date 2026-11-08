@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-11-07T16:59:48.948105+00:00",
+  "guncellendi": "2026-11-08T17:16:13.263689+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 146.5,
@@ -3805,7 +3805,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-10-31T16:46:23.616140+00:00",
       "subtitle": "Cologne Cathedral Took 632 Years To Finish",
@@ -4266,6 +4266,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-08T17:16:13.263689+00:00",
+          "yas_saat": 139.898,
+          "youtube": {
+            "views": 13,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 0,
+            "average_view_duration_seconds": 7,
+            "average_view_percentage": 78.5,
+            "engaged_views": 2,
+            "subscribers_gained": 0,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 236,
+            "impressions": 236,
+            "reach": 195,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 4363,
+            "ig_reels_video_view_total_time": 864026
+          },
+          "tiktok": {
+            "views": 290,
+            "likes": 2,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -4547,6 +4583,42 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-08T17:16:13.263689+00:00",
+          "yas_saat": 93.846,
+          "youtube": {
+            "views": 358,
+            "likes": 3,
+            "comments": 1,
+            "favorites": 0,
+            "watch_time_minutes": 30,
+            "average_view_duration_seconds": 16,
+            "average_view_percentage": 169.47,
+            "engaged_views": 92,
+            "subscribers_gained": 1,
+            "shares": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 189,
+            "impressions": 189,
+            "reach": 153,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 4786,
+            "ig_reels_video_view_total_time": 737153
+          },
+          "tiktok": {
+            "views": 324,
+            "likes": 3,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -4709,5 +4781,5 @@
       "etiket": "kazanan"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 6
 }

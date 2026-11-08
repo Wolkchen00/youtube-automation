@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 14,
-  "next_part": 11,
+  "next_part": 12,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -415,11 +415,29 @@
       }
     },
     "11": {
-      "status": "qc_retry",
+      "status": "published",
       "first_held_at": "2026-11-06T19:02:06.711906+00:00",
       "retry_count": 1,
       "last_reason_code": "UNKNOWN",
-      "hold_reason": "üretim nedeni bilinmiyor"
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep11/ep11_music_titled_mastered.mp4",
+      "subtitle": "Divers Found A 2000 Year Old Computer In A Shipwreck",
+      "stack_sha256": "3d21a1308ce4ef65f7f5f0eaacedcb6e3a03072a437c23ea5687b2ead134821f",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-08T17:55:44.495376+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 9.9,
+        "duration_in_band": true,
+        "degraded": false
+      }
     }
   },
   "engagement": {
