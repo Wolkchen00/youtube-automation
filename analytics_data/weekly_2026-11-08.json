@@ -1,0 +1,264 @@
+{
+  "generated_at": "2026-11-08T14:53:56.475809+00:00",
+  "snapshot_date": "2026-11-08",
+  "period": "2026-11-02 to 2026-11-08",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 134,
+        "total_views": 121279,
+        "total_videos": 307
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "U4-LfTMyNTE",
+          "title": "In 1816 It Snowed In June In New England",
+          "published": "2026-11-07T17:09:45Z",
+          "views": 1,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "IUFIPvmPLvg",
+          "title": "Terracotta Army Was Originally Brightly Painted",
+          "published": "2026-11-05T19:13:17Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "ULvJzLlhLoE",
+          "title": "The Medieval Town Of Dunwich Fell Into The Sea",
+          "published": "2026-11-04T19:24:00Z",
+          "views": 358,
+          "views_48h": 357,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "0UfxHi59iBU",
+          "title": "In 1908 A Siberian Blast Flattened 80 Million Trees",
+          "published": "2026-11-03T19:01:45Z",
+          "views": 8,
+          "views_48h": 8,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "Ca9aGUjmQeM",
+          "title": "In 1859 A Solar Storm Lit Up The Caribbean",
+          "published": "2026-11-02T21:19:15Z",
+          "views": 13,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "q4V-jt9vaRE",
+          "title": "Machu Picchu Stone Joints Leave No Room For A Knife",
+          "published": "2026-11-01T17:28:20Z",
+          "views": 3,
+          "views_48h": 2,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 10.5
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 158,
+        "total_views": 2,
+        "total_videos": 1
+      },
+      "videos_last_7_days": [],
+      "views_30d_median": 2
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 152,
+        "total_views": 79093,
+        "total_videos": 240
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "Ta77-_xnPUE",
+          "title": "Plunging into the Geysers of Triton",
+          "published": "2026-11-07T18:02:50Z",
+          "views": 2,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "2YXjt8QIY_A",
+          "title": "A Hurricane Covering the Whole Gulf of Mexico",
+          "published": "2026-11-06T19:59:08Z",
+          "views": 10,
+          "views_48h": 10,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "KEsHYdMdbzg",
+          "title": "A Rift Widening Across All of Thingvellir",
+          "published": "2026-11-04T20:14:05Z",
+          "views": 47,
+          "views_48h": 47,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "o7oohVUbQlU",
+          "title": "Through the Trojan Asteroids",
+          "published": "2026-11-03T19:40:25Z",
+          "views": 689,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "K_bbD-mP-FI",
+          "title": "A Lava River Along the Entire Hawaiian Coastline",
+          "published": "2026-11-02T21:51:35Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "GKnmYDv047k",
+          "title": "Through the Pillars of Creation",
+          "published": "2026-11-01T18:06:58Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 5.0
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 112,
+        "total_views": 162152,
+        "total_videos": 313
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "EC51_nEF_PM",
+          "title": "Christ the Redeemer storm drop #shorts",
+          "published": "2026-11-07T16:56:20Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "0EB8Foarkqo",
+          "title": "Taj Mahal slide into a flood #shorts",
+          "published": "2026-11-06T18:09:21Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "wOu6eMH6pfA",
+          "title": "Tokyo Tower slide into a typhoon #shorts",
+          "published": "2026-11-05T18:47:11Z",
+          "views": 1,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "eU_0dH5hM8Q",
+          "title": "Everest slide into an avalanche #shorts",
+          "published": "2026-11-04T18:48:04Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "cxOkChFzKP4",
+          "title": "Golden Gate, a giant wave below #shorts",
+          "published": "2026-11-03T18:33:36Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "7JRuml2UUVw",
+          "title": "Burj Khalifa struck by lightning #shorts",
+          "published": "2026-11-02T20:50:53Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "VP-rKheshxM",
+          "title": "Mount Fuji drop into an eruption #shorts",
+          "published": "2026-11-01T17:13:44Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 3
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 422,
+        "total_views": 245268,
+        "total_videos": 59
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "5BQiOxvaU-4",
+          "title": "Kocasının sevgilisi şirkete geldi. Karısı onu tek cümleyle yerine oturttu. 💅 | Bir Kez Olsun 73",
+          "published": "2026-11-07T16:02:28Z",
+          "views": 936,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "_8AR3xPaSI0",
+          "title": "Gelin anneannesini toprağa verdi. Kocası ona sadece bebeği sordu. 💔 | Bir Kez Olsun 72",
+          "published": "2026-11-06T16:03:16Z",
+          "views": 9288,
+          "views_48h": 9288,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "uhcRkNH4U_w",
+          "title": "Gelin hamileliğini sofrada müjdeleyecekti. Anneannesi o sofraya hiç gelmedi. 🕊️ | Bir Kez Olsun 71",
+          "published": "2026-11-05T16:02:10Z",
+          "views": 5819,
+          "views_48h": 4987,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "KTpBQRWTl7I",
+          "title": "Kocası kapıyı çalarken gizlice hamilelik testi yaptı. Sonucu ona söylemedi. 🍼 | Bir Kez Olsun 70",
+          "published": "2026-11-04T16:02:27Z",
+          "views": 3461,
+          "views_48h": 2455,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "xQRHX1DQP_8",
+          "title": "Kayınvalide aldatan kocasından intikam almaya başladı. İlk hamlesi şirkette oldu. | Bir Kez Olsun 69",
+          "published": "2026-11-03T16:02:37Z",
+          "views": 8172,
+          "views_48h": 6785,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "3HQMygVJEDs",
+          "title": "Kayınvalide kocasının sırrını öğrendi. Gelinine bile söylemeden avukata gitti. ⚖️ | Bir Kez Olsun 68",
+          "published": "2026-11-02T16:01:41Z",
+          "views": 9168,
+          "views_48h": 7435,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "gcp0gCGmYIA",
+          "title": "Kocası \"şirketteyim\" dedi. Karısı her şeyi biliyordu ama sesini çıkarmadı. 🤫 | Bir Kez Olsun 67",
+          "published": "2026-11-01T16:02:12Z",
+          "views": 23849,
+          "views_48h": 10820,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 3308.5
+    }
+  }
+}
