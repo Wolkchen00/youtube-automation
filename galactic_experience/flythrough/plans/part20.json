@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 20,
+    "title": "Flying into a Sunspot on the Sun"
+  },
+  "synopsis": "A high-speed plunge into a massive sunspot surrounded by magnetic solar plasma.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nIn 9:16 vertical framing, a massive dark sunspot is carved into the blinding golden surface of the Sun, surrounded by churning plasma granules. Hard incandescent light illuminates fiery magnetic arches loop overhead. Seconds 0-4 start with a smooth glide over the solar surface, revealing the cavernous dark center of the sunspot framed by glowing plasma walls. Seconds 4-6 accelerate toward the dark umbra as towering solar filaments enter the top of the frame. Seconds 6-13 fly at extreme velocity through magnetic plasma corridors, with house-sized granules streaking past, close plasma streams blurring, and magnetic reconnection snaps bursting across the field of view. Seconds 13-15 plunge deep into the core of the sunspot vortex, where swirling dark magnetic fields and explosive flares consume the frame. Sound initiates as a quiet, heavy low-frequency thrum, surging with crisp electrical snaps during magnetic bursts, hitting maximum intensity during the final two seconds. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Have you ever seen a real sunspot through a telescope solar filter? ☀️",
+  "family": "yildiz yakini",
+  "seed_id": 20,
+  "caption": "This dive plunges into a massive sunspot region on the surface of the Sun.\n\nGiant magnetic plasma convection cells measuring thousands of kilometers across boil continuously beside cooler sunspot cores.\n\nThe Parker Solar Probe flew through the solar corona in 2021, measuring intense magnetic fields and energetic solar wind particle fluxes.\n\nEntering a sunspot is impossible because plasma temperatures exceeding four thousand kelvin instantly incinerate any solid alloy into dispersed gas.\n\nThis is a simulation, not real footage. Did you expect sunspots to be calm or turbulent?",
+  "hashtags": "#Sun #Sunspot #SolarPhysics #Astronomy #SpaceExploration #SpaceSimulation #Astrophysics",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}

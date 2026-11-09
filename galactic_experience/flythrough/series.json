@@ -15,8 +15,8 @@
   "performance_feedback": true,
   "status": "active",
   "priority": 10,
-  "total_parts": 16,
-  "next_part": 16,
+  "total_parts": 21,
+  "next_part": 17,
   "doctrine": "galactic_experience/flythrough/KONSEPT-C.md",
   "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1",
   "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off'ta part 1 (Saturn) tuttu, serit SONSUZ ANTOLOJIYE cevrildi. Metot degismedi, hedef degisiyor. Doktrin: flythrough/KONSEPT-C.md v2.0. EN BUYUK RISK tekrar tuzagi: ayni anatomiyi ikinci kez cekmek uc kez olculdu ve 67 kata kadar dusus getirdi, bu yuzden families DALINAN ORTAM TURUNU tanimlar ve ardisik iki bolum ayni aileden olamaz. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi CIFT olan gunlerde bu serit uretilir, TEK gunlerde one-variable. Bu seride shot_seconds 15: Seedance 4-15 sn uretir, replenish sure dogrulamasi 14 Eylul'de motor-farkinda yapildi.",
@@ -168,8 +168,8 @@
       }
     ],
     "last_run": {
-      "at": "2026-10-24T15:58:52.527797+00:00",
-      "parts": "12-16"
+      "at": "2026-11-09T22:24:34.131464+00:00",
+      "parts": "17-21"
     }
   },
   "parts": {
@@ -472,6 +472,27 @@
         "tiktok"
       ],
       "published_at": "2026-11-07T18:05:02.337877+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 15.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "16": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flythrough/episodes/ep16/ep16_mastered.mp4",
+      "subtitle": "Through the Dust of Betelgeuse",
+      "stack_sha256": "288de2356974e6171bcab5c74963bbee031b99bb219a0824320951d5a9a646bc",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-09T22:39:26.410872+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,

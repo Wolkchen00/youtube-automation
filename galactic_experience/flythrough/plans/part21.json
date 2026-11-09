@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 21,
+    "title": "Through the Kuiper Belt"
+  },
+  "synopsis": "A continuous first-person flight through frozen planetesimals in the outer Kuiper Belt.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nIn 9:16 vertical layout, dark icy planetesimals float silently in the faint light of the distant Sun, surrounded by a sparse field of frozen debris. Cold sunlight highlights the pitted textures of ammonia and methane ice blocks. Seconds 0-4 begin with a wide forward drift, framing a cratered icy world on the left with distant stars visible beyond. Seconds 4-6 accelerate toward a dense cluster of frozen fragments as small icy rocks slide into view. Seconds 6-13 race through the icy boulder field, with car-sized frozen rocks passing rapidly on left and right, foreground frost crystals blurring past the camera, and tumbling asteroids colliding in shower of ice dust. Seconds 13-15 plunge into a dense cloud of shattered ice crystals, filling the viewpoint with brilliant white reflections in an intense climax. Sound starts as a faint deep rumble, growing continuously while crisp acoustic crackles match exploding ice impacts, reaching maximum power in the final two seconds. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Do you think we'll discover a ninth planet in the Kuiper Belt? 🪐",
+  "family": "kaya alani",
+  "seed_id": 11,
+  "caption": "This flight weaves through the distant icy planetesimals of the Kuiper Belt.\n\nBillions of frozen bodies composed of water ice, methane, and ammonia drift across distances spanning billions of kilometers.\n\nNASA New Horizons spacecraft encountered the Kuiper Belt object Arrokoth in 2019, revealing a reddish contact binary world.\n\nContinuous high-speed flight through this zone is impossible because extreme dark conditions and vast spatial distances prevent real-time obstacle avoidance.\n\nThis is a simulation, not real footage. Could humanity ever set up an outpost this far from the sun?",
+  "hashtags": "#KuiperBelt #IcyWorlds #OuterSolarSystem #Astronomy #SpaceExploration #SpaceSimulation #Cosmos",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}
