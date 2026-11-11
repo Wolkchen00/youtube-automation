@@ -543,3 +543,40 @@ gorunmuyordu). Dubai (2 Kasim) sabah kosusundan once tehlikeye cevrildi, ilk den
 
 Olcut: taban 3-4K. Bir kanca 3 denemede 15K'yi gecerse kalan stok o kancaya cevrilir.
 Ikisi de tabanda kalirsa sorun acilis degil format yorgunlugu; yeni konsept gerekir.
+
+## 11 Kasim 2026: kanca sonucu (Ihsan "degisiklikten sonra izlenmeler dustu")
+
+IG reels izgarasi, giris yapmis tarayici, 11 Kas ~18:00 UTC. Takipci 16,3K (29 Eki) -> 16,8K.
+
+| Tarih | Rota | Kanca | IG izlenme | Yas |
+|---|---|---|---|---|
+| 2 Kas | dubai-burj-yildirim | tehlike | 3.730 | 9 g |
+| 3 Kas | sanfrancisco-goldengate-dev-dalga | gece | 4.105 | 8 g |
+| 4 Kas | everest-cig | tehlike | 3.003 | 7 g |
+| 5 Kas | tokyo-kule-tayfun | gece | 8.656 | 6 g |
+| 6 Kas | agra-tacmahal-sel | tehlike | 5.460 | 5 g |
+| 7 Kas | rio-cristo-yildirim | gece | 3.786 | 4 g |
+| 8 Kas | venedik-sanmarco-taskin | tehlike | **69.500** | 3 g |
+| 9 Kas | lasvegas-strip-kum-firtinasi | gece | 2.882 (kanalin en dusugu) | ~2 g |
+| 10 Kas | chichenitza-piramit-kasirga | tehlike | 7.338 | ~1 g |
+
+Kiyas, degisiklikten onceki 12 video (21 Eki-1 Kas, bugunku deger): 4.334-12.900,
+ortanca ~6,3K, hicbiri 15K ustu yok. Son bes onceki (28 Eki-1 Kas): 4,3-9,8K, ortanca 4,7K.
+29 Eki olcumu gosteriyor: 2. gunden sonra video ~%20-25 daha buyur, sonra durur.
+
+Okuma:
+- Ihsan'in gordugu dusus SIRADAN videoda dogru: ortanca 4,7K -> ~3,9K. En son ikisi (Rio,
+  Las Vegas) gece kancasiydi ve en dusukler arasinda.
+- Gece kancasi 4/4 tabanda (2,9-8,7K). Eylul'un gece buyukleri tekrarlanmadi.
+- Tehlike kancasi 5'te 1 buyuk (Venedik 69,5K, 20 Eki Kolezyum 96,6K'dan beri en buyuk),
+  Chichen Itza 1. gununde 7,3K (Fuji 1. gun 3,3K idi). Diger uc tehlike tabanda.
+- Toplam: degisiklikten sonraki 8 video ~101K, onceki 8 video (25 Eki-1 Kas) ~46K.
+  Toplami Venedik tek basina tasiyor; tek ornekten kural cikarilmaz.
+- Venedik ilk karesi digerlerinden farkli olarak felaketi HAREKETLI gosteriyor: sehre
+  dogru yuruyen, kulelerden yuksek su duvari. Dubai/Everest'te felaket ufukta ama durgun.
+
+Karar (2 Kas olcutu, tehlike 15K'yi gecti): kalan stok tehlikeye. Neuschwanstein (11 Kas)
+sabah kosusundan once gece -> tehlike cevrildi (5a8469c, yeni ilk kare gozle onayli:
+kalenin arkasinda kopan yamac + sagnak). Londra (12 Kas) zaten tehlike. 13 Kas'tan itibaren
+yeni rota yok, sirdaki() tekrar uretir; yeni tehlike rotalari Venedik kalibiyla
+(ilk karede landmark'a dogru gelen dev tehdit) yazilmali.
