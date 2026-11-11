@@ -2045,28 +2045,30 @@ ROTALAR: dict[str, dict] = {
     "bavyera-neuschwanstein-heyelan": dict(
         sehir="Bavaria", landmark="Neuschwanstein Castle", neon="flamingo pink",
         palet="neon", anahtar="Neuschwanstein", isik="yesil-civa",
-        kanca="gece",
-        hava="a still, clear autumn night in the Alps, the sky black and full of stars",
+        kanca="tehlike",
+        hava=(
+            "a grey, darkening autumn afternoon in the Alps, still where she walks, with a "
+            "black cloudburst already pouring down on the mountains behind the castle"
+        ),
         felaket="an Alpine cloudburst and a landslide of mud and rock",
         ilk_kare=(
             "Far below and ahead, filling the upper half of the frame: Neuschwanstein Castle "
-            "seen from the FRONT, from the valley meadows, at night, its white limestone walls,"
-            " tall slender towers and pointed roofs floodlit warm gold against the black sky on"
-            " a rocky ridge above a deep dark gorge. The steep Alpine mountains rise black "
-            "behind it under the stars, and the lights of a small village glitter beside a dark"
-            " lake in the valley below. The two flamingo pink rims of the slide mouth flare "
-            "open like a pair of glowing wings, blazing against the dark and lighting her wet "
-            "legs and the glass. A thick cloud bank, lit softly from below by the glow of the "
-            "lights, lies across the valley below the slide, and the slide dives down toward "
-            "it."
+            "seen from the FRONT, from the valley meadows, its white limestone walls, tall "
+            "slender towers and pointed grey roofs on a rocky ridge above a deep gorge. Right "
+            "behind the castle a black cloudburst hangs over the steep Alpine mountains, grey "
+            "curtains of rain pouring down out of it, and the forested mountainside above the "
+            "castle has already torn open: a huge raw brown scar of mud and rock is sliding "
+            "down toward the castle walls, snapped pines tumbling in it, and the waterfall in "
+            "the gorge below has turned into a roaring brown torrent. A thick white cloud bank"
+            " lies across the valley below the slide, and the slide dives down toward it."
         ),
         acilis=(
-            "Neuschwanstein Castle fills the centre of the frame, its floodlit white towers and"
-            " turrets crowding along the narrow ridge, the gilded weather vanes glinting in the"
-            " light. The slide drops past the top of the tallest tower close enough to see the "
-            "lit white stone, the arched windows glowing yellow and the slate tiles rush up and"
-            " past on the right, the black gorge and the pale thread of its waterfall far "
-            "below."
+            "Neuschwanstein Castle fills the centre of the frame, its white towers and turrets"
+            " crowding along the narrow ridge, pale under the black cloudburst coming down off"
+            " the mountains and the brown scar of the slipping slope behind it. The slide drops"
+            " past the top of the tallest tower close enough to see the white stone, the "
+            "arched windows and the slate tiles rush up and past on the right, the brown "
+            "torrent in the gorge far below."
         ),
         kapi_ici=(
             "The air turns wet and heavy, the murk inside the cloud darkens to grey-green, "
