@@ -2391,6 +2391,14 @@
       "reserved": 700,
       "actual": 206.0,
       "ts": "2026-11-11T19:29:56.556210+00:00"
+    },
+    {
+      "month": "2026-11",
+      "series": "flythrough",
+      "part": 17,
+      "reserved": 900,
+      "actual": 372.0,
+      "ts": "2026-11-11T20:03:22.843434+00:00"
     }
   ],
   "episode_spend": {
@@ -2424,20 +2432,20 @@
     "wild-encounter:23": 890.0,
     "wild-encounter:24": 638.0,
     "wild-encounter:25": 260.0,
+    "wild-encounter:26": 260.0,
+    "wild-encounter:27": 134.0,
+    "wild-encounter:28": 134.0,
+    "wild-encounter:29": 638.0,
     "wild-encounter:3": 84.0,
+    "wild-encounter:30": 260.0,
+    "wild-encounter:31": 134.0,
+    "wild-encounter:32": 134.0,
+    "wild-encounter:33": 386.0,
     "wild-encounter:4": 210.0,
     "wild-encounter:5": 315.0,
     "wild-encounter:6": 436.0,
     "wild-encounter:7": 533.0,
     "wild-encounter:8": 142.0,
-    "wild-encounter:9": 142.0,
-    "wild-encounter:26": 260.0,
-    "wild-encounter:27": 134.0,
-    "wild-encounter:28": 134.0,
-    "wild-encounter:29": 638.0,
-    "wild-encounter:30": 260.0,
-    "wild-encounter:31": 134.0,
-    "wild-encounter:32": 134.0,
-    "wild-encounter:33": 386.0
+    "wild-encounter:9": 142.0
   }
 }
