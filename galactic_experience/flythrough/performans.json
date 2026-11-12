@@ -1,6 +1,6 @@
 {
   "series": "flythrough",
-  "guncellendi": "2026-11-11T19:43:16.890496+00:00",
+  "guncellendi": "2026-11-12T19:55:29.657813+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 24,
@@ -5513,6 +5513,36 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-12T19:55:29.657813+00:00",
+          "yas_saat": 121.841,
+          "youtube": {
+            "views": 2,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 2,
+            "comments": 1,
+            "views": 178,
+            "impressions": 178,
+            "reach": 145,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 2,
+            "comments_insight": 1,
+            "total_interactions": 3,
+            "ig_reels_avg_watch_time": 6820,
+            "ig_reels_video_view_total_time": 954820
+          },
+          "tiktok": {
+            "views": 458,
+            "likes": 5,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5722,6 +5752,36 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-12T19:55:29.657813+00:00",
+          "yas_saat": 69.268,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 4,
+            "comments": 1,
+            "views": 166,
+            "impressions": 166,
+            "reach": 122,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 4,
+            "comments_insight": 1,
+            "total_interactions": 5,
+            "ig_reels_avg_watch_time": 6966,
+            "ig_reels_video_view_total_time": 877778
+          },
+          "tiktok": {
+            "views": 316,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5858,7 +5918,62 @@
       },
       "puan": 1.0,
       "etiket": "orta"
+    },
+    {
+      "part": 17,
+      "post_ids": {
+        "youtube": "tUd7wI8fMHU",
+        "instagram": "18110452286244744",
+        "tiktok": "7707010231561161997"
+      },
+      "request_ids": {
+        "youtube": "c5b9821e74624379854e71b22cd53a74",
+        "instagram": "790ad1a4989344ae906e022f5c34ff79",
+        "tiktok": "b64257e3dc414959bb8b41b07a3e3323"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-12T19:55:29.657813+00:00",
+          "yas_saat": 23.65,
+          "youtube": {
+            "views": 2,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 146,
+            "impressions": 146,
+            "reach": 110,
+            "saves": 1,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 5,
+            "ig_reels_avg_watch_time": 7553,
+            "ig_reels_video_view_total_time": 838385
+          },
+          "tiktok": {
+            "views": 252,
+            "likes": 6,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-11T20:16:29.536701+00:00",
+      "subtitle": "Through the Rings of Uranus",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 12
 }

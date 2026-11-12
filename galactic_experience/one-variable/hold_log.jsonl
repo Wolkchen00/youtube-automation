@@ -5,3 +5,4 @@
 {"ts": "2026-10-21T17:21:42.050564+00:00", "part": 106, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
 {"ts": "2026-10-31T17:19:50.686947+00:00", "part": 108, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
 {"ts": "2026-11-10T19:48:10.353326+00:00", "part": 112, "durum": "qc_retry", "kod": "QUOTA", "neden": "quota", "coherence": null}
+{"ts": "2026-11-12T20:04:58.198323+00:00", "part": 112, "durum": "needs_human", "kod": "QUOTA", "neden": "quota", "coherence": null}
