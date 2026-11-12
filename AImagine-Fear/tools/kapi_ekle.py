@@ -21,6 +21,11 @@ kancayla sirayla acilir, yuruyus ve bulut kapisi ayni kalir:
   tehlike : felaket ilk karede ufukta gorunur ve yaklasir; bulutun altinda gelmis olur
 Olcum ve sonuc: REELYZE-RAPOR.md, 2 Kasim bolumu.
 
+2026-11-11 olcum: gece 4/4 tabanda (2,9-8,7K), tehlike Venedik 69,5K. Kalan ve yeni
+rotalar YALNIZ tehlike. Venedik kalibi: ilk karede felaket ufukta DURMAZ, landmark'tan
+buyuk ve ona dogru GELIR (dalga, hortum, goktasi, yangin, kul akisi). REELYZE-RAPOR.md
+11 Kasim bolumu.
+
 Rota alanlari:
   kanca (istege bagli): gece | tehlike, yalniz SOURCE satirina yazilir; metni hava,
   ilk_kare ve acilis tasir
@@ -2202,6 +2207,552 @@ ROTALAR: dict[str, dict] = {
             "Big Ben struck by lightning #shorts",
             "Big Ben drop into a violet storm #shorts",
             "Big Ben under a violet sky #shorts",
+        ),
+    ),
+    # 2026-11-11 ucuncu KAPI dalgasi: hepsi tehlike kancasi, Venedik kalibi (69,5K).
+    # Ilk karede felaket UZAKTA DURMAZ: landmark'tan buyuk ve ona dogru GELIR.
+    "pisa-kule-hortum": dict(
+        sehir="Pisa", landmark="the Leaning Tower of Pisa", neon="neon lavender",
+        palet="sicak", anahtar="Leaning Tower", isik="yesil-civa",
+        kanca="tehlike",
+        hava=(
+            "a warm golden Tuscan afternoon, still where she walks, with a black supercell "
+            "already dropping a giant tornado onto the fields beyond the city"
+        ),
+        felaket="a giant tornado tearing across the Piazza dei Miracoli",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: the Leaning Tower of "
+            "Pisa seen from the FRONT, from the green lawn of the Piazza dei Miracoli: the "
+            "white marble bell tower with its rows of arched galleries leaning clearly to one "
+            "side, the long white cathedral and the round baptistery beside it, the red roofs "
+            "of Pisa around the square, all lit gold by the low afternoon sun. Beyond the city "
+            "a huge black supercell fills the sky, and out of it a colossal dark tornado, far "
+            "taller than the tower, has already touched down in the fields and is moving "
+            "toward the square, a churning cloud of dust, torn trees and roof tiles flying "
+            "around its base. A thick white cloud bank lies across the city below the slide, "
+            "and the slide dives down toward it."
+        ),
+        acilis=(
+            "The Leaning Tower fills the centre of the frame, leaning hard to one side, its "
+            "white marble galleries gold in the sun under the black storm coming in over the "
+            "fields. The slide drops past the top of the tower close enough to see the bells "
+            "in the open belfry and the worn marble columns rush up and past on the right, the "
+            "green lawn and the cathedral far below."
+        ),
+        kapi_ici=(
+            "The warm air turns cold and green, a low howl rises inside the cloud, and grit "
+            "and torn leaves start to whip across the lens."
+        ),
+        ortaya=(
+            "the same square under a green-black supercell. The sky over Pisa has turned a "
+            "sick dark green, the grass of the Piazza dei Miracoli is flattened by the wind, "
+            "and the Leaning Tower stands pale against the storm. Beyond the cathedral the "
+            "giant tornado is grinding across the city toward the square, a black funnel wider "
+            "than the cathedral, roofs bursting into the air around its base."
+        ),
+        tirmanis=(
+            "Roof tiles, branches and cafe chairs fly past the slide, the wind slams the "
+            "acrylic sideways and it groans, and dust and rain streak over the clear floor "
+            "under her feet. The tornado rips the dome off the baptistery and throws the "
+            "marble into the air, and a flash of lightning lights the leaning tower for an "
+            "instant."
+        ),
+        doruk=(
+            "The tornado crosses the square toward the slide from the right side of the frame, "
+            "a roaring black wall of wind and dust taller than the Leaning Tower, with roof "
+            "tiles, trees and broken marble flying inside it, growing every second and filling "
+            "more and more of the frame."
+        ),
+        son=(
+            "The tornado swallows the camera: dust and debris blast across the lens, the frame "
+            "turns dark green-grey, then dims to near black as mud and grit cover the lens."
+        ),
+        son_durum=(
+            "The camera is inside the tornado. The frame is almost black, with only a faint "
+            "green flicker of lightning through the dirt pressed against the lens. The roar of "
+            "the wind is muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Tight, fast breathing as the wind rises in the cloud."),
+            ("7.6-8.6", "A short wordless scream as the roof tiles fly past."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the tornado, cut off "
+                          "as it swallows the camera."),
+        ),
+        caption=(
+            "You're sliding past the Leaning Tower of Pisa, then through a cloud as a giant "
+            "tornado crosses the square. Would you ride it?"
+        ),
+        emoji="\U0001F32A️\U0001F1EE\U0001F1F9", etiket="#LeaningTowerOfPisa",
+        basliklar=(
+            "Leaning Tower vs a tornado #shorts",
+            "Leaning Tower in a tornado #shorts",
+            "Leaning Tower, then the twister #shorts",
+        ),
+    ),
+    "singapur-marinabay-tsunami": dict(
+        sehir="Singapore", landmark="Marina Bay Sands", neon="molten orange",
+        palet="neon", anahtar="Marina Bay", isik="mavi-beyaz",
+        kanca="tehlike",
+        hava=(
+            "a bright, humid tropical afternoon, still where she walks, with a giant dark wave "
+            "already rising out at sea beyond the city"
+        ),
+        felaket="a colossal tsunami rolling in from the Singapore Strait",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: Marina Bay Sands in "
+            "Singapore seen from the FRONT, from across the bay: its three tall hotel towers "
+            "joined on top by the long SkyPark like a ship resting across their roofs, the "
+            "lotus-shaped ArtScience Museum on the waterfront, the tall Supertrees of Gardens "
+            "by the Bay beside it. Out at sea beyond the towers, a colossal dark green tsunami "
+            "wave, far taller than the three towers, is already rolling toward the city across "
+            "the whole horizon, its crest breaking white, the big container ships in the strait "
+            "tipped up on its face. A thick white cloud bank lies across the bay below the "
+            "slide, and the slide dives down toward it."
+        ),
+        acilis=(
+            "Marina Bay Sands fills the centre of the frame, the three towers and the SkyPark "
+            "on top shining in the sun under the dark wall of water rising out at sea. The "
+            "slide drops past the edge of the SkyPark close enough to see the long pool, the "
+            "palm trees and the sun loungers rush up and past on the right, the bay and the "
+            "Supertrees far below."
+        ),
+        kapi_ici=(
+            "The air turns cold and salty, a deep rumble rises inside the cloud, and sea spray "
+            "starts to bead across the lens."
+        ),
+        ortaya=(
+            "the same city as the tsunami arrives. The bay has drained to wet mud and stranded "
+            "boats, and Marina Bay Sands stands under a dark grey sky. Out past the towers the "
+            "giant wave is coming in across the strait, a moving green-black cliff of sea water "
+            "taller than the towers, ships and cranes tumbling on its face."
+        ),
+        tirmanis=(
+            "The first surge pours over the waterfront and fills the bay in seconds, smashing "
+            "the boats against the ArtScience Museum and flooding through the Supertrees. Spray "
+            "blasts up past the slide and hits the lens, and sea water streams over the clear "
+            "floor under her feet. The SkyPark shudders as the water climbs the towers."
+        ),
+        doruk=(
+            "The main wave rolls across the bay toward the slide from the left side of the "
+            "frame, a towering green-black wall of sea water higher than the three towers, "
+            "with ships, containers and broken palm trees inside it, its white crest tipping "
+            "forward, growing every second and filling more and more of the frame."
+        ),
+        son=(
+            "The wave crashes over the camera: foaming sea water slams across the lens, the "
+            "frame floods green-black, then dims to near black as the water closes over the "
+            "lens and drags it under."
+        ),
+        son_durum=(
+            "The camera is deep under the tsunami. The frame is almost black, with only a faint "
+            "blue-white glow of the drowned city lights through the churning water and a few "
+            "rising bubbles. The roar of the sea is muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Shaky breaths as the rumble grows inside the cloud."),
+            ("7.6-8.6", "A short wordless scream as the surge fills the bay."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the wave, cut off as "
+                          "the water closes over the camera."),
+        ),
+        caption=(
+            "You're sliding past Marina Bay Sands in Singapore, then through a cloud as a "
+            "tsunami taller than the towers rolls in. Would you ride it?"
+        ),
+        emoji="\U0001F30A\U0001F3D9️", etiket="#MarinaBaySands",
+        basliklar=(
+            "Marina Bay Sands vs a tsunami #shorts",
+            "Marina Bay slide into a tsunami #shorts",
+            "Marina Bay, then the sea rises #shorts",
+        ),
+    ),
+    "niagara-selale-meteor": dict(
+        sehir="Niagara Falls", landmark="the Horseshoe Falls", neon="electric turquoise",
+        palet="neon", anahtar="Niagara", isik="kirmizi-tabela",
+        kanca="tehlike",
+        hava=(
+            "a clear late afternoon over the falls, still where she walks, with a burning "
+            "meteor already streaking down out of the sky toward them"
+        ),
+        felaket="a meteor strike beside the falls",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: Niagara Falls seen from "
+            "the FRONT, from the river below: the great curved Horseshoe Falls pouring a wide "
+            "white curtain of water into a boiling cloud of mist, the American Falls beside it, "
+            "the green river gorge, and the hotel towers of the town along the cliff above. "
+            "High in the sky beyond the falls a huge burning meteor, a blazing white-orange "
+            "fireball, is streaking down toward them, trailing a long thick column of black "
+            "smoke and fire across the whole sky, smaller burning fragments breaking off "
+            "around it. A thick white cloud bank lies across the gorge below the slide, and "
+            "the slide dives down toward it."
+        ),
+        acilis=(
+            "The Horseshoe Falls fills the centre of the frame, the white curtain of water lit "
+            "orange by the burning sky. The slide drops past the brink of the falls close "
+            "enough to see the green water pouring over the edge, the spray and the wet rocks "
+            "rush up and past on the left, the mist and the river far below."
+        ),
+        kapi_ici=(
+            "The air turns hot and dry, the murk inside the cloud glows orange from somewhere "
+            "above, and a deep rumble shakes the acrylic."
+        ),
+        ortaya=(
+            "the same falls under a burning sky. The gorge lies under a red-black sky lit by "
+            "the falling fireball, the Horseshoe Falls glowing orange through its mist. Burning "
+            "fragments of the meteor are already raining down, each one hitting the river in a "
+            "flash and a fountain of steam and fire, and the main fireball is still coming down "
+            "beyond the falls, growing brighter."
+        ),
+        tirmanis=(
+            "A burning fragment slams into the river right beside the slide, a column of steam "
+            "and fire blasting into the air, and the shock wave throws the slide sideways. Hot "
+            "ash and sparks streak across the frame, the acrylic creaks, and grit rattles over "
+            "the clear floor under her feet. The trees along the cliff burst into flame."
+        ),
+        doruk=(
+            "The fireball hits beyond the falls and the blast wave rolls down the gorge toward "
+            "the slide from the right side of the frame, a towering red-black wall of fire, "
+            "steam and smoke higher than the falls, with burning trees, rocks and spray inside "
+            "it, growing every second and filling more and more of the frame."
+        ),
+        son=(
+            "The blast wave slams into the camera: fire and steam blast across the lens, the "
+            "frame burns orange-white for an instant, then dims to near black as ash and soot "
+            "cover the lens."
+        ),
+        son_durum=(
+            "The camera is buried in the falling ash. The frame is almost black, with only a "
+            "faint red glow of fire through the soot pressed against the lens. The roar of the "
+            "blast is muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Fast, tight breathing in the glowing cloud."),
+            ("7.6-8.6", "A short wordless scream as the fragment hits the river."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the blast, cut off as "
+                          "the fire swallows the camera."),
+        ),
+        caption=(
+            "You're sliding past the Horseshoe Falls at Niagara Falls, then through a cloud as "
+            "a meteor comes down on them. Would you ride it?"
+        ),
+        emoji="☄️\U0001F30A", etiket="#NiagaraFalls",
+        basliklar=(
+            "Niagara Falls under a meteor #shorts",
+            "Niagara Falls vs a meteor #shorts",
+            "Niagara, then the sky falls #shorts",
+        ),
+    ),
+    "montsaintmichel-dev-dalga": dict(
+        sehir="Normandy", landmark="Mont-Saint-Michel", neon="electric cobalt",
+        palet="sicak", anahtar="Mont-Saint-Michel", isik="sodyum-amber",
+        kanca="tehlike",
+        hava=(
+            "a warm golden evening over the bay, still where she walks, with a giant wall of "
+            "sea water already racing in across the sands"
+        ),
+        felaket="a giant storm wave racing across the bay",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: Mont-Saint-Michel seen "
+            "from the FRONT, from the bay: the small rocky island rising out of the wet "
+            "shining sands, crowned by the tall gothic abbey with its pointed spire and gold "
+            "statue on top, the grey stone walls and roofs of the village climbing the rock "
+            "beneath it, all lit gold by the low evening sun. Beyond the island, a colossal "
+            "dark wall of sea water, far taller than the abbey spire, is racing in across the "
+            "flat sands toward the island, its crest breaking white along the whole horizon, "
+            "under a black storm sky. A thick white cloud bank lies across the bay below the "
+            "slide, and the slide dives down toward it."
+        ),
+        acilis=(
+            "Mont-Saint-Michel fills the centre of the frame, the abbey and its spire gold in "
+            "the low sun under the black sky and the wall of water racing in behind it. The "
+            "slide drops past the top of the spire close enough to see the gold statue, the "
+            "carved stone pinnacles and the slate roofs rush up and past on the right, the "
+            "walls and the wet sands far below."
+        ),
+        kapi_ici=(
+            "The air turns cold and wet, a deep roar rises inside the cloud, and salt spray "
+            "beads across the lens."
+        ),
+        ortaya=(
+            "the same island as the sea comes in. The bay lies under a dark slate sky, the "
+            "abbey standing pale on its rock, and the giant wave is racing across the sands "
+            "toward the island, a moving grey-green cliff of sea water higher than the spire, "
+            "the sands vanishing under it."
+        ),
+        tirmanis=(
+            "The first surge hits the island and explodes up the walls in white towers of "
+            "spray, smashing over the ramparts and pouring down the village streets. Spray "
+            "blasts up past the slide and hits the lens, and sea water streams over the clear "
+            "floor under her feet. The road to the mainland disappears under the sea."
+        ),
+        doruk=(
+            "The main wave rolls over the island toward the slide from the left side of the "
+            "frame, a towering grey-green wall of sea water higher than the abbey, with broken "
+            "roofs, boats and timber inside it, its white crest tipping forward, growing "
+            "every second and filling more and more of the frame."
+        ),
+        son=(
+            "The wave crashes over the camera: foaming sea water slams across the lens, the "
+            "frame floods grey-green, then dims to near black as the water closes over the "
+            "lens and drags it under."
+        ),
+        son_durum=(
+            "The camera is under the sea in the bay. The frame is almost black, with only a "
+            "faint amber glow of a drowned village lamp through the churning water and a few "
+            "rising bubbles. The roar of the sea is muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Cold, shaky breaths in the roaring cloud."),
+            ("7.6-8.6", "A short wordless scream as the surge explodes up the walls."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the wave, cut off as "
+                          "the water closes over the camera."),
+        ),
+        caption=(
+            "You're sliding past the spire of Mont-Saint-Michel in Normandy, then through a "
+            "cloud as a giant wave races across the bay. Would you ride it?"
+        ),
+        emoji="\U0001F30A\U0001F3F0", etiket="#MontSaintMichel",
+        basliklar=(
+            "Mont-Saint-Michel vs the sea #shorts",
+            "Mont-Saint-Michel drowns #shorts",
+            "Mont-Saint-Michel, then the wave #shorts",
+        ),
+    ),
+    "seattle-spaceneedle-yanardag": dict(
+        sehir="Seattle", landmark="the Space Needle", neon="neon crimson",
+        palet="neon", anahtar="Space Needle", isik="civa-beyaz",
+        kanca="tehlike",
+        hava=(
+            "a cool, clear autumn afternoon over the bay, still where she walks, with Mount "
+            "Rainier already exploding behind the city"
+        ),
+        felaket="the eruption of Mount Rainier and a flow of hot ash",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: the Space Needle in "
+            "Seattle seen from the FRONT, its slender white legs and the round flying-saucer "
+            "top rising above the trees of the city centre, the skyscrapers of downtown "
+            "Seattle behind it and the water of Elliott Bay beside them. Behind the city "
+            "Mount Rainier has exploded: a colossal black-grey cloud of ash fills the whole sky "
+            "behind the skyline, boiling up far higher than the mountain and blotting out the "
+            "sun, violet lightning forking inside it, and a gigantic grey avalanche of hot ash, "
+            "taller than the skyscrapers, is already rolling down off the mountain across the "
+            "suburbs toward downtown, swallowing the forests in its path. The light over the "
+            "city is dim and grey-orange. A thick white cloud bank lies across the city below "
+            "the slide, and the slide dives down toward it."
+        ),
+        acilis=(
+            "The Space Needle fills the centre of the frame, its white saucer top pale "
+            "against the black ash cloud filling the sky behind the city. The slide drops past the "
+            "top of the Needle close enough to see the spire, the glass windows of the "
+            "observation deck and the white steel ribs rush up and past on the left, the "
+            "streets and the bay far below."
+        ),
+        kapi_ici=(
+            "The air turns hot and gritty, the murk inside the cloud darkens to ash-grey, and "
+            "fine grey ash starts to settle on the lens."
+        ),
+        ortaya=(
+            "the same city under falling ash. Seattle lies under a dark grey sky, ash falling "
+            "like snow, the Space Needle standing white against it. Behind the skyscrapers "
+            "Mount Rainier is blasting a black column of ash into the sky, lightning cracking "
+            "inside it, and a churning grey flow of hot ash and rock is pouring down the valley "
+            "toward the city."
+        ),
+        tirmanis=(
+            "Glowing rocks fall out of the ash cloud and smash into the streets, ash pours over "
+            "the slide like dirty snow, and grit hisses over the clear floor under her feet. A "
+            "bolt of lightning from the ash cloud strikes the top of the Needle and the flash "
+            "burns the frame white for an instant."
+        ),
+        doruk=(
+            "The flow of hot ash rolls through the city toward the slide from the right side "
+            "of the frame, a towering boiling wall of grey-black ash and smoke higher than the "
+            "skyscrapers, with glowing rocks, trees and wreckage inside it, growing every second "
+            "and filling more and more of the frame."
+        ),
+        son=(
+            "The ash cloud swallows the camera: hot grey ash blasts across the lens, the frame "
+            "goes solid grey, then dims to near black as ash buries the lens."
+        ),
+        son_durum=(
+            "The camera is buried in hot ash. The frame is almost black, with only a faint "
+            "orange glow of embers through the ash pressed against the lens. The roar of the "
+            "eruption is muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Coughing, ragged breaths in the ash-grey cloud."),
+            ("7.6-8.6", "A short wordless scream as the lightning hits the Needle."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the ash, cut off as "
+                          "the cloud swallows the camera."),
+        ),
+        caption=(
+            "You're sliding past the Space Needle in Seattle, then through a cloud as Mount "
+            "Rainier erupts behind the city. Would you ride it?"
+        ),
+        emoji="\U0001F30B\U0001F3D9️", etiket="#SpaceNeedle",
+        basliklar=(
+            "Space Needle vs Mount Rainier #shorts",
+            "Space Needle under an eruption #shorts",
+            "Space Needle, then the volcano #shorts",
+        ),
+    ),
+    "capetown-tablemountain-yangin": dict(
+        sehir="Cape Town", landmark="Table Mountain", neon="electric aqua",
+        palet="neon", anahtar="Table Mountain", isik="kirmizi-tabela",
+        kanca="tehlike",
+        hava=(
+            "a bright, windy summer afternoon over the bay, still where she walks, with a "
+            "wildfire already racing down the face of the mountain"
+        ),
+        felaket="a wind-driven wildfire racing down onto the city",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: Table Mountain in Cape "
+            "Town seen from the FRONT, from Table Bay: the long, perfectly flat-topped grey "
+            "rock wall of the mountain towering over the city, the pointed peak of Lion's Head "
+            "on one side, the white buildings and the harbour of Cape Town spread along the "
+            "water at its foot. A colossal wildfire has already engulfed the whole face of the "
+            "mountain: a wall of orange flames hundreds of metres high sweeps down the slopes "
+            "toward the houses, and a gigantic column of black and brown smoke, far taller than "
+            "the mountain, boils up and spreads across the whole sky above the city, turning "
+            "the sun into a red disc and the light dark orange. Burning embers blow out over "
+            "the rooftops. A thick white cloud bank lies across the bay below the slide, and "
+            "the slide dives down toward it."
+        ),
+        acilis=(
+            "Table Mountain fills the centre of the frame, its flat grey top sharp against the "
+            "black smoke pouring over it, the line of fire glowing on its slopes. The slide "
+            "drops past the edge of the flat summit close enough to see the cable car station, "
+            "the grey cliffs and the low green bushes rush up and past on the left, the city "
+            "and the harbour far below."
+        ),
+        kapi_ici=(
+            "The air turns hot and smoky, the murk inside the cloud glows orange, and flakes "
+            "of ash start to stick to the lens."
+        ),
+        ortaya=(
+            "the same city under a sky of smoke. Cape Town lies under a dark brown sky, the "
+            "sun a red disc, Table Mountain standing black against the glow. The fire front is "
+            "sweeping down the lower slopes toward the houses, a wall of flame driven by a "
+            "howling wind, and burning embers are blowing out over the city."
+        ),
+        tirmanis=(
+            "A gust drives the flames right up to the slide, burning branches and embers fly "
+            "past and stick to the acrylic, and the heat ripples the air across the frame. Ash "
+            "and sparks hiss over the clear floor under her feet, and houses at the foot of the "
+            "mountain catch fire one after another."
+        ),
+        doruk=(
+            "The fire front sweeps down toward the slide from the left side of the frame, a "
+            "towering wall of orange flame and black smoke higher than the mountain cliffs, "
+            "with burning trees, roof sheets and glowing embers inside it, growing every second "
+            "and filling more and more of the frame."
+        ),
+        son=(
+            "The fire wall engulfs the camera: flames and smoke blast across the lens, the "
+            "frame burns orange, then dims to near black as soot covers the lens."
+        ),
+        son_durum=(
+            "The camera is inside the smoke. The frame is almost black, with only a faint red "
+            "glow of fire through the soot pressed against the lens. The roar of the flames is "
+            "muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Coughing, hot breaths in the smoky cloud."),
+            ("7.6-8.6", "A short wordless scream as the flames reach the slide."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the fire, cut off as "
+                          "the flames swallow the camera."),
+        ),
+        caption=(
+            "You're sliding past Table Mountain in Cape Town, then through a cloud as a "
+            "wildfire races down onto the city. Would you ride it?"
+        ),
+        emoji="\U0001F525\U0001F3D4️", etiket="#TableMountain",
+        basliklar=(
+            "Table Mountain vs a wildfire #shorts",
+            "Table Mountain on fire #shorts",
+            "Table Mountain, then the fire #shorts",
+        ),
+    ),
+    "hoover-baraj-yikilma": dict(
+        sehir="Nevada", landmark="the Hoover Dam", neon="blaze orange",
+        palet="neon", anahtar="Hoover Dam", isik="buz-mavi",
+        kanca="tehlike",
+        hava=(
+            "a hot, clear desert afternoon over the canyon, still where she walks, with the "
+            "great dam already bursting open"
+        ),
+        felaket="the Hoover Dam bursting and a wall of flood water racing down the canyon",
+        ilk_kare=(
+            "Far below and ahead, filling the upper half of the frame: the Hoover Dam seen "
+            "from the FRONT, from the canyon downstream: the colossal curved white concrete "
+            "wall of the dam filling the narrow red-brown rock canyon, the tall intake towers "
+            "and the deep blue lake behind it, the high concrete arch of the bridge spanning "
+            "the canyon in front, under a dark storm sky. The dam is already bursting: its "
+            "centre is breaking away, huge blocks of white concrete falling, and a colossal "
+            "brown-white wall of water, taller than the dam itself, is exploding out through "
+            "the gap and roaring down the canyon toward the bridge, a giant cloud of spray "
+            "rising off it higher than the canyon walls. A thick white cloud bank lies across "
+            "the canyon below the slide, and the slide dives down toward it."
+        ),
+        acilis=(
+            "The Hoover Dam fills the centre of the frame, its curved white wall torn open and "
+            "pouring water under the dark sky. The slide drops past the top of the bridge "
+            "arch close enough to see the concrete columns, the steel railings and the road "
+            "deck rush up and past on the right, the canyon river far below."
+        ),
+        kapi_ici=(
+            "The air turns cold and wet, a deep grinding roar rises inside the cloud, and "
+            "spray starts to stream across the lens."
+        ),
+        ortaya=(
+            "the same canyon as the dam gives way. Under a darkening sky the centre of the "
+            "Hoover Dam has burst open, huge blocks of white concrete tumbling away, and the "
+            "whole lake is pouring through the gap in a roaring brown-white torrent that fills "
+            "the canyon from wall to wall."
+        ),
+        tirmanis=(
+            "The flood smashes into the bridge and tears its arch apart, concrete and steel "
+            "falling into the water, and spray blasts up the canyon walls and across the lens. "
+            "The slide shakes in the roar, and water streams over the clear floor under her "
+            "feet. Boulders and broken concrete tumble in the torrent below."
+        ),
+        doruk=(
+            "The main wall of flood water races down the canyon toward the slide from the left "
+            "side of the frame, a towering brown-white wall of water higher than the canyon "
+            "walls, with blocks of concrete, steel beams and trucks inside it, growing every "
+            "second and filling more and more of the frame."
+        ),
+        son=(
+            "The flood crashes over the camera: brown water slams across the lens, the frame "
+            "floods brown-grey, then dims to near black as the water closes over the lens and "
+            "drags it under."
+        ),
+        son_durum=(
+            "The camera is under the flood water in the canyon. The frame is almost black, "
+            "with only a faint blue glow of daylight through the churning water and a few "
+            "rising bubbles. The roar of the flood is muffled and fading."
+        ),
+        ses=(
+            ("0.0-1.5", "A sharp gasp at the height, then a held breath."),
+            ("3.0-5.0", "Shaky breaths as the roar grows inside the cloud."),
+            ("7.6-8.6", "A short wordless scream as the bridge tears apart."),
+            ("12.5-15.0", "A long wordless scream drowned by the roar of the flood, cut off as "
+                          "the water closes over the camera."),
+        ),
+        caption=(
+            "You're sliding past the Hoover Dam in Nevada, then through a cloud as the dam "
+            "bursts open. Would you ride it?"
+        ),
+        emoji="\U0001F30A\U0001F4A5", etiket="#HooverDam",
+        basliklar=(
+            "Hoover Dam bursts open #shorts",
+            "Hoover Dam slide into a flood #shorts",
+            "Hoover Dam, then the lake comes #shorts",
         ),
     ),
 }

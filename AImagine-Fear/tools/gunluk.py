@@ -160,6 +160,15 @@ SIRA = [
     "chichenitza-piramit-kasirga",       # neon, mavi, kasirga
     "bavyera-neuschwanstein-heyelan",    # neon, yesil, heyelan
     "londra-bigben-yildirim",            # neon, mor, yildirim firtinasi
+    # 2026-11-11 ucuncu dalga, hepsi tehlike kancasi (Venedik kalibi). 35 rotalik
+    # dairesel listede sicak 0,3,7,10,14,17,21,24,28,31: araliklar 3/4.
+    "pisa-kule-hortum",                  # sicak, yesil, hortum
+    "singapur-marinabay-tsunami",        # neon, mavi, tsunami
+    "niagara-selale-meteor",             # neon, kirmizi, goktasi
+    "montsaintmichel-dev-dalga",         # sicak, amber, firtina dalgasi
+    "seattle-spaceneedle-yanardag",      # neon, beyaz, yanardag
+    "capetown-tablemountain-yangin",     # neon, kirmizi, orman yangini
+    "hoover-baraj-yikilma",              # neon, mavi, baraj seli
 ]
 
 ESKI_HAVUZ_SIRASI = [

@@ -580,3 +580,13 @@ sabah kosusundan once gece -> tehlike cevrildi (5a8469c, yeni ilk kare gozle ona
 kalenin arkasinda kopan yamac + sagnak). Londra (12 Kas) zaten tehlike. 13 Kas'tan itibaren
 yeni rota yok, sirdaki() tekrar uretir; yeni tehlike rotalari Venedik kalibiyla
 (ilk karede landmark'a dogru gelen dev tehdit) yazilmali.
+
+Ek (11 Kasim aksami, Ihsan onayi "TAMAM ONAYLIYORUM"): yedi yeni tehlike rotasi SIRA'nin
+sonuna eklendi, 13-19 Kasim: pisa-kule-hortum, singapur-marinabay-tsunami,
+niagara-selale-meteor, montsaintmichel-dev-dalga, seattle-spaceneedle-yanardag,
+capetown-tablemountain-yangin, hoover-baraj-yikilma. Yedi ilk kare gozle onayli; Seattle,
+Cape Town ve Hoover ilk uretimde tehlike kucuk ve uzaktaydi, Venedik olcusune (landmark'tan
+buyuk, kareyi kaplayan, gelen tehdit) buyutulup yeniden uretildi. Neuschwanstein 11 Kas
+kosusu yeni onayli kareyle uretildi (kosu 18:39 UTC, degisiklik 18:11'de canlidaydi).
+Olcut: bu yedinin en az ikisi 15K'yi gecmezse Venedik tek seferlik sans sayilir, yeni
+konsept gerekir.
