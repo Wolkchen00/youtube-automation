@@ -13,10 +13,10 @@
   "standalone": true,
   "publish_mode": "auto",
   "performance_feedback": true,
-  "status": "completed",
+  "status": "active",
   "priority": 999,
-  "total_parts": 14,
-  "next_part": 15,
+  "total_parts": 17,
+  "next_part": 16,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
   "auto_replenish": {
@@ -182,8 +182,8 @@
       ]
     },
     "last_run": {
-      "at": "2026-11-05T19:00:45.226849+00:00",
-      "parts": "11-14"
+      "at": "2026-11-13T18:49:26.456179+00:00",
+      "parts": "15-17"
     }
   },
   "parts": {
@@ -485,6 +485,27 @@
         "narration_delivered": null,
         "arc_roles_missing": [],
         "duration_s": 10.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "15": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-a/episodes/ep15/ep15_music_titled_mastered.mp4",
+      "subtitle": "The Titanic Lookouts Had No Binoculars",
+      "stack_sha256": "3da9e4f2bc70a1c60855dd4b40ff0be1750b4fb59276f7ea7349d4b5822c3ed1",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-13T19:02:03.208431+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.01,
         "duration_in_band": true,
         "degraded": false
       }

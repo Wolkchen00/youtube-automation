@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "The Titanic Lookouts Had No Binoculars"
+  },
+  "synopsis": "The lookouts aboard the Titanic were forced to scan the dark Atlantic with the naked eye because their binoculars were locked away without a key.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, the wooden crow's nest of a massive ocean liner rises high above the dark freezing ocean, lit by starlight and the dim glow of ship lanterns. Two lookouts in heavy woolen coats are seen from behind, staring out into the black water where a pale, looming iceberg slowly drifts across the calm sea. Sea spray and cold ocean fog drift continuously through the night air. The camera executes a slow, smooth push-in toward the lookouts and the shadow of the ice. Grainy archival 16mm film look, muted desaturated colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Did you know the lookout key was left behind on land? ⚓",
+  "family": "tuhaf felaketler",
+  "seed_id": 37,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Titanic lookouts had no binoculars.",
+    "subtitle": "The locker key was left behind in 1912."
+  },
+  "caption": "The Titanic's lookouts had no binoculars on the night she struck the iceberg. The ship sank in 1912 after hitting ice in the North Atlantic. The binocular locker key had been left behind before sailing, leaving lookouts with only naked eyes.\n\nVisuals created with AI.\n\nWould you have spotted the iceberg in time?",
+  "hashtags": "#history #historyfacts #titanic #shipwreck #1912",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

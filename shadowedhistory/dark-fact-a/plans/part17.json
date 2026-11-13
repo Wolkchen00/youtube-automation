@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "Derinkuyu Could Shelter 20,000 People Underground"
+  },
+  "synopsis": "Carved deep beneath Cappadocia, the multi-level underground city of Derinkuyu was designed to shelter up to 20,000 inhabitants from invasion.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, a broad underground stone chamber is illuminated by flickering oil lamps mounted on rough rock walls, revealing a massive round stone rolling door set into an arched passageway. Wisps of lamp smoke float continuously through the subterranean air while shadows shift across the carved stone floor. The camera moves in a slow, steady push-in along the descending rock hallway toward the heavy circular door. Grainy archival 16mm film look, warm flickering torchlight, muted earthy tones, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could you imagine staying underground for months at a time? 🏛️",
+  "family": "gizli muhendislik",
+  "seed_id": 23,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Derinkuyu sheltered 20,000 people.",
+    "subtitle": "An underground city was carved in Turkey."
+  },
+  "caption": "Derinkuyu, an underground city carved beneath Turkey, could shelter around 20,000 people. Carved deep into soft volcanic rock, the multi-level sanctuary featured rolling stone doors and ventilation shafts. The sprawling complex remained hidden until its accidental discovery in 1963.\n\nVisuals created with AI.\n\nCould you live underground for months?",
+  "hashtags": "#history #historyfacts #turkey #undergroundcity #ancientengineering",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

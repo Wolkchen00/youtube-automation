@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "Woolly Mammoths Coexisted With The Great Pyramid"
+  },
+  "synopsis": "Woolly mammoths were still roaming a remote Arctic island while workers built the Great Pyramid in ancient Egypt.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame, a small herd of massive woolly mammoths walks across a vast snowy tundra, their long shaggy coats and curved tusks clearly lit by a low, golden Arctic sun on the horizon. Thick breath steams from their trunks into the freezing air as snow softly blows across the white landscape throughout the shot. The camera slowly glides laterally alongside the walking animals, keeping them prominent in frame. Grainy archival 16mm film look, muted cold tones, deep low-key shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Isn't it wild that mammoths outlasted the pyramids' construction? 🦣",
+  "family": "zamanin izi",
+  "seed_id": 3,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Mammoths existed with the pyramids.",
+    "subtitle": "They roamed the Arctic 4,500 years ago."
+  },
+  "caption": "Woolly mammoths were still alive on a remote Arctic island when the Great Pyramid was being built, about 4,500 years ago. An isolated population survived on Wrangel Island until around 1700 BC. Meanwhile in Egypt around 2500 BC, workers were assembling massive stone blocks.\n\nVisuals created with AI.\n\nDid you know mammoths survived this long?",
+  "hashtags": "#history #historyfacts #mammoth #archaeology #ancientegypt",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
