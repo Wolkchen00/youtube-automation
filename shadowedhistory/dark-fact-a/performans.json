@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-11-13T18:44:41.577288+00:00",
+  "guncellendi": "2026-11-14T17:17:52.786974+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 4,
@@ -5103,7 +5103,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-11-05T19:15:20.453840+00:00",
       "subtitle": "Terracotta Army Was Originally Brightly Painted",
@@ -5552,6 +5552,36 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-14T17:17:52.786974+00:00",
+          "yas_saat": 168.11,
+          "youtube": {
+            "views": 2,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 144,
+            "impressions": 144,
+            "reach": 119,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 6,
+            "comments_insight": 1,
+            "total_interactions": 7,
+            "ig_reels_avg_watch_time": 4970,
+            "ig_reels_video_view_total_time": 581560
+          },
+          "tiktok": {
+            "views": 697,
+            "likes": 24,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5653,8 +5683,8 @@
         },
         "s7g": {
           "youtube": {
-            "ts": "2026-11-13T18:44:41.577288+00:00",
-            "yas_saat": 145.557,
+            "ts": "2026-11-14T17:17:52.786974+00:00",
+            "yas_saat": 168.11,
             "youtube": {
               "views": 2,
               "likes": 1,
@@ -5676,15 +5706,15 @@
               "ig_reels_video_view_total_time": 581560
             },
             "tiktok": {
-              "views": 694,
+              "views": 697,
               "likes": 24,
               "comments": 1,
               "shares": 0
             }
           },
           "instagram": {
-            "ts": "2026-11-13T18:44:41.577288+00:00",
-            "yas_saat": 145.557,
+            "ts": "2026-11-14T17:17:52.786974+00:00",
+            "yas_saat": 168.11,
             "youtube": {
               "views": 2,
               "likes": 1,
@@ -5706,15 +5736,15 @@
               "ig_reels_video_view_total_time": 581560
             },
             "tiktok": {
-              "views": 694,
+              "views": 697,
               "likes": 24,
               "comments": 1,
               "shares": 0
             }
           },
           "tiktok": {
-            "ts": "2026-11-13T18:44:41.577288+00:00",
-            "yas_saat": 145.557,
+            "ts": "2026-11-14T17:17:52.786974+00:00",
+            "yas_saat": 168.11,
             "youtube": {
               "views": 2,
               "likes": 1,
@@ -5736,7 +5766,7 @@
               "ig_reels_video_view_total_time": 581560
             },
             "tiktok": {
-              "views": 694,
+              "views": 697,
               "likes": 24,
               "comments": 1,
               "shares": 0
@@ -5748,7 +5778,7 @@
       "oranlar": {
         "youtube": 0.5,
         "instagram": 1.014085,
-        "tiktok": 0.691924
+        "tiktok": 0.694915
       },
       "puanlanan_metrikler": {
         "youtube": {
@@ -5772,7 +5802,7 @@
           "ig_reels_video_view_total_time": 581560
         },
         "tiktok": {
-          "views": 694,
+          "views": 697,
           "likes": 24,
           "comments": 1,
           "shares": 0
@@ -5915,6 +5945,36 @@
           },
           "tiktok": {
             "views": 888,
+            "likes": 37,
+            "comments": 0,
+            "shares": 2
+          }
+        },
+        {
+          "ts": "2026-11-14T17:17:52.786974+00:00",
+          "yas_saat": 115.428,
+          "youtube": {
+            "views": 7,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 350,
+            "impressions": 350,
+            "reach": 292,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 5008,
+            "ig_reels_video_view_total_time": 1462360
+          },
+          "tiktok": {
+            "views": 893,
             "likes": 37,
             "comments": 0,
             "shares": 2
@@ -6128,6 +6188,36 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-14T17:17:52.786974+00:00",
+          "yas_saat": 69.592,
+          "youtube": {
+            "views": 4,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 13,
+            "impressions": 13,
+            "reach": 12,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 3220,
+            "ig_reels_video_view_total_time": 38645
+          },
+          "tiktok": {
+            "views": 138,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -6265,7 +6355,62 @@
       "puan": 0.148148,
       "etiket": "orta",
       "etiket_notu": "kaybeden icin erken"
+    },
+    {
+      "part": 15,
+      "post_ids": {
+        "youtube": "KPajTS12ZvE",
+        "instagram": "18117421940607613",
+        "tiktok": "7707733018848267550"
+      },
+      "request_ids": {
+        "youtube": "93a90eb901124fffb3d0fa185f2a20d0",
+        "instagram": "07c5374970fe45349da668f13ae7be56",
+        "tiktok": "ce9b0dbd3b1c4956a9555e1a67c7479f"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-14T17:17:52.786974+00:00",
+          "yas_saat": 22.264,
+          "youtube": {
+            "views": 121,
+            "likes": 3,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 1,
+            "views": 157,
+            "impressions": 157,
+            "reach": 113,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 5,
+            "comments_insight": 1,
+            "total_interactions": 7,
+            "ig_reels_avg_watch_time": 6811,
+            "ig_reels_video_view_total_time": 769698
+          },
+          "tiktok": {
+            "views": 948,
+            "likes": 26,
+            "comments": 1,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-13T19:02:03.208020+00:00",
+      "subtitle": "The Titanic Lookouts Had No Binoculars",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 12
+  "api_cagrilari": 15
 }
