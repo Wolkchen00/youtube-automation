@@ -579,3 +579,14 @@
 {"ts": "2026-11-12T20:04:57Z", "event": "qc_api_result", "attempt_id": "afd300b6b2a7499cbcf621918862f0e1", "outcome": "429"}
 {"ts": "2026-11-12T20:04:57Z", "event": "review", "episode": 112, "shot": 1, "attempt": 0, "review_try": 2, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_01.mp4"}
 {"ts": "2026-11-12T20:04:58Z", "event": "qc_hold", "episode": 112, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-11-14T19:30:56Z", "event": "qc_api_attempt", "attempt_id": "8177f6d9d17545d9b68eda3c78d68eb4", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 113, "shot": 1}
+{"ts": "2026-11-14T19:36:06Z", "event": "qc_api_result", "attempt_id": "8177f6d9d17545d9b68eda3c78d68eb4", "outcome": "ok"}
+{"ts": "2026-11-14T19:36:06Z", "event": "native_audio_review", "episode": 113, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Low ambient rumble followed by a heavy metallic impact sound.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-14T19:36:07Z", "event": "qc_api_attempt", "attempt_id": "10a354d143464d6488a0d11e41be5885", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 113, "shot": 1}
+{"ts": "2026-11-14T19:36:09Z", "event": "qc_api_result", "attempt_id": "10a354d143464d6488a0d11e41be5885", "outcome": "error"}
+{"ts": "2026-11-14T19:36:14Z", "event": "qc_api_attempt", "attempt_id": "332eafeda1e049d6bffda0b28aeb17ef", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 113, "shot": 1}
+{"ts": "2026-11-14T19:36:15Z", "event": "qc_api_result", "attempt_id": "332eafeda1e049d6bffda0b28aeb17ef", "outcome": "error"}
+{"ts": "2026-11-14T19:36:25Z", "event": "qc_api_attempt", "attempt_id": "760f718d87ba4116b8d3783aff2ae71a", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 113, "shot": 1}
+{"ts": "2026-11-14T19:42:12Z", "event": "qc_api_result", "attempt_id": "760f718d87ba4116b8d3783aff2ae71a", "outcome": "ok"}
+{"ts": "2026-11-14T19:42:12Z", "event": "review", "episode": 113, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Meteor trajectory disconnects from explosion location"], "fix_notes": ["Align blast center with the incoming meteor path"], "clip": "shot_01.mp4"}
+{"ts": "2026-11-14T19:42:12Z", "event": "qc_pass", "episode": 113, "shot": 1, "attempt": 0, "content_sha256": "e871182befa595eb77a2892cd46f6edd324b1f16b4350df91682112257839c6f", "clip": "shot_01.mp4"}

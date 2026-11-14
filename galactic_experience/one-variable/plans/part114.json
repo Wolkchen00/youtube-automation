@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 114,
+    "title": "A Landslide Across the Entire Himalayan Ridge"
+  },
+  "synopsis": "An impossible rockslide collapses an entire Himalayan ridge face simultaneously, sweeping down toward the Ganges plain.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh orbital perspective frames the vast snowy ridge of the Himalayas meeting the green Ganges plain. In frame one, the entire seventy-kilometer mountain flank fractured and detached, sliding down as a massive sheet of pulverized rock and ice. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Prominent geographical anchors include the snow-covered peaks, river channels of the Ganges, and the suspension bridge near Rishikesh at the valley base. Through seconds one to five, the immense debris avalanche rushes downward, darkening the green foothills under a rising cloud of grey dust. During seconds six to eight, the leading wave of rock hits the valley floor, sending a massive shockwave of displaced soil across the lowland plains. Diegetic sound begins with low rumble, thins to near silence at second four, and surges into a colossal thunderous impact at second seven.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could any valley structure survive a collapse of this scale?",
+  "family": "yer afeti",
+  "seed_id": 15,
+  "caption": "A vast landslide collapses an entire flank of the Himalayan mountain ridge directly above the Ganges plain.\n\nThis simulated event spans seventy kilometers of mountain wall in a single catastrophic movement, unleashing over five hundred cubic kilometers of rock.\n\nIn comparison, the historic 1970 Huascaran landslide in Peru displaced fifty million cubic meters of debris, traveling at speeds reaching three hundred kilometers per hour.\n\nAn event of this scale is physically impossible because gravitational loading and rock friction limit structural failure to isolated fault segments rather than simultaneous multi-peak collapses.\n\nThis is a simulation, not real footage. Would the atmospheric dust cloud reach orbit after an impact of this size?",
+  "hashtags": "#Landslide #Himalayas #Ganges #Geology #EarthScience #Simulation #Disaster",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 116,
+    "title": "A Lightning Storm Across the Entire Amazon Basin"
+  },
+  "synopsis": "An extraordinary atmospheric storm covers the whole Amazon basin at night, discharging continuous lightning from orbit.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nNighttime orbital view looking down at South America reveals the dark green canopy of the Amazon basin illuminated by a massive storm. In frame one, a continuous canopy of thunderclouds covers two million square kilometers, sparkling with hundreds of simultaneous lightning discharges every second. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Geographical anchors include the dark coastline of Brazil, city lights of Manaus, and the winding black ribbon of the main Amazon river channel. Through seconds one to five, the electrical activity intensifies, turning the storm top into a brilliant flickering sheet of purple and gold light. During seconds six to eight, a massive synchronized electrical pulse surges across the entire cloud deck, lighting up the atmosphere for thousands of kilometers. Diegetic sound holds one steady, continuous low thunder rumble punctuated by heavy electrical static from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What would the electrical ground voltage feel like under a storm this huge?",
+  "family": "gok afeti",
+  "seed_id": 25,
+  "caption": "A colossal lightning storm covers the entire Amazon basin under a continuous blanket of night cloud.\n\nThis electrical phenomenon spans three million square kilometers simultaneously, generating over fifty thousand lightning strikes per second across the tropical continent.\n\nIn comparison, the famous 1989 Quebec geomagnetic storm produced extreme atmospheric voltage spikes, but localized cloud systems produce only thirty discharges per second.\n\nSuch continuous basin-wide electrical discharging is physically impossible because local cloud charge separation depletes rapidly without thermal convective recharge across thousands of kilometers.\n\nThis is a simulation, not real footage. Which continent do you think experiences the most lightning strikes per year?",
+  "hashtags": "#Lightning #Amazon #Atmosphere #Meteorology #SpaceView #Simulation #Weather",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

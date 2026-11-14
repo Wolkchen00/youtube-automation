@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 117,
+    "title": "A Storm Tower Rising Past the Stratosphere"
+  },
+  "synopsis": "An impossibly tall cumulonimbus tower punches through the tropopause into space over the open Pacific Ocean.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh orbital perspective captures the blue curve of the Pacific Ocean beneath bright sunlight. In frame one, a gigantic cumulonimbus storm tower stands eighty kilometers tall, piercing far past the stratosphere into the upper mesosphere. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Geographic scale cues include the curvature of the Earth limb, deep ocean water below, and a weather satellite orbiting nearby in clear view. Through seconds one to five, the massive cloud column expands violently outward at its upper top, forming an enormous anvil structure that spreads across space. During seconds six to eight, violent ice-crystal shockwaves ripple outward across the top cloud layer, casting long sharp shadows over lower cloud decks. Diegetic environmental sound holds one steady, deep atmospheric wind roar continuously from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How high into the atmosphere could cloud vapor actually reach before freezing out?",
+  "family": "atmosfer afeti",
+  "seed_id": 9,
+  "caption": "A massive thunderstorm column punctures through the atmosphere over the open Pacific Ocean.\n\nThis vertical cloud tower reaches eighty kilometers in height, rising far past the stratospheric cap directly toward upper space.\n\nBy comparison, Superstorm Sandy in 2012 featured cloud tops reaching fifteen kilometers high, which is typical for extreme terrestrial weather events.\n\nA cloud tower cannot ascend into the mesosphere because decreasing air density neutralizes thermal buoyancy long before water vapor reaches high atmospheric layers.\n\nThis is a simulation, not real footage. Would cloud shadows look this sharp when cast from above the stratosphere?",
+  "hashtags": "#Thunderstorm #PacificOcean #Atmosphere #Meteorology #Orbit #Simulation #ExtremeWeather",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

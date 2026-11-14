@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 115,
+    "title": "A Flood Surge Up the Entire Amazon Basin"
+  },
+  "synopsis": "A colossal marine flood wave pushes up the mouth of the Amazon River past Marajo Island, drowning the entire river network.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh-aerial satellite view over the Atlantic delta of the Amazon River captures Marajo Island and the surrounding estuary channels. In frame one, an immense ocean flood surge twenty meters high stands across the sixty-kilometer-wide river mouth, pushing upstream against the river flow. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Prominent geographical anchors include the forested coast of Marajo Island, blue ocean water, and the massive concrete piers of the Macapa port terminal. Through seconds one to five, the massive wall of brown and blue water advances inland, completely submerging the low-lying riverbanks and palm forests. During seconds six to eight, the surge engulfs the port structures, transforming the labyrinth of river channels into one vast turbulent inland sea. Diegetic sound holds one steady, roaring, full-spectrum ocean rumble continuously from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How far inland would a tidal wave like this travel before slowing down?",
+  "family": "su afeti",
+  "seed_id": 3,
+  "caption": "A massive ocean flood surge surges inland up the mouth of the Amazon River past Marajo Island.\n\nThis wall of water stands thirty meters high and spans ninety kilometers across the entire estuary delta, reversing the flow of Earth's largest river.\n\nFor comparison, the 2011 Tohoku tsunami produced coastal run-up heights of forty meters, but decayed rapidly as it traveled inland across land topography.\n\nAn oceanic surge cannot drive hundreds of kilometers inland against river discharge because gravity and bed friction rapidly dissipate the hydraulic head of incoming waves.\n\nThis is a simulation, not real footage. Do you think rainforest vegetation could cushion the force of such a surge?",
+  "hashtags": "#Tsunami #AmazonRiver #MarajoIsland #Oceanography #Hydrology #Simulation #EarthScience",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 118,
+    "title": "A Surge Over the Whole Dutch Delta Wall"
+  },
+  "synopsis": "An impossible fifty-meter oceanic storm surge crests over the Oosterschelde barrier, flooding the Netherlands delta.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8.\n\nHigh aerial documentary view frames the North Sea coastline of the Netherlands and the intricate sluice gates of the Oosterschelde storm surge barrier. In frame one, a gigantic wall of ocean water fifty meters high stands directly behind the storm barrier, spilling completely over the concrete floodgates. The camera is rigidly fixed to one position, orientation, focal length, focus distance, and exposure for the full take. Geographical anchors include the geometric sea dykes, coastal polder fields, and the long steel structure of the barrier bridge. Through seconds one to five, the massive white-water torrent cascades over the concrete wall, filling the quiet inland estuary with churning seawater. During seconds six to eight, the overwhelming flood crest sweeps across coastal farmland, inundating green agricultural fields under meters of churning foam. Diegetic sound holds one steady, roaring, resonant water crash from second zero to second eight.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could any engineering structure withstand water overtopping it at this height?",
+  "family": "su afeti",
+  "seed_id": 5,
+  "caption": "A colossal sea surge crests directly over the Oosterschelde flood barrier along the Dutch coastline.\n\nThis oceanic swell reaches fifty meters in height, completely overflowing the world's most advanced sea defense network.\n\nDuring the catastrophic North Sea flood of 1953, storm surges reached five meters, breaching dykes and inundating over fifteen hundred square kilometers of land.\n\nA fifty-meter static wave cannot form in the shallow North Sea because shallow water dynamics limit wave height relative to sea floor depth.\n\nThis is a simulation, not real footage. Do you think modern coastal barriers could ever be built high enough to stop a surge like this?",
+  "hashtags": "#StormSurge #Netherlands #Oosterschelde #Flood #CoastalEngineering #Simulation #Hydrology",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}
