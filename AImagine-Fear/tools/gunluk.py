@@ -165,10 +165,18 @@ SIRA = [
     "pisa-kule-hortum",                  # sicak, yesil, hortum
     "singapur-marinabay-tsunami",        # neon, mavi, tsunami
     "niagara-selale-meteor",             # neon, kirmizi, goktasi
-    "montsaintmichel-dev-dalga",         # sicak, amber, firtina dalgasi
-    "seattle-spaceneedle-yanardag",      # neon, beyaz, yanardag
-    "capetown-tablemountain-yangin",     # neon, kirmizi, orman yangini
-    "hoover-baraj-yikilma",              # neon, mavi, baraj seli
+    # 2026-11-15 Ihsan: "eski duzene donelim". Eylul bicimine (havuz konsepti,
+    # 24,5M Burj tarifi, tools/sehir_ekle.py) donuldu. Kullanilmamis dort KAPI
+    # rotasi (montsaintmichel, seattle-yanardag, capetown-yangin, hoover; onayli
+    # ilk kareleri hazir) siradan cikti, dosyalari duruyor. 38 rotalik dairesel
+    # listede sicak 0,3,7,10,14,17,21,24,28,31,35: araliklar 3/4.
+    "dubai-marina-gece",                 # havuz, sicak, amber
+    "newyork-timessquare-gece",          # havuz, neon, karisik
+    "chicago-willis-gece",               # havuz, neon, mavi
+    "seul-lotte-gece",                   # havuz, neon, mor
+    "bangkok-mahanakhon-gece",           # havuz, sicak, amber
+    "kualalumpur-merdeka-gece",          # havuz, neon, beyaz
+    "tokyo-shibuya-gece",                # havuz, neon, kirmizi
 ]
 
 ESKI_HAVUZ_SIRASI = [

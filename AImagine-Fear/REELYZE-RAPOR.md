@@ -590,3 +590,32 @@ buyuk, kareyi kaplayan, gelen tehdit) buyutulup yeniden uretildi. Neuschwanstein
 kosusu yeni onayli kareyle uretildi (kosu 18:39 UTC, degisiklik 18:11'de canlidaydi).
 Olcut: bu yedinin en az ikisi 15K'yi gecmezse Venedik tek seferlik sans sayilir, yeni
 konsept gerekir.
+
+## 15 Kasim 2026: Eylul bicimine donus (Ihsan "eski duzene donelim / milyon izlenen videoya bakalim")
+
+IG izgarasi 15 Kas ~18:45 UTC (takipci 16,9K): Neuschwanstein 16,5K, Londra 3,4K, Pisa 8,6K
+(~2 g), Singapur 5,4K (~1 g), Niagara 2,2K (~1 sa). Tehlike donemi ortancasi ~5,8K, onceki
+donemlerden kotu degil; ama Eylul'den 100 kat asagida.
+
+Kontakt sayfasi (Burj 24,5M, Taipei 8,9M, Skytree 796K, Golden Gate 444K yan yana Venedik,
+Neuschwanstein, Pisa, Londra, Rio): dort buyugun HEPSI ayni:
+1. Gece, cok asagida sehir isiklari, bukuk fisheye ufuk.
+2. 0-3 sn DURAGAN: kenarda oturan/duran sürücü, karenin ortasinda kanat gibi parlayan kaydirak agzi.
+3. Dusus kuleler arasina (Burj, Taipei, Skytree 11. sn).
+4. Bitis PARLAK: cati havuzuna dalis, su alti, yuzeye cikis, kahkaha.
+5. Konusma var ("Oh my god. Look down."), sonda gulme.
+Kasim KAPI videolarinda bunlarin hicbiri yok: gunduz, cam yolda yuruyus, felaket, SIYAH son kare,
+kelimesiz. Eylul'un diger gece rotalari (16'si gece) ortanca ~13K, 1/5'i 47-444K. Yani bicim
+tabani ~13K ve vurus sansi veriyor; milyon garanti degil (ayni Burj rotasinin 30 Eyl tekrari 12,2K).
+
+Ek gozlem: 21 Ekim'de kanal bir gecede ~34K ortancadan ~5K'ya dustu ve o gunden beri hangi
+bicim denenirse denensin 3-9K'da kaliyor. 3-5K, 16,9K takipcinin takipci disina cikmayan
+erisimine uyuyor. Olasi sebep: 18 Ekim'de baslayan neredeyse ayni tekrarlar IG'nin "ozgun
+olmayan icerik" kuralina takildi ve hesap oneri disi kaldi. Dogrulama yalniz uygulamadan:
+Hesap durumu -> onerilebilirlik. Ihsan'dan bakmasi istendi.
+
+Karar: havuz konsepti (tools/sehir_ekle.py, 24,5M Burj tarifi) geri geldi. Uretici rota
+dosyasiyla esitlendi (dubai-burj-altin yeniden uretilince BIREBIR ayni cikiyor). Yedi yeni
+gece rotasi 16-22 Kas: dubai-marina, timessquare, chicago-willis, seul-lotte, bangkok,
+kualalumpur-merdeka, tokyo-shibuya. Kullanilmamis dort KAPI rotasi siradan cikti (dosyalar
+ve onayli ilk kareler duruyor). Kuru kosu: sirdaki dubai-marina-gece, konsept havuz, 720p.
