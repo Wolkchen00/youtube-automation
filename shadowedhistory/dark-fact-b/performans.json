@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-11-15T17:58:36.641261+00:00",
+  "guncellendi": "2026-11-16T21:14:25.092695+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 90.5,
@@ -5374,7 +5374,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-11-08T17:55:44.494728+00:00",
       "subtitle": "Divers Found A 2000 Year Old Computer In A Shipwreck",
@@ -5721,6 +5721,36 @@
             "comments": 5,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-16T21:14:25.092695+00:00",
+          "yas_saat": 97.683,
+          "youtube": {
+            "views": 169,
+            "likes": 4,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 19,
+            "impressions": 19,
+            "reach": 13,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 5054,
+            "ig_reels_video_view_total_time": 65703
+          },
+          "tiktok": {
+            "views": 1071,
+            "likes": 63,
+            "comments": 5,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -5859,5 +5889,5 @@
       "etiket": "orta"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 3
 }
