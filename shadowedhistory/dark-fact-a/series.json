@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 999,
   "total_parts": 17,
-  "next_part": 16,
+  "next_part": 17,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
   "auto_replenish": {
@@ -506,6 +506,27 @@
         "narration_delivered": null,
         "arc_roles_missing": [],
         "duration_s": 10.01,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "16": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-a/episodes/ep16/ep16_music_titled_mastered.mp4",
+      "subtitle": "Woolly Mammoths Coexisted With The Great Pyramid",
+      "stack_sha256": "3da9e4f2bc70a1c60855dd4b40ff0be1750b4fb59276f7ea7349d4b5822c3ed1",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-17T20:21:56.382914+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
         "duration_in_band": true,
         "degraded": false
       }

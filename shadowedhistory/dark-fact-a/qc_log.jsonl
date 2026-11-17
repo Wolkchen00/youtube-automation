@@ -695,3 +695,89 @@
 {"ts": "2026-11-13T18:58:02Z", "event": "review", "episode": 15, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Abrupt camera position reset near the final frame."], "fix_notes": ["Ensure continuous forward camera motion without jumping back to the initial frame."], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "The crow's nest, lookouts, and iceberg are clearly visible in the opening frame.", "opening_frame_luma_contrast_proxy": 29.0, "opening_frame_sharpness_proxy": 231.3381}
 {"ts": "2026-11-13T18:58:02Z", "event": "qc_pass", "episode": 15, "shot": 1, "attempt": 0, "content_sha256": "024bce8a7df4fad484e6e53bc4faa5cadd2aa624ad1d714be20f534bef2dfa9d", "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "The crow's nest, lookouts, and iceberg are clearly visible in the opening frame.", "opening_frame_luma_contrast_proxy": 29.0, "opening_frame_sharpness_proxy": 231.3381}
 {"ts": "2026-11-15T18:00:31Z", "event": "qc_api_attempt", "attempt_id": "7ccf82a0363b4d769b47e5cd67fd69ac", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:02:16Z", "event": "qc_api_attempt", "attempt_id": "31cc997e7de242309574c8521fdd1d61", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:02:22Z", "event": "qc_api_result", "attempt_id": "31cc997e7de242309574c8521fdd1d61", "outcome": "error"}
+{"ts": "2026-11-17T20:02:27Z", "event": "qc_api_attempt", "attempt_id": "e20aa7e3b0bb42e59261178c64794454", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:02:30Z", "event": "qc_api_result", "attempt_id": "e20aa7e3b0bb42e59261178c64794454", "outcome": "error"}
+{"ts": "2026-11-17T20:02:41Z", "event": "qc_api_attempt", "attempt_id": "66d52f5bb1fe4f2b9d44c66c55ac3d1b", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:02:44Z", "event": "qc_api_result", "attempt_id": "66d52f5bb1fe4f2b9d44c66c55ac3d1b", "outcome": "error"}
+{"ts": "2026-11-17T20:02:44Z", "event": "qc_api_attempt", "attempt_id": "cd974641ca194de899285f5e29349c73", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:02:47Z", "event": "qc_api_result", "attempt_id": "cd974641ca194de899285f5e29349c73", "outcome": "error"}
+{"ts": "2026-11-17T20:02:52Z", "event": "qc_api_attempt", "attempt_id": "202ff7bfbbea469891d8b38bb6630b18", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:03:10Z", "event": "qc_api_result", "attempt_id": "202ff7bfbbea469891d8b38bb6630b18", "outcome": "error"}
+{"ts": "2026-11-17T20:03:20Z", "event": "qc_api_attempt", "attempt_id": "b8c24f81b9934de0bb4c90eb7b599bb7", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:03:30Z", "event": "qc_api_result", "attempt_id": "b8c24f81b9934de0bb4c90eb7b599bb7", "outcome": "error"}
+{"ts": "2026-11-17T20:03:30Z", "event": "qc_api_attempt", "attempt_id": "631030d9f1f4433fb57caf27b8c190ca", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:03:35Z", "event": "qc_api_result", "attempt_id": "631030d9f1f4433fb57caf27b8c190ca", "outcome": "error"}
+{"ts": "2026-11-17T20:03:40Z", "event": "qc_api_attempt", "attempt_id": "b1ec15f8c0824d79bb0a294fd85d9f3b", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:03:46Z", "event": "qc_api_result", "attempt_id": "b1ec15f8c0824d79bb0a294fd85d9f3b", "outcome": "error"}
+{"ts": "2026-11-17T20:03:56Z", "event": "qc_api_attempt", "attempt_id": "a1c95c54ba244982bddcbf84b7f55451", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:04:06Z", "event": "qc_api_result", "attempt_id": "a1c95c54ba244982bddcbf84b7f55451", "outcome": "error"}
+{"ts": "2026-11-17T20:04:06Z", "event": "qc_api_attempt", "attempt_id": "6b69eccc9b8b4f8a9d2322b82b919e52", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:04:10Z", "event": "qc_api_result", "attempt_id": "6b69eccc9b8b4f8a9d2322b82b919e52", "outcome": "error"}
+{"ts": "2026-11-17T20:04:15Z", "event": "qc_api_attempt", "attempt_id": "5b0284f61cd943d7a224af705aac3eb7", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:04:19Z", "event": "qc_api_result", "attempt_id": "5b0284f61cd943d7a224af705aac3eb7", "outcome": "error"}
+{"ts": "2026-11-17T20:04:29Z", "event": "qc_api_attempt", "attempt_id": "9af7158233ba4b0d8cc173b37cc44a97", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:04:34Z", "event": "qc_api_result", "attempt_id": "9af7158233ba4b0d8cc173b37cc44a97", "outcome": "error"}
+{"ts": "2026-11-17T20:05:34Z", "event": "qc_api_attempt", "attempt_id": "18dee94258ab47c585233fd0c7caea61", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:05:38Z", "event": "qc_api_result", "attempt_id": "18dee94258ab47c585233fd0c7caea61", "outcome": "error"}
+{"ts": "2026-11-17T20:05:43Z", "event": "qc_api_attempt", "attempt_id": "147efd99e0294f8498f38b70de02a20f", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:05:49Z", "event": "qc_api_result", "attempt_id": "147efd99e0294f8498f38b70de02a20f", "outcome": "error"}
+{"ts": "2026-11-17T20:06:00Z", "event": "qc_api_attempt", "attempt_id": "b424d078357b46bab208b8c4164e8c63", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:06:10Z", "event": "qc_api_result", "attempt_id": "b424d078357b46bab208b8c4164e8c63", "outcome": "error"}
+{"ts": "2026-11-17T20:06:10Z", "event": "qc_api_attempt", "attempt_id": "d568c853731d4dd3847c45b06f8694d1", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:06:15Z", "event": "qc_api_result", "attempt_id": "d568c853731d4dd3847c45b06f8694d1", "outcome": "error"}
+{"ts": "2026-11-17T20:06:20Z", "event": "qc_api_attempt", "attempt_id": "a89938c70feb4375a5fefa76624dc8e8", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:06:29Z", "event": "qc_api_result", "attempt_id": "a89938c70feb4375a5fefa76624dc8e8", "outcome": "error"}
+{"ts": "2026-11-17T20:06:39Z", "event": "qc_api_attempt", "attempt_id": "3104bbd2e3cc4eb09b239e11e5d4c1d2", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:06:43Z", "event": "qc_api_result", "attempt_id": "3104bbd2e3cc4eb09b239e11e5d4c1d2", "outcome": "error"}
+{"ts": "2026-11-17T20:06:43Z", "event": "qc_api_attempt", "attempt_id": "d3b2ae2b94a14a73bccf349afa11cf65", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:06:47Z", "event": "qc_api_result", "attempt_id": "d3b2ae2b94a14a73bccf349afa11cf65", "outcome": "error"}
+{"ts": "2026-11-17T20:06:52Z", "event": "qc_api_attempt", "attempt_id": "8cd81f2645f94fccb629e4bd83854567", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:06:56Z", "event": "qc_api_result", "attempt_id": "8cd81f2645f94fccb629e4bd83854567", "outcome": "error"}
+{"ts": "2026-11-17T20:07:06Z", "event": "qc_api_attempt", "attempt_id": "773a0459cea94c4d8d4d5221fe5c9663", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:07:10Z", "event": "qc_api_result", "attempt_id": "773a0459cea94c4d8d4d5221fe5c9663", "outcome": "error"}
+{"ts": "2026-11-17T20:07:10Z", "event": "qc_api_attempt", "attempt_id": "8cb182266ad14ba99b855fc42ba18ad8", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:07:14Z", "event": "qc_api_result", "attempt_id": "8cb182266ad14ba99b855fc42ba18ad8", "outcome": "error"}
+{"ts": "2026-11-17T20:07:19Z", "event": "qc_api_attempt", "attempt_id": "c6188c5a5eb7455292d9ee3e4607bfe8", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:07:23Z", "event": "qc_api_result", "attempt_id": "c6188c5a5eb7455292d9ee3e4607bfe8", "outcome": "error"}
+{"ts": "2026-11-17T20:07:33Z", "event": "qc_api_attempt", "attempt_id": "22099b03960242a5a34611be64cdde5d", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:07:37Z", "event": "qc_api_result", "attempt_id": "22099b03960242a5a34611be64cdde5d", "outcome": "error"}
+{"ts": "2026-11-17T20:09:37Z", "event": "qc_api_attempt", "attempt_id": "380a13f81c1b4cf88e6bc4a118a7a202", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:09:48Z", "event": "qc_api_result", "attempt_id": "380a13f81c1b4cf88e6bc4a118a7a202", "outcome": "error"}
+{"ts": "2026-11-17T20:09:53Z", "event": "qc_api_attempt", "attempt_id": "2b6738c93e3546afb0b11008cf1f96cd", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:10:00Z", "event": "qc_api_result", "attempt_id": "2b6738c93e3546afb0b11008cf1f96cd", "outcome": "error"}
+{"ts": "2026-11-17T20:10:10Z", "event": "qc_api_attempt", "attempt_id": "8bd0121f1ea24a25a5a63585cff6dd9e", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:10:13Z", "event": "qc_api_result", "attempt_id": "8bd0121f1ea24a25a5a63585cff6dd9e", "outcome": "error"}
+{"ts": "2026-11-17T20:10:13Z", "event": "qc_api_attempt", "attempt_id": "73483e1f956245e49141b5935752598c", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:10:27Z", "event": "qc_api_result", "attempt_id": "73483e1f956245e49141b5935752598c", "outcome": "error"}
+{"ts": "2026-11-17T20:10:32Z", "event": "qc_api_attempt", "attempt_id": "867e830bc0294552ac87e1bc59e50bda", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:10:39Z", "event": "qc_api_result", "attempt_id": "867e830bc0294552ac87e1bc59e50bda", "outcome": "error"}
+{"ts": "2026-11-17T20:10:49Z", "event": "qc_api_attempt", "attempt_id": "4794fa03093a485e88b8368be807e6bf", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:10:54Z", "event": "qc_api_result", "attempt_id": "4794fa03093a485e88b8368be807e6bf", "outcome": "error"}
+{"ts": "2026-11-17T20:10:54Z", "event": "qc_api_attempt", "attempt_id": "c8048c972979426fb428f24f8bce1757", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:11:01Z", "event": "qc_api_result", "attempt_id": "c8048c972979426fb428f24f8bce1757", "outcome": "error"}
+{"ts": "2026-11-17T20:11:06Z", "event": "qc_api_attempt", "attempt_id": "10964cb392c24288b7c4bdfb65854229", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:11:15Z", "event": "qc_api_result", "attempt_id": "10964cb392c24288b7c4bdfb65854229", "outcome": "error"}
+{"ts": "2026-11-17T20:11:25Z", "event": "qc_api_attempt", "attempt_id": "074ea3fdea9845e99063bdb98055a16e", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:11:48Z", "event": "qc_api_result", "attempt_id": "074ea3fdea9845e99063bdb98055a16e", "outcome": "error"}
+{"ts": "2026-11-17T20:11:48Z", "event": "qc_api_attempt", "attempt_id": "da4844213df3454c88e788aa7203387d", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:11:54Z", "event": "qc_api_result", "attempt_id": "da4844213df3454c88e788aa7203387d", "outcome": "error"}
+{"ts": "2026-11-17T20:11:59Z", "event": "qc_api_attempt", "attempt_id": "e351c674e8cc449b8ecba1e17bc63a24", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:12:59Z", "event": "qc_api_result", "attempt_id": "e351c674e8cc449b8ecba1e17bc63a24", "outcome": "error"}
+{"ts": "2026-11-17T20:13:09Z", "event": "qc_api_attempt", "attempt_id": "45c2b0309d504f939bc4b50dd7e80098", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:13:38Z", "event": "qc_api_result", "attempt_id": "45c2b0309d504f939bc4b50dd7e80098", "outcome": "ok"}
+{"ts": "2026-11-17T20:13:38Z", "event": "review", "episode": 16, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "fail", "reasons": ["anatomi bozuk"], "artifact_score": 4, "issues": ["Anomalous structural appendage dangles beneath the central mammoth's belly in later frames."], "fix_notes": ["Maintain consistent body contours and leg structure on quadruped animals during motion."], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "The mammoths are prominently positioned and clearly recognizable in golden low-key light.", "opening_frame_luma_contrast_proxy": 168.0, "opening_frame_sharpness_proxy": 176.5267}
+{"ts": "2026-11-17T20:13:38Z", "event": "regen", "episode": 16, "shot": 1, "attempt": 1, "corrections": ["Render a coherent realistic take with stable geometry, lighting, materials and motion."]}
+{"ts": "2026-11-17T20:15:26Z", "event": "qc_api_attempt", "attempt_id": "dd078b4ad5ae49558e2f3445cb560a72", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:15:27Z", "event": "qc_api_result", "attempt_id": "dd078b4ad5ae49558e2f3445cb560a72", "outcome": "429"}
+{"ts": "2026-11-17T20:15:27Z", "event": "qc_api_attempt", "attempt_id": "6ad1583d8e75482795b43a185e664d57", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:15:27Z", "event": "qc_api_result", "attempt_id": "6ad1583d8e75482795b43a185e664d57", "outcome": "429"}
+{"ts": "2026-11-17T20:15:27Z", "event": "qc_api_attempt", "attempt_id": "4fa56abcfe4346beb47dbe41491c4b52", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:15:31Z", "event": "qc_api_result", "attempt_id": "4fa56abcfe4346beb47dbe41491c4b52", "outcome": "error"}
+{"ts": "2026-11-17T20:15:36Z", "event": "qc_api_attempt", "attempt_id": "7ab1360c51894a2eaf9ef8b838b7a2dd", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:15:39Z", "event": "qc_api_result", "attempt_id": "7ab1360c51894a2eaf9ef8b838b7a2dd", "outcome": "error"}
+{"ts": "2026-11-17T20:15:49Z", "event": "qc_api_attempt", "attempt_id": "e5eafb8ee7394345a25cab53cda97d6b", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 16, "shot": 1}
+{"ts": "2026-11-17T20:17:41Z", "event": "qc_api_result", "attempt_id": "e5eafb8ee7394345a25cab53cda97d6b", "outcome": "ok"}
+{"ts": "2026-11-17T20:17:41Z", "event": "review", "episode": 16, "shot": 1, "attempt": 1, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Slight geometry inconsistency in background mammoth tusks"], "fix_notes": ["Ensure consistent tusk shape and placement on background mammoths"], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Mammoths are prominent and clearly recognizable in the opening frame.", "opening_frame_luma_contrast_proxy": 177.0, "opening_frame_sharpness_proxy": 246.5345}
+{"ts": "2026-11-17T20:17:41Z", "event": "qc_pass", "episode": 16, "shot": 1, "attempt": 1, "content_sha256": "d27bf92b6412ba258ad50186a3b8568888f9c4224fd314d8094eb6d379ad7d72", "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Mammoths are prominent and clearly recognizable in the opening frame.", "opening_frame_luma_contrast_proxy": 177.0, "opening_frame_sharpness_proxy": 246.5345}
