@@ -564,6 +564,14 @@
         "duration_in_band": true,
         "degraded": false
       }
+    },
+    "20": {
+      "status": "qc_retry",
+      "first_held_at": "2026-11-17T21:46:49.544820+00:00",
+      "first_infra_held_at": "2026-11-17T21:46:49.544820+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota"
     }
   },
   "engagement": {
