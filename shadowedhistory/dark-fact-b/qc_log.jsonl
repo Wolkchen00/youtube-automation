@@ -1080,3 +1080,147 @@
 {"ts": "2026-11-16T21:17:53Z", "event": "review", "episode": 13, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "fail", "reasons": ["prompt'un yasakladığı öğe görünüyor"], "artifact_score": 5, "issues": ["Prominent Arabic calligraphy medallion on wall contradicts text-free surface requirement", "Final frame resets abruptly to opening framing"], "fix_notes": ["Remove calligraphic wall medallions to keep surfaces free of writing", "Maintain continuous camera motion without snapping back"], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Hagia Sophia interior is clearly visible and well-lit.", "opening_frame_luma_contrast_proxy": 129.0, "opening_frame_sharpness_proxy": 297.3843}
 {"ts": "2026-11-16T21:17:53Z", "event": "regen", "episode": 13, "shot": 1, "attempt": 1, "corrections": ["Render a coherent realistic take with stable geometry, lighting, materials and motion.", "Continue from the established place, preserving the subject, the light level and the period."]}
 {"ts": "2026-11-16T21:19:25Z", "event": "qc_api_attempt", "attempt_id": "bc1d655d250542559d622053f42d926a", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:37:28Z", "event": "qc_api_attempt", "attempt_id": "411b86dfe9d342faa82446bf3eaef860", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:37:32Z", "event": "qc_api_result", "attempt_id": "411b86dfe9d342faa82446bf3eaef860", "outcome": "error"}
+{"ts": "2026-11-18T19:37:37Z", "event": "qc_api_attempt", "attempt_id": "03a14bdf7dff4d24a9973fed57e90924", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:54:02Z", "event": "qc_api_result", "attempt_id": "03a14bdf7dff4d24a9973fed57e90924", "outcome": "ok"}
+{"ts": "2026-11-18T19:54:02Z", "event": "review", "episode": 13, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "fail", "reasons": ["prompt'un yasakladığı öğe görünüyor"], "artifact_score": 4, "issues": ["Calligraphy medallion banner with visible lettering violates the no-text requirement.", "Camera tilts upward smoothly but abruptly jumps back to the starting position at the end."], "fix_notes": ["Maintain a steady upward camera tilt throughout without resetting or looping frames.", "Remove text, banners, and calligraphy medallions from interior surfaces."], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "The Hagia Sophia interior is immediately recognizable and clearly illuminated.", "opening_frame_luma_contrast_proxy": 82.0, "opening_frame_sharpness_proxy": 503.3887}
+{"ts": "2026-11-18T19:54:02Z", "event": "regen", "episode": 13, "shot": 1, "attempt": 1, "corrections": ["Render a coherent realistic take with stable geometry, lighting, materials and motion.", "Let plain stone, wood, cloth and metal carry every surface, so walls, hulls and banners read as texture and colour alone."]}
+{"ts": "2026-11-18T19:55:19Z", "event": "qc_api_attempt", "attempt_id": "f67188779dc34491a3e5c4b1a8f894bc", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:55:47Z", "event": "qc_api_result", "attempt_id": "f67188779dc34491a3e5c4b1a8f894bc", "outcome": "error"}
+{"ts": "2026-11-18T19:55:52Z", "event": "qc_api_attempt", "attempt_id": "5e0d607d39cf4410bd1d8b48de313bb9", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:55:54Z", "event": "qc_api_result", "attempt_id": "5e0d607d39cf4410bd1d8b48de313bb9", "outcome": "error"}
+{"ts": "2026-11-18T19:56:04Z", "event": "qc_api_attempt", "attempt_id": "942d7fff18304b95a8fb46839d65a1dc", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:56:06Z", "event": "qc_api_result", "attempt_id": "942d7fff18304b95a8fb46839d65a1dc", "outcome": "error"}
+{"ts": "2026-11-18T19:56:06Z", "event": "qc_api_attempt", "attempt_id": "597ad08d388143328adb1da7539672b9", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:56:10Z", "event": "qc_api_result", "attempt_id": "597ad08d388143328adb1da7539672b9", "outcome": "error"}
+{"ts": "2026-11-18T19:56:15Z", "event": "qc_api_attempt", "attempt_id": "4d9972f0e5984263a5c6e81019d98be5", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:56:18Z", "event": "qc_api_result", "attempt_id": "4d9972f0e5984263a5c6e81019d98be5", "outcome": "error"}
+{"ts": "2026-11-18T19:56:28Z", "event": "qc_api_attempt", "attempt_id": "d0f3007037f64e86b9a62f90331904d4", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:57:27Z", "event": "qc_api_result", "attempt_id": "d0f3007037f64e86b9a62f90331904d4", "outcome": "error"}
+{"ts": "2026-11-18T19:57:27Z", "event": "qc_api_attempt", "attempt_id": "0c1e41b14da74236b4c477140188986a", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 1}
+{"ts": "2026-11-18T19:57:47Z", "event": "qc_api_result", "attempt_id": "0c1e41b14da74236b4c477140188986a", "outcome": "ok"}
+{"ts": "2026-11-18T19:57:47Z", "event": "review", "episode": 13, "shot": 1, "attempt": 1, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 5, "issues": ["Abrupt perspective jump and scene cut in frame 9."], "fix_notes": ["Ensure a continuous upward camera tilt without sudden shot cuts."], "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Hagia Sophia interior with arches and light rays is clearly recognizable.", "opening_frame_luma_contrast_proxy": 139.0, "opening_frame_sharpness_proxy": 497.0814}
+{"ts": "2026-11-18T19:57:47Z", "event": "qc_pass", "episode": 13, "shot": 1, "attempt": 1, "content_sha256": "fa4ae6fa540618b691af829fb2529f94eaf2f4629283832a9a2ca0a05d1e8f8a", "clip": "shot_01.mp4", "first_frame_ok": true, "first_frame_notes": "Hagia Sophia interior with arches and light rays is clearly recognizable.", "opening_frame_luma_contrast_proxy": 139.0, "opening_frame_sharpness_proxy": 497.0814}
+{"ts": "2026-11-18T19:59:40Z", "event": "qc_api_attempt", "attempt_id": "b81d6245a6ba49a59a2a8e66fad2c440", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 2}
+{"ts": "2026-11-18T20:06:13Z", "event": "qc_api_result", "attempt_id": "b81d6245a6ba49a59a2a8e66fad2c440", "outcome": "ok"}
+{"ts": "2026-11-18T20:06:13Z", "event": "review", "episode": 13, "shot": 2, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_02.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:06:13Z", "event": "qc_pass", "episode": 13, "shot": 2, "attempt": 0, "content_sha256": "5392776a300c5c5d2e660813eda1d6de640c38d8716aec78261339b54cef4e8d", "clip": "shot_02.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:07:50Z", "event": "qc_api_attempt", "attempt_id": "3b3a84204ea64f7ea54a0886d90803fd", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:08:13Z", "event": "qc_api_result", "attempt_id": "3b3a84204ea64f7ea54a0886d90803fd", "outcome": "error"}
+{"ts": "2026-11-18T20:08:18Z", "event": "qc_api_attempt", "attempt_id": "cacb9ee89a0a433aa2523db6ef9bc66b", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:08:25Z", "event": "qc_api_result", "attempt_id": "cacb9ee89a0a433aa2523db6ef9bc66b", "outcome": "error"}
+{"ts": "2026-11-18T20:08:35Z", "event": "qc_api_attempt", "attempt_id": "b74635e0197547c79211baff77ac492c", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:08:38Z", "event": "qc_api_result", "attempt_id": "b74635e0197547c79211baff77ac492c", "outcome": "error"}
+{"ts": "2026-11-18T20:08:38Z", "event": "qc_api_attempt", "attempt_id": "b7dab58cbca24cc4b951344c9ebda291", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:08:55Z", "event": "qc_api_result", "attempt_id": "b7dab58cbca24cc4b951344c9ebda291", "outcome": "error"}
+{"ts": "2026-11-18T20:09:00Z", "event": "qc_api_attempt", "attempt_id": "51a617e639da4e49921bd3561dcb3729", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:09:10Z", "event": "qc_api_result", "attempt_id": "51a617e639da4e49921bd3561dcb3729", "outcome": "error"}
+{"ts": "2026-11-18T20:09:20Z", "event": "qc_api_attempt", "attempt_id": "c98412c2d5e84a78b9992037f7a2bd4d", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:09:23Z", "event": "qc_api_result", "attempt_id": "c98412c2d5e84a78b9992037f7a2bd4d", "outcome": "error"}
+{"ts": "2026-11-18T20:09:23Z", "event": "qc_api_attempt", "attempt_id": "97a76d3eddc9480a85d1881e2069f7e9", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:09:47Z", "event": "qc_api_result", "attempt_id": "97a76d3eddc9480a85d1881e2069f7e9", "outcome": "error"}
+{"ts": "2026-11-18T20:09:52Z", "event": "qc_api_attempt", "attempt_id": "8648e00d6a474e49b9b5a8514eb4cfa7", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:10:00Z", "event": "qc_api_result", "attempt_id": "8648e00d6a474e49b9b5a8514eb4cfa7", "outcome": "error"}
+{"ts": "2026-11-18T20:10:10Z", "event": "qc_api_attempt", "attempt_id": "7700524a928148279f009dec67973c88", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:10:16Z", "event": "qc_api_result", "attempt_id": "7700524a928148279f009dec67973c88", "outcome": "error"}
+{"ts": "2026-11-18T20:10:16Z", "event": "qc_api_attempt", "attempt_id": "c11980af5e2a4cc3a71ca486bc137fd1", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:11:54Z", "event": "qc_api_result", "attempt_id": "c11980af5e2a4cc3a71ca486bc137fd1", "outcome": "error"}
+{"ts": "2026-11-18T20:11:59Z", "event": "qc_api_attempt", "attempt_id": "614b5df93ee64a91ad993c507880fc95", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:12:03Z", "event": "qc_api_result", "attempt_id": "614b5df93ee64a91ad993c507880fc95", "outcome": "error"}
+{"ts": "2026-11-18T20:12:13Z", "event": "qc_api_attempt", "attempt_id": "d6fdf4c744564856b09ca5345e4c942c", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:12:17Z", "event": "qc_api_result", "attempt_id": "d6fdf4c744564856b09ca5345e4c942c", "outcome": "error"}
+{"ts": "2026-11-18T20:13:17Z", "event": "qc_api_attempt", "attempt_id": "b7102ba8ccbd4fa59568d92257677398", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:13:23Z", "event": "qc_api_result", "attempt_id": "b7102ba8ccbd4fa59568d92257677398", "outcome": "error"}
+{"ts": "2026-11-18T20:13:28Z", "event": "qc_api_attempt", "attempt_id": "becd5f7333e64a658836ed773d203fa0", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:13:33Z", "event": "qc_api_result", "attempt_id": "becd5f7333e64a658836ed773d203fa0", "outcome": "error"}
+{"ts": "2026-11-18T20:13:43Z", "event": "qc_api_attempt", "attempt_id": "e2ad553331934fd58b9daf2b17a7920c", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:13:47Z", "event": "qc_api_result", "attempt_id": "e2ad553331934fd58b9daf2b17a7920c", "outcome": "error"}
+{"ts": "2026-11-18T20:13:47Z", "event": "qc_api_attempt", "attempt_id": "0d43abb91c0b4b6e81ffd62deec636f8", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:13:55Z", "event": "qc_api_result", "attempt_id": "0d43abb91c0b4b6e81ffd62deec636f8", "outcome": "error"}
+{"ts": "2026-11-18T20:14:00Z", "event": "qc_api_attempt", "attempt_id": "4374280bfa1d48168fcc559d61667b24", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:14:05Z", "event": "qc_api_result", "attempt_id": "4374280bfa1d48168fcc559d61667b24", "outcome": "error"}
+{"ts": "2026-11-18T20:14:15Z", "event": "qc_api_attempt", "attempt_id": "bc8a83296deb4a4ebbc0aeb3a2976cea", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:14:19Z", "event": "qc_api_result", "attempt_id": "bc8a83296deb4a4ebbc0aeb3a2976cea", "outcome": "error"}
+{"ts": "2026-11-18T20:14:19Z", "event": "qc_api_attempt", "attempt_id": "1ebbb1beea864b1c86cc90aecb2ea7ad", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:14:25Z", "event": "qc_api_result", "attempt_id": "1ebbb1beea864b1c86cc90aecb2ea7ad", "outcome": "error"}
+{"ts": "2026-11-18T20:14:30Z", "event": "qc_api_attempt", "attempt_id": "99a426141e3d4d19bc90b27b72331be4", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:14:35Z", "event": "qc_api_result", "attempt_id": "99a426141e3d4d19bc90b27b72331be4", "outcome": "error"}
+{"ts": "2026-11-18T20:14:45Z", "event": "qc_api_attempt", "attempt_id": "2a64514ece3146a1b8bc532da7d7e6cc", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:14:51Z", "event": "qc_api_result", "attempt_id": "2a64514ece3146a1b8bc532da7d7e6cc", "outcome": "error"}
+{"ts": "2026-11-18T20:14:51Z", "event": "qc_api_attempt", "attempt_id": "919933731c964fbb8569bc64b176a998", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:15:01Z", "event": "qc_api_result", "attempt_id": "919933731c964fbb8569bc64b176a998", "outcome": "error"}
+{"ts": "2026-11-18T20:15:06Z", "event": "qc_api_attempt", "attempt_id": "2edcebb202e14d98a6e6a7c2b1d92afb", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:15:35Z", "event": "qc_api_result", "attempt_id": "2edcebb202e14d98a6e6a7c2b1d92afb", "outcome": "error"}
+{"ts": "2026-11-18T20:15:45Z", "event": "qc_api_attempt", "attempt_id": "8f5299f153c64658865cf45906b20ab4", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:15:53Z", "event": "qc_api_result", "attempt_id": "8f5299f153c64658865cf45906b20ab4", "outcome": "error"}
+{"ts": "2026-11-18T20:17:53Z", "event": "qc_api_attempt", "attempt_id": "bec80ee7e3af4abf93267654b5635fd0", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:17:53Z", "event": "qc_api_result", "attempt_id": "bec80ee7e3af4abf93267654b5635fd0", "outcome": "429"}
+{"ts": "2026-11-18T20:17:53Z", "event": "qc_api_attempt", "attempt_id": "4cf41ba84cdf4ae4a0658ed7b6275592", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:18:54Z", "event": "qc_api_result", "attempt_id": "4cf41ba84cdf4ae4a0658ed7b6275592", "outcome": "error"}
+{"ts": "2026-11-18T20:18:59Z", "event": "qc_api_attempt", "attempt_id": "d32bfb04af234e32af54ccd1043c2a8d", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:18:59Z", "event": "qc_api_result", "attempt_id": "d32bfb04af234e32af54ccd1043c2a8d", "outcome": "429"}
+{"ts": "2026-11-18T20:18:59Z", "event": "qc_api_attempt", "attempt_id": "6fe6c1bb209c40669425ee75712a1501", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:21:35Z", "event": "qc_api_result", "attempt_id": "6fe6c1bb209c40669425ee75712a1501", "outcome": "error"}
+{"ts": "2026-11-18T20:21:40Z", "event": "qc_api_attempt", "attempt_id": "44f6c3ed3e364339b117b2c9c97f9d5d", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:21:45Z", "event": "qc_api_result", "attempt_id": "44f6c3ed3e364339b117b2c9c97f9d5d", "outcome": "error"}
+{"ts": "2026-11-18T20:21:55Z", "event": "qc_api_attempt", "attempt_id": "948ccbf984c649d5a2961353529fc982", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:22:12Z", "event": "qc_api_result", "attempt_id": "948ccbf984c649d5a2961353529fc982", "outcome": "error"}
+{"ts": "2026-11-18T20:22:12Z", "event": "qc_api_attempt", "attempt_id": "05b8d31e7b1342bdb9213c84ee7aa614", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:22:27Z", "event": "qc_api_result", "attempt_id": "05b8d31e7b1342bdb9213c84ee7aa614", "outcome": "error"}
+{"ts": "2026-11-18T20:22:32Z", "event": "qc_api_attempt", "attempt_id": "2915173e79784922a21e44cb910c4a18", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:22:37Z", "event": "qc_api_result", "attempt_id": "2915173e79784922a21e44cb910c4a18", "outcome": "error"}
+{"ts": "2026-11-18T20:22:47Z", "event": "qc_api_attempt", "attempt_id": "03164789433c4e8995ce52c058567eaf", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:23:01Z", "event": "qc_api_result", "attempt_id": "03164789433c4e8995ce52c058567eaf", "outcome": "error"}
+{"ts": "2026-11-18T20:27:01Z", "event": "qc_api_attempt", "attempt_id": "3f7861e7367847b79238eaa689000824", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:27:01Z", "event": "qc_api_result", "attempt_id": "3f7861e7367847b79238eaa689000824", "outcome": "429"}
+{"ts": "2026-11-18T20:27:01Z", "event": "qc_api_attempt", "attempt_id": "c26065cbbb3d4a4bb5502623d001b7de", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:27:02Z", "event": "qc_api_result", "attempt_id": "c26065cbbb3d4a4bb5502623d001b7de", "outcome": "429"}
+{"ts": "2026-11-18T20:27:02Z", "event": "qc_api_attempt", "attempt_id": "781ec6ef6cc046aebe8ceb8c4827050c", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:27:12Z", "event": "qc_api_result", "attempt_id": "781ec6ef6cc046aebe8ceb8c4827050c", "outcome": "error"}
+{"ts": "2026-11-18T20:27:17Z", "event": "qc_api_attempt", "attempt_id": "ce8d27bf8c594f7a9464c03711d9aafe", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:27:21Z", "event": "qc_api_result", "attempt_id": "ce8d27bf8c594f7a9464c03711d9aafe", "outcome": "error"}
+{"ts": "2026-11-18T20:27:31Z", "event": "qc_api_attempt", "attempt_id": "88693a9e94ec4726b20a84cb9c10a484", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 3}
+{"ts": "2026-11-18T20:28:16Z", "event": "qc_api_result", "attempt_id": "88693a9e94ec4726b20a84cb9c10a484", "outcome": "ok"}
+{"ts": "2026-11-18T20:28:16Z", "event": "review", "episode": 13, "shot": 3, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_03.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:28:16Z", "event": "qc_pass", "episode": 13, "shot": 3, "attempt": 0, "content_sha256": "2b5a1faa4e48a1c2e33e3ea9517bf1e40e90d8f340935b98e745f62f3cbf38bc", "clip": "shot_03.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:29:39Z", "event": "qc_api_attempt", "attempt_id": "9f67b9757e43450ea7331011fec1dddb", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:29:39Z", "event": "qc_api_result", "attempt_id": "9f67b9757e43450ea7331011fec1dddb", "outcome": "429"}
+{"ts": "2026-11-18T20:29:39Z", "event": "qc_api_attempt", "attempt_id": "64957703636449ccb7934e042f620c83", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:29:57Z", "event": "qc_api_result", "attempt_id": "64957703636449ccb7934e042f620c83", "outcome": "error"}
+{"ts": "2026-11-18T20:30:02Z", "event": "qc_api_attempt", "attempt_id": "74151d87af724632b348b6e02cd883a6", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:30:02Z", "event": "qc_api_result", "attempt_id": "74151d87af724632b348b6e02cd883a6", "outcome": "429"}
+{"ts": "2026-11-18T20:30:02Z", "event": "qc_api_attempt", "attempt_id": "cb72ce8948e040f89a6d794e2928d5bc", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:30:02Z", "event": "qc_api_result", "attempt_id": "cb72ce8948e040f89a6d794e2928d5bc", "outcome": "429"}
+{"ts": "2026-11-18T20:30:02Z", "event": "qc_api_attempt", "attempt_id": "c7a190f9aea4498c9162da93f60f04be", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:46:44Z", "event": "qc_api_result", "attempt_id": "c7a190f9aea4498c9162da93f60f04be", "outcome": "error"}
+{"ts": "2026-11-18T20:46:44Z", "event": "review", "episode": 13, "shot": 4, "attempt": 0, "review_try": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (server)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:46:45Z", "event": "qc_api_attempt", "attempt_id": "58a2c0194a1b4cccaf2396f33da6ad2a", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:46:45Z", "event": "qc_api_result", "attempt_id": "58a2c0194a1b4cccaf2396f33da6ad2a", "outcome": "429"}
+{"ts": "2026-11-18T20:46:45Z", "event": "qc_api_attempt", "attempt_id": "a99c0b7952f64eab8a9c423f069c6f13", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:46:45Z", "event": "qc_api_result", "attempt_id": "a99c0b7952f64eab8a9c423f069c6f13", "outcome": "429"}
+{"ts": "2026-11-18T20:46:45Z", "event": "qc_api_attempt", "attempt_id": "03f47276fdef4da3b340a38fdb7978f6", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:47:03Z", "event": "qc_api_result", "attempt_id": "03f47276fdef4da3b340a38fdb7978f6", "outcome": "error"}
+{"ts": "2026-11-18T20:47:08Z", "event": "qc_api_attempt", "attempt_id": "490f83921825412c8832fa297767d43a", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:47:19Z", "event": "qc_api_result", "attempt_id": "490f83921825412c8832fa297767d43a", "outcome": "error"}
+{"ts": "2026-11-18T20:47:29Z", "event": "qc_api_attempt", "attempt_id": "c641f6af56344319bc517a75c2fefc01", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:47:29Z", "event": "qc_api_result", "attempt_id": "c641f6af56344319bc517a75c2fefc01", "outcome": "429"}
+{"ts": "2026-11-18T20:47:29Z", "event": "qc_api_attempt", "attempt_id": "1135b80cefd64e83bd211237e79d2a80", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:47:29Z", "event": "qc_api_result", "attempt_id": "1135b80cefd64e83bd211237e79d2a80", "outcome": "429"}
+{"ts": "2026-11-18T20:47:29Z", "event": "review", "episode": 13, "shot": 4, "attempt": 0, "review_try": 1, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:47:29Z", "event": "qc_api_attempt", "attempt_id": "8a4b4fc55c6443ed87ce64f45e4a197f", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:47:30Z", "event": "qc_api_result", "attempt_id": "8a4b4fc55c6443ed87ce64f45e4a197f", "outcome": "429"}
+{"ts": "2026-11-18T20:47:30Z", "event": "qc_api_attempt", "attempt_id": "f55403fbbdaa42d7b6e9332ff60c1d0d", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:47:31Z", "event": "qc_api_result", "attempt_id": "f55403fbbdaa42d7b6e9332ff60c1d0d", "outcome": "error"}
+{"ts": "2026-11-18T20:47:36Z", "event": "qc_api_attempt", "attempt_id": "24bb4c5e992c432ab60d50332a4282c3", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:49:24Z", "event": "qc_api_result", "attempt_id": "24bb4c5e992c432ab60d50332a4282c3", "outcome": "error"}
+{"ts": "2026-11-18T20:49:34Z", "event": "qc_api_attempt", "attempt_id": "49de5eb9fd7b403fbf4927205dfd64c5", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:49:38Z", "event": "qc_api_result", "attempt_id": "49de5eb9fd7b403fbf4927205dfd64c5", "outcome": "error"}
+{"ts": "2026-11-18T20:49:38Z", "event": "qc_api_attempt", "attempt_id": "f7f39a5399e24237b5365c36cae693da", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:49:44Z", "event": "qc_api_result", "attempt_id": "f7f39a5399e24237b5365c36cae693da", "outcome": "error"}
+{"ts": "2026-11-18T20:49:49Z", "event": "qc_api_attempt", "attempt_id": "1328a2a386ea452385c5aa2b8fcf5ec2", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:49:49Z", "event": "qc_api_result", "attempt_id": "1328a2a386ea452385c5aa2b8fcf5ec2", "outcome": "429"}
+{"ts": "2026-11-18T20:49:49Z", "event": "qc_api_attempt", "attempt_id": "919a522d84224629a0491c23a901213a", "task_type": "visual_review", "model": "gemini-3.5-flash", "is_fallback": true, "episode": 13, "shot": 4}
+{"ts": "2026-11-18T20:49:49Z", "event": "qc_api_result", "attempt_id": "919a522d84224629a0491c23a901213a", "outcome": "429"}
+{"ts": "2026-11-18T20:49:49Z", "event": "review", "episode": 13, "shot": 4, "attempt": 0, "review_try": 2, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_04.mp4", "first_frame_ok": "n/a", "first_frame_notes": "n/a", "opening_frame_luma_contrast_proxy": "n/a", "opening_frame_sharpness_proxy": "n/a"}
+{"ts": "2026-11-18T20:49:49Z", "event": "qc_hold", "episode": 13, "shot": 4, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)"], "clip": "shot_04_qchold0.mp4"}

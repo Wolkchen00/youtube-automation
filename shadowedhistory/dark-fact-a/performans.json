@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-11-17T20:00:05.976388+00:00",
+  "guncellendi": "2026-11-18T19:33:57.940899+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 4.0,
@@ -6073,7 +6073,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-11-09T21:52:13.049422+00:00",
       "subtitle": "A 27-Metre Ship Was Buried As A Royal Grave",
@@ -6494,6 +6494,38 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-18T19:33:57.940899+00:00",
+          "yas_saat": 167.86,
+          "youtube": {
+            "views": 5,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 14,
+            "impressions": 14,
+            "reach": 13,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 3144,
+            "ig_reels_video_view_total_time": 40879,
+            "avg_watch_seconds": 3.144,
+            "watch_time_seconds": 40.879
+          },
+          "tiktok": {
+            "views": 140,
+            "likes": 1,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -6595,8 +6627,8 @@
         },
         "s7g": {
           "youtube": {
-            "ts": "2026-11-17T20:00:05.976388+00:00",
-            "yas_saat": 144.295,
+            "ts": "2026-11-18T19:33:57.940899+00:00",
+            "yas_saat": 167.86,
             "youtube": {
               "views": 5,
               "likes": 0,
@@ -6627,8 +6659,8 @@
             }
           },
           "instagram": {
-            "ts": "2026-11-17T20:00:05.976388+00:00",
-            "yas_saat": 144.295,
+            "ts": "2026-11-18T19:33:57.940899+00:00",
+            "yas_saat": 167.86,
             "youtube": {
               "views": 5,
               "likes": 0,
@@ -6659,8 +6691,8 @@
             }
           },
           "tiktok": {
-            "ts": "2026-11-17T20:00:05.976388+00:00",
-            "yas_saat": 144.295,
+            "ts": "2026-11-18T19:33:57.940899+00:00",
+            "yas_saat": 167.86,
             "youtube": {
               "views": 5,
               "likes": 0,
@@ -6865,6 +6897,38 @@
             "comments": 2,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-18T19:33:57.940899+00:00",
+          "yas_saat": 120.532,
+          "youtube": {
+            "views": 241,
+            "likes": 7,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 6,
+            "comments": 1,
+            "views": 160,
+            "impressions": 160,
+            "reach": 116,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 6,
+            "comments_insight": 1,
+            "total_interactions": 8,
+            "ig_reels_avg_watch_time": 6834,
+            "ig_reels_video_view_total_time": 785916,
+            "avg_watch_seconds": 6.834,
+            "watch_time_seconds": 785.916
+          },
+          "tiktok": {
+            "views": 1031,
+            "likes": 35,
+            "comments": 2,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -7001,7 +7065,64 @@
       },
       "puan": 56.5,
       "etiket": "kazanan"
+    },
+    {
+      "part": 16,
+      "post_ids": {
+        "youtube": "_QDQzSyliOQ",
+        "instagram": "18225682612356511",
+        "tiktok": "7709238085212589342"
+      },
+      "request_ids": {
+        "youtube": "1bf063d4a7ca49eeac6c0883cd62a36c",
+        "instagram": "8636d043348148b1af47f3df4d8fc8a7",
+        "tiktok": "12c97d6f34a1405f9a2b792405869b8d"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-18T19:33:57.940899+00:00",
+          "yas_saat": 23.2,
+          "youtube": {
+            "views": 744,
+            "likes": 13,
+            "comments": 3,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 128,
+            "impressions": 128,
+            "reach": 103,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 9822,
+            "ig_reels_video_view_total_time": 982264,
+            "avg_watch_seconds": 9.822,
+            "watch_time_seconds": 982.264
+          },
+          "tiktok": {
+            "views": 371,
+            "likes": 13,
+            "comments": 0,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-17T20:21:56.382278+00:00",
+      "subtitle": "Woolly Mammoths Coexisted With The Great Pyramid",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 12
 }
