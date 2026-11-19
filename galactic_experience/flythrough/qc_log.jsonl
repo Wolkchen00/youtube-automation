@@ -702,3 +702,14 @@
 {"ts": "2026-11-17T21:46:49Z", "event": "qc_api_result", "attempt_id": "c8b3f2a442824f4b9ba09d5ce365ac78", "outcome": "429"}
 {"ts": "2026-11-17T21:46:49Z", "event": "review", "episode": 20, "shot": 1, "attempt": 0, "review_try": 2, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)"], "artifact_score": null, "issues": null, "fix_notes": null, "clip": "shot_01.mp4"}
 {"ts": "2026-11-17T21:46:49Z", "event": "qc_hold", "episode": 20, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-11-19T20:52:16Z", "event": "qc_api_attempt", "attempt_id": "cf13cbbb9d2a488383a9c5eecdd75c64", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 20, "shot": 1}
+{"ts": "2026-11-19T20:55:06Z", "event": "qc_api_result", "attempt_id": "cf13cbbb9d2a488383a9c5eecdd75c64", "outcome": "ok"}
+{"ts": "2026-11-19T20:55:06Z", "event": "native_audio_review", "episode": 20, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Low-frequency atmospheric rumbles and whooshes with a metallic impact effect, without speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-19T20:55:06Z", "event": "qc_api_attempt", "attempt_id": "19cf0228e87844b093f31fa9a0ddb85c", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 20, "shot": 1}
+{"ts": "2026-11-19T20:55:10Z", "event": "qc_api_result", "attempt_id": "19cf0228e87844b093f31fa9a0ddb85c", "outcome": "error"}
+{"ts": "2026-11-19T20:55:15Z", "event": "qc_api_attempt", "attempt_id": "80d97f73378d41538bf764ad626f38f3", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 20, "shot": 1}
+{"ts": "2026-11-19T20:55:42Z", "event": "qc_api_result", "attempt_id": "80d97f73378d41538bf764ad626f38f3", "outcome": "error"}
+{"ts": "2026-11-19T20:55:52Z", "event": "qc_api_attempt", "attempt_id": "b0cd1a4791eb44bfabb9e6c766e0dc80", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 20, "shot": 1}
+{"ts": "2026-11-19T20:59:01Z", "event": "qc_api_result", "attempt_id": "b0cd1a4791eb44bfabb9e6c766e0dc80", "outcome": "ok"}
+{"ts": "2026-11-19T20:59:01Z", "event": "review", "episode": 20, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 4, "issues": ["Transition shifts into an abstract wormhole tunnel rather than a photoreal solar sunspot."], "fix_notes": ["Maintain solar plasma granulation and magnetic filaments throughout the dive."], "clip": "shot_01.mp4"}
+{"ts": "2026-11-19T20:59:01Z", "event": "qc_pass", "episode": 20, "shot": 1, "attempt": 0, "content_sha256": "93f0899e919c92ed23b4e08e0217ee2045dd37878b91e26679d4d003d1a64812", "clip": "shot_01.mp4"}
