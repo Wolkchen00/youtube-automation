@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 21,
+    "title": "Lascaux Cave Paintings Are About 17,000 Years Old"
+  },
+  "synopsis": "Prehistoric cave paintings of horses and deer inside Lascaux date back approximately 17,000 years.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. Deep inside a dark limestone cavern, vibrant prehistoric paintings of horses and giant bulls stretch across uneven rock walls. Warm yellow torchlight flickers along the cavern ceiling, casting dancing shadows and illuminating mineral pigments. Wisps of thin smoke drift upward past the stone surface. The camera performs a slow lateral tracking shot gliding rightward along the wall over ten seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "What do you think inspired humans 17,000 years ago to paint deep inside caves? 🎨",
+  "family": "zamanin izi",
+  "seed_id": 41,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Lascaux paintings are 17,000 years old.",
+    "subtitle": "Flickering torchlight revealed ancient artwork."
+  },
+  "caption": "The cave paintings of Lascaux are about 17,000 years old.\n\nDiscovered in 1940 inside a cave complex in southwestern France, these Palaeolithic artworks depict bulls, horses, and deer. Mineral pigments applied to limestone walls have remained preserved underground for roughly 17,000 years.\n\nVisuals created with AI.\n\nHave you ever seen prehistoric cave art?",
+  "hashtags": "#history #historyfacts #prehistory #archaeology #france",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

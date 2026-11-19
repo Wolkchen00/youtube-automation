@@ -15,8 +15,8 @@
   "performance_feedback": true,
   "status": "active",
   "priority": 999,
-  "total_parts": 17,
-  "next_part": 17,
+  "total_parts": 21,
+  "next_part": 18,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). A: tek kesintisiz sahne, 10 sn.",
   "auto_replenish": {
@@ -182,8 +182,8 @@
       ]
     },
     "last_run": {
-      "at": "2026-11-13T18:49:26.456179+00:00",
-      "parts": "15-17"
+      "at": "2026-11-19T19:44:30.344378+00:00",
+      "parts": "18-21"
     }
   },
   "parts": {
@@ -522,6 +522,27 @@
         "tiktok"
       ],
       "published_at": "2026-11-17T20:21:56.382914+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 10.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "17": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-a/episodes/ep17/ep17_music_titled_mastered.mp4",
+      "subtitle": "Derinkuyu Could Shelter 20,000 People Underground",
+      "stack_sha256": "de27d1abf192e3d927d98c479330884b73e526796385fd18fbffc14270eb3846",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-19T20:02:39.179565+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,

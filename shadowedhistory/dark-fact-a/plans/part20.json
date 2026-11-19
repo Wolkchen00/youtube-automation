@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 20,
+    "title": "Ancient Romans Used Urine To Wash Their Clothes"
+  },
+  "synopsis": "Ancient Romans gathered human urine in stone vats to launder and bleach woolen garments.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. Inside a dimly lit stone Roman fullery, stone vats sit filled with liquid under arched stone ceilings. Silhouetted workers in tunics seen from behind tread cloth in the basins. Steam rises gently from warm stone tubs while faint courtyard daylight filters through overhead grates. The camera performs a slow, subtle push-in toward the central vat over ten seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could you imagine using urine as laundry detergent? 🧺",
+  "family": "garip gercekler",
+  "seed_id": 31,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Romans washed clothes in urine.",
+    "subtitle": "Ammonia acted as a natural cleaning agent."
+  },
+  "caption": "Ancient Romans used urine to wash their clothes.\n\nPublic collection vats were placed throughout ancient towns to gather urine for fullers who laundered wool fabrics. Historical records from 1912 documenting fulling workshops explain how ammonia broke down grease and dirt effectively.\n\nVisuals created with AI.\n\nWhat is the strangest ancient custom you know?",
+  "hashtags": "#history #historyfacts #ancientrome #dailylife #archaeology",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

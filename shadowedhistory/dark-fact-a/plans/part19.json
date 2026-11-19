@@ -1,0 +1,28 @@
+{
+  "episode": {
+    "number": 19,
+    "title": "Roman Concrete Can Heal Its Own Cracks"
+  },
+  "synopsis": "Ancient Roman harbour concrete self-heals micro-cracks through mineral reactions with ocean water.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "10",
+      "prompt": "Shot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something in the scene moves for the whole ten seconds: water, waves, smoke, fog, fire, snow, a walking animal, distant people or a ship. One slow, single-direction camera move only, a gentle push-in or a slow lateral glide, keeping the subject in frame the whole time. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 1, exactly 10 seconds at 24 fps, ONE continuous unbroken shot with no cuts. An ancient Roman concrete harbour wall stands towering against a dark twilight ocean. Ocean waves crash steadily against the textured stone surface, sending fine white spray mist into the air. Low golden sunset light glints across the wet sea wall. The camera performs a slow lateral glide rightward along the weathered pier structure for the full ten seconds.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Is ancient engineering superior to modern concrete? 🌊",
+  "family": "gizli muhendislik",
+  "seed_id": 21,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Roman concrete heals its own cracks.",
+    "subtitle": "Ancient sea walls still stand after 2000 years."
+  },
+  "caption": "Roman concrete can heal its own cracks over time.\n\nMarine structures built along the Mediterranean coastline utilized lime clasts and volcanic ash. Scientific analysis in 2017 confirmed that seawater reacts with these materials to continuously repair micro-cracks over centuries.\n\nVisuals created with AI.\n\nDoes ancient engineering surprise you?",
+  "hashtags": "#history #historyfacts #romanempire #ancientrome #engineering",
+  "hook_shot": 1,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}
