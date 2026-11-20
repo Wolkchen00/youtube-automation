@@ -626,3 +626,24 @@
 {"ts": "2026-11-18T20:56:19Z", "event": "qc_api_result", "attempt_id": "6fbc132196a145ad95b7a42b621a079f", "outcome": "429"}
 {"ts": "2026-11-18T20:56:19Z", "event": "native_audio_review", "episode": 114, "shot": 1, "attempt": 0, "verdict": "hold", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "has_foley": null, "unwanted_speech": null, "unwanted_music": null, "notes": null, "no_foley_count": 0, "stem": null, "clip": "shot_01.mp4"}
 {"ts": "2026-11-18T20:56:19Z", "event": "qc_hold", "episode": 114, "shot": 1, "attempt": 0, "reason": "quota", "reasons": ["QC API deneme politikası tükendi (quota)", "zorunlu ham ses denetimi değerlendirilemedi"], "clip": "shot_01_qchold0.mp4"}
+{"ts": "2026-11-20T20:30:46Z", "event": "qc_api_attempt", "attempt_id": "5057e4986ec94ad990bf32f6b1803c74", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:31:23Z", "event": "qc_api_result", "attempt_id": "5057e4986ec94ad990bf32f6b1803c74", "outcome": "error"}
+{"ts": "2026-11-20T20:31:28Z", "event": "qc_api_attempt", "attempt_id": "2a9c57211d7b49ca83c68613e34b276f", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:31:34Z", "event": "qc_api_result", "attempt_id": "2a9c57211d7b49ca83c68613e34b276f", "outcome": "error"}
+{"ts": "2026-11-20T20:31:44Z", "event": "qc_api_attempt", "attempt_id": "725f20cec3bd43c2846983ad46c1a7db", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:31:45Z", "event": "qc_api_result", "attempt_id": "725f20cec3bd43c2846983ad46c1a7db", "outcome": "429"}
+{"ts": "2026-11-20T20:31:45Z", "event": "qc_api_attempt", "attempt_id": "ca3200d243f74a5eb2329c1acfda39f9", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:32:56Z", "event": "qc_api_result", "attempt_id": "ca3200d243f74a5eb2329c1acfda39f9", "outcome": "error"}
+{"ts": "2026-11-20T20:33:01Z", "event": "qc_api_attempt", "attempt_id": "5bb8a9be5a0448f69d889a23d47ef4fd", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:33:01Z", "event": "qc_api_result", "attempt_id": "5bb8a9be5a0448f69d889a23d47ef4fd", "outcome": "429"}
+{"ts": "2026-11-20T20:33:01Z", "event": "qc_api_attempt", "attempt_id": "6797273555cf4868ab60945db9207d6d", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:33:05Z", "event": "qc_api_result", "attempt_id": "6797273555cf4868ab60945db9207d6d", "outcome": "ok"}
+{"ts": "2026-11-20T20:33:05Z", "event": "native_audio_review", "episode": 114, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Loud atmospheric whooshing and wind noise with no speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-20T20:33:06Z", "event": "qc_api_attempt", "attempt_id": "8dce78f68bb54def99e705c310d34179", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:33:06Z", "event": "qc_api_result", "attempt_id": "8dce78f68bb54def99e705c310d34179", "outcome": "429"}
+{"ts": "2026-11-20T20:33:06Z", "event": "qc_api_attempt", "attempt_id": "f66accaf89d64026b0f595f01db3eff5", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:33:06Z", "event": "qc_api_result", "attempt_id": "f66accaf89d64026b0f595f01db3eff5", "outcome": "429"}
+{"ts": "2026-11-20T20:33:06Z", "event": "qc_api_attempt", "attempt_id": "526dea93b1d6478eac48c5f8043169d9", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 114, "shot": 1}
+{"ts": "2026-11-20T20:33:39Z", "event": "qc_api_result", "attempt_id": "526dea93b1d6478eac48c5f8043169d9", "outcome": "ok"}
+{"ts": "2026-11-20T20:33:39Z", "event": "review", "episode": 114, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-11-20T20:33:39Z", "event": "qc_pass", "episode": 114, "shot": 1, "attempt": 0, "content_sha256": "f9b5ea5e8a4c20baebf9c9e92c53272d1af8d81f868f2e2fb29d25d9ae41312a", "clip": "shot_01.mp4"}
