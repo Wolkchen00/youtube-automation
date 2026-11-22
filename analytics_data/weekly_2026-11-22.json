@@ -1,0 +1,232 @@
+{
+  "generated_at": "2026-11-22T16:04:23.010519+00:00",
+  "snapshot_date": "2026-11-22",
+  "period": "2026-11-16 to 2026-11-22",
+  "channels": {
+    "shadowedhistory": {
+      "stats": {
+        "subs": 136,
+        "total_views": 122967,
+        "total_videos": 316
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "v2Olvh87-pA",
+          "title": "Loaves Of Bread From 79 AD Were Preserved In Pompeii",
+          "published": "2026-11-21T18:23:21Z",
+          "views": 76,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "Ya3nFeeJqZQ",
+          "title": "Hagia Sophia Was The Largest Cathedral For Nearly 1000 Years",
+          "published": "2026-11-20T20:25:19Z",
+          "views": 570,
+          "views_48h": 570,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "zO7-KECQ2sY",
+          "title": "Derinkuyu Could Shelter 20,000 People Underground",
+          "published": "2026-11-19T19:59:01Z",
+          "views": 82,
+          "views_48h": 68,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "_QDQzSyliOQ",
+          "title": "Woolly Mammoths Coexisted With The Great Pyramid",
+          "published": "2026-11-17T20:19:36Z",
+          "views": 1049,
+          "views_48h": 995,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 10.5
+    },
+    "sentinal_ihsan": {
+      "stats": {
+        "subs": 158,
+        "total_views": 2,
+        "total_videos": 1
+      },
+      "videos_last_7_days": [],
+      "views_30d_median": 2
+    },
+    "galactic_experiment": {
+      "stats": {
+        "subs": 153,
+        "total_views": 80052,
+        "total_videos": 249
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "I4zZNtv_6-w",
+          "title": "Through the Kuiper Belt",
+          "published": "2026-11-21T19:29:09Z",
+          "views": 5,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "LgkWVxqDwQ8",
+          "title": "A Landslide Across the Entire Himalayan Ridge",
+          "published": "2026-11-20T20:34:26Z",
+          "views": 59,
+          "views_48h": 59,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "0ubUuH1MaWc",
+          "title": "Flying into a Sunspot on the Sun",
+          "published": "2026-11-19T20:59:52Z",
+          "views": 901,
+          "views_48h": 867,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "625hzZAVxBA",
+          "title": "Through the Orion Nebula",
+          "published": "2026-11-15T20:14:48Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 2
+    },
+    "aimagine": {
+      "stats": {
+        "subs": 113,
+        "total_views": 164814,
+        "total_videos": 327
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "T5OvT3vpyuk",
+          "title": "Merdeka 118, no floor #shorts",
+          "published": "2026-11-21T18:04:01Z",
+          "views": 0,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "8TTnZgEUnZk",
+          "title": "Bangkok skyscraper drop #shorts",
+          "published": "2026-11-20T19:12:12Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "gFxoPS781c0",
+          "title": "Lotte World Tower, no floor #shorts",
+          "published": "2026-11-19T19:33:58Z",
+          "views": 1,
+          "views_48h": 1,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "-zIvgfNpl4o",
+          "title": "Willis Tower, no floor #shorts",
+          "published": "2026-11-18T19:29:18Z",
+          "views": 0,
+          "views_48h": 0,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "5kNLejtdjCw",
+          "title": "Times Square, no railing #shorts",
+          "published": "2026-11-17T19:56:00Z",
+          "views": 1178,
+          "views_48h": 1178,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "27-IdQsew-I",
+          "title": "Dubai Marina, no railing #shorts",
+          "published": "2026-11-16T21:07:08Z",
+          "views": 1277,
+          "views_48h": 1275,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "ZeY051f_AMw",
+          "title": "Niagara Falls under a meteor #shorts",
+          "published": "2026-11-15T17:50:54Z",
+          "views": 3,
+          "views_48h": 0,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 1.0
+    },
+    "the_unfinished": {
+      "stats": {
+        "subs": 470,
+        "total_views": 294894,
+        "total_videos": 73
+      },
+      "videos_last_7_days": [
+        {
+          "video_id": "9Z4LFy4gEFM",
+          "title": "Kayınvalide, hamile gelinine laf atan kıza haddini bildirdi. 👑 | Bir Kez Olsun 87",
+          "published": "2026-11-21T16:00:45Z",
+          "views": 201,
+          "views_48h": null,
+          "views_48h_reason": "warmup"
+        },
+        {
+          "video_id": "9Z93LSmB7so",
+          "title": "Kayınvalide, gelinini aldatan oğlunu evlatlıktan reddetti. 👏 | Bir Kez Olsun 86",
+          "published": "2026-11-20T16:01:00Z",
+          "views": 4317,
+          "views_48h": 4317,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "xwGHUWExSrU",
+          "title": "Kızı yurt dışından döndü. Annesini mutfakta tek başına ağlarken buldu. 🥺 | Bir Kez Olsun 85",
+          "published": "2026-11-19T16:01:08Z",
+          "views": 1721,
+          "views_48h": 1628,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "BeYPWKnSYVc",
+          "title": "Karısı kocasına boşanmayı imzalattı. Metresi her şeyi geri almaya yemin etti. 👑 | Bir Kez Olsun 84",
+          "published": "2026-11-18T16:00:50Z",
+          "views": 1468,
+          "views_48h": 1387,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "B3LN6_q2gIs",
+          "title": "Kocası şirketin parasıyla metresine ev aldı. Tapuyu oğlu buldu. 🏠 | Bir Kez Olsun 83",
+          "published": "2026-11-17T16:00:49Z",
+          "views": 4356,
+          "views_48h": 4183,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "wFuxtsj9XBM",
+          "title": "Kayınvalide gelininin iş görüşmesini gizlice bozdu. Bunu ondan oğlu istemişti. 🤫 | Bir Kez Olsun 82",
+          "published": "2026-11-16T16:00:42Z",
+          "views": 3490,
+          "views_48h": 3122,
+          "views_48h_reason": null
+        },
+        {
+          "video_id": "vPioN5sPvFA",
+          "title": "Metres, kızına altı hafta bakan kadına 'Sen hep ikinci kadındın' dedi. 💔 | Bir Kez Olsun 81",
+          "published": "2026-11-15T16:00:38Z",
+          "views": 2877,
+          "views_48h": 2611,
+          "views_48h_reason": null
+        }
+      ],
+      "views_30d_median": 3183.5
+    }
+  }
+}
