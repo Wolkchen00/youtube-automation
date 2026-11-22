@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 16,
+    "title": "The Hundred Years War Actually Lasted 116 Years"
+  },
+  "synopsis": "Despite its famous name, the medieval war between the ruling houses of England and France lasted 116 years.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. A vast medieval battlefield at dawn engulfed in thick fog, where distant lines of mounted knights and archers stand ready while iron banners sway in the damp breeze. One slow, single-direction camera move. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A closer view of discarded iron gauntlets and weathered heraldic banners lying in churned mud as light mist drifts across the ground. One slow camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide panoramic shot showing a grand stone castle on a distant ridge behind thousands of silhouetted soldiers assembled across rolling fields. One slow camera tracking shot. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A solitary stone watchtower overlooking the misty valley, illuminated by faint morning sun rays breaking through storm clouds, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How do you think generations of soldiers coped with a century of continuous war? ⚔️",
+  "family": "garip gercekler",
+  "seed_id": 34,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "The Hundred Years War lasted 116 years.",
+    "subtitle": "The medieval conflict raged from 1337 to 1453."
+  },
+  "caption": "The Hundred Years' War actually lasted 116 years.\n\nThe royal dynasties of England and France fought this legendary conflict from 1337 until 1453. Spanning over a century, the war redefined European warfare, siege tactics, and feudal kingdom boundaries.\n\nVisuals created with AI.\n\nDid you know this conflict spanned over a full century?",
+  "hashtags": "#history #historyfacts #medieval #knights #europe",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

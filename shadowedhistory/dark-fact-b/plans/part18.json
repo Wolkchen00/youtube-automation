@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 18,
+    "title": "Cleopatra Lived Closer To The Moon Landing Than The Pyramids"
+  },
+  "synopsis": "Queen Cleopatra lived significantly closer in time to the 1969 Moon landing than to the construction of Egypt's Great Pyramid.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. The weathered Great Pyramid of Giza stands grandly under a twilight sky alongside a giant pale Moon, as a lone distant traveller with a camel crosses desert dunes. One slow, single-direction camera move. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A closer view of colossal weather-beaten limestone blocks of the pyramid base, illuminated by warm low evening sunlight as blowing sand drifts across stone edges. One slow camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide shot revealing the ancient Giza pyramid complex silhouetted against a deep blue evening horizon with tiny distant figures walking along sand ridges. One slow camera tracking shot. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A striking low-angle framing of the pyramid apex aligned directly beneath the bright lunar disc in the dark sky, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Does it warp your sense of time knowing how old the Great Pyramid really is? ⏳",
+  "family": "kayip harikalar",
+  "seed_id": 2,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Cleopatra lived closer to Moon landing.",
+    "subtitle": "The Apollo landing occurred in 1969."
+  },
+  "caption": "Cleopatra lived closer in time to the Moon landing than to the building of the Great Pyramid.\n\nThe Great Pyramid of Giza was constructed around 2560 BC, whereas Cleopatra ruled Egypt around 30 BC. When humans walked on the Moon in 1969, less time had elapsed since her reign than between her life and the pyramid's construction.\n\nVisuals created with AI.\n\nHow does this change your perspective on ancient history?",
+  "hashtags": "#history #historyfacts #ancientegypt #pyramids #cleopatra",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

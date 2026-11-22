@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 15,
+    "title": "Tenochtitlan Was Larger Than Any City In Spain"
+  },
+  "synopsis": "When Spanish forces arrived in 1519, the Aztec capital of Tenochtitlan was an island metropolis larger than any city in Spain.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. The island city of Tenochtitlan sits on a wide lake at sunrise, its massive stone temple pyramids glowing in warm golden light while wooden canoes move across misty waters. One slow, single-direction camera move. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A closer view of a wide stone causeway bridging the lake, where silhouetted figures carry woven trade goods as canal water laps against carved stone masonry. One slow camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide shot looking down a grand canal toward towering stepped pyramids, with tiny distant travellers in traditional woven tunics rowing wooden canoes across the foreground. One slow camera tracking shot. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A striking low-angle view of the central temple rising against the dawn sky, smoke drifting from sacred stone braziers on the summit, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Could you imagine navigating an entire empire's capital by wooden canoe? 🚣",
+  "family": "kayip harikalar",
+  "seed_id": 30,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Tenochtitlan was a city on a lake.",
+    "subtitle": "It was larger than any city in Spain in 1519."
+  },
+  "caption": "When the Spanish arrived, the Aztec capital Tenochtitlan was a city on a lake, larger than any city in Spain.\n\nFounded around 1325 in the Valley of Mexico, the grand island capital connected to the mainland through massive stone causeways. By 1519, over 200,000 residents navigated its clean canals and vibrant markets daily.\n\nVisuals created with AI.\n\nWould you have preferred travelling Tenochtitlan by canoe or stone causeway?",
+  "hashtags": "#history #historyfacts #aztec #tenochtitlan #ancienthistory",
+  "hook_shot": 3,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

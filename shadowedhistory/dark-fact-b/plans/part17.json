@@ -1,0 +1,46 @@
+{
+  "episode": {
+    "number": 17,
+    "title": "Venice Stands On Millions Of Wooden Piles"
+  },
+  "synopsis": "The historic stone palaces of Venice rest upon millions of petrified wooden piles driven deep into lagoon mud.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "4",
+      "prompt": "Shot 1, exactly 4 seconds at 24 fps, THE SUBJECT. In the very first frame the episode's subject is already large in the frame and clearly lit by a motivated light (low sun, dawn, dusk, firelight or torchlight), so a viewer recognises it at a glance. Something moves in the scene for the whole shot. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 1, exactly 4 seconds at 24 fps, THE SUBJECT. A cutaway underwater perspective beneath a dark Venetian canal at dusk, revealing thousands of dense wooden piles anchored into dark silt supporting massive stone foundations above. One slow, single-direction camera move. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 2,
+      "duration": "4",
+      "prompt": "Shot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. After a hard cut, a closer view of the detail that proves the fact (the material, the mechanism, the trace, the object), filling most of the frame, lit by the same kind of light. Something moves: dust, water, smoke, flame or a slow camera glide. Grainy archival 16mm film look.\n\nShot 2, exactly 4 seconds at 24 fps, THE EVIDENCE. A detailed close view of ancient petrified wooden trunks submerged under murky water, illuminated by flickering torchlight from a passing gondola. One slow camera glide. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 3,
+      "duration": "4",
+      "prompt": "Shot 3, exactly 4 seconds at 24 fps, THE SCALE. After a hard cut, a wide view that shows how big or how strange the subject is, with tiny distant human figures seen from behind or an object of known size for scale. One slow, single-direction camera move. Grainy archival 16mm film look.\n\nShot 3, exactly 4 seconds at 24 fps, THE SCALE. A wide exterior view of Venetian palaces reflected on smooth canal waters at twilight, with a single dark gondola gliding slowly past stone arches. One slow camera tracking shot. Grainy archival 16mm film look.",
+      "seed": null
+    },
+    {
+      "n": 4,
+      "duration": "4",
+      "prompt": "Shot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. After a hard cut, the single most striking picture of the subject, from a new angle, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.\n\nShot 4, exactly 4 seconds at 24 fps, THE LAST IMAGE. A quiet view of historic canal stone steps disappearing into dark water under dramatic dusk shadows, held steady with a slow push-in. Grainy archival 16mm film look, muted colour, deep shadows.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you have guessed underwater timber could support stone palaces for centuries? 🪵",
+  "family": "gizli muhendislik",
+  "seed_id": 42,
+  "music": "A dark, tense cinematic underscore: one low sustained drone with a slow, soft heartbeat pulse underneath and a single distant deep boom near the start. It holds a steady level for the whole duration, stays free of melody, vocals and bright high frequencies, and ends mid-tone so the loop is seamless.",
+  "title_card": {
+    "title": "Venice stands on millions of wood piles.",
+    "subtitle": "Submerged wood piles have held it up since 1100."
+  },
+  "caption": "Venice stands on millions of wooden piles driven into the mud, some of them over 1,000 years old.\n\nTo construct stone foundations in a marshy lagoon around 1100, medieval builders hammered millions of oak and alder trunks into dense silt. Deprived of oxygen underwater, the timber turned rock-hard, sustaining the republic until 1797.\n\nVisuals created with AI.\n\nDoes it surprise you that wood submerged underwater doesn't rot?",
+  "hashtags": "#history #historyfacts #venice #architecture #engineering",
+  "hook_shot": 2,
+  "doctrine_sha256": "4fdc6dcada2323bdd843dced64ad7ba56313989f748a39b34a93f0e4b0e9ec72"
+}

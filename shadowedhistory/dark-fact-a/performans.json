@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-a",
-  "guncellendi": "2026-11-21T18:12:05.777917+00:00",
+  "guncellendi": "2026-11-22T18:38:47.188894+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 5.5,
@@ -7059,7 +7059,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-11-13T19:02:03.208020+00:00",
       "subtitle": "The Titanic Lookouts Had No Binoculars",
@@ -7434,6 +7434,38 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-22T18:38:47.188894+00:00",
+          "yas_saat": 118.281,
+          "youtube": {
+            "views": 1049,
+            "likes": 14,
+            "comments": 3,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 129,
+            "impressions": 129,
+            "reach": 104,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 9735,
+            "ig_reels_video_view_total_time": 983270,
+            "avg_watch_seconds": 9.735,
+            "watch_time_seconds": 983.27
+          },
+          "tiktok": {
+            "views": 402,
+            "likes": 13,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -7655,6 +7687,38 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-22T18:38:47.188894+00:00",
+          "yas_saat": 70.602,
+          "youtube": {
+            "views": 82,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 1,
+            "comments": 1,
+            "views": 62,
+            "impressions": 62,
+            "reach": 48,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 1,
+            "comments_insight": 1,
+            "total_interactions": 2,
+            "ig_reels_avg_watch_time": 73096,
+            "ig_reels_video_view_total_time": 3654813,
+            "avg_watch_seconds": 73.096,
+            "watch_time_seconds": 3654.813
+          },
+          "tiktok": {
+            "views": 358,
+            "likes": 11,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -7799,7 +7863,64 @@
       },
       "puan": 12.909091,
       "etiket": "kazanan"
+    },
+    {
+      "part": 18,
+      "post_ids": {
+        "youtube": "v2Olvh87-pA",
+        "instagram": "18137701750738264",
+        "tiktok": "7710692443766803725"
+      },
+      "request_ids": {
+        "youtube": "109fb23d8de34b00a8b5d1d22c2145a0",
+        "instagram": "4582c1079ee640e0947e0abbd78dc4fa",
+        "tiktok": "bfdfdd74aa4649fea16bd4363c5460cb"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-22T18:38:47.188894+00:00",
+          "yas_saat": 24.213,
+          "youtube": {
+            "views": 76,
+            "likes": 2,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 30,
+            "impressions": 30,
+            "reach": 27,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 3421,
+            "ig_reels_video_view_total_time": 95791,
+            "avg_watch_seconds": 3.421,
+            "watch_time_seconds": 95.791
+          },
+          "tiktok": {
+            "views": 518,
+            "likes": 9,
+            "comments": 1,
+            "shares": 0
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-21T18:25:58.753414+00:00",
+      "subtitle": "Loaves Of Bread From 79 AD Were Preserved In Pompeii",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 12
 }

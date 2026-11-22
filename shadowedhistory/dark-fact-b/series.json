@@ -15,8 +15,8 @@
   "performance_feedback": true,
   "status": "active",
   "priority": 999,
-  "total_parts": 14,
-  "next_part": 14,
+  "total_parts": 18,
+  "next_part": 15,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
@@ -185,8 +185,8 @@
       ]
     },
     "last_run": {
-      "at": "2026-11-06T18:27:03.116286+00:00",
-      "parts": "11-14"
+      "at": "2026-11-22T18:42:53.160987+00:00",
+      "parts": "15-18"
     }
   },
   "parts": {
@@ -482,6 +482,27 @@
         "tiktok"
       ],
       "published_at": "2026-11-20T20:27:21.119009+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 9.9,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "14": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/dark-fact-b/episodes/ep14/ep14_music_titled_mastered.mp4",
+      "subtitle": "The Oldest Message In A Bottle Spent Over 130 Years At Sea",
+      "stack_sha256": "57fb6a28e6e0281d7a9e3b0476148673379b0a96035886f628e988e5fdadddff",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-22T19:02:59.537007+00:00",
       "coherence": {
         "loop_closed": true,
         "narration_delivered": null,
