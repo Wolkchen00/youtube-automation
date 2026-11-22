@@ -1,11 +1,11 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-11-21T19:17:12.965561+00:00",
+  "guncellendi": "2026-11-22T19:41:55.133662+00:00",
   "medyanlar": {
     "s48": {
-      "youtube": 4.5,
-      "instagram": 519.5,
-      "tiktok": 1044.5
+      "youtube": 7,
+      "instagram": 268,
+      "tiktok": 1084
     },
     "oturmus": {
       "youtube": 11,
@@ -8604,6 +8604,38 @@
             "comments": 0,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-22T19:41:55.133662+00:00",
+          "yas_saat": 191.947,
+          "youtube": {
+            "views": 1,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 186,
+            "impressions": 186,
+            "reach": 126,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 4,
+            "ig_reels_avg_watch_time": 5582,
+            "ig_reels_video_view_total_time": 725715,
+            "avg_watch_seconds": 5.582,
+            "watch_time_seconds": 725.715
+          },
+          "tiktok": {
+            "views": 5991,
+            "likes": 21,
+            "comments": 0,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -8885,19 +8917,183 @@
             "comments": 5,
             "shares": 5
           }
+        },
+        {
+          "ts": "2026-11-22T19:41:55.133662+00:00",
+          "yas_saat": 47.099,
+          "youtube": {
+            "views": 59,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 1,
+            "views": 208,
+            "impressions": 208,
+            "reach": 125,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 5,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 7730,
+            "ig_reels_video_view_total_time": 966260,
+            "avg_watch_seconds": 7.73,
+            "watch_time_seconds": 966.26
+          },
+          "tiktok": {
+            "views": 24662,
+            "likes": 185,
+            "comments": 5,
+            "shares": 7
+          }
         }
       ],
       "donduruldu": false,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-11-20T20:35:57.003411+00:00",
       "subtitle": "A Landslide Across the Entire Himalayan Ridge",
-      "anlik": {},
-      "yargi_anligi": null,
-      "oranlar": {},
-      "puanlanan_metrikler": {},
-      "puan": null,
-      "etiket": "olculmemis"
+      "anlik": {
+        "s48": {
+          "youtube": {
+            "ts": "2026-11-22T19:41:55.133662+00:00",
+            "yas_saat": 47.099,
+            "youtube": {
+              "views": 59,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 5,
+              "comments": 1,
+              "views": 208,
+              "impressions": 208,
+              "reach": 125,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 5,
+              "comments_insight": 1,
+              "total_interactions": 6,
+              "ig_reels_avg_watch_time": 7730,
+              "ig_reels_video_view_total_time": 966260,
+              "avg_watch_seconds": 7.73,
+              "watch_time_seconds": 966.26
+            },
+            "tiktok": {
+              "views": 24662,
+              "likes": 185,
+              "comments": 5,
+              "shares": 7
+            }
+          },
+          "instagram": {
+            "ts": "2026-11-22T19:41:55.133662+00:00",
+            "yas_saat": 47.099,
+            "youtube": {
+              "views": 59,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 5,
+              "comments": 1,
+              "views": 208,
+              "impressions": 208,
+              "reach": 125,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 5,
+              "comments_insight": 1,
+              "total_interactions": 6,
+              "ig_reels_avg_watch_time": 7730,
+              "ig_reels_video_view_total_time": 966260,
+              "avg_watch_seconds": 7.73,
+              "watch_time_seconds": 966.26
+            },
+            "tiktok": {
+              "views": 24662,
+              "likes": 185,
+              "comments": 5,
+              "shares": 7
+            }
+          },
+          "tiktok": {
+            "ts": "2026-11-22T19:41:55.133662+00:00",
+            "yas_saat": 47.099,
+            "youtube": {
+              "views": 59,
+              "likes": 0,
+              "comments": 1,
+              "favorites": 0
+            },
+            "instagram": {
+              "likes": 5,
+              "comments": 1,
+              "views": 208,
+              "impressions": 208,
+              "reach": 125,
+              "saves": 0,
+              "shares": 0,
+              "likes_insight": 5,
+              "comments_insight": 1,
+              "total_interactions": 6,
+              "ig_reels_avg_watch_time": 7730,
+              "ig_reels_video_view_total_time": 966260,
+              "avg_watch_seconds": 7.73,
+              "watch_time_seconds": 966.26
+            },
+            "tiktok": {
+              "views": 24662,
+              "likes": 185,
+              "comments": 5,
+              "shares": 7
+            }
+          }
+        }
+      },
+      "yargi_anligi": "s48",
+      "oranlar": {
+        "youtube": 8.428571,
+        "instagram": 0.776119,
+        "tiktok": 22.750923
+      },
+      "puanlanan_metrikler": {
+        "youtube": {
+          "views": 59,
+          "likes": 0,
+          "comments": 1,
+          "favorites": 0
+        },
+        "instagram": {
+          "likes": 5,
+          "comments": 1,
+          "views": 208,
+          "impressions": 208,
+          "reach": 125,
+          "saves": 0,
+          "shares": 0,
+          "likes_insight": 5,
+          "comments_insight": 1,
+          "total_interactions": 6,
+          "ig_reels_avg_watch_time": 7730,
+          "ig_reels_video_view_total_time": 966260,
+          "avg_watch_seconds": 7.73,
+          "watch_time_seconds": 966.26
+        },
+        "tiktok": {
+          "views": 24662,
+          "likes": 185,
+          "comments": 5,
+          "shares": 7
+        }
+      },
+      "puan": 22.750923,
+      "etiket": "kazanan"
     }
   ],
-  "api_cagrilari": 9
+  "api_cagrilari": 6
 }

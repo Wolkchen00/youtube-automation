@@ -647,3 +647,22 @@
 {"ts": "2026-11-20T20:33:39Z", "event": "qc_api_result", "attempt_id": "526dea93b1d6478eac48c5f8043169d9", "outcome": "ok"}
 {"ts": "2026-11-20T20:33:39Z", "event": "review", "episode": 114, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-11-20T20:33:39Z", "event": "qc_pass", "episode": 114, "shot": 1, "attempt": 0, "content_sha256": "f9b5ea5e8a4c20baebf9c9e92c53272d1af8d81f868f2e2fb29d25d9ae41312a", "clip": "shot_01.mp4"}
+{"ts": "2026-11-22T19:44:18Z", "event": "qc_api_attempt", "attempt_id": "e4f0e687925543d8ba87ed903f4f0e3f", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:45:19Z", "event": "qc_api_result", "attempt_id": "e4f0e687925543d8ba87ed903f4f0e3f", "outcome": "ok"}
+{"ts": "2026-11-22T19:45:19Z", "event": "native_audio_review", "episode": 115, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Natural ambient sound of ocean waves crashing and rushing water.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-22T19:45:20Z", "event": "qc_api_attempt", "attempt_id": "cae46a61b574433aa98de79d0eee1a95", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:45:23Z", "event": "qc_api_result", "attempt_id": "cae46a61b574433aa98de79d0eee1a95", "outcome": "error"}
+{"ts": "2026-11-22T19:45:28Z", "event": "qc_api_attempt", "attempt_id": "423930cc37904b63b71286ead1601ec1", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:52:19Z", "event": "qc_api_result", "attempt_id": "423930cc37904b63b71286ead1601ec1", "outcome": "error"}
+{"ts": "2026-11-22T19:52:29Z", "event": "qc_api_attempt", "attempt_id": "84d108870b1e48b290b3871e2567b3da", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:52:31Z", "event": "qc_api_result", "attempt_id": "84d108870b1e48b290b3871e2567b3da", "outcome": "error"}
+{"ts": "2026-11-22T19:52:31Z", "event": "qc_api_attempt", "attempt_id": "206b9b496d914ca8ba4ab80724200ca6", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:52:35Z", "event": "qc_api_result", "attempt_id": "206b9b496d914ca8ba4ab80724200ca6", "outcome": "error"}
+{"ts": "2026-11-22T19:52:40Z", "event": "qc_api_attempt", "attempt_id": "3235b25811e243119cf873dcd16bd4cc", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:52:43Z", "event": "qc_api_result", "attempt_id": "3235b25811e243119cf873dcd16bd4cc", "outcome": "error"}
+{"ts": "2026-11-22T19:52:53Z", "event": "qc_api_attempt", "attempt_id": "37a6a1c0b4ec4c44abfda9586be9150b", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:54:39Z", "event": "qc_api_result", "attempt_id": "37a6a1c0b4ec4c44abfda9586be9150b", "outcome": "error"}
+{"ts": "2026-11-22T19:54:39Z", "event": "qc_api_attempt", "attempt_id": "d3aca64954504f93aefef08aab61de2e", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 115, "shot": 1}
+{"ts": "2026-11-22T19:54:52Z", "event": "qc_api_result", "attempt_id": "d3aca64954504f93aefef08aab61de2e", "outcome": "ok"}
+{"ts": "2026-11-22T19:54:52Z", "event": "review", "episode": 115, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-11-22T19:54:52Z", "event": "qc_pass", "episode": 115, "shot": 1, "attempt": 0, "content_sha256": "c45218ce8ee9e9a7017227cb9ff825b3c9a6b8c879904eaaec005cd975ba57f4", "clip": "shot_01.mp4"}
