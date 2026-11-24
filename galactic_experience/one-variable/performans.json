@@ -1,6 +1,6 @@
 {
   "series": "one-variable",
-  "guncellendi": "2026-11-22T19:41:55.133662+00:00",
+  "guncellendi": "2026-11-24T00:54:37.233941+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 7,
@@ -8638,7 +8638,7 @@
           }
         }
       ],
-      "donduruldu": false,
+      "donduruldu": true,
       "gec_bos_deneme": 0,
       "yayin_zamani": "2026-11-14T19:45:06.237989+00:00",
       "subtitle": "A Meteor Strike Over the Siberian Taiga",
@@ -8949,6 +8949,38 @@
             "comments": 5,
             "shares": 7
           }
+        },
+        {
+          "ts": "2026-11-24T00:54:37.233941+00:00",
+          "yas_saat": 76.311,
+          "youtube": {
+            "views": 59,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 5,
+            "comments": 1,
+            "views": 219,
+            "impressions": 219,
+            "reach": 131,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 5,
+            "comments_insight": 1,
+            "total_interactions": 6,
+            "ig_reels_avg_watch_time": 7930,
+            "ig_reels_video_view_total_time": 1030997,
+            "avg_watch_seconds": 7.93,
+            "watch_time_seconds": 1030.997
+          },
+          "tiktok": {
+            "views": 26249,
+            "likes": 198,
+            "comments": 5,
+            "shares": 7
+          }
         }
       ],
       "donduruldu": false,
@@ -9093,7 +9125,64 @@
       },
       "puan": 22.750923,
       "etiket": "kazanan"
+    },
+    {
+      "part": 115,
+      "post_ids": {
+        "youtube": "dwYGZqPZXec",
+        "instagram": "18185601430378570",
+        "tiktok": "7711087202335247646"
+      },
+      "request_ids": {
+        "youtube": "9b29121b51064bdcaddff66aa0f253a9",
+        "instagram": "863d43b5a3f348c18d96cc4b9cc84aa1",
+        "tiktok": "8efa31e4b3654b6fa66d4db22fd5da5b"
+      },
+      "olcumler": [
+        {
+          "ts": "2026-11-24T00:54:37.233941+00:00",
+          "yas_saat": 28.947,
+          "youtube": {
+            "views": 0,
+            "likes": 0,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 20,
+            "comments": 1,
+            "views": 10628,
+            "impressions": 10628,
+            "reach": 5759,
+            "saves": 4,
+            "shares": 0,
+            "likes_insight": 20,
+            "comments_insight": 1,
+            "total_interactions": 27,
+            "ig_reels_avg_watch_time": 10385,
+            "ig_reels_video_view_total_time": 59333749,
+            "avg_watch_seconds": 10.385,
+            "watch_time_seconds": 59333.749
+          },
+          "tiktok": {
+            "views": 114862,
+            "likes": 347,
+            "comments": 12,
+            "shares": 13
+          }
+        }
+      ],
+      "donduruldu": false,
+      "gec_bos_deneme": 0,
+      "yayin_zamani": "2026-11-22T19:57:48.411225+00:00",
+      "subtitle": "A Flood Surge Up the Entire Amazon Basin",
+      "anlik": {},
+      "yargi_anligi": null,
+      "oranlar": {},
+      "puanlanan_metrikler": {},
+      "puan": null,
+      "etiket": "olculmemis"
     }
   ],
-  "api_cagrilari": 6
+  "api_cagrilari": 9
 }

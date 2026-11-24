@@ -2575,6 +2575,14 @@
       "reserved": 700,
       "actual": null,
       "ts": "2026-11-23T22:54:30.980554+00:00"
+    },
+    {
+      "month": "2026-11",
+      "series": "one-variable",
+      "part": 116,
+      "reserved": 900,
+      "actual": 105.0,
+      "ts": "2026-11-24T00:54:54.988365+00:00"
     }
   ],
   "episode_spend": {
