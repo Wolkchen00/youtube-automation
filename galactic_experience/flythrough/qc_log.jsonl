@@ -724,3 +724,12 @@
 {"ts": "2026-11-21T19:27:29Z", "event": "qc_api_result", "attempt_id": "28a3123e0cbd401b9953bd7399fb7be7", "outcome": "ok"}
 {"ts": "2026-11-21T19:27:29Z", "event": "review", "episode": 21, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-11-21T19:27:29Z", "event": "qc_pass", "episode": 21, "shot": 1, "attempt": 0, "content_sha256": "d10c1100c5911e426360a60535a08220437786b0b05894c529c789b38936106c", "clip": "shot_01.mp4"}
+{"ts": "2026-11-25T21:48:24Z", "event": "qc_api_attempt", "attempt_id": "8ebc0b7644e24960b84e43fe4431ea02", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 22, "shot": 1}
+{"ts": "2026-11-25T21:49:51Z", "event": "qc_api_result", "attempt_id": "8ebc0b7644e24960b84e43fe4431ea02", "outcome": "ok"}
+{"ts": "2026-11-25T21:49:51Z", "event": "native_audio_review", "episode": 22, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Deep sci-fi explosions, rumbling, and projectile sound effects without any speech or music.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-25T21:49:51Z", "event": "qc_api_attempt", "attempt_id": "768b8babca694887b6962c5bd8fa2c5b", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 22, "shot": 1}
+{"ts": "2026-11-25T21:49:55Z", "event": "qc_api_result", "attempt_id": "768b8babca694887b6962c5bd8fa2c5b", "outcome": "error"}
+{"ts": "2026-11-25T21:50:00Z", "event": "qc_api_attempt", "attempt_id": "d5c4a274228e43c9b9ffba557fbaf937", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 22, "shot": 1}
+{"ts": "2026-11-25T21:51:46Z", "event": "qc_api_result", "attempt_id": "d5c4a274228e43c9b9ffba557fbaf937", "outcome": "ok"}
+{"ts": "2026-11-25T21:51:46Z", "event": "review", "episode": 22, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-11-25T21:51:46Z", "event": "qc_pass", "episode": 22, "shot": 1, "attempt": 0, "content_sha256": "96f7849e8a7053c7204c95839f8af1dd89e8d0e2ed8b1457feefd09a0bb97bee", "clip": "shot_01.mp4"}
