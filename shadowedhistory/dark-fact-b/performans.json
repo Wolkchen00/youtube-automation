@@ -1,6 +1,6 @@
 {
   "series": "dark-fact-b",
-  "guncellendi": "2026-11-24T21:29:56.858321+00:00",
+  "guncellendi": "2026-11-25T20:39:04.985383+00:00",
   "medyanlar": {
     "s48": {
       "youtube": 125.0,
@@ -6256,6 +6256,39 @@
             "comments": 1,
             "shares": 0
           }
+        },
+        {
+          "ts": "2026-11-25T20:39:04.985383+00:00",
+          "yas_saat": 120.196,
+          "youtube": {
+            "views": 604,
+            "likes": 5,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 3,
+            "comments": 1,
+            "views": 186,
+            "impressions": 186,
+            "reach": 140,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 3,
+            "comments_insight": 1,
+            "total_interactions": 4,
+            "ig_reels_avg_watch_time": 5603,
+            "ig_reels_video_view_total_time": 812570,
+            "reels_skip_rate": 46.9,
+            "avg_watch_seconds": 5.603,
+            "watch_time_seconds": 812.57
+          },
+          "tiktok": {
+            "views": 504,
+            "likes": 27,
+            "comments": 1,
+            "shares": 0
+          }
         }
       ],
       "donduruldu": false,
@@ -6474,6 +6507,39 @@
           "tiktok": {
             "views": 349,
             "likes": 10,
+            "comments": 0,
+            "shares": 0
+          }
+        },
+        {
+          "ts": "2026-11-25T20:39:04.985383+00:00",
+          "yas_saat": 73.602,
+          "youtube": {
+            "views": 87,
+            "likes": 1,
+            "comments": 1,
+            "favorites": 0
+          },
+          "instagram": {
+            "likes": 0,
+            "comments": 1,
+            "views": 44,
+            "impressions": 44,
+            "reach": 35,
+            "saves": 0,
+            "shares": 0,
+            "likes_insight": 0,
+            "comments_insight": 1,
+            "total_interactions": 1,
+            "ig_reels_avg_watch_time": 4285,
+            "ig_reels_video_view_total_time": 154265,
+            "reels_skip_rate": 55.6,
+            "avg_watch_seconds": 4.285,
+            "watch_time_seconds": 154.265
+          },
+          "tiktok": {
+            "views": 351,
+            "likes": 11,
             "comments": 0,
             "shares": 0
           }
