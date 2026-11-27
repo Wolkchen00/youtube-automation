@@ -13,7 +13,9 @@ KOK = Path(__file__).resolve().parent
 #   1080p 1530 kredi ($7,65) taskId 311e039faf7db184311c7d1d0ed47717
 # 2026-09-10'da maliyet olculmeden 1080p yapildi, 11 Eylul'de olculunce Ihsan
 # geri aldirdi. 1080p'ye donmek Ihsan'in karari; burayi sessizce degistirme.
-VARSAYILAN_PROFIL = "720p"
+# 2026-11-27 Ihsan karari: varsayilan MAGI-2 ("daha kaliteli ama daha ucuz", 264 kredi,
+# Seedance 720p 615 idi). Eski yol: --profil 720p.
+VARSAYILAN_PROFIL = "magi2"
 
 PROFILLER = {
     "1080p": {
@@ -34,7 +36,32 @@ PROFILLER = {
         "sure_tolerans": 1.5,
         "min_bayt": 3_000_000,
     },
+    # 2026-11-27 Ihsan karari: kanal MAGI-2'ye geciyor (Kie magi-2, yalniz 1080p,
+    # 17,6 kredi/sn, 15 sn = 264 kredi; Seedance 720p 615 idi). MAGI-2 ciktisi ilk
+    # karenin en-boyunu izler (768x1376 kare -> 1076x1928) ve 25 fps'tir. Bu yuzden
+    # "normalize": ham video mastering'den ONCE 1080x1920 / 24 fps'e olceklenip
+    # kirpilir; denetim kapisi ayni sabit olcuyu bekler. Promptu canon/kapi/
+    # MAGI-BLOCK.md'den kurulan PROMPT_MAGI.txt'dir (build.py render_magi).
+    "magi2": {
+        "model": "magi-2",
+        "cozunurluk": "1080p",
+        "genislik": 1080,
+        "yukseklik": 1920,
+        "beklenen_fps": 24,
+        "fps_tolerans": 0.1,
+        "sure_tolerans": 1.5,
+        "min_bayt": 3_000_000,
+        "normalize": True,
+    },
 }
+
+# Profilde "model" yoksa Seedance'tir (eski iki profil).
+SEEDANCE_MODEL = "bytedance/seedance-2"
+
+
+def profil_modeli(profil: dict) -> str:
+    """Profilin uretim modeli. Eski profillerde alan yok: Seedance."""
+    return str(profil.get("model") or SEEDANCE_MODEL)
 
 
 def matris_anahtari(
@@ -54,6 +81,9 @@ YETENEK_MATRISI = {
     matris_anahtari("bytedance/seedance-2", 15, "720p", 24): "dogrulandi",
     matris_anahtari("bytedance/seedance-2", 15, "720p", 30): "kanarya",
     matris_anahtari("bytedance/seedance-2", 15, "1080p", 24): "kanarya",
+    # Ilk MAGI-2 kosusu kanaryadir: kapi (1080x1920, 24 fps, sure, -14 LUFS) gecerse
+    # profil_onay.json kendini damgalar; kalirsa kanarya kilidi para harcatmaz.
+    matris_anahtari("magi-2", 15, "1080p", 24): "kanarya",
 }
 
 

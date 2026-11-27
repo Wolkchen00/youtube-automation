@@ -6,6 +6,23 @@ AImagine icin yeniden kurulmus prompt sistemi.
 **Bir rota = bir prompt = bir video.** Klip zinciri yok, birlestirme yok. Kaynak kanal da
 oyle yapiyor: olculdu, `reference/TERSINE-MUHENDISLIK.md`.
 
+## 2026-11-27'den beri: MAGI-2 motoru
+
+Ihsan karari: "daha kaliteli ama daha ucuz". Varsayilan profil `magi2` (Kie
+`magi-2/image-to-video`, 1080p, 15 sn = 264 kredi; Seedance 720p 615 idi).
+
+- Prompt: `out/<slug>/PROMPT_MAGI.txt`, `build.py render_magi` ile `canon/kapi/MAGI-BLOCK.md`
+  kanonundan kurulur. Zaman araligi YOK: MAGI-2 `[2.0-4.0]` gibi araliklari ayri cekim
+  sayip sinirda kesiyor (26 Kas testi, 2,0 sn sicramasi). Rotanin BEATS/VOICE satirlari
+  araliksiz, sirayla tek akista birlestirilir. Seedance `PROMPT.txt` aynen duruyor.
+- Kapi: `build.py --check` MAGI promptunu da dogrular (14.800 karakter, zaman izi,
+  tetikleyici kelime); `gunluk.py` uretimden once gunun rotasi icin tekrar bakar.
+- Olcu: MAGI-2 ciktisi ilk karenin en-boyunu izler (1076x1928, 25 fps); `gunluk.py
+  normalize_et` mastering'den once 1080x1920 / 24 fps'e getirir.
+- Ilk MAGI kosusu kanaryadir (`profil_onay.json` kendini damgalar ya da kanarya kilidi).
+- Havuz rotalarinin MAGI kanonu yok: siraya gelirlerse o gun Seedance 720p ile uretilir.
+- Eski yola donus: `profil.py` VARSAYILAN_PROFIL = "720p".
+
 ## 2026-10-01'den beri: KAPI konsepti
 
 Kanal tekrara dustu (son 16 basligin 10'u "into the cloud"). Ihsan bir referans reel

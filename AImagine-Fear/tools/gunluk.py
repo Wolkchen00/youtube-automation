@@ -29,6 +29,7 @@ from profil import (  # noqa: E402
     YETENEK_MATRISI,
     matris_anahtari,
     profil_hash,
+    profil_modeli,
     uretim_kaydi_bul,
 )
 
@@ -57,6 +58,9 @@ KREDI_15SN = {
     # degil). 1523'te 402 almasi bununla tutarli.
     "1080p": 1530,
 }
+# MAGI-2 (Kie, 2026-11-27): cozunurlukten bagimsiz 17,6 kredi/sn, yalniz 1080p.
+# 26 Kasim olcumu: 15 sn is 264 kredi (creditsConsumed, taskId 50d1991c4072123b...).
+MAGI_KREDI_SANIYE = 17.6
 
 # Donusum havuzu: yalniz YETENEK_MATRISI'nde karsiligi olan sureli rotalar.
 # toronto-cn-red-dusk (20 sn), vegas-strat-blue-rain (20 sn) ve
@@ -390,7 +394,7 @@ def uretim_komutu(
         "tools/kie_uret.py",
         slug,
         "--model",
-        MODEL,
+        profil_modeli(profil),
         "--n-frames",
         str(sure),
         "--resolution",
@@ -398,7 +402,8 @@ def uretim_komutu(
         "--tag",
         "gunluk",
         "--max-wait",
-        "1500",
+        # MAGI-2 isi 26-27 Kas'ta 12-19 dk surdu (paralel yukte uzuyor); 25 dk dar.
+        "2400" if profil_modeli(profil).startswith("magi-2") else "1500",
     ] + ek
 
 
@@ -581,7 +586,9 @@ def _onay_kombinasyonu(onay: dict) -> tuple | None:
 
 def yayin_izni(profil_adi: str, sure: int | float) -> tuple[bool, str]:
     profil = PROFILLER[profil_adi]
-    anahtar = matris_anahtari(MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
+    anahtar = matris_anahtari(
+        profil_modeli(profil), sure, profil["cozunurluk"], profil["beklenen_fps"]
+    )
     durum = YETENEK_MATRISI.get(anahtar)
     if durum == "dogrulandi":
         return True, durum
@@ -664,8 +671,10 @@ def kanarya_kilidini_kaldir() -> None:
         pass
 
 
-def gerekli_kredi(cozunurluk: str, sure: int) -> float:
+def gerekli_kredi(cozunurluk: str, sure: int, model: str = MODEL) -> float:
     """Isin olculmus maliyeti ile MIN_KREDI tabanindan buyugu."""
+    if str(model).startswith("magi-2"):
+        return max(float(MIN_KREDI), MAGI_KREDI_SANIYE * sure)
     olculen = KREDI_15SN.get(cozunurluk)
     if olculen is None:
         return float(MIN_KREDI)
@@ -840,7 +849,8 @@ def onayla(master: Path) -> int:
     if kayit.get("denetim_sonucu") != "basarili":
         log("DUR: uretim kaydinin denetimi basarili degil")
         return 1
-    if kayit.get("model") != MODEL:
+    kayit_profili = PROFILLER.get(kayit.get("istenen_profil"))
+    if kayit_profili is None or kayit.get("model") != profil_modeli(kayit_profili):
         log("DUR: uretim kaydindaki model farkli")
         return 1
     if kayit.get("master_sha") != master_sha:
@@ -855,7 +865,8 @@ def onayla(master: Path) -> int:
         return 1
     profil = PROFILLER[profil_adi]
     anahtar = matris_anahtari(
-        MODEL, kayit.get("beklenen_sure"), profil["cozunurluk"], profil["beklenen_fps"]
+        profil_modeli(profil), kayit.get("beklenen_sure"),
+        profil["cozunurluk"], profil["beklenen_fps"],
     )
     if anahtar not in YETENEK_MATRISI:
         log("DUR: uretim kombinasyonu yetenek matrisinde yok")
@@ -1078,6 +1089,57 @@ def yayinla_mevcut(master: Path, allow_same_day: bool) -> int:
                    etiketler(caption_yolu.read_text(encoding="utf-8")))
 
 
+def magi_prompt_sorunlari(slug: str) -> list[str]:
+    """MAGI-2 promptu uretimden ONCE: var mi, sinirda mi, zaman izi tasiyor mu.
+
+    build --check ayni kapiyi zaten kosuyor; burada gunun rotasi icin bir kez
+    daha, kredi harcanmadan, okunacak dosyanin kendisi uzerinde kosar."""
+    import build
+
+    yol = KOK / "out" / slug / "PROMPT_MAGI.txt"
+    if not yol.exists():
+        return ["PROMPT_MAGI.txt yok: %s" % yol]
+    metin = yol.read_text(encoding="utf-8")
+    sorunlar = []
+    if len(metin) > build.MAGI_PROMPT_TAVAN:
+        sorunlar.append("PROMPT_MAGI.txt %d karakter, tavan %d"
+                        % (len(metin), build.MAGI_PROMPT_TAVAN))
+    izler = build.magi_zaman_izleri(metin)
+    if izler:
+        sorunlar.append("PROMPT_MAGI.txt zaman izi tasiyor: %s" % ", ".join(izler[:5]))
+    return sorunlar
+
+
+def normalize_et(ham: Path, profil: dict) -> Path:
+    """Ham videoyu profilin sabit olcusune (genislik x yukseklik, fps) getir.
+
+    MAGI-2 ciktisi ilk karenin en-boyunu izler (768x1376 kare -> 1076x1928) ve
+    25 fps'tir. Kapi 1080x1920 / 24 bekler. Once kapatacak kadar olcekle, sonra
+    ortadan kirp (en-boy farki ~%0,8, sundurme yok), fps'i 24'e indir. Ses aynen
+    kopyalanir; mastering sonra yalniz sesi isler.
+    """
+    hedef = ham.parent.parent / "norm" / (ham.stem + "_norm.mp4")
+    hedef.parent.mkdir(parents=True, exist_ok=True)
+    genislik, yukseklik = int(profil["genislik"]), int(profil["yukseklik"])
+    fps = profil["beklenen_fps"]
+    suzgec = (
+        "scale=%d:%d:force_original_aspect_ratio=increase:flags=lanczos,"
+        "crop=%d:%d,setsar=1,fps=%s" % (genislik, yukseklik, genislik, yukseklik, fps)
+    )
+    sonuc = kosa(
+        [
+            "ffmpeg", "-y", "-hide_banner", "-i", str(ham), "-vf", suzgec,
+            "-c:v", "libx264", "-preset", "medium", "-crf", "17",
+            "-pix_fmt", "yuv420p", "-c:a", "copy", "-movflags", "+faststart",
+            str(hedef),
+        ],
+        KOK,
+    )
+    if sonuc.returncode != 0 or not hedef.exists() or hedef.stat().st_size == 0:
+        raise RuntimeError("normalizasyon basarisiz: " + (sonuc.stderr or "")[-800:])
+    return hedef
+
+
 def _kontakt_uret(master: Path, master_sha: str, sure: float) -> Path:
     from tools import kontrol
 
@@ -1131,7 +1193,8 @@ def main(argv: list[str] | None = None) -> int:
         if kayit is not None:
             return takvim_yayinla(kayit, gecmis, bugun, args.allow_same_day)
     slug = args.sehir or sirdaki(gecmis)
-    profil = PROFILLER[args.profil]
+    profil_adi = args.profil
+    profil = PROFILLER[profil_adi]
     tekrar = tekrar_mi(slug, gecmis)
     uyari = stok_uyarisi(gecmis)
     if uyari:
@@ -1158,7 +1221,21 @@ def main(argv: list[str] | None = None) -> int:
         log("DUR: rota paleti/konsepti okunamadi: %s" % hata)
         return 1
 
-    anahtar = matris_anahtari(MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
+    # MAGI-2 promptu yalniz MAGI kanonu olan konseptte var (bugun: kapi). Eski
+    # havuz rotasi siraya gelirse o gun Seedance 720p ile uretilir; kanal durmaz.
+    if profil_modeli(profil).startswith("magi-2"):
+        import build
+
+        if not build.magi_destekli(KOK, konsept):
+            log("UYARI: %s konseptinin MAGI kanonu yok, bu rota Seedance 720p ile "
+                "uretilecek" % konsept)
+            print("::warning::%s (%s) MAGI kanonu yok, Seedance 720p'ye dusuldu"
+                  % (slug, konsept))
+            profil_adi = "720p"
+            profil = PROFILLER[profil_adi]
+    model = profil_modeli(profil)
+
+    anahtar = matris_anahtari(model, sure, profil["cozunurluk"], profil["beklenen_fps"])
     ham_durum = YETENEK_MATRISI.get(anahtar, "matriste yok")
 
     if args.dry:
@@ -1170,8 +1247,9 @@ def main(argv: list[str] | None = None) -> int:
         print("konsept      : %s" % konsept)
         print(
             "profil       : %s (%dx%d, %s fps)"
-            % (args.profil, profil["genislik"], profil["yukseklik"], profil["beklenen_fps"])
+            % (profil_adi, profil["genislik"], profil["yukseklik"], profil["beklenen_fps"])
         )
+        print("model        : %s" % model)
         print("matris       : %s" % ham_durum)
         print("KURU KOSU. Uretim ve yayin yapilmadi.")
         return 0
@@ -1180,16 +1258,17 @@ def main(argv: list[str] | None = None) -> int:
     log("sure          : %s" % sure)
     log("palet         : %s" % palet)
     log("konsept       : %s" % konsept)
-    log("profil        : %s" % args.profil)
+    log("profil        : %s" % profil_adi)
+    log("model         : %s" % model)
     log("matris        : %s" % ham_durum)
     if anahtar not in YETENEK_MATRISI:
         log(
             "DUR: (%s, %s sn, %s, %s fps) yetenek matrisinde YOK. Uretim yapilmadi, "
             "kredi harcanmadi. Bu kombinasyonun calistigi dogrulanmadan yayin yolu acilmaz."
-            % (MODEL, sure, profil["cozunurluk"], profil["beklenen_fps"])
+            % (model, sure, profil["cozunurluk"], profil["beklenen_fps"])
         )
         return 1
-    izinli, izin_durumu = yayin_izni(args.profil, sure)
+    izinli, izin_durumu = yayin_izni(profil_adi, sure)
     if not izinli:
         # KANARYA OTOMATIK KOSAR. Kombinasyonun calistigini INSAN degil KAPI
         # kanitlar: uretilen dosya gercekten 1080x1920, dogru fps, dogru sure ve
@@ -1215,11 +1294,17 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     log("build --check calisiyor")
-    sonuc = kosa([PY, "build.py", "--check", "--profil", args.profil], KOK)
+    sonuc = kosa([PY, "build.py", "--check", "--profil", profil_adi], KOK)
     if sonuc.returncode != 0:
         log("DUR: build dogrulamasi patladi:\n" + (sonuc.stdout + sonuc.stderr)[:1500])
         return 1
     log("build temiz")
+    if model.startswith("magi-2"):
+        magi_sorunlari = magi_prompt_sorunlari(slug)
+        if magi_sorunlari:
+            log("DUR: MAGI promptu uretime uygun degil, kredi harcanmadi: "
+                + "; ".join(magi_sorunlari))
+            return 1
 
     # Metadata onkontrolu KREDI HARCAMADAN ONCE. Yoksa her gun once uretiriz,
     # para gider, sonra baslik havuzu tukendigi icin dururuz.
@@ -1240,7 +1325,7 @@ def main(argv: list[str] | None = None) -> int:
     if bakiye is None:
         log("DUR: kredi okunamadi.")
         return 1
-    gerekli = gerekli_kredi(profil["cozunurluk"], sure)
+    gerekli = gerekli_kredi(profil["cozunurluk"], sure, model)
     if konsept == "kapi":
         from tools import ilk_kare as ilk_kare_modulu
 
@@ -1270,7 +1355,7 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         log("ilk kare      : %s (%s)" % (ilk_kare_url, ilk_kare_kaynagi))
 
-    log("uretim basliyor: %s, %d sn, %s" % (MODEL, sure, profil["cozunurluk"]))
+    log("uretim basliyor: %s, %d sn, %s" % (model, sure, profil["cozunurluk"]))
     sonuc = kosa(uretim_komutu(slug, sure, profil, ilk_kare_url), KOK)
     print(sonuc.stdout[-2500:])
     if sonuc.returncode != 0:
@@ -1291,6 +1376,14 @@ def main(argv: list[str] | None = None) -> int:
     ham = videolar[-1]
     master = KOK / "out" / slug / "master" / (ham.stem + "_master.mp4")
     log("ham video: %s (%.1f MB)" % (ham.name, ham.stat().st_size / 1e6))
+    if profil.get("normalize"):
+        try:
+            ham = normalize_et(ham, profil)
+        except Exception as error:
+            log("DUR: %s" % error)
+            return 1
+        log("normalize    : %s (%dx%d, %s fps)"
+            % (ham.name, profil["genislik"], profil["yukseklik"], profil["beklenen_fps"]))
 
     try:
         from core.ffmpeg_tools import master_audio
@@ -1303,8 +1396,8 @@ def main(argv: list[str] | None = None) -> int:
     sorunlar, olculen = denetle(master, sure, profil)
     kayit = {
         "sema_surumu": 2,
-        "model": MODEL,
-        "istenen_profil": args.profil,
+        "model": model,
+        "istenen_profil": profil_adi,
         "profil_hash": profil_hash(),
         "slug": slug,
         "palet": palet,

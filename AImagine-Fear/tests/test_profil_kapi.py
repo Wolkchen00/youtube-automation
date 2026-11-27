@@ -270,8 +270,10 @@ def test_dry_is_before_same_day_and_never_reads_credit(monkeypatch, capsys) -> N
     output = capsys.readouterr().out
     assert "sirdaki slug" in output
     assert "sure         : 15" in output
-    assert "profil       : 720p" in output
-    assert "matris       : dogrulandi" in output
+    # 2026-11-27: varsayilan magi2; testte onay dosyasi yok, ilk MAGI kosusu kanarya.
+    assert "profil       : magi2" in output
+    assert "model        : magi-2" in output
+    assert "matris       : kanarya" in output
 
 
 def test_yayinlama_runs_generation_without_publish_and_checks_contact(

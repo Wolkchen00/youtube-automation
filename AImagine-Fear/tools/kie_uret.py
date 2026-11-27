@@ -125,6 +125,9 @@ def main() -> int:
         prompt_path = Path(args.prompt_file)
         if not prompt_path.is_absolute():
             prompt_path = ROOT / prompt_path
+    elif args.model.startswith("magi-2"):
+        # MAGI-2 kendi dilindeki promptu okur (build.py render_magi): zaman araligi yok.
+        prompt_path = ROOT / "out" / args.slug / "PROMPT_MAGI.txt"
     else:
         prompt_path = ROOT / "out" / args.slug / "PROMPT.txt"
     if not prompt_path.exists():
@@ -133,7 +136,24 @@ def main() -> int:
 
     # Her modelin input govdesi farkli. Kaynak: _skills/kie-ai-video-production/models/
     model = args.model
-    if model.startswith("bytedance/seedance-2"):
+    if model.startswith("magi-2"):
+        # Kie magi-2 (2026-11-27): ilk kare varsa image-to-video (en-boy kareyi
+        # izler, aspect_ratio alani YOK), yoksa text-to-video 9:16. Yalniz 1080p,
+        # sure 4-30 tamsayi, prompt siniri 15000, basarisiz is ucretsiz.
+        block = {
+            "prompt": prompt,
+            "duration": int(args.n_frames),
+            "resolution": "1080p",
+            "generate_audio": True,
+        }
+        if args.first_frame_url:
+            model = "magi-2/image-to-video"
+            block["first_frame_url"] = args.first_frame_url
+        else:
+            model = "magi-2/text-to-video"
+            block["aspect_ratio"] = "9:16"
+        limit = 15000
+    elif model.startswith("bytedance/seedance-2"):
         block = {
             "prompt": prompt,
             "duration": int(args.n_frames),

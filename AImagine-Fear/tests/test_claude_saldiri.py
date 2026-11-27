@@ -224,19 +224,25 @@ def test_onay_taze_checkoutta_da_gecerli() -> None:
 
 
 # --------------------------------------------------------------------------
-# 8. BUGUNKU GERCEK DURUM: varsayilan profil 720p, onaysiz yayinlanir.
-#    2026-09-10'da varsayilan 1080p yapildi; 1080p ayni videoyu 615 yerine
-#    1530 krediye uretiyor (Kie creditsConsumed). Ihsan 11 Eylul'de geri
-#    aldirdi. Bu test varsayilanin sessizce pahali profile kaymasini yakalar.
+# 8. BUGUNKU GERCEK DURUM: varsayilan profil magi2 (2026-11-27 Ihsan karari).
+#    2026-09-10'da varsayilan 1080p yapildi; Seedance 1080p ayni videoyu 615
+#    yerine 1530 krediye uretiyordu, Ihsan 11 Eylul'de 720p'ye geri aldirdi.
+#    MAGI-2 1080p 15 sn 264 kredi, yani 720p'den de ucuz. Ilk MAGI kosusu
+#    kanaryadir (kapi gecerse kendini damgalar). Eski yol 720p hala dogrulanmis.
+#    Bu test varsayilanin sessizce pahali profile kaymasini yakalar.
 # --------------------------------------------------------------------------
-def test_varsayilan_profil_720p_ve_onaysiz_yayinlanir(monkeypatch) -> None:
+def test_varsayilan_profil_magi2_ve_720p_onaysiz_yayinlanir(monkeypatch) -> None:
     kok = _gecici("varsayilan")
     try:
         monkeypatch.setattr(gunluk, "ONAY_DOSYASI", kok / "yok.json")
-        assert profil_modulu.VARSAYILAN_PROFIL == "720p", (
-            "varsayilan 720p olmali: 1080p 2,5 kat pahali, degisiklik Ihsan karari"
+        assert profil_modulu.VARSAYILAN_PROFIL == "magi2", (
+            "varsayilan magi2 olmali (264 kredi); degisiklik Ihsan karari"
         )
-        izinli, durum = gunluk.yayin_izni(profil_modulu.VARSAYILAN_PROFIL, 15)
+        varsayilan = profil_modulu.PROFILLER[profil_modulu.VARSAYILAN_PROFIL]
+        assert gunluk.gerekli_kredi(
+            varsayilan["cozunurluk"], 15, profil_modulu.profil_modeli(varsayilan)
+        ) <= gunluk.gerekli_kredi("720p", 15)
+        izinli, durum = gunluk.yayin_izni("720p", 15)
         assert izinli is True, "720p@24 dogrulanmis olmaliydi: %s" % durum
         # 1080p onaysiz hala kanarya: yanlislikla secilirse sessiz yayin yok
         izinli1080, durum1080 = gunluk.yayin_izni("1080p", 15)

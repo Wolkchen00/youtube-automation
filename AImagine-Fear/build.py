@@ -194,6 +194,106 @@ FIXED_TRAILING_TAGS = (
 INTERVAL_RE = re.compile(
     r"^\[([0-9]+(?:\.[0-9]+)?)-([0-9]+(?:\.[0-9]+)?)\]\s+(.+)$"
 )
+
+# ----------------------------------------------------------------------
+# MAGI-2 PROMPTU (27 Kasim 2026, Ihsan karari: kanal MAGI-2'ye gecti)
+#
+# 26 Kasim karsilastirmasinda MAGI-2 promptdaki zaman araliklarini AYRI CEKIM
+# sayip tam o sinirda sicradi ("[2.0-4.0]" -> 2,0 sn'de yurume yolundan kaydirak
+# agzina kesme gibi gecis). Sand AI'nin prompt yeniden yazicisi (MAGI-2-preview
+# prompt_enhancement t2v.md / i2v.md) ayni seyi soyler: kesme sayisi olay
+# sayisini izler, tek plan tek olay + tek ortam + tek kamera davranisi ister.
+# Bu yuzden MAGI promptu ayri bir kanondan (canon/<konsept>/MAGI-BLOCK.md) kurulur,
+# rotanin BEATS ve VOICE araliklari silinip sirayla tek akista birlestirilir.
+# Seedance PROMPT.txt hic degismez; iki yol yan yana yasar.
+# ----------------------------------------------------------------------
+MAGI_KANON = "MAGI-BLOCK.md"
+MAGI_SECTIONS = (
+    "FORMAT",
+    "CAMERA",
+    "RIDER",
+    "SLIDE",
+    "THE RIDE",
+    "WORLD",
+    "SOUND",
+    "KEEP OUT",
+)
+# Kie magi-2 prompt siniri 15.000 karakter; kapi %1,3 pay birakir.
+MAGI_PROMPT_TAVAN = 14800
+# Zaman araligi, vurus etiketi ve saniye isareti: MAGI-2 bunlari kesme sayar.
+MAGI_ZAMAN_RE = re.compile(
+    r"\[\s*\d+(?:\.\d+)?\s*-\s*\d+(?:\.\d+)?\s*\]"
+    r"|\b\d+(?:\.\d+)?\s*(?:-|to)\s*\d+(?:\.\d+)?\s*(?:s|sec|secs|seconds)\b"
+    r"|\bseconds?\s+\d+(?:\.\d+)?\b"
+    r"|\b(?:at|by|after|for)\s+(?:about\s+)?\d+(?:\.\d+)?\s*(?:s|sec|secs|seconds)\b"
+    r"|\bshot\s+\d+\s*:",
+    re.IGNORECASE,
+)
+# Sirali vurus baglaclari. Her vurus ayni kesintisiz hareketin devami olarak
+# baglanir; boylece MAGI-2 vuruslari ayri olay (ve ayri cekim) saymaz.
+MAGI_BAGLACLAR = (
+    "In the same unbroken movement, ",
+    "Without a cut, ",
+    "Still in the same continuous take, ",
+    "Without slowing, ",
+    "In the same take, ",
+    "Still without a break, ",
+    "Continuing the same ride, ",
+)
+_MAGI_KUCUK_HARF = {"She", "The", "A", "An", "From", "Her", "It", "Its", "Then", "Through"}
+
+
+def magi_zaman_izleri(metin: str) -> list[str]:
+    """MAGI-2'nin kesme sayacagi zaman isaretlerini dondur (bos = temiz)."""
+    return [m.group(0) for m in MAGI_ZAMAN_RE.finditer(metin or "")]
+
+
+def _aralik_metinleri(bolum: str) -> list[str]:
+    metinler = []
+    for satir in bolum.splitlines():
+        satir = satir.strip()
+        if not satir:
+            continue
+        eslesme = INTERVAL_RE.fullmatch(satir)
+        metinler.append((eslesme.group(3) if eslesme else satir).strip())
+    return metinler
+
+
+def _magi_baglanmis(metinler: list[str]) -> str:
+    parcalar = []
+    for sira, metin in enumerate(metinler):
+        if sira == 0:
+            parcalar.append(metin)
+            continue
+        baglac = MAGI_BAGLACLAR[(sira - 1) % len(MAGI_BAGLACLAR)]
+        ilk, _, kalan = metin.partition(" ")
+        if ilk in _MAGI_KUCUK_HARF:
+            metin = ilk.lower() + (" " + kalan if kalan else "")
+        else:
+            baglac = baglac.rstrip(", ") + ": "
+        parcalar.append(baglac + metin)
+    return " ".join(parcalar)
+
+
+def magi_kanonu_yukle(root: Path, konsept: str) -> dict[str, str] | None:
+    """canon/<konsept>/MAGI-BLOCK.md; yoksa None (o konseptte MAGI yolu yok)."""
+    kanon_dir = root / "canon" if konsept == "havuz" else root / "canon" / konsept
+    yol = kanon_dir / MAGI_KANON
+    if not yol.exists():
+        return None
+    bolumler = parse_sections(read_utf8(yol), yol)
+    eksik = [ad for ad in MAGI_SECTIONS if not bolumler.get(ad, "").strip()]
+    if eksik:
+        raise BuildError((_issue(root, yol, "all routes",
+                                 "missing or empty MAGI section " + ", ".join(eksik)),))
+    return {ad: bolumler[ad] for ad in MAGI_SECTIONS}
+
+
+def magi_destekli(root: Path, konsept: str) -> bool:
+    try:
+        return magi_kanonu_yukle(Path(root), konsept) is not None
+    except BuildError:
+        return False
 # Alt cizgi de kabul edilir (TITLE_KEYWORD). Alanlar yalniz ilk "## " basligindan
 # ONCE ayristirildigi icin bu genisletme metin govdesini etkilemez.
 FIELD_RE = re.compile(r"^([A-Z][A-Z _]*):[ \t]*(.*)$")
@@ -452,6 +552,67 @@ def render_route(
             ilk_kare = ilk_kare.replace(token, route.fields[field])
         outputs["ILK_KARE.txt"] = ilk_kare + "\n"
     return outputs
+
+
+def render_magi(
+    magi: dict[str, str], route: Route, profil_adi: str = VARSAYILAN_PROFIL
+) -> str:
+    """Rotanin MAGI-2 promptu: zaman araliksiz, tek kesintisiz akis."""
+    profil = PROFILLER[profil_adi]
+    token_alanlari = dict(TOKEN_FIELDS)
+    if route.konsept == "kapi":
+        token_alanlari.update(KAPI_TOKEN_FIELDS)
+
+    def doldur(metin: str) -> str:
+        for token, field in token_alanlari.items():
+            metin = metin.replace(token, route.fields[field])
+        for token, uret in TUREV_TOKENLAR.items():
+            metin = metin.replace(token, uret(route.fields))
+        for token, deger in PROFIL_TOKENLARI.items():
+            metin = metin.replace(token, deger(profil))
+        return metin
+
+    akis = _magi_baglanmis(_aralik_metinleri(route.sections["BEATS"]))
+    ses = " ".join(_aralik_metinleri(route.sections["VOICE"]))
+    parcalar = [
+        "ONE CONTINUOUS SHOT\n" + doldur(magi["FORMAT"]),
+        "THE FIRST MOMENT\n" + route.sections["OPENING STATE"],
+        "CAMERA\n" + doldur(magi["CAMERA"]),
+        "RIDER\n" + doldur(magi["RIDER"]),
+        "SLIDE\n" + doldur(magi["SLIDE"]),
+        "THE RIDE\n" + doldur(magi["THE RIDE"])
+        + "\n\nThe ride, in order, as one unbroken movement: " + akis,
+        "WORLD\n" + doldur(magi["WORLD"]),
+        "SOUND\n" + doldur(magi["SOUND"])
+        + "\n\nHer voice, in order: " + ses
+        + " The sound continues to the very last frame.",
+        "THE LAST MOMENT\nThe shot ends on this: " + route.sections["END STATE"],
+        "KEEP OUT\n" + doldur(magi["KEEP OUT"]),
+    ]
+    return "\n\n".join(parcalar) + "\n"
+
+
+def validate_magi(route: Route, root: Path, metin: str) -> list[str]:
+    """MAGI promptu kapisi: sinir, zaman izi, gorsel tetikleyici, kalan token."""
+    yol = root / "out" / route.slug / "PROMPT_MAGI.txt"
+    hatalar = []
+    if len(metin) > MAGI_PROMPT_TAVAN:
+        hatalar.append(_issue(root, yol, route.slug,
+                              f"MAGI prompt {len(metin)} karakter, tavan {MAGI_PROMPT_TAVAN} "
+                              "(Kie magi-2 siniri 15000)"))
+    izler = magi_zaman_izleri(metin)
+    if izler:
+        hatalar.append(_issue(root, yol, route.slug,
+                              "MAGI promptunda zaman izi var (MAGI-2 kesme sayar): "
+                              + ", ".join(repr(iz) for iz in izler[:5])))
+    dusuk = metin.lower()
+    tetik = [ifade for ifade in TRIGGER_PHRASES if re.search(r"\b" + ifade, dusuk)]
+    if tetik:
+        hatalar.append(_issue(root, yol, route.slug,
+                              "MAGI promptunda gorsel tetikleyici: " + ", ".join(tetik)))
+    if "<<" in metin or ">>" in metin:
+        hatalar.append(_issue(root, yol, route.slug, "MAGI promptunda doldurulmamis token"))
+    return hatalar
 
 
 def _parse_duration(route: Route, root: Path) -> tuple[Decimal | None, list[str]]:
@@ -966,6 +1127,7 @@ def build_project(
     if messages:
         raise BuildError(messages)
 
+    magi_kanonlari: dict[str, dict[str, str] | None] = {}
     for route in routes:
         if route.konsept not in canons:
             canons[route.konsept] = load_canon(root, route.konsept)
@@ -976,6 +1138,15 @@ def build_project(
             write_utf8(output_dir / filename, text)
         if check:
             messages.extend(validate_route(canon, route, outputs, root, profil_adi))
+        # MAGI-2 promptu yalniz MAGI kanonu olan konseptte uretilir (bugun: kapi).
+        if route.konsept not in magi_kanonlari:
+            magi_kanonlari[route.konsept] = magi_kanonu_yukle(root, route.konsept)
+        magi = magi_kanonlari[route.konsept]
+        if magi is not None:
+            magi_metni = render_magi(magi, route, profil_adi)
+            write_utf8(output_dir / "PROMPT_MAGI.txt", magi_metni)
+            if check:
+                messages.extend(validate_magi(route, root, magi_metni))
 
     if messages:
         raise BuildError(messages)

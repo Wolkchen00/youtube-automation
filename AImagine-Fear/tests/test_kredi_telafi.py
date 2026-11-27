@@ -100,7 +100,10 @@ def test_varsayilan_profil_otomatik_yukleme_olu_bolgesine_dusmez() -> None:
     """Kie otomatik yuklemesi bakiye 1500'un ALTINA dusunce tetikleniyor. Is
     bundan ucuzsa bakiye hicbir zaman 'yukleme yok ama is de sigmiyor'
     araliginda kalamaz. 1080p (1530) bu araliga dusuyordu, 720p (615) dusmez."""
-    gerekli = gunluk.gerekli_kredi(gunluk.PROFILLER[gunluk.VARSAYILAN_PROFIL]["cozunurluk"], 15)
+    varsayilan = gunluk.PROFILLER[gunluk.VARSAYILAN_PROFIL]
+    gerekli = gunluk.gerekli_kredi(
+        varsayilan["cozunurluk"], 15, gunluk.profil_modeli(varsayilan)
+    )
     assert gerekli < 1500
 
 
