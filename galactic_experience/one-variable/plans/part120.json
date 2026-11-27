@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 120,
+    "title": "An Aurora Storm Lighting All of Scandinavia"
+  },
+  "synopsis": "A brilliant aurora storm illuminates the entire Scandinavian coastline from orbit, casting bright green light over every fjord and peak.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A single continuous 8-second shot from one static camera high above the Earth, one unbroken take from the first frame to the last. From the very first frame the disaster is already at full strength over the real place described below, and it keeps advancing steadily in one direction across the land or sea for the whole shot, growing larger and more violent until it reaches its most dramatic extent in the final moments. One event, one place, one fixed viewpoint. Sound: the event's own deep natural sound at full level, rising with it and continuing to the very last frame, with the event itself as the only sound.\n\nHigh-altitude satellite view of Scandinavia at night, highlighting the distinct jagged fjords of Norway, the Swedish coastline, and the lit span of the Øresund Bridge. From the very first frame, intense vibrant emerald green auroral ribbons blanket the sky, casting bright lime-green reflections across the dark ocean waters and snowy mountain peaks. The camera maintains a locked high-altitude orbital perspective throughout the continuous take. As the scene continues, radiant curtains of light steadily pulse and ripple southward over the peninsula, illuminating the structural cable framework of the Øresund Bridge below. The glowing curtain expands in brilliance toward the upper atmosphere, deepening the color contrast against the dark sea as the final moments show the aurora covering the entire landmass in a radiant blanket of light. Sound: continuous high-altitude electromagnetic hum and atmospheric rush holding a steady full volume from the beginning to the final moment.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Would you rather watch an aurora like this from a mountain peak or from space? 🌌",
+  "family": "gok afeti",
+  "seed_id": 27,
+  "caption": "A geomagnetic aurora storm covers the entire Scandinavian peninsula, illuminating the jagged fjord coastlines of Norway and Sweden from orbit.\n\nThe radiant green curtains stretch over 2,000 kilometers from the Arctic Ocean to the Baltic Sea, producing ground-level illumination rivaling daylight.\n\nTypical strong geomagnetic storms, like the Carrington Event of 1859, produce auroral ovals that shift rapidly and emit diffuse light high in the thermosphere.\n\nSustaining ground-level daylight across millions of square kilometers would require solar wind particle fluxes thousands of times stronger than the sun can emit, instantly stripping the upper atmosphere.\n\nThis is a simulation, not real footage. Do you think nighttime solar panels could generate power under an aurora this intense?",
+  "hashtags": "#Aurora #Scandinavia #Norway #SpaceWeather #Geomagnetism #Orbit #EarthScience #PhysicsSimulation",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}

@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 119,
+    "title": "A Cloud Ring Sealing the Whole Mediterranean"
+  },
+  "synopsis": "A massive cloud ring completely seals off the entire Mediterranean basin from orbit, framing the Strait of Gibraltar at its edge.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "8",
+      "prompt": "A single continuous 8-second shot from one static camera high above the Earth, one unbroken take from the first frame to the last. From the very first frame the disaster is already at full strength over the real place described below, and it keeps advancing steadily in one direction across the land or sea for the whole shot, growing larger and more violent until it reaches its most dramatic extent in the final moments. One event, one place, one fixed viewpoint. Sound: the event's own deep natural sound at full level, rising with it and continuing to the very last frame, with the event itself as the only sound.\n\nHigh-altitude orbital photograph over the western entrance to the Mediterranean Basin, framing the distinct Iberian Peninsula coastline and the Gibraltar port breakwater. From the very first frame, a vast, dense circular cloud wall encircles the entire sea basin, its bright white top reaching high into the stratosphere. The camera maintains a locked high-altitude orbital perspective throughout the continuous take. As the scene continues, the dense eyewall of cloud steadily rolls inward, casting dark blue shadow lines across the open water while the Gibraltar breakwater remains sharply defined beneath the outer edge. The atmospheric boundary expands smoothly towards the horizon, bringing thick overcast shadows over coastal terrain as the final moments show the circular ring swirling with unbroken density. Sound: continuous low-frequency atmospheric roar at a constant level from the start of the take to the very last frame.",
+      "seed": null
+    }
+  ],
+  "first_comment": "How dark do you think coastal cities under this giant cloud ring would get during midday? ☁️",
+  "family": "atmosfer afeti",
+  "seed_id": 11,
+  "caption": "A giant circular cloud ring seals the entire Mediterranean basin from orbit, framing the Strait of Gibraltar along its western edge.\n\nThis cloud formation spans over 3,800 kilometers in diameter and remains perfectly locked across Southern Europe and North Africa.\n\nReal storm systems over the Mediterranean, such as Medicane Daniel in 2023, rarely exceed 500 kilometers in diameter and drift continuously with atmospheric jet streams.\n\nA stationary cloud ring of this size would require a planetary heat sink to continuously condense atmospheric moisture along a fixed circular boundary without breaking into turbulence.\n\nThis is a simulation, not real footage. Would a cloud wall of this scale freeze surface temperatures across Europe within hours?",
+  "hashtags": "#Meteorology #Mediterranean #Gibraltar #Atmosphere #WeatherSimulation #SatelliteView #EarthScience",
+  "hook_shot": 1,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce"
+}
