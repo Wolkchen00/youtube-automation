@@ -9,7 +9,6 @@ WORKFLOWS = ROOT / ".github" / "workflows"
 
 EXPECTED_SCHEDULES = {
     "fear-slide.yml": ["13 11 * * *", "30 21 * * *"],
-    "dark-fact.yml": ["43 11 * * *"],
     "galactic-daily.yml": ["17 12 * * *"],
 }
 
@@ -53,6 +52,11 @@ def test_live_lane_cron_saatleri():
         workflow = _load_workflow(WORKFLOWS / filename)
         schedule = _triggers(workflow)["schedule"]
         assert [entry["cron"] for entry in schedule] == expected_crons
+
+
+def test_askidaki_dark_fact_zamanlanmaz():
+    # 27 Kasim 2026: shadowedhistory askida, yalniz elle tetiklenir.
+    assert "schedule" not in _triggers(_load_workflow(WORKFLOWS / "dark-fact.yml"))
 
 
 def test_kie_uretim_kuyrugu_tum_workflowlarda_max():

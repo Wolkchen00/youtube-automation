@@ -12,8 +12,13 @@ name: Dark Fact Daily
 # seriyi de korur (ayni upload profili), yani ayni gun ikinci video cikmaz.
 
 on:
-  schedule:
-    - cron: '43 11 * * *'   # still-home ile ayni saat. Hedef yayin: 15:30 UTC / 08:30 California (PDT); olculen gecikme: 1.9-3.0 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
+  # ===== ASKIYA ALINDI 2026-11-27 (Ihsan karari) =====
+  # "shadowedhistory kanalini simdilik durduralim, oradan izleyici takipci
+  # kazanamiyoruz, ilerde degistirecegim." Iki seri status=paused. Geri acmak
+  # icin asagidaki iki satiri ac ve iki seride status=active yap.
+  # GitHub'da da disabled_manually (id 372517391): once `gh workflow enable 372517391`.
+  # schedule:
+  #   - cron: '43 11 * * *'   # still-home ile ayni saat. Hedef yayin: 15:30 UTC / 08:30 California (PDT); olculen gecikme: 1.9-3.0 saat; 2026-09-24 izleyici saati analizi (IG takipci ulkeleri + YT izlenme ulkeleri + sentinal YT Studio saat tablosu)
   workflow_dispatch:
     inputs:
       seri:

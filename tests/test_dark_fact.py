@@ -96,7 +96,9 @@ def test_iki_seri_ayni_kanala_ve_ayni_doktrine_baglidir():
         assert meta["upload_profile"] == "shad0wedhistory"   # gunde-1 kilidi ikisini birlikte sayar
         assert meta["doctrine"] == "shadowedhistory/DARK-FACT.md"
         assert (REPO / meta["doctrine"]).is_file()
-    assert all(_meta(slug)["status"] == "active" for slug in SERILER)
+    # 27 Kasim 2026, Ihsan karari: kanal ASKIDA, iki seri birlikte paused ve ikmal kapali.
+    assert all(_meta(slug)["status"] == "paused" for slug in SERILER)
+    assert all(_meta(slug)["auto_replenish"]["enabled"] is False for slug in SERILER)
     still = json.loads((REPO / "shadowedhistory" / "still-home" / "series.json").read_text(encoding="utf-8"))
     assert still["status"] == "paused"
 

@@ -13,14 +13,14 @@
   "standalone": true,
   "publish_mode": "auto",
   "performance_feedback": true,
-  "status": "active",
+  "status": "paused",
   "priority": 999,
   "total_parts": 18,
   "next_part": 16,
   "doctrine": "shadowedhistory/DARK-FACT.md",
   "kurulum_notu": "1 Ekim 2026 kuruldu (still-home'un yerine). Ihsan karari: yeni yon, gunde 1 video. dark-fact-a ve dark-fact-b gun asiri sirayla cikar (dark-fact.yml). B: dort sahne x 2,5 sn (4 sn uretilir, micro_trim 0,75), 3 sert kesme.",
   "auto_replenish": {
-    "enabled": true,
+    "enabled": false,
     "batch": 4,
     "min_queue": 2,
     "shots": 4,
@@ -543,5 +543,6 @@
       "Rate this fact from 1 to 10.",
       "Tag someone who needs to know this."
     ]
-  }
+  },
+  "durdurma_notu": "27 Kasim 2026, Ihsan karari: shadowedhistory kanali ASKIYA alindi (\"oradan izleyici takipci kazanamiyoruz, ilerde degistirecegim\"). dark-fact.yml cron'u yoruma alindi, iki seri status=paused. Geri acma: cron satirini ac + iki seride status=active. GitHub'da da kapatildi (gh workflow disable, 27 Kas 17:41 UTC, durum disabled_manually, id 372517391); geri acarken once gh workflow enable 372517391."
 }
