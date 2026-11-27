@@ -400,6 +400,8 @@ def resolve_shot(bible: Bible, shot: dict, plan: dict | None = None,
 # konseptin tanimidir (olcum: galactic_experience/REELYZE-RAPOR.md EK 7).
 SEEDANCE_DURATION_RANGE = (4, 15)
 _SEEDANCE_ENGINES = ("seedance", "seedance-2", "seedance_fast", "bytedance/seedance-2-fast")
+MAGI2_DURATION_RANGE = (4, 30)
+_MAGI2_ENGINES = ("magi2", "magi-2", "magi_2")
 
 
 def validate_visual_duration(duration, engine: str | None) -> str:
@@ -409,6 +411,14 @@ def validate_visual_duration(duration, engine: str | None) -> str:
     dusurulmez). Diger ucuz motorlar (Veo, Kling) Omni enum'unda kalir.
     """
     eng = str(engine or "").strip().lower()
+    if eng in _MAGI2_ENGINES:
+        try:
+            d = int(float(str(duration).strip()))
+        except (TypeError, ValueError):
+            logger.warning(f"⚠️ MAGI-2 süresi '{duration}' sayı değil → 8s")
+            return "8"
+        alt, ust = MAGI2_DURATION_RANGE
+        return str(max(alt, min(ust, d)))
     if eng not in _SEEDANCE_ENGINES:
         return validate_duration(duration)
     ham = str(duration).strip()

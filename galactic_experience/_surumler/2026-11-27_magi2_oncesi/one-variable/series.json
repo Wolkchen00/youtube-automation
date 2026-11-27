@@ -1,0 +1,722 @@
+{
+  "slug": "one-variable",
+  "base_title": "Planet Scale",
+  "logline": "One real place, one real kind of natural disaster, at a scale the Earth could never produce, in one unbroken 8-second shot from above.",
+  "language": "en",
+  "upload_profile": "galacticexperimet",
+  "platforms": [
+    "youtube",
+    "instagram",
+    "tiktok"
+  ],
+  "hashtags": "#shorts #disaster #nature #earth #simulation",
+  "standalone": true,
+  "publish_mode": "auto",
+  "performance_feedback": true,
+  "status": "active",
+  "priority": 10,
+  "total_parts": 118,
+  "next_part": 118,
+  "doctrine_sha256": "ca8016b924419462b4b26cf89033fdd367c5b00015bd919fa7cc7d174c57f1ce",
+  "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off sonrasi konsept DARALDI. Artik 'tek degisken deneyi' degil, GERCEK bir dogal afet turu IMKANSIZ olcekte. Slug KORUNDU (published.json, last_run.json, filo.json bu slug'a bagli). Doktrin: one-variable/KONSEPT-A.md v2.0. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi TEK olan gunlerde bu serit uretilir, CIFT gunlerde flythrough. one-variable.yml cron'u KAPALI KALIR, yalniz elle tetiklenir; iki hattin ayni gun calismasi cift yayin demektir.",
+  "auto_replenish": {
+    "enabled": true,
+    "batch": 5,
+    "min_queue": 2,
+    "shots": 1,
+    "shot_seconds": "8",
+    "caption": true,
+    "music_prompt": false,
+    "credit_hard_cap": true,
+    "title_style": "plain English, max 70 characters, naming the disaster and the scale that makes it impossible, in the pattern '<the disaster> + <the impossible extent>' (e.g. 'One Wave Along the Whole Coast', 'One Whirlpool That Never Closes', 'A Hurricane Wider Than the Gulf'). The SUBJECT must be a disaster a reader can picture instantly. Name the real place only when it fits inside the character limit without crowding the disaster out. No clickbait punctuation, no hashtags, no surrounding quotes, no question marks, no first-person claim of having filmed anything.",
+    "caption_style": "\"caption\" = the entire WRITTEN STORY because the video has zero narration: 70-140 words of lean, specific English prose in five compact paragraphs separated with \n\n. Follow this exact order: (1) name the disaster and the real place in one direct sentence; (2) state what makes this version impossible, which is almost always its extent, height or duration, and give the number; (3) describe how the real version of this disaster actually behaves, with verified quantities and a named real event for comparison; (4) explain the physical reason the version on screen cannot happen, through a clear cause-and-effect chain a non-scientist can picture, such as where the energy or the water would have to come from; (5) write the exact standalone sentence \"This is a simulation, not real footage.\" and close with ONE concrete question about the viewer's judgement, prediction or observation. Every sentence must add a fact or advance the thought. Use verified quantities only, with units and useful context; omit any uncertain number. Make zero first-person claims of filming or capture. Use commas, colons, or full stops rather than em dashes.\n- HASHTAGS: \"hashtags\" = 6-9 specific, space-separated tags covering the disaster type, the named place or region, and 3-4 broad Earth-science, weather, geology or simulation categories. Each tag starts with # and contains no spaces; skip generic engagement tags.",
+    "families": [
+      "su afeti",
+      "atmosfer afeti",
+      "yer afeti",
+      "ates afeti",
+      "buz afeti",
+      "gok afeti"
+    ],
+    "shot_plan": [
+      "One continuous 8-second take at 24 fps from a physically fixed orbital or high-aerial mount. Camera position, orientation, focal length, focus, and exposure stay identical for all eight seconds. Frame one clearly contains the real-world geography of this episode and the disaster already at maximum strength and maximum extent. Only its visible physical consequence develops through seconds 1-5 and delivers a decisive payoff during seconds 6-8. A human-made structure of known size stays in frame for the whole take so the scale of the disaster reads instantly. Diegetic sound carries the whole take at full level, and its shape follows the event: when the event is a single impact the sound thins toward near-silence through seconds 3-5 and surges to its strongest during seconds 6-8; when the event runs continuously the sound holds one steady, full, unbroken level from second 0 to second 8."
+    ],
+    "brief": "SONSUZ DOGAL AFET ANTOLOJISI. Her bolum, gercek ve ilk bakista taninabilir tek bir yerde, GERCEK bir dogal afet turunu IMKANSIZ bir olcekte gosterir. Sonuc, yorungeden ya da yuksek havadan gorulen TEK KESINTISIZ 8 SANIYELIK PLAN icinde tamamlanir. Gorsel promptlar ve caption Ingilizce yazilir.\n\nBU KONSEPT OLCUMLE SECILDI. Ayni kanalda uc konsept yaristi: bu formul iki bolumde de tuttu (1.060 ve 1.676 izlenme, kanal medyani 104), uydurma bir geometri gosteren rakip konsept 77'de kaldi. Teknik olcumlerin hicbiri o cokusu aciklamadi; ayiran tek sey oznenin GERCEK olmasiydi. Bu yuzden asagidaki 1. ve 2. kural pazarliga kapalidir.\n\nDEGISMEZ KURALLAR:\n(1) OZNE GERCEK BIR AFET TURUDUR. Tsunami, girdap, kasirga, hortum, deprem, yarik, heyelan, volkan, piroklastik akinti, buzul cokusu, kum firtinasi, simsek firtinasi. Uydurma bir olay, uydurma bir fizik ya da bilim kurgu ogesi kullanma. Imkansiz olan sey afetin TURU degil, OLCEGIDIR.\n(2) TEK GERCEK YER. Konumu gercek adiyla kullan ve onu ilk karede tanitan en az uc buyuk cografi cipa sec: kiyi bicimi, dag sirasi, nehir agzi, col deseni, ada yayi, krater, kanyon ya da sehir isigi agi. Uydurma yer adi ve genel manzara kullanma.\n(3) OLCEK REFERANSI ZORUNLUDUR. Kadrajda sekiz saniye boyunca, boyutu bilinen insan yapimi bir yapi kalir: liman vinci, kule blogu, kopru, dalgakiran, rihtim, baraj, otoyol. Afetin buyuklugu ancak bu referansla okunur. Referanssiz kare buyuk degil soyut gorunur.\n(4) ILK KARE TAM VAATTIR. Ilk kare hem taninabilir yeri hem de afeti en uc, tamamen gerceklesmis halinde ayni anda gosterir. Kurulum, yaklasma, gecikmis ortaya cikis ve once normal halini gosterme yasaktir.\n(5) TEK PLAN VE SOMUT KAMERA KILIDI. Cekim 24 fps, kesintisiz ve tam 8 saniyedir. Kamera ayni dunya koordinatini, yuksekligi, bakis yonunu, odak uzakligini, netlik mesafesini ve pozlamayi korur. Pan, tilt, zoom, orbit, takip, sarsinti, kesme, gecis ve sahne sifirlamasi kullanma. Cografi cipalar sekiz saniye boyunca kadrajin ayni noktalarinda kalsin. Bu kamera kilidi cumlesini ozgun paragrafta BIR KEZ DAHA tekrarla: kazanan iki bolumde de iki kez geciyor.\n(6) SEKIZ SANIYELIK HAREKET. 0-1 saniyede vaat okunur; 1-3 saniyede afetin ilk sonucu kadraj icinde ilerler; 3-5 saniyede gorsel gerilim sikisir; 6-8 saniyede ayni nedensellik zinciri tek, buyuk ve filmde acikca gorulen bir odeme uretir. Son kare kapanis hareketi degil, devam eden fiziksel bir durumdur ve donguye uygundur.\n(6b) AFET SEKIZ SANIYE BOYUNCA ILERLER, DURMAZ. Ilk karede tam gucunde olmasi HAREKETSIZ oldugu anlamina GELMEZ. Kadrajda geri donulmez bir sey degisir: dalga karaya dogru ilerler ve temas eder, girdap buyur ve derinlesir, yarik uzar, piroklastik akinti yayilir, bulut cephesi yaklasir, buz cephesi kopar ve duser. Duran, donmus, asili kalan, seklini koruyan bir afet YAZMA; su Ingilizce kaliplari kullanma: motionless, perfectly still, frozen in place, stationary, suspended, holds its shape. Bu kural olculmustur: ayni kanalda sekiz saniyesinde hicbir seyin degismedigi rakip bolum 77 izlenmede kaldi, kazanan iki bolumde ise dalga limani yutuyor ve girdap gozle gorulur biçimde buyuyordu.\n(7) FIZIKSEL SONUC. Hareketi maddelerle ve kuvvetlerle yaz: su kutlesi, kaya levhasi, buz kristali, toz cephesi, bulut sutunu, lav dili, golge bandi, basinc dalgasi. Her harekette yon, hiz hissi, olcek referansi ve temas noktasi ver. Soyut sifatlari azalt.\n(8) POZITIF VIDEO DILI. Gorsel prompt yalnizca kadrajda bulunan ve gerceklesen seyleri soyler. Su Ingilizce sozcukleri gorsel paragrafta kullanma: no, not, never, nothing, without, avoid, cannot, absent, lacks, lacking. Ayrica \"instead of\" kalibini kullanma. Olumsuz komut yerine istenen pozitif durumu yaz: the ridge stays sharp, the camera remains fixed, the frame contains open terrain.\n(9) SES OLAYIN SEKLINI IZLER, IKI EGRIDEN BIRINI SEC. Anlatim, konusma ve muzik bulunmaz; motorun urettigi diegetic ortam sesi tek ses katmanidir. TEK CARPMA olayinda (tsunami, meteor, coku, heyelan): 0-1 saniyede isitilebilir dogal taban, 3-4 saniyede belirgin incelme, 4-5 saniyede sessizlige en yakin an, 6-7 saniyede sert yukselis, 7-8 saniyede en guclu tok darbe; yaklasik 16 dB algisal salinim hedefle. SUREGIDEN olayda (girdap, kasirga, lav akisi, simsek firtinasi): tek duz, gur ve kesintisiz seviye, 0. saniyeden 8. saniyeye kadar ayni. Yanlis egriyi secmek bolumu duzler. Her promptta ses kaynagini somut olarak adlandir ve zamanini yaz.\n(10) GORSEL PARAGRAF STANDARDI. shot.prompt icindeki ozgun gorsel paragraf 110-190 Ingilizce kelime olsun. Somut kompozisyon, gercek cografi cipalar, ilk karedeki afet, saniyelere bagli tek sonuc, olcek referansi, sabit kadraj kaniti ve ozgun ses egrisi icersin. Mekanik olarak eklenen shot_plan onekini ve art_style metnini paragraf icinde yeniden anlatma.\n(11) YAYIN GUVENLIGI, GEVSETILMEZ. Kadrajda insan figuru, yuz, beden ve panik kalabalik bulunmaz. Meskun binanin yikildigi yakin plan bulunmaz. Genis havadan gorulen sehir silueti serbesttir, tek binanin icine giren plan degildir. Kanal fizigi ve olcegi gosterir, can kaybini degil. Goruntude okunabilir yazi, altyazi, kunye, logo, filigran, imza ve kapanis karti uretme.\n(12) BASLIK AFETIN KENDISIDIR. En fazla 70 karakterlik duz Ingilizce baslikta afeti ve onu imkansiz kilan olcegi soyle. Tiklama tuzagi, soru isareti, hashtag ve cekimi sahiplenen birinci sahis iddiasi kullanma.\n(13) CAPTION HIKAYEYI TASIR. 70-140 Ingilizce kelimede afeti ve gercek yeri adlandir, olcegin neden imkansiz oldugunu sayiyla soyle, gercek versiyonun nasil davrandigini adi konmus gercek bir olayla karsilastir, fiziksel engeli acikla, bunun simulasyon oldugunu acikca yaz ve tek somut soruyla bitir.\n(14) AILE VE CESITLILIK. Yalnizca kanonik ailelerden birini aynen sec. Ardisik iki bolum ayni aileden olamaz. Ayni afet turunu ayni cografyada ikinci kez cekme: filoda uc kez olculdu, ayni anatominin tekrari 67 kata kadar dusus getirdi. Mevcut bolumun basligini, yer-afet ciftini, ana kompozisyonunu ya da odeme hareketini onceki bolumlerin hafifce degistirilmis hali olarak tekrarlama.",
+    "topic_pool": [
+      {
+        "id": 1,
+        "topic": "A single wave taller than the skyline standing along the entire Copacabana shoreline in Rio de Janeiro, the beachfront towers at its foot.",
+        "family": "su afeti"
+      },
+      {
+        "id": 2,
+        "topic": "A permanent whirlpool open in the Strait of Messina between Sicily and the Italian mainland, the ferry harbour on its rim.",
+        "family": "su afeti"
+      },
+      {
+        "id": 3,
+        "topic": "A wall of floodwater moving up the mouth of the Amazon past Marajo Island, the river channels vanishing beneath it.",
+        "family": "su afeti"
+      },
+      {
+        "id": 4,
+        "topic": "A wave covering the full length of the Dubai coastline and its palm-shaped islands, the tower line marking its height.",
+        "family": "su afeti"
+      },
+      {
+        "id": 5,
+        "topic": "A tidal surge standing over the Dutch delta behind the Oosterschelde barrier, the sea wall a thin line under it.",
+        "family": "su afeti"
+      },
+      {
+        "id": 6,
+        "topic": "A whirlpool opening in Tokyo Bay wide enough to reach both shores, the container terminal at its edge.",
+        "family": "su afeti"
+      },
+      {
+        "id": 7,
+        "topic": "A hurricane wide enough to cover the whole Gulf of Mexico, seen from orbit with the Florida peninsula at its rim.",
+        "family": "atmosfer afeti"
+      },
+      {
+        "id": 8,
+        "topic": "A wall of Saharan sand five kilometres high advancing across the dunes toward the Atlas Mountains.",
+        "family": "atmosfer afeti"
+      },
+      {
+        "id": 9,
+        "topic": "A single storm tower rising above the Pacific far past the top of the troposphere, seen from orbit against the curve of the Earth.",
+        "family": "atmosfer afeti"
+      },
+      {
+        "id": 10,
+        "topic": "A tornado wider than a city crossing the flat farmland grid of Kansas, grain elevators marking its scale.",
+        "family": "atmosfer afeti"
+      },
+      {
+        "id": 11,
+        "topic": "A closed ring of cloud sealing the entire Mediterranean basin, seen from orbit with Gibraltar at one edge.",
+        "family": "atmosfer afeti"
+      },
+      {
+        "id": 12,
+        "topic": "A dust front sweeping off the Gobi and covering the whole North China Plain, city light grids going dark beneath it.",
+        "family": "atmosfer afeti"
+      },
+      {
+        "id": 13,
+        "topic": "A fissure opening along the San Andreas Fault across the California landscape, highways ending at both lips.",
+        "family": "yer afeti"
+      },
+      {
+        "id": 14,
+        "topic": "The ground splitting open along the Great Rift Valley in Kenya, the crack running past Lake Magadi to the horizon.",
+        "family": "yer afeti"
+      },
+      {
+        "id": 15,
+        "topic": "A landslide carrying away an entire flank of the Himalayan ridge above the Ganges plain.",
+        "family": "yer afeti"
+      },
+      {
+        "id": 16,
+        "topic": "The Thingvellir rift in Iceland widening into an open canyon between the two plates, the road across it broken.",
+        "family": "yer afeti"
+      },
+      {
+        "id": 17,
+        "topic": "A sinkhole opening across the limestone plateau of Yucatan wider than any cenote, the jungle floor dropping into it.",
+        "family": "yer afeti"
+      },
+      {
+        "id": 18,
+        "topic": "A lava fountain rising from Mount Etna higher than the mountain itself, the Sicilian coast road below.",
+        "family": "ates afeti"
+      },
+      {
+        "id": 19,
+        "topic": "A pyroclastic flow spreading from Vesuvius across the whole Bay of Naples, the harbour moles vanishing.",
+        "family": "ates afeti"
+      },
+      {
+        "id": 20,
+        "topic": "A lava river from Kilauea reaching the Pacific along the entire Hawaiian coastline in one continuous front.",
+        "family": "ates afeti"
+      },
+      {
+        "id": 21,
+        "topic": "An eruption column rising from the Yellowstone caldera over the Wyoming plateau, its base filling the valley.",
+        "family": "ates afeti"
+      },
+      {
+        "id": 22,
+        "topic": "The calving front of the Jakobshavn glacier in Greenland collapsing along its entire width into the fjord.",
+        "family": "buz afeti"
+      },
+      {
+        "id": 23,
+        "topic": "An Antarctic ice shelf breaking away from the Ross Sea edge in a single piece, the fracture running to the horizon.",
+        "family": "buz afeti"
+      },
+      {
+        "id": 24,
+        "topic": "A snow avalanche covering the full south face of the Alps above Chamonix, the valley road at its base.",
+        "family": "buz afeti"
+      },
+      {
+        "id": 25,
+        "topic": "A lightning storm covering the entire Amazon basin at night, seen from orbit as a continuous sheet of flashes.",
+        "family": "gok afeti"
+      },
+      {
+        "id": 26,
+        "topic": "A meteor entering the atmosphere above the Siberian taiga near the Tunguska basin, its trail crossing the frame.",
+        "family": "gok afeti"
+      },
+      {
+        "id": 27,
+        "topic": "An aurora storm bright enough to light the ground across northern Scandinavia, the fjord coastline visible under it.",
+        "family": "gok afeti"
+      }
+    ],
+    "last_run": {
+      "at": "2026-11-14T19:20:26.229667+00:00",
+      "parts": "114-118"
+    }
+  },
+  "doctrine": "galactic_experience/one-variable/KONSEPT-A.md",
+  "parts": {
+    "94": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep94/ep94_mastered.mp4",
+      "subtitle": "A Wave Taller Than the Copacabana Skyline",
+      "stack_sha256": "3a66f4ca611ffc10eb26454f40a051758ba2213f98d26ad8348c0aa01f24864c",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-15T19:50:09.652620+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "95": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep95/ep95_mastered.mp4",
+      "subtitle": "A Tornado Wider Than a City Over Kansas",
+      "stack_sha256": "f95d900357d9972a731c5753696d3fb24eee1504a026b9138cd2e240882a1c54",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-17T19:59:15.834037+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "96": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep96/ep96_mastered.mp4",
+      "subtitle": "A Fissure Opening Along the San Andreas",
+      "stack_sha256": "6b5e044e5e1dc5febd567603c31dc21b504bc50085bd0f96b97420bf60dc37c1",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-19T18:45:10.224385+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "97": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep97/ep97_mastered.mp4",
+      "subtitle": "Pyroclastic Flow Engulfing the Bay of Naples",
+      "stack_sha256": "e95c5da1fa962f780f17058ed245d5fbcd6658fc1d7fb859fbd2ce039a07dd6f",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-21T20:34:18.330025+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "98": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep98/ep98_mastered.mp4",
+      "subtitle": "Jakobshavn Glacier Collapsing Along Its Width",
+      "stack_sha256": "f12afe43132a920f54f6d21495152feb83f95052ab3d34eb6207be347f8ac6c0",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-23T19:52:11.037825+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "99": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep99/ep99_mastered.mp4",
+      "subtitle": "A Whirlpool Spanning All of Tokyo Bay",
+      "stack_sha256": "a192b4fa17d852d442f36124c84ad4e8a1b8c644490eea100294c64de9defd76",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-25T17:20:37.374036+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "100": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep100/ep100_mastered.mp4",
+      "subtitle": "A Sand Wall Towering Five Kilometers High",
+      "stack_sha256": "9603084006cae3476a6a2f244e8db00df8b99474bd8ff72fbba36d73942e08e3",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-09-29T00:19:14.361577+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "101": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep101/ep101_mastered.mp4",
+      "subtitle": "A Rift Opening Through All of Kenya",
+      "stack_sha256": "a08cf1d872c69d1a32cf75dbe8e457c700f7ddd8f770d2f75a04452c8a4bfa8d",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-03T16:24:50.316121+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "102": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep102/ep102_mastered.mp4",
+      "subtitle": "A Lava Fountain Taller Than Mount Etna",
+      "stack_sha256": "a08cf1d872c69d1a32cf75dbe8e457c700f7ddd8f770d2f75a04452c8a4bfa8d",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-07T19:16:26.097285+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "103": {
+      "status": "published",
+      "first_held_at": "2026-10-09T18:37:07.872122+00:00",
+      "retry_count": 1,
+      "last_reason_code": "AUDIO_MASTER",
+      "hold_reason": "mastering başarısız: master teslim sözleşmesi 3 denemede tutulamadı: Max attempts (3) exhausted. Measured TP=-0.90 dB, LUFS=-14.40.",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep103/ep103_mastered.mp4",
+      "subtitle": "An Ice Shelf Fracture to the Horizon",
+      "stack_sha256": "95e5b1e47d69a6794783c2f41fbcbd0403a8fcf508ba432088dd2e5fbce1d3b4",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-11T17:55:23.267923+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "104": {
+      "status": "published",
+      "first_held_at": "2026-10-13T19:21:15.450846+00:00",
+      "first_infra_held_at": "2026-10-13T19:21:15.450846+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep104/ep104_mastered.mp4",
+      "subtitle": "A Sinkhole Wider Than the Yucatan Peninsula",
+      "stack_sha256": "95e5b1e47d69a6794783c2f41fbcbd0403a8fcf508ba432088dd2e5fbce1d3b4",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-15T18:08:21.084921+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "105": {
+      "status": "published",
+      "first_held_at": "2026-10-17T15:42:07.413504+00:00",
+      "retry_count": 1,
+      "last_reason_code": "UNKNOWN",
+      "hold_reason": "üretim nedeni bilinmiyor",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep105/ep105_mastered.mp4",
+      "subtitle": "One Wave Along the Entire Dubai Coast",
+      "stack_sha256": "95e5b1e47d69a6794783c2f41fbcbd0403a8fcf508ba432088dd2e5fbce1d3b4",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-19T19:05:46.849836+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "106": {
+      "status": "published",
+      "first_held_at": "2026-10-21T17:21:42.050498+00:00",
+      "first_infra_held_at": "2026-10-21T17:21:42.050498+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep106/ep106_mastered.mp4",
+      "subtitle": "A Dust Storm Covering the North China Plain",
+      "stack_sha256": "95e5b1e47d69a6794783c2f41fbcbd0403a8fcf508ba432088dd2e5fbce1d3b4",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-23T17:22:08.172851+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "107": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep107/ep107_mastered.mp4",
+      "subtitle": "An Avalanche Across the Entire Alps Range",
+      "stack_sha256": "95e5b1e47d69a6794783c2f41fbcbd0403a8fcf508ba432088dd2e5fbce1d3b4",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-10-29T18:49:07.804786+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "108": {
+      "status": "published",
+      "first_held_at": "2026-10-31T17:19:50.686815+00:00",
+      "first_infra_held_at": "2026-10-31T17:19:50.686815+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep108/ep108_mastered.mp4",
+      "subtitle": "A Lava River Along the Entire Hawaiian Coastline",
+      "stack_sha256": "2729a68a07a041accde2c9332ca26d779939af4a95a3c25c154199181dc2ec8c",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-02T21:53:06.041248+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "109": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep109/ep109_mastered.mp4",
+      "subtitle": "A Rift Widening Across All of Thingvellir",
+      "stack_sha256": "2729a68a07a041accde2c9332ca26d779939af4a95a3c25c154199181dc2ec8c",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-04T20:15:40.373325+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "110": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep110/ep110_mastered.mp4",
+      "subtitle": "A Hurricane Covering the Whole Gulf of Mexico",
+      "stack_sha256": "2729a68a07a041accde2c9332ca26d779939af4a95a3c25c154199181dc2ec8c",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-06T20:01:01.352387+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 7.94,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "111": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep111/ep111_mastered.mp4",
+      "subtitle": "An Eruption Column Over the Whole Yellowstone Caldera",
+      "stack_sha256": "2729a68a07a041accde2c9332ca26d779939af4a95a3c25c154199181dc2ec8c",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-08T18:14:24.117149+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "112": {
+      "status": "needs_human",
+      "first_held_at": "2026-11-10T19:48:10.353274+00:00",
+      "first_infra_held_at": "2026-11-10T19:48:10.353274+00:00",
+      "infra_retry_count": 2,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota",
+      "retry_count": 0
+    },
+    "113": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep113/ep113_mastered.mp4",
+      "subtitle": "A Meteor Strike Over the Siberian Taiga",
+      "stack_sha256": "2d5e0760878a97d004e4c32ef723dcbd4941054a0d81799fa1cb23c07322bd50",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-14T19:45:06.238741+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "114": {
+      "status": "published",
+      "first_held_at": "2026-11-18T20:56:19.787227+00:00",
+      "first_infra_held_at": "2026-11-18T20:56:19.787227+00:00",
+      "infra_retry_count": 1,
+      "last_reason_code": "QUOTA",
+      "hold_reason": "quota",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep114/ep114_mastered.mp4",
+      "subtitle": "A Landslide Across the Entire Himalayan Ridge",
+      "stack_sha256": "2d5e0760878a97d004e4c32ef723dcbd4941054a0d81799fa1cb23c07322bd50",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-20T20:35:57.004090+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "115": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep115/ep115_mastered.mp4",
+      "subtitle": "A Flood Surge Up the Entire Amazon Basin",
+      "stack_sha256": "2d5e0760878a97d004e4c32ef723dcbd4941054a0d81799fa1cb23c07322bd50",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-22T19:57:48.411945+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "116": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep116/ep116_mastered.mp4",
+      "subtitle": "A Lightning Storm Across the Entire Amazon Basin",
+      "stack_sha256": "2d5e0760878a97d004e4c32ef723dcbd4941054a0d81799fa1cb23c07322bd50",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-24T01:12:41.345053+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "117": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/one-variable/episodes/ep117/ep117_mastered.mp4",
+      "subtitle": "A Storm Tower Rising Past the Stratosphere",
+      "stack_sha256": "2d5e0760878a97d004e4c32ef723dcbd4941054a0d81799fa1cb23c07322bd50",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-26T22:13:56.414301+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 8.0,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    }
+  },
+  "engagement": {
+    "first_comment_pool": [
+      "Which place should we test next? 🌋",
+      "Would you watch this from above or run? One word.",
+      "Which disaster scares you the most?",
+      "Which place do you want to see hit next?",
+      "Which was worse, the sound or the scale?",
+      "How far away would you want to be from this?",
+      "Pick one: flood, fire, quake or ice?",
+      "Which landmark should face the next one?"
+    ]
+  }
+}

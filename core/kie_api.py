@@ -526,6 +526,76 @@ def generate_seedance_video(
     return None
 
 
+# ─── MAGI-2 (Sand AI, 1080p, native audio, 4-30 s, cuts inside one clip) ──────
+
+MAGI2_CREDITS_PER_SECOND = 17.6  # kie.ai/magi-2, 2026-11-26: audio and references do not change it
+
+
+def generate_magi2_video(
+    prompt: str,
+    first_frame_url: str = None,
+    last_frame_url: str = None,
+    reference_image_urls: list[str] | None = None,
+    duration: int | str = 10,
+    aspect_ratio: str = "9:16",
+    sound: bool = True,
+    seed: int | None = None,
+    max_attempts: int = 2,
+    poll_attempts: int = 120,  # 120 x 15 sn = 30 dk; 26 Kas isleri 16-19 dk surdu
+) -> dict | None:
+    """Generate one MAGI-2 clip through the generic /jobs/createTask endpoint.
+
+    Model choice follows the inputs: first_frame_url -> magi-2/image-to-video
+    (aspect follows the frame), reference_image_urls -> magi-2/reference-to-video,
+    otherwise magi-2/text-to-video. Only 1080p exists. Failed tasks are not
+    charged by Kie. Returns {"url", "urls", "credits", "model", "task_id"} or None.
+    """
+    try:
+        dur = int(float(duration))
+    except (ValueError, TypeError):
+        dur = 10
+    dur = max(4, min(30, dur))
+
+    inp: dict = {
+        "prompt": prompt[:15000],
+        "duration": dur,
+        "resolution": "1080p",
+        "generate_audio": bool(sound),
+    }
+    if seed is not None:
+        inp["seed"] = int(seed)
+    if first_frame_url:
+        model = "magi-2/image-to-video"
+        inp["first_frame_url"] = first_frame_url
+        if last_frame_url:
+            inp["last_frame_url"] = last_frame_url
+    elif reference_image_urls:
+        model = "magi-2/reference-to-video"
+        inp["reference_image_urls"] = list(reference_image_urls)[:10]
+        inp["aspect_ratio"] = aspect_ratio or "9:16"
+    else:
+        model = "magi-2/text-to-video"
+        inp["aspect_ratio"] = aspect_ratio or "9:16"
+
+    payload = {"model": model, "input": inp}
+    for attempt in range(1, max(1, max_attempts) + 1):
+        try:
+            task_id = create_task(payload)
+        except ServerError as e:
+            logger.error(f"MAGI-2 server error ({e})")
+            task_id = None
+        if task_id:
+            result = _poll_video_with_credits(task_id, max_attempts=poll_attempts)
+            if result and result.get("url"):
+                result["model"] = model
+                result["task_id"] = task_id
+                return result
+        logger.warning(f"MAGI-2 attempt {attempt}/{max_attempts} failed.")
+        if attempt < max_attempts:
+            time.sleep(20)
+    return None
+
+
 # ─── File Upload (geçici depo) & Topaz 4K Upscale ─────────────────────────────
 
 def upload_file_to_kie(file_path: str | Path, upload_path: str = "videos") -> str | None:

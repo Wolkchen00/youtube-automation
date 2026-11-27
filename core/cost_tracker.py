@@ -77,6 +77,10 @@ CONSERVATIVE_VIDEO_CREDITS = {
     "veo3_lite": {"4": 40, "6": 60, "8": 80, "10": 100},
     "veo3_fast": {"4": 50, "6": 70, "8": 90, "10": 115},
     "kling": {"4": 40, "6": 55, "8": 70, "10": 90},
+    # MAGI-2 (Kie, 27 Kasim 2026): 17,6 kredi/saniye sabit, yalniz 1080p, ses ve
+    # referans fiyati degistirmez (26 Kas olcumu: 8 sn 140,8, 15 sn 264, 16 sn 281,6).
+    # Tahmin %10 payla yukari yuvarlanir; tamsayi 4-30 sn.
+    "magi2": {str(s): float(int(17.6 * s * 1.1 + 0.999)) for s in range(4, 31)},
 }
 CONSERVATIVE_FIXED_CREDITS = {
     ("music", "suno"): 80,
@@ -93,6 +97,11 @@ _ENGINE_ALIASES = {
     "veo3": "veo3_fast",
     "veo": "veo3_fast",
     "kling-2.6": "kling",
+    "magi-2": "magi2",
+    "magi_2": "magi2",
+    "magi-2/text-to-video": "magi2",
+    "magi-2/image-to-video": "magi2",
+    "magi-2/reference-to-video": "magi2",
 }
 
 

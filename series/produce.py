@@ -22,7 +22,7 @@ from core.utils import download_file, sanitize_filename
 from core.imgbb import upload_to_imgbb
 from core.kie_api import (
     generate_image, check_credit,
-    generate_seedance_video, generate_veo_video, generate_video,
+    generate_seedance_video, generate_veo_video, generate_video, generate_magi2_video,
     upload_file_to_kie, generate_topaz_upscale,
 )
 from core import ffmpeg_tools, cost_tracker
@@ -505,6 +505,10 @@ def _generate_visual_clip(engine: str, prompt: str, start_url: str | None,
     """
     eng = (engine or "seedance").lower()
     dur = str(duration)
+    if eng in ("magi2", "magi-2", "magi_2"):
+        # MAGI-2: yalniz 1080p; ilk kare varsa image-to-video (en-boy kareyi izler).
+        return generate_magi2_video(prompt, first_frame_url=start_url, duration=dur,
+                                    aspect_ratio=aspect_ratio, sound=sound)
     if eng in ("seedance", "seedance-2", "seedance_fast", "bytedance/seedance-2-fast"):
         return generate_seedance_video(prompt, first_frame_url=start_url, duration=dur,
                                        aspect_ratio=aspect_ratio, resolution="720p", sound=sound)

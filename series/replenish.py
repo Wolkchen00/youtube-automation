@@ -205,11 +205,58 @@ VALID_DURATIONS = ("4", "6", "8", "10")
 # Omni enum'u 4/6/8/10 ile sinirli (core/env.py:63). Sure dogrulamasi motora gore secilir;
 # motor bilinmiyorsa Omni listesi kullanilir, yani eski davranis korunur.
 SEEDANCE_VALID_DURATIONS = tuple(str(value) for value in range(4, 16))
+# MAGI-2 (Kie) tek klipte 4-30 sn tamsayi uretir (core/kie_api.py generate_magi2_video).
+MAGI2_VALID_DURATIONS = tuple(str(value) for value in range(4, 31))
+
+
+# MAGI-2 tarif dili (27 Kasim 2026). 26 Kasim karsilastirmasinda MAGI-2 promptdaki
+# zaman araliklarini AYRI CEKIM sayip tam o sinirlarda sert kesme koydu: flythrough
+# "Seconds 4-6" -> 4,08 sn'de kesme, fear-slide "[2.0-4.0]" -> 2,0 sn'de sicrama.
+# Tek planlik seritte zaman araligi yazilmaz; olay tek kesintisiz hareket olarak,
+# olus sirasiyla anlatilir. Kapi plan dogrulamasinda da kosar (kredi harcanmadan).
+MAGI2_PROMPT_RULE = (
+    "\n- MAGI-2 PROMPT LANGUAGE (the video engine is MAGI-2, see Sand AI prompt_enhancement): "
+    "MAGI-2 treats every time range or numbered beat as a separate shot and puts a hard cut at "
+    "each boundary, and it splits a take into cuts when the prompt packs in several separate "
+    "events or places. Inside the shot prompt NEVER write timestamps, second ranges or beat "
+    "labels: no 'seconds 0-4', no 'from four to six seconds', no 'during seconds six to eight', "
+    "no '[2.0-4.0]', no 'Shot 2:', no 'at second 6'. Write the take as ONE principal event in ONE "
+    "connected place with ONE simple camera behaviour, in present tense, in the order it "
+    "happens, joined by continuity words (from the very first frame, steadily, as it keeps "
+    "going, by the final moments); avoid chains of separate 'then' events and any change of "
+    "place or time. Motion is already under way in the first frame. Order: the real place or "
+    "body and what fills the frame at the first moment; how the camera behaves; how the one "
+    "event develops; the closing image; one short sound sentence. State what IS in the frame "
+    "in positive, photographic, physically specific language (real light, real materials, real "
+    "atmosphere, true colours, restrained true-to-life saturation) and name the real place or "
+    "real body exactly. The episode-specific part of the prompt is 110-200 words."
+)
+_MAGI2_SAYI = (r"(?:\d+(?:\.\d+)?|zero|one|two|three|four|five|six|seven|eight|nine|ten|"
+               r"eleven|twelve|thirteen|fourteen|fifteen|sixteen|twenty|thirty)")
+MAGI2_TIME_SEGMENT_RE = re.compile(
+    r"\bseconds?\s+" + _MAGI2_SAYI + r"\s*(?:-|–|to|through|until|and)\s*" + _MAGI2_SAYI + r"\b"
+    r"|\bfrom\s+" + _MAGI2_SAYI + r"\s+(?:to|until)\s+" + _MAGI2_SAYI + r"\s+seconds?\b"
+    r"|\b" + _MAGI2_SAYI + r"\s*(?:-|–)\s*" + _MAGI2_SAYI + r"\s*(?:s|sec|secs|seconds)\b"
+    r"|\[\s*\d+(?:\.\d+)?\s*(?:-|–)\s*\d+(?:\.\d+)?\s*\]"
+    r"|\bshot\s+\d+\s*:"
+    r"|\b(?:at|by|until|from)\s+second\s+" + _MAGI2_SAYI + r"\b",
+    re.IGNORECASE,
+)
+
+
+def magi2_time_segments(prompt: str) -> list[str]:
+    """MAGI-2'nin kesme sandigi zaman araligi kaliplarini dondur (bos = temiz)."""
+    return [m.group(0) for m in MAGI2_TIME_SEGMENT_RE.finditer(str(prompt or ""))]
 
 
 def valid_durations(engine: str | None = None) -> tuple[str, ...]:
     """O motorun kabul ettigi cekim sureleri."""
-    return SEEDANCE_VALID_DURATIONS if (engine or "").strip().lower() == "seedance" else VALID_DURATIONS
+    eng = (engine or "").strip().lower()
+    if eng == "seedance":
+        return SEEDANCE_VALID_DURATIONS
+    if eng == "magi2":
+        return MAGI2_VALID_DURATIONS
+    return VALID_DURATIONS
 
 
 def _compiled_title_patterns(cfg: dict) -> list[tuple[re.Pattern, set[str]]]:
@@ -710,6 +757,16 @@ def validate_plan_against_config(plan: dict, cfg: dict, engine: str | None = Non
             prefix = cfg["shot_plan"][index - 1].strip() + "\n\n"
             if not str(shot.get("prompt") or "").startswith(prefix):
                 errors.append(f"çekim {index} prompt'u shot_plan önekiyle başlamalı")
+    if (engine or "").strip().lower() == "magi2":
+        for index, shot in enumerate(shots, start=1):
+            if not isinstance(shot, dict):
+                continue
+            hits = magi2_time_segments(shot.get("prompt"))
+            if hits:
+                errors.append(
+                    f"çekim {shot.get('n', index)}: MAGI-2 zaman aralığını kesme sayar, "
+                    "prompt'ta zaman aralığı olamaz: " + ", ".join(repr(h) for h in hits[:5])
+                )
     patterns = _compiled_title_patterns(cfg) if "title_patterns" in cfg else []
     if patterns:
         title = str((plan.get("episode") or {}).get("title") or "")
@@ -1413,6 +1470,8 @@ def _build_prompt(meta: SeriesMeta, bible: Bible, cfg: dict, start: int, batch: 
         "  series art style is automatically prefixed to every shot at production; do NOT restate\n"
         "  it wholesale, but stay inside it."
     )
+    if (bible.engine or "").strip().lower() == "magi2":
+        prompts_rule += MAGI2_PROMPT_RULE
     hard_limits_rule = (
         f"- HARD LIMITS: {humans_rule} natural lived-in unlabeled surfaces and grounded safe "
         "everyday home activity fill the frame. English only."

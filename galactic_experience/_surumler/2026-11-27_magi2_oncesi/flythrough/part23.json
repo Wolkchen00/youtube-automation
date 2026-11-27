@@ -1,0 +1,23 @@
+{
+  "episode": {
+    "number": 23,
+    "title": "Through the Debris of Vesta"
+  },
+  "synopsis": "A first-person flight through the boulder-strewn debris field surrounding asteroid 4 Vesta.",
+  "narration": "",
+  "shots": [
+    {
+      "n": 1,
+      "duration": "15",
+      "prompt": "One continuous 15-second first-person flight at 24 fps, filmed as if the camera itself is the spacecraft, moving forward without pause for the entire take. Seconds 0-4 are calm and wide: the real body fills one side of the frame, lit hard from the side, the far sun flaring at the frame edge, and the camera is already drifting forward. Seconds 4-6 accelerate toward the obstacle field and the first objects slide into frame. Seconds 6-13 race through the field itself: objects rush past on both sides and overhead, the nearest ones blurring, fine particles streaking past the lens, objects colliding and bursting apart, the body still showing through the gaps. Seconds 13-15 plunge into the densest part and the frame fills with the climax, the brightest and most overwhelming moment of the whole take, still moving forward as it ends. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people. Sound: diegetic only and locked to what is on screen, a deep low rumble running under the whole flight, quiet and distant at the start, sharp impacts hitting exactly when objects collide, the whole sound field growing continuously and reaching its loudest and fullest in the final two seconds. No music, no voice, no narration.\n\nA first-person forward camera trajectory flies past the battered surface of asteroid 4 Vesta, with its colossal southern crater rim dominating the lower frame. Harsh direct sunlight creates stark shadows across pale grey basaltic rock faces and jagged debris fragments. From zero to four seconds, the flight glides calmly above the cratered surface as a diffuse cloud of orbiting ejecta sits illuminated in the distance. From four to six seconds, the camera accelerates into the debris field as the first meter-wide boulder fragments enter the frame. From six to thirteen seconds, the trajectory weaves through a dense belt of tumbling grey rocks: jagged asteroids rush past overhead and beneath, fine regolith grit streaks across the frame with heavy motion blur, and colliding boulders smash into clouds of glowing gravel. From thirteen to fifteen seconds, the camera plunges headlong into a massive clumping of shattered basalt, where a blinding impact flash and dense rock cloud overwhelm the entire field of view. Sound: a low structural rumble hums continuously, echoing sharp metallic cracks on particle collisions, reaching its loudest peak in the closing two seconds. One continuous take, no cut, no fade, no scene change, and the camera never stops or hovers. Nothing of the vehicle is visible: no cockpit, no hull, no instruments, no HUD. No text, no captions, no logos, no watermark, no people.",
+      "seed": null
+    }
+  ],
+  "first_comment": "Do you think small asteroids have more debris than giant planets? 🪨",
+  "family": "kaya alani",
+  "seed_id": 10,
+  "caption": "This trajectory plunges through the boulder field surrounding asteroid 4 Vesta, passing near its massive southern impact basin.\n\nThe debris environment contains angular basaltic rocks ranging from meter-wide fragments to five-kilometer ejecta blocks traveling at high orbital velocities.\n\nNASA's Dawn spacecraft mapped the surface of Vesta in 2011, revealing a heavily cratered terrain shaped by ancient planetary collisions.\n\nFlying through this debris field is impossible because hypervelocity kinetic impacts from dense rock fragments would shatter any hull in milliseconds.\n\nThis is a simulation, not real footage. Do you think small asteroids produce more dangerous debris than major planets?",
+  "hashtags": "#Vesta #AsteroidBelt #SpaceDebris #Astronomy #SpaceSimulation #PlanetaryScience #SciFiVisuals",
+  "hook_shot": 1,
+  "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1"
+}

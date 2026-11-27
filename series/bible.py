@@ -189,8 +189,8 @@ class Bible:
     # -- üretim motoru (çok-motorlu) --
     @property
     def engine(self) -> str:
-        """Varsayılan üretim motoru: 'omni' (karakter+ses) | 'seedance' | 'veo3_fast' |
-        'veo3_lite' | 'kling' (ucuz görsel). Çekim bazında shot['engine'] ile override edilir."""
+        """Varsayılan üretim motoru: 'omni' (karakter+ses) | 'seedance' | 'magi2' (Kie MAGI-2,
+        1080p, 4-30 sn, 17,6 kredi/sn) | 'veo3_fast' | 'veo3_lite' | 'kling' (ucuz görsel). Çekim bazında shot['engine'] ile override edilir."""
         return self.data["series"].get("engine", "omni")
 
     @property
