@@ -16,7 +16,7 @@
   "status": "active",
   "priority": 10,
   "total_parts": 24,
-  "next_part": 23,
+  "next_part": 24,
   "doctrine": "galactic_experience/flythrough/KONSEPT-C.md",
   "doctrine_sha256": "9c714b9fb2bac91ed2906b379f6945e25eaae92b6c487957f676ad6483f876a1",
   "kurulum_notu": "14 Eylul 2026, Ihsan karari: bake-off'ta part 1 (Saturn) tuttu, serit SONSUZ ANTOLOJIYE cevrildi. Metot degismedi, hedef degisiyor. Doktrin: flythrough/KONSEPT-C.md v2.0. EN BUYUK RISK tekrar tuzagi: ayni anatomiyi ikinci kez cekmek uc kez olculdu ve 67 kata kadar dusus getirdi, bu yuzden families DALINAN ORTAM TURUNU tanimlar ve ardisik iki bolum ayni aileden olamaz. Yayin hatti: .github/workflows/galactic-daily.yml, epoch gun paritesi CIFT olan gunlerde bu serit uretilir, TEK gunlerde one-variable. Bu seride shot_seconds 15: Seedance 4-15 sn uretir, replenish sure dogrulamasi 14 Eylul'de motor-farkinda yapildi. 2026-11-27, Ihsan karari: serit MAGI-2'ye (Kie, 1080p, 17,6 kredi/sn) gecti; galactic kanali toplamda ucuzluyor ve daha kaliteli hedefleniyor, 'video kaliteleri bozulursa duzeltecegiz'. MAGI-2 zaman araligini ayri cekim sayip kesme koyar: tarifte zaman araligi YAZILMAZ (plan kapisi replenish.magi2_time_segments). Eski motor: seedance. Geri donus: bible engine + art_style ve series shot_plan eski degerlerine (_surumler/2026-11-27_magi2_oncesi/).",
@@ -629,6 +629,27 @@
         "narration_delivered": null,
         "arc_roles_missing": [],
         "duration_s": 15.1,
+        "duration_in_band": true,
+        "degraded": false
+      }
+    },
+    "23": {
+      "status": "published",
+      "video": "/home/runner/work/youtube-automation/youtube-automation/output/series/flythrough/episodes/ep23/ep23_mastered.mp4",
+      "subtitle": "Through the Debris of Vesta",
+      "stack_sha256": "9b59595506a33a2f31f20bdf6a063e2ab7bcab90e4b43533458b3214dc39f23b",
+      "stack_version": "sf2",
+      "platforms_ok": [
+        "youtube",
+        "instagram",
+        "tiktok"
+      ],
+      "published_at": "2026-11-27T21:39:10.347333+00:00",
+      "coherence": {
+        "loop_closed": true,
+        "narration_delivered": null,
+        "arc_roles_missing": [],
+        "duration_s": 15.2,
         "duration_in_band": true,
         "degraded": false
       }

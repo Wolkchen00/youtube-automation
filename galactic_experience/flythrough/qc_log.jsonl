@@ -733,3 +733,34 @@
 {"ts": "2026-11-25T21:51:46Z", "event": "qc_api_result", "attempt_id": "d5c4a274228e43c9b9ffba557fbaf937", "outcome": "ok"}
 {"ts": "2026-11-25T21:51:46Z", "event": "review", "episode": 22, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
 {"ts": "2026-11-25T21:51:46Z", "event": "qc_pass", "episode": 22, "shot": 1, "attempt": 0, "content_sha256": "96f7849e8a7053c7204c95839f8af1dd89e8d0e2ed8b1457feefd09a0bb97bee", "clip": "shot_01.mp4"}
+{"ts": "2026-11-27T21:24:22Z", "event": "qc_api_attempt", "attempt_id": "2788957af4cf4e5b808090c2d44c8295", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:32:26Z", "event": "qc_api_result", "attempt_id": "2788957af4cf4e5b808090c2d44c8295", "outcome": "error"}
+{"ts": "2026-11-27T21:32:31Z", "event": "qc_api_attempt", "attempt_id": "00087590c0a149478b4be9ffc156f879", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:32:34Z", "event": "qc_api_result", "attempt_id": "00087590c0a149478b4be9ffc156f879", "outcome": "error"}
+{"ts": "2026-11-27T21:32:44Z", "event": "qc_api_attempt", "attempt_id": "97f2665e82b84b74b2a7c89208925d76", "task_type": "native_audio_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:07Z", "event": "qc_api_result", "attempt_id": "97f2665e82b84b74b2a7c89208925d76", "outcome": "error"}
+{"ts": "2026-11-27T21:33:07Z", "event": "qc_api_attempt", "attempt_id": "af7c7ac99357473386d58840d1a9c4f2", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:14Z", "event": "qc_api_result", "attempt_id": "af7c7ac99357473386d58840d1a9c4f2", "outcome": "error"}
+{"ts": "2026-11-27T21:33:19Z", "event": "qc_api_attempt", "attempt_id": "0a39af1ea98849439bf151924ae65704", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:21Z", "event": "qc_api_result", "attempt_id": "0a39af1ea98849439bf151924ae65704", "outcome": "error"}
+{"ts": "2026-11-27T21:33:31Z", "event": "qc_api_attempt", "attempt_id": "d23c2861d66b43259945e84998a4e429", "task_type": "native_audio_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:33Z", "event": "qc_api_result", "attempt_id": "d23c2861d66b43259945e84998a4e429", "outcome": "error"}
+{"ts": "2026-11-27T21:33:33Z", "event": "qc_api_attempt", "attempt_id": "0246ba6e02064752a5f236cce450b205", "task_type": "native_audio_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:44Z", "event": "qc_api_result", "attempt_id": "0246ba6e02064752a5f236cce450b205", "outcome": "ok"}
+{"ts": "2026-11-27T21:33:44Z", "event": "native_audio_review", "episode": 23, "shot": 1, "attempt": 0, "verdict": "pass", "reasons": [], "has_foley": true, "unwanted_speech": false, "unwanted_music": false, "notes": "Heavy footsteps and impact sounds are audible throughout the clip.", "no_foley_count": 0, "stem": "shot_01_attempt_00.wav", "clip": "shot_01.mp4"}
+{"ts": "2026-11-27T21:33:45Z", "event": "qc_api_attempt", "attempt_id": "d64f4757c38c444f8b74709154565107", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:50Z", "event": "qc_api_result", "attempt_id": "d64f4757c38c444f8b74709154565107", "outcome": "error"}
+{"ts": "2026-11-27T21:33:55Z", "event": "qc_api_attempt", "attempt_id": "3319a5e6349e4d538fe05a3979abdd4e", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:33:57Z", "event": "qc_api_result", "attempt_id": "3319a5e6349e4d538fe05a3979abdd4e", "outcome": "error"}
+{"ts": "2026-11-27T21:34:07Z", "event": "qc_api_attempt", "attempt_id": "54880f329935465884f208bb33052336", "task_type": "visual_review", "model": "gemini-3.8-flash", "is_fallback": false, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:34:13Z", "event": "qc_api_result", "attempt_id": "54880f329935465884f208bb33052336", "outcome": "error"}
+{"ts": "2026-11-27T21:34:13Z", "event": "qc_api_attempt", "attempt_id": "0a9bab27370946b281f901067a97dd1f", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:34:16Z", "event": "qc_api_result", "attempt_id": "0a9bab27370946b281f901067a97dd1f", "outcome": "error"}
+{"ts": "2026-11-27T21:34:21Z", "event": "qc_api_attempt", "attempt_id": "16ee8fa9dd7c4f57be9c0dd1e47ccdc1", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:34:31Z", "event": "qc_api_result", "attempt_id": "16ee8fa9dd7c4f57be9c0dd1e47ccdc1", "outcome": "error"}
+{"ts": "2026-11-27T21:34:41Z", "event": "qc_api_attempt", "attempt_id": "c01a0f96fcec437f8b4b85d0fa186f7d", "task_type": "visual_review", "model": "gemini-3.7-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:34:43Z", "event": "qc_api_result", "attempt_id": "c01a0f96fcec437f8b4b85d0fa186f7d", "outcome": "error"}
+{"ts": "2026-11-27T21:34:43Z", "event": "qc_api_attempt", "attempt_id": "f7c6317318694498ab00a8920bfc5831", "task_type": "visual_review", "model": "gemini-3.6-flash", "is_fallback": true, "episode": 23, "shot": 1}
+{"ts": "2026-11-27T21:35:23Z", "event": "qc_api_result", "attempt_id": "f7c6317318694498ab00a8920bfc5831", "outcome": "ok"}
+{"ts": "2026-11-27T21:35:23Z", "event": "review", "episode": 23, "shot": 1, "attempt": 0, "review_try": 0, "verdict": "pass", "reasons": [], "artifact_score": 3, "issues": [], "fix_notes": [], "clip": "shot_01.mp4"}
+{"ts": "2026-11-27T21:35:23Z", "event": "qc_pass", "episode": 23, "shot": 1, "attempt": 0, "content_sha256": "de73b1b201b6026e6819947fc1a251d2c33ef9a5e29bce510bb98904607a444d", "clip": "shot_01.mp4"}
